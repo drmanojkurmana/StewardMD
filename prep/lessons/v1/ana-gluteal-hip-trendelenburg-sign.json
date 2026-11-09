@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-gluteal-hip",
+ "subject": "anatomy",
+ "title": "Hip Joint Biomechanics: Trendelenburg Sign, Capsular Ligaments, and Neck Fractures",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The hip is a multiaxial synovial ball-and-socket articulation formed by the hemispherical head of the femur and the cup-shaped acetabulum. The fibrous capsule is heavily reinforced by three intrinsic ligaments: the pubofemoral ligament, the ischiofemoral ligament, and the massive anterior **iliofemoral ligament** of Bigelow.",
+   "say": "The hip joint is a ball-and-socket articulation between the femoral head and the acetabulum. The joint capsule is strengthened by three intrinsic ligaments, dominated anteriorly by the powerful iliofemoral ligament of Bigelow.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-femoral-head-supply.svg",
+    "alt": "Arterial supply of the femoral head and neck, retinacular vessels and capsule",
+    "caption": "Capsular attachment and retinacular vascular supply to the femoral head and neck. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The iliofemoral ligament resembles an inverted letter Y, attached by its apex to the anterior inferior iliac spine and acetabular rim, and by its two bands to the intertrochanteric line. It is the strongest ligament in the human body, serving to resist excessive **hip hyperextension** and maintain erect posture with minimal muscular effort.",
+   "say": "The iliofemoral ligament has an inverted Y configuration running from the anterior inferior iliac spine to the intertrochanteric line. As the strongest ligament in the body, it arrests hip hyperextension during quiet upright stance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Capsular Ligament",
+     "Pelvic Origin",
+     "Femoral Insertion",
+     "Primary Mechanical Restraint"
+    ],
+    "rows": [
+     [
+      "Iliofemoral (Bigelow)",
+      "Anterior inferior iliac spine",
+      "Intertrochanteric line of femur",
+      "Arrests hyperextension; maintains standing posture"
+     ],
+     [
+      "Pubofemoral Ligament",
+      "Pubic part of acetabular rim",
+      "Lower part of intertrochanteric line",
+      "Restrains excessive abduction and extension"
+     ],
+     [
+      "Ischiofemoral Ligament",
+      "Ischial wall of acetabulum",
+      "Greater trochanter / trochanteric fossa",
+      "Restrains internal rotation and adduction"
+     ],
+     [
+      "Ligamentum Teres",
+      "Acetabular notch and transverse lig",
+      "Fovea capitis femoris",
+      "Transmits small foveal artery in childhood"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When a person stands on one leg, the gluteus medius and minimus of the supporting limb contract to prevent the pelvis from tilting downwards on the unsupported swing side. Failure of this mechanism is termed a positive **Trendelenburg sign**, where the pelvis drops on the opposite healthy side when standing on the affected limb.",
+   "say": "When standing on one foot, the gluteus medius and minimus on that side contract to elevate the unsupported pelvis. In a positive Trendelenburg test, the pelvis sags on the normal side when the patient bears weight on the affected limb.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Weight-Bearing Stance",
+     "points": [
+      "Supporting abductors (medius/minimus) contract",
+      "Pelvis on opposite swinging side tilts upward",
+      "Clears swinging foot from ground during gait",
+      "Superior gluteal nerve intact"
+     ]
+    },
+    "right": {
+     "title": "Positive Trendelenburg Test",
+     "points": [
+      "Supporting abductors fail to stabilize pelvis",
+      "Pelvis on opposite unsupported side sags downward",
+      "Patient compensates by lurching torso toward stance side",
+      "Trendelenburg gait or waddling gait"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A positive Trendelenburg sign results from four anatomical categories of failure: paralysis of the superior gluteal nerve, muscle destruction (poliomyelitis or gluteal tears), loss of the lever arm (coxa vara or malunited femoral fracture), or absence of a fulcrum due to **hip dislocation** or ununited femoral neck fracture.",
+   "say": "A positive Trendelenburg sign reflects four anatomical causes: superior gluteal nerve palsy, muscular destruction, loss of trochanteric lever arm as in coxa vara, or loss of an articular fulcrum from hip dislocation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Etiological Mechanisms of Trendelenburg Failure",
+    "nodes": [
+     {
+      "id": "nerve",
+      "label": "Superior Gluteal Nerve Lesion (L4-S1)"
+     },
+     {
+      "id": "fulcrum",
+      "label": "Loss of Fulcrum: Developmental Hip Dysplasia"
+     },
+     {
+      "id": "lever",
+      "label": "Shortened Lever Arm: Severe Coxa Vara"
+     },
+     {
+      "id": "instability",
+      "label": "Abductor Incompetence and Contralateral Pelvic Drop"
+     }
+    ],
+    "edges": [
+     [
+      "nerve",
+      "instability"
+     ],
+     [
+      "fulcrum",
+      "instability"
+     ],
+     [
+      "lever",
+      "instability"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blood supply to the adult femoral head depends primarily on the **retinacular arteries**, which arise from the trochanteric arterial anastomosis formed largely by the medial circumflex femoral artery. These branches ascend beneath the synovial retinacula along the femoral neck to enter the base of the femoral head.",
+   "say": "The adult femoral head is nourished predominantly by retinacular arteries originating from the medial circumflex femoral artery. These vessels course beneath synovial retinacular folds along the neck to penetrate the head.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Arterial Source",
+     "Origin / Parent Vessel",
+     "Course to Head",
+     "Clinical Vulnerability"
+    ],
+    "rows": [
+     [
+      "Medial Circumflex Femoral",
+      "Profunda femoris or femoral",
+      "Posterosuperior retinacular vessels",
+      "Lacerated in transcervical neck fractures"
+     ],
+     [
+      "Lateral Circumflex Femoral",
+      "Profunda femoris",
+      "Anterior capsule and trochanteric base",
+      "Minor contribution to head perfusion"
+     ],
+     [
+      "Artery of Ligamentum Teres",
+      "Obturator artery / acetabular branch",
+      "Through fovea capitis femoris",
+      "Insignificant in adults; patent in children"
+     ],
+     [
+      "Inferior Gluteal Artery",
+      "Internal iliac artery",
+      "Cruciate anastomosis anastomosis",
+      "Collateral bypass pathway in external iliac block"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Intracapsular displaced **femoral neck fracture** completely shears the ascending retinacular vessels traversing the femoral neck. Because the ligamentum teres artery provides negligible blood flow in adults, avascular necrosis (osteonecrosis) and non-union occur in up to one-third of displaced transcervical fractures, frequently necessitating hemiarthroplasty.",
+   "say": "Displaced intracapsular femoral neck fractures rupture the ascending retinacular arteries. Because collateral flow through the ligamentum teres artery is minimal in adults, avascular necrosis and non-union are frequent complications requiring arthroplasty.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-fracture-neck-of-femur.webp",
+    "alt": "Anteroposterior pelvic radiograph showing displaced transcervical fracture of the right femoral neck",
+    "caption": "Displaced transcervical femoral neck fracture disrupting retinacular blood supply to the femoral head. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Posterior hip dislocation accounts for over eighty-five percent of all traumatic hip dislocations, typically occurring when a flexed knee strikes the dashboard during a motor vehicle collision. The femoral head is driven backwards out of the acetabulum, tearing the posterior capsule and presenting with a limb that is shortened, flexed, **adducted**, and internally rotated.",
+   "say": "Posterior hip dislocation occurs during motor vehicle collisions when a flexed knee strikes the dashboard. The femoral head tears through the posterior capsule, leaving the injured lower limb shortened, adducted, and internally rotated.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Posterior Hip Dislocation",
+     "points": [
+      "Dashboard trauma to flexed knee",
+      "Shortened, flexed, adducted, internally rotated",
+      "Tears posterior capsule and ischiofemoral lig",
+      "High risk of sciatic nerve compression"
+     ]
+    },
+    "right": {
+     "title": "Displaced Femoral Neck Fracture",
+     "points": [
+      "Low-energy fall in elderly osteoporotic patient",
+      "Shortened, externally rotated limb",
+      "Disrupts intracapsular retinacular vessels",
+      "High risk of avascular necrosis of head"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Immediate reduction of posterior hip dislocation is imperative because the displaced femoral head compresses the adjacent **sciatic nerve** in the infrapiriform space and puts extreme stretch on the retinacular vessels. Delayed reduction beyond six hours precipitously increases the lifetime risk of permanent sciatic nerve palsy and femoral head avascular necrosis.",
+   "say": "Prompt closed reduction of a posterior hip dislocation within six hours is vital. Prolonged displacement exerts dangerous pressure on the adjacent sciatic nerve and retinacular vessels, dramatically increasing ischemic necrosis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Emergency Management Sequence of Hip Dislocation",
+    "nodes": [
+     {
+      "id": "diag",
+      "label": "Recognition of Flexed, Adducted, Internally Rotated Limb"
+     },
+     {
+      "id": "neuro",
+      "label": "Assess Sciatic Nerve Function (Foot Dorsiflexion/Sensation)"
+     },
+     {
+      "id": "reduc",
+      "label": "Emergent Closed Reduction Under Anaesthesia within 6 Hours"
+     },
+     {
+      "id": "post",
+      "label": "Post-reduction CT to Confirm Concentric Joint Seating"
+     }
+    ],
+    "edges": [
+     [
+      "diag",
+      "neuro"
+     ],
+     [
+      "neuro",
+      "reduc"
+     ],
+     [
+      "reduc",
+      "post"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "06d144a1-e855-4a14-afbe-26b76a7e7450",
+  "329451cf-941a-42dd-b9c0-60bf68a7c1ca",
+  "8b8cbdfa-75d9-4642-a0de-7b7c4a9ed2da"
+ ]
+}

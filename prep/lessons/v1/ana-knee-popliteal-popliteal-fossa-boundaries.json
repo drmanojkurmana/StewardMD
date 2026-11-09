@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-knee-popliteal",
+ "subject": "anatomy",
+ "title": "Popliteal Fossa Boundaries, Popliteal Artery, and Knee Cruciate Ligaments",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The popliteal fossa is a diamond-shaped intermuscular space situated behind the knee joint. Its boundaries comprise: superolaterally the biceps femoris; superomedially the **semimembranosus** and semitendinosus; inferolaterally the lateral head of gastrocnemius and plantaris; and inferomedially the medial head of gastrocnemius.",
+   "say": "The popliteal fossa is a diamond-shaped depression behind the knee. Its upper limits are formed by biceps femoris laterally and semimembranosus medially, while gastrocnemius heads form its lower boundaries.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fossa Margin",
+     "Boundaries / Muscular Structures",
+     "Spatial Position",
+     "Diagnostic Landmark"
+    ],
+    "rows": [
+     [
+      "Superolateral",
+      "Biceps femoris tendon",
+      "Upper lateral diamond boundary",
+      "Guides common peroneal nerve"
+     ],
+     [
+      "Superomedial",
+      "Semimembranosus and semitendinosus",
+      "Upper medial diamond boundary",
+      "Overlies Baker cyst site"
+     ],
+     [
+      "Inferolateral",
+      "Lateral head of gastrocnemius and plantaris",
+      "Lower lateral boundary",
+      "Arises above lateral condyle"
+     ],
+     [
+      "Inferomedial",
+      "Medial head of gastrocnemius",
+      "Lower medial boundary",
+      "Arises above medial condyle"
+     ],
+     [
+      "Floor",
+      "Popliteal surface of femur, capsule, popliteus",
+      "Bony-capsular base",
+      "Popliteal artery pulsates against floor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "From superficial to deep, the three major central contents of the popliteal fossa are arranged in an orderly step-ladder fashion: the tibial nerve is most superficial, the popliteal vein occupies the intermediate plane, and the **popliteal artery** lies deepest, resting directly against the floor of the fossa.",
+   "say": "The three central structures of the fossa follow a superficial-to-deep ladder: the tibial nerve is superficial, the popliteal vein lies in the middle, and the popliteal artery rests deepest against the bone.",
+   "vis": {
+    "kind": "flow",
+    "title": "Superficial to Deep Arrangement of Popliteal Contents",
+    "nodes": [
+     {
+      "id": "nerve",
+      "label": "Superficial: Tibial Nerve (Directly Under Popliteal Fascia)"
+     },
+     {
+      "id": "vein",
+      "label": "Intermediate: Popliteal Vein (Receives Small Saphenous Vein)"
+     },
+     {
+      "id": "art",
+      "label": "Deepest: Popliteal Artery (Rests Directly Against Bony Floor)"
+     }
+    ],
+    "edges": [
+     [
+      "nerve",
+      "vein"
+     ],
+     [
+      "vein",
+      "art"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because the popliteal artery lies immediately adjacent to the distal femoral popliteal surface and posterior knee joint capsule, supracondylar fractures of the femur or posterior knee dislocations carry an extreme hazard of arterial transection or thrombosis, producing acute **lower limb ischemia** that mandates immediate vascular intervention.",
+   "say": "Because the popliteal artery rests against the distal femur and posterior capsule, supracondylar fractures and posterior knee dislocations frequently lacerate or occlude the artery, provoking limb-threatening ischemia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acl-injury-fig1.webp",
+    "alt": "Anatomy of knee joint, popliteal neurovascular bundle, and cruciate ligaments",
+    "caption": "Sagittal anatomy of the knee showing relationship of cruciate ligaments to the popliteal space. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Within the joint cavity lie the two cruciate ligaments, named according to their attachments on the tibia. The **anterior cruciate ligament** (ACL) attaches to the anterior intercondylar area of the tibia, passing obliquely upwards, backwards, and laterally to insert into the medial surface of the lateral femoral condyle (LAMP: Lateral condyle, Anterior cruciate).",
+   "say": "The two cruciate ligaments are named for their tibial origins. The anterior cruciate ligament attaches to the anterior tibial plateau, traveling upward, backward, and laterally to the lateral femoral condyle.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior Cruciate (ACL)",
+     "points": [
+      "Origin: anterior intercondylar area of tibia",
+      "Course: upwards, backwards, and laterally",
+      "Insertion: medial surface of lateral condyle (LAMP)",
+      "Function: prevents anterior tibial displacement"
+     ]
+    },
+    "right": {
+     "title": "Posterior Cruciate (PCL)",
+     "points": [
+      "Origin: posterior intercondylar area of tibia",
+      "Course: upwards, forwards, and medially",
+      "Insertion: lateral surface of medial condyle",
+      "Function: prevents posterior tibial displacement"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **posterior cruciate ligament** (PCL) arises from the posterior intercondylar area of the tibia and ascends upwards, forwards, and medially to attach to the anterolateral surface of the medial femoral condyle. Stronger and thicker than the ACL, it serves as the primary restraint against posterior displacement of the tibia on the femur.",
+   "say": "The posterior cruciate ligament ascends from the posterior intercondylar tibia upward, forward, and medially to the medial femoral condyle. Stronger than the ACL, it checks posterior tibial translation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cruciate Ligament",
+     "Primary Restraint",
+     "Clinical Test",
+     "Mechanism of Injury"
+    ],
+    "rows": [
+     [
+      "Anterior Cruciate (ACL)",
+      "Anterior tibial translation",
+      "Lachman test, Anterior drawer test",
+      "Non-contact pivot-deceleration with valgus load"
+     ],
+     [
+      "Posterior Cruciate (PCL)",
+      "Posterior tibial translation",
+      "Posterior drawer test, Posterior sag sign",
+      "Dashboard injury driving flexed tibia posteriorly"
+     ],
+     [
+      "Medial Collateral (MCL)",
+      "Valgus stress and external rotation",
+      "Valgus stress test at 30 degrees",
+      "Direct lateral blow to extended or flexed knee"
+     ],
+     [
+      "Lateral Collateral (LCL)",
+      "Varus stress and internal rotation",
+      "Varus stress test at 30 degrees",
+      "Direct medial blow to knee joint"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Crescentic fibrocartilaginous structures known as the **menisci** deepen the tibial articular surfaces and absorb shock across the knee joint. The medial meniscus is large, semicircular (C-shaped), and firmly anchored to the tibial collateral ligament, rendering it twenty times more vulnerable to traumatic tearing than the mobile, nearly circular lateral meniscus.",
+   "say": "The menisci are fibrocartilaginous discs that deepen the tibial plateau and absorb compressive shock. The C-shaped medial meniscus is anchored to the tibial collateral ligament, making it far more injury prone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Medial Meniscus",
+     "points": [
+      "Broad, open C-shaped configuration",
+      "Firmly attached to tibial collateral ligament",
+      "Relatively fixed and immobile",
+      "Frequently torn in twisting injuries"
+     ]
+    },
+    "right": {
+     "title": "Lateral Meniscus",
+     "points": [
+      "Compact, circular (O-shaped) configuration",
+      "Separated from LCL by popliteus tendon",
+      "Highly mobile during knee rotation",
+      "Protected from peripheral shear tears"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Full extension of the knee joint culminates in **locking**, an involuntary terminal rotation that converts the joint into a rigid weight-bearing pillar. During the last thirty degrees of extension with the foot on the ground, the femur medially rotates approximately five degrees on the fixed tibia, tightening all knee ligaments.",
+   "say": "Full knee extension concludes with locking, an involuntary rotation that creates a rigid weight-bearing pillar. During terminal extension on a planted foot, the femur rotates medially on the tibia to tighten the capsule.",
+   "vis": {
+    "kind": "flow",
+    "title": "Knee Locking and Unlocking Kinematics",
+    "nodes": [
+     {
+      "id": "ext",
+      "label": "Quadriceps Drives Knee Extension to Final 30 Degrees"
+     },
+     {
+      "id": "lock",
+      "label": "Femur Medially Rotates 5 Degrees on Fixed Tibia (Locking)"
+     },
+     {
+      "id": "pop",
+      "label": "Popliteus Muscle Contracts to Laterally Rotate Femur"
+     },
+     {
+      "id": "unlock",
+      "label": "Joint Unlocks Permitting Hamstrings to Flex Knee"
+     }
+    ],
+    "edges": [
+     [
+      "ext",
+      "lock"
+     ],
+     [
+      "lock",
+      "pop"
+     ],
+     [
+      "pop",
+      "unlock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cruciate and collateral ligament integrity depends on surrounding synovial fluid and periarticular bursae. The large **suprapatellar bursa** extends three fingerbreadths proximal to the patella deep to the quadriceps tendon, freely communicating with the synovial cavity so that joint effusions immediately distend this suprapatellar pouch.",
+   "say": "Surrounding bursae cushion the knee, headed by the suprapatellar bursa beneath the quadriceps tendon. Because it communicates with the joint space, knee effusions expand freely into this pouch.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-knee-bursae.svg",
+    "alt": "Anatomical distribution of suprapatellar, prepatellar, and infrapatellar knee bursae",
+    "caption": "Periarticular knee bursae demonstrating synovial communication with the suprapatellar pouch. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "65a1636f-6fa8-490d-8515-0e9bbb8fb361",
+  "d4ab1825-8c1f-4ee0-bf47-a2f61a08c81a",
+  "e99772a0-b8be-4111-ac0e-3f2d788b93dc"
+ ]
+}
