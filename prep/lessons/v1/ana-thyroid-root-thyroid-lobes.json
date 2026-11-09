@@ -1,0 +1,231 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-thyroid-root",
+ "subject": "anatomy",
+ "title": "Thyroid Gland: Lobes, Capsules, Blood Supply, and Laryngeal Nerves",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The thyroid gland is a highly vascular endocrine organ situated in the lower anterior neck spanning vertebral levels C5 to T1. Weighing approximately twenty-five grams in the adult, the **thyroid gland** consists of two conical lateral lobes connected across the midline by a central isthmus that overlies the second, third, and fourth tracheal rings.",
+   "say": "Spanning C5 to T1 in the anterior neck, the twenty-five gram thyroid gland features two lateral lobes united by an isthmus resting across the second, third, and fourth tracheal rings.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-thyroid-relations.svg",
+    "alt": "Anatomical schematic showing thyroid lobes, isthmus, tracheal rings, and parathyroid positions",
+    "caption": "Anatomical configuration of the thyroid gland lobes, central isthmus, and parathyroid glands. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In approximately forty percent of individuals, a slender pyramidal lobe ascends from the isthmus or left lobe towards the hyoid bone, representing the persistent distal fibrous track of the embryonic **thyroglossal duct**. A fibromuscular band, the levator glandulae thyroideae, may connect the apex of the pyramidal lobe to the hyoid body.",
+   "say": "A pyramidal lobe ascends toward the hyoid bone in forty percent of individuals, marking the path of the embryonic thyroglossal duct.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Foramen Caecum (Embryonic thyroid origin at base of tongue between arches 1 and 2)"
+     },
+     {
+      "id": "t2",
+      "label": "Thyroglossal Duct Descent (Migrates down midline anterior to developing larynx)"
+     },
+     {
+      "id": "t3",
+      "label": "Definitive Thyroid Bed (Arrives at tracheal rings 2-4 by seventh week)"
+     },
+     {
+      "id": "t4",
+      "label": "Pyramidal Lobe / Cyst (Persistent duct remnant forms pyramidal lobe or thyroglossal cyst)"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The thyroid is invested by two distinct concentric envelopes: an inner true capsule and an outer false capsule. The true capsule is a thin, condensation of the glandular connective tissue stroma. The **false capsule** is derived from the pretracheal layer of deep cervical fascia. Crucially, the extensive thyroid venous plexus lies between the true capsule and the false capsule.",
+   "say": "Two envelopes invest the gland: an inner true fibrous capsule and an outer false pretracheal capsule. The rich thyroid venous plexus resides in the cleavage plane between them.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True Capsule",
+     "points": [
+      "Thin condensation of internal glandular stroma",
+      "Adheres intimately to thyroid parenchyma",
+      "Cannot be stripped off without tearing vascular tissue",
+      "Send internal trabeculae partitioning follicles"
+     ]
+    },
+    "right": {
+     "title": "False Capsule (Pretracheal Fascia)",
+     "points": [
+      "Derived from pretracheal deep cervical fascia",
+      "Forms the suspensory ligament of Berry postero-medially",
+      "Surrounds the four parathyroid glands outside its layer",
+      "Houses the rich venous plexus between itself and the true capsule"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Arterial supply to the thyroid is extraordinarily rich, provided primarily by two pairs of arteries. The superior thyroid artery arises as the first anterior branch of the external carotid artery, descending to the superior pole. The **inferior thyroid artery** arises from the thyrocervical trunk of the subclavian artery, arching medially behind the carotid sheath to supply the inferior and posterior surfaces.",
+   "say": "Paired superior and inferior thyroid arteries nourish the gland. Superior thyroid arises from the external carotid, while inferior thyroid stems from the subclavian thyrocervical trunk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Artery",
+     "Vascular Origin",
+     "Distribution to Gland",
+     "Associated Danger Nerve"
+    ],
+    "rows": [
+     [
+      "Superior thyroid artery",
+      "First branch of external carotid artery",
+      "Anterior and posterior branches supplying superior pole",
+      "External laryngeal nerve accompanies artery near pole"
+     ],
+     [
+      "Inferior thyroid artery",
+      "Thyrocervical trunk (subclavian artery)",
+      "Supplies inferior pole, posterior parenchyma, parathyroid glands",
+      "Recurrent laryngeal nerve intimately related near tracheo-oesophageal groove"
+     ],
+     [
+      "Thyroidea ima artery",
+      "Arch of aorta or brachiocephalic trunk (10%)",
+      "Ascends on anterior trachea to midline isthmus",
+      "Vulnerable during emergency tracheostomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Near the superior pole of the thyroid gland, the superior thyroid artery is intimately related to the external laryngeal nerve (motor branch of superior laryngeal nerve). To avoid iatrogenic nerve injury during thyroidectomy, the surgeon must ligate the **superior thyroid artery** as close as possible to the superior pole of the gland, where the nerve has diverged medially towards the cricothyroid muscle.",
+   "say": "Near the upper pole, the external laryngeal nerve accompanies the superior thyroid artery. Surgeons ligate the artery directly on the gland pole to protect the nerve.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "External Laryngeal Nerve Origin (Branch of superior laryngeal nerve CN X)"
+     },
+     {
+      "id": "s2",
+      "label": "Proximity to Superior Pole (Courses alongside superior thyroid artery down to upper pole)"
+     },
+     {
+      "id": "s3",
+      "label": "Medial Divergence (Turns medially to pierce and innervate cricothyroid muscle)"
+     },
+     {
+      "id": "s4",
+      "label": "Surgical Rule (Ligate superior thyroid artery FLUSH on the thyroid pole to avoid nerve)"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The external laryngeal nerve supplies the cricothyroid muscle, the sole tensor of the vocal folds. Accidental ligation or traction injury to the **external laryngeal** nerve paralyses the cricothyroid, preventing vocal cord tension. The patient loses the ability to produce high-pitched sounds and sings flat, presenting with vocal fatigue and a weakened monotone voice (Galli-Curci syndrome).",
+   "say": "The external laryngeal nerve innervates cricothyroid to tense vocal folds. Injury robs the patient of high-pitched phonation, creating voice fatigue and a monotone timber.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "External Laryngeal Nerve Injury",
+     "points": [
+      "Muscle paralysed: Cricothyroid (sole tensor)",
+      "Vocal cord status: Cord lacks tension; wavy appearance",
+      "Voice presentation: Loss of high pitch and vocal fatigue",
+      "Devastating complication for professional singers or orators"
+     ]
+    },
+    "right": {
+     "title": "Recurrent Laryngeal Nerve Injury",
+     "points": [
+      "Muscles paralysed: All intrinsic muscles except cricothyroid",
+      "Vocal cord status: Paramedian position (unilateral)",
+      "Voice presentation: Hoarseness, breathy voice, weak cough",
+      "Bilateral injury causes emergency stridor and complete airway asphyxia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The recurrent laryngeal nerve ascends in or near the tracheo-oesophageal groove, passing either deep to, superficial to, or between the terminal branches of the inferior thyroid artery. To protect the **recurrent laryngeal nerve** during thyroidectomy, the inferior thyroid artery is ligated far laterally, away from the gland, or its branches are coagulated individually on the thyroid capsule.",
+   "say": "Ascending in the tracheoesophageal groove, the recurrent laryngeal nerve intertwines with inferior thyroid artery branches. Surgeons ligate the artery laterally to spare the nerve.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-laryngeal-nerves.svg",
+    "alt": "Anatomical schematic showing recurrent laryngeal nerve course, tracheo-oesophageal groove, and inferior thyroid artery",
+    "caption": "Anatomical intimacy between the recurrent laryngeal nerve and terminal inferior thyroid arterial branches. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Venous drainage from the thyroid parenchyma is mediated by three pairs of veins. The superior thyroid vein ascends alongside the superior thyroid artery to drain into the internal jugular vein. The middle thyroid vein emerges from the lateral border, crossing the common carotid to enter the **internal jugular vein** directly. The inferior thyroid veins form a plexus that drains into the left brachiocephalic vein.",
+   "say": "Three veins drain each lobe: superior and middle thyroid veins enter the internal jugular vein directly, while inferior thyroid veins drain into the left brachiocephalic vein.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Thyroid Vein",
+     "Glandular Emergence",
+     "Termination Destination",
+     "Surgical Clinical Note"
+    ],
+    "rows": [
+     [
+      "Superior thyroid vein",
+      "Upper pole",
+      "Internal jugular vein (or common facial)",
+      "Accompanies superior thyroid artery; ligated together at pole"
+     ],
+     [
+      "Middle thyroid vein",
+      "Lateral convex border",
+      "Internal jugular vein directly",
+      "Short, fragile, solitary trunk; tears easily during lateral lobe mobilization"
+     ],
+     [
+      "Inferior thyroid veins",
+      "Lower borders and isthmus",
+      "Left brachiocephalic vein",
+      "Forms dense plexus in front of trachea; bleeds in tracheostomy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "1ccf890a-01ba-49fd-8b04-b162d4f9c146",
+  "323848ae-d879-4740-87a0-9b9f2ab44237",
+  "521627be-abef-4e19-a5d1-578915ab9b99"
+ ]
+}

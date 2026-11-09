@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-parotid-infratemporal",
+ "subject": "anatomy",
+ "title": "Parotid Gland Anatomy, Bed, Traversing Structures, and Fascial Capsule",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The parotid gland is the largest of the salivary glands, weighing approximately twenty-five grams. It is a purely serous exocrine gland wedged into the retromandibular fossa behind the ramus of the mandible. The **parotid gland** extends superiorly to the external acoustic meatus and zygomatic arch, and inferiorly overlaps the posterior belly of digastric and carotid triangle.",
+   "say": "Weighing twenty-five grams, the purely serous parotid gland occupies the retromandibular space. It wedges between the mandibular ramus, external acoustic meatus, and sternocleidomastoid.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-facial-course.svg",
+    "alt": "Anatomical schematic showing the parotid gland and the facial nerve branching across its lobes",
+    "caption": "Topographical relations of the parotid gland and emerging facial nerve branches. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The gland is invested by a dense, unyielding fibrocollagenous envelope designated the parotid capsule (parotid fascia). Derived from the investing layer of **deep cervical fascia**, the fascia splits at the lower border of the gland into a superficial layer attaching to the zygomatic arch and a deep layer attaching to the styloid process and tympanic plate, forming the stylomandibular ligament.",
+   "say": "The investing layer of deep cervical fascia splits to form the tough parotid capsule. The deep layer thickens into the stylomandibular ligament, separating the parotid from submandibular gland.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Superficial Layer of Parotid Capsule",
+     "points": [
+      "Dense, tough, and virtually unyielding",
+      "Attaches firmly above to the zygomatic arch",
+      "Blends anteriorly with the fascia over masseter",
+      "Tension causes excruciating pain in acute mumps parotitis"
+     ]
+    },
+    "right": {
+     "title": "Deep Layer of Parotid Capsule",
+     "points": [
+      "Attaches to styloid process, mandible, and tympanic plate",
+      "Thickens to form the stylomandibular ligament",
+      "Separates parotid from submandibular salivary gland",
+      "Pierced by external carotid artery and retroauricular vessels"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Because the parotid capsule is exceptionally fibrous and unyielding, acute bacterial parotitis or viral mumps causes rapid elevation of intraglandular tissue pressure. This stretching of the capsule stimulates sensory pain fibers of the **great auricular nerve** (C2-C3) and auriculotemporal nerve, producing severe, throbbing pain that is characteristically exacerbated by salivation and chewing.",
+   "say": "Because the parotid capsule cannot stretch, inflammatory swelling elevates tissue pressure. Tension on the great auricular nerve produces agonizing pain worsened by chewing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Mumps / Suppurative Parotitis (Viral or bacterial infection triggers rapid inflammatory oedema)"
+     },
+     {
+      "id": "p2",
+      "label": "Intracapsular Hypertension (Dense investing layer of cervical fascia resists expansion)"
+     },
+     {
+      "id": "p3",
+      "label": "Sensory Nerve Tension (Great auricular C2-C3 and auriculotemporal V3 endings stretched)"
+     },
+     {
+      "id": "p4",
+      "label": "Severe Otalgia and Trismus (Referred earache and pain on chewing food)"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The parotid bed comprises the deep anatomical structures supporting the gland. Posteriorly, the bed is formed by the mastoid process and sternocleidomastoid muscle, and the posterior belly of the digastric. Medially lies the **styloid process** with its attached muscles (styloglossus, stylohyoid, stylopharyngeus), which separate the parotid gland from the internal carotid artery and internal jugular vein.",
+   "say": "The parotid bed includes the mastoid process, sternocleidomastoid, and digastric posteriorly. Medially, the styloid apparatus shields the internal carotid artery and jugular vein.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bed Relation",
+     "Musculoskeletal Structure",
+     "Key Clinical / Surgical Hazard"
+    ],
+    "rows": [
+     [
+      "Anterior relation",
+      "Posterior border of ramus of mandible, masseter, medial pterygoid",
+      "Parotid wraps around posterior border of ramus like a U-shaped trough"
+     ],
+     [
+      "Posterior relation",
+      "Mastoid process, sternocleidomastoid, posterior belly of digastric",
+      "Facial nerve trunk exits skull immediately anterior to mastoid base"
+     ],
+     [
+      "Medial / Deep bed",
+      "Styloid process, stylopharyngeus, styloglossus, stylohyoid",
+      "Separates parotid from internal carotid artery, IJV, and cranial nerves IX, X, XI, XII"
+     ],
+     [
+      "Superior relation",
+      "External acoustic meatus and posterior temporomandibular joint capsule",
+      "Parotid neoplasm can erode into auditory canal or joint space"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Three major anatomical conduits traverse the substance of the parotid gland, arranged from superficial to deep in a strict surgical hierarchy. The most superficial structure is the **facial nerve** and its terminal pes anserinus branches; intermediate in depth is the retromandibular vein; and situated most deeply is the external carotid artery.",
+   "say": "Three structures pierce the parotid in strict superficial-to-deep order: the facial nerve superficially, the retromandibular vein intermediately, and the external carotid artery deeply.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "h1",
+      "label": "Superficial: Facial Nerve (CN VII branches form pes anserinus; surgical danger plane)"
+     },
+     {
+      "id": "h2",
+      "label": "Intermediate: Retromandibular Vein (Formed by superficial temporal and maxillary veins)"
+     },
+     {
+      "id": "h3",
+      "label": "Deep: External Carotid Artery (Ascends through gland, terminating as maxillary and superficial temporal)"
+     }
+    ],
+    "edges": [
+     [
+      "h1",
+      "h2"
+     ],
+     [
+      "h2",
+      "h3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgically, the facial nerve and its branching planes partition the parotid into an artificial superficial lobe and a deep lobe. During superficial parotidectomy for pleomorphic adenoma, the surgeon identifies the main trunk of the **facial nerve** as it emerges from the stylomastoid foramen, dissecting meticulously along its branching planes to extirpate the tumour without inducing postoperative facial paralysis.",
+   "say": "The branching planes of the facial nerve separate the superficial and deep parotid lobes. Meticulous identification of the nerve trunk prevents iatrogenic facial palsy during parotidectomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Superficial Parotid Lobe",
+     "points": [
+      "Constitutes 80% of glandular volume",
+      "Overlies the lateral surface of masseter muscle",
+      "Houses 80% of pleomorphic adenomas (benign)",
+      "Resected via standard superficial parotidectomy"
+     ]
+    },
+    "right": {
+     "title": "Deep Parotid Lobe",
+     "points": [
+      "Constitutes 20% of glandular volume",
+      "Projects medially into parapharyngeal space",
+      "Enlargement presents as a painless oropharyngeal or tonsillar bulge",
+      "Requires facial nerve mobilisation for total excision"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The intermediate structure within the gland is the retromandibular vein, formed at the upper border of the gland by the confluence of the superficial temporal vein and the maxillary vein. Descending through the gland, the **retromandibular vein** bifurcates at its lower border into an anterior branch that joins the facial vein and a posterior branch that joins the posterior auricular vein.",
+   "say": "Formed by the superficial temporal and maxillary veins, the retromandibular vein descends within the gland. At the inferior pole, it divides into anterior and posterior branches.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "v1",
+      "label": "Confluence: Superficial Temporal + Maxillary Veins (Form retromandibular vein)"
+     },
+     {
+      "id": "v2",
+      "label": "Intraglandular Descent: Courses immediately deep to facial nerve branches"
+     },
+     {
+      "id": "v3",
+      "label": "Anterior Division: Joins facial vein to form common facial vein -> IJV"
+     },
+     {
+      "id": "v4",
+      "label": "Posterior Division: Joins posterior auricular vein -> External jugular vein"
+     }
+    ],
+    "edges": [
+     [
+      "v1",
+      "v2"
+     ],
+     [
+      "v2",
+      "v3"
+     ],
+     [
+      "v2",
+      "v4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The external carotid artery enters the deep posteromedial surface of the parotid gland. Ascending in the deepest plane, it terminates within the upper part of the gland behind the neck of the mandible by dividing into two terminal branches: the maxillary artery running forward into the infratemporal fossa, and the **superficial temporal artery** ascending across the zygomatic arch.",
+   "say": "The external carotid artery ascends through the deepest part of the gland. Opposite the neck of the mandible, it divides into its terminal maxillary and superficial temporal branches.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-carotid-branches.svg",
+    "alt": "Anatomical schematic showing branches of the external carotid artery and terminal parotid division",
+    "caption": "Branching pattern of the external carotid artery terminating within the parotid parenchyma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "1b239bb7-bbf8-4eeb-b177-c1d84921d8f9",
+  "0b63d5ed-2923-42da-b429-409f0c2fa8d6",
+  "0c512e55-c21c-4959-bb2e-ee3990a760d1"
+ ]
+}

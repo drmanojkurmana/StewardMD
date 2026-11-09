@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-orbit",
+ "subject": "anatomy",
+ "title": "Central Retinal Artery, Ophthalmic Branches, and Lacrimal Apparatus",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The ophthalmic artery is the premier arterial vessel supplying the orbit, eyeball, and surrounding facial structures. Originating from the internal carotid artery immediately as it pierces the dural roof of the cavernous sinus, the **ophthalmic artery** enters the orbit through the optic canal, coursing inferolateral to the optic nerve within its dural sheath.",
+   "say": "Arising from the internal carotid as it exits the cavernous sinus, the ophthalmic artery enters the orbit via the optic canal. It accompanies the optic nerve inferolaterally.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Gross anatomical dissection of eyeball showing entry of the ophthalmic artery and central retinal artery into optic nerve",
+    "caption": "Gross anatomical relationship of the optic nerve and entering ophthalmic arterial branches. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The most crucial branch of the ophthalmic artery is the central retinal artery, which arises near the orbital apex. Approximately 1.25 centimetres behind the eyeball, the **central retinal artery** pierces the inferomedial aspect of the dural sheath of the optic nerve, running within the central core of the nerve accompanied by the central retinal vein.",
+   "say": "Arising near the apex, the central retinal artery pierces the optic nerve 1.25 centimetres behind the globe. It runs within the core of the nerve alongside its vein.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "o1",
+      "label": "Ophthalmic Artery (Branch of internal carotid artery entering optic canal)"
+     },
+     {
+      "id": "o2",
+      "label": "Optic Nerve Perforation (Pierces sheath 1.25 cm behind eyeball on inferomedial surface)"
+     },
+     {
+      "id": "o3",
+      "label": "Central Optic Core (Travels within central neurovascular canal to optic disc)"
+     },
+     {
+      "id": "o4",
+      "label": "Retinal Arteriolar Quadrants (Emerges at optic cup, bifurcating into superior and inferior nasal/temporal branches)"
+     }
+    ],
+    "edges": [
+     [
+      "o1",
+      "o2"
+     ],
+     [
+      "o2",
+      "o3"
+     ],
+     [
+      "o3",
+      "o4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Emerging through the optic disc, the central retinal artery divides into superior and inferior branches, which further subdivide into nasal and temporal arterioles. These branches are true anatomical **end arteries**, lacking anastomotic connections. They supply the inner six to eight layers of the retina, whereas the outer layers (photoreceptors) are nourished by the choroidal choriocapillaris.",
+   "say": "Arteriolar branches emerging from the optic disc are true end arteries. They nourish the inner retinal layers, while choroidal vessels supply outer photoreceptor strata.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Central Retinal Artery",
+     "points": [
+      "Supplies inner layers of retina up to inner nuclear layer",
+      "True anatomical end artery with no functional anastomoses",
+      "Occlusion causes instantaneous profound vision loss",
+      "Funduscopy reveals diffuse retinal pallor with cherry red spot"
+     ]
+    },
+    "right": {
+     "title": "Ciliary Circulation (Choroid)",
+     "points": [
+      "Derived from posterior ciliary arteries",
+      "Supplies outer avascular layers (rods, cones, RPE)",
+      "Choriocapillaris maintains foveolar vascularity",
+      "Cilioretinal artery (present in 20%) preserves central acuity in CRAO"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acute embolic or thrombotic occlusion of the central retinal artery produces painless, instantaneous, catastrophic loss of vision. Ophthalmoscopy classically reveals a milky-white, opaque, oedematous retina resulting from ischemic intracellular swelling of retinal ganglion cells, contrasting sharply with a bright **cherry-red spot** at the fovea centralis where thin retina exposes the vascular choroid.",
+   "say": "Central retinal artery occlusion causes sudden painless blindness. Swollen pale ganglion cells contrast with the choroidal flush at the fovea, creating a cherry-red spot.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-visual-lesions.svg",
+    "alt": "Schematic of retinal and visual pathway lesions showing optic nerve and central retinal vascular compromise",
+    "caption": "Diagnostic mapping of central retinal arterial occlusion and retrobulbar optic nerve deficits. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Beyond the central retinal artery, the ophthalmic artery gives off extensive orbital branches. These comprise the lacrimal artery supplying the lacrimal gland, short posterior ciliary arteries piercing the posterior sclera to form the arterial circle of **Zinn-Haller**, long posterior ciliary arteries, muscular branches, and the anterior and posterior ethmoidal arteries supplying the nasal mucosa.",
+   "say": "The ophthalmic artery also gives off lacrimal, ciliary, ethmoidal, and supraorbital vessels. Short posterior ciliary arteries assemble into the arterial ring of Zinn-Haller.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Arterial Group",
+     "Major Branches",
+     "Tissue Territory Nourished"
+    ],
+    "rows": [
+     [
+      "Ocular branches",
+      "Central retinal artery, short and long posterior ciliary, anterior ciliary",
+      "Retina, choroid, ciliary body, iris, and arterial circle of Zinn-Haller"
+     ],
+     [
+      "Orbital branches",
+      "Lacrimal artery, supraorbital artery, supratrochlear, dorsal nasal",
+      "Lacrimal gland, extraocular muscles, forehead skin, bridge of nose"
+     ],
+     [
+      "Extra-orbital branches",
+      "Anterior and posterior ethmoidal arteries",
+      "Ethmoidal air cells, frontal sinus, upper nasal septum and lateral wall"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The lacrimal apparatus is responsible for the production, distribution, and drainage of the tear film. Tears are secreted by the serous lacrimal gland, situated in the anterosuperior lateral angle of the orbit within the lacrimal fossa of the frontal bone. The **lacrimal gland** is divided into an upper orbital lobe and a lower palpebral lobe by the lateral expansion of the aponeurosis of levator palpebrae superioris.",
+   "say": "Resting in the anterolateral orbital roof, the lacrimal gland produces serous tears. The aponeurosis of levator palpebrae superioris indents it into orbital and palpebral lobes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "l1",
+      "label": "Lacrimal Gland Secretion (12 ducts open into superior conjunctival fornix)"
+     },
+     {
+      "id": "l2",
+      "label": "Tear Film Distribution (Capillary action and involuntary blinking wash tears inferomedially)"
+     },
+     {
+      "id": "l3",
+      "label": "Lacrimal Lake / Puncta (Tears collect in lacus lacrimalis at medial canthus)"
+     },
+     {
+      "id": "l4",
+      "label": "Canaliculi and Sac (Enter upper and lower puncta to drain into lacrimal sac)"
+     }
+    ],
+    "edges": [
+     [
+      "l1",
+      "l2"
+     ],
+     [
+      "l2",
+      "l3"
+     ],
+     [
+      "l3",
+      "l4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Secretomotor innervation to the lacrimal gland follows an intricate parasympathetic pathway. Preganglionic fibres originate in the lacrimatory nucleus of the facial nerve, travel via the greater petrosal nerve and nerve of the pterygoid canal to synapse in the **pterygopalatine ganglion**. Postganglionic fibres join the zygomatic nerve (V2) and pass via a communicating branch to the lacrimal nerve (V1).",
+   "say": "Secretomotor innervation originates in the facial lacrimatory nucleus, synapses in the pterygopalatine ganglion, and hitches a ride on the zygomatic and lacrimal nerves to reach the gland.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Superior Salivatory / Lacrimatory Nucleus (Facial nerve VII preganglionic fibres)"
+     },
+     {
+      "id": "s2",
+      "label": "Greater Petrosal Nerve -> Vidian Nerve (Traverses pterygoid canal)"
+     },
+     {
+      "id": "s3",
+      "label": "Pterygopalatine Ganglion (SYNAPSE of parasympathetic postganglionic secretomotor neurons)"
+     },
+     {
+      "id": "s4",
+      "label": "Zygomaticotemporal to Lacrimal Nerve (Postganglionic hitchhiking to lacrimal gland)"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tears pool in the lacus lacrimalis at the medial canthus, entering superior and inferior puncta on the eyelid margins. They traverse the lacrimal canaliculi into the lacrimal sac, which continues inferiorly as the **nasolacrimal duct**. Measuring eighteen millimetres in length, the nasolacrimal duct descends in its bony canal to terminate in the inferior meatus of the nose, guarded by the valve of Hasner.",
+   "say": "Tears enter puncta, drain through canaliculi into the lacrimal sac, and descend the nasolacrimal duct. The duct empties into the inferior nasal meatus under the valve of Hasner.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drainage Conduit",
+     "Length / Position",
+     "Anatomical Characteristic"
+    ],
+    "rows": [
+     [
+      "Lacrimal puncta",
+      "0.3 mm orifices on lid margins",
+      "Inverted against globe; surrounded by Horner muscle"
+     ],
+     [
+      "Lacrimal canaliculi",
+      "10 mm (2 mm vertical, 8 mm horizontal)",
+      "Dilated ampulla; join as common canaliculus in 90%"
+     ],
+     [
+      "Lacrimal sac",
+      "12 mm long, in lacrimal groove",
+      "Lies behind medial palpebral ligament; site of dacryocystitis"
+     ],
+     [
+      "Nasolacrimal duct",
+      "18 mm long (12 mm intraosseous)",
+      "Opens into inferior nasal meatus; guarded by mucosal valve of Hasner"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "1b239bb7-bbf8-4eeb-b177-c1d84921d8f9",
+  "0b63d5ed-2923-42da-b429-409f0c2fa8d6",
+  "0c512e55-c21c-4959-bb2e-ee3990a760d1"
+ ]
+}
