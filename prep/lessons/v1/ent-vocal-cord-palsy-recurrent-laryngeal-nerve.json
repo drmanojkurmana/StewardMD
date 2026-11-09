@@ -1,0 +1,231 @@
+{
+ "v": 1,
+ "id": "ent-vocal-cord-palsy-recurrent-laryngeal-nerve",
+ "subject": "ent",
+ "module": "ent-vocal-cord-palsy",
+ "title": "Vocal Cord Paralysis",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Recurrent laryngeal nerve palsy** immobolises one or both vocal folds after thyroid surgery, mediastinal tumour, aortic disease, intubation injury or idiopathic inflammation along the nerve course. Unilateral palsy hoarsens and weakens cough, while bilateral palsy obstructs breathing with near normal voice. The symptom inversion, voice worse in unilateral and airway worse in bilateral, is the core examination contrast for this module.",
+   "say": "Nerve injury immobolises folds after surgery, tumour or chest disease along its course. Unilateral disease hoarsens voice while bilateral disease obstructs breathing. Symptom inversion is the core examination contrast for this module.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/laryngeal-framework-and-vocal-cords-fig1.webp",
+    "alt": "Laryngeal diagram with recurrent nerve supply to intrinsic muscles and vocal folds.",
+    "caption": "Recurrent nerve supply to the folds. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Semon law** is the historical teaching that in progressive recurrent nerve lesions abductor fibres fail before adductors, so cords drift toward midline as lesions advance. Modern understanding qualifies the law, but examinations still use it to explain paramedian cord position in partial lesions. Complete lesions with synkinesis and joint fixation blur positions, so position alone never grades lesion completeness reliably at endoscopy.",
+   "say": "Historical teaching gives abductor failure before adductor failure in progressive lesions. Cord position is therefore toward midline as lesions advance classically. Position alone never grades completeness reliably at endoscopy.",
+   "vis": {
+    "kind": "table",
+    "title": "Cord positions and meaning",
+    "cols": [
+     "Position",
+     "Usual implication"
+    ],
+    "rows": [
+     [
+      "Median",
+      "Adducted, airway narrow"
+     ],
+     [
+      "Paramedian",
+      "Partial lesion pattern"
+     ],
+     [
+      "Cadaveric intermediate",
+      "Complete combined lesion"
+     ],
+     [
+      "Lateral",
+      "Compensated chronic palsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Wagner-Grossman theory** explains cord position by intact cricothyroid tension pulling the fold toward midline when recurrent supply fails, opposing older purely abductor theories. Combined recurrent plus superior nerve lesions remove that tension and leave the cord intermediate and bowed. Position reading therefore assesses both nerves together, not the recurrent nerve alone, whenever thyroid or skull base disease is the cause.",
+   "say": "Intact tensor tension pulls the paralysed fold toward midline mechanically. Combined nerve lesions remove tension and leave cords intermediate and bowed. Position assessment needs both nerves together in thyroid disease.",
+   "vis": {
+    "kind": "table",
+    "title": "Position reading",
+    "cols": [
+     "Nerves",
+     "Position"
+    ],
+    "rows": [
+     [
+      "Recurrent only",
+      "Paramedian fold"
+     ],
+     [
+      "Combined loss",
+      "Cadaveric intermediate"
+     ],
+     [
+      "Assessment",
+      "Both nerves together"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cadaveric position** is the intermediate relaxed posture of a fold deprived of both recurrent and superior laryngeal supply, with arytenoid tilted forward and cord bowed on phonation. It signals combined injury, classically after high vagal lesions or extensive surgery. Aspiration risk is highest in this group because glottic closure and sensation fail together, needing swallow assessment before oral intake resumes freely.",
+   "say": "Intermediate bowed posture indicates combined nerve supply loss to the fold. High vagal lesions produce this pattern with aspiration risk highest. Swallow assessment is required before free oral intake resumption.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Recurrent lesion alone",
+     "points": [
+      "Paramedian fold position",
+      "Cricothyroid tension intact",
+      "Breathy hoarseness"
+     ]
+    },
+    "right": {
+     "title": "Combined vagal lesion",
+     "points": [
+      "Cadaveric intermediate position",
+      "Bowed fold, tilted arytenoid",
+      "Aspiration risk highest"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Bilateral abductor paralysis** leaves both folds near midline after bilateral thyroid surgery or neurological disease, producing inspiratory stridor with surprisingly preserved voice and episodic suffocation on exertion or infection. Emergency presentation may need tracheostomy before definitive cord lateralisation. The preserved voice misleads triage toward reassurance while the airway narrows, a trap examiners highlight deliberately.",
+   "say": "Both folds near midline produce stridor with preserved voice deceptively. Exertion or infection precipitates suffocation episodes in bilateral palsy. Airway treatment is first before voice considerations in management.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/laryngeal-framework-and-vocal-cords-fig1.webp",
+    "alt": "Laryngeal framework diagram showing both vocal folds near the midline in bilateral palsy.",
+    "caption": "Midline folds in bilateral palsy. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Unilateral vocal cord palsy** workup images the whole nerve course from skull base to aortic arch when no surgical cause is obvious, because tumours declare along that entire route. Thyroid surgery palsy needs early laryngoscopy documentation and voice therapy referral, with temporary injection medialisation for aspiration or professional voice demands. Permanent procedures wait for the recovery window unless malignancy makes recovery impossible from the start.",
+   "say": "Unknown unilateral palsy needs imaging from skull base to aortic arch completely. Tumours declare along the entire nerve route without surgical cause. Temporary medialisation helps aspiration while recovery is awaited.",
+   "vis": {
+    "kind": "flow",
+    "title": "Unilateral palsy pathway",
+    "nodes": [
+     {
+      "id": "scope",
+      "label": "Confirm palsy and position"
+     },
+     {
+      "id": "image",
+      "label": "Image skull base to arch"
+     },
+     {
+      "id": "voice",
+      "label": "Therapy, temporary medialisation"
+     },
+     {
+      "id": "perm",
+      "label": "Permanent procedure if no recovery"
+     }
+    ],
+    "edges": [
+     [
+      "scope",
+      "image"
+     ],
+     [
+      "image",
+      "voice"
+     ],
+     [
+      "voice",
+      "perm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ortner syndrome** is left recurrent palsy from cardiovascular disease, classically a dilated left atrium in mitral stenosis compressing the nerve, extended today to aortic aneurysm and pulmonary hypertension causes. Hoarseness in cardiac disease therefore earns laryngoscopy, not assumption of intubation trauma. Treating the cardiac lesion occasionally recovers conduction, while persistent palsy follows the standard medialisation pathway after cardiology stabilisation.",
+   "say": "Cardiac enlargement compresses the left nerve and hoarsens voice in Ortner syndrome. Aortic and pulmonary causes extend the classic atrial description today. Laryngoscopy is required for hoarseness in cardiac disease.",
+   "vis": null
+  },
+  {
+   "tx": "**Thyroplasty** medialises a paralysed fold with an implant through a thyroid cartilage window, type one in the Isshiki classification, improving closure without entering the airway mucosa. Injection medialisation gives temporary or office based alternatives, while arytenoid adduction corrects posterior gap and vertical mismatch in larger defects. Choice follows gap anatomy, recovery prognosis and patient occupation rather than surgeon habit alone.",
+   "say": "Implant medialisation through cartilage window improves closure without mucosal entry. Injection gives temporary alternatives while arytenoid surgery corrects posterior gaps. Gap anatomy and prognosis guide procedure choice.",
+   "vis": {
+    "kind": "table",
+    "title": "Medialisation options",
+    "cols": [
+     "Option",
+     "Best for"
+    ],
+    "rows": [
+     [
+      "Injection medialisation",
+      "Temporary cover, recovery awaited"
+     ],
+     [
+      "Type one thyroplasty",
+      "Permanent fold medialisation"
+     ],
+     [
+      "Arytenoid adduction",
+      "Posterior gap and height mismatch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **Isshiki classification** organises framework surgery: type one medialises, type two lateralises for airway, type three shortens and relaxes for low pitch, type four lengthens and tenses for high pitch. Bilateral palsy airway surgery uses lateralisation logic, posterior cordotomy or arytenoidectomy to trade voice for breathing deliberately. Consent in airway lateralisation must state that voice worsens as breathing improves, without euphemism.",
+   "say": "Framework surgery medialises, lateralises, relaxes or tenses folds by design types. Airway surgery trades voice for breathing deliberately in bilateral palsy. Consent states voice worsening honestly without euphemism.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Isshiki medialisation",
+     "points": [
+      "Type one, implant window",
+      "Improves closure and voice",
+      "For unilateral palsy"
+     ]
+    },
+    "right": {
+     "title": "Lateralisation surgery",
+     "points": [
+      "Type two logic, airway first",
+      "Posterior cordotomy options",
+      "Voice worsens as airway gains"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Arytenoidectomy** and posterior cordotomy enlarge the posterior glottis for bilateral palsy where most airway cross section is gained with least voice cost. Laser cordotomy is commonest today, staged to avoid overshoot into severe breathiness. Recovery prognostication uses time, laryngeal electromyography in selected centres and synkinesis patterns, because operating permanently on a recovering nerve wastes native function.",
+   "say": "Posterior enlargement gives airway gain with least voice cost in bilateral palsy. Staged laser treatment avoids overshoot into severe breathiness. Recovery assessment is required before permanent surgery decisions.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Bilateral palsy paradox",
+   "b": "Stridor with preserved voice; airway first, lateralisation trades voice for breathing."
+  },
+  {
+   "f": "Cadaveric position",
+   "b": "Intermediate bowed fold from combined recurrent plus superior nerve loss; highest aspiration risk."
+  },
+  {
+   "f": "Ortner syndrome",
+   "b": "Left recurrent palsy from cardiovascular enlargement, classically dilated left atrium in mitral stenosis."
+  }
+ ],
+ "keys": [
+  "Image unilateral palsy from skull base to aortic arch",
+  "Semon law: abductors fail first in progressive lesions",
+  "Thyroplasty type one medialises the fold"
+ ]
+}
