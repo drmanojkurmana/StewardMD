@@ -1,0 +1,216 @@
+{
+ "v": 1,
+ "module": "obg-amenorrhoea",
+ "subject": "obstetrics-gynaecology",
+ "title": "MRKH, Androgen Insensitivity and Kallmann Syndrome",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Absent uterus and upper vagina with normal ovaries in a forty six XX woman is **MRKH** in amenorrhoea practice. Breasts and pubic hair are fully developed, separating it from androgen insensitivity by hair alone. The vagina is a shallow dimple. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "MRKH absents the uterus with normal hair, separating it from androgen insensitivity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mayer-rokitansky-kuster-hauser-fig1.webp",
+    "alt": "MRKH syndrome in amenorrhoea.",
+    "caption": "MRKH. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Complete resistance to androgens in a forty six XY individual giving female phenotype without uterus is **androgen insensitivity syndrome**. Breasts develop from aromatised oestrogen but pubic hair is scant. Testes sit in the abdomen or inguinal canal. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Androgen insensitivity gives female phenotype with scant hair and abdominal testes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MRKH",
+     "points": [
+      "46 XX",
+      "Normal pubic hair",
+      "Ovaries present"
+     ]
+    },
+    "right": {
+     "title": "AIS",
+     "points": [
+      "46 XY",
+      "Scant pubic hair",
+      "Testes present"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hypogonadotropic hypogonadism with absent smell from failed GnRH neuron migration is **Kallmann syndrome**. Puberty never starts and anosmia is the diagnostic gift. Pulsatile GnRH or gonadotropins restore fertility completely. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Kallmann syndrome pairs absent puberty with anosmia from failed GnRH migration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Kallmann"
+    ],
+    "rows": [
+     [
+      "Smell",
+      "Absent"
+     ],
+     [
+      "FSH LH",
+      "Low"
+     ],
+     [
+      "Fertility",
+      "Restorable fully"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inguinal herniae in girls may contain testes, so hernia in a phenotypic girl prompts **karyotype awareness**. Many AIS cases declare exactly this way in childhood. Repair surgeons send gonadal tissue for histology when found. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Hernia in a phenotypic girl may reveal testes and declare androgen insensitivity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Girl with hernia"
+     },
+     {
+      "id": "n1",
+      "label": "Testis like gonad found"
+     },
+     {
+      "id": "n2",
+      "label": "Karyotype performed"
+     },
+     {
+      "id": "n3",
+      "label": "AIS pathway entered"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gonadectomy timing in complete AIS balances tumour risk against puberty induction by endogenous hormones, termed **gonadectomy timing**. Many now defer until after puberty completes spontaneously. Shared decision making with the patient is essential. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Gonadectomy timing in AIS often defers until after spontaneous puberty completes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mayer-rokitansky-kuster-hauser-syndrome-fig1.webp",
+    "alt": "MRKH and AIS differential anatomy.",
+    "caption": "Differential anatomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Partial androgen insensitivity gives ambiguous genitalia at birth and a spectrum, grouped as **PAIS spectrum**. Sex assignment needs multidisciplinary teams and family time. Karyotype, hormones and receptor studies guide without rushing. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Partial androgen insensitivity gives ambiguous genitalia needing multidisciplinary time.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Complete AIS",
+     "points": [
+      "Female phenotype",
+      "Presents at puberty"
+     ]
+    },
+    "right": {
+     "title": "Partial AIS",
+     "points": [
+      "Ambiguous at birth",
+      "Team assignment process"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Vaginal hypoplasia in AIS is managed by dilation exactly as in MRKH, a shared **dilation pathway**. Surgery is rarely needed in either condition. Psychological support accompanies both diagnoses identically. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Dilation pathways serve vaginal hypoplasia identically in MRKH and AIS.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Diagnosis supported"
+     },
+     {
+      "id": "n1",
+      "label": "Dilation taught"
+     },
+     {
+      "id": "n2",
+      "label": "Functional vagina achieved"
+     },
+     {
+      "id": "n3",
+      "label": "Surgery rarely"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Disclosure of XY karyotype in AIS needs staged, supported honesty, termed **sensitive disclosure**. Historical concealment caused lasting harm when discovered accidentally. Modern practice tells the patient herself, at her pace. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Sensitive disclosure tells AIS patients themselves, staged and supported.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Sensitive amenorrhoea counselling.",
+    "caption": "Sensitive counselling. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Fertility differs absolutely: AIS and MRKH both need surrogacy or adoption routes, while Kallmann restores natural fertility, summarised as **fertility contrast**. Early honest framing lets families grieve and plan realistically. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Fertility contrast separates restorable Kallmann from surrogacy needing MRKH and AIS.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Natural fertility"
+    ],
+    "rows": [
+     [
+      "Kallmann",
+      "Restored by treatment"
+     ],
+     [
+      "MRKH",
+      "Surrogacy or adoption"
+     ],
+     [
+      "AIS",
+      "Surrogacy or adoption"
+     ]
+    ]
+   }
+  }
+ ]
+}

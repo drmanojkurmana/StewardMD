@@ -1,0 +1,247 @@
+{
+ "v": 1,
+ "module": "obg-amenorrhoea",
+ "subject": "obstetrics-gynaecology",
+ "title": "Primary and Secondary Amenorrhoea and Turner Syndrome",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "No menstruation by fifteen years with secondary characters, or thirteen without, defines **primary amenorrhoea**. Causes divide by breast development and uterus presence into a memorable grid. Most have a specific, often treatable diagnosis. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Primary amenorrhoea is no menstruation by fifteen with secondary characters.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Breasts",
+     "Uterus",
+     "Think"
+    ],
+    "rows": [
+     [
+      "Present",
+      "Present",
+      "Outflow or axis"
+     ],
+     [
+      "Present",
+      "Absent",
+      "MRKH or AIS"
+     ],
+     [
+      "Absent",
+      "Present",
+      "Gonadal or axis failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cessation of periods for three to six months after established cycles is **secondary amenorrhoea**. Pregnancy is always excluded first, then thyroid, prolactin and PCOS dominate causes. Hypothalamic suppression from weight and stress is common. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Secondary amenorrhoea excludes pregnancy first, then thyroid, prolactin and PCOS.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Pregnancy excluded"
+     },
+     {
+      "id": "n1",
+      "label": "TSH and prolactin"
+     },
+     {
+      "id": "n2",
+      "label": "Androgens assessed"
+     },
+     {
+      "id": "n3",
+      "label": "Cause treated"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bleeding after progestogen in an oestrogen primed woman proves a patent outflow and some oestrogen, the **progesterone challenge test**. No bleed means low oestrogen or outflow block, separated by an oestrogen plus progestogen cycle. It is now largely replaced by direct hormone panels.",
+   "say": "The progesterone challenge test proves outflow patency and oestrogen presence by bleeding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bleed follows",
+     "points": [
+      "Oestrogen present",
+      "Outflow patent",
+      "Anovulation likely"
+     ]
+    },
+    "right": {
+     "title": "No bleed",
+     "points": [
+      "Low oestrogen or block",
+      "Further testing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Streak ovaries from a missing X chromosome causing short stature and amenorrhoea form **Turner syndrome**. Forty five X is the classic karyotype, with mosaics milder. Oestrogen replacement induces puberty and protects bone and heart. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Turner syndrome with forty five X causes short stature and streak ovaries.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/amenorrhoea-primary-secondary-turner-asherman-fig1.webp",
+    "alt": "Turner and Asherman syndromes.",
+    "caption": "Turner syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Webbed neck, wide carrying angle and coarctation accompany the Turner phenotype as **somatic features**. Cardiac screening is lifelong because aortic dilatation can dissect. Growth hormone in childhood adds adult height. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Turner somatic features need lifelong cardiac screening for aortic dilatation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "System",
+     "Feature"
+    ],
+    "rows": [
+     [
+      "Neck",
+      "Webbed"
+     ],
+     [
+      "Heart",
+      "Coarctation, bicuspid valve"
+     ],
+     [
+      "Kidney",
+      "Horseshoe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hypergonadotropic failure with high FSH separates ovarian causes from hypothalamic low FSH patterns, termed **gonadotropin sorting**. One blood test halves the differential instantly. It is the pivotal investigation in amenorrhoea. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Gonadotropin sorting by FSH halves the amenorrhoea differential instantly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "FSH measured"
+     },
+     {
+      "id": "n1",
+      "label": "High means ovarian failure"
+     },
+     {
+      "id": "n2",
+      "label": "Low means hypothalamic pituitary"
+     },
+     {
+      "id": "n3",
+      "label": "Normal means outflow or PCOS"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Premature ovarian insufficiency before forty affects one percent and may fluctuate, unlike menopause, as **POI fluctuation**. Occasional ovulation and even pregnancy occur in five to ten percent. Bone and cardiovascular protection need oestrogen to fifty one. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Premature ovarian insufficiency fluctuates, with occasional ovulation unlike menopause.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Amenorrhoea assessment.",
+    "caption": "Amenorrhoea workup. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Absent breast development with absent uterus points to gonadal agenesis variants needing **karyotype first**. Swyer syndrome with forty six XY streak gonads carries gonadoblastoma risk. Gonadectomy follows diagnosis in Y bearing dysgenesis. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Karyotype first in absent breasts and uterus because Y bearing dysgenesis risks gonadoblastoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "46 XY dysgenesis",
+     "points": [
+      "Gonadectomy indicated",
+      "Tumour risk"
+     ]
+    },
+    "right": {
+     "title": "45 X Turner",
+     "points": [
+      "No Y, no gonadectomy",
+      "Oestrogen replacement"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Outflow causes with normal hormones include imperforate hymen, septum and MRKH, grouped as **Mullerian outflow causes**. Examination and imaging, not bloods, diagnose them. Each has a distinct surgical remedy covered earlier. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Mullerian outflow causes have normal hormones and imaging diagnoses.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Hormones normal"
+     },
+     {
+      "id": "n1",
+      "label": "Examination and MRI"
+     },
+     {
+      "id": "n2",
+      "label": "Outflow cause typed"
+     },
+     {
+      "id": "n3",
+      "label": "Surgery planned"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

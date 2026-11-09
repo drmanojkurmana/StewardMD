@@ -1,0 +1,210 @@
+{
+ "v": 1,
+ "module": "obg-menstrual-physiology",
+ "subject": "obstetrics-gynaecology",
+ "title": "Ovulation, Corpus Luteum and the Two-Cell Theory",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Release of the mature oocyte from the dominant follicle is **ovulation**. It follows the LH surge by about thirty six hours and occurs fourteen days before the next period, not always day fourteen. The fimbriae sweep the oocyte into the tube. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Ovulation releases the oocyte thirty six hours after the LH surge.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/menstrual-cycle-reproductive-hormones-fig1.webp",
+    "alt": "Ovulation within cycle physiology.",
+    "caption": "Ovulation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The ruptured follicle transformed into a progesterone factory is the **corpus luteum**. It lives fourteen days unless rescued by hCG from implantation. Its progesterone converts the endometrium to secretory form. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "The corpus luteum makes progesterone for fourteen days unless hCG rescues it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Hormone dominant"
+    ],
+    "rows": [
+     [
+      "Follicular",
+      "Oestradiol"
+     ],
+     [
+      "Luteal",
+      "Progesterone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Theca cells making androgens that granulosa cells convert to oestrogen under separate gonadotropins is the **two-cell two-gonadotropin theory**. LH drives the first step, FSH the aromatisation. Neither cell alone makes oestrogen efficiently. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "The two-cell theory splits oestrogen synthesis between theca and granulosa under LH and FSH.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "LH stimulates theca"
+     },
+     {
+      "id": "n1",
+      "label": "Androgens produced"
+     },
+     {
+      "id": "n2",
+      "label": "Granulosa aromatises under FSH"
+     },
+     {
+      "id": "n3",
+      "label": "Oestrogen secreted"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Midcycle pain from follicular rupture and peritoneal irritation is **mittelschmerz**. It localises to the ovulating side and lasts hours to a day. Basal temperature rises after, confirming ovulation retrospectively. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Mittelschmerz is midcycle pain from follicular rupture on the ovulating side.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-clomifene-citrate.webp",
+    "alt": "Clomifene inducing ovulation.",
+    "caption": "Ovulation induction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Progesterone confirmation of ovulation uses a mid luteal blood level, termed **day 21 progesterone**. Timed seven days before expected menses, not literally day twenty one in long cycles. A raised level proves ovulation occurred. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Day 21 progesterone, timed seven days before menses, proves ovulation occurred.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Correct timing",
+     "points": [
+      "7 days before period",
+      "Interpretable"
+     ]
+    },
+    "right": {
+     "title": "Calendar day 21",
+     "points": [
+      "Long cycles mislead",
+      "False low"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The regressing corpus luteum leaving a white scar is the **corpus albicans**. Without hCG rescue, progesterone falls and menstruation follows. Repeated cycles stud the ovary with these scars. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "The corpus albicans is the white scar left after the corpus luteum regresses.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Structure",
+     "Fate"
+    ],
+    "rows": [
+     [
+      "Follicle",
+      "Ovulates or atresia"
+     ],
+     [
+      "Corpus luteum",
+      "14 days"
+     ],
+     [
+      "Corpus albicans",
+      "Permanent scar"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure of the follicle to rupture despite luteinisation, trapping the oocyte, is the **luteinised unruptured follicle**. Hormones look ovulatory while no egg is released. It is an occult cause of unexplained infertility. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Luteinised unruptured follicle traps the oocyte despite ovulatory hormones.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Hormones surge normally"
+     },
+     {
+      "id": "n1",
+      "label": "Follicle fails to rupture"
+     },
+     {
+      "id": "n2",
+      "label": "Oocyte trapped"
+     },
+     {
+      "id": "n3",
+      "label": "Infertility unexplained"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ovulation prediction kits detect urinary LH for intercourse timing in **fertility awareness**. Temperature confirms afterwards but cannot predict. Cervical mucus stretch and clarity herald the fertile window prospectively. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Urinary LH kits predict ovulation while temperature only confirms it afterwards.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/female-cycle-ovarian-hormones-menopause-fig1.webp",
+    "alt": "Fertile window hormones.",
+    "caption": "Fertile window. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Anovulatory cycles bleed irregularly because unopposed oestrogen outgrows its blood supply, called **anovulatory bleeding**. It dominates adolescence and perimenopause. Endometrial protection needs progestogen when prolonged. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Anovulatory bleeding follows unopposed oestrogen outgrowing its blood supply.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ovulatory bleed",
+     "points": [
+      "Regular, molimina",
+      "Progesterone withdrawal"
+     ]
+    },
+    "right": {
+     "title": "Anovulatory",
+     "points": [
+      "Irregular, heavy",
+      "Oestrogen breakthrough"
+     ]
+    }
+   }
+  }
+ ]
+}

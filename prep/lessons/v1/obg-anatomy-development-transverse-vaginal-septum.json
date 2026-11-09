@@ -1,0 +1,210 @@
+{
+ "v": 1,
+ "module": "obg-anatomy-development",
+ "subject": "obstetrics-gynaecology",
+ "title": "Transverse Vaginal Septum and Haematocolpos",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A horizontal wall of tissue across the vagina from failed canalisation is a **transverse vaginal septum**. It may sit high, mid or low, with thickness varying greatly. Obstructed types present at puberty like imperforate hymen but with no bulging membrane. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Transverse vaginal septum walls the vagina from failed canalisation at any level.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Level",
+     "Frequency"
+    ],
+    "rows": [
+     [
+      "High",
+      "Commonest"
+     ],
+     [
+      "Mid",
+      "Intermediate"
+     ],
+     [
+      "Low",
+      "Least common"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Menstrual blood trapped above the septum forms **haematocolpos** with a pelvic mass. The perineum looks normal, separating it from imperforate hymen at a glance. MRI defines septum level and thickness for surgery. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Haematocolpos above a transverse septum shows a normal perineum, unlike imperforate hymen.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mayer-rokitansky-kuster-hauser-syndrome-fig1.webp",
+    "alt": "Vaginal septum pelvic anatomy context.",
+    "caption": "Septum anatomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Non obstructed septa present later with dyspareunia or infertility rather than amenorrhoea, termed **perforate septum**. A pinpoint opening lets menses escape slowly and painfully. Examination finds a blind upper vagina beyond it. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Perforate septa present with dyspareunia because a pinpoint opening drains slowly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Obstructed",
+     "points": [
+      "Puberty pain, amenorrhoea",
+      "Haematocolpos"
+     ]
+    },
+    "right": {
+     "title": "Perforate",
+     "points": [
+      "Dyspareunia later",
+      "Slow painful menses"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Excision must reconnect upper and lower vagina without stricture, using mucosal flaps in **septum excision**. Thick high septa may need combined abdominal and vaginal approaches with grafts. Postoperative dilation prevents restenosis. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Septum excision reconnects the vagina with flaps and dilation prevents restenosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "MRI defines thickness"
+     },
+     {
+      "id": "n1",
+      "label": "Excision with flaps"
+     },
+     {
+      "id": "n2",
+      "label": "Mucosa approximated"
+     },
+     {
+      "id": "n3",
+      "label": "Dilation programme follows"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Distinguishing septum from cervical atresia changes everything, a **differential diagnosis** settled by MRI. Cervical atresia with functioning uterus historically needed hysterectomy, though canalisation is reported. Wrong surgery here is catastrophic. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "MRI separates transverse septum from cervical atresia because their surgeries differ utterly.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Septum differential assessment.",
+    "caption": "Septum differential. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Associated renal anomalies accompany vaginal septa through shared development, needing **renal screening** again. The obstructed hemivagina syndrome pairs septum with didelphys and renal agenesis. One scan screens every anomaly patient. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Renal screening accompanies vaginal septa through shared developmental pathways.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Components"
+    ],
+    "rows": [
+     [
+      "OHVIRA",
+      "Didelphys, obstructed hemivagina, renal agenesis"
+     ],
+     [
+      "MRKH spectrum",
+      "Renal agenesis, ectopia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endometriosis from chronic retrograde menstruation complicates delayed septum treatment, termed **delayed treatment cost**. Early drainage at puberty prevents it. Adolescents with cyclic pain deserve imaging before years of analgesia. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Delayed septum treatment costs endometriosis from chronic retrograde menstruation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Obstruction at puberty"
+     },
+     {
+      "id": "n1",
+      "label": "Retrograde flow monthly"
+     },
+     {
+      "id": "n2",
+      "label": "Endometriosis seeded"
+     },
+     {
+      "id": "n3",
+      "label": "Early drainage prevents"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pregnancy after septum excision usually proceeds vaginally unless scarring narrows the canal, following **birth after repair** counselling. Caesarean follows only standard indications in most. The excision site rarely obstructs labour. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Birth after septum repair usually proceeds vaginally by standard indications.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/amenorrhoea-primary-secondary-turner-asherman-fig1.webp",
+    "alt": "Amenorrhoea anomaly context.",
+    "caption": "Anomaly context. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Long term dilation adherence decides surgical success more than technique, called **dilation adherence**. Structured support, moulds and follow up sustain it through adolescence. Stenosis presenting later can still be revised. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Dilation adherence decides septum surgery success more than technique alone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adherent dilation",
+     "points": [
+      "Canal stays open",
+      "Normal function"
+     ]
+    },
+    "right": {
+     "title": "Non adherent",
+     "points": [
+      "Restenosis",
+      "Revision surgery"
+     ]
+    }
+   }
+  }
+ ]
+}

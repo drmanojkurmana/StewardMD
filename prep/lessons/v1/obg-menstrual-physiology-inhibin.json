@@ -1,0 +1,214 @@
+{
+ "v": 1,
+ "module": "obg-menstrual-physiology",
+ "subject": "obstetrics-gynaecology",
+ "title": "Inhibin, AMH and the Endometrial Phases",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The granulosa peptide selectively suppressing pituitary FSH is **inhibin**. Inhibin B rises with the growing cohort, inhibin A dominates the luteal phase. Their fall at menopause releases FSH to climb. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Inhibin selectively suppresses FSH, with B follicular and A luteal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Peptide",
+     "Phase"
+    ],
+    "rows": [
+     [
+      "Inhibin B",
+      "Follicular"
+     ],
+     [
+      "Inhibin A",
+      "Luteal"
+     ],
+     [
+      "Activin",
+      "Stimulates FSH"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The hormone secreted by small growing follicles estimating ovarian reserve is **anti-Mullerian hormone**. It is cycle independent and predicts stimulation response in IVF. Very high levels associate with polycystic ovaries. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Anti-Mullerian hormone estimates ovarian reserve independent of cycle day.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/female-cycle-ovarian-hormones-menopause-fig1.webp",
+    "alt": "Ovarian reserve hormones.",
+    "caption": "Reserve hormones. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Endometrial growth under oestrogen after menstruation forms the **proliferative phase**. Glands straighten, stroma thickens and vessels regrow toward ovulation. It mirrors the follicular phase in the ovary. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "The proliferative phase regrows endometrium under oestrogen toward ovulation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Menstruation ends"
+     },
+     {
+      "id": "n1",
+      "label": "Oestrogen rises"
+     },
+     {
+      "id": "n2",
+      "label": "Glands proliferate"
+     },
+     {
+      "id": "n3",
+      "label": "Ovulation approaches"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Progesterone converting the lining into a secretory, receptive state forms the **secretory phase**. Glands coil and secrete, stroma predecidualises around vessels. It mirrors the luteal phase and lasts a constant fourteen days. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "The secretory phase converts the lining under progesterone for fourteen days.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-progesterone.webp",
+    "alt": "Progesterone secretory transformation.",
+    "caption": "Progesterone. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The brief window when endometrium accepts implantation is the **window of implantation**. Pinopodes and adhesion molecules peak around day twenty to twenty four. Embryo and endometrium must synchronise within it. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "The window of implantation accepts the embryo around day twenty to twenty four.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Receptive",
+     "points": [
+      "Pinopodes present",
+      "Adhesion molecules peak"
+     ]
+    },
+    "right": {
+     "title": "Refractory",
+     "points": [
+      "Outside window",
+      "Implantation fails"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Shedding follows progesterone withdrawal through spiral artery spasm, the mechanism of **menstruation**. Prostaglandins drive both cramping and vessel constriction. NSAIDs exploit this to lighten periods. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Menstruation follows progesterone withdrawal with spiral artery spasm and prostaglandins.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Event",
+     "Mediator"
+    ],
+    "rows": [
+     [
+      "Vessel spasm",
+      "Prostaglandins"
+     ],
+     [
+      "Cramping",
+      "Prostaglandins"
+     ],
+     [
+      "Shedding",
+      "Progesterone fall"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endometrial thickness on ultrasound triples lines before ovulation in the **triple line sign**. A thin lining under seven millimetres at transfer lowers implantation in IVF. Postmenopausal thickness over four to five millimetres with bleeding needs sampling. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Triple line endometrium heralds ovulation, and thin linings lower implantation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/menstrual-cycle-reproductive-hormones-fig1.webp",
+    "alt": "Endometrial phases across the cycle.",
+    "caption": "Endometrial phases. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Local endometrial haemostasis depends on vasoconstriction and platelet plugs, disturbed in **platelet disorders** causing heavy periods. Von Willebrand disease classically presents as heavy menstrual bleeding from menarche. Haematology screening belongs in adolescent heavy bleeding. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Von Willebrand disease classically presents as heavy menstrual bleeding from menarche.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Heavy periods from menarche"
+     },
+     {
+      "id": "n1",
+      "label": "Bleeding history taken"
+     },
+     {
+      "id": "n2",
+      "label": "Von Willebrand screened"
+     },
+     {
+      "id": "n3",
+      "label": "Treatment transforms control"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cycle length variation comes almost entirely from the follicular phase because luteal life is fixed, a principle of **follicular variability**. Long cycles mean late ovulation, not long luteal phases. This corrects day twenty one test timing. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Follicular variability drives cycle length because the luteal phase is fixed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Long cycle",
+     "points": [
+      "Late ovulation",
+      "Luteal still 14 days"
+     ]
+    },
+    "right": {
+     "title": "Short cycle",
+     "points": [
+      "Early ovulation",
+      "Luteal still 14 days"
+     ]
+    }
+   }
+  }
+ ]
+}

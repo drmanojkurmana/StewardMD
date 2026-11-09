@@ -1,0 +1,204 @@
+{
+ "v": 1,
+ "module": "obg-menstrual-physiology",
+ "subject": "obstetrics-gynaecology",
+ "title": "The HPO Axis, Pulsatile GnRH, FSH and the LH Surge",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The hormonal cascade from hypothalamus through pituitary to ovary governing reproduction is the **hypothalamic-pituitary-ovarian axis**. Feedback loops at each level tune the cycle precisely. Disruption at any level produces amenorrhoea or irregular bleeding. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "The HPO axis cascades from hypothalamus to ovary with feedback at each level.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/menstrual-cycle-reproductive-hormones-fig1.webp",
+    "alt": "Menstrual cycle physiology and phases.",
+    "caption": "Cycle physiology. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Gonadotropin releasing hormone must arrive in pulses every hour or so to work, a rule of **pulsatile GnRH**. Continuous exposure paradoxically suppresses the pituitary, exploited by GnRH analogue drugs. Pulse frequency itself encodes FSH versus LH preference. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Pulsatile GnRH works hourly, while continuous exposure suppresses the pituitary.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pulse pattern",
+     "Favours"
+    ],
+    "rows": [
+     [
+      "Fast",
+      "LH"
+     ],
+     [
+      "Slow",
+      "FSH"
+     ],
+     [
+      "Continuous",
+      "Suppression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The pituitary hormone recruiting the follicle cohort each cycle is **FSH**. Follicle stimulating hormone rises in the early follicular phase as inhibin and oestrogen fall. The follicle with most FSH receptors becomes dominant. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "FSH recruits the follicle cohort, and the best receptor endowed follicle dominates.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "FSH rises early"
+     },
+     {
+      "id": "n1",
+      "label": "Cohort recruited"
+     },
+     {
+      "id": "n2",
+      "label": "One follicle dominates"
+     },
+     {
+      "id": "n3",
+      "label": "Others undergo atresia"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sustained high oestrogen switching feedback to positive triggers the midcycle **LH surge**. Luteinising hormone then resumes meiosis and ruptures the follicle within about thirty six hours. Urine kits detect this surge for fertility timing. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "The LH surge follows sustained high oestrogen and ruptures the follicle in thirty six hours.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/female-cycle-ovarian-hormones-menopause-fig1.webp",
+    "alt": "Ovarian hormones across the cycle.",
+    "caption": "Ovarian hormones. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Negative feedback dominates most of the cycle, with oestrogen and inhibin restraining FSH, termed **feedback control**. Only the late follicular oestrogen peak flips the sign briefly. This single positive window times ovulation exactly. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Feedback control restrains FSH except for the brief positive window timing ovulation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Negative feedback",
+     "points": [
+      "Most of cycle",
+      "FSH restrained"
+     ]
+    },
+    "right": {
+     "title": "Positive feedback",
+     "points": [
+      "Late follicular",
+      "LH surge triggered"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Kisspeptin neurons integrate metabolic and seasonal signals into GnRH pulses, acting as the **pulse generator**. Leptin deficiency from low weight silences them, explaining athletic amenorrhoea. Their discovery redefined axis physiology. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Kisspeptin neurons generate GnRH pulses and fall silent with low leptin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Signal",
+     "Effect on axis"
+    ],
+    "rows": [
+     [
+      "Low leptin",
+      "Suppression"
+     ],
+     [
+      "Stress cortisol",
+      "Suppression"
+     ],
+     [
+      "Adequate energy",
+      "Normal pulses"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prolactin suppresses GnRH pulsatility, linking breastfeeding and prolactinoma amenorrhoea by one **prolactin brake**. Dopamine tonically restrains prolactin, so stalk damage raises it. Restoring dopamine agonism restores cycles. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "The prolactin brake suppresses GnRH, linking lactation and prolactinoma amenorrhoea.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-cabergoline.webp",
+    "alt": "Cabergoline restoring dopamine restraint.",
+    "caption": "Dopamine restraint. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Thyroid and adrenal disorders disturb the axis secondarily, so screening them belongs to every cycle workup, called **axis screening**. TSH, prolactin and androgens are the minimum blood panel. Treating the gland often restores ovulation alone. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Axis screening checks thyroid, prolactin and androgens in every cycle workup.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Cycle disturbed"
+     },
+     {
+      "id": "n1",
+      "label": "TSH prolactin androgens"
+     },
+     {
+      "id": "n2",
+      "label": "Gland treated"
+     },
+     {
+      "id": "n3",
+      "label": "Ovulation restores"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ageing depletes follicles until inhibin falls and FSH climbs permanently at the **menopausal transition**. Cycles shorten then lengthen with anovulatory gaps. The same axis, starved of follicles, explains every perimenopausal symptom pattern. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "The menopausal transition climbs FSH permanently as follicles deplete.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/menstrual-cycle-reproductive-hormones-fig1.webp",
+    "alt": "Axis ageing and menopause transition.",
+    "caption": "Axis ageing. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}
