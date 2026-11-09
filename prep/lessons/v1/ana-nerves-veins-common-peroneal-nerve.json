@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-nerves-veins",
+ "subject": "anatomy",
+ "title": "Lower Limb Neurovascular Pathology: Peroneal Nerve, Venous System, and Varicosities",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The common peroneal nerve (L4-S2) is the smaller terminal division of the sciatic nerve. Descending along the medial border of the biceps femoris tendon, it winds directly around the subcutaneously situated **neck of the fibula**, entering the lateral compartment by piercing the substance of the peroneus longus muscle.",
+   "say": "The common peroneal nerve is the smaller branch of the sciatic nerve. Winding around the subcutaneous neck of the fibula, it passes through peroneus longus to divide into superficial and deep branches.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-leg-nerve-injuries.svg",
+    "alt": "Common peroneal nerve winding around the neck of the fibula and its bifurcation into deep and superficial branches",
+    "caption": "Course of the common peroneal nerve winding around the neck of the fibula. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Its superficial position against the hard periosteum of the fibular neck renders the common peroneal nerve the most frequently injured nerve in the lower extremity. Direct trauma, tight plaster casts, or fibular fractures cause nerve palsy manifesting with flaccid **foot drop** and sensory loss over the dorsum of the foot and lateral leg.",
+   "say": "Its superficial location against the fibular neck makes the common peroneal nerve exceptionally vulnerable. Direct blows or tight leg casts cause foot drop and sensory loss over the foot dorsum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Motor Deficits in Foot Drop",
+     "points": [
+      "Paralysis of tibialis anterior: loss of dorsiflexion",
+      "Paralysis of peroneus longus/brevis: loss of eversion",
+      "Paralysis of EDL and EHL: loss of toe extension",
+      "High-stepping gait to avoid dragging toes"
+     ]
+    },
+    "right": {
+     "title": "Sensory Deficits in Foot Drop",
+     "points": [
+      "Loss over lower two-thirds of lateral leg",
+      "Loss across broad expanse of foot dorsum",
+      "Loss in first dorsal web space (deep branch)",
+      "Sensation on sole preserved (tibial nerve)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The venous drainage of the lower limb is divided into superficial and deep systems connected by communicating perforating veins. The **great saphenous vein** originates from the medial end of the dorsal venous arch, ascends anterior to the medial malleolus, travels along the medial knee, and pierces the cribriform fascia at the saphenous opening.",
+   "say": "Superficial veins connect to deep veins through perforating vessels. The great saphenous vein begins on the medial foot, ascends anterior to the medial malleolus, and enters the femoral vein at the saphenous opening.",
+   "vis": {
+    "kind": "flow",
+    "title": "Ascending Trajectory of Great Saphenous Vein",
+    "nodes": [
+     {
+      "id": "arch",
+      "label": "Origin: Medial Marginal Vein of Dorsal Venous Arch"
+     },
+     {
+      "id": "malleolus",
+      "label": "Ascends One Centimeter Anterior to Medial Malleolus"
+     },
+     {
+      "id": "knee",
+      "label": "Passes Handbreadth Posterior to Medial Patellar Border"
+     },
+     {
+      "id": "sfj",
+      "label": "Pierces Cribriform Fascia to Terminate at Saphenofemoral Junction"
+     }
+    ],
+    "edges": [
+     [
+      "arch",
+      "malleolus"
+     ],
+     [
+      "malleolus",
+      "knee"
+     ],
+     [
+      "knee",
+      "sfj"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Incompetence of valves within the saphenous trunks or perforating veins causes retrograde hydrostatic hypertension, transforming straight veins into dilated, tortuous **varicose veins**. Chronic venous hypertension leads to skin lipodermatosclerosis, stasis eczema, and non-healing venous ulcers characteristically localized over the medial gaiter area.",
+   "say": "Valvular incompetence in saphenous trunks or perforator veins causes retrograde hydrostatic hypertension, creating varicose veins. Chronic stasis yields skin induration, eczema, and medial gaiter ulcers.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-varicose-vein-stripping-specimen.webp",
+    "alt": "Stripped long saphenous vein specimen displaying marked tortuosity and nodular varicosities",
+    "caption": "Surgically stripped varicose great saphenous vein demonstrating valvular failure and saccular dilatation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Clinical assessment of valvular competence uses the **Trendelenburg test** for varicose veins. With the patient supine and the limb elevated to empty the veins, a tourniquet is applied at the upper thigh: rapid retrograde filling upon standing before tourniquet release confirms saphenofemoral junction incompetence, while sudden filling upon release proves trunk valve failure.",
+   "say": "The Trendelenburg test evaluates venous valve competence. With the leg elevated and a tourniquet applied at the groin, rapid filling upon standing identifies saphenofemoral junction incompetence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Venous Valve Assessment",
+     "Tourniquet Status",
+     "Observed Venous Response",
+     "Clinical Diagnosis"
+    ],
+    "rows": [
+     [
+      "Trendelenburg Part 1",
+      "Tourniquet on, patient stands",
+      "Rapid filling within 10 seconds",
+      "Incompetent calf/thigh perforators"
+     ],
+     [
+      "Trendelenburg Part 2",
+      "Tourniquet rapidly removed",
+      "Sudden retrograde venous column rush",
+      "Saphenofemoral junction incompetence"
+     ],
+     [
+      "Perthes Test",
+      "Tourniquet applied, patient walks",
+      "Varicose veins collapse and empty",
+      "Patent deep veins with competent pump"
+     ],
+     [
+      "Perthes Test",
+      "Tourniquet applied, patient walks",
+      "Veins engorge, calf pain increases",
+      "Deep vein thrombosis (contraindicates stripping)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The small saphenous vein arises from the lateral dorsal venous arch, ascends posterior to the **lateral malleolus** alongside the sural nerve, and pierces the deep popliteal fascia to drain into the popliteal vein. The sural nerve provides sensory innervation to the lateral margin of the foot and little toe.",
+   "say": "The small saphenous vein ascends behind the lateral malleolus with the sural nerve, draining into the popliteal vein. The sural nerve supplies cutaneous sensation to the lateral foot border and little toe.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Great Saphenous Vein",
+     "points": [
+      "Ascends anterior to medial malleolus",
+      "Accompanied by saphenous nerve in leg",
+      "Drains into femoral vein at saphenous opening",
+      "Contains 10 to 20 bicuspid valves"
+     ]
+    },
+    "right": {
+     "title": "Small Saphenous Vein",
+     "points": [
+      "Ascends posterior to lateral malleolus",
+      "Accompanied by sural nerve in calf",
+      "Drains into popliteal vein in popliteal fossa",
+      "Contains 7 to 10 bicuspid valves"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Entrapment of the lateral femoral cutaneous nerve (L2, L3) beneath the lateral attachment of the inguinal ligament near the ASIS causes **meralgia paraesthetica**. Characterized by burning pain, paresthesias, and hypersensitivity over the anterolateral thigh, it occurs frequently in pregnancy, obesity, or with tight utility belts.",
+   "say": "Entrapment of the lateral femoral cutaneous nerve under the inguinal ligament causes meralgia paraesthetica. It produces burning pain and tingling over the anterolateral thigh without any motor loss.",
+   "vis": {
+    "kind": "flow",
+    "title": "Mechanism of Meralgia Paraesthetica",
+    "nodes": [
+     {
+      "id": "nerve",
+      "label": "Lateral Femoral Cutaneous Nerve Passes Beneath ASIS"
+     },
+     {
+      "id": "pinch",
+      "label": "Compressed Under Rigid Inguinal Ligament Attachment"
+     },
+     {
+      "id": "symptom",
+      "label": "Burning Pain and Hypoesthesia over Anterolateral Thigh"
+     },
+     {
+      "id": "motor",
+      "label": "Zero Motor Weakness (Pure Cutaneous Sensory Nerve)"
+     }
+    ],
+    "edges": [
+     [
+      "nerve",
+      "pinch"
+     ],
+     [
+      "pinch",
+      "symptom"
+     ],
+     [
+      "symptom",
+      "motor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Superficial **inguinal lymph nodes** are arranged in a T-shaped configuration below the inguinal ligament. The horizontal group drains the anterior abdominal wall below the umbilicus, external genitalia (excluding testes), perineum, and anal canal below the pectinate line, while the vertical group along the great saphenous vein drains the superficial lower limb.",
+   "say": "Superficial inguinal lymph nodes form a T-shaped cluster. The horizontal chain drains the infraumbilical abdominal wall, external genitalia, and perineum, while the vertical chain drains the lower limb.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lymph Node Group",
+     "Anatomical Location",
+     "Drainage Territory",
+     "Clinical Presentation"
+    ],
+    "rows": [
+     [
+      "Horizontal Inguinal Nodes",
+      "Parallel to inguinal ligament",
+      "Lower abdomen, perineum, perianal skin, vulva/scrotum",
+      "Enlarged in vulvar carcinoma and perianal sepsis"
+     ],
+     [
+      "Vertical Inguinal Nodes",
+      "Along terminal great saphenous",
+      "Superficial lower extremity (leg and foot)",
+      "Enlarged in infected foot ulcers or melanoma"
+     ],
+     [
+      "Popliteal Lymph Nodes",
+      "Deep popliteal fat around vein",
+      "Lateral foot and sole via small saphenous",
+      "Enlarged in lateral heel infections"
+     ],
+     [
+      "Deep Inguinal Nodes",
+      "Medial to femoral vein in canal",
+      "Glans penis/clitoris and deep limb lymphatics",
+      "Cloquet node biopsy in penile carcinoma"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "62179cdd-6df6-42b9-aee1-92dab0bd4293",
+  "2b344251-d9d1-44f5-a65e-4cde13da978c",
+  "a2529910-f834-4301-b9ef-4fa6532a6808"
+ ]
+}
