@@ -1,0 +1,300 @@
+{
+    "v": 1,
+    "id": "ans-intraop-complications-bronchospasm",
+    "subject": "anaesthesia",
+    "module": "ans-intraop-complications",
+    "title": "Intraoperative Crises: Bronchospasm, Anaphylaxis, and Venous Air Embolism",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Intraoperative Bronchospasm Signs",
+            "tx": "**Acute intraoperative bronchospasm presentation** under general anaesthesia manifests as sudden elevation of peak inspiratory airway pressures with preserved normal plateau pressures (widened peak-to-plateau airway resistance gradient), expiratory musical wheezing on chest auscultation, prolonged expiration, dropping tidal volumes during pressure-controlled ventilation, and a classic upward-sloping 'shark-fin' alveolar plateau (Phase III) on capnography.",
+            "say": "Acute intraoperative bronchospasm presentation under general anaesthesia manifests as sudden elevation of peak inspiratory airway pressures with preserved normal plateau pressures (widened peak-to-plateau airway resistance gradient), expiratory musical wheezing on chest auscultation, prolonged expiration, dropping tidal volumes during pressure-controlled ventilation, and a classic upward-sloping 'shark-fin' alveolar plateau (Phase III) on capnography.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Diagnostic Indicator",
+                    "Bronchospasm Finding",
+                    "Differential Mechanism",
+                    "Confirmatory Clinical Action"
+                ],
+                "rows": [
+                    [
+                        "Peak Inspiratory Pressure",
+                        "Marked elevation (>40 cmH2O)",
+                        "Increased airway resistance",
+                        "Check plateau pressure during inspiratory hold"
+                    ],
+                    [
+                        "Plateau Airway Pressure",
+                        "Remains low and normal",
+                        "Preserved normal lung compliance",
+                        "Plateau elevation indicates tension pneumothorax"
+                    ],
+                    [
+                        "Capnography Waveform",
+                        "Shark-fin upward sloping Phase III",
+                        "Uneven regional expiratory emptying",
+                        "Measure increased alpha angle on tracing"
+                    ],
+                    [
+                        "Chest Auscultation",
+                        "High-pitched expiratory wheezing",
+                        "Bronchial smooth muscle constriction",
+                        "Rule out kinked endotracheal tube or carina carina abutment"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Immediate Bronchospasm Management",
+            "tx": "**Emergency treatment of intraoperative bronchospasm** begins with deepening anaesthesia using volatile anaesthetic vapors (sevoflurane or isoflurane act as potent direct bronchodilators) or intravenous propofol/ketamine, while ventilating with 100 percent oxygen. Clinicians must administer inhaled salbutamol (6 to 10 puffs via an in-line MDI adapter), administer intravenous hydrocortisone (100 to 200 mg), and inject subcutaneous or intravenous adrenaline for refractory bronchospasm.",
+            "say": "Emergency treatment of intraoperative bronchospasm begins with deepening anaesthesia using volatile anaesthetic vapors (sevoflurane or isoflurane act as potent direct bronchodilators) or intravenous propofol/ketamine, while ventilating with 100 percent oxygen. Clinicians must administer inhaled salbutamol (6 to 10 puffs via an in-line MDI adapter), administer intravenous hydrocortisone (100 to 200 mg), and inject subcutaneous or intravenous adrenaline for refractory bronchospasm.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Deepen anaesthesia with 8% sevoflurane or IV propofol bolus"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Switch to 100% O2 and adjust ventilator for prolonged expiration"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Deliver 8 to 10 puffs of salbutamol via endotracheal in-line spacer"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Administer IV magnesium sulphate (2 g) or IV adrenaline for refractory spasm"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Perioperative Anaphylaxis Triggers",
+            "tx": "**Etiology of perioperative anaphylaxis** identifies neuromuscular blocking agents (specifically rocuronium and succinylcholine, possessing immunogenic tertiary and quaternary ammonium epitopes) as the primary cause in over 60 percent of cases, followed by intravenous antibiotics (penicillins and cephalosporins in 15 to 20 percent), natural rubber latex, chlorhexidine skin prep, and intravenous colloidal volume expanders.",
+            "say": "Etiology of perioperative anaphylaxis identifies neuromuscular blocking agents (specifically rocuronium and succinylcholine, possessing immunogenic tertiary and quaternary ammonium epitopes) as the primary cause in over 60 percent of cases, followed by intravenous antibiotics (penicillins and cephalosporins in 15 to 20 percent), natural rubber latex, chlorhexidine skin prep, and intravenous colloidal volume expanders.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Allergenic Trigger Category",
+                    "Incidence Percentage",
+                    "Immunological Antigen Epitope",
+                    "Cross-Reactivity Risk"
+                ],
+                "rows": [
+                    [
+                        "Neuromuscular Blockers (NMBAs)",
+                        "60 to 70 percent",
+                        "Quaternary/tertiary ammonium ions",
+                        "High cross-reactivity across all muscle relaxants"
+                    ],
+                    [
+                        "Beta-Lactam Antibiotics",
+                        "15 to 20 percent",
+                        "Beta-lactam ring and side chains",
+                        "Cross-sensitivity between penicillin and cephalosporins"
+                    ],
+                    [
+                        "Chlorhexidine Skin Antiseptic",
+                        "5 to 10 percent",
+                        "Biguanide chemical structure",
+                        "Sensitization via central line insertion dressings"
+                    ],
+                    [
+                        "Natural Rubber Latex",
+                        "Under 5 percent (declining)",
+                        "Hevea brasiliensis plant proteins",
+                        "Severe allergy in spina bifida and healthcare workers"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Anaphylaxis Presentation and Grading",
+            "tx": "**Clinical presentation of anaesthetic anaphylaxis** is often masked by surgical drapes: the earliest and most dramatic sign is sudden, unexplained cardiovascular collapse with profound hypotension, accompanied by severe bronchospasm with high airway pressures. Cutaneous signs (generalized erythema, urticaria, angioedema) are absent in up to 30 percent of severe cases until circulation is resuscitated.",
+            "say": "Clinical presentation of anaesthetic anaphylaxis is often masked by surgical drapes: the earliest and most dramatic sign is sudden, unexplained cardiovascular collapse with profound hypotension, accompanied by severe bronchospasm with high airway pressures. Cutaneous signs (generalized erythema, urticaria, angioedema) are absent in up to 30 percent of severe cases until circulation is resuscitated.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Severe Cardiovascular Collapse",
+                    "points": [
+                        "Profound, refractory hypotension and absent peripheral pulses",
+                        "Massive systemic vasodilation and increased capillary permeability",
+                        "Loss of up to 40 to 50 percent of intravascular volume into interstitium"
+                    ]
+                },
+                "right": {
+                    "title": "Respiratory and Cutaneous Manifestations",
+                    "points": [
+                        "Acute severe bronchospasm with unventilatable lungs",
+                        "Laryngeal and pharyngeal angioedema",
+                        "Urticaria, flushing, and wheals frequently hidden under drapes"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Adrenaline First-Line Therapy",
+            "tx": "**Adrenaline administration in perioperative anaphylaxis** represents the non-negotiable first-line drug: adrenaline acts as an alpha-1 agonist to restore vascular tone and blood pressure, a beta-1 agonist to augment myocardial contractility, and a beta-2 agonist to relax bronchial smooth muscle and halt further mast cell mediator degranulation. Titrate intravenous boluses of 50 to 100 micrograms (0.5 to 1 mL of 1:10,000 solution) every 1 to 2 minutes.",
+            "say": "Adrenaline administration in perioperative anaphylaxis represents the non-negotiable first-line drug: adrenaline acts as an alpha-1 agonist to restore vascular tone and blood pressure, a beta-1 agonist to augment myocardial contractility, and a beta-2 agonist to relax bronchial smooth muscle and halt further mast cell mediator degranulation. Titrate intravenous boluses of 50 to 100 micrograms (0.5 to 1 mL of 1:10,000 solution) every 1 to 2 minutes.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Halt all potential allergens and discontinue volatile anaesthetics"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Administer immediate IV adrenaline bolus 50 to 100 micrograms"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Infuse rapid crystalloid fluid bolus (20 to 40 mL/kg)"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Start continuous IV adrenaline infusion (0.05-0.2 mcg/kg/min) for shock"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Diagnostic Serum Mast Cell Tryptase",
+            "tx": "**Diagnostic serum mast cell tryptase timing** confirms an IgE-mediated immunological reaction: draw baseline clotted blood for total tryptase immediately during initial resuscitation (within 1 to 2 hours of symptom onset), draw a second sample at 2 to 4 hours post-reaction, and draw a convalescent baseline sample at 24 hours. A peak tryptase exceeding 1.2 times baseline plus 2 micrograms per liter establishes anaphylaxis.",
+            "say": "Diagnostic serum mast cell tryptase timing confirms an IgE-mediated immunological reaction: draw baseline clotted blood for total tryptase immediately during initial resuscitation (within 1 to 2 hours of symptom onset), draw a second sample at 2 to 4 hours post-reaction, and draw a convalescent baseline sample at 24 hours. A peak tryptase exceeding 1.2 times baseline plus 2 micrograms per liter establishes anaphylaxis.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Blood Sampling Interval",
+                    "Target Tryptase Biomarker",
+                    "Physiological Significance",
+                    "Clinical Recommendation"
+                ],
+                "rows": [
+                    [
+                        "Immediate (Within 1 to 2 Hours)",
+                        "Peak total serum tryptase",
+                        "Reflects acute mast cell degranulation surge",
+                        "Draw alongside acute arterial blood gases"
+                    ],
+                    [
+                        "Intermediate (2 to 4 Hours)",
+                        "Elevated persistent tryptase",
+                        "Confirms sustained systemic mediator circulation",
+                        "Guides necessity of intensive care monitoring"
+                    ],
+                    [
+                        "Convalescent Baseline (24 Hours)",
+                        "Resting constitutional tryptase",
+                        "Establishes patient true individual baseline",
+                        "Essential reference for definitive formula calculation"
+                    ],
+                    [
+                        "Skin Prick Testing (4 to 6 Weeks)",
+                        "Specific IgE antibody identification",
+                        "Identifies exact triggering drug molecule",
+                        "Essential before any future general anaesthesia"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Venous Air Embolism Mechanics",
+            "tx": "**Venous air embolism pathogenesis** occurs when a negative pressure gradient develops between an open non-collapsible venous lumen and the atmosphere, classically during sitting craniotomy, posterior cervical spine surgery, or central venous cannulation. Air entering the right atrium forms an air-lock obstruction in the right ventricular outflow tract, triggering acute cor pulmonale, hypoxaemia, and sudden drops in end-tidal carbon dioxide.",
+            "say": "Venous air embolism pathogenesis occurs when a negative pressure gradient develops between an open non-collapsible venous lumen and the atmosphere, classically during sitting craniotomy, posterior cervical spine surgery, or central venous cannulation. Air entering the right atrium forms an air-lock obstruction in the right ventricular outflow tract, triggering acute cor pulmonale, hypoxaemia, and sudden drops in end-tidal carbon dioxide.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Monitoring Sensitivity Spectrum",
+                    "points": [
+                        "Transoesophageal echocardiography (TOE) is most sensitive (0.02 mL/kg)",
+                        "Precordial Doppler detects air bubbles as churning washing-machine sounds",
+                        "Sudden steep drop in end-tidal CO2 reflects pulmonary vascular obstruction"
+                    ]
+                },
+                "right": {
+                    "title": "Emergency Treatment Actions",
+                    "points": [
+                        "Flood surgical field with saline and occlude open venous bone sinuses",
+                        "Position patient in Durant position (left lateral decubitus, Trendelenburg)",
+                        "Aspirate air from right atrium via multiorifice central venous catheter"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Intraoperative Hypoxia DOPE Algorithm",
+            "tx": "**Intraoperative hypoxia DOPE algorithm** rapidly evaluates acute respiratory desaturation under general anaesthesia: Dislodgement of the endotracheal tube (accidental extubation or right mainstem endobronchial intubation), Obstruction of the tube (secretions, biting, blood, kinking), Pneumothorax (tension pneumothorax with absent breath sounds and hypotension), and Equipment failure (ventilator disconnect, oxygen supply failure).",
+            "say": "Intraoperative hypoxia DOPE algorithm rapidly evaluates acute respiratory desaturation under general anaesthesia: Dislodgement of the endotracheal tube (accidental extubation or right mainstem endobronchial intubation), Obstruction of the tube (secretions, biting, blood, kinking), Pneumothorax (tension pneumothorax with absent breath sounds and hypotension), and Equipment failure (ventilator disconnect, oxygen supply failure).",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Dislodgement: check tube depth and bilateral breath sounds"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Obstruction: pass suction catheter down tube lumen to carina"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Pneumothorax: auscultate chest, check tracheal deviation and peak pressures"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Equipment: switch to manual Ambu bag with 100% cylinder O2"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}
