@@ -1,0 +1,235 @@
+{
+  "v": 1,
+  "module": "mic-cestodes-trematodes",
+  "subject": "microbiology",
+  "title": "Foodborne Trematodes: Fasciola hepatica, Clonorchis and Paragonimus",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Foodborne trematodiases are zoonotic flatworm infections transmitted by consuming raw or improperly cooked aquatic vegetation, freshwater fish, or freshwater crustaceans. The three major human flukes are the sheep liver fluke **Fasciola hepatica**, the Chinese liver fluke Clonorchis sinensis, and the oriental lung fluke Paragonimus westermani. Snail intermediate hosts are mandatory for larval amplification.",
+      "say": "Eating unwashed aquatic plants, raw fish, or raw crustaceans transmits foodborne flukes to humans.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cestodes-trematodes-hydatid-schistosoma-flukes-fig1.webp",
+        "alt": "Trematode fluke comparative life cycle",
+        "caption": "Comparative morphology and organ tropism of human liver, lung, and blood flukes [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Humans contract Fasciola hepatica by ingesting encysted metacercariae adhering to raw aquatic freshwater plants, notably **watercress**, or by drinking unboiled water containing detached cysts. In the duodenum, excysted juvenile flukes penetrate the bowel wall into the peritoneal cavity, traverse Glisson's capsule, and tunnel through hepatic parenchyma over two months to reach their definitive home in major biliary ducts.",
+      "say": "Consuming wild watercress inoculates metacercariae that tunnel through hepatic parenchyma into bile ducts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fh1",
+            "label": "Ingest wild watercress or water carrying encysted metacercariae"
+          },
+          {
+            "id": "fh2",
+            "label": "Excysted juvenile flukes penetrate gut wall and traverse peritoneal cavity"
+          },
+          {
+            "id": "fh3",
+            "label": "Tunnelling through liver parenchyma induces fever, hepatomegaly, and eosinophilia"
+          }
+        ],
+        "edges": [
+          [
+            "fh1",
+            "fh2"
+          ],
+          [
+            "fh2",
+            "fh3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "During the acute hepatic migration phase, patients develop prolonged high fever, right upper quadrant pain, tender hepatomegaly, and marked peripheral blood **eosinophilia** often exceeding fifty percent. Computed tomography demonstrates linear, branching, low-attenuation tracts corresponding to parenchymal necrosis. In the chronic biliary phase, adult flukes cause mechanical obstruction, biliary colic, and ascending bacterial cholangitis.",
+      "say": "Parenchymal migration produces linear liver tunnel necrosis accompanied by extreme blood eosinophilia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Phase",
+          "Fluke Anatomical Site",
+          "Diagnostic Presentation"
+        ],
+        "rows": [
+          [
+            "Acute parenchymal phase",
+            "Tunnelling through hepatic tissue",
+            "High fever, tender liver, eosinophilia over 50%, linear CT tracks"
+          ],
+          [
+            "Chronic biliary phase",
+            "Mature adults inside large bile ducts",
+            "Intermittent biliary colic, jaundice, cholangitis, cholelithiasis"
+          ],
+          [
+            "Pharyngeal fascioliasis",
+            "Temporary attachment to pharyngeal wall",
+            "Halzoun syndrome: acute dysphagia and suffocation from raw sheep liver"
+          ],
+          [
+            "Stool examination",
+            "Biliary egg excretion into feces",
+            "Large, operculated, unembryonated eggs (130-150 microns)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The Chinese liver fluke **Clonorchis sinensis**, endemic in East Asia, is acquired by eating raw, pickled, or undercooked freshwater cyprinid carp containing encysted metacercariae. Following duodenal excystation, juvenile flukes migrate retrograde through the ampulla of Vater directly into intrahepatic bile ducts, where adults dwell for up to thirty years without parenchymal migration.",
+      "say": "Consuming raw freshwater carp introduces Clonorchis metacercariae, which ascend into intrahepatic bile ducts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clonorchis sinensis (liver)",
+          "points": [
+            "Source: raw or undercooked freshwater fish",
+            "Adult site: intrahepatic secondary bile ducts",
+            "Complication: recurrent cholangitis & cholangiocarcinoma",
+            "Drug of choice: oral praziquantel"
+          ]
+        },
+        "right": {
+          "title": "Fasciola hepatica (liver)",
+          "points": [
+            "Source: unwashed watercress or aquatic plants",
+            "Adult site: extrahepatic and common bile ducts",
+            "Complication: parenchymal liver tracks and cirrhosis",
+            "Drug of choice: oral triclabendazole"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Chronic irritation from adult Clonorchis flukes induces adenomatous mucosal hyperplasia, periductal fibrosis, and recurrent pyogenic cholangitis. This chronic inflammatory milieu provides strong oncogenic drive, establishing Clonorchis as a Group One biological carcinogen for **cholangiocarcinoma** (bile duct adenocarcinoma). Stool examination demonstrates small, flask-shaped, operculated eggs with a prominent seated shoulder rim and a tiny abopercular knob.",
+      "say": "Chronic biliary duct inflammation by Clonorchis flukes provides an oncogenic trigger for cholangiocarcinoma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathogen",
+          "Transmission Vehicle",
+          "Malignancy Association"
+        ],
+        "rows": [
+          [
+            "Clonorchis sinensis",
+            "Raw freshwater cyprinid fish",
+            "Intrahepatic cholangiocarcinoma (bile duct cancer)"
+          ],
+          [
+            "Opisthorchis viverrini",
+            "Raw freshwater fish (Southeast Asia)",
+            "Intrahepatic cholangiocarcinoma"
+          ],
+          [
+            "Schistosoma haematobium",
+            "Cercarial penetration from freshwater",
+            "Squamous cell carcinoma of urinary bladder"
+          ],
+          [
+            "Paragonimus westermani",
+            "Raw crabs and crayfish",
+            "Benign pulmonary cysts; no malignancy risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The oriental lung fluke **Paragonimus westermani** is contracted by consuming raw, pickled, or drunken freshwater crabs or crayfish harboring metacercariae. Excysted juvenile flukes penetrate the duodenal wall, traverse the peritoneal cavity and diaphragm, and enter pleural cavities to lodge within pulmonary parenchyma. Maturing flukes stimulate granulomatous encapsulation, forming fibrotic cystic cavities containing paired adult hermaphroditic worms.",
+      "say": "Eating raw freshwater crabs transmits Paragonimus flukes that migrate across the diaphragm into lung cavities.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pw1",
+            "label": "Ingest raw freshwater crab carrying encysted metacercariae"
+          },
+          {
+            "id": "pw2",
+            "label": "Larvae excyst in duodenum, penetrate gut wall and traverse diaphragm"
+          },
+          {
+            "id": "pw3",
+            "label": "Paired adults mature inside fibrotic pulmonary cysts, shedding eggs into bronchi"
+          }
+        ],
+        "edges": [
+          [
+            "pw1",
+            "pw2"
+          ],
+          [
+            "pw2",
+            "pw3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Patients with pulmonary paragonimiasis present with chronic cough, chest pain, and recurrent expectoration of tenacious, chocolate-brown or rusty sputum containing blood and inflammatory debris, known as **endemic haemoptysis**. The clinical and radiological appearance of apical cavitations, infiltrates, and pleural effusions closely mimics pulmonary tuberculosis, leading to frequent diagnostic delay in endemic regions.",
+      "say": "Chronic cough with rusty chocolate sputum and lung cavities mimics pulmonary tuberculosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Paragonimiasis (lung fluke)",
+          "points": [
+            "Endemic haemoptysis with chocolate-brown sputum",
+            "Golden-brown operculated eggs in sputum and stool",
+            "Peripheral blood eosinophilia is prominent",
+            "Curative therapy: oral praziquantel"
+          ]
+        },
+        "right": {
+          "title": "Pulmonary tuberculosis",
+          "points": [
+            "Haemoptysis with productive mucoid sputum",
+            "Acid-fast bacilli on Ziehl-Neelsen stain",
+            "Peripheral eosinophil count typically normal",
+            "Curative therapy: four-drug anti-tubercular therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A critical pharmacological exception tested on medical examinations involves antiparasitic drug selection. Oral praziquantel is the first-line drug of choice for Clonorchis sinensis, Opisthorchis, Paragonimus westermani, and all blood schistosomes. However, Fasciola hepatica is inherently refractory to praziquantel because its thick tegument lacks sensitive calcium channels; the definitive drug of choice for fascioliasis is oral **triclabendazole**.",
+      "say": "Praziquantel cures most flukes, but Fasciola is inherently refractory and requires triclabendazole.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Trematode Species",
+          "First-Line Anthelmintic",
+          "Mechanism & Key Exception"
+        ],
+        "rows": [
+          [
+            "Clonorchis & Opisthorchis",
+            "Oral praziquantel 25 mg/kg 3 doses",
+            "Increases tegumental calcium permeability"
+          ],
+          [
+            "Paragonimus westermani",
+            "Oral praziquantel 25 mg/kg 3 doses",
+            "Paralyzes fluke musculature; complete cure"
+          ],
+          [
+            "Schistosoma species",
+            "Oral praziquantel 40-60 mg/kg",
+            "Single-day therapy cures all human schistosomes"
+          ],
+          [
+            "Fasciola hepatica",
+            "Oral triclabendazole 10 mg/kg single dose",
+            "Praziquantel is ineffective; binds fluke tubulin"
+          ]
+        ]
+      }
+    }
+  ]
+}
