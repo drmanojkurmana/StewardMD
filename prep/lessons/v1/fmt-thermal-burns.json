@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-thermal-burns",
+ "subject": "forensic-medicine",
+ "module": "fmt-thermal",
+ "title": "Burns, Rule of Nines, Pugilistic Attitude and Heat Ruptures",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Estimating extent by the rule of nines",
+   "tx": "Burn severity depends first on extent, estimated by the Wallace **rule of nine**: nine percent each for head and neck, each upper limb, the front and back of each lower limb counted by nines, and nine each for front and back of chest and front and back of abdomen, totalling ninety nine, with one percent for the external genitalia. The patient's palmar hand surface approximates one percent and helps estimate scattered patches.",
+   "say": "Count the body in nines, head, each arm, chest front and back, and add one percent for the genitalia.",
+   "vis": {"kind": "table", "cols": ["Region", "Percent", "Subdivision"], "rows": [["Head and neck", "9 percent", "Head seven, neck two"], ["Each upper limb", "9 percent", "Arm four, forearm three, hand two"], ["Chest and abdomen", "9 percent each face", "Front and back counted separately"], ["External genitalia", "1 percent", "Palm of hand also one percent"]]}
+  },
+  {
+   "title": "Depth and why extent kills",
+   "tx": "Burns are classed superficial when less than full skin thickness is lost and deep when the whole skin is destroyed, under the **depth classification of burns**. Local effects include vascular thrombosis, tissue necrosis and heavy evaporative water loss. Involvement of fifty percent of the body surface can prove fatal even with first degree burns. Circulatory collapse may appear with only fifteen percent total body surface burned, and children suffer more than adults at the same extent.",
+   "say": "Even shallow burns kill when they cover half the body, and fifteen percent can already collapse the circulation.",
+   "vis": {"kind": "compare", "left": {"title": "Superficial burns", "points": ["Part thickness skin loss", "Blistering and redness", "Heal with thin scars", "Less contraction deformity"]}, "right": {"title": "Deep burns", "points": ["Full thickness skin destroyed", "Charred or leathery surface", "Thick contracted scars", "Marjolin ulcer risk years later"]}}
+  },
+  {
+   "title": "Causes of death after burns in time order",
+   "tx": "Deaths follow a timetable of **burn death mechanisms**. Primary neurogenic shock from pain strikes first. More than half of burn deaths occur within forty eight hours from secondary shock as fluid pours from the burnt surface. Toxaemia runs three to four days, sepsis dominates from four to five days onward, acute renal failure arrives on day three or four, and glottis oedema or pulmonary oedema can suffocate smoke victims early.",
+   "say": "Shock kills in two days, sepsis after four, kidneys fail near day three, so the survival day narrows the mechanism.",
+   "vis": {"kind": "table", "cols": ["Period", "Dominant killer", "Mechanism"], "rows": [["Immediately", "Neurogenic shock", "Pain and reflex collapse"], ["First 48 hours", "Secondary shock", "Fluid loss from surface"], ["Days three to four", "Renal failure, toxaemia", "Lower nephron nephrosis"], ["Day four onward", "Sepsis", "Infected burnt surface"]]}
+  },
+  {
+   "title": "Pugilistic attitude is a heat artefact",
+   "tx": "Great heat fixes the body in the **pugilistic attitude**: legs flexed at hips and knees, arms flexed and held before the body, head slightly extended and fingers hooked like claws, sometimes with opisthotonus from paraspinal contraction. Protein coagulation and dehydration shorten the muscles, and bulkier flexors win. It appears whether the person was alive or dead when burnt, so it never proves a defensive fight or the manner of death.",
+   "say": "The boxer pose is cooked muscle shortening, present in bodies burnt after death too, and proves nothing about struggle.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Great heat reaches muscles"}, {"id": "b", "label": "Protein coagulates, tissues dry"}, {"id": "c", "label": "Bulkier flexors contract most"}, {"id": "d", "label": "Boxing posture fixed on the body"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Heat ruptures imitate wounds",
+   "tx": "In severe charring the contracting skin splits into **heat ruptures**, usually over fleshy areas such as calves and thighs, extensor surfaces, joints and the head, running parallel to muscle fibres in the abdominal wall. They mimic lacerations and incised wounds. Four features separate them: no bleeding because heat coagulated the vessels, intact vessels and nerves visible in the floor, irregular margins, and no bruising or vital reaction at the edges.",
+   "say": "Heat splits look like cuts but show no bleeding, intact nerves in the floor and no vital reaction at the margins.",
+   "vis": {"kind": "compare", "left": {"title": "Heat rupture", "points": ["No bleeding in the split", "Intact vessels in the floor", "Irregular margins", "No vital reaction"]}, "right": {"title": "True incised wound", "points": ["Bleeds freely when made in life", "Structures divided cleanly", "Smooth even margins", "Bruising absent, reaction present"]}}
+  },
+  {
+   "title": "Heat haematoma versus extradural haemorrhage",
+   "tx": "Intense heat on the head produces a **heat haematoma** between skull and dura that imitates traumatic extradural haemorrhage. It is soft, friable, light chocolate coloured and honeycombed by steam bubbles, one and a half to fifteen millimetres thick and up to one hundred twenty millilitres, following the charring pattern without any blunt injury. Its blood carries the same carboxyhaemoglobin level as peripheral blood; a pre fire extradural bleed would not.",
+   "say": "A honeycombed chocolate clot under charred skull is boiled heat haematoma, separated from trauma by its steam bubbles.",
+   "vis": {"kind": "table", "cols": ["Feature", "Heat haematoma", "Extradural haemorrhage"], "rows": [["Consistency", "Soft, friable, honeycombed", "Rubbery, firm clot"], ["Blunt injury signs", "Absent", "Fracture and scalp injury"], ["Distribution", "Follows charring pattern", "Under the impact site"], ["Carboxyhaemoglobin", "Same as peripheral blood", "Absent if bleed preceded fire"]]}
+  },
+  {
+   "title": "Heat fractures of the skull",
+   "tx": "**Thermal skull fractures** take two forms. Steam pressure inside the cranium can separate ununited sutures or burst the skull with gaping defects. Rapid drying and contraction cracks only the outer table in stellate lines without displacement, usually above the temples and sometimes crossing suture lines. Burnt bone turns grey white with a fine criss cross network on its surface and crumbles on handling. Long bone heat fractures are characteristically curved.",
+   "say": "Steam bursts skulls from inside while drying cracks only the outer table, and neither pattern needs any weapon blow.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Skull exposed to intense heat"}, {"id": "b", "label": "Steam pressure builds inside"}, {"id": "c", "label": "Sutures part or bone cracks"}, {"id": "d", "label": "Grey white friable bone remains"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Scalds, hot liquid without flame",
+   "tx": "A **scald** results from liquid above sixty degrees or from steam and never singes hair or chars skin. Water at seventy degrees causes full thickness scalding in one second of contact. Redness appears at once and blisters form within minutes with a hyperaemic zone and red swollen papillae in the floor, containing white and red cells. Sticky syrup, oil and tar scald worse than water, and streaks run downward from the main area.",
+   "say": "Scalds blister within minutes, spare hair and charring, and streak downward where the hot liquid trickled.",
+   "vis": {"kind": "compare", "left": {"title": "Scald features", "points": ["Liquid above sixty degrees", "No singeing or charring", "Sharp contact demarcation", "Downward trickle streaks"]}, "right": {"title": "Flame burn features", "points": ["Dry heat and flame", "Hair singed, skin may char", "Patchy varied distribution", "Clothing may ignite further"]}}
+  },
+  {
+   "title": "Identity and accelerants in burnt bodies",
+   "tx": "Charring destroys weight and stature, which fall by up to sixty percent and several centimetres, under **burnt body identification problems**. Moles, scars and tattoos usually vanish, though wiping soot and fluid layers can reveal tattoo marks, and posterior teeth survive protected by the cheeks. Examine clothing and containers for kerosene or petrol smell and fingerprints, sealing them airtight for chemical analysis. DNA from cardiac blood can still match alleged parents.",
+   "say": "Burnt bodies shrink and lose surface marks, so identity leans on teeth, pocket contents and DNA from the heart blood.",
+   "vis": {"kind": "table", "cols": ["Evidence", "Survives fire", "Action"], "rows": [["Posterior teeth", "Often protected by cheeks", "Dental comparison"], ["Clothing smell", "Kerosene or petrol traces", "Seal airtight for analysis"], ["Cardiac blood DNA", "Recoverable often", "Compare with parents"], ["Weight and stature", "Fall up to sixty percent", "Never identify by size alone"]]}
+  }
+ ],
+ "quiz": []
+}

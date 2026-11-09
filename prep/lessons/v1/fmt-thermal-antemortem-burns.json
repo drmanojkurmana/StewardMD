@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-thermal-antemortem-burns",
+ "subject": "forensic-medicine",
+ "module": "fmt-thermal",
+ "title": "Antemortem Burns, Joule Burns and Electric Marks",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Proof the victim breathed during the fire",
+   "tx": "Two findings together are absolute proof of life in a fire: **carbon particles in the terminal bronchioles** on histology and an elevated carbon monoxide saturation in blood. Soot mixed in frothy mucus coats the congested air passages, and incising the trachea before evisceration displays it. Soot merely percolating into the back of an open pharynx after death never passes the vocal cords, so depth of soot is the discriminator.",
+   "say": "Soot below the vocal cords plus raised carbon monoxide proves breathing during the fire, while throat soot alone proves nothing.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Open trachea before evisceration"}, {"id": "b", "label": "Find soot in frothy mucus"}, {"id": "c", "label": "Confirm soot in terminal bronchioles"}, {"id": "d", "label": "Match raised blood carbon monoxide"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Carbon monoxide levels in fire deaths",
+   "tx": "In fatal burning, blood carbon monoxide commonly exceeds ten percent and may reach seventy to eighty percent, giving the blood its cherry red colour that heat later browns, in **carboxyhaemoglobin interpretation**. Children and the elderly die at thirty to forty percent, and heart or lung disease lowers the fatal level further. Carbon monoxide may be absent after rapid death, flash fire or inhalation of superheated air, so absence alone never proves the body was dead before burning.",
+   "say": "Fire deaths often carry ten to eighty percent saturation, children die near thirty, and a zero reading still proves nothing alone.",
+   "vis": {"kind": "table", "cols": ["Victim group", "Fatal CO pattern", "Caution"], "rows": [["Healthy adult", "Often over ten percent, to eighty", "Cherry red blood"], ["Children and elderly", "Death at thirty to forty percent", "Lower reserve"], ["Heart or lung disease", "Low levels can kill", "Do not dismiss low values"], ["Flash fire death", "CO may be absent", "Superheated air suffocates"]]}
+  },
+  {
+   "title": "Antemortem blisters versus postmortem blisters",
+   "tx": "Living skin answers heat with inflammation, making **antemortem burn blisters** that carry a hyperaemic red zone around them, a red floor with swollen papillae and fluid containing white and red cells. Postmortem blisters, including those of putrefaction and carbon monoxide poisoning, show no surrounding hyperaemia and no red floor. When considerable destruction has occurred, Reddy warns the two may become genuinely difficult to separate, and the report should say so.",
+   "say": "A red halo and cellular fluid mark the living blister, while the postmortem blister sits on pale skin with a quiet floor.",
+   "vis": {"kind": "compare", "left": {"title": "Antemortem blister", "points": ["Hyperaemic zone around it", "Red floor, swollen papillae", "Fluid holds white and red cells", "Vital reaction at margins"]}, "right": {"title": "Postmortem blister", "points": ["No hyperaemia around it", "Floor pale, not red", "Fluid lacks cellular reaction", "Also seen in putrefaction"]}}
+  },
+  {
+   "title": "The electric mark or Joule burn",
+   "tx": "The **electric mark or Joule burn** is specific and diagnostic of contact with electricity, found at the point where current entered. Heat generated inside the tissues makes round or oval shallow craters one to three centimetres wide, ringed by a ridge of skin one to three millimetres high, with a pale flattened floor. An areola of blanched skin at the periphery survives death and is pathognomonic. Palms are the commonest site.",
+   "say": "A pale floored crater with a raised rim and blanched halo on the palm is the diagnostic electric entry mark.",
+   "vis": {"kind": "table", "cols": ["Electric mark feature", "Finding", "Meaning"], "rows": [["Shape", "Round crater, one to three cm", "Point of current entry"], ["Rim", "Skin ridge one to three mm", "Heat raised the edge"], ["Periphery", "Blanched areola", "Pathognomonic of electricity"], ["Copper conductor", "Bright green tint possible", "Metal deposited in mark"]]}
+  },
+  {
+   "title": "When electrocution leaves no mark",
+   "tx": "Absence of a mark never excludes electrocution under **markless electrocution conditions**. With low voltage and a large wet contact, such as grasping a wire with a wet hand or dying in a bathtub, current spreads and no burn forms. A small contact or a brief touch can also leave nothing before ventricular fibrillation throws the victim off the wire. Moist skin may show no mark while thick dry skin shows a well marked one.",
+   "say": "Wet wide contact and bathtub deaths conduct without burning, so a clean skin examination cannot clear electrocution.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Wet hand grasps live wire"}, {"id": "b", "label": "Current spreads over wide area"}, {"id": "c", "label": "No local heat concentration"}, {"id": "d", "label": "Fibrillation kills without a mark"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Histology of the electric mark",
+   "tx": "Microscopy supports the naked eye in the **histology of electrical injury**: the dermis coagulates, the epidermis separates in places, and in other areas cells elongate into parallel rows streaming at an acute angle or almost at right angles to the dermis, as if combed by the current. This streaming of elongated nuclei is characteristic enough that a doubtful crater can be confirmed from a small excised sample sent for sectioning.",
+   "say": "Combed, elongated nuclei streaming through the epidermis confirm a doubtful crater as a true electric mark.",
+   "vis": {"kind": "compare", "left": {"title": "Electric mark microscopy", "points": ["Dermal coagulation present", "Epidermis separates in areas", "Nuclei elongated in parallel rows", "Streaming at an angle to dermis"]}, "right": {"title": "Ordinary thermal burn", "points": ["Generalised tissue necrosis", "No nuclear streaming pattern", "Blistering by heat alone", "Inflammatory response in life"]}}
+  },
+  {
+   "title": "Crocodile skin and flash burns of high voltage",
+   "tx": "High tension current arcing across the body without firm contact punches out multiple small discrete pitted burns as the arc dances over large areas, the **crocodile flash burns**. High voltage can jump several millimetres at one thousand volts and about thirty five centimetres at one hundred kilovolts. Massive currents char the body, destroy extremities and rupture organs, and bone involvement can elevate periosteum or fracture the bone beneath.",
+   "say": "Arcing high voltage peppers the skin with pitted crocodile burns and can blast limbs apart without any firm contact.",
+   "vis": {"kind": "table", "cols": ["Voltage situation", "Skin result", "Deeper result"], "rows": [["Low voltage, dry small contact", "Single Joule crater", "Fibrillation possible"], ["Low voltage, wet wide contact", "No mark at all", "Fibrillation still possible"], ["High voltage arcing", "Crocodile pitted burns", "Charring, limb loss"], ["Flash over heat", "Thermal type burns", "Arc eye from the flash"]]}
+  },
+  {
+   "title": "Spark burns and metal object burns",
+   "tx": "Where an air gap separates metal from skin, a **spark burn** forms: a central nodule of fused brown or yellow keratin ringed by the typical pale areola, from pinpoint size to deeply contracted with prolonged contact. Metal objects worn or carried, such as rings, buckles and cuff links, fuse in the flash and print true surface burns beneath them. Those same objects, being metal, later help establish identity in burnt bodies.",
+   "say": "A fused keratin nodule with a pale halo marks the spark gap, and fused jewellery prints burns that later aid identity.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Air gap between metal and skin"}, {"id": "b", "label": "Spark crosses the gap"}, {"id": "c", "label": "Keratin fuses into a nodule"}, {"id": "d", "label": "Pale areola rings the burn"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Separating burns from scalds and chemical injury",
+   "tx": "Exam tables love the three way separation of **burns, scalds and corrosive injuries**. Flame burns singe hair, char skin and form thick contracted scars. Scalds leave wet unburnt clothing, no singeing and thinner scars with less contraction. Corrosives add distinctive colour, possible charring and ulceration, with thick contracted scars. Trickle lines of burning kerosene down the neck, trunk and thighs reveal accelerant poured over a lying body.",
+   "say": "Singed charred skin means flame, wet sodden skin means scald, and coloured ulcerated skin points to a corrosive agent.",
+   "vis": {"kind": "table", "cols": ["Trait", "Flame burn", "Scald"], "rows": [["Hair", "Singed", "Not singed"], ["Skin", "May char and blacken", "Sodden and bleached"], ["Clothing", "Burnt", "Wet, not burnt"], ["Scar", "Thick and contracted", "Thin, less contracted"]]}
+  }
+ ],
+ "quiz": []
+}
