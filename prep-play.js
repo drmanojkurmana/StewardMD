@@ -56,7 +56,22 @@
   var SKIP_AFTER_CUE = { is: 1, its: 1, s: 1, would: 1, be: 1, number: 1 };
   var PHRASE_LEAD = { i: 1, ill: 1, ll: 1, im: 1, think: 1, thinks: 1, go: 1, going: 1, with: 1, definitely: 1, my: 1, would: 1, be: 1, it: 1, its: 1, s: 1, is: 1, choose: 1, pick: 1, say: 1, want: 1, the: 1, probably: 1, maybe: 1, just: 1, answer: 1 };
   var PARTIAL_MS = 500, SETTLE_MS = 1200;
-  function words(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(Boolean); }
+  // Greek symbols are spoken as words (β heard as "beta"); hyphens already become spaces below.
+  function words(s) { return String(s || "").toLowerCase().replace(/[\u03b1\u0391]/g, " alpha ").replace(/[\u03b2\u0392]/g, " beta ").replace(/[\u03b3\u0393]/g, " gamma ").replace(/[\u03b4\u0394]/g, " delta ").replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(Boolean); }
+  /* Unambiguous spoken letter forms. The NATO/example words alone count only as the whole utterance and
+     only when no option contains that word (an option's own words win); "A for apple" is handled in
+     parseVoice before the "for" homophone can be read as D. */
+  var APPLE_W = { apple: 0, ball: 1, cat: 2, dog: 3, elephant: 4 };
+  var NATO_W = { alpha: 0, bravo: 1, charlie: 2, delta: 3, echo: 4 };
+  /* Whole-utterance commands (after "please"/"kindly" are dropped): natural phrasing, still one exact
+     phrase, so a longer sentence that merely contains the word never fires. Speed returns slower/faster. */
+  var CMD_W = {};
+  ["repeat", "repeat that", "repeat the question", "repeat it", "say again", "say that again", "say it again", "read again", "read it again", "again", "one more time", "once more", "come again", "pardon", "sorry what", "can you repeat", "can you repeat that", "could you repeat", "could you repeat that", "what was the question"].forEach(function (p) { CMD_W[p] = "repeat"; });
+  ["skip", "skip this", "skip it", "skip question", "skip this question", "skip this one", "next", "next question", "next one", "pass", "move on", "go next", "i don t know", "don t know", "dont know", "no idea"].forEach(function (p) { CMD_W[p] = "skip"; });
+  ["stop", "stop voice", "stop voice mode", "stop listening", "stop reading", "voice off", "exit voice", "quit", "end voice mode"].forEach(function (p) { CMD_W[p] = "stop"; });
+  ["slower", "go slower", "slow down", "read slower"].forEach(function (p) { CMD_W[p] = "slower"; });
+  ["faster", "go faster", "speed up", "read faster"].forEach(function (p) { CMD_W[p] = "faster"; });
+  function cmdKey(c) { return c.filter(function (t) { return t !== "please" && t !== "kindly"; }).join(" "); }
   // Joined cue forms ("optionb") become two tokens; brackets and stops already became spaces in words().
   function voiceTokens(text) {
     var out = [];
@@ -86,24 +101,47 @@
     }
     return prev[n];
   }
-  // Most of an option's own words (3+ letters): the best option over 60%, and only a clear winner. A recogniser
-  // may split a drug name ("met forming"), so adjacent spoken words may join, and words of 5+ letters tolerate a
-  // small edit distance. A tie between options is no answer. Exact words win first: near-identical medical
-  // words (hypo/hyperkalemia, ileum/ilium) are within fuzzy distance of each other, so a fuzzy tie must never
-  // erase an exact clear winner. Fuzzy is tried only when exact matching has no clear winner, and a fuzzy
-  // result must still have a clear winner.
+  /* Option words, normalised on both sides the same way: Greek symbols as words (words()), hyphens as
+     spaces, number words as digits ("five"/"twenty five" -> "5"/"25"), "%" as "percent". Content tokens
+     are 3+ letter words, numbers, single letters an option needs ("Vitamin D", "ACE" spelled out joins to
+     "ace") and dose units. Matching: most of an option's words (over 60%, one clear winner), or one word
+     found in only one option ("beta" with Beta/Calcium channel blocker; shared "blocker" picks nothing).
+     Exact wins first: near-identical medical words (hypo/hyperkalemia, ileum/ilium) are within fuzzy
+     distance of each other, so fuzzy runs only when exact matching has no winner, and still needs one
+     clear winner. Identical options or a full tie return null. */
+  var NUM_ONES = { zero: 0, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19 };
+  var NUM_TENS = { twenty: 20, thirty: 30, forty: 40, fifty: 50, sixty: 60, seventy: 70, eighty: 80, ninety: 90 };
+  var UNIT_W = { mg: 1, ml: 1, kg: 1, mcg: 1, iu: 1, percent: 1, g: 1, dl: 1, meq: 1 };
+  function numTokens(toks) {
+    var out = [], cur = 0, has = false;
+    function flush() { if (has) out.push(String(cur)); cur = 0; has = false; }
+    (toks || []).forEach(function (t) {
+      if (NUM_ONES[t] != null || NUM_TENS[t] != null || t === "hundred" || t === "thousand") {
+        has = true;
+        if (NUM_TENS[t] != null) cur += NUM_TENS[t]; else if (t === "hundred") cur = (cur || 1) * 100; else if (t === "thousand") cur = (cur || 1) * 1000; else cur += NUM_ONES[t];
+      } else { flush(); out.push(t); }
+    });
+    flush();
+    return out;
+  }
+  function optionTokens(o) { return numTokens(words(String(o || "").replace(/%/g, " percent "))).filter(function (t) { return t.length >= 3 || /^[0-9]+$/.test(t) || /^[a-z]$/.test(t) || UNIT_W[t]; }); }
+  // An option word is heard when spoken whole, or when adjacent spoken words join to it ("met forming",
+  // spelled out "a c e" for "ace").
+  function tokenHit(x, w) {
+    if (w.indexOf(x) >= 0) return true;
+    for (var i = 0; i < w.length; i++) { var acc = ""; for (var j = i; j < Math.min(w.length, i + 4); j++) { acc += w[j]; if (j > i && acc === x) return true; if (acc.length > x.length) break; } }
+    return false;
+  }
   function optionScores(w, options, fuzzy) {
-    var scores = [];
+    var wn = numTokens(w), scores = [];
     (options || []).forEach(function (o, k) {
-      var ow = words(o).filter(function (x) { return x.length >= 3; }); if (!ow.length) { scores[k] = 0; return; }
+      var ow = optionTokens(o); if (!ow.length) { scores[k] = 0; return; }
       var hit = 0;
       ow.forEach(function (x) {
-        if (w.indexOf(x) >= 0) { hit++; return; }
-        var i;
-        for (i = 0; i + 1 < w.length; i++) if (x === w[i] + w[i + 1]) { hit++; return; }
-        if (!fuzzy || x.length < 5) return;
-        var cap = x.length >= 8 ? 2 : 1;
-        for (i = 0; i < w.length; i++) { if (lev(x, w[i], cap) <= cap || (i + 1 < w.length && lev(x, w[i] + w[i + 1], cap) <= cap)) { hit++; return; } }
+        if (tokenHit(x, wn)) { hit++; return; }
+        if (!fuzzy || x.length < 5 || /^[0-9]+$/.test(x)) return;
+        var cap = x.length >= 8 ? 2 : 1, i;
+        for (i = 0; i < wn.length; i++) { if (lev(x, wn[i], cap) <= cap || (i + 1 < wn.length && lev(x, wn[i] + wn[i + 1], cap) <= cap)) { hit++; return; } }
       });
       scores[k] = hit / ow.length;
     });
@@ -114,10 +152,32 @@
     scores.forEach(function (sc, k) { if (sc > bs) { ss = bs; bs = sc; best = k; } else if (sc > ss) ss = sc; });
     return bs >= 0.6 && bs > ss ? best : null;
   }
+  // Every spoken word is part of this option (spoken whole, or joined into one of its words): a fragment
+  // like "a beta" (of "a beta blocker") is not covered, so it never commits on its own.
+  function spokenCovered(wn, ow) {
+    for (var i = 0; i < wn.length; i++) {
+      if (ow.indexOf(wn[i]) >= 0) continue;
+      var ok = false, acc = "";
+      for (var a = Math.max(0, i - 3); a <= i && !ok; a++) { acc = ""; for (var b = a; b < Math.min(wn.length, a + 4); b++) { acc += wn[b]; if (b >= i && ow.indexOf(acc) >= 0) { ok = true; break; } if (acc.length > 24) break; } }
+      if (!ok) return false;
+    }
+    return true;
+  }
+  // A heard word (never a bare unit) that lives in exactly one option picks that option, when everything
+  // heard belongs to that option; words pointing at two different options cancel out.
+  function uniqueWinner(w, options) {
+    var wn = numTokens(w), lists = (options || []).map(optionTokens), votes = {};
+    lists.forEach(function (ow, k) { if (!spokenCovered(wn, ow)) return; ow.forEach(function (x) { if (UNIT_W[x] || !tokenHit(x, wn)) return; for (var j = 0; j < lists.length; j++) if (j !== k && lists[j].indexOf(x) >= 0) return; votes[k] = 1; }); });
+    var ks = Object.keys(votes);
+    return ks.length === 1 ? +ks[0] : null;
+  }
+  function optionHasWord(options, word) { return (options || []).some(function (o) { return optionTokens(o).indexOf(word) >= 0; }); }
   function matchOptionsExact(w, options) { return clearWinner(optionScores(w, options, false)); }
   function matchOptions(w, options) {
     var ex = matchOptionsExact(w, options);
-    return ex != null ? ex : clearWinner(optionScores(w, options, true));
+    if (ex != null) return ex;
+    var uq = uniqueWinner(w, options);
+    return uq != null ? uq : clearWinner(optionScores(w, options, true));
   }
   // A word in LET_RISKY_CUE that got its letter only from that risky table (not a bare b-f letter, not a safe
   // homophone): it is an ordinary English word too, so after a cue it counts only when nothing but a closing
@@ -159,6 +219,8 @@
     }
     // The whole utterance is one letter (risky words count here), or one letter said twice ("A A", "B B").
     if (c.length === 1 || (c.length === 2 && c[0] === c[1])) { var wk = letterOrNum(c[0], "whole"); if (wk != null && wk < n) return { k: wk }; }
+    // "A for apple": the letter before "for" answers, so "for" is never read as D.
+    if (c.length === 3 && c[1] === "for") { var fk = letterOf(c[0], "whole"); if (fk != null && fk < n) return { k: fk }; }
     // A natural short phrase ending in the answer: "I'll go with B", "I think C", "definitely A".
     if (c.length >= 2 && c.length <= 6) {
       var lk = letterOrNum(c[c.length - 1], "mid"), lead = lk != null;
@@ -166,20 +228,24 @@
       if (lead && lk < n) return { k: lk };
     }
     // The option's own words beat a command word inside them: "stop codon" is the option, not Stop.
-    var om = matchOptions(c, options);
+    // A leading "I think" or a trailing "is the answer" must not stop the option matching either.
+    var mw = c.slice();
+    if (mw[0] === "i" && mw[1] === "think") mw = mw.slice(2);
+    if (mw.length >= 3 && mw[mw.length - 3] === "is" && mw[mw.length - 2] === "the" && mw[mw.length - 1] === "answer") mw = mw.slice(0, -3);
+    var om = matchOptions(mw, options);
     if (om != null) return { k: om };
+    // Bare example/NATO words ("apple", "bravo") as the whole utterance, only when no option uses the word.
+    if (c.length === 1) { var bw = APPLE_W[c[0]] != null ? APPLE_W[c[0]] : NATO_W[c[0]]; if (bw != null && bw < n && !optionHasWord(options, c[0])) return { k: bw }; }
+    // A command is the whole utterance (CMD_W phrases, "please" dropped): a longer sentence that merely
+    // contains the word never fires. Before the number scan, so "next one" is Skip, not option one.
+    var cmd = CMD_W[cmdKey(c)];
+    if (cmd) return { cmd: cmd };
     // Two words at most: a safe homophone, a number or a B-F letter (never the article "a", never a risky word).
     if (c.length <= 2) {
       var seen = {}, cnt = 0;
       for (var s2 = 0; s2 < c.length; s2++) { var sk = /^[b-f]$/.test(c[s2]) ? letterOf(c[s2], "mid") : (LET_SAFE[c[s2]] != null ? LET_SAFE[c[s2]] : numOf(c[s2])); if (sk != null && sk < n && !seen[sk]) { seen[sk] = 1; cnt++; } }
       if (cnt === 1) return { k: +Object.keys(seen)[0] };
       if (cnt > 1) return null;
-    }
-    // A command must be a short utterance that is plainly a command.
-    if (c.length <= 3) {
-      if (c.indexOf("stop") >= 0) return { cmd: "stop" };
-      if (c.indexOf("skip") >= 0 || c.indexOf("next") >= 0) return { cmd: "skip" };
-      if (c.indexOf("repeat") >= 0 || c.indexOf("again") >= 0) return { cmd: "repeat" };
     }
     return null;
   }
@@ -212,7 +278,7 @@
   function partialVote(seen, text, options, now) {
     var p = parseVoice(text, options);
     if (!p) return { seen: null, commit: null };
-    var norm = voiceTokens(text).join(" "), ms = fastLetter(text, options) ? PARTIAL_MS : SETTLE_MS;
+    var norm = voiceTokens(text).join(" "), ms = (p.cmd || fastLetter(text, options)) ? PARTIAL_MS : SETTLE_MS;
     if (!seen || seen.text !== norm) return { seen: { k: p.k != null ? p.k : null, text: norm, at: now, ms: ms }, commit: null };
     return now - seen.at >= (seen.ms || ms) ? { seen: seen, commit: p } : { seen: seen, commit: null };
   }
@@ -232,6 +298,12 @@
     var ls = L.slice(0, n);
     return "say " + (ls.length === 1 ? ls[0] : ls.slice(0, -1).join(", ") + " or " + ls[ls.length - 1]);
   }
+  // "option B" is recognised far better than a lone "B" (owner benchmark): every prompt steers to it,
+  // following the real option count.
+  function optionRange(n) { n = Math.max(1, Math.min(L.length, n || 4)); return n === 1 ? L[0] : L[0] + " to " + L[n - 1]; }
+  function listenText(n) { return "Listening\u2026 say option " + optionRange(n) + ", or read it"; }
+  function missSay(n) { return "Sorry, say option " + optionRange(n) + ", or read the option."; }
+  function missHeard(t, n) { var x = String(t || "").trim().slice(0, 80); return x ? "Heard \u201C" + x + "\u201D. Say option " + optionRange(n) + ", or read it" : "Nothing heard. Say option " + optionRange(n) + ", or read it"; }
   // Which voice reads: Phonon when ready and fast enough, the system voice otherwise, "wait" while it loads.
   function voiceChoice(v) {
     if (!v || !v.available) return "system";
@@ -239,8 +311,8 @@
     if (v.state === "ready") return v.usable ? "phonon" : "system";
     return "wait";
   }
-  // No say() may hang the session: allow the spoken time plus rendering slack, by length.
-  function sayWatchdogMs(text) { var ms = 6000 + String(text || "").length * 150; return ms > 60000 ? 60000 : ms; }
+  // No say() may hang the session: allow the spoken time (longer at slow rates) plus rendering slack.
+  function sayWatchdogMs(text, rate) { var ms = 6000 + String(text || "").length * 150 / (rate > 0 ? rate : 1); return ms > 60000 ? 60000 : ms; }
   // sayChunks may end a piece at "Option B."; keep the letter with its option text.
   function joinOptionChunks(chunks) {
     var out = [];
@@ -298,7 +370,7 @@
       persona: persona(s.hr), spot: spot, bosses: bosses, focus: (s.fxm && s.fxm[month]) || 0 };
   }
 
-  var PURE = { hashStr: hashStr, shuffled: shuffled, spotPick: spotPick, istDay: istDay, parseVoice: parseVoice, standaloneLetter: standaloneLetter, partialVote: partialVote, pickAlternative: pickAlternative, choicePrompt: choicePrompt, voiceChoice: voiceChoice, sayWatchdogMs: sayWatchdogMs, joinOptionChunks: joinOptionChunks, PARTIAL_MS: PARTIAL_MS, SETTLE_MS: SETTLE_MS, earnFreeze: earnFreeze, applyFreezes: applyFreezes,
+  var PURE = { hashStr: hashStr, shuffled: shuffled, spotPick: spotPick, istDay: istDay, parseVoice: parseVoice, standaloneLetter: standaloneLetter, partialVote: partialVote, pickAlternative: pickAlternative, choicePrompt: choicePrompt, optionRange: optionRange, listenText: listenText, missSay: missSay, missHeard: missHeard, voiceChoice: voiceChoice, sayWatchdogMs: sayWatchdogMs, joinOptionChunks: joinOptionChunks, PARTIAL_MS: PARTIAL_MS, SETTLE_MS: SETTLE_MS, earnFreeze: earnFreeze, applyFreezes: applyFreezes,
     bossPick: bossPick, livesLeft: livesLeft, firstSentence: firstSentence, feedCards: feedCards, persona: persona, wrapped: wrapped, ym: ym, FREEZE_MAX: FREEZE_MAX, FREEZE_EXTRA: FREEZE_EXTRA, BOSS_N: BOSS_N, BOSS_LIVES: BOSS_LIVES };
   if (NODE) { module.exports = PURE; return; }
 
