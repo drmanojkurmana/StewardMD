@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-sexual-offences-sexual-perversions",
+ "subject": "forensic-medicine",
+ "module": "fmt-sexual-offences",
+ "title": "Sexual Perversions: Sadism, Masochism and Fetishism",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Classification of sexual offences",
+   "tx": "Reddy sorts the field into **four groups of sexual offences**: natural offences such as rape, incest and adultery; unnatural offences such as sodomy, tribadism, bestiality and buccal coitus; sexual perversions such as sadism, masochism, necrophilia, fetishism, transvestism, exhibitionism, frotteurism and undinism; and sex linked offences such as stalking, voyeurism, sexual harassment, trafficking and indecent assault. The classification organises both this lesson and the next.",
+   "say": "Natural, unnatural, perversions and sex linked offences are the four shelves on which every sexual case is filed.",
+   "vis": {"kind": "table", "cols": ["Group", "Members", "Legal centre"], "rows": [["Natural offences", "Rape, incest, adultery", "Consent and relationship"], ["Unnatural offences", "Sodomy, bestiality, buccal coitus", "Act itself prohibited"], ["Perversions", "Sadism, masochism, fetishism", "Arousal pattern disordered"], ["Sex linked offences", "Stalking, voyeurism, harassment", "Conduct toward victim"]]}
+  },
+  {
+   "title": "Sadism, pleasure from suffering",
+   "tx": "**Sadism** is sexual arousal and gratification derived from inflicting pain, humiliation or suffering on another person. At its criminal extreme it drives lust murders, where mutilation of the victim, sometimes after death, accompanies the sexual act. Injuries in such cases are disproportionate, patterned and often genital or breast focused, which alerts the pathologist. The victim may be a stranger, and defence injuries may be absent where the attack was sudden or the victim was restrained.",
+   "say": "Sadism takes pleasure from the victim's suffering, and its extreme form explains mutilating lust murders at autopsy.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Arousal linked to inflicted pain"}, {"id": "b", "label": "Injuries exceed what killing needs"}, {"id": "c", "label": "Genital or breast mutilation pattern"}, {"id": "d", "label": "Lust murder considered at autopsy"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Masochism, pleasure from being hurt",
+   "tx": "**Masochism** is the mirror pattern: sexual gratification from receiving pain, humiliation or restraint. Its forensic importance is accidental death during self applied or partner applied bondage and partial asphyxiation, where a solitary body with ligatures and no sign of struggle must not be misread as homicide. Scene details, padding to protect the neck, self rescue arrangements that failed and pornographic material together reconstruct the practice.",
+   "say": "Masochistic bondage deaths look staged like murder, until padding, self release gear and the scene explain an accident.",
+   "vis": {"kind": "compare", "left": {"title": "Accidental bondage death", "points": ["Padding protects the neck", "Self rescue device present but failed", "No defence injuries", "Supporting material at scene"]}, "right": {"title": "Homicidal strangulation", "points": ["No padding or release gear", "Defence injuries present", "Scene disturbed by struggle", "Ligature foreign to the victim"]}}
+  },
+  {
+   "title": "Sadomasochism and consent boundaries",
+   "tx": "Combined sadomasochistic practice raises the legal question met in **consent to harm**: consent is no defence to the infliction of actual bodily harm in most legal systems, and a death during consensual rough practice is investigated as a potential homicide, not dismissed as an accident between partners. The examiner therefore documents every injury's age, pattern and severity and preserves ligatures and implements exactly as in any other neck compression death.",
+   "say": "Consent does not legalise bodily harm, so a death in rough practice is worked up like any other suspicious death.",
+   "vis": {"kind": "table", "cols": ["Question", "Examination answer", "Caution"], "rows": [["Were injuries consensual in pattern", "Age and distribution documented", "Consent is for court to judge"], ["Could the victim self release", "Knots and gear examined", "Failure may still be homicide"], ["Any older injuries", "Different ages recorded", "Pattern of escalating harm"], ["Cause of death certain", "Neck structures dissected", "Vagal death leaves few signs"]]}
+  },
+  {
+   "title": "Fetishism, arousal from objects",
+   "tx": "**Fetishism** is sexual arousal fixed on an inanimate object or a non genital body part, classically articles of clothing such as undergarments, shoes or handkerchiefs. It reaches the forensic clinic through thefts of such articles, sometimes in escalating series. By itself between consenting adults it harms no one; it becomes an offence when it drives stealing, trespass or exposure. History taking stays factual and free of ridicule, which keeps disclosure flowing.",
+   "say": "Fetishism fixes arousal on objects like clothing, and it enters forensic work through thefts rather than through violence.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Arousal attached to an object"}, {"id": "b", "label": "Object repeatedly sought"}, {"id": "c", "label": "Theft or trespass may follow"}, {"id": "d", "label": "Offence is the conduct, not desire"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Transvestism and exhibitionism",
+   "tx": "**Transvestism** is arousal or emotional comfort from wearing clothes of the opposite sex, and it is not by itself an offence. **Exhibitionism** is exposure of the genitals to unsuspecting strangers for arousal, which is an offence and often the first sexual offence in a record. Distinguishing private cross dressing from public exposure matters because one is behaviour to note neutrally and the other is a chargeable act with a victim.",
+   "say": "Cross dressing privately is no offence, while exposing oneself to strangers is, and the record must separate the two.",
+   "vis": {"kind": "compare", "left": {"title": "Not offences alone", "points": ["Private transvestism", "Consensual adult fetish practice", "Masturbation in private", "Fantasy without conduct"]}, "right": {"title": "Offences with victims", "points": ["Exhibitionism to strangers", "Frotteurism in crowds", "Voyeurism by watching or recording", "Stalking and harassment"]}}
+  },
+  {
+   "title": "Frotteurism and undinism",
+   "tx": "**Frotteurism** is rubbing against a non consenting person, usually in a crowded place such as public transport, for sexual gratification. **Undinism** links arousal to water or urination. Both appear in examinations mainly through the behavioural history of an accused in repeated public complaints. A pattern of similar complaints at similar places and times is the evidence that matters, and it is assembled by investigators rather than by genital examination.",
+   "say": "Crowd rubbing and water linked arousal are diagnosed from repeated complaint patterns, not from any physical examination finding.",
+   "vis": {"kind": "table", "cols": ["Perversion", "Setting", "Evidence that counts"], "rows": [["Frotteurism", "Crowded transport", "Repeated similar complaints"], ["Exhibitionism", "Public places", "Stranger witnesses"], ["Undinism", "Water associated acts", "Behavioural history"], ["Fetishism", "Victims property taken", "Recovered articles"]]}
+  },
+  {
+   "title": "Masturbation and the limits of law",
+   "tx": "Private **masturbation** is normal behaviour and no offence; it enters forensic practice only when performed publicly as indecent exposure or when a death during autoerotic practice is referred for autopsy. The examiner's language in reports stays clinical, because moralising language in a medicolegal document prejudices courts and shames families without adding a single fact. Age, privacy and consent remain the three tests that separate behaviour from offence.",
+   "say": "Privacy, adulthood and consent decide whether sexual behaviour concerns the law at all, and reports must stay clinical.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Ask whether anyone was harmed"}, {"id": "b", "label": "Ask whether all parties consented"}, {"id": "c", "label": "Ask whether all were adults"}, {"id": "d", "label": "Offence only if an answer fails"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Examining an accused with a perversion history",
+   "tx": "In **assessment of sexual perversion cases**, the psychiatrist records the developmental history, onset, triggers, escalation, fantasies, previous complaints and response to treatment, and examines for mental illness that changes responsibility. Risk to identifiable groups, children above all, is stated plainly for the court. The physical examiner meanwhile treats any associated injury or disease. Neither examiner certifies that a perversion caused a specific act; that inference belongs to the trial.",
+   "say": "Record onset, triggers, escalation and risk honestly, treat the body, and leave causation of the act to the court.",
+   "vis": {"kind": "compare", "left": {"title": "Psychiatric record", "points": ["Onset and developmental history", "Triggers and escalation pattern", "Mental illness assessed", "Risk to groups stated"]}, "right": {"title": "Court decides", "points": ["Whether act is proved", "Whether disorder caused it", "Responsibility and sentencing", "Treatment or custody orders"]}}
+  }
+ ],
+ "quiz": []
+}
