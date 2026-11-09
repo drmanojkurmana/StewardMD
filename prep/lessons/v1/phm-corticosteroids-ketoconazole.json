@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-corticosteroids",
+  "subject": "pharmacology",
+  "title": "Cushing Syndrome Drugs and Adrenal Crisis: Ketoconazole, Metyrapone, Mifepristone, Mitotane",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Ketoconazole**, beyond its antifungal fame, inhibits multiple adrenal steroidogenic cytochrome enzymes (cholesterol side chain cleavage, 17 alpha hydroxylase, 11 beta hydroxylase), lowering cortisol within days in Cushing syndrome, at the cost of hepatotoxicity surveillance, QT and CYP3A4 interaction empires, and hypogonadism in men. Levoketoconazole refines the enantiomer for endocrine labelling in some markets. It is a bridge and controller, rarely a cure.",
+      "say": "Ketoconazole strangles cortisol synthesis at several enzymes; liver tests and interactions ride shotgun.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ketoconazole in Cushing syndrome",
+          "points": [
+            "Multiple steroidogenic enzyme blockade",
+            "Cortisol falls within days",
+            "Bridge to surgery or controller in recurrence",
+            "Dose titrated against cortisol day curves"
+          ]
+        },
+        "right": {
+          "title": "Ketoconazole burdens",
+          "points": [
+            "Hepatotoxicity: scheduled liver enzymes",
+            "Potent CYP3A4 inhibition across the chart",
+            "QT prolongation combinations audited",
+            "Male hypogonadism and gynaecomastia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Metyrapone** inhibits 11 beta hydroxylase alone, the final cortisol step, so 11 deoxycortisol piles up behind the blockade (and is measured to steer dosing) while cortisol falls within hours, making it the rapid controller for severe hypercortisolism and a diagnostic probe of pituitary reserve historically. Precursor spillover brings mineralocorticoid (hypertension, hypokalaemia) and androgen (hirsutism) effects on longer use, and cortisol assays cross react with the accumulating precursor unless specific methods are used.",
+      "say": "Metyrapone blocks the last cortisol step within hours and spills precursors into pressure and potassium problems.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mety",
+            "label": "Metyrapone blocks 11 beta hydroxylase"
+          },
+          {
+            "id": "fall",
+            "label": "Cortisol falls within hours"
+          },
+          {
+            "id": "precursor",
+            "label": "11 deoxycortisol and DOC accumulate"
+          },
+          {
+            "id": "spill",
+            "label": "Hypertension, hypokalaemia and androgen effects"
+          }
+        ],
+        "edges": [
+          [
+            "mety",
+            "fall"
+          ],
+          [
+            "fall",
+            "precursor"
+          ],
+          [
+            "precursor",
+            "spill"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Mifepristone** abandons synthesis for the receptor: a glucocorticoid (and progesterone) receptor antagonist that improves hyperglycaemia and Cushing features while cortisol and ACTH rise unmeasuredly behind the blockade, so dosing is steered clinically (glucose, weight, potassium, blood pressure) with no biochemical compass. Hypokalaemia from cortisol overwhelming renal mineralocorticoid receptors, endometrial thickening from progesterone antagonism, and pregnancy termination absolute contraindication (its abortifacient identity) complete a profile examiners delight in.",
+      "say": "Mifepristone blocks the receptor and blinds the cortisol assay; steer by glucose and potassium, never by levels.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mifepristone mechanics",
+          "points": [
+            "Glucocorticoid receptor antagonism",
+            "Cortisol and ACTH rise behind blockade",
+            "Diabetes and weight improve clinically",
+            "No cortisol target exists to titrate"
+          ]
+        },
+        "right": {
+          "title": "Mifepristone hazards",
+          "points": [
+            "Hypokalaemia from mineralocorticoid spillover",
+            "Endometrial thickening on progesterone blockade",
+            "Pregnancy absolutely contraindicated",
+            "Adrenal insufficiency symptoms despite high cortisol"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mitotane** is adrenolytic chemotherapy, an insecticide relative concentrated in adrenal cortex that destroys zona fasciculata and reticularis cells, serving adrenocortical carcinoma (adjuvant and metastatic) and refractory Cushing disease over months, with a fat stored half life measured in weeks to months. It induces hepatic enzymes ferociously (raising steroid replacement needs and gutting co prescribed drugs), demands drug level monitoring, and charges nausea, neurotoxicity and lipid effects for its cortical arson.",
+      "say": "Mitotane burns the adrenal cortex slowly for cancer; levels, liver enzymes and replacements all need rebuilding around it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mito",
+            "label": "Mitotane concentrates in adrenal cortex"
+          },
+          {
+            "id": "destroy",
+            "label": "Fasciculata and reticularis necrosis over months"
+          },
+          {
+            "id": "replace",
+            "label": "Glucocorticoid replacement escalated (enzyme induction)"
+          },
+          {
+            "id": "monitor",
+            "label": "Drug levels, neurology and lipids surveilled"
+          }
+        ],
+        "edges": [
+          [
+            "mito",
+            "destroy"
+          ],
+          [
+            "destroy",
+            "replace"
+          ],
+          [
+            "replace",
+            "monitor"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Osilodrostat**, a potent oral 11 beta hydroxylase inhibitor licensed after metyrapone's proof of concept, and pasireotide, a somatostatin analogue preferring SSTR5 on corticotroph adenomas (with hyperglycaemia as its toll), complete the modern Cushing shelf beside pituitary, adrenal or ectopic source surgery that remains definitive wherever resectable. Medical therapy controls, bridges and rescues; it rarely replaces the surgeon's cure, and every agent here is endocrine supervised.",
+      "say": "Newer blockers refine the same steps; surgery still cures where it can reach the source.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Enzyme blockers",
+          "points": [
+            "Ketoconazole: multi enzyme, hepatic vigilance",
+            "Metyrapone and osilodrostat: 11 beta hydroxylase",
+            "Etomidate infusion: intensive care cortisol brake",
+            "All titrated against cortisol and clinical state"
+          ]
+        },
+        "right": {
+          "title": "Source directed agents",
+          "points": [
+            "Pasireotide: corticotroph SSTR5, hyperglycaemia toll",
+            "Mifepristone: receptor blockade for diabetic Cushing",
+            "Mitotane: adrenocortical carcinoma",
+            "Surgery definitive where source resectable"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Adrenal crisis** is the opposite emergency and this module's resuscitation core: cortisol (and aldosterone) failure presenting with hypotension refractory to fluids and pressors, hypoglycaemia, hyponatraemia, hyperkalaemia (primary disease), vomiting, abdominal pain and collapse after steroid withdrawal, illness in known insufficiency, pituitary apoplexy or bilateral adrenal haemorrhage. Treatment never waits for tests: draw cortisol and ACTH if instant, then hydrocortisone 100 mg intravenously and saline at full speed.",
+      "say": "Refractory shock plus steroid history is adrenal crisis: hydrocortisone and saline now, tests as you go.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "suspect",
+            "label": "Refractory hypotension with insufficiency history or withdrawal"
+          },
+          {
+            "id": "bloods",
+            "label": "Cortisol, ACTH, glucose and electrolytes drawn"
+          },
+          {
+            "id": "hydro",
+            "label": "Hydrocortisone 100 mg IV, then infusion or divided doses"
+          },
+          {
+            "id": "saline",
+            "label": "Rapid saline with dextrose, treat precipitant"
+          }
+        ],
+        "edges": [
+          [
+            "suspect",
+            "bloods"
+          ],
+          [
+            "bloods",
+            "hydro"
+          ],
+          [
+            "hydro",
+            "saline"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Crisis aftercare tapers stress** hydrocortisone (typically 200 mg daily in divided doses or infusion) toward replacement over days as the precipitant resolves, adds fludrocortisone when hydrocortisone falls below about 50 mg daily in primary insufficiency (above that, hydrocortisone's own mineralocorticoid activity suffices), and closes with education: steroid cards, emergency injection kits, sick day doubling rules and medical alert identification, because the next crisis is scheduled by the next gastroenteritis.",
+      "say": "Taper the stress dose, restore fludrocortisone below fifty milligrams, and send the patient out crisis proofed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hospital taper",
+          "points": [
+            "Stress hydrocortisone about 200 mg daily initially",
+            "Halve daily as recovery proceeds",
+            "Fludrocortisone resumes below 50 mg hydrocortisone",
+            "Precipitant treated and documented"
+          ]
+        },
+        "right": {
+          "title": "Crisis proofing at discharge",
+          "points": [
+            "Steroid emergency card and alert identification",
+            "Sick day rules: double or triple, inject if vomiting",
+            "Hydrocortisone injection kit taught to family",
+            "Never stop replacement abruptly, ever"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Etomidate's adrenal suppression from** the anaesthetic lessons returns here as therapy: a subhypnotic etomidate infusion is intensive care's fastest cortisol brake in catastrophic Cushing crises where oral agents cannot keep pace, titrated against hourly cortisol. The same 11 beta hydroxylase blockade that frightened anaesthetists in sepsis becomes, deliberately dosed, endocrinology's emergency brake, a symmetry that summarises this module: every steroid drug is a dose and indication away from its opposite.",
+      "say": "Etomidate the anaesthetic hazard is etomidate the cortisol brake in crisis; dose and intention decide.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Etomidate as hazard",
+          "points": [
+            "Single induction dose suppresses cortisol for hours",
+            "Sepsis outcome debate in anaesthesia",
+            "Avoided where adrenal reserve is critical and alternatives serve",
+            "Myoclonus and nausea as fellow travellers"
+          ]
+        },
+        "right": {
+          "title": "Etomidate as therapy",
+          "points": [
+            "Subhypnotic infusion blocks 11 beta hydroxylase",
+            "Fastest cortisol control in catastrophic Cushing",
+            "Intensive care titration against levels",
+            "Bridge to oral blockers or surgery"
+          ]
+        }
+      }
+    }
+  ]
+}
