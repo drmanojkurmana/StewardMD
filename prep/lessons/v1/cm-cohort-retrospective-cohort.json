@@ -1,0 +1,144 @@
+{
+ "v": 1,
+ "id": "cm-cohort-retrospective-cohort",
+ "subject": "community-medicine",
+ "module": "cm-cohort",
+ "title": "Retrospective Cohorts, Framingham, Follow-Up Losses and Person-Years",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Three cohort types by timing",
+   "tx": "Cohorts split by timing into **prospective cohorts**, where outcomes have not yet occurred when study begins; retrospective or historical cohorts, where outcomes already occurred and records carry the investigator backward; and ambispective designs combining both. Retrospective versions cost less and answer faster, feeding on employment, medical and insurance records already filed.",
+   "say": "Timing splits the family three ways. Prospective cohorts wait for outcomes not yet occurred. Historical cohorts harvest outcomes already recorded, cheaper and faster. Ambispective designs stitch past records to future follow-up in one cohort.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Type", "Outcome timing"],
+    "rows": [
+     ["Prospective", "Not yet occurred at study start"],
+     ["Retrospective or historical", "Already occurred, records used"],
+     ["Ambispective combination", "Past records plus future follow-up"]
+    ]
+   }
+  },
+  {
+   "title": "Court-Brown and Doll: the combined pattern",
+   "tx": "The **Court-Brown and Doll** study assembled 13352 patients irradiated for ankylosing spondylitis between 1934 and 1954, assessed leukaemia and aplastic anaemia deaths from 1935 to 1954 retrospectively, then followed the cohort forward from 1955. Death rates far exceeded the general population. It remains the textbook ambispective example examiners name.",
+   "say": "One study models the combined pattern. Thirteen thousand irradiated patients were traced backward through two decades of records, then followed forward from 1955. Leukaemia deaths far exceeded population rates. Examiners name this study when the combined design appears.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Records 1934 to 1954 reviewed"},
+     {"id": "b", "label": "Cohort of 13352 assembled in 1955"},
+     {"id": "c", "label": "Past deaths assessed"},
+     {"id": "d", "label": "Prospective follow-up added"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["b", "d"]]
+   }
+  },
+  {
+   "title": "Framingham: the prospective archetype",
+   "tx": "The **Framingham Heart Study** enrolled a general population sample in a defined Massachusetts town and followed it for decades, measuring cholesterol, blood pressure, smoking and diabetes before coronary events occurred. Doll and Hill's British doctors study and the Royal College oral contraceptive study share the pattern: exposure recorded first, disease counted later, risk factors discovered in sequence.",
+   "say": "One town models the prospective archetype. Residents were measured for cholesterol, pressure, smoking and diabetes before heart events, then followed for decades. British doctors and pill users were studied the same way. Modern risk factor medicine descends from these cohorts.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Cohort", "Exposure recorded first"],
+    "rows": [
+     ["Framingham residents", "Cholesterol, pressure, smoking, diabetes"],
+     ["British doctors, 1951 register", "Smoking habits by questionnaire"],
+     ["Oral contraceptive users", "Pill use through general practice"]
+    ]
+   }
+  },
+  {
+   "title": "Selecting subjects: general or special groups",
+   "tx": "**Special exposure groups** such as doctors, nurses, insured persons, obstetric populations, college alumni and industrial workers offer homogeneous membership, accessibility and easy long follow-up. General population cohorts suit frequent exposures and generalisable results. Radiologists and arsenic workers show why rare exposures demand occupational lists instead of town samples.",
+   "say": "Recruitment trades reach against focus. Doctors, nurses, insured persons and alumni stay homogeneous and easy to trace for decades. Town samples generalise better for common exposures. Rare exposures like radiation demand occupational lists instead.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "General population cohorts",
+     "points": ["Frequent exposures studied well", "Results generalise widely", "Large samples needed"]
+    },
+    "right": {
+     "title": "Special group cohorts",
+     "points": ["Homogeneous and accessible", "Easy protracted follow-up", "Rare exposures captured"]
+    }
+   }
+  },
+  {
+   "title": "Comparison groups: internal, external, population",
+   "tx": "**Internal comparisons** split one cohort by exposure degree, as with graded smoking within British doctors. External comparisons recruit a separate unexposed cohort, while general population comparisons borrow published rates for the same region and era. Each step outward trades comparability for convenience, and examiners ask which a described study used.",
+   "say": "Three comparison styles trade rigour for convenience. Split one cohort internally by exposure dose for the tightest contrast. Recruit a separate unexposed cohort externally, or borrow published population rates for the loosest. Stems describe one; name it correctly.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Comparison", "Source of contrast"],
+    "rows": [
+     ["Internal", "Exposure grades inside one cohort"],
+     ["External", "Separate unexposed cohort recruited"],
+     ["General population", "Published rates for region and era"]
+    ]
+   }
+  },
+  {
+   "title": "Follow-up and attrition",
+   "tx": "**Loss to follow-up** through death from other causes, migration and lost interest is called attrition, and substantial attrition destroys generalisability to the reference population. Periodic mail contact, record linkage and stable occupational cohorts fight it. A cohort that loses its sickest members quietly understates incidence, the direction of bias to state in answers.",
+   "say": "People leak out of long studies. Deaths from other causes, migration and lost interest form attrition, and heavy losses destroy generalisability. Losing the sickest members understates incidence quietly. State that direction whenever follow-up losses appear in a stem.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Loss route", "Defence"],
+    "rows": [
+     ["Migration out of area", "Record linkage across registries"],
+     ["Loss of interest", "Periodic contact and feedback"],
+     ["Competing deaths", "Complete death certification capture"]
+    ]
+   }
+  },
+  {
+   "title": "Person-years as the denominator",
+   "tx": "**Person-years** sum each member's observed time: 1000 people followed 10 years contribute 10000 person-years if none are lost, fewer with staggered entry and exit. Death rates per 100000 person-years, like 224 in heavy smokers against 10 in non-smokers, already embed this denominator. Unequal follow-up between groups demands it; head counts alone mislead.",
+   "say": "Time becomes the denominator. Sum each person's observed years; staggered entries and losses shrink the total honestly. Rates per hundred thousand person-years already embed it. Unequal follow-up between groups makes head counts alone misleading.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Each member observed over time"},
+     {"id": "b", "label": "Individual years summed"},
+     {"id": "c", "label": "Events divided by person-years"},
+     {"id": "d", "label": "Rate per 100000 person-years"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Advantages that justify the cost",
+   "tx": "**Direct incidence** in both groups, exposure measured before disease (so recall bias vanishes), multiple outcomes from one exposure, and rare exposure study form the cohort advantage list. The design approximates the experimental model more closely than any other observational pattern, which is why well-run cohorts carry the strongest non-randomised causal weight.",
+   "say": "Cost buys four prizes. Incidence in both groups, exposure recorded before disease so memory cannot distort it, many outcomes from one exposure, and rare exposures made studyable. That package gives cohorts the strongest causal weight short of randomisation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cohort advantages",
+     "points": ["Incidence measured directly", "Exposure precedes disease in time", "Many outcomes per exposure"]
+    },
+    "right": {
+     "title": "Cohort disadvantages",
+     "points": ["Expensive and slow for rare disease", "Attrition erodes the sample", "Exposure may change mid-study"]
+    }
+   }
+  },
+  {
+   "title": "Occupational cohorts and vinyl chloride",
+   "tx": "**Angiosarcoma of the liver**, a very rare tumour, appeared in excess among polyvinyl chloride workers and was caught only because a retrospective cohort design could assemble exposed workers from plant records quickly. Rare outcomes in rare exposures invert the usual economics: records-based cohorts answer in years where prospective waiting would take generations of workers.",
+   "say": "Rare tumour, rare exposure, fast answer. Liver angiosarcoma clustered in vinyl chloride workers, and plant records assembled the cohort retrospectively within years. Prospective waiting would have taken generations. Record-based designs invert the usual cost logic completely.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Vinyl chloride example"],
+    "rows": [
+     ["Exposure", "Polyvinyl chloride in plant workers"],
+     ["Outcome", "Hepatic angiosarcoma, very rare"],
+     ["Design payoff", "Records gave results in years, not decades"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
