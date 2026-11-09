@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sur-skin",
+ "subject": "surgery",
+ "title": "Benign Skin and Subcutaneous Lesions: Cysts and Lipomas",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The common subcutaneous retention swelling traditionally known as an **epidermoid cyst** originates from the infundibulum of the hair follicle. Pathologically lined by true stratified squamous epithelium complete with a distinct granular cell layer, it fills with laminated flakes of keratin debris. Physical examination characteristically reveals an intradermal cystic swelling anchored to the overlying epidermis, prominently displaying a central punctum representing the occluded follicular orifice.",
+   "say": "Epidermoid cysts arise from the follicular infundibulum and are lined by stratified squamous epithelium. They are anchored to the skin and typically display a central punctum marking the occluded follicle.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acne-vulgaris-fig1.webp",
+    "alt": "Anatomy of the hair follicle and sebaceous infundibulum.",
+    "caption": "Follicular infundibular obstruction leading to keratin-filled cyst formation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Recognising clinical **sebaceous cyst complications** dictates appropriate surgical timing. Secondary bacterial infection converts the lesion into an acute abscess requiring incision and drainage. Alternatively, traumatic cyst rupture expels irritating keratin into the surrounding dermis, triggering a severe foreign-body giant-cell inflammatory reaction. Chronic recurring infection on the scalp can give rise to Cock's peculiar tumour, an ulcerated proliferating trichilemmal tumour mimicking squamous cell carcinoma.",
+   "say": "Complications of epidermoid cysts include acute abscess formation, foreign-body granulomatous inflammation following keratin rupture, and trichilemmal tumour proliferation on the scalp mimicking malignancy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "intact",
+      "label": "Uncomplicated epidermoid cyst with punctum"
+     },
+     {
+      "id": "rupture",
+      "label": "Traumatic rupture releasing keratin into dermis"
+     },
+     {
+      "id": "granul",
+      "label": "Foreign-body giant cell granulomatous reaction"
+     },
+     {
+      "id": "abscess",
+      "label": "Secondary bacterial infection producing painful abscess"
+     }
+    ],
+    "edges": [
+     [
+      "intact",
+      "rupture"
+     ],
+     [
+      "rupture",
+      "granul"
+     ],
+     [
+      "granul",
+      "abscess"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Formed by entrapment of ectodermal tissue along embryonic fusion lines, a **congenital dermoid cyst** represents a true developmental anomaly. Unlike epidermal retention cysts, dermoid cysts are lined by squamous epithelium that possesses true dermal appendages, including functional hair follicles, sebaceous glands, and sweat glands. Consequently, their lumen contains sebum, sweat, desquamated squamous cells, and variable bundles of hair.",
+   "say": "Congenital dermoid cysts arise from ectodermal sequestration along lines of embryonic fusion. Their wall contains genuine dermal appendages including hair follicles, sweat glands, and sebaceous structures.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cyst Feature",
+     "Epidermoid Cyst",
+     "Congenital Inclusion Dermoid",
+     "Teratoma Dermoid"
+    ],
+    "rows": [
+     [
+      "Etiology",
+      "Follicular retention / epidermal inclusion",
+      "Embryonic fusion plane entrapment",
+      "Germ cell proliferation"
+     ],
+     [
+      "Punctum",
+      "Present in majority",
+      "Strictly absent",
+      "Absent"
+     ],
+     [
+      "Attachment",
+      "Tethered to overlying skin",
+      "Free from skin, attached to bone",
+      "Deep pelvic or retroperitoneal"
+     ],
+     [
+      "Contents",
+      "Keratin flakes only",
+      "Sebum, keratin, and hair",
+      "Ectoderm, mesoderm, and endoderm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The classical presentation of an **angular dermoid** occurs at the outer canthus of the eye, directly overlying the frontozygomatic suture. It presents as a smooth, rounded, non-tender subcutaneous swelling that is freely mobile beneath overlying skin but fixed to the deeper periosteum. Over time, persistent pressure from the cyst typically erodes the outer cortex of the skull, producing a palpable saucer-like bony depression.",
+   "say": "An angular dermoid appears characteristically at the outer canthus over the frontozygomatic suture. It is mobile under the skin but attached to periosteum, often producing a shallow bony depression.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Angular Dermoid",
+     "points": [
+      "Located at outer canthus over frontozygomatic suture",
+      "Skin slides freely over cyst surface",
+      "Fixed to deep underlying periosteum",
+      "Palpable bony indentation beneath cyst"
+     ]
+    },
+    "right": {
+     "title": "Epidermoid Cyst",
+     "points": [
+      "Can occur anywhere on hair-bearing skin",
+      "Intradermal, moves with the skin",
+      "Not fixed to underlying bone or periosteum",
+      "Central punctum present on surface"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most frequent benign soft-tissue neoplasm in adult surgical practice is a **lipoma**, often referred to as the universal tumour. Arising from mature encapsulated adipocytes, it develops predominantly in subcutaneous tissues of the neck, back, shoulders, and proximal limbs. Palpation demonstrates a painless, lobulated, soft swelling that characteristically slips out from underneath the examining fingers, demonstrating the classic slipping sign.",
+   "say": "Lipomas are ubiquitous benign subcutaneous tumours composed of mature encapsulated fat cells. They are soft, lobulated, painless, and slip out from beneath the examiner's fingers.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/lipoma-fig1.webp",
+    "alt": "Clinical appearance of a soft, mobile subcutaneous lipoma.",
+    "caption": "Subcutaneous lipoma demonstrating lobulated architecture and slipping sign. [Credit: Sikander Iqbal]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Recognising distinctive **lipoma clinical variants** informs safe surgical management and differentiation from malignant sarcomas. Angiolipomas present as small, distinctly tender or painful subcutaneous nodules on the forearms of young adults, characterized histologically by vascular proliferation and microthrombi. Intramuscular lipomas infiltrate between skeletal muscle fibers and become firmer when the muscle contracts, whereas rapid growth or size exceeding five centimetres warrants imaging to exclude liposarcoma.",
+   "say": "Lipoma variants include painful angiolipomas with microthrombi and intramuscular lipomas that harden with muscle contraction. Rapidly growing masses larger than five centimetres must be evaluated for liposarcoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lipoma Subtype",
+     "Anatomical Site",
+     "Distinctive Clinical Feature",
+     "Histological Hallmark"
+    ],
+    "rows": [
+     [
+      "Subcutaneous Lipoma",
+      "Neck, trunk, proximal extremities",
+      "Painless, soft, positive slipping sign",
+      "Encapsulated mature adipocytes"
+     ],
+     [
+      "Angiolipoma",
+      "Forearms of young adults",
+      "Multiple painful, tender small nodules",
+      "Adipocytes with vascular microthrombi"
+     ],
+     [
+      "Intramuscular Lipoma",
+      "Deep within skeletal muscle bellies",
+      "Becomes firm and fixed on muscle contraction",
+      "Infiltrative unencapsulated mature fat"
+     ],
+     [
+      "Dercum Disease",
+      "Trunk and limbs in obese females",
+      "Painful adipose deposits with asthenia",
+      "Multiple tender subcutaneous lipomas"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Originating from peripheral nerve sheaths, a **neurofibroma** is a benign tumour comprising an intimate mixture of Schwann cells, perineurial cells, and fibroblastic collagen. Cutaneous neurofibromas present as soft, flesh-coloured or violaceous dermal papules that demonstrate the pathognomonic buttonhole sign, in which direct fingertip pressure invaginates the lesion through a small dermal defect into the underlying subcutaneous fat.",
+   "say": "Neurofibromas are benign nerve sheath tumours containing Schwann cells and fibroblasts. Cutaneous lesions demonstrate the buttonhole sign, where direct pressure invaginates the nodule through the dermal ring.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Solitary Neurofibroma",
+     "points": [
+      "Flesh-coloured soft dermal papule",
+      "Positive buttonhole sign on direct pressure",
+      "Rarely undergoes malignant transformation",
+      "Easily excised if symptomatic"
+     ]
+    },
+    "right": {
+     "title": "Schwannoma (Neurilemmoma)",
+     "points": [
+      "Eccentric growth along nerve trunk",
+      "Can be dissected away preserving nerve fibers",
+      "Antoni A and Antoni B tissue on histology",
+      "Mobile across nerve, fixed along its length"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The pathognomonic lesion of neurofibromatosis type one is the **plexiform neurofibroma**, which diffuses along multiple nerve fascicles. Palpation feels like a tortuous bag of worms beneath hypertrophic, hyperpigmented skin. Plexiform neurofibromas cause significant cosmetic deformity, skeletal erosion, and neuropathic pain, and carry a lifetime risk of eight to twelve percent for malignant transformation into malignant peripheral nerve sheath tumours.",
+   "say": "Plexiform neurofibromas infiltrate major nerve trunks with a classic bag of worms feel. Diagnostic of neurofibromatosis type one, they carry significant risk of malignant transformation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "nf1",
+      "label": "NF1 germline mutation in neurofibromin gene"
+     },
+     {
+      "id": "growth",
+      "label": "Diffuse multinodular infiltration along nerve trunks"
+     },
+     {
+      "id": "exam",
+      "label": "Palpable bag of worms sensation with overlying hyperpigmentation"
+     },
+     {
+      "id": "mpnst",
+      "label": "Risk of transformation to malignant peripheral nerve sheath tumour"
+     }
+    ],
+    "edges": [
+     [
+      "nf1",
+      "growth"
+     ],
+     [
+      "growth",
+      "exam"
+     ],
+     [
+      "exam",
+      "mpnst"
+     ]
+    ]
+   }
+  }
+ ]
+}

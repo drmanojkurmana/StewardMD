@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "module": "phy-membrane-transport",
+ "subject": "physiology",
+ "title": "Simple Diffusion, Facilitated Transport, and Fick Law",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Passive movement of solutes across biological membranes occurs without expenditure of metabolic energy. In **simple diffusion**, molecules traverse the lipid bilayer or aqueous channels down their electrochemical gradient driven solely by random thermal kinetic motion. Highly lipid-soluble non-polar substances such as oxygen, carbon dioxide, nitrogen, and anaesthetic gases penetrate the hydrophobic core with high permeability, governed directly by their oil-water partition coefficient.",
+   "say": "Passive solute movement occurs without metabolic energy. In simple diffusion, non-polar molecules like oxygen and carbon dioxide move through the lipid bilayer down their gradient.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypernatremia-fig1.webp",
+    "alt": "Solute diffusion gradients across cellular lipid bilayers.",
+    "caption": "Passive transmembrane diffusion gradients and solute partitioning across cell membranes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The quantitative rate of net diffusion across a membrane barrier is formulated by **Fick law**. Net flux equals diffusion coefficient multiplied by membrane surface area and concentration difference, divided by membrane thickness. Increased surface area or greater concentration gradient accelerates flux, whereas membrane thickening, seen in pulmonary interstitial fibrosis, proportionately reduces gas diffusion capacity according to this classical physical law.",
+   "say": "Fick law defines the rate of diffusion. Net flux rises with surface area and concentration gradient, but falls as membrane thickness increases.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Determinant",
+     "Effect on Flux",
+     "Physiological Example"
+    ],
+    "rows": [
+     [
+      "Concentration gradient",
+      "Directly proportional",
+      "Alveolar to capillary oxygen gradient"
+     ],
+     [
+      "Membrane surface area",
+      "Directly proportional",
+      "Extensive alveolar capillary network"
+     ],
+     [
+      "Solute lipid solubility",
+      "Directly proportional",
+      "Rapid carbon dioxide movement"
+     ],
+     [
+      "Membrane thickness",
+      "Inversely proportional",
+      "Diffusion defect in pulmonary fibrosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Polar molecules such as glucose and amino acids cannot easily dissolve in the hydrophobic membrane interior and require integral membrane carrier proteins. This process of **facilitated diffusion** operates down an electrochemical gradient without cellular energy expenditure. Unlike simple diffusion, facilitated transport displays structural specificity, competitive inhibition by stereochemically similar molecules, and saturable transport kinetics reaching a distinct maximum transport capacity.",
+   "say": "Polar molecules need carrier proteins to cross membranes. Facilitated diffusion moves solutes down their gradient without energy, showing carrier specificity and saturation kinetics.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Simple Diffusion",
+     "points": [
+      "Solutes dissolve directly across lipid bilayer",
+      "Linear increase in flux with concentration",
+      "No carrier protein requirement",
+      "No saturation maximum or competitive inhibition"
+     ]
+    },
+    "right": {
+     "title": "Facilitated Diffusion",
+     "points": [
+      "Requires transmembrane uniporter or carrier",
+      "Saturable kinetics with distinct transport maximum",
+      "High stereospecificity for designated substrates",
+      "Displays competitive inhibition by structural analogues"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A classic archetype of facilitated diffusion is the family of glucose transporters. Transporters such as **GLUT1** provide basal glucose uptake in erythrocytes and across the vascular blood-brain barrier. GLUT4 serves skeletal muscle and adipose tissue, translocating from intracellular vesicular pools to the plasma membrane in response to systemic insulin signaling or muscular contraction, facilitating glucose entry into peripheral storage tissues.",
+   "say": "Glucose transporters provide carrier-mediated uptake. GLUT1 maintains basal uptake in brain and erythrocytes, while GLUT4 translocates in muscle and fat after insulin stimulation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ins",
+      "label": "Insulin or Exercise Stimulus"
+     },
+     {
+      "id": "ves",
+      "label": "Intracellular GLUT4 Vesicle Translocation"
+     },
+     {
+      "id": "mem",
+      "label": "Membrane Insertion and Carrier Activation"
+     },
+     {
+      "id": "upt",
+      "label": "Facilitated Glucose Influx Down Gradient"
+     }
+    ],
+    "edges": [
+     [
+      "ins",
+      "ves"
+     ],
+     [
+      "ves",
+      "mem"
+     ],
+     [
+      "mem",
+      "upt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Uphill translocation of solutes against steep electrochemical gradients requires energy input from adenosine triphosphate hydrolysis. In **primary active transport**, the carrier protein itself functions as an ATPase enzyme, directly cleaving ATP to drive conformational alterations that pump substrates uphill. Classic primary active transporters include the ubiquitous sodium-potassium pump, gastric hydrogen-potassium ATPase, and sarcoplasmic endoplasmic reticulum calcium ATPase.",
+   "say": "Uphill transport against an electrochemical gradient requires energy. In primary active transport, the transporter hydrolyses ATP directly to pump solutes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/digoxin-toxicity-fig1.webp",
+    "alt": "Primary active transport pump mechanism utilizing ATP hydrolysis.",
+    "caption": "Primary active transport pumps consume ATP to maintain cellular ionic gradients. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The calcium ATPase pump sequestering cytosolic calcium into intracellular storage organelles is known as **SERCA**. In cardiac and skeletal myocytes, SERCA maintains resting cytosolic calcium at submicromolar concentrations below one hundred nanomoles per litre. Phospholamban modulates SERCA activity in cardiac muscle: beta-adrenergic stimulation phosphorylates phospholamban, relieving its inhibitory brake and accelerating diastolic calcium reuptake to enhance lusitropy.",
+   "say": "The SERCA pump clears cytosolic calcium into the sarcoplasmic reticulum. In cardiac myocytes, phosphorylation of phospholamban accelerates SERCA to hasten relaxation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Primary Active Pump",
+     "Location",
+     "Functional Transport Role"
+    ],
+    "rows": [
+     [
+      "Na-K ATPase",
+      "All mammalian cell membranes",
+      "Extrudes three sodium for two potassium"
+     ],
+     [
+      "SERCA",
+      "Sarcoplasmic reticulum",
+      "Sequesters cytosolic calcium for relaxation"
+     ],
+     [
+      "H-K ATPase",
+      "Gastric parietal canaliculi",
+      "Secretes hydrochloric acid into stomach"
+     ],
+     [
+      "PMCA",
+      "Plasma membrane of cells",
+      "Extrudes calcium into extracellular fluid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Electrolyte and fluid secretion in epithelial tissues relies upon the primary active proton pump. Gastric **parietal cells** utilize apical hydrogen-potassium ATPase to pump hydronium ions into the gastric lumen against a steep million-fold concentration gradient. Pharmacological inhibition of this enzyme by substituted benzimidazoles such as omeprazole suppresses acid output regardless of whether histamine, gastrin, or acetylcholine initiates stimulation.",
+   "say": "Gastric parietal cells use hydrogen-potassium ATPase to pump hydronium ions against a million-fold gradient. Proton pump inhibitors block this final common pathway of acid secretion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gastric H-K ATPase",
+     "points": [
+      "Located on apical canalicular membrane",
+      "Exchanges luminal potassium for cytoplasmic protons",
+      "Creates profound million-fold acid gradient",
+      "Irreversibly inhibited by proton pump inhibitors"
+     ]
+    },
+    "right": {
+     "title": "Renal H-ATPase",
+     "points": [
+      "Located on alpha-intercalated tubule cells",
+      "Pumps uncoupled protons into collecting duct lumen",
+      "Essential for systemic acid excretion and urinary acidification",
+      "Impaired in distal renal tubular acidosis type one"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Distinguishing transport classes is essential for interpreting physiological pharmacology and epithelial flux. Simple diffusion never saturates, facilitated diffusion shows saturation and structural selectivity, and primary active transport spends **adenosine triphosphate** directly. Metabolic poisons such as cyanide or dinitrophenol dissipate ATP stores, rapidly halting primary active transport while initially sparing simple diffusion of lipophilic substances across intact cell membranes.",
+   "say": "Transport categories show distinct kinetic signatures. Simple diffusion is nonsaturable, facilitated diffusion saturates, and primary active transport directly depends on ATP availability.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Simple Diffusion",
+     "Facilitated Diffusion",
+     "Primary Active"
+    ],
+    "rows": [
+     [
+      "Energy Source",
+      "Thermal kinetic energy",
+      "Electrochemical gradient",
+      "Direct ATP hydrolysis"
+     ],
+     [
+      "Carrier Protein",
+      "Not required",
+      "Required transmembrane uniporter",
+      "Required ATPase pump"
+     ],
+     [
+      "Transport Direction",
+      "Downhill only",
+      "Downhill only",
+      "Uphill against gradient"
+     ],
+     [
+      "Saturation Kinetics",
+      "Linear, no Vmax",
+      "Displays Vmax and Km",
+      "Displays Vmax and Km"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

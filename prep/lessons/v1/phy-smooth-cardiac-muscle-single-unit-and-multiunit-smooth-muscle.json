@@ -1,0 +1,240 @@
+{
+ "v": 1,
+ "module": "phy-smooth-cardiac-muscle",
+ "subject": "physiology",
+ "title": "Smooth and Cardiac Muscle Physiology",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Smooth muscle is classified anatomically and electrophysiologically into two major functional categories. In **single-unit smooth muscle**, also designated unitary or visceral smooth muscle, dense arrays of low-resistance gap junctions connect adjacent myocytes into an electrical syncytium. Spontaneous pacemaking cells generate rhythmic peristaltic contractions in hollow organs such as the gastrointestinal tract, uterus, and ureters.",
+   "say": "Single-unit smooth muscle connects cells via gap junctions into an electrical syncytium, firing rhythmic spontaneous contractions in the gut and uterus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Single-Unit (Visceral) Smooth Muscle",
+     "points": [
+      "Abundant low-resistance gap junctions (connexin channels)",
+      "Acts as an electrical and functional syncytium",
+      "Displays spontaneous myogenic pacemaker activity (slow waves)",
+      "Locations: Gastrointestinal tract, uterus, small blood vessels"
+     ]
+    },
+    "right": {
+     "title": "Multi-Unit Smooth Muscle",
+     "points": [
+      "Individual cells insulated with sparse gap junctions",
+      "Each myocyte innervated independently by autonomic axons",
+      "Neurogenic: requires nerve stimulus, no spontaneous waves",
+      "Locations: Ciliary muscle of eye, iris, vas deferens, piloerectors"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In contrast, **multiunit smooth muscle** comprises discrete, electrically isolated myocyte fibres lacking gap junctions, each richly innervated by individual autonomic varicosities. Contraction is purely neurogenic, non-spontaneous, and graded without propagating action potentials, enabling fine motor control in the ciliary muscle and iris of the eye, piloerector muscles, and large elastic arteries.",
+   "say": "Multiunit smooth muscle consists of electrically separate fibres innervated individually, providing precise autonomic control in the iris and ciliary muscle.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Single-Unit Smooth Muscle",
+     "Multiunit Smooth Muscle"
+    ],
+    "rows": [
+     [
+      "Gap Junction Density",
+      "Very high (abundant connexons)",
+      "Absent or extremely sparse"
+     ],
+     [
+      "Electrical Integration",
+      "Syncytial wave propagation",
+      "Independent discrete activation"
+     ],
+     [
+      "Spontaneous Pacemaker",
+      "Present (interstitial cells of Cajal)",
+      "Absent (purely neurogenic drive)"
+     ],
+     [
+      "Response to Stretch",
+      "Contracts actively (myogenic reflex)",
+      "Does not contract to stretch"
+     ],
+     [
+      "Autonomic Innervation",
+      "Diffuse varicosities on surface layer",
+      "Individual varicosities on every cell"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Smooth muscle contains no troponin. Instead, cytosolic calcium binds to the ubiquitous four-domain calcium sensor protein **calmodulin**. The active calcium-calmodulin complex binds and activates the catalytic subunit of myosin light chain kinase, which phosphorylates the twenty-kilodalton regulatory light chain of myosin, permitting myosin ATPase activation and cross-bridge attachment to actin.",
+   "say": "Smooth muscle lacks troponin. Calcium binds calmodulin, activating myosin light chain kinase to phosphorylate the regulatory light chain and drive contraction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ca",
+      "label": "Cytosolic Calcium Enters via Cav1.2 or IP3 Sarcoplasmic Efflux"
+     },
+     {
+      "id": "cam",
+      "label": "Four Calcium Ions Bind Calmodulin Forming Active Complex"
+     },
+     {
+      "id": "mlck",
+      "label": "Calcium-Calmodulin Complex Activates Myosin Light Chain Kinase"
+     },
+     {
+      "id": "phos",
+      "label": "MLCK Phosphorylates Myosin Regulatory Light Chain Initiating Contraction"
+     }
+    ],
+    "edges": [
+     [
+      "ca",
+      "cam"
+     ],
+     [
+      "cam",
+      "mlck"
+     ],
+     [
+      "mlck",
+      "phos"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Smooth muscle maintains tonic contraction for hours with minimal ATP consumption via the specialized **latch state**. When myosin light chain phosphatase dephosphorylates a myosin head that is already attached to actin, the cross-bridge detaches exceptionally slowly. This locks the myofilaments in a sustained force-generating state with low ATP turnover, maintaining baseline arteriolar vascular tone.",
+   "say": "The latch state allows smooth muscle to maintain sustained vascular tone with minimal ATP consumption, as dephosphorylated cross-bridges detach very slowly.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-nitroglycerine.webp",
+    "alt": "Smooth muscle myosin phosphorylation and relaxation signaling.",
+    "caption": "Regulation of vascular smooth muscle tone and latch state cross-bridge kinetics. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Spontaneous rhythmic electrical oscillations in gastrointestinal smooth muscle are designated **slow waves**. Originating in specialized interstitial cells of Cajal, these cyclic depolarisations between negative sixty-five and negative forty-five millivolts do not themselves cause contraction. When slow wave crests reach threshold, burst action potentials fire, opening voltage-gated calcium channels to elicit synchronized mechanical peristalsis.",
+   "say": "Slow waves are spontaneous pacemaking oscillations generated by interstitial cells of Cajal that determine the timing and frequency of gut peristalsis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "icc",
+      "label": "Interstitial Cells of Cajal Pacemaker Currents (Slow Waves)"
+     },
+     {
+      "id": "crest",
+      "label": "Slow Wave Depolarisation Reaches -40 mV Threshold Level"
+     },
+     {
+      "id": "spike",
+      "label": "Burst Action Potentials Fire via L-Type Calcium Channels"
+     },
+     {
+      "id": "peri",
+      "label": "Synchronized Phasic Peristaltic Contraction Propagates Down Gut"
+     }
+    ],
+    "edges": [
+     [
+      "icc",
+      "crest"
+     ],
+     [
+      "crest",
+      "spike"
+     ],
+     [
+      "spike",
+      "peri"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hollow visceral organs exhibit remarkable **plasticity**, also termed stress-relaxation. When hollow organs like the urinary bladder or stomach stretch as volume increases, wall tension spikes transiently but then relaxes back to near-baseline levels over minutes as smooth muscle cross-bridges reorganize, allowing substantial organ filling without premature rises in intraluminal pressure.",
+   "say": "Visceral smooth muscle displays stress-relaxation, allowing hollow organs like the bladder to fill with large volumes without raising intraluminal pressure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Immediate Acute Distension",
+     "points": [
+      "Sudden volume infusion stretches smooth muscle cells",
+      "Sarcomere-like dense bodies slide and tension spikes",
+      "Transient sharp rise in wall tension and intravesical pressure",
+      "Triggers transient myogenic stretch-activated response"
+     ]
+    },
+    "right": {
+     "title": "Stress-Relaxation Adaptation",
+     "points": [
+      "Cross-bridges detach and sliding filaments reset",
+      "Myosin heads re-attach at elongated lengths",
+      "Wall tension falls back toward baseline set point",
+      "Allows bladder to store 500 mL urine at low pressure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In cardiac ventricular myocytes, action potentials display a pronounced plateau phase lasting over two hundred milliseconds, enforcing an exceptionally long **refractory period**. Because the absolute refractory period lasts almost as long as the entire mechanical contraction, cardiac muscle cannot be tetanized, protecting the heart from fatal sustained contractions and preserving intermittent diastolic filling.",
+   "say": "Cardiac myocytes exhibit a prolonged action potential plateau and refractory period lasting throughout contraction, preventing tetany and ensuring diastolic filling.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Property",
+     "Skeletal Muscle",
+     "Ventricular Cardiac Muscle"
+    ],
+    "rows": [
+     [
+      "Action Potential Duration",
+      "1 to 2 milliseconds",
+      "200 to 300 milliseconds (plateau phase)"
+     ],
+     [
+      "Absolute Refractory Period",
+      "1 to 2 milliseconds",
+      "200 to 250 milliseconds"
+     ],
+     [
+      "Mechanical Twitch Duration",
+      "30 to 100 milliseconds",
+      "250 to 300 milliseconds"
+     ],
+     [
+      "Susceptibility to Tetany",
+      "Easily tetanized at > 50 Hz",
+      "Completely impossible to tetanize"
+     ],
+     [
+      "Intercellular Electrical Coupler",
+      "None (isolated motor units)",
+      "Intercalated discs with gap junctions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cardiac myocyte contraction is triggered by **calcium-induced calcium release**. During the plateau phase, calcium influx through L-type Cav1.2 channels binds directly to cardiac RyR2 receptors on the sarcoplasmic reticulum, triggering massive secondary calcium release. Furthermore, intercalated discs containing fascia adherens and gap junctions unite cardiac myocytes into a synchronized functional syncytium.",
+   "say": "Calcium entry through L-type channels triggers calcium-induced calcium release from RyR2 receptors, while gap junctions unite myocytes into a functional syncytium.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-beta-sympathomimetics.webp",
+    "alt": "Cardiac myocyte calcium induced calcium release and beta adrenergic signaling.",
+    "caption": "Calcium-induced calcium release and syncytial coupling in cardiac ventricular myocytes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "sur-head-injury",
+ "subject": "surgery",
+ "title": "Glasgow Coma Scale, Middle Meningeal Artery, and Extradural Haematoma",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Accurate, reproducible neurological assessment in acute traumatic brain injury relies universally on the **Glasgow Coma Scale**. Designed by Teasdale and Jennett, this standardized clinical scoring system evaluates three independent physiological response parameters: eye opening, best verbal response, and best motor response. The cumulative score ranges from a minimum of three to a maximum of fifteen. Head injury severity is stratified into mild with a score of thirteen to fifteen, moderate with nine to twelve, and severe with eight or less.",
+   "say": "The Glasgow Coma Scale provides a standardized evaluation of head injury severity based on eye, verbal, and motor responses. Total scores range from three to fifteen, with eight or less defining severe injury.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Response Category",
+     "Assessed Score",
+     "Clinical Neurological Response"
+    ],
+    "rows": [
+     [
+      "Eye Opening (E)",
+      "4 / 3 / 2 / 1",
+      "Spontaneous / To sound / To pressure / No response"
+     ],
+     [
+      "Verbal Response (V)",
+      "5 / 4 / 3 / 2 / 1",
+      "Oriented / Confused / Inappropriate words / Incomprehensible sounds / None"
+     ],
+     [
+      "Motor Response (M)",
+      "6 / 5 / 4 / 3 / 2 / 1",
+      "Obeys commands / Localises pain / Normal flexion / Abnormal flexion / Extension / None"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Among the three components of the Glasgow Coma Scale, the best motor response provides the most reliable prognostic indicator of underlying neurological injury and long-term functional recovery. Scores range from six for obeying commands down to one for flaccid unresponsiveness. A score of three indicates decorticate posturing, characterized by abnormal upper extremity flexion and internal rotation resulting from destructive lesions above the red nucleus. A score of two indicates **decerebrate posturing**, marked by rigid adduction and extension, indicating severe midbrain or upper brainstem disruption.",
+   "say": "The motor score offers the strongest prognostic value in head trauma. Decorticate abnormal flexion indicates hemispheric injury, whereas decerebrate extension reflects life-threatening midbrain or pontine damage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Decorticate Posturing (M3)",
+     "points": [
+      "Abnormal flexion at elbows and wrists",
+      "Internal rotation of the upper limbs",
+      "Lesion located above the red nucleus",
+      "Indicates deep cortical or subcortical injury"
+     ]
+    },
+    "right": {
+     "title": "Decerebrate Posturing (M2)",
+     "points": [
+      "Rigid extension of elbows and wrists",
+      "Pronation and adduction of forearms",
+      "Lesion involves brainstem below red nucleus",
+      "Indicates critical upper brainstem compression"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An acute **extradural haematoma**, often termed an epidural haematoma, represents an intracranial accumulation of blood within the potential anatomical space between the inner table of the bony skull and the outer periosteal endosteal layer of the dura mater. Because the dura is tightly anchored to the cranial bones at the skull suture lines, the expanding collection cannot easily detach the dural attachments, resulting in a characteristic well-circumscribed, lenticular mass that exerts focal compression on the underlying cerebral cortex.",
+   "say": "An extradural haematoma forms between the skull bone and the outer layer of the dura mater. Because the dura adheres tightly at cranial sutures, the bleeding produces a localized, lens-shaped collection.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/extradural-hematoma-fig1.webp",
+    "alt": "Non-contrast computed tomography brain scan demonstrating a hyperdense biconvex extradural haematoma.",
+    "caption": "Biconvex, lentiform hyperdense extradural haematoma bounded by cranial suture lines. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The anatomical origin of extradural haemorrhage is arterial in approximately eighty-five percent of adult clinical presentations. Fractures of the squamous temporal bone or the thin pterion directly lacerate the **middle meningeal artery** or its anterior branch as it courses through an osseous groove or tunnel along the inner table of the skull. Arising from the maxillary artery, this vessel enters the middle cranial fossa through the foramen spinosum. Less commonly, extradural haematomas arise from traumatic tears in dural venous sinuses or diploic skull veins.",
+   "say": "Approximately eighty-five percent of extradural haematomas arise from arterial bleeding, most commonly due to laceration of the middle meningeal artery beneath a temporoparietal skull fracture.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "impact",
+      "label": "Blunt Temporoparietal Skull Impact"
+     },
+     {
+      "id": "fracture",
+      "label": "Linear Skull Fracture Across Pterion"
+     },
+     {
+      "id": "lacerate",
+      "label": "Laceration of Middle Meningeal Artery"
+     },
+     {
+      "id": "expand",
+      "label": "High-Pressure Arterial Bleeding Strips Dura"
+     }
+    ],
+    "edges": [
+     [
+      "impact",
+      "fracture"
+     ],
+     [
+      "fracture",
+      "lacerate"
+     ],
+     [
+      "lacerate",
+      "expand"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The classic, textbook clinical presentation of an acute extradural haematoma features a striking three-phase temporal progression. Following blunt head trauma, the patient experiences an initial brief concussive loss of consciousness, followed by a temporary recovery of clear mental sensorium known as the **lucid interval**. Lasting from minutes to several hours, this clear period occurs as high-pressure arterial bleeding progressively strips the adherent dura from the inner table of the skull. Eventually, critical intracranial pressure elevation triggers precipitous neurological deterioration.",
+   "say": "The classic lucid interval describes a temporary return of normal consciousness following initial concussion, occurring before expanding arterial bleeding causes severe secondary neurological decline.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "concussion",
+      "label": "Initial Impact & Brief Loss of Consciousness"
+     },
+     {
+      "id": "lucid",
+      "label": "Lucid Interval: Sensorium Clears for Hours"
+     },
+     {
+      "id": "expand",
+      "label": "Haematoma Volume Exceeds Compensatory Reserve"
+     },
+     {
+      "id": "coma",
+      "label": "Rapid Deterioration, Uncal Herniation, & Coma"
+     }
+    ],
+    "edges": [
+     [
+      "concussion",
+      "lucid"
+     ],
+     [
+      "lucid",
+      "expand"
+     ],
+     [
+      "expand",
+      "coma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "As the expanding temporal extradural haematoma overcomes intracranial compliance, it forces the medial aspect of the temporal lobe across the rigid tentorial incisura, precipitating catastrophic uncal herniation. The herniating uncus directly compresses the adjacent ipsilateral oculomotor nerve, causing parasympathetic paralysis that manifests as an **ipsilateral dilated pupil** unreactive to light. Simultaneously, compression of the ipsilateral cerebral peduncle in the midbrain produces contralateral hemiparesis, presenting the classic neurosurgical localizing sign of an ipsilateral blown pupil accompanied by contralateral motor weakness.",
+   "say": "Uncal herniation from an expanding temporal haematoma compresses the oculomotor nerve and cerebral peduncle, causing an ipsilateral fixed dilated pupil paired with contralateral body weakness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ipsilateral Oculomotor Sign",
+     "points": [
+      "Direct mechanical compression of CN III",
+      "Paralysis of parasympathetic pupillary fibers",
+      "Fixed, dilated unreactive pupil on injury side",
+      "Ptosis and impaired downward-inward gaze"
+     ]
+    },
+    "right": {
+     "title": "Contralateral Motor Sign",
+     "points": [
+      "Compression of ipsilateral cerebral peduncle",
+      "Interrupts descending corticospinal motor tracts",
+      "Produces contralateral hemiparesis or hemiplegia",
+      "May rarely produce Kernohan notch phenomenon"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Immediate non-contrast computed tomography of the brain represents the gold standard diagnostic investigation for all acute traumatic intracranial haemorrhages. On non-contrast cranial computed tomography, an acute extradural haematoma appears as a sharply demarcated, hyperdense **biconvex collection** resembling a lentil or lens. Because the outer dural layer is fused to the cranial sutures, the haematoma cannot cross cranial suture lines. This pathognomonic appearance sharply distinguishes it from acute subdural haematomas, which form crescentic collections that freely cross cranial sutures.",
+   "say": "Non-contrast brain CT readily distinguishes an extradural haematoma by its hyperdense, biconvex lens shape. Because the dura adheres to sutures, the collection cannot cross suture lines.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/neuroimaging-in-neurologic-disorders-fig1.webp",
+    "alt": "Brain imaging schematic comparing epidural and subdural haematoma patterns.",
+    "caption": "Computed tomography neuroimaging patterns distinguishing epidural from subdural haematomas. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An acute symptomatic extradural haematoma is an absolute neurosurgical emergency demanding rapid operative evacuation. Guidelines dictate immediate operative intervention for any extradural haematoma exceeding thirty cubic centimetres in calculated volume regardless of the patient's Glasgow Coma Scale score, or any collection causing a midline shift greater than five millimetres or a clot thickness exceeding fifteen millimetres. The standard surgical procedure is an emergency **craniotomy**, during which the bone flap is elevated, the blood clot is evacuated, and bleeding meningeal vessels are coagulated alongside placement of dural hitching sutures.",
+   "say": "An acute extradural haematoma greater than thirty cubic centimetres or causing a midline shift over five millimetres requires emergency craniotomy to evacuate the clot and coagulate the torn artery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Parameter",
+     "Surgical Indication Threshold",
+     "Operative Management"
+    ],
+    "rows": [
+     [
+      "Haematoma Volume",
+      "Greater than 30 cubic centimetres",
+      "Emergency formal craniotomy and haematoma evacuation"
+     ],
+     [
+      "Midline Shift",
+      "Greater than 5 millimetres on axial CT",
+      "Bone flap elevation, clot suction, and dural hitching sutures"
+     ],
+     [
+      "Clot Thickness",
+      "Greater than 15 millimetres maximum thickness",
+      "Bipolar coagulation of bleeding middle meningeal branches"
+     ],
+     [
+      "Rapid Deterioration",
+      "Blown pupil with impending brainstem arrest",
+      "Immediate emergency burr hole if neurosurgeon unavailable"
+     ]
+    ]
+   }
+  }
+ ]
+}

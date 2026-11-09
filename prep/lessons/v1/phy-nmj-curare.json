@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "phy-nmj",
+ "subject": "physiology",
+ "title": "Synaptic Transmission, Blockers, and Central Inhibition",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Pharmacological neuromuscular blockade divides into non-depolarising and depolarising mechanisms. The prototypical plant alkaloid **curare** (d-tubocurarine) acts as a competitive antagonist, binding postjunctional nicotinic receptors without activating ion conduction. By preventing acetylcholine binding, curare reduces end plate potential amplitude below threshold, paralyzing skeletal muscle without causing preceding fasciculations.",
+   "say": "Curare acts as a competitive antagonist at nicotinic receptors, reducing end plate potential amplitude below threshold to cause flaccid paralysis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/myasthenia-gravis-fig1.webp",
+    "alt": "Competitive antagonism of postjunctional nicotinic acetylcholine receptors.",
+    "caption": "Postsynaptic receptor antagonism and loss of neuromuscular safety margin. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In contrast, the depolarising agent **succinylcholine** comprises two conjoined acetylcholine molecules that bind and persistently activate nicotinic receptors. Succinylcholine triggers an initial depolarisation manifesting as visible muscle fasciculations. Because plasma butyrylcholinesterase metabolises succinylcholine sluggishly, prolonged depolarisation inactivates perijunctional sodium channels (Phase I block), preventing further action potential initiation.",
+   "say": "Succinylcholine persistently depolarises the end plate, triggering initial fasciculations followed by sodium channel inactivation and flaccid paralysis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bind",
+      "label": "Succinylcholine Binds Nicotinic Receptors Inducing Initial Depolarisation"
+     },
+     {
+      "id": "fasc",
+      "label": "Disorganized Myocyte Contractions Cause Transient Muscle Fasciculations"
+     },
+     {
+      "id": "inact",
+      "label": "Persistent Depolarisation Locks Perijunctional Nav1.4 into Inactivated State"
+     },
+     {
+      "id": "block",
+      "label": "Flaccid Neuromuscular Paralysis Occurs (Phase I Block)"
+     }
+    ],
+    "edges": [
+     [
+      "bind",
+      "fasc"
+     ],
+     [
+      "fasc",
+      "inact"
+     ],
+     [
+      "inact",
+      "block"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the central nervous system, synaptic transmission between neurons generates graded postsynaptic potentials. An **excitatory postsynaptic potential** (EPSP) represents a transient local depolarisation produced when neurotransmitters such as glutamate open cation channels permeable to sodium and calcium, shifting the neuronal membrane potential closer to threshold.",
+   "say": "Excitatory postsynaptic potentials are graded depolarisations produced when transmitters like glutamate open cation channels, bringing neurons closer to threshold.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Excitatory Postsynaptic Potential (EPSP)",
+     "Inhibitory Postsynaptic Potential (IPSP)"
+    ],
+    "rows": [
+     [
+      "Membrane Voltage Effect",
+      "Depolarising (shifts Vm toward 0 mV)",
+      "Hyperpolarising (shifts Vm toward -85 mV)"
+     ],
+     [
+      "Dominant Permeability",
+      "Sodium and calcium influx",
+      "Chloride influx or potassium efflux"
+     ],
+     [
+      "Primary Neurotransmitter",
+      "Glutamate, Aspartate",
+      "GABA (brain), Glycine (spinal cord)"
+     ],
+     [
+      "Functional Outcome",
+      "Increases likelihood of action potential",
+      "Decreases likelihood of action potential"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Conversely, an **inhibitory postsynaptic potential** (IPSP) hyperpolarises the neuronal membrane, shifting it further away from firing threshold. Opening of ligand-gated chloride channels by GABA-A or glycine receptors drives chloride influx toward its negative seventy millivolt equilibrium potential, stabilizing resting potential and clamping the membrane against depolarising inputs.",
+   "say": "Inhibitory postsynaptic potentials hyperpolarise the neuronal membrane via chloride influx or potassium efflux, stabilizing the cell against firing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "GABA-A Receptor Mediated IPSP",
+     "points": [
+      "Ionotropic pentameric ligand-gated ion channel",
+      "Opens central pore conducting chloride influx",
+      "Mediates fast, immediate postsynaptic hyperpolarisation",
+      "Potentiated by benzodiazepines, barbiturates, and alcohol"
+     ]
+    },
+    "right": {
+     "title": "GABA-B Receptor Mediated IPSP",
+     "points": [
+      "Metabotropic G protein-coupled receptor (Gi/o)",
+      "Beta-gamma subunits open GIRK potassium channels",
+      "Mediates slow, prolonged postsynaptic hyperpolarisation",
+      "Selectively activated by the antispastic agent baclofen"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Because individual EPSPs typically measure only zero point five to two millivolts, a single excitatory synapse cannot discharge an axonal action potential. Generation of an action potential requires **summation** of multiple inputs at the axon hillock, where sodium channel density is exceptionally concentrated, lowering threshold to negative fifty-five millivolts.",
+   "say": "Individual EPSPs are subthreshold, requiring summation at the axon hillock, where high sodium channel density lowers the firing threshold.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "syn",
+      "label": "Multiple Synaptic Inputs Converge on Dendrites and Soma"
+     },
+     {
+      "id": "sum",
+      "label": "Spatial and Temporal Summation Integrates Individual Potentials"
+     },
+     {
+      "id": "hill",
+      "label": "Net Depolarisation Conducts Electrotonically to Axon Hillock"
+     },
+     {
+      "id": "fire",
+      "label": "High Nav Density Triggers Regenerative Axonal Action Potential"
+     }
+    ],
+    "edges": [
+     [
+      "syn",
+      "sum"
+     ],
+     [
+      "sum",
+      "hill"
+     ],
+     [
+      "hill",
+      "fire"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Summation operates through two distinct physical mechanisms. Spatial summation occurs when multiple distinct excitatory synapses discharge simultaneously at separated dendritic locations, their currents coalescing at the axon hillock. In **temporal summation**, rapid repetitive firing from a single presynaptic terminal delivers inputs within milliseconds, compounding before preceding depolarisations dissipate.",
+   "say": "Spatial summation combines inputs from separate synapses arriving simultaneously. Temporal summation compounds successive inputs arriving rapidly from the same synapse.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spatial Summation",
+     "points": [
+      "Multiple distinct synapses fire at the same moment",
+      "Potentials spread electrotonically and coalesce",
+      "Dependent on neuronal space (length) constant",
+      "Integrates wide spatial inputs across dendritic tree"
+     ]
+    },
+    "right": {
+     "title": "Temporal Summation",
+     "points": [
+      "Single presynaptic terminal fires in rapid succession",
+      "Successive EPSPs arrive before previous decay completes",
+      "Dependent on neuronal membrane time constant",
+      "Translates presynaptic discharge frequency into amplitude"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The finite duration required for neurotransmitter release, diffusion, and receptor activation introduces **synaptic delay**, measuring zero point five to one millisecond per chemical synapse. Consequently, multi-synaptic reflex arcs such as the flexor withdrawal reflex display substantially longer central latency than monosynaptic myotatic tendon jerks, which contain only one intervening central synapse.",
+   "say": "Chemical synapses introduce a synaptic delay of roughly one millisecond. Monosynaptic reflexes are faster than multisynaptic pathways because of fewer synaptic steps.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Synaptic Component Step",
+     "Physical Process",
+     "Typical Time Duration"
+    ],
+    "rows": [
+     [
+      "Calcium Channel Gating",
+      "Depolarisation opens voltage-gated Ca2+ channels",
+      "0.2 to 0.3 milliseconds"
+     ],
+     [
+      "Vesicle Exocytosis",
+      "SNARE assembly and fusion pore opening",
+      "0.2 milliseconds"
+     ],
+     [
+      "Transmitter Diffusion",
+      "Diffusion across 20 to 50 nm synaptic cleft",
+      "0.05 milliseconds"
+     ],
+     [
+      "Receptor Activation",
+      "Ligand binding and channel pore gating",
+      "0.1 to 0.2 milliseconds"
+     ],
+     [
+      "Total Synaptic Delay",
+      "Cumulative chemical synaptic transit time",
+      "0.5 to 1.0 milliseconds"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Synaptic efficacy can be modulated upstream of the postjunctional membrane by **presynaptic inhibition**. An axoaxonic inhibitory interneuron synapses directly onto an excitatory axon terminal, releasing GABA. GABA activation suppresses presynaptic voltage-gated calcium channels or opens potassium channels, reducing calcium influx and selectively diminishing neurotransmitter release from that specific terminal.",
+   "say": "Presynaptic inhibition uses axoaxonic synapses to reduce terminal calcium influx, selectively blunting transmitter release without affecting the rest of the cell.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/poisoning-antidotes-long-case-fig1.webp",
+    "alt": "Presynaptic inhibition and axoaxonic neuromodulatory synapses.",
+    "caption": "Axoaxonic synaptic modulation and presynaptic regulation of neurotransmitter release. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

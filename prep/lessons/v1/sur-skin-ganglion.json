@@ -1,0 +1,267 @@
+{
+ "v": 1,
+ "module": "sur-skin",
+ "subject": "surgery",
+ "title": "Skin Cysts, Sinuses, and Non-Melanoma Cutaneous Carcinomas",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The most common benign cystic swelling of the hand and wrist is a **ganglion cyst**, arising from mucinous degeneration of dense connective tissue. It originates from the fibrous capsule of a synovial joint or the adventitia of a tendon sheath, most frequently the scapholunate ligament on the dorsal wrist. The cyst wall consists of compressed collagenous tissue without an endothelial or synovial lining, enclosing thick, viscous mucinous fluid rich in hyaluronic acid.",
+   "say": "A ganglion cyst represents mucinous degeneration of dense fibrous tissue originating from joint capsules or tendon sheaths. Lacking a true synovial lining, the cyst contains thick, gelatinous fluid high in hyaluronic acid.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Site",
+     "Frequency",
+     "Originating Structure",
+     "Clinical Characteristics"
+    ],
+    "rows": [
+     [
+      "Dorsal Wrist",
+      "60 to 70%",
+      "Scapholunate ligament",
+      "Prominent during wrist flexion, non-tender"
+     ],
+     [
+      "Volar Wrist",
+      "18 to 20%",
+      "Radiocarpal joint or STT joint",
+      "Adjacent to radial artery, cautious puncture"
+     ],
+     [
+      "Flexor Tendon Sheath",
+      "10%",
+      "A1 pulley of finger",
+      "Small, tender pea-sized pearl at base of digit"
+     ],
+     [
+      "Dorsal DIP Joint",
+      "Minority",
+      "Associated with Heberden nodes",
+      "Mucous cyst causing longitudinal nail grooving"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Physical examination of a ganglion demonstrates brilliant **positive transillumination**, which confirms its fluid-filled cystic nature. When a focused penlight is pressed firmly against one side of the mass in a darkened room, the entire structure glows with a uniform pink-red luminescence. This simple physical finding reliably distinguishes cystic ganglions from solid soft-tissue tumours such as giant cell tumours of the tendon sheath or schwannomas.",
+   "say": "Positive transillumination is a key bedside sign confirming that a wrist lump is fluid-filled. Focused illumination distinguishes clear cystic ganglions from solid soft-tissue neoplasms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dorsal Wrist Ganglion",
+     "points": [
+      "Smooth, firm, cystic consistency",
+      "Brilliantly positive transillumination",
+      "Fluctuates in size with wrist activity",
+      "Filled with clear mucinous gel"
+     ]
+    },
+    "right": {
+     "title": "Giant Cell Tumour of Tendon Sheath",
+     "points": [
+      "Solid, firm, lobulated benign mass",
+      "Completely negative transillumination",
+      "Slow steady progressive growth",
+      "Histology shows osteoclast-like giant cells"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An acquired chronic inflammatory condition of the natal cleft is **pilonidal sinus**, historically termed Jeep disease due to prolonged vehicle vibration. Loose shed hairs gather in the intergluteal cleft and are drilled deep into moist macerated skin by the rolling movement of the buttocks. This foreign body reaction initiates midline primary pit infection, which tracks cephalad to open as discharging secondary sinuses off the midline.",
+   "say": "Pilonidal sinus is an acquired foreign-body reaction where loose hairs drill into macerated natal cleft skin. This creates midline primary pits and lateral tracking discharging sinuses.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hair",
+      "label": "Loose shed hair collects in moist natal cleft"
+     },
+     {
+      "id": "drill",
+      "label": "Buttock friction drills hair shaft through macerated skin"
+     },
+     {
+      "id": "pit",
+      "label": "Foreign-body granuloma forms midline primary pit"
+     },
+     {
+      "id": "sinus",
+      "label": "Secondary subcutaneous tract extends laterally with purulent discharge"
+     }
+    ],
+    "edges": [
+     [
+      "hair",
+      "drill"
+     ],
+     [
+      "drill",
+      "pit"
+     ],
+     [
+      "pit",
+      "sinus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical eradication of pilonidal sinus aims to excise diseased tracts and modify the natal cleft architecture to prevent hair entrapment. While simple excision with secondary intention healing carries prolonged recovery times, modern techniques utilise asymmetric flap transposition, such as the **Karydakis flap** or Bascom cleft-lift procedure. These procedures excise the sinus tracts and flatten the deep intergluteal contour, placing the scar lateral to the midline away from friction.",
+   "say": "Modern pilonidal surgery uses asymmetric flap reconstruction like the Karydakis or Bascom procedure. These operations flatten the deep natal cleft and place the healing scar away from the midline.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Procedure",
+     "Technique",
+     "Recurrence Rate",
+     "Primary Advantage"
+    ],
+    "rows": [
+     [
+      "Excision and Open Packing",
+      "Wide excision of tracts left to granulate",
+      "10 to 15%",
+      "Simple procedure, avoids wound breakdown"
+     ],
+     [
+      "Midline Primary Closure",
+      "Excision followed by direct midline suture",
+      "Up to 30%",
+      "High failure rate, unrecommended"
+     ],
+     [
+      "Karydakis Flap",
+      "Asymmetric flap shifting scar off-midline",
+      "1 to 5%",
+      "Rapid healing, flattens deep cleft"
+     ],
+     [
+      "Bascom Cleft-Lift",
+      "Shallow debridement and lateralized flap",
+      "Under 3%",
+      "Excellent cosmetic and functional outcome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most common human malignancy is **basal cell carcinoma**, accounting for over seventy percent of all cutaneous cancers. Arising from pluripotential cells in the basal layer of the epidermis, it correlates directly with cumulative exposure to ultraviolet radiation. The lesion appears most frequently on the sun-exposed skin of the head and neck, classically presenting as a slow-growing translucent or pearly papule traversed by arborising telangiectatic vessels.",
+   "say": "Basal cell carcinoma is the most common cutaneous malignancy, driven by cumulative ultraviolet sun exposure. It typically presents on the face as a pearly nodule with telangiectatic vessels.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cutaneous-malignancies-melanoma-and-non-melanoma-fig1.webp",
+    "alt": "Comparison of non-melanoma skin cancers and invasive melanoma.",
+    "caption": "Cutaneous malignancies comparison: basal cell, squamous cell, and melanoma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Neglected nodular lesions ulcerate centrally to form a **rodent ulcer**, characterised by a destructive excavated base surrounded by classical pearly, rolled, beaded edges. Ninety percent occur on the face above a line drawn from the angle of the mouth to the lobule of the ear. Although basal cell carcinomas virtually never metastasise to regional lymph nodes, they exhibit relentless local tissue invasion, eroding facial cartilage, orbital contents, and underlying bone.",
+   "say": "A rodent ulcer represents an ulcerated basal cell carcinoma with characteristic pearly rolled edges. It occurs above the angle of the mouth and causes extensive local destruction without lymphatic metastasis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Basal Cell Carcinoma",
+     "points": [
+      "Pearly nodule with rolled, beaded edges",
+      "Slow progressive growth above angle of mouth",
+      "Extremely low rate of metastasis (<0.1%)",
+      "Palisading basaloid cells with clefting artifact"
+     ]
+    },
+    "right": {
+     "title": "Squamous Cell Carcinoma",
+     "points": [
+      "Ulcer with raised, hard, everted margins",
+      "Rapid growth on lower lip or sun-damaged skin",
+      "Definite potential for regional lymph node metastasis",
+      "Atypical keratinocytes with keratin pearls"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The second most frequent skin malignancy is **squamous cell carcinoma**, arising from the atypical proliferation of epidermal keratinocytes. It frequently emerges from precursor lesions such as actinic keratosis or Bowen disease. Clinically, invasive squamous cell carcinoma manifests as an indurated, hyperkeratotic nodule or a necrotic ulcer displaying characteristic raised, everted edges. Unlike basal cell carcinoma, it possesses substantial potential for regional lymphatic metastasis.",
+   "say": "Cutaneous squamous cell carcinoma arises from keratinocytes, presenting as an indurated ulcer with everted margins. Unlike basal cell tumours, it can metastasise to regional lymph nodes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Low-Risk Cutaneous SCC",
+     "High-Risk Cutaneous SCC"
+    ],
+    "rows": [
+     [
+      "Tumour Diameter",
+      "Under 20 mm",
+      "Over 20 mm"
+     ],
+     [
+      "Tumour Thickness",
+      "Under 2 mm depth",
+      "Over 2 mm depth or Clark level IV/V"
+     ],
+     [
+      "Anatomic Site",
+      "Trunk and extremities",
+      "Lip, ear, scalp, or anogenital region"
+     ],
+     [
+      "Histological Grade",
+      "Well-differentiated",
+      "Poorly differentiated, perineural invasion"
+     ],
+     [
+      "Excision Margin Required",
+      "4 to 5 mm clear margin",
+      "6 to 10 mm clear margin or Mohs surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A particularly aggressive variant of squamous cell carcinoma developing within longstanding chronic scars is the **Marjolin ulcer**. First described in chronic burn cicatrices, it can also develop in osteomyelitic sinus tracts, chronic venous ulcers, and irradiated tissue. Characterised by an average latency of twenty to thirty years, Marjolin ulcers behave far more aggressively than standard cutaneous squamous cancers, exhibiting rapid deep infiltration and high rates of regional nodal metastases.",
+   "say": "Marjolin ulcer is an aggressive squamous carcinoma arising in longstanding burn scars or chronic sinuses. Following a decades-long latency, it exhibits deep local invasion and high rates of lymphatic spread.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "scar",
+      "label": "Deep full-thickness burn healed with chronic cicatricial scar"
+     },
+     {
+      "id": "latency",
+      "label": "Decades of repeated mechanical irritation and unstable ulceration"
+     },
+     {
+      "id": "malign",
+      "label": "Malignant transformation into aggressive squamous cell carcinoma"
+     },
+     {
+      "id": "spread",
+      "label": "Early lymphatic dissemination due to damaged local immune surveillance"
+     }
+    ],
+    "edges": [
+     [
+      "scar",
+      "latency"
+     ],
+     [
+      "latency",
+      "malign"
+     ],
+     [
+      "malign",
+      "spread"
+     ]
+    ]
+   }
+  }
+ ]
+}

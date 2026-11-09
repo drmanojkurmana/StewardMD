@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "module": "phy-rbc-haemoglobin",
+ "subject": "physiology",
+ "title": "Red Cell Indices, Haemoglobin Variants, and ESR",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Automated haematology analysers measure red blood cell indices that provide essential quantitative metrics for the morphologic classification of anaemia. The average volume of an individual erythrocyte is the **mean corpuscular volume** (MCV), calculated by dividing the haematocrit by the total red blood cell count, with normal reference values spanning eighty to one hundred femtolitres.",
+   "say": "The mean corpuscular volume calculates average red cell size from haematocrit and cell count, normally ranging from eighty to one hundred femtolitres.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Erythrocyte Index",
+     "Calculation Formula",
+     "Normal Reference Range",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Mean Corpuscular Volume (MCV)",
+      "(Hct x 10) / RBC count (millions)",
+      "80 to 100 fL",
+      "Microcytic (<80) vs Macrocytic (>100)"
+     ],
+     [
+      "Mean Corpuscular Hb (MCH)",
+      "(Hb g/dL x 10) / RBC count",
+      "27 to 33 pg",
+      "Absolute weight of Hb per erythrocyte"
+     ],
+     [
+      "Mean Corpuscular Hb Conc (MCHC)",
+      "(Hb g/dL x 100) / Hct percent",
+      "32 to 36 g/dL",
+      "Chromasia: Hypochromic (<32) vs Normochromic"
+     ],
+     [
+      "Red Cell Distribution Width (RDW)",
+      "(SD of MCV / Mean MCV) x 100",
+      "11.5 to 14.5 percent",
+      "Anisocytosis (variation in red cell size)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Classifying anaemias by MCV divides pathology into microcytic, normocytic, and macrocytic categories. A depressed MCV below eighty femtolitres defines **microcytic anaemia**, caused by defective haemoglobin synthesis: iron deficiency impairs heme synthesis, lead poisoning impairs porphyrin assembly, thalassaemias impair globin chain production, and chronic disease sequesters storage iron.",
+   "say": "Microcytic anaemia has an MCV below eighty femtolitres, caused by defective heme or globin synthesis in iron deficiency, thalassaemia, or lead toxicity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acquired-haemolytic-anaemias-fig1.webp",
+    "alt": "Microscopic peripheral blood smear demonstrating microcytic hypochromic red cells.",
+    "caption": "Microcytic hypochromic red cell morphology on peripheral blood film. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The average concentration of haemoglobin per unit volume of packed red blood cells is the **MCHC**. Normal values range between thirty-two and thirty-six grams per decilitre. Iron deficiency anaemia produces hypochromic cells with MCHC below thirty-two, whereas hereditary spherocytosis is the sole common condition where MCHC exceeds thirty-six due to membrane loss and intracellular dehydration.",
+   "say": "MCHC measures haemoglobin concentration within packed cells, normally 32 to 36. It drops in iron deficiency and rises uniquely in hereditary spherocytosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hypochromia (MCHC < 32 g/dL)",
+     "points": [
+      "Central pallor exceeds one-third of erythrocyte diameter",
+      "Caused by inadequate cytoplasmic haemoglobin loading",
+      "Classic finding in severe iron deficiency anaemia",
+      "Accompanied by elevated red cell distribution width"
+     ]
+    },
+    "right": {
+     "title": "Hyperchromia (MCHC > 36 g/dL)",
+     "points": [
+      "Loss of central pallor; dense, darkly staining spherical cells",
+      "Caused by spectrin/ankyrin loss and cellular dehydration",
+      "Diagnostic hallmark of hereditary spherocytosis",
+      "Increased osmotic fragility in hypotonic saline solutions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Normal adult human haemoglobin is a tetramer of two alpha and two beta globin chains, designated **haemoglobin A**. Each globin chain cradles a ferrous heme group that reversibly binds one molecule of oxygen. In normal adult blood, HbA comprises ninety-seven percent of total haemoglobin, complemented by two to three percent HbA2 (alpha2-delta2) and less than one percent fetal haemoglobin.",
+   "say": "Adult haemoglobin A is a tetramer of two alpha and two beta chains. It forms 97 percent of adult haemoglobin, alongside minor HbA2 and fetal haemoglobin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Haemoglobin Type",
+     "Globin Chain Subunits",
+     "Relative Percentage in Adult",
+     "Functional Affinity"
+    ],
+    "rows": [
+     [
+      "Adult HbA",
+      "Alpha2-Beta2 (alpha2-beta2)",
+      "95 to 98 percent",
+      "Standard P50 of 26.8 mmHg"
+     ],
+     [
+      "Adult HbA2",
+      "Alpha2-Delta2 (alpha2-delta2)",
+      "1.5 to 3.5 percent",
+      "Elevated in beta-thalassaemia trait (>3.5%)"
+     ],
+     [
+      "Fetal HbF",
+      "Alpha2-Gamma2 (alpha2-gamma2)",
+      "< 1 percent (80% at birth)",
+      "Higher oxygen affinity (low 2,3-BPG binding)"
+     ],
+     [
+      "Embryonic Gower-1",
+      "Zeta2-Epsilon2",
+      "0 percent (early yolk sac)",
+      "Primitive embryonic respiration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The dominant respiratory pigment during intrauterine life is **fetal haemoglobin**, comprising two alpha and two gamma globin chains. In gamma chains, serine replaces histidine at position 143, eliminating two positively charged binding residues for 2,3-bisphosphoglycerate. Consequently, HbF binds 2,3-BPG weakly, shifting its oxygen-haemoglobin dissociation curve to the left to extract oxygen across the placenta.",
+   "say": "Fetal haemoglobin has two alpha and two gamma chains. Weak binding to 2,3-BPG gives it a higher oxygen affinity, enabling transplacental oxygen extraction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/alpha-thalassemia-fig1.webp",
+    "alt": "Haemoglobin tetramers, globin gene clusters, and fetal-to-adult switching.",
+    "caption": "Haemoglobin globin subunit structure and developmental switching from HbF to HbA. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Iron absorption occurs primarily in the duodenum and upper jejunum. Dietary ferric iron is reduced to ferrous iron by apical **cytochrome b**, transported into enterocytes via divalent metal transporter 1 (DMT1), and exported into blood through basolateral ferroportin. The hepatic peptide hormone hepcidin binds and degrades ferroportin, suppressing systemic iron absorption during inflammation.",
+   "say": "Duodenal enterocytes absorb ferrous iron via DMT1 and export it through ferroportin. Hepcidin blocks ferroportin, suppressing iron absorption in inflammation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dcytb",
+      "label": "Apical Duodenal Cytochrome B Reduces Fe3+ to Soluble Fe2+"
+     },
+     {
+      "id": "dmt1",
+      "label": "Divalent Metal Transporter 1 (DMT1) Imports Fe2+ into Enterocyte"
+     },
+     {
+      "id": "fpn",
+      "label": "Basolateral Ferroportin Transports Iron into Capillary Blood"
+     },
+     {
+      "id": "hepc",
+      "label": "Hepcidin Binds Ferroportin Causing Internalisation and Degradation"
+     }
+    ],
+    "edges": [
+     [
+      "dcytb",
+      "dmt1"
+     ],
+     [
+      "dmt1",
+      "fpn"
+     ],
+     [
+      "fpn",
+      "hepc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The rate at which erythrocytes sediment in uncoagulated blood over one hour is the **erythrocyte sedimentation rate** (ESR), measured via the Westergren method. In normal blood, negative sialic acid surface charges (zeta potential) cause erythrocytes to repel one another. Acute phase proteins such as fibrinogen and immunoglobulins neutralize this zeta potential, accelerating rouleaux formation and raising ESR.",
+   "say": "The erythrocyte sedimentation rate measures settling speed. Asymmetric acute phase proteins neutralize negative surface charges, promoting rouleaux formation and raising ESR.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Erythrocyte Repulsion",
+     "points": [
+      "Negative sialic acid charges create surface zeta potential",
+      "Mutual electrostatic repulsion prevents cell clumping",
+      "Individual erythrocytes sediment sluggishly",
+      "Normal Westergren ESR: < 15 mm/hr in men, < 20 in women"
+     ]
+    },
+    "right": {
+     "title": "Accelerated Rouleaux Sedimentation",
+     "points": [
+      "Fibrinogen and immunoglobulins bridge red cells",
+      "Neutralization of zeta potential causes rouleaux stacking",
+      "Stacked rouleaux possess smaller surface area-to-mass ratio",
+      "Markedly elevated ESR in inflammation, infection, and myeloma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "ESR is accelerated by physiological factors such as advancing age, female sex, and pregnancy, and pathologically by infections, autoimmune vasculitis, and metastatic malignancy. Extremely high values exceeding one hundred millimetres per hour suggest serious underlying pathology including multiple myeloma, temporal arteritis, or polymyalgia rheumatica, whereas **polycythaemia** and sickle cell disease depress ESR.",
+   "say": "ESR exceeding one hundred suggests temporal arteritis or multiple myeloma. Polycythaemia and sickle cell anaemia retard sedimentation and lower ESR.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Condition",
+     "Effect on Westergren ESR",
+     "Underlying Mechanism"
+    ],
+    "rows": [
+     [
+      "Temporal Arteritis / Polymyalgia",
+      "Markedly elevated (> 100 mm/hr)",
+      "High systemic fibrinogen and IL-6 acute phase surge"
+     ],
+     [
+      "Multiple Myeloma",
+      "Markedly elevated (> 100 mm/hr)",
+      "Massive monoclonal IgG/IgA paraprotein bridging"
+     ],
+     [
+      "Severe Anaemia",
+      "Moderately elevated",
+      "Fewer erythrocytes allow faster downward packing"
+     ],
+     [
+      "Polycythaemia Vera",
+      "Extremely depressed (< 1 mm/hr)",
+      "High red cell density creates crowded settling resistance"
+     ],
+     [
+      "Sickle Cell Anaemia",
+      "Markedly depressed (< 2 mm/hr)",
+      "Abnormal sickled shapes prevent neat rouleaux stacking"
+     ],
+     [
+      "Hypofibrinogenaemia",
+      "Markedly depressed",
+      "Absence of asymmetric bridging acute phase proteins"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

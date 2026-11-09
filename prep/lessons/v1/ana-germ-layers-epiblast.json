@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-germ-layers",
+ "subject": "anatomy",
+ "title": "Gastrulation, Epiblast and Primitive Streak",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "During the second week of development, the inner cell mass differentiates into a bilaminar embryonic disc composed of epiblast and hypoblast. The columnar **epiblast** forms the floor of the amniotic cavity, while the small cuboidal hypoblast forms the ceiling of the primary yolk sac. Lineage tracing demonstrates that the epiblast gives rise to all three definitive embryonic germ layers.",
+   "say": "In week two, the inner cell mass splits into a bilaminar disc composed of epiblast and hypoblast. Columnar epiblast cells floor the amniotic cavity, while cuboidal hypoblast cells roof the yolk sac. Fate mapping confirms that the epiblast generates all three definitive germ layers.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-trilaminar-disc.svg",
+    "alt": "Gastrulation, primitive streak, epiblast ingression and germ layers",
+    "caption": "Gastrulation and formation of ectoderm, mesoderm, and endoderm. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The hypoblast lines the blastocoele and contributes to extraembryonic endoderm and the anterior visceral endoderm, which establishes the cranio-caudal axis. Gastrulation begins early in the third week with the appearance of the **primitive streak** on the dorsal surface of the epiblast, precisely demarcating the caudal midline of the developing embryonic disc.",
+   "say": "The hypoblast lines the blastocoele and establishes the cranio-caudal axis through its anterior visceral endoderm. Gastrulation initiates in week three with the formation of the primitive streak on the caudal dorsal epiblast, establishing midline bilateral symmetry.",
+   "vis": {
+    "kind": "flow",
+    "title": "Embryonic Axis Establishment",
+    "nodes": [
+     {
+      "id": "bilam",
+      "label": "Bilaminar Disc: Epiblast and Hypoblast"
+     },
+     {
+      "id": "streak",
+      "label": "Primitive Streak at Caudal End"
+     },
+     {
+      "id": "node",
+      "label": "Primitive Node Organiser"
+     },
+     {
+      "id": "trilam",
+      "label": "Trilaminar Embryonic Disc"
+     }
+    ],
+    "edges": [
+     [
+      "bilam",
+      "streak"
+     ],
+     [
+      "streak",
+      "node"
+     ],
+     [
+      "node",
+      "trilam"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "At the cephalic end of the primitive streak sits an elevated circular organizer designated the **primitive node**, surrounding the primitive pit. Epiblast cells detach, undergo epithelial-to-mesenchymal transition, and invaginate inward through the streak. The primitive node serves as the primary embryonic organizer, releasing morphogens like chordin and noggin to neuralize overlying ectoderm.",
+   "say": "At the cranial tip of the streak lies the primitive node, ringing the primitive pit. Epiblast cells detach, undergo epithelial-to-mesenchymal transition, and migrate inward through the streak. The primitive node acts as the master organizer, neuralizing the overlying ectoderm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primitive Streak Functions",
+     "points": [
+      "Site of cellular ingression and EMT",
+      "Defines longitudinal body axis",
+      "Regresses caudally during week four",
+      "Persisting remnants cause sacrococcygeal teratoma"
+     ]
+    },
+    "right": {
+     "title": "Primitive Node Functions",
+     "points": [
+      "Serves as Spemann-Mangold master organizer",
+      "Directs cellular migration of the notochord",
+      "Cilia drive leftward nodal flow for situs",
+      "Secretes BMP antagonists like chordin"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The fundamental embryonic milestone that transforms the bilaminar disc into a trilaminar embryo is **gastrulation**. Cells migrating inward through the streak first displace the underlying hypoblast to create the definitive embryonic endoderm. Subsequent ingressing cells settle between epiblast and endoderm to generate intraembryonic mesoderm, while remaining epiblast cells form ectoderm.",
+   "say": "The pivotal event converting the two-layered disc into a three-layered embryo is gastrulation. Ingressing epiblast cells displace the hypoblast to create definitive endoderm. Later migrating cells form intraembryonic mesoderm, while resident surface cells become definitive ectoderm.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-yolk-sac-fates.svg",
+    "alt": "Embryonic germ layer emergence and yolk sac cavity",
+    "caption": "Trilaminar disc formation during third-week gastrulation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The outermost germ layer is the surface **ectoderm**, which gives rise to the central and peripheral nervous systems, the sensory epithelia of the eye, ear, and nose, the epidermis of the skin, hair, nails, and the mammary glands. It also forms the pituitary gland and subcutaneous enamel of the teeth.",
+   "say": "The outermost germ layer is the ectoderm, which generates the brain, spinal cord, sensory organs of sight and hearing, and the epidermis of the skin. Ectoderm also forms hair, nails, breast glandular epithelium, and dental enamel.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Definitive Germ Layer",
+     "Central Nervous Derivation",
+     "Epithelial Derivation",
+     "Mesenchymal Derivation"
+    ],
+    "rows": [
+     [
+      "Ectoderm",
+      "Brain, spinal cord, retina",
+      "Epidermis, hair, nails, enamel",
+      "Neural crest mesenchyme"
+     ],
+     [
+      "Mesoderm",
+      "Meninges (dura mater)",
+      "Endothelium, mesothelium",
+      "Skeleton, skeletal muscle, kidneys"
+     ],
+     [
+      "Endoderm",
+      "None",
+      "GI tract, liver, pancreas, lungs",
+      "None (epithelial lining only)"
+     ],
+     [
+      "Neural Crest",
+      "Autonomic ganglia, Schwann cells",
+      "Melanocytes, adrenal medulla",
+      "Craniofacial branchial bones"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The innermost germ layer is the **endoderm**, which forms the epithelial lining of the gastrointestinal tract, the respiratory tree, and the urinary bladder. It also develops into the parenchymal secretory cells of the liver and pancreas, and the epithelial lining of the tympanic cavity, mastoid antrum, thyroid follicular cells, and parathyroid glands.",
+   "say": "The innermost layer is the endoderm, forming the epithelial lining of the gut tube, airway passages, and urinary bladder. It gives rise to hepatic and pancreatic parenchyma, as well as the linings of the middle ear and thyroid follicular cells.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Endodermal Organs",
+     "points": [
+      "Epithelial lining of stomach and intestines",
+      "Tracheobronchial respiratory tree mucosa",
+      "Hepatocytes and biliary tree lining",
+      "Acinar and islet cells of the pancreas"
+     ]
+    },
+    "right": {
+     "title": "Mesodermal Organs",
+     "points": [
+      "Cardiovascular and lymphatic systems",
+      "Kidneys, ureters, and gonads",
+      "Skeletal bones, cartilage, and joints",
+      "Connective tissue and muscular walls"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cranial to the primitive node, invaginating mesodermal cells form a solid midline cellular rod called the **notochord**, extending to the prechordal plate. The notochord serves as the primary longitudinal axis of the embryo, induces overlying ectoderm to form the neural tube, and persists in adults solely as the nucleus pulposus of intervertebral discs.",
+   "say": "Ahead of the primitive node, migrating cells form a midline cellular cylinder termed the notochord, stretching toward the prechordal plate. The notochord provides the structural axis, induces neural tube formation, and persists in adults as the nucleus pulposus.",
+   "vis": {
+    "kind": "flow",
+    "title": "Notochord Induction Cascade",
+    "nodes": [
+     {
+      "id": "node",
+      "label": "Primitive Node Invagination"
+     },
+     {
+      "id": "noto",
+      "label": "Solid Midline Notochordal Process"
+     },
+     {
+      "id": "ind",
+      "label": "Sonic Hedgehog Signaling to Ectoderm"
+     },
+     {
+      "id": "neur",
+      "label": "Neural Plate Thickening"
+     }
+    ],
+    "edges": [
+     [
+      "node",
+      "noto"
+     ],
+     [
+      "noto",
+      "ind"
+     ],
+     [
+      "ind",
+      "neur"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "If primitive streak cells fail to degenerate by the end of the fourth week, persisting pluripotential remnants in the sacrococcygeal region develop into a **sacrococcygeal teratoma**. This congenital tumour contains tissues derived from all three germ layers, including hair, teeth, bone, and glandular epithelium, representing the most common congenital tumour in newborns.",
+   "say": "If primitive streak remnants fail to regress by the fourth week, persistent pluripotential cells give rise to a sacrococcygeal teratoma. Containing tissues from all three germ layers like teeth, hair, and gut mucosa, it is the most common newborn congenital tumour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Congenital Condition",
+     "Developmental Defect",
+     "Histological Components",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Sacrococcygeal Teratoma",
+      "Persistence of primitive streak cells",
+      "Ectoderm, mesoderm, endoderm",
+      "Most common congenital newborn tumour"
+     ],
+     [
+      "Chordoma",
+      "Malignant remnant of notochord",
+      "Physaliferous cells in spheno-occiput",
+      "Invasive skull base or sacral tumour"
+     ],
+     [
+      "Situs Inversus",
+      "Defective ciliary nodal flow at pit",
+      "Mirror-image reversal of organs",
+      "Associated with Kartagener syndrome"
+     ],
+     [
+      "Sirenomelia",
+      "Inadequate caudal mesoderm formation",
+      "Fused lower extremities, renal agenesis",
+      "Associated with maternal diabetes"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

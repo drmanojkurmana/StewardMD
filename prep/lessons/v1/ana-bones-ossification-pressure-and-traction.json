@@ -1,0 +1,232 @@
+{
+ "v": 1,
+ "module": "ana-bones-ossification",
+ "subject": "anatomy",
+ "title": "Pressure and Traction Epiphyses and Bone Architecture",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Epiphyses fall into distinct functional categories based on mechanical forces encountered during joint motion and muscular pull. An articular end that transmits weight across a joint is termed a **pressure epiphysis**, exemplified by the head of the femur and condyles of the tibia. These regions bear compressive joint loading and directly guide articular alignment.",
+   "say": "Epiphyses are classified into functional categories according to mechanical stresses. An articular end transmitting body weight across a joint is a pressure epiphysis, such as the femoral head or tibial condyles. These surfaces endure heavy compressive loads.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-bone_tumour_sites.webp",
+    "alt": "Femoral head and condyles representing pressure epiphyses",
+    "caption": "Pressure epiphyses at the hip and knee joints bearing compressive loads. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In contrast, non-articular bony prominences providing attachment to forceful tendons are classified as a **traction epiphysis**, illustrated by the greater and lesser trochanters of the femur. Subjected to tensile pulling forces rather than compressive weight, these centres do not contribute directly to the longitudinal lengthening of the supporting skeletal column.",
+   "say": "Non-articular bony projections anchoring powerful muscle tendons form traction epiphyses, such as the femoral trochanters and humeral tubercles. These structures withstand tensile pull rather than compressive weight and do not alter bone length.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pressure Epiphysis",
+     "points": [
+      "Articular and weight-bearing",
+      "Transmits joint compression forces",
+      "Governs longitudinal limb length",
+      "Examples: Head of femur, tibial condyles"
+     ]
+    },
+    "right": {
+     "title": "Traction Epiphysis",
+     "points": [
+      "Non-articular muscular attachment",
+      "Transmits tensile tendon forces",
+      "Does not govern limb lengthening",
+      "Examples: Greater trochanter, tubercles"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Certain bones develop entirely inside the substance of muscular tendons or joint capsules, recognized clinically as a **sesamoid bone**. The patella represents the largest sesamoid bone in the human body, embedded within the quadriceps tendon. Sesamoid structures lack a periosteum, ossify postnatally, and alter the mechanical pull angle of tendons while reducing friction.",
+   "say": "Bones developing within the substance of tendons or capsules are termed sesamoid bones. The patella is the largest example, embedded in the quadriceps tendon. Lacking periosteum, sesamoid bones improve mechanical leverage and reduce tendon friction.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-sesamoids.svg",
+    "alt": "Sesamoid bone positions including patella and fabella",
+    "caption": "Sesamoid bones embedded within tendons to alter pull vectors. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Other consistent sesamoids include the pisiform bone located in the tendon of flexor carpi ulnaris and the **fabella** nestled in the lateral head of gastrocnemius. Two small sesamoid bones consistently lie beneath the head of the first metatarsal in the flexor hallucis brevis tendons. These bones protect delicate neurovascular bundles from crushing during toe-off.",
+   "say": "Common sesamoid bones include the pisiform in the flexor carpi ulnaris tendon and the fabella behind the lateral femoral condyle. Paired sesamoids under the first metatarsal head safeguard plantar digital nerves during the push-off phase of gait.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sesamoid Bone",
+     "Tendon or Site",
+     "Functional Purpose"
+    ],
+    "rows": [
+     [
+      "Patella",
+      "Quadriceps femoris tendon",
+      "Increases extensor lever arm at knee"
+     ],
+     [
+      "Pisiform",
+      "Flexor carpi ulnaris tendon",
+      "Alters wrist flexion angle"
+     ],
+     [
+      "Fabella",
+      "Gastrocnemius lateral head",
+      "Protects tendon over lateral femoral condyle"
+     ],
+     [
+      "Hallux Sesamoids",
+      "Flexor hallucis brevis",
+      "Transmits weight and shields digital nerves"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Compact cortical bone achieves high mechanical rigidity through microscopic cylindrical subunits known as the **Haversian system**, or osteon. Each osteon features concentric rings of mineralised bone matrix called lamellae arrayed around a central Haversian canal. Osteocytes reside within small lacunae and communicate with neighboring cells through minute branching tunnels called canaliculi.",
+   "say": "Compact bone is organized into microscopic cylindrical units termed Haversian systems or osteons. Concentric lamellae surround a central neurovascular canal. Trapped osteocytes occupy lacunae and communicate through delicate canaliculi.",
+   "vis": {
+    "kind": "flow",
+    "title": "Haversian Microarchitecture",
+    "nodes": [
+     {
+      "id": "can",
+      "label": "Central Haversian Canal"
+     },
+     {
+      "id": "lam",
+      "label": "Concentric Lamellae"
+     },
+     {
+      "id": "lac",
+      "label": "Osteocyte Lacunae"
+     },
+     {
+      "id": "volk",
+      "label": "Volkmann Transverse Canals"
+     }
+    ],
+    "edges": [
+     [
+      "can",
+      "lam"
+     ],
+     [
+      "lam",
+      "lac"
+     ],
+     [
+      "can",
+      "volk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transverse or oblique vascular tunnels called **Volkmann canals** connect adjacent Haversian canals to each other and to the periosteal surface. Unlike Haversian canals, Volkmann canals are not surrounded by concentric lamellae. They transmit blood vessels and nerves from the periosteum deep into the cortical bone, preserving tissue vitality during trauma.",
+   "say": "Transverse tunnels called Volkmann canals interconnect adjacent Haversian canals and link them to the periosteum. Not enveloped by lamellae, they allow periosteal vessels to penetrate into deep cortical layers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Haversian Canals",
+     "points": [
+      "Run longitudinally parallel to long axis",
+      "Encircled by concentric matrix lamellae",
+      "Contain axial capillaries and nerve fibres",
+      "Form the structural core of each osteon"
+     ]
+    },
+    "right": {
+     "title": "Volkmann Canals",
+     "points": [
+      "Run transversely or obliquely through cortex",
+      "Not encircled by concentric lamellae",
+      "Link periosteal vessels to central canals",
+      "Provide collateral blood distribution"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Internal bony trabeculae dynamically remodel in direct response to mechanical stress according to the principle of **Wolff law**. When mechanical loading increases, osteoblasts deposit mineralised bone along lines of principal compressive and tensile stress. Conversely, prolonged immobilisation or microgravity removes mechanical load, triggering osteoclastic resorption and marked trabecular thinning.",
+   "say": "Bone trabeculae dynamically adapt to mechanical stress according to Wolff law. Heightened loading stimulates osteoblasts to lay down bone along lines of stress. Conversely, prolonged bed rest removes mechanical strain, accelerating osteoclastic resorption.",
+   "vis": {
+    "kind": "flow",
+    "title": "Mechanotransduction in Bone",
+    "nodes": [
+     {
+      "id": "load",
+      "label": "Mechanical Loading Strain"
+     },
+     {
+      "id": "sens",
+      "label": "Osteocyte Canalicular Flow"
+     },
+     {
+      "id": "stim",
+      "label": "Osteoblastic Deposition"
+     },
+     {
+      "id": "arch",
+      "label": "Reinforced Trajectory Lines"
+     }
+    ],
+    "edges": [
+     [
+      "load",
+      "sens"
+     ],
+     [
+      "sens",
+      "stim"
+     ],
+     [
+      "stim",
+      "arch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vascular supply to the diaphysis depends on the major **nutrient artery**, which pierces the cortex obliquely and bifurcates into ascending and descending medullary branches. These medullary branches anastomose with epiphyseal and metaphyseal arteries after physeal closure. Occlusion of this nutrient vessel causes extensive medullary infarction while periosteal vessels preserve the outer cortex.",
+   "say": "The diaphysis is primarily supplied by the nutrient artery, which pierces the cortex obliquely before splitting into ascending and descending medullary branches. These join metaphyseal networks after physeal closure. Nutrient obstruction causes marrow infarction while sparing outer periosteal bone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vascular Division",
+     "Source and Course",
+     "Tissue Perfused"
+    ],
+    "rows": [
+     [
+      "Nutrient Artery",
+      "Systemic artery entering oblique canal",
+      "Inner two-thirds of cortex and marrow"
+     ],
+     [
+      "Periosteal Plexus",
+      "Muscular arterial branches in periosteum",
+      "Outer one-third of compact cortex"
+     ],
+     [
+      "Metaphyseal System",
+      "Periarticular anastomosis vessels",
+      "Metaphyseal spongiosa and physis"
+     ],
+     [
+      "Epiphyseal Network",
+      "Circulus vasculosus of joint capsule",
+      "Subchondral bone and epiphysis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

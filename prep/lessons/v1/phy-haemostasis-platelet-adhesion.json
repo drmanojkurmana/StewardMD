@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "phy-haemostasis",
+ "subject": "physiology",
+ "title": "Platelet Adhesion, Activation, and Primary Haemostasis",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The arrest of bleeding following vascular endothelial disruption relies upon an orchestrated sequence designated haemostasis. Primary haemostasis culminates in the rapid formation of a temporary platelet plug, initiated within seconds of injury by **platelet adhesion**, where circulating anucleate disc-shaped platelets adhere firmly to exposed subendothelial extracellular matrix proteins.",
+   "say": "Primary haemostasis arrests bleeding through a platelet plug. Within seconds of endothelial injury, platelets adhere to exposed subendothelial collagen.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inj",
+      "label": "Endothelial Disruption Exposes Subendothelial Collagen"
+     },
+     {
+      "id": "vwf",
+      "label": "Von Willebrand Factor Binds Exposed Fibrillar Collagen"
+     },
+     {
+      "id": "adh",
+      "label": "Platelet Glycoprotein Ib/IX Complexes Tether to Bound vWF"
+     },
+     {
+      "id": "act",
+      "label": "Platelet Shape Change and Release of Granule Mediators"
+     }
+    ],
+    "edges": [
+     [
+      "inj",
+      "vwf"
+     ],
+     [
+      "vwf",
+      "adh"
+     ],
+     [
+      "adh",
+      "act"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Under conditions of high hydrodynamic shear stress within arteriolar microvessels, platelet adhesion requires the multimeric plasma glycoprotein **von Willebrand factor**. Synthesized by endothelial Weibel-Palade bodies and megakaryocytes, vWF uncoils in high shear to bind exposed collagen, presenting A1 domains that tether platelet glycoprotein Ib/IX/V receptor complexes to arrest rolling platelets.",
+   "say": "Under high shear stress, multimeric von Willebrand factor binds collagen and tethers platelet glycoprotein Ib/IX complexes to arrest rolling platelets.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/von-willebrand-disease-fig1.webp",
+    "alt": "Endothelial von Willebrand factor secretion and platelet tethering.",
+    "caption": "High-shear platelet adhesion mediated by multimeric von Willebrand factor. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Genetic defects in this initial tethering mechanism produce severe bleeding diatheses. In **Bernard-Soulier syndrome**, congenital deficiency of the platelet glycoprotein Ib/IX/V receptor complex prevents platelet adhesion to vWF, presenting with severe mucosal bleeding, giant platelets on peripheral smear, and isolated thrombocytopenia that fails to agglutinate with ristocetin.",
+   "say": "Bernard-Soulier syndrome is caused by GP Ib/IX deficiency, preventing vWF binding and causing mucosal bleeding with giant platelets.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bernard-soulier-syndrome-fig1.webp",
+    "alt": "Platelet glycoprotein Ib receptor deficiency in Bernard Soulier syndrome.",
+    "caption": "Defective platelet adhesion to von Willebrand factor in Bernard-Soulier syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Adhesion triggers profound intracellular signaling, converting smooth discoid platelets into spiky spheres with extended pseudopodia. Calcium surges activate phospholipase A2, liberating membrane arachidonic acid, which cyclooxygenase-1 and thromboxane synthase convert into **thromboxane A2**. Thromboxane A2 serves as a potent autocrine and paracrine agonist, inducing intense localized vasoconstriction and activating neighboring platelets.",
+   "say": "Adhesion stimulates cyclooxygenase-1 to produce thromboxane A2, a potent agonist that causes vasoconstriction and recruits adjacent platelets.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Platelet Thromboxane A2",
+     "points": [
+      "Synthesized by platelet cyclooxygenase-1 (COX-1)",
+      "Promotes platelet activation and dense granule release",
+      "Induces intense local arteriolar vasoconstriction",
+      "Irreversibly blocked by low-dose aspirin (75-100 mg)"
+     ]
+    },
+    "right": {
+     "title": "Endothelial Prostacyclin (PGI2)",
+     "points": [
+      "Synthesized by intact endothelial COX-1 and COX-2",
+      "Elevates intracellular cyclic AMP in platelets",
+      "Potent inhibitor of platelet activation and aggregation",
+      "Promotes local vasodilation to limit thrombus size"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Concurrently, activated platelets undergo exocytic degranulation. Dense delta-granules discharge adenosine diphosphate, calcium, and serotonin, while alpha-granules release fibrinogen, fibronectin, platelet factor 4, and platelet-derived growth factor. Extracellular **adenosine diphosphate** binds platelet P2Y1 and P2Y12 purinergic receptors, stimulating adenylyl cyclase inhibition and sustained calcium mobilization.",
+   "say": "Platelets degranulate ADP and serotonin from dense granules, and fibrinogen from alpha granules. ADP binds P2Y12 receptors to amplify platelet activation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Granule Type",
+     "Key Stored Contents",
+     "Functional Haemostatic Role"
+    ],
+    "rows": [
+     [
+      "Dense (Delta) Granules",
+      "ADP, ATP, Serotonin, Calcium",
+      "Recruits platelets, vasoconstriction, clotting cofactor"
+     ],
+     [
+      "Alpha Granules",
+      "Fibrinogen, vWF, Factor V, PF4",
+      "Substrates for aggregation, coagulant surface"
+     ],
+     [
+      "Alpha Granules",
+      "PDGF, TGF-beta, VEGF",
+      "Vascular repair, smooth muscle proliferation"
+     ],
+     [
+      "Lysosomal Granules",
+      "Acid hydrolases, elastase",
+      "Clot remodeling and matrix clearance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The culminating event in primary haemostasis is **platelet aggregation**, mediated by inside-out conformational activation of the integrin alpha-IIb-beta-3 (glycoprotein IIb/IIIa) receptor complex. Activated glycoprotein IIb/IIIa receptors bind multivalent dimeric plasma fibrinogen molecules, which cross-link adjacent platelets into an expanding primary haemostatic plug.",
+   "say": "Aggregation occurs when activated glycoprotein IIb/IIIa receptors bind circulating fibrinogen, cross-linking neighboring platelets into a primary plug.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "in",
+      "label": "Inside-Out Signaling Triggered by Thrombin, ADP, and TXA2"
+     },
+     {
+      "id": "gp",
+      "label": "Glycoprotein IIb/IIIa Integrin Extracellular Heads Unfold"
+     },
+     {
+      "id": "fib",
+      "label": "Bivalent Plasma Fibrinogen Bridges Adjacent Platelet Receptors"
+     },
+     {
+      "id": "plug",
+      "label": "Cohesive Platelet Thrombus Seals Endothelial Defect"
+     }
+    ],
+    "edges": [
+     [
+      "in",
+      "gp"
+     ],
+     [
+      "gp",
+      "fib"
+     ],
+     [
+      "fib",
+      "plug"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Congenital failure of platelet aggregation occurs in **Glanzmann thrombasthenia**, an autosomal recessive bleeding disorder caused by deficiency or dysfunction of glycoprotein IIb/IIIa. Platelet count and morphology are normal, and platelet adhesion to subendothelium remains intact, but platelets fail to aggregate in response to ADP, collagen, or thrombin, causing lifelong mucocutaneous haemorrhage.",
+   "say": "Glanzmann thrombasthenia is caused by glycoprotein IIb/IIIa deficiency, impairing aggregation and causing severe mucocutaneous bleeding despite normal platelet count.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bernard-Soulier Syndrome",
+     "points": [
+      "Deficiency of GP Ib/IX/V receptor complex",
+      "Impaired platelet adhesion to subendothelial vWF",
+      "Thrombocytopenia with giant circulating platelets",
+      "Fails to agglutinate with ristocetin; normal with ADP"
+     ]
+    },
+    "right": {
+     "title": "Glanzmann Thrombasthenia",
+     "points": [
+      "Deficiency of GP IIb/IIIa integrin complex",
+      "Impaired platelet-to-platelet aggregation (fibrinogen cross-linking)",
+      "Normal platelet count and normal platelet size",
+      "Normal agglutination with ristocetin; fails with ADP and thrombin"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Primary haemostatic plug stability remains fragile until consolidated by secondary haemostasis. Activated platelets expose negatively charged **phosphatidylserine** on their outer membrane leaflet, creating a catalytic phospholipid scaffold. This procoagulant surface binds clotting factor complexes, accelerating thrombin generation thousand-fold to transform soluble fibrinogen into a rigid, permanent cross-linked fibrin meshwork.",
+   "say": "Activated platelets flip phosphatidylserine to their outer surface, providing a catalytic membrane scaffold that accelerates clotting factors to generate fibrin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Haemostatic Stage",
+     "Primary Effector",
+     "Key Molecular Bridge",
+     "Clinical Laboratory Test"
+    ],
+    "rows": [
+     [
+      "Primary Haemostasis",
+      "Platelets and vessel wall",
+      "vWF and Fibrinogen via GP IIb/IIIa",
+      "Bleeding Time / PFA-100"
+     ],
+     [
+      "Secondary Haemostasis",
+      "Plasma coagulation cascade",
+      "Factor Xa, Thrombin, and Fibrin",
+      "Prothrombin Time (PT) and aPTT"
+     ],
+     [
+      "Fibrin Stabilization",
+      "Factor XIIIa transglutaminase",
+      "Covalent covalent isopeptide cross-links",
+      "Urea clot solubility test"
+     ],
+     [
+      "Fibrinolysis",
+      "Plasmin enzyme",
+      "Cleaves fibrin into D-dimer fragments",
+      "Plasma D-dimer assay"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

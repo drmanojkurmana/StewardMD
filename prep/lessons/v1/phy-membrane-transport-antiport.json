@@ -1,0 +1,254 @@
+{
+ "v": 1,
+ "module": "phy-membrane-transport",
+ "subject": "physiology",
+ "title": "Antiport Mechanisms, Osmosis, and Aquaporins",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "When a carrier protein couples the downhill movement of a driving ion to the uphill extrusion of a substrate in the opposing spatial direction, the process is termed **antiport** or counter-transport. The dominant driving ion in animal cells is extracellular sodium, whose steep electrochemical gradient inward provides the energetic driving force to extrude ions such as calcium or protons against their steep concentration gradients.",
+   "say": "Antiport systems move solutes in opposite directions across the membrane. The downhill entry of sodium typically powers the uphill extrusion of calcium or protons.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Exchanger",
+     "Stoichiometry",
+     "Transport Direction",
+     "Key Physiological Role"
+    ],
+    "rows": [
+     [
+      "Sodium-Calcium Exchanger",
+      "3 Na+ in : 1 Ca2+ out",
+      "Opposing directions (antiport)",
+      "Cardiac myocyte calcium extrusion"
+     ],
+     [
+      "Sodium-Hydrogen Exchanger",
+      "1 Na+ in : 1 H+ out",
+      "Opposing directions (antiport)",
+      "Renal acid secretion and pH recovery"
+     ],
+     [
+      "Chloride-Bicarbonate Exchanger",
+      "1 Cl- in : 1 HCO3- out",
+      "Opposing directions (antiport)",
+      "Erythrocyte Hamburger chloride shift"
+     ],
+     [
+      "Mitochondrial ATP-ADP Translocase",
+      "1 ATP4- out : 1 ADP3- in",
+      "Opposing directions (antiport)",
+      "Mitochondrial energy export"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The cardiac **sodium-calcium exchanger**, designated NCX1, serves as the primary mechanism for extruding calcium during myocyte relaxation. Transporting three sodium ions inward for every divalent calcium extruded, NCX1 is electrogenic, generating a net inward depolarising current of one positive charge. Under conditions of high intracellular sodium or marked membrane depolarisation, NCX1 can reverse direction, mediating calcium influx into the myocyte.",
+   "say": "The sodium-calcium exchanger extrudes one calcium for three sodium ions entering. Because net positive charge enters, forward exchange produces a small depolarising current.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Forward Mode NCX",
+     "points": [
+      "Driven by high extracellular sodium and resting potential",
+      "Three Na+ enter down electrochemical gradient",
+      "One Ca2+ extruded against concentration gradient",
+      "Generates net inward electrogenic current"
+     ]
+    },
+    "right": {
+     "title": "Reverse Mode NCX",
+     "points": [
+      "Favoured during peak action potential depolarisation",
+      "Promoted when intracellular sodium rises (digitalis toxicity)",
+      "Calcium enters the cell while sodium is extruded",
+      "Can trigger delayed afterdepolarisations and arrhythmias"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In renal tubule epithelial cells, the apical **NHE3 exchanger** drives luminal sodium reabsorption coupled to proton secretion into the tubular fluid. This counter-transporter reabsorbs the bulk of filtered bicarbonate in the proximal convoluted tubule and is stimulated by angiotensin II and sympathetic adrenergic input, linking systemic extracellular fluid volume depletion directly to enhanced renal bicarbonate and sodium retention.",
+   "say": "The apical NHE3 exchanger in proximal tubules reabsorbs sodium in exchange for secreted protons. Angiotensin two stimulates this exchanger to maintain fluid volume.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "at2",
+      "label": "Angiotensin II & Sympathetic Activation"
+     },
+     {
+      "id": "nhe",
+      "label": "Stimulation of Apical NHE3 Counter-Transporter"
+     },
+     {
+      "id": "hsec",
+      "label": "Proton Secretion Couples to Luminal Bicarbonate Titration"
+     },
+     {
+      "id": "reab",
+      "label": "Enhanced Proximal Sodium & Bicarbonate Reabsorption"
+     }
+    ],
+    "edges": [
+     [
+      "at2",
+      "nhe"
+     ],
+     [
+      "nhe",
+      "hsec"
+     ],
+     [
+      "hsec",
+      "reab"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Net movement of water across a semipermeable membrane driven by chemical potential differences is defined as **osmosis**. Water migrates from a region of lower solute concentration (higher water activity) toward an area of higher solute concentration (lower water activity). Osmotic pressure represents the exact hydrostatic pressure required to prevent this net water influx across the semipermeable barrier.",
+   "say": "Osmosis is the net flow of water across a membrane toward higher solute concentration. Osmotic pressure is the hydrostatic force needed to prevent that water migration.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sodium-water-balance-and-osmolality-fig1.webp",
+    "alt": "Osmotic water movement and hydrostatic balance across membranes.",
+    "caption": "Osmotic pressure gradients and water equilibrium across cellular barriers. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Although simple diffusion through the lipid bilayer allows sluggish water movement, rapid physiological water flux requires dedicated tetrameric channel proteins called **aquaporins**. Discovered by Peter Agre, aquaporin channels contain a narrow hourglass pore lined with conserved asparagine-proline-alanine motifs. This structural arrangement allows water molecules to traverse in single file while strictly excluding protons and hydronium ions.",
+   "say": "Rapid transmembrane water flux occurs through specialised tetrameric aquaporin channels. Conserved pore motifs allow water to pass in single file while blocking protons.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Channel",
+     "Anatomical Site",
+     "Regulation",
+     "Physiological Role"
+    ],
+    "rows": [
+     [
+      "AQP1",
+      "Proximal tubule, descending thin limb, RBCs",
+      "Constitutively active",
+      "Obligatory water reabsorption"
+     ],
+     [
+      "AQP2",
+      "Collecting duct principal apical membrane",
+      "Regulated by vasopressin (V2-cAMP)",
+      "Facultative water reabsorption"
+     ],
+     [
+      "AQP3",
+      "Collecting duct basolateral membrane",
+      "Constitutively active",
+      "Basolateral water exit to interstitium"
+     ],
+     [
+      "AQP4",
+      "Astrocyte foot processes, brain ependyma",
+      "Constitutive, polarized",
+      "Blood-brain barrier fluid balance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vasopressin regulates urinary concentrating ability by mobilizing aquaporin-2 channels. Binding of antidiuretic hormone to basolateral **V2 receptors** on collecting duct principal cells stimulates adenylyl cyclase, raising cyclic AMP and activating protein kinase A. This phosphorylates intracellular vesicles carrying aquaporin-2, triggering their exocytic insertion into the apical membrane to dramatically increase luminal water permeability.",
+   "say": "Vasopressin binds V2 receptors to activate protein kinase A, driving exocytosis of aquaporin-2 into the apical membrane to promote water reabsorption.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sodium-water-balance-long-case-fig1.webp",
+    "alt": "Vasopressin signaling and aquaporin-2 insertion in collecting duct principal cells.",
+    "caption": "Aquaporin-2 translocation in principal cells driven by vasopressin V2 receptor signaling. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Internalisation of large macromolecules or extracellular fluid droplets that cannot fit through channels or carrier proteins occurs by **endocytosis**. In receptor-mediated endocytosis, ligands such as low-density lipoprotein or transferrin bind specific cell-surface receptors, clustering in plasma membrane depressions coated with the triskelion scaffold protein clathrin before pinching off as intracellular coated transport vesicles.",
+   "say": "Large molecules enter cells through endocytosis. Receptor-mediated endocytosis captures ligands in clathrin-coated pits, internalising them in membrane-bound vesicles.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "lig",
+      "label": "Ligand Binds Specific Transmembrane Receptor"
+     },
+     {
+      "id": "cla",
+      "label": "Clathrin Triskelions Assemble Coated Pit"
+     },
+     {
+      "id": "dyn",
+      "label": "Dynamin GTPase Pinches Vesicle Neck from Membrane"
+     },
+     {
+      "id": "end",
+      "label": "Uncoating and Delivery to Early Endosome"
+     }
+    ],
+    "edges": [
+     [
+      "lig",
+      "cla"
+     ],
+     [
+      "cla",
+      "dyn"
+     ],
+     [
+      "dyn",
+      "end"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Epithelial transport systems integrate these diverse mechanisms into coherent vector flux. Apical sodium enters via symport or antiport systems, water follows through aquaporins down osmotic gradients, and basolateral **Na-K ATPase** extrudes sodium into the interstitial space to sustain the driving potential. Disrupting any component of this transport hierarchy impairs organ-level fluid clearance and homeostatic solute balance.",
+   "say": "Epithelial transport coordinates apical entry, transcellular water flow through aquaporins, and basolateral extrusion by the sodium pump to maintain homeostasis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Epithelial Domain",
+     "Transport Element",
+     "Mechanism",
+     "Physiological Consequence"
+    ],
+    "rows": [
+     [
+      "Apical membrane",
+      "SGLT / NHE3 / AQP",
+      "Secondary active & osmosis",
+      "Solute and water entry from lumen"
+     ],
+     [
+      "Basolateral membrane",
+      "Na-K ATPase",
+      "Primary active transport",
+      "Establishes low intracellular sodium"
+     ],
+     [
+      "Basolateral membrane",
+      "GLUT2 / AQP3",
+      "Facilitated diffusion & osmosis",
+      "Solute and water exit to capillaries"
+     ],
+     [
+      "Paracellular junction",
+      "Claudin tight junctions",
+      "Passive selective ionic permeability",
+      "Regulates back-leak and selectivity"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

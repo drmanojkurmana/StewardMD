@@ -1,0 +1,264 @@
+{
+ "v": 1,
+ "module": "phy-rbc-haemoglobin",
+ "subject": "physiology",
+ "title": "Plasma Proteins, Erythropoiesis, and Reticulocytes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Total circulating **plasma proteins** measure between six and eight grams per decilitre, comprising albumin, globulins, and fibrinogen. Synthesized predominantly by hepatocytes, plasma proteins serve vital homeostatic functions including maintenance of colloid osmotic pressure, buffer capacity for blood pH, enzymatic cascades for haemostasis, and transport of lipids, hormones, and pharmacological drugs.",
+   "say": "Circulating plasma proteins measure 6 to 8 grams per decilitre. Synthesized largely in the liver, they maintain oncotic pressure, transport hormones, and buffer pH.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Plasma Protein Fraction",
+     "Concentration (g/dL)",
+     "Synthesis Site",
+     "Primary Physiological Role"
+    ],
+    "rows": [
+     [
+      "Serum Albumin",
+      "3.5 to 5.0 g/dL",
+      "Hepatocytes exclusively",
+      "Generates 80% of plasma oncotic pressure"
+     ],
+     [
+      "Alpha-1 Globulins",
+      "0.2 to 0.4 g/dL",
+      "Liver parenchymal cells",
+      "Alpha-1 antitrypsin, transcortin, TBG"
+     ],
+     [
+      "Alpha-2 Globulins",
+      "0.5 to 0.9 g/dL",
+      "Liver parenchymal cells",
+      "Haptoglobin, ceruloplasmin, macroglobulin"
+     ],
+     [
+      "Beta Globulins",
+      "0.6 to 1.1 g/dL",
+      "Liver parenchymal cells",
+      "Transferrin, hemopexin, beta-lipoproteins"
+     ],
+     [
+      "Gamma Globulins",
+      "0.8 to 1.5 g/dL",
+      "Plasma cells in lymphatics",
+      "Immunoglobulins (IgG, IgA, IgM, IgE, IgD)"
+     ],
+     [
+      "Fibrinogen",
+      "0.2 to 0.4 g/dL",
+      "Hepatocytes exclusively",
+      "Essential substrate for fibrin clot formation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Serum **albumin** accounts for fifty to sixty percent of total plasma protein mass. Despite its relatively small molecular weight of sixty-six kilodaltons, albumin generates eighty percent of total plasma colloid osmotic pressure because its molar concentration is five-fold higher than globulins, and its net negative charge of minus seventeen retains additional sodium ions via the Gibbs-Donnan effect.",
+   "say": "Albumin generates eighty percent of plasma oncotic pressure due to its high molar concentration and negative charge retaining sodium ions via Gibbs-Donnan forces.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Serum Albumin",
+     "points": [
+      "Concentration 3.5 to 5.0 g/dL (molecular weight 66 kDa)",
+      "Single polypeptide chain lacking carbohydrates",
+      "Exerts 22 out of 28 mmHg total oncotic pressure",
+      "Carries bilirubin, free fatty acids, calcium, and drugs"
+     ]
+    },
+    "right": {
+     "title": "Serum Globulins",
+     "points": [
+      "Concentration 2.0 to 3.5 g/dL (molecular weights 90 to 900 kDa)",
+      "Heterogeneous group of glycoproteins and antibodies",
+      "Exerts remaining 6 mmHg of oncotic pressure",
+      "Specialized transport, acute phase response, and immunity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The normal ratio of albumin to globulin in serum ranges between one point two and two point one. A reversed **A-G ratio** where globulins exceed albumin indicates advanced liver disease with impaired albumin synthesis, nephrotic syndrome with severe albuminuria, or multiple myeloma where monoclonal immunoglobulin paraproteins surge dramatically.",
+   "say": "A reversed albumin-globulin ratio occurs when albumin drops or globulins surge, seen in cirrhosis, nephrotic syndrome, and multiple myeloma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dis",
+      "label": "Clinical Pathology: Cirrhosis, Nephrotic Syndrome, or Myeloma"
+     },
+     {
+      "id": "shift",
+      "label": "Albumin Synthesis Falls or Monoclonal Immunoglobulin Surges"
+     },
+     {
+      "id": "ratio",
+      "label": "A-G Ratio Inverts Below 1.0 (Globulin Exceeds Albumin)"
+     },
+     {
+      "id": "conseq",
+      "label": "Plasma Oncotic Pressure Collapses Leading to Systemic Edema"
+     }
+    ],
+    "edges": [
+     [
+      "dis",
+      "shift"
+     ],
+     [
+      "shift",
+      "ratio"
+     ],
+     [
+      "ratio",
+      "conseq"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The complex multistep process generating mature erythrocytes from pluripotent hematopoietic stem cells in the red bone marrow is termed **erythropoiesis**. Under physiological conditions, bone marrow produces approximately two hundred billion erythrocytes daily (over two million per second) to balance the continuous clearance of aging red cells by splenic macrophages.",
+   "say": "Erythropoiesis generates two hundred billion erythrocytes daily in bone marrow from stem cells to replace senescent cells removed by the spleen.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anemia-of-chronic-disease-fig1.webp",
+    "alt": "Erythropoiesis pathway and bone marrow erythroblastic differentiation.",
+    "caption": "Erythroblastic differentiation stages in bone marrow erythropoiesis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The definitive humoral glycoprotein hormone driving erythropoiesis is **erythropoietin**. In adults, ninety percent of erythropoietin is synthesized by peritubular interstitial fibroblasts in the renal cortex, with the remaining ten percent synthesized by perivenous hepatocytes. Renal tissue hypoxia stabilizes hypoxia-inducible factor alpha (HIF-1alpha), accelerating erythropoietin gene transcription.",
+   "say": "Renal peritubular fibroblasts produce ninety percent of erythropoietin in response to hypoxia, guided by hypoxia-inducible factor stabilization.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hypo",
+      "label": "Renal Cortical Hypoxia (Anaemia, High Altitude, or Hypoxaemia)"
+     },
+     {
+      "id": "hif",
+      "label": "Prolyl Hydroxylase Inactivation Stabilizes HIF-1-Alpha Transcription Factor"
+     },
+     {
+      "id": "epo",
+      "label": "Peritubular Fibroblasts Synthesize and Secrete Erythropoietin"
+     },
+     {
+      "id": "marrow",
+      "label": "EPO Binds Progenitors in Bone Marrow Rescuing CFU-E from Apoptosis"
+     }
+    ],
+    "edges": [
+     [
+      "hypo",
+      "hif"
+     ],
+     [
+      "hif",
+      "epo"
+     ],
+     [
+      "epo",
+      "marrow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "During erythroblast maturation, cellular morphology undergoes orderly sequential changes. The proerythroblast matures into basophilic, polychromatophilic, and orthochromatophilic erythroblasts as hemoglobin accumulates and the nucleus progressively condenses. At the orthochromatophilic normoblast stage, the pyknotic nucleus is **extruded**, transforming the cell into a reticulocyte.",
+   "say": "Erythroblasts condense their nuclei and accumulate hemoglobin. Normoblasts extrude their pyknotic nucleus, yielding an immature reticulocyte.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Diameter (um)",
+     "Nuclear Morphology",
+     "Cytoplasmic Appearance"
+    ],
+    "rows": [
+     [
+      "Proerythroblast",
+      "14 to 19 um",
+      "Large, fine chromatin, 1-2 nucleoli",
+      "Deeply basophilic (ribosomes)"
+     ],
+     [
+      "Basophilic Erythroblast",
+      "12 to 17 um",
+      "Condensing chromatin (clock-face)",
+      "Intense dark blue (RNA abundant)"
+     ],
+     [
+      "Polychromatophilic",
+      "10 to 14 um",
+      "Dense, clumped chromatin",
+      "Grey-purple (Hb begins accumulating)"
+     ],
+     [
+      "Orthochromatophilic",
+      "8 to 12 um",
+      "Dense pyknotic ink-blot nucleus",
+      "Acidophilic pink (abundant Hb)"
+     ],
+     [
+      "Reticulocyte",
+      "7 to 8 um",
+      "Nucleus completely extruded",
+      "Pink with basophilic RNA reticulum"
+     ],
+     [
+      "Mature Erythrocyte",
+      "7.2 um",
+      "Enucleated biconcave disc",
+      "Salmon-pink with central pallor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immature enucleated erythrocytes containing residual ribosomal ribonucleic acid that stains blue with supravital dyes such as new methylene blue are designated **reticulocytes**. Reticulocytes mature in the marrow for two days and circulate in peripheral blood for twenty-four hours before shedding their ribosomes, normally accounting for zero point five to two percent of circulating erythrocytes.",
+   "say": "Reticulocytes are immature erythrocytes containing residual ribosomal RNA stained by supravital dyes, normally comprising 0.5 to 2 percent of circulating red cells.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anaemia-pregnancy-iron-transfusion-thresholds-fig1.webp",
+    "alt": "Reticulocyte response and maternal erythropoietic changes in anaemia.",
+    "caption": "Reticulocyte counting and marrow erythropoietic proliferative response. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "To accurately gauge bone marrow erythropoietic response in anaemia, raw reticulocyte percentage must be adjusted for reduced haematocrit, yielding the corrected reticulocyte count. Multiplying this by a maturation time factor generates the **reticulocyte production index** (RPI). An index above two to three indicates robust marrow response (haemolysis or acute bleeding), whereas an index below two denotes marrow failure or deficiency.",
+   "say": "The reticulocyte production index corrects for anaemia and early marrow release. An index above two indicates appropriate marrow response, while below two denotes failure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hyperproliferative Anaemia (RPI > 2)",
+     "points": [
+      "Effective, accelerated bone marrow erythropoiesis",
+      "Causes: Acute blood loss, autoimmune haemolysis, G6PD crisis",
+      "Polychromatophilic macrocytes present on peripheral smear",
+      "Bilirubin and LDH often elevated in haemolytic states"
+     ]
+    },
+    "right": {
+     "title": "Hypoproliferative Anaemia (RPI < 2)",
+     "points": [
+      "Inadequate or defective bone marrow response",
+      "Causes: Iron deficiency, aplastic anaemia, chronic kidney disease",
+      "Lack of polychromasia on peripheral blood smear",
+      "Reflects nutrient deficiency, toxin suppression, or marrow failure"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

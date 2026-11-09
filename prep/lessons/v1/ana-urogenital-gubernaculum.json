@@ -1,0 +1,241 @@
+{
+ "v": 1,
+ "module": "ana-urogenital",
+ "subject": "anatomy",
+ "title": "Genital Duct Differentiation and Testicular Descent",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Sexual differentiation is determined genetically at fertilisation by the sex chromosome complement. In genetic males, the **SRY gene** (sex-determining region of Y) located on the short arm of the Y chromosome expresses the SRY transcription factor, which initiates testicular differentiation of indifferent gonadal ridges into functional seminiferous cords.",
+   "say": "Sexual differentiation is established at conception. In males, the SRY gene on the short arm of the Y chromosome produces testis-determining factor, triggering the indifferent gonadal ridge to develop into testes containing Sertoli and Leydig cells.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-testis-descent.svg",
+    "alt": "Testicular descent, gubernaculum, and processus vaginalis",
+    "caption": "Embryonic testicular descent and hormonal regulation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Developing fetal Sertoli cells synthesize anti-Mullerian hormone (AMH), which induces rapid regression of the **paramesonephric Mullerian duct**. Simultaneously, testosterone secreted by Leydig cells stimulates the mesonephric Wolffian duct to differentiate into the male genital duct system: the epididymis, ductus deferens, and seminal vesicles.",
+   "say": "Sertoli cells secrete anti-Mullerian hormone to obliterate the paramesonephric Mullerian ducts. Concurrently, testosterone from Leydig cells drives the mesonephric Wolffian ducts to form the epididymis, vas deferens, and seminal vesicles.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mesonephric (Wolffian) System",
+     "points": [
+      "Stimulated by Leydig testosterone",
+      "Forms epididymis, vas deferens, seminal vesicles",
+      "Forms efferent ductules of testis",
+      "Degenerates in females (remnant: Gartner duct)"
+     ]
+    },
+    "right": {
+     "title": "Paramesonephric (Mullerian) System",
+     "points": [
+      "Suppressed by Sertoli anti-Mullerian hormone",
+      "In females forms fallopian tubes and uterus",
+      "Forms upper four-fifths of vagina",
+      "Regresses in males (remnant: appendix testis)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In genetic females lacking SRY, absence of anti-Mullerian hormone allows the paramesonephric ducts to persist and fuse caudally in the midline, creating the **uterus and fallopian tubes**. The fused cranial portions form the uterine tubes, while the fused caudal portions form the single uterine cavity and upper four-fifths of the vagina.",
+   "say": "In females lacking SRY, absence of anti-Mullerian hormone allows paramesonephric ducts to develop. Their upper segments become fallopian tubes, while their caudal segments fuse in the midline to form the uterus and upper vagina.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Embryonic Duct",
+     "Male Adult Derivative",
+     "Female Adult Derivative",
+     "Vestigial Remnant"
+    ],
+    "rows": [
+     [
+      "Mesonephric Duct",
+      "Epididymis, vas deferens, seminal vesicle",
+      "Regresses completely",
+      "Gartner duct cyst, epoophoron"
+     ],
+     [
+      "Paramesonephric Duct",
+      "Regresses completely",
+      "Uterine tubes, uterus, upper vagina",
+      "Appendix testis, prostatic utricle"
+     ],
+     [
+      "Mesonephric Tubules",
+      "Efferent ductules of the testis",
+      "Regresses completely",
+      "Paroophoron in broad ligament"
+     ],
+     [
+      "Urogenital Sinus",
+      "Prostate, prostatic urethra, bulbourethral",
+      "Lower vagina, vestibule, urethral glands",
+      "Skene and Bartholin glands"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The testes develop in the high retroperitoneum on the posterior abdominal wall at the L1 vertebral level. Their caudal migration into the scrotum is guided by a mesenchymal condensation termed the **gubernaculum**. The gubernaculum connects the lower pole of the developing testis to the labioscrotal fold, swelling under insulin-like peptide 3 to dilate the future inguinal canal.",
+   "say": "Testes develop in the upper retroperitoneum at the L1 level. Their descent into the scrotum is guided by the gubernaculum, a mesenchymal band anchoring the testis to the scrotum that dilates the inguinal pathway under insulin-like peptide three.",
+   "vis": {
+    "kind": "flow",
+    "title": "Testicular Descent Timeline",
+    "nodes": [
+     {
+      "id": "l1",
+      "label": "Month 3: Testis at L1 Retroperitoneum"
+     },
+     {
+      "id": "iliac",
+      "label": "Month 6: Enters Deep Inguinal Ring"
+     },
+     {
+      "id": "can",
+      "label": "Month 7: Traverses Inguinal Canal"
+     },
+     {
+      "id": "scrot",
+      "label": "Month 9 (Birth): Settles in Scrotal Sac"
+     }
+    ],
+    "edges": [
+     [
+      "l1",
+      "iliac"
+     ],
+     [
+      "iliac",
+      "can"
+     ],
+     [
+      "can",
+      "scrot"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Preceding the descending testis, an evagination of parietal peritoneum pushes through the abdominal wall, designated the **processus vaginalis**. It carries extensions of abdominal wall layers to form the walls of the inguinal canal and the coverings of the spermatic cord. The testis slips down behind the processus vaginalis, reaching the deep ring at six months and scrotum at birth.",
+   "say": "Ahead of the testis, an outpouching of peritoneum named the processus vaginalis evaginates through the body wall. It draws along layers that become the spermatic cord coats. The testis descends behind this peritoneal sac, reaching the scrotum by birth.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-spermatic-cord.svg",
+    "alt": "Spermatic cord coverings derived from abdominal wall layers",
+    "caption": "Processus vaginalis descent and spermatic cord coverings. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Before birth, the stalk of the processus vaginalis obliterates completely, while its distal sac remains to envelop the testis as the **tunica vaginalis**. If the entire processus vaginalis fails to obliterate and maintains patency with the peritoneal cavity, it creates a congenital indirect inguinal hernia, allowing abdominal viscera to enter the scrotum.",
+   "say": "Prior to birth, the stalk of the processus vaginalis obliterates, leaving its distal cup as the tunica vaginalis. If the entire stalk remains open, it creates a congenital indirect inguinal hernia, allowing bowel to slip into the scrotum.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Processus Obliteration",
+     "points": [
+      "Proximal and intermediate stalk fibroses",
+      "Forms vestigial tissue strand",
+      "Distal end persists as tunica vaginalis",
+      "Forms fluid-lubricated testicular sac"
+     ]
+    },
+    "right": {
+     "title": "Failure of Obliteration",
+     "points": [
+      "Patent lumen: Congenital indirect hernia",
+      "Pin-hole lumen: Congenital hydrocele",
+      "Segmental patency: Hydrocele of cord",
+      "Predisposes to strangulated hernia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Partial patency of the processus vaginalis can trap peritoneal fluid, forming a communicating hydrocele or an encysted hydrocele of the spermatic cord. In genetic females, the gubernaculum attaches to the uterus, its cranial part becoming the **ovarian ligament** and its caudal part becoming the round ligament of the uterus passing through the inguinal canal.",
+   "say": "Partial patency of the processus vaginalis forms an encysted hydrocele of the cord. In females, the gubernaculum attaches to the uterus, its upper portion becoming the ovarian ligament and its lower portion forming the round ligament of the uterus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gubernaculum Segment",
+     "Male Fate",
+     "Female Fate",
+     "Clinical Implication"
+    ],
+    "rows": [
+     [
+      "Cranial Segment",
+      "Gubernaculum testis (absorbed)",
+      "Ovarian ligament",
+      "Connects ovary to uterine cornu"
+     ],
+     [
+      "Caudal Segment",
+      "Scrotal ligament (tether)",
+      "Round ligament of the uterus",
+      "Traverses female inguinal canal to labium"
+     ],
+     [
+      "Processus Vaginalis",
+      "Tunica vaginalis",
+      "Canal of Nuck (regresses)",
+      "Canal of Nuck hydrocele in females"
+     ],
+     [
+      "Descent Endpoint",
+      "Scrotal sac (34 degrees C)",
+      "True pelvis (internal)",
+      "Ovaries arrest inside pelvis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure of one or both testes to descend into the scrotum is designated **cryptorchidism**, most frequently arrested in the inguinal canal or at the superficial ring. Uncorrected cryptorchidism causes irreversible germ cell arrest due to elevated intra-abdominal temperatures, causing male infertility and a forty-fold increased risk of testicular seminoma.",
+   "say": "Failure of the testis to reach the scrotum is cryptorchidism, most commonly halted in the inguinal canal. Undescended testes suffer heat-induced germ cell degeneration, causing infertility and a marked forty-fold spike in testicular malignancy risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cryptorchid Site",
+     "Percentage of Cases",
+     "Palpability on Exam",
+     "Surgical Action"
+    ],
+    "rows": [
+     [
+      "Inguinal Canal",
+      "70 percent of cases",
+      "Palpable in groin",
+      "Standard inguinal orchidopexy at 6 to 12 months"
+     ],
+     [
+      "Superficial Ring",
+      "20 percent of cases",
+      "Easily palpable subcutaneously",
+      "Mobilisation and scrotal dartos pouching"
+     ],
+     [
+      "Intra-abdominal",
+      "10 percent of cases",
+      "Non-palpable",
+      "Diagnostic laparoscopy and staged Fowler-Stephens"
+     ],
+     [
+      "Ectopic Testis",
+      "Perineum or femoral canal",
+      "Palpable in abnormal site",
+      "Excision of aberrant gubernacular bands"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,258 @@
+{
+ "v": 1,
+ "module": "phy-cardiac-electro",
+ "subject": "physiology",
+ "title": "Ventricular Action Potential Phases and ECG Intervals",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Ventricular and atrial contractile myocytes generate fast-response action potentials characterized by a prominent prolonged **plateau phase**. Displaying five distinct phases designated 0 through 4, the ventricular action potential spans two hundred to three hundred milliseconds, synchronizing mechanical contraction and enforcing a prolonged refractory period that prevents cardiac tetanization.",
+   "say": "Ventricular myocytes generate five-phase action potentials lasting up to 300 milliseconds, featuring a prolonged plateau that prevents tetany.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiac-electrophysiology-and-pacemaker-cells-fig1.webp",
+    "alt": "Ventricular myocyte five-phase action potential waveform.",
+    "caption": "Ionic currents across phases 0 to 4 of the ventricular myocyte action potential. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Phase 0 begins with rapid upstroke depolarisation driven by opening of fast **voltage-gated sodium channels** (Nav1.5), carrying inward INa that shifts membrane potential from negative eighty-five to plus thirty millivolts. Phase 1 follows as transient outward potassium current (Ito) mediates brief early repolarisation, creating a distinctive notch before plateau activation.",
+   "say": "Phase zero upstroke is driven by fast sodium channels. Phase one is a brief notch caused by transient outward potassium current.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Descriptive Name",
+     "Dominant Membrane Current",
+     "Ion Conductance & Direction"
+    ],
+    "rows": [
+     [
+      "Phase 0",
+      "Rapid Depolarisation Upstroke",
+      "INa (fast Nav1.5 channels)",
+      "Massive inward sodium influx"
+     ],
+     [
+      "Phase 1",
+      "Early Partial Repolarisation",
+      "Ito (transient outward potassium)",
+      "Brief outward potassium efflux"
+     ],
+     [
+      "Phase 2",
+      "Prolonged Plateau Phase",
+      "ICa-L balanced against IKs/IKr",
+      "Inward calcium balanced by outward potassium"
+     ],
+     [
+      "Phase 3",
+      "Rapid Final Repolarisation",
+      "IKr and IKs (delayed rectifiers)",
+      "Predominant outward potassium efflux"
+     ],
+     [
+      "Phase 4",
+      "Stable Resting Potential",
+      "IK1 (inward rectifier potassium)",
+      "Constitutive outward potassium leak"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The prolonged Phase 2 plateau is maintained by a delicate balance of opposing ionic currents. Inward calcium flux through voltage-gated **L-type calcium channels** (Cav1.2) entering at plus ten millivolts is precisely counterbalanced by outward delayed rectifier potassium currents (IKr and IKs). This sustained calcium influx triggers calcium-induced calcium release to drive mechanical contraction.",
+   "say": "The phase two plateau balances inward calcium through L-type channels against outward potassium, sustaining contraction and refractoriness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Phase 2 Plateau Inward Currents",
+     "points": [
+      "Driven by L-type Cav1.2 calcium channels (ICa-L)",
+      "Enters myocyte cytoplasm during depolarisation",
+      "Triggers RyR2 calcium-induced calcium release",
+      "Prolonged by hypocalcaemia; shortened by hypercalcaemia"
+     ]
+    },
+    "right": {
+     "title": "Phase 2 Plateau Outward Currents",
+     "points": [
+      "Driven by delayed rectifier potassium channels (IKs, IKr)",
+      "Carries positive potassium ions out of myocyte",
+      "Gradually accelerates as calcium channels inactivate",
+      "Inhibited by antiarrhythmics like sotalol and amiodarone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "As L-type calcium channels inactivate, outward potassium currents dominate, initiating Phase 3 rapid repolarisation. Outward delayed rectifier potassium currents (rapid IKr encoded by hERG and slow IKs) restore internal electrical negativity. At negative seventy millivolts, the inward rectifier **IK1 channel** re-opens, clamping Phase 4 resting membrane potential near negative eighty-five millivolts.",
+   "say": "Phase three repolarises the myocyte as potassium exits through delayed rectifiers, while IK1 channels re-open to clamp resting potential near minus 85.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inact",
+      "label": "Phase 2 L-Type Calcium Channels Inactivate Sluggishly"
+     },
+     {
+      "id": "ikr",
+      "label": "Delayed Rectifier Potassium Currents (IKr, IKs) Peak Unopposed"
+     },
+     {
+      "id": "repol",
+      "label": "Rapid Phase 3 Repolarisation Restores Membrane Negativity"
+     },
+     {
+      "id": "ik1",
+      "label": "Inward Rectifier IK1 Channels Re-Open to Establish Phase 4 Resting Potential"
+     }
+    ],
+    "edges": [
+     [
+      "inact",
+      "ikr"
+     ],
+     [
+      "ikr",
+      "repol"
+     ],
+     [
+      "repol",
+      "ik1"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The surface electrocardiogram records extracellular vector potentials generated by these synchronized cardiac currents. The **P wave** represents atrial depolarisation spreading from the SA node, normally measuring under zero point one two seconds in width and zero point two five millivolts in height in standard limb lead II.",
+   "say": "The electrocardiographic P wave reflects atrial depolarisation, normally measuring under 0.12 seconds in duration and under 0.25 millivolts in amplitude.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ECG Waveform",
+     "Electrophysiological Cardiac Event",
+     "Normal Adult Duration",
+     "Cellular Action Potential Phase"
+    ],
+    "rows": [
+     [
+      "P Wave",
+      "Atrial depolarisation from SA node",
+      "0.08 to 0.11 seconds",
+      "Atrial Phase 0 upstroke"
+     ],
+     [
+      "PR Interval",
+      "AV nodal conduction delay & His transit",
+      "0.12 to 0.20 seconds",
+      "AV nodal slow conduction delay"
+     ],
+     [
+      "QRS Complex",
+      "Ventricular endo-to-epi depolarisation",
+      "0.06 to 0.10 seconds",
+      "Ventricular Phase 0 upstroke"
+     ],
+     [
+      "ST Segment",
+      "Isoelectric biventricular plateau",
+      "0.08 to 0.12 seconds",
+      "Ventricular Phase 2 plateau"
+     ],
+     [
+      "T Wave",
+      "Ventricular repolarisation (epi-to-endo)",
+      "0.16 to 0.20 seconds",
+      "Ventricular Phase 3 repolarisation"
+     ],
+     [
+      "QT Interval",
+      "Total ventricular electrical systole",
+      "0.36 to 0.44 seconds",
+      "Phase 0 through Phase 3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The interval between the onset of the P wave and the beginning of the QRS complex is the **PR interval**, measuring zero point one two to zero point two zero seconds (three to five small squares on standard ECG paper). The PR interval reflects conduction time through the atria, AV node, bundle of His, and Purkinje network, prolonged in first-degree atrioventricular heart block.",
+   "say": "The PR interval measures conduction from atria through the AV node and His bundle, normally 0.12 to 0.20 seconds, prolonged in AV heart block.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "atria",
+      "label": "Atrial Myocyte Depolarisation (Generates P Wave)"
+     },
+     {
+      "id": "node",
+      "label": "Atrioventricular Nodal Slow Conduction Delay (PR Segment)"
+     },
+     {
+      "id": "purk",
+      "label": "Bundle of His and Purkinje Arborization Transit"
+     },
+     {
+      "id": "vent",
+      "label": "Initial Septal Ventricular Activation (Onset of QRS Complex)"
+     }
+    ],
+    "edges": [
+     [
+      "atria",
+      "node"
+     ],
+     [
+      "node",
+      "purk"
+     ],
+     [
+      "purk",
+      "vent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ventricular depolarisation generates the **QRS complex**, normally measuring zero point zero six to zero point one zero seconds. Depolarisation sweeps from left to right across the interventricular septum, generating a small initial Q wave, followed by massive simultaneous endocardial-to-epicardial activation of the left and right ventricular free walls producing the tall R wave and terminating in the basal S wave.",
+   "say": "The QRS complex represents ventricular depolarisation lasting under 0.10 seconds, sweeping from the septum across ventricular walls to the base.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Narrow QRS (< 0.10 s)",
+     "points": [
+      "Synchronized ventricular activation via His-Purkinje system",
+      "Rapid Purkinje conduction velocity (4 m/s)",
+      "Narrow, sharp R wave vector in lateral leads",
+      "Normal biventricular ejection synchrony"
+     ]
+    },
+    "right": {
+     "title": "Wide QRS (> 0.12 s)",
+     "points": [
+      "Bundle branch block or ventricular ectopic focus",
+      "Slow cell-to-cell myocyte conduction (0.5 m/s)",
+      "Delayed dyssynchronous biventricular activation",
+      "Secondary repolarisation ST-T wave abnormalities"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Total ventricular electrical systole spanning from the start of the QRS to the end of the T wave is the **QT interval**. Because QT duration varies inversely with heart rate, it is corrected using the Bazett formula where QTc equals QT divided by the square root of the RR interval. QTc prolongation exceeding zero point four six seconds predisposes to torsades de pointes.",
+   "say": "The QT interval reflects total ventricular electrical systole, corrected for heart rate using Bazett formula, where values over 0.46 seconds risk torsades de pointes.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-drug-emergency-correction.webp",
+    "alt": "ECG intervals and QT prolongation leading to polymorphic arrhythmias.",
+    "caption": "QT interval measurement and repolarisation dynamics on surface electrocardiography. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

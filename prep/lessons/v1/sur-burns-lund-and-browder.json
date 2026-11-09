@@ -1,0 +1,252 @@
+{
+ "v": 1,
+ "module": "sur-burns",
+ "subject": "surgery",
+ "title": "Lund and Browder Chart, Parkland Resuscitation, and Burn Complications",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Accurate burn surface estimation across pediatric and adolescent populations requires the **Lund and Browder chart**. Because infants possess a head surface area proportionally much larger and lower extremities proportionally smaller than adults, applying the adult rule of nines produces catastrophic overestimation or underestimation. The chart adjusts percentage body surface area according to chronological age, serving as the gold standard pediatric assessment tool.",
+   "say": "The Lund and Browder chart adjusts body surface percentages for age, providing the most accurate burn area calculation in children where head and limb proportions differ dramatically from adults.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-burns-wound.webp",
+    "alt": "Pediatric body proportions and burn mapping chart.",
+    "caption": "Age-adjusted surface area proportions and escharotomy lines. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Recognising age-related changes in **paediatric burn surface area** prevents fatal resuscitation errors. At birth, the infant head represents nineteen percent of total body surface area, while each thigh represents five point five percent and each leg represents five percent. With skeletal maturation, the head percentage decreases by approximately one percent per year of life, while lower limb percentages expand reciprocally until adult proportions are attained at age ten.",
+   "say": "In infants, the head represents nearly twenty percent of total body surface area, while legs represent only ten percent each. Head percentage decreases by one percent per year until adult proportions are reached.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomic Region",
+     "Newborn (Age 0)",
+     "Age 1 Year",
+     "Age 5 Years",
+     "Adult (Age 15+)"
+    ],
+    "rows": [
+     [
+      "Head",
+      "19%",
+      "17%",
+      "13%",
+      "7% to 9%"
+     ],
+     [
+      "Neck",
+      "2%",
+      "2%",
+      "2%",
+      "2%"
+     ],
+     [
+      "Anterior Trunk",
+      "13%",
+      "13%",
+      "13%",
+      "13%"
+     ],
+     [
+      "Posterior Trunk",
+      "13%",
+      "13%",
+      "13%",
+      "13%"
+     ],
+     [
+      "One Thigh",
+      "5.5%",
+      "6.5%",
+      "8%",
+      "9.5%"
+     ],
+     [
+      "One Lower Leg",
+      "5%",
+      "5%",
+      "5.5%",
+      "7%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Initial fluid resuscitation in major burns relies on the **Parkland formula**, also known as the Baxter formula. The total volume of balanced crystalloid (Ringer's lactate) required in the first twenty-four hours equals four millilitres multiplied by patient body weight in kilograms multiplied by the percentage total body surface area of second- and third-degree burns, excluding superficial first-degree erythema.",
+   "say": "The Parkland formula calculates fluid needs as four millilitres of Ringer lactate per kilogram per percent burn surface area over the initial twenty-four hours, excluding first-degree burns.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/sur-parkland.svg",
+    "alt": "Parkland formula fluid resuscitation calculation and distribution diagram.",
+    "caption": "Parkland formula fluid administration timeline and calculation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Timing is critical when applying the **fluid resuscitation schedule** following major thermal trauma. Exactly half of the total calculated twenty-four-hour Parkland volume must be administered over the first eight hours measured from the exact moment of burn injury, not from hospital arrival. The remaining half of the total volume is infused at a steady rate over the subsequent sixteen hours.",
+   "say": "The calculated Parkland volume is split into two halves: the first half is infused over eight hours from the time of injury, and the remaining half over the subsequent sixteen hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "calc",
+      "label": "Calculate 24h total: 4 mL x weight (kg) x %TBSA burn"
+     },
+     {
+      "id": "half1",
+      "label": "Administer first 50% volume within 8h from time of burn"
+     },
+     {
+      "id": "half2",
+      "label": "Administer remaining 50% volume over next 16h"
+     },
+     {
+      "id": "titrate",
+      "label": "Titrate rate hourly based strictly on urine output"
+     }
+    ],
+    "edges": [
+     [
+      "calc",
+      "half1"
+     ],
+     [
+      "half1",
+      "half2"
+     ],
+     [
+      "half2",
+      "titrate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Titration of resuscitation fluids depends on continuous **urine output monitoring** through an indwelling urinary catheter. The target physiological endpoint is an hourly urine output of zero point five to one millilitre per kilogram per hour in adults, and one to one point five millilitres per kilogram per hour in children weighing under thirty kilograms, adjusting infusion rates up or down by twenty percent hourly.",
+   "say": "Urine output is the single most reliable clinical guide for burn fluid resuscitation. Target output is zero point five to one millilitre per kilogram per hour in adults.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient Population",
+     "Target Hourly Urine Output",
+     "Action if Output Below Target",
+     "Action if Output Above Target"
+    ],
+    "rows": [
+     [
+      "Adults",
+      "0.5 to 1.0 mL/kg/h",
+      "Increase fluid infusion by 20%",
+      "Decrease fluid infusion by 20%"
+     ],
+     [
+      "Children (<30 kg)",
+      "1.0 to 1.5 mL/kg/h",
+      "Increase fluid infusion by 20%",
+      "Decrease fluid infusion by 20%"
+     ],
+     [
+      "High-Voltage Electrical",
+      "1.5 to 2.0 mL/kg/h",
+      "Aggressive fluid plus sodium bicarbonate",
+      "Maintain clear urine without myoglobin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exposure to heat, smoke, or toxic pyrolysis products in closed-space fires produces **inhalation injury**. Upper airway thermal damage causes rapid supraglottic laryngeal oedema, while toxic smoke produces chemical tracheobronchitis, mucosal sloughing, and alveolar collapse. Physical signs including facial burns, singed nasal vibrissae, soot in the sputum, stridor, or hoarseness mandate immediate prophylactic endotracheal intubation before progressive oedema obliterates the airway.",
+   "say": "Inhalation injury from smoke or fire causes rapid laryngeal swelling and chemical tracheobronchitis. Facial burns, singed nasal hairs, and hoarseness demand immediate prophylactic endotracheal intubation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Upper Airway Thermal Injury",
+     "points": [
+      "Direct heat transfer to pharynx and larynx",
+      "Rapid supraglottic and vocal cord oedema",
+      "Presents with stridor, hoarseness, and dyspnoea",
+      "Requires immediate preemptive intubation"
+     ]
+    },
+    "right": {
+     "title": "Lower Airway Chemical Injury",
+     "points": [
+      "Inhalation of aldehydes, sulfur dioxide, cyanide",
+      "Ciliary paralysis, mucosal sloughing, and plugging",
+      "Presents with bronchospasm and carbonaceous sputum",
+      "Requires bronchodilators and lung-protective ventilation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Smoke inhalation victims frequently suffer concurrent **carbon monoxide poisoning**, an invisible toxin with two hundred times higher affinity for haemoglobin than oxygen. Carbon monoxide displaces oxygen to form carboxyhaemoglobin and shifts the oxyhaemoglobin dissociation curve leftward, severely impairing peripheral oxygen unloading. Standard pulse oximetry falsely reads carboxyhaemoglobin as oxyhaemoglobin, mandating arterial blood gas co-oximetry and immediate administration of one hundred percent normobaric oxygen.",
+   "say": "Carbon monoxide binds haemoglobin with two hundred times greater affinity than oxygen, producing severe cellular hypoxia. Standard pulse oximeters are falsely normal, requiring arterial co-oximetry and high-flow oxygen.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inhale",
+      "label": "Inhalation of combustion smoke containing carbon monoxide"
+     },
+     {
+      "id": "bind",
+      "label": "CO binds haemoglobin with 200x affinity, forming carboxyhaemoglobin"
+     },
+     {
+      "id": "shift",
+      "label": "Leftward shift of dissociation curve halts tissue oxygen delivery"
+     },
+     {
+      "id": "treat",
+      "label": "100% normobaric or hyperbaric oxygen displaces carbon monoxide"
+     }
+    ],
+    "edges": [
+     [
+      "inhale",
+      "bind"
+     ],
+     [
+      "bind",
+      "shift"
+     ],
+     [
+      "shift",
+      "treat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Circumferential full-thickness burns of the torso or extremities require an **emergency escharotomy** to relieve life-threatening tissue compression. As resuscitation fluids accumulate, inelastic rigid eschar acts like a tourniquet. In circumferential chest burns, escharotomy incisions along anterior axillary lines connected across the epigastrium restore thoracic compliance and ventilation, while longitudinal mid-axial incisions on limbs restore distal arterial perfusion.",
+   "say": "Emergency escharotomy relieves dangerous compartment pressures caused by rigid circumferential burn eschar. Longitudinal incisions through the eschar restore limb perfusion and thoracic respiratory excursions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Circumferential Chest Escharotomy",
+     "points": [
+      "Indicated for severe ventilatory restriction",
+      "Bilateral anterior axillary line incisions",
+      "Transverse incision uniting them across lower costal margin",
+      "Immediately restores chest wall compliance"
+     ]
+    },
+    "right": {
+     "title": "Circumferential Limb Escharotomy",
+     "points": [
+      "Indicated for loss of distal pulses or cyanosis",
+      "Longitudinal mid-medial or mid-lateral incisions",
+      "Crosses flexion creases obliquely to prevent contractures",
+      "Incised strictly through insensate eschar into viable fat"
+     ]
+    }
+   }
+  }
+ ]
+}

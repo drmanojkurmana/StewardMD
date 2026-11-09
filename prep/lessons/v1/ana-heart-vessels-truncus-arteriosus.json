@@ -1,0 +1,254 @@
+{
+ "v": 1,
+ "module": "ana-heart-vessels",
+ "subject": "anatomy",
+ "title": "Aortic Arches and Embryonic Venous Systems",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "During the fourth and fifth weeks, six pairs of aortic arch arteries sprout from the aortic sac, coursing through the pharyngeal arches to connect with bilateral dorsal aortae. The **first aortic arch** largely regresses, leaving only a small portion that forms the maxillary artery, which supplies the deep facial structures and maxillary teeth.",
+   "say": "In weeks four and five, six pairs of aortic arch arteries connect the aortic sac to the dorsal aortae through the pharyngeal arches. The first arch artery regresses, contributing only to the maxillary artery supplying the jaws.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-vessel-walls.svg",
+    "alt": "Aortic arches and vascular wall architecture",
+    "caption": "Embryonic aortic arch distribution and vessel development. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The second aortic arch likewise atrophies, leaving remnants that form the embryonic stapedial artery and the hyoid artery. The **third aortic arch** develops into the common carotid artery and the proximal segment of the internal carotid artery, while the distal internal carotid derives from the cranial continuation of the dorsal aorta.",
+   "say": "The second aortic arch atrophies, contributing only the stapedial and hyoid arteries. The third aortic arch forms the common carotid artery and the base of the internal carotid, while the cranial dorsal aorta completes the cerebral vessel.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Aortic Arch",
+     "Adult Arterial Derivative",
+     "Supplied Territory",
+     "Associated Cranial Nerve"
+    ],
+    "rows": [
+     [
+      "1st Arch",
+      "Maxillary artery branch",
+      "Deep face, upper jaw",
+      "Mandibular nerve (CN V3)"
+     ],
+     [
+      "2nd Arch",
+      "Stapedial and hyoid arteries",
+      "Embryonic stapes, middle ear",
+      "Facial nerve (CN VII)"
+     ],
+     [
+      "3rd Arch",
+      "Common carotid, proximal internal carotid",
+      "Head, brain, ocular tissues",
+      "Glossopharyngeal nerve (CN IX)"
+     ],
+     [
+      "4th Left",
+      "Arch of the definitive aorta",
+      "Systemic aortic outflow",
+      "Vagus superior laryngeal"
+     ],
+     [
+      "4th Right",
+      "Proximal right subclavian artery",
+      "Right upper extremity",
+      "Vagus superior laryngeal"
+     ],
+     [
+      "6th Arch",
+      "Pulmonary arteries, ductus arteriosus",
+      "Lungs, fetal bypass shunt",
+      "Recurrent laryngeal nerve"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The fourth aortic arch exhibits marked asymmetrical evolution between left and right sides. On the left, the **fourth aortic arch** forms the segment of the definitive aortic arch between the left common carotid and left subclavian arteries. On the right, it forms the proximal portion of the right subclavian artery.",
+   "say": "The fourth arch develops asymmetrically: on the left, it builds the central span of the definitive aortic arch between the left common carotid and left subclavian arteries. On the right, it forms the proximal right subclavian artery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Left Fourth Arch",
+     "points": [
+      "Forms definitive arch of aorta",
+      "Spans left carotid to left subclavian",
+      "Maintains leftward systemic dominance",
+      "Recurrent laryngeal hooks around ligamentum"
+     ]
+    },
+    "right": {
+     "title": "Right Fourth Arch",
+     "points": [
+      "Forms proximal right subclavian artery",
+      "Distal segment derives from right 7th intersegmental",
+      "Lacks pulmonary ductus counterpart",
+      "Recurrent laryngeal hooks around right subclavian"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The fifth aortic arch is entirely transient, either failing to form or degenerating rapidly without leaving adult derivatives. The **sixth aortic arch**, or pulmonary arch, gives off branches to the developing lung buds. On the left side, its distal portion persists throughout fetal life as the muscular ductus arteriosus, shunting deoxygenated blood away from collapsed fetal lungs.",
+   "say": "The fifth arch regresses completely. The sixth arch sends branches to the lung buds. On the left, its distal portion forms the ductus arteriosus, shunting pulmonary blood away from nonventilated fetal lungs directly into the descending aorta.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-fetal-remnants.svg",
+    "alt": "Aortic arch derivatives, ductus arteriosus, and ligamentum arteriosum",
+    "caption": "Sixth aortic arch pulmonary branches and fetal vascular shunts. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The embryonic venous drainage is mediated by three paired venous systems entering the sinus venosus. The **vitelline veins** drain the yolk sac, traversing the septum transversum. Hepatic cords growing into the septum break these veins into hepatic sinusoids. The vitelline network gives origin to the portal vein, superior mesenteric vein, and the terminal segment of the inferior vena cava.",
+   "say": "Three paired venous systems empty into the sinus venosus. Vitelline veins drain the yolk sac and pass through the liver, forming hepatic sinusoids. They give rise to the portal vein, superior mesenteric vein, and the terminal inferior vena cava.",
+   "vis": {
+    "kind": "flow",
+    "title": "Vitelline Venous Transformation",
+    "nodes": [
+     {
+      "id": "vit",
+      "label": "Paired Vitelline Veins"
+     },
+     {
+      "id": "sin",
+      "label": "Hepatic Sinusoidal Plexus"
+     },
+     {
+      "id": "port",
+      "label": "Portal and Superior Mesenteric Veins"
+     },
+     {
+      "id": "ivc",
+      "label": "Post-Hepatic Inferior Vena Cava"
+     }
+    ],
+    "edges": [
+     [
+      "vit",
+      "sin"
+     ],
+     [
+      "sin",
+      "port"
+     ],
+     [
+      "sin",
+      "ivc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **umbilical veins** carry oxygenated and nutrient-rich blood from the chorionic villi of the placenta to the sinus venosus. The right umbilical vein obliterates early in week six. The left umbilical vein persists throughout gestation, establishing a bypass channel called the ductus venosus through the liver to channel oxygenated blood directly into the inferior vena cava.",
+   "say": "The umbilical veins carry oxygen-rich blood from the placenta to the heart. The right umbilical vein regresses early, leaving the left umbilical vein as the sole conduit. Inside the liver, it forms the ductus venosus to direct blood into the inferior vena cava.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right Umbilical Vein",
+     "points": [
+      "Degenerates completely during week six",
+      "Leaves no functional fetal vascular channel",
+      "Remnants absorbed into hepatic cords",
+      "Absent in normal mid-trimester fetus"
+     ]
+    },
+    "right": {
+     "title": "Left Umbilical Vein",
+     "points": [
+      "Carries 80% saturated oxygenated blood",
+      "Forms intrahepatic ductus venosus bypass",
+      "Obliterates at birth into ligamentum teres",
+      "Extends from umbilicus to left portal vein"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Somatic embryonic drainage depends upon the **cardinal veins**, comprising anterior cardinal veins draining the head and posterior cardinal veins draining the torso. These unite to form short common cardinal veins (ducts of Cuvier) entering the sinus horn. An anastomosis between anterior cardinals develops into the left brachiocephalic vein, while the right anterior cardinal forms the superior vena cava.",
+   "say": "Somatic drainage relies on paired cardinal veins: anterior cardinals drain the head and posterior cardinals drain the torso. An oblique anastomosis between anterior cardinals forms the left brachiocephalic vein, while the right anterior cardinal becomes the superior vena cava.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Embryonic Cardinal Segment",
+     "Transformation Mechanism",
+     "Definitive Adult Derivative",
+     "Clinical Abnormality"
+    ],
+    "rows": [
+     [
+      "Right Anterior Cardinal",
+      "Preserves caudal channel",
+      "Superior vena cava (upper half)",
+      "Persistent left SVC"
+     ],
+     [
+      "Right Common Cardinal",
+      "Incorporates into systemic inflow",
+      "Superior vena cava (cardiac end)",
+      "Double superior vena cava"
+     ],
+     [
+      "Subcardinal Network",
+      "Inter-subcardinal anastomosis",
+      "Renal segment of inferior vena cava",
+      "Left-sided inferior vena cava"
+     ],
+     [
+      "Supracardinal Network",
+      "Anastomoses along posterior wall",
+      "Azygos and hemiazygos veins",
+      "Interrupted IVC with azygos continuation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complex anastomoses between subcardinal and supracardinal veins assemble the definitive **inferior vena cava**, built from four distinct developmental segments: the hepatic segment (vitelline), prerenal segment (subcardinal), renal segment (subcardinal-supracardinal anastomosis), and postrenal segment (supracardinal). Failure of these venous anastomoses produces duplicated or left-sided inferior vena cava.",
+   "say": "The inferior vena cava forms from four developmental pieces: hepatic, prerenal, renal, and postrenal segments derived from vitelline, subcardinal, and supracardinal veins. Incomplete fusion leads to duplicated or left-sided inferior vena cava anomalies.",
+   "vis": {
+    "kind": "flow",
+    "title": "Inferior Vena Cava Assembly",
+    "nodes": [
+     {
+      "id": "hep",
+      "label": "Hepatic: Vitelline Vein"
+     },
+     {
+      "id": "pre",
+      "label": "Prerenal: Right Subcardinal"
+     },
+     {
+      "id": "ren",
+      "label": "Renal: Sub-Supracardinal Anastomosis"
+     },
+     {
+      "id": "post",
+      "label": "Postrenal: Right Supracardinal"
+     }
+    ],
+    "edges": [
+     [
+      "hep",
+      "pre"
+     ],
+     [
+      "pre",
+      "ren"
+     ],
+     [
+      "ren",
+      "post"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "module": "ana-pharyngeal",
+ "subject": "anatomy",
+ "title": "First Arch Malformations and Treacher Collins Syndrome",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Malformations of the head and neck frequently reflect abnormal proliferation, migration, or survival of cranial neural crest cells supplying the branchial arches. The prototype first pharyngeal arch malformation is **Treacher Collins syndrome**, or mandibulofacial dysostosis, transmitted in an autosomal dominant pattern with variable expressivity due to mutations in the TCOF1 gene.",
+   "say": "Congenital head and neck anomalies often stem from failed neural crest migration into branchial arches. The classical first arch disorder is Treacher Collins syndrome, or mandibulofacial dysostosis, an autosomal dominant condition linked to TCOF1 mutations.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-arch-derivatives.svg",
+    "alt": "First and second pharyngeal arch derivatives and skeletal elements",
+    "caption": "First and second pharyngeal arch skeletal components involved in dysostosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Treacher Collins syndrome results from extensive neural crest cell apoptosis during early organogenesis, crippling development of both the maxillary and mandibular prominences of the first arch and the second arch. Patients exhibit downward-slanting palpebral fissures, coloboma of the lower eyelids, malar hypoplasia from absent or underdeveloped **zygomatic bones**, and mandibular micrognathia.",
+   "say": "Treacher Collins syndrome arises from neural crest apoptosis that cripples first and second arch derivatives. Clinical signs include antimongoloid palpebral slanting, lower eyelid colobomas, malar flattening from hypoplastic zygomatic arches, and micrognathia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Skeletal Malformations",
+     "points": [
+      "Bilateral hypoplasia of zygomatic bones",
+      "Severe mandibular micrognathia and retrognathia",
+      "Hypoplastic condyles and coronoid processes",
+      "High-arched or cleft palate in 30%"
+     ]
+    },
+    "right": {
+     "title": "Soft Tissue and Sensory Defects",
+     "points": [
+      "Downward-slanting antimongoloid palpebral fissures",
+      "Coloboma of the lateral third of lower eyelid",
+      "Microtia, atresia of external auditory canal",
+      "Conductive hearing loss from ossicular hypoplasia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Auditory defects in Treacher Collins syndrome stem from malformation of the first cleft, first arch, and second arch elements. The external ear displays microtia or anotia with atresia of the external auditory canal. Malformed malleus, incus, and stapes cause severe **conductive hearing loss**, although inner ear sensorineural hearing is spared because the otic vesicle develops independently.",
+   "say": "Auditory impairment in Treacher Collins stems from flawed first cleft, first arch, and second arch development. External microtia and canal atresia combine with deformed middle ear ossicles to cause conductive deafness, while inner ear cochlear function is preserved.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathogenesis of Treacher Collins",
+    "nodes": [
+     {
+      "id": "tcof",
+      "label": "TCOF1 / Treacle Protein Mutation"
+     },
+     {
+      "id": "apop",
+      "label": "Cranial Neural Crest Apoptosis"
+     },
+     {
+      "id": "arch",
+      "label": "First and Second Arch Skeletal Failure"
+     },
+     {
+      "id": "pheno",
+      "label": "Mandibulofacial Dysostosis Phenotype"
+     }
+    ],
+    "edges": [
+     [
+      "tcof",
+      "apop"
+     ],
+     [
+      "apop",
+      "arch"
+     ],
+     [
+      "arch",
+      "pheno"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Another classic first arch developmental spectrum is the **Pierre Robin sequence**, initiated by primary micrognathia. Severe mandibular hypoplasia prevents the developing tongue from descending into the oral cavity. The abnormally positioned, retroplaced tongue (glossoptosis) physically prevents horizontal palatal shelf fusion, producing a wide U-shaped cleft palate.",
+   "say": "Another major first arch condition is the Pierre Robin sequence, triggered by primary micrognathia. A tiny mandible prevents the tongue from descending, causing glossoptosis that blocks palatal shelves from fusing, resulting in a U-shaped cleft palate.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pierre Robin Developmental Cascade",
+    "nodes": [
+     {
+      "id": "micro",
+      "label": "Primary Mandibular Micrognathia"
+     },
+     {
+      "id": "glosso",
+      "label": "Posterior Glossoptosis of Tongue"
+     },
+     {
+      "id": "shelf",
+      "label": "Blocked Palatal Shelf Horizontal Fusion"
+     },
+     {
+      "id": "air",
+      "label": "U-Shaped Cleft Palate and Airway Stridor"
+     }
+    ],
+    "edges": [
+     [
+      "micro",
+      "glosso"
+     ],
+     [
+      "glosso",
+      "shelf"
+     ],
+     [
+      "shelf",
+      "air"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast to first arch dysostoses, **DiGeorge syndrome** is a neurocristopathy affecting the third and fourth pharyngeal pouches, caused by a 22q11.2 microdeletion. Disruption of neural crest signaling cripples development of the thymus and parathyroid glands, presenting with severe T-cell immunodeficiency, neonatal hypocalcemic tetany, and conotruncal cardiac defects.",
+   "say": "Unlike first arch syndromes, DiGeorge syndrome stems from defective third and fourth pharyngeal pouch development caused by a 22q11.2 microdeletion. Crest migration failure impairs the thymus and parathyroids, causing T-cell immunodeficiency, hypocalcemia, and conotruncal heart defects.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-pouch-derivatives.svg",
+    "alt": "Agenesis of third and fourth pharyngeal pouches in DiGeorge syndrome",
+    "caption": "Third and fourth pharyngeal pouch agenesis in DiGeorge neurocristopathy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The clinical presentation of DiGeorge syndrome is recalled by the mnemonic CATCH-22: Cardiac anomalies (tetralogy of Fallot, interrupted aortic arch), Abnormal facies, **Thymic hypoplasia** with T-cell deficiency, Cleft palate, and Hypocalcemia secondary to parathyroid aplasia. Cardiac outflow defects stem directly from failure of neural crest cells to septate the truncus arteriosus.",
+   "say": "DiGeorge syndrome features the classic CATCH-22 pentad: Cardiac defects, Abnormal facies, Thymic aplasia, Cleft palate, and Hypocalcemia. Aorticopulmonary septal failure causes conotruncal cardiac malformations like tetralogy of Fallot.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CATCH-22 Feature",
+     "Underlying Embryonic Defect",
+     "Clinical Presentation",
+     "Diagnostic Evaluation"
+    ],
+    "rows": [
+     [
+      "Cardiac Defect",
+      "Neural crest outflow tract failure",
+      "Tetralogy of Fallot, truncus arteriosus",
+      "Echocardiography"
+     ],
+     [
+      "Abnormal Facies",
+      "First/second arch neural crest defect",
+      "Low-set ears, micrognathia, hypertelorism",
+      "Clinical dysmorphology"
+     ],
+     [
+      "Thymic Aplasia",
+      "Third pouch ventral wing agenesis",
+      "Absent T cells, recurrent fungal/viral infection",
+      "Flow cytometry, chest radiography"
+     ],
+     [
+      "Cleft Palate",
+      "Pharyngeal arch palatal defect",
+      "Velopharyngeal insufficiency, bifid uvula",
+      "Direct oral examination"
+     ],
+     [
+      "Hypocalcemia",
+      "Third/fourth pouch dorsal agenesis",
+      "Neonatal seizures, carpopedal tetany",
+      "Serum calcium, parathyroid hormone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A unilateral first and second arch anomaly is **hemifacial microsomia**, or oculoauriculovertebral spectrum (Goldenhar syndrome). Characterized by asymmetrical hypoplasia of the mandible, maxilla, and ear on one side, it is accompanied by preauricular skin tags, epibulbar dermoids on the eye, and vertebral segmentation defects like hemivertebrae.",
+   "say": "An asymmetrical first and second arch defect is hemifacial microsomia, seen in Goldenhar syndrome. Marked by unilateral facial bone and ear hypoplasia, it features preauricular skin tags, epibulbar dermoids, and cervical hemivertebrae.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Treacher Collins Syndrome",
+     "points": [
+      "Bilateral and symmetrical facial involvement",
+      "Autosomal dominant TCOF1 mutation",
+      "Spares vertebral column and internal organs",
+      "Prominent lower eyelid colobomas"
+     ]
+    },
+    "right": {
+     "title": "Goldenhar Syndrome",
+     "points": [
+      "Unilateral or markedly asymmetrical involvement",
+      "Typically sporadic vascular etiology",
+      "Associated with vertebral hemivertebrae",
+      "Features epibulbar conjunctival dermoids"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Surgical management of first arch anomalies requires multidisciplinary staging: neonatal mandibular distraction osteogenesis relieves tongue-base airway obstruction in Pierre Robin sequence, while custom rib grafts or distraction reconstruct hypoplastic zygomatic arches and mandibles in Treacher Collins. In DiGeorge syndrome, **thymic transplantation** or HLA-matched bone marrow rescue immune competence.",
+   "say": "Management of first arch disorders demands staged intervention: neonatal mandibular distraction relieves airway obstruction in Pierre Robin, while bone grafts reconstruct the facial skeleton in Treacher Collins. In complete DiGeorge syndrome, thymic transplantation restores immune function.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Primary Genetic Basis",
+     "Primary Embryonic Defect",
+     "Key Life-Threatening Threat"
+    ],
+    "rows": [
+     [
+      "Treacher Collins",
+      "Autosomal dominant TCOF1 mutation",
+      "1st and 2nd arch neural crest apoptosis",
+      "Upper airway obstruction from micrognathia"
+     ],
+     [
+      "Pierre Robin",
+      "Heterogeneous / sequence",
+      "Micrognathia causing glossoptosis",
+      "Neonatal obstructive sleep apnea, hypoxia"
+     ],
+     [
+      "DiGeorge Syndrome",
+      "22q11.2 chromosomal microdeletion",
+      "3rd and 4th pharyngeal pouch agenesis",
+      "Severe neonatal hypocalcemia and sepsis"
+     ],
+     [
+      "Goldenhar Syndrome",
+      "Sporadic (stapedial artery hematoma)",
+      "Unilateral 1st and 2nd arch ischemia",
+      "Airway asymmetry and spinal instability"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

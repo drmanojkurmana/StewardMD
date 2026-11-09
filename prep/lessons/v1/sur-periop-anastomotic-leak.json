@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "module": "sur-periop",
+ "subject": "surgery",
+ "title": "Anastomotic Leak, Postoperative Ileus, and Surgical Diathermy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Breakdown of an intestinal surgical union constitutes an **anastomotic leak**, representing one of the most dreaded complications of gastrointestinal surgery. Leaks characteristically declare themselves between postoperative days five and seven, presenting with persistent resting tachycardia, low-grade pyrexia, localized or spreading peritonitis, and purulent or feculent material draining from surgical drains or the midline wound.",
+   "say": "Anastomotic leak is a critical surgical complication declaring classically between postoperative days five and seven. Unexplained persistent tachycardia is often the earliest warning sign before overt peritonitis develops.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/advanced-trauma-life-support-primary-survey-and-damage-control-fig1.webp",
+    "alt": "Operative evaluation and control of intestinal anastomotic integrity.",
+    "caption": "Laparotomy interventions for bowel compromise and peritonitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Secure healing demands adherence to fundamental **anastomotic healing factors**, which dictate tissue viability and collagen maturation. Surgical edges must possess pristine arterial blood supply, be joined entirely without tension, exhibit accurate mucosal apposition, and be constructed without distal luminal obstruction. Systemic factors including profound malnutrition, active sepsis, corticosteroid use, and preoperative radiation drastically elevate breakdown risks.",
+   "say": "Successful intestinal anastomoses require good blood flow, complete absence of tension, accurate edge apposition, and no distal obstruction. Malnutrition, systemic steroids, and active infection heighten leak rates.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Requirement",
+     "Technical Principle",
+     "Consequence of Failure"
+    ],
+    "rows": [
+     [
+      "Vascular Perfusion",
+      "Pulsatile bleeding at cut bowel margins",
+      "Ischaemic necrosis of anastomotic edges"
+     ],
+     [
+      "Absence of Tension",
+      "Extensive retroperitoneal and mesentery mobilization",
+      "Mechanical distraction and suture pullout"
+     ],
+     [
+      "Accurate Apposition",
+      "Careful submucosal incorporation",
+      "Mucosal inversion or eversion leak"
+     ],
+     [
+      "No Distal Obstruction",
+      "Confirmation of distal bowel patency",
+      "Elevated intraluminal pressure blowout"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In high-risk colorectal resections, constructing a **defunctioning stoma** protects against devastating pelvic sepsis from low colorectal anastomoses. A temporary loop ileostomy diverts the fecal stream away from the freshly stapled or hand-sewn pelvic junction. While diverting stomas do not prevent microscopic anastomotic dehiscence, they significantly attenuate clinical sepsis, systemic peritonitis, and urgent re-laparotomy rates.",
+   "say": "A defunctioning loop ileostomy diverts fecal contents away from low colorectal anastomoses. It does not eliminate leaks, but it prevents catastrophic fecal peritonitis and reduces emergency reoperations.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-loop-ileostomy.webp",
+    "alt": "Surgical creation of a defunctioning loop ileostomy in right iliac fossa.",
+    "caption": "Loop ileostomy creation diverting the fecal stream from distal repair. [Credit: Salicyna]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Transient cessation of effective coordinated bowel motility is termed **postoperative ileus**, expected following major abdominal manipulation. Pathophysiology involves inhibitory sympathetic autonomic reflexes, inflammatory cytokine release within the muscularis externa, and the use of opioid analgesics. Physiological ileus typically resolves within twenty-four hours in the small intestine, twenty-four to forty-eight hours in the stomach, and seventy-two hours in the colon.",
+   "say": "Postoperative ileus is a temporary paralysis of intestinal motility following abdominal surgery. Small bowel activity recovers within twenty-four hours, while colonic motility takes up to seventy-two hours.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Paralytic Ileus",
+     "points": [
+      "Diffuse painless abdominal distension",
+      "Absent or sparse, hypoactive bowel sounds",
+      "Uniform gas dilation throughout small and large bowel",
+      "Absence of transition point on CT scan"
+     ]
+    },
+    "right": {
+     "title": "Mechanical Obstruction",
+     "points": [
+      "Colicky, severe, cramping abdominal pain",
+      "High-pitched, tinkling, hyperactive bowel sounds",
+      "Dilated proximal loops with collapsed distal bowel",
+      "Definite transition point visible on CT scan"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Management of **paralytic ileus** relies on supportive care and the correction of underlying reversible factors. Intravenous crystalloid fluids maintain circulating volume while serum electrolytes, particularly potassium and magnesium, are aggressively corrected. Nasogastric decompression relieves distressing gastric distension and nausea, while systemic opioids are replaced with multimodal non-opioid analgesics and prokinetic chewing gum is encouraged.",
+   "say": "Managing paralytic ileus centres on electrolyte correction, nasogastric decompression for nausea, and avoiding opioid analgesia. Chewing gum stimulates gastrointestinal reflexes and accelerates recovery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fluid",
+      "label": "Correct dehydration and electrolyte deficits (K+ and Mg2+)"
+     },
+     {
+      "id": "ng",
+      "label": "Place nasogastric tube for persistent bilious emesis"
+     },
+     {
+      "id": "opioid",
+      "label": "Discontinue or minimize systemic opioid analgesics"
+     },
+     {
+      "id": "chew",
+      "label": "Encourage sham feeding with chewing gum and early walking"
+     }
+    ],
+    "edges": [
+     [
+      "fluid",
+      "ng"
+     ],
+     [
+      "ng",
+      "opioid"
+     ],
+     [
+      "opioid",
+      "chew"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical cutting and coagulation commonly utilise **monopolar diathermy**, where high-frequency alternating electrical current flows from an active handpiece probe. The current concentrates at the narrow instrument tip to cut or desiccate tissue, passes through the patient's body, and disperses safely into a broad, well-vascularised patient return electrode pad, completing the electrical circuit back to the electrosurgical generator.",
+   "say": "Monopolar electrosurgery directs electrical current from an active probe through the patient to a return ground plate. The high current density at the tip cuts or coagulates target tissues.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Monopolar Diathermy",
+     "Bipolar Diathermy"
+    ],
+    "rows": [
+     [
+      "Circuit Pathway",
+      "Travels through entire patient body to return pad",
+      "Passes strictly between two forceps tines"
+     ],
+     [
+      "Return Electrode Pad",
+      "Mandatory broad grounding plate on skin",
+      "None required"
+     ],
+     [
+      "Stray Energy Risk",
+      "High risk (capacitive coupling, pad burns)",
+      "Negligible stray energy risk"
+     ],
+     [
+      "Ideal Application",
+      "Large open dissection and broad coagulation",
+      "Delicate microvascular, neurological, and laparoscopic work"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For delicate procedures near vital nerves or vessels, **bipolar diathermy** offers superior electrical safety and precision. The electrical current travels exclusively from one tine of a specialised forceps instrument, through the interposed target tissue, and exits through the opposing tine. Because current does not traverse the patient body, bipolar systems eliminate the risk of grounding plate burns and cardiac pacemaker interference.",
+   "say": "Bipolar diathermy confines electrical current between the two tines of a forceps instrument. Because current does not travel through the body, it eliminates grounding plate burns and pacemaker interference.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Monopolar Mode Safety",
+     "points": [
+      "Requires completely flush grounding pad placement",
+      "Avoid placing pad over bony prominences or metal",
+      "Higher risk of capacitive coupling in laparoscopy",
+      "Can interfere with implanted cardiac pacemakers"
+     ]
+    },
+    "right": {
+     "title": "Bipolar Mode Safety",
+     "points": [
+      "No dispersive return pad required on patient",
+      "Safe for patients with cardiac pacemakers",
+      "Minimal lateral thermal spread to adjacent nerves",
+      "Superior haemostasis in wet surgical fields"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Severe electrosurgical hazards include **diathermy burns**, which occur through alternative ground pathways, insulation failures, or capacitive coupling during laparoscopy. Capacitive coupling happens when electrical current from an active electrode induces a stray charge in a nearby metal cannula without direct contact. If this stray energy discharges into adjacent bowel or blood vessels outside the surgeon's view, occult intestinal perforation results.",
+   "say": "Diathermy burns can result from insulation failure or capacitive coupling during laparoscopy. Stray electrical currents can silently burn adjacent bowel outside the camera field, causing delayed peritonitis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "active",
+      "label": "Current passing through insulated laparoscopic electrode"
+     },
+     {
+      "id": "capac",
+      "label": "Capacitive induction across cannula or insulation defect"
+     },
+     {
+      "id": "stray",
+      "label": "Stray electrical charge discharges into adjacent bowel wall"
+     },
+     {
+      "id": "perf",
+      "label": "Delayed full-thickness thermal necrosis and perforation"
+     }
+    ],
+    "edges": [
+     [
+      "active",
+      "capac"
+     ],
+     [
+      "capac",
+      "stray"
+     ],
+     [
+      "stray",
+      "perf"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical adverse outcomes are universally classified using the **Clavien-Dindo classification**, which categorises postoperative complications according to the treatment required. Grade one comprises minor deviations treated with antiemetics or analgesics; grade two requires pharmacological treatments like antibiotics or transfusions; grade three requires surgical or radiological re-intervention; grade four indicates life-threatening organ dysfunction needing intensive care; and grade five denotes patient mortality.",
+   "say": "The Clavien-Dindo classification grades postoperative complications based on the therapy used to treat them. It ranges from grade one minor deviations to grade five patient death.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clavien-Dindo Grade",
+     "Defining Management Requirement",
+     "Clinical Examples"
+    ],
+    "rows": [
+     [
+      "Grade I",
+      "Minor alteration, bed rest, antiemetics, electrolytes",
+      "Wound opened at bedside for seroma"
+     ],
+     [
+      "Grade II",
+      "Pharmacological treatments, antibiotics, blood products",
+      "Surgical site infection treated with antibiotics"
+     ],
+     [
+      "Grade IIIa",
+      "Intervention not requiring general anaesthesia",
+      "Percutaneous abscess drainage under local"
+     ],
+     [
+      "Grade IIIb",
+      "Intervention requiring general anaesthesia",
+      "Re-laparotomy for anastomotic dehiscence"
+     ],
+     [
+      "Grade IV",
+      "Life-threatening complication requiring ICU organ support",
+      "Septic shock with inotropes, single or multi-organ"
+     ],
+     [
+      "Grade V",
+      "Death of the patient",
+      "Postoperative mortality"
+     ]
+    ]
+   }
+  }
+ ]
+}
