@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "med-overdose",
+ "subject": "medicine",
+ "title": "Toxicology: Toxidromes, Paracetamol Overdose, and Antidotes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The most common pharmaceutical overdose leading to acute liver failure in clinical practice is **paracetamol overdose** (acetaminophen). At therapeutic doses, ninety percent of paracetamol is conjugated via hepatic glucuronidation and sulfation. In overdose, these saturation pathways are overwhelmed, shunting drug metabolism through cytochrome P450 2E1 to produce the toxic electrophile N-acetyl-p-benzoquinone imine (NAPQI).",
+   "say": "The most common pharmaceutical overdose leading to acute liver failure is paracetamol overdose. In overdose, normal conjugation pathways are overwhelmed, shunting metabolism through cytochrome P450 2E1 to generate the highly reactive toxic metabolite NAPQI.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-drug-paracetamol.webp",
+    "alt": "Hepatic metabolism, toxic NAPQI pathway, and N-acetylcysteine antidote mechanism.",
+    "caption": "CYP2E1 conversion to NAPQI, glutathione depletion, and centrilobular hepatic necrosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When hepatic glutathione stores are depleted by over seventy percent, free unbound NAPQI covalently binds cysteinyl proteins on hepatocytes, causing mitochondrial membrane permeability transition, ATP depletion, and acute centrilobular hepatic necrosis. Assessment of hepatotoxicity risk following acute single ingestions relies on plotting four-hour post-ingestion serum paracetamol concentrations onto the **Rumack-Matthew nomogram**.",
+   "say": "When hepatic glutathione stores are depleted, free NAPQI binds hepatocyte proteins, causing acute centrilobular hepatic necrosis. Assessment of hepatotoxicity risk relies on plotting four-hour serum paracetamol levels onto the Rumack-Matthew nomogram.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "od",
+      "label": "Acute Paracetamol Overdose (> 150 mg/kg)"
+     },
+     {
+      "id": "dep",
+      "label": "Glutathione Stores Depleted by > 70%"
+     },
+     {
+      "id": "nac",
+      "label": "IV N-Acetylcysteine Replenishes Glutathione Buffer"
+     }
+    ],
+    "edges": [
+     [
+      "od",
+      "dep"
+     ],
+     [
+      "dep",
+      "nac"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive antidote of choice for paracetamol toxicity is **N-acetylcysteine** (NAC). Administered intravenously or orally, NAC replenishes hepatic intracellular glutathione stores, acts directly as a glutathione surrogate to conjugate free NAPQI, and provides antioxidant cytoprotection, completely preventing fatal hepatic necrosis when administered within eight hours of ingestion.",
+   "say": "The definitive antidote of choice for paracetamol toxicity is N-acetylcysteine. Administered intravenously, it replenishes hepatic glutathione stores and conjugates free NAPQI, preventing fatal hepatic necrosis when started within eight hours of ingestion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Poison / Toxin",
+     "Classic Toxidrome Features",
+     "Specific Antidote Pharmacotherapy"
+    ],
+    "rows": [
+     [
+      "Paracetamol (Acetaminophen)",
+      "Delayed RUQ pain, jaundice, encephalopathy, coagulopathy",
+      "IV N-Acetylcysteine (21-hour infusion protocol)"
+     ],
+     [
+      "Opioids (Morphine, Heroin)",
+      "Miosis, respiratory depression, coma, decreased bowel sounds",
+      "IV / Intranasal Naloxone (titrated to breathing)"
+     ],
+     [
+      "Benzodiazepines",
+      "CNS depression, normal vitals, dysarthria, ataxia",
+      "IV Flumazenil (caution: precipitating seizures)"
+     ],
+     [
+      "Digoxin",
+      "Yellow-green halos (xanthopsia), heart block, ventricular arrhythmia",
+      "Digoxin-specific Fab antibody fragments (DigiFab)"
+     ],
+     [
+      "Beta-Blockers",
+      "Bradycardia, hypotension, cardiogenic shock, hypoglycemia",
+      "IV High-dose Glucagon + High-dose Insulin Euglycemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tricyclic antidepressant (TCA) toxicity causes fatal cardiotoxicity via blockade of cardiac myocardial fast sodium channels, prolonging QRS duration beyond one-hundred milliseconds and predisposing to ventricular tachycardia. The mandatory first-line antidote is intravenous **sodium bicarbonate** (1 to 2 mEq/kg boluses), which provides an alkaline extracellular pH (7.45 to 7.55) to displace TCA from sodium channels and increases sodium concentration.",
+   "say": "Tricyclic antidepressant toxicity causes fatal cardiotoxicity via myocardial sodium channel blockade, widening the QRS complex beyond one hundred milliseconds. The mandatory antidote is intravenous sodium bicarbonate, which alkalinizes plasma to unbind the drug from sodium channels.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-drug-poisoning-antidotes.webp",
+    "alt": "Specific antidotes for common pharmaceutical poisonings and overdose emergencies.",
+    "caption": "Receptor targets, mechanisms, and specific antidote pharmacotherapies in poisoning. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Acute poisoning with acetylsalicylic acid (**salicylate poisoning**) uncouples mitochondrial oxidative phosphorylation and directly stimulates the medullary respiratory center. This generates the classic mixed acid-base disorder: an early primary respiratory alkalosis paired with a simultaneous severe primary high anion gap metabolic acidosis, accompanied by tinnitus, hyperpyrexia, and diaphoresis, treated with urinary alkalinization using sodium bicarbonate.",
+   "say": "Acute poisoning with aspirin directly stimulates the respiratory center and uncouples oxidative phosphorylation. This generates a classic mixed acid-base disorder: primary respiratory alkalosis paired with high anion gap metabolic acidosis, accompanied by tinnitus and hyperpyrexia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Salicylate Mixed Acid-Base",
+     "points": [
+      "Direct medullary hyperventilation -> Respiratory alkalosis",
+      "Mitochondrial uncoupling + lactic acid -> Metabolic acidosis",
+      "High anion gap with low PaCO2",
+      "Treated with IV Sodium Bicarbonate (urinary trapping)"
+     ]
+    },
+    "right": {
+     "title": "Opioid Overdose Acid-Base",
+     "points": [
+      "Profound respiratory depression (hypoventilation)",
+      "Pure primary respiratory acidosis with elevated PaCO2",
+      "Hypoxemia and secondary lactic acidosis if prolonged",
+      "Reversed immediately with IV Naloxone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cardiac glycoside toxicity presents with gastrointestinal nausea, yellow-green visual color distortion (xanthopsia), and dangerous cardiac arrhythmias. The pathognomonic digitalis-induced arrhythmia is paroxysmal atrial tachycardia with variable atrioventricular block. Life-threatening hyperkalaemia and ventricular ectopy respond immediately to **digoxin Fab fragments** (DigiFab).",
+   "say": "Digoxin toxicity presents with nausea, yellow-green visual halos, and cardiac arrhythmias. The characteristic arrhythmia is paroxysmal atrial tachycardia with variable block. Life-threatening arrhythmias and hyperkalaemia respond immediately to digoxin-specific Fab fragments.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dig",
+      "label": "Digoxin Inhibits Myocardial Na+/K+ ATPase"
+     },
+     {
+      "id": "arrh",
+      "label": "Hyperkalaemia + Bidirectional VT / PAT with Block"
+     },
+     {
+      "id": "fab",
+      "label": "IV Digoxin-Specific Fab Antibody Fragments (DigiFab)"
+     }
+    ],
+    "edges": [
+     [
+      "dig",
+      "arrh"
+     ],
+     [
+      "arrh",
+      "fab"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Toxic alcohol ingestions of methanol (windshield washer fluid) and ethylene glycol (antifreeze) are characterized by a massive high anion gap metabolic acidosis and a high serum **osmolar gap**. While methanol is metabolized by alcohol dehydrogenase into toxic formic acid causing retinal necrosis and snowstorm blindness, ethylene glycol yields glycolic and oxalic acids causing acute calcium oxalate renal failure.",
+   "say": "Toxic ingestions of methanol and ethylene glycol cause a severe high anion gap metabolic acidosis with an elevated osmolar gap. While methanol yields formic acid causing retinal necrosis and blindness, ethylene glycol produces oxalic acid causing calcium oxalate renal failure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/poisoning-and-drug-overdose-fig1.webp",
+    "alt": "Clinical toxidrome comparison across cholinergic, anticholinergic, opioid, and sympathomimetic poisonings.",
+    "caption": "Diagnostic clinical parameters across classic autonomic toxidromes and toxic ingestions. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Emergency therapy for both methanol and ethylene glycol poisonings requires immediate administration of the competitive alcohol dehydrogenase inhibitor **fomepizole** (15 mg/kg IV loading dose) or oral ethanol. Fomepizole blocks the enzymatic conversion of parent alcohols into toxic metabolites, while emergency haemodialysis is indicated for profound metabolic acidosis (pH under 7.25), visual impairment, or acute renal failure.",
+   "say": "Emergency therapy for methanol and ethylene glycol poisonings requires immediate administration of the competitive alcohol dehydrogenase inhibitor fomepizole. Fomepizole prevents conversion into toxic metabolites, while emergency hemodialysis clears parent alcohols and restores acid-base balance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "alc",
+      "label": "Toxic Alcohol Ingestion (Methanol / Ethylene Glycol)"
+     },
+     {
+      "id": "fom",
+      "label": "IV Fomepizole Inhibits Alcohol Dehydrogenase"
+     },
+     {
+      "id": "dial",
+      "label": "Hemodialysis Clears Unmetabolized Parent Alcohols"
+     }
+    ],
+    "edges": [
+     [
+      "alc",
+      "fom"
+     ],
+     [
+      "fom",
+      "dial"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 458"
+}

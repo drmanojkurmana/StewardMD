@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "med-resuscitation",
+ "subject": "medicine",
+ "title": "Cardiac Arrest Resuscitation: BLS, ACLS, and Post-Arrest Care",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The abrupt cessation of mechanical cardiac pump activity confirmed by unresponsiveness, absence of normal breathing, and absence of a palpable central pulse defines **cardiac arrest**. Effective high-quality cardiopulmonary resuscitation (CPR) maintains coronary and cerebral perfusion pressure, requiring a chest compression rate of one-hundred to one-hundred-twenty compressions per minute and depth of five to six centimetres.",
+   "say": "The abrupt cessation of cardiac pump activity confirmed by unresponsiveness, absent breathing, and absent pulse defines cardiac arrest. High-quality CPR requires a chest compression rate of one-hundred to one-hundred-twenty per minute and a depth of five to six centimetres with complete recoil.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anaesthesia-cpr-periarrest-long-case-fig1.webp",
+    "alt": "High-quality cardiopulmonary resuscitation hemodynamics and chest compression mechanics.",
+    "caption": "Cardiopulmonary resuscitation hemodynamics, chest compressions, and coronary perfusion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Advanced Cardiac Life Support (**ACLS**) divides cardiac arrest rhythms into shockable versus non-shockable categories. Shockable rhythms comprise pulseless ventricular tachycardia (pVT) and coarse ventricular fibrillation (VF), reflecting chaotic disorganized myocardial depolarization that responds to electrical unsynchronized defibrillation, whereas non-shockable rhythms comprise asystole and pulseless electrical activity (PEA).",
+   "say": "Advanced Cardiac Life Support divides arrest rhythms into shockable versus non-shockable groups. Shockable rhythms comprise pulseless ventricular tachycardia and ventricular fibrillation, which respond to immediate electrical defibrillation, whereas non-shockable rhythms comprise asystole and PEA.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiac-arrest-management-fig1.webp",
+    "alt": "Universal Advanced Cardiac Life Support (ACLS) resuscitation algorithm.",
+    "caption": "Universal ACLS algorithmic branch: shockable VF/pVT versus non-shockable PEA/asystole. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "For shockable rhythms (VF/pVT), immediate delivery of a single unsynchronized high-energy biphasic shock (one-hundred-twenty to two-hundred Joules) represents the primary determinant of survival, universally designated as **defibrillation**. CPR must be resumed immediately for two full minutes without pausing to check the pulse or rhythm, as post-shock myocardial stunning requires ongoing mechanical support.",
+   "say": "For shockable rhythms, immediate delivery of a single unsynchronized biphasic shock represents the primary determinant of survival. CPR must be resumed immediately for two full minutes without pausing to check the rhythm, supporting the stunned myocardium.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "vf",
+      "label": "Rhythm Check: Shockable VF / pVT"
+     },
+     {
+      "id": "def",
+      "label": "Single Biphasic Shock (120-200 Joules)"
+     },
+     {
+      "id": "cpr",
+      "label": "Immediate High-Quality CPR for 2 Minutes"
+     }
+    ],
+    "edges": [
+     [
+      "vf",
+      "def"
+     ],
+     [
+      "def",
+      "cpr"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In shockable arrest persisting after the second shock, intravenous **adrenaline in arrest** (one milligram of 1:10,000 dilution) is administered and repeated every three to five minutes. Adrenaline acts primarily via alpha-1 adrenergic vasoconstriction, increasing systemic vascular resistance and raising aortic diastolic pressure to enhance myocardial coronary perfusion during chest compressions.",
+   "say": "In shockable arrest persisting after the second shock, intravenous adrenaline at one milligram is administered every three to five minutes. Adrenaline acts via alpha-1 vasoconstriction, raising aortic diastolic pressure to enhance coronary blood flow during compressions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharmacological Agent",
+     "Timing in ACLS Protocol",
+     "Primary Resuscitation Mechanism"
+    ],
+    "rows": [
+     [
+      "Adrenaline (Epinephrine)",
+      "After 2nd shock in VF/pVT; immediate in asystole/PEA",
+      "Alpha-1 vasoconstriction increases coronary perfusion pressure"
+     ],
+     [
+      "Amiodarone (Cordarone)",
+      "After 3rd shock (300 mg bolus; repeat 150 mg)",
+      "Blocks potassium channels; terminates refractory VF/pVT"
+     ],
+     [
+      "Lidocaine (Xylocaine)",
+      "Alternative to Amiodarone (1-1.5 mg/kg bolus)",
+      "Blocks sodium channels; suppresses ventricular ectopy"
+     ],
+     [
+      "Magnesium Sulfate",
+      "Torsades de pointes (1-2 g IV over 1-2 min)",
+      "Stabilizes cardiac membrane in prolonged QT polymorphic VT"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For refractory shockable ventricular fibrillation or pulseless VT persisting after the third shock, the antiarrhythmic of choice is intravenous **amiodarone** administered as an initial three-hundred milligram IV bolus, with an additional one-hundred-fifty milligram bolus if rhythm persists. Lidocaine (1 to 1.5 mg/kg) serves as an equally effective first-line alternative.",
+   "say": "For refractory ventricular fibrillation persisting after the third shock, the antiarrhythmic of choice is intravenous amiodarone, given as a three-hundred milligram bolus, followed by a second one-hundred-fifty milligram dose if needed. Lidocaine serves as an alternative.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sh3",
+      "label": "Persistent VF After 3rd Defibrillation Shock"
+     },
+     {
+      "id": "amio",
+      "label": "IV Amiodarone 300 mg Bolus (First Dose)"
+     },
+     {
+      "id": "rpt",
+      "label": "Repeat Amiodarone 150 mg Bolus After 5th Shock"
+     }
+    ],
+    "edges": [
+     [
+      "sh3",
+      "amio"
+     ],
+     [
+      "amio",
+      "rpt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In non-shockable rhythms, pulseless electrical activity (**PEA**) denotes organized cardiac electrical activity without detectable arterial pulse, while asystole denotes total ventricular standstill. Management requires continuous CPR, immediate administration of intravenous adrenaline, and aggressive diagnostic identification and correction of reversible underlying causes.",
+   "say": "In non-shockable rhythms, pulseless electrical activity denotes organized cardiac rhythm without an arterial pulse, while asystole denotes total electrical standstill. Management requires continuous CPR, immediate adrenaline, and correction of reversible causes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Shockable Rhythms (VF / pVT)",
+     "points": [
+      "Ventricular Fibrillation & Pulseless VT",
+      "Primary treatment: Immediate unsynchronized defibrillation",
+      "Adrenaline given after 2nd shock; Amiodarone after 3rd",
+      "Favourable prognosis if defibrillated rapidly"
+     ]
+    },
+    "right": {
+     "title": "Non-Shockable Rhythms (PEA / Asystole)",
+     "points": [
+      "Asystole & Pulseless Electrical Activity",
+      "Defibrillation is completely ineffective and harmful",
+      "Immediate Adrenaline (1 mg IV) as early as possible",
+      "Search systematically for reversible Hs and Ts"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Search for reversible aetiologies of cardiac arrest follows the universal **Hs and Ts** mnemonic: Hypoxia, Hypovolaemia, Hydrogen ion acidosis, Hypo- or Hyperkalaemia, Hypothermia; and Tension pneumothorax, Tamponade cardiac, Toxins, Thrombosis pulmonary (massive PE), and Thrombosis coronary (acute MI). Immediate bedside point-of-care ultrasound identifies tamponade, pneumothorax, and right ventricular strain.",
+   "say": "Searching for reversible causes follows the universal Hs and Ts: Hypoxia, Hypovolaemia, Hydrogen ions, Hypo- or Hyperkalaemia, Hypothermia; and Tension pneumothorax, Tamponade, Toxins, and Thrombosis of coronary or pulmonary vessels. Bedside ultrasound rapidly identifies tamponade and pneumothorax.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Reversible Category",
+     "Clinical Clues / History",
+     "Immediate Resuscitation Action"
+    ],
+    "rows": [
+     [
+      "Hypovolaemia",
+      "Trauma, GI bleed, ruptured ectopic, severe burns",
+      "Rapid IV crystalloid / blood product boluses"
+     ],
+     [
+      "Hypoxia / Tension Pneumo",
+      "Cyanosis, airway obstruction, absent breath sounds",
+      "100% FiO2 + Immediate needle chest decompression"
+     ],
+     [
+      "Hyperkalaemia",
+      "End-stage renal disease on dialysis, peaked T-waves",
+      "IV Calcium gluconate + Insulin/Dextrose + Bicarbonate"
+     ],
+     [
+      "Cardiac Tamponade",
+      "Penetrating trauma, elevated CVP, pericardial effusion",
+      "Emergency subxiphoid ultrasound-guided pericardiocentesis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following return of spontaneous circulation (ROSC), comatose patients require bundled post-cardiac arrest neuroprotection. Guidelines mandate **targeted temperature management** (TTM), maintaining a strictly controlled core body temperature between thirty-two and thirty-six degrees Celsius (or strict normothermia under 37.5 C) for at least twenty-four hours to reduce cerebral metabolic rate and suppress post-ischaemic neuronal reperfusion apoptosis.",
+   "say": "Following return of spontaneous circulation, comatose patients require neuroprotective care. Guidelines mandate targeted temperature management, maintaining core temperature between thirty-two and thirty-six degrees for twenty-four hours to suppress post-ischemic neuronal apoptosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rosc",
+      "label": "Return of Spontaneous Circulation (ROSC)"
+     },
+     {
+      "id": "ttm",
+      "label": "Targeted Temperature Management (32-36 C x 24 hr)"
+     },
+     {
+      "id": "neuro",
+      "label": "Multimodal Neuroprognostication at >= 72 Hours"
+     }
+    ],
+    "edges": [
+     [
+      "rosc",
+      "ttm"
+     ],
+     [
+      "ttm",
+      "neuro"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 299"
+}
