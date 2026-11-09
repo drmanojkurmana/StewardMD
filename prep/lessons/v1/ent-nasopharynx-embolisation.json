@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "id": "ent-nasopharynx-embolisation",
+ "subject": "ent",
+ "module": "ent-nasopharynx",
+ "title": "Nasopharyngeal Carcinoma and Embolisation Principles",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Embolisation** in nasopharyngeal tumour care means catheter blockage of feeding arteries before surgery, most developed for juvenile angiofibroma where external carotid branches dominate supply. Particles or coils delivered superselectively devascularise tumour while sparing normal territory, and surgery follows within days before collaterals reopen the bed. Internal carotid feeders limit completeness and must be mapped even though they cannot be blocked safely.",
+   "say": "Catheter blockage of feeding arteries devascularises vascular tumours before surgical removal. Surgery follows within days before collateral vessels reopen the tumour bed. Carotid feeders limit completeness and need mapping for consent.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nasopharyngeal-tumours-fig1.webp",
+    "alt": "Diagram of nasopharyngeal tumour spread from the nasopharynx into adjacent compartments.",
+    "caption": "Nasopharyngeal tumour extent and spread. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Nasopharyngeal carcinoma** is the malignant counterpart that embolisation does not treat, arising in the fossa of Rosenmuller with strong Epstein Barr virus association and endemic peaks in Southeast Asia and North Africa. It spreads early to retropharyngeal and upper cervical nodes, invades skull base toward cranial nerves and blocks the Eustachian tube. Radiotherapy with chemotherapy, not primary surgery, forms definitive treatment for most stages.",
+   "say": "Malignant nasopharyngeal tumours arise behind the ear tube with viral association in endemic regions. Early nodal spread with skull base invasion gives the typical advanced presentation. Radiation with chemotherapy provides definitive treatment for most stages.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nasopharyngeal-carcinoma-fig1.webp",
+    "alt": "Diagram of nasopharyngeal carcinoma presentation triad with neck mass, ear effusion and nasal symptoms.",
+    "caption": "Nasopharyngeal carcinoma presentation triad. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **Epstein-Barr virus** link is diagnostic as well as causal: plasma viral DNA and antibody profiles support diagnosis and track treatment response in endemic practice. Undifferentiated non keratinising carcinoma dominates endemic disease and is highly radiosensitive, explaining good control despite advanced nodal presentation. Keratinising tumours behave more like other head and neck cancers with relatively lower viral association and radiosensitivity.",
+   "say": "Viral blood markers support diagnosis and track response during endemic practice care. Undifferentiated tumours are highly radiosensitive and explain good control despite large nodes. Keratinising tumours behave like other head and neck cancers comparatively.",
+   "vis": {
+    "kind": "table",
+    "title": "Nasopharyngeal carcinoma histology",
+    "cols": [
+     "Type",
+     "Behaviour"
+    ],
+    "rows": [
+     [
+      "Non keratinising undifferentiated",
+      "Endemic, EBV linked, radiosensitive"
+     ],
+     [
+      "Non keratinising differentiated",
+      "Intermediate features"
+     ],
+     [
+      "Keratinising squamous",
+      "Less EBV linked, less radiosensitive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Trotter triad** names the ipsilateral cluster produced when nasopharyngeal cancer blocks the tube and invades nearby structures: conductive hearing loss from middle ear effusion, palatal paralysis from vagal involvement and trigeminal neuralgia pain in the mandibular division. Any adult with unilateral effusion plus these neural signs needs nasopharyngeal endoscopy and imaging urgently. The triad is uncommon but unforgettable because each element maps to a named neighbouring structure.",
+   "say": "Tube blockage with palate weakness and trigeminal pain forms the named ipsilateral triad. Adult ear effusion with neural signs needs urgent nasopharyngeal inspection and imaging. Each element maps to a neighbouring structure invaded by tumour.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Trotter triad elements",
+     "points": [
+      "Conductive loss from effusion",
+      "Palatal paralysis, vagus involved",
+      "Mandibular trigeminal pain",
+      "All ipsilateral to tumour"
+     ]
+    },
+    "right": {
+     "title": "Commoner first presentations",
+     "points": [
+      "Painless upper neck node",
+      "Blood stained nasal discharge",
+      "Unilateral ear effusion alone",
+      "Nasal obstruction late"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Staging uses magnetic resonance for skull base, intracranial and perineural extent, computed tomography for bone detail and positron imaging for distant spread in advanced nodes. Cervical nodes are staged by level, size, laterality and low neck involvement, with bilateral disease common from midline drainage. **Nasopharyngoscopy with biopsy** remains diagnostic, in clear contrast to angiofibroma where clinic biopsy is forbidden by vascularity.",
+   "say": "Resonance imaging maps skull base while metabolic imaging finds distant spread in advanced disease. Bilateral neck nodes are common from midline drainage patterns here. Endoscopic biopsy provides diagnosis, unlike vascular benign tumour practice.",
+   "vis": {
+    "kind": "table",
+    "title": "Carcinoma staging set",
+    "cols": [
+     "Test",
+     "Maps"
+    ],
+    "rows": [
+     [
+      "MRI",
+      "Skull base and nerves"
+     ],
+     [
+      "CT",
+      "Bone detail"
+     ],
+     [
+      "PET",
+      "Distant spread in advanced nodes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive **radiotherapy** covers nasopharynx and elective neck bilaterally, with concurrent chemotherapy added for locoregionally advanced disease and induction or adjuvant courses in selected protocols. Intensity modulation spares parotids and brainstem while delivering tumouricidal dose to irregular skull base volumes. Surgery survives mainly as salvage for persistent neck nodes or local recurrence in operable patients after full dose radiation.",
+   "say": "Radiation provides definitive treatment covering the nasopharynx with both necks electively. Chemotherapy accompanies radiation for locoregionally advanced disease in fit patients. Surgery provides salvage for persistent nodes or operable local recurrence.",
+   "vis": {
+    "kind": "flow",
+    "title": "Nasopharyngeal carcinoma pathway",
+    "nodes": [
+     {
+      "id": "scope",
+      "label": "Endoscopy and biopsy"
+     },
+     {
+      "id": "stage",
+      "label": "MRI skull base, PET for spread"
+     },
+     {
+      "id": "rt",
+      "label": "Radiotherapy with chemotherapy"
+     },
+     {
+      "id": "salv",
+      "label": "Salvage surgery if persistent"
+     }
+    ],
+    "edges": [
+     [
+      "scope",
+      "stage"
+     ],
+     [
+      "stage",
+      "rt"
+     ],
+     [
+      "rt",
+      "salv"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Late radiation effects shape follow up as much as recurrence: xerostomia, dental decay, hypothyroidism, temporal lobe injury, cranial nerve palsy and osteoradionecrosis of skull base. Endocrine review, dental prophylaxis and thyroid testing therefore join endoscopic surveillance in long term clinics. **Second malignancy** and carotid stenosis complete the late risk list that survivors carry for decades after cure.",
+   "say": "Dry mouth with dental decay and thyroid failure affects survivorship alongside recurrence surveillance. Dental prevention with endocrine testing is part of long term clinic review. Late vessel narrowing and second malignancy complete the risk list.",
+   "vis": {
+    "kind": "table",
+    "title": "Late effects after nasopharyngeal radiation",
+    "cols": [
+     "System",
+     "Late effect"
+    ],
+    "rows": [
+     [
+      "Salivary and dental",
+      "Xerostomia and rampant decay"
+     ],
+     [
+      "Endocrine",
+      "Hypothyroidism, pituitary failure"
+     ],
+     [
+      "Neurological",
+      "Temporal lobe injury, nerve palsy"
+     ],
+     [
+      "Bone and vessels",
+      "Skull base necrosis, carotid stenosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Embolisation complications teach respect for collateral anatomy: stroke from reflux into carotid territory, blindness from ophthalmic collaterals, cranial nerve ischaemia and skin necrosis. Superselective catheter position, provocative testing and particle size choice reduce these risks in expert hands. **Consent** for embolisation therefore reads like consent for stroke, and the procedure belongs in centres where neurosurgical and stroke support exists.",
+   "say": "Stroke, blindness and nerve ischaemia give embolisation its serious complication profile. Selective catheter position with careful particle choice reduces risk in expert hands. Consent includes stroke explicitly and centres need neurosurgical support.",
+   "vis": null
+  },
+  {
+   "tx": "Comparing the two nasopharyngeal tumours fixes the module contrast. Angiofibroma is benign, adolescent, male, vascular, staged for surgery and never biopsied in clinic, while carcinoma is malignant, adult, viral linked, biopsied freely and treated by radiation. Both block the tube and present through neck or ear signs. **Age of the patient** plus vascularity on imaging separates them faster than any single symptom.",
+   "say": "Benign vascular tumour of adolescents is distinct from malignant viral tumour of adults clearly. Surgery provides treatment for the former while radiation provides definitive treatment for the latter. Age with imaging vascularity separates them faster than symptoms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Angiofibroma",
+     "points": [
+      "Adolescent male, benign vascular",
+      "No clinic biopsy allowed",
+      "Embolisation then resection",
+      "Epistaxis dominates"
+     ]
+    },
+    "right": {
+     "title": "Nasopharyngeal carcinoma",
+     "points": [
+      "Adult, EBV linked malignancy",
+      "Biopsy confirms diagnosis",
+      "Radiotherapy based treatment",
+      "Neck node dominates"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Plasma **viral DNA monitoring** after carcinoma treatment detects molecular recurrence before imaging in many endemic programmes, prompting earlier salvage assessment. Rising titres after initial clearance are therefore acted upon rather than filed away. Survivorship and surveillance merge into one clinic where endoscopy, imaging, endocrine tests and viral markers are reviewed together at each visit for the first five years.",
+   "say": "Blood viral monitoring detects molecular recurrence before imaging in many programmes. Rising levels after clearance need salvage assessment rather than filing away. Survivorship review combines endoscopy, imaging and endocrine testing together.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Trotter triad",
+   "b": "Ipsilateral conductive loss from effusion, palatal paralysis and mandibular trigeminal pain in nasopharyngeal carcinoma."
+  },
+  {
+   "f": "Embolisation role",
+   "b": "Preoperative devascularisation of vascular tumours via external carotid feeders; surgery within days; stroke and blindness are consented risks."
+  },
+  {
+   "f": "Nasopharyngeal carcinoma treatment",
+   "b": "Radiotherapy based, with concurrent chemotherapy for advanced disease; surgery mainly for salvage."
+  }
+ ],
+ "keys": [
+  "Adult unilateral effusion needs nasopharyngeal examination",
+  "Carcinoma is biopsied, angiofibroma is not",
+  "EBV markers track nasopharyngeal carcinoma"
+ ]
+}
