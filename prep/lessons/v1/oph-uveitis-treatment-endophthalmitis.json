@@ -1,0 +1,221 @@
+{
+ "v": 1,
+ "id": "oph-uveitis-treatment-endophthalmitis",
+ "subject": "ophthalmology",
+ "module": "oph-posterior-uveitis",
+ "title": "Endophthalmitis",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Endophthalmitis** is intraocular infection inflaming vitreous and aqueous after surgery, injection, trauma or bloodstream seeding, pain, vision collapse, hypopyon and vitritis as emergency set. Postoperative acute disease within weeks needs same day vitreous sampling and intravitreal antibiotics, systemic therapy adjunct. Delay by steroid assumption for presumed uveitis is classic catastrophic error.",
+   "say": "Intraocular infection together gives emergency pattern after procedures in endophthalmitis at tertiary eye casualty for adults urgently. Same day sampling gives salvage value additionally. Steroid assumption gives catastrophic delay.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/candidemia-fig1.webp",
+    "alt": "Candida ocular involvement diagram relevant to endogenous endophthalmitis patterns.",
+    "caption": "Fundoscopic view of fungal endophthalmitis with white vitreoretinal fluffy exudates. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Intravitreal antibiotics** deliver drug directly to vitreous after tap or during vitrectomy, empiric gram positive and gram negative cover refined by culture and response. Vitrectomy in severe disease clears organism load and samples better, trial evidence guiding light perception presentations. Sampling before injection preserves microbiology as corneal scraping preserved ulcer yield.",
+   "say": "Direct delivery together gives vitreous drug levels after sampling in endophthalmitis surgery at tertiary centres for severe disease. Culture refinement gives later adjustment additionally. Load clearance gives vitrectomy value.",
+   "vis": {
+    "kind": "table",
+    "title": "Endophthalmitis first hour",
+    "cols": [
+     "Action",
+     "Order"
+    ],
+    "rows": [
+     [
+      "Recognise emergency set",
+      "Pain, vision fall, vitritis"
+     ],
+     [
+      "Sample vitreous",
+      "Before intravitreal drugs"
+     ],
+     [
+      "Inject intravitreal cover",
+      "Empiric broad spectrum"
+     ],
+     [
+      "Vitrectomy assessment",
+      "Severe or light perception"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endogenous disease seeds from bloodstream in sepsis, endocarditis or fungal candidaemia, bilateral risk and systemic source hunt mandatory alongside eye therapy. Candida gives creamy chorioretinal lesions extending fluffy into vitreous in classic descriptions. **Source hunt** therefore treats endophthalmitis as systemic infection with eye sign, not isolated eye event.",
+   "say": "Bloodstream seeding together gives systemic source requirement in endogenous disease at hospital assessment for septic adults urgently. Bilateral risk gives fellow eye review additionally. Candida gives lesion pattern clue.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Exogenous postoperative",
+     "points": [
+      "Days to weeks after surgery",
+      "Painful rapid vitritis",
+      "Tap and inject emergency"
+     ]
+    },
+    "right": {
+     "title": "Endogenous bloodstream",
+     "points": [
+      "Sepsis or candidaemia source",
+      "Bilateral risk present",
+      "Systemic hunt mandatory"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Post injection endophthalmitis clusters need service investigation for contaminated products or technique breach where multiple cases share session or batch. Single case sporadic versus cluster outbreak response separates infection control pathways. **Cluster thinking** therefore belongs to endophthalmitis governance in injection clinics with high volumes.",
+   "say": "Cluster pattern together gives service investigation in injection related disease at governance review for multiple cases in sessions. Batch sharing gives contamination direction additionally. Sporadic gives individual pathway.",
+   "vis": {
+    "kind": "flow",
+    "title": "Endophthalmitis emergency flow",
+    "nodes": [
+     {
+      "id": "rec",
+      "label": "Emergency set recognised"
+     },
+     {
+      "id": "tap",
+      "label": "Vitreous sampled first"
+     },
+     {
+      "id": "inj",
+      "label": "Intravitreal antibiotics given"
+     },
+     {
+      "id": "vit",
+      "label": "Vitrectomy by severity"
+     }
+    ],
+    "edges": [
+     [
+      "rec",
+      "tap"
+     ],
+     [
+      "tap",
+      "inj"
+     ],
+     [
+      "inj",
+      "vit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sterile postoperative inflammation including toxic anterior segment syndrome within a day of surgery mimics infection without vitritis dominance, timing and vitreous clarity separating pathways. Toxic syndrome clusters by surgical products likewise needing service response. **Vitreous involvement** remains endophthalmitis discriminator that toxic anterior disease lacks.",
+   "say": "Vitreous clarity together gives toxic syndrome separation in early postoperative inflammation at surgical follow up in first days. Timing gives supporting weight additionally. Cluster gives product direction."
+  },
+  {
+   "tx": "Traumatic endophthalmitis after penetrating injury with retained foreign body carries Bacillus and fungal risk, prophylaxis and early vitrectomy considerations in trauma batch detail. Soil contamination worsens prognosis organism spectrum. **Retained body** therefore escalates infection pathway beyond routine postoperative protocols. Trauma notes therefore record contamination and body status explicitly for the receiving vitreoretinal team.",
+   "say": "Retained body together gives organism escalation in traumatic disease at trauma centres after penetrating injury with soil. Early surgery gives consideration additionally. Spectrum gives prophylaxis breadth.",
+   "vis": {
+    "kind": "table",
+    "title": "Route risk map",
+    "cols": [
+     "Route",
+     "Risk note"
+    ],
+    "rows": [
+     [
+      "Postoperative acute",
+      "Skin flora virulence tempo"
+     ],
+     [
+      "Post injection cluster",
+      "Product or technique hunt"
+     ],
+     [
+      "Trauma retained body",
+      "Bacillus and fungal breadth"
+     ],
+     [
+      "Endogenous fungal",
+      "Candidaemia source control"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vision prognosis follows presenting acuity, organism virulence and hours to intravitreal therapy, counselling honest from first day. Light perception presentations gain most vitrectomy debate in evidence teaching. **Hours matter** phrase therefore opens endophthalmitis referrals by telephone before transfer paperwork completes.",
+   "say": "Hours together give prognosis weight in endophthalmitis referrals by telephone at tertiary centres for postoperative patients urgently. Presenting acuity gives counselling honesty additionally. Organism gives virulence modifier.",
+   "vis": {
+    "kind": "table",
+    "title": "Prognosis inputs",
+    "cols": [
+     "Input",
+     "Direction"
+    ],
+    "rows": [
+     [
+      "Presenting acuity better",
+      "Better recovery chance"
+     ],
+     [
+      "Virulent organism",
+      "Worse despite speed"
+     ],
+     [
+      "Delay to injection",
+      "Worse independently"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: postoperative pain vitritis samples then injects same day, endogenous hunts bloodstream, toxic lacks vitritis and clusters investigate services. Steroid assumption delays lethally in undifferentiated postoperative inflammation. **Sample before inject** mirrors scrape before drops across infection modules. Transfer teams therefore receive organism and timing details before the patient leaves the referring hospital.",
+   "say": "Sampling priority together gives microbiology value in endophthalmitis as corneal infection at tertiary casualty for adults reliably. Vitreous gives toxic split additionally. Cluster gives governance response.",
+   "vis": {
+    "kind": "table",
+    "title": "Endophthalmitis anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Emergency set",
+      "Pain, vision fall, hypopyon, vitritis"
+     ],
+     [
+      "First procedure",
+      "Sample then intravitreal antibiotics"
+     ],
+     [
+      "Endogenous rule",
+      "Hunt bloodstream source always"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Endophthalmitis first hour",
+   "b": "Recognise emergency set, sample vitreous, inject intravitreal antibiotics same day; vitrectomy by severity."
+  },
+  {
+   "f": "Toxic syndrome split",
+   "b": "Day one anterior inflammation without vitritis dominance after surgery, clusters by products."
+  },
+  {
+   "f": "Endogenous rule",
+   "b": "Bloodstream source hunt mandatory with bilateral review in candida or sepsis seeding."
+  }
+ ],
+ "keys": [
+  "Steroid assumption is catastrophic delay here",
+  "Clusters trigger service investigation",
+  "Hours to injection decide prognosis"
+ ]
+}
