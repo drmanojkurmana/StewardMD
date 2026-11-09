@@ -1,0 +1,272 @@
+{
+ "v": 1,
+ "module": "sur-breast-benign",
+ "subject": "surgery",
+ "title": "Bloody Nipple Discharge, Intraductal Papilloma, and Microdochectomy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Spontaneous, persistent **bloody nipple discharge** represents an alarming clinical presentation that demands meticulous surgical evaluation. While nipple discharge can be physiological or related to hyperprolactinemia when bilateral and multi-ductal, discharge that is unilateral, spontaneous, bloody or serosanguinous, and confined to a single duct orifice raises immediate suspicion of an underlying ductal proliferative lesion, carrying a five to fifteen percent risk of breast malignancy.",
+   "say": "Unilateral bloody discharge from a single nipple duct is an alarming finding that carries a five to fifteen percent risk of malignancy, demanding thorough surgical evaluation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-nipple_discharge.webp",
+    "alt": "Clinical examination photograph demonstrating physical inspection and expression of single-duct nipple discharge.",
+    "caption": "Nipple discharge examination: systematic radial palpation localizing the trigger zone of a single duct orifice. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In over seventy percent of women presenting with spontaneous unilateral bloody or serosanguinous nipple discharge, the underlying histopathological cause is a benign **intraductal papilloma**. Arising from ductal epithelial and myoepithelial cells lining the major lactiferous ducts, it forms a fragile, arborescent polypoid frond within the duct lumen. Because the delicate fibrovascular stalks of the papilloma readily undergo torsion, twisting, and infarction during normal movement, they bleed directly into the lactiferous duct.",
+   "say": "Intraductal papilloma causes over seventy percent of bloody nipple discharge. Its fragile branching stalk undergoes torsion and infarction, bleeding into the duct lumen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Solitary Intraductal Papilloma",
+     "points": [
+      "Arises centrally in major lactiferous ducts beneath areola",
+      "Presents with spontaneous unilateral bloody discharge",
+      "Benign lesion with minimal or absent malignant potential",
+      "Curatively treated by single-duct microdochectomy"
+     ]
+    },
+    "right": {
+     "title": "Multiple Papillomatosis",
+     "points": [
+      "Arises peripherally in terminal duct lobular units",
+      "Presents with diffuse bilateral or multi-ductal discharge",
+      "Harbors significant risk (up to 30%) of malignant transformation",
+      "Requires wide local excision or comprehensive duct excision"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Clinical physical examination incorporates the technique of radial finger pressure to identify the **trigger zone for discharge**. The clinician places an index finger on the areolar margin and systematically compresses each radial clock hour toward the nipple. Expression of bloody discharge during compression of a specific quadrant pinpoints the involved duct system and marks the surgical axis for targeted microdochectomy, while simultaneously feeling for subtle subareolar nodularity.",
+   "say": "Systematic radial finger pressure around the areola identifies the trigger zone, pinpointing the exact clock hour of the involved duct to guide targeted surgical excision.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inspect",
+      "label": "Inspect Nipple-Areola Complex for Ulceration"
+     },
+     {
+      "id": "radial",
+      "label": "Systematic Radial Clock-Hour Digital Compression"
+     },
+     {
+      "id": "trigger",
+      "label": "Identify Specific Trigger Zone Eliciting Discharge"
+     },
+     {
+      "id": "orifice",
+      "label": "Identify Exact Single Excretory Ductal Orifice"
+     },
+     {
+      "id": "mark",
+      "label": "Mark Radial Clock Position for Targeted Resection"
+     }
+    ],
+    "edges": [
+     [
+      "inspect",
+      "radial"
+     ],
+     [
+      "radial",
+      "trigger"
+     ],
+     [
+      "trigger",
+      "orifice"
+     ],
+     [
+      "orifice",
+      "mark"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The diagnostic workup for pathological nipple discharge incorporates standard triple assessment, beginning with bilateral diagnostic mammography and targeted retroareolar high-resolution ultrasonography. On ultrasound, an intraductal papilloma presents as a distinct **intraductal hypoechoic mass** expanding a fluid-distended lactiferous duct. Galactography, or ductography, involves cannulating the discharging orifice with a fine catheter and injecting radiopaque contrast, revealing an intraluminal filling defect or abrupt ductal cutoff.",
+   "say": "High-resolution ultrasound visualizes the papilloma inside a dilated duct. Galactography cannulates the orifice to demonstrate contrast filling defects or ductal obstruction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Modality",
+     "Technique and Approach",
+     "Diagnostic Hallmarks in Bloody Discharge"
+    ],
+    "rows": [
+     [
+      "High-Resolution Ultrasound",
+      "Radial and antiradial scanning of subareolar ductal tree",
+      "Visualizes 2-5 mm hypoechoic vascular mass inside dilated anechoic duct"
+     ],
+     [
+      "Diagnostic Galactography",
+      "Retrograde cannulation with 30-gauge sialography needle and contrast",
+      "Demonstrates smooth intraluminal filling defect, cut-off, or wall irregularity"
+     ],
+     [
+      "High-Field Breast MRI",
+      "Dynamic contrast-enhanced breast MRI with high temporal resolution",
+      "Detects occult multicentric DCIS or peripheral multiple papillomatosis"
+     ],
+     [
+      "Ductal Cytology Smear",
+      "Smearing discharge on glass slide for Papanicolaou staining",
+      "Low sensitivity (>50% false negative); cannot rule out malignancy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When bloody discharge arises from a single, identifiable duct orifice in a young woman who wishes to preserve lactation capacity, the surgical treatment of choice is a **microdochectomy**, originally described by Hedley Atkins. In the operating room, the single discharging duct is cannulated with a fine lacrimal probe or injected with a minute volume of sterile methylene blue. Through a circumareolar incision, the dyed single duct and its surrounding lobule are excised while preserving the remaining lactiferous ducts.",
+   "say": "Microdochectomy is the operation of choice for single-duct discharge in young women. Cannulating and dying the duct with methylene blue allows selective excision, preserving lactation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cannulate",
+      "label": "Cannulate Discharging Orifice with Lacrimal Probe"
+     },
+     {
+      "id": "dye",
+      "label": "Inject 0.1 mL Sterile Methylene Blue into Duct"
+     },
+     {
+      "id": "incision",
+      "label": "Circumareolar Radial Incision Over Trigger Axis"
+     },
+     {
+      "id": "dissect",
+      "label": "Selective Dissection of Stained Duct Pyramid"
+     },
+     {
+      "id": "resect",
+      "label": "Ligate at Nipple Base & Excise Feeding Glandular Wedge"
+     }
+    ],
+    "edges": [
+     [
+      "cannulate",
+      "dye"
+     ],
+     [
+      "dye",
+      "incision"
+     ],
+     [
+      "incision",
+      "dissect"
+     ],
+     [
+      "dissect",
+      "resect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When bloody or suspicious discharge stems from multiple ducts, when a single duct cannot be cannulated reliably, or in postmenopausal women who have completed childbearing, the definitive operation is **Hadfield operation**, also known as total subareolar duct excision. Through a circumareolar incision, the surgeon inverts the nipple-areola complex, transects the entire terminal ductal bundle at the base of the nipple, and cores out a cone-shaped wedge of retroareolar breast tissue containing all major lactiferous ducts.",
+   "say": "For multi-ductal discharge or older women, the Hadfield operation cores out the entire subareolar duct system, curing symptoms and providing full tissue for pathology.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Microdochectomy (Atkins)",
+     "points": [
+      "Selectively excises only the single discharging lactiferous duct",
+      "Requires preoperative duct cannulation with probe or blue dye",
+      "Preserves the remaining lactiferous ducts and lactation ability",
+      "Ideal for young nulliparous women with clear single-duct discharge"
+     ]
+    },
+    "right": {
+     "title": "Hadfield Operation (Total Duct Excision)",
+     "points": [
+      "Excises the entire conical retroareolar ductal bundle en bloc",
+      "Permanently transects all lactiferous ducts at nipple base",
+      "Completely destroys future breastfeeding and lactation capacity",
+      "Preferred for multi-duct discharge, recurrent disease, or older women"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Another common benign condition presenting with thick, creamy, green, or brown nipple discharge from multiple ducts is **mammary duct ectasia**, also known as periductal mastitis or plasma cell mastitis. Typically affecting perimenopausal multiparous women and cigarette smokers, it involves chronic dilatation of the subareolar ducts filled with inspissated lipid secretions. Ductal rupture elicits intense chemical periductal inflammation with abundant plasma cells, causing fibrosis, slit-like nipple retraction, and painful subareolar masses.",
+   "say": "Mammary duct ectasia produces thick green multi-duct discharge in smokers. Ductal rupture triggers plasma cell inflammation, causing fibrosis and slit-like nipple inversion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mammary Duct Ectasia",
+     "points": [
+      "Affects perimenopausal women and heavy cigarette smokers",
+      "Multiductal, thick, sticky, green, white, or brownish discharge",
+      "Produces transverse slit-like nipple retraction from fibrotic shortening",
+      "Managed conservatively; persistent mass requires Hadfield excision"
+     ]
+    },
+    "right": {
+     "title": "Intraductal Papilloma",
+     "points": [
+      "Affects premenopausal women in thirties and forties",
+      "Single-duct, spontaneous, watery, serosanguinous, or frank bloody discharge",
+      "Nipple remains completely normal without retraction or inversion",
+      "Curatively treated by selective microdochectomy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Histopathological examination of all resected ductal specimens is mandatory to exclude underlying malignancy. Between five and fifteen percent of patients presenting with spontaneous bloody nipple discharge harbor an occult **ductal carcinoma in situ or invasive cancer**. Identifying papillary carcinoma, high-grade atypia, or frank microinvasion on histological sectioning guides subsequent oncological management, dictating surgical re-excision for clear margins, sentinel lymph node biopsy, and adjuvant endocrine or radiation therapy.",
+   "say": "Up to fifteen percent of bloody nipple discharge hides ductal carcinoma in situ or invasive cancer on histology. Malignancy requires margin clearance and sentinel node staging.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "specimen",
+      "label": "Microdochectomy or Hadfield Specimen to Pathology"
+     },
+     {
+      "id": "serial",
+      "label": "Serial Transverse Paraffin Sectioning of Ducts"
+     },
+     {
+      "id": "benign",
+      "label": "Benign Papilloma: Complete Cure, Routine Screening"
+     },
+     {
+      "id": "atypia",
+      "label": "Atypical Ductal Hyperplasia: Surveillance & Tamoxifen"
+     },
+     {
+      "id": "cancer",
+      "label": "DCIS or Invasive Cancer: Formal Staging & Margins"
+     }
+    ],
+    "edges": [
+     [
+      "specimen",
+      "serial"
+     ],
+     [
+      "serial",
+      "benign"
+     ],
+     [
+      "serial",
+      "atypia"
+     ],
+     [
+      "serial",
+      "cancer"
+     ]
+    ]
+   }
+  }
+ ]
+}
