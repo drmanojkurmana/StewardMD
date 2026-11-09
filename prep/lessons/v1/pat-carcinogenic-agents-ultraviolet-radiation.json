@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-carcinogenic-agents",
+  "subject": "pathology",
+  "title": "Ultraviolet and Ionising Radiation, Xeroderma Pigmentosum, and Oncogenic Viruses",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Ultraviolet B light welds adjacent pyrimidines into dimers in epidermal DNA, and cumulative exposure plus sunburns convert that damage into basal cell carcinoma, squamous cell carcinoma, and melanoma over decades. Sunscreen, shade, and mole surveillance interrupt the sequence; the carcinogenic waveband is **ultraviolet radiation**, principally UVB.",
+      "say": "UVB creates pyrimidine dimers in skin DNA; decades of exposure deliver the three great skin cancers.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cutaneous-malignancies-melanoma-and-non-melanoma-fig1.webp",
+        "alt": "Cutaneous malignancies melanoma and non-melanoma comparison",
+        "caption": "Melanoma and non-melanoma skin cancers compared, the tumours driven by ultraviolet radiation."
+      }
+    },
+    {
+      "tx": "Children with xeroderma pigmentosum cannot excise those pyrimidine dimers because nucleotide excision repair is inherited broken, so freckling, skin cancers, and eye damage arrive in childhood after minimal sun. Rigorous photoprotection from infancy is life saving; the repair defect defines **xeroderma pigmentosum**.",
+      "say": "Without nucleotide excision repair, children with xeroderma pigmentosum develop skin cancers after trivial sun exposure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal repair",
+          "points": [
+            "Pyrimidine dimers excised accurately",
+            "Sun damage cleared daily",
+            "Skin cancers await old age"
+          ]
+        },
+        "right": {
+          "title": "Xeroderma pigmentosum",
+          "points": [
+            "Excision repair inherited broken",
+            "Dimers persist and mutate",
+            "Childhood skin cancers, strict photoprotection"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Ionising radiation breaks both DNA strands, and survivors of atomic bombs, radiation accidents, and childhood radiotherapy carry raised risks of leukaemia first, then thyroid, breast, and lung cancers after longer latencies. Children and dividing tissues are most vulnerable; the exposure class is **ionising radiation**.",
+      "say": "Ionising radiation causes leukaemia early and solid cancers late, with children at greatest risk.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Exposure",
+          "Early cancer",
+          "Later cancers"
+        ],
+        "rows": [
+          [
+            "Atomic bomb survivors",
+            "Leukaemia within years",
+            "Thyroid, breast, lung, colon"
+          ],
+          [
+            "Childhood neck radiotherapy",
+            "Thyroid carcinoma",
+            "Salivary and skin tumours"
+          ],
+          [
+            "Radon in homes and mines",
+            "Lung carcinoma",
+            "Risk multiplied by smoking"
+          ],
+          [
+            "Medical imaging excess",
+            "Theoretical small risk",
+            "Justify and optimise every scan"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Human papillomavirus oncoproteins divide the labour of cervical carcinogenesis: E6 destroys p53 while E7 releases RB, removing both checkpoint and apoptosis in one viral stroke. Vaccination against high risk types prevents the infection upstream; the protein pair is **HPV E6 and E7**.",
+      "say": "HPV E6 kills p53 and E7 disables RB; together they explain cervical carcinogenesis in a single sentence.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "High risk HPV infects transformation zone"
+          },
+          {
+            "id": "b",
+            "label": "E6 degrades p53, E7 inactivates RB"
+          },
+          {
+            "id": "c",
+            "label": "Dysplasia progresses through CIN grades"
+          },
+          {
+            "id": "d",
+            "label": "Invasive cervical carcinoma"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Epstein-Barr virus immortalises B lymphocytes and, with cofactors, produces Burkitt lymphoma in malaria holoendemic Africa, nasopharyngeal carcinoma in southern China, and lymphomas in immunosuppressed hosts. Its latency proteins mimic growth and survival signals; the virus is **Epstein-Barr virus**. Salted fish, and immunosuppression after transplantation further raise the risks of its associated tumours.",
+      "say": "EBV links Burkitt lymphoma, nasopharyngeal carcinoma, and post-transplant lymphomas through B cell immortalisation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/burkitt-lymphoma-fig1.webp",
+        "alt": "Burkitt lymphoma histology and clinical features",
+        "caption": "Burkitt lymphoma, the EBV associated tumour with starry sky histology and MYC translocation."
+      }
+    },
+    {
+      "tx": "Human T-lymphotropic virus 1 integrates into T cells and its Tax protein drives proliferation until, after decades, a minority develop adult T-cell leukaemia and lymphoma with flower cells and hypercalcaemia. Endemic in Japan, the Caribbean, and parts of Africa, the retrovirus is **HTLV-1**.",
+      "say": "HTLV-1 causes adult T cell leukaemia after decades of latency, announced by flower cells and hypercalcaemia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HTLV-1 disease",
+          "points": [
+            "Adult T cell leukaemia, flower cells",
+            "Hypercalcaemia and skin lesions",
+            "Also HAM tropical spastic paraparesis"
+          ]
+        },
+        "right": {
+          "title": "Prevention",
+          "points": [
+            "Screen blood and organ donors",
+            "Avoid breastfeeding where safe alternatives exist",
+            "No vaccine available yet"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Hepatitis B virus promotes liver cancer two ways: chronic necroinflammation regenerates hepatocytes for decades, and viral integration plus the HBx protein disturbs growth control, so vaccination of infants is cancer prevention. The oncogenic contribution is termed **hepatitis B carcinogenesis**, shared partly by hepatitis C through inflammation alone.",
+      "say": "Hepatitis B causes liver cancer through chronic inflammation and viral integration; infant vaccination prevents that cancer.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Virus",
+          "Mechanism",
+          "Cancer"
+        ],
+        "rows": [
+          [
+            "HPV 16, 18",
+            "E6 and E7 disable p53, RB",
+            "Cervix, oropharynx, anus"
+          ],
+          [
+            "EBV",
+            "B cell latency growth programmes",
+            "Burkitt, nasopharyngeal, Hodgkin"
+          ],
+          [
+            "HTLV-1",
+            "Tax drives T cell proliferation",
+            "Adult T cell leukaemia"
+          ],
+          [
+            "HBV and HCV",
+            "Inflammation, integration, HBx",
+            "Hepatocellular carcinoma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Helicobacter pylori earns its oncogenic place in the stomach: chronic gastritis progresses through atrophy, intestinal metaplasia, and dysplasia to adenocarcinoma, while mucosal lymphoid tissue gives rise to MALT lymphoma that early eradication can reverse. The bacterium is **Helicobacter pylori**, a class I carcinogen.",
+      "say": "H pylori drives gastric cancer through the atrophy metaplasia sequence and MALT lymphoma that eradication can reverse early.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Chronic H pylori gastritis"
+          },
+          {
+            "id": "b",
+            "label": "Atrophy and intestinal metaplasia"
+          },
+          {
+            "id": "c",
+            "label": "Dysplasia in the Correa cascade"
+          },
+          {
+            "id": "d",
+            "label": "Gastric adenocarcinoma or MALT lymphoma"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

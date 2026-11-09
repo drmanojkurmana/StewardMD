@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-haematopoiesis-marrow-failure",
+  "subject": "pathology",
+  "title": "Haematopoietic Stem Cells, Marrow Examination, and Aplastic Anaemia",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Every blood cell descends from haematopoietic stem cells that self renew and differentiate through committed progenitors under cytokine instruction, residing in marrow niches and marked by CD34. Transplantation exploits their ability to rebuild an entire blood system from a small inoculum; the founding cell is the **haematopoietic stem cell**.",
+      "say": "One stem cell population rebuilds the entire blood; CD34 marks it and transplantation proves it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Stem cell self renews in marrow niche"
+          },
+          {
+            "id": "b",
+            "label": "Committed progenitors amplify each lineage"
+          },
+          {
+            "id": "c",
+            "label": "Cytokines steer red, white, platelet output"
+          },
+          {
+            "id": "d",
+            "label": "Mature cells enter blood for finite lifespans"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Erythropoiesis answers renal oxygen sensing: falling oxygen raises erythropoietin, marrow releases reticulocytes within days, and the reticulocyte count therefore reports real time red cell production in any anaemia. A low count in severe anaemia convicts the marrow; the production gauge is the **reticulocyte count**.",
+      "say": "The reticulocyte count is the marrow's live production report; inappropriately low values convict production failure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Index",
+          "Meaning",
+          "Iron deficiency pattern"
+        ],
+        "rows": [
+          [
+            "MCV",
+            "Average red cell volume",
+            "Low, microcytic"
+          ],
+          [
+            "MCH",
+            "Haemoglobin per cell",
+            "Low, hypochromic"
+          ],
+          [
+            "RDW",
+            "Size variability",
+            "High early in deficiency"
+          ],
+          [
+            "Reticulocyte count",
+            "New red cell output",
+            "Inappropriately low"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bone marrow aspiration smears cytology of individual cells while trephine biopsy preserves architecture, cellularity, fibrosis, and infiltrates, so the two procedures answer different questions and are usually performed together. Fat replacing marrow with age recalibrates what cellularity is normal; the architecture specimen is the **trephine biopsy**.",
+      "say": "Aspiration shows the cells, trephine shows the city plan; do both when the marrow itself is the question.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Marrow aspiration",
+          "points": [
+            "Cell morphology and differentials",
+            "Iron stores and organisms",
+            "Dry tap when fibrotic or packed"
+          ]
+        },
+        "right": {
+          "title": "Trephine biopsy",
+          "points": [
+            "Cellularity and architecture",
+            "Fibrosis, granulomas, metastases",
+            "Essential in aplasia and staging"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Aplastic anaemia empties the marrow through immune T cell attack on stem cells, leaving pancytopenia with a fatty hypocellular trephine and no blasts, splenomegaly, or dysplasia. Drugs, hepatitis, and inherited syndromes trigger some cases; the defining lesion is **immune marrow failure**.",
+      "say": "Aplastic anaemia is an empty fatty marrow with pancytopenia, most often an immune attack on stem cells.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aplastic-anemia-fig1.webp",
+        "alt": "Aplastic anaemia overview",
+        "caption": "Aplastic anaemia overview showing hypocellular marrow and pancytopenia."
+      }
+    },
+    {
+      "tx": "Fanconi anaemia inherits broken DNA crosslink repair, presenting with short stature, thumb and radial anomalies, skin pigmentation, and childhood marrow failure with high cancer risk. Chromosomal breakage testing with diepoxybutane confirms the diagnosis of **Fanconi anaemia** before transplant planning. Mitomycin C serves as the alternative breakage agent in laboratories without diepoxybutane access.",
+      "say": "Thumb anomalies, short stature, and childhood marrow failure mean Fanconi anaemia; test chromosomal breakage before transplant.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acquired aplastic anaemia",
+          "points": [
+            "Immune stem cell attack, any age",
+            "Immunosuppression or transplant treats",
+            "PNH clones commonly emerge"
+          ]
+        },
+        "right": {
+          "title": "Inherited marrow failure",
+          "points": [
+            "Fanconi, Diamond-Blackfan, dyskeratosis",
+            "Physical anomalies and family clues",
+            "Modified transplant conditioning needed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Pure red cell aplasia isolates the failure to one lineage: Diamond-Blackfan anaemia presents in infancy with ribosomal protein mutations and congenital anomalies, while acquired disease follows thymoma, parvovirus B19, or drugs. Transfusion dependence with absent erythroid precursors defines **pure red cell aplasia**.",
+      "say": "When only red cells fail, think Diamond-Blackfan in infants and parvovirus B19 or thymoma in adults.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Syndrome",
+          "Lineages lost",
+          "Signature clue"
+        ],
+        "rows": [
+          [
+            "Aplastic anaemia",
+            "All three lineages",
+            "Fatty empty marrow"
+          ],
+          [
+            "Diamond-Blackfan",
+            "Red cells only, infancy",
+            "Ribosomal mutation, anomalies"
+          ],
+          [
+            "Acquired pure red aplasia",
+            "Red cells only, adult",
+            "Thymoma, parvovirus B19"
+          ],
+          [
+            "Myelophthisic anaemia",
+            "All, by replacement",
+            "Leucoerythroblastic film, marrow fibrosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Myelophthisic anaemia results when fibrosis, metastatic cancer, or granulomas physically replace marrow, releasing nucleated red cells and early white precursors into blood with teardrop poikilocytes. The leucoerythroblastic film is a biopsy summons; the process is **myelophthisic anaemia**. Primary myelofibrosis is the classic marrow native cause behind this alarming blood film pattern.",
+      "say": "Teardrop cells with nucleated red cells in blood mean the marrow is being replaced; biopsy will show by what.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/iron-deficiency-anemia-fig2.webp",
+        "alt": "Systemic iron homeostasis and transport",
+        "caption": "Systemic iron homeostasis and transport, the supply chain erythropoiesis depends upon."
+      }
+    },
+    {
+      "tx": "Treatment of severe aplastic anaemia chooses between matched sibling transplantation for the young and immunosuppression with antithymocyte globulin, ciclosporin, and eltrombopag for others, while transfusion support is given cautiously to protect transplant options. Early specialist referral decides outcomes; the strategy is **marrow failure triage** by severity and donor.",
+      "say": "Young patients with a matched sibling go to transplant; others receive immunosuppression plus eltrombopag, referred early.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Grade severity by counts and cellularity"
+          },
+          {
+            "id": "b",
+            "label": "HLA type patient and siblings urgently"
+          },
+          {
+            "id": "c",
+            "label": "Transplant if young with matched donor"
+          },
+          {
+            "id": "d",
+            "label": "ATG, ciclosporin, eltrombopag otherwise"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}
