@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "id": "cm-infectious-epi-reservoir-of-infection",
+ "subject": "community-medicine",
+ "module": "cm-infectious-epi",
+ "title": "Reservoirs, Sources and Carriers in Infectious Disease Epidemiology",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Reservoir versus source",
+   "tx": "A **reservoir** is where the agent lives, multiplies and depends primarily for survival: people, animals or environmental sites such as soil. The source is the immediate origin from which infection passes to a host, which may be the reservoir itself or a vehicle it contaminated. Control aimed at the wrong one wastes the intervention, so stems reward the distinction.",
+   "say": "Separate home from doorway. The reservoir is where the agent lives and multiplies to survive; the source is the immediate origin passing it onward. Soil, animals and people host reservoirs. Attacking the wrong one wastes control.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Reservoir",
+     "points": ["Agent lives and multiplies there", "Primary survival site", "Human, animal or soil"]
+    },
+    "right": {
+     "title": "Source",
+     "points": ["Immediate origin of infection", "May be the reservoir itself", "May be a contaminated vehicle"]
+    }
+   }
+  },
+  {
+   "title": "Human reservoir: cases by clinical spectrum",
+   "tx": "**Clinical cases** range from fulminant to mild, ambulatory and missed: the mild walking case often spreads more than the prostrate severe one, precisely because nobody isolates a person still moving through markets and buses. Missed and abortive cases complete the human case reservoir that notification systems chronically undercount.",
+   "say": "The walking case spreads furthest. Fulminant cases stay in bed; mild ambulatory cases ride buses and work markets while infectious. Missed and abortive cases join them invisibly, which is why notifications chronically undercount the human reservoir.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Case type", "Spread potential"],
+    "rows": [
+     ["Fulminant, prostrate", "Low, patient immobilised"],
+     ["Mild, ambulatory", "High, moves through community"],
+     ["Missed or abortive", "Invisible to notification"]
+    ]
+   }
+  },
+  {
+   "title": "Carriers by type: incubatory, convalescent, healthy",
+   "tx": "**Incubatory carriers** shed during the last days of incubation, as in measles, mumps, polio, pertussis and hepatitis B; convalescent carriers shed through recovery, as in typhoid and dysentery; healthy carriers emerge from subclinical infection, as in cholera and meningococcal carriage. Each type defeats a different control habit: isolation misses the first and third entirely.",
+   "say": "Three carrier types defeat three habits. Incubatory carriers shed before illness, convalescent carriers after symptoms fade, healthy carriers without ever falling ill. Isolation of cases misses the first and third completely.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Carrier type", "Timing", "Examples"],
+    "rows": [
+     ["Incubatory", "Late incubation period", "Measles, pertussis, hepatitis B"],
+     ["Convalescent", "Through recovery", "Typhoid, dysentery, cholera"],
+     ["Healthy", "Subclinical infection", "Cholera, meningococcal carriage"]
+    ]
+   }
+  },
+  {
+   "title": "Carriers by duration and portal of exit",
+   "tx": "**Chronic carriers** excrete for indefinite periods, in typhoid, hepatitis B, dysentery, malaria and gonorrhoea, and outrank cases as community sources the longer they shed. Portals of exit classify the rest: intestinal carriers in typhoid and cholera, urinary in urinary infections, respiratory in respiratory disease. Occupations multiply danger: a food-handler carrier outranks a retired one.",
+   "say": "Duration and exit route complete classification. Chronic carriers shed indefinitely and outrank cases as sources. Intestinal, urinary and respiratory exits name the route. A carrier cooking for others multiplies danger beyond any bedside case.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Carrier state established"},
+     {"id": "b", "label": "Portal of exit shedding"},
+     {"id": "c", "label": "Vehicle or contact carries agent"},
+     {"id": "d", "label": "New susceptible infected"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Animal and non-living reservoirs",
+   "tx": "**Animal reservoirs** sustain zoonoses between human outbreaks: plague in rodents, rabies in mammals, leptospirosis in animal urine contaminating water. Non-living reservoirs, chiefly soil and water, hold tetanus spores and Legionella for years without any host. Eradication fails where such reservoirs persist, however completely human cases are treated.",
+   "say": "Animals and soil remember what treatment forgets. Rodents sustain plague, mammals rabies, soil tetanus spores for years. Human case treatment cannot eradicate diseases with such reservoirs, a limit examiners test directly.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Reservoir", "Disease sustained"],
+    "rows": [
+     ["Rodents", "Plague between human outbreaks"],
+     ["Mammals", "Rabies transmission cycles"],
+     ["Soil and water", "Tetanus spores, Legionella"]
+    ]
+   }
+  },
+  {
+   "title": "Infection, contamination, infestation",
+   "tx": "**Infection** means entry and multiplication of an agent in body tissues, while contamination is mere presence on a surface, garment or article, and infestation is lodgement and multiplication of arthropods on persons, animals or clothing. A contaminated fomite is not an infected patient, and exam definitions punish the confusion precisely.",
+   "say": "Three definitions, three marks. Infection multiplies inside tissues. Contamination merely sits on surfaces. Infestation lodges arthropods on bodies or clothing. Stems punish swapping them, so keep the trio mechanically separate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inside the host",
+     "points": ["Infection: agent multiplies in tissues", "Infestation: arthropods lodge and multiply", "Disease may or may not follow"]
+    },
+    "right": {
+     "title": "On surfaces",
+     "points": ["Contamination: agent present only", "Fomites and garments carry it", "No multiplication in a host"]
+    }
+   }
+  },
+  {
+   "title": "Communicable, contagious, infectious: nested words",
+   "tx": "A **communicable disease** transmits from person, animal or reservoir to a susceptible host directly or indirectly; contagious diseases spread readily by contact, a narrower set; infectious names agent-caused disease generally. Nosocomial infection is hospital-acquired, opportunistic infection exploits defective host defences, and iatrogenic disease follows medical activity itself.",
+   "say": "Nested vocabulary next. Communicable covers all transmission routes; contagious narrows to ready contact spread. Hospital-acquired, opportunistic in the immunodeficient, and doctor-caused iatrogenic complete the definitional set stems rotate.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Term", "Meaning"],
+    "rows": [
+     ["Nosocomial", "Acquired in hospital care"],
+     ["Opportunistic", "Exploits defective host defences"],
+     ["Iatrogenic", "Caused by medical activity"],
+     ["Exotic", "Imported into a free area"]
+    ]
+   }
+  },
+  {
+   "title": "Epidemic, endemic, pandemic in infectious terms",
+   "tx": "An **epidemic** is occurrence clearly in excess of normal expectancy; endemic is constant presence; sporadic cases scatter irregularly; pandemic crosses countries. Zoonosis transmits vertebrate to human, epizootic is its animal epidemic counterpart, and enzootic its constant animal presence. Eradication means worldwide permanent reduction to zero, stronger than elimination in one area.",
+   "say": "Grade occurrence precisely. Excess over expectancy, constant presence, scattered cases, worldwide spread. Animal mirrors carry their own names, and eradication means permanent zero worldwide, never merely regional elimination.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Term", "Pattern"],
+    "rows": [
+     ["Epidemic", "Clearly above normal expectancy"],
+     ["Endemic", "Constant presence in an area"],
+     ["Sporadic", "Scattered cases, no clear pattern"],
+     ["Pandemic", "Across countries or continents"]
+    ]
+   }
+  },
+  {
+   "title": "Controlling the reservoir: the first link",
+   "tx": "**Reservoir control** combines early diagnosis, notification, isolation where useful, and treatment that kills the agent in the reservoir before dissemination, extended to carriers. Rapid treatment of syphilis, tuberculosis and leprosy interrupts transmission chemically where physical isolation failed historically. Inadequate treatment breeds drug resistance instead, frustrating the same control it attempted.",
+   "say": "Attack the first link chemically. Early diagnosis, notification and treatment that sterilises the reservoir, carriers included, interrupt transmission where walls failed. Syphilis, tuberculosis and leprosy prove it; inadequate treatment breeds resistance instead.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Early diagnosis of case or carrier"},
+     {"id": "b", "label": "Notification to services"},
+     {"id": "c", "label": "Effective complete treatment"},
+     {"id": "d", "label": "Reservoir stops shedding"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}
