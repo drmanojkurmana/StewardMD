@@ -1,0 +1,196 @@
+{
+  "v": 1,
+  "module": "mic-vibrio-campylobacter",
+  "subject": "microbiology",
+  "title": "Guillain-Barre Syndrome, Helicobacter pylori and the Urease Breath Test",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Guillain Barre syndrome** follows Campylobacter jejuni in about a third of cases (lipooligosaccharide mimicking gangliosides GM1 and GD1a, antibodies cross reacting with motor axons, acute motor axonal neuropathy variant), ascending flaccid weakness with areflexia days to weeks after diarrhoea, treated by IVIG or plasma exchange, ventilation watch, antibiotics for the resolved gut irrelevant to nerves. Electrophysiology separates axonal from demyelinating patterns, but treatment decisions usually cannot wait for complete nerve studies.",
+      "say": "Diarrhoea three weeks ago, ascending areflexic weakness now: mimicry from Campylobacter LOS.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "GBS portrait",
+          "points": [
+            "Symmetric ascending weakness, areflexia",
+            "Autonomic instability, facial and bulbar variants",
+            "CSF albuminocytological dissociation (protein high, cells few)",
+            "Antecedents: Campylobacter, influenza, EBV and CMV, Zika"
+          ]
+        },
+        "right": {
+          "title": "GBS management",
+          "points": [
+            "IVIG or plasma exchange (not both routinely)",
+            "Vital capacity and autonomic monitoring",
+            "Steroids not beneficial alone",
+            "Antecedent stool study academically interesting, not therapeutic"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Molecular mimicry** from the autoimmunity lesson gets its cleanest infection proof in GBS: jejuni LOS outer cores sialylated like human gangliosides, anti GM1 antibodies bind nodes of Ranvier and motor terminals, complement injures axons, certain Penner serotypes (HS19) overrepresented. One microbe's coat becomes a neurology ward mechanism.",
+      "say": "Sialylated LOS wears nerve ganglioside uniform; antibodies attack the uniform at nodes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mimicry chain",
+          "points": [
+            "Sialyltransferase genes in LOS locus",
+            "Anti ganglioside antibodies rise",
+            "Complement at nodal membranes",
+            "Axonal versus demyelinating variants by target"
+          ]
+        },
+        "right": {
+          "title": "Variant map",
+          "points": [
+            "AMAN: motor axonal, GM1 and GD1a",
+            "AIDP: demyelinating, Western commoner",
+            "Miller Fisher: GQ1b, ophthalmoplegia ataxia areflexia",
+            "Prognosis and recovery months scale"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Helicobacter pylori** is a spiral microaerophilic gram negative of stomach mucus (flagellated, urease massive), causing chronic gastritis, peptic ulcers (duodenal and gastric), gastric adenocarcinoma and MALT lymphoma, half humanity colonised mostly harmlessly, faecal oral and oral oral childhood acquisition in crowded settings.",
+      "say": "A urease powered spiral living in acid writes ulcers and, rarely, cancers.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/helicobacter-pylori-infection-fig1.webp",
+        "alt": "Helicobacter pylori pathogenesis and outcomes diagram",
+        "caption": "Helicobacter pylori pathogenesis, gastritis to ulcer and malignancy outcomes."
+      }
+    },
+    {
+      "tx": "**Urease** splits urea to ammonia and carbon dioxide, neutralising acid microenvironment and feeding diagnosis: rapid urease test on biopsy (colour in minutes), urea breath test (labelled carbon), stool and biopsy urease heritage. Ammonia also injures mucosa and feeds nitrogen, virulence and diagnostic in one enzyme.",
+      "say": "One enzyme shields the bacterium and betrays it in three tests.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Urease biology",
+          "points": [
+            "Nickel dependent, acid gated urea channel (UreI)",
+            "Ammonia cloud at surface pH neutral",
+            "Flagellar motility through mucus",
+            "CagA and VacA virulence partners separate"
+          ]
+        },
+        "right": {
+          "title": "Urease tests",
+          "points": [
+            "CLO rapid urease biopsy minutes to hours",
+            "Histology silver stains organisms",
+            "Culture microaerophilic slow niche",
+            "PCR clarithromycin resistance emerging"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **urea breath test** gives labelled urea by mouth: bacterial urease frees labelled carbon dioxide in breath (13C non radioactive, 14C tracer), positive in active infection, used diagnosis and eradication confirmation after withholding antibiotics, bismuth (four weeks) and PPIs (two weeks) that suppress bacteria falsely negative.",
+      "say": "Breath labelled carbon means living urease in the stomach; stop suppressors before testing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Breath test rules",
+          "points": [
+            "13C preferred children and pregnancy",
+            "Baseline and 30 minute samples",
+            "Active infection only (not antibodies)",
+            "Eradication test at 4 plus weeks post therapy"
+          ]
+        },
+        "right": {
+          "title": "False negative guards",
+          "points": [
+            "PPI held 2 weeks",
+            "Antibiotics and bismuth held 4 weeks",
+            "Recent bleeding and gastrectomy reduce",
+            "Stool antigen alternative equivalent"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**H pylori therapy** (PPI plus antibiotics) currently leans bismuth quadruple (PPI, bismuth, tetracycline, metronidazole 14 days) or clarithromycin triple only where resistance under thresholds and prior macrolide absent, levofloxacin and rifabutin salvage, susceptibility culture or molecular after failures. Eradication confirmed non serologically.",
+      "say": "Fourteen days, resistance aware, confirm with breath or stool: eradication discipline.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Regimen logic",
+          "points": [
+            "Bismuth quadruple default many regions",
+            "Clarithromycin resistance above 15 percent abandons triple",
+            "Penicillin allergy pathways separate",
+            "Adherence counselling decides success"
+          ]
+        },
+        "right": {
+          "title": "After therapy",
+          "points": [
+            "Confirm eradication all treated (ulcer, MALT)",
+            "Serology stays positive (never confirm)",
+            "Failure: susceptibility guided salvage",
+            "Family and reinfection low in adults treated"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**CagA and VacA** stratify H pylori virulence: CagA injected by type IV secretion (EPIYA phosphorylation, inflammation and cancer signalling), VacA vacuolating toxin, dupA and oipA partners, East Asian CagA stronger variants, yet most carriers never ulcerate, host and diet arbitrating. Cancer prevention by eradication strongest before atrophy.",
+      "say": "CagA injects oncogenic instructions; eradication helps most before the mucosa scars.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Virulence kit",
+          "points": [
+            "Cag pathogenicity island and type IV secretion",
+            "VacA mosaic alleles s and m",
+            "BabA adhesion to Lewis antigens",
+            "Outer membrane inflammation proteins"
+          ]
+        },
+        "right": {
+          "title": "Disease map",
+          "points": [
+            "Antral gastritis: duodenal ulcer leaning",
+            "Pangastritis and atrophy: gastric ulcer and cancer road",
+            "MALT lymphoma regression with eradication early",
+            "Iron and B12 deficiency associations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Enterohepatic Helicobacter and Campylobacter kin** widen curves: Campylobacter coli (swine), fetus (immunocompromised blood), upsaliensis (dogs), Helicobacter cinaedi (HIV bacteraemia), Arcobacter, each microaerophile curved with source stories. Bench reports increasingly genus species precise by MALDI.",
+      "say": "Curved rods have many addresses; species names carry source and host clues.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Campylobacter kin",
+          "points": [
+            "Coli: pigs and poultry, hippurate negative",
+            "Fetus: cattle, immunocompromised bacteraemia",
+            "Upsaliensis and lari: pets and birds",
+            "Concisus oral emerging"
+          ]
+        },
+        "right": {
+          "title": "Helicobacter kin",
+          "points": [
+            "Cinaedi and fennelliae: immunocompromise",
+            "Heilmannii: animal contact gastritis",
+            "Pullorum poultry",
+            "Treatment by syndrome and susceptibility"
+          ]
+        }
+      }
+    }
+  ]
+}
