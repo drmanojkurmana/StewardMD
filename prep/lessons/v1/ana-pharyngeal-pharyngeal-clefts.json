@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-pharyngeal",
+ "subject": "anatomy",
+ "title": "Pharyngeal Clefts, Branchial Anomalies and Sinuses",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Externally, the human embryo exhibits four ectodermal grooves separating adjacent pharyngeal arches, designated **pharyngeal clefts**. The first pharyngeal cleft persists into adult life, its dorsal portion invaginating deeply to form the epithelial lining of the external acoustic meatus and the outer cuticular layer of the tympanic membrane.",
+   "say": "Externally, four ectodermal clefts separate adjacent pharyngeal arches. The first pharyngeal cleft persists into adulthood, invaginating deeply to produce the external acoustic meatus and the outer epithelial surface of the tympanic membrane.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-pharyngeal-gaps.svg",
+    "alt": "Branchial clefts, cervical sinus, and branchial fistulae",
+    "caption": "Pharyngeal cleft evolution and cervical sinus obliteration. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "During the fifth week, rapid proliferation of the second pharyngeal arch causes it to grow caudally like an operculum over the third and fourth arches. It fuses with the epicardial ridge in the lower neck, enclosing clefts two, three, and four inside an ectoderm-lined cavity designated the **cervical sinus of His**.",
+   "say": "During week five, rapid expansion of the second arch causes it to mushroom caudally over the third and fourth arches. Fusing with the lower neck, it submerges clefts two, three, and four within an ectodermal cavity called the cervical sinus.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cervical Sinus Formation",
+    "nodes": [
+     {
+      "id": "clefts",
+      "label": "Exposed Clefts 2, 3, and 4"
+     },
+     {
+      "id": "arch2",
+      "label": "Second Arch Caudal Overgrowth"
+     },
+     {
+      "id": "sinus",
+      "label": "Enclosed Cervical Sinus of His"
+     },
+     {
+      "id": "oblit",
+      "label": "Normal Total Obliteration"
+     }
+    ],
+    "edges": [
+     [
+      "clefts",
+      "arch2"
+     ],
+     [
+      "arch2",
+      "sinus"
+     ],
+     [
+      "sinus",
+      "oblit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Under normal circumstances, the cervical sinus obliterates completely without leaving a trace. If a portion of this ectodermal space fails to undergo obliteration, it persists as a painless fluid-filled swelling designated a **branchial cyst**, most frequently arising from remnants of the second pharyngeal cleft.",
+   "say": "Normally, the cervical sinus obliterates completely. If an isolated segment of this cavity persists, it retains epithelial secretion to form a painless, fluid-filled branchial cyst, most commonly derived from second pharyngeal cleft remnants.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Branchial Cyst Features",
+     "points": [
+      "Remnant of second pharyngeal cleft",
+      "Located along anterior border of SCM",
+      "Painless mass at junction of upper and middle third",
+      "Does not move on swallowing or tongue protrusion"
+     ]
+    },
+    "right": {
+     "title": "Thyroglossal Cyst Features",
+     "points": [
+      "Remnant of descending thyroglossal duct",
+      "Located strictly in midline of neck",
+      "Attached to hyoid bone and tongue base",
+      "Elevates sharply upon tongue protrusion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A classic branchial cyst presents in early adulthood as a smooth fluctuant mass located along the anterior border of the **sternocleidomastoid** muscle, precisely at the junction of its upper and middle thirds. Filled with turbid fluid rich in cholesterol crystals, it lies superficial to the carotid sheath and does not move with swallowing.",
+   "say": "A typical branchial cyst presents in young adults as a smooth mass along the anterior border of the sternocleidomastoid muscle at the junction of its upper and middle thirds. Containing fluid laden with cholesterol crystals, it does not move with swallowing.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-arch-derivatives.svg",
+    "alt": "Topographical anatomy of branchial arch and neck relationships",
+    "caption": "Topography of the sternocleidomastoid muscle and branchial remnants. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When the cervical sinus remains patent and communicates with the exterior surface of the skin, a **branchial sinus** results. The external cutaneous opening characteristically lies along the lower third of the anterior border of sternocleidomastoid, discharging intermittent mucoid fluid that predisposes to recurrent secondary skin infections.",
+   "say": "When the cervical sinus remains open to the skin, a branchial sinus forms. Its external opening lies along the lower anterior border of the sternocleidomastoid, periodically weeping mucoid fluid that invites secondary skin infections.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Branchial Anomaly",
+     "Internal Connection",
+     "External Connection",
+     "Embryonic Origin"
+    ],
+    "rows": [
+     [
+      "Branchial Cyst",
+      "None (closed sac)",
+      "None (intact skin)",
+      "Trapped 2nd cleft cervical sinus"
+     ],
+     [
+      "Branchial Sinus",
+      "None (blind track)",
+      "Pinhole on lower SCM border",
+      "Persistent 2nd cleft with skin defect"
+     ],
+     [
+      "Branchial Fistula",
+      "Tonsillar fossa (2nd pouch)",
+      "Skin along lower SCM border",
+      "Breakdown of 2nd cleft-pouch closing membrane"
+     ],
+     [
+      "Preauricular Sinus",
+      "None (blind pit)",
+      "Anterior to helix of auricle",
+      "Incomplete fusion of 1st arch hillocks of His"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "If the second pharyngeal cleft fails to obliterate while the closing membrane separating cleft two from pouch two ruptures, a complete **branchial fistula** develops. This abnormal epithelial tract connects the lateral neck skin directly to the internal pharynx, opening inside the tonsillar fossa between the palatoglossal and palatopharyngeal arches.",
+   "say": "If the second cleft persists and the membrane between cleft two and pouch two ruptures, a complete branchial fistula forms. This epithelial conduit connects the lower neck skin directly to the pharynx, opening inside the tonsillar fossa.",
+   "vis": {
+    "kind": "flow",
+    "title": "Second Branchial Fistula Track",
+    "nodes": [
+     {
+      "id": "skin",
+      "label": "Skin on Lower SCM Border"
+     },
+     {
+      "id": "carot",
+      "label": "Ascends between Internal/External Carotids"
+     },
+     {
+      "id": "nerve",
+      "label": "Loops over Hypoglossal and Glossopharyngeal"
+     },
+     {
+      "id": "tonsil",
+      "label": "Opens into Pharyngeal Tonsillar Fossa"
+     }
+    ],
+    "edges": [
+     [
+      "skin",
+      "carot"
+     ],
+     [
+      "carot",
+      "nerve"
+     ],
+     [
+      "nerve",
+      "tonsil"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The anatomical course of a **second branchial fistula** is predictable: ascending along the carotid sheath, it passes between the internal and external carotid arteries, crosses superficial to the hypoglossal and glossopharyngeal nerves, and pierces the superior constrictor muscle to enter the tonsillar fossa.",
+   "say": "The path of a second branchial fistula is highly consistent: ascending with the carotid sheath, it travels between the internal and external carotid arteries, crosses over the hypoglossal nerve, and pierces the superior constrictor to enter the tonsillar fossa.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Arterial Relationships",
+     "points": [
+      "Ascends between internal and external carotids",
+      "Internal carotid represents third aortic arch",
+      "External carotid represents first/second arch outgrowth",
+      "Fistula track passes precisely through this fork"
+     ]
+    },
+    "right": {
+     "title": "Neural Relationships",
+     "points": [
+      "Crosses superficial to hypoglossal nerve (CN XII)",
+      "Crosses superficial to glossopharyngeal (CN IX)",
+      "Lies deep to the facial nerve main trunk",
+      "Demands delicate dissection during excision"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A common developmental flaw involving the first pharyngeal cleft and auricle is the **preauricular sinus**, presenting as a small pinhole pit immediately anterior to the ascending helix of the ear. It results from incomplete fusion of the six mesenchymal hillocks of His during pinna morphogenesis and can develop recurrent cellulitis requiring complete surgical tract excision.",
+   "say": "A common defect near the first cleft is the preauricular sinus, appearing as a tiny pit anterior to the ascending helix of the ear. Caused by incomplete fusion of the embryonic auricular hillocks, it can develop recurrent abscesses requiring complete excision.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Feature",
+     "Branchial Cyst",
+     "Branchial Fistula",
+     "Preauricular Sinus"
+    ],
+    "rows": [
+     [
+      "Typical Age",
+      "Young adult (20 to 30 years)",
+      "Infancy or early childhood",
+      "Congenital; noticed at birth"
+     ],
+     [
+      "Location",
+      "Upper anterior SCM border",
+      "Lower third anterior SCM",
+      "Anterior to helix of external ear"
+     ],
+     [
+      "Discharge",
+      "None unless infected",
+      "Continuous salivatory mucus",
+      "Cheesy sebaceous secretion"
+     ],
+     [
+      "Definitive Treatment",
+      "Complete surgical excision",
+      "Stepladder excision of track",
+      "En bloc excision of sinus tract"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
