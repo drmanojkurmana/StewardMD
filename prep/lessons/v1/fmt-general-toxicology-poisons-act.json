@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-general-toxicology-poisons-act",
+ "subject": "forensic-medicine",
+ "module": "fmt-general-toxicology",
+ "title": "Poisons Law, Gastric Lavage and Its Contraindications",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The statutes that frame poisoning practice",
+   "tx": "Three statutes frame the field in **poisons and drugs law**. The Poisons Act regulates import, possession and sale of scheduled poisons. The Drugs and Cosmetics Act controls manufacture, quality and sale of drugs, with Schedule H and L drugs sold only on a registered practitioner's prescription recorded in a prescription register. The NDPS Act of 1985 consolidates narcotic law, repealing the Opium Acts and the Dangerous Drugs Act, and licenses cultivation of poppy, cannabis and coca.",
+   "say": "Poisons Act for poisons, Drugs and Cosmetics Act for medicines, NDPS for narcotics, and Schedule H needs a prescription.",
+   "vis": {"kind": "table", "cols": ["Statute", "Controls", "Key duty"], "rows": [["Poisons Act", "Sale and possession of poisons", "Licensed dealing only"], ["Drugs and Cosmetics Act", "Drug quality and sale", "Schedule H on prescription"], ["Pharmacy Act 1948", "Who may dispense", "Registered pharmacists"], ["NDPS Act 1985", "Narcotics and psychotropics", "Licensed cultivation only"]]}
+  },
+  {
+   "title": "NDPS Act and what counts as a narcotic",
+   "tx": "Under the **NDPS Act**, narcotic drug means coca leaf, cannabis, opium and poppy straw with all manufactured drugs, while psychotropic substance covers listed natural or synthetic materials that alter mental function, seventy seven in the original schedule including LSD, amphetamines, benzodiazepines, methaqualone, ketamine and psilocybin. The Act strengthens control over drugs of abuse, enhances penalties for illegal trading and implements international conventions. Cultivation without licence is itself an offence.",
+   "say": "Opium, cannabis and coca are narcotics under NDPS, the psychotropic list runs from LSD to ketamine, and unlicensed cultivation offends.",
+   "vis": {"kind": "compare", "left": {"title": "Narcotic drugs", "points": ["Coca leaf and cocaine", "Cannabis in defined forms", "Opium and poppy straw", "All manufactured drugs"]}, "right": {"title": "Psychotropic substances", "points": ["LSD and mescaline", "Amphetamines", "Benzodiazepines, methaqualone", "Ketamine and psilocybin"]}}
+  },
+  {
+   "title": "Poisoning in the penal code",
+   "tx": "The penal law, now in the Bharatiya Nyaya Sanhita, punishes **administering poison with intent** whether or not hurt actually results, up to ten years where a stupefying or unwholesome drug is given to cause hurt or facilitate an offence. Negligent conduct with poisonous substances endangering life draws up to six months. Deliberate poisoning proves intention to kill and brings culpable homicide within murder. Adulteration of food and drugs carries its own sections and penalties.",
+   "say": "Giving poison to hurt is an offence even if nobody is hurt, and deliberate poisoning proves murderous intent by itself.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Poison administered with intent"}, {"id": "b", "label": "Offence complete at administration"}, {"id": "c", "label": "Hurt aggravates punishment"}, {"id": "d", "label": "Death tried as murder"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Gastric lavage and its useful window",
+   "tx": "**Gastric lavage** washes out ingested poison through a stomach tube, useful at any time within three hours of ingestion, and up to twelve to eighteen hours for salicylates, phenothiazines, tricyclic antidepressants and antihistamines that delay emptying. A soft tube of one centimetre diameter is passed fifty centimetres, placement confirmed, and warm water or a suitable solution is syphoned in and out until the returning fluid is clear and odourless, preserving the first sample for analysis.",
+   "say": "Lavage earns its place within three hours, and up to eighteen for drugs that linger, with the first washings always preserved.",
+   "vis": {"kind": "table", "cols": ["Lavage element", "Standard practice", "Reason"], "rows": [["Tube length passed", "About 50 cm mark", "Reaches the stomach"], ["Fluid per cycle", "About a quarter litre first", "Avoids overfilling"], ["End point", "Clear odourless return", "Interaction exhausted"], ["First sample", "Always preserved", "Chemical analysis evidence"]]}
+  },
+  {
+   "title": "Contraindications of gastric lavage",
+   "tx": "The only absolute bar is **corrosive poisoning, except carbolic acid**, because the tube can perforate a corroded wall. Relative contraindications demand precautions first: convulsant poisons, after convulsions are controlled; comatose patients, after the airway is sealed with a cuffed endotracheal tube of eight to nine millimetres; volatile poisons that may be inhaled; oesophageal varices and upper alimentary disease; marked hypothermia and haemorrhagic diathesis. The patient lies left lateral or prone with the head below the larynx.",
+   "say": "Never lavage corrosives except carbolic acid, and seal the airway before lavaging coma, convulsions or volatile poisons.",
+   "vis": {"kind": "compare", "left": {"title": "Absolute contraindication", "points": ["Corrosive poisoning generally", "Perforation risk from tube", "Carbolic acid is the exception", "Use dilution and demulcents instead"]}, "right": {"title": "Precautions first", "points": ["Control convulsions, then lavage", "Cuffed tube seals coma airway", "Volatile poisons may be inhaled", "Varices and bleeding disorders"]}}
+  },
+  {
+   "title": "Complications and emetics",
+   "tx": "Lavage can cause **laryngeal spasm, aspiration pneumonitis, gastric perforation and sinus bradycardia**, and bleeding during the procedure means abandoning it. Emetics are a fallback only when a tube cannot be obtained: syrup of ipecacuanha, thirty millilitres in adults, vomits ninety to ninety five percent within twenty to thirty minutes. Household salt and mustard are ineffective and dangerous, excess salt water having caused fatal hypernatraemia; apomorphine and copper sulphate are obsolete.",
+   "say": "Spasm, aspiration and perforation end lavage attempts, and ipecac replaces salt or mustard whenever vomiting must be induced.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bleeding or spasm during lavage"}, {"id": "b", "label": "Abandon the procedure"}, {"id": "c", "label": "If tube impossible, ipecac syrup"}, {"id": "d", "label": "Conscious patient, side lying, head low"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Lavage solutions for specific poisons",
+   "tx": "The wash fluid is chosen against the poison in **lavage solution selection**: plain water, potassium permanganate one in five thousand that keeps washing until the outflow stays pink, five percent sodium bicarbonate, four percent tannic acid, one percent sodium or potassium iodide, calcium lactate or starch solution. A small quantity containing antidote or activated charcoal at one gram per kilogram is left behind at the end, with a cathartic, to neutralise what remains.",
+   "say": "Permanganate washes until pink stays pink, and the final aliquot left behind carries charcoal at a gram per kilo.",
+   "vis": {"kind": "table", "cols": ["Solution", "Used against", "End point"], "rows": [["Permanganate 1 in 5000", "Opium, strychnine, cyanides", "Outflow stays pink"], ["Tannic acid 4 percent", "Alkaloid precipitation", "Clear returns"], ["Sodium bicarbonate 5 percent", "Selected ingestions", "Clear returns"], ["Charcoal left behind", "Residual stomach poison", "One gram per kilogram"]]}
+  },
+  {
+   "title": "Antidote mechanisms in five families",
+   "tx": "**Antidotes work by five mechanisms**: inert complex formation, as chelators bind heavy metals; accelerated detoxification, as thiosulphate feeds cyanide conversion; reduced toxic conversion, as ethanol blocks methanol metabolism; receptor site blockade, as naloxone displaces opiates and atropine blocks muscarinic receptors in organophosphate poisoning; and toxic effect bypass, as one hundred percent oxygen competes in carbon monoxide and cyanide poisoning. Choosing the family identifies the drug.",
+   "say": "Bind it, detoxify it faster, block its conversion, block its receptor or bypass its effect: five doors out of poisoning.",
+   "vis": {"kind": "compare", "left": {"title": "Chemical strategies", "points": ["Chelators form inert complexes", "Thiosulphate speeds detoxification", "Ethanol reduces methanol conversion", "Precipitation inside the stomach"]}, "right": {"title": "Physiological strategies", "points": ["Naloxone blocks opiate receptors", "Atropine blocks muscarinic sites", "Oxygen bypasses toxic effect", "Opposite symptoms induced deliberately"]}}
+  },
+  {
+   "title": "Duties of the doctor in a poisoning case",
+   "tx": "The **duties of the doctor in poisoning** run in a fixed order: treat the patient first and stabilise airway, breathing and circulation; identify the poison from history, containers and clinical picture; inform police in medicolegal and suicidal or homicidal cases as the law requires; preserve vomit, lavage returns, blood, urine and the suspected container for analysis; and record everything contemporaneously. Treatment never waits for paperwork, and samples never wait for the police to arrive.",
+   "say": "Stabilise, identify, preserve samples and inform police, in that order, with treatment never delayed for any formality.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Stabilise airway and circulation"}, {"id": "b", "label": "Identify poison and container"}, {"id": "c", "label": "Preserve samples for analysis"}, {"id": "d", "label": "Inform police, complete records"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}

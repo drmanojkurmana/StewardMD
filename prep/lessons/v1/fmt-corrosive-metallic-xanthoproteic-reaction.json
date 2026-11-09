@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-corrosive-metallic-xanthoproteic-reaction",
+ "subject": "forensic-medicine",
+ "module": "fmt-corrosive-metallic",
+ "title": "Xanthoproteic Reaction, Carbolic Acid and Carboluria",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Xanthoproteic reaction names nitric acid",
+   "tx": "The **xanthoproteic reaction** is the yellow staining of skin, tissue and protein by nitric acid, which nitrates aromatic amino acids into yellow picric acid type compounds. Yellow coronets on the teeth, yellow skin and yellow clothing stains therefore name nitric acid rather than sulphuric acid, which chars brown black. The reaction is a scene test in words: colour of stain plus corrosion pattern separates the mineral acids before any laboratory report arrives.",
+   "say": "Yellow stain on skin, teeth and cloth is nitric acid signing its work, while sulphuric acid chars brown and black.",
+   "vis": {"kind": "table", "cols": ["Acid", "Stain", "Other signature"], "rows": [["Nitric acid", "Yellow, xanthoproteic", "Yellow tooth crowns"], ["Sulphuric acid", "Brown or black char", "Chalky white teeth"], ["Hydrochloric acid", "Greyish, milder corrosion", "Less charring"], ["Oxalic acid preview", "Bleached white mucosa", "Calcium oxalate in kidneys"]]}
+  },
+  {
+   "title": "Carbolic acid, phenol crystals",
+   "tx": "**Carbolic acid or phenol** forms short colourless prismatic needle crystals with a burning sweetish taste and the familiar carbolic smell, turning pink and liquefying in air; commercial acid is a dark brown liquid rich in cresol. Lysol is a fifty percent cresol solution in saponified oil, and phenol is about eight times as toxic as lysol. Dettol is a chlorinated phenol with terpineol. Ten to fifteen grams kill in three to four hours.",
+   "say": "Needle crystals smelling of carbolic, eight times lysol's strength, kill at ten to fifteen grams within hours.",
+   "vis": {"kind": "compare", "left": {"title": "Phenol properties", "points": ["Needle crystals, carbolic smell", "Turns pink in air", "Soluble in glycerine and alcohol", "Fatal dose 10 to 15 grams"]}, "right": {"title": "Related preparations", "points": ["Lysol, fifty percent cresol in oil", "Dettol, chlorinated phenol", "Cresol and creosote derivatives", "Thymol, menthol, tannic acid kin"]}}
+  },
+  {
+   "title": "Phenol anaesthetises what it burns",
+   "tx": "Phenol precipitates protein, coagulates cell contents and destroys nerve endings, so **carbolic skin burns** begin as a hard cracked whitish opaque eschar that is strikingly painless from local anaesthesia, then falls away leaving a brown stain. Deep burns are black, necrotic tissue turns green white or brown white and sloughs readily, and lysol stains tissues brownish purple. The painless white eschar is the bedside clue that separates phenol from mineral acid burns, which hurt intensely.",
+   "say": "A white painless eschar that later stains brown is phenol burning with built in anaesthesia, unlike screaming acid burns.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Phenol contacts the skin"}, {"id": "b", "label": "Protein precipitates, nerves die"}, {"id": "c", "label": "White painless eschar forms"}, {"id": "d", "label": "Eschar falls, brown stain remains"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Systemic carbolism",
+   "tx": "Absorbed phenol is a nervous system depressant, especially of the respiratory centre, under **acute carbolism**. Headache, giddiness and coma develop with subnormal temperature, contracted pupils, stertorous breathing, rapid feeble irregular pulse, cold sweat and dusky cyanosis, with phenol odour on the breath. Haemolysis and methaemoglobinaemia are characteristic. Death comes by syncope, respiratory failure, glottis oedema or aspiration bronchopneumonia. Vapour inhalation can produce the whole systemic picture without gut corrosion.",
+   "say": "Cold sweat, contracted pupils, stertor and phenol breath mark carbolism, and inhaled vapour alone can produce it.",
+   "vis": {"kind": "table", "cols": ["System", "Carbolism finding", "Danger"], "rows": [["Brain", "Headache, giddiness, coma", "Respiratory centre depressed"], ["Breathing", "Slow, laboured, stertorous", "Failure or oedema of glottis"], ["Blood", "Haemolysis, methaemoglobinaemia", "Characteristic of phenol"], ["Circulation", "Rapid feeble irregular pulse", "Syncope may kill"]]}
+  },
+  {
+   "title": "Carboluria, urine that darkens in air",
+   "tx": "**Carboluria** is the urine of phenol poisoning: scanty at first with albumin and free haemoglobin, colourless or slightly green when passed, then turning green or even black on exposure to air. Phenol is oxidised in the body to hydroquinone and pyrocatechol, excreted free and conjugated, and their further oxidation in standing urine makes the colour. A urine sample darkening in the specimen jar is therefore diagnostic evidence worth photographing and preserving.",
+   "say": "Urine that leaves the body pale and blackens in the jar is carboluria, phenol metabolites oxidising in open air.",
+   "vis": {"kind": "compare", "left": {"title": "Fresh phenol urine", "points": ["Scanty volume", "Colourless or slightly green", "Albumin and haemoglobin present", "Suppression may follow"]}, "right": {"title": "Standing phenol urine", "points": ["Turns green then black", "Hydroquinone oxidises in air", "Photograph the change", "Preserve sample for analysis"]}}
+  },
+  {
+   "title": "Carbolic acid is the lavage exception",
+   "tx": "Among corrosives, **carbolic acid alone permits gastric lavage** with care, the standing exception to the no lavage rule for corrosive poisoning. The reason is mechanistic: phenol hardens and anaesthetises the mucosa rather than charring it into friable tissue, and its greater danger is rapid systemic absorption, which lavage reduces. Olive oil, castor oil, magnesium or sodium sulphate, demulcents and ten percent alcohol or glycerine washing of skin complete the standard management Reddy describes.",
+   "say": "Phenol is the one corrosive you may lavage, because stopping its absorption matters more than the hardened wall risks.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Identify phenol by eschar and smell"}, {"id": "b", "label": "Wash skin with alcohol or glycerine"}, {"id": "c", "label": "Gastric lavage permitted here"}, {"id": "d", "label": "Oils and demulcents follow"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Chronic phenol poisoning, phenol marasmus",
+   "tx": "**Chronic carbolic acid poisoning or phenol marasmus** brings anorexia, weight loss, headache, vertigo, dark urine and pigmentation of skin and sclera. Hydroquinone and pyrocatechol deposit in cornea and cartilages producing ochronosis, the same pigmentation classically linked to alkaptonuria where homogentisic acid darkens cartilages, ligaments and fibrous tissue. Occupational exposure in disinfectant workers is the usual source, and removal from exposure is the first treatment.",
+   "say": "Wasting, dark urine and cartilage pigmentation in a disinfectant worker is phenol marasmus until exposure is removed.",
+   "vis": {"kind": "table", "cols": ["Chronic phenol feature", "Finding", "Source"], "rows": [["General", "Anorexia, weight loss, vertigo", "Continued absorption"], ["Urine", "Persistently dark carboluria", "Hydroquinone excretion"], ["Pigmentation", "Skin, sclera, cartilage ochronosis", "Metabolite deposition"], ["Treatment start", "Remove from exposure", "Occupational history"]]}
+  },
+  {
+   "title": "Xanthoproteic and other colour tests at the scene",
+   "tx": "Colour reactions give rapid orientation in **acid identification by staining**: nitric acid yellows, sulphuric acid chars black, carbolic acid whitens then browns, oxalic acid bleaches mucosa white, and copper sulphate, met next lesson, stains vomit and stomach green blue. Barium solution precipitates white barium sulphate from sulphuric acid and white barium oxalate, soluble in hydrochloric acid, from oxalic acid. Scene colours narrow the laboratory request but never replace chemical analysis of preserved samples.",
+   "say": "Yellow, black, white brown, bleached or green blue: stain colours triage the acids while the laboratory confirms them.",
+   "vis": {"kind": "compare", "left": {"title": "Scene colour clues", "points": ["Yellow means nitric acid", "Black char means sulphuric", "White eschar means phenol", "Green blue means copper salt"]}, "right": {"title": "Laboratory confirmation", "points": ["Barium precipitate tests", "Preserved vomit and viscera", "Clothing stains analysed", "Colour never stands alone"]}}
+  },
+  {
+   "title": "Circumstances of phenol poisoning",
+   "tx": "Phenol's disinfectant ubiquity shapes its cases under **circumstances of carbolic poisoning**: accidental ingestion from unlabelled bottles and skin absorption during disinfection work, suicidal drinking of household disinfectant, and abortifacient misuse by vaginal application. Because phenol absorbs through intact skin, serous cavities, rectum and vagina, splashes over large areas can kill without a drop being swallowed. The phenolic smell on breath and clothing often reaches the examiner before the history does.",
+   "say": "Unlabelled disinfectant bottles, skin absorption at work and suicidal drinking make most phenol cases, announced by their smell.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Note carbolic smell on arrival"}, {"id": "b", "label": "Inspect skin for white eschar"}, {"id": "c", "label": "Check urine for darkening"}, {"id": "d", "label": "Establish ingestion versus absorption"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}
