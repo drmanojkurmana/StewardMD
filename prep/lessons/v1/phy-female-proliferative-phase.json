@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "phy-female",
+  "subject": "physiology",
+  "title": "The Endometrial Cycle, Two-Cell Theory, and Menopause",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Following completion of menstrual shedding, rising concentrations of 17-beta estradiol secreted by developing ovarian follicles stimulate rapid mitotic regeneration of the uterine mucosa from the preserved stratum basale. This stage of mucosal reconstitution, stromal hyperplasia, and glandular lengthening constitutes the **proliferative phase** of the uterine endometrial cycle, typically spanning days five through fourteen.",
+      "say": "Rising ovarian estradiol regenerates the endometrial functional layer from basal cells during the proliferative phase.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/endometriosis-fig1.webp",
+        "caption": "Ectopic endometrial tissue demonstrating responsive cyclic hormonal proliferation and inflammation.",
+        "alt": "Endometriotic tissue proliferation driven by estrogenic stimulation"
+      }
+    },
+    {
+      "tx": "Following ovulation, progesterone secreted by the corpus luteum acts on the estrogen-primed endometrial stroma to arrest mitotic division and induce marked cellular differentiation. During this **secretory phase**, endometrial glands become markedly corkscrew-shaped, accumulating glycogen vacuoles at the subnuclear base before apocrine secretion into the uterine lumen to nourish the potential blastocyst.",
+      "say": "During the secretory phase, progesterone transforms the endometrium into corkscrew glycogen-secreting glands ready for implantation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "prog_bind",
+            "label": "Progesterone Binds Nuclear PR-A and PR-B Receptors in Stroma and Epithelium"
+          },
+          {
+            "id": "mitotic_arrest",
+            "label": "Downregulates Estrogen Receptors to Halt Epithelial Mitotic Division"
+          },
+          {
+            "id": "gland_corkscrew",
+            "label": "Glands Become Tortuous and Corkscrew-Shaped with Luminal Secretions"
+          },
+          {
+            "id": "decidualization",
+            "label": "Stromal Cells Enlarge into Epithelioid Glycogen-Rich Decidual Cells"
+          }
+        ],
+        "edges": [
+          [
+            "prog_bind",
+            "mitotic_arrest"
+          ],
+          [
+            "mitotic_arrest",
+            "gland_corkscrew"
+          ],
+          [
+            "gland_corkscrew",
+            "decidualization"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Follicular steroidogenesis requires coordinated metabolic cooperation between adjacent theca interna and granulosa cells, formalized as the **two-cell theory of steroidogenesis**. Luteinizing hormone acts on theca cells to promote cholesterol uptake and conversion into androstenedione, which then diffuses across the basement membrane into adjacent granulosa cells.",
+      "say": "The two-cell theory explains that LH stimulates theca cells to produce androgens, which diffuse to granulosa cells.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Theca Interna Cell Function",
+          "points": [
+            "Stimulated by pituitary luteinizing hormone (LH)",
+            "Expresses 17-alpha-hydroxylase and 17,20-lyase enzymes",
+            "Synthesizes androstenedione and testosterone from cholesterol",
+            "Lacks aromatase and cannot convert androgens to estrogens"
+          ]
+        },
+        "right": {
+          "title": "Granulosa Cell Function",
+          "points": [
+            "Stimulated by follicle-stimulating hormone (FSH)",
+            "Expresses high levels of cytochrome P450 aromatase enzyme",
+            "Converts thecal androstenedione into estrone and estradiol",
+            "Lacks 17-alpha-hydroxylase and cannot synthesize androgens de novo"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Within the avascular granulosa layer, follicle-stimulating hormone activates cyclic adenosine monophosphate signaling to induce transcription of the cytochrome P450 aromatase enzyme. Granulosa **aromatase activity** converts thecal androstenedione into estrone and estradiol, releasing high concentrations of potent estrogen into the follicular antrum and systemic circulation.",
+      "say": "FSH induces aromatase within granulosa cells to convert thecal androgens into estradiol.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/adenomyosis-fig1.webp",
+        "caption": "Ectopic myometrial glandular infiltration showing persistent responsive hormonal expansion.",
+        "alt": "Myometrial glandular penetration and cyclic hormonal changes"
+      }
+    },
+    {
+      "tx": "Natural exhaustion of the ovarian follicular pool marks the cessation of regular menstrual cycling and reproductive senescence, designated clinically as **menopause**. The absence of developing follicles removes circulating estradiol and inhibin B feedback, resulting in compensatory persistent hypergonadotropic elevations of both follicle-stimulating hormone and luteinizing hormone.",
+      "say": "Menopause occurs when ovarian follicles are depleted, resulting in low estrogen and compensatory high FSH and LH.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "depletion",
+            "label": "Complete Depletion of Ovarian Follicular Reserve Below Critical Threshold"
+          },
+          {
+            "id": "hypoestrogen",
+            "label": "Circulating 17-Beta Estradiol and Inhibin B Fall to Minimal Basal Levels"
+          },
+          {
+            "id": "loss_inhibition",
+            "label": "Loss of Negative Feedback at Arcuate Hypothalamus and Gonadotropes"
+          },
+          {
+            "id": "hypergonad",
+            "label": "Marked Persistent Elevation of Serum FSH (Typically Exceeding 30-40 IU/L)"
+          }
+        ],
+        "edges": [
+          [
+            "depletion",
+            "hypoestrogen"
+          ],
+          [
+            "hypoestrogen",
+            "loss_inhibition"
+          ],
+          [
+            "loss_inhibition",
+            "hypergonad"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Combined oral contraceptive formulations exploit physiological negative feedback mechanisms to inhibit ovulation with high reliability. Synthetic progestins suppress hypothalamic gonadotropin-releasing hormone pulse frequency and block the preovulatory luteinizing hormone surge, while estrogenic components suppress follicle-stimulating hormone to prevent follicular recruitment, establishing effective **hormonal contraception**.",
+      "say": "Hormonal contraceptives suppress GnRH pulses and block the LH surge to prevent ovulation reliably.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "synthetic_steroids",
+            "label": "Exogenous Synthetic Estrogen and Progestin Enter Systemic Circulation"
+          },
+          {
+            "id": "feedback_block",
+            "label": "Potent Negative Feedback Suppresses Hypothalamic GnRH and Pituitary LH/FSH"
+          },
+          {
+            "id": "anovulation",
+            "label": "Absence of Follicular Maturation and Complete Prevention of LH Surge"
+          },
+          {
+            "id": "peripheral_actions",
+            "label": "Hostile Cervical Mucus Thickening and Endometrial Atrophy Block Conception"
+          }
+        ],
+        "edges": [
+          [
+            "synthetic_steroids",
+            "feedback_block"
+          ],
+          [
+            "feedback_block",
+            "anovulation"
+          ],
+          [
+            "anovulation",
+            "peripheral_actions"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Urinary monitoring kits designed to anticipate ovulation detect the abrupt appearance of luteinizing hormone in concentrated morning urine samples. These **ovulation prediction tests** turn positive approximately twenty-four to thirty-six hours before follicular rupture, identifying the optimal fertile window for intercourse or artificial insemination.",
+      "say": "Ovulation prediction tests detect the urinary LH surge twenty-four to thirty-six hours before follicular rupture.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Urinary LH Surge Detection",
+          "points": [
+            "Employs monoclonal antibodies targeting LH beta subunit",
+            "Monitors preovulatory LH surge threshold in urine",
+            "Provides prospective prediction 24-36 hours prior to rupture",
+            "Accurately defines timing of maximal female fertility"
+          ]
+        },
+        "right": {
+          "title": "Cervical Mucus Spinnbarkeit",
+          "points": [
+            "High preovulatory estradiol thins and clears cervical mucus",
+            "Mucus demonstrates high elasticity stretching up to 10-12 cm",
+            "Exhibits microscopic ferning pattern upon air drying",
+            "Facilitates rapid sperm transit and capacitation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Progesterone exerts a direct thermogenic effect on the hypothalamic thermoregulatory center, mediated by local norepinephrine and prostaglandin signaling. Following ovulation, waking oral or tympanic temperatures rise by zero point three to zero point five degrees Celsius, creating a biphasic **basal body temperature shift** that confirms recent corpus luteum formation.",
+      "say": "Progesterone raises basal body temperature by up to half a degree Celsius after ovulation, confirming luteal activity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ovul_rupture",
+            "label": "Ovulation and Formation of Active Progesterone-Secreting Corpus Luteum"
+          },
+          {
+            "id": "hypothalamus_thermo",
+            "label": "Circulating Progesterone Resets Preoptic Hypothalamic Thermostat Upward"
+          },
+          {
+            "id": "temp_rise",
+            "label": "Basal Body Temperature Shifts Upward by 0.3 to 0.5 Degrees Celsius"
+          },
+          {
+            "id": "retrospective_proof",
+            "label": "Sustained Luteal Thermal Plateau Retrospectively Confirms Prior Ovulation"
+          }
+        ],
+        "edges": [
+          [
+            "ovul_rupture",
+            "hypothalamus_thermo"
+          ],
+          [
+            "hypothalamus_thermo",
+            "temp_rise"
+          ],
+          [
+            "temp_rise",
+            "retrospective_proof"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-stomach-spleen",
+ "subject": "anatomy",
+ "title": "Spleen Topography: Peritoneal Ligaments, Relations, and Surgical Risks",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The spleen is the largest lymphoid organ in the body, situated in the left hypochondrium between the gastric fundus and the diaphragm. It is completely invested by peritoneum and suspended by two primary peritoneal folds: the **gastrosplenic ligament** connecting it to the stomach, and the lienorenal ligament connecting it to the left kidney.",
+   "say": "The spleen is the largest lymphoid organ, nestled in the left hypochondrium. It is suspended by the gastrosplenic ligament to the stomach and the lienorenal ligament to the left kidney.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/accessory-spleen-fig1.webp",
+    "alt": "Anatomical schematic showing spleen, splenic hilum, and peritoneal ligaments",
+    "caption": "Anatomical relations of the spleen, splenic pedicle, and peritoneal ligaments. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The contents of the splenic ligaments are surgically critical during splenectomy. The gastrosplenic ligament transmits the **short gastric vessels** and left gastroepiploic vessels, whereas the lienorenal (splenorenal) ligament transmits the splenic artery and vein alongside the delicate tail of the pancreas.",
+   "say": "Splenic ligament contents are crucial during splenectomy. The gastrosplenic ligament contains short gastric vessels, while the lienorenal ligament carries splenic vessels and the pancreatic tail.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gastrosplenic Ligament",
+     "points": [
+      "Connects splenic hilum to greater curvature",
+      "Contains short gastric arteries and veins",
+      "Contains left gastroepiploic vessels",
+      "Divided to enter the lesser sac"
+     ]
+    },
+    "right": {
+     "title": "Lienorenal Ligament",
+     "points": [
+      "Connects splenic hilum to anterior left kidney",
+      "Contains splenic artery and splenic vein",
+      "Contains the tail of the pancreas",
+      "Pancreatic injury risks fistula during ligation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When ligating the splenic vascular pedicle at the hilum during emergency splenectomy, accidental injury to the **tail of the pancreas** is the most common iatrogenic complication. Laceration or ischemic necrosis of the pancreatic tail produces a persistent postoperative external pancreatic fistula or painful peripancreatic fluid collection.",
+   "say": "Inadvertent damage to the pancreatic tail is a major hazard of splenectomy. Lacerating the tail within the lienorenal ligament produces a troublesome postoperative pancreatic fistula.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathogenesis of Post-Splenectomy Pancreatic Fistula",
+    "nodes": [
+     {
+      "id": "clamp",
+      "label": "Mass Ligation of Splenic Pedicle Inadvertently Encloses Pancreatic Tail"
+     },
+     {
+      "id": "necrosis",
+      "label": "Parenchymal Ischemia and Disruption of Distal Pancreatic Ductules"
+     },
+     {
+      "id": "leak",
+      "label": "Enzyme-rich Amylase Fluid Leaks into Left Subphrenic Space"
+     },
+     {
+      "id": "fistula",
+      "label": "Formation of Chronic External Pancreatic Cutaneous Fistula"
+     }
+    ],
+    "edges": [
+     [
+      "clamp",
+      "necrosis"
+     ],
+     [
+      "necrosis",
+      "leak"
+     ],
+     [
+      "leak",
+      "fistula"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The visceral surface of the spleen exhibits three distinct impressions corresponding to adjacent organs: a large anterior gastric impression for the stomach fundus, an inferior renal impression resting against the left kidney, and a medial colic impression cradling the **splenic flexure** of the colon.",
+   "say": "The visceral surface shows three impressions: a gastric impression for the fundus, a renal impression for the left kidney, and a colic impression for the splenic flexure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Splenic Impression",
+     "Contacting Viscus",
+     "Spatial Quadrant",
+     "Surgical Signpost"
+    ],
+    "rows": [
+     [
+      "Gastric Impression",
+      "Posterior wall of gastric fundus",
+      "Anterosuperior visceral surface",
+      "Mobilized by dividing gastrosplenic fold"
+     ],
+     [
+      "Renal Impression",
+      "Upper pole of left kidney",
+      "Posteroinferior visceral surface",
+      "Separated by lienorenal reflection"
+     ],
+     [
+      "Colic Impression",
+      "Splenic flexure of colon",
+      "Inferior extremity (anterior pole)",
+      "Supported by phrenicocolic ligament"
+     ],
+     [
+      "Pancreatic Impression",
+      "Tail of the pancreas",
+      "At the splenic hilum",
+      "Tucked into the lienorenal ligament"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The superior border of the spleen is sharp and features one or two characteristic notches, termed the **splenic notch**. These notches represent embryological remnants of the multiple lobules that fused during development, providing a crucial bedside sign allowing clinical differentiation of an enlarged spleen from an enlarged left kidney.",
+   "say": "The superior border features notches representing embryonic lobules. Palpating a notch on the anterior border differentiates an enlarged spleen from an enlarged left kidney.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Splenomegaly Characteristics",
+     "points": [
+      "Enlarges downwards and medially toward right iliac fossa",
+      "Features sharp anterior border with palpable notch",
+      "Cannot get above the mass under costal margin",
+      "Dull to percussion; not bimanually ballotable"
+     ]
+    },
+    "right": {
+     "title": "Enlarged Left Kidney",
+     "points": [
+      "Enlarges downwards into left flank",
+      "Rounded smooth contour without any notches",
+      "Can get fingers above the mass in lean patients",
+      "Resonant due to overlying colon; bimanually ballotable"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Fracture of the left lower ribs (ribs nine, ten, and eleven) frequently lacerates the spleen, the most commonly injured visceral organ in blunt abdominal trauma. Extravasation of blood irritates the diaphragmatic parietal pleura, provoking referred pain to the left shoulder tip mediated by the phrenic nerve (C3-C5), designated **Kehr sign**.",
+   "say": "Fractures of lower left ribs frequently lacerate the spleen. Hemoperitoneum irritates the diaphragm, causing referred left shoulder pain mediated by the phrenic nerve, termed Kehr sign.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-splenic_injury_signs.webp",
+    "alt": "Clinical signs of splenic trauma including Kehr sign, Ballance sign, and injury grading",
+    "caption": "Signs of splenic trauma illustrating Kehr sign diaphragmatic irritation and visceral laceration. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Up to ten to fifteen percent of individuals possess one or more **accessory spleens** (splenculi), formed by failure of embryonic splenic buds to fuse completely. Typically located at the splenic hilum, gastrosplenic ligament, or greater omentum, an unrecognized accessory spleen can hypertrophy and cause recurrence of immune thrombocytopenia after splenectomy.",
+   "say": "Accessory spleens occur in up to fifteen percent of people from incomplete lobular fusion. Found near the hilum or omentum, missed tissue can cause disease relapse after splenectomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Accessory Spleen Site",
+     "Frequency Percentage",
+     "Embryological Mechanism",
+     "Clinical Implication"
+    ],
+    "rows": [
+     [
+      "Splenic Hilum",
+      "75% of accessory spleens",
+      "Incomplete fusion of dorsal mesogastrium buds",
+      "Must be sought and excised in ITP"
+     ],
+     [
+      "Gastrosplenic Ligament",
+      "20% of accessory spleens",
+      "Arrested migration along dorsal mesogastrium",
+      "Easily missed during emergency trauma surgery"
+     ],
+     [
+      "Greater Omentum",
+      "10% of accessory spleens",
+      "Displaced splenic primordium",
+      "Can mimic peritoneal metastasis on CT"
+     ],
+     [
+      "Splenogonadal Fusion",
+      "Under 1% (rare)",
+      "Descent of testis pulls splenic tissue",
+      "Presents as scrotal mass alongside testis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical acid reduction for refractory peptic ulcer disease historically utilized selective **highly selective vagotomy** (parietal cell vagotomy). By transecting only the gastric branches of the anterior and posterior nerves of Latarjet while preserving the terminal crow-foot branches to the pyloric antrum, acid secretion is reduced while preserving normal pyloric emptying.",
+   "say": "Highly selective vagotomy cuts only the acid-secreting branches of the nerves of Latarjet while sparing the crow's foot to the pylorus, preserving normal gastric emptying without drainage surgery.",
+   "vis": {
+    "kind": "flow",
+    "title": "Evolution of Surgical Vagotomy",
+    "nodes": [
+     {
+      "id": "truncal",
+      "label": "Truncal Vagotomy: Divides Vagal Trunks at Oesophagus (Requires Pyloroplasty)"
+     },
+     {
+      "id": "selective",
+      "label": "Selective Vagotomy: Sparing Celiac and Hepatic Branches"
+     },
+     {
+      "id": "hsv",
+      "label": "Highly Selective Vagotomy: Cuts Only Branches to Body and Fundus"
+     },
+     {
+      "id": "pylorus",
+      "label": "Preserves Latarjet Crow-Foot: Intact Pyloric Sphincter Emptying"
+     }
+    ],
+    "edges": [
+     [
+      "truncal",
+      "selective"
+     ],
+     [
+      "selective",
+      "hsv"
+     ],
+     [
+      "hsv",
+      "pylorus"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "503a073d-2e67-42ac-8b0d-c1df37328865",
+  "6fffe053-cf47-4e02-ada9-1cd271698ad0",
+  "793ae8d4-b496-4ae1-9dea-b5138085f151"
+ ]
+}

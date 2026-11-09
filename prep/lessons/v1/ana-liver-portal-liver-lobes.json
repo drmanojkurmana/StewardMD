@@ -1,0 +1,257 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-liver-portal",
+ "subject": "anatomy",
+ "title": "Liver Architecture: Anatomical Lobes, Couinaud Segments, and Bare Area",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The liver is the largest internal organ and metabolic factory of the human body, weighing approximately 1.5 kilograms in adults. Anatomically, its anterior diaphragmatic surface is divided into right and left anatomical lobes by the attachment of the **falciform ligament**, with the right lobe being five times larger than the left.",
+   "say": "The liver is the largest internal organ, weighing one and a half kilograms. Anatomically, the falciform ligament divides its diaphragmatic surface into right and left lobes, with the right lobe five times larger.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-proc-liver-biopsy.webp",
+    "alt": "Anatomical surface projection of the liver beneath the diaphragm and costal margin",
+    "caption": "Anatomical projection of the liver beneath the diaphragm and right costal margin. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "On the visceral and posterior surfaces, two additional anatomical lobes are demarcated: the **caudate lobe** and quadrate lobe, framed by the H-shaped arrangement of fissures and fossae. The caudate lobe lies between the fissure for ligamentum venosum and the IVC groove, while the quadrate lobe lies between the ligamentum teres and gallbladder fossa.",
+   "say": "On its visceral surface, the caudate and quadrate lobes are defined by an H-shaped fissure pattern. The caudate lobe sits behind the porta hepatis, while the quadrate lobe sits in front.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Caudate Lobe (Spigelius)",
+     "points": [
+      "Situated on posterior surface between IVC and venosum",
+      "Superior to the porta hepatis (roof of lesser sac)",
+      "Features caudate process and papillary process",
+      "Couinaud Segment I: independent venous drain to IVC"
+     ]
+    },
+    "right": {
+     "title": "Quadrate Lobe",
+     "points": [
+      "Situated on visceral surface between teres and gallbladder",
+      "Inferior to the porta hepatis",
+      "Functionally belongs to the physiological left liver",
+      "Couinaud Segment IVb: drains via left hepatic duct"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Crucially, anatomical surface lobation does not match functional biliary and vascular anatomy. The **functional liver division** (Cantlie line) runs along an imaginary plane extending from the notch for the gallbladder fundus anteriorly to the left border of the inferior vena cava posteriorly, splitting the liver into equal right and left functional hemilivers.",
+   "say": "Anatomical lobation does not match internal vascular flow. Cantlie line, from the gallbladder fossa to the IVC, divides the liver into functional right and left hemilivers based on portal and biliary distribution.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anatomical Lobation",
+     "points": [
+      "Demarcated by falciform ligament on surface",
+      "Demarcated by ligamentum teres/venosum on viscera",
+      "Superficial peritoneal boundary",
+      "Quadrate and caudate lobes grouped with right lobe"
+     ]
+    },
+    "right": {
+     "title": "Functional / Physiological Lobation",
+     "points": [
+      "Demarcated by Cantlie line (gallbladder to IVC)",
+      "Demarcated by bifurcation of portal triad vessels",
+      "Independent vascular and biliary architecture",
+      "Quadrate and left caudate belong to left functional liver"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Modern hepatic resection is based on the **Couinaud segmentation** system, which partitions the liver into eight surgically independent segments (numbered I to VIII). Each segment possesses its own dual vascular inflow (portal vein and hepatic artery) and dedicated biliary drainage, allowing precise segmental resections without jeopardizing surrounding parenchyma.",
+   "say": "Hepatic resection relies on the eight Couinaud segments. Each segment has its own portal branch, hepatic artery branch, and bile duct, allowing anatomical resections without damaging adjacent segments.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Couinaud Segment",
+     "Functional Hemiliver",
+     "Sector / Location",
+     "Clinical / Resection Designation"
+    ],
+    "rows": [
+     [
+      "Segment I",
+      "Independent (both sides)",
+      "Caudate lobe on posterior liver",
+      "Resected in cholangiocarcinoma (Klatskin)"
+     ],
+     [
+      "Segment II",
+      "Left hemiliver",
+      "Left lateral superior segment",
+      "Left lateral sectionectomy (II + III)"
+     ],
+     [
+      "Segment III",
+      "Left hemiliver",
+      "Left lateral inferior segment",
+      "Pediatric living-donor liver graft segment"
+     ],
+     [
+      "Segment IV (a/b)",
+      "Left hemiliver",
+      "Left medial sector (quadrate lobe)",
+      "Central resection / extended right hepatectomy"
+     ],
+     [
+      "Segments V and VIII",
+      "Right hemiliver",
+      "Right anterior sector (inferior/superior)",
+      "Right anterior sectionectomy"
+     ],
+     [
+      "Segments VI and VII",
+      "Right hemiliver",
+      "Right posterior sector (inferior/superior)",
+      "Right posterior sectionectomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The caudate lobe (**Segment I**) is anatomically unique because it receives vascular inflow and biliary drainage from both right and left portal branches. Furthermore, its hepatic venous blood drains directly into the retrohepatic inferior vena cava via three or four small independent emissary hepatic veins, bypassing the major three hepatic veins.",
+   "say": "Segment I, the caudate lobe, is unique because it receives dual right and left inflow and drains directly into the IVC via small veins, sparing it during major hepatic vein thrombosis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Hemodynamics of Caudate Lobe (Segment I)",
+    "nodes": [
+     {
+      "id": "bifurc",
+      "label": "Receives Branches from Both Right and Left Portal Veins"
+     },
+     {
+      "id": "artery",
+      "label": "Receives Arterial Supply from Both Hepatic Arteries"
+     },
+     {
+      "id": "budd",
+      "label": "Thrombosis of Major Hepatic Veins (Budd-Chiari Syndrome)"
+     },
+     {
+      "id": "spared",
+      "label": "Emissary Veins Directly to IVC Spare Caudate: Compensatory Hypertrophy"
+     }
+    ],
+    "edges": [
+     [
+      "bifurc",
+      "budd"
+     ],
+     [
+      "artery",
+      "budd"
+     ],
+     [
+      "budd",
+      "spared"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On the posterior surface of the right lobe lies the **bare area of the liver**, a triangular region devoid of peritoneal covering where the hepatic parenchyma is in direct contact with the diaphragm. Bounded by the superior and inferior layers of the coronary ligament and closed laterally by the right triangular ligament, it permits direct lymph-borne spread of infection.",
+   "say": "The posterior right lobe features the bare area, devoid of peritoneum and touching the diaphragm directly. Bounded by the coronary ligaments, it allows infectious spread into the thorax.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Peritoneal Ligament",
+     "Anatomical Boundary",
+     "Reflected Layer",
+     "Cavity Delimited"
+    ],
+    "rows": [
+     [
+      "Superior Coronary Ligament",
+      "Upper margin of bare area",
+      "Reflects to right diaphragmatic dome",
+      "Separates bare area from right subphrenic space"
+     ],
+     [
+      "Inferior Coronary Ligament",
+      "Lower margin of bare area",
+      "Reflects to right kidney / suprarenal",
+      "Separates bare area from Morison pouch"
+     ],
+     [
+      "Right Triangular Ligament",
+      "Lateral apex where coronary leaves unite",
+      "Small triangular fibrous fold",
+      "Divides bare area from lateral abdominal wall"
+     ],
+     [
+      "Left Triangular Ligament",
+      "Extends from left lobe to diaphragm",
+      "Double peritoneal fold",
+      "Lacks bare area; covers fibrous appendage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The transverse fissure on the visceral surface is the **porta hepatis**, the hilum of the liver. From anterior to posterior, the three structures entering and exiting the porta hepatis are arranged as: bile ducts (most anterior), hepatic artery branches (intermediate), and the portal vein (most posterior, lying against the deep floor).",
+   "say": "The porta hepatis is the liver hilum. From anterior to posterior, structures are arranged as: bile ducts in front, hepatic artery in the middle, and portal vein in the back.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-intermittent-porphyria-fig1.webp",
+    "alt": "Anatomical schematic showing liver visceral surface and porta hepatis portal triad",
+    "caption": "Porta hepatis architecture showing the spatial arrangement of the portal triad. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Three large hepatic veins (right, middle, and left) drain the hepatic parenchyma into the retrohepatic IVC. The **middle hepatic vein** courses along the Cantlie plane, draining both Segment IV of the left hemiliver and Segments V and VIII of the right hemiliver, making its trajectory critical when splitting liver grafts for pediatric living-donor transplantation.",
+   "say": "Three hepatic veins drain into the IVC. The middle hepatic vein runs down Cantlie line, draining segments on both sides, which makes its preservation vital in split liver transplants.",
+   "vis": {
+    "kind": "flow",
+    "title": "Drainage Territories of Major Hepatic Veins",
+    "nodes": [
+     {
+      "id": "right",
+      "label": "Right Hepatic Vein: Drains Segments VI, VII, and Part of VIII"
+     },
+     {
+      "id": "middle",
+      "label": "Middle Hepatic Vein: Drains Segments IV, V, and VIII in Cantlie Plane"
+     },
+     {
+      "id": "left",
+      "label": "Left Hepatic Vein: Drains Segments II and III"
+     },
+     {
+      "id": "ivc",
+      "label": "Empty Directly into Retrohepatic Inferior Vena Cava"
+     }
+    ],
+    "edges": [
+     [
+      "right",
+      "ivc"
+     ],
+     [
+      "middle",
+      "ivc"
+     ],
+     [
+      "left",
+      "ivc"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "01736105-4c43-437d-9e43-ab96502ee8c1",
+  "06da6a39-ef70-4737-93b0-cf32eadf1146",
+  "02de87ba-bea9-4632-b077-06ca1d713df1"
+ ]
+}

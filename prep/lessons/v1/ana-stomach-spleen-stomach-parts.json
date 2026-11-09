@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-stomach-spleen",
+ "subject": "anatomy",
+ "title": "Stomach Anatomy: Regions, Gastric Bed, and Coeliac Arterial Branches",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The stomach is the most dilated reservoir of the gastrointestinal tract, situated in the left hypochondriac, epigastric, and umbilical regions. It features two orifices (cardiac and pyloric), two curvatures (lesser and greater), and two surfaces (anterosuperior and posteroinferior), divided into the **fundus, body, and pyloric part**.",
+   "say": "The stomach is the most dilated digestive organ, lying in the left hypochondrium and epigastrium. It features cardiac and pyloric orifices, two curvatures, and fundus, body, and pyloric regions.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-stomach-nerves.svg",
+    "alt": "Anatomical schematic of stomach regions, arterial supply, and anterior vagal nerve of Latarjet",
+    "caption": "Anatomical regions of the stomach and autonomic vagal nerve distribution. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The dome-shaped gastric fundus projects upwards above the horizontal plane of the cardiac notch, resting beneath the left dome of the diaphragm. On an erect chest or abdominal radiograph, swallowed air within the fundus forms the physiological **gastric air bubble**, visible beneath the left hemidiaphragmatic shadow.",
+   "say": "The gastric fundus projects upward above the cardiac notch under the left diaphragm. Swallowed gas in the fundus creates the gastric air bubble seen on erect radiographs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gastric Fundus",
+     "points": [
+      "Elevates above horizontal cardiac plane",
+      "Contains gas bubble on erect radiography",
+      "Supplied by short gastric arteries (splenic)",
+      "Lacks primary acid-secreting antral G cells"
+     ]
+    },
+    "right": {
+     "title": "Pyloric Antrum and Canal",
+     "points": [
+      "Extends from incisura angularis to pylorus",
+      "Houses gastrin-secreting endocrine G cells",
+      "Guarded by thickened circular pyloric sphincter",
+      "Palpated at transpyloric plane (L1)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The stomach rests upon the **gastric bed**, separated from it by the cavity of the lesser sac. Structures forming the stomach bed from superior to inferior comprise: the left dome of the diaphragm, spleen, left suprarenal gland, upper pole of the left kidney, splenic artery, pancreas, and the transverse mesocolon.",
+   "say": "The stomach rests upon the structures of the stomach bed across the lesser sac: the diaphragm, spleen, left suprarenal, left kidney, splenic artery, pancreas, and transverse mesocolon.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stomach Bed Structure",
+     "Anatomical Orientation",
+     "Relation to Lesser Sac",
+     "Surgical Relevance"
+    ],
+    "rows": [
+     [
+      "Left Dome of Diaphragm",
+      "Superior and posterior",
+      "Forms upper roof",
+      "Ulcers may penetrate toward thorax"
+     ],
+     [
+      "Spleen",
+      "Lateral across gastrosplenic ligament",
+      "Forms left lateral margin",
+      "Splenectomy risk during total gastrectomy"
+     ],
+     [
+      "Left Kidney and Suprarenal",
+      "Intermediate posterior plane",
+      "Directly behind lesser sac",
+      "Invaded by posterior gastric malignancies"
+     ],
+     [
+      "Pancreas (Body and Tail)",
+      "Horizontal transverse axis",
+      "Direct posterior floor",
+      "Posterior ulcer penetrates pancreatic tissue"
+     ],
+     [
+      "Splenic Artery",
+      "Tortuous upper border of pancreas",
+      "Retroperitoneal floor",
+      "Erosion produces massive hematemesis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Posterior gastric wall ulcers eroding through the mucosa into the lesser sac can penetrate directly into the pancreas and the tortuous **splenic artery**. Erosion of this large arterial trunk provokes catastrophic, life-threatening upper gastrointestinal hemorrhage, presenting with torrential hematemesis and hemorrhagic shock.",
+   "say": "Posterior ulcers eroding through the gastric wall can penetrate the pancreas and splenic artery. Rupture of the splenic artery causes catastrophic hematemesis and hemorrhagic shock.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cascade of Posterior Gastric Ulcer Erosion",
+    "nodes": [
+     {
+      "id": "ulcer",
+      "label": "Deep Chronic Peptic Ulcer on Posterior Gastric Wall"
+     },
+     {
+      "id": "penetrate",
+      "label": "Penetrates Through Muscularis into Lesser Sac Floor"
+     },
+     {
+      "id": "artery",
+      "label": "Erosion into Splenic Artery on Pancreatic Border"
+     },
+     {
+      "id": "bleed",
+      "label": "Torrential Upper GI Bleeding Mandating Emergency Laparotomy"
+     }
+    ],
+    "edges": [
+     [
+      "ulcer",
+      "penetrate"
+     ],
+     [
+      "penetrate",
+      "artery"
+     ],
+     [
+      "artery",
+      "bleed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The arterial supply to the stomach is derived entirely from the **coeliac trunk**, which arises from the anterior aspect of the abdominal aorta at the level of T12. It divides almost immediately into three primary branches: the left gastric artery, the splenic artery, and the common hepatic artery.",
+   "say": "Arterial blood to the stomach comes from the coeliac trunk, branching from the aorta at T12. It splits into the left gastric, splenic, and common hepatic arteries.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Coeliac Branch",
+     "Trajectory and Course",
+     "Terminal Stomach Branches",
+     "Supplied Gastric Margin"
+    ],
+    "rows": [
+     [
+      "Left Gastric Artery",
+      "Smallest branch, ascends to cardia",
+      "Runs down lesser curvature in omentum",
+      "Lesser curvature and lower oesophagus"
+     ],
+     [
+      "Common Hepatic Artery",
+      "Passes right toward hepatoduodenal lig",
+      "Right gastric and gastroduodenal",
+      "Lesser curvature and pyloric area"
+     ],
+     [
+      "Splenic Artery",
+      "Largest branch, tortuous along pancreas",
+      "Short gastrics and left gastroepiploic",
+      "Gastric fundus and greater curvature"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The gastric fundus is supplied by five to seven **short gastric arteries**, which arise from the terminal division of the splenic artery within the gastrosplenic ligament. Because these vessels possess limited anastomotic connections compared to the lesser curvature, fundic mobilization requires careful ligation to avoid fundic infarction.",
+   "say": "The gastric fundus is nourished by short gastric arteries arising from the splenic artery inside the gastrosplenic ligament. They must be ligated carefully during fundoplication or gastrectomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Short Gastric Arteries",
+     "points": [
+      "Arise from distal splenic artery branches",
+      "Course within gastrosplenic ligament",
+      "Supply gastric fundus exclusively",
+      "Divided during Nissen fundoplication"
+     ]
+    },
+    "right": {
+     "title": "Gastroepiploic Arteries",
+     "points": [
+      "Left from splenic; right from gastroduodenal",
+      "Course along greater curvature in greater omentum",
+      "Form wide continuous arcuate anastomosis",
+      "Supply both anterior and posterior gastric walls"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extensive submucosal anastomoses link all gastric arteries, protecting the stomach against ischemic gangrene. Even if three of the four primary gastric arteries are ligated during partial gastrectomy, perfusion through the single remaining arterial source prevents **gastric wall necrosis**, illustrating the immense redundancy of coeliac hemodynamics.",
+   "say": "Immense vascular redundancy protects the stomach. Even if three major gastric arteries are ligated during surgery, the single remaining vessel prevents gastric gangrene.",
+   "vis": {
+    "kind": "flow",
+    "title": "Submucosal Gastric Collateral Network",
+    "nodes": [
+     {
+      "id": "branches",
+      "label": "Four Primary Arterial Arcs (Left/Right Gastric, Left/Right Gastroepiploic)"
+     },
+     {
+      "id": "plexus",
+      "label": "Dense Continuous Submucosal Microvascular Plexus"
+     },
+     {
+      "id": "ligation",
+      "label": "Surgical Ligation of Multiple Major Feeders for Resection"
+     },
+     {
+      "id": "viability",
+      "label": "Single Residual Vessel Maintains Robust Mucosal Perfusion"
+     }
+    ],
+    "edges": [
+     [
+      "branches",
+      "plexus"
+     ],
+     [
+      "plexus",
+      "ligation"
+     ],
+     [
+      "ligation",
+      "viability"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In advanced diffuse-type gastric adenocarcinoma, malignant scirrhous infiltration thickens and stiffens the gastric wall into an inelastic rigid leather bottle, termed **linitis plastica**. Gross pathological specimens show complete loss of normal mucosal rugae, mural thickening, and absence of normal peristaltic pliability.",
+   "say": "Diffuse gastric cancer infiltrates the wall to produce linitis plastica, transforming the stomach into a rigid leather bottle. Pathology demonstrates mural thickening and loss of rugal folds.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-carcinoma-stomach-linitis-plastica.webp",
+    "alt": "Total gastrectomy specimen showing linitis plastica with thick rigid contracted gastric wall",
+    "caption": "Gastric linitis plastica exhibiting classic leather bottle mural thickening. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "503a073d-2e67-42ac-8b0d-c1df37328865",
+  "6fffe053-cf47-4e02-ada9-1cd271698ad0",
+  "793ae8d4-b496-4ae1-9dea-b5138085f151"
+ ]
+}

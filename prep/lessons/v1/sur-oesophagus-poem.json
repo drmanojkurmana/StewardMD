@@ -1,0 +1,264 @@
+{
+ "v": 1,
+ "module": "sur-oesophagus",
+ "subject": "surgery",
+ "title": "Peroral Endoscopic Myotomy (POEM), Chicago Classification, and Bird Beak Sign",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Minimally invasive endoluminal management of esophageal motor disorders was revolutionized by the introduction of **peroral endoscopic myotomy**, commonly known as POEM. Developed as an entirely incisionless transluminal technique, POEM recreates the anatomical benefits of a surgical Heller myotomy using a flexible upper endoscope. It is indicated for primary achalasia, vigorous spastic achalasia, diffuse esophageal spasm, and patients who experience recurrent dysphagia following failed surgical myotomy.",
+   "say": "Peroral endoscopic myotomy, or POEM, is a scarless endoscopic procedure that divides esophageal circular muscle fibers from within the lumen to treat achalasia and spastic motility disorders.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diseases-of-esophagus-fig1.webp",
+    "alt": "Endoscopic view and diagnostic barium swallow demonstrating esophageal aperistalsis and tapering.",
+    "caption": "Endoscopic assessment in achalasia: paving the way for peroral submucosal endoscopic myotomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The operative technique of POEM follows four methodical stages performed under general endotracheal anaesthesia using carbon dioxide insufflation. First, the endoscopist creates a mucosal entry port in the mid-esophagus, roughly twelve to fifteen centimetres proximal to the gastroesophageal junction. Second, a submucosal fluid cushion is injected to facilitate **submucosal tunneling**, extending the tunnel down through the esophageal wall across the lower sphincter and two centimetres onto the gastric cardia.",
+   "say": "POEM involves creating a mucosal incision in the mid-esophagus and developing a submucosal tunnel that extends across the lower esophageal sphincter onto the stomach.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "entry",
+      "label": "Mucosal Entry: Longitudinal Incision at 12 to 15 cm Proximal to GEJ"
+     },
+     {
+      "id": "tunnel",
+      "label": "Submucosal Tunneling Using Triangle Tip Knife & CO2 Insufflation"
+     },
+     {
+      "id": "myo",
+      "label": "Selective Myotomy of Inner Circular Muscularis Propria"
+     },
+     {
+      "id": "cardia",
+      "label": "Extension of Myotomy 2 to 3 cm onto Anterior Gastric Cardia"
+     },
+     {
+      "id": "clips",
+      "label": "Hermetic Closure of Mucosal Entry Port with Endoscopic Clips"
+     }
+    ],
+    "edges": [
+     [
+      "entry",
+      "tunnel"
+     ],
+     [
+      "tunnel",
+      "myo"
+     ],
+     [
+      "myo",
+      "cardia"
+     ],
+     [
+      "cardia",
+      "clips"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Once the submucosal tunnel is established, the operator selectively divides the hypertrophied inner circular muscularis propria while meticulously preserving the outer longitudinal muscle layer and adventitia. Meticulous division continues past the gastroesophageal junction, identified by branching submucosal spindle veins and palisade vessels. Finally, the mucosal entry site is closed hermetically using **endoscopic clips**, preventing esophageal content leakage into the mediastinum and peritoneal cavity.",
+   "say": "The operator divides the inner circular muscle while preserving the outer longitudinal layer and adventitia. The mucosal entry site is then securely sealed with endoscopic clips.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Peroral Endoscopic Myotomy",
+     "points": [
+      "Completely natural orifice transluminal surgery",
+      "Adjustable proximal myotomy length (up to 15 cm)",
+      "Superior efficacy for Type III spastic achalasia",
+      "Zero abdominal incision or chest wall scarring"
+     ]
+    },
+    "right": {
+     "title": "Laparoscopic Heller Myotomy",
+     "points": [
+      "Requires five abdominal laparoscopic trocars",
+      "Limited proximal esophageal reach (5 to 6 cm)",
+      "Routinely incorporates anti-reflux fundoplication",
+      "Established long-term fifty-year outcome record"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A major technical advantage of POEM over laparoscopic surgery is the ability to customize the proximal length of the myotomy. While laparoscopic surgeons are restricted by the mediastinal diaphragmatic hiatus to five or six centimetres of distal esophagus, POEM allows myotomy extensions up to fifteen centimetres. This makes POEM the preferred intervention for **Type III spastic achalasia**, where long-segment spastic contractions throughout the esophageal body cause severe dysphagia and chest pain.",
+   "say": "POEM allows the surgeon to perform a long myotomy up to fifteen centimeters into the mid-esophagus, making it the treatment of choice for Type III spastic achalasia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "POEM",
+     "Laparoscopic Heller Myotomy"
+    ],
+    "rows": [
+     [
+      "Incision Approach",
+      "Endoluminal peroral submucosal tunnel",
+      "Transabdominal laparoscopic ports"
+     ],
+     [
+      "Myotomy Length",
+      "Customizable (up to 10 to 15 cm)",
+      "Limited by hiatus (5 to 6 cm)"
+     ],
+     [
+      "Anti-Reflux Wrap",
+      "None performed during primary procedure",
+      "Routine partial wrap (Dor or Toupet)"
+     ],
+     [
+      "Type III Achalasia",
+      "High success rate (>90%)",
+      "Moderate success rate (~70%)"
+     ],
+     [
+      "Hospital Stay",
+      "Typically 24 to 48 hours",
+      "Typically 24 to 48 hours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnostic barium swallow demonstrates the hallmark anatomical feature of achalasia: the classic **bird beak sign**. As radiopaque barium column fills the dilated esophageal body, gravity forces the contrast down against the tonically contracted lower esophageal sphincter. The smoothly tapered, symmetrical, conical narrowing at the gastroesophageal junction closely mimics a bird's beak or pencil tip, accompanied by absent primary peristalsis and delayed emptying.",
+   "say": "Barium esophagogram displays the classic bird beak sign, showing a dilated esophageal lumen that tapers into a smooth, symmetrical point at the tightly contracted lower sphincter.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-barium-swallow-achalasia-cardia.webp",
+    "alt": "Barium esophagogram showing the classic smooth bird beak narrowing at the gastroesophageal junction.",
+    "caption": "Barium swallow examination: characteristic smooth bird's beak narrowing at the gastroesophageal junction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The diagnostic sensitivity of barium radiography is enhanced using a standardized timed barium esophagogram. The patient ingests a fixed volume of low-density barium in the upright posture, and radiographs are taken at one, two, and five minutes. A persistent barium column height exceeding five centimetres at five minutes confirms significant **functional outflow obstruction**. Following successful myotomy or balloon dilation, timed radiographs document rapid column clearance into the gastric reservoir.",
+   "say": "Timed barium swallow tests assess esophageal emptying. A barium column height greater than five centimeters at five minutes confirms significant functional obstruction at the gastroesophageal junction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ingest",
+      "label": "Ingestion of 100 to 200 mL of Low-Density Barium in Upright Position"
+     },
+     {
+      "id": "t1",
+      "label": "Radiograph at 1 Minute: Evaluation of Esophageal Dilation & Spacing"
+     },
+     {
+      "id": "t2",
+      "label": "Radiograph at 2 Minutes: Assessment of Peristaltic Stripping Waves"
+     },
+     {
+      "id": "t5",
+      "label": "Radiograph at 5 Minutes: Measurement of Residual Barium Column Height"
+     },
+     {
+      "id": "cut",
+      "label": "Column > 5 cm Confirms Significant Esophageal Emptying Failure"
+     }
+    ],
+    "edges": [
+     [
+      "ingest",
+      "t1"
+     ],
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t5"
+     ],
+     [
+      "t5",
+      "cut"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A common clinical complication following POEM is post-procedural gastroesophageal reflux. Because the circular sphincter fibers are divided without constructing an anti-reflux wrap, pathological acid reflux occurs in thirty to forty percent of patients. While most cases respond to daily **proton pump inhibitor therapy**, all patients require postoperative objective surveillance with upper endoscopy and 24-hour ambulatory pH monitoring to detect silent acid reflux and prevent reflux oesophagitis.",
+   "say": "Because POEM does not include a surgical wrap, postoperative acid reflux occurs in up to forty percent of patients. Most respond well to proton pump inhibitors, but periodic monitoring is required.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Postoperative Surveillance",
+     "Testing Modality",
+     "Clinical Target"
+    ],
+    "rows": [
+     [
+      "Reflux Monitoring",
+      "24-hour ambulatory pH-impedance",
+      "Quantifies total acid exposure time"
+     ],
+     [
+      "Mucosal Surveillance",
+      "Upper gastrointestinal endoscopy",
+      "Screens for erosive reflux oesophagitis"
+     ],
+     [
+      "Symptom Scoring",
+      "Eckardt symptom score assessment",
+      "Scores dysphagia, regurgitation, chest pain"
+     ],
+     [
+      "Emptying Evaluation",
+      "Timed barium esophagogram at 6 months",
+      "Confirms adequate sphincter clearance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical success after any achalasia intervention is evaluated using the standardized **Eckardt symptom score**. The system grades four clinical domains on a scale from zero to three: dysphagia, regurgitation, retrosternal chest pain, and weight loss. A composite score of three or less signifies clinical remission, whereas a score exceeding three indicates treatment failure or symptomatic recurrence. Documenting Eckardt score reductions confirms the functional efficacy of endoscopic or surgical myotomy.",
+   "say": "Clinical success is tracked using the Eckardt score, which grades dysphagia, regurgitation, chest pain, and weight loss. A score of three or less indicates successful symptom remission.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Score Value",
+     "Dysphagia & Regurgitation",
+     "Weight Loss",
+     "Chest Pain"
+    ],
+    "rows": [
+     [
+      "0",
+      "None",
+      "None",
+      "None"
+     ],
+     [
+      "1",
+      "Occasional (less than once daily)",
+      "< 5 kg",
+      "Occasional episodes"
+     ],
+     [
+      "2",
+      "Daily (with every meal)",
+      "5 to 10 kg",
+      "Daily episodes"
+     ],
+     [
+      "3",
+      "Severe (every meal and liquid)",
+      "> 10 kg",
+      "Severe or disabling"
+     ]
+    ]
+   }
+  }
+ ]
+}

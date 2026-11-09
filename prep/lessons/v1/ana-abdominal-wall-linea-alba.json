@@ -1,0 +1,253 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-abdominal-wall",
+ "subject": "anatomy",
+ "title": "Abdominal Wall Topography: Linea Alba, Umbilicus, Incisions, and Reflexes",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The **linea alba** is a dense, fibrous median raphe extending from the xiphoid process down to the pubic symphysis. Formed by the decussation and interlacing of aponeurotic fibres from the external oblique, internal oblique, and transversus abdominis of both sides, it is broad and thick above the umbilicus and narrow below it.",
+   "say": "The linea alba is a dense midline tendon running from xiphoid to pubic symphysis. Formed by decussating aponeuroses of all flat abdominal muscles, it is wide above the umbilicus and narrow below.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix-abdomen-auscultation.jpg",
+    "alt": "Anatomical quadrants and midline landmarks of the anterior abdominal wall",
+    "caption": "Surface landmarks and midline course of the linea alba across abdominal quadrants. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Because the linea alba is entirely avascular (receiving only microscopic collateral twigs across the midline), it provides the classic anatomical site for a **midline laparotomy** incision. Midline incisions allow rapid, bloodless entry into the peritoneal cavity with wide exposure of both upper and lower abdominal viscera during emergency trauma surgery.",
+   "say": "Because the linea alba is virtually avascular, it is the ideal path for midline laparotomy incisions. Midline laparotomy offers rapid, bloodless entry and wide exposure in trauma emergencies.",
+   "vis": {
+    "kind": "flow",
+    "title": "Layers Traversed in Midline Laparotomy",
+    "nodes": [
+     {
+      "id": "skin",
+      "label": "Skin and Subcutaneous Adipose Tissue (Camper and Scarpa Fasciae)"
+     },
+     {
+      "id": "linea",
+      "label": "Avascular Fibrous Linea Alba (Incision Guided Down Midline)"
+     },
+     {
+      "id": "transversalis",
+      "label": "Endoabdominal Fascia Transversalis and Extraperitoneal Fat"
+     },
+     {
+      "id": "peritoneum",
+      "label": "Parietal Peritoneum Incised between Tissue Forceps"
+     }
+    ],
+    "edges": [
+     [
+      "skin",
+      "linea"
+     ],
+     [
+      "linea",
+      "transversalis"
+     ],
+     [
+      "transversalis",
+      "peritoneum"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Separation of the two rectus abdominis bellies without a true fascial defect is termed **divarication of recti** (diastasis recti). Frequently seen in multiparous women or patients with central obesity, rising from a supine posture produces a prominent midline ridge that requires reassurance rather than surgical repair.",
+   "say": "Separation of rectus abdominis muscles without a fascial hole is termed diastasis recti. Common in multiparous women and obesity, it causes a harmless midline bulge when rising from supine posture.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Divarication of Recti",
+     "points": [
+      "Stretching and widening of intact linea alba",
+      "Zero true fascial defect or hernial sac",
+      "Prominent bulge on rising from supine position",
+      "Zero risk of incarceration or strangulation"
+     ]
+    },
+    "right": {
+     "title": "Epigastric Hernia",
+     "points": [
+      "Definite focal defect in linea alba above umbilicus",
+      "Protrusion of extraperitoneal fat or falciform lig",
+      "Small, exquisitely tender midline nodule",
+      "Can incarcerate and requires elective suture repair"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **umbilicus** is a consolidated cicatricial depression representing the embryonic site of attachment of the umbilical cord. Situated at the level of the disc between vertebrae L3 and L4, it serves as the key dermatome landmark for the tenth thoracic spinal nerve (T10).",
+   "say": "The umbilicus is the scar left by umbilical cord attachment, located at vertebral level L3-L4. It serves as the primary surface landmark for the T10 dermatome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Embryonic Structure",
+     "Embryological Duty",
+     "Adult Remnant Structure",
+     "Clinical Pathology"
+    ],
+    "rows": [
+     [
+      "Left Umbilical Vein",
+      "Oxygenated blood from placenta to ductus venosus",
+      "Ligamentum teres hepatis (round ligament)",
+      "Recanalized in portal hypertension (Cruveilhier)"
+     ],
+     [
+      "Umbilical Arteries (2)",
+      "Deoxygenated fetal blood to placenta",
+      "Medial umbilical ligaments (cords)",
+      "Obliterated umbilical artery cords on bladder"
+     ],
+     [
+      "Urachus (Allantoic canal)",
+      "Fetal bladder drainage to allantois",
+      "Median umbilical ligament",
+      "Urachal fistula, urachal sinus, or urachal cyst"
+     ],
+     [
+      "Vitello-intestinal Duct",
+      "Midgut lumen connected to yolk sac",
+      "Meckel diverticulum (2% of population)",
+      "Vitelline fistula with fecal discharge at umbilicus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Crucial collateral venous channels radiate from the umbilicus. In portal hypertension or cirrhosis, recanalization of the umbilical vein in the ligamentum teres creates a hyperdynamic portosystemic shunt, engorging subcutaneous epigastric veins to produce the classic radial radiating pattern termed **caput medusae**.",
+   "say": "Veins radiating from the umbilicus form vital collateral shunts. In severe cirrhosis, recanalization of the umbilical vein engorges abdominal wall veins, producing the classic caput medusae.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-gi-hernia.webp",
+    "alt": "Diagrammatic layout of abdominal wall incisions and caput medusae venous pathways",
+    "caption": "Direction of venous flow in caput medusae radiating centrifugally from the umbilicus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Abdominal wall surgical access utilizes specialized incisions planned to avoid major peripheral nerves. The **Kocher subcostal incision** runs parallel to the right costal margin for open cholecystectomy, while the transverse suprapubic Pfannenstiel incision follows Langer skin cleavage lines above the pubis for caesarean delivery and pelvic surgery.",
+   "say": "Surgical incisions follow anatomical lines to preserve innervation. Kocher subcostal incisions access the biliary tree, while the suprapubic Pfannenstiel incision is favored for caesarean section.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Incision",
+     "Anatomical Location",
+     "Target Organ Exposure",
+     "Nerve Preservation Advantage"
+    ],
+    "rows": [
+     [
+      "Midline Laparotomy",
+      "Directly through linea alba",
+      "Universal abdominal trauma exposure",
+      "Completely spares all intercostal motor nerves"
+     ],
+     [
+      "Kocher Subcostal",
+      "3 cm below right costal margin",
+      "Gallbladder and biliary tract",
+      "Cuts 1-2 intercostals; excellent upper exposure"
+     ],
+     [
+      "McBurney / Gridiron",
+      "Two-thirds along line from umbilicus to ASIS",
+      "Appendix (open appendicectomy)",
+      "Muscle-splitting: divides no fibers or trunks"
+     ],
+     [
+      "Pfannenstiel",
+      "Transverse 2 cm above pubic symphysis",
+      "Uterus, ovaries, pelvic organs",
+      "Cosmetically hidden in skin fold; spares nerves"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The superficial abdominal reflexes are elicited by lightly stroking the abdominal skin toward the umbilicus. Stroking the upper quadrant tests spinal segments T7 through T9, while stroking the lower quadrant tests **T10 through T12**. Absence of the superficial abdominal reflex confirms an upper motor neuron corticospinal tract lesion.",
+   "say": "Superficial abdominal reflexes are tested by stroking skin toward the umbilicus. Upper strokes test T7 to T9, while lower strokes test T10 to T12. Loss of the reflex confirms an upper motor neuron lesion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Superficial Abdominal Reflex",
+     "points": [
+      "Stroke skin lightly from periphery to umbilicus",
+      "Upper quadrant tests roots T7, T8, T9",
+      "Lower quadrant tests roots T10, T11, T12",
+      "Lost early in multiple sclerosis and pyramidal damage"
+     ]
+    },
+    "right": {
+     "title": "Cremasteric Reflex",
+     "points": [
+      "Stroke skin of upper medial thigh lightly",
+      "Afferent limb: ilioinguinal nerve (L1)",
+      "Efferent limb: genital branch of genitofemoral (L1/L2)",
+      "Causes immediate ipsilateral elevation of testis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **cremasteric reflex** is evaluated by lightly stroking or pinching the skin of the upper medial thigh. Sensory impulses carried by the ilioinguinal nerve (L1) stimulate the genital branch of the genitofemoral nerve (L1, L2), provoking immediate contraction of the cremaster muscle and brisk elevation of the ipsilateral testis, absent in testicular torsion.",
+   "say": "The cremasteric reflex is elicited by stroking the inner thigh. Mediated by the ilioinguinal and genitofemoral nerves (L1-L2), it causes rapid elevation of the testis. Its absence suggests testicular torsion.",
+   "vis": {
+    "kind": "flow",
+    "title": "Arc of the Cremasteric Reflex",
+    "nodes": [
+     {
+      "id": "stim",
+      "label": "Light Tactile Stroke along Upper Medial Thigh Skin"
+     },
+     {
+      "id": "afferent",
+      "label": "Afferent Sensory Limb: Ilioinguinal Nerve (L1 Root)"
+     },
+     {
+      "id": "spinal",
+      "label": "L1/L2 Spinal Cord Interneuronal Integration Center"
+     },
+     {
+      "id": "efferent",
+      "label": "Efferent Motor Limb: Genital Branch of Genitofemoral (L1/L2)"
+     },
+     {
+      "id": "elev",
+      "label": "Cremaster Contracts: Rapid Ipsilateral Testicular Elevation"
+     }
+    ],
+    "edges": [
+     [
+      "stim",
+      "afferent"
+     ],
+     [
+      "afferent",
+      "spinal"
+     ],
+     [
+      "spinal",
+      "efferent"
+     ],
+     [
+      "efferent",
+      "elev"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "1f77cf49-7120-45b1-a4aa-027b7127ba35",
+  "f46bc24c-d6f2-4d1a-8cc9-7d037d2267f8",
+  "3d70e53b-1e66-4755-b618-dcba8f5327db"
+ ]
+}

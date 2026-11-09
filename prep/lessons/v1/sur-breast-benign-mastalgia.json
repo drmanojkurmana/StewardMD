@@ -1,0 +1,298 @@
+{
+ "v": 1,
+ "module": "sur-breast-benign",
+ "subject": "surgery",
+ "title": "Mastalgia, ANDI Classification, and Fibrocystic Breast Conditions",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The most frequent breast symptom prompting clinical consultation in general surgical practice is breast pain, designated **mastalgia**. It affects up to seventy percent of women at some point during reproductive life. Because fear of underlying breast malignancy causes profound anxiety, the paramount initial surgical objective is excluding cancer through clinical breast examination and imaging, reassuring the patient that isolated mastalgia carries less than a one to two percent probability of cancer.",
+   "say": "Mastalgia is the most common breast complaint in surgical clinics. Cancer occurs in under two percent of isolated breast pain cases, so patient reassurance is the primary goal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cyclical Mastalgia (70%)",
+     "points": [
+      "Tightly linked to luteal phase of menstrual cycle",
+      "Bilateral, diffuse, aching, heaviness in upper outer quadrants",
+      "Affects premenopausal women in thirties and forties",
+      "Driven by hormonal hypersensitivity to estrogen and prolactin"
+     ]
+    },
+    "right": {
+     "title": "Non-Cyclical Mastalgia (30%)",
+     "points": [
+      "Completely unrelated to menstrual cycles or hormonal phases",
+      "Unilateral, sharp, stabbing, burning localized pain",
+      "Affects perimenopausal and postmenopausal women over forty",
+      "Associated with duct ectasia, cysts, or chest wall musculoskeletal pain"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Clinical evaluation begins with classifying the pain into cyclical or non-cyclical patterns using a daily breast pain chart, such as the Cardiff breast pain score. True **cyclical mastalgia** is tightly linked to the menstrual cycle, emerging during the luteal phase five to ten days prior to menses and resolving with menstruation. It presents as a bilateral, dull aching or heaviness in the upper outer quadrants with radiation to the axilla, driven by elevated estrogen-to-progesterone ratios.",
+   "say": "Cyclical mastalgia correlates with the luteal phase of the menstrual cycle, causing bilateral aching in the upper outer quadrants that resolves with the onset of menstruation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "follicular",
+      "label": "Follicular Phase: Baseline Pain-Free Interval"
+     },
+     {
+      "id": "ovulation",
+      "label": "Ovulation Occurs at Mid-Cycle"
+     },
+     {
+      "id": "luteal",
+      "label": "Luteal Phase: Progesterone-Estrogen Fluid Retention"
+     },
+     {
+      "id": "mastalgia",
+      "label": "Severe Bilateral Heaviness & Upper Outer Quadrant Tenderness"
+     },
+     {
+      "id": "menses",
+      "label": "Onset of Menstruation: Prompt Relief of Symptoms"
+     }
+    ],
+    "edges": [
+     [
+      "follicular",
+      "ovulation"
+     ],
+     [
+      "ovulation",
+      "luteal"
+     ],
+     [
+      "luteal",
+      "mastalgia"
+     ],
+     [
+      "mastalgia",
+      "menses"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast, non-cyclical mastalgia exhibits no temporal relationship to menstrual cycles. It characteristically affects perimenopausal and postmenopausal women, presenting as a constant or intermittent, sharp, localized, unilateral pain. A common etiology is costochondritis, also known as **Tietze syndrome**, an inflammation of the costochondral junctions. Palpation directly over the second to fourth parasternal costochondral junctions reproduces the exact pain, distinguishing musculoskeletal chest wall pathology from true intrinsic breast disease.",
+   "say": "Non-cyclical mastalgia is unrelated to menses, often originating from costochondritis or Tietze syndrome, where direct pressure over the costochondral junctions reproduces the pain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Sign",
+     "True Intrinsic Breast Pain",
+     "Extrinsic Chest Wall Pain (Tietze)"
+    ],
+    "rows": [
+     [
+      "Palpation Technique",
+      "Pinching breast tissue gently between fingers elicits pain",
+      "Compressing pectoralis against chest wall or ribs elicits pain"
+     ],
+     [
+      "Trigger Points",
+      "Diffuse or localized within breast glandular tissue",
+      "Focal tenderness exquisitely localized to 2nd - 4th costochondral joints"
+     ],
+     [
+      "Effect of Arm Movement",
+      "Unchanged by deep inspiration or shoulder abduction",
+      "Exacerbated sharply by arm elevation, coughing, and deep breathing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The contemporary framework for understanding benign breast disorders is the **ANDI classification**, representing Aberrations of Normal Development and Involution. Formulated by Hughes, Mansel, and Webster, this concept emphasizes that the majority of benign breast conditions are minor physiological departures from normal hormonal and anatomical milestones rather than true diseases. The lifecycle is categorized into early reproductive development, mature cyclic endocrine activity, and perimenopausal involution.",
+   "say": "The ANDI classification frames benign breast conditions as minor departures from normal development and involution, mapping physiological breast changes across a woman's lifespan.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Reproductive Life Stage",
+     "Normal Physiological Process",
+     "Aberration (ANDI Spectrum)",
+     "True Disease State"
+    ],
+    "rows": [
+     [
+      "Early Reproductive (15-25)",
+      "Lobular and stromal development",
+      "Fibroadenoma (localized overgrowth)",
+      "Giant juvenile fibroadenoma (>5 cm)"
+     ],
+     [
+      "Mature Reproductive (25-40)",
+      "Cyclic menstrual changes",
+      "Cyclical mastalgia and nodularity",
+      "Incapacitating refractory mastalgia"
+     ],
+     [
+      "Involution Phase (35-55)",
+      "Lobular sclerosis and duct dilation",
+      "Macrocysts and duct ectasia",
+      "Periductal mastitis, fistula, abscess"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Encountered in over fifty percent of women, **fibrocystic breast changes** represent the most common manifestation of mature involutional ANDI. Microscopic hallmarks comprise a spectrum of lobular cystic dilatation, dense stromal fibrosis, apocrine metaplasia, and adenosis. Apocrine metaplasia, where columnar cells acquire granular pink cytoplasm resembling apocrine sweat glands, is a benign marker. Fibrocystic changes without epithelial hyperplasia carry zero increased relative risk of future breast cancer.",
+   "say": "Fibrocystic breast changes feature microcysts, stromal fibrosis, and apocrine metaplasia. When unaccompanied by epithelial hyperplasia, they carry no increased risk of breast cancer.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Non-Proliferative Lesions (RR 1.0)",
+     "points": [
+      "Simple cysts and apocrine metaplasia",
+      "Stromal fibrosis and mild ductal hyperplasia",
+      "Most common presentation of fibrocystic change",
+      "No increased relative risk of subsequent breast cancer"
+     ]
+    },
+    "right": {
+     "title": "Atypical Hyperplasia (RR 4.0 - 5.0)",
+     "points": [
+      "Atypical ductal hyperplasia (ADH) or lobular (ALH)",
+      "Monomorphic cellular proliferation with cytologic atypia",
+      "Four- to five-fold increased lifetime breast cancer risk",
+      "Indication for enhanced surveillance and chemoprevention"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "First-line conservative management for cyclical mastalgia relies on reassurance, lifestyle modifications, and wearing a supportive, professionally fitted sports bra. For persistent mild to moderate pain, **evening primrose oil** represents a well-tolerated non-hormonal supplement. Containing high concentrations of gamma-linolenic acid, it restores cellular membrane essential fatty acid ratios that modulate prostaglandin synthesis and dampen breast tissue receptor hypersensitivity to prolactin, requiring two to three months of therapy to achieve maximum benefit.",
+   "say": "First-line therapy for cyclical mastalgia includes reassurance, sports bras, and evening primrose oil. Rich in gamma-linolenic acid, it restores fatty acid balance over three months.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "eval",
+      "label": "Triple Assessment Confirms Benign Disease"
+     },
+     {
+      "id": "reassure",
+      "label": "Reassurance & Supportive Sports Bra Fitting (Resolves 85%)"
+     },
+     {
+      "id": "epo",
+      "label": "Evening Primrose Oil (Gamma-Linolenic Acid) for 3 Months"
+     },
+     {
+      "id": "nsaid",
+      "label": "Topical NSAID Gel (Diclofenac) for Localized Trigger Spots"
+     },
+     {
+      "id": "hormone",
+      "label": "Second-Line Prescription Hormonal Modulation"
+     }
+    ],
+    "edges": [
+     [
+      "eval",
+      "reassure"
+     ],
+     [
+      "reassure",
+      "epo"
+     ],
+     [
+      "epo",
+      "nsaid"
+     ],
+     [
+      "nsaid",
+      "hormone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For severe, intractable mastalgia that disrupts employment or sleep and fails conservative measures, second-line prescription endocrine therapy is warranted. The antigonadotropin **danazol** is an effective pharmacological option, producing symptom relief in up to seventy-five percent of patients by suppressing pituitary gonadotropin secretion. However, its use is constrained by significant androgenic adverse effects, including acne, hirsutism, irreversible voice deepening, weight gain, and menstrual irregularities, mandating strict dose titration.",
+   "say": "For severe refractory pain, danazol suppresses gonadotropins to provide relief in seventy-five percent of patients, but androgenic side effects like acne and hirsutism restrict long-term use.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Prescription Agent",
+     "Mechanism of Action",
+     "Clinical Efficacy and Major Adverse Effects"
+    ],
+    "rows": [
+     [
+      "Danazol",
+      "Synthetic steroid suppressing pituitary LH and FSH release",
+      "Highly effective (75%); causes acne, hirsutism, weight gain, voice deepening"
+     ],
+     [
+      "Tamoxifen",
+      "Selective estrogen receptor modulator (SERM) in breast",
+      "Exceptionally effective (85%); causes hot flushes, nausea, DVT risk"
+     ],
+     [
+      "Bromocriptine",
+      "Dopamine D2 agonist suppressing pituitary prolactin release",
+      "Effective for hyperprolactinemic mastalgia; causes severe nausea and postural hypotension"
+     ],
+     [
+      "Goserelin (GnRH Agonist)",
+      "Downregulates pituitary GnRH receptors causing medical castration",
+      "Reserved for extreme refractory cases; produces severe menopausal symptoms and bone loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Low-dose tamoxifen, administered at ten milligrams daily for three to six months, provides an exceptionally effective alternative for refractory mastalgia, achieving symptom resolution in over eighty percent of patients with fewer androgenic side effects than danazol. Prior to initiating any medical therapy for mastalgia, clinicians must complete **definitive triple assessment** to ensure that an occult malignancy or high-risk proliferative epithelial lesion is not masked by symptomatic medical therapy.",
+   "say": "Low-dose tamoxifen resolves severe mastalgia in over eighty percent of patients. Prior to starting medical therapy, triple assessment must rigorously rule out occult malignancy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "intractable",
+      "label": "Severe Incapacitating Refractory Mastalgia"
+     },
+     {
+      "id": "triple",
+      "label": "Rigorous Triple Assessment (Clinical + Imaging + Core)"
+     },
+     {
+      "id": "exclude",
+      "label": "Definitively Exclude Occult Malignancy or ADH"
+     },
+     {
+      "id": "tamoxifen",
+      "label": "Low-Dose Tamoxifen (10 mg Daily for 3-6 Months)"
+     },
+     {
+      "id": "taper",
+      "label": "Taper Therapy After Symptom Remission Achieved"
+     }
+    ],
+    "edges": [
+     [
+      "intractable",
+      "triple"
+     ],
+     [
+      "triple",
+      "exclude"
+     ],
+     [
+      "exclude",
+      "tamoxifen"
+     ],
+     [
+      "tamoxifen",
+      "taper"
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,287 @@
+{
+ "v": 1,
+ "module": "sur-breast-cancer",
+ "subject": "surgery",
+ "title": "Triple Assessment of Breast Disease, Mammography, and Core Biopsy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The diagnostic cornerstone of modern breast surgical practice is the systematic application of **triple assessment of breast lesions**. Any patient presenting with a discrete breast lump, focal thickening, or persistent localized symptom must undergo three sequential, independent diagnostic evaluations: clinical physical examination, diagnostic breast imaging (mammography and ultrasonography), and histopathological core needle biopsy. Concordance among all three components achieves a diagnostic accuracy exceeding ninety-nine percent.",
+   "say": "Triple assessment combines clinical examination, diagnostic imaging, and core needle biopsy. Concordance between all three components achieves greater than ninety-nine percent accuracy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/breast-cancer-fig1.webp",
+    "alt": "Diagnostic clinical flowchart illustrating triple assessment and surgical evaluation of breast masses.",
+    "caption": "Triple assessment of breast lesions: integrating clinical examination, bilateral imaging, and core biopsy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Each component of the triple assessment is scored on a standardized five-point scale from one to five: normal, benign, indeterminate, suspicious, and malignant. The central rule governing patient safety is the **concordance principle in triple assessment**. If any single modality suggests malignancy, such as a clinically rock-hard lump scoring five despite benign imaging, the lesion cannot be dismissed, and definitive tissue confirmation is mandatory before formulating a management plan.",
+   "say": "Each modality is scored from normal to malignant. Under the concordance principle, a high-suspicion finding on any single modality mandates definitive tissue confirmation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Score Tier",
+     "Clinical Assessment (E)",
+     "Radiological Imaging (R/U)",
+     "Pathological Biopsy (B)"
+    ],
+    "rows": [
+     [
+      "Category 1",
+      "Normal physical breast examination",
+      "Normal screening mammogram / ultrasound",
+      "Normal breast epithelial elements"
+     ],
+     [
+      "Category 2",
+      "Definite benign mass (fibroadenoma)",
+      "Benign radiological lesion (simple cyst)",
+      "Benign histopathology without atypia"
+     ],
+     [
+      "Category 3",
+      "Indeterminate, equivocal clinical lump",
+      "Probably benign finding (<2% risk)",
+      "Atypia probably benign (equivocal)"
+     ],
+     [
+      "Category 4",
+      "Suspicious for malignancy (hard, irregular)",
+      "Suspicious radiological abnormality",
+      "Suspicious for malignancy"
+     ],
+     [
+      "Category 5",
+      "Malignant (skin tethering, ulceration)",
+      "Unequivocal malignant features (spiculated)",
+      "Definitive invasive carcinoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical breast examination begins with inspection under adequate illumination with arms relaxed, elevated above the head, and pressed against the hips to contract the pectoralis major. Inspection assesses breast symmetry, contour flattening, skin dimpling, and nipple retraction. Palpation utilizes the finger pads of the middle three fingers in overlapping circular motions covering the entire breast, the axillary tail of Spence, and bilateral **supraclavicular and axillary nodal basins**.",
+   "say": "Clinical examination inspects the breast with arms elevated and pressed on hips, followed by flat-fingered circular palpation covering the gland and regional lymph nodes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inspect",
+      "label": "Visual Inspection with Arms Relaxed & Pressed on Hips"
+     },
+     {
+      "id": "palpate",
+      "label": "Bimanual Circular Palpation of All Four Quadrants"
+     },
+     {
+      "id": "spence",
+      "label": "Palpate Axillary Tail of Spence & Retromammary Space"
+     },
+     {
+      "id": "nodes",
+      "label": "Systematic Palpation of Axillary Levels I, II, III"
+     },
+     {
+      "id": "score",
+      "label": "Assign Standardized Clinical Score (E1 to E5)"
+     }
+    ],
+    "edges": [
+     [
+      "inspect",
+      "palpate"
+     ],
+     [
+      "palpate",
+      "spence"
+     ],
+     [
+      "spence",
+      "nodes"
+     ],
+     [
+      "nodes",
+      "score"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnostic breast imaging incorporates mammography and high-resolution ultrasound. Standard mammography utilizes low-dose ionizing radiation with breast compression, obtaining two standard views of each breast: the craniocaudal view and the **mediolateral oblique view**. The mediolateral oblique view is the most critical single mammographic projection because it captures the entire breast parenchyma, the axillary tail, and the pectoralis major muscle down to the inframammary fold.",
+   "say": "Mammography takes craniocaudal and mediolateral oblique views. The mediolateral oblique view is the most critical projection because it captures the entire gland and axillary tail.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mediolateral Oblique (MLO)",
+     "points": [
+      "X-ray beam oriented obliquely at 45-degree angle",
+      "Visualizes pectoralis major muscle down to retromammary space",
+      "Encompasses axillary tail of Spence and upper outer quadrant",
+      "Single most valuable screening mammographic projection"
+     ]
+    },
+    "right": {
+     "title": "Craniocaudal (CC) View",
+     "points": [
+      "X-ray beam oriented strictly vertically from superior to inferior",
+      "Depicts medial and lateral breast tissue distribution",
+      "Nipple must be positioned strictly in profile",
+      "Optimizes localization of medial and retroareolar lesions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In women under forty years of age, high parenchymal breast density impairs mammographic sensitivity, rendering small carcinomas radiologically invisible against dense glandular tissue. Therefore, **targeted breast ultrasonography** represents the initial imaging modality of choice in young women. Ultrasound reliably distinguishes fluid-filled benign cysts from solid masses, characterizes tumor margins, and guides needle biopsy. In women over forty, diagnostic mammography and ultrasound are routinely combined.",
+   "say": "In women under forty, dense breast tissue reduces mammographic sensitivity. Targeted ultrasound is the primary imaging modality, differentiating simple cysts from solid masses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Targeted Ultrasound (Preferred <40)",
+     "points": [
+      "Zero ionizing radiation; completely safe in pregnancy",
+      "Penetrates dense fibroglandular tissue without obscuration",
+      "Distinguishes simple benign cysts from solid neoplasms",
+      "Provides real-time dynamic needle guidance for core biopsy"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Mammography (Standard >=40)",
+     "points": [
+      "Utilizes low-dose soft tissue X-ray compression",
+      "Sensitized by fatty parenchymal breast involution",
+      "Gold standard for detecting microcalcifications in DCIS",
+      "Permits architectural distortion and asymmetry screening"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Mammographic and ultrasound findings are universally communicated using the **BI-RADS classification**, established by the American College of Radiology. Ranging from category zero indicating incomplete assessment to category six representing biopsy-proven malignancy, each tier dictates management. BI-RADS four denotes suspicious abnormalities with malignancy risk ranging from two to ninety-five percent, while BI-RADS five denotes abnormalities that are greater than ninety-five percent predictive of malignancy, mandating prompt core biopsy.",
+   "say": "The BI-RADS system standardizes breast imaging reporting from category zero to six. Category four and five abnormalities represent suspicious findings mandating core biopsy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "BI-RADS Category",
+     "Assessment Definition",
+     "Malignancy Risk",
+     "Clinical Management Recommendation"
+    ],
+    "rows": [
+     [
+      "BI-RADS 1",
+      "Negative (completely normal)",
+      "Essentially 0%",
+      "Routine age-appropriate screening surveillance"
+     ],
+     [
+      "BI-RADS 2",
+      "Benign finding (simple cyst, fibroadenoma)",
+      "Essentially 0%",
+      "Routine screening interval without intervention"
+     ],
+     [
+      "BI-RADS 3",
+      "Probably benign finding",
+      "Less than 2%",
+      "Short-interval follow-up imaging in six months"
+     ],
+     [
+      "BI-RADS 4",
+      "Suspicious abnormality",
+      "2% to 95%",
+      "Tissue biopsy mandatory (subdivided 4A, 4B, 4C)"
+     ],
+     [
+      "BI-RADS 5",
+      "Highly suggestive of malignancy",
+      "Greater than 95%",
+      "Immediate core needle biopsy and surgical consultation"
+     ],
+     [
+      "BI-RADS 6",
+      "Known biopsy-proven malignancy",
+      "100%",
+      "Definitive surgical extirpation or neoadjuvant therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The final, definitive step of the triple assessment is histopathological tissue acquisition. In modern breast oncology, fine-needle aspiration cytology has been almost completely replaced by **core needle biopsy**. Utilizing a fourteen-gauge automated spring-loaded Tru-Cut biopsy needle under ultrasound guidance, three to five tissue cores are harvested. Core biopsy provides intact tissue architecture, allowing pathologists to distinguish non-invasive ductal carcinoma in situ from true invasive carcinoma.",
+   "say": "Core needle biopsy using a fourteen-gauge needle has replaced aspiration cytology. It preserves tissue architecture, distinguishing invasive cancer from non-invasive carcinoma in situ.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Core Needle Biopsy (14-Gauge)",
+     "points": [
+      "Obtains intact cylinders of tissue for histological processing",
+      "Reliably differentiates in situ carcinoma from invasive disease",
+      "Performs receptor profiling (ER, PR, HER2, Ki-67) upfront",
+      "Gold standard for preoperative diagnosis and treatment planning"
+     ]
+    },
+    "right": {
+     "title": "Fine-Needle Aspiration Cytology (FNAC)",
+     "points": [
+      "Harvests loose cells without intact tissue architecture",
+      "Cannot evaluate basement membrane or stromal invasion",
+      "Cannot reliably perform receptor immunohistochemistry",
+      "Largely relegated to confirming axillary lymph node metastases"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Furthermore, core needle biopsy yields sufficient tissue volume to perform essential immunohistochemical prognostic profiling prior to surgery. Pathologists evaluate the expression of **hormone receptors and HER2 status**, specifically estrogen receptors, progesterone receptors, HER2/neu amplification, and the Ki-67 proliferative index. These molecular biomarkers classify the carcinoma into distinct intrinsic subtypes (Luminal A, Luminal B, HER2-enriched, and Triple-Negative), dictating whether the patient receives upfront surgery or neoadjuvant systemic therapy.",
+   "say": "Core biopsy enables pre-operative immunohistochemistry for estrogen, progesterone, and HER2 receptors. This molecular profiling guides neoadjuvant chemotherapy or upfront surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "core",
+      "label": "14-Gauge Ultrasound-Guided Core Needle Biopsy"
+     },
+     {
+      "id": "ihc",
+      "label": "Immunohistochemical Staining (ER, PR, HER2, Ki-67)"
+     },
+     {
+      "id": "luminal",
+      "label": "Luminal Subtypes: Upfront Resection & Endocrine Therapy"
+     },
+     {
+      "id": "her2",
+      "label": "HER2+ Subtype: Neoadjuvant Trastuzumab + Chemotherapy"
+     },
+     {
+      "id": "tnbc",
+      "label": "Triple-Negative: Neoadjuvant Multi-Agent Chemotherapy"
+     }
+    ],
+    "edges": [
+     [
+      "core",
+      "ihc"
+     ],
+     [
+      "ihc",
+      "luminal"
+     ],
+     [
+      "ihc",
+      "her2"
+     ],
+     [
+      "ihc",
+      "tnbc"
+     ]
+    ]
+   }
+  }
+ ]
+}

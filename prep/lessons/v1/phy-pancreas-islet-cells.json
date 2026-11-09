@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "phy-pancreas",
+  "subject": "physiology",
+  "title": "Islet Microanatomy, Beta Cells, and Insulin Exocytosis",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The endocrine pancreas consists of one to two million microscopic micro-organs known as the **islets of Langerhans**, scattered throughout exocrine acinar tissue. Islets contain four major hormone-secreting cell types: insulin-secreting beta cells (sixty percent), glucagon-secreting alpha cells (twenty-five percent), somatostatin-secreting delta cells (ten percent), and pancreatic polypeptide cells.",
+      "say": "Islets of Langerhans contain sixty percent beta cells making insulin, twenty-five percent alpha cells making glucagon, and delta cells.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Islet Cell Type",
+          "Percentage of Islet",
+          "Anatomical Micro-Location",
+          "Secreted Hormone",
+          "Primary Biological Action"
+        ],
+        "rows": [
+          [
+            "Beta (β) Cells",
+            "~60% to 70%",
+            "Central islet core",
+            "Insulin and Amylin",
+            "Anabolic storage of glucose, lipids, protein"
+          ],
+          [
+            "Alpha (α) Cells",
+            "~20% to 25%",
+            "Outer mantle rim",
+            "Glucagon",
+            "Catabolic hepatic glycogenolysis and gluconeogenesis"
+          ],
+          [
+            "Delta (δ) Cells",
+            "~5% to 10%",
+            "Interspersed boundary",
+            "Somatostatin",
+            "Paracrine inhibition of both insulin and glucagon"
+          ],
+          [
+            "PP (Gamma) Cells",
+            "< 2%",
+            "Head of pancreas",
+            "Pancreatic Polypeptide",
+            "Inhibits gallbladder contraction and pancreatic secretion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Microvascular blood flow within the islet proceeds from the center outward in a centrifugal direction. Consequently, arterial blood flows past centrally located beta cells before bathing peripheral alpha and delta cells, allowing high local concentrations of **secreted insulin** to directly inhibit adjacent alpha cells and suppress glucagon output.",
+      "say": "Centrifugal blood flow carries high concentrations of insulin from the central beta core outward to suppress alpha cells.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Centrifugal Microcirculation",
+          "points": [
+            "Central afferent arteriole penetrates islet core",
+            "Blood perfuses central beta cells first",
+            "Flows radially outward to peripheral alpha and delta mantle",
+            "Insulin directly suppresses glucagon gene transcription"
+          ]
+        },
+        "right": {
+          "title": "Paracrine Cross-Regulation",
+          "points": [
+            "Delta cell somatostatin potently inhibits both insulin and glucagon",
+            "Alpha cell glucagon stimulates insulin secretion directly",
+            "Beta cell amylin co-secreted with insulin inhibits glucagon",
+            "Disrupted in type 1 diabetes, producing paradoxical hyperglucagonemia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Beta cells couple ambient extracellular glucose concentrations to insulin secretion through an elegant stimulus-secretion mechanism. Extracellular glucose enters beta cells via the bidirectional, non-saturable facilitated glucose transporter **GLUT2**, which possesses a high Km of fifteen to twenty millimoles per litre.",
+      "say": "Glucose enters beta cells through GLUT2, which has a high Km that allows it to match intracellular levels to blood sugar.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "glu_entry",
+            "label": "Postprandial Hyperglycaemia Drives Glucose into Beta Cell via Apical GLUT2"
+          },
+          {
+            "id": "gck_phos",
+            "label": "Glucokinase Phosphorylates Glucose to Glucose-6-Phosphate (Rate-Limiting Sensor)"
+          },
+          {
+            "id": "atp_gen",
+            "label": "Mitochondrial Glycolysis and Krebs Cycle Elevate Intracellular ATP/ADP Ratio"
+          },
+          {
+            "id": "k_close",
+            "label": "ATP Closes Inward-Rectifying K-ATP Channels, Eliciting Membrane Depolarization"
+          }
+        ],
+        "edges": [
+          [
+            "glu_entry",
+            "gck_phos"
+          ],
+          [
+            "gck_phos",
+            "atp_gen"
+          ],
+          [
+            "atp_gen",
+            "k_close"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Inside the beta cell, glucose is immediately phosphorylated to glucose-six-phosphate by the monomeric enzyme **glucokinase**, functioning as the true glucose sensor of the beta cell. Because glucokinase has a low affinity and lacks product inhibition, the rate of glucose phosphorylation parallels extracellular glycaemia across physiological ranges.",
+      "say": "Glucokinase acts as the beta cell glucose sensor, setting the rate of glycolysis in proportion to blood sugar levels.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pancreatic Glucokinase (Hexokinase IV)",
+          "points": [
+            "High Km (~8 to 10 mM); low affinity matching postprandial glucose",
+            "Not inhibited by its reaction product (glucose-6-phosphate)",
+            "Phosphorylation rate varies linearly with circulating glycaemia",
+            "Mutations cause maturity-onset diabetes of the young (MODY-2)"
+          ]
+        },
+        "right": {
+          "title": "Hexokinase I-III (Peripheral Tissues)",
+          "points": [
+            "Very low Km (< 0.1 mM); extremely high affinity",
+            "Fully saturated even at profound hypoglycaemic levels",
+            "Potently inhibited by glucose-6-phosphate product feedback",
+            "Ensures constant basal glucose utilization in brain and muscle"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Accelerated intracellular glycolysis and mitochondrial oxidative phosphorylation generate abundant adenosine triphosphate, markedly increasing the cytosolic ATP-to-ADP ratio. This metabolic shift directly closes **ATP-sensitive potassium channels**, preventing further potassium efflux and depolarizing the beta-cell plasma membrane from minus seventy millivolts to minus forty millivolts.",
+      "say": "Rising ATP closes potassium channels, depolarizing the beta cell membrane to open voltage-gated calcium channels.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "atp_close",
+            "label": "Elevated ATP Binds Kir6.2 Subunit, Closing K-ATP Channels"
+          },
+          {
+            "id": "depol",
+            "label": "Arrests K+ Efflux; Membrane Depolarizes from -70 mV to -40 mV"
+          },
+          {
+            "id": "ca_open",
+            "label": "Voltage-Gated L-Type Calcium Channels Open -> Influx of Extracellular Ca2+"
+          },
+          {
+            "id": "exocytosis",
+            "label": "SNARE-Mediated Exocytosis of Pre-Formed Insulin Storage Granules"
+          }
+        ],
+        "edges": [
+          [
+            "atp_close",
+            "depol"
+          ],
+          [
+            "depol",
+            "ca_open"
+          ],
+          [
+            "ca_open",
+            "exocytosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Membrane depolarization triggers the opening of voltage-gated L-type calcium channels, producing a dramatic surge in intracellular calcium. Calcium activates synaptotagmin and SNARE core complexes, eliciting explosive exocytosis of dense-core secretory granules containing **mature human insulin** and stoichiometric quantities of connecting peptide.",
+      "say": "Calcium influx triggers SNARE proteins to fuse insulin granules with the membrane, releasing insulin and C-peptide.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diabetes-mellitus-fig2.webp",
+        "alt": "Insulin granule exocytosis and beta cell microarchitecture",
+        "caption": "Islet beta cell stimulus-secretion coupling, calcium-mediated exocytosis, and proinsulin processing."
+      }
+    },
+    {
+      "tx": "Oral sulfonylurea medications like glimepiride and gliclazide bind the sulfonylurea receptor one subunit of the **K-ATP channel complex**. By pharmacologically closing these channels independently of ambient glucose, sulfonylureas trigger continuous membrane depolarization and insulin exocytosis, explaining their characteristic risk of iatrogenic hypoglycemia.",
+      "say": "Sulfonylureas chemically close K-ATP channels, stimulating insulin secretion independently of ambient glucose levels.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diabetes-mellitus-management-and-therapies-fig1.webp",
+        "alt": "Sulfonylurea pharmacology and beta cell channel targets",
+        "caption": "SUR1 receptor binding, K-ATP channel blockade, and pharmacotherapeutic insulin secretagogues."
+      }
+    },
+    {
+      "tx": "During proinsulin processing in the Golgi apparatus, endopeptidases cleave connecting peptide, yielding active insulin and equimolar **connecting C-peptide**. Because hepatic extraction clears fifty percent of newly secreted insulin on first pass while C-peptide escapes hepatic degradation, serum C-peptide serves as the gold-standard biomarker of endogenous beta-cell reserve.",
+      "say": "C-peptide is co-secreted with insulin in equal amounts, serving as an accurate blood marker of natural insulin production.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Biomarker",
+          "Hepatic First-Pass Extraction",
+          "Circulating Half-Life",
+          "Clinical Diagnostic Role"
+        ],
+        "rows": [
+          [
+            "Serum Insulin",
+            "High (~50% cleared by liver)",
+            "Short (~4 to 6 minutes)",
+            "Reflects acute biologically active systemic levels"
+          ],
+          [
+            "C-Peptide",
+            "Zero (cleared purely by kidneys)",
+            "Long (~30 minutes)",
+            "Accurate measure of endogenous beta-cell secretory reserve"
+          ],
+          [
+            "Factitious Hypoglycemia",
+            "High (exogenous insulin injection)",
+            "Low / Undetectable",
+            "Distinguishes surreptitious insulin from insulinoma"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
