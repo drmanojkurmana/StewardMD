@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-sex-hormones",
+  "subject": "pharmacology",
+  "title": "Androgens and Antiandrogens: Testosterone, Finasteride, Dutasteride, Flutamide, Bicalutamide, Enzalutamide",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Testosterone** replacement restores deficient men toward mid normal range by intramuscular esters, transdermal gels or long acting undecanoate, against symptoms plus unequivocally low morning levels on two occasions. Monitoring is haematocrit (erythrocytosis is the dose limiter), prostate surveillance by age, and fertility honesty: exogenous testosterone suppresses gonadotropins and spermatogenesis, so it contracepts the man seeking fertility, for whom clomiphene or gonadotropins substitute.",
+      "say": "Replace to mid normal, watch the haematocrit and prostate, and never promise fertility on testosterone itself.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Replacement essentials",
+          "points": [
+            "Two low morning levels with symptoms",
+            "Gels daily or injections at intervals",
+            "Target mid normal range, not athletic ranges",
+            "Haematocrit above 54 percent: pause and review"
+          ]
+        },
+        "right": {
+          "title": "Counselling duties",
+          "points": [
+            "Spermatogenesis suppressed: fertility alternatives exist",
+            "Prostate and breast symptoms reviewed",
+            "Sleep apnoea may worsen",
+            "Transfer precautions with gels around partners and children"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "5 alpha reductase converts testosterone to dihydrotestosterone (DHT), the prostate and scalp's preferred androgen; **finasteride** (type 2 enzyme) and **dutasteride** (types 1 and 2, longer reach) block that conversion, shrinking prostates by about a fifth over six to twelve months, improving flow and cutting retention and surgery risk, and at a fifth of the dose (finasteride 1 mg) slowing male pattern hair loss. PSA halves on therapy, a correction every screening interpretation must apply.",
+      "say": "Block DHT and the prostate shrinks over a year; halve the PSA before you judge it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "testo",
+            "label": "Testosterone reaches prostate and scalp"
+          },
+          {
+            "id": "5ar",
+            "label": "5 alpha reductase converts to dihydrotestosterone"
+          },
+          {
+            "id": "block",
+            "label": "Finasteride or dutasteride blocks conversion"
+          },
+          {
+            "id": "shrink",
+            "label": "Prostate volume falls about a fifth over a year"
+          }
+        ],
+        "edges": [
+          [
+            "testo",
+            "5ar"
+          ],
+          [
+            "5ar",
+            "block"
+          ],
+          [
+            "block",
+            "shrink"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**The** 5 alpha reductase inhibitors' adverse set is sexual (erectile and libido effects in single digit percentages, usually reversible) plus a teratogenic fence: crushed tablets and semen exposure matter because a male fetus under DHT blockade feminises, banning the drugs in pregnancy handling. Dutasteride's month long tail after stopping (blood donation deferred six months) exceeds finasteride's, and the disputed persistent post finasteride syndrome requires honest uncertainty in counselling rather than dismissal or endorsement.",
+      "say": "Sexual effects usually reverse, fetal exposure must never happen, and dutasteride lingers for months after stopping.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Finasteride",
+          "points": [
+            "Type 2 reductase, daily 5 mg prostate, 1 mg hair",
+            "PSA reduced by about half",
+            "Clears within weeks of stopping",
+            "Sexual effects in a minority, usually reversible"
+          ]
+        },
+        "right": {
+          "title": "Dutasteride",
+          "points": [
+            "Types 1 and 2, half life about 5 weeks",
+            "Greater DHT suppression, similar prostate gains",
+            "Blood donation deferred 6 months after stopping",
+            "Pregnancy exposure contraindicated for both"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Androgen receptor blockade writes prostate cancer's history: **flutamide** and bicalutamide, non steroidal pure antagonists, block the receptor without lowering testosterone (so libido falls less while gynaecomastia and breast pain rise from unopposed oestrogen effect), used in combined androgen blockade and flare protection. Flutamide's hepatotoxicity demoted it behind bicalutamide's once daily kindness. Neither matches castration alone for survival, which is why they accompany rather than replace it.",
+      "say": "Bicalutamide blocks the receptor and spares testosterone; breasts pay what libido saves.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "First generation antiandrogens",
+          "points": [
+            "Flutamide thrice daily, hepatotoxicity fence",
+            "Bicalutamide once daily, better tolerated",
+            "Gynaecomastia and breast tenderness common",
+            "Flare protection at LHRH agonist initiation"
+          ]
+        },
+        "right": {
+          "title": "Strategic role",
+          "points": [
+            "Combined androgen blockade additions",
+            "Never survival equivalent to castration alone",
+            "Liver enzymes monitored, flutamide especially",
+            "Withdrawal responses occur on stopping (agonist metabolites)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Enzalutamide** leads the second generation: tighter receptor binding, blocked nuclear translocation and DNA binding, no agonist activity, and survival gains across metastatic castration resistant and hormone sensitive prostate cancer, alongside abiraterone's androgen synthesis blockade as the modern pair. Its tolls are fatigue, hypertension, falls and fractures in older men, and a seizure signal (GABA antagonism) fencing it from seizure prone patients, with CYP interactions across the chart.",
+      "say": "Enzalutamide strangles the receptor completely; fatigue, falls and a seizure fence ride along.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "enza",
+            "label": "Enzalutamide binds androgen receptor tightly"
+          },
+          {
+            "id": "nucleus",
+            "label": "Nuclear translocation and DNA binding blocked"
+          },
+          {
+            "id": "survive",
+            "label": "Survival gains in castration resistant and sensitive disease"
+          },
+          {
+            "id": "seizure",
+            "label": "Seizure history fences prescribing"
+          }
+        ],
+        "edges": [
+          [
+            "enza",
+            "nucleus"
+          ],
+          [
+            "nucleus",
+            "survive"
+          ],
+          [
+            "survive",
+            "seizure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Androgen deprivation's systemic price** is a chronic disease curriculum: hot flushes, sarcopenia and fat gain, osteoporosis and fractures (bone protection co prescribed), metabolic syndrome and cardiovascular debate, anaemia, cognitive and mood effects, and sexual extinction that relationship counselling must name. Intermittent versus continuous schedules, bone densitometry cadence and exercise prescriptions are therefore pharmacology follow through, not survivorship garnish.",
+      "say": "Deprivation ages the body deliberately; bones, muscle, metabolism and mood are monitored like organs on chemotherapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Deprivation costs",
+          "points": [
+            "Hot flushes and sleep disturbance",
+            "Bone loss: densitometry and protection therapy",
+            "Sarcopenia with visceral fat gain",
+            "Metabolic and cardiovascular risk accumulation"
+          ]
+        },
+        "right": {
+          "title": "Mitigation bundle",
+          "points": [
+            "Resistance exercise and protein sufficiency",
+            "Calcium, vitamin D and antiresorptives by risk",
+            "Cardiometabolic screening at intervals",
+            "Mood, cognition and relationship support"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anabolic androgenic steroid misuse** outside medicine borrows this lesson inverted: supraphysiological testosterone and derivatives for muscle, suppressed gonadotropins with testicular atrophy and infertility, erythrocytosis, dyslipidaemia (HDL crushed), cardiomyopathy signals, acne, gynaecomastia from aromatisation, and dependence with hypogonadal withdrawal. Harm reduction (needle exchange, haematocrit and cardiac review, fertility timelines measured in months to years after cessation) serves patients who will not accept abstinence lectures alone.",
+      "say": "Misused androgens suppress the axis they imitate; recovery of sperm and sense takes months after the last injection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Misuse consequences",
+          "points": [
+            "Testicular atrophy, infertility, gynaecomastia",
+            "Erythrocytosis and HDL suppression",
+            "Acne, alopecia acceleration, mood volatility",
+            "Cardiomyopathy and hepatic adenomas with oral 17 alkylated agents"
+          ]
+        },
+        "right": {
+          "title": "Harm reduction practice",
+          "points": [
+            "Non judgemental monitoring: haematocrit, lipids, pressure",
+            "Fertility recovery timelines counselled honestly",
+            "Injection hygiene and infection screening",
+            "Cessation support without moralising"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Female androgen pharmacology**, though smaller in this syllabus, completes the map: antiandrogens (spironolactone's receptor blockade, cyproterone, finasteride cautiously) serve hirsutism and acne with contraception mandatory beside them (feminised male fetus), while testosterone itself is licensed narrowly for postmenopausal hypoactive desire in some jurisdictions. The receptor does not care which clinic prescribes its blockers; the teratogenic fence is identical in all of them.",
+      "say": "Antiandrogens in women demand contraception beside them; the fetal fence follows the receptor everywhere.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hirsute",
+            "label": "Hirsutism or acne with androgen excess assessed"
+          },
+          {
+            "id": "contra",
+            "label": "Reliable contraception established first"
+          },
+          {
+            "id": "anti",
+            "label": "Spironolactone or other antiandrogen started"
+          },
+          {
+            "id": "months",
+            "label": "Judge at 6 months: hair cycles are slow"
+          }
+        ],
+        "edges": [
+          [
+            "hirsute",
+            "contra"
+          ],
+          [
+            "contra",
+            "anti"
+          ],
+          [
+            "anti",
+            "months"
+          ]
+        ]
+      }
+    }
+  ]
+}
