@@ -1,0 +1,195 @@
+{
+ "v": 1,
+ "module": "med-enteric-rickettsial",
+ "subject": "medicine",
+ "title": "Enteric, Rickettsial, and Zoonotic Fevers",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A severe systemic bacterial infection transmitted via ingestion of food or water contaminated with human feces containing Salmonella enterica serotype Typhi or Paratyphi is **typhoid fever** (enteric fever). Organisms invade intestinal microfold (M) cells overlying Peyer patches in the terminal ileum, replicate intracellularly within reticuloendothelial macrophages, and disseminate haematogenously throughout the body.",
+   "say": "A severe systemic bacterial infection transmitted through contaminated food or water is typhoid fever, caused by Salmonella Typhi. Organisms invade Peyer patches in the terminal ileum, replicate within reticuloendothelial macrophages, and disseminate haematogenously throughout the body.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/enteric-fever-nontyphoidal-salmonella-fig1.webp",
+    "alt": "Clinical manifestations of typhoid fever including rose spots and step-ladder fever.",
+    "caption": "Peyer patch hyperplasia, bacteremia, and cutaneous rose spots in typhoid fever. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Patients present during the first week with a characteristic step-ladder remittent fever, malaise, headache, and a pulse rate inappropriately low for the degree of hyperthermia, recognized as **relative bradycardia** (Faget sign). By the second week, transient faint, blanching erythematous macules measuring two to four millimetres, termed rose spots, appear across the anterior abdomen and lower chest.",
+   "say": "Patients present during the first week with a step-ladder fever and a pulse rate inappropriately low for temperature, recognized as relative bradycardia or Faget sign. By the second week, transient blanching rose spots appear across the abdomen and chest.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "wk1",
+      "label": "Week 1: Step-Ladder Fever + Relative Bradycardia"
+     },
+     {
+      "id": "wk2",
+      "label": "Week 2: Abdominal Rose Spots + Hepatosplenomegaly"
+     },
+     {
+      "id": "wk3",
+      "label": "Week 3: Pea-Soup Diarrhea + Intestinal Perforation"
+     }
+    ],
+    "edges": [
+     [
+      "wk1",
+      "wk2"
+     ],
+     [
+      "wk2",
+      "wk3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blood culture represents the gold standard diagnostic test during the first week of typhoid fever, displaying sixty to eighty percent sensitivity, whereas bone marrow aspirate culture provides ninety percent sensitivity even after starting antibiotics. The historic **Widal test**, which measures agglutinating antibodies against Salmonella O (somatic) and H (flagellar) antigens, is plagued by high false-positive rates from prior vaccination and cross-reactivity.",
+   "say": "Blood culture represents the diagnostic standard during the first week of typhoid fever, while bone marrow culture provides ninety percent sensitivity even after antibiotic initiation. The Widal serological test suffers from frequent false-positive results due to cross-reactivity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Specimen",
+     "Timing in Disease Course",
+     "Diagnostic Sensitivity & Role"
+    ],
+    "rows": [
+     [
+      "Blood Culture",
+      "First week of fever (maximal bacteremia)",
+      "60% to 80% sensitive; provides antibiotic susceptibilities"
+     ],
+     [
+      "Bone Marrow Aspirate",
+      "Any week; remains positive after antibiotics",
+      "90% sensitive; invasive gold standard"
+     ],
+     [
+      "Stool Culture",
+      "Positive from week 2 to week 3",
+      "30% to 50% sensitive; useful for chronic carrier detection"
+     ],
+     [
+      "Widal Serology",
+      "Paired acute and convalescent sera",
+      "Unreliable single-titre cutoff; high false-positive rate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most dangerous surgical complication of typhoid fever occurs during the third week, when necrotising hyperplastic Peyer patches slough to produce longitudinal antimesenteric **typhoid perforation** of the terminal ileum. Manifesting with abrupt peritonitis and free air beneath the diaphragm, treatment requires emergency exploratory laparotomy, simple primary closure or exteriorization, and broad-spectrum antibiotics.",
+   "say": "The most dangerous complication of typhoid fever occurs during the third week, when necrotic Peyer patches slough to cause longitudinal ileal perforation. Manifesting with peritonitis and free subdiaphragmatic air, management requires emergency surgical laparotomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Typhoid Ulcers & Perforation",
+     "points": [
+      "Longitudinal ulcers oriented along long axis of ileum",
+      "Occurs along antimesenteric border of terminal ileum",
+      "High risk of free peritoneal rupture and peritonitis",
+      "Emergency surgical laparotomy and primary repair"
+     ]
+    },
+    "right": {
+     "title": "Tuberculous Intestinal Ulcers",
+     "points": [
+      "Transverse ulcers oriented circumferentially around lumen",
+      "Follows circumferential mucosal lymphatic channels",
+      "Causes luminal strictures, stenosis, and bowel obstruction",
+      "Responds to medical antituberculous pharmacotherapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extensive fluoroquinolone resistance globally has made high-dose intravenous **ceftriaxone** (two grams daily for ten to fourteen days) or oral azithromycin (twenty milligrams per kilogram daily for seven days) the preferred empirical antimicrobials of choice for uncomplicated and severe enteric fever. Azithromycin demonstrates superior intracellular macrophage penetration and eradicates chronic Salmonella gallbladder carriage.",
+   "say": "Fluoroquinolone resistance has made intravenous ceftriaxone or oral azithromycin the preferred empirical antimicrobials for enteric fever. Azithromycin achieves high intracellular macrophage concentrations and effectively clears gallbladder carriage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Scenario",
+     "Preferred First-Line Regimen",
+     "Alternative Regimen"
+    ],
+    "rows": [
+     [
+      "Uncomplicated Enteric Fever",
+      "Oral Azithromycin 500-1000 mg/day for 7 days",
+      "Oral Cefixime 20 mg/kg/day for 14 days"
+     ],
+     [
+      "Severe / Complicated Enteric Fever",
+      "IV Ceftriaxone 2 g/day for 10-14 days",
+      "IV Meropenem (for XDR Salmonella strains)"
+     ],
+     [
+      "Chronic Biliary Carrier State",
+      "Oral Ciprofloxacin for 4 wk OR Ampicillin",
+      "Elective cholecystectomy for refractory gallstones"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An acute febrile rickettsial illness transmitted by the bite of larval trombiculid mites (chiggers) in dense secondary scrub vegetation is scrub typhus, caused by the obligate intracellular bacterium Orientia tsutsugamushi. The pathognomonic physical finding is a painless cigarette-burn **eschar**, featuring a punched-out central black necrotic crust surrounded by an erythematous halo at the bite site.",
+   "say": "An acute febrile illness transmitted by larval trombiculid mites in rural vegetation is scrub typhus, caused by Orientia tsutsugamushi. The pathognomonic physical finding is a painless cigarette-burn eschar, displaying a central black necrotic crust with an erythematous halo.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/scrub-typhus-fig1.webp",
+    "alt": "Life cycle, chigger bite transmission, and cutaneous eschar in scrub typhus.",
+    "caption": "Mite vector transmission, cutaneous necrotic eschar, and multi-organ vasculitis in scrub typhus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The absolute drug of choice for scrub typhus, murine typhus, and spotted fevers is oral or intravenous **doxycycline** (one-hundred milligrams twice daily for seven days). Defervescence characteristically occurs within twenty-four to forty-eight hours of starting doxycycline; failure to defervesce within forty-eight hours strongly suggests an alternative diagnosis or co-infection.",
+   "say": "The absolute drug of choice for scrub typhus and rickettsial fevers is doxycycline. Defervescence characteristically occurs within forty-eight hours of starting doxycycline; lack of response strongly suggests an alternative diagnosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mite",
+      "label": "Chigger Bite & Eschar Formation"
+     },
+     {
+      "id": "dox",
+      "label": "Oral Doxycycline (100 mg bid for 7 days)"
+     },
+     {
+      "id": "def",
+      "label": "Rapid Defervescence Within 24-48 Hours"
+     }
+    ],
+    "edges": [
+     [
+      "mite",
+      "dox"
+     ],
+     [
+      "dox",
+      "def"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A zoonotic spirochaetal infection acquired by contact with water or soil contaminated by urine from infected rodents and domestic animals is leptospirosis, caused by pathogenic Leptospira interrogans. While mild anicteric leptospirosis presents with fever, calf tenderness, and striking bilateral conjunctival suffusion (red eyes without purulent discharge), severe icteric **Weil disease** features jaundice, renal failure, and pulmonary haemorrhage.",
+   "say": "A zoonotic spirochaetal infection acquired through contact with rodent urine in floodwaters is leptospirosis. While mild cases feature fever, calf tenderness, and conjunctival suffusion without discharge, severe icteric Weil disease causes jaundice, renal failure, and pulmonary haemorrhage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/leptospirosis-fig1.webp",
+    "alt": "Zoonotic transmission and multi-organ manifestations of Weil disease in leptospirosis.",
+    "caption": "Leptospiral transmission, conjunctival suffusion, and severe hepatorenal Weil disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 160, 182, 185"
+}

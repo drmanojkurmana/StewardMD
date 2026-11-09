@@ -1,0 +1,223 @@
+{
+ "v": 1,
+ "module": "med-sepsis",
+ "subject": "medicine",
+ "title": "Sepsis, Septic Shock, and Inpatient Infection Management",
+ "minutes": 7,
+ "steps": [
+  {
+   "tx": "A life-threatening organ dysfunction caused by a dysregulated, host-damaging immune response to an underlying infection is defined clinically as **sepsis**. Pathophysiologically, pathogen-associated molecular patterns (such as bacterial endotoxin lipopolysaccharide) trigger massive macrophage activation, systemic cytokine release, widespread endothelial glycocalyx degradation, microvascular permeability, and cellular metabolic dysoxia.",
+   "say": "A life-threatening organ dysfunction caused by a dysregulated host response to infection is defined as sepsis. Pathogen molecular patterns trigger macrophage activation, cytokine storms, endothelial barrier breakdown, microvascular leakage, and cellular metabolic impairment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sepsis-fig2.webp",
+    "alt": "Microvascular leak, endothelial injury, and organ dysfunction in sepsis.",
+    "caption": "Endothelial activation, capillary leakage, and microvascular hypoperfusion in sepsis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A critical subset of sepsis featuring profound cellular, metabolic, and circulatory abnormalities carrying hospital mortality exceeding forty percent is **septic shock**. Diagnostic criteria require persistent hypotension necessitating vasopressor infusions to maintain a mean arterial pressure of sixty-five mmHg or higher, accompanied by an elevated serum lactate exceeding two millimoles per litre despite adequate fluid resuscitation.",
+   "say": "A critical subset of sepsis featuring profound circulatory and metabolic failure with mortality exceeding forty percent is septic shock. Diagnostic criteria mandate persistent hypotension requiring vasopressors to maintain mean arterial pressure above sixty-five mmHg, along with elevated lactate despite fluid resuscitation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "inf",
+      "label": "Severe Infection / Dysregulated Response"
+     },
+     {
+      "id": "resusc",
+      "label": "30 mL/kg Crystalloid Resuscitation"
+     },
+     {
+      "id": "shock",
+      "label": "Persistent MAP < 65 mmHg + Lactate > 2 mmol/L"
+     }
+    ],
+    "edges": [
+     [
+      "inf",
+      "resusc"
+     ],
+     [
+      "resusc",
+      "shock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bedside identification of patients at heightened risk of in-hospital mortality utilizes the quick Sequential Organ Failure Assessment (**qSOFA**) bedside score. Calculating three objective bedside physiological parameters (Respiratory rate twenty-two breaths per minute or higher, Altered mental status with GCS under fifteen, Systolic blood pressure one-hundred mmHg or lower), a score of two or higher prompts urgent ICU evaluation.",
+   "say": "Bedside identification of high-risk sepsis patients utilizes the quick Sequential Organ Failure Assessment bedside tool. Scoring respiratory rate above twenty-two, altered mentation, and systolic pressure under one hundred, a score of two or higher prompts urgent clinical evaluation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "qSOFA Bedside Parameter",
+     "Threshold Criterion",
+     "Assigned Points"
+    ],
+    "rows": [
+     [
+      "Respiratory Rate",
+      ">= 22 breaths per minute (tachypnea)",
+      "1 point"
+     ],
+     [
+      "Altered Mentation",
+      "Glasgow Coma Scale (GCS) < 15 points",
+      "1 point"
+     ],
+     [
+      "Systolic Blood Pressure",
+      "<= 100 mmHg (hypotension)",
+      "1 point"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Formal quantification of sepsis organ dysfunction relies on the full **SOFA score**, evaluating six physiological systems: respiration (PaO2/FiO2 ratio), coagulation (platelet count), hepatic function (serum bilirubin), cardiovascular support (mean arterial pressure or required vasopressor dose), central nervous system (Glasgow Coma Scale), and renal function (serum creatinine or daily urine output).",
+   "say": "Formal quantification of sepsis organ dysfunction relies on the full SOFA score, evaluating six organ systems: respiration, platelet count, bilirubin, cardiovascular vasopressor requirements, Glasgow Coma Scale, and renal creatinine excretion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ System Domain",
+     "Evaluation Parameter",
+     "Range (0 to 4 Points)"
+    ],
+    "rows": [
+     [
+      "Respiration",
+      "PaO2 / FiO2 ratio (mmHg)",
+      "> 400 (0 pts) down to < 100 with ventilation (4 pts)"
+     ],
+     [
+      "Coagulation",
+      "Platelet count (x10^3 / uL)",
+      "> 150 (0 pts) down to < 20 (4 pts)"
+     ],
+     [
+      "Liver",
+      "Serum Bilirubin (mg/dL)",
+      "< 1.2 (0 pts) down to > 12.0 (4 pts)"
+     ],
+     [
+      "Cardiovascular",
+      "Hypotension / Vasopressor infusion",
+      "MAP >= 70 (0 pts) to high-dose Noradrenaline (4 pts)"
+     ],
+     [
+      "Renal",
+      "Creatinine (mg/dL) or daily urine output",
+      "< 1.2 (0 pts) to > 5.0 or < 200 mL/day (4 pts)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Resuscitation bundles dictate the mandatory delivery of the hour-one sepsis bundle. Clinicians must measure baseline **serum lactate** (re-measuring within four hours if initial level exceeds two millimoles per litre), obtain two sets of peripheral blood cultures prior to antimicrobial initiation, administer broad-spectrum intravenous empirical antibiotics within one hour, and rapidly infuse thirty millilitres per kilogram of balanced crystalloids.",
+   "say": "Resuscitation protocols mandate delivering the hour-one sepsis bundle. Clinicians must measure serum lactate, draw blood cultures prior to antibiotics, administer broad-spectrum intravenous antimicrobials within one hour, and infuse thirty millilitres per kilogram of balanced crystalloid solution.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diag",
+      "label": "Measure Serum Lactate & Draw Blood Cultures"
+     },
+     {
+      "id": "abx",
+      "label": "Administer IV Broad-Spectrum Antibiotics (< 1 hr)"
+     },
+     {
+      "id": "ivf",
+      "label": "Infuse 30 mL/kg Balanced Crystalloid (Ringer Lactate)"
+     }
+    ],
+    "edges": [
+     [
+      "diag",
+      "abx"
+     ],
+     [
+      "abx",
+      "ivf"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The absolute first-line vasopressor of choice in septic shock unresponsive to crystalloid volume resuscitation is continuous intravenous **noradrenaline** (norepinephrine). Noradrenaline delivers potent alpha-1 vascular vasoconstriction to restore systemic vascular resistance and mean arterial pressure alongside modest beta-1 inotropic support, titrating to maintain mean arterial pressure at sixty-five mmHg while minimising tachyarrhythmias.",
+   "say": "The absolute first-line vasopressor of choice in septic shock refractory to crystalloids is intravenous noradrenaline. Noradrenaline provides potent alpha-1 vasoconstriction to restore mean arterial pressure above sixty-five mmHg alongside modest inotropic support, while minimising tachyarrhythmias.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Noradrenaline (First-Line)",
+     "points": [
+      "Potent alpha-1 vasoconstrictor + mild beta-1 inotrope",
+      "Restores vascular tone without excessive tachycardia",
+      "Target MAP >= 65 mmHg in septic shock",
+      "Superior survival compared to dopamine"
+     ]
+    },
+    "right": {
+     "title": "Vasopressin (Second-Line Adjunct)",
+     "points": [
+      "Stimulates vascular V1 receptors directly",
+      "Added at fixed dose (0.03 units/min) to reduce noradrenaline",
+      "Effective during profound lactic acidosis",
+      "Does not cause beta-adrenergic tachyarrhythmias"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hospital-acquired infections frequently involve multidrug-resistant pathogens requiring specific antimicrobial coverage. Methicillin-resistant Staphylococcus aureus (MRSA) mandates glycopeptides (vancomycin) or lipopeptides (daptomycin). Gram-negative bacteria harbouring extended-spectrum beta-lactamases (**ESBL**) require carbapenems (meropenem), while carbapenem-resistant Enterobacterales (CRE) require novel beta-lactamase inhibitor combinations such as ceftazidime-avibactam.",
+   "say": "Hospital-acquired infections frequently involve multidrug-resistant pathogens requiring targeted therapy. MRSA mandates vancomycin or daptomycin. Gram-negative bacilli producing extended-spectrum beta-lactamases require meropenem, while carbapenem-resistant Enterobacterales require ceftazidime-avibactam.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Resistant Pathogen Category",
+     "Primary Resistance Mechanism",
+     "First-Line Therapeutic Regimens"
+    ],
+    "rows": [
+     [
+      "MRSA",
+      "mecA gene encoding altered PBP2a",
+      "IV Vancomycin (trough 15-20) OR Daptomycin"
+     ],
+     [
+      "ESBL Enterobacterales",
+      "Hydrolyzes penicillins and cephalosporins",
+      "IV Meropenem OR Imipenem-cilastatin"
+     ],
+     [
+      "Carbapenem-Resistant (CRE)",
+      "Klebsiella pneumoniae carbapenemase (KPC)",
+      "Ceftazidime-avibactam OR Meropenem-vaborbactam"
+     ],
+     [
+      "Vancomycin-Resistant Enterococci (VRE)",
+      "vanA gene altering D-Ala-D-Ala to D-Ala-D-Lac",
+      "Linezolid OR Daptomycin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An acute oncological and infectious emergency presenting with an absolute neutrophil count falling under five-hundred cells per microlitre (or predicted decline below 500 within forty-eight hours) accompanied by a single temperature exceeding 38.3 degrees Celsius is **febrile neutropenia**. Empirical monotherapy with an antipseudomonal beta-lactam (intravenous piperacillin-tazobactam, cefepime, or meropenem) must be initiated within sixty minutes.",
+   "say": "An acute oncological emergency presenting with an absolute neutrophil count under five hundred cells per microlitre accompanied by a fever exceeding 38.3 degrees is febrile neutropenia. Empirical monotherapy with an antipseudomonal beta-lactam like piperacillin-tazobactam must be started within sixty minutes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/neonatal-sepsis-fig1.webp",
+    "alt": "Clinical signs, diagnostic workup, and systemic shock in severe sepsis.",
+    "caption": "Diagnostic stratification, cultures, and immediate empirical antimicrobial therapy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 138, 142"
+}

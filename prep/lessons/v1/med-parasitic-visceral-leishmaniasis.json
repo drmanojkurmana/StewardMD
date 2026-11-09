@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "med-parasitic",
+ "subject": "medicine",
+ "title": "Visceral Leishmaniasis, Filariasis, and Helminthic Infections",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A severe protozoan infection transmitted by the bite of infected female phlebotomine sandflies (Phlebotomus argentipes) is **visceral leishmaniasis** (kala-azar, black fever), caused by the intracellular flagellate Leishmania donovani. Promastigotes injected during blood feeding are engulfed by tissue macrophages, transforming into aflagellar amastigotes (Leishman-Donovan bodies) that multiply within the reticuloendothelial system.",
+   "say": "A severe protozoan infection transmitted by female phlebotomine sandflies is visceral leishmaniasis, or kala-azar, caused by Leishmania donovani. Injected promastigotes transform into amastigotes that multiply within macrophages across the liver, spleen, and bone marrow.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/kala-azar-fig1.webp",
+    "alt": "Sandfly vector, massive splenomegaly, and intracellular LD bodies in visceral leishmaniasis.",
+    "caption": "Phlebotomine sandfly transmission, giant splenomegaly, and bone marrow amastigotes in kala-azar. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Patients with visceral leishmaniasis present with chronic undulating fevers, marked cachexia, greyish hyperpigmentation of the hands, feet, and abdomen (hence black fever), and massive **splenomegaly** (spleen extending into the right iliac fossa). Bone marrow suppression causes severe pancytopenia (anaemia, leukopenia, thrombocytopenia) and profound polyclonal hypergammaglobulinaemia.",
+   "say": "Patients with visceral leishmaniasis present with undulating fever, marked cachexia, grey hyperpigmentation, and massive splenomegaly. Reticuloendothelial infiltration causes severe pancytopenia and profound polyclonal hypergammaglobulinaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical / Laboratory Feature",
+     "Pathological Mechanism",
+     "Diagnostic Hallmark"
+    ],
+    "rows": [
+     [
+      "Massive Splenomegaly",
+      "Massive reticuloendothelial hyperplasia & amastigote loading",
+      "Firm, non-tender spleen crossing the umbilicus"
+     ],
+     [
+      "Profound Pancytopenia",
+      "Hypersplenism + bone marrow parasitic infiltration",
+      "Normocytic anaemia, leukopenia (< 2500), thrombocytopenia"
+     ],
+     [
+      "Reversal of A:G Ratio",
+      "Massive non-specific polyclonal B-cell activation",
+      "Profound hypergammaglobulinaemia with hypoalbuminaemia"
+     ],
+     [
+      "Cutaneous Hyperpigmentation",
+      "Adrenal insufficiency & cytokine melanocyte activation",
+      "Classic kala-azar (black sickness) appearance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rapid non-invasive diagnostic confirmation in endemic regions relies on the recombinant **rK39** immunochromatographic dipstick test, which detects circulating antibodies against a thirty-nine amino acid repeat antigen of Leishmania donovani with over ninety-eight percent sensitivity. Definitive parasitological confirmation requires demonstrating intracellular Leishman-Donovan amastigotes on Giemsa-stained splenic or bone marrow aspirates.",
+   "say": "Rapid non-invasive diagnostic confirmation relies on the recombinant rK39 dipstick test, which detects circulating antibodies with over ninety-eight percent sensitivity. Parasitological confirmation requires demonstrating intracellular amastigotes on bone marrow or splenic aspirates.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fev",
+      "label": "Fever > 2 Weeks + Massive Splenomegaly"
+     },
+     {
+      "id": "rk39",
+      "label": "Rapid rK39 Serological Dipstick Strip"
+     },
+     {
+      "id": "amast",
+      "label": "Bone Marrow Aspirate Confirms LD Bodies"
+     }
+    ],
+    "edges": [
+     [
+      "fev",
+      "rk39"
+     ],
+     [
+      "rk39",
+      "amast"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The absolute therapeutic gold standard and treatment of choice for visceral leishmaniasis is intravenous **liposomal amphotericin B**. Delivering targeted fungicidal and leishmanicidal drug directly into macrophage phagolysosomes, a single dose of ten milligrams per kilogram achieves cure rates exceeding ninety-five percent with minimal nephrotoxicity.",
+   "say": "The therapeutic standard of choice for visceral leishmaniasis is intravenous liposomal amphotericin B. Targeting the drug directly into macrophage phagolysosomes, a single dose of ten milligrams per kilogram achieves cure rates exceeding ninety-five percent with minimal toxicity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Liposomal Amphotericin B",
+     "points": [
+      "Single-dose (10 mg/kg) infusion regimen",
+      "Targeted phagocytosis by splenic and hepatic macrophages",
+      "Cure rates > 95% in Indian subcontinent",
+      "Near total absence of infusion reactions or nephrotoxicity"
+     ]
+    },
+    "right": {
+     "title": "Miltefosine (Oral Alternative)",
+     "points": [
+      "First oral leishmanicidal drug (phosphocholine analogue)",
+      "Administered daily for 28 consecutive days",
+      "Strictly teratogenic (requires contraception for 3 months)",
+      "Frequent gastrointestinal nausea and vomiting"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A cutaneous sequel occurring in up to ten percent of patients in South Asia months to years after successful cure of visceral leishmaniasis is **post-kala-azar dermal leishmaniasis** (PKDL). Presenting as non-ulcerative hypopigmented macules that progress to erythematous papules and nodules on the face and trunk containing numerous amastigotes, PKDL patients serve as the critical human reservoir maintaining sandfly transmission during inter-epidemic periods.",
+   "say": "A cutaneous sequel occurring months to years after successful cure of visceral leishmaniasis is post-kala-azar dermal leishmaniasis. Presenting as hypopigmented macules and nodules packed with amastigotes, these patients serve as the primary reservoir maintaining transmission during inter-epidemic periods.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cure",
+      "label": "Cure of Visceral Leishmaniasis"
+     },
+     {
+      "id": "pkdl",
+      "label": "Facial Hypopigmented & Nodular PKDL Lesions"
+     },
+     {
+      "id": "trans",
+      "label": "Human Reservoir Infecting Sandflies"
+     }
+    ],
+    "edges": [
+     [
+      "cure",
+      "pkdl"
+     ],
+     [
+      "pkdl",
+      "trans"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A mosquito-borne parasitic infection caused by tissue-dwelling filarial nematodes (Wuchereria bancrofti in ninety percent of cases) is **lymphatic filariasis**. Transmitted by nocturnal Culex quinquefasciatus mosquitoes, adult worms nest within lymphatic vessels and lymph nodes, triggering chronic perilymphatic inflammation, lymphatic endothelial proliferation, obstructive lymphoedema, hydrocele, and irreversible brawny elephantiasis.",
+   "say": "A mosquito-borne parasitic infection caused by tissue filarial nematodes, predominantly Wuchereria bancrofti, is lymphatic filariasis. Transmitted by Culex mosquitoes, adult worms live in lymphatic vessels, causing chronic inflammation, obstructive lymphoedema, hydrocele, and irreversible elephantiasis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/filariasis-fig1.webp",
+    "alt": "Clinical stages of lymphatic filariasis, hydrocele, and lower limb elephantiasis.",
+    "caption": "Lymphatic vessel obstruction, lymphoedema, and severe lower limb elephantiasis in filariasis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The definitive first-line antifilarial drug for mass drug administration and individual therapy of active lymphatic filariasis is **diethylcarbamazine** (DEC, 6 mg/kg/day for twelve days), which rapidly eliminates circulating microfilariae and kills adult worms. An immunological hyperresponsiveness to trapped microfilariae within pulmonary capillaries presents as tropical pulmonary eosinophilia (TPE), characterized by nocturnal asthma and marked peripheral eosinophilia, responding dramatically to DEC.",
+   "say": "The definitive first-line drug for lymphatic filariasis is diethylcarbamazine, which eliminates circulating microfilariae. An allergic pulmonary hyperresponsiveness presents as tropical pulmonary eosinophilia, characterized by nocturnal asthma and marked eosinophilia, which responds dramatically to DEC.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Filarial Syndrome",
+     "Pathophysiological Mechanism",
+     "Characteristic Clinical Hallmark"
+    ],
+    "rows": [
+     [
+      "Acute Adenolymphangitis",
+      "Death of adult worm triggering severe inflammation",
+      "Retrograde lymphangitis extending distally from groin"
+     ],
+     [
+      "Chronic Lymphoedema / Elephantiasis",
+      "Mechanical and fibrotic lymphatic vessel obstruction",
+      "Non-pitting brawny skin thickening, mossy foot"
+     ],
+     [
+      "Filarial Hydrocele",
+      "Tunica vaginalis lymphatic obstruction",
+      "Painless scrotal fluid accumulation; most common manifestation"
+     ],
+     [
+      "Tropical Pulmonary Eosinophilia",
+      "Allergic Th2 hyperresponsiveness to trapped lung microfilariae",
+      "Nocturnal paroxysmal cough, wheezing, eosinophils > 3000"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Infection with the intestinal nematode Strongyloides stercoralis uniquely features an autoinfection life cycle, wherein rhabditiform larvae transform into infective filariform larvae within the intestinal lumen. In patients treated with systemic corticosteroids, accelerated autoinfection precipitates fatal **strongyloides hyperinfection** syndrome, with larvae invading lungs and carrying enteric Gram-negative bacteria into the bloodstream to produce polymicrobial meningitis and shock, treated with ivermectin.",
+   "say": "Strongyloides stercoralis uniquely features an internal autoinfection cycle. In patients given systemic corticosteroids, accelerated autoinfection precipitates fatal strongyloides hyperinfection syndrome, with larvae disseminating to lungs and brain carrying enteric bacteria, treated with ivermectin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "auto",
+      "label": "Endogenous Autoinfection Cycle"
+     },
+     {
+      "id": "ster",
+      "label": "Corticosteroid Immunosuppression"
+     },
+     {
+      "id": "hyp",
+      "label": "Disseminated Larval Migration & Enteric Sepsis"
+     }
+    ],
+    "edges": [
+     [
+      "auto",
+      "ster"
+     ],
+     [
+      "ster",
+      "hyp"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 222, 228"
+}

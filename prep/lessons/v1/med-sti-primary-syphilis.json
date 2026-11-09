@@ -1,0 +1,207 @@
+{
+ "v": 1,
+ "module": "med-sti",
+ "subject": "medicine",
+ "title": "Syphilis and Sexually Transmitted Infections",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A chronic, systemic venereal infection caused by the fastidious, tightly coiled spirochaete Treponema pallidum subspecies pallidum is **syphilis**. Transmitted primarily through direct contact with active infectious mucosal lesions during sexual intercourse, the disease progresses sequentially through primary, secondary, latent, and tertiary clinical stages if left untreated.",
+   "say": "A chronic systemic venereal infection caused by the spirochaete Treponema pallidum is syphilis. Transmitted through sexual contact with active mucosal lesions, the disease progresses through primary, secondary, latent, and tertiary stages if untreated.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/syphilis-fig2.webp",
+    "alt": "Natural history and multi-stage clinical manifestations of systemic syphilis.",
+    "caption": "Evolutionary natural history and dermatological stages of syphilis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The pathognomonic physical manifestation of primary syphilis appearing at the inoculation site after an incubation period of ten to ninety days is a hard **chancre**. Beginning as a painless indurated papule that rapidly erodes into a clean-based, painless, highly infectious ulcer with raised cartilaginous margins, it is accompanied by non-tender, rubbery regional lymphadenopathy.",
+   "say": "The pathognomonic physical manifestation of primary syphilis appearing after three weeks is a hard chancre. Beginning as a painless indurated papule that erodes into a clean-based painless ulcer with cartilaginous edges, it is accompanied by non-tender regional lymphadenopathy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Syphilitic Hard Chancre",
+     "points": [
+      "Treponema pallidum spirochaete",
+      "Single, painless ulcer with indurated, clean base",
+      "Non-tender, rubbery regional lymphadenopathy",
+      "Heals spontaneously within 3 to 6 weeks"
+     ]
+    },
+    "right": {
+     "title": "Chancroid Soft Chancre",
+     "points": [
+      "Haemophilus ducreyi Gram-negative bacillus",
+      "Multiple, excruciatingly painful non-indurated ulcers",
+      "Painful, fluctuant suppurative inguinal bubo",
+      "Treated with single-dose Azithromycin or Ceftriaxone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Systemic haematogenous dissemination occurring four to ten weeks after the primary chancre manifests as **secondary syphilis**. The clinical hallmark is a symmetrical, non-pruritic maculopapular or copper-penny papulosquamous rash prominently involving the palms and soles, accompanied by generalized lymphadenopathy, mucous patches in the mouth, and moth-eaten alopecia.",
+   "say": "Systemic dissemination occurring weeks after the primary chancre manifests as secondary syphilis. The clinical hallmark is a symmetrical copper-penny rash prominently involving the palms and soles, accompanied by generalized lymphadenopathy, oral mucous patches, and moth-eaten alopecia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/syphilis-fig1.webp",
+    "alt": "Clinical appearance of palmoplantar rash and mucous lesions in secondary syphilis.",
+    "caption": "Symmetrical palmoplantar papulosquamous eruption in secondary syphilis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In warm, intertriginous anatomical folds such as the perineum, perianal region, and vulva, hypertrophic coalescent secondary syphilitic papules form broad, flat, moist, greyish-white plaques designated as **condylomata lata**. Teeming with motile spirochaetes visible on darkfield microscopy, condylomata lata represent one of the most infectious cutaneous manifestations of treponemal disease.",
+   "say": "In warm intertriginous skin folds like the perineum and vulva, secondary syphilitic papules form broad moist plaques designated as condylomata lata. Teeming with motile spirochaetes on darkfield microscopy, they are highly infectious.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Condylomata Lata (Syphilis)",
+     "points": [
+      "Secondary syphilis (Treponema pallidum)",
+      "Broad, flat-topped, smooth moist grey plaques",
+      "Teeming with live motile spirochaetes",
+      "Rapidly resolves following Benzathine penicillin"
+     ]
+    },
+    "right": {
+     "title": "Condylomata Acuminata (Warts)",
+     "points": [
+      "Human Papillomavirus (HPV types 6 and 11)",
+      "Verrucous, cauliflower-like, peduncular filiform warts",
+      "Viral epithelial hyperplasia without ulceration",
+      "Treated with cryotherapy, podophyllin, or ablation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Serological diagnosis requires combining non-treponemal and treponemal tests. Non-treponemal tests (VDRL, RPR) detect anticardiolipin antibodies; titers fluctuate dynamically with disease activity, serving as the gold standard for monitoring therapeutic cure. Specific treponemal tests (**TPHA**, FTA-ABS) detect antibodies directed against treponemal antigens, remaining reactive for life regardless of treatment.",
+   "say": "Serological diagnosis requires combining non-treponemal and treponemal tests. Non-treponemal tests like VDRL detect anticardiolipin antibodies, fluctuating with disease activity to monitor cure. Specific treponemal tests like TPHA detect antitreponemal antibodies, remaining positive for life.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Serological Test Class",
+     "Diagnostic Examples",
+     "Clinical Interpretation & Role"
+    ],
+    "rows": [
+     [
+      "Non-Treponemal Tests",
+      "VDRL, Rapid Plasma Reagin (RPR)",
+      "Titer reflects disease activity; 4-fold decline indicates cure"
+     ],
+     [
+      "Treponemal Confirmatory",
+      "TPHA, TPPA, FTA-ABS, CIA",
+      "High specificity (> 99%); remains positive for life"
+     ],
+     [
+      "False-Positive Non-Treponemal",
+      "VDRL positive / TPHA negative",
+      "Caused by pregnancy, antiphospholipid syndrome, leprosy, malaria"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The absolute treatment of choice across all clinical stages of syphilis is parenteral penicillin G. Early syphilis (primary, secondary, and early latent under one year) responds to a single intramuscular injection of long-acting **benzathine penicillin** G (2.4 million units). Late latent syphilis and cardiovascular tertiary syphilis require three weekly doses of 2.4 million units.",
+   "say": "The absolute treatment of choice across all stages of syphilis is parenteral penicillin G. Early syphilis responds to a single intramuscular injection of long-acting benzathine penicillin G at 2.4 million units. Late latent and tertiary syphilis require three weekly doses.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Stage of Syphilis",
+     "Preferred Penicillin Regimen",
+     "Alternative for Penicillin Allergy"
+    ],
+    "rows": [
+     [
+      "Primary, Secondary, Early Latent",
+      "Benzathine Penicillin G 2.4 MU IM (single dose)",
+      "Oral Doxycycline 100 mg bid for 14 days"
+     ],
+     [
+      "Late Latent / Tertiary Syphilis",
+      "Benzathine Penicillin G 2.4 MU IM weekly for 3 doses",
+      "Oral Doxycycline 100 mg bid for 28 days"
+     ],
+     [
+      "Neurosyphilis / Ocular Syphilis",
+      "Aqueous Crystalline Penicillin G 18-24 MU/day IV for 10-14 days",
+      "Formal penicillin desensitization protocol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An acute, self-limiting systemic febrile reaction developing within two to twenty-four hours after initiating penicillin in secondary syphilis is the **Jarisch-Herxheimer reaction**. Driven by sudden massive spirochaetal lysis releasing endotoxin-like lipoproteins, patients develop transient fevers, chills, tachycardia, and flushing, managed with reassurance and antipyretics without stopping penicillin.",
+   "say": "An acute febrile reaction developing within twenty-four hours after starting penicillin in secondary syphilis is the Jarisch-Herxheimer reaction. Driven by sudden spirochaetal lysis releasing endotoxins, patients experience fever, chills, and flushing, managed with reassurance and paracetamol without stopping antibiotics.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pen",
+      "label": "Benzathine Penicillin G Injection"
+     },
+     {
+      "id": "lysis",
+      "label": "Massive Treponemal Lysis & Lipoprotein Release"
+     },
+     {
+      "id": "jh",
+      "label": "Jarisch-Herxheimer Fever, Chills & Myalgias (Transient)"
+     }
+    ],
+    "edges": [
+     [
+      "pen",
+      "lysis"
+     ],
+     [
+      "lysis",
+      "jh"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In resource-constrained settings, sexually transmitted infections are managed through evidence-based **syndromic management**. Patients presenting with urethral discharge receive dual empiric therapy covering both Neisseria gonorrhoeae and Chlamydia trachomatis (intramuscular ceftriaxone 500 mg plus oral azithromycin or doxycycline), while genital ulcers are treated empirically for both primary syphilis and chancroid.",
+   "say": "In clinical practice, sexually transmitted infections are managed through evidence-based syndromic management. Patients presenting with urethral discharge receive dual empiric therapy covering gonorrhoea and chlamydia with ceftriaxone and azithromycin, while genital ulcers are treated for syphilis and chancroid.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "STI Clinical Syndrome",
+     "Target Pathogens Covered",
+     "Empirical Syndromic Pharmacotherapy"
+    ],
+    "rows": [
+     [
+      "Urethral / Cervical Discharge",
+      "Neisseria gonorrhoeae + Chlamydia trachomatis",
+      "IM Ceftriaxone 500 mg stat + Oral Doxycycline 100 mg bid x 7 d"
+     ],
+     [
+      "Genital Ulcer Disease",
+      "Treponema pallidum + Haemophilus ducreyi",
+      "IM Benzathine Penicillin 2.4 MU + Oral Azithromycin 1 g stat"
+     ],
+     [
+      "Vaginal Discharge Syndrome",
+      "Trichomonas vaginalis + Bacterial Vaginosis",
+      "Oral Metronidazole 2 g stat (or 400 mg bid x 7 d) + Clotrimazole pessary"
+     ],
+     [
+      "Genital Herpes Simplex",
+      "Herpes simplex virus type 2 (HSV-2)",
+      "Oral Acyclovir 400 mg tid for 7 to 10 days"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 182, 186"
+}
