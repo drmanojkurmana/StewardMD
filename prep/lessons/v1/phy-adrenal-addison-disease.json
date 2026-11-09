@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phy-adrenal",
+  "subject": "physiology",
+  "title": "Addison Disease, Conn Syndrome, and the Adrenal Medulla",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Primary chronic adrenocortical insufficiency arising from autoimmune destruction of all three adrenal cortical zones is designated **Addison disease**. Because both glucocorticoid and mineralocorticoid production are obliterated, patients present with profound fatigue, postural hypotension, weight loss, salt craving, hyponatraemia, and hyperkalaemia.",
+      "say": "Addison disease is autoimmune destruction of all adrenal cortical zones, causing fatigue, hypotension, and salt wasting.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary Adrenocortical Failure (Addison)",
+          "points": [
+            "Autoimmune adrenalitis (anti-21-hydroxylase antibodies)",
+            "Destruction of cortex eliminates both cortisol and aldosterone",
+            "Loss of negative feedback produces massive ACTH elevation",
+            "Characterized by prominent cutaneous hyperpigmentation"
+          ]
+        },
+        "right": {
+          "title": "Secondary Adrenal Failure (Pituitary)",
+          "points": [
+            "Deficient pituitary ACTH secretion (tumors, Sheehan syndrome)",
+            "Cortisol deficiency with preserved aldosterone secretion (RAAS intact)",
+            "Plasma ACTH is low or undetectable",
+            "No cutaneous hyperpigmentation; normal serum potassium"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Because cortisol negative feedback is abolished, the anterior pituitary secretes massive compensatory amounts of pro-opiomelanocortin, the precursor prohormone for adrenocorticotropic hormone. Proteolytic cleavage of pro-opiomelanocortin generates melanocyte-stimulating hormone peptide sequences that stimulate cutaneous melanocortin-1 receptors, producing the classic **hyperpigmentation of Addison disease**.",
+      "say": "High levels of the ACTH precursor POMC stimulate melanocytes, causing hyperpigmentation of palmar creases and mucosa.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "adrenal_destruct",
+            "label": "Destruction of Adrenal Cortex Lowers Circulating Cortisol to Near Zero"
+          },
+          {
+            "id": "loss_feedback",
+            "label": "Loss of Long-Loop Negative Feedback at Hypothalamus and Pituitary"
+          },
+          {
+            "id": "pomc_surge",
+            "label": "Anterior Pituitary Produces Massive Amounts of Precursor Pro-Opiomelanocortin (POMC)"
+          },
+          {
+            "id": "msh_pigment",
+            "label": "Co-Secreted Alpha-MSH and ACTH Stimulate Melanocytes -> Diffuse Cutaneous Hyperpigmentation"
+          }
+        ],
+        "edges": [
+          [
+            "adrenal_destruct",
+            "loss_feedback"
+          ],
+          [
+            "loss_feedback",
+            "pomc_surge"
+          ],
+          [
+            "pomc_surge",
+            "msh_pigment"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute decompensation of chronic primary adrenal insufficiency triggered by acute bacterial infection, surgical trauma, or abrupt corticosteroid withdrawal precipitates life-threatening **acute adrenal crisis**. Uncontrolled circulatory vascular collapse, profound hyponatraemic hypovolemia, hyperkalaemia, metabolic acidosis, and severe hypoglycemia require immediate resuscitation with high-dose intravenous hydrocortisone and isotonic saline.",
+      "say": "Adrenal crisis presents with refractory hypotensive shock, hyperkalaemia, and hypoglycemia, treated with IV hydrocortisone.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/adrenal-crisis-fig1.webp",
+        "alt": "Acute adrenal crisis and cardiovascular collapse",
+        "caption": "Acute adrenocortical failure, mineralocorticoid shock, and emergency glucocorticoid resuscitation."
+      }
+    },
+    {
+      "tx": "Autonomous, uninhibited hypersecretion of aldosterone by a benign adrenal zona glomerulosa microadenoma is designated **Conn syndrome**, or primary hyperaldosteronism. Excessive ENaC stimulation in cortical collecting duct principal cells induces persistent renal sodium retention, severe hypokalaemia, metabolic alkalosis, and treatment-resistant secondary arterial hypertension.",
+      "say": "Conn syndrome is an aldosterone-producing adrenal adenoma that causes hypertension, hypokalaemia, and suppressed renin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary Hyperaldosteronism (Conn)",
+          "points": [
+            "Autonomous aldosterone secretion by adrenal glomerulosa adenoma",
+            "Plasma Aldosterone Concentration (PAC) is high",
+            "Plasma Renin Activity (PRA) is suppressed (< 1.0 ng/mL/hr)",
+            "Elevated PAC/PRA aldosterone-renin ratio (> 20 to 30)"
+          ]
+        },
+        "right": {
+          "title": "Secondary Hyperaldosteronism",
+          "points": [
+            "Renal artery stenosis, congestive heart failure, or cirrhosis",
+            "Low renal perfusion pressure stimulates juxtaglomerular renin release",
+            "Both plasma renin and aldosterone are markedly elevated",
+            "Normal or low PAC/PRA aldosterone-renin ratio (< 10)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Remarkably, patients with Conn syndrome do not develop clinical edema despite continuous sodium retention, a phenomenon termed **aldosterone escape**. Expanding intravascular blood volume elevates mean arterial pressure and stretches cardiac atria, triggering atrial natriuretic peptide release and pressure natriuresis that stabilizes extracellular volume.",
+      "say": "Patients with Conn syndrome do not get edema due to aldosterone escape, where ANP and pressure natriuresis limit volume gain.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "aldo_excess",
+            "label": "Autonomous Aldosterone Drives Continuous Principal Cell ENaC Sodium Reabsorption"
+          },
+          {
+            "id": "vol_expand",
+            "label": "Extracellular Fluid Volume Expands, Raising Arterial Blood Pressure"
+          },
+          {
+            "id": "anp_surge",
+            "label": "Atrial Stretch Triggers Atrial Natriuretic Peptide (ANP) Secretion"
+          },
+          {
+            "id": "natriuresis",
+            "label": "Pressure Natriuresis and ANP Restore Sodium Balance, Preventing Clinical Edema"
+          }
+        ],
+        "edges": [
+          [
+            "aldo_excess",
+            "vol_expand"
+          ],
+          [
+            "vol_expand",
+            "anp_surge"
+          ],
+          [
+            "anp_surge",
+            "natriuresis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The central core of the adrenal gland is the adrenal medulla, functionally representing a specialized sympathetic ganglion populated by **chromaffin neuroendocrine cells**. Innervated directly by preganglionic cholinergic sympathetic fibers from the splanchnic nerves, chromaffin cells synthesize, store, and release adrenaline and noradrenaline.",
+      "say": "Chromaffin cells in the adrenal medulla act like sympathetic postganglionic neurons, releasing adrenaline into blood.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adrenal Medullary Secretion (~80% Adrenaline)",
+          "points": [
+            "Synthesizes 80% Adrenaline (Epinephrine) and 20% Noradrenaline",
+            "Expresses Phenylethanolamine N-methyltransferase (PNMT)",
+            "PNMT induced by high local concentrations of glucocorticoids via portal blood",
+            "Released as systemic hormone into venous circulation"
+          ]
+        },
+        "right": {
+          "title": "Sympathetic Postganglionic Neurons",
+          "points": [
+            "Synthesize and release Noradrenaline almost exclusively",
+            "Lack the PNMT methylating enzyme required for adrenaline",
+            "Released locally as neurotransmitter across microscopic synaptic clefts",
+            "Provides rapid, localized organ-specific autonomic control"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Biosynthesis of catecholamines proceeds from tyrosine through L-DOPA and dopamine to noradrenaline. Within the adrenal medulla, high concentrations of cortisol arriving via intra-adrenal portal capillaries induce the enzyme **phenylethanolamine N-methyltransferase**, which methylates noradrenaline into adrenaline, accounting for eighty percent of medullary catecholamine output.",
+      "say": "High cortisol concentrations induce the PNMT enzyme, converting noradrenaline into adrenaline in the adrenal medulla.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tyrosine",
+            "label": "Tyrosine Converted to L-DOPA by Rate-Limiting Tyrosine Hydroxylase"
+          },
+          {
+            "id": "dopa_da",
+            "label": "DOPA Decarboxylase Converts L-DOPA to Dopamine in Cytoplasm"
+          },
+          {
+            "id": "dop_na",
+            "label": "Dopamine Beta-Hydroxylase Converts Dopamine to Noradrenaline Inside Granules"
+          },
+          {
+            "id": "pnmt_epi",
+            "label": "Cortisol-Induced PNMT Methylates Noradrenaline to Adrenaline (Epinephrine)"
+          }
+        ],
+        "edges": [
+          [
+            "tyrosine",
+            "dopa_da"
+          ],
+          [
+            "dopa_da",
+            "dop_na"
+          ],
+          [
+            "dop_na",
+            "pnmt_epi"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A rare catecholamine-secreting neuroendocrine tumor derived from adrenal medullary chromaffin cells is designated **phaeochromocytoma**. Tumors oversecrete adrenaline and noradrenaline autonomously into the circulation, producing the classic paroxysmal triad of episodic pounding headaches, profuse diaphoresis, and tachycardia, accompanied by severe episodic or sustained malignant hypertension.",
+      "say": "Phaeochromocytoma is a chromaffin tumor causing paroxysms of pounding headache, sweating, palpitations, and severe hypertension.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/adrenal-cortex-medulla-steroids-catecholamines-fig1.webp",
+        "alt": "Chromaffin cell tumor and catecholamine hypersecretion",
+        "caption": "Phaeochromocytoma chromaffin pathology, catecholamine surge mechanisms, and alpha-blocker therapy."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

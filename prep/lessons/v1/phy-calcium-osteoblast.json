@@ -1,0 +1,218 @@
+{
+  "v": 1,
+  "module": "phy-calcium",
+  "subject": "physiology",
+  "title": "Bone Remodeling, Osteoclasts, and Hypocalcaemic Tetany",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Continuous remodeling of human skeletal architecture relies upon coordinated paracrine communication between bone-forming osteoblasts and bone-resorbing osteoclasts. Derived from local mesenchymal stem cells, **bone-forming osteoblasts** synthesize organic osteoid matrix (predominantly type I collagen) and coordinate subsequent mineral crystallization with calcium hydroxyapatite.",
+      "say": "Osteoblasts synthesize type one collagen osteoid and coordinate mineralization, while osteoclasts resorb bone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bone-Forming Osteoblasts",
+          "points": [
+            "Derived from local mesenchymal osteoprogenitor stem cells",
+            "Synthesize organic osteoid matrix (90% Type I collagen)",
+            "Express high surface alkaline phosphatase to promote mineralization",
+            "Express PTH1R receptors; master regulators of osteoclastogenesis"
+          ]
+        },
+        "right": {
+          "title": "Bone-Resorbing Osteoclasts",
+          "points": [
+            "Derived from monocyte-macrophage hematopoietic lineage",
+            "Multinucleated giant cells formed by fusion of precursors",
+            "Lack functional parathyroid hormone receptors",
+            "Form sealed resorption lacunae (Howship lacunae) via ruffled borders"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Although parathyroid hormone potently accelerates osteoclastic bone resorption, mature multinucleated osteoclasts lack functional parathyroid hormone receptors. Parathyroid hormone binds receptors located exclusively on surrounding osteoblasts, stimulating marked upregulation of **receptor activator of nuclear factor kappa B ligand**, universally designated RANKL.",
+      "say": "Parathyroid hormone acts on osteoblasts, making them express RANKL to stimulate osteoclast differentiation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pth_bind",
+            "label": "PTH Binds Gs-Coupled Receptors on Surface of Bone-Forming Osteoblasts"
+          },
+          {
+            "id": "rankl_up",
+            "label": "Osteoblasts Upregulate Surface Expression of RANKL (RANK Ligand)"
+          },
+          {
+            "id": "rank_pre",
+            "label": "RANKL Binds RANK Receptors on Monocyte-Derived Osteoclast Precursors"
+          },
+          {
+            "id": "mature_oc",
+            "label": "Precursors Fuse into Multinucleated Mature Osteoclasts, Initiating Resorption"
+          }
+        ],
+        "edges": [
+          [
+            "pth_bind",
+            "rankl_up"
+          ],
+          [
+            "rankl_up",
+            "rank_pre"
+          ],
+          [
+            "rank_pre",
+            "mature_oc"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "To prevent excessive bone erosion, osteoblasts synthesize and secrete a soluble decoy receptor known as **osteoprotegerin**. Osteoprotegerin binds free RANKL with high affinity, competitively blocking it from engaging RANK receptors on osteoclasts, thereby acting as an intrinsic molecular brake that inhibits bone resorption.",
+      "say": "Osteoprotegerin is a decoy receptor secreted by osteoblasts that neutralizes RANKL to halt bone destruction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "RANKL (Bone Resorber)",
+          "points": [
+            "Membrane-bound cytokine expressed on osteoblast surface",
+            "Binds RANK receptor on osteoclast precursors",
+            "Drives osteoclast maturation, activation, and survival",
+            "Stimulated by PTH, calcitriol, cortisol, and inflammatory cytokines"
+          ]
+        },
+        "right": {
+          "title": "Osteoprotegerin (Decoy Brake)",
+          "points": [
+            "Soluble glycoprotein decoy receptor secreted by osteoblasts",
+            "Binds RANKL, preventing it from binding osteoclast RANK",
+            "Inhibits osteoclast differentiation and induces apoptosis",
+            "Stimulated by estrogens; decline in menopause causes osteoporosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Active osteoclasts adhere to bone surfaces via alpha-v-beta-three integrins, sealing off isolated microenvironments known as Howship lacunae. Across specialized ruffled borders, vacuolar-type proton pumps extrude hydrochloric acid to dissolve mineral hydroxyapatite, while **cathepsin K proteases** degrade the underlying organic collagen matrix.",
+      "say": "Osteoclasts dissolve mineral hydroxyapatite with pumped acid, and digest collagen using cathepsin K enzymes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "integrin",
+            "label": "Osteoclast Alpha-v-Beta-3 Integrins Seal Off Resorption Lacuna on Bone Surface"
+          },
+          {
+            "id": "h_pump",
+            "label": "Apical Vacuolar H+-ATPase Pumps Protons into Lacuna, Lowering pH to ~4.5"
+          },
+          {
+            "id": "dissolve",
+            "label": "Acidic Microenvironment Dissolves Insoluble Calcium Hydroxyapatite Crystals"
+          },
+          {
+            "id": "cathepsin",
+            "label": "Lysosomal Cathepsin K and Matrix Metalloproteinases Digest Type I Collagen"
+          }
+        ],
+        "edges": [
+          [
+            "integrin",
+            "h_pump"
+          ],
+          [
+            "h_pump",
+            "dissolve"
+          ],
+          [
+            "dissolve",
+            "cathepsin"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Extracellular calcium ions stabilize neuronal plasma membranes by tonically plugging the outer vestibules of voltage-gated sodium channels. When extracellular ionised calcium drops below critical thresholds, sodium channel threshold potentials shift toward resting membrane potential, producing profound **neuromuscular hyperexcitability and tetany** throughout the peripheral nervous system.",
+      "say": "Low extracellular calcium unplugs sodium channels, causing spontaneous depolarizations and neuromuscular tetany.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/parathyroid-calcium-disorders-fig1.webp",
+        "alt": "Neuromuscular hyperexcitability and hypocalcaemic tetany",
+        "caption": "Calcium membrane stabilization, peripheral nerve hyperexcitability, and acute hypocalcaemic tetany."
+      }
+    },
+    {
+      "tx": "A classic bedside sign of latent tetany is the **Chvostek sign**, elicited by gentle percussion of the facial nerve trunk anterior to the external auditory meatus. Mechanical stimulation of hyperexcitable facial motor axons produces instantaneous, involuntary ipsilateral twitching of facial muscles and the angle of the mouth.",
+      "say": "Tapping the facial nerve produces facial muscle twitching, known as Chvostek sign of latent hypocalcaemia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chvostek Sign",
+          "points": [
+            "Elicited by tapping facial nerve trunk anterior to earlobe",
+            "Ipsilateral twitching of facial and perioral muscles",
+            "Present in ~10% to 15% of normal individuals (lower specificity)",
+            "Reflects generalized peripheral cranial motor hyperexcitability"
+          ]
+        },
+        "right": {
+          "title": "Trousseau Sign",
+          "points": [
+            "Elicited by inflating blood pressure cuff > SBP for 3 minutes",
+            "Produces painful carpopedal spasm (accoucheur hand)",
+            "Highly sensitive and specific (>94%) for latent tetany",
+            "Ischaemia exacerbates hypocalcaemic axonal irritability"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Far more specific for latent hypocalcaemic tetany is the **Trousseau sign of latent tetany**, demonstrated by inflating a sphygmomanometer cuff above systolic blood pressure for three minutes. Induced brachial artery ischaemia exacerbates peripheral nerve hyperexcitability, triggering painful carpopedal spasm characterized by wrist flexion and metacarpophalangeal adduction.",
+      "say": "Inflating a blood pressure cuff for three minutes triggers carpopedal spasm, the highly specific Trousseau sign.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hypoparathyroidism-fig1.webp",
+        "alt": "Hypoparathyroidism clinical features and carpopedal spasm",
+        "caption": "Trousseau carpopedal spasm sign, QT interval prolongation, and acute postsurgical hypoparathyroidism."
+      }
+    },
+    {
+      "tx": "Iatrogenic surgical excision of parathyroid glands during total thyroidectomy or radical neck dissection causes **acute postsurgical hypoparathyroidism**. The abrupt cessation of parathyroid hormone causes severe hypocalcaemia, hyperphosphataemia, prolonged electrocardiographic QT intervals, painful laryngeal stridor, and life-threatening generalized seizures requiring emergency intravenous calcium gluconate infusion.",
+      "say": "Accidental parathyroid removal during thyroid surgery causes severe hypocalcaemia and QT prolongation, treated with IV calcium.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Presentation",
+          "Serum Calcium Level",
+          "Primary Electrocardiographic Sign",
+          "Definitive Medical Management"
+        ],
+        "rows": [
+          [
+            "Mild Hypocalcaemia",
+            "1.9 to 2.1 mmol/L",
+            "Normal or borderline QT interval",
+            "Oral calcium carbonate and active calcitriol"
+          ],
+          [
+            "Severe Symptomatic Tetany",
+            "< 1.8 mmol/L (Ca2+ < 0.9)",
+            "Marked QT prolongation, risk of Torsades",
+            "Slow IV 10% calcium gluconate under cardiac monitor"
+          ],
+          [
+            "Chronic Hypoparathyroidism",
+            "Variable",
+            "Intracranial basal ganglia calcification",
+            "Lifelong active vitamin D (calcitriol) and oral calcium"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
