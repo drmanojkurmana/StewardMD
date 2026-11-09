@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-oral-salivary",
+  "subject": "pathology",
+  "title": "Oral Submucous Fibrosis and Oral Squamous Cell Carcinoma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Oral submucous fibrosis stiffens cheeks, lips, and palate with collagen after years of areca nut and betel quid chewing, blanching mucosa, banding palpably, and progressively locking the mouth shut. Trismus is its late signature: **oral submucous fibrosis of areca nut chewing**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Blanched banded cheeks and a mouth that will not open after years of betel quid mean submucous fibrosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Areca nut alkaloids stimulate fibroblasts"
+          },
+          {
+            "id": "b",
+            "label": "Submucosal collagen accumulates, vessels narrow"
+          },
+          {
+            "id": "c",
+            "label": "Blanching, bands, burning intolerance"
+          },
+          {
+            "id": "d",
+            "label": "Progressive trismus, malignant risk"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Burning intolerance to spicy food, vesicles early, then marble white mucosa with palpable vertical bands and a shrunken uvula stage submucous fibrosis clinically before mouth opening measurements grade severity. Band palpation performs **oral submucous fibrosis clinical staging**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Feel for bands and measure mouth opening; both stage submucous fibrosis better than appearance alone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early disease",
+          "points": [
+            "Burning, vesicles, spice intolerance",
+            "Soft blanching, mouth opens fully",
+            "Habit cessation may soften course"
+          ]
+        },
+        "right": {
+          "title": "Advanced disease",
+          "points": [
+            "Dense bands, woody cheeks",
+            "Severe trismus, poor oral access",
+            "Surgery and cancer surveillance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Submucous fibrosis is a potentially malignant disorder whose stiff field can host dysplasia and carcinoma anywhere within it, so new ulcers, induration, or speckled change inside fibrosis demand biopsy. That vigilance is **malignant transformation surveillance in oral submucous fibrosis**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Cancer hides inside stiff fibrosis; biopsy any new ulcer or induration within the field.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/oral-cancer-fig1.webp",
+        "alt": "Oral cancer presentations",
+        "caption": "Oral squamous carcinoma presentations arising in potentially malignant fields."
+      }
+    },
+    {
+      "tx": "Oral squamous cell carcinoma invades as non-healing ulcer, indurated mass, or exophytic growth, spreading first to submental, submandibular, and jugular nodes whose involvement halves prognosis. Nodal status dominates its staging: **oral squamous cell carcinoma nodal spread**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "In oral cancer the neck decides survival; examine and image nodes at every presentation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Site",
+          "Share and habit",
+          "Pearl"
+        ],
+        "rows": [
+          [
+            "Tongue (lateral)",
+            "Commonest intraoral site",
+            "Depth of invasion stages"
+          ],
+          [
+            "Floor of mouth",
+            "Tobacco and alcohol synergy",
+            "Close to nodes bilaterally"
+          ],
+          [
+            "Buccal mucosa",
+            "Betel quid placement site",
+            "Quid site cancers in chewers"
+          ],
+          [
+            "Lower lip",
+            "Sun exposure, outdoor work",
+            "Better prognosis generally"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Field cancerisation explains second primaries across aerodigestive mucosa condemned by shared carcinogen exposure, so oral cancer survivors need pan-mucosal surveillance for life. That condemned field concept is **field cancerisation of the upper aerodigestive tract**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "One oral cancer condemns the whole exposed field; survivors grow second primaries for decades.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Single lesion thinking",
+          "points": [
+            "Excise visible tumour only",
+            "Misses dysplastic field",
+            "Recurrence surprises follow"
+          ]
+        },
+        "right": {
+          "title": "Field thinking",
+          "points": [
+            "Map mucosa, counsel habits",
+            "Surveil whole aerodigestive tract",
+            "Second primaries caught early"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Areca nut is carcinogenic even without tobacco, and gutka and pan masala deliver it sweetened to adolescents, making cessation counselling and school prevention public health dentistry. That independent carcinogen is **areca nut carcinogenicity without tobacco**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Areca nut causes cancer alone; do not let absence of tobacco reassure a betel chewer.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/oral-cavity-and-salivary-glands-fig1.webp",
+        "alt": "Oral cavity and salivary glands anatomy and histology",
+        "caption": "Oral cavity anatomy framing submucous fibrosis and carcinoma surveillance."
+      }
+    },
+    {
+      "tx": "Management layers habit cessation absolutely, physiotherapy and intralesional therapy modestly, surgical band release for severe trismus, and lifelong cancer surveillance above all. Cessation primacy defines **oral submucous fibrosis management hierarchy**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Stop the quid first; stretching, injections, and surgery only assist what cessation starts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Absolute areca and tobacco cessation"
+          },
+          {
+            "id": "b",
+            "label": "Mouth opening exercises, physiotherapy"
+          },
+          {
+            "id": "c",
+            "label": "Intralesional therapy selected cases"
+          },
+          {
+            "id": "d",
+            "label": "Surgical release, lifelong surveillance"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Early oral cancer cures with surgery or radiotherapy in most patients, while late disease's multimodal burden, disfigurement, and mortality argue for examination of every adult mouth at every dental visit. That opportunistic habit is **opportunistic oral cancer examination**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Thirty seconds examining every adult mouth finds oral cancers while they are still curable.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Finding",
+          "Action",
+          "Urgency"
+        ],
+        "rows": [
+          [
+            "Ulcer over three weeks",
+            "Referral and biopsy",
+            "Two week pathway"
+          ],
+          [
+            "Red or speckled patch",
+            "Specialist assessment",
+            "High priority"
+          ],
+          [
+            "Indurated tongue mass",
+            "Imaging, biopsy, neck staging",
+            "Urgent"
+          ],
+          [
+            "Loose tooth with nonhealing socket",
+            "Dental and maxillofacial review",
+            "Do not dismiss as infection alone"
+          ]
+        ]
+      }
+    }
+  ]
+}

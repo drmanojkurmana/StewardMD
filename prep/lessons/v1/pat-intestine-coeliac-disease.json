@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-intestine",
+  "subject": "pathology",
+  "title": "Coeliac Disease, Villous Atrophy, Anti-tTG, and Whipple Disease",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Coeliac disease injures proximal small bowel when gluten peptides deamidated by tissue transglutaminase provoke immune attack in HLA DQ2 or DQ8 hosts, flattening villi and starving absorption. The gluten immune enteropathy is **coeliac disease of HLA-DQ2 and DQ8 hosts**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Gluten plus HLA DQ2 or DQ8 plus transglutaminase immunity flattens villi; that triad is coeliac disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/celiac-disease-fig1.webp",
+        "alt": "Duodenal biopsy in coeliac disease",
+        "caption": "Coeliac duodenal biopsy with villous atrophy and crypt hyperplasia."
+      }
+    },
+    {
+      "tx": "Villous atrophy with crypt hyperplasia and intraepithelial lymphocytosis forms the Marsh spectrum, yet infection, drugs, and immune deficiency mimic it, so histology never diagnoses alone. The atrophy pattern is **Marsh classification of coeliac mucosal injury**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Flat villi accuse coeliac disease but do not convict alone; serology and gluten context complete the case.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Coeliac pattern",
+          "points": [
+            "Villous atrophy, crypt hyperplasia",
+            "Intraepithelial lymphocytes raised",
+            "Proximal bowel worst"
+          ]
+        },
+        "right": {
+          "title": "Mimic patterns",
+          "points": [
+            "Giardia, tropical sprue, drugs",
+            "Common variable immunodeficiency",
+            "Autoimmune enteropathy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "IgA anti-tissue transglutaminase antibodies screen coeliac disease sensitively while eating gluten, total IgA excluding deficiency that falsifies negativity, EMA and deamidated gliadin refining doubtful cases. The screening antibody is **IgA anti-tissue transglutaminase (anti-tTG)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Test anti-tTG IgA plus total IgA on a gluten containing diet; testing after quitting gluten wastes both.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/celiac-disease-fig2.webp",
+        "alt": "Coeliac disease pathophysiology and histopathology",
+        "caption": "Coeliac pathophysiology from gluten immunity to mucosal destruction."
+      }
+    },
+    {
+      "tx": "Presentations span iron deficiency alone, bloating, diarrhoea, osteoporosis, infertility, abnormal liver enzymes, and dermatitis herpetiformis blistering elbows and knees as skin coeliac disease. The cutaneous form is **dermatitis herpetiformis, cutaneous coeliac disease**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Itchy elbows and knees with granular IgA mean dermatitis herpetiformis, coeliac disease wearing skin.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Presentation",
+          "Mechanism",
+          "First test"
+        ],
+        "rows": [
+          [
+            "Iron deficiency alone",
+            "Duodenal absorption failure",
+            "Anti-tTG with blood count"
+          ],
+          [
+            "Osteoporosis early",
+            "Calcium and vitamin D malabsorption",
+            "Serology plus bone density"
+          ],
+          [
+            "Dermatitis herpetiformis",
+            "Skin IgA deposition",
+            "Skin biopsy immunofluorescence"
+          ],
+          [
+            "Unexplained transaminitis",
+            "Coeliac hepatitis association",
+            "Serology in liver workup"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Gluten free diet heals mucosa over months to years, normalises antibodies, and protects against lymphoma and fracture, while inadvertent contamination explains most persistent symptoms before refractory disease is invoked. Dietitian led strictness is **gluten free diet therapy in coeliac disease**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Strict gluten free diet is the drug; dietitian review finds the contamination behind most non-response.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Diagnosis secured serologically and histologically"
+          },
+          {
+            "id": "b",
+            "label": "Dietitian teaches gluten free living"
+          },
+          {
+            "id": "c",
+            "label": "Antibodies fall over six to twelve months"
+          },
+          {
+            "id": "d",
+            "label": "Bone health and annual review maintained"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Refractory coeliac disease persists villous atrophy despite strict diet, type two with aberrant monoclonal intraepithelial lymphocytes risking enteropathy associated T cell lymphoma requiring specialist therapy. That dangerous evolution is **refractory coeliac disease type two and EATL risk**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Persistent atrophy after a proven strict year means refractory disease; type two flirts with lymphoma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Non-responsive, not refractory",
+          "points": [
+            "Gluten contamination commonest",
+            "Dietitian forensic review",
+            "Antibodies often still positive"
+          ]
+        },
+        "right": {
+          "title": "True refractory disease",
+          "points": [
+            "Strict diet proven, atrophy persists",
+            "Clonal lymphocytes in type two",
+            "Specialist immunosuppression, lymphoma watch"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Whipple disease infects macrophages with Tropheryma whipplei that cannot digest it, PAS positive foamy macrophages packing lamina propria beside arthralgia, diarrhoea, pigmentation, and neurology. The macrophage storage infection is **Whipple disease of Tropheryma whipplei**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "PAS stuffed macrophages plus joint, gut, and brain symptoms spell Whipple disease; PCR confirms it.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Coeliac disease",
+          "Whipple disease"
+        ],
+        "rows": [
+          [
+            "Mucosal signature",
+            "Villous atrophy, lymphocytosis",
+            "PAS positive macrophage packing"
+          ],
+          [
+            "Serology",
+            "Anti-tTG positive usually",
+            "Negative"
+          ],
+          [
+            "Systemic clues",
+            "Dermatitis herpetiformis",
+            "Arthralgia years before gut"
+          ],
+          [
+            "Treatment",
+            "Gluten free diet",
+            "Prolonged antibiotics"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Seronegative villous atrophy forces a wider net: giardia, common variable immunodeficiency with absent plasma cells, olmesartan enteropathy, tropical sprue, and autoimmune enteropathy each impersonating coeliac disease. That net is **seronegative villous atrophy differential**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Flat villi with negative coeliac serology start a second differential, from giardia to olmesartan.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Villous atrophy, serology negative"
+          },
+          {
+            "id": "b",
+            "label": "Review drugs, infections, immunity"
+          },
+          {
+            "id": "c",
+            "label": "HLA testing excludes coeliac if negative"
+          },
+          {
+            "id": "d",
+            "label": "Cause directed therapy assigned"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

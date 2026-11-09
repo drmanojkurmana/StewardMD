@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-oral-salivary",
+  "subject": "pathology",
+  "title": "Nasopharyngeal Carcinoma: EBV, Presentation Triad, and Radiotherapy Primacy",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Nasopharyngeal carcinoma hides in the fossa of Rosenmuller behind the nose until neck nodes, nasal obstruction, epistaxis, ear effusion, or cranial nerve palsies announce it, strongly EBV driven in endemic populations. The silent nasopharynx cancer is **nasopharyngeal carcinoma (NPC)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "A neck node, blocked ear, and bloodstained nasal discharge in an endemic patient mean nasopharyngeal carcinoma.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/nasopharyngeal-carcinoma-fig1.webp",
+        "alt": "Nasopharyngeal carcinoma presentation triad",
+        "caption": "Nasopharyngeal carcinoma presentation triad of node, ear, and nasal symptoms."
+      }
+    },
+    {
+      "tx": "Epstein-Barr virus genomes in tumour cells, raised EBV antibodies, and circulating EBV DNA for screening and monitoring bind nasopharyngeal carcinoma to its virus more tightly than almost any carcinoma. That viral axis is **EBV association and EBV DNA in nasopharyngeal carcinoma**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Plasma EBV DNA screens endemic populations and monitors nasopharyngeal carcinoma like a tumour marker.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "EBV infected nasopharyngeal epithelium"
+          },
+          {
+            "id": "b",
+            "label": "Clonal viral genomes in tumour"
+          },
+          {
+            "id": "c",
+            "label": "Plasma EBV DNA detectable"
+          },
+          {
+            "id": "d",
+            "label": "Screening, prognosis, relapse monitoring"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Unilateral serous otitis media in an adult is nasopharyngeal carcinoma until endoscopy acquits the fossa, because Eustachian tube obstruction by tumour silently fills the middle ear. That examination rule is **adult unilateral middle ear effusion, exclude nasopharyngeal carcinoma**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "One sided middle ear effusion in an adult earns nasopharyngeal endoscopy, never just grommet reassurance.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/nasopharyngeal-tumours-fig1.webp",
+        "alt": "Nasopharyngeal tumours spread patterns",
+        "caption": "Nasopharyngeal tumour spread to nodes, skull base, and cranial nerves."
+      }
+    },
+    {
+      "tx": "Histology divides keratinising squamous carcinoma of smokers from non-keratinising EBV rich types with lymphoid stroma, undifferentiated appearances deceiving pathologists toward lymphoma until keratin stains speak. Immunostain rescue defines **non-keratinising nasopharyngeal carcinoma recognition**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Lymphoid rich nasopharyngeal tumours may be undifferentiated carcinoma in disguise; keratin stains unmask them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Non-keratinising (endemic)",
+          "points": [
+            "EBV driven, lymphoid stroma",
+            "Radiosensitive, EBV DNA tracked",
+            "Younger endemic patients"
+          ]
+        },
+        "right": {
+          "title": "Keratinising type",
+          "points": [
+            "Smoking associated more",
+            "Conventional squamous features",
+            "Relatively radioresistant"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Radiotherapy is nasopharyngeal carcinoma's primary cure because surgical access is poor and radiosensitivity high, intensity modulated techniques sparing parotids and brain while chemotherapy intensifies advanced stages. That primacy is **radiotherapy first in nasopharyngeal carcinoma**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Nasopharyngeal carcinoma is cured by radiation first; surgery rescues selected neck and local relapses.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stage",
+          "Backbone",
+          "Additions"
+        ],
+        "rows": [
+          [
+            "Early stage I",
+            "Radiotherapy alone",
+            "Excellent control expected"
+          ],
+          [
+            "Stage II",
+            "RT with concurrent chemo considered",
+            "Risk features guide"
+          ],
+          [
+            "Stage III to IVA",
+            "Induction plus chemoradiation",
+            "EBV DNA response studied"
+          ],
+          [
+            "Metastatic",
+            "Systemic chemoimmunotherapy",
+            "Oligometastatic RT selected"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Skull base erosion carries tumour to cavernous sinus cranial nerves, producing diplopia, facial pain, and ophthalmoplegia patterns that MRI maps for radiotherapy fields and prognosis. Neural geography is **cranial nerve involvement in nasopharyngeal carcinoma**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Diplopia beside a nasopharyngeal mass means skull base travel; MRI draws the true map.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Local symptoms",
+          "points": [
+            "Nasal block, epistaxis",
+            "Ear effusion, hearing loss",
+            "Endoscopy visualises primary"
+          ]
+        },
+        "right": {
+          "title": "Advanced signs",
+          "points": [
+            "Cranial nerve palsies",
+            "Bulky bilateral neck nodes",
+            "Skull base pain syndromes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Salted fish nitrosamines, genetic susceptibility in southern Chinese and Southeast Asian populations, and EBV together explain endemic geography, guiding family screening where incidence soars. That aetiological trio is **endemic nasopharyngeal carcinoma causation**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Genes, salted fish, and EBV draw nasopharyngeal carcinoma's endemic map across southern Asia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Factor",
+          "Contribution",
+          "Prevention angle"
+        ],
+        "rows": [
+          [
+            "EBV infection",
+            "Tumour viral driver",
+            "EBV DNA screening"
+          ],
+          [
+            "Salted fish nitrosamines",
+            "Childhood exposure risk",
+            "Dietary change generations"
+          ],
+          [
+            "HLA susceptibility",
+            "Familial clustering",
+            "Family vigilance"
+          ],
+          [
+            "Smoking",
+            "Keratinising type accent",
+            "Cessation counselling"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Late radiotherapy sequelae, xerostomia, hypothyroidism, temporal lobe injury, cranial neuropathy, and second cancers, structure survivorship clinics decades after cure in young patients. That follow up is **nasopharyngeal carcinoma survivorship after radiotherapy**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Cured at thirty, followed for life: nasopharyngeal survivorship watches thyroid, brain, teeth, and hearing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Chemoradiation completed"
+          },
+          {
+            "id": "b",
+            "label": "EBV DNA and MRI surveillance"
+          },
+          {
+            "id": "c",
+            "label": "Thyroid, dental, hearing review"
+          },
+          {
+            "id": "d",
+            "label": "Late effects managed proactively"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}
