@@ -1,0 +1,189 @@
+{
+  "v": 1,
+  "module": "mic-hiv",
+  "subject": "microbiology",
+  "title": "HIV p24 Antigen, ELISA, Western Blot, Viral Load and Window Period",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**p24 antigen** is an HIV core protein detectable in blood before antibody seroconversion. Fourth generation laboratory assays combine p24 antigen with HIV 1 and 2 antibodies, shortening the diagnostic window compared with antibody-only ELISA. A reactive screen is not a final diagnosis: it enters a differentiation and nucleic acid algorithm to separate HIV 1, HIV 2, acute infection and false positivity.",
+      "say": "p24 buys early detection, but the algorithm still must confirm the diagnosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fourth generation screen",
+          "points": [
+            "Detects p24 antigen",
+            "Detects HIV 1 and HIV 2 antibodies",
+            "Positive earlier than antibody only tests",
+            "Reactive result requires follow up testing"
+          ]
+        },
+        "right": {
+          "title": "Older antibody ELISA",
+          "points": [
+            "Waits for host seroconversion",
+            "Misses very early infection",
+            "High sensitivity in established infection",
+            "Also requires confirmatory strategy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The modern laboratory pathway uses an HIV 1 and HIV 2 **antibody differentiation immunoassay** after a reactive fourth generation screen. If differentiation is negative or indeterminate, HIV RNA testing separates acute HIV 1 from a false-positive screen. **Western blot** is largely historical in this algorithm because it is slower, more often indeterminate and less useful in early infection than differentiation assays.",
+      "say": "Western blot belongs mainly to HIV testing history; differentiation plus RNA is the modern route.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Differentiation positive",
+          "points": [
+            "HIV 1, HIV 2 or both antibody patterns",
+            "Established infection supported",
+            "Baseline viral load and CD4 follow",
+            "Link urgently to ART services"
+          ]
+        },
+        "right": {
+          "title": "Differentiation negative",
+          "points": [
+            "Send HIV 1 RNA",
+            "RNA positive means acute HIV 1",
+            "RNA negative means initial screen was false positive in most algorithms",
+            "Repeat if exposure was extremely recent"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The HIV **window period** depends on test type: RNA appears first, then p24 antigen, then antibody. A negative test shortly after exposure cannot end evaluation. Post-exposure prophylaxis should never wait for repeat testing when indicated, and follow up testing follows current local schedule. Counselling should state a time-anchored plan rather than falsely promise certainty from one early negative result.",
+      "say": "A negative HIV test is interpreted against days since exposure and the test generation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "exposure",
+            "label": "Exposure day zero"
+          },
+          {
+            "id": "rna",
+            "label": "HIV RNA earliest"
+          },
+          {
+            "id": "p24",
+            "label": "p24 antigen follows"
+          },
+          {
+            "id": "antibody",
+            "label": "Antibody completes seroconversion"
+          }
+        ],
+        "edges": [
+          [
+            "exposure",
+            "rna"
+          ],
+          [
+            "rna",
+            "p24"
+          ],
+          [
+            "p24",
+            "antibody"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**HIV viral load** is quantitative plasma RNA measured by amplification assays. It confirms acute infection, establishes baseline, monitors ART and identifies virologic failure. A single low-level blip differs from persistent rebound. If viral load rises, assess adherence, drug interactions and tolerability before resistance testing, and obtain genotype while the patient is taking therapy or soon after stopping so resistant variants remain detectable.",
+      "say": "A rising viral load starts with adherence and interactions, then resistance testing while virus is visible.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Treatment success",
+          "points": [
+            "Load falls rapidly after ART",
+            "Undetectable by assay threshold",
+            "Regular monitoring after suppression less frequent",
+            "Sustained suppression prevents sexual transmission"
+          ]
+        },
+        "right": {
+          "title": "Treatment failure review",
+          "points": [
+            "Confirm with repeat viral load",
+            "Ask missed doses and pharmacy gaps",
+            "Review rifampicin and other interactions",
+            "Send resistance genotype promptly"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "India's **NACO testing strategy** uses highly sensitive rapid and laboratory assays in defined algorithms according to setting, such as testing in integrated counselling and testing centres, antenatal care and high-risk outreach. The principle is sequential reactive testing with different assay principles and quality control. Self testing can expand access, but reactive self tests need facility confirmation and immediate linkage support.",
+      "say": "NACO algorithms scale one principle: screen sensitively, confirm differently, link immediately.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Facility testing",
+          "points": [
+            "Pre and post test counselling",
+            "Quality assured rapid or lab assays",
+            "Sequential strategy by prevalence setting",
+            "Same visit referral to ART"
+          ]
+        },
+        "right": {
+          "title": "Self testing",
+          "points": [
+            "Improves privacy and reach",
+            "Reactive is preliminary",
+            "Needs confirmatory facility test",
+            "Users need clear linkage instructions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Infant HIV diagnosis cannot rely on antibody because **maternal IgG crosses placenta** and can persist for many months. Virologic nucleic acid testing at defined birth and follow up points identifies infection. Any positive virologic result needs urgent repeat confirmation and immediate ART pathway without waiting for antibody disappearance. Maternal viral suppression sharply lowers but monitoring remains essential after exposure.",
+      "say": "In exposed infants, nucleic acid testing diagnoses HIV; antibody may only be mother's.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "birth",
+            "label": "Assess maternal ART and viral load"
+          },
+          {
+            "id": "nat",
+            "label": "Infant nucleic acid test"
+          },
+          {
+            "id": "confirm",
+            "label": "Repeat positive urgently"
+          },
+          {
+            "id": "art",
+            "label": "Start infant ART and prophylaxis plan"
+          }
+        ],
+        "edges": [
+          [
+            "birth",
+            "nat"
+          ],
+          [
+            "nat",
+            "confirm"
+          ],
+          [
+            "confirm",
+            "art"
+          ]
+        ]
+      }
+    }
+  ]
+}
