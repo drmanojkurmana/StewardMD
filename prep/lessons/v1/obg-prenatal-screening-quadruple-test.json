@@ -1,0 +1,252 @@
+{
+ "v": 1,
+ "module": "obg-prenatal-screening",
+ "subject": "obstetrics-gynaecology",
+ "title": "Quadruple Test, Maternal Serum AFP and Inhibin A",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Four second trimester markers screening for Down syndrome form the **quadruple test**. Alpha fetoprotein, hCG, unconjugated oestriol and inhibin A are combined with maternal age. It suits women presenting after the first trimester window has closed. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "The quadruple test combines four second trimester markers with maternal age.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Direction in Down"
+    ],
+    "rows": [
+     [
+      "AFP",
+      "Low"
+     ],
+     [
+      "hCG",
+      "High"
+     ],
+     [
+      "Oestriol",
+      "Low"
+     ],
+     [
+      "Inhibin A",
+      "High"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A fetal protein leaking into maternal blood, raised by open fetal defects, is **maternal serum AFP**. Alpha fetoprotein rises in neural tube and abdominal wall defects. Low values instead associate with Down syndrome. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Maternal serum AFP rises in open fetal defects and falls in Down syndrome.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-folic-acid.webp",
+    "alt": "Folic acid preventing neural tube defects.",
+    "caption": "Folate and neural tube prevention. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The placental hormone adding most accuracy to the quadruple test is **inhibin A**. Raised levels in Down syndrome distinguish the quadruple from the older triple test. This single addition lifts detection by about ten percent. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Inhibin A addition lifts quadruple test detection above the older triple test.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Triple markers measured"
+     },
+     {
+      "id": "n1",
+      "label": "Inhibin A added"
+     },
+     {
+      "id": "n2",
+      "label": "Detection improves"
+     },
+     {
+      "id": "n3",
+      "label": "Fewer invasive tests needed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Raised AFP needs ultrasound to find the cause, following an **AFP elevation pathway**. Dating error is the commonest explanation, then twins, defects and placental problems. Amniotic fluid AFP and acetylcholinesterase confirm neural defects historically. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Raised AFP follows a pathway starting with ultrasound for dating, twins and defects.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Raised AFP causes",
+     "points": [
+      "Wrong dates commonest",
+      "Twins",
+      "Open defects"
+     ]
+    },
+    "right": {
+     "title": "Low AFP causes",
+     "points": [
+      "Down syndrome",
+      "Wrong dates",
+      "Fetal death"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Accurate gestational dating underpins every serum screen because markers change weekly, a principle of **dating dependence**. A week of error can flip a result from low to high risk. This is why early ultrasound dating precedes screening. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Dating dependence means a week of error can flip serum screening results.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Error",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Overestimated age",
+      "Falsely low AFP ratio"
+     ],
+     [
+      "Underestimated age",
+      "Falsely high AFP ratio"
+     ],
+     [
+      "Correct dating",
+      "Valid risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Maternal weight, diabetes and smoking all shift marker levels and are entered as **adjustment factors**. Heavier women dilute markers, lowering concentrations. Software corrects results into multiples of the median for each woman. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Adjustment factors like weight and diabetes correct marker levels into multiples of the median.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Raw marker measured"
+     },
+     {
+      "id": "n1",
+      "label": "Weight and diabetes entered"
+     },
+     {
+      "id": "n2",
+      "label": "Corrected MoM calculated"
+     },
+     {
+      "id": "n3",
+      "label": "Risk issued"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Results are expressed relative to the normal median for that gestation as **multiples of the median**. A value of two means twice the typical level. This standardisation lets laboratories share reference ranges meaningfully. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Multiples of the median standardise marker results against gestation specific norms.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "MoM",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "0.5",
+      "Half the median"
+     ],
+     [
+      "1.0",
+      "Typical"
+     ],
+     [
+      "2.0",
+      "Twice the median"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Women booking late still deserve screening through quadruple or cell free routes, a matter of **late booking provision**. Gestation up to twenty weeks allows quadruple testing in most programmes. Beyond that, anomaly scanning and NIPT remain options. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Late booking provision offers quadruple testing to twenty weeks and NIPT beyond.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/folate-deficiency-fig1.webp",
+    "alt": "Folate deficiency and neural tube context.",
+    "caption": "Folate and screening context. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A high risk quadruple result is followed by an offer of diagnostic testing or cell free DNA, called **result pathway**. Many couples choose cell free DNA first to avoid invasive risk. Diagnostic testing remains necessary after a positive cell free result. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "A high risk result pathway offers cell free DNA first, with diagnostic confirmation after positives.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "High risk result"
+     },
+     {
+      "id": "n1",
+      "label": "Counselling offered"
+     },
+     {
+      "id": "n2",
+      "label": "NIPT or invasive chosen"
+     },
+     {
+      "id": "n3",
+      "label": "Diagnosis confirmed if positive"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

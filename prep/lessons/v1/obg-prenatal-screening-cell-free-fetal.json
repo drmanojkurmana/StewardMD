@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "module": "obg-prenatal-screening",
+ "subject": "obstetrics-gynaecology",
+ "title": "Cell-Free Fetal DNA, NIPT and Chorionic Villus Sampling",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Fragments of placental DNA circulating in maternal blood form **cell-free fetal DNA**. It derives mainly from trophoblast turnover, not the fetus directly. Levels rise with gestation and vanish within hours of delivery. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Cell-free fetal DNA comes from placental fragments circulating in maternal blood.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Placental fragments shed"
+     },
+     {
+      "id": "n1",
+      "label": "DNA in maternal blood"
+     },
+     {
+      "id": "n2",
+      "label": "Sequencing counts chromosomes"
+     },
+     {
+      "id": "n3",
+      "label": "Result in days"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Screening maternal blood DNA for fetal chromosome imbalance is **NIPT**. Non invasive prenatal testing detects over ninety nine percent of Down syndrome with very few false positives. It remains a screening test needing invasive confirmation when positive. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "NIPT screens blood DNA with very high Down detection but positives need confirmation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-misc-downs.webp",
+    "alt": "Down syndrome screening context for NIPT.",
+    "caption": "NIPT screening context. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Sampling placental villi for karyotype from eleven weeks is **chorionic villus sampling**. Transabdominal or transcervical routes both reach the placenta under ultrasound guidance. It gives earlier diagnosis than amniocentesis at slightly higher procedure risk. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Chorionic villus sampling takes placental tissue from eleven weeks for early karyotype.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "CVS",
+      "From 11 weeks"
+     ],
+     [
+      "Amniocentesis",
+      "From 15 weeks"
+     ],
+     [
+      "Cordocentesis",
+      "From 18 weeks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Insufficient fetal DNA fraction causes test failure, reported as **no call result**. Obesity, early gestation and certain chromosome patterns lower the fraction. Redraw succeeds in most cases a week or two later. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "A no call result from low fetal fraction usually succeeds on redraw later.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Successful test",
+     "points": [
+      "Fetal fraction adequate",
+      "Result issued",
+      "Risk refined"
+     ]
+    },
+    "right": {
+     "title": "No call",
+     "points": [
+      "Fraction too low",
+      "Redraw offered",
+      "Consider invasive test"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Because the DNA is placental, confined placental mosaicism can mislead, a limitation called **placental origin error**. Rare false positives and negatives arise this way. This is the core reason positives need diagnostic confirmation. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Placental origin means mosaicism can mislead NIPT, so positives need confirmation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "DNA is placental"
+     },
+     {
+      "id": "n1",
+      "label": "Mosaic placenta possible"
+     },
+     {
+      "id": "n2",
+      "label": "Result may mislead"
+     },
+     {
+      "id": "n3",
+      "label": "Confirmation required"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sex chromosome and microdeletion panels extend testing beyond the main trisomies as **expanded panels**. Accuracy falls sharply for these rarer conditions. Many guidelines advise against routine microdeletion screening for this reason. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Expanded panels test rarer conditions with sharply lower accuracy and limited endorsement.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Target",
+     "Performance"
+    ],
+    "rows": [
+     [
+      "Trisomy 21",
+      "Excellent"
+     ],
+     [
+      "Trisomy 18 and 13",
+      "Very good"
+     ],
+     [
+      "Microdeletions",
+      "Poor, not routine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A vanishing twin can contaminate results with DNA from the demised co-twin, termed **vanishing twin effect**. The extra DNA persists for weeks after demise. Ultrasound before testing identifies this and other confounders. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "A vanishing twin leaves DNA that contaminates results for weeks after demise.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chromosomal-disorders-children-long-case-fig1.webp",
+    "alt": "Chromosomal conditions in screening.",
+    "caption": "Screening conditions. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Couples declining invasive testing may still value NIPT for birth planning, a use termed **preparation value**. Knowing a diagnosis lets delivery and neonatal care be organised. Screening consent should explore this motivation sensitively. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "NIPT can prepare birth and neonatal care even when invasive testing is declined.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Screening consented"
+     },
+     {
+      "id": "n1",
+      "label": "Result known early"
+     },
+     {
+      "id": "n2",
+      "label": "Birth planned appropriately"
+     },
+     {
+      "id": "n3",
+      "label": "Neonatal team alerted"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rapid targeted tests on villi or fluid give preliminary results in days, called **rapid aneuploidy testing**. Full karyotype or microarray follows for complete information. Counselling explains what each layer can and cannot detect. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Rapid aneuploidy testing gives early answers while full karyotype follows.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rapid test",
+     "points": [
+      "Days",
+      "Main trisomies only",
+      "Early reassurance"
+     ]
+    },
+    "right": {
+     "title": "Full karyotype",
+     "points": [
+      "Weeks",
+      "All chromosomes",
+      "Definitive"
+     ]
+    }
+   }
+  }
+ ]
+}

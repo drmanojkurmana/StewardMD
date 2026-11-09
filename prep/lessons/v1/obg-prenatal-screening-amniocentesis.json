@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "module": "obg-prenatal-screening",
+ "subject": "obstetrics-gynaecology",
+ "title": "Amniocentesis, Cordocentesis and the Anomaly Scan",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Needle sampling of amniotic fluid under ultrasound guidance from fifteen weeks is **amniocentesis**. Fetal cells in the fluid give karyotype, microarray and infection studies. Procedure related miscarriage risk is now quoted around one in three hundred to nine hundred. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Amniocentesis samples fluid from fifteen weeks with a small procedure related loss risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Aspect",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Timing",
+      "From 15 weeks"
+     ],
+     [
+      "Sample",
+      "Amniotic fluid"
+     ],
+     [
+      "Loss risk",
+      "About 1 in 300 to 900"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sampling fetal blood from the umbilical cord for diagnosis and transfusion is **cordocentesis**. It checks fetal anaemia, platelets and karyotype rapidly from eighteen weeks. In skilled hands it also delivers intrauterine transfusion to the same site. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Cordocentesis samples fetal blood from eighteen weeks and can deliver transfusion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Cord vessel punctured"
+     },
+     {
+      "id": "n1",
+      "label": "Fetal blood sampled"
+     },
+     {
+      "id": "n2",
+      "label": "Anaemia graded"
+     },
+     {
+      "id": "n3",
+      "label": "Transfusion if needed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The detailed structural ultrasound at eighteen to twenty weeks is the **anomaly scan**. It systematically examines brain, heart, spine, abdomen and limbs. Detection varies greatly by organ system and operator experience. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "The anomaly scan systematically examines fetal structure at eighteen to twenty weeks.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Antenatal scanning assessment.",
+    "caption": "Antenatal scan assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Soft markers on the anomaly scan modestly shift chromosome risk and are called **soft markers**. Isolated soft markers with negative screening usually need no invasive testing. Multiple markers or structural defects change that advice. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Soft markers modestly shift risk, and isolated ones with negative screening need no invasion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Isolated soft marker",
+     "points": [
+      "Screening negative",
+      "Reassure usually",
+      "No invasive test"
+     ]
+    },
+    "right": {
+     "title": "Structural defect",
+     "points": [
+      "True malformation",
+      "Offer diagnosis",
+      "Plan birth place"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Fetal echocardiography follows when heart risk is raised by family history, diabetes or scan findings, termed **targeted cardiac scanning**. outflow tract views detect most major defects. Delivery planning at a cardiac centre follows significant findings. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Targeted cardiac scanning follows raised heart risk and plans delivery at cardiac centres.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indication",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Family history",
+      "Recurrence risk"
+     ],
+     [
+      "Maternal diabetes",
+      "Defect association"
+     ],
+     [
+      "Increased nuchal fluid",
+      "Heart link"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Infection testing on amniotic fluid uses polymerase chain reaction for agents like cytomegalovirus, called **amniotic PCR**. Timing after maternal infection matters because fetal shedding must have begun. Ultrasound signs of fetal infection guide who benefits. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Amniotic PCR tests fetal infection after maternal illness with ultrasound guidance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Maternal infection dated"
+     },
+     {
+      "id": "n1",
+      "label": "Ultrasound signs sought"
+     },
+     {
+      "id": "n2",
+      "label": "Amniocentesis timed"
+     },
+     {
+      "id": "n3",
+      "label": "PCR result guides care"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rh negative women receive anti-D after invasive procedures to prevent **sensitisation**. Procedures can push fetal cells into maternal circulation. A Kleihauer test may guide additional dosing after later procedures. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Anti-D after invasive procedures prevents Rh sensitisation from fetal cell leakage.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-folic-acid.webp",
+    "alt": "Antenatal supplementation context.",
+    "caption": "Antenatal care context. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Choosing between CVS and amniocentesis trades earliness against risk and mosaicism, a **test selection decision**. CVS suits early answers and DNA diagnosis, amniocentesis suits neural tube and later presentations. Counselling individualises the choice. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Test selection trades CVS earliness against amniocentesis advantages by indication.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CVS",
+     "points": [
+      "From 11 weeks",
+      "Placental tissue",
+      "Mosaicism possible"
+     ]
+    },
+    "right": {
+     "title": "Amniocentesis",
+     "points": [
+      "From 15 weeks",
+      "Fetal cells",
+      "AFP measurable"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "After invasive testing, pain, leaking fluid or fever mandates immediate contact, summarised as **post procedure advice**. Most procedures settle uneventfully within a day. Written instructions and a contact number are given to every woman. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Post procedure advice warns about pain, leaking and fever after invasive testing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Procedure completed"
+     },
+     {
+      "id": "n1",
+      "label": "Rest advised that day"
+     },
+     {
+      "id": "n2",
+      "label": "Warning signs listed"
+     },
+     {
+      "id": "n3",
+      "label": "Contact number given"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

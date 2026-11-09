@@ -1,0 +1,212 @@
+{
+ "v": 1,
+ "module": "obg-pelvis-fetal-skull",
+ "subject": "obstetrics-gynaecology",
+ "title": "Obstetric Conjugate, Skull Diameters and Moulding",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The shortest front to back diameter of the pelvic brim, from promontory to nearest pubic point, is the **obstetric conjugate**. It is the diameter the head must pass at engagement. About ten and a half to eleven centimetres is adequate. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "The obstetric conjugate is the shortest brim diameter the head must pass at engagement.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-mod-maternal-pelvis.webp",
+    "alt": "Maternal pelvis diameters model.",
+    "caption": "Pelvic diameters. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Distance between the ischial spines, the narrowest pelvic plane, is the **interspinous diameter**. About ten and a half centimetres is normal, and the spines mark zero station. Prominent spines narrow the midpelvis functionally. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "The interspinous diameter is the narrowest plane and marks zero station.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Plane",
+     "Key diameter"
+    ],
+    "rows": [
+     [
+      "Brim",
+      "Obstetric conjugate"
+     ],
+     [
+      "Midpelvis",
+      "Interspinous"
+     ],
+     [
+      "Outlet",
+      "Intertuberous"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Distances across the fetal skull determining ease of passage are **fetal skull diameters**. The presenting diameter depends on flexion and attitude. Full flexion offers the smallest, deflexion progressively larger ones. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Fetal skull diameters depend on flexion, with full flexion offering the smallest.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-mod-fetal-skull.webp",
+    "alt": "Fetal skull model showing diameters.",
+    "caption": "Fetal skull diameters. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The diameter from below the occiput to the centre of the forehead presenting in a well flexed vertex is the **suboccipitobregmatic diameter**. At nine and a half centimetres it is the most favourable for vaginal birth. It presents when flexion is complete.",
+   "say": "The suboccipitobregmatic diameter at nine and a half centimetres presents with full flexion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Full flexion achieved"
+     },
+     {
+      "id": "n1",
+      "label": "Smallest diameter presents"
+     },
+     {
+      "id": "n2",
+      "label": "Easier passage"
+     },
+     {
+      "id": "n3",
+      "label": "Favourable birth"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The longest skull diameter from chin to furthest occiput, presenting in face presentation, is the **mentovertical diameter** at about thirteen and a half centimetres in brow presentation terms. Brow presentation with this diameter usually cannot deliver vaginally at term. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "The mentovertical diameter is longest and brow presentation usually cannot deliver vaginally.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vertex flexed",
+     "points": [
+      "9.5 cm diameter",
+      "Delivers readily"
+     ]
+    },
+    "right": {
+     "title": "Brow",
+     "points": [
+      "13.5 cm diameter",
+      "Usually obstructs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Overlapping of fetal skull bones at sutures during descent is **moulding**. It reduces skull diameters and is normal in labour. Excessive moulding with no descent signals disproportion needing intervention. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Moulding overlaps skull bones to ease descent, while excessive moulding without descent warns of disproportion.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-fetal_skull.webp",
+    "alt": "Fetal skull sutures and fontanelles.",
+    "caption": "Fetal skull sutures. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The soft gaps where sutures meet, used to identify head position vaginally, are the **fontanelles**. The posterior Y shaped fontanelle marks the occiput. Feeling it tells the examiner exactly how the head lies. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Fontanelles identify head position vaginally, with the posterior one marking the occiput.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fontanelle",
+     "Shape"
+    ],
+    "rows": [
+     [
+      "Posterior",
+      "Y shaped, small"
+     ],
+     [
+      "Anterior",
+      "Diamond, larger"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Swelling of the scalp over the presenting part from pressure is **caput succedaneum**. It crosses suture lines and resolves within days of birth. It must not be confused with cephalhaematoma, which respects suture boundaries. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Caput succedaneum crosses suture lines, unlike cephalhaematoma which respects them.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Caput",
+     "points": [
+      "Crosses sutures",
+      "Present at birth",
+      "Resolves in days"
+     ]
+    },
+    "right": {
+     "title": "Cephalhaematoma",
+     "points": [
+      "Limited by sutures",
+      "Appears after hours",
+      "Resolves in weeks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Engagement means the widest head diameter has passed the brim, judged by **fifths palpable** abdominally. When two fifths or less remain palpable, the head is engaged. Non engagement at term in a first pregnancy needs evaluation. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Engagement is judged by fifths palpable, with two fifths or less meaning engaged.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Head palpated abdominally"
+     },
+     {
+      "id": "n1",
+      "label": "Fifths estimated"
+     },
+     {
+      "id": "n2",
+      "label": "Two or less engaged"
+     },
+     {
+      "id": "n3",
+      "label": "Non engagement evaluated"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

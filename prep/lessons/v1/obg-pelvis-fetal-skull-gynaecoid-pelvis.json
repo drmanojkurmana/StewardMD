@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "module": "obg-pelvis-fetal-skull",
+ "subject": "obstetrics-gynaecology",
+ "title": "Pelvic Types: Gynaecoid, Android, Anthropoid and Platypelloid",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The round, roomy female pelvis ideal for childbirth is the **gynaecoid pelvis**. All diameters are adequate and the subpubic angle is wide. About half of women have predominantly this pelvic shape. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "The gynaecoid pelvis is round and roomy, ideal for childbirth in about half of women.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-mod-maternal-pelvis.webp",
+    "alt": "Maternal pelvis model.",
+    "caption": "Maternal pelvis model. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The heart shaped, narrow pelvis resembling the male form is the **android pelvis**. Its funnel shape arrests descent in the midpelvis and deep transverse arrest is characteristic. Operative delivery rates rise with this type. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "The android pelvis funnels narrowly and characteristically arrests descent in the midpelvis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Brim shape"
+    ],
+    "rows": [
+     [
+      "Gynaecoid",
+      "Round"
+     ],
+     [
+      "Android",
+      "Heart shaped"
+     ],
+     [
+      "Anthropoid",
+      "Long oval"
+     ],
+     [
+      "Platypelloid",
+      "Flat oval"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The long anteroposterior oval pelvis favouring occipitoposterior positions is the **anthropoid pelvis**. Its roomy back segment accommodates the occiput posteriorly. Face to pubes delivery may occur spontaneously in this type. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "The anthropoid pelvis favours occipitoposterior positions with its roomy back segment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Android",
+     "points": [
+      "Heart brim",
+      "Midpelvic arrest",
+      "Operative delivery"
+     ]
+    },
+    "right": {
+     "title": "Anthropoid",
+     "points": [
+      "Long oval brim",
+      "Posterior positions",
+      "Face to pubes possible"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The flat pelvis with shortened front to back diameter is the **platypelloid pelvis**. Engagement happens in the transverse diameter with marked lateral tilt of the head. It is the least common of the four pure types. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "The platypelloid pelvis is flat front to back and engages the head transversely.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Flat brim"
+     },
+     {
+      "id": "n1",
+      "label": "Transverse engagement"
+     },
+     {
+      "id": "n2",
+      "label": "Marked asynclitism"
+     },
+     {
+      "id": "n3",
+      "label": "Descent if pelvis adequate"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The classification grouping pelves by brim shape is the **Caldwell-Moloy classification**. Most real pelves mix features of two types, such as gynaecoid with android tendencies. Clinical pelvimetry and labour progress matter more than labels. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Caldwell-Moloy classifies brim shapes, though most real pelves mix two types.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-mod-fetal-skull.webp",
+    "alt": "Fetal skull model for pelvic assessment.",
+    "caption": "Fetal skull and pelvis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The clinical estimate of the true conjugate taken vaginally is the **diagonal conjugate**. Measured from sacral promontory to lower pubic border, about twelve and a half centimetres is normal. Subtracting one and a half to two gives the obstetric conjugate. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "The diagonal conjugate estimates the true conjugate by subtracting about two centimetres.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diameter",
+     "Normal"
+    ],
+    "rows": [
+     [
+      "Diagonal conjugate",
+      "About 12.5 cm"
+     ],
+     [
+      "Obstetric conjugate",
+      "About 10.5 to 11 cm"
+     ],
+     [
+      "External conjugate",
+      "About 20 cm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pelvic adequacy is judged in labour by progress, the philosophy of **trial of labour**. Imaging pelvimetry rarely predicts outcome accurately outside extreme contraction. A well conducted trial with monitoring is the best test of the pelvis. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Trial of labour tests pelvic adequacy better than imaging pelvimetry in most cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Labour monitored closely"
+     },
+     {
+      "id": "n1",
+      "label": "Progress plotted"
+     },
+     {
+      "id": "n2",
+      "label": "Descent assessed"
+     },
+     {
+      "id": "n3",
+      "label": "Mode decided by progress"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Short stature, rickets and pelvic injury history flag possible **contracted pelvis**. Clinical assessment of conjugates, spines and outlet follows. Known severe contraction plans caesarean delivery before labour. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Contracted pelvis is flagged by short stature, rickets or pelvic injury history.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Suspected contraction",
+     "points": [
+      "Clinical pelvimetry",
+      "Height and history",
+      "Plan by severity"
+     ]
+    },
+    "right": {
+     "title": "Proven severe",
+     "points": [
+      "Elective caesarean",
+      "Before labour",
+      "Avoids obstructed labour"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The widest transverse diameter of the brim and the interspinous of the midpelvis each limit descent at their level, together called **transverse diameters**. Midpelvic contraction matters more because it cannot be bypassed by head moulding alone. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Transverse diameters limit descent at brim and midpelvis, with midpelvic contraction mattering most.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-fetal_diameters_station.webp",
+    "alt": "Fetal diameters and station scale.",
+    "caption": "Diameters and station. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}
