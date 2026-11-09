@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "pat-oedema-haemorrhage",
+  "subject": "pathology",
+  "title": "Starling Forces, Microvascular Fluid Dynamics, and Oedema Pathogenesis",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Fluid distribution between intravascular and interstitial compartments is governed by opposing hydrostatic and colloid osmotic pressure gradients across microvascular capillaries. Under normal resting physiological conditions, continuous fluid filtration into the interstitium slightly exceeds fluid reabsorption, with the slight excess returned to systemic venous circulation through lymphatic vessels via the classical **Starling equation**.",
+      "say": "Starling forces balance hydrostatic pressure and colloid osmotic pressure across capillary membranes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hydrostatic",
+            "label": "Capillary Hydrostatic Pressure Drives Fluid Outward"
+          },
+          {
+            "id": "oncotic",
+            "label": "Plasma Colloid Osmotic Pressure Retains Fluid Inward"
+          },
+          {
+            "id": "balance",
+            "label": "Starling Equilibrium Governs Net Microvascular Filtration"
+          }
+        ],
+        "edges": [
+          [
+            "hydrostatic",
+            "balance"
+          ],
+          [
+            "oncotic",
+            "balance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Elevations in microvascular pressure drive fluid transudation across intact vessel walls into adjacent interstitial connective tissue spaces. Congestive heart failure, constrictive pericarditis, or localized deep venous thrombosis increases venous resistance, elevating microvascular **capillary hydrostatic pressure** and producing dependent, pitting edema throughout the lower extremities and presacral soft tissues.",
+      "say": "Elevated capillary hydrostatic pressure forces excess transudate into dependent interstitial spaces.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pe-venous-debulking-fig1.webp",
+        "alt": "Unilateral lower extremity pitting edema from venous hypertension",
+        "caption": "Unilateral lower limb pitting edema resulting from elevated venous hydrostatic pressure."
+      }
+    },
+    {
+      "tx": "Circulating plasma albumin accounts for approximately eighty percent of total intravascular colloid osmotic force. When severe proteinuria or impaired hepatic protein synthesis depletes circulating albumin, declining intravascular **plasma oncotic pressure** permits systemic fluid filtration into tissues, causing diffuse periorbital and generalized subcutaneous fluid accumulation throughout dependent and non-dependent beds.",
+      "say": "Hypoalbuminemia drops plasma oncotic pressure, allowing diffuse fluid filtration into tissue beds.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Fluid Parameter",
+          "Transudate Effusion",
+          "Exudate Effusion"
+        ],
+        "rows": [
+          [
+            "Pathophysiologic Driver",
+            "Imbalanced Hydrostatic or Oncotic Forces",
+            "Increased Endothelial Vascular Permeability"
+          ],
+          [
+            "Specific Gravity",
+            "Low Specific Gravity Below 1.012",
+            "High Specific Gravity Above 1.020"
+          ],
+          [
+            "Protein Content",
+            "Low Protein Under 3 g/dL",
+            "High Protein Over 3 g/dL with Cellular Debris"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In nephrotic syndrome, massive glomerular capillary permeability allows urinary loss of massive albumin quantities, provoking profound intravascular hypovolemia. Compensatory activation of the renin-angiotensin-aldosterone axis drives secondary renal sodium and water retention, exacerbating severe generalized anasarca and dependent fluid accumulation termed **nephrotic oedema**.",
+      "say": "Nephrotic edema results from heavy urinary albumin loss coupled with secondary renal sodium retention.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "podocyte_injury",
+            "label": "Glomerular Podocyte Injury and Massive Albuminuria"
+          },
+          {
+            "id": "hypoalbuminemia",
+            "label": "Severe Systemic Hypoalbuminemia and Low Oncotic Pressure"
+          },
+          {
+            "id": "raas_activation",
+            "label": "Secondary Aldosteronism Retains Sodium and Water"
+          },
+          {
+            "id": "anasarca",
+            "label": "Profound Generalized Nephrotic Edema and Anasarca"
+          }
+        ],
+        "edges": [
+          [
+            "podocyte_injury",
+            "hypoalbuminemia"
+          ],
+          [
+            "hypoalbuminemia",
+            "raas_activation"
+          ],
+          [
+            "raas_activation",
+            "anasarca"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Impaired lymphatic outflow prevents physiological removal of normal interstitial fluid and extravasated macromolecules from peripheral connective tissue beds. Parasitic filariasis, neoplastic nodal infiltration, or surgical axillary lymphadenectomy produces severe localized non-pitting edema through persistent mechanical **lymphatic obstruction**, leading to cutaneous brawny induration and thickening.",
+      "say": "Lymphatic obstruction blocks interstitial macromolecule clearance, producing persistent lymphedema.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sva-venous-varicose-access-lymphoedema-fig1.webp",
+        "alt": "Brawny non-pitting edema from chronic lymphatic obstruction",
+        "caption": "Persistent tissue swelling and brawny non-pitting edema resulting from lymphatic outflow obstruction."
+      }
+    },
+    {
+      "tx": "Impaired venous outflow from a vascularized bed produces a passive increase in local blood volume accompanied by microvascular distension. In systemic heart failure or local portal vein occlusion, prolonged tissue hypoxia and capillary engorgement characterize the systemic process of **chronic venous congestion**, frequently leading to secondary ischemic parenchymal atrophy.",
+      "say": "Chronic venous congestion causes passive capillary distension, tissue hypoxia, and parenchymal atrophy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "outflow_block",
+            "label": "Impaired Venous Drainage in Congestive Heart Failure"
+          },
+          {
+            "id": "sinusoid_engorgement",
+            "label": "Sinusoidal and Capillary Congestion with Chronic Hypoxia"
+          },
+          {
+            "id": "parenchymal_atrophy",
+            "label": "Centrilobular Hepatocyte Atrophy and Hemosiderin Deposition"
+          }
+        ],
+        "edges": [
+          [
+            "outflow_block",
+            "sinusoid_engorgement"
+          ],
+          [
+            "sinusoid_engorgement",
+            "parenchymal_atrophy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Persistent right-sided heart failure elevates central venous pressures, transmitting retrograde stasis into hepatic central veins and sinusoids. Centrilobular regions undergo ischemic necrosis and hemorrhagic congestion, contrasting sharply with surrounding pale fatty periportal zones to generate the classic macroscopic **nutmeg liver** seen on autopsy cut surfaces.",
+      "say": "Nutmeg liver shows dark congested central veins alternating with pale fatty periportal hepatocyte cords.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Centrilobular Zone (Zone 3)",
+          "points": [
+            "Marked sinusoidal congestion surrounding central terminal venules",
+            "Severe erythrocyte extravasation into disrupted space of Disse",
+            "Ischemic coagulative necrosis and atrophy of centrilobular hepatocytes",
+            "Prominent golden-brown hemosiderin pigment accumulation in Kupffer cells"
+          ]
+        },
+        "right": {
+          "title": "Periportal Zone (Zone 1)",
+          "points": [
+            "Preserved oxygenation adjacent to incoming hepatic arterioles",
+            "Hepatocytes remain viable without primary ischemic coagulative necrosis",
+            "Develops variable degrees of secondary reversible steatosis",
+            "Provides pale yellow contrasting borders defining nutmeg appearance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Unrelieved severe chronic passive hepatic congestion triggers progressive parenchymal extinction around terminal hepatic venules. Deposition of dense fibrous collagen bridges adjacent central veins and leads to nodular remodeling, an irreversible late complication known clinically as **cardiac sclerosis**, often leading to hepatic synthetic failure and portal hypertension.",
+      "say": "Cardiac sclerosis occurs when longstanding congestive sinusoidal injury causes bridging central vein fibrosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "stasis",
+            "label": "Chronic High-Pressure Right Ventricular Failure"
+          },
+          {
+            "id": "central_necrosis",
+            "label": "Recurrent Centrilobular Ischemic Hepatocyte Death"
+          },
+          {
+            "id": "collagen_deposition",
+            "label": "Stellate Cell Activation Lays Down Perivenular Collagen"
+          },
+          {
+            "id": "cirrhosis",
+            "label": "Cardiac Cirrhosis with Bridging Centrilobular Fibrosis"
+          }
+        ],
+        "edges": [
+          [
+            "stasis",
+            "central_necrosis"
+          ],
+          [
+            "central_necrosis",
+            "collagen_deposition"
+          ],
+          [
+            "collagen_deposition",
+            "cirrhosis"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}

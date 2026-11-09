@@ -1,0 +1,241 @@
+{
+  "v": 1,
+  "module": "pat-mendelian-disorders",
+  "subject": "pathology",
+  "title": "Inborn Errors of Amino Acid and Carbohydrate Metabolism",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Inherited deficiencies of single metabolic enzymes block intermediary biochemical pathways, causing accumulation of upstream toxic substrates or deficiency of essential downstream products. These autosomal recessive disorders are grouped clinically as an **inborn error of metabolism**, frequently presenting in early infancy with acute metabolic decompensation.",
+      "say": "Inborn errors of metabolism arise from enzyme deficiencies blocking critical cellular pathways.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-liver-failure-fig1.webp",
+        "alt": "Metabolic pathway blockages precipitating acute hepatocellular injury",
+        "caption": "Metabolic pathway blockages precipitating acute hepatocellular injury and toxic metabolite accumulation."
+      }
+    },
+    {
+      "tx": "The classic amino acidopathy arises from autosomal recessive mutations in the phenylalanine hydroxylase gene on chromosome 12q24. Complete deficiency of hepatic phenylalanine hydroxylase prevents conversion of dietary phenylalanine into tyrosine, causing **phenylketonuria (PKU)** and driving alternative transamination into toxic ketoacids.",
+      "say": "Phenylketonuria is caused by phenylalanine hydroxylase deficiency preventing conversion to tyrosine.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pah_deficiency",
+            "label": "Autosomal Recessive Phenylalanine Hydroxylase Mutation"
+          },
+          {
+            "id": "metabolic_block",
+            "label": "Blocked Conversion of Dietary Phenylalanine to L-Tyrosine"
+          },
+          {
+            "id": "phenylalanine_surge",
+            "label": "Severe Elevation of Phenylalanine in Blood and Tissues"
+          },
+          {
+            "id": "transamination",
+            "label": "Alternative Transamination Yields Phenylpyruvate and Phenylacetate"
+          }
+        ],
+        "edges": [
+          [
+            "pah_deficiency",
+            "metabolic_block"
+          ],
+          [
+            "metabolic_block",
+            "phenylalanine_surge"
+          ],
+          [
+            "phenylalanine_surge",
+            "transamination"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Untreated phenylketonuria causes massive accumulation of phenylalanine and alternate transamination metabolites in cerebrospinal fluid. Competitive inhibition of large neutral amino acid transport into the developing brain impairs myelination and neurotransmitter synthesis, causing severe **hyperphenylalaninemia neurotoxicity** and irreversible mental disability unless dietary restriction begins immediately.",
+      "say": "Elevated phenylalanine blocks cerebral amino acid transport, impairing brain development and myelination.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Finding",
+          "Biochemical Mechanism",
+          "Preventive / Therapeutic Strategy"
+        ],
+        "rows": [
+          [
+            "Severe Cognitive Deficit",
+            "Impaired Myelination and Monoamine Neurotransmitter Synthesis",
+            "Early Neonatal Dietary Phenylalanine Restriction"
+          ],
+          [
+            "Mousy / Musty Odor",
+            "Excretion of Phenylacetate and Phenylpyruvate in Sweat and Urine",
+            "Maintenance of Safe Serum Phenylalanine Concentrations"
+          ],
+          [
+            "Hypopigmentation",
+            "Phenylalanine Competitive Inhibition of Tyrosinase Enzyme",
+            "Dietary L-Tyrosine Supplementation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Females with phenylketonuria who discontinue dietary restriction before pregnancy develop high circulating blood phenylalanine levels. The amino acid readily crosses the placenta and acts as a potent teratogen, inducing congenital cardiac malformations and microcephaly in **maternal PKU syndrome**, irrespective of fetal genotype.",
+      "say": "Maternal PKU exposes the developing fetus to toxic maternal phenylalanine, causing birth defects.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "maternal_hyperphenylalaninemia",
+            "label": "High Maternal Phenylalanine Due to Uncontrolled Diet"
+          },
+          {
+            "id": "placental_transport",
+            "label": "Active Amino Acid Transporters Pump Phenylalanine to Fetus"
+          },
+          {
+            "id": "fetal_teratogenicity",
+            "label": "Fetal Brain Growth Arrest and Branchial Arch Disruption"
+          },
+          {
+            "id": "congenital_defects",
+            "label": "Microcephaly, Intellectual Disability, and Congenital Heart Disease"
+          }
+        ],
+        "edges": [
+          [
+            "maternal_hyperphenylalaninemia",
+            "placental_transport"
+          ],
+          [
+            "placental_transport",
+            "fetal_teratogenicity"
+          ],
+          [
+            "fetal_teratogenicity",
+            "congenital_defects"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Inborn errors of carbohydrate metabolism produce severe neonatal toxicity upon lactose ingestion. Autosomal recessive deficiency of galactose-1-phosphate uridyltransferase (GALT) blocks conversion of galactose into glucose-1-phosphate, precipitating **classic galactosaemia** with rapid accumulation of galactose-1-phosphate within the liver, brain, and renal parenchyma.",
+      "say": "Classic galactosemia results from GALT deficiency following neonatal milk ingestion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lactose_intake",
+            "label": "Neonatal Ingestion of Lactose in Milk Yields Galactose"
+          },
+          {
+            "id": "galt_deficiency",
+            "label": "Inherited Galactose-1-Phosphate Uridyltransferase Block"
+          },
+          {
+            "id": "toxic_accumulation",
+            "label": "Accumulation of Intracellular Galactose-1-Phosphate"
+          },
+          {
+            "id": "hepatic_failure",
+            "label": "Fulminant Hepatosplenomegaly, Jaundice, and E. coli Sepsis"
+          }
+        ],
+        "edges": [
+          [
+            "lactose_intake",
+            "galt_deficiency"
+          ],
+          [
+            "galt_deficiency",
+            "toxic_accumulation"
+          ],
+          [
+            "toxic_accumulation",
+            "hepatic_failure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Within the lens of the eye, excess unphosphorylated galactose is converted by aldose reductase into the sugar alcohol galactitol. Osmotic swelling of lens fibers accompanied by lens epithelial cell apoptosis leads to oil-droplet cataracts driven by **galactitol accumulation**, reversible with early dietary galactose elimination.",
+      "say": "Galactitol accumulation causes osmotic swelling of lens fibers, leading to infantile cataracts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic Galactosemia (GALT Defect)",
+          "points": [
+            "Autosomal recessive deficiency of galactose-1-phosphate uridyltransferase",
+            "Severe toxic accumulation of galactose-1-phosphate in liver and kidneys",
+            "Manifests with neonatal hepatomegaly, jaundice, aminoaciduria, and E. coli sepsis",
+            "Oil-droplet cataracts accompanied by progressive severe cognitive impairment"
+          ]
+        },
+        "right": {
+          "title": "Galactokinase Deficiency (GALK Defect)",
+          "points": [
+            "Autosomal recessive deficiency of galactokinase enzyme",
+            "Lacks accumulation of toxic phosphorylated galactose-1-phosphate intermediates",
+            "No primary hepatocellular necrosis, renal tubular dysfunction, or cerebral edema",
+            "Presents exclusively with isolated early infantile cataracts due to galactitol"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Historical understanding of inborn errors originated with Sir Archibald Garrod's studies on dark urine. Autosomal recessive deficiency of homogentisate 1,2-dioxygenase on chromosome 3q21 blocks tyrosine degradation, defining the metabolic disorder **alkaptonuria**, leading to persistent urinary excretion of large amounts of homogentisic acid.",
+      "say": "Alkaptonuria is caused by homogentisate dioxygenase deficiency in the tyrosine breakdown pathway.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bone-marrow-failure-syndromes-including-fig1.webp",
+        "alt": "Metabolic inborn error affecting connective tissue and cartilage integrity",
+        "caption": "Metabolic pathway mutations producing systemic connective tissue and structural abnormalities."
+      }
+    },
+    {
+      "tx": "Unmetabolized homogentisic acid is excreted in urine, where oxidation upon standing or alkalinization produces a dark brownish-black color. Over decades, oxidized pigment polymers bind to fibrillar collagen of articular cartilages and intervertebral discs, causing crippling **ochronosis** and severe degenerative arthropathy.",
+      "say": "Ochronosis is the bluish-black pigmentation of cartilage that causes degenerative arthritis in alkaptonuria.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "homogentisic_acid",
+            "label": "Accumulation of Unmetabolized Homogentisic Acid"
+          },
+          {
+            "id": "polymerization",
+            "label": "Spontaneous Oxidation and Polymeric Pigment Formation"
+          },
+          {
+            "id": "collagen_binding",
+            "label": "Irreversible Binding to Articular Cartilage and Tendons"
+          },
+          {
+            "id": "ochronotic_arthropathy",
+            "label": "Brittleness, Fissuring, and Severe Ochronotic Arthritis"
+          }
+        ],
+        "edges": [
+          [
+            "homogentisic_acid",
+            "polymerization"
+          ],
+          [
+            "polymerization",
+            "collagen_binding"
+          ],
+          [
+            "collagen_binding",
+            "ochronotic_arthropathy"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}

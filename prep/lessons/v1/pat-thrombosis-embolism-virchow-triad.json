@@ -1,0 +1,204 @@
+{
+  "v": 1,
+  "module": "pat-thrombosis-embolism",
+  "subject": "pathology",
+  "title": "Virchow Triad, Thrombus Architecture, and Inherited Thrombophilia",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Pathological intravascular formation of a solid blood clot within uninjured vessels or inappropriate occlusion of an injured vascular lumen is governed by three primary abnormalities. Formulated in nineteenth-century pathology, the **Virchow triad** comprises endothelial injury, alterations in normal blood laminar flow, and hypercoagulability.",
+      "say": "Virchow triad identifies endothelial injury, abnormal blood flow, and hypercoagulability as causes of thrombosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/dvt-fig2.webp",
+        "alt": "The classical Virchow triad of thrombosis pathophysiology",
+        "caption": "The classical Virchow triad predisposing to deep venous thrombosis and thromboembolism."
+      }
+    },
+    {
+      "tx": "Microscopic evaluation of thrombi formed within flowing arterial or cardiac lumens demonstrates characteristic alternating pale and dark laminations. These microscopic structures represent **lines of Zahn**, composed of pale layers of platelets and fibrin alternating with darker, erythrocyte-rich layers, confirming ante-mortem intravascular formation.",
+      "say": "Lines of Zahn are alternating pale platelet-fibrin and dark erythrocyte laminations formed in flowing blood.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "platelet_layer",
+            "label": "Rapid Blood Flow Deposits Platelets and Entangled Fibrin"
+          },
+          {
+            "id": "rbc_layer",
+            "label": "Intermittent Blood Flow Stasis Traps Packed Erythrocytes"
+          },
+          {
+            "id": "lines_of_zahn",
+            "label": "Alternating Laminations Form Classic Microscopic Lines of Zahn"
+          }
+        ],
+        "edges": [
+          [
+            "platelet_layer",
+            "lines_of_zahn"
+          ],
+          [
+            "rbc_layer",
+            "lines_of_zahn"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Distinguishing an ante-mortem thrombus from post-mortem blood clotting is critical at autopsy. Unlike firm, adherent ante-mortem thrombi with lines of Zahn, a gelatinous **postmortem clot** is soft, unattached to vascular walls, and separates into dependent dark currant-jelly erythrocyte portions and superior yellow chicken-fat serum layers.",
+      "say": "Postmortem clots are soft, unattached, and divide into currant-jelly and chicken-fat layers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ante-Mortem Thrombus",
+          "points": [
+            "Dry, granular, and friable gross texture",
+            "Firmly adherent to underlying disrupted endothelial vessel wall",
+            "Exhibits distinct alternating microscopic lines of Zahn",
+            "Points of attachment leave an irregular, torn vascular intima"
+          ]
+        },
+        "right": {
+          "title": "Post-Mortem Clot",
+          "points": [
+            "Gelatinous, smooth, and moist gross surface",
+            "Completely unattached to the vascular wall, forming cast of lumen",
+            "Separates into dependent currant-jelly red and upper chicken-fat yellow zones",
+            "Lacks lines of Zahn and leaves completely smooth intact endothelium"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The most prevalent inherited thrombophilia among individuals of Caucasian descent involves a single point mutation in coagulation factor V. In **factor V Leiden**, an arginine-to-glutamine substitution at position 506 abolishes the cleavage site for activated protein C, preventing factor V inactivation and promoting recurrent venous thromboembolism.",
+      "say": "Factor V Leiden resists cleavage by activated protein C, causing inherited hypercoagulability.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/thrombophilia-fig1.webp",
+        "alt": "Inherited thrombophilia pathways and activated protein C resistance",
+        "caption": "Mechanisms of inherited thrombophilia and impaired endogenous anticoagulant pathways."
+      }
+    },
+    {
+      "tx": "The second most common inherited cause of venous thrombosis involves a single nucleotide transition (G20210A) in the 3-prime untranslated region of the prothrombin gene. This inherited **prothrombin mutation** destabilizes mRNA degradation, yielding elevated circulating plasma prothrombin concentrations and an approximately threefold increased lifetime risk of deep venous thrombosis.",
+      "say": "The prothrombin G20210A mutation elevates circulating prothrombin levels, increasing thrombotic risk.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mutation_site",
+            "label": "Prothrombin Gene G20210A Point Mutation in 3-Prime UTR"
+          },
+          {
+            "id": "mrna_stability",
+            "label": "Enhanced mRNA Stability Elevates Prothrombin Biosynthesis"
+          },
+          {
+            "id": "plasma_levels",
+            "label": "High Circulating Prothrombin Promotes Thrombin Generation"
+          },
+          {
+            "id": "venous_thrombosis",
+            "label": "Threefold Elevated Risk of Recurrent Venous Thrombosis"
+          }
+        ],
+        "edges": [
+          [
+            "mutation_site",
+            "mrna_stability"
+          ],
+          [
+            "mrna_stability",
+            "plasma_levels"
+          ],
+          [
+            "plasma_levels",
+            "venous_thrombosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinicians must recognize acquired hypercoagulable disorders driven by autoantibodies against plasma protein-phospholipid complexes. The **antiphospholipid syndrome** features anti-cardiolipin antibodies and lupus anticoagulant, paradoxically prolonging in vitro partial thromboplastin time while driving recurrent arterial and venous thrombosis and spontaneous pregnancy losses.",
+      "say": "Antiphospholipid syndrome causes recurrent thromboses and miscarriages despite prolonged in vitro PTT.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Feature",
+          "Laboratory Diagnostic Finding",
+          "Pathological Consequence"
+        ],
+        "rows": [
+          [
+            "Lupus Anticoagulant",
+            "Prolonged in vitro PTT Uncorrected by Normal Plasma",
+            "Promotes In Vivo Platelet Activation and Thrombosis"
+          ],
+          [
+            "Anti-Beta-2 Glycoprotein I",
+            "High IgG or IgM Titers on Immunoassay",
+            "Complement Activation on Endothelial Surfaces"
+          ],
+          [
+            "Obstetric Complications",
+            "Recurrent Spontaneous Fetal Losses After 10 Weeks",
+            "Placental Decidual Vasculopathy and Infarction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Hemodynamic differences dictate distinct morphological appearances between arterial and venous clots. Arteriolar thrombi typically initiate at sites of endothelial injury and plaque ulceration, consisting predominantly of platelet aggregates, whereas slow venous blood flow promotes fibrin meshwork trapping abundant erythrocytes, characterizing occlusive **arterial thrombosis** versus phlebothrombosis.",
+      "say": "Arterial thrombi are platelet-rich white clots, whereas venous thrombi are erythrocyte-rich red clots.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/arterial-and-venous-thrombosis-fig1.webp",
+        "alt": "Arterial white thrombi versus venous red stasis thrombi",
+        "caption": "Pathological comparison of arterial platelet-rich thrombi and venous erythrocyte-rich thrombi."
+      }
+    },
+    {
+      "tx": "If an established intravascular thrombus does not undergo early dissolution via endogenous tissue plasminogen activator fibrinolysis, capillary ingrowth and fibroblastic invasion occur. Over several weeks, endothelial-lined channels bore through the organizing fibrin mass, restoring partial luminal perfusion through the process of **thrombus recanalization**.",
+      "say": "Thrombus recanalization occurs as capillary ingrowth converts organized fibrin into new vascular channels.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fibrin_mass",
+            "label": "Persistent Occlusive Intravascular Fibrin Thrombus"
+          },
+          {
+            "id": "endothelial_invasion",
+            "label": "Capillary Ingrowth and Fibroblast Infiltration"
+          },
+          {
+            "id": "luminal_canals",
+            "label": "Formation of New Microscopic Endothelial-Lined Canals"
+          },
+          {
+            "id": "perfusion_restored",
+            "label": "Partial Perfusion Restored Across Organized Vascular Scar"
+          }
+        ],
+        "edges": [
+          [
+            "fibrin_mass",
+            "endothelial_invasion"
+          ],
+          [
+            "endothelial_invasion",
+            "luminal_canals"
+          ],
+          [
+            "luminal_canals",
+            "perfusion_restored"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}

@@ -1,0 +1,217 @@
+{
+  "v": 1,
+  "module": "pat-mendelian-disorders",
+  "subject": "pathology",
+  "title": "Fibrillinopathy, Collagen Defects, and Inherited Connective Tissue Disorders",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Extracellular microfibrils are polymeric protein assemblies that surround and stabilize amorphous elastic fibers throughout human connective tissues. The principal structural constituent of these microfibrils is the 350-kilodalton glycoprotein **fibrillin-1 glycoprotein**, which serves both as a mechanical scaffold and as a regulator of cytokine availability.",
+      "say": "Fibrillin-1 microfibrils provide structural scaffolding for elastin and sequester transforming growth factor beta.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fbn1_synthesis",
+            "label": "Fibroblasts Synthesize Fibrillin-1 Precursor Monomers"
+          },
+          {
+            "id": "microfibril_assembly",
+            "label": "Extracellular Polymerization into Insoluble Microfibrillar Bundles"
+          },
+          {
+            "id": "elastin_deposition",
+            "label": "Tropoelastin Deposition Generates Functional Resilient Elastic Fibers"
+          }
+        ],
+        "edges": [
+          [
+            "fbn1_synthesis",
+            "microfibril_assembly"
+          ],
+          [
+            "microfibril_assembly",
+            "elastin_deposition"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Beyond mechanical support, normal fibrillin microfibrils sequester latent complexes of transforming growth factor-beta within the extracellular matrix. When mutant fibrillin-1 fails to bind latent complexes, excess bioactive cytokine drives vascular smooth muscle apoptosis and matrix metalloproteinase secretion during **TGF-beta deregulation**.",
+      "say": "Excess active TGF-beta from mutant fibrillin stimulates matrix degradation and vascular remodeling.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diseases-of-the-aorta-fig1.webp",
+        "alt": "Cystic medial necrosis and aortic remodeling driven by TGF-beta signaling",
+        "caption": "Aortic wall remodeling and cystic medial necrosis driven by unrestrained TGF-beta signaling."
+      }
+    },
+    {
+      "tx": "Inherited abnormalities in collagen synthesis, post-translational enzymatic modification, and triple-helical assembly produce a diverse family of connective tissue fragility disorders. Marked skin hyperextensibility, vascular and visceral friability, poor wound healing, and generalized joint hypermobility characterize the genetic group known as **Ehlers-Danlos syndrome**.",
+      "say": "Ehlers-Danlos syndrome encompasses inherited collagen defects causing hyperextensible skin and loose joints.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Syndrome Variant",
+          "Affected Gene / Enzyme",
+          "Major Clinical Hallmarks"
+        ],
+        "rows": [
+          [
+            "Classical EDS",
+            "COL5A1, COL5A2 (Type V Collagen)",
+            "Marked Skin Hyperextensibility, Cigarette-Paper Scars"
+          ],
+          [
+            "Vascular EDS",
+            "COL3A1 (Type III Collagen)",
+            "Spontaneous Rupture of Muscular Arteries and Hollow Organs"
+          ],
+          [
+            "Kyphoscoliotic EDS",
+            "Lysyl Hydroxylase Deficiency",
+            "Severe Progressive Kyphoscoliosis, Ocular Fragility"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In classical Ehlers-Danlos syndrome, autosomal dominant mutations in COL5A1 or COL5A2 impair type V collagen fibrillogenesis. Patients demonstrate striking skin elasticity, velvety skin texture, and abnormal wound healing resulting in atrophic, paper-thin, parchment-like scars termed **classical Ehlers-Danlos syndrome**, frequently accompanied by joint hypermobility.",
+      "say": "Classical Ehlers-Danlos syndrome involves type five collagen defects causing skin elasticity and atrophic scars.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "type_v_defect",
+            "label": "Heterozygous Mutation in Type V Collagen Gene COL5A1/COL5A2"
+          },
+          {
+            "id": "fibril_disorganization",
+            "label": "Disorganized Packing of Primary Dermal Collagen Bundles"
+          },
+          {
+            "id": "skin_fragility",
+            "label": "Marked Skin Hyperextensibility and Characteristic Paper-Thin Scars"
+          }
+        ],
+        "edges": [
+          [
+            "type_v_defect",
+            "fibril_disorganization"
+          ],
+          [
+            "fibril_disorganization",
+            "skin_fragility"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most dangerous variant of Ehlers-Danlos syndrome arises from heterozygous mutations in the COL3A1 gene encoding type III collagen. Because type III collagen provides tensile strength to hollow organs and arteries, patients face catastrophic bowel perforation and arterial aneurysms in **vascular Ehlers-Danlos syndrome**.",
+      "say": "Vascular Ehlers-Danlos syndrome involves type three collagen mutations predisposing to fatal vascular rupture.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "col3a1_mutation",
+            "label": "Heterozygous COL3A1 Mutation Impairs Type III Collagen"
+          },
+          {
+            "id": "vascular_weakness",
+            "label": "Severe Thinning and Friability of Muscular Arterial Walls"
+          },
+          {
+            "id": "spontaneous_rupture",
+            "label": "Spontaneous Rupture of Aorta, Mesenteric Arteries, or Gravid Uterus"
+          }
+        ],
+        "edges": [
+          [
+            "col3a1_mutation",
+            "vascular_weakness"
+          ],
+          [
+            "vascular_weakness",
+            "spontaneous_rupture"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Autosomal dominant inherited metabolic disorders can accelerate cardiovascular atheroma formation through defective receptor-mediated clearance of lipids. The prototypic receptor defect elevating circulating low-density lipoprotein cholesterol to two to three times normal is **familial hypercholesterolaemia**, leading to severe premature atherosclerosis and early myocardial infarction.",
+      "say": "Familial hypercholesterolemia is an autosomal dominant LDL receptor defect causing premature coronary disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acs-fig2.webp",
+        "alt": "Coronary plaque rupture and acute coronary syndrome in severe hyperlipidemia",
+        "caption": "Premature coronary atheroma plaque rupture and thrombosis in severe inherited hyperlipidemia."
+      }
+    },
+    {
+      "tx": "Seventy percent of circulating LDL is cleared by hepatic low-density lipoprotein receptors via clathrin-coated pit endocytosis. In familial hypercholesterolemia, failure of receptor synthesis, transport, or binding generates a severe **LDL clearance defect**, causing profound systemic hypercholesterolemia and premature arterial atheroma accumulation.",
+      "say": "Defective LDL receptor endocytosis impairs hepatic clearance, driving extreme plasma LDL elevations.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ldlr_mutation",
+            "label": "Mutation in Hepatic Low-Density Lipoprotein Receptor Gene"
+          },
+          {
+            "id": "endocytosis_failure",
+            "label": "Impaired Clathrin-Coated Pit Endocytosis of Circulating LDL"
+          },
+          {
+            "id": "plasma_accumulation",
+            "label": "Marked Accumulation of Atherogenic LDL in Peripheral Plasma"
+          },
+          {
+            "id": "atherogenesis",
+            "label": "Accelerated Macrophage Scavenger Uptake and Foam Cell Atheromas"
+          }
+        ],
+        "edges": [
+          [
+            "ldlr_mutation",
+            "endocytosis_failure"
+          ],
+          [
+            "endocytosis_failure",
+            "plasma_accumulation"
+          ],
+          [
+            "plasma_accumulation",
+            "atherogenesis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Individuals carrying two mutant LDLR alleles demonstrate circulating cholesterol levels exceeding six hundred milligrams per deciliter. Premature atherogenesis manifests during childhood, causing planar cutaneous xanthomas, severe calcific aortic stenosis, and fatal myocardial infarction before age twenty in **homozygous familial hypercholesterolaemia**.",
+      "say": "Homozygous familial hypercholesterolemia leads to tendon xanthomas and fatal childhood heart attacks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Heterozygous FH (1 in 250)",
+          "points": [
+            "Inherits one mutant LDLR allele with 50% normal receptor activity",
+            "Plasma total cholesterol elevated between 300 and 500 mg/dL",
+            "Tendon xanthomas of Achilles and extensor digitorum tendons emerge in 30s",
+            "Symptomatic coronary artery disease typically manifests in fourth or fifth decade"
+          ]
+        },
+        "right": {
+          "title": "Homozygous FH (1 in 1,000,000)",
+          "points": [
+            "Inherits two mutant alleles with near-zero functional receptor activity",
+            "Plasma total cholesterol markedly elevated between 600 and 1200 mg/dL",
+            "Generalized planar cutaneous and tuberous xanthomas appear in early childhood",
+            "Severe aortic valvular stenosis and fatal myocardial infarction occur before age 20"
+          ]
+        }
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}
