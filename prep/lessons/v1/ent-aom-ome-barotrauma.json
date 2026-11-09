@@ -1,0 +1,231 @@
+{
+ "v": 1,
+ "id": "ent-aom-ome-barotrauma",
+ "subject": "ent",
+ "module": "ent-aom-ome",
+ "title": "Otitic Barotrauma and Acute Mastoiditis",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Otitic barotrauma, historically termed aerotitis media, is an acute traumatic injury to middle ear structures precipitated by rapid ambient pressure differentials. It occurs most frequently during the rapid descent phase of air travel or during underwater diving descent. When the ambient atmospheric pressure rises rapidly outside the head, an impaired **Eustachian tube** fails to open, creating a profound relative negative pressure within the middle ear cleft.",
+   "say": "Otitic barotrauma occurs when rapid ambient pressure rises during aircraft or diving descent while the Eustachian tube fails to open. This creates severe negative middle ear pressure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/otitis-media-with-effusion-fig1.webp",
+    "alt": "Clinical otoscopy illustration showing retracted tympanic membrane and middle ear barotrauma changes",
+    "caption": "Negative middle ear pressure during rapid barometric changes retracting the tympanic membrane. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "As middle ear negative pressure deepens beyond sixty to ninety millimetres of mercury, the cartilaginous Eustachian tube locks closed mechanically, preventing active muscular dilation. The intense vacuum pulls the tympanic membrane violently inward, stretching sensory pain fibres and drawing transudative serosanguinous fluid from engorged mucosal capillaries. In severe barotrauma, subepithelial capillary rupture produces gross **haemotympanum** or acute eardrum perforation.",
+   "say": "When negative pressure exceeds critical thresholds, the Eustachian tube locks shut. Capillaries rupture under the vacuum, producing painful haemotympanum or drum perforation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathophysiological Cascade of Aerotitis Media",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Rapid Ambient Descent Pressure Surge"
+     },
+     {
+      "id": "b2",
+      "label": "Eustachian Tubal Lock & Critical Vacuum"
+     },
+     {
+      "id": "b3",
+      "label": "Capillary Rupture & Haemotympanum Formation"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2"
+     ],
+     [
+      "b2",
+      "b3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prevention of otitic barotrauma during flight descent relies on active tubal autoinflation manoeuvres. The classic **Valsalva manoeuvre** involves forced expiration against pinched nostrils and closed lips, generating positive nasopharyngeal pressure that forces open the Eustachian tube. Swallowing, chewing gum, or employing the Frenzel manoeuvre activates the tensor veli palatini muscle to equalize pressures across the drum.",
+   "say": "Active tubal opening prevents barotrauma. The Valsalva manoeuvre inflates the Eustachian tube against pinched nostrils, equalizing pressure across the eardrum.",
+   "vis": {
+    "kind": "table",
+    "title": "Physiological Tubal Autoinflation Manoeuvres",
+    "cols": [
+     "Manoeuvre Name",
+     "Patient Technique",
+     "Active Mechanism",
+     "Clinical Utility"
+    ],
+    "rows": [
+     [
+      "Valsalva manoeuvre",
+      "Forced expiration against pinched nostrils",
+      "Positive pneumatic pressure forces tube open",
+      "Flight descent baroprotection"
+     ],
+     [
+      "Toynbee manoeuvre",
+      "Swallowing with nostrils held pinched",
+      "Generates initial negative pressure then opens",
+      "Evaluates tubal compliance"
+     ],
+     [
+      "Frenzel manoeuvre",
+      "Glottis closed, base of tongue pushes back",
+      "Pharyngeal muscle contraction opens tube",
+      "Favoured by professional divers"
+     ],
+     [
+      "Politzerisation",
+      "Air blown into nostril while saying K",
+      "Pushes air into tube during palate closure",
+      "Pediatric tubal insufflation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Impedance audiometry provides objective assessment of barometric tubal injury. In early barotrauma with drum retraction, tympanometry reveals a Type C curve with peak compliance shifted into negative territory beyond minus one hundred decapascals. When transudate and blood fill the middle ear cavity, compliance disappears entirely, generating a flat **Type B tympanogram** with normal ear canal physical volume.",
+   "say": "Tympanometry tracks barotrauma progression. Early drum retraction produces a negative Type C curve, transitioning to a flat Type B curve once haemotympanum accumulates.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Aerotitis (Dry Stage)",
+     "points": [
+      "Severe inward retraction of drum.",
+      "Marked otalgia and ear fullness.",
+      "Type C tympanogram (< -100 daPa).",
+      "Treated with topical decongestants."
+     ]
+    },
+    "right": {
+     "title": "Late Aerotitis (Haemotympanum)",
+     "points": [
+      "Purple or blue-black drum behind blood.",
+      "Air-bone gap of 20 to 35 dB.",
+      "Flat Type B tympanogram.",
+      "May require myringotomy aspiration."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "If acute suppurative otitis media is untreated or antibiotic therapy is inadequate, infection spreads into the pneumatic mastoid air cells, precipitating **acute mastoiditis**. Bony intercellular septa undergo osteoclastic resorption and hyperemic decalcification, a destructive process termed coalescence. The individual air cells coalesce into a single irregular empyema cavity under high pressure within the mastoid temporal bone.",
+   "say": "Untreated otitis media can cause acute coalescent mastoiditis. Hyperemia and osteoclasts destroy bony air-cell partitions, uniting them into a single pressurized pus cavity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/complications-of-otitis-media-fig1.webp",
+    "alt": "Anatomical diagram showing acute mastoiditis, mastoid air cell coalescence, and subperiosteal abscess spread",
+    "caption": "Coalescent mastoiditis showing destruction of bony trabeculae and subperiosteal abscess formation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The classical clinical triad of acute mastoiditis consists of persistent creamy ear discharge, unremitting deep mastoid pain, and exquisite tenderness localized over the mastoid antrum and tip. Swelling of the periosteum pushes the pinna downward, forward, and outward, obliterating the retroauricular sulcus. High-resolution **computed tomography** of the temporal bone demonstrates loss of the fine mastoid bony trabeculae and clouding of air cells.",
+   "say": "Mastoiditis produces throbbing pain, ear discharge, and mastoid tenderness. Subperiosteal edema pushes the pinna downward and forward, while CT shows loss of bony trabeculae.",
+   "vis": {
+    "kind": "table",
+    "title": "Clinical Hallmarks of Coalescent Mastoiditis",
+    "cols": [
+     "Diagnostic Feature",
+     "Physical Finding",
+     "Pathological Basis",
+     "Differential Consideration"
+    ],
+    "rows": [
+     [
+      "Auricular displacement",
+      "Pinna pushed forward and downward",
+      "Subperiosteal abscess over MacEwen triangle",
+      "Furuncle pushes pinna upward/forward"
+     ],
+     [
+      "Retroauricular groove",
+      "Obliterated by inflammatory edema",
+      "Subperiosteal cortical infiltration",
+      "Preserved in canal furunculosis"
+     ],
+     [
+      "Meatal wall sign",
+      "Sagging of posterosuperior canal wall",
+      "Periostitis of anterior mastoid wall",
+      "Circumferential in otitis externa"
+     ],
+     [
+      "CT temporal bone",
+      "Opacification and trabecular loss",
+      "Osteoclastic bony wall resorption",
+      "Intact septa in simple effusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pus within the coalescent mastoid cavity can erode the outer cortex to form a subperiosteal postauricular abscess over the MacEwen triangle. When pus breaches the thin medial aspect of the mastoid tip into the digastric groove, it tracks into the deep fascial planes of the neck, forming a **Bezold abscess** within the upper sheath of the sternocleidomastoid muscle.",
+   "say": "Eroding the mastoid tip medially, pus tracks along the digastric groove into the sternocleidomastoid muscle sheath, creating a deep cervical Bezold abscess.",
+   "vis": {
+    "kind": "flow",
+    "title": "Anatomical Spread of Subperiosteal Abscesses",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Coalescent Mastoid Empyema"
+     },
+     {
+      "id": "a2",
+      "label": "Perforation of Medial Mastoid Tip"
+     },
+     {
+      "id": "a3",
+      "label": "Bezold Abscess in Sternocleidomastoid Sheath"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Initial medical management of acute coalescent mastoiditis requires urgent hospitalization, intravenous broad-spectrum antipseudomonal and antipneumococcal antibiotics, and high-dose analgesia. If subperiosteal abscesses develop, posterosuperior canal wall sagging persists, or intracranial complications emerge, the patient requires an emergency **cortical mastoidectomy** (Schwartze operation) to exenterate all infected mastoid air cells and establish drainage.",
+   "say": "Hospitalization and intravenous antibiotics are essential. If subperiosteal abscesses or canal sagging emerge, urgent cortical mastoidectomy must clear all infected air cells.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Medical Therapy Alone",
+     "points": [
+      "Indicated for early mastoiditis without subperiosteal abscess.",
+      "Intravenous ceftriaxone or ampicillin-sulbactam.",
+      "Concurrent wide-bore myringotomy for drainage.",
+      "Close neurological and radiological observation."
+     ]
+    },
+    "right": {
+     "title": "Cortical Mastoidectomy (Schwartze)",
+     "points": [
+      "Indicated for coalescent empyema or subperiosteal abscess.",
+      "Exenterates all pneumatic mastoid cells.",
+      "Preserves posterior bony canal wall and middle ear.",
+      "Exposes mastoid antrum, sinodural angle, and tip cells."
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-011",
+  "bk2-ent-012",
+  "bk2-ent-013"
+ ]
+}

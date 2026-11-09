@@ -1,0 +1,231 @@
+{
+ "v": 1,
+ "id": "ent-csom-mucosal-chronic-otitis",
+ "subject": "ent",
+ "module": "ent-csom",
+ "title": "Mucosal Chronic Otitis Media and Retraction Pockets",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Chronic suppurative otitis media is a persistent, long-standing inflammatory infection of the mucoperiosteal lining of the middle ear cleft, defined clinically by recurrent otorrhea through a permanent tympanic membrane perforation lasting longer than six to twelve weeks. Historically and surgically, chronic otitis media is divided into two distinct pathophysiological categories: mucosal (tubotympanic or safe type) and **squamous chronic otitis** (atticoantral or unsafe type).",
+   "say": "Chronic suppurative otitis media features persistent ear discharge through a permanent eardrum perforation. It is categorized into benign mucosal disease and dangerous bone-eroding squamous disease.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cholesteatoma-fig1.webp",
+    "alt": "Clinical otoscopy illustration contrasting central safe perforation with attic unsafe cholesteatoma",
+    "caption": "Otoscopic classification contrasting benign mucosal chronic otitis with dangerous squamous disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Mucosal chronic otitis media involves primarily the anteroinferior middle ear compartments, namely the Eustachian tube, hypotympanum, and lower mesotympanum. The defining anatomical sign is a **central perforation** of the pars tensa, where a continuous rim of fibrous annulus tympanicus remains completely intact around the perforation perimeter. Because the fibrous ring is intact, squamous epithelium from the external canal cannot migrate into the tympanum.",
+   "say": "Mucosal otitis involves the lower middle ear, characterized by a central perforation with an intact fibrous annulus. This intact rim prevents inward migration of keratinizing epithelium.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mucosal (Tubotympanic / Safe)",
+     "points": [
+      "Central perforation with intact fibrous annulus.",
+      "Involves anteroinferior middle ear mucosa.",
+      "Discharge is profuse, mucoid, non-foul, intermittent.",
+      "No bone erosion; zero risk of cholesteatoma."
+     ]
+    },
+    "right": {
+     "title": "Squamous (Atticoantral / Unsafe)",
+     "points": [
+      "Attic or marginal perforation touching bone.",
+      "Involves posterosuperior cleft (attic and antrum).",
+      "Discharge is scanty, purulent, foul-smelling, continuous.",
+      "Osteolytic bone destruction caused by cholesteatoma."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Ear discharge in mucosal chronic otitis media is classically described as profuse, mucoid or mucopurulent, non-foul-smelling, and intermittent. Because the middle ear mucosa contains abundant mucin-secreting goblet cells, discharge is thick and can be stretched into strings, unlike non-mucoid external ear discharge. Episodes of active drainage are typically triggered by water entering the ear during bathing or by an intercurrent **upper respiratory tract infection**.",
+   "say": "Mucosal discharge is profuse, stringy, mucoid, and odorless. It occurs intermittently, triggered by water entering the ear or viral upper respiratory infections.",
+   "vis": {
+    "kind": "table",
+    "title": "Diagnostic Features of Middle Ear Discharge",
+    "cols": [
+     "Feature",
+     "Mucosal Chronic Otitis (Safe)",
+     "Squamous Chronic Otitis (Unsafe)"
+    ],
+    "rows": [
+     [
+      "Volume",
+      "Profuse, voluminous, abundant",
+      "Scanty, thin, persistent"
+     ],
+     [
+      "Character",
+      "Mucoid or mucopurulent (Stringy)",
+      "Purulent, serosanguinous, flakey"
+     ],
+     [
+      "Odor",
+      "Non-foul smelling (No bone destruction)",
+      "Extremely foul / fetid (Bone osteolysis)"
+     ],
+     [
+      "Timing",
+      "Intermittent (Quiescent intervals)",
+      "Continuous and unremitting"
+     ],
+     [
+      "Precipitant",
+      "Water entry or viral nasopharyngitis",
+      "Independent, spontaneous"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bacteriological cultures in chronic otitis media typically isolate a polymicrobial flora dominated by **Pseudomonas aeruginosa**, followed by Staphylococcus aureus, Proteus mirabilis, and Klebsiella pneumoniae. Anaerobic bacteria including Bacteroides fragilis and Peptostreptococcus are also frequently present. First-line therapy for active mucosal otitis consists of thorough aural microsuction toilet and topical antibiotic drops containing ciprofloxacin or ofloxacin.",
+   "say": "Polymicrobial flora in chronic otitis is dominated by Pseudomonas aeruginosa and Staphylococcus aureus. Thorough aural suction and topical quinolone drops provide first-line control.",
+   "vis": {
+    "kind": "flow",
+    "title": "Medical Control of Active Mucosal Chronic Otitis",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Aural Toilet (Microscopic Suction Clearance)"
+     },
+     {
+      "id": "m2",
+      "label": "Culture-Directed Topical Quinolone Drops"
+     },
+     {
+      "id": "m3",
+      "label": "Dry Ear Achieved & Prepare for Tympanoplasty"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Persistent chronic Eustachian tube dysfunction generates sustained negative intratympanic pressure that weakens the elastic tensile strength of the tympanic membrane. The flaccid or atrophic drum is drawn inward toward the medial wall, creating a **tympanic retraction pocket**. Retraction pockets occur in the pars flaccida (attic pockets) or in the posterosuperior quadrant of the pars tensa where collagen fibres are sparse.",
+   "say": "Chronic negative middle ear pressure draws the weakened eardrum inward, forming a retraction pocket. These develop most frequently in the pars flaccida and posterosuperior pars tensa.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/complications-of-otitis-media-fig1.webp",
+    "alt": "Anatomical schematic showing progression of pars tensa and pars flaccida retraction pockets",
+    "caption": "Retraction pocket formation progressing toward bone contact and acquired cholesteatoma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The Sade classification categorizes pars tensa retraction pockets into four progressive anatomical stages. In Stage I, the drum is mildly retracted inward. In Stage II, the drum retracts onto the incus long process and stapes suprastructure. In Stage III, the retracted membrane drapes across the promontory but remains mobile. In Stage IV, termed **adhesive otitis media**, the drum is irreversibly adhered to the promontory.",
+   "say": "The Sade classification grades pars tensa retraction from mild retraction in stage one to incus contact in stage two, promontory touching in stage three, and adhesive otitis in stage four.",
+   "vis": {
+    "kind": "table",
+    "title": "Sade Classification of Pars Tensa Retraction Pockets",
+    "cols": [
+     "Stage",
+     "Anatomical Relationship",
+     "Mobility on Pneumatic Otoscopy",
+     "Clinical Consequence"
+    ],
+    "rows": [
+     [
+      "Stage I",
+      "Mild retraction of drum",
+      "Freely mobile on positive pressure",
+      "Early Eustachian tubal failure"
+     ],
+     [
+      "Stage II",
+      "Retraction contacts incus / stapes",
+      "Partially mobile over ossicles",
+      "Incus long process erosion"
+     ],
+     [
+      "Stage III",
+      "Drum touches cochlear promontory",
+      "Tenting over promontory, not fixed",
+      "Middle ear atelectasis"
+     ],
+     [
+      "Stage IV",
+      "Adhesive otitis (Glued to promontory)",
+      "Completely immobile, fibrous fusion",
+      "Severe conductive deafness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A retraction pocket transforms into a primary acquired **cholesteatoma** when its self-cleaning epithelial migratory mechanism fails. Normally, keratin desquamates outward from the umbo toward the external canal. In a deep, narrow-necked retraction pocket, desquamated squamous keratin scales become entrapped within the pocket lumen. Bacterial colonization hydrolyzes keratin, inducing chronic osteoclastogenesis that lyses surrounding temporal bone.",
+   "say": "When deep retraction pockets trap desquamated keratin, self-cleaning fails. Bacterial enzymes and osteoclasts trigger progressive destruction of the surrounding bony ear structures.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathogenesis of Primary Acquired Cholesteatoma",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Eustachian Failure & Deep Retraction Pocket"
+     },
+     {
+      "id": "c2",
+      "label": "Keratin Retention & Microbial Hydrolysis"
+     },
+     {
+      "id": "c3",
+      "label": "Enzymatic Osteolysis of Ossicles & Mastoid"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Once active drainage has been arrested and the ear remains dry for at least six to twelve weeks, definitive surgical restoration is achieved by **myringoplasty**. The tympanic membrane perforation is closed using an autologous graft, most commonly temporalis muscle fascia or tragal perichondrium. Re-establishing an intact, vibrating membrane restores middle ear sound protection and prevents recurrent water-induced contamination.",
+   "say": "Once mucosal discharge has dried for six to twelve weeks, myringoplasty closes the perforation using temporalis fascia or perichondrium, restoring hearing and water resistance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Underlay Grafting Technique",
+     "points": [
+      "Graft placed medial to fibrous annulus and malleus.",
+      "Technically simpler with lower risk of lateralization.",
+      "Avoids anterior blunting of sulcus angle.",
+      "Universal gold standard for posterior and central holes."
+     ]
+    },
+    "right": {
+     "title": "Overlay Grafting Technique",
+     "points": [
+      "Graft placed lateral to fibrous layer after removing squamous skin.",
+      "Technically demanding; risk of epithelial pearls.",
+      "Risk of anterior angle blunting and graft lateralization.",
+      "Useful for total perforations and anterior marginal holes."
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "bk2-ent-021",
+  "bk2-ent-022",
+  "bk2-ent-023"
+ ]
+}
