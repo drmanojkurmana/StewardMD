@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-tuberculosis-mdr-tb",
+ "subject": "community-medicine",
+ "module": "cm-tuberculosis",
+ "title": "MDR-TB: Definitions, Regimens and Programme Care",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Naming resistance precisely",
+   "tx": "**Multidrug resistant TB** means resistance to at least isoniazid and rifampicin together, the two strongest first line drugs. Rifampicin resistance alone is managed as its practical proxy. Pre extensively drug resistant disease adds a fluoroquinolone, and extensively drug resistant disease adds one more key drug such as bedaquiline or linezolid under current definitions.",
+   "say": "Multidrug resistance means isoniazid plus rifampicin lost together. Add a fluoroquinolone for pre-XDR, then bedaquiline or linezolid for XDR. Definitions decide regimen eligibility.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Category", "Resistance pattern"],
+    "rows": [
+     ["Rifampicin resistant", "Rifampicin, with or without others"],
+     ["Multidrug resistant", "Isoniazid plus rifampicin"],
+     ["Pre extensively resistant", "Above plus any fluoroquinolone"],
+     ["Extensively resistant", "Above plus bedaquiline or linezolid group"]
+    ]
+   }
+  },
+  {
+   "title": "How resistance is manufactured",
+   "tx": "**Acquired resistance** grows when bacilli face drug pressure they can survive: irregular supply, wrong combinations, poor adherence, malabsorption or adding one drug to a failing regimen. Each error selects mutants that then transmit as primary resistance to contacts. Programmes therefore treat adherence support, fixed dose combinations and uninterrupted supply as resistance prevention, not clerical detail.",
+   "say": "Resistance is manufactured by weak treatment: gaps, wrong combinations, single drug additions. Mutants selected in one patient transmit to the next. Supply and adherence work is prevention.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Inadequate drug pressure"},
+     {"id": "b", "label": "Resistant mutants selected"},
+     {"id": "c", "label": "Treatment failure continues"},
+     {"id": "d", "label": "Resistant strain transmitted"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Finding resistance: the test ladder",
+   "tx": "**Line probe assays** read resistance to isoniazid, rifampicin and second line drugs from smear positive sputum or culture within days, confirmed and extended by phenotypic culture drug susceptibility testing and targeted sequencing where available. Every rifampicin resistant result triggers this ladder automatically, alongside HIV testing, baseline bloods, audiometry and electrocardiography for regimen safety.",
+   "say": "A rifampicin resistant report starts the ladder: line probe assay, culture susceptibility, safety baselines. Nobody waits for failure before mapping the full resistance pattern.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/mdr-tuberculosis-fig1.webp",
+    "alt": "Line probe assay strip showing bands indicating resistance to isoniazid and rifampicin",
+    "caption": "A line probe assay strip confirming isoniazid and rifampicin resistance. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "The old long regimen and its costs",
+   "tx": "The **conventional long regimen** ran eighteen to twenty four months with an injectable agent such as kanamycin or capreomycin, bringing hearing loss, renal injury, daily injection pain and high default. Cure hovered near half of patients in many cohorts. That toxicity and duration, not drug price alone, drove the global shift to all oral shorter regimens.",
+   "say": "Twenty months with daily injections, deafness and kidney injury, curing about half. Toxicity and default, more than price, forced the move to all oral regimens.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Injectable era",
+     "points": ["18 to 24 months duration", "Daily painful injections", "Hearing and renal toxicity", "Cure near one in two"]
+    },
+    "right": {
+     "title": "All oral era",
+     "points": ["Six to nine month options", "No injectable agent", "Better adherence support", "Higher success reported"]
+    }
+   }
+  },
+  {
+   "title": "BPaLM: the six month answer",
+   "tx": "The **BPaLM regimen** combines bedaquiline, pretomanid, linezolid and moxifloxacin for about six months in eligible rifampicin resistant and multidrug resistant cases, dropping moxifloxacin when fluoroquinolone resistance is proven. Trial and programme cohorts report success near nine in ten, transforming counselling from endurance of two toxic years to completion of two oral seasons.",
+   "say": "Bedaquiline, pretomanid, linezolid and moxifloxacin for six months, moxifloxacin dropped if fluoroquinolone resistance shows. Success near ninety percent rewrites the counselling conversation.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Drug", "Letter"],
+    "rows": [
+     ["Bedaquiline", "B"],
+     ["Pretomanid", "Pa"],
+     ["Linezolid", "L"],
+     ["Moxifloxacin", "M, dropped if resistant"]
+    ]
+   }
+  },
+  {
+   "title": "Safety monitoring on new drugs",
+   "tx": "**Bedaquiline and linezolid toxicity** shape follow up: bedaquiline prolongs the QT interval, so electrocardiograms and potassium and magnesium checks accompany interacting drugs, while linezolid causes anaemia, thrombocytopenia and peripheral or optic neuropathy needing blood counts and symptom review. Pretomanid adds hepatic monitoring. Active drug safety monitoring is a regimen component, not an optional audit.",
+   "say": "Watch the QT interval on bedaquiline and blood counts on linezolid. Correct potassium and magnesium, review neuropathy symptoms monthly. Safety monitoring belongs inside the regimen.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Drug", "Monitor"],
+    "rows": [
+     ["Bedaquiline", "ECG, potassium, magnesium"],
+     ["Linezolid", "Blood counts, neuropathy review"],
+     ["Pretomanid", "Liver function tests"],
+     ["Moxifloxacin", "ECG, glucose, tendon symptoms"]
+    ]
+   }
+  },
+  {
+   "title": "Nikshay, nutrition and adherence support",
+   "tx": "**Nikshay Poshan Yojana** pays a monthly nutritional support amount by direct benefit transfer to notified TB patients through treatment, recognising that food insecurity drives default. Treatment supporters, digital adherence tools and family counselling surround the regimen, and every visit reviews weight, adverse effects and sputum conversion. Social support is dosed as deliberately as the drugs.",
+   "say": "Monthly nutrition money reaches notified patients directly because hunger defaults treatment. Supporters, weight checks and sputum reviews run beside the drugs at every visit.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Support", "Purpose"],
+    "rows": [
+     ["Nutrition cash transfer", "Fight food insecurity default"],
+     ["Treatment supporter", "Daily adherence witness"],
+     ["Weight and sputum review", "Track response early"],
+     ["Adverse effect review", "Catch toxicity before dropout"]
+    ]
+   }
+  },
+  {
+   "title": "Contacts, children and preventive therapy",
+   "tx": "**Household contacts** of a multidrug resistant index case need symptom screening, radiography and evaluation for preventive therapy guided by the index resistance pattern, increasingly fluoroquinolone based under specialist advice. Children are evaluated actively rather than watched, because progression to severe disease is faster and confirmation is harder. Infection control at home covers cough hygiene, ventilation and sleeping separation.",
+   "say": "Screen every household contact actively, children fastest. Preventive choices follow the index case resistance pattern under specialist guidance, with ventilation and cough hygiene at home.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Index MDR case notified"},
+     {"id": "b", "label": "Household contacts listed"},
+     {"id": "c", "label": "Symptoms, radiograph, tests"},
+     {"id": "d", "label": "Treatment or preventive therapy"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Outcomes and the failure vocabulary",
+   "tx": "**Treatment outcomes** in drug resistant cohorts use the same disciplined language as drug sensitive care: cured, treatment completed, failure, death, loss to follow up and not evaluated, assigned from bacteriology and duration rules. Rising success on oral regimens still depends on early resistance detection, because every month on an ineffective regimen costs lung, money and transmission.",
+   "say": "Outcome words stay disciplined: cured, completed, failure, died, lost. Oral regimens succeed best when resistance is found early, before ineffective months destroy lung and spread strain.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Outcome", "Meaning"],
+    "rows": [
+     ["Cured", "Bacteriological proof of response"],
+     ["Failure", "Regimen stopped for non response"],
+     ["Loss to follow up", "Interrupted beyond definition"],
+     ["Not evaluated", "Outcome unknown to programme"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

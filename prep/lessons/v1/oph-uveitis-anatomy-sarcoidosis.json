@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "id": "oph-uveitis-anatomy-sarcoidosis",
+ "subject": "ophthalmology",
+ "module": "oph-anterior-uveitis",
+ "title": "Ocular Sarcoidosis",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Sarcoidosis** causes multisystem non caseating granulomas with ocular disease in anterior, intermediate, posterior or orbital compartments, sometimes presenting before systemic diagnosis. Lacrimal gland enlargement, conjunctival nodules available for biopsy and lid lesions give accessible tissue routes. Eye findings therefore direct systemic confirmation strategy in granulomatous clinics.",
+   "say": "Multisystem granuloma together gives ocular sarcoid across compartments at presentation in uveitis clinics for adults systemically over time. Accessible nodules give biopsy route additionally. Eye gives systemic direction often.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sarcoidosis-fig1.webp",
+    "alt": "Sarcoidosis histopathology diagram relevant to ocular granulomatous disease.",
+    "caption": "Posterior fundus findings in granulomatous uveitis and choroiditis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Mutton-fat precipitates** with iris nodules and trabecular involvement give anterior sarcoid pattern, pressure rising from trabecular granuloma or synechiae mechanisms separately assessed. Snowballs and periphlebitis posteriorly complete panuveitis potential in same patient. Compartment inventory at first visit therefore maps sarcoid extent before treatment intensity chosen.",
+   "say": "Compartment inventory together gives sarcoid extent mapping at first visit in granulomatous clinics for treatment intensity decisions. Trabecular pressure gives mechanism separation additionally. Posterior company gives systemic intensity.",
+   "vis": {
+    "kind": "table",
+    "title": "Sarcoid compartments",
+    "cols": [
+     "Compartment",
+     "Sarcoid signs"
+    ],
+    "rows": [
+     [
+      "Anterior",
+      "Mutton fat, iris nodules"
+     ],
+     [
+      "Intermediate",
+      "Snowballs inferior vitreous"
+     ],
+     [
+      "Posterior",
+      "Periphlebitis wax drippings"
+     ],
+     [
+      "Adnexa",
+      "Lacrimal and conjunctival granuloma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chest imaging bilateral hilar lymphadenopathy supports sarcoid where eye suggests it, biopsy of conjunctiva, lacrimal, skin or bronchial tissue confirming non caseating granuloma by accessibility. Enzyme markers assist but never replace tissue where feasible in teaching. **Accessible biopsy** choice is sarcoid workup skill examinations reward over panel recitation.",
+   "say": "Hilar nodes together give chest support in ocular sarcoid workup at joint clinics for adults with granuloma patterns. Accessible tissue gives confirmation preference additionally. Markers give assistance only.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tissue accessible sarcoid",
+     "points": [
+      "Conjunctival or lacrimal nodule",
+      "Skin lesion present",
+      "Biopsy confirms granuloma"
+     ]
+    },
+    "right": {
+     "title": "Tissue inaccessible start",
+     "points": [
+      "Chest imaging pattern only",
+      "Bronchial route considered",
+      "Markers support, not prove"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Lofgren and Heerfordt** systemic syndromes accompany sarcoid spectra, Heerfordt giving uveitis with parotid swelling, fever and facial palsy as uveoparotid fever historically. Parotid plus uveitis therefore triggers sarcoid chest pathway even without mutton fat reading. Syndrome recognition converts eye plus gland swelling into systemic diagnosis efficiently.",
+   "say": "Parotid company together gives Heerfordt recognition in uveitis assessment at systemic clinics for febrile adults characteristically. Chest pathway gives confirmation route additionally. Gland gives syndrome value.",
+   "vis": {
+    "kind": "flow",
+    "title": "Ocular sarcoid confirmation",
+    "nodes": [
+     {
+      "id": "eye",
+      "label": "Granulomatous eye pattern"
+     },
+     {
+      "id": "chest",
+      "label": "Chest imaging reviewed"
+     },
+     {
+      "id": "tissue",
+      "label": "Accessible tissue biopsied"
+     },
+     {
+      "id": "team",
+      "label": "Systemic sarcoid pathway"
+     }
+    ],
+    "edges": [
+     [
+      "eye",
+      "chest"
+     ],
+     [
+      "chest",
+      "tissue"
+     ],
+     [
+      "tissue",
+      "team"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Posterior sarcoid vasculitis leaks and occludes with macular oedema as vision endpoint, systemic corticosteroid and immunosuppression treating eye and lung together. Isolated anterior disease may manage topically while posterior mandates systemic intensity by compartment rule. **Posterior equals systemic** intensity phrase repeats across sarcoid and Behcet lessons deliberately.",
+   "say": "Posterior involvement together gives systemic intensity in sarcoid care at joint clinics for adults with vitritis over time. Macular oedema gives vision endpoint additionally. Anterior isolation gives topical possibility."
+  },
+  {
+   "tx": "Neurosarcoid with optic nerve granuloma or cranial neuropathy extends ocular sarcoid to neuro ophthalmology in neuro batch, facial palsy with uveitis bridging Heerfordt there. Optic disc swelling in sarcoid therefore images brain and orbit before lumbar decisions. **Disc plus sarcoid** is neuro pathway trigger in examinations.",
+   "say": "Disc swelling together gives neuro pathway trigger in sarcoid disease at tertiary assessment for adults with uveitis urgently. Brain imaging gives precedence additionally. Palsy company gives syndrome link.",
+   "vis": {
+    "kind": "table",
+    "title": "Sarcoid escalation triggers",
+    "cols": [
+     "Trigger",
+     "Escalation"
+    ],
+    "rows": [
+     [
+      "Posterior vasculitis",
+      "Systemic suppression team"
+     ],
+     [
+      "Optic disc swelling",
+      "Neuro imaging pathway"
+     ],
+     [
+      "Lacrimal orbital mass",
+      "Biopsy accessible tissue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ethnic and age patterns assist but never gate workup: sarcoid peaks young to middle adults with higher prevalence in some ancestries, tuberculosis mimicking in endemic regions needing exclusion before suppression. Dual granuloma exclusion therefore repeats infection cover logic. **Endemic caution** keeps sarcoid steroid from worsening tuberculous lookalike disease.",
+   "say": "Endemic caution together gives tuberculosis exclusion before sarcoid suppression at granuloma clinics in high burden regions always. Ancestry gives assistance only additionally. Suppression safety gives sequence value.",
+   "vis": {
+    "kind": "table",
+    "title": "Granuloma exclusion pair",
+    "cols": [
+     "Exclusion",
+     "Method"
+    ],
+    "rows": [
+     [
+      "Tuberculosis",
+      "Immunology, imaging, context"
+     ],
+     [
+      "Syphilis",
+      "Serology routine panel"
+     ],
+     [
+      "Sarcoid support",
+      "Chest nodes plus tissue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: mutton fat plus nodules anteriorly, snowballs intermediately, wax posteriorly and glands adnexally in one systemic disease. Chest and accessible tissue confirm, posterior systemises therapy. **Uveoparotid fever** name answers Heerfordt in examinations directly. Joint review with chest and rheumatology teams completes sarcoid care beyond the eye clinic alone.",
+   "say": "Compartment spread together gives sarcoid recognition across eye at presentation in granulomatous clinics for adults reliably. Accessible tissue gives confirmation additionally. Posterior gives systemic intensity always.",
+   "vis": {
+    "kind": "table",
+    "title": "Sarcoid anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Heerfordt",
+      "Uveitis, parotid, fever, palsy"
+     ],
+     [
+      "Confirmation",
+      "Chest nodes, accessible biopsy"
+     ],
+     [
+      "Posterior disease",
+      "Systemic therapy intensity"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Heerfordt syndrome",
+   "b": "Uveoparotid fever: uveitis with parotid swelling, fever and facial palsy in sarcoidosis."
+  },
+  {
+   "f": "Sarcoid confirmation route",
+   "b": "Chest hilar nodes plus biopsy of accessible conjunctival, lacrimal or skin tissue."
+  },
+  {
+   "f": "Posterior sarcoid rule",
+   "b": "Periphlebitis or vasculitis mandates systemic therapy intensity with joint teams."
+  }
+ ],
+ "keys": [
+  "Eye may trigger sarcoid systemic diagnosis",
+  "Exclude tuberculosis before suppression endemically",
+  "Disc swelling in sarcoid images neuro pathway"
+ ]
+}

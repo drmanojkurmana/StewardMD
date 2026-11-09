@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-regional-injuries-skull-fractures",
+ "subject": "forensic-medicine",
+ "module": "fmt-regional-injuries",
+ "title": "Skull Fractures: Ring, Pond, Gutter and Contrecoup Injuries",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Fissured and comminuted fractures",
+   "tx": "A **fissured fracture** is a linear crack through the skull from a broad striking surface, while a **comminuted fracture** breaks bone into three or more fragments by two or more intersecting lines. Without displacement the comminuted pattern resembles a spider web or mosaic. Heavy iron bars, thick sticks, kicks and crushing vehicle injuries cause them. Fissured lines often radiate outward from a comminuted centre where the force landed.",
+   "say": "Linear cracks are fissured fractures, and three or more fragments in a spider web pattern make a comminuted fracture.",
+   "vis": {"kind": "table", "cols": ["Fracture", "Pattern", "Typical force"], "rows": [["Fissured", "Single linear crack", "Broad blunt surface"], ["Comminuted", "Three or more fragments", "Crush or repeated blows"], ["Depressed", "Fragment driven inward", "Localised heavy blow"], ["Diastatic", "Suture separated", "Blow in a young person"]]}
+  },
+  {
+   "title": "Pond fractures only in infants",
+   "tx": "A **pond or indented fracture** is a simple dent in the skull, like a dent in a ping pong ball, produced by an obstetric forceps blade or a blunt impact against a protruding object. It occurs only in infant skulls. The inner table is not fractured, though the outer table may fissure around the dent's rim. The dura is not torn and the brain usually escapes damage, which separates pond fractures from depressed fractures of adults.",
+   "say": "Infant skulls dent like ping pong balls in pond fractures, sparing inner table, dura and brain in most cases.",
+   "vis": {"kind": "compare", "left": {"title": "Pond fracture", "points": ["Infant skulls only", "Smooth dent, ping pong type", "Inner table intact", "Brain usually undamaged"]}, "right": {"title": "Depressed fracture", "points": ["Any age with force", "Fragment displaced inward", "Dura may be torn", "Brain injury likely beneath"]}}
+  },
+  {
+   "title": "Gutter fractures from oblique bullets",
+   "tx": "When part of the skull thickness is scooped away by an oblique bullet, a **gutter fracture** results: a channel in the outer table with an irregular depressed fracture of the inner table beneath it. Dura and brain may be torn under the gutter. The pattern tells the examiner the bullet travelled tangentially rather than perforating, and the gutter's direction records the bullet's path across the head.",
+   "say": "An oblique bullet ploughs a gutter through the skull table, and the gutter points along its tangential path.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bullet strikes skull obliquely"}, {"id": "b", "label": "Outer table scooped into a gutter"}, {"id": "c", "label": "Inner table fractures irregularly"}, {"id": "d", "label": "Dura and brain may be torn"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Ring fracture around the foramen magnum",
+   "tx": "A **ring fracture** runs three to five centimetres outside the foramen magnum at the back and sides of the skull, separating the skull from the spine. It follows falls from a height onto the feet or buttocks, where force travels up the spinal column. A forceful blow on the chin in a traffic accident can also produce it through the jaw joints, usually without fracturing the mandible itself. Ring fractures are rare.",
+   "say": "Falling onto feet or buttocks can ring the foramen magnum and part skull from spine, and a chin blow can do the same.",
+   "vis": {"kind": "table", "cols": ["Mechanism", "Force route", "Result"], "rows": [["Fall onto feet", "Up the spinal column", "Ring around foramen magnum"], ["Fall onto buttocks", "Up the spinal column", "Skull separated from spine"], ["Blow on the chin", "Through jaw joints", "Ring fracture, jaw intact"], ["Blow on vertex", "Down through the base", "Ring with depressed vault"]]}
+  },
+  {
+   "title": "Base of skull fractures and CSF leaks",
+   "tx": "**Fractures of the skull base** arise by direct force at base level, general skull deformation, extension from the vault, or force transmitted through spine or face. Anterior fossa fractures bleed from nose and mouth; a torn cribriform plate with dura and nasal mucosa leaks cerebrospinal fluid and even brain into the nose, inviting leptomeningitis from ascending bacteria. Most basal lines converge on the pituitary fossa and open into basal foramina.",
+   "say": "Basal fractures leak blood and spinal fluid from the nose, and torn cribriform dura opens the road to meningitis.",
+   "vis": {"kind": "compare", "left": {"title": "Anterior fossa signs", "points": ["Blood from nose and mouth", "CSF rhinorrhoea possible", "Roof of orbit fractured", "Cranial nerve damage common"]}, "right": {"title": "How basal lines behave", "points": ["Converge on pituitary fossa", "Open into basal foramina", "Follow the petrous buttress", "Longitudinal or transverse splits"]}}
+  },
+  {
+   "title": "Coup injury at the point of impact",
+   "tx": "Damage directly beneath the blow is the **coup injury**: the skull bends inward at impact, contusing the cortex under it and sometimes fracturing into it. Coup lesions mark where force was applied, which is why their position reconstructs the direction of assault. A moving head striking a surface and a stationary head struck by a weapon both produce coup injury, though the accompanying patterns differ, as the next step shows.",
+   "say": "The bruise under the blow is the coup injury, and its site maps exactly where the force was applied.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Blow lands on the head"}, {"id": "b", "label": "Skull bends inward locally"}, {"id": "c", "label": "Cortex contuses beneath it"}, {"id": "d", "label": "Coup lesion marks the site"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Contrecoup injury opposite the blow",
+   "tx": "When a moving head is suddenly arrested, the brain travels on and strikes the skull interior opposite the impact, producing **contrecoup injury** at the pole facing away from the blow. Local distortion of the skull and negative pressure at the opposite pole add to the damage. The line joining coup and contrecoup centres indicates the direction of force. Falls backward therefore tear the frontal and temporal poles against the rough anterior skull base.",
+   "say": "A falling head bruises the brain opposite the impact, so frontal pole damage follows a blow to the back of the head.",
+   "vis": {"kind": "table", "cols": ["Impact site", "Coup lesion", "Contrecoup lesion"], "rows": [["Back of head, fall", "Occipital, often small", "Frontal and temporal poles"], ["Forehead strike", "Frontal pole", "Occipital pole, often minor"], ["Side of head", "Under the blow", "Opposite temporal lobe"], ["Moving head arrested", "Variable", "Prominent and larger"]]}
+  },
+  {
+   "title": "Fractures that imitate weapon injury",
+   "tx": "Two mimics trap beginners. Small independent ossification centres leave **wormian bones** in the skull, and separation of one leaves an aperture easily mistaken for a weapon fracture. Sutural or diastatic fractures separate sutures, usually the sagittal, in young persons after blunt blows or raised intracranial pressure. Perforating fractures by contrast are clean holes from firearms, daggers or axes whose size matches the weapon cross section.",
+   "say": "A wormian bone gap imitates a fracture, suture separation marks young skulls, and clean holes match the weapon that punched them.",
+   "vis": {"kind": "compare", "left": {"title": "Mimics and variants", "points": ["Wormian bone aperture", "Diastatic sagittal suture split", "Blow out orbital fracture", "Expressed shattering in blasts"]}, "right": {"title": "True perforating fracture", "points": ["Firearm or pointed weapon", "Both tables pierced cleanly", "Hole matches weapon section", "Track continues into brain"]}}
+  },
+  {
+   "title": "Describing skull fractures for court",
+   "tx": "A court ready description records **type, site, direction and associated brain injury** for every fracture line. State whether lines radiate from a comminuted centre, whether fragments displaced into brain, and whether the base is involved with fluid leaks or nerve damage. Photograph before cleaning blood away, because clots hide entry wounds and fracture lines alike. The pattern as a whole often decides between fall, assault and firearm mechanisms.",
+   "say": "Record fracture type, radiation, displacement and base signs with photographs, because the whole pattern names the mechanism.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Photograph before cleaning"}, {"id": "b", "label": "Trace every fracture line"}, {"id": "c", "label": "Note displacement into brain"}, {"id": "d", "label": "Match pattern to mechanism"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}

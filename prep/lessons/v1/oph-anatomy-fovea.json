@@ -1,0 +1,227 @@
+{
+ "v": 1,
+ "id": "oph-anatomy-fovea",
+ "subject": "ophthalmology",
+ "module": "oph-anatomy",
+ "title": "Fovea and Ciliary Body",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The **fovea** is the central pit of the macula where inner retinal layers are displaced aside so light strikes densely packed cones without scattering through overlying tissue. Its central foveola contains only cones and their processes over pigment epithelium, giving maximal acuity in the central degrees. Absent retinal vessels in the foveal avascular zone removes vascular shadow from the image entirely.",
+   "say": "The central pit displaces inner layers aside so that light reaches densely packed cones directly. Dense cones over pigment epithelium therefore give maximal acuity in the central degrees. Absent retinal vessels remove vascular shadow from the foveal image entirely.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/achromatopsia-fig1.webp",
+    "alt": "Cross section of foveal retina with cone region and layered pit structure.",
+    "caption": "Foveal pit and cone photoreceptors cross-section. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Macula anatomy scales by size: macula about five and a half millimetres, fovea about one and a half, foveola about a third of a millimetre and umbo at the pit centre. Xanthophyll pigment yellows the macula and gives it the lutea name, filtering blue light protectively. **Temporal location** about four millimetres from disc places the macula where fixation targets fall during fundus examination.",
+   "say": "Size scales together give a descending sequence from macula through fovea to foveola at the centre. Yellow xanthophyll pigment gives blue light filtering protectively across the macular region. Temporal distance from the disc gives location of fixation anatomy during examination.",
+   "vis": {
+    "kind": "table",
+    "title": "Macular size scale",
+    "cols": [
+     "Zone",
+     "Teaching size"
+    ],
+    "rows": [
+     [
+      "Macula",
+      "About five and a half millimetres"
+     ],
+     [
+      "Fovea",
+      "About one and a half millimetres"
+     ],
+     [
+      "Foveola",
+      "About a third of a millimetre"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Each foveal cone connects near privately through midget bipolar to midget ganglion cells, preserving spatial detail without convergence pooling. Periphery converges hundreds of rods per ganglion cell for sensitivity at acuity expense, the inverse economy. **Visual acuity** is therefore foveal cone wiring expressed clinically, and any foveal oedema, hole or scar drops acuity out of proportion to lesion size elsewhere.",
+   "say": "Private cone wiring gives fine spatial detail without the pooling convergence of periphery. Foveal lesions therefore give acuity loss far beyond their size expectation clinically. Acuity testing is an expression of foveal cone wiring functionally at the chart.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Foveal wiring",
+     "points": [
+      "One cone, private ganglion line",
+      "Maximal acuity, low sensitivity"
+     ]
+    },
+    "right": {
+     "title": "Peripheral wiring",
+     "points": [
+      "Many rods pooled per ganglion",
+      "Maximal sensitivity, low acuity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A sagittal cut through the **ciliary body** shows two zones with opposite surgical reputations. In front, the pars plicata carries seventy or so folded processes whose fenestrated capillaries and double epithelium secrete aqueous and anchor zonular fibres. Behind it the pars plana lies flat and relatively avascular. That flat stretch, beginning three and a half to four millimetres behind the limbus, is the standard entry route for vitreoretinal surgery.",
+   "say": "Ring tissue behind iris secretes aqueous and suspends lens by zonules. Folded processes produce fluid while the flat part gives surgical entry.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m164-oph-anatomy-fovea.webp",
+    "alt": "Sagittal anterior uvea section showing ciliary processes of pars plicata giving way to the flat pars plana, marked three and a half to four millimetres behind the limbus.",
+    "caption": "The flat pars plana behind the folded processes is the safe surgical doorway into the vitreous, measured from the visible limbus outside. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The **ciliary body** is the ring of tissue behind the iris root bearing ciliary processes that secrete aqueous and zonules that suspend the lens for accommodation. Its pars plicata carries folded processes with fenestrated capillaries and double epithelium, while pars plana provides the safe surgical entry zone for vitrectomy ports. Pigmented and non pigmented epithelial layers face each other apex to apex from optic cup embryology.",
+   "say": "Ring tissue behind iris secretes aqueous and suspends lens by zonules. Folded processes produce fluid while flat part gives surgical entry. Double epithelium faces apex to apex embryologically."
+  },
+  {
+   "tx": "Ciliary muscle contraction releases zonular tension so the elastic lens rounds for near focus, the accommodative act lost gradually in presbyopia as lens hardens. Parasympathetic supply through third nerve and Edinger Westphal nucleus drives the muscle, linking pupil near response to focus. **Accommodation triad** of convergence, miosis and lens rounding fires together for near targets physiologically.",
+   "say": "Muscle contraction releases zonules and rounds lens for near focus. Parasympathetic drive links pupil and focus responses. Near triad fires convergence, miosis and rounding together.",
+   "vis": {
+    "kind": "flow",
+    "title": "Accommodation sequence",
+    "nodes": [
+     {
+      "id": "mus",
+      "label": "Ciliary muscle contracts"
+     },
+     {
+      "id": "zon",
+      "label": "Zonules slacken"
+     },
+     {
+      "id": "lens",
+      "label": "Lens rounds elastically"
+     },
+     {
+      "id": "near",
+      "label": "Near focus achieved"
+     }
+    ],
+    "edges": [
+     [
+      "mus",
+      "zon"
+     ],
+     [
+      "zon",
+      "lens"
+     ],
+     [
+      "lens",
+      "near"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Aqueous production by ciliary processes combines ultrafiltration and active secretion, reduced by beta blockade and carbonic anhydrase inhibition in glaucoma therapy. Production continues independent of outflow resistance, so pressure rises when trabecular exit blocks despite normal secretion. **Ciliary shutdown** in severe inflammation reverses the problem into hypotony, showing the same epithelium as both pressure source and pressure casualty.",
+   "say": "Ciliary processes produce aqueous humour by filtration combined with active secretion continuously. Blocked exit therefore raises pressure despite completely normal production rates. Inflammatory shutdown of the same epithelium produces low pressure conversely.",
+   "vis": {
+    "kind": "table",
+    "title": "Ciliary pressure extremes",
+    "cols": [
+     "State",
+     "Pressure result"
+    ],
+    "rows": [
+     [
+      "Overproduction rare",
+      "Minimal pressure effect"
+     ],
+     [
+      "Outflow block",
+      "Pressure rises"
+     ],
+     [
+      "Shutdown",
+      "Pressure falls"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pars plana entry about three to four millimetres behind limbus avoids lens and retina during vitrectomy because no folded processes or retina extend there in phakic adults. Ciliary body detachment or cyclodialysis cleft after trauma opens suprachoroidal drainage and drops pressure profoundly. **Cyclodestructive procedures** deliberately ablate processes in refractory glaucoma, trading production for pressure when outflow surgery has failed.",
+   "say": "The flat ciliary zone gives safe vitrectomy entry several millimetres behind the limbus. Traumatic clefts give profound pressure loss by opening suprachoroidal drainage abnormally. Process ablation gives a trade of production for pressure in refractory glaucoma.",
+   "vis": {
+    "kind": "table",
+    "title": "Ciliary body clinical zones",
+    "cols": [
+     "Zone",
+     "Clinical use"
+    ],
+    "rows": [
+     [
+      "Pars plicata",
+      "Aqueous secretion, drug targets"
+     ],
+     [
+      "Pars plana",
+      "Vitrectomy entry, three to four millimetres back"
+     ],
+     [
+      "Whole body ablation",
+      "Refractory glaucoma last resort"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Foveal disease and ciliary disease meet in examination technique: acuity tests fovea, pressure tests ciliary production against outflow, and both need dilated fundus plus tomography for structure. A normal acuity never excludes peripheral disease, just as normal pressure never excludes glaucomatous damage already done. **Structure and function** pairing prevents both false reassurances in clinic.",
+   "say": "Acuity tests fovea while pressure tests production against outflow balance. Normal values never exclude structural damage already present. Paired structure function assessment prevents false reassurance.",
+   "vis": null
+  },
+  {
+   "tx": "Anchors for this lesson are pit, processes and pars plana. Pit gives acuity by displaced layers and private wiring, processes give aqueous and accommodation, flat part gives surgical entry. Foveal lesions shrink acuity disproportionately, ciliary lesions move pressure in either direction. **Avascular zone** enlargement on angiography grades macular ischaemia in diabetic and venous disease.",
+   "say": "Pit, processes and flat part together give organisation of foveal and ciliary anatomy for examinations. Foveal lesions give acuity loss far beyond their size expectation in clinic. Avascular zone enlargement gives grading of macular ischaemia on angiography.",
+   "vis": {
+    "kind": "table",
+    "title": "Fovea and ciliary anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Foveola",
+      "Cones only, maximal acuity"
+     ],
+     [
+      "Processes",
+      "Secrete aqueous, hold zonules"
+     ],
+     [
+      "Pars plana",
+      "Safe vitrectomy entry zone"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Foveola composition",
+   "b": "Cones and processes only over pigment epithelium, no inner layers or vessels; maximal acuity."
+  },
+  {
+   "f": "Accommodation mechanism",
+   "b": "Ciliary contraction slackens zonules, elastic lens rounds; parasympathetic third nerve drive with near triad."
+  },
+  {
+   "f": "Pars plana entry",
+   "b": "About three to four millimetres behind limbus, safe vitrectomy zone without processes or retina."
+  }
+ ],
+ "keys": [
+  "Acuity is foveal private wiring expressed clinically",
+  "Ciliary processes both source pressure and suffer shutdown",
+  "Avascular zone size grades macular ischaemia"
+ ]
+}

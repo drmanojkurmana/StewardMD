@@ -1,0 +1,226 @@
+{
+ "key": "ped-chronic-respiratory-childhood-asthma",
+ "v": 1,
+ "module": "ped-chronic-respiratory",
+ "subject": "paediatrics",
+ "title": "Childhood Asthma, Stepwise Therapy and Cystic Fibrosis",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Chronic airway inflammation drives variable expiratory airflow limitation and bronchial hyperresponsiveness. The diagnosis of **childhood asthma** relies upon recognizing recurrent episodes of wheezing, breathlessness, chest tightness, and nighttime cough triggered by viral infections, exercise, cold air, or aeroallergens. In children aged five years and older, spirometry demonstrates reversible airflow obstruction, defined as an increase in forced expiratory volume in one second (FEV1) of twelve percent or greater after bronchodilator inhalation.",
+   "say": "Childhood asthma features recurrent wheeze, breathlessness, and nocturnal cough triggered by viral infections or exercise. Spirometry shows twelve percent or greater FEV1 reversibility after salbutamol.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-misc-asthma-attack.webp",
+    "alt": "Physical examination signs and objective severity markers during an acute pediatric asthma attack.",
+    "caption": "Clinical signs of acute childhood asthma exacerbation including pulsus paradoxus, tachypnoea, and silent chest. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Inhaled corticosteroid aerosol deposition in young children requires appropriate interface devices. The optimal delivery technique utilizes a **pressurized metered-dose inhaler spacer**, which decelerates high-velocity aerosol particles, reduces oral impaction, and maximizes intrapulmonary alveolar deposition. Children under four years require a spacer paired with a silicone face mask, while children aged four and older use a mouthpiece, taking five to six tidal breaths per puff.",
+   "say": "A metered-dose inhaler with a spacer is the best delivery device for children, decreasing throat deposition and improving lung delivery. Children under four use a mask; older children use a mouthpiece.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spacer with Face Mask (<4 Years)",
+     "points": [
+      "Tight seal over nose and mouth without leaks",
+      "Child takes 5 to 6 normal tidal breaths per puff",
+      "Wash face and rinse mouth after corticosteroid",
+      "Never actuate multiple puffs into spacer at once"
+     ]
+    },
+    "right": {
+     "title": "Spacer with Mouthpiece (>=4 Years)",
+     "points": [
+      "Lips closed tightly around mouthpiece",
+      "Slow deep inhalation followed by 10-second breath-hold",
+      "Higher intrapulmonary deposition than face mask",
+      "Avoids facial steroid deposition and cataracts"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "International guidelines structure chronic pharmacological management according to control levels. Global Initiative for Asthma outlines **stepwise asthma therapy**: Step 1 utilizes as-needed low-dose inhaled corticosteroids or SABA; Step 2 establishes daily maintenance low-dose inhaled corticosteroids (fluticasone or budesonide) or montelukast; Step 3 adds a long-acting beta2-agonist (LABA) or increases to medium-dose corticosteroids; and Steps 4 and 5 incorporate high-dose therapies and biological agents.",
+   "say": "Stepwise asthma management advances from as-needed relievers to daily low-dose inhaled steroids, adding long-acting beta agonists if control is incomplete. Regular review guides step-down.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "GINA Step Level",
+     "Preferred Controller Medication",
+     "Alternative Controller",
+     "Reliever Medication"
+    ],
+    "rows": [
+     [
+      "Step 1",
+      "As-needed low-dose ICS with formoterol",
+      "Low-dose ICS taken with SABA",
+      "Inhaled salbutamol as needed"
+     ],
+     [
+      "Step 2",
+      "Daily low-dose inhaled corticosteroid (ICS)",
+      "Leukotriene receptor antagonist (LTRA)",
+      "Inhaled salbutamol as needed"
+     ],
+     [
+      "Step 3",
+      "Low-dose ICS plus LABA combination",
+      "Medium-dose ICS alone or ICS + LTRA",
+      "Inhaled salbutamol as needed"
+     ],
+     [
+      "Step 4",
+      "Medium-dose ICS plus LABA combination",
+      "High-dose ICS plus tiotropium",
+      "Inhaled salbutamol as needed"
+     ],
+     [
+      "Step 5",
+      "High-dose ICS-LABA plus add-on biologic",
+      "Anti-IgE (omalizumab) / anti-IL5",
+      "Inhaled salbutamol as needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Exocrine epithelial transport defects provoke multi-organ viscid secretions and chronic lung damage. The autosomal recessive disorder **cystic fibrosis CFTR defect** results from mutations in the Cystic Fibrosis Transmembrane Conductance Regulator gene on chromosome 7q31, most commonly the delta-F508 deletion. Defective apical chloride and bicarbonate conductance with hyperabsorption of sodium dehydrates airway surface liquid, producing thick, tenacious mucus that cripples mucociliary clearance.",
+   "say": "Cystic fibrosis stems from CFTR chloride channel mutations on chromosome 7, usually delta-F508. Dehydrated, viscous secretions cause bronchiectasis, pancreatic failure, and meconium ileus.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cystic-fibrosis-paed-fig1.webp",
+    "alt": "Multisystem pathology of pediatric cystic fibrosis across lungs, pancreas, liver, and intestine.",
+    "caption": "Cystic fibrosis organ pathology illustrating bronchiectasis, pancreatic exocrine atrophy, and meconium ileus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Neonatal presentation frequently features distal intestinal obstruction secondary to inspissated meconium. Approximately twenty percent of newborns with cystic fibrosis present with **meconium ileus obstruction**, characterized by abdominal distension, bilious emesis, and failure to pass meconium within forty-eight hours of birth. Contrast enema demonstrates a pathognomonic microcolon with pellets of inspissated meconium in the distal ileum, relieved by water-soluble diatrizoate meglumine enemas.",
+   "say": "Meconium ileus presents in twenty percent of newborns with cystic fibrosis as bilious vomiting and obstipation. Contrast enemas show a microcolon with impacted meconium pellets.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Meconium Ileus Signs",
+     "points": [
+      "Failure to pass meconium by 48 hours",
+      "Distended loops of bowel with ground-glass soap bubble sign",
+      "Contrast enema shows unused, narrow microcolon",
+      "Therapeutic gastrografin enema or surgical enterostomy"
+     ]
+    },
+    "right": {
+     "title": "Post-Neonatal Gastrointestinal Signs",
+     "points": [
+      "Exocrine pancreatic insufficiency in 85%",
+      "Malabsorptive steatorrhoea and severe failure to thrive",
+      "Rectal prolapse in toddlers secondary to bulky stools",
+      "Deficiency of fat-soluble vitamins (A, D, E, K)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Stimulated sweat electrolyte quantification provides the gold standard laboratory confirmation of cystic fibrosis. Performing the **pilocarpine iontophoresis sweat test** stimulates localized eccrine sweating using pilocarpine, collecting sweat on filter paper for coulometric chloride analysis. A sweat chloride concentration of sixty millimoles per litre or greater on two separate occasions definitively confirms cystic fibrosis, while thirty to fifty-nine millimoles per litre represents an intermediate borderline result.",
+   "say": "Quantitative pilocarpine sweat testing is the gold standard for cystic fibrosis. Sweat chloride of sixty millimoles per litre or greater on two occasions confirms the diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sweat Chloride Concentration",
+     "Diagnostic Interpretation",
+     "Underlying CFTR Function",
+     "Clinical Action"
+    ],
+    "rows": [
+     [
+      "60 mmol/L or greater",
+      "Definitive Cystic Fibrosis",
+      "Severe CFTR channel dysfunction",
+      "Initiate multidisciplinary CF care"
+     ],
+     [
+      "30 to 59 mmol/L",
+      "Intermediate / Equivocal",
+      "Partial residual CFTR conductance",
+      "Comprehensive CFTR gene sequencing"
+     ],
+     [
+      "Less than 30 mmol/L",
+      "Normal (CF Unlikely)",
+      "Normal epithelial chloride transport",
+      "Investigate other causes of bronchiectasis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic endobronchial bacterial colonization dictates pulmonary disease progression and ultimate life expectancy. Initial childhood airway colonization with Staphylococcus aureus and Haemophilus influenzae is superseded by chronic **Pseudomonas aeruginosa colonization**, which transitions into an alginate-producing mucoid phenotype forming antibiotic-resistant biofilms. Chronic infection accelerates bronchiectasis and respiratory decline, requiring aggressive eradication protocols with inhaled tobramycin or nebulized colistin.",
+   "say": "Mucoid Pseudomonas aeruginosa colonizes cystic fibrosis airways, forming thick biofilms that drive bronchiectasis. Inhaled tobramycin and colistin are essential for eradication and maintenance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Childhood Pathogens (<6 Years)",
+     "points": [
+      "Staphylococcus aureus (sensitive and MRSA)",
+      "Non-typeable Haemophilus influenzae",
+      "Treat with oral co-amoxiclav or flucloxacillin",
+      "Prevent irreversible early airway architectural damage"
+     ]
+    },
+    "right": {
+     "title": "Late Childhood & Adolescence Pathogens",
+     "points": [
+      "Mucoid Pseudomonas aeruginosa (alginate biofilm)",
+      "Burkholderia cepacia complex (cepacia syndrome)",
+      "Achromobacter xylosoxidans and non-tuberculous mycobacteria",
+      "Requires inhaled aminoglycosides and IV ceftazidime"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Novel small-molecule modulators restore gating and protein folding to mutant CFTR channels. Transformative modern therapy deploys **CFTR modulator therapies**, including the channel potentiator ivacaftor and chaperone correctors lumacaftor, tezacaftor, and elexacaftor. Triple combination therapy (elexacaftor-tezacaftor-ivacaftor) significantly improves lung function, drops sweat chloride concentrations below the diagnostic threshold, improves nutritional status, and slows long-term pulmonary architectural decline.",
+   "say": "Small-molecule CFTR modulators like ivacaftor and elexacaftor correct the underlying channel defect, dropping sweat chloride and dramatically improving lung function.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Modality",
+     "Specific Pharmacological Agent",
+     "Mechanism of Action",
+     "Primary Clinical Outcome"
+    ],
+    "rows": [
+     [
+      "CFTR potentiator",
+      "Ivacaftor",
+      "Increases channel open-probability",
+      "Corrects G551D gating mutations"
+     ],
+     [
+      "Triple CFTR corrector",
+      "Elexacaftor / Tezacaftor / Ivacaftor",
+      "Improves F508del folding and trafficking",
+      "Dramatically raises FEV1 in F508del"
+     ],
+     [
+      "Mucolytic enzyme",
+      "Recombinant dornase alfa (DNase)",
+      "Digests extracellular neutrophil DNA in mucus",
+      "Reduces sputum viscosity and exacerbations"
+     ],
+     [
+      "Pancreatic enzyme",
+      "Enteric-coated pancrelipase",
+      "Delivers lipase, protease, and amylase",
+      "Reverses malabsorption and steatorrhoea"
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-regional-injuries-bumper-fracture",
+ "subject": "forensic-medicine",
+ "module": "fmt-regional-injuries",
+ "title": "Bumper Fractures, Impact Phases and Run Over Injuries",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Three phases of pedestrian injury",
+   "tx": "Pedestrian impacts unfold in **three impact phases**. Primary impact injuries mark the first part struck by the vehicle. Secondary impact injuries follow as the vehicle throws or carries the body against its own parts, such as the bonnet and windscreen. Secondary or tertiary injuries arise when the victim strikes the ground or other objects. Diagramming the location, nature and extent of every injury reconstructs which phase produced it.",
+   "say": "First the vehicle strikes, then its bodywork strikes again, then the ground strikes, and each phase leaves its own injury set.",
+   "vis": {"kind": "table", "cols": ["Phase", "Body strikes", "Typical injuries"], "rows": [["Primary impact", "Bumper, fender, grille", "Leg fractures at bumper height"], ["Secondary impact", "Bonnet and windscreen", "Trunk, head and arm injuries"], ["Secondary injuries", "Ground or objects", "Abrasions, skull fractures"], ["Run over phase", "Wheel passes over body", "Crush and tyre print injuries"]]}
+  },
+  {
+   "title": "The bumper fracture of the tibia",
+   "tx": "The signature primary injury is the **bumper fracture**, usually of the tibia, where the struck fragment displaces forward. The fracture is typically spiral or wedge shaped: the base of the triangular fragment marks the site of impact, and its apex points in the direction the vehicle was travelling. If the leg was lifted, the fracture is often transverse instead. In children the bumper reaches higher and usually fractures the femur.",
+   "say": "A wedge fracture of the tibia points its apex along the vehicle's travel, while children take the bumper on the femur.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bumper strikes the leg"}, {"id": "b", "label": "Tibia fractures, fragment forward"}, {"id": "c", "label": "Wedge base marks impact site"}, {"id": "d", "label": "Apex points along vehicle travel"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Reading walking from bumper levels",
+   "tx": "Details of level refine the story under **bumper height interpretation**. Braking dips the vehicle front, so injuries land lower than the static bumper height. Bumper fractures at different levels on the two legs, or present on one leg only, suggest the victim was walking or running, with the fracture higher in the leg that was planted on the ground. A sideways oriented victim shows fracture in one leg alone.",
+   "say": "Unequal bumper levels mean unequal leg positions, so a walking victim's planted leg takes the higher fracture.",
+   "vis": {"kind": "compare", "left": {"title": "Both legs planted", "points": ["Fractures at similar levels", "Victim standing square", "Bilateral leg injuries", "Matches static bumper height"]}, "right": {"title": "Walking or sideways", "points": ["Levels differ between legs", "One leg may be spared", "Planted leg fractured higher", "Braking lowers both levels"]}}
+  },
+  {
+   "title": "Secondary impact on bonnet and windscreen",
+   "tx": "After the leg strike, the body wraps onto the car in **secondary impact injuries**. If the foot stays fixed, the buttocks and back meet the bonnet and the spine can fracture dislocate, sometimes transecting cord and thoracic aorta. Falling on the hood can shear skin and fat off the thigh and buttock muscle into a pocket that fills with blood invisibly. Head strike on the windscreen adds skull and facial fractures.",
+   "say": "The body wraps onto bonnet and windscreen next, shearing thigh pockets and fracturing spine, ribs and skull.",
+   "vis": {"kind": "table", "cols": ["Secondary contact", "Structure hit", "Injury produced"], "rows": [["Buttocks on bonnet", "Lumbar or thoracic spine", "Fracture dislocation"], ["Thigh sheared on hood", "Skin and fat plane", "Hidden blood pocket"], ["Head on windscreen", "Skull and face", "Fractures and lacerations"], ["Chest on vehicle front", "Aorta below the arch", "Rupture from pressure surge"]]}
+  },
+  {
+   "title": "Rear impact and run over patterns",
+   "tx": "Struck from behind, a pedestrian shows **parallel linear tears of the abdomen and groin** from overstretching of skin, dry, yellow and bloodless, with cervical spine fracture or dislocation at the skull base from whiplash. Run over adds the crushing weight of the wheel: skin overstretches and splits, internal organs rupture under direct pressure, and a tyre tread patterned abrasion may print across the back, tying the vehicle to the body.",
+   "say": "Rear strikes tear groin skin in dry parallel lines and whip the neck, while run over crushes organs and prints the tyre.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Vehicle strikes from behind"}, {"id": "b", "label": "Skin overstretches and tears"}, {"id": "c", "label": "Neck whips, cervical injury"}, {"id": "d", "label": "Wheel crushes with tread print"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Speed decides the body trajectory",
+   "tx": "Vehicle speed writes the trajectory in **speed dependent pedestrian trajectories**. At twenty kilometres per hour the person is simply thrown away. At forty to fifty, a strike below the centre of gravity scoops the victim up onto the bonnet, injuring elbows, shoulders and head, before sliding off sideways. At eighty to one hundred the pedestrian is thrown higher, may strike the roof, somersault, and land on the road behind the car.",
+   "say": "Twenty throws aside, fifty scoops onto the bonnet, and a hundred can somersault the victim clean over the roof.",
+   "vis": {"kind": "table", "cols": ["Vehicle speed", "Body trajectory", "Injury emphasis"], "rows": [["About 20 km per hour", "Thrown away from vehicle", "Impact site injuries"], ["40 to 50 km per hour", "Scooped onto bonnet", "Head, elbow, shoulder injuries"], ["80 to 100 km per hour", "Thrown over the roof", "Severe multisystem injuries"], ["High front bus or truck", "Pushed forward at hip level", "Pelvis and trunk primary damage"]]}
+  },
+  {
+   "title": "Children and high fronted vehicles",
+   "tx": "Geometry changes everything for small victims in **child pedestrian impacts**. A car's front strikes a child above the centre of gravity, so the child is pushed down and run over rather than scooped up. Bumper fractures hit the femur, not the tibia. A fast bus, truck or van with a straight high front strikes an adult at hip or shoulder level and pushes the body forward in front of the vehicle, where it may then be run over on stopping.",
+   "say": "Children are knocked down and run over because the bumper meets them above their centre of gravity, at the femur.",
+   "vis": {"kind": "compare", "left": {"title": "Adult, car front", "points": ["Strike below centre of gravity", "Scooped onto bonnet", "Tibia bumper fracture", "Slides off sideways"]}, "right": {"title": "Child or high vehicle", "points": ["Strike above centre of gravity", "Pushed down, run over", "Femur bumper fracture", "Pelvis and trunk damage"]}}
+  },
+  {
+   "title": "Waddell triad in child pedestrians",
+   "tx": "The classic child pattern taught for examinations is the **Waddell triad**: a femoral fracture from the bumper strike, an intrathoracic or intra abdominal injury as the chest or abdomen meets the vehicle front, and a head injury as the head strikes vehicle or ground. Finding all three in a child should immediately suggest a pedestrian vehicle impact and prompt a search for the tyre or grille pattern that identifies the vehicle class.",
+   "say": "Femur fracture plus chest or abdominal injury plus head injury is the Waddell triad of the child pedestrian.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bumper fractures the femur"}, {"id": "b", "label": "Vehicle front injures trunk"}, {"id": "c", "label": "Head strikes vehicle or ground"}, {"id": "d", "label": "Triad suggests pedestrian impact"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Occupant injuries and the second collision",
+   "tx": "Inside the vehicle, the **second collision** injures occupants when their bodies strike interior structures after the vehicle itself hits a barrier. Dashboard and windscreen impacts fracture the face and skull, and the most extensive fractures come from a head striking a flat surface. In pedestrians the head is injured twice, once by the vehicle and once by the road, so skull fractures involve almost all parts of the skull, especially the base.",
+   "say": "Occupants are injured by the second collision inside the car, and pedestrian heads are struck by both vehicle and road.",
+   "vis": {"kind": "table", "cols": ["Victim", "First strike", "Second strike"], "rows": [["Pedestrian head", "Vehicle bodywork", "Road surface"], ["Front seat occupant", "Vehicle hits barrier", "Dashboard and windscreen"], ["Rear impact occupant", "Seat drives body back", "Neck whiplash motion"], ["Run over victim", "Primary leg impact", "Wheel crush of trunk"]]}
+  }
+ ],
+ "quiz": []
+}

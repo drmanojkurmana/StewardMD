@@ -1,0 +1,246 @@
+{
+  "v": 1,
+  "module": "phm-pharmacokinetics",
+  "subject": "pharmacology",
+  "title": "Pharmacokinetic Drug Redistribution and Area Under the Concentration-Time Curve",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The rapid termination of pharmacological effect resulting from the movement of a drug from highly perfused vessel-rich organs to less perfused bulk tissue reservoirs is termed **redistribution**. Rather than hepatic biotransformation or renal excretion, physical diffusion down a concentration gradient terminates the clinical effect. This unique pharmacokinetic phenomenon occurs exclusively with highly lipid-soluble drugs administered rapidly via intravenous injection, most famously exemplified by intravenous general anaesthetics.",
+      "say": "Redistribution terminates drug action by transferring lipophilic drugs from brain tissue into muscle and adipose depots.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Redistribution termination",
+          "points": [
+            "Driven by differential tissue blood perfusion",
+            "Drug remains intact inside the body",
+            "Occurs within minutes after intravenous bolus",
+            "Governs recovery after single thiopental bolus"
+          ]
+        },
+        "right": {
+          "title": "Metabolic clearance termination",
+          "points": [
+            "Driven by hepatic enzymatic biotransformation",
+            "Drug is irreversibly destroyed or conjugated",
+            "Requires hours to clear systemic drug burden",
+            "Governs recovery after prolonged continuous infusion"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Intravenous bolus injection of the ultra-short-acting barbiturate thiopental sodium produces immediate loss of consciousness within twenty seconds as high cerebral blood flow rapidly equilibrates the drug into the brain. Over the subsequent five to fifteen minutes, plasma concentrations decline sharply as the drug redistributes into well-perfused skeletal muscle and ultimately into adipose tissue. This rapid tissue translocation causes clinical awakening from **thiopental anaesthesia** despite more than ninety percent of the administered dose still residing in the body.",
+      "say": "Awakening from thiopental anaesthesia occurs within ten minutes as drug diffuses from the brain into muscle reservoirs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "iv",
+            "label": "Intravenous thiopental bolus injection"
+          },
+          {
+            "id": "brain",
+            "label": "Vessel-rich brain rapid peak equilibration (<1 min)"
+          },
+          {
+            "id": "muscle",
+            "label": "Redistribution into intermediate skeletal muscle (5-15 min)"
+          },
+          {
+            "id": "fat",
+            "label": "Terminal slow uptake into adipose reservoir"
+          },
+          {
+            "id": "wake",
+            "label": "Patient awakens despite 90% body drug burden remaining"
+          }
+        ],
+        "edges": [
+          [
+            "iv",
+            "brain"
+          ],
+          [
+            "brain",
+            "muscle"
+          ],
+          [
+            "muscle",
+            "fat"
+          ],
+          [
+            "muscle",
+            "wake"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "While a single intravenous dose of thiopental exhibits a brief duration of action due to rapid redistribution, repeated boluses or prolonged continuous infusions saturate the peripheral skeletal muscle and adipose storage depots. Once tissue storage capacity is exhausted, the concentration gradient driving redistribution collapses, leaving elimination entirely dependent on slow hepatic metabolism. This accumulation markedly prolongs clinical recovery, a concept formalized in anaesthesia as the **context-sensitive half-time**.",
+      "say": "Repeated doses saturate muscle and fat reservoirs, eliminating redistribution gradients and prolonging recovery dependent on liver metabolism.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Single bolus injection",
+          "points": [
+            "Tissue depots completely empty",
+            "Steep concentration gradient into muscle",
+            "Prompt awakening within 10 minutes",
+            "Context-sensitive half-time is brief"
+          ]
+        },
+        "right": {
+          "title": "Prolonged continuous infusion",
+          "points": [
+            "Tissue depots fully saturated with drug",
+            "No concentration gradient for redistribution",
+            "Recovery prolonged for days",
+            "Context-sensitive half-time increases markedly"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Redistribution governs the clinical duration of several other lipophilic central nervous system depressants, including intravenous diazepam and propofol. When intravenous diazepam is administered for status epilepticus, central anticonvulsant activity terminates within thirty minutes due to extensive vascular redistribution into peripheral tissues, necessitating prompt initiation of a long-acting antiepileptic like fosphenytoin to prevent **seizure recurrence**. Propofol similarly displays rapid clinical recovery driven by extensive initial redistribution.",
+      "say": "Intravenous diazepam redistributes out of the brain within thirty minutes, necessitating longer-acting antiepileptics to prevent seizure recurrence.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-diazepam.webp",
+        "alt": "Diazepam pharmacokinetic and distribution profile",
+        "caption": "Diazepam pharmacokinetic illustration showing rapid cerebral entry and subsequent redistribution into peripheral tissue compartments."
+      }
+    },
+    {
+      "tx": "The definite integral of plasma drug concentration plotted as a function of time from time zero to infinity represents the **area under the curve**. Designated as AUC, this critical pharmacokinetic metric reflects the total amount of active unchanged drug that reaches the systemic circulation following administration. AUC serves as the gold-standard mathematical foundation for quantifying total body clearance, calculating absolute bioavailability, and demonstrating regulatory bioequivalence between pharmaceutical formulations.",
+      "say": "Area under the curve measures total systemic drug exposure over time, serving as the basis for clearance and bioavailability.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "graph",
+            "label": "Plasma concentration versus time curve"
+          },
+          {
+            "id": "trapezoid",
+            "label": "Trapezoidal integration of area segments"
+          },
+          {
+            "id": "auc",
+            "label": "Total Area Under the Curve (AUC0-inf)"
+          },
+          {
+            "id": "metrics",
+            "label": "Derivation of total clearance and bioavailability"
+          }
+        ],
+        "edges": [
+          [
+            "graph",
+            "trapezoid"
+          ],
+          [
+            "trapezoid",
+            "auc"
+          ],
+          [
+            "auc",
+            "metrics"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Total systemic body clearance is inversely proportional to total drug exposure, determined by dividing the administered intravenous dose by the resultant exposure area. This fundamental mathematical relationship, the **clearance formula**, states that clearance equals dose divided by AUC. When clearance is compromised by hepatic cirrhosis or acute tubular necrosis, total drug clearance declines, causing the plasma concentration-time curve to elevate and AUC to expand proportionately.",
+      "say": "Systemic clearance equals dose divided by area under the curve, decreasing in organ failure as exposure area expands.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal organ clearance",
+          "points": [
+            "High clearance capacity",
+            "Rapid plasma elimination",
+            "Standard baseline AUC area",
+            "Prevents toxic accumulation"
+          ]
+        },
+        "right": {
+          "title": "Impaired organ clearance",
+          "points": [
+            "Reduced hepatic or renal clearance",
+            "Slowed elimination rate",
+            "Markedly expanded AUC area",
+            "Demands maintenance dose reduction"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Determining the fraction of an orally administered drug that reaches the systemic circulation requires comparing extravascular exposure to an identical intravenous dose. The mathematical relationship, designated as the **bioavailability equation**, calculates absolute bioavailability (F) by dividing oral AUC by intravenous AUC, multiplied by the ratio of intravenous dose to oral dose. This calculation allows clinical pharmacologists to evaluate the efficiency of gastrointestinal absorption and determine oral dose equivalencies.",
+      "say": "Absolute bioavailability compares oral to intravenous area under the curve, adjusting for dose differences.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Dosing route",
+          "Administered dose",
+          "Measured AUC",
+          "Calculated systemic bioavailability (F)"
+        ],
+        "rows": [
+          [
+            "Intravenous (IV)",
+            "100 mg",
+            "50 mg*h/L",
+            "1.0 (100% reference baseline)"
+          ],
+          [
+            "Oral tablet",
+            "100 mg",
+            "35 mg*h/L",
+            "0.70 (70% absolute bioavailability)"
+          ],
+          [
+            "Oral capsule",
+            "200 mg",
+            "70 mg*h/L",
+            "0.70 (identical 70% bioavailability)"
+          ],
+          [
+            "Rectal suppository",
+            "100 mg",
+            "25 mg*h/L",
+            "0.50 (50% bioavailability)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pathological alterations in organ function and drug interactions substantially alter the total area under the concentration-time curve, precipitating adverse clinical consequences. Co-administration of a metabolic enzyme inhibitor blunts drug elimination, increasing the terminal half-life and dramatically elevating the **systemic exposure**. Conversely, malabsorption syndromes, diarrhoea, or co-administration of binding resins decrease oral AUC, leading to subtherapeutic drug levels and catastrophic treatment failure in organ transplant recipients.",
+      "say": "Enzyme inhibition expands systemic exposure area and risks toxicity, whereas malabsorption reduces exposure, causing treatment failure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Causes of increased AUC",
+          "points": [
+            "Cytochrome P450 enzyme inhibition",
+            "Renal acute tubular dysfunction",
+            "Hepatic cirrhosis with portosystemic shunting",
+            "P-glycoprotein efflux pump blockade"
+          ]
+        },
+        "right": {
+          "title": "Causes of decreased AUC",
+          "points": [
+            "Cytochrome P450 enzyme induction",
+            "Severe gastrointestinal malabsorption",
+            "Bowel resection or short gut syndrome",
+            "Chelation by multivalent metal cations"
+          ]
+        }
+      }
+    }
+  ]
+}

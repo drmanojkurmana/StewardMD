@@ -519,7 +519,7 @@
             }
           });
         }
-        var startOpts = { language: opts.language || navigator.language || "en-US", partialResults: true, popup: false, maxResults: 5 };
+        var startOpts = { language: opts.language || navigator.language || "en-US", partialResults: opts.partialResults !== false, popup: false, maxResults: opts.maxResults || 5 };
         if (opts.onDevice === "prefer" || opts.onDevice === "require") startOpts.onDevice = opts.onDevice;
         self.lastSpeechMode = null;
         return SP.start(startOpts);

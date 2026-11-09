@@ -1,0 +1,311 @@
+{
+ "v": 1,
+ "id": "cm-air-housing-noise-air-pollution-indicators",
+ "subject": "community-medicine",
+ "module": "cm-air-housing-noise",
+ "title": "Air Pollution Indicators, Smog Types, and Thermal Comfort Indices",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Principal indicators of air pollution",
+   "tx": "Monitoring urban atmospheric contamination relies on measuring established chemical and particulate markers classified under the **air pollution indicator criteria**. The primary global index is sulfur dioxide concentration, reflecting fossil fuel combustion and industrial emissions, monitored alongside smoke index, suspended particulate matter comprising PM10 and PM2.5 fractions, nitrogen dioxide, ground-level ozone, and carbon monoxide to calculate composite national air quality indices.",
+   "say": "Monitoring city air quality depends on chemical and particulate markers. Sulfur dioxide is the classic fuel combustion indicator, tracked alongside fine inhalable particulates and nitrogen oxides.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pollutant indicator",
+     "Source of emissions",
+     "Pathological health effect"
+    ],
+    "rows": [
+     [
+      "Sulfur dioxide (SO2)",
+      "Coal and heavy oil combustion",
+      "Bronchoconstriction, chronic bronchitis"
+     ],
+     [
+      "Particulate matter (PM2.5)",
+      "Vehicular exhaust, construction dust",
+      "Alveolar penetration, systemic inflammation"
+     ],
+     [
+      "Nitrogen dioxide (NO2)",
+      "Automobile traffic, thermal plants",
+      "Airway hyperresponsiveness, emphysema"
+     ],
+     [
+      "Carbon monoxide (CO)",
+      "Incomplete internal combustion",
+      "Carboxyhaemoglobinemia and tissue hypoxia"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Characteristics of classical reducing smog",
+   "tx": "Severe atmospheric pollution events produce hazardous aerosol hazes categorised into distinct chemical types. The first is **classical London reducing smog**, which occurs in cold, humid climates during winter temperature inversions when heavy coal smoke mixes with dense fog droplets; high concentrations of sulfur dioxide and sulfurous acid droplets generate reducing atmospheric conditions that provoke lethal exacerbations of chronic obstructive pulmonary disease.",
+   "say": "Classical London smog forms in cold, foggy weather when coal smoke and sulfur dioxide accumulate under winter inversions. It acts as a reducing chemical fog that damages bronchial airways.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classical London smog",
+     "points": [
+      "Cold, foggy, winter conditions",
+      "Coal smoke and sulfur dioxide",
+      "Reducing chemical atmosphere",
+      "Bronchial irritation and elderly mortality"
+     ]
+    },
+    "right": {
+     "title": "Photochemical Los Angeles smog",
+     "points": [
+      "Warm, sunny, dry climate",
+      "Automobile exhaust hydrocarbons and NOx",
+      "Oxidising atmosphere with ozone",
+      "Eye irritation and respiratory distress"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Dynamics of photochemical oxidising smog",
+   "tx": "In warm, sunny metropolitan basins with heavy automobile traffic, nitrogen oxides and volatile unburned hydrocarbons undergo solar ultraviolet irradiation under **photochemical oxidising smog mechanisms**. Solar photons drive complex secondary reactions yielding powerful oxidants including tropospheric ozone, peroxyacetyl nitrate, and acrolein; this oxidising haze causes intense conjunctival stinging, lacrimation, chest tightness, and accelerated degradation of synthetic rubber and botanical crop foliage.",
+   "say": "Photochemical smog develops in sunny cities from vehicular exhaust. Sunlight converts nitrogen oxides and hydrocarbons into ozone and peroxyacetyl nitrate, causing severe eye and lung irritation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Automobile exhaust: NOx and hydrocarbons"
+     },
+     {
+      "id": "s2",
+      "label": "Solar ultraviolet irradiation in warm basin"
+     },
+     {
+      "id": "s3",
+      "label": "Secondary photochemical reactions produce ozone and PAN"
+     },
+     {
+      "id": "s4",
+      "label": "Conjunctival irritation and airway bronchospasm"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2"
+     ],
+     [
+      "s2",
+      "s3"
+     ],
+     [
+      "s3",
+      "s4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Design of the Kata thermometer",
+   "tx": "Evaluating the thermal microenvironment of factory floors and domestic dwellings employs the **Kata thermometer instrument design**, invented by Leonard Hill. The device consists of an alcohol-filled glass thermometer featuring a massive cylindrical reservoir bulb and two distinct calibration markings at one hundred degrees and ninety-five degrees Fahrenheit, designed primarily to measure the cooling power of air rather than mere ambient dry temperature.",
+   "say": "The Kata thermometer uses a large alcohol bulb with marks at one hundred and ninety-five degrees Fahrenheit. It measures air cooling power through convection, radiation, and evaporation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dry Kata thermometer",
+     "points": [
+      "Uncovered polished glass bulb",
+      "Measures cooling by radiation and convection",
+      "Calculates air velocity in enclosed rooms"
+     ]
+    },
+    "right": {
+     "title": "Wet Kata thermometer",
+     "points": [
+      "Bulb covered with wet cotton muslin sleeve",
+      "Measures cooling by radiation, convection, evaporation",
+      "Reflects physiological human sweating capacity"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Kata thermometer operation and cooling power",
+   "tx": "To take a measurement, the bulb is warmed in hot water until the alcohol meniscus rises into the upper expansion chamber, wiped dry, and suspended in the study environment. Recording the exact seconds required for the meniscus to fall from one hundred to ninety-five degrees Fahrenheit allows sanitarians to determine **cooling power numerical computation**, dividing the factory-stamped instrument factor by the measured cooling time to yield millicalories per square centimetre per second.",
+   "say": "Warming the bulb in water raises the alcohol into the top reservoir. Timing the drop between calibration marks yields the cooling power after dividing the instrument factor by elapsed seconds.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "k1",
+      "label": "Heat bulb in hot water above 100 F"
+     },
+     {
+      "id": "k2",
+      "label": "Wipe bulb and suspend at work station"
+     },
+     {
+      "id": "k3",
+      "label": "Time alcohol drop from 100 to 95 F (T sec)"
+     },
+     {
+      "id": "k4",
+      "label": "Cooling power H = Factor F divided by T"
+     }
+    ],
+    "edges": [
+     [
+      "k1",
+      "k2"
+     ],
+     [
+      "k2",
+      "k3"
+     ],
+     [
+      "k3",
+      "k4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Concepts of effective temperature",
+   "tx": "Because human sensation of warmth depends on concurrent interactions between air temperature, humidity, and air movement, biometeorologists created the **effective temperature thermal scale**. This empirical index defines the subjective temperature sensation of an enclosed environment by equating it to still, saturated air at the same numerical temperature that induces an identical thermal perception in clothed subjects resting at sedentary occupations.",
+   "say": "Effective temperature combines air temperature, relative humidity, and air velocity into a single score. It matches subjective comfort against still, saturated air producing the same feeling.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Thermal environmental parameter",
+     "Measurement instrument",
+     "Physiological sensory impact"
+    ],
+    "rows": [
+     [
+      "Dry-bulb air temperature",
+      "Standard mercury thermometer",
+      "Convective and sensible heat exchange"
+     ],
+     [
+      "Wet-bulb humidity",
+      "Sling psychrometer / hygrometer",
+      "Evaporative sweating potential of skin"
+     ],
+     [
+      "Air movement velocity",
+      "Dry Kata / vane anemometer",
+      "Boundary layer convective heat dissipation"
+     ],
+     [
+      "Radiant thermal energy",
+      "Vernon black globe thermometer",
+      "Infrared radiative absorption and emission"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Corrected effective temperature adjustment",
+   "tx": "Standard effective temperature charts fail when workers operate near glowing industrial furnaces or uninsulated metal roofs emitting substantial infrared radiation. To rectify this limitation, sanitarians utilize **corrected effective temperature evaluation**, replacing the standard dry-bulb reading with the temperature of a Vernon black globe thermometer; this adjustment integrates mean radiant temperature into nomograms to predict true physiological heat stress in heavy manufacturing settings.",
+   "say": "When workers face radiant heat from industrial furnaces, standard charts underestimate danger. Corrected effective temperature replaces dry air readings with black globe thermometer values.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Standard effective temperature",
+     "points": [
+      "Uses standard dry-bulb thermometer",
+      "Omits radiant heat from hot machinery",
+      "Underestimates heat stress in foundries"
+     ]
+    },
+    "right": {
+     "title": "Corrected effective temperature",
+     "points": [
+      "Uses 15 cm matte black globe",
+      "Integrates radiant infrared energy",
+      "Accurate for steel mills and glass works"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Predicted 4-hour sweat rate index",
+   "tx": "In industrial ergonomics and military field operations, the most reliable physiological metric of environmental heat stress is the **predicted four-hour sweat rate**, abbreviated as P4SR. Developed by McArdle, this mathematical index calculates the total volume of sweat that fit, acclimatised young men will secrete over four hours of sustained work under specified combinations of thermal conditions, clothing insulation, and metabolic physical exertion.",
+   "say": "The predicted four-hour sweat rate measures physiological heat stress. It calculates how many litres of sweat fit workers will produce during four hours of physical labour.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Assess wet-bulb, globe temp, and air speed"
+     },
+     {
+      "id": "p2",
+      "label": "Input metabolic workload and clothing type"
+     },
+     {
+      "id": "p3",
+      "label": "Derive P4SR value from standard nomogram"
+     },
+     {
+      "id": "p4",
+      "label": "Enforce work-rest cycles if P4SR exceeds safety"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ],
+     [
+      "p3",
+      "p4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Thresholds and physiological limits of P4SR",
+   "tx": "When interpreting occupational surveys, a P4SR value of one to three litres reflects tolerable thermal strain, whereas a value of four point five litres represents the **upper physiological endurance limit** for healthy, heat-acclimatised young workers. Exceeding four point five litres leads rapidly to severe water and electrolyte depletion, progressive thermoregulatory collapse, heat exhaustion, and life-threatening heat stroke unless mandatory rest cycles and chilled fluid replacement are immediately enforced.",
+   "say": "A four-hour sweat rate of four point five litres is the absolute upper limit of human endurance. Beyond this threshold, workers face dehydration, heat exhaustion, and fatal heat stroke.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "P4SR sweat volume",
+     "Occupational classification",
+     "Required administrative intervention"
+    ],
+    "rows": [
+     [
+      "Under 1.0 litre",
+      "Comfortable conditions",
+      "Normal work routines without restriction"
+     ],
+     [
+      "1.0 to 3.0 litres",
+      "Moderate thermal load",
+      "Routine hydration breaks and light clothing"
+     ],
+     [
+      "3.0 to 4.5 litres",
+      "Severe thermal stress",
+      "Mandatory rest pauses and electrolyte fluids"
+     ],
+     [
+      "Above 4.5 litres",
+      "Dangerous physiological strain",
+      "Immediate work cessation; cooling stations"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

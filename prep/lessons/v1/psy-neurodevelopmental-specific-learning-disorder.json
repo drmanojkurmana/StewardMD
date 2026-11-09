@@ -1,0 +1,267 @@
+{
+ "v": 1,
+ "id": "psy-neurodevelopmental-specific-learning-disorder",
+ "subject": "psychiatry",
+ "module": "psy-neurodevelopmental",
+ "title": "Specific Learning Disorders and Childhood Communication Deficits",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Specific learning disorder**, abbreviated SLD, is diagnosed when a child exhibits persistent difficulties learning and using academic skills despite targeted interventions for at least six months. Affected academic performance lies substantially below developmental expectations on individualized standardized achievement testing, in the setting of normal intellect.",
+   "say": "Specific learning disorder involves academic achievement substantially below cognitive capability, persisting for six months despite targeted remedial help.",
+   "vis": {
+    "kind": "table",
+    "title": "Specific Learning Disorder Subtypes",
+    "cols": [
+     "Academic Domain",
+     "Common Term",
+     "Core Cognitive Deficit"
+    ],
+    "rows": [
+     [
+      "Impairment in reading",
+      "Developmental dyslexia",
+      "Phonological decoding & sight word recognition failure"
+     ],
+     [
+      "Impairment in written expression",
+      "Dysgraphia",
+      "Orthographic spelling, syntax, and spatial letter formation"
+     ],
+     [
+      "Impairment in mathematics",
+      "Dyscalculia",
+      "Number sense, mathematical calculation, & arithmetic facts"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Developmental dyslexia** represents the most prevalent specific learning disorder, accounting for approximately 80 percent of all SLD diagnoses. Sufferers exhibit core deficits in phonological processing, struggling to map graphemes to phonemes, which manifests as inaccurate, effortful, slow reading, frequent letter reversals (such as confusing 'b' and 'd'), and poor comprehension.",
+   "say": "Dyslexia accounts for eighty percent of learning disorders, driven by phonological deficits causing slow, inaccurate reading and letter reversals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Reading Deficits",
+     "points": [
+      "Inaccurate and effortful word decoding",
+      "Slow, dysfluent oral reading rate",
+      "Confusing mirror letters: 'b' for 'd', 'p' for 'q'",
+      "Poor reading comprehension of written passages"
+     ]
+    },
+    "right": {
+     "title": "Preserved Cognitive Faculties",
+     "points": [
+      "Normal or superior verbal intelligence",
+      "Excellent auditory listening comprehension",
+      "Intact logical reasoning and problem solving",
+      "Rich creative and visual-spatial abilities"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Neurobiological circuitry in dyslexia** reveals functional hypoactivation within left hemisphere posterior reading networks, specifically the left parieto-temporal junction (phonological decoding) and left occipito-temporal word-form area (automatic sight-word reading). Compensatory hyperactivation occurs in the right hemisphere and anterior left inferior frontal gyrus (Broca area).",
+   "say": "Dyslexia involves hypoactivation in the left occipito-temporal and parieto-temporal reading centers, with compensatory frontal activation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Reading Neural Circuitry",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Visual input received in primary occipital striate cortex"
+     },
+     {
+      "id": "n2",
+      "label": "Left occipito-temporal visual word-form area (hypoactive in dyslexia)"
+     },
+     {
+      "id": "n3",
+      "label": "Left parieto-temporal phonological decoding center (hypoactive in dyslexia)"
+     },
+     {
+      "id": "n4",
+      "label": "Compensatory recruitment of left Broca area & right hemisphere homologs"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dyscalculia** involves specific impairments in mathematical cognition, affecting the comprehension of number concepts, numerical facts, arithmetic symbols, and computational execution. Children struggle to determine which number is larger, rely persistently on immature finger counting long after peers, and cannot align multi-digit addition columns.",
+   "say": "Dyscalculia impairs number sense, arithmetic calculation, and numerical reasoning, often seen as persistent finger counting and calculation errors.",
+   "vis": {
+    "kind": "table",
+    "title": "Dyscalculia Clinical Features",
+    "cols": [
+     "Mathematical Domain",
+     "Deficit Presentation",
+     "Neuroanatomical Substrate"
+    ],
+    "rows": [
+     [
+      "Number magnitude sense",
+      "Inability to estimate quantities or compare numbers",
+      "Bilateral intraparietal sulcus hypofunction"
+     ],
+     [
+      "Arithmetic fact retrieval",
+      "Cannot memorize basic multiplication tables",
+      "Left angular gyrus and hippocampal encoding"
+     ],
+     [
+      "Procedural calculation",
+      "Errors in multi-step carrying and borrowing",
+      "Frontoparietal working memory executive loops"
+     ],
+     [
+      "Visuospatial mathematics",
+      "Misaligning vertical columns in long division",
+      "Right posterior parietal cortical dysfunction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dysgraphia** involves impaired written expression manifesting as poor spatial letter formation, irregular spacing, grammatical inaccuracies, and severe spelling errors. Children exhibit an awkward pencil grip, fatigue rapidly during handwriting tasks, and display a marked discrepancy between articulate spoken language and impoverished written essays.",
+   "say": "Dysgraphia causes illegible handwriting, awkward pencil grip, and spelling errors, with spoken ability far exceeding written output.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Motor & Spatial Dysgraphia",
+     "points": [
+      "Awkward, tight, painful pencil grasp",
+      "Inconsistent letter sizing and slant",
+      "Failure to adhere to ruled page margins",
+      "Excessive time spent forming individual letters"
+     ]
+    },
+    "right": {
+     "title": "Orthographic Dysgraphia",
+     "points": [
+      "Severe phonetic spelling errors",
+      "Omitting vowels and word endings",
+      "Struggles to organize thoughts into paragraphs",
+      "Intact verbal story narration when spoken"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Childhood-onset fluency disorder**, commonly known as stuttering or stammering, is a communication disorder characterized by frequent, marked prolongations, sound repetitions, and broken words (pauses within words). Physical tension and involuntary motor grimaces often accompany speech blocks, characteristically disappearing when the individual sings or whispers.",
+   "say": "Stuttering involves sound repetitions, syllable prolongations, and speech blocks, which characteristically disappear when singing or speaking to animals.",
+   "vis": {
+    "kind": "table",
+    "title": "Fluency Disturbance Spectrum",
+    "cols": [
+     "Fluency Symptom",
+     "Acoustic Feature",
+     "Clinical Example"
+    ],
+    "rows": [
+     [
+      "Sound repetition",
+      "Repeating initial consonant or syllable",
+      "'P-p-p-please pass the book'"
+     ],
+     [
+      "Sound prolongation",
+      "Abnormal lengthening of continuous sound",
+      "'Sssssssssometimes I walk home'"
+     ],
+     [
+      "Silent speech block",
+      "Tense silent pause with lip struggle",
+      "Inability to initiate vocal cord vibration"
+     ],
+     [
+      "Fluency enhancer",
+      "Singing, rhyming, choral unison speech",
+      "Bypasses left hemisphere; activates right auditory cortex"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Social pragmatic communication disorder** involves persistent difficulties in the social use of verbal and non-verbal communication, such as greeting, sharing information, and adapting communication to match the context. Sufferers fail to understand non-literal language, metaphors, irony, and humor, yet strictly lack the restricted, repetitive behaviors required for autism.",
+   "say": "Social pragmatic communication disorder impairs conversational rules and understanding of humor and idioms, without the repetitive rituals of autism.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Social Communication Disorder",
+     "points": [
+      "Impaired social pragmatic conversation",
+      "Takes idioms and metaphors literally",
+      "Struggles with storytelling and dialogue",
+      "Zero restricted repetitive motor rituals"
+     ]
+    },
+    "right": {
+     "title": "Autism Spectrum Disorder",
+     "points": [
+      "Impaired social pragmatic communication",
+      "Severe joint attention deficits",
+      "Restricted, repetitive motor stereotypies",
+      "Inflexible adherence to rigid daily routines"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Multisensory remedial education** constitutes the definitive evidence-based intervention for specific learning disorders, utilizing structured, sequential phonics programs like the Orton-Gillingham approach. Accommodations such as extended examination time, oral examinations, text-to-speech software, and calculators allow students to demonstrate mastery without penalty.",
+   "say": "Remedial education uses structured multisensory phonics like the Orton-Gillingham method, supported by extended exam time and assistive technology.",
+   "vis": {
+    "kind": "flow",
+    "title": "SLD Remedial & Accommodation Strategy",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Formal psychoeducational assessment establishing IQ-achievement disparity"
+     },
+     {
+      "id": "n2",
+      "label": "Structured multisensory phonics intervention (Orton-Gillingham)"
+     },
+     {
+      "id": "n3",
+      "label": "School accommodations: 25-50% extended exam time & reader assistance"
+     },
+     {
+      "id": "n4",
+      "label": "Assistive software: speech-to-text dictation and digital calculators"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -43,7 +43,7 @@ rm -rf \
   bench backend tools \
   local-plugins Packages atlas-pipeline scrollcraft \
   store-assets voice-service voice-benchmark \
-  prompts infra qa-report archive .fleet-reports .github .planning
+  prompts infra qa-report archive .fleet-reports .github .planning .claude
 
 # Pages rejects an output directory with broken symlinks ("build output directory contains links to files that
 # can't be accessed", build log 2026-10-14 20:16Z). npm clean-install links file: dependencies such as

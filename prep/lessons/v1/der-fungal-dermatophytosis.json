@@ -1,0 +1,281 @@
+{
+ "v": 1,
+ "id": "der-fungal-dermatophytosis",
+ "subject": "dermatology",
+ "module": "der-fungal",
+ "title": "Dermatophytosis",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Dermatophytosis** refers to superficial fungal infections of keratinized tissues including the stratum corneum, hair, and nails caused by dermatophytes belonging to three anamorphic genera: Trichophyton, Microsporum, and Epidermophyton. These fungi produce keratinases that digest keratin filaments, allowing hyphae to proliferate within dead cornified layers without invading viable living epidermis in immunocompetent hosts. Species are categorized by natural habitat into anthropophilic, zoophilic, and geophilic groups, with zoophilic species provoking marked host inflammation.",
+   "say": "Dermatophytes invade only dead keratinized layers of skin, hair, and nails using specialized keratinases. Anthropophilic strains cause chronic low-grade scaling, while zoophilic organisms acquired from pets provoke intense inflammatory reactions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/dermatophytosis-fig1.webp",
+    "alt": "Clinical photograph of tinea corporis showing annular plaque with central clearing.",
+    "caption": "Annular erythematous scaly plaque with active advancing peripheral border and central clearing. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Tinea corporis** presents characteristically as annular, well-demarcated erythematous plaques with a raised, active advancing border studded with tiny papules, vesicles, and scales, surrounding a central clearing area of resolving skin. Lesions expand centrifugally as hyphae exhaust local nutrients and advance outward into uninfected stratum corneum. In tinea cruris, scaly annular plaques involve the upper inner thighs and groin folds, but characteristically spare the scrotum, cleanly distinguishing it from candidal intertrigo.",
+   "say": "Tinea corporis produces ring-shaped plaques with active scaly borders that spread outward as the center clears. In the groin, tinea cruris affects the thighs but spares the scrotum, distinguishing it from candida.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tinea Cruris",
+     "points": [
+      "Trichophyton rubrum or mentagrophytes",
+      "Sharply demarcated active raised border",
+      "Crucially spares the scrotum and penis",
+      "Branching septate hyphae on KOH mount"
+     ]
+    },
+    "right": {
+     "title": "Candidal Intertrigo",
+     "points": [
+      "Candida albicans overgrowth",
+      "Confluent beefy red macerated plaque",
+      "Characteristically involves scrotal sac",
+      "Satellite pustules along peripheral margin"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Kerion** celsi represents a severe, highly destructive inflammatory tumefaction of tinea capitis provoked by intense cell-mediated hypersensitivity to zoophilic dermatophytes, predominantly Trichophyton verrucosum from cattle or Microsporum canis from cats and dogs. Affected children develop an exquisitely tender, boggy, purulent mass studded with pustules and discharging sinuses through which hairs easily pluck out without pain. Mistaking a kerion for a bacterial carbuncle and incising it is a catastrophic error that risks extensive scarring alopecia.",
+   "say": "A kerion is an exuberant hypersensitivity reaction to zoophilic fungi, presenting as a boggy purulent mass on the scalp. Never incise it like a bacterial abscess, because that leads to permanent scarring and baldness.",
+   "vis": {
+    "kind": "flow",
+    "title": "Tinea Capitis Pathological Spectrum",
+    "nodes": [
+     {
+      "id": "k1",
+      "label": "Zoophilic Inoculation",
+      "sub": "Microsporum canis or Trichophyton verrucosum"
+     },
+     {
+      "id": "k2",
+      "label": "Follicular Invasion",
+      "sub": "Ectothrix arthroconidia coating hair shaft"
+     },
+     {
+      "id": "k3",
+      "label": "Kerion Celsi",
+      "sub": "Boggy inflammatory granulomatous swelling"
+     },
+     {
+      "id": "k4",
+      "label": "Oral Griseofulvin",
+      "sub": "Systemic antifungals with short steroid course"
+     }
+    ],
+    "edges": [
+     [
+      "k1",
+      "k2",
+      "Arthroconidia spread"
+     ],
+     [
+      "k2",
+      "k3",
+      "Host cell-mediated burst"
+     ],
+     [
+      "k3",
+      "k4",
+      "Prompt medical salvage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tinea incognito** describes dermatophytosis whose typical morphological landmarks are erased and altered by inappropriate application of topical corticosteroids. Topical steroids suppress the local cell-mediated immune response, temporarily dampening erythema and itching while permitting rampant, uninhibited fungal proliferation through the dermis. The characteristic active, raised scaly margin disappears, and the lesion evolves into a diffuse, dull red, ill-defined patch with scattered pustules that confounds diagnostic recognition.",
+   "say": "Tinea incognito occurs when patients apply topical steroids to a fungal infection. The steroid quiets itching temporarily while allowing fungi to multiply unchecked, masking the telltale ringed border and delaying proper cure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Typical Ringworm Plaque",
+     "points": [
+      "Sharply defined elevated border",
+      "Continuous centrifugal expansion",
+      "Intact peripheral scaling margin",
+      "Readily positive on direct KOH prep"
+     ]
+    },
+    "right": {
+     "title": "Tinea Incognito",
+     "points": [
+      "Ill-defined borders lacking clear ring",
+      "Extensive dermal invasion and pustules",
+      "Suppressed erythema masking diagnosis",
+      "Rampant hyphae visible on repeat KOH"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Potassium hydroxide** mount remains the rapid, indispensable bedside gold standard for confirming superficial dermatophyte infections. Scales scraped firmly from the active advancing erythematous margin are transferred onto a glass slide, immersed in a ten to twenty percent potassium hydroxide solution, and gently heated. The alkaline reagent dissolves keratin and cellular debris while preserving fungal chitinous cell walls, revealing uniform, branching, parallel-walled, septate hyphae traversing epithelial squames under light microscopy.",
+   "say": "Scrape scales from the advancing border onto a glass slide and add twenty percent potassium hydroxide. Heating gently clears keratin squames, leaving translucent, branching septate hyphae visible under forty times magnification.",
+   "vis": {
+    "kind": "flow",
+    "title": "Bedside Diagnostic Protocol for Fungal Lesions",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Advancing Margin",
+      "sub": "Scrape actively growing scaly border"
+     },
+     {
+      "id": "p2",
+      "label": "20% KOH Mount",
+      "sub": "Keratin lysis reveals fungal cell walls"
+     },
+     {
+      "id": "p3",
+      "label": "Septate Hyphae",
+      "sub": "Branching filaments confirm dermatophyte"
+     },
+     {
+      "id": "p4",
+      "label": "Culture on SDA",
+      "sub": "Sabouraud dextrose agar for species identity"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2",
+      "Direct slide preparation"
+     ],
+     [
+      "p2",
+      "p3",
+      "Microscopic evaluation"
+     ],
+     [
+      "p3",
+      "p4",
+      "Species confirmation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Wood lamp** examination utilizes filtered ultraviolet light with a peak emission wavelength of 365 nanometres to assess fluorescence patterns in suspected dermatological infections. In tinea capitis caused by Microsporum canis or Microsporum audouinii, pteridine metabolites produced by the fungus emit a brilliant apple-green fluorescence along the hair shaft. In pityriasis versicolor, Malassezia yeasts produce subtle golden-yellow fluorescence, whereas Corynebacterium minutissimum in erythrasma produces intense coral-red fluorescence due to coproporphyrin III.",
+   "say": "Wood lamp illumination uses 365 nanometre light to elicit diagnostic fluorescence. Microsporum emits an apple-green glow on infected hairs, while erythrasma glows vivid coral-red due to bacterial porphyrins.",
+   "vis": {
+    "kind": "table",
+    "title": "Wood Lamp Diagnostic Fluorescence Findings",
+    "cols": [
+     "Cutaneous Condition",
+     "Responsible Pathogen",
+     "Fluorescence Colour"
+    ],
+    "rows": [
+     [
+      "Microsporum tinea capitis",
+      "Microsporum canis / audouinii",
+      "Brilliant apple-green"
+     ],
+     [
+      "Favus",
+      "Trichophyton schoenleinii",
+      "Dull greenish-white"
+     ],
+     [
+      "Pityriasis versicolor",
+      "Malassezia furfur / globosa",
+      "Subtle golden-yellow"
+     ],
+     [
+      "Erythrasma",
+      "Corynebacterium minutissimum",
+      "Intense coral-red"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Terbinafine** one percent topical cream represents the allylamine antifungal of choice for localized tinea corporis and tinea cruris. It functions fungicidally by selectively inhibiting squalene epoxidase in the early ergosterol biosynthetic pathway, resulting in intracellular accumulation of toxic squalene and rapid fungal membrane lysis. Applied twice daily to clean skin, extending two centimetres beyond the active advancing margin for two to four weeks, topical terbinafine achieves clinical and mycological cure rates exceeding ninety percent.",
+   "say": "Topical one percent terbinafine kills fungi by inhibiting squalene epoxidase, accumulating toxic squalene. Instruct patients to apply the cream extending two centimetres beyond the visible border for at least two weeks.",
+   "vis": {
+    "kind": "table",
+    "title": "Mechanisms of Antifungal Drug Classes",
+    "cols": [
+     "Drug Class",
+     "Target Fungal Enzyme",
+     "Pharmacological Action"
+    ],
+    "rows": [
+     [
+      "Allylamines (Terbinafine)",
+      "Squalene epoxidase",
+      "Fungicidal accumulation of squalene"
+     ],
+     [
+      "Azoles (Itraconazole)",
+      "14-alpha-demethylase (CYP51)",
+      "Fungistatic depletion of ergosterol"
+     ],
+     [
+      "Polyenes (Nystatin)",
+      "Binds directly to ergosterol",
+      "Forms lethal membrane pore channels"
+     ],
+     [
+      "Echinocandins (Caspofungin)",
+      "1,3-beta-D-glucan synthase",
+      "Disrupts fungal cell wall synthesis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Griseofulvin** remains the gold standard oral therapeutic agent for tinea capitis in children, administered at a dose of twenty to twenty-five milligrams per kilogram daily of microsize suspension for six to eight weeks. It binds selectively to fungal tubulin dimers, disrupting the mitotic spindle apparatus and arresting fungal mitosis in metaphase. Because griseofulvin deposits actively into keratin precursor cells in the hair matrix, new hair emerges fully resistant to fungal hyphal penetration.",
+   "say": "Oral griseofulvin is the treatment of choice for childhood tinea capitis, binding to fungal microtubules to arrest mitosis. It must be taken with fatty food to enhance absorption and continued for up to eight weeks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Griseofulvin in Tinea Capitis",
+     "points": [
+      "Microtubule mitotic spindle inhibitor",
+      "High affinity for hair matrix keratin",
+      "Excellent activity against Microsporum",
+      "Take with fatty food or whole milk"
+     ]
+    },
+    "right": {
+     "title": "Terbinafine in Tinea Capitis",
+     "points": [
+      "Squalene epoxidase allylamine blocker",
+      "Shorter treatment duration of 4 to 6 weeks",
+      "Superior efficacy against Trichophyton tonsurans",
+      "Dosed by paediatric weight bands"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Tinea cruris: cardinal anatomical landmark separating from candidiasis",
+   "b": "Tinea cruris spares the scrotum, whereas candidiasis involves it with satellite pustules."
+  },
+  {
+   "f": "Kerion celsi: primary surgical contraindication",
+   "b": "Incision and drainage must never be performed because it causes permanent scarring alopecia."
+  },
+  {
+   "f": "Wood lamp: characteristic fluorescence of erythrasma",
+   "b": "Intense coral-red fluorescence due to bacterial coproporphyrin III production."
+  }
+ ],
+ "keys": [
+  "Dermatophytosis invades keratinized stratum corneum, creating expanding rings with scaly active borders",
+  "Tinea cruris spares the scrotum, whereas candidal intertrigo characteristically involves scrotal skin",
+  "Potassium hydroxide mount demonstrates branching septate hyphae, and kerion requires oral antifungals"
+ ]
+}

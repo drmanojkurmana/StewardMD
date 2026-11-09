@@ -1,0 +1,300 @@
+{
+    "v": 1,
+    "id": "ans-iv-agents-total-intravenous-anaesthesia",
+    "subject": "anaesthesia",
+    "module": "ans-iv-agents",
+    "title": "Total Intravenous Anaesthesia: Target-Controlled Infusion and Context-Sensitive Kinetics",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Principles of TIVA",
+            "tx": "**Total intravenous anaesthesia principles** achieve all components of general anaesthesia (hypnosis, amnesia, analgesia, and autonomic stability) exclusively through intravenous infusions without utilizing inhalational volatile vapors or nitrous oxide. Combining intravenous propofol (for hypnotic unconsciousness) with an ultra-short-acting opioid like remifentanil (for potent surgical analgesia) provides rapid smooth induction, pristine intraoperative stability, and rapid clear-headed emergence.",
+            "say": "Total intravenous anaesthesia principles achieve all components of general anaesthesia (hypnosis, amnesia, analgesia, and autonomic stability) exclusively through intravenous infusions without utilizing inhalational volatile vapors or nitrous oxide. Combining intravenous propofol (for hypnotic unconsciousness) with an ultra-short-acting opioid like remifentanil (for potent surgical analgesia) provides rapid smooth induction, pristine intraoperative stability, and rapid clear-headed emergence.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Anaesthetic Component",
+                    "TIVA Pharmacological Agent",
+                    "Target Plasma Concentration",
+                    "Clinical Monitoring Modality"
+                ],
+                "rows": [
+                    [
+                        "Hypnosis and Amnesia",
+                        "Intravenous propofol infusion",
+                        "2.5 to 4.0 micrograms per milliliter",
+                        "Bispectral index (target 40 to 60)"
+                    ],
+                    [
+                        "Surgical Analgesia",
+                        "Intravenous remifentanil infusion",
+                        "2.0 to 6.0 nanograms per milliliter",
+                        "Hemodynamic heart rate and BP stability"
+                    ],
+                    [
+                        "Skeletal Muscle Paralysis",
+                        "Rocuronium or cisatracurium boluses",
+                        "TOF 1 to 2 twitches for surgery",
+                        "Quantitative train-of-four monitoring"
+                    ],
+                    [
+                        "Autonomic Attenuation",
+                        "Combined propofol and remifentanil synergy",
+                        "Synergistic suppression of reflex surges",
+                        "Continuous invasive arterial line tracing"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Context-Sensitive Half-Time Concept",
+            "tx": "**Context-sensitive half-time definition** represents the time required for the central plasma drug concentration to decrease by 50 percent after terminating an intravenous infusion of a specific duration (the context). Unlike elimination half-life, which assumes instantaneous bolus clearance, context-sensitive half-time incorporates three-compartment distribution kinetics and peripheral tissue saturation, explaining why drugs with similar terminal half-lives diverge radically during prolonged infusions.",
+            "say": "Context-sensitive half-time definition represents the time required for the central plasma drug concentration to decrease by 50 percent after terminating an intravenous infusion of a specific duration (the context). Unlike elimination half-life, which assumes instantaneous bolus clearance, context-sensitive half-time incorporates three-compartment distribution kinetics and peripheral tissue saturation, explaining why drugs with similar terminal half-lives diverge radically during prolonged infusions.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Context-Sensitive Half-Time",
+                    "points": [
+                        "Tracks plasma concentration decline after infusions of defined duration",
+                        "Directly predicts clinical awakening velocity after stopping infusion",
+                        "Accounts for post-infusion redistribution back into circulation"
+                    ]
+                },
+                "right": {
+                    "title": "Terminal Elimination Half-Life (t1/2 beta)",
+                    "points": [
+                        "Measures irreversible clearance from the entire body at steady-state",
+                        "Severely misleads clinicians regarding awakening speed after infusions",
+                        "Fails to reflect rapid initial redistribution out of plasma"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Comparative Context-Sensitive Half-Times",
+            "tx": "**Comparative context-sensitive drug profiles** highlight why remifentanil and propofol dominate TIVA: remifentanil exhibits a flat context-sensitive half-time of 3 to 4 minutes regardless of infusion duration (whether 1 hour or 10 hours) due to rapid blood esterase hydrolysis. Propofol context-sensitive half-time remains under 30 to 40 minutes even after 8 hours, whereas fentanyl rises steeply to over 250 minutes after a few hours of infusion as adipose reservoirs saturate.",
+            "say": "Comparative context-sensitive drug profiles highlight why remifentanil and propofol dominate TIVA: remifentanil exhibits a flat context-sensitive half-time of 3 to 4 minutes regardless of infusion duration (whether 1 hour or 10 hours) due to rapid blood esterase hydrolysis. Propofol context-sensitive half-time remains under 30 to 40 minutes even after 8 hours, whereas fentanyl rises steeply to over 250 minutes after a few hours of infusion as adipose reservoirs saturate.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Intravenous Drug",
+                    "2-Hour Infusion CSHT",
+                    "6-Hour Infusion CSHT",
+                    "Primary Elimination Clearance Mechanism"
+                ],
+                "rows": [
+                    [
+                        "Remifentanil",
+                        "3 to 4 minutes",
+                        "3 to 4 minutes (completely flat curve)",
+                        "Non-specific circulating blood and tissue esterases"
+                    ],
+                    [
+                        "Propofol",
+                        "15 to 20 minutes",
+                        "30 to 40 minutes",
+                        "High hepatic clearance and pulmonary uptake"
+                    ],
+                    [
+                        "Sufentanil",
+                        "20 to 30 minutes",
+                        "60 to 80 minutes",
+                        "Hepatic CYP3A4 biotransformation"
+                    ],
+                    [
+                        "Fentanyl",
+                        "100 to 120 minutes",
+                        "Exceeds 250 to 300 minutes",
+                        "Hepatic clearance overwhelmed by tissue storage"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Target-Controlled Infusion (TCI)",
+            "tx": "**Target-controlled infusion pharmacokinetic algorithms** use microprocessor-driven syringe pumps programmed with validated population multicompartment models to deliver exact target plasma (Cp) or effect-site (Ce) drug concentrations. The pump continuously calculates distribution and elimination losses across vessel-rich, muscle, and fat compartments, delivering high initial boluses followed by dynamically decelerating infusion rates to maintain rock-solid steady-state concentrations.",
+            "say": "Target-controlled infusion pharmacokinetic algorithms use microprocessor-driven syringe pumps programmed with validated population multicompartment models to deliver exact target plasma (Cp) or effect-site (Ce) drug concentrations. The pump continuously calculates distribution and elimination losses across vessel-rich, muscle, and fat compartments, delivering high initial boluses followed by dynamically decelerating infusion rates to maintain rock-solid steady-state concentrations.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Clinician enters patient age, weight, and target Ce (3 mcg/mL)"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Microprocessor calculates initial bolus to fill central volume (V1)"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Calculates transfer rates between compartments (k12, k21, k13, k31)"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Infusion rate throttles continuously to replace eliminated drug"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Marsh versus Schnider Models",
+            "tx": "**Pharmacokinetic models for propofol TCI** divide into the Marsh model and the Schnider model: the Marsh model bases compartment volumes strictly on patient total body weight, featuring a larger central compartment volume (V1 of 0.228 L/kg) that delivers a larger initial induction bolus. The Schnider model incorporates age, height, weight, and lean body mass, featuring a fixed central volume (V1 of 4.27 L) with slower age-adjusted boluses ideal for elderly patients.",
+            "say": "Pharmacokinetic models for propofol TCI divide into the Marsh model and the Schnider model: the Marsh model bases compartment volumes strictly on patient total body weight, featuring a larger central compartment volume (V1 of 0.228 L/kg) that delivers a larger initial induction bolus. The Schnider model incorporates age, height, weight, and lean body mass, featuring a fixed central volume (V1 of 4.27 L) with slower age-adjusted boluses ideal for elderly patients.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Marsh Model Characteristics",
+                    "points": [
+                        "Calculated strictly from total body weight (V1 = 0.228 L/kg)",
+                        "Delivers larger initial induction bolus; faster hypnosis",
+                        "Originally designed for plasma target control (Cp)"
+                    ]
+                },
+                "right": {
+                    "title": "Schnider Model Characteristics",
+                    "points": [
+                        "Incorporates age, gender, height, weight, and lean body mass",
+                        "Fixed small central volume (V1 = 4.27 L) with slower induction",
+                        "Designed specifically for effect-site targeting (Ce) in the brain"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Effect-Site Equilibration (ke0)",
+            "tx": "**Effect-site equilibration rate constant (ke0)** describes the delay between drug concentration in the plasma and its clinical hypnotic effect in the brain tissue (the biophase). Effect-site targeting algorithms account for this hysteresis lag: while plasma concentration peaks within seconds of an intravenous bolus, effect-site concentration of propofol peaks at approximately 1.6 to 2.5 minutes, preventing premature overshooting and severe hypotension.",
+            "say": "Effect-site equilibration rate constant (ke0) describes the delay between drug concentration in the plasma and its clinical hypnotic effect in the brain tissue (the biophase). Effect-site targeting algorithms account for this hysteresis lag: while plasma concentration peaks within seconds of an intravenous bolus, effect-site concentration of propofol peaks at approximately 1.6 to 2.5 minutes, preventing premature overshooting and severe hypotension.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Drug Molecule",
+                    "Time to Peak Effect (t-peak Ce)",
+                    "ke0 Rate Constant",
+                    "Clinical Induction Guidance"
+                ],
+                "rows": [
+                    [
+                        "Propofol (Schnider)",
+                        "1.6 to 2.2 minutes",
+                        "0.456 per minute",
+                        "Wait full 2 minutes before instrumentation"
+                    ],
+                    [
+                        "Remifentanil (Minto)",
+                        "1.1 to 1.5 minutes",
+                        "0.595 per minute",
+                        "Rapid peak synergy blunts intubation response"
+                    ],
+                    [
+                        "Thiopentone",
+                        "1.0 to 1.5 minutes",
+                        "0.550 per minute",
+                        "Rapid arm-brain transit in vessel-rich cortex"
+                    ],
+                    [
+                        "Midazolam",
+                        "2.8 to 4.5 minutes",
+                        "0.150 per minute",
+                        "Slow onset; high risk of stacking overdoses"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Clinical Advantages of TIVA",
+            "tx": "**Major clinical indications for TIVA** include patients with a proven personal or family history of malignant hyperthermia (since propofol is completely non-triggering), neurosurgical procedures requiring intraoperative neurophysiological somatosensory and motor evoked potential monitoring (which are blunted by volatile vapors), and patients at extreme risk of postoperative nausea and vomiting or undergoing tubal laser airway surgery.",
+            "say": "Major clinical indications for TIVA include patients with a proven personal or family history of malignant hyperthermia (since propofol is completely non-triggering), neurosurgical procedures requiring intraoperative neurophysiological somatosensory and motor evoked potential monitoring (which are blunted by volatile vapors), and patients at extreme risk of postoperative nausea and vomiting or undergoing tubal laser airway surgery.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Clinical Indication",
+                    "Mechanistic Advantage of TIVA",
+                    "Alternative Inhalational Hazard",
+                    "Outcome Benefit"
+                ],
+                "rows": [
+                    [
+                        "Malignant Hyperthermia Risk",
+                        "Propofol is completely safe and non-triggering",
+                        "Volatile agents trigger lethal calcium release",
+                        "Guaranteed patient safety without ryanodine activation"
+                    ],
+                    [
+                        "Motor Evoked Potential Monitoring",
+                        "Propofol preserves spinal cord anterior horn signals",
+                        "Volatiles abolish motor evoked potentials at >0.5 MAC",
+                        "Permits continuous spinal cord integrity surveillance"
+                    ],
+                    [
+                        "Airway Laser Surgery",
+                        "Eliminates flammable nitrous oxide and vapors",
+                        "High oxygen/vapor mixtures support airway fires",
+                        "Minimizes devastating endotracheal ignition hazards"
+                    ],
+                    [
+                        "Severe PONV History",
+                        "Direct antiemetic action of continuous propofol",
+                        "Volatile vapors trigger post-anaesthetic vomiting",
+                        "Dramatically enhances post-anaesthesia recovery"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Accidental Awareness Prevention in TIVA",
+            "tx": "**Awareness under TIVA safety protocols** demand rigorous vigilance because, unlike inhalational anaesthesia where end-tidal agent concentration is displayed continuously on the monitor, an unrecognized intravenous cannula disconnection, tissue extravasation, or syringe pump line occlusion can cause total cessation of drug delivery without immediate warning. Mandated safeguards include visible dedicated IV access, anti-siphon valves, and continuous depth of anaesthesia (BIS) monitoring.",
+            "say": "Awareness under TIVA safety protocols demand rigorous vigilance because, unlike inhalational anaesthesia where end-tidal agent concentration is displayed continuously on the monitor, an unrecognized intravenous cannula disconnection, tissue extravasation, or syringe pump line occlusion can cause total cessation of drug delivery without immediate warning. Mandated safeguards include visible dedicated IV access, anti-siphon valves, and continuous depth of anaesthesia (BIS) monitoring.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Establish dedicated, visible, unoccluded IV cannula"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Attach one-way anti-siphon and anti-reflux check valves"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Apply continuous processed EEG (BIS target 40-60)"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Verify syringe pump infusion flow and line patency regularly"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

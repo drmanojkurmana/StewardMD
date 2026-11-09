@@ -1,0 +1,215 @@
+{
+ "key": "ped-neonatal-misc-neonatal-hypoglycaemia",
+ "v": 1,
+ "module": "ped-neonatal-misc",
+ "subject": "paediatrics",
+ "title": "Neonatal Hypoglycaemia, Hypocalcaemia and Diabetic Mother",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The most common metabolic derangement in the neonatal intensive care unit is **neonatal symptomatic hypoglycaemia**, defined as a plasma glucose concentration below forty to forty-five milligrams per deciliter. Because the developing brain relies almost exclusively on glucose oxidation for cellular metabolism, untreated hypoglycemia precipitates irreversible neuronal necrosis within the occipital and parietal cortices.",
+   "say": "Blood glucose below forty to forty-five milligrams per deciliter demands prompt correction to protect the brain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient Population",
+     "Pathophysiological Mechanism",
+     "Screening Schedule"
+    ],
+    "rows": [
+     [
+      "Preterm and SGA infants",
+      "Depleted hepatic glycogen and adipose stores",
+      "Screen at 2 hours of life, then pre-feed every 3 to 4 hours"
+     ],
+     [
+      "Infants of diabetic mothers",
+      "Pancreatic beta-cell hyperinsulinism",
+      "Screen within 1 hour of life, then every 2 to 3 hours"
+     ],
+     [
+      "Perinatal asphyxia",
+      "Accelerated anaerobic glycogen consumption",
+      "Serial monitoring during cooling and rewarming"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical manifestations of neuroglycopenia include **jitteriness and fine tremors**, which must be distinguished from true epileptic seizures. Jitteriness is stimulus-sensitive, exhibits rapid alternating tremors without autonomic instability or gaze deviation, and ceases completely when the limb is gently held. In contrast, neonatal seizures are non-stimulus sensitive and persist despite passive limb restraint.",
+   "say": "Jitteriness stops when the limb is held, differentiating it from true neonatal epileptic seizures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Neonatal Jitteriness",
+     "points": [
+      "Stimulus sensitive (provoked by sound or touch)",
+      "Fine, rapid alternating tremor of extremities",
+      "Ceases immediately upon passive gentle limb flexion"
+     ]
+    },
+    "right": {
+     "title": "Neonatal Seizures",
+     "points": [
+      "Spontaneous, non-stimulus sensitive",
+      "Rhythmic clonic jerking with fast and slow phases",
+      "Persists unabated when limb is held by examiner"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Emergency management of symptomatic hypoglycemia requires an **immediate intravenous dextrose bolus** of two milliliters per kilogram of ten percent dextrose in water, delivering two hundred milligrams of glucose per kilogram. This is followed immediately by continuous maintenance infusion providing a glucose infusion rate of six to eight milligrams per kilogram per minute, titrated to maintain euglycemia.",
+   "say": "A bolus of two milliliters per kilogram of ten percent dextrose is followed by continuous glucose infusion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Step",
+     "Fluid and Dose Regimen",
+     "Clinical Objective"
+    ],
+    "rows": [
+     [
+      "Emergency IV bolus",
+      "10% dextrose 2 mL/kg (200 mg/kg) over 5 min",
+      "Rapidly restores plasma glucose above 50 mg/dL"
+     ],
+     [
+      "Continuous maintenance",
+      "Glucose infusion rate 6 to 8 mg/kg/min",
+      "Matches baseline endogenous hepatic glucose production"
+     ],
+     [
+      "Refractory escalation",
+      "Increase GIR in steps up to 12 to 15 mg/kg/min",
+      "Counteracts extreme hyperinsulinemic suppression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The prototype of hyperinsulinemic hypoglycemia is the **infant of a diabetic mother**. Maternal hyperglycemia drives transplacental glucose transfer, stimulating fetal pancreatic islet beta-cell hyperplasia. Fetal hyperinsulinemia promotes excessive glycogen and lipid synthesis, resulting in fetal macrosomia with birth weight exceeding four thousand grams, organomegaly, plethoric cushingoid facies, and severe rebound post-delivery hypoglycemia.",
+   "say": "Fetal hyperinsulinism drives macrosomia and causes severe rebound hypoglycemia once the cord is clamped.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pedersen Hypothesis Cascade",
+     "points": [
+      "Maternal hyperglycemia stimulates fetal pancreas",
+      "Fetal islet beta-cell hyperplasia",
+      "Hyperinsulinemia acts as primary anabolic growth factor"
+     ]
+    },
+    "right": {
+     "title": "Neonatal Clinical Phenotype",
+     "points": [
+      "Macrosomia with birth weight over 4000g",
+      "Plethoric round 'tomato-face' appearance",
+      "Visceromegaly (hepatosplenomegaly and cardiomegaly)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cardiac evaluation in infants of diabetic mothers frequently reveals **transient asymmetric septal hypertrophy**. Fetal hyperinsulinemia stimulates excessive glycogen and fat deposition directly into the interventricular septum, narrowing the left ventricular outflow tract and producing functional subaortic stenosis with a harsh systolic ejection murmur that resolves spontaneously over two to four months.",
+   "say": "Asymmetric septal hypertrophy produces transient subaortic stenosis that resolves spontaneously.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication in IDM",
+     "Pathophysiological Cause",
+     "Clinical Implication"
+    ],
+    "rows": [
+     [
+      "Septal hypertrophy",
+      "Interventricular septal glycogen deposition",
+      "Avoid digoxin/inotropes, manage with beta-blockers"
+     ],
+     [
+      "Respiratory distress",
+      "High insulin antagonizes cortisol on pneumocytes",
+      "Delayed surfactant synthesis despite mature dates"
+     ],
+     [
+      "Polycythemia",
+      "Fetal hypoxia stimulates erythropoietin",
+      "Venous hematocrit over 65%, hyperviscosity risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A highly specific congenital structural anomaly occurring almost exclusively in diabetic pregnancies is **caudal regression syndrome**, also termed sacral agenesis. Characterized by agenesis of the sacrum and lumbar spine with hypoplastic lower extremities in a fixed frog-leg position, it results from early teratogenic disruption of the caudal mesoderm before the seventh week of gestation.",
+   "say": "Caudal regression syndrome causes sacral agenesis and is pathognomonic of diabetic embryopathy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Caudal Regression Features",
+     "points": [
+      "Agenesis of sacral and lower lumbar vertebrae",
+      "Hypoplastic pelvis with narrow hips and flexion contractures",
+      "Neurogenic bladder and fecal incontinence"
+     ]
+    },
+    "right": {
+     "title": "Associated Diabetic Malformations",
+     "points": [
+      "Transposition of the great arteries and VSD",
+      "Small left colon syndrome and duodenal atresia",
+      "Neural tube defects (anencephaly, spina bifida)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Metabolic evaluation in stressed or diabetic neonates frequently reveals **early onset neonatal hypocalcaemia**, defined as total serum calcium below seven milligrams per deciliter or ionized calcium under four milligrams per deciliter within seventy-two hours of birth. Clinical signs include exaggerated jitteriness, neuromuscular irritability, high-pitched crying, and prolonged QTc intervals on electrocardiography.",
+   "say": "Total calcium under seven milligrams per deciliter causes neuromuscular excitability and prolonged QTc intervals.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classification",
+     "Onset Timing",
+     "Underlying Mechanism"
+    ],
+    "rows": [
+     [
+      "Early-onset hypocalcaemia",
+      "First 48 to 72 hours of life",
+      "Prematurity, asphyxia, maternal diabetes (blunted PTH)"
+     ],
+     [
+      "Late-onset hypocalcaemia",
+      "End of first week of life",
+      "High-phosphate cow milk feeding, hypomagnesemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mechanical traction during difficult deliveries with shoulder dystocia causes **Erb Duchenne brachial plexus palsy**, involving the fifth and sixth cervical nerve roots. The classic waiter's tip deformity presents with an adducted, internally rotated shoulder, extended elbow, and pronated forearm. The grasp reflex remains fully intact, while the ipsilateral biceps jerk and Moro reflex are absent.",
+   "say": "Erb palsy affects C5-C6 roots, producing an internally rotated arm with an intact grasp reflex.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Erb Palsy (Upper Trunk C5-C6)",
+     "points": [
+      "Shoulder adducted and internally rotated",
+      "Elbow extended, forearm pronated ('waiter's tip')",
+      "Biceps jerk absent, palmar grasp intact"
+     ]
+    },
+    "right": {
+     "title": "Klumpke Palsy (Lower Trunk C8-T1)",
+     "points": [
+      "Intrinsic hand muscle paralysis ('claw hand')",
+      "Absent palmar grasp reflex",
+      "Associated Horner syndrome if sympathetic T1 root torn"
+     ]
+    }
+   }
+  }
+ ]
+}

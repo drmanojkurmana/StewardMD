@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "id": "cm-vaccines-cold-chain-ice-lined-refrigerator",
+ "subject": "community-medicine",
+ "module": "cm-vaccines-cold-chain",
+ "title": "Ice-Lined Refrigerator: The Cold Chain Workhorse",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Why the lining is made of ice",
+   "tx": "An **ice-lined refrigerator** stores vaccines between plus 2 and plus 8 degrees Celsius, with water filled liners that freeze into an ice wall during powered hours. That ice wall keeps the cabinet cold through long power cuts without any generator. It is the standard vaccine store at primary health centre level across the programme.",
+   "say": "Water liners freeze while power runs, then hold the cabinet between two and eight degrees through cuts. No generator needed. That is the design's whole point.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Value"],
+    "rows": [
+     ["Storage range", "Plus 2 to plus 8 degrees Celsius"],
+     ["Lining", "Water packs frozen into ice wall"],
+     ["Level of use", "PHC and district stores"],
+     ["Backup", "Ice wall holdover, no generator"]
+    ]
+   }
+  },
+  {
+   "title": "Holdover time: the number that matters",
+   "tx": "**Holdover time** is how long the cabinet stays within range after power fails with the door shut, and top opening models with thick ice lining hold far longer than front opening domestic refrigerators. Staff must know their unit's holdover at local ambient temperature, because that number decides whether vaccines survive a weekend outage or need emergency shifting.",
+   "say": "Holdover is survival time with power off and door shut. Know your unit's number at local summer temperature. It decides rescue or routine waiting during outages.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Situation", "Meaning"],
+    "rows": [
+     ["Power cut within holdover", "Keep door shut, monitor"],
+     ["Cut beyond holdover", "Shift vaccines in cold boxes"],
+     ["Door opened repeatedly", "Holdover shortens sharply"],
+     ["Ice lining melted", "Recharge fully before restocking"]
+    ]
+   }
+  },
+  {
+   "title": "Top opening beats front opening",
+   "tx": "**Cold air loss** decides the design: cold air sinks, so lifting a top lid spills far less cold than swinging a front door, which dumps the chilled air at floor level with every opening. Programme refrigerators therefore open from the top, while domestic front opening units are discouraged for vaccine storage except in true emergencies.",
+   "say": "Cold air sinks. A top lid traps it, a front door dumps it. That single physics fact explains the programme's top opening cabinets.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Top opening ILR",
+     "points": ["Cold air retained on opening", "Long holdover time", "Baskets organise vaccines", "Programme standard"]
+    },
+    "right": {
+     "title": "Front opening domestic",
+     "points": ["Cold air spills each opening", "Short holdover", "Freezer compartment risks freezing", "Emergency use only"]
+    }
+   }
+  },
+  {
+   "title": "Loading: baskets, air gaps and the freezing trap",
+   "tx": "**Vaccine placement** inside uses perforated baskets that let cold air circulate, keeping cartons off the floor and walls of the cabinet. Freeze sensitive vaccines such as hepatitis B, pentavalent and tetanus toxoid must never touch the ice lining or sit where cold air blasts directly, because one freezing episode silently destroys them.",
+   "say": "Baskets keep cartons off cold walls with air moving around them. Freeze sensitive vaccines never touch the lining. One silent freeze can kill a whole batch.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Rule", "Reason"],
+    "rows": [
+     ["Use baskets", "Air circulation, no wall contact"],
+     ["Keep floor clear", "Cold pooling and freezing risk"],
+     ["Separate by expiry", "Earliest expiry used first"],
+     ["No food or specimens", "Contamination and confusion"]
+    ]
+   }
+  },
+  {
+   "title": "Twice daily temperature recording",
+   "tx": "The **temperature log** is read and recorded twice daily, morning and evening, including weekends, on the chart pinned to the unit. A single missed weekend of rising temperature can waste a month of vaccines unnoticed. Supervisors check the chart's continuity first on visits, because gaps in ink usually mean gaps in cold chain discipline.",
+   "say": "Read it morning and evening, weekends included, and write it down. Supervisors read the chart before anything else. Missing ink usually means missing discipline.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Read thermometer twice daily"},
+     {"id": "b", "label": "Record on temperature chart"},
+     {"id": "c", "label": "Spot out of range reading"},
+     {"id": "d", "label": "Shift vaccines, report fault"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Defrosting and the melt water trap",
+   "tx": "**Defrosting** is needed when frost thickens beyond about five millimetres, because heavy frost insulates the lining and paradoxically warms the storage chamber while stressing the compressor. Vaccines move to cold boxes with conditioned ice packs for the few hours involved, never onto a bench. Melt water must drain fully before the lining refreezes.",
+   "say": "Frost past five millimetres insulates and warms the chamber. Move vaccines to cold boxes, never the bench, defrost, drain, and only then restock.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Sign", "Action"],
+    "rows": [
+     ["Frost over 5 mm", "Plan defrosting"],
+     ["Temperature creeping up", "Check frost and door seal"],
+     ["Water pooling inside", "Drain and dry lining"],
+     ["Compressor running constantly", "Service call with vaccine shift"]
+    ]
+   }
+  },
+  {
+   "title": "Voltage, stabiliser and siting",
+   "tx": "A **voltage stabiliser** protects the compressor against the surges and sags of rural supply, and the unit sits level, away from direct sunlight and heat sources, with space behind for condenser airflow. Plugging through shared extension boards with heaters or autoclaves invites the voltage drops that burn out compressors mid summer.",
+   "say": "Stabiliser fitted, unit level, shade kept, back ventilated. Never share its line with heaters. Most compressor deaths trace back to bad power and bad siting.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Siting rule", "Protects against"],
+    "rows": [
+     ["Voltage stabiliser", "Surge compressor damage"],
+     ["Shade from sunlight", "Extra heat load"],
+     ["Gap behind unit", "Condenser overheating"],
+     ["Dedicated socket", "Voltage drop trips"]
+    ]
+   }
+  },
+  {
+   "title": "When the ILR fails: the rescue ladder",
+   "tx": "**Cold chain failure** response follows a ladder: keep the door shut, read the temperature and elapsed outage, shift vaccines into cold boxes with conditioned ice packs if range is breached, inform the medical officer, and quarantine doubtful stock for a potency decision instead of discarding it at the facility. Freeze exposure is judged by the shake test for adsorbed vaccines.",
+   "say": "Door shut first. Read temperature, shift to cold boxes if breached, inform upward, quarantine doubtful stock. Facility staff never discard on suspicion alone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Failure or outage noticed"},
+     {"id": "b", "label": "Door shut, temperature read"},
+     {"id": "c", "label": "Shift to cold boxes if breached"},
+     {"id": "d", "label": "Quarantine and report upward"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "ILR in the wider chain",
+   "tx": "The **cold chain** runs from manufacturer through state and district walk in coolers to the ILR, then out in vaccine carriers with conditioned ice packs for session days, returning unused sealed vials under the open vial policy where eligible. The ILR is the middle anchor of that chain: big enough to buffer supply, small enough to sit where sessions begin.",
+   "say": "Manufacturer to walk in cooler to this cabinet to the session carrier. The ice-lined refrigerator anchors the middle, buffering supply where outreach days begin.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Stage", "Equipment"],
+    "rows": [
+     ["State and district", "Walk in cooler"],
+     ["PHC level", "Ice-lined refrigerator"],
+     ["Session day", "Vaccine carrier, ice packs"],
+     ["Return", "Open vial policy if eligible"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-oral-antidiabetics",
+  "subject": "pharmacology",
+  "title": "SGLT2 Inhibitors, Acarbose and Pramlintide: Empagliflozin and Dapagliflozin Beyond Glucose",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Empagliflozin** opened the SGLT2 outcome era when EMPA REG OUTCOME showed cardiovascular death falling by over a third in high risk type 2 diabetes, a result glucose lowering could not explain and every successor trial chased. Blocking proximal tubular glucose and sodium reabsorption wastes 60 to 80 grams of glucose daily in hyperglycaemia, fading as filtration or glucose falls, which makes hypoglycaemia alone nearly impossible and urinary infection the predictable toll.",
+      "say": "Empagliflozin turned a glucose wasting trick into cardiovascular survival; the bladder pays the subscription.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "SGLT2 mechanism fruits",
+          "points": [
+            "Urinary glucose loss 60 to 80 g daily in hyperglycaemia",
+            "Natriuresis and osmotic diuresis: pressure falls modestly",
+            "Weight falls 2 to 3 kg, tubuloglomerular feedback restores",
+            "Hypoglycaemia essentially impossible alone"
+          ]
+        },
+        "right": {
+          "title": "SGLT2 tolls",
+          "points": [
+            "Genital mycotic infections, especially in women",
+            "Urinary infections occasionally ascending",
+            "Volume depletion in elderly and diuretic users",
+            "Euglycaemic ketoacidosis in illness (heart failure lesson)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Dapagliflozin** carried the class into heart failure and chronic kidney disease with and without diabetes (previous modules), while empagliflozin matched it indication for indication, making agent choice within class a formulary and licensing exercise in most systems. Glycaemic efficacy fades below eGFR 45 while organ protection persists to dialysis initiation thresholds, a dissociation prescribers must internalise or they will stop organ drugs for glucose reasons that no longer apply.",
+      "say": "When kidneys fade, glucose effect leaves and organ protection stays; do not stop the drug for the wrong endpoint.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "SGLT2 inhibitor started for diabetes, heart or kidney indication"
+          },
+          {
+            "id": "dip",
+            "label": "Early eGFR dip of 3 to 5 ml per minute expected"
+          },
+          {
+            "id": "persist",
+            "label": "Glycaemic effect fades below eGFR 45"
+          },
+          {
+            "id": "protect",
+            "label": "Cardiorenal protection continues to low eGFR thresholds"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "dip"
+          ],
+          [
+            "dip",
+            "persist"
+          ],
+          [
+            "persist",
+            "protect"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **SGLT2 inhibitor** safety drills from earlier modules bear collecting: sick day pauses in dehydrating illness, perioperative withholding against euglycaemic ketoacidosis, foot vigilance where amputation signals were debated (canagliflozin's CANVAS signal not reproduced class wide), Fournier gangrene as a rare labelled horror, and genital hygiene counselling that prevents most mycotic misery. Fractures and bladder signals vary by agent and remain surveillance items rather than class verdicts.",
+      "say": "Sick days paused, surgery withheld, feet watched, hygiene counselled: the class drill in one breath.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Routine drills",
+          "points": [
+            "Pause in vomiting, diarrhoea or poor intake",
+            "Withhold days before major surgery",
+            "Genital hygiene and early thrush treatment",
+            "Volume review in elderly and loop diuretic users"
+          ]
+        },
+        "right": {
+          "title": "Rare but labelled",
+          "points": [
+            "Euglycaemic ketoacidosis in illness or fasting",
+            "Fournier gangrene: perineal pain is an emergency",
+            "Amputation signal debated, foot care universal",
+            "Ketones checked in any sick SGLT2 patient"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Acarbose** inhibits intestinal alpha glucosidases, delaying carbohydrate digestion so postprandial glucose flattens while undigested starch ferments downstream into the flatulence, bloating and diarrhoea that limit it to the motivated. Taken with the first bite, useless without carbohydrate aboard, and hypoglycaemia on combination therapy must be treated with glucose, not sucrose, because the enzyme that frees glucose from sucrose is the one inhibited, a delicious examination trap.",
+      "say": "Acarbose trades postprandial peaks for flatulence, and its hypoglycaemia takes glucose, never table sugar.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acarbose profile",
+          "points": [
+            "Alpha glucosidase inhibition in the brush border",
+            "With the first bite of each carbohydrate meal",
+            "Postprandial glucose targeted, HbA1c fall modest",
+            "Flatulence and diarrhoea dose limiting"
+          ]
+        },
+        "right": {
+          "title": "Acarbose traps",
+          "points": [
+            "Hypoglycaemia treated with glucose, not sucrose",
+            "Useless in low carbohydrate meals",
+            "Liver enzymes at high doses historically",
+            "Miglitol its absorbable cousin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pramlintide**, an amylin analogue, replaces the beta cell's other hormone: it slows gastric emptying, suppresses postprandial glucagon and enforces satiety as mealtime injections added to insulin in type 1 and insulin using type 2 diabetes, at the cost of severe hypoglycaemia risk when insulin doses are not cut by a third to a half at initiation. Its niche is narrow and largely North American, but its physiology (amylin is co secreted with insulin and deficient in type 1) is examinable endocrinology.",
+      "say": "Pramlintide replaces insulin's forgotten partner hormone; cut the insulin first or it will teach you why.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "insulin",
+            "label": "Insulin treated diabetes with postprandial excursions"
+          },
+          {
+            "id": "cut",
+            "label": "Mealtime insulin cut by a third to a half"
+          },
+          {
+            "id": "pram",
+            "label": "Pramlintide injected before major meals"
+          },
+          {
+            "id": "flat",
+            "label": "Postprandial glucose and appetite flatten"
+          }
+        ],
+        "edges": [
+          [
+            "insulin",
+            "cut"
+          ],
+          [
+            "cut",
+            "pram"
+          ],
+          [
+            "pram",
+            "flat"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Sequencing modern type** 2 therapy after metformin is now comorbidity led and this module can finally be read as one map: cardiovascular disease argues GLP 1 agonist or SGLT2 inhibitor, heart failure or kidney progression argues SGLT2 inhibitor first, weight argues GLP 1 based therapy, hypoglycaemia avoidance argues gliptins or either modern class, and cost argues sulfonylureas and pioglitazone where their risks permit. HbA1c targets individualise around the chosen agents, not the reverse.",
+      "say": "Comorbidity chooses the second drug now; glucose arithmetic merely schedules the rest.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diabetes-mellitus-management-and-therapies-fig1.webp",
+        "alt": "Antidiabetic medication target organs diagram showing hepatic, pancreatic, gut and renal targets",
+        "caption": "The full antidiabetic target map across which modern comorbidity led sequencing is chosen."
+      }
+    },
+    {
+      "tx": "**Injectable escalation beyond orals** follows failure honestly defined: basal insulin added to orals (bedtime basal, fasting titration) before premixed or basal bolus complexity, GLP 1 agonists often preceding insulin where weight and hypoglycaemia argue, and fixed ratio basal GLP 1 combinations simplifying the union. Sulfonylureas are usually retired as insulin arrives, metformin and organ protective classes continue, and gliptins stop when GLP 1 therapy starts, the module's rules converging without contradiction.",
+      "say": "Basal before bolus, GLP 1 before insulin where weight argues, and retire the secretagogue as insulin lands.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fail",
+            "label": "Oral combinations miss individualised target"
+          },
+          {
+            "id": "basal",
+            "label": "Bedtime basal insulin or GLP 1 step chosen by phenotype"
+          },
+          {
+            "id": "fast",
+            "label": "Fasting glucose titrated, orals rationalised"
+          },
+          {
+            "id": "bolus",
+            "label": "Mealtime insulin added stepwise if control still fails"
+          }
+        ],
+        "edges": [
+          [
+            "fail",
+            "basal"
+          ],
+          [
+            "basal",
+            "fast"
+          ],
+          [
+            "fast",
+            "bolus"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Monitoring binds the modern** classes: HbA1c every three to six months against individualised targets, eGFR and potassium trajectories on SGLT2 and RAAS partners, eye surveillance where rapid improvement threatens retinopathy, foot and genital reviews by class, and annual structured complication screening whatever the regimen. The pharmacology of this module changed faster in a decade than any other in the syllabus; the monitoring habits are what keep that speed safe at clinic pace.",
+      "say": "Fast moving classes, slow careful monitoring; kidneys, eyes, feet and genitals by drug name.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "By class surveillance",
+          "points": [
+            "SGLT2: eGFR dip then slope, genital and foot review",
+            "GLP 1: gastrointestinal tolerance, gallbladder symptoms",
+            "Sulfonylureas: hypoglycaemia diary and driving",
+            "Metformin: B12 and eGFR by band"
+          ]
+        },
+        "right": {
+          "title": "Universal surveillance",
+          "points": [
+            "HbA1c against individualised targets",
+            "Annual eye, foot, renal and lipid screening",
+            "Sick day rules documented for all",
+            "Cardiovascular risk factors treated in parallel"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,240 @@
+{
+  "v": 1,
+  "module": "phm-adrenergic-agonists",
+  "subject": "pharmacology",
+  "title": "Direct-Acting Endogenous Catecholamines and Inotropic Vasopressors",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The primary endogenous sympathetic neurotransmitter and first-line vasopressor for septic and vasodilatory distributive shock is **noradrenaline**. Also designated norepinephrine, it acts as a potent agonist on vascular alpha-1 and alpha-2 adrenergic receptors alongside cardiac beta-1 receptors, while exhibiting minimal affinity for beta-2 receptors. Noradrenaline produces intense peripheral arteriolar vasoconstriction, elevating total peripheral resistance and expanding mean arterial pressure with minimal chronotropic metabolic oxygen penalty.",
+      "say": "Noradrenaline is the first-line vasopressor in septic shock, raising vascular resistance through potent alpha-1 stimulation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Catecholamine",
+          "Alpha-1 effect",
+          "Beta-1 effect",
+          "Beta-2 effect",
+          "Primary clinical usage"
+        ],
+        "rows": [
+          [
+            "Noradrenaline",
+            "Potent vasoconstriction (+++++)",
+            "Moderate inotropy (+++)",
+            "Negligible (0)",
+            "First-line vasopressor in septic shock"
+          ],
+          [
+            "Adrenaline",
+            "Potent vasoconstriction (++++)",
+            "Potent inotropy (++++)",
+            "Potent bronchodilation (++++)",
+            "Anaphylactic shock, cardiac arrest"
+          ],
+          [
+            "Isoprenaline",
+            "None (0)",
+            "Potent inotropy and chronotropy (+++++)",
+            "Potent vasodilation (+++++)",
+            "Heart block, severe bradycardia"
+          ],
+          [
+            "Dobutamine",
+            "Negligible (+/-)",
+            "Potent selective inotropy (++++)",
+            "Mild vasodilation (++)",
+            "Cardiogenic shock, acute decompensated heart failure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The principal endogenous hormone released by the adrenal medulla during fight-or-flight sympathetic stress responses is **adrenaline**. Operating as a non-selective adrenergic agonist across alpha-1, alpha-2, beta-1, and beta-2 receptors, adrenaline exerts dose-dependent hemodynamic effects. Low intravenous infusions stimulate highly sensitive vascular beta-2 receptors to produce peripheral vasodilation; higher therapeutic doses stimulate vascular alpha-1 receptors, producing widespread vasoconstriction that overrides beta-2 vasodilation.",
+      "say": "Adrenaline stimulates all adrenergic receptor subtypes, reversing hypotension, bronchospasm, and mast cell release.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "adr",
+            "label": "Intramuscular adrenaline 0.5 mg"
+          },
+          {
+            "id": "a1",
+            "label": "Alpha-1 stimulation: Vasoconstriction raises blood pressure"
+          },
+          {
+            "id": "b1",
+            "label": "Beta-1 stimulation: Increases cardiac inotropy and output"
+          },
+          {
+            "id": "b2",
+            "label": "Beta-2 stimulation: Relieves bronchospasm and halts mast degranulation"
+          }
+        ],
+        "edges": [
+          [
+            "adr",
+            "a1"
+          ],
+          [
+            "adr",
+            "b1"
+          ],
+          [
+            "adr",
+            "b2"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A vital endogenous catecholamine precursor with distinct concentration-dependent vascular and renal actions is **dopamine**. Low infusion rates under two micrograms per kilogram per minute stimulate vascular D1 dopaminergic receptors, causing selective renal and mesenteric vasodilation. Intermediate rates between two and five micrograms stimulate myocardial beta-1 receptors to augment cardiac inotropy; high infusion rates exceeding ten micrograms activate vascular alpha-1 receptors, causing generalized vasoconstriction.",
+      "say": "Dopamine exerts dose-dependent effects, stimulating D1 renal receptors at low doses and alpha-1 receptors at high doses.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Dose range (mcg/kg/min)",
+          "Predominant receptor",
+          "Hemodynamic action",
+          "Clinical utility"
+        ],
+        "rows": [
+          [
+            "0.5 to 2 (Low)",
+            "Vascular D1 dopaminergic",
+            "Renal and mesenteric vasodilation",
+            "Historical renal perfusion dosing"
+          ],
+          [
+            "2 to 10 (Intermediate)",
+            "Cardiac beta-1 adrenergic",
+            "Positive inotropy and stroke volume",
+            "Cardiogenic hypotension, bradycardia"
+          ],
+          [
+            "> 10 (High)",
+            "Vascular alpha-1 adrenergic",
+            "Systemic vasoconstriction, increased SVR",
+            "Distributive hypotension salvage"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A synthetic catecholamine formulated specifically as an inotropic agent devoid of prominent vasoconstriction is **dobutamine**. Synthesized as a racemic mixture of dextro and levo enantiomers, the dextro isomer acts as a potent beta-1 agonist and beta-2 agonist, while the levo isomer provides modest alpha-1 stimulation. The net clinical effect is substantial enhancement of myocardial contractility and stroke volume with minimal alterations in vascular resistance, making it ideal for acute cardiogenic shock.",
+      "say": "Dobutamine strengthens cardiac contraction with minimal vascular resistance change in cardiogenic shock.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/shock-haemodynamic-long-case-fig1.webp",
+        "alt": "Shock hemodynamic management and inotropic support",
+        "caption": "Hemodynamic profile and inotropic pharmacotherapy using dobutamine and vasopressors in shock states."
+      }
+    },
+    {
+      "tx": "A synthetic non-selective beta-1 and beta-2 adrenergic agonist devoid of alpha receptor activity is **isoprenaline**. Also designated isoproterenol, it stimulates cardiac beta-1 receptors to trigger potent positive inotropy, chronotropy, and dromotropy, markedly increasing myocardial work. Concurrently, stimulating vascular beta-2 receptors produces intense skeletal muscle arteriolar vasodilation, dropping diastolic arterial blood pressure. Its primary modern role is temporary pharmacological pacing for refractory bradycardia and complete AV nodal block.",
+      "say": "Isoprenaline selectively activates beta-1 and beta-2 receptors, boosting heart rate while dilating skeletal arterioles.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Isoprenaline (Pure beta agonist)",
+          "points": [
+            "Potent beta-1 chronotropy and inotropy",
+            "Beta-2 vasodilation lowers diastolic BP",
+            "Mean arterial blood pressure falls",
+            "Useful in third-degree complete AV block"
+          ]
+        },
+        "right": {
+          "title": "Noradrenaline (Alpha + beta-1)",
+          "points": [
+            "Potent alpha-1 peripheral vasoconstriction",
+            "Beta-1 inotropic support",
+            "Both systolic and diastolic BP rise markedly",
+            "Triggers baroreceptor reflex bradycardia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Acute distributive shock with systemic vasodilation and capillary leakage requires urgent restoration of vascular tone through **vasopressor resuscitation**. Following adequate fluid volume loading, noradrenaline infusion targets a mean arterial pressure of sixty-five millimeters of mercury. If hypotension persists despite escalating noradrenaline infusions, clinicians add vasopressin or adrenaline as secondary adjunctive agents to maintain end-organ microvascular perfusion pressure.",
+      "say": "Vasopressor infusions target a mean arterial pressure of 65 millimeters of mercury during septic shock resuscitation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fl",
+            "label": "Initial 30 mL/kg crystalloid fluid bolus"
+          },
+          {
+            "id": "na",
+            "label": "First-line noradrenaline infusion titrated to MAP 65 mmHg"
+          },
+          {
+            "id": "refr",
+            "label": "Persistent refractory hypotension"
+          },
+          {
+            "id": "adj",
+            "label": "Add second-line vasopressin 0.03 units/min or adrenaline"
+          }
+        ],
+        "edges": [
+          [
+            "fl",
+            "na"
+          ],
+          [
+            "na",
+            "refr"
+          ],
+          [
+            "refr",
+            "adj"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Severe hypersensitivity reactions with systemic compromise demand immediate intramuscular administration of **emergency adrenaline**. Anaphylaxis causes massive mast cell histamine and leukotriene degranulation, precipitating asphyxiating laryngeal edema, acute bronchospasm, and distributive circulatory shock. Intramuscular adrenaline in the anterolateral mid-thigh rapidly constricts dilated arterioles, halts mucosal edema, stimulates bronchial smooth muscle dilation, and shuts down further mast cell exocytosis.",
+      "say": "Prompt intramuscular adrenaline into the lateral thigh halts anaphylactic shock and airway obstruction.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/anaphylaxis-fig2.webp",
+        "alt": "Anaphylaxis and adrenaline receptor sites",
+        "caption": "Receptor targets of adrenaline in anaphylaxis: reversing alpha-1 vasodilation, beta-1 cardiac depression, and beta-2 bronchospasm."
+      }
+    },
+    {
+      "tx": "Extravasation of concentrated peripheral noradrenaline infusions causes severe localized ischemic necrosis recognized as **vasopressor tissue necrosis**. Intense localized alpha-1 vasoconstriction arrests capillary microcirculation in surrounding subcutaneous tissue, causing ischemic gangrene. Emergency management requires immediate cessation of the infusion, aspiration of residual drug from the cannulated vein, and subcutaneous infiltration of competitive alpha-blocker phentolamine to restore microvascular blood flow.",
+      "say": "Phentolamine infiltration reverses localized vasoconstriction and prevents tissue necrosis after noradrenaline extravasation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Complication phase",
+          "Pathophysiological process",
+          "Emergency rescue intervention"
+        ],
+        "rows": [
+          [
+            "Extravasation",
+            "Noradrenaline leaks into subcutaneous tissue",
+            "Stop infusion, do not remove cannula immediately"
+          ],
+          [
+            "Severe ischemia",
+            "Intense local alpha-1 arteriolar spasm",
+            "Aspirate 3 to 5 mL of blood from cannula"
+          ],
+          [
+            "Tissue salvage",
+            "Irreversible dermal necrosis threatens",
+            "Infiltrate 5 to 10 mg phentolamine in saline through cannula and skin"
+          ]
+        ]
+      }
+    }
+  ]
+}

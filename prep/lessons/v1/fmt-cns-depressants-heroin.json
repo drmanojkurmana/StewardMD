@@ -1,0 +1,315 @@
+{
+ "v": 1,
+ "id": "fmt-cns-depressants-heroin",
+ "subject": "forensic-medicine",
+ "module": "fmt-cns-depressants",
+ "title": "Heroin, Morphine, Naloxone and Opioid Overdose",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Heroin becomes morphine in the body",
+   "tx": "**Heroin**, diacetylmorphine or brown sugar, comes as white, brown and black tar forms, street names smack, junk and dope, diluted with quinine, lactose and mannitol, and combined with cocaine as speedballs. It is not taken orally because stomach hydrolysis destroys it; it is injected, heated on silver foil and inhaled as chasing the dragon, or snuffed. The body hydrolyses it to monoacetylmorphine then morphine within thirty to sixty minutes, so chemical analysis detects morphine but not heroin itself.",
+   "say": "Injected or smoked, never swallowed, heroin turns to morphine within the hour, which is all the laboratory ever finds.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Heroin fact",
+     "Detail",
+     "Point"
+    ],
+    "rows": [
+     [
+      "Forms",
+      "White, brown, black tar",
+      "Diluted with quinine, lactose"
+     ],
+     [
+      "Routes",
+      "Injected, smoked, snuffed",
+      "Oral route destroyed"
+     ],
+     [
+      "Metabolism",
+      "To morphine in 30 to 60 minutes",
+      "Analysis finds morphine"
+     ],
+     [
+      "Fatal dose",
+      "About 50 mg",
+      "Tolerance can exceed a hundredfold"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Overdose: the opioid triad",
+   "tx": "Opioid overdose is recognised by the **triad of respiratory depression, pinpoint pupils and depressed consciousness**, with a needle track, foam at the mouth and a syringe nearby completing the scene. Heroin causes sudden death even in long term users, sometimes with the needle still in the vein, from very strong central depressant action, personal hypersensitivity in a few, and alcohol aboard in almost all fatal cases. Intense euphoria lasts minutes, sedation about an hour, and effects are lost in three to six hours.",
+   "say": "Slow breathing, pinpoint pupils and coma with a fresh track are opioid overdose until naloxone proves it in minutes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Euphoria for minutes"
+     },
+     {
+      "id": "b",
+      "label": "Sedation about an hour"
+     },
+     {
+      "id": "c",
+      "label": "Breathing slows, pupils pin"
+     },
+     {
+      "id": "d",
+      "label": "Coma and respiratory arrest"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Naloxone reverses the overdose",
+   "tx": "**Naloxone** is the narcotic antagonist that displaces opioids from their receptors and restores breathing within minutes, which is both treatment and diagnostic test. Because its action is shorter than heroin's sedation, the revived patient is observed for re sedation and the dose repeated or infused. For dependence treatment, naltrexone blocks euphoria, methadone forty milligrams daily usually prevents withdrawal and eighty blocks heroin euphoria, tapered by twenty percent daily, and addicts must never be handed twenty milligrams of methadone at one time outside supervision.",
+   "say": "Naloxone wakes the overdose in minutes but wears off first, so watch for the patient sinking back into sedation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute reversal",
+     "points": [
+      "Naloxone restores breathing",
+      "Response confirms opioid cause",
+      "Observe for re sedation",
+      "Repeat or infuse as needed"
+     ]
+    },
+    "right": {
+     "title": "Dependence treatment",
+     "points": [
+      "Methadone prevents withdrawal",
+      "Taper twenty percent daily",
+      "Naltrexone blocks euphoria",
+      "Clonidine eases symptoms"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Morphinism: the chronic addict",
+   "tx": "**Chronic morphine addiction** tolerance can reach three to six grams of opium daily. The addict shows dry skin, scars of healed abscesses and abscesses themselves and tattooing from needles. Pleasure gives way to disinterest and recurring depression, restlessness, irritability, disturbed sleep or insomnia, loss of memory, mental fatigue and gradual intellectual and moral deterioration, with constipation, contracted pupils, anorexia, emaciation, weakness and impotence. Sudden cessation in a dependent pregnant woman can endanger the fetus fatally.",
+   "say": "Needle scarred, constipated, emaciated and deteriorating describes morphinism, whose tolerance can reach grams a day.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Addiction sign",
+     "Finding",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Skin",
+      "Abscesses, needle tattooing",
+      "Injection history"
+     ],
+     [
+      "Mind",
+      "Memory and moral deterioration",
+      "Depression recurs"
+     ],
+     [
+      "Body",
+      "Emaciation, constipation, impotence",
+      "Pupils contracted"
+     ],
+     [
+      "Tolerance",
+      "3 to 6 g opium daily",
+      "Cellular mechanism"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Withdrawal and methadone tapering",
+   "tx": "**Opioid withdrawal** in pethidine type dependence appears in three to four hours, peaks at eight to twelve and disappears in four to five days; morphine withdrawal runs a longer, miserable course of craving, lacrimation, rhinorrhoea, yawning, sweating, piloerection, diarrhoea and insomnia. Treatment is gradual withdrawal: methadone thirty to forty milligrams daily tapered off, dihydrocodeine or codeine for the less dependent, propranolol fifty milligrams against anxiety and craving, tranquillisers at bedtime and psychiatric counselling throughout.",
+   "say": "Tears, runny nose, yawning and diarrhoea mark withdrawal, answered by a slow methadone taper and counselling.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Craving and autonomic storm"
+     },
+     {
+      "id": "b",
+      "label": "Methadone stabilises the patient"
+     },
+     {
+      "id": "c",
+      "label": "Taper by a fifth daily"
+     },
+     {
+      "id": "d",
+      "label": "Counselling prevents relapse"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Autopsy in heroin death",
+   "tx": "At **autopsy after heroin death** the lungs are heavy and congested with severe pulmonary oedema, the commonest finding, probably from sudden ventricular dysrhythmia, and microscopically show foreign body granulomas from injected adulterants. The liver shows chronic triaditis with mononuclear infiltrates. Morphine can sometimes be detected in liver or bile when none is detectable in blood or urine, and opiates are identifiable in hair, which also dates the habit. Fresh and old injection sites are photographed and excised for analysis.",
+   "say": "Heavy oedematous lungs with granulomas and a triaditis liver are heroin's autopsy signature, and bile may hold what blood lost.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Heroin autopsy",
+     "points": [
+      "Heavy congested oedematous lungs",
+      "Foreign body granulomas",
+      "Chronic triaditis of liver",
+      "Needle tracks photographed"
+     ]
+    },
+    "right": {
+     "title": "Samples that persist",
+     "points": [
+      "Morphine in liver or bile",
+      "Opiates in hair segments",
+      "Excised injection sites",
+      "Blood may already be negative"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Pethidine, methadone and fentanyl relatives",
+   "tx": "The opioid family widens in **synthetic opioids**. Pethidine, fatal near two grams in twenty four hours, causes more dizziness and elation than morphine, incomplete tolerance with twitchings, tremors, confusion, hallucinations, dilated pupils and convulsions, addiction common among doctors and nurses, and dangerous reactions with monoamine oxidase inhibitors. Methadone is a long acting opioid of fifteen hour half life, more powerful than morphine. Fentanyl is fifty to one hundred times morphine's potency by vein, mouth, smoke, snort or skin patch.",
+   "say": "Pethidine addicts twitch and convulse among medical staff, methadone lasts fifteen hours, and fentanyl is a hundred times morphine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Opioid",
+     "Distinction",
+     "Fatal or potency guide"
+    ],
+    "rows": [
+     [
+      "Pethidine",
+      "Convulsions, dilated pupils",
+      "About 2 g fatal"
+     ],
+     [
+      "Methadone",
+      "15 hour half life",
+      "Stronger than morphine"
+     ],
+     [
+      "Fentanyl",
+      "Patch, vein, smoke routes",
+      "50 to 100 times morphine"
+     ],
+     [
+      "Codeine group",
+      "Less severe dependence",
+      "Used in tapering"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Barbiturates sit beside opioids in coma",
+   "tx": "**Barbiturates** are the other great depressant family: long acting onset two hours lasting six to twelve, intermediate half to one hour lasting three to six, short acting under three hours, and ultrashort pentothal acting immediately for five to ten minutes. Poisoning runs drowsiness and ataxia to deep coma with lost reflexes, reduced ventilation, cyanosis, hypotension and cold clammy skin. Barbiturates, alcohol and carbon monoxide can destroy the brain while the drug itself is fully excreted before death.",
+   "say": "Coma with lost reflexes and a cold clammy collapse may be barbiturate, and a negative level later never excludes it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Drowsiness, slurred speech"
+     },
+     {
+      "id": "b",
+      "label": "Ataxia, then stupor"
+     },
+     {
+      "id": "c",
+      "label": "Coma, reflexes lost"
+     },
+     {
+      "id": "d",
+      "label": "Ventilation and pressure fail"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Prescribing and custody duties with opioids",
+   "tx": "Opioids sit under the NDPS framework built earlier, and **opioid handling duties** bind the prescriber: prescription only supply, records of stock and administration, secure custody, and recognition that doctor and nurse addiction to pethidine is an occupational hazard needing treatment, not merely discipline. In overdose deaths the syringe, foil, powder residue and injection sites are seized with the body samples, because adulterants such as quinine in the powder can themselves contribute to death and to granulomas in the lungs.",
+   "say": "Records, locked custody and seized paraphernalia complete opioid care, and the powder's adulterants are evidence too.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical duties",
+     "points": [
+      "Prescription only supply",
+      "Stock records maintained",
+      "Secure locked custody",
+      "Staff addiction treated early"
+     ]
+    },
+    "right": {
+     "title": "Death investigation",
+     "points": [
+      "Syringe and foil seized",
+      "Powder residue analysed",
+      "Injection sites excised",
+      "Hair segments date the habit"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,139 @@
+{
+ "v": 1,
+ "id": "cm-cvd-rheumatic-heart-disease",
+ "subject": "community-medicine",
+ "module": "cm-cvd",
+ "title": "Rheumatic Heart Disease: Prevention, Prophylaxis and NP-NCD Programs",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Chronic rheumatic heart disease pathology",
+   "tx": "Recurrent attacks of acute carditis culminate in permanent **rheumatic heart disease**, characterized by chronic progressive valvular scarring, thickening, commissural fusion and calcification. The mitral valve is involved in over ninety percent of cases, producing mitral stenosis with fish-mouth deformity and mitral regurgitation, followed by aortic valve disease, leading to left atrial enlargement, atrial fibrillation, pulmonary venous hypertension, congestive heart failure and thromboembolic stroke.",
+   "say": "Repeated attacks of rheumatic carditis permanently damage heart valves. The mitral valve thickens and fuses into a rigid fish-mouth opening, causing heart failure and stroke.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-rheumatic-fever-fig1.webp",
+    "alt": "Clinical and cardiac pathology diagram of acute rheumatic fever showing pancarditis, Aschoff nodules and valvular verrucae",
+    "caption": "Acute rheumatic fever: Pancarditis, interstitial Aschoff nodules, MacCallum patch, and verrucous valvulitis. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Secondary prophylaxis with benzathine penicillin",
+   "tx": "To prevent recurrent streptococcal infections that cause cumulative valvular destruction, patients require lifelong or prolonged **benzathine penicillin prophylaxis**. The standard protocol administers one point two million units of intramuscular benzathine penicillin G every three to four weeks (six hundred thousand units for children under twenty-seven kilograms); continuous maintenance of low inhibitory penicillin blood levels prevents colonisation by Group A beta-haemolytic streptococci.",
+   "say": "Patients receive intramuscular benzathine penicillin every three to four weeks. Maintaining continuous protective antibiotic levels in the blood shields heart valves from recurrent streptococcal attacks.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Body weight category", "Benzathine penicillin dosage", "Injection interval"],
+    "rows": [
+     ["Children under 27 kg", "600,000 international units IM", "Every 3 to 4 weeks (every 21 to 28 days)"],
+     ["Children >= 27 kg and adults", "1,200,000 international units IM", "Every 3 to 4 weeks (every 21 to 28 days)"],
+     ["Penicillin-allergic patients", "Oral erythromycin 250 mg twice daily", "Continuous daily oral administration"]
+    ]
+   }
+  },
+  {
+   "title": "Duration guidelines for secondary prophylaxis",
+   "tx": "Cardiology consensus guidelines establish structured rules for **secondary prophylaxis duration** based on cardiac involvement and time elapsed since the last acute attack. For patients with documented rheumatic heart disease with persistent valvular lesions, prophylaxis continues until at least forty years of age or for ten years after the last attack (whichever is longer), with lifelong prophylaxis recommended for severe disease or following surgical valve replacement.",
+   "say": "For patients with permanent heart valve damage, penicillin shots must continue until at least age forty. Patients who had surgery for damaged valves require lifelong monthly protection.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Rheumatic fever category", "Minimum duration of prophylaxis", "Age cut-off benchmark"],
+    "rows": [
+     ["Rheumatic fever without carditis", "5 years after last attack", "or until 21 years of age (longer)"],
+     ["Rheumatic fever with resolved carditis", "10 years after last attack", "or until 21 years of age (longer)"],
+     ["Established RHD with persistent valvular defect", "10 years after last attack", "or until 40 years of age (lifelong if severe)"],
+     ["Post-prosthetic valve replacement", "Lifelong prophylaxis mandatory", "Continuous protection against infective endocarditis"]
+    ]
+   }
+  },
+  {
+   "title": "Echocardiographic screening in school surveys",
+   "tx": "Because clinical auscultation misses mild early valvular lesions, epidemiologists utilize **portable echocardiographic screening** in high-risk rural schools to identify subclinical rheumatic heart disease. Using World Heart Federation echocardiographic criteria, trained operators detect pathological mitral regurgitation and valve leaflet thickening before symptoms appear, enabling immediate enrollment in secondary prophylaxis registries to arrest disease progression before irreversible calcification occurs.",
+   "say": "Portable ultrasound screening in schools detects hidden heart valve leaks in children before symptoms appear. Starting penicillin shots early halts damage before severe disability develops.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "School-based screening with portable echo"},
+     {"id": "b", "label": "Detection of subclinical pathological regurgitation"},
+     {"id": "c", "label": "Enrolment in district RHD patient registry"},
+     {"id": "d", "label": "Regular 3-weekly benzathine penicillin shots"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Valvular pathology: mitral stenosis hemodynamics",
+   "tx": "Chronic inflammation and fibrous healing produce the classic anatomical changes of **mitral stenosis hemodynamics**, narrowing the normal mitral valve orifice area from four to six square centimetres down to less than one point five square centimetres in severe disease. Obstruction to left ventricular inflow elevates left atrial pressure, triggering reflex pulmonary arteriolar vasoconstriction and severe right ventricular hypertrophy that culminate in tricuspid regurgitation.",
+   "say": "Mitral stenosis narrows the heart valve opening from five square centimetres to under one point five. High pressure builds in the lungs and heart, causing fluid congestion and right heart failure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/rheumatic-heart-disease-fig1.webp",
+    "alt": "Pathology photograph of rheumatic mitral stenosis showing fish-mouth orifice, thickened cusps and fused chordae tendineae",
+    "caption": "Rheumatic mitral stenosis: Thickened valve cusps, commissural fusion, fish-mouth orifice and shortened chordae. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "The National Programme for Non-Communicable Diseases",
+   "tx": "To address the overwhelming chronic disease burden, the Ministry of Health restructured the earlier NPCDCS into the **National Programme for Prevention and Control of Non-Communicable Diseases**, widely known as NP-NCD. The programme integrates cardiovascular diseases, diabetes, chronic respiratory diseases, stroke and chronic kidney disease under a unified district delivery system, deploying dedicated NCD cells, cardiac care units and free essential antihypertensive medications.",
+   "say": "The National Programme for Non-Communicable Diseases provides free screening and medicines for hypertension, diabetes, heart disease and stroke across every district hospital in India.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Healthcare level", "NP-NCD institutional unit", "Key service delivered"],
+    "rows": [
+     ["Sub-centre / HWCs", "Ayushman Arogya Mandir", "Community screening, CBAC form, BP tracking"],
+     ["Primary health centre", "PHC NCD Clinic", "Physician diagnosis, oral drug refills, counselling"],
+     ["Community health centre", "CHC NCD Clinic", "ECG, biochemical labs, secondary consultation"],
+     ["District hospital", "District NCD Clinic and CCU", "Intensive cardiac care, echo, stroke management"]
+    ]
+   }
+  },
+  {
+   "title": "Population-based screening at Health and Wellness Centres",
+   "tx": "At the grassroots level, female health workers and ASHAs implement **population-based screening** targeting all men and women aged thirty years and older across every village. Using the Community Based Assessment Checklist (CBAC), workers score individuals based on age, tobacco use, alcohol consumption, waist circumference and physical activity, performing home blood pressure measurements and capillary blood glucose testing to capture silent chronic illnesses early.",
+   "say": "Frontline health workers screen everyone aged thirty and above in their homes for blood pressure and diabetes. The checklist scores lifestyle risks, referring high-risk individuals for clinic care.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Household survey of adults >= 30 years"},
+     {"id": "b", "label": "Completion of CBAC risk assessment score"},
+     {"id": "c", "label": "On-site BP measurement and blood glucose test"},
+     {"id": "d", "label": "Referral of positives to PHC medical officer"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Tracking blood pressure and the IHCI initiative",
+   "tx": "Public health centres track blood pressure control under the **India Hypertension Control Initiative**, a large-scale project demonstrating high treatment retention and medication adherence through simple protocols. IHCI employs standardized five-step drug protocols using once-daily low-cost generic antihypertensives (amlodipine, telmisartan, chlorthalidone), ensures uninterrupted thirty-day drug refills at sub-centres, and deploys digital mobile apps for real-time patient follow-up.",
+   "say": "The India Hypertension Control Initiative standardises once-daily blood pressure tablets, guarantees monthly refills, and uses digital phone apps to ensure patients never run out of pills.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Step 1: Low-dose amlodipine 5 mg once daily"},
+     {"id": "b", "label": "Step 2: Add telmisartan 40 mg if BP uncontrolled"},
+     {"id": "c", "label": "Step 3: Add chlorthalidone diuretic at month 3"},
+     {"id": "d", "label": "Digital app tracks adherence and 30-day refills"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Tracking of blood pressure from childhood to adult life",
+   "tx": "Epidemiologists emphasize the **tracking of blood pressure**, the biological tendency of an individual child or adolescent to maintain their relative blood pressure centile rank over successive decades into adult life. Children whose blood pressure tracks consistently in the upper percentiles become adults with established essential hypertension and premature atherosclerosis, highlighting the importance of school health screening, physical education, and childhood obesity prevention.",
+   "say": "Children with blood pressures in the higher percentiles tend to remain in those high ranks as adults. Promoting active sports, healthy school lunches and salt reduction protects future heart health.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Childhood high percentile tracking",
+     "points": ["BP >= 90th percentile for age and sex", "Strong predictor of adult hypertension", "Early left ventricular mass enlargement"]
+    },
+    "right": {
+     "title": "Public health intervention seam",
+     "points": ["Promote physical activity in schools", "Eliminate ultra-processed cafeteria foods", "Routine blood pressure checks in school health"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

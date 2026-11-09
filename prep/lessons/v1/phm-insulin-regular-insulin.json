@@ -1,0 +1,174 @@
+{
+  "v": 1,
+  "module": "phm-insulin",
+  "subject": "pharmacology",
+  "title": "Insulins: Regular, Rapid and Basal Analogues, Pumps, Somogyi and Dawn Phenomena, DKA and Hypoglycaemia",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Regular insulin**, short acting human insulin, begins in 30 minutes, peaks at 2 to 3 hours and lasts 6 to 8, given intravenously (where it is the only formulation used, half life minutes) for ketoacidosis and theatre control or subcutaneously before meals with the half hour lead its kinetics demand. Its hexamer dissociation delay is exactly what the rapid analogues were engineered to abolish, making regular insulin the reference curve every analogue is graded against.",
+      "say": "Regular insulin is the honest baseline: thirty minutes on, peak at two to three, and the only intravenous citizen.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diabetes-mellitus-fig2.webp",
+        "alt": "Diabetes mellitus insulin pathophysiology diagram showing insulin deficiency and resistance",
+        "caption": "Insulin pathophysiology in diabetes, the deficiency and resistance the preparations in this lesson replace or overcome."
+      }
+    },
+    {
+      "tx": "Rapid analogues **lispro**, aspart and glulisine swap amino acids to prevent hexamer self association, so monomers absorb within 10 to 15 minutes, peak near an hour and clear by 3 to 5, matching meal carbohydrate curves and permitting dosing at or even after eating, priceless in children and gastroparesis. Pump therapy (continuous subcutaneous infusion) uses only these, which is also its danger: interruption delivers ketoacidosis within hours because no basal depot exists.",
+      "say": "Rapid analogues arrive with the meal and leave with it; pumps inherit their speed and their interruption risk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rapid analogues (lispro, aspart, glulisine)",
+          "points": [
+            "Onset 10 to 15 minutes, peak about 1 hour",
+            "Duration 3 to 5 hours, meal matched",
+            "Dose with or immediately after food",
+            "Pump infusions: interruption risks rapid DKA"
+          ]
+        },
+        "right": {
+          "title": "Regular insulin",
+          "points": [
+            "Onset 30 minutes, peak 2 to 3 hours",
+            "Duration 6 to 8 hours subcutaneously",
+            "Intravenous use in DKA and critical care",
+            "Pre meal lead time required"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Basal engineering spans a century of tricks: **NPH** (protamine retarded, peaky 4 to 10 hour profile, twice daily, hypoglycaemia prone), glargine (precipitates at tissue pH into a day long depot, peakless, never mixed in a syringe), detemir (albumin bound via fatty acid, slightly shorter, weight friendlier) and **degludec** (multihexamer chains giving a 42 plus hour, forgiving profile where a missed day barely registers). Basal analogues cut nocturnal hypoglycaemia versus NPH in trial after trial.",
+      "say": "From peaky NPH to two day degludec, basal design is hypoglycaemia engineering by precipitation and chains.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Older basals",
+          "points": [
+            "NPH: peak 4 to 10 hours, twice daily usually",
+            "Mixing permitted (regular drawn first: clear before cloudy)",
+            "Nocturnal hypoglycaemia from the peak",
+            "Premixed formulations trade flexibility for simplicity"
+          ]
+        },
+        "right": {
+          "title": "Analogue basals",
+          "points": [
+            "Glargine: peakless 24 hours, never mixed",
+            "Detemir: albumin bound, once or twice daily",
+            "Degludec: beyond 42 hours, missed dose forgiving",
+            "All reduce nocturnal hypoglycaemia versus NPH"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Insulin pump** therapy (continuous subcutaneous insulin infusion with hybrid closed loop automation increasingly) delivers rapid analogue as programmable basal rates plus meal and correction boluses, reducing hypoglycaemia and HbA1c in motivated type 1 patients at the cost of site failures, lipohypertrophy from neglected rotation, cost and the interruption ketoacidosis above. Candidate selection (engagement, carbohydrate counting) predicts success better than any device specification.",
+      "say": "Pumps reward engagement with flexibility and punish interruption with ketones in hours.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "basal", "label": "Programmed basal rapid analogue infusion" },
+          { "id": "bolus", "label": "Meal and correction boluses by carbohydrate counting" },
+          { "id": "loop", "label": "Hybrid closed loop adjusts from sensor glucose" },
+          { "id": "fail", "label": "Site failure: ketones checked, backup pens ready" }
+        ],
+        "edges": [["basal", "bolus"], ["bolus", "loop"], ["loop", "fail"]]
+      }
+    },
+    {
+      "tx": "Morning hyperglycaemia splits into two examined phenomena: the **dawn phenomenon** (physiological early morning growth hormone and cortisol surge raising hepatic glucose output, universal and management by basal timing or pump programming) versus the **Somogyi effect** (postulated rebound after nocturnal hypoglycaemia, historically beloved, evidence thin, with 3 am glucose checks as the discriminating ritual). Modern sensors show true Somogyi rebounds are rare while dawn rises are real, yet the pair remains examination grammar.",
+      "say": "Check at 3 am: low says rebound, high says dawn, and sensors say dawn wins most nights.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dawn phenomenon",
+          "points": [
+            "Early morning counter regulatory hormone surge",
+            "3 am glucose normal or high, fasting high",
+            "Answer: basal timing, dose or pump programming",
+            "Present with and without diabetes"
+          ]
+        },
+        "right": {
+          "title": "Somogyi effect (contested)",
+          "points": [
+            "Nocturnal hypoglycaemia provoking rebound (postulated)",
+            "3 am glucose low, fasting high, night sweats or nightmares",
+            "Answer would be less evening insulin",
+            "Sensor era finds it uncommon; do not chase ghosts"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Diabetic ketoacidosis** therapy runs fluids, potassium and intravenous regular insulin as one braid: isotonic fluids first, potassium before insulin when low (insulin drives it intracellularly), insulin infusion near 0.1 unit per kg per hour once potassium permits, glucose added to fluids when levels fall so insulin can continue until the anion gap closes and ketones clear, because treating glucose alone abandons the acidosis half treated. Bicarbonate is reserved for extreme acidaemia; cerebral oedema vigilance governs paediatric pace.",
+      "say": "Fluids, potassium, then insulin until the gap closes; glucose is added so insulin never has to stop early.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "fluid", "label": "Isotonic fluids restore circulation" },
+          { "id": "k", "label": "Potassium checked and replaced before insulin if low" },
+          { "id": "ins", "label": "Intravenous regular insulin infusion started" },
+          { "id": "close", "label": "Dextrose fluids added, insulin until gap and ketones clear" }
+        ],
+        "edges": [["fluid", "k"], ["k", "ins"], ["ins", "close"]]
+      }
+    },
+    {
+      "tx": "**Hypoglycaemia** is insulin therapy's tax, recognised by Whipple's triad and graded from autonomic warnings (sweating, tremor, palpitations) through neuroglycopenia (confusion, seizures, coma). Conscious patients take 15 grams of fast carbohydrate rechecked in 15 minutes (15 15 rule); unconscious or unsafe swallow earns intravenous glucose or intramuscular **glucagon**, which needs hepatic glycogen and fails in starvation, alcohol excess and chronic liver disease. Sulfonylurea hypoglycaemia relapses for days and is admitted, with octreotide suppressing the insulin drive.",
+      "say": "Fifteen grams, fifteen minutes, recheck; glucagon needs a stocked liver, and sulfonylurea lows are admitted.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Conscious hypoglycaemia",
+          "points": [
+            "15 g fast carbohydrate, recheck in 15 minutes",
+            "Repeat until above 4 mmol per litre",
+            "Follow with longer acting carbohydrate",
+            "Find the cause before the next dose"
+          ]
+        },
+        "right": {
+          "title": "Severe hypoglycaemia",
+          "points": [
+            "Intravenous glucose or intramuscular glucagon",
+            "Glucagon fails without glycogen stores",
+            "Sulfonylurea cause: admit, observe, octreotide",
+            "Driving and occupational notifications follow"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Injection craft decides whether pharmacology arrives: **lipodystrophy** divides into lipoatrophy (immune, rare with analogues) and lipohypertrophy (insulin's lipogenic effect at overused sites), the latter silently destroying absorption predictability until rotation restores it, a hidden cause of inexplicable HbA1c. **Insulin resistance** at the other extreme (needs beyond 2 units per kg) hunts antibodies, technique, infection and true syndromes, with concentrated U 500 regular insulin as the specialist volume answer.",
+      "say": "Rotate sites or the insulin lands in fat that cannot time it; lipohypertrophy is silent pharmacology failure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Site discipline",
+          "points": [
+            "Rotate within anatomical regions systematically",
+            "Palpate for lipohypertrophy at review",
+            "Avoid injecting into lumps: erratic absorption",
+            "Needle reuse dulls and bruises: single use advised"
+          ]
+        },
+        "right": {
+          "title": "Resistance workup",
+          "points": [
+            "Technique, storage and expiry audited first",
+            "Infection, steroids, pregnancy and puberty considered",
+            "True immunological and syndromic resistance rare",
+            "U 500 concentrated insulin in specialist hands"
+          ]
+        }
+      }
+    }
+  ]
+}

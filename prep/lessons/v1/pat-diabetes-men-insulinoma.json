@@ -1,0 +1,199 @@
+{
+  "v": 1,
+  "module": "pat-diabetes-men",
+  "subject": "pathology",
+  "title": "Insulinoma, Gastrinoma, Glucagonoma, and MEN Syndromes with RET",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Insulinoma, usually benign pancreatic beta cell tumour, secretes insulin unsuppressed by hypoglycaemia producing Whipple triad fasting neuroglycopenia relieved by glucose. That triad tumour is **insulinoma with Whipple triad**. Most lesions are solitary, under 2 cm and evenly scattered through head, body and tail, and over 90 percent behave benignly after complete enucleation or resection.",
+      "say": "Symptoms, low glucose documented, relief on correction: Whipple triad earns insulinoma hunting.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/insulinoma-fig1.webp",
+        "alt": "Insulinoma pathophysiology and triad",
+        "caption": "Insulinoma with Whipple triad of fasting hypoglycaemia."
+      }
+    },
+    {
+      "tx": "Supervised fasting with insulin, C-peptide, proinsulin, and sulfonylurea screening separates insulinoma from factitious insulin or secretagogue abuse biochemically. That fast protocol is **72-hour fast in endogenous hyperinsulinism**. The fast ends when glucose falls below about 55 mg per dL with symptoms, and a raised proinsulin fraction at that moment points toward a beta cell tumour.",
+      "say": "Unsuppressed insulin plus C-peptide at low glucose means endogenous; absent C-peptide means injected insulin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Insulinoma pattern",
+          "points": [
+            "Insulin and C-peptide both unsuppressed",
+            "Sulfonylurea screen negative",
+            "Imaging localises pancreas lesion"
+          ]
+        },
+        "right": {
+          "title": "Factitious pattern",
+          "points": [
+            "Insulin high, C-peptide suppressed",
+            "Or sulfonylurea screen positive",
+            "Psychiatric and access review"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Gastrinoma secretes gastrin driving acid hypersecretion, refractory and multiple peptic ulcers, diarrhoea, and Zollinger-Ellison syndrome, duodenum now commoner source than pancreas. That acid flood is **gastrinoma and Zollinger-Ellison syndrome**. Ulcers in the distal duodenum or jejunum, beyond the bulb where ordinary peptic disease lives, should raise suspicion alongside prominent gastric folds and secretory diarrhoea.",
+      "say": "Refractory ulcers beyond duodenal bulb plus diarrhoea mean gastrin; hunt duodenal gastrinoma.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/zollinger-ellison-fig1.webp",
+        "alt": "Gastrinoma location and spread",
+        "caption": "Gastrinoma locations in gastrinoma triangle and metastatic spread."
+      }
+    },
+    {
+      "tx": "Secretin stimulation paradoxically raises gastrin in gastrinoma, while proton pump inhibitors falsify fasting gastrin and must be stopped carefully before testing. That provocation is the **secretin stimulation test for gastrinoma**. A gastrin rise above 120 pg per mL after secretin counts as positive, but calcium infusion was the older, less specific alternative examiners still mention.",
+      "say": "Secretin should suppress gastrin; paradoxical rise convicts gastrinoma after PPI washout discipline.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumour",
+          "Hormone",
+          "Syndrome accent"
+        ],
+        "rows": [
+          [
+            "Insulinoma",
+            "Insulin",
+            "Fasting hypoglycaemia Whipple triad"
+          ],
+          [
+            "Gastrinoma",
+            "Gastrin",
+            "Refractory ulcers, diarrhoea"
+          ],
+          [
+            "Glucagonoma",
+            "Glucagon",
+            "Necrolytic migratory erythema, diabetes"
+          ],
+          [
+            "VIPoma",
+            "Vasoactive intestinal peptide",
+            "Watery diarrhoea, hypokalaemia"
+          ],
+          [
+            "Somatostatinoma",
+            "Somatostatin",
+            "Diabetes, gallstones, steatorrhoea"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Glucagonoma rash necrolytic migratory erythema migrates with diabetes, glossitis, weight loss, and thrombosis from alpha cell tumours usually metastatic at discovery. That migrating rash is **necrolytic migratory erythema of glucagonoma**. Zinc and amino acid repletion can soften the eruption even before tumour therapy, because catabolic nutrient depletion helps drive the skin breakdown.",
+      "say": "Migrating necrolytic rash plus new diabetes means glucagonoma until plasma glucagon acquits it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Hypoglycaemia or ulcer syndrome proven hormonal"
+          },
+          {
+            "id": "b",
+            "label": "Cross sectional and DOTATATE imaging"
+          },
+          {
+            "id": "c",
+            "label": "Surgery if localised and fit"
+          },
+          {
+            "id": "d",
+            "label": "Somatostatin analogues control syndromes"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "MEN 1, Wermer syndrome, assembles parathyroid hyperplasia, pituitary adenomas, and enteropancreatic tumours from menin loss, hypercalcaemia usually first in young families. That three P family is **multiple endocrine neoplasia type 1 (MEN 1)**. Menin acts as a tumour suppressor, inheritance is autosomal dominant, and annual calcium checks from childhood catch the parathyroid phase before stones or bone loss appear.",
+      "say": "Parathyroid, pituitary, pancreas: MEN 1 counts three Ps and starts with young hypercalcaemia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MEN 1 (menin)",
+          "points": [
+            "Parathyroid, pituitary, pancreatic NET",
+            "Hypercalcaemia earliest usually",
+            "Gastrinoma common pancreatic lesion"
+          ]
+        },
+        "right": {
+          "title": "MEN 2 (RET)",
+          "points": [
+            "Medullary thyroid, phaeochromocytoma",
+            "Parathyroid in 2A only",
+            "Prophylactic thyroidectomy by codon"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "MEN 2A adds medullary thyroid cancer and phaeochromocytoma to parathyroid disease, MEN 2B earlier aggressive medullary cancer with mucosal neuromas and marfanoid habitus without parathyroid. Those RET families are **MEN 2A and MEN 2B syndromes**. Hirschsprung disease and cutaneous lichen amyloidosis tag certain MEN 2A kindreds, while MEN 2B adds intestinal ganglioneuromatosis with chronic constipation or megacolon.",
+      "say": "Mucosal neuromas plus marfanoid build mean MEN 2B; thyroidectomy clocks run fastest there.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Syndrome",
+          "Gene",
+          "Earliest danger"
+        ],
+        "rows": [
+          [
+            "MEN 1",
+            "MEN1 menin",
+            "Hyperparathyroidism youth"
+          ],
+          [
+            "MEN 2A",
+            "RET activating",
+            "Medullary thyroid childhood risk"
+          ],
+          [
+            "MEN 2B",
+            "RET M918T classic",
+            "Infant medullary cancer risk"
+          ],
+          [
+            "MEN 4 and others",
+            "CDKN1B and variants",
+            "MEN 1 like assemblies"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "RET proto-oncogene activating mutations stratify medullary cancer risk by codon scheduling prophylactic thyroidectomy childhood ages and phaeochromocytoma screening before any surgery. That codon clock is **RET codon based prophylactic thyroidectomy in MEN 2**. The M918T mutation of MEN 2B pushes total thyroidectomy into the first year of life, whereas moderate risk codons permit waiting until early childhood with calcitonin surveillance.",
+      "say": "The RET codon sets the childhood thyroidectomy date; phaeochromocytoma screening precedes every operation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/primary-hyperparathyroidism-and-pheochromocytoma-fig1.webp",
+        "alt": "Parathyroid adenoma and pheochromocytoma MEN associations",
+        "caption": "MEN associated parathyroid and adrenal tumours requiring sequenced surgery."
+      }
+    }
+  ]
+}

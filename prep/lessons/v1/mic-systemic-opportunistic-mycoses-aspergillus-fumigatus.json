@@ -1,0 +1,201 @@
+{
+  "v": 1,
+  "module": "mic-systemic-opportunistic-mycoses",
+  "subject": "microbiology",
+  "title": "Aspergillus fumigatus, Aspergilloma and Invasive Aspergillosis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The ubiquitous environmental hyphomycete **Aspergillus fumigatus** produces airborne conidia that humans inhale daily without adverse consequences. In individuals with preexisting cavitary lung lesions from treated tuberculosis, fungal spores colonize and proliferate within the anatomical dead space. This creates an aspergilloma, commonly called a fungus ball, consisting of entangled hyphae, fibrin, mucus, and cellular debris.",
+      "say": "Airborne conidia colonize preexisting tubercular cavities to form an entangled fungal mass.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aspergillosis-fig1.webp",
+        "alt": "Aspergillus microscopic morphology",
+        "caption": "Aspergillus fumigatus conidiophore with vesicles bearing phialides and chains of conidia [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "On erect chest radiography and computed tomography, an **aspergilloma** presents as a mobile intracavitary mass capped by a crescent-shaped halo of air, known as the air crescent sign or Monod sign. The mass moves gravitationally when the patient changes position from supine to prone. Recurrent life-threatening haemoptysis represents the chief surgical indication for anatomical resection of the affected pulmonary lobe.",
+      "say": "A mobile intracavitary fungus ball creates the classic gravitational air crescent sign on chest computed tomography.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Radiological Sign",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "Monod sign",
+            "Air crescent capping mobile mass within preexisting tubercular cavity"
+          ],
+          [
+            "Positional shift",
+            "Mass rolls gravitationally between supine and prone acquisitions"
+          ],
+          [
+            "Vascular risk",
+            "Contiguous bronchial artery erosion leads to massive haemoptysis"
+          ],
+          [
+            "Definitive therapy",
+            "Surgical lobectomy or bronchial artery embolisation for haemorrhage"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Tissue biopsies stained with Gomori methenamine silver or periodic acid-Schiff reveal **dichotomous branching** of Aspergillus hyphae. The vegetative filaments measure three to six micrometres in diameter, maintain uniform thickness, possess clear regular transverse septations, and divide acutely at progressive forty-five degree angles. This orderly acute branching morphology reliably separates Aspergillus from the irregular right-angled branching of zygomycetes.",
+      "say": "Regular septate hyphae dividing at forty-five degree acute angles characterize Aspergillus in tissue.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Aspergillus hyphae",
+          "points": [
+            "Uniform width measuring 3 to 6 micrometres",
+            "Regular, closely spaced transverse septa",
+            "Dichotomous acute angle branching at 45 degrees",
+            "Parallel cell walls throughout length"
+          ]
+        },
+        "right": {
+          "title": "Mucorales hyphae",
+          "points": [
+            "Broad, ribbon-like variable width 10 to 25 microns",
+            "Paucity of septa (coenocytic or aseptate)",
+            "Wide right angle branching at 90 degrees",
+            "Folded, thin collapsed wall appearance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In severely immunocompromised neutropenic leukaemia patients, fungal angioinvasion produces **invasive pulmonary aspergillosis**. Hyphae directly invade pulmonary arterioles, driving vascular thrombosis, coagulative infarction, and cavitating tissue necrosis. Early thoracic high-resolution computed tomography shows the halo sign, where a dense rounded pulmonary nodule of infarction is encircled by a ground-glass rim of alveolar haemorrhage.",
+      "say": "Fungal angioinvasion drives pulmonary infarction, producing the early CT halo sign in neutropenic patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/allergic-bronchopulmonary-aspergillosis-fig1.webp",
+        "alt": "Aspergillosis pulmonary pathology",
+        "caption": "Invasive pulmonary aspergillosis showing central infarcted tissue surrounded by hemorrhagic rim [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Serum and bronchoalveolar lavage screening detects the **galactomannan antigen**, a soluble polysaccharide constituent of the Aspergillus cell wall released during active hyphal growth. An optical density index exceeding zero point five on double-sandwich enzyme immunoassay indicates probable invasive aspergillosis before radiological cavitation appears. Piperacillin-tazobactam formulations formerly caused false-positive readings, an important pharmacological pearl.",
+      "say": "Serum galactomannan immunoassay provides early non-invasive confirmation of active fungal tissue invasion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gm1",
+            "label": "Neutropenic patient develops persistent fever despite broad antibiotics"
+          },
+          {
+            "id": "gm2",
+            "label": "Perform serum and bronchoalveolar lavage galactomannan EIA"
+          },
+          {
+            "id": "gm3",
+            "label": "Optical density index over 0.5 triggers targeted antifungal therapy"
+          }
+        ],
+        "edges": [
+          [
+            "gm1",
+            "gm2"
+          ],
+          [
+            "gm2",
+            "gm3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Asthmatic and cystic fibrosis patients may mount a profound hypersensitivity reaction termed **allergic bronchopulmonary aspergillosis**. Repeated conidial exposure triggers high total immunoglobulin E levels, Aspergillus-specific IgE, and peripheral blood eosinophilia. Chronic bronchial inflammation causes proximal central bronchiectasis with characteristic finger-in-glove mucoid impaction on chest radiography, managed with systemic corticosteroids alongside oral itraconazole.",
+      "say": "Hypersensitivity to inhaled conidia causes central bronchiectasis and high serum immunoglobulin E levels.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Criteria",
+          "Threshold Finding"
+        ],
+        "rows": [
+          [
+            "Predisposing condition",
+            "History of bronchial asthma or cystic fibrosis"
+          ],
+          [
+            "Total serum IgE",
+            "Elevated markedly over 1000 international units per millilitre"
+          ],
+          [
+            "Specific antibodies",
+            "Elevated Aspergillus-specific IgE and serum precipitins IgG"
+          ],
+          [
+            "Chest computed tomography",
+            "Central proximal bronchiectasis with mucoid impaction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Microbiological culture on Sabouraud dextrose agar without cycloheximide yields fast-growing smoky-green velvety colonies within forty-eight hours. Microscopic mounts show an unbranched conidiophore terminating in a dome-shaped **vesicle** with uniseriate phialides confined to the upper half or two-thirds. A. fumigatus is thermotolerant, growing readily at temperatures up to forty-five degrees Celsius.",
+      "say": "Smoky green mycelial colonies bear uniseriate phialides strictly atop the upper hemispherical vesicle.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Aspergillus fumigatus",
+          "points": [
+            "Smoky-green velvety colony morphology",
+            "Uniseriate phialides on upper half of vesicle",
+            "Thermotolerant up to 45 degrees Celsius",
+            "Most common cause of invasive disease"
+          ]
+        },
+        "right": {
+          "title": "Aspergillus niger",
+          "points": [
+            "Dense jet-black powdery colonies",
+            "Biseriate phialides covering entire vesicle",
+            "Radiating black conidial head (sunflower)",
+            "Causes otomycosis of external auditory canal"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Intravenous **voriconazole** serves as the undisputed first-line therapeutic standard for invasive aspergillosis, demonstrating superior survival over conventional amphotericin B in clinical trials. Isavuconazole provides an equivalent alternative with fewer adverse effects. Therapeutic drug monitoring for voriconazole is mandatory because non-linear saturation kinetics and cytochrome P450 2C19 polymorphisms lead to unpredictable hepatotoxicity and visual hallucinations.",
+      "say": "Voriconazole is the first-line standard of care but requires plasma concentration monitoring.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rx1",
+            "label": "Confirmed or probable invasive aspergillosis"
+          },
+          {
+            "id": "rx2",
+            "label": "Initiate IV voriconazole loading followed by maintenance"
+          },
+          {
+            "id": "rx3",
+            "label": "Monitor trough plasma levels to maintain 1 to 5 micrograms per millilitre"
+          }
+        ],
+        "edges": [
+          [
+            "rx1",
+            "rx2"
+          ],
+          [
+            "rx2",
+            "rx3"
+          ]
+        ]
+      }
+    }
+  ]
+}

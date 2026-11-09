@@ -1,0 +1,240 @@
+{
+  "v": 1,
+  "module": "phm-nsaids",
+  "subject": "pharmacology",
+  "title": "Aspirin Pharmacodynamics, Salicylism, Reye Syndrome, and Traditional NSAIDs",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The prototypical non-steroidal anti-inflammatory drug that acts by irreversibly acetylating cyclooxygenase enzymes is **aspirin** (acetylsalicylic acid). Aspirin covalently transfers its acetyl group to a specific serine residue within the catalytic channel of both COX-1 and COX-2. In circulating platelets, which lack nuclei and protein synthesis machinery, this permanently blocks thromboxane A2 production, conferring cardioprotective antiplatelet effects at low daily doses of 75 to 100 mg. At intermediate doses of 300 to 600 mg, it provides analgesia and antipyresis, while high anti-inflammatory doses require 3 to 5 grams daily.",
+      "say": "Aspirin permanently acetylates cyclooxygenase serine residues, delivering irreversible antiplatelet protection at low daily doses.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "asp",
+            "label": "Low-dose oral aspirin administration (75 to 100 mg)"
+          },
+          {
+            "id": "acetyl",
+            "label": "Covalent acetylation of platelet COX-1 Ser529 residue"
+          },
+          {
+            "id": "block",
+            "label": "Irreversible catalytic channel blockade of thromboxane synthase pathway"
+          },
+          {
+            "id": "antiplat",
+            "label": "Permanent suppression of thromboxane A2 for 8 to 10 day platelet lifespan"
+          }
+        ],
+        "edges": [
+          [
+            "asp",
+            "acetyl"
+          ],
+          [
+            "acetyl",
+            "block"
+          ],
+          [
+            "block",
+            "antiplat"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The toxic syndrome resulting from high-dose therapeutic accumulation or acute accidental ingestion of salicylates is **salicylism**. Early clinical manifestations include high-pitched tinnitus, reversible sensorineural hearing loss, vertigo, nausea, vomiting, and diaphoresis. In acute poisoning, direct medullary stimulation causes hyperventilation and initial respiratory alkalosis, followed rapidly by severe high anion-gap metabolic acidosis caused by uncoupling of oxidative phosphorylation and fatty acid accumulation. Emergency management includes gastric lavage, activated charcoal, and intravenous sodium bicarbonate to achieve urinary alkalinization (urine pH 7.5 to 8.5) and accelerate salicylate excretion.",
+      "say": "Salicylism causes tinnitus, initial respiratory alkalosis, and progressive high anion-gap metabolic acidosis requiring urinary alkalinization.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Toxicity severity stage",
+          "Serum salicylate concentration",
+          "Predominant clinical manifestations",
+          "Urgent therapeutic intervention"
+        ],
+        "rows": [
+          [
+            "Mild salicylism",
+            "30 to 50 mg/dL",
+            "Tinnitus, diminished hearing, vertigo, nausea",
+            "Dose reduction or drug discontinuation"
+          ],
+          [
+            "Moderate poisoning",
+            "50 to 80 mg/dL",
+            "Hyperpnea, respiratory alkalosis, fever, vomiting",
+            "Intravenous hydration and sodium bicarbonate"
+          ],
+          [
+            "Severe toxicity",
+            "Exceeding 80 mg/dL",
+            "Metabolic acidosis, seizures, coma, pulmonary edema",
+            "Urgent hemodialysis and airway protection"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A catastrophic post-viral illness in children and adolescents triggered by the administration of aspirin during acute influenza or varicella is **Reye syndrome**. Characterized by severe encephalopathy combined with non-inflammatory microvesicular fatty infiltration of the liver, affected children present with persistent vomiting, progressive delirium, seizures, and cerebral edema, accompanied by elevated serum transaminases and hyperammonemia without overt clinical jaundice. Because aspirin impairs mitochondrial fatty acid beta-oxidation in hepatocytes, it is strictly contraindicated in febrile children under sixteen years, with paracetamol or ibuprofen preferred for pediatric fever.",
+      "say": "Aspirin is contraindicated in febrile children because it can precipitate fatal Reye syndrome with cerebral edema.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ap-stomach-gross.webp",
+        "alt": "Gastroduodenal gross mucosal architecture and vascular supply",
+        "caption": "Gastroduodenal mucosal architecture illustrating rugal mucosal lining vulnerable to NSAID-induced cyclooxygenase-1 depletion and ulceration."
+      }
+    },
+    {
+      "tx": "The prototypical propionic acid derivative widely recognized as the best-tolerated non-selective non-steroidal anti-inflammatory drug is **ibuprofen**. By reversibly inhibiting both COX-1 and COX-2, ibuprofen provides rapid analgesic, antipyretic, and anti-inflammatory relief in dysmenorrhea, tension headaches, osteoarthritis, and acute musculoskeletal sprains. Because of its relatively short plasma half-life of two hours and lower ulcerogenic potential compared to aspirin or indomethacin, ibuprofen demonstrates the lowest incidence of severe gastrointestinal adverse events among traditional non-selective agents. It is available over-the-counter in doses up to 400 mg.",
+      "say": "Ibuprofen is a well-tolerated propionic acid NSAID with low gastrointestinal toxicity and a short two-hour half-life.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ibuprofen (Propionic acid class)",
+          "points": [
+            "Short plasma half-life (1.5 to 2 hours)",
+            "Lowest gastrointestinal ulceration risk among traditional NSAIDs",
+            "Requires dosing every 6 to 8 hours for pain",
+            "Well established safety profile across pediatric cohorts"
+          ]
+        },
+        "right": {
+          "title": "Naproxen (Propionic acid class)",
+          "points": [
+            "Long plasma half-life (12 to 15 hours)",
+            "Higher gastrointestinal mucosal ulceration risk",
+            "Permits convenient twice-daily dosing in chronic arthritis",
+            "Lowest documented thrombotic cardiovascular risk profile"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A potent phenylacetic acid derivative that inhibits cyclooxygenase enzymes while demonstrating modest selectivity for the COX-2 isoform is **diclofenac**. Administered orally, intramuscularly, or topically as a gel, diclofenac accumulates preferentially in inflamed synovial fluid, providing sustained therapeutic relief in rheumatoid arthritis and osteoarthritis. However, because its COX-2 selectivity profile closely resembles coxibs, long-term oral diclofenac therapy carries a significant hazard of arterial thrombotic cardiovascular events, including myocardial infarction and ischemic stroke. Consequently, diclofenac should be avoided in patients with established ischemic heart disease or heart failure.",
+      "say": "Diclofenac concentrates in synovial fluid for joint relief, but its COX-2 selectivity carries cardiovascular thrombotic risks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Traditional NSAID entity",
+          "Synovial fluid retention",
+          "Relative COX-2 selectivity",
+          "Cardiovascular safety profile"
+        ],
+        "rows": [
+          [
+            "Diclofenac",
+            "High synovial accumulation",
+            "Modest COX-2 selectivity (approx 4-fold)",
+            "Highest cardiovascular risk among traditional agents"
+          ],
+          [
+            "Naproxen",
+            "Moderate accumulation",
+            "Equipotent COX-1 and COX-2 inhibition",
+            "Safest cardiovascular profile in ischemic heart disease"
+          ],
+          [
+            "Indomethacin",
+            "Rapid joint penetration",
+            "Marked COX-1 selectivity (approx 20-fold)",
+            "Moderate risk; high central neurotoxicity"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A potent indoleacetic acid derivative recognized as one of the most powerful cyclooxygenase inhibitors and neutrophil migration suppressors is **indomethacin**. Beyond non-selective COX-1 and COX-2 inhibition, indomethacin directly inhibits phosphodiesterase and reduces leukocyte extravasation, making it exceptionally effective in acute gouty arthritis, ankylosing spondylitis, and hemicrania continua. In neonatology, intravenous indomethacin promotes pharmacological closure of a hemodynamically significant patent ductus arteriosus, although high rates of frontal headaches, dizziness, and gastric ulceration limit its chronic use.",
+      "say": "Indomethacin is a potent anti-inflammatory drug used for acute gout and closing a patent ductus arteriosus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Indomethacin (Indoleacetic acid)",
+          "points": [
+            "Potent non-selective COX inhibitor and phosphodiesterase blocker",
+            "Rapid termination of acute gouty arthritis flares",
+            "Closes patent ductus arteriosus in premature infants",
+            "High rate of frontal morning headaches, dizziness, and ulceration"
+          ]
+        },
+        "right": {
+          "title": "Colchicine (Tubulin antimitotic)",
+          "points": [
+            "Binds tubulin to disrupt microtubule polymerization",
+            "Suppresses neutrophil chemotaxis and inflammasome activation",
+            "First-line for acute gout without altering prostaglandin synthesis",
+            "Dose-limiting watery diarrhea and abdominal cramping"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The primary dose-limiting systemic hazard resulting from non-selective cyclooxygenase inhibition is **gastric mucosal ulceration**. Prostaglandin E2 and prostacyclin synthesized by constitutive gastric mucosal COX-1 continuously stimulate mucus secretion, increase bicarbonate production, maintain mucosal blood flow, and suppress acid secretion by parietal cells. By depleting these protective prostanoids, traditional NSAIDs allow luminal acid and pepsin to erode gastric and duodenal mucosa, precipitating superficial erosions, peptic ulcers, catastrophic perforation, and upper gastrointestinal hemorrhage.",
+      "say": "Inhibition of mucosal COX-1 deprives the stomach of protective prostaglandins, precipitating peptic ulceration and hemorrhage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "nsaid",
+            "label": "Traditional non-selective NSAID administration"
+          },
+          {
+            "id": "cox1",
+            "label": "Systemic inhibition of gastric mucosal COX-1 enzyme"
+          },
+          {
+            "id": "prosta",
+            "label": "Depletion of cytoprotective PGE2 and PGI2 prostanoids"
+          },
+          {
+            "id": "ulcer",
+            "label": "Impaired mucosal blood flow, reduced bicarbonate, and peptic ulceration"
+          }
+        ],
+        "edges": [
+          [
+            "nsaid",
+            "cox1"
+          ],
+          [
+            "cox1",
+            "prosta"
+          ],
+          [
+            "prosta",
+            "ulcer"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Renal perfusion and glomerular filtration rate in vulnerable hemodynamically compromised patients are preserved through the protective actions of **renal prostaglandins**. When circulating angiotensin II, norepinephrine, or vasopressin induce systemic arteriolar vasoconstriction in congestive heart failure, cirrhosis, or chronic kidney disease, local renal PGE2 and PGI2 dilate the afferent arteriole, maintaining glomerular capillary hydrostatic pressure. Administration of non-selective NSAIDs or coxibs ablates this compensatory vasodilation, precipitating acute kidney injury and fluid retention.",
+      "say": "Renal prostaglandins dilate afferent arterioles to maintain glomerular filtration, a protective mechanism abolished by NSAIDs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Afferent Arteriolar Vasodilation (Prostaglandins)",
+          "points": [
+            "Driven by local renal PGE2 and prostacyclin (PGI2)",
+            "Dilates afferent arteriole to sustain glomerular inflow",
+            "Inhibited by NSAIDs and selective COX-2 inhibitors",
+            "Ablation causes acute prerenal azotemia"
+          ]
+        },
+        "right": {
+          "title": "Efferent Arteriolar Vasoconstriction (Angiotensin II)",
+          "points": [
+            "Driven by circulating and intrarenal angiotensin II",
+            "Constricts efferent arteriole to elevate glomerular pressure",
+            "Inhibited by ACE inhibitors and angiotensin receptor blockers",
+            "Combined NSAID plus ACE inhibitor precipitates severe renal failure"
+          ]
+        }
+      }
+    }
+  ]
+}

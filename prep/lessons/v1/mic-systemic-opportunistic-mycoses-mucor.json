@@ -1,0 +1,211 @@
+{
+  "v": 1,
+  "module": "mic-systemic-opportunistic-mycoses",
+  "subject": "microbiology",
+  "title": "Mucorales: Rhizopus, Mucor and Aseptate Angioinvasive Hyphae",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Members of the order Mucorales are fast-growing saprophytic environmental molds that produce cottony aerial mycelia called lid-lifters on culture plates. The most common species causing human disease are **Rhizopus arrhizus** and Lichtheimia corymbifera, followed by Mucor circinelloides. Inhalation or percutaneous inoculation of sporangiospores triggers aggressive fulminant tissue invasion in susceptible hosts.",
+      "say": "Mucorales molds grow rapidly into fluffy aerial mycelia that invade host tissues aggressively.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mucormycosis-fig1.webp",
+        "alt": "Mucorales broad aseptate hyphae",
+        "caption": "Mucorales histopathology showing wide ribbon-like aseptate hyphae branching at right angles [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "A vital histological characteristic of Mucorales in tissue sections is the presence of broad **aseptate hyphae** measuring ten to twenty-five micrometres across. The non-parallel, thin, ribbon-like walls lack regular transverse septations and characteristically branch at wide, ninety-degree right angles. Because cell walls are delicate, mechanical crushing of tissue during biopsy preparation easily collapses filaments, confounding microbiological identification.",
+      "say": "Broad ribbon-like hyphae with right-angle branching and absent septa define Mucorales histology.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rhizopus microscopic features",
+          "points": [
+            "Dark brown nodal rhizoids present opposite sporangiophores",
+            "Unbranched long sporangiophores arise from stolons",
+            "Apophysis absent; spherical collapsable sporangia",
+            "Fast growing cottony growth filling culture tube"
+          ]
+        },
+        "right": {
+          "title": "Mucor microscopic features",
+          "points": [
+            "Rhizoids and stolons are completely absent",
+            "Branched sporangiophores ending in round sporangia",
+            "Columella prominent within sporangial sac",
+            "Sporangiospores smooth, oval to spherical"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Microscopic speciation relies on observing the presence and position of root-like anchoring structures called **rhizoids**. In Rhizopus, rhizoids develop directly opposite the emergence points of unbranched sporangiophores along horizontal runner hyphae called stolons. In Lichtheimia, rhizoids arise internodally between sporangiophores. In the genus Mucor, rhizoids and stolons are completely absent, with sporangiophores branching irregularly throughout.",
+      "say": "The anatomical alignment of root-like rhizoids separates Rhizopus from internodal Lichtheimia and rhizoid-free Mucor.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Genus",
+          "Rhizoid Location",
+          "Sporangiophore Branching"
+        ],
+        "rows": [
+          [
+            "Rhizopus",
+            "Nodal, directly opposite sporangiophore base",
+            "Unbranched long clusters"
+          ],
+          [
+            "Lichtheimia",
+            "Internodal, between sporangiophore clusters",
+            "Branched umbel-like groups"
+          ],
+          [
+            "Mucor",
+            "Absent entirely; no rhizoids or stolons",
+            "Irregular branching filaments"
+          ],
+          [
+            "Cunninghamella",
+            "Absent or poorly formed rhizoids",
+            "Swollen vesicles with terminal denticles"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Mucorales fungi exhibit marked tropism for vascular endothelial cells, termed **angioinvasion**. Hyphae penetrate arterial walls directly, inducing platelet aggregation, widespread microvascular thrombosis, and extensive ischaemic tissue necrosis. This rapid infarction produces the signature clinical presentation of black necrotic eschars across the hard palate, nasal turbinates, or overlying facial skin.",
+      "say": "Endothelial penetration triggers widespread arterial thrombosis, generating black necrotic mucosal eschars.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/systemic-opportunistic-mycoses-aspergillus-mucor-crypto-fig1.webp",
+        "alt": "Comparative opportunistic fungal tissue morphology",
+        "caption": "Comparative tissue morphology demonstrating angioinvasive Mucorales vs septate Aspergillus [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Diabetic ketoacidosis represents the paramount predisposing condition for rhino-orbital-cerebral disease. In ketoacidosis, elevated free serum iron from acidosis and transferrin dissociation alongside hyperglycaemia enhances fungal virulence. The pathogen expresses the high-affinity iron permease **CotH3 protein**, which binds human glucose-regulated protein 78 on endothelial cells, mediating rapid host cell invasion.",
+      "say": "Hyperglycaemia and free iron in ketoacidosis activate fungal CotH3 receptors to penetrate endothelium.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dk1",
+            "label": "Diabetic ketoacidosis causes hyperglycaemia and low serum pH"
+          },
+          {
+            "id": "dk2",
+            "label": "Free iron dissociates from transferrin, feeding fungal growth"
+          },
+          {
+            "id": "dk3",
+            "label": "Fungal CotH3 binds endothelial GRP78, triggering angioinvasion"
+          }
+        ],
+        "edges": [
+          [
+            "dk1",
+            "dk2"
+          ],
+          [
+            "dk2",
+            "dk3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Unlike Aspergillus, members of the Mucorales order do not shed galactomannan or beta-D-glucan into circulating blood. Consequently, standard fungal biomarkers return negative results, delaying diagnosis if clinicians rely on serology. A rapid presumptive diagnosis requires direct microscopy of biopsy tissue or mucosal scrapings using fluorescent optical brighteners such as **calcofluor white** under ultraviolet light.",
+      "say": "Fungal serological markers like galactomannan are negative in mucormycosis; calcofluor white provides rapid confirmation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Serological test results",
+          "points": [
+            "Serum galactomannan: negative",
+            "1,3-beta-D-glucan: negative",
+            "Cryptococcal antigen: negative",
+            "Serology cannot exclude Mucorales"
+          ]
+        },
+        "right": {
+          "title": "Direct diagnostic methods",
+          "points": [
+            "Calcofluor white fluorescent stain",
+            "Potassium hydroxide wet mount",
+            "Gomori methenamine silver on biopsy",
+            "Tissue pan-fungal PCR targeting 18S rRNA"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Successful eradication mandates urgent extensive **surgical debridement** to resect all devitalized necrotic tissue back to bleeding margins. Because thrombosed vessels prevent parenteral antifungals from penetrating necrotic infected tissues, medical therapy alone fails uniformly. Multiple sequential surgical re-explorations of the paranasal sinuses, orbit, or palate are routinely required to halt intracranial advancement.",
+      "say": "Emergency surgical debridement of necrotic bone and tissue is mandatory because thrombosed arteries block drug delivery.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "surg1",
+            "label": "Identify facial swelling, ptosis, or black palatal eschar"
+          },
+          {
+            "id": "surg2",
+            "label": "Emergency ENT endoscopic resection of necrotic turbinates and palate"
+          },
+          {
+            "id": "surg3",
+            "label": "Repeat debridement every 48 hours until healthy bleeding edges are achieved"
+          }
+        ],
+        "edges": [
+          [
+            "surg1",
+            "surg2"
+          ],
+          [
+            "surg2",
+            "surg3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The medical drug of choice is intravenous **liposomal amphotericin B** administered at high doses of five to ten milligrams per kilogram daily. Voriconazole possesses zero activity against Mucorales and its prophylactic use in transplant recipients actually predisposes to breakthrough zygomycosis. Oral posaconazole or isavuconazole serves as maintenance step-down therapy after surgical control.",
+      "say": "High dose liposomal amphotericin B is required; voriconazole lacks activity and must never be used.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Antifungal Agent",
+          "Activity Against Mucorales",
+          "Clinical Role"
+        ],
+        "rows": [
+          [
+            "Liposomal amphotericin B",
+            "Highly active fungicidal",
+            "First-line induction therapy at 5-10 mg/kg/day"
+          ],
+          [
+            "Isavuconazole",
+            "Active fungistatic",
+            "Alternative induction or oral step-down therapy"
+          ],
+          [
+            "Posaconazole",
+            "Active fungistatic",
+            "Oral suspension or delayed-release tablet maintenance"
+          ],
+          [
+            "Voriconazole",
+            "No activity (inherently resistant)",
+            "Prophylactic use predisposes to breakthrough infection"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,291 @@
+{
+ "v": 1,
+ "id": "der-fungal-itraconazole",
+ "subject": "dermatology",
+ "module": "der-fungal",
+ "title": "Itraconazole",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Itraconazole** is a synthetic, highly lipophilic, broad-spectrum triazole antifungal medication utilized extensively for superficial and deep mycotic infections. It acts by selectively inhibiting the fungal cytochrome P450 enzyme 14-alpha-demethylase, encoded by the CYP51 gene. This enzymatic blockade halts the demethylation of lanosterol, depleting structural ergosterol within the fungal plasma membrane while promoting intracellular accumulation of toxic methylated sterols, which alters membrane fluidity and halts fungal replication.",
+   "say": "Itraconazole is a triazole antifungal that blocks fungal CYP51, preventing the conversion of lanosterol into ergosterol. The resulting ergosterol depletion damages the fungal plasma membrane, inhibiting replication.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/superficial-fungal-infections-fig1.webp",
+    "alt": "Diagram illustrating fungal cell wall and cell membrane pharmacological targets.",
+    "caption": "Ergosterol synthesis pathway in fungal cell membranes and sites of azole inhibition. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Gastric acidity** represents an absolute physiological requirement for the optimal dissolution and oral bioavailability of conventional itraconazole capsule formulations. The un-ionized drug requires an acidic luminal environment with a gastric pH below three for complete dissolution. Concomitant administration of proton pump inhibitors, H2-receptor antagonists, or antacids severely impairs absorption, dropping systemic drug levels by over seventy percent. Taking capsules immediately after a full fatty meal or with an acidic cola beverage maximizes gastrointestinal absorption.",
+   "say": "Conventional itraconazole capsules require strong stomach acid to dissolve. Antacids and proton pump inhibitors drastically reduce absorption. Advise patients to take capsules with a full meal or an acidic cola drink.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Factors Enhancing Absorption",
+     "points": [
+      "Administration immediately after full meal",
+      "Co-administration with acidic cola drinks",
+      "Preserved gastric acid secretion",
+      "Consistent daily dosing schedule"
+     ]
+    },
+    "right": {
+     "title": "Factors Reducing Absorption",
+     "points": [
+      "Concurrent proton pump inhibitor therapy",
+      "H2-receptor antagonist premedication",
+      "Fasting state administration of capsules",
+      "Achlorydria in elderly patients"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Keratophilic affinity** enables itraconazole to achieve drug concentrations in the stratum corneum, hair, sebum, and nail plate that are up to ten-fold higher than corresponding serum concentrations. The drug binds avidly to epidermal and onychial keratin, establishing a tissue reservoir that remains clinically active long after discontinuation of oral therapy. In nail beds, therapeutic concentrations persist for six to nine months following drug cessation, underpinning the efficacy of intermittent pulse therapy regimens for onychomycosis.",
+   "say": "Itraconazole binds tightly to keratin in the skin and nails, reaching tissue levels ten times higher than in blood. This persistent reservoir remains active for up to nine months in nails after stopping the pills.",
+   "vis": {
+    "kind": "flow",
+    "title": "Tissue Distribution and Reservoir Elimination Kinetics",
+    "nodes": [
+     {
+      "id": "i1",
+      "label": "Oral Ingestion",
+      "sub": "Gastric acid dissolution and portal uptake"
+     },
+     {
+      "id": "i2",
+      "label": "Lipophilic Sequestration",
+      "sub": "Accumulates in sebum and basal keratinocytes"
+     },
+     {
+      "id": "i3",
+      "label": "Keratin Binding",
+      "sub": "Incorporation into nail matrix and cornified plate"
+     },
+     {
+      "id": "i4",
+      "label": "Prolonged Depot",
+      "sub": "Therapeutic levels persist 6 to 9 months post-therapy"
+     }
+    ],
+    "edges": [
+     [
+      "i1",
+      "i2",
+      "Systemic circulation"
+     ],
+     [
+      "i2",
+      "i3",
+      "Dermal incorporation"
+     ],
+     [
+      "i3",
+      "i4",
+      "Outgrowth reservoir"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pulse dosing** for dermatophyte onychomycosis delivers two hundred milligrams twice daily for seven consecutive days, repeated once monthly. Fingernail onychomycosis requires two monthly pulses, whereas toenail onychomycosis mandates three monthly pulses. This intermittent pulse strategy achieves clinical cure rates equivalent to continuous daily regimens while significantly reducing total drug exposure, lowering cumulative financial costs, minimizing hepatic metabolic burden, and improving long-term patient compliance.",
+   "say": "For onychomycosis, pulse therapy gives two hundred milligrams twice daily for one week per month. Fingernails need two pulses, while toenails require three. It matches continuous therapy while reducing drug exposure.",
+   "vis": {
+    "kind": "table",
+    "title": "Onychomycosis Dosing Protocols",
+    "cols": [
+     "Infection Site",
+     "Pulse Regimen",
+     "Continuous Regimen Alternative"
+    ],
+    "rows": [
+     [
+      "Fingernail onychomycosis",
+      "200 mg bd for 7 days, 2 pulses (2 months)",
+      "200 mg daily continuous for 6 weeks"
+     ],
+     [
+      "Toenail onychomycosis",
+      "200 mg bd for 7 days, 3 pulses (3 months)",
+      "200 mg daily continuous for 12 weeks"
+     ],
+     [
+      "Extensive tinea corporis",
+      "100 to 200 mg daily for 2 to 4 weeks",
+      "Continuous daily dosing preferred"
+     ],
+     [
+      "Pityriasis versicolor",
+      "200 mg daily for 5 to 7 days",
+      "Single dose 400 mg alternative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cytochrome P450 3A4** is powerfully inhibited by itraconazole, precipitating severe, life-threatening pharmacodynamic interactions with co-administered substrates. Co-administration with HMG-CoA reductase inhibitors like simvastatin and atorvastatin dramatically elevates statin plasma concentrations, triggering acute rhabdomyolysis and renal failure. Concurrent use with cardiac medications such as quinidine, dofetilide, or cisapride prolongs the QT interval and provokes fatal ventricular arrhythmias including torsades de pointes. Thorough medication reconciliation is mandatory before prescribing.",
+   "say": "Itraconazole is a potent CYP3A4 inhibitor that causes dangerous drug interactions. Never combine it with simvastatin due to rhabdomyolysis, or with QT-prolonging drugs that can provoke fatal torsades de pointes arrhythmias.",
+   "vis": {
+    "kind": "table",
+    "title": "Critical Itraconazole Drug Interactions",
+    "cols": [
+     "Concomitant Drug Class",
+     "Interacting Medication",
+     "Clinical Danger and Consequence"
+    ],
+    "rows": [
+     [
+      "Statins",
+      "Simvastatin, atorvastatin",
+      "Severe rhabdomyolysis and acute kidney injury"
+     ],
+     [
+      "Antiarrhythmics",
+      "Quinidine, dofetilide",
+      "QT prolongation and fatal torsades de pointes"
+     ],
+     [
+      "Anticoagulants",
+      "Warfarin, direct oral anticoagulants",
+      "Marked elevation of INR and haemorrhage"
+     ],
+     [
+      "Sedatives",
+      "Oral midazolam, triazolam",
+      "Profound, prolonged central nervous depression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Congestive heart failure** is an established black-box warning for itraconazole due to dose-dependent negative inotropic effects on myocardial contractility. The drug directly impedes cardiac excitation-contraction coupling by modulating calcium handling, precipitating pulmonary oedema in susceptible individuals. Prescribing itraconazole is strictly contraindicated in patients with known ventricular dysfunction, a history of congestive cardiac failure, or symptomatic ischaemic cardiomyopathy, necessitating immediate therapy cessation if dyspnoea or peripheral oedema emerges.",
+   "say": "Itraconazole carries a black box warning because of its negative inotropic effect on the heart. It is strictly contraindicated in patients with heart failure or left ventricular systolic dysfunction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Absolute Contraindications",
+     "points": [
+      "Documented congestive heart failure",
+      "Left ventricular systolic dysfunction",
+      "Concurrent administration of simvastatin",
+      "Active acute or chronic liver disease"
+     ]
+    },
+    "right": {
+     "title": "Relative Precautions",
+     "points": [
+      "Pre-existing hepatic enzyme elevation",
+      "Concurrent gastric acid suppression",
+      "Severe chronic renal impairment",
+      "Concomitant oral anticoagulant therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Hepatotoxicity** ranges from transient, asymptomatic transaminase elevations in up to five percent of patients to rare, idiosyncratic fulminant hepatic failure. Baseline liver function tests must be documented prior to initiating therapy, followed by periodic biochemical surveillance every four weeks in patients receiving continuous courses exceeding one month. Patients must be counseled to report warning symptoms including persistent anorexia, right upper quadrant pain, dark amber urine, and scleral jaundice immediately.",
+   "say": "Baseline liver function tests are necessary before prescribing itraconazole courses exceeding one month. Warn patients to report anorexia, nausea, dark urine, or jaundice, and stop the drug if transaminases rise significantly.",
+   "vis": {
+    "kind": "flow",
+    "title": "Safety Monitoring Protocol for Azole Therapy",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Baseline Screen",
+      "sub": "Confirm normal ALT, AST, and cardiac history"
+     },
+     {
+      "id": "s2",
+      "label": "Drug Reconciliation",
+      "sub": "Exclude statins, PPIs, and antiarrhythmics"
+     },
+     {
+      "id": "s3",
+      "label": "Monthly Monitoring",
+      "sub": "Recheck liver enzymes at 4-week intervals"
+     },
+     {
+      "id": "s4",
+      "label": "Discontinuation Rule",
+      "sub": "Halt if transaminases exceed 3 times normal"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2",
+      "Safety verification"
+     ],
+     [
+      "s2",
+      "s3",
+      "Initiate therapy"
+     ],
+     [
+      "s3",
+      "s4",
+      "Toxicity detection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Subungual hyperkeratosis** responding to itraconazole demonstrates the clinical utility of systemic therapy in distal lateral subungual onychomycosis, the most frequent clinical presentation. Fungi enter the nail bed hyponychium and proliferate proximally, producing yellowish dyschromia, onycholysis, and subungual hyperkeratotic crumbly debris. Because topical nail lacquers achieve poor penetration through thick diseased plates, oral itraconazole pulse therapy is preferred, achieving durable clinical cure as healthy nail plate advances from the proximal matrix.",
+   "say": "In distal subungual onychomycosis, fungi invade through the hyponychium to cause thick yellow crumbly debris. Oral itraconazole pulse therapy clears the matrix and nail bed, allowing clear nail to emerge distally.",
+   "vis": {
+    "kind": "table",
+    "title": "Clinical Patterns of Onychomycosis",
+    "cols": [
+     "Clinical Subtype",
+     "Site of Fungal Entry",
+     "Optimal Treatment Route"
+    ],
+    "rows": [
+     [
+      "Distal lateral subungual",
+      "Hyponychium and distal nail bed",
+      "Systemic oral pulse itraconazole"
+     ],
+     [
+      "Proximal subungual",
+      "Proximal nail fold (often HIV marker)",
+      "Oral systemic therapy mandatory"
+     ],
+     [
+      "White superficial",
+      "Dorsal nail plate surface",
+      "Topical ciclopirox or amorolfine lacquer"
+     ],
+     [
+      "Total dystrophic",
+      "Complete destruction of nail unit",
+      "Prolonged oral azoles or terbinafine"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Itraconazole: essential condition for capsule absorption",
+   "b": "Acidic gastric environment; absorption is severely impaired by proton pump inhibitors."
+  },
+  {
+   "f": "Onychomycosis pulse regimen: duration and frequency",
+   "b": "200 mg twice daily for 7 days per month: 2 pulses for fingernails, 3 for toenails."
+  },
+  {
+   "f": "Itraconazole: cardiac black-box warning",
+   "b": "Negative inotropic effect causing or exacerbating congestive heart failure."
+  }
+ ],
+ "keys": [
+  "Itraconazole inhibits fungal 14-alpha-demethylase, depleting membrane ergosterol",
+  "Capsules require gastric acidity and food for absorption, and persist in nail tissue for months",
+  "Strong CYP3A4 inhibition creates severe statin interactions, and heart failure is an absolute contraindication"
+ ]
+}

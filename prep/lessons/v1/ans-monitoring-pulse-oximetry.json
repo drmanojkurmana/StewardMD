@@ -1,0 +1,284 @@
+{
+    "v": 1,
+    "id": "ans-monitoring-pulse-oximetry",
+    "subject": "anaesthesia",
+    "module": "ans-monitoring",
+    "title": "Physiological Monitoring: Pulse Oximetry, Capnography, and Arterial Waveforms",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Beer-Lambert Law and Dual Wavelengths",
+            "tx": "**Pulse oximetry optical principles** combine spectrophotometry and plethysmography based on the Beer-Lambert law. The probe emits two specific light wavelengths through pulsating arteriolar tissue: red light at 660 nanometers, preferentially absorbed by deoxygenated haemoglobin, and infrared light at 940 nanometers, preferentially absorbed by oxygenated haemoglobin. The ratio of pulsatile (AC) to non-pulsatile background (DC) absorption calculates arterial oxygen saturation.",
+            "say": "Pulse oximetry optical principles combine spectrophotometry and plethysmography based on the Beer-Lambert law. The probe emits two specific light wavelengths through pulsating arteriolar tissue: red light at 660 nanometers, preferentially absorbed by deoxygenated haemoglobin, and infrared light at 940 nanometers, preferentially absorbed by oxygenated haemoglobin. The ratio of pulsatile (AC) to non-pulsatile background (DC) absorption calculates arterial oxygen saturation.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Light Wavelength",
+                    "Physical Colour",
+                    "Primary Absorbing Haemoglobin Species",
+                    "Clinical Significance"
+                ],
+                "rows": [
+                    [
+                        "660 Nanometers",
+                        "Visible Red Light",
+                        "Deoxygenated haemoglobin (DeoxyHb)",
+                        "High absorption during hypoxaemic desaturation"
+                    ],
+                    [
+                        "940 Nanometers",
+                        "Near Infrared Light",
+                        "Oxygenated haemoglobin (OxyHb)",
+                        "Predominant absorption at normal high saturation"
+                    ],
+                    [
+                        "805 Nanometers",
+                        "Isosbestic Point",
+                        "Equal absorption by OxyHb and DeoxyHb",
+                        "Used as optical reference calibration wavelength"
+                    ],
+                    [
+                        "590 Nanometers",
+                        "Yellow-Orange Light",
+                        "Equal absorption point across species",
+                        "Secondary isosbestic reference wavelength"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Pulse Oximetry Dyshaemoglobinaemias",
+            "tx": "**Dyshaemoglobinaemia optical artefacts** severely mislead pulse oximetry readings: carboxyhaemoglobin absorbs light identically to oxyhaemoglobin at 660 nanometers, falsely elevating SpO2 to near 100 percent despite lethal tissue hypoxia. Methaemoglobin absorbs equally at both 660 and 940 nanometers, locking the calculated R ratio to 1.0, which forces pulse oximeters to falsely display an SpO2 of 85 percent regardless of true arterial oxygenation.",
+            "say": "Dyshaemoglobinaemia optical artefacts severely mislead pulse oximetry readings: carboxyhaemoglobin absorbs light identically to oxyhaemoglobin at 660 nanometers, falsely elevating SpO2 to near 100 percent despite lethal tissue hypoxia. Methaemoglobin absorbs equally at both 660 and 940 nanometers, locking the calculated R ratio to 1.0, which forces pulse oximeters to falsely display an SpO2 of 85 percent regardless of true arterial oxygenation.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Carboxyhaemoglobinemia (CO Poisoning)",
+                    "points": [
+                        "Absorbs 660 nm red light identically to oxyhaemoglobin",
+                        "Pulse oximeter displays falsely reassuring 98 to 100 percent SpO2",
+                        "Diagnosed accurately only with laboratory co-oximetry"
+                    ]
+                },
+                "right": {
+                    "title": "Methaemoglobinaemia (Fe3+ Oxidation)",
+                    "points": [
+                        "Equal absorption at both 660 nm and 940 nm wavelengths",
+                        "Refractory fixed reading of 85 percent regardless of PaO2",
+                        "Treated emergently with intravenous methylene blue (1-2 mg/kg)"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Capnography Waveform Phases",
+            "tx": "**Capnogram waveform morphology** plots exhaled carbon dioxide partial pressure against time across four physiological phases: Phase I represents carbon dioxide-free gas clearing anatomical dead space; Phase II is the steep S-shaped upstroke mixing dead space with alveolar gas; Phase III is the horizontal alveolar plateau representing pure alveolar gas; and Phase 0 is the rapid vertical inspiratory downstroke.",
+            "say": "Capnogram waveform morphology plots exhaled carbon dioxide partial pressure against time across four physiological phases: Phase I represents carbon dioxide-free gas clearing anatomical dead space; Phase II is the steep S-shaped upstroke mixing dead space with alveolar gas; Phase III is the horizontal alveolar plateau representing pure alveolar gas; and Phase 0 is the rapid vertical inspiratory downstroke.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Waveform Phase",
+                    "Descriptive Segment",
+                    "Underlying Physiological Event",
+                    "Typical Pathology Manifestation"
+                ],
+                "rows": [
+                    [
+                        "Phase I",
+                        "Inspiratory baseline (zero CO2)",
+                        "Exhalation of anatomical conducting dead space",
+                        "Baseline elevation indicates rebreathing or faulty valve"
+                    ],
+                    [
+                        "Phase II",
+                        "Rapid ascending upstroke",
+                        "Transition from dead space to alveolar gas mixing",
+                        "Slanted delayed upstroke in obstructive airway disease"
+                    ],
+                    [
+                        "Phase III",
+                        "Alveolar plateau",
+                        "Emptying of true alveolar gas across all lung units",
+                        "Shark-fin upward slope in acute bronchospasm"
+                    ],
+                    [
+                        "Phase 0",
+                        "Sharp vertical inspiratory downstroke",
+                        "Rapid inhalation of fresh CO2-free gas",
+                        "Slurred prolonged downstroke in inspiratory valve incompetence"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "EtCO2 to PaCO2 Gradient",
+            "tx": "**Alveolar-arterial carbon dioxide gradient** reflects ventilation-perfusion matching in the lungs: under normal anaesthetized conditions, end-tidal carbon dioxide (EtCO2) is 35 to 45 mmHg, which is 2 to 5 mmHg lower than arterial carbon dioxide (PaCO2) due to normal physiological alveolar dead space. Any increase in dead space, such as massive pulmonary embolism or profound haemorrhagic shock, widens this gradient dramatically.",
+            "say": "Alveolar-arterial carbon dioxide gradient reflects ventilation-perfusion matching in the lungs: under normal anaesthetized conditions, end-tidal carbon dioxide (EtCO2) is 35 to 45 mmHg, which is 2 to 5 mmHg lower than arterial carbon dioxide (PaCO2) due to normal physiological alveolar dead space. Any increase in dead space, such as massive pulmonary embolism or profound haemorrhagic shock, widens this gradient dramatically.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Normal Gradient (2 to 5 mmHg)",
+                    "points": [
+                        "Homogeneous pulmonary perfusion and ventilation matching",
+                        "EtCO2 reliably tracks systemic arterial carbon dioxide tension",
+                        "Minimal alveolar dead space ventilation in healthy lungs"
+                    ]
+                },
+                "right": {
+                    "title": "Widened Gradient (greater than 10 mmHg)",
+                    "points": [
+                        "Massive pulmonary thromboembolism or gas embolism",
+                        "Profound hemorrhagic shock and systemic hypoperfusion",
+                        "Ventilated alveoli lose pulmonary capillary blood flow"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Diagnostic Capnography Patterns",
+            "tx": "**Diagnostic capnogram patterns** instantly reveal acute life-threatening anaesthetic emergencies: a sudden catastrophic loss of EtCO2 to zero indicates circuit disconnection, total endotracheal tube extubation, or cardiac arrest with circulatory standstill. A continuous upward sloping Phase III (shark-fin appearance) with an increased alpha angle signifies acute bronchospasm or chronic obstructive pulmonary disease, responding to bronchodilators.",
+            "say": "Diagnostic capnogram patterns instantly reveal acute life-threatening anaesthetic emergencies: a sudden catastrophic loss of EtCO2 to zero indicates circuit disconnection, total endotracheal tube extubation, or cardiac arrest with circulatory standstill. A continuous upward sloping Phase III (shark-fin appearance) with an increased alpha angle signifies acute bronchospasm or chronic obstructive pulmonary disease, responding to bronchodilators.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Sudden drop of EtCO2 to flatline zero"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Check chest rise, breath sounds, and pulse"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Rule out circuit disconnect or esophageal tube"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Initiate immediate cardiac arrest resuscitation"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "ECG Lead Selection and Ischaemia",
+            "tx": "**Intraoperative electrocardiographic lead selection** balances rhythm surveillance against myocardial ischaemia detection: Lead II aligns closely with the electrical axis of atrial depolarization, displaying the largest P waves to identify dysrhythmias and junctional rhythms. Meanwhile, precordial Lead V5, positioned at the fifth intercostal space along the anterior axillary line, detects up to 75 percent of left ventricular subendocardial ischaemic ST-segment depressions.",
+            "say": "Intraoperative electrocardiographic lead selection balances rhythm surveillance against myocardial ischaemia detection: Lead II aligns closely with the electrical axis of atrial depolarization, displaying the largest P waves to identify dysrhythmias and junctional rhythms. Meanwhile, precordial Lead V5, positioned at the fifth intercostal space along the anterior axillary line, detects up to 75 percent of left ventricular subendocardial ischaemic ST-segment depressions.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "ECG Monitoring Lead",
+                    "Anatomical Electrode Placement",
+                    "Primary Diagnostic Utility",
+                    "Sensitivity for Myocardial Ischaemia"
+                ],
+                "rows": [
+                    [
+                        "Lead II",
+                        "Right arm to left leg vector",
+                        "P-wave morphology and rhythm analysis",
+                        "Detects inferior wall ischaemia (approx 33 percent)"
+                    ],
+                    [
+                        "Lead V5",
+                        "5th intercostal space anterior axillary line",
+                        "Anterolateral left ventricular wall ischaemia",
+                        "Detects approximately 75 percent of ischaemic episodes"
+                    ],
+                    [
+                        "Combined Leads II and V5",
+                        "Simultaneous dual-channel display",
+                        "Comprehensive rhythm and anterolateral monitoring",
+                        "Detects greater than 80 to 90 percent of ischaemic events"
+                    ],
+                    [
+                        "Lead V4",
+                        "5th intercostal space midclavicular line",
+                        "Anterior septal wall ischaemia detection",
+                        "Adjunctive lead for multi-vessel coronary disease"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Invasive Arterial Blood Pressure Monitoring",
+            "tx": "**Invasive arterial pressure waveform monitoring** provides continuous beat-to-beat pressure measurement and vascular stroke volume assessment via radial artery cannulation. The transduced waveform exhibits a sharp systolic upstroke, systolic peak pressure, and a dicrotic notch reflecting aortic valve closure. Overdamped systems falsely underestimate systolic pressure and overestimate diastolic pressure, while underdamped systems produce exaggerated systolic overshoot from resonance resonance.",
+            "say": "Invasive arterial pressure waveform monitoring provides continuous beat-to-beat pressure measurement and vascular stroke volume assessment via radial artery cannulation. The transduced waveform exhibits a sharp systolic upstroke, systolic peak pressure, and a dicrotic notch reflecting aortic valve closure. Overdamped systems falsely underestimate systolic pressure and overestimate diastolic pressure, while underdamped systems produce exaggerated systolic overshoot from resonance resonance.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Overdamped Arterial Trace",
+                    "points": [
+                        "Air bubbles, blood clots, or compliant soft tubing",
+                        "Slurred upstroke with absent dicrotic notch",
+                        "Falsely low systolic and falsely high diastolic pressure"
+                    ]
+                },
+                "right": {
+                    "title": "Underdamped Arterial Trace",
+                    "points": [
+                        "Excessive tubing length or multiple stopcocks",
+                        "Exaggerated systolic spiking and ringing vibrations",
+                        "Falsely elevated systolic and falsely low diastolic pressure"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Central Venous Pressure Waveforms",
+            "tx": "**Central venous pressure waveform analysis** reflects right atrial pressure fluctuations across the cardiac cycle: the 'a' wave represents end-diastolic right atrial contraction; the 'c' wave marks early systolic tricuspid valve closure bulging into the atrium; the 'v' wave reflects systolic right atrial filling against a closed tricuspid valve; the 'x' descent represents atrial relaxation; and the 'y' descent marks diastolic ventricular filling after tricuspid opening.",
+            "say": "Central venous pressure waveform analysis reflects right atrial pressure fluctuations across the cardiac cycle: the 'a' wave represents end-diastolic right atrial contraction; the 'c' wave marks early systolic tricuspid valve closure bulging into the atrium; the 'v' wave reflects systolic right atrial filling against a closed tricuspid valve; the 'x' descent represents atrial relaxation; and the 'y' descent marks diastolic ventricular filling after tricuspid opening.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Atrial contraction generates a wave"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Ventricular systole causes c wave and x descent"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Atrial venous filling creates v wave"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Tricuspid valve opening produces y descent"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

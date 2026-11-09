@@ -1,0 +1,348 @@
+{
+ "v": 1,
+ "id": "fmt-ethics-negligence-national-medical-commission",
+ "subject": "forensic-medicine",
+ "module": "fmt-ethics-negligence",
+ "title": "Medical Ethics: National Medical Commission, Misconduct and Informed Consent",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Structure and mandate of the National Medical Commission",
+   "tx": "Established under the National Medical Commission Act of 2019, the **National Medical Commission regulatory authority** serves as the statutory apex body overseeing medical education, licensing, and professional conduct in India, replacing the former Medical Council of India. The commission operates through four specialized autonomous boards that coordinate undergraduate training, postgraduate curricula, medical college accreditation, and professional ethical standards nationwide.",
+   "say": "The National Medical Commission oversees medical education and ethical licensing in India through four specialized autonomous boards, replacing the Medical Council of India.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Autonomous board",
+     "Primary regulatory domain",
+     "Key statutory function"
+    ],
+    "rows": [
+     [
+      "UGMEB",
+      "Undergraduate medical education",
+      "Sets MBBS curricula, admissions and college standards"
+     ],
+     [
+      "PGMEB",
+      "Postgraduate medical education",
+      "Regulates MD, MS, DM, MCh and fellowship courses"
+     ],
+     [
+      "MARB",
+      "Medical assessment and rating",
+      "Inspects infrastructure and grants hospital accreditations"
+     ],
+     [
+      "EMRB",
+      "Ethics and medical registration",
+      "Maintains National Register and adjudicates misconduct"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The Ethics and Medical Registration Board and state councils",
+   "tx": "The central statutory organ regulating medical morals is the **Ethics and Medical Registration Board**, which compiles the live National Medical Register containing credentials of every registered practitioner in India. While State Medical Councils handle primary state-level registrations and initial disciplinary tribunals, the EMRB acts as the national appellate authority reviewing orders of erasure or suspension passed against doctors.",
+   "say": "The Ethics Board maintains the National Medical Register and handles ethics appeals, while State Medical Councils manage initial registrations and local disciplinary cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Complaint of professional misconduct filed"
+     },
+     {
+      "id": "b",
+      "label": "State Medical Council disciplinary inquiry and order"
+     },
+     {
+      "id": "c",
+      "label": "Aggrieved doctor appeals to Ethics and Registration Board (EMRB)"
+     },
+     {
+      "id": "d",
+      "label": "Final administrative appeal to National Medical Commission"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Definition and doctrine of professional misconduct",
+   "tx": "In medical jurisprudence, statutory **professional misconduct disciplinary liability** encompasses acts or omissions committed by a medical practitioner that are reasonably regarded as disgraceful, dishonourable, or unethical by professional brethren of good repute and competency. Historically termed infamous conduct in a professional respect, this standard penalizes clinicians who violate professional codes, exploit vulnerable patients, or debase the dignity of the healing profession.",
+   "say": "Professional misconduct refers to actions regarded as disgraceful or dishonourable by competent colleagues, subjecting the practitioner to formal disciplinary penalties.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Disciplinary level",
+     "Statutory sanction",
+     "Professional impact"
+    ],
+    "rows": [
+     [
+      "Formal warning notice",
+      "Written censure on council record",
+      "No immediate loss of license to practice"
+     ],
+     [
+      "Temporary suspension",
+      "Erasure for fixed months or years",
+      "Prohibits all medical practice during penalty period"
+     ],
+     [
+      "Permanent penal erasure",
+      "Name permanently struck from register",
+      "Total revocation of license to practice medicine"
+     ],
+     [
+      "Criminal referral",
+      "Filing formal police complaint",
+      "Prosecution for criminal forgery, fraud, or sexual assault"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The classic six Ds of infamous conduct",
+   "tx": "Forensic authorities summarize the primary manifestations of professional misconduct through the **infamous conduct six Ds**, representing classic ethical transgressions that provoke disciplinary erasure. These comprise Adultery (abusing doctor-patient relationships for sexual intimacy), Alcohol (treating patients while intoxicated), Advertising (unsolicited self-promotion), Association (covering unqualified quacks), Dichotomy (commercial fee-splitting or commissions), and Disregard of professional secrecy or issuing false certificates.",
+   "say": "The six Ds of infamous conduct are adultery, alcohol intoxication on duty, advertising, association with unqualified quacks, dichotomy fee-splitting, and disregarding secrecy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classic 'D' category",
+     "Prohibited clinical action",
+     "Ethical hazard"
+    ],
+    "rows": [
+     [
+      "Adultery / sexual misconduct",
+      "Exploiting doctor-patient intimacy",
+      "Violates fiduciary trust and patient vulnerability"
+     ],
+     [
+      "Alcohol / drug impairment",
+      "Attending clinical duties while intoxicated",
+      "Endangers patient life and clinical judgment"
+     ],
+     [
+      "Advertising / canvassing",
+      "Touting for patients or boasting cures",
+      "Debases medicine into deceptive commerce"
+     ],
+     [
+      "Association / covering",
+      "Employing or assisting unqualified quacks",
+      "Exposes the public to dangerous pseudo-medical care"
+     ],
+     [
+      "Dichotomy / fee-splitting",
+      "Receiving secret kickbacks from labs/clinics",
+      "Leads to unnecessary interventions and exploitation"
+     ],
+     [
+      "Disregard of secrecy / false papers",
+      "Issuing fraudulent disability/death certificates",
+      "Undermines public trust and legal records"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Issuing false medical certificates and legal liabilities",
+   "tx": "Issuing a knowingly false, exaggerated, or backdated certificate represents a **fraudulent medical certificate violation** carrying severe disciplinary and criminal sanctions. Medical officers frequently issue certificates regarding illness, fitness, injury severity, disability percentage, age estimation, and cause of death. Under Section 232 BNS, any practitioner issuing a false judicial certificate faces criminal prosecution alongside permanent erasure from the medical register.",
+   "say": "Signing false, backdated, or fabricated sickness certificates is a serious criminal offence, exposing the doctor to prosecution and permanent loss of medical license.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Doctor issues false sickness or injury certificate"
+     },
+     {
+      "id": "b",
+      "label": "Employer or court discovers falsification of dates"
+     },
+     {
+      "id": "c",
+      "label": "Disciplinary complaint lodged with State Medical Council"
+     },
+     {
+      "id": "d",
+      "label": "Criminal charge under Section 232 BNS and license erasure"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The legal and ethical doctrine of informed consent",
+   "tx": "Founded on patient autonomy and bodily inviolability, the **informed consent medical doctrine** holds that every competent adult possesses the inviolable legal right to determine what shall be done with their body. A surgical incision or invasive medical intervention performed without valid consent constitutes tortious assault, battery, and medical negligence, exposing the treating practitioner to civil damage claims and criminal charges.",
+   "say": "Informed consent protects patient autonomy. Every competent adult has the right to decide what happens to their body, making unauthorized surgery a civil battery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Clinician explains diagnosis and proposed procedure"
+     },
+     {
+      "id": "b",
+      "label": "Discussion of foreseeable risks, alternatives, and prognosis"
+     },
+     {
+      "id": "c",
+      "label": "Verification of patient competence and voluntary choice"
+     },
+     {
+      "id": "d",
+      "label": "Execution of signed, dated informed consent document"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Essential components of legally valid consent",
+   "tx": "For consent to hold judicial validity, four **valid informed consent components** must be scrupulously fulfilled before initiating therapy. The consent must be entirely voluntary without coercion, fraud, or misrepresentation; it must be informed, requiring disclosure of diagnosis, risks, and alternatives; it must be specific to the proposed intervention; and it must be granted by a legally competent individual of sound mind.",
+   "say": "Valid consent requires four things: it must be voluntary, fully informed regarding risks and alternatives, specific to the procedure, and given by a competent adult.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Consent requirement",
+     "Legal standard",
+     "Defect that invalidates consent"
+    ],
+    "rows": [
+     [
+      "Voluntariness",
+      "Given freely without duress or undue influence",
+      "Threats or emotional manipulation by family/doctor"
+     ],
+     [
+      "Adequate disclosure",
+      "Nature, purpose, hazards, and alternatives explained",
+      "Blanket consent without explaining specific risks"
+     ],
+     [
+      "Procedural specificity",
+      "Authorises designated operation and site",
+      "Performing unauthorized hysterectomy during appendectomy"
+     ],
+     [
+      "Legal competence",
+      "Adult of sound mind (18+ under Contract Act)",
+      "Intoxicated, delirious, mentally ill, or minor patient"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Age thresholds for consent under Indian law",
+   "tx": "Indian statutes define specific **age thresholds for medical consent** across clinical settings. Under Section 89 and Section 90 of the Indian Penal Code, an adolescent who has attained twelve years of age can legally consent to a physical clinical examination. However, for consenting to surgical operations, anesthesia, or interventions involving serious risks, the Indian Contract Act mandates the age of majority at eighteen years.",
+   "say": "Under Indian law, a twelve-year-old can consent to routine physical examination, but surgical operations and invasive risks require an adult aged eighteen or older.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Age 12 to 18 years",
+     "points": [
+      "Can consent to routine clinical examination",
+      "Can consent to non-invasive investigations",
+      "Parental consent required for major surgery",
+      "Protected under POCSO Act below 18 years"
+     ]
+    },
+    "right": {
+     "title": "Age 18 years and above",
+     "points": [
+      "Full legal capacity to consent to surgery",
+      "Can execute advance medical directives",
+      "Can refuse life-prolonging treatments",
+      "Can donate blood and postmortem organs"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Therapeutic privilege and emergency exceptions to consent",
+   "tx": "Under exceptional circumstances, the **therapeutic privilege clinical doctrine** allows a physician to withhold specific distressing diagnostic or prognostic details if direct disclosure would psychologically destabilize a fragile patient, precipitating immediate suicide or fatal cardiac arrest. However, this exception cannot be exploited for administrative convenience, and full disclosure must always be provided to close family guardians.",
+   "say": "Therapeutic privilege allows doctors to withhold distressing information only if disclosure would cause psychological collapse, with full facts given to the family.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Severe prognosis or malignant diagnosis identified"
+     },
+     {
+      "id": "b",
+      "label": "Doctor assesses extreme psychiatric vulnerability"
+     },
+     {
+      "id": "c",
+      "label": "Judicious therapeutic withholding of devastating details"
+     },
+     {
+      "id": "d",
+      "label": "Full disclosure and consent obtained from next of kin"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

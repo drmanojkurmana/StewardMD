@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-mechanical-injuries-defence-wounds",
+ "subject": "forensic-medicine",
+ "module": "fmt-mechanical-injuries",
+ "title": "Defence Wounds, Fabricated Wounds and Grievous Hurt",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Defence wounds are instinctive",
+   "tx": "**Defence wounds** result from the victim's immediate instinctive attempt to save himself when attacked. They fall where the body shields itself or grabs at the weapon, not where the attacker aimed. Their presence therefore indicates homicide, and in a woman they also suggest sexual assault. They are absent when the victim is unconscious, taken by surprise, attacked from behind, or under the influence of alcohol or drugs.",
+   "say": "Wounds earned while shielding or grabbing prove the victim fought back, so their presence points firmly to homicide.",
+   "vis": {"kind": "table", "cols": ["Situation", "Defence wounds", "Reason"], "rows": [["Conscious victim, frontal attack", "Usually present", "Instinctive shielding occurs"], ["Attack from behind", "Absent", "No warning to react"], ["Unconscious or drugged victim", "Absent", "No protective reflex"], ["Surprise attack", "Absent", "Weapon lands before defence"]]}
+  },
+  {
+   "title": "Active defence wounds from grasping",
+   "tx": "When the victim seizes the weapon itself, **active defence wounds** cut the palm and the bends of the fingers and thumb. A grasped single edged blade makes one cut; a double edged blade cuts palm and fingers on both sides. The cuts look irregular and ragged because gripping loosens skin tension. The classic site is the web between the base of the thumb and the index finger where the blade was caught.",
+   "say": "Cuts across palm, finger bends and the thumb web mean the victim grabbed the blade, single or double edged.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Victim grasps the incoming blade"}, {"id": "b", "label": "Edge slices palm and finger bends"}, {"id": "c", "label": "Thumb web cut is typical"}, {"id": "d", "label": "Ragged cuts from loose skin tension"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Passive defence wounds from shielding",
+   "tx": "Raising the arms to protect the eyes, head and neck produces **passive defence wounds** on the extensor and ulnar surfaces of the forearms, the wrists, backs of the hands, knuckles and the back of the upper arms. Against blunt weapons these are bruises and abrasions, sometimes with fractures of carpal bones, metacarpals or fingers. A victim curled on the ground may show them on shins, feet and the outer thigh as well.",
+   "say": "Shielding injuries line the ulnar forearm and hand backs, with knuckle and carpal fractures when the weapon is blunt.",
+   "vis": {"kind": "compare", "left": {"title": "Sharp weapon defence", "points": ["Cuts on palm and finger bends", "Thumb web involvement classic", "Ulnar forearm cuts common", "Irregular depth and spread"]}, "right": {"title": "Blunt weapon defence", "points": ["Bruises on forearm and hand", "Carpal and metacarpal fractures", "Knuckle abrasions and swelling", "Outer arm and shin involvement"]}}
+  },
+  {
+   "title": "Offensive injuries on the hands",
+   "tx": "Not every hand injury is defensive. **Offensive manual injuries** mark the person who threw the punches: abraded, contused knuckles, ragged lacerations where a fist struck the opponent's front teeth, and fractures of the fourth and fifth metacarpal necks from punching a head or chin. Examine the suspected assailant's hands with the same care as the victim's, because compatible knuckle injuries can place him inside the assault.",
+   "say": "Split knuckles and fourth and fifth metacarpal fractures belong to the puncher, so examine the suspect's hands too.",
+   "vis": {"kind": "table", "cols": ["Hand finding", "Points to", "Mechanism"], "rows": [["Palm and web cuts", "Victim defending", "Grasping a blade"], ["Ulnar forearm bruises", "Victim defending", "Shielding head and neck"], ["Knuckle lacerations", "Attacker offending", "Fist meeting front teeth"], ["Fifth metacarpal fracture", "Attacker offending", "Punch landing on a hard head"]]}
+  },
+  {
+   "title": "Fabricated wounds and their motives",
+   "tx": "**Fabricated wounds** are fictitious injuries produced by a person on his own body, or by another with his consent, to manufacture a case. Motives include charging an enemy with assault, making a simple injury look serious, a watchman pretending he defended property, prisoners accusing officers of beating, recruits escaping military service and false charges of rape. The history of assault offered almost never fits the injuries actually present.",
+   "say": "Self made wounds serve a story, from false assault charges to escaping service, and the tale never matches the injuries.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Motive to frame or escape"}, {"id": "b", "label": "Superficial wounds self inflicted"}, {"id": "c", "label": "History clashes with findings"}, {"id": "d", "label": "Fabrication opinion is formed"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "How fabricated wounds betray themselves",
+   "tx": "Fabricated injuries share a recognisable grammar of **superficial, multiple and parallel wounds** of equal depth at both ends. They are mostly incised, sometimes contusions or burns, and they spare vital and sensitive areas such as eyes, lips, nose and ears. The clothes are not cut, or cuts in cloth fail to match the wounds. Old linear scars at the same sites of election reveal previous similar performances.",
+   "say": "Equal depth parallel cuts that spare eyes and lips, with uncut clothing, expose a fabricated wound at one reading.",
+   "vis": {"kind": "compare", "left": {"title": "Fabricated wound signs", "points": ["Superficial, multiple, parallel", "Equal depth at both ends", "Eyes, lips and ears spared", "Clothing uncut or mismatched"]}, "right": {"title": "Genuine assault signs", "points": ["Varied depth and direction", "Vital areas not spared", "Clothing cut over wounds", "Defence wounds may coexist"]}}
+  },
+  {
+   "title": "Grievous hurt, the eight clauses",
+   "tx": "Indian law grades injury through **grievous hurt under Section 320** of the Penal Code, now carried into the Bharatiya Nyaya Sanhita, with eight clauses: emasculation; permanent loss of sight of either eye; permanent loss of hearing of either ear; loss of any member or joint; permanent impairment of a member or joint; permanent disfiguration of head or face; fracture or dislocation of a bone or tooth; and any hurt endangering life or causing twenty days of severe pain or disability.",
+   "say": "Eight clauses define grievous hurt, from emasculation and lost sight to any fracture and the twenty day disability clause.",
+   "vis": {"kind": "table", "cols": ["Clause", "Grievous hurt", "Example"], "rows": [["One to three", "Emasculation, lost sight, lost hearing", "Gouged eye, ruptured eardrum"], ["Four to six", "Lost or impaired member, disfigured face", "Amputation, cut off nose"], ["Seven", "Fracture or dislocation of bone or tooth", "Fissure fracture of skull table"], ["Eight", "Life endangered or twenty days disabled", "Severe pain or lost work for 20 days"]]}
+  },
+  {
+   "title": "Reading the fracture and twenty day clauses",
+   "tx": "Two clauses generate most disputes. Under the **fracture clause**, a break, splintering or fissure of bone counts even without displacement, and fracture of either skull table qualifies, while a mere scratch on bone does not. Under the **twentieth day clause**, severe bodily pain, inability to follow ordinary pursuits, or danger to life each independently qualify, but danger to life must be imminent, not a bare statement that the part is vital.",
+   "say": "A fissured skull table counts as fracture, and the twenty day clause needs real disability or imminent danger to life.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Examine bone injury closely"}, {"id": "b", "label": "Fissure or splinter means fracture"}, {"id": "c", "label": "Count days of pain or lost work"}, {"id": "d", "label": "Grade simple or grievous accordingly"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Dangerous injury is a clinical judgement",
+   "tx": "Beyond the legal list sits the **dangerous injury**, one causing imminent danger to life through involvement of important organs or an extensive body area, fatal without surgical aid. The concept is deliberately clinical, not anatomical: a wound on a vital part is not automatically dangerous. The medical witness must state the nature, dimensions and effects that create the danger, because courts reject a bare assertion that an injury was dangerous to life.",
+   "say": "Dangerous means imminently life threatening in effect, and the doctor must show why, not merely name the body part.",
+   "vis": {"kind": "compare", "left": {"title": "Supports dangerous grading", "points": ["Important organ involved", "Extensive body area injured", "Death likely without surgery", "Effects described in detail"]}, "right": {"title": "Does not suffice", "points": ["Vital part named alone", "Small superficial wound there", "No danger actually created", "Bare assertion by the witness"]}}
+  }
+ ],
+ "quiz": []
+}

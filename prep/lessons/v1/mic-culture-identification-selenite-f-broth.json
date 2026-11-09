@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-culture-identification",
+  "subject": "microbiology",
+  "title": "Culture Media II: Enrichment Broths, Biochemical Tests, MALDI-TOF and Blood Culture",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Selenite F broth** enriches Salmonella (and some Shigella) from stool by poisoning coliform rivals with selenite while salmonellae tolerate it, subcultured onto selective plates at 12 to 18 hours before the poison turns on its beneficiaries too. Tetrathionate broth serves the same stool with different chemistry; enrichment timing is a window, not a suggestion.",
+      "say": "Selenite poisons the rivals first and its beneficiaries later; subculture on schedule.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Enrichment design",
+          "points": [
+            "Liquid, pathogen favoured over commensals",
+            "Selenite F: Salmonella from stool and food",
+            "Alkaline peptone water: Vibrio",
+            "Subculture window hours, not days"
+          ]
+        },
+        "right": {
+          "title": "Enrichment uses",
+          "points": [
+            "Carrier detection (typhoid stool)",
+            "Food and water examination",
+            "Scanty pathogens in heavy flora",
+            "Never a substitute for direct plating"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Transport media** (Stuart, Amies with charcoal, Cary Blair for enterics and vibrios) keep organisms alive without multiplying during journeys from ward, camp or home, buffered and reduced so fastidious Neisseria and anaerobes survive hours. Viral transport medium and anaerobic transport systems are its siblings; a dry swab in a sterile tube is its negation.",
+      "say": "Transport media promise survival without growth; distance decides which promise a specimen needs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transport roster",
+          "points": [
+            "Stuart and Amies charcoal: general swabs",
+            "Cary Blair: stool enterics and Vibrio",
+            "Viral transport medium: swabs for NAAT",
+            "Anaerobic transport: oxygen excluded"
+          ]
+        },
+        "right": {
+          "title": "Specimen transport rules",
+          "points": [
+            "Urine and CSF immediate, never refrigerated CSF for bacteria",
+            "Blood cultures at room temperature, loaded fast",
+            "Sputum and stool within hours, refrigerate if delayed (not CSF)",
+            "Labelled biohazard sealed packaging"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **catalase test** drops hydrogen peroxide on a colony and reads bubbles (staphylococci positive, streptococci negative) within seconds, while the **oxidase test** (tetramethyl p phenylenediamine turning purple) names Neisseria, Pseudomonas, Vibrio and Campylobacter. Two reagent spots sort the gram positive cocci and gram negative worlds before any panel is inoculated, provided blood agar carryover does not fake catalase.",
+      "say": "Bubbles split staphylococci from streptococci; purple names the oxidase positive gram negatives.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Catalase logic",
+          "points": [
+            "Positive: staphylococci, most bacilli",
+            "Negative: streptococci and enterococci",
+            "Avoid blood agar carryover (red cell catalase)",
+            "Anaerobes often negative by oxygen logic"
+          ]
+        },
+        "right": {
+          "title": "Oxidase logic",
+          "points": [
+            "Positive: Neisseria, Pseudomonas, Vibrio, Pasteurella",
+            "Negative: Enterobacterales family wide",
+            "Read within 30 seconds, iron loops falsify",
+            "Cytochrome c oxidase is the target"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**IMViC** (indole, methyl red, Voges Proskauer, citrate) sorts enteric genera by metabolic votes: E coli classic plus plus minus minus, Klebsiella and Enterobacter the mirror minus minus plus plus, with indole from tryptophan (Kovac red ring), MR from stable acid, VP from acetoin, and citrate as sole carbon. Panels automated the questions, not the logic.",
+      "say": "Indole, MR, VP, citrate: four metabolic votes separate coli from Klebsiella.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "IMViC patterns",
+          "points": [
+            "E coli: + + - -",
+            "Klebsiella and Enterobacter: - - + +",
+            "Citrate positive: Salmonella and Citrobacter mostly",
+            "Indole positive: E coli, Vibrio cholerae (cholera red)"
+          ]
+        },
+        "right": {
+          "title": "Bench companions",
+          "points": [
+            "TSI: sugars, gas and H2S in one slant",
+            "Urease: Proteus rapid, Klebsiella slower",
+            "Motility at 25 versus 37 (Listeria, Yersinia)",
+            "API and VITEK galleries miniaturise panels"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**MALDI TOF** mass spectrometry identifies colonies in minutes by protein fingerprint (mostly ribosomal proteins) matched against libraries, collapsing days of biochemistry for most bacteria and yeasts, failing gracefully where libraries thin (mycobacteria need extraction, closely related Shigella and E coli blur), and increasingly reading resistance markers. Culture's clock changed; morphology and panels remain its referees.",
+      "say": "A protein fingerprint names colonies in minutes; the library decides what names exist.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "colony", "label": "Colony smeared on target plate" },
+          { "id": "laser", "label": "Laser desorption ionises proteins" },
+          { "id": "flight", "label": "Time of flight builds fingerprint" },
+          { "id": "match", "label": "Library match reports identification and score" }
+        ],
+        "edges": [["colony", "laser"], ["laser", "flight"], ["flight", "match"]]
+      }
+    },
+    {
+      "tx": "**Automated blood culture** (BACTEC, BacT ALERT) incubates bottles with growth atmosphere, sensing carbon dioxide colorimetrically or fluorescently around the clock, flagging positive in hours to days (most pathogens within 48 hours), subcultured and Gram stained immediately at the flag. Paired aerobic and anaerobic bottles, adequate volume (the strongest yield variable) and skin antisepsis decide its truth before machinery helps.",
+      "say": "Blood volume and skin prep decide blood culture truth; the machine only watches patiently.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Yield variables",
+          "points": [
+            "Volume: 20 to 30 ml per adult set split bottles",
+            "Two sets from separate sites before antibiotics",
+            "Skin antisepsis and sterile draw",
+            "Paediatric single bottle weight guided"
+          ]
+        },
+        "right": {
+          "title": "Interpretation",
+          "points": [
+            "Time to positivity hints organism and load",
+            "One of four bottles coagulase negative staph: suspect contaminant",
+            "Continuous monitoring 5 days standard",
+            "Positive Gram stain telephoned as critical result"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Specimen quality** precedes all instruments (the morphology lesson's rule serialised): sputum screened for squamous contamination, urine midstream with colony counts interpreted by collection method, stool cultured for defined pathogens not flora, CSF rushed warm, swabs rejected for anaerobic requests and dry sites. Laboratories that publish rejection criteria protect identification machinery from garbage elegantly labelled.",
+      "say": "Reject bad specimens kindly and in writing; instruments cannot redeem them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Quality gates",
+          "points": [
+            "Sputum Gram screen before culture",
+            "Urine counts interpreted by collection route",
+            "Wounds: tissue or aspirate over swabs",
+            "CSF priority transport, cell count paired"
+          ]
+        },
+        "right": {
+          "title": "Collection timing",
+          "points": [
+            "Before antibiotics where safe",
+            "Blood cultures before fever spike myth discarded",
+            "Paired serology needs acute sample saved",
+            "Repeat sampling for intermittent shedders"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Automated identification and susceptibility** platforms (VITEK, Phoenix, MicroScan) combine biochemical galleries with turbidimetric antibiotic dilutions into same day answers, while disc diffusion and gradient strips remain referees for difficult pairs. The identification pipeline now runs colony to MALDI name to automated MIC within a working day for routine organisms, rewiring empirical therapy's second day.",
+      "say": "Name by spectrum, susceptibility by machine, therapy revised by evening: the modern bench day.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Automated platforms",
+          "points": [
+            "Biochemical ID galleries inoculated from colonies",
+            "MIC by turbidimetric dilution series",
+            "Expert rules flag implausible phenotypes",
+            "LIS interfaces report to stewardship"
+          ]
+        },
+        "right": {
+          "title": "Manual referees",
+          "points": [
+            "Disc diffusion for confirmation niches",
+            "Gradient strips for single drug MICs",
+            "Phenotypic confirmatory tests (ESBL, carbapenemase)",
+            "Reference laboratory for the implausible"
+          ]
+        }
+      }
+    }
+  ]
+}

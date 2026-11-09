@@ -1,0 +1,282 @@
+{
+  "key": "ped-development-tanner-staging",
+  "v": 1,
+  "module": "ped-development",
+  "subject": "paediatrics",
+  "title": "Tanner Staging and Adolescent Growth Spurt",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Pubertal maturation progresses through an orderly sequence of physical changes driven by reactivation of the hypothalamic-pituitary-gonadal axis. The **Tanner staging** system, also designated as Sexual Maturity Rating (SMR), provides an objective five-stage classification scheme assessing secondary sexual characteristics. Stage 1 represents the prepubertal baseline, stages 2 through 4 describe progressive developmental changes, and stage 5 signifies complete adult maturity.",
+      "say": "Tanner staging evaluates secondary sexual development across five stages from prepubertal stage 1 to fully mature stage 5. It tracks hypothalamic pituitary gonadal reactivation during adolescence.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/growth-puberty-ageing-fig1.webp",
+        "alt": "Reactivation of hypothalamic GnRH secretion driving pubertal gonadotropin release and sex steroid production.",
+        "caption": "Reactivation of hypothalamic GnRH secretion driving pubertal gonadotropin release and sex steroid production.",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "In females, secondary sexual characteristics begin with estrogen-mediated glandular proliferation of breast tissue. The earliest phenotypic sign of female puberty is **thelarche breast budding**, classified as Tanner stage 2, characterized by a small palpable mound of subareolar breast tissue and areolar widening. Thelarche typically appears between eight and thirteen years of age, occurring at an average chronological age of ten years.",
+      "say": "Thelarche, or breast budding, is the initial sign of female puberty, appearing between eight and thirteen years. This Tanner 2 stage features a palpable glandular bud beneath an enlarged areola.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tanner Stage",
+          "Morphological Landmark",
+          "Endocrine Driver",
+          "Average Age"
+        ],
+        "rows": [
+          [
+            "B1",
+            "Prepubertal, elevation of papilla only",
+            "Basal prepubertal estradiol",
+            "Under 8 to 10 years"
+          ],
+          [
+            "B2 (Thelarche)",
+            "Breast bud, subareolar glandular mound",
+            "Pulsatile ovarian estradiol",
+            "9.5 to 10.5 years"
+          ],
+          [
+            "B3",
+            "Enlargement of breast and areola, no contour separation",
+            "Sustained follicular estradiol",
+            "11.5 to 12.0 years"
+          ],
+          [
+            "B4",
+            "Areola and papilla project as secondary mound",
+            "High periovulatory estradiol",
+            "12.5 to 13.0 years"
+          ],
+          [
+            "B5",
+            "Mature adult contour, areola recedes into contour",
+            "Adult cyclic estrogen and progesterone",
+            "14.5 to 15.0 years"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Linear skeletal growth reaches its maximum velocity earlier in girls than in boys. The **female growth spurt** attains peak height velocity (PHV) relatively early during puberty, typically in Tanner breast stage 3 or early stage 4, at an average age of eleven and a half to twelve years. Girls gain an average of eight to nine centimetres per year during this phase, driven by synergistic actions of growth hormone and estradiol.",
+      "say": "The adolescent growth spurt in girls peaks during Tanner stage 3 at around twelve years of age. Girls grow eight to nine centimetres yearly before the onset of menstruation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Female Peak Height Velocity",
+          "points": [
+            "Occurs early in puberty (Tanner B3)",
+            "Growth velocity peaks at 8 to 9 cm/year, roughly one year before menarche"
+          ]
+        },
+        "right": {
+          "title": "Male Peak Height Velocity",
+          "points": [
+            "Occurs late in puberty (Tanner G4)",
+            "Growth velocity peaks at 9 to 10 cm/year, two years later than girls"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The onset of menstrual bleeding represents a late milestone in the female pubertal cascade. Occurring roughly two to two and a half years following thelarche, **menarche** typically manifests during Tanner breast stage 4 at an average age of twelve and a half years. Because estrogen induces epiphyseal fusion in long bones, post-menarcheal linear growth is limited, with girls rarely gaining more than five to seven centimetres following menarche.",
+      "say": "Menarche arrives late in female puberty, usually during Tanner stage 4 about two years after thelarche. Because estrogen accelerates growth plate closure, girls add only five to seven centimetres after menarche.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pubertal Milestone",
+          "Tanner Stage Link",
+          "Median Timing",
+          "Remaining Growth Potential"
+        ],
+        "rows": [
+          [
+            "Thelarche",
+            "Tanner B2",
+            "10.0 years",
+            "20 to 25 cm of total growth"
+          ],
+          [
+            "Adrenarche (Pubarche)",
+            "Tanner PH2",
+            "10.5 years",
+            "18 to 22 cm of total growth"
+          ],
+          [
+            "Peak height velocity",
+            "Tanner B3",
+            "11.8 years",
+            "8 to 10 cm of total growth"
+          ],
+          [
+            "Menarche",
+            "Tanner B4",
+            "12.5 years",
+            "5 to 7 cm of total growth"
+          ],
+          [
+            "Epiphyseal fusion",
+            "Tanner B5",
+            "15.0 years",
+            "Zero linear growth remaining"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In males, the initial manifestation of puberty is driven by luteinizing hormone and follicle-stimulating hormone on the testes. The earliest physical sign of male puberty is **testicular enlargement** to a volume of four millilitres or greater, or a longitudinal length of two and a half centimetres, designated as Tanner stage G2. This milestone occurs at an average age of eleven and a half years, measured accurately using an ellipsoid Prader orchidometer.",
+      "say": "Testicular enlargement to four millilitres or greater marks the first sign of male puberty at about eleven and a half years. Testicular volume is measured accurately using a Prader orchidometer.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tanner Stage",
+          "Testicular Volume (Length)",
+          "Scrotal Features",
+          "Penile Morphology"
+        ],
+        "rows": [
+          [
+            "G1",
+            "Under 4 mL (<2.5 cm)",
+            "Prepubertal, fine smooth skin",
+            "Prepubertal infantile size"
+          ],
+          [
+            "G2 (Pubertal onset)",
+            "4 to 8 mL (2.5 to 3.2 cm)",
+            "Reddened, thinned, textured",
+            "Minimal or no enlargement"
+          ],
+          [
+            "G3",
+            "10 to 12 mL (3.3 to 4.0 cm)",
+            "Further scrotal enlargement",
+            "Lengthening mainly"
+          ],
+          [
+            "G4",
+            "15 to 20 mL (4.1 to 4.5 cm)",
+            "Darkened scrotal rugae",
+            "Lengthening and breadth, glans"
+          ],
+          [
+            "G5",
+            "Over 20 mL (>4.5 cm)",
+            "Adult size and deep pigmentation",
+            "Adult dimensions and shape"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pubic hair development in both sexes is driven by adrenal and gonadal androgens. Known as **pubarche**, the emergence of sparse, lightly pigmented, straight downy hair along the base of the penis or labia majora defines Tanner pubic hair stage 2. Stage 3 shows darker, coarser, curling hair over the mons, stage 4 displays adult-quality hair without medial thigh spread, and stage 5 shows adult hair extending to the inner thighs.",
+      "say": "Pubarche describes pubic hair growth driven by androgens. Stage 2 shows fine straight hair along the labia or penile base, while stage 5 features coarse adult hair spreading onto the medial thighs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tanner PH2",
+          "points": [
+            "Sparse, long, slightly pigmented downy hair mainly along labia majora or base of penis"
+          ]
+        },
+        "right": {
+          "title": "Tanner PH5",
+          "points": [
+            "Classic adult inverse triangle pattern in women or diamond pattern in men spreading to medial thighs"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Boys experience their pubertal growth spurt considerably later in the developmental sequence than girls. The **male growth spurt** peaks during Tanner genital stage 4, at an average age of thirteen and a half to fourteen years, yielding a peak velocity of nine to ten centimetres per year. This two-year developmental delay in male PHV explains the ultimate adult height advantage of approximately thirteen centimetres in men.",
+      "say": "Boys reach peak height velocity late during Tanner stage 4 at nearly fourteen years of age. This two-year delay compared to girls accounts for the average adult male height advantage.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pubertal Milestone",
+          "Tanner Stage Link",
+          "Median Timing",
+          "Key Clinical Landmark"
+        ],
+        "rows": [
+          [
+            "Gonadarche (Testes >=4 mL)",
+            "Tanner G2",
+            "11.5 years",
+            "First physical sign of puberty"
+          ],
+          [
+            "Pubarche (Pubic hair)",
+            "Tanner PH2",
+            "12.0 years",
+            "Adrenal and testicular androgens"
+          ],
+          [
+            "Penile growth",
+            "Tanner G3",
+            "12.8 years",
+            "Rapid lengthening of shaft"
+          ],
+          [
+            "Peak height velocity",
+            "Tanner G4",
+            "13.8 years",
+            "9 to 10 cm/year growth rate"
+          ],
+          [
+            "Spermarche / Wet dreams",
+            "Tanner G3/G4",
+            "13.5 years",
+            "Production of mature spermatozoa"
+          ],
+          [
+            "Voice breaking and facial hair",
+            "Tanner G4/G5",
+            "14.5 years",
+            "Laryngeal growth and beard hair"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Deviations from the normal pubertal timetable require prompt neuroendocrine and radiological investigation. In girls, **precocious puberty** is defined as secondary sexual development appearing before eight years of age, or menarche before nine years; in boys, it denotes testicular enlargement before nine years. Delayed puberty is diagnosed when secondary sexual characteristics are absent by thirteen in girls or fourteen in boys.",
+      "say": "Precocious puberty involves sexual development before age eight in girls or age nine in boys. Delayed puberty is diagnosed if girls show no breast buds by thirteen or boys no testicular growth by fourteen.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Category",
+          "Girls Threshold",
+          "Boys Threshold",
+          "First Diagnostic Step"
+        ],
+        "rows": [
+          [
+            "Precocious puberty",
+            "Breast budding before 8 years",
+            "Testicular enlargement before 9 years",
+            "Bone age radiograph and LH assay"
+          ],
+          [
+            "Delayed puberty",
+            "No breast buds by 13 years",
+            "Testes under 4 mL by 14 years",
+            "LH, FSH, testosterone/estradiol, MRI"
+          ],
+          [
+            "Arrested puberty",
+            "Failure to progress over 2 years",
+            "Failure to progress over 2 years",
+            "Systemic and endocrine screening"
+          ]
+        ]
+      }
+    }
+  ]
+}

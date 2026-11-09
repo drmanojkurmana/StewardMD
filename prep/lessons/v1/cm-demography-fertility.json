@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-demography-fertility",
+ "subject": "community-medicine",
+ "module": "cm-demography",
+ "title": "Fertility Measures: TFR, GFR, NRR and Replacement Level",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Crude birth rate and its crudeness",
+   "tx": "The **crude birth rate** (live births per 1000 mid-year population) fell in India from 40.8 in 1951 to 19.5 in 2020 on the programme's historical ledger. It is crude because the denominator includes men, children and the elderly who cannot give birth, so fertility comparisons between populations need refined measures that follow this lesson.",
+   "say": "Births per thousand everyone: forty point eight in 1951, nineteen point five in 2020 nationally. Crude, because most of the denominator cannot deliver. Refined measures exist precisely for fair comparison.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Measure", "Denominator"],
+    "rows": [
+     ["Crude birth rate", "Total mid-year population"],
+     ["General fertility rate", "Women 15 to 49 years"],
+     ["Age-specific fertility rate", "Women in one age group"]
+    ]
+   }
+  },
+  {
+   "title": "General and age-specific fertility",
+   "tx": "**General fertility rate** counts live births per 1000 women aged 15 to 49, removing non-reproductive population from the denominator. Age-specific rates then expose the reproductive curve's shape: early peaks signal early marriage and childbearing patterns, delayed peaks signal postponement, and the curve's area is the next measure.",
+   "say": "Restrict the denominator to women fifteen to forty nine and comparison sharpens. Age-specific curves then expose timing: early peaks accuse early childbearing, delayed peaks show postponement.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Births tabulated by mother's age"},
+     {"id": "b", "label": "Divided by women in each age group"},
+     {"id": "c", "label": "Curve of age-specific rates drawn"},
+     {"id": "d", "label": "Rates summed into TFR"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Total fertility rate: children per woman",
+   "tx": "The **total fertility rate** sums age-specific rates across 15 to 49 to give children per woman surviving the reproductive span at current rates: India fell from 6.0 in 1951 to 2.0 in NFHS 2019-21, below the classic replacement level of 2.1 nationally while several states remain above it. State, residence and education gradients hide inside the national average.",
+   "say": "Sum the curve: children per woman. Six in 1951, two point zero nationally in the latest family health survey, below replacement on average with states still above. Averages hide gradients examiners probe.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Year", "India TFR"],
+    "rows": [
+     ["1951", "About 6.0"],
+     ["Replacement benchmark", "2.1"],
+     ["2019-21 (NFHS)", "2.0 nationally"]
+    ]
+   }
+  },
+  {
+   "title": "Replacement level and NRR",
+   "tx": "**Replacement fertility** (TFR about 2.1) lets each generation exactly replace itself, the extra tenth covering girls who die before reproducing and sex ratio at birth. Net reproduction rate refines it directly: daughters surviving to reproduce per newborn girl, with NRR of 1 the exact replacement signal demographers certify.",
+   "say": "Two point one replaces generations: the extra tenth covers mortality before motherhood. Net reproduction counts surviving daughters directly; exactly one means exact replacement certified.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "TFR 2.1",
+     "points": ["All births counted", "Assumes survival implicitly", "Policy headline measure"]
+    },
+    "right": {
+     "title": "NRR 1.0",
+     "points": ["Only daughters counted", "Survival to reproduction explicit", "Demographer's exact signal"]
+    }
+   }
+  },
+  {
+   "title": "Why population keeps growing below replacement",
+   "tx": "**Population momentum** keeps births exceeding deaths for decades after fertility falls, because yesterday's large birth cohorts now occupy reproductive ages while deaths concentrate in small old cohorts. India stabilisation is projected around 2045 in national goals despite replacement fertility already reached. Momentum, not fertility failure, explains continued growth in stems.",
+   "say": "Growth outlives its cause. Large young cohorts reproduce while small old cohorts die, so births exceed deaths for decades after replacement. Stabilisation near 2045 is momentum arithmetic, not programme failure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Past high fertility built large cohorts"},
+     {"id": "b", "label": "Cohorts enter reproductive ages"},
+     {"id": "c", "label": "Births exceed deaths for decades"},
+     {"id": "d", "label": "Stabilisation when structure ages"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Couple protection and unmet need",
+   "tx": "**Couple protection rate** (eligible couples effectively protected by contraception) rose from 10.4 percent in 1971 to over half by recent surveys, while unmet need (fecund women wanting to space or limit but not using) persists near a tenth of married women nationally. Method mix skew (female sterilisation dominant, spacing methods thin) is the quality critique attached to the numbers.",
+   "say": "Protection climbed fivefold since 1971 while unmet need persists near a tenth. Sterilisation dominates the method mix and spacing stays thin: the quality critique stapled to every quantity gain.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Indicator", "Reads"],
+    "rows": [
+     ["Couple protection rate", "Share effectively contracepting"],
+     ["Unmet need", "Wanting space or limit, not using"],
+     ["Method mix", "Sterilisation heavy, spacing thin in India"]
+    ]
+   }
+  },
+  {
+   "title": "Determinants: marriage age, literacy, mortality",
+   "tx": "**Fertility determinants** interlock: raising girls' marriage age beyond 18 (preferably 20 in national goals), female literacy, and infant survival (IMR toward 28 per 1000 in demographic goals) each depress desired and actual fertility. Son preference sustains progression to another pregnancy after daughters, the cultural determinant surveys still measure state by state.",
+   "say": "Levers interlock. Later marriage, literate mothers, surviving infants shrink desired families. Son preference drives one more pregnancy after daughters. Goals name eighteen minimum, twenty preferred, mortality in the twenties.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pushes fertility down",
+     "points": ["Later female marriage", "Female literacy and work", "High infant survival confidence"]
+    },
+    "right": {
+     "title": "Holds fertility up",
+     "points": ["Early universal marriage", "Son preference progression", "High infant mortality experience"]
+    }
+   }
+  },
+  {
+   "title": "Gross versus net reproduction",
+   "tx": "**Gross reproduction rate** counts daughters born per woman ignoring mortality; net reproduction subtracts girls lost before reproductive age. Where mortality is high the pair diverge widely; where survival is near-universal they converge, which is why NRR loses discriminating drama in low-mortality settings and TFR headlines instead.",
+   "say": "Daughters born versus daughters surviving: gross ignores deaths, net subtracts them. High mortality splits the pair; near-universal survival merges them. Headlines therefore follow the simpler total rate.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Measure", "Counts", "Mortality handled"],
+    "rows": [
+     ["Gross reproduction rate", "Daughters born per woman", "Ignored"],
+     ["Net reproduction rate", "Daughters surviving to reproduce", "Subtracted explicitly"],
+     ["Total fertility rate", "All children per woman", "Implicit benchmark 2.1"]
+    ]
+   }
+  },
+  {
+   "title": "Reading a fertility stem",
+   "tx": "Stems fingerprint measures by denominator words: **per 1000 population** names crude birth rate, per 1000 women 15 to 49 names general fertility, children per woman names TFR, daughters surviving names NRR, and couples protected names a programme output rather than fertility itself. Extracting the denominator phrase before calculating rescues most demography marks.",
+   "say": "Denominators fingerprint every measure. Thousand population, thousand reproductive women, children per woman, surviving daughters, couples protected. Read the denominator phrase first; arithmetic follows safely.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Read denominator in stem"},
+     {"id": "b", "label": "Name the measure"},
+     {"id": "c", "label": "Apply its formula"},
+     {"id": "d", "label": "Compare with benchmark"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-antiarrhythmics",
+  "subject": "pharmacology",
+  "title": "Adenosine, Verapamil in Arrhythmia, Torsades and the Unclassified Agents",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A rapid intravenous bolus of **adenosine** floods A1 receptors in the sinoatrial and atrioventricular nodes, opening potassium channels and shutting calcium entry so conduction halts for a few seconds. That pharmacological pause terminates AV node dependent supraventricular tachycardia in over 90 percent of cases and unmasks flutter or atrial tachycardia by revealing atrial activity without ventricular response. Erythrocytes and endothelium destroy it within ten seconds, so speed of injection is everything.",
+      "say": "Adenosine pauses the AV node for seconds; push it fast, flush it faster, and warn about the chest pressure.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/paroxysmal-supraventricular-tachycardias-fig1.webp",
+        "alt": "Paroxysmal supraventricular tachycardia mechanism diagram showing AV nodal re entry circuit",
+        "caption": "AV nodal re entry, the circuit a brief adenosine induced AV block interrupts to restore sinus rhythm."
+      }
+    },
+    {
+      "tx": "**Technique** decides success: 6 mg as a rapid bolus through a large proximal vein with an immediate saline flush and the arm raised, escalating to 12 mg and then 12 mg again, all on a running ECG trace. Central lines and slow pushes waste the dose before it arrives. Caffeine and theophylline antagonise the receptor for hours beforehand, while dipyridamole blocks adenosine reuptake and multiplies the dose effect, a pairing examiners test in both directions.",
+      "say": "Six, twelve, twelve, fast and flushed, on a rhythm strip; caffeine blunts it and dipyridamole boosts it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "six",
+            "label": "6 mg rapid bolus, flush, arm raised, ECG running"
+          },
+          {
+            "id": "twelve",
+            "label": "No response in 1 to 2 minutes: 12 mg the same way"
+          },
+          {
+            "id": "twelve2",
+            "label": "Still no response: second 12 mg dose"
+          },
+          {
+            "id": "review",
+            "label": "Review strip: termination, unmasking or wrong diagnosis"
+          }
+        ],
+        "edges": [
+          [
+            "six",
+            "twelve"
+          ],
+          [
+            "twelve",
+            "twelve2"
+          ],
+          [
+            "twelve2",
+            "review"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The ten seconds of adenosine feel dreadful and must be pre warned: flushing, chest tightness, breathlessness and a sense of doom peak and pass before the monitor alarms settle. In asthma it can provoke **bronchospasm**, favouring verapamil or beta blockade strategies instead, and in denervated transplanted hearts the response is exaggerated, halving starting doses. Atrial fibrillation induced by its atrial refractory shortening is transient but forbids complacency in pre excited pathways, detailed below.",
+      "say": "Warn before you push: ten miserable seconds are expected, but asthma and transplanted hearts change the plan.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Expected adenosine sensations",
+          "points": [
+            "Facial flushing and chest tightness",
+            "Breathlessness and a sense of doom",
+            "Metallic taste and brief asystole on the trace",
+            "All resolving within about ten seconds"
+          ]
+        },
+        "right": {
+          "title": "Populations needing a different plan",
+          "points": [
+            "Asthma: bronchospasm risk, choose alternatives",
+            "Heart transplant: exaggerated response, halve the dose",
+            "Pre excited atrial fibrillation: avoid AV blockers",
+            "Caffeine loaded patient: expect blunted effect"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Intravenous **verapamil** terminates AV nodal tachycardias by L type calcium blockade and controls atrial fibrillation rate when beta blockers are unsuitable, yet two prohibitions guard it: never in wide complex tachycardia of unknown origin, where vasodilatation and negative inotropy can collapse a ventricular rhythm, and never in pre excited atrial fibrillation, where blocking the node diverts impulses down the accessory pathway into ventricular fibrillation. Procainamide or cardioversion owns those territories instead.",
+      "say": "Verapamil is for narrow complex certainty; wide or pre excited rhythms belong to procainamide or the pads.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Verapamil appropriate",
+          "points": [
+            "AV nodal re entry tachycardia after vagal manoeuvres",
+            "Rate control when beta blockade is contraindicated",
+            "Narrow complex rhythm with confident diagnosis",
+            "Haemodynamically stable patient under monitoring"
+          ]
+        },
+        "right": {
+          "title": "Verapamil forbidden",
+          "points": [
+            "Wide complex tachycardia of unknown origin",
+            "Pre excited atrial fibrillation (WPW pattern)",
+            "Reduced ejection fraction heart failure",
+            "Intravenous beta blocker already on board"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Paroxysmal supraventricular tachycardia, **PSVT**, is the clinical basket holding AV nodal re entry, AV re entry through an accessory pathway and focal atrial tachycardia, all abrupt onset regular narrow complex rhythms. Management climbs a ladder shared across the basket: vagal manoeuvres first (modified Valsalva roughly doubles success), then adenosine, then nodal blockers or cardioversion for instability, with ablation as the definitive cure offered after the first well documented episode in many centres.",
+      "say": "PSVT climbs one ladder: Valsalva, adenosine, blockers or pads, then ablation as the cure conversation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "vagal",
+            "label": "Modified Valsalva: strain, legs raised, passive leg lift"
+          },
+          {
+            "id": "adeno",
+            "label": "Adenosine 6 then 12 then 12 mg rapid bolus"
+          },
+          {
+            "id": "blocker",
+            "label": "Verapamil or beta blocker if rhythm persists"
+          },
+          {
+            "id": "ablate",
+            "label": "Refer for catheter ablation as definitive therapy"
+          }
+        ],
+        "edges": [
+          [
+            "vagal",
+            "adeno"
+          ],
+          [
+            "adeno",
+            "blocker"
+          ],
+          [
+            "blocker",
+            "ablate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Torsades de pointes**, twisting of the points, is polymorphic ventricular tachycardia riding on a long QT interval, spinning around the baseline in five to ten beat salvos that usually self terminate and occasionally degenerate. Acquired causes dominate: QT prolonging drugs, hypokalaemia, hypomagnesaemia and bradycardia. The treatment inverts instinct: stop the culprit, give intravenous magnesium even when levels are normal, and shorten the QT by raising heart rate with isoproterenol or overdrive pacing rather than slowing it.",
+      "say": "Torsades wants magnesium and a faster heart, the opposite of ordinary tachycardia instincts; stop the culprit drug first.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antiarrhythmic-drugs-fig1.webp",
+        "alt": "Polymorphic ventricular tachycardia ECG strip showing twisting QRS complexes",
+        "caption": "Torsades de pointes twisting around the baseline on a prolonged QT interval."
+      }
+    },
+    {
+      "tx": "Amiodarone's pulmonary price deserves its sentence opposite its thyroid effects: **pulmonary fibrosis** and organising pneumonia patterns emerge after months to years, dose and duration related, presenting as insidious cough, breathlessness and infiltrates that mimic the heart failure being treated. Baseline chest imaging, enquiry at every review, and diffusion capacity when symptoms appear catch it while withdrawal can still reverse early disease; steroids join when inflammation dominates and the drug must stop despite its rhythm value.",
+      "say": "New breathlessness on amiodarone is lung toxicity until excluded; that suspicion must outrank the heart failure assumption.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Amiodarone lung toxicity clues",
+          "points": [
+            "Months to years into therapy, higher cumulative dose",
+            "Insidious cough and progressive breathlessness",
+            "Diffuse infiltrates mimicking infection or failure",
+            "Diffusion capacity falls on lung function testing"
+          ]
+        },
+        "right": {
+          "title": "Response when suspected",
+          "points": [
+            "Stop amiodarone and involve respiratory specialists",
+            "Imaging and lung function quantify the injury",
+            "Corticosteroids when inflammation predominates",
+            "Remember months of residual drug after stopping"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **unclassified shelf** completes the module: magnesium suppresses torsades and digitalis arrhythmias, atropine rescues symptomatic bradycardia vagally, digoxin slows AV conduction through vagal tone, and potassium itself is an antiarrhythmic when deficiency drives ectopy. Examinations place these beside the classes precisely because algorithms reach for them at defined moments: magnesium in torsades, atropine in bradycardia, adenosine in PSVT, each within seconds of recognition.",
+      "say": "Magnesium, atropine, digoxin and potassium sit outside the classes and inside every resuscitation algorithm.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Unclassified essentials",
+          "points": [
+            "Magnesium: torsades and digoxin toxicity arrhythmias",
+            "Atropine: symptomatic vagal bradycardia",
+            "Digoxin: vagal AV slowing for rate control",
+            "Potassium repletion: ectopy suppression at source"
+          ]
+        },
+        "right": {
+          "title": "Algorithm moments",
+          "points": [
+            "PSVT: vagal, adenosine, blocker, cardioversion",
+            "Torsades: stop culprit, magnesium, raise the rate",
+            "Bradycardia: atropine, pacing pads, adrenaline infusion",
+            "Any arrhythmia: potassium and magnesium checked early"
+          ]
+        }
+      }
+    }
+  ]
+}

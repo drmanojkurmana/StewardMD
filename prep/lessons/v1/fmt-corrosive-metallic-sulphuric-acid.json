@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-corrosive-metallic-sulphuric-acid",
+ "subject": "forensic-medicine",
+ "module": "fmt-corrosive-metallic",
+ "title": "Sulphuric Acid, Vitriolage and Nitric Acid",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Sulphuric acid, oil of vitriol",
+   "tx": "**Sulphuric acid**, oil of vitriol, is a heavy, odourless, colourless, non fuming, hygroscopic oily liquid that carbonises organic material; the commercial acid is brown or dark. It burns skin superficially after one second of contact and through its full thickness after thirty seconds. Inside the body it corrodes mouth, throat and oesophagus on contact, which is why five to ten millilitres can kill within twelve to twenty four hours.",
+   "say": "Oil of vitriol chars what it touches in seconds, and five to ten millilitres swallowed can kill within a day.",
+   "vis": {"kind": "table", "cols": ["Property", "Sulphuric acid finding", "Clinical consequence"], "rows": [["Appearance", "Heavy oily liquid, commercial brown", "Mistaken for other liquids"], ["Skin contact", "Full thickness burn in 30 seconds", "Immediate first aid washing"], ["Fatal dose", "5 to 10 ml", "Death in 12 to 24 hours"], ["Fatal mechanisms", "Collapse, glottis oedema, perforation", "Airway first in treatment"]]}
+  },
+  {
+   "title": "Signs of swallowed sulphuric acid",
+   "tx": "The **signs of sulphuric acid poisoning** begin at the lips: swollen excoriated lips with brown or black streaks running from the mouth angles down the chin and neck where acid flowed. There is immediate burning pain, corrosion of mouth and throat, stridor, drooling and painful difficult swallowing, then epigastric pain spreading over abdomen and thorax. The vomit is brown or black, mucoid, strongly acid and may carry shreds of charred stomach wall, with intense thirst that provokes vomiting when satisfied.",
+   "say": "Black streaks from the mouth angles, charred shreds in brown vomit and thirst that reprovokes vomiting announce sulphuric acid.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Lips excoriated, streaks on chin"}, {"id": "b", "label": "Burning pain, drooling, stridor"}, {"id": "c", "label": "Brown black acid vomit"}, {"id": "d", "label": "Collapse or glottis oedema threatens"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Local findings: teeth, tongue and abdomen",
+   "tx": "Inside the mouth the **teeth turn chalky white** and the tongue swells, sodden and black. The abdomen distends and becomes very tender, constipation is severe with tenesmus, the voice turns hoarse and husky from laryngeal injury, eyes sink and pupils usually dilate while the mind stays clear until death. That preserved clarity amid agony is repeatedly described in corrosive poisoning and helps separate it from narcotic or alcoholic collapse at the bedside.",
+   "say": "Chalky teeth, a black sodden tongue, a rigid tender abdomen and a clear mind form the bedside portrait of acid poisoning.",
+   "vis": {"kind": "compare", "left": {"title": "Mouth and airway", "points": ["Teeth chalky white", "Tongue swollen and black", "Voice hoarse and husky", "Stridor from glottis oedema"]}, "right": {"title": "Abdomen and general", "points": ["Distended, very tender", "Severe constipation, tenesmus", "Eyes sunken, pupils dilated", "Mind clear until the end"]}}
+  },
+  {
+   "title": "Treatment: dilute, never lavage",
+   "tx": "**Treatment of sulphuric acid poisoning** forbids gastric lavage and emetics absolutely. Within thirty minutes the acid is diluted and neutralised in place with a quarter litre of water, milk, milk of magnesia, lime water, soap suds or aluminium hydroxide gel. Carbonates and bicarbonates are banned because liberated carbon dioxide distends and may rupture the stomach. Demulcents such as olive oil, milk and egg white follow, prednisolone sixty milligrams daily is given against stricture and shock, and tracheostomy answers glottis oedema.",
+   "say": "Dilute with milk or magnesia in the first half hour, never lavage, never bicarbonate, and secure the airway before anything else.",
+   "vis": {"kind": "table", "cols": ["Step", "Action", "Forbidden alternative"], "rows": [["Dilution", "Quarter litre water or milk early", "Waiting for hospital transfer"], ["Neutralisation", "Magnesia, lime water, soap suds", "Carbonates and bicarbonates"], ["Protection", "Demulcents, olive oil, egg white", "Gastric lavage or emetics"], ["Airway", "Tracheostomy for glottis oedema", "Oral fluids in obstruction"]]}
+  },
+  {
+   "title": "Postmortem picture of acid corrosion",
+   "tx": "At autopsy the **corrosion pattern of sulphuric acid** shows necrotic areas at lips, mouth, throat, chin and hands, greyish white at first then brown or black and leathery. Internally the injury hugs the upper digestive tract: squamous oesophagus is relatively resistant with superficial reaction, while the columnar stomach suffers coagulation eschar, sometimes converted wholly into a soft spongy black mass that disintegrates at touch, with perforation into the peritoneum and chemical peritonitis in survivors of hours.",
+   "say": "The oesophagus resists while the stomach blackens into a spongy mass, and perforation spills chemical peritonitis into the abdomen.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "External corrosion mapped"}, {"id": "b", "label": "Oesophagus superficially reacted"}, {"id": "c", "label": "Stomach black, spongy, friable"}, {"id": "d", "label": "Perforation and peritonitis sought"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Time course and late strictures",
+   "tx": "Corrosive injury evolves through **four time stages**. The acute inflammatory stage runs four to seven days with perforation and acidosis risk. Granulation occupies the next phase to about a week. Perforation is commonest between seven and twenty one days, when the wall is weakest. Cicatrisation begins at three weeks and can continue for years, and its overproduced scar is what strangles the oesophagus and pylorus. A four centimetre mercury filled bougie passed daily treats an established oesophageal stricture.",
+   "say": "Perforation peaks in the weak second and third weeks, and the scar that follows can stricture the gullet for years.",
+   "vis": {"kind": "table", "cols": ["Stage", "Timing", "Danger"], "rows": [["Acute inflammation", "First 4 to 7 days", "Early perforation, acidosis"], ["Granulation", "From 4 to 7 days", "Wall at its weakest"], ["Late perforation window", "7 to 21 days", "Commonest perforation time"], ["Cicatrisation", "From 3 weeks, years long", "Oesophageal and pyloric stricture"]]}
+  },
+  {
+   "title": "Circumstances of sulphuric acid poisoning",
+   "tx": "Most swallowed cases are suicidal under **circumstances of acid poisoning**. Homicidal use is rare because the acid taste, near immediate local action and visible changes in food betray it at the first sip. Accidents arise from mistaking acid for castor oil or from vapour inhalation in chemical factories. It is also taken or injected vaginally as an abortifacient, which the examiner remembers in criminal abortion deaths with corrosive injuries of the genital tract.",
+   "say": "Suicide swallows acid, homicide is betrayed by its taste, and factories and abortionists account for most of the rest.",
+   "vis": {"kind": "compare", "left": {"title": "Common circumstances", "points": ["Suicidal ingestion", "Mistaken for castor oil", "Factory vapour inhalation", "Abortifacient misuse"]}, "right": {"title": "Why homicide is rare", "points": ["Acid taste betrays at once", "Immediate pain stops drinking", "Food visibly changes", "Victim resists further doses"]}}
+  },
+  {
+   "title": "Vitriolage, acid thrown to disfigure",
+   "tx": "**Vitriolage** is throwing sulphuric acid, occasionally nitric or carbolic acid, alkali or marking nut and calotropis juice, on another person to disfigure and harm, typically from jealousy. The burns are described as painless at first yet penetrating, devitalising tissue and predisposing to infection, with slow repair and contracture of scar. Blindness follows eye involvement. Treatment is immediate washing with plenty of water and soap or carbonate, then magnesium oxide paste, with eyes irrigated and oiled.",
+   "say": "Thrown acid devitalises and blinds rather than kills, so flood with water at once and irrigate eyes for a quarter hour.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Acid strikes face and eyes"}, {"id": "b", "label": "Flood skin with water and soap"}, {"id": "c", "label": "Irrigate eyes 10 to 15 minutes"}, {"id": "d", "label": "Magnesium oxide paste applied"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Nitric acid and the xanthoproteic reaction",
+   "tx": "**Nitric acid**, aqua fortis, is a clear colourless fuming heavy liquid with a choking odour that stains organic matter yellow by producing picric acid, the **xanthoproteic reaction**. Symptoms mirror sulphuric acid with more eructation and abdominal distension from gas, yellow discolouration of tissues including the crowns of the teeth, and yellow stains on clothing that identify the acid at the scene. Inhaled fumes injure the respiratory tract directly, adding a pulmonary route to the corrosive gut injury.",
+   "say": "Yellow skin, yellow tooth crowns and yellow cloth stains are nitric acid signing its work through the xanthoproteic reaction.",
+   "vis": {"kind": "table", "cols": ["Acid", "Stain colour", "Signature test or sign"], "rows": [["Sulphuric acid", "Brown or black charring", "Barium gives white sulphate precipitate"], ["Nitric acid", "Yellow xanthoproteic stain", "Yellow crowns of teeth"], ["Hydrochloric acid", "Greyish corrosion, milder", "Less charring than sulphuric"], ["Carbolic acid preview", "White then brown skin", "Carboluria darkens urine later"]]}
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,303 @@
+{
+ "v": 1,
+ "id": "ort-fracture-principles-malunion",
+ "subject": "orthopaedics",
+ "module": "ort-fracture-principles",
+ "title": "Malunion and Fracture Healing",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Malunion** is defined as the solid consolidation and osseous healing of a fractured bone in an unsatisfactory, non-anatomical position that results in cosmetic deformity, functional impairment, or altered joint biomechanics. Deformities are categorized along cardinal anatomical planes: angular deformity (varus, valgus, recurvatum, procurvatum), rotational deformity (internal or external malrotation), translational displacement, and axial shortening leading to limb length discrepancy.",
+   "say": "Malunion occurs when a fracture heals in an abnormal position, causing deformity, limb shortening, or joint dysfunction. It can involve angulation, rotation, translation, or shortening.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/fracture-complications-early-late-fig1.webp",
+    "alt": "Diagram showing fracture healing complications including malunion and nonunion.",
+    "caption": "Late fracture complications: malunion angulation, delayed union, and pseudoarthrosis nonunion. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Secondary bone healing** proceeds through five distinct histological stages under conditions of relative mechanical stability, such as casting or intramedullary nailing. Hematoma and acute inflammation (days 1 to 5) recruit osteoprogenitors; soft fibrocartilaginous callus (days 6 to 14) bridges the fracture gap with type II collagen; hard woven bone callus (days 15 to 42) forms by endochondral ossification; and cortical Haversian remodeling (months to years) restores normal lamellar architecture under mechanical strain.",
+   "say": "Secondary fracture healing relies on external callus. A hematoma forms first, followed by soft cartilaginous callus, which mineralizes into hard woven bone before remodeling restores normal Haversian architecture over months.",
+   "vis": {
+    "kind": "flow",
+    "title": "Stages of Secondary Endochondral Bone Healing",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Hematoma Stage",
+      "sub": "Platelet degranulation and macrophage recruitment (Days 1-5)"
+     },
+     {
+      "id": "s2",
+      "label": "Soft Callus",
+      "sub": "Chondrocytes lay down type II collagen cartilage (Days 6-14)"
+     },
+     {
+      "id": "s3",
+      "label": "Hard Callus",
+      "sub": "Endochondral calcification into woven bone (Days 15-42)"
+     },
+     {
+      "id": "s4",
+      "label": "Remodeling",
+      "sub": "Osteoclasts and osteoblasts restore Haversian lamellae"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2",
+      "Granulation invasion"
+     ],
+     [
+      "s2",
+      "s3",
+      "Endochondral conversion"
+     ],
+     [
+      "s3",
+      "s4",
+      "Wolff law remodeling"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Primary bone healing** occurs exclusively when absolute anatomical reduction and rigid internal compression fixation are achieved using lag screws and compression plates. Under these conditions of zero interfragmentary strain (strain under two percent), osteoclasts form microscopic cutting cones that drill across the fracture line, followed immediately by osteoblasts depositing longitudinal osteons. Bone unites directly by primary contact and gap healing without the intermediate formation of external periosteal bridging callus.",
+   "say": "Primary bone healing occurs without external callus under absolute rigid plate compression. Osteoclastic cutting cones drill directly across the fracture gap, followed immediately by osteoblasts laying down new osteons.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Secondary (Indirect) Healing",
+     "points": [
+      "Relative stability (cast, nail, external fixator)",
+      "Interfragmentary strain between 2% and 10%",
+      "Abundant external bridging callus visible on X-ray",
+      "Passes through endochondral cartilage phase"
+     ]
+    },
+    "right": {
+     "title": "Primary (Direct) Healing",
+     "points": [
+      "Absolute stability (compression plate, lag screws)",
+      "Interfragmentary strain strictly under 2%",
+      "Complete absence of external callus on X-ray",
+      "Direct cutting-cone Haversian remodeling"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Rotational malunion** is the least tolerated deformity plane because the musculoskeletal system possesses zero capacity to spontaneously remodel rotational malalignment, even in young growing children. In the femur and tibia, internal rotational malunion exceeding ten to fifteen degrees causes severe in-toeing gait, patellofemoral tracking instability, and abnormal knee shear forces. In forearm radius and ulna fractures, rotational malunion obliterates the interosseous space, permanently restricting pronation and supination.",
+   "say": "Rotational malunion does not remodel, even in young children. An internal rotation deformity of the femur causes an awkward in-toeing gait and knee pain, while forearm malrotation permanently blocks pronation and supination.",
+   "vis": {
+    "kind": "table",
+    "title": "Tolerance Limits and Remodeling Capacity by Deformity Plane",
+    "cols": [
+     "Deformity Plane",
+     "Adult Acceptable Threshold",
+     "Paediatric Remodeling Potential"
+    ],
+    "rows": [
+     [
+      "Angular in plane of joint motion",
+      "Under 5 to 7 degrees",
+      "High remodeling capacity near active physis"
+     ],
+     [
+      "Angular out of plane of joint",
+      "Under 5 degrees (varus/valgus)",
+      "Poor to moderate remodeling capacity"
+     ],
+     [
+      "Rotational malalignment",
+      "Under 10 degrees",
+      "Zero remodeling capacity at any age"
+     ],
+     [
+      "Limb shortening",
+      "Under 1.5 to 2.0 cm",
+      "Overgrowth of 1 to 2 cm in young femur"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Paediatric remodeling** of angular malunions follows three predictable biological principles: remodeling is greatest when the child has more than two years of skeletal growth remaining; greatest when the fracture lies close to an active, rapidly growing physis (such as the distal radius or proximal humerus); and greatest when angulation occurs in the same anatomical plane as adjacent hinge joint motion (flexion and extension).",
+   "say": "Children can remodel angular deformities remarkably well, especially near rapidly growing growth plates like the wrist. However, remodeling only corrects angulation in the direction the joint bends, never rotational twists.",
+   "vis": {
+    "kind": "flow",
+    "title": "Determinants of Spontaneous Paediatric Bone Remodeling",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Growth Potential",
+      "sub": "Maximum when remaining skeletal growth >2 years"
+     },
+     {
+      "id": "p2",
+      "label": "Proximity to Physis",
+      "sub": "Metaphyseal fractures remodel faster than diaphysis"
+     },
+     {
+      "id": "p3",
+      "label": "Plane of Motion",
+      "sub": "Flexion-extension plane remodels; varus-valgus poorly"
+     },
+     {
+      "id": "p4",
+      "label": "Rotational Rule",
+      "sub": "Rotational twists never spontaneously remodel"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2",
+      "Biological timeline"
+     ],
+     [
+      "p2",
+      "p3",
+      "Anatomical location"
+     ],
+     [
+      "p3",
+      "p4",
+      "Remodeling boundaries"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Secondary osteoarthritis** is the most serious long-term joint complication of lower extremity malunion. Malalignment shifts the mechanical weight-bearing axis of the limb, concentrating joint contact stresses onto an abnormally small area of articular cartilage. In tibial shaft malunion, five degrees of varus malalignment increases medial compartment knee contact pressures by over fifty percent, initiating rapid cartilage breakdown, subchondral sclerosis, and end-stage unicompartmental osteoarthritis.",
+   "say": "Malunion shifts the mechanical axis, concentrating all weight-bearing forces onto one side of the knee or ankle. Just five degrees of varus malalignment increases medial knee contact pressure by fifty percent, accelerating osteoarthritis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Mechanical Axis",
+     "points": [
+      "Mikulicz line connects hip, knee, and ankle",
+      "Passes centrally through knee joint (1 mm medial)",
+      "Balanced 60-40 medial-lateral load distribution",
+      "Preserves articular cartilage longevity"
+     ]
+    },
+    "right": {
+     "title": "Varus Tibial Malunion",
+     "points": [
+      "Axis shifts significantly medial to knee center",
+      "Over ninety percent of load on medial compartment",
+      "Chondrocyte apoptosis and cartilage fibrillation",
+      "Early debilitating unicompartmental osteoarthritis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Long-leg scanogram** radiography or EOS low-dose stereoradiography provides essential objective measurement of mechanical axis deviation and limb length discrepancy. Standing, full-length weight-bearing anteroposterior radiographs capturing the pelvis down to the ankles allow precise tracing of the mechanical axis (Mikulicz line) from the centre of the femoral head to the centre of the ankle mortise. Rotational deformities are precisely quantified using computed tomography torsional profile scans.",
+   "say": "A full-length standing scanogram maps the mechanical axis from the hip center down to the ankle mortise. For rotational deformities, computed tomography rotational profiles compare angles between the two limbs.",
+   "vis": {
+    "kind": "table",
+    "title": "Diagnostic Assessment Protocol for Malunion",
+    "cols": [
+     "Diagnostic Imaging",
+     "Measured Deformity Parameter",
+     "Surgical Correction Utility"
+    ],
+    "rows": [
+     [
+      "Full-length standing scanogram",
+      "Mechanical axis deviation (MAD), leg length",
+      "Determines center of rotation of angulation (CORA)"
+     ],
+     [
+      "CT rotational profile",
+      "Femoral anteversion and tibial torsion angles",
+      "Calculates exact degrees of rotational correction"
+     ],
+     [
+      "Standard orthogonal X-rays",
+      "Local bone quality, union status, implants",
+      "Confirms mature consolidation prior to osteotomy"
+     ],
+     [
+      "Gait analysis laboratory",
+      "Dynamic ground reaction force vectors",
+      "Measures real-time functional compensation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Corrective osteotomy** represents the surgical standard of care for symptomatic malunion, designed to realign mechanical axes and restore limb length. The center of rotation of angulation (CORA) is determined using deformity analysis principles. A closing wedge, opening wedge, or focal dome osteotomy is executed at the apex of deformity, followed by rigid stabilization with an intramedullary nail or locking compression plate, frequently incorporating autologous bone grafting.",
+   "say": "Corrective osteotomy realigns the bone at the apex of the deformity. The surgeon performs an opening or closing wedge cut and fixes the corrected bone with a rigid plate or nail to restore normal joint alignment.",
+   "vis": {
+    "kind": "flow",
+    "title": "Surgical Planning and Execution in Corrective Osteotomy",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "CORA Analysis",
+      "sub": "Locate intersection of proximal and distal axes"
+     },
+     {
+      "id": "c2",
+      "label": "Osteotomy Selection",
+      "sub": "Opening wedge for length; closing wedge for soft tissue"
+     },
+     {
+      "id": "c3",
+      "label": "Angular Realignment",
+      "sub": "Restore mechanical axis through joint center"
+     },
+     {
+      "id": "c4",
+      "label": "Rigid Stabilization",
+      "sub": "Locking plate or reamed intramedullary nail"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2",
+      "Deformity mapping"
+     ],
+     [
+      "c2",
+      "c3",
+      "Bone wedge cut"
+     ],
+     [
+      "c3",
+      "c4",
+      "Internal fixation"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Primary bone healing: mandatory biomechanical condition",
+   "b": "Absolute rigid stability with interfragmentary strain strictly under 2% (no external callus)."
+  },
+  {
+   "f": "Paediatric fracture remodeling: deformity plane with zero remodeling potential",
+   "b": "Rotational malalignment (must be anatomically reduced at initial treatment)."
+  },
+  {
+   "f": "Corrective osteotomy planning: essential geometrical landmark",
+   "b": "Center of rotation of angulation (CORA) at intersection of proximal and distal axes."
+  }
+ ],
+ "keys": [
+  "Malunion represents solid bone healing in a deformed position that impairs function or alignment",
+  "Secondary healing forms bridging callus under relative stability; primary healing unites without callus",
+  "Rotational deformities never remodel spontaneously and require corrective osteotomy when symptomatic"
+ ]
+}

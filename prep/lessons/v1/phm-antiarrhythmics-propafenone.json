@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-antiarrhythmics",
+  "subject": "pharmacology",
+  "title": "Class Ic and Class III Agents: Propafenone, Amiodarone, Sotalol and Pure IKr Blockers",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Structurally echoing propranolol, **propafenone** combines potent class Ic sodium blockade with weak beta blocking and calcium channel activity, an impurity that slows AV conduction usefully in atrial fibrillation. Hepatic CYP2D6 metabolism creates strong and poor metaboliser phenotypes with several fold level differences, and the drug raises warfarin and digoxin concentrations. Like flecainide it is reserved for patients without structural heart disease, heart failure or coronary scarring.",
+      "say": "Propafenone is flecainide with a beta blocking shadow; metaboliser genetics and normal hearts govern its use.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Propafenone actions",
+          "points": [
+            "Class Ic sodium blockade slows conduction markedly",
+            "Weak beta blockade adds AV nodal slowing",
+            "CYP2D6 phenotype swings plasma levels widely",
+            "Raises warfarin effect and digoxin levels"
+          ]
+        },
+        "right": {
+          "title": "Propafenone limits",
+          "points": [
+            "No structural heart disease or heart failure",
+            "Metallic taste and visual blurring reported",
+            "Bronchospasm possible from beta blockade",
+            "QRS widening guides dose ceilings"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The iodine rich benzofuran **amiodarone** refuses single class citizenship: it blocks potassium channels (class III signature), sodium channels in use dependent fashion, calcium channels and alpha and beta receptors non competitively. That breadth makes it the most effective broad spectrum antiarrhythmic for ventricular arrhythmias, atrial fibrillation and shock refractory arrest, usable even in heart failure where class Ic agents are banned. Breadth, however, bills the whole body, as later steps itemise.",
+      "say": "Amiodarone does everything a little, works where others are banned, and charges every organ for the service.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/atrial-fib-fig1.webp",
+        "alt": "Atrial fibrillation mechanism diagram showing chaotic atrial activity and irregular ventricular response",
+        "caption": "Atrial fibrillation, the commonest rhythm for which amiodarone's broad multi class action is deployed."
+      }
+    },
+    {
+      "tx": "**Pharmacokinetics** of amiodarone are extreme: a volume of distribution around 60 litres per kg, fat and tissue sequestration, and a half life of 25 to 100 days mean loading takes weeks and effects persist months after stopping. Oral loading of roughly 10 g precedes 200 mg daily maintenance; intravenous loading rescues unstable ventricular arrhythmias. Interactions outlive the prescription, so warfarin and digoxin doses adjusted for amiodarone must be revisited long after it stops.",
+      "say": "Think in months with amiodarone: weeks to load, months to leave, and interactions that outstay the prescription.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "load",
+            "label": "Loading dose saturates fat and tissue stores over weeks"
+          },
+          {
+            "id": "maint",
+            "label": "Maintenance 200 mg daily balances stores against clearance"
+          },
+          {
+            "id": "stop",
+            "label": "Stopping leaves months of residual drug effect"
+          },
+          {
+            "id": "interact",
+            "label": "Warfarin and digoxin needs drift long after cessation"
+          }
+        ],
+        "edges": [
+          [
+            "load",
+            "maint"
+          ],
+          [
+            "maint",
+            "stop"
+          ],
+          [
+            "stop",
+            "interact"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Two iodine atoms per molecule explain the thyroid chaos: amiodarone causes **hypothyroidism** by blocking peripheral T4 to T3 conversion and flooding the gland with iodine, and thyrotoxicosis by either iodine driven synthesis (type 1) or destructive thyroiditis (type 2), distinguished by uptake and interleukin patterns and treated oppositely. Baseline and six monthly thyroid function tests are mandatory, and new breathlessness or weight change on therapy earns thyroid tests before cardiac conclusions.",
+      "say": "Amiodarone can shut the thyroid down or set it on fire; test at baseline and every six months.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Amiodarone hypothyroidism",
+          "points": [
+            "Iodine load plus blocked T4 to T3 conversion",
+            "Commoner in iodine replete regions",
+            "Treat with levothyroxine, amiodarone usually continues",
+            "TSH monitored six monthly on therapy"
+          ]
+        },
+        "right": {
+          "title": "Amiodarone thyrotoxicosis",
+          "points": [
+            "Type 1: iodine driven synthesis in abnormal gland",
+            "Type 2: destructive thyroiditis releasing hormone",
+            "Types treated differently; specialist diagnosis essential",
+            "Can destabilise the arrhythmia it was controlling"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Dronedarone was engineered as amiodarone without iodine to keep efficacy and lose thyroid and lung toxicity; trials kept only part of the bargain. It helps maintain sinus rhythm in paroxysmal atrial fibrillation but increased mortality in severe or recently decompensated heart failure and in permanent atrial fibrillation, both now contraindications. Liver injury reports added monitoring duties, leaving **dronedarone** a narrower, cleaner but weaker cousin for selected stable patients only.",
+      "say": "Dronedarone traded iodine for safety and lost power; heart failure and permanent fibrillation ban it outright.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Where dronedarone fits",
+          "points": [
+            "Paroxysmal or persistent atrial fibrillation after cardioversion",
+            "No iodine: thyroid and pulmonary toxicity largely absent",
+            "Twice daily dosing, food improves absorption",
+            "Liver enzymes monitored, injury reported rarely"
+          ]
+        },
+        "right": {
+          "title": "Where dronedarone is banned",
+          "points": [
+            "Severe or recently decompensated heart failure",
+            "Permanent atrial fibrillation",
+            "Strong CYP3A4 inhibitor co therapy",
+            "Prior amiodarone lung or liver injury cautions use"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Sotalol** fuses non selective beta blockade with class III potassium blockade in one racemic molecule, suppressing atrial and ventricular arrhythmias while slowing the heart. Renal excretion makes dose a direct function of creatinine clearance, and its QT prolongation is dose and rate dependent, worst at slow heart rates. Initiation traditionally happens under ECG surveillance with QTc and electrolytes watched, because torsades, not hypotension, is its defining accident.",
+      "say": "Sotalol is a beta blocker that stretches QT; kidneys set the dose and torsades sets the monitoring.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Sotalol started with baseline QTc and electrolytes"
+          },
+          {
+            "id": "renal",
+            "label": "Dose interval set by creatinine clearance"
+          },
+          {
+            "id": "qt",
+            "label": "QTc rechecked at steady state and after increases"
+          },
+          {
+            "id": "stop",
+            "label": "Stop for QTc beyond 500 ms or torsades"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "renal"
+          ],
+          [
+            "renal",
+            "qt"
+          ],
+          [
+            "qt",
+            "stop"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The pure IKr blockers **dofetilide** and ibutilide strip class III action to a single potassium current: dofetilide orally maintains sinus rhythm with hospital initiation, mandatory renal dosing and QTc gates at each dose, while ibutilide intravenously converts recent atrial fibrillation or flutter within the hour. Both carry torsades rates of a few percent, so monitored beds, repleted electrolytes and a defibrillator nearby are part of the prescription, not optional extras.",
+      "say": "Dofetilide and ibutilide are precision QT stretchers; the monitored bed is part of the dose.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antiarrhythmic-drugs-fig1.webp",
+        "alt": "Polymorphic ventricular tachycardia ECG strip showing twisting QRS complexes",
+        "caption": "Torsades de pointes, the monitored complication that shapes initiation rules for dofetilide, ibutilide and sotalol."
+      }
+    },
+    {
+      "tx": "Amiodarone's remaining organ toll completes its monitoring litany: dose related **pulmonary fibrosis** with cough and breathlessness, corneal microdeposits visible on slit lamp in most users, blue grey skin discoloration and photosensitivity, transaminase rises, tremor and peripheral neuropathy. Baseline chest imaging, liver and thyroid tests, eye review and annual surveillance convert that list from surprises into scheduled checks, and drug interactions with warfarin, digoxin, statins and many antiarrhythmics need active dose surgery.",
+      "say": "Lungs, eyes, skin, liver, thyroid and nerves: schedule amiodarone surveillance or the toxicities schedule themselves.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Amiodarone surveillance set",
+          "points": [
+            "Thyroid and liver tests at baseline, then six monthly",
+            "Chest imaging and lung review for new breathlessness",
+            "Eye symptoms asked; corneal deposits expected and benign",
+            "Skin protection advice for photosensitivity"
+          ]
+        },
+        "right": {
+          "title": "Interaction dose surgery",
+          "points": [
+            "Warfarin dose cut by about a third on starting",
+            "Digoxin dose halved, level rechecked",
+            "Simvastatin capped at 20 mg daily",
+            "Other QT drugs reviewed before co prescription"
+          ]
+        }
+      }
+    }
+  ]
+}

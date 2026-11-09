@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-cns-depressants-lsd",
+ "subject": "forensic-medicine",
+ "module": "fmt-cns-depressants",
+ "title": "LSD, Hallucinogens, Flashbacks and Synesthesia",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The hallucinogen family",
+   "tx": "**Hallucinogens** include LSD, cannabis preparations in high dose, mescaline from the peyote cactus, dimethyltryptamine, psilocybin and psilocin from magic mushrooms, peyote and phencyclidine. They act through various central neurotransmitters, LSD through the serotonin system, while tropane alkaloids act anticholinergically. There is psychic dependence only and no abstinence syndrome, which separates the family from opioids, alcohol and barbiturates in dependence classification. Mushrooms are taken orally, raw or cooked.",
+   "say": "Magic mushrooms, peyote, DMT and LSD share intensified perception with psychic dependence only and no withdrawal syndrome.",
+   "vis": {"kind": "table", "cols": ["Hallucinogen", "Source", "System"], "rows": [["LSD", "Ergot fungus derivative", "Serotonin system"], ["Psilocybin", "Magic mushrooms", "Serotonin kin"], ["Mescaline", "Peyote cactus", "Catecholamine kin"], ["Phencyclidine", "Synthetic", "Dissociative action"]]}
+  },
+  {
+   "title": "LSD: a hundred micrograms is a trip",
+   "tx": "**LSD, lysergic acid diethylamide**, is a colourless, tasteless, odourless semisynthetic compound whose lysergic acid comes from the ergot fungus Claviceps purpurea, at once serotonin antagonist and mimic. The psychotropic dose is only one hundred to two hundred micrograms, taken as liquid on sugar, a saturated sugar cube, blotting paper, capsule or blue pills. It absorbs from the gut, binds blood protein, concentrates in lungs, liver, kidney and brain, and is found in bile in high proportion.",
+   "say": "Two hundred micrograms on blotting paper, tasteless and colourless, is enough LSD for a twelve hour trip.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Blotter or sugar cube taken"}, {"id": "b", "label": "Trip begins in half to one hour"}, {"id": "c", "label": "Peak at two to six hours"}, {"id": "d", "label": "Fading by twelve hours"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Synesthesia and depersonalisation",
+   "tx": "Hallucination under LSD **intensifies the senses**: colours seem brighter and clearer, sounds excessively loud with exaggerated detail. The person feels depersonalisation and separation from the environment, perceiving himself as observing an event rather than being involved in it. Body image distorts, object boundaries dissolve, and **synesthesia** crosses the senses, hearing colours and seeing sounds, in Reddy's words even seeing smells. Time perception alters, mood swings extremely, and the same user can have a good or bad trip on different occasions or within one trip.",
+   "say": "Hearing colours, watching yourself from outside and losing the edges of objects are the LSD perceptual signatures.",
+   "vis": {"kind": "compare", "left": {"title": "Perceptual changes", "points": ["Colours brighter, sounds louder", "Synesthesia crosses senses", "Body image distorted", "Time perception altered"]}, "right": {"title": "Self changes", "points": ["Depersonalisation felt", "Observing rather than involved", "Extreme mood swings", "Floating sensations reported"]}}
+  },
+  {
+   "title": "Body signs during a trip",
+   "tx": "The body joins the mind in **LSD physical effects**: dry mouth, sweating, dilated pupils, tachycardia, hypertension and extreme mood change, with visual hallucinations. The wider hallucinogen picture mixes sympathetic signs, dilated pupils, tachycardia, tachypnoea, hyperthermia, sweating, piloerection, dizziness, weakness, hyperactivity, ataxia and altered mental state to coma, with parasympathetic signs of salivation, lacrimation, diarrhoea, nausea, vomiting and bronchoconstriction. Effects can persist twelve to eighteen hours, biological half life being three hours.",
+   "say": "Wide pupils, racing pulse, sweating and hypertension ride along with the visions, and the action can run eighteen hours.",
+   "vis": {"kind": "table", "cols": ["System", "Trip finding", "Note"], "rows": [["Pupils and heart", "Dilated, tachycardia", "Sympathetic signs"], ["Skin and glands", "Sweating, dry mouth", "Mixed autonomic picture"], ["Gut", "Nausea, vomiting, diarrhoea", "Parasympathetic signs"], ["Duration", "12 to 18 hours possible", "Half life three hours"]]}
+  },
+  {
+   "title": "Bad trips, panic and the flying delusion",
+   "tx": "Adverse LSD effects are **depression, panic attacks, schizophrenic episodes and psychosis**. At the height of the drug the person may become violent or panic stricken, attack others with an urge to kill, or hurt himself from disregard of reality; the feeling of being able to fly leads users to jump from windows. About fourteen milligrams is the nominal fatal dose, but death in practice is traumatic and behavioural, not pharmacological, which the autopsy and scene must establish.",
+   "say": "LSD rarely poisons the body; it kills by panic, violence and the belief that one can fly from a window.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Panic or psychosis erupts"}, {"id": "b", "label": "Reality testing collapses"}, {"id": "c", "label": "Flight or attack behaviour"}, {"id": "d", "label": "Traumatic death follows"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Flashback phenomenon",
+   "tx": "The **flashback phenomenon** is recurrence of the emotional and psychological aspects of a previous LSD trip days, weeks or even months after the dose, without new drug intake. It occurs most frequently with psychotomimetics such as LSD, STP, tryptamines, mescaline and psilocybin. These delayed recurring symptoms can lead to eccentric behaviour, suicide or even homicide. Lasting disturbances after repeated exposure include depersonalisation, chronic dread, depression, mood swings and paranoid attitudes, and repeated use can produce permanent psychosis.",
+   "say": "A trip that returns uninvited months later is a flashback, and it too can end in suicide or violence.",
+   "vis": {"kind": "compare", "left": {"title": "Flashback features", "points": ["Days to months after dose", "No new drug taken", "Emotional trip recurs", "Behaviour may turn dangerous"]}, "right": {"title": "Lasting disturbances", "points": ["Depersonalisation persists", "Chronic dread and depression", "Paranoid attitudes develop", "Permanent psychosis possible"]}}
+  },
+  {
+   "title": "Talking down and benzodiazepines",
+   "tx": "**Treatment of a bad trip** pairs pharmacology with presence: low dose antianxiety benzodiazepines, diazepam ten to twenty milligrams orally or five to ten intravenously repeated as needed, are the drug of choice, and prolonged calm talking, talking the person down, may extend twelve to eighteen hours. A quiet, supervised, low stimulus room protects against self harm. Tolerance to LSD develops in two to three days of daily dosing and disappears after two days withheld, and LSD does not cause chromosomal breakage and is not teratogenic on Reddy's evidence.",
+   "say": "Diazepam plus twelve hours of calm talking down is the treatment, in a quiet room where nobody can jump or run.",
+   "vis": {"kind": "table", "cols": ["Measure", "Detail", "Purpose"], "rows": [["Benzodiazepine", "Diazepam 10 to 20 mg", "Anxiety and panic control"], ["Talking down", "Up to 12 to 18 hours", "Reality anchoring"], ["Environment", "Quiet, supervised, low stimulus", "Prevents traumatic death"], ["Tolerance note", "Develops in 2 to 3 days", "Vanishes after two days off"]]}
+  },
+  {
+   "title": "Cannabis and driving impairment",
+   "tx": "**Cannabis** interferes with motor skills and judgement and leads to motor vehicle accidents, the forensic fact that matters most from this family in daily practice. Combined with alcohol its impairment compounds. Hallucinogenic mushrooms and peyote follow the same medicolegal pattern: behaviourally dangerous intoxication with a largely intact body. In custody and driving cases the history, witness account and timing outweigh drug levels, because tolerance and the gap between level and perception are wide.",
+   "say": "Cannabis impairs driving judgement measurably, and in hallucinogen cases witnesses and timing outweigh any blood level.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Cannabis impairs motor skills"}, {"id": "b", "label": "Judgement degrades silently"}, {"id": "c", "label": "Alcohol compounds impairment"}, {"id": "d", "label": "Accident liability follows"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Dependence types: psychic only",
+   "tx": "Dependence classification closes the module in **drug dependence types**: morphine type brings physical dependence and withdrawal, cocaine type and hallucinogen type bring psychic dependence with no abstinence syndrome in Reddy's scheme, while alcohol and barbiturate types bring the dangerous physical withdrawals. This is why LSD users need psychiatric follow up for flashbacks and psychosis rather than detoxification beds, and why a hallucinogen death investigation hunts behaviour and trauma, not overdose physiology.",
+   "say": "Psychic dependence without withdrawal sends hallucinogen care to psychiatry and hallucinogen deaths to the scene, not the syringe.",
+   "vis": {"kind": "compare", "left": {"title": "Psychic dependence only", "points": ["Cocaine type in classic scheme", "LSD and hallucinogens", "No abstinence syndrome", "Psychiatric follow up needed"]}, "right": {"title": "Physical dependence", "points": ["Morphine type opioids", "Alcohol and barbiturates", "Dangerous withdrawal states", "Detoxification required"]}}
+  }
+ ],
+ "quiz": []
+}

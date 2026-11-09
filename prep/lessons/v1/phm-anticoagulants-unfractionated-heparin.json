@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-anticoagulants",
+  "subject": "pharmacology",
+  "title": "Heparins: Unfractionated Heparin, Enoxaparin, Fondaparinux and Protamine",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Unfractionated heparin** is a mixture of sulfated glycosaminoglycan chains that bind antithrombin and contort it into a thrombin and factor Xa trap roughly a thousand times faster than antithrombin works alone. Trapping thrombin needs long chains bridging both proteins, which the unfractionated mixture supplies abundantly. Given intravenously or subcutaneously (never intramuscularly, haematomas), it acts instantly, vanishes within hours and is monitored by the aPTT (activated partial thromboplastin time).",
+      "say": "Heparin supercharges antithrombin a thousand fold; instant on, hours off, aPTT watched.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/coagulation-cascade-and-anticoagulants-fig1.webp",
+        "alt": "Coagulation cascade and anticoagulation pathways diagram showing heparin antithrombin action",
+        "caption": "Coagulation and anticoagulation pathways, with heparin accelerating antithrombin against thrombin and factor Xa."
+      }
+    },
+    {
+      "tx": "Low molecular weight heparins such as **enoxaparin** are fractionated chains too short to bridge thrombin, so they inhibit factor Xa predominantly, predictably enough for weight based subcutaneous dosing without routine monitoring. Kidney clearance means accumulation below a creatinine clearance of 30, where anti Xa levels or a switch to unfractionated heparin restores control. Their convenience rebuilt thromboprophylaxis and much of thrombosis treatment around twice or once daily injections patients give themselves.",
+      "say": "Enoxaparin is heparin trimmed to anti Xa work: predictable, injectable, and renally cleared.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-lmwh.webp",
+        "alt": "Low molecular weight heparin injection and mechanism illustration",
+        "caption": "Low molecular weight heparin, the fractionated anti Xa predominant heparin used by weight without routine monitoring. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Fondaparinux** is the synthetic pentasaccharide minimum: the exact five sugar sequence that binds antithrombin, delivering pure factor Xa inhibition with a 17 hour half life, once daily dosing and no platelet interaction, which makes it a refuge in heparin induced thrombocytopenia histories. Its long renal tail is also its weakness: no widely stocked specific antidote, contraindication in severe renal impairment, and unsuitability where procedures or bleeding may demand rapid reversal.",
+      "say": "Fondaparinux is heparin's active five sugars purified: clean anti Xa action, long tail, no easy antidote.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fondaparinux profile",
+          "points": [
+            "Synthetic pentasaccharide, pure anti Xa mechanism",
+            "Once daily dosing, half life about 17 hours",
+            "No PF4 interaction: safe history in HIT",
+            "Renally cleared, avoid in severe impairment"
+          ]
+        },
+        "right": {
+          "title": "Practical consequences",
+          "points": [
+            "No routine monitoring required",
+            "No specific reversal agent stocked widely",
+            "Neuraxial timing rules strictly observed",
+            "Often chosen for superficial and cancer associated clots in protocols"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Heparin's antidote is chemistry from salmon sperm: **protamine sulfate**, a strongly basic protein that binds acidic heparin ionically and strips it from antithrombin within minutes. One milligram neutralises about 100 units of unfractionated heparin, dosed on the amount still circulating given heparin's short half life, and only partially (about 60 percent of anti Xa activity) reverses low molecular weight heparin. Fondaparinux is essentially untouched by it.",
+      "say": "Protamine cancels heparin ion by ion; full for unfractionated, partial for enoxaparin, useless for fondaparinux.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bleed",
+            "label": "Bleeding on heparin, drug stopped"
+          },
+          {
+            "id": "calc",
+            "label": "Estimate circulating heparin from dose and time"
+          },
+          {
+            "id": "prot",
+            "label": "Protamine 1 mg per 100 units, slow intravenous push"
+          },
+          {
+            "id": "check",
+            "label": "Recheck aPTT and clinical bleeding"
+          }
+        ],
+        "edges": [
+          [
+            "bleed",
+            "calc"
+          ],
+          [
+            "calc",
+            "prot"
+          ],
+          [
+            "prot",
+            "check"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Protamine** itself is a drug with teeth: rapid injection causes histamine mediated hypotension and bradycardia, excess protamine paradoxically anticoagulates by impairing platelets and clotting factors, and prior exposure through NPH insulin or vasectomy raises allergy risk including anaphylaxis. Slow intravenous administration over about ten minutes, resuscitation ready, and the minimum calculated dose are the safety grammar every examination answer should recite.",
+      "say": "Give protamine slowly and sparingly; too fast drops pressure, too much anticoagulates.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Protamine adverse effects",
+          "points": [
+            "Hypotension and bradycardia if pushed fast",
+            "Anaphylaxis in sensitised patients",
+            "Excess dose impairs platelet function paradoxically",
+            "Catastrophic pulmonary vasoconstriction, rare"
+          ]
+        },
+        "right": {
+          "title": "Safe administration",
+          "points": [
+            "Slow intravenous push over about 10 minutes",
+            "Dose calculated on heparin still circulating",
+            "Resuscitation drugs and monitoring ready",
+            "Recheck aPTT rather than redosing blindly"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Choosing** among the three is a bedside matrix: unfractionated heparin when renal failure, imminent procedures or bleeding fear demand a short leash and full reversibility; enoxaparin for stable treatment and prophylaxis with predictable dosing; fondaparinux where HIT history or once daily purity appeals and kidneys allow. Pregnancy trusts heparins because none cross the placenta, while warfarin and the direct oral agents are avoided or contraindicated, an obstetric constant across this module.",
+      "say": "Short leash: unfractionated. Stable and simple: enoxaparin. HIT history: fondaparinux. Pregnancy: heparins only.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Choose unfractionated heparin when",
+          "points": [
+            "Creatinine clearance below 30",
+            "Procedure or surgery imminent",
+            "High bleeding risk needing full reversibility",
+            "Thrombolysis adjacent or ECMO circuits"
+          ]
+        },
+        "right": {
+          "title": "Choose LMWH or fondaparinux when",
+          "points": [
+            "Stable outpatient thrombosis treatment",
+            "Routine surgical and medical prophylaxis",
+            "Pregnancy anticoagulation (LMWH preferred)",
+            "HIT history argues for fondaparinux"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Monitoring** follows molecular size: the aPTT steers unfractionated infusions against a therapeutic range calibrated locally to anti Xa activity, platelets are counted at baseline and during exposure for the thrombocytopenia detailed next lesson, and anti Xa levels are reserved for enoxaparin in pregnancy, extremes of weight and renal impairment. A falling platelet count of more than half between days 5 and 14 is never dismissed as incidental until HIT is excluded.",
+      "say": "aPTT for the infusion, platelets for the trap, anti Xa for the special bodies; watch days five to fourteen.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "base",
+            "label": "Baseline platelets, aPTT and renal function"
+          },
+          {
+            "id": "apt",
+            "label": "aPTT titrated for unfractionated infusions"
+          },
+          {
+            "id": "plt",
+            "label": "Platelet count surveillance days 5 to 14"
+          },
+          {
+            "id": "xa",
+            "label": "Anti Xa levels for pregnancy, weight extremes, renal failure"
+          }
+        ],
+        "edges": [
+          [
+            "base",
+            "apt"
+          ],
+          [
+            "base",
+            "plt"
+          ],
+          [
+            "plt",
+            "xa"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Bleeding management** layers above the antidote: stop the drug, compress and survey the site, transfuse against haemoglobin and haemodynamics, and involve haematology early for life threatening haemorrhage. Because unfractionated heparin self clears in hours, watchful support often suffices before protamine is reached for. The same cannot be said of the oral agents ahead, which is why their specific reversal agents, idarucizumab and andexanet, earn their own lesson steps.",
+      "say": "Stop, compress, transfuse, call haematology; heparin's short half life is itself half the antidote.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Immediate bleeding steps",
+          "points": [
+            "Stop anticoagulant, note dose and timing",
+            "Compress, survey and image the bleeding site",
+            "Transfuse to haemodynamics, not numbers alone",
+            "Recheck aPTT or anti Xa to track clearance"
+          ]
+        },
+        "right": {
+          "title": "Escalation options",
+          "points": [
+            "Protamine for heparin class bleeding",
+            "Haematology and interventional radiology early",
+            "Surgical control where anatomy demands",
+            "Document re exposure plan before restarting"
+          ]
+        }
+      }
+    }
+  ]
+}

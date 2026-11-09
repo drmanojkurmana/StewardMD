@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-antibodies-complement",
+  "subject": "microbiology",
+  "title": "Immunoglobulins III: Fc Functions, Idiotypes and Class Switching",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **Fc fragment** is the antibody's instruction stem: its class and subclass sequence is read by Fc receptors (gamma for IgG, epsilon for IgE, alpha for IgA, mu and neonatal FcRn), C1q of complement, and placental and mucosal transporters. Same Fab on different Fc makes a neutraliser into an opsoniser or a mast cell trigger, the modular logic engineering exploits.",
+      "say": "Fc is read by receptors and complement; change the stem, change the orders.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fc readers",
+          "points": [
+            "Fc gamma RI, II, III: affinity and signalling classes",
+            "Fc epsilon RI: mast cell arming",
+            "FcRn: half life and placental transfer",
+            "C1q: classical complement ignition"
+          ]
+        },
+        "right": {
+          "title": "Fc consequences",
+          "points": [
+            "Opsonisation and phagocytosis",
+            "ADCC and cytokine release",
+            "Immune complex clearance by red cells (CR1 shuttle)",
+            "Therapeutic Fc silencing or enhancement"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Idiotypes** are the variable region's own antigenic fingerprints (the unique shapes of one clone's binding site), isotypes are class constants shared by all humans (IgG versus IgM), and allotypes are inherited constant region variants differing between individuals (Gm and Km markers). Anti idiotype antibodies can mimic antigen (vaccine experiments, autoimmunity networks in Jerne's theory).",
+      "say": "Isotype is class, allotype is inheritance, idiotype is the clone's fingerprint.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Three types",
+          "points": [
+            "Isotype: heavy chain class, species wide",
+            "Allotype: allelic constant variants",
+            "Idiotype: variable region determinants",
+            "Idiotype per clone, shared public idiotypes exist"
+          ]
+        },
+        "right": {
+          "title": "Idiotype uses",
+          "points": [
+            "Clonality markers in lymphoma",
+            "Anti idiotype vaccines (experimental mimicry)",
+            "Autoimmune network theories",
+            "Residual disease tracking by idiotype PCR heritage"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Class switch recombination** swaps the constant stem while keeping the variable address: in germinal centres under T cell cytokines, activation induced deaminase edits switch regions, moving IgM to IgG, IgA or IgE by loop deletion. Hyper IgM syndromes (CD40L, CD40, AID defects) freeze the repertoire at IgM, proving the machinery by its absence.",
+      "say": "Same target, new stem: AID and CD40 signals perform the switch, hyper IgM is its failure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "igm", "label": "Naive and early response: IgM (and IgD)" },
+          { "id": "signal", "label": "Germinal centre T help: CD40L plus cytokines" },
+          { "id": "aid", "label": "AID edits switch region DNA" },
+          { "id": "igg", "label": "IgG, IgA or IgE with same specificity" }
+        ],
+        "edges": [["igm", "signal"], ["signal", "aid"], ["aid", "igg"]]
+      }
+    },
+    {
+      "tx": "**Somatic hypermutation and affinity maturation** refine the Fab while switching proceeds: germinal centre B cells mutate variable genes and compete for follicular dendritic antigen plus T help, survivors binding tighter each round. Secondary response antibodies are thus both class changed and affinity educated, vaccines' booster logic in cellular form.",
+      "say": "Mutation proposes, antigen disposes: germinal centres graduate tighter binders.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mutation round",
+          "points": [
+            "AID introduces variable region point mutations",
+            "Dark zone proliferation and mutation",
+            "Light zone selection on follicular dendritic antigen",
+            "T follicular helper survival signals"
+          ]
+        },
+        "right": {
+          "title": "Outputs",
+          "points": [
+            "High affinity plasma cells to marrow",
+            "Memory B cells for recall",
+            "Failed cells apoptose in situ",
+            "Autoantibody risk policed by tolerance checkpoints"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**FcRn** (neonatal Fc receptor) rescues IgG and albumin from lysosomes, granting IgG its three week half life, ferries maternal IgG across placenta and gut in neonates, and is now a drug target: FcRn blockers (efgartigimod) lower IgG in myasthenia, while Fc engineered monoclonals borrow its recycling for monthly dosing. Half life is an Fc property, engineered like affinity.",
+      "say": "FcRn is IgG's recycling plant, placenta ferry and newest drug target in one receptor.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "FcRn duties",
+          "points": [
+            "IgG salvage from endothelial lysosomes",
+            "Placental transfer third trimester",
+            "Albumin recycling shared",
+            "Half life engineering target"
+          ]
+        },
+        "right": {
+          "title": "FcRn therapeutics",
+          "points": [
+            "Blockers lower pathogenic IgG (myasthenia, ITP)",
+            "IVIG partly works by FcRn saturation theories",
+            "Long acting monoclonals (YTE and LS Fc mutations)",
+            "Maternal transfer also transfers autoantibodies (neonatal disease)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Immune complexes** form where Fc meets antigen in circulation: small complexes cleared by red cell CR1 shuttling to liver and spleen, larger deposited in vessels, joints and glomeruli when clearance lags (serum sickness, post streptococcal and lupus nephritis, type III hypersensitivity module). Complement consumption in serum (low C3 and C4) betrays their traffic.",
+      "say": "Complexes too big to clear deposit and inflame; complement levels report their traffic.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Complex handling",
+          "points": [
+            "CR1 on red cells shuttles complexes",
+            "Kupffer and splenic macrophages unload",
+            "Size and class decide deposit sites",
+            "Fc gamma receptor polymorphisms modify risk"
+          ]
+        },
+        "right": {
+          "title": "Complex diseases",
+          "points": [
+            "Serum sickness after foreign proteins",
+            "Lupus nephritis with hypocomplementaemia",
+            "Cryoglobulinaemic vasculitis",
+            "Arthus local reaction (hypersensitivity module)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Therapeutic antibody Fc design** is now prescription information: checkpoint and depleting antibodies choose IgG1 (effector competent) or IgG4 and silenced Fc (blocking only), afucosylated Fc strengthens ADCC (obinutuzumab), and Fc gamma receptor polymorphisms (V158F) once predicted rituximab responses. Two antibodies to one target can be different drugs by stem alone.",
+      "say": "Read a monoclonal's subclass before predicting whether it depletes or merely blocks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Effector competent",
+          "points": [
+            "IgG1 depleters: rituximab class",
+            "Afucosylation enhances NK ADCC",
+            "Complement fixing designs",
+            "Cytokine release risk scales with Fc engagement"
+          ]
+        },
+        "right": {
+          "title": "Effector silent",
+          "points": [
+            "IgG4 checkpoint blockers (S228P stabilised)",
+            "Fc silencing mutations (LALA)",
+            "Pure receptor blockade intent",
+            "Fab only formats delete Fc entirely"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hypogammaglobulinaemia patterns** read class anatomy backward: absent all classes (X linked agammaglobulinaemia, B cell development failure), low IgG with high IgM (switch failure), isolated IgA absence (assembly or switching niche), and secondary losses (nephrotic, enteric, drug induced after B cell depletion). Each pattern fingerprints a different broken station from earlier steps.",
+      "say": "Which classes are missing names the broken station: factory, switch or drain.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pattern reads",
+          "points": [
+            "All low: production failure (Bruton, CVID patterns)",
+            "IgM high, others low: class switch defects",
+            "IgA only: selective deficiency",
+            "IgG low with loss history: protein losing states"
+          ]
+        },
+        "right": {
+          "title": "Workup echoes",
+          "points": [
+            "Vaccine responses test function, not levels alone",
+            "B cell counts separate production from switch",
+            "Immunoglobulin replacement for antibody failure",
+            "Live vaccine caution by defect"
+          ]
+        }
+      }
+    }
+  ]
+}

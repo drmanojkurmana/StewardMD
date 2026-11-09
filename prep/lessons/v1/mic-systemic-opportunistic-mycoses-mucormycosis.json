@@ -1,0 +1,227 @@
+{
+  "v": 1,
+  "module": "mic-systemic-opportunistic-mycoses",
+  "subject": "microbiology",
+  "title": "Opportunistic Fungal Syndromes: Mucormycosis and Pneumocystis jirovecii",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Opportunistic invasive mycoses exploit host vulnerabilities including profound neutropenia, ketoacidosis, and T-cell immunosuppression. While angioinvasive **mucormycosis** causes acute fulminant necrosis in ketoacidosis, Pneumocystis jirovecii causes insidious subacute alveolar pneumonia in advanced acquired immunodeficiency syndrome. Distinguishing their clinical presentations, microbiological characteristics, and treatment regimens is critical on medical licensing examinations.",
+      "say": "Mucormycosis causes acute vascular infarction while Pneumocystis causes subacute diffuse alveolar pneumonia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mucormycosis syndrome",
+          "points": [
+            "Predisposing state: diabetic ketoacidosis, neutropenia",
+            "Pathology: vascular invasion, tissue infarction",
+            "Onset: acute fulminant progression over days",
+            "Treatment: surgical debridement plus amphotericin B"
+          ]
+        },
+        "right": {
+          "title": "Pneumocystis pneumonia",
+          "points": [
+            "Predisposing state: CD4 count under 200 cells/uL",
+            "Pathology: intra-alveolar foamy exudates",
+            "Onset: subacute progressive exertional dyspnoea",
+            "Treatment: trimethoprim-sulfamethoxazole"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Rhino-orbital-cerebral mucormycosis begins in the nasal turbinates and paranasal sinuses, presenting with facial numbness, retro-orbital headache, proptosis, and ophthalmoplegia due to superior orbital fissure syndrome. The pathognomonic physical finding is a necrotic **black eschar** over the nasal septum, inferior turbinates, or hard palate. Direct extension through the cribriform plate or orbital apex leads to cavernous sinus thrombosis and fatal cerebral infarction.",
+      "say": "Invasion through facial bones produces a necrotic black palate eschar and cavernous sinus thrombosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mucormycosis-fig1.webp",
+        "alt": "Mucorales broad aseptate hyphae histology",
+        "caption": "Mucorales histology demonstrating broad, ribbon-like aseptate hyphae invading arterial lumen [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "A critical pharmacological risk factor for gastrointestinal and systemic mucormycosis is treatment with the iron chelator **deferoxamine**. Rhizopus species possess surface siderophore receptors that utilize ferrioxamine complexes to scavenge bound iron avidly, dramatically accelerating fungal replication. In contrast, newer second-generation iron chelators such as deferasirox and deferiprone do not promote fungal growth.",
+      "say": "Deferoxamine acts as a fungal siderophore, promoting explosive fungal growth by delivering iron.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fe1",
+            "label": "Dialysis or thalassaemia patient receives deferoxamine chelator"
+          },
+          {
+            "id": "fe2",
+            "label": "Fungal receptors bind ferrioxamine complex directly"
+          },
+          {
+            "id": "fe3",
+            "label": "Rapid iron acquisition fuels explosive systemic fungal angioinvasion"
+          }
+        ],
+        "edges": [
+          [
+            "fe1",
+            "fe2"
+          ],
+          [
+            "fe2",
+            "fe3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The atypical unicellular fungus **Pneumocystis jirovecii**, formerly classified as a protozoan and named Pneumocystis carinii, lacks ergosterol in its cytoplasmic membrane, containing cholesterol instead. This biological distinction explains why Pneumocystis is inherently resistant to amphotericin B, fluconazole, and all other standard antifungal agents that target ergosterol synthesis or membrane integrity.",
+      "say": "Pneumocystis cell membranes contain cholesterol instead of ergosterol, conferring resistance to azoles and amphotericin.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Biological Feature",
+          "Clinical Implication"
+        ],
+        "rows": [
+          [
+            "Membrane sterol",
+            "Cholesterol present; ergosterol is completely absent"
+          ],
+          [
+            "Antifungal resistance",
+            "Inherently refractory to azoles, polyenes and echinocandins"
+          ],
+          [
+            "Target enzymes",
+            "Folate synthesis enzymes (dihydropteroate synthase) present"
+          ],
+          [
+            "Drug of choice",
+            "Trimethoprim-sulfamethoxazole blocks sequential folate steps"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In patients with human immunodeficiency virus, Pneumocystis pneumonia classically presents when helper T-cell counts fall below two hundred cells per microlitre. Patients experience insidious exertional dyspnoea, dry non-productive cough, low-grade fever, and striking **exercise desaturation** where pulse oximetry saturation plummets dramatically after walking. High serum lactate dehydrogenase levels correlate with the extent of alveolar injury.",
+      "say": "Patients with low helper T-cell counts develop exertional hypoxaemia and elevated lactate dehydrogenase.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical manifestations",
+          "points": [
+            "Profound exertional desaturation on walking",
+            "Non-productive, persistent dry hacking cough",
+            "Tachypnoea disproportionate to lung auscultation",
+            "Marked elevation of serum lactate dehydrogenase"
+          ]
+        },
+        "right": {
+          "title": "Thoracic imaging findings",
+          "points": [
+            "Bilateral perihilar ground-glass opacities",
+            "Bat-wing butterfly alveolar distribution",
+            "Spares lung apices and peripheral costophrenic angles",
+            "Upper lobe pneumatoceles prone to pneumothorax"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Definitive diagnosis requires demonstrating fungal cysts or trophozoites in bronchoalveolar lavage fluid or induced sputum. The standard histological stain is **Gomori methenamine silver**, which highlights the thick walls of spherical, cup-shaped, or collapsed crescentic cysts measuring five to eight micrometres. A distinctive central dark dot or bracket-like thickening represents the intracystic focal wall thickening.",
+      "say": "Gomori silver stain outlines cup-shaped collapsed cysts with characteristic dark central brackets.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p1",
+            "label": "Obtain hypertonic saline-induced sputum or bronchoalveolar lavage"
+          },
+          {
+            "id": "p2",
+            "label": "Perform Gomori methenamine silver or direct immunofluorescence"
+          },
+          {
+            "id": "p3",
+            "label": "Identify 5 to 8 micrometre cup-shaped cysts with central dark dots"
+          }
+        ],
+        "edges": [
+          [
+            "p1",
+            "p2"
+          ],
+          [
+            "p2",
+            "p3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The definitive first-line therapeutic regimen is high-dose **trimethoprim-sulfamethoxazole** administered intravenously or orally for twenty-one days. In patients with moderate to severe disease, defined by an arterial oxygen tension under seventy millimetres of mercury on room air or an alveolar-arterial gradient exceeding thirty-five millimetres, adjunctive systemic corticosteroids must be initiated before or concurrently with antimicrobial therapy.",
+      "say": "High dose trimethoprim-sulfamethoxazole is curative; add steroids when arterial oxygen falls below seventy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Severity Marker",
+          "Corticosteroid Indication",
+          "Steroid Regimen"
+        ],
+        "rows": [
+          [
+            "PaO2 under 70 mmHg",
+            "Mandatory early adjunctive therapy",
+            "Oral prednisone 40 mg twice daily days 1-5"
+          ],
+          [
+            "A-a gradient over 35 mmHg",
+            "Mandatory early adjunctive therapy",
+            "Taper to 40 mg daily days 6-11, then 20 mg"
+          ],
+          [
+            "Mild disease (PaO2 over 70)",
+            "Corticosteroids not routinely indicated",
+            "Trimethoprim-sulfamethoxazole monotherapy"
+          ],
+          [
+            "Sulpha allergy alternative",
+            "Atovaquone or primaquine plus clindamycin",
+            "Intravenous pentamidine for severe disease"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Primary chemoprophylaxis against Pneumocystis is indicated for all human immunodeficiency virus patients with CD4 counts below two hundred cells per microlitre or a history of oropharyngeal candidiasis. One double-strength **cotrimoxazole** tablet daily provides complete protection while simultaneously protecting against cerebral toxoplasmosis and Isospora enteritis. Prophylaxis may be safely discontinued once antiretroviral therapy restores CD4 counts above two hundred for three months.",
+      "say": "Daily cotrimoxazole protects against Pneumocystis and Toxoplasma when helper counts are under two hundred.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cp1",
+            "label": "CD4 count falls below 200 cells/uL or oral thrush develops"
+          },
+          {
+            "id": "cp2",
+            "label": "Initiate daily double-strength trimethoprim-sulfamethoxazole"
+          },
+          {
+            "id": "cp3",
+            "label": "Discontinue prophylaxis after CD4 exceeds 200 for 3 consecutive months on ART"
+          }
+        ],
+        "edges": [
+          [
+            "cp1",
+            "cp2"
+          ],
+          [
+            "cp2",
+            "cp3"
+          ]
+        ]
+      }
+    }
+  ]
+}

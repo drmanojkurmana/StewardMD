@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "pat-hepatitis-cirrhosis",
+  "subject": "pathology",
+  "title": "Liver Function Tests, Viral and Autoimmune Hepatitis, Interface Hepatitis, and Cirrhosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Liver function tests misnamed still orient injury: transaminases mark hepatocyte damage, alkaline phosphatase and GGT mark cholestasis, while bilirubin, albumin, and prothrombin time judge true function. ALT comes largely from hepatocytes whereas AST also leaks from muscle and red cells, so a raised AST with normal ALT should prompt a creatine kinase check; albumin falls slowly over weeks, making the **prothrombin time** the quicker readout of failing synthesis.",
+      "say": "Hepatocellular, cholestatic, or failing: classify the liver pattern before chasing its cause.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pattern",
+          "Dominant abnormality",
+          "First differential"
+        ],
+        "rows": [
+          [
+            "Hepatocellular",
+            "ALT AST markedly raised",
+            "Viral, drug, ischaemic, autoimmune"
+          ],
+          [
+            "Cholestatic",
+            "ALP GGT bilirubin raised",
+            "Obstruction, PBC, PSC, drugs"
+          ],
+          [
+            "Synthetic failure",
+            "INR up, albumin down",
+            "Cirrhosis, acute liver failure"
+          ],
+          [
+            "Isolated bilirubin",
+            "Enzymes otherwise normal",
+            "Gilbert, haemolysis review"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute viral hepatitis inflames lobules with hepatocyte ballooning, apoptosis Councilman bodies, and spotty necrosis, ALT often exceeding a thousand, usually resolving except hepatitis B and C chronicity paths. A **Councilman body** is a shrunken eosinophilic hepatocyte with a pyknotic nucleus squeezed out into the sinusoid, and its presence beside lobular disarray favours viral injury over the centrilobular necrosis that ischaemia or paracetamol overdose tends to produce.",
+      "say": "ALT in thousands with spotty necrosis is acute viral hepatitis until drugs and ischaemia are excluded.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Resolving acute hepatitis",
+          "points": [
+            "Falling enzymes and bilirubin",
+            "Appetite and energy return",
+            "No fibrosis sequelae"
+          ]
+        },
+        "right": {
+          "title": "Chronic evolution",
+          "points": [
+            "HBV or HCV persistence",
+            "Interface activity continues",
+            "Fibrosis staging begins"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Ground glass hepatocytes pack cytoplasm with hepatitis B surface antigen, confirmed by orcein or immunostaining, marking chronic HBV infection's viral factories under immune tolerance or treatment. Shikata orcein colours the accumulated antigen copper brown, and a biopsy packed with such cells alongside a high viral load but near normal enzymes fits the immune tolerant phase where treatment often waits while **hepatitis B surface antigen** production far exceeds liver injury.",
+      "say": "Ground glass cytoplasm means surface antigen factories; stain it and stage the hepatitis B.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hepatitis-bcde-serology-phases-cure-fig1.webp",
+        "alt": "Hepatitis viruses, serology phases, and associated liver pathology",
+        "caption": "Hepatitis virus serology and liver pathology, including the surface antigen packed hepatocytes of chronic hepatitis B."
+      }
+    },
+    {
+      "tx": "Chronic hepatitis grades necroinflammatory activity and stages fibrosis from portal expansion through bridging to cirrhosis, because stage predicts outcomes and treatment urgency across aetiologies. Trichrome stain paints collagen blue so the pathologist can separate portal expansion from portoportal bridges; once **bridging fibrosis** links neighbouring tracts, antiviral or immunosuppressive therapy gains urgency because the next step leaves regenerative nodules trapped inside a cirrhotic architecture.",
+      "say": "Grade tells how angry, stage tells how scarred; stage writes the prognosis in chronic hepatitis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Portal inflammation only"
+          },
+          {
+            "id": "b",
+            "label": "Periportal interface activity spreads"
+          },
+          {
+            "id": "c",
+            "label": "Bridging fibrosis links tracts"
+          },
+          {
+            "id": "d",
+            "label": "Nodules encircled: cirrhosis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Interface hepatitis spills inflammation across limiting plate into periportal hepatocytes with plasma cells in autoimmune hepatitis, emperipolesis and rosettes joining its biopsy accent beside high IgG. Emperipolesis describes an intact lymphocyte sitting inside a hepatocyte without destroying it, and clusters of hepatocytes arranged as **rosettes** around a tiny central lumen; both clues strengthen an autoimmune reading when viral serology returns negative and serum IgG runs above the reference range.",
+      "say": "Plasma cell rich interface hepatitis plus high IgG means autoimmune hepatitis until serology votes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/autoimmune-hepatitis-fig1.webp",
+        "alt": "Autoimmune hepatitis liver biopsy",
+        "caption": "Autoimmune hepatitis biopsy with interface activity and plasma cells."
+      }
+    },
+    {
+      "tx": "Autoimmune hepatitis divides by antibodies: ANA and smooth muscle in type one, anti-LKM in childhood type two, answering steroids dramatically yet relapsing on withdrawal in most patients. Prednisolone with azathioprine usually normalises enzymes within months, and stopping therapy without a repeat biopsy showing resolved interface activity invites relapse in most patients, so maintenance through **azathioprine** often continues for years after biochemical remission first appears.",
+      "say": "Autoimmune hepatitis melts before steroids and returns when they stop; plan years, not weeks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type 1 AIH",
+          "points": [
+            "ANA, SMA antibodies",
+            "Any age, female accent",
+            "Commonest type"
+          ]
+        },
+        "right": {
+          "title": "Type 2 AIH",
+          "points": [
+            "Anti-LKM1 antibodies",
+            "Children and adolescents",
+            "More acute presentations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cirrhosis ends chronic injury roads with bridging fibrosis encircling regenerative nodules, distorting vasculature into portal hypertension and hepatocellular failure simultaneously. A nodule counts as regenerative when hepatocyte plates thicken beyond one cell and portal tracts vanish from its centre; that disorganisation plus fibrous encirclement is what separates true **cirrhosis** from the orderly fibrosis that still preserves lobular geography.",
+      "say": "Cirrhosis is architecture destroyed: fibrous rings, regenerative nodules, failing function, rising pressure.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hepatitis-cirrhosis-and-liver-failure-fig1.webp",
+        "alt": "Hepatitis cirrhosis and liver failure portal hypertension",
+        "caption": "Cirrhosis and liver failure with portal hypertension consequences."
+      }
+    },
+    {
+      "tx": "Compensated cirrhosis may hide behind normal examination while decompensation declares through ascites, variceal bleeding, encephalopathy, or jaundice, each reclassifying prognosis and transplant conversations. Median survival drops from well over a decade in compensated disease to roughly two years after the first **ascites** appears, which is why any new fluid collection in a cirrhotic patient triggers diagnostic paracentesis, sodium restriction and transplant referral in the same visit.",
+      "say": "First ascites, bleed, encephalopathy, or jaundice moves cirrhosis into decompensated prognosis territory.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Decompensation",
+          "Mechanism accent",
+          "Immediate duty"
+        ],
+        "rows": [
+          [
+            "Ascites",
+            "Portal pressure plus sodium retention",
+            "Paracentesis, albumin logic"
+          ],
+          [
+            "Variceal bleed",
+            "Collateral pressure rupture",
+            "Resuscitate, vasoactive, endoscopy"
+          ],
+          [
+            "Encephalopathy",
+            "Ammonia and inflammation",
+            "Precipitant hunt, lactulose"
+          ],
+          [
+            "Jaundice deepening",
+            "Hepatocellular failure",
+            "Sepsis and drug exclusion"
+          ]
+        ]
+      }
+    }
+  ]
+}

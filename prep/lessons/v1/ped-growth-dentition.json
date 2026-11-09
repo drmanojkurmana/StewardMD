@@ -1,0 +1,223 @@
+{
+ "key": "ped-growth-dentition",
+ "v": 1,
+ "module": "ped-growth",
+ "subject": "paediatrics",
+ "title": "Primary Dentition, Dental Milestones and Parental Height",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The initial set of twenty deciduous teeth constitutes **primary milk dentition**, comprising eight incisors, four canines, and eight molars. Unlike the permanent dentition, premolars are completely absent in the primary set. Eruption follows a predictable chronological sequence beginning in the sixth to eighth month of life, with all primary teeth erupting by thirty months.",
+   "say": "Primary dentition comprises twenty teeth, completely lacking premolars, and finishes by thirty months.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-dev-secondary-dentition.webp",
+    "alt": "Anatomical dental charts showing primary and permanent teeth eruption.",
+    "caption": "Anatomical eruption sequence of primary deciduous teeth and permanent dentition. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The very first teeth to erupt into the oral cavity are the **mandibular central incisors**, appearing between six and eight months of age. These are followed sequentially by the maxillary central incisors at eight to ten months, maxillary and mandibular lateral incisors at ten to twelve months, first molars at twelve to sixteen months, canines at sixteen to twenty months, and second molars at twenty to thirty months.",
+   "say": "Mandibular central incisors erupt first around six months, followed by maxillary central incisors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Deciduous Tooth Type",
+     "Order of Eruption",
+     "Mean Age of Eruption"
+    ],
+    "rows": [
+     [
+      "Mandibular central incisors",
+      "First teeth to erupt",
+      "6 to 8 months"
+     ],
+     [
+      "Maxillary central incisors",
+      "Second teeth to erupt",
+      "8 to 10 months"
+     ],
+     [
+      "Lateral incisors (upper/lower)",
+      "Third group to erupt",
+      "10 to 12 months"
+     ],
+     [
+      "First deciduous molars",
+      "Fourth group to erupt",
+      "12 to 16 months"
+     ],
+     [
+      "Deciduous canines",
+      "Fifth group to erupt",
+      "16 to 20 months"
+     ],
+     [
+      "Second deciduous molars",
+      "Final group to erupt",
+      "20 to 30 months"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A convenient clinical rule of thumb estimates expected tooth numbers in infants using the **age in months minus six rule**. For example, a healthy twelve-month-old infant is expected to have six erupted deciduous incisors. Calcification of primary teeth begins during the fourteenth to sixteenth week of intrauterine fetal life, making maternal nutrition and medications like tetracyclines critical determinants of enamel health.",
+   "say": "The number of primary teeth roughly equals the child's age in months minus six up to two years.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rule of Thumb Formula",
+     "points": [
+      "Number of erupted teeth = Age in months - 6",
+      "Valid up to 24 months of age",
+      "Estimates expected progress accurately"
+     ]
+    },
+    "right": {
+     "title": "Enamel Vulnerability",
+     "points": [
+      "In utero calcification begins at 14 weeks",
+      "Tetracycline exposure causes permanent staining",
+      "Severe systemic illness creates enamel hypoplasia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The failure of any primary tooth to erupt by thirteen months of age defines **pathological delayed dentition**. While constitutional or familial delay is the most common benign etiology, delayed eruption frequently serves as a sensitive clinical sign of underlying endocrine or metabolic disorders, notably congenital hypothyroidism, nutritional rickets, hypopituitarism, and cleidocranial dysplasia.",
+   "say": "Delayed dentition is the absence of teeth by thirteen months, pointing toward rickets or hypothyroidism.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Etiological Disease",
+     "Underlying Metabolic Defect",
+     "Associated Clinical Clues"
+    ],
+    "rows": [
+     [
+      "Nutritional rickets",
+      "Vitamin D deficiency and impaired mineralisation",
+      "Craniotabes, rachitic rosary, wide wrists"
+     ],
+     [
+      "Congenital hypothyroidism",
+      "Thyroid hormone deficiency arresting maturation",
+      "Coarse facies, macroglossia, umbilical hernia"
+     ],
+     [
+      "Cleidocranial dysplasia",
+      "RUNX2 gene mutation affecting bone remodeling",
+      "Absent clavicles, persistently open fontanelles"
+     ],
+     [
+      "Down syndrome (Trisomy 21)",
+      "Generalized developmental and skeletal delay",
+      "Upward slanting palpebral fissures, flat profile"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transition to the permanent dentition begins at six years of age with eruption of the **first permanent six-year molar**. Crucially, the first permanent molar erupts posterior to the second deciduous molar without shedding any primary tooth. Permanent incisors subsequently erupt between six and eight years as deciduous incisors are shed.",
+   "say": "The first permanent molar erupts at six years behind primary teeth without shedding a baby tooth.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Six-Year Permanent Molar",
+     "points": [
+      "First permanent tooth to appear",
+      "Erupts directly posterior to deciduous molars",
+      "Does not replace an existing primary tooth"
+     ]
+    },
+    "right": {
+     "title": "Shedding of Deciduous Teeth",
+     "points": [
+      "Root osteoclasts resorb deciduous roots",
+      "Begins with mandibular central incisors at 6 years",
+      "Continues sequentially through 12 years of age"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Predicting an individual child's adult height genetic potential utilizes the **mid-parental target height calculation**. Because adult stature is a polygenic trait inherited equally from both biological parents, the formula adjusts for the thirteen-centimeter biological height difference between adult males and females, establishing an expected genetic target range.",
+   "say": "The mid-parental height formula establishes expected genetic target stature adjusted for sex.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Child Gender",
+     "Mid-Parental Height Formula",
+     "Target Range"
+    ],
+    "rows": [
+     [
+      "Boy target height",
+      "[Father height + (Mother height + 13 cm)] / 2",
+      "Mid-parental height ± 6 to 8 cm"
+     ],
+     [
+      "Girl target height",
+      "[(Father height - 13 cm) + Mother height] / 2",
+      "Mid-parental height ± 6 to 8 cm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical assessment of dental health requires identifying **early childhood caries**, previously designated nursing bottle caries. Prolonged nocturnal bottle feeding with milk, fruit juices, or sweetened liquids allows fermentable carbohydrates to pool around maxillary incisors, where Streptococcus mutans generates acid that rapidly demineralizes enamel, characteristically sparing mandibular incisors protected by the tongue.",
+   "say": "Nursing caries destroys maxillary incisors from pooling nocturnal milk, sparing lower teeth.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Severe Maxillary Involvement",
+     "points": [
+      "Rapid circumferential enamel destruction",
+      "Maxillary central and lateral incisors decayed",
+      "Presents with blackened, broken crowns"
+     ]
+    },
+    "right": {
+     "title": "Mandibular Incisor Sparing",
+     "points": [
+      "Protected by tongue posture during suckling",
+      "Continuous bathing by submandibular saliva",
+      "Neutralizes bacterial acid production"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Routine pediatric preventative oral health care mandates **fluoride toothpaste and dental visits**. Tooth brushing should commence as soon as the first deciduous tooth erupts, using a tiny rice-grain smear of fluoridated toothpaste for children under three years of age, expanding to a pea-sized amount for children aged three to six years, accompanied by dental checks.",
+   "say": "Brushing starts with the first tooth using a rice-grain smear of fluoride toothpaste under age three.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Child Age Group",
+     "Recommended Toothpaste Amount",
+     "Fluoride Safety Guideline"
+    ],
+    "rows": [
+     [
+      "Under 3 years of age",
+      "Smear or rice-grain sized portion",
+      "Minimizes systemic swallowing and fluorosis risk"
+     ],
+     [
+      "3 to 6 years of age",
+      "Pea-sized portion (0.25 grams)",
+      "Supervised brushing, spit without swallowing"
+     ],
+     [
+      "Over 6 years of age",
+      "Standard ribbon of fluoridated paste",
+      "Independent brushing twice daily"
+     ]
+    ]
+   }
+  }
+ ]
+}

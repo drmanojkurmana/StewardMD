@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "id": "cm-descriptive-epi-time-place-person-distribution",
+ "subject": "community-medicine",
+ "module": "cm-descriptive-epi",
+ "title": "Time, Place and Person Distribution and the Epidemic Curve",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Descriptive studies ask who, where, when",
+   "tx": "**Descriptive epidemiology** characterises disease by time, place and person after defining the population and the disease under study. It counts cases, computes rates and compares them with known indices before formulating a hypothesis. No comparison group is assembled yet; that absence separates descriptive work from analytical designs that follow.",
+   "say": "Description comes first. Define the population, define the disease, then characterise cases by time, place and person. Rates get compared with known indices, and a hypothesis emerges. No comparison group exists yet; analytical designs add that later.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Define the population"},
+     {"id": "b", "label": "Define the disease"},
+     {"id": "c", "label": "Describe by time, place, person"},
+     {"id": "d", "label": "Compare with known indices"},
+     {"id": "e", "label": "Formulate a hypothesis"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]]
+   }
+  },
+  {
+   "title": "The epidemic curve and what it suggests",
+   "tx": "An **epidemic curve** graphs cases by time of onset, suggesting the time relation to a suspected exposure, any cyclical or seasonal pattern, and whether spread is common source or propagated. An epidemic itself means cases clearly in excess of normal expectancy for that community, season and population, precisely specified.",
+   "say": "Graph cases against onset time. The curve hints at exposure timing, seasonal rhythm, and common source versus propagated spread. Remember the definition behind it: cases clearly beyond normal expectancy for that place, season and population.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sid-outbreaks-fig1.webp",
+    "alt": "Outbreak investigation panel showing the ten investigation steps beside epidemic curves and attack rate calculation.",
+    "caption": "Outbreak investigation steps with epidemic curves and attack rate. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Point source epidemics explode and vanish",
+   "tx": "A **point source epidemic** follows brief, essentially simultaneous exposure, so all cases develop within one incubation period. The curve rises and falls rapidly with one peak and no secondary waves, clustering cases in a narrow time interval. Food poisoning at a single meal is the prototype every examiner expects.",
+   "say": "Brief simultaneous exposure gives one shape. Cases crowd within a single incubation period, the curve rockets up and crashes down, one peak, no second waves. Single meal food poisoning is the prototype examiners expect you to name.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Point source pattern",
+     "points": ["Explosive rise, rapid fall", "All cases within one incubation period", "No secondary waves"]
+    },
+    "right": {
+     "title": "Not point source when",
+     "points": ["Spread beyond one incubation period", "Repeated or continuing exposure", "Secondary cases among contacts"]
+    }
+   }
+  },
+  {
+   "title": "Continuous exposure stretches the curve",
+   "tx": "**Continuous exposure** from the same source prolongs an outbreak beyond one incubation period with an extended, irregular curve. A contaminated well, a nationally distributed vaccine batch or food product, and the Legionnaires' outbreak in Philadelphia in 1976 all fit. No secondary cases among contacts of the ill appeared in that investigation, confirming the source pattern.",
+   "say": "Prolonged exposure stretches the shape. A contaminated well or distributed product keeps cases coming beyond one incubation period, irregularly. The 1976 Philadelphia Legionnaires' outbreak fit, and contacts of the ill stayed healthy, confirming a source, not spread.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Source", "Curve consequence"],
+    "rows": [
+     ["Contaminated well in daily use", "Cases continue for weeks"],
+     ["Distributed food or vaccine batch", "Wide geography, extended timing"],
+     ["Cooling system aerosol, 1976", "Clustered place, no contact cases"]
+    ]
+   }
+  },
+  {
+   "title": "Propagated epidemics climb in waves",
+   "tx": "A **propagated epidemic** spreads person to person, rising gradually and tailing off over a much longer period, as in hepatitis A and poliomyelitis. Transmission continues until susceptibles are depleted or no longer exposed. Speed depends on herd immunity, contact opportunities and the secondary attack rate, so crowding of susceptibles accelerates it.",
+   "say": "Person to person spread climbs differently. Gradual rise, long tail, wave after wave, as with hepatitis A and polio. Spread stops when susceptibles run out or stop mixing. Herd immunity, contact chances and household attack rates set the speed.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "First cases infect contacts"},
+     {"id": "b", "label": "Successive waves rise"},
+     {"id": "c", "label": "Susceptibles deplete"},
+     {"id": "d", "label": "Epidemic tails off"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Place: spot maps and clustering",
+   "tx": "**Spot maps** plot cases by residence or workplace, showing high and low frequency areas and their boundaries at a glance. Clustering on a map suggests a common source of infection or a shared risk factor. Snow's Golden Square map fixed attention on the Broad Street pump; Maxcy's workplace map later exposed a rodent reservoir for typhus.",
+   "say": "Maps accuse places. Plot cases by home or workplace and clusters leap out, suggesting a shared source or risk. One famous map fixed blame on a single pump; workplace mapping later exposed a rodent reservoir behind typhus.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Map pattern", "Inference"],
+    "rows": [
+     ["Tight cluster around one point", "Common source nearby"],
+     ["Scatter along a river or road", "Vehicle distributed along the line"],
+     ["Household clusters only", "Person to person spread"]
+    ]
+   }
+  },
+  {
+   "title": "Place: international to local variation",
+   "tx": "**International variation** is stark: stomach cancer is very common in Japan yet unusual in the United States, while oral and cervical cancers are exceedingly common in India. Within India, goitre, lathyrism, fluorosis, leprosy and malaria each map unevenly. Urban areas carry more chronic bronchitis, lung cancer and mental illness; rural areas more soil-transmitted helminths and zoonoses.",
+   "say": "Scale changes the picture. Stomach cancer dominates in Japan, oral and cervical cancers in India. Goitre, fluorosis and malaria map unevenly inside one country. Cities carry more lung cancer and mental illness; villages more helminths and zoonoses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Urban excess",
+     "points": ["Chronic bronchitis and lung cancer", "Cardiovascular disease and accidents", "Mental illness and drug dependence"]
+    },
+    "right": {
+     "title": "Rural excess",
+     "points": ["Soil-transmitted helminths", "Zoonotic and skin diseases", "Higher infant and maternal deaths"]
+    }
+   }
+  },
+  {
+   "title": "Person: age, sex and bimodality",
+   "tx": "**Age distribution** relates to disease more strongly than any other host factor: measles in childhood, cancer in middle age, atherosclerosis in old age. Two peaks instead of one, called bimodality, appear in Hodgkin disease between 15 to 35 years and again after 50, hinting that two causal sets operate under one clinical label.",
+   "say": "Age beats every other host factor. Measles takes children, cancer middle age, atherosclerosis old age. Two incidence peaks, as in Hodgkin disease, warn that one label hides two causal sets. Small numbers can fake the pattern, so check counts first.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Pattern", "Reading"],
+    "rows": [
+     ["One childhood peak", "Infection with lasting immunity"],
+     ["Steady rise with age", "Cumulative exposure effect"],
+     ["Two separated peaks", "Possibly two causal sets, bimodality"]
+    ]
+   }
+  },
+  {
+   "title": "Person: sex, ethnicity, marital status",
+   "tx": "**Sex differences** mix biology with behaviour: diabetes, hyperthyroidism and obesity strike women more, while lung cancer and coronary disease strike men more, the 4 to 1 male lung cancer ratio having helped incriminate smoking. Ethnic differences span tuberculosis to sickle cell anaemia. Married people record lower mortality than the unmarried at the same age and sex.",
+   "say": "Person factors layer together. Women carry more diabetes and thyroid disease; men more lung cancer and coronary disease, and that four to one lung ratio helped incriminate smoking. Ethnic gaps and lower married mortality complete the standard checklist.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Factor", "Exam pattern"],
+    "rows": [
+     ["Female excess", "Diabetes, hyperthyroidism, obesity"],
+     ["Male excess", "Lung cancer, coronary heart disease"],
+     ["Married advantage", "Lower mortality than unmarried peers"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

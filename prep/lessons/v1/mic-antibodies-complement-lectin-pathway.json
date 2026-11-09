@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-antibodies-complement",
+  "subject": "microbiology",
+  "title": "Complement Pathways II: Lectin Pathway, Membrane Attack Complex and C1 Esterase Inhibitor",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **lectin pathway** starts without antibody or tick over: mannose binding lectin (MBL) and ficolins read microbial mannose and acetyl patterns, their associated proteases (MASP1 and 2) cleave C4 and C2, and the same C4b2a convertase as classical results. It is pattern recognition written in complement protein, innate immunity's third door into one cascade.",
+      "say": "MBL reads mannose where C1q reads antibody; both build the same convertase.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lectin initiation",
+          "points": [
+            "MBL and ficolins bind microbial sugars",
+            "MASP proteases activate C4 and C2",
+            "No antibody required",
+            "Collectin family shares collagenous structure with C1q"
+          ]
+        },
+        "right": {
+          "title": "Lectin deficiency",
+          "points": [
+            "MBL variants common in populations",
+            "Childhood infection susceptibility debated by severity",
+            "Compounding with other immune defects matters",
+            "Replacement not standard practice"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "All pathways converge at **C3 convertase** and multiply through the amplification loop, then C5 convertases (C4b2a3b, C3bBb3b) split C5, launching terminal assembly. Convergence explains why C3 deficiency devastates every route and why laboratory patterns (C4 low or normal) localise which door burned.",
+      "say": "Three doors, one C3 hallway; C4 tells you whether the classical or lectin door was used.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "doors", "label": "Classical, lectin or alternative initiation" },
+          { "id": "c3", "label": "C3 convertase: C3b deposition amplifies" },
+          { "id": "c5", "label": "C5 convertase splits C5" },
+          { "id": "mac", "label": "Terminal complex assembles" }
+        ],
+        "edges": [["doors", "c3"], ["c3", "c5"], ["c5", "mac"]]
+      }
+    },
+    {
+      "tx": "The **membrane attack complex** (C5b with C6, C7, C8 and polymerised C9) punches 10 nanometre pores into gram negative membranes, lysing Neisseria efficiently and most gram positives not at all (thick peptidoglycan shields), which is why terminal deficiency selects Neisseria alone among common pathogens. Sublytic MAC on host cells signals and inflames instead of killing.",
+      "say": "MAC drills gram negative envelopes; thick gram positive walls shrug it off.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MAC assembly",
+          "points": [
+            "C5b anchors, C6 C7 insert membrane",
+            "C8 begins pore, C9 polymerises (10 to 18 units)",
+            "Gram negative lysis, Neisseria exquisitely",
+            "CD59 (protectin) blocks C9 on self"
+          ]
+        },
+        "right": {
+          "title": "MAC pathology",
+          "points": [
+            "Sublytic MAC activates endothelium and platelets",
+            "PNH: CD59 absent, MAC lyses own red cells",
+            "Terminal deficiency: recurrent meningococcal disease",
+            "Soluble MAC marks complement activation in TMA"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**C1 esterase inhibitor** (C1 INH) restrains C1r and C1s, MASPs, kallikrein and factor XIIa, so its deficiency unleashes bradykinin (hereditary angioedema: recurrent non itchy swelling, laryngeal attacks, abdominal pain, low C4, normal C1q in hereditary forms), treated by C1 INH concentrates, bradykinin receptor blockade (icatibant) and kallikrein inhibitors, never relying on antihistamines or steroids.",
+      "say": "Bradykinin swelling ignores antihistamines; replace the inhibitor or block its pathway.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HAE portrait",
+          "points": [
+            "Autosomal dominant C1 INH deficiency or dysfunction",
+            "Swelling without urticaria or itch",
+            "Laryngeal and bowel wall attacks",
+            "Triggers: trauma, dental work, ACE inhibitors worsen"
+          ]
+        },
+        "right": {
+          "title": "HAE management",
+          "points": [
+            "C4 low (screen), C1q normal in hereditary",
+            "C1 INH concentrate or icatibant on demand",
+            "Lanadelumab kallikrein prophylaxis",
+            "Androgens historical prophylaxis, tranexamic weaker"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Regulators map** keeps complement self limited: C1 INH at initiation, C4 binding protein and factor I at convertases, factor H guarding surfaces, DAF accelerating decay, MCP cofactoring, CD59 at the pore, each regulator's defect a named disease (factor H atypical HUS and C3 glomerulopathy, CD59 and DAF loss in PNH via PIGA). The cascade is brakes as much as engine.",
+      "say": "Every activation step has a named brake; brake failure is a disease catalogue.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fluid phase brakes",
+          "points": [
+            "C1 inhibitor: initiation",
+            "Factor H and I: C3b management on surfaces",
+            "C4 binding protein: classical convertase",
+            "Carboxypeptidase trims anaphylatoxins"
+          ]
+        },
+        "right": {
+          "title": "Membrane brakes",
+          "points": [
+            "DAF (CD55): convertase decay",
+            "MCP (CD46): factor I cofactor",
+            "CD59: MAC blockade",
+            "PNH loses CD55 and CD59 together (GPI anchor)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**PNH** (paroxysmal nocturnal haemoglobinuria) unites this module: somatic PIGA mutation strips GPI anchored CD55 and CD59 from a blood stem cell clone, complement lyses its red cells (intravascular haemolysis, dark urine), thrombosis and marrow failure accompany, FLAER flow cytometry diagnoses the anchor loss, and C5 blockade transformed survival. One mutation connects complement, flow cytometry and therapeutics.",
+      "say": "Lose the anchor, lose both brakes, and complement eats your own red cells at night.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PNH portrait",
+          "points": [
+            "PIGA mutation, GPI anchor absent",
+            "CD55 and CD59 missing on clone cells",
+            "Intravascular haemolysis, LDH and haemoglobinuria",
+            "Venous thrombosis in unusual sites"
+          ]
+        },
+        "right": {
+          "title": "PNH answers",
+          "points": [
+            "FLAER and CD55 CD59 flow diagnosis",
+            "Eculizumab, ravulizumab C5 blockade",
+            "Meningococcal vaccination mandatory",
+            "Marrow failure may need transplantation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Complement laboratory strategy** sequences economically: CH50 (classical through terminal) and AH50 (alternative) as screens, C3 and C4 levels as consumption patterns (classical both low, alternative C3 low C4 normal), factor assays and genetics where screens point, and functional vigilance during infections that consume faster than synthesis.",
+      "say": "CH50 absent, AH50 present points classical; both absent points C3 or terminal.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pattern reads",
+          "points": [
+            "Low C4 and C3: classical or lectin consumption",
+            "Low C3 normal C4: alternative activation",
+            "Low CH50 normal AH50: early classical defect",
+            "Both zero: C3 or terminal defect"
+          ]
+        },
+        "right": {
+          "title": "Assay cautions",
+          "points": [
+            "Complement is labile: sample handling matters",
+            "Acute consumption mimics deficiency transiently",
+            "Repeat in convalescence before labelling",
+            "Genetics for regulator diseases"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Complement in disease mechanisms** recurs across the curriculum: lupus consumption, infection defence, transplant antibody mediated rejection (C4d staining in graft biopsies as classical footprint), atypical HUS dysregulation, and age related macular degeneration factor H genetics. The pathway diagram is a map several specialties share.",
+      "say": "C4d in a graft is complement's fingerprint at a rejection crime scene.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Consumption diseases",
+          "points": [
+            "SLE activity follows C3 C4 and anti dsDNA",
+            "Post infectious GN: C3 low, recovers in weeks",
+            "C3 glomerulopathy: persistent alternative activation",
+            "Cryoglobulins consume classical"
+          ]
+        },
+        "right": {
+          "title": "Deposition evidence",
+          "points": [
+            "C4d in transplant biopsies: antibody mediated rejection",
+            "C1q in lupus full house staining",
+            "MAC in infarcted and inflamed tissue",
+            "Complement split products as trial biomarkers"
+          ]
+        }
+      }
+    }
+  ]
+}

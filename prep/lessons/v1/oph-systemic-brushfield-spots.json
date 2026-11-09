@@ -1,0 +1,189 @@
+{
+ "v": 1,
+ "id": "oph-systemic-brushfield-spots",
+ "subject": "ophthalmology",
+ "module": "oph-systemic",
+ "title": "Brushfield Spots, CMV Retinitis and Phakomatosis Eyes",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Brushfield spots** are pale speckles arranged around the iris mid periphery, a recognised iris finding in Down syndrome seen during routine eye examination. The spots themselves need no treatment and mainly serve as a phenotypic clue supporting the syndrome picture. Recognition therefore prevents unnecessary investigation of a benign iris appearance.",
+   "say": "Benign recognition together gives Brushfield understanding in paediatric eye clinics for children attending routine syndrome reviews. Pale speckles gives iris pattern additionally. Untreated observation gives correct management."
+  },
+  {
+   "tx": "**CMV retinitis** is a necrotising retinal infection of profound immunosuppression, classically in advanced HIV disease with very low defender cell counts. Fundus shows haemorrhagic necrosis described by its pizza like appearance, advancing slowly with surprisingly mild symptoms until macula or detachment threatens. Low immune counts therefore make fundus screening urgent in this group.",
+   "say": "Immune context together gives CMV urgency in retinal clinics for adults with advanced immunosuppression and visual symptoms. Necrosis gives haemorrhagic pattern additionally. Screening gives macula protection.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/herpesviruses-hsv-vzv-ebv-cmv-fig1.webp",
+    "alt": "Composite illustration showing CMV retinitis with full-thickness necrotizing retinitis and hemorrhage (\"pizza pie\" fundus).",
+    "caption": "Full-thickness necrotizing retinitis with retinal hemorrhages (\"pizza pie\" retina) in cytomegalovirus retinitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "CMV retinitis treatment combines systemic antiviral therapy with immune recovery through effective HIV treatment, plus intravitreal therapy for immediately sight threatening lesions near the macula. Retinal detachment from necrotic thinning is the major structural complication needing surgical vigilance. **Immune recovery** therefore remains the long term control strategy alongside antivirals.",
+   "say": "Combined therapy together gives CMV control in retinal clinics for immunosuppressed adults with necrotising fundus lesions. Antiviral gives direct action additionally. Recovery gives durable control.",
+   "vis": {
+    "kind": "table",
+    "title": "CMV retinitis facts",
+    "cols": [
+     "Item",
+     "Point"
+    ],
+    "rows": [
+     [
+      "Setting",
+      "Profound immunosuppression"
+     ],
+     [
+      "Fundus",
+      "Haemorrhagic necrotic patches"
+     ],
+     [
+      "Complication",
+      "Detachment through necrotic retina"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sturge-Weber syndrome** links a facial port wine stain in the trigeminal first division area with glaucoma risk and choroidal haemangioma on the same side. Infants with the stain therefore need early and repeated pressure checks because glaucoma may be congenital or develop later. The stain therefore functions as an eye surveillance referral trigger.",
+   "say": "Facial stain together gives glaucoma surveillance in paediatric clinics for infants with port wine marks near the eye. Pressure gives repeated checking additionally. Haemangioma gives choroidal watch.",
+   "vis": {
+    "kind": "flow",
+    "title": "Systemic eye flow",
+    "nodes": [
+     {
+      "id": "clue",
+      "label": "Surface or immune clue seen"
+     },
+     {
+      "id": "examine",
+      "label": "Targeted eye examination"
+     },
+     {
+      "id": "treat",
+      "label": "Eye and systemic therapy"
+     },
+     {
+      "id": "follow",
+      "label": "Surveillance interval set"
+     }
+    ],
+    "edges": [
+     [
+      "clue",
+      "examine"
+     ],
+     [
+      "examine",
+      "treat"
+     ],
+     [
+      "treat",
+      "follow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neurofibromatosis type one shows iris Lisch nodules, lid plexiform swelling and optic pathway glioma risk, making eye review part of syndrome surveillance in childhood. Caf\u00e9 coloured skin patches plus family history complete the bedside syndrome picture. **Syndrome surveillance** therefore schedules eye checks even when vision seems normal.",
+   "say": "Syndrome surveillance together gives neurofibromatosis eye care in paediatric clinics for children with skin patches and family history. Lisch gives iris clue additionally. Glioma gives pathway watch."
+  },
+  {
+   "tx": "Retinal findings in immunosuppression must separate CMV necrosis from other opportunistic infections and HIV retinopathy cotton wool spots, because therapy differs completely. Immune status, lesion tempo and haemorrhage pattern guide that separation before treatment starts. **Pattern separation** therefore precedes antiviral commitment in uncertain fundus presentations.",
+   "say": "Pattern separation together gives fundus diagnosis in immunosuppressed adults attending retinal clinics with white retinal lesions. Tempo gives lesion behaviour additionally. Counts gives immune context.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CMV retinitis",
+     "points": [
+      "Necrosis with haemorrhage",
+      "Progresses without therapy"
+     ]
+    },
+    "right": {
+     "title": "HIV retinopathy",
+     "points": [
+      "Cotton wool spots only",
+      "No necrosis or treatment need"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Phakomatoses share a teaching pattern: skin or facial signs predict specific eye lesions, so surface examination selects which eye structures need imaging and surveillance. Sturge-Weber selects pressure and choroid, while neurofibromatosis selects iris, lid and optic pathway. **Surface selects structure** therefore organises phakomatosis eye clinics efficiently.",
+   "say": "Surface selection together gives phakomatosis organisation in syndrome clinics for children with skin and facial signs. Pressure gives Sturge-Weber route additionally. Pathway gives glioma route.",
+   "vis": {
+    "kind": "table",
+    "title": "Surface to structure map",
+    "cols": [
+     "Syndrome",
+     "Eye priorities"
+    ],
+    "rows": [
+     [
+      "Sturge-Weber",
+      "Glaucoma and choroid"
+     ],
+     [
+      "Neurofibromatosis one",
+      "Iris lid optic pathway"
+     ],
+     [
+      "Down syndrome",
+      "Iris refraction cornea"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors here: Brushfield spots are benign Down clues, CMV necrosis belongs to profound immunosuppression, and facial stains or skin patches select eye surveillance targets. Surface and immune context therefore direct the eye examination. **Context directs examination** closes systemic eye teaching for this group.",
+   "say": "Context direction together gives systemic anchors in examinations for students reliably in syndrome cases everywhere. CMV gives immune centre additionally. Stain gives surveillance completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Brushfield group anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Brushfield spots",
+      "Benign Down syndrome clue"
+     ],
+     [
+      "CMV retinitis",
+      "Profound immunosuppression necrosis"
+     ],
+     [
+      "Port wine stain",
+      "Glaucoma surveillance trigger"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Brushfield spots",
+   "b": "Benign pale iris speckles in Down syndrome; no treatment needed."
+  },
+  {
+   "f": "CMV retinitis",
+   "b": "Necrotising haemorrhagic retinitis in profound immunosuppression; antivirals plus immune recovery."
+  },
+  {
+   "f": "Sturge-Weber eye rule",
+   "b": "Facial port wine stain means early repeated glaucoma checks and choroid watch."
+  }
+ ],
+ "keys": [
+  "Surface signs select eye targets",
+  "Immune counts drive fundus urgency",
+  "Syndrome surveillance runs when vision seems normal"
+ ]
+}

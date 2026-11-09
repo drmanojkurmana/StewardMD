@@ -1,0 +1,146 @@
+{
+  "v": 1,
+  "id": "cm-sampling-simple-random-sampling",
+  "subject": "community-medicine",
+  "module": "cm-sampling",
+  "title": "Sampling Methods: Simple Random, Systematic, Stratified, Cluster, and Sample Size",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Why sampling, and the sampling frame",
+      "tx": "Studying everyone is usually impossible, so researchers study a sample drawn from a complete list of the population called the **sampling frame** (electoral rolls, village registers, admission lists). Every sampling error story begins here: an incomplete or outdated frame (telephone directories missing the poor) biases results before fieldwork starts, however elegant the statistics that follow.",
+      "say": "The sampling frame is the list you draw from. A faulty list dooms the study before it begins.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "fr1", "label": "Define target population precisely" },
+          { "id": "fr2", "label": "Build or verify the sampling frame" },
+          { "id": "fr3", "label": "Draw sample by chosen method" }
+        ],
+        "edges": [["fr1", "fr2"], ["fr2", "fr3"]]
+      }
+    },
+    {
+      "title": "Simple random sampling",
+      "tx": "**Simple random sampling** gives every population member an equal, independent chance of selection, classically by lottery or random number tables and today by computer generators. It needs a complete numbered frame, suits small homogeneous populations, and underpins the theory of all fancier designs. Its weakness is logistical: selected households may scatter across a district, raising travel cost per interview.",
+      "say": "Simple random sampling is a fair lottery from a full list. Equal chance for all, but scattered selections cost travel.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Strengths",
+          "points": ["Equal probability, unbiased", "Simple analysis, standard errors direct", "Theory base for other designs"]
+        },
+        "right": {
+          "title": "Limits",
+          "points": ["Needs complete numbered frame", "Selections geographically scattered", "Impractical for huge dispersed populations"]
+        }
+      }
+    },
+    {
+      "title": "Systematic random sampling",
+      "tx": "**Systematic random sampling** picks a random start between one and k, then every kth name from the list, where k equals population divided by desired sample (the sampling interval). It spreads the sample evenly through the frame and needs no random number for each pick. The trap is periodicity: if the list itself cycles with period k (every tenth house a corner shop), the sample distorts badly.",
+      "say": "Take a random start, then every kth name. Beware lists with hidden cycles matching your interval.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "sy1", "label": "Compute interval k equals N over n" },
+          { "id": "sy2", "label": "Random start between 1 and k" },
+          { "id": "sy3", "label": "Select every kth unit onward" }
+        ],
+        "edges": [["sy1", "sy2"], ["sy2", "sy3"]]
+      }
+    },
+    {
+      "title": "Stratified random sampling",
+      "tx": "Dividing the population into homogeneous strata (age groups, sex, urban rural, disease severity) and sampling randomly within each gives **stratified random sampling**. It guarantees representation of small but important groups, permits stratum specific estimates, and usually improves precision when strata differ strongly. Proportional allocation mirrors population shares; disproportionate allocation oversamples rare strata and reweights in analysis.",
+      "say": "Stratify first, sample inside each stratum. Small important groups can no longer be missed by chance.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Design choice", "Effect"],
+        "rows": [
+          ["Proportional allocation", "Sample mirrors population shares"],
+          ["Oversampling rare stratum", "Precise rare group estimate, reweight later"],
+          ["Homogeneous strata", "Precision gain over simple random"],
+          ["Heterogeneous strata", "Little gain, wasted complexity"]
+        ]
+      }
+    },
+    {
+      "title": "Cluster sampling and the 30 by 7 design",
+      "tx": "**Cluster sampling** selects groups (villages, wards, schools) randomly, then studies members within chosen clusters, trading statistical efficiency for feasibility. The World Health Organization's classic thirty cluster by seven children design assessed immunisation coverage for decades: thirty clusters, seven children each, two hundred ten total. Clustering inflates variance through the design effect because neighbours resemble one another.",
+      "say": "Sample villages, not scattered children, and fieldwork becomes possible. Thirty clusters of seven built the classic coverage survey.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cluster gains",
+          "points": ["No full population list needed", "Travel concentrated, cheaper per subject", "Suits villages and schools"]
+        },
+        "right": {
+          "title": "Cluster costs",
+          "points": ["Design effect inflates variance", "Needs larger total sample", "Analysis must adjust for clustering"]
+        }
+      }
+    },
+    {
+      "title": "Multistage sampling in national surveys",
+      "tx": "India's National Family Health Survey chains stages in **multistage sampling**: districts or villages first (often probability proportional to size), then households, then eligible individuals. Each stage uses the practical frame available at that level. Multistage designs are the only feasible route to nationally representative data in a billion plus population, at the price of complex weights and clustered variance.",
+      "say": "National surveys sample in stages: areas, then households, then people. Weights repair the unequal chances afterwards.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ms1", "label": "Stage 1: villages or wards by size" },
+          { "id": "ms2", "label": "Stage 2: households within areas" },
+          { "id": "ms3", "label": "Stage 3: eligible persons, weighted analysis" }
+        ],
+        "edges": [["ms1", "ms2"], ["ms2", "ms3"]]
+      }
+    },
+    {
+      "title": "Non probability sampling and its place",
+      "tx": "**Non probability sampling** (convenience samples of clinic attenders, purposive selection of typical villages, quota filling, and snowball chains through social networks for hidden populations such as injecting drug users) cannot support population estimates or standard errors. It still serves pilot work, qualitative research, and rare hidden groups where no frame exists, provided conclusions stay modest and honestly labelled.",
+      "say": "Convenience and snowball samples cannot estimate population rates. Use them for pilots and hidden groups, label them honestly.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Method", "Legitimate use"],
+        "rows": [
+          ["Convenience", "Pilots, instrument testing"],
+          ["Purposive", "Qualitative typical case study"],
+          ["Quota", "Rapid market style snapshots"],
+          ["Snowball", "Hidden populations without frames"]
+        ]
+      }
+    },
+    {
+      "title": "Sampling and non sampling errors",
+      "tx": "The gap between sample estimate and truth splits into **sampling error** (chance variation shrinking with root n, measured by the standard error) and non sampling error (bad frames, non response, lying, faulty instruments, observer bias), which grows with sloppy scale. Doubling a careless survey doubles its non sampling error while barely denting bias, the deepest lesson in survey design.",
+      "say": "Chance error shrinks with size; bias does not. A bigger careless survey is precisely wrong.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sampling error",
+          "points": ["Pure chance of who was picked", "Measured by standard error", "Shrinks as n grows"]
+        },
+        "right": {
+          "title": "Non sampling error",
+          "points": ["Frame gaps, refusals, bad questions", "Not measured by standard error", "Grows with careless scale"]
+        }
+      }
+    },
+    {
+      "title": "Sample size calculation essentials",
+      "tx": "The standard **sample size calculation for a prevalence survey** needs expected prevalence, allowable error (precision), and confidence level: n equals z squared times p times q divided by d squared, inflated for design effect and non response. For comparing means or proportions, expected difference and power enter instead. Underpowered studies waste every rupee; the formula is the ethics committee's first question for good reason.",
+      "say": "Prevalence, precision, and confidence fix the sample size. Add room for clustering and refusals before you finalise.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ss1", "label": "Fix prevalence, precision, confidence" },
+          { "id": "ss2", "label": "Compute n equals z squared p q over d squared" },
+          { "id": "ss3", "label": "Inflate for design effect and non response" }
+        ],
+        "edges": [["ss1", "ss2"], ["ss2", "ss3"]]
+      }
+    }
+  ]
+}

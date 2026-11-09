@@ -1,0 +1,240 @@
+{
+ "key": "ped-immunology-rheumatology-primary-immunodeficiency",
+ "v": 1,
+ "module": "ped-immunology-rheumatology",
+ "subject": "paediatrics",
+ "title": "Pediatric Immunodeficiencies: Agammaglobulinemia, SCID, and CGD",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Congenital genetic mutations disrupting immune system ontogeny predispose children to recurrent, severe, unusual infections. Warning signs of **pediatric primary immunodeficiency** include eight or more new ear infections within one year, two or more serious sinus infections, persistent oral candidiasis after one year of age, failure to thrive, recurrent deep skin or organ abscesses, two or more episodes of deep-seated sepsis, and family history of early infant death.",
+   "say": "Primary immunodeficiencies present with recurrent, deep-seated, or opportunistic infections and failure to thrive. Family history of early unexplained infant death is a major clue.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Jeffrey Modell Warning Signs",
+     "points": [
+      ">=4 new ear infections within 1 year",
+      ">=2 serious sinus infections within 1 year",
+      ">=2 months on antibiotics with little effect",
+      ">=2 pneumonias within 1 year; failure to gain weight"
+     ]
+    },
+    "right": {
+     "title": "Microbial Pathogen Associations",
+     "points": [
+      "B-cell / Antibody defects: encapsulated pyogenic bacteria (Pneumococcus)",
+      "T-cell defects: viruses, fungi (Candida), Pneumocystis jirovecii",
+      "Phagocyte defects: catalase-positive bacteria (Staph aureus), fungi",
+      "Complement defects: recurrent Neisseria meningitidis infections"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "X-linked recessive mutations in the Bruton tyrosine kinase gene abolish B-lymphocyte maturation beyond the pre-B stage. Manifesting in male infants after six months as maternal transplacental IgG wanes, **Bruton X-linked agammaglobulinaemia** (XLA) presents with recurrent sinopulmonary pyogenic bacterial infections (Streptococcus pneumoniae, Haemophilus influenzae). Physical examination demonstrates a striking complete absence of tonsillar lymphoid tissue and peripheral lymph nodes.",
+   "say": "Bruton agammaglobulinemia affects infant boys as maternal IgG fades after six months. Absence of tonsils and lymph nodes is pathognomonic, with profound pan-hypogammaglobulinemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Immunological Parameter",
+     "Bruton Agammaglobulinaemia Finding",
+     "Normal Pediatric Reference",
+     "Diagnostic Significance"
+    ],
+    "rows": [
+     [
+      "Flow cytometry CD19/CD20 B-cells",
+      "Profoundly absent (<1% or <0.1%)",
+      "Normal range: 10 to 20% of lymphocytes",
+      "Confirms block in pre-B cell maturation"
+     ],
+     [
+      "Serum IgG concentration",
+      "Profoundly depressed (<100 mg/dL)",
+      "Normal: 600 to 1,500 mg/dL",
+      "Severe pan-hypogammaglobulinaemia"
+     ],
+     [
+      "Serum IgA and IgM concentrations",
+      "Completely undetectable",
+      "Normal physiological ranges",
+      "All immunoglobulin isotypes affected"
+     ],
+     [
+      "Lifelong replacement therapy",
+      "Intravenous immunoglobulin (IVIG 400-600 mg/kg)",
+      "Administered every 3 to 4 weeks",
+      "Prevents bronchiectasis and chronic lung damage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Profound congenital defects in both cellular and humoral immunity constitute the most severe pediatric medical emergency. In infants with **severe combined immunodeficiency** (SCID), mutations in the common gamma chain (IL2RG) or adenosine deaminase (ADA) abolish T-cell development and secondary B-cell function. Infants present under six months with intractable candidiasis, chronic diarrhea, failure to thrive, Pneumocystis jirovecii pneumonia, and absent thymic shadow.",
+   "say": "Severe combined immunodeficiency is a pediatric emergency caused by T and B cell defects. Infants under six months present with thrush, chronic diarrhea, and Pneumocystis pneumonia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/severe-combined-immunodeficiency-fig1.webp",
+    "alt": "Flowchart depicting genetic mutations, absent thymic shadow on chest radiograph, and T-B-NK flow cytometry immunophenotyping in SCID.",
+    "caption": "Diagnostic flowchart and immunological phenotypes across genetic variants of severe combined immunodeficiency. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Immediate protective isolation and strict avoidance of live viral or bacterial vaccines prevent fatal disseminated infections. In infants with SCID, **live attenuated vaccine contraindications** are absolute: administering BCG causes disseminated fatal BCGosis, while live oral rotavirus or polio vaccines cause vaccine-strain paralysis. Blood products must be strictly irradiated and cytomegalovirus-negative, and allogeneic hematopoietic stem cell transplantation is curative.",
+   "say": "Live vaccines like BCG and rotavirus are strictly contraindicated in SCID, causing fatal dissemination. All blood products must be irradiated, and stem cell transplant is curative.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Strict Contraindications in SCID",
+     "points": [
+      "Live vaccines: BCG, Rotavirus, OPV, MMR, Varicella strictly banned",
+      "Unirradiated blood transfusions cause fatal graft-versus-host disease",
+      "Exposure to cytomegalovirus (CMV)-positive blood products",
+      "Delayed referral for stem cell transplantation"
+     ]
+    },
+    "right": {
+     "title": "Immediate Prophylaxis Protocol",
+     "points": [
+      "Trimethoprim-sulfamethoxazole for Pneumocystis jirovecii",
+      "Oral fluconazole for systemic Candida prevention",
+      "Intravenous or subcutaneous replacement immunoglobulin",
+      "Allogeneic HSCT within 3 months achieves >90% cure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Defective nicotinamide adenine dinucleotide phosphate oxidase enzyme complexes abolish phagocytic generation of superoxide radicals. Inherited predominantly as an X-linked recessive defect in the CYBB gene encoding gp91phox, **pediatric chronic granulomatous disease** (CGD) leaves phagocytes capable of engulfing pathogens but incapable of producing oxidative respiratory burst. Patients suffer recurrent granulomatous abscesses caused by catalase-positive bacteria and fungi.",
+   "say": "Chronic granulomatous disease impairs phagocytic respiratory burst due to NADPH oxidase defects. Children suffer recurrent abscesses from catalase-positive organisms like Staph and Aspergillus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Catalase-Positive Microorganism",
+     "Pathological Infection Site",
+     "Bacterial Catalase Rationale",
+     "Targeted Antimicrobial Agent"
+    ],
+    "rows": [
+     [
+      "Staphylococcus aureus",
+      "Suppurative lymphadenitis, hepatic abscesses",
+      "Catalase destroys host microbial H2O2",
+      "Trimethoprim-sulfamethoxazole prophylaxis"
+     ],
+     [
+      "Aspergillus fumigatus / nidulans",
+      "Invasive pulmonary granulomas, osteomyelitis",
+      "Fungal catalase evades non-oxidative killing",
+      "Lifelong oral itraconazole / voriconazole"
+     ],
+     [
+      "Burkholderia cepacia",
+      "Severe necrotizing pneumonia, septicaemia",
+      "Pathognomonic indicator organism in CGD",
+      "Intravenous ceftazidime or meropenem"
+     ],
+     [
+      "Serratia marcescens",
+      "Infantile osteomyelitis, skin abscesses",
+      "Frequent cause of occult bone infection",
+      "Ciprofloxacin or third-generation cephalosporin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Laboratory evaluation of neutrophil respiratory burst activity confirms the functional defect in oxidative radical production. Historically assessed using the **nitroblue tetrazolium reduction test** (NBT test), normal phagocytes reduce yellow soluble NBT into insoluble blue-black formazan crystals, whereas CGD neutrophils fail to produce color. Modern diagnosis utilizes dihydrorhodamine-123 (DHR) flow cytometry, which measures fluorescence shift following phorbol myristate acetate stimulation.",
+   "say": "The nitroblue tetrazolium test shows failure to reduce dye to blue formazan. Modern dihydrorhodamine flow cytometry demonstrates absent oxidative burst fluorescence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nitroblue Tetrazolium (NBT) Test",
+     "points": [
+      "Normal neutrophils reduce yellow NBT to blue formazan crystals",
+      "CGD neutrophils show 0% reduction (remain clear/yellow)",
+      "Qualitative, observer-dependent microscopic test",
+      "Useful historical screening assay"
+     ]
+    },
+    "right": {
+     "title": "Dihydrorhodamine (DHR) Flow Cytometry",
+     "points": [
+      "Measures non-fluorescent DHR oxidation to green rhodamine-123",
+      "Phorbol myristate acetate (PMA) stimulates neutrophils",
+      "Complete absence of fluorescent shift confirms CGD",
+      "Identifies X-linked carrier mothers (bimodal peak)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An X-linked recessive triad of microthrombocytopenia, severe eczema, and progressive combined immunodeficiency characterizes actin cytoskeletal remodeling defects. Arising from mutations in the WAS gene encoding the Wiskott-Aldrich syndrome protein, **Wiskott-Aldrich syndrome in boys** manifests in early infancy with petechiae, bloody diarrhea, intractable flexural atopic eczema, and recurrent encapsulated infections. The pathognomonic finding is microthrombocytes with small platelet volume.",
+   "say": "Wiskott-Aldrich syndrome is an X-linked triad of thrombocytopenia with tiny microplatelets, severe eczema, and recurrent infections. Platelet volume is characteristically small.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Diagnostic Triad",
+     "Pathological Clinical Sign",
+     "Biochemical / Hematological Marker",
+     "Definitive Management"
+    ],
+    "rows": [
+     [
+      "Microthrombocytopenia",
+      "Petechiae, purpura, bloody infant diarrhoea",
+      "Low platelets (<50,000) with low MPV (<5 fL)",
+      "Platelet transfusions; avoid splenectomy"
+     ],
+     [
+      "Intractable atopic eczema",
+      "Severe flexural and facial eczematous dermatitis",
+      "Markedly elevated serum IgE levels",
+      "Topical emollients, steroids, infection control"
+     ],
+     [
+      "Recurrent immunodeficiency",
+      "Sinopulmonary infections, encapsulated sepsis",
+      "Low IgM, elevated IgA and IgE, declining T-cells",
+      "Prophylactic antibiotics, IVIG replacement"
+     ],
+     [
+      "Curative intervention",
+      "Allogeneic hematopoietic stem cell transplant",
+      "Perinatal HLA-matched donor HSCT",
+      "Cures immunodeficiency and thrombocytopenia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Microscopic evaluation of peripheral platelets distinguishes Wiskott-Aldrich syndrome from immune thrombocytopenic purpura definitively. While idiopathic immune thrombocytopenia displays large giant platelets (elevated mean platelet volume MPV), Wiskott-Aldrich is uniquely characterized by **microthrombocytes with low MPV**, measuring five femtolitres or less. Prophylactic trimethoprim-sulfamethoxazole, intravenous immunoglobulin, and early allogeneic stem cell transplantation are mandatory.",
+   "say": "Wiskott-Aldrich platelets are uniquely tiny with a low mean platelet volume, distinguishing it from ITP where platelets are enlarged. Stem cell transplantation is curative.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Wiskott-Aldrich Syndrome (WAS)",
+     "points": [
+      "Microthrombocytes: small platelet size (MPV <5 fL)",
+      "Persistent congenital thrombocytopenia from birth",
+      "Elevated serum IgA and IgE; low serum IgM",
+      "High risk of lymphoma and autoimmune cytopenias"
+     ]
+    },
+    "right": {
+     "title": "Immune Thrombocytopenic Purpura (ITP)",
+     "points": [
+      "Megathrombocytes: large platelet size (MPV >11 fL)",
+      "Acute sudden post-viral onset in healthy toddler",
+      "Normal immunoglobulin concentrations (IgG, IgA, IgM)",
+      "Excellent spontaneous recovery rate (>80%)"
+     ]
+    }
+   }
+  }
+ ]
+}

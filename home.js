@@ -1115,13 +1115,14 @@
     wardsynq: function () { if (window.WARD && WARD.open) WARD.open(); else toast("Inpatient ward loading…"); },
     // Onco Home: clinician-facing oncology reference workbench (search + tool grid over the
     // existing MEDCALC/KB/drugs — not the patient treatment-plan engine). Flag-gated inside SMD_ONCOHOME.open().
-    atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
-    ophthalmos: function () { if (window.OPHTHALMOS && OPHTHALMOS.open) OPHTHALMOS.open(); else toast("Ophthalmós loading…"); },
+    atlas: function () { modHold("ATLAS"); if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
+    ophthalmos: function () { modHold("OPHTHALMOS"); if (window.OPHTHALMOS && OPHTHALMOS.open) OPHTHALMOS.open(); else toast("Ophthalmós loading…"); },
     // Tokós stays shut when its kill switch is set, whatever the entry (tile, stewardmd://tokos, MaiK tool chip):
     // a quiet no-op, like SURGX/CliniX/PGLOG, decided by the same eligible() that hides the tile.
     tokos: function () {
       var t = HOME_TOOLS.filter(function (x) { return x.act === "tokos"; })[0];
       if (!t || !homeToolEligible(t)) return;
+      modHold("TOKOS");
       if (window.TOKOS && TOKOS.open) TOKOS.open(); else toast("Tokós loading…");
     },
     // PrepNucleus (prep.js, loaded on first open by prep-loader.js): same quiet no-op when its flag is off.
@@ -1131,12 +1132,14 @@
       if (!t || !homeToolEligible(t)) return;
       opts = opts && typeof opts === "object" ? opts : undefined;
       if (opts && window.PREP && PREP.isOpen && PREP.isOpen() && PREP.close) PREP.close();
+      modHold("PREP");
       if (window.PREP && PREP.open) PREP.open(opts); else toast("PrepNucleus loading…");
     },
     // Narkē (Anaesthesia), the same kill-switch rule as Tokós.
     narke: function () {
       var t = HOME_TOOLS.filter(function (x) { return x.act === "narke"; })[0];
       if (!t || !homeToolEligible(t)) return;
+      modHold("NARKE");
       if (window.NARKE && NARKE.open) NARKE.open(); else toast("Anaesthetica loading…");
     },
     // Kardia (Echo and ECG learning on the specialty engine), the same quiet no-op as Tokós/Narkē
@@ -1144,6 +1147,7 @@
     kardia: function (opts) {
       var t = HOME_TOOLS.filter(function (x) { return x.act === "kardia"; })[0];
       if (!t || !homeToolEligible(t)) return;
+      modHold("KARDIA");
       if (window.KARDIA && KARDIA.open) KARDIA.open(opts); else toast("Kardia loading…");
     },
     oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCQIS loading…"); },
@@ -1262,14 +1266,14 @@
       // FundX is gated by the Experimental Access framework (one code = one device, server-verified).
       // Debug builds + a valid activation open it directly; otherwise the access gate is shown. If the
       // framework failed to load, fall back to opening directly so the tile is never bricked.
-      function openFundx() { try { localStorage.setItem("smd_fundx", "1"); } catch (e) {} if (window.FUNDX && FUNDX.open) FUNDX.open(); else toast("FundX AI loading…"); }
+      function openFundx() { try { localStorage.setItem("smd_fundx", "1"); } catch (e) {} modHold("FUNDX"); if (window.FUNDX && FUNDX.open) FUNDX.open(); else toast("FundX AI loading…"); }
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("fundx", openFundx); return; } } catch (e) {}
       openFundx();
     },
     kardiox: function () {
       // KardiQ X AI — opened from its Clinical-Tools tile (the big home hero was replaced by this tile).
       // Gated by Experimental Access like FundX; opens directly if the framework isn't loaded.
-      function openKardiox() { try { localStorage.setItem("smd_kardiox", "1"); } catch (e) {} if (window.KARDIOX && KARDIOX.open) KARDIOX.open(); else toast("KardiQ X AI loading…"); }
+      function openKardiox() { try { localStorage.setItem("smd_kardiox", "1"); } catch (e) {} modHold("KARDIOX"); if (window.KARDIOX && KARDIOX.open) KARDIOX.open(); else toast("KardiQ X AI loading…"); }
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("kardiox", openKardiox); return; } } catch (e) {}
       openKardiox();
     },
@@ -1282,7 +1286,7 @@
     thorex: function () {
       // ThoreX AI — opened from its Clinical-Tools tile, sibling of KardiQ X above.
       // Gated by Experimental Access like FundX/KardiQ X; opens directly if the framework isn't loaded.
-      function openThorex() { try { localStorage.setItem("smd_thorex", "1"); } catch (e) {} if (window.THOREX && THOREX.open) THOREX.open(); else toast("ThoreX AI loading…"); }
+      function openThorex() { try { localStorage.setItem("smd_thorex", "1"); } catch (e) {} modHold("THOREX"); if (window.THOREX && THOREX.open) THOREX.open(); else toast("ThoreX AI loading…"); }
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("thorex", openThorex); return; } } catch (e) {}
       openThorex();
     },
@@ -1291,7 +1295,7 @@
       // SKNX.open() by SKNX.isOn() (flag AND (access code OR early-access plan)); when the flag is on
       // but access is missing, open() shows the SMD_XACCESS code gate itself. The tile goes through
       // SMD_XACCESS.gate first, like the other three, so the code gate precedes the beta notice.
-      function openSknx() { if (window.SKNX && SKNX.open) SKNX.open(); else toast("SknX AI loading…"); }
+      function openSknx() { modHold("SKNX"); if (window.SKNX && SKNX.open) SKNX.open(); else toast("SknX AI loading…"); }
       try { if (window.SMD_XACCESS && SMD_XACCESS.gate) { SMD_XACCESS.gate("sknx", openSknx); return; } } catch (e) {}
       openSknx();
     },
@@ -2289,6 +2293,14 @@
     { act: "syndromes", ic: "coronavirus", tt: "Syndromes", sub: "Which antibiotic to start", defOn: false },
     { act: "antibiogram", ic: "biotech", tt: "Antibiogram", sub: "Your local resistance", defOn: false },
   ];
+  // Big learning and imaging modules open behind the hearts loader so their first load is hidden. Bedside tools stay instant.
+  function modHold(name) {
+    try {
+      var m = window[name];
+      if (!window.SMD_LOADER || !m || !m.open || (m.isOpen && m.isOpen())) return;
+      SMD_LOADER.hold(2400, function () { var t = window[name]; if (t && t.close) t.close(); }, function () { var t = window[name]; return !!(t && t.isOpen && t.isOpen()); });
+    } catch (e) {}
+  }
   function homeToolByAct(a) {
     if (a === "connect") a = "agentconnect";
     for (var i = 0; i < HOME_TOOLS.length; i++) if (HOME_TOOLS[i].act === a) return HOME_TOOLS[i];
@@ -10372,7 +10384,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     { id: "contrast", name: "High-Contrast", accent: "#00463d", paper: "#ffffff" }
   ];
   var FONTS = [
-    { id: "plex", name: "IBM Plex Sans", web: null },
+    { id: "plex", name: "Default", web: null },
     { id: "system", name: "System", web: null },
     { id: "arial", name: "Arial", web: null },
     { id: "serif", name: "Serif", web: null },

@@ -1,0 +1,253 @@
+{
+ "v": 1,
+ "id": "psy-alcohol-alcoholic-hallucinosis",
+ "subject": "psychiatry",
+ "module": "psy-alcohol",
+ "title": "Alcoholic Hallucinosis and Relapse Prevention Pharmacotherapy",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Alcoholic hallucinosis** is a distinct psychiatric syndrome developing within 12 to 24 hours following the cessation or reduction of heavy alcohol intake. Sufferers experience vivid, threatening auditory hallucinations, typically comprising persecutory voices speaking in the third person, while maintaining a completely clear sensorium and intact orientation.",
+   "say": "Alcoholic hallucinosis presents within twenty-four hours of drinking cessation with threatening auditory hallucinations, while orientation and consciousness remain completely clear.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alcoholic Hallucinosis",
+     "points": [
+      "Sensorium completely clear and oriented",
+      "Predominantly auditory persecutory voices",
+      "Absence of autonomic storm or hyperthermia",
+      "Responds promptly to atypical antipsychotics"
+     ]
+    },
+    "right": {
+     "title": "Delirium Tremens",
+     "points": [
+      "Sensorium clouded and severely confused",
+      "Predominantly lilliputian visual hallucinations",
+      "Severe autonomic storm (fever, tachycardia)",
+      "Responds exclusively to high-dose benzodiazepines"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Clinical course of alcoholic hallucinosis** is typically self-limiting, resolving spontaneously within 48 hours to several weeks upon sustained alcohol abstinence. A small subset of chronic patients develops a persistent hallucinatory state resembling paranoid schizophrenia, termed chronic alcoholic hallucinosis, requiring long-term second-generation antipsychotic maintenance.",
+   "say": "Most hallucinosis episodes resolve within several days with abstinence and antipsychotics. A small fraction develops a chronic schizophrenia-like syndrome.",
+   "vis": {
+    "kind": "flow",
+    "title": "Hallucinosis Clinical Trajectory",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Abrupt cessation of chronic heavy alcohol consumption"
+     },
+     {
+      "id": "n2",
+      "label": "Emergence of vivid auditory hallucinations within 24 hours"
+     },
+     {
+      "id": "n3",
+      "label": "Treatment with low-dose atypical antipsychotics (olanzapine/haloperidol)"
+     },
+     {
+      "id": "n4",
+      "label": "Full symptomatic resolution in >90% within one to two weeks"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Disulfiram pharmacodynamics** establish it as an irreversible inhibitor of aldehyde dehydrogenase (ALDH), the liver enzyme responsible for metabolizing toxic acetaldehyde into harmless acetate. When alcohol is ingested concurrently, acetaldehyde accumulates up to ten-fold in circulating plasma, precipitating an excruciatingly unpleasant physiological reaction.",
+   "say": "Disulfiram irreversibly inhibits aldehyde dehydrogenase, causing toxic acetaldehyde to surge ten-fold if alcohol is consumed, triggering a severe physiological reaction.",
+   "vis": {
+    "kind": "flow",
+    "title": "Ethanol Metabolism Blockade",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Ethanol converted to acetaldehyde via alcohol dehydrogenase"
+     },
+     {
+      "id": "n2",
+      "label": "Disulfiram irreversibly blocks aldehyde dehydrogenase enzyme"
+     },
+     {
+      "id": "n3",
+      "label": "Toxic accumulation of circulating blood acetaldehyde"
+     },
+     {
+      "id": "n4",
+      "label": "Severe flushing, tachycardia, hypotension, nausea, & panic"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Disulfiram-ethanol reaction** develops within 10 to 15 minutes of alcohol ingestion, presenting with intense facial flushing, throbbing headache, diaphoresis, nausea, intractable vomiting, chest pain, and profound hypotension. In severe cases, the reaction causes cardiovascular collapse, myocardial infarction, and death, mandating strict informed patient consent.",
+   "say": "The disulfiram-ethanol reaction causes facial flushing, vomiting, tachycardia, chest pain, and severe hypotension, requiring strict consent before prescription.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/alcohol-and-alcohol-use-disorders-fig1.webp",
+    "alt": "Hepatic alcohol dehydrogenase pathways and neurochemical dependence mechanisms",
+    "caption": "Hepatic alcohol dehydrogenase pathways and neurochemical dependence mechanisms.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Clinical precautions with disulfiram** require absolute abstinence from alcohol for at least 12 hours before therapy initiation, warning patients to avoid hidden alcohol in cough syrups, cooking sauces, aftershaves, and mouthwashes. Because enzyme resynthesis takes up to two weeks, the reaction can occur for 14 days after stopping disulfiram.",
+   "say": "Patients must be abstinent for twelve hours before starting disulfiram. The reaction can occur for up to two weeks after stopping due to slow enzyme resynthesis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hidden Ethanol Sources",
+     "points": [
+      "Over-the-counter cough and cold syrups",
+      "Alcohol-based mouthwashes and gargles",
+      "Cooking vinegars, desserts, and flambe dishes",
+      "Aftershaves, perfumes, and solvent vapors"
+     ]
+    },
+    "right": {
+     "title": "Absolute Contraindications",
+     "points": [
+      "Severe coronary artery disease & heart failure",
+      "Active hepatic cirrhosis or severe dysfunction",
+      "Psychotic disorders and severe cognitive decline",
+      "Pregnancy and lactation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Naltrexone in alcohol dependence** operates as a competitive antagonist at mu-opioid receptors, blocking endogenous endorphin release elicited by alcohol consumption. By severing the neurochemical reward associated with drinking, naltrexone significantly diminishes alcohol craving and prevents a slip from escalating into a full relapse.",
+   "say": "Naltrexone blocks mu-opioid receptors to extinguish alcohol-induced euphoria and cravings. It is contraindicated in acute hepatitis and opioid therapy.",
+   "vis": {
+    "kind": "table",
+    "title": "Naltrexone Pharmacology Summary",
+    "cols": [
+     "Parameter",
+     "Clinical Specification",
+     "Therapeutic Rationale"
+    ],
+    "rows": [
+     [
+      "Mechanism",
+      "Competitive mu-opioid receptor antagonist",
+      "Blocks endorphin-mediated dopaminergic reward"
+     ],
+     [
+      "Standard dosage",
+      "50 mg once daily orally (or depot monthly)",
+      "Maintains continuous 24-hour receptor blockade"
+     ],
+     [
+      "Clinical goal",
+      "Reduces heavy drinking days & craving",
+      "Allows patients to stop after one or two drinks"
+     ],
+     [
+      "Toxicity risk",
+      "Dose-dependent hepatocellular injury",
+      "Contraindicated in acute hepatitis or liver failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acamprosate calcium** is a synthetic taurine analogue that restores balance between central GABAergic inhibition and NMDA glutamatergic excitation disrupted by chronic alcohol consumption. Because acamprosate is cleared entirely by renal excretion without undergoing hepatic metabolism, it serves as the preferred anticraving medication in cirrhotic liver disease.",
+   "say": "Acamprosate modulates NMDA and GABA transmission to sustain abstinence. Because it is renally excreted, it is safe in patients with hepatic disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acamprosate Strengths",
+     "points": [
+      "Modulates hyper-excitable NMDA receptor channels",
+      "Proven efficacy in maintaining total abstinence",
+      "Completely safe in hepatic cirrhosis & hepatitis",
+      "No drug interactions with CYP450 enzymes"
+     ]
+    },
+    "right": {
+     "title": "Clinical Limitations",
+     "points": [
+      "Requires taking two tablets three times daily",
+      "Contraindicated in renal failure (CrCl < 30 mL/min)",
+      "Frequent transient diarrhea in initial weeks",
+      "Ineffective if active heavy drinking continues"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Comparison of anticraving medications** guides personalized psychiatric selection: naltrexone is optimal for actively drinking patients aiming to reduce heavy consumption, whereas acamprosate is optimal for motivated patients pursuing complete abstinence, especially those with hepatic impairment or cirrhosis where naltrexone is strictly contraindicated.",
+   "say": "Naltrexone suits individuals seeking to reduce binge drinking. Acamprosate is preferred for motivated abstinence, particularly in patients with liver disease.",
+   "vis": {
+    "kind": "table",
+    "title": "Pharmacotherapy Selection Matrix",
+    "cols": [
+     "Medication",
+     "Primary Target Patient",
+     "Metabolic Route",
+     "Key Exclusion"
+    ],
+    "rows": [
+     [
+      "Disulfiram",
+      "Highly motivated; supervised administration",
+      "Hepatic metabolism",
+      "Severe cardiac disease; psychosis"
+     ],
+     [
+      "Naltrexone",
+      "Binge drinkers; craving reduction",
+      "Hepatic metabolism",
+      "Acute liver failure; concurrent opioid use"
+     ],
+     [
+      "Acamprosate",
+      "Post-detoxification total abstinence",
+      "Renal excretion",
+      "Severe renal impairment (CrCl <30)"
+     ],
+     [
+      "Baclofen",
+      "Severe alcoholic liver cirrhosis",
+      "Renal excretion",
+      "Severe encephalopathy or sedation"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

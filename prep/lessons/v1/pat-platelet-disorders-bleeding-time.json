@@ -1,0 +1,280 @@
+{
+  "v": 1,
+  "gen": "AI",
+  "module": "pat-platelet-disorders",
+  "key": null,
+  "title": "Bleeding Time, Platelet Count, Immune Thrombocytopenia, TTP, and ADAMTS13",
+  "steps": [
+    {
+      "tx": "The historic **standard bleeding time** evaluates in vivo primary haemostasis: the capacity of circulating platelets to adhere to injured subendothelium, activate, and form an initial stable haemostatic platelet plug. Using a standardized template incision on the volar forearm with a blood pressure cuff inflated to forty millimeters of mercury (Ivy method), normal bleeding ceases within two to nine minutes. Bleeding time is prolonged in severe thrombocytopenia (platelets under fifty thousand per microliter), qualitative platelet dysfunction, von Willebrand disease, and aspirin therapy, remaining normal in isolated haemophilia.",
+      "say": "The template bleeding time tests primary haemostasis in vivo, measuring how long it takes platelets to form a mechanical plug following a small standardized skin incision under constant pressure. Normal bleeding stops within two to nine minutes. It is prolonged when platelets are quantitatively low or qualitatively defective, as well as in von Willebrand disease. In contrast, in secondary clotting factor deficiencies like haemophilia A, the bleeding time is completely normal.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary Haemostasis Defect",
+          "points": [
+            "Platelet deficiency or von Willebrand disease",
+            "Bleeding time is prolonged (>9 minutes)",
+            "Presents with petechiae, purpura, epistaxis",
+            "Bleeding starts immediately after minor trauma"
+          ]
+        },
+        "right": {
+          "title": "Secondary Haemostasis Defect",
+          "points": [
+            "Coagulation factor deficiencies (haemophilia)",
+            "Bleeding time is completely normal",
+            "Presents with deep hemarthroses and haematomas",
+            "Bleeding is characteristically delayed after injury"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When an automated haematology analyzer unexpectedly reports severe thrombocytopenia in an asymptomatic patient without petechiae or bruising, the clinician must exclude **in vitro pseudothrombocytopenia**. This laboratory artifact is caused by naturally occurring IgG or IgM autoantibodies that react with the glycoprotein IIb/IIIa complex specifically in the presence of ethylenediaminetetraacetic acid (EDTA) anticoagulant, causing platelets to agglutinate into large clusters counted as single leukocytes. Confirming pseudothrombocytopenia requires reviewing a peripheral blood smear for platelet clumps and repeating the platelet count in a sodium citrate tube.",
+      "say": "Pseudothrombocytopenia is a common laboratory artifact where an automated counter reports a dangerously low platelet count in an entirely well patient. It is triggered by EDTA anticoagulant in routine blood collection tubes, which alters platelet surface glycoprotein two-b-three-a and allows naturally occurring antibodies to clump platelets together. The automated counter counts these clumps as single white cells. Reviewing the peripheral smear and collecting blood in a citrated or heparinized tube confirms normal platelet numbers.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c1",
+            "label": "EDTA Automated Low Count"
+          },
+          {
+            "id": "c2",
+            "label": "Peripheral Blood Smear"
+          },
+          {
+            "id": "c3",
+            "label": "Giant Platelet Clumps Seen"
+          },
+          {
+            "id": "c4",
+            "label": "Sodium Citrate Blood Draw"
+          },
+          {
+            "id": "c5",
+            "label": "True Platelet Count Normal"
+          }
+        ],
+        "edges": [
+          [
+            "c1",
+            "c2",
+            "Asymptomatic Patient"
+          ],
+          [
+            "c2",
+            "c3",
+            "Microscopic Review"
+          ],
+          [
+            "c3",
+            "c4",
+            "Rule Out Artifact"
+          ],
+          [
+            "c4",
+            "c5",
+            "In Vitro Clumping Avoided"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Primary immune thrombocytopenia, formerly known as idiopathic thrombocytopenic purpura, is an acquired autoimmune disorder characterized by antibody-mediated platelet destruction and impaired megakaryocyte platelet production. Pathogenic IgG autoantibodies, directed primarily against **glycoprotein IIb/IIIa autoantigen complexes** or glycoprotein Ib/IX on platelet membranes, opsonize circulating platelets. Spleen-resident macrophages express Fc-gamma receptors that bind the antibody-coated platelets, rapidly engulfing and destroying them in the cords of Billroth, reducing platelet lifespan from ten days down to a few hours.",
+      "say": "Primary immune thrombocytopenia is driven by IgG autoantibodies targeting platelet surface glycoproteins, especially the glycoprotein two-b-three-a complex. Once coated with autoantibodies, platelets are recognized by Fc-gamma receptors on splenic macrophages, which phagocytose and destroy them in the red pulp. Furthermore, autoantibodies bind bone marrow megakaryocytes, inhibiting platelet shedding. As platelet lifespan plummets, patients manifest petechiae, purpura, and mucosal bleeding.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute Childhood ITP",
+          "points": [
+            "Peaks at 2 to 6 years of age",
+            "Frequently preceded by viral respiratory infection",
+            "Abrupt onset of petechiae and bruising",
+            "Over 80% resolve spontaneously within six months"
+          ]
+        },
+        "right": {
+          "title": "Chronic Adult ITP",
+          "points": [
+            "Peaks in females aged 20 to 50 years",
+            "Insidious onset without preceding viral illness",
+            "Chronic relapsing course; rarely resolves spontaneously",
+            "Requires medical therapy (steroids, IVIG, TPO-RA)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Diagnosis of **primary immune thrombocytopenia** remains a clinical diagnosis of exclusion, confirmed by isolated thrombocytopenia with completely normal white blood cell counts, normal haemoglobin (unless severe blood loss anaemia supervenes), and normal coagulation parameters. Bone marrow examination, indicated in patients older than sixty years or those failing first-line therapy, reveals normal or increased numbers of megakaryocytes, displaying immature morphology with hypolobated nuclei and absent peripheral platelet budding, reflecting compensatory thrombopoiesis trying unsuccessfully to overcome rapid peripheral destruction.",
+      "say": "Immune thrombocytopenia is diagnosed by excluding other causes of low platelets. Routine laboratory tests show isolated thrombocytopenia: the white cell count, red cell indices, and coagulation panel are completely normal. Bone marrow examination, when performed, shows megakaryocytic hyperplasia: the marrow is packed with increased numbers of immature megakaryocytes struggling to pump out platelets into a hostile peripheral circulation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/immune-thrombocytopenia-fig1.webp",
+        "alt": "Pathogenesis and diagnostic workup of immune thrombocytopenia showing autoantibody-mediated destruction",
+        "caption": "Immune thrombocytopenia pathogenesis with antibody mediated platelet destruction."
+      }
+    },
+    {
+      "tx": "Initial medical management for immune thrombocytopenia with active bleeding or platelet counts under thirty thousand per microliter utilizes oral corticosteroids (prednisone or high-dose dexamethasone) or intravenous immunoglobulin (IVIG). For refractory or chronic disease, second-line therapies target distinct biological mechanisms. **Thrombopoietin receptor agonists** including oral eltrombopag and subcutaneous romiplostim stimulate megakaryocyte proliferation and platelet maturation. Rituximab depletes autoantibody-producing CD20-positive B-cell clones, while laparoscopic splenectomy removes both the primary anatomical site of antibody generation and the principal organ of platelet clearance.",
+      "say": "First-line therapy for symptomatic ITP relies on corticosteroids or high-dose intravenous immunoglobulin, which saturates macrophage Fc receptors to halt acute platelet clearance. When disease becomes chronic, second-line options include thrombopoietin receptor agonists like eltrombopag and romiplostim, which boost marrow megakaryocyte output. The monoclonal antibody rituximab eliminates antibody-producing B-cells, while surgical splenectomy cures roughly two-thirds of patients by removing the main destruction site.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic Agent",
+          "Mechanism of Action",
+          "Route and Regimen",
+          "Clinical Indication / Notes"
+        ],
+        "rows": [
+          [
+            "High-Dose Dexamethasone",
+            "Suppresses antibody synthesis and macrophage Fc function",
+            "Oral 40 mg daily for 4 consecutive days",
+            "First-line therapy with rapid response"
+          ],
+          [
+            "Intravenous Immunoglobulin",
+            "Saturates splenic macrophage Fc-gamma receptors",
+            "1 g/kg daily for 1 to 2 days",
+            "Emergency bleeding or urgent surgery"
+          ],
+          [
+            "Eltrombopag / Romiplostim",
+            "Directly binds TPO receptor (c-Mpl) to drive megakaryocytes",
+            "Daily oral pill or weekly subcutaneous injection",
+            "Chronic refractory ITP; sustains counts"
+          ],
+          [
+            "Laparoscopic Splenectomy",
+            "Removes site of antibody synthesis and phagocytosis",
+            "Surgical excision following vaccinations",
+            "Durable remission in 65% to 70% of cases"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Thrombotic thrombocytopenic purpura is a life-threatening thrombotic microangiopathy caused by severe deficiency of **ADAMTS13 metalloprotease enzyme activity**, falling below ten percent of normal. ADAMTS13 normally cleaves ultra-large von Willebrand factor multimers secreted by endothelial Weibel-Palade bodies into smaller, less adhesive multimeric forms. When acquired IgG autoantibodies neutralise ADAMTS13, ultra-large multimers accumulate, anchoring to endothelial cells where they bind and activate platelets under high arteriolar shear stress, spawning disseminated platelet-rich microthrombi that shear passing erythrocytes into schistocytes.",
+      "say": "Thrombotic thrombocytopenic purpura is a haematological emergency caused by severe deficiency of the ADAMTS13 enzyme, with activity falling below ten percent. ADAMTS13 is a molecular scissor that trims ultra-large von Willebrand factor multimers into safe, smaller sizes. Without it, ultra-large multimers stretch across arterioles, binding platelets into widespread microvascular thrombi. These clots occlude microvessels, starving organs of oxygen and physically slicing red blood cells into schistocytes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/thrombotic-thrombocytopenic-purpura-fig1.webp",
+        "alt": "Microvascular platelet thrombi and schistocytes in thrombotic thrombocytopenic purpura",
+        "caption": "Thrombotic thrombocytopenic purpura microangiopathy with platelet rich microthrombi."
+      }
+    },
+    {
+      "tx": "The classical clinical presentation of thrombotic thrombocytopenic purpura is described by the **Pentad of Moschcowitz**, comprising severe thrombocytopenia, microangiopathic haemolytic anaemia with schistocytes, fluctuating neurological signs (confusion, seizures, focal deficits), acute renal insufficiency, and high fever. However, the complete pentad is present in less than ten percent of modern patients. Crucially, coagulation parameters (prothrombin time, activated partial thromboplastin time, and fibrinogen) remain entirely normal in TTP, cleanly distinguishing it from disseminated intravascular coagulation where clotting factors are massively consumed.",
+      "say": "The classic pentad of TTP includes profound thrombocytopenia, microangiopathic haemolytic anaemia, fluctuating neurological deficits, fever, and renal impairment. However, waiting for all five symptoms is dangerous: over ninety percent of patients present with only thrombocytopenia and haemolysis. A critical diagnostic invariant is that routine coagulation tests like PT, APTT, and fibrinogen are completely normal in TTP, reliably separating it from the consumptive coagulopathy of DIC.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Thrombotic Thrombocytopenic Purpura",
+          "points": [
+            "Severe ADAMTS13 deficiency (<10% activity)",
+            "Microthrombi composed purely of platelets and vWF",
+            "PT, APTT, and fibrinogen are completely normal",
+            "Emergency therapy: therapeutic plasma exchange"
+          ]
+        },
+        "right": {
+          "title": "Disseminated Intravascular Coagulation",
+          "points": [
+            "Widespread systemic thrombin generation",
+            "Microthrombi composed of dense fibrin and platelets",
+            "PT and APTT are prolonged; fibrinogen is depleted",
+            "Therapy: treat underlying infection or malignancy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Untreated thrombotic thrombocytopenic purpura carries a mortality rate exceeding ninety percent within hours to days. The mandatory emergency treatment is **daily therapeutic plasma exchange** utilizing fresh frozen plasma or solvent-detergent plasma. Plasmapheresis removes inhibitory anti-ADAMTS13 autoantibodies and circulating ultra-large von Willebrand factor multimers, while transfused donor plasma replenishes active ADAMTS13 enzyme. Platelet transfusions are strictly contraindicated because infusing platelets into an environment of circulating ultra-large multimers fuels catastrophic microvascular thrombosis, triggering acute myocardial infarction and stroke.",
+      "say": "Without prompt treatment, TTP is fatal in more than ninety percent of patients. Daily therapeutic plasma exchange using fresh frozen plasma must be started immediately upon clinical suspicion. Plasmapheresis removes the harmful autoantibodies and toxic ultra-large multimers while supplying functional ADAMTS13 enzyme. Remember this crucial rule: never give platelet transfusions in TTP, because adding platelets fuels widespread microvascular thrombosis and triggers fatal strokes or heart attacks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "Clinical Suspicion (MAHA + Low Platelets)"
+          },
+          {
+            "id": "t2",
+            "label": "Emergency Plasma Exchange (PEX)"
+          },
+          {
+            "id": "t3",
+            "label": "Immunosuppression (Steroids + Rituximab)"
+          },
+          {
+            "id": "t4",
+            "label": "Caplacizumab (Anti-vWF Nanobody)"
+          },
+          {
+            "id": "t5",
+            "label": "Survival Exceeds 85%"
+          }
+        ],
+        "edges": [
+          [
+            "t1",
+            "t2",
+            "Do Not Wait for ADAMTS13 Level"
+          ],
+          [
+            "t2",
+            "t3",
+            "Eliminates Autoantibody Synthesis"
+          ],
+          [
+            "t2",
+            "t4",
+            "Blocks Platelet-vWF Interaction"
+          ],
+          [
+            "t3",
+            "t5",
+            "Full Clinical Remission"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "What is the primary pathophysiological defect causing acquired thrombotic thrombocytopenic purpura (TTP)?",
+      "options": [
+        "Severe autoantibody-mediated deficiency of the ADAMTS13 metalloprotease (<10% activity)",
+        "Autoantibodies directed against platelet membrane glycoprotein IIb/IIIa complexes",
+        "Inborn deficiency of cell-surface complement decay-accelerating factor (CD55)",
+        "Overproduction of thrombopoietin driving abnormal platelet activation"
+      ],
+      "correct": 0,
+      "explain": "Acquired TTP is caused by inhibitory IgG autoantibodies that neutralize ADAMTS13, allowing ultra-large vWF multimers to accumulate and trigger widespread microvascular thrombosis."
+    },
+    {
+      "q": "Why are platelet transfusions strictly contraindicated in acute thrombotic thrombocytopenic purpura (TTP)?",
+      "options": [
+        "Transfused platelets bind ultra-large vWF multimers, exacerbating fatal microvascular thrombosis",
+        "Transfused platelets neutralize circulating ADAMTS13 enzyme in donor plasma",
+        "Platelet membranes release histamine, triggering acute anaphylactic shock",
+        "Transfused platelets precipitate within renal glomeruli, worsening acute tubular necrosis"
+      ],
+      "correct": 0,
+      "explain": "In TTP, infusing platelets provides raw substrate for ultra-large vWF multimers to form new microthrombi, precipitating acute myocardial infarction and stroke."
+    },
+    {
+      "q": "What coagulation laboratory pattern cleanly separates thrombotic thrombocytopenic purpura from disseminated intravascular coagulation?",
+      "options": [
+        "Normal PT, normal APTT, and normal fibrinogen in TTP versus prolonged clotting times in DIC",
+        "Markedly elevated fibrinogen and low D-dimer in DIC",
+        "Severe thrombocytopenia in DIC with normal platelet counts in TTP",
+        "Complete absence of schistocytes on peripheral blood smear in TTP"
+      ],
+      "correct": 0,
+      "explain": "TTP is a platelet-vWF microvascular occlusion with normal PT, APTT, and fibrinogen, while DIC is a consumptive coagulopathy with prolonged PT/APTT and hypofibrinogenemia."
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-ct-mri-larmor-frequency",
+ "subject": "radiology",
+ "module": "rad-ct-mri",
+ "title": "Larmor Frequency, MR Angiography and CT Dose",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Protons precess at Larmor frequency",
+   "tx": "**Larmor frequency** is the rate at which hydrogen protons precess around the main magnetic field, set by the equation frequency equals the gyromagnetic ratio times field strength. For hydrogen the gyromagnetic ratio is 42.58 megahertz per tesla, so a 1.5 tesla scanner tunes near 63.9 megahertz and a 3 tesla scanner near 127.7 megahertz. Radiofrequency pulses must match this frequency to tip the magnetisation.",
+   "say": "Larmor frequency is the rate at which hydrogen protons precess around the main field, set by the gyromagnetic ratio times field strength. For hydrogen that ratio is forty two point five eight megahertz per tesla, so a one point five tesla scanner tunes near sixty four megahertz. Radiofrequency pulses must match this frequency to tip the magnetisation.",
+   "vis": {"kind": "table", "cols": ["Field strength", "Hydrogen frequency", "Common use"], "rows": [["0.3 tesla", "12.8 MHz", "Open low field scanners"], ["1.5 tesla", "63.9 MHz", "Routine clinical MRI"], ["3.0 tesla", "127.7 MHz", "Neuro and angiography detail"], ["7.0 tesla", "298 MHz", "Research imaging"]]}
+  },
+  {
+   "title": "Parts per million in spectroscopy",
+   "tx": "**Parts per million** in magnetic resonance spectroscopy expresses each metabolite frequency as a fraction of the Larmor frequency, which keeps positions fixed across scanner strengths. N acetylaspartate sits at 2.0 parts per million, creatine at 3.0 and choline at 3.2 on a scale that counts down left to right. Joining choline, creatine and N acetylaspartate peaks normally forms a 45 degree Hunters angle.",
+   "say": "Parts per million in spectroscopy expresses each metabolite frequency as a fraction of the Larmor frequency, keeping positions fixed across scanner strengths. N acetylaspartate sits at two, creatine at three and choline at three point two, on a scale counting down left to right. Joining those peaks normally forms a forty five degree Hunters angle.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Choline 3.2 ppm"}, {"id": "b", "label": "Creatine 3.0 ppm"}, {"id": "c", "label": "NAA 2.0 ppm"}, {"id": "d", "label": "Hunters angle 45 degrees"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Gradient echo sequences",
+   "tx": "**Gradient echo** sequences flip magnetisation with a gradient reversal instead of a 180 degree radiofrequency pulse, which makes them fast but sensitive to field inhomogeneity. Blood breakdown products and calcification bloom dark on gradient echo and susceptibility weighted images, exposing old microbleeds in amyloid angiopathy. The same speed suits breath hold liver imaging and cartilage sequences, where T2 star decay shortens the usable echo window.",
+   "say": "Gradient echo sequences flip magnetisation with a gradient reversal instead of a one hundred eighty degree pulse, making them fast but sensitive to field unevenness. Blood products and calcification bloom dark on these images, exposing old microbleeds in amyloid angiopathy. The same speed suits breath hold liver imaging, where T2 star decay shortens the usable echo window.",
+   "vis": {"kind": "compare", "left": {"title": "Gradient echo gains", "points": ["Fast acquisition", "Breath hold liver imaging", "Cartilage detail", "Blood products bloom dark"]}, "right": {"title": "Gradient echo costs", "points": ["Sensitive to metal artefact", "T2 star signal loss", "Microbleeds exaggerated", "Bowel gas distortion"]}}
+  },
+  {
+   "title": "Time of flight angiography",
+   "tx": "**Time of flight angiography** needs no injected contrast. Repeated pulses saturate stationary tissue until it gives little signal, while fresh blood flowing into the slice arrives unsaturated and bright. Circle of Willis aneurysms and stenoses are mapped this way at 3 tesla. Slow or turbulent flow loses signal and can mimic a gap, so a suspected occlusion is confirmed on a second sequence.",
+   "say": "Time of flight angiography needs no injected contrast. Repeated pulses saturate stationary tissue until it gives little signal, while fresh blood entering the slice arrives unsaturated and bright. Circle of Willis aneurysms and narrowings are mapped this way. Slow or turbulent flow loses signal and can mimic a gap, so suspected blockage needs a second sequence.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Pulses saturate tissue"}, {"id": "b", "label": "Fresh blood flows in"}, {"id": "c", "label": "Vessel appears bright"}, {"id": "d", "label": "Aneurysm mapped"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Contrast enhanced MR angiography",
+   "tx": "**Contrast enhanced MR angiography** injects gadolinium and images during the first arterial pass, filling vessels regardless of flow direction or speed. It covers the aorta, renal arteries and runoff vessels in one breath hold per station. Timing the bolus is the critical skill: image too early and arteries are empty, too late and veins overlap the arterial map.",
+   "say": "Contrast enhanced angiography injects gadolinium and images during the first arterial pass, filling vessels regardless of flow direction or speed. It covers the aorta, renal arteries and leg runoff in one breath hold per station. Timing the bolus is the critical skill, because imaging too early leaves arteries empty and too late lets veins overlap the map.",
+   "vis": {"kind": "table", "cols": ["Feature", "Time of flight", "Contrast enhanced"], "rows": [["Contrast agent", "None", "Gadolinium bolus"], ["Flow dependence", "High", "Low"], ["Best territory", "Circle of Willis", "Aorta and runoff"], ["Main artefact", "Slow flow signal loss", "Venous overlap if late"]]}
+  },
+  {
+   "title": "Phase contrast angiography",
+   "tx": "**Phase contrast angiography** encodes velocity into the signal phase using bipolar gradients, so it measures flow direction and speed as well as anatomy. A velocity encoding value is chosen above the expected peak, commonly 20 centimetres per second for venous work and 80 for arterial studies. Setting it too low folds fast flow into a false reversed colour called aliasing.",
+   "say": "Phase contrast angiography encodes velocity into the signal phase using bipolar gradients, measuring flow direction and speed as well as anatomy. A velocity encoding value is chosen above the expected peak, near twenty centimetres per second for veins and eighty for arteries. Setting it too low folds fast flow into a false reversed appearance called aliasing.",
+   "vis": {"kind": "compare", "left": {"title": "Encoding set right", "points": ["Peak velocity captured", "Direction shown correctly", "Flow volume measured", "Venous 20 cm per second"]}, "right": {"title": "Encoding set low", "points": ["Aliasing wraps phase", "False reversed flow", "Peak speed underestimated", "Repeat with higher setting"]}}
+  },
+  {
+   "title": "CT dose quantities",
+   "tx": "**CT dose index** estimates scanner output in a standard phantom, reported as volume CT dose index in milligray. Multiplying it by scan length gives the dose length product, and multiplying that by a region conversion factor estimates effective dose in millisieverts. A routine head scan delivers near 2 millisieverts, close to eight months of natural background radiation at about 3 millisieverts per year.",
+   "say": "CT dose index estimates scanner output in a standard phantom, reported as volume dose index in milligray. Multiplying by scan length gives dose length product, and a region factor then estimates effective dose in millisieverts. A routine head scan delivers near two millisieverts, close to eight months of natural background radiation.",
+   "vis": {"kind": "table", "cols": ["Quantity", "Unit", "Meaning"], "rows": [["Volume CT dose index", "Milligray", "Scanner output in phantom"], ["Dose length product", "Milligray cm", "Output times scan length"], ["Effective dose", "Millisievert", "Whole body risk estimate"], ["Background per year", "About 3 millisievert", "Natural comparison"]]}
+  },
+  {
+   "title": "Cutting CT dose in practice",
+   "tx": "**Dose modulation** lowers tube current automatically over thinner body parts and during angles that cross less tissue, cutting dose without losing diagnostic density. Iterative reconstruction rebuilds images from noisier raw data, so protocols drop tube voltage to 100 kilovolts in slim patients. Children need weight based settings because the same adult exposure gives a far higher organ dose in a small body.",
+   "say": "Dose modulation lowers tube current automatically over thinner body parts and across angles crossing less tissue, cutting dose without losing diagnostic density. Iterative reconstruction rebuilds images from noisier raw data, letting protocols drop voltage in slim patients. Children need weight based settings because an adult exposure gives a far higher organ dose in a small body.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Weight based protocol"}, {"id": "b", "label": "Tube current modulation"}, {"id": "c", "label": "Iterative reconstruction"}, {"id": "d", "label": "Lower patient dose"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}

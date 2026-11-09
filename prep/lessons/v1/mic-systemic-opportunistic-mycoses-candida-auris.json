@@ -1,0 +1,204 @@
+{
+  "v": 1,
+  "module": "mic-systemic-opportunistic-mycoses",
+  "subject": "microbiology",
+  "title": "Candida auris, Candida glabrata, CHROMagar and Aspergillus Aflatoxin",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Candida auris** is an emerging healthcare-associated yeast that colonises skin, persists on surfaces, resists disinfection lapses and can be multidrug resistant to azoles, amphotericin B and echinocandins. It causes candidaemia and outbreaks in intensive care units. Older biochemical systems misidentified it as other yeasts, so MALDI-TOF with updated databases or molecular methods and immediate infection-control notification are essential.",
+      "say": "Candida auris is an outbreak organism; identification triggers isolation the same day.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Why auris spreads",
+          "points": [
+            "Skin colonisation of axilla and groin",
+            "Environmental persistence",
+            "Shared equipment transmission",
+            "Thermotolerant and salt tolerant growth"
+          ]
+        },
+        "right": {
+          "title": "Control steps",
+          "points": [
+            "Single room and contact precautions",
+            "Screen contacts and environment",
+            "Dedicated equipment",
+            "Chlorine based disinfection per local policy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Candida glabrata**, reclassified Nakaseomyces glabratus, forms small budding yeast without pseudohyphae in tissue. It causes urinary, vaginal and bloodstream infection in older, diabetic and azole-exposed patients. Fluconazole susceptibility is unpredictable and echinocandin resistance is emerging through FKS mutations. Its haploid genome facilitates rapid resistance selection under drug pressure compared with diploid Candida albicans.",
+      "say": "Glabrata makes no pseudohyphae and cannot be trusted with fluconazole blindly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Glabrata traits",
+          "points": [
+            "Small yeast only morphology",
+            "No germ tube or pseudohyphae",
+            "Older hospitalised hosts",
+            "Haploid genome aids resistance emergence"
+          ]
+        },
+        "right": {
+          "title": "Therapy cautions",
+          "points": [
+            "Check fluconazole susceptibility",
+            "Echinocandin first for candidaemia usually",
+            "Watch FKS resistance after echinocandin exposure",
+            "Urinary disease needs source and obstruction review"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**CHROMagar Candida** separates common species by colony colour in one plate, classically green for albicans, metallic blue for tropicalis and pink rough colonies for krusei, accelerating targeted therapy before full identification. Colours vary by manufacturer and mixed cultures can hide minority species, so chromogenic screening supplements rather than replaces MALDI-TOF or sequencing for invasive isolates and outbreak work.",
+      "say": "Chromogenic colour is a fast clue, not the final species verdict in blood.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cryptococcosis-fig1.webp",
+        "alt": "Cryptococcus neoformans India ink mount",
+        "caption": "Cryptococcus neoformans yeast cells highlighted against dark India ink suspension by prominent gelatinous capsule halation [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "**Aspergillus** species are environmental moulds whose septate hyphae branch at acute angles of about forty five degrees in tissue. Aspergillus fumigatus dominates invasive disease in neutropenia and transplantation because its small conidia reach alveoli and it grows at body temperature. Aspergillus flavus is prominent in sinus disease and produces aflatoxin in food; Aspergillus niger forms black colonies.",
+      "say": "Acute-angle septate hyphae from inhaled conidia define Aspergillus tissue invasion.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/systemic-opportunistic-mycoses-aspergillus-mucor-crypto-fig1.webp",
+        "alt": "Aspergillus mucor and cryptococcus comparison diagram",
+        "caption": "Tissue forms that separate Aspergillus, Mucorales and Cryptococcus."
+      }
+    },
+    {
+      "tx": "**Aflatoxin** from Aspergillus flavus and parasiticus contaminates peanuts, maize and spices stored warm and damp, causing acute aflatoxicosis outbreaks and chronic hepatocellular carcinoma risk, synergising with hepatitis B. Aflatoxin B1 is metabolised to an epoxide that forms DNA adducts and a signature TP53 mutation. Food drying, sorting and storage regulation are therefore cancer prevention, not merely food hygiene.",
+      "say": "Aflatoxin turns mouldy grain into a liver cancer exposure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Exposure",
+          "points": [
+            "Poorly stored peanuts and maize",
+            "Hot humid warehouses",
+            "Invisible contamination in sorted food",
+            "Animal feed carries toxin into milk as AFM1"
+          ]
+        },
+        "right": {
+          "title": "Prevention",
+          "points": [
+            "Rapid drying after harvest",
+            "Moisture proof storage",
+            "Remove mouldy and damaged kernels",
+            "Regulatory testing of food lots"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Galactomannan** is an Aspergillus cell wall polysaccharide detected in serum and bronchoalveolar lavage to support invasive aspergillosis in neutropenic and transplant patients. It can cross-react with other fungi and historic antibiotic contaminants, and mould-active prophylaxis lowers sensitivity. A positive galactomannan with a halo sign on CT in prolonged neutropenia is a strong treatment trigger even before culture, which is often negative.",
+      "say": "In neutropenic fever, galactomannan plus a halo sign can start therapy before culture wakes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "neutropenia",
+            "label": "Prolonged neutropenia or transplant"
+          },
+          {
+            "id": "ct",
+            "label": "CT halo or air crescent signs"
+          },
+          {
+            "id": "gm",
+            "label": "Galactomannan in serum or BAL"
+          },
+          {
+            "id": "treat",
+            "label": "Start voriconazole based therapy pathway"
+          }
+        ],
+        "edges": [
+          [
+            "neutropenia",
+            "ct"
+          ],
+          [
+            "ct",
+            "gm"
+          ],
+          [
+            "gm",
+            "treat"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The thick gelatinous capsule of **Cryptococcus neoformans** consists primarily of glucuronoxylomannan, an acidic polysaccharide polymer that actively repels phagocytic ingestion by human neutrophils and macrophages. The capsule stains intensely bright magenta with mucicarmine and vivid blue with alcian blue stains on tissue histology. Soluble capsular antigen shedding into blood and cerebrospinal fluid permits rapid bedside detection via lateral flow immunoassay.",
+      "say": "Glucuronoxylomannan polysaccharide creates a wide capsule that resists phagocytosis and binds mucicarmine stain.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Diagnostic capsule stains",
+          "points": [
+            "India ink wet mount: clear halo against dark field",
+            "Mayer mucicarmine: vivid red-magenta capsule",
+            "Alcian blue: electric blue staining of mucin",
+            "Fontana-Masson: silver staining of cell wall melanin"
+          ]
+        },
+        "right": {
+          "title": "Cryptococcal antigen detection",
+          "points": [
+            "Lateral flow assay detects glucuronoxylomannan",
+            "Sensitivity exceeds ninety-eight percent in CSF",
+            "Positive before microscopic cellular pleocytosis",
+            "Rapid diagnosis in advanced HIV immunosuppression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Speciation of Cryptococcus neoformans from other environmental yeasts exploits fungal **melanin production** via the copper-dependent laccase enzyme. When inoculated onto caffeic acid or bird seed agar containing Guizotia abyssinica seeds, cryptococcal laccase oxidises o-diphenols into brown-black melanin pigment within seventy-two hours. Melanin deposition reinforces the fungal cell wall against oxidative free radicals, antifungal penetration, and host macrophage killing.",
+      "say": "Laccase enzyme synthesizes dark melanin pigment on bird seed agar to protect against oxidative damage.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Media / Test",
+          "Reaction",
+          "Diagnostic Significance"
+        ],
+        "rows": [
+          [
+            "Bird seed agar",
+            "Dark brown to black colonies",
+            "Confirms laccase-mediated melanin synthesis"
+          ],
+          [
+            "Urease test",
+            "Rapid pink colour change",
+            "Urease positive distinguishes from Candida"
+          ],
+          [
+            "Canavanine glycine agar",
+            "Blue colour indicates C. gattii",
+            "Separates C. neoformans from C. gattii"
+          ],
+          [
+            "Sabouraud agar",
+            "Mucoid cream-coloured yeast colonies",
+            "Initial isolation from clinical specimens"
+          ]
+        ]
+      }
+    }
+  ]
+}
