@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "module": "sur-arterial",
+ "subject": "surgery",
+ "title": "Intermittent Claudication and Peripheral Arterial Disease",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Cramping leg pain brought on by walking and relieved by rest is **intermittent claudication**. Narrowed arteries cannot increase blood flow to exercising muscle, so pain builds at a predictable distance. Stopping lets supply meet demand again and pain fades within minutes. Pain that starts after the same distance every day and forces a stop within two minutes of rest fits vascular claudication, not arthritis.",
+   "say": "Intermittent claudication causes cramping calf pain at a predictable walking distance, relieved by rest.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/peripheral-arterial-disease-fig1.webp",
+    "alt": "Peripheral arterial disease narrowing leg arteries.",
+    "caption": "Peripheral arterial disease of the legs. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Pain in the foot at rest, worse lying flat, signals advanced disease called **rest pain**. It means blood flow cannot meet even resting tissue needs. Patients often hang the leg out of bed at night to ease it with gravity. Dependency rubor, a deep red foot when hanging down that blanches on elevation, is Buerger test evidence of severe ischaemia.",
+   "say": "Rest pain means flow cannot meet resting needs, and patients hang the leg down at night for relief.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Claudication",
+     "points": [
+      "Pain on walking",
+      "Relieved by standing still",
+      "Muscle supply demand mismatch"
+     ]
+    },
+    "right": {
+     "title": "Rest pain",
+     "points": [
+      "Pain at rest, worse flat",
+      "Relieved by dependency",
+      "Severe flow failure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The ratio of ankle to arm systolic pressure is the **ankle brachial pressure index**. Values below 0.9 indicate arterial narrowing, and very low values mean severe disease. It is measured with a Doppler probe and blood pressure cuff. A value of 0.9 to 1.4 is normal, below 0.5 is severe, and above 1.4 means stiff calcified vessels that fool the cuff.",
+   "say": "The ankle brachial pressure index compares ankle and arm pressures, with low values meaning severe disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Index",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "0.9 to 1.3",
+      "Normal"
+     ],
+     [
+      "0.5 to 0.9",
+      "Moderate disease"
+     ],
+     [
+      "Below 0.5",
+      "Severe disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Absent foot pulses with pale, cool skin and shiny hairless legs are typical **examination findings**. Comparing both legs side by side reveals temperature and colour differences. Capillary return is slow in the affected foot. Buerger test empties the veins on elevation and shows slow, patchy refilling when the leg hangs down again.",
+   "say": "Absent pulses, cool pale skin and slow capillary return mark the affected leg on examination.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/arterial-diseases-of-the-extremities-fig1.webp",
+    "alt": "Arterial diseases of the extremities.",
+    "caption": "Arterial disease of the extremities. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Stopping smoking is the single most effective step in **risk factor control**. Diabetes, blood pressure and cholesterol treatment slow progression throughout the body. Antiplatelet and statin therapy reduce heart attacks and strokes in these patients. Cilostazol can add walking distance for some patients, but it is stopped if there is no gain after three months.",
+   "say": "Stopping smoking plus antiplatelet and statin therapy slows progression and prevents heart events.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Smoking stopped"
+     },
+     {
+      "id": "n1",
+      "label": "Diabetes and pressure controlled"
+     },
+     {
+      "id": "n2",
+      "label": "Antiplatelet and statin started"
+     },
+     {
+      "id": "n3",
+      "label": "Walking programme begun"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Structured walking that pushes into pain and rests repeatedly is **supervised exercise therapy**. Over weeks it lengthens pain free walking distance as collateral vessels develop. It rivals stenting for many patients with claudication alone. Walking to near maximal pain, resting, then repeating for 30 to 45 minutes three times a week gives the best gain.",
+   "say": "Supervised walking therapy lengthens pain free distance as collateral vessels develop over weeks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Programme",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Weeks 1 to 4",
+      "Walk into pain, rest, repeat"
+     ],
+     [
+      "Weeks 5 to 8",
+      "Distance gradually lengthens"
+     ],
+     [
+      "Beyond",
+      "Maintenance walking daily"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Imaging the arterial tree before intervention is done by **CT angiography**. It maps narrowings and blockages from aorta to foot. The map lets surgeons choose between balloon treatment and bypass. Contrast kidney injury is the main hazard, so hydration and limiting contrast matter in patients with diabetes or kidney disease.",
+   "say": "CT angiography maps narrowings from aorta to foot so surgeons can choose balloon or bypass.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Symptoms and index confirm disease"
+     },
+     {
+      "id": "n1",
+      "label": "CT angiogram maps lesions"
+     },
+     {
+      "id": "n2",
+      "label": "Short lesion, balloon considered"
+     },
+     {
+      "id": "n3",
+      "label": "Long blockage, bypass considered"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ulcers and black toes in a claudicant mean disease has reached **tissue loss**. This stage needs urgent vascular assessment and usually revascularisation. Delay risks spreading infection and major amputation. A punched out ulcer on the toe tip or heel with a pale base points to arterial lack, unlike the shallow ulcers above the ankle in venous disease.",
+   "say": "Ulcers and black toes mean tissue loss needing urgent vascular assessment and revascularisation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stable claudication",
+     "points": [
+      "Pain only on exertion",
+      "No wounds",
+      "Exercise and medicines first"
+     ]
+    },
+    "right": {
+     "title": "Tissue loss",
+     "points": [
+      "Ulcers or gangrene",
+      "Wounds present",
+      "Urgent revascularisation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sudden painful pale pulseless leg is acute limb ischaemia, distinct from chronic **claudication history**. It is an emergency with only hours to save the leg. Any sudden change in a claudicant needs same day vascular review. The six Ps, pain, pallor, perishing cold, pulselessness, paraesthesia and paralysis, mark the threatened leg, and paralysis means muscle is already dying.",
+   "say": "A suddenly painful pale pulseless leg is an emergency distinct from chronic claudication.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Sudden pain and pallor"
+     },
+     {
+      "id": "n1",
+      "label": "Pulses absent"
+     },
+     {
+      "id": "n2",
+      "label": "Emergency referral"
+     },
+     {
+      "id": "n3",
+      "label": "Hours only to save leg"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}
