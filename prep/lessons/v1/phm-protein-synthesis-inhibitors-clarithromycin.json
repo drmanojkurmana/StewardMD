@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-protein-synthesis-inhibitors",
+  "subject": "pharmacology",
+  "title": "Clarithromycin and Macrolide Pharmacology: 50S Ribosome, CYP3A4, Motilin and Typhoid",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Clarithromycin** methylates erythromycin into acid stability and twice daily grace, covering respiratory pathogens, atypicals, Helicobacter pylori regimens and Mycobacterium avium complex treatment and prophylaxis, with an active 14 hydroxy metabolite adding Haemophilus reach. It is the macrolide whose interaction empire (next step) prescribers must actually memorise, because its ribosomal pharmacology is clean and its hepatic pharmacology is anything but.",
+      "say": "Clarithromycin fixed erythromycin's acid problem and kept its interaction empire fully staffed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clarithromycin territory",
+          "points": [
+            "Respiratory and atypical infections",
+            "H pylori triple and quadruple regimens",
+            "MAC treatment and prophylaxis in HIV history",
+            "Skin and soft tissue in penicillin allergy"
+          ]
+        },
+        "right": {
+          "title": "Clarithromycin manners",
+          "points": [
+            "Twice daily, metal taste characteristic",
+            "Active metabolite broadens Haemophilus",
+            "Better tolerated than erythromycin's gut storm",
+            "QT and liver effects class shared"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**CYP3A4 inhibition** is clarithromycin's second prescription hidden inside the first: it multiplies levels of statins (simvastatin rhabdomyolysis from the lipid lessons), colchicine (fatal in renal impairment), calcium channel blockers (hypotension in the elderly), tacrolimus, many anticoagulants and sedatives, while its own levels are gutted by inducers. Erythromycin shares the crime; azithromycin largely does not, which is the single most useful sentence in macrolide interaction practice.",
+      "say": "Clarithromycin and erythromycin strangle CYP3A4, azithromycin barely touches it; choose by the drug list.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "clar",
+            "label": "Clarithromycin inhibits intestinal and hepatic CYP3A4"
+          },
+          {
+            "id": "victim",
+            "label": "Statin, colchicine or blocker levels multiply"
+          },
+          {
+            "id": "harm",
+            "label": "Rhabdomyolysis, colchicine toxicity or hypotension"
+          },
+          {
+            "id": "switch",
+            "label": "Azithromycin substituted where spectrum allows"
+          }
+        ],
+        "edges": [
+          [
+            "clar",
+            "victim"
+          ],
+          [
+            "victim",
+            "harm"
+          ],
+          [
+            "harm",
+            "switch"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **50S ribosome** exit tunnel unites macrolides, lincosamides (clindamycin), streptogramins and chloramphenicol and oxazolidinones nearby, a crowded binding neighbourhood explaining cross resistance (erm methylation) and why combinations among them add little. Bacteriostatic labels bend: macrolides kill Streptococcus pneumoniae and Haemophilus at achievable concentrations in many models, another reminder from principles that static and cidal are contexts, not essences.",
+      "say": "Five families crowd one ribosomal tunnel; methylation evicts them together.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antibacterials-fq-vanco-metronidazole-uti-fig1.webp",
+        "alt": "Bacterial targets of three antibacterials diagram showing ribosomal and cell wall targets",
+        "caption": "Target map locating 50S agents whose shared tunnel explains macrolide cross resistance patterns."
+      }
+    },
+    {
+      "tx": "**Motilin agonist** activity is erythromycin's second identity: at sub antimicrobial doses (40 to 250 mg) it storms gastric and intestinal motility, used briefly for gastroparesis and feeding intolerance before tachyphylaxis retires it within weeks, and explaining the cramps and diarrhoea that dose limit its antibiotic life. Clarithromycin and azithromycin inherit weaker versions. Motilin agonism is also why erythromycin empties stomachs before emergency endoscopy in upper gastrointestinal bleeding protocols.",
+      "say": "Erythromycin shakes the gut by motilin design; prokinetic today, tachyphylaxis tomorrow.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prokinetic use",
+          "points": [
+            "Low dose erythromycin before feeds or endoscopy",
+            "Gastroparesis bridges of weeks, not months",
+            "Tachyphylaxis ends the benefit predictably",
+            "Intravenous routes in acute protocols"
+          ]
+        },
+        "right": {
+          "title": "Antimicrobial cost",
+          "points": [
+            "Cramping and diarrhoea dose limiting",
+            "Nausea worst with erythromycin base",
+            "Estolate salts: cholestatic hepatitis history",
+            "Successors reduced but did not erase it"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Typhoid fever** (enteric fever) assembles this module's rivals into a resistance driven algorithm: fluoroquinolones fell to decreased susceptibility across South Asia, ceftriaxone and azithromycin divide current therapy by severity and XDR (extensively drug resistant) geography, chloramphenicol and cotrimoxazole return only where susceptibility is proven, and carbapenems rescue XDR sepsis. Azithromycin's intracellular concentration suits Salmonella's intracellular life, a mechanism to indication sentence examinations reward.",
+      "say": "Typhoid therapy is resistance geography: ceftriaxone or azithromycin by severity, chloramphenicol only on proof.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Modern typhoid choices",
+          "points": [
+            "Uncomplicated: azithromycin oral where XDR threatens",
+            "Severe: ceftriaxone intravenous",
+            "XDR sepsis: carbapenem by specialist direction",
+            "Culture and susceptibility before narrowing"
+          ]
+        },
+        "right": {
+          "title": "Historical agents on proof only",
+          "points": [
+            "Chloramphenicol: marrow price, susceptibility required",
+            "Cotrimoxazole and amoxicillin: susceptibility required",
+            "Fluoroquinolones: susceptibility now uncommon regionally",
+            "Relapse and carriage follow up completes therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Macrolide QT and** hearing complete the safety grammar: QT prolongation stacks with the antiarrhythmic, antipsychotic and quinolone shelves (torsades arithmetic by list review), reversible sensorineural hearing loss and tinnitus accompany high dose or prolonged erythromycin and azithromycin especially in renal impairment and the elderly, and cholestatic hepatitis (erythromycin estolate historically) and pancreatitis decorate the rare ledger.",
+      "say": "QT lists and hearing questions belong in every prolonged macrolide review; both effects usually reverse.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "list",
+            "label": "QT prolonging co prescriptions audited"
+          },
+          {
+            "id": "dose",
+            "label": "Macrolide dose and duration minimised"
+          },
+          {
+            "id": "symptom",
+            "label": "Palpitations, syncope or tinnitus reported"
+          },
+          {
+            "id": "stop",
+            "label": "Stop, ECG and electrolytes, substitute class"
+          }
+        ],
+        "edges": [
+          [
+            "list",
+            "dose"
+          ],
+          [
+            "dose",
+            "symptom"
+          ],
+          [
+            "symptom",
+            "stop"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Ketolides** (telithromycin) tried to out engineer erm resistance and were fenced by hepatotoxicity and visual and myasthenia effects into near extinction, while fidaxomicin, a macrocycle cousin acting on RNA polymerase rather than ribosomes, owns C difficile next lesson. The family's lesson is iterative: each successor fixes one predecessor flaw (acid, gut, interactions, resistance) and invoices a new one, which is why the founder's ribosome still anchors the teaching.",
+      "say": "Every macrolide successor fixes one flaw and invoices another; the ribosome outlasts them all.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Successor engineering",
+          "points": [
+            "Clarithromycin: acid stability, twice daily",
+            "Azithromycin: tissue life, minimal CYP effects",
+            "Ketolides: resistance reach, hepatic fencing",
+            "Fidaxomicin: polymerase target, gut confined"
+          ]
+        },
+        "right": {
+          "title": "Persistent family traits",
+          "points": [
+            "Atypical and respiratory spectra",
+            "QT vigilance",
+            "Gastrointestinal intolerance gradient",
+            "Resistance by methylation and efflux"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pertussis and diphtheria** niches close the macrolide map: azithromycin is first line for Bordetella pertussis (catarrhal stage benefit, transmission reduction at all stages, infant pyloric stenosis weighed under six weeks), erythromycin historically for diphtheria adjunct and Campylobacter, and clarithromycin in MAC and H pylori combinations. Incubation windows, post exposure prophylaxis for vulnerable contacts and notification duties ride with these prescriptions in public health practice.",
+      "say": "Pertussis belongs to azithromycin at any stage for transmission, youngest infants weighed individually.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Defined macrolide niches",
+          "points": [
+            "Pertussis treatment and post exposure prophylaxis",
+            "Chlamydia (azithromycin or doxycycline rivalry)",
+            "MAC prophylaxis history in advanced HIV",
+            "Campylobacter where quinolones resist"
+          ]
+        },
+        "right": {
+          "title": "Public health attachments",
+          "points": [
+            "Contact prophylaxis for vulnerable infants",
+            "Notification where mandated",
+            "Exclusion periods from childcare and work",
+            "Vaccination status reviewed with the case"
+          ]
+        }
+      }
+    }
+  ]
+}

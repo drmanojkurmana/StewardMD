@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "phm-antitubercular",
+  "subject": "pharmacology",
+  "title": "Antitubercular Therapy: Isoniazid, Rifampicin, Pyrazinamide and Ethambutol",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Isoniazid**, a prodrug activated by mycobacterial KatG catalase peroxidase, blocks InhA in mycolic acid synthesis and kills dividing Mycobacterium tuberculosis bactericidally and cheaply, remaining the most potent early bactericidal drug and the backbone of latent infection therapy. Human genetics tax it twice: NAT2 acetylator status sets half life (slow acetylators accumulate neuropathy, fast acetylators underdose), and pyridoxine antagonism writes its signature adverse effect next lesson.",
+      "say": "Isoniazid is KatG activated mycolic acid sabotage; acetylator genetics set its speed and its neuropathy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/latent-tuberculosis-fig1.webp",
+        "alt": "Tuberculosis infection progression diagram from latent infection to active disease",
+        "caption": "Tuberculosis progression from latent infection, the state isoniazid based preventive therapy treats."
+      }
+    },
+    {
+      "tx": "**Rifampicin** binds bacterial RNA polymerase beta subunit and halts transcription, bactericidal against dividing and semi dormant persisters alike, which makes it tuberculosis' sterilising hero and the reason modern therapy lasts six rather than eighteen months. It stains urine, sweat and tears orange red (warn patients and contact lens wearers), and its hepatic enzyme induction is the most powerful in clinical medicine, gutting contraceptives, warfarin, antiretrovirals, transplant drugs and methadone within days.",
+      "say": "Rifampicin sterilises persisters and turns fluids orange while inducing half the formulary into failure.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-tb-dots.webp",
+        "alt": "DOTS tuberculosis treatment categories and regimen illustration",
+        "caption": "Directly observed tuberculosis regimens built on rifampicin and isoniazid backbones. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Pyrazinamide**, activated by mycobacterial pyrazinamidase to pyrazinoic acid, kills semi dormant bacilli in acidic phagolysosomes where no other first line drug reaches, earning its place in the two month intensive phase and shortening therapy by sterilising that niche. Its bills are hepatotoxicity shared across the regimen and hyperuricaemia with arthralgia (inhibited urate excretion), while gout flares and liver enzymes are its monitoring pair.",
+      "say": "Pyrazinamide hunts bacilli hiding in acid; liver and uric acid pay its rent.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intensive phase logic (2 months HRZE)",
+          "points": [
+            "Isoniazid kills rapid dividers early",
+            "Rifampicin sterilises persisters throughout",
+            "Pyrazinamide clears acidic niche bacilli",
+            "Ethambutol guards against unrecognised resistance"
+          ]
+        },
+        "right": {
+          "title": "Continuation phase (4 months HR)",
+          "points": [
+            "Isoniazid and rifampicin continue",
+            "Pyrazinamide and ethambutol stop",
+            "Total six months for drug susceptible disease",
+            "Extensions for cavitation and slow response"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Ethambutol** inhibits arabinosyl transferases building the cell wall's arabinogalactan, bacteriostatic at ordinary doses, included not for killing power but as resistance insurance while susceptibilities are unknown. Its dose related optic toxicity next lesson defines it. Renal clearance demands dose adjustment in kidney impairment, where accumulation writes the visual casualties that baseline acuity and colour vision testing exist to pre empt.",
+      "say": "Ethambutol is the regimen's insurance policy; kidneys and eyes set its dose.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Ethambutol started in intensive phase"
+          },
+          {
+            "id": "base",
+            "label": "Baseline acuity and red green colour documented"
+          },
+          {
+            "id": "renal",
+            "label": "Dose spaced in renal impairment"
+          },
+          {
+            "id": "stop",
+            "label": "Stops at 2 months when susceptibility confirmed"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "base"
+          ],
+          [
+            "base",
+            "renal"
+          ],
+          [
+            "renal",
+            "stop"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Standard drug susceptible** therapy (two months isoniazid, rifampicin, pyrazinamide, ethambutol, then four months isoniazid and rifampicin) is combination therapy's resistance suppression doctrine from principles incarnate: spontaneous resistance mutations (about one in a million per drug) cannot survive four simultaneous locks. Fixed dose combinations, weight banding, directly observed or video observed therapy, and adherence support are therefore pharmacological interventions, not administrative garnish.",
+      "say": "Four drugs because one in a million bacilli already resists each; adherence systems are resistance policy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Regimen architecture",
+          "points": [
+            "Fixed dose combinations by weight band",
+            "Daily therapy preferred over intermittent",
+            "Pyridoxine with isoniazid in risk groups",
+            "Baseline liver, vision, HIV and diabetes screening"
+          ]
+        },
+        "right": {
+          "title": "Support architecture",
+          "points": [
+            "Observed or video observed therapy options",
+            "Adverse effect review at every visit",
+            "Contact tracing and infection control",
+            "Treatment literacy in the patient's language"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Rifampicin's induction demands** a medication reconciliation ritual at start and stop: hormonal contraception replaced or supplemented, warfarin doses multiplied then divided again two weeks after cessation (the rebound direction kills quietly), antiretroviral regimens rebuilt around rifabutin where protease inhibitors rule, transplant immunosuppression re levelled, and methadone withdrawal anticipated with dose increases that must be unwound at therapy's end.",
+      "say": "Reconcile every drug at rifampicin's arrival and again at its departure; the second reconciliation is the forgotten one.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Rifampicin started: interaction audit"
+          },
+          {
+            "id": "adjust",
+            "label": "Contraception, warfarin, ARVs and methadone adjusted"
+          },
+          {
+            "id": "stop",
+            "label": "Rifampicin stopped: induction wanes over 2 weeks"
+          },
+          {
+            "id": "restore",
+            "label": "Victim doses restored before toxicity rebounds"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "adjust"
+          ],
+          [
+            "adjust",
+            "stop"
+          ],
+          [
+            "stop",
+            "restore"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Latent tuberculosis therapy** trades duration against hepatotoxicity across regimens (rifampicin four months, isoniazid six to nine, weekly rifapentine plus isoniazid three months where stocked), offered after active disease is excluded by symptom, imaging and microbiology review, because monotherapy poured into unrecognised active disease manufactures resistance. HIV, transplant, anti TNF and contact indications grade the offer's urgency.",
+      "say": "Exclude active disease before latent therapy, or monotherapy becomes a resistance factory.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Latent regimen choices",
+          "points": [
+            "Rifampicin 4 months: completion friendly",
+            "Isoniazid 6 to 9 months: hepatotoxicity watched",
+            "Rifapentine weekly 3 months where available",
+            "Choice by interactions, liver and adherence reality"
+          ]
+        },
+        "right": {
+          "title": "Before any latent regimen",
+          "points": [
+            "Active disease excluded clinically and radiologically",
+            "Baseline liver enzymes in risk groups",
+            "Alcohol and hepatotoxic co therapy reviewed",
+            "Completion support planned, not hoped"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hepatotoxicity surveillance binds** the first line trio (isoniazid, rifampicin, pyrazinamide all hepatotoxic, age and alcohol multiplying): baseline enzymes in risk groups, monthly symptom review for all, stop rules at three times upper limit with symptoms or five without, and sequential reintroduction protocols after recovery that identify the culprit by rechallenge order. Most drug induced liver injury here is hepatocellular and reversible; continuing through jaundice is the unforgivable variant.",
+      "say": "Three hepatotoxins walk together; jaundice stops the march and reintroduction names the culprit.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "base",
+            "label": "Baseline liver risk assessed"
+          },
+          {
+            "id": "symptom",
+            "label": "Nausea, anorexia or jaundice reported"
+          },
+          {
+            "id": "stop",
+            "label": "All hepatotoxic agents stopped at thresholds"
+          },
+          {
+            "id": "reintro",
+            "label": "Sequential reintroduction after normalisation"
+          }
+        ],
+        "edges": [
+          [
+            "base",
+            "symptom"
+          ],
+          [
+            "symptom",
+            "stop"
+          ],
+          [
+            "stop",
+            "reintro"
+          ]
+        ]
+      }
+    }
+  ]
+}
