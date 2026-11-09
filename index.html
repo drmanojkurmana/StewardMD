@@ -63,7 +63,7 @@
 <!-- Refined clinical look for INNER screens only (never #homeV2; owner 2026-10-12). Class smd-refined on <html> is set below; localStorage smd_refined="0" turns it off. -->
 <link rel="stylesheet" href="/refined.css?v=rf1-noempty1">
 <!-- Native-app behaviour app-wide (no tap flash, no double-tap zoom, no selectable buttons, no page rubber-band). Owner 2026-10-16. localStorage smd_native_feel=0 turns it off. -->
-<link rel="stylesheet" href="/native-feel.css?v=nf1"><link rel="stylesheet" href="/tablet-fit.css?v=tf6-ipad2"><link rel="stylesheet" href="/ipad-native.css?v=ipn1"><link rel="stylesheet" href="/ipad-clinical.css?v=ipm2"><link rel="stylesheet" href="/ipad-knowledge.css?v=ipm2"><link rel="stylesheet" href="/ipad-hospital.css?v=ipm2"><link rel="stylesheet" href="/ipad-learning.css?v=ipm2"><link rel="stylesheet" href="/ipad-specialty.css?v=ipm2"><link rel="stylesheet" href="/ipad-care.css?v=ipm2"><link rel="stylesheet" href="/ipad-account.css?v=ipm2"><script>/* ipad-native.css/js: a large touch screen (iPad, big Android tablet) gets html.smd-tablet before first paint. Kill switch: localStorage smd_ipad_native=0 */try{(function(){var s=window.screen||{};if((navigator.maxTouchPoints||0)>1&&Math.min(s.width||0,s.height||0)>=600&&localStorage.getItem("smd_ipad_native")!=="0")document.documentElement.classList.add("smd-tablet")})()}catch(e){}</script><script>try{if(localStorage.getItem("smd_native_feel")==="0")document.documentElement.classList.add("no-native-feel")}catch(e){}</script>
+<link rel="stylesheet" href="/native-feel.css?v=nf1"><link rel="stylesheet" href="/tablet-fit.css?v=tf6-ipad2"><link rel="stylesheet" href="/ipad-native.css?v=ipn1"><link rel="stylesheet" href="/ipad-clinical.css?v=ipm2-dcnative1"><link rel="stylesheet" href="/ipad-knowledge.css?v=ipm2"><link rel="stylesheet" href="/ipad-hospital.css?v=ipm2"><link rel="stylesheet" href="/ipad-learning.css?v=ipm2"><link rel="stylesheet" href="/ipad-specialty.css?v=ipm2"><link rel="stylesheet" href="/ipad-care.css?v=ipm2"><link rel="stylesheet" href="/ipad-account.css?v=ipm2"><script>/* ipad-native.css/js: a large touch screen (iPad, big Android tablet) gets html.smd-tablet before first paint. Kill switch: localStorage smd_ipad_native=0 */try{(function(){var s=window.screen||{};if((navigator.maxTouchPoints||0)>1&&Math.min(s.width||0,s.height||0)>=600&&localStorage.getItem("smd_ipad_native")!=="0")document.documentElement.classList.add("smd-tablet")})()}catch(e){}</script><script>try{if(localStorage.getItem("smd_native_feel")==="0")document.documentElement.classList.add("no-native-feel")}catch(e){}</script>
 <link rel="stylesheet" href="/motion.css?v=gold1-pf2">
 <script src="/smd-num.js?v=num2" defer></script>
 <!-- B2 privacy mode (window.SMD_PRIVACY_MODE; not privacy-config.js's SMD_PRIVACY): one tap in the home header masks patient names, IDs, phones and photos ON
@@ -2407,7 +2407,7 @@ window.openExternal = function (u) {
 <script src="/dxmgmt.js?v=gold363" defer></script>
 <script src="/clinical-nlp.js?v=gold363-nlpv2a-kbv2a-nlp2r-allon-r79" defer></script>
 <script src="/id-token.js?v=idtok2-quota1" defer></script>
-<link rel="stylesheet" href="/reasoning-workspace.css?v=kbbrand2-fr1-dxask2-simple1-taste1-priorsw-r20-hdr1">
+<link rel="stylesheet" href="/reasoning-workspace.css?v=kbbrand2-fr1-dxask2-simple1-taste1-priorsw-r20-hdr1-dxclear1">
 <link rel="stylesheet" href="/knowledge-library.css?v=klall6-kbbrand2-rd1-km1-ls1-synmgmt1-kbnav1-kbrd1-kbs1-rl1-oncolinks1-fig1-il1-hy1-ipad1-ipad2-kbrcard1-kbrrow1-kbredge1-kbfold1-kbrcard2">
 <link rel="stylesheet" href="/image-library.css?v=imglib3">
 <link rel="stylesheet" href="/image-viewer.css?v=iv3">
@@ -2418,7 +2418,7 @@ window.openExternal = function (u) {
 <script src="/phi-india.js?v=phiindia1" defer></script>
 <script src="/kb-search.js?v=kbs1" defer></script>
 <script src="/cancer-protocols-map.js?v=oncolinks1-fig1" defer></script>
-<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA-fr1-abg6-sttfb2-gatev2a-nlpv2a-rankv3a-kbv2a-calib1-prior1-dxask2-why1-simple1-taste1-on1-gate1-over1-nlp2r-abgr4-rank2-rankon-allon-r79-bl1-rd1-km1-kbls1-kbkeys1-mgmt1-dedup1-dedup2-onemgmt1-convo1002-cost1002-synmgmt1-kbnav1-emptyreply1-noloc1-kbrd1-mkai1-mkw1-quota1-cutshort1-kbs1-rl1-oncolinks1-kbfig1-fig1-il1-wiz1-hy1-figart1-ipad2-kbrcard1-kbrrow1-ipad3-kbfold1-wm1" defer></script
+<script src="/reasoning.js?v=hardlocal4-clinix1-figs1-tex1-kbchip1-kbexists1-kbopen1-kbopen2-us1-safetyux1-kbtitle1-kbbrand2-phiindia1-ci1-audA-fr1-abg6-sttfb2-gatev2a-nlpv2a-rankv3a-kbv2a-calib1-prior1-dxask2-why1-simple1-taste1-on1-gate1-over1-nlp2r-abgr4-rank2-rankon-allon-r79-bl1-rd1-km1-kbls1-kbkeys1-mgmt1-dedup1-dedup2-onemgmt1-convo1002-cost1002-synmgmt1-kbnav1-emptyreply1-noloc1-kbrd1-mkai1-mkw1-quota1-cutshort1-kbs1-rl1-oncolinks1-kbfig1-fig1-il1-wiz1-hy1-figart1-ipad2-kbrcard1-kbrrow1-ipad3-kbfold1-wm1-dxclear1" defer></script
 <!-- Knowledge Library Protocols tab: clinical protocols across specialties (kb/clinical-protocols/).
      Flag smd_kb_protocols (default ON, ?kbproto=0 hides it). The kb-protocols.js ?v= token is kept in
      step with the content hash by scripts/build-clinical-protocols.mjs. -->
@@ -2451,7 +2451,7 @@ window.openExternal = function (u) {
 <script src="/specialty-kits.js?v=kits8.286fc2ed2b" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Dose calculator (dose-calc.js): flag smd_dose_calc, DEFAULT ON (owner 2026-09-28); "0" hides it. Rules: data/dose-rules.json.gz (scripts/build-dose-rules.mjs). vault/modules/Dose Calculator.md -->
-<script src="/dose-calc.js?v=dc5-gzfb1-pm1-ipad1" defer></script>
+<script src="/dose-calc.js?v=dc5-gzfb1-pm1-ipad1-native1" defer></script>
 <!-- Neonatal layer (neo-*.js): master flag smd_neo, DEFAULT ON under a Beta label (owner 2026-10-01); off: Settings > Experimental Features, ?neo=0.
      neo-flags.js loads the rest only when the flag is on. Data: data/neo/*.json (quoted sources,
      ai_drafted). vault/modules/Neonatal.md -->
