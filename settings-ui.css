@@ -433,7 +433,7 @@ html:not([data-font]) #sbrSettings[data-settings-ui],html:not([data-font]) #sbrS
 @media (prefers-reduced-transparency:reduce){#sbrSettings[data-settings-ui] .settings-search input{background-color:var(--st-card);-webkit-backdrop-filter:none;backdrop-filter:none}}
 #sbrSettings[data-settings-ui] .settings-group{margin-bottom:28px}
 #sbrSettings[data-settings-ui] .sbr-sec{padding:0 16px 7px;font-size:13px;font-weight:400;letter-spacing:0;text-transform:none;color:var(--st-sub)}
-#sbrSettings[data-settings-ui] .settings-card{overflow:hidden;border-radius:26px;background:var(--st-card)}
+#sbrSettings[data-settings-ui] .settings-card{overflow:hidden;border-radius:26px;background:var(--st-fill,var(--st-card));-webkit-backdrop-filter:var(--st-blur,none);backdrop-filter:var(--st-blur,none);box-shadow:var(--st-extra,none)}
 #sbrSettings[data-settings-ui] .settings-card>*{position:relative;margin:0}
 #sbrSettings[data-settings-ui] .settings-card>*+*::before{content:"";position:absolute;z-index:1;top:0;left:16px;right:0;height:.5px;background:var(--st-sep);pointer-events:none}
 #sbrSettings[data-settings-ui] .settings-card>.sbr-row+*::before{left:60px}
@@ -517,3 +517,8 @@ html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .sbr-set-head{padding
   html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui]:not([data-searching]) .sbr-set-body>.settings-group>.sbr-sec{display:none}
   html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui][data-searching] .sbr-set-body>.settings-group:first-of-type{margin-top:calc(max(8px,env(safe-area-inset-top,0px)) + 28px)}
 }
+/* Settings > App appearance on this page: Standard stays flat iOS, the others change the card material. */
+html[data-appearance="frosted"] #sbrSettings[data-settings-ui]{--st-fill:color-mix(in srgb,var(--st-card) 66%,transparent);--st-blur:blur(18px) saturate(170%);--st-extra:0 8px 22px -12px rgba(6,60,50,.28)}
+html[data-appearance="liquid"] #sbrSettings[data-settings-ui]{--st-fill:color-mix(in srgb,var(--st-card) 48%,transparent);--st-blur:blur(24px) saturate(200%);--st-extra:inset 0 1px 0 rgba(255,255,255,.7),0 10px 26px -12px rgba(6,60,50,.3)}
+html[data-appearance="tinted3d"] #sbrSettings[data-settings-ui]{--st-fill:linear-gradient(160deg,color-mix(in srgb,var(--sphere-hi,#2f9184) 10%,var(--st-card)),color-mix(in srgb,var(--sphere-hi,#2f9184) 24%,var(--st-card)));--st-extra:0 2px 3px rgba(6,60,50,.14),0 14px 26px -12px rgba(6,60,50,.3),inset 0 1px 0 rgba(255,255,255,.55)}
+html[data-appearance="blend"] #sbrSettings[data-settings-ui]{--st-fill:linear-gradient(135deg,color-mix(in srgb,var(--sphere-hi,#2f9184) 20%,var(--st-card)),var(--st-card) 55%,color-mix(in srgb,var(--sphere-mid,#12564a) 14%,var(--st-card)));--st-extra:0 6px 18px -10px rgba(6,60,50,.3)}
