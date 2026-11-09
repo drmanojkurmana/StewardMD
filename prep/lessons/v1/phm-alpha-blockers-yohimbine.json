@@ -1,0 +1,250 @@
+{
+  "v": 1,
+  "module": "phm-alpha-blockers",
+  "subject": "pharmacology",
+  "title": "Alpha-2 Antagonism, First-Dose Hypotension, and Perioperative Pheochromocytoma Management",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The prototypical selective pharmacological antagonist for presynaptic autoregulatory alpha-2 receptors is **yohimbine**. By blocking presynaptic alpha-2 receptors on sympathetic nerve terminals, yohimbine prevents endogenous norepinephrine from exerting its physiological negative feedback inhibition. Unchecked calcium influx sustains continuous exocytosis of norepinephrine into synaptic clefts, increasing sympathetic tone, raising systemic blood pressure, triggering sinus tachycardia, and evoking central psychomotor agitation.",
+      "say": "Yohimbine blocks presynaptic alpha-2 autoreceptors, disinhibiting norepinephrine release and elevating blood pressure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "yoh",
+            "label": "Yohimbine competitive antagonism"
+          },
+          {
+            "id": "a2",
+            "label": "Blockade of presynaptic alpha-2 autoreceptor"
+          },
+          {
+            "id": "ca",
+            "label": "Loss of negative feedback: Sustained terminal calcium influx"
+          },
+          {
+            "id": "ne",
+            "label": "Surge in synaptic norepinephrine release elevates blood pressure"
+          }
+        ],
+        "edges": [
+          [
+            "yoh",
+            "a2"
+          ],
+          [
+            "a2",
+            "ca"
+          ],
+          [
+            "ca",
+            "ne"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A sudden dramatic collapse in arterial blood pressure and postural syncope following the initial dose of prazosin is the **first-dose hypotension**. Because selective alpha-1 blockade rapidly relaxes systemic capacitance veins, venous return to the heart plunges precipitously when a patient assumes an upright posture. To prevent syncopal trauma, clinicians introduce prazosin at an ultra-low bedtime dose of one milligram while the patient is recumbent.",
+      "say": "The first-dose phenomenon causes postural syncope from venodilation, managed by starting prazosin at bedtime.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "First-dose phenomenon",
+          "points": [
+            "Occurs 30 to 90 minutes after first dose",
+            "Precipitated by rapid systemic venodilation",
+            "Extreme postural hypotension and syncope",
+            "Aggravated by prior salt restriction or diuretics"
+          ]
+        },
+        "right": {
+          "title": "Clinical prevention strategy",
+          "points": [
+            "Initiate with ultra-low dose (1 mg prazosin)",
+            "Administer strictly at bedtime while in bed",
+            "Withhold or reduce diuretic doses beforehand",
+            "Titrate dosage upward slowly over weeks"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Pathological enlargement of the transitional zone of the prostate causing bladder outflow obstruction represents **benign prostatic hyperplasia**. Smooth muscle in the prostate stroma, capsule, and bladder neck expresses high densities of alpha-1A adrenergic receptors that maintain dynamic tone. Pharmacological blockade with tamsulosin, alfuzosin, or silodosin relaxes this smooth muscle, reducing urethral opening resistance and substantially improving peak urinary flow rates and post-void residual volumes.",
+      "say": "Alpha-1A antagonists relax prostatic smooth muscle to alleviate bladder outflow obstruction in BPH.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug class",
+          "Representative agents",
+          "Primary mechanism",
+          "Time to clinical onset"
+        ],
+        "rows": [
+          [
+            "Alpha-1A antagonists",
+            "Tamsulosin, silodosin",
+            "Relaxes prostatic smooth muscle",
+            "Rapid (48 to 72 hours)"
+          ],
+          [
+            "5-Alpha reductase inhibitors",
+            "Finasteride, dutasteride",
+            "Inhibits DHT; shrinks prostate volume",
+            "Delayed (3 to 6 months)"
+          ],
+          [
+            "Phosphodiesterase-5 inhibitors",
+            "Tadalafil",
+            "Elevates cGMP; relaxes bladder neck",
+            "Intermediate (1 to 2 weeks)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A catecholamine-secreting neuroendocrine neoplasm derived from adrenal chromaffin tissue is **pheochromocytoma**. Tumors autonomously secrete massive concentrations of norepinephrine and epinephrine, triggering severe paroxysmal hypertension, throbbing cephalalgia, profuse sweating, and palpitations. Preoperative medical preparation requires irreversible alpha-adrenergic blockade for ten to fourteen days using phenoxybenzamine to restore contracted plasma volume and abolish dangerous hypertensive crises during surgical tumor manipulation.",
+      "say": "Pheochromocytoma tumors secrete excess catecholamines, requiring preoperative phenoxybenzamine to expand plasma volume.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pheochromocytoma-fig1.webp",
+        "alt": "Pheochromocytoma pathology and catecholamine synthesis",
+        "caption": "Adrenal medullary chromaffin neoplasm driving pathological catecholamine synthesis and paroxysmal hypertension."
+      }
+    },
+    {
+      "tx": "Permanent non-surmountable antagonism of vascular alpha-adrenergic receptors is defined as **irreversible alpha blockade**. Phenoxybenzamine forms a reactive ethyleniminium carbocation that alkylates receptor cysteine residues, producing an insurmountable chemical bond that cannot be displaced even by extreme tumor catecholamine surges. Because new functional receptor synthesis requires days, patients are effectively shielded against massive hypertensive crisis spikes during laparoscopic adrenal handling.",
+      "say": "Irreversible alpha blockade by phenoxybenzamine prevents insurmountable blood pressure spikes during tumor handling.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Blockade feature",
+          "Phenoxybenzamine (Irreversible)",
+          "Phentolamine (Competitive)"
+        ],
+        "rows": [
+          [
+            "Receptor kinetics",
+            "Non-competitive covalent alkylation",
+            "Competitive equilibrium binding"
+          ],
+          [
+            "High catecholamine surge",
+            "Cannot overcome blockade (protective)",
+            "Displaces antagonist (hypertensive spike)"
+          ],
+          [
+            "Duration of action",
+            "3 to 4 days (requires receptor synthesis)",
+            "20 to 60 minutes"
+          ],
+          [
+            "Clinical application",
+            "Preoperative pheochromocytoma preparation",
+            "Acute intraoperative surge control"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Surgical mobilization of cataractous lenses in patients with current or prior uroselective alpha-1A blocker exposure is complicated by **floppy iris syndrome**. The classical triad features a flaccid iris stroma that undulates billowingly in response to normal intraocular irrigation currents, progressive intraoperative pupillary constriction refractory to mydriatics, and strong propensity for iris tissue to prolapse toward clear corneal incision ports.",
+      "say": "Floppy iris syndrome involves billowing iris stroma, miosis, and iris prolapse during cataract surgery.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "med",
+            "label": "Tamsulosin or silodosin exposure for BPH"
+          },
+          {
+            "id": "dil",
+            "label": "Atrophy and chronic flaccidity of iris dilator muscle"
+          },
+          {
+            "id": "surg",
+            "label": "Cataract phacoemulsification initiated"
+          },
+          {
+            "id": "ifis",
+            "label": "Iris billowing, progressive miosis, and prolapse through incisions"
+          }
+        ],
+        "edges": [
+          [
+            "med",
+            "dil"
+          ],
+          [
+            "dil",
+            "surg"
+          ],
+          [
+            "surg",
+            "ifis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Establishing cardiovascular safety endpoints prior to adrenalectomy requires strict fulfillment of the **Roizen criteria for pheochromocytoma**. Blood pressure must consistently remain under 160/90 mm Hg for at least forty-eight hours; orthostatic hypotension should be present but standing systolic pressure must not fall below 80 mm Hg; the electrocardiogram must be free of ST-T changes for two weeks; and premature ventricular contractions must occur less than once every five minutes.",
+      "say": "The Roizen criteria verify adequate preoperative alpha blockade and hemodynamic readiness before pheochromocytoma surgery.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Roizen criterion",
+          "Hemodynamic standard",
+          "Clinical significance"
+        ],
+        "rows": [
+          [
+            "Blood pressure control",
+            "Seated BP < 160/90 mmHg for 48 hours",
+            "Confirms adequate peripheral arteriolar dilation"
+          ],
+          [
+            "Orthostatic balance",
+            "Standing systolic BP > 80 mmHg",
+            "Indicates sufficient intravascular volume restoration"
+          ],
+          [
+            "Electrocardiographic stability",
+            "Absence of ST-T wave changes for 2 weeks",
+            "Excludes active catecholamine cardiomyopathy"
+          ],
+          [
+            "Arrhythmia suppression",
+            "Fewer than 1 ventricular premature beat every 5 min",
+            "Demonstrates adequate beta-adrenergic stabilization"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Managing acute intraoperative hypertensive emergencies during surgical manipulation of pheochromocytoma utilizes intravenous **clevidipine and sodium nitroprusside**. If catecholamine release escapes pharmacological control despite preoperative alpha-blocker preparation, short-acting titratable vasodilators immediately reduce systemic vascular resistance. Nitroprusside directly generates nitric oxide to relax resistance vessels, while clevidipine blocks L-type calcium channels, both providing minute-to-minute arterial pressure control.",
+      "say": "Nitroprusside and clevidipine provide rapid minute-to-minute control of intraoperative blood pressure spikes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sodium nitroprusside",
+          "points": [
+            "Direct nitric oxide donor",
+            "Dilates both arterioles and capacitance venules",
+            "Ultra-short duration of action (1 to 2 minutes)",
+            "Risk of thiocyanate and cyanide toxicity"
+          ]
+        },
+        "right": {
+          "title": "Clevidipine",
+          "points": [
+            "Third-generation dihydropyridine calcium channel blocker",
+            "Selective arteriolar vasodilation without venous pooling",
+            "Hydrolyzed rapidly by blood and tissue esterases",
+            "Ultra-short half-life of approximately one minute"
+          ]
+        }
+      }
+    }
+  ]
+}

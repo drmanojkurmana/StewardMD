@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "mic-tuberculosis",
+  "subject": "microbiology",
+  "title": "Mycobacterium tuberculosis: Acid-Fastness, Cord Factor, LJ, MGIT and CBNAAT",
+  "minutes": 7,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Mycobacterium tuberculosis** is a slow growing aerobic **acid fast bacillus** whose waxy cell envelope is rich in mycolic acids. It resists decolorisation in the **Ziehl Neelsen stain**, grows as rough buff colonies on **Lowenstein Jensen medium**, and spreads by airborne droplet nuclei. Its long generation time explains slow cultures, prolonged treatment and the risk of resistance when therapy is interrupted.",
+      "say": "The waxy wall makes it acid fast, slow growing and difficult to kill once established.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pulmonary-tb-fig1.webp",
+        "alt": "Pulmonary tuberculosis lesions and histology",
+        "caption": "Pulmonary tuberculosis with cavitation and granulomatous pathology."
+      }
+    },
+    {
+      "tx": "**Cord factor** is trehalose dimycolate in the mycobacterial surface. It promotes serpentine cording in liquid culture and contributes to granuloma formation and macrophage dysfunction. Virulent strains tend to form cords, although cording alone is not a complete laboratory definition of tuberculosis. The lipid rich envelope also includes lipoarabinomannan, phthiocerol dimycocerosates and mycolic acids, all contributing to persistence and immune modulation.",
+      "say": "Cord factor links visible cording with virulence, but laboratory confirmation uses several tests together.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cell envelope",
+          "points": [
+            "Mycolic acids cause acid fastness",
+            "Cord factor promotes cording",
+            "Lipids resist drying and disinfectants",
+            "Slow growth delays culture"
+          ]
+        },
+        "right": {
+          "title": "Clinical consequences",
+          "points": [
+            "Survives inside macrophages",
+            "Granulomas contain but may not eradicate",
+            "Cavitation increases transmission",
+            "Months of combination therapy are needed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sputum **Ziehl Neelsen microscopy** uses carbol fuchsin, heat or detergent penetration, acid alcohol decolorisation and a counterstain so mycobacteria remain red against a blue background. Fluorescence microscopy increases screening throughput. Smear grading estimates bacillary load and infectiousness, yet a negative smear never excludes tuberculosis because many specimens fall below microscopy's detection threshold.",
+      "say": "Smear positivity grades infectiousness, while smear negativity still leaves culture and molecular tests essential.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ziehl Neelsen features",
+          "points": [
+            "Carbol fuchsin penetrates waxy wall",
+            "Acid alcohol cannot decolorise mycobacteria",
+            "Red bacilli on blue background",
+            "Requires roughly 5,000 to 10,000 bacilli per millilitre"
+          ]
+        },
+        "right": {
+          "title": "Interpretation",
+          "points": [
+            "Higher grade means greater load and infectivity",
+            "Dead bacilli may still stain after treatment",
+            "Nontuberculous mycobacteria also stain",
+            "Culture or molecular identification speciates"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Lowenstein Jensen medium** is an egg based selective solid medium containing malachite green to suppress contaminants. Mycobacterium tuberculosis produces rough, tough and buff colonies after several weeks. Specimens from nonsterile sites require decontamination before inoculation, a processing step that can also reduce mycobacterial viability if exposure is excessive. Solid culture remains valuable for colony recognition and phenotypic drug susceptibility.",
+      "say": "LJ medium trades speed for a characteristic colony and a viable isolate for susceptibility testing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "collect",
+            "label": "Collect good sputum"
+          },
+          {
+            "id": "decontam",
+            "label": "Decontaminate and concentrate"
+          },
+          {
+            "id": "inoculate",
+            "label": "Inoculate LJ and liquid media"
+          },
+          {
+            "id": "identify",
+            "label": "Identify growth and test susceptibility"
+          }
+        ],
+        "edges": [
+          [
+            "collect",
+            "decontam"
+          ],
+          [
+            "decontam",
+            "inoculate"
+          ],
+          [
+            "inoculate",
+            "identify"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**MGIT** is mycobacteria growth indicator tube liquid culture. An oxygen sensitive fluorescent sensor at the tube base fluoresces as organisms consume oxygen, allowing an automated instrument to flag growth faster than visible colonies on LJ. Positive tubes still require acid fast confirmation, species identification and contamination checks. Liquid media shorten time to detection and increase yield, especially in smear negative and extrapulmonary specimens.",
+      "say": "MGIT uses oxygen consumption to detect growth earlier than colonies appear on solid medium.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Advantages",
+          "points": [
+            "Faster detection than LJ",
+            "Higher sensitivity in paucibacillary disease",
+            "Continuous automated monitoring",
+            "Growth can proceed to molecular and drug tests"
+          ]
+        },
+        "right": {
+          "title": "Limitations",
+          "points": [
+            "Contamination can outgrow mycobacteria",
+            "Positive signal is not species identification",
+            "Requires confirmation by smear and antigen or molecular test",
+            "More expensive and equipment dependent than LJ"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**CBNAAT GeneXpert** amplifies Mycobacterium tuberculosis DNA and probes the rifampicin resistance determining region of rpoB. It gives a rapid result from sputum and selected extrapulmonary specimens and simultaneously reports rifampicin resistance as an important marker that usually prompts expanded resistance testing and a multidrug resistant regimen pathway. Sensitivity falls in very paucibacillary samples, and detected DNA may come from nonviable organisms after prior therapy.",
+      "say": "GeneXpert rapidly joins species detection and rifampicin resistance screening in one cartridge.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "What it detects",
+          "points": [
+            "M tuberculosis complex DNA",
+            "rpoB mutations linked to rifampicin resistance",
+            "Result within about two hours",
+            "Useful in smear negative and HIV associated disease"
+          ]
+        },
+        "right": {
+          "title": "What still matters",
+          "points": [
+            "Very low or trace results need clinical correlation",
+            "Culture obtains isolates for full susceptibility",
+            "Other resistance genes need LPA or sequencing",
+            "A negative result does not exclude extrapulmonary tuberculosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Primary infection usually produces a subpleural Ghon focus with draining nodes, together called the **Ghon complex**. Most infections become latent, contained by T cell mediated immunity and granulomas. Post primary disease often affects lung apices where oxygen tension and reduced lymphatic clearance favour bacillary multiplication and cavitation. Reactivation risk rises with HIV, anti TNF therapy, silicosis, diabetes and undernutrition.",
+      "say": "Latent containment depends on cellular immunity, and apical reactivation creates the infectious cavitary lesion.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/disseminated-tb-fig1.webp",
+        "alt": "Disseminated miliary tuberculosis pathogenesis and features",
+        "caption": "Disseminated tuberculosis showing haematogenous millet seed spread."
+      }
+    },
+    {
+      "tx": "A practical diagnostic pathway combines **clinical syndrome, imaging, smear, CBNAAT and culture**, with at least one specimen obtained before treatment whenever this does not dangerously delay therapy. Induced sputum, gastric aspirate, bronchoscopy or site specific sampling can help when expectorated sputum is unavailable. The laboratory result must always be reconciled with specimen quality, prior treatment and competing diagnoses such as malignancy, nontuberculous mycobacteria or fungal disease.",
+      "say": "No single tuberculosis test is sufficient; specimen quality and clinical probability govern interpretation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "suspect",
+            "label": "Compatible cough, fever, imaging"
+          },
+          {
+            "id": "rapid",
+            "label": "Smear and CBNAAT"
+          },
+          {
+            "id": "culture",
+            "label": "MGIT and LJ culture"
+          },
+          {
+            "id": "resistance",
+            "label": "LPA, phenotypic DST or sequencing"
+          }
+        ],
+        "edges": [
+          [
+            "suspect",
+            "rapid"
+          ],
+          [
+            "rapid",
+            "culture"
+          ],
+          [
+            "culture",
+            "resistance"
+          ]
+        ]
+      }
+    }
+  ]
+}

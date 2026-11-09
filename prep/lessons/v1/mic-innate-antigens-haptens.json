@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-innate-antigens",
+  "subject": "microbiology",
+  "title": "Antigens, Haptens, Superantigens and Lymphocyte Populations",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A **complete antigen** both provokes and reacts with immune products (immunogenicity plus reactivity), usually a foreign protein above 10 kilodaltons, while a **hapten** (penicillin metabolites, urushiol, nickel) reacts but cannot provoke until conjugated to a carrier protein, the Landsteiner principle behind contact dermatitis and drug allergy. Size, foreignness, degradability and host genetics grade immunogenicity.",
+      "say": "Haptens are half antigens until a carrier protein lends them a stage.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Immunogenicity factors",
+          "points": [
+            "Foreignness greatest predictor",
+            "Size and complexity (proteins strongest)",
+            " degradability for processing",
+            "Route, dose and adjuvant context"
+          ]
+        },
+        "right": {
+          "title": "Hapten stories",
+          "points": [
+            "Penicillin haptenates proteins: allergy",
+            "Urushiol (poison ivy) contact dermatitis",
+            "Nickel and latex chemistries",
+            "Hapten carrier used deliberately in conjugate vaccines"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Superantigens** (staphylococcal TSST 1 and enterotoxins, streptococcal toxins) crosslink MHC class II to T cell receptor V beta regions outside the peptide groove, activating whole percent of T cells (versus 0.01 percent conventionally) into cytokine storm and toxic shock. Their polyclonal violence bypasses specific processing, which is why shock arrives faster than adaptive logic allows.",
+      "say": "Superantigens skip the peptide queue and activate T cells by the percent, not the clone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Conventional antigen",
+          "points": [
+            "Processed peptide in MHC groove",
+            "Activates rare specific clones",
+            "Days to expand",
+            "Memory results"
+          ]
+        },
+        "right": {
+          "title": "Superantigen",
+          "points": [
+            "Binds MHC II and TCR V beta outside groove",
+            "Activates 5 to 20 percent of T cells",
+            "Cytokine storm within hours",
+            "Toxic shock syndromes clinical face"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**T cells** mature in the thymus under CD grammar: CD4 helpers reading MHC class II, CD8 cytotoxic reading class I, receptors rearranged and selected (positive and negative selection deleting self reactive), exiting to lymphoid organs where dendritic cells present antigen. CD3 is their universal badge and the target of muromonab from the pharmacology lessons.",
+      "say": "CD4 reads class II, CD8 reads class I, CD3 badges them all: thymic grammar in one line.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "T cell subsets",
+          "points": [
+            "CD4 helper: orchestration and cytokines",
+            "CD8 cytotoxic: perforin and granzyme killing",
+            "Regulatory T: FoxP3 tolerance police",
+            "Memory T: central and effector pools"
+          ]
+        },
+        "right": {
+          "title": "Thymic education",
+          "points": [
+            "Positive selection: MHC recognition kept",
+            "Negative selection: strong self reactors deleted",
+            "Receptor gene rearrangement generates diversity",
+            "Involution with age shrinks output"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**B cells** carry surface immunoglobulin receptors, develop in bone marrow (bursa equivalent), and on activation become plasma cells secreting antibody or memory cells awaiting recall, presenting antigen to T cells as the partnership's other half. Their developmental arrest points name the primary immunodeficiencies of the later module.",
+      "say": "B cells turn receptor into secretion: plasma cells are antibody factories with one specificity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "B cell journey",
+          "points": [
+            "Marrow development and self tolerance checks",
+            "Follicular activation with T help",
+            "Germinal centre affinity maturation",
+            "Plasma and memory outputs"
+          ]
+        },
+        "right": {
+          "title": "B cell outputs",
+          "points": [
+            "Antibodies of five classes (next module)",
+            "Antigen presentation to helper T cells",
+            "Cytokines and regulatory subsets",
+            "Long lived plasma cells in marrow niches"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Epitopes** (determinants) are the molecular addresses antibodies and T receptors actually read: B cell epitopes often conformational surface shapes, T cell epitopes linear peptides in MHC grooves, immunodominant ones driving responses that vaccines copy and pathogens vary (antigenic variation at epitope level). Cross reactivity is epitope sharing read by one receptor.",
+      "say": "Immunity reads epitopes, not organisms; variation edits the address, not the building.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Epitope types",
+          "points": [
+            "Linear (sequential) epitopes",
+            "Conformational (assembled) epitopes",
+            "T cell epitopes: peptide plus MHC",
+            "Immunodominance hierarchies"
+          ]
+        },
+        "right": {
+          "title": "Epitope consequences",
+          "points": [
+            "Cross reactions between microbes and self (molecular mimicry)",
+            "Epitope masking by capsule and glycosylation",
+            "Vaccine design targets protective epitopes",
+            "Diagnostic antigens standardised epitopes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Thymus dependent versus independent antigens** split B cell behaviour: protein antigens need T help (class switching, memory, germinal centres), while repetitive polysaccharides crosslink B receptors directly (TI 2) producing IgM without memory or infant response, the deficit conjugate vaccines repair by marrying polysaccharide to carrier protein (hapten carrier logic as public health).",
+      "say": "Pure polysaccharide cannot recruit T help or infant memory; conjugation lends both.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "poly", "label": "Polysaccharide alone: IgM, no memory, infant poor" },
+          { "id": "conj", "label": "Conjugated to carrier protein" },
+          { "id": "help", "label": "T help recruited, germinal centres form" },
+          { "id": "memory", "label": "IgG, memory and infant protection" }
+        ],
+        "edges": [["poly", "conj"], ["conj", "help"], ["help", "memory"]]
+      }
+    },
+    {
+      "tx": "**Mitogens and polyclonal activators** (concanavalin A and PHA for T cells, pokeweed and LPS traditions) bypass receptors' specificity to divide lymphocytes wholesale, laboratory tools for proliferation assays and the conceptual cousins of superantigens. Adjuvants borrow a whisper of this polyclonal alarm without its storm.",
+      "say": "Mitogens divide lymphocytes without asking specificity; laboratories hire what toxins abuse.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mitogen bench",
+          "points": [
+            "PHA and concanavalin A: T cell division",
+            "Pokeweed: T dependent B division",
+            "LPS: murine B cells (human less)",
+            "Proliferation assays test cell mediated immunity"
+          ]
+        },
+        "right": {
+          "title": "Clinical echoes",
+          "points": [
+            "Superantigen storms as pathological mitogenesis",
+            "Adjuvant innate alarms localised",
+            "Lymphocyte transformation in immunodeficiency workups",
+            "Chronic inflammation polyclonal activation (hypergammaglobulinaemia)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Antigen presentation cells** rank by profession: dendritic cells (naive T activation specialists), macrophages (effector activation and innate instruction), B cells (specific antigen concentration for helpers), all displaying MHC class II to CD4 cells while every nucleated cell displays class I to CD8. The dendritic cell's migration from tissue to node is adaptive immunity's starting gun.",
+      "say": "Dendritic cells carry tissue news to the node and start the adaptive clock.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Professional presenters",
+          "points": [
+            "Dendritic: naive T activation, migration",
+            "Macrophage: phagocytosis plus presentation",
+            "B cell: antigen specific concentration",
+            "Follicular dendritic: antigen display to B cells (different lineage)"
+          ]
+        },
+        "right": {
+          "title": "Presentation rules",
+          "points": [
+            "Class II exogenous pathway to CD4",
+            "Class I endogenous pathway to CD8",
+            "Cross presentation by dendritic subsets",
+            "Costimulation decides activation versus tolerance"
+          ]
+        }
+      }
+    }
+  ]
+}

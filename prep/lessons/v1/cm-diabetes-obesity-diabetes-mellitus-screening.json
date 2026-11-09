@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "id": "cm-diabetes-obesity-diabetes-mellitus-screening",
+ "subject": "community-medicine",
+ "module": "cm-diabetes-obesity",
+ "title": "Diabetes Screening: OGTT, Glycated Hemoglobin and Asian Cut-Offs",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Type 2 diabetes epidemic and insulin resistance",
+   "tx": "The massive burden of **type 2 diabetes** in India is propelled by progressive pancreatic beta-cell secretory exhaustion superimposed on peripheral insulin resistance in skeletal muscle and liver. Genetic predisposition interacts with rapid urbanization, sedentary white-collar occupations, motorized transport, and shifts toward calorie-dense refined carbohydrates and saturated fats, producing diabetes onset at least a decade earlier than in Western populations.",
+   "say": "Diabetes strikes Indians ten years earlier than Western cohorts due to genetic traits, rapid urban desk lifestyles and diets rich in refined sugars and fats.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diabetes-mellitus-fig1.webp",
+    "alt": "Pathophysiology diagram of type 2 diabetes mellitus showing insulin resistance, beta-cell secretory failure and hepatic gluconeogenesis",
+    "caption": "Diabetes mellitus: Insulin resistance in peripheral tissues, hepatic glucose overproduction and pancreatic beta-cell exhaustion. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Screening strategy: high-risk versus population",
+   "tx": "Public health programs employ targeted **diabetes mellitus screening** for all adults aged thirty years and older at Health and Wellness Centres, as well as individuals presenting with excess weight, strong family history, gestational diabetes or hypertension. Testing begins with fasting venous plasma glucose or an opportunistic random capillary blood glucose; values of one hundred and forty milligrams per decilitre or higher on random testing mandate confirmatory testing.",
+   "say": "Screening targets adults aged thirty and above. A random capillary glucose of one hundred and forty or higher requires confirmatory venous testing to establish diabetes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Adults >= 30 yrs or high risk screened"},
+     {"id": "b", "label": "Random capillary glucose >= 140 mg/dl"},
+     {"id": "c", "label": "Fasting plasma glucose or 75g OGTT confirmation"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "The standard oral glucose tolerance test",
+   "tx": "The definitive laboratory gold standard is the **oral glucose tolerance test**, administered following an overnight fast of eight to twelve hours with at least three days of unrestricted carbohydrate intake. The patient drinks seventy-five grams of anhydrous glucose dissolved in two hundred and fifty to three hundred millilitres of water over five minutes; venous plasma glucose is drawn at fasting and two hours post-load.",
+   "say": "An oral glucose tolerance test drinks seventy-five grams of glucose in water after an overnight fast. Blood glucose is measured at baseline and two hours later.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Glycaemic category", "Fasting plasma glucose (mg/dl)", "2-hour post-glucose load (mg/dl)"],
+    "rows": [
+     ["Normal glucose tolerance", "Less than 100 mg/dl", "Less than 140 mg/dl"],
+     ["Impaired fasting glucose (IFG)", "100 to 125 mg/dl", "Less than 140 mg/dl"],
+     ["Impaired glucose tolerance (IGT)", "Less than 126 mg/dl", "140 to 199 mg/dl"],
+     ["Diabetes mellitus", "126 mg/dl or higher", "200 mg/dl or higher"]
+    ]
+   }
+  },
+  {
+   "title": "Glycated hemoglobin (HbA1c) diagnostic thresholds",
+   "tx": "Reflecting average ambient glycaemia over the preceding eighty to one hundred and twenty days, **glycated hemoglobin testing** serves as an indispensable tool for diagnosis and long-term therapeutic monitoring. An HbA1c value of six point five percent or higher on an NGSP-certified assay confirms diabetes, values between five point seven and six point four percent define pre-diabetes, and values below five point seven percent reflect normoglycaemia.",
+   "say": "An HbA1c of six point five percent or higher confirms diabetes without needing a fasting sample. Values between five point seven and six point four identify pre-diabetes.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Diagnostic threshold", "HbA1c percentage range", "Clinical interpretation"],
+    "rows": [
+     ["Normal", "Below 5.7 percent", "Optimal long-term glucose homeostasis"],
+     ["Pre-diabetes", "5.7 to 6.4 percent", "High risk of microvascular and macrovascular disease"],
+     ["Diabetes mellitus", "6.5 percent or higher", "Diagnostic confirmation; initiate lifestyle and drugs"],
+     ["Treatment target", "Below 7.0 percent", "Standard target to prevent microvascular injury"]
+    ]
+   }
+  },
+  {
+   "title": "Asian body mass index cut-offs",
+   "tx": "Because South Asians develop cardiovascular complications and insulin resistance at substantially lower adiposity levels than Caucasians, the World Health Organization established specific **Asian BMI cut-offs**. For Indian adults, normal body mass index spans eighteen point five to twenty-two point nine kilograms per square metre, overweight is defined between twenty-three point zero and twenty-four point nine, and obesity begins at twenty-five point zero or higher.",
+   "say": "For Indians, overweight begins at twenty-three kilograms per square metre, and obesity begins at twenty-five. These lowered thresholds reflect elevated body fat at lighter weights.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "International WHO cut-offs",
+     "points": ["Normal: 18.5 to 24.9 kg/m2", "Overweight: 25.0 to 29.9 kg/m2", "Obesity: 30.0 kg/m2 or higher"]
+    },
+    "right": {
+     "title": "Revised Asian Indian cut-offs",
+     "points": ["Normal: 18.5 to 22.9 kg/m2", "Overweight: 23.0 to 24.9 kg/m2", "Obesity: 25.0 kg/m2 or higher"]
+    }
+   }
+  },
+  {
+   "title": "Metabolic syndrome diagnostic components",
+   "tx": "The clustering of atherogenic metabolic derangements constitutes **metabolic syndrome**, driven fundamentally by visceral adiposity and peripheral insulin resistance. According to modified NCEP ATP III criteria, diagnosis requires any three of five features: central abdominal obesity, elevated triglycerides of one hundred and fifty milligrams per decilitre or higher, reduced HDL cholesterol, elevated blood pressure of one hundred and thirty over eighty-five or higher, and elevated fasting glucose.",
+   "say": "Metabolic syndrome is diagnosed when a patient has any three of five traits: large waist size, high triglycerides, low HDL, elevated blood pressure, or high fasting blood sugar.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Metabolic criterion", "Cut-off threshold in Asian Indians", "Underlying pathophysiology"],
+    "rows": [
+     ["Abdominal obesity", "Waist >= 90 cm (men), >= 80 cm (women)", "Visceral intra-abdominal fat deposition"],
+     ["High triglycerides", ">= 150 mg/dl (or on drug therapy)", "Excessive hepatic VLDL synthesis"],
+     ["Low HDL cholesterol", "< 40 mg/dl (men), < 50 mg/dl (women)", "Accelerated HDL clearance by hepatic lipase"],
+     ["High blood pressure", ">= 130/85 mmHg (or on drug therapy)", "Endothelial dysfunction and arterial stiffness"],
+     ["Elevated fasting glucose", ">= 100 mg/dl (or on diabetes drugs)", "Impaired suppression of hepatic gluconeogenesis"]
+    ]
+   }
+  },
+  {
+   "title": "Pathophysiological cascades of visceral adiposity",
+   "tx": "Enlarged visceral adipocytes secrete high levels of free fatty acids directly into the portal circulation, alongside inflammatory cytokines such as tumour necrosis factor-alpha and interleukin-six, downregulating **metabolic syndrome pathophysiology**. This flood of portal lipids impairs hepatic insulin clearance, stimulates excessive triglyceride-rich VLDL production, drives arterial endothelial dysfunction, and accelerates microalbuminuria and premature coronary atherosclerosis.",
+   "say": "Visceral belly fat dumps free fatty acids and inflammatory chemicals directly into the liver. This impairs insulin action, raises harmful fats and damages arterial linings.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/the-metabolic-syndrome-fig1.webp",
+    "alt": "Pathophysiology diagram showing visceral adiposity, portal free fatty acid influx, insulin resistance and metabolic syndrome",
+    "caption": "Metabolic syndrome: Visceral adiposity, macrophage infiltration, insulin resistance and accelerated vascular atherosclerosis. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Lifestyle interventions and dietary modification",
+   "tx": "The foundation of diabetes and metabolic syndrome prevention is intensive **therapeutic lifestyle modification**, targeting a sustained five to seven percent reduction in initial body weight. Guidelines prescribe at least one hundred and fifty minutes of moderate-intensity aerobic physical activity per week, such as brisk walking, accompanied by reducing refined carbohydrates, eliminating sugary beverages, and substituting saturated fats with monounsaturated oils.",
+   "say": "Losing five to seven percent of body weight and brisk walking for thirty minutes five days a week halves the risk of pre-diabetes progressing to full diabetes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "5 to 7 percent body weight loss target"},
+     {"id": "b", "label": "150 minutes/week moderate aerobic exercise"},
+     {"id": "c", "label": "Replace refined grains with complex whole pulses"},
+     {"id": "d", "label": "58% reduction in diabetes progression risk"}
+    ],
+    "edges": [["a", "d"], ["b", "d"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Community-based screening under NP-NCD",
+   "tx": "Public healthcare centers operationalise early detection through **population-based diabetes screening**, where Community Health Officers and auxiliary nurse midwives screen all citizens aged thirty and above at village sub-centres. Confirmed diabetic individuals are provided with free metformin, lifestyle counselling and regular blood pressure monitoring, while those exhibiting diabetic retinopathy or peripheral neuropathy are linked to district hospitals.",
+   "say": "Village sub-centres test every adult aged thirty and above for diabetes. Patients receive free metformin tablets, diet counselling and regular nerve and eye exams.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Community screening at Ayushman Arogya Mandir"},
+     {"id": "b", "label": "Glucometer testing and CBAC risk profiling"},
+     {"id": "c", "label": "Free metformin initiation and diet counselling"},
+     {"id": "d", "label": "Annual screening for retinopathy and foot ulcers"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

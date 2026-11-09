@@ -1,0 +1,286 @@
+{
+ "v": 1,
+ "id": "der-structure-lesions-epidermis-layers",
+ "subject": "dermatology",
+ "module": "der-structure-lesions",
+ "title": "Epidermal Layers and Architecture",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Epidermis** forms the stratified squamous, keratinized outer protective envelope of the human body, continuously renewing itself through orderly differentiation of epidermal keratinocytes. Averaging 0.1 millimetres in thickness over most body sites, it reaches up to 1.5 millimetres on friction-bearing surfaces like palms and soles. The tissue is completely avascular, relying entirely on passive diffusion of nutrients and oxygen from capillaries in the underlying papillary dermis across a continuous, semi-permeable basement membrane zone.",
+   "say": "The epidermis is a dynamic, self-renewing stratified squamous epithelium that lacks blood vessels entirely. It relies on passive nutrient diffusion from the vascular dermal papillae beneath the basement membrane.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hailey-hailey-disease-fig1.webp",
+    "alt": "Histological diagram of epidermal stratification and intercellular desmosomes.",
+    "caption": "Epidermal stratification, spinous layer keratinocytes, and intercellular desmosome architecture. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Stratum basale** constitutes the single germinative monolayer of columnar or cuboidal keratinocytes anchored directly to the basement membrane through specialized hemidesmosomes and type XVII collagen. These proliferative stem cells express keratin 5 and keratin 14 intermediate filaments. Interspersed among basal keratinocytes are dendrite-bearing melanocytes, which synthesize melanin pigments and transfer melanosomes to approximately thirty-six neighboring keratinocytes, as well as neuroendocrine Merkel cells that function as slow-adapting mechanoreceptors.",
+   "say": "The basal stratum is a single proliferative layer producing keratins 5 and 14. Melanocytes reside here, transferring pigment to thirty-six keratinocytes, alongside tactile Merkel cells that detect mechanical touch.",
+   "vis": {
+    "kind": "flow",
+    "title": "Epidermal Stratification from Base to Surface",
+    "nodes": [
+     {
+      "id": "l1",
+      "label": "Stratum Basale",
+      "sub": "Mitotic stem cells, keratins 5 and 14, melanocytes"
+     },
+     {
+      "id": "l2",
+      "label": "Stratum Spinosum",
+      "sub": "Desmosomal spines, keratins 1 and 10, Langerhans cells"
+     },
+     {
+      "id": "l3",
+      "label": "Stratum Granulosum",
+      "sub": "Keratohyalin granules, profilaggrin, Odland bodies"
+     },
+     {
+      "id": "l4",
+      "label": "Stratum Corneum",
+      "sub": "Enucleated corneocytes embedded in lipid matrix"
+     }
+    ],
+    "edges": [
+     [
+      "l1",
+      "l2",
+      "Upward migration"
+     ],
+     [
+      "l2",
+      "l3",
+      "Lipid extrusion"
+     ],
+     [
+      "l3",
+      "l4",
+      "Terminal cornification"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stratum spinosum** consists of five to ten layers of polyhedral keratinocytes that synthesize differentiation-specific keratins 1 and 10. In histological preparations, cellular dehydration creates microscopic spiny intercellular bridges, which represent intact desmosomal plaques anchoring adjacent cells. Scattered within this suprabasal layer are bone marrow-derived dendritic Langerhans cells containing tennis-racket-shaped Birbeck granules, which capture epidermal protein antigens and migrate to regional lymph nodes to prime naive helper T lymphocytes.",
+   "say": "The spinous stratum contains plump polygonal keratinocytes rich in desmosomes. Antigen-presenting Langerhans cells containing Birbeck granules patrol this layer, capturing antigens and traveling to regional lymph nodes.",
+   "vis": {
+    "kind": "table",
+    "title": "Non-Keratinocyte Cellular Residents of the Epidermis",
+    "cols": [
+     "Cell Type",
+     "Primary Epidermal Layer",
+     "Key Function and Hallmark Marker"
+    ],
+    "rows": [
+     [
+      "Melanocyte",
+      "Stratum basale (1 in 10 cells)",
+      "Melanin pigment synthesis, S100 and Melan-A"
+     ],
+     [
+      "Langerhans cell",
+      "Mid stratum spinosum",
+      "Antigen presentation, CD1a and Birbeck granules"
+     ],
+     [
+      "Merkel cell",
+      "Stratum basale",
+      "Slow-adapting mechanoreception, cytokeratin 20"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stratum granulosum** comprises two to four layers of flattened, diamond-shaped keratinocytes containing dense, deeply basophilic keratohyalin granules. These granules contain high concentrations of profilaggrin and loricrin, essential for assembling the tough cornified cell envelope. Simultaneously, lamellar bodies (Odland bodies) within these cells synthesize ceramides, cholesterol, and free fatty acids, extruding them into the extracellular space to form the primary impermeable lipid seal that prevents transepidermal water loss.",
+   "say": "The granular layer produces basophilic keratohyalin granules rich in profilaggrin and loricrin. Membrane-coating Odland bodies release lipid mixtures into intercellular spaces, establishing the skin vital waterproof barrier.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Keratohyalin Granules",
+     "points": [
+      "Dense, deeply basophilic structures",
+      "Abundant profilaggrin and loricrin",
+      "Cross-links keratin into rigid matrix",
+      "Absent in parakeratotic stratum corneum"
+     ]
+    },
+    "right": {
+     "title": "Lamellar (Odland) Bodies",
+     "points": [
+      "Membrane-bound lipid secretory organelles",
+      "Rich in ceramides, cholesterol, free fatty acids",
+      "Extrudes contents into intercellular spaces",
+      "Creates impermeable water barrier"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Stratum lucidum** is a thin, clear, highly refractile, eosinophilic transitional layer situated immediately superficial to the stratum granulosum. It is present exclusively in the thick, hairless skin of the palms of the hands and the soles of the feet. Cells in this layer are flattened, dead, and have lost their nuclei and cytoplasmic organelles, with their interiors densely packed with eleidin, a semi-fluid protein transformation product of keratohyalin.",
+   "say": "The stratum lucidum is an anucleate, clear band found solely on friction-bearing thick skin like palms and soles. Its cells are packed with eleidin, acting as a flexible buffer beneath the thick palmar stratum corneum.",
+   "vis": {
+    "kind": "table",
+    "title": "Architectural Differences Between Thick and Thin Skin",
+    "cols": [
+     "Histological Feature",
+     "Thick Skin (Palms and Soles)",
+     "Thin Skin (General Body Surface)"
+    ],
+    "rows": [
+     [
+      "Stratum lucidum",
+      "Prominent, continuous clear band",
+      "Completely absent"
+     ],
+     [
+      "Stratum corneum",
+      "Exceedingly thick (hundreds of layers)",
+      "Thin, delicate, basket-weave appearance"
+     ],
+     [
+      "Pilosebaceous units",
+      "Completely absent (no hair or sebum)",
+      "Abundantly present throughout"
+     ],
+     [
+      "Eccrine sweat glands",
+      "Extremely dense distribution",
+      "Variable, moderate distribution"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Stratum corneum** constitutes the final physical barrier of the skin, configured in a classic brick-and-mortar architecture. Anucleate, flattened, polygonal cornified squames (corneocytes) function as the protein bricks, composed of densely aggregated keratin macrofibrils enveloped by an insoluble cross-linked protein shell. The surrounding mortar consists of organized multilamellar lipid sheets containing ceramides, cholesterol, and free fatty acids. This barrier prevents passive desiccation, resists physical shear stresses, and blocks microbial invasion.",
+   "say": "The stratum corneum is built like a brick wall: flattened protein corneocytes are the bricks, while intercellular lipid lamellae act as the mortar. This structure provides our main defense against water loss and environmental microbes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Corneocyte Bricks",
+     "points": [
+      "Flattened dead anucleate squames",
+      "Insoluble cross-linked protein envelope",
+      "Aggregated keratin intermediate filaments",
+      "Rigid resistance to mechanical friction"
+     ]
+    },
+    "right": {
+     "title": "Extracellular Lipid Mortar",
+     "points": [
+      "Fifty percent ceramide content",
+      "Twenty-five percent cholesterol",
+      "Fifteen percent free fatty acids",
+      "Impermeable seal against fluid evaporation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Epidermal transit time** represents the total duration required for a newly divided basal keratinocyte to differentiate, migrate through the spinous and granular strata, cornify, and desquamate from the skin surface. Under normal physiological conditions, transit takes approximately twenty-eight days: fourteen days from basal layer to stratum corneum, and fourteen days within the cornified layer. In hyperproliferative diseases like psoriasis, this transit is accelerated to four days, preventing complete cell maturation.",
+   "say": "A basal keratinocyte normally takes twenty-eight days to migrate upward and shed from the surface: fourteen days through viable layers and fourteen days through the corneum. Psoriasis slashes this time to four days.",
+   "vis": {
+    "kind": "flow",
+    "title": "Keratinocyte Kinetics and Transit Milestones",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Basal Mitosis",
+      "sub": "Stem cell division on basement membrane"
+     },
+     {
+      "id": "t2",
+      "label": "Spinous Differentiation",
+      "sub": "Keratin 1 and 10 synthesis over 14 days"
+     },
+     {
+      "id": "t3",
+      "label": "Cornification",
+      "sub": "Nuclear destruction and lipid extrusion"
+     },
+     {
+      "id": "t4",
+      "label": "Desquamation",
+      "sub": "Corneodesmosome cleavage sheds cell at 28 days"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2",
+      "Suprabasal commitment"
+     ],
+     [
+      "t2",
+      "t3",
+      "Granular maturation"
+     ],
+     [
+      "t3",
+      "t4",
+      "Surface turnover"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Parakeratosis** is the pathological retention of intact pyknotic nuclei within the stratum corneum, signalling severely accelerated epidermal proliferation and defective keratinization. Normally, keratinocyte nuclei and cytoplasmic organelles are enzymatically degraded during the granular-to-corneal transition. In conditions such as psoriasis and subacute eczema, rapid cell transit skips this degradation step, causing parakeratotic scaling accompanied by complete disappearance of the underlying stratum granulosum.",
+   "say": "Parakeratosis is the retention of nuclei in the stratum corneum due to abnormally fast epidermal transit. Because cells reach the surface prematurely, the granular layer vanishes and scales flake off easily.",
+   "vis": {
+    "kind": "table",
+    "title": "Pathological Patterns of Epidermal Reaction",
+    "cols": [
+     "Histological Term",
+     "Microscopic Definition",
+     "Prototypical Clinical Example"
+    ],
+    "rows": [
+     [
+      "Hyperkeratosis",
+      "Thickening of the stratum corneum",
+      "Lichen simplex chronicus, calluses"
+     ],
+     [
+      "Parakeratosis",
+      "Retention of pyknotic nuclei in corneum",
+      "Psoriasis vulgaris, pityriasis rosea"
+     ],
+     [
+      "Acanthosis",
+      "Hyperplasia of the stratum spinosum",
+      "Acanthosis nigricans, chronic eczema"
+     ],
+     [
+      "Spongiosis",
+      "Intercellular edema widening spinous spaces",
+      "Acute contact allergic dermatitis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Stratum lucidum: exclusive anatomical distribution",
+   "b": "Present solely on the thick, hairless skin of the palms and soles."
+  },
+  {
+   "f": "Birbeck granules: diagnostic cell type and shape",
+   "b": "Langerhans dendritic cells; possess a characteristic tennis-racket shape."
+  },
+  {
+   "f": "Parakeratosis: microscopic definition and disease association",
+   "b": "Retention of cell nuclei in the stratum corneum, seen classically in psoriasis."
+  }
+ ],
+ "keys": [
+  "The epidermis consists of basal, spinous, granular, lucidum, and cornified strata",
+  "Stratum basale houses mitotic stem cells, melanocytes, and tactile Merkel cells",
+  "Keratinocyte transit takes 28 days normally, but accelerates to 4 days in psoriasis with parakeratosis"
+ ]
+}

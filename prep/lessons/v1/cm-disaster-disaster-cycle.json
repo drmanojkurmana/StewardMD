@@ -1,0 +1,145 @@
+{
+  "v": 1,
+  "id": "cm-disaster-disaster-cycle",
+  "subject": "community-medicine",
+  "module": "cm-disaster",
+  "title": "Disaster Management: Cycle, Triage, NDMA, and Post Disaster Surveillance",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "The disaster management cycle",
+      "tx": "The **disaster management cycle** organises action into response, rehabilitation, reconstruction, prevention, mitigation, and preparedness, looping continuously rather than ending at relief. A disaster is an event overwhelming local capacity (WHO phrasing), whether sudden (earthquake, flood, chemical leak) or slow (drought, famine). The cycle's lesson for health managers: most lives are saved by preparedness bought years before the sirens.",
+      "say": "Response, recovery, mitigation, preparedness: the cycle never stops. Preparedness purchased early saves the most lives.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "dc1", "label": "Prevention, mitigation, preparedness" },
+          { "id": "dc2", "label": "Response: rescue, triage, relief" },
+          { "id": "dc3", "label": "Rehabilitation and reconstruction, lessons fed back" }
+        ],
+        "edges": [["dc1", "dc2"], ["dc2", "dc3"]]
+      }
+    },
+    {
+      "title": "Mitigation versus preparedness",
+      "tx": "Two pre disaster words divide cleanly in **mitigation and preparedness in disasters**: mitigation reduces the hazard's damage potential permanently (embankments, earthquake resistant codes, land use zoning), while preparedness readies response (mock drills, stockpiles, hospital disaster plans, trained teams). Insurance and early warning systems straddle both. Examination stems describing building codes want mitigation; describing drills want preparedness.",
+      "say": "Mitigation rebuilds the world safer; preparedness rehearses the response. Codes mitigate, drills prepare.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mitigation (reduce damage)",
+          "points": ["Flood embankments and zoning", "Earthquake resistant construction", "Hazard mapping of settlements"]
+        },
+        "right": {
+          "title": "Preparedness (ready response)",
+          "points": ["Mock drills and hospital plans", "Stockpiles and trained teams", "Early warning dissemination"]
+        }
+      }
+    },
+    {
+      "title": "Triage colour coding",
+      "tx": "At a mass casualty scene, **triage colour coding** sorts victims by survival urgency under scarcity: red for immediate (airway, breathing, bleeding threats salvageable now), yellow for delayed (serious but stable hours), green for minimal (walking wounded), and black for deceased or expectant (unsalvageable with available resources). The ethical inversion (treat the salvageable urgent before the moribund) defines disaster medicine against ordinary queue ethics.",
+      "say": "Red now, yellow later, green walking, black expectant. Disaster triage treats salvageable urgency first, not first come.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Tag colour", "Meaning and action"],
+        "rows": [
+          ["Red (immediate)", "Life threat, salvageable, treat first"],
+          ["Yellow (delayed)", "Serious, can wait hours under watch"],
+          ["Green (minimal)", "Walking wounded, self help and minor care"],
+          ["Black (expectant)", "Deceased or unsurvivable with resources at hand"]
+        ]
+      }
+    },
+    {
+      "title": "START triage in sixty seconds",
+      "tx": "**START triage (Simple Triage And Rapid Treatment)** classifies adults in under a minute each: can they walk (green), then breathing (absent after airway opening: black; above thirty: red), perfusion (capillary refill or radial pulse), and mental status (follows commands or not). JumpSTART adapts the algorithm for children, whose respiratory physiology inverts adult priorities. Speed with acceptable accuracy beats precision that arrives after death.",
+      "say": "Walk, breathe, perfuse, obey: START sorts in sixty seconds. Children get the JumpSTART respiratory first variant.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "st1", "label": "Walking wounded tagged green, move aside" },
+          { "id": "st2", "label": "Breathing and perfusion checked in seconds" },
+          { "id": "st3", "label": "Red for salvageable life threats" }
+        ],
+        "edges": [["st1", "st2"], ["st2", "st3"]]
+      }
+    },
+    {
+      "title": "Mass casualty management chain",
+      "tx": "**Mass casualty management** chains scene triage to casualty clearing, graded transport, and hospital surge: incident command assigns roles, hospitals activate disaster plans (recall staff, clear beds, postpone electives), and a single medical control coordinates destinations so the nearest hospital is not drowned while others idle. Communication failure, not clinical skill, is the usual system fracture in after action reviews.",
+      "say": "Command, triage, staged transport, hospital surge. Most disaster failures are communication failures wearing clinical clothes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "mc1", "label": "Incident command and scene triage" },
+          { "id": "mc2", "label": "Casualty clearing and graded transport" },
+          { "id": "mc3", "label": "Hospital surge and definitive care" }
+        ],
+        "edges": [["mc1", "mc2"], ["mc2", "mc3"]]
+      }
+    },
+    {
+      "title": "NDMA and the Disaster Management Act 2005",
+      "tx": "India's **Disaster Management Act 2005** created the National Disaster Management Authority (NDMA, chaired by the Prime Minister), state and district authorities, the National Disaster Response Force, and dedicated funds, shifting policy from relief distribution to prevention, mitigation, and preparedness. The National Disaster Management Plan (2016) aligns agencies and explicitly adopts the Sendai framework priorities for Indian conditions.",
+      "say": "The 2005 Act built NDMA under the Prime Minister and a response force. Policy moved from relief to prevention.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Act 2005 creation", "Role"],
+        "rows": [
+          ["NDMA (PM chaired)", "National policy and guidelines"],
+          ["State and district authorities", "Plans, coordination, local response"],
+          ["NDRF battalions", "Specialised rescue response"],
+          ["Response and mitigation funds", "Financing relief and risk reduction"]
+        ]
+      }
+    },
+    {
+      "title": "Sendai Framework priorities",
+      "tx": "The **Sendai Framework for Disaster Risk Reduction (2015 to 2030)** succeeded the Hyogo framework with four priorities: understand disaster risk, strengthen risk governance, invest in resilience, and enhance preparedness with build back better recovery, against seven global targets including mortality and affected people reduction. Its risk reduction (not just response) philosophy is the sentence examinations reward candidates for reproducing.",
+      "say": "Sendai 2015 to 2030: understand risk, govern it, invest against it, build back better. Risk reduction outranks response.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hyogo era (2005 to 2015)",
+          "points": ["Response capacity emphasis", "National platforms created", "Losses kept rising globally"]
+        },
+        "right": {
+          "title": "Sendai era (2015 to 2030)",
+          "points": ["Risk reduction as the goal", "Seven measurable global targets", "All of society engagement"]
+        }
+      }
+    },
+    {
+      "title": "Post disaster surveillance and epidemics",
+      "tx": "After floods and earthquakes, **post disaster disease surveillance** watches for diarrhoea, acute respiratory infection, leptospirosis, malaria, measles in camps, and wound infections through daily syndromic reporting from relief sites, with safe water, sanitation, and vector control as the true prevention. Contrary to myth, corpses of disaster victims rarely cause epidemics; crowding, water failure, and interrupted immunisation do.",
+      "say": "Watch water, crowding, and camps, not corpses, for post disaster epidemics. Syndromic daily reporting catches the real threats.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Post disaster threat", "Control priority"],
+        "rows": [
+          ["Watery diarrhoea and cholera", "Safe water, sanitation, ORS corners"],
+          ["Leptospirosis after floods", "Wading protection, doxycycline policy, rodent control"],
+          ["Measles in camps", "Rapid immunisation of camp children"],
+          ["Malaria and dengue", "Drainage, nets, larval control"]
+        ]
+      }
+    },
+    {
+      "title": "Man made disasters and NDMA guidelines",
+      "tx": "**Man made disasters** (chemical Bhopal pattern, industrial fires, nuclear and radiological events, transport crashes, stampedes) demand hazard specific plans: chemical antidote stockpiles and decontamination corridors, burn surge capacity, radiation monitoring, and crowd management science. NDMA issues subject guidelines for each hazard family, and district plans must localise them with hospital and industry liaison before the event, never during it.",
+      "say": "Chemical, fire, nuclear, crowd: each man made hazard needs its own rehearsed plan. Bhopal wrote that lesson in 1984.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "mm1", "label": "Map local industrial and crowd hazards" },
+          { "id": "mm2", "label": "Stock antidotes, decon, burn capacity" },
+          { "id": "mm3", "label": "Drill joint response with industries" }
+        ],
+        "edges": [["mm1", "mm2"], ["mm2", "mm3"]]
+      }
+    }
+  ]
+}

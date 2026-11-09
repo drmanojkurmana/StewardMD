@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-respiratory-covid-19",
+ "subject": "community-medicine",
+ "module": "cm-respiratory",
+ "title": "COVID-19: Transmission, Variants and Programme Lessons",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "A coronavirus with a spike key",
+   "tx": "**SARS-CoV-2** is a betacoronavirus whose spike protein binds the ACE2 receptor on airway and other cells, entering by respiratory droplets and aerosols, especially indoors with poor ventilation. Incubation averaged around five days for early strains and shortened with later variants. Asymptomatic and presymptomatic shedding made symptom only screening leak from the start.",
+   "say": "Spike meets ACE2, aerosols accumulate indoors, shedding starts before symptoms. Ventilation and timing, not temperature checks alone, decided who caught it.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/covid19-fig1.webp",
+    "alt": "SARS-CoV-2 virus structure and clinical features of COVID-19",
+    "caption": "SARS-CoV-2 and the clinical pattern of COVID-19. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Variants and immune escape",
+   "tx": "**Variants of concern** emerged through mutation and selection, from Alpha and the severe Delta wave to Omicron lineages with marked antibody escape, milder intrinsic lung disease and very high transmissibility. Each wave re-sorted who was at risk, because prior infection and vaccine immunity held better against severe disease than against infection itself.",
+   "say": "Delta filled intensive care units; Omicron escaped antibodies and infected fast but landed softer per case. Immunity guarded severity longer than infection.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Wave lesson", "Pattern"],
+    "rows": [
+     ["Delta", "Severe disease surge, oxygen crisis"],
+     ["Omicron", "Immune escape, high case counts"],
+     ["Reinfections", "Common as antibodies waned"],
+     ["Severe disease protection", "More durable than infection block"]
+    ]
+   }
+  },
+  {
+   "title": "The clinical spectrum",
+   "tx": "Most **infections** stayed mild with fever, cough, sore throat and fatigue, while a minority progressed in the second week to breathlessness and hypoxaemia from viral pneumonia and inflammatory lung injury. Loss of smell and taste marked early strains distinctively. Silent hypoxaemia, distress out of proportion to examination comfort, taught pulse oximetry at home.",
+   "say": "Mostly mild, a minority worsening in week two with falling oxygen. Silent hypoxaemia made home oximeters famous. Second week deterioration defined vigilance.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Pattern"],
+    "rows": [
+     ["Common", "Fever, cough, fatigue, sore throat"],
+     ["Early strain clue", "Loss of smell and taste"],
+     ["Progression", "Second week breathlessness"],
+     ["Home monitor", "Pulse oximetry trends"]
+    ]
+   }
+  },
+  {
+   "title": "Who progressed: risk stacking",
+   "tx": "**Risk factors** for severe COVID stacked predictably: older age dominating, then obesity, diabetes, chronic heart, lung and kidney disease, immunosuppression and pregnancy. Vaccination flattened each of these curves without erasing them, so triage during surges still ranked the unvaccinated older diabetic first for beds and oxygen.",
+   "say": "Age led, metabolic and organ disease followed, pregnancy counted. Vaccines flattened but never erased gradients. Surge triage ranked stacked risk first.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Risk factor", "Effect"],
+    "rows": [
+     ["Older age", "Strongest severity predictor"],
+     ["Diabetes, obesity", "Higher ICU and death rates"],
+     ["Immunosuppression", "Prolonged viral replication"],
+     ["Pregnancy", "Higher severe disease risk"]
+    ]
+   }
+  },
+  {
+   "title": "Testing by timing: antigen and PCR",
+   "tx": "**Rapid antigen tests** perform best in the first symptomatic days when viral load peaks, trading some sensitivity for speed and home use, while RT-PCR detects lower loads across a longer window. Negative antigen results in strongly suspected early cases deserved PCR or repeat testing. Testing strategy shifted with prevalence, purpose and turnaround needs.",
+   "say": "Antigen at peak load for speed, PCR for sensitivity across the window. A negative antigen never ended a strong suspicion alone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rapid antigen",
+     "points": ["Minutes to result", "Best in early symptomatic days", "Home use possible", "Misses low viral loads"]
+    },
+    "right": {
+     "title": "RT-PCR",
+     "points": ["Highest sensitivity", "Longer positive window", "Laboratory turnaround", "Detects low loads"]
+    }
+   }
+  },
+  {
+   "title": "Oxygen, steroids and anticoagulation discipline",
+   "tx": "**Dexamethasone** reduced deaths in patients needing oxygen or ventilation while offering no benefit, and possible harm, in those who did not, the pandemic's cleanest treatment lesson. Oxygen titration, awake proning, thromboprophylaxis and restraint with antibiotics and unproven remedies separated protocol care from panic care in overwhelmed wards.",
+   "say": "Steroids saved the oxygen dependent and helped nobody else. Proning, titrated oxygen, clot prevention and antibiotic restraint beat panic polypharmacy.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Intervention", "Indication"],
+    "rows": [
+     ["Dexamethasone", "Oxygen or ventilation needed"],
+     ["Awake proning", "Hypoxaemia, monitored setting"],
+     ["Thromboprophylaxis", "Hospitalised patients"],
+     ["Antibiotics", "Only for suspected superinfection"]
+    ]
+   }
+  },
+  {
+   "title": "Vaccines: platforms and the booster logic",
+   "tx": "**COVID vaccines** arrived on multiple platforms, viral vector, inactivated whole virus and mRNA, all protecting most strongly against hospitalisation and death. Waning antibodies and variant escape justified boosters for older and high risk groups first. India's campaign leaned on vector and inactivated products delivered at population scale through digital registration.",
+   "say": "Every platform guarded hospitals better than infection. Boosters followed waning and variants, oldest first. Scale plus digital tracking defined India's delivery.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Platform", "Example pattern"],
+    "rows": [
+     ["Viral vector", "Adenovirus carrying spike gene"],
+     ["Inactivated", "Whole killed virus"],
+     ["mRNA", "Lipid wrapped spike message"],
+     ["Boosters", "Age and risk prioritised"]
+    ]
+   }
+  },
+  {
+   "title": "Long COVID and the tail of illness",
+   "tx": "**Long COVID** gathers symptoms persisting beyond twelve weeks, fatigue, breathlessness, cognitive slowing, palpitations and smell disturbance among the commonest, in a minority after even mild infection. Rehabilitation, pacing, graded activity and exclusion of organ damage structure care, while vaccination reduces but does not abolish risk. Registries still argue over mechanisms and definitions.",
+   "say": "Beyond twelve weeks, fatigue, fog and breathlessness persist for a minority. Pace, rehabilitate, exclude organ injury. Vaccination trims the risk, not to zero.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Domain", "Common complaint"],
+    "rows": [
+     ["Energy", "Fatigue, post exertional crash"],
+     ["Cognition", "Brain fog, poor concentration"],
+     ["Chest", "Breathlessness, palpitations"],
+     ["Senses", "Smell and taste disturbance"]
+    ]
+   }
+  },
+  {
+   "title": "Programme lessons that outlast the virus",
+   "tx": "The **pandemic playbook** now insists on genomic surveillance of variants, hospital oxygen self sufficiency, real time bed and supply dashboards, protection of routine immunisation and TB services during surges, and risk communication that survives rumour speed. Every one of these was purchased with a specific failure between 2020 and 2022.",
+   "say": "Genomic watch, oxygen autonomy, live dashboards, protected routine services, faster than rumour communication. Each line of the new playbook names an old failure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Genomic and syndromic surveillance"},
+     {"id": "b", "label": "Surge capacity and oxygen readiness"},
+     {"id": "c", "label": "Routine services protected"},
+     {"id": "d", "label": "Public communication at rumour speed"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

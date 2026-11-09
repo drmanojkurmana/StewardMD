@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "id": "cm-respiratory-influenza",
+ "subject": "community-medicine",
+ "module": "cm-respiratory",
+ "title": "Influenza: Antigenic Change, Pandemics and Prevention",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "A segmented virus wearing two spikes",
+   "tx": "The **influenza virus** is an orthomyxovirus with eight segments of single stranded RNA and two surface glycoproteins, haemagglutinin (H) and neuraminidase (N), which name each subtype such as H1N1 or H3N2. Types A and B cause seasonal epidemics, type A alone causes pandemics, and type C causes only mild sporadic illness that programmes ignore.",
+   "say": "Eight RNA segments, two spikes. Haemagglutinin and neuraminidase name the subtype, type A alone makes pandemics, and type C is clinically trivial.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/influenza-fig1.webp",
+    "alt": "Diagram of influenza virus showing H and N surface proteins, segmented RNA, and antigenic drift and shift",
+    "caption": "The influenza virion: haemagglutinin and neuraminidase spikes over a segmented RNA genome. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Drift: the yearly small change",
+   "tx": "**Antigenic drift** is the gradual accumulation of point mutations in the haemagglutinin and neuraminidase genes during ordinary replication. Antibody from last season partly fails, so the same subtype returns each winter in slightly altered form. Drift explains annual epidemics and why vaccine strains are reviewed and updated every year for both hemispheres.",
+   "say": "Drift is slow point mutation. Last year's antibody partly fails, epidemics return yearly, and vaccine strains need annual review. Small change, yearly consequence.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Antigenic drift"],
+    "rows": [
+     ["Mechanism", "Point mutations in H and N genes"],
+     ["Speed", "Gradual, season by season"],
+     ["Result", "Annual epidemics"],
+     ["Programme response", "Yearly vaccine strain update"]
+    ]
+   }
+  },
+  {
+   "title": "Shift: the pandemic change",
+   "tx": "**Antigenic shift** is an abrupt reassortment of gene segments when two different influenza A viruses infect one cell, often in pigs mixing avian and human strains. A wholly new haemagglutinin appears against which the population has almost no immunity. Shift produced the 1918 H1N1, 1957 H2N2, 1968 H3N2 and 2009 pandemic waves.",
+   "say": "Shift swaps whole segments in a co-infected host. A new haemagglutinin meets a non-immune population, and a pandemic follows. Remember the four pandemic years.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Drift",
+     "points": ["Point mutations only", "Same subtype continues", "Annual epidemics", "Vaccine updated yearly"]
+    },
+    "right": {
+     "title": "Shift",
+     "points": ["Segment reassortment", "New subtype appears", "Pandemics at long intervals", "Population largely non-immune"]
+    }
+   }
+  },
+  {
+   "title": "Incubation, infectivity and the clinical picture",
+   "tx": "The **incubation period** of influenza is short, usually 18 to 72 hours, and patients shed virus from a day before symptoms until about five days after onset. Abrupt fever, headache, myalgia and dry cough dominate, quite unlike the gradual coryza of a common cold. Most cases settle in a week without antibiotics.",
+   "say": "One to three days of incubation, shedding starts before symptoms. Abrupt fever with myalgia separates flu from a cold, and most cases need no antibiotic.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Influenza pattern"],
+    "rows": [
+     ["Incubation", "18 to 72 hours"],
+     ["Onset", "Abrupt fever and myalgia"],
+     ["Shedding", "Day before to 5 days after onset"],
+     ["Course", "About one week, self limited"]
+    ]
+   }
+  },
+  {
+   "title": "Who dies of flu: the risk groups",
+   "tx": "**Complications** concentrate in the extremes of age, pregnancy, obesity and chronic heart, lung, kidney or metabolic disease, plus immunosuppression. Primary viral pneumonia and secondary staphylococcal or pneumococcal pneumonia cause most deaths, with myocarditis and encephalitis much rarer. These same groups head every vaccination priority list in national guidance.",
+   "say": "Deaths cluster in the old, the pregnant, the obese and the chronically ill. Pneumonia, viral or secondary bacterial, kills most often, so those groups vaccinate first.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Group", "Main risk"],
+    "rows": [
+     ["Age over 65, under 5", "Pneumonia and death"],
+     ["Pregnancy", "Severe respiratory failure"],
+     ["Chronic heart or lung disease", "Decompensation and superinfection"],
+     ["Immunosuppression", "Prolonged viral replication"]
+    ]
+   }
+  },
+  {
+   "title": "Swine flu and avian flu in one line each",
+   "tx": "**H1N1 influenza** from the 2009 pandemic is now a seasonal strain covered by routine vaccines and treated supportively, with oseltamivir reserved early for severe or high risk cases. Avian H5N1 and H7N9 spill over from poultry with high case fatality but poor human to human spread, so exposure history drives suspicion.",
+   "say": "Pandemic H1N1 became seasonal. Avian strains spill from poultry, kill often, but spread poorly between people. Ask about bird exposure whenever the picture fits.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Seasonal H1N1",
+     "points": ["In routine vaccine", "Spreads readily in people", "Oseltamivir early if severe", "Low case fatality overall"]
+    },
+    "right": {
+     "title": "Avian H5N1 / H7N9",
+     "points": ["Poultry exposure history", "Poor human to human spread", "High case fatality", "Notify and isolate promptly"]
+    }
+   }
+  },
+  {
+   "title": "Vaccines: killed, live and who gets them",
+   "tx": "The **inactivated influenza vaccine** is grown in eggs or cell culture, given intramuscularly each year, and safe in pregnancy and immunosuppression. Live attenuated vaccine is sprayed intranasally for healthy children and young adults in some countries. Health workers, risk groups and pregnant women are the standing priority categories for annual doses.",
+   "say": "Killed vaccine yearly by injection is safe in pregnancy. Live spray suits healthy children where used. Health workers and risk groups stand first in the queue.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Vaccine", "Key fact"],
+    "rows": [
+     ["Inactivated", "Intramuscular, yearly, safe in pregnancy"],
+     ["Live attenuated", "Intranasal, healthy young people only"],
+     ["Timing", "Before the seasonal peak"],
+     ["Priority", "Health workers, risk groups, pregnancy"]
+    ]
+   }
+  },
+  {
+   "title": "Chemoprophylaxis and outbreak control",
+   "tx": "**Oseltamivir prophylaxis** uses a neuraminidase inhibitor once daily for at least seven days after exposure, offered to high risk contacts and during closed setting outbreaks in care homes. It complements, never replaces, vaccination and isolation of cases for five days. Hand hygiene and cough etiquette cut droplet spread in wards and schools.",
+   "say": "Post-exposure oseltamivir runs at least a week for high risk contacts. Isolate cases five days, push hygiene, and still vaccinate. Prophylaxis complements the vaccine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Case identified in closed setting"},
+     {"id": "b", "label": "Isolate case, list contacts"},
+     {"id": "c", "label": "Risk assess contacts"},
+     {"id": "d", "label": "Prophylaxis and vaccination offered"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Surveillance: how the world watches flu",
+   "tx": "**Influenza surveillance** networks track influenza like illness and severe acute respiratory infection through sentinel sites, confirm strains in laboratories, and feed the twice yearly vaccine strain selection. Sudden rises in severe respiratory admissions, clusters in schools, or deaths in health workers are the signals that trigger outbreak investigation and public messaging.",
+   "say": "Sentinel surveillance plus laboratory confirmation picks next season's vaccine strains. Watch severe admissions and clusters closely; they announce the wave before routine counts do.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Signal", "Response"],
+    "rows": [
+     ["Rising influenza like illness", "Alert clinicians, test samples"],
+     ["Severe respiratory clusters", "Outbreak investigation"],
+     ["New subtype isolated", "Pandemic preparedness review"],
+     ["Strain mismatch reported", "Vaccine composition review"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

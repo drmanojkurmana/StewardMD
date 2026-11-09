@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "id": "cm-diarrhoeal-cholera",
+ "subject": "community-medicine",
+ "module": "cm-diarrhoeal",
+ "title": "Cholera: Rice Water Stools, Rapid Loss and Outbreak Control",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Vibrio, toxin and the secretory flood",
+   "tx": "**Vibrio cholerae** O1 and O139 produce cholera toxin in the small intestine, locking intestinal cells into chloride and water secretion without damaging the mucosa. The result is painless, profuse watery diarrhoea that can exceed a litre an hour in adults. Because the gut stays intact, oral rehydration solution is absorbed and saves nearly every patient who receives it in time.",
+   "say": "Toxin locks the gut into secretion without destroying it. Painless water pours out, yet oral solution still absorbs. Intact mucosa is why drinking saves cholera patients.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Fact"],
+    "rows": [
+     ["Organisms", "O1 classical and El Tor, O139"],
+     ["Mechanism", "Toxin driven chloride secretion"],
+     ["Mucosa", "Intact, no invasion"],
+     ["Stool", "Painless, profuse, watery"]
+    ]
+   }
+  },
+  {
+   "title": "Rice water stools and washerwoman hands",
+   "tx": "**Rice water stool** describes the grey, watery effluent with mucus flecks and a fishy odour that replaces faecal stool as purging peaks. Washerwoman's hands, sunken eyes, doughy skin and a thready pulse chart the dehydration, while the patient often stays afebrile with a clear mind until shock deepens, a deceptive calm examiners test.",
+   "say": "Grey rice water with mucus flecks, washerwoman fingers, sunken eyes, yet often no fever and a clear mind. Dehydration signs, not temperature, grade this patient.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Sign", "Indicates"],
+    "rows": [
+     ["Rice water stool", "Peak purging phase"],
+     ["Washerwoman hands", "Severe fluid loss"],
+     ["Sunken eyes, doughy skin", "Dehydration grade"],
+     ["Afebrile, alert early", "Secretory, not invasive, disease"]
+    ]
+   }
+  },
+  {
+   "title": "Grading dehydration decides the route",
+   "tx": "**Dehydration grading** in cholera still follows the standard assessment of consciousness, eyes, thirst, skin pinch and pulse, sorting patients into no, some and severe dehydration. Severe cases need rapid intravenous Ringer's lactate first, switching to oral solution as soon as drinking resumes. Antibiotics never substitute for volume; fluid is the treatment everything else decorates.",
+   "say": "Grade first: eyes, pinch, pulse, thirst. Severe gets fast intravenous lactate, then oral solution. Fluid is the treatment. Antibiotics are decoration beside it.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Some dehydration",
+     "points": ["Thirsty, sunken eyes", "Skin pinch slow", "Oral solution in volume", "Observe for worsening"]
+    },
+    "right": {
+     "title": "Severe dehydration",
+     "points": ["Lethargic, pulse weak", "Skin pinch very slow", "Rapid IV Ringer's lactate", "Oral once drinking resumes"]
+    }
+   }
+  },
+  {
+   "title": "How much fluid: replacing loss on top of deficit",
+   "tx": "**Ongoing losses** separate cholera from ordinary diarrhoea care: every rice water stool and vomit must be measured and replaced volume for volume on top of the calculated deficit, guided by cholera cots with graduated collection buckets in treatment units. Underestimating continuing purge is the standard way resuscitated patients slide back into shock overnight.",
+   "say": "Replace the deficit, then replace every measured stool on top. Cholera cots and buckets exist for that arithmetic. Unmeasured overnight losses return patients to shock.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Grade dehydration, weigh patient"},
+     {"id": "b", "label": "Replace calculated deficit"},
+     {"id": "c", "label": "Measure every stool and vomit"},
+     {"id": "d", "label": "Replace losses volume for volume"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Antibiotics and zinc: supporting roles",
+   "tx": "A **single dose antibiotic** such as doxycycline in adults, or azithromycin where resistance or pregnancy dictates, shortens purging duration and bacterial shedding once rehydration is underway. Zinc supplementation supports recovery in children as in other diarrhoeas. Neither delays fluids by a minute, and vomiting patients receive them only when oral intake is reliably retained.",
+   "say": "One antibiotic dose shortens purging after fluids are running. Zinc helps children recover. Nothing, repeat nothing, is allowed to delay volume replacement.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Adjunct", "Role"],
+    "rows": [
+     ["Doxycycline single dose", "Shortens purge and shedding"],
+     ["Azithromycin", "Pregnancy, children, resistance"],
+     ["Zinc in children", "Supports mucosal recovery"],
+     ["Antiemetics routine", "Avoid, mask losses"]
+    ]
+   }
+  },
+  {
+   "title": "El Tor: the carrier problem",
+   "tx": "The **El Tor biotype** caused the seventh pandemic, survives longer in water and food, and produces far more mild and asymptomatic infections per severe case than classical cholera. Healthy carriers and convalescent shedders seed water sources quietly, which is why cholera control leans on water safety and surveillance rather than case hunting alone.",
+   "say": "El Tor survives in water and hides in carriers, dozens of quiet infections per dramatic case. Water safety and surveillance, not case hunting alone, control it.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trait", "El Tor pattern"],
+    "rows": [
+     ["Environmental survival", "Prolonged in water"],
+     ["Asymptomatic fraction", "High per severe case"],
+     ["Pandemic", "Seventh, ongoing historically"],
+     ["Control emphasis", "Water, sanitation, surveillance"]
+    ]
+   }
+  },
+  {
+   "title": "The outbreak playbook",
+   "tx": "**Outbreak response** sets up dedicated treatment centres or corners with cholera cots, secures safe water by chlorination, enforces safe disposal of stools and vomit, runs risk communication against panic and stigma, and tracks cases and deaths daily to compute case fatality. A case fatality above one percent signals failing access or fluids, not virulence.",
+   "say": "Treatment corners, chlorinated water, safe excreta disposal, daily fatality tracking. Fatality above one percent indicts the response, not the vibrio.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Alert and confirm first cases"},
+     {"id": "b", "label": "Treatment centre set up"},
+     {"id": "c", "label": "Water chlorination, excreta safety"},
+     {"id": "d", "label": "Daily cases, deaths, fatality review"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Oral cholera vaccines in campaigns",
+   "tx": "**Oral cholera vaccine** using killed whole cell preparations is deployed reactively and pre emptively in hotspots, refugee settings and outbreak rings, typically in two dose campaigns through global stockpile mechanisms. It buys population protection while water and sanitation works proceed, but no campaign licenses delay in pipes, chlorination and latrines.",
+   "say": "Killed oral vaccine campaigns shield hotspots while infrastructure catches up. Two doses buy time. They never replace chlorination, pipes and latrines.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Use", "Setting"],
+    "rows": [
+     ["Reactive campaign", "Confirmed outbreak zone"],
+     ["Pre emptive campaign", "Known hotspot, camps"],
+     ["Doses", "Usually two, spaced weeks"],
+     ["Partner measures", "Water and sanitation works"]
+    ]
+   }
+  },
+  {
+   "title": "Notification and the never again targets",
+   "tx": "**Cholera surveillance** treats even a single suspected case in a non endemic area as an alert demanding stool culture or rapid testing, line listing and water source investigation. Global roadmaps target a ninety percent reduction in cholera deaths and elimination in a set of countries by 2030, built on hotspot mapping, vaccination and WASH investment in sequence.",
+   "say": "One suspected case in new territory triggers investigation. Global targets aim to cut deaths ninety percent by 2030 through hotspots, vaccine and water investment.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trigger", "Response"],
+    "rows": [
+     ["Single suspect, new area", "Alert, test, investigate water"],
+     ["Cluster in known hotspot", "Activate outbreak playbook"],
+     ["Fatality above 1 percent", "Audit access and fluids"],
+     ["Season approaching", "Hotspot vaccine and WASH review"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -6,7 +6,7 @@
    Kill switch (same rule as the home tile in home.js): localStorage smd_narke = "0" or ?narke=0 for this load. */
 (function (G) {
   "use strict";
-  var V = "nrk11";
+  var V = "nrk12";
   var CSS = ["specialty.css", "narke.css", "narke-explore-ui.css", "narke-clinic.css", "narke-vent.css", "narke-vent-bridge.css"];
   var JS = ["specialty-core.js", "specialty-data.js", "specialty-stage.js", "specialty-shell.js", "specialty-learn.js", "specialty-bank.js",
     "specialty-explore.js", "specialty-tools.js", "specialty-notes.js", "narke.js", "narke-explore-ui.js", "narke-clinic.js", "narke-vent.js", "narke-vent-bridge.js"];
@@ -52,11 +52,13 @@
     return loading;
   }
   function fail() { try { if (G.toast) G.toast("Anaesthetica could not load. Check your connection and try again."); } catch (e) {} }
+  // Full-screen loader with a medical fact while the files download (smd-loader.js).
+  function shown(p) { return G.SMD_LOADER ? G.SMD_LOADER.during(p) : p; }
   function real() { return G.NARKE && G.NARKE !== stub ? G.NARKE : null; }
 
   var stub = {
     // Loaded but no host (a script failed to run): the same retry message as a failed download.
-    open: function () { if (!enabled()) return false; load().then(function () { var t = real(); if (t) t.open(); else fail(); }, fail); return true; },
+    open: function () { if (!enabled()) return false; shown(load()).then(function () { var t = real(); if (t) t.open(); else fail(); }, fail); return true; },
     // Review Desk "Read it": false when switched off, as the real openCase answers.
     openCase: function (id) { if (!enabled()) return false; return load().then(function () { var t = real(); if (!t) fail(); return t ? t.openCase(id) : false; }, function () { fail(); return false; }); },
     isOpen: function () { return false; },

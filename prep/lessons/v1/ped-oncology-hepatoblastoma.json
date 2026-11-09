@@ -1,0 +1,226 @@
+{
+ "key": "ped-oncology-hepatoblastoma",
+ "v": 1,
+ "module": "ped-oncology",
+ "subject": "paediatrics",
+ "title": "Pediatric Solid and CNS Tumours: Hepatoblastoma and Medulloblastoma",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Malignant transformation of primitive embryological hepatic parenchymal blastema represents the most frequent primary hepatic neoplasm of childhood. Arising predominantly during the first two to three years of life, **pediatric hepatoblastoma** strongly associates with Beckwith-Wiedemann syndrome, familial adenomatous polyposis (APC gene mutations), and extreme prematurity. Affected toddlers present with asymptomatic abdominal distension, a firm right upper quadrant mass, weight loss, and thrombocytosis.",
+   "say": "Hepatoblastoma is the most common primary liver cancer in toddlers, associated with Beckwith-Wiedemann syndrome and extreme prematurity. It presents as a large painless abdominal mass.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Epidemiology and Associations",
+     "points": [
+      "Peak incidence under 3 years of age (median 18 months)",
+      "Strong link to extreme prematurity and low birth weight",
+      "Beckwith-Wiedemann syndrome (11p15 WT2 / IGF2 overgrowth)",
+      "Familial adenomatous polyposis (germline APC mutations)"
+     ]
+    },
+    "right": {
+     "title": "Clinical Signs and Biomarkers",
+     "points": [
+      "Huge, solitary, firm right upper quadrant hepatic mass",
+      "Serum alpha-fetoprotein (AFP) elevated in >90% of cases",
+      "Extreme thrombocytosis from tumor IL-6 / thrombopoietin",
+      "Isosexual precocious puberty if beta-hCG is secreted"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extravagant synthesis of oncofetal proteins provides an essential diagnostic biomarker and sensitive monitor of therapeutic response. Over ninety percent of children with hepatoblastoma demonstrate massive serum elevations of **alpha-fetoprotein in hepatoblastoma**, frequently reaching hundreds of thousands of nanograms per millilitre. Conversely, the rare, highly aggressive small cell undifferentiated histological variant exhibits low or negative AFP levels, conferring a significantly worse prognosis.",
+   "say": "Serum alpha-fetoprotein levels are massively elevated in ninety percent of hepatoblastoma cases. Markedly low AFP levels in small cell undifferentiated tumors indicate a poor prognosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Histological Subtype",
+     "Pathological Microscopic Architecture",
+     "Serum AFP Secretion",
+     "Chemosensitivity & Prognosis"
+    ],
+    "rows": [
+     [
+      "Fetal epithelial (Pure)",
+      "Small regular uniform cells resembling fetal liver",
+      "Extremely high serum AFP (>100,000 ng/mL)",
+      "Highly chemosensitive; best prognosis (>90%)"
+     ],
+     [
+      "Embryonal epithelial",
+      "Less differentiated, sheets and pseudo-rosettes",
+      "Markedly elevated serum AFP",
+      "Good response to cisplatin-based chemotherapy"
+     ],
+     [
+      "Small cell undifferentiated",
+      "Small round blue cells, loss of INI1 (SMARCB1)",
+      "Low or normal serum AFP (<100 ng/mL)",
+      "Aggressive, chemoresistant; poor prognosis"
+     ],
+     [
+      "PRETEXT staging system",
+      "Pre-treatment extent of tumor (Stages I-IV)",
+      "Based on liver sector involvement on CT/MRI",
+      "Guides neoadjuvant chemotherapy and liver resection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Malignant embryonal neuroepithelial tumor arising in the roof of the fourth ventricle represents the most common malignant pediatric brain tumor. Typically presenting in school-aged children between five and nine years, **pediatric medulloblastoma** arises within the cerebellar vermis, rapidly obstructing normal cerebrospinal fluid pathways. Children present with signs of raised intracranial pressure and progressive truncal ataxia, causing an unsteady wide-based gait.",
+   "say": "Medulloblastoma arises in the cerebellar vermis in the roof of the fourth ventricle. It causes morning vomiting, headache, papilledema, and progressive truncal ataxia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/medulloblastoma-fig1.webp",
+    "alt": "Microscopic histology of medulloblastoma showing dense small round blue cells and neuroimaging displaying a fourth ventricle mass.",
+    "caption": "Densely packed small round blue cells and Homer-Wright rosettes in pediatric medulloblastoma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Propensity for extensive leptomeningeal subarachnoid dissemination mandates complete craniospinal neuroaxis evaluation at initial diagnosis. Medulloblastoma cells shed into cerebrospinal fluid pathways to form **drop metastases along the spinal cord**, depositing along the cauda equina and spinal leptomeninges. Complete diagnostic staging requires contrast-enhanced magnetic resonance imaging of the entire craniospinal axis alongside lumbar CSF cytology performed two weeks postoperatively.",
+   "say": "Medulloblastoma frequently seeds the subarachnoid space, forming drop metastases along the spinal cord. Full craniospinal MRI and CSF cytology are essential for staging.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Presentation Triad",
+     "points": [
+      "Early morning headache and projectile vomiting",
+      "Papilloedema and setting sun eye sign on fundoscopy",
+      "Truncal ataxia: unable to walk heel-to-toe or sit unsupported",
+      "Head tilt and neck stiffness from tonsillar herniation"
+     ]
+    },
+    "right": {
+     "title": "Molecular Subgroups (WHO)",
+     "points": [
+      "WNT-activated (beta-catenin): excellent prognosis (>95%)",
+      "SHH-activated (Sonic hedgehog): intermediate prognosis",
+      "Group 3 (MYC amplification): aggressive, frequent drop metastases",
+      "Group 4: most common, intermediate prognosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Multimodal therapeutic regimens combining maximal neurosurgical resection, craniospinal radiotherapy, and adjuvant chemotherapy achieve high cure rates in older children. To avoid devastating neurocognitive devastation, **craniospinal irradiation protocols** are strictly avoided in children under three years of age, utilizing high-dose chemotherapy with autologous stem cell rescue instead. Older children receive posterior fossa boost radiotherapy with craniospinal axis coverage.",
+   "say": "Craniospinal radiation is withheld in children under three years to prevent severe cognitive impairment. Older children receive craniospinal radiotherapy and platinum chemotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Treatment Modality",
+     "Therapeutic Protocol / Technique",
+     "Clinical Indication / Timing",
+     "Specific Adverse Sequelae"
+    ],
+    "rows": [
+     [
+      "Maximal safe resection",
+      "Suboccipital craniotomy; debulk 4th ventricle tumor",
+      "Immediate relief of hydrocephalus",
+      "Cerebellar mutism syndrome (transient)"
+     ],
+     [
+      "Craniospinal radiation",
+      "23.4 to 36 Gy to whole brain & spine + fossa boost",
+      "Standard in children >=3 years of age",
+      "Endocrine failure, intellectual decline, secondary tumors"
+     ],
+     [
+      "Adjuvant chemotherapy",
+      "Cisplatin, cyclophosphamide, and vincristine",
+      "Eradicates microscopic residual neuroaxis disease",
+      "Ototoxicity, peripheral neuropathy, myelosuppression"
+     ],
+     [
+      "Infant treatment strategy",
+      "High-dose marrow-ablative chemotherapy + ASCT",
+      "Children <3 years to avoid radiation toxicity",
+      "Preserves IQ and cognitive neurodevelopment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Malignant lymphoproliferative disorder characterized by the presence of pathognomonic multinucleated Reed-Sternberg giant cells affects older children and adolescents. Representing the most frequent malignant lymphoma in adolescents, **pediatric Hodgkin lymphoma** presents with painless, firm, rubbery, non-tender cervical or supraclavicular lymphadenopathy that persists for weeks without resolving. Mediastinal adenopathy is present in sixty percent, sometimes causing dry cough and dyspnea.",
+   "say": "Hodgkin lymphoma is the commonest lymphoma in adolescents, presenting with painless rubbery cervical lymph nodes and mediastinal widening on chest radiograph.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hodgkin-lymphoma-fig1.webp",
+    "alt": "Microscopic histological section demonstrating binucleated Reed-Sternberg giant cells with prominent owl-eye inclusion-like nucleoli.",
+    "caption": "Diagnostic Reed-Sternberg cell displaying bilobed mirror-image nuclei with prominent inclusion-like nucleoli. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Pathognomonic giant transformed B-cells surrounded by a non-neoplastic polyclonal reactive inflammatory background confirm histological diagnosis. Microscopic examination demonstrates **Reed-Sternberg giant cells**, featuring bilobed or multinucleated mirror-image nuclei containing huge eosinophilic inclusion-like nucleoli resembling owl eyes. Immunohistochemistry demonstrates strong positive staining for CD30 and CD15 in classical Hodgkin lymphoma, while CD45 is negative.",
+   "say": "Reed-Sternberg cells display classic owl-eye mirror-image nuclei. In classical Hodgkin lymphoma, the malignant cells stain strongly positive for CD30 and CD15.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classical Hodgkin Subtype",
+     "Histological Architecture & Stroma",
+     "Proportion in Pediatric Cohorts",
+     "Clinical Epidemiological Features"
+    ],
+    "rows": [
+     [
+      "Nodular sclerosis",
+      "Collagen bands dividing lymph node into nodules",
+      "60 to 70 percent (Adolescents)",
+      "Frequent mediastinal mass; lacunar variant cells"
+     ],
+     [
+      "Mixed cellularity",
+      "Heterogeneous background (eosinophils, plasma cells)",
+      "20 to 25 percent (Younger children)",
+      "Strong association with Epstein-Barr virus (EBV)"
+     ],
+     [
+      "Lymphocyte-rich",
+      "Scattered RS cells in background of small lymphocytes",
+      "5 percent",
+      "Favorable prognosis; excellent response to therapy"
+     ],
+     [
+      "Lymphocyte-depleted",
+      "Abundant atypical RS cells; scarce background lymphocytes",
+      "<2 percent (Rare in children)",
+      "Aggressive behavior; poor prognosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Systemic constitutional symptoms indicate biologically aggressive cytokine release and dictate risk-adapted therapeutic intensity. Ann Arbor staging designates the presence of **constitutional B symptoms in lymphoma**, defined as unexplained recurrent fevers exceeding 38.0 degrees Celsius, drenching night sweats requiring clothes changes, and involuntary loss of more than ten percent of baseline body weight over six months. Treatment utilizes response-adapted chemotherapy like OEPA/COPDAC.",
+   "say": "Constitutional B symptoms include drenching night sweats, weight loss over ten percent, and fevers above thirty-eight degrees. They indicate advanced stage requiring intensified chemotherapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ann Arbor Staging Framework",
+     "points": [
+      "Stage I: single lymph node region or lymphoid structure",
+      "Stage II: >=2 node regions on same side of diaphragm",
+      "Stage III: node regions on both sides of diaphragm",
+      "Stage IV: diffuse extranodal involvement (liver, marrow)"
+     ]
+    },
+    "right": {
+     "title": "Pediatric Chemotherapy Regimens",
+     "points": [
+      "OEPA: Vincristine, etoposide, prednisone, doxorubicin",
+      "COPDAC: Cyclophosphamide, vincristine, prednisone, dacarbazine",
+      "PET-CT adapted to eliminate radiotherapy in responders",
+      "Over 95% cure rates in early favorable disease"
+     ]
+    }
+   }
+  }
+ ]
+}

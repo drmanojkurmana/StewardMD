@@ -1,0 +1,231 @@
+{
+  "v": 1,
+  "module": "phm-gout-arthritis",
+  "subject": "pharmacology",
+  "title": "Conventional Synthetic DMARDs, Targeted Biologics, and JAK Inhibitors in Rheumatoid Arthritis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The foundational anchor disease-modifying antirheumatic drug of first choice in active rheumatoid arthritis is **methotrexate**. Administered as a single weekly oral or subcutaneous dose of 7.5 to 25 mg, methotrexate's low-dose antirheumatic efficacy does not depend on dihydrofolate reductase inhibition; rather, it inhibits AICAR transformylase. This leads to intracellular accumulation of AICAR and extracellular release of adenosine, a potent endogenous anti-inflammatory purine acting on A2A receptors to suppress macrophage TNF-alpha and interleukin-1 secretion. Co-prescription of daily folic acid (1 to 5 mg) prevents gastrointestinal distress, stomatitis, and hepatic transaminase elevations.",
+      "say": "Methotrexate is the weekly anchor DMARD in rheumatoid arthritis, promoting adenosine release to suppress inflammatory cytokines.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mtx",
+            "label": "Low-dose weekly methotrexate entry into immune cells"
+          },
+          {
+            "id": "poly",
+            "label": "Intracellular polyglutamation and retention"
+          },
+          {
+            "id": "aicar",
+            "label": "Inhibition of AICAR transformylase enzyme"
+          },
+          {
+            "id": "adeno",
+            "label": "Extracellular adenosine release and A2A receptor anti-inflammatory signaling"
+          }
+        ],
+        "edges": [
+          [
+            "mtx",
+            "poly"
+          ],
+          [
+            "poly",
+            "aicar"
+          ],
+          [
+            "aicar",
+            "adeno"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A synthetic azo-linked conjugate of 5-aminosalicylic acid and sulfapyridine utilized as a core conventional synthetic DMARD is **sulfasalazine**. Intact sulfasalazine traverses the stomach and small intestine unabsorbed to reach the colon, where colonic bacteria cleave the azo bond. Unlike in ulcerative colitis where mesalamine provides local mucosal action, in rheumatoid arthritis the absorbed sulfapyridine moiety exerts systemic immunosuppression by downregulating B-cell function and suppressing inflammatory cytokine production, although reversible male oligospermia, skin rashes, and leukopenia require monitoring.",
+      "say": "Sulfasalazine is cleaved by colonic bacteria into sulfapyridine, which enters the circulation to suppress arthritis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sulfapyridine Moiety (Rheumatoid Arthritis)",
+          "points": [
+            "Absorbed systemically from the large intestine",
+            "Responsible for systemic immunosuppression in arthritis",
+            "Suppresses B-cell proliferation and cytokine synthesis",
+            "Provokes reversible oligospermia, nausea, and leukopenia"
+          ]
+        },
+        "right": {
+          "title": "Mesalamine Moiety / 5-ASA (Ulcerative Colitis)",
+          "points": [
+            "Remains largely unabsorbed inside colonic lumen",
+            "Acts locally on mucosal epithelial cells",
+            "Inhibits lipoxygenase and scavenges free radicals",
+            "Spars systemic toxicity; delivers targeted colonic healing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A 4-aminoquinoline antimalarial derivative serving as a well-tolerated conventional synthetic DMARD for mild rheumatoid arthritis and systemic lupus erythematosus is **hydroxychloroquine**. Functioning as a lysosomotropic weak base, hydroxychloroquine accumulates within acidic intracellular lysosomes, raising their pH and impairing antigen processing, presentation, and toll-like receptor signaling in dendritic cells. Because prolonged high cumulative doses can cause irreversible bull's-eye retinal maculopathy, baseline and annual automated visual field perimetry and optical coherence tomography screenings are mandatory throughout chronic maintenance therapy.",
+      "say": "Hydroxychloroquine alkalinizes lysosomes to impair immune presentation, requiring regular retinal monitoring.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Conventional DMARD",
+          "Primary molecular target",
+          "Dosing schedule",
+          "Mandatory toxicity surveillance"
+        ],
+        "rows": [
+          [
+            "Methotrexate",
+            "AICAR transformylase / adenosine",
+            "Once weekly oral or subcutaneous",
+            "Complete blood counts, liver function tests"
+          ],
+          [
+            "Leflunomide",
+            "Dihydroorotate dehydrogenase",
+            "Once daily oral tablet",
+            "Liver enzymes, arterial blood pressure"
+          ],
+          [
+            "Sulfasalazine",
+            "Systemic sulfapyridine immunomodulation",
+            "Twice daily oral tablets with food",
+            "Complete blood counts (leukopenia risk)"
+          ],
+          [
+            "Hydroxychloroquine",
+            "Lysosomal alkalinization / TLR block",
+            "Once daily oral (max 5 mg/kg actual weight)",
+            "Automated visual field and OCT maculopathy check"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "An orally active isoxazole derivative that functions as an antiproliferative immunomodulatory DMARD is **leflunomide**. Rapidly metabolized in the gut wall and liver to its active open-ring malononitriloamide metabolite, it selectively and reversibly inhibits the mitochondrial enzyme dihydroorotate dehydrogenase. This halts de novo pyrimidine synthesis, selectively arresting rapidly proliferating activated auto-reactive T lymphocytes in the G1 phase. Because the active metabolite undergoes extensive enterohepatic recirculation resulting in a two-year elimination half-life, cholestyramine washout is required in cases of hepatotoxicity or desired pregnancy.",
+      "say": "Leflunomide inhibits mitochondrial pyrimidine synthesis to arrest activated T lymphocytes, requiring cholestyramine for rapid clearance.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/rheumatoid-fig1.webp",
+        "alt": "Synovial hyperplasia, pannus, and marginal bone erosions in rheumatoid arthritis",
+        "caption": "Pathophysiology of rheumatoid arthritis demonstrating chronic synovitis, invasive pannus formation, cartilage erosion, and marginal bony destruction."
+      }
+    },
+    {
+      "tx": "The orally bioavailable targeted synthetic DMARD that selectively inhibits Janus kinase enzymes is **tofacitinib**. By blocking the ATP-binding catalytic domain of JAK1 and JAK3, tofacitinib prevents the phosphorylation and activation of signal transducers and activators of transcription (STAT) proteins downstream of common gamma-chain cytokine receptors. This suppresses multiple cytokine signaling pathways simultaneously, offering oral efficacy comparable to injectable biologics, but carrying black-box warnings for serious infections, reactivation of herpes zoster, venous thromboembolism, and malignancy.",
+      "say": "Tofacitinib is an oral Janus kinase inhibitor that halts downstream STAT signaling across multiple cytokine pathways.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cyto",
+            "label": "Interleukins (IL-2, IL-6, IL-15) bind cytokine receptors"
+          },
+          {
+            "id": "jak",
+            "label": "Receptor dimerization and activation of JAK1 and JAK3"
+          },
+          {
+            "id": "tofa",
+            "label": "Tofacitinib competitively blocks JAK ATP-binding site"
+          },
+          {
+            "id": "stat",
+            "label": "Abolished STAT phosphorylation and suppression of immune gene expression"
+          }
+        ],
+        "edges": [
+          [
+            "cyto",
+            "jak"
+          ],
+          [
+            "jak",
+            "tofa"
+          ],
+          [
+            "tofa",
+            "stat"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The chimeric human-murine IgG1-kappa monoclonal antibody that binds with high affinity to both soluble and transmembrane tumor necrosis factor-alpha is **infliximab**. Administered as an intravenous infusion at 3 to 10 mg/kg at weeks 0, 2, 6, and every eight weeks thereafter, infliximab neutralizes TNF-alpha, prevents its interaction with TNFR1 and TNFR2 receptors, and induces complement-dependent cytotoxicity in TNF-expressing immune cells. To prevent the development of neutralizing anti-chimeric antibodies that shorten drug half-life and trigger infusion reactions, infliximab is co-prescribed with methotrexate.",
+      "say": "Infliximab is an intravenous TNF-alpha antibody co-administered with methotrexate to prevent neutralizing antibody formation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/osteoarthritis-fig2.webp",
+        "alt": "Comparative joint distribution between rheumatoid arthritis and osteoarthritis",
+        "caption": "Comparison of peripheral joint involvement patterns highlighting MCP and PIP symmetric polyarthritis in rheumatoid arthritis versus DIP nodes in osteoarthritis."
+      }
+    },
+    {
+      "tx": "The critical infectious safety hazard associated with all biological TNF-alpha inhibitors, including infliximab, adalimumab, and etanercept, is **latent tuberculosis reactivation**. In host immunity against Mycobacterium tuberculosis, macrophage-derived TNF-alpha is essential for the formation, architectural integrity, and maintenance of protective granulomas that sequester viable bacilli. TNF blockade causes disintegration of the granuloma wall, leading to rapid clinical progression to disseminated, miliary, and extrapulmonary tuberculosis. Consequently, baseline tuberculin skin testing or interferon-gamma release assay is mandatory prior to initiating biologic therapy.",
+      "say": "TNF inhibitors disrupt granuloma integrity, making pre-treatment screening for latent tuberculosis mandatory.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Monoclonal TNF Antibodies (Infliximab, Adalimumab)",
+          "points": [
+            "Binds both soluble and transmembrane TNF-alpha trimers",
+            "Induces complement-mediated lysis and apoptosis of target cells",
+            "Highest risk of granuloma breakdown and tuberculosis reactivation",
+            "Highly effective in both rheumatoid arthritis and Crohn disease"
+          ]
+        },
+        "right": {
+          "title": "Soluble TNF Receptor Fusion (Etanercept)",
+          "points": [
+            "Recombinant p75 TNF receptor fused to human IgG1 Fc domain",
+            "Binds and neutralizes soluble TNF-alpha and lymphotoxin-alpha",
+            "Does not trigger complement-dependent cellular lysis",
+            "Lower relative risk of tuberculosis reactivation; ineffective in Crohn"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The highly effective, low-cost conventional synthetic DMARD combination demonstrated in clinical trials to match biologic anti-TNF efficacy is the **triple therapy regimen**. Comprising the synergistic co-administration of oral methotrexate, sulfasalazine, and hydroxychloroquine, this combination attacks rheumatoid inflammation through three complementary non-overlapping mechanisms: adenosine release, bacterial metabolite immunosuppression, and lysosomal TLR inhibition. It produces clinical remission and retards radiographic joint destruction in early aggressive disease when monotherapy fails, offering an affordable alternative to costly biologic agents.",
+      "say": "Triple therapy combines methotrexate, sulfasalazine, and hydroxychloroquine to match biologic efficacy at low cost.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Regimen component drug",
+          "Therapeutic dosing schedule",
+          "Specific mechanism in combination",
+          "Complementary clinical benefit"
+        ],
+        "rows": [
+          [
+            "Methotrexate",
+            "15 to 25 mg once weekly",
+            "Adenosine release and AICAR inhibition",
+            "Anchors the combination; prevents radiographic erosions"
+          ],
+          [
+            "Sulfasalazine",
+            "1000 mg twice daily with food",
+            "Sulfapyridine suppresses B cells and cytokines",
+            "Rapid onset of anti-inflammatory symptom control"
+          ],
+          [
+            "Hydroxychloroquine",
+            "200 to 400 mg once daily",
+            "Lysosomal alkalinization and TLR inhibition",
+            "Improves lipid profiles; lowers methotrexate hepatotoxicity"
+          ]
+        ]
+      }
+    }
+  ]
+}

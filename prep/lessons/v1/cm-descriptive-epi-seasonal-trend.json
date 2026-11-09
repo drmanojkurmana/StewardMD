@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "id": "cm-descriptive-epi-seasonal-trend",
+ "subject": "community-medicine",
+ "module": "cm-descriptive-epi",
+ "title": "Seasonal and Cyclic Trends, Epidemic Types and Migrant Studies",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Seasonal trend follows the calendar",
+   "tx": "**Seasonal variation** marks many communicable diseases: measles and varicella peak in early spring, upper respiratory infections rise in winter, and bacterial gastrointestinal infections dominate summer as warmth and flies multiply organisms. Dengue outbreaks in India start around July and peak from September to November with late summer rain. Temperature, humidity, rainfall and vector life cycles drive the rhythm.",
+   "say": "The calendar predicts disease. Measles and chickenpox crest in early spring, chest infections in winter, gut infections in summer heat. Dengue builds from July to an autumn peak with the rains. Weather and vector life cycles conduct the rhythm.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Season", "Typical excess"],
+    "rows": [
+     ["Early spring", "Measles and varicella"],
+     ["Winter", "Upper respiratory infections"],
+     ["Summer", "Bacterial gastrointestinal infections"],
+     ["Post monsoon months", "Dengue rise toward autumn peak"]
+    ]
+   }
+  },
+  {
+   "title": "Cyclic trend: susceptibles rebuild",
+   "tx": "**Cyclic trends** recur over years as herd immunity waxes and wanes: measles in the pre-vaccination era peaked every 2 to 3 years, rubella every 6 to 9 years, and influenza pandemics arrive every 7 to 10 years with antigenic variation. Each epidemic burns through susceptibles; births rebuild them until the next wave can ignite.",
+   "say": "Longer rhythms ride on immunity. Measles once peaked every two to three years, rubella every six to nine, influenza pandemics every seven to ten. Epidemics burn the susceptible pool; births refill it until the next wave can ignite.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Epidemic depletes susceptibles"},
+     {"id": "b", "label": "Herd immunity high, quiet years"},
+     {"id": "c", "label": "Births rebuild susceptibles"},
+     {"id": "d", "label": "Next epidemic ignites"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Secular trend moves over decades",
+   "tx": "A **secular trend** is a consistent increase or decrease over years or decades, whatever short fluctuations ride on it. Coronary heart disease, lung cancer and diabetes climbed for 50 years in developed countries, while tuberculosis, typhoid, diphtheria and polio declined over the same span. Interpretation must exclude artefacts of diagnosis, reporting and age structure first.",
+   "say": "Decades reveal the third rhythm. Coronary disease, lung cancer and diabetes climbed for fifty years in rich countries while tuberculosis and typhoid fell. Before crediting causes, exclude better diagnosis, better reporting and ageing populations as artefacts.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Upward secular trends",
+     "points": ["Coronary heart disease", "Lung cancer", "Diabetes in developed countries"]
+    },
+    "right": {
+     "title": "Downward secular trends",
+     "points": ["Tuberculosis and typhoid fever", "Diphtheria", "Poliomyelitis"]
+    }
+   }
+  },
+  {
+   "title": "Endemic, hyperendemic, pandemic, sporadic",
+   "tx": "**Endemic** means the constant presence of a disease within a geographic area, while hyperendemic marks intense, persistently high transmission. Epidemic exceeds normal expectancy; pandemic spreads across countries or continents. Sporadic cases appear irregularly and haphazardly, scattered without obvious links, the pattern that precedes recognition of many emerging infections.",
+   "say": "Four words grade presence. Endemic means constantly present; hyperendemic means intensely so. Epidemic exceeds expectation locally; pandemic crosses continents. Sporadic cases scatter irregularly without links, often the first whisper of an emerging infection.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Term", "Pattern"],
+    "rows": [
+     ["Endemic", "Constant presence in an area"],
+     ["Hyperendemic", "Intense persistent transmission"],
+     ["Pandemic", "Spread across countries or continents"],
+     ["Sporadic", "Irregular scattered cases, no clear link"]
+    ]
+   }
+  },
+  {
+   "title": "Slow modern epidemics",
+   "tx": "**Slow epidemics** form the third epidemic family beside common source and propagated types: coronary disease, cancer and diabetes rising over decades rather than weeks. Their incubation spans years, their causes are behavioural and environmental mixtures, and their curves reward secular trend reading more than outbreak investigation reflexes.",
+   "say": "A third family moves slowly. Coronary disease, cancer and diabetes rise over decades, not weeks, from mixed behavioural and environmental causes. Outbreak reflexes fail here; secular trend reading and risk factor logic take over.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fast epidemics",
+     "points": ["Days to weeks of rise", "Infectious agent usually single", "Outbreak investigation applies"]
+    },
+    "right": {
+     "title": "Slow epidemics",
+     "points": ["Years to decades of rise", "Mixed behavioural causes", "Risk factor control applies"]
+    }
+   }
+  },
+  {
+   "title": "Migrant studies separate genes from environment",
+   "tx": "**Migrant studies** compare disease rates in migrants, their origin population and the host population. Rates following the origin pattern indict genes; rates converging on the host pattern indict environment and lifestyle. Japanese migrants to the United States gained coronary disease, lost stomach cancer and gained colon cancer across generations, tracking American life.",
+   "say": "Migration runs nature's experiment. Compare migrants with those who stayed and those born at destination. Origin-like rates indict genes; host-like rates indict environment. Japanese Americans traded stomach cancer for coronary and colon patterns across generations.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Rates in origin population"},
+     {"id": "b", "label": "Rates in migrants"},
+     {"id": "c", "label": "Rates in host population"},
+     {"id": "d", "label": "Genes or environment judged"}
+    ],
+    "edges": [["a", "b"], ["c", "b"], ["b", "d"]]
+   }
+  },
+  {
+   "title": "Limits that weaken migrant evidence",
+   "tx": "**Self-selection** weakens migrant studies: the fit and vigorous migrate more readily than the frail, so migrants never mirror their origin population. Long incubation delays any rate change for years after arrival, and exposures may act only at critical ages. Lack of random assignment leaves these defects inherent to every observational migration comparison.",
+   "say": "Trust migration evidence cautiously. The fit migrate more than the frail, so travellers never mirror home. Long incubation delays change for years, and critical age windows hide effects. Nobody randomises migration, so these defects stay built in.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Defect", "Consequence"],
+    "rows": [
+     ["Healthy migrant selection", "Rates start artificially low"],
+     ["Long incubation period", "Change invisible for years"],
+     ["Critical age exposure", "Arrival age decides the effect"]
+    ]
+   }
+  },
+  {
+   "title": "Ecological studies use groups, not people",
+   "tx": "An **ecological study** correlates group level exposure with group level disease: countries, districts or years form the units, not individuals. Fat consumption per country against coronary mortality built classic hypotheses this way. Its named weakness is the ecological fallacy: assuming every individual inside a high rate group personally carries the exposure.",
+   "say": "Groups can replace people as units. Country fat intake against country coronary deaths built classic hypotheses cheaply. The named weakness follows: assuming each person inside a high rate group personally shares the exposure is the ecological fallacy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ecological strength",
+     "points": ["Uses routine national statistics", "Fast and cheap hypothesis building", "Compares whole populations"]
+    },
+    "right": {
+     "title": "Ecological weakness",
+     "points": ["No individual exposure data", "Ecological fallacy in conclusions", "Confounders differ between groups"]
+    }
+   }
+  },
+  {
+   "title": "From description to hypothesis",
+   "tx": "**Hypothesis formulation** closes descriptive work: time clustering of vaginal adenocarcinoma in young women incriminated in utero diethylstilbestrol exposure, purely from distribution clues. Descriptive findings then hand analytical studies a testable statement naming exposure, outcome and population. Skipping this bridge leaves data collected without direction, the commonest waste in field reports.",
+   "say": "Description must end in a testable claim. Time clustering of a rare vaginal cancer in young women exposed one drug given to their mothers, from distribution clues alone. Analytical studies then test the named exposure, outcome and population.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Unusual time or place cluster"},
+     {"id": "b", "label": "Shared exposure suspected"},
+     {"id": "c", "label": "Hypothesis stated precisely"},
+     {"id": "d", "label": "Analytical study tests it"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

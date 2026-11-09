@@ -1,0 +1,145 @@
+{
+  "v": 1,
+  "id": "cm-contraception-pomeroy-technique",
+  "subject": "community-medicine",
+  "module": "cm-contraception",
+  "title": "Pomeroy Technique, Lactational Amenorrhoea, and Contraceptive Counselling",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "The Pomeroy technique step by step",
+      "tx": "The **Pomeroy technique of tubal ligation** lifts a loop of fallopian tube at its mid isthmic ampullary segment, ligates the loop base with absorbable catgut, and excises the knuckle, so the cut ends retract apart as the suture absorbs. Separating the stumps is the point: non absorbable ligature alone invites recanalisation, while wide excision sacrifices reversal prospects, a balance Pomeroy strikes deliberately.",
+      "say": "Pomeroy ties a tube loop with absorbable suture and cuts the knuckle off. The ends spring apart as the catgut dissolves.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "p1", "label": "Loop of tube lifted at mid segment" },
+          { "id": "p2", "label": "Base tied with absorbable catgut" },
+          { "id": "p3", "label": "Knuckle excised, ends retract apart" }
+        ],
+        "edges": [["p1", "p2"], ["p2", "p3"]]
+      }
+    },
+    {
+      "title": "Other tubal occlusion methods compared",
+      "tx": "Alternatives trade failure against reversibility in **tubal occlusion methods compared**: Pomeroy failure near zero point four percent with fair reversal, Parkland excises a mid segment segment, Irving buries the stump in myometrium, Uchida hides it under peritoneum, and laparoscopic Falope rings or Filshie clips crush a small segment preserving length and the best reversal odds. Electrocautery destroys the most tube and reverses worst.",
+      "say": "Clips and rings preserve tube for reversal; cautery destroys it. Pomeroy sits in the middle on both failure and reversal.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Method", "Failure and reversal profile"],
+        "rows": [
+          ["Pomeroy (modified)", "Failure ~0.4 percent, moderate reversal"],
+          ["Falope ring / Filshie clip", "Low failure, best reversal prospects"],
+          ["Parkland segment excision", "Low failure, poorer reversal"],
+          ["Electrocoagulation", "Low failure, worst reversal"]
+        ]
+      }
+    },
+    {
+      "title": "Lactational amenorrhoea method criteria",
+      "tx": "The **lactational amenorrhoea method** protects above ninety eight percent when three criteria hold together: the baby is under six months, breastfeeding is exclusive or nearly so day and night, and the mother's periods have not returned. Any criterion failing ends the method's reliability, and a modern spacing method must start the same week, a transition peripheral workers should plan at the six week postnatal visit itself.",
+      "say": "Lactational amenorrhoea needs all three: baby under six months, exclusive breastfeeding, and no periods. Lose one and switch methods at once.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "l1", "label": "Baby under six months old" },
+          { "id": "l2", "label": "Exclusive breastfeeding, amenorrhoea present" },
+          { "id": "l3", "label": "Any criterion lost: start modern method" }
+        ],
+        "edges": [["l1", "l2"], ["l2", "l3"]]
+      }
+    },
+    {
+      "title": "Natural methods and their evidence",
+      "tx": "Fertility awareness approaches (calendar rhythm, basal body temperature, cervical mucus Billings method, and the Standard Days cycle beads for cycles twenty six to thirty two days) form the **natural family planning methods** group. Typical use failures exceed twenty per hundred woman years except for rigorously taught symptothermal use, so programmes present them honestly for couples with religious objections or method intolerance rather than as equals of long acting methods.",
+      "say": "Natural methods suit motivated couples but fail typically above twenty per hundred yearly. Teach them honestly, not as equals of devices.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Awareness based tools",
+          "points": ["Cycle beads for 26 to 32 day cycles", "Mucus and temperature charting", "No hormones, no devices"]
+        },
+        "right": {
+          "title": "Practical limits",
+          "points": ["Needs regular cycles and training", "Illness and travel disturb signs", "No protection against infections"]
+        }
+      }
+    },
+    {
+      "title": "Contraindications across permanent methods",
+      "tx": "Permanent methods carry few medical bars, but **sterilisation contraindication screening** defers elective tubectomy in severe anaemia, active pelvic infection, uncontrolled hypertension or diabetes, and recent thromboembolism until stabilised, while vasectomy waits out local skin infection or bleeding disorders evaluation. Pregnancy must be excluded for interval tubectomy by history, examination, and test when in doubt, since operating on an unsuspected pregnancy is a classic preventable failure.",
+      "say": "Stabilise anaemia, infection, and uncontrolled disease before elective sterilisation. Always exclude pregnancy before interval tubectomy.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Defer sterilisation when", "Reason"],
+        "rows": [
+          ["Severe anaemia (haemoglobin under 7)", "Anaesthetic and bleeding risk"],
+          ["Active pelvic infection", "Post operative sepsis risk"],
+          ["Uncontrolled hypertension or diabetes", "Perioperative instability"],
+          ["Suspected pregnancy (interval case)", "Procedure failure and harm"]
+        ]
+      }
+    },
+    {
+      "title": "Contraceptive counselling: GATHER",
+      "tx": "Structured **contraceptive counselling by GATHER** walks through Greet, Ask about needs and history, Tell methods neutrally, Help choose, Explain use and side effects, and Return planning with a review date. Cafeteria choice means presenting the full basket without provider bias, documenting informed consent, and screening medical eligibility with the standard checklist before procedure or supply.",
+      "say": "GATHER structures every counselling visit: greet, ask, tell, help choose, explain, and fix the return. Choice must stay with the couple.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ga1", "label": "Greet, ask needs and medical history" },
+          { "id": "ga2", "label": "Tell all methods, help couple choose" },
+          { "id": "ga3", "label": "Explain use, consent, return date" }
+        ],
+        "edges": [["ga1", "ga2"], ["ga2", "ga3"]]
+      }
+    },
+    {
+      "title": "Medical eligibility wheel in practice",
+      "tx": "The World Health Organization **medical eligibility criteria categories** grade every method condition pair from one (use freely) to four (never use), compressed into a pocket wheel for peripheral workers. Category two means benefits generally outweigh risks, three means risks usually outweigh benefits without expert judgement. Examiners expect category numbers for smoking with pills, migraine with aura, breastfeeding with combined pills, and devices with pelvic infection.",
+      "say": "Category one use freely, four never use. The eligibility wheel lets a peripheral worker decide safely without memorising every rule.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Category", "Programme meaning"],
+        "rows": [
+          ["1", "Use in any circumstance"],
+          ["2", "Generally use, benefits exceed risks"],
+          ["3", "Usually avoid unless expert judgement supports"],
+          ["4", "Unacceptable risk, do not use"]
+        ]
+      }
+    },
+    {
+      "title": "Spacing versus limiting counselling",
+      "tx": "A young couple after a first birth needs **spacing method counselling** centred on postpartum devices, implants, injectables, and lactational amenorrhoea transition, while a couple with two or more children requesting finality needs limiting counselling centred on sterilisation permanence, alternatives, and regret risks. Mixing the scripts (pushing sterilisation on a twenty two year old with one child) violates programme ethics and eligibility norms alike.",
+      "say": "Space the young, limit only the certain. Sterilisation pressure on a young one child couple fails both ethics and eligibility.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Spacing conversation",
+          "points": ["Postpartum IUCD and implants first", "Three year interval goal", "Reversible, fertility preserving"]
+        },
+        "right": {
+          "title": "Limiting conversation",
+          "points": ["Permanence stated plainly", "Vasectomy offered before tubectomy", "Regret risks discussed openly"]
+        }
+      }
+    },
+    {
+      "title": "Failure, regret, and reversal facts",
+      "tx": "Honest closing facts cover **sterilisation failure and reversal counselling**: failure near five per thousand for tubectomy and one per thousand for vasectomy, ectopic danger in post tubectomy pregnancy, reversal as major microsurgery with success governed by remaining tube length, occlusion site, and interval since surgery, and alternatives (in vitro fertilisation) sometimes outperforming reversal. Regret concentrates where counselling was rushed, young, or coerced.",
+      "say": "Reversal is uncertain microsurgery, best after clips with long tube remaining. Unhurried counselling today prevents regret tomorrow.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "rv1", "label": "State permanence and failure rates" },
+          { "id": "rv2", "label": "Discuss reversal limits and IVF option" },
+          { "id": "rv3", "label": "Document free, informed, unhurried consent" }
+        ],
+        "edges": [["rv1", "rv2"], ["rv2", "rv3"]]
+      }
+    }
+  ]
+}

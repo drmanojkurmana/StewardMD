@@ -1,0 +1,298 @@
+{
+ "v": 1,
+ "id": "cm-waste-disposal-composting",
+ "subject": "community-medicine",
+ "module": "cm-waste-disposal",
+ "title": "Solid Waste Management, Composting, Sanitary Latrines, and Sewage Treatment",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Aerobic versus anaerobic composting methods",
+   "tx": "Biological stabilization of municipal organic refuse and nightsoil into agricultural humus employs **composting biological decomposition methodologies**. The aerobic Indore method developed by Howard and Wad requires piling refuse in above-ground heaps, turned manually three times over several weeks to aerate the mass, yielding mature compost within three months; in contrast, the Bangalore method pioneered by Acharya utilizes anaerobic trenches where un-turned waste stabilizes over four to six months.",
+   "say": "Composting converts city garbage and human waste into rich organic manure. The Indore method relies on aerobic turning, while the Bangalore method uses sealed anaerobic pits.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Indore aerobic composting",
+     "points": [
+      "Above-ground heaps or shallow pits",
+      "Requires manual turning 3 times",
+      "Matures in 3 months with high heat"
+     ]
+    },
+    "right": {
+     "title": "Bangalore anaerobic composting",
+     "points": [
+      "Deep trenches sealed with earth",
+      "No turning required during digestion",
+      "Matures in 4 to 6 months cleanly"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Mechanics of the Bangalore composting method",
+   "tx": "In urban Indian local bodies, municipal sweepers fill rectangular trenches using alternate layers of dry refuse and nightsoil under the **Bangalore method operational sequence**. Piles start with a fifteen-centimetre layer of dry refuse, topped by five centimetres of nightsoil, repeating sequentially until the trench rises thirty centimetres above ground level before being sealed with moist earth; internal temperatures climb rapidly to sixty degrees Celsius, destroying pathogenic helminth ova without fly breeding.",
+   "say": "The Bangalore method layers dry refuse with nightsoil inside trenches before sealing them with earth. Internal heat reaches sixty degrees Celsius, killing parasite eggs and flies.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Trench base: 15 cm dry refuse layer"
+     },
+     {
+      "id": "c2",
+      "label": "Add 5 cm nightsoil layer"
+     },
+     {
+      "id": "c3",
+      "label": "Repeat alternating layers to 30 cm above ground"
+     },
+     {
+      "id": "c4",
+      "label": "Seal with 10 cm moist earth cover for 5 months"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Controlled tipping and sanitary landfilling",
+   "tx": "For large metropolitan centers without compost processing capacity, the most satisfactory land disposal technique is **sanitary landfill controlled tipping**. Municipal trucks tip refuse into excavated depressions where bulldozers spread the waste in thin layers, compact it mechanically with heavy rollers to one-third its original volume, and seal the working face daily with twenty centimetres of compacted earth to eliminate open odor, rodent harborage, and spontaneous fires.",
+   "say": "Sanitary landfills dispose of garbage by spreading and rolling waste in thin layers. Each day's rubbish is buried under twenty centimetres of fresh earth to keep rats away.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Uncontrolled open dumping",
+     "points": [
+      "Open fly and rat breeding grounds",
+      "Surface water runoff and leachate leaks",
+      "Foul smoke from spontaneous fires"
+     ]
+    },
+    "right": {
+     "title": "Controlled sanitary landfill",
+     "points": [
+      "Compacted in thin daily lifts",
+      "20 cm daily earth cover seal",
+      "Leachate and methane gas collection"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Incineration for hazardous solid waste",
+   "tx": "Municipal waste with high calorific value and hazardous clinical refuse unsuitable for land disposal undergo **high temperature thermal incineration**. The refuse is fed into primary combustion chambers operating at eight hundred degrees Celsius to volatilise organic solids, followed by secondary afterburner chambers operating between one thousand and one thousand two hundred degrees Celsius with excess oxygen to decompose complex chlorinated dioxins and furans before stack discharge.",
+   "say": "Incineration burns dangerous medical and toxic waste at extreme temperatures. Dual chambers reach over one thousand degrees Celsius, destroying harmful pathogens and toxic organic fumes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "i1",
+      "label": "Waste intake and rotary feed shredder"
+     },
+     {
+      "id": "i2",
+      "label": "Primary chamber combustion at 800 C"
+     },
+     {
+      "id": "i3",
+      "label": "Secondary chamber afterburner at 1050 C"
+     },
+     {
+      "id": "i4",
+      "label": "Flue gas scrubbing and sterile ash extraction"
+     }
+    ],
+    "edges": [
+     [
+      "i1",
+      "i2"
+     ],
+     [
+      "i2",
+      "i3"
+     ],
+     [
+      "i3",
+      "i4"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Sanitation barrier and the F-diagram",
+   "tx": "Preventing the transmission of enteric pathogens from infected human excreta to susceptible community hosts requires establishing an effective **sanitation barrier intervention seam**. As illustrated by the classical F-diagram, infectious human faeces reach new hosts via fluids, fingers, flies, fields, and food; installing sanitary latrines, clean water taps, and handwashing stations erects physical barriers that sever transmission at the faecal source before environmental dissemination.",
+   "say": "Enteric pathogens travel from faeces to new victims through water, hands, flies, soil, and food. Sanitary latrines and handwashing create barriers that block these pathways.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "Faecal source reservoir"
+     },
+     {
+      "id": "f2",
+      "label": "Vectors: Fingers, Flies, Fluids, Fields"
+     },
+     {
+      "id": "f3",
+      "label": "Contaminated Food ingestion"
+     },
+     {
+      "id": "f4",
+      "label": "Sanitary latrine barrier breaks cycle at source"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ],
+     [
+      "f4",
+      "f1"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Sanitary latrine design and water-seal traps",
+   "tx": "Rural sanitation programs advocate the pour-flush sanitary latrine whose central functional innovation is the **water-seal trap mechanism**, typically embodied in the Research-cum-Action latrine. The curved P-trap maintains a water barrier twenty millimetres deep that completely blocks foul septic sewer gases from entering the super-structure while preventing flies, cockroaches, and rodents from gaining access to the anaerobic decomposing excreta pit beneath.",
+   "say": "Pour-flush latrines use a curved pipe holding twenty millimetres of water. This simple water seal blocks sewer gases and stops flies from touching human waste.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Open pit service latrine",
+     "points": [
+      "Uncovered faecal surface",
+      "Attracts blowflies and cockroaches",
+      "Foul noxious stench and hookworm spread"
+     ]
+    },
+    "right": {
+     "title": "Water-seal RCA latrine",
+     "points": [
+      "20 mm curved water trap seal",
+      "100 percent insect and odor barrier",
+      "Flushed cleanly with 1.5 litres water"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Septic tank design and digestion processes",
+   "tx": "In unsewered suburban institutions, domestic sewage is directed into an underground watertight settling basin operating under **septic tank anaerobic digestion principles**. Sewage remains in the rectangular chamber for a hydraulic retention period of twelve to twenty-four hours, during which heavy suspended solids settle as bottom sludge while fats and grease float as surface scum; anaerobic bacteria liquefy ninety percent of settled organic solids, discharging clarified liquid effluent to soakage pits.",
+   "say": "Septic tanks retain household sewage for twelve to twenty-four hours. Anaerobic bacteria break down solid sludge at the bottom while effluent drains into soakage pits.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Septic tank zone",
+     "Physical material",
+     "Biological activity"
+    ],
+    "rows": [
+     [
+      "Top floating scum",
+      "Fats, oils, grease, hair, soaps",
+      "Anaerobic crust prevents surface aeration"
+     ],
+     [
+      "Middle liquid effluent",
+      "Clarified septic waste water",
+      "Horizontal laminar flow towards outlet baffle"
+     ],
+     [
+      "Bottom settled sludge",
+      "Heavy organic and mineral solids",
+      "Anaerobic digestion and volume compaction"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Biochemical oxygen demand and sewage strength",
+   "tx": "The organic polluting strength of domestic sewage and industrial effluent is quantified by measuring **biochemical oxygen demand determinations**. Abbreviated as BOD, this standard metric records the milligrams of dissolved oxygen consumed by aerobic microorganisms to oxidise biodegradable organic matter present in one litre of waste water during five days of dark incubation at twenty degrees Celsius, compared against chemical oxygen demand which measures total dichromate oxidisability.",
+   "say": "Biochemical oxygen demand measures how much oxygen bacteria consume over five days to break down sewage waste. Higher numbers mean stronger pollution and greater danger to rivers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "BOD (Biochemical oxygen demand)",
+     "points": [
+      "Measures biologically degradable organics",
+      "5 days incubation at 20 degrees C",
+      "Raw domestic sewage: 150 to 300 mg/L"
+     ]
+    },
+    "right": {
+     "title": "COD (Chemical oxygen demand)",
+     "points": [
+      "Measures total chemically oxidisable matter",
+      "Rapid potassium dichromate digestion",
+      "Always higher than biological BOD"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Modern sewage treatment and Swachh Bharat Mission",
+   "tx": "Large municipal treatment facilities subject raw sewage to primary mechanical sedimentation followed by secondary biological oxidation via the activated sludge process or trickling filters, reducing BOD by over ninety percent before river discharge. Nationally, rural sanitation coverage and open-defecation-free verification have been driven through the **Swachh Bharat Mission infrastructure mandate**, which constructs twin-pit pour-flush household latrines and community sanitary complexes across thousands of Indian villages.",
+   "say": "City treatment plants use activated sludge to clean ninety percent of organic waste. Across India, the Swachh Bharat Mission has built millions of twin-pit toilets to end open defecation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "w1",
+      "label": "Screening and primary sedimentation"
+     },
+     {
+      "id": "w2",
+      "label": "Activated sludge aeration with Zoogloea"
+     },
+     {
+      "id": "w3",
+      "label": "Secondary clarification removes 90% BOD"
+     },
+     {
+      "id": "w4",
+      "label": "Swachh Bharat twin-pit village deployment"
+     }
+    ],
+    "edges": [
+     [
+      "w1",
+      "w2"
+     ],
+     [
+      "w2",
+      "w3"
+     ],
+     [
+      "w3",
+      "w4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

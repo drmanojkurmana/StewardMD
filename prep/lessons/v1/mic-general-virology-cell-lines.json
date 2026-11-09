@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-general-virology",
+  "subject": "microbiology",
+  "title": "Cell Lines, Embryonated Egg, Haemagglutination, Interference and Antigenic Change",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Cell culture systems** include primary cells directly from tissue, diploid finite lines that senesce after passages, and continuous lines derived from tumours or immortalisation. Different viruses require different cells and incubation temperatures. Rhinovirus grows better at cooler upper airway temperatures, whereas many respiratory viruses use epithelial lines at core temperature. Cell choice is therefore a diagnostic variable, not a laboratory afterthought.",
+      "say": "The right cell line and temperature decide whether a virus grows at all.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Culture types",
+          "points": [
+            "Primary monkey kidney historically broad susceptibility",
+            "Human diploid fibroblasts support CMV",
+            "Continuous lines simplify maintenance",
+            "Shell vial centrifugation speeds detection"
+          ]
+        },
+        "right": {
+          "title": "Detection layers",
+          "points": [
+            "Cytopathic effect observation",
+            "Immunofluorescent staining before CPE",
+            "Haemadsorption for haemagglutinating viruses",
+            "NAAT often replaces culture for speed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **embryonated egg** offers several inoculation routes: chorioallantoic membrane for pox lesions, allantoic cavity for influenza and mumps growth, amniotic cavity for primary influenza isolation, and yolk sac historically for rickettsiae and chlamydiae. Influenza vaccine production still uses eggs widely, though egg adaptation can alter haemagglutinin antigenicity. Cell based and recombinant vaccines reduce that mismatch risk.",
+      "say": "Egg compartments were living culture flasks, and influenza still uses the allantoic cavity at scale.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Routes",
+          "points": [
+            "Chorioallantoic membrane: pocks from poxviruses and HSV",
+            "Allantoic cavity: influenza and mumps replication",
+            "Amniotic cavity: sensitive primary influenza isolation",
+            "Yolk sac: historic intracellular bacteria culture"
+          ]
+        },
+        "right": {
+          "title": "Modern relevance",
+          "points": [
+            "Egg grown influenza vaccines are common",
+            "Egg allergy no longer blocks influenza vaccination in most guidance",
+            "Egg adaptation may reduce vaccine match",
+            "Cell and recombinant platforms avoid egg mutations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Haemagglutination** occurs when viral surface proteins crosslink red blood cells. Influenza haemagglutinin binds sialic acid on erythrocytes, producing a lattice in a well. Antibody that blocks this is measured by haemagglutination inhibition, which historically guides influenza serology and vaccine strain work. Some viruses elute by neuraminidase destroying receptors, reversing agglutination over time.",
+      "say": "Haemagglutination is a visible receptor binding assay, and inhibition measures functional antibody.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Direct haemagglutination",
+          "points": [
+            "Viral particles bridge red cells",
+            "Used to titrate influenza in culture fluid",
+            "Species of red cell can affect result",
+            "A diffuse mat rather than a button is positive"
+          ]
+        },
+        "right": {
+          "title": "Inhibition test",
+          "points": [
+            "Specific antibody blocks viral attachment",
+            "Used for influenza and rubella immunity historically",
+            "Requires standardised antigen dose",
+            "Paired titres show seroconversion"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Viral interference** is the phenomenon in which infection by one virus reduces replication of another in the same cell or host, often through interferon and resource competition. Rubella interference in monkey kidney cells was once exploited to detect rubella by challenging with a cytopathic enterovirus. Interference also shapes live vaccine scheduling and sequential viral infections, although simultaneous coinfections remain common.",
+      "say": "One virus can defend a cell against another by triggering interferon and occupying resources.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mechanisms",
+          "points": [
+            "Interferon induced antiviral state",
+            "Receptor blockade or downregulation",
+            "Competition for cellular machinery",
+            "Defective interfering particles compete for replication"
+          ]
+        },
+        "right": {
+          "title": "Applications",
+          "points": [
+            "Historic rubella detection by enterovirus challenge",
+            "Spacing some live viral vaccines",
+            "Interpreting sequential respiratory detections",
+            "Interferon defects cause severe viral susceptibility"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Antigenic drift** is gradual point mutation in influenza surface glycoproteins, especially haemagglutinin, allowing partial escape from population immunity and yearly vaccine updates. **Antigenic shift** is abrupt reassortment of segmented influenza genomes in a coinfected cell, exchanging whole segments and potentially generating pandemic strains with novel haemagglutinin or neuraminidase. Shift requires segmentation; drift occurs in many RNA viruses at different rates.",
+      "say": "Drift edits a few letters; shift swaps entire genome chapters in influenza.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Drift",
+          "points": [
+            "Point mutations accumulate",
+            "Seasonal epidemics continue",
+            "Vaccine strains updated regularly",
+            "Antibody escape is partial"
+          ]
+        },
+        "right": {
+          "title": "Shift",
+          "points": [
+            "Reassortment of eight influenza segments",
+            "Human and avian viruses can coinfect swine or humans",
+            "Novel subtype can seed a pandemic",
+            "Only segmented viruses can reassort this way"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Laboratory animal inoculation once isolated viruses and tested neurovirulence, but ethics, cost and molecular tools displaced most uses. Modern virus detection relies on **NAAT, antigen tests and sequencing**, while culture remains important for phenotypic resistance, novel virus characterisation and vaccine manufacture. Biosafety level follows transmission route and severity, not simply whether a specimen contains virus.",
+      "say": "PCR names most viruses today; culture still answers what the isolate actually does.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "specimen",
+            "label": "Correct site and timing"
+          },
+          {
+            "id": "naat",
+            "label": "NAAT or antigen detection"
+          },
+          {
+            "id": "sequence",
+            "label": "Sequence for typing or resistance"
+          },
+          {
+            "id": "culture",
+            "label": "Culture when phenotype matters"
+          }
+        ],
+        "edges": [
+          [
+            "specimen",
+            "naat"
+          ],
+          [
+            "naat",
+            "sequence"
+          ],
+          [
+            "sequence",
+            "culture"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,315 @@
+{
+ "v": 1,
+ "id": "fmt-plant-poisons-cobra-bite",
+ "subject": "forensic-medicine",
+ "module": "fmt-plant-poisons",
+ "title": "Cobra and Viper Bites, Antivenom and Scorpion Sting",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Colubrine versus viperine venom",
+   "tx": "Snake venoms divide by dominant action in **colubrine and viperine venom**. Elapid venom of cobra and krait is mainly neurotoxic, attacking respiratory and cardiac centres with curare like neuromuscular blockade. Viperine venom is mainly haemolytic, dissolving vessel walls, haemolysing blood and depressing coagulation into a defibrinated syndrome. Sea snake venom is myotoxic. Every venom shares hyaluronidase, the spreading factor, and proteolytic enzymes are rich in crotalid, lesser in viper and almost absent in elapid venoms.",
+   "say": "Elapids paralyse, vipers bleed, sea snakes dissolve muscle, and hyaluronidase spreads every venom through tissue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Venom family",
+     "Dominant action",
+     "Death by"
+    ],
+    "rows": [
+     [
+      "Cobra and krait",
+      "Neurotoxic blockade",
+      "Respiratory failure"
+     ],
+     [
+      "Vipers",
+      "Haemolytic, defibrinating",
+      "Shock and haemorrhage"
+     ],
+     [
+      "Sea snakes",
+      "Myotoxic",
+      "Cardiac or respiratory paralysis"
+     ],
+     [
+      "All venoms",
+      "Hyaluronidase present",
+      "Rapid local spread"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Cobra bite: ptosis is the earliest sign",
+   "tx": "**Cobra bite** starts locally in six to eight minutes with a small reddish wheal, tender slight radiating burning pain and oozing of bloodstained fluid, swelling minimal or absent. Systemic symptoms follow in about thirty minutes: sleepiness, intoxication, leg weakness and reluctance to move. **Ptosis is the earliest neuroparalytic manifestation**, then ophthalmoplegia, then paralysis of lower limbs spreading to trunk and head, face, palate, tongue and vocal cords, with salivation and vomiting, until paralysis completes in about two hours and respiration arrests.",
+   "say": "A reddish wheal, then sleepiness, then drooping eyelids first: cobra paralysis climbs to the diaphragm in about two hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Wheal and burning in minutes"
+     },
+     {
+      "id": "b",
+      "label": "Sleepiness and leg weakness"
+     },
+     {
+      "id": "c",
+      "label": "Ptosis, earliest paralysis"
+     },
+     {
+      "id": "d",
+      "label": "Bulbar then respiratory failure"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Krait bite: painless, drowsy, abdominal",
+   "tx": "**Krait bite** resembles cobra bite with decisive differences: no swelling or burning pain at the site, milder convulsions, and a more intense feeling of drowsiness and intoxication, with albumin appearing in the urine. Victims bitten asleep may present with morning paralysis and severe abdominal pain that misleads surgeons. Inability to raise the head in supine position is the basic bedside test of imminent respiratory failure across neurotoxic bites, while the patient stays conscious but unable to speak.",
+   "say": "No local pain, deep drowsiness and a head that cannot lift off the pillow announce krait envenomation approaching the diaphragm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Krait bite clues",
+     "points": [
+      "No swelling or burning pain",
+      "Drowsiness unusually intense",
+      "Albumin in urine",
+      "Morning paralysis after night bite"
+     ]
+    },
+    "right": {
+     "title": "Respiratory warning",
+     "points": [
+      "Head cannot be raised supine",
+      "Speech and swallowing fail",
+      "Patient conscious, cannot speak",
+      "Ventilation support is decisive"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Viper bite: bleeding that will not clot",
+   "tx": "**Viper bite** declares itself locally: severe pain within eight minutes, red painful swelling from fifteen minutes, bloodstained discharge, persistent bleeding from the bite as a constant feature, blisters at twelve hours and swelling marching to the trunk in one to two days. Systemically come vomiting, giddiness, sweating, abdominal pain, dilated pupils unreactive to light, collapse and haemorrhagic syndrome from gums, rectum, sputum and bite, with haematuria in hours and blood that becomes defibrinated and will not clot. Russell's and hump nosed viper bites frequently end in renal failure.",
+   "say": "Pain in eight minutes, swelling in fifteen and blood that refuses to clot are viper bite until proved otherwise.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Viper sign",
+     "Timing",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Severe local pain",
+      "Within 8 minutes",
+      "Venom injected"
+     ],
+     [
+      "Swelling begins",
+      "Within 15 minutes",
+      "May march to trunk"
+     ],
+     [
+      "Blisters",
+      "About 12 hours",
+      "Local tissue injury"
+     ],
+     [
+      "Incoagulable blood",
+      "Hours",
+      "Defibrination established"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The twenty minute whole blood clotting test",
+   "tx": "The **twenty minute whole blood clotting test** is the bedside arbiter in viper bite: a few millilitres of fresh venous blood stand undisturbed in a clean dry glass tube for twenty minutes and are then gently tilted; blood still liquid proves viper envenomation. It is repeated every six hours to judge repeat antivenom dosing, normalisation of clotting being the endpoint, then at twelve hour intervals for at least forty eight hours to catch recurring envenoming as hepatic factor recovery takes about six hours.",
+   "say": "Liquid blood at twenty minutes means viper venom at work, and the test repeated six hourly steers every further vial.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Fresh blood in clean dry tube"
+     },
+     {
+      "id": "b",
+      "label": "Stand twenty minutes undisturbed"
+     },
+     {
+      "id": "c",
+      "label": "Tilt gently, liquid means positive"
+     },
+     {
+      "id": "d",
+      "label": "Repeat six hourly for dosing"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "First aid that helps and first aid that harms",
+   "tx": "**Snake bite first aid** is reassurance, firm pressure over the bite, pressure immobilisation with a broad firm bandage at fifty to seventy millimetres of mercury for elapid and sea snake bites, splinting the limb, cleaning with soap and water and lying the patient on one side. Pressure immobilisation is not used in viper bites for fear of local necrosis. Forbidden are local incision and suction, sucking the wound, chemicals on the wound, cautery and cryotherapy, each adding bleeding, nerve injury or sealed in poison.",
+   "say": "Bandage firmly, splint and transport; never incise, suck, cauterise or freeze a snake bite, and skip pressure bandage in viper bites.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Do immediately",
+     "points": [
+      "Reassure the patient",
+      "Pressure immobilise elapid bites",
+      "Splint the limb still",
+      "Clean, dress, recovery position"
+     ]
+    },
+    "right": {
+     "title": "Never do",
+     "points": [
+      "Incise or suck the wound",
+      "Apply chemicals or herbs",
+      "Cauterise the bite",
+      "Cryotherapy or tight tourniquet"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Polyvalent antivenom dosing",
+   "tx": "**Polyvalent antivenom**, raised in horses against cobra, common krait, Russell's viper and saw scaled viper venoms, is lyophilised, keeps potency about five years, and each vial neutralises about six to eight milligrams of venom. It works best within four hours, less at eight, doubtfully after twenty four. No test dose is given. Minimal envenomation takes five vials, moderate ten, severe ten to fifteen, children the same as adults, infused in five hundred millilitres over one hour; neurotoxic cases repeat ten vials after one hour.",
+   "say": "Five, ten or fifteen vials by severity, same for children, no test dose, and a second ten after an hour for neurotoxic bites.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Envenomation grade",
+     "Antivenom dose",
+     "Notes"
+    ],
+    "rows": [
+     [
+      "Minimal, local only",
+      "5 vials",
+      "No systemic reaction"
+     ],
+     [
+      "Moderate, progressing",
+      "10 vials",
+      "Systemic reaction present"
+     ],
+     [
+      "Severe",
+      "10 to 15 vials",
+      "Marked local and systemic"
+     ],
+     [
+      "Neurotoxic repeat",
+      "10 more after one hour",
+      "Viper redose waits six hours"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Fatal venom doses and fatal periods",
+   "tx": "Dried venom fatal doses put the species in order in **venom lethality figures**: krait six milligrams, echis eight, cobra twelve and Russell's viper fifteen, while one bite yields far more, cobra one hundred seventy to three hundred twenty five milligrams, Russell's viper one hundred thirty to two hundred fifty, krait only twenty and echis twenty to thirty five. Fatal periods run half to six hours for cobra and one to two days for vipers. More than half of venomous bites inject inadequate venom and stay mild, which observation periods respect.",
+   "say": "Six milligrams of krait venom can kill while a cobra carries three hundred in one bite, and half of all bites stay mild.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Identify species where possible"
+     },
+     {
+      "id": "b",
+      "label": "Observe twelve to twenty four hours"
+     },
+     {
+      "id": "c",
+      "label": "Watch ptosis or clotting test"
+     },
+     {
+      "id": "d",
+      "label": "Antivenom on envenomation signs"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Scorpion sting: one hole and a catecholamine storm",
+   "tx": "**Scorpion sting** leaves a single hole in the centre of a reddened area, separating it from snake bite. The venom, a clear toxalbumen more toxic weight for weight than snake venom though tiny in dose, is a potent autonomic stimulator releasing massive catecholamines from the adrenals with direct myocardial effects. Neurotoxic stings mimic cobra bite with restlessness, paralysis, arrhythmias, convulsions and death from pulmonary oedema or cardiac failure within hours, children being the real mortality risk. Specific antivenin exists; morphine is contraindicated, barbiturates control excitement.",
+   "say": "One central hole, a catecholamine storm and a failing heart mark scorpion sting, deadliest in children and never treated with morphine.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Scorpion sting clues",
+     "points": [
+      "Single central hole",
+      "Oedema, pain, redness",
+      "Catecholamine storm signs",
+      "Children die, adults rarely"
+     ]
+    },
+    "right": {
+     "title": "Scorpion treatment anchors",
+     "points": [
+      "Immobilise, ice the sting",
+      "Specific antivenin available",
+      "Barbiturates for excitement",
+      "Morphine contraindicated"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

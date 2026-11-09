@@ -1,0 +1,232 @@
+{
+  "v": 1,
+  "module": "phm-cholinergic-agonists",
+  "subject": "pharmacology",
+  "title": "Acetylcholine Synthesis, Storage, Release, and Cholinomimetic Agonists",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Neurotransmission in the parasympathetic nervous system and somatic motor endplate relies on active **acetylcholine synthesis**. Extracellular choline is transported into the presynaptic nerve terminal by a high-affinity, sodium-dependent carrier mechanism. Once inside the terminal cytoplasm, choline combines with acetyl coenzyme A derived from mitochondrial pyruvate oxidation, establishing the primary neurotransmitter responsible for muscarinic and nicotinic signaling across synapses.",
+      "say": "Choline uptake by sodium-dependent transporters forms the rate-limiting step in acetylcholine synthesis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cho",
+            "label": "Choline extracellular uptake"
+          },
+          {
+            "id": "acoa",
+            "label": "Mitochondrial acetyl coenzyme A"
+          },
+          {
+            "id": "chat",
+            "label": "Choline acetyltransferase synthesis"
+          },
+          {
+            "id": "ves",
+            "label": "Vesicular acetylcholine transporter"
+          }
+        ],
+        "edges": [
+          [
+            "cho",
+            "chat"
+          ],
+          [
+            "acoa",
+            "chat"
+          ],
+          [
+            "chat",
+            "ves"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The enzymatic esterification of choline and acetyl coenzyme A is catalyzed specifically by cytosolic **choline acetyltransferase**. This constitutive enzyme operates in cholinergic neuron terminals, rapidly transferring the acetyl moiety to yield acetylcholine. Newly formed acetylcholine is subsequently pumped into synaptic storage vesicles by a proton-antiporter vesicular acetylcholine transporter, where it is concentrated alongside adenosine triphosphate and proteoglycans awaiting calcium-triggered exocytosis.",
+      "say": "Choline acetyltransferase converts choline and acetyl-CoA into acetylcholine in presynaptic terminals.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Choline acetyltransferase",
+          "points": [
+            "Cytoplasmic presynaptic enzyme",
+            "Synthesizes neurotransmitter acetylcholine",
+            "Requires mitochondrial acetyl-CoA",
+            "Specific marker for cholinergic neurons"
+          ]
+        },
+        "right": {
+          "title": "Acetylcholinesterase",
+          "points": [
+            "Postsynaptic and junctional enzyme",
+            "Terminates cholinergic signaling rapidly",
+            "Hydrolyzes acetylcholine into acetate and choline",
+            "Target of reversible and irreversible inhibitors"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Experimental pharmacologic blockade of presynaptic choline uptake is achieved with the research tool **hemicholinium**. By competitively inhibiting the high-affinity sodium-dependent choline transporter at the axolemma, hemicholinium depletes presynaptic acetylcholine reserves and abolishes cholinergic neurotransmission. A distinct blocker, vesamicol, selectively inhibits the vesicular acetylcholine transporter, preventing storage of synthesized neurotransmitter into synaptic vesicles.",
+      "say": "Hemicholinium blocks axonal choline uptake while vesamicol prevents vesicular packaging.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Inhibitor",
+          "Molecular target",
+          "Pharmacologic result"
+        ],
+        "rows": [
+          [
+            "Hemicholinium",
+            "High-affinity Na-choline symporter",
+            "Depletes intracellular choline and ACh synthesis"
+          ],
+          [
+            "Vesamicol",
+            "Vesicular ACh proton-antiporter",
+            "Prevents vesicular ACh storage and packaging"
+          ],
+          [
+            "Botulinum toxin",
+            "SNARE docking complex proteins",
+            "Abolishes calcium-dependent exocytotic release"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cholinergic actions on visceral target organs are mediated primarily by five distinct **muscarinic receptors M1 M2 M3**. M1 receptors reside in gastric parietal cells and cerebral cortex, signaling via Gq proteins and inositol trisphosphate. M2 receptors predominate in nodal cardiac myocardium, coupling to Gi proteins to slow heart rate. M3 receptors govern exocrine gland secretion, smooth muscle contraction, and endothelial nitric oxide release.",
+      "say": "Muscarinic M1, M2, and M3 receptors mediate parasympathetic effects through Gq and Gi protein signaling.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Subtype",
+          "G-protein",
+          "Primary organ",
+          "Physiological response"
+        ],
+        "rows": [
+          [
+            "M1",
+            "Gq (IP3 / DAG)",
+            "Gastric parietal cells, CNS",
+            "Gastric acid secretion, neural activation"
+          ],
+          [
+            "M2",
+            "Gi (cAMP decrease)",
+            "Sinoatrial node, AV node",
+            "Bradycardia, decreased conduction velocity"
+          ],
+          [
+            "M3",
+            "Gq (IP3 / DAG)",
+            "Bronchi, bladder, pupil",
+            "Bronchoconstriction, detrusor contraction, miosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Rapid neurotransmission across autonomic ganglia and neuromuscular junctions is controlled by ligand-gated ionotropic **nicotinic receptors**. These pentameric ion channels consist of neuronal subtypes in autonomic ganglia and adrenal medulla, and muscular subtypes at skeletal motor endplates. Agonist binding opens central sodium channels, causing swift membrane depolarization, action potential propagation, and immediate contraction of voluntary striated skeletal muscle.",
+      "say": "Nicotinic receptors are ligand-gated cation channels mediating rapid ganglionic and neuromuscular excitation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Receptor subtype",
+          "Location",
+          "Selective agonist",
+          "Selective antagonist"
+        ],
+        "rows": [
+          [
+            "Nm (Muscular)",
+            "Skeletal motor endplate",
+            "Phenyltrimethylammonium",
+            "Tubocurarine, rocuronium"
+          ],
+          [
+            "Nn (Neuronal)",
+            "Autonomic ganglia, adrenal medulla",
+            "Dimethylphenylpiperazinium",
+            "Hexamethonium, trimethaphan"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Selective stimulation of urinary and gastrointestinal tract motility without substantial cardiac deceleration is achieved with **bethanechol**. Because of its carbamic ester substitution and beta-methyl carbon side chain, bethanechol resists degradation by acetylcholinesterase and pseudocholinesterase. Clinicians administer bethanechol orally or subcutaneously to alleviate non-obstructive postoperative urinary retention, neurogenic bladder atony, and congenital megacolon.",
+      "say": "Bethanechol selectively stimulates urinary bladder detrusor muscle while resisting cholinesterase breakdown.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bethanechol",
+          "points": [
+            "Pure muscarinic agonist activity",
+            "Completely resistant to cholinesterases",
+            "Used for non-obstructive urinary retention",
+            "Minimal cardiovascular depressant action"
+          ]
+        },
+        "right": {
+          "title": "Carbachol",
+          "points": [
+            "Mixed muscarinic and nicotinic agonist",
+            "Resistant to acetylcholinesterase",
+            "Used topically in refractory glaucoma",
+            "Substantial autonomic ganglionic stimulation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Tertiary amine natural alkaloid cholinomimetics with superior tissue penetrance are exemplified by **pilocarpine**. Extracted from Pilocarpus microphyllus leaves, pilocarpine crosses corneal barriers to cause pupillary sphincter contraction, producing therapeutic miosis and opening trabecular outflow angles in acute closed-angle glaucoma. A related oral agent, cevimeline, acts on M3 receptors to stimulate saliva production in patients suffering from Sjogren syndrome xerostomia.",
+      "say": "Pilocarpine induces miosis to treat glaucoma, while cevimeline stimulates salivary flow in Sjogren syndrome.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Agent",
+          "Pharmacological class",
+          "Clinical indication",
+          "Route"
+        ],
+        "rows": [
+          [
+            "Pilocarpine",
+            "Natural tertiary alkaloid",
+            "Angle-closure glaucoma, xerostomia",
+            "Ophthalmic drops, oral"
+          ],
+          [
+            "Cevimeline",
+            "Synthetic quinuclidine",
+            "Sjogren syndrome dry mouth",
+            "Oral capsules"
+          ],
+          [
+            "Carbachol",
+            "Choline carbamate ester",
+            "Intraoperative miosis, open-angle glaucoma",
+            "Intraocular instillation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Irreversible inhibition of cholinergic synaptic transmission can be produced by bacterial exoneurotoxins such as **botulinum toxin**. Secreted by Clostridium botulinum, the toxin light chain acts as an endopeptidase that cleaves presynaptic SNARE proteins, abolishing exocytotic fusion of acetylcholine vesicles at motor endplates. This produces flaccid paralysis used therapeutically for blepharospasm, cervical dystonia, spasticity, and axillary hyperhidrosis.",
+      "say": "Botulinum toxin cleaves SNARE proteins to prevent acetylcholine release, producing flaccid muscle paralysis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/botulism-fig1.webp",
+        "alt": "Botulinum toxin mechanism at neuromuscular junction",
+        "caption": "Botulinum neurotoxin light chain cleaving presynaptic SNARE complex proteins, blocking vesicle fusion and acetylcholine release."
+      }
+    }
+  ]
+}

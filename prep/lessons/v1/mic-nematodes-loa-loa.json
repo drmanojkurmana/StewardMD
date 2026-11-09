@@ -1,0 +1,267 @@
+{
+  "v": 1,
+  "module": "mic-nematodes",
+  "subject": "microbiology",
+  "title": "Tissue Nematodes: Loa loa, Onchocerca, Dracunculus and Larva Migrans",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The African eye worm **Loa loa** is a filarial nematode endemic to the rain forests of West and Central Africa, transmitted by day-biting female mango flies or deerflies belonging to the genus Chrysops. Adult worms wander through subcutaneous and subfascial connective tissues for up to seventeen years. Microfilariae are sheathed, with nuclei extending continuously to the extreme tip of the tail, exhibiting strict diurnal periodicity in daytime blood.",
+      "say": "Day-biting Chrysops flies transmit Loa loa, whose sheathed microfilariae circulate during the daytime.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/nematodes-ascaris-hookworm-strongyloides-filaria-fig1.webp",
+        "alt": "Filarial microfilaria morphological features",
+        "caption": "Diagnostic morphology of filarial microfilariae showing continuous column of tail nuclei [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Hypersensitivity to metabolic secretions of wandering adult worms provokes localized angioedema known as **Calabar swellings**. These transient, non-pitting, painless or pruritic subcutaneous swellings typically measure several centimetres across, developing suddenly over the wrists, forearms, or periorbital tissues before resolving spontaneously over three to seven days. A dramatic presentation occurs when an adult worm crawls visibly across the bulbar subconjunctival space.",
+      "say": "Wandering adult worms provoke transient non-pitting Calabar swellings or crawl beneath the conjunctiva.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Calabar swellings (Loa loa)",
+          "points": [
+            "Transient subcutaneous angioedematous nodules",
+            "Predilection for forearms, wrists and face",
+            "Resolve spontaneously within several days",
+            "Driven by type I and IV allergic hypersensitivity"
+          ]
+        },
+        "right": {
+          "title": "Subconjunctival migration",
+          "points": [
+            "Adult worm crawls visibly under bulbar conjunctiva",
+            "Foreign body sensation, intense ocular congestion",
+            "Can be surgically extracted under local anaesthesia",
+            "Does not cause irreversible corneal blindness"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The microfilaricide of choice for loiasis is oral **diethylcarbamazine**, which rapidly clears circulating microfilariae and kills adult worms. However, in individuals with high microfilarial loads exceeding eight thousand parasites per millilitre, rapid massive microfilarial lysis can trigger life-threatening encephalopathy, coma, and retinal haemorrhages. In such patients, pretreatment with oral albendazole is mandatory to lower microfilarial density safely before introducing diethylcarbamazine.",
+      "say": "Diethylcarbamazine eliminates microfilariae but requires caution to avoid post-treatment encephalopathy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "loa1",
+            "label": "Quantify daytime blood microfilarial load prior to initiating therapy"
+          },
+          {
+            "id": "loa2",
+            "label": "If microfilariae exceed 8000/mL: administer oral albendazole to reduce density"
+          },
+          {
+            "id": "loa3",
+            "label": "Once density falls safely: administer oral diethylcarbamazine with steroid cover"
+          }
+        ],
+        "edges": [
+          [
+            "loa1",
+            "loa2"
+          ],
+          [
+            "loa2",
+            "loa3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The filarial parasite **Onchocerca volvulus** causes onchocerciasis, commonly known as river blindness, transmitted by blackflies of the genus Simulium that breed along fast-flowing, highly oxygenated river rapids. Adult worms live encapsulated inside firm, painless, fibrous subcutaneous nodules called onchocercomata, commonly situated over bony prominences such as the iliac crests, ribs, and skull.",
+      "say": "Simulium blackflies breeding in oxygenated rapids transmit Onchocerca, forming subcutaneous onchocercoma nodules.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Filarial Parasite",
+          "Vector Species",
+          "Microfilaria Sheath & Blood Periodicity"
+        ],
+        "rows": [
+          [
+            "Wuchereria bancrofti",
+            "Culex quinquefasciatus mosquito",
+            "Sheathed microfilariae; strict nocturnal periodicity"
+          ],
+          [
+            "Loa loa",
+            "Chrysops deerfly (mango fly)",
+            "Sheathed microfilariae; strict diurnal daytime periodicity"
+          ],
+          [
+            "Onchocerca volvulus",
+            "Simulium blackfly (damnosum)",
+            "Unsheathed microfilariae; dermis and eyes (not in blood)"
+          ],
+          [
+            "Mansonella perstans",
+            "Culicoides biting midges",
+            "Unsheathed microfilariae; non-periodic in blood"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Female worms produce millions of unsheathed microfilariae that do not enter circulating blood, migrating instead through dermal connective tissues and ocular structures. Microfilarial death in the cornea and anterior chamber provokes punctate snowflake keratitis and progressive sclerosing keratitis, leading to irreversible **river blindness**. In the skin, chronic inflammation destroys elastic fibers, causing pruritic lizard skin, hanging groin, and patchy depigmentation.",
+      "say": "Dermal and ocular microfilarial death causes sclerosing keratitis, resulting in irreversible river blindness.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ocular manifestations",
+          "points": [
+            "Punctate keratitis (snowflake opacities)",
+            "Progressive sclerosing keratitis",
+            "Anterior uveitis with secondary glaucoma",
+            "Optic atrophy and chorioretinitis"
+          ]
+        },
+        "right": {
+          "title": "Cutaneous manifestations",
+          "points": [
+            "Severe intractable pruritic onchodermatitis",
+            "Loss of dermal elastin causing hanging groin",
+            "Pretibial patchy depigmentation (leopard skin)",
+            "Subcutaneous fibrous onchocercomata nodules"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Definitive diagnosis of onchocerciasis relies on microscopic examination of a bloodless **skin snip**, where a tiny piece of skin elevated with a needle is shaved off, placed in physiological saline, and inspected within thirty minutes for emerging motile unsheathed microfilariae. Mass drug administration with annual oral ivermectin paralyzes microfilariae, successfully suppressing ocular pathology and halting community transmission.",
+      "say": "Microscopic examination of saline-mounted skin snips demonstrates actively motile unsheathed microfilariae.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ss1",
+            "label": "Raise tiny skin tent over iliac crest or shoulder with sterile needle"
+          },
+          {
+            "id": "ss2",
+            "label": "Shave bloodless epidermal snip and immerse in saline well on slide"
+          },
+          {
+            "id": "ss3",
+            "label": "Light microscopy at 30 minutes reveals emerging motile unsheathed microfilariae"
+          }
+        ],
+        "edges": [
+          [
+            "ss1",
+            "ss2"
+          ],
+          [
+            "ss2",
+            "ss3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The guinea worm **Dracunculus medinensis**, known historically as the fiery serpent of biblical antiquity, is contracted by drinking stagnant step-well water containing infected microscopic freshwater copepods (Cyclops water fleas). The female worm matures over one year, reaching up to one metre in length, before migrating to the subcutaneous tissues of the lower leg and foot, where it provokes a painful burning cutaneous blister.",
+      "say": "Ingesting water fleas carrying guinea worm larvae causes a burning foot blister after one year.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/intestinal-nematode-infections-fig1.webp",
+        "alt": "Nematode clinical manifestations and vectors",
+        "caption": "Diagnostic clinical presentations of tissue and intestinal nematode infections [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "When the infected patient immerses the burning foot into cool water to relieve the intense pain, the blister ruptures, releasing millions of rhabditiform larvae into the water source. Eradication of guinea worm disease represents a triumphant public health achievement achieved through filtering drinking water through fine nylon mesh strainers and treating step-wells with temephos larvicide, without requiring any vaccine or curative pharmaceutical **anthelmintic drug**.",
+      "say": "Filtering drinking water through nylon mesh and eliminating Cyclops vectors successfully eradicated guinea worm.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Eradication Strategy",
+          "Intervention Target",
+          "Public Health Impact"
+        ],
+        "rows": [
+          [
+            "Cloth / nylon filtration",
+            "Strains out Cyclops water fleas from drinking water",
+            "Completely interrupts larval ingestion by humans"
+          ],
+          [
+            "Step-well closure",
+            "Conversion to sanitary hand-pump boreholes",
+            "Prevents foot contact with open municipal drinking water"
+          ],
+          [
+            "Chemical larviciding",
+            "Application of temephos (Abate) to ponds",
+            "Destroys copepod crustacean vectors rapidly"
+          ],
+          [
+            "Case containment",
+            "Voluntary patient isolation with wound dressing",
+            "Prevents water contamination by emerging gravid worms"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Zoonotic nematodes incapable of completing their normal development in human hosts produce larva migrans syndromes. **Cutaneous larva migrans**, commonly termed creeping eruption, occurs when filariform larvae of dog and cat hookworms, particularly Ancylostoma braziliense, penetrate human skin on sandy beaches. Lacking enzymes to penetrate the deeper dermal basement membrane, the trapped larvae wander confined to the epidermis, creating intensely pruritic, erythematous, advancing serpiginous tracks.",
+      "say": "Trapped animal hookworm larvae create advancing serpiginous cutaneous tracks, termed creeping eruption.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cutaneous larva migrans",
+          "points": [
+            "Pathogen: Ancylostoma braziliense (dog/cat hookworm)",
+            "Exposure: walking barefoot on sandy beaches",
+            "Pathology: intraepidermal advancing serpiginous tracks",
+            "Treatment: oral or topical albendazole / ivermectin"
+          ]
+        },
+        "right": {
+          "title": "Visceral larva migrans",
+          "points": [
+            "Pathogen: Toxocara canis (dog roundworm)",
+            "Exposure: ingesting soil or sand contaminated with dog feces",
+            "Pathology: visceral granulomas in liver, lungs, brain, eyes",
+            "Treatment: oral albendazole with systemic corticosteroids"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Conversely, **visceral larva migrans** arises when humans accidentally ingest embryonated eggs of the canine roundworm Toxocara canis from soil or sandbox playgrounds. Hatched larvae penetrate the bowel wall and wander relentlessly through internal organs including the liver, lungs, and central nervous system, driving dense eosinophilic granulomas, hepatomegaly, bronchospasm, and leukocytosis. Ocular toxocariasis mimics retinoblastoma, causing retinal granulomas and painless unilateral visual loss.",
+      "say": "Ingested Toxocara dog roundworm eggs hatch and invade visceral organs, causing hepatomegaly and retinal granulomas.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lm1",
+            "label": "Child ingests Toxocara canis eggs from contaminated soil or puppy feces"
+          },
+          {
+            "id": "lm2",
+            "label": "Larvae hatch in intestine and invade portal and systemic circulation"
+          },
+          {
+            "id": "lm3",
+            "label": "Visceral granulomas form in liver and eyes, mimicking retinoblastoma on exam"
+          }
+        ],
+        "edges": [
+          [
+            "lm1",
+            "lm2"
+          ],
+          [
+            "lm2",
+            "lm3"
+          ]
+        ]
+      }
+    }
+  ]
+}

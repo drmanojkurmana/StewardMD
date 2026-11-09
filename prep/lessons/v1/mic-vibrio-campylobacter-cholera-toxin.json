@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "mic-vibrio-campylobacter",
+  "subject": "microbiology",
+  "title": "Cholera Toxin, Darting Motility, TCBS and Alkaline Peptone Water",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Cholera toxin** is an AB5 enterotoxin (one A, five B subunits) encoded by CTX phi phage (lysogenic conversion again): B binds GM1 ganglioside on enterocytes, A ADP ribosylates Gs alpha locking adenylate cyclase on, cAMP opens CFTR chloride channels and blocks sodium absorption, isotonic fluid pours into lumen. Toxin coregulated pilus (TCP) colonises first, co regulated by ToxR. The same ToxR regulatory system illustrates how a bacterium changes virulence when it senses bile, temperature and other intestinal signals.",
+      "say": "Pilus attaches, toxin locks the Gs switch, CFTR floods the gut: cholera in three molecules.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Toxin mechanics",
+          "points": [
+            "B pentamer binds GM1",
+            "A1 enzyme ADP ribosylates Gs alpha",
+            "cAMP rises persistently",
+            "CFTR secretion plus NHE inhibition"
+          ]
+        },
+        "right": {
+          "title": "Colonisation partners",
+          "points": [
+            "TCP pili bundle and attach",
+            "ToxT and ToxR regulon coordinates",
+            "Accessory colonisation factors",
+            "Fresh shed vibrios hyperinfectious (stool genes up)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Darting motility** (shooting star zigzag of single polar flagellum) on hanging drop or dark field from rice water stool or alkaline peptone growth, inhibited by specific antiserum (immobilisation test heritage), is the fastest presumptive cholera evidence where cultures lag. That immediacy helped field laboratories recognise cholera before serotyping reagents arrived from a central store.",
+      "say": "Darting commas stop when O1 antiserum lands: motility immobilisation in a drop.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Motility reading",
+          "points": [
+            "Fresh liquid stool or young broth",
+            "Darting, not Brownian drift",
+            "Dark field or phase contrast best",
+            "Antiserum immobilisation supports serogroup"
+          ]
+        },
+        "right": {
+          "title": "Motility pitfalls",
+          "points": [
+            "Other vibrios dart too",
+            "Old specimens lose motility",
+            "Campylobacter darts smaller (separate lesson)",
+            "Presumptive only, culture confirms"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**TCBS agar** mechanics from the media module deserve toxin level detail: sucrose fermentation by cholerae acidifies bromothymol to yellow, bile and citrate and alkaline pH 8.6 suppress enterics, sodium thiosulfate and iron add H2S reading; Vibrio parahaemolyticus green (sucrose negative) shares the plate.",
+      "say": "Yellow on alkaline TCBS after peptone enrichment is cholera's bench portrait.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "TCBS recipe logic",
+          "points": [
+            "pH 8.6 alkalinity vibrio favoured",
+            "Bile salts inhibit gram positives and enterics",
+            "Sucrose 2 percent indicator system",
+            "Colonies 2 to 3 mm yellow (cholerae) in 18 hours"
+          ]
+        },
+        "right": {
+          "title": "Plate partners",
+          "points": [
+            "Alkaline peptone enrichment first",
+            "Blood agar oxidase colonies check",
+            "String and oxidase confirm vibrio",
+            "Serogrouping antisera final"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Alkaline peptone water** (pH 8.4 to 9) enriches vibrios because they outrun most stool flora at alkaline surface pellicle within 6 to 8 hours; longer incubation lets rivals catch up, the enrichment window rule from the culture module with lives attached.",
+      "say": "Six hours alkaline enrichment, then plate; overnight enrichment betrays the advantage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "stool",
+            "label": "Stool into alkaline peptone water"
+          },
+          {
+            "id": "pellicle",
+            "label": "Surface pellicle sampled at 6 to 8 hours"
+          },
+          {
+            "id": "tcbs",
+            "label": "TCBS and blood agar plated"
+          },
+          {
+            "id": "confirm",
+            "label": "Oxidase, string, serogroup confirmation"
+          }
+        ],
+        "edges": [
+          [
+            "stool",
+            "pellicle"
+          ],
+          [
+            "pellicle",
+            "tcbs"
+          ],
+          [
+            "tcbs",
+            "confirm"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**ORS physiology** exploits sodium glucose cotransport (SGLT) untouched by toxin: glucose drags sodium and water back despite secretion, low osmolarity ORS (sodium 75, glucose 75) reducing stool output versus older formula, rice based variants, home fluids when packets absent. This cotransporter saved more lives than any antibiotic class in diarrhoea.",
+      "say": "Toxin opens chloride out, glucose hauls sodium in; ORS wins by the second door.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ORS design",
+          "points": [
+            "Low osmolarity WHO ORS standard",
+            "Sodium glucose matched molarity",
+            "Potassium and citrate replace losses",
+            "Continue feeding and breastfeeding"
+          ]
+        },
+        "right": {
+          "title": "ORS practice",
+          "points": [
+            "Small frequent sips, vomiting not a stop sign",
+            "Plan B observed 4 hours reassessment",
+            "IV when shock or ORS fails",
+            "Homemade sugar salt correct mixing taught"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Antibiotics in cholera** (doxycycline single dose adults, azithromycin children and pregnancy, fluoroquinolone where susceptible) shorten duration and shedding about half, reserved moderate severe and hospitalised, resistance shifting by outbreak. They are adjuncts ranked publicly below fluids in every protocol. Their effect is supportive rather than curative, and fluid volume remains the number most closely tied to survival.",
+      "say": "Antibiotics halve the purge; fluids decide survival. Protocol order matters.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Antibiotic gains",
+          "points": [
+            "Duration shortened 1 to 2 days",
+            "Stool volume reduced",
+            "Shedding shortened (transmission)",
+            "Single dose doxycycline traditions"
+          ]
+        },
+        "right": {
+          "title": "Antibiotic cautions",
+          "points": [
+            "Tetracycline resistance plasmids regional",
+            "Never delay rehydration for drugs",
+            "Outbreak antibiograms guide choice",
+            "Mild cases ORS alone"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Toxin detection heritage** (rabbit ileal loop, Y1 adrenal and CHO cell cAMP assays, GM1 ELISA and bead assays, ctx PCR) built enterotoxin science; ETEC LT measured by the same kits, cross curriculum toxin AB5 grammar again. Bench history matters because outbreak laboratories still run GM1 ELISA.",
+      "say": "GM1 captures the B subunit wherever AB5 toxins are hunted.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic assays",
+          "points": [
+            "Ileal loop fluid accumulation (animal era)",
+            "Cell culture cAMP elongation (CHO)",
+            "GM1 ganglioside ELISA",
+            "Reverse passive latex traditions"
+          ]
+        },
+        "right": {
+          "title": "Modern assays",
+          "points": [
+            "ctxAB PCR from isolates and stool",
+            "Multiplex GI panels",
+            "Dipstick antigen in field",
+            "Whole genome virulence in surveillance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hyperinfectivity and household spread** close outbreak craft: freshly shed vibrios in stool transiently upregulate infectivity genes (animal models hundred fold), household contacts within days, water chlorination and safe storage narrow necked containers, funeral feasts historically explosive. Speed of response in first cases prevents second wave.",
+      "say": "Fresh stool is most infectious; protect household water in the first forty eight hours.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transmission accelerants",
+          "points": [
+            "Hyperinfectious fresh vibrios",
+            "Shared water storage contamination",
+            "Food prepared by cases",
+            "Funeral gatherings documented"
+          ]
+        },
+        "right": {
+          "title": "Household answers",
+          "points": [
+            "Chlorinate and narrow mouth storage",
+            "Handwashing with soap stations",
+            "Antibiotic prophylaxis not routine (selected contacts policies debate)",
+            "Vaccination rings in campaigns"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-significance-tests-null-hypothesis",
+  "subject": "community-medicine",
+  "module": "cm-significance-tests",
+  "title": "Hypothesis Testing: Null Hypothesis, P Value, Errors, and Power",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "The null hypothesis",
+      "tx": "Every significance test begins by assuming no effect: the **null hypothesis** states that the observed difference (between drug and placebo, exposed and unexposed) reflects chance alone, with any true difference being zero. The alternative hypothesis claims a real difference. Tests never prove the alternative directly; they measure how embarrassing the data are for the null, exactly like a court presuming innocence.",
+      "say": "The null hypothesis says the difference is pure chance. We test how badly the data embarrass that assumption.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Null hypothesis (H0)",
+          "points": ["No true difference or association", "Assumed true for the test", "Rejected or not rejected, never proved"]
+        },
+        "right": {
+          "title": "Alternative hypothesis (H1)",
+          "points": ["Real difference exists", "One sided or two sided", "Supported indirectly via rejecting H0"]
+        }
+      }
+    },
+    {
+      "title": "The p value, precisely",
+      "tx": "The **p value in hypothesis testing** is the probability of obtaining results at least as extreme as those observed if the null hypothesis were true. A p of zero point zero three means such data would arise by chance three percent of the time under no effect. It is not the probability that the null is true, nor that the finding is clinically important, the two misreadings examiners hunt relentlessly.",
+      "say": "P is the chance of data this extreme if nothing were truly different. It never gives the chance that the null is true.",
+      "vis": {
+        "kind": "table",
+        "cols": ["P value statement", "Verdict"],
+        "rows": [
+          ["Probability data arose if H0 true", "Correct definition"],
+          ["Probability H0 is true", "Wrong, classic trap"],
+          ["Probability result is important", "Wrong, size is separate"],
+          ["Below 0.05 means significant", "Convention, not nature"]
+        ]
+      }
+    },
+    {
+      "title": "Significance level and critical values",
+      "tx": "Researchers fix the **level of significance (alpha)** before analysis, conventionally five percent, marking the test statistic boundary (z of one point nine six for two sided five percent) beyond which the null is rejected. Choosing alpha after seeing data, or hunting across twenty outcomes for one p below zero point zero five, manufactures false discoveries that replication later exposes.",
+      "say": "Alpha is fixed in advance, usually five percent. Fishing through outcomes until one turns significant manufactures false findings.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "al1", "label": "Fix alpha at 0.05 before analysis" },
+          { "id": "al2", "label": "Compute statistic, compare with 1.96" },
+          { "id": "al3", "label": "Reject or retain the null hypothesis" }
+        ],
+        "edges": [["al1", "al2"], ["al2", "al3"]]
+      }
+    },
+    {
+      "title": "Type I error (alpha error)",
+      "tx": "Rejecting a true null hypothesis commits a **type I error (false positive)**, whose probability equals alpha by construction. Convicting an innocent drug of efficacy floods formularies with useless treatments. Multiple comparisons multiply this risk: twenty independent tests at five percent expect one false positive free of charge, which is why primary outcomes are declared in advance and corrections such as Bonferroni exist.",
+      "say": "Type I error is a false alarm: rejecting a true null. Run twenty tests and chance gifts you one.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type I error (alpha)",
+          "points": ["False positive conclusion", "Probability fixed at alpha (5 percent)", "Grows with multiple testing"]
+        },
+        "right": {
+          "title": "Guard against it",
+          "points": ["Pre declare primary outcome", "Bonferroni style corrections", "Replicate before adopting"]
+        }
+      }
+    },
+    {
+      "title": "Type II error, beta, and power",
+      "tx": "Failing to reject a false null commits a **type II error (false negative)** with probability beta; one minus beta is the power of the study, the chance of detecting a real effect of stated size. The conventional eighty percent power target means accepting a twenty percent miss rate. Small trials of effective treatments die of type II error constantly, and absence of significance in them proves nothing.",
+      "say": "Type II error misses a real effect. Power of eighty percent still accepts missing one real effect in five.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Truth versus decision", "Outcome"],
+        "rows": [
+          ["H0 true, not rejected", "Correct retention"],
+          ["H0 true, rejected", "Type I error (alpha)"],
+          ["H0 false, rejected", "Correct detection (power)"],
+          ["H0 false, not rejected", "Type II error (beta)"]
+        ]
+      }
+    },
+    {
+      "title": "What power depends on",
+      "tx": "**Statistical power depends on** four levers: sample size (larger detects smaller effects), true effect size (larger effects need fewer subjects), variability (noisier outcomes need more subjects), and alpha (relaxing to ten percent buys power at false positive cost). Sample size formulas are these levers solved for n. Post hoc power computed from observed effects adds nothing beyond the p value and misleads routinely.",
+      "say": "Power rises with sample size and effect size, falls with noise. Compute it before the study, never after.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "pw1", "label": "Larger n or larger true effect" },
+          { "id": "pw2", "label": "Smaller outcome variability" },
+          { "id": "pw3", "label": "Higher power to detect the effect" }
+        ],
+        "edges": [["pw1", "pw2"], ["pw2", "pw3"]]
+      }
+    },
+    {
+      "title": "One tailed versus two tailed tests",
+      "tx": "A **two tailed test** splits alpha across both directions (difference either way), while a one tailed test bets everything on one direction and reaches significance sooner there but is blind to opposite effects. Journals and examiners default to two tailed; one tailed testing needs prior justification that an opposite result would be treated exactly as no effect, a claim rarely honest in therapeutics.",
+      "say": "Default to two tailed tests. One tailed tests reach significance faster but pretend opposite effects are impossible.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Two tailed (default)",
+          "points": ["Alpha split 2.5 percent each side", "Critical z of 1.96 at 5 percent", "Detects harm or benefit"]
+        },
+        "right": {
+          "title": "One tailed (exceptional)",
+          "points": ["Alpha 5 percent one side", "Critical z of 1.645", "Blind to opposite direction"]
+        }
+      }
+    },
+    {
+      "title": "Statistical versus clinical significance",
+      "tx": "Huge samples make trivial differences statistically significant, while small samples leave large benefits non significant, separating **statistical from clinical significance** permanently. A blood pressure fall of half a millimetre at p zero point zero zero one changes no practice; a ten percent mortality fall at p zero point zero eight in a small trial demands a bigger trial, not dismissal. Effect size with confidence intervals carries both messages at once.",
+      "say": "Significant is not important, and non significant is not useless. Read the effect size, not just the p.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Finding", "Interpretation"],
+        "rows": [
+          ["Tiny effect, p very small (huge n)", "Statistically significant, clinically trivial"],
+          ["Large effect, p 0.08 (small n)", "Promising, needs larger trial"],
+          ["Large effect, p small", "Significant and important"],
+          ["No effect, tight interval", "Usefully rules out benefit"]
+        ]
+      }
+    },
+    {
+      "title": "Degrees of freedom (first encounter)",
+      "tx": "Many test statistics follow distributions indexed by **degrees of freedom**: the number of values free to vary once estimates are fixed (n minus one after estimating a mean). Degrees of freedom shape the t and chi square distributions used next lesson. The phrase intimidates beginners; the idea is bookkeeping: every parameter estimated from the data spends one degree of freedom from the budget.",
+      "say": "Degrees of freedom count values still free after estimating parameters. Estimating the mean spends one.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "df1", "label": "Start with n observations" },
+          { "id": "df2", "label": "Spend degrees on estimated parameters" },
+          { "id": "df3", "label": "Remainder indexes the test distribution" }
+        ],
+        "edges": [["df1", "df2"], ["df2", "df3"]]
+      }
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+{
+    "v": 1,
+    "id": "ans-difficult-airway-difficult-airway-algorithm",
+    "subject": "anaesthesia",
+    "module": "ans-difficult-airway",
+    "title": "Difficult Airway Management: Algorithms, Supraglottic Devices, and Front-of-Neck Access",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "LEMON Airway Assessment",
+            "tx": "**LEMON difficult airway assessment** provides a systematic clinical framework: Look externally for facial trauma, micrognathia, or beard; Evaluate the 3-3-2 rule (three fingerbreadth mouth opening, three fingerbreadth hyomental distance, two fingerbreadth thyrohyoid distance); assess Mallampati score; evaluate airway Obstruction (epiglottitis, peritonsillar abscess, stridor); and test Neck mobility (atlanto-occipital extension greater than 35 degrees).",
+            "say": "LEMON difficult airway assessment provides a systematic clinical framework: Look externally for facial trauma, micrognathia, or beard; Evaluate the 3-3-2 rule (three fingerbreadth mouth opening, three fingerbreadth hyomental distance, two fingerbreadth thyrohyoid distance); assess Mallampati score; evaluate airway Obstruction (epiglottitis, peritonsillar abscess, stridor); and test Neck mobility (atlanto-occipital extension greater than 35 degrees).",
+            "vis": {
+                "kind": "image",
+                "src": "v1/kb/media/difficult-airway-fig1.webp",
+                "alt": "Difficult airway algorithm showing progression through intubation attempts and rescue supraglottic airways",
+                "caption": "Difficult airway algorithm showing progression through intubation attempts and rescue supraglottic airways"
+            }
+        },
+        {
+            "title": "Supraglottic Airway Devices",
+            "tx": "**Supraglottic airway device evolution** spans first-generation and second-generation designs: the classic Laryngeal Mask Airway (LMA) features an inflatable silicone mask seating over the hypopharynx to seal the laryngeal inlet. Second-generation devices incorporate a dedicated gastric drain channel to vent stomach liquids and reduce aspiration risk; the ProSeal LMA achieves high seal pressures of 30 cmH2O, while the i-gel utilizes a preformed non-inflatable thermoplastic elastomer cuff.",
+            "say": "Supraglottic airway device evolution spans first-generation and second-generation designs: the classic Laryngeal Mask Airway (LMA) features an inflatable silicone mask seating over the hypopharynx to seal the laryngeal inlet. Second-generation devices incorporate a dedicated gastric drain channel to vent stomach liquids and reduce aspiration risk; the ProSeal LMA achieves high seal pressures of 30 cmH2O, while the i-gel utilizes a preformed non-inflatable thermoplastic elastomer cuff.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Device Name",
+                    "Generation Tier",
+                    "Cuff Seal Technology",
+                    "Oropharyngeal Leak Pressure"
+                ],
+                "rows": [
+                    [
+                        "LMA Classic",
+                        "First Generation",
+                        "Inflatable elliptical silicone cuff",
+                        "Approximately 18 to 20 cmH2O"
+                    ],
+                    [
+                        "LMA ProSeal",
+                        "Second Generation",
+                        "Double inflatable cuff with gastric drain tube",
+                        "Exceeds 30 cmH2O seal pressure"
+                    ],
+                    [
+                        "i-gel Airway",
+                        "Second Generation",
+                        "Soft medical-grade thermoplastic elastomer",
+                        "Approximately 25 to 30 cmH2O"
+                    ],
+                    [
+                        "LMA Supreme",
+                        "Second Generation",
+                        "Precurved reinforced polyvinyl with gastric port",
+                        "Approximately 25 to 28 cmH2O"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Awake Flexible Bronchoscopic Intubation",
+            "tx": "**Awake flexible fibreoptic intubation** remains the undisputed gold standard for anticipated difficult airways, severe maxillofacial deformities, morbid obesity, or unstable cervical spine fractures. The airway is meticulously prepared using topical local anaesthetics (nebulized 4 percent lignocaine, superior laryngeal nerve block, and translaryngeal tracheal injection) and antisialagogue glycopyrrolate, allowing intubation over the bronchoscope while the patient maintains spontaneous respiration and airway reflexes.",
+            "say": "Awake flexible fibreoptic intubation remains the undisputed gold standard for anticipated difficult airways, severe maxillofacial deformities, morbid obesity, or unstable cervical spine fractures. The airway is meticulously prepared using topical local anaesthetics (nebulized 4 percent lignocaine, superior laryngeal nerve block, and translaryngeal tracheal injection) and antisialagogue glycopyrrolate, allowing intubation over the bronchoscope while the patient maintains spontaneous respiration and airway reflexes.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Administer IV glycopyrrolate antisialagogue"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Topicalize airway mucosa with 4% lignocaine"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Navigate flexible bronchoscope past vocal cords to carina"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Railroad endotracheal tube smoothly over scope"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Video Laryngoscopy Principles",
+            "tx": "**Video laryngoscopy optical advantages** overcome limited direct line-of-sight visual axes by positioning a high-definition digital camera chip and light-emitting diode at the distal tip of the blade. Hyperangulated blades (such as the GlideScope) visualize the anterior glottis without requiring sniffing position alignment, demanding a rigid pre-shaped stylet to guide the endotracheal tube around the steep curvature into the trachea.",
+            "say": "Video laryngoscopy optical advantages overcome limited direct line-of-sight visual axes by positioning a high-definition digital camera chip and light-emitting diode at the distal tip of the blade. Hyperangulated blades (such as the GlideScope) visualize the anterior glottis without requiring sniffing position alignment, demanding a rigid pre-shaped stylet to guide the endotracheal tube around the steep curvature into the trachea.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Standard Direct Laryngoscopy",
+                    "points": [
+                        "Requires physical alignment of oral, pharyngeal, and laryngeal axes",
+                        "Fails when cervical spine mobility or mouth opening is limited",
+                        "Direct line-of-sight illumination from mouth entrance"
+                    ]
+                },
+                "right": {
+                    "title": "Hyperangulated Video Laryngoscopy",
+                    "points": [
+                        "Digital micro-camera looks around anatomical corner directly",
+                        "Provides panoramic view of vocal cords without neck extension",
+                        "Requires dedicated curved rigid stylet for tube delivery"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Gum Elastic Bougie Tactile Signs",
+            "tx": "**Gum elastic bougie intubation tactile signs** distinguish tracheal entry from accidental esophageal passage when direct glottic exposure is restricted to a Cormack-Lehane Grade III view. Advancing the angled 40-degree coud\u00e9 tip down the trachea produces distinct palpable clicks as the tip rubs against anterior cartilaginous tracheal rings, followed by a firm hold-up resistance at 24 to 40 centimeters upon reaching the carina.",
+            "say": "Gum elastic bougie intubation tactile signs distinguish tracheal entry from accidental esophageal passage when direct glottic exposure is restricted to a Cormack-Lehane Grade III view. Advancing the angled 40-degree coud\u00e9 tip down the trachea produces distinct palpable clicks as the tip rubs against anterior cartilaginous tracheal rings, followed by a firm hold-up resistance at 24 to 40 centimeters upon reaching the carina.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Bougie Tactile Sensation",
+                    "Anatomical Structure Encountered",
+                    "Correct Clinical Interpretation",
+                    "Next Procedural Step"
+                ],
+                "rows": [
+                    [
+                        "Palpable Tracheal Clicks",
+                        "Anterior tracheal cartilaginous rings",
+                        "Confirms definite tracheal entry",
+                        "Advance bougie smoothly toward carina"
+                    ],
+                    [
+                        "Hold-up Resistance (24-40 cm)",
+                        "Branching tracheobronchial carina",
+                        "Confirms tip seated above mainstem bronchi",
+                        "Railroad endotracheal tube over bougie"
+                    ],
+                    [
+                        "No Clicks and No Resistance",
+                        "Smooth compliant posterior esophagus",
+                        "Definite accidental esophageal entry",
+                        "Withdraw bougie completely and redirect anteriorly"
+                    ],
+                    [
+                        "Early Resistance (under 20 cm)",
+                        "Laryngeal spasm or arytenoid fold",
+                        "Incomplete advancement into larynx",
+                        "Gently rotate bougie 90 degrees to disengage"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Can't Intubate Can't Oxygenate (CICO)",
+            "tx": "**Can not intubate can not oxygenate emergency** represents the ultimate airway crisis, declared when tracheal intubation fails, bag-mask ventilation is impossible, and rescue supraglottic airway insertion fails to maintain arterial oxygenation. Cognitive aids mandate calling for emergency multidisciplinary assistance, declaring CICO aloud to the operating theatre team, awakening the patient if feasible, and proceeding instantly to emergency front-of-neck access.",
+            "say": "Can not intubate can not oxygenate emergency represents the ultimate airway crisis, declared when tracheal intubation fails, bag-mask ventilation is impossible, and rescue supraglottic airway insertion fails to maintain arterial oxygenation. Cognitive aids mandate calling for emergency multidisciplinary assistance, declaring CICO aloud to the operating theatre team, awakening the patient if feasible, and proceeding instantly to emergency front-of-neck access.",
+            "vis": {
+                "kind": "image",
+                "src": "clinix/media/practicals/pae-neo-intubation-cpap.webp",
+                "alt": "Paediatric neonatal airway resuscitation and emergency oxygenation pathway",
+                "caption": "Paediatric neonatal airway resuscitation and emergency oxygenation pathway"
+            }
+        },
+        {
+            "title": "Scalpel-Bougie-Tube Cricothyroidotomy",
+            "tx": "**Scalpel bougie tube cricothyroidotomy** is the definitive, fastest technique for emergency front-of-neck access endorsed by the Difficult Airway Society. The clinician identifies the cricothyroid membrane, executes a transverse stab incision through the skin and membrane with a size 10 scalpel blade, turns the blade 90 degrees to hold the stoma open, slides a coud\u00e9-tipped bougie into the trachea, and railroads a cuffed 6.0 mm endotracheal tube into place.",
+            "say": "Scalpel bougie tube cricothyroidotomy is the definitive, fastest technique for emergency front-of-neck access endorsed by the Difficult Airway Society. The clinician identifies the cricothyroid membrane, executes a transverse stab incision through the skin and membrane with a size 10 scalpel blade, turns the blade 90 degrees to hold the stoma open, slides a coud\u00e9-tipped bougie into the trachea, and railroads a cuffed 6.0 mm endotracheal tube into place.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Palpate cricothyroid membrane between thyroid and cricoid"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Transverse stab incision with number 10 scalpel blade"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Insert coud\u00e9 bougie alongside rotated blade into trachea"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Railroad 6.0 mm cuffed endotracheal tube and inflate cuff"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Double-Lumen Tubes for Lung Isolation",
+            "tx": "**Double-lumen endobronchial tube mechanics** provide independent one-lung ventilation during thoracic surgery. Left-sided double-lumen tubes are preferred universally because the right mainstem bronchus gives off the right upper lobe bronchus merely 1.5 to 2 centimeters from the carina, making right-sided tubes highly prone to right upper lobe bronchial cuff obstruction. Positioning must be confirmed immediately via flexible fiberoptic bronchoscopy.",
+            "say": "Double-lumen endobronchial tube mechanics provide independent one-lung ventilation during thoracic surgery. Left-sided double-lumen tubes are preferred universally because the right mainstem bronchus gives off the right upper lobe bronchus merely 1.5 to 2 centimeters from the carina, making right-sided tubes highly prone to right upper lobe bronchial cuff obstruction. Positioning must be confirmed immediately via flexible fiberoptic bronchoscopy.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Left-Sided Double-Lumen Tube",
+                    "points": [
+                        "Long left mainstem bronchus (4 to 5 cm) provides safe bronchial cuff seating",
+                        "Universal standard tube for almost all thoracic procedures",
+                        "Low risk of lobar bronchial orifice occlusion"
+                    ]
+                },
+                "right": {
+                    "title": "Right-Sided Double-Lumen Tube",
+                    "points": [
+                        "Short right mainstem bronchus (1.5 to 2 cm) before upper lobe takeoff",
+                        "Requires special slotted bronchial cuff to ventilate right upper lobe",
+                        "Reserved strictly for left pneumonectomy or left bronchial disruption"
+                    ]
+                }
+            }
+        }
+    ],
+    "quiz": []
+}

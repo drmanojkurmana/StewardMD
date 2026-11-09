@@ -1,0 +1,211 @@
+{
+  "v": 1,
+  "module": "mic-intestinal-protozoa",
+  "subject": "microbiology",
+  "title": "Entamoeba histolytica: Flask Ulcers, Liver Abscess and Anchovy Sauce Pus",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The protozoan parasite **Entamoeba histolytica** exists in two distinct morphological stages: an infectious quadri-nucleate cyst that survives in external water supplies, and an invasive motile trophozoite that colonizes the human large intestine. Ingestion of fecally contaminated water or food containing mature cysts initiates infection. Gastric acid resistance permits excystation in the terminal ileum, releasing motile amoebulae that mature into active trophozoites.",
+      "say": "Ingested quadrinucleate cysts excyst in the small intestine, releasing invasive vegetative trophozoites.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/amoebiasis-fig1.webp",
+        "alt": "Entamoeba histolytica intestinal trophozoites",
+        "caption": "Entamoeba histolytica trophozoites invading intestinal mucosa with ingested red blood cells [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Pathogenic trophozoites measure fifteen to twenty micrometres in diameter, display unidirectional pseudopodial motility, and contain a single spherical nucleus with a small central karyosome and delicate peripheral chromatin beads. The diagnostic hallmark demonstrating tissue invasiveness is the presence of ingested **erythrophagocytosis**, where red blood cells appear engulfed inside cytoplasmic food vacuoles. Non-pathogenic commensal amoebae never ingest host erythrocytes.",
+      "say": "Engulfed red blood cells within the amoebic cytoplasm reliably distinguish invasive histolytica from harmless commensals.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Entamoeba histolytica trophozoite",
+          "points": [
+            "Actively motile with clear finger-like pseudopodia",
+            "Engulfed erythrocytes present inside cytoplasm",
+            "Single nucleus with small central karyosome",
+            "Evenly distributed fine peripheral chromatin"
+          ]
+        },
+        "right": {
+          "title": "Commensal Entamoeba coli",
+          "points": [
+            "Sluggish motility with blunt granular pseudopodia",
+            "Erythrocytes absent; contains bacteria and vacuoles",
+            "Large eccentric karyosome off-center",
+            "Coarse, irregular clumps of peripheral chromatin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Trophozoites adhere to colonic mucosal enterocytes via galactose-N-acetylgalactosamine-specific lectin, secreting pore-forming amoebapores and cysteine proteases that lyse the epithelial barrier. Once penetrating the muscularis mucosae into the loose submucosa, the organisms encounter lateral tissue resistance, spreading horizontally. This distinctive submucosal undermining produces classic **flask-shaped ulcers** with narrow necks and broad, necrotic bases in the caecum and ascending colon.",
+      "say": "Submucosal spread creates pathognomonic flask-shaped ulcers with narrow mucosal necks and wide bases.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fl1",
+            "label": "Trophozoites adhere to colonic enterocytes via Gal/GalNAc lectin"
+          },
+          {
+            "id": "fl2",
+            "label": "Secretion of cysteine proteases and amoebapores destroys epithelium"
+          },
+          {
+            "id": "fl3",
+            "label": "Lateral undermining in loose submucosa forms flask-shaped necrotic ulcers"
+          }
+        ],
+        "edges": [
+          [
+            "fl1",
+            "fl2"
+          ],
+          [
+            "fl2",
+            "fl3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Extraintestinal dissemination occurs when trophozoites erode through mesenteric venules and enter the portal venous circulation, migrating directly to the liver parenchyma. The resulting **amoebic liver abscess** represents the most common extraintestinal complication, typically presenting as a solitary cavity located high in the right hepatic lobe, particularly the posterior superior segment, manifesting with high fever, tender hepatomegaly, and right upper quadrant pain.",
+      "say": "Portal venous embolisation seeds the right hepatic lobe, generating a solitary liquefactive amoebic abscess.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/amoebic-liver-abscess-fig1.webp",
+        "alt": "Amoebic liver abscess pathogenesis",
+        "caption": "Amoebic liver abscess showing solitary cavitary necrosis in right hepatic lobe [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Aspiration of mature hepatic abscess fluid yields thick, sterile, chocolate-brown or reddish liquefactive material classically described as **anchovy sauce pus**. This fluid consists of liquefied, necrotic hepatocytes and liquefied erythrocytes rather than true polymorphonuclear pus. Examination of the aspirate reveals that the center is completely acellular and sterile, while active trophozoites reside exclusively within the peripheral abscess wall.",
+      "say": "Liquefied brown liver tissue resembles anchovy sauce pus, with active trophozoites living in the abscess wall.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Amoebic Liver Abscess",
+          "Pyogenic Liver Abscess"
+        ],
+        "rows": [
+          [
+            "Cavity number",
+            "Usually solitary (over 80% in right lobe)",
+            "Frequently multiple scattered microabscesses"
+          ],
+          [
+            "Aspirate colour",
+            "Thick reddish-brown anchovy sauce pus",
+            "Creamy yellow-green foul-smelling pus"
+          ],
+          [
+            "Microbiology",
+            "Sterile fluid; trophozoites in wall biopsy",
+            "Positive bacterial culture (E. coli, Klebsiella)"
+          ],
+          [
+            "Demographics",
+            "Young adult males with travel or endemic exposure",
+            "Elderly patients with biliary sepsis or diabetes"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Mature fecal cysts are spherical, measuring twelve to fifteen micrometres, and contain one to four nuclei alongside blunt-ended **chromatoid bars**. These crystalline aggregates of ribonucleoprotein stain intensely with iron-haematoxylin, displaying rounded, cigar-shaped ends. In contrast, cysts of the commensal Entamoeba coli possess up to eight nuclei and splinter-like chromatoid bars with sharp, pointed or fractured ends.",
+      "say": "Smooth cigar-shaped chromatoid bars and four nuclei identify mature infectious cysts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Entamoeba histolytica cyst",
+          "points": [
+            "Four nuclei in mature infective cyst",
+            "Cigar-shaped chromatoid bars with rounded ends",
+            "Spherical shape measuring 12 to 15 microns",
+            "Small central karyosome in each nucleus"
+          ]
+        },
+        "right": {
+          "title": "Entamoeba coli cyst",
+          "points": [
+            "Eight nuclei in mature cyst",
+            "Splinter-like chromatoid bars with pointed ends",
+            "Larger size measuring 15 to 25 microns",
+            "Eccentric, coarse chunky karyosomes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Definitive management requires dual antimicrobial therapy directed against both invasive tissue trophozoites and surviving intestinal cysts. Oral or intravenous **metronidazole** or tinidazole rapidly clears trophozoites from the intestinal mucosa and hepatic abscesses. However, because nitroimidazoles fail to reach adequate luminal concentrations in the colonic space, a sequential luminal amoebicide must be administered to prevent clinical relapse and carrier transmission.",
+      "say": "Tissue amoebicides eliminate invasive trophozoites but must be followed by a luminal agent.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rx1",
+            "label": "Diagnose invasive amoebiasis or amoebic liver abscess"
+          },
+          {
+            "id": "rx2",
+            "label": "Administer systemic tissue amoebicide: metronidazole for 7-10 days"
+          },
+          {
+            "id": "rx3",
+            "label": "Administer oral luminal amoebicide: paromomycin or diloxanide furoate"
+          }
+        ],
+        "edges": [
+          [
+            "rx1",
+            "rx2"
+          ],
+          [
+            "rx2",
+            "rx3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The non-absorbable luminal agent **paromomycin**, an aminoglycoside, or diloxanide furoate effectively sterilizes the large intestine by killing residual luminal cysts. Without this second sequential course, up to forty percent of treated patients continue to harbor intestinal cysts, remaining asymptomatic carriers who shed infectious propagules or suffer delayed recurrence of invasive dysentery.",
+      "say": "Oral paromomycin clears lingering luminal cysts to prevent recurrent dysentery and carrier shedding.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug Class",
+          "Representative Agents",
+          "Site of Therapeutic Action"
+        ],
+        "rows": [
+          [
+            "Tissue amoebicides",
+            "Metronidazole, tinidazole",
+            "Intestinal mucosa, liver, and deep organs"
+          ],
+          [
+            "Luminal amoebicides",
+            "Paromomycin, diloxanide furoate",
+            "Bowel lumen; eradicates cyst carriage"
+          ],
+          [
+            "Hepatic amoebicides",
+            "Chloroquine (concentrates in liver)",
+            "Adjunct for refractory amoebic liver abscess"
+          ],
+          [
+            "Surgical indication",
+            "Impending peritoneal or pericardial rupture",
+            "Image-guided percutaneous needle aspiration"
+          ]
+        ]
+      }
+    }
+  ]
+}

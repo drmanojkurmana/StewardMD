@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "id": "cm-respiratory-whooping-cough",
+ "subject": "community-medicine",
+ "module": "cm-respiratory",
+ "title": "Whooping Cough: Stages, Infant Risk and Vaccine Strategy",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Bordetella and its toxins",
+   "tx": "**Bordetella pertussis** is a gram negative coccobacillus that attaches to ciliated airway epithelium and releases pertussis toxin and tracheal cytotoxin, paralysing mucociliary clearance. Humans are the only reservoir, spread is by droplets, and the disease is most infectious during the early catarrhal stage before anyone suspects it, which drives household spread.",
+   "say": "A coccobacillus that paralyses airway cilia with toxins. Only humans carry it, and peak infectiousness hides in the innocent catarrhal week before the cough declares itself.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Fact"],
+    "rows": [
+     ["Organism", "Bordetella pertussis, gram negative"],
+     ["Reservoir", "Humans only"],
+     ["Spread", "Respiratory droplets"],
+     ["Peak infectiousness", "Catarrhal stage"]
+    ]
+   }
+  },
+  {
+   "title": "Three stages over six to eight weeks",
+   "tx": "The **catarrhal stage** runs one to two weeks like a common cold, the paroxysmal stage follows for two to six weeks with bursts of coughing ending in an inspiratory whoop and often vomiting, then convalescence fades over weeks. Older literature calls it the hundred day cough, a name patients remember better than stage numbers.",
+   "say": "Catarrhal cold first, then weeks of whooping paroxysms with vomiting, then slow recovery. A hundred days in the old name. Stage decides infectiousness and treatment value.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Catarrhal 1 to 2 weeks"},
+     {"id": "b", "label": "Paroxysmal 2 to 6 weeks"},
+     {"id": "c", "label": "Convalescent weeks"},
+     {"id": "d", "label": "Cough finally settles"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Paroxysms: what the whoop really is",
+   "tx": "A **paroxysm** is a burst of ten to twenty forceful coughs on one breath out, leaving the child flushed or cyanosed, followed by a loud inspiratory whoop as air rushes through the narrowed glottis, frequently ending in post tussive vomiting. Between bursts the child looks well, a pattern that helps separate pertussis from pneumonia at the bedside.",
+   "say": "Twenty coughs on one outgoing breath, a whoop on the breath in, vomiting to finish, wellness between bursts. That rhythm at the bedside is nearly diagnostic.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Element", "Sign"],
+    "rows": [
+     ["Burst", "10 to 20 coughs, one expiration"],
+     ["Whoop", "Inspiratory, through narrowed glottis"],
+     ["Aftermath", "Vomiting, exhaustion"],
+     ["Between bursts", "Child appears well"]
+    ]
+   }
+  },
+  {
+   "title": "Infants under six months die differently",
+   "tx": "**Young infants** may never whoop: apnoea, cyanotic spells, bradycardia and poor feeding replace the classic picture, and pulmonary hypertension with extreme lymphocytosis marks fatal disease. Most pertussis deaths worldwide sit in infants too young to have completed, or even started, primary immunisation, which is why maternal vaccination exists.",
+   "say": "Small infants apnoea instead of whooping. Deaths cluster before the first doses land. That age gap is exactly what vaccinating mothers is designed to close.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Older child",
+     "points": ["Classic whoop present", "Post tussive vomiting", "Well between paroxysms", "Rarely fatal"]
+    },
+    "right": {
+     "title": "Young infant",
+     "points": ["Apnoea and cyanosis", "No whoop heard", "Feeding failure", "Most deaths occur"]
+    }
+   }
+  },
+  {
+   "title": "Complications beyond the cough",
+   "tx": "**Complications** follow pressure and asphyxia: subconjunctival and scleral haemorrhages, epistaxis, petechiae on the face, rib fractures in adults, rectal prolapse and inguinal hernia from coughing pressure, plus secondary bacterial pneumonia and seizures from hypoxia. Periorbital puffiness with petechiae after a coughing bout is a recognised examination photograph.",
+   "say": "Pressure bursts vessels in eyes and face, fractures adult ribs, and prolapses what coughing can push. Pneumonia and hypoxic seizures complete the list examiners expect.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Mechanism", "Complication"],
+    "rows": [
+     ["Venous pressure", "Subconjunctival haemorrhage, petechiae"],
+     ["Cough pressure", "Hernia, rectal prolapse, rib fracture"],
+     ["Asphyxia", "Seizures, encephalopathy"],
+     ["Superinfection", "Secondary bacterial pneumonia"]
+    ]
+   }
+  },
+  {
+   "title": "Diagnosis and the lymphocyte clue",
+   "tx": "**Laboratory confirmation** uses nasopharyngeal samples for polymerase chain reaction early and culture where available, while serology helps late presenters. The plain blood film offers a classical clue: marked absolute lymphocytosis in a coughing child, unusual among bacterial infections, reflecting pertussis toxin blocking lymphocyte entry into lymph nodes.",
+   "say": "Nasopharyngeal PCR early, serology late. The bedside clue is striking lymphocytosis in a bacterial illness, toxin keeping lymphocytes circulating instead of homing.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Test", "Timing"],
+    "rows": [
+     ["Nasopharyngeal PCR", "First 3 weeks of cough"],
+     ["Culture", "Early, fastidious and slow"],
+     ["Serology", "Late presenters"],
+     ["Blood film", "Absolute lymphocytosis clue"]
+    ]
+   }
+  },
+  {
+   "title": "Macrolides: treating patient and contacts",
+   "tx": "A **macrolide antibiotic** such as azithromycin, given early, shortens infectiousness and may soften the course, though once paroxysms are established it mainly protects contacts rather than curing the cough. Household and close contacts receive post exposure prophylaxis with the same drug class, prioritising households with infants and pregnant women.",
+   "say": "Macrolides early limit spread; late, they protect contacts more than the cougher. Prophylax households with infants or pregnancy first. Established paroxysms run their course.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Case confirmed or suspected"},
+     {"id": "b", "label": "Macrolide started promptly"},
+     {"id": "c", "label": "Close contacts listed"},
+     {"id": "d", "label": "Prophylaxis for risk contacts"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Whole cell and acellular vaccines",
+   "tx": "The **whole cell pertussis vaccine** in pentavalent combinations is highly effective but reactogenic, with fever and local reactions common and rare febrile seizures colouring public memory. Acellular vaccines with purified antigens cause fewer reactions and serve boosters and pregnancy in many countries. India's programme uses whole cell in infancy under the Universal Immunisation Programme.",
+   "say": "Whole cell works hard and reacts more; acellular is gentler for boosters and pregnancy. India vaccinates infants with whole cell inside pentavalent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Whole cell",
+     "points": ["Strong effectiveness", "More fever, local reactions", "Infant primary series in India", "Inside pentavalent vaccine"]
+    },
+    "right": {
+     "title": "Acellular",
+     "points": ["Purified antigens", "Fewer reactions", "Boosters and pregnancy abroad", "Higher cost per dose"]
+    }
+   }
+  },
+  {
+   "title": "Waning immunity and cocooning",
+   "tx": "**Waning immunity** within years of vaccination or infection lets adolescents and adults carry mild, unrecognised pertussis to newborns, so strategies add booster doses and cocooning: vaccinating mothers in pregnancy and close caregivers around the infant. Maternal antibody crossing the placenta now protects the exact weeks when deaths concentrate.",
+   "say": "Immunity wanes, adults cough mildly, newborns pay. Pregnancy vaccination and cocooning wrap antibody around the infant's most dangerous weeks.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Strategy", "Target"],
+    "rows": [
+     ["Pregnancy dose", "Antibody before birth"],
+     ["Cocooning caregivers", "Household transmission"],
+     ["Adolescent booster", "School age reservoir"],
+     ["Timely infant series", "Close the gap early"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

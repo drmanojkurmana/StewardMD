@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-ncd-hypertension",
+ "subject": "community-medicine",
+ "module": "cm-ncd",
+ "title": "Hypertension: Rule of Halves, Classification and Population Control",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Rule of halves: the iceberg in numbers",
+   "tx": "The **rule of halves** states that in a typical community only about half of hypertensives are detected, half of those detected are treated, and half of those treated are controlled, leaving roughly one in eight adequately managed. Modern surveys improve the fractions unevenly, but the cascade shape remains the fastest community diagnosis in NCD teaching.",
+   "say": "Half, half, half. Half detected, half of those treated, half of those controlled: one in eight managed. Fractions improve unevenly across surveys, but the cascade still diagnoses a community fastest.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "All hypertensives in community"},
+     {"id": "b", "label": "Half detected"},
+     {"id": "c", "label": "Half of those treated"},
+     {"id": "d", "label": "Half of those controlled: one eighth"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Classification by office readings",
+   "tx": "**Hypertension classification** in common Indian teaching (JNC lineage) reads normal under 120/80, prehypertension or elevated bands above it, stage 1 at 140 to 159/90 to 99, stage 2 at 160/100 and beyond, with 140/90 the diagnostic threshold on repeated measurement. Newer American thresholds at 130/80 create stem ambiguity, so answers should name the classification system used.",
+   "say": "Thresholds need naming. One forty over ninety diagnoses in classic teaching on repeated readings; stage two begins at one sixty over one hundred. Newer American cut-offs differ, so state your system in answers.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Category (classic)", "Systolic", "Diastolic"],
+    "rows": [
+     ["Normal", "Under 120", "Under 80"],
+     ["Prehypertension", "120 to 139", "80 to 89"],
+     ["Stage 1 hypertension", "140 to 159", "90 to 99"],
+     ["Stage 2 hypertension", "160 or more", "100 or more"]
+    ]
+   }
+  },
+  {
+   "title": "Measurement technique decides truth",
+   "tx": "**Measurement error** manufactures hypertension and misses it: 5 minutes rest seated, back supported, feet flat, arm at heart level, correct cuff size (bladder encircling most of the arm), no talking, no recent caffeine or smoking, and two readings averaged, repeated on another day before labelling. White-coat and masked hypertension explain discordance with home and ambulatory monitoring.",
+   "say": "Technique decides truth. Seated rest, supported arm at heart level, right cuff, silence, two readings averaged, another day before labelling. White-coat and masked patterns explain office-home discordance examiners love.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Error", "False result"],
+    "rows": [
+     ["Cuff too small", "Falsely high reading"],
+     ["Arm below heart level", "Falsely high reading"],
+     ["Talking during measurement", "Raised reading"],
+     ["Single rushed reading", "Label without confirmation"]
+    ]
+   }
+  },
+  {
+   "title": "Population strategy: shift the whole curve",
+   "tx": "**Salt reduction** is the population flagship: cutting average intake toward 5 grams daily shifts the entire blood pressure distribution left, preventing more events than treating severe cases alone, Geoffrey Rose's prevention paradox applied. Potassium-rich diets, weight control, alcohol moderation and activity complete the primordial layer the NPCDCS health promotion arm preaches.",
+   "say": "Shift the whole curve. Salt toward five grams daily moves average pressure left and prevents more events than rescuing severe cases. Rose's paradox in action: many at small risk outnumber few at high risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Population approach",
+     "points": ["Salt reduction for everyone", "Small average fall, huge event saving", "No screening needed to start"]
+    },
+    "right": {
+     "title": "High-risk approach",
+     "points": ["Treat detected hypertensives", "Large individual benefit", "Needs detection machinery first"]
+    }
+   }
+  },
+  {
+   "title": "Opportunistic screening at 30 years",
+   "tx": "**NPCDCS screening** offers blood pressure (with glucose) measurement to all adults 30 years and above at health facilities and community screening camps, because yield justifies the age floor and younger hypertension is rarer. Detected cases enter NCD clinics at PHC and CHC levels with drug supply and follow-up registers, converting camps into chronic care rather than case counts.",
+   "say": "Thirty is the screening floor. Pressure and glucose for every adult above it, at facilities and camps, feeding NCD clinics with registers and drug supply. Camps must convert into chronic care, not case counts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Adult 30 plus attends or camped"},
+     {"id": "b", "label": "BP and glucose measured"},
+     {"id": "c", "label": "Raised values confirmed on repeat"},
+     {"id": "d", "label": "Registered at NCD clinic, followed"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Tracking, target organ damage, referral",
+   "tx": "**Tracking phenomenon** means children in high blood pressure percentiles tend to stay high as adults, justifying school and adolescent measurement in high-risk families. Established hypertension is staged by target organ damage (heart, kidney, retina, brain) deciding referral urgency. Resistant hypertension on three drugs including a diuretic triggers secondary-cause evaluation.",
+   "say": "Pressure tracks from childhood percentiles into adult ranks. Target organ damage stages urgency in the established case. Resistance on three drugs including a diuretic demands secondary cause hunting.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Finding", "Action"],
+    "rows": [
+     ["Child in high percentile repeatedly", "Family screening, lifestyle counsel"],
+     ["Retinopathy or renal damage", "Urgent specialist referral"],
+     ["Uncontrolled on 3 drugs with diuretic", "Evaluate secondary causes"]
+    ]
+   }
+  },
+  {
+   "title": "Lifestyle prescription with numbers",
+   "tx": "**Non-drug therapy** quantifies: weight loss lowers systolic roughly 1 mmHg per kilogram in teaching estimates, DASH-style diet rich in fruit, vegetables and low-fat dairy, sodium restriction, 30 minutes activity most days, alcohol limits, tobacco cessation absolutely. Every drug prescription without this prescription wastes half the consultation, examiners note, because effects add to pharmacotherapy.",
+   "say": "Prescribe lifestyle in numbers. Kilogram for millimetre in teaching estimates, DASH plates, thirty active minutes most days, alcohol capped, tobacco zero. Drug scripts without lifestyle scripts waste half the consultation.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Measure", "Expected direction"],
+    "rows": [
+     ["Weight loss", "Systolic falls with kilograms"],
+     ["Salt restriction", "Falls more in salt-sensitive"],
+     ["Regular aerobic activity", "Sustained modest fall"],
+     ["Tobacco cessation", "Vascular risk falls steeply"]
+    ]
+   }
+  },
+  {
+   "title": "Drug therapy principles in programme care",
+   "tx": "**First-line classes** (thiazide-type diuretics, calcium channel blockers, ACE inhibitors or ARBs, with beta blockers for compelling indications) start singly or in combination by level and comorbidity: ACE or ARB compulsory flavour in diabetes with albuminuria, avoided in pregnancy where ACE and ARB are teratogenic. Free drug supply through public facilities decides adherence more than molecule choice at population scale.",
+   "say": "Classes first, brands last. Thiazides, calcium blockers, ACE or ARB families start therapy; pregnancy forbids the last two. At population scale free supply decides adherence more than molecule elegance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Compelling preferences",
+     "points": ["Diabetes with albuminuria: ACE or ARB", "Coronary disease: beta blocker included", "Older isolated systolic: CCB or thiazide"]
+    },
+    "right": {
+     "title": "Avoid",
+     "points": ["ACE or ARB in pregnancy", "Abrupt clonidine withdrawal", "Duplicate ACE plus ARB routinely"]
+    }
+   }
+  },
+  {
+   "title": "Hypertensive emergencies versus urgencies",
+   "tx": "**Hypertensive emergency** couples severe elevation with acute target organ damage (encephalopathy, pulmonary oedema, dissection, eclampsia) needing controlled intravenous reduction in monitored units, while urgency without damage takes oral therapy and hours-to-days reduction. Dropping pressure precipitously in chronic hypertension strokes watershed territories, the balancing error stems test at the bedside.",
+   "say": "Damage, not numbers, defines emergency. Acute organ injury takes monitored intravenous control; no damage takes oral therapy over hours to days. Precipitous drops stroke watershed brain in chronic hypertensives.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Presentation", "Pace of reduction"],
+    "rows": [
+     ["Emergency with organ damage", "Controlled IV reduction, monitored"],
+     ["Urgency without damage", "Oral drugs, hours to days"],
+     ["Chronic stable severe reading", "Confirm, start oral therapy, review soon"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

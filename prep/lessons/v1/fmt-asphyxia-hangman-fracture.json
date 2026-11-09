@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-asphyxia-hangman-fracture",
+ "subject": "forensic-medicine",
+ "module": "fmt-asphyxia",
+ "title": "Judicial Hanging, Hangman Fracture, Strangulation and Throttling",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Judicial hanging and the long drop",
+   "tx": "**Judicial hanging** uses a calculated free fall and sudden jerk to fracture or dislocate the cervical vertebrae instead of slowly asphyxiating the condemned person. The drop pulps the spinal cord and transects the cervical cord, stretching the neck considerably. With a properly performed judicial hanging the brain stem ruptures between pons and medulla. Asphyxial signs are absent because death is neurological, not respiratory, in mechanism.",
+   "say": "The long drop kills by breaking the neck and brain stem, so a proper judicial hanging shows no asphyxial signs.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Free fall with sudden jerk"}, {"id": "b", "label": "Cervical fracture dislocation"}, {"id": "c", "label": "Cord transected, neck lengthens"}, {"id": "d", "label": "Brain stem ruptures pons to medulla"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Hangman fracture of the axis",
+   "tx": "The signature injury is the **hangman fracture**, traumatic spondylolisthesis of the axis, where the pars interarticularis of the second cervical vertebra breaks under hyperextension and distraction. The pharynx is usually injured and the carotid arteries may tear transversely, partly or completely. Immediate irreversible unconsciousness follows destruction of the reticular formation, and apnoea follows destruction of the respiratory centre region, though heart and respiratory movements can persist ten to fifteen minutes.",
+   "say": "Fracture through the pars of the axis with torn carotids is the hangman injury, ending consciousness and breathing centrally.",
+   "vis": {"kind": "table", "cols": ["Structure", "Judicial hanging injury", "Result"], "rows": [["Axis vertebra C2", "Pars fracture, dislocation", "Neck lengthens visibly"], ["Cervical cord", "Stretched or transected", "Instant unconsciousness"], ["Brain stem", "Pons medulla rupture", "Irreversible apnoea"], ["Carotid arteries", "Transverse tears", "No asphyxial congestion"]]}
+  },
+  {
+   "title": "Strangulation defined against hanging",
+   "tx": "**Strangulation** is asphyxia from constriction of the neck by a ligature without suspending the body, the force coming from hands, a lever or the assailant's pull rather than body weight. Pulling a U shaped ligature against the front and sides of the neck while standing behind the victim suffices. Its family includes ligature strangulation, manual strangulation or throttling, garrotting, mugging and bansdola, each named by its instrument.",
+   "say": "External force, not body weight, tightens the ligature in strangulation, by cord, hands, elbow, lever or bamboo.",
+   "vis": {"kind": "compare", "left": {"title": "Hanging mechanism", "points": ["Body suspended", "Body weight constricts", "Mark oblique, incomplete", "Usually suicidal"]}, "right": {"title": "Strangulation mechanism", "points": ["Body not suspended", "Assailant force constricts", "Mark transverse, encircling", "Almost always homicidal"]}}
+  },
+  {
+   "title": "The strangulation ligature mark",
+   "tx": "The **strangulation ligature mark** is well defined, slightly depressed and transverse, completely encircling the neck usually about the middle or below the thyroid cartilage, more prominent at front and sides than at the back. Clothing or long hair can spare the back entirely. Crossed ligature ends mark deepest at the crossover, bruising widens at a knot, and dragging a strangled body can tilt the mark oblique like hanging, a trap for the unwary.",
+   "say": "A transverse mark circling the whole neck below the thyroid cartilage is strangulation until dragging proves otherwise.",
+   "vis": {"kind": "table", "cols": ["Mark trait", "Hanging", "Strangulation"], "rows": [["Direction", "Oblique to knot", "Transverse, horizontal"], ["Continuity", "Broken at knot", "Encircles completely"], ["Level", "Above thyroid cartilage", "Middle or below cartilage"], ["Deepest point", "Opposite suspension", "Front, sides or crossover"]]}
+  },
+  {
+   "title": "Throttling, manual strangulation",
+   "tx": "In **throttling or manual strangulation** the hands themselves compress the neck, leaving fingernail crescents, fingertip bruises and abrasions rather than a ligature groove. Sudden violent compression of the windpipe causes almost immediate insensibility. Partial closure gives buzzing ears, congestion and cyanosis of the head, vertigo, tingling, weakness, bleeding from mouth, nose and ears, clenched hands and convulsions. Fracture of the hyoid or larynx signals appreciable homicidal force.",
+   "say": "Nail crescents and fingertip bruises replace the groove in throttling, and a broken hyoid proves force no accident explains.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Hands compress the neck"}, {"id": "b", "label": "Nails score crescent abrasions"}, {"id": "c", "label": "Fingertips bruise the skin"}, {"id": "d", "label": "Hyoid or larynx may fracture"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Causes of death in strangulation",
+   "tx": "Strangulation kills by the same menu as hanging under **mechanisms of strangulation death**: asphyxia from elevation of larynx and tongue closing the airway at pharyngeal level, cerebral anoxia or venous congestion, the two combined, vagal inhibition, and rarely fracture dislocation of the cervical vertebrae. The rigid laryngeal and tracheal cartilages resist direct occlusion, so most assailants kill through vessels and the pharyngeal airway rather than by crushing the windpipe flat.",
+   "say": "Vessels and the tongue blocked pharynx kill in strangulation, because the rigid windpipe itself resists being crushed shut.",
+   "vis": {"kind": "compare", "left": {"title": "Common mechanisms", "points": ["Airway closed at pharynx", "Cerebral anoxia from vessels", "Venous congestion of head", "Combined asphyxia and congestion"]}, "right": {"title": "Less common mechanisms", "points": ["Reflex vagal inhibition", "Cervical fracture dislocation", "Laryngeal spasm after release", "Delayed airway swelling"]}}
+  },
+  {
+   "title": "Force assessment from neck damage",
+   "tx": "The degree of neck injury grades the force for court in **force estimation in strangulation**. Severe damage to neck structures indicates considerable force and intent to injure if not to kill; fracture of hyoid or larynx specifically indicates appreciable homicidal force that no accidental touch or momentary grip explains. Minor damage is presumptive of innocence, yet the karate blow shows deliberate neck interference can kill with little damage, so slight findings deserve a guarded opinion.",
+   "say": "Broken hyoid or larynx proves homicidal force, but near normal neck structures still allow vagal killing, so opine cautiously.",
+   "vis": {"kind": "table", "cols": ["Neck finding", "Force implied", "Opinion"], "rows": [["Hyoid or larynx fractured", "Appreciable force", "Homicidal in nature"], ["Severe soft tissue damage", "Considerable force", "Intent to injure shown"], ["Minor or no damage", "Brief or reflex mechanism", "Guarded opinion needed"], ["Karate type blow", "Focused sudden force", "Can kill with little damage"]]}
+  },
+  {
+   "title": "Mugging, the elbow hold",
+   "tx": "**Mugging** strangles by holding the victim's neck in the bend of the elbow, the forearm and upper arm squeezing the front of the larynx or both sides of the neck, usually from behind. Postmortem signs mimic strangulation by a broad ligature and are often minimal: a diffuse abrasion along the jaw margin from forearm friction, diffuse bruising behind the larynx and in the strap muscles, and rarely fracture of the superior horn of thyroid or hyoid.",
+   "say": "An elbow choke from behind leaves minimal signs, jaw margin abrasion and deep strap muscle bruising at most.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Elbow crook traps the neck"}, {"id": "b", "label": "Forearm presses the larynx"}, {"id": "c", "label": "Jaw margin abrades diffusely"}, {"id": "d", "label": "Strap muscles bruise deeply"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Hard neck compression and karate blows",
+   "tx": "Kicking, stamping, jumping on the neck or a **karate chop** grossly damages soft tissues: vertical fractures of thyroid laminae, cricoid and upper tracheal rings, with hyoid and thyroid flattened and broken outward. Death may be rapid from crush and bleeding into tissues, asphyxial from swelling, or from laryngeal spasm and sudden reflex neurogenic cardiovascular failure. Surgical emphysema can track from a fractured larynx into the neck tissues.",
+   "say": "Stamps and karate chops shatter thyroid and cricoid rings and kill by crush, swelling, spasm or reflex cardiac arrest.",
+   "vis": {"kind": "compare", "left": {"title": "Hard compression damage", "points": ["Thyroid laminae fractured vertically", "Cricoid and tracheal rings broken", "Blood seeps into soft tissues", "Surgical emphysema may form"]}, "right": {"title": "Ways death follows", "points": ["Direct crush injury", "Airway obstructed by swelling", "Laryngeal spasm", "Reflex cardiac inhibition"]}}
+  }
+ ],
+ "quiz": []
+}

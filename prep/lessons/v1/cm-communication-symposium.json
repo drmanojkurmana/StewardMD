@@ -1,0 +1,146 @@
+{
+  "v": 1,
+  "id": "cm-communication-symposium",
+  "subject": "community-medicine",
+  "module": "cm-communication",
+  "title": "Group Methods: Symposium, Panel, Workshop, Group Discussion, IEC and BCC",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Symposium: experts in sequence",
+      "tx": "A **symposium in health education** lines up two or more experts who speak in sequence on phases of one theme before a large audience, with a chairperson weaving summaries between talks. The audience listens but does not debate speakers, and no discussion among experts occurs. It suits updating professionals on a new guideline, not changing village behaviour.",
+      "say": "A symposium is a relay of expert talks on one theme. The audience listens; experts never debate each other.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "s1", "label": "Expert one presents first phase" },
+          { "id": "s2", "label": "Expert two presents next phase" },
+          { "id": "s3", "label": "Chairperson summarises, audience questions" }
+        ],
+        "edges": [["s1", "s2"], ["s2", "s3"]]
+      }
+    },
+    {
+      "title": "Panel discussion: experts converse",
+      "tx": "In a **panel discussion** four to eight experts hold a guided conversation before an audience, chaired by a moderator who poses questions, balances airtime, and summarises. Unlike the symposium, panellists react to one another, exposing genuine controversy (sugar taxes, vaccine mandates). The audience may question at the end. It informs opinion formers elegantly but demands skilled moderation to avoid drift.",
+      "say": "Panellists talk with each other, not past each other. A strong moderator keeps controversy useful and on time.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Symposium",
+          "points": ["Sequential prepared speeches", "Experts do not interact", "Audience passive until questions"]
+        },
+        "right": {
+          "title": "Panel discussion",
+          "points": ["Moderated conversation among experts", "Disagreement surfaces openly", "Audience questions at close"]
+        }
+      }
+    },
+    {
+      "title": "Workshop: learning by producing",
+      "tx": "A **workshop in health training** assembles twenty to thirty participants under consultants to solve real problems in small groups and plenary synthesis over days, producing an actual output (a district plan, a training module). Learning by doing replaces lectures. Its cost per head is the highest of group methods, reserved for planning and trainer development where the output justifies expense.",
+      "say": "Workshops produce something real: a plan or module. Small groups work, plenary decides, experts coach.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "w1", "label": "Small groups attack assigned problems" },
+          { "id": "w2", "label": "Plenary compares group outputs" },
+          { "id": "w3", "label": "Consultants synthesise final product" }
+        ],
+        "edges": [["w1", "w2"], ["w2", "w3"]]
+      }
+    },
+    {
+      "title": "Group discussion: six to twenty peers",
+      "tx": "A **group discussion for health education** seats six to twenty people face to face with a leader who seeds a topic (sanitation, immunisation fears) and ensures every voice enters; members teach one another through experience exchange. Decisions emerge by consensus, making it powerful for community entry. Beyond twenty, discussion fragments and silent members vanish, which fixes its size ceiling.",
+      "say": "Six to twenty people, one facilitator, everyone's voice. Group discussion builds community decisions, not just knowledge.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Method", "Size and interaction"],
+        "rows": [
+          ["Group discussion", "6 to 20, all interact"],
+          ["Focus group", "6 to 12, moderator guided research"],
+          ["Panel", "4 to 8 experts before audience"],
+          ["Symposium", "2 plus experts, sequential, large audience"]
+        ]
+      }
+    },
+    {
+      "title": "Seminar, conference, and lecture",
+      "tx": "The **lecture and seminar family** completes the map: a lecture delivers prepared content to many with minimal interaction (efficient for facts, weak for skills), a seminar adds participant papers and discussion around a theme in academic settings, and a conference scales deliberation to hundreds with parallel sessions. Examinations ask which method permits audience discussion among experts (panel), which produces a work output (workshop), and which is pure sequence (symposium).",
+      "say": "Lectures broadcast facts efficiently. Panels deliberate, workshops produce, symposiums parade experts in order.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "One way heavy",
+          "points": ["Lecture: facts to many, cheap", "Symposium: expert sequence", "Conference: scale with parallels"]
+        },
+        "right": {
+          "title": "Interaction heavy",
+          "points": ["Seminar: papers plus discussion", "Panel: expert conversation", "Workshop: group production"]
+        }
+      }
+    },
+    {
+      "title": "Buzz groups and brainstorming",
+      "tx": "Inside large sessions, **buzz groups and brainstorming** rescue participation: buzz groups split hundreds into twos or threes for five minute neighbour discussions before reporting, while brainstorming harvests uncensored ideas under deferred judgement. Both warm up plenaries, surface village vocabulary for message design, and cost nothing but facilitation courage. They open, rather than replace, deeper methods.",
+      "say": "Buzz pairs thaw a silent hall in five minutes. Brainstorming collects wild ideas before judging any of them.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "bz1", "label": "Pose one sharp question" },
+          { "id": "bz2", "label": "Pairs buzz for five minutes" },
+          { "id": "bz3", "label": "Harvest reports in plenary" }
+        ],
+        "edges": [["bz1", "bz2"], ["bz2", "bz3"]]
+      }
+    },
+    {
+      "title": "IEC: information education communication",
+      "tx": "**Information education communication (IEC)** in national programmes historically meant the poster pamphlet broadcast apparatus supporting services: wall paintings of immunisation days, flip books for workers, radio spots for campaigns. Its weakness was measuring outputs (posters printed) instead of behaviour. Every Indian programme retains an IEC budget line, now expected to fund research driven behaviour strategies rather than print tonnage.",
+      "say": "IEC built the poster and pamphlet machinery of programmes. Counting posters printed was its fatal measurement habit.",
+      "vis": {
+        "kind": "table",
+        "cols": ["IEC output", "Old metric versus new demand"],
+        "rows": [
+          ["Posters and wall paintings", "Numbers printed versus behaviour shifted"],
+          ["Radio and TV spots", "Airtime bought versus recall and action"],
+          ["Flip books for workers", "Copies distributed versus counselling quality"],
+          ["Campaign days", "Events held versus coverage achieved"]
+        ]
+      }
+    },
+    {
+      "title": "BCC and social behaviour change",
+      "tx": "**Behaviour change communication (BCC)** starts from the behaviour, researches its barriers and facilitators in segmented audiences, designs messages plus service and environment fixes, and evaluates behaviour itself. Social and behaviour change communication widens further to norms, networks, and community mobilisation (self help groups, panchayats). The COM-B style analysis (capability, opportunity, motivation) exemplifies its diagnostic discipline.",
+      "say": "BCC begins with the behaviour and its barriers, not the poster. Norms and environments get engineered alongside messages.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Diagnose first (BCC)",
+          "points": ["Formative research on barriers", "Audience segmentation", "Message plus environment design"]
+        },
+        "right": {
+          "title": "Evaluate behaviour",
+          "points": ["Adoption, not recall, as endpoint", "Norm shifts tracked in surveys", "Mid course correction built in"]
+        }
+      }
+    },
+    {
+      "title": "Method selection traps",
+      "tx": "Examination traps for **group education methods compared** include calling any expert gathering a seminar, expecting behaviour change from symposiums, and sizing groups wrongly: focus groups six to twelve, group discussions six to twenty, workshops twenty to thirty with consultants, panels four to eight experts. Role play and demonstration remain the skill builders; lectures remain the fact broadcasters. Match method to objective or lose the mark.",
+      "say": "Size and interaction define each method. Symposium informs, panel deliberates, workshop produces, discussion mobilises.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "mt1", "label": "Fix objective: inform, deliberate, produce, mobilise" },
+          { "id": "mt2", "label": "Match symposium, panel, workshop, discussion" },
+          { "id": "mt3", "label": "Size group to method limits" }
+        ],
+        "edges": [["mt1", "mt2"], ["mt2", "mt3"]]
+      }
+    }
+  ]
+}

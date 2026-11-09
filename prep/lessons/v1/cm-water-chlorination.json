@@ -1,0 +1,150 @@
+{
+ "v": 1,
+ "id": "cm-water-chlorination",
+ "subject": "community-medicine",
+ "module": "cm-water",
+ "title": "Water Disinfection: Chlorination Chemistry, Breakpoint and Demand",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Chlorination chemistry and hypochlorous acid",
+   "tx": "The final and most crucial barrier against water-borne enteric epidemics is chemical disinfection through **potable water chlorination**. When gaseous chlorine or bleaching powder dissolves in water, it hydrolyses into hypochlorous acid and hydrochloric acid; hypochlorous acid is a neutral, uncharged, highly reactive molecule that readily penetrates bacterial cell walls, oxidising essential intracellular sulfhydryl-containing metabolic enzymes and destroying vegetative bacteria within thirty minutes.",
+   "say": "Chlorine dissolves in water to form hypochlorous acid. Because it carries no electrical charge, it easily penetrates bacterial walls to destroy vital enzymes within thirty minutes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Chlorine gas or bleaching powder added to water"},
+     {"id": "b", "label": "Cl2 + H2O <---> HOCl (Hypochlorous acid) + HCl"},
+     {"id": "c", "label": "HOCl penetrates bacterial membrane freely"},
+     {"id": "d", "label": "Oxidation of intracellular sulfhydryl enzymes and bacterial death"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Influence of pH on chlorine disinfection efficacy",
+   "tx": "The bactericidal power of chlorine depends fundamentally on ambient water pH, which dictates the **pH-dependent dissociation equilibrium** between active hypochlorous acid and much weaker hypochlorite ions. Hypochlorous acid is eighty times more potent as a germicide than hypochlorite; below pH seven point five, more than fifty percent exists as active hypochlorous acid, whereas at pH above eight point five, almost all chlorine dissociates into sluggish hypochlorite.",
+   "say": "Water pH governs chlorine potency. Hypochlorous acid is eighty times stronger than hypochlorite ions. Water must be kept slightly acidic or neutral so the active acid form dominates.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Water pH value", "Hypochlorous acid (HOCl) %", "Hypochlorite ion (OCl-) %", "Disinfection efficacy"],
+    "rows": [
+     ["pH 6.0", "96.5 percent", "3.5 percent", "Maximum rapid bactericidal potency"],
+     ["pH 7.0", "75.0 percent", "25.0 percent", "High bactericidal efficacy"],
+     ["pH 7.5", "50.0 percent", "50.0 percent", "Acceptable disinfection threshold"],
+     ["pH 8.0", "23.0 percent", "77.0 percent", "Reduced potency; longer contact needed"],
+     ["pH 9.0", "3.0 percent", "97.0 percent", "Very weak disinfection; pH correction required"]
+    ]
+   }
+  },
+  {
+   "title": "Chlorine demand concept and calculation",
+   "tx": "Raw water contains diverse reducing substances, including organic matter, ferrous iron, manganese, hydrogen sulphide and nitrites, which immediately react with added chlorine, establishing the **water chlorine demand**. Calculated as the total quantity of chlorine added minus the amount of residual chlorine remaining at the conclusion of a specified contact time (typically sixty minutes), chlorine demand must be completely satisfied before active free residual can emerge.",
+   "say": "Chlorine demand is the amount of chlorine consumed by organic matter, iron and minerals in raw water. You must satisfy this demand completely before any free disinfectant is left over.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Total chlorine dose added to raw water"},
+     {"id": "b", "label": "Subtracted: Residual chlorine remaining after 60 min"},
+     {"id": "c", "label": "Equals: Chlorine Demand of the water sample"},
+     {"id": "d", "label": "Determines exact dosage needed at treatment plant"}
+    ],
+    "edges": [["a", "c"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Breakpoint chlorination curve: phases 1 and 2",
+   "tx": "When increasing doses of chlorine are added to ammonia-containing water, the chemical response follows the famous **breakpoint chlorination curve**. In Phase 1, added chlorine is immediately destroyed by reducing agents like iron and hydrogen sulfide without producing any residual; in Phase 2, chlorine reacts with ammonia to form combined residuals (monochloramine, dichloramine and nitrogen trichloride), causing apparent residual chlorine to rise.",
+   "say": "As chlorine is added, minerals absorb the first portion completely. Next, chlorine binds with ammonia to form chloramines, producing a temporary rise in combined residual chlorine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Phase 1: Direct oxidation of iron, manganese, H2S"},
+     {"id": "b", "label": "Phase 2: Formation of chloramines with ammonia"},
+     {"id": "c", "label": "Apparent rise in combined residual chlorine"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "The dip and breakpoint: destruction of chloramines",
+   "tx": "As chlorine dosing continues beyond the chloramine peak, further additions oxidize and decompose the chloramines into inert nitrogen gas, nitrous oxide and water, causing residual chlorine to plunge sharply in Phase 3. The lowest nadir of this curve represents the **breakpoint chlorination phenomenon**; beyond this precise point, all organic matter and ammonia have been destroyed, and any additional chlorine appears directly as active free residual chlorine.",
+   "say": "Adding more chlorine oxidizes chloramines into nitrogen gas, causing measured residuals to drop. The lowest point is the breakpoint, beyond which pure free chlorine begins to appear.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Curve section", "Chemical reaction occurring", "Residual form detected"],
+    "rows": [
+     ["Phase 1 (Initial)", "Oxidation of reducing minerals (iron, sulphide)", "Zero residual detected"],
+     ["Phase 2 (Ascending)", "Reaction with ammonia to form chloramines", "Combined residual chlorine rises"],
+     ["Phase 3 (Descending)", "Oxidation and destruction of chloramines into N2", "Apparent residual drops sharply"],
+     ["The Breakpoint", "All ammonia and organic matter destroyed", "Nadir of curve; target operational point"],
+     ["Phase 4 (Post-breakpoint)", "Every drop added remains unconsumed", "Free available residual chlorine (HOCl/OCl-)"]
+    ]
+   }
+  },
+  {
+   "title": "Free versus combined residual chlorine",
+   "tx": "Water testing distinguishes between **free available residual chlorine** (uncombined hypochlorous acid and hypochlorite ions) and combined residual chlorine (chloramines formed with ammonia). Free residual chlorine kills bacteria twenty-five times faster and destroys enteroviruses far more effectively than combined chloramines; national standards require a minimum free residual of zero point five milligrams per litre (0.5 ppm) after sixty minutes of contact time.",
+   "say": "Free chlorine kills bacteria twenty-five times faster than combined chloramines. National drinking standards demand half a milligram per litre of free residual chlorine after one hour.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Free available chlorine (HOCl/OCl-)",
+     "points": ["Fast, potent bactericidal and virucidal kill", "Acts within minutes against vegetative germs", "Required minimum: 0.5 ppm after 60 min contact"]
+    },
+    "right": {
+     "title": "Combined chlorine (Chloramines)",
+     "points": ["Sluggish, slow disinfection velocity", "Requires hours of contact time to kill bacteria", "More stable; persists longer in pipe networks"]
+    }
+   }
+  },
+  {
+   "title": "Bleaching powder and chlorine content",
+   "tx": "In rural communities without piped gas installations, wells are disinfected using **bleaching powder chlorination**, chemically formulated as chlorinated lime or calcium hypochlorite (CaOCl2). Freshly manufactured bleaching powder contains thirty-three percent available chlorine by weight; because atmospheric exposure to air, light and moisture degrades chlorine into inert calcium chloride, bags must be stored in cool, dark, dry warehouses.",
+   "say": "Bleaching powder supplies thirty-three percent available chlorine when fresh. Because air and moisture degrade it, bags must be kept tightly sealed in cool, dark storage sheds.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Chlorine disinfectant agent", "Available chlorine content", "Physical form and use"],
+    "rows": [
+     ["Fresh bleaching powder", "33 percent available chlorine by weight", "White powder for well disinfection and camps"],
+     ["High test hypochlorite (HTH)", "65 to 70 percent available chlorine", "Stable granules; longer shelf life in tropics"],
+     ["Sodium hypochlorite solution", "5 to 15 percent available chlorine", "Liquid bleach for hospital disinfection and water"],
+     ["Chlorine gas cylinders", "100 percent available chlorine", "Liquefied gas under pressure in urban waterworks"]
+    ]
+   }
+  },
+  {
+   "title": "Horrocks apparatus for well disinfection dosage",
+   "tx": "To determine the exact quantity of bleaching powder needed to disinfect a village open dug well, sanitarians deploy the **Horrocks apparatus testing kit**. Six white porcelain cups containing two millilitres of suspect well water receive increasing drops of one percent bleaching powder solution; after stirring, starch-iodide indicator is added, with the first cup displaying a distinct blue color revealing the exact weight of powder required.",
+   "say": "Horrocks apparatus uses six cups of well water and starch-iodide indicator to determine bleaching powder dose. The first cup turning blue reveals the exact grams of powder to add.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Fill 6 porcelain cups with 2 ml well water each"},
+     {"id": "b", "label": "Add 1 to 6 drops of 1% bleaching powder solution"},
+     {"id": "c", "label": "Stir and add 3 drops of starch-iodide indicator"},
+     {"id": "d", "label": "First cup developing blue color gives required dose"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Testing residual chlorine: orthotolidine vs DPD test",
+   "tx": "Field verification of residual chlorine is performed using the **diethyl-para-phenylenediamine test** (DPD test), which has superseded the legacy orthotolidine method due to its precision and safety. The DPD tablet added to chlorinated water produces an instant red colour with free chlorine, evaluated against calibrated colour comparator discs; unlike orthotolidine, DPD avoids carcinogenic chemical reagents and is not skewed by false-positive iron and manganese.",
+   "say": "The modern DPD tablet test turns water instant red in the presence of free chlorine, measuring exact residual levels without using the toxic, cancer-causing orthotolidine dye.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Modern DPD comparator test",
+     "points": ["Reagent: Diethyl-p-phenylenediamine tablets", "Produces stable red color instantly with free chlorine", "Safe, non-carcinogenic, specific for free chlorine"]
+    },
+    "right": {
+     "title": "Legacy Orthotolidine (OT) test",
+     "points": ["Reagent: Orthotolidine in acid solution", "Produces yellow color (flashes for free chlorine)", "Carcinogenic reagent; false positives with iron/nitrites"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,197 @@
+{
+  "v": 1,
+  "module": "mic-hiv",
+  "subject": "microbiology",
+  "title": "HIV Opportunistic Infections, CD4 Thresholds and Retroviruses",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Clinical progression in human immunodeficiency virus infection correlates inversely with the absolute CD4 helper T-lymphocyte count. As immunity declines, distinct **opportunistic infections** emerge predictably at characteristic cellular thresholds. Tuberculosis and candidiasis appear early during immunosuppression, whereas cytomegalovirus retinitis and Mycobacterium avium complex typically signify profound failure below fifty cells per microlitre.",
+      "say": "Falling helper T-cell numbers expose the host to predictable opportunistic pathogens.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early stage infections",
+          "points": [
+            "Oral candidiasis thrush",
+            "Pulmonary tuberculosis reactivation",
+            "Herpes zoster dermatomal eruption",
+            "Persistent generalized lymphadenopathy"
+          ]
+        },
+        "right": {
+          "title": "Advanced stage infections",
+          "points": [
+            "Pneumocystis jirovecii pneumonia",
+            "Cryptococcal meningoencephalitis",
+            "Cerebral toxoplasma ring lesions",
+            "Cytomegalovirus end-organ damage"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The absolute peripheral blood **CD4 count** serves as the principal surrogate marker for staging cellular immunodeficiency and dictating antimicrobial chemoprophylaxis. Prophylaxis against Pneumocystis using trimethoprim-sulfamethoxazole begins when counts breach two hundred cells per microlitre. Toxoplasma prophylaxis becomes mandatory below one hundred cells, while routine primary azithromycin for atypical mycobacteria was formerly given under fifty cells.",
+      "say": "Antimicrobial prophylaxis is triggered when helper counts fall below defined numerical cutoffs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c1",
+            "label": "CD4 under 200: start cotrimoxazole for Pneumocystis"
+          },
+          {
+            "id": "c2",
+            "label": "CD4 under 100: add coverage for Toxoplasma and Cryptococcus"
+          },
+          {
+            "id": "c3",
+            "label": "CD4 under 50: screen for cytomegalovirus and MAC"
+          }
+        ],
+        "edges": [
+          [
+            "c1",
+            "c2"
+          ],
+          [
+            "c2",
+            "c3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Oral and oesophageal fungal disease reflects early mucosal immune depletion. **Candida albicans** frequently manifests as pseudomembranous thrush with curd-like plaques that scrape away leaving an erythematous bleeding base. In contrast to oral hairy leukoplakia caused by Epstein-Barr virus which cannot be scraped off, candidal lesions respond readily to topical nystatin or oral fluconazole.",
+      "say": "Scrapable white curd-like plaques in the mouth confirm mucosal candidiasis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/candidiasis-fig1.webp",
+        "alt": "Microscopic view showing budding yeast and pseudohyphae of Candida albicans",
+        "caption": "Candida albicans blastospores and elongated pseudohyphae seen on microscopy [Credit: Ajay Kumar, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Central nervous system fungal infection presents insidiously with subacute headache and fever rather than frank meningism. **Cryptococcus neoformans** possesses a prominent antiphagocytic polysaccharide capsule that impairs leucocyte migration. Cerebrospinal fluid analysis reveals elevated opening pressure, lymphocytic pleocytosis, and clear halos around budding yeast on negative staining with nigrosin or India ink.",
+      "say": "Encapsulated yeasts with wide clear halos in spinal fluid establish cryptococcal meningitis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cryptococcosis-fig1.webp",
+        "alt": "India ink preparation showing encapsulated Cryptococcus neoformans yeast cells",
+        "caption": "India ink preparation demonstrating wide polysaccharide capsules excluding carbon particles around Cryptococcus neoformans [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "In India, voluntary testing and diagnostic confirmation rely on the standardized **NACO testing strategy** to eliminate false-positive diagnoses. For symptomatic patients or blood safety, strategy three requires three sequential reactive tests utilizing distinct kit antigens or operating principles. A sample reactive on the first screening test must be confirmed by two different secondary immunoassays before confirming infection.",
+      "say": "Three different reactive test kits are mandatory before declaring an individual seropositive.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "First ELISA or rapid test with high sensitivity"
+          },
+          {
+            "id": "t2",
+            "label": "Second test with different antigen preparation"
+          },
+          {
+            "id": "t3",
+            "label": "Third test with high specificity for confirmation"
+          }
+        ],
+        "edges": [
+          [
+            "t1",
+            "t2"
+          ],
+          [
+            "t2",
+            "t3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Human T-cell lymphotropic virus type one is an oncornavirus classified as **HTLV-1** that infects CD4 helper lymphocytes via glucose transporter one receptors. Unlike HIV, it is non-cytolytic and transforms infected lymphocytes through the regulatory Tax protein. Transmission occurs through breast milk, sexual intercourse, and parenteral blood transfusions, with high endemicity in southern Japan and the Caribbean basin.",
+      "say": "This transforming retrovirus immortalizes helper lymphocytes rather than killing them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HTLV-1 transmission",
+          "points": [
+            "Vertical transmission via prolonged breast feeding",
+            "Parenteral exposure through blood products",
+            "Unprotected sexual intercourse"
+          ]
+        },
+        "right": {
+          "title": "Pathogenic mechanism",
+          "points": [
+            "Tax transactivator protein drives NF-kB",
+            "Inactivation of p53 tumor suppressor",
+            "Clonal lymphoproliferation of CD4 cells"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Malignant transformation of infected helper lymphocytes culminates after decades of latency in **adult T-cell leukaemia** lymphoma. Circulating neoplastic cells exhibit characteristic polylobated, indented nuclei known as flower cells on peripheral blood films. Patients manifest painful hepatosplenomegaly, generalized lymphadenopathy, hypercalcaemia from parathyroid hormone-related peptide secretion, and lytic bone lesions.",
+      "say": "Flower cells on peripheral blood smear with lytic bone lesions indicate malignant adult T-cell disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical manifestations",
+          "points": [
+            "Generalized lymphadenopathy and skin plaques",
+            "Hepatosplenomegaly with abdominal distension",
+            "Severe hypercalcaemia and lytic bone lesions",
+            "Aggressive course with opportunistic sepsis"
+          ]
+        },
+        "right": {
+          "title": "Laboratory markers",
+          "points": [
+            "Flower-like indented nuclei on blood film",
+            "CD4 positive and CD25 positive immunophenotype",
+            "High serum lactate dehydrogenase",
+            "Integrated HTLV-1 proviral DNA on blotting"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Chronic neurologic myelopathy from the same retrovirus presents as **tropical spastic paraparesis** or HTLV-1-associated myelopathy. Patients develop insidious weakness and spasticity in both lower extremities accompanied by sensory disturbances and neurogenic bladder dysfunction. Histopathology demonstrates perivascular lymphocytic cuffing and thoracic spinal cord demyelination driven by host cytotoxic T-cell responses against Tax.",
+      "say": "Progressive spastic paraparesis with bladder urgency represents inflammatory spinal demyelination.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "Perivascular CD8 infiltration in thoracic spinal cord"
+          },
+          {
+            "id": "n2",
+            "label": "Cytokine release causing lateral column demyelination"
+          },
+          {
+            "id": "n3",
+            "label": "Spastic paraparesis with hyperreflexia and Babinski sign"
+          }
+        ],
+        "edges": [
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
+    }
+  ]
+}

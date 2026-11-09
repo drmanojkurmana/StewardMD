@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-staphylococcus",
+  "subject": "microbiology",
+  "title": "Novobiocin Testing and Mannitol Salt Agar in Staphylococcal Identification",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **novobiocin test** drops a 5 microgram disc on a coagulase negative staphylococcus lawn: susceptible zones (16 mm and above) suggest the epidermidis group, resistance names saprophyticus among urinary isolates (its gyrase naturally less susceptible). One disc routes the commonest CoNS bench fork in urinary work.",
+      "say": "Resistant to novobiocin in urine: think saprophyticus; susceptible: epidermidis group.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Novobiocin logic",
+          "points": [
+            "5 ug disc on Mueller Hinton or blood agar",
+            "Resistant: S saprophyticus (urinary context)",
+            "Susceptible: S epidermidis and most CoNS",
+            "Confirm species when site is sterile"
+          ]
+        },
+        "right": {
+          "title": "Bench cautions",
+          "points": [
+            "Some other CoNS share resistance (cohnii group)",
+            "Mixed cultures falsify zones",
+            "MALDI supersedes where available",
+            "Urine isolate context drives interpretation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mannitol salt agar** from the aureus lesson doubles as CoNS stage: non fermenters grow pink unchanged, so a yellow colony demands coagulase confirmation while pink colonies travel to novobiocin and speciation. Reading both media together is the staphylococcal bench's opening two moves.",
+      "say": "MSA yellow asks coagulase; MSA pink asks novobiocin and species.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MSA reads",
+          "points": [
+            "Yellow: mannitol fermented (presume aureus)",
+            "Pink red: non fermenter CoNS",
+            "No growth: salt intolerant, not staphylococcus",
+            "Confirm before reporting invasive isolates"
+          ]
+        },
+        "right": {
+          "title": "Opening sequence",
+          "points": [
+            "Gram stain clusters",
+            "Catalase positive confirms staphylococcus",
+            "Coagulase or latex for aureus",
+            "Novobiocin and speciation for CoNS by site"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Chromogenic MRSA media** modernise screening: cefoxitin containing chromogenic agar turns MRSA colonies a proprietary colour in 18 to 24 hours from nasal swabs, sensitivity rivalled by PCR where speed pays (pre surgical, outbreak), cost deciding between them. Culture retains isolate recovery for typing that PCR cannot hand over.",
+      "say": "Chromogenic plates colour MRSA by morning; PCR answers by lunch without an isolate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chromogenic culture",
+          "points": [
+            "Selective cefoxitin plus chromogen",
+            "18 to 24 hour screening answer",
+            "Isolate kept for typing and susceptibility",
+            "MSSA chromogenic variants exist"
+          ]
+        },
+        "right": {
+          "title": "Molecular screening",
+          "points": [
+            "mecA plus junction PCR hours",
+            "Empty cassette and mecC caveats",
+            "Pooled swab programmes in some units",
+            "Cost and prevalence decide platform"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**PYR and rapid kits** compress speciation: pyrrolidonyl arylamidase positive lugdunensis among CoNS, latex agglutination (clumping factor, protein A, capsular antigens) for aureus in minutes from colonies, and automated panels finishing what discs begin. Rapid tests route therapy days earlier in blood culture workflows (mecA and PBP2a from positive bottles).",
+      "say": "Minutes from colony to aureus answer: latex and PBP2a kits rewired the first day.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rapid colony tests",
+          "points": [
+            "Latex: clumping factor and protein A",
+            "PYR spot: lugdunensis and enterococcus clues",
+            "DNase agar aureus support",
+            "Tube coagulase arbitration remains"
+          ]
+        },
+        "right": {
+          "title": "From positive blood culture",
+          "points": [
+            "PBP2a lateral flow in minutes",
+            "mecA molecular panels with species",
+            "Rapid phenotypic susceptibility emerging",
+            "Stewardship acts same day on these"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Antimicrobial discs for staphylococci** carry species specific traps: cefoxitin surrogate for mecA, penicillin zone edge test for beta lactamase (sharp cliff versus fuzzy beach), erythromycin clindamycin D zone, vancomycin MIC only (disc blind to VISA), each expert rule from the susceptibility module applied to this genus.",
+      "say": "Staphylococcal reports are expert rules in action: edges, D zones and MIC only vancomycin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Disc rules",
+          "points": [
+            "Cefoxitin predicts mecA mediated resistance",
+            "Penicillin zone edge: beta lactamase if sharp",
+            "D test flattens clindamycin zone",
+            "Fusidic and rifampicin never report alone (resistance speed)"
+          ]
+        },
+        "right": {
+          "title": "MIC only drugs",
+          "points": [
+            "Vancomycin: MIC methods for aureus",
+            "Daptomycin: calcium supplemented testing",
+            "Linezolid disc and MIC both valid",
+            "Reference labs arbitrate VISA and rare resistance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Typing for outbreaks** (spa sequence of protein A repeats, PFGE heritage, whole genome SNP) decides whether MRSA isolates are one transmission or many importations, directing infection control theatre toward wards or admissions. Protein A returns as epidemiologist's barcode, its third career in one module.",
+      "say": "Protein A binds antibody, carries test kits and barcodes outbreaks: three careers, one molecule.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "cluster", "label": "Cases cluster in time and ward" },
+          { "id": "type", "label": "Isolates typed (spa, then genome)" },
+          { "id": "match", "label": "Match implies transmission chain" },
+          { "id": "act", "label": "Screening, cleaning and cohorting targeted" }
+        ],
+        "edges": [["cluster", "type"], ["type", "match"], ["match", "act"]]
+      }
+    },
+    {
+      "tx": "**Reporting language** disciplines prescribers: CoNS reported with site aware comments (possible contaminant versus probable pathogen), aureus always fully worked, mecA positive reported as resistant to all beta lactams except ceftaroline class, and inducible clindamycin reported resistant with comment. The report is a prescription consultation.",
+      "say": "Comments on staphylococcal reports prescribe as surely as drug names do.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Report habits",
+          "points": [
+            "Number of sets positive stated for CoNS",
+            "Time to positivity available on request",
+            "Suppression of misleading susceptibilities",
+            "Critical results telephoned (blood aureus)"
+          ]
+        },
+        "right": {
+          "title": "Therapy echoes",
+          "points": [
+            "MSSA: cefazolin or antistaph penicillin preferred over vancomycin",
+            "MRSA: vancomycin AUC, daptomycin not in pneumonia",
+            "CoNS devices: glycopeptide plus removal plan",
+            "Repeat cultures clear bacteraemia documentation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Novobiocin in history** also treated infections (gyrase B inhibitor) before resistance and toxicity shelved it, surviving only as this identification disc, a common fate for antibiotics turned reagents (bacitracin, optochin in the streptococcal lessons follow). Bench discs are retired drugs with second careers.",
+      "say": "Half the bench's discs are retired antibiotics; identification is their second career.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Disc second careers",
+          "points": [
+            "Novobiocin: CoNS fork",
+            "Bacitracin: group A streptococcus",
+            "Optochin: pneumococcus",
+            "Cefoxitin: mecA surrogate marker"
+          ]
+        },
+        "right": {
+          "title": "Why retired",
+          "points": [
+            "Resistance speed or toxicity as therapy",
+            "Better successors displaced",
+            "Differential susceptibility retained diagnostic value",
+            "Examination lists preserve them deliberately"
+          ]
+        }
+      }
+    }
+  ]
+}

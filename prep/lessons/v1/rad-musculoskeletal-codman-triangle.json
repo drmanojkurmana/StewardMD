@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-musculoskeletal-codman-triangle",
+ "subject": "radiology",
+ "module": "rad-musculoskeletal",
+ "title": "Codman Triangle, Sunburst and Onion Peel Periosteal Reactions",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Codman triangle marks lifted periosteum",
+   "tx": "**Codman triangle** is the cuff of reactive bone left where a fast growing process lifts periosteum off the cortex and only the base ossifies before the centre outruns it. The pictured bone lesion set places that triangle beside sunburst and onion peel patterns, the three periosteal signatures examiners rotate. Osteosarcoma is the classic owner, but Ewing sarcoma, osteomyelitis and even a lifting haematoma can raise the same triangle.",
+   "say": "Codman triangle is the cuff of reactive bone where a fast process lifts periosteum off cortex and only the base ossifies. The pictured set places it beside sunburst and onion peel patterns. Osteosarcoma is the classic owner, but Ewing sarcoma and osteomyelitis can raise the same triangle.",
+   "vis": {"kind": "image", "src": "v1/kb/media/bone-tumours-osteosarcoma-ewing-paget-fig1.webp", "alt": "Bone lesion radiograph patterns showing osteosarcoma and Ewing periosteal reactions.", "caption": "Bone tumour periosteal reaction patterns. Illustration: StewardMD."}
+  },
+  {
+   "title": "Sunburst shoots from the cortex",
+   "tx": "**Sunburst appearance** radiates spicules of new bone perpendicular to the cortex, tumour osteoid laid down along vessels stretched by rapid expansion. It pairs with a wide zone of transition, cortical destruction and a soft tissue mass in the metaphysis of an adolescent femur or tibia. A slow benign process instead earns a narrow transition zone, intact cortex and solid smooth periosteal bone, the tempo split every bone film read begins with.",
+   "say": "Sunburst appearance radiates spicules of new bone perpendicular to cortex, tumour osteoid laid along stretched vessels. It pairs with a wide transition zone and soft tissue mass in an adolescent metaphysis. Slow benign processes earn a narrow transition zone and intact cortex instead, the tempo split every bone read begins with.",
+   "vis": {"kind": "compare", "left": {"title": "Aggressive tempo", "points": ["Wide transition zone", "Cortex destroyed", "Sunburst or Codman reaction", "Soft tissue mass"]}, "right": {"title": "Non aggressive tempo", "points": ["Narrow transition zone", "Cortex intact or expanded", "Solid smooth periosteal bone", "No soft tissue mass"]}}
+  },
+  {
+   "title": "Onion peel layers in Ewing sarcoma",
+   "tx": "**Onion peel** reaction stacks concentric periosteal layers as growth pulses lift the membrane repeatedly, classically in Ewing sarcoma of a child or adolescent long bone diaphysis. The lesion underneath is permeative, tiny holes chewing the cortex without one clear margin. Fever, raised inflammatory markers and a soft tissue mass make Ewing the great infection mimic, so a diaphyseal onion peel with fever earns biopsy, not just antibiotics.",
+   "say": "Onion peel reaction stacks concentric periosteal layers as growth pulses lift the membrane repeatedly, classically in Ewing sarcoma of a child diaphysis. The lesion is permeative, chewing cortex without a clear margin. Fever and a soft tissue mass make it the great infection mimic, so biopsy follows.",
+   "vis": {"kind": "table", "cols": ["Reaction", "Shape", "Classic owner"], "rows": [["Codman triangle", "Single ossified cuff", "Osteosarcoma"], ["Sunburst", "Perpendicular spicules", "Osteosarcoma"], ["Onion peel", "Concentric layers", "Ewing sarcoma"], ["Solid smooth", "Single thick layer", "Healing or benign"]]}
+  },
+  {
+   "title": "Osteosarcoma specimen matches film",
+   "tx": "**Osteosarcoma radiograph** in the pictured practical film shows the metaphyseal destructive mass with mineralised tumour bone clouding the soft tissue extension around the knee of an adolescent. Peak incidence follows the pubertal growth spurt, and the distal femur, proximal tibia and proximal humerus metaphyses host most cases. Night pain, a firm mass and raised alkaline phosphatase complete the presentation that should never wait for a second film.",
+   "say": "Osteosarcoma radiograph in the pictured film shows a metaphyseal destructive mass with mineralised tumour bone around an adolescent knee. Peak incidence follows the pubertal growth spurt at distal femur, proximal tibia and proximal humerus. Night pain and a firm mass should never wait for a second film.",
+   "vis": {"kind": "image", "src": "clinix/media/practicals/surg-xray-osteosarcoma.webp", "alt": "Radiograph of osteosarcoma at the knee with metaphyseal destruction and tumour bone formation.", "caption": "Osteosarcoma of the knee on radiograph. Credit: StewardMD library."}
+  },
+  {
+   "title": "Zone of transition grades tempo",
+   "tx": "**Zone of transition** is the border width between lesion and normal bone: pencil sharp in slow cysts the bone can wall off, wide and invisible in fast tumours and infection the bone cannot contain. Lodwick grading formalises that read from geographic destruction with sclerotic rim down to permeative pattern. Margin, periosteal reaction and cortical state together predict biology before histology, which is why the radiologist, not the clock, triages biopsy urgency.",
+   "say": "Zone of transition is the border width between lesion and normal bone: pencil sharp in slow cysts, wide and invisible in fast tumours. Margin, periosteal reaction and cortical state together predict biology before histology, which is why the radiologist triages biopsy urgency.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Measure transition zone"}, {"id": "b", "label": "Judge periosteal reaction"}, {"id": "c", "label": "Check cortex and matrix"}, {"id": "d", "label": "Tempo predicts biology"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Matrix mineralisation names tissue",
+   "tx": "**Tumour matrix** mineralisation fingerprints the tissue making it: osteoid clouds and ivory density in osteosarcoma, rings and arcs or popcorn calcification in chondroid tumours, and ground glass in fibrous dysplasia. A purely lytic lesion with no matrix can still be myeloma, metastasis, Ewing or infection. Reading matrix before naming the tumour keeps the differential honest, because age and site then rank the short list the matrix allows.",
+   "say": "Tumour matrix fingerprints the tissue: osteoid clouds in osteosarcoma, rings and arcs in chondroid tumours, ground glass in fibrous dysplasia. A purely lytic lesion can still be myeloma, metastasis, Ewing or infection. Reading matrix before naming the tumour keeps the differential honest.",
+   "vis": {"kind": "table", "cols": ["Matrix pattern", "Tissue", "Example"], "rows": [["Cloud like osteoid", "Bone forming", "Osteosarcoma"], ["Rings and arcs", "Cartilage", "Enchondroma, chondrosarcoma"], ["Ground glass", "Fibrous", "Fibrous dysplasia"], ["Absent, purely lytic", "None mineralised", "Myeloma, Ewing, infection"]]}
+  },
+  {
+   "title": "Infection raises periosteum too",
+   "tx": "**Osteomyelitis** lifts periosteum into Codman like cuffs and onion layers in children, because pus strips the membrane off cortex before cloaca and involucrum organise. The tempo signs overlap malignancy deliberately in examiners questions. Sequestrum, a dense dead bone fragment inside lucency, and a cloaca draining it favour infection, while a mineralised soft tissue mass favours tumour, and biopsy with culture settles the overlap whenever doubt survives imaging.",
+   "say": "Osteomyelitis lifts periosteum into similar cuffs in children, because pus strips the membrane off cortex. Sequestrum and cloaca favour infection, while a mineralised soft tissue mass favours tumour. Biopsy with culture settles the overlap whenever doubt survives imaging, which is often.",
+   "vis": {"kind": "compare", "left": {"title": "Infection clues", "points": ["Sequestrum inside lucency", "Cloaca drainage gap", "Involucrum sheath of new bone", "Culture grows organism"]}, "right": {"title": "Tumour clues", "points": ["Mineralised soft tissue mass", "Matrix pattern present", "No sequestrum", "Biopsy shows sarcoma"]}}
+  },
+  {
+   "title": "MRI stages local extent",
+   "tx": "**MRI staging** of a bone sarcoma maps marrow extent, skip lesions in the same bone, joint and neurovascular involvement and the soft tissue compartment for the surgeon. The biopsy track is planned with the resecting surgeon and placed where the definitive operation can excise it, because a badly placed track seeds tumour into new compartments. Chest CT completes staging since lung is the first metastatic station for osteosarcoma and Ewing alike.",
+   "say": "MRI staging maps marrow extent, skip lesions, joint and neurovascular involvement for the surgeon. The biopsy track is planned with the resecting surgeon where the operation can excise it, because a badly placed track seeds new compartments. Chest CT completes staging since lung is the first metastatic station.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Plain film grades tempo"}, {"id": "b", "label": "MRI maps local extent"}, {"id": "c", "label": "Planned biopsy track"}, {"id": "d", "label": "Chest CT stages spread"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}

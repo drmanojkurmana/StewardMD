@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-neuroradiology-ct-head-in",
+ "subject": "radiology",
+ "module": "rad-neuroradiology",
+ "title": "CT Head in Trauma: Extradural and Subdural Haematomas",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Biconvex extradural collection",
+   "tx": "**Extradural haematoma** collects between skull and dura as a biconvex, lens shaped high density mass that respects suture lines where dura is tacked down but crosses the midline freely. The pictured CT anatomy set shows that lens shape over the temporal region, classic after a fracture tears the middle meningeal artery. A lucid interval between injury and deterioration is the clinical story examiners attach to this shape.",
+   "say": "Extradural haematoma collects between skull and dura as a biconvex lens shaped mass that respects suture lines but crosses the midline. The pictured CT shows that lens over the temporal region, classic after a fracture tears the middle meningeal artery. A lucid interval is the story examiners attach.",
+   "vis": {"kind": "image", "src": "v1/kb/media/extradural-hematoma-fig1.webp", "alt": "CT illustration of biconvex extradural haematoma with skull and dura anatomy.", "caption": "Biconvex extradural haematoma on CT with related anatomy. Illustration: StewardMD."}
+  },
+  {
+   "title": "Crescentic subdural collection",
+   "tx": "**Subdural haematoma** spreads between dura and arachnoid as a crescent that crosses suture lines but stops at the falx and tentorium, so it never crosses the midline. The pictured chronic subdural shows the crescent hugging the hemisphere in an older patient after minor trauma tore bridging veins. Acute subdural density is bright like extradural, so shape and suture behaviour, not brightness, separate the two at first look.",
+   "say": "Subdural haematoma spreads between dura and arachnoid as a crescent crossing suture lines but stopping at the falx, so it never crosses the midline. The pictured chronic subdural hugs the hemisphere after bridging vein tears. Shape and suture behaviour, not brightness, separate it from extradural blood.",
+   "vis": {"kind": "image", "src": "v1/kb/media/chronic-subdural-hematoma-fig1.webp", "alt": "CT showing crescentic chronic subdural haematoma over a cerebral hemisphere.", "caption": "Crescentic chronic subdural haematoma on CT. Illustration: StewardMD."}
+  },
+  {
+   "title": "Density dates the bleed",
+   "tx": "**Haematoma density** fades on a timetable: acute blood is hyperdense at 50 to 80 Hounsfield units for about the first three days, turns isodense with cortex between one and three weeks, then hypodense like fluid after three weeks. The isodense phase is the trap, betrayed only by sulci that vanish, grey white junction displaced inward and a ventricle squeezed on the same side.",
+   "say": "Haematoma density fades on a timetable: acute blood is bright for about three days, turns isodense with cortex between one and three weeks, then dark like fluid. The isodense phase betrays itself only by vanished sulci, displaced grey white junction and a squeezed ventricle.",
+   "vis": {"kind": "table", "cols": ["Phase", "Timing", "Density"], "rows": [["Hyperacute and acute", "Hours to 3 days", "Hyperdense 50 to 80 HU"], ["Subacute", "3 days to 3 weeks", "Falling, isodense window"], ["Chronic", "Over 3 weeks", "Hypodense near fluid"], ["Rebleed", "Any chronic stage", "Mixed density, fluid level"]]}
+  },
+  {
+   "title": "Midline shift and herniation",
+   "tx": "**Midline shift** is measured at the septum pellucidum or pineal gland, and shift over 5 mm with a deteriorating patient drives urgent neurosurgical discussion. Uncal herniation pushes the medial temporal lobe over the tentorium, effacing the ambient cistern and compressing the third nerve to blow the pupil. Subfalcine shift slides the cingulate under the falx, and tonsillar descent through the foramen magnum is the final, often fatal, event.",
+   "say": "Midline shift is measured at the septum pellucidum, and shift over five millimetres with deterioration drives urgent neurosurgical discussion. Uncal herniation effaces the ambient cistern and blows the pupil. Subfalcine shift slides the cingulate under the falx, and tonsillar descent is the final event.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Collection expands"}, {"id": "b", "label": "Midline shifts over 5 mm"}, {"id": "c", "label": "Cisterns efface"}, {"id": "d", "label": "Herniation syndrome"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Fractures and the pterion",
+   "tx": "**Pterion fracture** matters because the middle meningeal artery grooves the bone exactly there, four centimetres above the zygomatic arch midpoint region. A fracture line crossing the arterial groove beside an extradural lens confirms the bleeding source. Depressed fractures deeper than the skull table thickness, open fractures and fractures over a venous sinus each change management toward theatre, antibiotics or extreme elevation caution respectively.",
+   "say": "Pterion fracture matters because the middle meningeal artery grooves the bone exactly there. A fracture crossing the arterial groove beside an extradural lens confirms the source. Depressed fractures deeper than the skull table, open fractures and fractures over a venous sinus each change management toward theatre or caution.",
+   "vis": {"kind": "compare", "left": {"title": "Arterial extradural clues", "points": ["Temporal lens shape", "Fracture crosses artery groove", "Lucid interval story", "Fast deterioration"]}, "right": {"title": "Venous or sinus clues", "points": ["Collection crosses midline vertex", "Fracture over sagittal sinus", "Slower expansion", "Elevation risks sinus tear"]}}
+  },
+  {
+   "title": "Swirl sign means active bleeding",
+   "tx": "**Swirl sign** mixes low density fresh unclotted blood inside a brighter clotted haematoma, marking active or recent bleeding and a collection likely to expand. It upgrades urgency in both extradural and subdural bleeds and appears in spontaneous intracerebral haemorrhage too. Anticoagulant or antiplatelet use, a wide pupil and falling consciousness beside a swirl sign collection should already have neurosurgery and reversal agents moving before the formal report lands.",
+   "say": "Swirl sign mixes low density fresh blood inside brighter clot, marking active bleeding and a collection likely to expand. It upgrades urgency in extradural and subdural bleeds alike. Anticoagulant use, a wide pupil and falling consciousness beside it should move neurosurgery and reversal before the report lands.",
+   "vis": {"kind": "table", "cols": ["Sign", "Appearance", "Meaning"], "rows": [["Swirl", "Dark swirls in bright clot", "Active bleeding, expansion risk"], ["Spot sign on angiogram", "Contrast dot in haematoma", "Active extravasation"], ["Fluid level", "Layered densities", "Rebleed or coagulopathy"], ["Uniform chronic density", "Even dark crescent", "Stable old collection"]]}
+  },
+  {
+   "title": "Diffuse injury without a collection",
+   "tx": "**Diffuse axonal injury** shears white matter at the grey white junction, corpus callosum and dorsolateral brainstem, often with a near normal CT apart from tiny haemorrhagic dots. MRI with susceptibility sequences is far more sensitive and grades depth of lesions, brainstem involvement carrying the worst prognosis. A patient in coma with a clean CT after high speed trauma has diffuse injury until MRI proves otherwise, never a reassuring scan.",
+   "say": "Diffuse axonal injury shears white matter at the grey white junction, corpus callosum and brainstem, often with a near normal CT apart from tiny dots. MRI is far more sensitive, and brainstem lesions carry the worst prognosis. Coma with a clean CT after high speed trauma means diffuse injury until proven otherwise.",
+   "vis": {"kind": "compare", "left": {"title": "Surgical collections", "points": ["Extradural lens", "Subdural crescent", "Large contusion with shift", "Theatre decision by size and shift"]}, "right": {"title": "Diffuse injury", "points": ["Tiny junctional dots", "Corpus callosum lesions", "Coma out of proportion", "MRI grades prognosis"]}}
+  },
+  {
+   "title": "Contusions blossom and contrecoup",
+   "tx": "**Cerebral contusions** bruise the inferior frontal and anterior temporal poles where brain scrapes over skull base ridges, appearing as mixed density haemorrhagic patches that blossom over 24 to 48 hours. Contrecoup bruising sits opposite the impact point, coup beneath it. Repeat CT catches blossoming before herniation, which is why a talking patient with frontal contusions and anticoagulant use earns observation rather than discharge.",
+   "say": "Cerebral contusions bruise the inferior frontal and anterior temporal poles where brain scrapes over skull base ridges, blossoming over twenty four to forty eight hours. Contrecoup bruising sits opposite the impact. Repeat CT catches blossoming before herniation, so anticoagulated patients with frontal contusions earn observation.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Impact scrapes basal cortex"}, {"id": "b", "label": "Mixed density bruise"}, {"id": "c", "label": "Blossoms over 48 hours"}, {"id": "d", "label": "Repeat CT catches growth"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}

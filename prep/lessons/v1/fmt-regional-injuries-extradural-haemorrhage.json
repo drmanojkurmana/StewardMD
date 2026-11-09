@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-regional-injuries-extradural-haemorrhage",
+ "subject": "forensic-medicine",
+ "module": "fmt-regional-injuries",
+ "title": "Extradural and Subdural Haemorrhage, Diffuse Axonal Injury and Lucid Interval",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Extradural bleeding strips dura off bone",
+   "tx": "**Extradural haemorrhage** is almost exclusively traumatic: at impact the skull moves against the dura and strips it from bone, opening a space that a torn vessel then fills. A blow over the lateral head fractures the thin squamous temporal bone and tears the middle meningeal artery, usually its posterior branch. It is the least common meningeal bleed, one to three percent of head injuries, commonest between twenty and forty years.",
+   "say": "Impact strips dura off the temporal bone and tears the middle meningeal artery, filling the new space with arterial blood.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Blow fractures temporal bone"}, {"id": "b", "label": "Dura strips from inner table"}, {"id": "c", "label": "Meningeal artery tears"}, {"id": "d", "label": "Clot expands between bone and dura"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "The extradural clot respects sutures",
+   "tx": "Because dura is tacked down at suture lines, the **extradural clot** is sharply limited, oval or circular, reddish purple and rubbery, ten to twenty centimetres wide and two to six centimetres thick, weighing thirty to three hundred grams. It dents the brain surface into a localised concavity and sits directly under the surface injury in almost every case. About one hundred millilitres is the usual minimum found in fatal cases.",
+   "say": "Suture attachments fence the extradural clot into a rubbery oval that dents the brain directly under the scalp injury.",
+   "vis": {"kind": "table", "cols": ["Clot feature", "Extradural finding", "Reason"], "rows": [["Extent", "Stops at suture lines", "Dura attached at sutures"], ["Shape", "Oval, sharply defined", "Stripping spreads evenly"], ["Site", "Under the scalp injury", "Same blow tears the vessel"], ["Fatal volume", "About 100 ml minimum", "Brain compression threshold"]]}
+  },
+  {
+   "title": "Lucid interval, seen in a minority",
+   "tx": "The textbook course runs injury, brief unconsciousness, recovery, then decline, and the recovered phase is the **lucid interval**, lasting a few hours, two to four typically, up to a week. Reddy insists it appears in only thirty to forty percent of cases, and in a quarter of cases there is no initial unconsciousness at all. As pressure rises the patient grows confused and seemingly drunk, then sleepy, then comatose.",
+   "say": "A lucid interval of a few hours appears in barely a third of extradural cases, so its absence excludes nothing.",
+   "vis": {"kind": "compare", "left": {"title": "Lucid course present", "points": ["Brief initial unconsciousness", "Normal interval of hours", "Then confusion like drunkenness", "Weakness opposite the clot"]}, "right": {"title": "Lucid course absent", "points": ["Severe brain injury overlaps", "Continuous coma from the start", "No clear interval to observe", "Still can be extradural bleeding"]}}
+  },
+  {
+   "title": "Pupil and weakness signs of expansion",
+   "tx": "Expanding clot displaces the brain toward the tentorial opening in **progressive extradural compression**. Weakness begins in the face or arm opposite the haemorrhage and spreads to the leg. The pupil on the side of the haemorrhage dilates and stops reacting to light. Later both pupils fix and dilate, decerebrate rigidity appears, and death comes from respiratory failure by compression of the brain stem. Twenty to fifty percent of cases prove fatal.",
+   "say": "Opposite weakness plus a same side blown pupil mark the expanding clot, ending in brain stem respiratory failure.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Clot pressure keeps rising"}, {"id": "b", "label": "Opposite face and arm weaken"}, {"id": "c", "label": "Same side pupil dilates, fixes"}, {"id": "d", "label": "Decerebrate rigidity, then death"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Subdural bleeding from bridging veins",
+   "tx": "**Subdural haemorrhage** fills the narrow space between dura and arachnoid, most often when parasagittal bridging veins tear as the brain shifts across the dura. It is commoner than extradural bleeding and favours childhood and old age, where a shrunken brain stretches its veins. About seventy percent follow falls and assaults and twenty five percent vehicle accidents. Slight trauma without fracture or even unconsciousness can be enough, especially in alcoholics.",
+   "say": "Bridging veins torn by brain shift cause subdural bleeding, often after trivial trauma in the old, young or alcoholic.",
+   "vis": {"kind": "table", "cols": ["Feature", "Subdural", "Extradural"], "rows": [["Usual vessel", "Bridging veins", "Middle meningeal artery"], ["Trauma needed", "Often slight", "Usually fracturing blow"], ["Age favouring", "Children and elderly", "Adults twenty to forty"], ["Spread", "Whole hemisphere surface", "Limited at sutures"]]}
+  },
+  {
+   "title": "Acute, subacute and chronic subdural types",
+   "tx": "Timing divides subdural collections into **three subdural types**. Acute bleeding develops immediately and rapidly after trauma and kills by brain stem compression around one hundred to one hundred fifty millilitres. Subacute symptoms arrive over days to two or three weeks as a thin peripheral membrane forms. Chronic collections follow slight trauma by weeks or months. Small subdural films are often absorbed spontaneously without any operation.",
+   "say": "Immediate, days later or months later symptom onset separates acute, subacute and chronic subdural collections.",
+   "vis": {"kind": "compare", "left": {"title": "Acute and subacute", "points": ["Symptoms immediate or in days", "Rapid brain compression", "Dark fluid with early membrane", "Fatal near 100 to 150 ml"]}, "right": {"title": "Chronic", "points": ["Weeks or months after slight injury", "Slow expansion tolerated longer", "Membrane encloses the collection", "Common in elderly fallers"]}}
+  },
+  {
+   "title": "Diffuse axonal injury and instant coma",
+   "tx": "**Diffuse axonal injury** shears axons through the white matter when the head accelerates over a long period, as in traffic accidents and falls from height. The clinical signature is immediate unconsciousness with coma beyond six hours: mild six to twenty four hours, moderate beyond twenty four without brain stem signs, severe beyond twenty four with them. About ninety percent follow vehicle accidents. Focal lesions strike the corpus callosum and dorsolateral rostral brain stem.",
+   "say": "Long acceleration shears axons in corpus callosum and brain stem, causing instant coma graded by its length and stem signs.",
+   "vis": {"kind": "table", "cols": ["DAI grade", "Coma duration", "Brain stem signs"], "rows": [["Mild", "6 to 24 hours", "Absent"], ["Moderate", "Over 24 hours", "Absent"], ["Severe", "Over 24 hours", "Present"], ["Cause in ninety percent", "Vehicle accidents", "Falls and assaults share rest"]]}
+  },
+  {
+   "title": "Retraction balls appear after twelve hours",
+   "tx": "Microscopy dates diffuse axonal injury through **retraction balls**, the swollen ends of transected axons. No axonal change is visible up to twelve hours after injury. Axons then dilate, turn club shaped and finally appear as round retraction balls. Their number falls after two to three weeks as clusters of microglial cells appear, followed by astrocytosis and demyelination. This timetable can test whether alleged survival intervals fit the brain findings.",
+   "say": "Axons stay microscopically silent for twelve hours, then swell into retraction balls that fade as microglia gather weeks later.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "First twelve hours, no change"}, {"id": "b", "label": "Axons dilate and club"}, {"id": "c", "label": "Round retraction balls form"}, {"id": "d", "label": "Microglia, then astrocytosis weeks on"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Whiplash injury of the neck",
+   "tx": "**Whiplash injury** strikes front seat occupants when a vehicle stops suddenly: forward thrust throws the neck into acute hyperflexion, then the forehead hitting the windscreen converts it to acute hyperextension. Fatal contusion or laceration of the cervical cord can occur without any fracture of the spine, an exception to the rule that cord injury needs vertebral damage. A sharp blow over an upper cervical spinous process can do the same.",
+   "say": "Sudden stop whips the neck from flexion into extension and can tear the cervical cord while the spine stays unbroken.",
+   "vis": {"kind": "compare", "left": {"title": "Whiplash sequence", "points": ["Vehicle stops suddenly", "Neck hyperflexes forward", "Forehead strike hyperextends it", "Cord injured without fracture"]}, "right": {"title": "Related fatal levels", "points": ["Above C4 kills by respiration failure", "Phrenic centre is mainly C4", "Atlanto occipital dislocation occurs", "Rear impact whips pedestrians too"]}}
+  }
+ ],
+ "quiz": []
+}

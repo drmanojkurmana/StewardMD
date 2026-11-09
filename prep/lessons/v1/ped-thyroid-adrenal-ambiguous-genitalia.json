@@ -1,0 +1,254 @@
+{
+ "key": "ped-thyroid-adrenal-ambiguous-genitalia",
+ "v": 1,
+ "module": "ped-thyroid-adrenal",
+ "subject": "paediatrics",
+ "title": "Pediatric Endocrine Anomalies: Ambiguous Genitalia, GHD, and Cushing",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Atypical development of external genital anatomy where chromosomal and phenotypic sex discord exists represents a medical and social emergency. The birth of an infant with **ambiguous genitalia in newborns** mandates rapid multidisciplinary evaluation by pediatric endocrinologists, geneticists, and pediatric urologists. A gender assignment must never be conjectured or declared until definitive chromosomal karyotype, pelvic imaging, and steroid biochemistry are completed.",
+   "say": "Ambiguous genitalia at birth is a medical emergency requiring urgent karyotype, ultrasound, and electrolytes. Gender assignment must be withheld until workup is complete.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-penis_inspection.webp",
+    "alt": "Clinical examination schematic depicting diagnostic features of genital ambiguity including clitoromegaly, bifid scrotum, and hypospadias.",
+    "caption": "Clinical features of ambiguous genitalia showing bifid scrotum, micropenis, and perineal meatus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Palpability of gonads within the labioscrotal folds or inguinal canals provides the most powerful clinical branchpoint in evaluation. The presence of **bilateral palpable gonads in ambiguity** virtually guarantees testicular tissue and male 46,XY disorder of sex development (DSD), such as androgen insensitivity syndrome. Conversely, absent palpable gonads strongly indicates a 46,XX infant with virilizing congenital adrenal hyperplasia, threatening fatal salt wasting.",
+   "say": "Palpating bilateral gonads indicates testicular tissue and 46,XY DSD. Non-palpable gonads strongly suggest 46,XX CAH, requiring immediate electrolyte monitoring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physical Gonadal Palpation",
+     "Likely Gonadal Histology",
+     "Probable Chromosomal Karyotype",
+     "Most Common Diagnostic Etiology"
+    ],
+    "rows": [
+     [
+      "Neither gonad palpable",
+      "Ovaries (Intra-abdominal location)",
+      "46,XX Karyotype (Over 90%)",
+      "Virilizing Congenital Adrenal Hyperplasia (CYP21A2)"
+     ],
+     [
+      "Both gonads palpable",
+      "Testes (Descended into scrotum)",
+      "46,XY Karyotype (Over 95%)",
+      "Partial Androgen Insensitivity / 5-alpha reductase"
+     ],
+     [
+      "One gonad palpable (Asymmetry)",
+      "Testis on one side, streak/ovary on other",
+      "46,XY / 45,X Mosaicism or 46,XX/46,XY",
+      "Mixed Gonadal Dysgenesis or Ovotesticular DSD"
+     ],
+     [
+      "Immediate blood tests",
+      "Stat karyotype, 17-OHP, electrolytes",
+      "Pelvic ultrasound for Mullerian structures",
+      "Rule out life-threatening adrenal crisis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Deficient secretion of anterior pituitary growth hormone causes profound proportionate growth deceleration with preserved body proportions. In young children, **pediatric growth hormone deficiency** (GHD) presents with severe short stature with height velocity below four centimetres per year, delayed bone age, cherubic facial appearance with prominent frontal bossing, doll-like facies, and mid-facial hypoplasia, accompanied by truncal adiposity.",
+   "say": "Growth hormone deficiency causes proportionate short stature, cherubic doll-like facies, and delayed bone age. In neonates, it causes hypoglycemia and micropenis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Neonatal Clinical Presentation",
+     "points": [
+      "Severe refractory neonatal hypoglycaemia",
+      "Direct hyperbilirubinaemia (neonatal cholestasis)",
+      "Micropenis (stretched penile length <2.5 cm)",
+      "Midline defects: single central incisor, cleft lip"
+     ]
+    },
+    "right": {
+     "title": "Childhood Clinical Presentation",
+     "points": [
+      "Severe growth deceleration crossing percentiles",
+      "Height >3 standard deviations below mean for age",
+      "Markedly delayed bone age (>2 years behind)",
+      "Cherubic infant-like facial contours with high voice"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pulsatile physiological secretion precludes single random growth hormone measurements from establishing a diagnosis. Confirmation requires demonstrating **subnormal growth hormone stimulation testing**, where peak serum growth hormone remains below seven to ten nanograms per millilitre following two separate provocative stimulation pharmacological tests (such as clonidine, arginine, glucagon, or insulin-induced hypoglycemia), accompanied by depressed serum IGF-1 and IGFBP-3.",
+   "say": "Random growth hormone levels are uninformative due to pulsatile secretion. Failure of growth hormone to rise above ten nanograms on two provocative tests confirms deficiency.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Modality",
+     "Testing Protocol / Provocative Agent",
+     "Diagnostic Cutoff Threshold",
+     "Clinical Role"
+    ],
+    "rows": [
+     [
+      "Provocative GH stimulation tests",
+      "Clonidine, Arginine, Glucagon, or Insulin",
+      "Peak GH <7-10 ng/mL on two tests",
+      "Definitive biochemical proof of GHD"
+     ],
+     [
+      "Serum IGF-1 and IGFBP-3",
+      "Random basal serum blood sample",
+      "Depressed >2 SD below age-matched mean",
+      "Stable surrogate marker of GH action"
+     ],
+     [
+      "Pituitary brain MRI",
+      "High-resolution sella MRI with contrast",
+      "Pituitary hypoplasia, ectopic posterior pituitary",
+      "Identifies pituitary stalk transection syndrome"
+     ],
+     [
+      "Recombinant human GH (rhGH)",
+      "Daily subcutaneous somatropin injections",
+      "0.16 to 0.24 mg/kg/week divided daily",
+      "Accelerates height velocity; continues until epiphyseal closure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Impaired antidiuretic hormone synthesis or action produces profound hypotonic polyuria and unquenchable thirst. In children with **pediatric diabetes insipidus**, deficiency of hypothalamic vasopressin (central DI) or renal collecting duct insensitivity (nephrogenic DI) causes massive excretion of dilute urine exceeding two litres per square metre per day. Children exhibit extreme polydipsia, preferring ice-cold water, nocturnal enuresis, and recurrent hypernatraemic dehydration.",
+   "say": "Diabetes insipidus causes massive dilute polyuria and extreme thirst for cold water. Central DI involves hypothalamic vasopressin deficiency, whereas nephrogenic DI is a renal defect.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Central Diabetes Insipidus (Neurogenic)",
+     "points": [
+      "Hypothalamic-posterior pituitary vasopressin deficiency",
+      "Craniopharyngioma, histiocytosis, trauma, germinoma",
+      "Urine osmolality rises >50% after desmopressin",
+      "Excellent therapeutic response to oral/nasal DDAVP"
+     ]
+    },
+    "right": {
+     "title": "Nephrogenic Diabetes Insipidus",
+     "points": [
+      "Renal collecting duct resistance to vasopressin",
+      "X-linked AVPR2 gene mutation (85% of genetic cases)",
+      "Zero response to exogenous desmopressin administration",
+      "Managed with hydrochlorothiazide and indomethacin"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Controlled fluid restriction followed by synthetic vasopressin challenge differentiates central from nephrogenic diabetes insipidus. During a **water deprivation test in children**, fluid is restricted until serum osmolality exceeds three hundred milliosmoles per kilogram. Persistent excretion of dilute urine (osmolality below three hundred) confirms diabetes insipidus; subsequent subcutaneous desmopressin administration raises urine osmolality by over fifty percent in central DI.",
+   "say": "During a water deprivation test, urine remains inappropriately dilute. Desmopressin increases urine osmolality by over fifty percent in central DI, but produces no effect in nephrogenic DI.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Diagnostic State",
+     "Urine Osmolality (Deprivation)",
+     "Serum Osmolality & Sodium",
+     "Response to Desmopressin (DDAVP)"
+    ],
+    "rows": [
+     [
+      "Primary psychogenic polydipsia",
+      "Concentrates normally (>600 mOsm/kg)",
+      "Normal serum sodium & osmolality",
+      "No change; already concentrated"
+     ],
+     [
+      "Central diabetes insipidus",
+      "Fails to concentrate (<300 mOsm/kg)",
+      "High serum sodium & osmolality (>300)",
+      "Dramatic rise in urine osmolality (>50-100%)"
+     ],
+     [
+      "Nephrogenic diabetes insipidus",
+      "Fails to concentrate (<300 mOsm/kg)",
+      "High serum sodium & osmolality (>300)",
+      "No response (urine osmolality unchanged)"
+     ],
+     [
+      "Normal physiological state",
+      "Concentrates maximally (>800 mOsm/kg)",
+      "Serum osmolality maintained 285-295",
+      "Normal baseline response"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sustained supraphysiological glucocorticoid exposure produces a classic constellation of catabolic features and growth arrest. In children, **pediatric Cushing syndrome** is most frequently iatrogenic due to prolonged exogenous corticosteroid therapy for nephrotic syndrome or asthma. Endogenous causes include ACTH-secreting pituitary adenomas (Cushing disease), adrenocortical tumors (adenoma or carcinoma), and bilateral micronodular adrenocortical hyperplasia.",
+   "say": "Pediatric Cushing syndrome is most commonly iatrogenic from prescribed steroids. Growth deceleration combined with excessive weight gain is the most sensitive pediatric hallmark.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Characteristic Physical Phenotype",
+     "points": [
+      "Truncal obesity with moon facies and buffalo hump",
+      "Deceleration of linear growth velocity with weight gain",
+      "Violaceous cutaneous striae (>1 cm wide) on abdomen",
+      "Hirsutism, acne, hypertension, and emotional lability"
+     ]
+    },
+    "right": {
+     "title": "Screening Laboratory Workup",
+     "points": [
+      "Elevated 24-hour urinary free cortisol (UFC)",
+      "Loss of midnight salivary cortisol circadian trough",
+      "Failure to suppress cortisol on low-dose dexamethasone",
+      "Serum ACTH differentiates adrenal from pituitary etiology"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Growth deceleration in the presence of excessive weight gain represents the most reliable clinical sign of endogenous hypercortisolemia in childhood. Unlike simple nutritional childhood obesity, where children are tall with accelerated growth and advanced bone age, **growth velocity in Cushing syndrome** exhibits severe progressive deceleration across height percentiles, combined with delayed bone age. Treatment of endogenous disease involves transsphenoidal pituitary adenomectomy or unilateral adrenalectomy.",
+   "say": "Simple childhood obesity features accelerated linear growth and advanced bone age. Cushing syndrome causes severe growth arrest and delayed bone age.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical / Diagnostic Feature",
+     "Simple Exogenous Obesity",
+     "Endogenous Cushing Syndrome",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Linear growth velocity",
+      "Accelerated; tall stature (height >50th %)",
+      "Severely stunted; growth arrest (height <5th %)",
+      "Most discriminating physical finding"
+     ],
+     [
+      "Bone age maturation",
+      "Advanced or normal bone age",
+      "Markedly delayed bone age",
+      "Distinguishes obesity from endocrine disease"
+     ],
+     [
+      "Blood pressure status",
+      "Normal or mild borderline elevation",
+      "Marked systolic and diastolic hypertension",
+      "Secondary to mineralocorticoid action"
+     ],
+     [
+      "Circadian cortisol rhythm",
+      "Normal midnight salivary cortisol trough",
+      "Loss of diurnal rhythm; high midnight levels",
+      "Confirmed on screening assays"
+     ]
+    ]
+   }
+  }
+ ]
+}

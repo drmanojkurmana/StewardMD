@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-respiratory-rna-viruses",
+  "subject": "microbiology",
+  "title": "Antigenic Shift, Measles, Koplik Spots and SSPE",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Antigenic shift** is abrupt reassortment between two influenza A viruses infecting the same cell. Their eight RNA segments are packaged in new combinations, potentially importing a novel haemagglutinin against which the population has little immunity. Pigs can host avian and human viruses and have been called mixing vessels, but reassortment can occur in other hosts too. Shift is a pandemic mechanism, not ordinary seasonal mutation.",
+      "say": "Shift creates a new influenza coat from whole genome segments, not accumulated spelling errors.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Drift",
+          "points": [
+            "Polymerase copying errors",
+            "Small HA and NA changes",
+            "Seasonal vaccine reformulation",
+            "Partial prior immunity usually remains"
+          ]
+        },
+        "right": {
+          "title": "Shift",
+          "points": [
+            "Coinfection and segment reassortment",
+            "Novel HA or NA subtype appears",
+            "Population immunity may be very low",
+            "Pandemic potential if transmission is efficient"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Measles virus** is a nonsegmented negative-sense RNA morbillivirus spread by airborne droplets and aerosols. It is among the most contagious human viruses. After respiratory entry it infects immune cells bearing SLAM, spreads through lymphoid tissue and later infects epithelium via nectin 4. The immune response clears rash illness but measles also erases prior immune memory, termed immune amnesia.",
+      "say": "Measles is airborne, lymphotropic and capable of deleting previously learned immune protection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transmission",
+          "points": [
+            "Airborne particles remain infectious in airspace",
+            "Patients contagious before rash",
+            "Secondary attack rates very high in susceptibles",
+            "Isolation requires airborne precautions"
+          ]
+        },
+        "right": {
+          "title": "Pathogenesis",
+          "points": [
+            "SLAM on immune cells",
+            "Viraemia seeds lymphoid tissue",
+            "Nectin 4 permits epithelial exit",
+            "Immune amnesia increases later infection risk"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Koplik spots** are small bluish-white lesions on erythematous buccal mucosa opposite the molars, appearing shortly before the measles rash. The prodrome has fever, cough, coryza and conjunctivitis, the three Cs. Rash begins at the hairline and face and spreads downward, often becoming confluent. Koplik spots are highly suggestive but can be missed if the mouth is not examined in good light.",
+      "say": "Look inside the cheek during a febrile cough-and-conjunctivitis prodrome for Koplik spots.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prodrome",
+          "points": [
+            "High fever",
+            "Cough, coryza and conjunctivitis",
+            "Photophobia may occur",
+            "Koplik spots before skin rash"
+          ]
+        },
+        "right": {
+          "title": "Exanthem",
+          "points": [
+            "Starts behind ears and hairline",
+            "Spreads cephalocaudally",
+            "Maculopapular and confluent on face",
+            "Fades in same order with staining"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Measles complications include **pneumonia**, otitis media, diarrhoea, croup, encephalitis and death, especially in malnourished, very young, pregnant or immunocompromised patients. Vitamin A deficiency increases severity, and vitamin A supplementation is used in acute measles in children under defined protocols. Secondary bacterial infections and measles inclusion body encephalitis in immune deficiency are additional threats. Vaccination prevents this burden with two-dose MMR.",
+      "say": "Measles kills through pneumonia, diarrhoea, encephalitis and later immune amnesia, not the rash itself.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Common complications",
+          "points": [
+            "Otitis media",
+            "Pneumonia, viral or bacterial",
+            "Diarrhoea and dehydration",
+            "Laryngotracheitis"
+          ]
+        },
+        "right": {
+          "title": "Serious complications",
+          "points": [
+            "Acute encephalitis",
+            "Subacute sclerosing panencephalitis late",
+            "Measles inclusion body encephalitis",
+            "Death in malnourished or immunocompromised hosts"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Subacute sclerosing panencephalitis** is a rare delayed fatal measles complication occurring years after early infection. Defective measles virus persists in brain and spreads cell to cell without efficient budding. Progressive cognitive decline, behavioural change, myoclonus, seizures and autonomic failure follow. High measles antibody in cerebrospinal fluid and characteristic EEG periodic complexes support diagnosis; prevention is measles vaccination before natural infection.",
+      "say": "SSPE is measles returning as slow brain failure years after the childhood rash.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "early",
+            "label": "Measles often before age two"
+          },
+          {
+            "id": "persist",
+            "label": "Defective virus persists in brain"
+          },
+          {
+            "id": "decline",
+            "label": "Cognitive and motor decline"
+          },
+          {
+            "id": "myoclonus",
+            "label": "Myoclonus and progressive disability"
+          }
+        ],
+        "edges": [
+          [
+            "early",
+            "persist"
+          ],
+          [
+            "persist",
+            "decline"
+          ],
+          [
+            "decline",
+            "myoclonus"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Measles diagnosis is usually clinical plus **IgM or PCR** confirmation for public health. PCR from throat or nasopharyngeal swab and urine improves early detection. Post-exposure vaccination within seventy two hours or immunoglobulin within six days can protect susceptible contacts in appropriate groups. Suspected cases require immediate notification, airborne isolation and exposure tracing because waiting for laboratory confirmation loses prevention time.",
+      "say": "Notify measles on suspicion; post-exposure prophylaxis has a short clock.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Laboratory",
+          "points": [
+            "Measles IgM after rash onset",
+            "RT PCR from respiratory specimen",
+            "Urine PCR can extend window",
+            "Genotyping tracks importation and transmission"
+          ]
+        },
+        "right": {
+          "title": "Immediate action",
+          "points": [
+            "Airborne isolation",
+            "Identify susceptible contacts",
+            "MMR within seventy two hours where eligible",
+            "Immunoglobulin within six days for high risk contacts"
+          ]
+        }
+      }
+    }
+  ]
+}

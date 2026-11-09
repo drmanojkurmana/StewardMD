@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "id": "psy-delirium-delirium",
+ "subject": "psychiatry",
+ "module": "psy-delirium",
+ "title": "Delirium: Clinical Features, Diagnostic Criteria, and Bedside Management",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Delirium**, an acute confusional state, is characterized by a disturbance in attention and awareness that develops rapidly over hours to days, represents a marked change from baseline, and tends to fluctuate in severity throughout the day. It is an acute manifestation of diffuse cerebral dysfunction caused by underlying medical illness.",
+   "say": "Delirium is an acute disturbance in attention and awareness developing over hours to days and fluctuating throughout the day, driven by medical illness.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/delirium-overview-fig1.webp",
+    "alt": "Bedside cognitive domains and clinical assessment of attention in acute delirium",
+    "caption": "Bedside cognitive domains and clinical assessment of attention in acute delirium.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Inattention and fluctuating consciousness** represent the foundational diagnostic pillars of delirium. Patients cannot sustain, focus, or shift attention, demonstrated on bedside examination by inability to repeat five digits forwards, perform serial sevens, or spell the word 'WORLD' backwards, characteristically worsening during nighttime hours.",
+   "say": "Inattention is the core feature of delirium, tested by reciting serial sevens or spelling WORLD backwards, fluctuating markedly from morning to night.",
+   "vis": {
+    "kind": "table",
+    "title": "Bedside Inattention Testing",
+    "cols": [
+     "Bedside Test",
+     "Standard Performance",
+     "Delirium Failure Pattern"
+    ],
+    "rows": [
+     [
+      "Digit span forwards",
+      "Repeat 5 to 7 digits sequentially",
+      "Cannot repeat 4 digits; loses focus immediately"
+     ],
+     [
+      "Months backwards",
+      "Recite December through January",
+      "Stops, wanders, or repeats forward sequence"
+     ],
+     [
+      "Spelling 'WORLD' backwards",
+      "Spell D-L-R-O-W accurately",
+      "Omits letters, introduces irrelevant words"
+     ],
+     [
+      "Vigilance 'A' test",
+      "Tap hand whenever letter 'A' is read",
+      "Frequent errors of omission and commission"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Sundowning** refers to the pronounced exacerbation of confusion, perceptual illusions, and psychomotor agitation occurring in the late afternoon and evening hours as ambient lighting fades. Loss of familiar sensory cues, fatigue, and circadian rhythm disruption combine to trigger terrifying visual misperceptions and restless wandering.",
+   "say": "Sundowning involves worsening confusion and visual misperceptions in the late afternoon as ambient light fades, disrupting circadian orientation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sundowning Triggers",
+     "points": [
+      "Fading ambient daylight and casting shadows",
+      "Circadian melatonin rhythm breakdown",
+      "Fatigue and sensory deprivation at dusk",
+      "Hospital shift changes and unfamiliar staff"
+     ]
+    },
+    "right": {
+     "title": "Environmental Remedies",
+     "points": [
+      "Adequate daytime and evening lighting",
+      "Visible wall clocks and large calendars",
+      "Consistent family member bedside presence",
+      "Minimize nocturnal noise and vital sign checks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Confusion Assessment Method**, abbreviated CAM, is the gold standard validated bedside diagnostic algorithm for delirium, requiring the presence of features 1 and 2, plus either feature 3 or feature 4. Feature 1 requires acute onset and fluctuating course; Feature 2 requires inattention; Feature 3 requires disorganized thinking; Feature 4 requires altered consciousness.",
+   "say": "The Confusion Assessment Method confirms delirium when acute fluctuating onset and inattention are present alongside disorganized thinking or altered consciousness.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/delirium-fig1.webp",
+    "alt": "Neurobiological causes and multimodal non-pharmacological management of delirium",
+    "caption": "Neurobiological causes and multimodal non-pharmacological management of delirium.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Hypoactive delirium** is characterized by decreased psychomotor activity, lethargy, psychomotor slowing, apathy, and stupor, occurring more frequently than the agitated hyperactive subtype. Crucially, hypoactive delirium carries a significantly worse prognosis and higher mortality because it is frequently misdiagnosed as depression.",
+   "say": "Hypoactive delirium presents with lethargy, psychomotor slowing, and withdrawal, carrying higher mortality because it is misdiagnosed as depression.",
+   "vis": {
+    "kind": "table",
+    "title": "Delirium Motor Subtypes",
+    "cols": [
+     "Subtype",
+     "Motor & Behavioral Profile",
+     "Prognostic Reality"
+    ],
+    "rows": [
+     [
+      "Hyperactive",
+      "Agitation, hallucinations, wandering, pulling lines",
+      "Easily recognized; lower mortality; treated with haloperidol"
+     ],
+     [
+      "Hypoactive",
+      "Quiet, somnolent, lethargic, impoverished speech",
+      "Frequently missed; highest mortality; avoid sedatives"
+     ],
+     [
+      "Mixed",
+      "Alternates between hyperactive agitation and lethargy",
+      "Common in ICU; requires dynamic clinical titration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Etiological evaluation of delirium** demands systematic medical investigation for underlying systemic insults, remembered by the classic clinical mnemonic I WATCH DEATH: Infections, Withdrawal, Acute metabolic, Trauma, CNS pathology, Hypoxia, Deficiencies, Endocrinopathies, Acute vascular, Toxins/drugs, and Heavy metals, requiring comprehensive laboratory screening.",
+   "say": "Delirium workup investigates systemic causes like sepsis, hypoxia, metabolic collapse, or anticholinergic drugs using the mnemonic I WATCH DEATH.",
+   "vis": {
+    "kind": "table",
+    "title": "I WATCH DEATH Differential Mnemonic",
+    "cols": [
+     "Letter",
+     "Etiological Category",
+     "Common Clinical Causes"
+    ],
+    "rows": [
+     [
+      "I",
+      "Infections",
+      "Pneumonia, urinary tract infection, sepsis, meningitis"
+     ],
+     [
+      "W",
+      "Withdrawal",
+      "Alcohol, benzodiazepines, barbiturates, sedatives"
+     ],
+     [
+      "A",
+      "Acute metabolic",
+      "Electrolyte imbalance (hyponatraemia), acidosis, renal failure"
+     ],
+     [
+      "T",
+      "Trauma",
+      "Head injury, subdural hematoma, postoperative pain"
+     ],
+     [
+      "C / H",
+      "CNS / Hypoxia",
+      "Stroke, encephalitis, respiratory failure, cardiac arrest"
+     ],
+     [
+      "D / E",
+      "Deficiencies / Endo",
+      "Thiamine (Wernicke), thyroid storm, Addisonian crisis"
+     ],
+     [
+      "A / T / H",
+      "Vascular / Toxins / Heavy",
+      "Myocardial infarction, anticholinergics, lead poisoning"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Electroencephalography in delirium** characteristically demonstrates diffuse, generalized background slowing of cerebral electrical rhythms, characterized by replacement of normal alpha rhythms with prominent theta and delta waves. The sole exception is alcohol or sedative withdrawal delirium, which exhibits fast, low-voltage beta activity.",
+   "say": "Delirium produces generalized EEG slowing with theta and delta waves, except in alcohol withdrawal which shows fast beta activity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "General Delirium EEG",
+     "points": [
+      "Diffuse generalized background slowing",
+      "Prominent theta (4-7 Hz) & delta (<4 Hz) waves",
+      "Loss of posterior dominant alpha rhythm",
+      "Parallels degree of cognitive clouding"
+     ]
+    },
+    "right": {
+     "title": "Alcohol Withdrawal Delirium",
+     "points": [
+      "Generalized fast low-voltage beta waves",
+      "Reflects acute cortical hyper-excitability",
+      "Absence of diffuse background slowing",
+      "May show paroxysmal epileptiform spikes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Pharmacological management with haloperidol** is reserved strictly for severe agitation threatening patient safety or disrupting essential life-saving medical care, administered at low doses (0.5 to 2.0 milligrams orally or intramuscularly). Benzodiazepines are strictly avoided in non-withdrawal delirium because they exacerbate cognitive confusion.",
+   "say": "Low-dose haloperidol is reserved for severe agitation threatening safety. Benzodiazepines are avoided as they worsen delirium, except in alcohol withdrawal.",
+   "vis": {
+    "kind": "table",
+    "title": "Delirium Medication Guidelines",
+    "cols": [
+     "Clinical Scenario",
+     "Preferred Medication",
+     "Clinical Rationale & Caution"
+    ],
+    "rows": [
+     [
+      "Severe agitation / psychosis",
+      "Haloperidol (0.5 to 1.0 mg PO/IM)",
+      "High D2 potency; zero anticholinergic effect; monitor QTc"
+     ],
+     [
+      "Parkinsonian delirium",
+      "Quetiapine (12.5 to 25 mg PO)",
+      "Low D2 binding spares motor function; avoid haloperidol"
+     ],
+     [
+      "Alcohol / Sedative withdrawal",
+      "Lorazepam (1.0 to 2.0 mg IV/IM)",
+      "Replaces deficient GABA-A tone; prevents seizures"
+     ],
+     [
+      "Hepatic encephalopathy",
+      "Lactulose & Rifaximin",
+      "Eliminates ammonia; avoid sedatives and narcotics"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

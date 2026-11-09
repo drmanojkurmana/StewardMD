@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "id": "cm-health-programmes-ayushman-bharat",
+ "subject": "community-medicine",
+ "module": "cm-health-programmes",
+ "title": "Ayushman Bharat: Health and Wellness Centres and PM-JAY Assurance",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Two arms, one announcement",
+   "tx": "**Ayushman Bharat** (2018) joined comprehensive primary care through 1.5 lakh health and wellness centres (now Ayushman Arogya Mandirs) with hospitalisation assurance through Pradhan Mantri Jan Arogya Yojana for the deprived bottom roughly 40 percent of families. Prevention near home plus protection from hospital bills is the whole doctrine in one sentence.",
+   "say": "Two arms, one doctrine. Wellness centres near home for comprehensive primary care; assurance against hospital bills for the poorest two fifths of families. Prevention plus protection, announced together in 2018.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary arm (AAM)",
+     "points": ["Wellness centres upgraded publicly", "Free comprehensive primary care", "Population assigned by geography"]
+    },
+    "right": {
+     "title": "Assurance arm (PM-JAY)",
+     "points": ["Entitled families by deprivation list", "Cashless hospitalisation cover", "Public and private empanelled hospitals"]
+    }
+   }
+  },
+  {
+   "title": "PM-JAY entitlement: 5 lakh per family per year",
+   "tx": "**PM-JAY cover** is 5 lakh rupees per entitled family per year on a floater basis for hospitalisation, cashless at empanelled hospitals, portable across states. Entitlement derives from SECC 2011 deprivation and occupational criteria, not income certificates or premiums: no enrolment fee, no cap on family size or age, pre-existing diseases covered from day one in the standard teaching list.",
+   "say": "Five lakh per family yearly, floating across members, portable across states, cashless at empanelled doors. Deprivation lists entitle; no premiums, no size caps, pre-existing disease covered from day one.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Design feature", "Rule"],
+    "rows": [
+     ["Cover amount", "5 lakh per family per year, floater"],
+     ["Entitlement basis", "SECC deprivation and occupation criteria"],
+     ["Premiums or enrolment fee", "None for beneficiaries"],
+     ["Portability", "Cashless across states at empanelled hospitals"]
+    ]
+   }
+  },
+  {
+   "title": "Packages, rates and the purchasing logic",
+   "tx": "**Health benefit packages** (about 1900+ procedures across specialities in current counts) carry fixed rates hospitals accept for empanelment, revised periodically with cost evidence. Strategic purchasing means the state buys defined care at defined prices with quality conditions, replacing open-ended reimbursement. Fraud analytics (ghost admissions, upcoding) police the model from claims data.",
+   "say": "Fixed packages, fixed prices, quality conditions: strategic purchasing replaces open bills. Nineteen hundred procedures rated, claims mined for ghosts and upcoding. The purchaser disciplines the market deliberately.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Beneficiary admitted, card verified"},
+     {"id": "b", "label": "Package pre-authorised by payer"},
+     {"id": "c", "label": "Cashless treatment delivered"},
+     {"id": "d", "label": "Claim audited and paid at package rate"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Wellness centres: the CHO-led team",
+   "tx": "Each **Ayushman Arogya Mandir** is led by a community health officer (nursing or AYUSH graduate with bridge training) over multipurpose workers and ASHAs, delivering the 12 comprehensive packages with free essential drugs and expanding diagnostics, plus teleconsultation (eSanjeevani) upward to PHC medical officers and specialists. Population enumeration and family folders anchor its register.",
+   "say": "A mid-level leader runs the centre. Community health officer over multipurpose workers and ASHAs, twelve packages, free drugs, teleconsultation upward. Enumerated family folders anchor every register she keeps.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Team member", "Anchors"],
+    "rows": [
+     ["Community health officer", "Clinical comprehensive care, team leadership"],
+     ["ANM and MPW", "Outreach, immunisation, surveillance"],
+     ["ASHAs (about 5)", "Household mobilisation, follow-up"],
+     ["PHC medical officer", "Teleconsultation and referral support"]
+    ]
+   }
+  },
+  {
+   "title": "Continuum the two arms promise",
+   "tx": "The **continuum promise** runs screening at wellness centres, treatment of uncomplicated disease locally, referral into PM-JAY hospitals for entitled families (and public referral care for all), then back-referral for follow-up and medicines near home. Breaks in the return leg (no records home, medicines unavailable locally) are where evaluations find the design leaking.",
+   "say": "Screen locally, treat locally, refer upward, return home for follow-up. Evaluations find leaks on the return leg: records missing, medicines stocked out. The loop, not the launch, is the intervention.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Loop working",
+     "points": ["Records travel both directions", "Medicines available at wellness centre", "Follow-up visits completed"]
+    },
+    "right": {
+     "title": "Loop leaking",
+     "points": ["Discharge summary never arrives", "Local drug stock-outs", "Patient defaults silently"]
+    }
+   }
+  },
+  {
+   "title": "Digital spine: ABHA and registries",
+   "tx": "The **Ayushman Bharat Digital Mission** issues ABHA health accounts linking records across facilities with consent-managed sharing, registries of facilities and professionals, and teleconsultation rails. Examiners frame it as infrastructure, not care itself: identifiers and interoperability that both arms increasingly ride on, with privacy law as its stated guardrail.",
+   "say": "Identifiers underpin both arms. Health accounts link records with consent, facility and professional registries standardise the map, teleconsultation rides the rails. Infrastructure, not care; privacy law is the guardrail.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Component", "Function"],
+    "rows": [
+     ["ABHA account", "Person's longitudinal health identifier"],
+     ["Facility and professional registries", "Verified service map"],
+     ["eSanjeevani", "Teleconsultation at national scale"],
+     ["Consent manager", "Patient-controlled record sharing"]
+    ]
+   }
+  },
+  {
+   "title": "Out-of-pocket expenditure: the target metric",
+   "tx": "**Out-of-pocket expenditure** (roughly half of India's health spending in recent national accounts, falling slowly) is the doctrine's enemy metric, driven by outpatient drugs and diagnostics more than hospitalisation nationally. Critics therefore judge Ayushman Bharat by whether the free primary arm, not only insurance, expands; insurance alone cannot touch the commonest spending.",
+   "say": "Household spending is the enemy metric. Hospital bills are only part; outpatient drugs and tests dominate nationally. The free primary arm, not insurance alone, must move that number.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Household health spending measured"},
+     {"id": "b", "label": "Drug and diagnostic share identified"},
+     {"id": "c", "label": "Free primary services expanded"},
+     {"id": "d", "label": "Catastrophic expenditure tracked"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "State models vary under one banner",
+   "tx": "**Implementation varies**: some states run PM-JAY in insurance mode with companies, others in trust mode through state health agencies paying directly, and several merged state schemes into the national entitlement (with a few large states joining late or running parallel schemes historically). Federal variation under common entitlement rules is the accurate one-line summary for essays.",
+   "say": "One banner, several engines. Insurance companies in some states, public trusts in others, merged state schemes beneath national entitlement. Federal variation under common rules is the accurate summary.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Insurance mode",
+     "points": ["Insurer bears risk for premium", "State pays per family enrolled", "Claims managed commercially"]
+    },
+    "right": {
+     "title": "Trust mode",
+     "points": ["State agency pays claims directly", "No insurer margin", "Public administrative capacity decisive"]
+    }
+   }
+  },
+  {
+   "title": "Ayushman versus the older RSBY",
+   "tx": "**Rashtriya Swasthya Bima Yojana** (2008) insured BPL families for 30000 rupees yearly through insurers, the direct ancestor whose lessons (enrolment friction, hospitalisation-only cover, low awareness) PM-JAY scaled past with 5 lakh assurance, entitlement lists and a simultaneous primary care arm. Exam narratives present PM-JAY as RSBY's correction, not its synonym.",
+   "say": "Ancestry matters. Thirty thousand through insurers in 2008 taught enrolment friction and hospital-only limits. Five lakh entitlement assurance plus a primary arm is the correction, never the synonym.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "RSBY (2008)", "PM-JAY (2018)"],
+    "rows": [
+     ["Cover", "30000 per family yearly", "5 lakh per family yearly"],
+     ["Entitlement", "BPL lists, enrolment drives", "SECC lists, no enrolment fee"],
+     ["Primary care arm", "None", "Wellness centres simultaneously"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

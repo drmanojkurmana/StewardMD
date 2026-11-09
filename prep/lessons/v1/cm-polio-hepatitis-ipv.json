@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "id": "cm-polio-hepatitis-ipv",
+ "subject": "community-medicine",
+ "module": "cm-polio-hepatitis",
+ "title": "IPV and Fractional Doses: Individual Protection in the Endgame",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Why an injected vaccine returned",
+   "tx": "**Inactivated polio vaccine** returned to universal schedules because oral vaccine's own virus, once wild type 2 was eradicated, became the main type 2 paralysis risk. IPV contains killed virus of all three types, cannot replicate or cause vaccine associated paralysis, and restores type 2 immunity that bivalent OPV no longer provides.",
+   "say": "Killed virus, zero replication, type 2 cover restored. IPV returned because the oral vaccine's type 2 virus outlived its wild enemy.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trait", "IPV fact"],
+    "rows": [
+     ["Contents", "Killed virus, all three types"],
+     ["Replication", "None in the gut"],
+     ["VAPP risk", "Absent"],
+     ["Role", "Individual paralysis protection"]
+    ]
+   }
+  },
+  {
+   "title": "Blood yes, gut partly: the immunity split",
+   "tx": "**Humoral immunity** after IPV reliably prevents virus reaching motor neurons, so paralysis protection is excellent after a completed course. Intestinal immunity is weaker than after OPV, meaning vaccinated children can still host silent gut infection and shed virus, which matters for surveillance interpretation in the final eradication phase.",
+   "say": "Blood antibody guards neurons superbly; the gut stays partly open to silent carriage. IPV protects children, surveillance must still hunt virus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "After IPV",
+     "points": ["Strong blood antibody", "Paralysis prevented", "Gut carriage possible", "Shedding can continue"]
+    },
+    "right": {
+     "title": "After OPV",
+     "points": ["Strong gut immunity", "Transmission blocked", "Brief vaccine virus shedding", "Rare vaccine virus risks"]
+    }
+   }
+  },
+  {
+   "title": "Fractional dose: a fifth through the skin",
+   "tx": "A **fractional dose** is one fifth of a full IPV dose, 0.1 millilitre, given intradermally, exploiting the skin's rich antigen presenting cell population to achieve strong responses with far less antigen. India adopted two fractional doses in the infant schedule to stretch global supply while keeping type 2 protection universal.",
+   "say": "One fifth dose into skin, not muscle, harvests the skin's immune density. Two fractional doses cover infants while vials stretch five times further.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Fractional IPV"],
+    "rows": [
+     ["Volume", "0.1 ml, one fifth dose"],
+     ["Route", "Intradermal"],
+     ["Doses in schedule", "Two in infancy"],
+     ["Purpose", "Supply stretching with protection"]
+    ]
+   }
+  },
+  {
+   "title": "Technique: the intradermal bleb",
+   "tx": "**Intradermal technique** uses a short bevel needle almost flat against the skin, raising a pale wheal or bleb as the 0.1 millilitre deposits; leakage or a subcutaneous slip wastes the fractional logic. BCG style technique training, correct syringes and site selection decide whether policy doses become real immunity at the session site.",
+   "say": "Flat needle, pale bleb raised, nothing leaked. Technique is the dose here. Training and syringes decide whether fractional policy becomes fractional failure.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Step", "Check"],
+    "rows": [
+     ["Needle angle", "Almost flat to skin"],
+     ["Volume", "0.1 ml measured exactly"],
+     ["Endpoint", "Visible pale wheal"],
+     ["Failure sign", "Leakage, no bleb formed"]
+    ]
+   }
+  },
+  {
+   "title": "Schedule position in the Indian programme",
+   "tx": "The **UIP schedule** places fractional IPV doses in early infancy alongside pentavalent and rotavirus visits, with bivalent OPV continuing at birth and through the primary series and boosters, so children receive gut immunity from OPV plus type 2 blood protection from IPV in the same first year of life.",
+   "say": "Fractional IPV rides existing infant visits beside pentavalent; bivalent OPV keeps gut cover. One year, both shields, no extra journeys for mothers.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Birth OPV dose"},
+     {"id": "b", "label": "Infant visits: pentavalent plus bOPV"},
+     {"id": "c", "label": "Two fractional IPV doses added"},
+     {"id": "d", "label": "Boosters complete the wall"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Safety profile parents ask about",
+   "tx": "**IPV reactions** are mostly local pain, redness and brief low fever, with severe allergy to vaccine components the standing contraindication and no paralysis risk to explain away. Its safety in immunodeficiency, where live OPV is dangerous, makes IPV the household answer when a sibling or parent carries immune compromise.",
+   "say": "Sore arm, mild fever, no paralysis risk. Where immunity is compromised at home, killed vaccine answers the question live vaccine cannot.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Question", "Answer"],
+    "rows": [
+     ["Can it cause polio", "No, virus is inactivated"],
+     ["Common reactions", "Local pain, low fever"],
+     ["Immunodeficient child", "Preferred over live OPV"],
+     ["Contraindication", "Severe component allergy"]
+    ]
+   }
+  },
+  {
+   "title": "Hexavalent and combination futures",
+   "tx": "**Combination vaccines** containing IPV with diphtheria, tetanus, pertussis, hepatitis B and Hib antigens dominate private practice in many countries, reducing injections per visit. Programme adoption weighs price, supply security and cold chain volume against session simplicity, which is why public and private schedules legitimately differ in presentation while sharing antigens.",
+   "say": "Six antigens, one prick in private rooms; price and vial volume argue back in public planning. Same antigens, different packaging logic.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Factor", "Programme weight"],
+    "rows": [
+     ["Injections per visit", "Fewer with combinations"],
+     ["Price per dose", "Higher for combinations"],
+     ["Cold chain volume", "Larger combination vials"],
+     ["Antigen coverage", "Identical targets"]
+    ]
+   }
+  },
+  {
+   "title": "The sequential endgame logic",
+   "tx": "The **endgame sequence** runs OPV cessation serotype by serotype as each wild type falls, universal IPV maintained for a decade beyond, AFP and environmental surveillance at certification standard, and containment audits of every facility holding virus. Skipping ahead, withdrawing oral vaccine before surveillance matures, is how vaccine derived outbreaks earn their second act.",
+   "say": "Retire oral types in order, hold IPV ten years on, surveil to certification standard, contain every stock. Sequence skipped is outbreak invited.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Wild serotype certified gone"},
+     {"id": "b", "label": "Matching OPV type withdrawn"},
+     {"id": "c", "label": "IPV maintained universally"},
+     {"id": "d", "label": "Surveillance and containment audited"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Counselling the OPV to IPV generation",
+   "tx": "**Parent counselling** meets a fair question: why add an injection when drops ended polio here. The answer honours both tools: drops stopped transmission and built the free status, the injection now guards against the vaccine virus's own rare risks and imported virus while the world finishes. Gratitude plus vigilance, in that order.",
+   "say": "Drops won the war here; the injection guards the peace against rare vaccine risks and imports. Explain both honours, attendance follows understanding.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Parent worry", "Response"],
+    "rows": [
+     ["Why injection now", "Type 2 cover after OPV switch"],
+     ["Are drops unsafe", "Drops eradicated polio in India"],
+     ["Extra visit needed", "Given at existing infant visits"],
+     ["If a dose is missed", "Catch up at next contact"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

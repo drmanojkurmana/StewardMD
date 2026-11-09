@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-planning-management-planning-cycle",
+  "subject": "community-medicine",
+  "module": "cm-planning-management",
+  "title": "Health Planning Cycle, PERT, CPM, and Cost Analysis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "The planning cycle",
+      "tx": "Health planning moves in a circle, not a line: the **health planning cycle** runs from analysing the health situation, setting objectives and goals, assessing resources, fixing priorities, writing the plan, programming and implementing it, monitoring, and evaluating, whose findings restart analysis. Skipping evaluation (the commonest Indian programme habit historically) breaks the loop and repeats expensive mistakes with fresh budgets.",
+      "say": "Analyse, set goals, assess resources, prioritise, implement, monitor, evaluate, then loop. Evaluation restarts the cycle.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "pc1", "label": "Analyse situation, set objectives" },
+          { "id": "pc2", "label": "Assess resources, fix priorities, implement" },
+          { "id": "pc3", "label": "Monitor and evaluate, feed back" }
+        ],
+        "edges": [["pc1", "pc2"], ["pc2", "pc3"]]
+      }
+    },
+    {
+      "title": "Objectives, goals, and targets",
+      "tx": "Planning vocabulary separates **objectives goals and targets in planning**: a goal is the ultimate broad direction (health for all), objectives are planned outcomes within a period (reduce infant mortality), and targets are discrete countable activities (immunise ninety percent of infants by March). Policies frame principles, programmes organise services toward objectives, and schedules fix dates: five nested words examinations rotate relentlessly.",
+      "say": "Goals point, objectives plan outcomes, targets count activities by date. Keep the five planning words in their nests.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Term", "Example"],
+        "rows": [
+          ["Policy", "Free essential drugs in public facilities"],
+          ["Goal", "Universal health coverage"],
+          ["Objective", "Cut infant mortality to 25 by 2027"],
+          ["Target", "Immunise 90 percent infants by March"]
+        ]
+      }
+    },
+    {
+      "title": "Cost benefit versus cost effectiveness",
+      "tx": "The two economic evaluations divide cleanly: **cost benefit analysis** converts health gains into money and asks whether benefits exceed costs in rupees, while cost effectiveness analysis keeps outcomes natural (cost per life saved, per case detected, per DALY averted) and compares rival routes to the same goal. Cost utility analysis refines outcomes to quality adjusted life years; cost minimisation applies only when outcomes are proven equal.",
+      "say": "Cost benefit prices health in rupees; cost effectiveness prices each life or case. Cost utility upgrades to quality adjusted years.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cost benefit analysis",
+          "points": ["Outcomes converted to money", "Benefit cost ratio decides", "Suits cross sector comparisons"]
+        },
+        "right": {
+          "title": "Cost effectiveness analysis",
+          "points": ["Outcomes in natural units", "Cost per DALY or life saved", "Compares health interventions"]
+        }
+      }
+    },
+    {
+      "title": "PERT: programme evaluation and review",
+      "tx": "**PERT (programme evaluation and review technique)** charts a project as a network of events and activities with three time estimates per activity (optimistic, most likely, pessimistic) combined into expected time, exposing schedule risk. Born with the Polaris missile programme, it serves one time complex projects (new hospital commissioning, campaign launches) where durations are uncertain and delays cascade.",
+      "say": "PERT networks events with three time guesses per task. It manages uncertain one time projects like hospital launches.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "pt1", "label": "List events and activities as network" },
+          { "id": "pt2", "label": "Estimate optimistic likely pessimistic times" },
+          { "id": "pt3", "label": "Compute expected timeline and risks" }
+        ],
+        "edges": [["pt1", "pt2"], ["pt2", "pt3"]]
+      }
+    },
+    {
+      "title": "CPM: the critical path",
+      "tx": "**CPM (critical path method)** networks a project with single deterministic durations and finds the longest chain of dependent activities: the critical path, whose delay delays the whole project, while off path activities carry float (slack). Managers crash critical activities with extra resources when deadlines threaten. PERT versus CPM (probabilistic versus deterministic time) is the management question examinations never retire.",
+      "say": "The critical path is the longest dependent chain; delay there delays everything. PERT guesses times, CPM fixes them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PERT",
+          "points": ["Three time estimates, probabilistic", "Event oriented network", "Research and one off projects"]
+        },
+        "right": {
+          "title": "CPM",
+          "points": ["Single time estimate, deterministic", "Activity oriented, finds critical path", "Construction and routine projects"]
+        }
+      }
+    },
+    {
+      "title": "Cost accounting and input output analysis",
+      "tx": "**Cost accounting in health management** tracks what each cost centre (laboratory test, bed day, operation) truly consumes in staff time, materials, and overheads, feeding budgeting and pricing. Input output analysis extends the lens system wide, tabulating how sectors supply one another. Systems analysis then models the whole organisation's flows to test policy changes before living them, the analytic trio behind rational resource allocation.",
+      "say": "Cost accounting prices a bed day honestly. Without it, budgets repeat last year's guesses dressed as plans.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Technique", "Question it answers"],
+        "rows": [
+          ["Cost accounting", "What does one bed day truly cost?"],
+          ["Input output analysis", "How do sectors supply each other?"],
+          ["Systems analysis", "What happens system wide if we change this?"],
+          ["Network analysis (PERT CPM)", "In what order and how long?"]
+        ]
+      }
+    },
+    {
+      "title": "Management by objectives and SWOT",
+      "tx": "**Management by objectives** sets specific measurable targets jointly with staff and reviews achievement against them, while SWOT analysis audits strengths and weaknesses inside the organisation against opportunities and threats outside, positioning strategy at their intersection. Both are examination staples: MBO for its participative target setting, SWOT for its internal external split which candidates chronically reverse.",
+      "say": "MBO sets joint measurable targets. SWOT puts strengths and weaknesses inside, opportunities and threats outside.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Inside the organisation",
+          "points": ["Strengths to exploit", "Weaknesses to repair", "Staff, funds, infrastructure audit"]
+        },
+        "right": {
+          "title": "Outside environment",
+          "points": ["Opportunities to seize", "Threats to defend against", "Policy, market, disease trends"]
+        }
+      }
+    },
+    {
+      "title": "Delphi, operations research, work sampling",
+      "tx": "Three specialist techniques complete the syllabus: the **Delphi technique** harvests expert consensus through anonymous questionnaire rounds without meeting dominance, operations research optimises queues, inventories, and allocations mathematically (hospital bed and theatre scheduling), and work sampling observes random instants to estimate how staff time divides among activities without stopwatch shadowing. Each answers a distinct management question economically.",
+      "say": "Delphi polls experts anonymously to consensus. Work sampling snapshots random moments to map how staff time is spent.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Technique", "Best problem"],
+        "rows": [
+          ["Delphi technique", "Expert consensus without meetings"],
+          ["Operations research", "Queues, inventory, allocation optima"],
+          ["Work sampling", "How staff time actually divides"],
+          ["Network analysis", "Project sequencing and deadlines"]
+        ]
+      }
+    },
+    {
+      "title": "Planning traps in examinations",
+      "tx": "Closing traps for **health planning and management questions**: evaluation ends and restarts the cycle (never implementation alone), cost benefit alone monetises outcomes, PERT alone carries three time estimates, the critical path is the longest (not shortest) chain, and SWOT opportunities are external. A stem describing anonymous expert rounds wants Delphi; one describing random instant observations wants work sampling. These fingerprints recur verbatim.",
+      "say": "Longest chain is critical, benefit analysis speaks rupees, Delphi never meets. Read the fingerprint, name the technique.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "tp1", "label": "Spot stem fingerprint: money, times, experts, instants" },
+          { "id": "tp2", "label": "Map to CBA, PERT CPM, Delphi, work sampling" },
+          { "id": "tp3", "label": "Answer the named technique" }
+        ],
+        "edges": [["tp1", "tp2"], ["tp2", "tp3"]]
+      }
+    }
+  ]
+}

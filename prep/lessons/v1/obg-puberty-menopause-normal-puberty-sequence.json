@@ -1,0 +1,303 @@
+{
+ "v": 1,
+ "id": "obg-puberty-menopause-normal-puberty-sequence",
+ "subject": "obstetrics-gynaecology",
+ "module": "obg-puberty-menopause",
+ "title": "Normal Puberty Sequence",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Hypothalamic-pituitary-gonadal axis** reactivation marks the neuroendocrine onset of female puberty. Throughout childhood, the reproductive axis remains held under profound central GABAergic and neuropeptide Y inhibition. Pubertal initiation begins when kisspeptin, acting via the GPR54 (KISS1R) receptor on GnRH neurons, escapes central inhibition and triggers pulsatile release of gonadotropin-releasing hormone, initially occurring exclusively during nocturnal sleep. This pulsatile stimulus disinhibits anterior pituitary secretion of luteinizing hormone and follicle-stimulating hormone, driving ovarian estrogen synthesis.",
+   "say": "Female puberty begins when kisspeptin awakens the dormant reproductive axis, releasing nocturnal pulses of GnRH. This stimulates pituitary LH and FSH to prompt ovarian estrogen production, setting physical changes into motion.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-smr-puberty-timing-boneage.webp",
+    "alt": "Clinical chart showing pubertal timing, secondary sexual sequence, and bone age assessment.",
+    "caption": "Normal pubertal milestones sequence, Tanner staging benchmarks, and wrist bone age assessment. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Pubertal sequence** in females unfolds in a predictable, highly conserved chronological order spanning three to four years, remembered by the clinical mnemonic T-A-P-M: Thelarche (breast budding), Adrenarche/Pubarche (pubic and axillary hair), Peak height velocity (maximum growth spurt), and Menarche (onset of menstruation). Disruption of this sequence, such as menarche preceding breast thelarche, represents a red flag pointing to exogenous estrogen exposure, ovarian neoplasms, or adrenal virilization.",
+   "say": "Female puberty follows a precise four-stage sequence: Thelarche breast budding comes first, followed by Pubarche pubic hair, Peak height velocity, and finally Menarche. Any deviation from this order demands investigation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Chronological Sequence of Female Pubertal Milestones",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Thelarche",
+      "sub": "Average age 8 to 10 years (Tanner stage B2)"
+     },
+     {
+      "id": "p2",
+      "label": "Pubarche / Adrenarche",
+      "sub": "Average age 10 to 11 years (Tanner stage PH2)"
+     },
+     {
+      "id": "p3",
+      "label": "Peak Height Velocity",
+      "sub": "Average age 11.5 to 12 years (Tanner stage 3)"
+     },
+     {
+      "id": "p4",
+      "label": "Menarche",
+      "sub": "Average age 12.5 to 13 years (Tanner stage 4)"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2",
+      "6 to 12 months"
+     ],
+     [
+      "p2",
+      "p3",
+      "Growth acceleration"
+     ],
+     [
+      "p3",
+      "p4",
+      "Deceleration to menses"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Thelarche** is the appearance of palpable glandular breast buds beneath the areola, representing the earliest outward physical manifestation of true female puberty. Emerging at an average age of 8.5 to 10.5 years, it is driven by ovarian estradiol synthesis under pituitary FSH stimulation. Clinically defined as Tanner stage B2, the subareolar bud is frequently unilateral and tender initially, a normal physiological asymmetry that requires parental reassurance rather than imaging or surgical excision.",
+   "say": "Thelarche is the appearance of palpable breast buds, the very first physical sign of puberty. It typically begins between eight and ten years of age and is often asymmetrical, which is completely physiological.",
+   "vis": {
+    "kind": "table",
+    "title": "Tanner Staging System for Female Breast Development",
+    "cols": [
+     "Tanner Stage",
+     "Morphological Breast Findings",
+     "Underlying Endocrine State"
+    ],
+    "rows": [
+     [
+      "Stage B1 (Prepubertal)",
+      "Elevation of papilla only (no glandular tissue)",
+      "Dormant childhood baseline state"
+     ],
+     [
+      "Stage B2 (Thelarche)",
+      "Palpable breast bud beneath enlarged areola",
+      "Initial ovarian estradiol activation"
+     ],
+     [
+      "Stage B3",
+      "Further glandular enlargement beyond areola",
+      "Continuous estrogenic stimulation"
+     ],
+     [
+      "Stage B4",
+      "Areola and papilla project to form secondary mound",
+      "Advanced estrogen action before menarche"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adrenarche** and pubarche describe the development of coarse, pigmented pubic hair and axillary hair under the influence of weak adrenal androgens, predominantly dehydroepiandrosterone (DHEA) and androstenedione from the expanding adrenal zona reticularis. While pubarche normally follows thelarche by six to twelve months, adrenarche represents an independent maturation of the adrenal cortex that is not driven by pituitary gonadotropins and occurs independently of ovarian follicular activation.",
+   "say": "Pubarche brings coarse pubic and axillary hair about six to twelve months after breast budding. It is driven by adrenal androgens like DHEA from the adrenal cortex, rather than pituitary gonadotropins.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Thelarche (Ovarian)",
+     "points": [
+      "Driven by hypothalamic-pituitary-ovarian axis",
+      "Ovarian estradiol stimulates breast ductal growth",
+      "Correlates with bone age and growth acceleration",
+      "Essential marker of true central puberty"
+     ]
+    },
+    "right": {
+     "title": "Adrenarche (Adrenal)",
+     "points": [
+      "Driven by adrenal zona reticularis maturation",
+      "Adrenal androgens (DHEA-S) stimulate hair",
+      "Independent of pituitary gonadotropins LH/FSH",
+      "Does not indicate true gonadal puberty"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Peak height velocity** occurs early in female puberty, peaking at Tanner stage 3 at an average age of 11.5 to 12 years, approximately six to twelve months prior to menarche. Under the synergistic stimulation of rising estrogen levels and accelerated growth hormone secretion, girls achieve a maximum linear growth rate averaging 8 to 9 centimetres per year. Once menarche arrives, high circulating estrogen levels promote epiphyseal growth plate senescence, leaving minimal residual growth.",
+   "say": "The female growth spurt happens early in puberty, peaking before menarche at eight to nine centimetres per year. Once menarche occurs, high estrogen levels fuse epiphyseal plates, leaving only a few centimetres of growth.",
+   "vis": {
+    "kind": "flow",
+    "title": "Endocrine Dynamics of the Pubertal Growth Spurt",
+    "nodes": [
+     {
+      "id": "g1",
+      "label": "Low Estrogen Level",
+      "sub": "Stimulates pituitary GH and hepatic IGF-1"
+     },
+     {
+      "id": "g2",
+      "label": "Peak Velocity Spurt",
+      "sub": "8 to 9 cm per year linear height velocity"
+     },
+     {
+      "id": "g3",
+      "label": "High Estrogen Surge",
+      "sub": "Triggers menarche and epiphyseal maturation"
+     },
+     {
+      "id": "g4",
+      "label": "Epiphyseal Fusion",
+      "sub": "Complete cessation of growth within 2 years"
+     }
+    ],
+    "edges": [
+     [
+      "g1",
+      "g2",
+      "Synergistic chondrogenesis"
+     ],
+     [
+      "g2",
+      "g3",
+      "Pubertal progression"
+     ],
+     [
+      "g3",
+      "g4",
+      "Growth plate closure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Menarche** represents the onset of the first menstrual period, arriving as a late pubertal milestone at an average age of 12.8 years, typically at Tanner breast stage 4. Menarche occurs approximately 2 to 2.5 years following the initial appearance of thelarche. Most menstrual cycles during the first one to two years following menarche are anovulatory due to immaturity of positive estrogen feedback on the hypothalamic LH surge mechanism, presenting with physiological cycle irregularity.",
+   "say": "Menarche arrives late in the sequence, about two and a half years after thelarche, at an average age of twelve point eight years. Cycles are normally irregular and anovulatory for the first two years due to hypothalamic immaturity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Post-Menarcheal State",
+     "points": [
+      "Immature hypothalamic positive feedback",
+      "Anovulatory cycles in over fifty percent",
+      "Cycle intervals vary widely (21 to 45 days)",
+      "Painless menses without premenstrual symptoms"
+     ]
+    },
+    "right": {
+     "title": "Mature Ovulatory Pattern",
+     "points": [
+      "Coordinated mid-cycle LH surge",
+      "Consistent ovulatory cycles established",
+      "Predictable 28-day cycle frequency",
+      "Normal luteal phase progesterone secretion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Precocious puberty** is formally defined as the development of secondary sexual characteristics prior to the age of eight years in girls. It is categorized into central (GnRH-dependent) precocious puberty, where premature activation of the hypothalamic HPG axis produces an orderly pubertal sequence with elevated LH, and peripheral (GnRH-independent) precocious puberty, where autonomous sex steroid secretion from ovarian follicular cysts, granulosa cell tumours, or adrenal lesions suppresses gonadotropins.",
+   "say": "Precocious puberty is defined as pubertal signs before age eight. Central precocious puberty is GnRH-dependent and follows the normal orderly sequence, whereas peripheral precocious puberty is driven by ovarian or adrenal tumours with suppressed gonadotropins.",
+   "vis": {
+    "kind": "table",
+    "title": "Classification of Precocious Puberty in Girls",
+    "cols": [
+     "Pubertal Entity",
+     "Underlying Mechanism",
+     "Gonadotropin Profile"
+    ],
+    "rows": [
+     [
+      "Central (true) precocious puberty",
+      "Premature hypothalamic GnRH activation",
+      "Pubertal LH and FSH (LH >0.3 IU/L)"
+     ],
+     [
+      "Peripheral precocious puberty",
+      "Autonomous ovarian or adrenal steroid secretion",
+      "Suppressed basal LH and FSH (<0.1 IU/L)"
+     ],
+     [
+      "McCune-Albright syndrome",
+      "Activating GNAS1 mutation; autonomous cysts",
+      "Cafe-au-lait macules, fibrous dysplasia"
+     ],
+     [
+      "Premature thelarche",
+      "Isolated benign transient breast budding",
+      "Normal prepubertal bone age and hormones"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Delayed puberty** is diagnosed when there is a complete absence of breast budding (thelarche) by thirteen years of age, or an absence of menarche by fifteen years of age in the presence of normal secondary sexual development. Constitutional delay of growth and puberty is the most common benign etiology, characterized by delayed bone age and a family history. Pathological causes include hypergonadotropic hypogonadism, most commonly Turner syndrome (45,X), and hypogonadotropic hypogonadism from Kallmann syndrome.",
+   "say": "Delayed puberty is defined by absent breast thelarche by age thirteen, or absent menarche by age fifteen. Constitutional delay is the most common benign cause, while Turner syndrome is the leading genetic cause.",
+   "vis": {
+    "kind": "flow",
+    "title": "Diagnostic Triage for Delayed Puberty",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "Delayed Milestones",
+      "sub": "No thelarche by 13 or no menses by 15"
+     },
+     {
+      "id": "d2",
+      "label": "Measure LH and FSH",
+      "sub": "Differentiates primary gonadal from central failure"
+     },
+     {
+      "id": "d3",
+      "label": "High Gonadotropins",
+      "sub": "Hypergonadotropic: perform karyotype (Turner 45,X)"
+     },
+     {
+      "id": "d4",
+      "label": "Low Gonadotropins",
+      "sub": "Hypogonadotropic: constitutional delay or Kallmann"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2",
+      "Baseline laboratory check"
+     ],
+     [
+      "d2",
+      "d3",
+      "Gonadal failure"
+     ],
+     [
+      "d2",
+      "d4",
+      "Central failure"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Normal female puberty: chronological sequence of milestones",
+   "b": "Thelarche (breast), Pubarche (hair), Peak height velocity, Menarche (menses)."
+  },
+  {
+   "f": "Female pubertal growth spurt: timing relative to menarche",
+   "b": "Peak height velocity occurs before menarche (Tanner stage 3, age 11.5 to 12 years)."
+  },
+  {
+   "f": "Delayed puberty: cardinal diagnostic age thresholds",
+   "b": "Absence of thelarche by age 13, or absence of menarche by age 15."
+  }
+ ],
+ "keys": [
+  "Female puberty initiates with pulsatile GnRH secretion stimulating ovarian estradiol",
+  "Thelarche is the earliest physical milestone, followed by pubarche, growth spurt, and menarche",
+  "Precocious puberty begins before age 8, while delayed puberty is diagnosed if thelarche is absent by age 13"
+ ]
+}

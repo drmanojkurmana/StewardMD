@@ -1,0 +1,267 @@
+{
+  "v": 1,
+  "module": "phm-antiparkinsonian",
+  "subject": "pharmacology",
+  "title": "Levodopa, Carbidopa and Motor Complications: Wearing Off and On Off Phenomena",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Levodopa**, the amino acid precursor dopamine itself cannot be given (it never crosses the blood brain barrier), rides the neutral amino acid transporter into brain and is decarboxylated to dopamine inside remaining nigrostriatal terminals and other cells. It remains the most effective antiparkinsonian drug ever tested, improving bradykinesia and rigidity robustly. Dietary protein competes for its transporters in gut and barrier alike, so large protein meals can swallow a dose's effect whole.",
+      "say": "Levodopa smuggles dopamine's precursor across the barrier; protein meals compete for the same smuggling route.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ldopa",
+            "label": "Levodopa absorbed, competes with dietary amino acids"
+          },
+          {
+            "id": "bbb",
+            "label": "Neutral amino acid transporter crosses blood brain barrier"
+          },
+          {
+            "id": "decarb",
+            "label": "Decarboxylation to dopamine in brain"
+          },
+          {
+            "id": "effect",
+            "label": "Bradykinesia and rigidity improve"
+          }
+        ],
+        "edges": [
+          [
+            "ldopa",
+            "bbb"
+          ],
+          [
+            "bbb",
+            "decarb"
+          ],
+          [
+            "decarb",
+            "effect"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Carbidopa** (and benserazide outside the United States) inhibits dopa decarboxylase everywhere except across the blood brain barrier, which it cannot cross, so levodopa survives the periphery and dopamine's peripheral mischief (nausea, vomiting, arrhythmias, postural hypotension) fades while the required levodopa dose quarters. At least 75 to 100 mg of carbidopa daily is needed to saturate peripheral decarboxylase; early nausea often simply means the carbidopa fraction is still too low.",
+      "say": "Carbidopa bodyguards levodopa outside the brain and is shot inside it; nausea often means too little bodyguard.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Without carbidopa",
+          "points": [
+            "Most levodopa decarboxylated peripherally",
+            "Nausea, vomiting and cardiac arrhythmias",
+            "Gram doses needed historically",
+            "Postural hypotension from peripheral dopamine"
+          ]
+        },
+        "right": {
+          "title": "With carbidopa",
+          "points": [
+            "Peripheral decarboxylase saturated at 75 to 100 mg daily",
+            "Levodopa dose and peripheral effects fall sharply",
+            "More precursor reaches the brain intact",
+            "Carbidopa itself never crosses the barrier"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Early levodopa therapy enjoys the long duration response: surviving terminals store dopamine and smooth each dose into steady benefit, the honeymoon of several years. As terminals vanish, benefit tracks plasma levels minute by minute (short duration response) and **wearing off** appears: end of dose akinesia, morning akinesia and predictable trough symptoms announcing each next dose. Dose fractionation, COMT and MAO B partners and controlled release strategies from the next lessons exist to plaster over this pharmacokinetic cliff.",
+      "say": "Wearing off is the honeymoon ending: benefit starts keeping plasma level hours instead of calendar months.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "early",
+            "label": "Early disease: terminals store dopamine, smooth response"
+          },
+          {
+            "id": "loss",
+            "label": "Terminal loss removes the buffer"
+          },
+          {
+            "id": "wear",
+            "label": "End of dose and morning akinesia emerge"
+          },
+          {
+            "id": "adjust",
+            "label": "Fractionate doses and add enzyme inhibitor partners"
+          }
+        ],
+        "edges": [
+          [
+            "early",
+            "loss"
+          ],
+          [
+            "loss",
+            "wear"
+          ],
+          [
+            "wear",
+            "adjust"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Later still, the **on off phenomenon** replaces predictable troughs with abrupt, random switches between mobility (on, sometimes with dyskinesia) and freezing akinesia (off) unrelated to dose timing, probably reflecting postsynaptic plasticity and erratic gastric delivery together. Duodenal levodopa gel infusion and subcutaneous apomorphine rescue exist substantially to defeat this volatility. Patients keep diaries because clinic snapshots lie; the diary, not the examination room performance, writes the prescription changes.",
+      "say": "On off switches flip without consulting the dose clock; diaries, gels and apomorphine pens answer them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Wearing off (predictable)",
+          "points": [
+            "Symptoms return before the next dose is due",
+            "Morning akinesia after the overnight gap",
+            "Diary shows a dose linked pattern",
+            "Answer: timing, fractionation, enzyme partners"
+          ]
+        },
+        "right": {
+          "title": "On off (unpredictable)",
+          "points": [
+            "Abrupt switches unrelated to dose timing",
+            "Freezing episodes amid otherwise good control",
+            "Diary shows randomness across the day",
+            "Answer: infusions, rescue apomorphine, device therapies"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Peak dose **dyskinesia**, choreiform writhing at maximum levodopa effect, brackets the therapeutic window from above while wearing off brackets it from below, and the window narrows yearly. Diphasic dyskinesia strikes as levels rise and fall. Management trades in small levodopa doses taken oftener, amantadine's antidyskinetic effect, and eventually device therapies; patient preference rules, because many patients choose mobile with dyskinesia over still without it, a values judgement no algorithm should confiscate.",
+      "say": "Too little freezes, too much writhes, and the corridor narrows yearly; ask the patient which side they prefer.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "off",
+            "label": "Low levels: off state akinesia and tremor"
+          },
+          {
+            "id": "on",
+            "label": "Therapeutic window: mobile without troublesome dyskinesia"
+          },
+          {
+            "id": "dysk",
+            "label": "Peak levels: choreiform dyskinesia"
+          },
+          {
+            "id": "narrow",
+            "label": "Window narrows as disease advances"
+          }
+        ],
+        "edges": [
+          [
+            "off",
+            "on"
+          ],
+          [
+            "on",
+            "dysk"
+          ],
+          [
+            "dysk",
+            "narrow"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Dopamine agonists **bromocriptine** (ergot, largely historic here) and ropinirole (non ergot, D2 and D3 preferring) stimulate receptors directly without needing surviving terminals, lasting longer per dose and delaying dyskinesia when used early, at the cost of more somnolence, oedema, hallucinations and impulse control disorders. Their modern role is adjunctive and in younger patients deferring levodopa complications, always with the behavioural warning repeated at review.",
+      "say": "Agonists bypass dying terminals and delay dyskinesia, billing in sleepiness and impulse control instead.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dopamine agonist gains",
+          "points": [
+            "Direct receptor stimulation, terminal independent",
+            "Longer action smooths motor response",
+            "Levodopa sparing and dyskinesia delaying early",
+            "Ropinirole and pramipexole non ergot standards"
+          ]
+        },
+        "right": {
+          "title": "Dopamine agonist costs",
+          "points": [
+            "Somnolence and sudden sleep episodes",
+            "Impulse control disorders: gambling, shopping, hypersexuality",
+            "Peripheral oedema and hallucinations in the elderly",
+            "Ergot members: fibrotic valvulopathy and serositis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Two prescribing traps** guard levodopa: dopamine blocking antiemetics and antipsychotics (metoclopramide, prochlorperazine, haloperidol) can precipitate severe worsening or neuroleptic malignant like crises, so domperidone (peripheral, barrier excluded) or ondansetron substitute; and pyridoxine (vitamin B6) accelerates peripheral decarboxylation, irrelevant beside carbidopa but a favourite examination ghost from the pre carbidopa era. Non selective MAO inhibitors with levodopa risk hypertensive crisis; the selective MAO B partners next lesson are designed around that fence.",
+      "say": "Never block dopamine in a Parkinson patient needing an antiemetic; domperidone exists precisely for them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Forbidden in Parkinson disease",
+          "points": [
+            "Metoclopramide and prochlorperazine antiemetics",
+            "Haloperidol and typical antipsychotics where avoidable",
+            "Abrupt levodopa withdrawal: parkinsonism hyperpyrexia",
+            "Non selective MAO inhibitors with levodopa"
+          ]
+        },
+        "right": {
+          "title": "Safer substitutes",
+          "points": [
+            "Domperidone: peripheral blockade, barrier excluded",
+            "Ondansetron for nausea without dopamine blockade",
+            "Quetiapine or clozapine where antipsychosis essential",
+            "Perioperative levodopa continued by any route available"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Nausea, postural hypotension, confusion and hallucinations** in the elderly, and vivid dreams form levodopa's everyday adverse weather, managed by carbidopa adequacy, slow titration, dose redistribution toward daytime, and reviewing every other sedating or hypotensive drug in the list. Abrupt withdrawal, by contrast, is an emergency: the parkinsonism hyperpyrexia syndrome mirrors neuroleptic malignant syndrome with rigidity, fever and autonomic collapse, prevented simply by never letting supply or swallowing failure interrupt therapy unplanned.",
+      "say": "Titrate slowly, redistribute doses, and never let levodopa stop abruptly; withdrawal can kill like neuroleptic malignancy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "side",
+            "label": "Nausea, postural drop, dreams or hallucinations"
+          },
+          {
+            "id": "carbi",
+            "label": "Check carbidopa adequacy and titration speed"
+          },
+          {
+            "id": "redist",
+            "label": "Redistribute doses and prune interacting drugs"
+          },
+          {
+            "id": "never",
+            "label": "Never abrupt cessation: hyperpyrexia syndrome risk"
+          }
+        ],
+        "edges": [
+          [
+            "side",
+            "carbi"
+          ],
+          [
+            "carbi",
+            "redist"
+          ],
+          [
+            "redist",
+            "never"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "v": 1,
+  "module": "phm-anticholinesterases",
+  "subject": "pharmacology",
+  "title": "Myasthenic Crisis, Cholinergic Crisis, and Oxime Enzyme Reactivation",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A sudden life-threatening deterioration in neuromuscular transmission causing ventilatory failure constitutes a **myasthenic crisis**. Triggered commonly by systemic infections, emotional distress, pregnancy, or inadequate anticholinesterase dosing, diaphragm and intercostal muscle strength plunges precipitously. Patients manifest tachypnea, paradoxically weak vital capacity below fifteen milliliters per kilogram, stertorous swallowing weakness, and profound hypoxemia requiring immediate intensive care airway management.",
+      "say": "Myasthenic crisis represents severe respiratory muscle failure driven by acute autoimmune disease exacerbation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Myasthenic crisis",
+          "points": [
+            "Underlying severe acetylcholine receptor deficiency",
+            "Triggered by infection, stress, or medication default",
+            "Pupils normal or dilated, skin is dry",
+            "Improves dramatically following edrophonium test"
+          ]
+        },
+        "right": {
+          "title": "Cholinergic crisis",
+          "points": [
+            "Excessive anticholinesterase medication dosage",
+            "Persistent motor endplate depolarization blockade",
+            "Pinpoint miosis, copious secretomotor drooling",
+            "Worsens or shows no change after edrophonium test"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Paradoxical profound skeletal muscle paralysis induced by excessive anticholinesterase medication is recognized as a **cholinergic crisis**. Persistent excessive acetylcholine accumulation at the motor endplate sustains continuous membrane depolarization, refractory sodium channel inactivation, and flaccid paresis resembling succinylcholine paralysis. Accompanying muscarinic signs including miosis, profuse diaphoresis, copious pulmonary secretions, abdominal colic, and bradycardia provide clinical clues.",
+      "say": "Excessive anticholinesterase drug levels lock motor endplates in persistent depolarizing paralysis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "over",
+            "label": "Excessive anticholinesterase dosing"
+          },
+          {
+            "id": "ach",
+            "label": "Massive junctional acetylcholine buildup"
+          },
+          {
+            "id": "depol",
+            "label": "Persistent motor endplate depolarization"
+          },
+          {
+            "id": "inact",
+            "label": "Voltage-gated sodium channel inactivation and flaccidity"
+          }
+        ],
+        "edges": [
+          [
+            "over",
+            "ach"
+          ],
+          [
+            "ach",
+            "depol"
+          ],
+          [
+            "depol",
+            "inact"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Immediate differentiation between disease-related weakness and medication overdose requires a cautious **edrophonium challenge**. In a monitored resuscitation setting with endotracheal intubation equipment immediately accessible, one to two milligrams of intravenous edrophonium are administered. In myasthenic crisis, muscle power and vital capacity improve promptly; in cholinergic crisis, fasciculations intensify, secretomotor discharge surges, and respiratory weakness deepens dangerously.",
+      "say": "A bedside edrophonium injection clarifies whether respiratory weakness stems from underdosing or overtreatment.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical feature",
+          "Myasthenic crisis",
+          "Cholinergic crisis"
+        ],
+        "rows": [
+          [
+            "Pupillary diameter",
+            "Normal or mid-dilated",
+            "Pinpoint constricted miosis"
+          ],
+          [
+            "Secretory status",
+            "Normal secretions, dry oral mucosa",
+            "Profuse salivation, lacrimation, bronchorrhea"
+          ],
+          [
+            "Fasciculations",
+            "Absent",
+            "Prominent across face, tongue, and chest wall"
+          ],
+          [
+            "Response to edrophonium",
+            "Prompt temporary improvement",
+            "Dangerous clinical deterioration"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Specific pharmacological reactivation of phosphorylated acetylcholinesterase in acute organophosphate insecticide poisoning is achieved with **pralidoxime**. Administered as an intravenous infusion within the first twenty-four hours, pralidoxime utilizes its positively charged quaternary pyridinium nitrogen to anchor near the enzyme anionic locus, orienting its nucleophilic oxime moiety directly against the phosphorylated esteratic site to restore catalytic activity.",
+      "say": "Pralidoxime acts as a nucleophile to pull organophosphate toxins off inhibited acetylcholinesterase enzymes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/organophosphate-fig1.webp",
+        "alt": "Organophosphate antidote mechanism with pralidoxime and atropine",
+        "caption": "Reactivation of phosphorylated acetylcholinesterase by pralidoxime alongside muscarinic receptor blockade by atropine."
+      }
+    },
+    {
+      "tx": "The biochemical detachment of organophosphate residues from the catalytic serine pocket represents **oxime reactivation**. Pralidoxime forms a coordinate covalent bond with the electrophilic phosphorus atom, liberating active acetylcholinesterase while generating a harmless phosphorylated oxime complex excreted in urine. Because oximes reverse weakness at nicotinic skeletal neuromuscular junctions, they directly relieve diaphragmatic paresis and peripheral motor fasciculations that atropine cannot reverse.",
+      "say": "Oxime reactivation restores neuromuscular transmission, relieving muscle weakness and respiratory paralysis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pralidoxime action",
+          "points": [
+            "Target: Phosphorylated acetylcholinesterase",
+            "Reverses nicotinic neuromuscular weakness",
+            "Abolishes muscle fasciculations and twitching",
+            "Must be administered before chemical aging occurs"
+          ]
+        },
+        "right": {
+          "title": "Atropine action",
+          "points": [
+            "Target: Postjunctional muscarinic receptors",
+            "Reverses lethal bronchorrhea and bradycardia",
+            "No direct action on skeletal motor endplates",
+            "Administered repeatedly until pulmonary clearing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Delaying oxime administration results in chemical refractory failure due to spontaneous **aging of enzyme**. Aging involves spontaneous non-enzymatic dealkylation of one alkoxy group from the phosphorylated serine-organophosphate adduct. The resulting monoalkylphosphorylated complex acquires a negative electrostatic charge that repels nucleophilic oximes completely, rendering acetylcholinesterase permanently refractory to chemical reactivation and mandating de novo enzyme protein synthesis over weeks.",
+      "say": "Chemical aging permanently locks the organophosphate onto the enzyme, preventing reactivation by oximes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Organophosphate agent",
+          "Aging half-life",
+          "Oxime therapeutic window"
+        ],
+        "rows": [
+          [
+            "Soman (Nerve gas)",
+            "2 to 5 minutes",
+            "Extremely narrow (immediate therapy essential)"
+          ],
+          [
+            "Sarin (Nerve gas)",
+            "2 to 5 hours",
+            "Narrow (therapy required within 2 hours)"
+          ],
+          [
+            "Parathion (Pesticide)",
+            "24 to 48 hours",
+            "Moderate (effective if started within 24 hours)"
+          ],
+          [
+            "Malathion (Pesticide)",
+            "Several days",
+            "Broad (favorable response beyond 24 hours)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In organophosphate and carbamate intoxication, reversing lethal muscarinic bronchorrhea and bradycardia demands immediate intravenous **atropinization**. Clinicians initiate therapy with two to five milligrams of intravenous atropine, doubling the dose every five to ten minutes until definitive signs of atropinization appear: cleared chest auscultation without wet rales, heart rate exceeding eighty beats per minute, dry axillae, and dilated pupils.",
+      "say": "Titrating atropine until pulmonary secretions vanish and bronchial rales clear remains the primary survival endpoint.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "init",
+            "label": "Initial intravenous atropine 2 to 5 mg"
+          },
+          {
+            "id": "eval",
+            "label": "Serial pulmonary chest auscultation"
+          },
+          {
+            "id": "titr",
+            "label": "Dose doubling every 5 to 10 min"
+          },
+          {
+            "id": "end",
+            "label": "Clear lungs and heart rate > 80 bpm"
+          }
+        ],
+        "edges": [
+          [
+            "init",
+            "eval"
+          ],
+          [
+            "eval",
+            "titr"
+          ],
+          [
+            "titr",
+            "end"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When severe neuromuscular exhaustion progresses to overt **respiratory paralysis**, pharmacological antidotes alone cannot preserve alveolar ventilation. Mechanical ventilation with endotracheal intubation becomes mandatory to sustain gas exchange. In refractory myasthenic crises, therapeutic plasma exchange or high-dose intravenous immunoglobulin is deployed rapidly to clear circulating pathogenic anti-acetylcholine receptor autoantibodies from systemic blood.",
+      "say": "Mechanical ventilation, plasma exchange, and immunoglobulin are crucial when respiratory paralysis supervenes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/nmj-endplate-myasthenia-blockers-fig1.webp",
+        "alt": "Neuromuscular junction pathology and antibody-mediated receptor loss",
+        "caption": "Motor endplate architectural destruction and antibody binding causing terminal neuromuscular respiratory paralysis."
+      }
+    }
+  ]
+}

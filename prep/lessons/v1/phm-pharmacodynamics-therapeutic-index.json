@@ -1,0 +1,255 @@
+{
+  "v": 1,
+  "module": "phm-pharmacodynamics",
+  "subject": "pharmacology",
+  "title": "Therapeutic Index, Drug Potency, Maximal Efficacy, and Receptor Tachyphylaxis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Evaluating pharmaceutical safety across diverse clinical populations requires assessing quantal dose-response relationships where therapeutic or toxic outcomes are scored as all-or-none events. In population studies, the dose required to produce a specified toxic effect in fifty percent of subjects is designated the median toxic dose, or the median lethal dose in preclinical animal toxicology. The fundamental quantitative measure of relative drug safety is the **therapeutic index**, mathematically calculated as the ratio of TD50 to ED50.",
+      "say": "The therapeutic index divides median toxic dose by median effective dose, establishing the margin of safety.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Safety metric",
+          "Mathematical formula",
+          "Clinical interpretation",
+          "Representative drug class"
+        ],
+        "rows": [
+          [
+            "Therapeutic Index (TI)",
+            "TD50 / ED50 (or LD50 / ED50)",
+            "Ratio of toxic to therapeutic dose; higher is safer",
+            "Penicillins (TI > 100), Digoxin (TI approx 2)"
+          ],
+          [
+            "Certain Safety Factor (CSF)",
+            "TD1 / ED99",
+            "Ratio of dose toxic in 1% to dose effective in 99%",
+            "Stringent measure avoiding curve-overlap toxicity"
+          ],
+          [
+            "Therapeutic Window",
+            "MTC - MEC (toxic vs effective level)",
+            "Plasma concentration range safe and effective",
+            "Lithium (0.6 to 1.2 mEq/L)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When a drug possesses a low therapeutic index approaching one or two, therapeutic blood concentrations overlap dangerously with toxic ranges, necessitating routine clinical surveillance. Classic pharmaceuticals with a narrow therapeutic index include digoxin, lithium, theophylline, warfarin, aminoglycosides, and carbamazepine. For these agents, clinicians utilize **therapeutic drug monitoring** to measure steady-state serum concentrations, preventing catastrophic cardiac arrhythmias, neurotoxicity, or life-threatening systemic bleeding.",
+      "say": "Narrow therapeutic index drugs require therapeutic drug monitoring to prevent severe toxicity from small dose escalations.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dose",
+            "label": "Narrow therapeutic index drug administration"
+          },
+          {
+            "id": "sampling",
+            "label": "Trough plasma concentration sampling"
+          },
+          {
+            "id": "target",
+            "label": "Target therapeutic window comparison"
+          },
+          {
+            "id": "adjustment",
+            "label": "Precise dosage adjustment preventing toxicity"
+          }
+        ],
+        "edges": [
+          [
+            "dose",
+            "sampling"
+          ],
+          [
+            "sampling",
+            "target"
+          ],
+          [
+            "target",
+            "adjustment"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The antiepileptic hydantoin compound phenytoin represents a classic narrow-window medication exhibiting saturable Michaelis-Menten elimination kinetics within its therapeutic range of ten to twenty micrograms per millilitre. Once hepatic cytochrome CYP2C9 metabolic capacity becomes saturated, small dosage increments cause disproportionate surges in free plasma drug levels. This sudden metabolic tipping point converts seizure control into toxic cerebellar ataxia, coarse horizontal nystagmus, and stupor, illustrating strict **phenytoin therapeutic monitoring**.",
+      "say": "Phenytoin combines a narrow therapeutic window with saturable zero-order metabolism, risking rapid neurotoxicity if levels exceed twenty micrograms.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-phenytoin.webp",
+        "alt": "Phenytoin therapeutic monitoring and kinetics",
+        "caption": "Phenytoin clinical pharmacokinetics card illustrating narrow therapeutic index requiring routine serum monitoring between ten and twenty micrograms per millilitre."
+      }
+    },
+    {
+      "tx": "The amount or concentration of a drug required to produce a pharmacological response of a given magnitude defines drug **potency**. Governed primarily by receptor binding affinity and tissue penetration, potency is reflected by the horizontal location of the log concentration-response curve along the dose axis. For example, fentanyl produces analgesia at a clinical dose of one hundred micrograms, whereas morphine requires ten milligrams to elicit equivalent pain relief, demonstrating that fentanyl is one hundred times more potent.",
+      "say": "Drug potency refers to the dose needed to produce an effect, governed by receptor affinity and reflected by curve position.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "High potency (e.g. Fentanyl)",
+          "points": [
+            "Very high receptor binding affinity",
+            "Effective at microgram dose ranges",
+            "Curve shifted far to the left on log axis",
+            "Requires smaller physical tablet weight"
+          ]
+        },
+        "right": {
+          "title": "Lower potency (e.g. Morphine)",
+          "points": [
+            "Moderate receptor binding affinity",
+            "Effective at milligram dose ranges",
+            "Curve positioned further to the right",
+            "Can attain identical maximal pain relief"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In clinical practice, therapeutic utility depends far more heavily on the maximal ceiling response a drug can produce, designated as its **efficacy**. While potency only dictates how many milligrams must be formulated into a tablet, maximal efficacy reflects the intrinsic ability of the drug-receptor complex to activate downstream cellular cascades. For instance, furosemide can eliminate fifteen litres of fluid in acute pulmonary oedema, possessing high ceiling efficacy that thiazide diuretics can never match regardless of dose.",
+      "say": "Maximal efficacy determines the ceiling of clinical benefit a drug can achieve, which matters far more than mere potency.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Comparison feature",
+          "Drug Potency",
+          "Maximal Efficacy (Emax)"
+        ],
+        "rows": [
+          [
+            "Primary determinant",
+            "Receptor affinity and drug bioavailability",
+            "Intrinsic activity (alpha) and tissue capacity"
+          ],
+          [
+            "Graphical metric",
+            "Horizontal position (EC50 / ED50)",
+            "Height of upper horizontal plateau"
+          ],
+          [
+            "Clinical relevance",
+            "Determines tablet dose weight in mg",
+            "Determines maximum attainable therapeutic benefit"
+          ],
+          [
+            "Diuretic example",
+            "Bumetanide is 40x more potent than furosemide",
+            "Loop diuretics have far higher efficacy than thiazides"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Rapid, progressive diminution of pharmacological responsiveness following repeated administration of a drug over brief time intervals is termed **tachyphylaxis**. Unlike chronic drug tolerance, which develops gradually over weeks through hepatic enzyme induction or receptor downregulation, tachyphylaxis manifests acutely within minutes to hours. Classic agents prone to rapid tachyphylaxis include indirectly acting sympathomimetics such as ephedrine and amphetamine, as well as organic nitrates, hydralazine, and nicotine.",
+      "say": "Tachyphylaxis represents acute tolerance developing over minutes to hours following repeated doses of drugs like ephedrine or nitrates.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute tachyphylaxis",
+          "points": [
+            "Develops within minutes to hours",
+            "Often due to mediator depletion or uncoupling",
+            "Cannot be overcome by increasing the dose",
+            "Ephedrine, nitroglycerin, tyramine"
+          ]
+        },
+        "right": {
+          "title": "Chronic tolerance",
+          "points": [
+            "Develops over days to weeks",
+            "Due to receptor downregulation or CYP induction",
+            "Can often be surmounted by dose escalation",
+            "Morphine analgesia, diazepam sedation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The biochemical mechanisms underpinning tachyphylaxis vary across drug classes. In the case of indirectly acting sympathomimetics, rapid repetitive dosing causes exhaustion and depletion of vesicular noradrenaline stores from peripheral sympathetic nerve terminals. In contrast, tachyphylaxis to organic nitrates like nitroglycerin arises from the depletion of intracellular **sulfhydryl donors** such as mitochondrial glutathione, impairing enzymatic bioactivation to nitric oxide and mandating a daily eight-hour nitrate-free interval.",
+      "say": "Nitrate tachyphylaxis stems from depleted intracellular sulfhydryl donors, requiring a daily nitrate-free interval to restore sensitivity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "nitrate",
+            "label": "Continuous nitroglycerin infusion"
+          },
+          {
+            "id": "sh",
+            "label": "Depletion of mitochondrial sulfhydryl groups"
+          },
+          {
+            "id": "bioactivation",
+            "label": "Impaired ALDH2 nitric oxide generation"
+          },
+          {
+            "id": "interval",
+            "label": "Loss of vasodilation corrected by nitrate-free interval"
+          }
+        ],
+        "edges": [
+          [
+            "nitrate",
+            "sh"
+          ],
+          [
+            "sh",
+            "bioactivation"
+          ],
+          [
+            "bioactivation",
+            "interval"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "At the molecular receptor level, acute desensitization of GPCRs involves phosphorylation of agonist-bound receptors by specific G-protein coupled receptor kinases. Once phosphorylated, the cytoplasmic loops of the receptor recruit cytosolic beta-arrestin proteins, which physically uncouple the receptor from heterotrimeric G-proteins. Beta-arrestin subsequently targets the receptor complex to clathrin-coated pits for endocytosis, leading either to dephosphorylation and recycling in endosomes or proteolytic degradation during prolonged **receptor down-regulation**.",
+      "say": "G-protein receptor kinases phosphorylate active receptors, recruiting arrestin to uncouple G-proteins and internalize receptors.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "agonist",
+            "label": "Persistent agonist receptor occupancy"
+          },
+          {
+            "id": "grk",
+            "label": "GRK phosphorylation of cytoplasmic tail"
+          },
+          {
+            "id": "arrestin",
+            "label": "Beta-arrestin binding and G-protein uncoupling"
+          },
+          {
+            "id": "internal",
+            "label": "Clathrin-mediated receptor internalisation"
+          }
+        ],
+        "edges": [
+          [
+            "agonist",
+            "grk"
+          ],
+          [
+            "grk",
+            "arrestin"
+          ],
+          [
+            "arrestin",
+            "internal"
+          ]
+        ]
+      }
+    }
+  ]
+}
