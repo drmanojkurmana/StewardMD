@@ -1,0 +1,215 @@
+{
+ "v": 1,
+ "module": "med-ich",
+ "subject": "medicine",
+ "title": "Intracerebral Haemorrhage and Hypertensive Vascular Rupture",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Non-traumatic extravasation of blood directly into the parenchymal substance of the brain constitutes an **intracerebral haemorrhage** (ICH). Accounting for ten to fifteen percent of all acute strokes, spontaneous ICH carries a thirty-day mortality approaching forty percent, driven primarily by acute mass effect, early haematoma expansion, and acute obstructive hydrocephalus.",
+   "say": "Non-traumatic extravasation of blood directly into brain parenchyma constitutes an intracerebral haemorrhage. Accounting for fifteen percent of all strokes, spontaneous ICH carries thirty-day mortality near forty percent, driven by mass effect, haematoma expansion, and acute obstructive hydrocephalus.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ich-fig1.webp",
+    "alt": "Pathophysiology and vascular mechanisms of intracerebral haemorrhage.",
+    "caption": "Parenchymal haematoma formation, local mass effect, and surrounding oedema. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The single most common and treatable modifiable risk factor for spontaneous non-traumatic ICH is chronic systemic arterial hypertension, responsible for the classic **hypertensive bleed**. Decades of elevated intravascular pressure induce deep arteriolar lipohyalinosis, smooth muscle medial degeneration, and microvascular wall weakening within deep penetrating arteries branching off main basal vessels.",
+   "say": "The most common modifiable risk factor for spontaneous intracerebral haemorrhage is chronic systemic arterial hypertension, causing the classic hypertensive bleed. Longstanding elevated pressure induces deep arteriolar lipohyalinosis and medial degeneration within penetrating vessels branching off major cerebral arteries.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "htn",
+      "label": "Chronic Uncontrolled Hypertension"
+     },
+     {
+      "id": "lipo",
+      "label": "Arteriolar Lipohyalinosis & Medial Fibrinoid Lysis"
+     },
+     {
+      "id": "rupt",
+      "label": "Vascular Rupture & Intraparenchymal Bleed"
+     }
+    ],
+    "edges": [
+     [
+      "htn",
+      "lipo"
+     ],
+     [
+      "lipo",
+      "rupt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Histopathologically, chronic hypertensive shear stress produces minute microaneurysmal dilatations along the length of deep lenticulostriate arterioles measuring under three hundred micrometres in diameter, historically recognised as **Charcot-Bouchard aneurysms**. Rupture of these fragile microaneurysms under acute blood pressure surges precipitates explosive parenchymal extravasation into deep subcortical structures.",
+   "say": "Histopathologically, chronic hypertensive stress produces minute microaneurysmal dilatations along deep penetrating arterioles, historically recognized as Charcot-Bouchard aneurysms. Rupture of these fragile microaneurysms under blood pressure surges precipitates explosive parenchymal haemorrhage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Charcot-Bouchard Microaneurysms",
+     "points": [
+      "Deep penetrating arterioles (< 300 um)",
+      "Lenticulostriate and thalamoperforating vessels",
+      "Underlying mechanism of intraparenchymal ICH",
+      "Induced by chronic arteriolar lipohyalinosis"
+     ]
+    },
+    "right": {
+     "title": "Saccular (Berry) Aneurysms",
+     "points": [
+      "Major bifurcation sites of Circle of Willis",
+      "Muscular media and elastic lamina congenital defect",
+      "Underlying mechanism of Subarachnoid Haemorrhage",
+      "Larger calibre (typically 5 to 15 mm)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most frequent anatomical site for hypertensive intracerebral haemorrhage is the basal ganglia, accounting for over fifty percent of instances as a **putaminal haemorrhage**. Blood ruptures into the lateral putamen and external capsule, compressing the internal capsule to produce contralateral dense spastic hemiplegia, hemianesthesia, homonymous hemianopia, and conjugate eye deviation looking toward the side of the hematoma.",
+   "say": "The most frequent anatomical site for hypertensive haemorrhage is the basal ganglia, accounting for half of cases as a putaminal haemorrhage. Blood ruptures into the putamen, compressing the internal capsule to produce contralateral dense hemiplegia, hemianesthesia, and gaze deviation toward the bleed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Haemorrhage Site",
+     "Vascular Supply",
+     "Characteristic Physical Examination Signs"
+    ],
+    "rows": [
+     [
+      "Putamen (50%)",
+      "Lenticulostriate branches of MCA",
+      "Contralateral dense hemiplegia, conjugate gaze to lesion side"
+     ],
+     [
+      "Thalamus (15%)",
+      "Thalamoperforating branches of PCA",
+      "Contralateral sensory loss > motor loss, unreactive small pupils"
+     ],
+     [
+      "Pons (10%)",
+      "Paramedian basilar perforators",
+      "Pinpoint reactive pupils, quadriplegia, coma, hyperpyrexia"
+     ],
+     [
+      "Cerebellum (10%)",
+      "Superior cerebellar artery / PICA",
+      "Ipsilateral ataxia, vertigo, occipital headache, absent hemiplegia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In elderly, non-hypertensive patients presenting with superficial, recurrent lobar haemorrhages located at the corticosubcortical junction, the primary underlying vascular disorder is **cerebral amyloid angiopathy** (CAA). Progressive deposition of amyloid-beta 40 peptide within the media and adventitia of small leptomeningeal and cortical arteries weakens vessel integrity, predisposing to spontaneous cortical bleeding.",
+   "say": "In elderly non-hypertensive patients presenting with superficial recurrent lobar haemorrhages at the corticosubcortical junction, the primary underlying disorder is cerebral amyloid angiopathy. Progressive deposition of amyloid-beta peptide within cortical arteries weakens vessel integrity, causing spontaneous cortical bleeds.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cerebral-amyloid-angiopathy-fig1.webp",
+    "alt": "Histopathology and cortical microbleeds of cerebral amyloid angiopathy.",
+    "caption": "Amyloid-beta vascular deposition in cerebral amyloid angiopathy and lobar ICH. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The most critical determinant of clinical deterioration and poor functional outcome during the initial twenty-four hours following ICH is active **haematoma expansion**. Occurring in up to one-third of patients within six hours of onset, ongoing microvascular re-bleeding around the hematoma periphery dramatically increases intracranial pressure, visible on computed tomography angiography as the dynamic contrast extravasation spot sign.",
+   "say": "The most critical determinant of deterioration during the initial twenty-four hours following ICH is active haematoma expansion. Occurring in one-third of patients within six hours of onset, ongoing microvascular re-bleeding increases intracranial pressure, visible on CT angiography as the spot sign.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ich",
+      "label": "Initial Arteriolar Rupture"
+     },
+     {
+      "id": "shear",
+      "label": "Perilesional Microvascular Shearing"
+     },
+     {
+      "id": "exp",
+      "label": "Haematoma Expansion & Brain Herniation"
+     }
+    ],
+    "edges": [
+     [
+      "ich",
+      "shear"
+     ],
+     [
+      "shear",
+      "exp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute blood pressure lowering represents the cornerstone of medical therapy to arrest haematoma expansion in spontaneous ICH. Guidelines recommend rapid titration of intravenous antihypertensive infusions (such as labetalol or nicardipine) to achieve a target systolic blood pressure between 130 and 140 mmHg within two hours of presentation, while carefully avoiding precipitous **hypotension**.",
+   "say": "Acute blood pressure lowering represents the cornerstone of medical therapy to arrest haematoma expansion in spontaneous ICH. Guidelines recommend rapid titration of intravenous labetalol or nicardipine to achieve target systolic blood pressure between 130 and 140 mmHg within two hours of presentation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Target",
+     "Target Threshold",
+     "Preferred Therapeutic Interventions"
+    ],
+    "rows": [
+     [
+      "Systolic Blood Pressure",
+      "130 to 140 mmHg (within 1-2 hours)",
+      "IV Nicardipine or Labetalol continuous infusions"
+     ],
+     [
+      "Anticoagulation Reversal",
+      "Immediate normalization of INR / Factor Xa",
+      "4-Factor PCC + Vitamin K for warfarin; Idarucizumab / Andexanet"
+     ],
+     [
+      "Intracranial Pressure",
+      "ICP < 20 mmHg; CPP > 60 mmHg",
+      "Head elevation 30 degrees, hypertonic 3% saline or mannitol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Extravasation of arterial blood into the basal cisterns and subarachnoid space without primary parenchymal destruction defines **subarachnoid haemorrhage** (SAH). Characterised by an instantaneous, explosive headache reaching maximal intensity within seconds, classically termed a thunderclap headache, eighty-five percent of non-traumatic cases arise from saccular intracranial aneurysm rupture, mandating emergency non-contrast cranial computed tomography.",
+   "say": "Extravasation of arterial blood into the basal cisterns and subarachnoid space defines subarachnoid haemorrhage. Characterized by an explosive thunderclap headache reaching maximal intensity within seconds, eighty-five percent of non-traumatic cases arise from ruptured saccular aneurysms.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rupt",
+      "label": "Saccular Aneurysm Rupture"
+     },
+     {
+      "id": "bleed",
+      "label": "High-Pressure Blood Enters Basal Cisterns"
+     },
+     {
+      "id": "head",
+      "label": "Instantaneous Thunderclap Headache"
+     }
+    ],
+    "edges": [
+     [
+      "rupt",
+      "bleed"
+     ],
+     [
+      "bleed",
+      "head"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 424"
+}
