@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "id": "oph-refraction-anisometropia",
+ "subject": "ophthalmology",
+ "module": "oph-refraction",
+ "title": "Anisometropia, Presbyopia and Retinoscopy",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Anisometropia** is unequal refractive error between eyes, commonly significant beyond one dioptre difference, producing unequal image size and clarity that fusion struggles to combine. Children develop amblyopia in the more ametropic eye silently because the better eye sees normally at every casual check. Spectacle correction magnifies unequally, so contact lenses or refractive surgery equalise image size in larger differences.",
+   "say": "Unequal refraction between eyes gives unequal image size and clarity for fusion. Childhood amblyopia develops silently in the worse eye without symptoms. Contact correction gives image size equalisation in larger differences.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Ocular cross sections relevant to unequal axial length between the two eyes.",
+    "caption": "Unequal eye anatomy in anisometropia. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Presbyopia** is age loss of accommodation as lens stiffens and ciliary zonular mechanics fail, separating near focus from distance focus after about forty years. Near addition power rises with age in predictable steps while distance refraction stays as before. Bifocal, progressive and monovision strategies divide the near task differently, each trading field clarity zones for convenience.",
+   "say": "Age related lens stiffening gives loss of near accommodation after forty years typically. Near addition power increases predictably with age in steps. Correction strategies give different clarity zone trades.",
+   "vis": {
+    "kind": "table",
+    "title": "Presbyopia correction trades",
+    "cols": [
+     "Strategy",
+     "Trade"
+    ],
+    "rows": [
+     [
+      "Bifocal",
+      "Line segment, image jump"
+     ],
+     [
+      "Progressive",
+      "No line, peripheral distortion"
+     ],
+     [
+      "Monovision",
+      "One eye near, depth reduced"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Accommodation** amplitude falls from about fourteen dioptres in childhood toward near zero by sixty, measured by near point recession or push up methods. Hofstetter formulas estimate expected amplitude by age for comparison when symptoms precede schedule. Premature presbyopia follows lens, ciliary or parasympathetic disease and needs cause assessment rather than stronger adds alone.",
+   "say": "Accommodative amplitude gives decline from childhood toward zero by sixty years. Age formulas give expected values for premature symptom comparison. Early presbyopia needs cause assessment additionally.",
+   "vis": {
+    "kind": "table",
+    "title": "Amplitude by age logic",
+    "cols": [
+     "Stage",
+     "Amplitude trend"
+    ],
+    "rows": [
+     [
+      "Childhood",
+      "High amplitude, near point close"
+     ],
+     [
+      "Middle age",
+      "Falling amplitude, presbyopia"
+     ],
+     [
+      "Older age",
+      "Near zero without adds"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Retinoscopy** projects a streak of light whose reflex movement against or with the examiner, neutralised by trial lenses, objectively measures refraction without patient responses. With movement means plus needed, against movement means minus overcorrection in standard working distance technique. Children, infants and uncooperative adults depend on this test entirely, making it the paediatric refraction backbone.",
+   "say": "Streak reflex neutralisation gives objective refraction without patient responses reliably. Reflex direction gives the sign of correction needed. Paediatric refraction is dependent on this test.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-angle-closure-glaucoma-fig1.webp",
+    "alt": "Anterior segment anatomy relevant to objective refraction and accommodation assessment.",
+    "caption": "Anterior segment in refraction assessment. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Working distance compensation subtracts its reciprocal dioptres from retinoscopy gross findings to give net prescription before subjective refinement. Cycloplegic retinoscopy in children removes accommodation that otherwise masquerades as myopia or hides hypermetropia. **Neutral point** seeking in two meridians separately gives astigmatism magnitude and axis objectively in skilled hands.",
+   "say": "Working distance compensation gives net prescription from gross retinoscopy findings accurately. Cycloplegia gives removal of accommodative masking in children. Separate meridian neutralisation gives astigmatism objectively.",
+   "vis": {
+    "kind": "flow",
+    "title": "Retinoscopy to prescription",
+    "nodes": [
+     {
+      "id": "streak",
+      "label": "Observe streak reflex movement"
+     },
+     {
+      "id": "neut",
+      "label": "Neutralise both meridians"
+     },
+     {
+      "id": "work",
+      "label": "Subtract working distance"
+     },
+     {
+      "id": "subj",
+      "label": "Refine subjectively, prescribe"
+     }
+    ],
+    "edges": [
+     [
+      "streak",
+      "neut"
+     ],
+     [
+      "neut",
+      "work"
+     ],
+     [
+      "work",
+      "subj"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Aniseikonia, unequal perceived image size, follows anisometropia corrected by spectacles more than by contacts because vertex distance magnification differs by lens power. Symptoms include headache, spatial distortion and fusion failure despite clear acuity in each eye separately. **Knapp law** teaching places axial anisometropia correction at spectacle plane neutrality, a nuance examinations use to test correction plane understanding.",
+   "say": "Unequal perceived size follows spectacle correction more than contact correction clinically. Clear separate acuity with fusion failure gives the symptomatic pattern. Correction plane gives size equalisation differences.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spectacle correction in anisometropia",
+     "points": [
+      "Unequal magnification by power",
+      "Aniseikonia symptoms possible",
+      "Simple and cheap"
+     ]
+    },
+    "right": {
+     "title": "Contact correction",
+     "points": [
+      "Minimal size difference",
+      "Better fusion in large gaps",
+      "Hygiene responsibilities added"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Amblyopia prevention in anisometropic children pairs full correction with occlusion or penalisation of the better eye during visual critical periods. Late detection after about eight years recovers less, so preschool screening by refraction or photoscreening carries the public health weight. **Equal acuity** at presentation never excludes anisometropia because each eye is charted separately only in formal testing.",
+   "say": "Full correction together with occlusion gives amblyopia prevention in critical periods of visual development. Preschool screening gives detection before recovery potential declines significantly with age. Casual binocular vision gives hiding of unilateral amblyopia completely in children.",
+   "vis": {
+    "kind": "table",
+    "title": "Anisometropia actions by age",
+    "cols": [
+     "Age finding",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Preschool difference found",
+      "Correct fully, occlude better eye"
+     ],
+     [
+      "School age difference",
+      "Correct, limited occlusion trial"
+     ],
+     [
+      "Adult difference",
+      "Contacts for fusion comfort"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Presbyopic adds are prescribed by working distance: closer habitual work needs stronger addition at same age, musicians and dentists differing from readers. Overplussing near adds steals distance through bifocal segment and shrinks working range, complained as in between blur. **Task analysis** therefore precedes add number, occupational history being refraction data in this age group.",
+   "say": "Working distance gives addition strength at any given age clinically. Occupational task analysis is therefore refraction data in presbyopes. Overplussing gives in between blur complaints.",
+   "vis": null
+  },
+  {
+   "tx": "Anchors: unequal eyes amblyope children, stiff lens presbyopes adults, streak reflex refracts without answers. Contacts equalise size, cycloplegia reveals truth in children and adds follow task distance. **Critical period** timing decides whether correction restores vision or merely focuses a permanently amblyopic eye.",
+   "say": "Unequal refraction gives childhood amblyopia without symptoms in many cases. Streak neutralisation gives objective refraction at every age reliably. Critical period timing gives recovery potential decisions.",
+   "vis": {
+    "kind": "table",
+    "title": "Refraction anchors two",
+    "cols": [
+     "Concept",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Anisometropia risk",
+      "Silent amblyopia in worse eye"
+     ],
+     [
+      "Presbyopia cause",
+      "Lens stiffening, amplitude falls"
+     ],
+     [
+      "Retinoscopy value",
+      "Objective, no responses needed"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Anisometropia danger",
+   "b": "Silent amblyopia in the more ametropic eye of children; correct fully and occlude during critical period."
+  },
+  {
+   "f": "Retinoscopy principle",
+   "b": "Neutralise streak reflex movement with lenses, subtract working distance; objective at all ages."
+  },
+  {
+   "f": "Presbyopia mechanism",
+   "b": "Lens stiffening loses accommodation after forty; adds follow age and working distance."
+  }
+ ],
+ "keys": [
+  "Contacts minimise aniseikonia over spectacles",
+  "Cycloplegic retinoscopy is paediatric backbone",
+  "Adds are prescribed by task, not age alone"
+ ]
+}

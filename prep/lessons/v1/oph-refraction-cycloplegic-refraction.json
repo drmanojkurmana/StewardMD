@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "id": "oph-refraction-cycloplegic-refraction",
+ "subject": "ophthalmology",
+ "module": "oph-refraction",
+ "title": "Cycloplegic Refraction, Cross Cylinder and LASIK",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Cycloplegic refraction** paralyses accommodation pharmacologically so retinoscopy reveals total refractive error including latent hypermetropia hidden by ciliary tone. It is mandatory in children, esotropia assessment, latent hypermetropes and fluctuating pseudomyopia. Agent choice balances depth and duration against age and iris pigmentation, stronger and longer agents suiting young or dark irides and accommodative squint workup.",
+   "say": "Accommodation paralysis gives revelation of total error including latent hypermetropia accurately. Children and squint assessment need cycloplegia in standard practice. Agent depth follows age and pigmentation.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Anterior segment with ciliary body relevant to cycloplegic drug action.",
+    "caption": "Ciliary action in cycloplegia. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Jackson cross cylinder** refines astigmatism by flipping a paired plus minus cylinder before the eye, asking which position clears vision better to adjust axis then power in sequence. Axis refinement precedes power because axis error degrades power testing validity. The test needs cooperative subjective responses, so objective retinoscopy still leads in children even where cross cylinder finishes adult prescriptions elegantly.",
+   "say": "Flipping paired cylinders gives refinement of axis followed by power subjectively. Axis accuracy gives validity to subsequent power testing. Cooperative adults suit subjective finishing best.",
+   "vis": {
+    "kind": "table",
+    "title": "Subjective refinement order",
+    "cols": [
+     "Order",
+     "Test"
+    ],
+    "rows": [
+     [
+      "First",
+      "Best sphere by acuity"
+     ],
+     [
+      "Second",
+      "Cross cylinder axis refinement"
+     ],
+     [
+      "Third",
+      "Cross cylinder power, balance eyes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Contact lenses** correct at corneal plane, widening field, minimising size distortion and suiting irregular corneas in rigid designs, at cost of infection, hypoxia and handling demands. Microbial keratitis risk, though small daily, dominates counselling because it blinds faster than any spectacle complication. Lens candidacy therefore screens hygiene behaviour, occupation water exposure and follow up reliability explicitly.",
+   "say": "Corneal plane correction gives field and size advantages over spectacles clinically. Infection risk gives the dominant counselling burden in lens fitting. Behaviour screening gives candidacy assessment additionally.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spectacles",
+     "points": [
+      "Safe, no infection risk",
+      "Size distortion in high powers",
+      "Field limited by frame"
+     ]
+    },
+    "right": {
+     "title": "Contact lenses",
+     "points": [
+      "Corneal plane, wide field",
+      "Suits irregular corneas rigid",
+      "Keratitis risk needs hygiene"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**LASIK** reshapes corneal stroma beneath an epithelial stromal flap to correct myopia, hypermetropia and astigmatism within limits set by corneal thickness and residual bed safety. Excimer ablation removes tissue by dioptre and optical zone formulas, deeper for higher corrections. Preoperative topography, pachymetry and tear assessment exclude keratoconus and dry eye that convert good candidates into poor outcomes.",
+   "say": "Stromal reshaping under a flap gives correction within thickness safety limits. Preoperative topography gives exclusion of keratoconus before surgery. Residual bed thickness gives safety boundary.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-angle-closure-glaucoma-fig1.webp",
+    "alt": "Corneal anterior segment cross section relevant to refractive corneal surgery.",
+    "caption": "Corneal anatomy in refractive surgery. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Residual stromal bed and percentage tissue altered calculations protect against postoperative ectasia, the progressive corneal steepening that mimics keratoconus after surgery. Stable refraction for a year, adequate thickness and normal topography are non negotiable gates. **Ectasia risk** counselling names this complication specifically because it may need cross linking or transplantation despite initially perfect acuity.",
+   "say": "Residual bed calculations give protection against postoperative ectasia development surgically. Stable refraction with normal topography gives candidate gating. Ectasia counselling is specific in consent.",
+   "vis": {
+    "kind": "flow",
+    "title": "Refractive surgery gating",
+    "nodes": [
+     {
+      "id": "stable",
+      "label": "Stable refraction documented"
+     },
+     {
+      "id": "topo",
+      "label": "Topography and thickness normal"
+     },
+     {
+      "id": "bed",
+      "label": "Residual bed calculation safe"
+     },
+     {
+      "id": "proceed",
+      "label": "Proceed with consent on ectasia"
+     }
+    ],
+    "edges": [
+     [
+      "stable",
+      "topo"
+     ],
+     [
+      "topo",
+      "bed"
+     ],
+     [
+      "bed",
+      "proceed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cycloplegic agent teaching separates duration: short agents for routine adult latent checks, intermediate for children, longest for accommodative esotropia and young dark irides needing full relaxation. Post test counselling warns blur and photophobia duration honestly by agent chosen. **Longest acting agents** suit squint cycloplegia where incomplete relaxation falsely preserves the deviation driving error.",
+   "say": "Agent duration gives matching to clinical question depth in cycloplegic refraction assessment. Longest action is suited to accommodative squint assessment in young children. Duration counselling gives honest blur expectations to families.",
+   "vis": {
+    "kind": "table",
+    "title": "Cycloplegia depth by scenario",
+    "cols": [
+     "Scenario",
+     "Depth needed"
+    ],
+    "rows": [
+     [
+      "Adult latent check",
+      "Short acting relaxation"
+     ],
+     [
+      "Child routine refraction",
+      "Intermediate relaxation"
+     ],
+     [
+      "Accommodative esotropia",
+      "Full longest relaxation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prescription after cycloplegia is not the cycloplegic number copied blindly: post cycloplegic subjective acceptance, age and squint status modify plus prescribed, full plus for accommodative esotropia, trimmed plus for routine wear. Copying raw numbers gives overplussing blur in non squint children classically. **Post cycloplegic test** days later converts laboratory refraction into wearable prescription safely.",
+   "say": "Wearable prescription gives modification of raw cycloplegic numbers by acceptance testing afterward. Full plus correction is suited to accommodative squint specifically in children. Raw copying gives overplussing blur classically in routine wear.",
+   "vis": {
+    "kind": "table",
+    "title": "Post cycloplegic prescribing",
+    "cols": [
+     "Case",
+     "Plus decision"
+    ],
+    "rows": [
+     [
+      "Accommodative squint",
+      "Full plus prescribed"
+     ],
+     [
+      "Routine child wear",
+      "Trimmed plus accepted"
+     ],
+     [
+      "Adult latent",
+      "Subjective acceptance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Refractive surgery alternatives divide by tissue: corneal ablation for moderate errors in thick corneas, surface ablation where flap risk matters, lens based surgery for extreme errors or early lens change. Age near presbyopia adds monovision counselling to every option. **No procedure** reverses presbyopia permanently, a consent sentence examinations expect verbatim in spirit.",
+   "say": "Tissue based alternatives give options by error size and corneal thickness together. Presbyopia counselling accompanies every option near forty years. Permanent presbyopia reversal is unavailable currently.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Corneal procedures",
+     "points": [
+      "Moderate errors, thick cornea",
+      "Flap or surface variants",
+      "Ectasia screened carefully"
+     ]
+    },
+    "right": {
+     "title": "Lens based procedures",
+     "points": [
+      "Extreme errors or lens change",
+      "Phakic implant or lens exchange",
+      "Retinal and pressure risks differ"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Anchors: cycloplegia reveals latent, cross cylinder refines axis before power, corneal surgery respects residual bed. Children copy no raw numbers, ectasia consent is specific and presbyopia survives every laser. **Stability first** is the gate that protects candidates from operating on still progressing myopia.",
+   "say": "Latent revelation gives cycloplegia its paediatric value in refraction practice. Residual bed respect gives corneal surgery its safety boundary. Stability documentation gives candidate protection.",
+   "vis": {
+    "kind": "table",
+    "title": "Refinement anchors",
+    "cols": [
+     "Tool",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Cycloplegia",
+      "Reveals latent hypermetropia"
+     ],
+     [
+      "Cross cylinder",
+      "Axis before power"
+     ],
+     [
+      "Corneal laser",
+      "Respect residual bed"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Cycloplegia mandatory cases",
+   "b": "Children, esotropia workup, latent hypermetropia and pseudomyopia fluctuation."
+  },
+  {
+   "f": "Jackson cross cylinder order",
+   "b": "Refine cylinder axis first, then power, by flip preference responses."
+  },
+  {
+   "f": "LASIK safety gate",
+   "b": "Stable refraction, normal topography and safe residual stromal bed; ectasia is the consented risk."
+  }
+ ],
+ "keys": [
+  "Raw cycloplegic numbers are not wearable prescriptions",
+  "Keratoconus excludes corneal ablation",
+  "No laser reverses presbyopia permanently"
+ ]
+}

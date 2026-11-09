@@ -1,0 +1,207 @@
+{
+ "v": 1,
+ "id": "oph-lacrimal-dry-eye",
+ "subject": "ophthalmology",
+ "module": "oph-lacrimal",
+ "title": "Dry Eye and Lacrimal Assessment",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Dry eye** is tear film failure from aqueous deficiency, evaporative meibomian loss or both, producing burning, fluctuating vision, reflex watering paradox and punctate corneal staining. Tear film layers lipid, aqueous and mucin fail by different glands, so treatment follows layer diagnosis rather than generic drops. Visual fluctuation clearing with blink is the history phrase that separates film instability from fixed media opacity.",
+   "say": "Tear failure gives burning with fluctuating vision and reflex watering paradoxically. Layer diagnosis gives treatment direction beyond generic drops. Blink clearing gives film instability separation.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Anterior eye diagram with tear film and lacrimal gland orientation.",
+    "caption": "Tear film and gland orientation. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Schirmer test** measures aqueous production by filter paper wetting in lower fornix over five minutes, with anaesthesia isolating basal secretion in modified form. Low wetting supports aqueous deficiency but variability limits single test diagnosis, so it sits inside a test battery. Reflex tearing from irritation falsely normalises unanaesthetised strips in early disease, a caveat examinations quote.",
+   "say": "Paper wetting gives aqueous production measurement over five minutes in fornix. Variability gives single test limits needing battery context. Reflex tearing gives false normalisation caveat.",
+   "vis": {
+    "kind": "table",
+    "title": "Dry eye test battery",
+    "cols": [
+     "Test",
+     "Measures"
+    ],
+    "rows": [
+     [
+      "Schirmer strip",
+      "Aqueous production volume"
+     ],
+     [
+      "Breakup time",
+      "Film stability seconds"
+     ],
+     [
+      "Staining pattern",
+      "Surface damage distribution"
+     ],
+     [
+      "Meibomian expression",
+      "Evaporative gland function"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tear film breakup time** times first dry spot after blink under vital dye, shortened below about ten seconds in film instability from lipid or mucin failure. It tests stability where Schirmer tests volume, pairing quantity with quality in assessment. Rose bengal classically stains devitalised cells and mucin deficiency zones, modern lissamine alternatives staining similar damage with less sting.",
+   "say": "Breakup timing gives film stability measurement under dye in seconds during clinic assessment together. Volume and stability pairing gives complete tear assessment beyond single numbers. Surface staining gives damage distribution mapping for cause.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aqueous deficient pattern",
+     "points": [
+      "Low Schirmer wetting",
+      "Gland or autoimmune cause",
+      "Volume replacement focus"
+     ]
+    },
+    "right": {
+     "title": "Evaporative pattern",
+     "points": [
+      "Short breakup time",
+      "Meibomian dysfunction cause",
+      "Lid and lipid focus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Congenital nasolacrimal duct obstruction** leaves infant watering and discharge from failed canalisation at Hasner valve, most resolving by one year with sac massage and hygiene. Crigler massage compresses sac to rupture the membrane hydrostatically, technique taught to parents at first visit. Persistent, bilateral atypical or syndromic cases probe earlier than routine one year thresholds.",
+   "say": "Failed canalisation gives infant watering together with discharge in congenital duct obstruction characteristically. Sac massage gives membrane rupture technique for parents at home. Persistence beyond infancy gives probing timing decisions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/orbital-disease-proptosis-thyroid-fig1.webp",
+    "alt": "Orbit diagram with lacrimal drainage region relevant to infant duct obstruction.",
+    "caption": "Lacrimal drainage region. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Crigler massage** direction matters: firm stroke downward over sac along nose, repeated in sets daily, empties sac and pressures distal membrane, upward rubbing merely moving contents without effect. Acute dacryocystitis in infants overrides massage with antibiotics and urgent referral because neonatal sac infection spreads. Massage failure by about one year earns probing under anaesthesia with high first success.",
+   "say": "Downward sac stroke gives hydrostatic membrane pressure in massage technique correctly. Infant sac infection gives antibiotic priority over massage. Probing gives high first success afterward.",
+   "vis": {
+    "kind": "flow",
+    "title": "Infant watering pathway",
+    "nodes": [
+     {
+      "id": "mass",
+      "label": "Massage and hygiene first year"
+     },
+     {
+      "id": "rev",
+      "label": "Review resolution by one year"
+     },
+     {
+      "id": "probe",
+      "label": "Probe if persistent"
+     },
+     {
+      "id": "tube",
+      "label": "Tube or bypass if failed"
+     }
+    ],
+    "edges": [
+     [
+      "mass",
+      "rev"
+     ],
+     [
+      "rev",
+      "probe"
+     ],
+     [
+      "probe",
+      "tube"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adult dry eye drivers include autoimmune lacrimal destruction in Sjogren disease, medication anticholinergic load, screen blink suppression and post refractive surface change, each needing driver review before escalating drops. Punctal plugs conserve tears after inflammation controlled, plugging an inflamed eye worsening cytokine retention. **Sequence** anti inflammation before conservation is the prescribing nuance examinations test.",
+   "say": "Driver review gives dry eye assessment beyond drop escalation in adults routinely. Inflammation control gives sequence before punctal conservation safely. Medication load review accompanies testing.",
+   "vis": {
+    "kind": "table",
+    "title": "Dry eye driver review",
+    "cols": [
+     "Driver",
+     "Response"
+    ],
+    "rows": [
+     [
+      "Meibomian dysfunction",
+      "Lid hygiene backbone"
+     ],
+     [
+      "Autoimmune deficiency",
+      "Anti inflammation, systemic review"
+     ],
+     [
+      "Drug and screen load",
+      "Modify contributors"
+     ],
+     [
+      "Post surgical surface",
+      "Film rehabilitation plan"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Staining topography reads cause: inferior exposure staining in lagophthalmos, interpalpebral in evaporative disease, superior in vernal or contact lens related patterns. Distribution therefore directs treatment like a map rather than grading severity alone. **Filamentary keratitis** threads of mucus and epithelium on cornea mark severe aqueous deficiency needing filament removal and intensive lubrication.",
+   "say": "Stain distribution together gives cause direction like a map in dry eye assessment at the slit lamp. Inferior staining pattern gives exposure mechanism clue in lagophthalmos disease. Filament formation gives severe deficiency marking clinically.",
+   "vis": null
+  },
+  {
+   "tx": "Anchors: volume Schirmer, stability breakup, drainage infant massage. Layers decide drops, drivers decide escalation, sequence decides plugs. Watering in dry eye is reflex paradox, watering in infants is drainage failure, same symptom opposite systems. **Test battery** beats any single number in tear film diagnosis.",
+   "say": "Volume and stability pairing gives tear diagnosis beyond single numbers reliably. Infant watering gives drainage failure contrast with dry eye paradox. Battery testing gives assessment standard.",
+   "vis": {
+    "kind": "table",
+    "title": "Watering separation",
+    "cols": [
+     "Watering type",
+     "System failing"
+    ],
+    "rows": [
+     [
+      "Dry eye reflex watering",
+      "Film quality, overflows poor tears"
+     ],
+     [
+      "Infant duct watering",
+      "Drainage canalisation failed"
+     ],
+     [
+      "Ectropion watering",
+      "Punctum everted, patent system"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Schirmer versus breakup time",
+   "b": "Schirmer measures aqueous volume; breakup time measures film stability in seconds."
+  },
+  {
+   "f": "Crigler massage technique",
+   "b": "Firm downward sac strokes daily to rupture Hasner membrane; most infant obstruction resolves by one year."
+  },
+  {
+   "f": "Plug sequence rule",
+   "b": "Control surface inflammation before punctal plugs conserve tears."
+  }
+ ],
+ "keys": [
+  "Dry eye watering is reflex paradox",
+  "Stain distribution maps the cause",
+  "Infant watering probes after one year"
+ ]
+}

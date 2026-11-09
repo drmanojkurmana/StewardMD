@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "id": "oph-refraction-myopia",
+ "subject": "ophthalmology",
+ "module": "oph-refraction",
+ "title": "Myopia, Hypermetropia and Astigmatism",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Myopia** is short sight where parallel light focuses in front of the retina because the eye is too long axially or too powerful optically, corrected by concave diverging lenses. Distance blur with clear near vision and squinting gives the school presentation. Each millimetre of axial elongation adds roughly three dioptres of myopia in teaching approximation used for progression counselling.",
+   "say": "Short sight is present when parallel light has focus in front of the retina. Distance blur with clear near vision therefore gives the typical school presentation. Concave diverging lenses give correction of the refractive error.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Ocular cross section with axial length and lens position relevant to refractive errors.",
+    "caption": "Axial anatomy behind refractive error. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Pathological myopia** is degenerative elongation beyond simple refraction, with posterior staphyloma, chorioretinal atrophy, lacquer cracks, macular haemorrhage and high detachment or glaucoma risk. High myopia beyond minus six dioptres or axial length beyond twenty six millimetres enters surveillance territory. Correction alone never completes care because structural complications blind independently of glasses strength.",
+   "say": "Degenerative elongation gives structural complications beyond simple refractive blur in pathological myopia. Posterior staphyloma with macular atrophy therefore gives independent blindness risk. Surveillance is needed in addition to optical correction.",
+   "vis": {
+    "kind": "table",
+    "title": "Simple versus pathological myopia",
+    "cols": [
+     "Feature",
+     "Distinction"
+    ],
+    "rows": [
+     [
+      "Simple myopia",
+      "Refractive only, healthy fundus"
+     ],
+     [
+      "Pathological myopia",
+      "Staphyloma, atrophy, macular risk"
+     ],
+     [
+      "Care",
+      "Correction plus fundus surveillance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypermetropia** is long sight where light focuses behind the retina in a short eye, corrected by convex converging lenses, with young patients accommodating through blur until asthenopia or accommodative esotropia declares it. Total hypermetropia splits into latent revealed only by cycloplegia and manifest accepted without it. Children with esotropia therefore need full cycloplegic refraction before any squint surgery planning.",
+   "say": "Long sight is present when light has focus behind the retina in a short eye. Young patients give compensation through accommodation until strain or squint declares it. Cycloplegic refraction is needed before squint surgery planning.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Myopia pattern",
+     "points": [
+      "Focus in front of retina",
+      "Distance blur, near clear",
+      "Concave lens correction"
+     ]
+    },
+    "right": {
+     "title": "Hypermetropia pattern",
+     "points": [
+      "Focus behind retina",
+      "Accommodation masks blur",
+      "Convex lens correction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Astigmatism** is unequal corneal or lens curvature giving two focal lines instead of a point, with regular forms correctable by cylindrical lenses at an axis. With the rule astigmatism steepens vertical meridian in youth, against the rule steepens horizontal with age, and irregular astigmatism from scar or keratoconus needs rigid contact optics. Retinoscopy reflex behaviour gives the axis before subjective refinement confirms it.",
+   "say": "Unequal curvature gives two focal lines instead of a single point focus. Cylindrical lenses at a measured axis give correction of regular astigmatism. Irregular corneal disease needs rigid contact optics instead.",
+   "vis": {
+    "kind": "table",
+    "title": "Astigmatism forms",
+    "cols": [
+     "Form",
+     "Correction"
+    ],
+    "rows": [
+     [
+      "Regular",
+      "Cylindrical lens at axis"
+     ],
+     [
+      "With the rule youth",
+      "Vertical steep meridian"
+     ],
+     [
+      "Irregular scar",
+      "Rigid contact optics"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Correction prescribing balances acuity, comfort and binocular status rather than retinoscopy numbers alone, undercorrecting myopia debates aside. Children need amblyopia prevention dosing, adults need occupational and night driving review. **Contact lens** wear adds hygiene and infection responsibilities that glasses never impose, so candidacy assessment includes behaviour as much as refraction values.",
+   "say": "Prescribing is based on acuity together with comfort and binocular status clinically. Children need amblyopia prevention in dosing decisions always. Contact wear gives infection responsibilities beyond refraction values.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-angle-closure-glaucoma-fig1.webp",
+    "alt": "Anterior eye cross section with cornea and lens power relevant to refractive correction.",
+    "caption": "Corneal and lens power anatomy. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Myopia control in progressing children uses optical defocus designs and low dose antimuscarinic drop therapy in specialist programmes to slow axial elongation, distinct from mere correction. Outdoor time association and near work counselling accompany optical strategies without proven drug free substitutes. **Progression documentation** by serial refraction and axial length decides escalation, not single visit alarm.",
+   "say": "Progression control gives slowing of axial elongation beyond mere optical correction in children. Serial refraction together with axial length gives documentation for escalation decisions. Outdoor time counselling accompanies optical strategies in programmes.",
+   "vis": {
+    "kind": "flow",
+    "title": "Progressing childhood myopia pathway",
+    "nodes": [
+     {
+      "id": "doc",
+      "label": "Document progression serially"
+     },
+     {
+      "id": "opt",
+      "label": "Defocus optics or drops programme"
+     },
+     {
+      "id": "axial",
+      "label": "Track axial length yearly"
+     },
+     {
+      "id": "fund",
+      "label": "Surveil fundus for degeneration"
+     }
+    ],
+    "edges": [
+     [
+      "doc",
+      "opt"
+     ],
+     [
+      "opt",
+      "axial"
+     ],
+     [
+      "axial",
+      "fund"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Night myopia, pseudomyopia from accommodative spasm and index myopia from nuclear cataract mimic true axial progression and each reverses differently. Cycloplegia unmasks spasm, lens examination finds index shift, and dark focus explains night blur without prescription change. **Age of onset** plus family pattern still gives the first sort between physiological school myopia and syndromic high myopia needing systemic review.",
+   "say": "Accommodative spasm and lens index change give mimicry of true axial progression clinically. Cycloplegia gives unmasking of spasm during assessment accurately. Lens examination gives the index shift explanation instead.",
+   "vis": {
+    "kind": "table",
+    "title": "Myopia mimics",
+    "cols": [
+     "Mimic",
+     "Test"
+    ],
+    "rows": [
+     [
+      "Pseudomyopia spasm",
+      "Cycloplegic refraction normalises"
+     ],
+     [
+      "Index myopia",
+      "Nuclear cataract on lens exam"
+     ],
+     [
+      "Night myopia",
+      "Dark focus history, normal exam"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Refractive examination sequence is acuity, pinhole, retinoscopy, subjective refinement and binocular balance before prescribing, with cycloplegia substituted in children and latent hypermetropes. Skipping objective refraction in children is the commonest prescribing error source in examinations. **Jackson cross cylinder** refinement of cylinder axis and power belongs to the next lesson in detail.",
+   "say": "Objective refraction gives the starting point before subjective refinement in sequence. Children need cycloplegia as substitution for unreliable subjective responses. Prescribing follows binocular balance assessment always.",
+   "vis": null
+  },
+  {
+   "tx": "Anchors: front focus concave, behind focus convex, two lines cylindrical. Pathological elongation surveils fundus, childhood squint cyclopleges first and progressing myopia tracks axial length. **Dioptre** is reciprocal focal length in metres, the unit every prescription and trial lens in this module shares.",
+   "say": "Focal position gives lens choice in every refractive error pattern simply. Pathological elongation needs fundus surveillance beyond correction alone always. Axial tracking gives progression decisions in children.",
+   "vis": {
+    "kind": "table",
+    "title": "Refractive anchors",
+    "cols": [
+     "Error",
+     "Lens"
+    ],
+    "rows": [
+     [
+      "Myopia, focus front",
+      "Concave diverging"
+     ],
+     [
+      "Hypermetropia, focus behind",
+      "Convex converging"
+     ],
+     [
+      "Astigmatism, two lines",
+      "Cylindrical at axis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Pathological myopia threshold teaching",
+   "b": "Beyond minus six dioptres or twenty six millimetres axial length with degenerative fundus surveillance."
+  },
+  {
+   "f": "Hypermetropia in childhood squint",
+   "b": "Full cycloplegic refraction first; latent component hides without cycloplegia and drives accommodative esotropia."
+  },
+  {
+   "f": "Astigmatism correction",
+   "b": "Regular: cylindrical lens at axis. Irregular scar or keratoconus: rigid contact optics."
+  }
+ ],
+ "keys": [
+  "Front focus concave, behind focus convex",
+  "Correction never completes pathological myopia care",
+  "Children refract under cycloplegia"
+ ]
+}

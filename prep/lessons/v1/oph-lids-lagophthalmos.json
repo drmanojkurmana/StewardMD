@@ -1,0 +1,203 @@
+{
+ "v": 1,
+ "id": "oph-lids-lagophthalmos",
+ "subject": "ophthalmology",
+ "module": "oph-lids",
+ "title": "Lagophthalmos, Blepharophimosis and Lid Tumours",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Lagophthalmos** is incomplete lid closure leaving cornea exposed during blink or sleep, classically from facial nerve palsy, severe proptosis or lid scarring and retraction. Nocturnal exposure ulcerates inferior cornea while Bell phenomenon rolling eye upward protects some patients variably. Lubrication, moisture chambers and taping bridge to tarsorrhaphy or lid loading when palsy persists.",
+   "say": "Incomplete lid closure gives corneal exposure during sleep in lagophthalmos disease affecting the inferior cornea. Facial nerve palsy gives the classic mechanism with ulcer risk overnight. Lubrication gives bridging toward surgical protection in care.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anticholinesterases-and-myasthenia-fig1.webp",
+    "alt": "Eyelid function assessment diagram relevant to closure and ptosis evaluation.",
+    "caption": "Lid closure assessment. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Blepharophimosis** syndrome narrows horizontal fissure with ptosis, epicanthus inversus and telecanthus as congenital lid complex, often needing staged repair sequencing epicanthus before ptosis suspension. Family and ovarian associations in females extend assessment beyond lids in syndromic cases. Amblyopia surveillance runs parallel because bilateral ptosis covers pupils in severe presentations.",
+   "say": "Narrow fissure together with ptosis and epicanthus gives congenital lid syndrome pattern in children characteristically. Staged repair gives sequence of correction before suspension surgery in planning. Amblyopia surveillance accompanies correction planning in childhood.",
+   "vis": {
+    "kind": "table",
+    "title": "Blepharophimosis components",
+    "cols": [
+     "Component",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Blepharophimosis",
+      "Narrow horizontal fissure"
+     ],
+     [
+      "Ptosis",
+      "Poor levator function droop"
+     ],
+     [
+      "Epicanthus inversus",
+      "Fold from lower lid upward"
+     ],
+     [
+      "Telecanthus",
+      "Wide inner canthal distance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Basal cell carcinoma** is commonest malignant lid tumour, a pearly nodule with rolled edge, telangiectasia and central ulcer called rodent ulcer, locally destructive but rarely metastatic. Lower lid and medial canthus dominate, medial lesions threatening lacrimal and orbital depth early. Complete excision with margin control, Mohs technique where available, is curative principle before reconstruction.",
+   "say": "Pearly rolled ulcer gives basal carcinoma pattern on lower lid classically. Local destruction gives threat without usual metastasis. Margin controlled excision gives cure principle.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/eyelid-disorders-blepharitis-chalazion-fig1.webp",
+    "alt": "Eyelid diagram for orientation to lid tumour sites and margin anatomy.",
+    "caption": "Lid tumour site orientation. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Sebaceous gland carcinoma** arises from meibomian or Zeis glands in elderly, masquerading as recurrent chalazion or unilateral blepharitis while spreading pagetoid through conjunctiva and metastasising to nodes. Lash loss, margin thickening and same site recurrence are its betrayals. Map biopsies stage conjunctival spread before definitive wide excision and nodal assessment in suspected cases.",
+   "say": "Elderly masquerade as chalazion gives sebaceous carcinoma its danger in practice. Lash loss with margin thickening gives betrayal signs. Map biopsy gives spread staging.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Basal cell carcinoma",
+     "points": [
+      "Pearly rolled ulcer edge",
+      "Locally destructive, rare spread",
+      "Margin control excision"
+     ]
+    },
+    "right": {
+     "title": "Sebaceous carcinoma",
+     "points": [
+      "Masquerades as chalazion",
+      "Pagetoid spread, nodal spread",
+      "Map biopsies, wide excision"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Exposure management escalates by corneal state: lubricants and taping for intact cornea, bandage lens or moisture chamber for epithelial breakdown, tarsorrhaphy for ulcer or impending perforation. Gold weight loading or palpebral springs restore blink dynamics in permanent palsy electively. **Bell phenomenon** grading predicts who tolerates observation because upward roll covers cornea despite open fissure during sleep.",
+   "say": "Corneal state gives exposure escalation from lubricants to tarsorrhaphy stepwise. Upward roll gives protection grading in palsy assessment. Permanent palsy gives loading options electively.",
+   "vis": {
+    "kind": "flow",
+    "title": "Exposure escalation",
+    "nodes": [
+     {
+      "id": "lub",
+      "label": "Lubricate, tape, chamber"
+     },
+     {
+      "id": "lens",
+      "label": "Bandage lens if breakdown"
+     },
+     {
+      "id": "tars",
+      "label": "Tarsorrhaphy if ulcer threatens"
+     },
+     {
+      "id": "load",
+      "label": "Lid loading if permanent"
+     }
+    ],
+    "edges": [
+     [
+      "lub",
+      "lens"
+     ],
+     [
+      "lens",
+      "tars"
+     ],
+     [
+      "tars",
+      "load"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Medial canthal tumours deserve disproportionate respect because lacrimal sac, ethmoid and orbit lie millimetres deep to skin that looks resectable superficially. Imaging precedes excision there, and sac involvement changes margins and reconstruction. **Frozen section** or staged margin control prevents positive margin reoperations in cosmetically and functionally dense tissue.",
+   "say": "Medial canthal depth gives disproportionate respect to tumours in surgical planning near the sac. Imaging assessment precedes excision near lacrimal drainage structures always in practice. Margin control gives prevention of reoperation in dense tissue.",
+   "vis": {
+    "kind": "table",
+    "title": "Medial tumour precautions",
+    "cols": [
+     "Precaution",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Imaging first",
+      "Sac and orbit depth"
+     ],
+     [
+      "Margin control",
+      "Avoid positive margins"
+     ],
+     [
+      "Sac involvement",
+      "Changes reconstruction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Squamous carcinoma and keratoacanthoma occupy the sun damaged elderly lid spectrum between benign papilloma and basal carcinoma, faster growing and nodal capable for squamous disease. Actinic damage field explains multiple sequential lid tumours in fair skinned outdoor workers. **Sun field** review therefore examines both lids and face, not the presenting nodule alone.",
+   "say": "Sun damage field gives multiple sequential tumours in fair skinned outdoor workers over years. Squamous growth gives nodal capability beyond basal cell behaviour in spread. Whole field review is part of nodule care in clinic.",
+   "vis": {
+    "kind": "table",
+    "title": "Lid malignancy anchors",
+    "cols": [
+     "Tumour",
+     "Anchor"
+    ],
+    "rows": [
+     [
+      "Basal cell",
+      "Commonest, pearly rolled, local"
+     ],
+     [
+      "Sebaceous",
+      "Masquerade, pagetoid, nodal"
+     ],
+     [
+      "Squamous",
+      "Faster, nodal capable, sun field"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: closure failure exposes, fissure syndrome stages, pearly ulcer basals and masquerade sebaceous kills by delay. Exposure escalates by cornea, medial tumours image first and elderly recurrence biopsies always. **Margin control** is the curative variable every lid cancer operation is judged by at follow up.",
+   "say": "Closure failure together gives exposure risk while tumour pattern gives biopsy urgency in elderly lids always. Corneal state gives exposure escalation in stepwise surgical planning. Margin control gives cure assessment at follow up.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Lagophthalmos danger and bridge",
+   "b": "Exposure ulcer from incomplete closure, usually facial palsy; lubricate and tape, tarsorrhaphy if ulcer threatens."
+  },
+  {
+   "f": "Sebaceous carcinoma masquerade",
+   "b": "Recurrent chalazion or unilateral blepharitis in elderly with lash loss; map biopsies and wide excision."
+  },
+  {
+   "f": "Blepharophimosis tetrad",
+   "b": "Narrow fissure, ptosis, epicanthus inversus and telecanthus needing staged repair."
+  }
+ ],
+ "keys": [
+  "Basal cell is commonest lid malignancy",
+  "Medial canthal tumours image before excision",
+  "Bell phenomenon grades exposure tolerance"
+ ]
+}

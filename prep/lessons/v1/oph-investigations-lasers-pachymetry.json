@@ -1,0 +1,189 @@
+{
+ "v": 1,
+ "id": "oph-investigations-lasers-pachymetry",
+ "subject": "ophthalmology",
+ "module": "oph-investigations-lasers",
+ "title": "Pachymetry, Specular Microscopy and Ophthalmic Lasers",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Pachymetry** measures central corneal thickness by ultrasound or optical methods, correcting pressure interpretation because thick corneas overread and thin corneas underread applanation values. Thin corneas also flag ectasia risk and glaucoma progression risk independently. Refractive surgery consumes thickness by ablation, so preoperative pachymetry gates candidacy with residual bed maths from the refraction module.",
+   "say": "Thickness measurement gives pressure correction and ectasia risk information clinically. Thin corneas give underreading of applanation pressure values. Surgery gating needs thickness maths always.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-angle-closure-glaucoma-fig1.webp",
+    "alt": "Corneal anterior segment section relevant to thickness measurement and pressure interpretation.",
+    "caption": "Corneal thickness and pressure logic. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Specular microscopy** counts corneal endothelial cells and grades their size and shape variation, predicting corneal tolerance to intraocular surgery. Counts fall with age and Fuchs dystrophy, low counts warning of postoperative decompensation needing endothelial transplant planning. It quantifies the neural crest monolayer from embryology lessons as a surgical safety number.",
+   "say": "Endothelial cell counting gives surgical tolerance prediction before intraocular procedures in clinic routinely. Low cell counts give decompensation warning after cataract surgery in vulnerable corneas. The embryology monolayer is therefore a surgical safety number.",
+   "vis": {
+    "kind": "table",
+    "title": "Corneal measurement pair",
+    "cols": [
+     "Test",
+     "Predicts"
+    ],
+    "rows": [
+     [
+      "Pachymetry",
+      "Pressure correction, ectasia risk"
+     ],
+     [
+      "Specular microscopy",
+      "Endothelial surgical tolerance"
+     ],
+     [
+      "Topography tomography",
+      "Shape and ectasia screening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nd:YAG laser** photodisrupts tissue by plasma formation at focus, cutting posterior capsule opacification and peripheral iris for pressure equalisation without incisions. Its two classic uses, capsulotomy and iridotomy, share physics and differ only by target tissue. Energy minimisation and lens protection govern technique because pitting implants and pressure spikes follow careless application.",
+   "say": "Photodisruption gives incision free cutting of capsule and iris by plasma focus. Target tissue gives difference between classic uses. Energy discipline gives implant protection.",
+   "vis": {
+    "kind": "table",
+    "title": "YAG targets",
+    "cols": [
+     "Target",
+     "Indication"
+    ],
+    "rows": [
+     [
+      "Posterior capsule",
+      "Opacification after cataract"
+     ],
+     [
+      "Peripheral iris",
+      "Angle closure equalisation"
+     ],
+     [
+      "Energy rule",
+      "Minimum effective, protect lens"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Argon laser** photocoagulates by thermal burn, sealing retinal tears, ablating ischaemic retina in diabetes and venous occlusion, and treating trabecular meshwork in older trabeculoplasty technique. Retinal burns trade peripheral tissue for central preservation, a bargain explained explicitly in proliferative disease consent. Wavelength absorption by pigment and haemoglobin decides target selectivity.",
+   "say": "Thermal photocoagulation gives sealing of tears and ischaemic retina ablation therapeutically. Peripheral sacrifice gives central preservation in proliferative disease. Pigment absorption gives target selectivity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/age-related-macular-degeneration-fig1.webp",
+    "alt": "Macular cross sections relevant to laser treatment planning in retinal disease.",
+    "caption": "Retinal laser planning anatomy. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Excimer laser** photoablates corneal stroma with ultraviolet precision submicron per pulse, the engine of LASIK and surface ablation in refraction lessons. **Femtosecond laser** photodisrupts at near infrared to cut flaps, lenticules and cataract steps with programmable geometry. Laser families therefore map by interaction: ablation removes, coagulation burns, disruption cuts, each wavelength tissue pair deliberate.",
+   "say": "Ultraviolet ablation gives corneal reshaping precision in refractive procedures surgically. Near infrared disruption gives programmable cutting of flaps and lens steps. Interaction type gives laser family mapping.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Photocoagulation argon",
+     "points": [
+      "Thermal burn mechanism",
+      "Retina and meshwork targets",
+      "Seals and ablates tissue"
+     ]
+    },
+    "right": {
+     "title": "Photodisruption YAG and femto",
+     "points": [
+      "Plasma cutting mechanism",
+      "Capsule, iris, flap targets",
+      "Cuts without heat spread"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Laser safety teaching pairs eye protection by wavelength glasses with controlled environments because every ophthalmic laser is also a staff hazard. Retinal hazard ranges differ by wavelength, excimer injuring cornea superficially while near infrared reaches retina silently. **Wavelength specific** goggles, not generic shields, are the consented standard in laser rooms.",
+   "say": "Wavelength specific protection gives staff safety in controlled laser environments during clinical work. Hazard depth differs by wavelength across the devices in ophthalmic use. Specific goggles give the standard protection for rooms.",
+   "vis": {
+    "kind": "table",
+    "title": "Laser interaction map",
+    "cols": [
+     "Laser",
+     "Interaction and use"
+    ],
+    "rows": [
+     [
+      "Excimer ultraviolet",
+      "Ablation, corneal reshaping"
+     ],
+     [
+      "Argon visible",
+      "Coagulation, retina sealing"
+     ],
+     [
+      "YAG infrared",
+      "Disruption, capsule and iris cutting"
+     ],
+     [
+      "Femtosecond",
+      "Disruption, flap and lenticule cutting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diode and micropulse variants extend coagulation to subthreshold retinal therapy and ciliary ablation, reducing collateral damage while retaining effect in selected disease. Cyclophotocoagulation by diode deliberately destroys ciliary processes in refractory glaucoma, the ablative endpoint of outflow lesson logic. **Subthreshold** dosing aims biological effect without visible burn, changing follow up from scar watching to function testing.",
+   "say": "Subthreshold variants give effect with reduced collateral damage in selected disease. Ciliary ablation gives refractory glaucoma pressure control destructively. Function testing replaces scar watching afterward.",
+   "vis": null
+  },
+  {
+   "tx": "Measurement and laser summary: pachymetry corrects pressure, specular counts endothelium, lasers ablate, burn or cut by design. Investigation choice follows tissue question, laser choice follows interaction needed. **Numbers before energy** is the module rule, measurements gating every laser firing in safe practice.",
+   "say": "Thickness and cell counting together give measurement gating before any laser energy delivery in patients. Interaction need gives laser family selection during clinical planning always. Measured numbers therefore precede energy in safe practice.",
+   "vis": {
+    "kind": "table",
+    "title": "Module two anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Thin cornea",
+      "Underreads pressure, ectasia risk"
+     ],
+     [
+      "Low endothelium",
+      "Surgical decompensation warning"
+     ],
+     [
+      "Laser rule",
+      "Choose by tissue interaction"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Pachymetry roles",
+   "b": "Corrects applanation pressure reading and flags ectasia and glaucoma risk; gates refractive ablation."
+  },
+  {
+   "f": "YAG laser uses",
+   "b": "Photodisruption for posterior capsulotomy and peripheral iridotomy without incisions."
+  },
+  {
+   "f": "Argon laser role",
+   "b": "Photocoagulation sealing retinal tears and ablating ischaemic retina; older trabeculoplasty."
+  }
+ ],
+ "keys": [
+  "Thick cornea overreads, thin underreads pressure",
+  "Lasers map by ablation, coagulation, disruption",
+  "Measurements gate every laser firing"
+ ]
+}
