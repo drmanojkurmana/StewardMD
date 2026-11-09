@@ -1,0 +1,205 @@
+{
+ "key": "obg-contraception-who-medical-eligibility",
+ "v": 1,
+ "module": "obg-contraception",
+ "subject": "obstetrics-gynaecology",
+ "title": "WHO Medical Eligibility Criteria for Contraceptive Use",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Evidence-based contraceptive prescription utilizes the **WHO medical eligibility criteria**, classifying medical conditions into four distinct safety tiers. Category one indicates no restriction on method use. Category two means advantages outweigh theoretical or proven risks. Category three indicates risks usually outweigh advantages. Category four represents an unacceptable health risk where the method must not be used.",
+   "say": "The WHO medical eligibility criteria classify contraceptive safety into four tiers from unrestricted to prohibited.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "WHO Category",
+     "Clinical Definition",
+     "Practice Recommendation"
+    ],
+    "rows": [
+     [
+      "Category 1",
+      "No restriction whatsoever",
+      "Use method without limitation"
+     ],
+     [
+      "Category 2",
+      "Advantages outweigh theoretical or proven risks",
+      "Generally use the method"
+     ],
+     [
+      "Category 3",
+      "Risks usually outweigh advantages",
+      "Method not recommended unless others unavailable"
+     ],
+     [
+      "Category 4",
+      "Unacceptable health risk",
+      "Method must not be used under any circumstances"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prescribing estrogen-containing contraceptives to women with **severe uncontrolled hypertension** constitutes an absolute category four contraindication. Sustained systolic blood pressure of one hundred and sixty millimeters of mercury or higher, or diastolic pressure of one hundred or higher, combined with estrogen multiplies stroke and myocardial infarction risks, precluding combined pills, patches, and rings.",
+   "say": "Systolic pressure over 160 or diastolic over 100 is a category four contraindication to combined hormonal methods.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-con-combined-pill.webp",
+    "alt": "Combined oral contraceptive pill pack and target organs.",
+    "caption": "Combined oral contraceptive formulations contraindicated in severe hypertension. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Current or personal history of **venous thromboembolism** represents an absolute WHO category four contraindication to all combined hormonal methods. In patients with prior deep vein thrombosis or pulmonary embolism, ethinylestradiol accelerates procoagulant cascade activation. Progestogen-only pills, etonogestrel implants, and intrauterine devices do not elevate venous thrombotic risk and are completely safe.",
+   "say": "A history of deep vein thrombosis is a category four contraindication to estrogen, but safe for progestins.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Contraceptive Class",
+     "WHO MEC in Prior VTE",
+     "Thrombogenic Rationale"
+    ],
+    "rows": [
+     [
+      "Combined pill, patch, ring",
+      "Category 4",
+      "Increases liver synthesis of clotting factors"
+     ],
+     [
+      "Progestogen-only pill (POP)",
+      "Category 2",
+      "No activation of coagulation pathways"
+     ],
+     [
+      "Subdermal implant (Nexplanon)",
+      "Category 2",
+      "No increased venous thrombotic risk"
+     ],
+     [
+      "Copper T 380A",
+      "Category 1",
+      "Non-hormonal, zero vascular risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Patients diagnosed with **current breast cancer** face a category four contraindication to all hormonal contraceptive preparations, including combined pills, progestogen-only pills, injectables, implants, and the levonorgestrel intrauterine system. Because breast carcinoma cells frequently express estrogen and progesterone receptors, all exogenous sex steroids must be avoided, making the non-hormonal copper IUD the method of choice.",
+   "say": "Current breast cancer contraindicates all hormonal contraceptives, leaving the copper IUD as the top choice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hormonal Contraindications",
+     "points": [
+      "Combined oral contraceptives (Cat 4)",
+      "Progestogen-only pills and implants (Cat 4)",
+      "Levonorgestrel intrauterine system (Cat 4)"
+     ]
+    },
+    "right": {
+     "title": "Safe Non-Hormonal Methods",
+     "points": [
+      "Copper T 380A intrauterine device (Cat 1)",
+      "Male and female barrier methods (Cat 1)",
+      "Surgical sterilization of patient or partner"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Insertion of intrauterine contraceptive devices is strictly category four in the presence of **active pelvic inflammatory disease**. Placing an intrauterine device through an infected endocervical canal into the endometrial cavity inoculates Chlamydia or Gonorrhoea into the upper genital tract, triggering severe pelvic peritonitis and tubo-ovarian abscess formation.",
+   "say": "Active pelvic inflammatory disease is an absolute contraindication to initiating any intrauterine device.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-con-copper-iucd.webp",
+    "alt": "Copper intrauterine device and inserter tube.",
+    "caption": "Intrauterine contraceptive devices contraindicated during acute pelvic infection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In women with diabetes mellitus, the presence of **diabetic microvascular complications** upgrades combined hormonal contraceptives to category three or four. Diabetic retinopathy, nephropathy, neuropathy, or disease duration exceeding twenty years signifies widespread endothelial damage, predisposing to accelerated arterial thrombosis, stroke, and progressive renal decline if exposed to synthetic estrogens.",
+   "say": "Diabetic microvascular damage or duration over twenty years makes combined estrogen pills unacceptable.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Category 3 or 4 Diabetic States",
+     "points": [
+      "Diabetic nephropathy with proteinuria",
+      "Proliferative diabetic retinopathy",
+      "Diabetes duration exceeding 20 years"
+     ]
+    },
+    "right": {
+     "title": "Uncomplicated Diabetes",
+     "points": [
+      "Under 20 years duration without end-organ damage",
+      "Combined pill is Category 2",
+      "Progestin methods and IUDs are Category 1 or 2"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hepatic adenomas and decompensated cirrhosis constitute category four contraindications due to **severe hepatic dysfunction**. Sex steroids undergo extensive hepatic metabolism and stimulate hepatic adenoma growth, increasing the hazard of catastrophic intraperitoneal rupture. In severe active viral hepatitis or decompensated cirrhosis, hormonal contraceptives are avoided, directing patients toward copper IUDs or barrier protection.",
+   "say": "Decompensated liver cirrhosis and hepatic adenomas contraindicate hormonal methods due to rupture and failure risks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Liver Pathology",
+     "Combined Hormonal Contraceptives",
+     "Copper T 380A"
+    ],
+    "rows": [
+     [
+      "Hepatic adenoma or hepatocellular cancer",
+      "Category 4",
+      "Category 1"
+     ],
+     [
+      "Decompensated cirrhosis",
+      "Category 4",
+      "Category 1"
+     ],
+     [
+      "Compensated stable cirrhosis",
+      "Category 1 or 2",
+      "Category 1"
+     ],
+     [
+      "Asymptomatic viral hepatitis carrier",
+      "Category 1",
+      "Category 1"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A unique category four contraindication specific to copper intrauterine devices is **Wilson disease**. In this autosomal recessive inborn error of copper metabolism, defective biliary excretion causes toxic copper accumulation in the liver, brain, and corneas. Releasing copper ions locally from an intrauterine device carries theoretical toxic risks, making the levonorgestrel IUS or hormonal methods preferable.",
+   "say": "Wilson disease is a specific contraindication to copper IUDs due to impaired copper excretion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Wilson Disease Pathophysiology",
+     "points": [
+      "ATP7B mutation on chromosome 13",
+      "Impaired hepatic copper excretion into bile",
+      "Systemic toxic copper accumulation"
+     ]
+    },
+    "right": {
+     "title": "Contraceptive Recommendations",
+     "points": [
+      "Copper T 380A is Category 4",
+      "Levonorgestrel IUS is Category 1",
+      "Combined hormonal pills are Category 1"
+     ]
+    }
+   }
+  }
+ ]
+}
