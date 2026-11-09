@@ -1,0 +1,233 @@
+{
+  "v": 1,
+  "module": "phy-digestion-absorption",
+  "subject": "physiology",
+  "title": "Cobalamin, Iron, and Calcium Absorption, and Malabsorption",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Intestinal micronutrient absorption is tightly regulated to prevent systemic deficiency or toxic accumulation. Dietary non-heme ferric iron must be reduced to the soluble ferrous state by the apical brush border enzyme **duodenal cytochrome b**, allowing uptake into enterocytes via divalent metal transporter 1.",
+      "say": "Duodenal cytochrome b reduces dietary ferric iron to ferrous iron for absorption via divalent metal transporter one.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ferric",
+            "label": "Dietary Non-Heme Iron Exists Predominantly as Insoluble Ferric Iron (Fe3+)"
+          },
+          {
+            "id": "dcybt",
+            "label": "Apical Duodenal Cytochrome b (DCYTB) Reduces Fe3+ to Soluble Ferrous Iron (Fe2+)"
+          },
+          {
+            "id": "dmt1",
+            "label": "Divalent Metal Transporter 1 (DMT1) Cotransports Fe2+ Across Apical Membrane with H+"
+          },
+          {
+            "id": "enterocyte",
+            "label": "Intracellular Iron Stored as Ferritin or Exported via Basolateral Ferroportin"
+          }
+        ],
+        "edges": [
+          [
+            "ferric",
+            "dcybt"
+          ],
+          [
+            "dcybt",
+            "dmt1"
+          ],
+          [
+            "dmt1",
+            "enterocyte"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Basolateral export of iron into the portal circulation is mediated by the sole known mammalian iron exporter, **ferroportin**. Exported ferrous iron is immediately re-oxidized to ferric iron by hephaestin, allowing high-affinity loading onto plasma transferrin for systemic delivery to erythroblasts.",
+      "say": "Ferroportin exports iron across the basolateral membrane into blood, where hephaestin oxidizes it to bind transferrin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Low Systemic Iron (Deficiency)",
+          "points": [
+            "Hepatic hepcidin secretion is suppressed",
+            "Ferroportin molecules remain abundant on basolateral membrane",
+            "Unimpeded iron export into portal bloodstream",
+            "Apical DMT1 and DCYTB expression markedly upregulated"
+          ]
+        },
+        "right": {
+          "title": "High Systemic Iron (Excess / Inflammation)",
+          "points": [
+            "Hepatic hepcidin secretion is potently stimulated",
+            "Hepcidin binds basolateral ferroportin, inducing internalization",
+            "Trapped intracellular iron sloughed with senescent enterocytes",
+            "Causes functional iron deficiency in chronic inflammation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Systemic iron homeostasis is controlled hormonally by the hepatic peptide **hepcidin**, which binds directly to basolateral ferroportin, triggering its ubiquitination, internalization, and lysosomal degradation. By closing the ferroportin gateway, hepcidin arrests intestinal iron absorption and traps recycled iron within reticuloendothelial macrophages.",
+      "say": "Hepcidin binds ferroportin, causing its destruction to block iron absorption and lock iron inside storage cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "iron_over",
+            "label": "Hepatic Iron Overload or Systemic Inflammation (IL-6 Signaling)"
+          },
+          {
+            "id": "hepcidin_rel",
+            "label": "Liver Synthesizes and Secretes Circulating Peptide Hormone Hepcidin"
+          },
+          {
+            "id": "bind_fpn",
+            "label": "Hepcidin Binds Basolateral Ferroportin on Enterocytes and Macrophages"
+          },
+          {
+            "id": "degrad",
+            "label": "Ferroportin Internalized and Degraded, Trapping Iron and Halting Absorption"
+          }
+        ],
+        "edges": [
+          [
+            "iron_over",
+            "hepcidin_rel"
+          ],
+          [
+            "hepcidin_rel",
+            "bind_fpn"
+          ],
+          [
+            "bind_fpn",
+            "degrad"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Intestinal calcium absorption is localized predominantly in the duodenum and upper jejunum, stimulated by the active vitamin D metabolite **one-alpha-twenty-five-dihydroxycholecalciferol**. Calcitriol upregulates apical TRPV6 calcium channels, intracellular calbindin-D9k transport shuttles, and basolateral plasma membrane calcium ATPases to maximize active transcellular calcium uptake.",
+      "say": "Active vitamin D stimulates duodenal calcium absorption by upregulating apical channels, calbindin, and calcium pumps.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Transport Step",
+          "Molecular Transporter",
+          "Regulation by Calcitriol (1,25-OH2D3)"
+        ],
+        "rows": [
+          [
+            "Apical Calcium Influx",
+            "TRPV6 (Epithelial Ca2+ Channel)",
+            "Strong transcriptional upregulation"
+          ],
+          [
+            "Cytosolic Translocation",
+            "Calbindin-D9k (Buffering Protein)",
+            "10-fold induction; prevents cytosolic toxic Ca2+ spikes"
+          ],
+          [
+            "Basolateral Calcium Efflux",
+            "PMCA1b (Ca2+-ATPase) and NCX1",
+            "Transcriptional upregulation of active pumps"
+          ],
+          [
+            "Paracellular Diffusion",
+            "Claudin-2 and claudin-12 tight junctions",
+            "Facilitates passive absorption during high calcium intake"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Vitamin B12 absorption requires an intact terminal ileum and functioning gastric intrinsic factor. Because hepatic cobalamin stores average two to five milligrams while daily obligatory loss is only one to two micrograms, complete cessation of absorption takes three to five years to produce clinical **vitamin B12 deficiency**.",
+      "say": "Hepatic vitamin B12 stores last three to five years, delaying symptoms of deficiency after gastrectomy or ileal resection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vitamin B12 (Cobalamin)",
+          "points": [
+            "Water-soluble; absorbed exclusively in terminal ileum via cubilin",
+            "Massive hepatic storage pool (2000 to 5000 mcg)",
+            "Takes 3 to 5 years of malabsorption to deplete stores",
+            "Deficiency causes megaloblastic anaemia and spinal degeneration"
+          ]
+        },
+        "right": {
+          "title": "Folate (Vitamin B9)",
+          "points": [
+            "Absorbed predominantly in proximal jejunum via PCFT",
+            "Limited hepatic storage pool (5 to 10 mg)",
+            "Depleted within 3 to 4 months of poor intake or malabsorption",
+            "Deficiency causes megaloblastic anaemia without neurological defects"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Genetically programmed decline in mucosal lactase expression following weaning affects over sixty-five percent of the global adult population, known as primary **adult-type hypolactasia**. Ingestion of dairy lactose leaves unabsorbed disaccharides in the lumen, drawing water osmotically to cause borborygmi, abdominal cramping, and osmotic diarrhea.",
+      "say": "Adult-type hypolactasia leaves lactose unabsorbed, drawing water and producing gas from colonic bacterial fermentation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dairy",
+            "label": "Ingestion of Milk Products Containing Disaccharide Lactose"
+          },
+          {
+            "id": "defic",
+            "label": "Absence of Brush Border Lactase Leaves Intact Lactose in Small Intestinal Lumen"
+          },
+          {
+            "id": "osm_draw",
+            "label": "Unabsorbed Lactose Draws Water Osmotically, Causing Fluid Distension"
+          },
+          {
+            "id": "ferment",
+            "label": "Colonic Bacteria Ferment Lactose into H2 Gas, Methane, and Irritant Fatty Acids"
+          }
+        ],
+        "edges": [
+          [
+            "dairy",
+            "defic"
+          ],
+          [
+            "defic",
+            "osm_draw"
+          ],
+          [
+            "osm_draw",
+            "ferment"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Colonic fermentation of unabsorbed lactose by bacterial flora generates short-chain fatty acids, carbon dioxide, and hydrogen gas. Diffusing into the bloodstream and exhaled by the lungs, excreted hydrogen gas serves as the diagnostic foundation for the non-invasive **hydrogen breath test**.",
+      "say": "Colonic bacteria ferment unabsorbed lactose into hydrogen gas, which can be measured in breath to diagnose lactose intolerance.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/autoimmune-gastritis-fig1.webp",
+        "alt": "Gastric mucosal atrophy and autoimmune malabsorption",
+        "caption": "Parietal cell atrophy, loss of intrinsic factor, and secondary nutritional malabsorption syndromes."
+      }
+    },
+    {
+      "tx": "Autoimmune enteropathy triggered by dietary gluten in genetically susceptible HLA-DQ2 or DQ8 individuals produces **celiac disease**. Chronic mucosal inflammation causes diffuse blunting and flattening of jejunal villi with crypt hyperplasia, leading to generalized malabsorption of carbohydrates, fats, iron, folate, and fat-soluble vitamins.",
+      "say": "Celiac disease is gluten-induced autoimmune villous atrophy in the jejunum, producing generalized nutrient malabsorption.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/gi-celiac-ibd-gerd-malnutrition-fig1.webp",
+        "alt": "Celiac sprue histology and mucosal villous blunting",
+        "caption": "Small intestinal villous flattening, crypt hyperplasia, and pan-malabsorption in celiac sprue."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

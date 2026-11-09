@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phy-hormone-pituitary",
+  "subject": "physiology",
+  "title": "Hormone Receptors, cAMP, IP3-DAG, and Tyrosine Kinase Cascades",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Endocrine communication relies upon high-affinity hormone receptors that transduce minute nanomolar circulating chemical signals into profound intracellular biological responses. Hydrophilic peptide hormones and circulating catecholamines cannot penetrate the hydrophobic lipid bilayer, binding instead to specialized cell-surface **transmembrane hormone receptors** on target tissues.",
+      "say": "Hydrophilic peptides and catecholamines bind surface transmembrane receptors to activate intracellular second messengers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cell-Surface Receptors (Hydrophilic)",
+          "points": [
+            "Peptides, glycoproteins, and catecholamines (adrenaline, TSH, ACTH)",
+            "Cannot penetrate lipid bilayer; bind extracellular receptor domains",
+            "Rapid onset of action within seconds to minutes",
+            "Signal amplified through second messengers (cAMP, IP3, Ca2+)"
+          ]
+        },
+        "right": {
+          "title": "Intracellular Receptors (Lipophilic)",
+          "points": [
+            "Steroid hormones, thyroid hormones, and calcitriol (vitamin D)",
+            "Diffuses across plasma membrane to bind cytosolic or nuclear receptors",
+            "Slow onset of action over hours to days",
+            "Acts as ligand-activated transcription factors altering gene expression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The largest class of cell-surface receptors are seven-transmembrane G-protein coupled receptors. In the classic **cyclic AMP signaling pathway**, ligand binding activates stimulatory Gs alpha subunits, which exchange GDP for GTP to activate membrane-bound adenylyl cyclase, converting adenosine triphosphate into cyclic AMP.",
+      "say": "Gs-coupled receptors stimulate adenylyl cyclase to generate cyclic AMP, which activates protein kinase A.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ligand",
+            "label": "Hormone Binds Seven-Transmembrane GPCR (e.g., Glucagon, ACTH, TSH, PTH)"
+          },
+          {
+            "id": "gs_act",
+            "label": "Stimulatory Gs Alpha Subunit Releases GDP and Binds GTP"
+          },
+          {
+            "id": "ac_camp",
+            "label": "Adenylyl Cyclase Hydrolyzes ATP into Cyclic Adenosine Monophosphate (cAMP)"
+          },
+          {
+            "id": "pka_act",
+            "label": "cAMP Binds Regulatory Subunits of Protein Kinase A (PKA), Activating Catalytic Subunits"
+          }
+        ],
+        "edges": [
+          [
+            "ligand",
+            "gs_act"
+          ],
+          [
+            "gs_act",
+            "ac_camp"
+          ],
+          [
+            "ac_camp",
+            "pka_act"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Elevated cyclic AMP binds the regulatory subunits of protein kinase A, liberating active catalytic subunits that phosphorylate serine and threonine residues on specific cellular enzymes. Cyclic AMP signaling is terminated by **cyclic nucleotide phosphodiesterases**, which hydrolyze cyclic AMP into inactive five-prime adenosine monophosphate.",
+      "say": "Protein kinase A phosphorylates metabolic enzymes, while phosphodiesterases break down cyclic AMP to stop the signal.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Signaling Pathway",
+          "Primary Hormones",
+          "Second Messengers",
+          "Downstream Kinases"
+        ],
+        "rows": [
+          [
+            "Gs Protein / cAMP",
+            "ACTH, TSH, FSH, LH, Glucagon, PTH, ADH (V2)",
+            "cAMP",
+            "Protein Kinase A (PKA)"
+          ],
+          [
+            "Gi Protein / Inhibitory",
+            "Somatostatin, Dopamine, Acetylcholine (M2)",
+            "Decreased cAMP",
+            "Suppresses PKA activation"
+          ],
+          [
+            "Gq Protein / Phospholipase C",
+            "GnRH, TRH, GHRH, Angiotensin II, ADH (V1), Oxytocin",
+            "IP3, DAG, Ca2+",
+            "Protein Kinase C (PKC), CaM-Kinase"
+          ],
+          [
+            "Receptor Tyrosine Kinase",
+            "Insulin, IGF-1, Growth Hormone (JAK-STAT)",
+            "Phosphorylated tyrosines",
+            "MAPK, PI3K/Akt pathways"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Receptors coupled to Gq alpha proteins activate membrane-bound phospholipase C-beta, initiating the classical **IP3 and DAG pathway**. Upon activation, phospholipase C hydrolyzes membrane phosphatidylinositol four-five-bisphosphate into two distinct intracellular second messengers: water-soluble inositol one-four-five-trisphosphate and membrane-bound diacylglycerol to coordinate intracellular signal transduction.",
+      "say": "Gq-coupled receptors activate phospholipase C to split PIP2 into IP3, which mobilizes calcium, and DAG.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gq_act",
+            "label": "Hormone Binds Gq-Coupled Receptor (e.g., TRH, GnRH, Angiotensin II)"
+          },
+          {
+            "id": "plc_beta",
+            "label": "Phospholipase C-Beta Hydrolyzes Membrane PIP2 into IP3 and DAG"
+          },
+          {
+            "id": "ip3_ca",
+            "label": "IP3 Diffuses to Endoplasmic Reticulum, Releasing Intracellular Calcium"
+          },
+          {
+            "id": "dag_pkc",
+            "label": "Diacylglycerol (DAG) and Calcium Activate Membrane-Bound Protein Kinase C"
+          }
+        ],
+        "edges": [
+          [
+            "gq_act",
+            "plc_beta"
+          ],
+          [
+            "plc_beta",
+            "ip3_ca"
+          ],
+          [
+            "plc_beta",
+            "dag_pkc"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Inositol trisphosphate diffuses rapidly through cytoplasm to bind ligand-gated calcium channels on the endoplasmic reticulum, releasing stored calcium into the cytosol. Elevated calcium binds the calcium-binding protein calmodulin, forming an active complex that stimulates **calcium-calmodulin-dependent protein kinases** to phosphorylate target cellular enzymes.",
+      "say": "IP3 releases calcium from endoplasmic reticulum storage, activating calmodulin-dependent kinases.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Inositol 1,4,5-Trisphosphate (IP3)",
+          "points": [
+            "Water-soluble cytosolic messenger",
+            "Binds IP3-gated Ca2+ release channels on endoplasmic reticulum",
+            "Elevates cytosolic calcium from 100 nM to micromolar levels",
+            "Drives smooth muscle contraction and exocytosis"
+          ]
+        },
+        "right": {
+          "title": "Diacylglycerol (DAG)",
+          "points": [
+            "Lipid-soluble messenger retained in plasma membrane",
+            "Recruits cytosolic Protein Kinase C (PKC) to membrane",
+            "Acts synergistically with calcium to fully activate PKC",
+            "Phosphorylates proteins regulating cell growth and proliferation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Unlike G-protein coupled receptors, receptors for insulin and insulin-like growth factor 1 possess intrinsic enzymatic activity within their cytoplasmic domains, operating as **receptor tyrosine kinases**. Ligand binding induces receptor autophosphorylation on tyrosine residues, creating docking sites for insulin receptor substrates.",
+      "say": "Insulin and IGF-1 receptors have intrinsic tyrosine kinase activity, autophosphorylating docking sites for downstream adapters.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ins_bind",
+            "label": "Insulin Binds Extracellular Alpha Subunits of Heterotetrameric Receptor"
+          },
+          {
+            "id": "tyr_kinase",
+            "label": "Beta Subunits Undergo Trans-Autophosphorylation on Specific Tyrosine Residues"
+          },
+          {
+            "id": "irs_dock",
+            "label": "Insulin Receptor Substrates (IRS-1 / IRS-2) Bind Phosphotyrosine Pockets"
+          },
+          {
+            "id": "pi3k_akt",
+            "label": "Activation of PI3K-Akt Pathway Drives GLUT4 Translocation and Glycogen Synthesis"
+          }
+        ],
+        "edges": [
+          [
+            "ins_bind",
+            "tyr_kinase"
+          ],
+          [
+            "tyr_kinase",
+            "irs_dock"
+          ],
+          [
+            "irs_dock",
+            "pi3k_akt"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Receptors for growth hormone and prolactin belong to the cytokine receptor superfamily, lacking intrinsic enzymatic activity. Ligand binding induces receptor dimerization, recruiting and activating cytoplasmic **Janus kinase 2 proteins**, which phosphorylate signal transducer and activator of transcription (STAT) proteins that translocate to the nucleus.",
+      "say": "Growth hormone and prolactin receptors lack kinase activity, using JAK2 to phosphorylate STAT proteins that enter the nucleus.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/autoimmune-polyendocrine-syndromes-fig1.webp",
+        "alt": "Endocrine autoimmune polyglandular syndromes and receptor targets",
+        "caption": "Endocrine receptor pathways, autoimmune autoantibodies, and polyendocrine failure syndromes."
+      }
+    },
+    {
+      "tx": "Inherited genetic mutations in G-protein alpha subunits produce distinct endocrine diseases. In McCune-Albright syndrome, mosaic postzygotic activating mutations in Gs alpha cause autonomous, ligand-independent cyclic AMP generation, producing precocious puberty, polyostotic fibrous dysplasia, and café-au-lait skin pigmentation via unrestrained **constitutive Gs signaling**.",
+      "say": "McCune-Albright syndrome is caused by mosaic activating Gs mutations, causing precocious puberty and fibrous bone lesions.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/multiple-endocrine-neoplasia-fig1.webp",
+        "alt": "Multiple endocrine neoplasia and receptor signaling mutations",
+        "caption": "Neuroendocrine receptor tyrosine kinase mutations, G-protein signaling, and polyglandular syndromes."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

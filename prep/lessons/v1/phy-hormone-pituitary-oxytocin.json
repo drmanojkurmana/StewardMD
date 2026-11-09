@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phy-hormone-pituitary",
+  "subject": "physiology",
+  "title": "Oxytocin, Vasopressin, Feedback Control, and Pituitary Disorders",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The posterior pituitary gland, or neurohypophysis, does not synthesize hormones itself, functioning instead as a storage and release site for hypothalamic neuropeptides. The two closely related nonapeptides **oxytocin and vasopressin** are synthesized in magnocellular neurosecretory neurons of the paraventricular and supraoptic hypothalamic nuclei.",
+      "say": "The posterior pituitary stores oxytocin and vasopressin, synthesized in hypothalamic paraventricular and supraoptic nuclei.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oxytocin (OXT)",
+          "points": [
+            "Synthesized predominantly in paraventricular hypothalamic nucleus",
+            "Packaged with carrier protein neurophysin I in axonal granules",
+            "Stimulates uterine myometrial contractions during parturition",
+            "Drives myoepithelial cell contraction for breast milk ejection"
+          ]
+        },
+        "right": {
+          "title": "Vasopressin (ADH / AVP)",
+          "points": [
+            "Synthesized predominantly in supraoptic hypothalamic nucleus",
+            "Packaged with carrier protein neurophysin II in axonal granules",
+            "Stimulates collecting duct water retention via V2 receptors",
+            "Stimulates vascular arteriolar vasoconstriction via V1a receptors"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "During labor, mechanical stretching of the cervix by the descending fetal head triggers an escalating neuroendocrine positive feedback cascade known as the **Ferguson reflex**. Sensory afferents ascend via spinothalamic tracts to stimulate paraventricular oxytocin release, intensifying uterine contractions until delivery is complete.",
+      "say": "The Ferguson reflex is a positive feedback loop where cervical stretching triggers oxytocin release, intensifying labor contractions.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cervix_stretch",
+            "label": "Descending Fetal Head Stretches Mechanoreceptors in Uterine Cervix"
+          },
+          {
+            "id": "spinothal",
+            "label": "Sensory Afferents Ascend Anterolateral Spinal Cord to Hypothalamus"
+          },
+          {
+            "id": "oxt_release",
+            "label": "Magnocellular Neurons Fire, Releasing Massive Pulses of Oxytocin from Posterior Pituitary"
+          },
+          {
+            "id": "myometrium",
+            "label": "Oxytocin Binds Gq Receptors on Myometrium, Escalating Contraction Wave"
+          }
+        ],
+        "edges": [
+          [
+            "cervix_stretch",
+            "spinothal"
+          ],
+          [
+            "spinothal",
+            "oxt_release"
+          ],
+          [
+            "oxt_release",
+            "myometrium"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In lactating women, mechanical stimulation of the nipple during infant nursing initiates the **milk ejection reflex**, or milk let-down. Oxytocin released into circulation binds Gq-coupled receptors on mammary myoepithelial cells surrounding alveoli, squeezing milk forward into large lactiferous ducts within thirty to sixty seconds.",
+      "say": "Nipple suckling triggers oxytocin release, contracting mammary myoepithelial cells to cause milk let-down.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Milk Production (Prolactin)",
+          "points": [
+            "Secreted by anterior pituitary lactotrophs",
+            "Stimulates biochemical synthesis of milk caseins, lipids, lactose",
+            "Acts over hours to replenish milk volume in alveolar lumen",
+            "Suppressed by dopamine; stimulated by infant suckling"
+          ]
+        },
+        "right": {
+          "title": "Milk Ejection (Oxytocin)",
+          "points": [
+            "Secreted by posterior pituitary neurosecretory terminals",
+            "Contracts myoepithelial cells encircling mammary alveoli",
+            "Acts within 30 to 60 seconds to propel stored milk into ducts",
+            "Conditioned by auditory cues (baby crying); inhibited by maternal stress"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Homeostatic stability of the endocrine system is governed by delicate **negative feedback control loops**. In long-loop negative feedback, target gland hormones (such as cortisol, thyroxine, or testosterone) feed back to both the anterior pituitary and the hypothalamus to inhibit trophic hormone synthesis and release.",
+      "say": "Negative feedback loops allow peripheral target hormones like cortisol to inhibit both hypothalamic and pituitary trophic output.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Endocrine Axis",
+          "Hypothalamic Hormone",
+          "Pituitary Trophic Hormone",
+          "Primary Negative Feedback Effector"
+        ],
+        "rows": [
+          [
+            "Hypothalamic-Pituitary-Thyroid (HPT)",
+            "TRH",
+            "TSH",
+            "Free T3 and Free T4 inhibit TRH and TSH"
+          ],
+          [
+            "Hypothalamic-Pituitary-Adrenal (HPA)",
+            "CRH",
+            "ACTH",
+            "Free Cortisol inhibits CRH and ACTH"
+          ],
+          [
+            "Hypothalamic-Pituitary-Gonadal (HPG)",
+            "GnRH",
+            "FSH and LH",
+            "Sex steroids and Inhibin inhibit GnRH and gonadotropins"
+          ],
+          [
+            "Growth Hormone Axis",
+            "GHRH (inhibited by SS)",
+            "GH",
+            "Circulating IGF-1 inhibits GHRH and stimulates somatostatin"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Postpartum ischaemic necrosis of the anterior pituitary gland following massive obstetric hemorrhage and hypotensive shock is designated **Sheehan syndrome**. Because the pituitary hypertrophies during pregnancy within a rigid sella turcica, acute vascular collapse precipitates infarction of anterior pituitary cells while sparing the neurohypophysis.",
+      "say": "Sheehan syndrome is anterior pituitary infarction from postpartum shock, presenting with failure of lactation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sheehan-syndrome-fig1.webp",
+        "alt": "Sheehan syndrome postpartum pituitary necrosis",
+        "caption": "Postpartum hypopituitarism, ischaemic infarction of anterior lobe, and secondary target organ failure."
+      }
+    },
+    {
+      "tx": "Patients with Sheehan syndrome classically present with failure of postpartum lactation due to prolactin deficiency, followed by amenorrhoea, profound fatigue, cold intolerance, and secondary adrenal insufficiency. The posterior pituitary is typically spared because its independent arterial blood supply originates directly from the **inferior hypophyseal arteries**.",
+      "say": "Sheehan syndrome spares posterior pituitary function because inferior hypophyseal arteries provide independent blood supply.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anterior Lobe Vulnerability",
+          "points": [
+            "Hypertrophies up to 100% in pregnancy under estrogen stimulation",
+            "Supplied entirely by low-pressure hypophyseal portal venous system",
+            "Susceptible to compression against rigid bony diaphragma sellae",
+            "Necrosis leads to loss of GH, PRL, FSH/LH, TSH, and ACTH"
+          ]
+        },
+        "right": {
+          "title": "Posterior Lobe Sparing",
+          "points": [
+            "Supplied by direct arterial branches from internal carotid arteries",
+            "Arterial perfusion persists during systemic hypotensive collapse",
+            "Posterior pituitary neurosecretion of ADH and oxytocin preserved",
+            "Central diabetes insipidus is exceptionally rare in Sheehan syndrome"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Macroadenomas expanding beyond ten millimetres within the sella turcica produce visual field deficits by compressing the crossing nasal retinal fibers of the **optic chiasm**. This classic compression produces bitemporal hemianopia, accompanied by dull frontal headaches and hypopituitarism from compression of the non-adenomatous pituitary stalk.",
+      "say": "Expanding pituitary macroadenomas compress the optic chiasm, causing bitemporal hemianopia and frontal headache.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "adenoma",
+            "label": "Pituitary Macroadenoma Expands Upward Beyond Confines of Sella Turcica"
+          },
+          {
+            "id": "chiasm",
+            "label": "Compresses Crossing Decussating Fibers from Nasal Hemiretinas at Optic Chiasm"
+          },
+          {
+            "id": "vision",
+            "label": "Bitemporal Hemianopia: Loss of Lateral Peripheral Vision in Both Eyes"
+          },
+          {
+            "id": "stalk",
+            "label": "Pituitary Stalk Compression Elevates Prolactin and Blunts Remaining Trophic Hormones"
+          }
+        ],
+        "edges": [
+          [
+            "adenoma",
+            "chiasm"
+          ],
+          [
+            "chiasm",
+            "vision"
+          ],
+          [
+            "adenoma",
+            "stalk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute haemorrhage or infarction into a pre-existing pituitary adenoma constitutes life-threatening **pituitary apoplexy**. Patients present with sudden thunderclap headache, meningism, bilateral ophthalmoplegia, acute visual loss, and hemodynamic collapse due to abrupt adrenocorticotropic hormone deficiency, requiring emergency intravenous hydrocortisone and transsphenoidal decompression.",
+      "say": "Pituitary apoplexy is acute infarction into an adenoma, causing thunderclap headache, visual loss, and adrenal collapse.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hypopituitarism-fig1.webp",
+        "alt": "Pituitary apoplexy and acute sellar hemorrhage",
+        "caption": "Acute hemorrhagic necrosis of pituitary adenoma, chiasmal compression, and emergency neurosurgical decompression."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
