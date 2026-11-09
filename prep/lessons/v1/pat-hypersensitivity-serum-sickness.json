@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-hypersensitivity",
+  "subject": "pathology",
+  "title": "Serum Sickness, Type IV Hypersensitivity, and Contact Dermatitis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "One to two weeks after exposure to a foreign protein or drug, circulating antigen and newly formed antibody meet in slight antigen excess and generate soluble complexes that lodge in vessel walls, joints, and glomeruli. This systemic immune complex illness is called **serum sickness**, and complement consumption with low C3 and C4 supports the diagnosis during the active phase.",
+      "say": "Serum sickness appears one to two weeks after the trigger, when soluble immune complexes deposit in vessels, joints, and kidneys.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Foreign serum or drug antigen persists in blood"
+          },
+          {
+            "id": "b",
+            "label": "IgG antibody forms soluble immune complexes"
+          },
+          {
+            "id": "c",
+            "label": "Complexes deposit in vessels, joints, glomeruli"
+          },
+          {
+            "id": "d",
+            "label": "Complement activation recruits neutrophils and injures tissue"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Fever, an itchy urticarial or morbilliform rash, joint pains, and tender lymph node enlargement form the classic clinical picture that examiners expect you to recognise. The modern triggers are drugs such as equine antithymocyte globulin, antivenoms, and some antibiotics rather than the horse serum used historically, hence the modern label **serum sickness-like reaction** for drug cases without proven complexes.",
+      "say": "Think fever, rash, joint pains, and swollen glands about ten days after antivenom, antithymocyte globulin, or a new drug.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Typical finding",
+          "Point to remember"
+        ],
+        "rows": [
+          [
+            "Timing",
+            "Seven to fourteen days after exposure",
+            "Faster on re-exposure"
+          ],
+          [
+            "Skin",
+            "Urticarial or morbilliform rash",
+            "Often starts near the injection site"
+          ],
+          [
+            "Joints",
+            "Painful swelling of knees and small joints",
+            "Usually resolves without damage"
+          ],
+          [
+            "Blood tests",
+            "Low C3 and C4, raised ESR",
+            "Complement normal in drug-like reactions"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Deposited complexes activate complement, release C3a and C5a, and attract neutrophils whose enzymes damage the vessel wall, producing a small vessel vasculitis with purpura in dependent skin. Immune complex vasculitis of this kind is the tissue lesion behind the rash, and the kidney may show a mild proliferative **glomerulonephritis** that settles as complexes clear.",
+      "say": "The rash is a small vessel vasculitis caused by complement and neutrophils attacking complex-laden vessel walls.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cryoglobulinaemic-vasculitis-fig1.webp",
+        "alt": "Immune complex small vessel vasculitis of skin",
+        "caption": "Immune complex small vessel vasculitis, the vessel lesion that produces purpuric skin rash in serum sickness."
+      }
+    },
+    {
+      "tx": "Skin biopsy in immune complex disease shows leukocytoclastic vasculitis, meaning fragmented neutrophil nuclei around damaged postcapillary venules with fibrin in the wall. Direct immunofluorescence can demonstrate granular deposits of immunoglobulin and complement, a pattern pathologists call **leukocytoclastic vasculitis**, and the same granular logic explains the glomerular deposits seen on renal biopsy in systemic immune complex diseases.",
+      "say": "Biopsy shows leukocytoclastic vasculitis with granular immunoglobulin and complement deposits in the vessel wall.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bowel-associated-dermatosis-arthritis-syndrome-fig1.webp",
+        "alt": "Leukocytoclastic vasculitis on skin biopsy",
+        "caption": "Leukocytoclastic vasculitis with neutrophil fragments and fibrinoid vessel wall change in immune complex skin disease."
+      }
+    },
+    {
+      "tx": "Management starts with stopping the culprit drug or serum product, after which most cases settle over one to two weeks as antigen disappears and complexes are cleared by the spleen and liver. Antihistamines control itch, nonsteroidal drugs ease joint pain, and a short tapering course of **corticosteroids** is reserved for severe vasculitis, glomerulonephritis, or neurological involvement.",
+      "say": "Stop the trigger first; antihistamines and anti-inflammatory drugs suffice for most, with steroids kept for severe disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mild serum sickness",
+          "points": [
+            "Fever, rash, and joint pains only",
+            "Stop the culprit drug and observe",
+            "Antihistamine for itch, NSAID for joints"
+          ]
+        },
+        "right": {
+          "title": "Severe serum sickness",
+          "points": [
+            "Vasculitis, nephritis, or neuritis present",
+            "Short tapering corticosteroid course",
+            "Monitor urine, creatinine, and complement recovery"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Unlike the antibody driven types, delayed hypersensitivity is mediated entirely by sensitised T lymphocytes and macrophages, so it peaks at forty eight to seventy two hours rather than minutes. Prior sensitisation creates memory Th1 and cytotoxic T cells that release interferon gamma on re-exposure, recruiting macrophages to the site; this mechanism is formally termed **Type IV hypersensitivity**.",
+      "say": "Type IV reactions are T cell driven, need no antibody, and take two to three days to reach their peak.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "First contact sensitises Th1 and cytotoxic T cells"
+          },
+          {
+            "id": "b",
+            "label": "Re-exposure presents antigen to memory T cells"
+          },
+          {
+            "id": "c",
+            "label": "Interferon gamma recruits and activates macrophages"
+          },
+          {
+            "id": "d",
+            "label": "Indurated inflammation peaks at 48 to 72 hours"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Nickel in jewellery, fragrances, rubber accelerators, and hair dye chemicals act as haptens that bind skin proteins and provoke an itchy eczematous eruption exactly where contact occurred, often with vesicles in acute cases. Patch testing identifies the culprit allergen, and this common occupational and cosmetic disorder is diagnosed clinically as **allergic contact dermatitis**.",
+      "say": "Allergic contact dermatitis gives itchy eczema at the contact site, classically from nickel, fragrances, or hair dye.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Allergen",
+          "Common source",
+          "Typical site"
+        ],
+        "rows": [
+          [
+            "Nickel",
+            "Jewellery, belt buckles, spectacle frames",
+            "Earlobes, waist, nose bridge"
+          ],
+          [
+            "Paraphenylenediamine",
+            "Permanent hair dyes",
+            "Scalp margins and face"
+          ],
+          [
+            "Fragrance mix",
+            "Cosmetics and perfumes",
+            "Neck and flexures"
+          ],
+          [
+            "Thiuram mix",
+            "Rubber gloves and shoes",
+            "Hands and feet"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The tuberculin skin test is the bedside prototype of delayed hypersensitivity: intradermal purified protein derivative produces induration, not redness, measured at forty eight to seventy two hours in a sensitised person. Granulomatous inflammation in tuberculosis and sarcoidosis, graft rejection, and tumour immunity all share this **delayed-type hypersensitivity** machinery, which is why steroids and calcineurin inhibitors suppress it.",
+      "say": "Measure the induration of the tuberculin test at two to three days; it is the living prototype of delayed hypersensitivity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type III, immune complex",
+          "points": [
+            "Antibody and complement mediated",
+            "Serum sickness and Arthus reaction",
+            "Onset hours to days, neutrophil rich"
+          ]
+        },
+        "right": {
+          "title": "Type IV, cell mediated",
+          "points": [
+            "T cell and macrophage mediated",
+            "Contact dermatitis and tuberculin test",
+            "Onset 48 to 72 hours, mononuclear rich"
+          ]
+        }
+      }
+    }
+  ]
+}
