@@ -1297,3 +1297,24 @@ html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-banner-logo{width:58px;hei
 @media (max-width:340px){html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qc,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn.is-first{font-size:11px}}
 /* Smallest phones: the header cannot fit the chip and four icons; the banner still says Pro. */
 @media (max-width:350px){body #homeV2#homeV2#homeV2.rnav .hrf-head .hrf-pro{display:none!important}}
+/* One header button: Notifications, theme and privacy live in its menu, leaving room for Knowledge Units. */
+#homeV2#homeV2#homeV2.rnav .hrf-more{position:relative}
+#homeV2#homeV2#homeV2.rnav .hrf-more-ic{width:24px;height:24px;color:#fff}
+#homeV2#homeV2#homeV2.rnav:has(#v3BellBtn.has-unread) .hrf-more::after{content:"";position:absolute;top:6px;right:5px;width:8px;height:8px;border-radius:50%;background:var(--hrf-mint);box-shadow:0 0 0 2px rgba(0,0,0,.25)}
+#homeV2#homeV2#homeV2.rnav .hrf-head .v3-ku{position:relative;margin:0 2px;padding:6px 10px;gap:4px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.12);color:#fff;font:700 13px var(--rds-font);font-variant-numeric:tabular-nums}
+#homeV2#homeV2#homeV2.rnav .hrf-head .v3-ku .kudia{color:var(--hrf-mint)}
+#homeV2#homeV2#homeV2.rnav .hrf-head .v3-ku::before{content:"";position:absolute;inset:-7px -2px}
+#homeV2#homeV2#homeV2.rnav .hrf-menu{position:absolute;z-index:40;top:calc(env(safe-area-inset-top,0px) + 50px);right:10px;display:flex;flex-direction:column;gap:1px;width:216px;box-sizing:border-box;padding:6px;border-radius:18px;background:color-mix(in srgb,var(--hrf-card) 88%,transparent);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);box-shadow:0 0 0 1px var(--hrf-hair),0 18px 40px -12px rgba(0,0,0,.42);transform-origin:top right;animation:hrfMenuIn .16s cubic-bezier(.2,.8,.2,1)}
+#homeV2#homeV2#homeV2.rnav .hrf-menu[hidden]{display:none}
+@keyframes hrfMenuIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+#homeV2#homeV2#homeV2.rnav .hrf-menu .rds-icon-btn{position:relative;display:flex;align-items:center;justify-content:flex-start;gap:12px;width:100%;min-width:0;height:46px;padding:0 12px;border:0;border-radius:12px;background:transparent;color:var(--hrf-ink);font:500 15px var(--rds-font);box-shadow:none}
+#homeV2#homeV2#homeV2.rnav .hrf-menu .rds-icon-btn:active{background:color-mix(in srgb,var(--hrf-ink) 8%,transparent)}
+#homeV2#homeV2#homeV2.rnav .hrf-menu .rds-icon-btn .rds-icon{order:1;font-size:22px;color:var(--hrf-deep)}
+#homeV2#homeV2#homeV2.rnav .hrf-menu .rds-icon-btn::before{order:2;position:static;inset:auto;width:auto;height:auto;background:none;color:inherit}
+#homeV2#homeV2#homeV2.rnav .hrf-menu #v4ThemeBtn::before{content:"Dark mode"}
+body.dark #homeV2#homeV2#homeV2.rnav .hrf-menu #v4ThemeBtn::before{content:"Light mode"}
+#homeV2#homeV2#homeV2.rnav .hrf-menu #v3BellBtn::before{content:"Notifications"}
+#homeV2#homeV2#homeV2.rnav .hrf-menu .smd-pv-btn::before{content:"Privacy mode"}
+@media (min-width:561px){#homeV2#homeV2#homeV2.rnav .hrf-menu{right:max(22px,calc((100% - 1040px)/2))}}
+@media (prefers-reduced-motion:reduce){#homeV2#homeV2#homeV2.rnav .hrf-menu{animation:none}}
+@media (prefers-reduced-transparency:reduce){#homeV2#homeV2#homeV2.rnav .hrf-menu{background:var(--hrf-card);-webkit-backdrop-filter:none;backdrop-filter:none}}
