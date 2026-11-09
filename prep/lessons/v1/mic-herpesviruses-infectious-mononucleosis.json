@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-herpesviruses",
+  "subject": "microbiology",
+  "title": "Infectious Mononucleosis, Paul-Bunnell Test and HHV-6 Roseola",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Infectious mononucleosis** is most often primary Epstein Barr virus infection in adolescents and young adults. The incubation period is roughly four to six weeks. Fever, exudative pharyngitis, generalised lymphadenopathy, fatigue and splenomegaly evolve over days. Younger children often have mild or silent infection, while older adults may have prolonged hepatitis-like illness and less prominent lymphadenopathy.",
+      "say": "Primary EBV in a teenager is a systemic immune reaction, not just a sore throat.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic syndrome",
+          "points": [
+            "Fever and sore throat",
+            "Posterior cervical nodes prominent",
+            "Palatal petechiae may occur",
+            "Splenomegaly and fatigue"
+          ]
+        },
+        "right": {
+          "title": "Differential",
+          "points": [
+            "CMV mononucleosis like illness",
+            "Acute HIV infection",
+            "Toxoplasmosis",
+            "Streptococcal pharyngitis and viral hepatitis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Paul Bunnell test** detects heterophile antibodies that agglutinate sheep or horse red cells after absorption steps designed to improve specificity. Modern Monospot formats use the same principle. Heterophile antibodies are not directed against EBV antigens and can be absent early, in young children or in some adults. A negative test therefore does not exclude primary EBV when clinical suspicion remains strong.",
+      "say": "Paul Bunnell finds cross-reactive heterophile antibody, not an EBV specific antibody.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Positive meaning",
+          "points": [
+            "Supports infectious mononucleosis in the right syndrome",
+            "Usually appears in first weeks",
+            "Can persist for months",
+            "False positives are uncommon but possible"
+          ]
+        },
+        "right": {
+          "title": "Negative meaning",
+          "points": [
+            "May be too early",
+            "Young children often heterophile negative",
+            "CMV and other causes need consideration",
+            "Order EBV specific serology if needed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Atypical lymphocytes** in mononucleosis are activated T cells responding vigorously to EBV infected B cells. Their nuclei and basophilic cytoplasm can look alarming but they are reactive. Blood film morphology plus clinical context helps distinguish them from leukaemic blasts. Automated counters can flag them, prompting manual film review. Severe cytopenias are uncommon and warrant broader evaluation.",
+      "say": "Reactive T cells create the dramatic film in infectious mononucleosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Film features",
+          "points": [
+            "Large lymphocytes with abundant cytoplasm",
+            "Cytoplasm may hug adjacent red cells",
+            "Nuclei vary from oval to folded",
+            "No blast chromatin pattern of acute leukaemia"
+          ]
+        },
+        "right": {
+          "title": "Clinical links",
+          "points": [
+            "Lymphocytosis evolves over one to two weeks",
+            "Transaminitis common",
+            "Mild haemolysis or thrombocytopenia possible",
+            "Persistent cytopenia needs another explanation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Supportive care** dominates infectious mononucleosis: fluids, antipyretics, activity modification and warning about splenic rupture. Antibiotics do not treat EBV, and aminopenicillins often provoke a rash that should not automatically become a lifelong penicillin allergy label. Corticosteroids are reserved for airway obstruction, severe haemolysis, thrombocytopenia or other specific complications, not routine fatigue.",
+      "say": "Rest and spleen protection outrank antibiotics in uncomplicated glandular fever.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Supportive care",
+          "points": [
+            "Hydration and analgesia",
+            "Avoid contact sports with splenomegaly",
+            "Return to exercise graduated by symptoms and spleen",
+            "Reassess worsening abdominal pain urgently"
+          ]
+        },
+        "right": {
+          "title": "Common errors",
+          "points": [
+            "Calling ampicillin rash permanent allergy without review",
+            "Using antibiotics for exudative EBV pharynx alone",
+            "Steroids for ordinary fatigue",
+            "Missing airway swelling or splenic rupture"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**HHV 6** most often infects infants. HHV 6B causes roseola infantum: several days of high fever followed by defervescence and a pink maculopapular rash. Febrile seizures can occur during the fever peak. HHV 6 establishes latency and can reactivate after transplantation, causing encephalitis or marrow suppression. Inherited chromosomally integrated HHV 6 can produce persistently very high DNA levels without active disease.",
+      "say": "Roseola declares itself when fever breaks and the rash arrives.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Roseola pattern",
+          "points": [
+            "Infant or toddler age peak",
+            "High fever for three to five days",
+            "Rash begins as fever resolves",
+            "Child often looks well after defervescence"
+          ]
+        },
+        "right": {
+          "title": "Diagnostic traps",
+          "points": [
+            "HHV 6 DNA persists in latency",
+            "Chromosomal integration causes very high whole blood levels",
+            "Plasma and CSF context matter after transplant",
+            "Febrile seizure evaluation follows standard criteria"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**HHV 7** is another roseola associated virus acquired in childhood and usually causes milder or asymptomatic infection. HHV 6 and 7 can be detected by multiplex panels in cerebrospinal fluid or blood, but a positive result needs careful attribution because latency and integration complicate interpretation. In transplant recipients, clinical syndrome, viral kinetics and exclusion of other pathogens determine whether antiviral therapy is warranted.",
+      "say": "A positive HHV 6 PCR is a clue, not automatic proof that it caused the syndrome.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "detect",
+            "label": "HHV 6 DNA detected"
+          },
+          {
+            "id": "syndrome",
+            "label": "Compatible encephalitis or marrow syndrome"
+          },
+          {
+            "id": "exclude",
+            "label": "Exclude integration and other causes"
+          },
+          {
+            "id": "treat",
+            "label": "Specialist antiviral decision"
+          }
+        ],
+        "edges": [
+          [
+            "detect",
+            "syndrome"
+          ],
+          [
+            "syndrome",
+            "exclude"
+          ],
+          [
+            "exclude",
+            "treat"
+          ]
+        ]
+      }
+    }
+  ]
+}

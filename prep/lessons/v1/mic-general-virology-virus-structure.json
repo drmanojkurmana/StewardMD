@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-general-virology",
+  "subject": "microbiology",
+  "title": "Virus Structure, Capsid Symmetry, Envelope, Replication and Inclusion Bodies",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A **virion** is a nucleic acid genome protected by a protein **capsid**, sometimes surrounded by a lipid envelope bearing viral glycoprotein spikes. Genomes may be DNA or RNA, single or double stranded, linear or circular, segmented or nonsegmented. Viruses lack ribosomes and independent energy production, so replication requires a living host cell. Structure predicts environmental stability and disinfectant susceptibility.",
+      "say": "Genome plus capsid defines the virion; an envelope adds entry tools but also fragility.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Core components",
+          "points": [
+            "DNA or RNA genome, never both in one virion",
+            "Capsid protects genome and aids delivery",
+            "Some virions carry polymerases or enzymes",
+            "No protein synthesis machinery of their own"
+          ]
+        },
+        "right": {
+          "title": "Envelope components",
+          "points": [
+            "Host derived lipid bilayer",
+            "Viral spikes mediate attachment and fusion",
+            "Matrix proteins may line the membrane",
+            "Detergents and drying inactivate many enveloped viruses"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Capsid symmetry** is commonly helical, icosahedral or complex. Helical nucleocapsids form flexible rods in many RNA viruses; icosahedral capsids package genomes efficiently in DNA and RNA viruses; poxviruses have complex brick-shaped architecture. Capsid proteins can self assemble around the genome, and symmetry seen by electron microscopy historically helped classify viruses before genome sequencing became the standard taxonomic language.",
+      "say": "Helical, icosahedral and complex symmetry are the three classic capsid architectures.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Helical",
+          "points": [
+            "Protein units spiral around nucleic acid",
+            "Often enclosed in an envelope",
+            "Examples include influenza and measles nucleocapsids",
+            "Length can vary with genome"
+          ]
+        },
+        "right": {
+          "title": "Icosahedral and complex",
+          "points": [
+            "Twenty triangular faces enclose genome efficiently",
+            "Adenovirus has fibres at vertices",
+            "Poxviruses show complex internal structures",
+            "Bacteriophages combine head, tail and fibres"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The viral **envelope** is acquired by budding through plasma, nuclear, Golgi or endoplasmic reticulum membranes depending on the virus. Enveloped viruses are generally more sensitive to desiccation and detergents than non enveloped viruses, which survive better on surfaces and in the gut. This distinction guides disinfectant choice and explains why norovirus and poliovirus persist environmentally while influenza and coronaviruses are easier to inactivate.",
+      "say": "Non enveloped viruses are environmentally tougher; enveloped viruses depend on an intact lipid coat.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Enveloped pattern",
+          "points": [
+            "Budding acquires host membrane",
+            "Spikes are major neutralising antibody targets",
+            "Alcohol and detergent usually disrupt envelope",
+            "Examples: influenza, HIV, HBV and coronaviruses"
+          ]
+        },
+        "right": {
+          "title": "Non enveloped pattern",
+          "points": [
+            "Released often by cell lysis",
+            "Resistant to acid and many disinfectants",
+            "Faecal oral spread is common",
+            "Examples: poliovirus, norovirus, adenovirus and HAV"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A generalised **viral replication cycle** proceeds through attachment, penetration, uncoating, genome replication and viral protein synthesis, assembly and release. DNA viruses commonly replicate in the nucleus, with poxvirus a cytoplasmic exception. Plus sense RNA can act directly as messenger RNA, whereas negative sense RNA viruses must carry RNA dependent RNA polymerase in the virion. Retroviruses reverse transcribe RNA into DNA.",
+      "say": "Attachment through release is one pathway, but genome type decides the molecular shortcuts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "attach",
+            "label": "Attachment to receptor"
+          },
+          {
+            "id": "enter",
+            "label": "Entry and uncoating"
+          },
+          {
+            "id": "replicate",
+            "label": "Genome replication and protein synthesis"
+          },
+          {
+            "id": "release",
+            "label": "Assembly and release"
+          }
+        ],
+        "edges": [
+          [
+            "attach",
+            "enter"
+          ],
+          [
+            "enter",
+            "replicate"
+          ],
+          [
+            "replicate",
+            "release"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cytopathic effect** is the visible injury produced in cultured cells: rounding, swelling, syncytium formation, detachment or lysis depending on the virus. It allows laboratories to suspect replication before identification by antigen, nucleic acid or neutralisation methods. Some viruses cause little cytopathic effect and need immunofluorescence or molecular assays. Cell culture phenotype remains useful for phenotyping and antiviral susceptibility in reference settings.",
+      "say": "Cytopathic effect is the culture footprint; its pattern hints at the virus family.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Patterns",
+          "points": [
+            "Syncytia from cell fusion in RSV and measles",
+            "Rounding and detachment in many enteroviruses",
+            "Grape like clusters in adenovirus",
+            "Slow focal change in CMV"
+          ]
+        },
+        "right": {
+          "title": "Uses",
+          "points": [
+            "Initial recognition of viral growth",
+            "Quantification by plaque assay",
+            "Neutralisation tests measure antibody inhibition",
+            "Reference labs use it for unusual isolates"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Inclusion bodies** are intracellular accumulations of viral proteins or particles visible by light microscopy. Negri bodies are cytoplasmic inclusions in rabies infected neurons; Guarnieri bodies occur in poxvirus infection; Cowdry type A nuclear inclusions occur in herpesvirus infection; and CMV produces large owl eye nuclear inclusions. They are powerful morphology clues when present but lack sensitivity compared with PCR and immunohistochemistry.",
+      "say": "Inclusion bodies localise viral factories, from Negri bodies in rabies to owl eye CMV.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cytoplasmic inclusions",
+          "points": [
+            "Negri bodies in rabies neurons",
+            "Guarnieri bodies in poxvirus infection",
+            "Molluscum bodies in molluscum contagiosum",
+            "Rabies antigen testing is more sensitive than inclusion search"
+          ]
+        },
+        "right": {
+          "title": "Nuclear inclusions",
+          "points": [
+            "Cowdry A in HSV and VZV",
+            "Owl eye in CMV infected cells",
+            "Inclusions can overlap morphologically",
+            "Immunostains and PCR identify the agent"
+          ]
+        }
+      }
+    }
+  ]
+}
