@@ -1,0 +1,241 @@
+{
+  "v": 1,
+  "module": "phy-adrenal",
+  "subject": "physiology",
+  "title": "The Adrenal Cortex, Cortisol Dynamics, and Cushing Syndrome",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The mammalian adrenal cortex comprises three histologically and functionally distinct concentric cellular zones surrounding the central medulla. The outer **zona glomerulosa** synthesizes mineralocorticoids (principally aldosterone), the middle zona fasciculata produces glucocorticoids (predominantly cortisol), and the inner zona reticularis synthesizes adrenal sex androgens such as dehydroepiandrosterone.",
+      "say": "The adrenal cortex has three zones: glomerulosa makes aldosterone, fasciculata makes cortisol, and reticularis makes androgens.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Adrenal Cortical Zone",
+          "Relative Thickness",
+          "Principal Steroid Hormone",
+          "Primary Trophic Regulator"
+        ],
+        "rows": [
+          [
+            "Zona Glomerulosa",
+            "~15% (outer rim)",
+            "Aldosterone (Mineralocorticoid)",
+            "Angiotensin II and extracellular Potassium"
+          ],
+          [
+            "Zona Fasciculata",
+            "~75% (middle cords)",
+            "Cortisol (Glucocorticoid)",
+            "Adrenocorticotropic Hormone (ACTH)"
+          ],
+          [
+            "Zona Reticularis",
+            "~10% (inner net)",
+            "DHEA and Androstenedione (Androgens)",
+            "Adrenocorticotropic Hormone (ACTH)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "All adrenal steroidogenesis begins in the mitochondria with the cleavage of cholesterol to pregnenolone, catalyzed by the rate-limiting enzyme **cholesterol desmolase**, or CYP11A1. Adrenocorticotropic hormone binds melanocortin-2 receptors on fasciculata cells to stimulate cyclic AMP, accelerating cholesterol translocation across the mitochondrial membrane via StAR protein.",
+      "say": "Cholesterol desmolase cleaves cholesterol to pregnenolone, activated by ACTH through cyclic AMP and StAR protein.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "acth_bind",
+            "label": "Pituitary ACTH Binds Melanocortin-2 Receptors (MC2R) on Adrenal Cortex"
+          },
+          {
+            "id": "camp_star",
+            "label": "cAMP Activates StAR Protein to Import Cholesterol Across Mitochondrial Membrane"
+          },
+          {
+            "id": "desmolase",
+            "label": "CYP11A1 (Cholesterol Desmolase) Cleaves Cholesterol to Pregnenolone"
+          },
+          {
+            "id": "hydroxylase",
+            "label": "Microsomal 17-Alpha, 21-, and 11-Beta Hydroxylases Form Active Cortisol"
+          }
+        ],
+        "edges": [
+          [
+            "acth_bind",
+            "camp_star"
+          ],
+          [
+            "camp_star",
+            "desmolase"
+          ],
+          [
+            "desmolase",
+            "hydroxylase"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Circulating cortisol secretion displays a profound **circadian diurnal rhythm** entrained by the suprachiasmatic nucleus of the anterior hypothalamus. Cortisol concentrations reach their highest physiological peak around eight in the morning shortly after awakening, declining progressively throughout the day to a nadir at midnight.",
+      "say": "Cortisol follows a strict circadian rhythm, peaking in the morning around eight and falling to its lowest point at midnight.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Morning Peak (08:00 AM)",
+          "points": [
+            "Highest diurnal ACTH and cortisol concentrations (~15 to 25 mcg/dL)",
+            "Promotes morning arousal and wakefulness",
+            "Mobilizes hepatic glucose stores to support morning fast",
+            "Driven by pulsatile bursts of hypothalamic CRH"
+          ]
+        },
+        "right": {
+          "title": "Midnight Nadir (00:00 Midnight)",
+          "points": [
+            "Lowest physiological cortisol levels (< 1.8 to 3.0 mcg/dL)",
+            "Permits uninhibited immune surveillance and cellular repair",
+            "Loss of midnight nadir is the earliest sign of Cushing syndrome",
+            "Screened clinically using late-night salivary cortisol"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "As the primary circulating glucocorticoid, cortisol exerts extensive catabolic, lipolytic, and diabetogenic metabolic actions. Cortisol potently stimulates hepatic gluconeogenesis, accelerates skeletal muscle proteolysis to mobilize gluconeogenic amino acid substrates, and stimulates adipocyte lipolysis while downregulating **peripheral GLUT4 glucose uptake** in resting skeletal muscle and adipose tissues.",
+      "say": "Cortisol is a catabolic hormone, raising blood glucose through gluconeogenesis while breaking down muscle protein and fat.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cortisol",
+            "label": "Cortisol Diffuses into Target Cells and Binds Glucocorticoid Receptor (GR)"
+          },
+          {
+            "id": "liver_pepck",
+            "label": "Upregulates Hepatic PEPCK and Glucose-6-Phosphatase -> Accelerates Gluconeogenesis"
+          },
+          {
+            "id": "muscle_prot",
+            "label": "Stimulates Ubiquitin-Proteasome Skeletal Muscle Breakdown -> Releases Amino Acids"
+          },
+          {
+            "id": "ins_resist",
+            "label": "Inhibits Muscle and Adipocyte GLUT4 Translocation -> Induces Insulin Resistance"
+          }
+        ],
+        "edges": [
+          [
+            "cortisol",
+            "liver_pepck"
+          ],
+          [
+            "cortisol",
+            "muscle_prot"
+          ],
+          [
+            "cortisol",
+            "ins_resist"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cortisol exerts profound anti-inflammatory and immunosuppressive actions by inhibiting nuclear factor kappa B. This downregulates transcription of pro-inflammatory cytokines, suppresses phospholipase A2 via lipocortin induction, stabilizes lysosomal membranes, and induces **circulating lymphopenia and eosinopenia** while mobilizing marginated neutrophils into the circulation.",
+      "say": "Cortisol suppresses inflammation by blocking NF-kappa B and inducing lipocortin, dropping lymphocytes while increasing neutrophils.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Blood Cell Type",
+          "Effect of Glucocorticoids",
+          "Underlying Mechanism"
+        ],
+        "rows": [
+          [
+            "Neutrophils",
+            "Markedly Increased (Neutrophilia)",
+            "Demargination from vascular endothelial walls into circulating blood"
+          ],
+          [
+            "Lymphocytes (T and B cells)",
+            "Significantly Decreased (Lymphopenia)",
+            "Apoptosis of immature cells and sequestration in lymphoid tissues"
+          ],
+          [
+            "Eosinophils",
+            "Markedly Decreased (Eosinopenia)",
+            "Suppression of bone marrow release and enhanced peripheral apoptosis"
+          ],
+          [
+            "Monocytes / Macrophages",
+            "Decreased Function",
+            "Inhibition of phagocytosis and cytokine production (IL-1, IL-6, TNF-alpha)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cortisol also maintains essential vascular reactivity by transcriptionally upregulating alpha-1 adrenergic receptors on vascular smooth muscle cells, providing the **permissive vascular effect of cortisol**. In the total absence of basal cortisol, vascular tone collapses, producing catecholamine-resistant vasodilatory hypotension during severe physiological illness or stress.",
+      "say": "Cortisol provides a permissive effect on blood vessels, upregulating alpha-one receptors to maintain vascular tone.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/adrenal-cortex-medulla-steroids-catecholamines-fig1.webp",
+        "alt": "Adrenal cortical steroid synthesis pathways and catecholamine synergy",
+        "caption": "Steroidogenic enzymatic cascades, adrenal cortical zonal histology, and cardiovascular permissive actions."
+      }
+    },
+    {
+      "tx": "Sustained, pathological glucocorticoid excess from any etiology produces the clinical constellation of **Cushing syndrome**. Patients display centripetal fat redistribution (moon facies, buffalo hump, truncal obesity), proximal muscle wasting, violaceous abdominal striae, thin fragile skin, osteoporosis, hypertension, and secondary diabetes mellitus.",
+      "say": "Cushing syndrome is chronic cortisol excess, causing moon facies, buffalo hump, purple striae, and muscle wasting.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cushing-disease-fig1.webp",
+        "alt": "Cushing syndrome clinical manifestations and ACTH adenoma",
+        "caption": "Pituitary corticotroph adenoma in Cushing disease, hypercortisolemia features, and adrenal hyperplasia."
+      }
+    },
+    {
+      "tx": "Differentiating the underlying pathophysiological etiology of Cushing syndrome requires measuring plasma adrenocorticotropic hormone. Suppressed ACTH definitively isolates the disorder to an autonomous adrenal cortical adenoma or carcinoma, whereas elevated ACTH signifies ACTH-dependent disease, categorized into **pituitary Cushing disease** and occult ectopic ACTH secretion.",
+      "say": "Measuring ACTH separates adrenal adenomas with low ACTH from pituitary or ectopic tumors with high ACTH.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cushing_conf",
+            "label": "Hypercortisolemia Confirmed via 24-Hour Urine Free Cortisol or Low-Dose Dexamethasone"
+          },
+          {
+            "id": "acth_meas",
+            "label": "Measure Plasma ACTH: Low (< 5 pg/mL) vs High / Inappropriately Normal (> 15 pg/mL)"
+          },
+          {
+            "id": "adrenal_ind",
+            "label": "Low ACTH: Primary Adrenal Adenoma / Carcinoma (ACTH-Independent)"
+          },
+          {
+            "id": "high_dose_dex",
+            "label": "High ACTH: High-Dose Dexamethasone (8 mg) -> Pituitary Cushing Disease Suppresses >50%"
+          }
+        ],
+        "edges": [
+          [
+            "cushing_conf",
+            "acth_meas"
+          ],
+          [
+            "acth_meas",
+            "adrenal_ind"
+          ],
+          [
+            "acth_meas",
+            "high_dose_dex"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

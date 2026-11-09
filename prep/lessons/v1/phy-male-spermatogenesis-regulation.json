@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phy-male",
+  "subject": "physiology",
+  "title": "Spermatogenesis, Sertoli Cells, and Leydig Cell Regulation",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Male reproductive function is anchored by the dual endocrine and gametogenic operations of the paired testes. Compartmentalized within convoluted seminiferous tubules, continuous production of haploid spermatozoa from diploid spermatogonia is designated **spermatogenesis**, requiring seventy-four days to complete full developmental maturation.",
+      "say": "Spermatogenesis takes seventy-four days within seminiferous tubules, producing haploid sperm from diploid precursors.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cellular Stage",
+          "Chromosomal Ploidy",
+          "DNA Content",
+          "Key Cytological Feature"
+        ],
+        "rows": [
+          [
+            "Spermatogonia (Type A & B)",
+            "Diploid (2n = 46 chromosomes)",
+            "2C DNA content",
+            "Mitotic self-renewal and lineage commitment"
+          ],
+          [
+            "Primary Spermatocytes",
+            "Diploid (2n = 46 chromosomes)",
+            "4C DNA content",
+            "Undergoes prolonged Meiosis I prophase"
+          ],
+          [
+            "Secondary Spermatocytes",
+            "Haploid (1n = 23 chromosomes)",
+            "2C DNA content",
+            "Rapidly completes Meiosis II without delay"
+          ],
+          [
+            "Spermatids",
+            "Haploid (1n = 23 chromosomes)",
+            "1C DNA content",
+            "Undergoes spermiogenesis (flagellar remodeling)"
+          ],
+          [
+            "Mature Spermatozoa",
+            "Haploid (1n = 23 chromosomes)",
+            "1C DNA content",
+            "Condensed protamine nucleus; shed into tubule lumen"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The somatic nurse cells of the seminiferous epithelium are the columnar **Sertoli cells**, extending from the basal lamina to the tubular lumen. Sertoli cells envelop developing germ cells, providing essential structural support, metabolic lactate nutrition, and phagocytosis of discarded spermatid residual cytoplasm.",
+      "say": "Sertoli cells act as nurse cells spanning the tubule, nourishing germ cells and engulfing discarded cytoplasm.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sertoli Cells (Intratubular)",
+          "points": [
+            "Target of follicle-stimulating hormone (FSH) via Gs/cAMP",
+            "Form the blood-testis barrier via tight junctions",
+            "Secrete Androgen-Binding Protein (ABP) and Inhibin B",
+            "Convert testosterone to estradiol via aromatase enzyme"
+          ]
+        },
+        "right": {
+          "title": "Leydig Cells (Interstitial)",
+          "points": [
+            "Located in vascular connective tissue outside tubules",
+            "Target of luteinizing hormone (LH) via Gs/cAMP",
+            "Express cholesterol desmolase and 17-beta-HSD",
+            "Synthesize and secrete over 95% of circulating testosterone"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Adjacent Sertoli cells form specialized occluding zonula occludens tight junctions near the tubular basement membrane, establishing the impenetrable **blood-testis barrier**. This anatomical barrier divides the seminiferous epithelium into a basal compartment containing diploid spermatogonia and a specialized adluminal compartment housing developing post-meiotic spermatocytes.",
+      "say": "The blood-testis barrier isolates post-meiotic germ cells from the immune system using tight junctions between Sertoli cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sertoli_tight",
+            "label": "Adjacent Sertoli Cell Basolateral Membranes Form Occluding Tight Junctions"
+          },
+          {
+            "id": "barrier_est",
+            "label": "Establishes Blood-Testis Barrier: Separates Basal from Adluminal Compartments"
+          },
+          {
+            "id": "neo_antigen",
+            "label": "Post-Meiotic Spermatids Express Novel Haploid Cell-Surface Neo-Antigens"
+          },
+          {
+            "id": "immune_priv",
+            "label": "Prevents Autoimmune Recognition, Halting Cytotoxic Autoantibody Formation"
+          }
+        ],
+        "edges": [
+          [
+            "sertoli_tight",
+            "barrier_est"
+          ],
+          [
+            "barrier_est",
+            "neo_antigen"
+          ],
+          [
+            "neo_antigen",
+            "immune_priv"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because meiotic recombination generates novel haploid cell-surface antigens that the host immune system would recognize as foreign, the blood-testis barrier creates **testicular immune privilege**. Breach of this barrier through testicular trauma, biopsy, or mumps orchitis permits autoantibody formation, causing secondary autoimmune infertility.",
+      "say": "Disrupting the blood-testis barrier allows autoimmune antibodies to form against sperm, causing infertility.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/androgen-deficiency-aging-male-fig1.webp",
+        "alt": "Testicular architecture and Sertoli-Leydig cellular microenvironment",
+        "caption": "Seminiferous tubule cross-section, Sertoli-germ cell junctions, and interstitial Leydig clusters."
+      }
+    },
+    {
+      "tx": "Endocrine regulation of testicular gametogenesis and steroidogenesis operates via the classic hypothalamic-pituitary-gonadal axis. Hypothalamic gonadotropin-releasing hormone stimulates anterior pituitary gonadotrophs to secrete **luteinizing hormone and follicle-stimulating hormone** in synchronized, pulsatile bursts every ninety to one hundred twenty minutes throughout adult life.",
+      "say": "Pulsatile hypothalamic GnRH drives pituitary release of LH to stimulate Leydig cells, and FSH to stimulate Sertoli cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gnrh_pulse",
+            "label": "Hypothalamic Arcuate Nucleus Emits Pulsatile GnRH Bursts Every 90-120 Minutes"
+          },
+          {
+            "id": "pit_lh_fsh",
+            "label": "Anterior Pituitary Gonadotrophs Secrete Glycoproteins LH and FSH"
+          },
+          {
+            "id": "leydig_lh",
+            "label": "LH Binds Leydig Cells -> Stimulates Testosterone Synthesis"
+          },
+          {
+            "id": "sertoli_fsh",
+            "label": "FSH Binds Sertoli Cells -> Drives Spermatogenesis and ABP Secretion"
+          }
+        ],
+        "edges": [
+          [
+            "gnrh_pulse",
+            "pit_lh_fsh"
+          ],
+          [
+            "pit_lh_fsh",
+            "leydig_lh"
+          ],
+          [
+            "pit_lh_fsh",
+            "sertoli_fsh"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Luteinizing hormone acts on interstitial Leydig cells via cyclic AMP to stimulate the steroidogenic synthesis of **testosterone from cholesterol**. Over ninety-five percent of circulating male testosterone is produced by Leydig cells, while the remainder is contributed by the adrenal zona reticularis.",
+      "say": "Luteinizing hormone stimulates Leydig cells to produce ninety-five percent of circulating testosterone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Systemic Circulating Testosterone",
+          "points": [
+            "Normal male serum concentration: 300 to 1000 ng/dL",
+            "60% bound tightly to Sex Hormone-Binding Globulin (SHBG)",
+            "38% bound loosely to albumin (bioavailable fraction)",
+            "Only 2% circulates as free active hormone"
+          ]
+        },
+        "right": {
+          "title": "Intratesticular Testosterone",
+          "points": [
+            "Concentrated 100-fold higher than systemic blood levels",
+            "Tightly bound by Androgen-Binding Protein (ABP) in tubule fluid",
+            "Absolute requirement for normal spermatogenesis progression",
+            "Exogenous testosterone suppresses LH, paradoxically causing azoospermia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sertoli cells synthesize and secrete the high-affinity glycoprotein **androgen-binding protein** into the tubular lumen under follicle-stimulating hormone stimulation. Androgen-binding protein sequesters testosterone, maintaining intratesticular testosterone concentrations one hundred times higher than systemic circulation, an absolute physiological requirement for normal spermatogenesis.",
+      "say": "Androgen-binding protein concentrates testosterone inside seminiferous tubules to levels one hundred times higher than blood.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/testicular-cancer-fig1.webp",
+        "alt": "Testicular germ cell neoplasia and endocrine regulation",
+        "caption": "Seminiferous germ cell kinetics, testicular endocrine tumors, and gonadotropic dysregulation."
+      }
+    },
+    {
+      "tx": "Selective negative feedback on pituitary FSH secretion is exerted by the heterodimeric glycoprotein **inhibin B**, synthesized by Sertoli cells in proportion to active spermatogenesis. Conversely, circulating testosterone feeds back to both the hypothalamus and pituitary, suppressing pulsatile secretion of GnRH and luteinizing hormone.",
+      "say": "Inhibin B from Sertoli cells selectively suppresses FSH, while testosterone inhibits both LH and hypothalamic GnRH.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hormone Factor",
+          "Primary Cellular Origin",
+          "Direct Regulatory Target",
+          "Negative Feedback Action"
+        ],
+        "rows": [
+          [
+            "Testosterone",
+            "Leydig interstitial cells",
+            "Hypothalamus and Pituitary",
+            "Inhibits pulsatile GnRH and selectively suppresses LH"
+          ],
+          [
+            "Inhibin B",
+            "Sertoli nurse cells",
+            "Anterior Pituitary Gonadotrophs",
+            "Selectively suppresses FSH secretion without altering LH"
+          ],
+          [
+            "Estradiol (via aromatase)",
+            "Adipose tissue and Sertoli cells",
+            "Hypothalamus and Pituitary",
+            "Suppresses both GnRH and gonadotropins"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
