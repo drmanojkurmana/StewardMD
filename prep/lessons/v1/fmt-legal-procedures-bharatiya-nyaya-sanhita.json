@@ -1,0 +1,324 @@
+{
+ "v": 1,
+ "id": "fmt-legal-procedures-bharatiya-nyaya-sanhita",
+ "subject": "forensic-medicine",
+ "module": "fmt-legal-procedures",
+ "title": "Legal Procedures: Bharatiya Nyaya Sanhita, Bharatiya Sakshya Adhiniyam and Court Powers",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Evolution of substantive criminal law in India",
+   "tx": "Replacing the Indian Penal Code of 1860, the **Bharatiya Nyaya Sanhita codification** serves as the primary substantive criminal statute defining offences, culpable mental states, and punitive measures across India. Medical practitioners frequently interface with this statute when documenting blunt force trauma, firearm lacerations, sexual offences, unnatural fatalities, dowry harassment, poisoned casualties, and clinical negligence disputes before criminal trial benches.",
+   "say": "The Bharatiya Nyaya Sanhita replaces the Indian Penal Code. It defines offences and punishments, guiding doctors who examine trauma, sexual assault, poisoning, and clinical negligence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Medicolegal offence",
+     "Historic IPC section",
+     "Bharatiya Nyaya Sanhita section"
+    ],
+    "rows": [
+     [
+      "Murder / intentional homicide",
+      "Section 302 IPC",
+      "Section 103 BNS"
+     ],
+     [
+      "Culpable homicide not amounting to murder",
+      "Section 304 IPC",
+      "Section 105 BNS"
+     ],
+     [
+      "Causing death by rash or negligent act",
+      "Section 304A IPC",
+      "Section 106(1) BNS"
+     ],
+     [
+      "Grievous hurt / permanent disfigurement",
+      "Section 320 IPC",
+      "Section 116 BNS"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Grievous hurt criteria under modern statute",
+   "tx": "In medicolegal injury certification, the statutory **grievous hurt legal criteria** dictate elevated criminal culpability whenever physical violence causes permanent privation of sight, hearing, limb amputation, facial disfigurement, bone fracture, or joint dislocation. Crucially, clause eight classifies any injury that endangers life or causes the victim to remain in severe bodily pain or unable to follow ordinary pursuits for twenty days as grievous.",
+   "say": "Grievous hurt covers loss of sight, hearing, limbs, permanent facial disfigurement, fractures, tooth loss, life-endangering trauma, or inability to perform daily activities for twenty days.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Traumatic injury examined by medical officer"
+     },
+     {
+      "id": "b",
+      "label": "Assessment against eight statutory grievous clauses"
+     },
+     {
+      "id": "c",
+      "label": "Radiological or clinical confirmation of fracture / privation"
+     },
+     {
+      "id": "d",
+      "label": "Certification as simple versus grievous hurt in injury report"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Medical negligence provisions under Section 106 BNS",
+   "tx": "Under criminal law reform, the **medical practitioner negligence proviso** in Section 106(1) of the Bharatiya Nyaya Sanhita establishes distinct statutory sentencing parameters for registered doctors. While general rash or negligent acts resulting in death carry imprisonment up to five years, clinical negligence by a registered medical practitioner during a professional medical procedure carries a mitigated ceiling of two years imprisonment along with fines.",
+   "say": "Section 106 of the Bharatiya Nyaya Sanhita reduces the maximum prison term for registered doctors to two years for procedural medical negligence, recognizing clinical risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "General rash or negligent act",
+     "points": [
+      "Covered under Section 106(1) main clause",
+      "Includes rash driving and industrial negligence",
+      "Carries imprisonment up to 5 years plus fine",
+      "Subject to general police arrest powers"
+     ]
+    },
+    "right": {
+     "title": "Doctor professional procedure",
+     "points": [
+      "Covered under Section 106(1) proviso",
+      "Applies to registered medical practitioners",
+      "Maximum imprisonment limited to 2 years",
+      "Requires gross negligence per Jacob Mathew rule"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Bharatiya Sakshya Adhiniyam and evidentiary rules",
+   "tx": "Replacing the Indian Evidence Act of 1872, the **Bharatiya Sakshya Adhiniyam enactment** governs all rules of evidence, admissibility, witness competence, and expert testimony in judicial trials. Medical witnesses present documentary evidence comprising injury sheets, postmortem reports, and chemical analysis certificates, which transition from ordinary hearsay into admissible trial records through oral corroboration and cross-examination in open court.",
+   "say": "The Bharatiya Sakshya Adhiniyam replaces the Evidence Act. It sets rules for admitting injury certificates, autopsy reports, and expert medical testimony in trials.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Evidentiary rule",
+     "Historic Evidence Act",
+     "Bharatiya Sakshya Adhiniyam"
+    ],
+    "rows": [
+     [
+      "Expert opinion on medical science",
+      "Section 45 IEA",
+      "Section 39 BSA"
+     ],
+     [
+      "Dying declaration admissibility",
+      "Section 32(1) IEA",
+      "Section 26 BSA"
+     ],
+     [
+      "Refreshing memory using case notes",
+      "Section 159 IEA",
+      "Section 162 BSA"
+     ],
+     [
+      "Admissibility of electronic digital records",
+      "Section 65B IEA",
+      "Section 63 BSA"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Expert medical witness testimony under Section 39 BSA",
+   "tx": "When a court forms an opinion regarding forensic science, toxicology, cause of death, or biological identity, the **expert witness testimony framework** under Section 39 BSA permits medical officers to state expert opinions. Unlike ordinary witnesses who may testify only to observed facts, a medical expert is legally permitted to interpret findings, deduce injury mechanisms, estimate time since death, and reconstruct wound trajectories.",
+   "say": "Under Section 39 of the evidence statute, medical experts can provide professional opinions on injury mechanisms, weapon types, and time since death, unlike lay witnesses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Common witness of fact",
+     "points": [
+      "Testifies only to facts directly perceived",
+      "Cannot offer scientific deductions or guesses",
+      "Personal perception required (saw, heard)",
+      "No specialized qualification required"
+     ]
+    },
+    "right": {
+     "title": "Expert medical witness",
+     "points": [
+      "Can offer scientific opinions and deductions",
+      "Interprets autopsy and clinical records",
+      "Explains pathophysiological mechanisms",
+      "Possesses special training in medicine"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Hierarchy and sentencing powers of the Supreme Court and High Courts",
+   "tx": "The criminal judiciary in India follows a strict jurisdictional ladder, headed by the **constitutional court sentencing authority** vested in the Supreme Court and state High Courts. The Supreme Court operates as the ultimate appellate authority, while state High Courts possess statutory power to pass any sentence authorized by law, including capital punishment, life imprisonment, and supervisory review over all lower subordinate criminal benches.",
+   "say": "The Supreme Court and state High Courts hold apex judicial authority. High Courts can pass any lawful sentence, including life imprisonment and capital punishment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Supreme Court of India (Apex Court)"
+     },
+     {
+      "id": "b",
+      "label": "State High Court (Can pass any sentence)"
+     },
+     {
+      "id": "c",
+      "label": "Sessions Court (Death sentence requires HC confirmation)"
+     },
+     {
+      "id": "d",
+      "label": "Magistrate Courts (CJM, JMFC, JMSC)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Sessions Court and Additional Sessions Judge powers",
+   "tx": "At the district tier, the presiding **Sessions Court criminal jurisdiction** exercises trial authority over major offences including homicide, dowry murder, rape, and major dacoity. A Sessions Judge or Additional Sessions Judge may pass any sentence authorized by law; however, any sentence of capital death awarded by a Sessions Court remains legally suspended until formally confirmed by a division bench of the respective state High Court.",
+   "say": "Sessions Judges can award any lawful sentence including life imprisonment, but any death sentence must be confirmed by the High Court before execution.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Judicial designation",
+     "Maximum imprisonment power",
+     "Fine awarding power"
+    ],
+    "rows": [
+     [
+      "High Court Judge",
+      "Any sentence authorised by law",
+      "Unlimited fine"
+     ],
+     [
+      "Sessions / Addl Sessions Judge",
+      "Any sentence (death needs HC confirmation)",
+      "Unlimited fine"
+     ],
+     [
+      "Assistant Sessions Judge",
+      "Imprisonment up to 10 years",
+      "Unlimited fine"
+     ],
+     [
+      "Chief Judicial Magistrate (CJM)",
+      "Imprisonment up to 7 years",
+      "Unlimited fine under new code"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Subordinate magistrate sentencing powers",
+   "tx": "Governing primary criminal trials, the **subordinate judicial magistrate powers** define the jurisdictional limits of daily courtroom sentencing. A Chief Judicial Magistrate or Chief Metropolitan Magistrate can impose imprisonment up to seven years. A Judicial Magistrate of the First Class (JMFC) can pass imprisonment terms up to three years, whereas a Second Class Magistrate is restricted to imprisonment not exceeding one year.",
+   "say": "Chief Judicial Magistrates can sentence up to seven years. First Class Magistrates can sentence up to three years, while Second Class Magistrates are capped at one year.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Magistrate tier",
+     "Imprisonment threshold",
+     "Fine threshold"
+    ],
+    "rows": [
+     [
+      "Chief Judicial Magistrate / CMM",
+      "Up to 7 years",
+      "Unlimited fine"
+     ],
+     [
+      "Judicial Magistrate 1st Class (JMFC)",
+      "Up to 3 years",
+      "Fine up to 50,000 rupees"
+     ],
+     [
+      "Judicial Magistrate 2nd Class (JMSC)",
+      "Up to 1 year",
+      "Fine up to 10,000 rupees"
+     ],
+     [
+      "Executive Magistrate",
+      "Maintains public peace / bonds",
+      "No trial imprisonment powers"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Electronic records and digital evidentiary certificates",
+   "tx": "With the modernization of procedural law, statutory rules enforce **electronic evidence digital certification** under Section 63 BSA for electronic medical records, digital hospital monitors, ECG printouts, CT scan DICOM files, and mortuary videography. The treating clinician or hospital IT custodian must submit a signed compliance certificate verifying device integrity, uninterrupted operation, and authenticity before electronic printouts are admitted into legal evidence.",
+   "say": "Digital hospital records, CT scans, and mortuary videos require an electronic certificate under Section 63 BSA confirming device security before court admission.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Electronic clinical data generated on hospital system"
+     },
+     {
+      "id": "b",
+      "label": "Secure digital storage with timestamp and hash log"
+     },
+     {
+      "id": "c",
+      "label": "Printing / extraction with custodian compliance certificate"
+     },
+     {
+      "id": "d",
+      "label": "Admitted as primary electronic evidence under Section 63 BSA"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

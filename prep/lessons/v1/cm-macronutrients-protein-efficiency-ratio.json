@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "id": "cm-macronutrients-protein-efficiency-ratio",
+ "subject": "community-medicine",
+ "module": "cm-macronutrients",
+ "title": "Fats and Lipids: Essential Fatty Acids and Protein Efficiency Ratio",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Protein efficiency ratio bioassay",
+   "tx": "In preclinical food evaluation, nutritional scientists measure protein bioavailability through the standardized **protein efficiency ratio bioassay**, defined as the gain in body weight of young growing laboratory rats divided by their total weight of test protein consumed over a twenty-eight-day trial period. While simple and reproducible, it overestimates the protein requirements of humans because growing rodents possess a significantly faster rate of fur and skeletal growth.",
+   "say": "The protein efficiency ratio divides the weight gained by growing rats by the grams of protein they ate over four weeks. It provides a simple animal measure of protein growth power.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Protein food source", "Protein Efficiency Ratio (PER)", "Quality assessment"],
+    "rows": [
+     ["Casein (milk reference standard)", "2.5 (standardized baseline)", "High quality reference standard"],
+     ["Whole egg protein", "3.8 to 4.0", "Superior growth promoting capacity"],
+     ["Beef and poultry meat", "2.8 to 3.2", "High quality tissue building protein"],
+     ["Soybean flour protein", "2.1 to 2.3", "Good quality plant protein source"],
+     ["Wheat gluten protein", "0.8 to 1.1", "Poor growth unless fortified with lysine"]
+    ]
+   }
+  },
+  {
+   "title": "Digestibility-corrected scoring: PDCAAS",
+   "tx": "Recognizing the limitations of rodent assays, modern regulatory bodies adopted the **protein digestibility-corrected amino acid score** (PDCAAS) as the official standard for human nutrition labeling. Computed by multiplying the chemical amino acid score of the most limiting amino acid by the true faecal protein digestibility, scores are truncated at one point zero zero, with cow milk, eggs and soy protein isolate achieving the maximum possible rating of one.",
+   "say": "Modern food labeling uses the digestibility-corrected amino acid score. It multiplies the limiting amino acid score by gut absorption, giving milk, eggs and soy a perfect score of one.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Protein Efficiency Ratio (PER)",
+     "points": ["Weight gain in grams / protein eaten in grams", "Measures rodent growth over 28 days", "Overestimates human amino acid needs"]
+    },
+    "right": {
+     "title": "PDCAAS standard",
+     "points": ["Amino acid score x True faecal digestibility", "Reflects human preschooler amino acid targets", "Maximum truncated value capped at 1.00"]
+    }
+   }
+  },
+  {
+   "title": "Dietary lipids and essential fatty acids",
+   "tx": "Dietary fats supply concentrated energy at nine kilocalories per gram, facilitate the absorption of fat-soluble vitamins (A, D, E and K), and provide **essential fatty acids** that cannot be synthesized endogenously by human desaturase enzymes. Humans lack the delta-twelve and delta-fifteen desaturases required to insert double bonds beyond carbon-nine of fatty acyl chains, mandating regular dietary intake of polyunsaturated fatty acids to maintain cell membrane fluidity and eicosanoid synthesis.",
+   "say": "Fats provide nine calories per gram and help absorb fat-soluble vitamins. The body cannot make essential polyunsaturated fats on its own, so they must come from our daily food.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fatty acid class", "Representative molecule", "Primary dietary vegetable source"],
+    "rows": [
+     ["Omega-6 essential PUFA", "Linoleic acid (18:2 n-6)", "Sunflower, safflower, corn, soybean oils"],
+     ["Omega-3 essential PUFA", "Alpha-linolenic acid (18:3 n-3)", "Flaxseed (linseed), mustard oil, walnuts"],
+     ["Long-chain omega-3 PUFA", "Eicosapentaenoic acid (EPA, 20:5)", "Marine fatty fish, salmon, mackerel, sardine"],
+     ["Monounsaturated FA", "Oleic acid (18:1 n-9)", "Olive oil, groundnut oil, mustard oil"]
+    ]
+   }
+  },
+  {
+   "title": "Linoleic acid and deficiency manifestations",
+   "tx": "The primary parent omega-6 polyunsaturated fatty acid is **linoleic acid**, an eighteen-carbon fatty acid with two cis double bonds (18:2 n-6), which elongates and desaturates into arachidonic acid, the precursor for prostaglandins, thromboxanes and leukotrienes. Dietary deficiency causes dry scaly dermatitis, impaired wound healing, alopecia, thrombocytopenia, and follicular hyperkeratosis known as toad skin or phrynoderma, responding rapidly to vegetable oil supplementation.",
+   "say": "Linoleic acid is the primary omega-six fatty acid needed to build cell membranes and prostaglandins. Deficiency causes rough, bumpy skin called toad skin or phrynoderma, hair loss and poor wound healing.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/essential-fatty-acid-deficiency-fig1.webp",
+    "alt": "Clinical photograph and biochemical pathways of essential fatty acid deficiency showing phrynoderma and triene-tetraene ratio",
+    "caption": "Essential fatty acid deficiency: Scaly dermatosis, follicular hyperkeratosis (phrynoderma), and elevated triene to tetraene ratio. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Alpha-linolenic acid and marine omega-3 lipids",
+   "tx": "The parent omega-3 fatty acid **alpha-linolenic acid** (18:3 n-3) undergoes elongation into eicosapentaenoic acid (EPA) and docosahexaenoic acid (DHA), which are vital structural constituents of cerebral synaptic membranes and retinal photoreceptor outer segments. Omega-3 eicosanoids exert anti-inflammatory, anti-thrombotic and vasodilatory effects, dampening platelet aggregation and lowering plasma triglyceride concentrations to protect against fatal cardiac arrhythmias.",
+   "say": "Alpha-linolenic acid is converted into DHA and EPA, which build brain synapses and retinal membranes. Omega-three fats reduce blood clotting, lower triglycerides and protect against heart attacks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Omega-6 (Linoleic acid)",
+     "points": ["Precursor of arachidonic acid", "Pro-inflammatory eicosanoids (PGE2, TXA2)", "Platelet aggregator and vasoconstrictor"]
+    },
+    "right": {
+     "title": "Omega-3 (Alpha-linolenic acid)",
+     "points": ["Precursor of EPA and DHA", "Anti-inflammatory eicosanoids (PGE3, PGI3)", "Anti-arrhythmic and lowers plasma triglycerides"]
+    }
+   }
+  },
+  {
+   "title": "The dietary omega-6 to omega-3 ratio",
+   "tx": "Modern nutritional guidelines emphasize balancing the **omega-6 to omega-3 ratio**, warning against excessive consumption of refined seed oils like sunflower or safflower that drive the ratio beyond twenty to one. The National Institute of Nutrition recommends an ideal dietary ratio between five to one and ten to one, achievable by incorporating mustard oil, canola oil, flaxseeds, walnuts or fatty fish into routine household meal preparation.",
+   "say": "Modern diets consume far too much omega-six seed oil, throwing the fat balance out of proportion. Incorporating mustard oil, walnuts and flaxseeds restores the healthy five-to-one balance.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Cooking oil source", "Predominant fatty acid profile", "Nutritional recommendation"],
+    "rows": [
+     ["Mustard oil", "Rich in MUFA + Alpha-linolenic acid (ALA)", "Optimal choice for northern and eastern diets"],
+     ["Groundnut oil", "High in oleic acid (MUFA), stable for frying", "Balanced profile, moderate omega-6 content"],
+     ["Sunflower / Safflower", "Extremely high in linoleic acid (>70%)", "Blend with mustard or olive to balance omega-3"],
+     ["Coconut oil", "High in medium-chain saturated fats (lauric)", "Stable; limit to moderate regional intake"]
+    ]
+   }
+  },
+  {
+   "title": "Visible versus invisible dietary fat",
+   "tx": "In community dietary assessment, nutritionists distinguish **visible dietary fat** (cooking oils, ghee, butter and vanaspati added to recipes) from invisible fat naturally present within cereals, pulses, nuts, oilseeds, dairy and meat. Invisible fats contribute ten to fifteen grams of fatty acids daily even in poor vegetarian diets; consequently, daily visible oil consumption should not exceed twenty to thirty grams per person.",
+   "say": "Visible fats are cooking oils and butter added in the kitchen. Invisible fats are naturally hidden inside rice, lentils and nuts, quietly supplying up to fifteen grams of fat daily.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Visible fats (cooking fats)",
+     "points": ["Vegetable oils, mustard oil, ghee, butter", "Directly measured in household food budgets", "Recommended limit: 20 to 30 g/day per adult"]
+    },
+    "right": {
+     "title": "Invisible fats (food matrix)",
+     "points": ["Constituent lipids inside grains, pulses, nuts", "Provides 10 to 15 grams daily in vegetarian diets", "Major source of essential fatty acids in rural poor"]
+    }
+   }
+  },
+  {
+   "title": "Saturated fatty acids and cardiovascular thresholds",
+   "tx": "Excessive intake of **saturated fatty acids**, particularly myristic, palmitic and lauric acids found in dairy butter, animal tallow and palm oil, downregulates hepatic LDL receptor expression, raising circulating LDL cholesterol and promoting coronary atheroma formation. National guidelines mandate that saturated fat should contribute less than ten percent of total daily calorie intake, with individuals with dyslipidaemia or diabetes restricting intake below seven percent.",
+   "say": "Saturated fats from butter and palm oil raise bad LDL cholesterol by blunting liver clearance receptors. Keep saturated fat intake below ten percent of your daily calories.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fatty acid type", "Effect on serum LDL-C", "Recommended caloric cap"],
+    "rows": [
+     ["Saturated fatty acids (SFA)", "Raises LDL cholesterol significantly", "Less than 10 percent of total calories"],
+     ["Monounsaturated fatty acids (MUFA)", "Lowers LDL, preserves protective HDL", "10 to 15 percent of total calories"],
+     ["Polyunsaturated fatty acids (PUFA)", "Lowers LDL, improves insulin sensitivity", "6 to 10 percent of total calories"],
+     ["Trans fatty acids", "Raises LDL and lowers protective HDL", "Less than 1 percent (target zero)"]
+    ]
+   }
+  },
+  {
+   "title": "Dual cooking oil strategy for balanced fatty acids",
+   "tx": "Because no single vegetable oil provides the ideal proportions of saturated, monounsaturated and polyunsaturated fatty acids, community health specialists advocate a **dual cooking oil strategy**. Families are advised to use two different oils in combination, such as pairing a monounsaturated-rich oil like groundnut or mustard with a polyunsaturated-rich oil like rice bran or sunflower, ensuring balanced eicosanoid production and minimizing dyslipidaemia.",
+   "say": "No single cooking oil is perfect. Rotating or blending two different oils, such as groundnut with mustard or rice bran, delivers a balanced blend of healthy fats across meals.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "No single natural oil has ideal fat ratios"},
+     {"id": "b", "label": "Pair MUFA oil (mustard/groundnut) with PUFA oil (rice bran)"},
+     {"id": "c", "label": "Balanced 1:1:1 SFA:MUFA:PUFA intake achieved"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  }
+ ],
+ "quiz": []
+}

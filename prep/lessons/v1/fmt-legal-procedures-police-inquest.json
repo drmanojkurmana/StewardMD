@@ -1,0 +1,343 @@
+{
+ "v": 1,
+ "id": "fmt-legal-procedures-police-inquest",
+ "subject": "forensic-medicine",
+ "module": "fmt-legal-procedures",
+ "title": "Legal Procedures: Police Inquest and Magistrate Inquest Framework",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Statutory concept and primary objectives of an inquest",
+   "tx": "In forensic jurisprudence, a formal **statutory inquest inquiry** represents a legal investigation conducted to ascertain the apparent cause of death in unnatural, sudden, suspicious, or violent fatalities. The investigating authority examines the dead body on-site, inspects the immediate surroundings, records witness statements, notes external injuries, and determines whether death resulted from homicide, suicide, accident, or natural disease under suspicious circumstances.",
+   "say": "An inquest is a legal inquiry into the cause of unnatural, sudden, or suspicious death. The investigating officer examines the deceased and surroundings to determine whether foul play occurred.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Discovery of unnatural or suspicious death"
+     },
+     {
+      "id": "b",
+      "label": "Intimation to local police or executive magistrate"
+     },
+     {
+      "id": "c",
+      "label": "On-site scene examination and panchnama"
+     },
+     {
+      "id": "d",
+      "label": "Requisition for medicolegal autopsy if indicated"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Police inquest under the criminal procedure framework",
+   "tx": "Governed by statutory criminal provisions, the **police inquest procedure** is initiated by the officer in charge of a police station or an authorized officer not below the rank of sub-inspector. Upon receiving information regarding an unnatural death, the investigating officer immediately proceeds to the scene, summons two or more respectable local inhabitants as panchas, inspects the deceased, and prepares a detailed panchnama report.",
+   "say": "Police inquests are conducted by a police sub-inspector who visits the scene, summons local witnesses called panchas, inspects the body, and writes a detailed panchnama report.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Procedural parameter",
+     "Police inquest rule",
+     "Medicolegal implication"
+    ],
+    "rows": [
+     [
+      "Investigating officer",
+      "Sub-inspector rank or higher",
+      "Empowered under Section 174 CrPC / Section 194 BNSS"
+     ],
+     [
+      "Witness requirements",
+      "Two or more local panchas",
+      "Must witness body inspection and sign panchnama report"
+     ],
+     [
+      "Scope of investigation",
+      "Apparent cause and external marks",
+      "Describes ligature marks, wounds, fractures and weapon marks"
+     ],
+     [
+      "Referral for postmortem",
+      "Sent to authorised medical officer",
+      "Mandatory whenever doubt exists regarding true cause of death"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The inquest panchnama report and postmortem requisition",
+   "tx": "The formal **inquest panchnama document** describes the exact position of the deceased, clothing condition, postmortem staining distribution, rigor mortis, visible trauma, and ambient scene evidence. If any suspicion of foul play exists or the cause of death is not entirely obvious, the investigating officer forwards the corpse along with the inquest papers and dead body challan to the nearest authorized medical officer for autopsy.",
+   "say": "The panchnama describes the position of the body, clothing, lividity, wounds, and scene evidence. The officer sends these documents to the doctor with the autopsy requisition.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Scene inspection and documentation"
+     },
+     {
+      "id": "b",
+      "label": "Preparation of inquest report and challan"
+     },
+     {
+      "id": "c",
+      "label": "Secure body transport under police guard"
+     },
+     {
+      "id": "d",
+      "label": "Delivery to hospital mortuary for postmortem"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Magistrate inquest jurisdictions and statutory mandates",
+   "tx": "Under specialized circumstances, an authoritative **magistrate inquest inquiry** supersedes or supplements police inquiries to ensure judicial transparency and prevent administrative bias. Conducted by an Executive Magistrate or Judicial Magistrate, this inquiry is legally mandated in custodial deaths, deaths during police interrogation, deaths resulting from police firing, prison fatalities, and suspected dowry deaths occurring within seven years of marriage.",
+   "say": "Magistrate inquests are conducted by executive or judicial magistrates in custodial deaths, police firing, prison fatalities, and dowry deaths of women within seven years of marriage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fatal scenario",
+     "Mandatory inquest authority",
+     "Statutory rationale"
+    ],
+    "rows": [
+     [
+      "Death in police custody / lock-up",
+      "Judicial / Metropolitan Magistrate",
+      "Eliminates departmental bias and ensures independent judicial inquiry"
+     ],
+     [
+      "Death of woman within 7 years of marriage",
+      "Executive / Sub-Divisional Magistrate",
+      "Screens for dowry homicide or coerced suicide under Section 304B"
+     ],
+     [
+      "Death from police firing",
+      "Executive Magistrate",
+      "Determines legality of lethal force and crowd dispersal protocols"
+     ],
+     [
+      "Exhumation of buried corpse",
+      "Executive Magistrate",
+      "Provides lawful warrant for disinterment and medicolegal examination"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Custodial deaths and judicial magistrate inquiry",
+   "tx": "To safeguard human rights, statutory law dictates that a **judicial magistrate custodial inquiry** must investigate every fatality occurring in police custody, judicial lock-up, or correctional institutions. The Judicial Magistrate or Metropolitan Magistrate personally visits the site, examines detention records, interviews fellow inmates, orders a videographed autopsy conducted by a medical board, and directly probes any allegations of physical torture or custodial violence.",
+   "say": "Every custodial death requires an inquiry by a judicial magistrate. The magistrate reviews detention logs, interviews inmates, and directs a videographed postmortem by a medical board.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Custodial death reported within 24 hours"
+     },
+     {
+      "id": "b",
+      "label": "Judicial magistrate visits detention cell"
+     },
+     {
+      "id": "c",
+      "label": "Videographed autopsy by medical board"
+     },
+     {
+      "id": "d",
+      "label": "Formal judicial finding submitted to rights commission"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Dowry deaths and Section 176 CrPC investigations",
+   "tx": "Whenever a woman dies within seven years of solemnization of marriage under unnatural circumstances, statutory provisions enforce a **mandatory dowry death inquest**. Conducted by a Sub-Divisional Magistrate or designated Executive Magistrate, this inquiry scrutinizes history of harassment, demand for valuable security, cruelty by the husband or in-laws, and directs an exhaustive medicolegal autopsy to establish whether death was homicidal or suicidal.",
+   "say": "Suspicious death of a woman within seven years of marriage demands an inquest by a sub-divisional magistrate. The magistrate investigates dowry harassment, cruelty, and cause of death.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Police inquest",
+     "points": [
+      "Conducted by police sub-inspector",
+      "Routine accidents and suicides",
+      "Panchnama with two civilian panchas",
+      "Forwarded to medical officer"
+     ]
+    },
+    "right": {
+     "title": "Magistrate inquest",
+     "points": [
+      "Conducted by executive or judicial magistrate",
+      "Mandatory in custodial and dowry deaths",
+      "Empowered to issue exhumation orders",
+      "Higher evidentiary standing in trial"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Exhumation procedures and magistrate warrants",
+   "tx": "When suspicion of foul play arises after burial, lawful **exhumation of buried human remains** can only proceed under a written warrant issued by an Executive Magistrate. The magistrate personally attends the disinterment at the gravesite, verifies the grave identity through gravediggers and relatives, oversees specimen collection of control soil samples above, beside, and below the coffin, and hands the corpse to forensic pathologists.",
+   "say": "Exhumation requires an order from an executive magistrate who attends the disinterment. Control earth samples are collected around the coffin to rule out environmental arsenic contamination.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Executive magistrate issues exhumation order"
+     },
+     {
+      "id": "b",
+      "label": "Grave identification by family and cemetery registrar"
+     },
+     {
+      "id": "c",
+      "label": "Collection of control earth samples around coffin"
+     },
+     {
+      "id": "d",
+      "label": "On-site or mortuary autopsy with toxicological preservation"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Transition from Section 174 CrPC to Bharatiya Nagarik Suraksha Sanhita",
+   "tx": "In modern Indian criminal jurisprudence, traditional provisions have transitioned to the **Bharatiya Nagarik Suraksha Sanhita framework**, where Section 194 BNSS replaces the classic Section 174 of the Code of Criminal Procedure. Similarly, Section 196 BNSS modernizes Section 176 CrPC magistrate inquiries, codifying strict timelines, promoting electronic documentation, integrating mandatory forensic videography, and harmonizing investigative duties across public mortuaries and magistrates.",
+   "say": "The new criminal code replaces section 174 CrPC with section 194 BNSS, and section 176 CrPC with section 196 BNSS, adding digital records and mandatory forensic videography.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Legal subject matter",
+     "Historic CrPC section",
+     "New BNSS section 2023"
+    ],
+    "rows": [
+     [
+      "Police inquiry into unnatural deaths",
+      "Section 174 CrPC",
+      "Section 194 BNSS"
+     ],
+     [
+      "Power to summon witness to inquest",
+      "Section 175 CrPC",
+      "Section 195 BNSS"
+     ],
+     [
+      "Inquiry by magistrate into cause of death",
+      "Section 176 CrPC",
+      "Section 196 BNSS"
+     ],
+     [
+      "Medical examination of arrested accused",
+      "Section 53 CrPC",
+      "Section 51 BNSS"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Duties and clinical responsibilities of the autopsy surgeon",
+   "tx": "When receiving an inquest requisition, the official **autopsy surgeon verification duty** demands careful scrutiny of all enclosed police documents before commencing the postmortem examination. The medical officer cross-checks the dead body challan, verifies Constable identification marks, confirms police seals, matches alleged wound patterns against physical findings, and prepares an impartial, objective postmortem report for the presiding magistrate.",
+   "say": "The autopsy doctor must verify police seals, dead body challan details, and Constable identification before dissection, ensuring objective documentation for the court.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Verify police challan, constable badge and seals"
+     },
+     {
+      "id": "b",
+      "label": "Inspect body external surface and match injury notes"
+     },
+     {
+      "id": "c",
+      "label": "Perform systematic complete three-cavity dissection"
+     },
+     {
+      "id": "d",
+      "label": "Preserve viscera and issue final autopsy report"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,144 @@
+{
+ "v": 1,
+ "id": "cm-tetanus-trachoma-tetanus",
+ "subject": "community-medicine",
+ "module": "cm-tetanus-trachoma",
+ "title": "Tetanus Prevention: Neonatal Elimination, Vaccines and Wound Care",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Pathogenesis and tetanospasmin exotoxin",
+   "tx": "The strictly anaerobic spore-forming bacillus Clostridium tetani produces **generalised tetanus**, entering through lacerations, puncture wounds, animal bites or dirty surgical procedures. When necrotic tissue provides an anaerobic redox potential, multiplying bacilli release the lethal exotoxin tetanospasmin, which travels intra-axonally into spinal inhibitory interneurons, permanently cleaving synaptobrevin to block GABA and glycine release and producing uninhibited, agonizing muscular spasms.",
+   "say": "Tetanus spores multiply in dirty puncture wounds devoid of oxygen. The toxin travels along nerves to block inhibitory neurotransmitters, locking muscles into agonizing, unrelenting spasms.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tetanus-fig1.webp",
+    "alt": "Diagram of Clostridium tetani pathogenesis, tetanospasmin inhibition of glycine and typical clinical manifestations",
+    "caption": "Tetanus: Tetanospasmin cleavage of synaptobrevin, inhibition of GABA/glycine, and muscular rigidity. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Neonatal tetanus: umbilical cord entry",
+   "tx": "Historically responsible for immense infant mortality, **neonatal tetanus** results from unhygienic umbilical cord dressing, applying cow dung, ash or contaminated earth to the freshly severed stump, or severing the cord with unsterile blades. Presenting typically around the seventh day of life, previously healthy vigorous infants stop breastfeeding, develop severe trismus preventing suckling, clench their fists, and progress to generalized spasms with high fever.",
+   "say": "Neonatal tetanus strikes babies when unsterile blades or dirty cow dung dressings contaminate the umbilical stump. By the seventh day, the infant stops feeding and develops body spasms.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Unsterile cutting or dirty cord dressing"},
+     {"id": "b", "label": "Spore germination in necrotic umbilical stump"},
+     {"id": "c", "label": "Day 7 inability to suckle and feed"},
+     {"id": "d", "label": "Fatal autonomic instability and spasms"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Validation of maternal and neonatal tetanus elimination",
+   "tx": "India achieved official international validation for **maternal and neonatal tetanus elimination** in 2015, maintaining an annual neonatal tetanus incidence of less than one case per one thousand live births in every single district. This public health triumph was driven by the National Health Mission through institutional delivery expansion under Janani Suraksha Yojana, promoting the five clean practices at birth, and ensuring universal antenatal tetanus immunization.",
+   "say": "India eliminated maternal and neonatal tetanus by achieving less than one case per thousand live births across all districts, powered by hospital births and antenatal immunization.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Elimination pillar", "Strategic intervention", "Protective outcome"],
+    "rows": [
+     ["Institutional delivery", "Free hospital births under JSY", "Clean umbilical cutting with sterile kits"],
+     ["Five cleans at birth", "Clean hands, surface, blade, cord tie, stump", "Zero contamination of neonatal tissues"],
+     ["Antenatal immunization", "Two doses of Td during pregnancy", "Maternal IgG crosses placenta to shield infant"],
+     ["Validation benchmark", "Neonatal tetanus < 1 per 1,000 live births", "Sustained across every district in India"]
+    ]
+   }
+  },
+  {
+   "title": "Transition from tetanus toxoid to Td vaccine",
+   "tx": "The national immunisation programme transitioned from monovalent tetanus toxoid to **tetanus and diphtheria toxoid**, delivering zero point five millilitres intramuscularly. This policy update addresses the re-emergence of adult diphtheria by co-administering reduced-dose diphtheria toxoid alongside tetanus toxoid, sustaining high population antibody titres against both pathogens during school booster sessions at ten years and sixteen years as well as throughout pregnancy.",
+   "say": "The national program replaced pure tetanus toxoid with combined tetanus and diphtheria vaccine. This protects mothers and adolescents against both tetanus and adult diphtheria outbreaks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Legacy tetanus toxoid (TT)",
+     "points": ["Contains tetanus toxoid only", "Ignored waning adult diphtheria immunity", "Permitted adolescent diphtheria outbreaks"]
+    },
+    "right": {
+     "title": "Modern Td vaccine",
+     "points": ["Contains tetanus toxoid + reduced diphtheria", "Boosts both antibodies simultaneously", "Standard in pregnancy, schools and wound care"]
+    }
+   }
+  },
+  {
+   "title": "Antenatal immunization protocol for pregnant women",
+   "tx": "Every pregnant woman receives structured **antenatal Td prophylaxis** to induce maternal IgG antibodies that transfer across the placenta to confer passive immunity to the newborn. If unimmunised previously, she receives two doses of Td four weeks apart, with the first dose given early in pregnancy; if she received two doses in a pregnancy within the preceding three years, a single booster dose suffices.",
+   "say": "Pregnant mothers receive two doses of Td four weeks apart. Maternal antibodies travel across the placenta, shielding the newborn baby from umbilical tetanus during the first months of life.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Maternal immunization status", "Antenatal schedule recommended", "Timing of doses"],
+    "rows": [
+     ["Unvaccinated / Unknown", "Two doses of Td (0.5 ml IM)", "Td-1 early in pregnancy; Td-2 after 4 weeks"],
+     ["Vaccinated within past 3 years", "Single booster dose of Td (0.5 ml IM)", "Given early in index pregnancy"],
+     ["Late presentation in third trimester", "Two doses at minimum 4-week gap", "Second dose at least 2 weeks before delivery"]
+    ]
+   }
+  },
+  {
+   "title": "Tetanus immunoglobulin for passive immunization",
+   "tx": "In unimmunised patients suffering severe contaminated wounds, immediate passive immunity is provided by **human tetanus immunoglobulin**, administered intramuscularly at a dose of two hundred and fifty international units (or five hundred units for severe, contaminated wounds). Because injected antibodies provide instant toxin neutralization before active vaccine immunity can develop, it is administered at a separate anatomical site using a separate syringe from the Td vaccine.",
+   "say": "Human tetanus immunoglobulin provides instant antibodies to neutralize toxin in dirty wounds before the patient can make their own. Always inject it at a separate site from the vaccine.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Human tetanus immunoglobulin (HTIG)",
+     "points": ["250 to 500 IU intramuscular dose", "Immediate passive neutralizing antibodies", "No serum sickness; half-life 3 to 4 weeks"]
+    },
+    "right": {
+     "title": "Active Td vaccine",
+     "points": ["0.5 ml intramuscular deltoid injection", "Stimulates host B cells to make antibodies", "Takes 7 to 14 days to produce IgG response"]
+    }
+   }
+  },
+  {
+   "title": "Evidence-based post-exposure wound management",
+   "tx": "Emergency triage follows standardized **wound prophylaxis guidelines**, categorising wounds into clean minor versus dirty contaminated wounds, based on soil contamination, animal bites, devitalised tissue or delays exceeding six hours. Clean minor wounds require only a Td booster if more than ten years have elapsed since the last dose; contaminated dirty wounds receive a Td booster if more than five years elapsed, plus HTIG if unimmunised.",
+   "say": "Clean minor wounds need a tetanus booster only if ten years have passed. Dirty or deep puncture wounds need a booster after five years, plus tetanus immunoglobulin if the person is unvaccinated.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Prior vaccination history", "Clean minor wound action", "Dirty, contaminated wound action"],
+    "rows": [
+     ["Unimmunised or < 3 doses", "Complete Td series; no HTIG", "Complete Td series + HTIG 250 IU"],
+     ["3 or more doses; last < 5 years", "No vaccine; no HTIG", "No vaccine; no HTIG"],
+     ["3 or more doses; last 5 to 10 years", "No vaccine; no HTIG", "Give single Td booster; no HTIG"],
+     ["3 or more doses; last > 10 years", "Give single Td booster; no HTIG", "Give single Td booster + HTIG if high risk"]
+    ]
+   }
+  },
+  {
+   "title": "Surgical wound toilet and debridement",
+   "tx": "The foundation of wound management is meticulous **surgical wound debridement**, removing necrotic tissue, foreign dirt, soil and blood clots to restore oxygenated tissue perfusion that prevents anaerobic spore germination. Wounds are copiously irrigated with sterile saline, devitalised margins excised, puncture tracts widely unroofed, and primary suturing avoided in grossly contaminated crush injuries, accompanied by oral penicillin or metronidazole.",
+   "say": "Thorough surgical cleaning washes away dirt, removes dead tissue and restores oxygen to the wound. Flooding the tissues with oxygen prevents anaerobic tetanus spores from germinating.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Copious sterile normal saline irrigation"},
+     {"id": "b", "label": "Excision of devitalised necrotic margins"},
+     {"id": "c", "label": "Removal of embedded foreign dirt and soil"},
+     {"id": "d", "label": "Open wound care to prevent anaerobic environment"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Management of clinical generalised tetanus",
+   "tx": "When clinical spasms develop, treatment requires immediate **intensive care management** in a darkened, quiet isolation room to minimize external sensory stimuli that trigger reflex spasms. Physicians administer intravenous human tetanus immunoglobulin, parenteral metronidazole to eliminate vegetative bacteria, intravenous diazepam infusions or magnesium sulphate to control muscle spasms, and early elective tracheostomy with neuromuscular blockade to prevent asphyxiation.",
+   "say": "Patients with established tetanus need intensive care in a quiet, darkened room. Treatment combines tetanus immunoglobulin, metronidazole, muscle relaxants and early tracheostomy.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Clinical priority", "Intervention administered", "Therapeutic goal"],
+    "rows": [
+     ["Toxin neutralization", "HTIG 3,000 to 6,000 IU intramuscularly", "Binds circulating unbound tetanospasmin"],
+     ["Eradicate vegetative bacilli", "Metronidazole 500 mg IV every 8 hours", "Destroys anaerobic bacteria at wound bed"],
+     ["Control reflex spasms", "IV diazepam infusions or magnesium sulphate", "Calms reflex motor convulsions and rigidity"],
+     ["Airway protection", "Elective tracheostomy and mechanical support", "Prevents fatal laryngospasm and suffocation"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
