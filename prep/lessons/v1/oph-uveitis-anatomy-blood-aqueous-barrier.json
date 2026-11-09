@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "id": "oph-uveitis-anatomy-blood-aqueous-barrier",
+ "subject": "ophthalmology",
+ "module": "oph-anterior-uveitis",
+ "title": "Uveitis Anatomy and Blood Aqueous Barrier",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Blood-aqueous barrier** at iris vessels and ciliary epithelium normally keeps anterior chamber optically empty, breakdown in uveitis leaking protein as flare and cells graded at slit lamp. Uveitis anatomy classifies inflammation as anterior iris and ciliary, intermediate pars plana, posterior retina choroid or panuveitis by primary site. Classification by anatomy precedes aetiology because treatment route and prognosis follow compartment first.",
+   "say": "Barrier breakdown together gives flare and cells in anterior uveitis at slit lamp during assessment in clinic. Anatomical classification gives treatment direction first. Compartment gives prognosis additionally.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anterior-uveitis-fig1.webp",
+    "alt": "Anterior uveitis clinical findings with cells, flare and keratic precipitates diagram.",
+    "caption": "Anterior uveitis findings. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Keratic precipitates** are inflammatory deposits on corneal endothelium distributed inferiorly by convection, size and colour suggesting granulomatous mutton fat versus fine non granulomatous patterns. Fresh white versus old pigmented precipitates date activity roughly. Precipitate reading therefore starts aetiology sorting before serology returns in anterior uveitis clinics.",
+   "say": "Endothelial deposits together give granulomatous direction by size in anterior uveitis at slit lamp in clinic characteristically. Inferior distribution gives convection explanation additionally. Fresh colour gives activity dating.",
+   "vis": {
+    "kind": "table",
+    "title": "Precipitate reading",
+    "cols": [
+     "Pattern",
+     "Direction"
+    ],
+    "rows": [
+     [
+      "Large mutton fat",
+      "Granulomatous causes"
+     ],
+     [
+      "Fine white small",
+      "Non granulomatous causes"
+     ],
+     [
+      "Old pigmented",
+      "Previous activity evidence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cells and flare grading standardises activity: slit beam counting cells in defined field and flare by protein haze visibility against iris detail. Grading decides steroid intensity and taper speed objectively across visits and examiners. **Beam standardisation** makes uveitis follow up quantitative rather than impressionistic redness memory.",
+   "say": "Standard beam counting together gives activity grading across visits in uveitis follow up at hospital clinics for consistency. Intensity decisions give objective basis additionally. Redness memory gives poor substitute.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior uveitis pattern",
+     "points": [
+      "Cells flare, precipitates",
+      "Pain, photophobia, ciliary flush"
+     ]
+    },
+    "right": {
+     "title": "Posterior pattern",
+     "points": [
+      "Vitritis, retinal lesions",
+      "Floaters, vision loss, painless often"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Ciliary flush** is violaceous perilimbal injection of deep vessels in anterior uveitis and keratitis, separating intraocular inflammation from conjunctival redness that maximises in fornices. Pain, photophobia and small or irregular pupil accompany flush in uveitis triad presentations. Pupil synechiae to lens, posterior synechiae, festoon pupil when partially adherent after dilation attempts.",
+   "say": "Perilimbal flush together gives intraocular direction in red eye triage at emergency assessment for painful eyes in adults. Synechia formation gives complication additionally. Pupil shape gives activity history.",
+   "vis": {
+    "kind": "flow",
+    "title": "Anterior uveitis assessment",
+    "nodes": [
+     {
+      "id": "flush",
+      "label": "Ciliary flush and pain read"
+     },
+     {
+      "id": "grade",
+      "label": "Cells flare precipitates graded"
+     },
+     {
+      "id": "pupil",
+      "label": "Synechiae and pressure checked"
+     },
+     {
+      "id": "cause",
+      "label": "Anatomy led cause review"
+     }
+    ],
+    "edges": [
+     [
+      "flush",
+      "grade"
+     ],
+     [
+      "grade",
+      "pupil"
+     ],
+     [
+      "pupil",
+      "cause"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Posterior synechiae** adhesion of iris to lens blocks aqueous at pupil giving iris bombe and secondary angle closure in recurrent anterior disease, prevented by mydriasis during activity. Seclusio pupillae complete adhesion ring and occlusio by membrane are advanced forms named in complications. Dilating early therefore is pressure prevention, not comfort alone.",
+   "say": "Iris adhesion together gives pupillary block risk in recurrent anterior uveitis during follow up in clinic over episodes. Early dilation gives pressure prevention additionally. Complete ring gives advanced naming.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-angle-closure-glaucoma-fig1.webp",
+    "alt": "Pupillary block iris bombe diagram relevant to synechiae complications in uveitis.",
+    "caption": "Synechiae block complications. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Hypopyon in anterior uveitis, especially HLA disease and Behcet patterns, layers inflammatory cells without corneal ulcer, separating uveitic hypopyon from ulcer hypopyon by cornea clarity. Mobile hypopyon shifting with head tilt suggests Behcet in teaching. **Cornea clear** with hypopyon therefore routes to uveitis, cornea ulcerated routes to keratitis pathways.",
+   "say": "Clear cornea together gives uveitic hypopyon separation from ulcer disease at slit lamp during emergency assessment in clinic. Shifting pattern gives Behcet suggestion additionally. Route gives treatment difference.",
+   "vis": {
+    "kind": "table",
+    "title": "Hypopyon route split",
+    "cols": [
+     "Cornea state",
+     "Route"
+    ],
+    "rows": [
+     [
+      "Ulcer infiltrate present",
+      "Keratitis pathway urgent"
+     ],
+     [
+      "Clear, cells severe",
+      "Uveitis pathway graded"
+     ],
+     [
+      "Shifting with tilt",
+      "Behcet consideration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complications cataract from inflammation and steroids, glaucoma from trabecular or synechia mechanisms and macular oedema as vision thief structure uveitis follow up as much as activity grading. Each visit therefore checks lens, pressure and macula alongside chamber activity. **Macular oedema** screening by tomography in persistent anterior disease catches treatable vision loss early.",
+   "say": "Lens together with pressure and macula gives complication surveillance in uveitis follow up at every clinic visit for patients. Tomography gives oedema detection additionally. Activity alone gives incomplete review.",
+   "vis": {
+    "kind": "table",
+    "title": "Uveitis visit set",
+    "cols": [
+     "Check",
+     "Complication"
+    ],
+    "rows": [
+     [
+      "Chamber grade",
+      "Activity intensity decision"
+     ],
+     [
+      "Lens and pressure",
+      "Cataract, glaucoma surveillance"
+     ],
+     [
+      "Macular tomography",
+      "Oedema vision protection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: barrier leaks flare, precipitates sort granuloma, flush localises intraocular and synechiae block pupil. Anatomy classifies before aetiology, grading quantifies before tapering. **Cells in beam** is uveitis vital sign recorded at every visit. Recording the beam grade in numbers at every visit protects tapering decisions from memory and examiner change.",
+   "say": "Barrier anatomy together gives flare understanding while precipitates give aetiology direction at slit lamp in clinic for examiners reliably. Grading gives taper decisions additionally. Classification gives route first always.",
+   "vis": {
+    "kind": "table",
+    "title": "Uveitis anatomy anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Flare source",
+      "Blood aqueous barrier breakdown"
+     ],
+     [
+      "Mutton fat precipitates",
+      "Granulomatous direction"
+     ],
+     [
+      "Synechiae risk",
+      "Dilate to prevent block"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Blood aqueous barrier sign",
+   "b": "Flare from leaked protein plus cells in beam; grading standardises activity and taper."
+  },
+  {
+   "f": "Mutton fat precipitates",
+   "b": "Large greasy endothelial deposits suggesting granulomatous uveitis causes."
+  },
+  {
+   "f": "Synechiae danger",
+   "b": "Iris lens adhesion blocks pupil causing bombe closure; dilate during activity."
+  }
+ ],
+ "keys": [
+  "Anatomy classification precedes aetiology",
+  "Clear cornea hypopyon means uveitis route",
+  "Every visit checks lens, pressure, macula"
+ ]
+}
