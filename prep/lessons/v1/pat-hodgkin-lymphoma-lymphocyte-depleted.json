@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-hodgkin-lymphoma",
+  "subject": "pathology",
+  "title": "Lymphocyte-Depleted Hodgkin, NLPHL Popcorn Cells, Ann Arbor Staging, and B Symptoms",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Lymphocyte depleted classical Hodgkin lymphoma, rarest and most aggressive subtype, floods tissue with Reed-Sternberg cells and variants amid few lymphocytes and diffuse fibrosis, often in HIV positive or older patients with advanced disease. The depleted subtype is **lymphocyte-depleted classical Hodgkin lymphoma**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Lymphocyte depleted Hodgkin is rare, RS rich, and advanced at presentation, especially with HIV.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lymphocyte rich end",
+          "points": [
+            "Few RS cells, lymphocyte sea",
+            "Early stage, indolent course",
+            "Excellent prognosis"
+          ]
+        },
+        "right": {
+          "title": "Lymphocyte depleted end",
+          "points": [
+            "Many RS cells, sparse lymphocytes",
+            "Advanced stage, B symptoms",
+            "Aggressive, HIV association"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Nodular lymphocyte predominant Hodgkin lymphoma is a different disease wearing a similar name: its malignant LP cells resemble exploded popcorn, keep CD20, and grow inside follicular dendritic meshworks with PD1 positive rosettes. The popcorn cell entity is **nodular lymphocyte predominant Hodgkin lymphoma (NLPHL)**.",
+      "say": "Popcorn cells with CD20 positivity mean NLPHL, a separate indolent disease treated differently from classical Hodgkin.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hodgkin-lymphoma-fig1.webp",
+        "alt": "Hodgkin lymphoma histology",
+        "caption": "Hodgkin lymphoma histology contrasting classical and lymphocyte predominant patterns."
+      }
+    },
+    {
+      "tx": "Popcorn or LP cells, lymphocyte predominant cells with multilobed nuclei, express B cell markers CD20 and CD79a and lack CD15 and CD30, so rituximab joins its therapy while classical regimens recede. The defining cell remains the **LP (popcorn) cell of NLPHL**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "CD20 positive popcorn cells invite rituximab; CD15 and CD30 negativity keeps NLPHL out of classical protocols.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Classical Hodgkin",
+          "NLPHL"
+        ],
+        "rows": [
+          [
+            "Malignant cell",
+            "Reed-Sternberg and Hodgkin cells",
+            "LP popcorn cells"
+          ],
+          [
+            "CD15, CD30",
+            "Positive pattern",
+            "Negative"
+          ],
+          [
+            "CD20",
+            "Usually negative",
+            "Positive"
+          ],
+          [
+            "Behaviour",
+            "Cure with ABVD based therapy",
+            "Indolent, late relapses, rituximab options"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Ann Arbor staging maps lymphoma by node regions on each side of the diaphragm, extranodal spread, and bulk, now refined by PET imaging in the Lugano revision that governs Hodgkin and most non-Hodgkin staging. The map is **Ann Arbor staging with Lugano modification**.",
+      "say": "Ann Arbor counts node regions above and below the diaphragm; Lugano lets PET draw the modern map.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/leukaemia-all-aml-hodgkin-fig1.webp",
+        "alt": "Reed-Sternberg cell morphology",
+        "caption": "Reed-Sternberg cell morphology at the centre of Hodgkin lymphoma diagnosis and staging."
+      }
+    },
+    {
+      "tx": "Stage I involves one node region, stage II several on one diaphragmatic side, stage III both sides, and stage IV disseminated extranodal disease such as marrow or liver, with letters recording symptoms and bulk. Fluency in **Ann Arbor stage groups I to IV** remains examination bedrock.",
+      "say": "One side, both sides, disseminated: stages I through IV in one breath, with letters for symptoms and bulk.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Stage I: single node region"
+          },
+          {
+            "id": "b",
+            "label": "Stage II: same side of diaphragm"
+          },
+          {
+            "id": "c",
+            "label": "Stage III: both sides of diaphragm"
+          },
+          {
+            "id": "d",
+            "label": "Stage IV: disseminated extranodal disease"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "B symptoms, drenching night sweats, fever above thirty eight degrees, and weight loss above ten percent over six months, worsen prognosis and add the letter B to any stage, while absence earns an A. The prognostic triad is **B symptoms of lymphoma**.",
+      "say": "Fever, drenching sweats, and ten percent weight loss earn the letter B and a worse prognosis at any stage.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "A designation",
+          "points": [
+            "No B symptoms",
+            "Better prognostic group",
+            "Standard stage therapy"
+          ]
+        },
+        "right": {
+          "title": "B designation",
+          "points": [
+            "Fever, sweats, weight loss present",
+            "Unfavourable risk features counted",
+            "Therapy may intensify by PET"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Epstein-Barr virus genomes reside in Reed-Sternberg cells of many mixed cellularity and depleted cases, especially in developing world and immunocompromised patients, implicating viral rescue of crippled B cells in pathogenesis. The viral association is **EBV association in classical Hodgkin lymphoma**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "EBV rescues doomed germinal centre B cells in many Hodgkin cases; its footprint varies by subtype and geography.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Subtype",
+          "EBV association",
+          "Context"
+        ],
+        "rows": [
+          [
+            "Mixed cellularity",
+            "Strongest",
+            "Developing world, HIV, older age"
+          ],
+          [
+            "Lymphocyte depleted",
+            "Strong",
+            "Immunocompromise linked"
+          ],
+          [
+            "Nodular sclerosis",
+            "Weaker",
+            "Young adults in developed world"
+          ],
+          [
+            "NLPHL",
+            "Absent",
+            "Separate EBV negative disease"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Staging workup now means PET-CT from skull base to mid thigh, marrow biopsy only when PET is equivocal or cytopenias demand, and baseline cardiac, pulmonary, and fertility review before chemotherapy. That package constitutes **modern Hodgkin staging workup**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "PET-CT replaced blind marrow biopsies in Hodgkin staging; protect heart, lungs, and fertility from the first visit.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Excision biopsy confirms subtype"
+          },
+          {
+            "id": "b",
+            "label": "PET-CT stages metabolically"
+          },
+          {
+            "id": "c",
+            "label": "Risk group and stage assigned"
+          },
+          {
+            "id": "d",
+            "label": "PET adapted therapy begins"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

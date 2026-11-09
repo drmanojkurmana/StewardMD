@@ -1,0 +1,228 @@
+{
+  "v": 1,
+  "module": "pat-non-hodgkin-lymphoma",
+  "subject": "pathology",
+  "title": "Chronic Lymphocytic Leukaemia, Smudge Cells, CD5 CD23, and Follicular Lymphoma t(14;18)",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Chronic lymphocytic leukaemia accumulates mature looking but functionally incompetent B lymphocytes in blood, marrow, nodes, and spleen of older adults, often discovered incidentally on a routine count and watched for years before treatment. The commonest adult leukaemia is **chronic lymphocytic leukaemia (CLL)**.",
+      "say": "CLL is the incidental lymphocytosis of older adults; many patients watch and wait for years safely.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chronic-lymphocytic-leukemia-fig1.webp",
+        "alt": "CLL peripheral blood smear",
+        "caption": "CLL peripheral blood smear with mature lymphocytes and smudge cells."
+      }
+    },
+    {
+      "tx": "CLL cells are so fragile that film preparation crushes them into smudge or basket cells, an artefact so characteristic it supports the diagnosis beside absolute lymphocytosis above five thousand clonal B cells. The crushed signature is the **smudge (basket) cell of CLL**.",
+      "say": "Smudge cells are CLL cells crushed by slide making; fragility itself becomes a diagnostic clue.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CLL film",
+          "points": [
+            "Smudge cells numerous",
+            "Mature small lymphocytes dominate",
+            "Anaemia or thrombocytopenia stages disease"
+          ]
+        },
+        "right": {
+          "title": "Reactive lymphocytosis",
+          "points": [
+            "Atypical Downey forms",
+            "Clinical viral context",
+            "Resolves in weeks"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Flow cytometry defines CLL by CD5 coexpression on B cells with CD23 positivity, dim CD20 and surface immunoglobulin, separating it from mantle cell lymphoma which shares CD5 but lacks CD23 and carries cyclin D1. The phenotype is **CD5 positive, CD23 positive CLL immunophenotype**.",
+      "say": "CD5 plus CD23 plus dim CD20 equals CLL; CD5 without CD23 demands mantle cell exclusion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disease",
+          "CD5",
+          "CD23",
+          "Decisive extra"
+        ],
+        "rows": [
+          [
+            "CLL",
+            "Positive",
+            "Positive",
+            "Dim CD20, LEF1"
+          ],
+          [
+            "Mantle cell lymphoma",
+            "Positive",
+            "Negative",
+            "Cyclin D1, t(11;14)"
+          ],
+          [
+            "Follicular lymphoma",
+            "Negative",
+            "Variable",
+            "CD10, BCL2, t(14;18)"
+          ],
+          [
+            "Hairy cell leukaemia",
+            "Negative",
+            "Negative",
+            "CD11c, CD25, CD103, BRAF"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Rai and Binet staging grade CLL by lymphocytosis extent, node and spleen enlargement, and marrow failure through anaemia and thrombocytopenia, while genetics such as TP53 disruption decide therapy more than stage alone. Prognostic layering is **CLL staging with genomic risk**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Stage tells burden, TP53 tells behaviour; modern CLL decisions need both before any treatment starts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Incidental clonal lymphocytosis found"
+          },
+          {
+            "id": "b",
+            "label": "Flow confirms CLL phenotype"
+          },
+          {
+            "id": "c",
+            "label": "Stage, TP53, IGHV assessed"
+          },
+          {
+            "id": "d",
+            "label": "Watch and wait until active disease criteria"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Treatment begins only for active disease: progressive marrow failure, massive or symptomatic nodes and spleen, rapid lymphocyte doubling, refractory autoimmune cytopenias, or constitutional symptoms, using BTK inhibitors, venetoclax combinations, and chemoimmunotherapy in selected patients. Those triggers are **iwCLL active disease criteria for CLL treatment**.",
+      "say": "Treat symptoms, cytopenias, and doubling time in CLL, never the lymphocyte number alone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Watch and wait",
+          "points": [
+            "Asymptomatic, stable counts",
+            "Regular review and vaccination",
+            "Treatment does not prolong life early"
+          ]
+        },
+        "right": {
+          "title": "Treat now",
+          "points": [
+            "Marrow failure, bulky symptomatic disease",
+            "Rapid doubling under six months",
+            "BTK inhibitor or venetoclax based therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Follicular lymphoma, the commonest indolent non-Hodgkin lymphoma, grows as nodular follicle centre proliferations of older adults, waxing and waning for years, incurable conventionally yet controllable through many lines. Its translocation defines it molecularly below; clinically it is **follicular lymphoma, the indolent prototype**.",
+      "say": "Follicular lymphoma is indolent, relapsing, and usually managed as a chronic disease over decades.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-lymphoid-leukemia-fig1.webp",
+        "alt": "Acute lymphoblastic leukemia features",
+        "caption": "Lymphoid neoplasm spectrum contrasting acute leukaemia tempo with indolent lymphoma behaviour."
+      }
+    },
+    {
+      "tx": "The t(14;18) translocation places BCL2 under immunoglobulin heavy chain enhancer control in follicular lymphoma, so germinal centre B cells refuse apoptosis and accumulate, the founding lesion detectable by FISH and PCR. That anti-apoptotic fusion is **t(14;18) IGH-BCL2 of follicular lymphoma**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "t(14;18) makes BCL2 immortalise follicle centre cells; apoptosis refusal is follicular lymphoma's founding sin.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "t(14;18) joins BCL2 to IGH enhancer"
+          },
+          {
+            "id": "b",
+            "label": "BCL2 overexpressed in follicle cells"
+          },
+          {
+            "id": "c",
+            "label": "Apoptosis refused, cells accumulate"
+          },
+          {
+            "id": "d",
+            "label": "Indolent nodular lymphoma emerges"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Transformation of follicular lymphoma into diffuse large B cell lymphoma announces itself with rapidly growing nodes, rising LDH, B symptoms, and new PET avidity, demanding fresh biopsy rather than assumption. That tempo change is **histological transformation of follicular lymphoma**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "A suddenly fast node in follicular lymphoma earns a fresh biopsy; transformation changes therapy completely.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Indolent follicular phase",
+          "Transformed phase"
+        ],
+        "rows": [
+          [
+            "Growth",
+            "Months to years, waxing",
+            "Weeks, rapid"
+          ],
+          [
+            "LDH and symptoms",
+            "Often normal, asymptomatic",
+            "Raised LDH, B symptoms"
+          ],
+          [
+            "Biopsy",
+            "Grade 1 to 3a follicular",
+            "Diffuse large B cell areas"
+          ],
+          [
+            "Therapy",
+            "Watch, rituximab, chemoimmunotherapy options",
+            "DLBCL regimens, trials"
+          ]
+        ]
+      }
+    }
+  ]
+}

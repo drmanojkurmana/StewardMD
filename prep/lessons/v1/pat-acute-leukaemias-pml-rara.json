@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-acute-leukaemias",
+  "subject": "pathology",
+  "title": "PML-RARA, DIC, Acute Lymphoblastic Leukaemia, TdT, and CD10",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Acute promyelocytic leukaemia begins with the t(15;17) translocation fusing the PML gene to the retinoic acid receptor alpha gene, producing a fusion protein that freezes myeloid maturation at the promyelocyte stage and fills marrow with granule packed cells. The defining fusion is **PML-RARA**, detectable by cytogenetics, FISH, and PCR.",
+      "say": "PML-RARA freezes maturation at the promyelocyte; finding that fusion names acute promyelocytic leukaemia instantly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "t(15;17) fuses PML to RARA"
+          },
+          {
+            "id": "b",
+            "label": "Fusion blocks promyelocyte differentiation"
+          },
+          {
+            "id": "c",
+            "label": "Granule packed promyelocytes accumulate"
+          },
+          {
+            "id": "d",
+            "label": "DIC and marrow failure present together"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The granules of promyelocytes carry procoagulant and fibrinolytic machinery, so patients bleed from disseminated intravascular coagulation with low fibrinogen, raised D-dimer, and consumption of platelets and factors before chemotherapy even begins. Early haemorrhage, especially intracranial, is the killer complication: **DIC of acute promyelocytic leukaemia**.",
+      "say": "APL bleeds before it obstructs: DIC with low fibrinogen is present at diagnosis in most patients.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-myeloid-leukemia-fig1.webp",
+        "alt": "Myeloblast with Auer rods",
+        "caption": "Auer rod packed blasts of acute promyelocytic leukaemia, whose granules drive DIC."
+      }
+    },
+    {
+      "tx": "All-trans retinoic acid must start on clinical suspicion, before genetic confirmation returns, because it forces promyelocytes to differentiate and switches off the coagulopathy within days, while arsenic trioxide degrades the fusion protein itself. Waiting for confirmation costs lives; the rule is **ATRA on suspicion in APL**.",
+      "say": "Start ATRA when you suspect APL, not when genetics returns; hours decide who survives the coagulopathy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "On suspicion, immediately",
+          "points": [
+            "Start ATRA without waiting for genetics",
+            "Support fibrinogen, platelets, factors",
+            "Avoid invasive procedures during DIC"
+          ]
+        },
+        "right": {
+          "title": "After confirmation",
+          "points": [
+            "Arsenic trioxide added by risk group",
+            "Monitor differentiation syndrome",
+            "PCR tracks molecular remission"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Differentiation syndrome complicates ATRA and arsenic success: maturing cells release cytokines producing fever, dyspnoea, infiltrates, effusions, and weight gain, treated by prompt dexamethasone without abandoning the differentiating drugs in most cases. Recognising it early defines **differentiation syndrome of APL therapy**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Fever, breathlessness, and infiltrates during ATRA therapy mean differentiation syndrome; dexamethasone treats it early.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Differentiation syndrome",
+          "Sepsis mimic"
+        ],
+        "rows": [
+          [
+            "Timing",
+            "First two weeks of ATRA or arsenic",
+            "Any time, neutropenia linked"
+          ],
+          [
+            "Signs",
+            "Infiltrates, effusions, weight gain",
+            "Source often identifiable"
+          ],
+          [
+            "Response",
+            "Dexamethasone rapidly",
+            "Antibiotics and source control"
+          ],
+          [
+            "Drug handling",
+            "Usually continue ATRA",
+            "Chemotherapy reviewed"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute lymphoblastic leukaemia peaks in childhood, where lymphoblasts crowd marrow and blood, spread to meninges and testes, and yet cure rates exceed eighty percent on modern protocols, a triumph of risk stratified chemotherapy. The childhood prototype is **acute lymphoblastic leukaemia (ALL)**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Childhood ALL went from fatal to usually curable through risk stratified protocols and CNS prophylaxis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-lymphoid-leukemia-fig1.webp",
+        "alt": "Acute lymphoblastic leukemia features",
+        "caption": "Acute lymphoblastic leukaemia features with lymphoblast expansion and marrow failure."
+      }
+    },
+    {
+      "tx": "Terminal deoxynucleotidyl transferase, the enzyme that inserts random nucleotides while assembling antigen receptors, marks lymphoblasts as immature lymphoid cells and helps separate ALL from mature lymphoid neoplasms and AML. The immaturity marker is **terminal deoxynucleotidyl transferase (TdT)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "TdT stamps lymphoblasts as immature; mature lymphomas have switched that enzyme off.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lymphoblast (ALL)",
+          "points": [
+            "TdT positive, immature programme",
+            "MPO negative, no Auer rods",
+            "B or T precursor immunophenotype"
+          ]
+        },
+        "right": {
+          "title": "Mature lymphoid neoplasm",
+          "points": [
+            "TdT negative",
+            "Surface immunoglobulin in B lineage",
+            "CLL, follicular, mantle patterns"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "CD10, the common ALL antigen first defined on childhood B precursor blasts, identifies the favourable common phenotype and also marks germinal centre lymphomas, showing how one antigen serves different maps at different ages. The antigen is **CD10 (common ALL antigen, CALLA)**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "CD10 named common ALL in children and germinal centre lymphomas in adults; context gives it meaning.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Marker",
+          "Lineage meaning",
+          "Disease use"
+        ],
+        "rows": [
+          [
+            "TdT",
+            "Immature lymphoid",
+            "ALL versus mature lymphoma"
+          ],
+          [
+            "CD10",
+            "Common ALL, germinal centre",
+            "B-ALL phenotype, follicular and Burkitt"
+          ],
+          [
+            "CD19, CD79a",
+            "B lineage",
+            "B-ALL confirmation"
+          ],
+          [
+            "Cytoplasmic CD3",
+            "T lineage",
+            "T-ALL confirmation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Central nervous system prophylaxis with intrathecal therapy is non-negotiable in ALL because the meninges shelter blasts from systemic drugs, and testicular relapse historically taught the same sanctuary lesson. Sanctuary site treatment embodies **CNS prophylaxis in acute lymphoblastic leukaemia**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Intrathecal prophylaxis exists because the meninges hide blasts from systemic chemotherapy; never omit it in ALL.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Remission induced systemically"
+          },
+          {
+            "id": "b",
+            "label": "Intrathecal therapy sterilises meninges"
+          },
+          {
+            "id": "c",
+            "label": "Consolidation and maintenance follow"
+          },
+          {
+            "id": "d",
+            "label": "MRD guides intensity throughout"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

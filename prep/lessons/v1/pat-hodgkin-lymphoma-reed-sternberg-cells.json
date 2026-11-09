@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-hodgkin-lymphoma",
+  "subject": "pathology",
+  "title": "Reed-Sternberg Cells, CD15 and CD30, and Classical Hodgkin Subtypes",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Classical Hodgkin lymphoma hides rare malignant Reed-Sternberg cells and their mononuclear Hodgkin variants inside a reactive sea of lymphocytes, eosinophils, plasma cells, and histiocytes that the tumour itself recruits. The binucleate owl eye giant is the **Reed-Sternberg cell**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Reed-Sternberg cells are rare giants in a reactive crowd they themselves recruited; find the owl eyes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hodgkin-lymphoma-fig2.webp",
+        "alt": "Hodgkin lymphoma Reed Sternberg pathology",
+        "caption": "Reed-Sternberg pathology in classical Hodgkin lymphoma with reactive background."
+      }
+    },
+    {
+      "tx": "Immunophenotype seals the diagnosis: Reed-Sternberg cells express CD30 almost always and CD15 usually, while losing the B cell programme despite B cell origin, with PAX5 only weakly retained. The paired markers are **CD30 and CD15 in classical Hodgkin lymphoma**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "CD30 positive, CD15 often positive, B cell programme silenced: that phenotype names classical Hodgkin lymphoma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classical Hodgkin (RS cells)",
+          "points": [
+            "CD30 positive, CD15 variable",
+            "PAX5 weak, CD20 usually negative",
+            "Reactive inflammatory background"
+          ]
+        },
+        "right": {
+          "title": "Nodular lymphocyte predominant",
+          "points": [
+            "CD20 positive, CD15 and CD30 negative",
+            "LP popcorn cells",
+            "Different therapy and late relapse pattern"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Nodular sclerosis, the commonest subtype in young adults, traps lymph node tissue in collagen bands with lacunar Reed-Sternberg variants shrunken in clear spaces, favouring mediastinal masses in young women. The banded subtype is **nodular sclerosis classical Hodgkin lymphoma**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Collagen bands plus lacunar cells plus a young woman's mediastinal mass equal nodular sclerosis Hodgkin lymphoma.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hodgkin-lymphoma-reed-sternberg-and-staging-fig1.webp",
+        "alt": "Hodgkin lymphoma staging and Reed Sternberg cells",
+        "caption": "Hodgkin lymphoma Reed-Sternberg cells and staging framework."
+      }
+    },
+    {
+      "tx": "Mixed cellularity carries plentiful classic Reed-Sternberg cells in a polymorphous background without bands, associates more with EBV and older or immunocompromised patients, and presents with advanced stage and B symptoms. The EBV linked subtype is **mixed cellularity classical Hodgkin lymphoma**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Mixed cellularity brings classic RS cells, EBV links, and advanced presentations more often than nodular sclerosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Subtype",
+          "Signature",
+          "Typical patient"
+        ],
+        "rows": [
+          [
+            "Nodular sclerosis",
+            "Collagen bands, lacunar cells",
+            "Young women, mediastinal mass"
+          ],
+          [
+            "Mixed cellularity",
+            "Classic RS cells, mixed background",
+            "Older, EBV associated, advanced"
+          ],
+          [
+            "Lymphocyte rich",
+            "RS cells, lymphocyte sea",
+            "Older men, peripheral nodes, early"
+          ],
+          [
+            "Lymphocyte depleted",
+            "Many RS cells, few lymphocytes",
+            "Rare, HIV associated, aggressive"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Lymphocyte rich classical Hodgkin scatters rare Reed-Sternberg cells among overwhelming reactive lymphocytes in nodular patterns, behaving indolently and mimicking the nodular lymphocyte predominant entity it must be separated from by markers. Marker discipline separates **lymphocyte-rich classical Hodgkin lymphoma**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Lymphocyte rich classical disease mimics NLPHL; only the CD15 CD30 phenotype keeps them apart.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lymphocyte rich classical",
+          "points": [
+            "RS cells CD30 positive",
+            "Background small lymphocytes",
+            "Classical therapy applies"
+          ]
+        },
+        "right": {
+          "title": "NLPHL",
+          "points": [
+            "LP cells CD20 positive, CD30 negative",
+            "PD1 rosettes around LP cells",
+            "Rituximab and watchful options"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Excisional node biopsy is mandatory because needle samples miss rare diagnostic cells and architecture, while immunostains rescue cases where Reed-Sternberg cells hide among mimics such as immunoblasts. Tissue adequacy principle is **excisional biopsy for lymphoma diagnosis**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Never diagnose Hodgkin lymphoma on a needle core when excision is possible; the diagnostic cells are too rare.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Painless progressive lymphadenopathy"
+          },
+          {
+            "id": "b",
+            "label": "Excisional node biopsy obtained"
+          },
+          {
+            "id": "c",
+            "label": "RS cells plus CD30 CD15 phenotype"
+          },
+          {
+            "id": "d",
+            "label": "PET-CT staging assigns treatment"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Prognosis in Hodgkin lymphoma is enviable: most patients cure with ABVD based chemotherapy, PET adapted escalation or de-escalation, and involved field radiotherapy in selected early disease. Response adapted strategy is **PET-guided Hodgkin lymphoma therapy**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Interim PET now steers Hodgkin therapy up or down; cure with least late toxicity is the modern goal.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stage group",
+          "Typical approach",
+          "Goal"
+        ],
+        "rows": [
+          [
+            "Early favourable",
+            "Short ABVD plus involved field RT or chemo alone",
+            "Cure, minimal late effects"
+          ],
+          [
+            "Early unfavourable",
+            "More cycles, PET adapted",
+            "Balance cure and toxicity"
+          ],
+          [
+            "Advanced",
+            "ABVD or escalated regimens by PET",
+            "Cure majority"
+          ],
+          [
+            "Relapsed",
+            "Salvage, autologous transplant, checkpoint drugs",
+            "Second cure attempt"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Survivorship dominates late Hodgkin care because mediastinal radiation and anthracyclines bequeath second breast and lung cancers, thyroid failure, infertility, and cardiac disease decades after cure. Lifelong surveillance embodies **Hodgkin lymphoma survivorship care**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Curing Hodgkin lymphoma is the first half; screening its survivors for second cancers is the second.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early survivorship",
+          "points": [
+            "Relapse vigilance, thyroid checks",
+            "Fertility and cardiac review",
+            "Vaccination after therapy"
+          ]
+        },
+        "right": {
+          "title": "Late survivorship",
+          "points": [
+            "Breast and lung cancer screening",
+            "Cardiovascular risk management",
+            "Psychosocial and fatigue support"
+          ]
+        }
+      }
+    }
+  ]
+}

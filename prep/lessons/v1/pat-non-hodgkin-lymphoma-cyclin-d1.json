@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "pat-non-hodgkin-lymphoma",
+  "subject": "pathology",
+  "title": "Cyclin D1, MALT Lymphoma, Hairy Cell Leukaemia, Mycosis Fungoides, and Sezary Cells",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Cyclin D1 partners CDK4 and CDK6 to push cells through the G1 restriction point, and its translocation driven excess in mantle cell lymphoma removes that brake while also marking mantle zone lineage. The G1 accelerator is **cyclin D1 (CCND1)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Cyclin D1 is the G1 accelerator; its excess names mantle cell lymphoma on any panel.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Growth signals raise cyclin D1"
+          },
+          {
+            "id": "b",
+            "label": "CDK4 and CDK6 phosphorylate RB"
+          },
+          {
+            "id": "c",
+            "label": "E2F released, S phase begins"
+          },
+          {
+            "id": "d",
+            "label": "Translocation locks this on in mantle cell"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "MALT lymphoma grows where chronic antigen stimulation built lymphoid tissue that never belonged: stomach after Helicobacter, salivary gland in Sjogren disease, thyroid in Hashimoto thyroiditis, remaining localised for years. The extranodal entity is **MALT lymphoma (mucosa-associated lymphoid tissue lymphoma)**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "MALT lymphoma grows in lymphoid tissue that inflammation built; remove the antigen and early gastric disease may vanish.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/malt-lymphoma-fig1.webp",
+        "alt": "Gastric MALT lymphoma pathology",
+        "caption": "Gastric MALT lymphoma pathology arising in Helicobacter driven lymphoid tissue."
+      }
+    },
+    {
+      "tx": "Early gastric MALT lymphoma regresses in most patients after Helicobacter eradication antibiotics alone, while t(11;18) API2-MALT1 predicts eradication resistance and directs radiotherapy or systemic therapy instead. Antigen removal therapy is **Helicobacter eradication for gastric MALT lymphoma**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Eradicate Helicobacter first in gastric MALT; t(11;18) warns that antibiotics alone will not suffice.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Eradication responsive",
+          "points": [
+            "H pylori positive, superficial disease",
+            "Regression over months after antibiotics",
+            "Endoscopic surveillance follows"
+          ]
+        },
+        "right": {
+          "title": "Eradication resistant",
+          "points": [
+            "t(11;18) present, deep or nodal disease",
+            "Radiotherapy highly effective locally",
+            "Systemic therapy for disseminated disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Hairy cell leukaemia coats B cells in fine cytoplasmic projections, infiltrates marrow with fibrosis causing dry taps, splenomegaly, pancytopenia, and monocytopenia, and melts before cladribine chemotherapy for years. The fried egg marrow disease is **hairy cell leukaemia**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Hairy projections, dry tap, splenomegaly, and absent monocytes: hairy cell leukaemia answers for years to cladribine.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hairy-cell-leukemia-fig1.webp",
+        "alt": "Hairy cell leukaemia blood film",
+        "caption": "Hairy cell leukaemia blood film with cytoplasmic projections on lymphoid cells."
+      }
+    },
+    {
+      "tx": "Tartrate resistant acid phosphatase staining historically identified hairy cells, now replaced by flow cytometry CD11c, CD25, CD103 and annexin A1 plus BRAF V600E mutation in nearly all classic cases. The molecular signature is **BRAF V600E in hairy cell leukaemia**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "TRAP is history; CD103, annexin A1, and BRAF V600E make the modern hairy cell diagnosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Test",
+          "Hairy cell result",
+          "Status"
+        ],
+        "rows": [
+          [
+            "TRAP stain",
+            "Tartrate resistant positive",
+            "Historical, replaced"
+          ],
+          [
+            "Flow cytometry",
+            "CD11c, CD25, CD103 bright",
+            "Diagnostic standard"
+          ],
+          [
+            "BRAF V600E",
+            "Present in classic disease",
+            "Therapy target in relapse"
+          ],
+          [
+            "Marrow biopsy",
+            "Fried egg cells, reticulin fibrosis",
+            "Explains dry tap"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Mycosis fungoides patches, plaques, and tumours the skin over years as malignant T cells home to epidermis forming Pautrier microabscesses, remaining a dermatological disease long before nodes or blood join. The cutaneous T cell prototype is **mycosis fungoides**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Years of patches and plaques with Pautrier abscesses mean mycosis fungoides; stage decides skin or systemic therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Patch and plaque stage",
+          "points": [
+            "Skin directed therapy suffices",
+            "Pautrier microabscesses on biopsy",
+            "Slow progression over years"
+          ]
+        },
+        "right": {
+          "title": "Tumour and erythrodermic stage",
+          "points": [
+            "Systemic therapy required",
+            "Blood involvement assessed",
+            "Sezary syndrome at extreme"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sezary syndrome completes the cutaneous T cell spectrum with erythroderma, lymphadenopathy, and circulating malignant T cells whose cerebriform nuclei wrinkle like brains on film and electron microscopy. The circulating signature is the **Sezary cell with cerebriform nucleus**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Erythroderma plus cerebriform Sezary cells in blood defines Sezary syndrome, mycosis fungoides' leukaemic counterpart.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sezary-syndrome-fig1.webp",
+        "alt": "Sezary syndrome manifestations",
+        "caption": "Sezary syndrome manifestations with erythroderma and circulating cerebriform cells."
+      }
+    },
+    {
+      "tx": "Indolent lymphomas share a management moral: early treatment of asymptomatic disease rarely prolongs life, so staging, symptoms, and tempo, not anxiety, schedule therapy across MALT, hairy cell mimics excluded, and mycosis fungoides. That discipline is **tempo-based indolent lymphoma management**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "In indolent lymphoma, treat tempo and symptoms, not the calendar; watching is an active therapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disease",
+          "First move when asymptomatic",
+          "Treat trigger"
+        ],
+        "rows": [
+          [
+            "Gastric MALT",
+            "Eradicate Helicobacter",
+            "Persistence, deep or nodal spread"
+          ],
+          [
+            "Hairy cell",
+            "Observe if counts allow",
+            "Cytopenias, infections, splenomegaly"
+          ],
+          [
+            "Mycosis fungoides early",
+            "Skin directed therapy",
+            "Tumour stage, blood involvement"
+          ],
+          [
+            "Follicular lymphoma",
+            "Watch and wait",
+            "Symptoms, bulk, marrow failure"
+          ]
+        ]
+      }
+    }
+  ]
+}

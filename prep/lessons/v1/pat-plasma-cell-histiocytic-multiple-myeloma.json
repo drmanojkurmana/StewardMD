@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-plasma-cell-histiocytic",
+  "subject": "pathology",
+  "title": "Multiple Myeloma: M Spike, Bence Jones Proteins, and Punched-Out Lytic Lesions",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Multiple myeloma is a marrow plasma cell clone secreting one immunoglobulin species, dissolving bone, suppressing normal immunity, and injuring kidneys until anaemia, infections, fractures, and renal failure declare it. The plasma cell malignancy is **multiple myeloma**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "One plasma clone, one immunoglobulin, dissolving bone and kidneys: myeloma in a single sentence.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/myeloma-fig1.webp",
+        "alt": "Multiple myeloma pathophysiology",
+        "caption": "Multiple myeloma pathophysiology from clonal plasma cells to bone and kidney injury."
+      }
+    },
+    {
+      "tx": "Serum protein electrophoresis spikes a narrow monoclonal peak in the gamma region, immunofixation names its class, and free light chain ratio quantifies light chain only disease that electrophoresis can miss. The narrow peak is the **M spike (monoclonal protein)**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "A narrow M spike plus immunofixation names the clone; free light chains catch what electrophoresis misses.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Serum electrophoresis finds M spike"
+          },
+          {
+            "id": "b",
+            "label": "Immunofixation types heavy and light chain"
+          },
+          {
+            "id": "c",
+            "label": "Free light chain ratio quantifies clone"
+          },
+          {
+            "id": "d",
+            "label": "Marrow and imaging stage the disease"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bence Jones proteins are free light chains filtered into urine, invisible to dipstick yet precipitating on specialised urine electrophoresis, and their tubular casts with giant cells obstruct kidneys in cast nephropathy. The urinary light chain is **Bence Jones protein**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Dipstick misses Bence Jones protein; urine electrophoresis finds the light chains that cast and kill tubules.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dipstick proteinuria",
+          "points": [
+            "Detects albumin mainly",
+            "Glomerular disease pattern",
+            "Misses free light chains"
+          ]
+        },
+        "right": {
+          "title": "Bence Jones proteinuria",
+          "points": [
+            "Light chains on urine electrophoresis",
+            "Cast nephropathy risk",
+            "Sulfosalicylic acid detects all protein"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Myeloma bone disease punches round lytic holes without sclerotic rims because osteoclasts are activated by RANK ligand signalling while osteoblasts are suppressed, so bone scans relying on formation stay falsely cold. The rimless holes are **punched-out lytic lesions of myeloma**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Punched out lesions without reactive bone explain cold bone scans; use skeletal survey, CT, or MRI instead.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/myeloma-fig2.webp",
+        "alt": "Multiple myeloma CRAB features",
+        "caption": "Multiple myeloma CRAB features: hypercalcaemia, renal failure, anaemia, and bone lesions."
+      }
+    },
+    {
+      "tx": "CRAB features, hypercalcaemia, renal impairment, anaemia, and bone lesions, historically defined symptomatic myeloma needing therapy, now joined by biomarkers of imminent damage in modern criteria. The treatment threshold acronym remains **CRAB criteria in myeloma**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Hypercalcaemia, renal failure, anaemia, bone lesions: CRAB still opens the myeloma treatment door.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Letter",
+          "Feature",
+          "Mechanism"
+        ],
+        "rows": [
+          [
+            "C",
+            "Hypercalcaemia",
+            "Osteoclast bone resorption"
+          ],
+          [
+            "R",
+            "Renal impairment",
+            "Casts, light chains, hypercalcaemia"
+          ],
+          [
+            "A",
+            "Anaemia",
+            "Marrow replacement, inflammation"
+          ],
+          [
+            "B",
+            "Bone lesions",
+            "Lytic destruction, fractures"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Monoclonal gammopathy of undetermined significance precedes myeloma at about one percent per year, with small spike, marrow plasma cells under ten percent, and no CRAB, while smouldering myeloma sits between watchfulness and therapy. The precursor state is **MGUS (monoclonal gammopathy of undetermined significance)**.",
+      "say": "MGUS converts at one percent a year; risk stratify and watch, do not treat the spike.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MGUS",
+          "points": [
+            "Spike under 30 g per litre",
+            "Marrow plasma cells under 10 percent",
+            "No CRAB, observe"
+          ]
+        },
+        "right": {
+          "title": "Smouldering and active myeloma",
+          "points": [
+            "Higher burden, no damage yet, or CRAB present",
+            "Risk models schedule review or trials",
+            "Active disease treated promptly"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Myeloma kidney wears several costumes: cast nephropathy commonest, then amyloidosis, light chain deposition disease, hypercalcaemia, and drug injury, separated by biopsy when treatment hinges on mechanism. The dominant renal lesion is **myeloma cast nephropathy**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Most myeloma kidney is cast nephropathy, but biopsy when amyloid or deposition disease would change therapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Renal lesion",
+          "Deposit",
+          "Clue"
+        ],
+        "rows": [
+          [
+            "Cast nephropathy",
+            "Light chain casts with giant cells",
+            "High light chain burden, AKI"
+          ],
+          [
+            "AL amyloidosis",
+            "Congo red positive fibrils",
+            "Nephrotic syndrome, big tongue"
+          ],
+          [
+            "Light chain deposition",
+            "Granular basement membrane deposits",
+            "Nephrotic, nodular glomeruli"
+          ],
+          [
+            "Hypercalcaemic injury",
+            "No deposit",
+            "Calcium high, reversible early"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Modern therapy layers proteasome inhibitors, immunomodulatory drugs, anti-CD38 antibodies, and autologous transplant for eligible patients, with bisphosphonates protecting bone and vaccination defending suppressed immunity. Quadruplet induction embodies **contemporary myeloma therapy**. This point is tested repeatedly because it changes everyday bedside decisions. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Proteasome, IMiD, anti-CD38, and transplant layers have doubled myeloma survival; protect bone alongside.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Confirm clonal disease and damage"
+          },
+          {
+            "id": "b",
+            "label": "Risk cytogenetics and fitness assessed"
+          },
+          {
+            "id": "c",
+            "label": "Combination induction, transplant if eligible"
+          },
+          {
+            "id": "d",
+            "label": "Maintenance, bone and infection protection"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

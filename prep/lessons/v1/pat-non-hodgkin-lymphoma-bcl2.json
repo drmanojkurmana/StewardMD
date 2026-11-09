@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-non-hodgkin-lymphoma",
+  "subject": "pathology",
+  "title": "BCL2, Diffuse Large B-Cell Lymphoma, Burkitt Starry Sky, and Mantle Cell Lymphoma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "BCL2 guards the mitochondrial apoptosis gate by restraining BAX and BAK, so its overexpression lets damaged lymphocytes survive indefinitely, a founding advantage in follicular lymphoma and a drug target for venetoclax in CLL. The survival protein is **BCL2 (B-cell lymphoma 2)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "BCL2 is the mitochondrial doorman refusing apoptosis; venetoclax finally learned how to dismiss him.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "BCL2 high states",
+          "points": [
+            "Follicular lymphoma t(14;18)",
+            "CLL dependence, venetoclax sensitive",
+            "Double expressor DLBCL adverse"
+          ]
+        },
+        "right": {
+          "title": "BCL2 low or absent",
+          "points": [
+            "Burkitt lymphoma characteristically negative",
+            "Normal germinal centre dark zone",
+            "Helps separate Burkitt from DLBCL"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Diffuse large B cell lymphoma, commonest aggressive lymphoma, grows in sheets effacing nodes within weeks, subdivided by cell of origin into germinal centre and activated B cell types with different biology and trials. The aggressive prototype is **diffuse large B-cell lymphoma (DLBCL)**.",
+      "say": "DLBCL is the common aggressive lymphoma: weeks of growth, R-CHOP backbone, cure genuinely possible.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Subtype",
+          "Origin signature",
+          "Behaviour note"
+        ],
+        "rows": [
+          [
+            "GCB DLBCL",
+            "CD10, BCL6 germinal programme",
+            "Relatively favourable"
+          ],
+          [
+            "ABC DLBCL",
+            "NF-kB driven, plasmablastic",
+            "Adverse, targeted trials"
+          ],
+          [
+            "Double hit lymphoma",
+            "MYC plus BCL2 or BCL6 rearranged",
+            "Intensive regimens considered"
+          ],
+          [
+            "Primary mediastinal",
+            "Thymic B cell, young women",
+            "Mediastinal mass, Hodgkin overlaps"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "R-CHOP immunochemotherapy cures a majority of DLBCL, with PET response, cell of origin, MYC rearrangements, and international prognostic index refining who needs intensification, salvage transplant, or CAR T cell therapy. The backbone regimen is **R-CHOP for DLBCL**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "R-CHOP cures most DLBCL; PET and genetics decide who needs salvage, transplant, or CAR T cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Biopsy proves DLBCL, genetics sent"
+          },
+          {
+            "id": "b",
+            "label": "PET-CT stage and IPI assigned"
+          },
+          {
+            "id": "c",
+            "label": "R-CHOP cycles with response PET"
+          },
+          {
+            "id": "d",
+            "label": "Salvage, transplant, or CAR T if relapsed"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Burkitt lymphoma doubles faster than any human tumour, Ki67 near one hundred percent, with medium blasts, lipid vacuoles, and macrophages full of apoptotic debris creating the famous starry sky. That tingible body pattern is the **starry sky appearance of Burkitt lymphoma**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Starry sky means macrophages eating apoptotic Burkitt cells in the fastest growing human tumour.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/burkitt-lymphoma-fig1.webp",
+        "alt": "Burkitt lymphoma histology and clinical features",
+        "caption": "Burkitt lymphoma with starry sky histology and jaw or abdominal presentation."
+      }
+    },
+    {
+      "tx": "The t(8;14) translocation drives MYC from immunoglobulin heavy chain enhancers in Burkitt lymphoma, with variant light chain translocations sharing the biology, while BCL2 negativity helps separate it from diffuse large B cell lymphoma. The defining lesion is **t(8;14) IGH-MYC of Burkitt lymphoma**.",
+      "say": "MYC under immunoglobulin control plus absent BCL2 separates Burkitt from its DLBCL mimics.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Burkitt lymphoma",
+          "points": [
+            "MYC rearranged, BCL2 negative",
+            "Ki67 near 100 percent",
+            "Short intensive regimens, CNS prophylaxis"
+          ]
+        },
+        "right": {
+          "title": "DLBCL",
+          "points": [
+            "MYC variable, BCL2 often positive",
+            "Ki67 high but lower",
+            "R-CHOP backbone therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Mantle cell lymphoma wears CD5 like CLL but carries t(11;14) cyclin D1 overexpression, spreads to gut as lymphomatous polyposis, and behaves aggressively despite small cell disguise. Its translocation is **t(11;14) CCND1-IGH of mantle cell lymphoma**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "CD5 positive but CD23 negative with cyclin D1 means mantle cell, and it does not behave gently.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mantle-cell-lymphoma-fig1.webp",
+        "alt": "Mantle cell lymphoma manifestations",
+        "caption": "Mantle cell lymphoma manifestations including lymphomatous polyposis and nodal disease."
+      }
+    },
+    {
+      "tx": "Tumour lysis prophylaxis precedes Burkitt and high burden DLBCL therapy because chemotherapy can release potassium, phosphate, and uric acid faster than kidneys clear them, collapsing renal function within days. Prevention embodies **tumour lysis syndrome prophylaxis with hydration and rasburicase**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Hydrate and give allopurinol or rasburicase before treating Burkitt; tumour lysis is predictable and preventable.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Lysis product",
+          "Danger",
+          "Prevention"
+        ],
+        "rows": [
+          [
+            "Potassium",
+            "Fatal arrhythmia",
+            "ECG, hydration, monitoring"
+          ],
+          [
+            "Uric acid",
+            "Crystal nephropathy",
+            "Allopurinol or rasburicase"
+          ],
+          [
+            "Phosphate",
+            "Calcium phosphate deposition",
+            "Hydration, phosphate binders"
+          ],
+          [
+            "Creatinine rise",
+            "Acute kidney injury",
+            "Pre-hydration, avoid nephrotoxins"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Prognostic indices across aggressive lymphoma combine age, stage, performance, LDH, and extranodal sites into the IPI, still useful beside PET and genetics for counselling and trial stratification. The clinical score is the **International Prognostic Index (IPI)**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Age, stage, LDH, performance, and extranodal sites: the IPI still counsels patients beside modern genetics.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Limited stage DLBCL",
+          "points": [
+            "Short R-CHOP with or without RT",
+            "Excellent cure rates",
+            "Late toxicity minimised"
+          ]
+        },
+        "right": {
+          "title": "Advanced high IPI",
+          "points": [
+            "Full course therapy, trials considered",
+            "CNS relapse risk assessed",
+            "Salvage planning from diagnosis"
+          ]
+        }
+      }
+    }
+  ]
+}

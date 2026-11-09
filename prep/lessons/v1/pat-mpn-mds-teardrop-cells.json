@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "pat-mpn-mds",
+  "subject": "pathology",
+  "title": "Teardrop Cells, CALR, Myelodysplastic Syndromes, and Mastocytosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Teardrop poikilocytes, red cells pulled into dacrocytes by fibrotic marrow and splenic passage, headline the leucoerythroblastic film of myelofibrosis alongside nucleated red cells and immature white cells. The signature cell is the **teardrop cell (dacrocyte)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Teardrop cells plus nucleated red cells mean the marrow space is occupied; biopsy finds the occupier.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/myeloproliferative-and-myelodysplastic-syndromes-fig1.webp",
+        "alt": "Myelofibrosis peripheral smear",
+        "caption": "Myelofibrosis peripheral smear with teardrop cells and leucoerythroblastic features."
+      }
+    },
+    {
+      "tx": "Calreticulin mutations, CALR exon 9 insertions and deletions, drive many JAK2 negative thrombocythaemia and myelofibrosis cases by activating the thrombopoietin receptor from inside the cell, completing the driver trio with MPL. The second driver family is **CALR mutation in myeloproliferative neoplasms**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "JAK2 negative does not mean driver negative: CALR and MPL mutations complete the classic trio.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Driver",
+          "Diseases",
+          "Note"
+        ],
+        "rows": [
+          [
+            "JAK2 V617F",
+            "PV, ET, PMF",
+            "Commonest driver"
+          ],
+          [
+            "CALR exon 9",
+            "ET, PMF",
+            "Absent in PV"
+          ],
+          [
+            "MPL",
+            "ET, PMF",
+            "Thrombopoietin receptor activation"
+          ],
+          [
+            "Triple negative",
+            "ET, PMF minority",
+            "Worse prognosis in PMF"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Myelodysplastic syndromes are clonal marrow failures of older adults producing cytopenias despite cellular marrow, because dysplastic precursors die before release, with risk of transformation to acute myeloid leukaemia. Ineffective clonal production defines **myelodysplastic syndromes (MDS)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "MDS is a full marrow that delivers empty blood; dysplasia plus cytopenia plus clonality make the diagnosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/myelodysplastic-syndrome-fig1.webp",
+        "alt": "Myelodysplastic syndrome dysplastic cell lineage",
+        "caption": "Myelodysplastic syndrome with dysplastic maturation across cell lineages."
+      }
+    },
+    {
+      "tx": "Pseudo-Pelger-Huet neutrophils, bilobed spectacle nuclei with coarse chromatin, announce dysplasia on film together with hypogranular cytoplasm, ring sideroblasts, and micromegakaryocytes in marrow. The bilobed signature is the **pseudo-Pelger-Huet anomaly of MDS**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Spectacle shaped bilobed neutrophils on film are dysplasia waving; look for MDS behind unexplained cytopenias.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dysplasia clues",
+          "points": [
+            "Pseudo-Pelger-Huet neutrophils",
+            "Ring sideroblasts, micromegakaryocytes",
+            "Blasts quantify progression risk"
+          ]
+        },
+        "right": {
+          "title": "Mimics to exclude",
+          "points": [
+            "B12 deficiency megaloblastosis",
+            "Drug and alcohol effects",
+            "Copper deficiency, viral suppression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Ring sideroblasts return in MDS as clonal iron trapped mitochondria, especially with SF3B1 mutation, linking morphology to a molecular entity with relatively favourable prognosis when blasts stay low. The mutation defined subtype is **MDS with SF3B1 mutation and ring sideroblasts**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Ring sideroblasts plus SF3B1 mutation now name their own MDS entity with its own prognosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Cytopenias prompt marrow examination"
+          },
+          {
+            "id": "b",
+            "label": "Dysplasia and blast count assessed"
+          },
+          {
+            "id": "c",
+            "label": "Cytogenetics and mutations refine risk"
+          },
+          {
+            "id": "d",
+            "label": "IPSS-M risk assigns treatment intensity"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Isolated deletion 5q creates a distinctive MDS of older women with macrocytic anaemia, preserved or high platelets, hypolobated megakaryocytes, and exquisite sensitivity to lenalidomide. The cytogenetic entity is **MDS with isolated del(5q)**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Del(5q) MDS in an older woman with high platelets answers beautifully to lenalidomide; genotype chooses the drug.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lower risk MDS",
+          "points": [
+            "Transfusion burden dominates",
+            "ESA, lenalidomide, luspatercept options",
+            "Watchful supportive care valid"
+          ]
+        },
+        "right": {
+          "title": "Higher risk MDS",
+          "points": [
+            "Excess blasts, adverse genetics",
+            "Hypomethylating agents",
+            "Transplant evaluation for eligible"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Systemic mastocytosis accumulates clonal mast cells bearing KIT D816V in marrow, skin, gut, and bone, releasing flushing, anaphylaxis, diarrhoea, and osteoporosis, with serum tryptase as its biomarker. The mediator disease is **systemic mastocytosis**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Flushing, anaphylaxis, gut cramps, and high tryptase spell mastocytosis; KIT D816V confirms the clone.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mastocytosis-fig1.webp",
+        "alt": "Mastocytosis pathogenesis and clinical manifestations",
+        "caption": "Mastocytosis pathogenesis and clinical manifestations from clonal mast cell accumulation."
+      }
+    },
+    {
+      "tx": "Distinguishing MPN from MDS and overlap syndromes rests on whether marrow overproduces mature cells, destroys its own dysplastic output, or tragically does both as in MDS-MPN overlap entities. That production question organises **myeloid neoplasm classification at the bedside**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Ask whether the marrow overproduces, underdelivers, or does both; that answer sorts MPN, MDS, and overlaps.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Category",
+          "Marrow behaviour",
+          "Blood result"
+        ],
+        "rows": [
+          [
+            "MPN",
+            "Overproduction of mature cells",
+            "Counts high"
+          ],
+          [
+            "MDS",
+            "Dysplastic ineffective production",
+            "Counts low despite cellular marrow"
+          ],
+          [
+            "MDS-MPN overlap",
+            "Both proliferation and dysplasia",
+            "Mixed counts, CMML prototype"
+          ],
+          [
+            "Marrow failure",
+            "Empty or replaced marrow",
+            "Pancytopenia, aplasia pattern"
+          ]
+        ]
+      }
+    }
+  ]
+}

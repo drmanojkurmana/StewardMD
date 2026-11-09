@@ -1,0 +1,199 @@
+{
+  "v": 1,
+  "module": "pat-mpn-mds",
+  "subject": "pathology",
+  "title": "Chronic Myeloid Leukaemia, Polycythaemia Vera, Essential Thrombocythaemia, and Myelofibrosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Chronic myeloid leukaemia expands the whole myeloid series from blasts under five percent to mature neutrophils, with basophilia, eosinophilia, splenomegaly, and the BCR-ABL fusion driving growth independent of normal controls. The t(9;22) disease is **chronic myeloid leukaemia (CML)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "CML shows the full myeloid spectrum with basophilia and a big spleen, all driven by BCR-ABL.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chronic-myeloid-leukemia-fig1.webp",
+        "alt": "Chronic myeloid leukaemia pathogenesis",
+        "caption": "Chronic myeloid leukaemia pathogenesis driven by BCR-ABL tyrosine kinase."
+      }
+    },
+    {
+      "tx": "Tyrosine kinase inhibitors from imatinib onward suppress the BCR-ABL clone to deep molecular remission, converting CML into a near normal lifespan condition monitored by PCR of fusion transcripts on the international scale. Transcript surveillance embodies **BCR-ABL molecular monitoring in CML**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "PCR of BCR-ABL transcripts every three months is the heartbeat of modern CML care.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "TKI therapy begins at diagnosis"
+          },
+          {
+            "id": "b",
+            "label": "Haematological response in weeks"
+          },
+          {
+            "id": "c",
+            "label": "Cytogenetic then molecular milestones"
+          },
+          {
+            "id": "d",
+            "label": "Deep response may allow treatment free trial"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Without control, CML marches from chronic phase through accelerated phase with rising blasts and resistance to blast crisis resembling acute leukaemia, a progression kinase inhibitors now make uncommon when adherence holds. The terminal transformation is **blast crisis of CML**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Blast crisis is CML's old ending; adherence to kinase inhibitors is what keeps it rare.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chronic phase",
+          "points": [
+            "Blasts under ten percent",
+            "TKI highly effective",
+            "Near normal lifespan expected"
+          ]
+        },
+        "right": {
+          "title": "Accelerated and blast phase",
+          "points": [
+            "Rising blasts, new cytogenetic clones",
+            "Resistance mutations emerge",
+            "Intensive therapy and transplant considered"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Polycythaemia vera raises red cell mass with panmyelosis, low erythropoietin, itching after warm showers, erythromelalgia, and thrombosis in unusual veins such as hepatic vein causing Budd-Chiari syndrome. Nearly all carry JAK2 mutation; the disease is **polycythaemia vera (PV)**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Aquagenic itching, low erythropoietin, and JAK2 mutation spell polycythaemia vera; hunt its clots in odd veins.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/polycythaemia-vera-fig1.webp",
+        "alt": "Polycythaemia vera JAK2 features",
+        "caption": "Polycythaemia vera with JAK2 driven erythrocytosis and thrombotic risk."
+      }
+    },
+    {
+      "tx": "The JAK2 V617F mutation locks the erythropoietin receptor pathway on in almost all polycythaemia vera and about half of essential thrombocythaemia and primary myelofibrosis, uniting these neoplasms molecularly. The shared driver is **JAK2 V617F mutation**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "JAK2 V617F unites polycythaemia vera, half of thrombocythaemia, and half of myelofibrosis under one switch.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disease",
+          "JAK2 V617F frequency",
+          "Dominant lineage"
+        ],
+        "rows": [
+          [
+            "Polycythaemia vera",
+            "Over 95 percent",
+            "Red cells"
+          ],
+          [
+            "Essential thrombocythaemia",
+            "About half",
+            "Platelets"
+          ],
+          [
+            "Primary myelofibrosis",
+            "About half",
+            "Fibrotic multilineage"
+          ],
+          [
+            "CML",
+            "Absent, BCR-ABL instead",
+            "Granulocytes"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Essential thrombocythaemia sustains platelets above four hundred fifty thousand with giant platelets, thrombotic and paradoxical bleeding risks, and exclusion of reactive causes and other neoplasms before diagnosis. The platelet neoplasm is **essential thrombocythaemia (ET)**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Essential thrombocythaemia clots and, at extreme counts, bleeds; exclude reactive thrombocytosis before naming it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/essential-thrombocythemia-fig1.webp",
+        "alt": "Essential thrombocythemia overview",
+        "caption": "Essential thrombocythaemia overview with sustained thrombocytosis and thrombotic risk."
+      }
+    },
+    {
+      "tx": "Primary myelofibrosis replaces marrow with reticulin fibrosis driven by abnormal megakaryocytes, forcing blood production into spleen and liver with massive splenomegaly, night sweats, and weight loss. Progressive marrow scarring defines **primary myelofibrosis (PMF)**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Myelofibrosis moves blood production into an enlarging spleen while marrow scars shut; constitutional symptoms follow.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early prefibrotic phase",
+          "points": [
+            "High counts may mimic ET",
+            "Trephine shows early reticulin",
+            "Symptoms often mild"
+          ]
+        },
+        "right": {
+          "title": "Overt fibrotic phase",
+          "points": [
+            "Anaemia, leucoerythroblastic film",
+            "Massive splenomegaly",
+            "Transfusion and JAK inhibitor decisions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When aspiration yields nothing because fibrotic marrow will not surrender cells, the dry tap itself becomes evidence, redirecting diagnosis to the trephine with reticulin staining and molecular studies. That empty aspirate is the **dry tap of marrow fibrosis**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "A dry tap is data, not failure: take the trephine, stain reticulin, and send molecular studies.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Aspiration attempted, dry tap"
+          },
+          {
+            "id": "b",
+            "label": "Trephine shows reticulin fibrosis"
+          },
+          {
+            "id": "c",
+            "label": "Film shows teardrops and precursors"
+          },
+          {
+            "id": "d",
+            "label": "JAK2, CALR, MPL studies complete triage"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}
