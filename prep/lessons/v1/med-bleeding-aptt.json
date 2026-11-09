@@ -1,0 +1,256 @@
+{
+ "v": 1,
+ "module": "med-bleeding",
+ "subject": "medicine",
+ "title": "Coagulation Assays and Consumptive Bleeding",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Laboratory evaluation of the intrinsic and common coagulation pathways utilizes a phospholipid and contact activator reagent. The **aptt** (activated partial thromboplastin time) measures the clotting time of decalcified plasma after adding surface activators (silica, celite, or kaolin), phospholipid, and calcium. Reflecting functional activity of factors XII, XI, IX, and VIII in the intrinsic pathway alongside factors X, V, prothrombin, and fibrinogen in the common pathway, a normal aPTT ranges between 25 and 35 seconds. It is specifically used to monitor therapeutic unfractionated heparin.",
+   "say": "Laboratory evaluation of the intrinsic and common coagulation pathways utilizes a phospholipid and contact activator reagent. The aptt measures the clotting time of plasma after adding surface activators, phospholipid, and calcium. Reflecting functional activity of factors twelve, eleven, nine, and eight alongside the common pathway, normal aPTT ranges between 25 and 35 seconds. It is specifically used to monitor therapeutic unfractionated heparin.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/coagulation-cascade-and-anticoagulants-fig1.webp",
+    "alt": "Coagulation cascade schematic highlighting intrinsic, extrinsic, and common pathway screening seams.",
+    "caption": "Intrinsic and extrinsic coagulation cascades with corresponding screening laboratory assays. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Assessing the extrinsic and common pathways of blood coagulation relies on tissue factor thromboplastin reagents. The **prothrombin time** (PT) measures clotting time following addition of recombinant tissue factor and calcium to citrated plasma. Reflecting factor VII in the extrinsic pathway alongside factors X, V, II, and I in the common pathway, a normal PT is 11 to 13.5 seconds. Because factor VII possesses the shortest physiological half-life of all clotting factors (roughly four to six hours), the prothrombin time is the most sensitive early laboratory indicator of acute liver failure.",
+   "say": "Assessing the extrinsic and common pathways of blood coagulation relies on tissue factor thromboplastin reagents. The prothrombin time measures clotting time following addition of tissue factor and calcium to citrated plasma. Reflecting factor seven alongside the common pathway, normal PT is 11 to 13.5 seconds. Because factor seven has the shortest half-life, the prothrombin time represents the most sensitive early indicator of acute liver failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Coagulation Assay",
+     "Pathways Evaluated",
+     "Key Clotting Factors Tested",
+     "Clinical Monitoring / Etiology"
+    ],
+    "rows": [
+     [
+      "aPTT (25-35 sec)",
+      "Intrinsic + Common",
+      "XII, XI, IX, VIII, X, V, II, I",
+      "Monitors Unfractionated Heparin; Hemophilia A/B"
+     ],
+     [
+      "PT / INR (11-13 sec)",
+      "Extrinsic + Common",
+      "VII, X, V, II, I",
+      "Monitors Warfarin; Early Acute Liver Failure"
+     ],
+     [
+      "Thrombin Time (14-19 sec)",
+      "Fibrinogen to Fibrin",
+      "Factor I (Fibrinogen quantity/quality)",
+      "Elevated in Hypofibrinogenemia / Heparin presence"
+     ],
+     [
+      "Bleeding Time (2-9 min)",
+      "Primary Haemostasis",
+      "Platelet count, function, VWF",
+      "Historic test for primary platelet plug formation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An acquired systemic thrombo-haemorrhagic syndrome characterized by uncontrolled, widespread microvascular thrombin generation leads to consumptive coagulopathy. In **disseminated intravascular coagulation** (DIC), systemic release of tissue factor triggered by sepsis (gram-negative endotoxin), obstetric catastrophes (abruptio placentae, amniotic fluid embolism), severe trauma, or acute promyelocytic leukaemia initiates widespread microvascular fibrin deposition. Extensive microthrombi cause tissue ischaemia and multi-organ failure. Simultaneously, exhaustion of platelets, fibrinogen, and prothrombin combined with secondary hyperfibrinolysis produces profuse diffuse haemorrhage from catheter sites, surgical wounds, and mucous membranes.",
+   "say": "An acquired systemic thrombo-haemorrhagic syndrome characterized by uncontrolled microvascular thrombin generation leads to consumptive coagulopathy. In disseminated intravascular coagulation, systemic release of tissue factor triggered by sepsis, obstetric catastrophes, or trauma initiates widespread microvascular fibrin deposition. Microthrombi cause tissue ischaemia and organ failure. Simultaneously, exhaustion of platelets and clotting factors combined with hyperfibrinolysis produces profuse bleeding.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/coagulation-disorders-haemophilia-and-dic-fig1.webp",
+    "alt": "Pathophysiological flowchart of tissue factor release, microvascular thrombosis, and consumptive haemorrhage in DIC.",
+    "caption": "Pathophysiological balance between microvascular thrombosis and fatal consumptive bleeding in DIC. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Deficient post-translational gamma-carboxylation of glutamic acid residues in liver-derived clotting factors disrupts calcium-dependent phospholipid binding. Developing **vitamin k deficiency** impairs the synthesis of active factors II, VII, IX, and X, alongside anticoagulant proteins C and S. Common etiologies include prolonged broad-spectrum antibiotic therapy eliminating intestinal gut flora, prolonged parenteral nutrition without vitamin K supplementation, obstructive biliary jaundice with fat malabsorption, and severe malabsorptive states. Laboratory profiling reveals early prolongation of the prothrombin time, followed by aPTT prolongation as factor IX and II levels decline.",
+   "say": "Deficient post-translational gamma-carboxylation of glutamic acid residues in clotting factors disrupts calcium-dependent membrane binding. Developing vitamin k deficiency impairs active factors two, seven, nine, and ten, alongside proteins C and S. Common causes include broad-spectrum antibiotics, obstructive jaundice with fat malabsorption, and lack of dietary intake. Laboratory profiling reveals early prolongation of prothrombin time, followed by aPTT prolongation as factor levels drop.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vitamin K Deficiency",
+     "points": [
+      "Impaired factors II, VII, IX, X, Protein C, S",
+      "Prolonged PT/INR initially; aPTT prolongs later",
+      "Factor V and Fibrinogen: Strictly Normal",
+      "Rapid correction with IV Vitamin K1 (Phytonadione)",
+      "Common post-antibiotics or in obstructive jaundice"
+     ]
+    },
+    "right": {
+     "title": "Severe Liver Cirrhosis",
+     "points": [
+      "Impaired synthesis of all factors except FVIII",
+      "Prolonged PT and aPTT",
+      "Factor V markedly depressed (< 50%)",
+      "No correction with Vitamin K administration",
+      "Thrombocytopenia secondary to hypersplenism"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A historic in vivo clinical test of primary haemostasis evaluating the duration of capillary haemorrhage following standardised dermal incision. Measuring **bleeding time** using the Ivy method involves inflating a sphygmomanometer cuff on the upper arm to 40 millimetres of mercury, making a standardised incision on the volar forearm, and blotting escaping blood every thirty seconds until cessation. Normal bleeding time ranges between two and nine minutes. It is characteristically prolonged in severe thrombocytopenia, qualitative platelet dysfunction (Glanzmann, Bernard-Soulier, uremia, aspirin), and von Willebrand disease, but is normal in hemophilia.",
+   "say": "A historic in vivo clinical test of primary haemostasis evaluating the duration of capillary bleeding following standardised dermal incision. Measuring bleeding time using the Ivy method reflects primary platelet plug formation. Normal bleeding time ranges between two and nine minutes. It is characteristically prolonged in severe thrombocytopenia, qualitative platelet dysfunction, and von Willebrand disease, but remains completely normal in factor deficiencies like haemophilia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "vessel",
+      "label": "Vascular Endothelial Disruption (Standardized Dermal Incision)"
+     },
+     {
+      "id": "vwf",
+      "label": "Subendothelial VWF Binds Platelet GPIb/IX Complexes"
+     },
+     {
+      "id": "plug",
+      "label": "Platelet Activation & Fibrinogen Bridging via GPIIb/IIIa"
+     },
+     {
+      "id": "stop",
+      "label": "Primary Platelet Plug Cessation: Normal 2-9 Minutes"
+     }
+    ],
+    "edges": [
+     [
+      "vessel",
+      "vwf"
+     ],
+     [
+      "vwf",
+      "plug"
+     ],
+     [
+      "plug",
+      "stop"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Establishing the diagnosis of disseminated intravascular coagulation requires scoring standardized coagulation and fibrinolytic parameters. The International Society on Thrombosis and Haemostasis (ISTH) overt DIC score evaluates four laboratory parameters: platelet count (< 50,000 earns 2 points), elevated **d-dimer** or fibrin degradation products (strong elevation earns 3 points), prolonged prothrombin time (> 6 seconds earns 2 points), and hypofibrinogenemia (< 100 mg/dL earns 1 point). A composite score of five or higher confirms overt DIC, mandating aggressive treatment of the underlying precipitating sepsis or obstetric trigger.",
+   "say": "Establishing the diagnosis of disseminated intravascular coagulation requires scoring standardized coagulation parameters. The International Society on Thrombosis and Haemostasis score evaluates four parameters: platelet count, elevated d-dimer, prolonged prothrombin time, and hypofibrinogenemia. A composite score of five or higher confirms overt DIC, mandating aggressive treatment of the underlying precipitating sepsis or obstetric trigger.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Laboratory Marker",
+     "Mild Abnormality (1 point)",
+     "Severe Abnormality (2-3 points)",
+     "Pathophysiological Significance"
+    ],
+    "rows": [
+     [
+      "Platelet Count",
+      "< 100,000/mcL (1 pt)",
+      "< 50,000/mcL (2 pt)",
+      "Platelet consumption into microthrombi"
+     ],
+     [
+      "Fibrin Markers (D-Dimer)",
+      "Moderate rise (2 pt)",
+      "Strong elevation (3 pt)",
+      "Plasmin cleavage of cross-linked fibrin"
+     ],
+     [
+      "Prolonged PT (seconds)",
+      "3 to 6 sec prolongation (1 pt)",
+      "> 6 sec prolongation (2 pt)",
+      "Clotting factor consumption (FVII, X, II)"
+     ],
+     [
+      "Fibrinogen Level",
+      "Normal (>= 100 mg/dL, 0 pt)",
+      "< 100 mg/dL (1 pt)",
+      "Severe substrate exhaustion (late marker)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Supportive transfusion management during acute bleeding crises in disseminated intravascular coagulation targets specific haematological thresholds. Transfusing **fresh frozen plasma** (FFP) at fifteen millilitres per kilogram replaces consumed clotting factors when the prothrombin time or aPTT exceeds 1.5 times normal in bleeding patients. Cryoprecipitate is specifically indicated to replenish fibrinogen when plasma fibrinogen falls below 150 milligrams per decilitre. Platelet transfusions maintain counts above 50,000 per microlitre in active bleeding, while prophylactic heparin is reserved for patients exhibiting predominant microvascular thrombosis or acral gangrene.",
+   "say": "Supportive transfusion management during acute bleeding crises in disseminated intravascular coagulation targets specific haematological thresholds. Transfusing fresh frozen plasma replaces consumed clotting factors when prothrombin time or aPTT is significantly prolonged in bleeding patients. Cryoprecipitate is indicated to replenish fibrinogen when levels drop below 150 milligrams per decilitre. Platelet transfusions maintain counts above 50,000 in active bleeding.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Transfusion Component",
+     "Clinical Trigger in Bleeding DIC",
+     "Therapeutic Target",
+     "Key Clotting Factors Supplied"
+    ],
+    "rows": [
+     [
+      "Platelet Concentrates",
+      "Platelets < 50,000/mcL",
+      "> 50,000/mcL (100,000 if CNS bleed)",
+      "Platelet plugs for primary haemostasis"
+     ],
+     [
+      "Fresh Frozen Plasma (FFP)",
+      "PT or aPTT > 1.5x normal",
+      "INR < 1.5 and aPTT near normal",
+      "All coagulation factors, antithrombin, albumin"
+     ],
+     [
+      "Cryoprecipitate (10 units)",
+      "Fibrinogen < 150 mg/dL",
+      "Fibrinogen > 150-200 mg/dL",
+      "Fibrinogen (Factor I), FVIII, VWF, FXIII"
+     ],
+     [
+      "Packed Red Blood Cells",
+      "Hemoglobin < 7.0-8.0 g/dL",
+      "Hb > 8.0 g/dL with clinical stability",
+      "Oxygen-carrying capacity restoration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Deficiency of clotting factor XIII produces normal routine screening tests with delayed, severe post-traumatic or umbilical bleeding. Because factor XIII functions downstream of thrombin as a transglutaminase that cross-links soluble fibrin monomers into insoluble covalent polymers, factor XIII deficiency produces completely normal PT, aPTT, and thrombin times. In **factor xiii deficiency**, the initial fibrin clot forms normally but rapidly dissolves, causing delayed re-bleeding twenty-four to forty-eight hours after trauma or dental extraction. Diagnosis is confirmed by demonstrating clot dissolution in five-molar urea, treated with cryoprecipitate or recombinant factor XIII.",
+   "say": "Deficiency of clotting factor XIII produces normal routine screening tests with delayed, severe post-traumatic bleeding. Because factor XIII cross-links soluble fibrin monomers into insoluble covalent polymers, deficiency produces completely normal PT, aPTT, and thrombin times. In factor xiii deficiency, the initial clot forms normally but dissolves rapidly, causing delayed re-bleeding twenty-four to forty-eight hours after trauma. Diagnosis is confirmed by clot dissolution in urea.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "clot",
+      "label": "Normal Thrombin Burst Forms Soluble Fibrin Monomers"
+     },
+     {
+      "id": "xiii",
+      "label": "Factor XIII Cross-links Covalent Lysine-Glutamine Bonds"
+     },
+     {
+      "id": "def",
+      "label": "FXIII Deficiency: Uncrosslinked Fibrin Dissolves in 5M Urea"
+     },
+     {
+      "id": "bleed",
+      "label": "Delayed Umbilical / Surgical Bleeding at 24-48 Hours"
+     }
+    ],
+    "edges": [
+     [
+      "clot",
+      "xiii"
+     ],
+     [
+      "xiii",
+      "def"
+     ],
+     [
+      "def",
+      "bleed"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
