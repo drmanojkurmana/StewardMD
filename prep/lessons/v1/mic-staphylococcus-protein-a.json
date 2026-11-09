@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-staphylococcus",
+  "subject": "microbiology",
+  "title": "Staphylococcal Toxins: Protein A, Panton-Valentine Leukocidin and Toxic Shock Toxin",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Protein A** coats S aureus and binds IgG by its Fc stem, presenting antibody backwards so phagocyte Fc receptors find nothing useful, while also engaging Fab VH3 families as a B cell superantigen. Coagglutination tests exploit it (antibody coated staphylococci as reagent carriers), turning a virulence factor into bench equipment.",
+      "say": "Antibody grabbed by the stem cannot call phagocytes; protein A reverses the uniform.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Protein A actions",
+          "points": [
+            "Binds IgG Fc (subclasses 1, 2, 4)",
+            "Antiphagocytic by antibody inversion",
+            "B cell superantigen via VH3 Fab",
+            "Von Willebrand factor binding in endocarditis"
+          ]
+        },
+        "right": {
+          "title": "Protein A uses",
+          "points": [
+            "Coagglutination reagent platform",
+            "Latex kit component for aureus identification",
+            "Antibody purification columns (protein A chromatography)",
+            "Typing and vaccine research target"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Panton Valentine leukocidin** (PVL) is a two component pore toxin (LukS and LukF) lysing neutrophils and macrophages, genetically mobile (prophage), marking community MRSA and MSSA strains that cause recurrent boils and necrotising pneumonia after influenza, especially in the young. Its presence changes severity expectations, not first antibiotic choice.",
+      "say": "PVL kills the very cells sent to kill it; necrotising pneumonia in a young adult asks its name.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PVL portrait",
+          "points": [
+            "Bicomponent leukocyte pore former",
+            "Prophage encoded, strain associated",
+            "Recurrent furunculosis and skin necrosis",
+            "Post influenza necrotising pneumonia, haemoptysis"
+          ]
+        },
+        "right": {
+          "title": "PVL practice",
+          "points": [
+            "Suspect in household boil clusters",
+            "Decolonisation and hygiene counselling",
+            "Toxin suppressing antibiotics debated adjuncts",
+            "Notification and typing in outbreaks by jurisdiction"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Toxic shock syndrome toxin 1** (TSST 1) is a superantigen (antigens lesson) flooding T cells into cytokine storm: menstrual cases with vaginal colonisation and tampon traditions, non menstrual from wound and post surgical colonisation, presenting fever, rash, desquamation later, hypotension and multi organ failure, diagnosed clinically with cultures usually sterile at the toxin's distant stage.",
+      "say": "Toxin made elsewhere shocks everywhere; blood cultures are usually innocent in toxic shock.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "TSS portrait",
+          "points": [
+            "Fever, diffuse rash, then desquamation 1 to 2 weeks",
+            "Hypotension and three organ systems minimum",
+            "Mucosal hyperaemia, strawberry tongue",
+            "Streptococcal TSS parallel (invasive GAS)"
+          ]
+        },
+        "right": {
+          "title": "TSS answers",
+          "points": [
+            "Remove tampon or drain focus, wash out",
+            "Anti staphylococcal therapy plus clindamycin toxin suppression",
+            "Fluids, vasopressors, critical care",
+            "IVIG considered in streptococcal toxic shock"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Superantigen family** extends enterotoxins and exfoliatins: TSST and enterotoxin B and C crosslink MHC II to TCR V beta subsets, each toxin a V beta signature, explaining cytokine patterns and why toxoid protection is hard. Staphylococcal superantigen like proteins additionally block complement and neutrophil recruitment, layered immune evasion.",
+      "say": "Each superantigen shakes hands with a different V beta family and storms accordingly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Superantigen roster",
+          "points": [
+            "TSST 1: menstrual and non menstrual TSS",
+            "Enterotoxins B, C: non menstrual and food roles",
+            "Exfoliative toxins: serine proteases more than classic superantigens",
+            "V beta expansion signatures"
+          ]
+        },
+        "right": {
+          "title": "Evasion partners",
+          "points": [
+            "SSL proteins block complement and IgA",
+            "CHIPS blocks neutrophil chemotaxis receptors",
+            "Staphylokinase dissolves fibrin barriers",
+            "Capsule and biofilm physical layers"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Alpha toxin** (haemolysin alpha) forms beta barrel pores in membranes including red cells (the beta haemolysis partly), platelets, endothelium, driving dermonecrosis and pneumonia injury, while beta toxin (sphingomyelinase, hot cold phenomenon), gamma toxin and delta toxin complete the haemolysin alphabet students inherit.",
+      "say": "Alpha pores perforate the neighbourhood; beta needs cold to finish its haemolysis trick.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Alpha toxin",
+          "points": [
+            "Pore forming cytolysin broad cell range",
+            "Dermonecrotic in skin models",
+            "Pneumonia epithelial injury",
+            "Vaccine and monoclonal target research"
+          ]
+        },
+        "right": {
+          "title": "Other haemolysins",
+          "points": [
+            "Beta: sphingomyelinase, hot cold lysis",
+            "Gamma: bicomponent leukocidin kin",
+            "Delta: surfactant like, agr indicator",
+            "Haemolysis patterns assist bench identity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Agr quorum sensing** conducts the toxin orchestra: at high cell density the agr system upregulates secreted toxins and downregulates surface adhesins, switching aureus from colonising to attacking programme, a regulatory biography explaining abscess timing and why stationary phase culture supernatants are toxic.",
+      "say": "Crowded aureus turns toxin loud and adhesive quiet; density conducts the programme.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "low", "label": "Low density: adhesins on, toxins quiet (colonise)" },
+          { "id": "signal", "label": "Autoinducing peptide accumulates" },
+          { "id": "agr", "label": "Agr switches programme" },
+          { "id": "attack", "label": "Toxins secreted, surface proteins repressed (attack)" }
+        ],
+        "edges": [["low", "signal"], ["signal", "agr"], ["agr", "attack"]]
+      }
+    },
+    {
+      "tx": "**Toxin suppressing antibiotics** (clindamycin and linezolid protein synthesis inhibitors from the pharmacology lessons) join cell wall agents in severe toxin mediated disease (toxic shock, necrotising fasciitis and pneumonia) to stop new toxin production while bactericidal partners clear organisms, an adjunct logic the bench toxins justify.",
+      "say": "Kill the factory and silence it: clindamycin joins beta lactams where toxins drive disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adjunct logic",
+          "points": [
+            "Protein synthesis stop halts toxin production",
+            "Eagle effect: stationary cells evade penicillin killing",
+            "Clindamycin resistance (D test) checked",
+            "IVIG neutralisation debated, streptococcal TSS stronger case"
+          ]
+        },
+        "right": {
+          "title": "Syndromes applying it",
+          "points": [
+            "Staphylococcal and streptococcal toxic shock",
+            "Necrotising fasciitis (group A strep)",
+            "PVL necrotising pneumonia",
+            "Toxin mediated disease after source control"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Laboratory toxin detection** is mostly research and reference work (PVL gene PCR in defined syndromes, toxin typing in outbreaks, enterotoxin immunoassays in food), while routine laboratories report species and susceptibility and clinicians diagnose toxin disease clinically. Knowing which requests reference laboratories actually answer prevents specimen theatre.",
+      "say": "Toxin genes belong to defined syndromes and outbreaks, not routine wound reports.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Reference testing",
+          "points": [
+            "lukS F PCR for PVL in severe presentations",
+            "Enterotoxin detection in implicated food",
+            "Exfoliative toxin genes in scalded skin investigations",
+            "Whole genome virulence profiling in outbreaks"
+          ]
+        },
+        "right": {
+          "title": "Routine reporting",
+          "points": [
+            "Species and susceptibility sufficient usually",
+            "Clinical criteria define TSS",
+            "Food poisoning diagnosis clinical and epidemiological",
+            "Save isolates for later typing"
+          ]
+        }
+      }
+    }
+  ]
+}
