@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "module": "sur-spleen",
+ "subject": "surgery",
+ "title": "Splenic Trauma, Injury Grading, and Splenectomy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The most frequently injured solid visceral organ in blunt abdominal trauma is the spleen, resulting in acute **splenic rupture**. Motor vehicle collisions and direct blows to the left lower rib cage commonly fracture the left ninth through eleventh ribs, lacerating the delicate, highly vascular splenic capsule. Haemorrhage can range from contained subcapsular haematomas to torrential free intraperitoneal exsanguination requiring emergent damage control resuscitation.",
+   "say": "The spleen is the most commonly injured visceral organ in blunt abdominal trauma, frequently associated with lower left rib fractures.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-splenic_injury_signs.webp",
+    "alt": "Clinical illustration showing physical signs of splenic trauma including Kehr sign, Ballance sign, and Saegesser sign.",
+    "caption": "Eponymic physical signs of splenic trauma: left shoulder tip pain and fixed dullness in the left flank. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Physical signs of splenic rupture include left upper quadrant tenderness, involuntary guarding, and referred pain to the left shoulder tip upon palpation, designated as **Kehr sign**. This referred hyperaesthesia is mediated by sensory phrenic nerve afferents irritated by subdiaphragmatic blood. Another classic eponymous sign is Ballance sign, where shifting dullness is elicited in the right flank while persistent fixed dullness is percussed over the left flank due to coagulated hematoma.",
+   "say": "Kehr sign describes left shoulder tip pain from diaphragmatic irritation, while Ballance sign indicates fixed dullness from perisplenic clots.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physical Sign",
+     "Clinical Description",
+     "Pathological Mechanism"
+    ],
+    "rows": [
+     [
+      "Kehr sign",
+      "Acute pain referred to the left shoulder",
+      "Diaphragmatic irritation mediated by C3-C5 phrenic afferents"
+     ],
+     [
+      "Ballance sign",
+      "Fixed dullness in left flank, shifting dullness in right",
+      "Coagulated clotted blood around torn splenic capsule"
+     ],
+     [
+      "Saegesser sign",
+      "Exquisite tenderness over left phrenic nerve in neck",
+      "Irritation of cervical roots by retroperitoneal hematoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In hemodynamically stable trauma victims, contrast-enhanced computed tomography is the gold standard imaging modality, stratifying injuries using the American Association for the Surgery of Trauma **splenic injury grading**. Grade one involves a subcapsular hematoma under ten percent surface area or capsular tear under one centimetre depth. Grade five defines a completely shattered, devascularized spleen with hilar vascular avulsion.",
+   "say": "The AAST splenic injury scale classifies trauma from grade one subcapsular tears to grade five completely shattered or devascularized spleens.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/splenic-trauma-and-post-splenectomy-sepsis-fig1.webp",
+    "alt": "Anatomical schematic and CT diagrams illustrating AAST splenic trauma grades I through V.",
+    "caption": "AAST splenic injury classification: grading parenchymal laceration depth and vascular devascularisation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Non-operative management has become the primary standard of care in over eighty percent of hemodynamically stable blunt splenic injuries across all grades. Management entails admission to an intensive care unit, continuous hemodynamic monitoring, serial hemoglobin assessments, and strict bed rest. For patients demonstrating contrast blush representing active arterial pseudoaneurysm or extravasation on computed tomography, catheter-directed transcatheter arterial **angioembolization** successfully arrests bleeding without requiring laparotomy.",
+   "say": "Stable patients undergo non-operative management, utilizing angioembolization to control active arterial extravasation while preserving the spleen.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stable",
+      "label": "Blunt Splenic Trauma with Hemodynamic Stability"
+     },
+     {
+      "id": "ct",
+      "label": "Contrast-Enhanced CT Confirms AAST Grade & Blush"
+     },
+     {
+      "id": "embol",
+      "label": "Angiography & Selective Splenic Artery Embolization"
+     },
+     {
+      "id": "success",
+      "label": "Successful Spleen Preservation (> 90% Success Rate)"
+     }
+    ],
+    "edges": [
+     [
+      "stable",
+      "ct"
+     ],
+     [
+      "ct",
+      "embol"
+     ],
+     [
+      "embol",
+      "success"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When non-operative management is contraindicated by persistent hemodynamic instability, refractory shock, or concomitant perforated hollow viscus requiring emergency laparotomy, surgical exploration is mandatory. In stable pediatric patients or moderate adult injuries, the surgeon attempts splenic salvage through **splenorrhaphy**. Techniques encompass application of topical haemostatic agents, argon beam coagulation, direct suture repair with pledgets, partial splenectomy, or wrapping the organ in an absorbable mesh bag.",
+   "say": "Splenorrhaphy preserves splenic tissue using topical haemostatics, suturing, or mesh wrapping when hemodynamic stability permits.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Splenorrhaphy",
+     "points": [
+      "Preserves splenic immune function",
+      "AAST Grade II or III lacerations",
+      "Requires haemodynamic stability",
+      "Pledgeted sutures or mesh wrapping"
+     ]
+    },
+    "right": {
+     "title": "Total Splenectomy",
+     "points": [
+      "Mandatory in refractory shock",
+      "AAST Grade V shattered spleen",
+      "Severe multi-trauma (damage control)",
+      "Eliminates bleeding rapidly"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Unstable patients who remain hypotensive despite blood transfusion, or individuals harbouring a grade five shattered spleen with hilum disruption, require immediate emergency **splenectomy**. The splenocolic, gastrosplenic, splenorenal, and splenophrenic ligaments are rapidly mobilized to deliver the spleen into the wound. The splenic artery and vein are individually ligated at the hilum, exercising meticulous care to avoid crushing the closely adjacent pancreatic tail within the clamp.",
+   "say": "Total splenectomy rapidly ligates the splenic hilum, taking care to avoid injuring the intimately related tail of the pancreas.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "shock",
+      "label": "Persistent Shock & Failed Resuscitation at Laparotomy"
+     },
+     {
+      "id": "lig",
+      "label": "Division of Splenocolic & Gastrosplenic Ligaments"
+     },
+     {
+      "id": "hilum",
+      "label": "Safe Ligation of Splenic Vessels at the Splenic Hilum"
+     },
+     {
+      "id": "pancreas",
+      "label": "Careful Avoidance of Pancreatic Tail Injury"
+     }
+    ],
+    "edges": [
+     [
+      "shock",
+      "lig"
+     ],
+     [
+      "lig",
+      "hilum"
+     ],
+     [
+      "hilum",
+      "pancreas"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most feared long-term infectious hazard following total removal of the spleen is **overwhelming post-splenectomy infection**. Loss of splenic macrophages and tuftsin impairs clearance of non-opsonized encapsulated bacteria from the bloodstream. Encapsulated pathogens, predominantly Streptococcus pneumoniae, followed by Neisseria meningitidis and Haemophilus influenzae type B, cause fulminant bacteremia that rapidly progresses from mild shivering to catastrophic septic shock and death within twenty-four hours.",
+   "say": "Overwhelming post-splenectomy infection is a fulminant, fatal sepsis caused by encapsulated organisms like pneumococcus following spleen removal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathogen",
+     "Relative Frequency",
+     "Clinical Manifestation",
+     "Prevention"
+    ],
+    "rows": [
+     [
+      "Streptococcus pneumoniae",
+      "50% - 70%",
+      "Fulminant septic shock, purpura fulminans",
+      "13-valent & 23-valent pneumococcal vaccines"
+     ],
+     [
+      "Haemophilus influenzae type B",
+      "15% - 20%",
+      "Rapid respiratory failure, meningitis",
+      "HiB conjugate vaccine"
+     ],
+     [
+      "Neisseria meningitidis",
+      "10% - 15%",
+      "Meningococcemia, adrenal hemorrhage",
+      "MenACWY and MenB conjugate vaccines"
+     ],
+     [
+      "Capnocytophaga canimorsus",
+      "Rare (< 5%)",
+      "Severe sepsis following domestic dog bites",
+      "Immediate prophylactic amoxicillin-clavulanate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "To prevent overwhelming post-splenectomy infection, strict protocols govern **vaccination before splenectomy** or immediately following emergency surgery. In planned elective splenectomy, vaccines against Streptococcus pneumoniae, Haemophilus influenzae, and Neisseria meningitidis are administered at least fourteen days prior to surgery to achieve peak antibody titers. Following emergency trauma splenectomy, vaccines are administered on postoperative day fourteen to avoid the immunosuppressive refractoriness of acute trauma.",
+   "say": "Vaccines against pneumococcus, meningococcus, and Haemophilus are given two weeks before elective surgery, or fourteen days after emergency splenectomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vaccine Schedule",
+     "Elective Splenectomy",
+     "Emergency Splenectomy (Trauma)"
+    ],
+    "rows": [
+     [
+      "Timing",
+      "At least 14 days before operation",
+      "At or after postoperative day 14 (or at discharge)"
+     ],
+     [
+      "Primary Antigens",
+      "Pneumococcal (PCV20 or PCV15 + PPSV23)",
+      "Pneumococcal (PCV20 or PCV15 + PPSV23)"
+     ],
+     [
+      "Secondary Antigens",
+      "Meningococcal (MenACWY + MenB) & HiB",
+      "Meningococcal (MenACWY + MenB) & HiB"
+     ],
+     [
+      "Booster Doses",
+      "PPSV23 booster at 5 years",
+      "PPSV23 booster at 5 years"
+     ]
+    ]
+   }
+  }
+ ]
+}

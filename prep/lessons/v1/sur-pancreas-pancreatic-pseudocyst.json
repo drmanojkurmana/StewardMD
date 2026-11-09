@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sur-pancreas",
+ "subject": "surgery",
+ "title": "Pancreatic Pseudocysts and Drainage Techniques",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A localized collection of amylase-rich fluid enclosed within a non-epithelialized wall of fibrous and granulation tissue is defined as a **pancreatic pseudocyst**. Pseudocysts arise predominantly as a sequela of acute pancreatitis or chronic pancreatitis following pancreatic duct disruption, and less commonly secondary to blunt abdominal trauma. Unlike true congenital or neoplastic cysts, histopathological examination confirms a complete absence of an internal epithelial lining.",
+   "say": "A pancreatic pseudocyst is an encapsulated collection of amylase-rich fluid lacking an epithelial lining, arising after pancreatitis or duct disruption.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-pancreas-gross.webp",
+    "alt": "Gross anatomical diagram of the pancreas showing relationships to the stomach, lesser sac, and common sites of pseudocyst formation.",
+    "caption": "Surgical anatomy of the pancreas: lesser sac relationships where pseudocysts typically mature against the posterior stomach. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Pathophysiologically, the pseudocyst begins as an acute peripancreatic fluid collection that fails to resorb. Over a period of four to six weeks, surrounding peritoneal and retroperitoneal structures, including the posterior gastric wall, transverse mesocolon, and parietal peritoneum, mount an intense inflammatory reaction. This reaction organizes into a dense, mature fibrous capsule capable of holding surgical sutures without tearing, termed mural **capsular maturation**.",
+   "say": "Capsular maturation requires four to six weeks, during which fibrous tissue forms a capsule strong enough to support surgical sutures.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "leak",
+      "label": "Pancreatic Duct Disruption & Enzyme Extravasation"
+     },
+     {
+      "id": "fluid",
+      "label": "Acute Peripancreatic Fluid Accumulates in Lesser Sac"
+     },
+     {
+      "id": "inflam",
+      "label": "Intense Mesothelial & Fibroblastic Inflammatory Reaction"
+     },
+     {
+      "id": "mature",
+      "label": "Mature Non-Epithelial Fibrous Capsule Formed (> 4-6 Weeks)"
+     }
+    ],
+    "edges": [
+     [
+      "leak",
+      "fluid"
+     ],
+     [
+      "fluid",
+      "inflam"
+     ],
+     [
+      "inflam",
+      "mature"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Most small asymptomatic pseudocysts measuring under four to six centimetres resolve spontaneously without active intervention through gradual reabsorption. Indications for therapeutic drainage encompass persistent symptoms such as epigastric pain, early satiety from gastric outlet obstruction, common bile duct compression causing jaundice, rapid enlargement, or life-threatening complications such as infection, rupture, and pseudoaneurysm **haemorrhage**.",
+   "say": "Indications for draining a pseudocyst include pain, gastric outlet obstruction, jaundice, rapid expansion, infection, or vascular erosion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Observation Indicated",
+     "points": [
+      "Asymptomatic pseudocyst < 4 to 6 cm",
+      "No compression of adjacent hollow organs",
+      "Immature capsule (< 4 weeks from acute episode)",
+      "High rate of spontaneous resolution (40% to 50%)"
+     ]
+    },
+    "right": {
+     "title": "Intervention Required",
+     "points": [
+      "Persistent epigastric pain or early satiety",
+      "Gastric outlet or biliary obstruction",
+      "Size > 6 cm with documented interval enlargement",
+      "Infection, rupture, or bleeding pseudoaneurysm"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prior to undertaking any drainage procedure, contrast-enhanced computed tomography or magnetic resonance cholangiopancreatography is mandatory to delineate the cyst relationship to the stomach and define ductal anatomy. Cyst fluid analysis obtained by fine-needle aspiration demonstrates extremely high amylase activity alongside low carcinoembryonic antigen levels, reliably excluding mucinous **cystic neoplasms** of the pancreas.",
+   "say": "Cyst fluid analysis reveals high amylase and low CEA levels, confirming a benign pseudocyst and ruling out mucinous cystic neoplasms.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cystic Lesion",
+     "Cyst Amylase",
+     "Cyst CEA Level",
+     "Epithelial Lining"
+    ],
+    "rows": [
+     [
+      "Pancreatic Pseudocyst",
+      "Markedly elevated (>1,000 U/L)",
+      "Low (< 5 ng/mL)",
+      "None (fibrous granulation tissue)"
+     ],
+     [
+      "Serous Cystadenoma",
+      "Low (< 250 U/L)",
+      "Low (< 5 ng/mL)",
+      "Glycogen-rich cuboidal epithelium"
+     ],
+     [
+      "Mucinous Cystic Neoplasm",
+      "Variable / Low",
+      "Markedly elevated (> 192 ng/mL)",
+      "Mucin-secreting columnar epithelium"
+     ],
+     [
+      "IPMN",
+      "High",
+      "High (> 192 ng/mL)",
+      "Mucin-producing with duct communication"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When an intervention is required for a mature pseudocyst densely adherent to the posterior wall of the stomach, the definitive surgical procedure is open or laparoscopic **cystogastrostomy**. Through an anterior gastrotomy, the posterior gastric wall is incised into the adherent pseudocyst cavity, fluid and necrotic debris are evacuated, and the edges of the posterior stomach and cyst wall are sutured together circumferentially.",
+   "say": "Cystogastrostomy establishes internal drainage by creating an anastomosis between the pseudocyst and the adherent posterior gastric wall.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pancreatitis-fig1.webp",
+    "alt": "Surgical diagram showing posterior gastrotomy and creation of an internal anastomosis into a pancreatic pseudocyst.",
+    "caption": "Cystogastrostomy: internal anastomotic decompression of a mature lesser sac pseudocyst into the stomach lumen. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Historically described by Jurasz, surgical cystogastrostomy provides permanent dependent internal drainage because gastric acid promptly neutralizes pancreatic enzymes while the cyst cavity rapidly obliterates as it contracts. In contemporary practice, endoscopic ultrasound-guided cystogastrostomy has largely replaced open surgery. An expandable bifanged lumen-apposing metal stent or multiple double-pigtail plastic stents are deployed transmurally across the gastric wall into the cyst under real-time **endosonography**.",
+   "say": "Endoscopic ultrasound cystogastrostomy provides transmural stents between the stomach and pseudocyst under real-time ultrasound guidance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "eus",
+      "label": "EUS Localisation of Pseudocyst Abutting Posterior Stomach"
+     },
+     {
+      "id": "puncture",
+      "label": "19-Gauge Needle Puncture & Guidewire Coiling"
+     },
+     {
+      "id": "tract",
+      "label": "Electrocautery Tract Dilation across Gastric Wall"
+     },
+     {
+      "id": "stent",
+      "label": "Deployment of Lumen-Apposing Metal or Pigtail Stents"
+     }
+    ],
+    "edges": [
+     [
+      "eus",
+      "puncture"
+     ],
+     [
+      "puncture",
+      "tract"
+     ],
+     [
+      "tract",
+      "stent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When a pseudocyst is located within the inframesocolic compartment or does not adhere to the posterior stomach wall, surgical cystogastrostomy is technically infeasible. For these lesions, surgical **cystojejunostomy** is executed, utilizing an isolated forty-to-fifty centimetre Roux-en-Y jejunal loop anastomosed to the most dependent portion of the cyst wall. External catheter drainage is strictly avoided for non-infected pseudocysts due to the high hazard of creating an intractable pancreaticocutaneous fistula.",
+   "say": "Pseudocysts non-adherent to the stomach are drained via Roux-en-Y cystojejunostomy, avoiding external drains that risk permanent fistulas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drainage Technique",
+     "Anatomical Indication",
+     "Primary Advantage",
+     "Primary Hazard"
+    ],
+    "rows": [
+     [
+      "Cystogastrostomy",
+      "Pseudocyst adherent to posterior gastric wall",
+      "Physiological internal drainage, rapid collapse",
+      "Gastric bleeding from mucosal edges"
+     ],
+     [
+      "Cystojejunostomy",
+      "Inframesocolic pseudocyst non-adherent to stomach",
+      "Dependent drainage of pelvic/lower cysts",
+      "Requires bowel resection and anastomosis"
+     ],
+     [
+      "Cystoduodenostomy",
+      "Pseudocyst located in head of pancreas abutting D2",
+      "Direct transenteric drainage for head lesions",
+      "Duodenal leak, severe retroperitoneal sepsis"
+     ],
+     [
+      "Percutaneous External",
+      "Infected pseudocyst in critically unstable patient",
+      "Rapid emergency bedside decompression",
+      "High rate of chronic pancreaticocutaneous fistula"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most catastrophic vascular emergency complicating a pancreatic pseudocyst is the erosion of enzymatic secretions into an adjacent major artery, forming a **pseudoaneurysm**. The splenic artery is most commonly affected, followed by the gastroduodenal and superior mesenteric arteries. Sudden acute haemorrhage into the pseudocyst or gastrointestinal tract produces torrential bleeding, which demands immediate diagnostic angiography and emergency transcatheter arterial coil embolization.",
+   "say": "Enzymatic erosion of the splenic artery creates a pseudoaneurysm, which requires urgent transcatheter angiographic coil embolization.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Angiographic Embolization",
+     "points": [
+      "First-line therapy for bleeding pseudoaneurysm",
+      "Superselective catheterization of feeding vessel",
+      "Coil embolization proximal and distal to neck",
+      "High initial success rate (> 85%)"
+     ]
+    },
+    "right": {
+     "title": "Emergency Surgical Exploration",
+     "points": [
+      "Hostile, inflamed, blood-filled field",
+      "Extremely difficult vascular control",
+      "High operative mortality (20% to 40%)",
+      "Reserved strictly for failed embolization"
+     ]
+    }
+   }
+  }
+ ]
+}
