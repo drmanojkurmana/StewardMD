@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-drowning-immersion-syndrome",
+ "subject": "forensic-medicine",
+ "module": "fmt-drowning",
+ "title": "Immersion Syndrome, Drowning Froth and the Diatom Test",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Immersion syndrome kills by vagal arrest",
+   "tx": "**Immersion syndrome**, also called hydrocution or submersion inhibition, is death from cardiac arrest by vagal inhibition on sudden immersion. Triggers are cold water stimulating skin nerve endings, water striking the epigastrium, and cold water entering the ear drums, nasal passages, pharynx and larynx. Feet first falls, duck diving and horizontal dives onto the abdomen cause it. Alcohol, through skin vasodilatation, increases the effect, as does emotional tension.",
+   "say": "Cold shock to skin, ears or belly stops the heart vagally in one to two percent of immersions, before any drowning begins.",
+   "vis": {"kind": "table", "cols": ["Trigger", "Surface stimulated", "Result"], "rows": [["Cold water on skin", "Surface nerve endings", "Vagal cardiac arrest"], ["Blow on epigastrium", "Abdominal wall impact", "Reflex inhibition"], ["Cold in ears and nose", "Mucosal nerve endings", "Sudden collapse in water"], ["Alcohol before entry", "Dilated skin vessels", "Effect amplified"]]}
+  },
+  {
+   "title": "Why immersion syndrome leaves no signs",
+   "tx": "Because the heart stops at entry, the **signs of drowning are absent in immersion syndrome**: no struggle, no aspirated water, no froth columns, no ballooned lungs. The reliable drowning signs listed by Reddy will not be found when death is due to vagal inhibition. This is precisely why a body in water with a blank autopsy still needs the history: a witnessed instantaneous sinking after a dive is itself the strongest evidence available.",
+   "say": "A vagal death on entry struggles not at all, so witnessed instant sinking replaces the missing froth and flooded lungs.",
+   "vis": {"kind": "compare", "left": {"title": "Wet drowning signs", "points": ["Froth at mouth and airways", "Ballooned waterlogged lungs", "Water in stomach", "Struggle history"]}, "right": {"title": "Immersion syndrome", "points": ["Instant collapse witnessed", "Lungs not flooded", "No froth columns formed", "Blank or asphyxial autopsy"]}}
+  },
+  {
+   "title": "Froth forms by the check valve mechanism",
+   "tx": "Inside the lungs, oedema fluid and air whip into froth that behaves as a **check valve in drowning**: powerful inspiratory efforts draw air in, but weaker expiratory efforts cannot expel the air, water and foam mixture. The lungs therefore stay trapped in the inspiratory position, feel doughy and pit on pressure. Rib impressions groove their lateral surfaces, an important sign. In an unconscious victim the lungs merely flood, without froth columns, the oedema aquosum picture.",
+   "say": "Froth traps air like a one way valve, leaving doughy pitting lungs grooved by the ribs over them.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Water and air whip into froth"}, {"id": "b", "label": "Inspiration draws mixture inward"}, {"id": "c", "label": "Expiration cannot expel it"}, {"id": "d", "label": "Lungs balloon and pit on pressure"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Emphysema aquosum and Paltauf haemorrhages",
+   "tx": "Water penetrating alveolar walls into tissues and vessels produces **emphysema aquosum**, present in about eighty percent of drownings and presumptive evidence of the diagnosis. The lungs are ballooned, about double normal weight in fresh water, pale from blood squeezed out of interalveolar vessels, and they keep their shape without collapsing after removal, with crepitus on section. Ruptured alveoli bleed subpleurally as pale pink or bluish red Paltauf haemorrhages, three to five centimetres at most, in about half of cases.",
+   "say": "Ballooned crepitant lungs that hold their shape, with pale Paltauf spots under the pleura, speak strongly for drowning.",
+   "vis": {"kind": "table", "cols": ["Lung sign", "Frequency", "Appearance"], "rows": [["Emphysema aquosum", "About 80 percent", "Ballooned, doughy, rib grooves"], ["Paltauf haemorrhages", "About 50 percent", "Pale pink subpleural patches"], ["Petechiae on lungs", "Absent or very rare", "Vessels compressed by water"], ["Froth on squeezing", "Little in fresh water lungs", "Foam locks the airspaces"]]}
+  },
+  {
+   "title": "Diatoms, silica shelled algae",
+   "tx": "**Diatoms** are microscopic unicellular algae of the class Bacillariophyceae with hard siliceous box like skeletons and brown diatomin pigment, radially recognisable under the microscope and birefringent in polarised light. They float freely in natural waters. Their silica shells resist acid digestion and putrefaction, which is what makes them recoverable from tissues long after softer evidence has disappeared. Species in the body can be compared with species in the suspected drowning water.",
+   "say": "Silica shelled diatoms survive digestion of tissue, so their species can match a body to a particular stretch of water.",
+   "vis": {"kind": "compare", "left": {"title": "Diatom properties", "points": ["Silica box like skeleton", "Resists acid and decay", "Birefringent under microscope", "Species vary by water body"]}, "right": {"title": "Why examiners seek them", "points": ["Enter only with circulation", "Reach marrow and organs", "Prove live immersion", "Match scene water species"]}}
+  },
+  {
+   "title": "How diatoms reach bone marrow",
+   "tx": "Only a beating circulation can deliver diatoms beyond the lungs in the **diatom test principle**: aspirated diatoms cross ruptured alveolar walls into pulmonary vessels and are carried to bone marrow, brain and other closed organs. A body merely immersed after death has no circulation, so diatoms stay out of the marrow. Samples are taken with clean instruments, the sternum washed in distilled water, and tissue is acid digested to leave the silica shells for microscopy.",
+   "say": "Diatoms in sternum marrow prove the heart was beating in the water, which postmortem immersion can never imitate.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Diatoms aspirated with water"}, {"id": "b", "label": "Cross torn alveolar walls"}, {"id": "c", "label": "Circulation carries them onward"}, {"id": "d", "label": "Recovered from marrow after digestion"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Limits and contamination in the diatom test",
+   "tx": "The diatom test supports rather than decides, under **diatom test limitations**. Diatoms are widespread in air, food and laboratory reagents, so contamination from unwashed instruments, tap water or the autopsy room can seed a false positive. Numbers are small and species matching needs a genuine sample of the scene water taken at the right season. Reddy's overall verdict stands: every drowning test is unreliable, and diatoms add weight only inside a consistent investigation.",
+   "say": "Diatoms contaminate easily from air and instruments, so clean technique and scene water controls decide their value.",
+   "vis": {"kind": "table", "cols": ["Risk", "Source", "Control"], "rows": [["False positive", "Reagents and tap water", "Distilled water, clean tools"], ["False negative", "Few diatoms in that water", "Sample the actual scene"], ["Species mismatch", "Wrong season or site", "Match species carefully"], ["Overclaiming", "Treating test as proof alone", "Combine with full autopsy"]]}
+  },
+  {
+   "title": "Cadaveric spasm and grasped weeds revisited",
+   "tx": "The hands deserve a second look in every immersion case for **grasped material in the fists**. Weeds, grass, sand or mud firmly grasped by cadaveric spasm show the victim was alive when entering the water and struggled at the bottom or bank. Loosely lying debris in open palms proves nothing. Break the spasm only after photography, retain the material in a labelled container, and record which hand held it and how firmly.",
+   "say": "Only a spasm locked grip on weeds counts, so photograph first, then retain the handful exactly as found.",
+   "vis": {"kind": "compare", "left": {"title": "Significant grasping", "points": ["Weeds locked in spasm", "Material matches the bank or bed", "Grip survives body handling", "Photographed before release"]}, "right": {"title": "Insignificant contact", "points": ["Debris resting in open palm", "Loose sand on skin surface", "Placed by currents after death", "No spasm in the fingers"]}}
+  },
+  {
+   "title": "Water in stomach and pleural cavities",
+   "tx": "Swallowed water supports the diagnosis with limits, in **water distribution after drowning**. Water in the stomach and intestines is one of Reddy's reliable signs because swallowing continues during the struggle. After death, by contrast, water seeps passively and collects in increasing quantity in the pleural cavities as the body lies immersed, and putrefaction beginning in head, neck and chest can imitate diffuse scalp haemorrhage. Volume and site therefore matter more than mere presence.",
+   "say": "Water swallowed into the bowel supports drowning, while pleural water only proves the body lay in water afterwards.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Struggling victim swallows water"}, {"id": "b", "label": "Water reaches stomach and bowel"}, {"id": "c", "label": "Supports live drowning"}, {"id": "d", "label": "Pleural seepage after death excluded"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}
