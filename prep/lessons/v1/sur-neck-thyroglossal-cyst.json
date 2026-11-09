@@ -1,0 +1,312 @@
+{
+ "v": 1,
+ "module": "sur-neck",
+ "subject": "surgery",
+ "title": "Thyroglossal Cyst, Branchial Anomalies, and Sistrunk Operation",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Representing over seventy percent of all congenital neck masses, a **thyroglossal cyst** arises from the incomplete obliteration and persistent epithelial remnants of the embryonic thyroglossal duct. During early organogenesis in the third to fourth gestational week, the thyroid primordium descends from the foramen caecum at the base of the tongue through the developing second branchial arch to reach its definitive position in the anterior lower neck, leaving a duct that normally atrophies by the eighth week.",
+   "say": "Thyroglossal duct cysts are the most common congenital neck masses, arising from remnants of the embryonic tract left as the thyroid descends from the foramen caecum to the lower neck.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "caecum",
+      "label": "Thyroid Primordium at Foramen Caecum"
+     },
+     {
+      "id": "descent",
+      "label": "Descends Through Hyoid Primordium to Lower Neck"
+     },
+     {
+      "id": "atrophy",
+      "label": "Normal Obliteration of Thyroglossal Duct by Week 8"
+     },
+     {
+      "id": "persist",
+      "label": "Failure of Obliteration Leaves Epithelial Remnant"
+     },
+     {
+      "id": "cyst",
+      "label": "Secretory Mucus Accumulates Forming Thyroglossal Cyst"
+     }
+    ],
+    "edges": [
+     [
+      "caecum",
+      "descent"
+     ],
+     [
+      "descent",
+      "atrophy"
+     ],
+     [
+      "atrophy",
+      "persist"
+     ],
+     [
+      "persist",
+      "cyst"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A thyroglossal cyst presents as a smooth, rounded, nontender, cystic swelling in the anterior midline of the neck. Although it can arise anywhere along the descent pathway from the tongue base to the suprasternal notch, over sixty percent develop in the infrahyoid region. On physical examination, the cyst moves upward on deglutition because of its attachment to the pretracheal fascia. Uniquely, the mass **moves with tongue protrusion**, because its persistent embryonic stalk connects directly to the foramen caecum via the hyoid bone.",
+   "say": "Thyroglossal cysts present as smooth midline neck lumps. They move upward during swallowing and, uniquely, elevate on tongue protrusion because the tract attaches to the tongue base.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Thyroglossal Duct Cyst",
+     "points": [
+      "Arises strictly in or near the anterior midline of the neck",
+      "Moves upward both during deglutition and on tongue protrusion",
+      "Attached to the body of the hyoid bone and tongue base",
+      "Epithelial lining is pseudostratified ciliated columnar or squamoid"
+     ]
+    },
+    "right": {
+     "title": "Branchial Cleft Cyst",
+     "points": [
+      "Arises along the lateral neck at anterior border of upper SCM",
+      "Does not move on deglutition or on tongue protrusion",
+      "Remnant of second branchial apparatus (cervical sinus of His)",
+      "Lined by stratified squamous epithelium surrounded by dense lymphoid tissue"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Before planning surgical excision of any midline neck swelling suspected of being a thyroglossal cyst, high-resolution ultrasonography of the neck is mandatory. The critical imaging objective is to confirm the presence of a **normal orthotopic thyroid gland** in its expected lower cervical bed. In one to two percent of individuals with a midline mass, the apparent thyroglossal cyst actually represents an ectopic thyroid gland, and inadvertent surgical removal would plunge the patient into lifelong severe athyreotic hypothyroidism.",
+   "say": "Preoperative ultrasound must confirm a normal orthotopic thyroid gland in the lower neck. This prevents accidental excision of an ectopic thyroid gland masquerading as a thyroglossal cyst.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Preoperative Investigation",
+     "Key Diagnostic Findings",
+     "Surgical and Clinical Importance"
+    ],
+    "rows": [
+     [
+      "High-Resolution Neck Ultrasound",
+      "Confirms presence of normal bilobed thyroid gland in lower neck",
+      "Mandatory step to rule out solitary ectopic thyroid tissue prior to resection"
+     ],
+     [
+      "Thyroid Function Tests (TSH)",
+      "Documents baseline euthyroid, hypothyroid, or hyperthyroid status",
+      "Identifies subclinical hypothyroidism in children with ectopic thyroid tissue"
+     ],
+     [
+      "Radionuclide Thyroid Scintigraphy",
+      "Technetium-99m uptake localized strictly to the cervical thyroid",
+      "Indicated if neck ultrasound fails to convincingly identify a normal thyroid bed"
+     ],
+     [
+      "Fine-Needle Aspiration Cytology",
+      "Aspiration of mucinous fluid with squamoid and ciliated epithelial cells",
+      "Excludes rare thyroglossal duct carcinoma, predominantly papillary thyroid cancer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Simple enucleation or unroofing of a thyroglossal cyst suffers a prohibitive recurrence rate approaching fifty percent because microscopic epithelial side-branches arborize intimately through the hyoid bone. The definitive, curative operation is the **Sistrunk operation**, described by Walter Sistrunk. This procedure entails en bloc excision of the cyst, the central core of the hyoid bone body, and a wide one-centimetre muscular core of tissue surrounding the tract up to the foramen caecum, reducing recurrence to less than three percent.",
+   "say": "Simple cyst removal carries a fifty percent recurrence risk. The definitive Sistrunk operation excises the cyst, the central body of the hyoid bone, and a core of tongue base muscle.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "incise",
+      "label": "Transverse Midline Incision Over Cyst"
+     },
+     {
+      "id": "mobilize",
+      "label": "Mobilize Cyst Toward Inferior Hyoid Border"
+     },
+     {
+      "id": "hyoid",
+      "label": "Resect Central 1 cm Body of Hyoid Bone En Bloc"
+     },
+     {
+      "id": "core",
+      "label": "Core 1 cm Cylinder of Tongue Base Muscle to Foramen Caecum"
+     },
+     {
+      "id": "cure",
+      "label": "Definitive Resection Drops Recurrence Below 3%"
+     }
+    ],
+    "edges": [
+     [
+      "incise",
+      "mobilize"
+     ],
+     [
+      "mobilize",
+      "hyoid"
+     ],
+     [
+      "hyoid",
+      "core"
+     ],
+     [
+      "core",
+      "cure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lateral congenital neck masses arise predominantly from anomalies of the branchial apparatus. A **branchial cyst** develops in over ninety-five percent of cases from incomplete obliteration of the second branchial cleft, specifically persistence of the embryonic cervical sinus of His. It presents as a smooth, painless, fluctuant, nontender lateral neck swelling located along the anterior border of the sternocleidomastoid muscle at the junction of its upper and middle thirds, just below the angle of the jaw.",
+   "say": "Branchial cysts arise from second branchial cleft remnants. They present as smooth, fluctuant lateral neck swellings along the anterior border of the sternocleidomastoid muscle.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Second Branchial Cleft Cyst",
+     "points": [
+      "Accounts for ninety-five percent of all branchial anomalies",
+      "Located at anterior border of upper sternocleidomastoid",
+      "Aspiration yields turbid yellow fluid rich in cholesterol crystals",
+      "Lined by stratified squamous epithelium with abundant lymphoid follicles"
+     ]
+    },
+    "right": {
+     "title": "First Branchial Cleft Cyst",
+     "points": [
+      "Accounts for one to four percent of branchial anomalies",
+      "Located intimately related to external auditory canal or parotid",
+      "Closely associated with branches of the facial nerve",
+      "May present with chronic purulent ear discharge and parotid swelling"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Diagnostic fine-needle aspiration of a branchial cyst yields characteristic thick, turbid, brownish fluid containing abundant desquamated epithelial cells and glittering **cholesterol crystals** on microscopic polarized light examination. In adults presenting with an apparent branchial cyst, clinicians must exercise extreme vigilance to exclude a cystic cervical lymph node metastasis from an occult oropharyngeal or papillary thyroid carcinoma, demanding thorough endoscopic inspection and p16 immunohistochemical evaluation.",
+   "say": "Aspiration of a branchial cyst reveals thick turbid fluid rich in cholesterol crystals. In adults, surgeons must rigorously exclude a cystic lymph node metastasis from hidden oropharyngeal cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Entity",
+     "Diagnostic Hallmarks",
+     "Critical Oncological Caveat"
+    ],
+    "rows": [
+     [
+      "Benign Branchial Cyst",
+      "Young adult, long history of fluctuating mass, cholesterol crystals on FNAC",
+      "Wall shows benign squamous lining with germinal center lymphoid stroma"
+     ],
+     [
+      "Cystic Oropharyngeal Metastasis",
+      "Adult smoker or HPV positive, painless cystic lateral neck node",
+      "HPV p16-positive squamous carcinoma from occult tonsil or tongue base primary"
+     ],
+     [
+      "Cystic Papillary Thyroid Node",
+      "Mid to lower lateral neck, cystic fluid contains thyroglobulin",
+      "Metastatic deposit from microcarcinoma in clinically normal thyroid gland"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When a persistent tract communicates both externally with the skin and internally with the pharynx, it constitutes a **second branchial fistula**. The external opening is positioned along the lower third of the anterior border of the sternocleidomastoid muscle. The fistulous tract ascends through cervical subcutaneous tissue and platysma, pierces the deep cervical fascia, passes between the internal and external carotid arteries, crosses over the hypoglossal nerve, and opens internally within the supratonsillar fossa.",
+   "say": "A second branchial fistula opens externally at the lower border of the sternocleidomastoid and terminates internally in the tonsillar fossa, passing between the internal and external carotid arteries.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "skin",
+      "label": "External Skin Orifice at Lower Anterior SCM"
+     },
+     {
+      "id": "ascend",
+      "label": "Ascends Subcutaneously Through Platysma"
+     },
+     {
+      "id": "carotid",
+      "label": "Passes Between Internal & External Carotid Arteries"
+     },
+     {
+      "id": "hypo",
+      "label": "Crosses Superficial to Hypoglossal Nerve (CN XII)"
+     },
+     {
+      "id": "pharynx",
+      "label": "Internal Orifice at Supratonsillar Fossa (Tonsil Bed)"
+     }
+    ],
+    "edges": [
+     [
+      "skin",
+      "ascend"
+     ],
+     [
+      "ascend",
+      "carotid"
+     ],
+     [
+      "carotid",
+      "hypo"
+     ],
+     [
+      "hypo",
+      "pharynx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complete surgical extirpation of a second branchial fistula requires complete removal of the entire tract from the lower neck up to the pharyngeal tonsillar bed. To achieve safe exposure without creating an unsightly long longitudinal cervical scar, surgeons employ a **stepladder incision technique**. Two separate horizontal transverse skin crease incisions are made: one encircling the lower cutaneous orifice and a second higher incision over the carotid bifurcation, allowing safe dissection of the tract between major neurovascular structures.",
+   "say": "Excision of a branchial fistula requires complete tract removal up to the tonsillar fossa. A stepladder approach with two horizontal incisions achieves full exposure without an unsightly vertical scar.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cannulate",
+      "label": "Cannulate Tract with Lacrimal Probe or Methylene Blue"
+     },
+     {
+      "id": "lower",
+      "label": "Elliptical Transverse Incision Around Cutaneous Fistula"
+     },
+     {
+      "id": "step",
+      "label": "Second Higher Horizontal Incision at Carotid Bifurcation"
+     },
+     {
+      "id": "tunnel",
+      "label": "Tract Pulled Through Subcutaneous Tunnel from Below"
+     },
+     {
+      "id": "tonsil",
+      "label": "Ligate & Divide Tract at Supratonsillar Pharyngeal Wall"
+     }
+    ],
+    "edges": [
+     [
+      "cannulate",
+      "lower"
+     ],
+     [
+      "lower",
+      "step"
+     ],
+     [
+      "step",
+      "tunnel"
+     ],
+     [
+      "tunnel",
+      "tonsil"
+     ]
+    ]
+   }
+  }
+ ]
+}

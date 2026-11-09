@@ -1,0 +1,307 @@
+{
+ "v": 1,
+ "module": "sur-salivary",
+ "subject": "surgery",
+ "title": "Perineural Invasion, Superficial Parotidectomy, and Facial Nerve Safety",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "In malignant salivary gland oncology, **perineural invasion** denotes the infiltration, tracking, and circumferential encirclement of nerve fibers by malignant cells within the perineural space. Mediated by neurotrophic signaling molecules including nerve growth factor and glial cell line-derived neurotrophic factor, tumor cells proliferate along the plane of lowest physical resistance. This phenomenon is most pervasive in adenoid cystic carcinoma, high-grade mucoepidermoid carcinoma, and salivary duct carcinoma.",
+   "say": "Perineural invasion is the tracking of malignant cells along nerve sheaths driven by neurotrophic growth factors. It is seen most frequently in adenoid cystic carcinoma and high-grade malignancies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Perineural Infiltration (PNI)",
+     "points": [
+      "Malignant cells occupy space between perineurium and endoneurium",
+      "Tracks centripetally toward skull base and cranial nerve nuclei",
+      "Causes early neuropathic pain, paresis, and positive surgical margins",
+      "Mandates frozen-section margin control of divided nerve stumps"
+     ]
+    },
+    "right": {
+     "title": "Direct Extraneural Compression",
+     "points": [
+      "Benign or encapsulated tumor physically displaces nerve bundle",
+      "Nerve sheath remains histologically intact and free of tumor",
+      "Motor dysfunction occurs only with massive mechanical pressure",
+      "Complete recovery follows surgical decompression without resection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The clinical presence of perineural invasion fundamentally alters surgical strategy and long-term prognosis. Because microscopic tumor cells travel longitudinally within the nerve sheath far beyond the macroscopic tumor border, simple visual clearance is misleading. When perineural invasion is identified intraoperatively, surgeons perform frozen section examinations of the proximal and distal nerve margins. Identifying positive nerve margins warrants postoperative **adjuvant radiotherapy** encompassing the full intracranial nerve course.",
+   "say": "Perineural tracking extends far beyond visible tumor borders. Surgeons must sample nerve stumps for frozen section evaluation, and positive margins require adjuvant radiotherapy along the nerve pathway.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "resect",
+      "label": "En Bloc Tumor Resection with Nerve Sacrifice"
+     },
+     {
+      "id": "margin",
+      "label": "Shave Proximal & Distal Nerve Stumps"
+     },
+     {
+      "id": "frozen",
+      "label": "Intraoperative Frozen Section Examination"
+     },
+     {
+      "id": "clear",
+      "label": "Margin Clear: Proceed to Nerve Cable Grafting"
+     },
+     {
+      "id": "postop",
+      "label": "Adjuvant Radiotherapy to Skull Base Conduit"
+     }
+    ],
+    "edges": [
+     [
+      "resect",
+      "margin"
+     ],
+     [
+      "margin",
+      "frozen"
+     ],
+     [
+      "frozen",
+      "clear"
+     ],
+     [
+      "clear",
+      "postop"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "For benign tumors and low-grade malignancies confined to the parotid tissue lateral to the facial nerve plane, **superficial parotidectomy** represents the benchmark surgical procedure. Through a modified Blair or facelift incision, the surgeon raises a subplatysmal skin flap while strictly preserving the greater auricular nerve posterior branch to maintain lobular ear sensation. The entire superficial lobe enclosing the lesion is excised en bloc, avoiding tumor breach.",
+   "say": "Superficial parotidectomy excises the parotid tissue lateral to the facial nerve for benign and low-grade tumors. Raising skin flaps in the subplatysmal plane protects underlying nerve branches.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Step",
+     "Operative Technique",
+     "Critical Anatomical Objective"
+    ],
+    "rows": [
+     [
+      "Modified Blair Incision",
+      "Preauricular crease curving around lobule into upper neck",
+      "Provides wide exposure of parotid gland and upper cervical fascia"
+     ],
+     [
+      "Subplatysmal Flap Elevation",
+      "Sharp dissection anteriorly over parotid-masseteric fascia",
+      "Prevents skin necrosis and preserves greater auricular nerve posterior branch"
+     ],
+     [
+      "Trunk Identification",
+      "Systematic dissection using bony and cartilaginous landmarks",
+      "Locates facial nerve main trunk before commencing lobar mobilization"
+     ],
+     [
+      "Lobar Dissection",
+      "Tunneling scissor dissection directly along nerve branches",
+      "Safely frees superficial lobe without tearing underlying facial nerve branches"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Safe execution of parotid surgery hinges on reliable, rapid intraoperative identification of the main trunk of the facial nerve before any lobar tissue is mobilized. The surgeon dissects meticulously within the retromandibular fossa using four consistent surgical landmarks: the **tragal pointer**, the tympanomastoid suture line, the posterior belly of the digastric muscle, and the styloid process. Triangulating these anatomical structures exposes the main nerve trunk with reproducible accuracy.",
+   "say": "Identifying the facial nerve trunk before lobar dissection is the cornerstone of safe parotid surgery. Surgeons use the tragal pointer, tympanomastoid suture, and digastric muscle to locate it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Landmark",
+     "Structural Relationship to Facial Nerve Trunk",
+     "Reliability and Pitfalls"
+    ],
+    "rows": [
+     [
+      "Tragal Pointer",
+      "Nerve lies one centimetre deep and slightly inferior to cartilaginous tip",
+      "Readily palpable cartilage tip; pointer may be mobile or asymmetric"
+     ],
+     [
+      "Tympanomastoid Suture",
+      "Nerve emerges six to eight millimetres deep to suture drop-off",
+      "Most consistent and immoveable bony landmark on the mastoid bone"
+     ],
+     [
+      "Posterior Belly of Digastric",
+      "Nerve runs parallel and immediately superior to upper muscular edge",
+      "Excellent muscular landmark; deep plane retraction can obscure visualization"
+     ],
+     [
+      "Styloid Process",
+      "Nerve crosses superficial to styloid base after leaving foramen",
+      "Deep bony landmark; palpation requires care to avoid avulsing nerve trunk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Upon exiting the stylomastoid foramen, the main facial nerve trunk travels anterolaterally into the parotid substance for one to two centimetres before dividing into its primary divisions at the **pes anserinus**. Resembling the webbed foot of a goose, this bifurcation splits into an upper temporofacial division and a lower cervicofacial division. The temporofacial division gives rise to temporal and zygomatic branches, whereas the cervicofacial division distributes buccal, marginal mandibular, and cervical branches.",
+   "say": "The main facial nerve trunk enters the parotid gland and bifurcates at the pes anserinus into temporofacial and cervicofacial divisions, which subdivide into five peripheral terminal branches.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "trunk",
+      "label": "Facial Nerve Trunk at Stylomastoid Foramen"
+     },
+     {
+      "id": "pes",
+      "label": "Bifurcation at Pes Anserinus"
+     },
+     {
+      "id": "tempo",
+      "label": "Temporofacial Division"
+     },
+     {
+      "id": "cervico",
+      "label": "Cervicofacial Division"
+     },
+     {
+      "id": "upper",
+      "label": "Temporal & Zygomatic Branches"
+     },
+     {
+      "id": "lower",
+      "label": "Buccal, Marginal Mandibular & Cervical"
+     }
+    ],
+    "edges": [
+     [
+      "trunk",
+      "pes"
+     ],
+     [
+      "pes",
+      "tempo"
+     ],
+     [
+      "pes",
+      "cervico"
+     ],
+     [
+      "tempo",
+      "upper"
+     ],
+     [
+      "cervico",
+      "lower"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When a large, deep lobe tumor or inflammatory mass distorts normal anatomy and obscures the stylomastoid foramen, surgeons locate peripheral branches to trace the nerve retrogradely. The **marginal mandibular nerve** can be safely identified crossing the facial vessels over the lower border of the mandible. Alternatively, the buccal branch runs parallel to and one centimetre inferior to the zygomatic arch, accompanied by the parotid duct, providing a reliable retrograde pathway to the pes anserinus.",
+   "say": "When large tumors distort the nerve trunk, surgeons identify peripheral branches retrogradely. The marginal mandibular nerve at the facial vessels and buccal branch near the parotid duct provide safe access.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Antegrade Trunk Dissection",
+     "points": [
+      "Locates main trunk first using tragal pointer and tympanomastoid suture",
+      "Follows divisions forward from pes anserinus into peripheral branches",
+      "Fastest and standard approach in ninety-five percent of parotidectomies",
+      "Minimizes stretching and thermal trauma to delicate terminal branches"
+     ]
+    },
+    "right": {
+     "title": "Retrograde Branch Dissection",
+     "points": [
+      "Identifies peripheral branch first (marginal mandibular or buccal branch)",
+      "Traces branch backward through parotid substance toward the main trunk",
+      "Essential when massive tumor obliterates stylomastoid anatomical landmarks",
+      "Technically tedious with higher risk of neuropraxia to fine arborizations"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "During dissection of the inferior parotid pole and lower cheek, meticulous attention is paid to **facial nerve preservation**. The marginal mandibular branch runs superficial to the posterior facial vein and curves below the inferior border of the mandible in twenty percent of individuals before ascending across the facial artery. Accidental transection during inferior pole dissection causes paralysis of the depressor anguli oris, producing an asymmetric, crooked smile with lower lip inversion failure.",
+   "say": "The marginal mandibular branch dips below the mandibular angle in twenty percent of individuals. Injury paralyzes the depressor anguli oris, causing a crooked smile with lower lip asymmetry.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "platysma",
+      "label": "Incise Cervical Platysma Muscle"
+     },
+     {
+      "id": "vein",
+      "label": "Identify Anterior Facial Vein"
+     },
+     {
+      "id": "loop",
+      "label": "Retract Fascial Envelope Above Mandibular Rim"
+     },
+     {
+      "id": "protect",
+      "label": "Safeguard Marginal Mandibular Branch"
+     },
+     {
+      "id": "preserve",
+      "label": "Maintains Normal Lower Lip Symmetry on Smiling"
+     }
+    ],
+    "edges": [
+     [
+      "platysma",
+      "vein"
+     ],
+     [
+      "vein",
+      "loop"
+     ],
+     [
+      "loop",
+      "protect"
+     ],
+     [
+      "protect",
+      "preserve"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Modern parotidectomy incorporates continuous intraoperative facial nerve electromyographic monitoring to enhance nerve preservation. Mechanical stretching or surgical manipulation generates characteristic auditory burst potentials, warning the operating surgeon of impending axonal traction before irreversible structural injury occurs. In the event of inadvertent sharp division, immediate microscopic **microsurgical neurorrhaphy** using ten-zero epineural sutures restores functional facial symmetry in over seventy percent of patients.",
+   "say": "Intraoperative facial nerve monitoring emits acoustic alerts during traction, preventing injury. If sharp transection occurs, immediate microsurgical repair with ten-zero sutures restores symmetry.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Nerve Injury Mechanism",
+     "Pathophysiological Consequence",
+     "Management and Recovery Expectation"
+    ],
+    "rows": [
+     [
+      "Traction Neuropraxia",
+      "Transient physiological conduction block without axonal disruption",
+      "Temporary facial paresis resolving spontaneously within six to twelve weeks"
+     ],
+     [
+      "Thermal Diathermy Burn",
+      "Axonotmesis with endoneurial sheath injury from electrocautery",
+      "Delayed recovery over six to nine months, potential synkinesis"
+     ],
+     [
+      "Sharp Transection",
+      "Complete neurotmesis with disruption of axons and epineural sheath",
+      "Mandates immediate primary microscopic epineural neurorrhaphy or cable graft"
+     ]
+    ]
+   }
+  }
+ ]
+}

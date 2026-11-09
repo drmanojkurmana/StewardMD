@@ -1,0 +1,274 @@
+{
+ "v": 1,
+ "module": "sur-oral",
+ "subject": "surgery",
+ "title": "Carcinoma of Buccal Mucosa, Gingivobuccal Sulcus, and Verrucous Tumours",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "In South Asia, **carcinoma of the buccal mucosa** represents the most prevalent oral malignancy, so frequently encountered that it is termed Indian oral cancer. Its high incidence stems from the widespread cultural custom of chewing tobacco, areca nut, and slaked lime mixtures, known locally as khaini or gutkha. The caustic, alkaline lime promotes mucosal epithelial breakdown while unburned tobacco releases tobacco-specific nitrosamines, causing chronic localized genotoxic and carcinogenic stress.",
+   "say": "Buccal mucosal carcinoma is the leading oral cancer in South Asia due to chewing tobacco, areca nut, and slaked lime mixtures. Chronic chemical irritation triggers aggressive carcinogenic transformation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Indian Oral Cancer Pattern",
+     "points": [
+      "Predominantly affects buccal mucosa and lower gingivobuccal sulcus",
+      "Driven by smokeless chewed tobacco, slaked lime, and areca nut",
+      "Strong predilection for early mandible and alveolar bone invasion",
+      "High rate of regional cervical nodal spread to levels IB and IIA"
+     ]
+    },
+    "right": {
+     "title": "Western Oral Cancer Pattern",
+     "points": [
+      "Predominantly affects lateral tongue and floor of mouth",
+      "Driven primarily by smoked tobacco, heavy alcohol, and HPV in oropharynx",
+      "Earlier soft tissue ulceration with deeper floor of mouth infiltration",
+      "High prevalence of p16-positive lesions in posterior oropharyngeal sites"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Most chewing tobacco users habitually hold the tobacco quid tucked deep into the lower **gingivobuccal sulcus**, the anatomical trough situated between the mandibular teeth and the mobile buccal cheek mucosa. Because the underlying periosteum of the alveolar ridge lies merely one to two millimetres beneath the sulcular mucosa, tumors arising here rapidly breach cortical bone. Clinical examination demonstrates a non-healing, indurated ulcer with everted edges and early alveolar attachment.",
+   "say": "Holding tobacco quids in the gingivobuccal sulcus exposes the thin mucosal lining to prolonged carcinogen contact. Because bone lies immediately beneath, tumors rapidly invade the mandibular cortex.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Landmark",
+     "Structural Relationships",
+     "Clinical Relevance in Sulcular Cancer"
+    ],
+    "rows": [
+     [
+      "Gingivobuccal Sulcus",
+      "Reflection of mucous membrane from cheek to mandibular alveolus",
+      "Primary site of tobacco quid placement and tumor nidus"
+     ],
+     [
+      "Mandibular Periosteum",
+      "Fibrous envelope covering mandibular alveolar cortical bone",
+      "Provides temporary barrier before direct cortical erosion occurs"
+     ],
+     [
+      "Mental Foramen",
+      "Inferior to second premolar root transmitting mental nerve",
+      "Provides conduit for early perineural invasion into inferior alveolar canal"
+     ],
+     [
+      "Buccinator Muscle",
+      "Muscular framework of cheek deep to submucosal plane",
+      "Lateral barrier whose infiltration dictates full-thickness cheek resection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Assessing bone invasion is paramount in staging gingivobuccal malignancies. Computed tomography demonstrating cortical erosion or panoramic radiographs revealing scalloped radiolucency dictate the extent of bone resection required. When tumor abuts the cortex without frank marrow invasion, a **marginal mandibulectomy** preserves the structural continuity of the lower mandibular rim. Conversely, once the inferior alveolar neurovascular bundle or marrow space is breached, a formal segmental mandibulectomy is indispensable.",
+   "say": "Cortical bone involvement is evaluated with computed tomography. Tumors abutting bone without marrow invasion can be managed with marginal mandibulectomy, whereas marrow infiltration requires segmental bone resection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Marginal Mandibulectomy",
+     "points": [
+      "Removes alveolar bone while preserving lower mandibular border",
+      "Indicated when tumor abuts bone without cortical or marrow erosion",
+      "Maintains continuity of mandibular arch without bony grafting",
+      "Contraindicated in previously irradiated bone or deeply invaded marrow"
+     ]
+    },
+    "right": {
+     "title": "Segmental Mandibulectomy",
+     "points": [
+      "Complete through-and-through resection of mandibular segment",
+      "Indicated for gross cortical erosion or inferior alveolar nerve invasion",
+      "Disrupts dental occlusion requiring reconstruction with vascularized fibula",
+      "Essential to achieve histologically clear bone resection margins"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Regional lymphatic dissemination from carcinoma of the buccal mucosa follows an orderly, predictable pathway into the cervical lymphatic basin. First-echelon drainage reaches the **submandibular lymph nodes** in level one B, situated within the submandibular triangle. From level one B, efferent lymphatic channels drain directly into level two upper jugular and level three mid-jugular nodes. Even in clinically node-negative necks, occult micrometastases occur in twenty to thirty percent of patients.",
+   "say": "Lymphatic spread from buccal carcinoma travels predictably to the level one B submandibular nodes and level two deep jugular chains. Elective neck dissection is routinely required even when nodes feel normal.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tumor",
+      "label": "Buccal Mucosa / Sulcus Tumor"
+     },
+     {
+      "id": "facial",
+      "label": "Preglandular & Facial Nodes"
+     },
+     {
+      "id": "level1b",
+      "label": "Level IB Submandibular Nodes"
+     },
+     {
+      "id": "level2",
+      "label": "Level IIA Upper Deep Jugular"
+     },
+     {
+      "id": "level3",
+      "label": "Level III Mid Deep Jugular"
+     }
+    ],
+    "edges": [
+     [
+      "tumor",
+      "facial"
+     ],
+     [
+      "facial",
+      "level1b"
+     ],
+     [
+      "level1b",
+      "level2"
+     ],
+     [
+      "level2",
+      "level3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A distinct, well-differentiated variant of oral squamous cell carcinoma is **verrucous carcinoma**, originally described by Lauren Ackerman. It presents as an indolent, slow-growing, exophytic warty mass with a cauliflower-like or papillary surface covered in dense white keratin. In contrast to conventional squamous cell carcinoma, verrucous carcinoma expands with a broad, pushing, bulbous border rather than an infiltrative, destructive pattern, preserving basement membrane integrity for prolonged intervals.",
+   "say": "Verrucous carcinoma, or Ackerman tumor, is an indolent, warty oral malignancy with a cauliflower appearance. It grows with a broad, pushing border rather than aggressively infiltrating deep structures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Verrucous Carcinoma (Ackerman)",
+     "points": [
+      "Slow-growing warty, exophytic cauliflower-like mass",
+      "Broad pushing rete ridges with intact basement membrane",
+      "Minimal cytological atypia with abundant surface hyperkeratosis",
+      "Lymph node metastases are exceptionally rare",
+      "Primary treatment is complete wide surgical excision"
+     ]
+    },
+    "right": {
+     "title": "Conventional Squamous Cell Carcinoma",
+     "points": [
+      "Infiltrative ulceroproliferative ulcer with everted borders",
+      "Jagged infiltrating malignant cords invading stroma and nerves",
+      "Marked nuclear pleomorphism, mitoses, and keratin pearls",
+      "Frequent early regional cervical lymph node metastasis",
+      "Requires multimodality surgical resection and radiation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Histopathological diagnosis of verrucous carcinoma requires an adequate full-thickness incisional biopsy incorporating the tumor base, as superficial shavings often capture only benign-appearing hyperkeratosis. An imperative oncological principle governs its therapy: **radiotherapy is contraindicated** as primary treatment for pure verrucous carcinoma. Irradiation can trigger anaplastic transformation into a highly aggressive, rapidly metastasizing spindle cell carcinoma, making complete surgical excision the sole definitive curative modality.",
+   "say": "Biopsy of verrucous carcinoma must include the deep advancing base. Radiation therapy is strictly contraindicated because it can provoke catastrophic transformation into lethal spindle cell carcinoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Modality",
+     "Clinical Application",
+     "Oncological Rationale and Hazards"
+    ],
+    "rows": [
+     [
+      "Wide Surgical Excision",
+      "Curative treatment of choice with one-centimetre clear margins",
+      "Achieves high cure rates without risk of cytological dedifferentiation"
+     ],
+     [
+      "Elective Neck Dissection",
+      "Omitted unless hybrid conventional SCC components exist",
+      "Enlarged nodes usually represent benign reactive follicular hyperplasia"
+     ],
+     [
+      "Radiation Therapy",
+      "Strictly contraindicated in pure verrucous carcinoma",
+      "Carries high risk of anaplastic malignant transformation into high-grade sarcoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When advanced carcinoma of the gingivobuccal sulcus infiltrates through the full thickness of the cheek, surgeons perform a composite through-and-through resection. This procedure creates a large composite defect involving buccal mucosa, the buccinator muscle, overlying facial skin, and adjacent bone. Reconstruction requires reliable vascularized tissue, most commonly achieved with a **pectoralis major myocutaneous flap** folded as a bipaddled flap to reconstruct both inner lining and outer facial skin.",
+   "say": "Through-and-through cheek resections require composite soft tissue reconstruction. A bipaddled pectoralis major myocutaneous flap provides inner mucosal lining and outer skin coverage simultaneously.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "defect",
+      "label": "Full-Thickness Cheek & Mandible Defect"
+     },
+     {
+      "id": "harvest",
+      "label": "Harvest Pectoralis Major Flap on Thoracoacromial Axis"
+     },
+     {
+      "id": "tunnel",
+      "label": "Subcutaneous Tunnel Over Clavicle into Neck"
+     },
+     {
+      "id": "inward",
+      "label": "Inner Skin Paddle Restores Buccal Lining"
+     },
+     {
+      "id": "outward",
+      "label": "Outer Skin Paddle Closes Facial Cutaneous Defect"
+     }
+    ],
+    "edges": [
+     [
+      "defect",
+      "harvest"
+     ],
+     [
+      "harvest",
+      "tunnel"
+     ],
+     [
+      "tunnel",
+      "inward"
+     ],
+     [
+      "tunnel",
+      "outward"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Adjuvant management for locally advanced buccal carcinoma depends on pathological risk features identified in the resected specimen. The presence of positive surgical margins or **extranodal extension** in metastatic cervical lymph nodes constitutes a major high-risk feature. Patients exhibiting these adverse hallmarks require post-operative adjuvant concurrent chemoradiotherapy utilizing cisplatin, which significantly reduces locoregional recurrence rates and improves overall survival.",
+   "say": "Specimens showing positive margins or extranodal tumor extension represent high-risk disease. These patients receive postoperative concurrent chemoradiotherapy with cisplatin to prevent local recurrence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathological Risk Category",
+     "Histological Features",
+     "Recommended Adjuvant Therapy"
+    ],
+    "rows": [
+     [
+      "High-Risk Pathology",
+      "Positive surgical margins and gross extranodal extension (ENE)",
+      "Concurrent chemoradiotherapy with high-dose intravenous cisplatin"
+     ],
+     [
+      "Intermediate-Risk Pathology",
+      "pT3-pT4 disease, close margins (<5mm), perineural or lymphovascular invasion",
+      "Adjuvant external beam radiotherapy alone to tumor bed and bilateral neck"
+     ],
+     [
+      "Low-Risk Pathology",
+      "pT1-pT2, clear margins (>5mm), no nodal involvement or perineural invasion",
+      "Careful clinical surveillance without postoperative adjuvant radiation"
+     ]
+    ]
+   }
+  }
+ ]
+}
