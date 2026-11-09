@@ -1,0 +1,207 @@
+{
+ "v": 1,
+ "module": "med-neuropathy",
+ "subject": "medicine",
+ "title": "Peripheral Neuropathies: Mononeuritis, Entrapment, and CMT",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A distinctive peripheral nerve disorder characterised by acute or subacute, painful, asymmetrical, asynchronous sensorimotor deficits involving at least two anatomically separate peripheral nerve trunks is **mononeuritis multiplex**. Caused by ischaemic infarction of the epineural vasa nervorum, the leading clinical culprit is systemic necrotising vasculitis (polyarteritis nodosa, microscopic polyangiitis, eosinophilic granulomatosis with polyangiitis).",
+   "say": "A peripheral nerve disorder characterized by painful, asymmetrical, asynchronous deficits involving at least two anatomically separate nerves is mononeuritis multiplex. Caused by ischemic infarction of the epineural vasa nervorum, the leading cause is systemic necrotising vasculitis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diabetic-neuropathy-fig1.webp",
+    "alt": "Distribution of peripheral neuropathies: symmetrical polyneuropathy vs mononeuritis.",
+    "caption": "Symmetrical length-dependent polyneuropathy versus asymmetric mononeuritis multiplex. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The primary infectious cause of mononeuritis multiplex in endemic countries is **leprous neuropathy**, caused by direct Mycobacterium leprae invasion of Schwann cells within superficial cutaneous nerve branches. Bacillary proliferation causes prominent, palpable nerve enlargement (greater auricular, ulnar, and common peroneal nerves), loss of temperature and pain sensation within hypopigmented anaesthetic skin macules, and secondary claw-hand deformities.",
+   "say": "The primary infectious cause of mononeuritis multiplex in endemic regions is leprous neuropathy, caused by Mycobacterium leprae invading Schwann cells. Bacillary proliferation causes palpable nerve thickening, cutaneous anaesthesia in hypopigmented macules, and secondary claw-hand deformities.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Aetiology of Mononeuritis",
+     "Key Diagnostic Biomarkers",
+     "Histopathological Hallmarks"
+    ],
+    "rows": [
+     [
+      "Systemic Vasculitis (PAN/MPA)",
+      "c-ANCA / p-ANCA, elevated ESR/CRP",
+      "Transmural fibrinoid necrosis of epineural arterioles"
+     ],
+     [
+      "Leprosy (Hansen disease)",
+      "Acid-fast bacilli on slit-skin smear",
+      "Granulomatous epineural inflammation & Schwann invasion"
+     ],
+     [
+      "Diabetes Mellitus",
+      "Elevated HbA1c, microalbuminuria",
+      "Arteriolar hyalinosis and microangiopathic nerve ischemia"
+     ],
+     [
+      "Cryoglobulinaemia",
+      "Positive rheumatoid factor, low C4, anti-HCV",
+      "Leukocytoclastic vasculitis with cryoglobulin plugs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most frequent focal compressive entrapment mononeuropathy in the human body is **carpal tunnel syndrome**. Compression of the median nerve as it courses beneath the transverse carpal ligament within the carpal tunnel produces nocturnal burning paraesthesias and pain across the thumb, index, and middle fingers, accompanied in advanced cases by wasting and weakness of the thenar abductor pollicis brevis muscle.",
+   "say": "The most frequent focal compressive mononeuropathy is carpal tunnel syndrome. Compression of the median nerve beneath the transverse carpal ligament produces nocturnal burning numbness across the lateral three digits, accompanied in advanced cases by wasting of the thenar muscles.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tinel Sign",
+     "points": [
+      "Light percussive tapping over volar carpal tunnel",
+      "Elicits electric tingling radiating to median digits",
+      "Reflects regenerating sensory axonal sprouts",
+      "High diagnostic specificity for median entrapment"
+     ]
+    },
+    "right": {
+     "title": "Phalen Maneuver",
+     "points": [
+      "Forced unassisted wrist flexion to 90 degrees for 60 sec",
+      "Increases intracarpal tunnel hydrostatic pressure",
+      "Reproduces or worsens paresthesias in median digits",
+      "Higher diagnostic sensitivity than Tinel sign"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The definitive electrophysiological investigation for objective confirmation of peripheral neuropathy is the nerve conduction study (**NCS**). By evaluating compound muscle action potential (CMAP) and sensory nerve action potential (SNAP) amplitudes and conduction velocities, it accurately distinguishes primary axonal degeneration (reduced amplitudes with preserved velocities) from primary demyelinating neuropathy (markedly slowed velocities and prolonged distal latencies).",
+   "say": "The definitive electrophysiological test for objective confirmation of peripheral neuropathy is the nerve conduction study. By evaluating action potential amplitudes and conduction velocities, it accurately distinguishes primary axonal degeneration from primary demyelinating neuropathy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathological Category",
+     "Nerve Conduction Velocity",
+     "Action Potential Amplitude",
+     "Distal Motor Latency"
+    ],
+    "rows": [
+     [
+      "Demyelinating Neuropathy",
+      "Markedly slowed (< 38 m/s in arms)",
+      "Relatively preserved until late",
+      "Markedly prolonged (> 130% upper limit)"
+     ],
+     [
+      "Axonal Neuropathy",
+      "Normal or mildly slowed (> 38 m/s)",
+      "Markedly reduced CMAP / SNAP",
+      "Normal or minimally prolonged"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most common inherited peripheral neuropathy in clinical neurology is **Charcot-Marie-Tooth disease** (CMT, hereditary motor and sensory neuropathy). CMT1A, accounting for over seventy percent of autosomal dominant cases, is caused by a 1.5-megabase duplication on chromosome 17p11.2 containing the peripheral myelin protein 22 gene, resulting in defective myelin compaction.",
+   "say": "The most common inherited peripheral neuropathy is Charcot-Marie-Tooth disease. CMT1A, accounting for seventy percent of cases, is caused by a duplication on chromosome 17 containing the peripheral myelin protein 22 gene, resulting in defective myelin compaction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dup",
+      "label": "PMP22 Gene Duplication (17p11.2)"
+     },
+     {
+      "id": "onion",
+      "label": "Repeated Demyelination & Onion-Bulb Schwann Proliferation"
+     },
+     {
+      "id": "atrop",
+      "label": "Distal Inverted Champagne-Bottle Muscle Wasting"
+     }
+    ],
+    "edges": [
+     [
+      "dup",
+      "onion"
+     ],
+     [
+      "onion",
+      "atrop"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The pathognomonic physical phenotype of Charcot-Marie-Tooth disease comprises bilateral high-arched feet (**pes cavus**), hammer toes, and progressive, symmetrical distal lower extremity muscle atrophy of the calves and peroneal muscles. Spared thigh musculature creates the classic inverted champagne bottle or stork leg appearance, accompanied by generalized areflexia and palpable peripheral nerve hypertrophy.",
+   "say": "The pathognomonic physical phenotype of Charcot-Marie-Tooth disease comprises bilateral pes cavus, hammer toes, and progressive symmetrical distal leg atrophy. Spared thigh musculature creates the classic inverted champagne bottle appearance, accompanied by areflexia and thickened nerves.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cns-motor-power.webp",
+    "alt": "Clinical examination of distal lower extremity muscle bulk, power, and deformities.",
+    "caption": "Examination of distal limb muscle bulk, pes cavus, and gait in hereditary neuropathy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In reciprocal contrast to CMT1A, a 1.5-megabase deletion of the identical 17p11.2 region containing **PMP22** causes hereditary neuropathy with liability to pressure palsies (HNPP). Patients present with recurrent, painless, episodic compression mononeuropathies (such as peroneal foot drop or radial wrist drop) triggered by minor mechanical trauma or limb entrapment, displaying focal sausage-like tomaculous swellings on nerve biopsy.",
+   "say": "In reciprocal contrast to CMT1A, a heterozygous deletion of the identical region containing PMP22 causes hereditary neuropathy with liability to pressure palsies. Patients present with recurrent episodic compression neuropathies like foot drop triggered by minor mechanical pressure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CMT1A (Duplication)",
+     "points": [
+      "Duplication of PMP22 gene on 17p11.2",
+      "Progressive chronic demyelinating polyneuropathy",
+      "Severe uniform conduction slowing (< 38 m/s)",
+      "Onion-bulb formations on nerve biopsy"
+     ]
+    },
+    "right": {
+     "title": "HNPP (Deletion)",
+     "points": [
+      "Deletion of PMP22 gene on 17p11.2",
+      "Recurrent episodic pressure-induced nerve palsies",
+      "Focal conduction blocks across entrapment sites",
+      "Tomaculous sausage-like myelin foldings"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Comprehensive diagnostic workup for an undifferentiated symmetrical axonal polyneuropathy requires screening for common systemic metabolic and toxic triggers. Routine evaluation mandates measuring fasting plasma glucose, glycated haemoglobin, serum vitamin B12 with methylmalonic acid, thyroid-stimulating hormone, serum protein electrophoresis with immunofixation (screening for paraproteinaemia), and a history of neurotoxic **chemotherapy** or alcohol exposure.",
+   "say": "Comprehensive diagnostic workup for symmetrical axonal polyneuropathy requires screening for systemic metabolic and toxic triggers. Routine evaluation mandates testing fasting blood glucose, HbA1c, vitamin B12, TSH, and serum protein electrophoresis to screen for monoclonal gammopathies.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "symp",
+      "label": "Glove-and-Stocking Axonal Neuropathy"
+     },
+     {
+      "id": "lab",
+      "label": "HbA1c + Vitamin B12 + TSH + SPEP/IFE"
+     },
+     {
+      "id": "dx",
+      "label": "Targeted Therapy of Systemic Aetiology"
+     }
+    ],
+    "edges": [
+     [
+      "symp",
+      "lab"
+     ],
+     [
+      "lab",
+      "dx"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 438"
+}
