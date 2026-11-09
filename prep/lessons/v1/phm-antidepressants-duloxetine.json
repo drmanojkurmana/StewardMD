@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-antidepressants",
+  "subject": "pharmacology",
+  "title": "Duloxetine, Tricyclics and Their Overdose, Mirtazapine and Bupropion",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Duloxetine**, a balanced SNRI from the first milligram, treats depression and anxiety alongside diabetic neuropathic pain, chemotherapy neuropathy elements, chronic musculoskeletal pain and fibromyalgia, because descending noradrenergic inhibition is spinal analgesia. Hepatotoxicity warnings fence it from significant liver disease and heavy alcohol use, nausea leads its adverse list, and its moderate discontinuation syndrome still demands tapering respect.",
+      "say": "Duloxetine sells one molecule to mood and pain clinics; keep it away from diseased livers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Duloxetine territory",
+          "points": [
+            "Depression and generalised anxiety",
+            "Diabetic peripheral neuropathic pain",
+            "Fibromyalgia and chronic musculoskeletal pain",
+            "Stress urinary incontinence in some jurisdictions"
+          ]
+        },
+        "right": {
+          "title": "Duloxetine limits",
+          "points": [
+            "Avoid in significant hepatic disease",
+            "Nausea commonest at initiation",
+            "Blood pressure rises modestly, monitored",
+            "Discontinuation symptoms without tapering"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Tricyclics **imipramine** and amitriptyline block serotonin and noradrenaline reuptake and then keep blocking: muscarinic (dry mouth, constipation, retention, delirium), histamine (sedation, weight), alpha 1 (postural hypotension) and cardiac sodium channels (conduction delay). That promiscuity makes amitriptyline a superb neuropathic pain and migraine drug at a tenth of antidepressant doses, and a lethal overdose agent at a month's supply in a drawer.",
+      "say": "Tricyclics block everything in reach: analgesic gold at low dose, cardiotoxic poison at high dose.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antidepressants-mood-stabilisers-psych-fig1.webp",
+        "alt": "Antidepressant synaptic sites of action diagram comparing reuptake inhibitors",
+        "caption": "Synaptic sites of antidepressant action, with tricyclics adding the receptor blockades drawn around the transporters."
+      }
+    },
+    {
+      "tx": "**Tricyclic overdose** is the toxicology set piece: sodium channel blockade widens QRS beyond 100 ms predicting seizures and ventricular arrhythmias, anticholinergic delirium and ileus, alpha blockade hypotension, and coma. Treatment is hypertonic sodium bicarbonate, whose sodium load and alkalinisation both overcome the channel blockade, titrated to QRS narrowing and pH 7.45 to 7.55, with benzodiazepines for seizures and physostigmine forbidden (asystole reports). Class Ia and Ic antiarrhythmics are contraindicated; the ECG, not the level, steers therapy.",
+      "say": "Wide QRS after tricyclics means bicarbonate by the ECG, benzodiazepines for seizures, physostigmine never.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "od",
+            "label": "Tricyclic overdose: coma, seizures, wide QRS"
+          },
+          {
+            "id": "bicarb",
+            "label": "Sodium bicarbonate boluses titrated to QRS and pH"
+          },
+          {
+            "id": "seize",
+            "label": "Benzodiazepines for seizures, avoid phenytoin tradition"
+          },
+          {
+            "id": "monitor",
+            "label": "Continuous ECG, intensive care until QRS normalises"
+          }
+        ],
+        "edges": [
+          [
+            "od",
+            "bicarb"
+          ],
+          [
+            "bicarb",
+            "seize"
+          ],
+          [
+            "seize",
+            "monitor"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "At therapeutic doses **tricyclic choice** is adverse effect tailoring: amitriptyline most sedating and anticholinergic (pain, migraine, insomnia niches), imipramine's metabolite desipramine more noradrenergic and activating, nortriptyline the best tolerated compromise with a therapeutic window guiding levels, and clomipramine the most serotonergic, owning obsessive compulsive disorder history. All are avoided where possible after infarction and in conduction disease, and all demand slow titration in the elderly, if they are used there at all.",
+      "say": "Choose the tricyclic by its nuisance profile and dose it by indication: pain needs a tenth of depression's dose.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sedating pole",
+          "points": [
+            "Amitriptyline: pain, migraine prophylaxis, sleep",
+            "Doxepin: potent antihistamine, low dose insomnia",
+            "Trimipramine: sedation heavy",
+            "Anticholinergic burden highest here"
+          ]
+        },
+        "right": {
+          "title": "Activating pole",
+          "points": [
+            "Desipramine and nortriptyline: noradrenergic",
+            "Nortriptyline best tolerated, level guided",
+            "Clomipramine: most serotonergic, OCD heritage",
+            "All prolong conduction in overdose and disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mirtazapine** blocks presynaptic alpha 2 autoreceptors (releasing noradrenaline and serotonin) plus 5 HT2, 5 HT3 and H1 receptors, delivering antidepressant action with sedation and appetite stimulation that prescribers aim at the insomniac, weight losing depressed patient. Paradoxically it is more sedating at low doses where antihistamine action dominates before noradrenergic effects recruit. Near absent sexual dysfunction and nausea are its quiet virtues; cholesterol and weight monitoring its toll.",
+      "say": "Mirtazapine treats the depressed patient who cannot sleep or eat, and sedates harder at 15 than at 45.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mirtazapine profile",
+          "points": [
+            "Alpha 2 antagonism plus 5 HT2, 5 HT3, H1 blockade",
+            "Sedation and appetite stimulation therapeutically aimed",
+            "Minimal sexual dysfunction and nausea",
+            "Adjunct in SSRI partial response"
+          ]
+        },
+        "right": {
+          "title": "Mirtazapine cautions",
+          "points": [
+            "Weight gain and lipid effects monitored",
+            "Low doses more sedating than high",
+            "Blood dyscrasias rare, fever vigilance as with class",
+            "Discontinuation symptoms milder but present"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Bupropion** inhibits noradrenaline and dopamine reuptake with no serotonin action at all: activating, weight neutral or reducing, sexually sparing, and doubled as a smoking cessation aid (and with naltrexone, a weight management combination). Its ceiling is set by dose dependent seizures, forbidding it in epilepsy and eating disorders with electrolyte chaos, and cautioning with other proconvulsants. Insomnia, dry mouth and anxiety are its everyday tolls, and CYP2D6 inhibition its interaction flag.",
+      "say": "Bupropion is the dopamine noradrenaline antidepressant: sparing of sex and weight, forbidden where seizures lurk.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ndri",
+            "label": "Noradrenaline dopamine reuptake inhibited"
+          },
+          {
+            "id": "gain",
+            "label": "Energy, concentration and libido preserved"
+          },
+          {
+            "id": "smoke",
+            "label": "Smoking cessation benefit in parallel"
+          },
+          {
+            "id": "seize",
+            "label": "Seizure ceiling: epilepsy and eating disorders excluded"
+          }
+        ],
+        "edges": [
+          [
+            "ndri",
+            "gain"
+          ],
+          [
+            "gain",
+            "smoke"
+          ],
+          [
+            "ndri",
+            "seize"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Pain prescribing** reuses this whole lesson: duloxetine and tricyclics (amitriptyline, nortriptyline) are first line oral agents for neuropathic pain at doses below antidepressant ranges, SNRIs and tricyclics both exploiting descending inhibition, while SSRIs are weak analgesics. Number needed to treat values cluster around 4 to 7 for meaningful relief, so combination and switching strategies, topical agents and gabapentinoids from the epilepsy lessons complete the realistic toolkit.",
+      "say": "For neuropathic pain reach for duloxetine or a tricyclic, not an SSRI; descending inhibition is the analgesic.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-pain-management-fig1.webp",
+        "alt": "Acute pain pathway targets diagram showing descending inhibitory pathways",
+        "caption": "Pain pathway targets including the descending noradrenergic inhibition SNRIs and tricyclics recruit for neuropathic pain."
+      }
+    },
+    {
+      "tx": "**Cardiac safety** sorts the antidepressant cabinet for the post infarction or elderly patient: sertraline and escitalopram (QT watched) lead, mirtazapine and bupropion serve niches, tricyclics are avoided in conduction disease and recent infarction for their quinidine like sodium blockade, and venlafaxine pressure effects are monitored. ECG before tricyclics in anyone over 40 or with cardiac history is an old rule that still earns its keep.",
+      "say": "Hearts vote sertraline first and tricyclics last; an ECG precedes any tricyclic past forty.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cardiac friendlier",
+          "points": [
+            "Sertraline: post infarction trial safety",
+            "Escitalopram: QT dose discipline observed",
+            "Mirtazapine: no conduction effects of note",
+            "Bupropion: pressure watched, conduction spared"
+          ]
+        },
+        "right": {
+          "title": "Cardiac hazardous",
+          "points": [
+            "Tricyclics: sodium blockade, QRS and QT effects",
+            "Citalopram at high dose: QT ceiling breaches",
+            "Venlafaxine: dose dependent hypertension",
+            "Combinations with other QT prolongers audited"
+          ]
+        }
+      }
+    }
+  ]
+}

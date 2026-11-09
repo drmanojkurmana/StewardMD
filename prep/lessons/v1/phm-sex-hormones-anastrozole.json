@@ -1,0 +1,239 @@
+{
+  "v": 1,
+  "module": "phm-sex-hormones",
+  "subject": "pharmacology",
+  "title": "Anastrozole, Progestogens, Ulipristal, HRT and Anabolic Steroids Integrated",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Anastrozole**, the reference non steroidal aromatase inhibitor, collapses postmenopausal oestrogen synthesis reversibly and became adjuvant breast cancer's standard over tamoxifen with fewer thrombotic and endometrial events, paid for in arthralgia (a leading discontinuation cause), bone density loss needing densitometry and protection, and lipid neutrality debates. Exemestane, its steroidal irreversible cousin, offers a switch after intolerance with androgenic metabolite accents.",
+      "say": "Anastrozole trades tamoxifen's clots and uterus for joints and bone; monitor both ledgers by name.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anastrozole gains over tamoxifen",
+          "points": [
+            "Disease free survival advantage in adjuvant trials",
+            "No endometrial cancer signal",
+            "Fewer venous thromboembolic events",
+            "No CYP2D6 activation dependence"
+          ]
+        },
+        "right": {
+          "title": "Anastrozole bills",
+          "points": [
+            "Arthralgia and stiffness, adherence threatening",
+            "Bone loss: densitometry and antiresorptives",
+            "Vaginal dryness without endometrial risk",
+            "Cholesterol monitored in long courses"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Medroxyprogesterone** acetate is the progestogen workhorse across gynecology: injectable contraception (next lesson), endometrial protection in hormone therapy's older regimens, endometriosis and dysfunctional bleeding control, and oncology history. Its glucocorticoid and androgenic accents explain weight and mood effects and the bone density warning on long injectable use, while micronised progesterone's cleaner profile (sedation via neurosteroid metabolites included) wins modern HRT prescriptions where available.",
+      "say": "Medroxyprogesterone does everything adequately and some things roughly; micronised progesterone is the gentler heir.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Medroxyprogesterone profile",
+          "points": [
+            "Injectable contraception every 3 months (DMPA)",
+            "HRT endometrial protection, older regimens",
+            "Bone density warning with long injectable use",
+            "Delayed fertility return after last injection"
+          ]
+        },
+        "right": {
+          "title": "Micronised progesterone",
+          "points": [
+            "Body identical progestogen, oral or vaginal",
+            "Sedative neurosteroid metabolites: evening dosing",
+            "Breast risk cohorts kinder than synthetic progestins",
+            "First trimester support niches in protocols"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Ulipristal** acetate, a selective progesterone receptor modulator (SPRM), delays ovulation by postponing the LH surge even after it begins, making it the most effective oral emergency contraceptive up to 120 hours (next lesson), and at daily low dose shrank uterine fibroids in preoperative programmes until rare severe liver injury fenced it behind restrictions. Its tissue selectivity (agonist and antagonist by site) defines the SPRM class mifepristone also inhabits at the antagonist pole.",
+      "say": "Ulipristal postpones an LH surge already rising; its fibroid career was fenced by the liver.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "uli",
+            "label": "Ulipristal 30 mg within 120 hours of intercourse"
+          },
+          {
+            "id": "lh",
+            "label": "LH surge postponed even after onset"
+          },
+          {
+            "id": "ovul",
+            "label": "Ovulation delayed beyond sperm survival"
+          },
+          {
+            "id": "rule",
+            "label": "Progestogen contraception restarted after 5 days"
+          }
+        ],
+        "edges": [
+          [
+            "uli",
+            "lh"
+          ],
+          [
+            "lh",
+            "ovul"
+          ],
+          [
+            "ovul",
+            "rule"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**The SERM concept generalises** beyond oestrogen: selective modulation means one ligand stabilising receptor conformations that recruit co activators in some tissues and co repressors in others, which is why tamoxifen, raloxifene and bazedoxifene (paired with conjugated oestrogens in a tissue selective complex) share a surname and different bodies. Examinations test the concept by asking which tissue effect follows which drug; memorising the grid outperforms memorising paragraphs.",
+      "say": "One receptor, tissue specific partners; the grid of agonist and antagonist cells is the examinable object.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tissue grid essentials",
+          "points": [
+            "Tamoxifen: breast antagonist, uterus and bone agonist",
+            "Raloxifene: breast and uterus antagonist, bone agonist",
+            "Bazedoxifene: paired with oestrogen for menopause",
+            "All retain venous thrombosis as a class tax"
+          ]
+        },
+        "right": {
+          "title": "Applying the grid",
+          "points": [
+            "Endometrial surveillance questions: tamoxifen only",
+            "Vertebral fracture prevention: raloxifene",
+            "Cancer treatment: tamoxifen (and aromatase rivals)",
+            "Hot flushes worsen on raloxifene, variable on others"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hormone replacement therapy** composition is the applied sum of this module: oestrogen for symptoms (transdermal estradiol preferred with risk factors), progestogen for endometrial protection where a uterus persists (micronised progesterone or medroxyprogesterone, or a levonorgestrel intrauterine system as the elegant local answer), testosterone niches for desire, and tibolone's tissue selective hybrid in some formularies. Duration is the shortest that serves the indication with annual reviews, not a lifetime sentence in either direction.",
+      "say": "Oestrogen for symptoms, progestogen for the uterus, route by thrombosis, duration by annual review.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Composition choices",
+          "points": [
+            "Transdermal estradiol with migraine or VTE factors",
+            "Micronised progesterone evenings for endometrium",
+            "Levonorgestrel intrauterine system as local protection",
+            "Oestrogen alone after hysterectomy"
+          ]
+        },
+        "right": {
+          "title": "Review obligations",
+          "points": [
+            "Indication and dose annual review",
+            "Breast screening up to date",
+            "Unscheduled bleeding investigated",
+            "Bone and cardiovascular context revisited"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anabolic steroids** in medicine shrink to narrow legitimate rooms (hypogonadism covered previously, wasting in defined illnesses historically, hereditary angioedema's danazol cousin, aplastic anaemia antiques) while their misuse economy borrows the whole class. The pharmacology distinction examinations want is anabolic versus androgenic ratio mythology: all anabolic steroids are androgenic at the receptor, separation is partial at best, and virilisation in women and children follows any of them given enough dose and time.",
+      "say": "No purely anabolic steroid exists; the ratio is marketing, the receptor is honest.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Legitimate narrow rooms",
+          "points": [
+            "Hypogonadism replacement (testosterone lesson)",
+            "Defined wasting and anaemia history",
+            "Hereditary angioedema (danazol, attenuated androgens)",
+            "Specialist supervision in all"
+          ]
+        },
+        "right": {
+          "title": "Universal androgenic truths",
+          "points": [
+            "Virilisation dose and time dependent in women",
+            "Growth plate fusion in adolescents",
+            "Gonadal suppression in men",
+            "Separation of anabolic from androgenic is partial only"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Progestogen only therapeutics beyond** contraception deserve their line: norethisterone delays menstruation and treats dysfunctional bleeding with thrombosis counsel, high dose progestogens palliate endometrial and breast cancers historically, and progesterone support inhabits assisted reproduction and threatened miscarriage protocols with evidence graded indication by indication. Each use is endometrial biology applied: proliferation restrained, secretion organised, withdrawal scheduled.",
+      "say": "Progestogens organise the endometrium on prescription: delay it, protect it, or prepare it, by dose and day.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "prog",
+            "label": "Progestogen prescribed with a named indication"
+          },
+          {
+            "id": "endo",
+            "label": "Endometrium secretory, stabilised or suppressed"
+          },
+          {
+            "id": "goal",
+            "label": "Bleeding controlled, protection or support achieved"
+          },
+          {
+            "id": "review",
+            "label": "Thrombosis, mood and metabolic review by agent"
+          }
+        ],
+        "edges": [
+          [
+            "prog",
+            "endo"
+          ],
+          [
+            "endo",
+            "goal"
+          ],
+          [
+            "goal",
+            "review"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Close the sex hormone** module by sorting its grid: gonadal steroids (testosterone, estradiol, progesterone forms), their receptor modulators (SERMs, SPRMs, antiandrogens), synthesis blockers (aromatase, 5 alpha reductase, GnRH upstream), and pituitary drivers from the previous module. Vignettes give a tissue and a desired direction; the grid returns the drug family before brand memory wakes, which is the intended use of everything in the last three lessons.",
+      "say": "Tissue plus direction returns the family; let the grid answer before the brand names argue.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Grid by lever",
+          "points": [
+            "Replace: testosterone, estradiol, progesterone",
+            "Modulate receptors: SERMs, SPRMs, antiandrogens",
+            "Block synthesis: aromatase, 5 alpha reductase, GnRH",
+            "Drive pituitary: clomiphene, gonadotropins"
+          ]
+        },
+        "right": {
+          "title": "Grid by fence",
+          "points": [
+            "Teratogenic fences: antiandrogens, danazol, reductase blockers",
+            "Thrombotic fences: oestrogens, SERMs",
+            "Bone fences: aromatase inhibitors, deprivation",
+            "Fertility fences: exogenous testosterone, GnRH analogues"
+          ]
+        }
+      }
+    }
+  ]
+}

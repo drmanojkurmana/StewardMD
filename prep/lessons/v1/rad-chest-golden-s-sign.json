@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-chest-golden-s-sign",
+ "subject": "radiology",
+ "module": "rad-chest",
+ "title": "Golden S Sign and Westermark Sign on Chest Films",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Golden S from a central tumour",
+   "tx": "**Golden S sign** appears when a central right upper lobe tumour blocks the bronchus and the lobe collapses around the mass. The horizontal fissure droops at its lateral end under the collapsed lobe weight but bulges downward near the hilum where tumour bulk props it up, tracing a reverse S curve. That convex medial bulge separates tumour collapse from simple benign collapse, whose fissure stays concave throughout.",
+   "say": "Golden S sign appears when a central right upper lobe tumour blocks the bronchus and the lobe collapses around the mass. The horizontal fissure droops laterally under collapsed lobe weight but bulges downward near the hilum where tumour props it up, tracing a reverse S. That medial bulge separates tumour collapse from benign collapse.",
+   "vis": {"kind": "compare", "left": {"title": "Golden S collapse", "points": ["Central tumour at hilum", "Fissure bulges medially", "Reverse S curve traced", "Bronchoscopy needed"]}, "right": {"title": "Benign collapse", "points": ["No hilar mass", "Fissure concave throughout", "Mucus plug or foreign body", "May re expand with suction"]}}
+  },
+  {
+   "title": "Right upper lobe collapse basics",
+   "tx": "**Right upper lobe collapse** pulls the horizontal fissure upward and the trachea rightward as volume leaves the lobe. Without tumour, the fissure bows smoothly upward in one concave arc and the opacity hugs the mediastinum. Children collapse this lobe around aspirated foreign bodies and mucus plugs in asthma, while adults over forty with a smoking history collapse it around bronchogenic carcinoma until proven otherwise.",
+   "say": "Right upper lobe collapse pulls the horizontal fissure upward and the trachea rightward as volume leaves the lobe. Without tumour, the fissure bows smoothly upward in one concave arc. Children collapse this lobe around foreign bodies and mucus plugs, while older smokers collapse it around bronchogenic carcinoma until proven otherwise.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bronchus blocked"}, {"id": "b", "label": "Air resorbed distally"}, {"id": "c", "label": "Fissure pulled upward"}, {"id": "d", "label": "Trachea shifts right"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Westermark sign in embolism",
+   "tx": "**Westermark sign** is a focal region of hyperlucency where a pulmonary embolus has cut arterial flow and emptied the vessels beyond it. The affected segment looks washed out beside normally perfused lung, with vessels that stop abruptly at the clot. Sensitivity is low because most emboli are too small or too central to empty a visible territory, so a normal looking film never excludes pulmonary embolism.",
+   "say": "Westermark sign is a focal region of hyperlucency where a pulmonary embolus cut arterial flow and emptied vessels beyond it. The segment looks washed out beside normally perfused lung, with vessels stopping abruptly at the clot. Sensitivity is low, so a normal looking film never excludes pulmonary embolism.",
+   "vis": {"kind": "compare", "left": {"title": "Westermark territory", "points": ["Focal hyperlucency", "Vessels emptied beyond clot", "Abrupt vessel cut off", "Segmental distribution"]}, "right": {"title": "Normal perfusion", "points": ["Even vascular markings", "Vessels taper smoothly", "Matching lucency both sides", "No abrupt cut off"]}}
+  },
+  {
+   "title": "Hampton hump and Palla sign",
+   "tx": "**Hampton hump** is the dome shaped pleural based opacity of pulmonary infarction, its base on the pleura and its rounded apex pointing at the hilum. Palla sign instead shows an enlarged right pulmonary artery with a sausage shape from clot distending it. Both signs support embolism on a plain film, but CT pulmonary angiography remains the test that confirms clot, maps its burden and excludes mimics.",
+   "say": "Hampton hump is the dome shaped pleural based opacity of pulmonary infarction, base on the pleura and apex pointing at the hilum. Palla sign shows an enlarged right pulmonary artery with a sausage shape from clot distending it. Both support embolism, but CT pulmonary angiography confirms clot and maps its burden.",
+   "vis": {"kind": "table", "cols": ["Sign", "Appearance", "Mechanism"], "rows": [["Westermark", "Focal hyperlucency", "Oligaemia beyond clot"], ["Hampton hump", "Pleural based dome", "Alveolar infarction"], ["Palla", "Sausage shaped artery", "Clot distends right artery"], ["Normal film", "No focal sign", "Embolism still possible"]]}
+  },
+  {
+   "title": "Oligaemia versus hyperinflation",
+   "tx": "**Focal oligaemia** from embolism keeps normal lung volume in the pale territory, separating it from air trapping where the pale side expands and flattens its diaphragm. A unilateral hyperlucent lung in a child more often means an inhaled foreign body with check valve air trapping, best shown by an expiratory film where the pale side stays inflated. Embolism patients are usually breathless adults with pleuritic pain or haemoptysis instead.",
+   "say": "Focal oligaemia from embolism keeps normal lung volume in the pale territory, separating it from air trapping where the pale side expands and flattens its diaphragm. A unilateral bright lung in a child more often means an inhaled foreign body with air trapping. Embolism patients are usually breathless adults with pleuritic pain.",
+   "vis": {"kind": "compare", "left": {"title": "Embolic oligaemia", "points": ["Normal volume pale zone", "Vessels cut off abruptly", "Adult with pleuritic pain", "CT angiography confirms"]}, "right": {"title": "Air trapping", "points": ["Pale side overexpanded", "Diaphragm flattened", "Child after choking episode", "Expiratory film proves it"]}}
+  },
+  {
+   "title": "Golden S demands tissue diagnosis",
+   "tx": "**Bronchoscopy** follows a Golden S film because imaging alone cannot grade or type the tumour causing collapse. The scope finds most central lesions directly, since nearly nine in ten bronchogenic carcinomas causing this sign sit within a main or lobar bronchus. Biopsy type then drives staging CT and treatment, while the collapsed lobe may re expand after stenting or radiotherapy relieves the block.",
+   "say": "Bronchoscopy follows a Golden S film because imaging alone cannot grade or type the tumour causing collapse. The scope finds most central lesions directly, since most carcinomas causing this sign sit within a main or lobar bronchus. Biopsy type then drives staging and treatment, while the collapsed lobe may re expand after relief.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Golden S on film"}, {"id": "b", "label": "Contrast CT chest"}, {"id": "c", "label": "Bronchoscopy and biopsy"}, {"id": "d", "label": "Staging and treatment plan"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Silhouette loss joins the Golden S",
+   "tx": "**Mediastinal silhouette** loss often accompanies right upper lobe tumour collapse because the opaque lobe touches the upper mediastinum and ascending aorta. The upper right mediastinal border vanishes while the heart border lower down stays crisp. Combining border loss with the fissure S curve doubles confidence that the opacity is right upper lobe and central in origin before any cross sectional study is booked.",
+   "say": "Mediastinal silhouette loss often accompanies right upper lobe tumour collapse because the opaque lobe touches the upper mediastinum and ascending aorta. The upper right mediastinal border vanishes while the lower heart border stays crisp. Combining border loss with the fissure S curve doubles confidence in a central right upper lobe cause.",
+   "vis": {"kind": "table", "cols": ["Film clue", "Points to", "Next step"], "rows": [["Reverse S fissure", "Central tumour collapse", "CT then bronchoscopy"], ["Upper border lost", "Lobe touches mediastinum", "Localises to upper lobe"], ["Trachea shifted right", "Volume loss", "Exclude effusion instead"], ["Hilar enlargement", "Mass plus nodes", "Staging CT chest"]]}
+  },
+  {
+   "title": "Embolism signs never rule out",
+   "tx": "**Plain film signs** of pulmonary embolism, Westermark, Hampton hump and Palla together, still miss most cases because small peripheral clots change nothing visible. A high clinical probability with a clear film proceeds straight to CT pulmonary angiography or a ventilation perfusion study when contrast is barred. D dimer only helps when probability is low or intermediate, where a negative result safely avoids imaging.",
+   "say": "Plain film signs of pulmonary embolism, taken together, still miss most cases because small peripheral clots change nothing visible. High clinical probability with a clear film proceeds straight to CT pulmonary angiography, or a perfusion study when contrast is barred. D dimer only helps at low or intermediate probability, where a negative avoids imaging.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "High probability, clear film"}, {"id": "b", "label": "CT pulmonary angiography"}, {"id": "c", "label": "Clot mapped or excluded"}, {"id": "d", "label": "Anticoagulation decision"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}

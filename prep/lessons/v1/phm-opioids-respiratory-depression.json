@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-opioids",
+  "subject": "pharmacology",
+  "title": "Opioid Respiratory Depression, Withdrawal, Constipation and Nalbuphine",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Respiratory depression** is mu agonism at brainstem rhythm and chemosensory circuits (pre Botzinger complex and central chemoreceptors): rate falls first, tidal volume follows, the CO2 response curve flattens and shifts right, and hypoxic drive becomes the last governor, which supplemental oxygen can silence unwitnessed. Sedation level predicts it better than any single rate number. Sleep apnoea, COPD, infancy, old age and co sedatives multiply the risk multiplicatively, not additively.",
+      "say": "Watch sedation, not just rate; oxygen can hide hypoventilation behind a reassuring saturation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mu",
+            "label": "Mu agonism at brainstem respiratory circuits"
+          },
+          {
+            "id": "co2",
+            "label": "CO2 responsiveness flattens and shifts right"
+          },
+          {
+            "id": "rate",
+            "label": "Rate and tidal volume fall, sedation deepens first"
+          },
+          {
+            "id": "apnoea",
+            "label": "Apnoea and hypoxic injury if unrecognised"
+          }
+        ],
+        "edges": [
+          [
+            "mu",
+            "co2"
+          ],
+          [
+            "co2",
+            "rate"
+          ],
+          [
+            "rate",
+            "apnoea"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Management** climbs a ladder in order: stop further opioid, stimulate and position, give oxygen while recognising it does not ventilate, assist ventilation with bag and mask (the definitive bridge), then titrated naloxone with infusion planning for long acting agents, and continuous observation because renarcotisation outlasts most discharge impulses. Capnography detects hypoventilation that oximetry misses on oxygen, which is why monitored beds, not corridor trolleys, host high risk titration.",
+      "say": "Ventilate first, naloxone titrated second, and observe longer than the antagonist lasts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Immediate ladder",
+          "points": [
+            "Stop opioid, call for help, stimulate",
+            "Airway, positioning and high flow oxygen",
+            "Bag mask ventilation as the bridge",
+            "Titrated naloxone to ventilation"
+          ]
+        },
+        "right": {
+          "title": "After stabilisation",
+          "points": [
+            "Naloxone infusion for long acting agonists",
+            "Capnography where hypoventilation may hide",
+            "Observation beyond antagonist duration",
+            "Regimen redesigned before any rechallenge"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Opioid withdrawal** is rebound noradrenergic and cholinergic weather after dependence: early lacrimation, rhinorrhoea, yawning and anxiety (the cold turkey skin and flu mimicry), mid-course mydriasis, piloerection, vomiting, diarrhoea and cramps, with insomnia and craving throughout. Timelines follow half life (heroin and morphine 6 to 12 hours to onset, methadone 24 to 36), severity is scored (COWS), and while rarely lethal in healthy adults it kills by dehydration in custody and by relapse overdose after tolerance evaporates.",
+      "say": "Withdrawal feels like flu with dilated pupils; its danger is dehydration and the overdose waiting after it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Withdrawal timetable",
+          "points": [
+            "Short acting: onset 6 to 12 hours, peak 36 to 72",
+            "Methadone: onset 24 to 36 hours, weeks of tail",
+            "COWS scoring grades severity objectively",
+            "Craving outlasts physical signs"
+          ]
+        },
+        "right": {
+          "title": "Symptomatic pharmacology",
+          "points": [
+            "Clonidine or lofexidine: alpha 2 dampens noradrenergic storm",
+            "Loperamide, antiemetics, antispasmodics by symptom",
+            "Substitution induction once withdrawal declares",
+            "Relapse prevention planning from day one"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Constipation** is peripheral mu blockade of gut propulsion and secretion plus central contributions, the one effect with essentially no tolerance, present in up to 95 percent of chronic users without prophylaxis and capable of ileus, overflow, pseudo obstruction presentations and stercoral perforation at the extremes. Stimulant plus osmotic laxatives start with the opioid, not after impaction; peripherally restricted antagonists (previous lesson) rescue refractory cases, and bulk fibre alone in immobile patients can cement the problem it meant to soften.",
+      "say": "The bowel never tolerises; prescribe the laxative with the opioid, every time, from day one.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "opioid",
+            "label": "Opioid started for pain"
+          },
+          {
+            "id": "lax",
+            "label": "Stimulant and osmotic laxative co prescribed"
+          },
+          {
+            "id": "review",
+            "label": "Bowel habit reviewed at every contact"
+          },
+          {
+            "id": "pamora",
+            "label": "Peripherally restricted antagonist if refractory"
+          }
+        ],
+        "edges": [
+          [
+            "opioid",
+            "lax"
+          ],
+          [
+            "lax",
+            "review"
+          ],
+          [
+            "review",
+            "pamora"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Nalbuphine**, another kappa agonist mu partial antagonist, serves as analgesic where its ceiling on respiratory depression was once marketed as safety, and in small intravenous doses as a celebrated antipruritic for neuraxial opioid itching, reversing mu mediated itch while largely preserving analgesia at those doses. It precipitates withdrawal in dependence like its mixed cousins, causes sedation and dysphoria dose dependently, and shares their modern demotion to teaching and niche status.",
+      "say": "Nalbuphine's surviving trick is curing spinal morphine itch at doses that spare the analgesia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nalbuphine niches",
+          "points": [
+            "Kappa agonism, mu partial antagonism",
+            "Low dose antipruritic for neuraxial opioid itch",
+            "Respiratory depression ceiling as single agent",
+            "Obstetric analgesia history"
+          ]
+        },
+        "right": {
+          "title": "Nalbuphine limits",
+          "points": [
+            "Precipitates withdrawal in mu dependence",
+            "Analgesic ceiling reached early",
+            "Sedation and dysphoria with escalation",
+            "Avoid in chronic full agonist therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Tolerance, dependence and addiction** are three different nouns examinations weaponise: tolerance is pharmacological adaptation needing more drug for the same effect, physical dependence is withdrawal on cessation, and addiction (opioid use disorder) is compulsive use despite harm driven by reward circuitry and environment. Pain patients develop the first two predictably and the third uncommonly with structured prescribing; confusing the nouns stigmatises patients and corrupts prescribing in both directions.",
+      "say": "Tolerance is not dependence is not addiction; grade the vignette's noun before judging its patient.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pharmacological adaptations",
+          "points": [
+            "Tolerance: dose escalation for same effect",
+            "Physical dependence: withdrawal on stopping",
+            "Both expected with chronic exposure",
+            "Managed by tapering and regimen design"
+          ]
+        },
+        "right": {
+          "title": "Opioid use disorder",
+          "points": [
+            "Compulsive use, craving, loss of control",
+            "Continued use despite harm",
+            "Treated with substitution and psychosocial care",
+            "Not diagnosed by tolerance or dependence alone"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Opioid induced hyperalgesia** completes the chronic paradox: sustained high dose exposure sensitises pronociceptive systems (NMDA mediated) so pain worsens as doses climb and spreads beyond its original territory, distinguished from tolerance by distribution and allodynia and treated paradoxically by dose reduction, rotation, methadone's NMDA arm or ketamine in specialist hands. The vignette giveaway is escalating dose with expanding, unexplained pain and a normal disease review.",
+      "say": "Pain that grows and spreads as doses climb may be the opioid itself; sometimes less opioid is the analgesic.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "high",
+            "label": "High dose chronic opioid exposure"
+          },
+          {
+            "id": "sens",
+            "label": "Pronociceptive NMDA sensitisation"
+          },
+          {
+            "id": "spread",
+            "label": "Pain expands with allodynia beyond original site"
+          },
+          {
+            "id": "reduce",
+            "label": "Dose reduction or rotation improves pain"
+          }
+        ],
+        "edges": [
+          [
+            "high",
+            "sens"
+          ],
+          [
+            "sens",
+            "spread"
+          ],
+          [
+            "spread",
+            "reduce"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Safe prescribing systems** close the module: start low with immediate release formulations, define functional goals and review dates, co prescribe laxatives and (where risk argues) naloxone, avoid benzodiazepine and gabapentinoid stacking, check prescription monitoring where available, taper when harm exceeds benefit at roughly 5 to 10 percent monthly with patient partnership, and never abandon a dependent patient for failing a regimen the system designed.",
+      "say": "Goals, laxatives, naloxone where risk lives, no sedative stacking, and tapers negotiated never imposed by abandonment.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Initiation safeguards",
+          "points": [
+            "Functional goals and review date documented",
+            "Immediate release before modified release",
+            "Laxative and antiemetic plan attached",
+            "Sedative co prescriptions audited"
+          ]
+        },
+        "right": {
+          "title": "Continuation safeguards",
+          "points": [
+            "Benefit reviewed against goals, not scores alone",
+            "Naloxone co prescribed where overdose risk argues",
+            "Taper 5 to 10 percent monthly when harm leads",
+            "Dependence treated, never punished by abandonment"
+          ]
+        }
+      }
+    }
+  ]
+}

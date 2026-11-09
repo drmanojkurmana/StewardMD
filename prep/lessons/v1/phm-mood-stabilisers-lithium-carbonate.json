@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-mood-stabilisers",
+  "subject": "pharmacology",
+  "title": "Lithium Carbonate: Therapeutic Range, Toxicity, Nephrogenic Diabetes Insipidus and Ebstein Anomaly",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Lithium carbonate** remains bipolar disorder's reference mood stabiliser and its only agent with replicated anti suicidal effect, modulating second messengers (inositol depletion), neurotransmission and neuroprotective signalling by mechanisms still incompletely mapped. It prevents manic and, more modestly, depressive relapses in bipolar I disorder. Its pharmacology is elemental: a monovalent cation handled by the kidney exactly like sodium, which writes every interaction and toxicity rule in this lesson.",
+      "say": "Lithium is psychiatry's element: anti suicidal, kidney handled like sodium, and monitored like a religion.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bipolar-disorder-fig1.webp",
+        "alt": "Bipolar mood spectrum diagram showing manic, hypomanic, euthymic and depressive poles",
+        "caption": "The bipolar mood spectrum across which lithium's prophylaxis is prescribed and monitored."
+      }
+    },
+    {
+      "tx": "The **therapeutic range** is famously narrow and level anchored: 0.6 to 1.0 mmol per litre for maintenance (0.8 to 1.0 often targeted in younger patients), up to 1.2 in acute mania, sampled 12 hours post dose at steady state after 5 days of stable dosing. Toxicity stirs above 1.5 and threatens life beyond 2. Baseline and serial renal function, thyroid, calcium, weight and ECG where indicated frame initiation, because lithium's chronic organ taxes (next steps) must be priced in advance.",
+      "say": "Twelve hour levels, point six to one point zero, five days steady; toxicity starts knocking at one point five.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Level discipline",
+          "points": [
+            "12 hour post dose sampling standard",
+            "Maintenance 0.6 to 1.0 mmol per litre",
+            "Acute mania up to 1.2 mmol per litre",
+            "Steady state after about 5 stable days"
+          ]
+        },
+        "right": {
+          "title": "Baseline contract",
+          "points": [
+            "Renal function, thyroid function, calcium",
+            "Weight, blood pressure, ECG where indicated",
+            "Pregnancy intention and contraception review",
+            "Level 3 to 6 monthly, organs 6 to 12 monthly"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Lithium toxicity** begins as an exaggeration of its nuisance effects (tremor, diarrhoea, polyuria) and climbs through coarse tremor, ataxia, dysarthria and confusion to seizures, coma and death, precipitated by dehydration, sodium depletion, thiazides, NSAIDs, ACE inhibitors and intercurrent illness, all reducing lithium clearance. Management stops lithium, restores volume with saline (which promotes lithium excretion), and dialyses for severe neurology, very high levels or renal failure, because lithium dialyses beautifully.",
+      "say": "Dehydration and thiazides poison lithium patients; saline and dialysis rescue them in that order.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "trigger",
+            "label": "Dehydration, sodium loss or clearance reducing drug"
+          },
+          {
+            "id": "signs",
+            "label": "Coarse tremor, ataxia, confusion ascending"
+          },
+          {
+            "id": "saline",
+            "label": "Stop lithium, intravenous saline resuscitation"
+          },
+          {
+            "id": "dialyse",
+            "label": "Haemodialysis for severe neurology or renal failure"
+          }
+        ],
+        "edges": [
+          [
+            "trigger",
+            "signs"
+          ],
+          [
+            "signs",
+            "saline"
+          ],
+          [
+            "saline",
+            "dialyse"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Chronic renal tax number one is **nephrogenic diabetes insipidus**: lithium enters collecting duct principal cells through epithelial sodium channels and poisons aquaporin 2 trafficking, producing polyuria and polydipsia in up to a fifth of long term users, usually reversible early. Amiloride, which blocks that entry channel, is the elegant treatment that does not sacrifice mood stability, alongside lowest effective levels and once nightly dosing. Progressive tubulointerstitial nephropathy with slowly falling GFR is the rarer second renal tax after decades.",
+      "say": "Lithium floods the collecting duct and deafens it to ADH; amiloride locks its entry door.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nephrogenic DI on lithium",
+          "points": [
+            "Polyuria and polydipsia, nocturia prominent",
+            "Aquaporin 2 trafficking poisoned via ENaC entry",
+            "Amiloride blocks lithium entry into principal cells",
+            "Once nightly dosing and lowest levels mitigate"
+          ]
+        },
+        "right": {
+          "title": "Long term renal surveillance",
+          "points": [
+            "Creatinine and eGFR trended, not spot checked",
+            "Tubulointerstitial nephropathy after decades in a minority",
+            "Nephrology liaison when eGFR falls below 60 or declines",
+            "Stopping lithium late rarely reverses established damage"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Endocrine taxes are predictable from lithium's glandular hobbies: hypothyroidism (commoner in women, monitored six monthly, treated with levothyroxine without stopping lithium), hyperparathyroidism with hypercalcaemia from a raised parathyroid set point, and weight gain. Teratogenicity headlines **Ebstein anomaly**, tricuspid displacement into the right ventricle, whose relative risk multiplies many fold while absolute risk stays small (roughly 1 in 1000 exposed), counselling arithmetic that deserves both numbers, never one alone.",
+      "say": "Thyroid down, calcium up, and Ebstein risk quoted relatively and absolutely or not at all.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Endocrine surveillance",
+          "points": [
+            "Hypothyroidism: TSH 6 to 12 monthly, treat through",
+            "Hyperparathyroidism: calcium checked with renal panel",
+            "Weight and metabolic review at visits",
+            "Fine tremor and cognitive dulling dose reviewed"
+          ]
+        },
+        "right": {
+          "title": "Pregnancy arithmetic",
+          "points": [
+            "Ebstein anomaly relative risk high, absolute about 1 in 1000",
+            "First trimester exposure drives cardiac risk",
+            "Fetal echocardiography offered after exposure",
+            "Relapse risk off lithium is the opposing number"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Drug interactions** all translate through sodium: thiazides (worst), loop diuretics in volume depletion, NSAIDs and ACE inhibitors or blockers reduce lithium clearance and demand level rechecks within days of any change; sodium loading and theophylline increase excretion modestly. Sick day rules (pause during vomiting, diarrhoea or poor intake, check a level, restart when well) prevent most emergency presentations, and every lithium patient should be able to recite them unprompted.",
+      "say": "Anything moving sodium moves lithium; teach sick day rules until the patient recites them back.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "change",
+            "label": "New diuretic, NSAID or RAAS blocker started"
+          },
+          {
+            "id": "recheck",
+            "label": "Lithium level rechecked within 5 to 7 days"
+          },
+          {
+            "id": "sick",
+            "label": "Vomiting, diarrhoea or poor intake: pause and test"
+          },
+          {
+            "id": "restart",
+            "label": "Restart when eating, drinking and well again"
+          }
+        ],
+        "edges": [
+          [
+            "change",
+            "recheck"
+          ],
+          [
+            "recheck",
+            "sick"
+          ],
+          [
+            "sick",
+            "restart"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Valproate in mania** is the comparator that proves lithium is chosen, not defaulted: valproate loads rapidly by mouth or vein, suits mixed features and rapid cycling historically, and avoids level monitoring theatre, while charging weight, hepatic, haematological and the cabinet's worst teratogenicity (previous module). Carbamazepine is third line with its interaction empire. Choice among stabilisers is phenotype, organ reserve and reproductive planning arithmetic, which the next lesson completes with lamotrigine's depressive pole strength.",
+      "say": "Valproate loads fast and suits mixed mania; lithium endures for prophylaxis, suicide and cost.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antidepressants-ssri-lithium-mood-fig1.webp",
+        "alt": "SSRI and lithium action mechanisms diagram at the synapse",
+        "caption": "Lithium's intracellular second messenger actions beside serotonergic mechanisms, the stabiliser comparison in one frame."
+      }
+    },
+    {
+      "tx": "**Stopping lithium** is its own hazard: abrupt discontinuation provokes rebound mania within weeks at rates exceeding gradual taper, so discontinuation (pregnancy planning, renal decline, patient choice) stretches over at least a month and preferably three, with relapse plans written in advance. Switching stabilisers cross tapers where pharmacology allows, remembering valproate and lamotrigine carry no lithium like withdrawal physiology, only relapse risk on their own clocks.",
+      "say": "Stop lithium over months, never days; rebound mania is the tax on haste.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Safe discontinuation",
+          "points": [
+            "Taper over at least 4 weeks, preferably 3 months",
+            "Relapse action plan written with patient and family",
+            "Levels and symptoms reviewed through the taper",
+            "Alternative prophylaxis established first where possible"
+          ]
+        },
+        "right": {
+          "title": "Unsafe patterns",
+          "points": [
+            "Abrupt cessation for minor nuisance effects",
+            "Stopping without informing the monitoring team",
+            "Pregnancy discovery panic stops without specialist input",
+            "Restarting at old dose after long gaps without levels"
+          ]
+        }
+      }
+    }
+  ]
+}

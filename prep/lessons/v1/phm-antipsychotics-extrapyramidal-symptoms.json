@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-antipsychotics",
+  "subject": "pharmacology",
+  "title": "Extrapyramidal Symptoms, Tardive Dyskinesia, Neuroleptic Malignant Syndrome, Prolactin and Metabolic Effects",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Extrapyramidal symptoms** arrive on a timetable that itself diagnoses: acute dystonia in hours to days (young men, high potency agents), akathisia in days to weeks (a subjective inner restlessness that drives pacing and is misread as agitation into dose increases that worsen it), drug induced parkinsonism in weeks, and tardive dyskinesia after months to years. Each has its own remedy, so naming the syndrome by clock and phenomenology precedes any prescription change.",
+      "say": "Hours dystonia, weeks akathisia and parkinsonism, months tardive dyskinesia; the calendar names the syndrome.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antipsychotics-d2-eps-clozapine-nms-fig1.webp",
+        "alt": "Antipsychotic dopamine neurocircuit pathways diagram showing mesolimbic, nigrostriatal, tuberoinfundibular and mesocortical tracts",
+        "caption": "Nigrostriatal D2 blockade on this pathway map generates the extrapyramidal syndromes timed in this lesson."
+      }
+    },
+    {
+      "tx": "**Acute dystonia** (sustained twisting spasms, torticollis, oculogyric crisis, occasionally laryngeal threat) melts within minutes of intravenous or intramuscular anticholinergics (procyclidine, benztropine) or promethazine, followed by oral cover for days and agent review. Akathisia answers oppositely: dose reduction or switch first, propranolol or low dose mirtazapine and benzodiazepines as adjuncts, anticholinergics mostly useless, because its mechanism is not simple cholinergic excess.",
+      "say": "Dystonia wants an anticholinergic now; akathisia wants less drug, not more, however agitated it looks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute dystonia response",
+          "points": [
+            "Intravenous procyclidine or benztropine",
+            "Relief within minutes confirms the diagnosis",
+            "Oral anticholinergic cover for several days",
+            "Agent and dose reviewed before discharge"
+          ]
+        },
+        "right": {
+          "title": "Akathisia response",
+          "points": [
+            "Reduce dose or switch agent first",
+            "Propranolol where pulse and airways allow",
+            "Low dose mirtazapine or benzodiazepine adjuncts",
+            "Never mistake for psychotic agitation needing more drug"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Drug induced parkinsonism** (bradykinesia, rigidity, tremor) mimics idiopathic disease except for symmetry, early onset after drug change and absent rest tremor asymmetry clues; management reduces or switches the antipsychotic (quetiapine or clozapine where movement is intolerable), with anticholinergics time limited because they worsen tardive dyskinesia and cognition. Levodopa has no place while dopamine blockade continues, except where idiopathic Parkinson disease genuinely coexists and psychiatrists and neurologists co own the tightrope.",
+      "say": "Parkinsonism on an antipsychotic wants less blockade or a kinder agent, not levodopa against the blockade.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "park",
+            "label": "Symmetrical bradykinesia and rigidity after dose change"
+          },
+          {
+            "id": "reduce",
+            "label": "Reduce dose or switch to quetiapine or clozapine"
+          },
+          {
+            "id": "anti",
+            "label": "Anticholinergic only briefly if needed"
+          },
+          {
+            "id": "review",
+            "label": "Reassess for tardive dyskinesia at every step"
+          }
+        ],
+        "edges": [
+          [
+            "park",
+            "reduce"
+          ],
+          [
+            "reduce",
+            "anti"
+          ],
+          [
+            "anti",
+            "review"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Tardive dyskinesia** is the late, potentially irreversible choreoathetoid debt of D2 blockade: oro buccal lingual masticatory movements first, then trunk and limbs, emerging after months to years, sometimes unmasked when doses fall. Cumulative exposure, age, female sex, diabetes and prior acute EPS raise risk. Anticholinergics worsen it (and are the examination trap), stopping the drug may worsen then slowly improve it, clozapine switch helps, and VMAT2 inhibitors (valbenazine, deutetrabenazine) deplete presynaptic dopamine to suppress movements with trial backing.",
+      "say": "Tardive dyskinesia is treated by VMAT2 depletion and clozapine logic; anticholinergics feed it, so banish that reflex.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tardive dyskinesia features",
+          "points": [
+            "Oro buccal lingual movements earliest",
+            "After months to years of cumulative blockade",
+            "May worsen transiently on dose reduction",
+            "AIMS examination documented periodically"
+          ]
+        },
+        "right": {
+          "title": "Management ladder",
+          "points": [
+            "Stop anticholinergics worsening the picture",
+            "Clozapine switch where psychosis allows",
+            "VMAT2 inhibitors: valbenazine, deutetrabenazine",
+            "Prevention: lowest effective dose, EPS surveillance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Neuroleptic malignant syndrome** is dopamine blockade's catastrophe: lead pipe rigidity, hyperthermia, autonomic instability, altered consciousness and raised creatine kinase evolving over days after starting or increasing a blocker (or abruptly withdrawing dopaminergics). Management is stop the drug, intensive supportive care with cooling and fluids, benzodiazepines, dantrolene and bromocriptine in severe cases by specialist direction, and never rechallenge quickly; mortality falls with recognition speed. It mirrors serotonin syndrome and malignant hyperthermia, distinguished by drug history and lead pipe (versus clonus) phenomenology.",
+      "say": "Rigidity, fever, storming autonomics after a blocker is NMS until excluded: stop the drug and cool aggressively.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "suspect",
+            "label": "Rigidity, hyperthermia, autonomic instability, high CK"
+          },
+          {
+            "id": "stop",
+            "label": "Stop all dopamine blockers immediately"
+          },
+          {
+            "id": "support",
+            "label": "Cooling, fluids, benzodiazepines, intensive care"
+          },
+          {
+            "id": "severe",
+            "label": "Dantrolene or bromocriptine in severe cases, specialist led"
+          }
+        ],
+        "edges": [
+          [
+            "suspect",
+            "stop"
+          ],
+          [
+            "stop",
+            "support"
+          ],
+          [
+            "support",
+            "severe"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Hyperprolactinaemia** follows tuberoinfundibular blockade because dopamine is prolactin's brake: levels rise within hours, producing galactorrhoea, amenorrhoea and infertility, erectile and libido loss, and, over years, accelerated bone density loss compounding postmenopausal and lifestyle risks. Risperidone and typicals lead the league (previous lesson); management measures prolactin when symptoms speak, excludes pregnancy, thyroid and pituitary causes, then reduces, switches to aripiprazole or adds it as rescue under specialist habits.",
+      "say": "Dopamine is prolactin's brake; cut the brake line and periods, fertility and bones pay over years.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hyperprolactinaemia signals",
+          "points": [
+            "Galactorrhoea and amenorrhoea or infertility",
+            "Erectile dysfunction and loss of libido",
+            "Gynaecomastia occasionally",
+            "Long term bone density loss silently"
+          ]
+        },
+        "right": {
+          "title": "Response sequence",
+          "points": [
+            "Measure prolactin, exclude other causes",
+            "Dose reduction or switch toward aripiprazole",
+            "Aripiprazole adjunct rescue in specialist practice",
+            "Bone protection where elevation persists"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Metabolic syndrome** under atypicals assembles weight, waist, pressure, glucose and lipids into the cardiovascular mortality gap of severe mental illness: antipsychotics add kilograms and insulin resistance (clozapine and olanzapine worst) atop illness related inactivity and smoking. The monitoring law from the previous lesson, lifestyle intervention from day one, metformin for antipsychotic weight gain with trial support, and switching agents on deteriorating trajectories together form the only honest mitigation, owned jointly by psychiatry and primary care.",
+      "say": "The metabolic contract is signed at the first prescription: measure, intervene early, switch when the trajectory sours.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antipsychotic-drugs-psych-fig1.webp",
+        "alt": "Antipsychotic side effects summary diagram by receptor profile",
+        "caption": "Receptor based adverse effect summary, with the metabolic burden that dominates long term atypical harm."
+      }
+    },
+    {
+      "tx": "Differentiating the hyperthermic trio is an examination rite: NMS (dopamine blockade; lead pipe rigidity, slow onset), **serotonin syndrome** (serotonergic excess; clonus, hyperreflexia, agitation, rapid onset), and malignant hyperthermia (volatile or succinylcholine trigger in theatre; hypercapnia and rigidity intraoperatively). Each has a different drug to stop, a different specific therapy (cyproheptadine for serotonin syndrome, dantrolene for malignant hyperthermia and sometimes NMS), and a shared intensive care chassis of cooling, sedation and paralysis when severe.",
+      "say": "Clonus says serotonin, lead pipe says dopamine blockade, the theatre clock says malignant hyperthermia; stop the right drug.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Distinguishing features",
+          "points": [
+            "NMS: lead pipe rigidity, hyporeflexia, days to evolve",
+            "Serotonin syndrome: clonus, hyperreflexia, hours to evolve",
+            "Malignant hyperthermia: intraoperative hypercapnia first",
+            "Histories: blocker, serotonergic stack, volatile trigger"
+          ]
+        },
+        "right": {
+          "title": "Specific therapies",
+          "points": [
+            "All: stop culprit, cool, sedate, support intensively",
+            "Serotonin syndrome: cyproheptadine adjunct",
+            "Malignant hyperthermia: dantrolene definitively",
+            "NMS: benzodiazepines first, dantrolene or bromocriptine severe"
+          ]
+        }
+      }
+    }
+  ]
+}
