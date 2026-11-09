@@ -1,0 +1,267 @@
+{
+ "v": 1,
+ "id": "psy-neurodevelopmental-echolalia",
+ "subject": "psychiatry",
+ "module": "psy-neurodevelopmental",
+ "title": "Repetitive Behaviors in Autism and Attention Deficit Hyperactivity Disorder",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Echolalia** is the automatic, parrot-like repetition of vocalizations, words, or phrases spoken by another person, serving as a classic linguistic feature of autism spectrum disorder. Immediate echolalia involves repeating words instantly; delayed echolalia involves repeating commercial slogans or movie dialogues hours or days later.",
+   "say": "Echolalia is the parrot-like repetition of another person's speech, categorized as immediate repetition or delayed recitation of movie lines.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Immediate Echolalia",
+     "points": [
+      "Repeats question immediately without answering",
+      "Reflects language processing latency",
+      "Serves as conversational turn-taking attempt",
+      "Common in early language acquisition"
+     ]
+    },
+    "right": {
+     "title": "Delayed Echolalia (Scripting)",
+     "points": [
+      "Recites dialogues or advertisements hours later",
+      "Non-communicative or communicative self-soothing",
+      "Accompanied by rhythmic prosodic chanting",
+      "Highly characteristic of autism spectrum disorder"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Stereotypies and motor mannerisms** are repetitive, purposeless, rhythmic, coordinated motor movements exhibited by autistic children, including bilateral hand flapping, body rocking, toe walking, spinning objects, and finger flicking. These behaviors intensify during periods of emotional excitement, boredom, or sensory overload, functioning as sensory self-regulation.",
+   "say": "Stereotypies are rhythmic, purposeless movements like hand flapping or body rocking that increase with excitement or sensory overload.",
+   "vis": {
+    "kind": "table",
+    "title": "Repetitive Motor Phenotypes",
+    "cols": [
+     "Motor Behavior",
+     "Physical Manifestation",
+     "Clinical Context"
+    ],
+    "rows": [
+     [
+      "Hand flapping",
+      "Rapid bilateral wrist and finger fluttering",
+      "Triggered by joy, excitement, or sensory overload"
+     ],
+     [
+      "Toe walking",
+      "Walking exclusively on metatarsal heads",
+      "Sensory processing tactile defense or Achilles contracture"
+     ],
+     [
+      "Body rocking",
+      "Rhythmic anterior-posterior trunk swaying",
+      "Sedative self-soothing in states of anxiety"
+     ],
+     [
+      "Complex mannerisms",
+      "Finger flicking in peripheral visual fields",
+      "Exploration of visual optical light refractions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Attention deficit hyperactivity disorder**, abbreviated ADHD, is a persistent neurodevelopmental disorder characterized by developmentally inappropriate levels of inattention, hyperactivity, and impulsivity. Diagnostic criteria mandate symptom presence before age 12, persistence for at least six months, and impairment across two or more settings like school and home.",
+   "say": "ADHD features developmentally inappropriate inattention, hyperactivity, and impulsivity present before age twelve across school and domestic environments.",
+   "vis": {
+    "kind": "table",
+    "title": "ADHD Presentations",
+    "cols": [
+     "ADHD Presentation",
+     "Core Symptoms",
+     "Epidemiological Profile"
+    ],
+    "rows": [
+     [
+      "Combined presentation",
+      "Meets >=6 inattentive AND >=6 hyperactive criteria",
+      "Most common form; male predominance; school referral"
+     ],
+     [
+      "Predominantly inattentive",
+      "Meets inattentive criteria; lacks hyperactivity",
+      "More common in females; 'daydreamers'; missed early"
+     ],
+     [
+      "Predominantly hyperactive",
+      "Meets hyperactive criteria; lacks inattention",
+      "Pre-school age children; squirming, running, climbing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Neurobiology of ADHD** involves delayed maturation of prefrontal cortical networks, particularly the frontostriatal circuits connecting the dorsolateral prefrontal cortex with the caudate nucleus and anterior cingulate gyrus. Neurotransmitter dysfunction features deficient dopaminergic and noradrenergic transmission, impairing the top-down cognitive gating of irrelevant sensory distractors.",
+   "say": "ADHD involves delayed maturation of prefrontal-striatal circuits and deficient dopamine and noradrenaline transmission, impairing attention gating.",
+   "vis": {
+    "kind": "flow",
+    "title": "Prefrontal Catecholamine Gating",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Deficient prefrontal dopamine (D1) and noradrenaline (alpha-2A) signalling"
+     },
+     {
+      "id": "n2",
+      "label": "Weakened prefrontal cortical inhibition over striatal motor output"
+     },
+     {
+      "id": "n3",
+      "label": "Failure of executive working memory to filter extraneous stimuli"
+     },
+     {
+      "id": "n4",
+      "label": "Clinical distractibility, motor restlessness, and behavioral impulsivity"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Methylphenidate** is the first-line psychostimulant medication of choice for ADHD, operating pharmacologically by blocking the presynaptic dopamine transporter (DAT) and noradrenaline transporter (NET). By increasing extracellular dopamine and noradrenaline in the prefrontal cortex, methylphenidate dramatically enhances attention span, task completion, and behavioral self-control.",
+   "say": "Methylphenidate blocks dopamine and noradrenaline reuptake in the prefrontal cortex, improving sustained concentration and executive focus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Methylphenidate Actions",
+     "points": [
+      "Blocks dopamine transporter (DAT)",
+      "Blocks noradrenaline transporter (NET)",
+      "Immediate enhancement of task focus",
+      "Efficacy rate exceeds seventy percent"
+     ]
+    },
+    "right": {
+     "title": "Clinical Surveillance",
+     "points": [
+      "Monitor blood pressure and resting pulse",
+      "Track appetite loss and growth deceleration",
+      "Evaluate nighttime insomnia and tics",
+      "Utilize weekend drug holidays if growth slows"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Adverse effects of psychostimulants** include appetite suppression, abdominal pain, weight loss, delayed sleep onset insomnia, and modest transient deceleration in linear height velocity. Clinicians regularly monitor height and weight curves; implementing weekend or holiday 'drug holidays' allows catch-up physical growth without compromising school term academic learning.",
+   "say": "Stimulants can cause appetite loss, insomnia, and growth slowing. Monitoring growth charts and using weekend drug holidays preserves linear growth.",
+   "vis": {
+    "kind": "table",
+    "title": "Stimulant Side Effect Mitigation",
+    "cols": [
+     "Side Effect",
+     "Clinical Manifestation",
+     "Management Strategy"
+    ],
+    "rows": [
+     [
+      "Appetite suppression",
+      "Skipping lunch at school; weight loss",
+      "High-calorie breakfast before dose; late evening snacks"
+     ],
+     [
+      "Insomnia",
+      "Delayed sleep onset beyond 11 PM",
+      "Switch from extended-release to short-acting morning dose"
+     ],
+     [
+      "Growth deceleration",
+      "Dropping height percentiles over 12 months",
+      "Planned drug holidays during summer school vacations"
+     ],
+     [
+      "Emergence of motor tics",
+      "Eye blinking or shoulder shrugging",
+      "Reduce dose or switch to non-stimulant atomoxetine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Atomoxetine** is a non-stimulant medication approved for ADHD that operates as a highly selective inhibitor of the presynaptic noradrenaline transporter (NET). Because atomoxetine does not increase dopamine in the nucleus accumbens, it carries zero potential for substance abuse and represents the preferred agent in adolescents.",
+   "say": "Atomoxetine is a non-stimulant selective noradrenaline reuptake inhibitor. It carries no abuse liability and is ideal for patients with comorbid substance risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Atomoxetine (Non-Stimulant)",
+     "points": [
+      "Selective noradrenaline reuptake block",
+      "Zero abuse potential; unscheduled drug",
+      "Takes 2 to 4 weeks for full therapeutic effect",
+      "Preferred in patients with substance risk or tics"
+     ]
+    },
+    "right": {
+     "title": "Methylphenidate (Stimulant)",
+     "points": [
+      "Dual dopamine and noradrenaline block",
+      "Controlled substance due to abuse liability",
+      "Dramatic immediate therapeutic effect on day one",
+      "Higher incidence of appetite suppression"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Behavioral classroom and parenting strategies** form an indispensable component of multimodal ADHD treatment, utilizing positive reinforcement, token economies, and structured visual organizers. Breaking complex assignments into small timed segments, sitting close to the teacher, and providing immediate feedback dramatically bolsters academic focus and social engagement alongside pharmacological stabilization.",
+   "say": "Parenting training and classroom accommodations like token economies and structured routines provide essential non-pharmacological support in ADHD.",
+   "vis": {
+    "kind": "flow",
+    "title": "Classroom Accommodation Plan",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Preferential seating: front row adjacent to teacher, away from windows"
+     },
+     {
+      "id": "n2",
+      "label": "Chunking: break lengthy assignments into distinct 10-minute tasks"
+     },
+     {
+      "id": "n3",
+      "label": "Token economy: immediate tangible rewards for completed tasks"
+     },
+     {
+      "id": "n4",
+      "label": "Daily behavioral report card communicating between school and home"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
