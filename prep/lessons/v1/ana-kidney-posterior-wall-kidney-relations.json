@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-kidney-posterior-wall",
+ "subject": "anatomy",
+ "title": "Kidney Relations, Renal Fascia, Hilum, and Vascular Segments",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The kidneys are retroperitoneal parenchymal organs situated in the posterior abdominal wall extending from vertebral levels T12 to L3. Because of the bulk of the right lobe of the liver, the **right kidney** lies approximately half an inch lower than the left kidney. Each kidney moves downward by about one inch during normal respiratory excursions.",
+   "say": "Situated retroperitoneally between T12 and L3, each kidney rests along the posterior abdominal wall. The right kidney lies approximately half an inch lower than the left due to the liver.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-kidney-gross.webp",
+    "alt": "Gross anatomical dissection of human kidney showing cortical and medullary architecture",
+    "caption": "Gross parenchymal anatomy showing renal cortex, medullary pyramids, and pelvicalyceal collecting system. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The anterior relations differ markedly between the two kidneys due to asymmetrical visceral development. The anterior surface of the right kidney relates directly to the right suprarenal gland, liver, second part of duodenum, and hepatic flexure. Conversely, the **left kidney** relates anteriorly to the left suprarenal gland, spleen, stomach, body of pancreas, splenic flexure, and jejunal loops.",
+   "say": "Anterior visceral contacts diverge between sides. The right kidney borders the liver, duodenum, and hepatic flexure, while the left abuts the stomach, spleen, pancreas, and descending colon.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right Kidney Anterior Relations",
+     "points": [
+      "Superior pole: Right suprarenal gland",
+      "Upper anterior: Right lobe of liver (peritoneal)",
+      "Medial border: Second part of duodenum (non-peritoneal)",
+      "Inferior pole: Hepatic flexure of colon and ileum"
+     ]
+    },
+    "right": {
+     "title": "Left Kidney Anterior Relations",
+     "points": [
+      "Superior pole: Left suprarenal gland",
+      "Upper anterior: Stomach and spleen (peritoneal)",
+      "Middle horizontal strip: Body of pancreas and splenic vessels",
+      "Inferior pole: Splenic flexure and jejunum"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Posteriorly, relations are nearly identical on both sides, providing a stable anatomical bed. Four muscular surfaces support the posterior renal parenchyma: the diaphragm superiorly, followed inferiorly from medial to lateral by psoas major, **quadratus lumborum**, and the aponeurosis of transversus abdominis. Three nerves cross obliquely: subcostal, iliohypogastric, and ilioinguinal nerves.",
+   "say": "Posteriorly, four muscles form the renal bed: diaphragm superiorly, flanked inferiorly by psoas major, quadratus lumborum, and transversus abdominis. Subcostal and lumbar nerves cross this bed obliquely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Posterior Structure",
+     "Position",
+     "Surgical Clinical Note"
+    ],
+    "rows": [
+     [
+      "Diaphragm",
+      "Upper third",
+      "Separates kidney from 11th and 12th ribs and costodiaphragmatic recess"
+     ],
+     [
+      "Psoas major",
+      "Lower medial third",
+      "Covered by psoas fascia; femoral nerve runs lateral to it"
+     ],
+     [
+      "Quadratus lumborum",
+      "Lower middle third",
+      "Crossed by subcostal vessels and nerve, iliohypogastric, and ilioinguinal"
+     ],
+     [
+      "Transversus abdominis",
+      "Lower lateral third",
+      "Aponeurotic origin forming the lateral posterior relation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The renal parenchyma is encased in distinct concentric protective capsules. Proceeding from internal to external, the kidney is invested by the true fibrous capsule, the perirenal fat, the fibroelastic **renal fascia** of Gerota, and the pararenal fat. Gerota fascia fuses superiorly above the suprarenal gland and laterally, but remains open inferiorly around the ureter.",
+   "say": "Four surrounding layers envelop each kidney from inside out: fibrous capsule, perirenal fat, Gerota fascia, and pararenal fat. Gerota fascia remains open inferiorly around the exiting ureter.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "True Fibrous Capsule (Smooth, strips easily in health)"
+     },
+     {
+      "id": "c2",
+      "label": "Perirenal Fat (Adipose capsule thickest at margins)"
+     },
+     {
+      "id": "c3",
+      "label": "Renal Fascia of Gerota (Anterior and posterior lamellae)"
+     },
+     {
+      "id": "c4",
+      "label": "Pararenal Fat (Retroperitoneal fat behind posterior layer)"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "At the medial concave margin lies the vertical slit-like renal hilum that transmits vital conduits between the retroperitoneum and the renal sinus. From anterior to posterior, the primary hilum structures follow the classic anatomical arrangement: **renal vein** lies most anteriorly, followed by the renal artery in the middle, and the renal pelvis posteriorly.",
+   "say": "At the renal hilum, three structures enter in a precise anteroposterior sequence: renal vein anteriorly, renal artery in the middle, and renal pelvis most posteriorly.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "h1",
+      "label": "Anterior: Renal Vein (Receives left gonadal and suprarenal on left)"
+     },
+     {
+      "id": "h2",
+      "label": "Middle: Renal Artery (Divides into segmental branches)"
+     },
+     {
+      "id": "h3",
+      "label": "Posterior: Renal Pelvis (Funnel continuation into ureter)"
+     }
+    ],
+    "edges": [
+     [
+      "h1",
+      "h2"
+     ],
+     [
+      "h2",
+      "h3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The renal artery divides at or near the hilum into five anatomical vascular branches that supply distinct parenchymal territories. These segmental arteries are true physiological **end arteries**, lacking functional parenchymal anastomoses. Occlusion of any segmental branch inevitably precipitates wedge-shaped ischemic infarction of the corresponding sector of renal cortex and medulla.",
+   "say": "Five segmental arteries originate from the main renal artery to supply distinct vascular zones. Because these branches are end arteries, occlusion causes irreversible wedge-shaped parenchymal infarction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vascular Segment",
+     "Arterial Branch Origin",
+     "Territory Supplied"
+    ],
+    "rows": [
+     [
+      "Apical segment",
+      "Anterior division of renal artery",
+      "Superior renal pole and upper medial aspect"
+     ],
+     [
+      "Anterior superior segment",
+      "Anterior division of renal artery",
+      "Upper middle anterior cortex and medulla"
+     ],
+     [
+      "Anterior inferior segment",
+      "Anterior division of renal artery",
+      "Lower middle anterior cortex and medulla"
+     ],
+     [
+      "Inferior segment",
+      "Anterior division of renal artery",
+      "Entire inferior pole crossing anterior to posterior"
+     ],
+     [
+      "Posterior segment",
+      "Posterior division of renal artery",
+      "Middle posterior parenchyma between apical and inferior"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The boundary between the anterior and posterior vascular territories lies approximately one centimetre posterior to the lateral convex border of the kidney. This relatively avascular plane is designated the line of **Brodel line**, which surgeons exploit during nephrolithotomy to incise the renal parenchyma while minimising arterial haemorrhage and collateral tissue injury.",
+   "say": "Brodel line represents an avascular plane situated one centimetre behind the lateral convex border. Surgeons incise along this line to access the collecting system with minimal bleeding.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior Vascular Division",
+     "points": [
+      "Supplies apical, anterior superior, anterior inferior, inferior segments",
+      "Covers approximately 75 percent of renal parenchymal volume",
+      "Supplied by anterior division off main renal trunk"
+     ]
+    },
+    "right": {
+     "title": "Posterior Vascular Division",
+     "points": [
+      "Supplies solitary posterior segment",
+      "Crosses over the posterior aspect of renal pelvis",
+      "Leaves Brodel avascular line along posterolateral convexity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pathological enlargement of the renal parenchyma can distort surrounding neurovascular relationships. In adult polycystic kidney disease, bilateral cystic transformation displaces the ascending and descending colon anteriorly and stretches the renal capsule. Clinically, a palpable **renal mass** is distinguished from splenomegaly by its retroperitoneal ballotability and absence of an anterior splenic notch.",
+   "say": "Massive parenchymal enlargement from polycystic change or tumour displaces the colon anteriorly. A renal mass is bimanually ballotable, distinguishing it from anterior intraperitoneal structures like the spleen.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-polycystic-kidney-disease.webp",
+    "alt": "Pathological specimen of enlarged kidney distorted by multiple cortical and medullary cysts",
+    "caption": "Polycystic renal transformation demonstrating marked parenchymal expansion and distortion of normal segmental architecture. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "340174cc-3595-44a7-a0f2-48964faa52aa",
+  "5e4aa628-9fc2-460e-b964-0e9a7c67df35",
+  "b9bbc96f-7781-497a-8d03-4b3d54d2f811"
+ ]
+}

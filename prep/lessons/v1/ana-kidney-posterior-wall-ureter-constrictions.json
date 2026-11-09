@@ -1,0 +1,221 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-kidney-posterior-wall",
+ "subject": "anatomy",
+ "title": "Ureter Anatomy, Anatomical Constrictions, and Retroperitoneal Vessels",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The ureters are paired muscular conduits approximately twenty-five centimetres in length that transport urine from the renal pelves to the urinary bladder. Each **ureter** descends along the anterior surface of the psoas major muscle, embedded within the retroperitoneal subserous fascia. It is crossed anteriorly by the gonadal vessels before reaching the pelvic brim.",
+   "say": "Measuring twenty-five centimetres, each ureter descends retroperitoneally over psoas major. The gonadal vessels cross anterior to it before the ureter traverses the pelvic brim.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ureteric Segment",
+     "Length",
+     "Anterior Relations"
+    ],
+    "rows": [
+     [
+      "Abdominal segment",
+      "12.5 cm",
+      "Duodenum (right), right colic vessels, root of mesentery; left colic vessels, sigmoid mesocolon (left)"
+     ],
+     [
+      "Pelvic segment",
+      "12.5 cm",
+      "Internal iliac vessels, obliterated umbilical artery, obturator nerve and vessels, uterine artery (female) or vas deferens (male)"
+     ],
+     [
+      "Intramural segment",
+      "1.5 to 2.0 cm",
+      "Runs obliquely through muscular bladder wall, forming physiological flap valve"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Along its anatomical course, the ureter exhibits three physiological narrowings where renal calculi characteristically lodge. The first site is the pelviureteric junction, the second is where the ureter crosses the external or common **iliac vessels** at the pelvic brim, and the third and narrowest site is the intramural entry through the bladder wall.",
+   "say": "Three normal narrowings impede stone passage: the pelviureteric junction, the pelvic brim crossing over the iliac vessels, and the intramural passage into the bladder.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "u1",
+      "label": "First Constriction: Pelviureteric Junction (PUJ at L1-L2 level)"
+     },
+     {
+      "id": "u2",
+      "label": "Second Constriction: Pelvic Brim (Crossing bifurcation of common iliac)"
+     },
+     {
+      "id": "u3",
+      "label": "Third Constriction: Ureterovesical Junction (Intramural tunnel, narrowest point)"
+     }
+    ],
+    "edges": [
+     [
+      "u1",
+      "u2"
+     ],
+     [
+      "u2",
+      "u3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The blood supply of the ureter is segmental, derived from adjacent arteries that anastomose along its adventitial sheath. Arteries approaching the abdominal ureter originate medially from the aorta and renal artery, whereas arteries approaching the pelvic ureter originate laterally from the **internal iliac** and vesical branches. Surgeons preserve this adventitial plexus by retracting the ureter medially.",
+   "say": "Segmental arterial branches form an adventitial plexus along the ureter, supplied medially in the abdomen and laterally in the pelvis. Surgical mobilisation must preserve this delicate sheath.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-internal-iliac-artery-ligation.webp",
+    "alt": "Surgical view of internal iliac artery and retroperitoneal pelvic dissection near the ureter",
+    "caption": "Surgical relations of the retroperitoneal pelvic vessels and adjacent ureteric crossing. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Perched on the superior pole of each kidney within Gerota fascia lies the suprarenal gland. The right gland is pyramidal, while the left is semilunar and larger. Each **suprarenal gland** receives rich arterial supply from three distinct sources: superior suprarenal arteries from the inferior phrenic, middle suprarenal directly from the aorta, and inferior suprarenal from the renal artery.",
+   "say": "Capping each kidney, the suprarenal glands receive arterial inflow from three vessels: inferior phrenic, aorta, and renal artery. Venous drainage converges on a single central suprarenal vein.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vessel",
+     "Right Suprarenal Gland",
+     "Left Suprarenal Gland"
+    ],
+    "rows": [
+     [
+      "Superior artery",
+      "Branch of right inferior phrenic artery",
+      "Branch of left inferior phrenic artery"
+     ],
+     [
+      "Middle artery",
+      "Direct branch from abdominal aorta",
+      "Direct branch from abdominal aorta"
+     ],
+     [
+      "Inferior artery",
+      "Branch of right renal artery",
+      "Branch of left renal artery"
+     ],
+     [
+      "Venous drainage",
+      "Short right suprarenal vein drains directly into IVC",
+      "Longer left suprarenal vein joins left inferior phrenic to enter left renal vein"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The abdominal aorta enters the abdomen through the aortic hiatus of the diaphragm at the level of T12, descending anterior to the vertebral bodies until bifurcating at L4. Its **ventral branches** arise as single vessels that supply the gut: coeliac trunk at T12, superior mesenteric artery at L1, and inferior mesenteric artery at L3.",
+   "say": "Descending from T12 to L4, the abdominal aorta gives off three midline ventral branches to the digestive tube: coeliac trunk, superior mesenteric artery, and inferior mesenteric artery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ao1",
+      "label": "Coeliac Trunk (T12 level: Foregut supply via hepatic, splenic, left gastric)"
+     },
+     {
+      "id": "ao2",
+      "label": "Superior Mesenteric Artery (L1 level: Midgut supply to distal transverse colon)"
+     },
+     {
+      "id": "ao3",
+      "label": "Inferior Mesenteric Artery (L3 level: Hindgut supply to proximal rectum)"
+     }
+    ],
+    "edges": [
+     [
+      "ao1",
+      "ao2"
+     ],
+     [
+      "ao2",
+      "ao3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lateral and dorsal aortic branches supply paired retroperitoneal viscera and musculoskeletal parietes. The lateral paired visceral branches comprise the middle suprarenal, renal, and gonadal arteries. Dorsal parietal branches include four pairs of **lumbar arteries** that pass behind the psoas muscle and sympathetic trunk, supplying the posterior abdominal wall and spinal canal.",
+   "say": "Paired lateral aortic branches feed the suprarenals, kidneys, and gonads. Dorsal branches include four pairs of lumbar arteries coursing behind psoas to supply the musculature and spine.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lateral Paired Visceral Branches",
+     "points": [
+      "Middle suprarenal arteries (L1 level)",
+      "Renal arteries (L1-L2, right longer than left)",
+      "Testicular or ovarian arteries (L2 level)",
+      "All supply retroperitoneal urogenital structures"
+     ]
+    },
+    "right": {
+     "title": "Parietal Branches of Aorta",
+     "points": [
+      "Inferior phrenic arteries (T12, diaphragmatic undersurface)",
+      "Four pairs of lumbar arteries (L1-L4 segmental)",
+      "Median sacral artery (unpaired branch at bifurcation)",
+      "Supply muscular walls, vertebrae, and cauda equina"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The inferior vena cava is formed at vertebral level L5 by the confluence of the common iliac veins behind the right common iliac artery. Ascending on the right side of the aorta, the **inferior vena cava** pierces the central tendon of the diaphragm at T8. It receives the lumbar, renal, right gonadal, right suprarenal, and hepatic veins.",
+   "say": "Formed at L5, the inferior vena cava ascends along the right of the aorta to pierce the diaphragm at T8. It collects systemic venous blood from the lower limbs and retroperitoneum.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vein",
+     "Right Side Drainage Destination",
+     "Left Side Drainage Destination"
+    ],
+    "rows": [
+     [
+      "Common iliac vein",
+      "Joins left common iliac to form IVC at L5",
+      "Passes behind right common iliac artery to join IVC"
+     ],
+     [
+      "Gonadal vein",
+      "Drains directly into anterolateral wall of IVC",
+      "Drains into left renal vein at perpendicular right angle"
+     ],
+     [
+      "Suprarenal vein",
+      "Drains directly into posterior wall of IVC",
+      "Drains into left renal vein alongside inferior phrenic"
+     ],
+     [
+      "Renal vein",
+      "Short vein (2.5 cm) entering IVC directly",
+      "Long vein (7.5 cm) crossing anterior to aorta below SMA"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Congenital anomalies of the urogenital axis frequently arise from aberrant embryological migration and vascular persistence. A classic example is the **horseshoe kidney**, wherein the lower poles of the metanephros fuse across the midline. During cephalic ascent from the pelvis, the fused parenchymal isthmus is arrested by the origin of the inferior mesenteric artery at level L3.",
+   "say": "Horseshoe kidney occurs when the lower metanephric poles fuse across the midline. Cranial migration is arrested at L3 where the renal isthmus impinges against the inferior mesenteric artery.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-renal-anomalies.svg",
+    "alt": "Anatomical diagram of congenital renal anomalies showing horseshoe kidney arrested below inferior mesenteric artery",
+    "caption": "Embryological ascent of horseshoe kidney arrested at L3 by the inferior mesenteric artery origin. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "15d7433c-5675-4896-b6db-dfa9e3d426ab",
+  "3c3f134f-854d-4769-9d64-7580db7c4836",
+  "cc0c7f6c-bd08-4b35-be16-d6666a75156a"
+ ]
+}

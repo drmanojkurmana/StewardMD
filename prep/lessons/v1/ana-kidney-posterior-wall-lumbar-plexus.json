@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-kidney-posterior-wall",
+ "subject": "anatomy",
+ "title": "Posterior Abdominal Wall: Psoas Major, Quadratus Lumborum, and Lumbar Plexus",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The posterior abdominal wall is an osteomuscular framework bounded by the lumbar vertebrae, iliac crests, and lower ribs. The powerful **psoas major** originates from the transverse processes, intervertebral discs, and margins of vertebral bodies from T12 to L5. It courses inferolaterally beneath the inguinal ligament to insert into the lesser trochanter of the femur.",
+   "say": "Originating from T12 to L5 vertebrae, psoas major passes beneath the inguinal ligament to insert into the femoral lesser trochanter. It acts as the premier flexor of the hip.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-lumbar-plexus.svg",
+    "alt": "Diagram of posterior abdominal wall muscles showing psoas major, quadratus lumborum, and lumbar plexus roots",
+    "caption": "Anatomy of the lumbar plexus branches forming within and emerging around psoas major. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Psoas major is enveloped by the unyielding psoas fascia, which attaches medially to the lumbar vertebral bodies and superiorly thickens to form the medial arcuate ligament. Tuberculous spondylitis of the thoracolumbar spine can track along this fascial envelope, presenting as a cold **psoas abscess** that gravitates downward beneath the inguinal ligament into the femoral triangle.",
+   "say": "The dense psoas fascia forms the medial arcuate ligament superiorly. Tuberculous infection tracking within this sheath produces a dependent psoas abscess presenting in the groin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Thoracolumbar Spine Infection (Tuberculous osteomyelitis of T12-L2 bodies)"
+     },
+     {
+      "id": "t2",
+      "label": "Subfascial Tracking (Pus confined beneath impermeable psoas fascia)"
+     },
+     {
+      "id": "t3",
+      "label": "Femoral Triangle Bulge (Emerges lateral to femoral vessels below inguinal ligament)"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lateral to psoas major lies the quadratus lumborum, a quadrate muscular sheet extending from the iliolumbar ligament and posterior iliac crest to the twelfth rib and upper lumbar transverse processes. The superior border of **quadratus lumborum** is arched by the lateral arcuate ligament. It fixes the twelfth rib during respiration and laterally flexes the vertebral column.",
+   "say": "Quadratus lumborum bridges the iliac crest and the twelfth rib, arched superiorly by the lateral arcuate ligament. It stabilises the twelfth rib during forced expiration.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Psoas Major",
+     "points": [
+      "Arched by medial arcuate ligament",
+      "Inserts onto lesser trochanter of femur",
+      "Primary powerful flexor of hip joint",
+      "Houses the roots and trunks of lumbar plexus"
+     ]
+    },
+    "right": {
+     "title": "Quadratus Lumborum",
+     "points": [
+      "Arched by lateral arcuate ligament",
+      "Inserts onto lower border of twelfth rib",
+      "Fixes twelfth rib and produces lateral trunk flexion",
+      "Covered by anterior layer of thoracolumbar fascia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The lumbar plexus is formed within the muscular substance of psoas major by the anterior primary rami of spinal nerves L1, L2, L3, and part of L4. An accessory contribution frequently arises from the T12 subcostal nerve. The emerging branches of the **lumbar plexus** exit the borders of psoas major to innervate the lower abdominal wall and thigh.",
+   "say": "Within the substance of psoas major, ventral rami of L1 through L4 assemble into the lumbar plexus. Branches distribute to the lower abdominal wall and lower limb.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Psoas Border Emergence",
+     "Lumbar Plexus Branches",
+     "Spinal Roots"
+    ],
+    "rows": [
+     [
+      "Lateral border (superior to inferior)",
+      "Iliohypogastric, ilioinguinal, lateral cutaneous of thigh, femoral",
+      "L1, L1, L2-L3, L2-L4"
+     ],
+     [
+      "Anterior surface",
+      "Genitofemoral nerve",
+      "L1-L2"
+     ],
+     [
+      "Medial border",
+      "Obturator nerve, accessory obturator (when present), lumbosacral trunk",
+      "L2-L4, L3-L4, L4-L5"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "From the lateral border of psoas major, the iliohypogastric and ilioinguinal nerves derive from the L1 root, crossing the anterior surface of quadratus lumborum. The **femoral nerve** (posterior divisions of L2, L3, L4) emerges lower along the lateral border, descending in the groove between psoas and iliacus to pass beneath the inguinal ligament lateral to the femoral sheath.",
+   "say": "Arising from L2 through L4, the femoral nerve emerges along the lateral margin of psoas major. It descends between psoas and iliacus to innervate the anterior thigh compartment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "L2, L3, L4 Posterior Divisions (Assemble within psoas major substance)"
+     },
+     {
+      "id": "f2",
+      "label": "Groove Between Psoas and Iliacus (Supplies iliacus muscle directly)"
+     },
+     {
+      "id": "f3",
+      "label": "Subinguinal Space (Enters thigh lateral to femoral artery, outside femoral sheath)"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2"
+     ],
+     [
+      "f2",
+      "f3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Emerging from the medial border of psoas major, the obturator nerve (anterior divisions of L2, L3, L4) crosses the pelvic brim to enter the obturator canal, supplying the adductor muscles. Piercing the anterior surface of psoas is the **genitofemoral nerve** (L1, L2), which divides into a genital branch supplying the cremaster and a femoral branch supplying subinguinal skin.",
+   "say": "The obturator nerve emerges from the medial border of psoas to supply the adductors. The genitofemoral nerve pierces the anterior psoas belly to distribute genital and femoral twigs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Obturator Nerve (L2, L3, L4 anterior)",
+     "points": [
+      "Exits medial border of psoas behind common iliac",
+      "Runs along lateral pelvic wall above obturator vessels",
+      "Traverses obturator canal to enter medial thigh",
+      "Supplies adductor longus, brevis, magnus, and gracilis"
+     ]
+    },
+    "right": {
+     "title": "Genitofemoral Nerve (L1, L2)",
+     "points": [
+      "Pierces anterior belly of psoas major at L3-L4",
+      "Genital branch enters inguinal canal through deep ring",
+      "Femoral branch enters femoral sheath anterior to artery",
+      "Mediates the motor limb of cremasteric reflex"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Lying on the bodies of the first and second lumbar vertebrae, immediately to the right of the abdominal aorta, is the **cisterna chyli**. This dilated lymphatic sac receives the bilateral lumbar lymphatic trunks and intestinal trunk. Superiorly, it tapers to continue through the aortic hiatus of the diaphragm as the thoracic duct, transporting absorbed dietary chylomicrons into systemic circulation.",
+   "say": "Resting over the upper lumbar bodies, the cisterna chyli collects lymph from the lower extremities, pelvis, and intestines. It continues superiorly through the diaphragm as the thoracic duct.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "l1",
+      "label": "Right and Left Lumbar Trunks (Lower limbs, pelvic viscera, kidneys)"
+     },
+     {
+      "id": "l2",
+      "label": "Intestinal Lymph Trunk (Chyle from mesenteric lymphatics)"
+     },
+     {
+      "id": "l3",
+      "label": "Cisterna Chyli (Confluent retroperitoneal sac at L1-L2)"
+     },
+     {
+      "id": "l4",
+      "label": "Thoracic Duct (Ascends through aortic hiatus into posterior mediastinum)"
+     }
+    ],
+    "edges": [
+     [
+      "l1",
+      "l3"
+     ],
+     [
+      "l2",
+      "l3"
+     ],
+     [
+      "l3",
+      "l4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On plain radiographs of the abdomen, the retroperitoneal soft-tissue fat planes outline the divergent lateral margins of the psoas major muscles. Loss of a crisp **psoas shadow** on an abdominal film indicates retroperitoneal inflammation, haematoma, or perinephric abscess that obliterates the normal contrast interface between retroperitoneal adipose tissue and muscle.",
+   "say": "Normal retroperitoneal fat outlines the sharp margins of the psoas muscles on plain abdominal radiographs. Blurring or obliteration of this contour signals retroperitoneal fluid or inflammation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-xray-abdomen.webp",
+    "alt": "Abdominal plain radiograph demonstrating lumbar spine, pelvic bones, and soft tissue shadow contours",
+    "caption": "Radiographic view of posterior abdominal wall structures showing lumbar vertebral alignments and pelvic landmarks. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "24960699-8e63-4089-8389-6124b9a4fe0d",
+  "274b0ef1-d5de-4d8b-ae5e-e2c9d8788ecd",
+  "2ed98e39-4dc4-441d-9f38-97d9f518744b"
+ ]
+}

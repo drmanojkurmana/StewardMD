@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-pelvis-perineum",
+ "subject": "anatomy",
+ "title": "Bony Pelvis, Pelvic Diameters, Levator Ani, and the Perineal Body",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The bony pelvis is a rigid ring formed by four bones: two hip bones anterolaterally, and the sacrum and coccyx posteriorly. It is divided by the pelvic brim (iliopectineal line) into the greater false pelvis superiorly and the **lesser pelvis** (true pelvis) inferiorly. The true pelvis contains the pelvic viscera, pelvic floor, and the bony birth canal.",
+   "say": "Formed by the two innominate bones, sacrum, and coccyx, the bony pelvis divides at the pelvic brim into false and true cavities. The true pelvis accommodates the viscera and birth canal.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-mod-maternal-pelvis.webp",
+    "alt": "Anatomical demonstration model of female maternal bony pelvis showing inlet, cavity, and subpubic arch",
+    "caption": "Maternal bony pelvis architecture highlighting the pelvic brim, sacral promontory, and subpubic arch. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Obstetric pelvic diameters determine cephalopelvic engagement and fetal transit during parturition. At the pelvic inlet, the **obstetric conjugate** extends from the sacral promontory to the posterior midpoint of the pubic symphysis, measuring eleven centimetres. It cannot be measured clinically; instead, the diagonal conjugate (12.5 cm) is palpated vaginally from the lower symphyseal border.",
+   "say": "The obstetric conjugate measures eleven centimetres from the sacral promontory to the posterior symphysis pubis. Clinicians estimate it by subtracting 1.5 centimetres from the palpable diagonal conjugate.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Inlet Plane Diameter",
+     "Anatomical Landmarks",
+     "Normal Dimension"
+    ],
+    "rows": [
+     [
+      "True conjugate (anatomical)",
+      "Sacral promontory to upper border of pubic symphysis",
+      "11.0 cm"
+     ],
+     [
+      "Obstetric conjugate",
+      "Sacral promontory to most bulging posterior symphysis point",
+      "10.5 to 11.0 cm (fixed narrowest inlet AP)"
+     ],
+     [
+      "Diagonal conjugate",
+      "Sacral promontory to lower border of pubic symphysis",
+      "12.0 to 12.5 cm (clinically measurable)"
+     ],
+     [
+      "Transverse diameter",
+      "Widest distance between arcuate lines on each side",
+      "13.0 to 13.5 cm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "At the plane of least pelvic dimensions (midpelvis), the anteroposterior diameter measures eleven centimetres, while the **transverse diameter** between the ischial spines (interspinous diameter) measures ten centimetres. Because this represents the narrowest dimension of the entire birth canal, an interspinous diameter under 9.5 centimetres risks persistent occiput posterior arrest.",
+   "say": "The interspinous diameter spans ten centimetres between the ischial spines in the midpelvis. Representing the narrowest plane in the birth canal, it governs internal rotation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pelvic Midcavity Plane",
+     "points": [
+      "Bounded by S2-S3 junction and mid-symphysis pubis",
+      "Interspinous diameter measures exactly 10.0 cm",
+      "Ischial spines serve as station zero landmark",
+      "Fetal head undergoes internal rotation here"
+     ]
+    },
+    "right": {
+     "title": "Pelvic Outlet Plane",
+     "points": [
+      "Bounded by tip of coccyx, ischial tuberosities, lower pubis",
+      "Anteroposterior diameter measures 13.0 cm during nutation",
+      "Intertuberous diameter measures 11.0 cm",
+      "Subpubic angle measures 85 to 90 degrees in females"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The muscular pelvic floor is dominated by the pelvic diaphragm, a funnel-shaped sheet that separates the pelvic cavity above from the perineum below. The principal muscle is the **levator ani**, which arises from the body of the pubis, the white line of obturator fascia (tendinous arch), and the ischial spine, inserting centrally into the perineal body and anococcygeal raphe.",
+   "say": "Closing the pelvic outlet, the levator ani forms the funnel-shaped pelvic diaphragm. It arises from the pubis, obturator tendinous arch, and ischial spine to insert along the midline raphe.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "l1",
+      "label": "Puborectalis (Forms U-shaped sling around anorectal junction; maintains 80-degree angle)"
+     },
+     {
+      "id": "l2",
+      "label": "Pubococcygeus (Main intermediate sheet; fibres encircle urethra, vagina, and rectum)"
+     },
+     {
+      "id": "l3",
+      "label": "Iliococcygeus (Posterior thin sheet from tendinous arch to coccyx and anococcygeal body)"
+     }
+    ],
+    "edges": [
+     [
+      "l1",
+      "l2"
+     ],
+     [
+      "l2",
+      "l3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The puborectalis component of levator ani plays a critical role in faecal continence. Arising from the posterior aspect of the pubis, its fibres loop around the lower rectum to form a dynamic muscular sling. Tonic contraction of **puborectalis** pulls the anorectal junction anteriorly toward the pubis, creating an 80-degree anorectal angle that mechanically occludes the lumen.",
+   "say": "Puborectalis forms a dynamic sling around the anorectal junction. Its continuous resting tone creates an acute anorectal angle that prevents inadvertent passage of stool.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Resting State: Puborectalis Sling Tensed (Maintains 80-degree anorectal angle)"
+     },
+     {
+      "id": "p2",
+      "label": "Defaecation: Voluntary Relaxation of Sling (Anorectal angle straightens to 110-120 degrees)"
+     },
+     {
+      "id": "p3",
+      "label": "Stool Evacuation: Unobstructed Axial Propulsion Through Rectal Lumen"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Situated in the midline between the urogenital triangle and the anal triangle lies the **perineal body** (central tendon of the perineum). It is a pyramidal fibromuscular node where ten muscles decussate and insert: superficial and deep transverse perinei, bulbospongiosus, external anal sphincter, levator ani (pubovaginalis/puboprostaticus), and the longitudinal muscle of the rectum.",
+   "say": "Located between the urogenital and anal triangles, the perineal body is a fibromuscular hub. Ten muscles converge on this central tendon to anchor the pelvic viscera.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-perineum-diamond.svg",
+    "alt": "Diamond-shaped anatomical diagram of perineum showing anterior urogenital and posterior anal triangles",
+    "caption": "Anatomical boundaries of the perineum and convergence of musculature upon the central perineal body. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Obstetric laceration or poor episiotomy healing can disrupt the perineal body, compromising pelvic organ suspension. Loss of integrity of the **central tendon** permits widening of the urogenital hiatus and descent of pelvic organs, leading to cystocele, rectocele, and uterine prolapse. Reconstitution of the perineal body is the key objective of perineorrhaphy.",
+   "say": "Disruption of the perineal body during childbirth destabilises the pelvic floor. Unrepaired tears widen the genital hiatus, promoting progressive pelvic organ prolapse.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intact Perineal Body",
+     "points": [
+      "Anchors pelvic diaphragm and urogenital musculature",
+      "Separates lower vagina from anal canal",
+      "Maintains normal forward inclination of lower vagina",
+      "Prevents widening of urogenital hiatus"
+     ]
+    },
+    "right": {
+     "title": "Disrupted Perineal Body",
+     "points": [
+      "Retraction of bulbospongiosus and transverse perinei",
+      "Gaping introitus and lax vaginal introitus",
+      "Posterior vaginal wall descends as a rectocele",
+      "Predisposes to vault or uterine descent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Nerve supply to the pelvic diaphragm is dual and direct. The superior pelvic surface of levator ani is innervated directly by anterior rami of spinal nerves S3 and S4, whereas its inferior perineal surface and the puborectalis receive supply from the **perineal branch** of the pudendal nerve (S2-S4). This dual innervation protects against complete pelvic floor denervation.",
+   "say": "Levator ani enjoys dual innervation: S3 and S4 anterior rami directly on its pelvic face, and the pudendal nerve via its perineal branch on its inferior perineal surface.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pelvic Floor Muscle",
+     "Nerve Supply",
+     "Spinal Segment"
+    ],
+    "rows": [
+     [
+      "Levator ani (pelvic surface)",
+      "Direct branches from sacral plexus",
+      "S3, S4"
+     ],
+     [
+      "Puborectalis",
+      "Perineal branch of pudendal nerve and direct S4",
+      "S2, S3, S4"
+     ],
+     [
+      "Coccygeus (ischiococcygeus)",
+      "Direct branches from sacral plexus",
+      "S4, S5"
+     ],
+     [
+      "External anal sphincter",
+      "Inferior rectal nerve (pudendal)",
+      "S2, S3, S4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "6c664734-a677-4f45-9e20-74e1e71489b1",
+  "7d5685fa-8818-4ba6-8919-e74c319f6582",
+  "80302133-5db0-4baa-ade9-1819b0d94877"
+ ]
+}
