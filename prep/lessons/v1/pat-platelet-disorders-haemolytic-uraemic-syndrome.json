@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "pat-platelet-disorders",
+  "subject": "pathology",
+  "title": "Haemolytic Uraemic Syndrome, Bernard-Soulier, Glanzmann, and von Willebrand Disease",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Haemolytic uraemic syndrome triads microangiopathic haemolysis, thrombocytopenia, and acute kidney injury, classically after Shiga toxin Escherichia coli bloody diarrhoea in children, with complement driven atypical forms behind it. The renal microangiopathy is **haemolytic uraemic syndrome (HUS)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Bloody diarrhoea then pallor, low platelets, and kidney failure in a child spell Shiga toxin HUS.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hemolytic-uremic-syndrome-fig1.webp",
+        "alt": "Haemolytic uraemic syndrome schistocyte blood film",
+        "caption": "Haemolytic uraemic syndrome with schistocytes and microangiopathic haemolysis."
+      }
+    },
+    {
+      "tx": "Separating HUS from TTP decides therapy: HUS is kidney dominant with ADAMTS13 preserved, TTP is brain and systemic dominant with enzyme absent, and atypical complement HUS earns complement blockade. That fork is **HUS versus TTP differentiation by ADAMTS13 and organ pattern**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Kidney first suggests HUS, neurology first suggests TTP; ADAMTS13 adjudicates the borderland.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HUS pattern",
+          "points": [
+            "Kidney injury dominant",
+            "ADAMTS13 above ten percent",
+            "Diarrhoeal or complement driven"
+          ]
+        },
+        "right": {
+          "title": "TTP pattern",
+          "points": [
+            "Neurological and systemic ischaemia",
+            "ADAMTS13 under ten percent",
+            "Plasma exchange emergency"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Bernard-Soulier syndrome deletes the GPIb platelet receptor for von Willebrand factor, so platelets cannot tether to injured vessels, producing giant platelets, thrombocytopenia, and severe mucosal bleeding from childhood. The adhesion defect is **Bernard-Soulier syndrome (GPIb deficiency)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Giant platelets that cannot stick to von Willebrand factor define Bernard-Soulier syndrome.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bernard-soulier-syndrome-fig1.webp",
+        "alt": "Bernard Soulier platelet defect",
+        "caption": "Bernard-Soulier platelet defect with absent GPIb adhesion receptor and giant platelets."
+      }
+    },
+    {
+      "tx": "Glanzmann thrombasthenia removes the GPIIb-IIIa fibrinogen receptor, so platelets aggregate to nothing despite normal count and adhesion, and ristocetin response survives while ADP, collagen, and adrenaline responses vanish. The aggregation defect is **Glanzmann thrombasthenia (GPIIb-IIIa deficiency)**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Normal count, no aggregation except ristocetin: Glanzmann thrombasthenia has lost its fibrinogen bridge.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disease",
+          "Receptor lost",
+          "Aggregometry signature"
+        ],
+        "rows": [
+          [
+            "Bernard-Soulier",
+            "GPIb adhesion receptor",
+            "Ristocetin response absent"
+          ],
+          [
+            "Glanzmann thrombasthenia",
+            "GPIIb-IIIa aggregation receptor",
+            "Only ristocetin response preserved"
+          ],
+          [
+            "von Willebrand disease",
+            "vWF quantity or quality",
+            "Ristocetin cofactor reduced"
+          ],
+          [
+            "Storage pool disease",
+            "Granule release",
+            "Second wave aggregation lost"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Von Willebrand disease, commonest inherited bleeding disorder, reduces platelet adhesion and factor VIII carriage through quantitative type 1 and 3 or qualitative type 2 von Willebrand factor defects. Mucosal bleeding dominates its story: **von Willebrand disease (vWD)**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Von Willebrand disease is the commonest inherited bleeder: nose, gums, periods, and post extraction oozing.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/von-willebrand-disease-fig1.webp",
+        "alt": "Von Willebrand disease overview",
+        "caption": "Von Willebrand disease overview linking adhesion failure to factor VIII carriage."
+      }
+    },
+    {
+      "tx": "Von Willebrand factor levels swing with blood group O lowering them, stress, oestrogen, and inflammation raising them, so borderline results need repeated testing and clinical bleeding scores before labels attach. Variability discipline is **von Willebrand testing interpretation**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Group O runs low and stress runs high; repeat borderline von Willebrand tests before labelling anyone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type patterns",
+          "points": [
+            "Type 1 partial quantity loss, commonest",
+            "Type 2 quality defects, subtypes",
+            "Type 3 near absent, severe, factor VIII low"
+          ]
+        },
+        "right": {
+          "title": "Treatment levers",
+          "points": [
+            "Desmopressin releases stores in type 1",
+            "vWF concentrates for severe or resistant",
+            "Tranexamic acid for mucosal procedures"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Atypical HUS results from complement alternative pathway dysregulation by factor H, I, MCP, or C3 defects and autoantibodies, relapsing after transplant unless complement blockade with eculizumab protects the kidney. The complement disease is **atypical haemolytic uraemic syndrome (aHUS)**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "No diarrhoea, relapsing course, family history: atypical complement HUS earns eculizumab thinking early.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Microangiopathy with kidney dominance"
+          },
+          {
+            "id": "b",
+            "label": "ADAMTS13 preserved, Shiga test sent"
+          },
+          {
+            "id": "c",
+            "label": "Complement studies and genetics"
+          },
+          {
+            "id": "d",
+            "label": "Eculizumab for complement mediated disease"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Supportive care in typical HUS, meticulous fluids, dialysis, transfusion restraint, and avoidance of antimotility drugs and antibiotics controversies in Shiga disease, carries most children to recovery. Kidney support excellence is **supportive care in Shiga toxin HUS**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "In typical childhood HUS, superb fluids and dialysis support beat exotic therapy; avoid platelet transfusion unless bleeding.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Problem",
+          "Support",
+          "Avoid"
+        ],
+        "rows": [
+          [
+            "Acute kidney injury",
+            "Fluids, dialysis when indicated",
+            "Nephrotoxins where possible"
+          ],
+          [
+            "Anaemia",
+            "Red cell transfusion by symptoms",
+            "Platelets unless bleeding or procedure"
+          ],
+          [
+            "Hypertension",
+            "Agents safe in renal failure",
+            "Delayed control worsens outcome"
+          ],
+          [
+            "Neurological signs",
+            "Imaging, seizure care",
+            "Missing TTP overlap assessment"
+          ]
+        ]
+      }
+    }
+  ]
+}

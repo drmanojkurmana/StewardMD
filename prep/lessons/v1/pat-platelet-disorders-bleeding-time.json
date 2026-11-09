@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-platelet-disorders",
+  "subject": "pathology",
+  "title": "Bleeding Time, Platelet Count, Immune Thrombocytopenia, TTP, and ADAMTS13",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Primary haemostasis plugs wounds with platelets within minutes, so its failure bleeds immediately from skin and mucosa with petechiae and prolonged oozing, while coagulation failure bleeds deep and delayed into joints and muscles. Bleeding pattern separates the systems: **mucocutaneous bleeding of platelet disorders**.",
+      "say": "Immediate skin and mucosal bleeding means platelets or von Willebrand; deep delayed bleeding means factors.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Platelet type bleeding",
+          "points": [
+            "Petechiae, purpura, gum and nose bleeds",
+            "Immediate oozing after cuts",
+            "Bleeding time historically prolonged"
+          ]
+        },
+        "right": {
+          "title": "Coagulation type bleeding",
+          "points": [
+            "Haemarthrosis, muscle haematomas",
+            "Delayed post traumatic bleeding",
+            "PT or APTT prolonged by factor loss"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Bleeding time, the minutes for a standardised skin incision to stop, tested platelet number and function plus von Willebrand factor historically, now largely replaced by analyser closure times and specific assays. The retired bedside test is the **bleeding time test**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Bleeding time is retired history; platelet function analysers and specific von Willebrand assays replaced it.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Test",
+          "What it assesses",
+          "Modern status"
+        ],
+        "rows": [
+          [
+            "Bleeding time",
+            "Primary haemostasis in vivo",
+            "Largely abandoned, operator dependent"
+          ],
+          [
+            "Platelet count",
+            "Number only, not function",
+            "Automated, film confirms clumping"
+          ],
+          [
+            "PFA closure time",
+            "Platelet plug under shear",
+            "Screen, aspirin and vWD sensitive"
+          ],
+          [
+            "Aggregometry",
+            " agonist specific function",
+            "Reference platelet function testing"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Platelet count interpretation starts by excluding pseudothrombocytopenia from EDTA clumping on a citrated recount and film, then separates production failure, destruction, sequestration, and dilution by marrow, film, and spleen. Number without mechanism is meaningless: **thrombocytopenia mechanism triage**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Confirm the count is real on film and citrate, then ask production, destruction, sequestration, or dilution.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Low automated platelet count"
+          },
+          {
+            "id": "b",
+            "label": "Film excludes clumping artefact"
+          },
+          {
+            "id": "c",
+            "label": "Marrow, spleen, drug, immune review"
+          },
+          {
+            "id": "d",
+            "label": "Mechanism assigned, therapy targeted"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Immune thrombocytopenic purpura destroys antibody coated platelets in the spleen and suppresses production, leaving isolated thrombocytopenia with large young platelets, normal other lines, and bleeding out of proportion only at low counts. The exclusion diagnosis is **immune thrombocytopenic purpura (ITP)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Isolated low platelets, big young platelets, well patient: ITP after exclusions, marrow usually unnecessary in children.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/immune-thrombocytopenia-fig1.webp",
+        "alt": "Immune thrombocytopenia pathogenesis",
+        "caption": "Immune thrombocytopenia pathogenesis with antibody mediated platelet destruction."
+      }
+    },
+    {
+      "tx": "ITP therapy climbs from observation in asymptomatic children through corticosteroids, intravenous immunoglobulin for rapid rises, rituximab, thrombopoietin receptor agonists, and splenectomy in chronic disease, guided by bleeding not numbers alone. Bleeding guided escalation is **ITP treatment by bleeding phenotype**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Treat bleeding and risk in ITP, not the platelet number waving from the laboratory printout.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Observe",
+          "points": [
+            "No or minor skin bleeding only",
+            "Activity advice, safety netting",
+            "Many children remit spontaneously"
+          ]
+        },
+        "right": {
+          "title": "Treat actively",
+          "points": [
+            "Mucosal or internal bleeding",
+            "Steroids, IVIg for speed",
+            "TPO agonists or rituximab if chronic"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Thrombotic thrombocytopenic purpura consumes platelets into von Willebrand rich microthrombi while red cells shear into schistocytes, producing thrombocytopenia, microangiopathic anaemia, and organ ischaemia that plasma exchange must not wait to treat. The exchange emergency is **thrombotic thrombocytopenic purpura (TTP)**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Schistocytes, low platelets, and organ ischaemia mean TTP; plasma exchange starts on suspicion, not confirmation.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/thrombotic-thrombocytopenic-purpura-fig1.webp",
+        "alt": "Thrombotic thrombocytopenic purpura microangiopathy",
+        "caption": "Thrombotic thrombocytopenic purpura microangiopathy with platelet rich microthrombi."
+      }
+    },
+    {
+      "tx": "ADAMTS13, the protease that trims ultra-large von Willebrand multimers, falls below ten percent in TTP from autoantibody or congenital absence, letting multimers string platelets across microvessels. Severe deficiency defines the mechanism: **ADAMTS13 deficiency in TTP**. That is why this detail earns its place in every examination and ward round.",
+      "say": "ADAMTS13 under ten percent confirms TTP mechanism, but never delay exchange waiting for its result.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "ADAMTS13 absent or antibody blocked"
+          },
+          {
+            "id": "b",
+            "label": "Ultra-large vWF multimers persist"
+          },
+          {
+            "id": "c",
+            "label": "Platelets string into microthrombi"
+          },
+          {
+            "id": "d",
+            "label": "Exchange removes antibody, replaces enzyme"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Caplacizumab blocks von Willebrand platelet binding to halt microthrombosis while immunosuppression clears the autoantibody, and rituximab prevents relapse, completing a triad with plasma exchange in modern TTP care. That combined strategy is **contemporary TTP triple therapy principles**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Exchange, caplacizumab, and immunosuppression attack TTP's enzyme, multimer, and antibody simultaneously.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapy",
+          "Target",
+          "Role"
+        ],
+        "rows": [
+          [
+            "Plasma exchange",
+            "Removes antibody, replaces ADAMTS13",
+            "Immediate, life saving"
+          ],
+          [
+            "Caplacizumab",
+            "Blocks vWF platelet binding",
+            "Stops microthrombosis fast"
+          ],
+          [
+            "Steroids, rituximab",
+            "Autoantibody production",
+            "Remission durability, relapse prevention"
+          ],
+          [
+            "Platelet transfusion",
+            "Generally avoided",
+            "May fuel thrombosis, reserve for bleeding"
+          ]
+        ]
+      }
+    }
+  ]
+}

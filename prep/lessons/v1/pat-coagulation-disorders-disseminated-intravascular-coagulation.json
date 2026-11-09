@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-coagulation-disorders",
+  "subject": "pathology",
+  "title": "Disseminated Intravascular Coagulation, D-Dimer, Vitamin K Deficiency, and Lupus Anticoagulant",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Disseminated intravascular coagulation ignites thrombin everywhere at once from sepsis, trauma, obstetric catastrophe, malignancy, or transfusion disaster, consuming platelets and factors into microthrombi while secondary fibrinolysis bleeds the patient. Consumption with thrombosis defines **disseminated intravascular coagulation (DIC)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "DIC clots and bleeds simultaneously because consumption outruns production; treat the cause or nothing holds.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/dic-fig1.webp",
+        "alt": "Disseminated intravascular coagulation mechanism",
+        "caption": "DIC mechanism with systemic thrombin generation, consumption, and fibrinolysis."
+      }
+    },
+    {
+      "tx": "The laboratory quartet falls and rises in formation: platelets and fibrinogen fall, PT prolongs, and fibrin degradation products including D-dimer soar, scored formally by ISTH criteria beside the clinical trigger. That score is the **ISTH overt DIC scoring system**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Falling platelets and fibrinogen, rising PT and D-dimer beside a trigger: score DIC, do not eyeball it.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "DIC direction",
+          "Points logic"
+        ],
+        "rows": [
+          [
+            "Platelet count",
+            "Falling",
+            "Lower scores worse"
+          ],
+          [
+            "Fibrin marker D-dimer",
+            "Strongly raised",
+            "Moderate and strong rise graded"
+          ],
+          [
+            "PT prolongation",
+            "Seconds beyond control",
+            "Graded by prolongation"
+          ],
+          [
+            "Fibrinogen",
+            "Falling, under 1 g per litre late",
+            "Late marker, acute phase may mask"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "D-dimer, the crosslinked fibrin breakdown signature, excels at exclusion: a negative result in low probability patients dismisses venous thromboembolism and supports DIC scoring, while positive results merely demand interpretation. Its power is negative: **D-dimer as an exclusion test**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Negative D-dimer excludes in low probability patients; positive D-dimer accuses almost everything and proves little alone.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/dic-fig2.webp",
+        "alt": "Disseminated intravascular coagulation laboratory pattern",
+        "caption": "DIC laboratory pattern across platelets, fibrinogen, PT, and fibrin markers."
+      }
+    },
+    {
+      "tx": "Fibrinogen behaves as an acute phase reactant, so early DIC may show normal levels while consumption races, and trends matter more than single values beside falling platelets and lengthening PT. Cryoprecipitate replaces it when bleeding. Trend reading is **fibrinogen trend interpretation in DIC**.",
+      "say": "Normal fibrinogen does not acquit early DIC; watch it fall beside platelets while D-dimer climbs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bleeding DIC phenotype",
+          "points": [
+            "Oozing lines, wounds, mucosa",
+            "Fibrinogen and platelet support",
+            "Treat trigger aggressively"
+          ]
+        },
+        "right": {
+          "title": "Thrombotic DIC phenotype",
+          "points": [
+            "Acral ischaemia, organ failure",
+            "Anticoagulation considered carefully",
+            "Purpura fulminans extreme"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Vitamin K deficiency starves gamma carboxylation of factors II, VII, IX, X and proteins C and S, prolonging PT first through factor VII's short life, in newborns, malabsorption, antibiotics, and warfarin therapy. The carboxylation vitamin is **vitamin K and its dependent factors**.",
+      "say": "PT prolongs first when vitamin K fails because factor VII dies youngest; newborns bleed without their injection.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Vitamin K absent or antagonised"
+          },
+          {
+            "id": "b",
+            "label": "Factors II VII IX X undercarboxylated"
+          },
+          {
+            "id": "c",
+            "label": "PT prolongs before APTT"
+          },
+          {
+            "id": "d",
+            "label": "Vitamin K or PCC reverses by urgency"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Lupus anticoagulant is an antiphospholipid antibody that prolongs phospholipid dependent clotting tests in vitro yet promotes thrombosis and pregnancy morbidity in vivo, diagnosed by screening, mixing, and confirmatory phospholipid excess steps. The paradoxical antibody is the **lupus anticoagulant of antiphospholipid syndrome**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Lupus anticoagulant lengthens the APTT in the tube and shortens the leash on clotting in the patient.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Test step",
+          "Lupus anticoagulant behaviour",
+          "Purpose"
+        ],
+        "rows": [
+          [
+            "Screen, dilute Russell viper time",
+            "Prolonged",
+            "Sensitive detection"
+          ],
+          [
+            "Mixing study",
+            "Fails to correct",
+            "Inhibitor pattern"
+          ],
+          [
+            "Confirm with excess phospholipid",
+            "Shortens toward normal",
+            "Phospholipid dependence proven"
+          ],
+          [
+            "Persistence check",
+            "Positive twelve weeks apart",
+            "Excludes transient infection effect"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Antiphospholipid syndrome clinical criteria demand arterial or venous thrombosis or defined pregnancy morbidity beside persistent antibodies, and catastrophic multiorgan thrombosis within days is its fulminant variant. Classification requires both halves: **antiphospholipid syndrome criteria, clinical plus laboratory**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "One clot plus persistent antibodies classifies antiphospholipid syndrome; catastrophic disease clots everywhere at once.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Thrombotic APS",
+          "points": [
+            "Venous or arterial events",
+            "Warfarin mainstay, DOAC caution in triple positive",
+            "Recurrence prevention lifelong often"
+          ]
+        },
+        "right": {
+          "title": "Obstetric APS",
+          "points": [
+            "Recurrent early loss, fetal death, early preeclampsia",
+            "Aspirin plus heparin in pregnancy",
+            "Live birth rates transformed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "DIC management hierarchy never changes: treat the trigger, support oxygen and perfusion, replace platelets, plasma, and cryoprecipitate for bleeding or procedures rather than numbers, and anticoagulate thrombotic phenotypes selectively. That hierarchy is **DIC management by cause and phenotype**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Cause first, support by phenotype, replace for bleeding not numbers: DIC care in one hierarchy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Identify and treat the trigger"
+          },
+          {
+            "id": "b",
+            "label": "Perfusion, oxygen, source control"
+          },
+          {
+            "id": "c",
+            "label": "Components for bleeding phenotype"
+          },
+          {
+            "id": "d",
+            "label": "Anticoagulation for thrombotic phenotype"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

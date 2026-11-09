@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-coagulation-disorders",
+  "subject": "pathology",
+  "title": "Thrombin Time, Haemophilia A and B, Factor VIII, and Christmas Disease",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Thrombin time adds thrombin directly to plasma and times fibrin formation, isolating fibrinogen quantity and quality plus thrombin inhibitors such as heparin and dabigatran from upstream factor problems. Prolongation narrows thinking to the final step: the **thrombin time test**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Thrombin time skips the cascade and interrogates fibrinogen itself plus any thrombin inhibitor aboard.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Thrombin time prolonged",
+          "points": [
+            "Low or dysfibrinogenaemia",
+            "Heparin or dabigatran present",
+            "Fibrin degradation products excess"
+          ]
+        },
+        "right": {
+          "title": "Thrombin time normal",
+          "points": [
+            "Fibrinogen conversion intact",
+            "Look upstream at factors",
+            "Reptilase time separates heparin effect"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Reptilase, a snake venom enzyme clotting fibrinogen without thrombin and immune to heparin, stays normal when heparin alone prolongs thrombin time, while fibrinogen disorders prolong both tests together. That separation uses the **reptilase time heparin discrimination**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Reptilase ignores heparin; normal reptilase with long thrombin time convicts heparin, not fibrinogen.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Thrombin time",
+          "Reptilase time",
+          "Interpretation"
+        ],
+        "rows": [
+          [
+            "Prolonged",
+            "Normal",
+            "Heparin or dabigatran effect"
+          ],
+          [
+            "Prolonged",
+            "Prolonged",
+            "Fibrinogen low or dysfunctional"
+          ],
+          [
+            "Normal",
+            "Normal",
+            "Final step intact"
+          ],
+          [
+            "Very prolonged",
+            "Prolonged",
+            "Severe hypofibrinogenaemia, DIC consideration"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Haemophilia A, X-linked factor VIII deficiency, bleeds into joints and muscles from childhood, prolongs APTT with normal PT and platelets, and grades severe under one percent factor activity with spontaneous haemarthroses. The commonest severe factor deficiency is **haemophilia A (factor VIII deficiency)**.",
+      "say": "Bleeding joints, long APTT, normal platelets in a boy: haemophilia A until factor assay returns.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/coagulation-disorders-haemophilia-and-dic-fig1.webp",
+        "alt": "Haemophilia and DIC pathophysiology",
+        "caption": "Haemophilia pathophysiology contrasted with DIC consumption coagulopathy."
+      }
+    },
+    {
+      "tx": "Haemophilia B repeats the same bleeding script from factor IX deficiency, eponymously Christmas disease after the first described patient, separated only by specific factor assay and treated with factor IX concentrates. The factor IX twin is **haemophilia B (Christmas disease)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Christmas disease is haemophilia B; only the factor assay separates identical bleeding twins.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Haemophilia A",
+          "points": [
+            "Factor VIII deficient",
+            "Commoner, X-linked",
+            "Emicizumab prophylaxis option"
+          ]
+        },
+        "right": {
+          "title": "Haemophilia B",
+          "points": [
+            "Factor IX deficient",
+            "Christmas disease eponym",
+            "Longer half life concentrates available"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Factor VIII travels protected by von Willebrand factor, so von Willebrand disease lowers VIII secondarily, while haemophilia carriers may bleed after surgery and deserve level testing before procedures. Carrier bleeding recognition is **symptomatic haemophilia carrier assessment**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Carrier mothers can bleed too; check factor levels before surgery instead of assuming X-linked protection.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Severity",
+          "Factor level",
+          "Bleeding pattern"
+        ],
+        "rows": [
+          [
+            "Severe",
+            "Under 1 percent",
+            "Spontaneous joint and muscle bleeds"
+          ],
+          [
+            "Moderate",
+            "1 to 5 percent",
+            "Bleeds after minor trauma"
+          ],
+          [
+            "Mild",
+            "5 to 40 percent",
+            "Surgical and dental bleeding"
+          ],
+          [
+            "Carrier, low level",
+            "Variable, may be under 40 percent",
+            "Procedural risk, test before surgery"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Modern haemophilia care prevents bleeds with regular factor prophylaxis or emicizumab bridging factor VIII function in haemophilia A, reserving on demand treatment for breakthrough bleeds and surgery. Prevention first is **prophylaxis in severe haemophilia**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Prophylaxis prevents the arthropathy our predecessors watched helplessly; emicizumab changed haemophilia A again.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acquired-haemophilia-fig1.webp",
+        "alt": "Acquired hemophilia A pathophysiology",
+        "caption": "Acquired haemophilia A from factor VIII autoantibodies in older adults."
+      }
+    },
+    {
+      "tx": "Inhibitors, alloantibodies neutralising infused factor in severe congenital disease or autoantibodies in acquired haemophilia of the elderly and postpartum, convert manageable deficiency into refractory bleeding needing bypassing agents. Bethesda titres quantify them: **factor VIII inhibitor (Bethesda) assessment**. That is why this detail earns its place in every examination and ward round.",
+      "say": "When factor stops working, measure the Bethesda titre; inhibitors rewrite haemophilia management completely.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Factor recovery poor or bleeding refractory"
+          },
+          {
+            "id": "b",
+            "label": "Mixing study fails incubated correction"
+          },
+          {
+            "id": "c",
+            "label": "Bethesda titre quantifies inhibitor"
+          },
+          {
+            "id": "d",
+            "label": "Bypassing agents, eradication therapy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Gene therapy now delivers durable factor production for eligible adults with haemophilia A and B in some health systems, while extended half life concentrates lengthen prophylaxis intervals for others. Counselling must balance durability unknowns: **gene therapy counselling in haemophilia**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Gene therapy offers years of factor from one infusion; counsel durability and liver monitoring honestly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Established care",
+          "points": [
+            "Factor prophylaxis, emicizumab in A",
+            "Proven joint protection",
+            "Treatment burden ongoing"
+          ]
+        },
+        "right": {
+          "title": "Emerging care",
+          "points": [
+            "Gene therapy single infusion",
+            "Durability still being learned",
+            "Eligibility and liver criteria strict"
+          ]
+        }
+      }
+    }
+  ]
+}

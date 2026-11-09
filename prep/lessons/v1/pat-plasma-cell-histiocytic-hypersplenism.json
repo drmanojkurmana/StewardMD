@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-plasma-cell-histiocytic",
+  "subject": "pathology",
+  "title": "Hypersplenism, Splenomegaly, and Thymoma-Associated Syndromes",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "An enlarged spleen can sequester and destroy blood cells faster than marrow replaces them, producing cytopenias with a cellular compensating marrow and correcting after splenectomy, the physiology behind many portal hypertension counts. That sequestration physiology is **hypersplenism**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Big spleen, low counts, busy marrow: hypersplenism explains cytopenias that splenectomy can correct.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Spleen enlarges from congestion or infiltration"
+          },
+          {
+            "id": "b",
+            "label": "Cells sequestered and destroyed early"
+          },
+          {
+            "id": "c",
+            "label": "Marrow compensates, counts still fall"
+          },
+          {
+            "id": "d",
+            "label": "Treat cause; splenectomy selected cases"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Splenomegaly differential organises by mechanism: congestion from portal hypertension, haemolysis working overtime, infection from malaria to endocarditis, infiltration by leukaemia, lymphoma, myelofibrosis, and storage disease. Massive spleens narrow the list sharply. That mechanism map is **splenomegaly differential by mechanism**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Sort the big spleen by mechanism first; massive splenomegaly leaves only a short list of suspects.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Mechanism",
+          "Examples",
+          "Clue"
+        ],
+        "rows": [
+          [
+            "Congestion",
+            "Cirrhosis, portal or splenic vein thrombosis",
+            "Varices, liver stigmata"
+          ],
+          [
+            "Work hypertrophy",
+            "Chronic haemolysis, malaria",
+            "Haemolysis markers, travel"
+          ],
+          [
+            "Infiltration",
+            "Myelofibrosis, lymphoma, Gaucher disease",
+            "Film, marrow, enzyme clues"
+          ],
+          [
+            "Infection and inflammation",
+            "EBV, endocarditis, sarcoidosis",
+            "Fever pattern, cultures"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Massive splenomegaly crossing the midline or reaching the pelvis belongs chiefly to myelofibrosis, chronic myeloid leukaemia, visceral leishmaniasis, malaria hyperreactivity, and storage diseases, a shortlist examinations adore. The shortlist sign is **massive splenomegaly differential**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "A spleen in the pelvis means myelofibrosis, CML, kala-azar, malaria, or storage disease until proven otherwise.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Massive spleen likely",
+          "points": [
+            "Myelofibrosis, CML",
+            "Kala-azar, hyperreactive malaria",
+            "Gaucher disease"
+          ]
+        },
+        "right": {
+          "title": "Massive spleen unlikely",
+          "points": [
+            "Uncomplicated viral infection",
+            "Immune thrombocytopenia",
+            "Hereditary spherocytosis usually moderate"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Splenic rupture risk, infarct pain, and cytopenias push some hypersplenic patients toward splenectomy or partial embolisation, balanced against lifelong infection risk and thrombotic tendency after removal. Vaccination and fever plans precede elective surgery. That balance is **splenectomy decision making in hypersplenism**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Remove a spleen only with vaccines given, fever plans written, and thrombosis risk honestly weighed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Favours splenectomy",
+          "points": [
+            "Transfusion burden, rupture risk",
+            "Diagnostic uncertainty needing tissue",
+            "Severe symptomatic hypersplenism"
+          ]
+        },
+        "right": {
+          "title": "Favours conservation",
+          "points": [
+            "Mild cytopenias, cause treatable",
+            "Young child, infection risk high",
+            "Portal surgery alternative exists"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Thymoma, the anterior mediastinal tumour of thymic epithelium, associates famously with myasthenia gravis in a third of patients, and also with pure red cell aplasia and hypogammaglobulinaemia of Good syndrome. The autoimmune tumour is **thymoma with paraneoplastic autoimmunity**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "An anterior mediastinal mass plus myasthenia, red cell aplasia, or low immunoglobulins means thymoma biology.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/thymoma-fig1.webp",
+        "alt": "Type B1 thymoma histology",
+        "caption": "Thymoma histology, the anterior mediastinal tumour linked to myasthenia gravis."
+      }
+    },
+    {
+      "tx": "Good syndrome couples thymoma with hypogammaglobulinaemia, low B cells, and opportunistic infections including cytomegalovirus and mucosal candidiasis, requiring immunoglobulin replacement beside tumour surgery. The immunodeficiency is **Good syndrome (thymoma with immunodeficiency)**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Thymoma plus absent immunoglobulins equals Good syndrome; replace immunoglobulin and hunt opportunists.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/good-syndrome-fig1.webp",
+        "alt": "Good syndrome thymoma immunodeficiency",
+        "caption": "Good syndrome linking thymoma to hypogammaglobulinaemia and opportunistic infection."
+      }
+    },
+    {
+      "tx": "Myasthenia gravis in thymoma arises because tumour thymic epithelium mis-educates T cells against acetylcholine receptor bearing tissue, and thymectomy benefits generalised disease even beyond tumour removal. Antibody testing completes the picture: **acetylcholine receptor antibodies in thymoma myasthenia**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Thymoma teaches T cells to attack the neuromuscular junction; thymectomy treats tumour and autoimmunity together.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Association",
+          "Mechanism clue",
+          "Screen"
+        ],
+        "rows": [
+          [
+            "Myasthenia gravis",
+            "Anti-acetylcholine receptor antibodies",
+            "Antibody tests, neurology review"
+          ],
+          [
+            "Pure red cell aplasia",
+            "Erythroid precursor attack",
+            "Reticulocytes, marrow"
+          ],
+          [
+            "Good syndrome",
+            "Hypogammaglobulinaemia, low B cells",
+            "Immunoglobulins, B cell count"
+          ],
+          [
+            "Autoimmune cytopenias",
+            "Broad tolerance failure",
+            "Blood counts, Coombs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Anterior mediastinal masses share the four T differential, thymoma, teratoma, thyroid, and terrible lymphoma, separated by age, markers AFP and beta-hCG, imaging, and biopsy strategy that respects lymphoma protocols. That mnemonic is the **four T anterior mediastinal differential**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Thymoma, teratoma, thyroid, terrible lymphoma: the four Ts organise every anterior mediastinal mass.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Anterior mediastinal mass imaged"
+          },
+          {
+            "id": "b",
+            "label": "Age, AFP, beta-hCG, thyroid review"
+          },
+          {
+            "id": "c",
+            "label": "Biopsy planned with lymphoma in mind"
+          },
+          {
+            "id": "d",
+            "label": "Surgery for thymoma and teratoma patterns"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

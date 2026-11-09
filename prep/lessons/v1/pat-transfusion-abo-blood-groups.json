@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-transfusion",
+  "subject": "pathology",
+  "title": "ABO Groups, Bombay Phenotype, Cross-Matching, Components, TRALI, and TACO",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "ABO antigens are carbohydrate structures on red cells whose absence provokes naturally occurring IgM antibodies against the missing antigen, so group O cells carry neither A nor B while AB plasma suits almost everyone. Landsteiner's rules organise transfusion: the **ABO blood group system**.",
+      "say": "You carry antibodies against the A or B antigens you lack; that single rule runs the blood bank.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Group",
+          "Red cell antigens",
+          "Plasma antibodies",
+          "Transfusion pearl"
+        ],
+        "rows": [
+          [
+            "O",
+            "Neither A nor B",
+            "Anti-A and anti-B",
+            "Universal red cell donor"
+          ],
+          [
+            "A",
+            "A antigen",
+            "Anti-B",
+            "A or O cells"
+          ],
+          [
+            "B",
+            "B antigen",
+            "Anti-A",
+            "B or O cells"
+          ],
+          [
+            "AB",
+            "Both antigens",
+            "Neither antibody",
+            "Universal plasma donor"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bombay phenotype individuals cannot build the H antigen scaffold beneath A and B structures, so they type as O yet carry potent anti-H destroying ordinary O cells, and can receive only Bombay blood. The paradoxical group is **Bombay phenotype (Oh) blood**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Bombay blood types as O but kills O cells with anti-H; only Bombay donors can save these patients.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "True group O",
+          "points": [
+            "H antigen present, A B absent",
+            "Anti-A and anti-B only",
+            "Receives O cells safely"
+          ]
+        },
+        "right": {
+          "title": "Bombay Oh phenotype",
+          "points": [
+            "H antigen absent entirely",
+            "Anti-H plus anti-A and anti-B",
+            "Needs rare Bombay donor blood"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Rh D antigen, a protein rather than carbohydrate, immunises D negative patients after pregnancy or transfusion, causing haemolytic disease of future D positive newborns unless anti-D prophylaxis intervenes. Sensitisation prevention centres on the **Rh D antigen and anti-D prophylaxis**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "D sensitisation happens silently in pregnancy and harms the next baby; anti-D exists to interrupt exactly that.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "D negative mother, D positive fetus"
+          },
+          {
+            "id": "b",
+            "label": "Fetomaternal bleed sensitises silently"
+          },
+          {
+            "id": "c",
+            "label": "Anti-D prophylaxis clears fetal cells"
+          },
+          {
+            "id": "d",
+            "label": "Future newborns protected from haemolysis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Antibody screening hunts unexpected red cell antibodies in recipient plasma against reagent cells by indirect Coombs technique, while cross-matching mixes recipient plasma with actual donor cells as the final compatibility rehearsal. The two safety nets are **antibody screening and serological cross-matching**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Screen finds the antibody, cross-match rehearses the actual unit; electronic issue replaces the rehearsal only under strict rules.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-haemolytic-transfusion-reaction-fig1.webp",
+        "alt": "Acute haemolytic transfusion reaction mechanism",
+        "caption": "Acute haemolytic transfusion reaction, the ABO catastrophe cross-matching exists to prevent."
+      }
+    },
+    {
+      "tx": "Modern transfusion prescribes components, not whole blood: packed red cells for oxygen carriage, fresh frozen plasma for multiple factor deficiency, cryoprecipitate for fibrinogen, and platelet concentrates for thrombocytopenic bleeding. Component thinking is **blood component therapy selection**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Order the missing component, not whole blood: cells, plasma, cryoprecipitate, and platelets each have one job.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Component",
+          "Supplies",
+          "Classic indication"
+        ],
+        "rows": [
+          [
+            "Packed red cells",
+            "Oxygen carriage",
+            "Symptomatic anaemia, bleeding"
+          ],
+          [
+            "Fresh frozen plasma",
+            "All coagulation factors",
+            "DIC, liver coagulopathy, massive transfusion"
+          ],
+          [
+            "Cryoprecipitate",
+            "Fibrinogen, VIII, von Willebrand factor",
+            "Low fibrinogen bleeding"
+          ],
+          [
+            "Platelet concentrate",
+            "Platelet number and function",
+            "Thrombocytopenic bleeding, procedures"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute haemolytic transfusion reaction from ABO incompatibility destroys donor cells intravascularly with fever, flank pain, hypotension, and DIC, most often from human identification error, demanding immediate stop, clerical check, and supportive care. The lethal error reaction is **acute haemolytic transfusion reaction**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Fever and flank pain in the first minutes mean stop the transfusion, keep the line, check the labels, call the bank.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "First minutes protocol",
+          "points": [
+            "Stop transfusion, keep venous access",
+            "Clerical check at bedside",
+            "Return unit, send samples, inform bank"
+          ]
+        },
+        "right": {
+          "title": "Never do",
+          "points": [
+            "Restart a questioned unit",
+            "Discard the bag before investigation",
+            "Delay fluids and DIC support"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "TRALI floods lungs with noncardiogenic oedema within six hours through donor anti-leucocyte antibodies and recipient neutrophil activation, while TACO overloads circulation with hydrostatic oedema in older, cardiac, and rapidly transfused patients. Separating them guides therapy: **TRALI versus TACO after transfusion**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Breathless after transfusion: TRALI leaks, TACO overloads; diuretics help one and harm the other.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/allergic-transfusion-reaction-fig1.webp",
+        "alt": "Allergic transfusion reaction pathophysiology",
+        "caption": "Transfusion reaction mechanisms spanning allergic, haemolytic, and lung injury patterns."
+      }
+    },
+    {
+      "tx": "Massive transfusion balances red cells, plasma, and platelets in near whole blood ratios while chasing calcium, potassium, temperature, and fibrinogen, with leukoreduction and irradiation protecting immunocompromised recipients. That protocol discipline is **massive transfusion and special requirements practice**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Massive transfusion is ratios plus calcium, warmth, and fibrinogen; irradiation and leukoreduction guard special patients.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Special requirement",
+          "Prevents",
+          "For whom"
+        ],
+        "rows": [
+          [
+            "Leukoreduced components",
+            "Febrile reactions, CMV, alloimmunisation",
+            "Most modern inventories routinely"
+          ],
+          [
+            "Irradiated components",
+            "Transfusion associated graft versus host disease",
+            "Immunodeficiency, directed family donations"
+          ],
+          [
+            "Washed cells",
+            "Severe allergic recurrence, IgA deficiency reactions",
+            "Selected reaction histories"
+          ],
+          [
+            "CMV negative",
+            "Cytomegalovirus transmission",
+            "Seronegative pregnant and transplant patients"
+          ]
+        ]
+      }
+    }
+  ]
+}

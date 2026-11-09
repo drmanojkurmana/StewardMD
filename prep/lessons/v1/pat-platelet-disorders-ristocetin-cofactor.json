@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-platelet-disorders",
+  "subject": "pathology",
+  "title": "Ristocetin Cofactor, Heparin-Induced Thrombocytopenia, Henoch-Schonlein Purpura, and Scurvy",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Ristocetin forces von Willebrand factor onto platelet GPIb in vitro, so the cofactor assay measures von Willebrand function: reduced in von Willebrand disease, absent response in Bernard-Soulier, and corrected by normal plasma only in the former. The functional assay is **ristocetin cofactor activity (vWF activity)**.",
+      "say": "Ristocetin cofactor measures whether von Willebrand factor can grip platelets; mixing separates factor lack from receptor lack.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Condition",
+          "Ristocetin response",
+          "Correction by normal plasma"
+        ],
+        "rows": [
+          [
+            "von Willebrand disease",
+            "Reduced aggregation",
+            "Corrects, factor supplied"
+          ],
+          [
+            "Bernard-Soulier syndrome",
+            "Absent aggregation",
+            "No correction, receptor absent"
+          ],
+          [
+            "Normal platelets, aspirin effect",
+            "Reduced secondary responses",
+            "Pattern differs by agonist"
+          ],
+          [
+            "Glanzmann thrombasthenia",
+            "Preserved ristocetin response",
+            "Other agonists absent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Low dose ristocetin induced platelet aggregation that appears only in type 2B von Willebrand disease and platelet type pseudo disease betrays gain of function binding, a paradox where more activity causes platelet loss and bleeding. That hyperresponse defines **type 2B von Willebrand disease testing**.",
+      "say": "Aggregation at low ristocetin dose is too much binding, not health: type 2B or platelet type disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Loss of function",
+          "points": [
+            "Ristocetin cofactor low",
+            "Bleeding from failed adhesion",
+            "Concentrate or desmopressin strategies"
+          ]
+        },
+        "right": {
+          "title": "Gain of function 2B",
+          "points": [
+            "Low dose ristocetin aggregates",
+            "Platelets consumed, thrombocytopenia",
+            "Desmopressin generally avoided"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Heparin induced thrombocytopenia turns an anticoagulant prothrombotic: IgG against platelet factor 4 heparin complexes activates platelets, dropping their count by half while arteries and veins clot, five to fourteen days after exposure. The paradox is **heparin-induced thrombocytopenia (HIT)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Falling platelets plus new clots on heparin means HIT; stop heparin and anticoagulate differently today.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/heparin-induced-thrombocytopenia-fig1.webp",
+        "alt": "Heparin induced thrombocytopenia mechanism and 4Ts",
+        "caption": "Heparin induced thrombocytopenia mechanism with platelet activation and thrombosis."
+      }
+    },
+    {
+      "tx": "The 4Ts score, thrombocytopenia depth, timing, thrombosis, and other causes, triages HIT testing toward PF4 immunoassays and functional serotonin release confirmation, while non-heparin anticoagulants start on moderate suspicion. That pretest discipline is **4Ts scoring in suspected HIT**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Score the 4Ts before testing for HIT; treat on suspicion while functional confirmation travels.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Platelets fall on heparin day 5 to 14"
+          },
+          {
+            "id": "b",
+            "label": "4Ts score calculated"
+          },
+          {
+            "id": "c",
+            "label": "Stop all heparin if intermediate or high"
+          },
+          {
+            "id": "d",
+            "label": "Argatroban or fondaparinux, test PF4"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Henoch-Schonlein purpura, now IgA vasculitis, deposits IgA in small vessels of skin, gut, joints, and kidney, producing palpable purpura over buttocks and legs, colicky pain, arthritis, and haematuria in children. The tetrad disease is **IgA vasculitis (Henoch-Schonlein purpura)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Palpable purpura on buttocks plus gut pain, joints, and haematuria in a child equals IgA vasculitis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/henoch-schonlein-purpura-fig1.webp",
+        "alt": "Henoch-Schonlein purpura tetrad and vasculitis",
+        "caption": "IgA vasculitis tetrad with palpable purpura, arthritis, abdominal pain, and renal disease."
+      }
+    },
+    {
+      "tx": "Platelet counts stay normal in vasculitic purpura because vessels, not platelets, fail, separating IgA vasculitis, scurvy, and amyloid purpura from thrombocytopenic causes at the first blood count. Normal platelets with purpura redirect thinking to **non-thrombocytopenic (vascular) purpura**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Purpura with a normal platelet count is a vessel wall problem; vasculitis, scurvy, and fragility lead the list.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Low platelet purpura",
+          "points": [
+            "ITP, TTP, marrow failure, drugs",
+            "Mucosal bleeding common",
+            "Count and film decide urgently"
+          ]
+        },
+        "right": {
+          "title": "Normal platelet purpura",
+          "points": [
+            "IgA vasculitis, scurvy, senile purpura",
+            "Palpable or perifollicular patterns",
+            "Vessel and support tissue failure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Scurvy starves collagen hydroxylation without vitamin C, so vessels tear perifollicularly, gums haemorrhage, wounds reopen, and anaemia follows bleeding and poor diet in sailors historically and restricted diets today. The collagen vitamin disease returns as **scurvy in modern restricted diets**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Perifollicular haemorrhages, corkscrew hairs, and bleeding gums in a restricted diet still mean scurvy today.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Sign",
+          "Scurvy mechanism",
+          "Look alike"
+        ],
+        "rows": [
+          [
+            "Perifollicular haemorrhage",
+            "Capillary fragility, faulty collagen",
+            "Vasculitis palpable purpura"
+          ],
+          [
+            "Gum haemorrhage",
+            "Only where teeth present",
+            "Thrombocytopenic gum bleeding"
+          ],
+          [
+            "Wound dehiscence",
+            "Failed collagen crosslinking",
+            "Zinc deficiency, steroids"
+          ],
+          [
+            "Anaemia",
+            "Bleeding, folate co-deficiency",
+            "Iron deficiency patterns"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The unifying examination habit reads purpura by palpability, platelet count, distribution, and company it keeps, converting a rash into vasculitis, platelet, or vessel fragility pathways within minutes. That rash algorithm is **purpura pattern recognition at the bedside**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Palpable or flat, count high or low, legs or mucosa: three questions sort purpura before any panel returns.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Palpable purpura suggests vasculitis"
+          },
+          {
+            "id": "b",
+            "label": "Flat purpura checks platelet count"
+          },
+          {
+            "id": "c",
+            "label": "Distribution and systemic signs reviewed"
+          },
+          {
+            "id": "d",
+            "label": "Biopsy, counts, urinalysis targeted"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

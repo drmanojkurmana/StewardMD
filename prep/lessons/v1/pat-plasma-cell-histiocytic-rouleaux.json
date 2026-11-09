@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-plasma-cell-histiocytic",
+  "subject": "pathology",
+  "title": "Rouleaux, Russell Bodies, and Monoclonal Gammopathy",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Red cells normally repel each other through surface negative charge, but excess immunoglobulin or fibrinogen neutralises that charge and stacks cells into coin piles that sediment rapidly and smear across the film. A raised ESR accompanies the stacking. The coin pile formation is **rouleaux formation** in paraproteinaemia and inflammation.",
+      "say": "Coins stacked on film mean paraprotein or fibrinogen has neutralised red cell repulsion; check the ESR and protein gap.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/myeloma-fig1.webp",
+        "alt": "Multiple myeloma pathophysiology",
+        "caption": "Multiple myeloma pathophysiology, the paraprotein state most associated with rouleaux."
+      }
+    },
+    {
+      "tx": "Rouleaux must be separated from true agglutination, where antibody bridges clump cells into irregular grape clusters that resist saline dilution, while rouleaux disperse when plasma is diluted and reform in undisturbed areas of the film. Cold agglutinin disease clumps; paraprotein stacks. The distinction is **rouleaux versus red cell agglutination**.",
+      "say": "Stacks disperse in saline, clumps do not; that bench trick separates rouleaux from cold agglutination.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rouleaux",
+          "points": [
+            "Coin stacks, linear piles",
+            "Disperse with saline dilution",
+            "Paraprotein, high fibrinogen"
+          ]
+        },
+        "right": {
+          "title": "Agglutination",
+          "points": [
+            "Irregular grape like clumps",
+            "Persist after dilution and warming tests differ",
+            "Cold agglutinin, incompatible transfusion"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Plasma cells drowning in their own immunoglobulin pack endoplasmic reticulum into round eosinophilic globules, single or grape like, visible in myeloma marrows and chronic inflammation alike as evidence of secretory overload. The immunoglobulin globule is a **Russell body**, its cell a Mott cell when multiple.",
+      "say": "Russell bodies are immunoglobulin stuffed endoplasmic reticulum; many in one plasma cell make a Mott cell.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Body",
+          "Contents",
+          "Seen in"
+        ],
+        "rows": [
+          [
+            "Russell body",
+            "Immunoglobulin in endoplasmic reticulum",
+            "Myeloma, chronic inflammation"
+          ],
+          [
+            "Dutcher body",
+            "Immunoglobulin overlying nucleus",
+            "Lymphoplasmacytic neoplasms"
+          ],
+          [
+            "Flame cell",
+            "Fiery cytoplasmic edges",
+            "IgA myeloma association"
+          ],
+          [
+            "Mott cell",
+            "Multiple Russell bodies",
+            "Reactive and neoplastic plasma cells"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Monoclonal gammopathy means one clone's immunoglobulin product, ranging from harmless MGUS through smouldering states to myeloma and Waldenstrom disease, stratified by spike size, marrow burden, free light chains, and end organ damage. The umbrella term is **monoclonal gammopathy**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Every monoclonal spike sits on a risk spectrum; size, marrow, light chains, and damage place the patient on it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/myeloma-fig2.webp",
+        "alt": "Multiple myeloma CRAB features",
+        "caption": "CRAB features separating symptomatic myeloma from MGUS and smouldering states."
+      }
+    },
+    {
+      "tx": "Risk stratification of MGUS uses spike size, immunoglobulin class, and free light chain ratio to schedule follow up from annual community review to haematology surveillance, sparing low risk patients decades of anxiety. The model is **MGUS risk stratification by spike, class, and light chain ratio**.",
+      "say": "Small IgG spike, normal light chain ratio: low risk MGUS needs only calm annual watching.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Spike found incidentally"
+          },
+          {
+            "id": "b",
+            "label": "Size, class, light chain ratio measured"
+          },
+          {
+            "id": "c",
+            "label": "Low risk: periodic community review"
+          },
+          {
+            "id": "d",
+            "label": "Higher risk: haematology surveillance"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Monoclonal protein injures beyond myeloma through amyloid deposition, cryoglobulin precipitation in cold, hyperviscosity sludging, and light chain kidney damage, grouped increasingly as monoclonal gammopathy of clinical significance. Damage without tumour burden defines **monoclonal gammopathy of clinical significance (MGCS)**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "A small clone can still wreck kidneys, nerves, and skin; treat the damage mechanism, not just the numbers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tumour burden problem",
+          "points": [
+            "Large spike, marrow replacement",
+            "CRAB features develop",
+            "Anti-myeloma therapy"
+          ]
+        },
+        "right": {
+          "title": "Protein toxicity problem",
+          "points": [
+            "Small clone, toxic product",
+            "Amyloid, cryoglobulin, kidney injury",
+            "Clone directed therapy for organ salvage"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Hyperviscosity from pentameric IgM in Waldenstrom disease or extreme IgG and IgA levels blurs vision with sausage link retinal veins, bleeds mucosa, and confuses mentation until plasma exchange thins the blood. The rheological emergency is **hyperviscosity syndrome**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Blurred vision, mucosal bleeding, and confusion with a big IgM spike mean hyperviscosity; plasma exchange today.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Protein",
+          "Viscosity tendency",
+          "Classic syndrome"
+        ],
+        "rows": [
+          [
+            "IgM pentamer",
+            "Highest per molecule",
+            "Waldenstrom hyperviscosity"
+          ],
+          [
+            "IgG, especially IgG3",
+            "Moderate, level dependent",
+            "Myeloma hyperviscosity at high spike"
+          ],
+          [
+            "IgA polymers",
+            "Significant",
+            "Myeloma, mucosal bleeding"
+          ],
+          [
+            "Cryoglobulins",
+            "Precipitate in cold",
+            "Raynaud, purpura, glomerulonephritis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The laboratory moral unites the lesson: rouleaux on film, a globulin gap, raised ESR out of proportion, or unexplained renal and nerve disease should trigger electrophoresis and free light chains. That trigger habit is **paraprotein hunt from film and chemistry clues**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Let rouleaux, globulin gap, and a wild ESR order the electrophoresis for you; films still talk first.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Film rouleaux or globulin gap noticed"
+          },
+          {
+            "id": "b",
+            "label": "Electrophoresis and immunofixation"
+          },
+          {
+            "id": "c",
+            "label": "Free light chains and marrow if indicated"
+          },
+          {
+            "id": "d",
+            "label": "Risk group and surveillance assigned"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

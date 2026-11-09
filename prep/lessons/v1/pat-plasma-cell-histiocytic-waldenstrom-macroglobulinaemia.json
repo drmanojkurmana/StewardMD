@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-plasma-cell-histiocytic",
+  "subject": "pathology",
+  "title": "Waldenstrom Macroglobulinaemia, Langerhans Cell Histiocytosis, Birbeck Granules, and CD1a",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Waldenstrom macroglobulinaemia infiltrates marrow with lymphoplasmacytic lymphoma cells secreting monoclonal IgM, producing anaemia, lymphadenopathy, and hyperviscosity rather than the lytic bones and renal failure of myeloma. MYD88 mutation supports most cases. The IgM lymphoplasmacytic disease is **Waldenstrom macroglobulinaemia**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "IgM spike plus marrow lymphoplasmacytic infiltrate without lytic bones spells Waldenstrom macroglobulinaemia.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/waldenstrom-fig1.webp",
+        "alt": "Waldenstrom macroglobulinaemia histology and IgM",
+        "caption": "Waldenstrom macroglobulinaemia histology with monoclonal IgM production."
+      }
+    },
+    {
+      "tx": "IgM's pentameric bulk explains Waldenstrom signatures: hyperviscosity with retinal changes, cold agglutinin or cryoglobulin behaviour in some clones, neuropathy from anti-MAG antibodies, and amyloid occasionally. Monitoring IgM level tracks both tumour and symptoms. The pentamer effect is **IgM-mediated symptom burden in Waldenstrom disease**.",
+      "say": "In Waldenstrom disease the IgM level is a symptom dial: viscosity, neuropathy, and cold phenomena follow it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Waldenstrom pattern",
+          "points": [
+            "IgM spike, marrow based",
+            "Hyperviscosity, neuropathy",
+            "No lytic bone lesions"
+          ]
+        },
+        "right": {
+          "title": "Myeloma pattern",
+          "points": [
+            "IgG or IgA spike",
+            "Lytic bones, cast nephropathy",
+            "CRAB features dominate"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Bing-Neel syndrome names direct infiltration of the central nervous system by lymphoplasmacytic cells, a rare Waldenstrom complication requiring cerebrospinal fluid immunophenotyping and intrathecal thinking in therapy. Cognitive or cranial nerve signs in Waldenstrom patients demand that search: **Bing-Neel syndrome**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "New neurology in Waldenstrom disease means Bing-Neel infiltration until cerebrospinal fluid studies clear it.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Complication",
+          "Mechanism",
+          "First response"
+        ],
+        "rows": [
+          [
+            "Hyperviscosity",
+            "IgM pentamer bulk",
+            "Urgent plasma exchange"
+          ],
+          [
+            "Peripheral neuropathy",
+            "Anti-MAG antibody, amyloid, infiltration",
+            "Neurophysiology, clone therapy"
+          ],
+          [
+            "Bing-Neel syndrome",
+            "CNS lymphoplasmacytic infiltration",
+            "CSF studies, MRI, targeted therapy"
+          ],
+          [
+            "Cold agglutinin overlap",
+            "IgM cold reactivity",
+            "Cold avoidance, rituximab"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Treatment of Waldenstrom disease waits for symptoms, then uses rituximab based combinations and BTK inhibitors such as zanubrutinib, avoiding rituximab monotherapy flare of IgM in high viscosity states. Plasma exchange precedes rituximab when viscosity threatens. That sequencing is **Waldenstrom therapy sequencing around IgM flare**.",
+      "say": "Exchange before rituximab when IgM is high; the antibody flare can thicken blood before it thins disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Symptomatic disease confirmed"
+          },
+          {
+            "id": "b",
+            "label": "Viscosity assessed, exchange if threatened"
+          },
+          {
+            "id": "c",
+            "label": "Rituximab combination or BTK inhibitor"
+          },
+          {
+            "id": "d",
+            "label": "IgM and symptoms tracked together"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Langerhans cell histiocytosis accumulates clonal dendritic cells with grooved nuclei in bone, skin, pituitary, lung, and nodes of children and smoking adults, driven usually by BRAF pathway mutations. Lytic skull lesions and diabetes insipidus headline childhood disease: **Langerhans cell histiocytosis (LCH)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Lytic bone lesions plus diabetes insipidus in a child mean Langerhans cell histiocytosis until biopsy clears it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pulmonary-langerhans-histiocytosis-fig1.webp",
+        "alt": "Pulmonary Langerhans cell histiocytosis",
+        "caption": "Pulmonary Langerhans cell histiocytosis, the smoking associated adult form with cystic lung disease."
+      }
+    },
+    {
+      "tx": "Electron microscopy once diagnosed LCH by tennis racket Birbeck granules, cytoplasmic organelles of Langerhans cells, now replaced by immunostaining for CD1a and langerin CD207 on biopsy tissue. The racket organelle is the **Birbeck granule of Langerhans cells**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Birbeck granules are museum pieces now; CD1a and langerin stains make the LCH diagnosis today.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Historical diagnosis",
+          "points": [
+            "Birbeck granules on electron microscopy",
+            "Grooved coffee bean nuclei",
+            "S100 positivity supportive"
+          ]
+        },
+        "right": {
+          "title": "Modern diagnosis",
+          "points": [
+            "CD1a and CD207 langerin positive",
+            "BRAF V600E in many cases",
+            "MAPK pathway targeted options"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "CD1a presents lipid antigens on dendritic cells and marks cortical thymocytes and Langerhans cells, so its bright expression on lesional histiocytes separates LCH from other histiocytic disorders such as Rosai-Dorfman and Erdheim-Chester disease. The lipid presenting marker is **CD1a in Langerhans cell histiocytosis**.",
+      "say": "CD1a plus langerin separates LCH from its histiocytic cousins; panel thinking beats single stains.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disorder",
+          "Signature markers",
+          "Clue"
+        ],
+        "rows": [
+          [
+            "LCH",
+            "CD1a, CD207, BRAF often",
+            "Bone, pituitary, lung, skin"
+          ],
+          [
+            "Rosai-Dorfman",
+            "S100, emperipolesis, CD1a negative",
+            "Massive painless nodes"
+          ],
+          [
+            "Erdheim-Chester",
+            "CD68, factor XIIIa, BRAF often",
+            "Symmetric leg bone sclerosis"
+          ],
+          [
+            "Juvenile xanthogranuloma",
+            "Touton giant cells",
+            "Skin nodules of childhood"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pulmonary LCH stalks young smokers with stellate interstitial nodules evolving into bizarre cysts and pneumothorax, and smoking cessation alone can regress early disease, making the history therapeutic. That exposure disease is **pulmonary Langerhans cell histiocytosis of smokers**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Cystic lung disease in a young smoker earns an LCH thought, and quitting smoking is its first therapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Young smoker, cystic interstitial pattern"
+          },
+          {
+            "id": "b",
+            "label": "Biopsy or BAL CD1a cells assessed"
+          },
+          {
+            "id": "c",
+            "label": "Complete smoking cessation"
+          },
+          {
+            "id": "d",
+            "label": "Systemic therapy for progressive disease"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

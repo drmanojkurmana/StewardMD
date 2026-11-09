@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-coagulation-disorders",
+  "subject": "pathology",
+  "title": "Coagulation Cascade, PT INR, APTT, and Mixing Studies",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Secondary haemostasis builds fibrin through tissue factor ignition, platelet surface amplification, and thrombin burst, sealing the platelet plug into a durable clot while anticoagulant pathways confine it to injury. The cascade's modern cell based framing is the **coagulation cascade and thrombin generation**.",
+      "say": "Tissue factor lights the fire, platelets host the burst, thrombin builds fibrin; anticoagulants keep it local.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/coagulation-cascade-and-anticoagulants-fig1.webp",
+        "alt": "Coagulation and anticoagulation pathways",
+        "caption": "Coagulation cascade and anticoagulation pathways with drug targets marked."
+      }
+    },
+    {
+      "tx": "Prothrombin time tests the extrinsic and common pathways, tissue factor, factor VII, X, V, prothrombin, and fibrinogen, standardised across reagents as INR for warfarin control and liver synthetic assessment. The standardised ratio is the **INR (international normalised ratio) from prothrombin time**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "PT and INR watch factor VII's world: warfarin, liver failure, and vitamin K answer here first.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PT and INR prolonged",
+          "points": [
+            "Warfarin, vitamin K deficiency",
+            "Liver synthetic failure",
+            "Factor VII, X, V, II deficiency"
+          ]
+        },
+        "right": {
+          "title": "APTT prolonged",
+          "points": [
+            "Heparin, haemophilia A and B",
+            "Lupus anticoagulant paradox",
+            "Factor VIII, IX, XI deficiency"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Activated partial thromboplastin time tests intrinsic and common pathways and monitors unfractionated heparin, prolonging also in lupus anticoagulant where thrombosis, not bleeding, is the clinical danger. The intrinsic screen is the **activated partial thromboplastin time (APTT)**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "APTT watches heparin and haemophilia factors, but a lupus anticoagulant prolongs it while clotting the patient.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/coagulation-disorders-fig2.webp",
+        "alt": "Coagulation cascade drug targets",
+        "caption": "Coagulation cascade drug targets across anticoagulant classes."
+      }
+    },
+    {
+      "tx": "Mixing studies add normal plasma to patient plasma: correction implies factor deficiency starved of supply, non-correction implies an inhibitor or lupus anticoagulant neutralising the mixture, guiding factor assays and Bethesda titres. That fork is the **mixing study in prolonged clotting times**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Corrects means missing factor, fails to correct means inhibitor; the mixing study forks every long APTT.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Prolonged PT or APTT found"
+          },
+          {
+            "id": "b",
+            "label": "Mix one to one with normal plasma"
+          },
+          {
+            "id": "c",
+            "label": "Corrects: factor deficiency assay"
+          },
+          {
+            "id": "d",
+            "label": "No correction: inhibitor or LA workup"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Time and temperature expose factor VIII inhibitors: immediate mixing may correct while incubated mixtures prolong as antibody destroys factor VIII, a pattern called time dependent inhibition in acquired haemophilia. That incubated behaviour defines **time-dependent factor VIII inhibition**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Incubate the mixing study; acquired factor VIII inhibitors reveal themselves only after time together.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pattern",
+          "Meaning",
+          "Next test"
+        ],
+        "rows": [
+          [
+            "Corrects immediately and stays",
+            "Factor deficiency",
+            "Specific factor assays"
+          ],
+          [
+            "Corrects then prolongs incubated",
+            "Factor VIII inhibitor",
+            "Bethesda inhibitor titre"
+          ],
+          [
+            "Never corrects",
+            "Lupus anticoagulant or strong inhibitor",
+            "Phospholipid dependence tests"
+          ],
+          [
+            "Both PT and APTT long",
+            "Common pathway, liver, DIC, warfarin",
+            "Fibrinogen, platelets, clinical review"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pre-analytical errors counterfeit coagulopathy daily: underfilled citrate tubes, heparin contaminated lines, high haematocrit, and delayed processing prolong times in healthy people, so repeat clean sampling precedes exotic assays. That discipline is **coagulation sample quality control**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Repeat the blue top properly before chasing rare factors; bad samples manufacture coagulopathy daily.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Suspect the sample",
+          "points": [
+            "Underfilled or clotted citrate tube",
+            "Drawn from heparinised line",
+            "Result defies the clinical picture"
+          ]
+        },
+        "right": {
+          "title": "Suspect the patient",
+          "points": [
+            "Bleeding history concordant",
+            "Repeat sample confirms abnormality",
+            "Family or drug history supports"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Direct oral anticoagulants distort routine tests unpredictably, dabigatran stretching thrombin time exquisitely and Xa inhibitors variably prolonging PT, so drug specific calibrated assays answer urgent surgical questions. Test literacy includes **DOAC effects on coagulation screening**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Routine clotting screens mislead on DOACs; ask which drug and order its calibrated assay instead.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug class",
+          "Screen distortion",
+          "Specific assay"
+        ],
+        "rows": [
+          [
+            "Dabigatran",
+            "Thrombin time exquisitely long",
+            "Dilute thrombin time"
+          ],
+          [
+            "Rivaroxaban, apixaban",
+            "PT variable, APTT modest",
+            "Calibrated anti-Xa level"
+          ],
+          [
+            "Warfarin",
+            "INR designed for it",
+            "INR monitoring standard"
+          ],
+          [
+            "Heparin unfractionated",
+            "APTT therapeutic range",
+            "APTT or anti-Xa monitoring"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Point of care viscoelastic tests, thromboelastography and rotational thromboelastometry, watch whole blood clot form, strengthen, and lyse at the bedside of trauma, cardiac, and liver surgery. The tracing method is **viscoelastic haemostatic testing (TEG and ROTEM)**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "TEG and ROTEM draw the whole clot's life story at the bedside when minutes matter more than factors.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Whole blood clot initiation timed"
+          },
+          {
+            "id": "b",
+            "label": "Strength reflects platelets and fibrinogen"
+          },
+          {
+            "id": "c",
+            "label": "Lysis percentage measured"
+          },
+          {
+            "id": "d",
+            "label": "Components targeted in real time"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}
