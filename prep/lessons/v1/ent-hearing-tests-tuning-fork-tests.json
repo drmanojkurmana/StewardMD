@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "id": "ent-hearing-tests-tuning-fork-tests",
+ "subject": "ent",
+ "module": "ent-hearing-tests",
+ "title": "Tuning Fork Tests and Pure Tone Audiometry",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Bedside clinical assessment of hearing relies fundamentally on qualitative tuning fork examinations using a five hundred and twelve hertz fork. Lower frequencies such as one hundred and twenty-eight or two hundred and fifty-six hertz elicit misleading vibrotactile somatosensory sensations rather than true auditory perception. Conversely, higher frequency forks such as two thousand and forty-eight hertz decay too rapidly, making the **512 Hz fork** the universal clinical gold standard.",
+   "say": "A five hundred and twelve hertz tuning fork is standard for bedside testing. Lower frequencies produce deceptive vibrotactile sensations, while higher frequencies decay too rapidly.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cns-cn8-hearing.webp",
+    "alt": "Clinical bedside examination showing cranial nerve eight assessment with tuning fork tests",
+    "caption": "Bedside tuning fork testing comparing air and bone conduction to categorize hearing impairment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The Rinne test compares air conduction to bone conduction in the same ear. The vibrating fork is placed against the mastoid process until the sound fades, then immediately held two centimetres from the external meatus. In normal hearing and sensorineural hearing loss, air conduction exceeds bone conduction, designated **Rinne positive**. When bone conduction exceeds air conduction, it is Rinne negative, indicating a conductive loss of at least fifteen to twenty decibels.",
+   "say": "The Rinne test compares air and bone conduction. In normal ears, air conduction exceeds bone, termed Rinne positive. Bone conduction exceeding air indicates conductive loss.",
+   "vis": {
+    "kind": "table",
+    "title": "Interpretation of Rinne Test Results",
+    "cols": [
+     "Rinne Result",
+     "Conduction Pattern",
+     "Air-Bone Status",
+     "Clinical Diagnosis"
+    ],
+    "rows": [
+     [
+      "Rinne positive (AC > BC)",
+      "Air conduction louder",
+      "No air-bone gap",
+      "Normal hearing or sensorineural loss"
+     ],
+     [
+      "Rinne negative (BC > AC)",
+      "Bone conduction louder",
+      "Air-bone gap > 15-20 dB",
+      "Conductive hearing loss in tested ear"
+     ],
+     [
+      "False negative Rinne",
+      "BC heard via other ear",
+      "Transcranial crossover",
+      "Severe unilateral profound sensorineural loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A critical diagnostic pitfall is the false negative Rinne test encountered in patients with profound unilateral sensorineural hearing loss. When testing the deaf ear, the patient perceives bone conduction because vibrational energy travels across the skull bones to stimulate the intact contralateral cochlea. To unmask a true **false negative Rinne**, the examiner must mask the good ear with a Barany noise box while testing.",
+   "say": "In severe one-sided deafness, skull bone conduction stimulates the opposite good ear, creating a false negative Rinne. Masking the normal ear with noise reveals the error.",
+   "vis": {
+    "kind": "flow",
+    "title": "Mechanism of False Negative Rinne",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "Vibrating Fork on Deaf Mastoid"
+     },
+     {
+      "id": "r2",
+      "label": "Transcranial Skull Transmission"
+     },
+     {
+      "id": "r3",
+      "label": "Cross-Hearing in Normal Opposite Cochlea"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r2"
+     ],
+     [
+      "r2",
+      "r3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The Weber test evaluates bone conduction symmetry by placing the stem of a vibrating fork on a midline cranial site such as the vertex, forehead, or upper incisors. Sound vibrations travel through skull bones equally to both cochleae. In normal individuals, the sound is heard equally in the midline. In unilateral conductive loss, sound lateralizes to the **poorer ear**, whereas in unilateral sensorineural loss, sound lateralizes to the better ear.",
+   "say": "The Weber test places a vibrating fork in the midline. Sound lateralizes to the diseased ear in conductive loss, but lateralizes to the better ear in sensorineural loss.",
+   "vis": {
+    "kind": "table",
+    "title": "Tuning Fork Test Battery Summary",
+    "cols": [
+     "Hearing Condition",
+     "Rinne Test (Right / Left)",
+     "Weber Test Lateralization",
+     "Absolute Bone Conduction"
+    ],
+    "rows": [
+     [
+      "Normal hearing",
+      "AC > BC bilaterally (Positive)",
+      "Midline (Central / No shift)",
+      "Normal in both ears"
+     ],
+     [
+      "Right conductive loss",
+      "Right BC > AC (Negative), Left Pos",
+      "Lateralizes to Right (Poorer ear)",
+      "Normal in right ear"
+     ],
+     [
+      "Right sensorineural loss",
+      "AC > BC bilaterally (Positive)",
+      "Lateralizes to Left (Better ear)",
+      "Reduced in right ear"
+     ],
+     [
+      "Bilateral conductive loss",
+      "BC > AC bilaterally (Negative)",
+      "Lateralizes to worse conductive ear",
+      "Normal bilaterally"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pure tone audiometry is a quantitative psychoacoustic test that measures hearing thresholds across frequencies from one hundred and twenty-five to eight thousand hertz. By plotting air conduction thresholds via headphones and bone conduction thresholds via a mastoid vibrator, the audiogram establishes the **air-bone gap**. A gap of greater than ten decibels between bone and air thresholds defines conductive hearing impairment.",
+   "say": "Pure tone audiometry quantifies thresholds across frequencies. A gap greater than ten decibels between bone conduction and air conduction signifies conductive hearing loss.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sensorineural-loss-and-inner-ear-fig1.webp",
+    "alt": "Audiogram schematic illustrating air conduction, bone conduction, and air-bone gap curves",
+    "caption": "Pure tone audiogram demonstrating bone conduction curves, air conduction, and the pathological air-bone gap. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In patients with clinical otosclerosis, fixation of the stapes footplate causes an artifactual dip in the bone conduction threshold centered sharply at two thousand hertz, known as the **Carhart notch**. Rather than representing genuine cochlear sensory damage, this notch reflects the loss of the inertial ossicular bone conduction component and middle ear resonance, characteristically disappearing after successful stapedotomy.",
+   "say": "Stapes fixation in otosclerosis creates the Carhart notch, a mechanical dip in bone conduction at two kilohertz that resolves after corrective stapedotomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Carhart Notch (Otosclerosis)",
+     "points": [
+      "Artifactual bone conduction threshold elevation.",
+      "Maximal elevation occurs specifically at 2,000 Hz (2 kHz).",
+      "Caused by mechanical loss of middle ear inertial ossicular resonance.",
+      "Completely resolves following successful stapes surgery."
+     ]
+    },
+    "right": {
+     "title": "Acoustic Trauma Notch",
+     "points": [
+      "True sensorineural hair cell damage.",
+      "Dip occurs sharply at 4,000 Hz (4 kHz notch).",
+      "Caused by irreversible mechanical shear damage to outer hair cells.",
+      "Permanent deficit that does not reverse with middle ear surgery."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The absolute bone conduction test assesses cochlear nerve reserve by comparing the patient bone conduction to that of the examiner with the external auditory meatus occluded. Meatal occlusion eliminates background ambient masking noise. In conductive hearing loss, **absolute bone conduction** remains completely normal, whereas in sensorineural hearing loss, the patient perceives the sound for a significantly shorter duration than the normal examiner.",
+   "say": "The absolute bone conduction test occludes the meatus to evaluate inner ear reserve. It remains normal in conductive loss but is reduced in sensorineural hearing loss.",
+   "vis": {
+    "kind": "flow",
+    "title": "Absolute Bone Conduction Test Sequence",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Vibrating Fork on Mastoid with Tragus Occluded"
+     },
+     {
+      "id": "b2",
+      "label": "Note Time of Sound Extinction"
+     },
+     {
+      "id": "b3",
+      "label": "Compare to Normal Hearing Examiner Control"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2"
+     ],
+     [
+      "b2",
+      "b3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When testing one ear audiometrically, high-intensity sounds can cross the cranial bones to stimulate the non-test cochlea, a phenomenon termed acoustic crossover. The interaural attenuation for air conduction with supra-aural headphones is forty decibels, and zero decibels for bone conduction. Whenever the air conduction threshold in the test ear exceeds bone conduction in the non-test ear by forty decibels, **audiometric masking** using narrow-band noise is mandatory.",
+   "say": "Sound can cross the skull to stimulate the non-test ear. Whenever test air conduction exceeds opposite bone conduction by forty decibels, masking noise is essential.",
+   "vis": {
+    "kind": "table",
+    "title": "Interaural Attenuation Thresholds for Masking Rules",
+    "cols": [
+     "Transducer Type",
+     "Tested Pathway",
+     "Interaural Attenuation",
+     "Masking Requirement Rule"
+    ],
+    "rows": [
+     [
+      "Supra-aural earphones",
+      "Air conduction",
+      "40 decibels",
+      "Mandatory if AC difference \u2265 40 dB"
+     ],
+     [
+      "Insert earphones",
+      "Air conduction",
+      "70 decibels",
+      "Mandatory if AC difference \u2265 70 dB"
+     ],
+     [
+      "Bone vibrator",
+      "Bone conduction",
+      "0 decibels",
+      "Mandatory whenever AB gap > 10 dB exists"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "abfab05a-0f08-419f-ae94-582589acfa86",
+  "5f46cef1-20e2-4540-a4a6-e97d666f2b93",
+  "9e659639-b8e0-4395-879d-0d3be6c0a992"
+ ]
+}

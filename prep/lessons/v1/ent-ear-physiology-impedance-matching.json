@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "id": "ent-ear-physiology-impedance-matching",
+ "subject": "ent",
+ "module": "ent-ear-physiology",
+ "title": "Middle Ear Mechanics and Vestibular Transduction",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "Sound waves traveling through air encounter high acoustic resistance when entering the fluid-filled cochlea because liquid has higher characteristic impedance than gas. Without an intermediary transformer, ninety-nine point nine percent of acoustic sound energy would be reflected back, resulting in a thirty-decibel hearing deficit. The middle ear cleft functions as a mechanical **impedance matching transformer** that overcomes this sound reflection.",
+   "say": "Sound traveling from air to liquid encounters ninety-nine point nine percent reflection, losing thirty decibels. The middle ear acts as an impedance matching transformer to restore this energy.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/phy-middle-ear-gain.svg",
+    "alt": "Biophysical diagram of middle ear transformer mechanisms including areal ratio and lever ratio",
+    "caption": "Biomechanical transformer mechanisms of the middle ear overcoming air-to-fluid impedance mismatch. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The primary contributor to impedance matching is the hydraulic areal ratio between the tympanic membrane and the stapes footplate. While the total surface area of the membrane is eighty-five square millimetres, its effective vibrating area is roughly fifty-five square millimetres. Comparing this to the three point two square millimetres area of the **stapes footplate** yields an areal ratio of seventeen to one (17:1), concentrating acoustic pressure seventeen-fold.",
+   "say": "The primary gain comes from the areal ratio. The fifty-five square millimetre vibrating drum concentrates force onto the small three point two square millimetre stapes footplate.",
+   "vis": {
+    "kind": "flow",
+    "title": "Areal Pressure Concentration Mechanism",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Vibrating Eardrum (55 mm2)"
+     },
+     {
+      "id": "a2",
+      "label": "Ossicular Force Transmission"
+     },
+     {
+      "id": "a3",
+      "label": "Stapes Footplate (3.2 mm2) 17x Pressure"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The ossicular chain introduces a secondary mechanical advantage known as the ossicular lever ratio. The manubrium of the malleus measures roughly one point three times the length of the long process of the incus. Because the malleus handle is longer than the incus long process, the **ossicular lever** increases force at the stapes by a factor of one point three to one (1.3:1) at the expense of excursion velocity.",
+   "say": "The malleus handle is one point three times longer than the incus long process. This ossicular lever amplifies sound pressure at the stapes by thirty percent.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-ossicle-chain.svg",
+    "alt": "Mechanical diagram of ossicles showing the fulcrum and lever lengths of malleus and incus",
+    "caption": "Leverage mechanism of the ossicular chain multiplying pressure at the incudostapedial junction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Multiplying the areal ratio of seventeen by the ossicular lever ratio of one point three yields a total transformer ratio of approximately twenty-two to one. Together with the curved catenary membrane effect of the tympanic membrane, this mechanical apparatus boosts sound pressure by twenty-five to thirty decibels. This amplification fully recovers the acoustic energy that would otherwise be lost to liquid **impedance mismatch**.",
+   "say": "Multiplying the seventeen-to-one areal ratio by the one point three lever ratio yields a total twenty-two-fold pressure gain, recovering the thirty-decibel impedance loss.",
+   "vis": {
+    "kind": "table",
+    "title": "Components of Middle Ear Transformer Advantage",
+    "cols": [
+     "Mechanism",
+     "Anatomical Basis",
+     "Force Multiplication Ratio",
+     "Decibel Gain Contribution"
+    ],
+    "rows": [
+     [
+      "Areal (Hydraulic) ratio",
+      "Drum area (55 mm2) to footplate (3.2 mm2)",
+      "17 : 1",
+      "24 to 25 dB"
+     ],
+     [
+      "Ossicular lever ratio",
+      "Malleus handle length to incus long process",
+      "1.3 : 1",
+      "2 to 3 dB"
+     ],
+     [
+      "Catenary lever ratio",
+      "Curved conical tympanic membrane tension",
+      "2 : 1",
+      "3 to 4 dB"
+     ],
+     [
+      "Combined transformer gain",
+      "Total multiplicative middle ear mechanical action",
+      "22 to 35 : 1",
+      "27 to 30 dB total recovery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sound vibration of the stapes footplate initiates a travelling wave along the cochlear partition, formulated in the Nobel-prize-winning travelling wave theory of Georg von Bekesy. Sound displacement causes a wave of basilar membrane deflection that travels from the cochlear base toward the apex. As it propagates, the wave grows gradually in amplitude until reaching a point of **resonance peak**, where it dissipates abruptly.",
+   "say": "Von Bekesy travelling wave theory explains that sound initiates a fluid wave along the basilar membrane, swelling to a resonant peak determined by frequency before dying away.",
+   "vis": {
+    "kind": "flow",
+    "title": "Propagation of Von Bekesy Travelling Wave",
+    "nodes": [
+     {
+      "id": "w1",
+      "label": "Stapes Inward Piston Stroke"
+     },
+     {
+      "id": "w2",
+      "label": "Perilymph Wave Displaces Basilar Membrane"
+     },
+     {
+      "id": "w3",
+      "label": "Resonant Frequency Peak and Sharp Damping"
+     }
+    ],
+    "edges": [
+     [
+      "w1",
+      "w2"
+     ],
+     [
+      "w2",
+      "w3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hair cells generate extracellular electrical potentials during auditory stimulation. When stereocilia shear toward the tallest kinocilium, mechanosensitive cation channels open, admitting potassium to produce receptor depolarization. This instantaneous alternating electrical waveform mirrors the stimulus sound wave without latency and is designated the **cochlear microphonic**, generated predominantly by outer hair cells.",
+   "say": "Hair cell shearing opens cation channels to produce cochlear microphonics, an alternating electrical voltage that faithfully mirrors the frequency and waveform of the acoustic stimulus.",
+   "vis": {
+    "kind": "table",
+    "title": "Cochlear Potentials and Their Cellular Origins",
+    "cols": [
+     "Potential Name",
+     "Nature of Signal",
+     "Electrophysiological Source",
+     "Stimulus Dependence"
+    ],
+    "rows": [
+     [
+      "Endocochlear potential",
+      "Direct current (+80 mV resting)",
+      "Stria vascularis potassium pumps",
+      "Resting battery, independent"
+     ],
+     [
+      "Cochlear microphonic",
+      "Alternating current (AC wave)",
+      "Outer hair cell stereocilia transduction",
+      "Replicates stimulus waveform"
+     ],
+     [
+      "Summating potential",
+      "Direct current shift (DC)",
+      "Inner and outer hair cell non-linearity",
+      "Follows stimulus envelope"
+     ],
+     [
+      "Action potential",
+      "Compound nerve spike (All-or-none)",
+      "Spiral ganglion axons (Auditory nerve)",
+      "Discontinuous nerve firing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The vestibular labyrinth comprises five sensory end-organs: three semicircular canals sensing angular acceleration, and two otolith organs (the utricle and saccule) sensing linear acceleration and gravity. In the dilated ampulla of each semicircular canal, sensory hair cells are anchored onto a ridge called the crista ampullaris, capped by a gelatinous sail called the **cupula** that swings in response to endolymph flow.",
+   "say": "Five vestibular receptors sense motion: three semicircular canals for angular acceleration, and the utricle and saccule for linear acceleration and head tilt.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Semicircular Canals (Cristae)",
+     "points": [
+      "Three orthogonal canals (anterior, posterior, lateral).",
+      "Sensory organ is crista ampullaris in the ampulla.",
+      "Hair cells embedded in gelatinous sail termed cupula.",
+      "Detect angular rotational acceleration of head."
+     ]
+    },
+    "right": {
+     "title": "Otolith Organs (Maculae)",
+     "points": [
+      "Comprise the utricle (horizontal) and saccule (vertical).",
+      "Sensory organ is the macula capped with otoconia (calcium carbonate).",
+      "Heavier otolithic membrane exerts gravity shear.",
+      "Detect linear acceleration and static head tilt."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Vestibular afferents project through the vestibular nuclei to extraocular motor nuclei to drive the **vestibulo-ocular reflex**. When the head rotates in one direction, endolymph inertia deflects the cupula, triggering compensatory slow-phase eye movements of equal velocity in the exactly opposite direction. This continuous reflex stabilizes retinal images during rapid head motion, preventing oscillopsia.",
+   "say": "The vestibulo-ocular reflex maintains gaze stability during head movements by driving the eyes at equal velocity in the direction opposite to head rotation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Vestibulo-Ocular Reflex Arc",
+    "nodes": [
+     {
+      "id": "v1",
+      "label": "Head Rotation Sensed by Semicircular Canal"
+     },
+     {
+      "id": "v2",
+      "label": "Vestibular Nuclei Activation"
+     },
+     {
+      "id": "v3",
+      "label": "Opposing Conjugate Eye Movement"
+     }
+    ],
+    "edges": [
+     [
+      "v1",
+      "v2"
+     ],
+     [
+      "v2",
+      "v3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "25e45baf-7e7f-4c71-835a-275c412188e3",
+  "283ef33a-c294-48a3-9a2f-517f564f8d27",
+  "a7951b5f-6f08-4ccb-a18c-2b4c3900f47f"
+ ]
+}

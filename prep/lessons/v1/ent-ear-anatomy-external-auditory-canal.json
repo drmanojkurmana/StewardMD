@@ -1,0 +1,226 @@
+{
+ "v": 1,
+ "id": "ent-ear-anatomy-external-auditory-canal",
+ "subject": "ent",
+ "module": "ent-ear-anatomy",
+ "title": "External Auditory Canal and Tympanic Membrane",
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The external acoustic meatus is an S-shaped sinuous conduit measuring approximately twenty-four millimetres in length that conducts sound waves from the concha to the tympanic membrane. The outer third is cartilaginous, directed upward, backward, and medially, while the inner two-thirds are osseous, directed downward, forward, and medially. To examine the canal, the **pinna** must be pulled posterosuperiorly and laterally in adults to align both segments.",
+   "say": "Measuring twenty-four millimetres, the external auditory canal has an outer cartilaginous third and inner osseous two-thirds. In adults, pulling the pinna upward and backward straightens the canal for examination.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-ear-gross.webp",
+    "alt": "Gross anatomical dissection of external, middle, and inner ear showing acoustic canal trajectory",
+    "caption": "Sinuous trajectory of the external acoustic meatus leading to the tympanic membrane and middle ear cleft. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The cartilaginous canal contains ceruminous glands, sebaceous follicles, and protective hairs, making it the exclusive site of localized furuncles. Two or three vertical fissures in the anterior cartilaginous wall known as the **fissures of Santorini** permit parotid neoplasms or infections to spread directly into the ear canal, and vice versa. Anteroinferiorly in the bony canal, a persistent deficiency termed the foramen of Huschke may also allow salivary fistulae.",
+   "say": "Ceruminous glands and hair follicles occupy the cartilaginous canal. Vertical fissures of Santorini permit two-way spread of infection or tumor between the parotid gland and the ear canal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Outer Cartilaginous Canal",
+     "points": [
+      "Eight millimetres length (outer third).",
+      "Contains ceruminous and sebaceous glands with hair follicles.",
+      "Possesses fissures of Santorini that link to parotid space.",
+      "Exclusive location for localized furunculosis."
+     ]
+    },
+    "right": {
+     "title": "Inner Osseous Canal",
+     "points": [
+      "Sixteen millimetres length (inner two-thirds).",
+      "Lined by thin adherent skin without hairs or glands.",
+      "Features an isthmus six millimetres lateral to the membrane.",
+      "Potential foramen of Huschke in anteroinferior wall."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The tympanic membrane forms a pearl-grey translucent partition inclined at forty-five degrees to the horizontal, separating the canal from the middle ear. Peripherally, a thickened fibrocartilaginous ring termed the annulus tympanicus fits into the bony tympanic sulcus. At the center of the membrane, the deepest inward depression is the **umbo**, which corresponds precisely to the tip of the attached manubrium of the malleus.",
+   "say": "Inclined at forty-five degrees, the pearl-grey tympanic membrane features an outer fibrous ring resting in the tympanic sulcus. The central inward peak is the umbo, attached to the malleus tip.",
+   "vis": {
+    "kind": "table",
+    "title": "Anatomical Landmarks on Normal Otoscopic Examination",
+    "cols": [
+     "Otoscopic Landmark",
+     "Quadrant or Region",
+     "Underlying Structure",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Umbo",
+      "Center of drum",
+      "Tip of handle of malleus",
+      "Deepest point of inward tenting"
+     ],
+     [
+      "Cone of light",
+      "Anteroinferior quadrant",
+      "Reflected light from drum",
+      "Lost or distorted in effusions"
+     ],
+     [
+      "Lateral process",
+      "Superior end of handle",
+      "Malleus short process",
+      "Prominent projection landmark"
+     ],
+     [
+      "Incus long process",
+      "Posterosuperior quadrant",
+      "Lenticular articulation",
+      "Visualized through translucent drum"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The tympanic membrane is divided into two unequal portions by anterior and posterior malleolar folds extending from the lateral process of the malleus. The larger inferior portion is the **pars tensa**, composed of three distinct histological coats: an outer stratified squamous cuticular layer, a robust middle fibrous layer with radial and circular collagen fibres, and an inner mucous layer continuous with middle ear mucosa.",
+   "say": "The pars tensa forms the resilient majority of the drum. It possesses three layers: outer cuticular squamous epithelium, middle radial and circular fibrous tissue, and inner respiratory mucosa.",
+   "vis": {
+    "kind": "flow",
+    "title": "Three-Layer Architecture of the Pars Tensa",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Cuticular Layer (Squamous)"
+     },
+     {
+      "id": "t2",
+      "label": "Fibrous Layer (Radial/Circular)"
+     },
+     {
+      "id": "t3",
+      "label": "Mucosal Layer (Ciliated)"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Above the anterior and posterior malleolar folds lies the triangular **pars flaccida**, also termed Shrapnell membrane, occupying the notch of Rivinus. Unlike the pars tensa, the pars flaccida completely lacks an organized middle fibrous layer and annulus tympanicus. This natural structural deficiency renders it thin, slack, and particularly vulnerable to inward retraction under negative middle ear pressure, forming primary attic retraction pockets.",
+   "say": "Situated above the malleolar folds, the triangular pars flaccida lacks an organized fibrous layer. This inherent mechanical slackness makes it prone to deep retraction pockets and cholesteatoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pars Tensa",
+     "points": [
+      "Occupies inferior four-fifths of membrane.",
+      "Rigid three-layered structure with robust middle fibrous core.",
+      "Anchored securely into bony sulcus by fibrous annulus.",
+      "Resistant to retraction; perforations usually central."
+     ]
+    },
+    "right": {
+     "title": "Pars Flaccida (Shrapnell)",
+     "points": [
+      "Occupies superior notch of Rivinus.",
+      "Lacks an organized middle fibrous lamina.",
+      "Lacks a peripheral fibrocartilaginous ring.",
+      "Prone to negative-pressure retraction into Prussak space."
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prussak space, or the superior recess of the tympanic membrane, is a minute anatomical compartment within the epitympanic recess. It is bounded laterally by the pars flaccida, medially by the neck of the malleus, superiorly by the lateral malleolar fold, and inferiorly by the short process of the malleus. Pathologically, **Prussak space** represents the initial sanctuary where attic retraction pockets collect keratin to spawn primary acquired cholesteatomas.",
+   "say": "Prussak space sits between the pars flaccida laterally and the malleus neck medially. It serves as the primary originating sanctuary for attic cholesteatoma formation.",
+   "vis": {
+    "kind": "table",
+    "title": "Anatomical Boundaries of Prussak Space",
+    "cols": [
+     "Boundary Wall",
+     "Anatomical Structure",
+     "Clinical Relevance"
+    ],
+    "rows": [
+     [
+      "Lateral wall",
+      "Pars flaccida (Shrapnell)",
+      "Retracts medially under negative pressure"
+     ],
+     [
+      "Medial wall",
+      "Neck of malleus",
+      "Site of early bony erosion"
+     ],
+     [
+      "Superior roof",
+      "Lateral malleolar fold",
+      "Limits spread into upper epitympanum"
+     ],
+     [
+      "Inferior floor",
+      "Short process of malleus",
+      "Marks lower border of attic pouch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Suspended across the air-filled middle ear cavity is a mobile chain of three delicate auditory ossicles: the malleus, incus, and stapes. The **malleus** resembles a hammer, consisting of a rounded head in the epitympanic recess, a neck, a manubrium embedded in the fibrous drum layer, a short lateral process, and an anterior process anchored by the anterior malleolar ligament.",
+   "say": "Three ossicles bridge the middle ear. The hammer-shaped malleus features a head in the attic, a neck, a manubrium fused to the eardrum, and anterior and lateral processes.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-ossicle-chain.svg",
+    "alt": "Anatomical schematic showing malleus, incus, and stapes articulated within the middle ear cleft",
+    "caption": "Ossicular chain showing synovial articulation between malleus, incus, and stapes footplate. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The incus features a large body articulating with the malleus head, a short process resting in the fossa incudis, and a vertical long process whose lenticular process articulates with the stapes head. The stapes consists of a head, neck, hollow anterior and posterior crura, and a flat **stapes footplate** resting in the oval window. The footplate is secured within the fenestra vestibuli by the fibrous annular ligament.",
+   "say": "The incus articulates with the stapes head via its lenticular process. The stapes footplate sits in the oval window, held in place by the annular ligament.",
+   "vis": {
+    "kind": "flow",
+    "title": "Acoustic Conduction Chain Across Middle Ear",
+    "nodes": [
+     {
+      "id": "o1",
+      "label": "Tympanic Membrane & Malleus"
+     },
+     {
+      "id": "o2",
+      "label": "Incus Long Process"
+     },
+     {
+      "id": "o3",
+      "label": "Stapes Footplate in Oval Window"
+     }
+    ],
+    "edges": [
+     [
+      "o1",
+      "o2"
+     ],
+     [
+      "o2",
+      "o3"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "a38ab09e-f067-4032-b5ac-9e7912c40ec5",
+  "a8515d79-d6bc-4a09-a6d9-e45ec0bd5475",
+  "3627ed15-b137-445f-bbcd-6e3513334913"
+ ]
+}
