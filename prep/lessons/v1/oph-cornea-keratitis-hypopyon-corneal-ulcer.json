@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "id": "oph-cornea-keratitis-hypopyon-corneal-ulcer",
+ "subject": "ophthalmology",
+ "module": "oph-cornea",
+ "title": "Hypopyon Ulcer, Acanthamoeba and Sterile Infiltrates",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Hypopyon corneal ulcer** in severe form historically meant pneumococcal creeping ulcer in elderly dacryocystitis patients, serpiginous spread with hypopyon and perforation risk. Modern hypopyon remains severity sign across bacterial and fungal ulcers needing sac assessment as source. Chronic sac reservoir reinfects cornea until drainage treated, linking lacrimal and cornea modules causally.",
+   "say": "Layered pus together gives severity across ulcer types needing sac source assessment in elderly patients at presentation. Reservoir treatment gives recurrence prevention additionally. Creeping history gives pneumococcal context.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bacterial-keratitis-fig1.webp",
+    "alt": "Corneal ulcer with hypopyon layered in anterior chamber and injection.",
+    "caption": "Corneal ulceration with stromal infiltrate, ciliary injection, and anterior chamber hypopyon. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Acanthamoeba keratitis** infects contact lens wearers exposed to water, pain out of proportion to signs early, pseudodendrite, then ring infiltrate and perineuritis late. Diagnosis delays because herpes assumption treats pseudodendrite while amoeba advances. Confocal microscopy or culture on special media confirms where suspicion voiced early enough to request them.",
+   "say": "Lens water exposure together gives amoeba suspicion with pain beyond signs in wearers characteristically over weeks. Herpes assumption gives delay danger additionally. Early suspicion gives test requesting.",
+   "vis": {
+    "kind": "table",
+    "title": "Amoeba clue set",
+    "cols": [
+     "Clue",
+     "Stage"
+    ],
+    "rows": [
+     [
+      "Pain beyond signs",
+      "Early perineuritis phase"
+     ],
+     [
+      "Pseudodendrite no bulbs",
+      "Herpes mimic phase"
+     ],
+     [
+      "Ring infiltrate",
+      "Late stromal phase"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ring infiltrate** is late amoeba sign but also immune ring in bacterial or fungal disease, so ring alone never diagnoses organism without exposure and pain context. Steroids worsen amoeba dramatically as herpes dendrite, shared lesson that suppression before organism control harms protozoal and viral ulcers alike. Lens water history therefore precedes steroid in every wearer ulcer.",
+   "say": "Ring context together gives organism direction beyond shape alone in wearer ulcers at assessment in specialist clinics over time. Steroid worsening gives shared protozoal lesson. Water history gives prescribing gate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Amoeba pattern wearer",
+     "points": [
+      "Water exposure, pain beyond signs",
+      "Pseudodendrite then ring late",
+      "Confocal or special culture"
+     ]
+    },
+    "right": {
+     "title": "Bacterial pattern wearer",
+     "points": [
+      "Acute suppurative infiltrate",
+      "Rapid melt tempo",
+      "Standard culture plates"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sterile infiltrates from contact lens inflammation, marginal hypersensitivity or post surgical immune response mimic infection with milder pain, smaller size and intact epithelium clues. Culture negative course and steroid responsiveness after infection exclusion separate them retrospectively. **Intact epithelium** over infiltrate lowers infection priority substantially at slit lamp sorting.",
+   "say": "Intact epithelium together gives sterile priority lowering in infiltrate sorting at slit lamp during lens clinic assessment in wearers. Milder pain gives supporting weight additionally. Exclusion gives steroid safety.",
+   "vis": {
+    "kind": "flow",
+    "title": "Wearer infiltrate sorting",
+    "nodes": [
+     {
+      "id": "hist",
+      "label": "Lens, water, pain history"
+     },
+     {
+      "id": "epi",
+      "label": "Epithelium defect or intact"
+     },
+     {
+      "id": "micro",
+      "label": "Scrape by severity and doubt"
+     },
+     {
+      "id": "route",
+      "label": "Antimicrobial or sterile route"
+     }
+    ],
+    "edges": [
+     [
+      "hist",
+      "epi"
+     ],
+     [
+      "epi",
+      "micro"
+     ],
+     [
+      "micro",
+      "route"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Perineuritis** radial nerve inflammation around amoeba cysts explains disproportionate pain anatomically, tenderness tracing nerve paths beyond visible infiltrate. Pain narrative therefore localises amoeba before ring appears in disease timeline. Analgesia need out of proportion is documented as diagnostic data, not symptom exaggeration, in amoeba clerking.",
+   "say": "Radial nerve inflammation together gives pain anatomy explanation in amoeba disease before ring formation in wearers over weeks. Narrative documentation gives diagnostic data value. Tenderness tracing gives bedside support."
+  },
+  {
+   "tx": "Amoeba therapy is prolonged antiseptic based with cyst resistance explaining months course and late surgery for scar or perforation after organism clearance. Early diagnosis decides graft free survival more than drug choice variations. **Confocal request** phrase in referral accelerates diagnosis where microscopy available, examinations rewarding named test.",
+   "say": "Prolonged antiseptic course together gives cyst resistance management in amoeba therapy at referral centres over many months. Early diagnosis gives graft free survival dominance. Named microscopy gives referral acceleration.",
+   "vis": {
+    "kind": "table",
+    "title": "Hypopyon source checklist",
+    "cols": [
+     "Source",
+     "Check"
+    ],
+    "rows": [
+     [
+      "Lacrimal sac reservoir",
+      "Pressure reflux, sac surgery plan"
+     ],
+     [
+      "Lens water exposure",
+      "Amoeba tests requested"
+     ],
+     [
+      "Vegetative trauma",
+      "Fungal mount requested"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endophthalmitis risk after perforation converts ulcer care to intraocular emergency with vitreous assessment and intravitreal pathways from uveitis batch. Sealed perforation with formed chamber and quiet vitreous observes differently from open leak with vitreous inflammation. **Vitreous view** at ulcer perforation decides which emergency ladder begins.",
+   "say": "Vitreous assessment together gives emergency ladder selection after ulcer perforation in hospital care at presentation urgently. Sealed quiet gives observation difference additionally. Open inflamed gives intraocular pathway.",
+   "vis": {
+    "kind": "table",
+    "title": "Perforation split",
+    "cols": [
+     "State",
+     "Ladder"
+    ],
+    "rows": [
+     [
+      "Sealed, chamber formed",
+      "Tectonic support, observe vitreous"
+     ],
+     [
+      "Leaking, flat chamber",
+      "Glue or graft urgently"
+     ],
+     [
+      "Vitreous inflamed",
+      "Endophthalmitis pathway"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: hypopyon grades and sources, amoeba hurts beyond signs in wet lens wearers, sterile keeps epithelium and steroids wait organisms. Ring needs context, pain narrates nerves and sac reinfects cornea. **Water history** is amoeba gate question in every lens ulcer clerking.",
+   "say": "Pain pattern together gives amoeba direction while hypopyon gives sac source search in ulcer clinics for wearers and elderly. Water history gives gate questioning always. Organism control gives steroid timing.",
+   "vis": {
+    "kind": "table",
+    "title": "Infiltrate anchors",
+    "cols": [
+     "Anchor",
+     "Direction"
+    ],
+    "rows": [
+     [
+      "Pain beyond signs, water",
+      "Amoeba until disproved"
+     ],
+     [
+      "Intact epithelium, mild",
+      "Sterile pattern likely"
+     ],
+     [
+      "Hypopyon elderly",
+      "Examine sac reservoir"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Acanthamoeba signature",
+   "b": "Lens water exposure, pain out of proportion, pseudodendrite then ring infiltrate with perineuritis."
+  },
+  {
+   "f": "Hypopyon sac link",
+   "b": "Elderly hypopyon ulcer needs lacrimal sac reservoir assessment; sac reinfects cornea until treated."
+  },
+  {
+   "f": "Sterile infiltrate clue",
+   "b": "Intact epithelium, milder pain and smaller infiltrate lower infection priority."
+  }
+ ],
+ "keys": [
+  "Ring infiltrate needs exposure context",
+  "Steroids worsen amoeba like dendrite",
+  "Perforation vitreous decides emergency ladder"
+ ]
+}

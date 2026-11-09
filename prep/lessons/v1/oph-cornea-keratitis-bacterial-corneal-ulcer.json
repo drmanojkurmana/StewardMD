@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "id": "oph-cornea-keratitis-bacterial-corneal-ulcer",
+ "subject": "ophthalmology",
+ "module": "oph-cornea",
+ "title": "Bacterial Corneal Ulcer",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Bacterial corneal ulcer** is stromal infection with epithelial defect, infiltrate, pain, photophobia and ciliary injection after trauma, contact lens wear or surface disease breaks corneal defence. Vision falls by size and centrality, hypopyon signalling severe inflammation in anterior chamber. Scraping for microbiology precedes intensive fortified therapy in central or severe ulcers.",
+   "say": "Stromal infection together gives painful ulcer with infiltrate after surface defence failure in trauma or lens wear. Scraping gives microbiology before intensive therapy in severe disease. Centrality gives vision prognosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bacterial-keratitis-fig1.webp",
+    "alt": "Anterior segment with corneal ulceration, stromal infiltrate, ciliary injection and hypopyon.",
+    "caption": "Bacterial corneal ulcer with central stromal infiltrate, ciliary injection, and hypopyon. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Corneal scraping** samples ulcer base and edges for Gram, culture and sensitivity before antibiotics dilute yield, using blade or needle under anaesthesia at slit lamp. Smear gives immediate direction while culture refines therapy days later. Contact lens and case culture accompany lens related ulcers where organism may differ from cornea.",
+   "say": "Ulcer sampling together gives immediate smear direction and later culture refinement in severe keratitis management. Lens culture accompanies corneal sampling in wearers. Sampling precedes intensive drops always.",
+   "vis": {
+    "kind": "table",
+    "title": "Ulcer workup set",
+    "cols": [
+     "Sample",
+     "Value"
+    ],
+    "rows": [
+     [
+      "Gram smear",
+      "Immediate organism direction"
+     ],
+     [
+      "Culture plates",
+      "Sensitivity refinement later"
+     ],
+     [
+      "Lens and case",
+      "Wearer reservoir organism"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Risk sorting by organism tempo: gram negative lens related ulcers melt rapidly, staphylococcal ulcers localise more indolently, and post surgical or trauma contexts shift probabilities. **Melting** with thinning toward descemetocele and perforation is surgical emergency needing glue, graft or tectonic repair by size. Perforation seals by iris plug sometimes, flat chamber and Seidel sign confirming leak.",
+   "say": "Organism tempo together gives melting risk sorting in bacterial ulcer assessment at presentation in clinic. Thinning gives perforation emergency needing tectonic repair. Leak signs give confirmation bedside.",
+   "vis": {
+    "kind": "flow",
+    "title": "Severe ulcer pathway",
+    "nodes": [
+     {
+      "id": "scrape",
+      "label": "Scrape and smear first"
+     },
+     {
+      "id": "fort",
+      "label": "Intensive fortified therapy"
+     },
+     {
+      "id": "review",
+      "label": "Daily thinning review"
+     },
+     {
+      "id": "tect",
+      "label": "Glue or graft if perforation"
+     }
+    ],
+    "edges": [
+     [
+      "scrape",
+      "fort"
+     ],
+     [
+      "fort",
+      "review"
+     ],
+     [
+      "review",
+      "tect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hypopyon corneal ulcer** collects sterile or infective layered pus in anterior chamber from severe keratitis toxins and inflammation, classically with fungal or bacterial virulence and in marginal disease immunologically. Hypopyon height is severity charted daily, not diagnosis by itself. Its presence escalates admission and hourly therapy decisions in ulcer protocols.",
+   "say": "Layered chamber pus together gives severity marking in hypopyon ulcer assessment at slit lamp daily. Height charting gives response monitoring in protocols. Presence gives admission escalation."
+  },
+  {
+   "tx": "Steroids in bacterial ulcer wait microbiological control and epithelial healing under specialist direction because premature suppression melts cornea catastrophically. Pain control by cycloplegia reduces ciliary spasm without masking thinning signs. **No patching** in lens related or infected ulcers because warm darkness favours organism growth, a first aid rule for referring clinics.",
+   "say": "Steroid timing together gives specialist control after microbiology in bacterial ulcer care safely in clinic. Cycloplegia gives pain relief without masking. Patch avoidance gives growth prevention.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Central severe ulcer",
+     "points": [
+      "Scrape, admit, hourly therapy",
+      "Daily thinning measurement",
+      "Tectonic standby"
+     ]
+    },
+    "right": {
+     "title": "Small peripheral ulcer",
+     "points": [
+      "Outpatient intensive drops",
+      "Review within a day",
+      "Escalate if enlarging"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Contact lens related keratitis prevention revisits hygiene, overnight wear prohibition and water exposure avoidance because gram negative organisms exploit all three. Pain out of proportion or ring infiltrate redirects toward amoebic disease next modules. **Lens history** is microbiology prediction, every ulcer clerking recording lens, trauma, surgery and steroid exposures separately.",
+   "say": "Exposure history together gives organism prediction in ulcer clerking at presentation in emergency clinics always. Lens, trauma and steroid items give separate recording. Pain pattern gives amoeba redirection.",
+   "vis": {
+    "kind": "table",
+    "title": "Ulcer exposure prediction",
+    "cols": [
+     "Exposure",
+     "Organism direction"
+    ],
+    "rows": [
+     [
+      "Contact lens water",
+      "Gram negative, amoeba considered"
+     ],
+     [
+      "Vegetable trauma",
+      "Fungal disease considered"
+     ],
+     [
+      "Post surgical",
+      "Staph and atypical organisms"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Healing leaves scar whose density and centrality decide acuity, irregular astigmatism managed by rigid lens or graft after quiet months. Operating inflamed ulcer elective graft invites failure, tectonic graft excepted for perforation salvage. **Quiet interval** before optical keratoplasty is prognosis investment, measured in months of uninflamed surface.",
+   "say": "Scar position together gives acuity outcome after ulcer healing in follow up clinics over months. Quiet interval gives optical graft prognosis investment. Rigid lens gives scar rehabilitation option.",
+   "vis": {
+    "kind": "table",
+    "title": "Ulcer outcome determinants",
+    "cols": [
+     "Determinant",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Central location",
+      "Worse acuity by scar"
+     ],
+     [
+      "Perforation history",
+      "Tectonic scar, irregular optics"
+     ],
+     [
+      "Quiet months before graft",
+      "Better optical prognosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: scrape before drops in severe, hypopyon grades severity, melting perforates tectonically and lens pain escalates instantly. Steroids wait control, patches avoided in infection and scars wait quiet for optics. **Daily measurement** of size, depth and hypopyon is ulcer treatment chart, not observation decoration.",
+   "say": "Scraping priority together gives microbiology value in severe ulcer care at presentation in hospital clinics always. Daily measurement gives treatment charting in protocols. Steroid timing gives melt prevention.",
+   "vis": {
+    "kind": "table",
+    "title": "Bacterial ulcer anchors",
+    "cols": [
+     "Anchor",
+     "Rule"
+    ],
+    "rows": [
+     [
+      "Severe or central",
+      "Scrape, admit, intensive therapy"
+     ],
+     [
+      "Thinning present",
+      "Tectonic standby daily"
+     ],
+     [
+      "Lens wearer",
+      "No patch, culture lens"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Severe ulcer first step",
+   "b": "Scrape base and edges for Gram and culture before intensive fortified therapy."
+  },
+  {
+   "f": "Hypopyon meaning",
+   "b": "Layered anterior chamber pus grading severity, charted daily; not a diagnosis alone."
+  },
+  {
+   "f": "Steroid rule in bacterial ulcer",
+   "b": "Only after microbiological control and healing under specialist direction; never patch lens related ulcers."
+  }
+ ],
+ "keys": [
+  "Pain in lens wearer is keratitis until disproved",
+  "Melting toward perforation is tectonic emergency",
+  "Scar optics wait for quiet months"
+ ]
+}

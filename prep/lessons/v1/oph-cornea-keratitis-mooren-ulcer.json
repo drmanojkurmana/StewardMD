@@ -1,0 +1,206 @@
+{
+ "v": 1,
+ "id": "oph-cornea-keratitis-mooren-ulcer",
+ "subject": "ophthalmology",
+ "module": "oph-cornea",
+ "title": "Mooren Ulcer and Marginal Keratitis",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Mooren ulcer** is painful peripheral corneal ulceration with undermined leading edge, no scleral involvement and no systemic association identified, a diagnosis of exclusion progressing circumferentially and centrally despite intact epithelium elsewhere initially. Severe pain out of proportion and peripheral guttering separate it from infectious ulcer. Immunosuppression, conjunctival excision and tectonic support escalate by progression.",
+   "say": "Painful peripheral guttering together gives Mooren pattern by exclusion at slit lamp in clinic characteristically over time. Undermined edge gives recognition detail for examiners. Immunosuppression gives escalation pathway."
+  },
+  {
+   "tx": "**Marginal keratitis** gives peripheral infiltrates separated from limbus by clear zone in staphylococcal hypersensitivity, usually with blepharitis and multiple small lesions at lid margin contact points. Clear lucid interval separates marginal immune infiltrate from infectious ulcer touching limbus. Lid treatment plus topical suppression settles it, scraping reserved for atypical progression.",
+   "say": "Clear zone separation together gives marginal immune pattern at limbus during blepharitis assessment in clinic characteristically. Lid treatment gives source control backbone. Atypical progression gives scraping need.",
+   "vis": {
+    "kind": "table",
+    "title": "Peripheral ulcer separation",
+    "cols": [
+     "Feature",
+     "Direction"
+    ],
+    "rows": [
+     [
+      "Clear zone from limbus",
+      "Marginal hypersensitivity"
+     ],
+     [
+      "Undermined edge, severe pain",
+      "Mooren exclusion pathway"
+     ],
+     [
+      "Sclera inflamed company",
+      "Systemic vasculitis review"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Peripheral ulcerative keratitis with scleritis signals systemic vasculitis including rheumatoid and granulomatosis diseases needing systemic immunosuppression and rheumatology jointly. Mooren by contrast spares sclera and systemic workup returns negative, exclusion steps documented. **Scleral involvement** is therefore fork between systemic vasculitis pathway and Mooren labelling.",
+   "say": "Scleral company together gives systemic vasculitis direction in peripheral ulceration during joint assessment in clinic always. Mooren gives scleral sparing by definition. Fork documentation gives exclusion value.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mooren ulcer",
+     "points": [
+      "Sclera spared, systemic negative",
+      "Undermined edge, severe pain",
+      "Exclusion diagnosis"
+     ]
+    },
+    "right": {
+     "title": "Vasculitic peripheral ulcer",
+     "points": [
+      "Scleritis accompanies melt",
+      "Systemic disease present",
+      "Systemic immunosuppression"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Terrien marginal degeneration** thins peripheral cornea painlessly without inflammation or epithelial defect, superior gutter with vascular pannus and lipid leading edge in older patients. Quiet thinning separates Terrien from painful Mooren and inflamed marginal disease by symptoms alone mostly. Induced astigmatism dominates management until perforation risk in advanced thinning.",
+   "say": "Painless quiet thinning together gives Terrien separation from inflammatory peripheral disease at slit lamp in clinic characteristically. Astigmatism gives management dominance in degeneration. Inflammation absence gives key split.",
+   "vis": {
+    "kind": "flow",
+    "title": "Peripheral cornea sorting",
+    "nodes": [
+     {
+      "id": "pain",
+      "label": "Pain and inflammation graded"
+     },
+     {
+      "id": "sclera",
+      "label": "Sclera involved or spared"
+     },
+     {
+      "id": "sys",
+      "label": "Systemic pathway or exclusion"
+     },
+     {
+      "id": "tect",
+      "label": "Tectonic risk monitored"
+     }
+    ],
+    "edges": [
+     [
+      "pain",
+      "sclera"
+     ],
+     [
+      "sclera",
+      "sys"
+     ],
+     [
+      "sys",
+      "tect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Phlyctenular marginal disease from previous module sits in same peripheral map in children with antigen source treatment, age separating it from adult Mooren and Terrien patterns. Peripheral cornea therefore reads by age, pain, sclera and clear zone in four questions. **Four question map** is examination routine for every peripheral lesion presentation.",
+   "say": "Age together with pain, sclera and clear zone gives peripheral reading in four questions at slit lamp in clinic. Child pattern gives antigen direction. Adult quiet gives degeneration direction."
+  },
+  {
+   "tx": "Tectonic management of peripheral melt uses crescentic grafts, conjunctival flaps or lamellar patches preserving globe when perforation threatens, optical rehabilitation deferred. Systemic control precedes elective graft because vasculitic melt recurs in graft under active disease. **Disease quiet** gates peripheral grafting even more strictly than central ulcer grafting.",
+   "say": "Tectonic support together gives globe preservation in peripheral melt during surgical management in hospital care when threatened. Systemic quiet gives graft gating strictly. Optical deferral gives priority clarity.",
+   "vis": {
+    "kind": "table",
+    "title": "Peripheral melt actions",
+    "cols": [
+     "State",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Progressing Mooren",
+      "Immunosuppress, excise conjunctiva selected"
+     ],
+     [
+      "Vasculitic melt",
+      "Systemic control before graft"
+     ],
+     [
+      "Impending perforation",
+      "Tectonic patch urgently"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Conjunctival excision in Mooren removes adjacent immune effector tissue historically, modern systemic and biologic immunosuppression dominating severe bilateral disease. Unilateral older and bilateral younger patterns differ prognostically in literature subdivisions. **Bilaterality** worsens Mooren prognosis and escalates systemic intensity earlier in protocols.",
+   "say": "Bilateral disease together gives worse prognosis needing earlier systemic intensity in Mooren protocols at specialist centres over time. Adjacent excision gives historical adjunct context. Age pattern gives subdivision value.",
+   "vis": {
+    "kind": "table",
+    "title": "Mooren pattern notes",
+    "cols": [
+     "Pattern",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Unilateral older",
+      "Slower, better prognosis"
+     ],
+     [
+      "Bilateral younger",
+      "Aggressive, systemic early"
+     ],
+     [
+      "All patterns",
+      "Exclude infection and vasculitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: undermined painful excludes to Mooren, clear zone hypersensitises marginally, sclera systemises vasculitically and quiet thins Terrien. Perforation tectonics and quiet gating repeat across peripheral melts. **Exclusion documented** phrase protects Mooren diagnosis in examinations and referrals alike. Referral letters document negative infection and systemic workup explicitly for the receiving specialist.",
+   "say": "Edge, zone and sclera together give peripheral ulcer separation at slit lamp in clinic for examiners reliably each presentation. Quiet gating gives graft safety in melts. Exclusion documentation gives diagnostic protection.",
+   "vis": {
+    "kind": "table",
+    "title": "Peripheral anchors",
+    "cols": [
+     "Anchor",
+     "Diagnosis"
+    ],
+    "rows": [
+     [
+      "Undermined painful edge",
+      "Mooren after exclusion"
+     ],
+     [
+      "Clear lucid interval",
+      "Marginal hypersensitivity"
+     ],
+     [
+      "Quiet superior thinning",
+      "Terrien degeneration"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Mooren ulcer identity",
+   "b": "Painful undermined peripheral ulcer, sclera spared, systemic workup negative; exclusion diagnosis."
+  },
+  {
+   "f": "Marginal keratitis split",
+   "b": "Peripheral infiltrate with clear zone from limbus in staphylococcal hypersensitivity with blepharitis."
+  },
+  {
+   "f": "Terrien degeneration",
+   "b": "Painless quiet peripheral thinning without inflammation; astigmatism dominates."
+  }
+ ],
+ "keys": [
+  "Scleral involvement forks to systemic vasculitis",
+  "Peripheral grafts need disease quiet first",
+  "Four questions read every peripheral lesion"
+ ]
+}
