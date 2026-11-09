@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "id": "der-vesiculobullous-pemphigus-vulgaris",
+ "subject": "dermatology",
+ "module": "der-vesiculobullous",
+ "title": "Pemphigus Vulgaris",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Desmoglein 3 autoantibodies** drive the mucosal-dominant form of pemphigus vulgaris, whereas additional autoantibodies against desmoglein 1 provoke extensive cutaneous blister involvement. Desmogleins are calcium-dependent transmembrane cadherins that maintain desmosomal adhesion between neighboring stratified squamous keratinocytes throughout the skin and mucous membranes.",
+   "say": "Pathogenic IgG autoantibodies target desmoglein cadherins within desmosomes. Antibodies targeting desmoglein 3 produce oral lesions, while concurrent desmoglein 1 antibodies prompt skin blistering.",
+   "vis": {
+    "kind": "table",
+    "title": "Desmoglein Compensation Profile",
+    "cols": [
+     "Pemphigus Subtype",
+     "Target Autoantigens",
+     "Primary Clinical Sites"
+    ],
+    "rows": [
+     [
+      "Mucosal pemphigus vulgaris",
+      "Desmoglein 3 only",
+      "Oral and genital mucosa"
+     ],
+     [
+      "Mucocutaneous vulgaris",
+      "Desmoglein 3 and 1",
+      "Oral mucosa plus widespread skin"
+     ],
+     [
+      "Pemphigus foliaceus",
+      "Desmoglein 1 only",
+      "Superficial skin, oral mucosa spared"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Suprabasal acantholysis** constitutes the essential histologic hallmark of pemphigus vulgaris. Binding of autoantibodies disassembles desmosomes, causing loss of intercellular attachment between keratinocytes directly above the basal layer. Detached round keratinocytes float freely within the blister cavity, readily visualised on bedside Tzanck smear cytology.",
+   "say": "Autoantibody binding triggers desmosome breakdown, producing suprabasal acantholysis. Uncoupled, rounded keratinocytes detach into the blister fluid where a Tzanck smear detects them.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pemphigus-vulgaris-fig1.webp",
+    "alt": "Pemphigus vulgaris histology showing suprabasal split and acantholytic cells.",
+    "caption": "Pemphigus vulgaris histopathology with intraepidermal suprabasal acantholysis and basal tombstoning.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Tombstone appearance** describes the single layer of intact basal keratinocytes remaining anchored to the basement membrane zone via intact hemidesmosomes. Because desmoplakins and hemidesmosomes remain undamaged by desmoglein antibodies, the basal cells survive along the dermal floor resembling a row of tombstones in a graveyard.",
+   "say": "Basal keratinocytes stay firmly attached to the basement membrane through hemidesmosomes, resembling tombstones. Blistering occurs strictly above this basal layer.",
+   "vis": {
+    "kind": "flow",
+    "title": "Acantholytic Cleavage Mechanics",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Circulating IgG binds desmoglein 3/1 in spinous layer"
+     },
+     {
+      "id": "n2",
+      "label": "Desmosomal detachment produces suprabasal cleavage"
+     },
+     {
+      "id": "n3",
+      "label": "Basal cells retain hemidesmosome anchors to lamina lucida"
+     },
+     {
+      "id": "n4",
+      "label": "Characteristic tombstone monolayer lines the blister floor"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Flaccid bullae** develop on normal or erythematous skin, possessing fragile, thin roofs that rupture quickly under minor shearing forces. Instead of intact blisters, patients typically present with extensive, painful, weeping erosions that expand centrifugally, release foul-smelling exudate, and heal with post-inflammatory hyperpigmentation without primary dermal scarring.",
+   "say": "Blisters are thin-roofed and flaccid, rupturing rapidly upon minimal contact. Patients often present with painful denuded erosions that weep fluid and heal without true dermal scars.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pemphigus Vulgaris",
+     "points": [
+      "Flaccid, fragile blisters",
+      "Easily ruptured thin roof",
+      "Suprabasal intraepidermal split",
+      "Heals without dermal scarring"
+     ]
+    },
+    "right": {
+     "title": "Bullous Pemphigoid",
+     "points": [
+      "Tense, durable blisters",
+      "Resistant thick roof",
+      "Subepidermal basement split",
+      "Prodromal urticarial plaques"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Positive Nikolsky sign** is elicited by applying firm tangential sliding pressure with a finger to normal-appearing perilesional skin, resulting in epidermal dislodgement and erosion. The Asboe-Hansen sign, or bulla spread sign, demonstrates centrifugal lateral expansion of an intact blister cavity when direct vertical pressure is applied to its roof.",
+   "say": "A positive Nikolsky sign is confirmed when gentle lateral friction detaches normal-appearing epidermis. Applying vertical pressure spreads the blister fluid laterally, demonstrating the Asboe-Hansen sign.",
+   "vis": {
+    "kind": "table",
+    "title": "Bedside Blister Physical Signs",
+    "cols": [
+     "Physical Sign",
+     "Maneuver",
+     "Clinical Meaning"
+    ],
+    "rows": [
+     [
+      "Nikolsky sign",
+      "Lateral shearing on normal perilesional skin",
+      "Active intraepidermal fragility"
+     ],
+     [
+      "Asboe-Hansen sign",
+      "Gentle vertical pressure on intact blister",
+      "Acantholytic fluid cleaves laterally"
+     ],
+     [
+      "Tzanck smear",
+      "Scraping blister base stained with Giemsa",
+      "Demonstrates rounded acantholytic cells"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Oral mucosal erosions** precede cutaneous blister emergence by several months in the majority of patients. The lesions present as painful, irregular, non-healing erosions on the buccal mucosa, soft palate, and gingiva, leading to significant odynophagia, weight loss, and frequent misdiagnosis as recurrent aphthous stomatitis.",
+   "say": "Oral erosions represent the initial manifestation in most patients, preceding skin lesions by months. Persistent painful buccal and palate ulcers cause severe dysphagia and nutritional decline.",
+   "vis": {
+    "kind": "flow",
+    "title": "Natural History of Pemphigus Vulgaris",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Desmoglein 3 autoantibodies generate isolated oral erosions"
+     },
+     {
+      "id": "n2",
+      "label": "Delayed recognition over months due to aphthae misdiagnosis"
+     },
+     {
+      "id": "n3",
+      "label": "Intermolecular epitope spreading to desmoglein 1 occurs"
+     },
+     {
+      "id": "n4",
+      "label": "Widespread cutaneous flaccid blister eruption develops"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fishnet pattern immunofluorescence** on direct immunofluorescence testing of perilesional skin demonstrates diagnostic IgG and C3 deposition along the intercellular cementing substance between keratinocytes throughout the entire epidermis. Indirect immunofluorescence reveals circulating anti-desmoglein antibodies whose serum titers correlate closely with clinical disease severity.",
+   "say": "Direct immunofluorescence displays a distinctive lace-like or fishnet pattern of intercellular IgG throughout the epidermis. Circulating antibody titers correspond to disease activity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pemphigus-foliaceus-fig1.webp",
+    "alt": "Immunofluorescence pattern and superficial blistering in pemphigus.",
+    "caption": "Pemphigus immunopathology illustrating intercellular epidermal IgG deposition.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Rituximab** combined with systemic corticosteroids now represents the standard first-line therapy for moderate-to-severe pemphigus vulgaris. This chimeric monoclonal antibody selectively targets CD20 on B-lymphocytes, rapidly depleting pathogenic autoantibody-secreting clones, expediting complete clinical remission, and drastically reducing long-term corticosteroid toxicity and hospitalization rates.",
+   "say": "Rituximab administered alongside systemic steroids represents first-line therapy. By depleting CD20-positive B cells, it eliminates autoantibody production and accelerates steroid-free remission.",
+   "vis": {
+    "kind": "flow",
+    "title": "Targeted B-Cell Remission Protocol",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "High-dose systemic corticosteroids control acute blistering"
+     },
+     {
+      "id": "n2",
+      "label": "Rituximab infusions deplete CD20-bearing B lymphocytes"
+     },
+     {
+      "id": "n3",
+      "label": "Circulating anti-desmoglein antibody titers decline"
+     },
+     {
+      "id": "n4",
+      "label": "Systemic steroids tapered to avert long-term immunosuppression toxicity"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

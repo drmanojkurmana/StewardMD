@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "id": "der-acne-rosacea-acne-vulgaris",
+ "subject": "dermatology",
+ "module": "der-acne-rosacea",
+ "title": "Acne Vulgaris and Rosacea",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Cutibacterium acnes colonization** within the pilosebaceous unit contributes centrally to inflammatory acne pathogenesis alongside androgen-induced sebum overproduction and follicular hyperkeratinization. This anaerobic diphtheroid hydrolyzes sebum triglycerides into free fatty acids and releases pro-inflammatory lipases that trigger toll-like receptor 2 signaling on surrounding keratinocytes.",
+   "say": "Acne begins within the pilosebaceous unit through excess sebum, follicular plugged keratin, and Cutibacterium acnes proliferation. Bacterial lipases incite toll-like receptor 2 inflammation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acne-vulgaris-fig1.webp",
+    "alt": "Pilosebaceous unit anatomy, comedone formation, and acne pathogenesis.",
+    "caption": "Pilosebaceous follicle showing keratin plugging, Cutibacterium acnes colonization, and rupture.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Microcomedone precursor** lesions form when retained corneocytes occlude the follicular infundibulum, trapping accumulating sebum. As lipid and keratinaceous debris consolidate, lesions evolve into closed comedones or whiteheads with microscopic ostia, and open comedones or blackheads whose widened follicular pores expose packed keratin and melanin to air oxidation.",
+   "say": "The microcomedone represents the subclinical precursor. Obstruction yields closed whiteheads with tiny orifices, or open blackheads where oxidized surface melanin darkens the pore.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Closed Comedone (Whitehead)",
+     "points": [
+      "Narrow or microscopic follicular ostium",
+      "Pale, flesh-colored non-inflammatory papule",
+      "Prone to inflammatory follicular rupture",
+      "Responds to topical retinoids"
+     ]
+    },
+    "right": {
+     "title": "Open Comedone (Blackhead)",
+     "points": [
+      "Widely dilated follicular orifice",
+      "Dark plug from oxidized melanin and lipid",
+      "Rarely ruptures into dermis",
+      "Extracted mechanically or topically"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Acne conglobata** represents a devastating chronic inflammatory subtype characterized by coalescing deep nodulocystic lesions, extensive burrowing sinus tracts, and severe cribriform or keloidal scarring. In contrast, acne fulminans presents as an acute, ulcerating eruption of necrotic acne lesions accompanied by systemic fever, leukocytosis, and sterile polyarthritis.",
+   "say": "Acne conglobata produces deep draining sinus tracts and disfiguring scarring. Acne fulminans erupts with ulcerating necrotic nodules accompanied by high fever and painful joint swelling.",
+   "vis": {
+    "kind": "table",
+    "title": "Severe Acne Presentations",
+    "cols": [
+     "Variant",
+     "Primary Lesions",
+     "Systemic Findings"
+    ],
+    "rows": [
+     [
+      "Nodulocystic acne",
+      "Tender deep nodules >5 mm",
+      "Localized pain without fever"
+     ],
+     [
+      "Acne conglobata",
+      "Burrowing sinus tracts, foul discharge",
+      "Severe keloidal scarring, no systemic fever"
+     ],
+     [
+      "Acne fulminans",
+      "Ulcerating necrotic hemorrhagic crusts",
+      "High fever, leukocytosis, polyarthritis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Topical retinoids** including tretinoin, adapalene, and tazarotene form the foundational cornerstone of all non-inflammatory and maintenance acne regimens by accelerating corneocyte desquamation and normalizing infundibular differentiation. Pairing retinoids with benzoyl peroxide provides bactericidal action against Cutibacterium acnes without inducing antimicrobial resistance.",
+   "say": "Topical retinoids normalize follicular shedding and clear microcomedones. Combining them with benzoyl peroxide suppresses bacteria without inciting antibiotic resistance.",
+   "vis": {
+    "kind": "flow",
+    "title": "Topical Acne Regimen Strategy",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Topical retinoid clears microcomedones and prevents plugs"
+     },
+     {
+      "id": "n2",
+      "label": "Benzoyl peroxide releases free radicals against C. acnes"
+     },
+     {
+      "id": "n3",
+      "label": "Topical clindamycin added for mild inflammatory papules"
+     },
+     {
+      "id": "n4",
+      "label": "Fixed-dose combinations enhance patient compliance"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Oral isotretinoin** acts as a uniquely curative therapy for severe recalcitrant nodulocystic acne by profoundly suppressing sebaceous gland size and activity, normalizing follicular keratinization, reducing bacterial counts, and dampening inflammation. Because it is notoriously teratogenic, mandatory pregnancy testing, strict contraception, and serial lipid monitoring are compulsory.",
+   "say": "Oral isotretinoin shrinks sebaceous glands and provides durable remission in nodulocystic acne. Its profound teratogenicity mandates strict contraception and liver panel monitoring.",
+   "vis": {
+    "kind": "table",
+    "title": "Isotretinoin Safety Protocol",
+    "cols": [
+     "Organ System",
+     "Adverse Effect",
+     "Monitoring Requirement"
+    ],
+    "rows": [
+     [
+      "Teratogenicity",
+      "Severe craniofacial and cardiac birth defects",
+      "Monthly pregnancy tests, dual contraception"
+     ],
+     [
+      "Mucocutaneous",
+      "Cheilitis, xerosis, epistaxis",
+      "Universal, managed with emollients"
+     ],
+     [
+      "Hepatic & lipid",
+      "Elevated transaminases and triglycerides",
+      "Baseline and serial serum biochemistry"
+     ],
+     [
+      "Musculoskeletal",
+      "Myalgias, elevated CPK",
+      "Screen history with intense athletic activity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Absence of comedones** distinguishes rosacea definitively from acne vulgaris. Rosacea represents a chronic vascular and pilosebaceous disorder centered on the convexities of the face, featuring persistent erythema, telangiectasias, and inflammatory papules and pustules. Common triggers include spicy foods, hot beverages, alcohol, ultraviolet radiation, and emotional stress.",
+   "say": "Rosacea lacks comedones, an essential clinical discriminator from acne. Patients experience facial flushing, telangiectasias, and papulopustules triggered by spicy foods, heat, and alcohol.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/rosacea-fig1.webp",
+    "alt": "Rosacea clinical subtypes and centrofacial erythema.",
+    "caption": "Rosacea clinical features showing centrofacial erythema, telangiectasia, and inflammatory papules.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Rhinophyma** characterizes advanced phymatous rosacea, manifesting as progressive, bulbous, hyperplastic enlargement of the sebaceous glands and soft tissues of the nasal tip, occurring almost exclusively in older men. Papulopustular rosacea responds well to topical ivermectin, metronidazole, or low-dose oral doxycycline.",
+   "say": "Rhinophyma produces bulbous nasal enlargement from sebaceous hypertrophy in older men. Inflammatory papulopustular rosacea responds well to topical ivermectin or oral doxycycline.",
+   "vis": {
+    "kind": "table",
+    "title": "Rosacea Clinical Classifications",
+    "cols": [
+     "Subtype",
+     "Key Physical Manifestations",
+     "Primary Therapy"
+    ],
+    "rows": [
+     [
+      "Erythematotelangiectatic",
+      "Flushing, central facial telangiectasia",
+      "Brimonidine gel, pulsed-dye laser"
+     ],
+     [
+      "Papulopustular",
+      "Central pustules without comedones",
+      "Topical ivermectin, oral doxycycline"
+     ],
+     [
+      "Phymatous (rhinophyma)",
+      "Bulbous nasal tissue hypertrophy",
+      "Surgical debulking, electrosurgery"
+     ],
+     [
+      "Ocular rosacea",
+      "Blepharitis, conjunctival injection",
+      "Lid hygiene, oral doxycycline"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hidradenitis suppurativa** is a chronic, painful follicular occlusion disease affecting terminal hair follicles in intertriginous apocrine-bearing sites including the axillae, inguinoperineal folds, and inframammary creases. Occluded follicles rupture, forming double-ended comedones, painful subcutaneous abscesses, and draining sinus tracts staged under the Hurley system.",
+   "say": "Hidradenitis suppurativa arises from follicular occlusion in intertriginous areas like the axillae and groin. Recurrent abscesses, double comedones, and sinus tracts define the disease.",
+   "vis": {
+    "kind": "flow",
+    "title": "Hurley Staging System",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Hurley Stage I: Single or multiple isolated abscesses without sinus tracts"
+     },
+     {
+      "id": "n2",
+      "label": "Hurley Stage II: Recurrent abscesses with sinus tract formation and scarring"
+     },
+     {
+      "id": "n3",
+      "label": "Hurley Stage III: Diffuse confluent involvement with interconnected sinus networks"
+     },
+     {
+      "id": "n4",
+      "label": "Medical and surgical escalation with adalimumab and wide excision"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

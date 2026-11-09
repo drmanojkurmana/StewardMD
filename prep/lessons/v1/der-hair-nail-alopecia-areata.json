@@ -1,0 +1,249 @@
+{
+ "v": 1,
+ "id": "der-hair-nail-alopecia-areata",
+ "subject": "dermatology",
+ "module": "der-hair-nail",
+ "title": "Alopecia Areata and Hair-Nail Pathology",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Alopecia areata** represents an autoimmune disorder characterized by targeted immune-mediated disruption of the hair follicle immune privilege during the anagen growth phase. Autoreactive CD8+ T cells breach the normally protected follicular bulb, arresting hair matrix proliferation and precipitating rapid transition into catagen and telogen shedding phases.",
+   "say": "Alopecia areata results from collapse of immune privilege around growing anagen hair bulbs. Autoreactive CD8+ T lymphocytes attack the bulb, forcing follicles into premature shedding.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/alopecia-areata-fig1.webp",
+    "alt": "Alopecia areata histology showing peribulbar lymphocytic infiltrate.",
+    "caption": "Alopecia areata scalp biopsy with dense peribulbar swarm-of-bees lymphocytic infiltrate.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Exclamation mark hairs** serve as the pathognomonic diagnostic sign of active alopecia areata, visible along the advancing peripheral margins of bare patches. These short, broken hairs measure two to three millimeters in length and exhibit a tapered, hypopigmented, frayed proximal shaft with a normal-caliber distal tip.",
+   "say": "Exclamation mark hairs are pathognomonic and line active bald patch borders. The proximal shaft near the scalp is thin and depigmented while the distal end remains broad.",
+   "vis": {
+    "kind": "flow",
+    "title": "Exclamation Mark Hair Evolution",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Peribulbar inflammation attacks anagen hair matrix"
+     },
+     {
+      "id": "n2",
+      "label": "Matrix transiently produces an attenuated, weakened hair shaft"
+     },
+     {
+      "id": "n3",
+      "label": "Inflammation subsides and hair fractures upon reaching skin surface"
+     },
+     {
+      "id": "n4",
+      "label": "Short tapered stub with frayed tip marks active disease boundary"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Swarm of bees infiltrate** describes the classic histopathologic finding on horizontal scalp biopsy in alopecia areata. Dense collections of CD4+ and CD8+ T-lymphocytes surround and infiltrate the bulbs of terminal anagen and early catagen hair follicles, closely mimicking a swarm of bees clustered around a hive.",
+   "say": "Scalp biopsy reveals a distinctive lymphocytic infiltrate surrounding the lower hair bulbs. This peribulbar clustering resembles a swarm of bees attacking the follicle.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alopecia Areata Pathology",
+     "points": [
+      "Peribulbar swarm-of-bees infiltrate",
+      "Preserved follicular ostia",
+      "Miniaturized nanogen hairs",
+      "Non-scarring, reversible potential"
+     ]
+    },
+    "right": {
+     "title": "Cicatricial (Scarring) Alopecia",
+     "points": [
+      "Destruction of follicular stem cells",
+      "Complete loss of follicular ostia",
+      "Dermal fibrotic tract replacement",
+      "Permanent, irreversible hair loss"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Ophiasis pattern** represents a distinct, recalcitrant morphological variant of alopecia areata where hair loss tracks along the occipital and temporal margins of the scalp in a snake-like band. Ophiasis carries a notoriously poor prognosis for spontaneous regrowth compared to typical circumscribed circular patches.",
+   "say": "Ophiasis describes band-like hair loss tracking around the lower scalp margins. This pattern responds poorly to treatment compared to focal circular patches.",
+   "vis": {
+    "kind": "table",
+    "title": "Alopecia Areata Clinical Subtypes",
+    "cols": [
+     "Clinical Pattern",
+     "Anatomic Involvement",
+     "Prognostic Outlook"
+    ],
+    "rows": [
+     [
+      "Patchy alopecia areata",
+      "Single or few circular bare scalp patches",
+      "High rate of spontaneous regrowth"
+     ],
+     [
+      "Ophiasis pattern",
+      "Band-like loss along temporal and occipital margin",
+      "Poor response to standard treatment"
+     ],
+     [
+      "Alopecia totalis",
+      "Complete loss of all terminal scalp hair",
+      "Low spontaneous recovery rate"
+     ],
+     [
+      "Alopecia universalis",
+      "Complete loss of all scalp and body hair",
+      "Requires systemic JAK inhibitor therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Androgenetic alopecia** constitutes non-scarring progressive hair loss driven by dihydrotestosterone binding to follicular androgen receptors in genetically susceptible individuals. Dihydrotestosterone synthesis is catalyzed by 5-alpha reductase, inducing progressive follicular miniaturization where terminal pigmented hairs convert into short, fine, hypopigmented vellus hairs.",
+   "say": "Dihydrotestosterone drives androgenetic alopecia by binding androgen receptors and shrinking follicles. Miniaturization gradually replaces thick terminal hairs with fine vellus fibers.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/androgenetic-alopecia-fig1.webp",
+    "alt": "Androgenetic alopecia classification patterns.",
+    "caption": "Male and female pattern hair loss showing bitemporal recession and crown thinning.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Finasteride** functions as a competitive inhibitor of type II 5-alpha reductase, decreasing circulating and scalp dihydrotestosterone concentrations by over sixty percent to halt hair loss and stimulate regrowth. Topical or oral minoxidil acts as an adenosine triphosphate-sensitive potassium channel opener, prolonging the anagen growth phase.",
+   "say": "Finasteride blocks type II 5-alpha reductase, lowering dihydrotestosterone levels to arrest hair thinning. Minoxidil opens potassium channels to extend the active anagen growth phase.",
+   "vis": {
+    "kind": "table",
+    "title": "Androgenetic Alopecia Pharmacotherapy",
+    "cols": [
+     "Therapeutic Agent",
+     "Mechanism of Action",
+     "Clinical Nuance"
+    ],
+    "rows": [
+     [
+      "Oral finasteride",
+      "Type II 5-alpha reductase inhibitor",
+      "Approved for men, teratogenic in women"
+     ],
+     [
+      "Oral dutasteride",
+      "Dual type I and II 5-alpha reductase blocker",
+      "Greater DHT suppression, off-label use"
+     ],
+     [
+      "Topical minoxidil",
+      "ATP-sensitive potassium channel opener",
+      "Stimulates anagen, causes transient shedding"
+     ],
+     [
+      "Oral spironolactone",
+      "Aldosterone and androgen receptor antagonist",
+      "Used in female pattern hair loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Telogen effluvium** causes diffuse non-scarring scalp shedding occurring characteristically two to three months after a major systemic physiological trigger such as high fever, severe illness, major surgery, severe emotional trauma, or childbirth. An abrupt premature shift drives up to fifty percent of anagen hairs simultaneously into telogen resting phase.",
+   "say": "Telogen effluvium manifests as diffuse hair shedding two to three months after physiological shock, childbirth, or fever. Follicles shift prematurely into resting telogen phase.",
+   "vis": {
+    "kind": "flow",
+    "title": "Telogen Effluvium Timeline",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Severe metabolic stress, sepsis, surgery, or childbirth"
+     },
+     {
+      "id": "n2",
+      "label": "Anagen follicles abruptly transition into telogen phase"
+     },
+     {
+      "id": "n3",
+      "label": "Two to three month resting latent interval transpires"
+     },
+     {
+      "id": "n4",
+      "label": "Massive club hair shedding observed with positive pull test"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Koilonychia** describes thin, spoon-shaped nail plates with everted lateral edges that can hold a drop of water without spilling, classic for chronic iron deficiency anemia. Digital clubbing obliterates the normal Lovibond angle past one hundred eighty degrees, reflecting cardiopulmonary shunting or bronchogenic carcinoma.",
+   "say": "Spoon-shaped concave nails denote koilonychia from iron deficiency anemia. Obliteration of the Lovibond angle signifies clubbing, prompting cardiopulmonary evaluation.",
+   "vis": {
+    "kind": "table",
+    "title": "Systemic Nail Clues",
+    "cols": [
+     "Nail Sign",
+     "Physical Morphology",
+     "Underlying Systemic Disease"
+    ],
+    "rows": [
+     [
+      "Koilonychia",
+      "Concave spoon-shaped nail plate",
+      "Severe iron deficiency anemia"
+     ],
+     [
+      "Digital clubbing",
+      "Lovibond angle >180 degrees",
+      "Cyanotic heart disease, lung carcinoma"
+     ],
+     [
+      "Beau lines",
+      "Transverse grooves across nail plate",
+      "Severe acute systemic illness, sepsis"
+     ],
+     [
+      "Half-and-half nails",
+      "Proximal white, distal reddish-brown",
+      "Chronic kidney disease, uremia"
+     ],
+     [
+      "Terry nails",
+      "Diffuse white ground-glass, distal pink rim",
+      "Hepatic cirrhosis, heart failure"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

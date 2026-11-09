@@ -1,0 +1,229 @@
+{
+ "v": 1,
+ "id": "der-vesiculobullous-bullous-pemphigoid",
+ "subject": "dermatology",
+ "module": "der-vesiculobullous",
+ "title": "Bullous Pemphigoid and Subepidermal Blistering",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**BP180 autoantibodies** direct targeted humoral destruction against the non-collagenous NC16A domain of type XVII collagen within hemidesmosomes. Along with secondary autoantibodies targeting BP230, this attack destabilizes the adhesion complex connecting basal keratinocytes to the underlying basement membrane zone in elderly patients.",
+   "say": "The disease is mediated by autoantibodies against the NC16A domain of BP180 and BP230 in hemidesmosomes. This autoantibody attack compromises basement membrane cohesion in elderly adults.",
+   "vis": {
+    "kind": "table",
+    "title": "Hemidesmosomal Autoantigens",
+    "cols": [
+     "Antigen",
+     "Molecular Identity",
+     "Pathologic Function"
+    ],
+    "rows": [
+     [
+      "BP180",
+      "Type XVII collagen, transmembrane",
+      "Primary target, NC16A domain induces split"
+     ],
+     [
+      "BP230",
+      "Plakin family, intracellular plaque",
+      "Secondary antibody target, anchors keratins"
+     ],
+     [
+      "Lamina lucida",
+      "Dermoepidermal junction plane",
+      "Site of blister cleavage and fluid accumulation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Subepidermal blister** formation occurs within the lamina lucida of the basement membrane, leaving the entire epidermis fully intact to form the roof of the lesion. Histopathology reveals an inflammatory infiltrate in the upper dermis and blister cavity dominated by abundant eosinophils.",
+   "say": "Blister cleavage occurs within the lamina lucida, meaning the blister roof consists of the entire epidermis. Eosinophil-rich inflammatory infiltrates fill the dermal papillae and cavity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bullous-pemphigoid-fig1.webp",
+    "alt": "Subepidermal blister histology with eosinophil infiltration.",
+    "caption": "Bullous pemphigoid histology demonstrating a tense subepidermal split with dermal eosinophils.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Tense bullae** arising on normal-appearing or inflamed erythematous skin represent the classic cutaneous lesion in elderly patients over seventy years of age. Because the thick epidermal roof withstands trauma, blisters persist for days without collapsing, and both the Nikolsky sign and Asboe-Hansen sign are negative.",
+   "say": "Blisters are characteristically tense and durable, resisting spontaneous rupture for several days. Both the Nikolsky sign and the bulla spread sign test negative.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Physical Blister Hallmarks",
+     "points": [
+      "Tense, domed fluid-filled bullae",
+      "Thick roof resistant to rupture",
+      "Negative Nikolsky sign",
+      "Negative Asboe-Hansen sign"
+     ]
+    },
+    "right": {
+     "title": "Demographic Associations",
+     "points": [
+      "Patients typically over 70 years",
+      "Preceding severe pruritus",
+      "Associated neurological disorders",
+      "Drug triggers like gliptins"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Urticarial prodrome** often precedes overt blistering by weeks or months, presenting as intensely pruritic urticarial plaques or eczematous eruptions without visible bullae. Clinicians managing refractory pruritus or atypical urticaria in elderly individuals must maintain suspicion for early non-bullous pemphigoid before blisters emerge.",
+   "say": "Intense itching and urticarial plaques frequently precede blister formation by several months. In older adults, unexplained persistent pruritus warrants consideration of prodromal pemphigoid.",
+   "vis": {
+    "kind": "flow",
+    "title": "Bullous Pemphigoid Evolution",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Subclinical autoantibody production against BP180"
+     },
+     {
+      "id": "n2",
+      "label": "Pruritic urticarial and eczematous prodrome emerges"
+     },
+     {
+      "id": "n3",
+      "label": "Complement activation and eosinophil degranulation"
+     },
+     {
+      "id": "n4",
+      "label": "Tense subepidermal bullae erupt across limbs and trunk"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Linear basement membrane zone IgG** and C3 deposition on direct immunofluorescence of perilesional skin confirms the diagnosis. The continuous, smooth linear fluorescent band outlines the dermoepidermal junction precisely, distinguishing it from the intercellular fishnet pattern of pemphigus or the granular papillary pattern of dermatitis herpetiformis.",
+   "say": "Direct immunofluorescence demonstrates a continuous, sharp linear band of IgG and C3 hugging the basement membrane zone. This clean linear deposition is diagnostic.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anti-p200-pemphigoid-fig1.webp",
+    "alt": "Linear dermoepidermal basement membrane immunofluorescence.",
+    "caption": "Basement membrane zone immunopathology showing continuous linear IgG and C3 deposition.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**High-potency topical clobetasol** propionate applied to the entire body surface constitutes first-line therapy for extensive bullous pemphigoid, demonstrating equivalent disease control to oral prednisolone with significantly lower one-year mortality from systemic steroid side effects. Oral tetracyclines combined with nicotinamide offer mild steroid-sparing alternatives.",
+   "say": "Whole-body application of superpotent clobetasol ointment provides superior survival compared to high-dose oral steroids. It achieves rapid blister control with fewer systemic complications.",
+   "vis": {
+    "kind": "table",
+    "title": "Bullous Pemphigoid Therapeutic Options",
+    "cols": [
+     "Treatment Modality",
+     "Agent",
+     "Clinical Context"
+    ],
+    "rows": [
+     [
+      "Topical steroid",
+      "Clobetasol 0.05% cream",
+      "First-line preferred, reduced mortality"
+     ],
+     [
+      "Systemic steroid",
+      "Oral prednisolone",
+      "Alternative when extensive topical care unfeasible"
+     ],
+     [
+      "Steroid-sparing",
+      "Methotrexate or azathioprine",
+      "Maintains remission, limits steroid burden"
+     ],
+     [
+      "Anti-inflammatory",
+      "Doxycycline with nicotinamide",
+      "Mild or localized disease in frail elderly"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dermatitis herpetiformis** presents as intensely pruritic, grouped polymorphic papulovesicles distributed symmetrically over the extensor surfaces of the elbows, knees, buttocks, and upper back. Virtually all patients have underlying gluten-sensitive enteropathy or celiac disease, even if gastrointestinal symptoms remain entirely silent.",
+   "say": "Dermatitis herpetiformis causes grouped, symmetrically distributed vesicles on the extensor elbows, knees, and buttocks. It is invariably linked to underlying gluten-sensitive enteropathy.",
+   "vis": {
+    "kind": "flow",
+    "title": "Dermatitis Herpetiformis Pathogenesis",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Ingested gluten stimulates mucosal IgA transglutaminase production"
+     },
+     {
+      "id": "n2",
+      "label": "Circulating IgA-epidermal transglutaminase complexes form"
+     },
+     {
+      "id": "n3",
+      "label": "Granular IgA precipitates in dermal papillae tips"
+     },
+     {
+      "id": "n4",
+      "label": "Neutrophil microabscesses produce subepidermal microvesicles"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Granular IgA in dermal papillae** on direct immunofluorescence proves pathognomonic for dermatitis herpetiformis, distinguishing it definitively from other subepidermal bullous conditions. Oral dapsone relieves the debilitating pruritus within forty-eight hours, while a strict lifelong gluten-free diet provides curative long-term control.",
+   "say": "Direct immunofluorescence demonstrates diagnostic granular IgA deposits within the tips of dermal papillae. Dapsone relieves pruritus rapidly while a gluten-free diet controls the disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dermatitis Herpetiformis",
+     "points": [
+      "Granular IgA in dermal papillae",
+      "Gluten-sensitive celiac disease",
+      "Neutrophilic papillary microabscesses",
+      "Responds promptly to dapsone"
+     ]
+    },
+    "right": {
+     "title": "Epidermolysis Bullosa Acquisita",
+     "points": [
+      "Linear IgG along type VII collagen",
+      "Trauma-induced blisters on hands/feet",
+      "Prominent scarring and milia formation",
+      "Refractory to routine steroid therapy"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}
