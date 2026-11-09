@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "phy-sensory",
+  "subject": "physiology",
+  "title": "Sensory Transduction, Receptor Potentials, and Cutaneous Mechanoreceptors",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Sensory receptors act as biological transducers that convert diverse mechanical, thermal, chemical, or electromagnetic physical stimuli into local electrochemical responses. When an adequate stimulus deforms or alters the receptor membrane, opening of non-selective cation channels generates a graded, non-propagated depolarisation termed the **receptor potential**, whose amplitude varies in direct proportion to stimulus intensity.",
+      "say": "A receptor potential is a graded depolarisation produced when an adequate stimulus opens cation channels.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "physical_stim",
+            "label": "Physical Modality Stimulates Specialized Receptor Ending or Sense Organ"
+          },
+          {
+            "id": "mechano_open",
+            "label": "Direct Stretch or Chemical Gating Opens Non-Selective Inward Cation Pores"
+          },
+          {
+            "id": "graded_depol",
+            "label": "Graded Local Receptor Potential Spreads Electrotonically Along Terminal"
+          },
+          {
+            "id": "action_pot",
+            "label": "Reaches Trigger Zone Threshold to Fire Frequency-Coded Action Potentials"
+          }
+        ],
+        "edges": [
+          [
+            "physical_stim",
+            "mechano_open"
+          ],
+          [
+            "mechano_open",
+            "graded_depol"
+          ],
+          [
+            "graded_depol",
+            "action_pot"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When maintained under continuous constant-strength stimulation, sensory receptors exhibit a progressive decline in receptor potential amplitude and afferent action potential firing frequency over time. This physiological damping is designated **sensory receptor adaptation**, allowing the nervous system to filter out continuous unvarying baseline background signals while remaining exquisitely sensitive to dynamic environmental changes.",
+      "say": "Receptor adaptation diminishes discharge frequency over time under constant stimulation, filtering unchanging signals.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Phasic (Rapidly Adapting) Receptors",
+          "points": [
+            "Fire brief bursts of action potentials at stimulus onset and offset",
+            "Discharge frequency ceases completely during sustained steady stimulus",
+            "Specialized for detecting velocity, acceleration, and vibration",
+            "Examples include Pacinian corpuscles and Meissner corpuscles"
+          ]
+        },
+        "right": {
+          "title": "Tonic (Slowly Adapting) Receptors",
+          "points": [
+            "Fire continuously throughout prolonged duration of maintained stimulus",
+            "Discharge rate declines only modestly over seconds or minutes",
+            "Specialized for signaling static position, pressure, and stretch",
+            "Examples include Merkel discs, Ruffini endings, and muscle spindles"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Regardless of how a specific sensory afferent pathway is stimulated, the perceived conscious sensation corresponds invariably to the normal modality mediated by that pathway. Formulated as the **law of specific nerve energies**, this principle dictates that electrical or mechanical irritation of the optic nerve produces visual flashes of light rather than sounds or tactile sensations.",
+      "say": "Muller law of specific nerve energies dictates that stimulating a sensory pathway always produces its specific modality.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/spine-awake-neuromonitoring-fig1.webp",
+        "caption": "Intraoperative neurophysiological monitoring tracing specific modality-dedicated dorsal column and spinothalamic signals.",
+        "alt": "Sensory evoked potential electrophysiological tracings demonstrating pathway specificity"
+      }
+    },
+    {
+      "tx": "Perceptual psychophysics demonstrates that the perceived sensory intensity does not scale linearly with stimulus magnitude, but rather corresponds to a logarithmic mathematical function. Stated as the **Weber-Fechner law**, the just-noticeable difference between two sensory stimuli represents a constant ratio of the original baseline stimulus intensity across varying sensory modalities.",
+      "say": "The Weber-Fechner law states that perceptual sensory intensity scales logarithmically with physical stimulus magnitude.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "baseline_stim",
+            "label": "Baseline Physical Stimulus Intensity Established Across Receptor Field"
+          },
+          {
+            "id": "intensity_boost",
+            "label": "Incremental Stimulus Applied to Produce Just-Noticeable Difference (JND)"
+          },
+          {
+            "id": "constant_ratio",
+            "label": "Weber Fraction (Delta I / I) Remains Constant Across Moderate Intensities"
+          },
+          {
+            "id": "log_perception",
+            "label": "Subjective Conscious Sensation Scales Logarithmically with Stimulus Amplitude"
+          }
+        ],
+        "edges": [
+          [
+            "baseline_stim",
+            "intensity_boost"
+          ],
+          [
+            "intensity_boost",
+            "constant_ratio"
+          ],
+          [
+            "constant_ratio",
+            "log_perception"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Located deep within the subcutaneous tissue, joints, and mesentery, large concentric lamellar structures encasing a central unmyelinated axon terminal form the **Pacinian corpuscle**. Mechanical indentation of the fluid-filled onion-skin capsule redistributes viscoelastically within milliseconds, making this receptor extraordinarily rapidly adapting and tuned specifically to detect high-frequency vibration between one hundred and four hundred hertz.",
+      "say": "Pacinian corpuscles have fluid-filled lamellae that adapt rapidly to detect high-frequency vibration.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "high_freq_vibe",
+            "label": "High-Frequency Mechanical Vibration (100-400 Hz) Indents Outer Capsule"
+          },
+          {
+            "id": "lamellar_slip",
+            "label": "Concentric Lamellae Slip, Transmitting Rapid Transient Pressure Wave"
+          },
+          {
+            "id": "piezo_channel",
+            "label": "Terminal Axon Membrane Deforms, Opening Mechanosensitive Cation Channels"
+          },
+          {
+            "id": "fluid_redistrib",
+            "label": "Intracapsular Fluid Instantly Redistributes, Dissipating Static Pressure"
+          }
+        ],
+        "edges": [
+          [
+            "high_freq_vibe",
+            "lamellar_slip"
+          ],
+          [
+            "lamellar_slip",
+            "piezo_channel"
+          ],
+          [
+            "piezo_channel",
+            "fluid_redistrib"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In glabrous non-hairy skin such as fingertips, lips, and palms, elongated encapsulated corpuscles nestled within the superficial dermal papillae serve as tactile sensors. These structures are **Meissner corpuscles**, which possess small receptive fields with distinct sharp boundaries and rapid adaptation, making them exquisitely suited for signaling dynamic skin movement, slip, and low-frequency flutter.",
+      "say": "Meissner corpuscles in dermal papillae of glabrous skin adapt rapidly to detect light flutter and slip.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Meissner Corpuscle Properties",
+          "points": [
+            "Located in superficial dermal papillae immediately beneath epidermis",
+            "Small receptive field (3 to 5 mm) with sharp defined borders",
+            "Rapidly adapting mechanoreceptor (RA1 sensory afferent unit)",
+            "Detects dynamic skin slip, grip friction, and flutter (20-50 Hz)"
+          ]
+        },
+        "right": {
+          "title": "Merkel Disc Properties",
+          "points": [
+            "Located at basal layer of epidermis aligned with dermal ridges",
+            "Small receptive field (2 to 4 mm) with highly localized boundaries",
+            "Slowly adapting type 1 mechanoreceptor (SA1 sensory afferent unit)",
+            "Detects sustained light pressure, fine textures, edges, and form"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Positioned directly at the base of the epidermis in both hairy and glabrous skin, specialized neuroendocrine-like epithelial cells form synaptic contacts with expanded nerve terminals termed the **Merkel disc**. Because they adapt slowly and express mechanosensitive Piezo two channels, Merkel complexes discharge continuously to sustain fine tactile discrimination of fine textures, curves, and sharp edges.",
+      "say": "Merkel discs at the epidermal base adapt slowly to signal sustained pressure, edges, and fine surface textures.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/peripheral-neuropathy-fig1.webp",
+        "caption": "Cutaneous sensory nerve fiber degeneration causing loss of distal vibratory and fine tactile sensation.",
+        "alt": "Peripheral sensory axon loss and distal sensory receptor impairment"
+      }
+    },
+    {
+      "tx": "The density of primary mechanoreceptor innervation across the cutaneous surface determines the peripheral spatial resolution of the nervous system. Body areas dedicated to fine manipulation such as the fingertips and tongue exhibit dense receptor packing with minimal convergence, whereas proximal trunk skin displays sparse innervation and broad receptive fields that diminish tactile **two-point spatial discrimination**.",
+      "say": "High receptor density and small receptive fields in fingertips enable sharp two-point spatial discrimination.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "finger_skin",
+            "label": "Fingertip and Lip Skin Displays Extremely Dense Mechanoreceptor Arrays"
+          },
+          {
+            "id": "small_rf",
+            "label": "Primary Afferents Form Tiny Receptive Fields with Minimal Central Convergence"
+          },
+          {
+            "id": "two_point",
+            "label": "Calipers Separated by Only 2 Millimeters Readily Perceived as Two Distinct Points"
+          },
+          {
+            "id": "trunk_contrast",
+            "label": "Trunk Skin Requires 30-40 Millimeters Separation Due to High Convergence"
+          }
+        ],
+        "edges": [
+          [
+            "finger_skin",
+            "small_rf"
+          ],
+          [
+            "small_rf",
+            "two_point"
+          ],
+          [
+            "two_point",
+            "trunk_contrast"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

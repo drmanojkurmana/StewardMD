@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "phy-pain",
+  "subject": "physiology",
+  "title": "Nociceptors, Pain Fibres, and the Gate Control Theory",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Tissue injury, extreme temperatures, and noxious mechanical pressures activate specialized high-threshold unencapsulated bare nerve endings distributed widely throughout peripheral tissues. These primary pain transducers are **nociceptors**, which do not adapt readily to ongoing stimulation, ensuring that persistent or impending tissue damage commands continuous neurological attention until defensive actions are taken.",
+      "say": "Nociceptors are bare nerve endings that detect noxious stimuli and do not adapt to ongoing tissue injury.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-pain-management-fig1.webp",
+        "caption": "Nociceptive transmission pathways from bare peripheral nerve terminals to the spinal dorsal horn.",
+        "alt": "Peripheral nociceptive activation and ascending spinal pain pathways"
+      }
+    },
+    {
+      "tx": "Pain sensation is conducted centrally over two distinct classes of peripheral nerve fibers with markedly different conduction velocities. Sharp, pricking, well-localized sensation represents **fast pain**, conducted at twelve to thirty meters per second by lightly myelinated A-delta fibers, whereas dull, aching, poorly localized suffering constitutes slow pain, mediated by unmyelinated C fibers.",
+      "say": "Fast pain travels rapidly over lightly myelinated A-delta fibers, while slow aching pain travels over unmyelinated C fibers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "A-Delta Fiber (Fast Pain)",
+          "points": [
+            "Thinly myelinated fibers with 1 to 5 micrometer diameter",
+            "Conduction velocity of 12 to 30 meters per second",
+            "Signals sharp, pricking, acute, highly localized noxious stimuli",
+            "Terminates in Rexed laminae I and V of spinal dorsal horn"
+          ]
+        },
+        "right": {
+          "title": "C Fiber (Slow Pain)",
+          "points": [
+            "Unmyelinated fibers with 0.4 to 1.2 micrometer diameter",
+            "Conduction velocity of 0.5 to 2 meters per second",
+            "Signals dull, burning, aching, persistent, poorly localized suffering",
+            "Terminates in Rexed laminae II and III (substantia gelatinosa)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cellular damage caused by thermal, chemical, or mechanical trauma releases a diverse cocktail of endogenous algogenic mediators into the local interstitial fluid. Histamine, bradykinin, serotonin, potassium ions, ATP, and prostaglandins combine to form an **inflammatory soup**, binding specific G-protein-coupled receptors and ligand-gated channels to lower nociceptor activation thresholds.",
+      "say": "Damaged cells release inflammatory mediators that sensitize nociceptors and lower their firing thresholds.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tissue_rupture",
+            "label": "Cell Membrane Lysis Releases Intracellular Potassium, ATP, and H+ Ions"
+          },
+          {
+            "id": "enzyme_cascade",
+            "label": "Cyclooxygenases Generate Prostaglandin E2; Kallikrein Generates Bradykinin"
+          },
+          {
+            "id": "sensitize_c_fiber",
+            "label": "Mediators Bind Prostanoid, Purinergic, and B2 Kinase Receptors on C Terminals"
+          },
+          {
+            "id": "phosphorylation",
+            "label": "Protein Kinase Phosphorylation Lowers Threshold of Nav1.8 and TRPV1 Channels"
+          }
+        ],
+        "edges": [
+          [
+            "tissue_rupture",
+            "enzyme_cascade"
+          ],
+          [
+            "enzyme_cascade",
+            "sensitize_c_fiber"
+          ],
+          [
+            "sensitize_c_fiber",
+            "phosphorylation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Within the superficial spinal dorsal horn, nociceptive primary afferents release fast excitatory amino acids alongside specific slow-acting peptide neurotransmitters. In particular, unmyelinated C fibers synthesize and exocytose **substance P**, an eleven amino acid tachykinin that binds neurokinin-1 receptors on second-order neurons, producing prolonged slow synaptic depolarisation that amplifies pain transmission.",
+      "say": "C fibers release substance P alongside glutamate in the dorsal horn, prolonging synaptic pain transmission.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "action_burst",
+            "label": "Sustained Train of C-Fiber Action Potentials Invades Dorsal Horn Boutons"
+          },
+          {
+            "id": "cotransmission",
+            "label": "Vesicles Release Glutamate Alongside Dense-Core Substance P and CGRP"
+          },
+          {
+            "id": "nk1_activation",
+            "label": "Substance P Binds Postsynaptic Gq-Coupled Neurokinin-1 (NK-1) Receptors"
+          },
+          {
+            "id": "slow_epsp",
+            "label": "Produces Long-Lasting Excitatory Depolarisation Lasting Seconds to Minutes"
+          }
+        ],
+        "edges": [
+          [
+            "action_burst",
+            "cotransmission"
+          ],
+          [
+            "cotransmission",
+            "nk1_activation"
+          ],
+          [
+            "nk1_activation",
+            "slow_epsp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In 1965, Melzack and Wall proposed that non-noxious mechanical stimulation can modulate and attenuate concurrent noxious input at the spinal level. Formulated as the **gate control theory of pain**, activation of large myelinated A-beta tactile fibers excites local GABAergic interneurons within the substantia gelatinosa, closing the presynaptic gate to incoming C-fiber transmission.",
+      "say": "The gate control theory shows that rubbing skin activates A-beta fibers, closing the spinal pain gate.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tactile_rub",
+            "label": "Rubbing or Massaging Injured Skin Activates Large Myelinated A-Beta Fibers"
+          },
+          {
+            "id": "sg_excitation",
+            "label": "A-Beta Collaterals Excite Inhibitory Interneurons in Substantia Gelatinosa"
+          },
+          {
+            "id": "presynaptic_block",
+            "label": "GABA and Enkephalin Release Inhibits Presynaptic C-Fiber Boutons"
+          },
+          {
+            "id": "closed_gate",
+            "label": "Second-Order T-Cell Firing Suppressed, Preventing Pain Relays to Cortex"
+          }
+        ],
+        "edges": [
+          [
+            "tactile_rub",
+            "sg_excitation"
+          ],
+          [
+            "sg_excitation",
+            "presynaptic_block"
+          ],
+          [
+            "presynaptic_block",
+            "closed_gate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because deep visceral structures and somatic cutaneous dermatomes share common embryological spinal segment origins, visceral nociceptive afferents often converge upon the same second-order spinothalamic projection neurons. As a consequence, visceral pathology is perceived consciously as arising from superficial somatic structures, representing the clinical phenomenon of **referred pain**.",
+      "say": "Visceral and somatic fibers converge on the same dorsal horn neurons, causing referred pain to the body surface.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/radiculopathy-fig1.webp",
+        "caption": "Spinal nerve root compression demonstrating dermatomal radiating pain matching segmental convergence.",
+        "alt": "Nerve root compression causing dermatomal pain distribution matching spinal segment"
+      }
+    },
+    {
+      "tx": "Classical examples of referred pain reflect precise developmental dermatomal innervation patterns established during embryonic organogenesis. For instance, cardiac ischemia evokes pain referred to the precordium, left shoulder, and medial left arm via T1 through T4 spinal roots, while gallbladder inflammation irritates diaphragmatic peritoneum to produce **referred right shoulder pain** via C3 through C5 phrenic roots.",
+      "say": "Gallbladder inflammation refers pain to the right shoulder via phrenic nerve C3 to C5 roots.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cardiac Ischemia Referral (T1-T4)",
+          "points": [
+            "Ischemic cardiac afferents travel with sympathetic nerves to T1-T4",
+            "Converge on spinothalamic neurons receiving upper chest and arm dermatomes",
+            "Perceived as crushing substernal tightness radiating down left arm",
+            "May also radiate to jaw, neck, epigastrium, or interscapular region"
+          ]
+        },
+        "right": {
+          "title": "Diaphragmatic Irritation Referral (C3-C5)",
+          "points": [
+            "Diaphragmatic sensory afferents travel centrally in phrenic nerve (C3, 4, 5)",
+            "Converge with somatic supraclavicular sensory roots supplying shoulder tip",
+            "Gallbladder inflammation or subdiaphragmatic blood triggers shoulder ache",
+            "Known clinically as Kehr sign when caused by splenic rupture hemoperitoneum"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Persistent intense nociceptive input can induce long-term neuroplastic remodeling within dorsal horn projection neurons, leading to augmented synaptic strength and hyperexcitability. This phenomenon of central sensitization produces **secondary hyperalgesia**, wherein undamaged cutaneous tissue surrounding an injury site exhibits marked hypersensitivity to mildly painful stimuli and severe pain to gentle touch.",
+      "say": "Central sensitization causes hyperalgesia and allodynia as dorsal horn neurons become hyperexcitable.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c_barrage",
+            "label": "Continuous Intense C-Fiber Barrage Releases High Quantities of Glutamate"
+          },
+          {
+            "id": "nmda_unblock",
+            "label": "Sustained Depolarisation Expels Magnesium Block from Postsynaptic NMDA Receptors"
+          },
+          {
+            "id": "calcium_entry",
+            "label": "Massive Calcium Influx Activates Nitric Oxide Synthase and MAP Kinase Cascades"
+          },
+          {
+            "id": "hyperexcitable",
+            "label": "Dorsal Horn Neurons Lower Thresholds, Responding to Sub-Threshold Non-Noxious Input"
+          }
+        ],
+        "edges": [
+          [
+            "c_barrage",
+            "nmda_unblock"
+          ],
+          [
+            "nmda_unblock",
+            "calcium_entry"
+          ],
+          [
+            "calcium_entry",
+            "hyperexcitable"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

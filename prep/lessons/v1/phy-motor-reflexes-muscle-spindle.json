@@ -1,0 +1,241 @@
+{
+  "v": 1,
+  "module": "phy-motor-reflexes",
+  "subject": "physiology",
+  "title": "Muscle Spindles, Gamma Motor Neurons, and the Stretch Reflex",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Skeletal muscles contain specialized encapsulated stretch receptors oriented in parallel with extrafusal force-generating muscle fibers. These sensory sense organs are **muscle spindles**, consisting of modified intrafusal muscle fibers enclosed in a fluid-filled connective tissue capsule that continuously monitors muscle length and the velocity of length changes.",
+      "say": "Muscle spindles are encapsulated receptors parallel to extrafusal fibers that monitor muscle length and velocity.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/stiff-person-syndrome-fig1.webp",
+        "caption": "Severe axial muscle rigidity illustrating continuous uninhibited spinal motor neuron firing.",
+        "alt": "Continuous motor unit discharge and severe muscle stiffness"
+      }
+    },
+    {
+      "tx": "Within each muscle spindle, intrafusal muscle fibers divide into two distinct morphological and functional categories: nuclear bag fibers and nuclear chain fibers. Nuclear bag fibers possess clustered central nuclei and mediate dynamic stretch responses, whereas **nuclear chain fibers** possess nuclei arranged in a single longitudinal row and monitor static muscle length.",
+      "say": "Dynamic nuclear bag fibers detect stretch velocity, while static chain fibers monitor maintained muscle length.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nuclear Bag Fibers",
+          "points": [
+            "Nuclei clustered in expanded central equatorial bag region",
+            "Subdivided into dynamic bag 1 and static bag 2 fibers",
+            "Innerveated primarily by large primary group Ia afferents",
+            "Highly sensitive to velocity and rate of length change (dynamic response)"
+          ]
+        },
+        "right": {
+          "title": "Nuclear Chain Fibers",
+          "points": [
+            "Nuclei arranged in an orderly single longitudinal row",
+            "Thinner and shorter than nuclear bag fibers",
+            "Innervated by both primary group Ia and secondary group II afferents",
+            "Signal static maintained muscle length with proportional sustained firing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sensory innervation of the muscle spindle comprises two distinct classes of myelinated afferents. Large, rapidly conducting group Ia fibers form annulospiral endings encircling the equatorial region of all intrafusal fibers, whereas **group II afferents** form flower-spray endings predominantly on static chain fibers, firing in direct proportion to absolute muscle length.",
+      "say": "Group Ia annulospiral fibers detect velocity and length, while group II flower-spray fibers detect static length.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "equatorial_stretch",
+            "label": "Extrafusal Muscle Elongation Stretches Intrafusal Non-Contractile Centers"
+          },
+          {
+            "id": "ia_spiral",
+            "label": "Primary Group Ia Annulospiral Endings Deform, Firing High-Frequency Bursts"
+          },
+          {
+            "id": "ii_flower",
+            "label": "Secondary Group II Flower-Spray Terminals Fire Steadily in Proportion to Length"
+          },
+          {
+            "id": "dorsal_entry",
+            "label": "Afferents Enter Spinal Cord via Posterior Roots to Synapse in Anterior Horn"
+          }
+        ],
+        "edges": [
+          [
+            "equatorial_stretch",
+            "ia_spiral"
+          ],
+          [
+            "equatorial_stretch",
+            "ii_flower"
+          ],
+          [
+            "ia_spiral",
+            "dorsal_entry"
+          ],
+          [
+            "ii_flower",
+            "dorsal_entry"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Intrafusal muscle fibers receive motor innervation from smaller lower motor neurons situated in the spinal anterior grey horns. Designated **gamma motor neurons**, these efferent fibers innervate the striated polar contractile ends of intrafusal fibers, adjusting their tension to maintain sensory spindle sensitivity even when the surrounding extrafusal muscle contracts and shortens.",
+      "say": "Gamma motor neurons contract intrafusal ends, keeping the spindle taut and sensitive during muscle shortening.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "corticospinal_drive",
+            "label": "Descending Motor Commands Activate Both Alpha and Gamma Motor Neurons"
+          },
+          {
+            "id": "gamma_efferent",
+            "label": "Gamma Motor Axons Discharge, Releasing Acetylcholine onto Intrafusal Poles"
+          },
+          {
+            "id": "polar_shortening",
+            "label": "Contractile Polar Ends Shorten, Stretching the Central Sensory Equatorial Bag"
+          },
+          {
+            "id": "spindle_taut",
+            "label": "Spindle Retains High Dynamic Sensitivity Throughout Extrafusal Muscle Contraction"
+          }
+        ],
+        "edges": [
+          [
+            "corticospinal_drive",
+            "gamma_efferent"
+          ],
+          [
+            "gamma_efferent",
+            "polar_shortening"
+          ],
+          [
+            "polar_shortening",
+            "spindle_taut"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "During voluntary skeletal movement, descending motor pathways activate alpha and gamma motor neurons concurrently. Known as **alpha-gamma coactivation**, this simultaneous discharge ensures that as extrafusal muscle fibers shorten under alpha command, intrafusal polar ends contract simultaneously, preventing the muscle spindle from becoming slack and silent during movement.",
+      "say": "Alpha-gamma coactivation fires both motor neuron types together so spindles stay taut during movement.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Without Gamma Activation",
+          "points": [
+            "Alpha motor neuron causes extrafusal muscle fiber contraction",
+            "Extrafusal shortening unloads spindle, causing intrafusal slacking",
+            "Group Ia afferent firing falls silent completely during movement",
+            "Nervous system loses sensory feedback regarding unexpected loads"
+          ]
+        },
+        "right": {
+          "title": "With Alpha-Gamma Coactivation",
+          "points": [
+            "Alpha and gamma motor neurons fire synchronously from motor cortex",
+            "Gamma stimulation contracts intrafusal poles as muscle shortens",
+            "Maintains stretch on central sensory annulospiral endings",
+            "Continuous feedback enables instant reflex compensation against perturbations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Tapping a skeletal muscle tendon with a reflex hammer rapidly elongates the muscle, stretching its embedded spindles. Primary group Ia afferents fire an action potential volley that enters the spinal cord and monosynaptically excites alpha motor neurons innervating the stretched muscle, producing the brisk contraction known as the **monosynaptic stretch reflex**.",
+      "say": "Tendon tapping evokes the monosynaptic stretch reflex as group Ia fibers directly excite alpha motor neurons.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cervical-spondylotic-myelopathy-fig1.webp",
+        "caption": "Cervical spinal cord compression showing hyperreflexia and loss of descending corticospinal control.",
+        "alt": "Cervical myelopathy causing disruption of upper motor neuron inhibitory pathways"
+      }
+    },
+    {
+      "tx": "For a stretch reflex to produce smooth limb movement, contraction of the homonymous agonist muscle must be accompanied by simultaneous relaxation of opposing muscles. Group Ia afferent collaterals synapse on inhibitory Ia interneurons in the spinal cord, which release glycine to silence alpha motor neurons supplying antagonist muscles, a mechanism termed **reciprocal inhibition**.",
+      "say": "Reciprocal inhibition uses Ia inhibitory interneurons to relax opposing muscles during a stretch reflex.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ia_afferent",
+            "label": "Group Ia Sensory Axon Fires Rapid Volley from Muscle Spindle"
+          },
+          {
+            "id": "direct_alpha",
+            "label": "Directly Synapses and Excites Homonymous Agonist Alpha Motor Neuron"
+          },
+          {
+            "id": "ia_interneuron",
+            "label": "Collateral Branch Synapses on Inhibitory Glycinergic Ia Interneuron"
+          },
+          {
+            "id": "antagonist_relax",
+            "label": "Inhibitory Interneuron Suppresses Antagonist Alpha Motor Neuron, Causing Relaxation"
+          }
+        ],
+        "edges": [
+          [
+            "ia_afferent",
+            "direct_alpha"
+          ],
+          [
+            "ia_afferent",
+            "ia_interneuron"
+          ],
+          [
+            "ia_interneuron",
+            "antagonist_relax"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical elicitation of tendon reflexes can be substantially reinforced when patients clench their teeth or hook and pull their interlocked fingers apart. This reinforcement maneuver is the **Jendrassik maneuver**, which enhances spinal motor neuron excitability by decreasing presynaptic inhibition and increasing gamma motor drive throughout the neuroaxis.",
+      "say": "The Jendrassik maneuver reinforces diminished deep tendon reflexes by increasing spinal motor neuron excitability.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "remote_effort",
+            "label": "Patient Clenches Teeth Firmly or Pulls Interlocked Flexed Fingers Apart"
+          },
+          {
+            "id": "diffuse_descend",
+            "label": "Descending Reticulospinal and Corticospinal Volleys Disinhibit Spinal Interneurons"
+          },
+          {
+            "id": "lower_threshold",
+            "label": "Presynaptic Inhibition on Ia Afferents Decreases, Raising Alpha Excitability"
+          },
+          {
+            "id": "augmented_jerk",
+            "label": "Sub-Threshold Tendon Tap Now Evokes Readily Observable Muscle Contraction"
+          }
+        ],
+        "edges": [
+          [
+            "remote_effort",
+            "diffuse_descend"
+          ],
+          [
+            "diffuse_descend",
+            "lower_threshold"
+          ],
+          [
+            "lower_threshold",
+            "augmented_jerk"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}
