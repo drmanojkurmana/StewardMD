@@ -1,106 +1,201 @@
 {
  "v": 1,
- "module": "oph-retinal-detachment",
+ "id": "oph-retinal-detachment",
  "subject": "ophthalmology",
- "title": "Retinal detachment and retinal degenerations",
+ "module": "oph-retinal-detachment",
+ "title": "Retinal Detachment",
  "minutes": 6,
+ "gen": "AI",
  "steps": [
   {
-   "tx": "A full thickness retinal break lets liquefied vitreous pass under the neurosensory retina and peel it from the pigment epithelium, with flashes, new floaters, dark tobacco dust and a spreading curtain. Nearsightedness, lattice degeneration, trauma and recent cataract surgery all raise the risk. When the **macula** is still attached, surgery proceeds emergently, while a detached macula is repaired within days. Flat tears receive **barrage laser**, wide breaks receive **scleral buckling**, complex disease receives vitrectomy with gas or oil tamponade, and one superior break may suit pneumatic retinopexy.",
-   "say": "A curtain or shadow that spreads after flashes and new floaters means the retina has detached through a break. When central vision is still preserved, the macula is attached and surgery must happen emergently. Small flat tears can be sealed with laser, while detached retina needs buckling or vitrectomy with gas or oil. The fellow eye also needs careful examination because it carries the same risk.",
+   "tx": "**Retinal detachment** separates neurosensory retina from pigment epithelium, most rhegmatogenously through retinal break letting liquid vitreous under retina in myopic or lattice eyes. Flashes floaters shower and curtain field loss therefore present detachment symptoms until proven otherwise. Break therefore hunted as surgical target in every rhegmatogenous assessment.",
+   "say": "Break hunting together gives detachment assessment in eye casualty for myopic adults with flashes and curtain symptoms presenting urgently. Shower gives vitreous clue additionally. Curtain gives field direction.",
    "vis": {
     "kind": "image",
-    "src": "v1/lessons/media/oph-retinal-detachment-fig1.webp",
-    "alt": "Diagram showing rhegmatogenous retinal detachment caused by a full thickness break, with subretinal fluid, and an area of lattice degeneration.",
-    "caption": "Rhegmatogenous retinal detachment with break and lattice. Image: Rene Cheung, Angelica Ly, Paula Katalinic, Minas Theodore Coroneo, And, CC BY 4.0, Wikimedia Commons.",
-    "ar": 0.9065
+    "src": "v1/kb/media/retinal-detachment-fig1.webp",
+    "alt": "Cross-sectional diagram of the eye showing a horseshoe retinal tear with liquefied vitreous entering the subretinal space and detaching the neurosensory retina from the retinal pigment epithelium.",
+    "caption": "Pathophysiology of rhegmatogenous retinal detachment with full-thickness break and subretinal fluid accumulation. [Credit: StewardMD]",
+    "ar": 1.5
    }
   },
   {
-   "tx": "In **tractional detachment**, fibrovascular membranes in proliferative diabetic disease, sickle cell sea fans or retinopathy of prematurity pull the retina into a tented concave shape, and vitrectomy with membrane peeling is needed before the macula is threatened. In **exudative detachment**, fluid from Harada disease, posterior scleritis, tumours or severe hypertension collects under the retina without any break and shifts with posture, so treatment controls the systemic cause. **B scan ultrasound** separates break related detachment from tractional or exudative patterns when haze blocks the view.",
-   "say": "A tented and immobile retina that is pulled by membranes points to tractional detachment, which needs membrane peeling by vitrectomy. Shifting fluid under the retina without any break points to exudative detachment, which settles when the systemic disease is treated. When blood or haze blocks the view, ultrasound separates these patterns reliably. Combined disease with both traction and breaks needs vitrectomy with tamponade.",
-   "vis": null
-  },
-  {
-   "tx": "This ocular **B scan** shows a bright wavy retinal membrane tethered at the optic nerve head with dark **subretinal fluid** beneath it, which is the classic appearance of detachment when the fundus cannot be seen. The membrane stays anchored at the disc while the rest floats, and its concave tented shape favors tractional disease over a freely mobile break. Recognising this pattern matters because it directs the patient toward vitrectomy with **membrane peeling** rather than laser alone.",
-   "say": "This ultrasound shows a bright wavy membrane that remains attached at the optic nerve head while fluid collects beneath it. The tethered and concave shape tells you the retina is detached, even when blood or cataract hides the fundus. A membrane pulled by traction looks tented and thick, while exudative fluid shifts freely without a break. Spotting disc attachment with subretinal fluid should make you plan vitrectomy in the exam.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/oph-retinal-detachment-gen1.webp",
-    "alt": "Grayscale ocular ultrasound B scan showing bright wavy tethered retinal membrane attached at optic nerve head with subretinal fluid.",
-    "caption": "Ocular B scan showing tethered retinal membrane and subretinal fluid Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "**Retinitis pigmentosa** is a rod cone dystrophy, often autosomal recessive and sometimes part of Usher syndrome with deafness, that causes night blindness first, then bone spicules, narrowed arterioles, waxy disc pallor and tunnel fields with a flat electroretinogram. Vitamin A palmitate may slow decline, gene therapy for RPE65 helps some children, and low vision aids sustain function. **Lattice degeneration** with atrophic holes in nearsighted eyes receives prophylactic laser. **Retinoschisis** splits retinal layers, classically X linked boys with a spoke wheel macula, and is observed unless detachment develops.",
-   "say": "A young patient with night blindness, bone spicule pigmentation and tunnel vision has retinitis pigmentosa. Narrowed arterioles with a waxy pale disc and a flat electroretinogram confirm the diagnosis. Thin lattice with holes in a nearsighted eye deserves prophylactic laser before a tear forms. A spoke wheel macula in a boy suggests retinoschisis, which is observed unless detachment occurs.",
-   "vis": null
-  },
-  {
-   "tx": "**Retinopathy of prematurity** follows arrested retinal vascularisation in low birthweight infants given oxygen, progressing through stages to a fibrous ridge with **plus disease**, meaning dilated tortuous posterior vessels, and onward to tractional detachment and blindness. Screening covers infants born very preterm or with very low birth weight, and timely peripheral laser ablation, with anti vascular endothelial growth factor therapy in selected eyes, halts progression. Advanced stages need vitrectomy or buckling. **Aggressive posterior disease** can skip stages rapidly, so oxygen is titrated carefully with neonatal collaboration.",
-   "say": "A preterm infant on oxygen can develop a ridge with dilated tortuous vessels, which is plus disease in retinopathy of prematurity. Screening of tiny babies catches the ridge before traction detaches the retina. Timely laser to the avascular periphery prevents progression in most eyes. Advanced traction needs vitrectomy, and careful oxygen titration with the neonatal team prevents severe disease.",
+   "tx": "Tractional detachment pulls retina by fibrovascular membranes in proliferative diabetes without break primarily, while exudative detachment accumulates fluid from tumour or inflammation without break or traction. Mechanism therefore selects surgery, membrane peeling or medical cause therapy respectively. **Break pull or leak** trio therefore triages detachment operations in retinal clinics precisely.",
+   "say": "Mechanism triage together gives operation selection in retinal clinics for adults with elevated retina on examination. Pull gives diabetic membrane additionally. Leak gives medical direction.",
    "vis": {
     "kind": "table",
+    "title": "Detachment trio",
     "cols": [
-     "Detachment",
-     "Mechanism",
-     "Fix"
+     "Type",
+     "Mechanism and direction"
     ],
     "rows": [
      [
       "Rhegmatogenous",
-      "Break plus liquid vitreous",
-      "Buckle or vitrectomy"
+      "Break seals and fluid drains"
      ],
      [
       "Tractional",
-      "Membranes pull",
-      "Peel membranes"
+      "Membrane peel releases pull"
      ],
      [
       "Exudative",
-      "Fluid without break",
-      "Treat systemic cause"
+      "Treat tumour inflammation cause"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Macula status sets urgency clock: macula still attached operates urgently to preserve central vision, while macula detached repairs promptly yet prognosis limited by photoreceptor duration. Referral therefore states macula status in first sentence. **Macula sentence first** therefore governs detachment telephone referrals nationally in quality services.",
+   "say": "Macula sentence together gives referral quality for detachment in eye casualty for adults telephoning retinal centres urgently. Attached gives preservation clock additionally. Detached gives prognosis honesty.",
+   "vis": {
+    "kind": "flow",
+    "title": "Detachment flow",
+    "nodes": [
+     {
+      "id": "symptoms",
+      "label": "Flashes curtain assessed"
+     },
+     {
+      "id": "examine",
+      "label": "Break and macula status"
+     },
+     {
+      "id": "refer",
+      "label": "Same day retinal referral"
+     },
+     {
+      "id": "repair",
+      "label": "Seal drain reattach surgery"
+     }
+    ],
+    "edges": [
+     [
+      "symptoms",
+      "examine"
      ],
      [
-      "ROP traction",
-      "Ridge fibrovascular",
-      "Laser periphery"
+      "examine",
+      "refer"
+     ],
+     [
+      "refer",
+      "repair"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Examination uses dilated indirect ophthalmoscopy with indentation to find breaks peripherally, supplemented by ultrasound where vitreous haemorrhage hides view in diabetic eyes. Break map therefore drawn before theatre for buckle or vitrectomy planning. **Map before list** therefore appears in retinal surgical documentation routinely.",
+   "say": "Mapping discipline together gives theatre preparation in retinal surgery for adults with detachment and identified peripheral breaks. Indentation gives peripheral view additionally. Ultrasound gives hidden view route.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/oph-physiology-fig1.webp",
+    "alt": "Retinal layers physiology diagram.",
+    "caption": "Retinal separation physiology. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Repair principles close break, drain subretinal fluid and hold retina by buckle indentation, gas or oil tamponade after vitrectomy, or pneumatic displacement selected by break position and complexity. Positioning after gas therefore becomes patient task with written instructions. **Hold and position** pair therefore teaches tamponade adherence after detachment surgery.",
+   "say": "Positioning pairing together gives aftercare teaching after detachment surgery for adults receiving gas tamponade at retinal centres. Buckle gives indentation additionally. Instructions gives written adherence."
+  },
+  {
+   "tx": "Retinal tear without detachment may seal by laser or cryotherapy barrage preventing progression, so symptomatic tears triage same day before fluid extends under retina. Horseshoe tear with traction therefore treated urgently over incidental round hole observation. **Tear before detachment** therefore rewards flashes assessment speed in prevention terms.",
+   "say": "Prevention timing together gives tear urgency in eye casualty for adults with flashes and symptomatic horseshoe tears found. Barrage gives seal additionally. Speed gives detachment prevention.",
+   "vis": {
+    "kind": "table",
+    "title": "Detachment prevention",
+    "cols": [
+     "Finding",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Symptomatic horseshoe tear",
+      "Urgent laser barrage"
+     ],
+     [
+      "Detachment macula on",
+      "Emergency repair pathway"
+     ],
+     [
+      "Vitreous haemorrhage no view",
+      "Ultrasound and retina referral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prognosis counsels honestly: anatomical reattachment high in modern series yet vision depends on macula duration, proliferative scarring may redetach needing further surgery in minority. Consent therefore separates anatomical success from visual recovery expectation. **Anatomy versus vision** therefore structures detachment consent at retinal centres.",
+   "say": "Consent separation together gives expectation setting before detachment surgery for adults facing macula involved repairs. Scarring gives redetachment minority additionally. Duration gives vision logic.",
+   "vis": {
+    "kind": "table",
+    "title": "Detachment counselling",
+    "cols": [
+     "Point",
+     "Wording"
+    ],
+    "rows": [
+     [
+      "Goal",
+      "Reattach retina and preserve vision"
+     ],
+     [
+      "Vision factor",
+      "Macula duration matters most"
+     ],
+     [
+      "Possible course",
+      "Further surgery sometimes needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors detachment: break pull leak selects operation, macula status sets clock and tear barrage prevents extension. Flashes with curtain therefore never wait routine clinic. **Macula sentence first** phrase therefore closes detachment teaching for casualty clerking and retinal referral alike. Retinal units therefore audit referral wording in governance reviews each year.",
+   "say": "Referral discipline together gives detachment anchors in examinations for students reliably in casualty cases everywhere reliably. Break gives surgical target additionally. Macula gives clock completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Detachment anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Symptoms",
+      "Flashes shower curtain loss"
+     ],
+     [
+      "First sentence",
+      "Macula attached or detached"
+     ],
+     [
+      "Trio",
+      "Break pull leak selects treatment"
      ]
     ]
    }
   }
  ],
- "quiz": [
-  "bk2-oph-131",
-  "bk2-oph-132",
-  "bk2-oph-133",
-  "bk2-oph-134",
-  "bk2-oph-135",
-  "bk2-oph-136",
-  "bk2-oph-137",
-  "bk2-oph-138",
-  "bk2-oph-139",
-  "bk2-oph-140"
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Detachment trio",
+   "b": "Rhegmatogenous break seals, tractional membrane peels, exudative cause treats."
+  },
+  {
+   "f": "Macula clock",
+   "b": "Macula attached urgent preserve; macula sentence first in every referral."
+  },
+  {
+   "f": "Detachment consent split",
+   "b": "Anatomical reattachment separate from visual recovery by macula duration."
+  }
  ],
- "src": [],
- "refs": [
-  "Parsons' Diseases of the Eye 23rd Edition (topic map; text rewritten, no verbatim copy)"
- ],
- "gen": "hand",
- "run": "books2-oph2",
- "model": "muse-wonder (local authoring, no external API)",
- "checks": {
-  "shape": true,
-  "numbers": true,
-  "drugs": true,
-  "verbatim": true,
-  "dashes": true,
-  "verify": true,
-  "redone": 0,
-  "dropped": 0,
-  "kbWords": 0,
-  "itemN": 10
- }
+ "keys": [
+  "Flashes curtain never wait routinely",
+  "Map breaks before theatre list",
+  "Tear barrage prevents detachment"
+ ]
 }

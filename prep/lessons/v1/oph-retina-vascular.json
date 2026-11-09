@@ -1,0 +1,204 @@
+{
+ "v": 1,
+ "id": "oph-retina-vascular",
+ "subject": "ophthalmology",
+ "module": "oph-retinal-vascular",
+ "title": "Retinal Vascular Disease",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Retinal vascular disease** unifies diabetic, hypertensive, vein and artery occlusion damage by perfusion and leakage mechanisms seen on fundus examination. Vessel calibre, haemorrhage pattern, exudate and ischaemic signs therefore read like circulation chart of eye and body. Fundus therefore teaches systemic vascular risk at ophthalmology visit uniquely.",
+   "say": "Fundus reading together gives vascular unification in retinal clinics for adults with diabetes and hypertension attending screening. Pattern gives mechanism additionally. Circulation gives systemic window."
+  },
+  {
+   "tx": "Arterial disease narrows, occludes or embolises with pale ischaemic retina and sudden painless loss, while venous disease congests with haemorrhagic sectors and swelling presentations. Tempo therefore separates arterial minutes from venous days clinically. **Pale sudden versus red swollen** tempo phrase therefore triages vascular fundus presentations in emergency clerking.",
+   "say": "Tempo phrasing together gives vascular triage at emergency clerking for adults with sudden fundus presentations reliably. Pale gives arterial direction additionally. Red gives venous direction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Arterial pattern",
+     "points": [
+      "Pale ischaemic retina",
+      "Sudden severe painless loss"
+     ]
+    },
+    "right": {
+     "title": "Venous pattern",
+     "points": [
+      "Haemorrhage sector congestion",
+      "Swelling blurred presentation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Leakage mechanism produces macular oedema by barrier breakdown in diabetes and vein occlusion, treated by growth factor therapy and laser in modern retina pathways. Ischaemia mechanism separately drives neovascularisation needing photocoagulation. **Leak versus ischaemia** treatment fork therefore organises retinal vascular prescriptions in clinic letters.",
+   "say": "Treatment forking together gives retinal prescribing in vascular clinics for adults with diabetic or occlusive disease. Leakage gives oedema therapy additionally. Ischaemia gives laser direction.",
+   "vis": {
+    "kind": "table",
+    "title": "Vascular treatment fork",
+    "cols": [
+     "Mechanism",
+     "Direction"
+    ],
+    "rows": [
+     [
+      "Barrier leakage",
+      "Macular oedema therapy"
+     ],
+     [
+      "Ischaemic drive",
+      "Photocoagulation for new vessels"
+     ],
+     [
+      "Embolic arterial",
+      "Urgent systemic stroke pathway"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hypertensive retinopathy grades vessel narrowing, crossing changes, haemorrhages exudates and disc swelling in malignant phase, signalling systemic control urgency beyond eye clinic. Disc swelling therefore escalates same day medical coordination. **Grade with pressure** pairing therefore sends hypertensive fundus findings into systemic action immediately.",
+   "say": "Systemic pairing together gives hypertensive escalation in retinal clinics for adults with severe blood pressure findings on funduscopy. Grade gives vessel reading additionally. Disc gives urgency trigger.",
+   "vis": {
+    "kind": "flow",
+    "title": "Vascular assessment flow",
+    "nodes": [
+     {
+      "id": "fundus",
+      "label": "Fundus pattern and tempo"
+     },
+     {
+      "id": "mech",
+      "label": "Leak ischaemia or occlusion"
+     },
+     {
+      "id": "eye",
+      "label": "Retina therapy pathway"
+     },
+     {
+      "id": "sys",
+      "label": "Systemic risk coordination"
+     }
+    ],
+    "edges": [
+     [
+      "fundus",
+      "mech"
+     ],
+     [
+      "mech",
+      "eye"
+     ],
+     [
+      "eye",
+      "sys"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diabetic retinopathy screening grades background, pre proliferative and proliferative stages with maculopathy separately, because sight threat follows new vessels or macular leak rather than duration alone. Screening intervals therefore set by grade in structured programmes. **Grade sets interval** therefore replaces annual habit framing in diabetic eye services.",
+   "say": "Grade interval together gives screening structure in diabetic programmes for adults attending annual photography services nationally. Stage gives sight logic additionally. Maculopathy gives separate grading."
+  },
+  {
+   "tx": "Vascular risk coordination closes every retina visit: glucose, pressure, lipids, smoking and antiplatelet context reviewed because eye events predict stroke and cardiac risk materially. Eye letter therefore states systemic actions for primary care explicitly. **Retina letter home** therefore lists vascular tasks beside ocular grade in quality correspondence.",
+   "say": "Vascular letter together gives systemic coordination after retina visits for adults with vascular fundus findings everywhere. Prediction gives risk value additionally. Tasks give letter content.",
+   "vis": {
+    "kind": "table",
+    "title": "Retina letter set",
+    "cols": [
+     "Item",
+     "Content"
+    ],
+    "rows": [
+     [
+      "Ocular grade",
+      "Stage and maculopathy"
+     ],
+     [
+      "Therapy given",
+      "Laser or injection plan"
+     ],
+     [
+      "Systemic tasks",
+      "Glucose pressure lipids smoking"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Imaging supports vascular grading: angiography maps leakage and ischaemia, tomography measures macular swelling for injection decisions in contemporary pathways. Imaging therefore chosen by mechanism question rather than routine bundle. **Question led imaging** therefore orders angiography for ischaemia and tomography for thickness distinctly.",
+   "say": "Question led imaging together gives test selection in retinal vascular care for adults needing mechanism confirmation during assessment. Angiography gives perfusion mapping additionally. Tomography gives thickness centre.",
+   "vis": {
+    "kind": "table",
+    "title": "Vascular imaging map",
+    "cols": [
+     "Question",
+     "Test direction"
+    ],
+    "rows": [
+     [
+      "Where is ischaemia",
+      "Angiography perfusion map"
+     ],
+     [
+      "How thick macula",
+      "Tomography measurement"
+     ],
+     [
+      "New vessels present",
+      "Angiography plus examination"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors vascular: tempo separates artery from vein, leak versus ischaemia forks therapy and fundus grade launches systemic action. Retinal vessels therefore teach eye and body circulation in one examination. **Fundus is circulation chart** phrase therefore closes vascular retina teaching for screening and emergency presentations alike.",
+   "say": "Circulation chart together gives vascular anchors in examinations for students reliably in fundus cases everywhere reliably. Tempo gives triage additionally. Grade gives systemic completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Vascular anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Tempo",
+      "Artery sudden pale, vein red swollen"
+     ],
+     [
+      "Fork",
+      "Leak treats oedema, ischaemia lasers"
+     ],
+     [
+      "Systemic",
+      "Eye grade triggers vascular tasks"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Vascular tempo rule",
+   "b": "Arterial sudden pale ischaemia; venous congested haemorrhagic swelling."
+  },
+  {
+   "f": "Leak versus ischaemia",
+   "b": "Leakage causes macular oedema therapy; ischaemia drives neovascular photocoagulation."
+  },
+  {
+   "f": "Fundus systemic rule",
+   "b": "Grade launches glucose pressure lipid smoking coordination in retina letter."
+  }
+ ],
+ "keys": [
+  "Fundus reads systemic circulation",
+  "Grade sets diabetic screening interval",
+  "Question led vascular imaging"
+ ]
+}
