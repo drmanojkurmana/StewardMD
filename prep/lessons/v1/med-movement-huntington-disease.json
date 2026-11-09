@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "module": "med-movement",
+ "subject": "medicine",
+ "title": "Hyperkinetic Movement Disorders and Hereditary Ataxias",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "An autosomal dominant, fully penetrant progressive neurodegenerative disorder characterised by the clinical triad of involuntary choreiform movements, psychiatric and behavioural disturbances, and relentless cognitive decline is **Huntington disease**. Pathology features profound atrophy of the caudate nucleus and putamen (striatum) with loss of medium spiny GABAergic neurons.",
+   "say": "An autosomal dominant progressive neurodegenerative disorder characterized by involuntary choreiform movements, psychiatric disturbances, and cognitive decline is Huntington disease. Neuropathology features profound atrophy of the caudate nucleus and putamen with loss of GABAergic neurons.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/huntington-disease-fig1.webp",
+    "alt": "Neuropathology and gross striatal caudate atrophy in Huntington disease.",
+    "caption": "Bilateral caudate nucleus atrophy and lateral ventricular dilation in Huntington disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Genetically, Huntington disease is caused by an unstable, expanded **CAG trinucleotide repeat** encoding an elongated polyglutamine tract in the huntingtin (HTT) gene on the short arm of chromosome 4. Normal alleles contain under twenty-six repeats; full disease penetrance occurs with thirty-six or more repeats, leading to toxic gain-of-function protein aggregation and nuclear neuronal death.",
+   "say": "Genetically, Huntington disease is caused by an expanded CAG trinucleotide repeat encoding an elongated polyglutamine tract in the huntingtin gene on chromosome 4. Full disease penetrance occurs with thirty-six or more repeats, leading to toxic gain-of-function protein aggregation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Repeat Size",
+     "Huntingtin (HTT) Genotype",
+     "Clinical Phenotype and Transmission Risk"
+    ],
+    "rows": [
+     [
+      "<= 26 CAG repeats",
+      "Normal allele",
+      "Unaffected; no risk of disease in self or offspring"
+     ],
+     [
+      "27 to 35 repeats",
+      "Intermediate allele",
+      "Unaffected; risk of expansion during paternal transmission"
+     ],
+     [
+      "36 to 39 repeats",
+      "Reduced penetrance",
+      "May or may not develop symptoms; offspring at risk"
+     ],
+     [
+      ">= 40 repeats",
+      "Full penetrance",
+      "100% lifetime risk of developing Huntington disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Trinucleotide repeat instability during gametogenesis explains the phenomenon of genetic **anticipation**, wherein subsequent generations manifest earlier disease onset and more severe clinical symptoms. In Huntington disease, anticipation occurs predominantly during paternal spermatogenesis, where massive repeat expansions can precipitate juvenile Huntington disease (Westphal variant) presenting with rigid hypokinetic parkinsonism.",
+   "say": "Trinucleotide repeat instability during gametogenesis explains genetic anticipation, wherein subsequent generations manifest earlier disease onset and more severe symptoms. In Huntington disease, anticipation occurs predominantly during paternal transmission, precipitating juvenile rigid parkinsonism.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pat",
+      "label": "Paternal Spermatogenesis Instability"
+     },
+     {
+      "id": "exp",
+      "label": "Massive CAG Repeat Expansion (> 60)"
+     },
+     {
+      "id": "juv",
+      "label": "Early Juvenile Rigid Variant (Westphal)"
+     }
+    ],
+    "edges": [
+     [
+      "pat",
+      "exp"
+     ],
+     [
+      "exp",
+      "juv"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The signature hyperkinetic motor abnormality of Huntington disease is **chorea**, characterised by rapid, involuntary, non-rhythmic, jerky, purposeless, migratory movements that flow irregularly from one muscle group to another. Patients frequently attempt to mask these movements by incorporating them into semi-purposeful gestures (parakinesia) and display motor impersistence (milkmaid grip, tongue darting).",
+   "say": "The signature hyperkinetic motor abnormality of Huntington disease is chorea, characterized by rapid, involuntary, non-rhythmic, purposeless migratory movements flowing irregularly between muscle groups. Patients frequently incorporate them into semi-purposeful gestures, accompanied by motor impersistence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chorea",
+     "points": [
+      "Rapid, jerky, unpredictable, migratory",
+      "Continuous dance-like purposeless flow",
+      "Milkmaid grip and tongue motor impersistence",
+      "Suppressed with VMAT2 inhibitors (Tetrabenazine)"
+     ]
+    },
+    "right": {
+     "title": "Athetosis",
+     "points": [
+      "Slow, writhing, continuous sinuous movements",
+      "Predominantly involves distal fingers and hands",
+      "Seen in athetoid cerebral palsy and kernicterus",
+      "Associated with basal ganglia putaminal injury"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Involuntary, sustained or intermittent muscle contractions causing twisting and repetitive movements or abnormal postures are classified as **dystonia**. Examples include focal cervical dystonia (spasmodic torticollis), blepharospasm, writer cramp, and generalized dystonias. First-line therapy for disabling focal dystonias is local intramuscular injection of botulinum toxin to block neuromuscular acetylcholine release.",
+   "say": "Involuntary sustained muscle contractions causing twisting movements or abnormal postures are classified as dystonia. Examples include cervical torticollis, blepharospasm, and writer cramp. First-line therapy for disabling focal dystonias is local intramuscular injection of botulinum neurotoxin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Dystonia Type",
+     "Anatomical Distribution",
+     "Primary First-Line Therapy"
+    ],
+    "rows": [
+     [
+      "Cervical Dystonia (Torticollis)",
+      "Neck muscles (sternocleidomastoid, trapezius)",
+      "Intramuscular Botulinum toxin injections"
+     ],
+     [
+      "Blepharospasm",
+      "Orbicularis oculi muscles (forced eye closure)",
+      "Targeted periocular Botulinum toxin injections"
+     ],
+     [
+      "Writer's Cramp",
+      "Forearm flexors and intrinsic hand muscles",
+      "Occupational retraining, Botulinum toxin"
+     ],
+     [
+      "Generalized Dystonia (DYT1)",
+      "Axial trunk and multi-limb involvement",
+      "High-dose Trihexyphenidyl OR Bilateral GPi DBS"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most common autosomal recessive hereditary ataxia in clinical practice is **Friedreich ataxia**. Caused by an expanded non-coding intronic GAA trinucleotide repeat in the FXN gene on chromosome 9, it leads to severe transcriptional silencing of the mitochondrial iron-chaperone protein frataxin, triggering intra-mitochondrial iron accumulation, reactive oxygen species generation, and respiratory chain failure.",
+   "say": "The most common autosomal recessive hereditary ataxia is Friedreich ataxia. Caused by an expanded intronic GAA trinucleotide repeat in the frataxin gene, it leads to deficiency of mitochondrial frataxin, triggering iron accumulation, oxidative stress, and respiratory chain failure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ataxic-disorders-fig1.webp",
+    "alt": "Pathways of cerebellar and sensory ataxia and neuroanatomical tract degeneration.",
+    "caption": "Posterior column, corticospinal, and spinocerebellar degeneration in hereditary ataxias. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The neuropathology of Friedreich ataxia involves combined degeneration of the dorsal root ganglia, posterior columns (causing profound loss of proprioception and vibration), spinocerebellar tracts, and descending corticospinal motor tracts. Patients present before age twenty-five with progressive gait ataxia, absent deep tendon reflexes in the lower limbs, extensor Babinski responses, and pes **cavus** foot deformity with kyphoscoliosis.",
+   "say": "The neuropathology of Friedreich ataxia involves combined degeneration of the posterior columns, spinocerebellar tracts, and corticospinal pathways. Patients present before age twenty-five with progressive gait ataxia, absent lower limb reflexes, extensor Babinski responses, and pes cavus with kyphoscoliosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Neurological Features",
+     "points": [
+      "Progressive sensory and cerebellar gait ataxia",
+      "Absent lower limb reflexes (areflexia) + Babinski signs",
+      "Profound loss of vibration and position sense",
+      "Optic atrophy and sensorineural hearing loss"
+     ]
+    },
+    "right": {
+     "title": "Systemic Extraneural Features",
+     "points": [
+      "Hypertrophic cardiomyopathy (dominant cause of death)",
+      "Diabetes mellitus (present in 10% to 20%)",
+      "High-arched foot deformity (pes cavus)",
+      "Progressive thoracic kyphoscoliosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Physical examination of the motor system differentiates cerebellar from sensory ataxia. Classical **cerebellar signs** comprise kinetic intention tremor, dysmetria on finger-nose-finger testing, dysdiadochokinesia (impaired rapid alternating movements), cerebellar scanning staccato dysarthria, horizontal gaze-evoked nystagmus, and a wide-based, uncoordinated staggering gait that fails to worsen significantly with eye closure.",
+   "say": "Physical examination differentiates cerebellar from sensory ataxia. Classical cerebellar signs comprise intention tremor, dysmetria on finger-to-nose testing, dysdiadochokinesia, cerebellar scanning speech, horizontal nystagmus, and a wide-based staggering gait that persists with eyes open or closed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cerebellar Sign",
+     "Clinical Bedside Test",
+     "Pathophysiological Deficit"
+    ],
+    "rows": [
+     [
+      "Dysmetria",
+      "Finger-to-nose and heel-to-shin testing",
+      "Impaired trajectory calculation; past-pointing"
+     ],
+     [
+      "Dysdiadochokinesia",
+      "Rapid alternating hand supination/pronation",
+      "Inability to perform rhythmic antagonistic reversals"
+     ],
+     [
+      "Intention Tremor",
+      "Goal-directed reaching to target",
+      "Kinetic oscillatory tremor worsening near target"
+     ],
+     [
+      "Scanning Dysarthria",
+      "Spoken phrases (baby hippopotamus)",
+      "Irregular volume, fragmented cadence, slurred cadence"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 428"
+}
