@@ -1,0 +1,218 @@
+{
+ "key": "ped-vaccine-principles-live-attenuated-vaccines",
+ "v": 1,
+ "module": "ped-vaccine-principles",
+ "subject": "paediatrics",
+ "title": "Vaccine Principles, Cold Chain, Shake Test and Immunization Schedules",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Immunobiological agents stimulate active protective immunity through divergent antigen presentation formats. Live vaccines contain laboratory-weakened replicating organisms, designated as **live attenuated vaccines**, such as BCG, oral polio, measles, rubella, varicella, and rotavirus. These agents provoke robust cell-mediated and humoral memory mimicking natural infection, but remain strictly contraindicated in children with severe primary T-cell immunodeficiencies, acquired immunosuppression, or leukemia.",
+   "say": "Live attenuated vaccines contain weakened pathogens that induce durable cellular and humoral immunity. They are contraindicated in severe congenital T-cell immunodeficiency and high-dose immunosuppression.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-imm-classification.webp",
+    "alt": "Classification scheme of live attenuated, killed, toxoid, and conjugate vaccines.",
+    "caption": "Vaccine biological platforms illustrating live attenuated, whole killed, toxoid, and subunit formats. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Non-replicating immunogens require structured prime-boost schedules to establish sustained protection. In contrast to live agents, **killed inactivated vaccines** utilize whole killed microorganisms, recombinant protein subunits, capsular polysaccharides, or chemically inactivated toxoids like diphtheria and tetanus toxoids. Because inactivated platforms do not replicate within the host, they are entirely safe in immunocompromised patients but necessitate adjuvant formulations and multiple booster injections to maintain protective antibody titers.",
+   "say": "Inactivated vaccines use killed organisms, toxoids, or recombinant proteins. They cannot replicate and are safe in immunocompromised children, but require booster doses to maintain immunity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vaccine Biological Class",
+     "Representative Vaccines",
+     "Immune Response Type",
+     "Immunodeficiency Safety"
+    ],
+    "rows": [
+     [
+      "Live attenuated viral",
+      "Measles, Rubella, Varicella, OPV, Rotavirus",
+      "Humoral and strong CD8+ T-cell",
+      "Strictly contraindicated"
+     ],
+     [
+      "Live attenuated bacterial",
+      "BCG (Bacille Calmette-Gu\u00e9rin)",
+      "Macrophage and CD4+ T-cell",
+      "Strictly contraindicated"
+     ],
+     [
+      "Whole killed bacterial/viral",
+      "Whole-cell pertussis (wP), IPV, Hep A",
+      "Humoral antibodies primarily",
+      "Completely safe to administer"
+     ],
+     [
+      "Toxoids",
+      "Tetanus toxoid, Diphtheria toxoid",
+      "Neutralizing antitoxin IgG",
+      "Completely safe to administer"
+     ],
+     [
+      "Conjugate polysaccharide",
+      "Hib, PCV, Typhoid conjugate (TCV)",
+      "T-dependent B-cell memory",
+      "Completely safe to administer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Maintaining strict thermal control from manufacturer to end user prevents irreversible biological degradation. The refrigeration system termed the **vaccine cold chain** preserves biological potency by keeping vaccines within defined temperature ranges. District stores, community health centres, and clinics utilize the ice-lined refrigerator (ILR) to maintain temperatures strictly between positive two and positive eight degrees Celsius for all stored liquid vaccines.",
+   "say": "The cold chain preserves vaccine potency from production to administration. Ice-lined refrigerators maintain temperatures strictly between plus two and plus eight degrees Celsius.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-paed-vaccine_rules.webp",
+    "alt": "Cold chain arrangement diagram showing temperature compartments in an ice-lined refrigerator.",
+    "caption": "Ice-lined refrigerator compartment layout showing top heat-sensitive baskets and bottom freeze-sensitive shelves. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Freezing induces irreversible denaturation and aluminium adjuvant agglomeration in specific formulations. Freeze-sensitive vaccines include hepatitis B, DPT, pentavalent, tetanus toxoid, pneumococcal conjugate, and inactivated polio vaccine, which must never be frozen. Clinicians perform the **standard shake test** when freezing is suspected, shaking the test vial alongside a deliberately frozen control: if the test vial sediment settles rapidly within thirty minutes, leaving clear supernatant, the vaccine has been ruined by freezing and must be discarded.",
+   "say": "Freezing destroys aluminium-adsorbed vaccines like hepatitis B and pentavalent. The shake test confirms freezing damage if the suspended antigen precipitates rapidly leaving clear supernatant.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Passed Shake Test (Unfrozen)",
+     "points": [
+      "Homogeneous cloudy suspension persists",
+      "Sedimentation is extremely slow (>60 min)",
+      "Adjuvant lattice remains intact and active",
+      "Safe and effective to administer"
+     ]
+    },
+    "right": {
+     "title": "Failed Shake Test (Frozen)",
+     "points": [
+      "Adjuvant forms coarse clumped flakes",
+      "Precipitates rapidly within 30 minutes",
+      "Clear transparent supernatant fluid forms",
+      "Destroyed potency; discard vial immediately"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cumulative heat exposure is monitored continuously at the individual container level. The **vaccine vial monitor** (VVM) is a temperature-sensitive label consisting of an inner square surrounded by an outer reference circle. As long as the inner square remains noticeably lighter than the outer circle (stages 1 and 2), the vaccine is safe to administer; if the inner square matches or becomes darker than the outer circle (stages 3 and 4), the vial must be discarded immediately.",
+   "say": "The vaccine vial monitor measures cumulative heat exposure. If the inner square matches or becomes darker than the outer circle, the vaccine has lost potency and must be discarded.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "VVM Stage",
+     "Visual Appearance of Label",
+     "Heat Exposure Status",
+     "Clinical Decision Rule"
+    ],
+    "rows": [
+     [
+      "Stage 1",
+      "Inner square is distinctly white/lighter than circle",
+      "Negligible heat exposure",
+      "Usable; safe to administer"
+     ],
+     [
+      "Stage 2",
+      "Inner square remains lighter than outer circle",
+      "Moderate heat exposure",
+      "Usable; prioritize using first"
+     ],
+     [
+      "Stage 3 (Discard)",
+      "Inner square matches colour of outer circle",
+      "Heat threshold reached",
+      "Do not use; discard immediately"
+     ],
+     [
+      "Stage 4 (Discard)",
+      "Inner square is darker than outer circle",
+      "Severe heat denaturation",
+      "Do not use; discard immediately"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "National immunization protocols permit extended utilization of opened liquid containers under defined criteria. India's **open vial policy** allows opened multi-dose vials of liquid vaccines, including DPT, pentavalent, hepatitis B, OPV, IPV, and PCV, to be reused in subsequent sessions for up to twenty-eight days provided cold chain storage was maintained, aseptic technique was used, and the VVM has not reached discard stage. Reconstituted freeze-dried vaccines like BCG, measles, and Japanese encephalitis must be discarded after four hours.",
+   "say": "The open vial policy allows opened liquid vaccine vials to be used for up to twenty-eight days if kept cold and clean. Reconstituted BCG and measles must be discarded after four hours.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Open Vial Policy (28 Days Allowed)",
+     "points": [
+      "Liquid vaccines: DPT, Hep B, OPV, IPV, Pentavalent",
+      "VVM must not have reached discard stage",
+      "Vial septum not submerged in water",
+      "Aseptic single-use syringe withdrawals"
+     ]
+    },
+    "right": {
+     "title": "Reconstituted Vaccines (Discard in 4 Hours)",
+     "points": [
+      "Freeze-dried powders: BCG, Measles, Rubella, JE",
+      "Lack preservative; support bacterial growth",
+      "Toxic shock syndrome risk from Staphylococcus",
+      "Discard all unused volume at 4 hours strictly"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Systematic national frameworks protect populations against high-burden communicable diseases across preschool years. India's **National Immunization Schedule** mandates BCG, oral polio, and hepatitis B at birth; pentavalent (DPT, Hib, Hep B), rotavirus, fractional IPV, and PCV at six, ten, and fourteen weeks; followed by measles-rubella and vitamin A at nine months. Booster doses of DPT and MR are administered at sixteen to twenty-four months, followed by a second DPT booster at five to six years.",
+   "say": "The National Immunization Schedule delivers birth vaccines, pentavalent and polio at six, ten, and fourteen weeks, and measles-rubella at nine months, with DPT boosters up to five years.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-imm-national-schedule.webp",
+    "alt": "Tabular layout of the National Immunization Schedule with vaccine administration timings.",
+    "caption": "Indian National Immunization Schedule detailing antigens, administration routes, and developmental ages. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Professional paediatric societies recommend supplemental vaccines to confer broader protection against life-threatening pathogens. The Indian Academy of Pediatrics advocates **typhoid conjugate vaccine** (TCV) given as a single dose at six to nine months of age, providing sustained T-cell dependent protection against Salmonella Typhi. Other key supplemental vaccines include the nonavalent human papillomavirus (HPV) vaccine at nine to fourteen years to prevent cervical cancer, varicella vaccine at fifteen months, and inactivated hepatitis A vaccine.",
+   "say": "IAP schedules recommend typhoid conjugate vaccine from six months and human papillomavirus vaccine from nine years. Varicella and hepatitis A vaccines offer vital supplemental childhood protection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Supplemental Vaccine",
+     "Recommended Schedule",
+     "Antigen Format",
+     "Primary Target Pathology"
+    ],
+    "rows": [
+     [
+      "Typhoid conjugate (TCV)",
+      "Single dose at 6 to 9 months",
+      "Vi polysaccharide conjugated to TT",
+      "Enteric typhoid fever bacteremia"
+     ],
+     [
+      "Human papillomavirus (HPV)",
+      "2 doses 6 months apart at 9-14 years",
+      "Recombinant L1 virus-like particle",
+      "Cervical carcinoma and genital warts"
+     ],
+     [
+      "Varicella vaccine",
+      "2 doses: 15 months and 4-6 years",
+      "Live attenuated Oka strain",
+      "Chickenpox and secondary necrotizing fasciitis"
+     ],
+     [
+      "Inactivated Hepatitis A",
+      "2 doses 6 months apart at 12 months",
+      "Formalin-inactivated viral particles",
+      "Acute viral hepatitis and fulminant liver failure"
+     ]
+    ]
+   }
+  }
+ ]
+}
