@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "obg-induction",
+ "subject": "obstetrics-gynaecology",
+ "title": "Induction of Labour: Bishop, Ripening, Oxytocin and VBAC",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Artificial initiation of labour before spontaneous onset is **induction of labour**. Indications from post term to pre-eclampsia share one test: vaginal birth must be safer than continuing pregnancy. One in five labours in many systems is induced. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Induction of labour starts labour artificially when vaginal birth beats continuing pregnancy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indication",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Post term",
+      "By 41 to 42 weeks"
+     ],
+     [
+      "Pre-eclampsia",
+      "By severity"
+     ],
+     [
+      "Diabetes",
+      "38 to 39 weeks"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cervical favourability deciding method and success is scored by the **Bishop score** at induction. Unfavourable scores need ripening first; favourable cervices proceed to amniotomy and oxytocin. Reassessment after ripening is mandatory. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Bishop score decides ripening need at induction, with reassessment mandatory after.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Bishop scored"
+     },
+     {
+      "id": "n1",
+      "label": "Unfavourable, ripen first"
+     },
+     {
+      "id": "n2",
+      "label": "Favourable, amniotomy"
+     },
+     {
+      "id": "n3",
+      "label": "Oxytocin follows"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Softening and effacing the cervix before contractions is **cervical ripening**. Prostaglandins, balloon catheters and osmotic dilators all achieve it by different mechanisms. Balloon methods suit scarred uteri where prostaglandins are risky. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Cervical ripening softens the cervix, with balloons suiting scarred uteri.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prostaglandin",
+     "points": [
+      "Pharmacological",
+      "Hyperstimulation possible"
+     ]
+    },
+    "right": {
+     "title": "Balloon catheter",
+     "points": [
+      "Mechanical",
+      "Scar friendly"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The vaginal prostaglandin E2 preparation standard for ripening is **dinoprostone**. Gel or controlled release pessary forms allow removal if hyperstimulation strikes the pessary form. Monitoring follows administration per protocol. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Dinoprostone ripens the cervix as gel or removable controlled release pessary.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-oxytocin.webp",
+    "alt": "Induction agents including oxytocin.",
+    "caption": "Induction agents. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Low dose oral or vaginal prostaglandin E1 used widely for induction and fetal death is **misoprostol**. It is cheap, stable at room temperature and powerful in small divided doses. Scarred uteri restrict its use near term. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Misoprostol induces labour cheaply and stably, restricted in scarred uteri.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Setting",
+     "Misoprostol"
+    ],
+    "rows": [
+     [
+      "Live fetus induction",
+      "Low divided doses"
+     ],
+     [
+      "Fetal death",
+      "Higher doses safe"
+     ],
+     [
+      "Scarred uterus",
+      "Avoid near term"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A balloon catheter inflated in the cervix ripening by pressure and local prostaglandins is the **Foley catheter** method. Thirty to eighty millilitres for twelve to twenty four hours effaces most cervices. It is the method of choice after caesarean in many units.",
+   "say": "Foley catheter ripening suits post caesarean induction by mechanical pressure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Catheter through cervix"
+     },
+     {
+      "id": "n1",
+      "label": "Balloon inflated"
+     },
+     {
+      "id": "n2",
+      "label": "Left 12 to 24 hours"
+     },
+     {
+      "id": "n3",
+      "label": "Removed, amniotomy follows"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Titrated intravenous hormone driving contractions after membrane rupture is **oxytocin** induction. Dose rises by protocol against contraction frequency and fetal response. It needs continuous monitoring and a dedicated line. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Oxytocin induction titrates against contractions and fetal response with continuous monitoring.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-atosiban.webp",
+    "alt": "Oxytocin receptor pharmacology.",
+    "caption": "Oxytocin pharmacology. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Artificial rupture of membranes releasing local prostaglandins and committing to delivery is **amniotomy**. It is avoided with a high head because of cord prolapse. Once done, the clock toward delivery and infection awareness starts. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Amniotomy commits to delivery and is avoided with a high head for cord risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High head",
+     "points": [
+      "Prolapse risk",
+      "Defer amniotomy"
+     ]
+    },
+    "right": {
+     "title": "Engaged head",
+     "points": [
+      "Safe usually",
+      "Proceed with monitoring"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "More than five contractions in ten minutes, with or without fetal changes, defines **tachysystole** and hyperstimulation when the heart suffers. Stopping oxytocin and tocolysis reverse it. Induction protocols exist largely to prevent this state, and augmentation of spontaneous labour follows the same rules at lower intensity, while scarred uterus induction in VBAC avoids misoprostol and favours balloon plus careful oxytocin.",
+   "say": "Tachysystole overstimulates the uterus and stopping oxytocin reverses it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Contractions exceed five in ten"
+     },
+     {
+      "id": "n1",
+      "label": "Oxytocin stopped"
+     },
+     {
+      "id": "n2",
+      "label": "Tocolysis if heart affected"
+     },
+     {
+      "id": "n3",
+      "label": "Restart cautiously or deliver"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "obg-teratogens",
+ "subject": "obstetrics-gynaecology",
+ "title": "Teratogenic Drugs: Thalidomide, Valproate, Lithium and Radiation",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Drugs causing structural fetal abnormalities when given in organogenesis are **teratogenic drugs**. The first trimester, especially weeks three to eight, is the vulnerable window. Most modern prescribing systems flag these agents automatically. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Teratogenic drugs cause structural abnormalities in the organogenesis window of weeks three to eight.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Classic defect"
+    ],
+    "rows": [
+     [
+      "Thalidomide",
+      "Limb reduction"
+     ],
+     [
+      "Valproate",
+      "Neural tube defects"
+     ],
+     [
+      "Warfarin",
+      "Nasal hypoplasia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The sedative withdrawn after causing seal like limb shortening is thalidomide, producing **thalidomide phocomelia**. Hands arising almost directly from shoulders defined the disaster. It remains the historical reason for modern pregnancy drug regulation. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Thalidomide phocomelia shortened limbs seal like and created modern drug regulation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Drug given for nausea"
+     },
+     {
+      "id": "n1",
+      "label": "Limb buds damaged"
+     },
+     {
+      "id": "n2",
+      "label": "Phocomelia at birth"
+     },
+     {
+      "id": "n3",
+      "label": "Regulation transformed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The acne drug absolutely contraindicated in pregnancy for craniofacial and heart defects is **isotretinoin**. Pregnancy prevention programmes mandate contraception before, during and after treatment. Even brief early exposure carries high malformation risk. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Isotretinoin is absolutely contraindicated, with pregnancy prevention programmes mandatory around treatment.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Teratogen counselling in pregnancy.",
+    "caption": "Teratogen counselling. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Antiepileptic folate antagonism causing spina bifida in one to two percent is **valproate neural** tube risk. High dose folate and detailed spine scanning accompany unavoidable use. Switching before conception, never abruptly in pregnancy, is the strategy. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Valproate causes neural tube defects in one to two percent through folate antagonism.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Valproate",
+     "points": [
+      "Highest teratogenicity",
+      "Switch preconception"
+     ]
+    },
+    "right": {
+     "title": "Lamotrigine",
+     "points": [
+      "Lowest known risk",
+      "Folate supplemented"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The fetal syndrome of saddle nose, stippled epiphyses and blindness from early warfarin is **fetal warfarin syndrome**. Exposure at six to twelve weeks is critical. Heparin substitutes during that window in valve patients who accept its risks. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Fetal warfarin syndrome follows six to twelve week exposure with nasal hypoplasia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Exposure window",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "6 to 12 weeks",
+      "Embryopathy"
+     ],
+     [
+      "Later",
+      "Bleeding, brain effects"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mood stabiliser exposure linked to Ebstein tricuspid anomaly is **lithium Ebstein** association. Absolute risk stays low, under one percent, despite a high relative risk. Fetal echocardiography follows first trimester exposure. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Lithium associates with Ebstein anomaly, though absolute risk stays under one percent.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-paed-cvs-cyanosis.webp",
+    "alt": "Ebstein anomaly cardiac assessment.",
+    "caption": "Cardiac anomaly. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Synthetic oestrogen given historically causing vaginal clear cell cancer in daughters is **diethylstilbestrol**. It also deformed the uterus and raised infertility in exposed offspring. Its lessons shaped transgenerational vigilance for all pregnancy drugs. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Diethylstilbestrol caused clear cell cancer in daughters, teaching transgenerational vigilance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Drug given in pregnancy"
+     },
+     {
+      "id": "n1",
+      "label": "Daughters exposed in utero"
+     },
+     {
+      "id": "n2",
+      "label": "Cancer in adolescence"
+     },
+     {
+      "id": "n3",
+      "label": "Transgenerational lesson"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diagnostic radiation below fifty milligray carries no proven increase in anomalies, the **radiation dose threshold** concept. Needed imaging is never withheld in pregnancy for this reason. Shielding and ultrasound substitution still apply where equal. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Radiation below fifty milligray has no proven anomaly increase, so needed imaging proceeds.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Under 50 mGy",
+     "points": [
+      "No proven increase",
+      "Proceed if needed"
+     ]
+    },
+    "right": {
+     "title": "Over 100 mGy",
+     "points": [
+      "Possible effects",
+      "Specialist advice"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Most common medicines including paracetamol, penicillins and metformin have reassuring lactation profiles, summarised as **safe drugs in lactation**. True contraindications are few, mainly cytotoxics and radioactive agents. Stopping breastfeeding unnecessarily usually harms more than the drug. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Most common medicines are safe in lactation, and unnecessary stopping usually harms more.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Safe generally",
+     "Avoid"
+    ],
+    "rows": [
+     [
+      "Paracetamol, penicillins",
+      "Cytotoxics"
+     ],
+     [
+      "Metformin, levothyroxine",
+      "Radioactive iodine"
+     ]
+    ]
+   }
+  }
+ ]
+}

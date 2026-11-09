@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "module": "obg-abnormal-labour",
+ "subject": "obstetrics-gynaecology",
+ "title": "Shoulder Dystocia, McRoberts and Prolonged Labour",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Impaction of the anterior shoulder behind the pubic symphysis after head delivery is **shoulder dystocia**. The head retracts against the perineum in the turtle sign. It is unpredictable in most cases, so drills matter more than prediction. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Shoulder dystocia impacts the anterior shoulder and drills matter more than prediction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/shoulder-dystocia-fig1.webp",
+    "alt": "Shoulder dystocia management.",
+    "caption": "Shoulder dystocia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Hyperflexing the mothers thighs onto her abdomen, flattening the sacrum, is the **McRoberts manoeuvre**. Combined with suprapubic pressure it frees half to two thirds of cases. It is always the first manoeuvre, with help summoned simultaneously. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "McRoberts hyperflexes thighs and frees most shoulder dystocia with suprapubic pressure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Help summoned"
+     },
+     {
+      "id": "n1",
+      "label": "McRoberts position"
+     },
+     {
+      "id": "n2",
+      "label": "Suprapubic pressure"
+     },
+     {
+      "id": "n3",
+      "label": "Most release here"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Internal rotational manoeuvres and delivery of the posterior arm follow failed McRoberts in the **HELPERR sequence**. Help, evaluate episiotomy, legs, pressure, enter, extract, roll organises the drill. Each step has thirty seconds before moving on. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "The HELPERR sequence organises shoulder dystocia steps after McRoberts fails.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Letter",
+     "Step"
+    ],
+    "rows": [
+     [
+      "H",
+      "Help"
+     ],
+     [
+      "E",
+      "Evaluate episiotomy"
+     ],
+     [
+      "L",
+      "Legs McRoberts"
+     ],
+     [
+      "P",
+      "Pressure suprapubic"
+     ],
+     [
+      "E",
+      "Enter internal"
+     ],
+     [
+      "R",
+      "Remove posterior arm"
+     ],
+     [
+      "R",
+      "Roll over"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Brachial plexus stretch injury, usually Erb palsy, is the feared fetal complication, termed **plexus injury**. Most recover within months, a minority persist. Documentation of manoeuvres and timings protects baby follow up and staff equally. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Plexus injury stretches the brachial plexus and most Erb palsies recover in months.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gestational-diabetes-mellitus-fig1.webp",
+    "alt": "Macrosomia predisposing to dystocia.",
+    "caption": "Dystocia risk. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Last resort measures include cleidotomy, symphysiotomy and the Zavanelli manoeuvre under **salvage procedures**. Symphysiotomy retains a real role where caesarean is unavailable or unsafe. These are rehearsed conceptually even where rarely used. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Salvage procedures include symphysiotomy, which retains a role where caesarean is unsafe.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Standard sequence",
+     "points": [
+      "McRoberts and pressure",
+      "Internal manoeuvres",
+      "Posterior arm"
+     ]
+    },
+    "right": {
+     "title": "Salvage",
+     "points": [
+      "Cleidotomy",
+      "Symphysiotomy",
+      "Zavanelli"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Labour exceeding expected duration by stage defines **prolonged labour** variably. First stage prolongation splits into latent and active problems with different responses. Second stage limits differ for first and subsequent births and epidural use. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Prolonged labour definitions split latent and active problems with different responses.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Prolonged beyond"
+    ],
+    "rows": [
+     [
+      "Active first",
+      "Partograph action line"
+     ],
+     [
+      "Second, first baby",
+      "About 2 to 3 hours"
+     ],
+     [
+      "Second, multipara",
+      "About 1 to 2 hours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inadequate contractions are the commonest correctable cause of slow labour, treated by **oxytocin augmentation**. Amniotomy precedes it and progress is reassessed in four hours. Hyperstimulation is watched for with continuous monitoring. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Oxytocin augmentation corrects inadequate contractions after amniotomy with four hour review.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-oxytocin.webp",
+    "alt": "Oxytocin augmentation.",
+    "caption": "Oxytocin. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The three Ps framework sorts slow labour into powers, passenger and passage causes, taught as **powers passenger passage**. Each demands different correction, from oxytocin to rotation to caesarean. Systematic sorting prevents reflex caesareans for fixable powers problems. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Powers, passenger and passage sorting prevents reflex caesareans for fixable contraction problems.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Powers assessed"
+     },
+     {
+      "id": "n1",
+      "label": "Passenger position checked"
+     },
+     {
+      "id": "n2",
+      "label": "Passage pelvis judged"
+     },
+     {
+      "id": "n3",
+      "label": "Correct cause treated"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After dystocia, debriefing parents and staff plus physiotherapy referral completes care, termed **post event care**. Shoulder dystocia recurs in about one in ten next deliveries. The next birth plan is documented before discharge. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Post event care debriefs dystocia and documents the next birth plan before discharge.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-labour_abdomen.webp",
+    "alt": "Shoulder dystocia debrief context.",
+    "caption": "Dystocia care. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

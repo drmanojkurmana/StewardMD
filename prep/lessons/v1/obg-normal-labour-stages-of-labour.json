@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "module": "obg-normal-labour",
+ "subject": "obstetrics-gynaecology",
+ "title": "Stages of Labour, Cardinal Movements and the Labour Care Guide",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Labour divides into first, second, third and early recovery fourth periods called the **stages of labour**. The first stage dilates the cervix, the second delivers the baby, the third the placenta. Knowing stages structures every labour decision. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Stages of labour divide dilation, delivery, placental delivery and recovery periods.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "From to"
+    ],
+    "rows": [
+     [
+      "First",
+      "Labour to full dilation"
+     ],
+     [
+      "Second",
+      "Full dilation to birth"
+     ],
+     [
+      "Third",
+      "Birth to placenta"
+     ],
+     [
+      "Fourth",
+      "First hours after"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The sequence of head movements through the pelvis forms the **cardinal movements**. Engagement, descent, flexion, internal rotation, extension, restitution and external rotation follow in order. Each movement adapts the head to successive pelvic planes. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Cardinal movements sequence engagement through external rotation adapting the head to the pelvis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-fetal_skull.webp",
+    "alt": "Fetal skull in cardinal movements.",
+    "caption": "Cardinal movements. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Passage of the biparietal diameter through the pelvic brim is **engagement**. In first pregnancies it often precedes labour, in later ones it may await contractions. Non engagement with a normal pelvis usually reflects malposition or deflexion. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Engagement passes the biparietal diameter through the brim, often before labour in first pregnancies.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Head at brim"
+     },
+     {
+      "id": "n1",
+      "label": "Biparietal passes"
+     },
+     {
+      "id": "n2",
+      "label": "Two fifths palpable"
+     },
+     {
+      "id": "n3",
+      "label": "Engagement confirmed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Progressive downward movement driven by contractions throughout labour is **descent**. It is judged abdominally in fifths and vaginally by station together. Arrest of descent despite good contractions signals obstruction or malposition. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Descent is judged by fifths and station together throughout labour.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-labour_abdomen.webp",
+    "alt": "Labour abdominal examination for descent.",
+    "caption": "Labour examination. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Rotation of the occiput to under the pubic arch at the pelvic floor is **internal rotation**. The levator ani gutter directs the head through forty five to ninety degrees. Failure gives deep transverse arrest or persistent posterior position. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Internal rotation turns the occiput under the pubic arch at the pelvic floor.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Successful rotation",
+     "points": [
+      "Occiput anterior",
+      "Extension follows",
+      "Vaginal birth"
+     ]
+    },
+    "right": {
+     "title": "Failed rotation",
+     "points": [
+      "Transverse arrest",
+      "Posterior persistence",
+      "Assistance needed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The historical graph of expected dilation against time is the **Friedman curve**. Modern data show labour is slower than Friedman taught, especially before six centimetres. Applying old curves caused unnecessary caesareans for normal slow labour. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "The Friedman curve overstated expected dilation speed compared with modern labour data.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Era",
+     "Active phase from"
+    ],
+    "rows": [
+     [
+      "Friedman",
+      "3 to 4 cm"
+     ],
+     [
+      "Modern",
+      "5 to 6 cm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The current WHO intrapartum guide replacing rigid curves with individualised thresholds is the **WHO labour care guide**. It plots progress with supportive care and alert thresholds per parameter. Respectful, woman centred care is built into its design. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "The WHO labour care guide individualises thresholds with respectful woman centred care.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-obg-partograph.webp",
+    "alt": "Partograph and labour care charting.",
+    "caption": "Labour charting. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Latent phase up to five centimetres can last many hours normally, termed **prolonged latent phase** tolerance. Admission too early in this phase raises intervention cascades. Reassurance, hydration and analgesia at home or in latent areas serve better. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Prolonged latent phase tolerance avoids intervention cascades from early admission.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Latent contractions"
+     },
+     {
+      "id": "n1",
+      "label": "Assessment and reassurance"
+     },
+     {
+      "id": "n2",
+      "label": "Home or latent area"
+     },
+     {
+      "id": "n3",
+      "label": "Return in active labour"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Continuous one to one support in labour shortens it and reduces caesareans, an evidence based **support effect**. A chosen companion plus staff presence delivers this benefit cheaply. It is the single most effective non drug labour intervention. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Continuous support shortens labour and reduces caesareans more than any non drug intervention.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Continuous support",
+     "points": [
+      "Shorter labour",
+      "Fewer caesareans",
+      "Higher satisfaction"
+     ]
+    },
+    "right": {
+     "title": "Intermittent care",
+     "points": [
+      "Standard staffing",
+      "More interventions"
+     ]
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,206 @@
+{
+ "v": 1,
+ "module": "obg-abnormal-labour",
+ "subject": "obstetrics-gynaecology",
+ "title": "Face, Brow and Transverse Lie",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The head fully extended presenting the face is **face presentation**. The chin, or mentum, is the denominator. Mentum anterior can deliver vaginally; mentum posterior cannot and needs caesarean. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Face presentation presents the chin, and only mentum anterior delivers vaginally.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Position",
+     "Delivery"
+    ],
+    "rows": [
+     [
+      "Mentum anterior",
+      "Vaginal possible"
+     ],
+     [
+      "Mentum posterior",
+      "Caesarean needed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Partial extension presenting the brow, the rarest and largest attitude, is **brow presentation**. The mentovertical diameter of thirteen and a half centimetres usually cannot pass at term. Most convert to face or vertex, persistent brow needs caesarean. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Brow presentation offers the largest diameter and persistent brow needs caesarean.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-mod-fetal-skull.webp",
+    "alt": "Brow presentation diameters.",
+    "caption": "Brow diameters. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The fetus lying across the uterus with shoulder over the os is **transverse lie**. Vaginal delivery is impossible and cord prolapse stalks membrane rupture. Caesarean is mandatory once labour or rupture occurs. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Transverse lie makes vaginal delivery impossible and caesarean mandatory in labour.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Transverse lie in labour"
+     },
+     {
+      "id": "n1",
+      "label": "Membranes threaten rupture"
+     },
+     {
+      "id": "n2",
+      "label": "Cord prolapse risk"
+     },
+     {
+      "id": "n3",
+      "label": "Caesarean performed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Causes of malpresentation cluster around prematurity, polyhydramnios, placenta praevia and uterine anomalies, grouped as **malpresentation causes**. Finding the cause matters because several independently mandate caesarean. Ultrasound at presentation assessment seeks them. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Malpresentation causes include prematurity, polyhydramnios, praevia and uterine anomalies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fetal causes",
+     "points": [
+      "Prematurity",
+      "Anencephaly in face"
+     ]
+    },
+    "right": {
+     "title": "Maternal causes",
+     "points": [
+      "Praevia",
+      "Uterine anomaly"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Face presentation oedema distorts the newborn face for days, a benign **facial swelling** course. Bruised, swollen lips and eyelids alarm parents unnecessarily without warning. Antenatal counselling after diagnosis prepares them. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Facial swelling after face delivery distorts the newborn face benignly for days.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-fetal_skull.webp",
+    "alt": "Face presentation skull landmarks.",
+    "caption": "Face landmarks. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Vaginal examination in face presentation feels orbital ridges and mouth, easily confused with breech, a **palpation pitfall**. The mouth with hard gums differs from the anus with sphincter tone. Misdiagnosis leads to dangerous management errors. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Face palpation pitfalls confuse mouth with anus, distinguished by gums versus sphincter.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feels like",
+     "Distinguisher"
+    ],
+    "rows": [
+     [
+      "Mouth",
+      "Hard gums, sucking"
+     ],
+     [
+      "Anus",
+      "Sphincter grip, meconium"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Compound presentation with a hand prolapsing beside the head usually resolves, following **compound observation**. The hand typically withdraws as the head descends. Persistent compound with arm prolapse may need caesarean. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Compound presentation usually resolves as the hand withdraws with descent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Hand beside head"
+     },
+     {
+      "id": "n1",
+      "label": "Labour observed"
+     },
+     {
+      "id": "n2",
+      "label": "Hand withdraws"
+     },
+     {
+      "id": "n3",
+      "label": "Normal delivery"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Shoulder presentation with a prolapsed arm in neglected labour historically forced destructive operations, now prevented by **timely caesarean access**. Its disappearance marks functioning referral systems. Neglected transverse lie remains a systems failure diagnosis. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Neglected transverse lie marks systems failure now prevented by timely caesarean access.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-labour_abdomen.webp",
+    "alt": "Transverse lie abdominal findings.",
+    "caption": "Transverse lie. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Stabilising induction converts unstable lie to longitudinal under controlled rupture, a specialist **stabilising induction** technique. The abdomen is held while liquor drains slowly with oxytocin running. It is reserved for units ready for instant caesarean. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Stabilising induction controls unstable lie with held abdomen and instant caesarean readiness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stabilising induction",
+     "points": [
+      "Expert unit only",
+      "Instant section ready"
+     ]
+    },
+    "right": {
+     "title": "Expectant",
+     "points": [
+      "Unstable lie persists",
+      "Cord accident risk"
+     ]
+    }
+   }
+  }
+ ]
+}

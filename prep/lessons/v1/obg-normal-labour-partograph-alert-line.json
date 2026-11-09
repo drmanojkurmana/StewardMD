@@ -1,0 +1,208 @@
+{
+ "v": 1,
+ "module": "obg-normal-labour",
+ "subject": "obstetrics-gynaecology",
+ "title": "Partograph, Bishop Score, Third Stage and Perineal Tears",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The graphic labour record plotting dilation against alert and action lines is the **partograph alert line**. Crossing to the right of the alert line warns of slow progress needing referral or review. The action line, four hours later, mandates intervention decisions. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "The partograph alert line warns of slow progress, with the action line four hours later.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-obg-partograph.webp",
+    "alt": "Partograph with alert and action lines.",
+    "caption": "Partograph. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The five feature score predicting induction success by cervical favourability is the **Bishop score**. Dilatation, effacement, station, consistency and position each score to thirteen. Scores of eight or more predict vaginal delivery like spontaneous labour. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "The Bishop score predicts induction success, with eight or more favouring vaginal delivery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Scores"
+    ],
+    "rows": [
+     [
+      "Dilatation",
+      "0 to 3"
+     ],
+     [
+      "Effacement",
+      "0 to 3"
+     ],
+     [
+      "Station",
+      "0 to 3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Uterotonic, controlled cord traction and uterine massage preventing haemorrhage form **active management of third stage**. It halves postpartum haemorrhage compared with expectant care. Oxytocin ten units is its cornerstone drug. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Active management of third stage halves postpartum haemorrhage with oxytocin.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-oxytocin.webp",
+    "alt": "Oxytocin in third stage management.",
+    "caption": "Oxytocin. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A cut to enlarge the vaginal opening at crowning is an **episiotomy**. Mediolateral cuts protect the anal sphincter better than midline ones. Routine use is abandoned; restricted use for fetal distress or instruments remains. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Episiotomy is now restricted, with mediolateral cuts protecting the sphincter better.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mediolateral",
+     "points": [
+      "Sphincter protected",
+      "More blood loss"
+     ]
+    },
+    "right": {
+     "title": "Midline",
+     "points": [
+      "Easier repair",
+      "Higher sphincter injury"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Tears are graded one to four by depth, with third and fourth degree involving sphincter and mucosa as **perineal tears** classification. Sphincter tears need theatre repair and structured follow up. Missing them causes incontinence. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Perineal tears grade to four, with sphincter tears needing theatre repair.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Degree",
+     "Involves"
+    ],
+    "rows": [
+     [
+      "One",
+      "Skin only"
+     ],
+     [
+      "Two",
+      "Perineal muscle"
+     ],
+     [
+      "Three",
+      "Anal sphincter"
+     ],
+     [
+      "Four",
+      "Rectal mucosa"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lengthening cord, a gush of blood and the uterus rising globular signal **placental separation**. Traction before these signs risks uterine inversion. Brandt Andrews technique guards the uterus while delivering the placenta. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Placental separation signals cord lengthening, a gush and a globular rising uterus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Uterus contracts hard"
+     },
+     {
+      "id": "n1",
+      "label": "Cord lengthens"
+     },
+     {
+      "id": "n2",
+      "label": "Blood gushes"
+     },
+     {
+      "id": "n3",
+      "label": "Controlled traction delivers"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Retained placenta beyond thirty minutes needs manual removal in theatre, termed **retained placenta**. Accreta is considered when no cleavage plane is found. Antibiotic cover and blood readiness accompany the procedure. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Retained placenta beyond thirty minutes needs manual removal in theatre.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-manual-removal-of-placenta.webp",
+    "alt": "Manual removal of placenta.",
+    "caption": "Manual removal. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Cervical dilation expected at one centimetre per hour in classic teaching is now relaxed, reflecting **modern dilation expectations**. Slower progress with a well fetus and mother is observed longer. The labour care guide encodes this patience. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Modern dilation expectations observe slower progress longer with a well fetus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Progress plotted"
+     },
+     {
+      "id": "n1",
+      "label": "Slower than classic curve"
+     },
+     {
+      "id": "n2",
+      "label": "Mother and fetus well"
+     },
+     {
+      "id": "n3",
+      "label": "Continue observing"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fetal heart, contractions, liquor and maternal vitals share the partograph because **multiparameter plotting** catches deterioration early. Meconium, moulding and urine output add context. A partograph is a communication tool as much as a record. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Multiparameter plotting on the partograph catches deterioration and communicates it early.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-labour_abdomen.webp",
+    "alt": "Labour monitoring parameters.",
+    "caption": "Labour monitoring. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

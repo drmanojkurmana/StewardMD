@@ -1,0 +1,232 @@
+{
+ "v": 1,
+ "module": "obg-abnormal-labour",
+ "subject": "obstetrics-gynaecology",
+ "title": "Cord Prolapse, Obstructed Labour and Cephalopelvic Disproportion",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The cord descending below the presenting part after membrane rupture is **cord prolapse**. Compression and spasm cut fetal blood flow within minutes. Immediate relief of pressure plus emergency delivery saves the baby. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Cord prolapse cuts fetal flow within minutes and needs pressure relief plus emergency delivery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Action",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Hand lifts presenting part",
+      "Relieves compression"
+     ],
+     [
+      "Knee chest or Trendelenburg",
+      "Gravity helps"
+     ],
+     [
+      "Emergency caesarean",
+      "Definitive delivery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Filling the bladder with saline to lift the presenting part is a temporising **bladder filling** manoeuvre. Three to five hundred millilitres raise the head off the cord during transfer. The catheter is clamped until theatre. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Bladder filling lifts the presenting part off the cord during transfer to theatre.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Prolapse diagnosed"
+     },
+     {
+      "id": "n1",
+      "label": "Bladder filled 500 ml"
+     },
+     {
+      "id": "n2",
+      "label": "Part lifted off cord"
+     },
+     {
+      "id": "n3",
+      "label": "Transfer to theatre"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Labour where mechanical obstruction prevents delivery despite strong contractions is **obstructed labour**. Neglected cases rupture the uterus, fistula the bladder and kill the fetus. Its prevention is the entire point of the partograph. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Obstructed labour prevents delivery despite strong contractions and the partograph exists to prevent it.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-obg-partograph.webp",
+    "alt": "Partograph preventing obstructed labour.",
+    "caption": "Obstruction prevention. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The pathological retraction ring between thinned lower and thickened upper segments in obstruction is the **Bandl ring**. Visible as an abdominal groove, it heralds uterine rupture. Immediate caesarean without oxytocin resolves it. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Bandl ring heralds uterine rupture in obstruction and needs immediate caesarean.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Physiological ring",
+     "points": [
+      "Normal labour",
+      "Not visible abdominally"
+     ]
+    },
+    "right": {
+     "title": "Bandl ring",
+     "points": [
+      "Obstructed labour",
+      "Visible groove, rupture near"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Mismatch between fetal head size and pelvic capacity is **cephalopelvic disproportion**. It is proven only by a well conducted trial of labour in most cases. True disproportion from contracted pelvis is rare where nutrition is adequate. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Cephalopelvic disproportion is proven by trial of labour in most cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Trial of labour conducted"
+     },
+     {
+      "id": "n1",
+      "label": "Progress despite contractions judged"
+     },
+     {
+      "id": "n2",
+      "label": "Disproportion declared only then"
+     },
+     {
+      "id": "n3",
+      "label": "Caesarean follows"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Caput and moulding climbing while descent stalls are the vaginal signs of **impending obstruction**. Three plus moulding with a high head warns the examiner. Oxytocin in this setting courts rupture and is stopped. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Climbing moulding without descent warns of impending obstruction and oxytocin stops.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-fetal_skull.webp",
+    "alt": "Moulding assessment in obstruction.",
+    "caption": "Moulding signs. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Ruptured uterus through an obstructed scarred segment presents with pain, shock and lost contractions, termed **uterine rupture**. The fetus is often dead and partially extruded. Laparotomy, repair or hysterectomy, and massive transfusion follow. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Uterine rupture in obstruction presents with shock and lost contractions needing laparotomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Contractions",
+      "Stop suddenly"
+     ],
+     [
+      "Presentation",
+      "Recedes, parts felt abdominally"
+     ],
+     [
+      "Mother",
+      "Shock, pain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vesicovaginal fistula is the late price of neglected obstruction in low resource settings, a **fistula consequence**. Days of pressure necrose the bladder base. Prevention is timely caesarean access; repair needs specialist surgery months later. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Vesicovaginal fistula is the late price of neglected obstruction from pressure necrosis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-labour_abdomen.webp",
+    "alt": "Obstructed labour prevention.",
+    "caption": "Obstruction prevention. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Tocolysis with terbutaline relaxes the uterus during cord prolapse transfer in some protocols, an adjunct **uterine relaxation**. It reduces cord compression from contractions while theatre readies. The examining hand remains until delivery regardless. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Uterine relaxation adjuncts reduce cord compression while the hand remains until delivery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Prolapse found"
+     },
+     {
+      "id": "n1",
+      "label": "Hand stays in vagina"
+     },
+     {
+      "id": "n2",
+      "label": "Relaxant may be given"
+     },
+     {
+      "id": "n3",
+      "label": "Delivered in theatre"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

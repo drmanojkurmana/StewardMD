@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "module": "obg-other-medical",
+ "subject": "obstetrics-gynaecology",
+ "title": "Thyroid Disease, Epilepsy, SLE and Thrombosis in Pregnancy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Inadequate thyroid hormone in pregnancy impairing fetal brain development is maternal **hypothyroidism**. Levothyroxine requirements rise by a third, so dose increases at the positive test. Stimulating hormone targets are trimester specific, tightest early. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Hypothyroidism in pregnancy needs levothyroxine increased by a third at the positive test.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Trimester",
+     "TSH aim"
+    ],
+    "rows": [
+     [
+      "First",
+      "Under 2.5"
+     ],
+     [
+      "Second and third",
+      "Under 3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Replacement hormone identical to natural thyroxine, safe throughout pregnancy, is **levothyroxine**. It does not cross harmfully and treats mother and fetus together. Iron and calcium supplements must be spaced hours away from it. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Levothyroxine safely replaces thyroid hormone, spaced hours from iron and calcium.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Dose increased at test"
+     },
+     {
+      "id": "n1",
+      "label": "TSH checked monthly"
+     },
+     {
+      "id": "n2",
+      "label": "Dose titrated"
+     },
+     {
+      "id": "n3",
+      "label": "Pre pregnancy dose after birth"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Seizure disorders complicating pregnancy need folate and drug review as **epilepsy in pregnancy**. Most women deliver normally with unchanged seizures. Valproate is avoided wherever alternatives control seizures adequately. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Epilepsy in pregnancy needs folate and drug review, avoiding valproate where possible.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Medical disorders in pregnancy care.",
+    "caption": "Medical disorders care. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Autoimmune multisystem disease flaring in pregnancy and harming placenta is **SLE** in pregnancy. Anti Ro antibodies can cause fetal heart block, checked by serial scans. Hydroxychloroquine is continued because stopping invites flares. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "SLE in pregnancy risks placental harm and fetal heart block from anti Ro antibodies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Quiescent 6 months",
+     "points": [
+      "Conception advised",
+      "Best outcomes"
+     ]
+    },
+    "right": {
+     "title": "Active disease",
+     "points": [
+      "Defer pregnancy",
+      "Flare and loss risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Inherited or acquired clotting tendency raising thrombosis and placental risk is **thrombophilia**. Antiphospholipid syndrome is the acquired form proven to benefit from treatment. Inherited thrombophilias mainly guide thrombosis prevention, not miscarriage treatment. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Thrombophilia raises clotting risk, with antiphospholipid syndrome the treatable acquired form.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Example"
+    ],
+    "rows": [
+     [
+      "Acquired",
+      "Antiphospholipid syndrome"
+     ],
+     [
+      "Inherited",
+      "Factor V Leiden"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clots in leg veins or lungs, the leading direct killer of mothers in developed countries, are **venous thromboembolism**. Risk scoring at booking assigns prophylactic heparin to high risk women. Sudden breathlessness in pregnancy is embolism until excluded. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Venous thromboembolism is a leading maternal killer, prevented by risk scored heparin.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/preeclampsia-fig1.webp",
+    "alt": "Thrombosis risk in pregnancy context.",
+    "caption": "Thrombosis context. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Overactive thyroid in pregnancy, usually Graves disease, risks fetal thyrotoxicosis through **thyroid stimulating antibodies**. Propylthiouracil is preferred in the first trimester, carbimazole later. Both cross the placenta, so the lowest effective dose is used. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Graves disease antibodies can overstimulate the fetal thyroid across the placenta.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Graves diagnosed"
+     },
+     {
+      "id": "n1",
+      "label": "Antibodies measured"
+     },
+     {
+      "id": "n2",
+      "label": "Lowest drug dose"
+     },
+     {
+      "id": "n3",
+      "label": "Fetal heart watched"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Thyroid storm precipitated by labour or infection is a life threatening decompensation of **hyperthyroidism**. Beta blockade, thionamides, iodine and steroids follow a strict sequence. Senior endocrine and critical care help is summoned early. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Thyroid storm in labour needs sequenced blockade and critical care help early.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Controlled hyperthyroid",
+     "points": [
+      "Lowest dose thionamide",
+      "Fetal monitoring",
+      "Planned delivery"
+     ]
+    },
+    "right": {
+     "title": "Thyroid storm",
+     "points": [
+      "Emergency sequence",
+      "Critical care",
+      "Multidisciplinary"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Postpartum thyroiditis affects one in twenty women within a year of delivery, an autoimmune **postpartum thyroiditis**. A thyrotoxic phase flips to hypothyroid before most recover. It predicts permanent hypothyroidism in later years. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Postpartum thyroiditis flips from thyrotoxic to hypothyroid phases within a year of delivery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Thyrotoxic",
+      "1 to 4 months"
+     ],
+     [
+      "Hypothyroid",
+      "4 to 8 months"
+     ],
+     [
+      "Recovery",
+      "By 12 months usually"
+     ]
+    ]
+   }
+  }
+ ]
+}
