@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-antiepileptics",
+  "subject": "pharmacology",
+  "title": "Phenytoin, Fosphenytoin and Carbamazepine Family Sodium Channel Antiepileptics",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Phenytoin** stabilises the inactivated state of voltage gated sodium channels, throttling high frequency repetitive firing in epileptic foci while sparing ordinary neurotransmission, a use dependent selectivity shared with carbamazepine. It serves focal and generalised tonic clonic seizures and intravenous status epilepticus second line duty, and is famously useless, even aggravating, in absence seizures where T type calcium currents, not sodium firing, generate the rhythm.",
+      "say": "Phenytoin calms high frequency firing and does nothing for absence; match the channel to the seizure.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-phenytoin.webp",
+        "alt": "Phenytoin mechanism and adverse effect illustration for paediatric practice",
+        "caption": "Phenytoin, the sodium channel antiepileptic whose kinetics and toxicities fill this lesson. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Phenytoin kinetics** are the examination inside the drug: hepatic metabolism saturates within the therapeutic range, switching from first order to zero order so small dose increments produce disproportionate, sometimes toxic level jumps, with an effective half life stretching from hours to days. Albumin binding of 90 percent means low albumin, uraemia and pregnancy falsify total levels, and free levels or albumin corrected formulae rescue interpretation. Therapeutic range 10 to 20 mg per litre is a guide, not a god.",
+      "say": "Saturable kinetics mean small increases, big jumps; correct the level for albumin before believing it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dose",
+            "label": "Dose increased by a small increment"
+          },
+          {
+            "id": "sat",
+            "label": "Hepatic enzymes saturate near therapeutic range"
+          },
+          {
+            "id": "zero",
+            "label": "Zero order elimination: levels climb steeply"
+          },
+          {
+            "id": "tox",
+            "label": "Nystagmus, ataxia and encephalopathy if unrecognised"
+          }
+        ],
+        "edges": [
+          [
+            "dose",
+            "sat"
+          ],
+          [
+            "sat",
+            "zero"
+          ],
+          [
+            "zero",
+            "tox"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Toxicity** climbs a cerebellar staircase examiners recite in order: nystagmus first (often beyond 20 mg per litre), then ataxia and slurred speech (beyond 30), then confusion and encephalopathy (beyond 40), with seizures paradoxically at extreme levels. Chronic exposure adds gingival hyperplasia, coarsened facies, hirsutism, osteomalacia, folate deficiency with megaloblastic anaemia, and peripheral neuropathy, the adverse gallery the teratogenicity lesson revisits in the fetus.",
+      "say": "Nystagmus, ataxia, encephalopathy: read the level off the cerebellum in that order.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dose related toxicity ladder",
+          "points": [
+            "Nystagmus at levels roughly above 20 mg per litre",
+            "Ataxia and dysarthria above 30",
+            "Confusion and encephalopathy above 40",
+            "Management: withhold, level, supportive care"
+          ]
+        },
+        "right": {
+          "title": "Chronic exposure gallery",
+          "points": [
+            "Gingival hyperplasia and coarsened facies",
+            "Hirsutism and acne in younger patients",
+            "Osteomalacia from vitamin D catabolism",
+            "Folate depletion with megaloblastic anaemia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Fosphenytoin**, a phosphate prodrug converted by phosphatases within minutes, exists to fix intravenous phenytoin's manners: it infuses faster, in ordinary fluids, intramuscularly if needed, without the propylene glycol vehicle that caused hypotension, arrhythmias and purple glove syndrome (limb threatening extravasation necrosis). Doses are written in phenytoin equivalents (PE) to keep the arithmetic honest, and cardiac monitoring still attends loading in status epilepticus.",
+      "say": "Fosphenytoin is phenytoin with the vehicle violence removed; dose it in phenytoin equivalents.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intravenous phenytoin hazards",
+          "points": [
+            "Maximum 50 mg per minute infusion rate",
+            "Hypotension and arrhythmia from propylene glycol vehicle",
+            "Purple glove syndrome on extravasation",
+            "Saline only, large vein, cardiac monitoring"
+          ]
+        },
+        "right": {
+          "title": "Fosphenytoin advantages",
+          "points": [
+            "Faster infusion in dextrose or saline",
+            "Intramuscular option when veins fail",
+            "No purple glove syndrome",
+            "Same levels, interactions and toxicity once converted"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Carbamazepine** shares the sodium channel mechanism and owns trigeminal neuralgia (drug of choice) plus focal seizures and bipolar mania. Its epoxide metabolite is active, autoinduction shortens its own half life over the first weeks so doses climb, and the adverse trio is hyponatraemia from SIADH like effect, blood dyscrasias including aplastic anaemia, and severe skin reactions (Stevens Johnson syndrome) genetically flagged by HLA B*1502 in Han Chinese and HLA A*3101 in Europeans, screened before first prescription where ancestry dictates.",
+      "say": "Carbamazepine treats trigeminal neuralgia best, induces its own metabolism, and screens HLA before starting.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-carbamazepine.webp",
+        "alt": "Carbamazepine voltage gated sodium channel inhibition illustration",
+        "caption": "Carbamazepine blocking voltage gated sodium channels, with its neuralgia and seizure indications. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Oxcarbazepine**, carbamazepine's keto analogue, skips the epoxide metabolite, induces enzymes less, and causes hyponatraemia more (up to a third of patients biochemically), trading interaction burden for sodium surveillance. Eslicarbazepine extends the same lineage once daily. All three worsen absence and myoclonic seizures in generalised epilepsies, the sodium channel paradox that punishes mechanism free prescribing in juvenile myoclonic epilepsy especially.",
+      "say": "Oxcarbazepine trades carbamazepine's interactions for more hyponatraemia; both worsen absence and myoclonus.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Carbamazepine burdens",
+          "points": [
+            "Autoinduction and broad enzyme induction",
+            "Hyponatraemia, dizziness and diplopia dose related",
+            "Aplastic anaemia and Stevens Johnson syndrome rare but defining",
+            "HLA screening by ancestry before initiation"
+          ]
+        },
+        "right": {
+          "title": "Oxcarbazepine trade",
+          "points": [
+            "No epoxide metabolite, fewer interactions",
+            "Hyponatraemia commoner and occasionally severe",
+            "Cross sensitivity in a quarter of carbamazepine allergic patients",
+            "Same aggravation of absence and myoclonic seizures"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Enzyme induction** is the family curse on co prescribing: phenytoin and carbamazepine induce CYP3A4 and glucuronidation, gutting levels of oral contraceptives (contraceptive failure with teratogenic stakes), warfarin, antiretrovirals, immunosuppressants and most fellow antiepileptics, while valproate does the opposite by inhibition in the next lesson. Every new prescription in a patient on an inducer is an interaction consultation, and stopping the inducer rebounds victim levels upward dangerously over following weeks.",
+      "say": "Inducers quietly halve contraceptives and warfarin; stopping the inducer rebounds everything upward.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ind",
+            "label": "Phenytoin or carbamazepine induces hepatic enzymes"
+          },
+          {
+            "id": "fall",
+            "label": "Victim drug levels fall over 1 to 3 weeks"
+          },
+          {
+            "id": "fail",
+            "label": "Contraceptive, warfarin or antiepileptic failure"
+          },
+          {
+            "id": "rebound",
+            "label": "Stopping the inducer rebounds victim levels: delayed toxicity"
+          }
+        ],
+        "edges": [
+          [
+            "ind",
+            "fall"
+          ],
+          [
+            "fall",
+            "fail"
+          ],
+          [
+            "fail",
+            "rebound"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Status epilepticus sequencing gathers this lesson: benzodiazepine first (previous module), then a second line load of levetiracetam, **fosphenytoin** (20 mg PE per kg) or valproate, with trials showing rough equivalence and choice governed by comorbidity and stock. Phenytoin's historic second line crown is now shared, but its kinetics lesson, albumin correction, cardiac monitored infusion and absence uselessness remain compulsory knowledge for any prescriber who loads it.",
+      "say": "Second line status therapy is a three horse race; fosphenytoin still demands its kinetic respect.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Loading fosphenytoin safely",
+          "points": [
+            "20 mg PE per kg at up to 150 mg PE per minute",
+            "Cardiac and pressure monitoring during loading",
+            "Levels checked after distribution, albumin corrected",
+            "Free level where albumin low or uraemia present"
+          ]
+        },
+        "right": {
+          "title": "Choosing the second line horse",
+          "points": [
+            "Levetiracetam: fewest interactions, renal dose",
+            "Valproate: broad spectrum, liver and pregnancy cautions",
+            "Fosphenytoin: kinetics and cardiac monitoring",
+            "Trials show broad equivalence; comorbidity decides"
+          ]
+        }
+      }
+    }
+  ]
+}

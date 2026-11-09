@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-local-anaesthetics",
+  "subject": "pharmacology",
+  "title": "Local Anaesthetics: Lignocaine, Bupivacaine, Ropivacaine and Special Agents",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Lignocaine** (lidocaine) is the reference amide local anaesthetic: rapid onset, intermediate duration, and versatility across infiltration, nerve block, epidural, spinal, topical and intravenous regional techniques. Its maximum safe dose anchors the family arithmetic, about 4.5 mg per kg plain and 7 mg per kg with adrenaline, because systemic levels beyond technique error are what toxicity counts. It doubles systemically as the class Ib antiarrhythmic met in the arrhythmia lessons.",
+      "say": "Lignocaine is the yardstick: fast, flexible, and dose capped at four point five, seven with adrenaline.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lignocaine profile",
+          "points": [
+            "Amide, rapid onset, intermediate duration",
+            "Max 4.5 mg per kg plain, 7 with adrenaline",
+            "Every route from skin to spinal to intravenous",
+            "Also a class Ib antiarrhythmic systemically"
+          ]
+        },
+        "right": {
+          "title": "Dose discipline",
+          "points": [
+            "Calculate maximum before drawing up",
+            "Reduce in liver disease, pregnancy and low output states",
+            "Incremental injection with aspiration and observation",
+            "Toxicity scales with free plasma concentration"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Long acting **bupivacaine** trades onset speed for four to eight hours of block, powering epidural labour analgesia at low concentrations and spinal anaesthesia at higher, and carries the family's most feared cardiotoxicity: its avid cardiac sodium channel binding dissociates slowly, so accidental intravascular injection can arrest a heart resistant to resuscitation. **Ropivacaine**, its single enantiomer refinement, keeps most of the duration with less cardiotoxicity and less motor block at analgesic concentrations.",
+      "say": "Bupivacaine lasts longest and kills hardest; ropivacaine is its safer handed refinement.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bupivacaine",
+          "points": [
+            "Long acting, dense motor block at higher concentrations",
+            "Labour epidural and spinal mainstay historically",
+            "Cardiotoxicity: slow dissociation from cardiac channels",
+            "Maximum about 2 to 2.5 mg per kg"
+          ]
+        },
+        "right": {
+          "title": "Ropivacaine and levobupivacaine",
+          "points": [
+            "Single enantiomer chemistry, less cardiotoxic",
+            "Less motor block at analgesic doses",
+            "Preferred for prolonged epidural and peripheral infusions",
+            "Still demands identical injection discipline"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The ester shelf is shorter acting and allergy prone: **chloroprocaine**, hydrolysed by plasma cholinesterase within minutes, suits short epidural top ups and obstetric urgency where speed of offset is safety; **procaine**, the historic prototype, is now largely a museum and combination ingredient. Ester metabolites include para aminobenzoic acid, the allergen also implicated in sulfonamide and sunscreen cross reactions, while true amide allergy is vanishingly rare and usually preservative borne.",
+      "say": "Esters vanish in plasma and allergise through PABA; amide allergy is the rare one everyone fears.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ester",
+            "label": "Ester injected: chloroprocaine or procaine"
+          },
+          {
+            "id": "pche",
+            "label": "Plasma cholinesterase hydrolyses within minutes"
+          },
+          {
+            "id": "paba",
+            "label": "PABA metabolite explains ester allergy"
+          },
+          {
+            "id": "short",
+            "label": "Short action suits brief, titratable techniques"
+          }
+        ],
+        "edges": [
+          [
+            "ester",
+            "pche"
+          ],
+          [
+            "pche",
+            "paba"
+          ],
+          [
+            "pche",
+            "short"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cocaine** is the family's only vasoconstricting member and its only topical agent for nasal surgery tradition: it blocks noradrenaline reuptake while blocking sodium channels, shrinking mucosa as it numbs. The same monoamine action drives euphoria, dependence, coronary spasm and arrhythmias that made it a controlled drug with shrinking legitimate territory. A patient anaesthetised with cocaine who then receives adrenaline or halothane inherits a catecholamine minefield.",
+      "say": "Cocaine numbs and constricts and stimulates; its reuptake blockade is both its use and its danger.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cocaine pharmacology",
+          "points": [
+            "Ester sodium channel blockade like its cousins",
+            "Unique noradrenaline reuptake blockade",
+            "Mucosal vasoconstriction for nasal surgery",
+            "Euphoria and dependence via dopamine reuptake"
+          ]
+        },
+        "right": {
+          "title": "Cocaine dangers",
+          "points": [
+            "Coronary spasm and myocardial infarction",
+            "Arrhythmias potentiated by adrenaline and volatiles",
+            "Hyperthermia and seizures in toxicity",
+            "Controlled drug status, shrinking clinical role"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Prilocaine methaemoglobinaemia** is the metabolic trap examinations never retire: prilocaine's o toluidine metabolite oxidises haemoglobin iron to the ferric state, which cannot carry oxygen, producing cyanosis refractory to oxygen with chocolate brown blood at doses above roughly 600 mg. Neonates and G6PD considerations raise susceptibility. Treatment for significant methaemoglobinaemia is intravenous methylene blue, which itself fails in G6PD deficiency and can cause it at high dose, recursion examinations enjoy.",
+      "say": "Prilocaine can rust the blood's iron; cyanosis ignoring oxygen plus brown blood is the clue, methylene blue the key.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "prilo",
+            "label": "Large dose prilocaine absorbed"
+          },
+          {
+            "id": "otol",
+            "label": "o Toluidine metabolite oxidises haemoglobin iron"
+          },
+          {
+            "id": "methb",
+            "label": "Methaemoglobinaemia: cyanosis refractory to oxygen"
+          },
+          {
+            "id": "mb",
+            "label": "Methylene blue reduces iron back, G6PD permitting"
+          }
+        ],
+        "edges": [
+          [
+            "prilo",
+            "otol"
+          ],
+          [
+            "otol",
+            "methb"
+          ],
+          [
+            "methb",
+            "mb"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**EMLA** cream, a eutectic mixture of lignocaine and prilocaine whose combined melting point drops below room temperature, lets both agents penetrate intact skin as an oil, numbing venepuncture sites in 45 to 60 minutes under occlusion. Paediatric phlebotomy and vaccination clinics run on it. Its prilocaine content imports the methaemoglobinaemia caution into infants under three months and G6PD deficiency, a prescribing detail hidden inside an apparently innocent cream.",
+      "say": "EMLA melts two solids into a skin penetrating oil; give it an hour, and remember the prilocaine inside.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "EMLA mechanics",
+          "points": [
+            "Eutectic lignocaine prilocaine 2.5 percent each",
+            "Liquid at skin temperature, penetrates intact skin",
+            "Occlusive dressing for 45 to 60 minutes",
+            "Depth of analgesia grows with application time"
+          ]
+        },
+        "right": {
+          "title": "EMLA cautions",
+          "points": [
+            "Methaemoglobinaemia risk under 3 months of age",
+            "Avoid on broken skin and mucous membranes unless directed",
+            "Blanching then erythema at the site expected",
+            "Remove before antisepsis for procedures"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Systemic toxicity announces in sequence as plasma levels climb: circumoral numbness, metallic taste and tinnitus, then visual disturbance and muscle twitching, then convulsions, then coma, respiratory arrest and cardiovascular collapse, though bupivacaine may present with arrest first. Management stops the injection, secures airway and oxygenation, treats seizures with benzodiazepines, and gives **lipid emulsion** therapy detailed next lesson, with prolonged resuscitation because recovery from cardiac toxicity is slow but genuinely possible.",
+      "say": "Toxicity climbs from tingling lips to seizures to arrest; know the staircase and climb down fast.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-ana-spinal_position_asepsis.webp",
+        "alt": "Spinal positioning, lumbar landmarks and aseptic preparation for neuraxial local anaesthesia",
+        "caption": "Neuraxial technique preparation, the setting where dose and placement discipline prevents systemic toxicity. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Technique choice** sorts the family clinically: rapid short procedures take lignocaine or chloroprocaine, prolonged postoperative analgesia takes ropivacaine or bupivacaine infusions, topical niches take cocaine, EMLA or tetracaine preparations, and prilocaine serves intravenous regional anaesthesia (Bier block) where its tissue binding and metabolism forgive tourniquet leaks better than bupivacaine, which is absolutely contraindicated there for the arrest it would cause on release.",
+      "say": "Match duration to the job, and never let bupivacaine near a Bier block.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Short and topical choices",
+          "points": [
+            "Lignocaine: infiltration and blocks, fast and flexible",
+            "Chloroprocaine: brief epidural top ups",
+            "EMLA and tetracaine gels: intact skin",
+            "Prilocaine: intravenous regional anaesthesia"
+          ]
+        },
+        "right": {
+          "title": "Long choices and bans",
+          "points": [
+            "Ropivacaine infusions for postoperative analgesia",
+            "Bupivacaine for dense prolonged blocks",
+            "Bupivacaine banned in Bier block (fatal release bolus)",
+            "Cocaine confined to controlled topical niches"
+          ]
+        }
+      }
+    }
+  ]
+}
