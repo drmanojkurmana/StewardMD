@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sur-chest-trauma",
+ "subject": "surgery",
+ "title": "Cardiac Tamponade, Traumatic Aortic Rupture, and Tracheobronchial Injury",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Penetrating or blunt cardiac injury leading to rapid accumulation of blood within the non-distensible fibrous pericardium produces acute **cardiac tamponade**. Because the fibrous pericardial sac cannot acutely stretch, as little as one hundred to one hundred and fifty millilitres of blood causes a dramatic rise in intrapericardial pressure, exceeding right atrial filling pressure and severely restricting ventricular diastolic relaxation. Right ventricular collapse leads to a precipitous reduction in stroke volume and catastrophic cardiovascular collapse.",
+   "say": "Acute cardiac tamponade occurs when blood collects in the fibrous pericardial sac, restricting ventricular filling. As little as one hundred millilitres of trapped blood can compress the heart and trigger cardiovascular collapse.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-haemothorax_tamponade.webp",
+    "alt": "Medical diagram illustrating cardiac tamponade pathophysiology and Beck triad.",
+    "caption": "Cardiac tamponade pathophysiology: pericardial fluid accumulation, chamber compression, and elevated venous pressure. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Classically described by Claude Beck, acute cardiac tamponade produces the pathognomonic clinical constellation recognized as **Beck triad**. This diagnostic triad consists of hypotension accompanied by a narrowed pulse pressure, prominent elevation of central venous pressure manifesting as distended jugular veins, and distant, muffled heart sounds on cardiac auscultation. Patients frequently exhibit pulsus paradoxus, characterized by an exaggerated drop in systemic systolic blood pressure exceeding ten millimetres of mercury during normal spontaneous inspiration.",
+   "say": "Beck triad comprises hypotension, distended neck veins, and muffled heart sounds. Patients also exhibit pulsus paradoxus, where systolic blood pressure drops more than ten millimetres of mercury during inspiration.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiac-trauma-fig1.webp",
+    "alt": "Anatomical schematic showing cardiac trauma, hemopericardium, and aortic injury.",
+    "caption": "Traumatic cardiac pathology: hemopericardium, myocardial contusion, and aortic isthmus rupture. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Rapid bedside identification of pericardial fluid during trauma resuscitation relies on the subxiphoid view of the Focused Assessment with Sonography for Trauma. In patients in extremis, ultrasound-guided emergency pericardiocentesis with aspiration of even fifteen to twenty millilitres of blood temporarily restores cardiac output. Definitive treatment, however, demands emergent surgical decompression via a subxiphoid **pericardial window**, anterolateral thoracotomy, or median sternotomy, allowing the trauma team to identify and suture the underlying myocardial laceration.",
+   "say": "Bedside FAST ultrasound confirms pericardial fluid. While emergency needle aspiration offers temporary stabilization, definitive care requires surgical pericardial decompression and direct suture repair of the myocardial wound.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Intervention",
+     "Approach and Technique",
+     "Clinical Role and Objectives"
+    ],
+    "rows": [
+     [
+      "Bedside FAST Scan",
+      "Subxiphoid acoustic window oriented toward left shoulder",
+      "Rapid non-invasive confirmation of anechoic pericardial fluid"
+     ],
+     [
+      "Emergency Pericardiocentesis",
+      "Subxiphoid needle puncture angled 45 degrees toward left shoulder",
+      "Temporizing aspiration of 15-30 mL blood to relieve acute arrest"
+     ],
+     [
+      "Subxiphoid Pericardial Window",
+      "Subxiphoid midline incision through linea alba and diaphragm",
+      "Rapid diagnostic confirmation and decompression in operating room"
+     ],
+     [
+      "Median Sternotomy / Thoracotomy",
+      "Median sternotomy or left anterolateral thoracotomy",
+      "Definitive exposure, clot evacuation, and direct cardiac suture repair"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In moribund trauma victims suffering witnessed cardiac arrest following penetrating chest trauma, an immediate **emergency thoracotomy** in the emergency department is indicated. Performed through a left fifth intercostal space anterolateral thoracotomy, the procedure achieves three cardinal resuscitation goals: rapid relief of cardiac tamponade via longitudinal pericardiotomy anterior to the phrenic nerve, cross-clamping of the descending thoracic aorta to redistribute limited coronary and cerebral perfusion, and internal cardiac massage.",
+   "say": "Emergency department thoracotomy is performed for witnessed cardiac arrest following penetrating thoracic trauma. It relieves cardiac tamponade, cross-clamps the descending aorta, and enables direct cardiac massage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "arrest",
+      "label": "Witnessed Arrest from Penetrating Chest Trauma"
+     },
+     {
+      "id": "incision",
+      "label": "Left 5th Intercostal Anterolateral Thoracotomy"
+     },
+     {
+      "id": "pericardium",
+      "label": "Incise Pericardium Anterior to Phrenic Nerve"
+     },
+     {
+      "id": "clamp",
+      "label": "Cross-Clamp Descending Aorta & Internal Cardiac Massage"
+     }
+    ],
+    "edges": [
+     [
+      "arrest",
+      "incision"
+     ],
+     [
+      "incision",
+      "pericardium"
+     ],
+     [
+      "pericardium",
+      "clamp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe blunt deceleration trauma arising from high-speed motor vehicle crashes or falls from great heights frequently precipitates traumatic aortic rupture. Over eighty percent of victims perish at the scene from instantaneous exsanguination. Among salvageable patients surviving transport, the injury represents an incomplete tear where the intact adventitia and surrounding mediastinal pleura temporarily contain the haemorrhage. The classical anatomical site of tearing is the **aortic isthmus**, located immediately distal to the origin of the left subclavian artery.",
+   "say": "Traumatic aortic rupture typically occurs at the aortic isthmus, just distal to the left subclavian artery. In survivors, the intact adventitia temporarily contains the tear as a false aneurysm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aortic Isthmus Vulnerability",
+     "points": [
+      "Junction of mobile arch and fixed aorta",
+      "Tethered by ligamentum arteriosum",
+      "Maximal shear stress during deceleration",
+      "Accounts for 90% of surviving tears"
+     ]
+    },
+    "right": {
+     "title": "Ascending Aorta / Root",
+     "points": [
+      "Associated with direct sternal crush",
+      "Frequent concurrent cardiac rupture",
+      "High rate of immediate field mortality",
+      "Requires cardiopulmonary bypass repair"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Initial supine anteroposterior chest radiography serves as the primary screening tool for blunt aortic disruption, revealing characteristic indirect signs of mediastinal haematoma. The hallmark radiographic finding is a distinctly **widened mediastinum** exceeding eight centimetres in diameter at the level of the aortic knob. Accompanying radiographic signs include obliteration of the sharp aortic knob contour, deviation of the trachea and nasogastric tube to the right, depression of the left mainstem bronchus, and presence of an apical pleural cap.",
+   "say": "A widened mediastinum over eight centimetres on chest radiograph strongly suggests traumatic aortic rupture. Other signs include loss of the aortic contour and displacement of the trachea to the right.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Radiographic Finding",
+     "Anatomical Mechanism",
+     "Diagnostic Significance"
+    ],
+    "rows": [
+     [
+      "Widened Mediastinum (>8 cm)",
+      "Extravasated blood pooling in superior mediastinum",
+      "Most sensitive screening sign on supine chest radiograph"
+     ],
+     [
+      "Loss of Aortic Knob Contour",
+      "Periaortic haematoma obscures vascular silhouette",
+      "Suggests false aneurysm at the aortic isthmus"
+     ],
+     [
+      "Rightward Tracheal Shift",
+      "Mass effect of haematoma pushing trachea to right",
+      "Reflects large expanding mediastinal haematoma"
+     ],
+     [
+      "Depressed Left Main Bronchus",
+      "Aortic hematoma compresses bronchus below 40 degrees",
+      "Severe posterior mediastinal blood accumulation"
+     ],
+     [
+      "Apical Pleural Cap",
+      "Blood tracking over left lung apex into pleural cupola",
+      "Strong indicator of major thoracic vascular injury"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hemodynamically stable patients displaying suspicious mediastinal widening on plain radiography must undergo immediate contrast-enhanced **computed tomography angiography** of the chest, which represents the definitive diagnostic gold standard. Intravenous beta-blockade using esmolol is initiated promptly to lower heart rate under sixty beats per minute and maintain systolic blood pressure between one hundred and one hundred and twenty millimetres of mercury. Definitive surgical repair has been revolutionized by Thoracic Endovascular Aortic Repair, avoiding traditional left thoracotomy and cardiopulmonary bypass.",
+   "say": "Contrast-enhanced CT angiography confirms aortic rupture. Blood pressure and heart rate are controlled with beta-blockers before definitive treatment, which is usually performed with endovascular stent-grafts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "screen",
+      "label": "Widened Mediastinum on Screening Chest X-Ray"
+     },
+     {
+      "id": "cta",
+      "label": "Emergent Contrast-Enhanced Chest CT Angiography"
+     },
+     {
+      "id": "med",
+      "label": "Impulse Control: IV Esmolol (HR <60, SBP 100-120)"
+     },
+     {
+      "id": "tevar",
+      "label": "Thoracic Endovascular Aortic Repair (TEVAR)"
+     }
+    ],
+    "edges": [
+     [
+      "screen",
+      "cta"
+     ],
+     [
+      "cta",
+      "med"
+     ],
+     [
+      "med",
+      "tevar"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blunt abdominal deceleration forces transmitting a sudden pressure wave across the diaphragm can produce a traumatic **diaphragmatic rupture**. Occurring in up to five percent of major blunt abdominal trauma cases, tears involve the left posterolateral hemidiaphragm in over seventy-five percent of presentations because the bulky liver protects the right dome. Plain radiography may demonstrate gas-filled stomach or bowel loops within the hemithorax, with the tip of a nasogastric tube curling in the chest, mandating surgical laparotomy and primary suture repair.",
+   "say": "Traumatic diaphragmatic rupture affects the left side far more often than the right because the liver shields the right dome. Abdominal organs herniate into the chest, requiring surgical laparotomy and repair.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Left-Sided Rupture (75%)",
+     "points": [
+      "Posterolateral radial tear of left cupola",
+      "Herniation of stomach, spleen, or colon",
+      "Nasogastric tube coils above the diaphragm",
+      "Accessible via abdominal laparotomy"
+     ]
+    },
+    "right": {
+     "title": "Right-Sided Rupture (25%)",
+     "points": [
+      "Large liver mass protects the right dome",
+      "Massive force required to produce tear",
+      "Liver herniates partially into right chest",
+      "Higher associated mortality from shock"
+     ]
+    }
+   }
+  }
+ ]
+}

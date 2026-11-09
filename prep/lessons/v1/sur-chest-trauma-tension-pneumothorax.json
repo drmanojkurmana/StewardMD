@@ -1,0 +1,223 @@
+{
+ "v": 1,
+ "module": "sur-chest-trauma",
+ "subject": "surgery",
+ "title": "Tension and Open Pneumothorax, Haemothorax, and Flail Chest",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Thoracic trauma accounts for approximately twenty-five percent of all traumatic fatalities, demanding rapid identification of immediate life threats during the primary survey. The most time-critical physiological emergency is a **tension pneumothorax**, which develops when a one-way flap-valve tear in the visceral or parietal pleura allows inspired air to enter the pleural space during inhalation while preventing its escape during expiration. Progressive intrapleural air accumulation generates massive positive intrathoracic pressure, collapsing the ipsilateral lung and shifting the mediastinum contralaterally.",
+   "say": "A tension pneumothorax forms when a one-way pleural valve traps air in the pleural space, generating dangerous positive pressure. The ipsilateral lung collapses and the mediastinum shifts to the opposite side.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-tension_pneumothorax.webp",
+    "alt": "Medical illustration of tension pneumothorax pathophysiology and decompression technique.",
+    "caption": "Tension pneumothorax pathophysiology, mediastinal displacement, and anatomical decompression sites. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Contralateral mediastinal displacement exerts severe mechanical kinking and compression upon the superior and inferior vena cava, drastically impeding systemic venous return to the right atrium. Patients present with profound **obstructive shock**, severe hypotension, marked tachycardia, cyanosis, distended jugular neck veins, absent breath sounds on the affected side, and hyperresonance to percussion. Diagnosis is strictly clinical; waiting for a confirmatory chest radiograph before initiating treatment is a lethal error.",
+   "say": "Mediastinal shifting kinks the vena cava, causing sudden cardiovascular collapse and obstructive shock. Because this is a clinical diagnosis, immediate treatment must never wait for an X-ray.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-tension-pneumothorax.webp",
+    "alt": "Erect chest radiograph demonstrating marked tension pneumothorax with mediastinal shift.",
+    "caption": "Chest radiograph showing right hemithorax hyperlucency, complete lung collapse, and tracheal deviation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Immediate treatment requires urgent decompression before definitive tube thoracostomy. While historical protocols taught decompression at the second intercostal space in the midclavicular line, current ATLS tenth edition guidelines recommend emergency **needle decompression** in the fifth intercostal space slightly anterior to the midaxillary line using an eight-centimetre, fourteen-gauge catheter. This laterally placed site reliably traverses thinner chest wall musculature, successfully entering the pleural cavity. Immediate audible hiss of escaping pressurized air confirms decompression, followed promptly by standard tube thoracostomy.",
+   "say": "Emergency needle decompression is performed at the fifth intercostal space anterior to the midaxillary line using a long, large-bore needle. A rush of escaping air confirms success before placing a formal chest drain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Decompression Site",
+     "Anatomical Location",
+     "Clinical Rationale and Advantages"
+    ],
+    "rows": [
+     [
+      "Fifth Intercostal Space (Lateral)",
+      "Anterior to midaxillary line (nipple level)",
+      "Thinner chest wall in adults; avoids internal mammary artery"
+     ],
+     [
+      "Second Intercostal Space (Anterior)",
+      "Midclavicular line, superior rib margin",
+      "Traditional historical site; fails in up to 40% due to pectoral thickness"
+     ],
+     [
+      "Formal Tube Thoracostomy",
+      "Fifth intercostal space anterior to midaxillary line",
+      "Definitive 28 to 32 French chest tube connected to underwater seal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When a full-thickness chest wall defect measures at least two-thirds the diameter of the trachea, inspired air preferentially follows the path of least resistance through the wound rather than down the trachea, producing an **open pneumothorax**. Colloquially termed a sucking chest wound, it results in profound ventilatory failure. Emergency field management requires immediate application of a sterile three-sided occlusive dressing, which functions as an escape flutter valve allowing air to exit during expiration while sealing during inspiration.",
+   "say": "An open pneumothorax occurs when a large chest wall defect draws air directly into the pleural cavity. Applying a three-sided dressing creates a flutter valve that permits air exit while preventing air entry.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "defect",
+      "label": "Full-Thickness Sucking Chest Wall Defect"
+     },
+     {
+      "id": "dressing",
+      "label": "Apply Sterile Three-Sided Occlusive Dressing"
+     },
+     {
+      "id": "valve",
+      "label": "Dressing Acts as Flutter Valve During Expiration"
+     },
+     {
+      "id": "chest_tube",
+      "label": "Insert Chest Tube via Separate Incision & Close Defect"
+     }
+    ],
+    "edges": [
+     [
+      "defect",
+      "dressing"
+     ],
+     [
+      "dressing",
+      "valve"
+     ],
+     [
+      "valve",
+      "chest_tube"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rapid accumulation of blood exceeding one thousand five hundred millilitres within the pleural cavity, or bleeding exceeding one-third of the patient's blood volume, defines a **massive haemothorax**. Commonly caused by penetrating or blunt disruption of systemic intercostal or internal mammary arteries, patients present in profound hypovolaemic shock with flat neck veins, dullness to percussion, and absent ipsilateral breath sounds. Resuscitation requires simultaneous balanced blood transfusion alongside immediate large-bore tube thoracostomy.",
+   "say": "A massive haemothorax involves over fifteen hundred millilitres of blood in the pleural space, presenting with flat neck veins and percussion dullness. Immediate blood transfusion and large-bore tube thoracostomy are required.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tension Pneumothorax",
+     "points": [
+      "Obstructive shock mechanism",
+      "Distended jugular neck veins",
+      "Hyperresonance to percussion",
+      "Air rush upon decompression"
+     ]
+    },
+    "right": {
+     "title": "Massive Haemothorax",
+     "points": [
+      "Profound hypovolaemic shock",
+      "Flat, collapsed neck veins",
+      "Stony dullness to percussion",
+      "Immediate blood drainage via tube"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Indications for urgent emergency thoracotomy following chest tube insertion are standardized in trauma resuscitation. Immediate operative exploration is mandatory if the initial chest drain output yields one thousand five hundred millilitres of blood upon placement, or if ongoing drainage exceeds two hundred millilitres per hour for two to four consecutive hours. In contrast, smaller stable collections are managed conservatively with **tube thoracostomy** alone, allowing low-pressure pulmonary parenchymal lacerations to tamponade spontaneously against the re-expanded chest wall.",
+   "say": "Emergency thoracotomy is indicated if the initial chest tube drainage exceeds fifteen hundred millilitres, or if bleeding continues above two hundred millilitres per hour. Smaller volumes usually resolve with tube drainage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tube",
+      "label": "Insert 28-32 Fr Intercostal Chest Tube"
+     },
+     {
+      "id": "assess",
+      "label": "Measure Initial and Ongoing Blood Output"
+     },
+     {
+      "id": "criteria",
+      "label": "Initial >1500 mL or >200 mL/h for 2-4 Hours?"
+     },
+     {
+      "id": "surgery",
+      "label": "Emergency Operative Thoracotomy in OR"
+     }
+    ],
+    "edges": [
+     [
+      "tube",
+      "assess"
+     ],
+     [
+      "assess",
+      "criteria"
+     ],
+     [
+      "criteria",
+      "surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe blunt crushing forces that fracture three or more consecutive ribs in two or more places create an unattached, freely floating chest wall segment, termed a **flail chest**. The detached segment displays paradoxical respiration, sinking inward during negative-pressure inspiration and bulging outward during positive-pressure expiration. The primary determinant of severe respiratory failure, however, is not the paradoxical motion itself, but rather the underlying pulmonary parenchymal contusion characterized by extensive alveolar haemorrhage, microatelectasis, and refractory hypoxaemia.",
+   "say": "A flail chest occurs when multiple ribs fracture in two places, creating a floating segment with paradoxical motion. Severe respiratory compromise stems primarily from the underlying bruised lung tissue.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Respiratory Phase",
+     "Intrathoracic Pressure",
+     "Normal Chest Wall Motion",
+     "Flail Segment Motion"
+    ],
+    "rows": [
+     [
+      "Inspiration",
+      "Negative intrathoracic pressure generated",
+      "Chest wall expands symmetrically outwards",
+      "Flail segment sinks paradoxically inwards"
+     ],
+     [
+      "Expiration",
+      "Positive intrathoracic pressure generated",
+      "Chest wall collapses symmetrically inwards",
+      "Flail segment bulges paradoxically outwards"
+     ],
+     [
+      "Pathophysiological Impact",
+      "Alveolar collapse and ventilation-perfusion mismatch",
+      "Substantial decrease in effective tidal volume",
+      "Severe progressive hypoxaemia and hypercapnia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management of flail chest and significant pulmonary contusion focuses on multimodal pain relief, aggressive respiratory therapy, and judicious fluid administration. Controlling severe pleuritic pain through thoracic **epidural analgesia** or continuous paravertebral nerve blocks enables the patient to take deep breaths and cough effectively, clearing retained secretions. Intravenous crystalloid fluids must be administered cautiously to avoid exacerbating interstitial pulmonary edema, reserving endotracheal intubation and mechanical ventilation for patients developing overt respiratory fatigue or severe hypoxaemic failure.",
+   "say": "Effective pain control using thoracic epidural analgesia is the foundation of managing flail chest, enabling cough and deep breathing. Fluid restriction prevents pulmonary edema, reserving ventilation for respiratory exhaustion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First-Line Medical Care",
+     "points": [
+      "Thoracic epidural or regional block",
+      "Aggressive incentive spirometry",
+      "Judicious fluid management",
+      "Humidified supplemental oxygen"
+     ]
+    },
+    "right": {
+     "title": "Indications for Intubation",
+     "points": [
+      "Overt clinical respiratory exhaustion",
+      "Severe hypoxaemia (PaO2 < 60 mmHg on FiO2 > 0.5)",
+      "Refractory hypercapnia (PaCO2 > 50 mmHg)",
+      "Severe traumatic brain injury (GCS <= 8)"
+     ]
+    }
+   }
+  }
+ ]
+}
