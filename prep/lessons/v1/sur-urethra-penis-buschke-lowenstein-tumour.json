@@ -1,0 +1,260 @@
+{
+ "v": 1,
+ "module": "sur-urethra-penis",
+ "subject": "surgery",
+ "title": "Giant Condyloma, Penile Curvature and Erection Emergencies",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A large locally destructive wart like tumour of the genital skin is the **Buschke-Lowenstein tumour**. Also called giant condyloma, it grows relentlessly and burrows into nearby tissue. Although its cells look benign under the microscope, wide surgical removal is required. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "The Buschke-Lowenstein tumour is a giant destructive wart needing wide removal despite benign looking cells.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Appearance",
+      "Large cauliflower wart"
+     ],
+     [
+      "Behaviour",
+      "Locally destructive"
+     ],
+     [
+      "Treatment",
+      "Wide surgical removal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fibrous plaque in the penile shaft causing bent erections is **Peyronie disease**. Scarring of the tunica albuginea shortens one side, so the erection curves toward the plaque. Pain usually settles over time, though curvature may persist. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Peyronie disease scars the penile covering so erections curve toward the plaque.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Fibrous plaque forms"
+     },
+     {
+      "id": "n1",
+      "label": "Erection curves toward plaque"
+     },
+     {
+      "id": "n2",
+      "label": "Pain settles with time"
+     },
+     {
+      "id": "n3",
+      "label": "Surgery if function impaired"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A prolonged painful erection lasting over four hours without stimulation is **priapism**. Trapped blood starves the erectile tissue of oxygen. Urgent drainage and medication are needed because delay causes permanent erection failure. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Priapism traps blood for over four hours and needs urgent drainage to prevent permanent damage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ischaemic priapism",
+     "points": [
+      "Painful, rigid",
+      "Low oxygen blood",
+      "Emergency drainage"
+     ]
+    },
+    "right": {
+     "title": "Non ischaemic priapism",
+     "points": [
+      "Painless, partial",
+      "After trauma fistula",
+      "Less urgent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rupture of the erectile cylinders during intercourse causes a **penile fracture**. Patients hear a snap, lose the erection rapidly and develop a swollen, bent, bruised penis. Prompt surgical repair of the torn covering gives the best functional result. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "A penile fracture snaps the erectile covering during intercourse and needs prompt surgical repair.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Snap heard during intercourse"
+     },
+     {
+      "id": "n1",
+      "label": "Rapid detumescence"
+     },
+     {
+      "id": "n2",
+      "label": "Swelling and bending develop"
+     },
+     {
+      "id": "n3",
+      "label": "Surgical repair performed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Persistent inability to achieve or keep an erection sufficient for intercourse is **erectile dysfunction**. It commonly signals blood vessel disease and may precede heart symptoms by years. Diabetes, smoking and some blood pressure medicines contribute frequently. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Erectile dysfunction often signals blood vessel disease and may precede heart symptoms by years.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cause group",
+     "Examples"
+    ],
+    "rows": [
+     [
+      "Vascular",
+      "Diabetes, smoking"
+     ],
+     [
+      "Neurological",
+      "Pelvic surgery"
+     ],
+     [
+      "Drug related",
+      "Some pressure medicines"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Narrowing of the urethral opening at the tip of the penis is **meatal stenosis**. It deflects and sprays the urinary stream and may cause stinging. Simple surgical widening of the opening usually corrects it. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Meatal stenosis narrows the tip opening, sprays the stream, and simple widening usually corrects it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Opening narrows"
+     },
+     {
+      "id": "n1",
+      "label": "Stream sprays and deflects"
+     },
+     {
+      "id": "n2",
+      "label": "Stinging on urination"
+     },
+     {
+      "id": "n3",
+      "label": "Surgical widening done"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Human papillomavirus infection underlies most giant condylomas and many penile cancers, a link called **HPV association**. Vaccination prevents the main cancer causing types. Partners should be offered assessment and vaccination advice. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Human papillomavirus underlies most giant condylomas, and vaccination prevents the main cancer causing types.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "HPV link"
+    ],
+    "rows": [
+     [
+      "Giant condyloma",
+      "Strong"
+     ],
+     [
+      "Penile cancer",
+      "Moderate"
+     ],
+     [
+      "Genital warts",
+      "Strong"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Wide local removal with clear margins is the goal of **tumour excision**. For Buschke-Lowenstein tumours, incomplete removal almost always leads to regrowth. Reconstruction may need skin grafts when a large area is removed. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Wide excision with clear margins prevents regrowth of giant condylomas, sometimes needing skin grafts.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Wide excision",
+     "points": [
+      "Clear margins sought",
+      "Best control",
+      "May need graft"
+     ]
+    },
+    "right": {
+     "title": "Local destruction",
+     "points": [
+      "Creams or cautery",
+      "Suits small warts",
+      "Fails for giant tumours"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Assessment of any persistent penile lesion includes **biopsy confirmation**. Wart like growths that ulcerate, bleed or fail treatment must be sampled. Histology separates giant condyloma from invasive squamous cancer. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Persistent penile lesions that ulcerate or fail treatment need biopsy to separate wart tumours from cancer.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/urooncology-bladder-kidney-testis-fig1.webp",
+    "alt": "Urological tumour assessment and biopsy planning.",
+    "caption": "Penile lesion assessment and biopsy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

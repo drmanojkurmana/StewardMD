@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "sur-prostate",
+ "subject": "surgery",
+ "title": "TURP Syndrome, Laser Prostate Surgery and Prostate Cancer",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Dilution of blood sodium by absorbed irrigation fluid during prostate resection is the **TURP syndrome**. Glycine fluid enters open veins during transurethral resection, expanding volume while diluting sodium. Confusion, visual disturbance, slow pulse and breathlessness follow in severe cases, so resection time is limited and fluid balance is watched carefully throughout the operation.",
+   "say": "TURP syndrome dilutes blood sodium through absorbed irrigation fluid and causes confusion with visual disturbance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/prostate-bph-turp-psa-fig1.webp",
+    "alt": "Prostate anatomy and transurethral resection.",
+    "caption": "Transurethral resection and fluid absorption risk. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Laser removal of prostate tissue through the urethra with holmium energy is called **HoLEP**. Holmium laser enucleation of the prostate shells out whole lobes, which are then cut into pieces and removed. It works for very large glands and causes less bleeding than conventional resection in most series.",
+   "say": "Holmium laser enucleation shells out whole prostate lobes and suits very large glands with less bleeding.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Laser scope through urethra"
+     },
+     {
+      "id": "n1",
+      "label": "Lobes shelled out whole"
+     },
+     {
+      "id": "n2",
+      "label": "Tissue cut and removed"
+     },
+     {
+      "id": "n3",
+      "label": "Less bleeding, large glands suited"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Malignant growth arising in the outer zone of the prostate gland is **carcinoma prostate**. It is the commonest cancer in older men in many countries and often grows slowly. Early disease causes no symptoms and is found through testing or examination. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Carcinoma of the prostate arises in the outer zone, grows slowly, and early disease causes no symptoms.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Zone",
+     "Disease"
+    ],
+    "rows": [
+     [
+      "Peripheral zone",
+      "Most cancers"
+     ],
+     [
+      "Transition zone",
+      "Benign enlargement"
+     ],
+     [
+      "Central zone",
+      "Rarely diseased"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A blood protein raised by both benign enlargement and cancer is **PSA**. Prostate specific antigen is not a cancer test by itself because infection and retention also raise it. Trends over time and the feel of the gland guide whether biopsy is needed.",
+   "say": "PSA rises with benign enlargement and infection too, so trends and examination guide biopsy decisions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/prostate-bph-turp-psa-fig1.webp",
+    "alt": "Prostate specific antigen testing in prostate disease.",
+    "caption": "PSA testing in prostate disease. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The grading system scoring prostate cancer patterns from biopsy is the **Gleason score**. Pathologists add the two commonest growth patterns to judge aggressiveness. Higher scores mean faster growth and greater spread risk, shaping choices between surveillance, surgery and radiation. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "The Gleason score adds the two commonest biopsy patterns, and higher scores mean more aggressive cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gleason score",
+     "Behaviour"
+    ],
+    "rows": [
+     [
+      "6",
+      "Low risk, slow"
+     ],
+     [
+      "7",
+      "Intermediate risk"
+     ],
+     [
+      "8 to 10",
+      "High risk, aggressive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Spread of prostate cancer to bone characteristically produces dense bone forming deposits called **osteoblastic metastases**. The pelvis, spine and ribs are common sites, causing pain and raised alkaline phosphatase. Bone scanning maps the full extent of spread. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Prostate cancer spreads to bone as dense osteoblastic deposits in the spine, pelvis and ribs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Cancer leaves prostate"
+     },
+     {
+      "id": "n1",
+      "label": "Cells lodge in bone"
+     },
+     {
+      "id": "n2",
+      "label": "Dense new bone forms"
+     },
+     {
+      "id": "n3",
+      "label": "Pain and raised phosphatase"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment lowering male hormone levels to slow prostate cancer is **androgen deprivation therapy**. Removing testosterone drive shrinks hormone sensitive cancer and relieves symptoms. It causes hot flushes, bone thinning and metabolic change, so bone protection is considered alongside. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Androgen deprivation lowers testosterone to slow prostate cancer, though bone thinning needs protection alongside.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Surgical castration",
+     "points": [
+      "Testicles removed",
+      "Permanent hormone fall",
+      "One time procedure"
+     ]
+    },
+    "right": {
+     "title": "Medical castration",
+     "points": [
+      "Injections block hormones",
+      "Reversible in principle",
+      "Repeated treatment needed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complete surgical removal of the prostate and seminal vesicles is a **radical prostatectomy**. It aims to cure cancer confined to the gland in fit patients. Urinary leakage and erection problems are the main long term risks discussed before surgery. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Radical prostatectomy removes the whole prostate to cure confined cancer in fit patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Option",
+     "Best for"
+    ],
+    "rows": [
+     [
+      "Active surveillance",
+      "Low risk, older patients"
+     ],
+     [
+      "Radical prostatectomy",
+      "Confined cancer, fit patients"
+     ],
+     [
+      "Radiotherapy",
+      "Confined cancer, surgical risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inflammation of the prostate causing pelvic pain and urinary symptoms is **prostatitis**. Acute bacterial prostatitis causes fever, painful urination and a tender swollen gland needing antibiotics. Chronic forms cause recurring pelvic pain without clear infection and are harder to treat. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Prostatitis inflames the prostate, and the acute bacterial form causes fever with a tender swollen gland.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/prostatitis-fig1.webp",
+    "alt": "Acute bacterial prostatitis pathophysiology.",
+    "caption": "Prostatitis: inflamed prostate gland. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

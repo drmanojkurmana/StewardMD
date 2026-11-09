@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "sur-testis",
+ "subject": "surgery",
+ "title": "Epididymal Cyst and Testicular Tumours",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A smooth fluid filled swelling arising from the epididymis is an **epididymal cyst**. It is felt separately from the testis, usually above it. These cysts are benign, common and need treatment only when painful or large. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "An epididymal cyst is a benign fluid swelling felt separately above the testis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-scrotal_swelling_matrix.webp",
+    "alt": "Scrotal swelling comparison matrix of six conditions.",
+    "caption": "Scrotal swellings compared. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The commonest testicular cancer in younger men, arising from germ cells, is **seminoma**. It typically presents as a painless firm testicular lump. Seminomas are very sensitive to radiotherapy and chemotherapy, giving excellent cure rates. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Seminoma is the commonest testicular cancer in younger men and responds excellently to treatment.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-high-inguinal-orchidectomy.webp",
+    "alt": "High radical inguinal orchidectomy specimen approach.",
+    "caption": "High inguinal orchidectomy for testicular tumour. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Germ cell cancers with mixed tissue types are grouped as **non-seminomatous germ cell tumours**. They often produce marker proteins and grow faster than seminomas. Chemotherapy is the mainstay when spread has occurred. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Non-seminomatous germ cell tumours grow faster, produce markers, and need chemotherapy when spread.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumour",
+     "Typical age"
+    ],
+    "rows": [
+     [
+      "Seminoma",
+      "Thirties to forties"
+     ],
+     [
+      "Non-seminomatous",
+      "Twenties to thirties"
+     ],
+     [
+      "Lymphoma",
+      "Over sixties"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A protein made by yolk sac elements of germ cell tumours is **AFP**. Alpha fetoprotein is raised in many non-seminomatous tumours but never in pure seminoma. A raised AFP therefore changes classification and treatment. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Alpha fetoprotein rises in non-seminomatous tumours and is never raised in pure seminoma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Testicular lump found"
+     },
+     {
+      "id": "n1",
+      "label": "Markers measured"
+     },
+     {
+      "id": "n2",
+      "label": "AFP raised suggests non-seminoma"
+     },
+     {
+      "id": "n3",
+      "label": "Treatment planned accordingly"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ultrasound is the first investigation for any solid testicular lump, termed **scrotal ultrasound**. It separates cysts from solid tumours reliably. Solid intratesticular masses are treated as cancer until proved otherwise. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Scrotal ultrasound separates cysts from solid tumours, and solid masses are treated as cancer.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Epididymal cyst",
+     "points": [
+      "Outside the testis",
+      "Fluid filled",
+      "Reassure usually"
+     ]
+    },
+    "right": {
+     "title": "Solid tumour",
+     "points": [
+      "Inside the testis",
+      "Solid on ultrasound",
+      "Urgent cancer pathway"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Blood markers and cross sectional imaging together complete **tumour staging**. Computed tomography checks the retroperitoneal nodes where testicular cancer first spreads. Stage guides surveillance, chemotherapy or node surgery. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Markers plus CT staging of retroperitoneal nodes guide surveillance, chemotherapy or node surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Spread"
+    ],
+    "rows": [
+     [
+      "One",
+      "Testis only"
+     ],
+     [
+      "Two",
+      "Retroperitoneal nodes"
+     ],
+     [
+      "Three",
+      "Beyond retroperitoneum"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Any painless testicular lump in a young man deserves **urgent referral**. Delay worsens prognosis even though cure rates are high. Patients should be taught that new lumps need prompt medical review, not watching for months. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Painless testicular lumps in young men need urgent referral because delay worsens prognosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "New lump noticed"
+     },
+     {
+      "id": "n1",
+      "label": "Prompt medical review"
+     },
+     {
+      "id": "n2",
+      "label": "Ultrasound arranged"
+     },
+     {
+      "id": "n3",
+      "label": "Cancer pathway started"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Benign cysts that are small and painless are managed by simple **reassurance**. Operation risks damaging the epididymis and affecting fertility. Aspiration recurs quickly and is generally avoided. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Small painless epididymal cysts need only reassurance because surgery can harm fertility.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Watch",
+     "points": [
+      "Small and painless",
+      "No procedure",
+      "Fertility protected"
+     ]
+    },
+    "right": {
+     "title": "Operate",
+     "points": [
+      "Large or painful",
+      "Cyst excised",
+      "Fertility risk discussed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Testicular tumours spread first to nodes beside the aorta and vena cava, the **retroperitoneal nodes**. This predictable pattern makes imaging and node dissection effective. Lung spread occurs later in advanced disease. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Testicular cancer spreads first to retroperitoneal nodes beside the great vessels in a predictable pattern.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-scrotal_palpation.webp",
+    "alt": "Scrotal palpation comparing cyst and tumour.",
+    "caption": "Scrotal palpation: cyst versus tumour. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

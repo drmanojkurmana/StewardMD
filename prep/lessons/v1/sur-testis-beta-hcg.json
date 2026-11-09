@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "module": "sur-testis",
+ "subject": "surgery",
+ "title": "Tumour Markers and Surgery for Testicular Cancer",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A hormone subunit produced by some germ cell tumours used as a marker is **beta-hCG**. Human chorionic gonadotropin rises in choriocarcinoma and some seminomas. Falling levels after treatment confirm response, while rising levels warn of recurrence. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Beta-hCG marks some germ cell tumours, and falling levels confirm treatment response.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Marker",
+     "Raised in"
+    ],
+    "rows": [
+     [
+      "Beta-hCG",
+      "Choriocarcinoma, some seminoma"
+     ],
+     [
+      "AFP",
+      "Non-seminomatous tumours"
+     ],
+     [
+      "LDH",
+      "Tumour burden marker"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Removal of the testis through a groin incision with high cord division is **high inguinal orchidectomy**. Approaching through the groin avoids disturbing lymph drainage patterns of the scrotum. The specimen gives the exact tumour type for staging. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "High inguinal orchidectomy removes the testis through the groin and gives the exact tumour type.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-high-inguinal-orchidectomy.webp",
+    "alt": "High radical inguinal orchidectomy operation.",
+    "caption": "High inguinal orchidectomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Surgical clearance of nodes beside the great abdominal vessels is **retroperitoneal lymph node dissection**. It treats residual or relapsing nodal disease after chemotherapy in selected patients. Nerve sparing technique protects ejaculation where possible. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Retroperitoneal node dissection clears nodes beside the great vessels for residual disease after chemotherapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Chemotherapy completed"
+     },
+     {
+      "id": "n1",
+      "label": "Residual nodes assessed"
+     },
+     {
+      "id": "n2",
+      "label": "Node dissection if needed"
+     },
+     {
+      "id": "n3",
+      "label": "Nerve sparing attempted"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Marker levels measured before and after orchidectomy guide **risk stratification**. Persistently raised markers imply remaining disease even with normal scans. Such patients usually receive chemotherapy rather than surveillance alone. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Persistently raised markers after orchidectomy imply remaining disease and usually lead to chemotherapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Markers normalise",
+     "points": [
+      "Disease likely removed",
+      "Surveillance possible",
+      "Scans still continue"
+     ]
+    },
+    "right": {
+     "title": "Markers stay raised",
+     "points": [
+      "Remaining disease likely",
+      "Chemotherapy advised",
+      "Closer monitoring"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A rapidly growing haemorrhagic tumour type with very high beta-hCG is **choriocarcinoma**. It spreads early through the bloodstream to lungs and brain. Chemotherapy is urgent and usually highly effective. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Choriocarcinoma grows fast, bleeds, spreads through blood, and needs urgent chemotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Choriocarcinoma"
+    ],
+    "rows": [
+     [
+      "Beta-hCG",
+      "Very high"
+     ],
+     [
+      "Spread",
+      "Blood borne, early"
+     ],
+     [
+      "Treatment",
+      "Urgent chemotherapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Long term follow up after testicular cancer treatment is called **surveillance protocol**. It combines marker checks, examination and interval imaging over years. Most relapses occur within two years and remain curable when caught early. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Surveillance combines markers, examination and imaging, and most early relapses remain curable.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Treatment completed"
+     },
+     {
+      "id": "n1",
+      "label": "Markers checked regularly"
+     },
+     {
+      "id": "n2",
+      "label": "Imaging at intervals"
+     },
+     {
+      "id": "n3",
+      "label": "Relapse treated promptly"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fertility preservation should be discussed before chemotherapy, centred on **sperm banking**. Chemotherapy can reduce sperm production for years. Offering storage before treatment protects future family choices. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Sperm banking before chemotherapy protects future fertility choices for young men.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Timing",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Before chemotherapy",
+      "Sperm storage offered"
+     ],
+     [
+      "During treatment",
+      "Contraception advised"
+     ],
+     [
+      "After treatment",
+      "Fertility reassessed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Scrotal violation by biopsy through the skin changes drainage and worsens control, hence the rule of **never biopsying through scrotum**. Suspected tumours are removed whole through the groin instead. This principle is absolute in testicular cancer surgery. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Never biopsy a testicular tumour through the scrotum; remove it whole through the groin instead.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-scrotal_swelling_matrix.webp",
+    "alt": "Scrotal swelling matrix guiding tumour assessment.",
+    "caption": "Scrotal swelling assessment matrix. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Overall cure rates exceed ninety five percent in early disease, reflecting excellent **treatment outcomes**. Even widespread disease is often curable with chemotherapy. This success makes early presentation and full treatment completion vital. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Early testicular cancer cures exceed ninety five percent, making early presentation vital.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Early presentation"
+     },
+     {
+      "id": "n1",
+      "label": "Correct surgery and staging"
+     },
+     {
+      "id": "n2",
+      "label": "Chemotherapy when needed"
+     },
+     {
+      "id": "n3",
+      "label": "Cure in most patients"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

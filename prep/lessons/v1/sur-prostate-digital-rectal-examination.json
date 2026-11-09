@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sur-prostate",
+ "subject": "surgery",
+ "title": "Digital Rectal Examination and Prostate Assessment",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Examination of the prostate with a gloved finger through the rectum is the **digital rectal examination**. It assesses size, surface, consistency and the central groove of the gland. A smooth, rubbery enlargement favours benign growth, while hardness raises concern. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Digital rectal examination feels prostate size and surface, where smoothness favours benign growth and hardness worries.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-dre_surgical.webp",
+    "alt": "Digital rectal examination technique.",
+    "caption": "Digital rectal examination of the prostate. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A hard irregular nodule felt in the prostate raises suspicion of **prostate cancer on examination**. Such a finding needs PSA testing and usually biopsy regardless of the blood result. Cancer most often starts in the part of the gland nearest the examining finger.",
+   "say": "A hard irregular nodule on rectal examination needs biopsy regardless of the PSA result.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Hard nodule felt"
+     },
+     {
+      "id": "n1",
+      "label": "PSA measured"
+     },
+     {
+      "id": "n2",
+      "label": "Biopsy arranged"
+     },
+     {
+      "id": "n3",
+      "label": "Cancer confirmed or excluded"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Loss of the normal central groove with a firm gland suggests **malignant infiltration**. Benign enlargement preserves the groove and feels elastic. Asymmetry between the two lobes is another warning sign that should never be ignored. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Loss of the central groove with a firm asymmetric gland suggests malignant infiltration rather than benign growth.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Benign gland",
+     "points": [
+      "Smooth and elastic",
+      "Groove preserved",
+      "Symmetrical lobes"
+     ]
+    },
+    "right": {
+     "title": "Malignant gland",
+     "points": [
+      "Hard and irregular",
+      "Groove lost",
+      "Asymmetric lobes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A markedly raised blood marker together with a hard gland strengthens the case for **urgent biopsy**. Magnetic resonance imaging before biopsy now targets suspicious areas precisely. This reduces missed cancers and unnecessary sampling of harmless tissue. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Imaging before biopsy targets suspicious prostate areas precisely and reduces missed cancers.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "PSA blood test",
+      "Risk estimation"
+     ],
+     [
+      "MRI scan",
+      "Target localisation"
+     ],
+     [
+      "Biopsy",
+      "Tissue diagnosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bone pain in a man with prostate cancer usually means **skeletal spread**. Dense osteoblastic deposits weaken bone despite looking thick on films. Fractures can occur through involved vertebrae and long bones. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Bone pain in prostate cancer usually means skeletal spread with dense but weakened osteoblastic deposits.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/prostate-bph-turp-psa-fig1.webp",
+    "alt": "Prostate disease assessment including PSA.",
+    "caption": "Prostate assessment and spread evaluation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Lowering testosterone to control advanced prostate cancer is achieved by **hormone therapy**. It relieves bone pain and slows progression in most men initially. Resistance eventually develops, after which other systemic treatments are added. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Hormone therapy lowers testosterone, relieves bone pain, and slows advanced prostate cancer initially.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Testosterone lowered"
+     },
+     {
+      "id": "n1",
+      "label": "Cancer growth slows"
+     },
+     {
+      "id": "n2",
+      "label": "Bone pain eases"
+     },
+     {
+      "id": "n3",
+      "label": "Resistance develops later"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical cure remains an option when cancer is confined, an operation called **radical prostatectomy**. Nerve sparing technique preserves erections when cancer position allows. Continence usually recovers over months with pelvic floor training. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Radical prostatectomy cures confined cancer, and nerve sparing preserves erections when position allows.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk",
+     "Frequency note"
+    ],
+    "rows": [
+     [
+      "Urinary leakage",
+      "Usually temporary"
+     ],
+     [
+      "Erection problems",
+      "Reduced by nerve sparing"
+     ],
+     [
+      "Bleeding",
+      "Uncommon with modern technique"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Painful prostate inflammation with fever must not be massaged, a caution in **acute prostatitis**. Rectal examination is gentle because vigorous palpation can push bacteria into the blood. The gland feels hot, swollen and exquisitely tender. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "In acute prostatitis the gland feels hot and tender, and vigorous palpation can push bacteria into blood.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/prostatitis-fig1.webp",
+    "alt": "Acute prostatitis features.",
+    "caption": "Acute prostatitis: hot tender prostate. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Recording examination findings clearly after every assessment is good **clinical documentation**. Size in grams, surface, consistency and groove status should all be noted. Clear records let later clinicians detect change over time. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Clear documentation of size, surface and groove lets later clinicians detect prostate change over time.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Gland examined gently"
+     },
+     {
+      "id": "n1",
+      "label": "Findings recorded fully"
+     },
+     {
+      "id": "n2",
+      "label": "PSA result filed"
+     },
+     {
+      "id": "n3",
+      "label": "Change tracked over time"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}
