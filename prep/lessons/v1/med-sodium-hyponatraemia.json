@@ -1,0 +1,204 @@
+{
+ "v": 1,
+ "module": "med-sodium",
+ "subject": "medicine",
+ "title": "Hyponatraemia evaluation, SIADH, and osmotic demyelination syndrome",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Disturbances in systemic water balance relative to total exchangeable sodium represent the most frequent electrolyte disorder in hospitalized medical patients. Clinically defining **Hyponatraemia** requires a measured serum sodium concentration below one hundred and thirty-five milliequivalents per litre. Because sodium constitutes the primary determinant of extracellular fluid osmolality, acute hypoosmolality creates an osmotic gradient that drives free water into brain astrocytes, producing acute cerebral oedema. Symptoms range from nausea, malaise, and headache to confusion, lethargy, generalized seizures, respiratory depression, and tentorial herniation.",
+   "say": "Disturbances in free water balance relative to sodium represent the most common electrolyte disorder in hospitalized patients. Clinically defining Hyponatraemia requires a serum sodium concentration below one hundred and thirty-five milliequivalents per litre. Because sodium determines extracellular osmolality, acute drops create osmotic gradients driving water into brain cells, causing cerebral oedema, headache, confusion, and seizures.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-sodium-ladder.svg",
+    "alt": "Diagnostic ladder showing stepwise clinical assessment and management of hyponatraemia.",
+    "caption": "Diagnostic assessment ladder and therapeutic targets for acute hyponatraemia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The initial diagnostic step in evaluating low serum sodium requires determining whether real hypoosmolar conditions exist in circulation. Measuring laboratory **serum osmolality** differentiates true hypotonic hyponatraemia (osmolality below two hundred and seventy-five milliosmoles per kilogram) from hypertonic and isotonic variants. Hypertonic hyponatraemia occurs when unmeasured effective osmolytes (predominantly severe hyperglycaemia or intravenous mannitol) draw water from cells into plasma, diluting serum sodium (sodium falls by one point six to two milliequivalents per litre for every hundred milligram rise in glucose above normal).",
+   "say": "The initial diagnostic step in evaluating low sodium requires determining whether true hypoosmolar conditions exist in plasma. Measuring laboratory serum osmolality distinguishes true hypotonic hyponatraemia from hypertonic and isotonic states. Hypertonic hyponatraemia occurs when active osmolytes like severe hyperglycaemia draw intracellular water into plasma, diluting measured sodium concentrations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Serum tonicity category",
+     "Serum osmolality (mOsm/kg)",
+     "Pathophysiological mechanism",
+     "Clinical aetiologies"
+    ],
+    "rows": [
+     [
+      "Hypotonic (True hyponatraemia)",
+      "< 275 mOsm/kg",
+      "Excess water relative to sodium; risk of cerebral oedema",
+      "SIADH, heart failure, cirrhosis, hypovolaemia, polydipsia"
+     ],
+     [
+      "Isotonic (Pseudohyponatraemia)",
+      "275 to 295 mOsm/kg",
+      "Artefactual displacement of water by non-aqueous phase",
+      "Severe hypertriglyceridaemia, severe paraproteinaemia"
+     ],
+     [
+      "Hypertonic (Translocational)",
+      "> 295 mOsm/kg",
+      "Osmotic fluid shift from intracellular to extracellular space",
+      "Marked hyperglycaemia (DKA/HHS), intravenous mannitol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Measuring the solute concentration of voided urine clarifies whether physiological antidiuretic hormone suppression is operative or inappropriately sustained. Evaluating **urine osmolality** in hypotonic hyponatraemia establishes whether the neurohypophysis successfully shuts off vasopressin secretion. A maximally dilute urine osmolality below one hundred milliosmoles per kilogram confirms intact antidiuretic hormone suppression, pointing toward primary psychogenic polydipsia, beer potomania, or severe malnutrition (tea-and-toast diet). Conversely, a urine osmolality exceeding one hundred milliosmoles per kilogram confirms persistent, non-suppressed vasopressin action, mandating subsequent volume status and urinary sodium evaluation.",
+   "say": "Measuring urine concentration clarifies whether physiological antidiuretic hormone suppression is functioning normally. Evaluating urine osmolality in hypotonic hyponatraemia reveals whether vasopressin secretion has ceased. A dilute urine osmolality below one hundred confirms normal hormone suppression in primary polydipsia, while higher values indicate persistent vasopressin activity requiring volume assessment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hypo",
+      "label": "Hypotonic Hyponatraemia (Serum Osmolality <275 mOsm/kg)"
+     },
+     {
+      "id": "suppressed",
+      "label": "Urine Osmolality <100 mOsm/kg: ADH Suppressed (Primary Polydipsia)"
+     },
+     {
+      "id": "active",
+      "label": "Urine Osmolality >100 mOsm/kg: Persistent ADH -> Check Volume Status & UNa"
+     }
+    ],
+    "edges": [
+     [
+      "hypo",
+      "suppressed"
+     ],
+     [
+      "hypo",
+      "active"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Autonomous, non-physiological secretion of antidiuretic hormone in the absence of osmotic or volume triggers produces classic euvolaemic hypoosmolality. Diagnosing the **SIADH** (syndrome of inappropriate antidiuretic hormone secretion) requires documented hypotonic hyponatraemia, inappropriately concentrated urine (urine osmolality exceeding one hundred milliosmoles per kilogram), and elevated urinary sodium (exceeding thirty to forty milliequivalents per litre) in a clinically euvolaemic patient. Essential diagnostic criteria require normal renal, adrenal, and thyroid function. Major aetiologies encompass ectopic production by small cell lung carcinoma, central nervous system disorders, pulmonary infections, and medications like SSRIs and carbamazepine.",
+   "say": "Autonomous secretion of antidiuretic hormone without osmotic triggers causes classic euvolaemic hypoosmolar state. Diagnosing the SIADH requires documented hypotonic hyponatraemia, inappropriately concentrated urine, and elevated urinary sodium in a clinically euvolaemic patient. Normal thyroid and adrenal functions are mandatory, with small cell lung cancer, brain pathology, and medications representing leading causes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyponatremia-siadh-fig1.webp",
+    "alt": "Diagnostic criteria and clinical causes of the syndrome of inappropriate antidiuretic hormone.",
+    "caption": "Diagnostic framework and underlying pulmonary, neurological, and drug causes of SIADH. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Severe acute intracranial neurological injury can trigger excessive renal sodium wasting that mimics the biochemical profile of inappropriate vasopressin secretion. Distinguishing **cerebral salt wasting** (CSW) from SIADH is essential because their clinical managements are diametrically opposed. Cerebral salt wasting occurs following subarachnoid haemorrhage, head trauma, or neurosurgery, driven by central release of natriuretic peptides that impairs renal tubular sodium reabsorption. Unlike euvolaemic SIADH, cerebral salt wasting features true extracellular volume contraction, hypotension, and negative fluid balance, requiring aggressive volume repletion with isotonic saline rather than fluid restriction.",
+   "say": "Severe intracranial injury can trigger excessive renal sodium wasting that mimics inappropriate vasopressin secretion. Distinguishing cerebral salt wasting from SIADH is vital because their clinical treatments are opposite. Cerebral salt wasting features true extracellular volume contraction from natriuretic peptides, requiring aggressive saline hydration rather than fluid restriction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "SIADH",
+     "points": [
+      "Clinical volume status: Strictly Euvolaemic",
+      "Fluid balance: Normal or slightly positive",
+      "Serum uric acid and BUN: Low / suppressed",
+      "Primary treatment: Fluid restriction (500-1000 mL/day)"
+     ]
+    },
+    "right": {
+     "title": "Cerebral Salt Wasting (CSW)",
+     "points": [
+      "Clinical volume status: Hypovolaemic (dehydrated)",
+      "Fluid balance: Negative with weight loss and hypotension",
+      "Urinary sodium: Markedly elevated (>80 mEq/L)",
+      "Primary treatment: Isotonic saline hydration + fludrocortisone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Emergency osmotic decompression of swollen brain tissue takes absolute precedence in patients presenting with severe neurocognitive compromise. Administering **hypertonic saline** (three percent sodium chloride containing five hundred and thirteen milliequivalents per litre) is indicated for severe symptomatic hyponatraemia manifesting with active seizures, coma, or impending brainstem herniation. Delivering an intravenous bolus of one hundred millilitres of three percent saline over ten minutes (repeated up to twice if symptoms persist) rapidly raises serum sodium by four to six milliequivalents per litre, reversing cerebral oedema and halting life-threatening herniation.",
+   "say": "Emergency osmotic relief of swollen brain tissue takes absolute priority in patients presenting with severe neurological symptoms. Administering hypertonic saline is indicated for severe symptomatic hyponatraemia presenting with active seizures or coma. Infusing one hundred millilitres of three percent saline over ten minutes rapidly raises sodium by five milliequivalents, reversing acute brain swelling and stopping seizures.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "symptom",
+      "label": "Severe Symptoms: Seizures, Coma, Respiratory Depression"
+     },
+     {
+      "id": "bolus",
+      "label": "Give 100 mL IV 3% Hypertonic Saline over 10 min (repeat x2 if needed)"
+     },
+     {
+      "id": "target",
+      "label": "Target: Raise Na by 4-6 mEq/L rapidly; Limit total rise to <8 mEq/L in 24h"
+     }
+    ],
+    "edges": [
+     [
+      "symptom",
+      "bolus"
+     ],
+     [
+      "bolus",
+      "target"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Overly rapid correction of longstanding chronic hypoosmolality provokes catastrophic non-inflammatory demyelination of brainstem pontine tracts. Developing **osmotic demyelination syndrome** (ODS, formerly central pontine myelinolysis) occurs when chronic hyponatraemia (duration exceeding forty-eight hours) is corrected too quickly. Brain cells that adapted to chronic hypoosmolality by expelling intracellular organic osmolytes cannot re-accumulate osmolytes rapidly, causing oligodendrocyte shrinkage and death. Two to six days after rapid correction, patients develop dysarthria, dysphagia, spastic quadriparesis, and locked-in syndrome. Total sodium correction must not exceed eight milliequivalents per litre in twenty-four hours.",
+   "say": "Rapid correction of chronic low sodium causes severe demyelination of brainstem white matter tracts. Developing osmotic demyelination syndrome occurs when chronic hyponatraemia is corrected too quickly, exceeding eight milliequivalents per litre in twenty-four hours. Brain cells that extruded organic osmolytes dehydrate rapidly, causing spastic quadriparesis, pseudobulbar palsy, and locked-in syndrome.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyponatremia-fig1.webp",
+    "alt": "MRI brain showing trident-shaped central pontine hyperintensity in osmotic demyelination syndrome.",
+    "caption": "T2-weighted MRI demonstrating central pontine demyelination following rapid sodium correction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Targeted pharmacological antagonism of renal vasopressin receptors promotes selective aquaresis without inducing kaliuresis or natriuresis. Prescribing **tolvaptan**, an oral non-peptide selective vasopressin V2 receptor antagonist, blocks aquaporin-two channel insertion in collecting duct principal cells, promoting solute-free water excretion. Tolvaptan is indicated for euvolaemic hyponatraemia in SIADH or hypervolaemic hyponatraemia in heart failure and cirrhosis when fluid restriction fails. Mandatory administration rules dictate initiating therapy in a hospital setting with frequent sodium monitoring, strictly prohibiting concurrent fluid restriction to prevent unintended rapid overcorrection.",
+   "say": "Targeted pharmacological blockade of renal vasopressin receptors promotes selective water excretion without electrolyte loss. Prescribing tolvaptan selectively blocks V2 receptors in collecting duct cells, promoting solute-free aquaresis. Tolvaptan manages euvolaemic hyponatraemia in SIADH when fluid restriction fails, requiring hospital initiation and frequent sodium monitoring to prevent rapid overcorrection.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic modality",
+     "Mechanism of action",
+     "Indications & setting",
+     "Critical monitoring rules"
+    ],
+    "rows": [
+     [
+      "Fluid restriction",
+      "Negative water balance (500-1000 mL/day)",
+      "First-line for asymptomatic euvolaemic SIADH",
+      "Slow response over 48 to 72 hours; evaluate UNa/UK"
+     ],
+     [
+      "Oral Urea / Oral Salt",
+      "Increases urinary solute load to excrete water",
+      "Mild to moderate chronic SIADH",
+      "Palatability issues; effective maintenance therapy"
+     ],
+     [
+      "Tolvaptan (V2 antagonist)",
+      "Selectively blocks V2 receptor aquaresis",
+      "Euvolaemic / hypervolaemic hyponatraemia",
+      "Hospital initiation; NO fluid restriction; monitor Na q6h"
+     ],
+     [
+      "Desmopressin rescue",
+      "Exogenous V2 agonist (re-lowering strategy)",
+      "Accidental rapid overcorrection (>8 mEq/L/24h)",
+      "Give dDAVP 1-2 ug IV + D5W to re-lower sodium safely"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

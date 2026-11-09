@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "module": "med-renovascular",
+ "subject": "medicine",
+ "title": "Renal artery stenosis, fibromuscular dysplasia, and thrombotic microangiopathy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Lumen-occluding narrowing of the major renal arterial supply triggers persistent activation of systemic neurohumoral pressor pathways. Diagnosing **Renal artery stenosis** (RAS) accounts for the most common remediable cause of secondary hypertension. Atherosclerotic renovascular disease comprises over eighty-five percent of cases, typically affecting elderly individuals with widespread vascular atheroma and involving the proximal ostial segment of the renal artery. Chronic renal hypoperfusion stimulates juxtaglomerular apparatus hypersecretion of renin, generating angiotensin-two-dependent systemic arterial hypertension that accelerates target organ damage and causes progressive ischemic nephropathy.",
+   "say": "Narrowing of the main renal arterial blood supply triggers continuous activation of systemic pressor pathways. Diagnosing Renal artery stenosis represents the most common correctable cause of secondary hypertension. Atherosclerotic disease accounts for eighty-five percent of cases in older adults, where chronic hypoperfusion stimulates juxtaglomerular renin hypersecretion and drives angiotensin-mediated vascular damage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/renovascular-disease-fig1.webp",
+    "alt": "Computed tomography angiography demonstrating proximal renal artery stenosis and parenchymal asymmetry.",
+    "caption": "Atherosclerotic ostial renal artery stenosis and secondary ischemic renal parenchymal atrophy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Non-atherosclerotic segmental arterial dysplasia causes severe secondary renovascular hypertension in young, otherwise healthy individuals. Pathologically designated as **fibromuscular dysplasia** (FMD), this idiopathic non-inflammatory vascular disease predominantly affects females aged fifteen to fifty years. Medial fibroplasia accounts for over eighty percent of histological presentations, classically producing alternating aneurysmal dilatations and luminal narrowings described on catheter angiography as a string-of-beads appearance within the middle and distal renal artery segments. Percutaneous transluminal renal angioplasty without stenting achieves curative clinical blood pressure normalization in most patients.",
+   "say": "Non-atherosclerotic arterial dysplasia causes severe secondary hypertension in young individuals. Pathologically designated as fibromuscular dysplasia, this non-inflammatory disorder predominantly affects young females. Medial fibroplasia causes alternating luminal narrowings producing a string-of-beads appearance on angiography, which responds curatively to balloon angioplasty without stenting.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Atherosclerotic Renal Artery Stenosis",
+     "points": [
+      "Elderly individuals (>55 years) with systemic vascular disease",
+      "Involves proximal ostium and first 1 cm of renal artery",
+      "Progressive bilateral disease leading to ischemic nephropathy",
+      "Managed medically; stenting reserved for refractory failure"
+     ]
+    },
+    "right": {
+     "title": "Fibromuscular Dysplasia (FMD)",
+     "points": [
+      "Young to middle-aged females (15 to 50 years)",
+      "Involves middle and distal thirds of main renal artery",
+      "Pathognomonic string-of-beads angiographic appearance",
+      "High cure rate with balloon angioplasty alone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Dynamic physiological imaging evaluates the functional hemodynamic significance of anatomical arterial luminal narrowing. Performing diagnostic **captopril renography** utilizes an ACE inhibitor challenge to unmask hemodynamically significant stenosis. Administering captopril blocks angiotensin-two-mediated vasoconstriction at the efferent arteriole, precipitating a sudden, measurable drop in single-kidney glomerular filtration rate visualized on MAG3 scintigraphy. In patients with bilateral severe renal artery stenosis, unilateral functioning kidney stenosis, or severe volume expansion, sudden acute pulmonary venous congestion produces recurrent **flash pulmonary oedema** (Pickering syndrome).",
+   "say": "Dynamic physiological scintigraphy assesses the functional significance of renal arterial luminal narrowing. Performing diagnostic captopril renography uses an ACE inhibitor challenge to unmask significant stenosis. Captopril blocks efferent arteriolar constriction, causing a sudden drop in filtration on nuclear scanning. In bilateral stenosis, severe volume expansion causes recurrent flash pulmonary oedema.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "captopril",
+      "label": "Administer Oral Captopril prior to MAG3 Nuclear Renogram"
+     },
+     {
+      "id": "efferent",
+      "label": "Efferent Arteriolar Dilatation -> Sudden GFR collapse in stenotic kidney"
+     },
+     {
+      "id": "flash",
+      "label": "Bilateral Stenosis: Severe HTN + Recurrent Flash Pulmonary Oedema"
+     }
+    ],
+    "edges": [
+     [
+      "captopril",
+      "efferent"
+     ],
+     [
+      "efferent",
+      "flash"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Iatrogenic mechanical disruption of ulcerated aortic atheromatous plaques releases showers of microemboli that occlude small peripheral parenchymal arterioles. Manifesting as **atheroembolic renal disease**, the disorder typically emerges weeks following endovascular catheterization, vascular surgery, or initiation of systemic anticoagulation. Dislodged microscopic **cholesterol emboli** lodge within arcuate and interlobular renal arteries, inciting foreign-body giant-cell inflammatory reactions. The diagnostic triad combines livedo reticularis on lower extremities, progressive subacute renal failure, and peripheral eosinophilia with transient hypocomplementaemia. Histological confirmation reveals pathognomonic biconvex needle-shaped empty cholesterol clefts.",
+   "say": "Mechanical disruption of ulcerated aortic plaques releases showers of microemboli that occlude small parenchymal vessels. Manifesting as atheroembolic renal disease, this condition emerges weeks after vascular catheterization or anticoagulation. Dislodged cholesterol emboli lodge in small renal arteries, provoking inflammatory obstruction with livedo reticularis, eosinophilia, and biconvex needle-shaped clefts on biopsy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical domain",
+     "Atheroembolic renal disease features",
+     "Pathological significance"
+    ],
+    "rows": [
+     [
+      "Precipitating event",
+      "Vascular intervention (angiography), anticoagulation",
+      "Mechanical plaque disruption or lysis of protective thrombus"
+     ],
+     [
+      "Cutaneous signs",
+      "Livedo reticularis, blue toe syndrome, digital gangrene",
+      "Microvascular cholesterol occlusion in dermal vessels"
+     ],
+     [
+      "Renal laboratory profile",
+      "Subacute progressive AKI, mild proteinuria",
+      "Foreign-body giant cell arteriolitis and ischemia"
+     ],
+     [
+      "Renal biopsy hallmark",
+      "Biconvex needle-shaped empty clefts (ghost clefts)",
+      "Solubilized cholesterol crystals within arteriolar lumens"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Microvascular endothelial damage combined with platelet aggregation within the renal microcirculation generates a systemic thrombotic microangiopathy syndrome. Classifying **haemolytic uraemic syndrome** (HUS) requires the classic clinical triad: microangiopathic haemolytic anaemia with abundant fragmented erythrocytes (schistocytes), consumptive thrombocytopenia, and acute kidney injury. In typical pediatric HUS, enteric infection by **Shiga toxin**-producing Escherichia coli (O157:H7) drives receptor-mediated endothelial apoptosis and microvascular thrombosis. In contrast, atypical HUS results from genetic gain-of-function or loss-of-function mutations affecting alternative complement regulatory proteins, responding dramatically to the terminal complement inhibitor eculizumab.",
+   "say": "Microvascular endothelial injury combined with platelet aggregation produces systemic thrombotic microangiopathy. Classifying haemolytic uraemic syndrome requires a clinical triad: microangiopathic haemolytic anaemia with schistocytes, thrombocytopenia, and acute kidney injury. Typical pediatric disease follows enteric Shiga toxin infection, while atypical disease arises from alternative complement regulatory gene mutations.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thrombotic-renovascular-disorders-fig1.webp",
+    "alt": "Microscopic appearance of glomerular microthrombi and peripheral blood schistocytes in HUS.",
+    "caption": "Thrombotic microangiopathy with arteriolar thrombosis, fibrin deposition, and schistocytes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Sudden intense renal cortical vasoconstriction in patients with diffuse systemic autoimmune connective tissue disease precipitates life-threatening malignant hypertension. Manifesting as **scleroderma renal crisis** (SRC), the syndrome occurs in approximately ten percent of patients with diffuse cutaneous systemic sclerosis, strongly associated with autoantibodies against RNA polymerase three and preceding high-dose glucocorticoid exposure. Patients present with abrupt onset of accelerated arterial hypertension, oliguric acute kidney injury, and microangiopathic haemolysis. Emergency therapeutic administration of short-acting oral ACE inhibitors (captopril) reverses renal vasoconstriction, dramatically improving clinical survival.",
+   "say": "Sudden intense renal vasoconstriction in patients with diffuse systemic sclerosis triggers life-threatening accelerated hypertension. Manifesting as scleroderma renal crisis, this disorder occurs in patients with RNA polymerase three antibodies following high-dose steroid exposure. Patients present with severe hypertension, acute renal failure, and microangiopathic haemolysis, requiring emergency captopril therapy to reverse vasospasm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Scleroderma Renal Crisis (SRC)",
+     "points": [
+      "Diffuse cutaneous systemic sclerosis (anti-RNA pol III)",
+      "Abrupt malignant hypertension and oliguric AKI",
+      "Precipitated by oral glucocorticoid therapy (>15 mg/day)",
+      "Immediate first-line therapy: Oral Captopril (ACE inhibitor)"
+     ]
+    },
+    "right": {
+     "title": "Thrombotic Thrombocytopenic Purpura",
+     "points": [
+      "Severe ADAMTS13 metalloprotease deficiency (<10%)",
+      "Prominent neurocognitive symptoms and fever",
+      "Renal involvement typically mild compared to HUS",
+      "Immediate first-line therapy: Emergency plasma exchange"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Severe vascular shear stress associated with acute, massive arterial blood pressure elevations provokes accelerated hyperplastic and necrotizing arteriolar lesions. Developing **malignant nephrosclerosis** occurs in the setting of malignant hypertension (diastolic blood pressure typically exceeding one hundred and twenty to one hundred and thirty millimetres of mercury), accompanied by bilateral grade four hypertensive retinopathy with flame haemorrhages and papilloedema. Histopathological inspection reveals hyperplastic arteriolosclerosis characterized by concentric, laminated smooth muscle cell proliferation creating pathognomonic onion-skin vascular thickening, alongside fibrinoid necrosis of afferent arterioles and glomerular tufts.",
+   "say": "Severe vascular shear stress from acute massive blood pressure elevations causes accelerated hyperplastic arteriolar damage. Developing malignant nephrosclerosis occurs in malignant hypertension with diastolic pressure exceeding one hundred and twenty, accompanied by bilateral papilloedema and retinal haemorrhages. Histopathology demonstrates concentric onion-skin smooth muscle thickening and necrotizing fibrinoid arteriolitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vascular pathology",
+     "Histological lesion",
+     "Pathogenetic mechanism",
+     "Clinical presentation"
+    ],
+    "rows": [
+     [
+      "Hyperplastic arteriolosclerosis",
+      "Concentric laminar 'onion-skin' thickening",
+      "Vascular smooth muscle proliferation from extreme shear",
+      "Diastolic BP >120 mmHg, papilloedema, acute renal decline"
+     ],
+     [
+      "Fibrinoid necrosis",
+      "Eosinophilic transmural vessel wall necrosis",
+      "Plasma protein and fibrin insudation through ruptured endothelium",
+      "Oliguria, microangiopathic haemolysis, elevated LDH"
+     ],
+     [
+      "Hyaline arteriolosclerosis",
+      "Homogeneous pink proteinaceous thickening",
+      "Chronic benign endothelial leakage over decades",
+      "Subtle benign nephrosclerosis with mild proteinuria"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic microvascular sclerosis drives progressive gradual nephron loss, while acute macrovascular thromboembolism produces sudden wedge-shaped coagulative necrosis. Chronic **hypertensive nephropathy** (benign nephrosclerosis) develops over decades of longstanding essential hypertension, characterized by progressive hyaline arteriolosclerosis, ischemic glomerular collapse, and mild subnephrotic proteinuria. In sharp contrast, acute **renal infarction** follows sudden thromboembolic occlusion of a major or segmental renal artery (typically from atrial fibrillation or cardiac mural thrombi), presenting with abrupt severe unremitting flank pain, persistent microscopic haematuria, and marked isolated elevation of serum lactate dehydrogenase.",
+   "say": "Chronic microvascular sclerosis causes gradual nephron loss, whereas acute arterial thromboembolism produces sudden coagulative necrosis. Chronic hypertensive nephropathy develops over decades, characterized by hyaline arteriolosclerosis and mild proteinuria. In contrast, acute renal infarction follows sudden embolic occlusion of a renal artery, presenting with abrupt flank pain, haematuria, and marked elevation of serum lactate dehydrogenase.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "source",
+      "label": "Cardiac Thromboembolism (Atrial Fibrillation, MI Mural Thrombus)"
+     },
+     {
+      "id": "occlusion",
+      "label": "Acute Renal Artery Occlusion -> Wedge-shaped Cortical Infarction"
+     },
+     {
+      "id": "dx",
+      "label": "Flank Pain + Haematuria + Markedly Elevated LDH (Contrast CT confirms)"
+     }
+    ],
+    "edges": [
+     [
+      "source",
+      "occlusion"
+     ],
+     [
+      "occlusion",
+      "dx"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

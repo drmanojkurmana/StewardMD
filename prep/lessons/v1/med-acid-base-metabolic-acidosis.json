@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "module": "med-acid-base",
+ "subject": "medicine",
+ "title": "Metabolic acidosis, anion gap, and compensatory mechanics",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A primary systemic reduction in circulating bicarbonate concentration below twenty-two milliequivalents per litre establishes clinical **metabolic acidosis**. This disturbance stems from the pathological accumulation of exogenous or endogenous fixed non-volatile acids, accelerated renal bicarbonate wasting, or extensive gastrointestinal base loss through secretory diarrhoea. Arterial blood gas analysis reveals a decreased arterial pH below seven point three five accompanied by reduced serum bicarbonate. Chemoreceptors in the brainstem detect acidaemia, stimulating vigorous hyperventilation known as Kussmaul breathing to exhale carbon dioxide and provide rapid respiratory compensation.",
+   "say": "A primary systemic reduction in bicarbonate concentration below twenty-two milliequivalents per litre causes metabolic acidosis. This disorder stems from fixed acid accumulation, renal bicarbonate wasting, or gastrointestinal base loss. Arterial blood gas analysis demonstrates a low pH accompanied by decreased bicarbonate. Brainstem chemoreceptors detect acidaemia and stimulate deep Kussmaul respirations to exhale carbon dioxide, providing rapid compensatory relief.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Acid-Base Homeostasis",
+     "points": [
+      "Arterial pH: 7.35 to 7.45",
+      "Serum Bicarbonate: 22 to 26 mEq/L",
+      "Partial Pressure of CO2: 35 to 45 mmHg",
+      "Balanced volatile and fixed acid excretion"
+     ]
+    },
+    "right": {
+     "title": "Primary Metabolic Acidosis",
+     "points": [
+      "Arterial pH: < 7.35 (systemic acidaemia)",
+      "Serum Bicarbonate: < 22 mEq/L (primary defect)",
+      "Partial Pressure of CO2: Compensatory reduction",
+      "Stimulates alveolar hyperventilation (Kussmaul)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Mathematical calculation of the difference between routinely measured serum cations and anions categorizes metabolic acidosis into distinct diagnostic classes. Determining the **anion gap** uses the formula: serum sodium minus the sum of serum chloride and serum bicarbonate, with a physiological normal range between eight and twelve milliequivalents per litre. The normal gap represents unmeasured plasma anions, predominantly albumin, phosphate, and sulfate. High anion gap acidosis reflects the accumulation of unmeasured organic anions like lactate, ketoacids, or toxic alcohol metabolites, whereas normal anion gap acidosis signifies hyperchloraemic base loss.",
+   "say": "Mathematical calculation of the difference between measured cations and anions categorizes metabolic acidosis into distinct diagnostic classes. Determining the anion gap subtracts chloride and bicarbonate from sodium, with a normal range between eight and twelve milliequivalents per litre. Unmeasured plasma anions like albumin compose the physiological gap. High anion gap acidosis indicates the accumulation of unmeasured organic acids, whereas normal anion gap acidosis reflects hyperchloraemic base wasting.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acid-base-disorders-and-anion-gap-fig1.webp",
+    "alt": "Stacked bar graph illustrating measured cations, measured anions, and the calculated serum anion gap.",
+    "caption": "Serum anion gap calculation and distribution of unmeasured plasma anions. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Hypoalbuminaemia significantly distorts calculated serum anion gaps, masking the true presence of pathological organic acid accumulation in critically ill patients. Applying an **albumin correction** adjusts the expected baseline anion gap, because negatively charged circulating serum albumin accounts for approximately seventy-five percent of normal unmeasured anions. For every decline of one gram per decilitre in serum albumin below the normal level of four grams per decilitre, the expected anion gap drops by two point five milliequivalents per litre. Failure to calculate this correction frequently conceals occult lactic acidosis or diabetic ketoacidosis.",
+   "say": "Hypoalbuminaemia distorts calculated anion gaps, masking the true presence of organic acid accumulation in critically ill patients. Applying an albumin correction adjusts the expected baseline gap, because negatively charged albumin accounts for most normal unmeasured anions. For every drop of one gram per decilitre in albumin, the baseline anion gap decreases by two point five milliequivalents per litre. Adjusting for albumin prevents clinicians from overlooking occult ketoacidosis or lactic acidosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "measure",
+      "label": "Measure serum Albumin, Sodium, Chloride, and Bicarbonate"
+     },
+     {
+      "id": "apparent",
+      "label": "Calculate Apparent Anion Gap = Na - (Cl + HCO3)"
+     },
+     {
+      "id": "formula",
+      "label": "Corrected Anion Gap = Apparent Gap + [2.5 * (4.0 - Albumin in g/dL)]"
+     },
+     {
+      "id": "classify",
+      "label": "Classify true metabolic disturbance based on corrected value"
+     }
+    ],
+    "edges": [
+     [
+      "measure",
+      "apparent"
+     ],
+     [
+      "apparent",
+      "formula"
+     ],
+     [
+      "formula",
+      "classify"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Evaluating the physiological adequacy of respiratory compensation distinguishes simple metabolic acidosis from complex mixed acid-base disorders. Applying the **Winter formula** predicts the expected arterial partial pressure of carbon dioxide through the equation: one point five multiplied by measured serum bicarbonate, plus eight, with a margin of plus or minus two. If the measured arterial carbon dioxide matches the calculated value, simple metabolic acidosis with appropriate respiratory compensation exists. A higher measured carbon dioxide indicates superimposed respiratory acidosis, while a lower carbon dioxide confirms concomitant primary respiratory alkalosis.",
+   "say": "Evaluating the adequacy of respiratory compensation distinguishes simple metabolic acidosis from complex mixed acid-base disorders. Applying the Winter formula predicts the expected carbon dioxide through a validated mathematical equation using measured bicarbonate. If measured carbon dioxide equals the calculated value, simple compensated metabolic acidosis is present. A higher carbon dioxide reveals coexisting respiratory acidosis, while a lower carbon dioxide indicates concomitant respiratory alkalosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Comparison to calculated Winter value",
+     "Arterial carbon dioxide status",
+     "Underlying physiological mechanism",
+     "Clinical diagnostic interpretation"
+    ],
+    "rows": [
+     [
+      "Measured PaCO2 equals expected value",
+      "Appropriate compensation (within +/- 2 mmHg)",
+      "Intact brainstem chemoreceptor hyperventilation",
+      "Pure, simple metabolic acidosis with compensation"
+     ],
+     [
+      "Measured PaCO2 exceeds expected value",
+      "Inappropriately elevated PaCO2 (> expected + 2)",
+      "Hypoventilation, respiratory fatigue, CNS depression",
+      "Mixed metabolic acidosis AND primary respiratory acidosis"
+     ],
+     [
+      "Measured PaCO2 below expected value",
+      "Inappropriately reduced PaCO2 (< expected - 2)",
+      "Excessive alveolar hyperventilation, pain, sepsis",
+      "Mixed metabolic acidosis AND primary respiratory alkalosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Comparing the increment in the anion gap above normal to the corresponding decrement in serum bicarbonate identifies concealed mixed metabolic disturbances. Calculating the **delta ratio** (delta-delta) divides the change in anion gap (measured gap minus twelve) by the change in bicarbonate (twenty-four minus measured bicarbonate). A ratio between one and two confirms an uncomplicated high anion gap metabolic acidosis. A ratio below one indicates a mixed high anion gap and normal anion gap acidosis, whereas a ratio exceeding two reveals a concomitant metabolic alkalosis or preexisting chronic respiratory acidosis.",
+   "say": "Comparing the change in anion gap to the change in serum bicarbonate identifies hidden mixed metabolic disturbances. Calculating the delta ratio divides the rise in anion gap by the decline in bicarbonate. A ratio between one and two confirms an uncomplicated high anion gap acidosis. A ratio below one reveals a concurrent normal anion gap acidosis, while a ratio above two indicates a concomitant metabolic alkalosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/bio-acid-base-balance-fig1.webp",
+    "alt": "Graphic chart showing delta ratio calculation and interpretation in mixed acid-base disorders.",
+    "caption": "Four-step acid-base interpretation showing anion gap, Winter formula, and delta ratio. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Characteristic hyperpnoea triggered by intense metabolic acidaemia provides vital clinical evidence of severe systemic hydrogen ion excess. Developing **Kussmaul breathing** features deep, rapid, regular respirations driven by acid-sensitive carotid body and central brainstem chemoreceptors. This intense respiratory effort lowers arterial carbon dioxide, shifting the carbonic acid-bicarbonate equilibrium to consume excess free hydrogen ions and defend systemic pH. Clinicians observe Kussmaul respirations classical in severe diabetic ketoacidosis, uremic acidosis, and stage four lactic acidosis. Exhaustion of respiratory muscles leads to rapid clinical collapse and fatal acidaemia.",
+   "say": "Characteristic hyperpnoea triggered by intense metabolic acidaemia provides vital clinical evidence of severe hydrogen ion excess. Developing Kussmaul breathing features deep, rapid, regular respirations driven by acid-sensitive brainstem chemoreceptors. This intense respiratory effort lowers arterial carbon dioxide, consuming excess hydrogen ions to defend blood pH. Clinicians observe this breathing pattern classically in diabetic ketoacidosis, uremic acidosis, and severe lactic acidosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Kussmaul Breathing",
+     "points": [
+      "Deep, rapid, and regular respiratory rate",
+      "Driven by severe metabolic acidaemia (pH < 7.20)",
+      "Acts to maximally eliminate volatile acid (CO2)",
+      "Continuous effort without apneic pauses"
+     ]
+    },
+    "right": {
+     "title": "Cheyne-Stokes Breathing",
+     "points": [
+      "Crescendo-decrescendo tidal volumes with apnoea",
+      "Driven by delayed circulatory feedback to brainstem",
+      "Associated with congestive heart failure and stroke",
+      "Features periodic pauses in breathing cycles"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Judicious administration of intravenous alkaline solutions remains strictly restricted to severe acidaemia associated with hemodynamic instability. Infusing intravenous **sodium bicarbonate** is generally avoided in mild to moderate organic acidosis, because exogenous base therapy causes paradoxical intracellular cerebral acidosis through rapid carbon dioxide diffusion across the blood-brain barrier. Bicarbonate infusion is reserved for life-threatening acidaemia with an arterial pH below seven point one, refractory shock, or severe hyperkalaemia. In non-gap acidosis caused by renal tubular acidosis or severe diarrhoea, oral bicarbonate replacement provides safe, definitive correction.",
+   "say": "Judicious administration of intravenous alkaline solutions remains strictly restricted to severe acidaemia associated with hemodynamic instability. Infusing intravenous sodium bicarbonate is avoided in mild organic acidosis, because exogenous base therapy risks paradoxical intracellular brain acidosis from rapid carbon dioxide diffusion. Bicarbonate infusion is reserved for life-threatening acidaemia below pH seven point one or severe hyperkalaemia. In contrast, renal tubular acidosis requires safe oral bicarbonate replacement.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ph_check",
+      "label": "Arterial Blood Gas Analysis: Check systemic pH"
+     },
+     {
+      "id": "mild_mod",
+      "label": "pH > 7.15: Avoid IV Bicarbonate (Risk paradoxical CNS acidosis)"
+     },
+     {
+      "id": "severe",
+      "label": "pH < 7.10 with Shock: Slow infusion of Isotonic Sodium Bicarbonate"
+     },
+     {
+      "id": "nagma",
+      "label": "Normal Gap Acidosis (RTA/Diarrhoea): Replete bicarbonate safely"
+     }
+    ],
+    "edges": [
+     [
+      "ph_check",
+      "mild_mod"
+     ],
+     [
+      "ph_check",
+      "severe"
+     ],
+     [
+      "ph_check",
+      "nagma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Simultaneous occurrence of two or more independent primary acid-base disturbances within a single patient creates complex physiological diagnostic presentations. Identifying **mixed acid-base disorders** requires systematic analysis of arterial blood gases, serum electrolytes, calculated anion gaps, and compensatory formulas. A classic example is acute salicylate intoxication, which causes direct brainstem stimulation producing respiratory alkalosis, combined with mitochondrial uncoupling producing a high anion gap metabolic acidosis. Recognizing mixed disturbances prevents therapeutic missteps, such as failing to recognize respiratory exhaustion in a patient who appears to have a normal pH.",
+   "say": "Simultaneous occurrence of two or more independent acid-base disturbances within a single patient creates complex diagnostic challenges. Identifying mixed acid-base disorders requires systematic analysis of blood gases, electrolytes, anion gaps, and compensatory equations. Acute salicylate poisoning exemplifies a classic mixed disorder, combining primary respiratory alkalosis with high anion gap metabolic acidosis. Recognizing multiple disturbances prevents fatal clinical errors during resuscitation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical presentation scenario",
+     "Primary coexisting disorders",
+     "Typical arterial blood gas profile",
+     "Calculated parameter clues"
+    ],
+    "rows": [
+     [
+      "Salicylate poisoning",
+      "Respiratory alkalosis + High anion gap metabolic acidosis",
+      "pH near normal, low PaCO2, low HCO3-",
+      "High anion gap with PaCO2 lower than Winter prediction"
+     ],
+     [
+      "Severe sepsis with septic shock",
+      "Lactic acidosis (HAGMA) + Respiratory alkalosis (hyperventilation)",
+      "Variable pH, markedly low PaCO2 and HCO3-",
+      "Elevated serum lactate and anion gap"
+     ],
+     [
+      "Cardiopulmonary arrest",
+      "Severe metabolic acidosis (hypoxia) + Severe respiratory acidosis (apnoea)",
+      "Profound acidaemia (pH < 7.0), high PaCO2, low HCO3-",
+      "Life-threatening combined hydrogen ion retention"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

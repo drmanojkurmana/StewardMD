@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "med-potassium",
+ "subject": "medicine",
+ "title": "Hypokalaemia, hyperkalaemia, and membrane stabilization",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Serum potassium concentrations below three point five milliequivalents per litre define **hypokalaemia**, representing a pervasive disturbance in cellular membrane polarization. Common aetiologies include gastrointestinal losses from vomiting or secretory diarrhoea, renal wasting from loop or thiazide diuretics, hyperaldosteronism, and intracellular potassium shifting driven by beta-agonists or alkalosis. Manifestations feature muscle weakness, fatigue, hyporeflexia, constipation, and ascending paralysis. Severe depletion impairs cardiac repolarization, predisposing patients to lethal atrial and ventricular tachyarrhythmias.",
+   "say": "Serum potassium concentrations below three point five milliequivalents per litre define hypokalaemia, representing a major disruption of membrane polarization. Gastrointestinal fluid losses, loop diuretics, and intracellular shifts drive depletion. Patients develop muscle weakness, constipation, and ascending paralysis. Severe potassium depletion impairs myocardial repolarization, causing life-threatening ventricular arrhythmias.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanism of depletion",
+     "Specific clinical causes",
+     "Urinary potassium level",
+     "Common acid-base state"
+    ],
+    "rows": [
+     [
+      "Gastrointestinal loss",
+      "Vomiting, profuse diarrhoea, laxative abuse",
+      "Low (< 20 mEq/day)",
+      "Metabolic alkalosis (vomiting) or acidosis (diarrhoea)"
+     ],
+     [
+      "Renal potassium wasting",
+      "Loop/thiazide diuretics, hyperaldosteronism",
+      "High (> 20 mEq/day)",
+      "Metabolic alkalosis"
+     ],
+     [
+      "Intracellular redistribution",
+      "Insulin, beta-2 agonists, alkalosis, hypothermia",
+      "Variable (reflects total stores)",
+      "Systemic alkalosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Characteristic electrocardiographic repolarization abnormalities emerge as serum potassium concentrations decline below physiological thresholds. Developing prominent **U waves** following the T wave serves as a classic diagnostic sign of moderate to severe potassium deficiency. Concomitant electrocardiographic findings include flattening or frank inversion of T waves, ST segment depression, and progressive prolongation of the apparent QT or QU interval. These changes heighten vulnerability to polymorphic ventricular tachycardia, particularly torsades de pointes, necessitating urgent telemetry and electrolyte repletion.",
+   "say": "Electrocardiographic repolarization abnormalities emerge as serum potassium concentrations fall below critical thresholds. Developing prominent U waves after T waves marks moderate to severe hypokalaemia. Patients also show flattened T waves, ST segment depression, and prolonged QU intervals. These electrocardiographic signs warn of impending polymorphic ventricular tachycardia, requiring prompt intravenous or oral potassium replacement.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-ecg-potassium.svg",
+    "alt": "Electrocardiogram rhythm strips illustrating ST depression, flattened T waves, and prominent U waves in hypokalaemia.",
+    "caption": "Electrocardiographic manifestations of hypokalaemia and progressive repolarization abnormalities. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Safe and structured restoration of body potassium stores prevents iatrogenic hyperkalaemia and peripheral venous thrombophlebitis. Administering **potassium replacement** prioritizes the oral route with potassium chloride for mild to moderate asymptomatic deficits. Intravenous infusion is reserved for severe hypokalaemia below two point five milliequivalents per litre, symptomatic cardiac arrhythmias, or non-functioning gastrointestinal tracts. Intravenous peripheral infusion rates must not exceed ten to twenty milliequivalents per hour, using continuous cardiac monitoring and avoiding dextrose-containing diluents that trigger insulin release.",
+   "say": "Safe restoration of body potassium stores protects patients from iatrogenic hyperkalaemia and venous injury. Administering potassium replacement utilizes oral potassium chloride for mild asymptomatic deficits. Clinicians reserve intravenous infusions for severe deficits below two point five milliequivalents per litre or symptomatic arrhythmias. Peripheral infusion rates must never exceed twenty milliequivalents hourly without continuous cardiac telemetry.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "assess",
+      "label": "Assess Severity: Mild (>3.0), Moderate (2.5-3.0), Severe (<2.5 mEq/L)"
+     },
+     {
+      "id": "mild",
+      "label": "Mild/Moderate Asymptomatic: Oral KCl 20-40 mEq doses"
+     },
+     {
+      "id": "severe",
+      "label": "Severe (<2.5) or Arrhythmia: IV KCl (Max 10-20 mEq/h peripheral)"
+     }
+    ],
+    "edges": [
+     [
+      "assess",
+      "mild"
+     ],
+     [
+      "assess",
+      "severe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sustained elevation of extracellular potassium concentration above five point zero milliequivalents per litre establishes **hyperkalaemia**, the most lethal common electrolyte emergency. Primary mechanisms comprise impaired renal excretion from acute kidney injury or chronic renal disease, mineralocorticoid deficiency, and pharmacological blockade of the renin-angiotensin-aldosterone axis. Extracellular redistribution from acidosis, tissue rhabdomyolysis, or massive haemolysis further aggravates toxicity. Clinical presentations are deceptive, frequently progressing silently from vague neuromuscular weakness to sudden cardiac arrest and asystole.",
+   "say": "Sustained elevation of serum potassium above five milliequivalents per litre establishes hyperkalaemia, a lethal clinical emergency. Impaired renal clearance, aldosterone deficiency, and medication adverse effects drive potassium accumulation. Acidosis and tissue crush injury also shift potassium into the extracellular fluid. Patients often remain asymptomatic until fatal cardiac conduction disturbances appear suddenly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hypokalaemia (K < 3.5 mEq/L)",
+     "points": [
+      "Hyperpolarizes resting membrane potential",
+      "Inactivates sodium channels, impairs excitation",
+      "ECG: Flattened T waves, ST depression, U waves",
+      "Risks polymorphic VT, torsades de pointes"
+     ]
+    },
+    "right": {
+     "title": "Hyperkalaemia (K > 5.0 mEq/L)",
+     "points": [
+      "Depolarizes resting membrane potential",
+      "Accelerates repolarization, impairs conduction",
+      "ECG: Peaked T waves, wide QRS, sine wave",
+      "Risks ventricular fibrillation and asystole"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Sequential progression of electrophysiological conduction failure correlates directly with the magnitude of extracellular potassium elevation. The appearance of tall, narrow, symmetrical **peaked T waves** with a shortened QT interval represents the earliest reliable electrocardiographic indicator of hyperkalaemia. As potassium concentrations rise further, progressive PR interval prolongation, flattening and loss of P waves, and marked widening of the QRS complex develop. Ultimately, the widened QRS merges directly with the elevated T wave, forming a lethal sine-wave pattern preceding asystole.",
+   "say": "Progressive conduction failure correlates with the magnitude of extracellular potassium elevation. The appearance of tall, symmetrical peaked T waves provides the earliest electrocardiographic hallmark of hyperkalaemia. As potassium rises, the PR interval lengthens, P waves disappear, and the QRS complex widens dramatically. A terminal sine-wave configuration leads to fatal ventricular fibrillation or asystole.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyperkalemia-fig1.webp",
+    "alt": "Electrocardiogram showing sequential hyperkalaemia progression from peaked T waves to sine-wave pattern.",
+    "caption": "Electrocardiographic changes in progressive hyperkalaemia from peaked T waves to sine wave. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Immediate pharmacological antagonism of myocardial membrane excitability takes precedence over all other therapeutic interventions in severe hyperkalaemic emergencies. Administering intravenous **calcium gluconate** (ten milliliters of ten percent solution infused over three to five minutes) immediately stabilizes cardiac myocyte resting membrane potentials without altering serum potassium concentrations. Intravenous calcium restores the electrical gradient between resting potential and threshold potential, reversing widening of the QRS complex within minutes. Protection persists for thirty to sixty minutes, buying time for potassium-lowering treatments.",
+   "say": "Immediate pharmacological antagonism of cardiac membrane excitability takes priority in severe hyperkalaemia. Administering intravenous calcium gluconate stabilizes myocardial resting membrane potentials without lowering circulating potassium levels. Calcium quickly reverses conduction delays and narrows the widened QRS complex within three to five minutes. This membrane stabilization lasts up to one hour, creating a critical window for definitive potassium-lowering therapies.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ecg",
+      "label": "Step 1: Hyperkalaemia with ECG Changes (Wide QRS, Peaked T)"
+     },
+     {
+      "id": "calcium",
+      "label": "Step 2: IV 10% Calcium Gluconate 10 mL over 3-5 min (Membrane Stabilisation)"
+     },
+     {
+      "id": "shift",
+      "label": "Step 3: Insulin + Dextrose, Salbutamol, Bicarbonate (Intracellular Shift)"
+     },
+     {
+      "id": "eliminate",
+      "label": "Step 4: Furosemide, Binders, or Emergent Haemodialysis (Elimination)"
+     }
+    ],
+    "edges": [
+     [
+      "ecg",
+      "calcium"
+     ],
+     [
+      "calcium",
+      "shift"
+     ],
+     [
+      "shift",
+      "eliminate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Spurious elevation of measured potassium resulting from mechanical in vitro cellular release must be differentiated from true systemic hyperkalaemia. Clinically designated as **pseudohyperkalaemia**, this artifact arises when traumatic venepuncture, prolonged tourniquet application, repeated fist clenching, or delayed centrifugation lyses fragile erythrocytes. Marked thrombocytosis with platelet counts exceeding five hundred thousand or extreme leukocytosis also releases intracellular potassium during clot formation in serum collection tubes. Repeating the measurement using heparinized plasma without a tourniquet establishes the true normal potassium concentration.",
+   "say": "Spurious elevation of measured potassium from mechanical cell destruction must be distinguished from true systemic hyperkalaemia. Clinically designated as pseudohyperkalaemia, this artifact arises from traumatic venepuncture, prolonged tourniquet use, or fist pumping during phlebotomy. Extreme thrombocytosis or leukocytosis also leaks intracellular potassium into serum samples during laboratory clotting. Obtaining a free-flowing heparinized plasma sample confirms the normal baseline value.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pseudohyperkalaemia (In Vitro Artifact)",
+     "points": [
+      "Haemolysed blood specimen from traumatic draw",
+      "Extreme thrombocytosis or leukocytosis",
+      "Normal concurrent ECG without peaked T waves",
+      "True plasma potassium is completely normal"
+     ]
+    },
+    "right": {
+     "title": "True Hyperkalaemia (Systemic Toxicity)",
+     "points": [
+      "Impaired renal clearance, acidosis, tissue death",
+      "Characteristic peaked T waves and conduction delay",
+      "Elevated in both serum and plasma samples",
+      "Mandates urgent medical cardioprotective therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rapid translocation of circulating potassium into intracellular fluid compartments provides urgent temporary reduction of dangerous serum concentrations. Driving **intracellular shifting** utilizes intravenous regular insulin accompanied by twenty-five to fifty grams of dextrose, which stimulates the sodium-potassium ATPase pump to move potassium into skeletal muscle and hepatocytes. Inhaled nebulized salbutamol acts synergistically through beta-two adrenergic stimulation to promote rapid cellular uptake. These interventions lower serum potassium by zero point five to one point two milliequivalents within thirty to sixty minutes.",
+   "say": "Rapid translocation of circulating potassium into cells provides temporary reduction of dangerous serum concentrations. Driving intracellular shifting uses intravenous regular insulin and hypertonic dextrose to activate sodium-potassium ATPase pumps. High-dose inhaled salbutamol acts synergistically through beta-two receptors to accelerate cellular potassium entry. These medications reduce serum potassium within thirty minutes, bridging until elimination therapies remove the excess cation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharmacological shift agent",
+     "Standard adult dosing",
+     "Onset of action",
+     "Expected serum K reduction"
+    ],
+    "rows": [
+     [
+      "Regular Insulin + Dextrose",
+      "10 units IV regular insulin + 50 mL 50% dextrose",
+      "15 to 30 minutes",
+      "0.5 to 1.0 mEq/L (lasts 4-6 hours)"
+     ],
+     [
+      "Nebulized Salbutamol",
+      "10 to 20 mg nebulized in 4 mL saline",
+      "30 minutes",
+      "0.5 to 1.0 mEq/L (synergistic with insulin)"
+     ],
+     [
+      "Sodium Bicarbonate",
+      "50 mEq IV infusion over 5 minutes",
+      "30 to 60 minutes",
+      "Variable (effective mainly in metabolic acidosis)"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

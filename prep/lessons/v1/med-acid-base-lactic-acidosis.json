@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "module": "med-acid-base",
+ "subject": "medicine",
+ "title": "Lactic acidosis, ketoacidosis, and gap characterization",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Marked overproduction or impaired hepatic clearance of lactate exceeding five millimoles per litre with systemic acidaemia defines **lactic acidosis**, the most frequent cause of metabolic acidosis in intensive care units. Type A lactic acidosis arises from marked tissue hypoperfusion and cellular hypoxia in septic shock, cardiogenic shock, cardiac arrest, or severe hypovolaemia. Type B lactic acidosis occurs without tissue hypoxia, driven by liver failure, malignancy, mitochondrial toxins, or medications such as metformin. Management focuses entirely on rapid hemodynamic resuscitation, tissue reperfusion, and eradication of underlying sepsis.",
+   "say": "Marked overproduction or impaired hepatic clearance of lactate exceeding five millimoles per litre with acidaemia defines lactic acidosis, the most frequent metabolic acidosis in critical illness. Type A lactic acidosis arises from severe tissue hypoperfusion in septic or cardiogenic shock. Type B lactic acidosis occurs without tissue hypoxia, triggered by hepatic failure, malignancy, or medications like metformin. Management focuses on restoring tissue perfusion and reversing shock.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Subtype classification",
+     "Tissue oxygenation status",
+     "Predominant cellular mechanism",
+     "Representative clinical aetiologies"
+    ],
+    "rows": [
+     [
+      "Type A Lactic Acidosis",
+      "Hypoperfusion and overt tissue hypoxia",
+      "Anaerobic glycolysis from impaired oxygen delivery",
+      "Septic shock, cardiogenic shock, hypovolaemia, cardiac arrest"
+     ],
+     [
+      "Type B1 Lactic Acidosis",
+      "Adequate macrovascular tissue oxygenation",
+      "Impaired hepatic clearance or systemic disease",
+      "Fulminant hepatic failure, haematological malignancy, severe sepsis"
+     ],
+     [
+      "Type B2 Lactic Acidosis",
+      "Adequate macrovascular tissue oxygenation",
+      "Toxins or pharmacological mitochondrial inhibition",
+      "Metformin toxicity, linezolid, propofol infusion, reverse transcriptase inhibitors"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Enhanced lipolysis and hepatic ketogenesis triggered by absolute or relative insulin deficiency and counter-regulatory hormone excess generate severe systemic acidaemia. Presenting as **ketoacidosis**, elevated circulating acetoacetate and beta-hydroxybutyrate create a profound high anion gap metabolic acidosis. Major clinical forms include diabetic ketoacidosis, alcoholic ketoacidosis following binge drinking with starvation, and prolonged fasting ketosis. Nitroprusside urine dipsticks detect only acetoacetate, frequently underestimating the true severity of beta-hydroxybutyrate accumulation. Treatment combines intravenous fluid expansion, electrolyte replacement, and insulin administration to suppress ongoing lipolysis and ketogenesis.",
+   "say": "Enhanced lipolysis and hepatic ketogenesis triggered by insulin deficiency and counter-regulatory hormone excess generate severe systemic acidaemia. Presenting as ketoacidosis, elevated circulating acetoacetate and beta-hydroxybutyrate produce a high anion gap metabolic acidosis. Major forms comprise diabetic ketoacidosis, alcoholic ketoacidosis, and starvation ketosis. Standard dipstick tests detect only acetoacetate, underestimating predominant beta-hydroxybutyrate levels. Treatment requires intravenous fluids, electrolyte repletion, and insulin to suppress ketogenesis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diabetic Ketoacidosis (DKA)",
+     "points": [
+      "Absolute insulin deficiency in type 1 diabetes",
+      "Marked hyperglycaemia (glucose > 250 mg/dL)",
+      "High circulating beta-hydroxybutyrate and acetoacetate",
+      "Mandates IV regular insulin and fluid resuscitation"
+     ]
+    },
+    "right": {
+     "title": "Alcoholic Ketoacidosis (AKA)",
+     "points": [
+      "Heavy ethanol ingestion with starvation and vomiting",
+      "Normal, mildly elevated, or low blood glucose",
+      "Markedly high NADH/NAD ratio favoring beta-hydroxybutyrate",
+      "Managed primarily with IV dextrose and saline fluids"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Systematic evaluation of unmeasured anions distinguishes organic acid accumulation from primary bicarbonate wasting disorders. Documenting a **high anion gap** metabolic acidosis (HAGMA) occurs when circulating organic acids introduce conjugate anions that replace consumed bicarbonate without elevating chloride. Classic causes are remembered by the mnemonic GOLD MARK: glycols, oxoproline, L-lactate, D-lactate, methanol, aspirin, renal failure (uremia), and ketoacidosis. Identifying the specific causative anion requires testing blood lactate, beta-hydroxybutyrate, serum creatinine, toxic alcohol levels, and calculating the serum osmolal gap to uncover volatile poisons.",
+   "say": "Systematic evaluation of unmeasured anions distinguishes organic acid accumulation from primary bicarbonate wasting disorders. Documenting a high anion gap metabolic acidosis occurs when organic acids replace consumed bicarbonate without elevating serum chloride. Classic causes include glycols, lactic acidosis, toxic alcohols, aspirin toxicity, renal uremia, and ketoacidosis. Clinicians measure lactate, beta-hydroxybutyrate, creatinine, and the serum osmolal gap to identify the offending substance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acid-base-disorders-and-anion-gap-fig1.webp",
+    "alt": "Diagnostic flowchart for high anion gap versus normal anion gap metabolic acidosis.",
+    "caption": "Diagnostic discrimination of organic anion accumulation in high anion gap metabolic acidosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Reciprocal elevation of serum chloride matching the loss of plasma bicarbonate maintains electrical neutrality without expanding unmeasured anions. Diagnosing **normal anion gap acidosis** (NAGMA), or hyperchloraemic metabolic acidosis, arises from direct bicarbonate loss through the gastrointestinal tract (profuse diarrhoea, enterocutaneous fistulae) or impaired renal hydrogen secretion (renal tubular acidosis). Iatrogenic infusion of large volumes of normal zero point nine percent saline also induces hyperchloraemic acidosis. Distinguishing gastrointestinal base loss from renal tubular acidosis relies on calculating the urine anion gap or urine osmolal gap.",
+   "say": "Reciprocal elevation of serum chloride matching the loss of plasma bicarbonate maintains electrical neutrality without expanding unmeasured anions. Diagnosing normal anion gap acidosis, or hyperchloraemic metabolic acidosis, arises from gastrointestinal bicarbonate loss or renal tubular acidosis. Infusing large volumes of normal saline also induces hyperchloraemic acidosis through chloride overload. Distinguishing gastrointestinal loss from renal tubular acidosis relies on calculating the urine anion gap.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Acidosis classification",
+     "Serum chloride level",
+     "Calculated anion gap",
+     "Underlying mechanism and causes"
+    ],
+    "rows": [
+     [
+      "High Anion Gap Acidosis (HAGMA)",
+      "Normal chloride",
+      "Elevated (> 12 mEq/L)",
+      "Fixed organic acid accumulation (lactate, ketones, toxics)"
+     ],
+     [
+      "Normal Anion Gap Acidosis (NAGMA)",
+      "Hyperchloraemic (elevated)",
+      "Normal (8 to 12 mEq/L)",
+      "Gastrointestinal HCO3- loss (diarrhoea) or Renal Tubular Acidosis"
+     ],
+     [
+      "Saline-Induced Hyperchloraemia",
+      "Markedly elevated chloride",
+      "Normal (8 to 12 mEq/L)",
+      "Infusion of 0.9% saline (154 mEq/L Cl) diluting serum bicarbonate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Detecting unmeasured, low-molecular-weight exogenous toxins relies on calculating the difference between measured and calculated serum osmolality. Measuring an elevated **osmolal gap** exceeding ten milliosmoles per kilogram provides a vital diagnostic clue for toxic alcohol ingestions, including ethylene glycol, methanol, and isopropanol. Calculated osmolality equals two times sodium plus glucose divided by eighteen, plus blood urea nitrogen divided by two point eight. Ethylene glycol causes calcium oxalate crystalluria and acute renal failure, while methanol causes retinal toxicity and blindness. Prompt treatment with fomepizole and haemodialysis prevents irreversible organ damage.",
+   "say": "Detecting unmeasured low-molecular-weight exogenous toxins relies on calculating the difference between measured and calculated serum osmolality. Measuring an elevated osmolal gap exceeding ten milliosmoles per kilogram indicates toxic alcohol ingestion, such as ethylene glycol, methanol, or isopropanol. Ethylene glycol causes calcium oxalate kidney stones and renal failure, whereas methanol causes optic papillitis and blindness. Prompt treatment with fomepizole and haemodialysis prevents lethal poisoning.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "suspect",
+      "label": "Suspected Ingestion or Unexplained High Anion Gap Acidosis"
+     },
+     {
+      "id": "osmolal",
+      "label": "Calculate Osmolal Gap = Measured Osmolality - Calculated Osmolality"
+     },
+     {
+      "id": "high_gap",
+      "label": "Osmolal Gap > 10 mOsm/kg indicates Toxic Alcohol (Methanol / Ethylene Glycol)"
+     },
+     {
+      "id": "antidote",
+      "label": "Initiate IV Fomepizole (Alcohol Dehydrogenase inhibitor) & Haemodialysis"
+     }
+    ],
+    "edges": [
+     [
+      "suspect",
+      "osmolal"
+     ],
+     [
+      "osmolal",
+      "high_gap"
+     ],
+     [
+      "high_gap",
+      "antidote"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ingestion of toxic doses of acetylsalicylic acid produces a complex, biphasic, and potentially fatal acid-base derangement. Experiencing severe **salicylate toxicity** triggers direct stimulation of the respiratory center in the medulla, causing marked hyperventilation and early respiratory alkalosis. Concurrently, intracellular uncoupling of oxidative phosphorylation stimulates anaerobic glycolysis, generating profound lactic acidosis and ketosis that superimposes a high anion gap metabolic acidosis. Tinnitus, nausea, hyperpyrexia, and altered mental status are classic findings. Therapy mandates urinary alkalinization with intravenous sodium bicarbonate to trap salicylate anions and promote renal clearance.",
+   "say": "Ingestion of toxic doses of acetylsalicylic acid produces a complex, biphasic, and potentially fatal acid-base derangement. Experiencing severe salicylate toxicity triggers direct stimulation of the medullary respiratory center, causing hyperventilation and early respiratory alkalosis. Concurrently, uncoupling of oxidative phosphorylation generates lactic acidosis and ketosis, producing high anion gap metabolic acidosis. Patients present with tinnitus, nausea, and confusion, requiring urinary alkalinization with sodium bicarbonate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early / Mild Salicylate Toxicity",
+     "points": [
+      "Direct medullary respiratory stimulation",
+      "Alveolar hyperventilation blowing off CO2",
+      "Primary respiratory alkalosis predominates",
+      "Arterial pH is typically alkalinaemic (> 7.45)"
+     ]
+    },
+    "right": {
+     "title": "Late / Severe Salicylate Toxicity",
+     "points": [
+      "Mitochondrial oxidative uncoupling occurs",
+      "Accumulation of lactic acid and ketoacids",
+      "Superimposed high anion gap metabolic acidosis",
+      "Arterial pH falls toward severe acidaemia (< 7.30)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Production and systemic absorption of an unphysiological lactate stereoisomer by colonic bacterial fermentation produces unusual neurological symptoms. Developing rare **d-lactic acidosis** occurs almost exclusively in individuals with short bowel syndrome or extensive jejunoileal bypass surgery following heavy carbohydrate intake. Unabsorbed carbohydrates undergo excessive fermentation by colonic lactobacilli, synthesizing D-lactic acid. Because standard clinical laboratory assays measure only L-lactate, standard lactate measurements return deceptively normal despite high anion gap acidosis. Patients exhibit episodic encephalopathy, slurred speech, ataxia, and confusion, resolving upon oral carbohydrate restriction and antimicrobial therapy.",
+   "say": "Production and systemic absorption of an unphysiological lactate stereoisomer by colonic bacteria produces unusual neurological symptoms. Developing rare d-lactic acidosis occurs in individuals with short bowel syndrome following heavy carbohydrate meals. Unabsorbed sugars undergo bacterial fermentation, generating D-lactic acid that standard laboratory tests cannot detect. Patients present with episodic encephalopathy, ataxia, and confusion alongside an elevated anion gap, improving with dietary carbohydrate restriction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "gut",
+      "label": "Short Bowel Syndrome: High oral carbohydrate ingestion delivered to colon"
+     },
+     {
+      "id": "flora",
+      "label": "Colonic Lactobacillus ferment sugars into D-lactic acid isomer"
+     },
+     {
+      "id": "absorb",
+      "label": "Systemic absorption of D-lactate (Not metabolized by human L-LDH)"
+     },
+     {
+      "id": "cns",
+      "label": "High Anion Gap Acidosis + Episodic Encephalopathy with normal L-lactate"
+     }
+    ],
+    "edges": [
+     [
+      "gut",
+      "flora"
+     ],
+     [
+      "flora",
+      "absorb"
+     ],
+     [
+      "absorb",
+      "cns"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Graphic nomograms charting arterial pH, carbon dioxide tension, and serum bicarbonate delineate physiological confidence bands for primary and compensatory derangements. Plotting coordinates on an **acid-base map** allows clinicians to determine instantly whether a patient exhibits a single compensated disorder or a complex mixed acid-base problem. Points falling inside the shaded confidence bands represent appropriate physiological compensation. Coordinates lying outside the confidence bands confirm mixed disorders, such as combined respiratory and metabolic acidosis in cardiopulmonary arrest, or combined metabolic acidosis and respiratory alkalosis in septic shock.",
+   "say": "Graphic nomograms charting arterial pH, carbon dioxide tension, and bicarbonate delineate physiological confidence bands for acid-base disorders. Plotting coordinates on an acid-base map allows clinicians to determine instantly whether a patient exhibits a single compensated disorder or a mixed disorder. Coordinates falling inside the shaded bands indicate appropriate physiological compensation. Values falling outside the confidence bands confirm complex mixed disturbances requiring comprehensive therapeutic resuscitation.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/phy-acid-base-map.svg",
+    "alt": "Graphic acid-base map nomogram demonstrating physiological compensation pathways and mixed disturbance areas.",
+    "caption": "Acid-base nomogram showing physiological compensation pathways and mixed disorders. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
