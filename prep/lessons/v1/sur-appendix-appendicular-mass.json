@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sur-appendix",
+ "subject": "surgery",
+ "title": "Appendicular Mass, Abscess, and Carcinoid Tumours",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "When acute perforated or gangrenous appendicitis is successfully walled off by surrounding physiological defense mechanisms, an **appendicular mass** develops. The greater omentum, terminal ileal loops, and caecal wall migrate toward the inflamed appendix and adhere densely to contain the localized purulent infection. Presenting typically three to five days after the onset of symptoms, physical examination reveals a firm, tender, ill-defined palpable mass in the right iliac fossa.",
+   "say": "An appendicular mass develops when greater omentum and small bowel loops wall off an inflamed appendix, presenting as a tender mass.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-gangrenous-appendicitis.webp",
+    "alt": "Gross specimen of gangrenous perforated appendicitis surrounded by adherent omental fat.",
+    "caption": "Gangrenous appendicitis: severe mural necrosis and perforation triggering omental walling-off and mass formation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Immediate emergency surgery for an appendicular mass is strictly avoided because inflamed, friable, edematous bowel tissues tear easily under surgical manipulation. Attempting appendicectomy through this hostile inflammatory phlegmon carries a grave hazard of iatrogenic enterotomy, fecal peritonitis, and enterocutaneous **fistula formation**. Consequently, international consensus mandates frontline non-operative conservative management.",
+   "say": "Emergency surgery for an appendicular mass is contraindicated due to high risks of bowel injury and enterocutaneous fistula formation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Immediate Surgery Hazards",
+     "points": [
+      "Friable, oedematous small bowel loops",
+      "High risk of iatrogenic enterotomy",
+      "Inability to securely close appendiceal base",
+      "Severe hazard of fecal fistula or caecal leak"
+     ]
+    },
+    "right": {
+     "title": "Conservative Therapy Rationale",
+     "points": [
+      "Infection already localized by omentum",
+      "85% to 90% resolution rate with antibiotics",
+      "Inflammatory phlegmon gradually resorbs",
+      "Permits safe elective interval surgery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The established protocol for conservative non-operative management of an appendicular mass is the **Ochsner-Sherren regimen**. Introduced in the early twentieth century, this protocol dictates complete bowel rest with intravenous crystalloid maintenance fluids, broad-spectrum intravenous antibiotics covering enteric Gram-negative and anaerobic organisms, and meticulous serial clinical monitoring with hourly pulse, temperature, and abdominal marking of mass margins.",
+   "say": "The Ochsner-Sherren regimen manages an appendicular mass with bowel rest, intravenous antibiotics, and close hemodynamic surveillance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "admit",
+      "label": "Hospital Admission & Outline Mass Margins on Abdominal Skin"
+     },
+     {
+      "id": "rest",
+      "label": "Bowel Rest, IV Crystalloids & Broad-Spectrum Antibiotics"
+     },
+     {
+      "id": "monitor",
+      "label": "Serial Monitoring: Hourly Pulse, Temperature & Mass Dimensions"
+     },
+     {
+      "id": "outcome",
+      "label": "Success: Mass Shrinks & Resolves vs Failure: Emergency Surgery"
+     }
+    ],
+    "edges": [
+     [
+      "admit",
+      "rest"
+     ],
+     [
+      "rest",
+      "monitor"
+     ],
+     [
+      "monitor",
+      "outcome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical failure of the Ochsner-Sherren regimen is signaled by rising pulse rate, spiking swinging temperatures, increasing leukocytosis, expansion of the charted mass boundaries, or onset of generalized peritonitis. These warning signs indicate that conservative localization has broken down, typically representing the maturation of an **appendicular abscess**. Emergency surgical or radiological intervention is immediately indicated.",
+   "say": "Failure of conservative therapy is marked by rising pulse, high fever, or an expanding mass, indicating abscess maturation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Monitoring Parameter",
+     "Favourable Response (Success)",
+     "Failure of Regimen (Alarm Sign)"
+    ],
+    "rows": [
+     [
+      "Pulse Rate",
+      "Gradual settling to normal range",
+      "Persistent or progressive tachycardia (> 100 bpm)"
+     ],
+     [
+      "Temperature",
+      "Lysis of fever within 48 to 72 hours",
+      "Spiking, swinging temperatures with rigors"
+     ],
+     [
+      "Mass Margins",
+      "Progressive regression and softening",
+      "Expansion beyond marked skin margins"
+     ],
+     [
+      "Abdominal Exam",
+      "Tenderness localizes and resolves",
+      "Development of generalized guarding or rigidity"
+     ],
+     [
+      "Bowel Function",
+      "Flatus passed, bowel sounds return",
+      "Persistent paralytic ileus or vomiting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Contrast-enhanced computed tomography is the gold standard imaging modality for verifying an appendicular abscess, delineating a discrete fluid collection with an enhancing peripheral wall containing gas bubbles. In stable patients, image-guided **percutaneous drainage** using an ultrasound or CT-guided pigtail catheter successfully evacuates pus and resolves sepsis without open laparotomy.",
+   "say": "Percutaneous catheter drainage under CT or ultrasound guidance evacuates an appendicular abscess, avoiding major open surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ct",
+      "label": "Contrast CT Confirms Mature Abscess Cavity with Fluid Level"
+     },
+     {
+      "id": "drain",
+      "label": "Ultrasound / CT-Guided Pigtail Catheter Percutaneous Drainage"
+     },
+     {
+      "id": "culture",
+      "label": "Pus Culture Guides Targeted Antibiotic Therapy"
+     },
+     {
+      "id": "settle",
+      "label": "Rapid Sepsis Resolution & Permanent Fistula Avoidance"
+     }
+    ],
+    "edges": [
+     [
+      "ct",
+      "drain"
+     ],
+     [
+      "drain",
+      "culture"
+     ],
+     [
+      "culture",
+      "settle"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following successful resolution of an appendicular mass or drained abscess under conservative management, elective **interval appendicectomy** can be considered after six to eight weeks. Delaying surgery allows acute inflammation and phlegmon to completely dissipate, leaving clean anatomical tissue planes that facilitate safe laparoscopic resection without risk of enterotomy. However, in patients over forty years of age, routine colonoscopy is mandatory prior to surgery to exclude caecal carcinoma.",
+   "say": "Interval appendicectomy is performed six to eight weeks later, with colonoscopy required in patients over forty to rule out cancer.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Interval Appendicectomy",
+     "points": [
+      "Executed 6 to 8 weeks after mass resolves",
+      "Prevents 10% to 20% recurrence risk",
+      "Safe laparoscopic tissue planes",
+      "Provides histological confirmation"
+     ]
+    },
+    "right": {
+     "title": "Malignancy Surveillance",
+     "points": [
+      "Mandatory in patients > 40 years",
+      "Colonoscopy or contrast CT colonography",
+      "Rules out occult caecal adenocarcinoma",
+      "Identifies appendiceal mucinous neoplasms"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most common primary neoplasm of the vermiform appendix, identified in approximately one in three hundred routine appendicectomies, is a **carcinoid of appendix**. Arising from subepithelial neuroendocrine cells, over seventy percent of appendiceal carcinoids are located at the distal tip of the organ. Because of this peripheral tip location, they rarely cause luminal obstruction and are almost universally discovered as incidental histopathological findings following surgery.",
+   "say": "Carcinoid tumours of the appendix typically arise at the tip and are found incidentally on histology following routine appendicectomy.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-laparoscopic-appendicectomy.webp",
+    "alt": "Surgical photograph showing laparoscopic appendicectomy technique with division of mesoappendix and clear base margins.",
+    "caption": "Laparoscopic appendicectomy: thorough inspection of the tip and mesoappendix for occult neuroendocrine tumours. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Surgical management of appendiceal carcinoid is governed strictly by tumour size, location, and histological margin status. For well-differentiated tumours measuring under one centimetre located at the tip with negative margins, simple appendicectomy alone is curative with a ten-year survival near one hundred percent. However, tumours exceeding two centimetres in diameter, lesions involving the base of the appendix, or those demonstrating mesoappendiceal invasion require formal oncological **right hemicolectomy**.",
+   "say": "Appendiceal carcinoids under one centimetre are cured by appendicectomy, while tumours over two centimetres require right hemicolectomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumour Feature",
+     "Standard Surgical Management",
+     "Oncological Rationale"
+    ],
+    "rows": [
+     [
+      "Tumour < 1 cm at tip",
+      "Simple appendicectomy alone",
+      "Curative; nodal metastasis risk < 1%"
+     ],
+     [
+      "Tumour 1 to 2 cm (clear margins)",
+      "Appendicectomy (right hemicolectomy if invasion)",
+      "Consider hemicolectomy if mesoappendiceal extension"
+     ],
+     [
+      "Tumour > 2 cm in diameter",
+      "Formal oncological right hemicolectomy",
+      "High rate of regional mesenteric nodal metastases (up to 30%)"
+     ],
+     [
+      "Tumour at appendiceal base",
+      "Right hemicolectomy or partial cecectomy",
+      "Ensures clear negative surgical margins"
+     ],
+     [
+      "Goblet cell adenocarcinoma",
+      "Formal oncological right hemicolectomy",
+      "Aggressive mixed histology; behaves like adenocarcinoma"
+     ]
+    ]
+   }
+  }
+ ]
+}
