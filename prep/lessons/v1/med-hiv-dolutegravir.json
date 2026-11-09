@@ -1,0 +1,212 @@
+{
+ "v": 1,
+ "module": "med-hiv",
+ "subject": "medicine",
+ "title": "Opportunistic Infections in HIV and Immune Reconstitution",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Second-generation integrase strand transfer inhibitors, headlined by **dolutegravir**, have superseded older non-nucleoside reverse transcriptase inhibitors like efavirenz in first-line antiretroviral guidelines. Dolutegravir displays superior viral suppression kinetics, an exceptionally high genetic barrier to resistance, minimal cytochrome P450 interactions, and complete freedom from the severe neuropsychiatric hallucinations and vivid dreams classic of efavirenz.",
+   "say": "Second-generation integrase inhibitors, headlined by dolutegravir, have replaced older drugs like efavirenz in first-line HIV therapy. Dolutegravir provides faster viral suppression, an exceptionally high barrier to resistance, and freedom from the neuropsychiatric side effects of efavirenz.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dolutegravir (INSTI)",
+     "points": [
+      "Second-generation integrase inhibitor",
+      "High barrier to viral resistance",
+      "Rapid viral suppression within 4 to 8 weeks",
+      "Rare neuropsychiatric effects; well tolerated"
+     ]
+    },
+    "right": {
+     "title": "Efavirenz (NNRTI)",
+     "points": [
+      "Non-nucleoside reverse transcriptase inhibitor",
+      "Low barrier to resistance (single K103N mutation)",
+      "Frequent CNS toxicity: vivid dreams, dizziness, psychosis",
+      "CYP3A4 inducer with extensive drug interactions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rapid restoration of pathogen-specific cellular immunity following initiation of antiretroviral therapy can paradoxically trigger an exuberant, exaggerated systemic inflammatory response, recognized as **immune reconstitution inflammatory syndrome** (IRIS). Occurring primarily in patients starting ART with very low CD4 counts (under fifty) and high opportunistic pathogen burdens (tuberculosis, cryptococcosis), systemic corticosteroids control inflammation.",
+   "say": "Rapid restoration of cellular immunity following antiretroviral therapy can paradoxically trigger an exaggerated inflammatory reaction, recognized as immune reconstitution inflammatory syndrome. Occurring when ART starts at very low CD4 counts with high pathogen loads, corticosteroids control inflammation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "art",
+      "label": "ART Initiation at CD4 < 50 cells/uL"
+     },
+     {
+      "id": "cd4",
+      "label": "Rapid CD4 T-Cell Reconstitution & Activation"
+     },
+     {
+      "id": "iris",
+      "label": "Hyperinflammatory IRIS Reaction Against Cryptococcus/TB"
+     }
+    ],
+    "edges": [
+     [
+      "art",
+      "cd4"
+     ],
+     [
+      "cd4",
+      "iris"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most frequent defining opportunistic pulmonary infection in patients with advanced HIV whose CD4 count drops below two-hundred cells per microlitre is **Pneumocystis pneumonia** (PCP), caused by the atypical fungus Pneumocystis jirovecii. Patients present subacutely with dry non-productive cough, progressive exertional dyspnoea, fevers, and profound exertional oxygen desaturation out of proportion to chest radiography.",
+   "say": "The most frequent defining opportunistic lung infection in patients with CD4 counts under two-hundred is Pneumocystis pneumonia, caused by Pneumocystis jirovecii. Patients present with dry cough, progressive exertional dyspnea, fever, and marked oxygen desaturation out of proportion to chest radiographs.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pneumocystis-pneumonia-fig1.webp",
+    "alt": "Chest radiograph and silver stain histology of Pneumocystis jirovecii cysts.",
+    "caption": "Bilateral perihilar ground-glass opacities and Gomori methenamine silver cysts in PCP. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Chest radiography in Pneumocystis pneumonia demonstrates classic bilateral, symmetrical perihilar diffuse interstitial ground-glass infiltrates, while high-resolution CT shows diffuse ground-glass attenuation with subpleural sparing. Sputum or bronchoalveolar lavage microscopy using Gomori methenamine silver (GMS) stain demonstrates distinctive round cup-shaped or crushed ping-pong ball fungal cysts containing dark central **nuclei**.",
+   "say": "Chest radiography in Pneumocystis pneumonia demonstrates classic bilateral perihilar ground-glass opacities. Bronchoalveolar lavage microscopy using Gomori methenamine silver stain reveals distinctive round cup-shaped fungal cysts with dark central dots.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Modality",
+     "Characteristic PCP Finding",
+     "Sensitivity / Diagnostic Role"
+    ],
+    "rows": [
+     [
+      "High-Resolution Chest CT",
+      "Bilateral symmetrical ground-glass opacities",
+      "Sensitivity > 95%; negative scan excludes active PCP"
+     ],
+     [
+      "Gomori Methenamine Silver (GMS)",
+      "Crushed ping-pong ball shaped fungal cysts",
+      "Definitive microscopic gold standard on BAL fluid"
+     ],
+     [
+      "Serum 1,3-Beta-D-Glucan",
+      "Markedly elevated (> 80 pg/mL)",
+      "Highly sensitive fungal cell wall surrogate biomarker"
+     ],
+     [
+      "Induced Sputum / BAL PCR",
+      "Detects P. jirovecii mitochondrial rRNA gene",
+      "High sensitivity; cannot differentiate colonization from disease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive first-line therapeutic drug of choice for acute Pneumocystis pneumonia is high-dose intravenous or oral trimethoprim-sulfamethoxazole (TMP-SMX, 15 to 20 mg/kg/day of trimethoprim component) for twenty-one days. In moderate to severe PCP (defined by an arterial oxygen tension under seventy mmHg or alveolar-arterial oxygen gradient of thirty-five mmHg or higher), adjunctive systemic **corticosteroids** must be co-administered to prevent respiratory failure.",
+   "say": "The first-line drug of choice for acute Pneumocystis pneumonia is high-dose trimethoprim-sulfamethoxazole for twenty-one days. In moderate to severe cases with arterial PO2 under seventy mmHg, adjunctive systemic corticosteroids must be co-administered to prevent acute respiratory failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Severity Category",
+     "Arterial Oxygenation Threshold",
+     "Standard Pharmacological Regimen"
+    ],
+    "rows": [
+     [
+      "Moderate-to-Severe PCP",
+      "PaO2 < 70 mmHg OR A-a gradient >= 35 mmHg",
+      "TMP-SMX + Oral Prednisone (40 mg bid taper over 21 days)"
+     ],
+     [
+      "Mild PCP",
+      "PaO2 >= 70 mmHg AND A-a gradient < 35 mmHg",
+      "Oral TMP-SMX (2 double-strength tablets tid for 21 days)"
+     ],
+     [
+      "Severe Sulpha Allergy",
+      "Anaphylaxis or severe Stevens-Johnson rash",
+      "IV Pentamidine isethionate OR Primaquine + Clindamycin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Universal primary prophylaxis against both Pneumocystis pneumonia and cerebral toxoplasmosis is mandatory for all HIV-infected individuals with a CD4 count falling below two-hundred cells per microlitre (or clinical history of oropharyngeal candidiasis). The standard prophylaxis regimen is oral **cotrimoxazole** (one double-strength tablet daily), discontinued only after CD4 counts sustain above two-hundred for at least three months on ART.",
+   "say": "Universal primary prophylaxis against Pneumocystis pneumonia and cerebral toxoplasmosis is mandatory for all patients with CD4 counts under two-hundred. The standard prophylaxis regimen is oral cotrimoxazole once daily, discontinued only when CD4 counts rise above two hundred for three months.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Opportunistic Pathogen",
+     "Prophylaxis CD4 Threshold",
+     "First-Line Prophylactic Medication"
+    ],
+    "rows": [
+     [
+      "Pneumocystis jirovecii",
+      "CD4 < 200 cells / uL (or thrush)",
+      "Oral Trimethoprim-sulfamethoxazole 1 DS tab daily"
+     ],
+     [
+      "Toxoplasma gondii",
+      "CD4 < 100 cells / uL AND IgG positive",
+      "Oral Trimethoprim-sulfamethoxazole 1 DS tab daily"
+     ],
+     [
+      "Mycobacterium avium complex",
+      "CD4 < 50 cells / uL (not on ART)",
+      "Oral Azithromycin 1200 mg once weekly"
+     ],
+     [
+      "Cryptococcus neoformans",
+      "CD4 < 100 cells / uL (screen CrAg)",
+      "Fluconazole preemptive therapy if CrAg positive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most frequent cause of focal neurological mass lesions in patients with advanced HIV whose CD4 count drops below one-hundred cells per microlitre is **cerebral toxoplasmosis**, caused by reactivation of the intracellular protozoan Toxoplasma gondii. Patients present with headache, confusion, fever, and focal motor deficits, exhibiting multiple ring-enhancing basal ganglia lesions on contrast-enhanced neuroimaging.",
+   "say": "The most frequent cause of focal neurological mass lesions in patients with CD4 counts under one-hundred is cerebral toxoplasmosis, caused by reactivation of Toxoplasma gondii. Patients present with headache, confusion, and focal deficits, showing multiple ring-enhancing basal ganglia lesions on neuroimaging.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/toxoplasmosis-fig1.webp",
+    "alt": "Ring-enhancing basal ganglia lesions and protozoan cysts in cerebral toxoplasmosis.",
+    "caption": "Multiple ring-enhancing lesions in the basal ganglia and corticomedullary junction in toxoplasmosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "First-line antimicrobial therapy for cerebral toxoplasmosis combines oral pyrimethamine, sulfadiazine, and folinic acid (leucovorin to prevent bone marrow suppression) for six weeks. Clinical and neuroimaging improvement should be evident within ten to fourteen days. Failure to improve prompts stereotactic brain **biopsy** to rule out primary central nervous system lymphoma, which is strongly associated with Epstein-Barr virus.",
+   "say": "First-line therapy for cerebral toxoplasmosis combines pyrimethamine, sulfadiazine, and folinic acid for six weeks. Clinical and radiological improvement should be evident within two weeks. Failure to improve prompts stereotactic brain biopsy to exclude primary CNS lymphoma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cerebral Toxoplasmosis",
+     "points": [
+      "Multiple ring-enhancing lesions in basal ganglia",
+      "Serum anti-Toxoplasma IgG positive in > 95%",
+      "CSF PCR detects Toxoplasma gondii DNA",
+      "Rapid clinical response to Pyrimethamine + Sulfadiazine"
+     ]
+    },
+    "right": {
+     "title": "Primary CNS Lymphoma (PCNSL)",
+     "points": [
+      "Typically solitary, periventricular enhancing mass",
+      "Strongly driven by Epstein-Barr virus (EBV)",
+      "CSF PCR positive for EBV DNA in > 90%",
+      "High-dose Methotrexate + whole-brain radiotherapy"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 202, 218"
+}

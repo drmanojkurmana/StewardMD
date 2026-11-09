@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "module": "med-ich",
+ "subject": "medicine",
+ "title": "Subarachnoid Haemorrhage: Saccular Aneurysms and Vasospasm",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The primary anatomical substrate responsible for eighty-five percent of spontaneous subarachnoid haemorrhages is a ruptured intracranial saccular or **berry aneurysm**. Arising predominantly at major arterial bifurcation angles within the Circle of Willis, aneurysms develop due to acquired hemodynamic shear stress superimposed on congenital defects of the arterial tunica media and internal elastic lamina.",
+   "say": "The primary anatomical substrate responsible for eighty-five percent of spontaneous subarachnoid haemorrhages is a ruptured intracranial saccular or berry aneurysm. Arising at major arterial bifurcation angles within the Circle of Willis, aneurysms develop from shear stress on defective tunica media.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cerebral-aneurysm-fig1.webp",
+    "alt": "Anatomy of Circle of Willis saccular berry aneurysms and acute rupture.",
+    "caption": "Saccular berry aneurysm anatomy at Circle of Willis bifurcation sites. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Berry aneurysms occur most frequently at three high-flow bifurcation sites: the anterior communicating artery (thirty percent), the junction of the internal carotid and posterior communicating artery (twenty-five percent), and the main bifurcation of the middle cerebral artery (twenty percent). Genetic conditions predisposing to aneurysms include autosomal dominant polycystic kidney disease and vascular **Ehlers-Danlos** syndrome.",
+   "say": "Berry aneurysms occur most frequently at three high-flow bifurcation sites: the anterior communicating artery, posterior communicating artery junction, and middle cerebral artery bifurcation. Genetic conditions predisposing to aneurysms include autosomal dominant polycystic kidney disease and Ehlers-Danlos syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Aneurysm Bifurcation Location",
+     "Frequency",
+     "Distinctive Clinical Localising Signs"
+    ],
+    "rows": [
+     [
+      "Anterior Communicating Artery (ACom)",
+      "30% to 35%",
+      "Abulia, personality change, bilateral leg weakness"
+     ],
+     [
+      "Posterior Communicating Artery (PCom)",
+      "25% to 30%",
+      "Ipsilateral CN III palsy with unreactive mydriasis"
+     ],
+     [
+      "Middle Cerebral Artery (MCA) Bifurcation",
+      "20%",
+      "Contralateral hemiparesis, aphasia, focal seizures"
+     ],
+     [
+      "Basilar Tip / Posterior Circulation",
+      "10%",
+      "Brainstem compression, ataxia, cranial neuropathies"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Initial diagnostic evaluation requires an immediate non-contrast cranial computed tomography, which exhibits near one-hundred percent sensitivity for subarachnoid blood within six hours of symptom onset. If CT is negative or equivocal beyond six hours, a lumbar puncture must be performed to inspect the cerebrospinal fluid for yellow supernatant discolouration termed **xanthochromia**.",
+   "say": "Initial diagnostic evaluation requires an immediate non-contrast cranial computed tomography, which exhibits near one-hundred percent sensitivity within six hours of symptom onset. If imaging is negative beyond six hours, lumbar puncture must be performed to detect yellow cerebrospinal fluid discolouration termed xanthochromia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ct",
+      "label": "Non-Contrast Head CT Within 6 Hours"
+     },
+     {
+      "id": "lp",
+      "label": "Lumbar Puncture at 12 Hours (If CT Negative)"
+     },
+     {
+      "id": "xanth",
+      "label": "Spectrophotometric Xanthochromia Confirms SAH"
+     }
+    ],
+    "edges": [
+     [
+      "ct",
+      "lp"
+     ],
+     [
+      "lp",
+      "xanth"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Spectrophotometric detection of xanthochromia confirms true subarachnoid haemorrhage and excludes traumatic tap artifact. Xanthochromia results from in vivo enzymatic breakdown of extravasated erythrocyte haemoglobin into yellow **bilirubin** by meningeal macrophages, a biological process requiring at least six to twelve hours from aneurysm rupture to become detectable in cerebrospinal fluid.",
+   "say": "Spectrophotometric detection of xanthochromia confirms true subarachnoid haemorrhage and excludes traumatic tap artifact. Xanthochromia results from enzymatic breakdown of extravasated erythrocyte haemoglobin into yellow bilirubin, requiring six to twelve hours to become detectable.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True Subarachnoid Haemorrhage",
+     "points": [
+      "Uniform blood across tubes 1 to 4",
+      "Centrifuged supernatant is yellow (xanthochromic)",
+      "Spectrophotometry detects oxyhaemoglobin and bilirubin",
+      "Does not clot on standing"
+     ]
+    },
+    "right": {
+     "title": "Traumatic Lumbar Puncture",
+     "points": [
+      "Progressive clearing of blood from tube 1 to tube 4",
+      "Centrifuged supernatant is completely clear and colourless",
+      "Spectrophotometry negative for bilirubin",
+      "CSF sample may form fibrin clot"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Clinical severity and prognosis at initial presentation are graded using the five-tier Hunt and Hess scale, where Grade 1 denotes an asymptomatic or mild headache with slight nuchal rigidity, and Grade 5 signifies deep coma with decerebrate posturing. Simultaneously, the **Fisher** grade on cranial CT quantifies the thickness of subarachnoid blood clot, accurately predicting the subsequent risk of delayed cerebral ischaemia.",
+   "say": "Clinical severity is graded using the Hunt and Hess scale, ranging from mild headache in Grade 1 to deep coma in Grade 5. Simultaneously, the Fisher grade on cranial CT quantifies the thickness of subarachnoid blood clot, accurately predicting the subsequent risk of delayed cerebral ischaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hunt and Hess Grade",
+     "Clinical Presentation",
+     "Fisher Grade",
+     "Subarachnoid Blood Thickness on CT"
+    ],
+    "rows": [
+     [
+      "Grade 1",
+      "Asymptomatic or mild headache, slight rigidity",
+      "Fisher 1",
+      "No blood detected on CT scan"
+     ],
+     [
+      "Grade 2",
+      "Moderate to severe headache, nuchal rigidity, CN palsy",
+      "Fisher 2",
+      "Diffuse thin blood layer < 1 mm"
+     ],
+     [
+      "Grade 3",
+      "Drowsiness, confusion, mild focal deficit",
+      "Fisher 3",
+      "Localized thick blood clot > 1 mm (Highest vasospasm risk)"
+     ],
+     [
+      "Grade 4",
+      "Stupor, moderate to severe hemiparesis",
+      "Fisher 4",
+      "Intraventricular or parenchymal extension"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A major delayed life-threatening complication occurring typically between day four and day fourteen following aneurysm rupture is cerebral **vasospasm**. Breakdown products of perivascular blood clots (primarily oxyhaemoglobin and endothelin) trigger severe, prolonged vasoconstriction of major basal cerebral arteries, reducing distal parenchymal perfusion and producing delayed ischaemic neurological deficits.",
+   "say": "A major delayed life-threatening complication occurring between day four and day fourteen following aneurysm rupture is cerebral vasospasm. Breakdown products of perivascular blood clots trigger prolonged vasoconstriction of basal cerebral arteries, producing delayed ischemic neurological deficits.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "clot",
+      "label": "Subarachnoid Erythrocyte Lysis"
+     },
+     {
+      "id": "oxy",
+      "label": "Oxyhaemoglobin & Endothelin Release"
+     },
+     {
+      "id": "vaso",
+      "label": "Arterial Vasospasm & Delayed Infarction"
+     }
+    ],
+    "edges": [
+     [
+      "clot",
+      "oxy"
+     ],
+     [
+      "oxy",
+      "vaso"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The only pharmacological therapy proven to reduce mortality and poor neurological outcomes from delayed cerebral ischaemia following subarachnoid haemorrhage is the dihydropyridine calcium channel blocker **nimodipine**. Administered orally at a dose of 60 mg every four hours for twenty-one consecutive days, nimodipine exerts neuroprotective cytoprotection and microvascular antispasmodic effects.",
+   "say": "The only pharmacological therapy proven to reduce mortality and poor outcomes from delayed cerebral ischemia following subarachnoid haemorrhage is nimodipine. Administered orally at 60 mg every four hours for twenty-one days, nimodipine exerts neuroprotective and microvascular antispasmodic effects.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Complication",
+     "Peak Incidence Timing",
+     "Primary Management Strategy"
+    ],
+    "rows": [
+     [
+      "Aneurysm Re-bleeding",
+      "First 24 hours (maximal day 1)",
+      "Emergency endovascular coiling or surgical clipping within 24 hr"
+     ],
+     [
+      "Cerebral Vasospasm",
+      "Days 4 to 14 (peak day 7-8)",
+      "Oral Nimodipine 60 mg q4h for 21 days + euvolemia + angioplasty"
+     ],
+     [
+      "Acute Hydrocephalus",
+      "First 24-48 hours",
+      "External ventricular drainage (EVD) for symptomatic ventricular dilation"
+     ],
+     [
+      "Hyponatremia",
+      "Days 3 to 10",
+      "Avoid fluid restriction; treat Cerebral Salt Wasting with hypertonic saline"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive securing of the ruptured aneurysm must be accomplished within the initial twenty-four hours to eliminate the catastrophic hazard of re-bleeding. Treatment modalities comprise minimally invasive endovascular coil embolisation or open microsurgical aneurysm neck **clipping**. High-flow arteriovenous malformations require multidisciplinary embolisation, stereotactic radiosurgery, or surgical resection.",
+   "say": "Definitive securing of the ruptured aneurysm must be accomplished within the initial twenty-four hours to eliminate the catastrophic hazard of re-bleeding. Treatment modalities comprise minimally invasive endovascular coil embolisation or open microsurgical aneurysm neck clipping.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/arteriovenous-malformation-brain-fig1.webp",
+    "alt": "Cerebral vascular angiography and arteriovenous malformation nidus.",
+    "caption": "Angiographic evaluation of cerebral vascular anomalies and vascular malformations. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 424"
+}

@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "module": "sur-infections",
+ "subject": "surgery",
+ "title": "Carbuncle, Hidradenitis Suppurativa, and Surgical Wound Classes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "While a furuncle represents a focal staphylococcal infection of a single hair follicle, a **carbuncle** is a more extensive, necrotising infection comprising an interconnected cluster of furuncles. Carbuncles typically develop in the thick, inelastic skin and subcutaneous fat of the posterior neck, upper back, or thighs, occurring almost exclusively in patients with underlying diabetes mellitus, malnutrition, or immune dysfunction. The predominant causative microorganism is Staphylococcus aureus.",
+   "say": "A carbuncle is a deep necrotising infection formed by interconnected furuncles across multiple hair follicles. They typically arise on the posterior neck of diabetic individuals, caused by Staphylococcus aureus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Furuncle (Boil)",
+     "points": [
+      "Involves a single hair follicle and sebaceous unit",
+      "Small, localized pustule with central core",
+      "Minimal systemic disturbance",
+      "Frequently resolves with warm compresses"
+     ]
+    },
+    "right": {
+     "title": "Carbuncle",
+     "points": [
+      "Cluster of interconnected multiple follicles",
+      "Broad, indurated, extremely painful mass",
+      "Fever, malaise, and prominent toxaemia",
+      "Requires cruciate incision and slough debridement"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Anatomy dictates the unique clinical presentation of a carbuncle. The dense fibrous vertical septa of the posterior neck extend from deep fascia to the dermis, preventing lateral fluid decompression and forcing pus to penetrate upward through adjacent follicular channels. This produces multiple discharging cutaneous openings displaying a characteristic **cribriform plate** appearance. Surrounding tissue exhibits brawny induration, intense erythema, and deep central necrotic slough.",
+   "say": "Vertical fibrous septa in the posterior neck trap the infection, forcing pus up through multiple follicular orifices. This produces a sieve-like cribriform appearance over an indurated, painful base.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-incision-and-drainage-abscess.webp",
+    "alt": "Incision and drainage of deep cutaneous suppurative infection.",
+    "caption": "Surgical drainage of deep subcutaneous suppuration following fascial planes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Definitive surgical therapy of an extensive carbuncle entails a generous **cruciate incision** across the entire indurated mass. Surgeons raise the four triangular skin flaps, evacuate purulent loculations, and meticulously debride the underlying greyish-yellow necrotic subcutaneous slough. The open cavity is irrigated with warm saline and packed with antiseptic ribbon gauze, allowing the wound to granulate by secondary intention while glycemic control is aggressively optimized with intravenous insulin.",
+   "say": "Management of a mature carbuncle requires a cruciate incision across the mass. Surgeons raise the skin flaps to debride necrotic slough, pack the cavity open, and strictly regulate blood glucose.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "prep",
+      "label": "Aggressive intravenous hydration and glycemic control with insulin"
+     },
+     {
+      "id": "inc",
+      "label": "Cruciate incision extending across indurated inflammatory borders"
+     },
+     {
+      "id": "deb",
+      "label": "Raise four flaps and debride all necrotic subcutaneous slough"
+     },
+     {
+      "id": "pack",
+      "label": "Antiseptic gauze packing and healing by secondary intention"
+     }
+    ],
+    "edges": [
+     [
+      "prep",
+      "inc"
+     ],
+     [
+      "inc",
+      "deb"
+     ],
+     [
+      "deb",
+      "pack"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A chronic, recurring, debilitating inflammatory disease of terminal hair follicles in apocrine gland-bearing skin is **hidradenitis suppurativa**, also known as acne inversa. Occurring primarily in the axillae, groin, perineum, and inframammary folds, the condition begins with follicular hyperkeratosis and occlusion. Follicular rupture releases keratin and bacteria into the surrounding dermis, triggering chronic sterile inflammation, painful recurrent nodules, draining sinus tracts, and extensive fibrosis.",
+   "say": "Hidradenitis suppurativa is a chronic inflammatory disorder affecting apocrine gland-bearing areas like the axilla and groin. Follicular occlusion leads to rupture, sinus tracts, and thick fibrotic scarring.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hurley Stage",
+     "Clinical Pathological Features",
+     "Primary Treatment Strategy"
+    ],
+    "rows": [
+     [
+      "Hurley Stage I",
+      "Solitary or multiple isolated abscesses without sinus tracts",
+      "Topical clindamycin, oral tetracyclines, intralesional triamcinolone"
+     ],
+     [
+      "Hurley Stage II",
+      "Recurrent abscesses with sinus tract formation and scarring",
+      "Oral rifampicin plus clindamycin, targeted surgical unroofing"
+     ],
+     [
+      "Hurley Stage III",
+      "Diffuse interconnected sinus tracts and bridging cicatrices across entire area",
+      "Biologic therapy (adalimumab) and radical wide surgical excision"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgeons handle delicate inflamed skin flaps and secure bleeding dermal vessels using fine haemostatic instruments like **Spencer Wells artery forceps**. These straight or curved instruments feature serrated jaws that grasp subcutaneous bleeders precisely before electrocautery or ligature application. Using proper haemostatic tools prevents large postoperative haematomas, which otherwise act as rich culture media for secondary bacterial proliferation.",
+   "say": "Surgeons use Spencer Wells artery forceps to grasp subcutaneous bleeding vessels. Secure haemostasis prevents wound haematomas, which would otherwise act as fertile ground for secondary infection.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-ins-spencer-wells-artery-forceps.webp",
+    "alt": "Spencer Wells haemostatic artery forceps.",
+    "caption": "Spencer Wells haemostatic forceps for precise vessel control in contaminated fields. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "To predict infection risks and guide antibiotic stewardship, surgical incisions are categorized into four standardized tiers. A **clean-contaminated wound class** represents Class II, comprising elective operative procedures in which the respiratory, alimentary, genital, or urinary tract is entered under controlled conditions without unusual contamination. Examples include elective cholecystectomy, planned gastrectomy, or elective colon resection, carrying an expected baseline infection risk of five to ten percent.",
+   "say": "Class two wounds represent clean-contaminated operations where hollow viscera are entered under controlled conditions without gross spillage, carrying a baseline infection risk of five to ten percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Wound Class",
+     "Definition and Criteria",
+     "Typical Clinical Examples",
+     "Expected SSI Rate (No Antibiotic)"
+    ],
+    "rows": [
+     [
+      "Class I: Clean",
+      "Uninfected, no inflammation, hollow viscera not entered",
+      "Elective hernia repair, thyroidectomy, lipoma excision",
+      "< 2%"
+     ],
+     [
+      "Class II: Clean-contaminated",
+      "Hollow viscera entered under controlled conditions",
+      "Elective cholecystectomy, elective appendicectomy",
+      "5% to 10%"
+     ],
+     [
+      "Class III: Contaminated",
+      "Open fresh trauma, major break in technique, gross spillage",
+      "Diverticular perforation within hours, compound fracture",
+      "15% to 20%"
+     ],
+     [
+      "Class IV: Dirty or infected",
+      "Pre-existing infection, perforated viscera with fecal peritonitis",
+      "Drainage of abscess, perforated sigmoid peritonitis",
+      "> 30%"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The cornerstone of preventing postoperative surgical site infections in Class II and III cases is timely **antibiotic prophylaxis**. To achieve bactericidal tissue levels during incision, intravenous antimicrobials must be completely infused within sixty minutes before skin incision (within one hundred and twenty minutes for vancomycin or fluoroquinolones). Prophylaxis should not extend beyond twenty-four hours postoperatively, as prolonged exposure promotes antimicrobial resistance and Clostridioides difficile colitis without reducing infection rates.",
+   "say": "Antibiotic prophylaxis must be administered within sixty minutes before surgical incision to ensure bactericidal tissue concentrations. Dosing should not exceed twenty-four hours to avoid antibiotic resistance.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "adm",
+      "label": "Administer weight-adjusted IV cephalosporin 30 to 60 minutes pre-incision"
+     },
+     {
+      "id": "red",
+      "label": "Re-dose intraoperatively if surgery exceeds 2 half-lives or blood loss > 1500 mL"
+     },
+     {
+      "id": "dis",
+      "label": "Discontinue prophylaxis strictly within 24 hours of surgical completion"
+     },
+     {
+      "id": "aud",
+      "label": "Review surveillance data to minimize emergent hospital resistance patterns"
+     }
+    ],
+    "edges": [
+     [
+      "adm",
+      "red"
+     ],
+     [
+      "red",
+      "dis"
+     ],
+     [
+      "dis",
+      "aud"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Selecting the appropriate prophylactic antimicrobial agent depends strictly on the anatomical site and typical colonizing flora. For clean operations involving prosthetic mesh or heart valves, intravenous cefazolin provides reliable staphylococcal coverage. For colorectal surgery, coverage must expand to include enteric Gram-negative bacilli and anaerobes, accomplished with **cefazolin plus metronidazole** or single-agent cefoxitin, significantly reducing postoperative pelvic and abdominal wall abscesses.",
+   "say": "Antimicrobial selection matches the flora of the operative site. Cefazolin provides staphylococcal coverage for prosthetics, whereas colorectal surgery requires metronidazole to cover anaerobes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Biliary and Gastric Surgery",
+     "points": [
+      "Target flora: E. coli, Klebsiella, Proteus",
+      "Primary agent: IV cefazolin (2 g or 3 g if > 120 kg)",
+      "Single pre-induction dose usually sufficient",
+      "Low anaerobic risk in un-obstructed biliary tract"
+     ]
+    },
+    "right": {
+     "title": "Colorectal Surgery",
+     "points": [
+      "Target flora: enteric coliforms and Bacteroides fragilis",
+      "Primary regimen: IV cefazolin plus metronidazole",
+      "Combined with oral mechanical bowel preparation",
+      "Crucial for preventing anastomotic and wound breakdown"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Sabiston 22e, Ch. 7"
+}

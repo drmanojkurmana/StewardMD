@@ -1,0 +1,229 @@
+{
+ "v": 1,
+ "module": "sur-infections",
+ "subject": "surgery",
+ "title": "Tetanus Prophylaxis, Pyomyositis, and Progressive Bacterial Gangrene",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A devastating neurological disease caused by the potent exotoxin of Clostridium tetani is **tetanus**. C. tetani is an obligate anaerobic, spore-forming Gram-positive rod ubiquitous in soil and animal feces. When spores enter devitalised, contaminated wounds, they germinate into vegetative bacilli and synthesize tetanospasmin. This potent neurotoxin enters peripheral motor nerve terminals and travels via retrograde intra-axonal transport to the spinal cord and brainstem.",
+   "say": "Tetanus is a lethal neurological disorder caused by Clostridium tetani exotoxin. Spores germinate in devitalised tissue, releasing tetanospasmin which ascends retrograde into the central nervous system.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tetanus-fig1.webp",
+    "alt": "Tetanus clinical signs and molecular toxin mechanism.",
+    "caption": "Mechanism of tetanospasmin blocking spinal inhibitory interneurons. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Within spinal inhibitory Renshaw interneurons, tetanospasmin cleaves **synaptobrevin**, a critical vesicle-associated membrane protein essential for exocytosis. This enzymatic cleavage irreversibly blocks the release of inhibitory neurotransmitters, namely gamma-aminobutyric acid and glycine. Deprived of normal inhibitory control, lower motor neurons fire uncontrollably, producing generalized muscle rigidity, painful reflex spasms, trismus, risus sardonicus, and dangerous autonomic sympathetic hyperactivity.",
+   "say": "Tetanospasmin cleaves synaptobrevin, preventing the exocytosis of inhibitory GABA and glycine. Unchecked motor neuron discharge generates violent muscle spasms and autonomic storm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tetanus (Tetanospasmin)",
+     "points": [
+      "Blocks release of inhibitory GABA and glycine",
+      "Produces spastic paralysis and intense muscular rigidity",
+      "Trismus (lockjaw) and opisthotonus posture",
+      "Severe autonomic sympathetic storms"
+     ]
+    },
+    "right": {
+     "title": "Botulism (Botulinum Toxin)",
+     "points": [
+      "Blocks release of acetylcholine at motor endplate",
+      "Produces flaccid descending symmetrical paralysis",
+      "Early cranial nerve palsies and pupillary dilation",
+      "Preserves normal sensory examination"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The delivery of surgical **tetanus prophylaxis** is determined by two clinical factors: the physical characteristics of the wound and the patient's verified immunization history. Wounds are classified as clean and minor versus contaminated, tetanus-prone wounds. Tetanus-prone wounds include injuries older than six hours, stellate or avulsive lacerations deeper than one centimetre, puncture wounds, burns, frostbite, and lesions contaminated with soil, feces, or saliva.",
+   "say": "Surgical tetanus prophylaxis depends on wound contamination and immunization history. Tetanus-prone injuries include punctures, deep lacerations, and wounds contaminated with soil or manure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vaccination History",
+     "Clean, Minor Wounds",
+     "Tetanus-Prone, Contaminated Wounds"
+    ],
+    "rows": [
+     [
+      "Uncertain or < 3 doses",
+      "Give Td/Tdap vaccine alone (no TIG)",
+      "Give Td/Tdap vaccine PLUS 250 IU TIG"
+     ],
+     [
+      ">= 3 doses, last dose < 5 years ago",
+      "No vaccine; no TIG needed",
+      "No vaccine; no TIG needed"
+     ],
+     [
+      ">= 3 doses, last dose 5 to 10 years ago",
+      "No vaccine; no TIG needed",
+      "Give Td/Tdap booster (no TIG)"
+     ],
+     [
+      ">= 3 doses, last dose > 10 years ago",
+      "Give Td/Tdap booster (no TIG)",
+      "Give Td/Tdap booster (no TIG)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When passive protection is indicated in unimmunized patients with tetanus-prone wounds, clinicians administer **tetanus immunoglobulin** at a dose of two hundred and fifty international units intramuscularly. If the injury is older than twenty-four hours or heavily contaminated, the dose is increased to five hundred units. Tetanus immunoglobulin neutralizes circulating unbound toxin but cannot reverse toxin already fixed to neural membranes, and it must be injected at an anatomical site separate from the active toxoid vaccine.",
+   "say": "Passive protection relies on tetanus immunoglobulin administered intramuscularly. It neutralizes unbound circulating toxin and must be injected at a separate site from the toxoid vaccine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "wnd",
+      "label": "Evaluate wound: identify tetanus-prone characteristics or soil dirt"
+     },
+     {
+      "id": "hist",
+      "label": "Review immunization history: determine total prior toxoid doses"
+     },
+     {
+      "id": "tig",
+      "label": "If < 3 doses: administer 250 IU human TIG in separate anatomical limb"
+     },
+     {
+      "id": "tdap",
+      "label": "Administer active Td/Tdap toxoid booster to initiate long-term immunity"
+     }
+    ],
+    "edges": [
+     [
+      "wnd",
+      "hist"
+     ],
+     [
+      "hist",
+      "tig"
+     ],
+     [
+      "tig",
+      "tdap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Proper surgical debridement of contaminated puncture wounds forms an indispensable pillar of tetanus prevention. Tetanus bacilli can germinate only in low-oxygen environments; therefore, excising all devitalised tissue, irrigating foreign particulates, and avoiding premature tight closure eliminate the necessary anaerobic conditions. Performing thorough **wound debridement and toilet** removes bacterial spores and stops exotoxin synthesis at the source.",
+   "say": "Surgical debridement of contaminated wounds eliminates the anaerobic microenvironment needed for spore germination. Removing necrotic debris and foreign material stops toxin synthesis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-wound-debridement-and-toilet.webp",
+    "alt": "Surgical wound toilet and debridement of contaminated tissue.",
+    "caption": "Surgical wound toilet and debridement to remove devitalised necrotic tissues. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A primary, subacute purulent bacterial infection of skeletal muscle occurring without an obvious external penetrating injury or adjacent osteomyelitis is known as **pyomyositis**. Historically endemic to tropical regions, it increasingly affects immunocompromised hosts or intravenous drug users in temperate climates. Over ninety percent of cases are caused by haematogenous seeding of Staphylococcus aureus, most frequently targeting the large muscle groups of the thigh, pelvis, and trunk.",
+   "say": "Pyomyositis is a primary subacute bacterial infection of skeletal muscle, predominantly caused by Staphylococcus aureus. It typically affects large muscle groups like the quadriceps and iliopsoas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Stage",
+     "Physical Signs and Presentation",
+     "Radiological and Lab Findings",
+     "Management"
+    ],
+    "rows": [
+     [
+      "Stage 1: Invasive (cramp)",
+      "Subacute muscle ache, low-grade fever, wooden induration",
+      "Normal plain radiographs, mild leukocytosis",
+      "Oral or IV anti-staphylococcal antibiotics"
+     ],
+     [
+      "Stage 2: Suppurative (abscess)",
+      "Hectic fever, severe pain, marked swelling, local fluctuance",
+      "Ultrasound/MRI confirms intramuscular fluid cavity",
+      "Percutaneous catheter or open surgical drainage"
+     ],
+     [
+      "Stage 3: Late septic",
+      "Severe septic shock, multi-organ failure, metastatic abscesses",
+      "Metastatic emboli on chest CT, rhabdomyolysis",
+      "Intensive resuscitation, radical open debridement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Contrast-enhanced computed tomography or magnetic resonance imaging readily confirms intramuscular fluid collections in Stage 2 pyomyositis. While Stage 1 can be successfully managed with intravenous antibiotics alone, the suppurative stage demands prompt catheter drainage or formal open evacuation. Intravenous therapy targeting **methicillin-resistant Staphylococcus aureus** with vancomycin, daptomycin, or linezolid should be initiated empirically until targeted antimicrobial sensitivities return from culture.",
+   "say": "Imaging confirms intramuscular abscess formation in stage two pyomyositis. Management requires prompt percutaneous or surgical drainage combined with empirical antibiotics covering MRSA.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stage 1 (Invasive Phlegmon)",
+     "points": [
+      "Dull muscular ache with woody induration",
+      "Absence of frank purulent fluid collection",
+      "Preserved muscular architecture on MRI",
+      "Curable with systemic antibiotics alone"
+     ]
+    },
+    "right": {
+     "title": "Stage 2 (Suppurative Abscess)",
+     "points": [
+      "High fever, localized swelling, and fluctuance",
+      "Intramuscular pus collection on ultrasound/MRI",
+      "Failure to respond to antibiotics alone",
+      "Requires mandatory ultrasound or open drainage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Another unique and severe soft tissue synergy is **Meleney gangrene**, historically termed progressive bacterial synergistic gangrene. Typically arising after thoracic or abdominal surgery around retention sutures or draining enterocutaneous fistulae, this indolent condition displays a pathognomonic three-zone ulcer: an outer erythematous zone, an intermediate violaceous cyanotic tender ring, and a central necrotic ulcer base. It results from synergy between microaerophilic non-haemolytic streptococci and Staphylococcus aureus, requiring wide surgical excision.",
+   "say": "Meleney gangrene is a slowly spreading ulceration caused by synergy between microaerophilic streptococci and staphylococci. It produces a three-zone ulcer that requires wide surgical excision.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "entry",
+      "label": "Abdominal wall surgery or drainage of intra-abdominal abscess"
+     },
+     {
+      "id": "synergy",
+      "label": "Synergistic proliferation of microaerophilic streptococci and S. aureus"
+     },
+     {
+      "id": "zones",
+      "label": "Development of characteristic three-zone spreading skin ulceration"
+     },
+     {
+      "id": "excision",
+      "label": "Radical surgical excision of necrotic ulcer borders with dual antibiotics"
+     }
+    ],
+    "edges": [
+     [
+      "entry",
+      "synergy"
+     ],
+     [
+      "synergy",
+      "zones"
+     ],
+     [
+      "zones",
+      "excision"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Sabiston 22e, Ch. 7"
+}

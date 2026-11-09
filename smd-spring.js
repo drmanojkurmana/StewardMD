@@ -17,7 +17,44 @@
     while (!settled(x, v, to) && n < (max || 2400)) { var r = step(x, v, to, DT, k, c); x = r.x; v = r.v; n++; if (n % 4 === 0) path.push(x); }
     return { steps: n, path: path };
   }
-  var seam = { step: step, settled: settled, simulate: simulate };
+  // Settle-flight controller: owns one in-flight release settle so a touch can catch it.
+  // touch(onElement): "ignore" (touch elsewhere: the settle finishes untouched), "hold"
+  // (touch on the settling element: frozen where it is), "none" (nothing in flight).
+  // While held, resume() re-runs the SAME settle to its original target with its original
+  // completion (exactly once); supersede() drops that completion because a drag took over
+  // and the drag's own release will start the next settle. start() supersedes any old one.
+  function makeSettle(animateFn) {
+    var flight = null, held = null;
+    function dropFlight() { if (flight) { var f = flight; flight = null; if (f.stop) try { f.stop(); } catch (e) {} } }
+    function start(o) {
+      dropFlight(); held = null;
+      var f = { to: o.to, update: o.onUpdate, done: o.onDone, k: o.stiffness, c: o.damping, current: o.from, stop: null };
+      flight = f;
+      f.stop = animateFn({ from: o.from, to: o.to, velocity: o.velocity || 0, stiffness: o.stiffness, damping: o.damping,
+        onUpdate: function (x) { f.current = x; if (f.update) f.update(x); },
+        onDone: function () { if (flight === f) flight = null; if (f.done) f.done(); } });
+      return f;
+    }
+    function touch(onElement) {
+      if (!flight) return "none";
+      if (!onElement) return "ignore";
+      held = flight; flight = null;
+      if (held.stop) try { held.stop(); } catch (e) {}
+      return "hold";
+    }
+    function resume(from) {
+      if (!held) return false;
+      var h = held;
+      start({ from: typeof from === "number" ? from : h.current, to: h.to, velocity: 0, stiffness: h.k, damping: h.c, onUpdate: h.update, onDone: h.done });
+      return true;
+    }
+    return { start: start, touch: touch, resume: resume,
+      supersede: function () { held = null; },
+      drop: function () { dropFlight(); held = null; },
+      flying: function () { return !!flight; }, holding: function () { return !!held; },
+      heldPos: function () { return held ? held.current : null; } };
+  }
+  var seam = { step: step, settled: settled, simulate: simulate, makeSettle: makeSettle };
   if (typeof module !== "undefined" && module.exports) module.exports = seam;
   if (typeof window === "undefined" || window.SMD_SPRING) return;
 
@@ -54,5 +91,5 @@
     };
   }
 
-  window.SMD_SPRING = { animate: animate, reduced: reduced, tracker: tracker, step: step };
+  window.SMD_SPRING = { animate: animate, reduced: reduced, tracker: tracker, step: step, makeSettle: makeSettle };
 })();

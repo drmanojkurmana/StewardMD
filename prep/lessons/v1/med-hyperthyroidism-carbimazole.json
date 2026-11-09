@@ -1,0 +1,211 @@
+{
+ "v": 1,
+ "module": "med-hyperthyroidism",
+ "subject": "medicine",
+ "title": "Antithyroid Drugs and Thyroid Storm",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Thionamide medications constitute the primary pharmacological therapy for suppressing excessive endogenous thyroid hormone synthesis. Administering oral **carbimazole**, a prodrug rapidly converted to active methimazole in vivo, potently inhibits thyroid peroxidase within follicular lumens. This blockade prevents iodide organification and the subsequent coupling of iodotyrosines into T3 and T4. Carbimazole represents the first-line agent worldwide due to convenient once-daily dosing, rapid restoration of euthyroidism within four to eight weeks, and lower hepatotoxicity compared to older agents.",
+   "say": "Thionamide antithyroid medications constitute the primary pharmacological therapy for suppressing excessive thyroid hormone synthesis. Administering oral carbimazole, a prodrug rapidly converted to methimazole, potently inhibits the thyroid peroxidase enzyme within follicular lumens. This blockade prevents iodide organification and the coupling of iodotyrosines into T3 and T4. Carbimazole represents the first-line antithyroid agent due to once-daily dosing, predictable efficacy, and lower liver toxicity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyperthyroidism-and-other-causes-of-fig1.webp",
+    "alt": "Biochemical mechanisms of thyroid hormone synthesis and antithyroid drug targets.",
+    "caption": "Inhibition of thyroid peroxidase by thionamide drugs in follicular hormone synthesis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A secondary thionamide provides specific clinical benefits in hyperthyroid emergencies and early gestation. Utilizing oral **propylthiouracil** (PTU) provides a unique dual mechanism of action: it inhibits thyroid peroxidase and blocks peripheral type one deiodinase, halting peripheral conversion of T4 to T3. Propylthiouracil is strictly preferred during the first trimester of pregnancy because methimazole carries teratogenic risks, including aplasia cutis. Outside early pregnancy and acute thyroid storm, PTU is restricted due to black-box warnings regarding idiosyncratic fulminant hepatic necrosis.",
+   "say": "A secondary thionamide agent provides specific clinical benefits in hyperthyroid emergencies and early gestation. Utilizing oral propylthiouracil provides a dual mechanism of action: it inhibits thyroid peroxidase and additionally blocks peripheral type one deiodinase, halting conversion of T4 to T3. Propylthiouracil is preferred during the first trimester of pregnancy because methimazole causes aplasia cutis and choanal atresia. However, its use is otherwise restricted due to risks of fulminant hepatic necrosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Carbimazole / Methimazole",
+     "points": [
+      "Inhibits thyroid peroxidase (TPO) only",
+      "Once-daily dosing; preferred first-line outside trimester 1",
+      "Lower incidence of severe drug-induced hepatotoxicity",
+      "Teratogenic in early pregnancy (aplasia cutis, choanal atresia)"
+     ]
+    },
+    "right": {
+     "title": "Propylthiouracil (PTU)",
+     "points": [
+      "Inhibits TPO AND peripheral type 1 deiodinase (T4 to T3)",
+      "Preferred in first trimester of pregnancy and thyroid storm",
+      "Requires three-times-daily dosing schedule",
+      "Carries FDA black-box warning for fulminant liver failure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Severe idiosyncratic bone marrow suppression represents the most feared haematological adverse reaction of thionamide therapy. Developing acute **agranulocytosis**, defined as an absolute neutrophil count falling below five hundred cells per microlitre, occurs in zero point two to zero point five percent of patients, typically within ninety days. Patients must be warned to stop medication immediately and check a complete blood count if they develop sudden fever or sore throat. Management requires immediate thionamide cessation, protective isolation, and broad-spectrum antibiotics.",
+   "say": "Severe idiosyncratic bone marrow suppression represents the most feared haematological adverse reaction of thionamide therapy. Developing acute agranulocytosis, defined as an absolute neutrophil count falling below five hundred cells per microlitre, occurs in zero point five percent of patients, typically within ninety days. Patients must be warned explicitly to stop medication and check blood counts if fever or sore throat occurs. Management requires thionamide cessation, broad-spectrum antibiotics, and colony-stimulating factors.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "symptom",
+      "label": "Patient on thionamide reports sudden fever or severe sore throat"
+     },
+     {
+      "id": "stop",
+      "label": "Immediate Action: STOP drug immediately + urgent STAT complete blood count"
+     },
+     {
+      "id": "mgmt",
+      "label": "Neutrophils < 500: Admit, IV broad-spectrum antibiotics, G-CSF support"
+     }
+    ],
+    "edges": [
+     [
+      "symptom",
+      "stop"
+     ],
+     [
+      "stop",
+      "mgmt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An acute, decompensated hypermetabolic crisis triggered by physiological stress in untreated or poorly controlled thyrotoxicosis carries high mortality. Clinical **thyroid storm** is precipitated by systemic infection, emergency surgery, trauma, parturition, or diabetic ketoacidosis. Characterized by severe hyperpyrexia exceeding forty degrees Celsius, profuse diaphoresis, marked tachycardia, atrial fibrillation, delirium, psychosis, and gastrointestinal dysfunction with jaundice, it is scored using Burch-Wartofsky criteria. Treatment requires immediate intensive care admission, supportive aggressive cooling, high-dose intravenous beta-blockers, high-dose propylthiouracil, potassium iodide administered one hour after thionamides, and intravenous hydrocortisone.",
+   "say": "An acute, decompensated hypermetabolic crisis triggered by physiological stress in poorly controlled thyrotoxicosis carries high mortality. Clinical thyroid storm is precipitated by infection, emergency surgery, trauma, or diabetic ketoacidosis. Characterized by severe hyperpyrexia, profuse diaphoresis, tachycardia, delirium, and jaundice, it is scored using Burch-Wartofsky criteria. Treatment requires intensive care admission, aggressive cooling, intravenous beta-blockers, propylthiouracil, potassium iodide, and hydrocortisone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Class",
+     "Specific Agent & Dose",
+     "Physiological Target in Thyroid Storm"
+    ],
+    "rows": [
+     [
+      "Beta-Blocker",
+      "Propranolol 60-80 mg q4h PO or Esmolol IV",
+      "Controls tachyarrhythmia; blocks peripheral T4-T3 conversion"
+     ],
+     [
+      "Thionamide",
+      "Propylthiouracil 200 mg q4h PO or NG",
+      "Blocks thyroid synthesis and halts peripheral T4-T3 conversion"
+     ],
+     [
+      "Inorganic Iodine",
+      "Lugol iodine (8 drops q6h) or SSKI",
+      "Wolff-Chaikoff effect: Blocks release of preformed hormone"
+     ],
+     [
+      "Glucocorticoid",
+      "Hydrocortisone 100 mg IV q8h",
+      "Prevents relative adrenal crisis; reduces peripheral conversion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Administering large exogenous loads of iodine can paradoxically provoke thyrotoxicosis in susceptible thyroid glands. Historically described as the **jod-basedow phenomenon**, this iodine-induced hyperthyroidism occurs when patients with pre-existing endemic goitre, latent Graves disease, or autonomous nodular tissue receive massive iodine exposures from iodinated radiocontrast dyes or amiodarone. Unregulated autonomous tissue utilizes the abundant substrate to produce massive quantities of thyroid hormone, escaping physiological Wolff-Chaikoff autoregulatory suppression. Thyroid radioiodine uptake is characteristically low due to substrate saturation, requiring beta-blockers and thionamide suppression until the iodine pool washes out.",
+   "say": "Administering large exogenous loads of iodine can paradoxically provoke thyrotoxicosis in susceptible thyroid glands. Historically described as the jod-basedow phenomenon, this iodine-induced hyperthyroidism occurs when patients with pre-existing goitre or autonomous nodules receive iodine exposures from contrast dyes or amiodarone. Autonomous tissue utilizes the abundant substrate to synthesize massive hormone quantities, escaping normal suppression. Thyroid radioiodine uptake is low, requiring beta-blockers and thionamide therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "substrate",
+      "label": "Iodine load: Contrast media or amiodarone exposure"
+     },
+     {
+      "id": "uptake",
+      "label": "Autonomous nodules / latent Graves: Unregulated hormone synthesis"
+     },
+     {
+      "id": "storm",
+      "label": "Jod-Basedow hyperthyroidism: Thyrotoxicosis with low radioiodine uptake"
+     }
+    ],
+    "edges": [
+     [
+      "substrate",
+      "uptake"
+     ],
+     [
+      "uptake",
+      "storm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Suppression of pituitary thyroid-stimulating hormone with normal circulating free hormone levels defines an increasingly recognized subclinical disorder. Developing **subclinical hyperthyroidism** is confirmed when serum TSH is persistently suppressed below zero point one milli-international units per litre despite normal free thyroxine and free triiodothyronine. Common causes include multinodular goitre, early Graves disease, and exogenous levothyroxine over-replacement. Longitudinal studies demonstrate that chronic TSH suppression increases the long-term risk of atrial fibrillation threefold and accelerates trabecular bone mineral loss, predisposing postmenopausal women to osteoporotic fractures and justifying treatment in high-risk individuals.",
+   "say": "Suppression of pituitary thyroid-stimulating hormone with normal circulating free hormone levels defines an increasingly recognized subclinical disorder. Developing subclinical hyperthyroidism is confirmed when serum TSH is persistently suppressed below zero point one milli-units per litre despite normal free hormones. Causes include multinodular goitre, early Graves, and levothyroxine over-replacement. Chronic TSH suppression increases the long-term risk of atrial fibrillation threefold and accelerates osteoporotic bone loss in postmenopausal women.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Subclinical Hyperthyroidism",
+     "points": [
+      "Serum TSH < 0.1 mIU/L (suppressed)",
+      "Serum free T4 and free T3 strictly within normal limits",
+      "Risk of atrial fibrillation and cardiovascular mortality",
+      "Accelerated bone mineral density loss and osteoporosis"
+     ]
+    },
+    "right": {
+     "title": "Indications for Treatment",
+     "points": [
+      "Age >= 65 years with persistent TSH < 0.1 mIU/L",
+      "Coexisting cardiac disease or previous atrial fibrillation",
+      "Postmenopausal females with osteoporosis or high fracture risk",
+      "Overt clinical symptoms of mild hypermetabolism"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Therapy with the iodine-rich antiarrhythmic drug amiodarone triggers distinct pathological derangements in thyroid function. Encountering **amiodarone-induced thyrotoxicosis** (AIT) requires classifying the disorder into two mechanistic types to direct appropriate therapy. Type one AIT is an iodine-induced hyperthyroidism occurring in pre-existing latent Graves disease or goitre, showing increased vascularity on Doppler ultrasound. In contrast, type two AIT is a destructive thyroiditis with low Doppler flow. Type one requires antithyroid thionamides, whereas type two responds to oral corticosteroids.",
+   "say": "Therapy with the iodine-rich antiarrhythmic drug amiodarone triggers complex and distinct pathological derangements in thyroid function. Encountering amiodarone-induced thyrotoxicosis requires classifying the disorder into two mechanistic types to direct appropriate therapy. Type one AIT is an iodine-induced hyperthyroidism occurring in pre-existing goitre, exhibiting increased vascularity on Doppler ultrasound. In contrast, type two AIT is a destructive thyroiditis with low Doppler flow. Type one requires thionamides, whereas type two responds to corticosteroids.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/amiodarone-induced-thyrotoxicosis-fig1.webp",
+    "alt": "Diagnostic flowchart and ultrasound Doppler differentiation between type 1 and type 2 amiodarone-induced thyrotoxicosis.",
+    "caption": "Diagnostic and ultrasound discrimination between Type 1 and Type 2 amiodarone thyrotoxicosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Safe discontinuation and long-term titration protocols prevent recurrent hyperthyroidism and drug-induced toxicities. Following twelve to eighteen months of thionamide therapy for Graves disease, documenting normal TSH, normal free T4, and undetectable TSH receptor antibodies signals disease remission. If relapse occurs, definitive radioiodine or surgical ablation is recommended. During active therapy, routine monitoring of complete blood counts and liver enzymes is reserved for symptomatic presentations, ensuring prompt identification of rare adverse effects while optimizing thyroid **hormone regulation**.",
+   "say": "Safe discontinuation and long-term titration protocols prevent recurrent hyperthyroidism and drug-induced toxicities. Following twelve to eighteen months of thionamide therapy for Graves disease, documenting normal TSH and undetectable TSH receptor antibodies signals disease remission. If relapse occurs, definitive radioiodine or surgical ablation is recommended. During therapy, monitoring blood counts and liver enzymes is reserved for symptomatic presentations, ensuring prompt identification of adverse effects while optimizing hormone regulation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "init",
+      "label": "Initial therapy: Carbimazole 15-40 mg daily until euthyroid (4-8 weeks)"
+     },
+     {
+      "id": "maint",
+      "label": "Titration: Reduce to maintenance 5-15 mg daily for 12-18 months"
+     },
+     {
+      "id": "stop",
+      "label": "Cessation: Stop drug if TRAb is negative; monitor TSH quarterly"
+     }
+    ],
+    "edges": [
+     [
+      "init",
+      "maint"
+     ],
+     [
+      "maint",
+      "stop"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

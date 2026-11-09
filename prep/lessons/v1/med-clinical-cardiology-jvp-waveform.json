@@ -1,0 +1,231 @@
+{
+ "v": 1,
+ "module": "med-clinical-cardiology",
+ "subject": "medicine",
+ "title": "Jugular venous pulse waveforms and venous bedside signs",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Examination of the internal jugular vein provides a direct window into right atrial haemodynamics. The **jugular venous pulse** reflects pressure and volume changes throughout the right cardiac chambers during each cardiac cycle. Observe the internal jugular pulsations between the sternal and clavicular heads of the sternocleidomastoid muscle at 45 degrees of bed elevation, measuring height above the sternal angle.",
+   "say": "Examining the internal jugular vein offers direct insight into right heart pressure and volume. Pulsations reflect right atrial activity through the cardiac cycle. Position the patient at forty-five degrees and identify venous waveforms between the sternocleidomastoid muscle heads, measuring elevation above the sternal angle.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-clinical-cardiology-fig1.webp",
+    "alt": "Diagram showing normal and pathological jugular venous pressure waveforms.",
+    "caption": "Jugular venous waveforms: normal wave morphology and abnormal contours. [Credit: StewardMD]",
+    "ar": 1.8349
+   }
+  },
+  {
+   "tx": "Presystolic right atrial contraction produces the positive **a wave** in the jugular venous tracing. Because atrial contraction occurs immediately before the first heart sound, the a wave precedes the carotid pulse upstroke. When right ventricular end-diastolic compliance falls, as in pulmonary hypertension, pulmonary stenosis, or tricuspid stenosis, the right atrium must contract forcefully against increased resistance, generating a prominent wave.",
+   "say": "Right atrial contraction produces the presystolic a wave in the venous waveform. This wave occurs just before the first heart sound and precedes the carotid upstroke. When the right ventricle becomes stiff or obstructed, the atrium contracts with greater force, creating a tall a wave.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Waveform component",
+     "Mechanical event",
+     "Clinical timing"
+    ],
+    "rows": [
+     [
+      "a wave",
+      "Right atrial contraction",
+      "Presystolic, before S1"
+     ],
+     [
+      "c wave",
+      "Tricuspid bulging and carotid pulse",
+      "Early systole"
+     ],
+     [
+      "x descent",
+      "Atrial relaxation and floor pull",
+      "Midsystole, during ventricular contraction"
+     ],
+     [
+      "v wave",
+      "Passive right atrial venous filling",
+      "Latesystole, just before tricuspid opening"
+     ],
+     [
+      "y descent",
+      "Rapid ventricular passive filling",
+      "Early diastole, after tricuspid opening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast, complete absence of the a wave is the diagnostic hallmark of **atrial fibrillation**. Without coordinated atrial depolarisation, presystolic atrial contraction vanishes, leaving only a systolic filling wave and rapid diastolic descent. When the atrium contracts against a closed tricuspid valve, giant cannon waves erupt. Regular cannon waves indicate nodal rhythm, whereas irregular cannon waves signal atrioventricular dissociation, differentiating ventricular tachycardia from supraventricular tachycardia.",
+   "say": "Absence of the a wave is the classic bedside sign of atrial fibrillation. Lacking organised electrical depolarisation, the atrium cannot contract. Cannon waves occur when atrial systole strikes a closed tricuspid valve. Regular cannon waves suggest junctional rhythm, while irregular cannon waves prove atrioventricular dissociation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Absent a wave",
+     "points": [
+      "Atrial fibrillation",
+      "Loss of coordinated atrial kick",
+      "Irregular venous pulse rhythm"
+     ]
+    },
+    "right": {
+     "title": "Cannon a wave",
+     "points": [
+      "AV dissociation in VT",
+      "Complete heart block",
+      "Atrium contracts on closed valve"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Venous filling into the right atrium against a closed tricuspid valve produces the **v wave**. It peaks in late ventricular systole just prior to tricuspid valve opening. In severe tricuspid regurgitation, retrograde systolic blood ejection transforms this into a giant, early systolic fusion wave known as a cv wave. Patients may demonstrate systolic earlobe pulsation, prominent neck vein expansion, and a pulsatile enlarged liver.",
+   "say": "Passive venous return into the right atrium forms the systolic v wave. In severe tricuspid regurgitation, backward blood flow creates a giant systolic cv wave. You can observe systolic neck distension, earlobe movement and hepatic pulsation on bedside physical examination.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tr",
+      "label": "Severe tricuspid regurgitation"
+     },
+     {
+      "id": "retro",
+      "label": "Retrograde RV systolic ejection"
+     },
+     {
+      "id": "cv",
+      "label": "Giant cv fusion wave"
+     },
+     {
+      "id": "signs",
+      "label": "Hepatic and earlobe pulsation"
+     }
+    ],
+    "edges": [
+     [
+      "tr",
+      "retro"
+     ],
+     [
+      "retro",
+      "cv"
+     ],
+     [
+      "cv",
+      "signs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following the v wave, opening of the tricuspid valve allows rapid passive ventricular filling, producing the downward **y descent**. In constrictive pericarditis, early diastolic ventricular suction is unimpaired, yielding an exaggerated steep and deep descent known as Friedreich sign. Conversely, in cardiac tamponade, high intrapericardial pressure prevents rapid diastolic filling, causing a blunted or absent descent.",
+   "say": "Opening of the tricuspid valve allows rapid early ventricular filling, creating the downward y descent. In constrictive pericarditis, this descent is abrupt and deep, termed Friedreich sign. In cardiac tamponade, continuous pericardial compression prevents rapid filling, leaving the descent attenuated or absent.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Constrictive pericarditis",
+     "points": [
+      "Sharp, deep y descent (Friedreich)",
+      "Rapid early diastolic filling",
+      "Prominent x and y descents"
+     ]
+    },
+    "right": {
+     "title": "Cardiac tamponade",
+     "points": [
+      "Blunted or absent y descent",
+      "Impaired early diastolic filling",
+      "Preserved prominent x descent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Normally, inspiration lowers intrathoracic pressure, increasing venous return and reducing mean jugular venous pressure. A paradoxical inspiratory elevation in venous pressure defines **Kussmaul sign**. It occurs when a non-compliant right ventricle cannot accommodate increased inspiratory venous return. While classically described in constrictive pericarditis, it is also observed in severe right ventricular infarction, restrictive cardiomyopathy, and massive pulmonary embolism.",
+   "say": "Inspiration normally lowers intrathoracic pressure and decreases jugular venous height. A paradoxical rise in venous pressure during inspiration defines Kussmaul sign. It reflects right ventricular inability to accept increased venous return. While classic for constrictive pericarditis, right ventricular infarction and restrictive cardiomyopathy also produce it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Kussmaul sign presence",
+     "Pathophysiological mechanism"
+    ],
+    "rows": [
+     [
+      "Constrictive pericarditis",
+      "Present (classic)",
+      "Rigid shell prevents ventricular expansion"
+     ],
+     [
+      "Right ventricular infarction",
+      "Present",
+      "Ischaemic non-compliant right ventricle"
+     ],
+     [
+      "Restrictive cardiomyopathy",
+      "Present",
+      "Myocardial infiltration restricts filling"
+     ],
+     [
+      "Cardiac tamponade",
+      "Usually absent",
+      "Fluid compliance cushions inspiratory swing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Firm compression over the mid-abdomen for 10 to 15 seconds assesses the **abdominojugular test**. A sustained rise of more than 3 cm in jugular venous level persisting throughout abdominal pressure indicates elevated left ventricular filling pressure. A transient rise that promptly returns to baseline during ongoing compression is normal. This bedside manoeuvre reliably detects occult left ventricular failure and elevated pulmonary capillary wedge pressure.",
+   "say": "Applying steady abdominal pressure tests the abdominojugular response. A sustained rise exceeding three centimetres throughout compression demonstrates elevated left ventricular filling pressure. A brief elevation that promptly resolves is normal. This bedside test reliably exposes occult heart failure and elevated wedge pressure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "press",
+      "label": "Firm abdominal pressure for 10s"
+     },
+     {
+      "id": "ven",
+      "label": "Increased splanchnic venous return"
+     },
+     {
+      "id": "rise",
+      "label": "Sustained JVP rise over 3 cm"
+     },
+     {
+      "id": "fail",
+      "label": "High left-sided filling pressure"
+     }
+    ],
+    "edges": [
+     [
+      "press",
+      "ven"
+     ],
+     [
+      "ven",
+      "rise"
+     ],
+     [
+      "rise",
+      "fail"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Correlating venous waveforms with bedside auscultation refines clinical accuracy. Whenever a patient demonstrates elevated venous pressure, cannon waves, or Kussmaul sign, obtain a 12-lead ECG and comprehensive **echocardiogram**. Distinguishing constrictive pericarditis from cardiac tamponade or restrictive cardiomyopathy is critical, because constriction requires pericardiectomy, while acute tamponade demands emergency pericardiocentesis.",
+   "say": "Correlate jugular venous findings with careful cardiac auscultation. When you detect abnormal venous waves, cannon waves or Kussmaul sign, order an ECG and echocardiogram immediately. Separating constriction from tamponade is vital, because tamponade requires emergency drainage while constriction calls for pericardiectomy.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-heart-conduction-cycle.webp",
+    "alt": "Cardiac anatomical diagram illustrating conduction system and chambers in relation to venous return.",
+    "caption": "Right atrial chamber relationships and cardiac conduction pathways. [Credit: StewardMD]",
+    "ar": 1.4
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

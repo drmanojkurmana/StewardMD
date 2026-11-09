@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "module": "med-cns-infections",
+ "subject": "medicine",
+ "title": "Focal CNS Infections: Japanese Encephalitis, Neurocysticercosis, and Abscess",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The most important cause of epidemic viral encephalitis in South and Southeast Asia is **Japanese encephalitis**, an arbovirus belonging to the family Flaviviridae. Transmitted through the bite of night-biting Culex tritaeniorhynchus mosquitoes breeding in rural irrigated rice paddies, pigs and ardeid wading birds serve as amplifying natural reservoirs.",
+   "say": "The most important cause of epidemic viral encephalitis in Asia is Japanese encephalitis, a flavivirus transmitted by night-biting Culex mosquitoes breeding in rice paddies. Pigs and wading birds serve as amplifying hosts.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pigs",
+      "label": "Swine / Avian Reservoir"
+     },
+     {
+      "id": "mosq",
+      "label": "Culex tritaeniorhynchus Vector"
+     },
+     {
+      "id": "cns",
+      "label": "Thalamic & Basal Ganglia Necrosis"
+     }
+    ],
+    "edges": [
+     [
+      "pigs",
+      "mosq"
+     ],
+     [
+      "mosq",
+      "cns"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pathologically, Japanese encephalitis exhibits a distinctive, selective affinity for deep gray matter nuclei, producing bilateral symmetrical necrotising haemorrhagic lesions within the thalami, substantia nigra, and basal ganglia. Patients present with acute fevers, altered sensorium, focal seizures, and a prominent mask-like parkinsonian syndrome with cogwheel rigidity and coarse **tremor**.",
+   "say": "Pathologically, Japanese encephalitis exhibits a distinctive affinity for deep gray matter nuclei, producing bilateral necrotising lesions within the thalami and basal ganglia. Patients present with high fever, seizures, and a parkinsonian syndrome with masked facies and cogwheel rigidity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Japanese Encephalitis",
+     "points": [
+      "Flavivirus; mosquito vector (Culex)",
+      "Selective predilection for bilateral thalami",
+      "Prominent extrapyramidal parkinsonian features",
+      "Diagnosed via CSF IgM capture ELISA"
+     ]
+    },
+    "right": {
+     "title": "Herpes Simplex Encephalitis",
+     "points": [
+      "DNA virus (HSV-1); retrograde neural spread",
+      "Predilection for medial temporal and frontal lobes",
+      "Prominent aphasia, olfactory aura, bizarre behaviour",
+      "Diagnosed via CSF HSV-1 PCR"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most prevalent parasitic infection of the central nervous system and leading cause of acquired adult epilepsy in the developing world is **neurocysticercosis**. Acquired by ingesting Taenia solium tapeworm eggs via contaminated food or water (fecal-oral route, not by eating undercooked pork), oncospheres hatch, cross the intestinal mucosa, and encyst throughout brain parenchyma.",
+   "say": "The most prevalent parasitic CNS infection and leading cause of acquired adult epilepsy in endemic regions is neurocysticercosis. Acquired by ingesting Taenia solium eggs through fecal-oral transmission, oncospheres cross the bowel wall and encyst within brain parenchyma.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/neurocysticercosis-fig1.webp",
+    "alt": "Neuroimaging spectrum of vesicular, colloidal, granular, and calcified neurocysticercosis.",
+    "caption": "Evolutionary radiological stages of parenchymal neurocysticercosis on MRI. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "On neuroimaging, neurocysticercosis evolves through four distinct radiological stages: vesicular (viable cyst with an eccentric mural scolex, dot-in-a-hole sign), colloidal vesicular (dying larva with surrounding host ring enhancement and oedema), granular nodular (involuting shrunken cyst), and calcified nodule. The definitive antiparasitic therapy for viable active cysts combines **albendazole** with praziquantel under oral corticosteroid cover.",
+   "say": "On neuroimaging, neurocysticercosis evolves through four stages: viable vesicular cyst with an eccentric scolex, colloidal stage with ring enhancement and edema, granular stage, and calcified nodule. Antiparasitic therapy combines albendazole and praziquantel administered with corticosteroids.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cestode-infections-fig1.webp",
+    "alt": "Magnetic resonance imaging showing eccentric scolex within cystic parenchymal lesion.",
+    "caption": "Pathognomonic eccentric mural scolex within a viable cysticercus cyst on MRI. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A focal intracerebral suppurative infection within brain parenchyma is a **brain abscess**. Arising from direct contiguous spread (from chronic suppurative otitis media, mastoiditis, or dental sinusitis) or haematogenous seeding (from cyanotic congenital heart disease or bronchiectasis), contrast-enhanced cranial CT or MRI reveals a smooth, thin-walled, uniformly enhancing ring-enhancing lesion with central restricted diffusion.",
+   "say": "A focal intracerebral suppurative infection within brain parenchyma is a brain abscess. Arising from contiguous spread from otitis media or haematogenous seeding from cyanotic heart disease, contrast MRI reveals a smooth ring-enhancing lesion with central restricted diffusion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Source / Predisposing Condition",
+     "Typical Anatomical Abscess Site",
+     "Dominant Bacterial Pathogens"
+    ],
+    "rows": [
+     [
+      "Otitis Media / Mastoiditis",
+      "Temporal lobe or Cerebellar hemisphere",
+      "Streptococcus milleri, Bacteroides, Proteus"
+     ],
+     [
+      "Paranasal Frontal Sinusitis",
+      "Frontal lobe (anterior cranial fossa)",
+      "Streptococcus anginosus group, anaerobes"
+     ],
+     [
+      "Cyanotic Congenital Heart Disease",
+      "Multiple hematogenous (middle cerebral territory)",
+      "Streptococcus viridans, Staphylococcus aureus"
+     ],
+     [
+      "Penetrating Head Trauma",
+      "Focal site along fracture or projectile track",
+      "Staphylococcus aureus, Clostridium species"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In severely immunocompromised individuals, reactivation of the human polyomavirus JC virus selectively destroys myelin-producing oligodendrocytes, causing **progressive multifocal leukoencephalopathy** (PML). Classic in advanced HIV (CD4 under one-hundred) or patients receiving natalizumab, MRI demonstrates asymmetric, confluent, non-enhancing white matter lesions lacking mass effect that spare the cortical ribbon.",
+   "say": "In severely immunocompromised individuals, reactivation of JC virus selectively destroys oligodendrocytes, causing progressive multifocal leukoencephalopathy. Seen in advanced HIV or patients receiving natalizumab, MRI demonstrates confluent non-enhancing white matter lesions lacking mass effect.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PML (JC Polyomavirus)",
+     "points": [
+      "Subcortical white matter demyelination",
+      "Absence of contrast enhancement (< 10%)",
+      "Absence of mass effect or perilesional edema",
+      "Confirmed via CSF JC virus PCR"
+     ]
+    },
+    "right": {
+     "title": "CNS Toxoplasmosis",
+     "points": [
+      "Basal ganglia and corticomedullary junction",
+      "Prominent nodular or ring enhancement",
+      "Extensive surrounding vasogenic edema",
+      "Responds to Pyrimethamine + Sulfadiazine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Infection of the central nervous system by the spirochaete Treponema pallidum defines **neurosyphilis**, which may present at any stage of syphilitic infection. Early forms manifest as acute syphilitic meningitis or meningovascular stroke in young adults, whereas late parenchymal neurosyphilis manifests decades later as general paresis (dementia, megalomania, tremors) or tabes dorsalis.",
+   "say": "Infection of the central nervous system by Treponema pallidum defines neurosyphilis, occurring at any syphilitic stage. Early forms manifest as meningitis or meningovascular stroke, whereas late parenchymal forms manifest decades later as general paresis or tabes dorsalis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "spiro",
+      "label": "Treponema pallidum CNS Invasion"
+     },
+     {
+      "id": "early",
+      "label": "Early Meningovascular Neurosyphilis"
+     },
+     {
+      "id": "late",
+      "label": "Late Parenchymal General Paresis & Tabes"
+     }
+    ],
+    "edges": [
+     [
+      "spiro",
+      "early"
+     ],
+     [
+      "early",
+      "late"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The pathognomonic pupillary abnormality observed in tabes dorsalis and neurosyphilis is the bilateral small, irregular Argyll Robertson pupil. The pupils constrict normally during accommodation for near targets but fail completely to react to bright light stimulation, classically remembered as light-near **dissociation**.",
+   "say": "The pathognomonic pupillary abnormality observed in neurosyphilis is the bilateral Argyll Robertson pupil. The pupils constrict normally during accommodation for near targets but fail completely to react to light, classically remembered as light-near dissociation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pupillary Sign",
+     "Response to Bright Light",
+     "Response to Near Accommodation",
+     "Anatomical Lesion Site"
+    ],
+    "rows": [
+     [
+      "Argyll Robertson Pupil",
+      "Absent constriction (unreactive to light)",
+      "Brisk, normal pupillary constriction",
+      "Pretectal midbrain tectum (Neurosyphilis)"
+     ],
+     [
+      "Holmes-Adie Tonic Pupil",
+      "Sluggish, delayed pupillary constriction",
+      "Slow, tonic constriction with slow re-dilation",
+      "Ciliary ganglion postganglionic parasympathetics"
+     ],
+     [
+      "Hutchinson Pupil",
+      "Fixed, widely dilated (mydriasis)",
+      "Absent accommodation reflex",
+      "Transtentorial uncal compression of CN III"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 140"
+}

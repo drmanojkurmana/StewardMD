@@ -1,0 +1,211 @@
+{
+ "v": 1,
+ "module": "med-viral-hepatitis",
+ "subject": "medicine",
+ "title": "HBV quantification, diagnostic window period, hepatitis C, and pan-genotypic DAAs",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Quantitative determination of viral genomic load by real-time polymerase chain reaction guides clinical staging and therapeutic decision-making in chronic hepatitis B. Serum **HBV DNA** quantification directly correlates with the rate of progression to cirrhosis and hepatocellular carcinoma, independent of baseline transaminase levels. International guidelines recommend initiating oral nucleotide analogue antiviral therapy when HBV DNA surpasses two thousand international units per millilitre in patients exhibiting persistent ALT elevation or moderate histological fibrosis on elastography.",
+   "say": "Quantifying viral genomic load with polymerase chain reaction guides clinical staging and treatment decisions in chronic hepatitis B. Measuring serum HBV DNA correlates directly with progression to cirrhosis and liver cancer. Antiviral treatment with nucleotide analogues is indicated when viral DNA exceeds two thousand international units per millilitre in patients with elevated transaminases.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hepatitis-bcde-serology-phases-cure-fig2.webp",
+    "alt": "Diagram illustrating HBV DNA viral load kinetics and serological marker phases in acute and chronic infection.",
+    "caption": "Quantitative viral DNA dynamics and serological markers in hepatitis B infection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A transient diagnostic serological gap occurs during the resolving phase of acute hepatitis B when routine surface antigen and antibody testing both yield negative results. During this **window period**, circulating HBsAg has cleared below detection limits, while protective neutralizing anti-HBs antibodies have not yet reached detectable concentrations. Laboratory confirmation of acute infection during this interval relies entirely on detecting serum anti-HBc IgM, which remains strongly positive and serves as the sole serological diagnostic pillar.",
+   "say": "A transient diagnostic gap occurs when surface antigen and antibody both yield negative results. During this window period, surface antigen has fallen below detection thresholds while protective surface antibody has not yet emerged. Confirming acute infection during this interval relies on detecting anti-HBc IgM, which serves as the sole positive serological marker.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hbsag_drop",
+      "label": "HBsAg falls below serological detection limit"
+     },
+     {
+      "id": "window",
+      "label": "Window Period: HBsAg(-) and Anti-HBs(-)"
+     },
+     {
+      "id": "igm_positive",
+      "label": "Anti-HBc IgM positive confirms acute infection"
+     }
+    ],
+    "edges": [
+     [
+      "hbsag_drop",
+      "window"
+     ],
+     [
+      "window",
+      "igm_positive"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Naturally occurring mutations in the precore or basal core promoter regions of the viral genome prevent translation of the e-antigen despite high viral replication. In **HBeAg-negative chronic HBV**, a G1896A point mutation introduces a premature stop codon in the precore region, halting e-antigen secretion. Despite testing HBeAg-negative and anti-HBe-positive, patients exhibit high circulating HBV DNA levels, fluctuating transaminases, and progressive hepatic fibrosis. This aggressive variant requires long-term antiviral suppression with potent agents like entecavir or tenofovir.",
+   "say": "Mutations in the precore promoter region prevent translation of e-antigen despite active viral replication. In HBeAg-negative chronic HBV, a point mutation introduces a stop codon that halts e-antigen secretion. Despite testing negative for e-antigen, patients exhibit high viral DNA and progressive liver damage. This aggressive variant requires long-term suppression with entecavir or tenofovir.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "HBeAg-Positive HBV",
+     "points": [
+      "Wild-type precore/core viral genome",
+      "HBeAg positive; anti-HBe negative",
+      "High HBV DNA levels (>10^7 IU/mL)",
+      "Younger patients, immune-tolerant phase"
+     ]
+    },
+    "right": {
+     "title": "HBeAg-Negative HBV",
+     "points": [
+      "Precore G1896A stop codon mutant",
+      "HBeAg negative; anti-HBe positive",
+      "Fluctuating HBV DNA and transaminases",
+      "Older patients, progressive fibrosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Transmission of an enveloped, positive-sense single-stranded RNA flavivirus primarily through percutaneous blood exposure establishes high rates of permanent persistence. Approximately seventy-five to eighty-five percent of individuals exposed to **hepatitis C** fail to clear the virus spontaneously, developing insidious chronic hepatitis. The infection remains largely asymptomatic for decades, silently driving hepatic fibrosis toward cirrhosis and end-stage complications. Screening begins with enzyme immunoassay for anti-HCV antibodies, but confirmation requires quantitative viral RNA testing.",
+   "say": "Transmission of an enveloped RNA flavivirus through blood exposure leads to high rates of chronic persistence. Up to eighty-five percent of individuals exposed to hepatitis C develop chronic infection. The condition remains asymptomatic for decades, silently driving fibrosis toward cirrhosis. Screening begins with anti-HCV antibodies, but definitive diagnosis requires quantitative RNA testing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "exposure",
+      "label": "Percutaneous blood exposure to HCV"
+     },
+     {
+      "id": "acute",
+      "label": "Acute infection (mostly asymptomatic)"
+     },
+     {
+      "id": "chronic",
+      "label": "75-85% develop chronic hepatitis C"
+     }
+    ],
+    "edges": [
+     [
+      "exposure",
+      "acute"
+     ],
+     [
+      "acute",
+      "chronic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Differentiating active, ongoing viraemia from past spontaneously cleared or successfully treated infection requires molecular detection of viral genomes. Measuring serum **HCV RNA** by sensitive real-time polymerase chain reaction confirms active viral replication following a reactive screening antibody test. Because anti-HCV antibodies persist indefinitely even after viral cure, antibody assays cannot assess treatment response or detect re-infection. Quantitative RNA measurement provides the essential baseline metric before initiating antiviral therapy and monitors viral eradication.",
+   "say": "Distinguishing active infection from resolved disease requires molecular detection of viral genomes. Measuring serum HCV RNA by polymerase chain reaction confirms active viraemia following a reactive screening antibody test. Because antibodies persist indefinitely, they cannot assess treatment success. Measuring viral RNA establishes the baseline before therapy and monitors clearance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Active Hepatitis C",
+     "points": [
+      "Anti-HCV antibody positive",
+      "Serum HCV RNA detectable by PCR",
+      "Requires direct-acting antiviral therapy",
+      "Undergoing ongoing hepatic necroinflammation"
+     ]
+    },
+    "right": {
+     "title": "Resolved / Cleared HCV",
+     "points": [
+      "Anti-HCV antibody positive for life",
+      "Serum HCV RNA undetectable by PCR",
+      "No antiviral treatment required",
+      "Represents spontaneous or therapeutic cure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Development of orally administered small-molecule inhibitors targeting non-structural viral proteins revolutionized hepatology by transforming chronic infection into a curable disease. Modern **direct-acting antivirals** combine agents with complementary mechanisms: NS3/4A protease inhibitors (glecaprevir), NS5A replication complex inhibitors (velpatasvir, pibrentasvir), and NS5B RNA-dependent RNA polymerase inhibitors (sofosbuvir). Standard pan-genotypic regimens taken once daily for eight to twelve weeks achieve cure rates exceeding ninety-five percent with minimal adverse effects.",
+   "say": "Oral small-molecule inhibitors targeting viral enzymes revolutionized hepatology by making chronic hepatitis C curable. Modern direct-acting antivirals combine protease inhibitors, replication complex blockers, and polymerase inhibitors like sofosbuvir. Standard pan-genotypic regimens taken daily for eight to twelve weeks achieve cure rates exceeding ninety-five percent with excellent tolerability.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antivirals-herpes-hepatitis-flu-covid-fig1.webp",
+    "alt": "Diagram of direct-acting antiviral molecular targets including NS3/4A protease, NS5A, and NS5B polymerase.",
+    "caption": "Molecular targets of direct-acting antivirals in the viral replication cycle. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Definitive virological cure is established when serum viral RNA remains undetectable following completion of antimicrobial therapy. Achieving a **sustained virological response** (SVR12) requires undetectable serum HCV RNA twelve weeks after finishing direct-acting antiviral therapy. Attaining SVR12 is equivalent to permanent viral eradication, halting hepatic fibrosis progression, reducing portal pressures, and slashing liver-related mortality by over seventy percent. Late viral relapse occurs in less than one percent of patients.",
+   "say": "Permanent virological cure is confirmed when viral RNA remains undetectable after completing therapy. Achieving a sustained virological response requires undetectable HCV RNA twelve weeks post-treatment. Attaining this endpoint halts fibrosis progression, lowers portal pressures, and reduces liver mortality by seventy percent. Relapse after twelve weeks occurs in under one percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antiviral drug class",
+     "Representative agents",
+     "Primary molecular target"
+    ],
+    "rows": [
+     [
+      "NS5B Polymerase inhibitor",
+      "Sofosbuvir",
+      "Viral RNA-dependent RNA polymerase"
+     ],
+     [
+      "NS5A Complex inhibitor",
+      "Velpatasvir, Ledipasvir, Pibrentasvir",
+      "Viral replication complex assembly"
+     ],
+     [
+      "NS3/4A Protease inhibitor",
+      "Glecaprevir, Voxilaprevir",
+      "Viral polyprotein post-translational cleavage"
+     ],
+     [
+      "Pan-genotypic combination",
+      "Sofosbuvir + Velpatasvir (12 weeks)",
+      "All HCV genotypes 1 through 6"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Successful viral clearance does not eliminate the requirement for long-term malignancy screening in patients with pre-existing cirrhosis. Initiating routine **cirrhosis HCC screening** mandates transabdominal ultrasonography and serum alpha-fetoprotein measurement every six months indefinitely for all patients with advanced bridging fibrosis (F3) or cirrhosis (F4). Although viral eradication markedly reduces the annual incidence of hepatocellular carcinoma, persistent architectural distortion and genetic mutations in regenerated cirrhotic nodules maintain residual carcinogenic risk.",
+   "say": "Viral clearance does not eliminate the need for ongoing cancer surveillance in patients with pre-existing cirrhosis. Initiating cirrhosis screening mandates abdominal ultrasound and alpha-fetoprotein measurement every six months indefinitely for patients with advanced fibrosis. Although viral eradication reduces cancer rates, architectural distortion carries a residual risk.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cure",
+      "label": "Patient achieves SVR12 with direct-acting antivirals"
+     },
+     {
+      "id": "staging",
+      "label": "Evaluate pre-treatment fibrosis stage (F3 or F4)"
+     },
+     {
+      "id": "surveillance",
+      "label": "Lifelong 6-monthly ultrasound & AFP surveillance"
+     }
+    ],
+    "edges": [
+     [
+      "cure",
+      "staging"
+     ],
+     [
+      "staging",
+      "surveillance"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "module": "med-cad-stable",
+ "subject": "medicine",
+ "title": "Dyslipidaemia, statin therapy and cardiovascular risk scores",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Atherosclerotic cardiovascular disease prevention centres on lowering atherogenic lipoproteins. Competitive inhibition of HMG-CoA reductase by **statins** depletes intracellular hepatic cholesterol, upregulating cell-surface LDL receptors and accelerating clearance of circulating atherogenic particles. High-intensity regimens using atorvastatin 40 to 80 mg or rosuvastatin 20 to 40 mg lower LDL cholesterol by 50% or more, stabilizing fibrous caps and reducing cardiovascular mortality.",
+   "say": "Cardiovascular risk reduction centres on aggressive cholesterol lowering. Statins inhibit the rate limiting enzyme in cholesterol synthesis, prompting liver cells to increase surface LDL receptors. High intensity regimens using atorvastatin or rosuvastatin reduce LDL cholesterol by fifty percent or more and stabilize plaque.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cholesterol-biosynthesis-and-statins-fig1.webp",
+    "alt": "Biochemical diagram of hepatocyte cholesterol biosynthesis pathway from HMG-CoA to cholesterol, showing statin inhibition and LDL receptor mediated clearance.",
+    "caption": "Hepatic cholesterol synthesis, statin HMG-CoA reductase inhibition and LDL clearance. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The central primary target in both primary and secondary cardiovascular prevention is **LDL cholesterol**. Circulating apoB-containing low-density lipoprotein particles penetrate the damaged endothelial barrier, undergo oxidation, and trigger foam cell formation within the arterial intima. Current international guidelines recommend an LDL target below 55 mg/dL (1.4 mmol/L) for patients at very high cardiovascular risk, such as those with established coronary disease.",
+   "say": "Low density lipoprotein cholesterol represents the primary target in cardiovascular prevention. Circulating particles enter the arterial wall, undergo oxidation and initiate foam cell recruitment. International guidelines recommend an LDL target below fifty-five milligrams per decilitre for patients with established coronary disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ldl",
+      "label": "Circulating apoB LDL particles"
+     },
+     {
+      "id": "sub",
+      "label": "Subendothelial retention and oxidation"
+     },
+     {
+      "id": "mac",
+      "label": "Macrophage uptake and foam cells"
+     },
+     {
+      "id": "core",
+      "label": "Necrotic lipid core and fibrous cap"
+     },
+     {
+      "id": "rupt",
+      "label": "Plaque rupture and thrombosis"
+     }
+    ],
+    "edges": [
+     [
+      "ldl",
+      "sub"
+     ],
+     [
+      "sub",
+      "mac"
+     ],
+     [
+      "mac",
+      "core"
+     ],
+     [
+      "core",
+      "rupt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An autosomal dominant disorder characterized by markedly elevated LDL from birth is **familial hypercholesterolaemia**. Mutations most commonly disrupt the LDL receptor gene, though mutations in APOB and gain-of-function mutations in PCSK9 produce identical phenotypes. Heterozygotes exhibit LDL levels exceeding 190 mg/dL, developing premature coronary artery disease in their thirties and forties, whereas rare homozygotes present with severe atherosclerosis in early childhood.",
+   "say": "Markedly elevated LDL cholesterol from birth characterizes familial hypercholesterolaemia. Autosomal dominant mutations in the LDL receptor gene prevent normal hepatic clearance. Heterozygous individuals carry cholesterol levels over one hundred and ninety, developing coronary artery disease prematurely in young adulthood.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/familial-hypercholesterolemia-fig1.webp",
+    "alt": "Hepatocyte LDL receptor pathway with drug actions beside tendon xanthomas, corneal arcus and atherosclerotic heart.",
+    "caption": "Familial hypercholesterolaemia receptor pathway, cutaneous xanthomas and coronary atheroma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Physical examination in severe chronic dyslipidaemia reveals cutaneous lipid deposits known as **xanthoma**. Tendon xanthomas, specifically palpable nodular deposits in the Achilles tendon and extensor finger tendons, are pathognomonic for familial hypercholesterolaemia. Xanthelasma palpebrarum around the eyelids and arcus senilis in patients younger than 45 years strongly suggest familial lipid clearance disorders and demand full fasting lipid profiling.",
+   "say": "Physical examination in dyslipidaemia often reveals cutaneous lipid deposits called xanthomas. Nodular Achilles tendon xanthomas are pathognomonic for familial hypercholesterolaemia. Xanthelasma around the eyelids and corneal arcus in young patients warrant an immediate fasting lipid profile.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physical sign",
+     "Anatomical location",
+     "Associated lipid disorder"
+    ],
+    "rows": [
+     [
+      "Tendon xanthoma",
+      "Achilles tendon, extensor tendons of hand",
+      "Familial hypercholesterolaemia (Type IIa)"
+     ],
+     [
+      "Tuberous xanthoma",
+      "Elbows and knees",
+      "Dysbetalipoproteinaemia (Type III)"
+     ],
+     [
+      "Eruptive xanthoma",
+      "Buttocks, back, extensor surfaces",
+      "Severe hypertriglyceridaemia (Type I/V)"
+     ],
+     [
+      "Planar palmar xanthoma",
+      "Palmar creases",
+      "Type III hyperlipoproteinaemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When statin monotherapy fails to achieve target LDL levels, oral administration of **ezetimibe** provides valuable synergistic reduction. Ezetimibe selectively inhibits the Niemann-Pick C1-Like 1 transporter in the jejunal brush border, blocking dietary and biliary cholesterol absorption. Added to a statin, ezetimibe provides an incremental 15% to 20% reduction in LDL cholesterol and reduces cardiovascular events without increasing statin-associated muscle symptoms.",
+   "say": "When statin monotherapy proves insufficient, ezetimibe provides effective add on therapy. Ezetimibe blocks the intestinal cholesterol transporter, reducing dietary absorption. Combined with a statin, it delivers an additional fifteen to twenty percent LDL reduction and improves cardiovascular outcomes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Statin mechanism",
+     "points": [
+      "Inhibits hepatic HMG-CoA reductase",
+      "Reduces hepatic cholesterol synthesis",
+      "Upregulates hepatic LDL receptors"
+     ]
+    },
+    "right": {
+     "title": "Ezetimibe mechanism",
+     "points": [
+      "Inhibits intestinal NPC1L1 transporter",
+      "Blocks gut cholesterol absorption",
+      "Additive 15-20% LDL reduction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Monoclonal antibodies targeting proprotein convertase subtilisin/kexin type 9 are known as **PCSK9 inhibitors**. Agents such as evolocumab and alirocumab prevent PCSK9 from binding to LDL receptors, halting receptor lysosomal degradation and recycling receptors back to the hepatocyte surface. Biweekly subcutaneous injection lowers circulating LDL cholesterol by an impressive 60%, delivering substantial event reduction in patients with familial hypercholesterolaemia or statin intolerance.",
+   "say": "Monoclonal antibodies inhibiting PCSK9 provide powerful cholesterol lowering. Medications such as evolocumab prevent receptor degradation, recycling LDL receptors back to the liver cell membrane. Subcutaneous administration reduces LDL cholesterol by sixty percent, proving invaluable in high risk patients.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-cad-stable-fig1.webp",
+    "alt": "Diagram illustrating hepatic LDL receptor recycling and the mechanism of PCSK9 inhibition.",
+    "caption": "Hepatic LDL receptor recycling and PCSK9 targeted monoclonal therapy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Multivariable assessment of 10-year fatal and non-fatal atherosclerotic risk utilizes validated **cardiovascular risk scores**. Tools such as the Framingham Risk Score, ACC/AHA Pooled Cohort Equations, and European SCORE2 incorporate age, sex, smoking, systolic blood pressure, total cholesterol, and HDL cholesterol. Identifying individuals with a 10-year risk exceeding 7.5% to 10% guides clinical decisions to initiate primary prevention statin therapy.",
+   "say": "Predicting ten year cardiovascular risk relies on validated risk calculation tools. Algorithms such as the Framingham Score and Pooled Cohort Equations integrate age, blood pressure, smoking and lipid levels. Estimating risk guides decisions regarding when to start primary preventive statin therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk calculator",
+     "Target population",
+     "Key risk variables"
+    ],
+    "rows": [
+     [
+      "Pooled Cohort Equation (PCE)",
+      "US guidelines, primary prevention",
+      "Age, sex, race, BP, cholesterol, diabetes, smoking"
+     ],
+     [
+      "SCORE2 / SCORE2-OP",
+      "European guidelines, 40-89 years",
+      "Non-HDL cholesterol, SBP, age, smoking, region"
+     ],
+     [
+      "Framingham Risk Score",
+      "General adult population",
+      "Age, total cholesterol, HDL, SBP, smoking"
+     ],
+     [
+      "QRISK3",
+      "UK primary care population",
+      "Adds chronic kidney disease, rheumatoid arthritis, BMI"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Routine screening and risk scoring should trigger aggressive lifestyle and pharmacological therapy. For every patient with documented coronary atherosclerosis, prescribe high-intensity statin therapy, titrate to strict LDL goals, and ensure regular follow-up with **lipid profile** monitoring. When targets remain unmet, promptly combine statins with ezetimibe or PCSK9 inhibitors to arrest plaque progression and optimize long-term cardiovascular survival.",
+   "say": "Cardiovascular screening should trigger structured preventive therapy. For every patient with coronary artery disease, initiate high intensity statin therapy and verify LDL targets with regular lipid panels. If targets are missed, add ezetimibe or PCSK9 inhibitors to stop plaque progression.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "strat",
+      "label": "Calculate 10-year cardiovascular risk"
+     },
+     {
+      "id": "stat",
+      "label": "Initiate high-intensity statin"
+     },
+     {
+      "id": "eval",
+      "label": "Check lipid panel at 8-12 weeks"
+     },
+     {
+      "id": "comb",
+      "label": "If LDL >= 55 mg/dL: add ezetimibe / PCSK9i"
+     }
+    ],
+    "edges": [
+     [
+      "strat",
+      "stat"
+     ],
+     [
+      "stat",
+      "eval"
+     ],
+     [
+      "eval",
+      "comb"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

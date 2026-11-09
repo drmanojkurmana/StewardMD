@@ -67,7 +67,7 @@ try {
   ok(tabsBox.doc <= 390, 'no horizontal page scroll at 390 px: ' + JSON.stringify(tabsBox));
   ok(await ev(`[...document.querySelectorAll("#homeV2 .rnav-htab")].every(b=>b.offsetHeight>=44)`), "tabs are 44 px tall (offsetHeight: Home may still be scaling in)");
   ok(await ev(`(()=>{const b=document.querySelector('#homeV2 .rnav-tools-head .rnav-alltools');return !!b&&b.offsetHeight>=44&&/All tools/.test(b.innerText)})()`), 'All tools sits beside the heading, 44 px');
-  ok(await ev(`document.fonts.ready.then(()=>1)`) && await until(`document.fonts.check("700 15px 'Atkinson Hyperlegible Next'") && getComputedStyle(document.querySelector('#homeV2 .rnav-htab')).fontFamily.indexOf('Atkinson')===1`), 'Home type is Atkinson Hyperlegible Next, loaded');
+  ok(await ev(`document.fonts.ready.then(()=>1)`) && await until(`document.fonts.check("700 15px 'Manrope'") && getComputedStyle(document.querySelector('#homeV2 .rnav-htab')).fontFamily.indexOf('Manrope')===0`), 'Home type is Manrope, loaded');
   ok(await ev(`!document.querySelector('#rnavTry .rnav-try-k') && /^Try /.test(document.querySelector('#rnavTry .rnav-try-t').innerText)`), 'Try card: no eyebrow label; the heading is the action');
   await click('#homeV2 .rnav-tools-head .rnav-alltools');
   ok(await until(`!!document.querySelector('#hvSheet.on .hv-at-list')`), 'All tools button opens the All tools sheet');

@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sur-shock-transfusion",
+ "subject": "surgery",
+ "title": "Massive Transfusion Protocol, Damage Control Resuscitation, and the Lethal Triad",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "In trauma resuscitation, replacement of ten or more units of packed red blood cells within twenty-four hours, or four or more units within one hour, defines a **massive transfusion protocol**. Early activation of this protocol is lifesaving in catastrophic exsanguination from pelvic fractures, major vascular disruption, or deep liver lacerations. The overarching goal is the prompt restoration of circulating blood volume, oxygen-carrying capacity, and functional coagulation factors.",
+   "say": "A massive transfusion protocol is triggered when patients require ten or more units of red blood cells in twenty-four hours. Early activation restores circulating volume, oxygen delivery, and clotting factors.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "trig",
+      "label": "Massive haemorrhage trigger: shock index > 1 or positive ABC score"
+     },
+     {
+      "id": "act",
+      "label": "Activate MTP: blood bank prepares balanced 1:1:1 component packs"
+     },
+     {
+      "id": "inf",
+      "label": "Rapid infusion via Belmont or Level 1 warmer (red cells, plasma, platelets)"
+     },
+     {
+      "id": "stop",
+      "label": "Deactivate MTP upon surgical haemostasis and normalized lactate"
+     }
+    ],
+    "edges": [
+     [
+      "trig",
+      "act"
+     ],
+     [
+      "act",
+      "inf"
+     ],
+     [
+      "inf",
+      "stop"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Historically, trauma patients received large infusions of clear crystalloids and red blood cells alone, producing catastrophic dilutional coagulopathy. Modern practice employs **damage control resuscitation**, which severely limits crystalloid administration and institutes immediate balanced component therapy. Blood products are transfused in an empirical one-to-one-to-one ratio of packed red blood cells, fresh frozen plasma, and pooled platelets, closely mimicking the physiological composition of whole blood.",
+   "say": "Damage control resuscitation restricts crystalloid infusion and prioritizes balanced blood products. Transfusing red cells, plasma, and platelets in a one-to-one-to-one ratio prevents dilutional coagulopathy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Blood Product",
+     "Unit Volume",
+     "Therapeutic Content Provided",
+     "Resuscitation Target"
+    ],
+    "rows": [
+     [
+      "Packed red blood cells",
+      "~ 250 to 300 mL",
+      "Erythrocytes (haematocrit ~ 60%)",
+      "Maintain haemoglobin 7 to 9 g/dL"
+     ],
+     [
+      "Fresh frozen plasma",
+      "~ 250 mL",
+      "All soluble clotting factors and fibrinogen",
+      "Maintain INR < 1.5, PT/aPTT < 1.5x control"
+     ],
+     [
+      "Platelet concentrate (pool)",
+      "~ 300 mL",
+      ">= 3 x 10^11 platelets",
+      "Maintain platelet count > 50 x 10^9/L (or > 100 in TBI)"
+     ],
+     [
+      "Cryoprecipitate (10 units)",
+      "~ 150 mL",
+      "High-concentration fibrinogen and Factor VIII",
+      "Maintain serum fibrinogen > 1.5 to 2.0 g/L"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The primary existential threat in severe trauma haemorrhage is the self-reinforcing vicious cycle known as the **lethal triad**. This metabolic collapse consists of hypothermia, severe metabolic acidosis, and trauma-induced coagulopathy. Each component dramatically exacerbates the others: hypothermia impairs clotting enzyme kinetics, acidosis shuts down thrombin generation, and progressive coagulopathy leads to unchecked haemorrhage that drives worsening hypoperfusion, creating a deadly downward spiral.",
+   "say": "The lethal triad comprises hypothermia, acidosis, and coagulopathy. Each factor worsens the others in a lethal cycle: hypothermia blunts clotting enzymes, acidosis stops thrombin, and bleeding accelerates.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/sur-lethal-triad.svg",
+    "alt": "The trauma lethal triad diagram: hypothermia, acidosis, coagulopathy.",
+    "caption": "The lethal triad of trauma: hypothermia, metabolic acidosis, and coagulopathy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When core body temperature falls below thirty-five degrees Celsius, **hypothermia in trauma** severely impairs the enzymatic activity of the clotting cascade. The assembly of factor ten and prothrombinase complexes on activated platelet surfaces slows dramatically. Because standard laboratory coagulation tests are warmed to thirty-seven degrees Celsius before processing, routine coagulograms falsely underestimate the profound in vivo coagulopathy present in hypothermic trauma patients.",
+   "say": "Hypothermia below thirty-five degrees blunts coagulation enzyme kinetics. Because laboratory tests are warmed to thirty-seven degrees, routine tests underestimate the severe in vivo clotting defect.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hypothermia Effects (< 35 C)",
+     "points": [
+      "Reduces clotting factor enzyme kinetics",
+      "Impaired platelet activation and adhesion",
+      "Increases cardiac arrhythmogenic risk",
+      "Must be treated with active warm air and fluid warmers"
+     ]
+    },
+    "right": {
+     "title": "Metabolic Acidosis Effects (pH < 7.20)",
+     "points": [
+      "Dramatically reduces thrombin generation",
+      "Depresses myocardial contractility",
+      "Blunts vascular response to catecholamines",
+      "Reversed by restoring perfusion, not bicarbonate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Profound systemic hypoperfusion leads to tissue hypoxia and anaerobic glycolysis, driving lactic **metabolic acidosis**. When arterial pH drops below seven point two zero, the activity of coagulation factor complexes decreases by more than fifty percent, and thrombin production becomes severely impaired. Acidosis also blunts peripheral vascular responsiveness to endogenous and exogenous vasopressors, exacerbating circulatory collapse until cellular oxygen delivery is restored.",
+   "say": "Tissue hypoxia drives anaerobic glycolysis and lactic acidosis. Arterial pH below seven point two zero halves clotting factor activity and blunts cardiovascular responsiveness to vasopressors.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "perf",
+      "label": "Massive blood loss produces profound cellular hypoperfusion"
+     },
+     {
+      "id": "lact",
+      "label": "Anaerobic glycolysis generates systemic lactic acidosis (pH < 7.20)"
+     },
+     {
+      "id": "clot",
+      "label": "Acidosis directly halves coagulation factor complex activity"
+     },
+     {
+      "id": "exsang",
+      "label": "Unchecked microvascular bleeding drives worsening hypoperfusion"
+     }
+    ],
+    "edges": [
+     [
+      "perf",
+      "lact"
+     ],
+     [
+      "lact",
+      "clot"
+     ],
+     [
+      "clot",
+      "exsang"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Early pharmacological intervention with **tranexamic acid** is a proven survival-enhancing component of modern massive transfusion. As demonstrated in the landmark CRASH-2 trial, this synthetic lysine analogue competitively inhibits plasminogen activation, blunting premature clot breakdown. Patients in haemorrhagic shock should receive an intravenous loading dose of one gram over ten minutes within three hours of injury, followed by one gram infused over eight hours.",
+   "say": "Tranexamic acid inhibits plasminogen activation, preventing premature clot breakdown. Administering an initial one gram dose within three hours of injury significantly reduces trauma mortality.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Dosing Regimen",
+     "Timing of Administration",
+     "Therapeutic Mechanism",
+     "Clinical Mortality Impact"
+    ],
+    "rows": [
+     [
+      "1 g IV over 10 minutes (bolus)",
+      "Within 3 hours of trauma injury",
+      "Inhibits plasminogen activation",
+      "Reduces all-cause mortality by 15%"
+     ],
+     [
+      "1 g IV over 8 hours (infusion)",
+      "Follows initial loading dose",
+      "Maintains fibrin clot stabilization",
+      "Prevents hyperfibrinolytic collapse"
+     ],
+     [
+      "Late administration (> 3 hours)",
+      "Given after 3 hours post-injury",
+      "Increases thromboembolic risk",
+      "Harmful; associated with increased mortality"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Massive transfusion introduces significant biochemical complications, prominently including **hypocalcaemia**. Citrate preservative present within storage bags chelates ionized calcium, which is an essential cofactor in ten biochemical steps of the clotting cascade. Infusing multiple blood units rapidly drops ionized calcium, precipitating hypotension, cardiac arrhythmias, and impaired coagulation. Clinicians must administer one gram of intravenous calcium chloride for every four units of transfused red blood cells.",
+   "say": "Citrate in stored blood units chelates ionized calcium, impairing coagulation and cardiac contractility. Resuscitation teams must administer intravenous calcium chloride for every four units of transfused blood.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Citrate Toxicity and Hypocalcaemia",
+     "points": [
+      "Citrate preservative binds ionized serum calcium",
+      "Impairs factor complexes and cardiac contractility",
+      "Prolongs QT interval and triggers arrhythmias",
+      "Administer 1 g calcium chloride per 4 units PRBC"
+     ]
+    },
+    "right": {
+     "title": "Hyperkalaemia from Stored Blood",
+     "points": [
+      "RBC lysis in stored units leaks potassium",
+      "Worsened by hypoperfusion and acidosis",
+      "Monitored closely via point-of-care blood gases",
+      "Treated with calcium, insulin-dextrose, or dialysis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Clinicians must also monitor for immune and respiratory complications such as transfusion-related acute lung injury and acute haemolytic reactions. Sudden dyspnea, fever, hypotension, or dark urine during blood product delivery signals a severe **transfusion reaction**. When this occurs, the transfusion must be stopped immediately, the blood bag returned for repeat crossmatching, aggressive fluid diuresis initiated, and intensive supportive care provided to avert renal failure.",
+   "say": "Transfusion reactions can manifest as sudden dyspnea, hypotension, or haemoglobinuria. The infusion must be stopped immediately while supportive therapy is initiated to prevent acute renal failure.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/sur-transfusion-reaction.svg",
+    "alt": "Transfusion reactions: acute haemolytic, febrile, TRALI, and TACO.",
+    "caption": "Spectrum of transfusion reactions including acute haemolysis and TRALI. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Sabiston 22e, Ch. 4"
+}
