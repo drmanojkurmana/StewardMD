@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "id": "oph-retina-vascular-retinopathy-of-prematurity",
+ "subject": "ophthalmology",
+ "module": "oph-retinal-vascular",
+ "title": "Retinopathy of Prematurity",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Retinopathy of prematurity** develops where retinal vessels grow incompletely after preterm birth, then abnormal ridge vessels proliferate under growth factor drive risking traction detachment. Screening therefore targets babies by gestation and weight criteria on neonatal units systematically. Incomplete vascularisation therefore converts prematurity into scheduled eye surveillance.",
+   "say": "Scheduled surveillance together gives prematurity screening on neonatal units for preterm infants meeting gestation criteria nationally. Ridge gives abnormal growth additionally. Traction gives detachment risk.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/apnoea-of-prematurity-fig1.webp",
+    "alt": "Prematurity pathophysiology diagram context for neonatal screening.",
+    "caption": "Prematurity systemic context. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Staging describes ridge severity one to three, plus disease for dilated tortuous posterior vessels signalling aggressive activity needing treatment urgency. Zone location posterior therefore worsens prognosis at same stage number in screening language. **Stage plus zone** pair therefore determines treatment clock in neonatal eye reports precisely.",
+   "say": "Clock pairing together gives screening language on neonatal units for preterm infants reviewed by ophthalmology teams weekly. Plus gives activity additionally. Zone gives posterior risk.",
+   "vis": {
+    "kind": "table",
+    "title": "Prematurity screening language",
+    "cols": [
+     "Term",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Stage",
+      "Ridge severity progression"
+     ],
+     [
+      "Plus disease",
+      "Posterior dilation tortuosity activity"
+     ],
+     [
+      "Zone",
+      "Posterior location worsens prognosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Oxygen management balances lung survival against retinal vessel signalling, with neonatal teams titrating saturation targets by evidence rather than eye instruction alone. Eye screening therefore observes oxygen context without directing neonatal physiology unilaterally. **Neonatal leads oxygen** therefore governs retinopathy comments on unit rounds professionally.",
+   "say": "Leadership clarity together gives unit conduct for eye teams on neonatal rounds for preterm infants receiving oxygen therapy. Saturation gives neonatal domain additionally. Observation gives eye role.",
+   "vis": {
+    "kind": "table",
+    "title": "Screening visit set",
+    "cols": [
+     "Item",
+     "Record"
+    ],
+    "rows": [
+     [
+      "Gestation weight",
+      "Eligibility and risk"
+     ],
+     [
+      "Zone stage plus",
+      "Treatment clock language"
+     ],
+     [
+      "Oxygen context",
+      "Neonatal team information"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treatment thresholds use laser to avascular retina or growth factor injection in selected posterior disease, timed within days once threshold reached because progression outruns weekly routine. Threshold therefore activates urgent treatment slot rather than next screening cycle. **Threshold means days** therefore appears in neonatal eye escalation language everywhere.",
+   "say": "Threshold urgency together gives treatment timing after screening on neonatal units for infants reaching activity criteria. Laser gives avascular target additionally. Days gives clock centre.",
+   "vis": {
+    "kind": "flow",
+    "title": "Prematurity flow",
+    "nodes": [
+     {
+      "id": "screen",
+      "label": "Screen by criteria schedule"
+     },
+     {
+      "id": "grade",
+      "label": "Zone stage plus recorded"
+     },
+     {
+      "id": "threshold",
+      "label": "Treat within days if reached"
+     },
+     {
+      "id": "follow",
+      "label": "Follow regression or reactivation"
+     }
+    ],
+    "edges": [
+     [
+      "screen",
+      "grade"
+     ],
+     [
+      "grade",
+      "threshold"
+     ],
+     [
+      "threshold",
+      "follow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Parents receive screening explanation before first examination: dilating drops, speculum examination discomfort brief, and results language translated from stage codes into action meaning. Consent therefore prepares families for possible urgent treatment decisions later. **Code translated** counselling therefore avoids stage numbers without action at cot side conversations.",
+   "say": "Translated counselling together gives family preparation before screening on neonatal units for parents of preterm infants facing examinations. Speculum gives discomfort honesty additionally. Action gives code meaning.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Code only talk",
+     "points": [
+      "Stage two zone two stated",
+      "Parents left uncertain"
+     ]
+    },
+    "right": {
+     "title": "Action talk",
+     "points": [
+      "What seen what happens next",
+      "Treatment clock explained"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Long term follow up continues after regression because prematurity associates with myopia, squint and late detachment risk into childhood eye services. Discharge from neonatal screening therefore hands over to paediatric eye follow up explicitly. **Childhood handover** therefore closes prematurity eye pathway beyond nursery graduation.",
+   "say": "Childhood handover together gives pathway completion after neonatal screening for preterm children entering community eye services. Myopia gives refractive risk additionally. Detachment gives late caution.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/oph-physiology-fig1.webp",
+    "alt": "Retinal circulation physiology diagram.",
+    "caption": "Retinal vascular growth physiology. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Screening programmes audit missed babies because eligibility transfers between units create loss risk; tracking therefore lists every eligible infant until examination documented. System lesson mirrors diabetic screening: register completeness determines blindness prevention more than examination skill alone. **Register first** therefore opens prematurity programme governance reviews nationally.",
+   "say": "Register governance together gives programme quality in prematurity screening across neonatal networks transferring infants between hospitals. Completeness gives prevention additionally. Tracking gives audit form.",
+   "vis": {
+    "kind": "table",
+    "title": "Prematurity governance",
+    "cols": [
+     "Audit item",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Eligible register complete",
+      "No baby missed on transfer"
+     ],
+     [
+      "Examination documented",
+      "Screening actually delivered"
+     ],
+     [
+      "Treatment within window",
+      "Threshold acted in days"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors prematurity: incomplete vessels plus ridge activity set treatment clock by zone stage plus, and registers ensure no eligible baby missed. Screening therefore operates as neonatal system, not occasional funduscopy. **Eligible means examined** phrase therefore closes prematurity teaching for neonatal and eye teams.",
+   "say": "System completion together gives prematurity anchors in examinations for students reliably in neonatal cases everywhere reliably. Ridge gives activity centre additionally. Register gives governance completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Prematurity anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Risk",
+      "Incomplete vessels after preterm birth"
+     ],
+     [
+      "Clock",
+      "Zone stage plus sets days"
+     ],
+     [
+      "System",
+      "Register tracks every eligible baby"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Prematurity mechanism",
+   "b": "Incomplete retinal vascularisation then ridge proliferation risks traction detachment."
+  },
+  {
+   "f": "Prematurity clock",
+   "b": "Zone, stage and plus disease determine treatment within days at threshold."
+  },
+  {
+   "f": "Prematurity system",
+   "b": "Eligible register tracked until examination documented; childhood eye handover follows."
+  }
+ ],
+ "keys": [
+  "Eligible means examined and documented",
+  "Code translated into action for parents",
+  "Neonatal team leads oxygen decisions"
+ ]
+}

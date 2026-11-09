@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "id": "oph-retina-vascular-central-retinal-artery",
+ "subject": "ophthalmology",
+ "module": "oph-retinal-vascular",
+ "title": "Central Retinal Artery Occlusion",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Central retinal artery occlusion** infarcts inner retina by embolus usually from carotid or cardiac source, presenting sudden painless severe monocular loss with pale retina and cherry red spot at fovea. Retinal survival window measures in hours, making presentation a stroke emergency rather than eye appointment. Embolus source hunt therefore starts same visit as ocular diagnosis.",
+   "say": "Stroke framing together gives artery emergency in eye casualty for elderly adults with sudden painless monocular loss presentations. Hours gives window additionally. Embolus gives source direction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/retinal-artery-occlusion-fig1.webp",
+    "alt": "Retinal artery occlusion fundus with pale retina and cherry red spot.",
+    "caption": "Arterial occlusion fundus. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Cherry red spot arises because foveola receives choroidal supply while surrounding inner retina pales ischaemically, creating red centre contrast sign. Attenuated arteries, segmented blood column and visible embolus sometimes complete picture. **Red centre pale surround** sign therefore teaches dual retinal circulation in one fundus image.",
+   "say": "Dual circulation together gives cherry sign in examinations for students reliably in fundus cases everywhere reliably. Foveola gives choroidal exception additionally. Pale gives inner infarction.",
+   "vis": {
+    "kind": "table",
+    "title": "Artery occlusion signs",
+    "cols": [
+     "Sign",
+     "Cause"
+    ],
+    "rows": [
+     [
+      "Pale retina",
+      "Inner retinal infarction"
+     ],
+     [
+      "Cherry red spot",
+      "Choroidal foveola visible"
+     ],
+     [
+      "Attenuated arteries",
+      "Flow loss and embolus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ocular first aid measures historically include pressure lowering and ocular massage attempts, yet evidence limits benefit and never justifies delaying stroke pathway activation. Emergency systems therefore parallel eye attempts with urgent medical referral. **Stroke first** ordering therefore governs artery occlusion paperwork in modern casualty departments.",
+   "say": "Stroke ordering together gives casualty priority for artery occlusion in emergency departments for elderly adults arriving within hours of loss. Attempts gives limited role additionally. Referral gives parallel action.",
+   "vis": {
+    "kind": "flow",
+    "title": "Artery occlusion flow",
+    "nodes": [
+     {
+      "id": "recognise",
+      "label": "Recognise pale cherry fundus"
+     },
+     {
+      "id": "stroke",
+      "label": "Activate stroke pathway"
+     },
+     {
+      "id": "source",
+      "label": "Carotid cardiac source hunt"
+     },
+     {
+      "id": "fellow",
+      "label": "Fellow eye risk protection"
+     }
+    ],
+    "edges": [
+     [
+      "recognise",
+      "stroke"
+     ],
+     [
+      "stroke",
+      "source"
+     ],
+     [
+      "source",
+      "fellow"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Giant cell arteritis must exclude in elderly artery occlusion because fellow eye blindness follows untreated arteritis rapidly; headache, scalp tenderness, jaw pain and inflammatory markers therefore checked urgently. Steroid starts on suspicion where arteritis plausible, coordinated medically. **Arteritis screen** therefore appears in every elderly occlusion clerking without exception in examinations.",
+   "say": "Arteritis screening together gives fellow protection after artery occlusion at elderly clerking in eye casualty presentations reliably. Markers gives blood route additionally. Suspicion gives steroid timing.",
+   "vis": {
+    "kind": "table",
+    "title": "Arteritis screen",
+    "cols": [
+     "Item",
+     "Look for"
+    ],
+    "rows": [
+     [
+      "Symptoms",
+      "Headache scalp jaw pain"
+     ],
+     [
+      "Bloods",
+      "Inflammatory markers urgent"
+     ],
+     [
+      "Action",
+      "Steroid on suspicion medically"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Branch occlusion infarcts sector following arteriole distribution with corresponding field defect, embolus often visible at bifurcation point on funduscopy. Sector therefore localises lesion while source hunt remains systemic identical. **Sector same source** phrase therefore prevents branch presentations receiving lesser medical workup.",
+   "say": "Systemic equality together gives branch workup in retinal clinics for adults with sector infarction and partial field loss. Bifurcation gives visible embolus additionally. Source gives identical hunt.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Central occlusion",
+     "points": [
+      "Whole inner retina pale",
+      "Counting fingers or worse"
+     ]
+    },
+    "right": {
+     "title": "Branch occlusion",
+     "points": [
+      "Sector pale distribution",
+      "Altitudinal field defect"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Vision prognosis remains poor after established infarction despite interventions, so prevention dominates: carotid imaging, rhythm detection, pressure lipid diabetes control and antiplatelet or anticoagulation by source. Counselling therefore honest about eye recovery while urgent about brain protection. **Brain over eye** honesty therefore frames artery occlusion consent conversations.",
+   "say": "Prevention honesty together gives counselling after artery infarction in stroke clinics for elderly adults facing poor visual recovery. Source gives therapy direction additionally. Brain gives priority framing.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/oph-physiology-fig1.webp",
+    "alt": "Retinal circulation physiology diagram.",
+    "caption": "Dual circulation physiology. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Susac and other rare arteriole syndromes enter differential where recurrent branch occlusions affect young patients with hearing or encephalopathy features, teaching occlusion pattern recognition beyond embolus age. Recurrence in youth therefore widens source hunt neurologically. **Young recurrent** flag therefore changes occlusion referral destination materially in clinic letters.",
+   "say": "Pattern flagging together gives rare syndrome routing for young occlusion in retinal clinics where branch events recur unexpectedly. Hearing gives triad clue additionally. Destination gives letter change.",
+   "vis": {
+    "kind": "table",
+    "title": "Occlusion source map",
+    "cols": [
+     "Pattern",
+     "Hunt direction"
+    ],
+    "rows": [
+     [
+      "Elderly single event",
+      "Carotid cardiac embolus"
+     ],
+     [
+      "Elderly arteritis clues",
+      "Arteritis urgent screen"
+     ],
+     [
+      "Young recurrent branch",
+      "Neurologic syndrome pathway"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors artery: sudden pale retina with cherry spot is stroke, arteritis screened in elderly and source therapy protects brain and fellow eye. Eye recovery honesty therefore accompanies urgent systemic action. **Pale eye stroke pathway** phrase therefore closes arterial occlusion teaching for emergency clerking.",
+   "say": "Stroke pathway together gives artery anchors in examinations for students reliably in emergency cases everywhere reliably. Cherry gives sign centre additionally. Source gives completion direction.",
+   "vis": {
+    "kind": "table",
+    "title": "Artery anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Sign",
+      "Pale retina cherry red spot"
+     ],
+     [
+      "Emergency",
+      "Stroke pathway same visit"
+     ],
+     [
+      "Elderly extra",
+      "Exclude giant cell arteritis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Artery occlusion sign",
+   "b": "Sudden painless loss, pale inner retina, cherry red spot from choroidal foveola."
+  },
+  {
+   "f": "Artery occlusion priority",
+   "b": "Stroke pathway and embolus source hunt same visit; eye measures never delay."
+  },
+  {
+   "f": "Elderly occlusion extra",
+   "b": "Screen giant cell arteritis urgently; steroid on suspicion protects fellow eye."
+  }
+ ],
+ "keys": [
+  "Pale eye activates stroke pathway",
+  "Sector branch gets same source hunt",
+  "Brain protection dominates counselling"
+ ]
+}

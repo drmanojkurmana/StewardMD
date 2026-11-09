@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "id": "oph-retina-vascular-hypertensive-retinopathy",
+ "subject": "ophthalmology",
+ "module": "oph-retinal-vascular",
+ "title": "Hypertensive Retinopathy",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Hypertensive retinopathy** grades chronic arteriolar narrowing, crossing changes, haemorrhages exudates and cotton wool spots, culminating in disc swelling of malignant hypertension. Fundus therefore stages systemic vascular injury duration and severity at bedside. Pressure measurement pairs with every retinopathy grade because eye signs recalibrate urgency.",
+   "say": "Pressure pairing together gives hypertensive grading in retinal clinics for adults with severe blood pressure discovered at funduscopy. Duration gives chronic staging additionally. Severity gives malignant end.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/diabetic-retinopathy-fig1.webp",
+    "alt": "Retinopathy fundus with haemorrhages exudates and vessel changes.",
+    "caption": "Retinopathy fundus pattern. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Early vessel signs include generalised and focal narrowing, arteriovenous nicking and copper or silver wiring reflectance changes from wall thickening. Chronicity therefore readable before haemorrhage appears in hypertensive fundus. **Wall story** in vessels therefore separates longstanding hypertension from acute pressure spike presentations.",
+   "say": "Wall reading together gives chronicity assessment in hypertensive fundus at medical clinics for adults with raised pressure readings. Nicking gives crossing sign additionally. Wiring gives reflectance clue.",
+   "vis": {
+    "kind": "table",
+    "title": "Hypertensive vessel signs",
+    "cols": [
+     "Sign",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Narrowing nicking",
+      "Chronic arteriolar change"
+     ],
+     [
+      "Copper silver wiring",
+      "Wall thickening reflectance"
+     ],
+     [
+      "Cotton wool spots",
+      "Focal nerve fibre ischaemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Flame haemorrhages, hard exudates in macular star and cotton wool spots mark severe retinopathy where systemic organs share injury in kidney brain and heart. Fundus grade therefore triggers organ assessment beyond ophthalmology discharge. **Severe grade organ hunt** therefore writes hypertensive eye referrals into medical pathways directly.",
+   "say": "Organ hunting together gives medical referral after severe retinopathy in eye clinics for adults with haemorrhagic fundus findings. Kidney gives shared injury additionally. Grade gives pathway trigger.",
+   "vis": {
+    "kind": "table",
+    "title": "Severe retinopathy actions",
+    "cols": [
+     "Finding",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Haemorrhages exudates",
+      "Urgent medical control assessment"
+     ],
+     [
+      "Macular star exudate",
+      "Vision and pressure urgency"
+     ],
+     [
+      "Disc swelling",
+      "Malignant emergency pathway"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Disc swelling defines malignant phase with encephalopathy risk, needing controlled urgent pressure reduction medically rather than abrupt falls risking perfusion. Eye therefore diagnoses emergency whose treatment belongs to physicians with ophthalmic monitoring. **Controlled urgency** phrase therefore appears in malignant retinopathy handover language precisely.",
+   "say": "Controlled urgency together gives malignant handover from eye clinics for adults with disc swelling and severe pressure presentations. Encephalopathy gives brain risk additionally. Fall gives perfusion caution.",
+   "vis": {
+    "kind": "flow",
+    "title": "Hypertensive flow",
+    "nodes": [
+     {
+      "id": "grade",
+      "label": "Grade vessels and fundus"
+     },
+     {
+      "id": "measure",
+      "label": "Measure pressure both arms context"
+     },
+     {
+      "id": "escalate",
+      "label": "Medical pathway by grade"
+     },
+     {
+      "id": "monitor",
+      "label": "Eye review as control proceeds"
+     }
+    ],
+    "edges": [
+     [
+      "grade",
+      "measure"
+     ],
+     [
+      "measure",
+      "escalate"
+     ],
+     [
+      "escalate",
+      "monitor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pregnancy hypertension adds retinopathy assessment where visual symptoms may signal severe disease, coordinating obstetric urgency by systemic criteria primarily. Eye signs therefore support rather than replace obstetric scoring. **Support not replace** therefore governs pregnancy hypertensive fundus reporting to maternity teams.",
+   "say": "Role clarity together gives pregnancy reporting from eye clinics for adults with hypertensive visual symptoms in maternity care. Symptoms gives support value additionally. Criteria gives obstetric primacy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Eye contributes",
+     "points": [
+      "Retinopathy grade documented",
+      "Visual symptom context"
+     ]
+    },
+    "right": {
+     "title": "Obstetrics decides",
+     "points": [
+      "Systemic severity criteria",
+      "Delivery and treatment timing"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Distinguishing diabetic overlap matters because many adults carry both diseases; microaneurysm dominance suggests diabetes while crossing changes and flame pattern suggest hypertension, often mixed truly. Dual control therefore prescribed where fundus cannot separate contributions honestly. **Both levers** therefore closes mixed retinopathy counselling without false attribution.",
+   "say": "Dual control together gives mixed counselling in retinal clinics for adults carrying diabetes with hypertension simultaneously. Dominance gives pattern clue additionally. Attribution gives honesty centre.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/oph-physiology-fig1.webp",
+    "alt": "Retinal circulation physiology diagram.",
+    "caption": "Retinal vessel physiology. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Follow up tracks regression: vessel calibre improves slowly, haemorrhages clear over weeks with control, while disc swelling resolution monitors malignant recovery alongside pressure charts. Photographic comparison therefore documents control objectively in hypertensive eye reviews. **Photo proof** therefore pairs fundus series with pressure diary at medical eye joint reviews.",
+   "say": "Photo pairing together gives control proof at joint reviews for hypertensive adults after medical treatment begins. Regression gives vessel timeline additionally. Diary gives pressure context.",
+   "vis": {
+    "kind": "table",
+    "title": "Hypertensive review set",
+    "cols": [
+     "Review item",
+     "Shows"
+    ],
+    "rows": [
+     [
+      "Fundus photographs",
+      "Haemorrhage and swelling regression"
+     ],
+     [
+      "Pressure diary",
+      "Control pattern over weeks"
+     ],
+     [
+      "Vision chart",
+      "Macular recovery function"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors hypertensive: wall signs stage chronicity, severe grade hunts organs and disc swelling means malignant controlled urgency medically. Fundus therefore accelerates systemic care rather than collecting eye labels. **Grade accelerates medicine** phrase therefore closes hypertensive retina teaching for medical and eye clerking alike.",
+   "say": "Systemic acceleration together gives hypertensive anchors in examinations for students reliably in fundus cases everywhere reliably. Wall gives chronicity additionally. Disc gives malignant completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Hypertensive anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Chronic",
+      "Narrowing nicking wiring"
+     ],
+     [
+      "Severe",
+      "Haemorrhages trigger organ hunt"
+     ],
+     [
+      "Malignant",
+      "Disc swelling controlled urgency"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Hypertensive chronic signs",
+   "b": "Narrowing, AV nicking, copper/silver wiring stage longstanding vessel injury."
+  },
+  {
+   "f": "Severe hypertensive action",
+   "b": "Haemorrhages exudates trigger urgent medical organ assessment."
+  },
+  {
+   "f": "Malignant hypertensive rule",
+   "b": "Disc swelling is malignant phase; controlled urgent medical pressure reduction."
+  }
+ ],
+ "keys": [
+  "Grade accelerates systemic care",
+  "Photo series proves control regression",
+  "Obstetric criteria lead in pregnancy"
+ ]
+}
