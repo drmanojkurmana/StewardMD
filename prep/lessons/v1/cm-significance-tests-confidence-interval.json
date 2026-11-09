@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-significance-tests-confidence-interval",
+  "subject": "community-medicine",
+  "module": "cm-significance-tests",
+  "title": "Confidence Intervals, T Tests, Chi Square, and ANOVA",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Confidence interval: definition",
+      "tx": "A **confidence interval** brackets an estimate with its precision: estimate plus minus (critical value times standard error). The ninety five percent interval means that ninety five of one hundred identically conducted studies would produce intervals capturing the true value. It reports effect and precision together, which is why modern journals demand intervals beside every p value and estimate.",
+      "say": "A confidence interval is the estimate plus and minus about two standard errors. It shows size and precision together.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ci1", "label": "Compute estimate and its standard error" },
+          { "id": "ci2", "label": "Add and subtract 1.96 times SE" },
+          { "id": "ci3", "label": "Report 95 percent confidence interval" }
+        ],
+        "edges": [["ci1", "ci2"], ["ci2", "ci3"]]
+      }
+    },
+    {
+      "title": "Reading intervals against the null",
+      "tx": "For differences, a **confidence interval including zero** (or one for ratios such as odds and risk ratios) means the null survives at that confidence level; excluding it means significance. The interval's width grades precision, and its position grades importance: a risk reduction interval from one to two percent is significant yet small, while zero point five to twenty percent is important yet imprecise.",
+      "say": "If the interval crosses zero for differences or one for ratios, the result is not significant. Width tells precision.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Difference measures",
+          "points": ["Null value is zero", "Interval crossing zero: not significant", "Mean difference, risk difference"]
+        },
+        "right": {
+          "title": "Ratio measures",
+          "points": ["Null value is one", "Interval crossing one: not significant", "Odds ratio, relative risk, hazard ratio"]
+        }
+      }
+    },
+    {
+      "title": "Unpaired (independent) t test",
+      "tx": "The **unpaired t test** compares means of two independent groups (haemoglobin in cases versus controls) by dividing their difference by its standard error, judged against the t distribution with pooled degrees of freedom. It assumes approximately normal data and similar variances; large samples forgive mild violations through the central limit theorem. Equal variance doubt routes to the Welch variant.",
+      "say": "Unpaired t compares two separate groups' means. Difference over its standard error, judged on the t distribution.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Feature", "Unpaired t test"],
+        "rows": [
+          ["Groups", "Two independent samples"],
+          ["Data type", "Continuous, near normal"],
+          ["Statistic", "Mean difference over pooled SE"],
+          ["Degrees of freedom", "n1 plus n2 minus 2"]
+        ]
+      }
+    },
+    {
+      "title": "Paired t test: same subjects twice",
+      "tx": "When the same subjects are measured before and after (blood pressure before and after salt reduction), the **paired t test** analyses the within person differences as a single sample against zero, cancelling between person variation and gaining power enormously. Pairing must be real (same person, matched twins, two eyes handled carefully); falsely pairing independent data invalidates the arithmetic completely.",
+      "say": "Paired t works on each person's own change. Removing between person noise makes it far more powerful.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "pt1", "label": "Measure each subject twice" },
+          { "id": "pt2", "label": "Compute each subject's difference" },
+          { "id": "pt3", "label": "Test mean difference against zero" }
+        ],
+        "edges": [["pt1", "pt2"], ["pt2", "pt3"]]
+      }
+    },
+    {
+      "title": "Chi square test for categories",
+      "tx": "The **chi square test of association** compares observed counts in a contingency table (smoking by lung cancer, treatment by recovery) with counts expected under no association, summing (observed minus expected) squared over expected. Large discrepancies reject independence. It needs counts (never percentages), expected cells preferably five or more, and independent observations; Yates correction and Fisher exact rescue small tables.",
+      "say": "Chi square compares counted observations with counts expected under no association. Feed it counts, never percentages.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Chi square requirement", "Reason"],
+        "rows": [
+          ["Raw counts as input", "Percentages destroy sample size information"],
+          ["Expected count 5 plus ideally", "Approximation breaks in sparse cells"],
+          ["Independent observations", "Paired tables need McNemar instead"],
+          ["Degrees of freedom", "(Rows minus 1) times (columns minus 1)"]
+        ]
+      }
+    },
+    {
+      "title": "ANOVA: many means at once",
+      "tx": "Comparing three or more group means with repeated t tests inflates false positives, so **analysis of variance (ANOVA)** tests all means jointly by comparing between group variance with within group variance as an F ratio. A significant F declares that some group differs, after which post hoc tests locate pairs. ANOVA assumes normality and equal variances within groups, checked before trusting the verdict.",
+      "say": "ANOVA compares many means in one test using the F ratio. Significant means some group differs, then find which.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Repeated t tests (wrong)",
+          "points": ["Each test adds false positive risk", "Ten groups give 45 pairwise tests", "Family error explodes"]
+        },
+        "right": {
+          "title": "ANOVA (right)",
+          "points": ["One joint F test first", "Between over within variance", "Post hoc tests only if F significant"]
+        }
+      }
+    },
+    {
+      "title": "Z test for large samples",
+      "tx": "With large samples the **z test for means and proportions** replaces t, using standard normal critical values (one point nine six at five percent), because the t distribution converges to normal as degrees of freedom grow. Standard error of proportion (root p q over n) powers the large sample test for percentages, the workhorse behind survey comparisons in programme reports.",
+      "say": "Large samples use z with the one point nine six boundary. The t and normal curves merge as samples grow.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "zt1", "label": "Compute difference and its SE" },
+          { "id": "zt2", "label": "Divide to obtain z statistic" },
+          { "id": "zt3", "label": "Beyond 1.96: significant at 5 percent" }
+        ],
+        "edges": [["zt1", "zt2"], ["zt2", "zt3"]]
+      }
+    },
+    {
+      "title": "Choosing the test: the master table",
+      "tx": "All choices collapse into one **test selection table by data type**: two independent means (unpaired t), paired means (paired t), three plus means (ANOVA), two proportions or categorical association (chi square), paired categories (McNemar), ordinal or skewed continuous (non parametric next lesson). Examinations award the mark for naming the test, not computing it, so this table is the lesson's treasure.",
+      "say": "Name the test from the data structure: independent, paired, categorical, or many groups. That naming is the examination mark.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Data structure", "Test"],
+        "rows": [
+          ["Two independent means", "Unpaired t test"],
+          ["Before after same subjects", "Paired t test"],
+          ["Three or more means", "ANOVA"],
+          ["Categorical association", "Chi square test"]
+        ]
+      }
+    },
+    {
+      "title": "Assumptions and honesty checks",
+      "tx": "Every parametric test carries **assumptions of statistical tests**: independence of observations, approximate normality of data or means, and (for pooled t and ANOVA) equal variances. Violations route to transformations, Welch corrections, or non parametric alternatives rather than hopeful proceeding. Reporting which checks were run is now a journal requirement, and examiners increasingly ask candidates to name the assumption a stem violates.",
+      "say": "Independence, normality, equal variance: check them or change tests. Hope is not a statistical method.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Assumption holds",
+          "points": ["Proceed with t or ANOVA", "Report checks performed", "Interpret p and interval together"]
+        },
+        "right": {
+          "title": "Assumption fails",
+          "points": ["Transform skewed data", "Use Welch or non parametric test", "Never force the planned test"]
+        }
+      }
+    }
+  ]
+}
