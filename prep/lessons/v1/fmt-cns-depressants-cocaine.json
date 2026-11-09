@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-cns-depressants-cocaine",
+ "subject": "forensic-medicine",
+ "module": "fmt-cns-depressants",
+ "title": "Cocaine: Excitement, Depression, Crack and Cocaine Bugs",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Cocaine from coca leaves",
+   "tx": "**Cocaine** comes from leaves of Erythroxylum coca holding nought point five to one percent alkaloid, a colourless odourless crystalline substance of bitter taste, street names coke, snow, cadillac and white lady. Crack is cocaine combined with baking soda and water for smoking. It desensitises terminal nerves and vasoconstricts locally, its legitimate use as local anaesthetic, and powerfully stimulates the central nervous system briefly then depresses it, releasing dopamine and serotonin in the pleasure centre with sympathomimetic effect like amphetamine.",
+   "say": "Coca leaf crystals that numb, constrict and then intoxicate through dopamine are cocaine, and crack is its smokable form.",
+   "vis": {"kind": "table", "cols": ["Cocaine fact", "Detail", "Point"], "rows": [["Source", "Coca leaves, 0.5 to 1 percent", "South America, India, Java"], ["Local action", "Anaesthesia, vasoconstriction", "Legitimate medical use"], ["Central action", "Stimulation then depression", "Dopamine pleasure centre"], ["Fatal dose", "One gram orally", "Minutes to hours to death"]]}
+  },
+  {
+   "title": "Speed of onset by route",
+   "tx": "**Cocaine onset follows its route**: inhaled in one to three minutes, intravenous or smoked in seconds peaking at three to five minutes, topical nasal mucosa peaking at twenty to thirty minutes, oral peaking at sixty to ninety minutes. Action is so short that a high needs redosing every half to one hour. It is hydrolysed by liver and plasma esterases to ecgonine methyl ester and benzoylecgonine, biological half life half to one hour, appearing almost immediately in urine and cleared within twenty four hours.",
+   "say": "Seconds by vein or smoke, half an hour by nose and an hour by mouth, gone within a day: cocaine's clock is its route.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Route decides absorption speed"}, {"id": "b", "label": "Peak in seconds to ninety minutes"}, {"id": "c", "label": "High fades, redose in an hour"}, {"id": "d", "label": "Metabolites clear within a day"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Stage of excitement",
+   "tx": "The **excitement stage** brings bitter taste, dry mouth, dysphagia, well being with loss of depression and fatigue, then excitement, restlessness and talkativeness passing into calm dullness. Pulse and respirations are rapid and deep, pupils dilated, headache, pallor, cyanosis, sweating and raised temperature appear, reflexes are exaggerated with tremors or convulsions, and hallucinations with mania may supervene. Tingling in hands and feet and numbness where the drug touched, nose and throat after sniffing, are characteristic local signatures.",
+   "say": "Talkative, flushed hot, wide pupilled and tremulous with a numb nose: cocaine excitement mimics a sympathomimetic storm.",
+   "vis": {"kind": "compare", "left": {"title": "Excitement signs", "points": ["Restless, talkative, euphoric", "Rapid pulse and breathing", "Dilated pupils, raised temperature", "Exaggerated reflexes, tremors"]}, "right": {"title": "Local signatures", "points": ["Numb nose and throat", "Tingling hands and feet", "Dry mouth, dysphagia", "Hallucinations, mania possible"]}}
+  },
+  {
+   "title": "Stage of depression and sudden death",
+   "tx": "Within an hour or less the **depression stage** follows: feeble respirations, profuse perspiration, collapse, convulsions and death from respiratory failure, cardiac failure or vascular collapse. Sudden death follows intravenous injection and smoking more than snorting, from cardiac arrhythmias by direct myocardial action and cardiopulmonary arrest. Cocaine hypertension can burst a cerebral vessel or aneurysm and cause coronary spasm; a person may die suddenly during or immediately after a struggle, the excited delirium death that demands careful autopsy.",
+   "say": "Collapse within the hour, arrhythmia after vein or smoke, and death in a struggle are cocaine's killing patterns.",
+   "vis": {"kind": "table", "cols": ["Death route", "Mechanism", "Setting"], "rows": [["Respiratory failure", "Depression stage collapse", "Within an hour of dose"], ["Cardiac arrhythmia", "Direct myocardial action", "Intravenous or smoked"], ["Cerebral bleeding", "Hypertension bursts vessel", "Aneurysm rupture possible"], ["Maternal use", "Coronary spasm, fetal death", "Premature damaged infants"]]}
+  },
+  {
+   "title": "Cocaine complications across organs",
+   "tx": "**Cocaine complications** read like a vascular catalogue: cerebrovascular accidents, subarachnoid and intracerebral haemorrhage, myocardial infarction, skin necrosis, aortic dissection and pulmonary infarcts. Chronic snorting perforates the nasal septum. The heart at autopsy may show foci of scarring that source fatal dysrhythmias, and lungs weigh three to four times normal with congestion and oedema after fatal use. Cocaine with heroin injected together is the speedball, and death under alcohol's influence compounds forensic interpretation.",
+   "say": "Infarcts, dissections, haemorrhages and a scarred irritable heart are the organs' record of cocaine's vascular violence.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Vasoconstriction and hypertension"}, {"id": "b", "label": "Infarction or dissection strikes"}, {"id": "c", "label": "Heart scars between events"}, {"id": "d", "label": "Fatal dysrhythmia follows"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Formication: the cocaine bugs",
+   "tx": "Chronic cocaine use produces **Magnan sign or cocaine bugs**, a tactile hallucination of insects crawling under the skin, classically grouped with alcoholic formication in delirium tremens. The user scratches and excoriates the skin hunting the insects, leaving patterned self inflicted lesions that can imitate assault or infestation. Combined with paranoia and panic on large doses or binges, anxiety leading to paranoia, the mental picture separates stimulant psychosis from primary schizophrenia by its drug timeline and autonomic storm.",
+   "say": "Insects felt crawling under cocaine skin are hallucinated, and the scratch marks they provoke must not be read as assault.",
+   "vis": {"kind": "compare", "left": {"title": "Cocaine bugs picture", "points": ["Tactile insect hallucination", "Scratching and excoriation", "Paranoia on binges", "Autonomic storm accompanies"]}, "right": {"title": "Look alike states", "points": ["Delirium tremens formication", "True parasitic infestation", "Assault excoriations", "Primary psychosis without storm"]}}
+  },
+  {
+   "title": "Treatment and the antidote tradition",
+   "tx": "**Cocaine treatment** is decontamination and stabilisation: gastric lavage with warm water, permanganate, charcoal or tannic acid after oral intake, washing drug off nose and throat, a ligature above an injected part in the classical regimen, convulsions controlled with short acting barbiturates in Reddy's text and benzodiazepines in modern practice, amyl nitrite inhalation as the traditional antidote, airway and circulatory stabilisation, thiamine one hundred milligrams intravenously and naloxone two milligrams where opioid co ingestion is possible in speedball deaths.",
+   "say": "Wash it out, sedate the convulsions, stabilise heart and airway, and remember naloxone when a speedball partner may be aboard.",
+   "vis": {"kind": "table", "cols": ["Step", "Action", "Reason"], "rows": [["Decontaminate", "Lavage or wash mucosa", "Remove unabsorbed drug"], ["Convulsions", "Sedation urgently", "Prevents hyperthermia injury"], ["Circulation", "Airway and pressure support", "Arrhythmia risk throughout"], ["Co ingestion", "Naloxone if opioid possible", "Speedball combination"]]}
+  },
+  {
+   "title": "Preserving cocaine evidence before it vanishes",
+   "tx": "**Cocaine decomposes rapidly**, so blood is preserved with fluoride to stop esterase hydrolysis, and brain is analysed because it does not hydrolyse cocaine to benzoylecgonine as blood does. Cocaine, amphetamine, nicotine and barbiturates can be found in the stomach even when given parenterally. Nasal swabs, the powder, straws and pipes, and urine taken immediately carry the case. A negative blood cocaine after delay is meaningless without the metabolite and brain results beside it.",
+   "say": "Fluoride in the blood tube and brain on the bench rescue a cocaine case that plain delayed blood would silently lose.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Blood into fluoride at once"}, {"id": "b", "label": "Brain retained for analysis"}, {"id": "c", "label": "Nasal swabs and powder seized"}, {"id": "d", "label": "Metabolite sought in urine"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Stimulant toxidrome at the bedside",
+   "tx": "Cocaine anchors the **sympathomimetic toxidrome** met in the general toxicology module: dilated pupils, tachycardia, hypertension, hyperthermia, sweating, agitation and convulsions. The differential runs through amphetamine, which lasts longer, anticholinergic poisoning, which is dry rather than sweaty, and thyrotoxicosis and phaeochromocytoma medically. Sweating with wide pupils and a racing heart after a powder or pipe is stimulant poisoning until excluded, and cooling plus sedation precede any specific drug history.",
+   "say": "Sweaty, wide pupilled, hot and racing is the stimulant storm; cool and sedate first and take the drug history second.",
+   "vis": {"kind": "compare", "left": {"title": "Sympathomimetic storm", "points": ["Sweaty skin, dilated pupils", "Tachycardia and hypertension", "Hyperthermia, agitation", "Convulsions possible"]}, "right": {"title": "Anticholinergic contrast", "points": ["Dry skin, dilated pupils", "Tachycardia present", "No sweating at all", "Delirium without storm"]}}
+  }
+ ],
+ "quiz": []
+}

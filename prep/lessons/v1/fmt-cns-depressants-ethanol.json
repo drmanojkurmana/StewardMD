@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-cns-depressants-ethanol",
+ "subject": "forensic-medicine",
+ "module": "fmt-cns-depressants",
+ "title": "Ethanol: Drunkenness Stages, Driving Law and Withdrawal",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Blood alcohol bands and their words",
+   "tx": "Examiners grade intoxication by **blood alcohol concentration bands**. Below ten milligrams percent the person is sober; ten to eighty is drinking; eighty to one hundred fifty is under the influence, meaning some clearness of mind and self control normally possessed has been lost; one hundred fifty to three hundred is drunk or intoxicated; three hundred to four hundred is stupor; and four hundred and above is coma and death. Judgement and self criticism are lost long before obvious drunkenness appears.",
+   "say": "Ten sober, eighty under the influence, one fifty drunk, three hundred stupor and four hundred coma: the alcohol ladder.",
+   "vis": {"kind": "table", "cols": ["Blood alcohol", "Legal description", "Examination picture"], "rows": [["Below 10 mg percent", "Sober", "Normal findings"], ["80 to 150 mg percent", "Under the influence", "Euphoria, thick speech, incoordination"], ["150 to 300 mg percent", "Drunk", "Staggering, reeling on turns"], ["400 mg percent and above", "Coma and death", "Stertorous, pupils contracted"]]}
+  },
+  {
+   "title": "Under the influence versus drunk",
+   "tx": "**Under the influence** shows a flushed face, dilated sluggish pupils, euphoria, loss of restraint, thickness of speech, carelessness, recklessness, incoordination and staggering on sudden turning. The **drunk** patient adds inactive pupils, rapid eyeball movements, unstable mood, clouding of intellect and reeling and lurching when called to turn suddenly. Very drunk brings a pale face, gross incoordination, slurred speech and falling; coma brings rapid pulse, subnormal temperature, stertorous breathing and contracted pupils.",
+   "say": "Euphoria and thick speech mean influence, reeling turns mean drunk, and stertor with a rapid pulse means alcoholic coma.",
+   "vis": {"kind": "compare", "left": {"title": "Under the influence", "points": ["Flushed face, sluggish pupils", "Euphoria, lost restraint", "Thick speech, careless", "Staggers on sudden turning"]}, "right": {"title": "Drunk and beyond", "points": ["Inactive pupils, unstable mood", "Reeling, lurching gait", "Gross incoordination, vomiting", "Stupor then stertorous coma"]}}
+  },
+  {
+   "title": "Driving: risk doubles at sixty",
+   "tx": "Alcohol destroys driving in four ways under **alcohol and road accidents**: it increases reaction time, creates false confidence, impairs concentration, judgement and muscular coordination, and decreases visual and auditory acuity. Most drivers are unaffected below fifty milligrams percent for road safety, sensorimotor tasks falter at fifty, accident risk doubles at sixty against sober, rises markedly at eighty, is twelve fold at one hundred and twenty fold above one hundred fifty. India's statutory limit is thirty milligrams percent under section 185 of the Motor Vehicles Act.",
+   "say": "Risk doubles at sixty and rises twenty fold past one fifty, and India's driving limit sits at thirty milligrams percent.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Reaction time lengthens"}, {"id": "b", "label": "False confidence grows"}, {"id": "c", "label": "Coordination and vision degrade"}, {"id": "d", "label": "Accident risk multiplies"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Hazards of the drunk patient",
+   "tx": "The **hazards of intoxication** fill casualty registers: death from exposure, aspiration pneumonia from alcohol in the airways, inhaled vomit or dentures, cafe coronary choking on a food bolus, reduced resistance to hypoxia endangering climbers, aviators and cardiac patients, falls with head injury, drowning after falling into water, unlit gas left running, electrocution while fumbling with plugs, and poison mistaken for alcohol. Saturday night paralysis is radial nerve pressure palsy from an arm hanging over a chair in coma.",
+   "say": "Vomit, falls, water, gas and mistaken poison kill the drunk more often than the alcohol level itself ever does.",
+   "vis": {"kind": "table", "cols": ["Hazard", "Mechanism", "Setting"], "rows": [["Aspiration", "Vomit or dentures inhaled", "Comatose drinker"], ["Head injury", "Fall while staggering", "Street and stairs"], ["Drowning", "Fall into water", "Canals and tanks"], ["Radial palsy", "Arm over chair in coma", "Saturday night paralysis"]]}
+  },
+  {
+   "title": "Alcoholic blackout, the palimpsest",
+   "tx": "An **alcoholic palimpsest or blackout** is loss of memory for a period of a drinking spell after only a moderate amount, seen among alcoholics and rarely in non addicted drinkers, resembling anoxaemic blackouts. Amnesia may be fragmentary or total; total lost time is unlikely ever to be recalled. It is a late manifestation of alcoholism. During a blackout the person may perform a criminal act and remember nothing afterwards, which the court must weigh against independent evidence of the act.",
+   "say": "A blackout erases hours of a drinking spell forever, and a crime inside it is judged on evidence, not on the missing memory.",
+   "vis": {"kind": "compare", "left": {"title": "Blackout features", "points": ["Moderate amount suffices", "Fragmentary or total amnesia", "Late sign of alcoholism", "Acts performed, not recalled"]}, "right": {"title": "Medicolegal handling", "points": ["Independent act evidence needed", "Amnesia is not automatism proof", "Timeline from witnesses", "Level alone decides nothing"]}}
+  },
+  {
+   "title": "Withdrawal: shakes to delirium tremens",
+   "tx": "**Alcohol withdrawal** begins twelve to forty eight hours after reduction, with coarse tremor of hands, tongue and eyelids, nausea, malaise, autonomic hyperactivity, anxiety, transient hallucinations, headache and insomnia; seizures are typically single and generalised at six to forty eight hours, and about a third progress to delirium tremens untreated. **Delirium tremens** at seventy two to ninety six hours brings coarse tremors, insomnia, confusion, uncontrollable fear and horror hallucinations of insects and snakes, with five to fifteen percent mortality from cerebral oedema, cardiac failure or shock.",
+   "say": "Shakes at a day, seizures by two and delirium of horrors by four: withdrawal kills five to fifteen percent untreated.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Tremor and autonomic storm"}, {"id": "b", "label": "Single generalised seizures"}, {"id": "c", "label": "Delirium tremens at 3 to 4 days"}, {"id": "d", "label": "Diazepam controls agitation"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Wernicke and Korsakoff: thiamine deficiency",
+   "tx": "**Wernicke encephalopathy** from thiamine deficiency injures hypothalamus, midbrain and cerebellum in heavy drinkers: disturbed consciousness, drowsiness, amnesia, peripheral neuropathy, external ocular palsies, ophthalmoplegia, nystagmus, retinal haemorrhages, papilloedema, confusion, ataxia and stupor, with high mortality and death possible in twenty four hours. Untreated, about eighty percent progress to **Korsakoff psychosis**, with anterograde and retrograde memory failure, disorientation in time and confabulation filling the gaps with invented experiences.",
+   "say": "Eye palsies, ataxia and confusion demand thiamine at once, before four of five untreated cases settle into Korsakoff amnesia.",
+   "vis": {"kind": "table", "cols": ["Syndrome", "Hallmarks", "Course"], "rows": [["Wernicke encephalopathy", "Ocular palsies, ataxia, confusion", "Can kill in 24 hours"], ["Korsakoff psychosis", "Amnesia with confabulation", "Follows 80 percent untreated"], ["Alcoholic polyneuritis", "Weakness, wrist and foot drop", "Painful tender muscles"], ["Alcoholic paranoia", "Fixed delusions, no hallucinations", "Deep suspicion of family"]]}
+  },
+  {
+   "title": "Alcohol after death: the putrefaction trap",
+   "tx": "**Alcohol in putrefaction** is manufactured after death by fermentation of body carbohydrates and proteins, usually twenty to thirty milligrams percent and up to nought point two percent in advanced decay, commonest organism Escherichia coli, more with longer interval and higher temperature. Above nought point two percent indicates drinking before death. The decisive pattern: alcohol in blood and organs but absent in urine and vitreous humour means the blood result is probably false from putrefaction, while brain analysis gives the best results in decomposed bodies.",
+   "say": "Blood alcohol without urine or vitreous alcohol in a decomposed body is fermentation talking, not the last drink.",
+   "vis": {"kind": "compare", "left": {"title": "Putrefaction alcohol", "points": ["Blood positive, urine negative", "Vitreous humour negative", "Usually under 0.2 percent", "Rises with interval and heat"]}, "right": {"title": "Antemortem drinking", "points": ["Urine and vitreous positive", "Blood above 0.2 percent", "Levels fit across fluids", "Clots date the fatal injury"]}}
+  },
+  {
+   "title": "Examining the allegedly drunk accused",
+   "tx": "The **examination for drunkenness** combines observation and chemistry, because the blood level is only of value when consistent with non chemical observations. Smell of breath, dress and behaviour, speech, gait on turning, finger nose and Romberg type coordination, pupils, memory and orientation are recorded contemporaneously, with consent and a note of injuries that imitate drunkenness, head injury above all. The opinion uses the statutory words, sober, drinking, under the influence or drunk, tied to the measured level and the signs together.",
+   "say": "Signs and level must agree before the certificate chooses its words, and head injury is excluded before alcohol is blamed.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Observe gait, speech, pupils"}, {"id": "b", "label": "Exclude head injury and hypoglycaemia"}, {"id": "c", "label": "Measure blood alcohol level"}, {"id": "d", "label": "Certify only where both agree"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}
