@@ -1,0 +1,209 @@
+{
+ "v": 1,
+ "module": "med-zoonoses-toxin",
+ "subject": "medicine",
+ "title": "Rabies, Tetanus, and Toxin-Mediated Zoonoses",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "An invariably fatal acute viral encephalomyelitis transmitted via the saliva of an infected rabid mammal (dogs in over ninety-nine percent of human cases globally) through bites or scratches is **rabies**, caused by a bullet-shaped, negative-sense single-stranded RNA Lyssavirus. The virus enters peripheral motor nerve endings at the neuromuscular junction, ascending centripetally via retrograde axoplasmic transport into the spinal cord and brain.",
+   "say": "An invariably fatal acute viral encephalomyelitis transmitted through the saliva of infected mammals is rabies, caused by a bullet-shaped Lyssavirus. The virus enters motor nerve terminals, travelling centripetally via retrograde axoplasmic transport into the central nervous system.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/rabies-fig1.webp",
+    "alt": "Transmission, retrograde axonal transport, and brain pathology in human rabies.",
+    "caption": "Retrograde axoplasmic transport and viral replication in the limbic system in rabies. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Encephalitic (furious) rabies, accounting for eighty percent of clinical cases, manifests with fluctuating episodes of hyperexcitability, delirium, autonomic instability, and terrifying involuntary spasms of diaphragmatic and pharyngeal inspiratory muscles triggered by attempted swallowing of liquids, universally designated as **hydrophobia**. Even the gentle sensation of air movement across the face provokes identical paroxysms (aerophobia).",
+   "say": "Furious rabies manifests with episodes of hyperexcitability, autonomic instability, and terrifying involuntary spasms of pharyngeal muscles provoked by attempted drinking, termed hydrophobia. Even gentle air currents across the skin provoke identical paroxysms, known as aerophobia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bite",
+      "label": "Rabid Animal Inoculation"
+     },
+     {
+      "id": "cns",
+      "label": "Limbic & Brainstem Neuronal Infection"
+     },
+     {
+      "id": "hydro",
+      "label": "Severe Pharyngeal Spasms (Hydrophobia)"
+     }
+    ],
+    "edges": [
+     [
+      "bite",
+      "cns"
+     ],
+     [
+      "cns",
+      "hydro"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The pathognomonic histopathological hallmark of rabies is the demonstration of round or oval eosinophilic intracytoplasmic viral inclusion bodies within Purkinje cells of the cerebellum and pyramidal neurons of the hippocampus, universally designated as **Negri bodies**. Composed of viral ribonucleoprotein complexes, they confirm diagnosis on post-mortem brain examination.",
+   "say": "The pathognomonic histopathological hallmark of rabies is the demonstration of round eosinophilic intracytoplasmic viral inclusion bodies within hippocampal and cerebellar neurons, designated as Negri bodies, confirming diagnosis on brain tissue examination.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Negri Bodies (Rabies)",
+     "points": [
+      "Intracytoplasmic eosinophilic inclusions",
+      "Located in hippocampal pyramidal & Purkinje cells",
+      "Composed of Lyssavirus ribonucleoprotein",
+      "Absence of inflammatory necrosis around inclusions"
+     ]
+    },
+    "right": {
+     "title": "Lewy Bodies (Parkinson/DLB)",
+     "points": [
+      "Intracytoplasmic round concentric inclusions",
+      "Located in substantia nigra and locus coeruleus",
+      "Composed of aggregated alpha-synuclein",
+      "Surrounded by pale halo on haematoxylin-eosin"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Because clinical rabies carries an established mortality approaching one-hundred percent, immediate post-exposure prophylaxis (PEP) is vital. Following any category III exposure (transdermal bites or scratches, licking of broken skin), wound management requires immediate vigorous soap and running water washing for fifteen minutes, immediate infiltration of equine or human **rabies immunoglobulin** (RIG) into wound margins, and a four-dose cell-culture rabies vaccine series.",
+   "say": "Because clinical rabies is virtually universally fatal, immediate post-exposure prophylaxis is mandatory. Following category three animal bites, management requires fifteen minutes of soap washing, immediate infiltration of rabies immunoglobulin into wound edges, and a four-dose vaccine series.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "WHO Exposure Category",
+     "Clinical Exposure Type",
+     "Mandatory Post-Exposure Prophylaxis"
+    ],
+    "rows": [
+     [
+      "Category I",
+      "Touching, feeding animals; licks on intact skin",
+      "None (wash exposed skin surface)"
+     ],
+     [
+      "Category II",
+      "Nibbling of uncovered skin; minor superficial scratches",
+      "Immediate wound washing + full cell-culture rabies vaccine"
+     ],
+     [
+      "Category III",
+      "Single or multiple transdermal bites; licks on broken skin",
+      "Wound washing + Rabies Immunoglobulin (RIG) + Rabies vaccine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A severe neurotoxin-mediated disorder caused by contamination of wounds with spores of the anaerobic bacterium Clostridium tetani is **tetanus**. In anaerobic necrotic tissue, spores germinate to produce tetanospasmin, a potent zinc metalloprotease that undergoes retrograde intra-axonal transport to the spinal cord, cleaving synaptobrevin II to block inhibitory GABA and glycine release from Rensselaer interneurons.",
+   "say": "A severe neurotoxin-mediated disorder caused by wound contamination with Clostridium tetani spores is tetanus. Tetanospasmin undergoes retrograde axonal transport to the spinal cord, cleaving synaptobrevin to block inhibitory glycine and GABA release from Rensselaer interneurons.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/tetanus-fig1.webp",
+    "alt": "Mechanism of tetanospasmin inhibition of Renshaw interneurons and painful muscle spasms.",
+    "caption": "Tetanospasmin retrograde transport, Renshaw cell blockade, and severe motor spasms. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Uninhibited motor alpha-neuron firing produces sustained, agonizing muscular rigidity and painful paroxysmal spasms. The presenting sign in over seventy-five percent of patients is masseter muscle rigidity causing lockjaw, termed **trismus**. Facial spasm produces the fixed sardonic grin designated as risus sardonicus, while severe axial extensor hypertonia causes extreme arching of the spine (opisthotonos).",
+   "say": "Uninhibited motor neuron firing produces sustained agonizing muscle rigidity and spasms. The presenting sign in seventy-five percent of patients is masseter rigidity causing lockjaw, termed trismus. Facial spasm produces the sardonic grin termed risus sardonicus, with opisthotonic spinal arching.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Sign of Tetanus",
+     "Involved Anatomical Muscle Group",
+     "Pathological Presentation"
+    ],
+    "rows": [
+     [
+      "Trismus (Lockjaw)",
+      "Masseter and pterygoid muscles",
+      "Inability to open mouth; difficulty chewing"
+     ],
+     [
+      "Risus Sardonicus",
+      "Frontalis and orbicularis oris muscles",
+      "Sardonic grin with raised eyebrows and curled lips"
+     ],
+     [
+      "Opisthotonos",
+      "Paraspinal axial extensor muscles",
+      "Severe hyperextension of back; resting on heels and head"
+     ],
+     [
+      "Autonomic Storm",
+      "Sympathetic nervous system disinhibition",
+      "Fluctuating hypertension, tachycardia, hyperpyrexia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management of generalized tetanus mandates immediate neutralization of circulating unbound toxin using human **tetanus immunoglobulin** (HTIG, 3000 to 6000 units intramuscularly), surgical debridement of the anaerobic wound nidus, intravenous metronidazole, and high-dose benzodiazepines (diazepam) in a dark, quiet, stimulus-free intensive care environment, accompanied by early elective tracheostomy.",
+   "say": "Management of generalized tetanus mandates immediate neutralization of unbound toxin using human tetanus immunoglobulin, wound debridement, intravenous metronidazole, and high-dose benzodiazepines in a quiet intensive care setting, with early tracheostomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tox",
+      "label": "Human Tetanus Immunoglobulin (3000-6000 IU)"
+     },
+     {
+      "id": "abx",
+      "label": "IV Metronidazole + Surgical Wound Debridement"
+     },
+     {
+      "id": "sed",
+      "label": "IV Diazepam Infusion + ICU Tracheostomy"
+     }
+    ],
+    "edges": [
+     [
+      "tox",
+      "abx"
+     ],
+     [
+      "abx",
+      "sed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A distinct neurotoxin-mediated paralysis caused by the preformed exotoxin of Clostridium botulinum is botulism. In sharp contrast to the spastic rigidity of tetanus, botulinum toxin cleaves SNARE proteins at the presynaptic neuromuscular junction to prevent acetylcholine exocytosis, producing the classic clinical triad of acute, symmetrical **descending flaccid paralysis**, prominent bulbar palsies (diplopia, dysarthria, dysphagia), and dilated unreactive pupils.",
+   "say": "A neurotoxin-mediated paralysis caused by preformed exotoxin of Clostridium botulinum is botulism. In contrast to the spastic rigidity of tetanus, botulinum toxin blocks presynaptic acetylcholine release, producing acute symmetrical descending flaccid paralysis with dilated pupils and bulbar palsies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tetanus (Tetanospasmin)",
+     "points": [
+      "Blocks inhibitory Glycine / GABA release",
+      "Spastic paralysis, trismus, and opisthotonos",
+      "Cognition completely preserved throughout",
+      "Treated with HTIG + Metronidazole + Sedatives"
+     ]
+    },
+    "right": {
+     "title": "Botulism (Botulinum Toxin)",
+     "points": [
+      "Blocks presynaptic Acetylcholine release",
+      "Descending flaccid paralysis + mydriasis",
+      "Prominent bulbar palsies and autonomic dry mouth",
+      "Treated with Equine Heptavalent Botulinum Antitoxin"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 148, 149, 150"
+}
