@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-forearm-hand",
+ "subject": "anatomy",
+ "title": "Anatomical Snuffbox Boundaries and Scaphoid Fractures",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The **anatomical snuffbox** is a triangular depression situated on the posterolateral aspect of the wrist at the base of the thumb, becoming sharply delineated when the thumb is fully extended and abducted. Historically named because powdered tobacco was placed in this depression for sniffing, it houses crucial radial vascular and skeletal structures.",
+   "say": "The anatomical snuffbox is a triangular hollow on the posterolateral wrist at the base of the thumb, visible when the thumb is extended and abducted. Historically used for holding snuff, it houses vital radial vessels and carpal bones.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-radial-levels.svg",
+    "alt": "Radial nerve branches and anatomical snuffbox boundaries",
+    "caption": "Radial nerve and anatomical snuffbox boundaries on the dorsolateral wrist. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The boundaries of the anatomical snuffbox are formed by three long thumb tendons. Medially (posteriorly) it is bounded by the tendon of **extensor pollicis longus**, which hooks around Lister tubercle on the dorsal radius before passing to the distal phalanx of the thumb.",
+   "say": "The snuffbox boundaries are formed by three thumb tendons. Medially, it is bounded by extensor pollicis longus, which pivots around Lister tubercle on the dorsal radius before heading to the distal phalanx.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Medial (Posterior) Boundary",
+     "points": [
+      "Tendon of extensor pollicis longus (EPL)",
+      "Hooks around dorsal tubercle of radius (Lister)",
+      "Inserts on the base of distal phalanx of thumb",
+      "Powerful extensor of interphalangeal joint"
+     ]
+    },
+    "right": {
+     "title": "Lateral (Anterior) Boundary",
+     "points": [
+      "Tendon of abductor pollicis longus (APL)",
+      "Tendon of extensor pollicis brevis (EPB)",
+      "Share the first dorsal extensor compartment",
+      "Subject to De Quervain tenosynovitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Laterally (anteriorly), the snuffbox is bounded by two tendons traveling together within the first dorsal extensor compartment: the abductor pollicis longus and the **extensor pollicis brevis**. Stenosing tenosynovitis of these two tendons within their fibrous sheath at the radial styloid process constitutes De Quervain disease, diagnosed by Finkelstein test.",
+   "say": "Laterally, the hollow is bounded by abductor pollicis longus and extensor pollicis brevis, which share the first extensor compartment. Friction within this sheath produces De Quervain tenosynovitis, identified by the Finkelstein test.",
+   "vis": {
+    "kind": "flow",
+    "title": "First Extensor Compartment Pathology",
+    "nodes": [
+     {
+      "id": "comp",
+      "label": "APL and EPB Tendons in 1st Compartment"
+     },
+     {
+      "id": "fric",
+      "label": "Repetitive Thumb Abduction and Ulnar Deviation"
+     },
+     {
+      "id": "thick",
+      "label": "Fibrous Sheath Thickening at Radial Styloid"
+     },
+     {
+      "id": "deq",
+      "label": "De Quervain Stenosing Tenosynovitis"
+     }
+    ],
+    "edges": [
+     [
+      "comp",
+      "fric"
+     ],
+     [
+      "fric",
+      "thick"
+     ],
+     [
+      "thick",
+      "deq"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The bony floor of the anatomical snuffbox is formed from proximal to distal by the styloid process of the radius, the **scaphoid bone**, and the trapezium, followed by the base of the first metacarpal. Palpation deep within the snuffbox directly tests for tenderness of the scaphoid waist.",
+   "say": "The bony floor of the snuffbox is formed by the radial styloid, the scaphoid bone, the trapezium, and the base of the first metacarpal. Palpation in the hollow directly contacts the waist of the scaphoid.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-smr-puberty-timing-boneage.webp",
+    "alt": "Wrist bones showing scaphoid, lunate, and carpal relationships",
+    "caption": "Carpal floor bones: scaphoid and trapezium forming the snuffbox base. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The contents of the anatomical snuffbox comprise the **radial artery**, traversing the floor as it winds from the volar wrist onto the dorsum of the hand to plunge between the two heads of the first dorsal interosseous muscle, alongside the terminal branches of the superficial radial nerve and the commencement of the cephalic vein in the roof.",
+   "say": "The snuffbox floor transmits the radial artery as it passes from front to back before diving into the first dorsal interosseous. In its roof run branches of the superficial radial nerve and the start of the cephalic vein.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Snuffbox Zone",
+     "Anatomical Structure",
+     "Clinical Examination",
+     "Surgical Sign"
+    ],
+    "rows": [
+     [
+      "Deep Floor",
+      "Radial artery trunk",
+      "Palpation of snuffbox pulse",
+      "Used for arterial cannulation"
+     ],
+     [
+      "Osseous Base",
+      "Waist of scaphoid bone",
+      "Point tenderness after FOOSH",
+      "Presumptive scaphoid fracture"
+     ],
+     [
+      "Subcutaneous Roof",
+      "Superficial radial nerve",
+      "Tinel sign at radial border",
+      "Wartenberg cheiralgia paresthetica"
+     ],
+     [
+      "Superficial Vein",
+      "Cephalic vein commencement",
+      "Visible subcutaneous blue vein",
+      "Site for peripheral intravenous line"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A fall onto an outstretched hand (FOOSH) delivers tremendous impact across the extended, radially deviated wrist, making the **scaphoid fracture** the most frequent carpal bone fracture, comprising seventy percent of all carpal fractures. Initial plain radiographs can appear entirely normal in fifteen percent of cases, demanding repeat films or MRI after ten days.",
+   "say": "A fall onto an outstretched hand forces the wrist into hyperextension, making the scaphoid the most commonly fractured carpal bone. Initial X-rays can miss up to fifteen percent of fractures, requiring repeat films or MRI after ten days.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Scaphoid Fracture Clinical Signs",
+     "points": [
+      "Localized tenderness in anatomical snuffbox",
+      "Tenderness over volar scaphoid tubercle",
+      "Pain on axial thumb metacarpal loading",
+      "Treated initially in thumb spica cast"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Radiological Pitfall",
+     "points": [
+      "Hairline waist fractures invisible on day 1",
+      "Bone resorption reveals fracture line at 10 days",
+      "MRI is gold standard for occult fracture",
+      "Failure to immobilize causes nonunion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The vascular supply of the scaphoid bone is retrograde and precarious, entering exclusively through the distal pole and dorsal ridge from branches of the radial artery. Consequently, a fracture across the waist of the scaphoid shears off the blood supply to the proximal fragment, leading inevitably to **avascular necrosis** of the proximal pole.",
+   "say": "Blood supply to the scaphoid enters through its distal pole in a retrograde direction. A fracture through the scaphoid waist shears off the blood supply to the proximal pole, resulting in avascular necrosis and nonunion.",
+   "vis": {
+    "kind": "flow",
+    "title": "Scaphoid Avascular Necrosis Pathway",
+    "nodes": [
+     {
+      "id": "foosh",
+      "label": "FOOSH: High-Impact Wrist Hyperextension"
+     },
+     {
+      "id": "shear",
+      "label": "Transverse Fracture Across Scaphoid Waist"
+     },
+     {
+      "id": "retro",
+      "label": "Disruption of Retrograde Distal Arterial Inflow"
+     },
+     {
+      "id": "avn",
+      "label": "Avascular Necrosis and Sclerosis of Proximal Pole"
+     }
+    ],
+    "edges": [
+     [
+      "foosh",
+      "shear"
+     ],
+     [
+      "shear",
+      "retro"
+     ],
+     [
+      "retro",
+      "avn"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Untreated scaphoid nonunion and avascular necrosis collapse carpal biomechanics, progressing over years to **scaphoid nonunion advanced collapse** (SNAC wrist), marked by severe secondary osteoarthritis between the radial styloid and the scaphoid, demanding salvage procedures like proximal row carpectomy or four-corner fusion.",
+   "say": "Untreated scaphoid nonunion progresses to scaphoid nonunion advanced collapse, or SNAC wrist, producing severe osteoarthritis between the radius and carpal bones that requires salvage carpal surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Scaphoid Fracture Zone",
+     "Incidence Proportion",
+     "Arterial Supply Status",
+     "Avascular Necrosis Risk"
+    ],
+    "rows": [
+     [
+      "Distal Tubercle / Pole",
+      "10 percent of fractures",
+      "Direct anterograde blood supply intact",
+      "Negligible risk of avascular necrosis"
+     ],
+     [
+      "Mid-Waist Fracture",
+      "70 percent of fractures",
+      "Retrograde supply severed across waist",
+      "30 to 40 percent avascular necrosis risk"
+     ],
+     [
+      "Proximal Pole Fracture",
+      "20 percent of fractures",
+      "Completely devascularized fragment",
+      "Approaches 100 percent avascular necrosis"
+     ],
+     [
+      "SNAC Wrist",
+      "Late consequence of nonunion",
+      "Severe radioscaphoid arthrosis",
+      "Requires proximal row carpectomy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
