@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-tetanus-trachoma-trachoma",
+ "subject": "community-medicine",
+ "module": "cm-tetanus-trachoma",
+ "title": "Trachoma and Yaws: The SAFE Strategy and Elimination Milestones",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Chlamydia trachomatis serovars and transmission",
+   "tx": "The obligate intracellular bacterium **Chlamydia trachomatis serovars** A, B, Ba and C causes trachoma, historically the leading infectious cause of preventable blindness worldwide. Spread through ocular and nasal discharges of infected children, transmission is facilitated by dirty fingers, contaminated towels or clothing, and eye-seeking eye-flies of the genus Musca sorbens, concentrating in arid rural settlements with acute water scarcity and overcrowded living conditions.",
+   "say": "Trachoma is caused by Chlamydia serovars A, B, Ba and C. Eye-seeking flies and shared dirty towels spread ocular discharges between children in dry, water-scarce communities.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chlamydial-infection-fig1.webp",
+    "alt": "Clinical photograph of upper tarsal conjunctival trachomatous follicles and cicatricial scarring",
+    "caption": "Trachoma: Tarsal conjunctival follicles, cicatricial scarring, trichiasis and corneal opacification. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "WHO simplified grading of trachoma",
+   "tx": "Field screening uses the **WHO simplified trachoma grading**, which categorises disease into five distinct progressive clinical stages: Trachomatous inflammation Follicular (TF), Trachomatous inflammation Intense (TI), Trachomatous Scarring (TS), Trachomatous Trichiasis (TT), and Corneal Opacity (CO). Presence of five or more lymphoid follicles measuring zero point five millimetres or larger on the upper tarsal conjunctiva defines follicular inflammation requiring community chemotherapy.",
+   "say": "Trachoma progresses through five stages: follicles, severe inflammation, scarring, ingrown eyelashes, and blinding corneal opacity. Five follicles on the upper eyelid confirms active disease.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Trachoma stage", "Defining clinical sign", "Pathological meaning"],
+    "rows": [
+     ["TF (Follicular)", ">= 5 follicles on upper tarsal conjunctiva", "Active lymphoid hyperplasia in children"],
+     ["TI (Intense)", "Severe inflammatory thickening obscuring tarsal vessels", "Intense diffuse conjunctival infiltration"],
+     ["TS (Scarring)", "Visible white fibrous bands in tarsal conjunctiva", "Irreversible cicatricial tissue contraction"],
+     ["TT (Trichiasis)", "At least one eyelash rubbing against the eyeball", "Entropion inward turning of the eyelid"],
+     ["CO (Corneal Opacity)", "Corneal clouding covering part of the pupil", "Blindness resulting from mechanical abrasion"]
+    ]
+   }
+  },
+  {
+   "title": "The SAFE strategy for global elimination",
+   "tx": "Public health elimination relies on the comprehensive **SAFE strategy framework**, which combines four coordinated interventions: Surgery for trichiasis, Antibiotics for active infection, Facial cleanliness, and Environmental improvement. Surgery realigns inverted eyelashes to protect the cornea, mass antibiotics eradicate the ocular bacterial reservoir, while facial washing and sanitary latrines break fly-mediated transmission chains across villages.",
+   "say": "The SAFE strategy fights trachoma on four fronts: surgery for ingrown eyelashes, antibiotics to kill bacteria, facial washing to clear discharge, and environmental sanitation to reduce flies.",
+   "vis": {
+    "kind": "table",
+    "cols": ["SAFE component", "Target intervention", "Primary operational objective"],
+    "rows": [
+     ["S: Surgery", "Bilamellar tarsal rotation surgery", "Corrects inward turning trichiasis and saves vision"],
+     ["A: Antibiotics", "Mass oral azithromycin or tetracycline eye ointment", "Eliminates Chlamydia reservoir from the community"],
+     ["F: Facial cleanliness", "Promote daily face washing in children", "Removes infectious discharge and fly attraction"],
+     ["E: Environmental improvement", "Water access, pit latrines and fly control", "Disrupts Musca sorbens breeding and transmission"]
+    ]
+   }
+  },
+  {
+   "title": "Oral azithromycin mass treatment guidelines",
+   "tx": "The antibiotic component delivers **oral azithromycin administration** as a single observed oral dose of twenty milligrams per kilogram body weight, up to a maximum of one gram for adults. When community prevalence of follicular trachoma among children aged one to nine years exceeds five percent, annual mass drug administration is delivered to the entire district population for at least three consecutive years until prevalence falls below threshold.",
+   "say": "A single annual dose of oral azithromycin treats the whole community when follicular trachoma exceeds five percent in children, stopping active transmission within three years.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Oral azithromycin (first-line)",
+     "points": ["Single oral dose of 20 mg/kg (max 1 g)", "Directly observed, high community compliance", "Safe in children older than 6 months"]
+    },
+    "right": {
+     "title": "Topical 1% tetracycline ointment",
+     "points": ["Applied twice daily for 6 consecutive weeks", "Alternative for infants under 6 months and allergy", "Poor compliance due to prolonged daily application"]
+    }
+   }
+  },
+  {
+   "title": "Bilamellar tarsal rotation for trichiasis",
+   "tx": "To avert imminent blindness, ophthalmic surgeons perform **bilamellar tarsal rotation**, a minor surgical procedure carried out under local anaesthesia in rural health camps. The surgeon makes a full-thickness incision through the scarred tarsal plate parallel to the lid margin and places eversion sutures, rotating the eyelash-bearing lid border outward to prevent lashes from relentlessly scratching and ulcerating the delicate cornea.",
+   "say": "Tarsal rotation surgery makes a small incision through the upper eyelid under local anaesthetic, turning ingrown eyelashes outward so they can no longer scratch the cornea.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Local infiltration anaesthesia of upper lid"},
+     {"id": "b", "label": "Full-thickness incision through tarsal plate"},
+     {"id": "c", "label": "Placement of three eversion mattress sutures"},
+     {"id": "d", "label": "Outward rotation of lashes away from cornea"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "India's validation of trachoma elimination",
+   "tx": "Through decades of targeted socioeconomic development and SAFE strategy execution, India achieved official validation of **trachoma elimination milestones** as a public health problem. National surveillance confirmed that active follicular trachoma prevalence among children aged one to nine years dropped below five percent in all surveyed evaluation units, alongside a reduction of unmanaged trichiasis to less than zero point two percent in adults.",
+   "say": "India eliminated trachoma as a public health problem by bringing active childhood infections below five percent and unmanaged eyelash trichiasis below zero point two percent nationwide.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Elimination indicator", "WHO validation threshold", "Indian status verified"],
+    "rows": [
+     ["Active trachoma (TF) in children 1-9 yrs", "Prevalence below 5 percent", "Sustained below 5% across all states"],
+     ["Trachomatous trichiasis (TT) in adults >= 15 yrs", "Prevalence below 0.2 percent", "Reduced below 0.2% with surgical backlog cleared"],
+     ["Surveillance system", "Active post-elimination monitoring", "Integrated into National Blindness Programme"]
+    ]
+   }
+  },
+  {
+   "title": "Yaws: non-venereal treponemal infection",
+   "tx": "Another historical neglected disease is **yaws endemicity**, a chronic non-venereal treponemal infection caused by Treponema pertenue, primarily affecting children under fifteen years living in impoverished, warm, humid, forested tribal belts. Spread through direct non-sexual skin-to-skin contact via minor cuts or abrasions, yaws manifests as an initial raspberry-like cutaneous papule called mother yaw, followed by secondary generalized contagious framboesiform skin lesions.",
+   "say": "Yaws is a non-venereal treponemal infection spread among tribal children through skin contact in humid forests. An initial raspberry-like sore evolves into widespread contagious lesions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Skin-to-skin contact in humid tribal belts"},
+     {"id": "b", "label": "Primary mother yaw ulcer at inoculation site"},
+     {"id": "c", "label": "Secondary crops of papillomas and bone pain"},
+     {"id": "d", "label": "Late tertiary destructive osteitis and deformities"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Yaws eradication strategy and Morges policy",
+   "tx": "The historic breakthrough in yaws control emerged from the **Morges eradication strategy**, which replaced painful intramuscular benzathine penicillin injections with a single oral dose of azithromycin at thirty milligrams per kilogram body weight. Deploying total community treatment where every village resident received oral azithromycin simultaneously, health teams cleared the treponemal reservoir across endemic districts without needing trained injection personnel.",
+   "say": "The Morges strategy replaced painful penicillin shots with a single oral dose of azithromycin for every village resident, curing active sores and wiping out the treponemal reservoir.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Legacy penicillin campaigns",
+     "points": ["Intramuscular benzathine penicillin G", "Required trained injection technicians", "Anaphylaxis risk and needle phobia"]
+    },
+    "right": {
+     "title": "Modern Morges oral strategy",
+     "points": ["Single oral azithromycin dose 30 mg/kg", "Swallowed under direct observation", "Universal community administration"]
+    }
+   }
+  },
+  {
+   "title": "India's landmark yaws eradication triumph",
+   "tx": "Through meticulous active surveillance and case searches across fifty-one endemic districts in ten states, India achieved certified **yaws eradication status** in 2016, becoming the first country in the world to officially eliminate this neglected tropical disease. The Yaws Eradication Programme demonstrated that sustained house-to-house case finding, immediate treatment of cases and contacts, cash rewards for reporting, and independent verification can permanently eradicate an ancient infection.",
+   "say": "In 2016, India became the first country in the world to officially eradicate yaws. House-to-house searches and cash rewards for reporting cases secured this historic milestone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Active search in 51 endemic tribal districts"},
+     {"id": "b", "label": "Immediate treatment of cases and contacts"},
+     {"id": "c", "label": "Cash reward for reporting suspected cases"},
+     {"id": "d", "label": "Zero cases certified by WHO in 2016"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}
