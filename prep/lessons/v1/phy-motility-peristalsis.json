@@ -1,232 +1,233 @@
 {
-  "v": 1,
-  "module": "phy-motility",
-  "subject": "physiology",
-  "title": "Peristalsis, the Defecation Reflex, and the Vomiting Cascade",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "The fundamental propulsive motor pattern of the gastrointestinal tract is peristalsis, governed by the classic **law of the gut**. Distension of the intestinal wall by an intraluminal bolus stimulates mucosal serotonin release, triggering contraction of circular muscle upstream and relaxation of circular muscle downstream.",
-      "say": "The law of the gut dictates upstream circular contraction and downstream receptive relaxation to propel food boluses.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "bolus",
-            "label": "Intraluminal Food Bolus Stretches Enteric Mucosa and Enterochromaffin Cells"
-          },
-          {
-            "id": "serotonin",
-            "label": "Release of Serotonin (5-HT) Stimulates Intrinsic Primary Afferent Neurons"
-          },
-          {
-            "id": "upstream",
-            "label": "Ascending Interneurons Release ACh and Substance P: Upstream Circular Contraction"
-          },
-          {
-            "id": "downstream",
-            "label": "Descending Interneurons Release Nitric Oxide and VIP: Downstream Receptive Relaxation"
-          }
-        ],
-        "edges": [
-          [
-            "bolus",
-            "serotonin"
-          ],
-          [
-            "serotonin",
-            "upstream"
-          ],
-          [
-            "serotonin",
-            "downstream"
-          ]
-        ]
-      }
+ "v": 1,
+ "module": "phy-motility",
+ "subject": "physiology",
+ "title": "Peristalsis, the Defecation Reflex, and the Vomiting Cascade",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The fundamental propulsive motor pattern of the gastrointestinal tract is peristalsis, governed by the classic **law of the gut**. Distension of the intestinal wall by an intraluminal bolus stimulates mucosal serotonin release, triggering contraction of circular muscle upstream and relaxation of circular muscle downstream.",
+   "say": "The law of the gut dictates upstream circular contraction and downstream receptive relaxation to propel food boluses.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bolus",
+      "label": "Intraluminal Food Bolus Stretches Enteric Mucosa and Enterochromaffin Cells"
+     },
+     {
+      "id": "serotonin",
+      "label": "Release of Serotonin (5-HT) Stimulates Intrinsic Primary Afferent Neurons"
+     },
+     {
+      "id": "upstream",
+      "label": "Ascending Interneurons Release ACh and Substance P: Upstream Circular Contraction"
+     },
+     {
+      "id": "downstream",
+      "label": "Descending Interneurons Release Nitric Oxide and VIP: Downstream Receptive Relaxation"
+     }
+    ],
+    "edges": [
+     [
+      "bolus",
+      "serotonin"
+     ],
+     [
+      "serotonin",
+      "upstream"
+     ],
+     [
+      "serotonin",
+      "downstream"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast to propulsive peristalsis, the predominant motor activity of the small intestine during active digestion is **segmental mixing contraction**. Ring-like contractions chop chyme into segments and slosh it back and forth over mucosal brush borders, maximizing nutrient contact without producing forward transit.",
+   "say": "Segmental contractions chop and mix chyme across the intestinal brush border without forward propulsion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Peristaltic Propulsion",
+     "points": [
+      "Coordinated upstream contraction and downstream relaxation",
+      "Travels aborally at 1 to 2 cm/sec over short distances",
+      "Primary role is forward transit of intestinal chyme",
+      "Requires intact myenteric plexus and enteric reflex arcs"
+     ]
     },
-    {
-      "tx": "In contrast to propulsive peristalsis, the predominant motor activity of the small intestine during active digestion is **segmental mixing contraction**. Ring-like contractions chop chyme into segments and slosh it back and forth over mucosal brush borders, maximizing nutrient contact without producing forward transit.",
-      "say": "Segmental contractions chop and mix chyme across the intestinal brush border without forward propulsion.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Peristaltic Propulsion",
-          "points": [
-            "Coordinated upstream contraction and downstream relaxation",
-            "Travels aborally at 1 to 2 cm/sec over short distances",
-            "Primary role is forward transit of intestinal chyme",
-            "Requires intact myenteric plexus and enteric reflex arcs"
-          ]
-        },
-        "right": {
-          "title": "Segmental Mixing",
-          "points": [
-            "Isolated rhythmic contractions of circular muscle rings",
-            "Divides chyme into segments and recombines them",
-            "Maximizes nutrient contact with brush border enzymes",
-            "Governed by slow wave frequency of interstitial cells of Cajal"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Colonic motility is characterized by slow, uncoordinated contractions that form pocket-like pouches called haustra. Approximately one to three times daily, powerful propulsive **mass movements** sweep through the transverse and descending colon, propelling faecal material rapidly into the rectum to initiate the urge to defecate.",
-      "say": "Mass movements occur one to three times daily, sweeping faeces into the rectum to trigger the defecation urge.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Colonic Motility Pattern",
-          "Frequency / Timing",
-          "Mechanistic Control",
-          "Functional Role"
-        ],
-        "rows": [
-          [
-            "Haustral Churning",
-            "Continuous (~6 to 8 cpm)",
-            "Intrinsic slow waves in circular muscle",
-            "Slow kneading, desiccation, and water reabsorption"
-          ],
-          [
-            "Mass Movements",
-            "1 to 3 times per day",
-            "Triggered by gastrocolic and duodenocolic reflexes",
-            "Drives colonic contents into rectum in seconds"
-          ],
-          [
-            "Anti-Peristalsis",
-            "Intermittent in ascending colon",
-            "Retrograde pacemaker waves",
-            "Delays emptying of caecum to maximize fluid recovery"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Ingestion of a meal triggers prompt colonic mass contractions through the coordinated **gastrocolic reflex**. Mediated by vagovagal neural pathways and endocrine gastrin release from the gastric antrum, this physiological reflex explains the common postprandial urge to defecate, which is especially pronounced in healthy infants.",
-      "say": "The gastrocolic reflex stimulates colonic mass movements after meals, mediated by vagal signals and gastrin.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "meal",
-            "label": "Food Ingestion Distends Stomach; Peptides Stimulate Antral Gastrin Release"
-          },
-          {
-            "id": "vagus",
-            "label": "Vagal Afferents Signal Brainstem; Long-Loop Vagovagal Reflex Activated"
-          },
-          {
-            "id": "colon_act",
-            "label": "Myenteric Parasympathetic Postganglionics Stimulate Colonic Smooth Muscle"
-          },
-          {
-            "id": "mass_mov",
-            "label": "Gastrocolic Reflex Initiates Vigorous Mass Movement Toward Rectum"
-          }
-        ],
-        "edges": [
-          [
-            "meal",
-            "vagus"
-          ],
-          [
-            "vagus",
-            "colon_act"
-          ],
-          [
-            "colon_act",
-            "mass_mov"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Faecal entry into the distensible rectal ampulla activates mechanoreceptors that trigger the **intrinsic defecation reflex**. Mediated via the myenteric plexus, peristaltic waves drive faeces through the anal canal while simultaneously relaxing the involuntary internal anal sphincter through nitric oxide release.",
-      "say": "Rectal distension triggers the defecation reflex, contracting rectal muscle while relaxing the internal anal sphincter.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/intestinal-malabsorption-ibd-polyps-hirschsprung-fig1.webp",
-        "alt": "Defecation reflex pathways and anorectal innervation",
-        "caption": "Anorectal junction reflex arcs, sphincter pressures, and autonomic regulation of continence."
-      }
-    },
-    {
-      "tx": "The intrinsic reflex is reinforced by the powerful **parasympathetic defecation reflex**, transmitting sensory impulses to sacral spinal cord segments S2 through S4. Efferents travel back via pelvic splanchnic nerves, intensifying peristalsis and relaxing the internal sphincter, while continence is preserved voluntarily by the somatic pudendal nerve.",
-      "say": "Parasympathetic signals from sacral spinal segments reinforce defecation, while voluntary pudendal nerves control continence.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Internal Anal Sphincter",
-          "points": [
-            "Thickened circular smooth muscle layer (involuntary)",
-            "Tonically contracted via sympathetic hypogastric outflow",
-            "Relaxes reflexively when rectal wall is distended (rectosphincteric reflex)",
-            "Abolished in Hirschsprung disease due to missing enteric inhibitory neurons"
-          ]
-        },
-        "right": {
-          "title": "External Anal Sphincter",
-          "points": [
-            "Striated voluntary muscle encircling anal canal",
-            "Innervated by somatic pudendal nerve (S2-S4)",
-            "Tonically active; consciously contracted to maintain continence",
-            "Can voluntarily override defecation reflex until convenient"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "The neurochemical coordination of emesis is controlled by the **brainstem vomiting center**, located in the dorsolateral reticular formation of the medulla. It integrates afferents from the chemoreceptor trigger zone, vagal gastrointestinal mechanoreceptors, vestibular nuclei in motion sickness, and higher cortical centres.",
-      "say": "The medullary vomiting centre integrates signals from the chemoreceptor trigger zone, vagal afferents, and vestibular system.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "stimuli",
-            "label": "Trigger: Toxins, Chemotherapy, GI Irritation, or Vestibular Motion Sickness"
-          },
-          {
-            "id": "ctz",
-            "label": "Chemoreceptor Trigger Zone (Area Postrema) Senses Bloodborne Emetogens"
-          },
-          {
-            "id": "vom_cent",
-            "label": "Medullary Vomiting Center Integrates Afferents from CN VIII, IX, X, and CTZ"
-          },
-          {
-            "id": "motor_out",
-            "label": "Coordinated Motor Surge: Retrograde Peristalsis, Diaphragm and Abdominal Contraction"
-          }
-        ],
-        "edges": [
-          [
-            "stimuli",
-            "ctz"
-          ],
-          [
-            "ctz",
-            "vom_cent"
-          ],
-          [
-            "vom_cent",
-            "motor_out"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Located in the area postrema on the floor of the fourth ventricle, the **chemoreceptor trigger zone** lacks a functional blood-brain barrier. Bathed directly by systemic arterial blood, it expresses high concentrations of dopamine D2 and serotonin 5-HT3 receptors, allowing circulating emetogenic toxins and chemotherapy agents to trigger vomiting.",
-      "say": "The chemoreceptor trigger zone in the area postrema lacks a blood-brain barrier, sensing toxins via dopamine and serotonin receptors.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/gi-celiac-ibd-gerd-malnutrition-fig1.webp",
-        "alt": "Gastrointestinal emetic reflex arcs and pharmacology",
-        "caption": "Emetic neuropharmacology, 5-HT3 and dopamine receptor blockade, and upper GI expulsion dynamics."
-      }
+    "right": {
+     "title": "Segmental Mixing",
+     "points": [
+      "Isolated rhythmic contractions of circular muscle rings",
+      "Divides chyme into segments and recombines them",
+      "Maximizes nutrient contact with brush border enzymes",
+      "Governed by slow wave frequency of interstitial cells of Cajal"
+     ]
     }
-  ],
-  "quiz": [],
-  "gen": "AI",
-  "src": []
+   }
+  },
+  {
+   "tx": "Colonic motility is characterized by slow, uncoordinated contractions that form pocket-like pouches called haustra. Approximately one to three times daily, powerful propulsive **mass movements** sweep through the transverse and descending colon, propelling faecal material rapidly into the rectum to initiate the urge to defecate.",
+   "say": "Mass movements occur one to three times daily, sweeping faeces into the rectum to trigger the defecation urge.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Colonic Motility Pattern",
+     "Frequency / Timing",
+     "Mechanistic Control",
+     "Functional Role"
+    ],
+    "rows": [
+     [
+      "Haustral Churning",
+      "Continuous (~6 to 8 cpm)",
+      "Intrinsic slow waves in circular muscle",
+      "Slow kneading, desiccation, and water reabsorption"
+     ],
+     [
+      "Mass Movements",
+      "1 to 3 times per day",
+      "Triggered by gastrocolic and duodenocolic reflexes",
+      "Drives colonic contents into rectum in seconds"
+     ],
+     [
+      "Anti-Peristalsis",
+      "Intermittent in ascending colon",
+      "Retrograde pacemaker waves",
+      "Delays emptying of caecum to maximize fluid recovery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ingestion of a meal triggers prompt colonic mass contractions through the coordinated **gastrocolic reflex**. Mediated by vagovagal neural pathways and endocrine gastrin release from the gastric antrum, this physiological reflex explains the common postprandial urge to defecate, which is especially pronounced in healthy infants.",
+   "say": "The gastrocolic reflex stimulates colonic mass movements after meals, mediated by vagal signals and gastrin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "meal",
+      "label": "Food Ingestion Distends Stomach; Peptides Stimulate Antral Gastrin Release"
+     },
+     {
+      "id": "vagus",
+      "label": "Vagal Afferents Signal Brainstem; Long-Loop Vagovagal Reflex Activated"
+     },
+     {
+      "id": "colon_act",
+      "label": "Myenteric Parasympathetic Postganglionics Stimulate Colonic Smooth Muscle"
+     },
+     {
+      "id": "mass_mov",
+      "label": "Gastrocolic Reflex Initiates Vigorous Mass Movement Toward Rectum"
+     }
+    ],
+    "edges": [
+     [
+      "meal",
+      "vagus"
+     ],
+     [
+      "vagus",
+      "colon_act"
+     ],
+     [
+      "colon_act",
+      "mass_mov"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Faecal entry into the distensible rectal ampulla activates mechanoreceptors that trigger the **intrinsic defecation reflex**. Mediated via the myenteric plexus, peristaltic waves drive faeces through the anal canal while simultaneously relaxing the involuntary internal anal sphincter through nitric oxide release.",
+   "say": "Rectal distension triggers the defecation reflex, contracting rectal muscle while relaxing the internal anal sphincter.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/intestinal-malabsorption-ibd-polyps-hirschsprung-fig1.webp",
+    "alt": "Defecation reflex pathways and anorectal innervation",
+    "caption": "Anorectal junction reflex arcs, sphincter pressures, and autonomic regulation of continence."
+   }
+  },
+  {
+   "tx": "The intrinsic reflex is reinforced by the powerful **parasympathetic defecation reflex**, transmitting sensory impulses to sacral spinal cord segments S2 through S4. Efferents travel back via pelvic splanchnic nerves, intensifying peristalsis and relaxing the internal sphincter, while continence is preserved voluntarily by the somatic pudendal nerve.",
+   "say": "Parasympathetic signals from sacral spinal segments reinforce defecation, while voluntary pudendal nerves control continence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Internal Anal Sphincter",
+     "points": [
+      "Thickened circular smooth muscle layer (involuntary)",
+      "Tonically contracted via sympathetic hypogastric outflow",
+      "Relaxes reflexively when rectal wall is distended (rectosphincteric reflex)",
+      "Abolished in Hirschsprung disease due to missing enteric inhibitory neurons"
+     ]
+    },
+    "right": {
+     "title": "External Anal Sphincter",
+     "points": [
+      "Striated voluntary muscle encircling anal canal",
+      "Innervated by somatic pudendal nerve (S2-S4)",
+      "Tonically active; consciously contracted to maintain continence",
+      "Can voluntarily override defecation reflex until convenient"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The neurochemical coordination of emesis is controlled by the **brainstem vomiting center**, located in the dorsolateral reticular formation of the medulla. It integrates afferents from the chemoreceptor trigger zone, vagal gastrointestinal mechanoreceptors, vestibular nuclei in motion sickness, and higher cortical centres.",
+   "say": "The medullary vomiting centre integrates signals from the chemoreceptor trigger zone, vagal afferents, and vestibular system.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stimuli",
+      "label": "Trigger: Toxins, Chemotherapy, GI Irritation, or Vestibular Motion Sickness"
+     },
+     {
+      "id": "ctz",
+      "label": "Chemoreceptor Trigger Zone (Area Postrema) Senses Bloodborne Emetogens"
+     },
+     {
+      "id": "vom_cent",
+      "label": "Medullary Vomiting Center Integrates Afferents from CN VIII, IX, X, and CTZ"
+     },
+     {
+      "id": "motor_out",
+      "label": "Coordinated Motor Surge: Retrograde Peristalsis, Diaphragm and Abdominal Contraction"
+     }
+    ],
+    "edges": [
+     [
+      "stimuli",
+      "ctz"
+     ],
+     [
+      "ctz",
+      "vom_cent"
+     ],
+     [
+      "vom_cent",
+      "motor_out"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Located in the area postrema on the floor of the fourth ventricle, the **chemoreceptor trigger zone** lacks a functional blood-brain barrier. Bathed directly by systemic arterial blood, it expresses high concentrations of dopamine D2 and serotonin 5-HT3 receptors, allowing circulating emetogenic toxins and chemotherapy agents to trigger vomiting.",
+   "say": "The chemoreceptor trigger zone in the area postrema lacks a blood-brain barrier, sensing toxins via dopamine and serotonin receptors.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hyperemesis-gravidarum-fig1.webp",
+    "alt": "Illustration of pregnancy hormone effects on the chemoreceptor trigger zone and electrolyte shifts in hyperemesis gravidarum.",
+    "caption": "Illustration of pregnancy hormone effects on the chemoreceptor trigger zone, mucosal dehydration, electrolyte shifts, and ketosis in hyperemesis gravidarum. Illustration: StewardMD original.",
+    "ar": 1.3333
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
 }
