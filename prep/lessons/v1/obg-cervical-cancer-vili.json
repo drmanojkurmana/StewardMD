@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "obg-cervical-cancer",
+ "subject": "obstetrics-gynaecology",
+ "title": "VILI, HPV DNA Testing and Colposcopy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Painting the cervix with iodine staining healthy tissue brown while precancer stays pale is **VILI**, visual inspection with Lugol iodine. Glycogen rich mature epithelium takes the stain; abnormal epithelium lacks glycogen. The mustard yellow patch maps the lesion for treatment. Iodine allergy and thyroid cautions are checked before the bottle opens.",
+   "say": "VILI stains healthy cervix brown while precancer remains pale yellow.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-via_screening.webp",
+    "alt": "Visual inspection of the cervix.",
+    "caption": "Cervical inspection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Magnified examination of the cervix after vinegar application is **colposcopy**. Acetowhite density, borders and vessel patterns estimate grade at the chairside. Punctation and mosaic vessels betray abnormal angiogenesis under the surface. Colposcopy directs biopsy; it never replaces histology where treatment decisions need certainty.",
+   "say": "Colposcopy involves magnified examination and directs biopsy to abnormal areas.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Suggests"
+    ],
+    "rows": [
+     [
+      "Dense acetowhite",
+      "High grade"
+     ],
+     [
+      "Fine mosaic",
+      "Low grade"
+     ],
+     [
+      "Atypical vessels",
+      "Invasion concern"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Biopsy from the worst colposcopic area confirms grade, the **directed biopsy**. Sampling the most abnormal site matters more than sampling many average ones. Bleeding after biopsy is controlled with pressure or cautery in clinic. An inadequate view of the transformation zone converts assessment toward excision instead.",
+   "say": "Directed biopsy samples the worst area and confirms precancer grade.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Abnormal area seen"
+     },
+     {
+      "id": "n1",
+      "label": "Biopsy taken"
+     },
+     {
+      "id": "n2",
+      "label": "Histology grades"
+     },
+     {
+      "id": "n3",
+      "label": "Treatment chosen"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Viral DNA testing as the first screening step is **primary HPV screening**. Positive results are triaged by cytology or genotyping before colposcopy. Longer negative protection stretches intervals and frees capacity for the unscreened. Programmes switching from cytology must retrain smear takers into sample takers.",
+   "say": "Primary HPV screening involves viral testing first and triage afterwards.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-ix-obg-hpv_dna_screening.webp",
+    "alt": "HPV DNA screening pathway.",
+    "caption": "HPV DNA pathway. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Benign mimics including ectropion, polyps and cervicitis confuse every visual test, teaching **mimic recognition**. An ectropion blushes red but lacks dense acetowhite change. Cervicitis produces patchy staining that treatment and retesting resolve. Treating infection before judging the cervix prevents ablation of inflamed but healthy tissue.",
+   "say": "Mimic recognition separates ectropion and cervicitis from true precancer.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "True precancer",
+     "points": [
+      "Dense acetowhite",
+      "Sharp border",
+      "Persists"
+     ]
+    },
+    "right": {
+     "title": "Mimic",
+     "points": [
+      "Patchy change",
+      "Inflamed look",
+      "Resolves with treatment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Self collected samples remove the speculum barrier for reluctant women, expanding **screening access**. Instruction quality decides sample adequacy more than anatomy does. Positive self tests still need a clinic visit for triage examination. Postal programmes in several countries now find precancer in women clinics never reached.",
+   "say": "Screening access improves when women collect their own HPV samples.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Barrier",
+     "Self sampling answer"
+    ],
+    "rows": [
+     [
+      "Speculum fear",
+      "No speculum"
+     ],
+     [
+      "Distance",
+      "Postal kit"
+     ],
+     [
+      "Clinic time",
+      "Home collection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Negative HPV results protect longer than negative cytology, setting **recall intervals**. Programmes lengthen intervals only with registries that guarantee the recall happens. A long interval without invitation systems becomes no interval at all. Interval policy therefore follows information systems, not laboratory sensitivity alone.",
+   "say": "Recall intervals are longer safely only with reliable invitation systems.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Negative HPV result"
+     },
+     {
+      "id": "n1",
+      "label": "Registry records"
+     },
+     {
+      "id": "n2",
+      "label": "Invitation at interval"
+     },
+     {
+      "id": "n3",
+      "label": "Rescreen completed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Positive screens without follow up waste the entire programme, naming the **follow up duty**. Tracking registers chase unreturned women actively rather than filing results. Same visit treatment exists precisely because return visits fail so often. Every screening report should state who owns the next step by name.",
+   "say": "The follow up duty requires active tracking of positive screening results.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Failure point",
+     "Remedy"
+    ],
+    "rows": [
+     [
+      "Result not seen",
+      "Registry chase"
+     ],
+     [
+      "Treatment deferred",
+      "Same visit cure"
+     ],
+     [
+      "Recall missed",
+      "Named owner"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Colposcopy quality is audited by correlation between impression, biopsy and outcome, closing with **quality assurance**. Clinics review missed cancers and overtreated regressions without blame. Photodocumentation lets peers verify difficult calls later. Standards protect women from both the timid biopsy and the heroic unnecessary excision.",
+   "say": "Quality assurance involves auditing colposcopy against histology outcomes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cervical-cancer-fig1.webp",
+    "alt": "Cervical tumour spread.",
+    "caption": "Cervical cancer patterns. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}
