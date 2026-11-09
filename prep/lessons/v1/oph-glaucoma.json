@@ -1,106 +1,218 @@
 {
-  "v": 1,
-  "module": "oph-glaucoma",
-  "subject": "ophthalmology",
-  "title": "Primary glaucoma",
-  "minutes": 6,
-  "steps": [
-    {
-      "tx": "Evaluation of the anterior chamber angle by **gonioscopy** is mandatory to differentiate open-angle from angle-closure glaucoma. Aqueous produced by ciliary epithelium circulates through the pupil and drains via the trabecular meshwork into Schlemm canal. In open-angle disease, gonioscopy reveals all angle structures from Schwalbe line to scleral spur and ciliary band, with outflow resistance at juxtacanalicular meshwork. Angle closure occurs when peripheral iris contacts trabecular meshwork, blocking aqueous drainage. Accurate classification determines whether therapy requires medical outflow enhancement or relief of pupillary block.",
-      "say": "Gonioscopy is the essential examination technique used to inspect the drainage structures within the iridocorneal angle. Normal aqueous humour is secreted by the ciliary processes, flows around the lens through the pupil, and leaves the eye through the trabecular meshwork into Schlemm canal. When inspecting an open angle, the examiner identifies Schwalbe line, the pigmented trabecular meshwork, scleral spur and ciliary body band. In angle closure, the peripheral iris touches the trabecular meshwork, obstructing drainage. Differentiating between open and closed angles guides proper management.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/oph-glaucoma-fig1.webp",
-        "alt": "Diagram illustrating aqueous humor flow and the difference between open and closed anterior chamber angles in glaucoma.",
-        "caption": "Aqueous outflow and angle types in primary glaucoma",
-        "ar": 1.8349
-      }
+ "v": 1,
+ "id": "oph-glaucoma",
+ "subject": "ophthalmology",
+ "module": "oph-glaucoma",
+ "title": "Glaucoma Overview and Optic Nerve Head",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Glaucoma** is progressive optic neuropathy with characteristic disc excavation and visual field loss, intraocular pressure main modifiable risk though damage occurs at normal pressures and high pressure without damage exists. Retinal ganglion axon loss at lamina cribrosa produces cupping and nerve fibre defects. It is disease of nerve, pressure being risk and treatment lever, definition examinations test first.",
+   "say": "Progressive neuropathy together gives glaucoma definition beyond pressure number at examinations for students reliably each time. Axon loss gives cupping mechanism additionally. Pressure gives modifiable lever status.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-angle-closure-glaucoma-fig1.webp",
+    "alt": "Glaucoma mechanisms diagram with angle and pressure pathways overview.",
+    "caption": "Glaucoma mechanism overview. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Optic nerve head** cupping enlarges cup disc ratio vertically, neuroretinal rim thinning violating the inferior superior nasal temporal thickness order early in glaucoma. Rim notching, disc haemorrhage and nerve fibre wedge defects mark progression at disc examination. Asymmetry between eyes beyond small limits therefore triggers glaucoma workup even at normal pressures.",
+   "say": "Rim thinning together gives early glaucoma disc evidence at fundus examination in screening clinics for adults. Haemorrhage gives progression marking additionally. Asymmetry gives workup trigger value.",
+   "vis": {
+    "kind": "table",
+    "title": "Disc glaucoma signs",
+    "cols": [
+     "Sign",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Vertical cup enlargement",
+      "Rim axon loss pattern"
+     ],
+     [
+      "Rim notch or haemorrhage",
+      "Active progression evidence"
+     ],
+     [
+      "Fibre wedge defect",
+      "Bundle loss to field"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**ISNT rule** states healthy rim thickest inferior, then superior, nasal, temporal thinnest, glaucoma violating order earliest inferiorly and superiorly. Rule breaking rim therefore suspects glaucoma before field loss in disc screening. Large physiological cups in large discs need size correction before ratio alarm in myopic screening populations.",
+   "say": "Rim order together gives screening rule in disc assessment at glaucoma clinics for adults with large cups. Violation gives early suspicion additionally. Disc size gives ratio context.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Glaucomatous disc",
+     "points": [
+      "ISNT order violated",
+      "Notch, haemorrhage, wedge"
+     ]
     },
-    {
-      "tx": "The progression of **primary open-angle glaucoma** causes insidious, painless, bilateral visual loss that patients rarely notice early. Risk factors include elevated intraocular pressure, advanced age, positive family history, myopia, thin cornea, and African descent. First-line medical therapy uses once-daily topical prostaglandin analogues to augment uveoscleral outflow, or topical beta-blockers like timolol to reduce aqueous production, avoiding the latter in asthma. Alpha-2 agonists and carbonic anhydrase inhibitors provide add-on control. When maximum medical therapy and laser trabeculoplasty fail, trabeculectomy creates an alternative drainage fistula.",
-      "say": "Primary open angle glaucoma is a chronic, progressive optic neuropathy characterized by painless visual field loss that patients rarely notice early. Elevated intraocular pressure is the major modifiable risk factor, alongside advanced age, high myopia and a positive family history. First line treatment begins with topical prostaglandin analogues, which enhance uveoscleral outflow, while beta blockers decrease aqueous production but are avoided in patients with asthma. If drops and laser trabeculoplasty fail to control intraocular pressure, surgical trabeculectomy creates a new subconjunctival drainage fistula.",
-      "vis": null
-    },
-    {
-      "tx": "An acute attack of **primary angle closure** develops when pupillary block in a shallow anterior chamber causes the iris to occlude the trabecular meshwork. Patients experience severe periocular pain, nausea, vomiting, colored halos, and blurred vision. Examination reveals a stony hard eye, ciliary congestion, corneal edema, shallow chamber, and a vertically oval, mid-dilated, unreactive pupil. Immediate medical therapy combines intravenous mannitol, oral acetazolamide, topical beta-blockers, alpha-2 agonists, and pilocarpine. Definitive management requires bilateral laser peripheral iridotomy once corneal clarity is restored, preventing recurrence in both eyes.",
-      "say": "Acute angle closure glaucoma represents a severe ocular emergency caused by sudden pupillary block in an eye with a shallow anterior chamber. The iris bows forward, completely occluding the trabecular meshwork and causing an abrupt rise in intraocular pressure. Patients suffer excruciating eye pain, headache, nausea, colored halos and rapid loss of vision. The eye is red, the cornea looks cloudy, and the pupil is fixed and mid dilated. Emergency management lowers pressure with systemic acetazolamide, intravenous mannitol and topical drops, followed by bilateral laser peripheral iridotomy.",
-      "vis": null
-    },
-    {
-      "tx": "In **normal tension glaucoma**, characteristic optic disc excavation and visual field loss progress despite intraocular pressure remaining consistently within normal range below twenty-one millimetres of mercury. Pathogenesis involves vascular dysregulation, nocturnal hypotension, sleep apnea, Raynaud phenomenon, and migraine headaches. Disc hemorrhages and scotomas close to fixation are commoner than in high-tension glaucoma. Treatment requires lowering baseline pressure by thirty percent with topical medications or laser, while avoiding overzealous nocturnal antihypertensive treatment that compromises optic nerve head perfusion during sleep.",
-      "say": "Normal tension glaucoma is a subtype of open angle glaucoma where optic disc cupping and visual field loss progress despite pressure readings within normal limits. Vasospastic tendencies, Raynaud phenomenon, migraine headaches and nocturnal systemic hypotension are frequently associated with this condition. Examination often reveals flame shaped splinter haemorrhages at the disc margin and visual field scotomas close to central fixation. Management focuses on lowering intraocular pressure by thirty percent from baseline, while taking care not to lower systemic blood pressure excessively during nighttime hours.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Drug",
-          "Action",
-          "Caution"
-        ],
-        "rows": [
-          [
-            "Latanoprost",
-            "Uveoscleral outflow up",
-            "Darkens iris, grows lashes"
-          ],
-          [
-            "Timolol",
-            "Aqueous production down",
-            "Asthma, slow pulse"
-          ],
-          [
-            "Pilocarpine",
-            "Trabecular pull open",
-            "Brow ache, myopia"
-          ],
-          [
-            "Acetazolamide",
-            "Systemic production down",
-            "Tingling, stones"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Ophthalmoscopy reveals progressive **optic disc cupping**, characterized by thinning and notching of the neuroretinal rim violating the normal inferior-superior-nasal-temporal rule. As axons die, the cup-to-disc ratio enlarges, retinal vessels show bayoneting and nasal shifting at the cup margin, and splinter hemorrhages appear. Humphrey visual field perimetry maps functional loss from paracentral scotomas and nasal steps to dense arcuate scotomas and tunnel vision. Optical coherence tomography detects retinal nerve fiber layer thinning before perimetric visual field defects emerge, enabling early neuroprotective intervention.",
-      "say": "Glaucomatous optic neuropathy produces progressive optic disc cupping that reflects irreversible loss of retinal ganglion cell axons. Examination shows selective thinning of the neuroretinal rim, violation of the normal inferior superior nasal temporal rule, and vascular bayoneting at the cup edge. Flame shaped splinter haemorrhages at the disc border often signal active disease progression. Automated visual field testing maps corresponding functional losses, progressing from early paracentral scotomas to dense arcuate defects. Optical coherence tomography provides objective measurement of nerve fibre thinning before visual field loss appears.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/oph-glaucoma-s4.webp",
-        "alt": "Cross-sectional ocular diagram of a trabeculectomy showing guarded partial-thickness scleral flap and filtering bleb.",
-        "caption": "Trabeculectomy surgical anatomy: guarded scleral flap and filtering bleb",
-        "ar": 1.3333
-      }
+    "right": {
+     "title": "Physiological cup",
+     "points": [
+      "ISNT order preserved",
+      "Large disc explains cup"
+     ]
     }
-  ],
-  "quiz": [
-    "bk2-oph-091",
-    "bk2-oph-092",
-    "bk2-oph-093",
-    "bk2-oph-094",
-    "bk2-oph-095",
-    "bk2-oph-096",
-    "bk2-oph-097",
-    "bk2-oph-098",
-    "bk2-oph-099",
-    "bk2-oph-100"
-  ],
-  "src": [],
-  "refs": [
-    "Parsons' Diseases of the Eye 23rd Edition (topic map; text rewritten, no verbatim copy)"
-  ],
-  "gen": "hand",
-  "run": "books2-oph1",
-  "model": "muse-wonder-1.0",
-  "checks": {
-    "shape": true,
-    "numbers": true,
-    "drugs": true,
-    "verbatim": true,
-    "dashes": true,
-    "verify": true,
-    "redone": 0,
-    "dropped": 0,
-    "kbWords": 0,
-    "itemN": 10
+   }
+  },
+  {
+   "tx": "Open versus angle closure classification by gonioscopy mechanism decides laser and surgery families in following batches, outflow anatomy from earlier lessons applied. Primary open angle insidious bilateral, angle closure pupillary block acute or chronic by anatomy. **Gonioscopy mandatory** in every new glaucoma because pressure alone never classifies mechanism.",
+   "say": "Gonioscopy together gives mechanism classification in every new glaucoma at diagnosis clinics for adults without exception. Pressure gives insufficient classification additionally. Anatomy gives family direction.",
+   "vis": {
+    "kind": "flow",
+    "title": "Glaucoma classification flow",
+    "nodes": [
+     {
+      "id": "disc",
+      "label": "Disc and field damage read"
+     },
+     {
+      "id": "gonio",
+      "label": "Gonioscopy mechanism read"
+     },
+     {
+      "id": "class",
+      "label": "Open or closure family"
+     },
+     {
+      "id": "target",
+      "label": "Target pressure set"
+     }
+    ],
+    "edges": [
+     [
+      "disc",
+      "gonio"
+     ],
+     [
+      "gonio",
+      "class"
+     ],
+     [
+      "class",
+      "target"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Target pressure** individualises by baseline damage, progression rate, life expectancy and pressure level at damage, lower targets for advanced or progressing disease. Single normal range number therefore never manages glaucoma patient longitudinally. Progression despite target resets target lower in stepwise chronic care.",
+   "say": "Individual target together gives longitudinal glaucoma management beyond normal range at follow up clinics for adults over years. Progression gives resetting rule additionally. Damage gives starting severity.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Optic nerve head anatomy diagram relevant to cupping assessment.",
+    "caption": "Optic nerve head cupping anatomy. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Visual field defects respect horizontal midline and nerve fibre bundles: arcuate scotomas, nasal steps and paracentral loss early, tunnel vision late with central island. Field pattern therefore localises to nerve fibre layer against neurological defects respecting vertical midline. **Horizontal respect** is glaucoma field signature examinations contrast with chiasmal vertical respect.",
+   "say": "Horizontal respect together gives glaucoma field signature against neurological patterns at perimetry review in clinics for adults. Arcuate shape gives bundle logic additionally. Vertical gives chiasmal contrast.",
+   "vis": {
+    "kind": "table",
+    "title": "Field pattern split",
+    "cols": [
+     "Pattern",
+     "Localisation"
+    ],
+    "rows": [
+     [
+      "Arcuate, nasal step",
+      "Glaucoma nerve fibre"
+     ],
+     [
+      "Bitemporal vertical respect",
+      "Chiasmal lesion pathway"
+     ],
+     [
+      "Tunnel late island",
+      "Advanced glaucoma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ocular hypertension without damage observes or treats by risk profile, normal tension glaucoma with damage at normal pressures treats pressure lower still proving pressure relative concept. Both challenge pressure only definitions in opposite directions at screening. **Damage decides** glaucoma label, pressure decides intensity in both paradoxes.",
+   "say": "Damage decision together gives glaucoma labelling in pressure paradoxes at screening clinics for adults with borderline numbers. Intensity gives pressure role additionally. Observation gives hypertension option.",
+   "vis": {
+    "kind": "table",
+    "title": "Pressure paradox pair",
+    "cols": [
+     "State",
+     "Label logic"
+    ],
+    "rows": [
+     [
+      "High pressure, no damage",
+      "Ocular hypertension observe risk"
+     ],
+     [
+      "Normal pressure, damage",
+      "Normal tension glaucoma treat"
+     ],
+     [
+      "Damage progressing",
+      "Lower target regardless number"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors overview: nerve disease, rim order violated, fields respect horizontal and targets individualise by damage. Gonioscopy classifies mechanism before drops family chosen in next batches. **Cupping plus field** diagnoses, pressure number alone never does in glaucoma. Screening programmes therefore refer by disc and field suspicion without waiting for pressure thresholds.",
+   "say": "Nerve pattern together gives glaucoma diagnosis beyond pressure at examinations for students reliably in screening and clinic. Gonioscopy gives mechanism additionally. Target gives longitudinal individualisation.",
+   "vis": {
+    "kind": "table",
+    "title": "Glaucoma overview anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Definition",
+      "Optic neuropathy, pressure modifiable"
+     ],
+     [
+      "Disc rule",
+      "ISNT violated inferior superior first"
+     ],
+     [
+      "Management unit",
+      "Individual target pressure"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Glaucoma definition",
+   "b": "Progressive optic neuropathy with cupping and fibre field loss; pressure is modifiable risk, not definition."
+  },
+  {
+   "f": "ISNT rule",
+   "b": "Rim thickest inferior then superior nasal temporal; violation suspects glaucoma early."
+  },
+  {
+   "f": "Target pressure",
+   "b": "Individualised by damage and progression; progressing disease resets target lower."
+  }
+ ],
+ "keys": [
+  "Gonioscopy classifies every new glaucoma",
+  "Fields respect horizontal midline in glaucoma",
+  "Damage decides label, pressure decides intensity"
+ ]
 }

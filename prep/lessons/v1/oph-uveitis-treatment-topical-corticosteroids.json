@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "id": "oph-uveitis-treatment-topical-corticosteroids",
+ "subject": "ophthalmology",
+ "module": "oph-anterior-uveitis",
+ "title": "Uveitis Treatment Ladder and Steroid Safety",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Topical corticosteroids** are first line for anterior uveitis, potency and frequency matched to cell grade, tapered only as grade falls to avoid rebound and pressure complications. Cycloplegia accompanies moderate to severe anterior disease for pain and synechiae prevention from earlier lessons. Grade led prescribing therefore replaces fixed course thinking in anterior clinics.",
+   "say": "Potency matching together gives anterior uveitis control by grade at slit lamp in clinic for acute attacks. Taper by grade gives rebound prevention additionally. Cycloplegia gives synechiae protection company.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anterior-uveitis-fig1.webp",
+    "alt": "Anterior uveitis grading findings relevant to steroid intensity decisions.",
+    "caption": "Grade led steroid decisions. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Periocular and intravitreal steroid routes deliver posterior or macular disease where drops cannot reach, trading local efficacy against pressure and cataract certainty over time. Systemic steroids bridge severe bilateral or posterior disease while steroid sparing immunosuppression takes effect. **Route by compartment** repeats anatomy classification as treatment law across uveitis modules.",
+   "say": "Route selection together gives compartment treatment law in uveitis care at tertiary clinics for posterior disease. Local trade gives pressure certainty additionally. Systemic bridging gives sparing onset cover.",
+   "vis": {
+    "kind": "table",
+    "title": "Steroid routes by compartment",
+    "cols": [
+     "Route",
+     "Reaches"
+    ],
+    "rows": [
+     [
+      "Topical drops",
+      "Anterior segment disease"
+     ],
+     [
+      "Periocular injection",
+      "Intermediate and macular disease"
+     ],
+     [
+      "Intravitreal implant",
+      "Posterior chronic disease"
+     ],
+     [
+      "Systemic therapy",
+      "Bilateral severe panuveitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Steroid responders** raise intraocular pressure predictably in a substantial minority, children and glaucoma families higher risk, pressure therefore checked at every steroid course review. Cataract posterior subcapsular pattern accumulates with duration in any route. Monitoring phrases belong on uveitis prescriptions as vernal lesson taught for children.",
+   "say": "Pressure response together gives monitoring need at every steroid review in uveitis clinics for children and families. Posterior cataract gives duration accumulation additionally. Prescription phrases give safety culture.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Steroid benefit track",
+     "points": [
+      "Grade falls visit by visit",
+      "Synechiae prevented early",
+      "Macular oedema controlled"
+     ]
+    },
+    "right": {
+     "title": "Steroid harm track",
+     "points": [
+      "Pressure rises in responders",
+      "Posterior cataract accumulates",
+      "Infection worsens uncovered"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Steroid sparing immunosuppression enters chronic, bilateral, posterior or steroid dependent disease, antimetabolite first line in many protocols with laboratory monitoring partnerships. Biologic agents escalate refractory Behcet and severe posterior disease in specialist centres. **Sparing intent** declared at systemic start prevents indefinite steroid harm by drift.",
+   "say": "Sparing intent together gives chronic uveitis strategy at systemic start in tertiary clinics for bilateral disease. Laboratory partnership gives safety additionally. Biologic escalation gives refractory route.",
+   "vis": {
+    "kind": "flow",
+    "title": "Uveitis treatment ladder",
+    "nodes": [
+     {
+      "id": "top",
+      "label": "Topical grade led therapy"
+     },
+     {
+      "id": "local",
+      "label": "Local injection if posterior"
+     },
+     {
+      "id": "sys",
+      "label": "Systemic steroid bridge"
+     },
+     {
+      "id": "spare",
+      "label": "Sparing immunosuppression"
+     }
+    ],
+    "edges": [
+     [
+      "top",
+      "local"
+     ],
+     [
+      "local",
+      "sys"
+     ],
+     [
+      "sys",
+      "spare"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Infection cover before intensive suppression repeats granuloma rule: herpetic, tuberculous and syphilitic uveitis worsen under steroid alone after brief improvement. Cover or cause therapy therefore accompanies escalation in any pattern with infectious differential. **Brief improvement** after steroid never proves non infectious cause in uveitis reasoning.",
+   "say": "Brief improvement together gives trap warning in infectious uveitis during steroid escalation at hospital clinics for undiagnosed patients. Cover gives safety additionally. Pattern gives differential breadth.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Uveal tract diagram relevant to steroid route selection by compartment.",
+    "caption": "Compartment route anatomy. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Mydriatic cycloplegic therapy rests ciliary spasm pain, prevents synechiae by moving pupil and breaks fresh adhesions in severe anterior attacks. Short versus long acting choice balances school or work vision against adhesion risk. **Moving pupil** is mechanical prophylaxis, drops therefore timed through waking hours in fibrinous disease.",
+   "say": "Moving pupil together gives mechanical prophylaxis in fibrinous anterior attacks at emergency clinics for young adults. Acting duration gives lifestyle balance additionally. Timing gives waking cover value.",
+   "vis": {
+    "kind": "table",
+    "title": "Anterior adjunct set",
+    "cols": [
+     "Adjunct",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Cycloplegia",
+      "Pain rest, synechiae prevention"
+     ],
+     [
+      "Pressure therapy",
+      "Steroid or inflammation rise cover"
+     ],
+     [
+      "Macular imaging",
+      "Oedema endpoint surveillance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Taper discipline reduces frequency stepwise with grade halving as guide, stopping only at zero cells in most anterior protocols, rebound re escalating one rung. Patient self tapering by comfort is commonest rebound cause counselled at discharge. **Written taper** with review date therefore accompanies every intensive uveitis prescription.",
+   "say": "Written taper together gives rebound prevention in anterior uveitis discharge from hospital clinics for acute attacks. Grade halving gives step logic additionally. Comfort tapering gives counselling target.",
+   "vis": {
+    "kind": "table",
+    "title": "Taper rules",
+    "cols": [
+     "Rule",
+     "Reason"
+    ],
+    "rows": [
+     [
+      "Taper by grade fall",
+      "Activity led, not calendar"
+     ],
+     [
+      "Rebound up one rung",
+      "Restore last effective level"
+     ],
+     [
+      "Zero cells endpoint",
+      "Stop only when quiet"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: grade leads potency, compartment leads route, sparing declares intent and cover precedes suppression where infection possible. Pressure and lens surveil every steroid month. **Taper written** is discharge safety in uveitis as mobilisation written in surgery. Review dates therefore travel with every prescription copy given to the patient and the referring team.",
+   "say": "Grade together with compartment gives uveitis prescribing law at examinations for students reliably in anterior and posterior cases. Written taper gives discharge safety additionally. Surveillance gives harm tracking.",
+   "vis": {
+    "kind": "table",
+    "title": "Treatment anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Anterior first line",
+      "Topical grade led steroids"
+     ],
+     [
+      "Posterior route",
+      "Local or systemic by compartment"
+     ],
+     [
+      "Chronic bilateral",
+      "Declare sparing intent early"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Steroid taper rule",
+   "b": "Taper by cell grade fall, stop at zero cells; rebound returns one rung."
+  },
+  {
+   "f": "Route by compartment",
+   "b": "Topical anterior, periocular or intravitreal posterior, systemic bilateral severe."
+  },
+  {
+   "f": "Steroid surveillance pair",
+   "b": "Pressure in responders and posterior subcapsular cataract with duration."
+  }
+ ],
+ "keys": [
+  "Declare steroid sparing intent at systemic start",
+  "Cover infection before intensive suppression",
+  "Written taper prevents comfort rebound"
+ ]
+}
