@@ -1,0 +1,229 @@
+{
+ "v": 1,
+ "module": "phy-nerve-fibres",
+ "subject": "physiology",
+ "title": "Nerve Fibre Vulnerability, Degeneration, and Regeneration",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Different nerve fibre types display distinct susceptibilities to physiological insults. When subjected to ischaemia, **susceptibility to hypoxia** is greatest in large myelinated A fibres, intermediate in B fibres, and lowest in unmyelinated C fibres. Because large A fibres possess high metabolic energy demands for continuous sodium pumping, tourniquet ischaemia paralyses motor and touch senses while sparing dull pain.",
+   "say": "Large myelinated A fibres are most vulnerable to hypoxia because of high metabolic demands, while unmyelinated C fibres are most resistant.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Insult / Agent",
+     "Most Sensitive (First Blocked)",
+     "Intermediate",
+     "Most Resistant (Last Blocked)"
+    ],
+    "rows": [
+     [
+      "Hypoxia / Ischaemia",
+      "Type A fibres (large myelinated)",
+      "Type B fibres",
+      "Type C fibres (unmyelinated)"
+     ],
+     [
+      "Mechanical Pressure",
+      "Type A fibres (large myelinated)",
+      "Type B fibres",
+      "Type C fibres (unmyelinated)"
+     ],
+     [
+      "Local Anaesthetics",
+      "Type C and A-delta (small diameter)",
+      "Type B fibres",
+      "Type A-alpha (large motor fibres)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mechanical compression blocks nerve conduction by displacing myelin and producing localized microvascular ischaemia. Heavy mechanical pressure preferentially impairs large myelinated **A-alpha fibres**, causing motor weakness and loss of proprioception and vibration sense. This vulnerability explains wrist drop in Saturday night radial nerve palsy and tourniquet paralysis, while dull unmyelinated C fibre pain remains intact.",
+   "say": "Mechanical compression preferentially damages large A fibres, causing motor paralysis and numbness while leaving unmyelinated pain fibres functioning.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pressure Palsy (Saturday Night Radial)",
+     "points": [
+      "Direct mechanical compression of large A fibres",
+      "Loss of motor extension (wrist drop)",
+      "Impaired proprioception and vibration sensation",
+      "C fibre burning pain remains unaffected"
+     ]
+    },
+    "right": {
+     "title": "Local Anaesthetic Block",
+     "points": [
+      "Chemical blockade of voltage-gated sodium channels",
+      "Small diameter A-delta and C fibres blocked first",
+      "Loss of pain and temperature precedes motor block",
+      "Large motor A-alpha fibres blocked last"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In contrast to hypoxia and pressure, pharmacological **local anaesthetics** exhibit an inverse sequence of susceptibility. Small unmyelinated C fibres and thinly myelinated A-delta fibres are blocked first, followed by small B fibres, with large motor A-alpha fibres blocked last. Shorter critical lengths of exposure and high firing rates render small pain fibres exceptionally vulnerable to sodium channel blockade.",
+   "say": "Local anaesthetics block small unmyelinated C and A-delta fibres first, abolishing pain and temperature before affecting large motor fibres.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/local-anaesthetics-esters-amides-blocks-fig1.webp",
+    "alt": "Differential pharmacological blockade of nerve fibre classes.",
+    "caption": "Differential susceptibility to local anaesthetic blockade across axonal diameter classes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Complete axonal transection initiates an anterograde degenerative cascade distal to the injury site termed **Wallerian degeneration**. Deprived of vital somal axoplasmic transport, the distal axon segment swells, fragments, and is cleared by recruited macrophages. Surrounding Schwann cells dedifferentiate, shed their myelin sheaths, and proliferate along the original endoneurial basal lamina.",
+   "say": "Wallerian degeneration destroys the axon distal to a transection. Macrophages clear debris while Schwann cells proliferate inside endoneurial tubes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tran",
+      "label": "Axonal Transection (Axotomy) Separates Distal Segment from Soma"
+     },
+     {
+      "id": "frag",
+      "label": "Axon Fragments & Macrophages Clear Axoplasm and Myelin Debris"
+     },
+     {
+      "id": "band",
+      "label": "Schwann Cells Proliferate to Form Bands of Bungner"
+     },
+     {
+      "id": "sprout",
+      "label": "Proximal Growth Cone Sprouts and Navigates Toward Target"
+     }
+    ],
+    "edges": [
+     [
+      "tran",
+      "frag"
+     ],
+     [
+      "frag",
+      "band"
+     ],
+     [
+      "band",
+      "sprout"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The proliferating Schwann cells form column-like cellular conduits designated bands of Bungner within intact endoneurial tubes. In peripheral nerves, **nerve regeneration** proceeds at a steady rate of one to two millimetres per day (approximately one inch per month) as axonal growth cones sprout from the proximal stump, guided by neurotropic factors toward terminal target end-organs.",
+   "say": "Peripheral nerve axons regenerate at one to two millimetres per day along Schwann cell bands of Bungner toward their target organs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Regeneration Feature",
+     "Peripheral Nervous System (PNS)",
+     "Central Nervous System (CNS)"
+    ],
+    "rows": [
+     [
+      "Regenerative Capacity",
+      "Robust functional regeneration occurs",
+      "Extremely abortive and unsuccessful"
+     ],
+     [
+      "Glial Guiding Substrate",
+      "Schwann cell bands of Bungner",
+      "Astrocytic glial scar formation"
+     ],
+     [
+      "Myelin Breakdown Debris",
+      "Cleared rapidly by hematogenous macrophages",
+      "Persistent myelin inhibitors (Nogo-A, MAG)"
+     ],
+     [
+      "Rate of Axonal Growth",
+      "1 to 2 millimetres per day",
+      "Arrested by chondroitin sulfate proteoglycans"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Simultaneously, the cell body undergoes reactive retrograde alterations designated **chromatolysis**. Within forty-eight hours of axotomy, the neuronal nucleus shifts eccentric to the periphery, the perikaryon swells, and Nissl granules disperse as the cell transitions from neurotransmitter production to high-volume structural protein and RNA synthesis required for axonal repair.",
+   "say": "Chromatolysis occurs in the cell body after axotomy. The nucleus moves peripherally and Nissl substance disperses as protein synthesis accelerates for repair.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Resting Neuron",
+     "points": [
+      "Centrally placed round nucleus with prominent nucleolus",
+      "Abundant coarse Nissl substance (rough ER clusters)",
+      "Synthesizes neurotransmitters and maintenance proteins",
+      "Stable synaptic architecture with dendritic spines"
+     ]
+    },
+    "right": {
+     "title": "Chromatolytic Axotomized Neuron",
+     "points": [
+      "Eccentrically displaced nucleus at cell periphery",
+      "Dispersal of Nissl granules into fine cytoplasmic dust",
+      "Marked cellular swelling of perikaryon",
+      "Dramatically upregulated tubulin and actin synthesis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Survival and guided directional outgrowth of regenerating axons depend strictly on target-derived polypeptides called **neurotrophins**. The prototype nerve growth factor (NGF), along with brain-derived neurotrophic factor (BDNF), neurotrophin-3, and neurotrophin-4/5, bind high-affinity Trk receptor tyrosine kinases, undergoing retrograde axonal transport to the soma to suppress apoptotic caspase activation.",
+   "say": "Target-derived neurotrophins such as nerve growth factor bind Trk receptors and undergo retrograde transport to promote neuronal survival and guide outgrowth.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "target",
+      "label": "Peripheral Target Tissues Secrete Neurotrophic Factors (NGF, BDNF)"
+     },
+     {
+      "id": "trk",
+      "label": "Binding and Dimerization of High-Affinity Trk Tyrosine Kinase Receptors"
+     },
+     {
+      "id": "retro",
+      "label": "Retrograde Axoplasmic Transport of Signaling Endosome to Soma"
+     },
+     {
+      "id": "gene",
+      "label": "Transcriptional Activation of Survival Genes and Inhibition of Apoptosis"
+     }
+    ],
+    "edges": [
+     [
+      "target",
+      "trk"
+     ],
+     [
+      "trk",
+      "retro"
+     ],
+     [
+      "retro",
+      "gene"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast to peripheral nerves, central axonal regeneration fails because oligodendrocytes express potent inhibitory surface ligands such as **Nogo-A**, myelin-associated glycoprotein, and oligodendrocyte myelin glycoprotein. Furthermore, reactive astrocytes proliferate to establish a dense impenetrable physical and chemical glial scar containing chondroitin sulfate proteoglycans, halting axonal growth cone elongation in the spinal cord.",
+   "say": "Central regeneration fails because oligodendrocytes express inhibitory Nogo-A while astrocytes form an impenetrable glial scar that blocks growth cones.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-phenytoin.webp",
+    "alt": "Neuronal membrane signaling and central axonal inhibitory environment.",
+    "caption": "Central nervous system glial scar and myelin inhibitory factors arresting axonal elongation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

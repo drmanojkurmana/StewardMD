@@ -1,0 +1,254 @@
+{
+ "v": 1,
+ "module": "phy-nerve-fibres",
+ "subject": "physiology",
+ "title": "Erlanger-Gasser Nerve Fibre Classification and Conduction",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Mammalian peripheral nerve trunks contain heterogeneous populations of axons subserving distinct motor, sensory, and autonomic functions. The classical **Erlanger-Gasser classification** categorizes peripheral nerve fibres into three major groups designated A, B, and C based on axonal diameter, degree of myelination, and compound action potential conduction velocity.",
+   "say": "The Erlanger-Gasser classification divides peripheral nerve axons into groups A, B, and C based on diameter, myelination, and conduction speed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fibre Type",
+     "Myelination",
+     "Axon Diameter (um)",
+     "Conduction Velocity (m/s)"
+    ],
+    "rows": [
+     [
+      "A-alpha",
+      "Heavily myelinated",
+      "12 to 20 um",
+      "70 to 120 m/s"
+     ],
+     [
+      "A-beta",
+      "Heavily myelinated",
+      "5 to 12 um",
+      "30 to 70 m/s"
+     ],
+     [
+      "A-gamma",
+      "Moderately myelinated",
+      "3 to 6 um",
+      "15 to 30 m/s"
+     ],
+     [
+      "A-delta",
+      "Thinly myelinated",
+      "2 to 5 um",
+      "12 to 30 m/s"
+     ],
+     [
+      "B fibres",
+      "Lightly myelinated",
+      "1 to 3 um",
+      "3 to 15 m/s"
+     ],
+     [
+      "C fibres",
+      "Completely unmyelinated",
+      "0.4 to 1.2 um",
+      "0.5 to 2.0 m/s"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The largest and fastest fibres belong to the myelinated **A-alpha fibre** class. Measuring twelve to twenty micrometres in diameter, they conduct action potentials at rapid velocities between seventy and one hundred and twenty metres per second. Functionally, A-alpha fibres encompass alpha motor neurons supplying extrafusal skeletal muscle and primary afferents from muscle spindle annulospiral endings.",
+   "say": "A-alpha fibres are the largest myelinated axons, conducting up to 120 metres per second to serve somatic motor units and muscle spindle afferents.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "spindle",
+      "label": "Muscle Spindle Ia Afferent or Alpha Motor Neuron"
+     },
+     {
+      "id": "myelin",
+      "label": "Thick Myelin Sheath with Wide Internodal Distances"
+     },
+     {
+      "id": "nodes",
+      "label": "Rapid Saltatory Conduction at High Sodium Channel Density"
+     },
+     {
+      "id": "target",
+      "label": "Fast Motor Delivery and Proprioceptive Sensory Integration"
+     }
+    ],
+    "edges": [
+     [
+      "spindle",
+      "myelin"
+     ],
+     [
+      "myelin",
+      "nodes"
+     ],
+     [
+      "nodes",
+      "target"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Tactile and mechanoreceptive sensations travel through A-beta fibres, whereas acute sharp nociception is mediated by **A-delta fibres**. These thinly myelinated axons transmit fast, pricking, well-localized first pain, cold thermal sensations, and light mechanical stimuli at velocities of twelve to thirty metres per second, terminating in lamina I and V of the spinal dorsal horn.",
+   "say": "A-delta fibres are thinly myelinated axons that transmit sharp, localized first pain and cold temperature into dorsal horn laminae.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "A-Delta Fibres (Fast Pain)",
+     "points": [
+      "Thinly myelinated (diameter 2 to 5 um)",
+      "Conduction velocity 12 to 30 m/s",
+      "Mediates initial sharp, pricking pain sensation",
+      "Transmits cold thermal sensation",
+      "Terminates in Rexed laminae I and V"
+     ]
+    },
+    "right": {
+     "title": "C Fibres (Slow Pain)",
+     "points": [
+      "Unmyelinated (diameter 0.4 to 1.2 um)",
+      "Conduction velocity 0.5 to 2.0 m/s",
+      "Mediates delayed dull, burning, aching pain",
+      "Transmits warmth thermal sensation and itch",
+      "Terminates in substantia gelatinosa (lamina II)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In contrast to myelinated axons, unmyelinated **C fibres** represent the smallest axons in peripheral nerves, measuring less than one point two micrometres. Conducting sluggishly between zero point five and two metres per second, C fibres transmit slow burning second pain, warm sensations, and postganglionic sympathetic autonomic outflow, embedded in Remak Schwann cell bundles.",
+   "say": "Unmyelinated C fibres conduct below two metres per second, carrying slow aching pain, warmth, and postganglionic sympathetic signals.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/local-anaesthetics-esters-amides-blocks-fig1.webp",
+    "alt": "Myelinated versus unmyelinated nerve fibre conduction anatomy.",
+    "caption": "Conduction pathways and Schwann cell wrapping in peripheral nerve fibre classes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Axonal conduction velocity is governed by axon geometry and insulation. In myelinated fibres, **conduction velocity** scales linearly with external fibre diameter, following the Hursh factor where velocity in metres per second equals diameter in micrometres multiplied by approximately six. In unmyelinated fibres, conduction velocity increases proportionately only to the square root of axonal diameter.",
+   "say": "Conduction velocity scales linearly with diameter in myelinated fibres by the Hursh factor, but only with the square root of diameter in unmyelinated fibres.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Myelinated Axons",
+     "Unmyelinated Axons",
+     "Physiological Determinant"
+    ],
+    "rows": [
+     [
+      "Velocity Scaling",
+      "Linear (Velocity = 6 x Diameter)",
+      "Square root of axon diameter",
+      "Myelin membrane resistance"
+     ],
+     [
+      "Transmembrane Current",
+      "Confined to nodal membranes",
+      "Continuous across entire length",
+      "High nodal sodium channel density"
+     ],
+     [
+      "Internal Resistance",
+      "Low due to large core diameter",
+      "High due to narrow axonal caliber",
+      "Axoplasmic volume and ion flow"
+     ],
+     [
+      "Capacitance",
+      "Very low due to thick myelin layers",
+      "High across bare lipid bilayer",
+      "Reduces charge charging time"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Insulation of the axon by multilayered concentric wraps of Schwann cell membrane produces **myelination**. Myelin dramatically increases effective transmembrane electrical resistance while decreasing membrane capacitance up to fifty-fold. This electrical insulation prevents outward dissipation of local longitudinal currents across the internodal axonal membrane between adjacent nodes of Ranvier.",
+   "say": "Myelination wraps axons in Schwann cell membranes, dramatically increasing membrane resistance and lowering capacitance to prevent current leakage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "schwann",
+      "label": "Schwann Cell Wraps Axon in Concentric Myelin Lamellae"
+     },
+     {
+      "id": "res",
+      "label": "Transmembrane Resistance Rises & Capacitance Falls 50-Fold"
+     },
+     {
+      "id": "flow",
+      "label": "Local Axial Current Spreads Electrotonically Down Core"
+     },
+     {
+      "id": "nodes",
+      "label": "Depolarises Adjacent Node of Ranvier to Threshold"
+     }
+    ],
+    "edges": [
+     [
+      "schwann",
+      "res"
+     ],
+     [
+      "res",
+      "flow"
+     ],
+     [
+      "flow",
+      "nodes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because ionic current is barred from traversing insulated internodes, action potentials leap from one node of Ranvier to the next in **saltatory conduction**. Clusters of voltage-gated sodium channels exceeding one thousand per square micrometre at the nodal gap guarantee a safety factor of five, allowing instantaneous regenerative spiking across successive internodal intervals.",
+   "say": "Saltatory conduction forces action potentials to jump between nodes of Ranvier, accelerating conduction twenty-fold while conserving metabolic energy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiac-electrophysiology-and-pacemaker-cells-fig1.webp",
+    "alt": "Action potential propagation and conduction kinetics in excitable tissue.",
+    "caption": "Saltatory conduction jumping between uninsulated nodal gaps in myelinated axons. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A parallel sensory classification scheme designates primary muscle and tendon afferents by Roman numerals. Group Ia fibres supply primary muscle spindle annulospiral endings, **Group Ib fibres** innervate Golgi tendon organs monitoring muscle tension, Group II fibres supply secondary spindle flower-spray endings, Group III matches A-delta fibres, and Group IV matches unmyelinated C fibres.",
+   "say": "The numerical sensory system classifies muscle afferents: Ia and II for muscle spindles, Ib for Golgi tendon organs, III for fast pain, and IV for unmyelinated fibres.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Muscle Spindle Ia Afferent",
+     "points": [
+      "Wraps nuclear bag and chain intrafusal fibres",
+      "Monitors dynamic rate of muscle length change",
+      "Mediates monosynaptic stretch reflex",
+      "Conduction velocity up to 120 m/s"
+     ]
+    },
+    "right": {
+     "title": "Golgi Tendon Ib Afferent",
+     "points": [
+      "Arranged in series at myotendinous junction",
+      "Monitors active muscle tension and force",
+      "Mediates inverse myotatic reflex",
+      "Inhibits homonymous motor neuron to prevent tear"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

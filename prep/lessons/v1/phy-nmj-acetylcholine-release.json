@@ -1,0 +1,240 @@
+{
+ "v": 1,
+ "module": "phy-nmj",
+ "subject": "physiology",
+ "title": "Neuromuscular Junction and End Plate Potentials",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The specialized chemical synapse connecting a somatic motor axon terminal to a skeletal muscle fibre is the **neuromuscular junction**. Action potentials invading the motor nerve terminal depolarise the presynaptic membrane, opening voltage-gated P/Q-type calcium channels. Influx of extracellular calcium triggers the quantal exocytosis of approximately sixty synaptic vesicles, each discharging ten thousand acetylcholine molecules.",
+   "say": "At the neuromuscular junction, nerve action potentials open presynaptic calcium channels, triggering quantal exocytosis of acetylcholine into the synaptic cleft.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/nmj-endplate-myasthenia-blockers-fig1.webp",
+    "alt": "Presynaptic terminal and postsynaptic motor end plate architecture.",
+    "caption": "Synaptic vesicle exocytosis and postsynaptic junctional folds at the neuromuscular junction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Synaptic vesicle fusion requires presynaptic SNARE protein assembly. In **acetylcholine release**, synaptobrevin on the vesicle membrane pairs with syntaxin-1 and SNAP-25 on the terminal plasma membrane, forming a tight four-helix bundle. Calcium binding to synaptotagmin-1 acts as the decisive molecular trigger, driving immediate fusion pore opening and neurotransmitter discharge into the fifty-nanometre synaptic cleft.",
+   "say": "SNARE proteins pair synaptobrevin with syntaxin and SNAP-25 to dock vesicles. Calcium binding to synaptotagmin triggers vesicle fusion and acetylcholine release.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "depol",
+      "label": "Axonal Action Potential Invades Terminal Opening P/Q Calcium Channels"
+     },
+     {
+      "id": "snare",
+      "label": "Synaptobrevin, Syntaxin-1, and SNAP-25 Form Tight SNARE Core Complex"
+     },
+     {
+      "id": "tagmin",
+      "label": "Calcium Binds Synaptotagmin-1 Triggering Vesicle Membrane Fusion"
+     },
+     {
+      "id": "cleft",
+      "label": "Acetylcholine Discharges Quantally Across 50 nm Synaptic Cleft"
+     }
+    ],
+    "edges": [
+     [
+      "depol",
+      "snare"
+     ],
+     [
+      "snare",
+      "tagmin"
+     ],
+     [
+      "tagmin",
+      "cleft"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acetylcholine diffuses across the synaptic cleft to bind postjunctional **nicotinic receptors** concentrated on crests of the sarcolemmal subneural folds. The muscle nicotinic receptor is a pentameric ligand-gated ion channel comprising two alpha, one beta, one delta, and one epsilon subunit. Simultaneous binding of two acetylcholine molecules to the alpha subunits opens an aqueous pore permeable to sodium and potassium.",
+   "say": "Acetylcholine binds muscle nicotinic receptors on junctional folds. Binding two molecules opens a non-selective cation channel permeable to sodium and potassium.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adult Muscle Nicotinic Receptor",
+     "points": [
+      "Subunit composition: (alpha1)2, beta1, delta, epsilon",
+      "Localized tightly at crests of junctional folds",
+      "Short burst open duration with high conductance",
+      "Inhibited by curare, alpha-bungarotoxin, and rocuronium"
+     ]
+    },
+    "right": {
+     "title": "Fetal Extra-Junctional Receptor",
+     "points": [
+      "Subunit composition: (alpha1)2, beta1, delta, gamma",
+      "Distributed diffusely across entire denervated sarcolemma",
+      "Longer open channel duration with lower conductance",
+      "Causes lethal hyperkalaemia if exposed to succinylcholine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Opening of nicotinic receptor channels allows massive inward sodium influx down its steep electrochemical gradient, accompanied by minor potassium efflux. This net inward current generates a graded local depolarisation of the motor end plate termed the **end plate potential**. Because the normal end plate potential of forty millivolts far exceeds the threshold required to activate adjacent sarcolemmal sodium channels, a wide safety factor guarantees muscle contraction.",
+   "say": "Inward sodium flux generates an end plate potential of forty millivolts. This large potential easily surpasses threshold, guaranteeing muscle contraction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "epp",
+      "label": "Nicotinic Cation Conductance Generates 40 mV End Plate Potential"
+     },
+     {
+      "id": "safe",
+      "label": "EPP Magnitude Greatly Exceeds 15 mV Threshold (Safety Factor)"
+     },
+     {
+      "id": "nav",
+      "label": "Voltage-Gated Nav1.4 Channels Open in Depths of Junctional Folds"
+     },
+     {
+      "id": "spike",
+      "label": "Propagating Muscle Action Potential Sweeps Across Sarcolemma"
+     }
+    ],
+    "edges": [
+     [
+      "epp",
+      "safe"
+     ],
+     [
+      "safe",
+      "nav"
+     ],
+     [
+      "nav",
+      "spike"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Even at rest, spontaneous exocytosis of individual isolated synaptic vesicles occurs at a rate of approximately one per second. Each individual vesicle generates a tiny, non-propagating postjunctional depolarisation of zero point five to one millivolt termed a **miniature end plate potential**. MEPPs demonstrate that neurotransmitter is discharged in discrete multimolecular units called quanta.",
+   "say": "Spontaneous exocytosis of single vesicles creates miniature end plate potentials of one millivolt, confirming that acetylcholine is released in discrete quanta.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Miniature End Plate Potential (MEPP)",
+     "points": [
+      "Caused by spontaneous fusion of a single vesicle",
+      "Amplitude 0.5 to 1.0 millivolt (subthreshold)",
+      "Discharges at random baseline frequency (~1 Hz)",
+      "Reduced amplitude in myasthenia; reduced frequency in LEMS"
+     ]
+    },
+    "right": {
+     "title": "Evoked End Plate Potential (EPP)",
+     "points": [
+      "Caused by nerve action potential opening calcium channels",
+      "Synchronous release of ~60 to 100 vesicles (quanta)",
+      "Amplitude 40 to 50 millivolts (suprathreshold)",
+      "Triggering propagating sarcolemmal action potential"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Synaptic action is terminated in fractions of a millisecond by the tethered enzyme **acetylcholinesterase**. Anchored to collagen tails within the synaptic basal lamina, acetylcholinesterase hydrolyses acetylcholine into acetate and choline with one of the fastest catalytic turnover numbers known in biology, hydrolysing twenty-five thousand molecules per enzyme site per second.",
+   "say": "Acetylcholinesterase hydrolyses acetylcholine into acetate and choline within fractions of a millisecond, preventing receptor desensitization.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ach",
+      "label": "Acetylcholine Dissociates Rapidly from Postsynaptic Nicotinic Receptor"
+     },
+     {
+      "id": "ache",
+      "label": "Basal Lamina Acetylcholinesterase Cleaves Transmitter into Choline & Acetate"
+     },
+     {
+      "id": "upt",
+      "label": "Choline Transporter (CHT1) Reabsorbs Choline into Presynaptic Terminal"
+     },
+     {
+      "id": "chat",
+      "label": "Choline Acetyltransferase Re-Synthesizes Acetylcholine for Storage"
+     }
+    ],
+    "edges": [
+     [
+      "ach",
+      "ache"
+     ],
+     [
+      "ache",
+      "upt"
+     ],
+     [
+      "upt",
+      "chat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **myasthenia gravis**, pathogenic autoantibodies target muscle nicotinic acetylcholine receptors, triggering complement-mediated destruction of junctional folds and receptor cross-linking. This reduces the number of functional receptors, blunting end plate potential amplitude below threshold. Patients exhibit fatiguable ptosis, diplopia, and proximal weakness that improves following administration of acetylcholinesterase inhibitors like pyridostigmine.",
+   "say": "Myasthenia gravis is caused by autoantibodies against nicotinic receptors, flattening junctional folds and causing fatiguable weakness responsive to pyridostigmine.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Myasthenia Gravis (MG)",
+     "Lambert-Eaton Syndrome (LEMS)",
+     "Botulism"
+    ],
+    "rows": [
+     [
+      "Primary Pathology",
+      "Postsynaptic ACh receptor antibodies",
+      "Presynaptic P/Q calcium channel antibodies",
+      "SNARE protein cleavage (A, B, E)"
+     ],
+     [
+      "Associated Disease",
+      "Thymoma, thymic hyperplasia",
+      "Small cell lung carcinoma (paraneoplastic)",
+      "Clostridium botulinum neurotoxin"
+     ],
+     [
+      "Repetitive Nerve Stimulation",
+      "Decremental response (3 Hz)",
+      "Incremental response (post-exercise facilitation)",
+      "Low baseline with post-exercise facilitation"
+     ],
+     [
+      "Autonomic Involvement",
+      "Absent (pure motor weakness)",
+      "Common (dry mouth, erectile failure)",
+      "Prominent (mydriasis, ileus, urinary retention)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Presynaptic blockade occurs in botulism. The lethal zinc endopeptidase **botulinum toxin** is internalised into cholinergic terminals, where light chains cleave specific SNARE proteins: serotypes A and E cleave SNAP-25, while serotypes B, D, and F cleave synaptobrevin. This completely abolishes acetylcholine exocytosis, producing severe descending flaccid paralysis with dilated pupils and dry mouth.",
+   "say": "Botulinum toxin cleaves presynaptic SNARE proteins, abolishing acetylcholine exocytosis and producing severe descending flaccid paralysis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/botulism-fig1.webp",
+    "alt": "Botulinum neurotoxin mechanism cleaving presynaptic SNARE proteins.",
+    "caption": "Botulinum toxin cleavage of SNAP-25 and synaptobrevin blocking acetylcholine release. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

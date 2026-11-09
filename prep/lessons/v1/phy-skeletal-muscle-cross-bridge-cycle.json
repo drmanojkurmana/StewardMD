@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "phy-skeletal-muscle",
+ "subject": "physiology",
+ "title": "Cross-Bridge Cycle, Sliding Filament, and Muscle Mechanics",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The mechanical generation of muscular force is described by the **sliding filament** theory formulated by Andrew Huxley and Hugh Huxley. During muscular contraction, thick myosin and thin actin filaments do not change their individual physical lengths. Instead, thin actin filaments slide past thick myosin filaments toward the center of the sarcomere, shortening the I-band and H-zone while the A-band length remains constant.",
+   "say": "According to the sliding filament theory, actin and myosin filaments do not shorten. Thin filaments slide past thick filaments, narrowing the I-band and H-zone.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sarcomere Region",
+     "Myofilament Composition",
+     "Change During Active Contraction"
+    ],
+    "rows": [
+     [
+      "A-Band",
+      "Thick myosin filaments (plus overlapping actin)",
+      "Constant length (does not change)"
+     ],
+     [
+      "I-Band",
+      "Thin actin filaments only (bisected by Z-disc)",
+      "Shortens significantly as actin overlaps"
+     ],
+     [
+      "H-Zone",
+      "Thick myosin filaments only (center of A-band)",
+      "Narrowed or completely obliterated"
+     ],
+     [
+      "Z-to-Z Distance",
+      "Total sarcomere anatomical length",
+      "Shortens from 2.5 um down to 1.8 um"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The cyclic mechanical interaction between myosin heads and actin thin filaments is the **cross-bridge cycle**. Each cycle begins when ATP binds to the myosin head, causing immediate dissociation of myosin from actin. The catalytic ATPase site on the myosin head then hydrolyses ATP into adenosine diphosphate and inorganic phosphate, cocking the myosin neck into an energized ninety-degree conformation.",
+   "say": "The cross-bridge cycle begins when ATP binds myosin, detaching it from actin. Hydrolysing ATP into ADP and phosphate cocks the myosin head into its energized state.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "atp",
+      "label": "ATP Binds Myosin Head: Dissociates Cross-Bridge from Actin"
+     },
+     {
+      "id": "cock",
+      "label": "ATP Hydrolysis to ADP + Pi Cocks Myosin Neck into High-Energy 90-Degree State"
+     },
+     {
+      "id": "bind",
+      "label": "Cocked Myosin Head Binds Adjacent Uncovered Actin Monomer"
+     },
+     {
+      "id": "power",
+      "label": "Phosphate Release Triggers 45-Degree Power Stroke Pulling Actin Filament"
+     }
+    ],
+    "edges": [
+     [
+      "atp",
+      "cock"
+     ],
+     [
+      "cock",
+      "bind"
+     ],
+     [
+      "bind",
+      "power"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Following weak binding of the cocked myosin head to actin, release of inorganic phosphate triggers the decisive **power stroke**. The myosin neck rotates forty-five degrees, pulling the attached actin filament ten nanometres toward the M-line and developing a peak force of two piconewtons per head. ADP is subsequently discharged, leaving the cross-bridge in a transient, tightly bound state until fresh ATP arrives.",
+   "say": "Phosphate release triggers the power stroke, rotating the myosin neck forty-five degrees to slide the actin filament ten nanometres toward the center.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pre-Power Stroke Cocked State",
+     "points": [
+      "Myosin neck lever arm held at 90 degrees",
+      "Bound to ADP and inorganic phosphate (M-ADP-Pi)",
+      "Weak, transient electrostatic interaction with actin",
+      "Stores potential elastic energy from ATP hydrolysis"
+     ]
+    },
+    "right": {
+     "title": "Post-Power Stroke State",
+     "points": [
+      "Myosin neck rotates 45 degrees toward sarcomere center",
+      "Inorganic phosphate released, driving force generation",
+      "Pulls actin filament 10 nanometres along thick filament",
+      "ADP discharged, leaving stable rigor complex until ATP binds"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The mechanical force developed by a sarcomere varies as a function of its initial sarcomere length, defining the **length-tension relationship**. Maximal isometric tension develops at an optimal resting sarcomere length of two to two point two micrometres, where the number of overlapping cross-bridges between actin and myosin heads reaches an absolute geometrical maximum.",
+   "say": "The length-tension relationship shows that maximal force develops at an optimal sarcomere length of 2.2 micrometres, where actin-myosin cross-bridge overlap is maximal.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/digoxin-toxicity-fig1.webp",
+    "alt": "Myofilament overlap and active isometric length-tension curve.",
+    "caption": "Sarcomere length-tension curve illustrating cross-bridge overlap geometry. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "If a muscle is stretched beyond its optimal length to three point six micrometres, actin thin filaments pull completely out of the thick filament zone. With zero cross-bridge overlap, active **isometric tension** falls to zero, leaving only passive elastic tension generated by the giant titin scaffolding protein. Conversely, excessive shortening below one point eight micrometres causes colliding actin filaments and distorted myosin, depressing active tension.",
+   "say": "Stretching muscle beyond optimal length eliminates cross-bridge overlap, reducing active tension to zero. Excessive shortening causes actin collision and forces drop.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "short",
+      "label": "Sarcomere < 1.6 um: Actin Collides Across M-Line and Myosin Crumples"
+     },
+     {
+      "id": "opt",
+      "label": "Optimal Length 2.0 to 2.2 um: Maximum Cross-Bridge Overlap (100% Tension)"
+     },
+     {
+      "id": "stretch",
+      "label": "Sarcomere > 2.6 um: Overlap Progressively Declines (Tension Drops)"
+     },
+     {
+      "id": "zero",
+      "label": "Sarcomere > 3.6 um: Zero Overlap (Zero Active Tension, High Passive Titin Tension)"
+     }
+    ],
+    "edges": [
+     [
+      "short",
+      "opt"
+     ],
+     [
+      "opt",
+      "stretch"
+     ],
+     [
+      "stretch",
+      "zero"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A single electrical action potential elicits a brief, isolated mechanical contraction called a twitch, lasting twenty to one hundred milliseconds. When successive action potentials arrive before calcium clearance is complete, twitch contractions summate. At high firing frequencies exceeding fifty Hertz, individual twitches fuse into a smooth, sustained maximal contraction known as complete **tetanus**, developing four-fold higher tension.",
+   "say": "Rapid repetitive stimulation prevents calcium clearance between twitches. Twitches summate into smooth, sustained tetanus, generating four times single twitch tension.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Single Muscle Twitch",
+     "points": [
+      "Triggered by single action potential stimulus",
+      "Sarcoplasmic calcium rises and falls within 100 ms",
+      "Internal elastic elements not fully stretched",
+      "Produces baseline peak twitch force (Po)"
+     ]
+    },
+    "right": {
+     "title": "Fused Tetanic Contraction",
+     "points": [
+      "Triggered by high-frequency stimulation (> 50 Hz)",
+      "Sarcoplasmic calcium remains elevated at saturating levels",
+      "Series elastic components fully stretched and taut",
+      "Generates maximal fused tetanic force (3 to 4 times Po)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The functional building block of motor control is the **motor unit**, defined as a single alpha motor neuron and all the extrafusal skeletal muscle fibres it innervates. In muscles requiring fine precision, such as extraocular muscles or laryngeal intrinsics, motor units are small, containing two to ten muscle fibres. In large postural muscles like the gastrocnemius, a single motor unit controls over one thousand fibres.",
+   "say": "A motor unit comprises one alpha motor neuron and all the muscle fibres it innervates, ranging from a few fibres in eye muscles to thousands in postural muscles.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Muscle Type",
+     "Innervation Ratio (Fibres/Neuron)",
+     "Precision of Control",
+     "Primary Function"
+    ],
+    "rows": [
+     [
+      "Extraocular rectus muscles",
+      "3 to 10 fibres",
+      "Exceptionally high precision",
+      "Fine saccadic gaze tracking"
+     ],
+     [
+      "Laryngeal intrinsic muscles",
+      "10 to 20 fibres",
+      "High fine control",
+      "Phonation and vocal cord tension"
+     ],
+     [
+      "First dorsal interosseous",
+      "100 to 200 fibres",
+      "Intermediate manual dexterity",
+      "Precision finger grip"
+     ],
+     [
+      "Gastrocnemius / Soleus",
+      "1000 to 2000 fibres",
+      "Low precision, high force",
+      "Gross locomotion and posture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gradation of muscular force follows the Henneman **size principle**. As synaptic drive to a motor neuron pool increases, small motor neurons with high input resistance reach threshold first, activating fatigue-resistant slow-twitch fibres. As force requirements escalate, progressively larger motor neurons with lower input resistance are recruited, activating high-threshold, powerful fast-twitch glycolytic fibres.",
+   "say": "Henneman size principle recruits motor units in order: small fatigue-resistant units activate first, followed by larger, more powerful fast-twitch units as demand rises.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/isaacs-syndrome-fig1.webp",
+    "alt": "Motor unit recruitment and continuous motor firing mechanics.",
+    "caption": "Motor unit recruitment order and summation of force in skeletal muscle. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
