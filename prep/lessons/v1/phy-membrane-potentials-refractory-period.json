@@ -1,0 +1,240 @@
+{
+ "v": 1,
+ "module": "phy-membrane-potentials",
+ "subject": "physiology",
+ "title": "Refractory Periods, Accommodation, and All-or-None Law",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Following initiation of an action potential, excitable membranes undergo a period of diminished excitability known as the **refractory period**. Refractoriness is subdivided into an initial absolute refractory period during which no stimulus, regardless of intensity, can elicit a second spike, followed by a relative refractory period during which a supranormal stimulus can evoke an action potential.",
+   "say": "Following an action potential, membranes become refractory. During the absolute period no stimulus can trigger a spike, while in the relative period a supranormal stimulus is required.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiac-electrophysiology-and-pacemaker-cells-fig1.webp",
+    "alt": "Action potential phases and corresponding refractory periods.",
+    "caption": "Action potential trajectory and timeline of absolute versus relative refractory intervals. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The molecular basis of the **absolute refractory period** is the complete inactivation of voltage-gated sodium channels. Once the inactivation loop plugs the channel pore, the channel cannot reopen until the membrane repolarises sufficiently to allow the inactivation gate to swing open and the activation gate to close, resetting the channel into its primed resting state.",
+   "say": "The absolute refractory period is caused by sodium channel inactivation. Channels cannot reopen until repolarisation removes the inactivation plug.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Absolute Refractory Period",
+     "points": [
+      "Spans from threshold upstroke through mid-repolarisation",
+      "Virtually all Nav channels in inactivated state",
+      "Zero excitability: no action potential can be generated",
+      "Determines absolute maximum firing frequency of axon"
+     ]
+    },
+    "right": {
+     "title": "Relative Refractory Period",
+     "points": [
+      "Spans late repolarisation and after-hyperpolarisation",
+      "Portion of Nav channels reset to resting closed state",
+      "High Kv potassium conductance opposes depolarisation",
+      "Requires suprathreshold stimulus; produces smaller spike"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "During the relative refractory period, excitability gradually recovers. Although a fraction of sodium channels have reset to their resting state, delayed rectifier potassium channels remain open, creating an outward repolarising current that opposes threshold depolarisation. Consequently, generating a second action potential requires a **suprathreshold stimulus** and yields a spike with reduced amplitude and slower conduction velocity.",
+   "say": "During the relative refractory period, open potassium channels oppose depolarisation. A suprathreshold stimulus is required, producing a smaller action potential.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "repol",
+      "label": "Membrane Repolarises Past Negative Sixty Millivolts"
+     },
+     {
+      "id": "reset",
+      "label": "Subpopulation of Nav Inactivation Gates Reset"
+     },
+     {
+      "id": "kv",
+      "label": "Elevated Potassium Conductance Persists (After-Hyperpolarisation)"
+     },
+     {
+      "id": "supra",
+      "label": "Stronger Supranormal Stimulus Can Evoke Second Smaller Action Potential"
+     }
+    ],
+    "edges": [
+     [
+      "repol",
+      "reset"
+     ],
+     [
+      "reset",
+      "kv"
+     ],
+     [
+      "kv",
+      "supra"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anticonvulsant drugs prolong sodium channel refractoriness to control seizures. Agents such as **carbamazepine** delay the transition from the inactivated state back to the resting closed state, lengthening the effective refractory period of rapidly firing epileptic foci while sparing normally discharging motor and sensory neurons.",
+   "say": "Carbamazepine prolongs the refractory period by delaying recovery of sodium channels from inactivation, suppressing pathological seizure bursts.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-drug-carbamazepine.webp",
+    "alt": "Carbamazepine prolonging sodium channel inactivation kinetics.",
+    "caption": "Prolongation of sodium channel inactivation by carbamazepine suppressing high-frequency firing. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When an excitable tissue is exposed to a slowly rising depolarising current, the threshold potential shifts upward to less negative values, a phenomenon termed **accommodation**. Slow depolarisation allows substantial numbers of voltage-gated sodium channels to inactivate before threshold is reached, while delayed rectifier potassium channels activate, preventing action potential discharge despite reaching the original threshold voltage.",
+   "say": "Accommodation occurs when slowly rising depolarisation allows sodium channels to inactivate before firing, raising the threshold and preventing an action potential.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rapid Current Injection",
+     "points": [
+      "Fast voltage rise crosses threshold before inactivation",
+      "Synchronized Nav channel opening triggers action potential",
+      "Normal excitability and threshold level",
+      "Standard all-or-none propagation"
+     ]
+    },
+    "right": {
+     "title": "Slowly Rising Ramp Current",
+     "points": [
+      "Gradual depolarisation allows early Nav inactivation",
+      "Concurrently opens delayed rectifier Kv channels",
+      "Threshold shifts to less negative voltage (accommodation)",
+      "No action potential fires despite exceeding original threshold"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Subthreshold stimuli fail to elicit an all-or-none action potential, generating graded local changes called **electrotonic potentials**. Electrotonic potentials conduct passively with decrement over short distances, their amplitude decaying exponentially with distance according to the axon length constant. They do not exhibit refractory periods, display linear summation, and lack all-or-none behaviour.",
+   "say": "Subthreshold stimuli produce local electrotonic potentials that conduct passively with decrement. Unlike action potentials, they summate and lack refractory periods.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Action Potential",
+     "Electrotonic Potential (Graded)"
+    ],
+    "rows": [
+     [
+      "Magnitude",
+      "All-or-none (constant amplitude)",
+      "Graded, proportional to stimulus intensity"
+     ],
+     [
+      "Propagation",
+      "Non-decremental active regeneration",
+      "Decremental passive electrotonic spread"
+     ],
+     [
+      "Refractory Period",
+      "Present (absolute and relative)",
+      "Absent (no refractoriness)"
+     ],
+     [
+      "Summation",
+      "Cannot summate (all-or-none)",
+      "Exhibits spatial and temporal summation"
+     ],
+     [
+      "Channel Basis",
+      "Voltage-gated Nav and Kv channels",
+      "Passive membrane capacitance and resistance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The fundamental operational principle of axonal signaling is the classical **all-or-none law**. If a depolarising stimulus fails to bring the membrane to threshold, no action potential occurs. If threshold is reached or exceeded, a complete action potential of maximal, uniform amplitude is triggered, whose size and shape are entirely independent of stimulus strength.",
+   "say": "The all-or-none law dictates that a stimulus either triggers a full-sized action potential or none at all. Stronger stimuli increase firing frequency, not amplitude.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sub",
+      "label": "Subthreshold Stimulus -> Only Local Graded Electrotonic Potential"
+     },
+     {
+      "id": "thr",
+      "label": "Threshold Stimulus Reached -> Full Regenerative Action Potential Fires"
+     },
+     {
+      "id": "sup",
+      "label": "Suprathreshold Stimulus -> Identical Full-Size Action Potential Fires"
+     },
+     {
+      "id": "freq",
+      "label": "Stronger Stimuli Encoded as Increased Firing Frequency, Not Amplitude"
+     }
+    ],
+    "edges": [
+     [
+      "sub",
+      "thr"
+     ],
+     [
+      "thr",
+      "sup"
+     ],
+     [
+      "sup",
+      "freq"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In myelinated nerve fibres, action potentials do not propagate continuously through every membrane segment. Instead, myelin insulation forces ionic currents to jump between uninsulated gaps called nodes of Ranvier in **saltatory conduction**. Because voltage-gated sodium channels are clustered at high density exceeding one thousand per square micrometre within nodal membranes, conduction velocity increases twenty-fold while conserving metabolic energy.",
+   "say": "Saltatory conduction allows action potentials to leap between nodes of Ranvier, increasing conduction speed twenty-fold and conserving metabolic pumping energy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Nerve Fibre Property",
+     "Unmyelinated C Fibre",
+     "Myelinated A-alpha Fibre"
+    ],
+    "rows": [
+     [
+      "Conduction Mechanism",
+      "Continuous wave propagation",
+      "Saltatory leaping between nodes of Ranvier"
+     ],
+     [
+      "Conduction Velocity",
+      "0.5 to 2.0 m/s",
+      "70 to 120 m/s"
+     ],
+     [
+      "Nav Channel Distribution",
+      "Evenly distributed (100 / um2)",
+      "Concentrated at nodes (> 1000 / um2)"
+     ],
+     [
+      "Metabolic Energy Cost",
+      "High (Na+ entry across entire length)",
+      "Low (Na+ entry restricted to nodal gaps)"
+     ],
+     [
+      "Axon Diameter",
+      "0.4 to 1.2 um",
+      "12 to 20 um"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "phy-membrane-transport",
+ "subject": "physiology",
+ "title": "Na-K ATPase and Secondary Active Transport",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The fundamental engine generating transmembrane electrochemical potential differences across all animal cells is the **Na-K ATPase**. This integral membrane heterodimer spans the plasma membrane, consisting of a catalytic alpha subunit that binds ATP, sodium, and cardiac glycosides, alongside a glycosylated beta subunit required for proper membrane targeting and stabilization of the functional enzyme complex.",
+   "say": "The sodium-potassium ATPase creates transmembrane electrochemical gradients. Its catalytic alpha subunit binds ATP, sodium, and digitalis, while the beta subunit assists membrane assembly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/digoxin-toxicity-fig1.webp",
+    "alt": "Molecular structure and mechanism of sodium potassium ATPase pump.",
+    "caption": "Catalytic cycle and ion binding sites of the sodium-potassium ATPase pump. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Operating through a cyclic conformational transition between phosphorylated E1 and dephosphorylated E2 states, the pump displays strict stoichiometry. For every molecule of ATP consumed, it extrudes three sodium ions from the cytosol and imports two potassium ions into the cell. Because three positive charges leave for every two entering, the pump is intrinsically **electrogenic**, generating a small negative potential.",
+   "say": "The pump extrudes three sodium ions and imports two potassium ions for each ATP spent. Because net positive charge exits, the pump is electrogenic.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "E1 State Binds 3 Intracellular Sodium Ions"
+     },
+     {
+      "id": "phos",
+      "label": "ATP Phosphorylation Causes E1 to E2 Transition"
+     },
+     {
+      "id": "e2",
+      "label": "E2 State Releases Sodium & Binds 2 Extracellular Potassium"
+     },
+     {
+      "id": "deph",
+      "label": "Dephosphorylation Restores E1 Releasing Potassium Inside"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "phos"
+     ],
+     [
+      "phos",
+      "e2"
+     ],
+     [
+      "e2",
+      "deph"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cardiac glycosides such as digoxin and ouabain bind specifically to the extracellular face of the phosphorylated alpha subunit, arresting the pump in its E2-P state. Pharmacological **ouabain inhibition** increases intracellular sodium concentration, which decreases the transmembrane sodium gradient. This diminishes forward sodium-calcium exchange, elevating intracellular calcium and strengthening myocardial contractility in failing ventricles.",
+   "say": "Cardiac glycosides bind the extracellular face of the pump, locking it in the E2 state. Rising intracellular sodium reduces calcium extrusion, enhancing myocardial contractility.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Pump Activity",
+     "points": [
+      "Low intracellular sodium (10 to 14 mmol/L)",
+      "High intracellular potassium (140 mmol/L)",
+      "Maintains steep inward sodium electrochemical gradient",
+      "Drives secondary active calcium and solute transport"
+     ]
+    },
+    "right": {
+     "title": "Glycoside Inhibition",
+     "points": [
+      "Intracellular sodium accumulates inside cell",
+      "Loss of transmembrane sodium driving force",
+      "Secondary reduction in NCX calcium extrusion",
+      "Increased sarcoplasmic calcium loading enhances inotropy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The steep inward sodium gradient established by primary active pumping serves as the potential energy source for **secondary active transport**. In this mechanism, the downhill thermodynamic flow of sodium down its steep electrochemical gradient is obligatorily coupled to the uphill movement of a second solute against its concentration gradient, without direct instantaneous consumption of ATP at the carrier site.",
+   "say": "The inward sodium gradient powers secondary active transport. The downhill movement of sodium is coupled to uphill transport of a second substrate without direct ATP hydrolysis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Transport Class",
+     "Coupled Ions/Solutes",
+     "Gradient Direction",
+     "Representative Tissue"
+    ],
+    "rows": [
+     [
+      "Sodium-Glucose Symport",
+      "Na+ and D-glucose",
+      "Both move into cell",
+      "Renal proximal tubule (SGLT)"
+     ],
+     [
+      "Sodium-Amino Acid Symport",
+      "Na+ and neutral amino acids",
+      "Both move into cell",
+      "Small intestinal brush border"
+     ],
+     [
+      "Sodium-Iodide Symport",
+      "2 Na+ and 1 I-",
+      "Both move into thyroid cell",
+      "Thyroid follicular epithelium (NIS)"
+     ],
+     [
+      "Na-K-2Cl Symport",
+      "1 Na+, 1 K+, 2 Cl-",
+      "All four move into cell",
+      "Thick ascending limb of Henle (NKCC2)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When the driving ion and coupled substrate move in the same spatial direction across the plasma membrane, the transporter operates as a **symport** or cotransporter. In the luminal brush border of the small intestine and renal proximal tubule, sodium-glucose linked cotransporters utilize this mechanism to absorb hexoses from the luminal fluid against substantial intracellular glucose concentration gradients.",
+   "say": "When driving ion and substrate travel in identical directions, the carrier is a symport. Intestinal and renal brush borders use symport systems to reclaim glucose and amino acids.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/glucose-galactose-malabsorption-fig1.webp",
+    "alt": "Sodium glucose cotransport in enterocyte apical brush border.",
+    "caption": "Secondary active sodium-glucose cotransport mechanism across luminal epithelial membranes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Two major isoforms of sodium-glucose cotransporter govern physiological glucose reclamation. In the early renal proximal convoluted tubule, high-capacity low-affinity **SGLT2** reabsorbs ninety percent of filtered glucose with one-to-one sodium-glucose stoichiometry. In the late straight proximal tubule and intestinal enterocytes, high-affinity SGLT1 reabsorbs the remaining filtered glucose utilizing two sodium ions per glucose molecule.",
+   "say": "SGLT2 reabsorbs ninety percent of filtered glucose in the early proximal tubule. SGLT1 has higher affinity and reabsorbs residual glucose using two sodium ions per molecule.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "SGLT2 Transporter",
+     "points": [
+      "Expressed in S1 and S2 proximal tubule segments",
+      "Low affinity, high transport capacity",
+      "Stoichiometry of 1 Na+ to 1 glucose molecule",
+      "Selectively blocked by gliflozin antidiabetic drugs"
+     ]
+    },
+    "right": {
+     "title": "SGLT1 Transporter",
+     "points": [
+      "Expressed in small intestine and S3 renal segment",
+      "High affinity, lower overall capacity",
+      "Stoichiometry of 2 Na+ to 1 glucose molecule",
+      "Mutations cause glucose-galactose malabsorption"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pharmacological inhibition of SGLT2 by gliflozins lowers blood glucose in diabetes by inducing glucosuria. Concurrently, increased sodium delivery to the macula densa restores tubuloglomerular feedback, constricting the afferent arteriole to reduce intraglomerular hypertension. This mechanism preserves renal function and reduces cardiac strain, demonstrating how manipulating **secondary active transport** yields systemic hemodynamic and metabolic benefits.",
+   "say": "Blocking SGLT2 promotes urinary glucose excretion. Enhanced sodium delivery to the macula densa restores tubuloglomerular feedback, reducing intraglomerular pressure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sglt",
+      "label": "SGLT2 Inhibitor Blocks Proximal Glucose/Na+ Uptake"
+     },
+     {
+      "id": "mac",
+      "label": "Increased Solute Delivery to Macula Densa"
+     },
+     {
+      "id": "tgf",
+      "label": "Tubuloglomerular Feedback Constricts Afferent Arteriole"
+     },
+     {
+      "id": "prot",
+      "label": "Reduction of Hyperfiltration and Glomerular Protection"
+     }
+    ],
+    "edges": [
+     [
+      "sglt",
+      "mac"
+     ],
+     [
+      "mac",
+      "tgf"
+     ],
+     [
+      "tgf",
+      "prot"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Without continuous primary active pumping, cellular life collapses rapidly. Blocking Na-K ATPase abolishes intracellular potassium accumulation, dissipates the transmembrane electrical potential, and leads to intracellular sodium and chloride retention. Water follows passively down osmotic gradients, causing irreversible **cellular swelling** and lytic necrosis, highlighting the indispensability of active transport for maintaining cellular volume homeostasis.",
+   "say": "Without continuous pumping, intracellular sodium and chloride accumulate, causing water entry and cell swelling. The sodium pump is indispensable for volume regulation and osmotic stability.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Normal Active Pumping",
+     "Pump Arrest (Ischaemia/Cyanide)"
+    ],
+    "rows": [
+     [
+      "Intracellular Sodium",
+      "Low (10 to 14 mmol/L)",
+      "Markedly elevated (equilibrates with ECF)"
+     ],
+     [
+      "Intracellular Potassium",
+      "High (140 to 150 mmol/L)",
+      "Markedly depleted (leaks out)"
+     ],
+     [
+      "Resting Potential",
+      "Negative (-70 to -90 mV)",
+      "Depolarised toward zero mV"
+     ],
+     [
+      "Cell Volume",
+      "Constant and controlled",
+      "Progressive osmotic swelling and lysis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

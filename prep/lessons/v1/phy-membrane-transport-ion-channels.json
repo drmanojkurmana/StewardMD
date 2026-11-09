@@ -1,0 +1,240 @@
+{
+ "v": 1,
+ "module": "phy-membrane-transport",
+ "subject": "physiology",
+ "title": "Ion Channels, G Proteins, and Second Messengers",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Rapid transmembrane flux of inorganic ions down their electrochemical gradients is mediated by **ion channels**. These multimeric transmembrane proteins form aqueous pore complexes with narrow selectivity filters that discriminate between sodium, potassium, calcium, and chloride ions with remarkable fidelity, allowing flow rates exceeding ten million ions per second per open channel pore.",
+   "say": "Ion channels form water-filled pore complexes allowing rapid flux down electrochemical gradients. Selectivity filters distinguish specific ions with high precision.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Channel Class",
+     "Gating Stimulus",
+     "Selectivity",
+     "Physiological Prototype"
+    ],
+    "rows": [
+     [
+      "Voltage-Gated",
+      "Transmembrane potential change",
+      "Na+, K+, Ca2+",
+      "Nav1.1-1.9 axonal action potentials"
+     ],
+     [
+      "Ligand-Gated",
+      "Extracellular chemical agonist",
+      "Cations or anions",
+      "Nicotinic acetylcholine receptor (nAChR)"
+     ],
+     [
+      "Second Messenger-Gated",
+      "Intracellular cAMP, cGMP, Ca2+",
+      "Cations",
+      "HCN pacemaker funny channels"
+     ],
+     [
+      "Mechanosensitive",
+      "Membrane stretch or shear stress",
+      "Cations",
+      "PIEZO1 and PIEZO2 mechanoreceptors"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ligand-gated channels convert chemical neurotransmitter signals directly into electrical membrane potential alterations. A classic pentameric example is the **GABA-A receptor**, which opens an integral chloride channel upon binding gamma-aminobutyric acid. Because the equilibrium potential for chloride is close to the resting potential, chloride influx hyperpolarises the neuronal membrane, mediating rapid inhibitory postsynaptic potentials.",
+   "say": "Ligand-gated receptors open upon binding specific chemical agonists. The GABA-A receptor admits chloride ions, hyperpolarising the post-synaptic membrane to cause inhibition.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-diazepam.webp",
+    "alt": "GABA-A receptor ion channel complex with allosteric drug binding sites.",
+    "caption": "Pentameric GABA-A receptor chloride channel mediating postsynaptic hyperpolarisation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Metabotropic receptors transmit extracellular hormonal and autonomic signals through heterotrimeric **G protein** complexes composed of alpha, beta, and gamma subunits. In the resting inactive state, the alpha subunit binds guanosine diphosphate. Ligand binding induces a conformational change that promotes exchange of guanosine triphosphate for GDP, causing dissociation of the GTP-bound alpha subunit from the beta-gamma dimer.",
+   "say": "Metabotropic receptors act through heterotrimeric G proteins. Agonist binding causes GTP to replace GDP on the alpha subunit, triggering dissociation and effector activation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ago",
+      "label": "Agonist Binds G Protein-Coupled Receptor (GPCR)"
+     },
+     {
+      "id": "exc",
+      "label": "GDP-GTP Exchange on Alpha Subunit"
+     },
+     {
+      "id": "dis",
+      "label": "Alpha-GTP Dissociates from Beta-Gamma Subunit Dimer"
+     },
+     {
+      "id": "eff",
+      "label": "Alpha & Beta-Gamma Subunits Regulate Target Effectors"
+     }
+    ],
+    "edges": [
+     [
+      "ago",
+      "exc"
+     ],
+     [
+      "exc",
+      "dis"
+     ],
+     [
+      "dis",
+      "eff"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Three major families of heterotrimeric G protein alpha subunits coordinate distinct intracellular signaling cascades. The stimulatory **Gs alpha** subunit activates adenylyl cyclase, accelerating the conversion of cellular ATP into the classic second messenger cyclic adenosine monophosphate. In contrast, inhibitory Gi alpha suppresses adenylyl cyclase, while Gq alpha stimulates membrane-bound phospholipase C beta.",
+   "say": "G protein alpha subunits direct specific cascades. Stimulatory Gs activates adenylyl cyclase, inhibitory Gi blocks it, and Gq activates phospholipase C.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gs Pathway",
+     "points": [
+      "Stimulates adenylyl cyclase enzyme",
+      "Increases intracellular cyclic AMP",
+      "Activates protein kinase A (PKA)",
+      "Receptors: Beta-1, Beta-2, V2, D1, H2"
+     ]
+    },
+    "right": {
+     "title": "Gi Pathway",
+     "points": [
+      "Inhibits adenylyl cyclase enzyme",
+      "Decreases intracellular cyclic AMP",
+      "Opens inward rectifier potassium channels (GIRK)",
+      "Receptors: Alpha-2, M2, D2, Opioid receptors"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The downstream effector of elevated cyclic AMP is **protein kinase A**. Cyclic AMP binds the two regulatory subunits of inactive PKA, releasing its active catalytic subunits to phosphorylate serine and threonine residues on target enzymes, ion channels, and transcriptional regulators like CREB. Cyclic nucleotide phosphodiesterases degrade cAMP back to inactive five-prime AMP, terminating the downstream signal.",
+   "say": "Cyclic AMP activates protein kinase A by freeing its catalytic subunits to phosphorylate enzymes and ion channels. Phosphodiesterases terminate the signal by degrading cyclic AMP.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ac",
+      "label": "Adenylyl Cyclase Generates Cyclic AMP from ATP"
+     },
+     {
+      "id": "pka",
+      "label": "cAMP Binds Regulatory Subunits of Protein Kinase A"
+     },
+     {
+      "id": "cat",
+      "label": "Catalytic PKA Subunits Phosphorylate Cellular Target Proteins"
+     },
+     {
+      "id": "pde",
+      "label": "Phosphodiesterase Hydrolyses cAMP to 5'-AMP Terminating Signal"
+     }
+    ],
+    "edges": [
+     [
+      "ac",
+      "pka"
+     ],
+     [
+      "pka",
+      "cat"
+     ],
+     [
+      "cat",
+      "pde"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Signaling through Gq alpha stimulates the membrane-bound effector phospholipase C beta, which cleaves phosphatidylinositol 4,5-bisphosphate into two distinct **second messengers**. Inositol 1,4,5-trisphosphate diffuses across the cytoplasm to open calcium release channels on the endoplasmic reticulum, while diacylglycerol remains in the membrane to activate protein kinase C alongside calcium and phosphatidylserine.",
+   "say": "The Gq pathway activates phospholipase C to cleave PIP2 into IP3 and diacylglycerol. IP3 mobilises calcium from the endoplasmic reticulum, while diacylglycerol activates protein kinase C.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Second Messenger",
+     "Source Precursor",
+     "Primary Intracellular Target",
+     "Physiological Consequence"
+    ],
+    "rows": [
+     [
+      "Cyclic AMP",
+      "ATP via adenylyl cyclase",
+      "Protein kinase A (PKA)",
+      "Glycogenolysis, inotropy, lipolysis"
+     ],
+     [
+      "Cyclic GMP",
+      "GTP via guanylyl cyclase",
+      "Protein kinase G (PKG)",
+      "Vascular smooth muscle relaxation"
+     ],
+     [
+      "IP3",
+      "PIP2 via phospholipase C",
+      "ER calcium release channels",
+      "Smooth muscle contraction, secretion"
+     ],
+     [
+      "Diacylglycerol",
+      "PIP2 via phospholipase C",
+      "Protein kinase C (PKC)",
+      "Cell proliferation, gene expression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In cardiac pacemaker tissue, hyperpolarisation-activated cyclic nucleotide-gated channels generate the inward **funny current** that drives spontaneous diastolic depolarisation. These channels open in response to membrane hyperpolarisation below negative fifty millivolts, but their gating kinetics are shifted positively by direct binding of cyclic AMP to their cytoplasmic cyclic nucleotide-binding domain, accelerating SA nodal discharge.",
+   "say": "Funny channels in pacemaker cells open upon hyperpolarisation. Direct binding of cyclic AMP shifts their opening curve, accelerating heart rate during sympathetic stimulation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiac-electrophysiology-and-pacemaker-cells-fig1.webp",
+    "alt": "Cardiac pacemaker action potential and funny current electrophysiology.",
+    "caption": "Pacemaker action potential and cyclic AMP modulation of funny channels. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Termination of G protein signaling is controlled intrinsically by the alpha subunit, which possesses intrinsic GTPase activity that hydrolyses bound GTP back to GDP. Regulatory proteins called **RGS proteins** accelerate this GTPase activity up to one thousand-fold, promoting rapid reassociation with the beta-gamma dimer and resetting the receptor system for subsequent hormonal cues.",
+   "say": "Intrinsic GTPase activity on the alpha subunit terminates G protein signaling. Regulators of G protein signaling accelerate GTP hydrolysis, resetting the cycle.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Active Signaling State",
+     "points": [
+      "GTP bound to alpha subunit",
+      "Dissociated from beta-gamma heterodimer",
+      "Stimulates adenylyl cyclase or phospholipase C",
+      "Prolonged by cholera toxin inhibiting GTPase"
+     ]
+    },
+    "right": {
+     "title": "Inactive Reset State",
+     "points": [
+      "GDP bound to alpha subunit",
+      "High affinity for beta-gamma dimer complex",
+      "Effector stimulation ceases completely",
+      "RGS proteins accelerate transition to this state"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
