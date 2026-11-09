@@ -1,0 +1,217 @@
+{
+  "v": 1,
+  "module": "pat-intestine",
+  "subject": "pathology",
+  "title": "Crypt Abscesses, Pseudopolyps, Hirschsprung Disease, and Intestinal Tuberculosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Crypt abscesses collect neutrophils inside colonic crypt lumens during active colitis of ulcerative colitis, infection, or ischaemia, marking activity rather than naming its cause. Cryptitis describes neutrophils merely crossing the crypt epithelium, one rung below a true **crypt abscess** filling the lumen; either finding grades activity for the report yet Campylobacter, Shigella and early inflammatory bowel disease all produce identical pictures.",
+      "say": "Crypt abscesses shout active colitis, not ulcerative colitis specifically; infection makes them just as well.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Activity markers",
+          "points": [
+            "Cryptitis and crypt abscesses",
+            "Ulceration, mucin depletion",
+            "Neutrophils in lamina propria"
+          ]
+        },
+        "right": {
+          "title": "Chronicity markers",
+          "points": [
+            "Crypt distortion and branching",
+            "Basal plasmacytosis",
+            "Paneth metaplasia left colon"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Chronicity markers separate inflammatory bowel disease from self limited infection: distorted branching crypts, basal plasmacytosis, and Paneth cells beyond their ileal home declare longstanding colitis. Plasma cells crowding the crypt bases separate epithelium from muscularis mucosae in **basal plasmacytosis**, one of the earliest chronic changes, while Paneth cells appearing in the left colon count as metaplasia because they normally live only right sided and ileal.",
+      "say": "Distorted crypts and basal plasma cells mean chronicity; acute infection keeps crypt architecture honest.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/intestinal-malabsorption-ibd-polyps-hirschsprung-fig1.webp",
+        "alt": "Crohn versus ulcerative colitis and Hirschsprung patterns",
+        "caption": "Inflammatory bowel disease patterns with Hirschsprung disease in the intestinal spectrum."
+      }
+    },
+    {
+      "tx": "Pseudopolyps are surviving mucosal islands and granulation tags left standing between ulcerated seas in ulcerative colitis, inflammatory not neoplastic, yet surveillance still samples them with surrounding dysplasia vigilance. Giant forms exceeding 1.5 cm cluster in severe past flares and may fill the lumen at barium study, mimicking cancer; histology of a **pseudopolyp** shows inflamed granulation tissue wearing regenerating epithelium, never the crowded dysplastic glands of a true adenoma.",
+      "say": "Pseudopolyps are survivors, not precursors; the cancer risk lives in flat dysplasia around them.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Lesion",
+          "Nature",
+          "Cancer implication"
+        ],
+        "rows": [
+          [
+            "Pseudopolyp",
+            "Inflammatory residual mucosa",
+            "Not itself precancerous"
+          ],
+          [
+            "Adenoma in colitis",
+            "True neoplastic polyp",
+            "Dysplasia managed by visibility"
+          ],
+          [
+            "Flat dysplasia",
+            "Neoplastic, endoscopically subtle",
+            "Highest surveillance concern"
+          ],
+          [
+            "Stricture in colitis",
+            "Fibrotic or malignant",
+            "Malignancy exclusion mandatory"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Longstanding ulcerative colitis raises colorectal cancer risk by duration, extent, inflammation severity, primary sclerosing cholangitis, and family history, earning chromoendoscopy surveillance programmes. Surveillance usually opens eight years after symptom onset, yet **primary sclerosing cholangitis** moves the first surveillance colonoscopy to the day that diagnosis lands and keeps it annual, because cancer risk in that pairing climbs earlier and runs higher than duration alone predicts.",
+      "say": "Eight to ten years of extensive colitis starts cancer surveillance; sclerosing cholangitis starts it immediately.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Extensive colitis duration accrues"
+          },
+          {
+            "id": "b",
+            "label": "Surveillance chromoendoscopy begins"
+          },
+          {
+            "id": "c",
+            "label": "Visible dysplasia resected endoscopically"
+          },
+          {
+            "id": "d",
+            "label": "Invisible high grade: colectomy discussion"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Hirschsprung disease aganglionically paralyses distal colon from failed neural crest migration, presenting neonatal delayed meconium, distension, and explosive stool on examination, diagnosed by absent ganglion cells on suction biopsy. Failure to pass meconium within 48 hours in a term baby opens the workup; suction biopsy must sample at least 2 cm above the dentate line, where absent ganglion cells plus hypertrophic nerve trunks confirm **Hirschsprung disease** before pull through surgery levels the transition zone.",
+      "say": "Delayed meconium plus explosive stool on examination means Hirschsprung disease until suction biopsy acquits it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hirschsprung disease",
+          "points": [
+            "Neonatal obstruction, delayed meconium",
+            "Transition zone on contrast enema",
+            "Absent ganglion cells, hypertrophic nerves"
+          ]
+        },
+        "right": {
+          "title": "Functional constipation",
+          "points": [
+            "Later onset, stool withholding",
+            "Normal neonatal history",
+            "Responds to medical therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Intestinal tuberculosis favours ileocaecum with transverse ulcers, caseating granulomas, and strictures mimicking Crohn disease endoscopically, histologically, and radiologically in endemic regions. The ileocaecal valve often gapes patulous beside a pulled up, conical caecum on imaging, and large confluent granulomas exceeding 200 micrometres with central caseation favour **intestinal tuberculosis** strongly enough to start treatment while cultures mature over coming weeks.",
+      "say": "Ileocaecal disease in endemic regions is tuberculosis versus Crohn until caseation, AFB, and cultures vote."
+    },
+    {
+      "tx": "Transverse and circumferential ulcers favour tuberculosis, longitudinal serpiginous ulcers favour Crohn disease, while necrotic lymph nodes on imaging and ascites further tilt tuberculosis. Lymph nodes with hypodense necrotic centres on contrast CT argue hard for tuberculosis because Crohn nodes merely enlarge reactively, and perianal fistula or longitudinal ulcers argue back with equal force toward **Crohn disease** in the same tally.",
+      "say": "Transverse ulcers think tuberculosis, longitudinal think Crohn; nodes and ascites cast deciding votes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Intestinal TB",
+          "Crohn disease"
+        ],
+        "rows": [
+          [
+            "Ulcer axis",
+            "Transverse, circumferential",
+            "Longitudinal, serpiginous"
+          ],
+          [
+            "Granulomas",
+            "Caseating, confluent, submucosal",
+            "Noncaseating, sparse"
+          ],
+          [
+            "Perianal disease",
+            "Rare",
+            "Common"
+          ],
+          [
+            "Imaging extra",
+            "Necrotic nodes, ascites",
+            "Fat wrapping, fistulas"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Therapeutic tuberculosis trial traps await the impatient: steroids prescribed for presumed Crohn disease can disseminate tuberculosis fatally, so endemic uncertainty demands microbiological patience. Eight weeks of antitubercular therapy should heal tuberculous ulcers visibly at repeat ileocolonoscopy, and failure to improve reopens the Crohn question; starting anti-TNF therapy before **latent tuberculosis** screening repeats the same dissemination error through a different drug class.",
+      "say": "Never steroid endemic ileocaecal disease on a guess; tuberculosis disseminates under that mistake.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Ileocaecal inflammation found"
+          },
+          {
+            "id": "b",
+            "label": "Biopsies for AFB, culture, molecular TB"
+          },
+          {
+            "id": "c",
+            "label": "Chest imaging and exposure review"
+          },
+          {
+            "id": "d",
+            "label": "Treat TB or Crohn on evidence"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-colorectal-tumours",
+  "subject": "pathology",
+  "title": "Colorectal Polyps, Adenoma-Carcinoma Sequence, FAP, Lynch, CEA, and Dukes Staging",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Hyperplastic polyps, small pale serrated rectosigmoid lesions without dysplasia, are innocuous, while sessile serrated lesions with dysplasia potential demand complete excision and surveillance distinction. Under the microscope a **sessile serrated lesion** shows dilated, boot shaped crypt bases with serration reaching the crypt bottom, and it usually carries a BRAF mutation with widespread CpG island methylation driving its route toward cancer.",
+      "say": "Tiny rectal hyperplastic polyps reassure; proximal sessile serrated lesions earn respect and surveillance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hyperplastic polyp",
+          "points": [
+            "Small, distal, pale",
+            "No dysplasia",
+            "No added surveillance usually"
+          ]
+        },
+        "right": {
+          "title": "Sessile serrated lesion",
+          "points": [
+            "Proximal, flat, mucus cap",
+            "Braf and methylation pathway",
+            "Surveillance colonoscopy scheduled"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Tubular adenomas grow on stalks with low grade dysplasia common, villous adenomas spread sessile carpets secreting mucus and potassium, malignant risk climbing with size, villous share, and high grade dysplasia. An adenoma reaching 2 cm across carries roughly a one in five chance of harbouring invasive cancer, so size above 1 cm already pushes management from cold snare removal toward complete en bloc excision and closer follow up when **villous architecture** is present.",
+      "say": "Big, villous, high grade: those three adjectives move an adenoma toward cancer fastest.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/colorectal-polyps-and-carcinoma-fig1.webp",
+        "alt": "Colorectal polyps and carcinoma with familial adenomatous polyposis",
+        "caption": "Colorectal polyps and carcinoma including familial adenomatous polyposis patterns."
+      }
+    },
+    {
+      "tx": "Juvenile polyps hamartomatously bleed in children usually solitarily and benignly, while Peutz-Jeghers polyps with mucocutaneous pigmentation carry wider cancer risks needing kindred surveillance. Peutz-Jeghers polyps show smooth muscle bundles branching like a tree through the polyp fronds, and the STK11 defect behind the syndrome raises lifetime cancer risk in breast, pancreas and gut, so families enter upper gut, colon, breast and pancreatic vigilance from early adult life through **Peutz-Jeghers syndrome** clinics.",
+      "say": "Lips pigmented plus hamartomatous polyps mean Peutz-Jeghers; cancers beyond bowel join its surveillance.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Polyp",
+          "Nature",
+          "Malignancy meaning"
+        ],
+        "rows": [
+          [
+            "Hyperplastic",
+            "Serrated, no dysplasia",
+            "Innocuous distally"
+          ],
+          [
+            "Tubular adenoma",
+            "Neoplastic, dysplastic",
+            "Risk by size and grade"
+          ],
+          [
+            "Juvenile polyp",
+            "Hamartomatous",
+            "Solitary benign, syndrome if many"
+          ],
+          [
+            "Peutz-Jeghers polyp",
+            "Hamartomatous, arborizing muscle",
+            "Syndrome cancer surveillance"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Familial adenomatous polyposis carpets colon with hundreds of adenomas from adolescence after germline APC loss, cancer inevitable without colectomy, Gardner variant adding desmoids, osteomas, and epidermoid cysts. Diagnosis needs only 100 adenomas in a classic case, and prophylactic colectomy usually falls in the late teens once polyp burden climbs, while relatives of a patient with **familial adenomatous polyposis** start annual flexible sigmoidoscopy from about age 12 so surgery can be timed before cancer appears.",
+      "say": "Hundreds of adenomas in a teenager mean APC disease; colectomy timing, not polyp watching, prevents cancer.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/familial-adenomatous-polyposis-fig1.webp",
+        "alt": "Familial adenomatous polyposis clinical and pathological features",
+        "caption": "Familial adenomatous polyposis with hundreds of colonic adenomas."
+      }
+    },
+    {
+      "tx": "Lynch syndrome accelerates adenomas to cancer through mismatch repair failure without polyposis, at younger ages and right sided sites, with endometrial cancer shadowing colorectal risk in families. An adenoma here may convert within two to three years instead of the usual decade, so colonoscopy repeats every one to two years, and tumours lose MLH1, MSH2, MSH6 or PMS2 staining when **mismatch repair deficiency** lets microsatellite errors accumulate unchecked.",
+      "say": "Lynch cancers arrive young, right sided, and few in polyp number because repair failure accelerates each adenoma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "FAP pathway",
+          "points": [
+            "Hundreds of adenomas",
+            "APC germline, colectomy prevents",
+            "Desmoid and duodenal vigilance"
+          ]
+        },
+        "right": {
+          "title": "Lynch pathway",
+          "points": [
+            "Few adenomas, fast progression",
+            "Mismatch repair germline",
+            "Short interval colonoscopy, aspirin debated"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The adenoma carcinoma sequence steps APC loss, KRAS activation, chromosome 18 losses, and TP53 loss over years, the molecular staircase screening colonoscopy interrupts by polypectomy. Loss of APC function normally unleashes beta-catenin, which is why nuclear beta-catenin staining lights up dysplastic crypts; late loss of **TP53** then removes the guard that would otherwise kill a chromosomally chaotic cell before invasion begins.",
+      "say": "APC, KRAS, 18q, TP53: the staircase every screening polypectomy interrupts mid climb.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "APC loss initiates adenoma"
+          },
+          {
+            "id": "b",
+            "label": "KRAS grows adenoma size"
+          },
+          {
+            "id": "c",
+            "label": "18q losses advance dysplasia"
+          },
+          {
+            "id": "d",
+            "label": "TP53 loss completes carcinoma"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Colorectal adenocarcinoma spreads by direct invasion, lymphatics, portal blood to liver, and peritoneal seeding, presenting by site: right sided anaemia, left sided obstruction, rectal bleeding and tenesmus. The liver receives the first venous drainage through the portal vein, making it the commonest distant site, whereas a low rectal tumour can slip through systemic veins to the lungs first; unexplained **iron deficiency anaemia** in an older man therefore demands colonic imaging even without bowel symptoms.",
+      "say": "Right side bleeds silently into anaemia, left side obstructs, rectum bleeds visibly with tenesmus.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Site",
+          "Presentation accent",
+          "Pearl"
+        ],
+        "rows": [
+          [
+            "Right colon",
+            "Iron deficiency, mass, weight loss",
+            "Liquid stool hides bleeding"
+          ],
+          [
+            "Left colon",
+            "Obstruction, altered habit",
+            "Narrower lumen declares earlier"
+          ],
+          [
+            "Rectum",
+            "Visible bleeding, tenesmus",
+            "Digital and endoscopic access"
+          ],
+          [
+            "Any site emergency",
+            "Perforation, obstruction",
+            "Surgery before oncology sequencing"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "CEA monitors colorectal cancer recurrence and therapy rather than screening, while Dukes staging's wall depth and node logic survives inside modern TNM teaching for prognosis conversations. A rising **carcinoembryonic antigen** after curative resection often precedes visible recurrence by months and triggers cross sectional imaging, yet smokers and patients with liver disease run mildly raised values that must not be mistaken for relapse without a clear upward trend.",
+      "say": "CEA watches known cancer, never screens for it; Dukes ABCD still teaches wall and node logic.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dukes logic",
+          "points": [
+            "A wall confined",
+            "B through wall, nodes clear",
+            "C nodes involved, D distant"
+          ]
+        },
+        "right": {
+          "title": "Modern practice",
+          "points": [
+            "TNM staging formally used",
+            "MSI and RAS biology guide therapy",
+            "CEA trends trigger imaging"
+          ]
+        }
+      }
+    }
+  ]
+}
