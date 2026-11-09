@@ -1,0 +1,190 @@
+{
+ "key": "obg-infertility-antral-follicle-count",
+ "v": 1,
+ "module": "obg-infertility",
+ "subject": "obstetrics-gynaecology",
+ "title": "Antral Follicle Count, Ovulation Induction and Insemination",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Sonographic enumeration of small subcentimeter follicles using transvaginal scanning determines the **baseline antral follicle count**. Performed between days two and four of the menstrual cycle, it tallies all follicles measuring two to nine millimeters across both ovaries. This total count directly correlates with the number of mature oocytes harvested after controlled ovarian hyperstimulation.",
+   "say": "Antral follicle count counts two to nine millimeter follicles early in the follicular phase.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antral Count (Total Both Ovaries)",
+     "Reserve Category",
+     "Protocol Selection"
+    ],
+    "rows": [
+     [
+      "Fewer than 5 follicles",
+      "Markedly reduced",
+      "High-dose gonadotropin, microdose flare"
+     ],
+     [
+      "8 to 15 follicles",
+      "Normal reserve",
+      "Standard antagonist protocol with rFSH"
+     ],
+     [
+      "Over 20 follicles",
+      "Excessive reserve (PCOS)",
+      "GnRH antagonist with GnRH agonist trigger"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The first-line oral medical agent for ovulation induction in women with polycystic ovary syndrome is **letrozole therapy**. As a competitive non-steroidal aromatase inhibitor, letrozole reversibly blocks the conversion of androstenedione to estrone and testosterone to estradiol. The resulting drop in central estrogen feedback unleashes pituitary follicle-stimulating hormone release, recruiting dominant follicles.",
+   "say": "Letrozole is the first-line oral ovulation induction drug for polycystic ovary syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aromatase Inhibition",
+     "points": [
+      "Suppresses estrone and estradiol synthesis",
+      "Relieves hypothalamic negative feedback",
+      "Stimulates physiological pituitary FSH pulse"
+     ]
+    },
+    "right": {
+     "title": "Dosage and Protocol",
+     "points": [
+      "Start at 2.5 mg daily for 5 days",
+      "Administered from cycle day 3 to 7",
+      "Titrate up to 5 mg or 7.5 mg if anovulatory"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extensive randomized trials demonstrate that letrozole provides significantly higher **cumulative live birth rates** and lower multiple pregnancy rates compared to clomiphene citrate in anovulatory PCOS. Because letrozole does not deplete peripheral estrogen receptors, it maintains normal endometrial thickness and preserves receptive cervical mucus throughout the ovulatory cycle.",
+   "say": "Letrozole achieves superior live birth rates without the anti-estrogenic endometrial thinning of clomiphene.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharmacological Feature",
+     "Letrozole",
+     "Clomiphene Citrate"
+    ],
+    "rows": [
+     [
+      "Mechanism",
+      "Aromatase enzyme inhibition",
+      "Estrogen receptor antagonism"
+     ],
+     [
+      "Endometrial effect",
+      "Normal thickness and trilaminar pattern",
+      "Thinning due to prolonged receptor depletion"
+     ],
+     [
+      "Multiple pregnancy rate",
+      "Lower (approx 3 to 5 percent)",
+      "Higher (approx 8 to 10 percent)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The traditional selective estrogen receptor modulator is **clomiphene citrate**, administered orally at fifty to one hundred milligrams daily from cycle days two to six. By binding and depleting nuclear estrogen receptors in the hypothalamus, clomiphene blocks negative estrogen feedback. This perceived estrogen deficit triggers increased pulsatile GnRH and compensatory pituitary gonadotropin secretion.",
+   "say": "Clomiphene citrate blocks hypothalamic estrogen receptors to stimulate endogenous gonadotropin release.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-clomifene-citrate.webp",
+    "alt": "Pharmacological mechanism of clomifene citrate.",
+    "caption": "Clomifene citrate hypothalamic receptor antagonism driving pituitary gonadotropins. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Failure to achieve ovulation despite escalating clomiphene dosages up to one hundred and fifty milligrams defines **clomiphene resistance**. Therapeutic strategies include insulin-sensitizing metformin co-treatment, switching to letrozole, exogenous low-dose gonadotropin injections, or performing laparoscopic ovarian drilling with a monopolar or bipolar needle to reduce androgen-secreting stroma.",
+   "say": "Clomiphene resistance can be overcome with letrozole, gonadotropins, or laparoscopic ovarian drilling.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-ins-bipolar-ovarian-needle.webp",
+    "alt": "Bipolar ovarian drilling needle.",
+    "caption": "Bipolar ovarian needle used for laparoscopic drilling in resistant anovulation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Precise timing of follicle maturation relies on serial **transvaginal folliculometry**. Sonography monitors follicular growth at an average rate of two millimeters per day in the late follicular phase. When the leading follicle attains eighteen to twenty millimeters in diameter, final oocyte maturation is triggered using urinary or recombinant human chorionic gonadotropin.",
+   "say": "Folliculometry tracks growth until a mature eighteen millimeter follicle is ready for hCG triggering.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Follicular Monitoring",
+     "points": [
+      "Serial TVS from cycle day 9 or 10",
+      "Dominant follicle grows 2 mm per day",
+      "Target mature diameter is 18 to 20 mm"
+     ]
+    },
+    "right": {
+     "title": "Ovulation Trigger",
+     "points": [
+      "Recombinant or urinary hCG (5000 to 10000 IU)",
+      "Binds LH receptors on theca and granulosa",
+      "Rupture occurs 36 to 40 hours after trigger"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A common first-line assisted reproductive intervention is **intrauterine insemination**, bypassing hostile cervical mucus and depositing motile sperm directly at the tubal ostia. Fresh ejaculate is processed using density gradient centrifugation or swim-up washing to separate hypermotile spermatozoa from seminal plasma, prostaglandins, bacteria, and immotile debris.",
+   "say": "Intrauterine insemination washes sperm to isolate motile cells and deposits them into the uterine cavity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step in IUI",
+     "Technique",
+     "Clinical Objective"
+    ],
+    "rows": [
+     [
+      "Sperm preparation",
+      "Density gradient or swim-up",
+      "Removes prostaglandins and immotile cells"
+     ],
+     [
+      "Timing",
+      "36 to 40 hours after hCG trigger",
+      "Synchronizes with follicular rupture"
+     ],
+     [
+      "Insemination",
+      "Flexible catheter into uterine cavity",
+      "Deposits 0.3 to 0.5 mL of washed sperm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Optimal success requires a minimum **total motile sperm count** of five to ten million in the processed post-wash sample. Insemination is performed thirty-six hours following the trigger injection to coincide precisely with ovulation. If the processed motile count remains below five million, clinical pregnancy rates drop sharply, indicating the need to escalate to in vitro fertilization.",
+   "say": "Post-wash motile sperm counts above five to ten million are required for successful insemination.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Motile Count 5 to 10 Million",
+     "points": [
+      "Adequate for standard IUI protocols",
+      "Expect cumulative pregnancy rate 10 to 15 percent",
+      "3 to 4 cycles attempted before escalating"
+     ]
+    },
+    "right": {
+     "title": "Motile Count Under 5 Million",
+     "points": [
+      "Marked drop in intrauterine success",
+      "Inadequate sperm density at tubal ampulla",
+      "Indication for IVF or ICSI conversion"
+     ]
+    }
+   }
+  }
+ ]
+}

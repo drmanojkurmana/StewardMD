@@ -1,0 +1,194 @@
+{
+ "key": "obg-ovarian-cancer-epithelial-ovarian-cancer",
+ "v": 1,
+ "module": "obg-ovarian-cancer",
+ "subject": "obstetrics-gynaecology",
+ "title": "Epithelial Ovarian Malignancy, High-Grade Serous and BRCA Genetics",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The most lethal gynaecological malignancy across adult populations is **epithelial ovarian cancer**, responsible for the majority of ovarian cancer deaths. Most patients present with advanced stage three or four disease due to vague abdominal symptoms like bloating, early satiety, and pelvic discomfort. Primary management combines comprehensive surgical debulking with platinum-taxane intravenous chemotherapy.",
+   "say": "Epithelial ovarian carcinoma often presents in advanced stages due to insidious peritoneal dissemination.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Symptom",
+     "Pathophysiological Mechanism",
+     "Clinical Presentation"
+    ],
+    "rows": [
+     [
+      "Abdominal distension",
+      "Ascites and omental caking",
+      "Progressive increase in waist size"
+     ],
+     [
+      "Early satiety",
+      "Gastric compression by tumor nodules",
+      "Inability to finish normal meals"
+     ],
+     [
+      "Pelvic pressure",
+      "Bilateral solid adnexal masses",
+      "Urinary frequency and altered bowel habit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Accounting for seventy percent of all epithelial ovarian tumors, **high grade serous carcinoma** represents the dominant histological subtype. Molecular profiling demonstrates universal TP53 mutations alongside profound chromosomal instability and defective homologous recombination repair. Most of these high grade serous tumors originate from the distal fimbria of the fallopian tube.",
+   "say": "High grade serous carcinoma harbors universal p53 mutations and frequently originates in the fallopian tube fimbria.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "High-Grade Serous",
+     "Low-Grade Serous"
+    ],
+    "rows": [
+     [
+      "Precursor lesion",
+      "STIC in fallopian tube fimbria",
+      "Serous borderline tumor"
+     ],
+     [
+      "Key mutations",
+      "TP53, BRCA1, BRCA2",
+      "KRAS, BRAF mutations"
+     ],
+     [
+      "Chemosensitivity",
+      "High primary platinum response",
+      "Relative chemoresistance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The earliest recognizable neoplastic precursor on microscopic examination is **serous tubal intraepithelial carcinoma**. Located in the fallopian tube fimbria, these noninvasive lesions demonstrate nuclear stratification, severe atypia, overexpression of mutant p53 protein, and an elevated Ki-67 proliferative index. Exfoliated tubal cells implant secondarily onto the ovarian surface and peritoneal mesothelium.",
+   "say": "Serous tubal intraepithelial carcinoma in the fimbria precedes most high-grade serous ovarian cancers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "STIC Precursor Features",
+     "points": [
+      "Located in tubal fimbrial mucosa",
+      "Overexpressed mutant p53 protein",
+      "High nuclear stratification and Ki-67"
+     ]
+    },
+    "right": {
+     "title": "Dissemination Cascade",
+     "points": [
+      "Exfoliation into peritoneal fluid",
+      "Secondary seeding on ovarian cortex",
+      "Extensive transcoelomic implantation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Germline deleterious mutations in the tumor suppressor gene **BRCA1 mutation** on chromosome seventeen confer a lifetime ovarian cancer risk of forty to fifty percent. Carriers also possess an elevated lifetime risk of breast carcinoma approaching seventy percent. Recommended risk-reducing surgery is bilateral salpingo-oophorectomy performed between thirty-five and forty years of age.",
+   "say": "BRCA1 mutations convey up to fifty percent lifetime risk of epithelial ovarian cancer.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hereditary-breast-ovarian-fig1.webp",
+    "alt": "Hereditary breast and ovarian cancer genetics and pathways.",
+    "caption": "BRCA1 and BRCA2 DNA repair pathways in hereditary ovarian cancer. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Located on chromosome thirteen, the DNA repair gene **BRCA2 mutation** increases ovarian cancer lifetime risk to twenty percent while predisposing to male breast and pancreatic malignancies. Deficits in BRCA proteins impair homologous recombination double-strand break repair, conferring profound clinical susceptibility to poly ADP-ribose polymerase enzyme inhibitors like olaparib and niraparib.",
+   "say": "BRCA2 mutations disable homologous recombination repair, conferring sensitivity to PARP inhibitor therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Genetic Marker",
+     "Chromosome",
+     "Lifetime Ovarian Cancer Risk",
+     "Surgery Age"
+    ],
+    "rows": [
+     [
+      "BRCA1",
+      "Chromosome 17q",
+      "40 to 50 percent",
+      "35 to 40 years"
+     ],
+     [
+      "BRCA2",
+      "Chromosome 13q",
+      "15 to 25 percent",
+      "40 to 45 years"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The high molecular weight transmembrane glycoprotein **serum CA-125** serves as the primary tumor marker for monitoring disease burden and response to therapy. A reference threshold of thirty-five units per milliliter differentiates normal values. Although elevated in eighty percent of advanced serous carcinomas, it lacks sensitivity in early-stage disease.",
+   "say": "Serum CA-125 is elevated in advanced serous carcinoma and guides response to chemotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Etiology",
+     "Physiological Condition",
+     "CA-125 Elevation"
+    ],
+    "rows": [
+     [
+      "Malignant",
+      "Serous ovarian cancer",
+      "Marked elevation, often above 500"
+     ],
+     [
+      "Benign pelvic",
+      "Endometriosis, PID, fibroids",
+      "Mild to moderate elevation"
+     ],
+     [
+      "Physiological",
+      "Menstruation, first trimester",
+      "Transient benign rise"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical triage of postmenopausal adnexal masses utilizes the **risk of malignancy index**, integrating serum CA-125 level, menopausal status, and ultrasound scores. An ultrasound score is derived by evaluating multilocular cysts, solid areas, bilateral lesions, ascites, and intra-abdominal metastases. A score exceeding two hundred indicates high malignancy probability, requiring oncology referral.",
+   "say": "The risk of malignancy index combines ultrasound morphology, CA-125, and menopausal status.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "RMI Calculation",
+     "points": [
+      "Ultrasound score (U: 0, 1, or 3)",
+      "Menopausal score (M: 1 or 3)",
+      "Serum CA-125 absolute value"
+     ]
+    },
+    "right": {
+     "title": "Clinical Triage",
+     "points": [
+      "RMI under 200: low malignancy risk",
+      "RMI 200 or greater: high risk",
+      "Directs oncological surgical center referral"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Comprehensive anatomical staging follows the updated **FIGO ovarian staging** guidelines. Stage one is limited to the ovaries or fallopian tubes. Stage two extends into pelvic organs below the pelvic brim. Stage three represents microscopic or macroscopic peritoneal implants beyond the pelvis or retroperitoneal lymph node metastases.",
+   "say": "FIGO ovarian staging evaluates pelvic extension, retroperitoneal lymph nodes, and peritoneal dissemination.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-figo-ovary.webp",
+    "alt": "FIGO staging diagram of ovarian carcinoma.",
+    "caption": "FIGO stages of ovarian carcinoma across pelvic, nodal and peritoneal sites. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}
