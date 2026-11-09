@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "med-localisation",
+ "subject": "medicine",
+ "title": "Motor Pathways: Upper versus Lower Motor Neuron Syndromes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The central motor architecture is organised into a hierarchical dual-neuron descending system consisting of corticospinal upper motor neurons and cranial or anterior horn lower motor neurons. Lesions interrupting the descending corticospinal tracts above the anterior horn cells produce the distinctive constellation of **upper motor neuron signs**, characterised by loss of supraspinal inhibitory control, hyperreflexia, and heightened muscle tone.",
+   "say": "The central motor architecture is organized into a hierarchical dual-neuron descending system consisting of corticospinal upper motor neurons and anterior horn lower motor neurons. Lesions interrupting the descending corticospinal tracts produce the distinctive constellation of upper motor neuron signs, characterized by loss of supraspinal inhibition, hyperreflexia, and spastic hypertonia.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cns-umn-vs-lmn.webp",
+    "alt": "Comparison of upper versus lower motor neuron physical examination signs.",
+    "caption": "Diagnostic clinical signs differentiating upper from lower motor neuron lesions. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In direct contrast, structural destruction of the motor neuron cell bodies in the anterior horn of the spinal cord or their peripheral axonal projections produces **lower motor neuron signs**. Denervation of skeletal motor units decouples muscle fibres from all central and spinal reflex drives, causing flaccid muscle weakness, profound neurogenic muscle atrophy, total loss of deep tendon reflexes, and visible muscle twitching.",
+   "say": "In direct contrast, destruction of motor neuron cell bodies in the anterior horn or their peripheral axons produces lower motor neuron signs. Denervation of skeletal motor units decouples muscle fibres from spinal reflex drives, causing flaccid paralysis, rapid neurogenic muscle atrophy, and absent deep tendon reflexes.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cns-motor-power.webp",
+    "alt": "Physical examination testing motor power and muscle tone.",
+    "caption": "Clinical assessment of muscle power grading and neurological tone. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The pathognomonic clinical hallmark of corticospinal tract interruption in adults is the extensor plantar response, universally designated as the **Babinski sign**. Firm noxious mechanical stroking of the lateral plantar aspect of the foot curving medially across the metatarsal pads elicits slow dorsiflexion (extension) of the hallux accompanied by fanning of the outer four toes, reflecting uninhibited spinal flexor withdrawal circuitry.",
+   "say": "The pathognomonic clinical hallmark of corticospinal tract interruption in adults is the extensor plantar response, designated as the Babinski sign. Firm noxious stroking of the lateral plantar foot elicits dorsiflexion of the hallux accompanied by fanning of the outer toes, reflecting uninhibited spinal flexor withdrawal circuitry.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Plantar Reflex (Flexor)",
+     "points": [
+      "Intact corticospinal tract inhibition",
+      "Downwards curling (flexion) of all toes",
+      "Present in healthy adults and older children",
+      "Integrated through S1 spinal root"
+     ]
+    },
+    "right": {
+     "title": "Babinski Sign (Extensor)",
+     "points": [
+      "Pathognomonic corticospinal tract disruption",
+      "Upwards extension of great toe (hallux)",
+      "Fanning of lateral four toes",
+      "Normal only in neonates under 12 months"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Alterations in skeletal muscle tone reliably differentiate upper from lower motor neuron pathology on passive limb manipulation. Corticospinal tract injury causes velocity-dependent resistance to passive muscle stretch termed **spasticity**, exhibiting a characteristic clasp-knife phenomenon with predilection for upper limb flexors and lower limb extensors. Conversely, lower motor neuron denervation eliminates motor tone entirely, producing profound flaccidity.",
+   "say": "Alterations in skeletal muscle tone reliably differentiate upper from lower motor neuron pathology on passive limb manipulation. Corticospinal tract injury causes velocity-dependent resistance termed spasticity, exhibiting a classic clasp-knife phenomenon. Conversely, lower motor neuron denervation eliminates tone entirely, producing profound flaccidity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spastic Hypertonia (UMN)",
+     "points": [
+      "Velocity-dependent resistance to passive stretch",
+      "Clasp-knife response (initial resistance gives way)",
+      "Preferential distribution (flexors in arms, extensors in legs)",
+      "Exaggerated monosynaptic stretch reflex"
+     ]
+    },
+    "right": {
+     "title": "Flaccid Hypotonia (LMN)",
+     "points": [
+      "Complete loss of muscle resistance",
+      "Flaccid, pendular limb mobility",
+      "Generalized across all muscle groups",
+      "Interruption of monosynaptic reflex arc"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Spontaneous, involuntary synchronous contractions of single motor units visible beneath the skin surface are defined as **fasciculations**. These fine flickering muscular twitches reflect denervation supersensitivity and electrical instability in dying anterior horn cells or regenerating motor axon sprouts, serving as a classic hallmark of progressive lower motor neuron disorders such as amyotrophic lateral sclerosis.",
+   "say": "Spontaneous involuntary synchronous contractions of single motor units visible beneath the skin are defined as fasciculations. These fine muscular twitches reflect denervation instability in dying anterior horn cells or regenerating motor axons, serving as a classic hallmark of progressive lower motor neuron disorders.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dene",
+      "label": "Anterior Horn Cell Injury"
+     },
+     {
+      "id": "axon",
+      "label": "Motor Unit Instability"
+     },
+     {
+      "id": "fasc",
+      "label": "Visible Cutaneous Fasciculations"
+     }
+    ],
+    "edges": [
+     [
+      "dene",
+      "axon"
+     ],
+     [
+      "axon",
+      "fasc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A highly sensitive bedside physical examination test for detecting subtle, subclinical corticospinal tract dysfunction in the upper extremity is **pronator drift**. The patient holds both arms outstretched horizontally with forearms fully supinated and eyes closed. Corticospinal weakness selectively weakens the phylogenetically newer supinator and extensor muscles, causing the affected forearm to slowly pronate and drift downwards.",
+   "say": "A highly sensitive bedside test for detecting subtle subclinical corticospinal tract dysfunction in the upper extremity is pronator drift. The patient holds both arms outstretched horizontally with forearms fully supinated and eyes closed. Corticospinal weakness causes the affected forearm to slowly pronate and drift downwards.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pos",
+      "label": "Arms Outstretched & Supinated"
+     },
+     {
+      "id": "clos",
+      "label": "Eyes Closed (Removes Visual Input)"
+     },
+     {
+      "id": "drif",
+      "label": "Forearm Pronation & Downward Drift"
+     }
+    ],
+    "edges": [
+     [
+      "pos",
+      "clos"
+     ],
+     [
+      "clos",
+      "drif"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Deep tendon stretch reflexes demonstrate divergent changes based on the level of motor pathway compromise. Corticospinal tract lesions release spinal reflex interneurons from supraspinal inhibition, generating pathologic **hyperreflexia** accompanied by sustained rhythmic clonic contractions of the ankle or patella. In contrast, lower motor neuron lesions disrupt the efferent limb of the monosynaptic arc, causing complete hyporeflexia or areflexia.",
+   "say": "Deep tendon stretch reflexes demonstrate divergent changes based on the level of motor pathway compromise. Corticospinal tract lesions release spinal reflex interneurons from descending inhibition, generating hyperreflexia with sustained ankle clonus. In contrast, lower motor neuron lesions disrupt the reflex arc, causing areflexia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physical Examination Feature",
+     "Upper Motor Neuron (UMN)",
+     "Lower Motor Neuron (LMN)"
+    ],
+    "rows": [
+     [
+      "Muscle Tone",
+      "Spastic (velocity-dependent clasp-knife)",
+      "Flaccid (diminished or absent resistance)"
+     ],
+     [
+      "Deep Tendon Reflexes",
+      "Hyperreflexia with sustained clonus",
+      "Hyporeflexia or complete areflexia"
+     ],
+     [
+      "Plantar Response",
+      "Extensor (positive Babinski sign)",
+      "Flexor or unelicitable"
+     ],
+     [
+      "Muscle Atrophy",
+      "Disuse atrophy only (mild, late)",
+      "Neurogenic atrophy (profound, rapid)"
+     ],
+     [
+      "Fasciculations",
+      "Strictly absent",
+      "Present and characteristic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Accurate neurological localisation requires synthesising motor signs with sensory levels and cranial nerve findings. A pure hemiplegia sparing facial sensation localises to the internal capsule. A hemiparesis paired with an ipsilateral cranial nerve palsy and contralateral body weakness defines a crossed brainstem stroke syndrome. Lower motor neuron signs spanning multiple contiguous nerve roots indicate an anterior **horn** cell or cauda equina lesion.",
+   "say": "Accurate neurological localisation requires synthesising motor signs with sensory levels and cranial nerve findings. A pure hemiplegia sparing facial sensation localizes to the internal capsule. A hemiparesis paired with an ipsilateral cranial nerve palsy and contralateral weakness defines a brainstem stroke syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Lesion Site",
+     "Clinical Motor Pattern",
+     "Associated Localising Findings"
+    ],
+    "rows": [
+     [
+      "Cerebral Cortex (Motor Strip)",
+      "Contralateral monoparesis or hemiparesis",
+      "Aphasia, cortical sensory loss, apraxia"
+     ],
+     [
+      "Internal Capsule",
+      "Dense proportional contralateral hemiplegia",
+      "Pure motor stroke without cortical signs"
+     ],
+     [
+      "Brainstem",
+      "Crossed hemiplegia (ipsilateral CN, contra body)",
+      "Diplopia, vertigo, ataxia, Horner syndrome"
+     ],
+     [
+      "Spinal Cord (Hemicord)",
+      "Brown-Sequard: ipsilateral UMN weakness",
+      "Ipsilateral loss of vibration; contra pain loss"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 29"
+}

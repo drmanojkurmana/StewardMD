@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "module": "med-stroke",
+ "subject": "medicine",
+ "title": "Acute Ischaemic Stroke: Evaluation, Thrombolysis, and Thrombectomy",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Acute loss of focal neurological function resulting from critical impairment of cerebral blood flow without acute extravasation of blood defines an **ischaemic stroke**. Accounting for approximately eighty-five percent of all acute cerebrovascular events, focal cerebral hypoperfusion induces rapid neuronal energy depletion, cellular depolarisation, cytotoxic oedema, and irreversible ischaemic infarction within the central infarct core.",
+   "say": "Acute loss of focal neurological function resulting from impairment of cerebral blood flow without haemorrhage defines an ischemic stroke. Accounting for eighty-five percent of cerebrovascular events, cerebral hypoperfusion induces neuronal energy depletion, cytotoxic edema, and irreversible infarction within the ischemic core.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ischemic-stroke-fig1.webp",
+    "alt": "Pathophysiology of acute ischaemic stroke and ischaemic penumbra.",
+    "caption": "Ischaemic core and salvageable penumbra in acute arterial occlusion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A transient episode of neurological dysfunction caused by focal brain, spinal cord, or retinal ischaemia without acute cerebral infarction on neuroimaging is designated as a **transient ischaemic attack** (TIA). While symptoms historically resolved within twenty-four hours, the modern tissue-based definition requires neuroimaging confirmation to exclude permanent tissue infarction, as TIA heralds high short-term risk of disabling stroke.",
+   "say": "A transient episode of neurological dysfunction caused by focal ischemia without infarction on neuroimaging is designated as a transient ischemic attack. While symptoms typically resolve quickly, tissue-based criteria require imaging to exclude infarction, as TIA indicates high short-term stroke risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Transient Ischaemic Attack (TIA)",
+     "points": [
+      "Focal neurological deficit resolves rapidly",
+      "Absence of acute infarction on MRI DWI",
+      "High imminent risk of completed stroke",
+      "Requires emergency neurovascular evaluation"
+     ]
+    },
+    "right": {
+     "title": "Ischaemic Stroke",
+     "points": [
+      "Permanent neurological deficit",
+      "Visible infarction on diffusion-weighted MRI",
+      "Neuronal death within ischaemic core",
+      "Eligible for immediate revascularization therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "To quantify the short-term risk of completed stroke following a transient ischaemic attack, clinicians calculate the validated **ABCD2 score**. Scoring incorporates Age (over sixty years), Blood pressure elevation (systolic 140 or diastolic 90 mmHg or higher), Clinical features (unilateral weakness scores two points, speech disturbance scores one), Duration (over sixty minutes scores two), and Diabetes. High scores mandate immediate inpatient admission.",
+   "say": "To quantify stroke risk following a transient ischemic attack, clinicians calculate the ABCD2 score. Scoring incorporates age, blood pressure, clinical features like weakness or speech disturbance, symptom duration, and diabetes. High scores mandate immediate inpatient hospital admission.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ABCD2 Component",
+     "Scoring Criteria",
+     "Points Assigned"
+    ],
+    "rows": [
+     [
+      "Age",
+      "Age >= 60 years",
+      "1 point"
+     ],
+     [
+      "Blood Pressure",
+      "Systolic >= 140 or Diastolic >= 90 mmHg",
+      "1 point"
+     ],
+     [
+      "Clinical Features",
+      "Unilateral weakness (2 pts) OR Speech disturbance without weakness (1 pt)",
+      "1 to 2 points"
+     ],
+     [
+      "Duration of Symptoms",
+      "Duration >= 60 min (2 pts) OR 10-59 min (1 pt)",
+      "1 to 2 points"
+     ],
+     [
+      "Diabetes Mellitus",
+      "History of diagnosed diabetes",
+      "1 point"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neurological deficit severity is standardised globally using the eleven-item National Institutes of Health Stroke Scale (**NIHSS**). Ranging from zero (normal) to forty-two (severe stroke), the score evaluates level of consciousness, gaze, visual fields, facial palsy, limb motor power, ataxia, sensory loss, language, and neglect, providing objective prognostic guidance and eligibility monitoring for acute reperfusion.",
+   "say": "Neurological deficit severity is standardized globally using the eleven-item National Institutes of Health Stroke Scale. Ranging from zero to forty-two, the score evaluates consciousness, vision, facial palsy, motor strength, sensation, and language, guiding acute reperfusion decisions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "NIHSS Score Band",
+     "Stroke Severity Category",
+     "Clinical and Therapeutic Significance"
+    ],
+    "rows": [
+     [
+      "0",
+      "No stroke symptoms",
+      "Normal neurological examination"
+     ],
+     [
+      "1 to 4",
+      "Minor stroke",
+      "Favourable prognosis; consider antiplatelet therapy"
+     ],
+     [
+      "5 to 15",
+      "Moderate stroke",
+      "Standard indication for IV thrombolysis"
+     ],
+     [
+      "16 to 20",
+      "Moderate to severe stroke",
+      "High suspicion for large vessel occlusion"
+     ],
+     [
+      "21 to 42",
+      "Severe stroke",
+      "Critical mortality risk; assess for thrombectomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The proven therapeutic cornerstone for acute ischaemic stroke within the established **thrombolysis window** of 4.5 hours from symptom onset is intravenous recombinant tissue plasminogen activator. Emergency non-contrast cranial computed tomography must first strictly exclude intracranial haemorrhage, extensive established hypoattenuation spanning over one-third of the middle cerebral artery territory, and neurovascular mimics.",
+   "say": "The proven therapeutic cornerstone for acute ischemic stroke within 4.5 hours from symptom onset is intravenous thrombolysis. Emergency non-contrast cranial computed tomography must first strictly exclude intracranial haemorrhage, extensive established territorial infarction, and stroke mimics.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ct",
+      "label": "Non-Contrast Head CT Excludes Haemorrhage"
+     },
+     {
+      "id": "win",
+      "label": "Onset Within 4.5 Hours Window"
+     },
+     {
+      "id": "ivt",
+      "label": "Immediate IV Thrombolytic Infusion"
+     }
+    ],
+    "edges": [
+     [
+      "ct",
+      "win"
+     ],
+     [
+      "win",
+      "ivt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The standard intravenous fibrinolytic agent administered for acute ischaemic stroke is **alteplase** (recombinant tissue plasminogen activator, rtPA) given at a weight-based dose of 0.9 mg/kg (maximum 90 mg), with ten percent delivered as an initial intravenous bolus over one minute and ninety percent infused over sixty minutes. Tenecteplase provides an alternative single bolus regimen.",
+   "say": "The standard intravenous fibrinolytic agent administered for acute ischemic stroke is alteplase, given at 0.9 mg/kg up to 90 mg. Ten percent is delivered as an initial bolus with ninety percent infused over one hour. Tenecteplase provides an effective single bolus alternative.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cns-stroke-ms-meningitis-prion-hydrocephalus-fig1.webp",
+    "alt": "Pathology of vascular ischaemic stroke, cerebral infarction, and oedema.",
+    "caption": "Cerebrovascular occlusive pathology and acute ischaemic tissue injury. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "For acute ischaemic stroke caused by confirmed large vessel occlusion (internal carotid artery or proximal M1 middle cerebral artery), catheter-based **mechanical thrombectomy** using stent retrievers or direct aspiration dramatically improves functional independence. Thrombectomy is strongly indicated up to six hours from onset, and up to twenty-four hours in selected patients demonstrating clinical-core mismatch on perfusion neuroimaging.",
+   "say": "For acute ischemic stroke caused by confirmed large vessel occlusion, catheter-based mechanical thrombectomy using stent retrievers dramatically improves functional independence. Thrombectomy is strongly indicated up to six hours from onset, and up to twenty-four hours with perfusion mismatch.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "lvo",
+      "label": "CTA Confirms Large Vessel Occlusion"
+     },
+     {
+      "id": "cath",
+      "label": "Endovascular Microcatheter Access"
+     },
+     {
+      "id": "rec",
+      "label": "Stent Retriever Clot Extraction (TICI 3)"
+     }
+    ],
+    "edges": [
+     [
+      "lvo",
+      "cath"
+     ],
+     [
+      "cath",
+      "rec"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Secondary prevention following ischaemic stroke must be initiated within twenty-four to forty-eight hours after thrombolysis. Patients presenting with non-cardioembolic minor stroke (NIHSS 3 or lower) or high-risk TIA benefit from dual antiplatelet therapy combining **aspirin** and clopidogrel for twenty-one days, followed by long-term antiplatelet monotherapy, high-intensity statin therapy, and strict blood pressure control.",
+   "say": "Secondary prevention following ischemic stroke must be initiated within twenty-four to forty-eight hours after thrombolysis. Patients presenting with non-cardioembolic minor stroke or high-risk TIA benefit from dual antiplatelet therapy with aspirin and clopidogrel for twenty-one days, followed by long-term monotherapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mechanism / Aetiology",
+     "Acute Reperfusion Strategy",
+     "Secondary Prevention Regimen"
+    ],
+    "rows": [
+     [
+      "Large Vessel Occlusion",
+      "IV Thrombolysis + Mechanical Thrombectomy",
+      "High-intensity statin + Dual antiplatelets / Carotid revascularization"
+     ],
+     [
+      "Small Vessel Lacunar",
+      "IV Thrombolysis (if within 4.5 hr)",
+      "Antiplatelet monotherapy + Tight BP control (< 130/80)"
+     ],
+     [
+      "Cardioembolic (AF)",
+      "IV Thrombolysis (if not anticoagulated)",
+      "Direct Oral Anticoagulant (DOAC) initiated at 3-14 days"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 423"
+}
