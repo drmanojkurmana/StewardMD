@@ -1,0 +1,284 @@
+{
+    "v": 1,
+    "id": "ans-inhalational-concentration-effect",
+    "subject": "anaesthesia",
+    "module": "ans-inhalational",
+    "title": "Inhalational Dynamics: Concentration Effect, Diffusion Hypoxia, and Nitrous Oxide",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "The Concentration Effect",
+            "tx": "**The concentration effect in inhalational uptake** explains why administering higher inspired concentrations (FI) of an anaesthetic gas accelerates the rate of rise of alveolar concentration toward inspired concentration (FA/FI). Driven by two physical phenomena: the concentrating effect, wherein rapid gas uptake contracts alveolar volume, and the tracheal inflow augmentation effect, where incoming fresh gas rushes into the lung to replace absorbed gas volume.",
+            "say": "The concentration effect in inhalational uptake explains why administering higher inspired concentrations (FI) of an anaesthetic gas accelerates the rate of rise of alveolar concentration toward inspired concentration (FA/FI). Driven by two physical phenomena: the concentrating effect, wherein rapid gas uptake contracts alveolar volume, and the tracheal inflow augmentation effect, where incoming fresh gas rushes into the lung to replace absorbed gas volume.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Low Inspired Concentration (1% Gas)",
+                    "points": [
+                        "Minimal gas volume absorbed into capillary bloodstream",
+                        "Negligible reduction in residual alveolar volume",
+                        "Slow, gradual rise of FA toward inspired FI concentration"
+                    ]
+                },
+                "right": {
+                    "title": "High Inspired Concentration (70% N2O)",
+                    "points": [
+                        "Massive instantaneous uptake of gas into pulmonary blood",
+                        "Marked alveolar shrinkage concentrates remaining gas molecules",
+                        "Rapid, steep surge of FA/FI ratio accelerating induction"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Diffusion Hypoxia Fink Effect",
+            "tx": "**Diffusion hypoxia Fink phenomenon** occurs upon abrupt discontinuation of nitrous oxide at the termination of general anaesthesia. Because nitrous oxide is 34 times more soluble in blood than nitrogen, huge quantities of dissolved nitrous oxide rapidly diffuse out of pulmonary blood into alveoli down a steep concentration gradient, massively diluting alveolar oxygen and carbon dioxide, plunging alveolar PaO2 into severe hypoxaemia.",
+            "say": "Diffusion hypoxia Fink phenomenon occurs upon abrupt discontinuation of nitrous oxide at the termination of general anaesthesia. Because nitrous oxide is 34 times more soluble in blood than nitrogen, huge quantities of dissolved nitrous oxide rapidly diffuse out of pulmonary blood into alveoli down a steep concentration gradient, massively diluting alveolar oxygen and carbon dioxide, plunging alveolar PaO2 into severe hypoxaemia.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Abrupt discontinuation of 70% N2O"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Massive diffusion of N2O from blood into alveoli"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Alveolar oxygen and CO2 diluted severely"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Administer 100% oxygen for 5 to 10 minutes to prevent hypoxaemia"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Closed Gas Space Expansion",
+            "tx": "**Closed gas space expansion by nitrous oxide** results directly from differential gas solubility: nitrous oxide is 34 times more soluble in blood than nitrogen. When nitrous oxide enters circulation, it diffuses into air-filled compliant body cavities 34 times faster than nitrogen can leave, rapidly multiplying cavity volume or escalating pressure within rigid enclosed anatomical spaces.",
+            "say": "Closed gas space expansion by nitrous oxide results directly from differential gas solubility: nitrous oxide is 34 times more soluble in blood than nitrogen. When nitrous oxide enters circulation, it diffuses into air-filled compliant body cavities 34 times faster than nitrogen can leave, rapidly multiplying cavity volume or escalating pressure within rigid enclosed anatomical spaces.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Anatomical Air-Filled Space",
+                    "Physical Cavity Compliance",
+                    "Nitrous Oxide Consequence",
+                    "Clinical Outcome and Contraindication"
+                ],
+                "rows": [
+                    [
+                        "Closed Pneumothorax",
+                        "Highly compliant pleural space",
+                        "Doubles in volume within 10 minutes; triples in 30",
+                        "Tension pneumothorax and cardiovascular collapse"
+                    ],
+                    [
+                        "Obstructed Intestinal Loop",
+                        "Compliant intestinal wall",
+                        "Massive bowel distension; impairs surgical closure",
+                        "Absolute contraindication in mechanical bowel obstruction"
+                    ],
+                    [
+                        "Middle Ear / Tympanic Cavity",
+                        "Rigid bony non-compliant walls",
+                        "Rapid pressure surge exceeding 50 cmH2O",
+                        "Dislodgement of tympanoplasty graft; postoperative nausea"
+                    ],
+                    [
+                        "Pneumocephalus / Cranium",
+                        "Rigid non-compliant skull",
+                        "Intracranial pressure spikes abruptly",
+                        "Transtentorial herniation following craniotomy"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Vitreoretinal Gas Bubble Hazard",
+            "tx": "**Vitreoretinal surgery nitrous oxide hazard** represents a catastrophic sight-threatening complication following pars plana vitrectomy with intraocular gas tamponade. Injected sulfur hexafluoride (SF6) or perfluoropropane (C3F8) bubbles rapidly expand as nitrous oxide diffuses into the vitreous cavity, driving intraocular pressure above central retinal artery perfusion pressure, causing irreversible ischemic optic atrophy and permanent blindness.",
+            "say": "Vitreoretinal surgery nitrous oxide hazard represents a catastrophic sight-threatening complication following pars plana vitrectomy with intraocular gas tamponade. Injected sulfur hexafluoride (SF6) or perfluoropropane (C3F8) bubbles rapidly expand as nitrous oxide diffuses into the vitreous cavity, driving intraocular pressure above central retinal artery perfusion pressure, causing irreversible ischemic optic atrophy and permanent blindness.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Sulfur Hexafluoride (SF6) Bubble",
+                    "points": [
+                        "Expands twice its volume within hours",
+                        "Persists inside the vitreous cavity for 10 to 14 days",
+                        "Nitrous oxide strictly contraindicated for 2 full weeks"
+                    ]
+                },
+                "right": {
+                    "title": "Perfluoropropane (C3F8) Bubble",
+                    "points": [
+                        "Expands four times its original injected volume",
+                        "Persists inside the vitreous cavity for 6 to 8 weeks",
+                        "Nitrous oxide strictly contraindicated for 2 full months"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Vitamin B12 Inactivation and Toxicity",
+            "tx": "**Methionine synthase inhibition by nitrous oxide** irreversibly oxidizes the cobalt atom of vitamin B12 (cobalamin) from its monovalent active Co+ state to inactive trivalent Co3+. This shuts down methionine synthase, disabling the conversion of homocysteine to methionine and halting tetrahydrofolate synthesis essential for DNA production, leading to megaloblastic bone marrow suppression and subacute combined degeneration of the spinal cord.",
+            "say": "Methionine synthase inhibition by nitrous oxide irreversibly oxidizes the cobalt atom of vitamin B12 (cobalamin) from its monovalent active Co+ state to inactive trivalent Co3+. This shuts down methionine synthase, disabling the conversion of homocysteine to methionine and halting tetrahydrofolate synthesis essential for DNA production, leading to megaloblastic bone marrow suppression and subacute combined degeneration of the spinal cord.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Enzymatic Pathway",
+                    "Biochemical Consequence",
+                    "Clinical Manifestation",
+                    "High-Risk Patient Groups"
+                ],
+                "rows": [
+                    [
+                        "Methionine Synthase Inactivation",
+                        "Homocysteine accumulates; methionine depleted",
+                        "Subacute combined degeneration of cord",
+                        "Malnourished, vegan, and pernicious anaemia patients"
+                    ],
+                    [
+                        "Thymidylate Synthesis Blockade",
+                        "Impaired DNA replication in dividing cells",
+                        "Megaloblastic bone marrow suppression",
+                        "Patients undergoing prolonged exposures greater than 6 hours"
+                    ],
+                    [
+                        "Homocysteine Accumulation",
+                        "Hyperhomocysteinaemia in systemic blood",
+                        "Vascular endothelial oxidative damage",
+                        "Premature arterial thrombosis and stroke risk"
+                    ],
+                    [
+                        "Cobalamin Oxidation",
+                        "Cobalt atom oxidized from Co+ to Co3+",
+                        "Permanent loss of enzyme cofactor function",
+                        "Reversed only with de novo enzyme protein synthesis"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Cardiovascular Actions of Nitrous Oxide",
+            "tx": "**Cardiovascular hemodynamics of nitrous oxide** feature a unique dual profile: in isolated myocardial preparations, nitrous oxide is a direct negative inotrope, but in intact healthy humans, it stimulates sympathetic nervous system outflow, causing mild peripheral vasoconstriction that maintains mean arterial pressure and heart rate. However, in patients with severe preexisting heart failure, the direct depressant action dominates, dropping cardiac index.",
+            "say": "Cardiovascular hemodynamics of nitrous oxide feature a unique dual profile: in isolated myocardial preparations, nitrous oxide is a direct negative inotrope, but in intact healthy humans, it stimulates sympathetic nervous system outflow, causing mild peripheral vasoconstriction that maintains mean arterial pressure and heart rate. However, in patients with severe preexisting heart failure, the direct depressant action dominates, dropping cardiac index.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Intact Autonomic System",
+                    "points": [
+                        "Sympathetic stimulation balances direct myocardial depression",
+                        "Preserves systemic vascular resistance and blood pressure",
+                        "Slight elevation in pulmonary vascular resistance"
+                    ]
+                },
+                "right": {
+                    "title": "Blunted Sympathetic Tone or Heart Failure",
+                    "points": [
+                        "Unmasked direct negative inotropic myocardial depression",
+                        "Significant reduction in cardiac output and stroke volume",
+                        "Dangerous elevation of right ventricular afterload"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Pulmonary Vascular Resistance and Hypertension",
+            "tx": "**Pulmonary vasoconstrictive actions of nitrous oxide** produce clinically meaningful elevations in pulmonary vascular resistance (PVR) and pulmonary arterial pressure, especially when co-administered with opioids or in patients with preexisting pulmonary hypertension, congenital heart disease, or chronic obstructive pulmonary disease. Nitrous oxide should be strictly avoided in severe pulmonary hypertension to avert acute right ventricular decompensation.",
+            "say": "Pulmonary vasoconstrictive actions of nitrous oxide produce clinically meaningful elevations in pulmonary vascular resistance (PVR) and pulmonary arterial pressure, especially when co-administered with opioids or in patients with preexisting pulmonary hypertension, congenital heart disease, or chronic obstructive pulmonary disease. Nitrous oxide should be strictly avoided in severe pulmonary hypertension to avert acute right ventricular decompensation.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Administer 70% N2O in patient with pulmonary hypertension"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Direct vasoconstriction of pulmonary vascular bed"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Sudden escalation in pulmonary vascular resistance"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Acute right ventricular strain and systemic hypotension"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Postoperative Nausea and Vomiting (PONV)",
+            "tx": "**Emetogenic potential of nitrous oxide** significantly increases the baseline incidence of postoperative nausea and vomiting through multiple synergistic mechanisms: activation of the chemoreceptor trigger zone in the area postrema, stimulation of vestibular catecholaminergic pathways, and distension of the gastrointestinal tract due to middle ear pressure changes and bowel gas expansion.",
+            "say": "Emetogenic potential of nitrous oxide significantly increases the baseline incidence of postoperative nausea and vomiting through multiple synergistic mechanisms: activation of the chemoreceptor trigger zone in the area postrema, stimulation of vestibular catecholaminergic pathways, and distension of the gastrointestinal tract due to middle ear pressure changes and bowel gas expansion.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Apfel Risk Factor",
+                    "Points Contributed",
+                    "Nitrous Oxide Compounding Effect",
+                    "Prophylaxis Recommendation"
+                ],
+                "rows": [
+                    [
+                        "Female Gender",
+                        "1 point in Apfel score",
+                        "Heightened vestibular sensitivity to N2O",
+                        "Use propofol-based TIVA to avoid nitrous oxide"
+                    ],
+                    [
+                        "Non-Smoking Status",
+                        "1 point in Apfel score",
+                        "Unprotected gastric mucosal catecholamine surge",
+                        "Combine 5-HT3 antagonist with dexamethasone"
+                    ],
+                    [
+                        "History of PONV / Motion Sickness",
+                        "1 point in Apfel score",
+                        "Direct vestibular and area postrema stimulation",
+                        "Avoid nitrous oxide entirely in high-risk patients"
+                    ],
+                    [
+                        "Postoperative Opioid Use",
+                        "1 point in Apfel score",
+                        "Synergistic emetogenic interaction in medulla",
+                        "Multimodal non-opioid regional analgesia"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}
