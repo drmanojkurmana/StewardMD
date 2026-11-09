@@ -1,0 +1,281 @@
+{
+ "v": 1,
+ "module": "sur-breast-cancer",
+ "subject": "surgery",
+ "title": "Invasive Lobular Carcinoma, E-Cadherin Loss, and Bilateral Disease",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Representing ten to fifteen percent of all invasive breast malignancies, **invasive lobular carcinoma** is the second most common histological subtype following invasive ductal carcinoma. It arises from the terminal duct lobular unit and exhibits a unique biology characterized by discohesive, single-cell infiltration. Because lobular carcinoma expands through subtle permeation without provoking an intense desmoplastic connective tissue reaction, it frequently presents as an indistinct thickening rather than a hard lump.",
+   "say": "Invasive lobular carcinoma is the second most common breast cancer, characterized by discohesive single cells infiltrating without forming a dense mass, often presenting as diffuse thickening.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/breast-cancer-staging-subtypes-and-surgical-management-fig1.webp",
+    "alt": "Histological and clinical diagram comparing invasive lobular carcinoma with invasive ductal carcinoma.",
+    "caption": "Invasive breast cancer subtypes: lobular carcinoma single-cell streaming versus ductal carcinoma cohesive tubules. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The genetic and molecular hallmark defining invasive lobular carcinoma is the complete **loss of E-cadherin expression**. Encoded by the CDH1 gene on chromosome 16q22, E-cadherin is a transmembrane calcium-dependent cell adhesion molecule that anchors adjacent epithelial cells together via cytoplasmic catenin complexes. Inactivating mutations, deletions, or promoter hypermethylation of CDH1 disrupt E-cadherin synthesis, stripping cells of intercellular adhesion and driving a dyscohesive, single-file migratory phenotype.",
+   "say": "Loss of E-cadherin due to CDH1 gene mutations is the hallmark of lobular cancer. Without this adhesion molecule, tumor cells lose contact inhibition and infiltrate in single file.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mutation",
+      "label": "Inactivating Mutation or Methylation of CDH1 Gene"
+     },
+     {
+      "id": "ecad",
+      "label": "Complete Loss of Transmembrane E-Cadherin Protein"
+     },
+     {
+      "id": "catenin",
+      "label": "Disruption of Intracellular Catenin Cytoskeleton Anchor"
+     },
+     {
+      "id": "discohesion",
+      "label": "Total Loss of Intercellular Epithelial Adhesion"
+     },
+     {
+      "id": "indian",
+      "label": "Single-File Infiltrative Indian Filing Through Stroma"
+     }
+    ],
+    "edges": [
+     [
+      "mutation",
+      "ecad"
+     ],
+     [
+      "ecad",
+      "catenin"
+     ],
+     [
+      "catenin",
+      "discohesion"
+     ],
+     [
+      "discohesion",
+      "indian"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On microscopic examination, this discohesive growth manifests as the classic histopathological pattern known as **Indian filing of tumor cells**. Small, uniform, rounded neoplastic cells march in long, slender, single-file cords through collagenous stroma without distorting underlying ductal architecture. Furthermore, lobular cells characteristically encircle normal, uninvolved mammary ducts in concentric laminated rings, an architectural hallmark termed targetoid infiltration.",
+   "say": "Microscopy reveals Indian filing, where small uniform tumor cells stream in single file through connective tissue, often encircling normal ducts in a targetoid pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Invasive Lobular Carcinoma (ILC)",
+     "points": [
+      "Complete loss of membranous E-cadherin expression",
+      "Single-file linear streaming of discohesive cells (Indian filing)",
+      "Concentric targetoid arrangement around normal ducts",
+      "Uniform, small round nuclei with intracytoplasmic mucin vacuoles"
+     ]
+    },
+    "right": {
+     "title": "Invasive Ductal Carcinoma (IDC)",
+     "points": [
+      "Retains strong membranous E-cadherin immunohistochemistry",
+      "Forms cohesive cohesive sheets, cords, and well-defined tubules",
+      "Provokes prominent desmoplastic fibrotic stromal reaction",
+      "Marked nuclear pleomorphism, frequent mitoses, and central necrosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "To definitively distinguish challenging poorly differentiated ductal carcinomas from pleomorphic lobular carcinomas, pathologists perform immunohistochemical staining for E-cadherin. Invasive ductal carcinoma displays intense, continuous membranous brown staining, whereas invasive lobular carcinoma demonstrates **negative E-cadherin immunostaining**. Occasionally, lobular carcinoma cells contain intracytoplasmic mucin droplets that compress the nucleus against the cell membrane, forming classic signet ring cells.",
+   "say": "Immunohistochemistry confirms lobular cancer by demonstrating complete absence of E-cadherin staining, distinguishing it from ductal carcinoma which stains strongly positive.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Immunohistochemical Marker",
+     "Invasive Lobular Carcinoma",
+     "Invasive Ductal Carcinoma"
+    ],
+    "rows": [
+     [
+      "E-Cadherin Staining",
+      "Completely negative membranous staining (loss of CDH1)",
+      "Strongly positive diffuse membranous staining"
+     ],
+     [
+      "p120-Catenin Staining",
+      "Diffuse cytoplasmic localization (uncoupled from membrane)",
+      "Strictly linear membranous localization"
+     ],
+     [
+      "Estrogen Receptor (ER)",
+      "Strongly positive in over ninety-five percent of tumors",
+      "Positive in seventy to eighty percent of cases"
+     ],
+     [
+      "HER2/neu Oncoprotein",
+      "Overexpression is exceptionally rare (<3%)",
+      "Overexpression or amplification in fifteen to twenty percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A defining clinical feature of invasive lobular carcinoma is its propensity for **multifocality, multicentricity, and bilaterality**. Bilateral synchronous or metachronous breast cancer develops in ten to twenty percent of patients with lobular carcinoma, a rate nearly double that observed in ductal carcinoma. Furthermore, because cells permeate without inciting desmoplasia, conventional mammography frequently fails to delineate the true tumor extent, underestimating lesion volume in up to forty percent.",
+   "say": "Lobular carcinoma is bilateral in up to twenty percent of patients and frequently multifocal. Because it elicits little desmoplasia, mammography often severely underestimates tumor volume.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bilateral Involvement Risk",
+     "points": [
+      "Bilateral cancer occurs in ten to twenty percent of ILC patients",
+      "Mandates rigorous surveillance of contralateral breast",
+      "Higher rate of synchronous and metachronous contralateral disease",
+      "Indication for preoperative bilateral contrast breast MRI"
+     ]
+    },
+    "right": {
+     "title": "Unilateral Ductal Pattern",
+     "points": [
+      "Bilateral cancer occurs in only five to ten percent of IDC",
+      "Tumors are predominantly unifocal and discrete",
+      "Well visualized on standard two-view mammography",
+      "Contralateral breast disease develops far less frequently"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "To overcome the limitations of mammography in staging lobular carcinoma, high-field **preoperative dynamic contrast MRI** of both breasts is strongly recommended. Dynamic breast MRI boasts a sensitivity exceeding ninety-five percent for invasive lobular carcinoma, accurately mapping the full three-dimensional extent of disease, detecting occult multicentric ipsilateral satellite foci, and uncovering unsuspected synchronous contralateral breast malignancies prior to definitive surgical resection.",
+   "say": "Preoperative dynamic contrast breast MRI is recommended for lobular carcinoma. It accurately measures tumor extent and identifies hidden multicentric or contralateral tumors.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diagnose",
+      "label": "Core Biopsy Confirms Invasive Lobular Carcinoma"
+     },
+     {
+      "id": "under",
+      "label": "Mammography & Ultrasound Underestimate True Tumor Volume"
+     },
+     {
+      "id": "mri",
+      "label": "Perform Bilateral Dynamic Contrast-Enhanced Breast MRI"
+     },
+     {
+      "id": "extent",
+      "label": "Detects True 3D Extent & Contralateral Occult Cancer"
+     },
+     {
+      "id": "plan",
+      "label": "Formulate Definitive Clear-Margin Surgical Strategy"
+     }
+    ],
+    "edges": [
+     [
+      "diagnose",
+      "under"
+     ],
+     [
+      "under",
+      "mri"
+     ],
+     [
+      "mri",
+      "extent"
+     ],
+     [
+      "extent",
+      "plan"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Invasive lobular carcinoma exhibits an atypical, distinct pattern of distant metastatic dissemination compared to ductal cancer. While ductal cancer metastasizes predominantly to the lungs, liver, brain, and skeleton, lobular carcinoma displays an affinity for **peritoneal and gastrointestinal metastasis**. It infiltrates the peritoneum, retroperitoneum, omentum, stomach, colon, and ovaries, producing a clinical picture mimicking linitis plastica, bilateral Krukenberg tumors, or malignant bowel obstruction.",
+   "say": "Lobular carcinoma spreads to unique metastatic sites, infiltrating the peritoneum, retroperitoneum, stomach, and ovaries, mimicking linitis plastica and gastrointestinal obstruction.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Metastatic Site",
+     "Clinical Presentation",
+     "Diagnostic Challenge and Pathology"
+    ],
+    "rows": [
+     [
+      "Peritoneum & Omentum",
+      "Malignant ascites, diffuse omental caking, bowel obstruction",
+      "Mimics primary ovarian serous carcinoma; requires GATA3 and ER staining"
+     ],
+     [
+      "Gastric Wall",
+      "Severe early satiety, weight loss, linitis plastica appearance",
+      "Single-cell infiltration mimics primary signet ring gastric adenocarcinoma"
+     ],
+     [
+      "Ovaries & Uterus",
+      "Bilateral solid ovarian enlargement (Krukenberg tumors), bleeding",
+      "Differentiated from primary gynecologic neoplasms by E-cadherin loss"
+     ],
+     [
+      "Meninges",
+      "Leptomeningeal carcinomatosis, cranial nerve palsies, headache",
+      "Dispersed single cells in CSF with negative routine head CT scans"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical management of invasive lobular carcinoma is complicated by significantly higher rates of positive surgical margins during breast-conserving surgery, requiring re-excision or conversion to mastectomy in up to twenty-five percent of cases. Because virtually all lobular carcinomas are strongly estrogen-receptor positive and HER2-negative, **adjuvant endocrine therapy with aromatase inhibitors** (such as letrozole or anastrozole) is exceptionally effective, serving as the therapeutic backbone of systemic adjuvant management.",
+   "say": "Lobular cancer has a higher rate of positive margins during breast-conserving surgery. Because over ninety-five percent are hormone-positive, aromatase inhibitors are highly effective.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "resect",
+      "label": "Wide Local Excision or Total Mastectomy + SLNB"
+     },
+     {
+      "id": "margin",
+      "label": "Pathology Evaluates 3D Surgical Margins"
+     },
+     {
+      "id": "re-excise",
+      "label": "Positive Margins Require Re-Excision or Mastectomy"
+     },
+     {
+      "id": "radiate",
+      "label": "Adjuvant Whole-Breast Radiotherapy"
+     },
+     {
+      "id": "aromatase",
+      "label": "5-10 Years of Adjuvant Aromatase Inhibitor Therapy"
+     }
+    ],
+    "edges": [
+     [
+      "resect",
+      "margin"
+     ],
+     [
+      "margin",
+      "re-excise"
+     ],
+     [
+      "margin",
+      "radiate"
+     ],
+     [
+      "radiate",
+      "aromatase"
+     ]
+    ]
+   }
+  }
+ ]
+}

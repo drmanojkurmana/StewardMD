@@ -1,0 +1,271 @@
+{
+ "v": 1,
+ "module": "sur-parathyroid-adrenal",
+ "subject": "surgery",
+ "title": "Phaeochromocytoma Resection: Alpha-Blockade, Roizen Criteria, and Adrenalectomy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Arising from chromaffin cells of the adrenal medulla, **phaeochromocytoma** is a catecholamine-secreting neuroendocrine neoplasm. It classically produces paroxysmal or sustained hypertension accompanied by the clinical triad of episodic pounding headaches, profuse diaphoresis, and tachycardia. Phaeochromocytomas historically obey the rule of tens: ten percent are bilateral, ten percent are extra-adrenal (paragangliomas), ten percent are malignant, and ten percent are familial, although modern genetics demonstrates germline mutations in over thirty percent.",
+   "say": "Phaeochromocytoma is a catecholamine-secreting tumor of the adrenal medulla causing hypertension, headache, sweating, and tachycardia. Traditionally obeying the rule of tens, genetics now explains a third.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pheochromocytoma-fig1.webp",
+    "alt": "Medical diagram illustrating phaeochromocytoma pathology, catecholamine secretion, and clinical manifestations.",
+    "caption": "Phaeochromocytoma: adrenal medullary chromaffin tumor, catecholamine excess, and multi-organ adrenergic overstimulation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Biochemical diagnosis is established by demonstrating elevated levels of catecholamine metabolites. Free fractionated plasma metanephrines or **twenty-four-hour urinary metanephrines** represent the diagnostic gold standard, offering sensitivity exceeding ninety-seven percent. Because metanephrines are produced continuously within chromaffin tumor cells independently of episodic catecholamine release, they remain elevated even between paroxysmal hypertensive surges. Once confirmed biochemically, contrast CT or MRI localizes the adrenal mass.",
+   "say": "Fractionated plasma or twenty-four-hour urinary metanephrines represent the gold standard biochemical test, remaining elevated continuously even between hypertensive paroxysms.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "triad",
+      "label": "Headaches, Sweating, Tachycardia & Hypertension"
+     },
+     {
+      "id": "biochem",
+      "label": "Fractionated Plasma or 24-Hour Urinary Metanephrines"
+     },
+     {
+      "id": "confirm",
+      "label": "Three-Fold Elevation in Metanephrines / Normetanephrines"
+     },
+     {
+      "id": "ct",
+      "label": "Abdominal Contrast-Enhanced CT or MRI Imaging"
+     },
+     {
+      "id": "local",
+      "label": "123-I MIBG or 68-Ga DOTATATE PET for Staging"
+     }
+    ],
+    "edges": [
+     [
+      "triad",
+      "biochem"
+     ],
+     [
+      "biochem",
+      "confirm"
+     ],
+     [
+      "confirm",
+      "ct"
+     ],
+     [
+      "ct",
+      "local"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An absolute, inviolable medical rule governs the preoperative preparation of phaeochromocytoma: **alpha-blockade before beta-blockade**. Non-competitive, irreversible alpha-adrenergic blockade, classically utilizing phenoxybenzamine or selective alpha-one antagonists like doxazosin, must be initiated at least ten to fourteen days prior to surgery. Administering a beta-blocker prior to establishing adequate alpha-blockade leaves alpha-mediated peripheral arteriolar vasoconstriction completely unopposed, precipitating catastrophic hypertensive crisis, cerebral hemorrhage, and acute myocardial infarction.",
+   "say": "Alpha-blockers must always precede beta-blockers by at least ten days. Administering a beta-blocker first provokes unopposed alpha-vasoconstriction, triggering lethal hypertensive crisis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alpha-Blockade First (Correct)",
+     "points": [
+      "Initiates phenoxybenzamine or doxazosin 10-14 days preoperatively",
+      "Blocks vascular alpha-1 receptors, causing peripheral vasodilation",
+      "Re-expands chronically contracted intravascular blood volume",
+      "Permits safe subsequent addition of beta-blockers for reflex tachycardia"
+     ]
+    },
+    "right": {
+     "title": "Beta-Blockade First (Catastrophic Error)",
+     "points": [
+      "Blocks peripheral beta-2 vasodilatory receptors in skeletal muscle",
+      "Circulating adrenaline acts unopposed on alpha-1 vascular receptors",
+      "Triggers acute, massive systemic arteriolar vasoconstriction",
+      "Produces lethal hypertensive crisis, acute heart failure, and death"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Adequate preoperative alpha-blockade and cardiovascular optimization are confirmed using the standardized **Roizen criteria for preoperative preparation**. Developed by Michael Roizen, these clinical criteria ensure that the patient's intravascular blood volume has re-expanded and peripheral vasoconstriction is controlled. The patient must maintain consistent blood pressure control below 160/90 mmHg, demonstrate orthostatic hypotension without supine hypotension, show absence of ST-segment changes, and exhibit fewer than one premature ventricular contraction every five minutes.",
+   "say": "The Roizen criteria verify adequate preoperative preparation. Patients must achieve blood pressures below 160/90, exhibit orthostatic hypotension from volume re-expansion, and show stable cardiac rhythms.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Roizen Criterion Parameter",
+     "Clinical Target Threshold",
+     "Physiological Significance"
+    ],
+    "rows": [
+     [
+      "Blood Pressure Control",
+      "Consistent BP < 160/90 mmHg for 48 hours prior to surgery",
+      "Confirms pharmacological blockade of vascular alpha-adrenergic tone"
+     ],
+     [
+      "Orthostatic Hypotension",
+      "Orthostatic BP drop (>80/45 mmHg) present on standing",
+      "Confirms adequate alpha-adrenergic receptor blockade"
+     ],
+     [
+      "Electrocardiographic Stability",
+      "Absence of ST-segment depression or T-wave inversion for 2 weeks",
+      "Ensures resolution of catecholamine-induced toxic cardiomyopathy"
+     ],
+     [
+      "Ventricular Ectopy",
+      "Fewer than 1 premature ventricular contraction every 5 minutes",
+      "Minimizes risk of fatal intraoperative ventricular fibrillation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Intravascular volume expansion is an essential companion to pharmacological alpha-blockade. Chronic high-titer catecholamines induce relentless arteriolar vasoconstriction, severely contracting the patient's effective circulating plasma volume. Starting on the second day of alpha-blockade, patients are instructed to consume a **high-sodium diet** accompanied by aggressive oral hydration and intravenous crystalloid infusions, restoring intravascular volume and preventing profound, refractory hypotension upon tumor resection.",
+   "say": "High circulating catecholamines contract plasma volume. Once alpha-blockade begins, patients consume a high-salt diet and intravenous fluids to re-expand circulating volume.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "catechol",
+      "label": "Chronic Catecholamine Vasoconstriction Contracts Plasma Volume"
+     },
+     {
+      "id": "alpha",
+      "label": "Phenoxybenzamine Blocks Alpha-1 Vascular Receptors"
+     },
+     {
+      "id": "vasodilate",
+      "label": "Peripheral Arteriolar Dilation & Vascular Bed Expansion"
+     },
+     {
+      "id": "salt",
+      "label": "High-Sodium Diet & Generous Intravenous Saline Infusion"
+     },
+     {
+      "id": "euvolemia",
+      "label": "Restores Normal Circulating Intravascular Blood Volume"
+     }
+    ],
+    "edges": [
+     [
+      "catechol",
+      "alpha"
+     ],
+     [
+      "alpha",
+      "vasodilate"
+     ],
+     [
+      "vasodilate",
+      "salt"
+     ],
+     [
+      "salt",
+      "euvolemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The surgical procedure of choice for benign phaeochromocytomas measuring less than six to eight centimetres is **laparoscopic adrenalectomy**. Surgeons utilize either the transperitoneal laparoscopic approach or the posterior retroperitoneoscopic approach. The posterior retroperitoneoscopic approach accesses the adrenal space directly through the retroperitoneum without entering the peritoneal cavity or mobilizing the bowel, liver, or spleen, dramatically reducing postoperative ileus and recovery times.",
+   "say": "Laparoscopic adrenalectomy is the gold standard for resecting phaeochromocytomas under eight centimeters. The posterior retroperitoneoscopic approach provides direct access without mobilizing abdominal organs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Transperitoneal Laparoscopy",
+     "points": [
+      "Patient placed in lateral decubitus position",
+      "Wide operative field familiar to general surgeons",
+      "Requires mobilization of liver (right) or spleen and pancreas (left)",
+      "Ideal for large tumors (>6 cm) or bilateral adrenalectomies"
+     ]
+    },
+    "right": {
+     "title": "Posterior Retroperitoneoscopy",
+     "points": [
+      "Patient placed in prone jack-knife position",
+      "Direct retroperitoneal access below twelfth rib",
+      "Completely avoids intra-abdominal bowel and previous adhesions",
+      "Significantly less postoperative pain and faster ambulation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "During surgical adrenalectomy, the paramount hemodynamic objective is **early adrenal vein ligation**. As the adrenal gland is manipulated, tumor squeezing releases massive surges of stored catecholamines into the circulation, precipitating dangerous hypertensive spikes and cardiac tachyarrhythmias. To prevent these catecholamine storm surges, the surgeon meticulously dissects the primary drainage vessel, specifically the short right adrenal vein entering the inferior vena cava or the left adrenal vein joining the left renal vein, and ligates it early.",
+   "say": "Early ligation of the main adrenal vein is critical during surgery. It prevents surges of catecholamines from flooding into the circulation as the surgeon manipulates the tumor.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Adrenal Vein Anatomy",
+     "Vascular Drainage Pathway",
+     "Surgical Dissection Nuances"
+    ],
+    "rows": [
+     [
+      "Right Adrenal Vein",
+      "Extremely short (3-5 mm) draining directly into posterior IVC",
+      "High avulsion risk; requires meticulous vascular stapling or clips"
+     ],
+     [
+      "Left Adrenal Vein",
+      "Longer (2-3 cm) draining inferiorly into left renal vein",
+      "Joined by inferior phrenic vein before entering left renal vein"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immediately upon ligation of the main adrenal vein and extirpation of the phaeochromocytoma, the surgeon and anesthesiologist anticipate sudden, catastrophic **post-excision profound hypotension**. The abrupt withdrawal of high circulating catecholamines combined with residual alpha-adrenergic receptor blockade causes widespread vascular collapse. Management requires rapid intravenous crystalloid and colloid fluid boluses to fill the dilated vascular tree, supplemented with continuous vasopressor infusions of noradrenaline or phenylephrine.",
+   "say": "Dividing the adrenal vein triggers sudden profound hypotension as circulating catecholamines vanish. Rapid fluid boluses and continuous noradrenaline infusions restore blood pressure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ligate",
+      "label": "Ligation of Primary Adrenal Drainage Vein"
+     },
+     {
+      "id": "drop",
+      "label": "Circulating Catecholamines Fall Precipitously"
+     },
+     {
+      "id": "collapse",
+      "label": "Sudden Systemic Vascular Resistance Collapse"
+     },
+     {
+      "id": "fluids",
+      "label": "Rapid Volume Resuscitation with Crystalloid Boluses"
+     },
+     {
+      "id": "pressors",
+      "label": "Titrated Intravenous Noradrenaline / Vasopressin Infusion"
+     }
+    ],
+    "edges": [
+     [
+      "ligate",
+      "drop"
+     ],
+     [
+      "drop",
+      "collapse"
+     ],
+     [
+      "collapse",
+      "fluids"
+     ],
+     [
+      "collapse",
+      "pressors"
+     ]
+    ]
+   }
+  }
+ ]
+}
