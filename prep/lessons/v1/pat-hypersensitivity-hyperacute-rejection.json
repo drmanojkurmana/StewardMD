@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-hypersensitivity",
+  "subject": "pathology",
+  "title": "Hyperacute and Acute Cellular Transplant Rejection",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Within minutes to hours of restoring blood flow, a graft in a sensitised recipient turns mottled, flabby, and stops working because preformed recipient antibodies bind donor endothelium and trigger thrombosis. This catastrophic and now rare event is **hyperacute rejection**, most often caused by ABO incompatibility or preformed anti-HLA antibodies from pregnancy, transfusion, or a previous transplant.",
+      "say": "Hyperacute rejection strikes within minutes because preformed antibodies attack the graft vessels the moment blood flow returns.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Preformed anti-donor antibody circulates in recipient"
+          },
+          {
+            "id": "b",
+            "label": "Antibody binds graft endothelium at reperfusion"
+          },
+          {
+            "id": "c",
+            "label": "Complement activation and widespread thrombosis"
+          },
+          {
+            "id": "d",
+            "label": "Graft infarction within minutes to hours"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Prevention is the whole story in hyperacute rejection: ABO matching, a negative lymphocytotoxic crossmatch, and panel reactive antibody screening before listing keep sensitised recipients away from incompatible organs. Once thrombosis begins there is no effective rescue treatment and the organ must be removed, so the pre-transplant **crossmatch** is one of the highest yield preventive tests in transplant medicine.",
+      "say": "A negative crossmatch and ABO matching prevent hyperacute rejection; once it starts, the graft cannot be saved.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Screen",
+          "What it detects",
+          "Action if positive"
+        ],
+        "rows": [
+          [
+            "ABO grouping",
+            "Blood group incompatibility",
+            "Do not proceed with that donor"
+          ],
+          [
+            "Panel reactive antibody",
+            "Breadth of HLA sensitisation",
+            "Wait for a compatible donor"
+          ],
+          [
+            "Lymphocytotoxic crossmatch",
+            "Preformed donor-specific antibody",
+            "Decline the organ offer"
+          ],
+          [
+            "Virtual crossmatch",
+            "Antibody specificity from single antigen beads",
+            "Avoid listed unacceptable antigens"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Histology of a hyperacutely rejected kidney shows fibrin thrombi in glomeruli and small arteries, neutrophils packed in peritubular capillaries, and cortical necrosis, reflecting complement driven endothelial injury rather than cellular immunity. Immunostaining may show C4d in peritubular capillaries, a footprint of complement activation that pathologists also use to diagnose later **antibody-mediated rejection** episodes.",
+      "say": "Biopsy shows thrombi, capillary neutrophils, and necrosis, with C4d marking complement activation in the capillaries.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-transplant-rejection-fig1.webp",
+        "alt": "Transplant kidney rejection histology",
+        "caption": "Allograft rejection histology with vascular and interstitial inflammation in a transplant kidney biopsy."
+      }
+    },
+    {
+      "tx": "Days to weeks after transplantation, recipient T cells that recognise donor HLA on antigen presenting cells expand and invade the graft interstitium, producing fever, graft tenderness, and rising creatinine in kidney recipients. This commonest early rejection pattern is **acute cellular rejection**, and unlike the hyperacute form it usually responds well to intensified immunosuppression when caught early.",
+      "say": "Acute cellular rejection appears days to weeks later, when recipient T cells invade the graft and impair its function.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/organ-transplantation-immunobiology-rejection-and-renal-allograft-fig1.webp",
+        "alt": "Renal allograft rejection mechanisms",
+        "caption": "Cellular and antibody mediated rejection mechanisms in a renal allograft, from T cell infiltration to vascular injury."
+      }
+    },
+    {
+      "tx": "On renal biopsy, lymphocytes invade tubules and interstitium, a pattern called tubulitis, and more severe episodes add arteritis with lymphocytes under the arterial endothelium. Banff grading organises these findings so clinicians can match treatment intensity to severity, and the defining biopsy lesion of cellular rejection remains **tubulitis** with interstitial lymphocytic infiltrate and oedema.",
+      "say": "Tubulitis, lymphocytes inside tubules with interstitial infiltrate, is the biopsy signature of acute cellular rejection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hyperacute rejection",
+          "points": [
+            "Minutes to hours after reperfusion",
+            "Preformed antibody and complement",
+            "Thrombosis and graft infarction, irreversible"
+          ]
+        },
+        "right": {
+          "title": "Acute cellular rejection",
+          "points": [
+            "Days to weeks after transplant",
+            "Recipient T cells invade the graft",
+            "Tubulitis on biopsy, usually steroid responsive"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Treatment of an acute cellular episode begins with high dose intravenous methylprednisolone pulses, followed by optimisation of maintenance tacrolimus or ciclosporin and mycophenolate levels and a check for nonadherence. Steroid resistant episodes need lymphocyte depleting therapy such as antithymocyte globulin, so the standard first line drug class remains **glucocorticoids** given promptly after biopsy confirmation.",
+      "say": "Pulse methylprednisolone is first line; check drug levels and adherence before blaming the maintenance regimen.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Rising creatinine prompts urgent graft biopsy"
+          },
+          {
+            "id": "b",
+            "label": "Banff grade guides treatment intensity"
+          },
+          {
+            "id": "c",
+            "label": "Pulse methylprednisolone for three days"
+          },
+          {
+            "id": "d",
+            "label": "Antithymocyte globulin if steroid resistant"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Antibody mediated acute rejection looks different: donor specific antibodies injure peritubular capillaries and glomeruli, C4d stains positive, and patients may deteriorate faster with heavier proteinuria. Plasma exchange, intravenous immunoglobulin, and rituximab target this humoral process, distinguishing it from purely cellular episodes; examiners summarise the triad as circulating antibody, C4d deposition, and **microvascular inflammation**.",
+      "say": "Donor specific antibody with C4d and microvascular inflammation defines antibody mediated rejection and needs plasma exchange based therapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Cellular rejection",
+          "Antibody mediated rejection"
+        ],
+        "rows": [
+          [
+            "Effector",
+            "Recipient T lymphocytes",
+            "Donor specific antibody"
+          ],
+          [
+            "Biopsy clue",
+            "Tubulitis and interstitial infiltrate",
+            "Capillaritis, glomerulitis, C4d positive"
+          ],
+          [
+            "Blood clue",
+            "No specific antibody",
+            "Donor specific antibody present"
+          ],
+          [
+            "Key treatment",
+            "Steroid pulse, optimise tacrolimus",
+            "Plasma exchange, IVIg, rituximab"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Every rejection episode matters beyond the immediate creatinine rise, because repeated injury scars the graft and shortens its survival even when function appears to recover. Meticulous drug level monitoring, infection prophylaxis, and adherence counselling therefore protect the organ as surely as any rescue drug, a principle transplant teams call **rejection prophylaxis** through therapeutic drug monitoring.",
+      "say": "Each treated episode still scars the graft, so steady drug levels and adherence protect long term survival.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Before transplant",
+          "points": [
+            "ABO match and negative crossmatch",
+            "Panel reactive antibody screening",
+            "Counsel on lifelong immunosuppression"
+          ]
+        },
+        "right": {
+          "title": "After transplant",
+          "points": [
+            "Monitor tacrolimus trough levels",
+            "Biopsy any unexplained dysfunction",
+            "Treat infection and rejection in balance"
+          ]
+        }
+      }
+    }
+  ]
+}
