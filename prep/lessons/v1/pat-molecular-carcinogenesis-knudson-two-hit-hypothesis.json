@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-molecular-carcinogenesis",
+  "subject": "pathology",
+  "title": "Knudson Two-Hit Hypothesis, APC, BRCA, and Li-Fraumeni Syndrome",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Comparing ages at diagnosis, Knudson deduced that hereditary retinoblastoma children inherit one RB hit and need one more, while sporadic cases must acquire both hits in the same retinal cell. This explained bilateral early hereditary disease versus unilateral later sporadic disease: the **Knudson two-hit hypothesis**.",
+      "say": "Knudson's two hits explain why inherited retinoblastoma is bilateral and early while sporadic disease is unilateral and later.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Hereditary: first hit inherited in every cell"
+          },
+          {
+            "id": "b",
+            "label": "One somatic second hit starts a tumour"
+          },
+          {
+            "id": "c",
+            "label": "Many cells at risk: bilateral, early, multiple"
+          },
+          {
+            "id": "d",
+            "label": "Sporadic: two somatic hits in one cell, unilateral, later"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Retinoblastoma presents with leukocoria, a white pupillary reflex replacing the red reflex in photographs, and strabismus in toddlers, and examination under anaesthesia with imaging maps both eyes. Calcified intraocular masses on imaging support the diagnosis of **retinoblastoma**, where biopsy is avoided to prevent seeding.",
+      "say": "A white pupil reflex in a toddler is retinoblastoma until proven otherwise; never biopsy it, image and refer urgently.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/retinoblastoma-fig1.webp",
+        "alt": "Retinoblastoma manifestations and pathology",
+        "caption": "Retinoblastoma manifestations including leukocoria and tumour pathology."
+      }
+    },
+    {
+      "tx": "The APC protein destroys beta-catenin, keeping Wnt signalling off in resting colonic crypts; losing APC leaves beta-catenin driving proliferation and starts adenoma formation. Germline APC mutation carpets the colon with hundreds of polyps by adolescence in **familial adenomatous polyposis**, mandating prophylactic colectomy.",
+      "say": "APC loss switches Wnt signalling permanently on; hundreds of colonic polyps by adolescence define familial adenomatous polyposis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/familial-adenomatous-polyposis-fig1.webp",
+        "alt": "Familial adenomatous polyposis features",
+        "caption": "Familial adenomatous polyposis with innumerable colonic adenomas from germline APC mutation."
+      }
+    },
+    {
+      "tx": "Sporadic colorectal cancers follow the same script somatically: APC loss initiates most adenomas, KRAS grows them, and TP53 loss completes carcinoma, the Vogelstein sequence. Screening colonoscopy interrupts the script by removing adenomas; the initiating gatekeeper remains **APC**. The same sequence also explains why cancer incidence rises so steeply with advancing age.",
+      "say": "Most sporadic colon cancers also begin with APC loss; removing adenomas at colonoscopy breaks the sequence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hereditary FAP route",
+          "points": [
+            "Germline APC hit inherited",
+            "Hundreds of adenomas in teens",
+            "Colectomy prevents near certain cancer"
+          ]
+        },
+        "right": {
+          "title": "Sporadic route",
+          "points": [
+            "Both APC hits acquired somatically",
+            "Single adenomas in older adults",
+            "Polypectomy prevents progression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "BRCA1 and BRCA2 are caretaker proteins repairing DNA double strand breaks by homologous recombination, and inherited loss produces breast, ovarian, prostate, and pancreatic cancers with defective repair. Their tumours' repair defect creates vulnerability to platinum and PARP inhibitors; the genes are **BRCA1 and BRCA2**.",
+      "say": "BRCA genes repair broken DNA; inheriting a defect raises breast and ovarian cancer risk but creates PARP inhibitor sensitivity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Gene",
+          "Repair role",
+          "Main inherited cancers"
+        ],
+        "rows": [
+          [
+            "BRCA1",
+            "Homologous recombination repair",
+            "Breast, ovarian, fallopian tube"
+          ],
+          [
+            "BRCA2",
+            "Homologous recombination repair",
+            "Breast, ovarian, prostate, pancreas"
+          ],
+          [
+            "MLH1, MSH2",
+            "Mismatch repair",
+            "Colorectal, endometrial (Lynch)"
+          ],
+          [
+            "TP53",
+            "Damage checkpoint and apoptosis",
+            "Li-Fraumeni spectrum"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Li-Fraumeni syndrome, germline TP53 mutation, delivers soft tissue and bone sarcomas, premenopausal breast cancer, brain tumours, leukaemia, and adrenocortical carcinoma across one family, often in childhood and young adults. Surveillance uses whole body MRI while radiation is minimised; the syndrome is **Li-Fraumeni syndrome**.",
+      "say": "Sarcomas, early breast cancer, brain tumours, and adrenal cancers in one family mean Li-Fraumeni syndrome; avoid radiation where possible.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Li-Fraumeni clues",
+          "points": [
+            "Childhood sarcoma or adrenal tumour",
+            "Premenopausal breast cancer",
+            "Several primaries in one person"
+          ]
+        },
+        "right": {
+          "title": "Response",
+          "points": [
+            "Germline TP53 testing and cascade screening",
+            "Whole body MRI surveillance",
+            "Minimise diagnostic radiation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Two hit logic scales beyond single genes: epigenetic silencing by promoter methylation can deliver a hit without mutation, and haploinsufficient suppressors misbehave after one. Modern teaching therefore treats methylation as a full hit equivalent; the mechanism is **epigenetic gene silencing**.",
+      "say": "Promoter methylation can silence a suppressor as completely as mutation; count it as a hit when you tally the two.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "One allele mutated or inherited defective"
+          },
+          {
+            "id": "b",
+            "label": "Second allele lost, deleted, or methylated silent"
+          },
+          {
+            "id": "c",
+            "label": "Suppressor function reaches zero"
+          },
+          {
+            "id": "d",
+            "label": "Clonal expansion with growth advantage"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For families, the hypothesis becomes a service: identify the germline hit, cascade test relatives, and start organ surveillance or risk reducing surgery before the second hit declares itself. Retinoblastoma eye screening, FAP colectomy timing, and BRCA risk reducing operations all monetise **predictive genetic testing**.",
+      "say": "Finding the inherited first hit lets you screen relatives and intervene before their second hit ever lands.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Syndrome",
+          "Gene",
+          "Preventive intervention"
+        ],
+        "rows": [
+          [
+            "Hereditary retinoblastoma",
+            "RB",
+            "Infant eye examinations under anaesthesia"
+          ],
+          [
+            "FAP",
+            "APC",
+            "Timed prophylactic colectomy"
+          ],
+          [
+            "HBOC",
+            "BRCA1, BRCA2",
+            "Risk reducing mastectomy, salpingo-oophorectomy"
+          ],
+          [
+            "Li-Fraumeni",
+            "TP53",
+            "Whole body MRI surveillance"
+          ]
+        ]
+      }
+    }
+  ]
+}
