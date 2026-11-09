@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "id": "oph-anatomy-extraocular-muscle-insertions",
+ "subject": "ophthalmology",
+ "module": "oph-anatomy",
+ "title": "Extraocular Muscle Insertions and Spiral of Tillaux",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Extraocular muscle insertions** place the four rectus tendons on the anterior sclera at increasing distances from the limbus, medial rectus nearest and superior rectus farthest. These distances decide surgical recession and resection measurements in strabismus operations. The obliques insert posteriorly, superior oblique through its trochlear pulley and inferior oblique from orbital floor, giving them torsional actions the recti cannot produce.",
+   "say": "Rectus tendons insert at increasing limbal distances with medial nearest. Surgical measurements follow insertion anatomy in squint operations. Obliques insert posteriorly and produce torsional actions.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/strabismus-fig1.webp",
+    "alt": "Schematic superior and frontal views of extraocular muscles with insertions on the eyeball.",
+    "caption": "Extraocular muscles and insertions. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **spiral of Tillaux** is the imaginary spiral line joining the rectus insertions as distances increase from medial to lateral around the limbus. Medial rectus inserts about five and a half millimetres behind limbus, inferior about six and a half, lateral about seven and superior about seven and a half in classic teaching values. Anterior ciliary arteries travel with rectus muscles, so operating multiple recti risks anterior segment ischaemia in vulnerable adults.",
+   "say": "Increasing insertion distances together form a spiral running from medial to superior rectus. These classic values increase by roughly one millimetre per muscle around the limbus. Multiple rectus surgery therefore has a risk of anterior segment ischaemia in older adults.",
+   "vis": {
+    "kind": "table",
+    "title": "Rectus insertions behind limbus",
+    "cols": [
+     "Muscle",
+     "Classic distance"
+    ],
+    "rows": [
+     [
+      "Medial rectus",
+      "About five and a half millimetres"
+     ],
+     [
+      "Inferior rectus",
+      "About six and a half millimetres"
+     ],
+     [
+      "Lateral rectus",
+      "About seven millimetres"
+     ],
+     [
+      "Superior rectus",
+      "About seven and a half millimetres"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Primary actions simplify to rectus vertical and horizontal movement with oblique torsion: superior oblique intorts and depresses, inferior oblique extorts and elevates, each maximal in specific gaze positions used during motility testing. **Clinical fields of action** place each muscle where its pull is purest, superior oblique tested down and in, inferior oblique up and in. Nerve palsies are isolated by these fields at the bedside.",
+   "say": "Obliques produce torsion with vertical actions maximal in specific gaze fields. Down and in testing isolates superior oblique clinically. Field testing separates individual nerve palsies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Superior oblique",
+     "points": [
+      "Intorts and depresses globe",
+      "Best tested down and in",
+      "Trochlear nerve supply"
+     ]
+    },
+    "right": {
+     "title": "Inferior oblique",
+     "points": [
+      "Extorts and elevates globe",
+      "Best tested up and in",
+      "Third nerve inferior division"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Nerve supply follows a simple rule: lateral rectus by the sixth nerve, superior oblique by the fourth nerve, and all remaining muscles by the third nerve including levator palpebrae. Pupil involvement in third palsy signals compression until disproved, because parasympathetic fibres run superficially on the nerve. **Ptosis with down and out eye** plus dilated pupil is therefore an aneurysm pathway, not a routine clinic referral.",
+   "say": "The lateral rectus is supplied by the sixth nerve while the superior oblique is supplied by the fourth nerve. Pupil involvement in third nerve palsy therefore indicates compression until proven otherwise. A down and out eye with ptosis needs aneurysm exclusion urgently.",
+   "vis": {
+    "kind": "table",
+    "title": "Third palsy danger split",
+    "cols": [
+     "Pupil",
+     "Interpretation"
+    ],
+    "rows": [
+     [
+      "Involved and dilated",
+      "Compression until disproved"
+     ],
+     [
+      "Spared",
+      "Microvascular pattern likely"
+     ],
+     [
+      "Action",
+      "Image urgently if pupil involved"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Strabismus surgery weakens by **recession**, moving insertion backward, and strengthens by resection, shortening muscle before reattachment at the original insertion. Amounts are dosed in millimetres against deviation in prism dioptres measured preoperatively. The spiral anatomy matters because recession beyond insertion anatomy risks lost muscles, while anterior artery preservation modifies how many recti are detached in one sitting.",
+   "say": "Moving an insertion backward weakens a rectus muscle while shortening the muscle strengthens it. Millimetre dosing follows the measured deviation recorded carefully before any operation. Artery preservation limits how many rectus muscles are detached together.",
+   "vis": {
+    "kind": "flow",
+    "title": "Squint surgery logic",
+    "nodes": [
+     {
+      "id": "meas",
+      "label": "Measure deviation in prism dioptres"
+     },
+     {
+      "id": "dose",
+      "label": "Dose millimetres of surgery"
+     },
+     {
+      "id": "oper",
+      "label": "Recess or resect muscles"
+     },
+     {
+      "id": "rev",
+      "label": "Review alignment and diplopia"
+     }
+    ],
+    "edges": [
+     [
+      "meas",
+      "dose"
+     ],
+     [
+      "dose",
+      "oper"
+     ],
+     [
+      "oper",
+      "rev"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The superior oblique tendon passes through the **trochlea**, a cartilaginous pulley at the superomedial orbit, then turns posterolaterally to insert behind the equator. Brown syndrome restricts elevation in adduction when this tendon sheath complex is tight, mimicking inferior oblique palsy with opposite forced duction findings. Forced duction testing under anaesthesia separates restriction from palsy before any surgery is planned.",
+   "say": "A cartilaginous pulley in the superomedial orbit gives redirection of the superior oblique tendon toward its posterior insertion. Tight sheath tissue therefore gives restriction of elevation and imitates inferior oblique palsy clinically. Forced duction testing separates mechanical restriction from true palsy.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Cross section of ocular and orbital structures with extraocular muscle insertions and pathways.",
+    "caption": "Muscle insertions and orbital pathways. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Anterior ciliary arteries**, seven in total, accompany rectus muscles and supply conjunctiva, sclera, iris and ciliary body, anastomosing with long posterior ciliary arteries. Detaching three or four recti in older or vasculopathic patients risks anterior segment ischaemia with pain, corneal oedema and iris atrophy. Staging surgery or sparing vessels is the preventive response when multiple muscles need operation.",
+   "say": "Seven anterior ciliary arteries together give supply to anterior segment structures along the rectus muscles. Multiple muscle detachment therefore has a risk of ischaemia in older vasculopathic patients significantly. Staged surgery prevents anterior segment infarction in such vulnerable patients.",
+   "vis": {
+    "kind": "table",
+    "title": "Insertion surgical risks",
+    "cols": [
+     "Risk",
+     "Prevention"
+    ],
+    "rows": [
+     [
+      "Lost muscle",
+      "Respect spiral anatomy, secure tendons"
+     ],
+     [
+      "Anterior ischaemia",
+      "Stage rectus surgery, spare vessels"
+     ],
+     [
+      "Scleral perforation",
+      "Spatula needles, controlled depth"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Levator palpebrae superioris shares third nerve origin and inserts into tarsus and skin, so third palsy ptosis travels with eye movement failure while isolated ptosis points elsewhere. Mullers muscle adds sympathetic lift whose loss gives the small ptosis of Horner syndrome. **Ptosis grading** by levator function therefore begins every eyelid assessment in the lids module that follows later batches.",
+   "say": "Levator shares third nerve origin and links ptosis with movement failure. Sympathetic muscle loss gives small Horner ptosis comparatively. Levator function grading starts eyelid assessment.",
+   "vis": null
+  },
+  {
+   "tx": "Insertion memory compresses to spiral order and nerve rule. Medial nearest, superior farthest, obliques posterior, lateral rectus sixth, superior oblique fourth and the rest third. Recession weakens, resection strengthens and artery count limits staging. **Forced duction** remains the restriction test that prevents operating a palsy plan onto a mechanical problem.",
+   "say": "Spiral order together with the nerve rule organises insertion anatomy completely for examinations. Recession weakens a muscle while resection strengthens it during squint surgery. Forced duction testing prevents a palsy plan on restriction.",
+   "vis": {
+    "kind": "table",
+    "title": "Muscle anatomy anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Nearest insertion",
+      "Medial rectus"
+     ],
+     [
+      "Farthest insertion",
+      "Superior rectus"
+     ],
+     [
+      "Nerve rule",
+      "Lateral sixth, oblique fourth, rest third"
+     ],
+     [
+      "Restriction test",
+      "Forced duction under anaesthesia"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Spiral of Tillaux order",
+   "b": "Medial nearest, then inferior, lateral, superior farthest from limbus at about 5.5, 6.5, 7 and 7.5 millimetres."
+  },
+  {
+   "f": "Recession versus resection",
+   "b": "Recession moves insertion back and weakens; resection shortens muscle and strengthens."
+  },
+  {
+   "f": "Brown syndrome",
+   "b": "Tight superior oblique tendon sheath restricts elevation in adduction; forced duction positive."
+  }
+ ],
+ "keys": [
+  "LR6 SO4 nerve rule governs muscle supply",
+  "Multiple rectus surgery risks anterior ischaemia",
+  "Pupil in third palsy means compression until disproved"
+ ]
+}
