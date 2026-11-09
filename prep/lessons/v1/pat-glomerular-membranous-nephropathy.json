@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-glomerular",
+  "subject": "pathology",
+  "title": "Membranous Nephropathy, PLA2R Antibodies, and Spike-and-Dome Deposits",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Membranous nephropathy thickens glomerular basement membranes around subepithelial immune deposits in adults with nephrotic syndrome, primary autoimmune against podocyte antigens or secondary to lupus, hepatitis, drugs, and cancers. The thick walled nephrotic disease is **membranous nephropathy**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Adult nephrotic syndrome with thickened capillary walls means membranous nephropathy until biopsy stages it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/membranous-nephropathy-fig1.webp",
+        "alt": "Membranous nephropathy glomerulus",
+        "caption": "Membranous nephropathy glomerulus with thickened basement membrane and deposits."
+      }
+    },
+    {
+      "tx": "Antibodies against podocyte phospholipase A2 receptor drive most primary membranous disease, titres diagnosing, prognosticating, and monitoring immunological remission before proteinuria follows months behind. That biomarker is **anti-PLA2R antibody in membranous nephropathy**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Anti-PLA2R titres fall months before proteinuria; immunological remission leads, clinical remission follows.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/phospholipase-a2-receptor-nephropathy-fig1.webp",
+        "alt": "Membranous nephropathy PLA2R biopsy staining",
+        "caption": "PLA2R staining in membranous nephropathy biopsy confirming primary autoimmune disease."
+      }
+    },
+    {
+      "tx": "Silver staining outlines basement membrane spikes growing between subepithelial deposits, later domes overarch them, staging membranous evolution from deposit to incorporation to rarefaction. Those projections are the **spike-and-dome appearance of membranous nephropathy**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Spikes climb between deposits, domes roof them over; silver stain stages membranous time.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stage",
+          "Deposit position",
+          "Silver appearance"
+        ],
+        "rows": [
+          [
+            "Stage 1",
+            "Subepithelial, membrane normal",
+            "Deposits without spikes"
+          ],
+          [
+            "Stage 2",
+            "Spikes between deposits",
+            "Classic spike pattern"
+          ],
+          [
+            "Stage 3",
+            "Deposits incorporated in membrane",
+            "Dome and chain patterns"
+          ],
+          [
+            "Stage 4",
+            "Deposits rarefied, membrane thick",
+            "Irregular lucencies"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Secondary membranous hunt includes lupus class five, hepatitis B, malignancy screening age appropriately, NSAIDs and penicillamine histories, because removing causes changes therapy fundamentally. That hunt is **secondary membranous nephropathy cause exclusion**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "New membranous disease earns lupus, hepatitis, drug, and cancer screening before primary is signed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary membranous",
+          "points": [
+            "PLA2R or THSD7A associated",
+            "Kidney limited usually",
+            "Immunosuppression risk stratified"
+          ]
+        },
+        "right": {
+          "title": "Secondary membranous",
+          "points": [
+            "Lupus, hepatitis, cancer, drugs",
+            "Extrarenal clues present",
+            "Treat cause primarily"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Risk stratification by proteinuria persistence, kidney function slope, and antibody titre schedules observation with RAAS blockade versus rituximab or cyclophosphamide based immunosuppression. That scheduling is **membranous nephropathy risk based immunosuppression**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Low risk membranous disease is watched on RAAS blockade; high risk earns rituximab era immunosuppression.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Membranous confirmed, cause excluded"
+          },
+          {
+            "id": "b",
+            "label": "Proteinuria, function, PLA2R risk graded"
+          },
+          {
+            "id": "c",
+            "label": "Supportive RAAS and lipid therapy"
+          },
+          {
+            "id": "d",
+            "label": "Immunosuppression if high risk persists"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Membranous patients clot renal veins and pulmonary arteries at the highest nephrotic rates, flank pain with haematuria or sudden breathlessness demanding imaging and anticoagulation decisions by albumin depth. That vigilance is **thrombotic prophylaxis in membranous nephropathy**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Membranous nephrotic patients with albumin under twenty earn anticoagulation conversations early.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Complication",
+          "Signal",
+          "Response"
+        ],
+        "rows": [
+          [
+            "Renal vein thrombosis",
+            "Flank pain, haematuria, AKI",
+            "Imaging, anticoagulation"
+          ],
+          [
+            "Pulmonary embolism",
+            "Sudden dyspnoea, pleurisy",
+            "Emergency CT pathway"
+          ],
+          [
+            "Infection",
+            "Cellulitis, peritonitis, pneumonia",
+            "Vaccination, early antibiotics"
+          ],
+          [
+            "Accelerated atherosclerosis",
+            "Lipid burden years",
+            "Statin and risk control"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Spontaneous remission graces roughly a third of primary membranous patients over years, justifying initial supportive patience in lower risk disease while kidneys are protected. That natural history counsels **watchful support in low risk membranous nephropathy**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "A third remit spontaneously; patience with protection is therapy, not neglect, in low risk membranous disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Remission likely watch",
+          "points": [
+            "Subnephrotic or falling proteinuria",
+            "Stable function, low titre",
+            "Six monthly review"
+          ]
+        },
+        "right": {
+          "title": "Progression likely act",
+          "points": [
+            "Persistent heavy proteinuria",
+            "Falling eGFR, high titre",
+            "Immunosuppression initiated"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Novel antigens beyond PLA2R, THSD7A, NELL1 and others increasingly split membranous disease into molecular entities with distinct cancer and autoimmune associations. That expansion is **expanding antigen taxonomy in membranous nephropathy**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Each new membranous antigen rewrites its associations; NELL1 already whispers malignancy screening louder.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Membranous pattern on biopsy"
+          },
+          {
+            "id": "b",
+            "label": "PLA2R staining and serology"
+          },
+          {
+            "id": "c",
+            "label": "Negative: extended antigen panel"
+          },
+          {
+            "id": "d",
+            "label": "Cause directed surveillance follows antigen"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

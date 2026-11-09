@@ -1,0 +1,199 @@
+{
+  "v": 1,
+  "module": "pat-gallbladder-pancreas",
+  "subject": "pathology",
+  "title": "Acute and Chronic Pancreatitis, Fat Necrosis, Pseudocysts, and Pancreatic Cancer CA 19-9",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Acute pancreatitis autodigests itself when trypsin activates prematurely inside acinar cells from gallstone obstruction or alcohol, enzymes digesting pancreas and peripancreatic fat into haemorrhagic necrosis. Premature activation ignites **acute pancreatitis, interstitial versus necrotising**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Trypsin switched on inside the gland digests pancreas and fat; gallstones and alcohol light most fires.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pancreatitis-fig1.webp",
+        "alt": "Acute pancreatitis pathophysiology",
+        "caption": "Acute pancreatitis pathophysiology from premature enzyme activation to necrosis."
+      }
+    },
+    {
+      "tx": "Fat necrosis saponifies peripancreatic and omental fat into chalky white deposits as lipases free fatty acids that bind calcium, occasionally hypocalcaemia marking severe disease prognostically. Those chalk deposits are **fat necrosis with saponification in acute pancreatitis**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Chalky fat necrosis is lipase handwriting; falling calcium beside it grades severity grimly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Acinar injury activates enzymes"
+          },
+          {
+            "id": "b",
+            "label": "Lipase splits peripancreatic fat"
+          },
+          {
+            "id": "c",
+            "label": "Fatty acids bind calcium into soaps"
+          },
+          {
+            "id": "d",
+            "label": "Chalky necrosis, calcium falls"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Diagnosis needs two of characteristic epigastric pain radiating to back, amylase or lipase tripled, and imaging inflammation, lipase outperforming amylase in specificity and window. Severity scores follow: **acute pancreatitis diagnostic criteria (revised Atlanta)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Pain, tripled lipase, imaging: any two diagnose pancreatitis; lipase beats amylase on both counts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Interstitial oedematous",
+          "points": [
+            "Gland swollen, no necrosis",
+            "Most cases, resolves in week",
+            "Supportive fluids and analgesia"
+          ]
+        },
+        "right": {
+          "title": "Necrotising pancreatitis",
+          "points": [
+            "Pancreatic or peripancreatic necrosis",
+            "Infection risk weeks later",
+            "Step up intervention delayed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Chronic pancreatitis fibroses gland irreversibly chiefly from alcohol, calcifying ducts, destroying exocrine then endocrine function into steatorrhoea and diabetes with chronic pain. That fibrotic endpoint is **chronic calcifying pancreatitis**. Students should anchor this fact before moving to rarer causes and exceptions. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Alcohol calcifies and fibroses the pancreas until enzymes and insulin both fail behind chronic pain.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chronic-pancreatitis-fig1.webp",
+        "alt": "Chronic pancreatitis pathology",
+        "caption": "Chronic pancreatitis pathology with fibrosis, calcification, and duct distortion."
+      }
+    },
+    {
+      "tx": "Pancreatic pseudocysts wall off enzyme rich fluid collections after four weeks without epithelial lining, persisting, infecting, rupturing, or compressing until drainage selected by anatomy and symptoms. The unlined collection is the **pancreatic pseudocyst of pancreatitis**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Pseudocysts have walls of scar, not epithelium; size alone never mandates drainage, symptoms do.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Collection",
+          "Timing and wall",
+          "Action accent"
+        ],
+        "rows": [
+          [
+            "Acute fluid collection",
+            "Under 4 weeks, no wall",
+            "Observation usually"
+          ],
+          [
+            "Pseudocyst",
+            "Over 4 weeks, fibrous wall",
+            "Drain if symptomatic or infected"
+          ],
+          [
+            "Acute necrotic collection",
+            "Early, solid debris",
+            "Delay intervention"
+          ],
+          [
+            "Walled off necrosis",
+            "Over 4 weeks, encapsulated necrosis",
+            "Step up drainage and necrosectomy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pancreatic adenocarcinoma of ductal origin, KRAS almost universal, hides retroperitoneally until weight loss, pain, painless jaundice from head tumours, new diabetes, or migratory thrombosis declares advanced disease. Its silence defines **pancreatic ductal adenocarcinoma presentation**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Painless jaundice, weight loss, new diabetes in an older adult: pancreatic head cancer until CT acquits it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pancreatic-cancer-fig1.webp",
+        "alt": "Pancreatic cancer key signs",
+        "caption": "Pancreatic cancer signs including Courvoisier gallbladder and weight loss."
+      }
+    },
+    {
+      "tx": "CA 19-9, a Lewis antigen glycan, rises in pancreatic cancer yet also in cholestasis and cholangitis and never in Lewis negative patients, serving prognosis and monitoring rather than screening. That caveat defines **CA 19-9 interpretation in pancreatic cancer**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "CA 19-9 monitors known pancreatic cancer; jaundice alone raises it and Lewis negative patients never make it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CA 19-9 useful",
+          "points": [
+            "Baseline prognosis in proven cancer",
+            "Response and recurrence monitoring",
+            "Very high suggests metastatic burden"
+          ]
+        },
+        "right": {
+          "title": "CA 19-9 misleading",
+          "points": [
+            "Any cholestasis raises it",
+            "Lewis negative patients secrete none",
+            "Never a screening test"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Trousseau migratory thrombophlebitis returns as pancreatic cancer's paraneoplastic flag beside depression and new diabetes, while Courvoisier palpable gallbladder separates malignant from stone obstruction classically. Those bedside flags are **pancreatic cancer clinical signatures, Trousseau and Courvoisier**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Migratory clots, new diabetes, and a palpable painless gallbladder triangulate pancreatic cancer at the bedside.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Alarm pattern recognised"
+          },
+          {
+            "id": "b",
+            "label": "Pancreatic protocol CT obtained"
+          },
+          {
+            "id": "c",
+            "label": "Resectability by vascular involvement"
+          },
+          {
+            "id": "d",
+            "label": "Oncology, nutrition, biliary drainage sequenced"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-glomerular",
+  "subject": "pathology",
+  "title": "Membranoproliferative Pattern, Tram-Track Glomerulus, Complement, and C3 Glomerulopathy",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Membranoproliferative pattern duplicates basement membrane around interposed mesangial deposits, double contours shining as tram tracks on silver stain while lobulation and hypercellularity crowd tufts. That duplication is the **tram-track (double contour) glomerulus of MPGN pattern**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Tram tracks mean new basement membrane wrapped around deposits and cells; find why complement or complexes built them.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/membranoproliferative-glomerulonephritis-fig1.webp",
+        "alt": "Membranoproliferative glomerulonephritis histopathology",
+        "caption": "Membranoproliferative pattern with lobulation and double contour basement membranes."
+      }
+    },
+    {
+      "tx": "Modern classification asks mechanism before morphology: immune complex disease from infections, lupus, and monoclonal proteins versus complement dysregulation of C3 glomerulopathy by immunofluorescence dominance. That reorganisation is **MPGN reclassification, immune complex versus C3 glomerulopathy**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Do not sign MPGN pattern without asking complexes or complement; immunofluorescence dominance decides the road.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Immune complex MPGN",
+          "points": [
+            "Immunoglobulin plus C3 deposits",
+            "Hepatitis, lupus, endocarditis, clones",
+            "Treat infection or clone cause"
+          ]
+        },
+        "right": {
+          "title": "C3 glomerulopathy",
+          "points": [
+            "C3 dominant, immunoglobulin scant",
+            "Alternative pathway dysregulation",
+            "Complement genetics and autoantibodies"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Dense deposit disease, C3 glomerulopathy's electron dense ribbon within basement membrane, strikes young patients with low C3, drusen eye deposits, and lipodystrophy associations. The ribbon lesion is **dense deposit disease of C3 glomerulopathy**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Ribbon dense membrane, low C3, young patient: dense deposit disease within C3 glomerulopathy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Immune complex MPGN",
+          "C3 glomerulopathy"
+        ],
+        "rows": [
+          [
+            "Immunofluorescence",
+            "Ig plus complement",
+            "C3 dominant by two orders"
+          ],
+          [
+            "Serum C3 and C4",
+            "Both may fall",
+            "C3 low, C4 usually normal"
+          ],
+          [
+            "Causes hunted",
+            "Infection, autoimmune, clone",
+            "Complement genes, C3 nephritic factor"
+          ],
+          [
+            "Therapy accent",
+            "Cause directed plus support",
+            "Complement blockade trials evolving"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Low C4 with low C3 suggests classical pathway immune complexes, isolated low C3 suggests alternative pathway complement disease, cryoglobulins consuming C4 dramatically. That complement compass is **C3 and C4 patterns in glomerulonephritis**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "C4 falls with classical complexes, C3 alone falls with alternative complement disease; let complement navigate.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "MPGN pattern on biopsy"
+          },
+          {
+            "id": "b",
+            "label": "Immunofluorescence: Ig or C3 dominant"
+          },
+          {
+            "id": "c",
+            "label": "Infection, clone, complement workup"
+          },
+          {
+            "id": "d",
+            "label": "Cause or complement directed therapy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Monoclonal gammopathy of renal significance hides small clones injuring kidney through proliferative glomerulonephritis with monoclonal deposits, demanding clone hunting by electrophoresis, free light chains, and marrow. That small clone danger is **monoclonal gammopathy of renal significance (MGRS)**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "A tiny clone can wreck a kidney; proliferative deposits earn full paraprotein hunting regardless of spike size.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/lupus-nephritis-fig1.webp",
+        "alt": "Lupus nephritis glomerular histology",
+        "caption": "Immune complex glomerulonephritis patterns including lupus within MPGN differential."
+      }
+    },
+    {
+      "tx": "Transplant recurrence stalks C3 glomerulopathy and monoclonal deposit diseases, counselling recipients and sometimes selecting prophylactic complement strategies in trials. That recurrence honesty is **glomerular disease recurrence after transplantation**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Counsel recurrence plainly in C3 and monoclonal diseases; grafts inherit the original battlefield.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "High recurrence concern",
+          "points": [
+            "C3 glomerulopathy, dense deposits",
+            "Monoclonal deposit diseases",
+            "Primary FSGS selected"
+          ]
+        },
+        "right": {
+          "title": "Lower recurrence concern",
+          "points": [
+            "Diabetic nephropathy, slow years",
+            "IgA disease variable graft impact",
+            "Membranous PLA2R monitored"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Supportive RAAS blockade, blood pressure, sodium, and lipid control underpin every MPGN mechanism therapy, because proteinuria itself accelerates scarring regardless of deposits. That foundation is **antiproteinuric support across glomerular diseases**. Remembering it prevents the commonest errors made with this presentation entirely. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Whatever built the deposits, block RAAS and pressure; proteinuria scars kidneys on its own schedule.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Support",
+          "Target",
+          "Monitor"
+        ],
+        "rows": [
+          [
+            "RAAS inhibition",
+            "Proteinuria and pressure",
+            "Potassium, creatinine"
+          ],
+          [
+            "Sodium restriction",
+            "Volume and drug synergy",
+            "Weight, blood pressure"
+          ],
+          [
+            "Statin therapy",
+            "Nephrotic lipid burden",
+            "Lipid profile"
+          ],
+          [
+            "Smoking cessation",
+            "Vascular progression",
+            "Every visit counselled"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Eculizumab and emerging complement inhibitors serve selected C3 glomerulopathy and thrombotic microangiopathy patients by genetics, biopsy activity, and trial access rather than pattern alone. Selection discipline defines **complement inhibitor selection in glomerular disease**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Complement drugs follow mechanism proof, not pattern panic; genetics and activity select their patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "C3 dominance proven on biopsy"
+          },
+          {
+            "id": "b",
+            "label": "Complement genetics and autoantibodies"
+          },
+          {
+            "id": "c",
+            "label": "Activity versus chronicity weighed"
+          },
+          {
+            "id": "d",
+            "label": "Inhibitor or trial referral selected"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

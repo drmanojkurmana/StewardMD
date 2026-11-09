@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-glomerular",
+  "subject": "pathology",
+  "title": "Podocyte Effacement and Focal Segmental Glomerulosclerosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Podocytes wrap glomerular capillaries with interdigitating foot processes bridged by slit diaphragm nephrin, whose injury flattens processes into continuous cytoplasm sheets leaking protein. That flattening is **podocyte foot process effacement**. This point is tested repeatedly because it changes everyday bedside decisions. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Effaced foot processes are podocytes flattened by injury; protein leaks where their fingers interlocked.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/minimal-change-disease-fig1.webp",
+        "alt": "Podocyte effacement in minimal change disease",
+        "caption": "Podocyte effacement, the shared ultrastructure of proteinuric podocytopathies."
+      }
+    },
+    {
+      "tx": "Effacement alone never names the disease because minimal change, FSGS, membranous, and diabetic injuries share it, light microscopy, deposits, and clinical tempo separating reversible from scarring diseases. That humility defines **effacement as sign, not diagnosis**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Effacement is a podocyte cry for help, not a diagnosis; context and deposits name the disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Effacement, no deposits or scars",
+          "points": [
+            "Minimal change favoured",
+            "Steroid responsive usually",
+            "Children especially"
+          ]
+        },
+        "right": {
+          "title": "Effacement with segmental scars",
+          "points": [
+            "FSGS pattern",
+            "Steroid resistance commoner",
+            "Adaptive versus primary sorting"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Focal segmental glomerulosclerosis scars some glomeruli partially with hyalinosis and podocyte hypertrophy, primary circulating factor forms relapsing after transplant, secondary adaptive forms following obesity and hyperfiltration. Those segmental scars define **focal segmental glomerulosclerosis (FSGS)**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Some glomeruli, part scarred: FSGS in four words, primary and adaptive forms demanding different therapy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/fsgs-fig1.webp",
+        "alt": "FSGS glomerular pathology",
+        "caption": "FSGS glomerular pathology with segmental sclerosis and hyalinosis."
+      }
+    },
+    {
+      "tx": "Tip, perihilar, cellular, collapsing, and not otherwise specified FSGS variants carry different causes and prognoses, collapsing variant devastating in APOL1 risk, HIV, and interferon contexts. Variant literacy is **Columbia classification of FSGS variants**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Tip variant forgives, collapsing variant devastates; FSGS variants are prognoses, not trivia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Variant",
+          "Accent",
+          "Association"
+        ],
+        "rows": [
+          [
+            "Tip lesion",
+            "Glomerular tip scar",
+            "Steroid response better"
+          ],
+          [
+            "Perihilar",
+            "Vascular pole sclerosis",
+            "Adaptive hyperfiltration, obesity"
+          ],
+          [
+            "Collapsing",
+            "Capillary collapse, podocyte crowding",
+            "APOL1, HIV, severe course"
+          ],
+          [
+            "Cellular",
+            "Endocapillary hypercellularity",
+            "Active early pattern"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Primary FSGS presents full nephrotic syndrome with diffuse effacement and may recur in grafts within hours, while secondary adaptive FSGS shows patchy effacement, glomerulomegaly, and subnephrotic proteinuria. That separation is **primary versus secondary (adaptive) FSGS**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Full nephrotic syndrome with diffuse effacement thinks primary; obesity with big glomeruli thinks adaptive.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary FSGS",
+          "points": [
+            "Abrupt full nephrotic syndrome",
+            "Diffuse foot effacement",
+            "Immunosuppression, transplant recurrence"
+          ]
+        },
+        "right": {
+          "title": "Adaptive FSGS",
+          "points": [
+            "Obesity, reflux, reduced renal mass",
+            "Subnephrotic proteinuria often",
+            "Weight and pressure therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Genetic podocytopathies mutate nephrin, podocin, and cytoskeletal proteins causing steroid resistant nephrotic syndrome of childhood, sparing immunosuppression when sequencing names them. That sequencing duty is **genetic testing in steroid resistant nephrotic syndrome**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Steroid resistant children earn podocyte gene panels before escalating drugs their genes render futile.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Steroid resistance established"
+          },
+          {
+            "id": "b",
+            "label": "Biopsy plus podocyte gene panel"
+          },
+          {
+            "id": "c",
+            "label": "Genetic cause: spare heavy immunosuppression"
+          },
+          {
+            "id": "d",
+            "label": "Non-genetic: calcineurin strategies considered"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Calcineurin inhibitors stabilise podocyte cytoskeleton beside immune effects in steroid resistant FSGS, rituximab serving selected steroid dependent minimal change and FSGS patients. Podocyte directed therapy explains **calcineurin inhibitors in podocytopathies**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Calcineurin drugs steady podocyte skeletons directly, one reason they succeed where steroids failed.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapy",
+          "Podocytopathy role",
+          "Watch"
+        ],
+        "rows": [
+          [
+            "Glucocorticoids",
+            "Minimal change first line",
+            "Relapse pattern defines next"
+          ],
+          [
+            "Calcineurin inhibitors",
+            "Steroid resistant or dependent",
+            "Nephrotoxicity monitoring"
+          ],
+          [
+            "Rituximab",
+            "Selected dependent disease",
+            "B cell depletion duration"
+          ],
+          [
+            "RAAS blockade",
+            "All proteinuric diseases",
+            "Potassium and creatinine"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Sampling error haunts FSGS diagnosis because focal lesions hide in unsampled glomeruli, juxtamedullary first, so small biopsies falsely reassure as minimal change until resistance declares truth. That trap is **FSGS sampling error on renal biopsy**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "FSGS hides focally; a small biopsy calling minimal change in a resistant patient deserves suspicion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Biopsy adequate",
+          "points": [
+            "Many glomeruli, juxtamedullary included",
+            "Electron microscopy complete",
+            "Pattern confidently assigned"
+          ]
+        },
+        "right": {
+          "title": "Biopsy limited",
+          "points": [
+            "Few superficial glomeruli",
+            "FSGS may be missed",
+            "Rebiopsy if course disagrees"
+          ]
+        }
+      }
+    }
+  ]
+}
