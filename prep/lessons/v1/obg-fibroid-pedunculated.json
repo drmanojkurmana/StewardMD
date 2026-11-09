@@ -1,0 +1,200 @@
+{
+ "v": 1,
+ "module": "obg-fibroid",
+ "subject": "obstetrics-gynaecology",
+ "title": "Pedunculated Fibroids, Cervical Fibroids and Broad Ligament Fibroids",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A subserosal fibroid hanging from the uterus on a stalk is a **pedunculated fibroid**. Torsion of the stalk cuts its blood and mimics ovarian torsion or appendicitis. Laparoscopic stalk division cures it simply. Torsion twists the stalk veins first, so congestion and swelling precede arterial loss and make early pain deceptively intermittent.",
+   "say": "Pedunculated fibroids twist on stalks mimicking torsion or appendicitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Event",
+     "Presentation"
+    ],
+    "rows": [
+     [
+      "Stalk torsion",
+      "Acute abdomen"
+     ],
+     [
+      "Parasitic wandering",
+      "Mass away from uterus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A fibroid growing from the cervix, distorting bladder and ureters upward, is a **cervical fibroid**. It fills the pelvis centrally, the lantern on the dome of St Pauls on imaging. Surgery is among the hardest hysterectomies. The uterus perches on top of the cervical mass like a lantern on a dome, displacing the bladder upward and ureters outward.",
+   "say": "Cervical fibroids fill the pelvis centrally and make the hardest hysterectomies.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-gynae_abdominal.webp",
+    "alt": "Cervical fibroid examination.",
+    "caption": "Cervical fibroid. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Fibroids growing sideways between broad ligament leaves are **broad ligament fibroids**. True ones arise from ligament muscle, false ones fall out from the uterus. Ureters are displaced unpredictably, demanding their identification first. Ureter injury is the defining danger of broad ligament surgery, so tracing the ureter under vision precedes any clamp placement.",
+   "say": "Broad ligament fibroids displace ureters unpredictably between ligament leaves.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Lateral pelvic mass"
+     },
+     {
+      "id": "n1",
+      "label": "Ureter displaced"
+     },
+     {
+      "id": "n2",
+      "label": "Identified first"
+     },
+     {
+      "id": "n3",
+      "label": "Fibroid enucleated"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A prolapsing submucosal fibroid polyp through the cervix presents as a vaginal mass, termed **fibroid polyp**. It ulcerates, bleeds and infects while mimicking cervical cancer. Vaginal myomectomy twists it off after excluding inversion. Inversion of the uterus mimics a fibroid polyp exactly, and pulling an inverted uterus downward is the classic operative trap here.",
+   "say": "Fibroid polyps prolapse through the cervix mimicking cancer and are twisted off.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/abnormal-uterine-bleeding-and-palm-coein-classification-fig1.webp",
+    "alt": "Fibroid polyp within AUB causes.",
+    "caption": "Fibroid polyp. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Parasitic fibroids detach and parasitize omental blood supply after stalk atrophy, called **parasitic leiomyoma**. Morcellation spread creates the iatrogenic modern version across the peritoneum. Contained extraction prevents seeding. Contained extraction inside a bag has replaced open morcellation because spilled fragments implant and grow across the peritoneal cavity.",
+   "say": "Parasitic leiomyomas feed from omentum, with morcellation spread the iatrogenic version.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spontaneous parasitic",
+     "points": [
+      "Stalk atrophied",
+      "Omental supply"
+     ]
+    },
+    "right": {
+     "title": "Iatrogenic disseminated",
+     "points": [
+      "Morcellation seeded",
+      "Contained bags prevent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Imaging maps fibroid number, size and cavity relation before any surgery as **fibroid mapping**. MRI is the gold standard when ultrasound is inconclusive or surgery complex. The map chooses route: hysteroscopic, laparoscopic or open. Mapping also counts fibroids, because missed deep intramural lesions are the commonest cause of early symptom recurrence after surgery.",
+   "say": "Fibroid mapping by MRI chooses hysteroscopic, laparoscopic or open routes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Route",
+     "Suits"
+    ],
+    "rows": [
+     [
+      "Hysteroscopic",
+      "Submucosal 0 to 2"
+     ],
+     [
+      "Laparoscopic",
+      "Moderate intramural"
+     ],
+     [
+      "Open",
+      "Huge, multiple, cervical"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "GnRH analogues shrink fibroids by a third preoperatively, termed **preoperative shrinkage**. Three months corrects anaemia and eases surgery, especially vaginal or laparoscopic routes. Hot flushes and bone loss cap duration. Analogues also induce amenorrhoea that rebuilds haemoglobin without transfusion, provided iron is replaced alongside the hormonal suppression.",
+   "say": "Preoperative GnRH therapy reduces fibroid size and improves anaemia before surgery.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-myomectomy.webp",
+    "alt": "Myomectomy after shrinkage.",
+    "caption": "Myomectomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Uterine artery embolisation infarcts fibroids while sparing uterus, covered fully next, as **embolisation alternative**. It suits women avoiding surgery who accept possible reintervention. Ovarian reserve effects limit use in fertility seekers. Embolisation is detailed fully in the myomectomy lesson, and its fertility cautions apply equally to every stalked lesion here.",
+   "say": "Embolisation infarcts fibroids sparing the uterus for surgery avoiders.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Catheter to uterine arteries"
+     },
+     {
+      "id": "n1",
+      "label": "Particles infarct fibroids"
+     },
+     {
+      "id": "n2",
+      "label": "Uterus survives on collaterals"
+     },
+     {
+      "id": "n3",
+      "label": "Symptoms improve"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pregnancy with fibroids usually proceeds normally, with red degeneration and malpresentation the watch items, termed **fibroid pregnancy care**. Caesarean myomectomy is avoided except for pedunculated stalks. Delivery planning follows obstruction, not fibroid presence. Lower segment obstruction by a cervical or broad ligament fibroid converts a planned vaginal birth into caesarean delivery.",
+   "say": "Fibroid pregnancy care watches degeneration and malpresentation, avoiding caesarean myomectomy.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-uterine-artery-embolisation.webp",
+    "alt": "Uterine artery embolisation.",
+    "caption": "Embolisation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

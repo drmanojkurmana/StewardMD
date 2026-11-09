@@ -1,0 +1,232 @@
+{
+ "v": 1,
+ "module": "obg-pid-genital-tb",
+ "subject": "obstetrics-gynaecology",
+ "title": "Pelvic Inflammatory Disease and Its Sequelae",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Ascending infection of uterus, tubes and pelvis from cervicitis is **pelvic inflammatory disease**. Chlamydia and gonococcus lead, with anaerobes joining in established disease. Lower abdominal pain, deep dyspareunia and cervical motion tenderness form the clinical core. Risk concentrates in young sexually active women, recent partner change and prior sexually transmitted infection, which is why history targets exposures.",
+   "say": "Pelvic inflammatory disease ascends from cervicitis causing pain and cervical motion tenderness.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pelvic-inflammatory-disease-fig1.webp",
+    "alt": "Pelvic inflammatory disease pathophysiology.",
+    "caption": "PID pathophysiology. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Tenderness on moving the cervix during examination, the chandelier sign from the pain it provokes, is **cervical motion tenderness**. Combined with adnexal tenderness it justifies empirical treatment. Waiting for proof costs tubes. Treatment starts on clinical suspicion alone because every day of delay allows more tubal scarring that no later antibiotic can reverse.",
+   "say": "Cervical motion tenderness justifies empirical PID treatment because waiting costs tubes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Cervical motion",
+      "Exquisite tenderness"
+     ],
+     [
+      "Adnexa",
+      "Tender, maybe mass"
+     ],
+     [
+      "Temperature",
+      "May be normal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Perihepatic inflammation causing right upper quadrant pain in PID is **Fitz-Hugh-Curtis syndrome**. Violin string adhesions between liver and diaphragm are its legacy. It proves how far pelvic infection ascends. Right upper quadrant pain with pelvic infection is perihepatitis until proved otherwise, and it resolves with the same antibiotics as the pelvis.",
+   "say": "Fitz-Hugh-Curtis syndrome causes violin string adhesions between liver and diaphragm in pelvic infection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Pelvic infection ascends"
+     },
+     {
+      "id": "n1",
+      "label": "Perihepatitis develops"
+     },
+     {
+      "id": "n2",
+      "label": "Right upper pain"
+     },
+     {
+      "id": "n3",
+      "label": "Violin string adhesions"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A complex tubo ovarian mass of tube, ovary and pus is a **tubo-ovarian abscess**. It complicates a third of hospitalised PID. Antibiotics first, drainage or surgery for rupture or failure, is the sequence. Rupture spills pus into the peritoneum and presents as peritonitis with shock, converting medical disease into an immediate surgical emergency.",
+   "say": "Tubo-ovarian abscess complicates hospitalised PID and ruptures as an emergency.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pelvic-inflammatory-disease-and-vaginitis-fig1.webp",
+    "alt": "Tubo ovarian infection context.",
+    "caption": "Tubo ovarian context. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Outpatient regimens pair ceftriaxone with doxycycline and metronidazole for fourteen days as **empirical PID therapy**. Inpatient intravenous therapy follows severity, pregnancy or abscess. Partners are treated for gonorrhoea and chlamydia regardless of their results. Partners from the preceding weeks need treatment and testing, because reinfection from an untreated partner restarts the whole episode.",
+   "say": "Empirical therapy for pelvic infection involves ceftriaxone with doxycycline and metronidazole.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Outpatient",
+     "points": [
+      "Mild moderate",
+      "Oral regimen"
+     ]
+    },
+    "right": {
+     "title": "Inpatient",
+     "points": [
+      "Severe, pregnant, abscess",
+      "IV regimen"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Each PID episode scars tubes, multiplying infertility and ectopic risk as **tubal sequelae**. One episode leaves about ten percent infertile, three episodes over half. Early empirical treatment is fertility preservation. Scarring also raises ectopic pregnancy risk in every later conception, so fertility counselling follows even a single treated episode.",
+   "say": "Tubal sequelae multiply infertility with each PID episode, reaching half by three.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Episodes",
+     "Infertility"
+    ],
+    "rows": [
+     [
+      "One",
+      "About one tenth"
+     ],
+     [
+      "Two",
+      "About one quarter"
+     ],
+     [
+      "Three",
+      "Over one half"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic pelvic pain from adhesions persists after infection clears as **post PID pain**. It needs pain team and laparoscopic assessment, not repeated antibiotics. Distinguishing it from recurrence prevents antibiotic harm. Adhesion pain characteristically worsens with movement and intercourse and eases with rest, unlike active infection pain that persists constantly.",
+   "say": "Post PID pain from adhesions needs pain teams, not repeated antibiotics.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Infection cured"
+     },
+     {
+      "id": "n1",
+      "label": "Adhesion pain persists"
+     },
+     {
+      "id": "n2",
+      "label": "Pain team assessment"
+     },
+     {
+      "id": "n3",
+      "label": "Antibiotics stopped"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Subclinical PID found only on endometrial biopsy explains some infertility with silent tubes, termed **silent PID**. Chlamydia antibody testing flags past exposure in fertility workups. It argues for screening programmes in the young. Silent disease explains infertility in women who never recall an attack, which is why tubal damage alone can reveal past infection.",
+   "say": "Silent PID explains infertility with chlamydia antibodies flagging past exposure.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Silent PID fertility assessment.",
+    "caption": "Silent PID. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Annual chlamydia screening of young women is the population answer, termed **screening prevention**. Treating asymptomatic cervicitis prevents most ascending disease. Partner notification multiplies each treatments value. Notification reaches partners who feel entirely well, and treating them protects both their fertility and the index woman from reinfection.",
+   "say": "Screening prevention treats asymptomatic chlamydia in the young to prevent PID.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Annual youth screen"
+     },
+     {
+      "id": "n1",
+      "label": "Cervicitis treated"
+     },
+     {
+      "id": "n2",
+      "label": "Partners notified"
+     },
+     {
+      "id": "n3",
+      "label": "PID prevented"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}
