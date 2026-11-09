@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "med-neuromuscular",
+ "subject": "medicine",
+ "title": "Myasthenia Gravis: Neuromuscular Transmission and Thymoma",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "An autoimmune disorder of the postsynaptic neuromuscular junction characterised by fluctuating muscle weakness and pathological fatigability that worsens with sustained physical exertion and improves following periods of rest is **myasthenia gravis** (MG). It typically presents with asymmetric ptosis, binocular diplopia, dysarthria, and proximal limb weakness with completely normal sensation and preserved pupillary reflexes.",
+   "say": "An autoimmune disorder of the postsynaptic neuromuscular junction characterized by fluctuating muscle weakness and fatigability is myasthenia gravis. It typically presents with asymmetric ptosis, binocular diplopia, and proximal limb weakness with normal pupillary reflexes and sensation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/myasthenia-gravis-fig1.webp",
+    "alt": "Pathophysiology of neuromuscular junction and autoantibody attack in myasthenia gravis.",
+    "caption": "Postsynaptic acetylcholine receptor blockade and complement-mediated simplification in MG. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The pathogenic immunological hallmark in up to eighty-five percent of generalized cases is circulating IgG autoantibodies directed against the nicotinic skeletal muscle **acetylcholine receptor antibody** (AChR-Ab). Binding triggers complement-mediated lysis of postsynaptic junctional folds, accelerated receptor endocytosis, and competitive functional blockade, decreasing safety margin of neuromuscular transmission.",
+   "say": "The pathogenic immunological hallmark in eighty-five percent of generalized cases is circulating autoantibodies against the nicotinic acetylcholine receptor. Binding triggers complement-mediated lysis of junctional folds and receptor endocytosis, blunting neuromuscular transmission.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ab",
+      "label": "Anti-AChR Autoantibodies Bind Postsynaptic Receptor"
+     },
+     {
+      "id": "comp",
+      "label": "Membrane Attack Complex Activation & Lysis"
+     },
+     {
+      "id": "simp",
+      "label": "Simplified Postsynaptic Folds & Failed Action Potentials"
+     }
+    ],
+    "edges": [
+     [
+      "ab",
+      "comp"
+     ],
+     [
+      "comp",
+      "simp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In patients with generalised myasthenia gravis who test seronegative for anti-AChR antibodies, approximately forty percent possess autoantibodies targeting muscle-specific receptor tyrosine kinase (**anti-MuSK**). Anti-MuSK positive myasthenia exhibits a distinct clinical phenotype characterised by prominent bulbar, facial, and neck extensor weakness with rapid tongue atrophy, and typically responds poorly to acetylcholinesterase inhibitors.",
+   "say": "In patients testing seronegative for anti-AChR antibodies, forty percent possess autoantibodies targeting muscle-specific kinase, termed anti-MuSK. Anti-MuSK myasthenia exhibits prominent bulbar, facial, and neck weakness with tongue atrophy, responding poorly to standard acetylcholinesterase inhibitors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Serological Subtype",
+     "Target Postsynaptic Antigen",
+     "Dominant Clinical Features",
+     "Therapeutic Response"
+    ],
+    "rows": [
+     [
+      "Anti-AChR Positive (85%)",
+      "Nicotinic acetylcholine receptor",
+      "Ocular, bulbar, proximal limb weakness",
+      "Responds to Pyridostigmine, thymectomy, steroids"
+     ],
+     [
+      "Anti-MuSK Positive (5-10%)",
+      "Muscle-specific receptor tyrosine kinase",
+      "Severe bulbar weakness, neck drop, tongue atrophy",
+      "Poor response to Pyridostigmine; excellent response to Rituximab"
+     ],
+     [
+      "Anti-LRP4 Positive (1-3%)",
+      "Low-density lipoprotein receptor-related protein 4",
+      "Mild generalized or ocular myasthenia",
+      "Variable response to standard immunosuppression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A highly sensitive, simple bedside physical diagnostic examination for myasthenic ptosis is the **ice pack test**. An ice-filled surgical glove or cold pack is applied over the closed ptotic eyelid for two to five minutes. By inhibiting endogenous acetylcholinesterase enzyme kinetics and enhancing acetylcholine receptor sensitivity at cooler temperatures, an objective improvement in palpebral fissure height exceeding two millimetres confirms myasthenia.",
+   "say": "A simple bedside diagnostic test for myasthenic ptosis is the ice pack test. An ice pack is placed over the closed ptotic eyelid for three minutes. By slowing acetylcholinesterase kinetics at lower temperatures, an objective improvement in eyelid elevation confirms myasthenia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/anticholinesterases-and-myasthenia-fig1.webp",
+    "alt": "Ice pack test technique and palpebral fissure elevation in myasthenia gravis.",
+    "caption": "Reversal of myasthenic ptosis following application of ice in the bedside ice pack test. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Electrophysiological diagnosis relies on low-frequency (two to three Hertz) repetitive nerve stimulation (RNS). In myasthenia gravis, progressive depletion of presynaptic acetylcholine quanta paired with a reduced postsynaptic receptor population causes a progressive decline in compound muscle action potential amplitudes exceeding ten percent between the first and fourth potentials, designated as a **decremental response**.",
+   "say": "Electrophysiological diagnosis relies on low-frequency repetitive nerve stimulation. In myasthenia gravis, depletion of presynaptic acetylcholine paired with reduced postsynaptic receptors produces a progressive decline in action potential amplitude exceeding ten percent, termed a decremental response.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Myasthenia Gravis (Postsynaptic)",
+     "points": [
+      "Low-frequency (3 Hz) RNS testing",
+      "> 10% decremental amplitude response",
+      "Fatigable weakness worsens with exercise",
+      "Single-fiber EMG: Increased jitter and blocking"
+     ]
+    },
+    "right": {
+     "title": "Lambert-Eaton (Presynaptic)",
+     "points": [
+      "High-frequency (20-50 Hz) RNS or post-exercise",
+      "> 100% incremental amplitude facilitation",
+      "Temporary strength improvement following brief exercise",
+      "Antibodies against P/Q-type calcium channels"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The thymus gland plays an essential role in the immunopathogenesis of AChR-positive myasthenia gravis, acting as the primary site of autoimmunization against acetylcholine receptors. Thymic follicular lymphoid hyperplasia occurs in seventy percent of patients, while ten to fifteen percent harbour an underlying epithelial **thymoma**, mandating contrast-enhanced chest computed tomography in all newly diagnosed adults.",
+   "say": "The thymus gland plays an essential role in the immunopathogenesis of myasthenia gravis, acting as the site of autoimmunization. Thymic hyperplasia occurs in seventy percent of patients, while fifteen percent harbour a thymoma, mandating chest CT in all newly diagnosed cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "thym",
+      "label": "Thymic Lymphoid Hyperplasia / Thymoma"
+     },
+     {
+      "id": "auto",
+      "label": "Loss of Central Tolerance & Anti-AChR Clonal Expansion"
+     },
+     {
+      "id": "resect",
+      "label": "Surgical Thymectomy Induces Long-Term Remission"
+     }
+    ],
+    "edges": [
+     [
+      "thym",
+      "auto"
+     ],
+     [
+      "auto",
+      "resect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The initial symptomatic first-line pharmacotherapy for myasthenia gravis is the oral reversible acetylcholinesterase inhibitor **pyridostigmine**. By competitively inhibiting acetylcholinesterase within the synaptic cleft, it prolongs the lifetime of released acetylcholine to overcome the postsynaptic receptor deficit, though excess dosing can trigger a cholinergic crisis with abdominal cramping, diarrhoea, and fasciculations.",
+   "say": "The initial symptomatic therapy for myasthenia gravis is the oral acetylcholinesterase inhibitor pyridostigmine. By inhibiting acetylcholinesterase within the synaptic cleft, it prolongs acetylcholine action to overcome the receptor deficit, though excessive dosing can trigger a cholinergic crisis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Strategy",
+     "Representative Regimen",
+     "Clinical Role in Myasthenia Gravis"
+    ],
+    "rows": [
+     [
+      "Cholinesterase Inhibitor",
+      "Oral Pyridostigmine 60 mg tid to qid",
+      "First-line symptomatic relief; titrate to symptom control"
+     ],
+     [
+      "Immunosuppression",
+      "Oral Prednisone + Azathioprine / MMF",
+      "Long-term disease modification; suppresses autoantibody production"
+     ],
+     [
+      "Targeted Biologic",
+      "Rituximab (Anti-CD20) OR Eculizumab",
+      "Refractory generalized MG; Rituximab is first-line in anti-MuSK"
+     ],
+     [
+      "Surgical Intervention",
+      "Extended Transsternal Thymectomy",
+      "Mandatory in thymoma; improves remission in non-thymomatous AChR+"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A critical, life-threatening exacerbation characterized by respiratory muscle weakness requiring mechanical ventilation is a **myasthenic crisis**. Triggered by intercurrent pulmonary infections, surgery, or medications that impair neuromuscular transmission (aminoglycosides, macrolides, fluoroquinolones, beta-blockers), acute rescue therapy mandates immediate plasmapheresis or intravenous immunoglobulin paired with temporary discontinuation of pyridostigmine to minimize airway secretions.",
+   "say": "A critical exacerbation characterized by respiratory failure requiring mechanical ventilation is a myasthenic crisis. Triggered by systemic infections or contraindicated medications like fluoroquinolones, rescue therapy requires immediate plasmapheresis or IVIG paired with temporary cessation of pyridostigmine.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "trig",
+      "label": "Infection or Incompatible Drug (Fluoroquinolone)"
+     },
+     {
+      "id": "cris",
+      "label": "Diaphragmatic & Bulbar Respiratory Failure"
+     },
+     {
+      "id": "res",
+      "label": "Endotracheal Intubation + PLEX / IVIG"
+     }
+    ],
+    "edges": [
+     [
+      "trig",
+      "cris"
+     ],
+     [
+      "cris",
+      "res"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 440"
+}
