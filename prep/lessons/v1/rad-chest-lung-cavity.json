@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-chest-lung-cavity",
+ "subject": "radiology",
+ "module": "rad-chest",
+ "title": "Lung Cavity, Tree in Bud and Ground Glass Opacity",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "A cavity is air inside a mass",
+   "tx": "**Lung cavity** means a gas filled space inside a consolidation, mass or nodule, created when necrotic centre tissue drains through a bronchus. Wall thickness guides the cause: a wall over 15 mm with an irregular inner edge favours squamous cell carcinoma, while a wall under 4 mm and smooth favours a benign cyst, bulla or resolving infection. The air crescent of a fungal ball sits between these patterns.",
+   "say": "Lung cavity means a gas filled space inside a consolidation, mass or nodule, created when a necrotic centre drains through a bronchus. Wall thickness guides the cause: over fifteen millimetres with an irregular inner edge favours squamous cancer, while under four millimetres and smooth favours a benign cyst or resolving infection.",
+   "vis": {"kind": "table", "cols": ["Wall feature", "Favours malignancy", "Favours benign"], "rows": [["Maximum thickness", "Over 15 mm", "Under 4 mm"], ["Inner margin", "Irregular, nodular", "Smooth"], ["Outer margin", "Spiculated", "Well defined"], ["Contents", "Solid mural nodule", "Mobile fungal ball"]]}
+  },
+  {
+   "title": "Tuberculosis loves the upper lobes",
+   "tx": "**Post primary tuberculosis** cavitates in the apical and posterior segments of upper lobes and the superior segment of lower lobes, where high oxygen tension suits the bacillus. Multiple thin walled cavities with surrounding tree in bud nodules and fibrosis mark active disease needing isolation and sputum testing. A thick walled single cavity with weight loss in a smoker instead earns a malignancy workup first.",
+   "say": "Post primary tuberculosis cavitates in the apical and posterior upper lobe segments and the superior lower lobe segment, where high oxygen suits the bacillus. Multiple thin walled cavities with tree in bud nodules mark active disease needing isolation. A thick walled single cavity with weight loss in a smoker earns a malignancy workup first.",
+   "vis": {"kind": "compare", "left": {"title": "Tuberculous cavity", "points": ["Upper lobe apex", "Multiple cavities", "Tree in bud around", "Fibrosis and volume loss"]}, "right": {"title": "Malignant cavity", "points": ["Any lobe, often single", "Wall over 15 mm", "Irregular inner margin", "Smoker with weight loss"]}}
+  },
+  {
+   "title": "Air crescent and Monod signs",
+   "tx": "**Air crescent sign** is the crescent of air capping a fungal ball inside a pre existing cavity, classically an aspergilloma in an old tuberculous space. The ball moves when the patient rolls, which is the Monod sign, separating it from a clot or tumour fixed to the wall. In a neutropenic patient an air crescent instead means recovering invasive aspergillosis as white cells return and dead lung retracts.",
+   "say": "Air crescent sign is the crescent of air capping a fungal ball inside a pre existing cavity, classically an aspergilloma in an old tuberculous space. The ball moves when the patient rolls, the Monod sign, separating it from fixed clot or tumour. In neutropenic patients it instead means recovering invasive aspergillosis.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Old cavity exists"}, {"id": "b", "label": "Fungal ball grows inside"}, {"id": "c", "label": "Air crescent caps it"}, {"id": "d", "label": "Ball moves on rolling"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Tree in bud means small airway pus",
+   "tx": "**Tree in bud** describes centrilobular nodules with branching linear opacities where terminal bronchioles are stuffed with pus, mucus or inflammatory tissue. Endobronchial tuberculosis spread is the examination classic, but bacterial bronchiolitis, aspiration and atypical mycobacteria produce the same bud. The pattern spares the pleural surface by a few millimetres because the smallest lobular branches end before the fissures, separating it from perilymphatic beading.",
+   "say": "Tree in bud describes centrilobular nodules with branching opacities where terminal bronchioles are stuffed with pus, mucus or inflammatory tissue. Endobronchial tuberculosis is the classic, but bacterial bronchiolitis and aspiration produce the same bud. It spares the pleural surface by a few millimetres, separating it from perilymphatic beading.",
+   "vis": {"kind": "compare", "left": {"title": "Tree in bud", "points": ["Centrilobular branching", "Spares pleural surface", "Infected small airways", "Active tuberculosis classic"]}, "right": {"title": "Perilymphatic nodules", "points": ["Bead along fissures", "Touch pleural surface", "Sarcoidosis pattern", "Lymphangitic tumour"]}}
+  },
+  {
+   "title": "Ground glass still shows vessels",
+   "tx": "**Ground glass opacity** is increased lung density through which vessels and bronchial walls remain visible, because alveoli are only partly filled or their walls are thickened. When density rises enough to hide vessels the pattern becomes consolidation instead. Ground glass with subpleural sparing and uniform change fits nonspecific interstitial pneumonia, while patchy ground glass with fever fits viral or atypical infection in the right clinical week.",
+   "say": "Ground glass opacity is increased lung density through which vessels and bronchial walls remain visible, because alveoli are only partly filled. When density hides vessels the pattern becomes consolidation instead. Ground glass with subpleural sparing fits nonspecific interstitial pneumonia, while patchy ground glass with fever fits viral or atypical infection.",
+   "vis": {"kind": "image", "src": "v1/kb/media/nonspecific-interstitial-pneumonia-fig1.webp", "alt": "Illustration of lung tissue showing ground glass opacities with subpleural sparing in nonspecific interstitial pneumonia.", "caption": "Ground glass change with subpleural sparing in nonspecific interstitial pneumonia. Illustration: StewardMD."}
+  },
+  {
+   "title": "Halo and reversed halo signs",
+   "tx": "**Halo sign** rings a nodule with ground glass, haemorrhage around invasive aspergillosis in a neutropenic host being the urgent cause. Reversed halo, also called the atoll sign, puts ground glass in the centre ringed by consolidation and points toward organising pneumonia. Both signs reverse the usual reading order: the ring tells you the process, the centre tells you the tissue response inside it.",
+   "say": "Halo sign rings a nodule with ground glass, haemorrhage around invasive aspergillosis in a neutropenic host being the urgent cause. Reversed halo puts ground glass in the centre ringed by consolidation and points toward organising pneumonia. The ring tells you the process, the centre tells you the tissue response inside it.",
+   "vis": {"kind": "table", "cols": ["Sign", "Centre", "Ring"], "rows": [["Halo", "Solid nodule", "Ground glass halo"], ["Reversed halo", "Ground glass", "Consolidation ring"], ["Air crescent", "Fungal ball", "Air crescent"], ["Target", "Calcified granuloma centre", "Soft tissue rim"]]}
+  },
+  {
+   "title": "Cavity contents checklist",
+   "tx": "**Intracavitary contents** narrow the cause before cultures return. A dependent mobile ball suggests aspergilloma, an air fluid level suggests lung abscess or infected bulla, and a floating membrane suggests a ruptured hydatid cyst forming the water lily appearance. Rasmussen aneurysm, a pulmonary artery branch ballooning into a tuberculous cavity wall, explains massive haemoptysis and forbids casual biopsy of the cavity wall.",
+   "say": "Intracavitary contents narrow the cause before cultures return. A dependent mobile ball suggests aspergilloma, an air fluid level suggests lung abscess, and a floating membrane suggests a ruptured hydatid cyst. Rasmussen aneurysm ballooning into a tuberculous cavity wall explains massive haemoptysis and forbids casual biopsy of the wall.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Look inside the cavity"}, {"id": "b", "label": "Mobile ball: aspergilloma"}, {"id": "c", "label": "Fluid level: abscess"}, {"id": "d", "label": "Membrane: hydatid cyst"}], "edges": [["a", "b"], ["a", "c"], ["a", "d"]]}
+  },
+  {
+   "title": "Abscess versus empyema split",
+   "tx": "**Lung abscess** forms an acute angle with the chest wall, keeps a round shape on two views and holds bronchi that end abruptly at its edge. Empyema forms an obtuse angle, looks lentiform and compresses lung with the split pleura sign on contrast CT. The distinction decides treatment: abscess usually answers antibiotics and postural drainage, while empyema needs a pleural drain and often surgical review.",
+   "say": "Lung abscess forms an acute angle with the chest wall, keeps a round shape on two views and shows bronchi ending at its edge. Empyema forms an obtuse angle, looks lentiform and compresses lung with the split pleura sign. Abscess usually answers antibiotics, while empyema needs a pleural drain and often surgical review.",
+   "vis": {"kind": "compare", "left": {"title": "Lung abscess", "points": ["Acute angle to chest wall", "Round on two views", "Bronchi end at edge", "Antibiotics first"]}, "right": {"title": "Empyema", "points": ["Obtuse angle to chest wall", "Lentiform shape", "Split pleura sign", "Pleural drain needed"]}}
+  }
+ ]
+}
