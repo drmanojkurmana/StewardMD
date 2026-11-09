@@ -1,153 +1,222 @@
 {
-  "id": "pen-hypergonadotropic-hypogonadism-klinefelter",
-  "title": "Hypergonadotropic Hypogonadism: Klinefelter Syndrome 47,XXY, Dysgenesis and Hormone Replacement",
-  "subject": "ss-paediatric-endocrinology",
-  "module": "Precocious and Delayed Puberty, Hypogonadism and Gynecomastia",
-  "v": 1,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "say": "Primary gonadal failure releases anterior pituitary gonadotropins from normal steroid feedback inhibition.",
-      "tx": "Recognize primary testicular failure by evaluating the **Hypergonadotropic hypogonadism hallmark** profile on laboratory testing. Characterized by primary gonadal failure with markedly elevated serum gonadotropins (FSH and LH > 20-40 IU/L) due to absence of negative feedback from sex steroids and inhibin B.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Hypergonadotropic (Primary)",
-          "points": [
-            "Intrinsic gonadal failure (dysgenesis/orchitis)",
-            "Markedly elevated serum FSH and LH (> 20-40 IU/L)",
-            "Absence of testosterone and inhibin B feedback"
-          ]
-        },
-        "right": {
-          "title": "Hypogonadotropic (Secondary)",
-          "points": [
-            "Hypothalamic or pituitary insufficiency",
-            "Inappropriately low or normal serum FSH and LH",
-            "Impaired central GnRH pulse generator"
-          ]
-        }
-      }
+ "id": "pen-hypergonadotropic-hypogonadism-klinefelter",
+ "title": "Hypergonadotropic Hypogonadism: Klinefelter Syndrome 47,XXY, Dysgenesis and Hormone Replacement",
+ "subject": "ss-paediatric-endocrinology",
+ "module": "Precocious and Delayed Puberty, Hypogonadism and Gynecomastia",
+ "v": 1,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Primary gonadal failure releases anterior pituitary gonadotropins from normal steroid feedback inhibition.",
+   "tx": "Recognize primary testicular failure by evaluating the **Hypergonadotropic hypogonadism hallmark** profile on laboratory testing. Characterized by primary gonadal failure with markedly elevated serum gonadotropins (FSH and LH > 20-40 IU/L) due to absence of negative feedback from sex steroids and inhibin B.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hypogonadism-male-fig1.webp",
+    "alt": "Medical illustration of hypergonadotropic hypogonadism showing pituitary LH and FSH hypersecretion, atrophic small testis, and histological seminiferous tubule hyalinisation and fibrosis.",
+    "caption": "Testicular histological dysgenesis, seminiferous tubule fibrosis, and elevated gonadotropins in hypergonadotropic hypogonadism."
+   }
+  },
+  {
+   "say": "Meiotic nondisjunction generates the most prevalent constitutional sex chromosome aneuploidy in newborn boys.",
+   "tx": "Assess epidemiology and cytogenetics by determining **Klinefelter syndrome 47,XXY incidence** in neonatal screening statistics. Klinefelter syndrome is the most common sex-chromosome aneuploidy in males (1 in 500-600 liveborn boys), caused by meiotic non-disjunction of paternal or maternal X chromosomes during gametogenesis.",
+   "vis": {
+    "kind": "table",
+    "title": "Cytogenetic Features of Klinefelter Syndrome",
+    "cols": [
+     "Parameter",
+     "Finding",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Liveborn Prevalence",
+      "1 in 500-600 liveborn males",
+      "Most common genetic cause of male hypogonadism"
+     ],
+     [
+      "Karyotype Distribution",
+      "80-85% classic 47,XXY",
+      "15% mosaic (47,XXY/46,XY) or high-grade polyploidy"
+     ],
+     [
+      "Nondisjunction Origin",
+      "50% paternal / 50% maternal",
+      "Increased risk correlated with advanced maternal age"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Progressive hyalinization of seminiferous tubules during adolescence results in characteristic eunuchoid proportions.",
+   "tx": "Identify physical features during pubertal examination noting **Pubertal phenotype and testicular fibrosclerosis** in adolescent males. Adolescents develop eunuchoid proportions (tall stature, long legs, span > height by 5 cm), bilateral firm small testes (< 4-6 mL) due to progressive hyalinization of seminiferous tubules, and gynecomastia in 50-80%.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/disorders-of-the-testes-and-fig1.webp",
+    "alt": "Diagram of the hypothalamic-pituitary-testicular axis illustrating GnRH pulse generator, LH stimulation of Leydig cells, FSH drive to Sertoli cells, and negative feedback loops.",
+    "caption": "Hypothalamic-pituitary-testicular axis showing negative feedback regulation disrupted in primary gonadal failure."
+   }
+  },
+  {
+   "say": "Adolescents and adults carry distinct risks for malignant neoplasms alongside cardiometabolic complications.",
+   "tx": "Screen for long term systemic comorbidities by reviewing **Endocrine and metabolic comorbidities** during annual follow up visits. Adults with Klinefelter carry a 20-fold increased risk of male breast cancer, 5-fold risk of metabolic syndrome/type 2 diabetes, extragonadal germ cell tumors (mediastinal teratoma), and mitral valve prolapse.",
+   "vis": {
+    "kind": "table",
+    "title": "Systemic Comorbidities in 47,XXY Males",
+    "cols": [
+     "Organ System",
+     "Associated Comorbidity",
+     "Relative Risk"
+    ],
+    "rows": [
+     [
+      "Oncologic Risk",
+      "Male breast carcinoma & mediastinal teratoma",
+      "20-fold increased breast cancer risk"
+     ],
+     [
+      "Cardiometabolic",
+      "Insulin resistance, type 2 diabetes, dyslipidemia",
+      "5-fold increased metabolic syndrome risk"
+     ],
+     [
+      "Cardiovascular",
+      "Mitral valve prolapse & venous thromboembolism",
+      "Screen with periodic echocardiography"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Exogenous testosterone replacement builds peak bone mass and preserves lean muscle during pubertal maturation.",
+   "tx": "Initiate androgen replacement by following established **Testosterone replacement timing** guidelines in symptomatic adolescents. Testosterone replacement therapy is initiated at age 12-14 years when serum testosterone plateaus and LH/FSH rise, building bone mineral density, lean muscle mass, and preventing metabolic syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Initiation Regimen (Age 12-14)",
+     "points": [
+      "Low-dose testosterone enanthate / cypionate",
+      "50 mg IM monthly, titrated over 2-3 years",
+      "Allows physiological virilization without rapid closure"
+     ]
     },
-    {
-      "say": "Meiotic nondisjunction generates the most prevalent constitutional sex chromosome aneuploidy in newborn boys.",
-      "tx": "Assess epidemiology and cytogenetics by determining **Klinefelter syndrome 47,XXY incidence** in neonatal screening statistics. Klinefelter syndrome is the most common sex-chromosome aneuploidy in males (1 in 500-600 liveborn boys), caused by meiotic non-disjunction of paternal or maternal X chromosomes during gametogenesis.",
-      "vis": {
-        "kind": "table",
-        "title": "Cytogenetic Features of Klinefelter Syndrome",
-        "cols": ["Parameter", "Finding", "Clinical Significance"],
-        "rows": [
-          ["Liveborn Prevalence", "1 in 500-600 liveborn males", "Most common genetic cause of male hypogonadism"],
-          ["Karyotype Distribution", "80-85% classic 47,XXY", "15% mosaic (47,XXY/46,XY) or high-grade polyploidy"],
-          ["Nondisjunction Origin", "50% paternal / 50% maternal", "Increased risk correlated with advanced maternal age"]
-        ]
-      }
-    },
-    {
-      "say": "Progressive hyalinization of seminiferous tubules during adolescence results in characteristic eunuchoid proportions.",
-      "tx": "Identify physical features during pubertal examination noting **Pubertal phenotype and testicular fibrosclerosis** in adolescent males. Adolescents develop eunuchoid proportions (tall stature, long legs, span > height by 5 cm), bilateral firm small testes (< 4-6 mL) due to progressive hyalinization of seminiferous tubules, and gynecomastia in 50-80%.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "pub", "label": "Pubertal Gonadotropin Rise"},
-          {"id": "scler", "label": "Seminiferous Tubule Hyalinization & Fibrosis"},
-          {"id": "test", "label": "Small Firm Testes (< 4-6 mL) & Sertoli Aplasia"},
-          {"id": "gyn", "label": "Gynecomastia (50-80%) & Eunuchoid Habitus"}
-        ],
-        "edges": [
-          ["pub", "scler"],
-          ["scler", "test"],
-          ["test", "gyn"]
-        ]
-      }
-    },
-    {
-      "say": "Adolescents and adults carry distinct risks for malignant neoplasms alongside cardiometabolic complications.",
-      "tx": "Screen for long term systemic comorbidities by reviewing **Endocrine and metabolic comorbidities** during annual follow up visits. Adults with Klinefelter carry a 20-fold increased risk of male breast cancer, 5-fold risk of metabolic syndrome/type 2 diabetes, extragonadal germ cell tumors (mediastinal teratoma), and mitral valve prolapse.",
-      "vis": {
-        "kind": "table",
-        "title": "Systemic Comorbidities in 47,XXY Males",
-        "cols": ["Organ System", "Associated Comorbidity", "Relative Risk"],
-        "rows": [
-          ["Oncologic Risk", "Male breast carcinoma & mediastinal teratoma", "20-fold increased breast cancer risk"],
-          ["Cardiometabolic", "Insulin resistance, type 2 diabetes, dyslipidemia", "5-fold increased metabolic syndrome risk"],
-          ["Cardiovascular", "Mitral valve prolapse & venous thromboembolism", "Screen with periodic echocardiography"]
-        ]
-      }
-    },
-    {
-      "say": "Exogenous testosterone replacement builds peak bone mass and preserves lean muscle during pubertal maturation.",
-      "tx": "Initiate androgen replacement by following established **Testosterone replacement timing** guidelines in symptomatic adolescents. Testosterone replacement therapy is initiated at age 12-14 years when serum testosterone plateaus and LH/FSH rise, building bone mineral density, lean muscle mass, and preventing metabolic syndrome.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Initiation Regimen (Age 12-14)",
-          "points": [
-            "Low-dose testosterone enanthate / cypionate",
-            "50 mg IM monthly, titrated over 2-3 years",
-            "Allows physiological virilization without rapid closure"
-          ]
-        },
-        "right": {
-          "title": "Adult Maintenance Targets",
-          "points": [
-            "Full adult replacement (200-250 mg every 2-3 weeks)",
-            "Or transdermal testosterone gels daily",
-            "Maintains normal adult male testosterone levels"
-          ]
-        }
-      }
-    },
-    {
-      "say": "Surgical sperm retrieval before complete testicular hyalinization offers biological paternity opportunities.",
-      "tx": "Preserve future fertility options through timely **Microdissection testicular sperm extraction (micro-TESE)** in late adolescence. Micro-TESE achieves viable sperm retrieval rates of 40-50% in non-mosaic Klinefelter adolescents and young adults for intracytoplasmic sperm injection (ICSI), before complete testicular sclerosis occurs. Early cryopreservation allows biological parenthood.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "adol", "label": "Late Adolescent Non-Mosaic 47,XXY Patient"},
-          {"id": "tese", "label": "Microdissection Testicular Sperm Extraction (Micro-TESE)"},
-          {"id": "sperm", "label": "Viable Sperm Retrieval Rate (40-50%)"},
-          {"id": "icsi", "label": "Cryopreservation & Intracytoplasmic Sperm Injection"}
-        ],
-        "edges": [
-          ["adol", "tese"],
-          ["tese", "sperm"],
-          ["sperm", "icsi"]
-        ]
-      }
-    },
-    {
-      "say": "Exogenous insults including ionizing radiation and cytotoxic chemotherapy cause irreversible gonadal failure.",
-      "tx": "Evaluate non-genetic secondary insults by investigating **Acquired hypergonadotropic hypogonadism causes** in pediatric oncology survivors. Secondary testicular failure can result from bilateral testicular torsion, mumps orchitis, radiation (> 20 Gy to testes destroys Sertoli and Leydig cells), or alkylating chemotherapy (cyclophosphamide > 200-300 mg/kg).",
-      "vis": {
-        "kind": "table",
-        "title": "Acquired Etiologies of Primary Testicular Failure",
-        "cols": ["Etiology", "Critical Damage Threshold", "Target Cell Injury"],
-        "rows": [
-          ["Testicular Radiation", "> 20 Gy total dose", "Permanent Leydig and Sertoli cell destruction"],
-          ["Alkylating Chemotherapy", "Cyclophosphamide > 200-300 mg/kg", "Severe germ cell aplasia with azoospermia"],
-          ["Infectious / Vascular", "Mumps orchitis or bilateral torsion", "Ischemic necrosis of parenchymal tissue"]
-        ]
-      }
-    },
-    {
-      "say": "Transient physiological glandular enlargement regresses spontaneously in the majority of adolescent boys.",
-      "tx": "Distinguish self-limiting pubertal changes from pathology through **Persistent pubertal gynecomastia management** protocols. Physiological pubertal gynecomastia affects up to 60% of boys at Tanner stages 2-3, spontaneously regressing in 90% within 1-2 years; refractory severe cases (> 4 cm diameter) respond to tamoxifen or subcutaneous mastectomy.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "gyn", "label": "Pubertal Gynecomastia at Tanner Stages 2-3 (Up to 60%)"},
-          {"id": "spont", "label": "Reassurance: Spontaneous Regression in 90% in 1-2 Years"},
-          {"id": "refr", "label": "Severe Refractory Fibrous Tissue (> 4 cm Diameter)"},
-          {"id": "rx", "label": "Medical Therapy (Tamoxifen) or Subcutaneous Mastectomy"}
-        ],
-        "edges": [
-          ["gyn", "spont"],
-          ["gyn", "refr"],
-          ["refr", "rx"]
-        ]
-      }
+    "right": {
+     "title": "Adult Maintenance Targets",
+     "points": [
+      "Full adult replacement (200-250 mg every 2-3 weeks)",
+      "Or transdermal testosterone gels daily",
+      "Maintains normal adult male testosterone levels"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "say": "Surgical sperm retrieval before complete testicular hyalinization offers biological paternity opportunities.",
+   "tx": "Preserve future fertility options through timely **Microdissection testicular sperm extraction (micro-TESE)** in late adolescence. Micro-TESE achieves viable sperm retrieval rates of 40-50% in non-mosaic Klinefelter adolescents and young adults for intracytoplasmic sperm injection (ICSI), before complete testicular sclerosis occurs. Early cryopreservation allows biological parenthood.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "adol",
+      "label": "Late Adolescent Non-Mosaic 47,XXY Patient"
+     },
+     {
+      "id": "tese",
+      "label": "Microdissection Testicular Sperm Extraction (Micro-TESE)"
+     },
+     {
+      "id": "sperm",
+      "label": "Viable Sperm Retrieval Rate (40-50%)"
+     },
+     {
+      "id": "icsi",
+      "label": "Cryopreservation & Intracytoplasmic Sperm Injection"
+     }
+    ],
+    "edges": [
+     [
+      "adol",
+      "tese"
+     ],
+     [
+      "tese",
+      "sperm"
+     ],
+     [
+      "sperm",
+      "icsi"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Exogenous insults including ionizing radiation and cytotoxic chemotherapy cause irreversible gonadal failure.",
+   "tx": "Evaluate non-genetic secondary insults by investigating **Acquired hypergonadotropic hypogonadism causes** in pediatric oncology survivors. Secondary testicular failure can result from bilateral testicular torsion, mumps orchitis, radiation (> 20 Gy to testes destroys Sertoli and Leydig cells), or alkylating chemotherapy (cyclophosphamide > 200-300 mg/kg).",
+   "vis": {
+    "kind": "table",
+    "title": "Acquired Etiologies of Primary Testicular Failure",
+    "cols": [
+     "Etiology",
+     "Critical Damage Threshold",
+     "Target Cell Injury"
+    ],
+    "rows": [
+     [
+      "Testicular Radiation",
+      "> 20 Gy total dose",
+      "Permanent Leydig and Sertoli cell destruction"
+     ],
+     [
+      "Alkylating Chemotherapy",
+      "Cyclophosphamide > 200-300 mg/kg",
+      "Severe germ cell aplasia with azoospermia"
+     ],
+     [
+      "Infectious / Vascular",
+      "Mumps orchitis or bilateral torsion",
+      "Ischemic necrosis of parenchymal tissue"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Transient physiological glandular enlargement regresses spontaneously in the majority of adolescent boys.",
+   "tx": "Distinguish self-limiting pubertal changes from pathology through **Persistent pubertal gynecomastia management** protocols. Physiological pubertal gynecomastia affects up to 60% of boys at Tanner stages 2-3, spontaneously regressing in 90% within 1-2 years; refractory severe cases (> 4 cm diameter) respond to tamoxifen or subcutaneous mastectomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "gyn",
+      "label": "Pubertal Gynecomastia at Tanner Stages 2-3 (Up to 60%)"
+     },
+     {
+      "id": "spont",
+      "label": "Reassurance: Spontaneous Regression in 90% in 1-2 Years"
+     },
+     {
+      "id": "refr",
+      "label": "Severe Refractory Fibrous Tissue (> 4 cm Diameter)"
+     },
+     {
+      "id": "rx",
+      "label": "Medical Therapy (Tamoxifen) or Subcutaneous Mastectomy"
+     }
+    ],
+    "edges": [
+     [
+      "gyn",
+      "spont"
+     ],
+     [
+      "gyn",
+      "refr"
+     ],
+     [
+      "refr",
+      "rx"
+     ]
+    ]
+   }
+  }
+ ]
 }

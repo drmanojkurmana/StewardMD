@@ -1,270 +1,250 @@
 {
-  "id": "pen-46-xy-dsd-androgen-insensitivity",
-  "title": "46,XY Differences of Sex Development: Androgen Insensitivity, 5-ARD and Gonadectomy Timing",
-  "subject": "ss-paediatric-endocrinology",
-  "module": "Adrenal Cortex, CAH and Differences of Sex Development",
-  "v": 1,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "say": "Differences of sex development in 46,XY infants are systematically classified by embryological mechanisms.",
-      "tx": "Execute diagnostic evaluation under the **46,XY DSD diagnostic classification** framework. 46,XY DSD results from impaired testis development (SRY/SOX9 gonadal dysgenesis), impaired androgen synthesis (CYP17A1, HSD17B3), or impaired androgen action (androgen receptor or 5-alpha-reductase-2 defects). Evaluation mandates chromosomal karyotyping, extensive imaging of internal pelvic anatomy, and targeted molecular panel sequencing.",
-      "vis": {
-        "kind": "table",
-        "title": "Etiological Categories of 46,XY DSD",
-        "cols": [
-          "Category",
-          "Enzymatic / Genetic Lesion",
-          "Phenotype"
-        ],
-        "rows": [
-          [
-            "Gonadal dysgenesis",
-            "SRY, SOX9, NR5A1, WT1 mutations",
-            "Streak gonads, persistent Mullerian structures"
-          ],
-          [
-            "Androgen synthesis defects",
-            "CYP11A1, HSD3B2, CYP17A1, HSD17B3, StAR",
-            "Impaired testosterone production, ambiguous genitalia"
-          ],
-          [
-            "Androgen action defects",
-            "AR mutations (CAIS, PAIS), SRD5A2",
-            "Normal testosterone synthesis, end-organ resistance"
-          ]
-        ]
-      }
+ "id": "pen-46-xy-dsd-androgen-insensitivity",
+ "title": "46,XY Differences of Sex Development: Androgen Insensitivity, 5-ARD and Gonadectomy Timing",
+ "subject": "ss-paediatric-endocrinology",
+ "module": "Adrenal Cortex, CAH and Differences of Sex Development",
+ "v": 1,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Differences of sex development in 46,XY infants are systematically classified by embryological mechanisms.",
+   "tx": "Execute diagnostic evaluation under the **46,XY DSD diagnostic classification** framework. 46,XY DSD results from impaired testis development (SRY/SOX9 gonadal dysgenesis), impaired androgen synthesis (CYP17A1, HSD17B3), or impaired androgen action (androgen receptor or 5-alpha-reductase-2 defects). Evaluation mandates chromosomal karyotyping, extensive imaging of internal pelvic anatomy, and targeted molecular panel sequencing.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/androgen-insensitivity-syndrome-fig1.webp",
+    "alt": "Sagittal illustration of complete androgen insensitivity syndrome showing female external phenotype, shortened blind-ending vagina, absence of uterus and ovaries, and undescended testes.",
+    "caption": "Pelvic anatomy and undescended testes in complete androgen insensitivity syndrome."
+   }
+  },
+  {
+   "say": "Complete androgen insensitivity syndrome produces a phenotypic female with absent internal Müllerian structures.",
+   "tx": "Recognize the **Complete androgen insensitivity syndrome (CAIS) phenotype** in phenotypic adolescent females. CAIS is an X-linked recessive androgen receptor (AR) mutation presenting with completely normal female external genitalia, blind-ending vagina, absent uterus/fallopian tubes (due to normal Sertoli anti-Müllerian hormone AMH), and bilateral intra-abdominal testes.",
+   "vis": {
+    "kind": "table",
+    "title": "Endocrine and Anatomical Hallmarks of CAIS",
+    "cols": [
+     "Feature",
+     "Finding in CAIS",
+     "Physiological Basis"
+    ],
+    "rows": [
+     [
+      "Karyotype",
+      "46,XY",
+      "Genotypic male with SRY expression"
+     ],
+     [
+      "External phenotype",
+      "Normal female genitalia",
+      "Complete unresponsiveness to dihydrotestosterone"
+     ],
+     [
+      "Internal genitalia",
+      "Absent uterus, fallopian tubes & upper vagina",
+      "Normal Sertoli cell secretion of AMH"
+     ],
+     [
+      "Pubertal thelarche",
+      "Tanner IV-V breast development",
+      "High testosterone aromatized to estradiol"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Gonadectomy is deferred until after spontaneous puberty to permit natural estrogen production through aromatization.",
+   "tx": "Determine appropriate **Post-pubertal gonadectomy timing in CAIS** to maximize psychosexual and skeletal development. In CAIS, bilateral gonadectomy is safely deferred until late adolescence (after completion of spontaneous female puberty driven by aromatization of endogenous testicular androgens), with malignancy risk < 2-5% before age 20.",
+   "vis": {
+    "kind": "compare",
+    "title": "Gonadectomy Timing Considerations in CAIS",
+    "left": {
+     "title": "Pre-Pubertal Gonadectomy",
+     "points": [
+      "Completely eliminates childhood neoplasia risk",
+      "Requires artificial exogenous pubertal induction with estrogen",
+      "Often results in sub-optimal spontaneous breast contour"
+     ]
     },
-    {
-      "say": "Complete androgen insensitivity syndrome produces a phenotypic female with absent internal Müllerian structures.",
-      "tx": "Recognize the **Complete androgen insensitivity syndrome (CAIS) phenotype** in phenotypic adolescent females. CAIS is an X-linked recessive androgen receptor (AR) mutation presenting with completely normal female external genitalia, blind-ending vagina, absent uterus/fallopian tubes (due to normal Sertoli anti-Müllerian hormone AMH), and bilateral intra-abdominal testes.",
-      "vis": {
-        "kind": "table",
-        "title": "Endocrine and Anatomical Hallmarks of CAIS",
-        "cols": [
-          "Feature",
-          "Finding in CAIS",
-          "Physiological Basis"
-        ],
-        "rows": [
-          [
-            "Karyotype",
-            "46,XY",
-            "Genotypic male with SRY expression"
-          ],
-          [
-            "External phenotype",
-            "Normal female genitalia",
-            "Complete unresponsiveness to dihydrotestosterone"
-          ],
-          [
-            "Internal genitalia",
-            "Absent uterus, fallopian tubes & upper vagina",
-            "Normal Sertoli cell secretion of AMH"
-          ],
-          [
-            "Pubertal thelarche",
-            "Tanner IV-V breast development",
-            "High testosterone aromatized to estradiol"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Gonadectomy is deferred until after spontaneous puberty to permit natural estrogen production through aromatization.",
-      "tx": "Determine appropriate **Post-pubertal gonadectomy timing in CAIS** to maximize psychosexual and skeletal development. In CAIS, bilateral gonadectomy is safely deferred until late adolescence (after completion of spontaneous female puberty driven by aromatization of endogenous testicular androgens), with malignancy risk < 2-5% before age 20.",
-      "vis": {
-        "kind": "compare",
-        "title": "Gonadectomy Timing Considerations in CAIS",
-        "left": {
-          "title": "Pre-Pubertal Gonadectomy",
-          "points": [
-            "Completely eliminates childhood neoplasia risk",
-            "Requires artificial exogenous pubertal induction with estrogen",
-            "Often results in sub-optimal spontaneous breast contour"
-          ]
-        },
-        "right": {
-          "title": "Post-Pubertal Gonadectomy (Preferred)",
-          "points": [
-            "Permits natural spontaneous thelarche via endogenous aromatization",
-            "Malignancy risk before age 20 remains exceptionally low (< 2-5%)",
-            "Requires bilateral gonadectomy after adult height attainment"
-          ]
-        }
-      }
-    },
-    {
-      "say": "Partial androgen insensitivity presents with ambiguous genitalia and shows variable responsiveness to testosterone.",
-      "tx": "Evaluate the clinical spectrum of **Partial androgen insensitivity syndrome (PAIS)** across infancy and puberty. PAIS exhibits partial AR responsiveness, presenting with ambiguous genitalia (micropenis, bifid scrotum, perineoscrotal hypospadias) and gynecomastia at puberty; response to high-dose testosterone cypionate therapy is variable.",
-      "vis": {
-        "kind": "flow",
-        "title": "Diagnostic and Therapeutic Assessment in PAIS",
-        "nodes": [
-          {
-            "id": "p1",
-            "label": "46,XY Infant with Ambiguous Genitalia"
-          },
-          {
-            "id": "p2",
-            "label": "Confirmation of Hypomorphic AR Mutation"
-          },
-          {
-            "id": "p3",
-            "label": "Trial of High-Dose Testosterone Cypionate"
-          },
-          {
-            "id": "p4",
-            "label": "Evaluate Phallic Growth & Surgical Feasibility"
-          }
-        ],
-        "edges": [
-          [
-            "p1",
-            "p2",
-            "Karyotype and molecular sequencing"
-          ],
-          [
-            "p2",
-            "p3",
-            "Test androgen receptor responsiveness"
-          ],
-          [
-            "p3",
-            "p4",
-            "Guides multidisciplinary sex assignment"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Deficiency of 5-alpha-reductase type 2 causes striking virilization at puberty due to the surge of testosterone.",
-      "tx": "Recognize the striking evolution of **5-alpha-reductase type 2 deficiency (SRD5A2)** from infancy to adolescence. Autosomal recessive SRD5A2 mutations impair dihydrotestosterone (DHT) synthesis, causing ambiguous genitalia at birth but dramatic virilization at puberty (phallic growth, muscle mass, voice deepening) due to testosterone surge. Longitudinal management requires meticulous follow-up to support psychosexual adjustment and optimize male phallic reconstruction where feasible.",
-      "vis": {
-        "kind": "table",
-        "title": "SRD5A2 Evolution: Birth vs Puberty",
-        "cols": [
-          "Developmental Phase",
-          "Circulating Androgens",
-          "Anatomical Phenotype"
-        ],
-        "rows": [
-          [
-            "At Birth",
-            "Low DHT in target tissues",
-            "Bifid scrotum, pseudovaginal perineoscrotal hypospadias"
-          ],
-          [
-            "At Puberty",
-            "Surge in testicular testosterone secretion",
-            "Marked phallic enlargement, testicular descent, deepening voice"
-          ],
-          [
-            "Prostate / Facial Hair",
-            "Severely deficient DHT action lifelong",
-            "Absent prostate tissue, minimal facial and body hair"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "An abnormally high ratio of testosterone to dihydrotestosterone after hCG stimulation confirms the diagnosis.",
-      "tx": "Measure the **Testosterone-to-DHT ratio diagnostic cutoff** following endocrine stimulation. Human chorionic gonadotropin (hCG) stimulation testing yields an abnormally elevated serum testosterone-to-DHT ratio (> 20-30:1) in 5-alpha-reductase deficiency compared to normal (< 10:1), distinguishing SRD5A2 deficiency from partial androgen insensitivity. Meticulous evaluation prevents misdiagnosis and directs appropriate surgical timing.",
-      "vis": {
-        "kind": "compare",
-        "title": "Post-hCG Biochemical Interpretation",
-        "left": {
-          "title": "5-Alpha-Reductase Deficiency",
-          "points": [
-            "Marked rise in serum testosterone post-hCG",
-            "Blunted / flat serum dihydrotestosterone response",
-            "Elevated testosterone-to-DHT ratio > 20-30:1"
-          ]
-        },
-        "right": {
-          "title": "Partial Androgen Insensitivity (PAIS)",
-          "points": [
-            "Parallel rise in both testosterone and DHT",
-            "Normal testosterone-to-DHT ratio (< 10:1)",
-            "Impaired end-organ AR responsiveness despite high DHT"
-          ]
-        }
-      }
-    },
-    {
-      "say": "Persistent Müllerian duct syndrome occurs in phenotypically normal males found to have uterine structures.",
-      "tx": "Identify the anatomical findings of **Persistent Müllerian duct syndrome (PMDS)** during pediatric groin surgery. PMDS is caused by mutations in AMH or AMHR2, presenting in phenotypically normal 46,XY males who are found to have uterus and fallopian tubes during surgery for inguinal hernia (hernia uteri inguinalis) or cryptorchidism.",
-      "vis": {
-        "kind": "flow",
-        "title": "Surgical Presentation of PMDS",
-        "nodes": [
-          {
-            "id": "m1",
-            "label": "46,XY Male with Inguinal Hernia / Cryptorchidism"
-          },
-          {
-            "id": "m2",
-            "label": "Inguinal Exploration Identifies Uterus & Tubes"
-          },
-          {
-            "id": "m3",
-            "label": "Confirm AMH or AMHR2 Genetic Mutation"
-          },
-          {
-            "id": "m4",
-            "label": "Careful Orchidopexy Preserving Vas Deferens"
-          }
-        ],
-        "edges": [
-          [
-            "m1",
-            "m2",
-            "Hernia uteri inguinalis finding"
-          ],
-          [
-            "m2",
-            "m3",
-            "Molecular genetics verification"
-          ],
-          [
-            "m3",
-            "m4",
-            "Avoid damage to vas deferens embedded in uterine wall"
-          ]
-        ]
-      }
-    },
-    {
-      "say": "Dysgenetic intra-abdominal gonads carry high risk of malignant degeneration, requiring early surgical removal.",
-      "tx": "Establish surgical vigilance regarding the **Malignancy risk in dysgenetic gonads** in differences of sex development. In 46,XY partial gonadal dysgenesis with intra-abdominal gonads, the risk of gonadoblastoma and seminoma exceeds 30-50%, mandating early prophylactic laparoscopic gonadectomy upon diagnosis, in contrast to the lower risk in CAIS.",
-      "vis": {
-        "kind": "table",
-        "title": "Neoplastic Risk Stratification in 46,XY DSD",
-        "cols": [
-          "DSD Condition",
-          "Gonadal Neoplasia Risk",
-          "Gonadectomy Protocol"
-        ],
-        "rows": [
-          [
-            "Partial Gonadal Dysgenesis",
-            "High (> 30-50%)",
-            "Early prophylactic bilateral gonadectomy at diagnosis"
-          ],
-          [
-            "Complete Gonadal Dysgenesis (Swyer)",
-            "High (30%)",
-            "Immediate laparoscopic bilateral gonadectomy"
-          ],
-          [
-            "Complete Androgen Insensitivity (CAIS)",
-            "Low (< 2-5% before age 20)",
-            "Deferred until completion of spontaneous puberty"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Post-Pubertal Gonadectomy (Preferred)",
+     "points": [
+      "Permits natural spontaneous thelarche via endogenous aromatization",
+      "Malignancy risk before age 20 remains exceptionally low (< 2-5%)",
+      "Requires bilateral gonadectomy after adult height attainment"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "say": "Partial androgen insensitivity presents with ambiguous genitalia and shows variable responsiveness to testosterone.",
+   "tx": "Evaluate the clinical spectrum of **Partial androgen insensitivity syndrome (PAIS)** across infancy and puberty. PAIS exhibits partial AR responsiveness, presenting with ambiguous genitalia (micropenis, bifid scrotum, perineoscrotal hypospadias) and gynecomastia at puberty; response to high-dose testosterone cypionate therapy is variable.",
+   "vis": {
+    "kind": "flow",
+    "title": "Diagnostic and Therapeutic Assessment in PAIS",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "46,XY Infant with Ambiguous Genitalia"
+     },
+     {
+      "id": "p2",
+      "label": "Confirmation of Hypomorphic AR Mutation"
+     },
+     {
+      "id": "p3",
+      "label": "Trial of High-Dose Testosterone Cypionate"
+     },
+     {
+      "id": "p4",
+      "label": "Evaluate Phallic Growth & Surgical Feasibility"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2",
+      "Karyotype and molecular sequencing"
+     ],
+     [
+      "p2",
+      "p3",
+      "Test androgen receptor responsiveness"
+     ],
+     [
+      "p3",
+      "p4",
+      "Guides multidisciplinary sex assignment"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Deficiency of 5-alpha-reductase type 2 causes striking virilization at puberty due to the surge of testosterone.",
+   "tx": "Recognize the striking evolution of **5-alpha-reductase type 2 deficiency (SRD5A2)** from infancy to adolescence. Autosomal recessive SRD5A2 mutations impair dihydrotestosterone (DHT) synthesis, causing ambiguous genitalia at birth but dramatic virilization at puberty (phallic growth, muscle mass, voice deepening) due to testosterone surge. Longitudinal management requires meticulous follow-up to support psychosexual adjustment and optimize male phallic reconstruction where feasible.",
+   "vis": {
+    "kind": "table",
+    "title": "SRD5A2 Evolution: Birth vs Puberty",
+    "cols": [
+     "Developmental Phase",
+     "Circulating Androgens",
+     "Anatomical Phenotype"
+    ],
+    "rows": [
+     [
+      "At Birth",
+      "Low DHT in target tissues",
+      "Bifid scrotum, pseudovaginal perineoscrotal hypospadias"
+     ],
+     [
+      "At Puberty",
+      "Surge in testicular testosterone secretion",
+      "Marked phallic enlargement, testicular descent, deepening voice"
+     ],
+     [
+      "Prostate / Facial Hair",
+      "Severely deficient DHT action lifelong",
+      "Absent prostate tissue, minimal facial and body hair"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "An abnormally high ratio of testosterone to dihydrotestosterone after hCG stimulation confirms the diagnosis.",
+   "tx": "Measure the **Testosterone-to-DHT ratio diagnostic cutoff** following endocrine stimulation. Human chorionic gonadotropin (hCG) stimulation testing yields an abnormally elevated serum testosterone-to-DHT ratio (> 20-30:1) in 5-alpha-reductase deficiency compared to normal (< 10:1), distinguishing SRD5A2 deficiency from partial androgen insensitivity. Meticulous evaluation prevents misdiagnosis and directs appropriate surgical timing.",
+   "vis": {
+    "kind": "compare",
+    "title": "Post-hCG Biochemical Interpretation",
+    "left": {
+     "title": "5-Alpha-Reductase Deficiency",
+     "points": [
+      "Marked rise in serum testosterone post-hCG",
+      "Blunted / flat serum dihydrotestosterone response",
+      "Elevated testosterone-to-DHT ratio > 20-30:1"
+     ]
+    },
+    "right": {
+     "title": "Partial Androgen Insensitivity (PAIS)",
+     "points": [
+      "Parallel rise in both testosterone and DHT",
+      "Normal testosterone-to-DHT ratio (< 10:1)",
+      "Impaired end-organ AR responsiveness despite high DHT"
+     ]
+    }
+   }
+  },
+  {
+   "say": "Persistent Müllerian duct syndrome occurs in phenotypically normal males found to have uterine structures.",
+   "tx": "Identify the anatomical findings of **Persistent Müllerian duct syndrome (PMDS)** during pediatric groin surgery. PMDS is caused by mutations in AMH or AMHR2, presenting in phenotypically normal 46,XY males who are found to have uterus and fallopian tubes during surgery for inguinal hernia (hernia uteri inguinalis) or cryptorchidism.",
+   "vis": {
+    "kind": "flow",
+    "title": "Surgical Presentation of PMDS",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "46,XY Male with Inguinal Hernia / Cryptorchidism"
+     },
+     {
+      "id": "m2",
+      "label": "Inguinal Exploration Identifies Uterus & Tubes"
+     },
+     {
+      "id": "m3",
+      "label": "Confirm AMH or AMHR2 Genetic Mutation"
+     },
+     {
+      "id": "m4",
+      "label": "Careful Orchidopexy Preserving Vas Deferens"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2",
+      "Hernia uteri inguinalis finding"
+     ],
+     [
+      "m2",
+      "m3",
+      "Molecular genetics verification"
+     ],
+     [
+      "m3",
+      "m4",
+      "Avoid damage to vas deferens embedded in uterine wall"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Dysgenetic intra-abdominal gonads carry high risk of malignant degeneration, requiring early surgical removal.",
+   "tx": "Establish surgical vigilance regarding the **Malignancy risk in dysgenetic gonads** in differences of sex development. In 46,XY partial gonadal dysgenesis with intra-abdominal gonads, the risk of gonadoblastoma and seminoma exceeds 30-50%, mandating early prophylactic laparoscopic gonadectomy upon diagnosis, in contrast to the lower risk in CAIS.",
+   "vis": {
+    "kind": "table",
+    "title": "Neoplastic Risk Stratification in 46,XY DSD",
+    "cols": [
+     "DSD Condition",
+     "Gonadal Neoplasia Risk",
+     "Gonadectomy Protocol"
+    ],
+    "rows": [
+     [
+      "Partial Gonadal Dysgenesis",
+      "High (> 30-50%)",
+      "Early prophylactic bilateral gonadectomy at diagnosis"
+     ],
+     [
+      "Complete Gonadal Dysgenesis (Swyer)",
+      "High (30%)",
+      "Immediate laparoscopic bilateral gonadectomy"
+     ],
+     [
+      "Complete Androgen Insensitivity (CAIS)",
+      "Low (< 2-5% before age 20)",
+      "Deferred until completion of spontaneous puberty"
+     ]
+    ]
+   }
+  }
+ ]
 }

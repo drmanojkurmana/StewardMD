@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "module": "med-valvular",
+ "subject": "medicine",
+ "title": "Graham Steell murmur, TAVI and prosthetic heart valves",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Severe longstanding pulmonary arterial hypertension can cause secondary functional pulmonary regurgitation. The resulting high-pitched, early diastolic decrescendo murmur heard along the left sternal border is termed the **Graham Steell murmur**. Dilation of the pulmonary valve ring secondary to severe pulmonary hypertension, most commonly caused by severe rheumatic mitral stenosis, allows diastolic reflux into the right ventricle.",
+   "say": "Severe pulmonary hypertension can induce secondary pulmonary valve regurgitation. The resulting early diastolic decrescendo murmur along the left sternal border is called the Graham Steell murmur. High pulmonary pressures dilate the valve ring, causing regurgitation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Graham Steell murmur",
+     "points": [
+      "High-pitched early diastolic decrescendo",
+      "Heard at left 2nd to 4th intercostal spaces",
+      "Secondary to severe pulmonary hypertension",
+      "Associated with loud P2 and RV heave"
+     ]
+    },
+    "right": {
+     "title": "Aortic regurgitation murmur",
+     "points": [
+      "High-pitched early diastolic decrescendo",
+      "Heard at left sternal border or right 2nd ICS",
+      "Primary aortic valve or root disease",
+      "Associated with wide pulse pressure signs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Catheter-based replacement of the diseased aortic valve has revolutionized structural cardiology. Originally developed for inoperable elderly patients, **transcatheter aortic valve implantation** has expanded across high, intermediate, and selected low-risk surgical candidates. Delivered percutaneously via the transfemoral artery, a balloon-expandable or self-expanding bioprosthesis is deployed within the calcified native valve without requiring sternotomy or cardiopulmonary bypass.",
+   "say": "Transcatheter aortic valve implantation has transformed the management of severe aortic stenosis. Delivered through the femoral artery, a balloon expandable or self expanding valve is deployed inside the calcified native leaflets without sternotomy or heart-lung bypass.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/med-clinical-cardiology-gen1.webp",
+    "alt": "Diagram showing transcatheter aortic valve deployment within calcified native valve.",
+    "caption": "Transcatheter aortic valve implantation (TAVI) deployment mechanism. [Credit: StewardMD]",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Clinical decision-making between surgical replacement and catheter intervention requires multidisciplinary heart team consensus. In patients aged 75 years or older, or those with significant comorbidities, **transfemoral TAVI** is preferred due to lower 30-day mortality, shorter hospital stay, and faster functional recovery. Conversely, surgical aortic valve replacement remains the standard of care in patients younger than 65 years.",
+   "say": "Deciding between surgery and catheter valve implantation requires a multidisciplinary heart team. For patients aged seventy-five or older, transfemoral TAVI is preferred due to lower procedural mortality and rapid recovery. Surgery remains the preferred choice in patients younger than sixty-five.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient characteristic",
+     "Preferred intervention",
+     "Key clinical rationale"
+    ],
+    "rows": [
+     [
+      "Age >= 75 years or high surgical risk",
+      "Transfemoral TAVI",
+      "Lower 30-day mortality, faster recovery"
+     ],
+     [
+      "Age < 65 years or low surgical risk",
+      "Surgical AVR (SAVR)",
+      "Established 20-year durability, lower pacemaker rate"
+     ],
+     [
+      "Bicuspid aortic valve anatomy",
+      "Surgical AVR preferred",
+      "Asymmetric calcification increases paravalvular leak"
+     ],
+     [
+      "Small transfemoral vascular access",
+      "Alternative TAVI access or SAVR",
+      "Vascular complications with small iliofemoral arteries"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When surgical valve replacement is undertaken, selecting between a mechanical prosthesis and a tissue bioprosthesis is critical. A modern **mechanical valve**, such as a bileaflet St. Jude medical prosthesis, offers outstanding lifelong structural durability without risk of degeneration. However, blood contact with artificial pyrolytic carbon surfaces requires permanent lifelong anticoagulation with warfarin to prevent catastrophic valve thrombosis.",
+   "say": "Selecting between mechanical and tissue valves represents a crucial clinical decision. Modern mechanical valves offer lifelong durability and never degenerate structurally. However, artificial pyrolytic carbon surfaces demand permanent warfarin therapy to prevent fatal valve thrombosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mechanical prosthesis",
+     "points": [
+      "Lifelong structural durability",
+      "Mandatory lifelong warfarin anticoagulation",
+      "Target INR 2.5 (aortic) or 3.0 (mitral)",
+      "Preferred in patients under 50-60 years"
+     ]
+    },
+    "right": {
+     "title": "Bioprosthetic valve",
+     "points": [
+      "Bovine pericardial or porcine tissue",
+      "No long-term anticoagulation required",
+      "Undergoes structural degradation in 10-15 years",
+      "Preferred in patients over 65 years"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In patients receiving mechanical prosthetic valves, target intensity of anticoagulation depends on anatomical position and patient risk factors. Mechanical aortic valves require an **international normalized ratio** target of 2.5 (range 2.0 to 3.0), whereas mechanical mitral valves require a higher target of 3.0 (range 2.5 to 3.5) due to lower velocity flow. Direct oral anticoagulants are strictly contraindicated in all mechanical heart valves.",
+   "say": "Target anticoagulation intensity depends on the anatomical position of the mechanical valve. An aortic prosthesis requires an INR target of two point five, whereas a mitral valve requires three point zero due to slower flow. Direct oral anticoagulants are strictly contraindicated.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Prosthetic valve position",
+     "Thromboembolic risk",
+     "Target INR (range)",
+     "Anticoagulant choice"
+    ],
+    "rows": [
+     [
+      "Mechanical aortic valve",
+      "Standard risk",
+      "2.5 (2.0 to 3.0)",
+      "Warfarin only (DOACs contraindicated)"
+     ],
+     [
+      "Mechanical aortic + risk factors",
+      "High risk (AF, LV dysfunction)",
+      "3.0 (2.5 to 3.5)",
+      "Warfarin only"
+     ],
+     [
+      "Mechanical mitral valve",
+      "High risk (low velocity flow)",
+      "3.0 (2.5 to 3.5)",
+      "Warfarin only"
+     ],
+     [
+      "Bioprosthetic valve (first 3 mo)",
+      "Early endothelialisation",
+      "2.5 (or aspirin alone)",
+      "Warfarin or Aspirin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute onset of dyspnoea or a muffled prosthetic click in a patient with a mechanical valve heralds life-threatening **prosthetic valve thrombosis**. Inadequate anticoagulation leads to thrombus formation that restricts leaflet motion. Transoesophageal echocardiography and fluoroscopy demonstrate leaflet immobilization and elevated transvalvular gradients. Emergency management requires intravenous unfractionated heparin and either urgent surgical re-replacement or low-dose slow-infusion fibrinolytic therapy.",
+   "say": "Sudden breathlessness or loss of a mechanical click warns of prosthetic valve thrombosis. Subtherapeutic anticoagulation causes clot to obstruct leaflet motion. Transoesophageal ultrasound confirms leaflet restriction. Emergency treatment requires intravenous heparin and urgent surgery or fibrinolysis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sub",
+      "label": "Subtherapeutic INR in mechanical valve"
+     },
+     {
+      "id": "clot",
+      "label": "Thrombus obstructs leaflet excursion"
+     },
+     {
+      "id": "muffled",
+      "label": "Muffled click and pulmonary oedema"
+     },
+     {
+      "id": "tee",
+      "label": "Urgent TEE and fluoroscopy"
+     },
+     {
+      "id": "tx",
+      "label": "Slow-infusion tPA or emergency redo surgery"
+     }
+    ],
+    "edges": [
+     [
+      "sub",
+      "clot"
+     ],
+     [
+      "clot",
+      "muffled"
+     ],
+     [
+      "muffled",
+      "tee"
+     ],
+     [
+      "tee",
+      "tx"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "All patients with prosthetic heart valves or repaired valves using prosthetic rings require antibiotic prophylaxis against **infective endocarditis**. High-risk dental procedures involving gingival manipulation or mucosal perforation require 2 g of oral amoxicillin administered 30 to 60 minutes prior to the procedure. Patients allergic to penicillin should receive 600 mg of oral clindamycin, 500 mg of azithromycin, or 500 mg of cephalexin.",
+   "say": "Patients with prosthetic heart valves require antibiotic prophylaxis against infective endocarditis. Dental procedures involving gingival manipulation require two grams of oral amoxicillin one hour before the appointment. Penicillin allergic patients receive clindamycin or azithromycin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient setting",
+     "Antibiotic agent",
+     "Dosing and timing"
+    ],
+    "rows": [
+     [
+      "Standard oral prophylaxis",
+      "Amoxicillin",
+      "2 g orally 30 to 60 minutes pre-procedure"
+     ],
+     [
+      "Unable to take oral meds",
+      "Ampicillin or Cefazolin",
+      "2 g IM or IV 30 to 60 minutes pre-procedure"
+     ],
+     [
+      "Penicillin allergy (oral)",
+      "Azithromycin, Clarithromycin, Cephalexin",
+      "500 mg orally 30 to 60 minutes pre-procedure"
+     ],
+     [
+      "Penicillin allergy (severe)",
+      "Clindamycin",
+      "600 mg orally or IV pre-procedure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lifelong surveillance is mandatory for every patient following valve intervention. Perform baseline transthoracic echocardiography at 6 to 12 weeks post-procedure to document new hemodynamic baseline gradients, followed by annual clinical evaluation. Any new murmur, unexplained fever, or decline in exercise tolerance warrants immediate blood cultures and **echocardiography** to exclude prosthetic valve endocarditis or paravalvular regurgitation.",
+   "say": "Lifelong surveillance is required after any valve intervention. Obtain a baseline echocardiogram at six to twelve weeks to establish baseline gradients, with annual follow-up. Any new murmur, unexplained fever or breathlessness warrants prompt echocardiography and blood cultures.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-murmur-as-ar.svg",
+    "alt": "Diagram showing prosthetic valve Doppler gradients and echocardiographic surveillance.",
+    "caption": "Postoperative prosthetic valve surveillance and transvalvular gradient assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

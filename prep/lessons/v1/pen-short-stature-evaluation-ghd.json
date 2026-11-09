@@ -1,153 +1,215 @@
 {
-  "id": "pen-short-stature-evaluation-ghd",
-  "title": "Short Stature and Growth Failure: GHD Auxology, Provocative Tests and Pituitary MRI",
-  "subject": "ss-paediatric-endocrinology",
-  "module": "Thyroid Disorders, Short Stature and Skeletal Dysplasias",
-  "v": 1,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "say": "Auxological assessment defines short stature and abnormal velocity thresholds across pediatric growth curves.",
-      "tx": "Evaluate linear auxology by comparing **Short stature statistical definitions** against established population reference charts. Short stature is defined as height > 2 standard deviations below the mean for age and sex (height SDS < -2.0, or < 3rd percentile); growth failure is annual height velocity < 25th percentile for age over 6-12 months.",
-      "vis": {
-        "kind": "table",
-        "title": "Auxological Criteria for Growth Evaluation",
-        "cols": ["Parameter", "Statistical Cutoff", "Clinical Interpretation"],
-        "rows": [
-          ["Height SDS", "< -2.0 (> 2 SD below mean)", "Meets definition of short stature (< 3rd percentile)"],
-          ["Height Velocity", "< 25th percentile over 6-12 months", "Pathological deceleration indicating growth failure"],
-          ["Severe Stature", "< -3.0 SDS", "Mandates urgent endocrine investigation"]
-        ]
-      }
+ "id": "pen-short-stature-evaluation-ghd",
+ "title": "Short Stature and Growth Failure: GHD Auxology, Provocative Tests and Pituitary MRI",
+ "subject": "ss-paediatric-endocrinology",
+ "module": "Thyroid Disorders, Short Stature and Skeletal Dysplasias",
+ "v": 1,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "say": "Auxological assessment defines short stature and abnormal velocity thresholds across pediatric growth curves.",
+   "tx": "Evaluate linear auxology by comparing **Short stature statistical definitions** against established population reference charts. Short stature is defined as height > 2 standard deviations below the mean for age and sex (height SDS < -2.0, or < 3rd percentile); growth failure is annual height velocity < 25th percentile for age over 6-12 months.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-anthro-length-height-mph.webp",
+    "alt": "Infantometer board and stadiometer setup for accurate recumbent length and standing height auxological measurements.",
+    "caption": "Standardised equipment for auxological evaluation of length and standing height in children."
+   }
+  },
+  {
+   "say": "Target height calculation identifies whether a child is growing within their genetic family expectation.",
+   "tx": "Calculate genetic growth expectations using **Mid-parental height target calculation** formulas adjusted for sex. Target height calculation: For boys = [Father height + Mother height + 13 cm] / 2; For girls = [Father height - 13 cm + Mother height] / 2; target range is ± 8.5 cm (± 2 SD).",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Target Height for Boys",
+     "points": [
+      "[Father height + Mother height + 13 cm] / 2",
+      "Target channel range ± 8.5 cm (± 2 SD)",
+      "Identifies discordant growth patterns"
+     ]
     },
-    {
-      "say": "Target height calculation identifies whether a child is growing within their genetic family expectation.",
-      "tx": "Calculate genetic growth expectations using **Mid-parental height target calculation** formulas adjusted for sex. Target height calculation: For boys = [Father height + Mother height + 13 cm] / 2; For girls = [Father height - 13 cm + Mother height] / 2; target range is ± 8.5 cm (± 2 SD).",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Target Height for Boys",
-          "points": [
-            "[Father height + Mother height + 13 cm] / 2",
-            "Target channel range ± 8.5 cm (± 2 SD)",
-            "Identifies discordant growth patterns"
-          ]
-        },
-        "right": {
-          "title": "Target Height for Girls",
-          "points": [
-            "[Father height - 13 cm + Mother height] / 2",
-            "Target channel range ± 8.5 cm (± 2 SD)",
-            "Guides pathological workup when outside range"
-          ]
-        }
-      }
-    },
-    {
-      "say": "Stable circulating binding proteins provide dependable screening markers that overcome natural pulsatile peaks.",
-      "tx": "Screen suspected growth hormone axis deficiency using **IGF-1 and IGFBP-3 screening** assays from peripheral serum. Serum IGF-1 and IGFBP-3 reflect integrated GH secretion; levels < -2 SD for age and pubertal stage support GH deficiency or GH insensitivity, unaffected by pulsatility.",
-      "vis": {
-        "kind": "table",
-        "title": "Serum Biomarkers for Somatotropic Axis",
-        "cols": ["Biomarker", "Diagnostic Threshold", "Key Clinical Role"],
-        "rows": [
-          ["Serum IGF-1", "< -2 SD for age and pubertal stage", "Reflects integrated tissue GH bioactivity"],
-          ["Serum IGFBP-3", "< -2 SD for age and sex", "High sensitivity in children < 3 years old"],
-          ["Random GH", "Variable and uninformative", "Misleading due to pulsatile ultradian spikes"]
-        ]
-      }
-    },
-    {
-      "say": "Confirmation of deficiency requires documented subnormal peaks across two independent stimulation challenges.",
-      "tx": "Establish definitive biochemical failure by meeting **Provocative GH testing criteria** using standardized pharmacologic triggers. Definitive diagnosis of GHD requires failure to reach peak GH >= 7-10 ng/mL on two separate provocative stimulation tests (clonidine, arginine, glucagon, or insulin tolerance test).",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "scr", "label": "Auxological Failure & Subnormal IGF-1"},
-          {"id": "stim", "label": "Provocative Testing (Clonidine / Arginine / Glucagon)"},
-          {"id": "cut", "label": "Peak GH < 7-10 ng/mL on 2 Tests"},
-          {"id": "dx", "label": "Confirmed Diagnosis of Growth Hormone Deficiency"}
-        ],
-        "edges": [
-          ["scr", "stim"],
-          ["stim", "cut"],
-          ["cut", "dx"]
-        ]
-      }
-    },
-    {
-      "say": "Exogenous sex steroids must be administered before provocative testing in peri-pubertal children.",
-      "tx": "Prevent false diagnostic categorization by implementing **Sex-steroid priming before GH testing** in mature children. Pre-pubertal boys > 10 years and girls > 9 years with delayed bone age require sex-steroid priming (intramuscular testosterone or oral estradiol) prior to GH testing to prevent false-positive subnormal peaks.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Priming in Boys (> 10 years)",
-          "points": [
-            "Intramuscular testosterone depot given beforehand",
-            "Sensitizes somatotroph response to stimuli",
-            "Prevents false-positive GH deficiency diagnosis"
-          ]
-        },
-        "right": {
-          "title": "Priming in Girls (> 9 years)",
-          "points": [
-            "Oral estradiol given prior to testing protocol",
-            "Overcomes transient peri-pubertal physiological resistance",
-            "Restores hypothalamic-pituitary somatotroph reserve"
-          ]
-        }
-      }
-    },
-    {
-      "say": "High resolution neuroimaging reveals pathognomonic anatomic anomalies of the pituitary stalk and gland.",
-      "tx": "Delineate midline cranial structural architecture by assessing **Pituitary MRI findings in congenital GHD** on magnetic resonance scans. Brain MRI evaluates the hypothalamic-pituitary axis; the triad of pituitary stalk interruption syndrome consists of ectopic posterior pituitary bright spot, hypoplastic/absent infundibulum, and anterior pituitary hypoplasia.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "ect", "label": "Ectopic Posterior Pituitary Bright Spot at Tuber Cinereum"},
-          {"id": "inf", "label": "Hypoplastic or Absent Infundibular Stalk"},
-          {"id": "ant", "label": "Severe Anterior Pituitary Hypoplasia in Sella"},
-          {"id": "psis", "label": "Pituitary Stalk Interruption Syndrome (PSIS)"}
-        ],
-        "edges": [
-          ["ect", "psis"],
-          ["inf", "psis"],
-          ["ant", "psis"]
-        ]
-      }
-    },
-    {
-      "say": "Daily bedtime subcutaneous injections provide physiological hormone replacement titrated to circulating biomarkers.",
-      "tx": "Restore physiologic catch-up velocity by calculating **Recombinant human growth hormone dosing** based on body mass. Somatropin is initiated at 0.16-0.24 mg/kg/week (divided into daily subcutaneous bedtime injections), monitoring linear growth and titrating dose to maintain serum IGF-1 between 0 and +2 SDS.",
-      "vis": {
-        "kind": "table",
-        "title": "Somatropin Therapy and Dose Titration",
-        "cols": ["Parameter", "Starting Target", "Clinical Strategy"],
-        "rows": [
-          ["Initial Dose", "0.16-0.24 mg/kg/week", "Divided into 6-7 daily bedtime subcutaneous injections"],
-          ["Monitoring Target", "Serum IGF-1 between 0 and +2 SDS", "Titrate dose every 3-6 months to avoid overdose"],
-          ["Growth Response", "Height velocity acceleration", "Maximal catch-up growth seen in year 1 of therapy"]
-        ]
-      }
-    },
-    {
-      "say": "Routine clinical surveillance detects orthopedic and intracranial adverse effects during rapid linear growth acceleration.",
-      "tx": "Safeguard musculoskeletal and metabolic health through meticulous **Safety monitoring during GH therapy** throughout childhood. Children on GH must be monitored for slipped capital femoral epiphysis (SCFE, limping or knee pain), idiopathic intracranial hypertension (pseudotumor cerebri, headache/vomiting), scoliosis progression, and hyperglycemia.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {"id": "gh", "label": "Somatropin Administration"},
-          {"id": "ortho", "label": "Orthopedic Surveillance (SCFE / Scoliosis)"},
-          {"id": "cns", "label": "Intracranial Pressure (Pseudotumor Cerebri)"},
-          {"id": "met", "label": "Metabolic Monitoring (Hyperglycemia & HbA1c)"}
-        ],
-        "edges": [
-          ["gh", "ortho"],
-          ["gh", "cns"],
-          ["gh", "met"]
-        ]
-      }
+    "right": {
+     "title": "Target Height for Girls",
+     "points": [
+      "[Father height - 13 cm + Mother height] / 2",
+      "Target channel range ± 8.5 cm (± 2 SD)",
+      "Guides pathological workup when outside range"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "say": "Stable circulating binding proteins provide dependable screening markers that overcome natural pulsatile peaks.",
+   "tx": "Screen suspected growth hormone axis deficiency using **IGF-1 and IGFBP-3 screening** assays from peripheral serum. Serum IGF-1 and IGFBP-3 reflect integrated GH secretion; levels < -2 SD for age and pubertal stage support GH deficiency or GH insensitivity, unaffected by pulsatility.",
+   "vis": {
+    "kind": "table",
+    "title": "Serum Biomarkers for Somatotropic Axis",
+    "cols": [
+     "Biomarker",
+     "Diagnostic Threshold",
+     "Key Clinical Role"
+    ],
+    "rows": [
+     [
+      "Serum IGF-1",
+      "< -2 SD for age and pubertal stage",
+      "Reflects integrated tissue GH bioactivity"
+     ],
+     [
+      "Serum IGFBP-3",
+      "< -2 SD for age and sex",
+      "High sensitivity in children < 3 years old"
+     ],
+     [
+      "Random GH",
+      "Variable and uninformative",
+      "Misleading due to pulsatile ultradian spikes"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Confirmation of deficiency requires documented subnormal peaks across two independent stimulation challenges.",
+   "tx": "Establish definitive biochemical failure by meeting **Provocative GH testing criteria** using standardized pharmacologic triggers. Definitive diagnosis of GHD requires failure to reach peak GH >= 7-10 ng/mL on two separate provocative stimulation tests (clonidine, arginine, glucagon, or insulin tolerance test).",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/isolated-growth-hormone-deficiency-fig1.webp",
+    "alt": "Clinical features, decelerated growth curve, and delayed carpal bone age radiograph in isolated growth hormone deficiency.",
+    "caption": "Growth failure, delayed bone age, and auxological pattern in isolated growth hormone deficiency."
+   }
+  },
+  {
+   "say": "Exogenous sex steroids must be administered before provocative testing in peri-pubertal children.",
+   "tx": "Prevent false diagnostic categorization by implementing **Sex-steroid priming before GH testing** in mature children. Pre-pubertal boys > 10 years and girls > 9 years with delayed bone age require sex-steroid priming (intramuscular testosterone or oral estradiol) prior to GH testing to prevent false-positive subnormal peaks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Priming in Boys (> 10 years)",
+     "points": [
+      "Intramuscular testosterone depot given beforehand",
+      "Sensitizes somatotroph response to stimuli",
+      "Prevents false-positive GH deficiency diagnosis"
+     ]
+    },
+    "right": {
+     "title": "Priming in Girls (> 9 years)",
+     "points": [
+      "Oral estradiol given prior to testing protocol",
+      "Overcomes transient peri-pubertal physiological resistance",
+      "Restores hypothalamic-pituitary somatotroph reserve"
+     ]
+    }
+   }
+  },
+  {
+   "say": "High resolution neuroimaging reveals pathognomonic anatomic anomalies of the pituitary stalk and gland.",
+   "tx": "Delineate midline cranial structural architecture by assessing **Pituitary MRI findings in congenital GHD** on magnetic resonance scans. Brain MRI evaluates the hypothalamic-pituitary axis; the triad of pituitary stalk interruption syndrome consists of ectopic posterior pituitary bright spot, hypoplastic/absent infundibulum, and anterior pituitary hypoplasia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ect",
+      "label": "Ectopic Posterior Pituitary Bright Spot at Tuber Cinereum"
+     },
+     {
+      "id": "inf",
+      "label": "Hypoplastic or Absent Infundibular Stalk"
+     },
+     {
+      "id": "ant",
+      "label": "Severe Anterior Pituitary Hypoplasia in Sella"
+     },
+     {
+      "id": "psis",
+      "label": "Pituitary Stalk Interruption Syndrome (PSIS)"
+     }
+    ],
+    "edges": [
+     [
+      "ect",
+      "psis"
+     ],
+     [
+      "inf",
+      "psis"
+     ],
+     [
+      "ant",
+      "psis"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Daily bedtime subcutaneous injections provide physiological hormone replacement titrated to circulating biomarkers.",
+   "tx": "Restore physiologic catch-up velocity by calculating **Recombinant human growth hormone dosing** based on body mass. Somatropin is initiated at 0.16-0.24 mg/kg/week (divided into daily subcutaneous bedtime injections), monitoring linear growth and titrating dose to maintain serum IGF-1 between 0 and +2 SDS.",
+   "vis": {
+    "kind": "table",
+    "title": "Somatropin Therapy and Dose Titration",
+    "cols": [
+     "Parameter",
+     "Starting Target",
+     "Clinical Strategy"
+    ],
+    "rows": [
+     [
+      "Initial Dose",
+      "0.16-0.24 mg/kg/week",
+      "Divided into 6-7 daily bedtime subcutaneous injections"
+     ],
+     [
+      "Monitoring Target",
+      "Serum IGF-1 between 0 and +2 SDS",
+      "Titrate dose every 3-6 months to avoid overdose"
+     ],
+     [
+      "Growth Response",
+      "Height velocity acceleration",
+      "Maximal catch-up growth seen in year 1 of therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "say": "Routine clinical surveillance detects orthopedic and intracranial adverse effects during rapid linear growth acceleration.",
+   "tx": "Safeguard musculoskeletal and metabolic health through meticulous **Safety monitoring during GH therapy** throughout childhood. Children on GH must be monitored for slipped capital femoral epiphysis (SCFE, limping or knee pain), idiopathic intracranial hypertension (pseudotumor cerebri, headache/vomiting), scoliosis progression, and hyperglycemia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "gh",
+      "label": "Somatropin Administration"
+     },
+     {
+      "id": "ortho",
+      "label": "Orthopedic Surveillance (SCFE / Scoliosis)"
+     },
+     {
+      "id": "cns",
+      "label": "Intracranial Pressure (Pseudotumor Cerebri)"
+     },
+     {
+      "id": "met",
+      "label": "Metabolic Monitoring (Hyperglycemia & HbA1c)"
+     }
+    ],
+    "edges": [
+     [
+      "gh",
+      "ortho"
+     ],
+     [
+      "gh",
+      "cns"
+     ],
+     [
+      "gh",
+      "met"
+     ]
+    ]
+   }
+  }
+ ]
 }
