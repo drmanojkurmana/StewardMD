@@ -1,0 +1,227 @@
+{
+ "v": 1,
+ "module": "sur-thyroid",
+ "subject": "surgery",
+ "title": "Solitary Thyroid Nodule, Ultrasound Stratification, and Bethesda System",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A discrete palpable or sonographic swelling in an otherwise normal-feeling thyroid gland is designated a **solitary thyroid nodule**. Although four times more prevalent in females, a solitary nodule discovered in a male carries twice the statistical probability of being malignant. Other clinical red flags heralding thyroid malignancy include patient age under twenty or over seventy years, a history of neck external radiation in childhood, rapid nodular expansion, hard fixation, and vocal hoarseness.",
+   "say": "A solitary thyroid nodule is a discrete lump within an otherwise normal gland. While more common in women, nodules in men, extremes of age, or irradiated necks carry higher cancer risks.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thyroid-nodule-fig1.webp",
+    "alt": "Diagnostic algorithm flow diagram for the evaluation of a solitary thyroid nodule.",
+    "caption": "Diagnostic pathway for solitary thyroid nodules: serum TSH triage leading to ultrasound and fine-needle biopsy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The initial biochemical step in investigating any thyroid nodule is measuring serum thyroid-stimulating hormone. If serum TSH is suppressed, the patient harbors primary hyperthyroidism, prompting a radionuclide thyroid scintigraphy scan using technetium-99m or iodine-123. A nodule displaying intense tracer uptake with suppression of surrounding parenchyma represents a hyperfunctioning **toxic autonomous hot nodule**, which is virtually never malignant. Conversely, a normal or elevated TSH dictates dedicated high-resolution neck ultrasonography.",
+   "say": "Serum TSH is the first test ordered. A suppressed TSH suggests a hyperfunctioning hot nodule, which is almost always benign, whereas normal TSH mandates neck ultrasonography.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Suppressed TSH (Hyperthyroid)",
+     "points": [
+      "Indicates thyrotoxicosis or toxic adenoma",
+      "Order radionuclide thyroid scan (Tc-99m or I-123)",
+      "Hyperfunctioning hot nodule has under one percent cancer risk",
+      "Managed with antithyroid drugs, radioiodine, or lobectomy"
+     ]
+    },
+    "right": {
+     "title": "Normal or Elevated TSH",
+     "points": [
+      "Indicates euthyroid or subclinical hypothyroid state",
+      "Higher statistical probability of thyroid carcinoma",
+      "Radionuclide scintigraphy is non-contributory and omitted",
+      "Proceed directly to high-resolution cervical ultrasonography"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "High-resolution ultrasonography provides anatomical characterization and risk stratification using standardized reporting frameworks, such as the American College of Radiology TI-RADS system. High-suspicion sonographic hallmarks indicative of thyroid carcinoma include marked hypoechogenicity, a **taller-than-wide nodule geometry** in the transverse plane, irregular microlobulated or spiculated margins, fine punctate microcalcifications representing psammoma bodies, and frank extrathyroidal extension breaching the anterior thyroid capsule.",
+   "say": "Neck ultrasound evaluates nodule malignancy risk. Taller-than-wide shape, marked hypoechogenicity, irregular borders, and microcalcifications represent high-suspicion sonographic features.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sonographic Feature",
+     "Benign Characteristic",
+     "Malignant Suspicious Hallmark"
+    ],
+    "rows": [
+     [
+      "Internal Composition",
+      "Purely cystic or spongiform (honeycomb) architecture",
+      "Solid or predominantly solid hypoechoic tissue"
+     ],
+     [
+      "Echogenicity",
+      "Isoechoic or hyperechoic relative to strap muscles",
+      "Marked hypoechogenicity darker than adjacent strap muscles"
+     ],
+     [
+      "Nodule Dimensions",
+      "Wider-than-tall orientation in axial plane",
+      "Taller-than-wide geometry (anteroposterior > transverse diameter)"
+     ],
+     [
+      "Marginal Definition",
+      "Smooth, distinct borders with complete peripheral hypoechoic halo",
+      "Spiculated, jagged, microlobulated, or ill-defined borders"
+     ],
+     [
+      "Calcification Pattern",
+      "Coarse dense macrocalcifications or peripheral eggshell rim",
+      "Punctate microcalcifications (<1 mm) lacking acoustic shadowing"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ultrasound-guided fine-needle aspiration cytology serves as the definitive diagnostic tool for evaluating suspicious nodules. Cytological findings are universally classified according to the standardized **Bethesda system for reporting thyroid cytopathology**. Comprising six diagnostic tiers, each category carries an evidence-based risk of malignancy that directly dictates whether the patient requires routine clinical surveillance, molecular biomarker testing, diagnostic hemithyroidectomy, or upfront total thyroidectomy.",
+   "say": "Fine-needle aspiration cytology is categorized using the six-tier Bethesda system. Each tier predicts a specific malignancy risk that guides observation, lobectomy, or total thyroidectomy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thyroid-carcinoma-and-bethesda-classification-fig1.webp",
+    "alt": "Medical diagram illustrating the Bethesda system for reporting thyroid cytopathology and thyroid tumor variants.",
+    "caption": "Bethesda cytopathology classification: diagnostic tiers, cytological architecture, and malignancy risk stratification. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Category one in the Bethesda system is designated non-diagnostic or unsatisfactory, typically resulting from purely cystic fluid or inadequate cellularity with fewer than six clusters of ten well-preserved follicular cells. This category mandates a **repeat ultrasound-guided aspiration**. Category two represents benign disease, such as colloid adenomatous nodule or Hashimoto thyroiditis, carrying an exceptionally low malignancy risk under three percent, managed safely with periodic sonographic observation.",
+   "say": "Bethesda one is non-diagnostic and requires a repeat ultrasound-guided biopsy. Bethesda two represents benign colloid nodules with under three percent malignancy risk, managed with observation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bethesda I (Non-Diagnostic)",
+     "points": [
+      "Inadequate cellularity (<6 follicular cell clusters)",
+      "Obscured by thick blood, cystic fluid, or air drying",
+      "Carries five to ten percent true risk of cancer",
+      "Mandates repeat ultrasound-guided needle aspiration"
+     ]
+    },
+    "right": {
+     "title": "Bethesda II (Benign)",
+     "points": [
+      "Abundant thin colloid with sheets of flat follicular cells",
+      "Typical of colloid goitre or chronic thyroiditis",
+      "True risk of malignancy is zero to three percent",
+      "Managed conservatively with serial clinical surveillance"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Category three comprises atypia of undetermined significance or follicular lesion of undetermined significance, presenting with subtle architectural or nuclear atypia that falls short of malignancy. It carries an estimated malignancy risk of ten to thirty percent. Recommended management includes repeat fine-needle aspiration or **molecular biomarker testing** using next-generation sequencing panels (such as Afirma or ThyroSeq) to identify mutations in BRAF, RAS, or RET/PTC rearrangements, avoiding unnecessary diagnostic surgery.",
+   "say": "Bethesda three carries a ten to thirty percent cancer risk. It is managed with repeat aspiration or molecular testing for genetic mutations to rule out cancer without surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "b3",
+      "label": "Bethesda III Cytology (AUS / FLUS)"
+     },
+     {
+      "id": "repeat",
+      "label": "Repeat FNA Cytology or Molecular Panel"
+     },
+     {
+      "id": "neg",
+      "label": "Mutation Negative / Benign Expression"
+     },
+     {
+      "id": "pos",
+      "label": "BRAF V600E or High-Risk RET / RAS Mutation"
+     },
+     {
+      "id": "surgery",
+      "label": "Proceed to Diagnostic Lobectomy"
+     }
+    ],
+    "edges": [
+     [
+      "b3",
+      "repeat"
+     ],
+     [
+      "repeat",
+      "neg"
+     ],
+     [
+      "repeat",
+      "pos"
+     ],
+     [
+      "pos",
+      "surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Category four is designated follicular neoplasm or suspicious for follicular neoplasm, characterized by a hypercellular aspirate of uniform follicular cells arranged in microfollicles with crowding and absent colloid. Because fine-needle aspiration evaluates cellular cytology rather than tissue architecture, it cannot assess capsular or vascular invasion. Consequently, establishing whether the lesion is a benign follicular adenoma or a malignant follicular carcinoma mandates a **diagnostic thyroid lobectomy** with isthmusectomy.",
+   "say": "Bethesda four represents follicular neoplasms. Because needle cytology cannot demonstrate capsular or vascular invasion, a diagnostic lobectomy is required to establish the histology.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fine-Needle Cytology Limitation",
+     "points": [
+      "Captures individual cells and tiny microfollicular clusters",
+      "Cannot visualize the intact outer fibrous tumor capsule",
+      "Cannot assess penetration into capsular blood vessels",
+      "Definitive histological diagnosis is completely impossible on FNA"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Surgical Lobectomy",
+     "points": [
+      "Excises entire affected thyroid lobe and central isthmus",
+      "Allows complete serial paraffin sectioning of tumor capsule",
+      "Histology confirms capsular or vascular invasion in carcinoma",
+      "Avoids unnecessary completion thyroidectomy if adenoma"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Bethesda category five is suspicious for malignancy, carrying a sixty to seventy-five percent probability of cancer, while Bethesda category six represents unequivocally malignant cytology, carrying a ninety-seven to ninety-nine percent malignancy risk. Common malignant diagnoses include papillary thyroid carcinoma and medullary thyroid carcinoma. Management for these high-risk categories entails upfront **total thyroidectomy**, accompanied by therapeutic central compartment neck dissection whenever metastatic lymph nodes are detected.",
+   "say": "Bethesda five and six carry up to ninety-nine percent malignancy risks, usually papillary or medullary carcinoma. These high-risk categories are treated with total thyroidectomy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bethesda Category",
+     "Cytological Designation",
+     "Malignancy Risk",
+     "Standard Surgical Recommendation"
+    ],
+    "rows": [
+     [
+      "Bethesda IV",
+      "Follicular Neoplasm / Suspicious for Follicular",
+      "25 - 40 %",
+      "Diagnostic thyroid lobectomy and isthmusectomy"
+     ],
+     [
+      "Bethesda V",
+      "Suspicious for Malignancy",
+      "60 - 75 %",
+      "Near-total or total thyroidectomy"
+     ],
+     [
+      "Bethesda VI",
+      "Malignant (Papillary, Medullary, Anaplastic)",
+      "97 - 99 %",
+      "Total thyroidectomy +/- central neck dissection"
+     ]
+    ]
+   }
+  }
+ ]
+}

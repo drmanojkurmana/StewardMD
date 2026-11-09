@@ -1,0 +1,323 @@
+{
+ "v": 1,
+ "module": "sur-neck",
+ "subject": "surgery",
+ "title": "Cervical Lymphadenopathy, Tuberculous Lymphadenitis, and Cold Abscess",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Evaluation of **cervical lymphadenopathy** requires systematic examination of all cervical lymphatic stations. Clinicians divide neck nodes into six standardized levels: submental and submandibular nodes in level one, upper deep jugular nodes in level two, mid-jugular nodes in level three, lower jugular nodes in level four, posterior triangle nodes in level five, and pretracheal central compartment nodes in level six. Distinguishing reactive hyperplasia from infectious, granulomatous, or metastatic disease governs management.",
+   "say": "Cervical lymph nodes are organized into six anatomical levels from the submental space to the posterior triangle. Accurate level mapping guides identification of the underlying infection or malignancy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cervical Node Level",
+     "Anatomical Boundaries",
+     "Primary Echelon Drainage Territories"
+    ],
+    "rows": [
+     [
+      "Level I (A & B)",
+      "Submental and submandibular triangles above hyoid bone",
+      "Lip, anterior floor of mouth, oral tongue tip, buccal mucosa"
+     ],
+     [
+      "Level II (A & B)",
+      "Skull base down to hyoid bone, bounded by posterior SCM border",
+      "Oropharynx, larynx, oral cavity, hypopharynx, parotid gland"
+     ],
+     [
+      "Level III (Mid Jugular)",
+      "Hyoid bone superiorly to cricoid cartilage inferiorly",
+      "Larynx, hypopharynx, oral tongue, thyroid gland lateral lobes"
+     ],
+     [
+      "Level IV (Low Jugular)",
+      "Cricoid cartilage to clavicle; includes Virchow node on left",
+      "Thyroid gland, cervical esophagus, thoracic and abdominal viscera"
+     ],
+     [
+      "Level V (Posterior)",
+      "Posterior triangle bounded by trapezius, SCM, and clavicle",
+      "Nasopharynx, posterior scalp, cutaneous neck, thyroid"
+     ],
+     [
+      "Level VI (Central)",
+      "Hyoid to sternal notch between carotid sheaths",
+      "Thyroid gland, glottic and subglottic larynx, cervical trachea"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In developing countries, Mycobacterium tuberculosis infection remains the most common etiology of persistent granulomatous neck masses, termed **tuberculous lymphadenitis** or scrofula. It accounts for thirty to forty percent of all extrapulmonary tuberculosis cases. The primary route of entry involves hematogenous seeding following pulmonary infection, or retrograde lymphatic spread from mycobacteria colonizing the tonsillar crypts. The posterior triangle and upper deep jugular lymph node chains are the most frequently affected sites.",
+   "say": "Tuberculous lymphadenitis, or scrofula, is the leading cause of chronic cervical adenopathy in endemic regions, typically involving posterior triangle and jugulodigastric nodes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "entry",
+      "label": "Mycobacterium Inhalation or Tonsillar Seeding"
+     },
+     {
+      "id": "macrophage",
+      "label": "Phagocytosis by Cervical Nodal Macrophages"
+     },
+     {
+      "id": "granuloma",
+      "label": "Epithelioid Histiocytes & Langhans Giant Cells"
+     },
+     {
+      "id": "caseation",
+      "label": "Central Caseation Necrosis in Lymph Nodes"
+     },
+     {
+      "id": "scrofula",
+      "label": "Persistent Matted Tuberculous Scrofula"
+     }
+    ],
+    "edges": [
+     [
+      "entry",
+      "macrophage"
+     ],
+     [
+      "macrophage",
+      "granuloma"
+     ],
+     [
+      "granuloma",
+      "caseation"
+     ],
+     [
+      "caseation",
+      "scrofula"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The natural progression of untreated tuberculous lymphadenitis follows five distinct pathological and clinical stages. In stage one, affected lymph nodes are discrete, firm, and non-tender. As inflammation breaches the nodal capsule in stage two, periadenitis glues adjacent nodes into a fixed, conglomerate mass termed **matted tuberculous nodes**. Stage three features central caseous necrosis and liquefaction, transforming the matted nodal mass into a cold abscess that lacks warmth, erythema, and acute pain.",
+   "say": "Tuberculous adenitis progresses from discrete firm nodes to matted conglomerate masses. Central caseous liquefaction then creates a painless cold abscess devoid of acute inflammatory erythema.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage of Scrofula",
+     "Pathological State",
+     "Physical Examination Hallmarks"
+    ],
+    "rows": [
+     [
+      "Stage 1 (Hyperplasia)",
+      "Reactive follicular and epithelioid cell hyperplasia",
+      "Discrete, mobile, firm, rubbery, painless lymphadenopathy"
+     ],
+     [
+      "Stage 2 (Periadenitis)",
+      "Capsular breach with perilymphadenitis and adhesions",
+      "Matted, non-mobile conglomerate mass adherent to surrounding tissue"
+     ],
+     [
+      "Stage 3 (Cold Abscess)",
+      "Central caseation liquefaction within node capsule",
+      "Fluctuant swelling devoid of warmth, redness, or acute tenderness"
+     ],
+     [
+      "Stage 4 (Collar Stud)",
+      "Perforation through deep fascia into subcutaneous space",
+      "Dumbbell collection with palpable cross-fluctuance across fascia"
+     ],
+     [
+      "Stage 5 (Sinus Tract)",
+      "Spontaneous cutaneous rupture and chronic drainage",
+      "Chronic ulcer or sinus with characteristic undermined, bluish edges"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When a deep subfascial caseous lymph node undergoes liquefaction, accumulating fluid pressure causes central necrosis of the overlying investing layer of deep cervical fascia. The liquefied pus herniates through this narrow fascial aperture into the looser superficial subcutaneous tissue, forming a **collar stud abscess**. Known in classical surgical literature as an abscessus en bouton de chemise, this bilocular collection comprises a deep necrotic lymph node connected via a constricted fascial neck to an expansive subcutaneous reservoir.",
+   "say": "A collar stud abscess forms when caseous pus from a deep lymph node erodes through a small fascial opening into the subcutaneous plane, creating a classic hourglass collection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Superficial Subcutaneous Compartment",
+     "points": [
+      "Situated superficial to investing layer of deep cervical fascia",
+      "Expansile, soft, fluctuant subcutaneous fluid collection",
+      "Lacks overlying erythema, calor, or classical pyogenic signs",
+      "Readily compressible, transferring fluid into deeper compartment"
+     ]
+    },
+    "right": {
+     "title": "Deep Subfascial Nodal Compartment",
+     "points": [
+      "Originates from necrotic caseating deep cervical lymph node",
+      "Situated deep to investing fascia near jugular vein and SCM",
+      "Harbors the primary granulomatous nidus of mycobacterial disease",
+      "Communicates with superficial space through a tight fascial ring"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The pathognomonic physical examination sign of a collar stud abscess is cross-fluctuance. Alternating digital pressure between the superficial subcutaneous reservoir and the deeper subfascial lymph node transmits a distinct fluid wave across the constricted fascial neck. An indispensable surgical rule governs its drainage: simple incision over the subcutaneous swelling is strictly contraindicated because **blind superficial incisional drainage** leaves the deep subfascial nidus unaddressed and results in an intractable, non-healing tuberculous sinus.",
+   "say": "Cross-fluctuance confirms the connection between deep and superficial pockets. Incising only the superficial bulge leaves the deep focus behind, leading to a persistent discharging sinus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fluid",
+      "label": "Alternating Digital Compression"
+     },
+     {
+      "id": "cross",
+      "label": "Fluid Wave Transmitted Across Fascial Neck"
+     },
+     {
+      "id": "incise_bad",
+      "label": "Error: Simple Incision of Superficial Pocket"
+     },
+     {
+      "id": "sinus",
+      "label": "Failure of Deep Nodule Clearance"
+     },
+     {
+      "id": "drain",
+      "label": "Chronic Scrofuloderma Sinus Tract with Undermined Edges"
+     }
+    ],
+    "edges": [
+     [
+      "fluid",
+      "cross"
+     ],
+     [
+      "cross",
+      "incise_bad"
+     ],
+     [
+      "incise_bad",
+      "sinus"
+     ],
+     [
+      "sinus",
+      "drain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "If a collar stud abscess spontaneously ruptures through ischemic skin, or is incised improperly, it forms a tuberculous sinus, also known as scrofuloderma. The cutaneous ulcer exhibits thin, undermined, bluish-purple edges and a pale base covered by watery discharge and curdy caseous debris. Aspiration of cold abscesses must always be performed through **oblique needle aspiration** traversing healthy surrounding skin rather than dependent necrotic skin, ensuring an intact soft tissue seal that prevents sinus tract formation.",
+   "say": "Rupture of a cold abscess produces a chronic sinus with undermined bluish edges. Aspiration must always be directed obliquely through healthy skin to avoid creating a sinus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Aspiration Technique",
+     "Needle Trajectory",
+     "Clinical Rationale and Prevention"
+    ],
+    "rows": [
+     [
+      "Oblique Healthy Skin Entry",
+      "Wide-bore needle inserted obliquely through normal distant skin",
+      "Creates stepped valvular tract that closes after withdrawal, preventing fistula"
+     ],
+     [
+      "Direct Dependent Puncture",
+      "Perpendicular needle insertion directly over point of maximal skin thinning",
+      "Strictly contraindicated; inevitably breaks down into a chronic discharging sinus"
+     ],
+     [
+      "Ultrasound-Guided Aspiration",
+      "Real-time transducer guidance directing cannula into deep pocket",
+      "Evacuates thick caseous necrotic material while mapping deep fascial defect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive diagnosis of tuberculous lymphadenitis relies on fine-needle aspiration cytology, Ziehl-Neelsen staining for acid-fast bacilli, and real-time polymerase chain reaction testing, such as **cartridge-based nucleic acid amplification**. Cytology demonstrates caseating granulomas composed of epithelioid histiocytes, Langhans multinucleated giant cells, and granular acellular necrotic debris. Modern molecular testing simultaneously confirms Mycobacterium tuberculosis and detects rpoB gene mutations conferring rifampicin resistance within two hours.",
+   "say": "Fine-needle aspiration with GeneXpert PCR testing confirms tuberculous adenitis and detects rifampicin resistance within hours, identifying caseating granulomas and Langhans giant cells.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Test",
+     "Microscopic or Molecular Hallmark",
+     "Sensitivity and Clinical Utility"
+    ],
+    "rows": [
+     [
+      "FNAC Cytology",
+      "Epithelioid granulomas, Langhans giant cells, amorphous caseous necrosis",
+      "High sensitivity (85-90%); establishes granulomatous architecture"
+     ],
+     [
+      "Ziehl-Neelsen (ZN) Staining",
+      "Bright red, slender, rod-shaped acid-fast bacilli on blue background",
+      "Variable sensitivity (30-50%); depends directly on nodal bacterial load"
+     ],
+     [
+      "CBNAAT (GeneXpert)",
+      "Automated real-time PCR targeting Mycobacterium tuberculosis IS6110 sequence",
+      "Exceptional sensitivity (>90%) with rapid detection of rifampicin resistance"
+     ],
+     [
+      "Mycobacterial Culture (MGIT)",
+      "Automated liquid culture detection of viable mycobacterial colonies",
+      "Gold standard for comprehensive second-line antibiotic sensitivity profiling"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The cornerstone of management is medical treatment with standard six-month **anti-tubercular therapy**, consisting of a two-month intensive phase of rifampicin, isoniazid, pyrazinamide, and ethambutol, followed by a four-month continuation phase of rifampicin and isoniazid. Surgical intervention is restricted strictly to diagnostic excisional biopsy of indeterminate nodes, aspiration of tense symptomatic cold abscesses, or en bloc excision of localized sinus tracts and underlying necrotic nodes that fail to resolve despite compliant chemotherapy.",
+   "say": "Treatment is medical, utilizing a six-month anti-tubercular chemotherapy regimen. Surgery is reserved for diagnostic biopsy or evacuating tense abscesses that fail medical therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diagnose",
+      "label": "Confirm Diagnosis via FNAC & GeneXpert"
+     },
+     {
+      "id": "intensive",
+      "label": "2-Month Intensive Phase (HRZE Therapy)"
+     },
+     {
+      "id": "continuation",
+      "label": "4-Month Continuation Phase (HR Therapy)"
+     },
+     {
+      "id": "monitor",
+      "label": "Clinical Assessment of Nodal Resolution"
+     },
+     {
+      "id": "salvage",
+      "label": "Surgical Excision Reserved for Persistent Cold Abscess"
+     }
+    ],
+    "edges": [
+     [
+      "diagnose",
+      "intensive"
+     ],
+     [
+      "intensive",
+      "continuation"
+     ],
+     [
+      "continuation",
+      "monitor"
+     ],
+     [
+      "monitor",
+      "salvage"
+     ]
+    ]
+   }
+  }
+ ]
+}

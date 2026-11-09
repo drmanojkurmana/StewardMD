@@ -1,0 +1,294 @@
+{
+ "v": 1,
+ "module": "sur-neck",
+ "subject": "surgery",
+ "title": "Cystic Hygroma, Carotid Body Tumour, and Lateral Neck Masses",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Arising from failure of the embryonic jugular lymphatic sacs to establish drainage into the internal jugular venous system, a **cystic hygroma** is a macrocystic lymphatic malformation. Over seventy-five percent present in the posterior triangle of the neck in infants or young children. It consists of multilocular endothelial-lined lymphatic spaces filled with clear or straw-colored lymph that dissect freely along cervical fascial planes, around the carotid sheath, and into the mediastinum.",
+   "say": "Cystic hygroma is a congenital lymphatic malformation developing in the posterior triangle of the neck when jugular lymph sacs fail to drain into the venous system.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cystic Hygroma (Macrocystic)",
+     "points": [
+      "Arises in posterior triangle of neck in infancy",
+      "Brilliantly transilluminant on penlight examination",
+      "Soft, lobulated, brilliantly compressible and painless",
+      "Crosses anatomical fascial boundaries and planes"
+     ]
+    },
+    "right": {
+     "title": "Branchial Cleft Cyst",
+     "points": [
+      "Arises in upper anterior triangle along anterior SCM",
+      "Does not transilluminate on clinical examination",
+      "Tense, smooth, circumscribed, unilocular swelling",
+      "Confined strictly to second branchial apparatus territory"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "On clinical examination, a cystic hygroma is classically described as soft, lobulated, non-tender, and brilliantly transilluminant. Because the thin-walled lymphatic spaces contain crystal-clear fluid without light-absorbing cellular debris, a penlight pressed against one side produces a **brilliant red transillumination** throughout the entire mass. The swelling characteristically enlarges suddenly during episodes of viral upper respiratory tract infection or following spontaneous intralesional hemorrhage, occasionally provoking acute stridor from tracheal compression.",
+   "say": "A penlight examination demonstrates brilliant transillumination across the clear fluid spaces of a cystic hygroma. Upper respiratory infections or bleeding can trigger rapid, threatening airway compression.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "congenital",
+      "label": "Lymphatic Sac Sequestration in Embryo"
+     },
+     {
+      "id": "fluid",
+      "label": "Clear Lymph Accumulates in Macrocysts"
+     },
+     {
+      "id": "penlight",
+      "label": "Penlight Elicits Brilliant Transillumination"
+     },
+     {
+      "id": "trigger",
+      "label": "Viral Infection or Intralesional Bleeding"
+     },
+     {
+      "id": "stridor",
+      "label": "Acute Expansion Triggers Airway Stridor"
+     }
+    ],
+    "edges": [
+     [
+      "congenital",
+      "fluid"
+     ],
+     [
+      "fluid",
+      "penlight"
+     ],
+     [
+      "penlight",
+      "trigger"
+     ],
+     [
+      "trigger",
+      "stridor"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Management of macrocystic lymphatic malformations has shifted toward intralesional **percutaneous sclerotherapy** as the preferred first-line intervention. Injection of sclerosing agents, such as picibanil OK-432, bleomycin, or doxycycline, induces intense aseptic endothelial inflammation followed by progressive fibrotic obliteration of the cyst cavities without risking surgical facial or accessory nerve trauma. Surgical excision is reserved for sclerotherapy-refractory lesions, acute airway compromise, or localized malformations with clear anatomical margins.",
+   "say": "Intralesional sclerotherapy with picibanil or bleomycin is the primary treatment for cystic hygroma. Surgical excision is reserved for refractory malformations or severe airway compromise.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Modality",
+     "Mechanism of Action",
+     "Clinical Indications and Risks"
+    ],
+    "rows": [
+     [
+      "Picibanil (OK-432)",
+      "Killed group A Streptococcus pyogenes pyrogen inducing IL-6 and TNF-alpha",
+      "Highly effective for macrocystic hygromas; produces transient fever and swelling"
+     ],
+     [
+      "Bleomycin Sclerotherapy",
+      "Endothelial cell DNA cleavage and localized fibrotic luminal sclerosis",
+      "Excellent cosmetic results; requires cumulative dose monitoring to avoid pneumonitis"
+     ],
+     [
+      "Doxycycline Sclerotherapy",
+      "Matrix metalloproteinase inhibition and caustic inflammatory desquamation",
+      "Readily available and inexpensive; causes significant localized post-injection pain"
+     ],
+     [
+      "Surgical Resection",
+      "Direct microscopic dissection of cyst walls from neurovascular structures",
+      "Indicated for acute airway distress; high risk of cranial nerve palsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the carotid triangle of the upper anterior neck, a rare, highly vascular neoplasm is the **carotid body tumour**, historically termed a chemodectoma or non-chromaffin paraganglioma. Arising from neural crest-derived glomus cells embedded within the adventitia of the carotid bifurcation, the normal organ functions as a peripheral chemoreceptor monitoring arterial oxygen tension, pH, and carbon dioxide. Chronic physiological hypoxia, such as living at high altitudes, strongly predisposes to carotid body hyperplasia and tumor formation.",
+   "say": "Carotid body tumors are vascular paragangliomas arising from neural crest glomus cells at the carotid bifurcation. They function physiologically as arterial chemoreceptors monitoring oxygen and carbon dioxide levels.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "crest",
+      "label": "Neural Crest Glomus Type I & II Cells"
+     },
+     {
+      "id": "bifurcation",
+      "label": "Embed Within Carotid Adventitia"
+     },
+     {
+      "id": "hypoxia",
+      "label": "Chronic Hypoxic Drive or SDH Mutation"
+     },
+     {
+      "id": "hyperplasia",
+      "label": "Polyclonal Chemoreceptor Hyperplasia"
+     },
+     {
+      "id": "paraganglioma",
+      "label": "Vascular Carotid Body Paraganglioma"
+     }
+    ],
+    "edges": [
+     [
+      "crest",
+      "bifurcation"
+     ],
+     [
+      "bifurcation",
+      "hypoxia"
+     ],
+     [
+      "hypoxia",
+      "hyperplasia"
+     ],
+     [
+      "hyperplasia",
+      "paraganglioma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinically, a carotid body tumor presents as a slow-growing, painless, firm, pulsatile neck mass situated at the level of the hyoid bone, anterior to the sternocleidomastoid muscle. Auscultation frequently reveals a continuous bruit or systolic thrill. A pathognomonic physical finding is **Fontaine sign**, where the mass can be freely moved side to side horizontally, but cannot be moved vertically up and down because it is tethered securely within the bifurcation of the carotid artery sheath.",
+   "say": "Carotid body tumors present as pulsatile neck masses with a systolic bruit. Fontaine sign demonstrates free horizontal movement but complete vertical fixation due to carotid sheath anchoring.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Horizontal Mobility (Positive Fontaine)",
+     "points": [
+      "Moves smoothly across transverse neck axis",
+      "Separates from superficial sternocleidomastoid muscle",
+      "Pathognomonic of carotid bifurcation tumors",
+      "Reflects lack of lateral or medial fascial fixation"
+     ]
+    },
+    "right": {
+     "title": "Vertical Immobility (Fixed)",
+     "points": [
+      "Cannot be displaced vertically toward jaw or clavicle",
+      "Firmly tethered to adventitia of common carotid artery",
+      "Distinguishes tumor from mobile cervical lymph nodes",
+      "Confirmed clinically during bimanual neck palpation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Digital subtraction angiography or contrast-enhanced computed tomography confirms the diagnosis and establishes the tumor's Shamblin classification. Classic cross-sectional imaging reveals the pathognomonic **Lyre sign**, produced as the expanding vascular tumor pushes the internal and external carotid arteries apart, widening the carotid bifurcation like the strings of a classical lyre. Biopsy of a suspected carotid body tumor is strictly contraindicated because of the extreme risk of uncontrollable hemorrhage.",
+   "say": "Angiography reveals the Lyre sign, where the tumor splays the internal and external carotid arteries apart. Needle biopsy is strictly contraindicated because of massive bleeding risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Shamblin Group",
+     "Vascular Relationship",
+     "Surgical Resection Difficulty & Morbidity"
+    ],
+    "rows": [
+     [
+      "Shamblin I",
+      "Small localized tumor loosely abutting carotid vessels",
+      "Easily dissected in the subadventitial plane without vascular reconstruction"
+     ],
+     [
+      "Shamblin II",
+      "Moderately sized tumor partially surrounding carotid bifurcation",
+      "Challenging dissection requiring meticulous separation; low stroke risk"
+     ],
+     [
+      "Shamblin III",
+      "Large tumor completely encasing internal and external carotids",
+      "Requires temporary arterial shunting, vessel resection, and saphenous vein grafting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive treatment for carotid body tumors is complete surgical excision. Large or Shamblin group two and three neoplasms routinely undergo **preoperative arterial embolization** twenty-four to forty-eight hours prior to surgery to reduce intraoperative vascularity and blood loss. During the operation, the surgeon dissects through the white line of Gordon-Taylor within the subadventitial plane, meticulously stripping the tumor from the adventitial layer of the carotid arteries while preserving the vagus, hypoglossal, and glossopharyngeal nerves.",
+   "say": "Surgical resection is preceded by embolization to limit bleeding. Dissection proceeds through the avascular subadventitial plane, protecting the vagus, hypoglossal, and glossopharyngeal nerves.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "embolize",
+      "label": "Preoperative Superselective Angiographic Embolization"
+     },
+     {
+      "id": "expose",
+      "label": "Cervical Incision Exposes Common, Internal, External Carotid"
+     },
+     {
+      "id": "plane",
+      "label": "Enter Gordon-Taylor Subadventitial Avascular Plane"
+     },
+     {
+      "id": "strip",
+      "label": "Circumferential Dissection Strips Tumor from Arteries"
+     },
+     {
+      "id": "preserve",
+      "label": "Preserve CN IX, X, XI, XII & Superior Laryngeal Nerve"
+     }
+    ],
+    "edges": [
+     [
+      "embolize",
+      "expose"
+     ],
+     [
+      "expose",
+      "plane"
+     ],
+     [
+      "plane",
+      "strip"
+     ],
+     [
+      "strip",
+      "preserve"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Approximately five to ten percent of carotid body tumors exhibit malignant biological behavior, defined strictly by the presence of metastasis to regional lymph nodes or distant organs such as the lungs or skeleton. Malignancy cannot be predicted reliably on histopathological grounds alone. Germline mutations in the **succinate dehydrogenase subunit genes**, notably SDHD and SDHB, account for up to thirty percent of familial or bilateral paragangliomas, mandating lifelong genetic counseling and annual catecholamine monitoring.",
+   "say": "Malignancy occurs in under ten percent of carotid body tumors, defined strictly by distant metastases. Mutations in succinate dehydrogenase genes drive familial tumors, requiring genetic screening.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Genetic Mutation",
+     "Inheritance Pattern",
+     "Clinical Manifestations and Risk"
+    ],
+    "rows": [
+     [
+      "SDHD Mutation",
+      "Autosomal dominant with maternal genomic imprinting",
+      "High frequency of multifocal, bilateral carotid and glomus jugulare tumors"
+     ],
+     [
+      "SDHB Mutation",
+      "Autosomal dominant transmission without imprinting",
+      "Highest propensity for malignant degeneration and distant hematogenous spread"
+     ],
+     [
+      "SDHC Mutation",
+      "Autosomal dominant with variable clinical penetrance",
+      "Rare, predominantly causes benign head and neck paragangliomas"
+     ]
+    ]
+   }
+  }
+ ]
+}
