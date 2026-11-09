@@ -1,0 +1,295 @@
+{
+ "v": 1,
+ "id": "cm-healthcare-delivery-asha",
+ "subject": "community-medicine",
+ "module": "cm-healthcare-delivery",
+ "title": "ASHA: Selection, Roles, Incentives and the Village Health System",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "One per thousand: who the ASHA is",
+   "tx": "An **ASHA** (Accredited Social Health Activist) is a literate woman resident of the village she serves, roughly one per 1000 rural population (relaxed in tribal and hilly areas), selected by the community through the panchayat process under the National Health Mission since 2005. She is a voluntary activist paid performance incentives, not a salaried employee, the distinction every stem tests.",
+   "say": "Resident, literate, community-chosen: one per thousand villagers since 2005. She activates health behaviour as a volunteer earning performance incentives, never a salaried employee. That status distinction fills examination stems.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Design"
+    ],
+    "rows": [
+     [
+      "Population norm",
+      "About 1 per 1000 rural population"
+     ],
+     [
+      "Selection",
+      "Community through panchayat process"
+     ],
+     [
+      "Employment status",
+      "Voluntary activist, incentive paid"
+     ],
+     [
+      "Residence",
+      "Must live in the village served"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Three roles: activist, facilitator, provider",
+   "tx": "**ASHA roles** layer three deep: health activist creating awareness and demand, facilitator escorting and linking villagers to facilities (especially institutional delivery and immunisation), and community-level provider for first-contact care (ORS, iron, malaria testing support, contraceptive resupply, DOTS support) within her drug kit. Role confusion with ANM and Anganwadi worker is the standard comparison table.",
+   "say": "Three hats, one woman. Activist raising demand, facilitator escorting to facilities, first-contact provider from her drug kit. Compare her with ANM and Anganwadi worker whenever stems blur the boundaries.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Worker",
+     "Core identity"
+    ],
+    "rows": [
+     [
+      "ASHA",
+      "Activist and link worker, village resident"
+     ],
+     [
+      "ANM / CHO",
+      "Clinical service provider at sub-centre or HWC"
+     ],
+     [
+      "Anganwadi worker",
+      "Nutrition and preschool, ICDS"
+     ],
+     [
+      "MPW male",
+      "Surveillance and vector duties historically"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Incentive architecture in practice",
+   "tx": "**Performance incentives** pay per verified activity: escorting institutional deliveries, completed immunisation sessions mobilised, family planning adoption, TB treatment support, NCD screening mobilisation and home visits under home-based newborn and young child care. Format-based monthly compilation decides payment. Delayed or opaque incentive payment is the commonest programme grievance and retention risk.",
+   "say": "Pay follows verified activity: deliveries escorted, sessions mobilised, screening completed. Monthly format-based claims decide amounts. Late opaque payment is the workforce's commonest grievance and the retention risk programmes ignore.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Activity performed and recorded"
+     },
+     {
+      "id": "b",
+      "label": "Monthly format compiled"
+     },
+     {
+      "id": "c",
+      "label": "Verification at facility level"
+     },
+     {
+      "id": "d",
+      "label": "Incentive paid to ASHA"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Home-based newborn and young child care",
+   "tx": "**Home-based newborn care** schedules ASHA visits on days 1, 3, 7, 14, 21, 28 and 42 (more for low birth weight), checking temperature, feeding, cord and danger signs, extended into young child care with nutrition and illness visits across the second year. This visit spine converts her from campaign mobiliser into longitudinal caregiver, the NHM's deliberate evolution.",
+   "say": "Visits give her a calendar: days one through forty two for newborns, denser for small babies, extending into the second year. Longitudinal caregiving replaces campaign mobilisation as her core identity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Visit window",
+     "Checks"
+    ],
+    "rows": [
+     [
+      "Days 1, 3, 7",
+      "Temperature, feeding, cord, danger signs"
+     ],
+     [
+      "Days 14, 21, 28, 42",
+      "Weight, feeding, immunisation linkage"
+     ],
+     [
+      "Low birth weight",
+      "Extra visits added"
+     ],
+     [
+      "Months 3 to 24 (HBYC)",
+      "Nutrition, development, illness care"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Village Health Sanitation and Nutrition Day",
+   "tx": "The **VHSND** (monthly village health, sanitation and nutrition day at the Anganwadi) is her stage: immunisation, antenatal care, nutrition demonstration and health education converge while she mobilises beneficiaries by name from her household register. Untied village health funds and the village committee (VHSNC) give that stage microplanning authority and small local money.",
+   "say": "One monthly stage gathers everything. Immunisation, antenatal care, nutrition and education at the Anganwadi, beneficiaries mobilised by name. Village committees with untied funds give the day local authority and money.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ASHA brings",
+     "points": [
+      "Beneficiary lists by name",
+      "Mobilisation and escort",
+      "Follow-up of the absent"
+     ]
+    },
+    "right": {
+     "title": "System brings",
+     "points": [
+      "ANM and CHO clinical services",
+      "Vaccines, supplies, records",
+      "Anganwadi nutrition platform"
+     ]
+    }
+   }
+  },
+  {
+   "title": "NCD era tasks: CBAC and screening mobilisation",
+   "tx": "**Community-based assessment checklist** scoring by ASHAs (age, tobacco, alcohol, waist, activity, family history) triages adults toward HWC screening for pressure, glucose and the three cancers. Her eleven-plus registers and family folders feed the same data upward. Task expansion without workload relief is the live policy tension examiners now quote.",
+   "say": "Checklists triage the village. Tobacco, waist, activity and family history score adults toward screening. Registers multiply with every programme. Task expansion without workload relief is the tension to name.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Household CBAC scored by ASHA"
+     },
+     {
+      "id": "b",
+      "label": "High-risk adults listed"
+     },
+     {
+      "id": "c",
+      "label": "Screening at HWC completed"
+     },
+     {
+      "id": "d",
+      "label": "Follow-up and medicine adherence visits"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Training, supervision and the facilitator",
+   "tx": "**ASHA facilitators** supervise roughly 20 ASHAs each, while modular training (induction then periodic rounds on newborn, child, NCD and other packages) builds skills in cascades. Certification through national open schooling modules professionalised parts of the cadre. Supervision quality, measured in accompanied home visits rather than meeting counts, predicts her performance better than training volume.",
+   "say": "Support decides performance. Facilitators per twenty workers, modular training in rounds, accompanied home visits as real supervision. Meeting counts flatter reports; accompanied visits change practice.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Support element",
+     "Design"
+    ],
+    "rows": [
+     [
+      "ASHA facilitator",
+      "About 1 per 20 ASHAs"
+     ],
+     [
+      "Training",
+      "Induction plus modular rounds"
+     ],
+     [
+      "Supervision",
+      "Accompanied visits, review meetings"
+     ],
+     [
+      "Kit and tools",
+      "Drug kit, HBNC kit, registers, phone support"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "What ASHAs demonstrably changed",
+   "tx": "**Institutional delivery** and immunisation mobilisation are her signature population effects, credited across NHM evaluations with narrowing rural access gaps, while effects vary by state capacity and payment reliability. COVID-era surveillance, vaccination mobilisation and oxygen-era home monitoring extended her brief publicly. Evaluation stems reward naming both the evidence and its state-level variance.",
+   "say": "Deliveries and immunisation carry her signature in evaluations, varying by state capacity and payment reliability. Pandemic duties extended her brief publicly. Quote impact with its variance, never as uniform magic.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Strongest evidence",
+     "points": [
+      "Institutional delivery rise",
+      "Immunisation session turnout",
+      "Newborn home visit coverage"
+     ]
+    },
+    "right": {
+     "title": "Persistent strains",
+     "points": [
+      "Incentive delays",
+      "Task overload across programmes",
+      "Variable state supervision quality"
+     ]
+    }
+   }
+  },
+  {
+   "title": "ASHA versus ANM versus AWW in one stem",
+   "tx": "Stems separate the trio by **employer and instrument**: ASHA (NHM, incentives, drug kit and mobilisation), ANM (health department employee, clinical services and records at sub-centre), Anganwadi worker (women and child development, ICDS nutrition and preschool). The community health officer now leads the HWC team professionally above them in Ayushman Bharat's design.",
+   "say": "Employer and instrument separate the trio. Mission incentives, departmental clinical service, ICDS nutrition. The community health officer leads the wellness centre team above them in current design.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cadre",
+     "Employer logic",
+     "Signature tool"
+    ],
+    "rows": [
+     [
+      "ASHA",
+      "NHM volunteer activist",
+      "Household register, drug kit"
+     ],
+     [
+      "ANM",
+      "Health department staff",
+      "Sub-centre clinical services"
+     ],
+     [
+      "Anganwadi worker",
+      "ICDS staff",
+      "Growth chart, supplementary food"
+     ],
+     [
+      "CHO",
+      "HWC team leader",
+      "Comprehensive primary care package"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

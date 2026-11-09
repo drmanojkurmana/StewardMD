@@ -1,0 +1,278 @@
+{
+ "v": 1,
+ "id": "cm-cvd-cvd-risk",
+ "subject": "community-medicine",
+ "module": "cm-cvd",
+ "title": "Cardiovascular Risk: WHO Risk Charts, Absolute Risk and Best Buys",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Absolute risk beats single factors",
+   "tx": "**Absolute cardiovascular risk** combines age, sex, blood pressure, cholesterol, smoking and diabetes into the probability of a fatal or non-fatal event over 10 years. A moderate pressure with smoking and diabetes outranks severe pressure alone. Treatment thresholds follow the combined figure, which is why risk charts, not single readings, allocate statins and drugs in rational programmes.",
+   "say": "Combine before deciding. Age, pressure, cholesterol, smoking and diabetes together price ten-year risk. Moderate pressure with smoking and diabetes beats severe pressure alone. Charts allocate drugs; single readings mislead.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Input",
+     "Why it enters"
+    ],
+    "rows": [
+     [
+      "Age and sex",
+      "Strongest background drivers"
+     ],
+     [
+      "Systolic pressure and cholesterol",
+      "Continuous causal factors"
+     ],
+     [
+      "Smoking and diabetes",
+      "Multiplicative amplifiers"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "WHO risk charts with and without cholesterol",
+   "tx": "**WHO cardiovascular risk charts** colour-code 10-year risk by the inputs above for regional populations, in laboratory (with cholesterol) and non-laboratory (body mass index substituted) versions for low-resource settings. Green under 5 percent climbs through yellow and orange to red at 20 percent and above in the 2019 revision, thresholds where drug therapy firms up.",
+   "say": "Colour carries the number. Green under five percent to red above twenty in current charts, cholesterol optional where laboratories are absent. Red zones firm up drug decisions in low-resource clinics.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "10-year risk band",
+     "Programme response"
+    ],
+    "rows": [
+     [
+      "Under 5 percent (green)",
+      "Lifestyle counsel, periodic review"
+     ],
+     [
+      "10 to under 20 percent",
+      "Lifestyle plus consider drugs by factors"
+     ],
+     [
+      "20 percent or more (red)",
+      "Drug therapy plus intensive lifestyle"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Risk factors: causal, conditional, predisposing",
+   "tx": "**Major causal factors** (smoking, hypertension, dyslipidaemia, diabetes) multiply each other rather than merely adding, so combined control pays disproportionately. INTERHEART showed nine modifiable factors (lipids, smoking, pressure, diabetes, obesity, diet, alcohol, activity, psychosocial) account for most myocardial infarction risk across 52 countries, the citation behind global prevention confidence.",
+   "say": "Factors multiply, never merely add. Nine modifiable factors explained most heart attacks across fifty two countries in the landmark study. Combined control therefore pays disproportionately, the arithmetic of prevention clinics.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Modifiable majors",
+     "points": [
+      "Smoking, pressure, lipids",
+      "Diabetes and obesity",
+      "Diet, alcohol, inactivity"
+     ]
+    },
+    "right": {
+     "title": "Fixed background",
+     "points": [
+      "Age and male sex",
+      "Family history of early disease",
+      "Genetic lipid disorders (partly treatable)"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Statins and aspirin: who actually benefits",
+   "tx": "**Statin allocation** follows absolute risk and LDL thresholds, not cholesterol alone, with secondary prevention after events unconditional. Aspirin earns its bleeding risk in secondary prevention clearly; in primary prevention modern trials narrowed it to selected higher-risk adults without bleeding tendency. Stems contrasting the two settings test exactly this asymmetry.",
+   "say": "After events, both drugs are near-automatic. Before events, statins follow absolute risk while aspirin's bleeding narrows it to selected adults. Stems live on that primary-secondary asymmetry.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Setting",
+     "Statin",
+     "Aspirin"
+    ],
+    "rows": [
+     [
+      "After MI or stroke",
+      "Yes, high intensity",
+      "Yes, unless contraindicated"
+     ],
+     [
+      "High primary risk",
+      "By chart and LDL",
+      "Selected cases only"
+     ],
+     [
+      "Low primary risk",
+      "Lifestyle first",
+      "No, bleeding dominates"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The polypill idea and fixed-dose logic",
+   "tx": "The **polypill** concept bundles blood pressure drugs, statin (and originally aspirin) into one daily tablet to collapse adherence failure, showing event reductions in trials of high-risk and post-event populations. It dramatises a programme truth: most NCD loss is adherence and access failure wearing pharmacological clothes. Fixed-dose combinations already run TB and HIV programmes on the same logic.",
+   "say": "One pill attacks adherence collapse. Bundled pressure, lipid and platelet drugs cut events where systems leak doses. TB and HIV programmes proved fixed-dose logic decades before cardiology adopted it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Multiple daily tablets prescribed"
+     },
+     {
+      "id": "b",
+      "label": "Adherence decays within months"
+     },
+     {
+      "id": "c",
+      "label": "Single combination tablet substituted"
+     },
+     {
+      "id": "d",
+      "label": "Coverage of all pathways sustained"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Best buys: population policies that pay",
+   "tx": "**WHO best buys** for NCDs list tobacco and alcohol taxation, salt reduction, trans-fat elimination, smoke-free environments and marketing restrictions as cost-effective population interventions, several cost-saving outright. Hepatitis B and HPV vaccination and drug therapy for high cardiovascular risk join the clinical best buys. Examiners contrast these with expensive low-yield interventions deliberately.",
+   "say": "Some policies pay for themselves. Tobacco and alcohol taxes, salt cuts, trans-fat bans headline the best buys. Vaccination and high-risk drug therapy lead the clinical list. Cheap population wins beat expensive rescues.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Best buy",
+     "Type"
+    ],
+    "rows": [
+     [
+      "Tobacco and alcohol taxation",
+      "Fiscal, revenue-raising"
+     ],
+     [
+      "Salt reduction in foods",
+      "Regulatory and reformulation"
+     ],
+     [
+      "Trans-fat elimination",
+      "Regulatory ban"
+     ],
+     [
+      "Drug therapy at high CVD risk",
+      "Clinical, cost-effective"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Acute events: systems save myocardium",
+   "tx": "**STEMI systems** (recognition, aspirin and loading therapy, rapid transfer for thrombolysis or angioplasty within window times, hub-and-spoke networks with transmitted ECGs) convert risk control into survival when prevention fails. Golden-hour discipline and pre-hospital triage appear in Indian STEMI programmes using pharmacoinvasive strategies where cath labs are distant.",
+   "say": "When prevention fails, systems decide. Transmitted ECGs, loading therapy, thrombolysis or angioplasty inside windows, pharmacoinvasive bridges where labs are distant. Golden hours are organisational, not pharmacological.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Chest pain recognised, ECG sent"
+     },
+     {
+      "id": "b",
+      "label": "Aspirin and loading therapy"
+     },
+     {
+      "id": "c",
+      "label": "Lysis or transfer for angioplasty"
+     },
+     {
+      "id": "d",
+      "label": "Secondary prevention for life"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Stroke units and the same logic",
+   "tx": "**Stroke care** mirrors cardiac systems: FAST recognition, thrombolysis within 4.5 hours for eligible ischaemic stroke after imaging excludes bleed, stroke-unit care with swallowing assessment and early mobilisation, then secondary prevention (antiplatelet or anticoagulation for atrial fibrillation, statin, pressure control). Rehabilitation begins in the unit, not after discharge paperwork.",
+   "say": "Stroke mirrors heart systems. Recognise fast, image, lyse eligible cases inside four and a half hours, unit care with swallow checks, then tailored secondary prevention. Rehabilitation starts inside the unit.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First hours",
+     "points": [
+      "FAST recognition, urgent imaging",
+      "Thrombolysis if eligible",
+      "Swallowing and glucose checked"
+     ]
+    },
+    "right": {
+     "title": "Thereafter",
+     "points": [
+      "Antiplatelet or anticoagulation by cause",
+      "Statin and pressure control",
+      "Early rehabilitation and mobilisation"
+     ]
+    }
+   }
+  },
+  {
+   "title": "India's CVD profile in one paragraph",
+   "tx": "**Indian cardiovascular disease** strikes a decade earlier than Western averages, with high diabetes and central obesity at lower body mass (thin-fat phenotype), rampant smokeless tobacco, and household air pollution adding risk. Risk thresholds and screening ages therefore localise: waiting for Western age cut-offs misses the Indian event decade entirely.",
+   "say": "Events arrive a decade early here. Central obesity at lower weight, smokeless tobacco, household smoke, early diabetes. Imported age thresholds miss the Indian event decade; localisation is evidence, not sentiment.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indian feature",
+     "Programme consequence"
+    ],
+    "rows": [
+     [
+      "Events a decade earlier",
+      "Screen and treat younger"
+     ],
+     [
+      "Thin-fat central obesity",
+      "Waist matters beyond BMI"
+     ],
+     [
+      "Smokeless tobacco widespread",
+      "Ask beyond smoking alone"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

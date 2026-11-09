@@ -1,0 +1,282 @@
+{
+ "v": 1,
+ "id": "cm-healthcare-delivery-sub-centre-phc-chc",
+ "subject": "community-medicine",
+ "module": "cm-healthcare-delivery",
+ "title": "Sub-Centre, PHC and CHC: Population Norms, Staffing and IPHS",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Population norms: the 5000-30000-120000 ladder",
+   "tx": "**Population norms** ladder upward: a sub-centre per 5000 population in plains (3000 in hilly, tribal, desert areas), a primary health centre per 30000 (20000 difficult), and a community health centre per 120000 (80000 difficult). Each CHC thus references about four PHCs and each PHC about six sub-centres, the arithmetic behind every infrastructure gap calculation.",
+   "say": "Five, thirty, one twenty thousand. Sub-centre, PHC, CHC, relaxed in hills and tribal belts. Four PHCs per CHC, six sub-centres per PHC: the arithmetic behind every gap calculation in examinations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Facility",
+     "Plains norm",
+     "Hilly or tribal norm"
+    ],
+    "rows": [
+     [
+      "Sub-centre",
+      "5000",
+      "3000"
+     ],
+     [
+      "Primary health centre",
+      "30000",
+      "20000"
+     ],
+     [
+      "Community health centre",
+      "120000",
+      "80000"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Sub-centre: the ANM's outpost, now HWC",
+   "tx": "The **sub-centre** is the most peripheral fixed facility, staffed classically by ANM and male health worker pairs, delivering immunisation, antenatal, family planning and disease surveillance for its villages. Ayushman Bharat upgrades sub-centres into health and wellness centres (Ayushman Arogya Mandirs) led by community health officers delivering comprehensive primary care packages.",
+   "say": "The periphery lives here. ANM-led immunisation, antenatal and surveillance work for five thousand people, now upgrading into wellness centres under community health officers with comprehensive packages.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic sub-centre",
+     "points": [
+      "ANM and MPW staffing",
+      "Maternal, child, family planning focus",
+      "Outreach through VHSND"
+     ]
+    },
+    "right": {
+     "title": "Health and wellness centre",
+     "points": [
+      "CHO leads a wider team",
+      "Comprehensive primary care packages",
+      "NCD screening and teleconsultation added"
+     ]
+    }
+   }
+  },
+  {
+   "title": "PHC: first doctor, first referral",
+   "tx": "A **primary health centre** is the first contact with a medical officer, covering 30000 with curative OPD, maternal and child health, 24x7 delivery in upgraded facilities, minor surgery, and supervision of its sub-centres. Staffing norms add staff nurses, pharmacist, laboratory technician and health assistants to the medical officer core under Indian Public Health Standards.",
+   "say": "First doctor, first referral unit. Thirty thousand people, medical officer led, delivery capable when upgraded, supervising six sub-centres. Standards specify the nurse, pharmacist and technician around that core.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "PHC element",
+     "Standard expectation"
+    ],
+    "rows": [
+     [
+      "Medical officer",
+      "Team leader, OPD and supervision"
+     ],
+     [
+      "Beds",
+      "4 to 6 observation beds"
+     ],
+     [
+      "Services",
+      "OPD, maternal child health, minor procedures"
+     ],
+     [
+      "Supervision",
+      "About 6 sub-centres"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "CHC: first referral unit with specialists",
+   "tx": "A **community health centre** serves 120000 as first referral unit with 30 beds and four specialist cores in IPHS design (medicine, surgery, obstetrics-gynaecology, paediatrics, with anaesthesia support), operation theatre, labour room, X-ray, laboratory and blood storage. Specialist vacancies against this norm are the chronic gap every health systems analysis quotes.",
+   "say": "Referral becomes real here. Thirty beds, four specialist cores, theatre, blood storage for one hundred twenty thousand. Vacant specialist posts against that norm are the chronic quoted gap.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Sub-centre manages periphery"
+     },
+     {
+      "id": "b",
+      "label": "PHC doctor gives first contact care"
+     },
+     {
+      "id": "c",
+      "label": "CHC specialists accept referral"
+     },
+     {
+      "id": "d",
+      "label": "District hospital takes the rest"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "IPHS: standards as entitlements",
+   "tx": "**Indian Public Health Standards** convert facilities from buildings into assured service packages: infrastructure, human resources, drugs, diagnostics and quality protocols per level, revised periodically (2022 revision aligning wellness centres). Gap analysis against IPHS, not against neighbouring districts, is the sanctioned planning method, and facility grading through quality frameworks operationalises it.",
+   "say": "Standards convert buildings into promises. Staff, drugs, diagnostics and protocols per level, gap analysis against the standard itself. Planning compares facilities with entitlements, not with neighbouring districts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "IPHS domain",
+     "Assures"
+    ],
+    "rows": [
+     [
+      "Human resources",
+      "Posts and skills per level"
+     ],
+     [
+      "Drugs and diagnostics",
+      "Essential lists available free"
+     ],
+     [
+      "Infrastructure",
+      "Space, water, power, waste systems"
+     ],
+     [
+      "Quality protocols",
+      "Standard treatment and safety practice"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Referral is a system, not a direction",
+   "tx": "**Referral discipline** fails when patients bypass levels (crowding district OPDs with sub-centre problems), transport is unarranged, or feedback never returns downward. Functioning referral needs communication before movement, transport (108 ambulances), stabilisation at origin, and counter-referral advice. Bypass rates therefore audit trust in lower levels, not patient indiscipline.",
+   "say": "Referral is logistics plus trust. Communication, transport, stabilisation, feedback downward. Bypassing audits lower-level trust, never patient character. Ambulance networks made the chain physical.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Referral working",
+     "points": [
+      "Stabilised, communicated transfer",
+      "Transport arranged by system",
+      "Feedback returns to origin facility"
+     ]
+    },
+    "right": {
+     "title": "Referral failing",
+     "points": [
+      "Self-bypass to district OPD",
+      "Family hires any vehicle",
+      "No record returns downward"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Health and wellness centres: 12 packages",
+   "tx": "**Comprehensive primary care** at wellness centres expands beyond maternal-child work into 12 service packages: pregnancy and newborn, child and adolescent health, family planning, communicable and non-communicable disease management, mental health, eye, ENT, oral, elderly and palliative, emergency and trauma stabilisation. The expansion from selective to comprehensive is National Health Policy 2017's stated paradigm shift.",
+   "say": "Twelve packages replace selective care. Mental health, oral, eye, elderly, palliative and emergency stabilisation join the maternal-child core. Policy calls it the shift from selective to assured comprehensive primary care.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Newer packages",
+     "Older core retained"
+    ],
+    "rows": [
+     [
+      "NCD and mental health care",
+      "Pregnancy and newborn care"
+     ],
+     [
+      "Eye, ENT, oral health",
+      "Immunisation and family planning"
+     ],
+     [
+      "Elderly and palliative care",
+      "Communicable disease control"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Rogi Kalyan Samiti and untied funds",
+   "tx": "**Rogi Kalyan Samitis** (patient welfare committees) govern facilities with community representation, spending untied funds and annual maintenance grants on local gaps (cleanliness, minor repairs, patient amenities) without state sanction delays. Jan Arogya Samitis do the same at wellness centres. Decentralised small money, visibly spent, is the governance intervention behind many cleanliness transformations.",
+   "say": "Small local money, visibly governed. Facility committees with community members spend untied funds on cleanliness and repairs without distant sanctions. Decentralised rupees explain many transformed facilities.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Committee with community members"
+     },
+     {
+      "id": "b",
+      "label": "Untied funds received yearly"
+     },
+     {
+      "id": "c",
+      "label": "Local gaps fixed immediately"
+     },
+     {
+      "id": "d",
+      "label": "Accounts displayed publicly"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Staffing reality versus norms",
+   "tx": "**Vacancy analysis** separates sanctioned, posted and present: specialists at CHCs show the deepest shortfalls, while CHO deployment filled wellness centre leadership faster than doctor recruitment filled PHCs. Task-shifting (trained nurses and AYUSH practitioners in defined roles) and rural service bonds are the policy responses stems expect beside the vacancy numbers.",
+   "say": "Count three ways: sanctioned, posted, present. Specialist chairs empty deepest; wellness officers filled faster than PHC doctors. Task-shifting and service bonds are the quoted policy responses.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gap",
+     "Policy response"
+    ],
+    "rows": [
+     [
+      "CHC specialists vacant",
+      "Rural bonds, incentives, contractual hiring"
+     ],
+     [
+      "PHC doctor shortage",
+      "AYUSH co-location historically, CHO teams"
+     ],
+     [
+      "Nurse and technician gaps",
+      "Task-shifting with protocols"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
