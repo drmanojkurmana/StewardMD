@@ -1,0 +1,250 @@
+{
+  "v": 1,
+  "module": "phy-gfr",
+  "subject": "physiology",
+  "title": "Tubuloglomerular Feedback, Filtration Fraction, and GFR Determinants",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The second major mechanism governing renal autoregulation is **tubuloglomerular feedback**, linking the rate of glomerular filtration to the solute composition of tubular fluid reaching the distal nephron. Operating through the juxtaglomerular apparatus, this feedback loop ensures that each individual nephron continuously stabilizes its own single-nephron glomerular filtration rate.",
+      "say": "Tubuloglomerular feedback enables the macula densa to sense distal tubular flow and adjust single-nephron filtration rate.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gfr_rise",
+            "label": "Glomerular Filtration Rate Rises -> Tubular Flow Accelerates"
+          },
+          {
+            "id": "loop",
+            "label": "Fluid Rushes Past Thick Ascending Limb with Less Time for Solute Reabsorption"
+          },
+          {
+            "id": "md_sense",
+            "label": "Macula Densa Detects Elevated Sodium and Chloride Concentration"
+          },
+          {
+            "id": "tgf_feed",
+            "label": "Release of Paracrine Adenosine Constricts Afferent Arteriole, Normalizing GFR"
+          }
+        ],
+        "edges": [
+          [
+            "gfr_rise",
+            "loop"
+          ],
+          [
+            "loop",
+            "md_sense"
+          ],
+          [
+            "md_sense",
+            "tgf_feed"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Specialized sensory epithelial cells situated within the wall of the thick ascending limb where it abuts the vascular pole form the **macula densa**. These specialized cells detect luminal fluid sodium chloride delivery via apical sodium-potassium-two-chloride cotransporters, functioning as the sensory receptor of tubuloglomerular feedback.",
+      "say": "Macula densa cells sense luminal sodium and chloride via NKCC2 cotransporters at the vascular pole of their nephron.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Macula Densa Epithelium",
+          "points": [
+            "Densely packed columnar epithelial cells in cortical thick ascending limb",
+            "Apical NKCC2 cotransporters sense luminal Na+ and Cl- flux",
+            "Basolateral release of adenosine and ATP upon high solute delivery",
+            "Inhibits renin secretion when luminal NaCl concentration is high"
+          ]
+        },
+        "right": {
+          "title": "Juxtaglomerular (JG) Cells",
+          "points": [
+            "Modified smooth muscle cells in wall of afferent arteriole",
+            "Synthesize, store, and secrete the proteolytic enzyme renin",
+            "Stimulated by low renal perfusion pressure (baroreceptor mechanism)",
+            "Stimulated by sympathetic beta-1 adrenergic receptors and low NaCl"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When excessive glomerular filtration increases sodium chloride delivery to the macula densa, cellular uptake accelerates, triggering intracellular adenosine triphosphate breakdown and basolateral release of **paracrine adenosine**. Adenosine binds vascular A1 receptors on adjacent afferent arterioles, eliciting prompt vasoconstriction that dampens excessive glomerular filtration.",
+      "say": "High sodium chloride delivery causes the macula densa to release adenosine, constricting the afferent arteriole to lower filtration.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "nkcc2",
+            "label": "Elevated Luminal NaCl Enters Macula Densa via Apical NKCC2 Cotransporter"
+          },
+          {
+            "id": "atp_hydro",
+            "label": "Increased Intracellular Na+ Drives Na/K-ATPase; ATP Hydrolyzed to Adenosine"
+          },
+          {
+            "id": "a1_rec",
+            "label": "Adenosine Binds A1 Receptors on Afferent Arteriolar Smooth Muscle"
+          },
+          {
+            "id": "vasocon",
+            "label": "Intracellular Ca2+ Rises, Eliciting Prompt Afferent Arteriolar Constriction"
+          }
+        ],
+        "edges": [
+          [
+            "nkcc2",
+            "atp_hydro"
+          ],
+          [
+            "atp_hydro",
+            "a1_rec"
+          ],
+          [
+            "a1_rec",
+            "vasocon"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Glomerular ultrafiltration is governed physically by the balance of hydrostatic and oncotic pressures, known as **Starling forces across capillaries**. Glomerular capillary hydrostatic pressure promotes filtration, opposed by Bowman space hydrostatic pressure and the oncotic pressure of plasma proteins inside glomerular capillaries.",
+      "say": "Glomerular filtration is driven by capillary hydrostatic pressure, opposed by Bowman space pressure and plasma oncotic pressure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Starling Force",
+          "Typical Value",
+          "Vector Direction",
+          "Clinical Determinant"
+        ],
+        "rows": [
+          [
+            "Capillary Hydrostatic Pressure (PGC)",
+            "~60 mmHg",
+            "Favours Filtration (Outward)",
+            "Governed by renal perfusion and arteriolar resistance"
+          ],
+          [
+            "Bowman Space Hydrostatic Pressure (PBS)",
+            "~15 mmHg",
+            "Opposes Filtration (Inward)",
+            "Elevated in ureteral obstruction or kidney stones"
+          ],
+          [
+            "Capillary Oncotic Pressure (πGC)",
+            "~32 mmHg (mean)",
+            "Opposes Filtration (Inward)",
+            "Rises from 28 to 36 mmHg along capillary length"
+          ],
+          [
+            "Bowman Space Oncotic Pressure (πBS)",
+            "0 mmHg",
+            "Favours Filtration",
+            "Negligible because filtrate is virtually protein-free"
+          ],
+          [
+            "Net Ultrafiltration Pressure (PUF)",
+            "~10 to 15 mmHg",
+            "Net Outward Driving Force",
+            "PUF = PGC - PBS - πGC"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because protein-free fluid is continually filtered along the length of glomerular capillaries, remaining plasma proteins become progressively concentrated. Consequently, **glomerular oncotic pressure** rises from twenty-eight millimetres of mercury at the afferent end to thirty-six millimetres of mercury at the efferent end, gradually diminishing net filtration pressure.",
+      "say": "Plasma protein concentration rises along the capillary, increasing oncotic pressure and slowing net ultrafiltration toward the efferent end.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Afferent Arteriolar End",
+          "points": [
+            "Capillary hydrostatic pressure ~60 mmHg",
+            "Plasma oncotic pressure ~28 mmHg",
+            "Bowman space hydrostatic pressure ~15 mmHg",
+            "High net ultrafiltration pressure (~17 mmHg outward)"
+          ]
+        },
+        "right": {
+          "title": "Efferent Arteriolar End",
+          "points": [
+            "Capillary hydrostatic pressure ~58 mmHg (minimal drop)",
+            "Plasma oncotic pressure rises to ~36 mmHg due to fluid loss",
+            "Bowman space hydrostatic pressure remains ~15 mmHg",
+            "Diminished net ultrafiltration pressure (~7 mmHg outward)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The ratio of glomerular filtration rate to total renal plasma flow is designated the **filtration fraction**. Under normal physiological conditions, with a GFR of one hundred twenty-five millilitres per minute and renal plasma flow of six hundred millilitres per minute, the normal baseline filtration fraction approximates twenty percent.",
+      "say": "The filtration fraction is the ratio of filtration rate to renal plasma flow, normally averaging twenty percent.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Haemodynamic Scenario",
+          "Renal Plasma Flow (RPF)",
+          "Glomerular Filtration Rate (GFR)",
+          "Filtration Fraction (GFR/RPF)"
+        ],
+        "rows": [
+          [
+            "Normal Baseline",
+            "600 mL / min",
+            "125 mL / min",
+            "20% (0.20)"
+          ],
+          [
+            "Afferent Arteriolar Constriction",
+            "Decreased",
+            "Decreased proportionally",
+            "Unchanged"
+          ],
+          [
+            "Efferent Arteriolar Constriction",
+            "Markedly Decreased",
+            "Preserved or Increased",
+            "Significantly Elevated (>25%)"
+          ],
+          [
+            "Plasma Protein Depletion (Nephrotic)",
+            "Normal",
+            "Increased (low πGC)",
+            "Elevated"
+          ],
+          [
+            "Ureteral Stone Obstruction",
+            "Normal or Decreased",
+            "Markedly Decreased (high PBS)",
+            "Markedly Reduced"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In early diabetic nephropathy, glomerular hyperfiltration is driven by preferential efferent arteriolar constriction alongside proximal tubular sodium-glucose cotransporter upregulation. This excessive proximal reabsorption blunts tubuloglomerular feedback delivery of sodium to the macula densa, elevating **single-nephron GFR** and accelerating long-term diabetic glomerulosclerosis.",
+      "say": "Early diabetes produces glomerular hyperfiltration by suppressing tubuloglomerular feedback through sodium-glucose reabsorption.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diabetic-nephropathy-fig1.webp",
+        "alt": "Diabetic nephropathy histopathology",
+        "caption": "Diabetic glomerular hyperfiltration, nodular glomerulosclerosis, and microvascular basement membrane thickening."
+      }
+    },
+    {
+      "tx": "Total filtration capacity is quantified as the product of net ultrafiltration pressure and the **ultrafiltration coefficient**, abbreviated as Kf. Kf reflects the total hydraulic conductivity and surface area of glomerular capillaries; diseases like glomerulonephritis reduce functional surface area, slashing Kf and precipitating clinical oliguria.",
+      "say": "The ultrafiltration coefficient combines membrane conductivity and surface area, which drops sharply in glomerulonephritis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/glomerular-diseases-fig1.webp",
+        "alt": "Glomerular capillary architecture",
+        "caption": "Glomerular basement membrane destruction, podocyte effacement, and ultrafiltration surface loss."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

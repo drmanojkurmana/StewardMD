@@ -1,0 +1,236 @@
+{
+  "v": 1,
+  "module": "phy-gas-exchange",
+  "subject": "physiology",
+  "title": "The Alveolar Gas Equation, DLCO, and Regional V/Q Ratios",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Calculating the ideal partial pressure of oxygen within pulmonary alveoli requires applying the clinical **alveolar gas equation**. Because direct sampling of alveolar gas is impractical, this fundamental equation calculates alveolar oxygen tension from barometric pressure, water vapor pressure, inspired oxygen fraction, and arterial carbon dioxide tension.",
+      "say": "The alveolar gas equation computes ideal alveolar oxygen tension using atmospheric pressure, inspired oxygen fraction, and arterial carbon dioxide.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Equation Component",
+          "Sea Level Value (Room Air)",
+          "Physiological Meaning"
+        ],
+        "rows": [
+          [
+            "PB (Barometric Pressure)",
+            "760 mmHg",
+            "Ambient dry atmospheric pressure at sea level"
+          ],
+          [
+            "PH2O (Water Vapor Pressure)",
+            "47 mmHg",
+            "Vapor pressure of fully humidified air at 37°C in trachea"
+          ],
+          [
+            "FiO2 (Inspired O2 Fraction)",
+            "0.21 (21%)",
+            "Fractional oxygen concentration of room air"
+          ],
+          [
+            "PaCO2 / R (CO2 Correction)",
+            "40 / 0.8 = 50 mmHg",
+            "Accounts for oxygen consumed relative to CO2 produced"
+          ],
+          [
+            "PAO2 (Calculated Alveolar PO2)",
+            "~100 mmHg",
+            "Normal sea-level ideal alveolar oxygen tension"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In the alveolar gas equation, the respiratory exchange ratio, abbreviated as R, represents the whole-body **respiratory quotient**. Under resting metabolic conditions with a typical balanced mixed diet of carbohydrates, lipids, and proteins, the normal steady-state respiratory exchange ratio equals zero point eight, reflecting two hundred millilitres of carbon dioxide produced per two hundred fifty millilitres of oxygen consumed.",
+      "say": "The resting respiratory quotient averages zero point eight on a balanced diet, reflecting the ratio of carbon dioxide production to oxygen consumption.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Carbohydrate Metabolism",
+          "points": [
+            "Substrate: Pure Glucose (C6H12O6 + 6 O2 -> 6 CO2 + 6 H2O)",
+            "Respiratory Quotient (RQ) = 1.00",
+            "Maximum CO2 production per mole of O2 consumed"
+          ]
+        },
+        "right": {
+          "title": "Lipid and Protein Metabolism",
+          "points": [
+            "Substrate: Triacylglycerols (RQ ~ 0.70)",
+            "Substrate: Dietary Proteins (RQ ~ 0.82)",
+            "Standard clinical mixed diet average: RQ = 0.80"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Passive gas transfer across the alveolar-capillary blood-gas barrier conforms to **Fick law of diffusion**. The rate of gas transfer is directly proportional to the surface area of the membrane, the diffusion constant of the specific gas, and the partial pressure gradient, but inversely proportional to membrane thickness.",
+      "say": "Fick law dictates that alveolar gas diffusion increases with surface area and pressure gradient, but decreases with membrane thickness.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "area",
+            "label": "Alveolar Surface Area (~50 to 100 m²): Directly Increases Gas Diffusion Rate"
+          },
+          {
+            "id": "grad",
+            "label": "Partial Pressure Gradient (Alveolar to Capillary ΔP): Drives Diffusion Flux"
+          },
+          {
+            "id": "thick",
+            "label": "Membrane Thickness (~0.2 to 0.5 μm): Inversely Retards Diffusion Rate"
+          },
+          {
+            "id": "sol",
+            "label": "Gas Solubility & Molecular Weight: CO2 Diffuses 20× Faster Than O2"
+          }
+        ],
+        "edges": [
+          [
+            "area",
+            "grad"
+          ],
+          [
+            "grad",
+            "thick"
+          ],
+          [
+            "thick",
+            "sol"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical assessment of the integrity of the alveolar-capillary membrane is achieved by measuring the **diffusing capacity of the lung for carbon monoxide**. Carbon monoxide binds avidly to intra-erythrocytic haemoglobin with negligible plasma tension, making its uptake purely diffusion-limited and ideal for quantifying functional membrane surface area.",
+      "say": "Diffusing capacity for carbon monoxide measures alveolar-capillary membrane integrity, because carbon monoxide transfer is entirely diffusion-limited.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/carbon-monoxide-poisoning-fig1.webp",
+        "alt": "Carbon monoxide diffusion kinetics",
+        "caption": "Carbon monoxide affinity for haemoglobin and diffusion uptake principles across the blood-gas barrier."
+      }
+    },
+    {
+      "tx": "Conditions that thicken the blood-gas barrier or destroy pulmonary capillary beds cause a marked reduction in **measured DLCO**. Classic disorders decreasing DLCO include idiopathic pulmonary fibrosis, emphysema, and pulmonary hypertension. Conversely, alveolar haemorrhage and polycythaemia transiently elevate measured DLCO due to excess intra-alveolar or circulating haemoglobin binding sites.",
+      "say": "Pulmonary fibrosis, emphysema, and pulmonary hypertension reduce DLCO, whereas alveolar haemorrhage and polycythaemia elevate it.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Condition",
+          "Effect on DLCO",
+          "Primary Pathophysiological Basis"
+        ],
+        "rows": [
+          [
+            "Idiopathic Pulmonary Fibrosis",
+            "Markedly Decreased",
+            "Alveolar-capillary membrane fibrotic thickening"
+          ],
+          [
+            "Pulmonary Emphysema",
+            "Significantly Decreased",
+            "Irreversible destruction of alveolar septa and capillaries"
+          ],
+          [
+            "Bronchial Asthma",
+            "Normal or Mildly Increased",
+            "Intact alveolar parenchyma with preserved capillary beds"
+          ],
+          [
+            "Diffuse Alveolar Haemorrhage",
+            "Paradoxically Elevated",
+            "Excess free RBCs in alveolar spaces actively bind inhaled CO"
+          ],
+          [
+            "Severe Anaemia",
+            "Spuriously Decreased",
+            "Fewer circulating RBC haemoglobin binding sites in capillaries"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In the upright human lung, gravity creates striking vertical gradients in ventilation and blood flow, establishing regional differences in the **ventilation-perfusion ratio**. Because intrapleural pressure is more negative at the apex, apical alveoli are already distended at rest, whereas basal alveoli are compressed and reside on a steeper compliance curve.",
+      "say": "Gravity creates vertical gradients in the upright lung, leading to differences in compliance, ventilation, and blood flow from apex to base.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gravity",
+            "label": "Hydrostatic Gravitational Force Pulls Down Lung Tissue and Blood Columns"
+          },
+          {
+            "id": "apex",
+            "label": "Apex: Highly Negative Pleural Pressure; Alveoli Overdistended; Low Compliance"
+          },
+          {
+            "id": "base",
+            "label": "Base: Less Negative Pleural Pressure; Compressed Alveoli; High Compliance"
+          },
+          {
+            "id": "vent",
+            "label": "Inspiration: Basal Alveoli Expand Far More, Receiving Greater Ventilation"
+          }
+        ],
+        "edges": [
+          [
+            "gravity",
+            "apex"
+          ],
+          [
+            "gravity",
+            "base"
+          ],
+          [
+            "base",
+            "vent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Although absolute blood flow and ventilation both increase progressively from the lung apex down to the lung base, perfusion increases far more steeply than ventilation. Consequently, the local **apical V/Q ratio** is high at approximately three point three, whereas the base exhibits a low ratio of approximately zero point six.",
+      "say": "The ventilation-perfusion ratio is high at the lung apex around three point three, and low at the base around zero point six.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Apex of Upright Lung",
+          "points": [
+            "High V/Q ratio (~ 3.3)",
+            "Alveolar PO2 is high (~ 130 mmHg)",
+            "Alveolar PCO2 is low (~ 28 mmHg)",
+            "Favours growth of Mycobacterium tuberculosis"
+          ]
+        },
+        "right": {
+          "title": "Base of Upright Lung",
+          "points": [
+            "Low V/Q ratio (~ 0.6)",
+            "Alveolar PO2 is lower (~ 89 mmHg)",
+            "Alveolar PCO2 is higher (~ 42 mmHg)",
+            "Receives greater absolute volume of ventilation and perfusion"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Because high apical V/Q ratios provide abundant oxygen and minimal carbon dioxide tension, obligate aerobic organisms such as Mycobacterium tuberculosis preferentially colonize the pulmonary apices. When airway obstruction reduces local ventilation to zero, the ratio falls to zero, establishing true **intrapulmonary shunting** that cannot be corrected by supplemental oxygen.",
+      "say": "Obligate aerobes favor the oxygen-rich apex. Complete airway obstruction reduces ventilation to zero, forming a true shunt.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bronchiectasis-exacerbation-fig1.webp",
+        "alt": "Regional ventilation defects",
+        "caption": "Regional parenchymal ventilation derangements, mucus plugging, and airway architecture changes."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

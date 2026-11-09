@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sur-abdominal-trauma",
+ "subject": "surgery",
+ "title": "Blunt Abdominal Trauma: Splenic, Hepatic Injuries and Pringle Manoeuvre",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Blunt abdominal trauma represents a leading cause of preventable post-traumatic mortality, most commonly caused by motor vehicle collisions, falls, and direct physical blows. The spleen represents the most frequently injured solid abdominal organ in blunt trauma, followed closely by the liver. Patients present across a wide clinical spectrum ranging from mild isolated left upper quadrant abdominal tenderness to profound, life-threatening **haemorrhagic shock** with refractory hypotension and abdominal distension.",
+   "say": "The spleen is the most commonly injured organ in blunt abdominal trauma, followed by the liver. Presentations range from mild local tenderness to severe haemorrhagic shock from internal bleeding.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-splenic_injury_signs.webp",
+    "alt": "Clinical illustration of splenic trauma examination signs and injury grading.",
+    "caption": "Splenic injury examination signs: Kehr sign, localized flank dullness, and anatomical injury grades. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Physical examination in suspected splenic trauma reveals localized left upper quadrant tenderness and guarding. Blood accumulating in the subdiaphragmatic space irritates the diaphragmatic peritoneum, triggering sensory afferent impulses through the phrenic nerve that manifest as referred pain to the left shoulder tip, pathognomonically recognized as **Kehr sign**. Percussion may demonstrate fixed dullness in the left flank alongside shifting dullness in the right flank, historically termed Ballance sign, reflecting clotted perisplenic blood and fluid peritoneal blood.",
+   "say": "Left shoulder tip pain, known as Kehr sign, is caused by subdiaphragmatic blood irritating the phrenic nerve. Physical examination also reveals left upper quadrant guarding and percussion dullness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Kehr Sign",
+     "points": [
+      "Referred left shoulder tip pain",
+      "Irritation of diaphragmatic peritoneum",
+      "Mediated via phrenic nerve (C3, C4, C5)",
+      "Exacerbated by Trendelenburg positioning"
+     ]
+    },
+    "right": {
+     "title": "Ballance Sign",
+     "points": [
+      "Fixed dullness to percussion in left flank",
+      "Shifting dullness to percussion in right flank",
+      "Reflects solid clotted blood around spleen",
+      "Free fluid blood moves to dependent flank"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Anatomical staging of splenic injuries follows the American Association for the Surgery of Trauma classification. Grade One injuries encompass subcapsular haematomas involving under ten percent surface area or capsular tears under one centimetre depth. In contrast, Grade Four lesions involve lacerations of segmental or hilar vessels producing devascularization of more than twenty-five percent of the spleen, while Grade Five represents a completely **shattered spleen** or complete devascularizing hilar avulsion.",
+   "say": "Splenic injuries are graded from one to five. Grade one consists of small subcapsular haematomas, while grade five represents a shattered spleen or complete avulsion of the splenic hilum.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "AAST Grade",
+     "Haematoma Criteria",
+     "Laceration Criteria",
+     "Vascular Injury Criteria"
+    ],
+    "rows": [
+     [
+      "Grade I",
+      "Subcapsular <10% surface area",
+      "Capsular tear <1 cm parenchymal depth",
+      "No vascular injury"
+     ],
+     [
+      "Grade II",
+      "Subcapsular 10% to 50%; intraparenchymal <5 cm",
+      "Laceration 1 to 3 cm depth without trabecular vessel",
+      "No active extravasation"
+     ],
+     [
+      "Grade III",
+      "Subcapsular >50% or expanding; intraparenchymal >=5 cm",
+      "Laceration >3 cm parenchymal depth or trabecular vessel",
+      "No active bleeding"
+     ],
+     [
+      "Grade IV",
+      "Ruptured intraparenchymal haematoma with active bleed",
+      "Laceration involving segmental or hilar vessels (>25% devascularised)",
+      "Active arterial blush on CT"
+     ],
+     [
+      "Grade V",
+      "Completely shattered and fragmented spleen",
+      "Completely devascularised splenic parenchyma",
+      "Total hilar vascular avulsion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Over eighty percent of hemodynamically stable blunt splenic injury patients are managed successfully through **non-operative management**. Candidates undergo continuous hemodynamic monitoring in the intensive care unit, serial haematocrit checks, and strict bed rest. Contrast-enhanced computed tomography demonstrating an active arterial vascular contrast blush indicates urgent transcatheter angiographic embolization. Indications for immediate exploratory laparotomy include persistent hemodynamic instability, positive FAST with refractory shock, signs of peritonitis, or failed conservative therapy.",
+   "say": "Most stable patients with splenic trauma are managed conservatively without surgery. Angioembolization controls active bleeding blushes on CT, while unstable patients require immediate laparotomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "blunt",
+      "label": "Blunt Abdominal Trauma with Positive FAST"
+     },
+     {
+      "id": "hemo",
+      "label": "Hemodynamically Stable Patient?"
+     },
+     {
+      "id": "ct",
+      "label": "Contrast CT -> ICU Monitoring & Angioembolization"
+     },
+     {
+      "id": "or",
+      "label": "Unstable -> Immediate Exploratory Laparotomy"
+     }
+    ],
+    "edges": [
+     [
+      "blunt",
+      "hemo"
+     ],
+     [
+      "hemo",
+      "ct"
+     ],
+     [
+      "hemo",
+      "or"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The liver is the second most commonly injured abdominal solid organ, but carries the highest mortality among blunt abdominal parenchymal injuries. The extensive surface area of the liver and its dual vascular inflow from the portal vein and hepatic artery make parenchymal tears prone to massive haemorrhage. Associated trauma frequently involves lower right **rib fractures** and right diaphragmatic tears. Over eighty-five percent of stable blunt hepatic injuries resolve without surgical intervention, utilizing transcatheter hepatic arterial embolization for active arterial blushes.",
+   "say": "The liver is frequently injured in blunt trauma and can bleed profusely from its dual blood supply. Most stable hepatic injuries are managed conservatively with angiographic embolization when necessary.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/penetrating-abdominal-trauma-fig1.webp",
+    "alt": "Surgical diagram showing abdominal visceral trauma, liver laceration, and hemoperitoneum.",
+    "caption": "Traumatic abdominal parenchymal injury: hepatic laceration, mesenteric disruption, and peritoneal haemorrhage. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "During emergency laparotomy for massive, uncontrolled hepatic parenchymal haemorrhage, surgeons perform the rapid diagnostic and therapeutic **Pringle manoeuvre**. The surgeon passes an index finger or non-crushing vascular clamp through the foramen of Winslow to compress the hepatoduodenal ligament, temporarily occluding the portal vein and hepatic artery. Occlusion can be safely maintained continuously for fifteen to twenty minutes, or intermittently for up to sixty minutes with intervening five-minute reperfusion intervals.",
+   "say": "The Pringle manoeuvre temporarily clamps the hepatoduodenal ligament to occlude the hepatic artery and portal vein. This controls inflow bleeding and helps identify the precise source of haemorrhage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pringle Response",
+     "Bleeding Status",
+     "Anatomical Bleeding Source",
+     "Subsequent Surgical Strategy"
+    ],
+    "rows": [
+     [
+      "Complete Haemostasis",
+      "Hepatic parenchymal bleeding ceases completely",
+      "Hepatic artery or portal vein branches",
+      "Parenchymal tractotomy and direct suture ligation"
+     ],
+     [
+      "Partial Reduction",
+      "Bleeding substantially diminishes but continues",
+      "Mixed inflow and parenchymal venous injury",
+      "Topical haemostatics and deep parenchymal mattress sutures"
+     ],
+     [
+      "Persistent Profuse Bleeding",
+      "Torrential dark venous bleeding continues unabated",
+      "Retrohepatic IVC or major hepatic vein trunks",
+      "Perihepatic gauze packing, total vascular exclusion, or shunt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Evaluating the response to the Pringle manoeuvre directs subsequent intraoperative management. If clamping the hepatoduodenal ligament successfully arrests hepatic bleeding, the vascular source is confirmed to arise from the portal vein or hepatic artery, which are controlled with direct suture ligation or parenchymal tractotomy. Conversely, if torrential dark haemorrhage persists unchecked, the source is retrohepatic **inferior vena cava** or major hepatic veins, which cannot be controlled by portal clamping.",
+   "say": "If bleeding stops during the Pringle manoeuvre, the inflow vessels are responsible. If massive dark bleeding continues unabated, a retrohepatic vena cava or hepatic vein tear is present.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inflow Vessel Bleeding",
+     "points": [
+      "Arises from hepatic artery or portal vein",
+      "Arrests completely upon Pringle clamping",
+      "Managed by direct vessel ligation",
+      "Amenable to selective angioembolization"
+     ]
+    },
+    "right": {
+     "title": "Retrohepatic Venous Bleeding",
+     "points": [
+      "Arises from IVC or major hepatic veins",
+      "Bleeding continues unabated during clamp",
+      "Requires perihepatic gauze packing",
+      "High mortality; mandates damage control"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In patients undergoing emergency splenectomy following severe splenic rupture, loss of splenic reticuloendothelial phagocytic filtration and properdin-opsonin synthesis permanently impairs bacterial defense. Patients remain vulnerable to overwhelming post-splenectomy infection, a catastrophic fulminant sepsis typically caused by encapsulated bacteria such as Streptococcus pneumoniae, Neisseria meningitidis, and Haemophilus influenzae. Prevention mandates administering polyvalent pneumococcal, meningococcal, and Haemophilus **vaccines** two weeks postoperatively, accompanied by patient education regarding prompt empiric antibiotics for febrile illnesses.",
+   "say": "Splenectomy leaves patients susceptible to life-threatening post-splenectomy sepsis from encapsulated bacteria. Vaccination against pneumococcus, meningococcus, and Haemophilus two weeks after surgery is essential.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "splenectomy",
+      "label": "Emergency Splenectomy for Severe Trauma"
+     },
+     {
+      "id": "loss",
+      "label": "Loss of Splenic Opsonisation and Phagocytosis"
+     },
+     {
+      "id": "vaccine",
+      "label": "Administer Vaccines at Postoperative Day 14"
+     },
+     {
+      "id": "prophylaxis",
+      "label": "Lifelong Patient Education and Empiric Antibiotics"
+     }
+    ],
+    "edges": [
+     [
+      "splenectomy",
+      "loss"
+     ],
+     [
+      "loss",
+      "vaccine"
+     ],
+     [
+      "vaccine",
+      "prophylaxis"
+     ]
+    ]
+   }
+  }
+ ]
+}

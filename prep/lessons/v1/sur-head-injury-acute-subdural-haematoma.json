@@ -1,0 +1,229 @@
+{
+ "v": 1,
+ "module": "sur-head-injury",
+ "subject": "surgery",
+ "title": "Subdural Haematomas and Diffuse Axonal Injury in Head Trauma",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Traumatic intracranial haemorrhage located in the anatomical plane between the dura mater and the underlying arachnoid membrane represents an acute **subdural haematoma**. Most frequently precipitated by high-energy deceleration motor vehicular collisions or major falls, the lesion characteristically arises from tearing of delicate bridging cortical veins as they traverse the subdural space to enter the superior sagittal sinus, or from direct laceration of cortical vessels overlying severe cortical contusions.",
+   "say": "An acute subdural haematoma forms between the dura and arachnoid membranes, usually from torn bridging veins entering the superior sagittal sinus. It typically reflects high-energy deceleration trauma with significant brain injury.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/subdural-fig1.webp",
+    "alt": "Coronal anatomical diagram of torn bridging veins and crescentic subdural haematoma.",
+    "caption": "Tearing of parasagittal bridging cortical veins producing an acute crescentic subdural haematoma. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Unlike extradural collections, an acute subdural haematoma carries a devastating prognosis with mortality rates often exceeding fifty to sixty percent. This poor outcome stems directly from the severe primary parenchymal brain injury and malignant hemispheric edema that accompany the vascular tear. Clinically, patients present in immediate profound coma or experience rapid secondary neurological collapse without the classic lucid interval, displaying decerebrate posturing and progressive pupillary unresponsiveness from **uncal herniation**.",
+   "say": "Acute subdural haematomas carry high mortality because they are accompanied by severe parenchymal brain contusion and malignant swelling. Patients typically present in deep coma with signs of impending herniation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Extradural Haematoma",
+     "points": [
+      "Arterial middle meningeal bleeding",
+      "Underlying brain parenchyma often uninjured",
+      "Frequent classic lucid interval",
+      "Lower overall mortality (5% to 10%)"
+     ]
+    },
+    "right": {
+     "title": "Acute Subdural Haematoma",
+     "points": [
+      "Venous bridging vein or cortical vessel tear",
+      "Severe underlying primary parenchymal contusion",
+      "Immediate persistent coma is typical",
+      "High overall mortality (50% to 60%)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "On emergency non-contrast cranial computed tomography, an acute subdural haematoma exhibits a pathognomonic appearance as a hyperdense, crescentic collection overlying the cerebral convexity. Because the subdural space lacks internal fibrous tethering, the haemorrhage freely crosses anatomical cranial sutures, bounded only by the rigid midline falx cerebri and tentorium cerebelli. A pronounced **midline shift** frequently exceeds the physical thickness of the haematoma, reflecting the contribution of malignant underlying cerebral parenchymal edema.",
+   "say": "Non-contrast CT reveals a hyperdense, crescentic collection that freely crosses cranial suture lines. Severe underlying hemispheric brain edema frequently produces marked midline brain shift.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Imaging Parameter",
+     "Extradural Haematoma",
+     "Acute Subdural Haematoma"
+    ],
+    "rows": [
+     [
+      "Shape on Axial CT",
+      "Biconvex, lentiform, lens-shaped",
+      "Crescentic, concavo-convex, sickle-shaped"
+     ],
+     [
+      "Cranial Suture Crossing",
+      "Arrested at sutures where dura attaches",
+      "Freely crosses sutures across the hemisphere"
+     ],
+     [
+      "Limiting Dural Folds",
+      "Can cross dural falx attachments",
+      "Strictly limited by midline falx and tentorium"
+     ],
+     [
+      "Parenchymal Edema",
+      "Minimal underlying cerebral swelling",
+      "Severe underlying parenchymal edema and shift"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neurosurgical guidelines dictate immediate operative evacuation for any acute subdural haematoma displaying a maximum clot thickness exceeding ten millimetres or inducing a midline shift greater than five millimetres on axial computed tomography, regardless of the Glasgow Coma Scale score. In comatose patients with smaller collections, surgery is indicated if the intracranial pressure exceeds twenty millimetres of mercury or if the Glasgow Coma Scale score drops by two or more points. The procedure of choice is an emergent **decompressive craniectomy**.",
+   "say": "Clot thickness over ten millimetres or midline shift greater than five millimetres mandates emergency surgical evacuation. A large decompressive craniectomy accommodates post-traumatic brain swelling.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ct",
+      "label": "Non-Contrast Head CT Scan Performed"
+     },
+     {
+      "id": "criteria",
+      "label": "Clot Thickness >10mm or Shift >5mm?"
+     },
+     {
+      "id": "or",
+      "label": "Immediate Transfer to Operating Theater"
+     },
+     {
+      "id": "surgery",
+      "label": "Large Craniotomy / Decompressive Craniectomy"
+     }
+    ],
+    "edges": [
+     [
+      "ct",
+      "criteria"
+     ],
+     [
+      "criteria",
+      "or"
+     ],
+     [
+      "or",
+      "surgery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In elderly individuals and chronic alcoholics, progressive age-related cerebral atrophy widens the subdural space and places bridging veins under continuous chronic traction. Trivial, forgotten head trauma can rupture these attenuated vessels, resulting in an insidious **chronic subdural haematoma**. Over weeks, extravasated blood breaks down into dark, liquefying fluid encapsulated by inner and outer fibrovascular neo-membranes. Capillary fragility within the hypervascular outer membrane triggers recurrent micro-haemorrhages, causing progressive volumetric expansion.",
+   "say": "Chronic subdural haematoma affects elderly patients after trivial head trauma as stretched bridging veins tear slowly. Fragile capillaries in an expanding outer membrane leak repeatedly over weeks.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chronic-subdural-hematoma-fig1.webp",
+    "alt": "Axial cranial computed tomography showing chronic subdural collection.",
+    "caption": "Computed tomography demonstrating a hypodense crescentic chronic subdural haematoma with mass effect. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Patients suffering from a chronic subdural haematoma present with insidious symptoms frequently misdiagnosed as dementia, depression, or an acute ischaemic stroke. Prominent clinical features include dull fluctuating headaches, progressive cognitive decline, gait ataxia, personality alterations, and subtle contralateral motor hemiparesis. Diagnostic computed tomography reveals a characteristic hypodense or isodense crescentic fluid collection. Symptomatic collections causing neurological deficit require surgical decompression, accomplished through bedside twist-drill or operative **burr hole craniostomy** accompanied by closed subdural irrigation and catheter drainage.",
+   "say": "Chronic subdural haematoma presents insidiously with cognitive decline, gait imbalance, and fluctuating headaches. Evacuation through burr hole craniostomy with closed catheter drainage provides excellent symptom relief.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Feature",
+     "Acute Subdural Haematoma",
+     "Chronic Subdural Haematoma"
+    ],
+    "rows": [
+     [
+      "Patient Demographics",
+      "Young trauma victims, high-speed collisions",
+      "Elderly individuals, alcoholics, coagulopathy"
+     ],
+     [
+      "Time to Presentation",
+      "Hours to first 24 to 48 hours post-injury",
+      "Weeks to months following forgotten minor bump"
+     ],
+     [
+      "CT Attenuation",
+      "Uniformly hyperdense (bright white clot)",
+      "Hypodense (dark fluid) or mixed isodense"
+     ],
+     [
+      "Surgical Approach",
+      "Emergency large decompressive craniotomy",
+      "Elective burr hole craniostomy with catheter drainage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe rotational acceleration and deceleration forces during high-speed trauma impart violent shearing stresses across tissues of differing physical densities. This mechanical phenomenon produces **diffuse axonal injury**, characterized by widespread microscopic tearing and disruption of neuronal axons and their cytoskeletal transport systems. Pathological shearing lesions localize characteristically to the cerebral gray-white matter junction, the corpus callosum, and the dorsolateral upper brainstem.",
+   "say": "Diffuse axonal injury results from violent rotational shearing stresses that disrupt axons at tissue interfaces. Lesions concentrate at the gray-white junction, the corpus callosum, and the brainstem.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "decel",
+      "label": "Violent Rotational Deceleration Force"
+     },
+     {
+      "id": "shear",
+      "label": "Shearing Stress at Gray-White Interface"
+     },
+     {
+      "id": "axotomy",
+      "label": "Microscopic Axonal Retraction Balls Form"
+     },
+     {
+      "id": "coma",
+      "label": "Immediate Prolonged Post-Traumatic Coma"
+     }
+    ],
+    "edges": [
+     [
+      "decel",
+      "shear"
+     ],
+     [
+      "shear",
+      "axotomy"
+     ],
+     [
+      "axotomy",
+      "coma"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinically, diffuse axonal injury presents with immediate, profound, and prolonged post-traumatic coma that appears strikingly disproportionate to initial head computed tomography findings. Initial emergency computed tomography may appear entirely normal or reveal only subtle punctate petechial micro-haemorrhages scattered along the corpus callosum and centrum semiovale. Magnetic resonance imaging, particularly **susceptibility-weighted imaging**, represents the gold standard diagnostic modality for identifying extensive paramagnetic haemosiderin microbleeds, while management focuses on rigorous intracranial pressure control and neurointensive care.",
+   "say": "Diffuse axonal injury produces deep, persistent coma despite relatively normal initial CT findings. Susceptibility-weighted magnetic resonance imaging is the gold standard to reveal diffuse microscopic petechial haemorrhages.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Non-Contrast Head CT",
+     "points": [
+      "Often appears deceptively normal",
+      "May show tiny punctate petechiae",
+      "Underestimates true axonal trauma",
+      "Primary tool for ruling out mass lesion"
+     ]
+    },
+    "right": {
+     "title": "MRI (SWI Sequence)",
+     "points": [
+      "Demonstrates diffuse microscopic haemosiderin",
+      "High sensitivity for corpus callosum shearing",
+      "Accurately maps brainstem axonal injury",
+      "Provides superior long-term neuroprognostication"
+     ]
+    }
+   }
+  }
+ ]
+}

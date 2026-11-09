@@ -1,0 +1,216 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-wall-diaphragm",
+ "subject": "anatomy",
+ "title": "Intercostal Drainage, Internal Thoracic Artery, and Diaphragmatic Openings",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Safe evacuation of air or fluid from the pleural space requires tube thoracostomy placed strictly within the **safe triangle** of the chest wall. Bounded anteriorly by the lateral border of pectoralis major, posteriorly by the anterior border of latissimus dorsi, and inferiorly by the horizontal level of the fifth intercostal space, this zone avoids major muscular and neurovascular injury.",
+   "say": "Tube thoracostomy must be placed within the safe triangle of the chest wall. Bounded by pectoralis major anteriorly, latissimus dorsi posteriorly, and the fifth intercostal space inferiorly, this area protects major nerves and vessels.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-tube-thoracostomy-intercostal-drain.webp",
+    "alt": "Clinical photograph showing chest tube placement in the fifth intercostal space within the safe triangle",
+    "caption": "Tube thoracostomy positioned in the fifth intercostal space within the anatomical safe triangle. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When inserting an **intercostal drain**, the fifth intercostal space in the midaxillary line represents the standard landmark, lying at the level of the nipple in males. Placing the tube below the fifth space risks catastrophic transdiaphragmatic penetration into the liver on the right side or the spleen on the left side during full expiration.",
+   "say": "The fifth intercostal space in the midaxillary line is the classic insertion site for chest tube placement. Placing drains below the fifth space risks piercing the diaphragm into the liver or spleen during expiration.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Safe 5th Intercostal Space",
+     "points": [
+      "Within midaxillary safe triangle",
+      "Level with the male nipple (dermatome T4)",
+      "Safely clears highest diaphragmatic dome",
+      "Evacuates both pneumothorax and hemothorax"
+     ]
+    },
+    "right": {
+     "title": "Dangerous Sub-5th Space",
+     "points": [
+      "Diaphragm rises to 4th rib on right during expiration",
+      "Direct trocar injury to hepatic parenchyma",
+      "Splenic laceration on left hemithorax",
+      "Severe intraperitoneal hemorrhage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An intercostal drainage catheter features a radio-opaque stripe interrupted by a **sentinel eye**, marking the most proximal drainage hole. When positioning the tube, the sentinel eye must be confirmed radiologically to reside completely within the pleural cavity, preventing subcutaneous air extravasation and surgical emphysema.",
+   "say": "Chest tubes feature a radio-opaque marker interrupted at the sentinel eye, the most proximal drainage port. Radiographs must confirm the sentinel eye sits entirely inside the pleural cavity to prevent subcutaneous emphysema.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-tub-intercostal-drain-tube.webp",
+    "alt": "Intercostal drainage catheter showing radio-opaque stripe interrupted at the sentinel eye",
+    "caption": "Chest drain tube demonstrating the sentinel eye fenestration and depth markers. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **internal thoracic artery** (internal mammary artery) arises from the first part of the subclavian artery in the root of the neck. Descending vertically approximately one centimetre lateral to the sternal margin, it rests on the endothoracic fascia and transversus thoracis muscle before bifurcating at the sixth intercostal space.",
+   "say": "The internal thoracic artery originates from the first part of the subclavian artery. Descending one centimeter lateral to the sternal edge, it splits in the sixth intercostal space into musculophrenic and superior epigastric arteries.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Arterial Branch",
+     "Origin / Level",
+     "Course / Destination",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Pericardiacophrenic Artery",
+      "Root of neck near origin",
+      "Accompanies phrenic nerve to pericardium",
+      "Vascular supply to fibrous pericardium"
+     ],
+     [
+      "Anterior Intercostal Branches",
+      "Upper 6 intercostal spaces",
+      "Anastomose with posterior intercostal arteries",
+      "Collateral bypass in coarctation of aorta"
+     ],
+     [
+      "Superior Epigastric Artery",
+      "Terminal bifurcation at 6th space",
+      "Enters rectus sheath behind rectus abdominis",
+      "Anastomoses with inferior epigastric artery"
+     ],
+     [
+      "Musculophrenic Artery",
+      "Terminal bifurcation at 6th space",
+      "Follows costal margin to supply diaphragm",
+      "Supplies lower anterior intercostal spaces 7-9"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because the internal thoracic artery possesses remarkable resistance to atherosclerosis and maintains sustained endothelial nitric oxide production, its left anterior branch, the **left internal mammary artery** (LIMA), represents the undisputed gold-standard bypass conduit in coronary artery bypass grafting to revascularize the left anterior descending coronary artery.",
+   "say": "Due to its resistance to atherosclerosis and strong nitric oxide production, the left internal mammary artery is the gold-standard bypass conduit for revascularizing the left anterior descending coronary artery.",
+   "vis": {
+    "kind": "flow",
+    "title": "Use of LIMA in Coronary Bypass",
+    "nodes": [
+     {
+      "id": "harvest",
+      "label": "LIMA Mobilized from Anterior Chest Wall with Pedicle"
+     },
+     {
+      "id": "insitu",
+      "label": "Subclavian Inflow Maintained In Situ as Native Arterial Conduit"
+     },
+     {
+      "id": "anast",
+      "label": "Distal Anastomosis Constructed to Left Anterior Descending"
+     },
+     {
+      "id": "patency",
+      "label": "Over 90% Long-term 10-year Graft Patency Achieved"
+     }
+    ],
+    "edges": [
+     [
+      "harvest",
+      "insitu"
+     ],
+     [
+      "insitu",
+      "anast"
+     ],
+     [
+      "anast",
+      "patency"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The respiratory diaphragm is a dome-shaped musculotendinous partition separating thoracic and abdominal cavities. It is pierced by three major openings arranged at successive vertebral levels: the **caval opening** at vertebral level T8, the oesophageal hiatus at level T10, and the aortic hiatus at level T12.",
+   "say": "The diaphragm separates thoracic and abdominal cavities, pierced by three major openings at T8, T10, and T12: the vena caval foramen at T8, oesophageal hiatus at T10, and aortic hiatus at T12.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-diaphragm-openings.svg",
+    "alt": "Anatomical schematic of the diaphragm showing caval, oesophageal, and aortic hiatuses",
+    "caption": "Three major diaphragmatic apertures and their transmitted neurovascular structures. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The caval opening lies within the central tendon of the diaphragm at the level of the eighth thoracic vertebra (T8), slightly to the right of the midline. Traversing this aperture are the **inferior vena cava** and terminal branches of the right phrenic nerve. Diaphragmatic contraction during inspiration dilates the opening, augmenting venous return.",
+   "say": "The caval opening resides in the central tendon at vertebral level T8 to the right of midline. It transmits the inferior vena cava and right phrenic nerve. Diaphragmatic contraction widens this aperture, enhancing venous return.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Caval Opening (T8)",
+     "points": [
+      "Located in central tendon (rigid margin)",
+      "Transmits inferior vena cava and right phrenic",
+      "Widened during inspiration by muscular pull",
+      "Increases venous return to right atrium"
+     ]
+    },
+    "right": {
+     "title": "Oesophageal Hiatus (T10)",
+     "points": [
+      "Located in muscular right crus (contractile)",
+      "Transmits oesophagus, vagal trunks, gastric vessels",
+      "Constricted during inspiration by right crus pinch",
+      "Acts as physiological anti-reflux sphincter"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Remembering the vertebral levels of diaphragmatic apertures uses the classic consonant mnemonic: Vena Cava has 8 letters (T8), Oesophagus has 10 letters (T10), and Aortic Hiatus has 12 letters (T12). Variations or trauma to these openings can provoke congenital or acquired **diaphragmatic herniation**, requiring immediate surgical restoration.",
+   "say": "Remember diaphragmatic levels by letter counts: Vena Cava has eight letters for T8, Oesophagus has ten letters for T10, and Aortic Hiatus has twelve letters for T12. Hernias through these gaps require surgical repair.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diaphragmatic Hiatus",
+     "Vertebral Level",
+     "Tissue Margin",
+     "Transmitted Structures"
+    ],
+    "rows": [
+     [
+      "Caval Aperture",
+      "T8",
+      "Central tendon",
+      "Inferior vena cava, right phrenic nerve branches"
+     ],
+     [
+      "Oesophageal Hiatus",
+      "T10",
+      "Right crus (muscular sling)",
+      "Oesophagus, anterior/posterior vagal trunks, gastric vessels"
+     ],
+     [
+      "Aortic Hiatus",
+      "T12",
+      "Median arcuate ligament",
+      "Abdominal aorta, thoracic duct, azygos vein"
+     ],
+     [
+      "Sternocostal (Larrey)",
+      "T10/T11 anterior",
+      "Between xiphoid and costal fibers",
+      "Superior epigastric vessels, Morgagni hernia site"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "2e171e43-c4d5-46d7-9d5d-fd7266d333d5",
+  "3338dc39-bad8-4491-aa60-f33f160a6363",
+  "89911ff4-3237-4297-a225-1b09787b7f42"
+ ]
+}

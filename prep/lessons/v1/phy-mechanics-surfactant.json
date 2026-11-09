@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "module": "phy-mechanics",
+ "subject": "physiology",
+ "title": "Pulmonary Surfactant, Airway Resistance, and Work of Breathing",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The air-liquid interface lining microscopic alveoli generates immense surface tension forces, which account for two-thirds of total lung elastic recoil. According to Laplace law applied to spherical alveoli, collapsing pressure equals twice surface tension divided by alveolar radius. Without intervention, smaller alveoli would generate higher collapsing pressures, emptying into larger alveoli in progressive **atelectasis**.",
+   "say": "Surface tension creates two-thirds of lung recoil. By Laplace law, smaller alveoli face higher collapsing pressure and would collapse without surfactant.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "lap",
+      "label": "Laplace Law for Sphere: Collapsing Pressure (P) = 2 x Tension (T) / Radius (r)"
+     },
+     {
+      "id": "small",
+      "label": "Small Alveolus (Small r) Faces Higher Inward Collapsing Pressure"
+     },
+     {
+      "id": "empty",
+      "label": "Small Alveoli Empty Air into Larger Alveoli Down Pressure Gradient"
+     },
+     {
+      "id": "col",
+      "label": "Widespread Alveolar Instability and Progressive Micro-Atelectasis"
+     }
+    ],
+    "edges": [
+     [
+      "lap",
+      "small"
+     ],
+     [
+      "small",
+      "empty"
+     ],
+     [
+      "empty",
+      "col"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Alveolar stability is guaranteed by **pulmonary surfactant**, a surface-active lipoprotein complex synthesized and secreted by Type II alveolar pneumocytes. Surfactant comprises ninety percent lipids and ten percent proteins, dominated by the unique zwitterionic phospholipid dipalmitoylphosphatidylcholine (DPPC), which concentrates at the air-water interface to dramatically lower surface tension.",
+   "say": "Pulmonary surfactant synthesized by Type II pneumocytes is rich in dipalmitoylphosphatidylcholine, concentrating at the interface to lower surface tension.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surfactant Component",
+     "Proportion by Weight",
+     "Specific Biochemical Name",
+     "Functional Role"
+    ],
+    "rows": [
+     [
+      "Dominant Phospholipid",
+      "50 to 60 percent",
+      "Dipalmitoylphosphatidylcholine (DPPC)",
+      "Forms packed surface monolayer lowering surface tension"
+     ],
+     [
+      "Unsaturated Phosphatidylcholine",
+      "20 to 25 percent",
+      "Fluidizing phospholipids",
+      "Aids rapid spreading of DPPC across alveolar surface"
+     ],
+     [
+      "Phosphatidylglycerol",
+      "8 to 10 percent",
+      "Acidic phospholipid",
+      "Facilitates surfactant film spread and stability"
+     ],
+     [
+      "Hydrophobic Proteins (SP-B, SP-C)",
+      "1 to 2 percent",
+      "Surfactant proteins B and C",
+      "Critical for insertion and monolayer formation"
+     ],
+     [
+      "Hydrophilic Proteins (SP-A, SP-D)",
+      "3 to 5 percent",
+      "Collectin innate defense proteins",
+      "Opsonises pathogens and regulates surfactant recycling"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surfactant reduces surface tension proportionately more in small alveoli than in large alveoli. During expiration, as alveolar surface area shrinks, DPPC molecules pack tightly together, driving surface tension down to near zero dynes per centimetre. This equalizes collapsing pressure across alveoli of varying sizes, preventing atelectasis and markedly increasing pulmonary **compliance**.",
+   "say": "As alveoli shrink during expiration, surfactant molecules pack tightly, lowering surface tension to near zero and stabilizing small alveoli.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alveoli Lacking Surfactant",
+     "points": [
+      "Constant high surface tension (~70 dyn/cm) at all volumes",
+      "Small alveoli develop higher inward collapsing pressures",
+      "Small alveoli collapse into larger alveoli (Laplace instability)",
+      "Transudation of fluid into alveoli (pulmonary oedema)"
+     ]
+    },
+    "right": {
+     "title": "Alveoli with Surfactant",
+     "points": [
+      "Surface tension varies with surface area (falls to < 5 dyn/cm)",
+      "Collapsing pressure equalized across different-sized alveoli",
+      "Maintains independent alveolar patency and stability",
+      "Reduces hydrostatic suction, keeping alveoli dry"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Premature infants born before thirty-four weeks of gestation frequently lack adequate surfactant synthesis, developing **neonatal respiratory distress syndrome** (NRDS). Deficiency of DPPC leads to widespread diffuse atelectasis, severe hypoxaemia, and intrapulmonary shunting. Damaged alveolar capillaries leak plasma protein, forming fibrinous hyaline membranes that severely impair gas exchange.",
+   "say": "Premature infants lacking surfactant develop neonatal respiratory distress syndrome, with diffuse alveolar collapse and hyaline membrane formation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/pae-neo-downe-score.webp",
+    "alt": "Downe score clinical assessment of neonatal respiratory distress.",
+    "caption": "Clinical evaluation and scoring of neonatal respiratory distress syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Fetal lung maturity is assessed clinically by measuring the lecithin-to-sphingomyelin ratio in amniotic fluid. Lecithin (DPPC) surges after thirty-four weeks of gestation while sphingomyelin remains constant; an **L-S ratio** exceeding two point zero signifies mature surfactant production. In threatened preterm delivery, maternal antenatal corticosteroid therapy accelerates fetal pneumocyte maturation.",
+   "say": "Fetal lung maturity is confirmed by a lecithin-sphingomyelin ratio over two. Antenatal corticosteroids given to mothers stimulate fetal surfactant synthesis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ster",
+      "label": "Antenatal Betamethasone Administered to Mother in Preterm Labor"
+     },
+     {
+      "id": "diff",
+      "label": "Corticosteroids Cross Placenta and Bind Fetal Pneumocyte Nuclear Receptors"
+     },
+     {
+      "id": "enz",
+      "label": "Upregulates Choline Phosphate Cytidylyltransferase & Surfactant Proteins"
+     },
+     {
+      "id": "mat",
+      "label": "Accelerates DPPC Synthesis and Elevates L-S Ratio Above 2.0"
+     }
+    ],
+    "edges": [
+     [
+      "ster",
+      "diff"
+     ],
+     [
+      "diff",
+      "enz"
+     ],
+     [
+      "enz",
+      "mat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The opposition to gas flow through the tracheobronchial tree is **airway resistance**. Governing eighty percent of total resistance, medium-sized segmental bronchi (generations 4 through 8) represent the primary site of airway resistance because their total cumulative cross-sectional area is relatively small. Conversely, terminal bronchioles contribute minimally because millions of parallel branches create massive total surface area.",
+   "say": "Medium-sized bronchi account for the bulk of airway resistance. Terminal bronchioles contribute little because their parallel branches create immense surface area.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Airway Branching Level",
+     "Airway Generation",
+     "Total Cross-Sectional Area",
+     "Proportion of Airway Resistance"
+    ],
+    "rows": [
+     [
+      "Upper Airway (Nose, Pharynx)",
+      "Generations 0 (Trachea)",
+      "Moderate (~2.5 cm2)",
+      "Accounts for 30 to 40% of total resistance"
+     ],
+     [
+      "Segmental / Lobar Bronchi",
+      "Generations 4 to 8",
+      "Relatively small cross-section",
+      "Primary site of resistance (40 to 50%)"
+     ],
+     [
+      "Terminal Bronchioles",
+      "Generations 12 to 16",
+      "Enormously expanded (> 100 cm2)",
+      "Contributes < 10% (silent zone of the lung)"
+     ],
+     [
+      "Alveolar Ducts and Sacs",
+      "Generations 17 to 23",
+      "Massive surface (> 1000 cm2)",
+      "Zero resistance (gas moves by diffusion)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Autonomic signaling dynamically regulates airway resistance. Sympathetic activation stimulates **beta-2 adrenergic receptors** on bronchial smooth muscle, elevating cyclic AMP to induce bronchodilation. In contrast, parasympathetic vagal acetylcholine binds muscarinic M3 receptors, mobilizing IP3 and calcium to cause bronchoconstriction and increase mucus secretion.",
+   "say": "Sympathetic stimulation of beta-2 receptors raises cyclic AMP to dilate airways, while parasympathetic M3 stimulation causes bronchoconstriction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/asthma-copd-drugs-fig1.webp",
+    "alt": "Pharmacological targets regulating airway smooth muscle tone.",
+    "caption": "Beta-2 adrenergic bronchodilation and muscarinic bronchoconstriction mechanisms. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The mechanical energy expended by respiratory muscles to overcome elastic recoil and airway resistance is the **work of breathing**. In healthy resting adults, work of breathing accounts for less than five percent of total body oxygen consumption. In restrictive fibrosis, elastic work escalates steeply, while in obstructive asthma or COPD, resistive work dominates, exhausting respiratory muscle reserves.",
+   "say": "Work of breathing consumes under five percent of body oxygen at rest, dominated by elastic work in fibrosis and resistive work in asthma and COPD.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Elastic Work of Breathing",
+     "points": [
+      "Work required to overcome lung and chest wall recoil",
+      "Accounts for 65 percent of resting work of breathing",
+      "Markedly elevated in pulmonary fibrosis, ARDS, and kyphosis",
+      "Patients adopt rapid, shallow breathing patterns to minimize work"
+     ]
+    },
+    "right": {
+     "title": "Resistive (Non-Elastic) Work",
+     "points": [
+      "Work required to overcome frictional resistance to airflow",
+      "Accounts for 35 percent of resting work of breathing",
+      "Markedly elevated in acute asthma, COPD, and foreign body",
+      "Patients adopt slow, deep breathing patterns with prolonged expiration"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

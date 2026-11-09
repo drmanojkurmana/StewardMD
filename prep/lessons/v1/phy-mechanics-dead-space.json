@@ -1,0 +1,231 @@
+{
+  "v": 1,
+  "module": "phy-mechanics",
+  "subject": "physiology",
+  "title": "Dead Space, Alveolar Ventilation, and the Bohr Equation",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Not all inspired atmospheric gas entering the respiratory tract participates in pulmonary capillary gas exchange. The volume of inspired gas filling conducting airways (from external nares down to terminal bronchioles) constitutes the **anatomical dead space**. In a typical healthy adult, anatomical dead space approximates one hundred and fifty millilitres.",
+      "say": "Anatomical dead space refers to inspired air occupying the conducting zone where no gas exchange occurs, averaging one hundred fifty millilitres.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anatomical Dead Space",
+          "points": [
+            "Conducting zone volume (generations 0 through 16)",
+            "Approximate estimate: 2 mL per kilogram ideal body weight (~150 mL)",
+            "Functions to humidify, warm, and filter inspired gas",
+            "No pulmonary capillaries present for gas exchange"
+          ]
+        },
+        "right": {
+          "title": "Respiratory Zone",
+          "points": [
+            "Respiratory bronchioles, alveolar ducts, and alveolar sacs",
+            "Generations 17 through 23 of tracheobronchial tree",
+            "Massive surface area (~70 to 100 square metres)",
+            "Site of all physiological gas exchange"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The anatomical dead space can be experimentally measured in human subjects using the **Fowler method**, which employs single-breath nitrogen washout. Following a single maximal inhalation of pure hundred percent oxygen, the subject exhales through a rapid nitrogen analyzer, generating an S-shaped expired nitrogen concentration curve divided into four characteristic phases.",
+      "say": "Fowler single-breath nitrogen washout measures anatomical dead space by tracking expired nitrogen concentration after an oxygen breath.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "insp",
+            "label": "Inhalation of Single Maximal Breath of 100% O2 from Residual Volume"
+          },
+          {
+            "id": "ph1",
+            "label": "Phase I: Pure O2 Exhaled from Anatomical Dead Space (0% Nitrogen)"
+          },
+          {
+            "id": "ph2",
+            "label": "Phase II: Steep Transition Mixing Dead Space and Alveolar Gas"
+          },
+          {
+            "id": "ph3",
+            "label": "Phase III: Alveolar Plateau Reflecting True Alveolar Gas Composition"
+          }
+        ],
+        "edges": [
+          [
+            "insp",
+            "ph1"
+          ],
+          [
+            "ph1",
+            "ph2"
+          ],
+          [
+            "ph2",
+            "ph3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In contrast to healthy alveoli, non-perfused or under-perfused alveoli receive ventilation but cannot transfer carbon dioxide, creating **alveolar dead space**. In healthy individuals resting in the upright posture, alveolar dead space is virtually negligible. However, severe pulmonary embolism or catastrophic shock causes immense ventilation-perfusion mismatch and massive alveolar dead space expansion.",
+      "say": "Alveolar dead space arises when alveoli receive air but lack capillary blood flow, expanding dramatically during pulmonary embolism.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pulmonary-hypertension-fig1.webp",
+        "alt": "Pulmonary vascular bed and perfusion",
+        "caption": "Pulmonary vascular perfusion defects and microvascular compromise generating dead space."
+      }
+    },
+    {
+      "tx": "The functional combination of anatomical dead space and alveolar dead space represents total **physiological dead space**. In healthy young individuals with optimal pulmonary capillary perfusion, physiological dead space is virtually identical to anatomical dead space, whereas destructive parenchymal diseases like emphysema markedly widen the discrepancy between them.",
+      "say": "Physiological dead space combines anatomical and alveolar dead spaces, serving as the total volume of ineffective ventilation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anatomical Dead Space",
+          "points": [
+            "Purely structural volume of conducting airways",
+            "Measured by Fowler single-breath nitrogen washout",
+            "Remains relatively constant in healthy individuals",
+            "Generations 0 through 16 of bronchial tree"
+          ]
+        },
+        "right": {
+          "title": "Physiological Dead Space",
+          "points": [
+            "Total functional wasted ventilation (anatomical + alveolar)",
+            "Measured by the Enghoff modification of Bohr equation",
+            "Greatly exceeds anatomical dead space in lung pathology",
+            "Expanded in emphysema, shock, and pulmonary embolism"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The physiological dead space fraction is quantified mathematically using the **Bohr equation**, modernly adapted with the Enghoff modification. Because virtually all expired carbon dioxide originates from perfused alveoli, measuring arterial carbon dioxide and mixed expired carbon dioxide allows exact computation of the ratio of dead space to tidal volume.",
+      "say": "The Bohr equation calculates the fraction of dead space by comparing arterial and mixed expired carbon dioxide levels.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Variable in Bohr Equation",
+          "Standard Physiological Value",
+          "Clinical Interpretation"
+        ],
+        "rows": [
+          [
+            "PaCO2 (Arterial PCO2)",
+            "~40 mmHg",
+            "Reflects mean gas-exchanging alveolar carbon dioxide tension"
+          ],
+          [
+            "PECO2 (Mixed Expired PCO2)",
+            "~28 mmHg",
+            "Diluted by carbon-dioxide-free gas from dead space"
+          ],
+          [
+            "VD / VT Ratio",
+            "0.20 to 0.35 (20% to 35%)",
+            "Normal fraction of wasted ventilation at quiet rest"
+          ],
+          [
+            "Exercise VD / VT Ratio",
+            "< 0.15 (15%)",
+            "Decreases efficiently as tidal volume expands during exercise"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Deducting dead space ventilation from total minute ventilation determines the true **alveolar ventilation**, the volume of fresh atmospheric air entering respiratory zones per minute. Calculated as respiratory rate multiplied by the difference between tidal volume and dead space, alveolar ventilation dictates systemic arterial blood gas homeostasis.",
+      "say": "Alveolar ventilation represents the fresh air entering gas-exchanging alveoli each minute, calculated by subtracting dead space from tidal volume.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ve",
+            "label": "Minute Ventilation (VE = VT × RR): Total Volume Entering Lungs per Minute"
+          },
+          {
+            "id": "vd",
+            "label": "Wasted Dead Space Ventilation (VD = Dead Space Volume × RR)"
+          },
+          {
+            "id": "va",
+            "label": "Alveolar Ventilation: VA = (VT - VD) × RR (~ 4.2 Litres/min at Rest)"
+          },
+          {
+            "id": "abg",
+            "label": "Direct Determinant of Alveolar and Arterial Carbon Dioxide Tension"
+          }
+        ],
+        "edges": [
+          [
+            "ve",
+            "va"
+          ],
+          [
+            "vd",
+            "va"
+          ],
+          [
+            "va",
+            "abg"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The fundamental relationship between metabolic carbon dioxide production and alveolar ventilation is formalized in the **alveolar ventilation equation**. Systemic arterial carbon dioxide partial pressure is directly proportional to whole-body metabolic carbon dioxide production and inversely proportional to alveolar ventilation, making alveolar hypoventilation the sole cause of hypercapnia.",
+      "say": "Arterial carbon dioxide tension varies inversely with alveolar ventilation. Halving alveolar ventilation precisely doubles arterial carbon dioxide.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Ventilatory Pattern",
+          "Tidal Volume (mL)",
+          "Frequency (bpm)",
+          "Minute Vent (L/min)",
+          "Alveolar Vent (L/min)"
+        ],
+        "rows": [
+          [
+            "Normal Baseline",
+            "500",
+            "12",
+            "6.0",
+            "4.2 (Optimal gas exchange)"
+          ],
+          [
+            "Rapid Shallow Breathing",
+            "250",
+            "24",
+            "6.0",
+            "2.4 (Severe hypoventilation)"
+          ],
+          [
+            "Slow Deep Breathing",
+            "1000",
+            "6",
+            "6.0",
+            "5.1 (Highly efficient)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Rapid shallow breathing wastes an immense proportion of minute ventilation on dead space, precipitating **hypercapnic respiratory failure** despite a preserved minute volume. Conversely, slow deep breathing minimizes the relative contribution of dead space, delivering significantly more oxygen to alveolar gas exchange surfaces with identical total mechanical work.",
+      "say": "Shallow breathing wastes minute ventilation on dead space, causing hypercapnic failure, while deep breathing maximizes alveolar delivery.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-respiratory-failure-fig1.webp",
+        "alt": "Hypercapnic respiratory failure",
+        "caption": "Hypercapnic ventilatory failure patterns and arterial blood gas derangements."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

@@ -1,0 +1,227 @@
+{
+  "v": 1,
+  "module": "phy-gas-transport",
+  "subject": "physiology",
+  "title": "Myoglobin Kinetics, Oxygen Content, and Carbon Monoxide Poisoning",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "In contrast to tetrameric haemoglobin, **skeletal muscle myoglobin** is a monomeric haemoprotein consisting of a single polypeptide globin chain and one iron-protoporphyrin IX group. Because it contains only a single oxygen-binding site, myoglobin cannot display allosteric subunit cooperativity, resulting in a strictly hyperbolic oxygen binding curve.",
+      "say": "Myoglobin is a single-chain monomer with one oxygen binding site, producing a hyperbolic dissociation curve without cooperativity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Skeletal Muscle Myoglobin",
+          "points": [
+            "Monomeric structure: 153 amino acids (17.8 kDa)",
+            "Contains exactly one iron-protoporphyrin IX haem pocket",
+            "Hyperbolic non-cooperative oxygen equilibrium curve",
+            "Abundantly concentrated in slow-twitch Type I muscle fibres and myocardium"
+          ]
+        },
+        "right": {
+          "title": "Adult Erythrocyte Haemoglobin",
+          "points": [
+            "Tetrameric structure: two alpha and two beta globin chains (64.5 kDa)",
+            "Contains four cooperative iron haem binding pockets",
+            "Sigmoidal allosteric curve regulated by 2,3-BPG and protons",
+            "Specialized for systemic vascular oxygen transport and offloading"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Because myoglobin lacks cooperativity and allosteric inhibition, it possesses an exceptionally high oxygen affinity, characterized by a **myoglobin P50** of approximately two point seven five millimetres of mercury. This value is nearly ten times lower than the P50 of adult haemoglobin, preventing myoglobin from unloading oxygen until tissue tension falls precipitously.",
+      "say": "With a P50 under three millimetres of mercury, myoglobin holds oxygen tightly, releasing it only during severe tissue hypoxia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adult Haemoglobin (HbA)",
+          "points": [
+            "Tetramer (2 alpha, 2 beta chains)",
+            "Sigmoidal binding curve with cooperativity",
+            "P50 ~ 26.8 mmHg",
+            "Transports and unloads oxygen efficiently at ~40 mmHg"
+          ]
+        },
+        "right": {
+          "title": "Skeletal Myoglobin (Mb)",
+          "points": [
+            "Monomer (1 chain, 1 haem group)",
+            "Hyperbolic binding curve without cooperativity",
+            "P50 ~ 2.75 mmHg",
+            "Acts as an emergency oxygen reservoir during muscle ischemia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Total oxygen carried by blood is defined as the **arterial oxygen content**, abbreviated as CaO2. It represents the mathematical sum of haemoglobin-bound oxygen and physically dissolved oxygen, calculated as one point three four times haemoglobin concentration times fractional saturation, plus zero point zero zero three times oxygen partial pressure.",
+      "say": "Arterial oxygen content combines oxygen bound to haemoglobin and dissolved oxygen, totaling approximately twenty millilitres per decilitre.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bound",
+            "label": "Hb-Bound O2: 1.34 mL O2/g Hb × [Hb in g/dL] × SaO2 (~19.7 mL/dL)"
+          },
+          {
+            "id": "diss",
+            "label": "Dissolved O2: 0.003 mL O2/dL/mmHg × PaO2 (~0.3 mL/dL at PaO2 100)"
+          },
+          {
+            "id": "sum",
+            "label": "Total Oxygen Content (CaO2) ≈ 20.0 mL O2 per 100 mL Whole Blood"
+          },
+          {
+            "id": "do2",
+            "label": "Systemic Delivery (DO2) = Cardiac Output (CO) × CaO2 (~1000 mL O2/min)"
+          }
+        ],
+        "edges": [
+          [
+            "bound",
+            "sum"
+          ],
+          [
+            "diss",
+            "sum"
+          ],
+          [
+            "sum",
+            "do2"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In carbon monoxide toxicity, carbon monoxide binds competitively to iron haem sites with an affinity over two hundred times greater than oxygen, forming **lethal carboxyhaemoglobin**. Even low ambient concentrations of carbon monoxide occupy oxygen-binding sites, catastrophically slashing the oxygen-carrying capacity of circulating blood.",
+      "say": "Carbon monoxide binds haemoglobin with two hundred times the affinity of oxygen, forming carboxyhaemoglobin and displacing oxygen.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/carbon-monoxide-poisoning-fig1.webp",
+        "alt": "Carboxyhaemoglobin binding",
+        "caption": "Carboxyhaemoglobin formation kinetics, competitive binding, and tissue hypoperfusion."
+      }
+    },
+    {
+      "tx": "Crucially, carbon monoxide binding to one or two haem groups in the tetramer alters quaternary structure to the relaxed state, locking remaining sites into high-affinity conformation. This induces a **severe leftward shift** of the remaining oxygen dissociation curve, preventing release of oxygen to suffocating peripheral tissues.",
+      "say": "Carbon monoxide locks haemoglobin in the relaxed state, shifting the dissociation curve left and preventing oxygen release to tissues.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "co_bind",
+            "label": "Carbon Monoxide Binds 1 or 2 Haem Sites with Extreme Affinity"
+          },
+          {
+            "id": "r_state",
+            "label": "Converts Tetramer to High-Affinity Relaxed (R) State"
+          },
+          {
+            "id": "left_shift",
+            "label": "Remaining Sites Hold Oxygen Tenaciously (Severe Left Shift; Low P50)"
+          },
+          {
+            "id": "hypox",
+            "label": "Profound Cellular Hypoxia: Tissues Cannot Extract Bound Oxygen"
+          }
+        ],
+        "edges": [
+          [
+            "co_bind",
+            "r_state"
+          ],
+          [
+            "r_state",
+            "left_shift"
+          ],
+          [
+            "left_shift",
+            "hypox"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because carbon monoxide is carried dissolved in plasma in negligible amounts, arterial oxygen partial pressure remains completely normal, falsely reassuring standard pulse oximeters which cannot distinguish carboxyhaemoglobin from oxyhaemoglobin. Clinically, patients display cherry-red skin discoloration, severe headache, confusion, metabolic acidosis, and profound **cellular histotoxic hypoxia**.",
+      "say": "Standard pulse oximetry cannot detect carbon monoxide poisoning because partial pressure of dissolved oxygen remains completely normal.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter in CO Poisoning",
+          "Measured Value",
+          "Physiological Explanation"
+        ],
+        "rows": [
+          [
+            "Arterial PO2 (PaO2)",
+            "Normal (~ 100 mmHg)",
+            "Dissolved oxygen unaffected; alveolar gas exchange normal"
+          ],
+          [
+            "Standard Pulse Oximetry (SpO2)",
+            "Falsely Normal / High (~ 100%)",
+            "Oximeter light wavelengths cannot distinguish HbCO from HbO2"
+          ],
+          [
+            "True Arterial O2 Saturation (SaO2)",
+            "Markedly Reduced (< 60%)",
+            "Quantified accurately only by co-oximetry blood gas"
+          ],
+          [
+            "Total Oxygen Content (CaO2)",
+            "Severely Depleted",
+            "Marked reduction in functional oxygen binding capacity"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The definitive antidote for carbon monoxide poisoning is administering high concentrations of normobaric or **hyperbaric oxygen therapy**. Breathing room air, the half-life of carboxyhaemoglobin averages three hundred minutes; hundred percent oxygen reduces it to ninety minutes, while three atmospheres hyperbaric oxygen slashes it to twenty minutes.",
+      "say": "Hyperbaric oxygen reduces the half-life of carboxyhaemoglobin from five hours down to twenty minutes, clearing carbon monoxide.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Inhaled Gas Modality",
+          "Inspired PO2",
+          "HbCO Half-Life",
+          "Clinical Indication"
+        ],
+        "rows": [
+          [
+            "Room Air (21% O2 at 1 ATA)",
+            "~150 mmHg",
+            "~300 minutes (5 hours)",
+            "Subclinical exposure without symptoms"
+          ],
+          [
+            "100% Normobaric O2 (Non-Rebreather)",
+            "~700 mmHg",
+            "~90 minutes (1.5 hours)",
+            "Mild-to-moderate poisoning; initial acute resuscitation"
+          ],
+          [
+            "Hyperbaric Oxygen (100% O2 at 2.5 to 3 ATA)",
+            "~2000 mmHg",
+            "~20 to 25 minutes",
+            "Severe toxicity: loss of consciousness, HbCO > 25%, pregnancy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In contrast to carbon monoxide poisoning, **clinical methaemoglobinaemia** arises when haem iron is oxidized from ferrous to ferric form. Ferric iron cannot bind oxygen, shifting remaining subunits leftward; treatment requires intravenous reducing agents such as methylene blue to reactivate protective red cell methaemoglobin reductase pathways.",
+      "say": "Methaemoglobinaemia oxidizes iron into the ferric state, which cannot carry oxygen, treated effectively with intravenous methylene blue.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-respiratory-failure-fig1.webp",
+        "alt": "Cellular hypoxia and abnormal haemoglobins",
+        "caption": "Metabolic and toxic haemoglobin derangements causing refractory hypoxaemia and cyanosis."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

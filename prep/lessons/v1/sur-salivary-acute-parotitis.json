@@ -1,0 +1,268 @@
+{
+ "v": 1,
+ "module": "sur-salivary",
+ "subject": "surgery",
+ "title": "Acute Suppurative Parotitis, Sialadenosis, and Salivary Imaging",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "In debilitated, dehydrated, or malnourished elderly patients recovering from major abdominal surgery, reduced salivary flow can precipitate **acute suppurative parotitis**. Historically called surgical parotitis, it develops when profound stasis in the parotid duct allows virulent oral bacteria to ascend in a retrograde manner from the mouth along Stensen duct into the parotid parenchyma. The predominant causative bacterial pathogen is Staphylococcus aureus, followed by oral viridans streptococci and anaerobes.",
+   "say": "Acute suppurative parotitis develops in dehydrated, postoperative elderly patients when poor salivary flow permits Staphylococcus aureus to migrate in a retrograde manner up Stensen duct.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "postop",
+      "label": "Postoperative Dehydration & NPO Status"
+     },
+     {
+      "id": "stasis",
+      "label": "Severe Reduction in Parotid Salivary Flow"
+     },
+     {
+      "id": "ascend",
+      "label": "Retrograde Bacterial Ascent Up Stensen Duct"
+     },
+     {
+      "id": "staph",
+      "label": "Staphylococcus Aureus Parenchymal Proliferation"
+     },
+     {
+      "id": "parotitis",
+      "label": "Acute Suppurative Parotitis with Microabscesses"
+     }
+    ],
+    "edges": [
+     [
+      "postop",
+      "stasis"
+     ],
+     [
+      "stasis",
+      "ascend"
+     ],
+     [
+      "ascend",
+      "staph"
+     ],
+     [
+      "staph",
+      "parotitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A patient with acute suppurative parotitis presents with rapid onset of severe, throbbing preauricular pain, high-grade fever, systemic toxaemia, and exquisite swelling overlying the parotid region. The tense, unyielding fibrous parotid capsule restricts acute swelling, producing excruciating tenderness and marked trismus. Intraoral examination reveals an inflamed, edematous Stensen duct orifice opposite the upper second molar, from which **purulent discharge from Stensen duct** exudes on gentle external parotid massage.",
+   "say": "Patients experience severe preauricular pain, fever, and trismus. Massaging the swollen parotid gland reveals thick, purulent discharge milking out of Stensen duct orifice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute Suppurative Parotitis",
+     "points": [
+      "Rapid unilateral acute tender inflammatory swelling",
+      "Milking gland expresses thick frank pus from Stensen orifice",
+      "Bacterial etiology predominantly Staphylococcus aureus",
+      "Requires vigorous intravenous hydration and targeted antibiotics"
+     ]
+    },
+    "right": {
+     "title": "Viral Parotitis (Mumps)",
+     "points": [
+      "Bilateral painful parotid swelling in pediatric patients",
+      "Stensen duct orifice is erythematous without purulence",
+      "Paramyxovirus infection accompanied by prodromal malaise",
+      "Self-limiting viral disease treated with supportive care"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Initial medical management of acute suppurative parotitis entails aggressive intravenous rehydration, warm local compresses, oral sialogogues such as lemon drops to stimulate salivary wash-out, and broad-spectrum intravenous antistaphylococcal antimicrobial therapy. If medical treatment fails to induce improvement within forty-eight to seventy-two hours, or if fluctuance is detected, surgical decompression is mandatory. Surgeons perform multiple horizontal incisions through the parotid capsule, carefully executing **surgical parotid drainage** parallel to facial nerve branches.",
+   "say": "Management includes vigorous rehydration, antistaphylococcal antibiotics, and sialogogues. If symptoms persist after three days, surgical decompression is performed parallel to the facial nerve.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Treatment Modality",
+     "Clinical Intervention",
+     "Therapeutic Objective and Rationale"
+    ],
+    "rows": [
+     [
+      "Intravenous Rehydration",
+      "Crystalloid infusion restoring intravascular circulating volume",
+      "Reverses dehydration and restores native serous salivary flow"
+     ],
+     [
+      "Antimicrobial Therapy",
+      "Intravenous amoxicillin-clavulanate or vancomycin for MRSA",
+      "Eradicates invasive Staphylococcus aureus and mixed oral flora"
+     ],
+     [
+      "Sialogogue Stimulation",
+      "Sugar-free lemon drops, citrus fluids, and gentle massage",
+      "Mechanically flushes infected debris from obstructed ductal system"
+     ],
+     [
+      "Surgical Capsular Decompression",
+      "Blair incision with horizontal capsular incisions parallel to CN VII",
+      "Relieves compartment pressure, drains microabscesses, prevents tissue necrosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In stark contrast to infectious or inflammatory disorders, **sialadenosis**, or sialosis, is a benign, non-inflammatory, non-neoplastic, painless bilateral swelling of the salivary glands, involving the parotid glands in over ninety percent of cases. Light microscopy reveals striking hypertrophy of serous acinar cells swollen with dense zymogen granules, unaccompanied by inflammatory infiltration or ductal dilatation. The pathophysiology represents an autonomic neuropathy disrupting intracellular secretory exocytosis.",
+   "say": "Sialadenosis is a benign, painless, non-inflammatory bilateral parotid enlargement. Driven by autonomic neuropathy, serous acinar cells become bloated with zymogen granules without inflammation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sjogren-syndrome-fig1.webp",
+    "alt": "Medical illustration showing bilateral symmetric parotid gland enlargement and salivary anatomy.",
+    "caption": "Bilateral parotid gland enlargement: non-inflammatory symmetric salivary expansion characteristic of sialadenosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Because sialadenosis reflects underlying metabolic or autonomic dysfunction, establishing its etiology requires a comprehensive systemic evaluation. It is strongly linked to **chronic alcoholism with cirrhosis**, poorly controlled diabetes mellitus, severe malnutrition, anorexia nervosa, and bulimia with frequent self-induced vomiting. Recognition of sialadenosis is essential to prevent unnecessary surgical biopsies or parotidectomies, as therapy is strictly medical, focusing entirely on correcting the underlying nutritional or metabolic derangement.",
+   "say": "Sialadenosis stems from systemic conditions like chronic alcoholism, diabetes mellitus, cirrhosis, and bulimia. Treatment focuses entirely on managing the underlying metabolic disorder, avoiding surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Etiological Category",
+     "Specific Systemic Disorder",
+     "Pathophysiological Mechanism"
+    ],
+    "rows": [
+     [
+      "Endocrine & Metabolic",
+      "Diabetes mellitus and metabolic syndrome",
+      "Autonomic neuropathy with delayed acinar exocytosis of zymogen granules"
+     ],
+     [
+      "Nutritional Disorders",
+      "Severe protein-calorie malnutrition and kwashiorkor",
+      "Metabolic deprivation causing compensatory acinar cell hypertrophy"
+     ],
+     [
+      "Eating Disorders",
+      "Bulimia nervosa with recurrent self-induced vomiting",
+      "Autonomic overdrive triggered by gastric acid reflux and starvation"
+     ],
+     [
+      "Hepatic & Toxic",
+      "Chronic alcohol abuse and alcoholic cirrhosis",
+      "Direct toxic autonomic neuropathy impairing salivary protein secretion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Radiological evaluation of the salivary ductal architecture has historically relied on **diagnostic sialography**. This radiographic examination involves direct retrograde cannulation of Stensen or Wharton duct orifice using a fine lacrimal probe, followed by the slow injection of water-soluble or lipid-based radiopaque iodinated contrast media under fluoroscopic control. Serial radiographs visualize ductal morphology, identifying radiolucent calculi, strictures, ductal diverticula, and glandular ectasias.",
+   "say": "Sialography visualizes the salivary duct tree by cannulating the duct opening and injecting radiopaque contrast. It identifies radiolucent calculi, duct strictures, and chronic dilatation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Indication",
+     "Diagnostic Findings on Sialography",
+     "Management Implications"
+    ],
+    "rows": [
+     [
+      "Suspected Sialolithiasis",
+      "Smooth, well-delineated filling defect with upstream ductal dilatation",
+      "Confirms location of radiolucent stone for sialendoscopy or extraction"
+     ],
+     [
+      "Chronic Sialadenitis",
+      "Punctate sialectasis yielding snowstorm appearance",
+      "Documents ductal damage; managed conservatively with ductal washouts"
+     ],
+     [
+      "Ductal Strictures",
+      "Localized smooth segment of caliber narrowing with proximal sausage dilatation",
+      "Amenable to balloon dilatation during interventional sialendoscopy"
+     ],
+     [
+      "Salivary Fistula",
+      "Extravasation of radiopaque contrast into cheek soft tissue planes",
+      "Maps tract anatomy for surgical excision or botulinum toxin therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In chronic recurrent parotitis, sialography demonstrates characteristic spherical collections of contrast medium within dilated terminal ductules, producing a classic **punctate sialectasis**, often described as a snowstorm or string-of-sausages appearance. However, a rigid clinical rule governs this examination: sialography is absolutely contraindicated during active acute suppurative sialadenitis. Forceful retrograde injection of contrast into an acutely infected gland risks ductal rupture, severe pain, and catastrophic parenchymal extravasation.",
+   "say": "Sialography shows punctate sialectasis in chronic parotitis. However, it is strictly contraindicated during acute bacterial infection because pressure can rupture the infected duct system.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Indications for Sialography",
+     "points": [
+      "Investigation of recurrent, unexplained salivary gland swelling",
+      "Detection and localization of non-calcified radiolucent stones",
+      "Evaluation of ductal stenosis, strictures, and sialectasis",
+      "Performed strictly during quiescent, asymptomatic intervals"
+     ]
+    },
+    "right": {
+     "title": "Contraindications to Sialography",
+     "points": [
+      "Active acute suppurative parotitis or sialadenitis",
+      "Documented clinical allergy to iodinated contrast media",
+      "Suspected acute parenchymal abscess with tissue necrosis",
+      "Pre-existing ductal transection or traumatic disruption"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In contemporary head and neck surgery, invasive diagnostic sialography is increasingly supplanted by modern non-invasive imaging and interventional **salivary sialendoscopy**. Utilizing micro-endoscopes measuring zero point eight to one point three millimetres in outer diameter, surgeons navigate the ductal lumen under direct optical magnification. Diagnostic sialendoscopy allows immediate therapeutic intervention, such as wire-basket extraction of ductal calculi, balloon dilatation of fibrotic strictures, and localized intraductal corticosteroid lavage.",
+   "say": "Modern micro-sialendoscopy enables direct optical inspection of the duct lumen without radiation. Surgeons can extract stones using wire baskets and dilate strictures under direct vision.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dilate",
+      "label": "Dilate Ductal Papilla with Lacrimal Probes"
+     },
+     {
+      "id": "insert",
+      "label": "Insert 1 mm Semi-Rigid Sialendoscope"
+     },
+     {
+      "id": "irrigate",
+      "label": "Saline Irrigation Distends Ductal Lumen"
+     },
+     {
+      "id": "visualize",
+      "label": "Optical Inspection Identifies Stone or Stricture"
+     },
+     {
+      "id": "extract",
+      "label": "Wire Basket Extraction or Balloon Dilatation"
+     }
+    ],
+    "edges": [
+     [
+      "dilate",
+      "insert"
+     ],
+     [
+      "insert",
+      "irrigate"
+     ],
+     [
+      "irrigate",
+      "visualize"
+     ],
+     [
+      "visualize",
+      "extract"
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,236 @@
+{
+ "v": 1,
+ "module": "ana-shoulder",
+ "subject": "anatomy",
+ "title": "Scapular Intermuscular Spaces and the Axillary Nerve",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The posterior scapular and shoulder region contains three distinct intermuscular spaces transmitting critical neurovascular structures between the axilla and the posterior shoulder: the quadrangular space, the upper triangular space, and the lower triangular space (triangular interval). These spaces are bounded by **teres minor**, teres major, the triceps brachii, and the humerus.",
+   "say": "The posterior scapular region houses three intermuscular spaces that convey neurovascular structures between the axilla and posterior shoulder: the quadrangular space, upper triangular space, and triangular interval. They are bounded by teres muscles, triceps, and humerus.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/adhesive-capsulitis-fig1.webp",
+    "alt": "Posterior scapular spaces: quadrangular space and triangular spaces",
+    "caption": "Topographical anatomy of the posterior scapular intermuscular spaces. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **quadrangular space** is a four-sided anatomical window bounded superiorly by the subscapularis anteriorly and teres minor posteriorly, inferiorly by the upper border of teres major, medially by the long head of triceps brachii, and laterally by the surgical neck of the humerus.",
+   "say": "The quadrangular space is a four-sided window bounded superiorly by subscapularis and teres minor, inferiorly by teres major, medially by the long head of triceps, and laterally by the humeral surgical neck.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Boundary Margin",
+     "Quadrangular Space",
+     "Upper Triangular Space",
+     "Triangular Interval"
+    ],
+    "rows": [
+     [
+      "Superior",
+      "Teres minor (and subscapularis)",
+      "Teres minor (lower border)",
+      "Teres major (lower border)"
+     ],
+     [
+      "Inferior",
+      "Teres major (upper border)",
+      "Teres major (upper border)",
+      "Shaft of the humerus"
+     ],
+     [
+      "Medial",
+      "Long head of triceps brachii",
+      "Long head of triceps (lateral)",
+      "Long head of triceps (lateral)"
+     ],
+     [
+      "Lateral",
+      "Surgical neck of humerus",
+      "Base of triangle (bounded medial)",
+      "Lateral head of triceps / humerus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The contents of the quadrangular space are the **axillary nerve** and the posterior circumflex humeral artery and veins. The axillary nerve passes backward through the space in direct contact with the inferior glenohumeral joint capsule, making it highly vulnerable to stretching or traction injury during anterior shoulder dislocation.",
+   "say": "The quadrangular space transmits the axillary nerve and posterior circumflex humeral vessels. The axillary nerve traverses the space in direct contact with the shoulder capsule, making it vulnerable to traction in shoulder dislocations.",
+   "vis": {
+    "kind": "flow",
+    "title": "Quadrangular Neurovascular Contents",
+    "nodes": [
+     {
+      "id": "ax",
+      "label": "Posterior Cord in Axilla"
+     },
+     {
+      "id": "space",
+      "label": "Traverses Quadrangular Space"
+     },
+     {
+      "id": "neck",
+      "label": "Winds around Surgical Neck of Humerus"
+     },
+     {
+      "id": "supply",
+      "label": "Innervates Deltoid and Teres Minor"
+     }
+    ],
+    "edges": [
+     [
+      "ax",
+      "space"
+     ],
+     [
+      "space",
+      "neck"
+     ],
+     [
+      "neck",
+      "supply"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fracture of the **surgical neck of the humerus** is another classic mechanism of axillary nerve injury. Nerve transection or neuropraxia paralyzes both the deltoid and teres minor muscles, abolishing arm abduction beyond fifteen degrees and causing sensory anesthesia over the lower half of the deltoid, recognized clinically as the regimental badge area.",
+   "say": "Fractures of the humeral surgical neck frequently injure the axillary nerve. Damage paralyzes deltoid and teres minor, preventing arm abduction beyond fifteen degrees and numbing the regimental badge area over the lateral shoulder.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Axillary Nerve Motor Deficit",
+     "points": [
+      "Paralysis of deltoid muscle",
+      "Loss of abduction from 15 to 90 degrees",
+      "Paralysis of teres minor muscle",
+      "Severe flattening of shoulder contour"
+     ]
+    },
+    "right": {
+     "title": "Axillary Nerve Sensory Deficit",
+     "points": [
+      "Upper lateral cutaneous nerve of arm branch",
+      "Loss of touch and pain over lower deltoid",
+      "Designated regimental badge sensory area",
+      "Reliable sign tested after shoulder dislocation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The upper **triangular space** lies medial to the quadrangular space, bounded superiorly by teres minor, inferiorly by teres major, and laterally by the long head of triceps brachii. It transmits the circumflex scapular artery, a branch of the subscapular artery that curves around the lateral border of the scapula to enter the infraspinous fossa.",
+   "say": "The upper triangular space sits medial to the quadrangular space, bounded by teres minor, teres major, and the long head of triceps. It carries the circumflex scapular artery into the infraspinous fossa to join the scapular anastomosis.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-abduction-phases.svg",
+    "alt": "Posterior scapular arterial anastomosis and triceps relationship",
+    "caption": "Collateral vascular pathways of the scapula and triceps heads. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The lower triangular space, or **triangular interval**, is bounded superiorly by the lower border of teres major, medially by the long head of triceps brachii, and laterally by the shaft of the humerus. It serves as the gateway through which the radial nerve and profunda brachii artery exit the axilla to enter the spiral groove of the humerus.",
+   "say": "The triangular interval is bounded by teres major, the long head of triceps, and the humeral shaft. It provides the pathway for the radial nerve and profunda brachii artery to pass from the axilla into the spiral groove.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Triangular Space Contents",
+     "points": [
+      "Circumflex scapular artery and vein",
+      "No major peripheral nerve trunk transmitted",
+      "Contributes to rich scapular collateral circulation",
+      "Lies entirely medial to long head of triceps"
+     ]
+    },
+    "right": {
+     "title": "Triangular Interval Contents",
+     "points": [
+      "Radial nerve (C5 through T1)",
+      "Profunda brachii (deep brachial) artery",
+      "Passes directly into radial spiral groove",
+      "Lies inferior to teres major tendon"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hypertrophy of surrounding muscular margins or fibrous bands can compress structures passing through the quadrangular space, termed **quadrangular space syndrome**. Patients present with dull posterior shoulder aching, weakness of abduction, and paresthesias in the axillary nerve distribution, exacerbated by active abduction and external rotation of the arm.",
+   "say": "Muscular hypertrophy or fibrous bands can constrict the quadrangular space, causing quadrangular space syndrome. Patients experience posterior shoulder aching, deltoid fatigue, and numbness over the lateral shoulder during overhead throwing motions.",
+   "vis": {
+    "kind": "flow",
+    "title": "Quadrangular Syndrome Cascade",
+    "nodes": [
+     {
+      "id": "throw",
+      "label": "Repetitive Overhead Throwing Strain"
+     },
+     {
+      "id": "comp",
+      "label": "Teres Major / Triceps Compression"
+     },
+     {
+      "id": "isch",
+      "label": "Posterior Circumflex and Nerve Ischemia"
+     },
+     {
+      "id": "atroph",
+      "label": "Isolated Teres Minor and Deltoid Atrophy"
+     }
+    ],
+    "edges": [
+     [
+      "throw",
+      "comp"
+     ],
+     [
+      "comp",
+      "isch"
+     ],
+     [
+      "isch",
+      "atroph"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Knowledge of these spaces guides surgical access: the quadrangular space provides a posterior approach to repair the axillary nerve, while the triangular space allows ligation of the **circumflex scapular artery** during resection of scapular vascular malformations, avoiding inadvertent injury to the nearby radial nerve.",
+   "say": "Understanding these intermuscular boundaries directs surgical navigation: the quadrangular space permits posterior repair of the axillary nerve, while the triangular space guides vessel ligation while shielding the deeper radial nerve.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Intermuscular Space",
+     "Shape and Location",
+     "Arterial Vessel",
+     "Neural Structure"
+    ],
+    "rows": [
+     [
+      "Quadrangular Space",
+      "Four-sided; lateral scapular",
+      "Posterior circumflex humeral artery",
+      "Axillary nerve (C5-C6)"
+     ],
+     [
+      "Triangular Space",
+      "Three-sided; medial scapular",
+      "Circumflex scapular artery",
+      "None (vascular space)"
+     ],
+     [
+      "Triangular Interval",
+      "Three-sided; inferior humeral",
+      "Profunda brachii artery",
+      "Radial nerve (C5-T1)"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

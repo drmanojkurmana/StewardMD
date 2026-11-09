@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "ana-forearm-hand",
+ "subject": "anatomy",
+ "title": "Carpal Tunnel Mechanics and Guyon Canal Anatomy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The anterior carpal arch is converted into a fibro-osseous conduit designated the **carpal tunnel** by the thick, inelastic flexor retinaculum (transverse carpal ligament). The flexor retinaculum attaches medially to the pisiform and hook of the hamate, and laterally to the tubercle of the scaphoid and crest of the trapezium.",
+   "say": "The carpal bones form a concave arch converted into the carpal tunnel by the dense transverse flexor retinaculum. The retinaculum bridges from the pisiform and hook of the hamate medially to the scaphoid and trapezium laterally.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-smr-puberty-timing-boneage.webp",
+    "alt": "Carpal bones, carpal tunnel arch, and wrist osseous boundaries",
+    "caption": "Carpal bones forming the floor and walls of the carpal tunnel. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The carpal tunnel transmits ten structures: four tendons of flexor digitorum superficialis, four tendons of flexor digitorum profundus, one tendon of flexor pollicis longus, and a single peripheral nerve, the **median nerve**. The tendon of flexor carpi radialis occupies a separate dedicated osseofibrous compartment within the lateral attachment.",
+   "say": "The carpal tunnel carries ten structures: four tendons of flexor digitorum superficialis, four of flexor digitorum profundus, the flexor pollicis longus tendon, and the median nerve. Flexor carpi radialis runs in a separate groove on the trapezium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Structure Category",
+     "Transmitted Components",
+     "Synovial Sheath",
+     "Spatial Layout"
+    ],
+    "rows": [
+     [
+      "Superficialis Tendons",
+      "Four FDS digital tendons",
+      "Common flexor synovial sheath (ulnar bursa)",
+      "Digits 3 and 4 lie superficial to digits 2 and 5"
+     ],
+     [
+      "Profundus Tendons",
+      "Four FDP digital tendons",
+      "Common flexor synovial sheath (ulnar bursa)",
+      "Lie side-by-side in deep tunnel floor"
+     ],
+     [
+      "Thumb Flexor",
+      "Flexor pollicis longus tendon",
+      "Radial bursa (synovial sheath)",
+      "Deep lateral compartment of tunnel"
+     ],
+     [
+      "Neural Trunk",
+      "Median nerve",
+      "None (shares tunnel space)",
+      "Most superficial structure beneath retinaculum"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Compression of the median nerve within this rigid osteofibrous space produces **carpal tunnel syndrome**, the most common entrapment neuropathy. Patients experience nocturnal paresthesias, numbness, and burning pain across the radial three and a half digits, with weakness and atrophy of the thenar muscles (abductor pollicis brevis, opponens pollicis, flexor pollicis brevis).",
+   "say": "Compression of the median nerve inside this rigid space produces carpal tunnel syndrome. Patients suffer nocturnal numbness and burning across the thumb, index, and middle fingers, progressing to thenar muscle wasting.",
+   "vis": {
+    "kind": "flow",
+    "title": "Carpal Tunnel Pathophysiology",
+    "nodes": [
+     {
+      "id": "teno",
+      "label": "Synovial Tenosynovitis or Fluid Retention"
+     },
+     {
+      "id": "press",
+      "label": "Elevated Intracarpal Pressure (>30 mmHg)"
+     },
+     {
+      "id": "isch",
+      "label": "Median Nerve Capillary Ischemia and Edema"
+     },
+     {
+      "id": "symp",
+      "label": "Nocturnal Acroparesthesias and Thenar Atrophy"
+     }
+    ],
+    "edges": [
+     [
+      "teno",
+      "press"
+     ],
+     [
+      "press",
+      "isch"
+     ],
+     [
+      "isch",
+      "symp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Crucially, sensation over the central palm is completely spared in carpal tunnel syndrome because the **palmar cutaneous branch of median nerve** arises five centimeters proximal to the flexor retinaculum and passes superficial to the transverse carpal ligament into the palm, avoiding entrapment within the tunnel.",
+   "say": "Importantly, sensation over the palm is spared in carpal tunnel syndrome because the palmar cutaneous branch arises five centimeters above the wrist and travels superficial to the retinaculum, bypassing the tunnel entirely.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tunnel Median Nerve Cutaneous",
+     "points": [
+      "Palmar digital branches traverse tunnel",
+      "Sensory loss over palmar radial 3.5 digits",
+      "Sensory loss over dorsal nail beds",
+      "Profound numbness in thumb and index tip"
+     ]
+    },
+    "right": {
+     "title": "Palmar Cutaneous Branch",
+     "points": [
+      "Arises 5 cm proximal to carpal tunnel",
+      "Passes superficial to flexor retinaculum",
+      "Supplies central palmar and thenar skin",
+      "Completely spared in carpal tunnel syndrome"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Clinical provocation tests confirm median nerve entrapment: **Phalen test** reproduces paresthesias within sixty seconds of unforced maximal wrist flexion, while Tinel sign elicits electrical tingling upon tapping over the volar carpal retinaculum. Severe cases show ape hand deformity with flat thenar eminence and loss of thumb opposition.",
+   "say": "Provocation maneuvers confirm carpal tunnel syndrome: Phalen test reproduces numbness within sixty seconds of sustained wrist flexion, while Tinel sign triggers tingling upon tapping the retinaculum. Severe cases show an ape-like flat thenar pad.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Provocative Sign",
+     "Clinical Technique",
+     "Positive Response Mechanism",
+     "Diagnostic Diagnostic Utility"
+    ],
+    "rows": [
+     [
+      "Phalen Maneuver",
+      "Acute wrist flexion for 60 seconds",
+      "Elevates intracarpal tunnel pressure",
+      "Sensitive for active nerve compression"
+     ],
+     [
+      "Tinel Sign",
+      "Percussion over flexor retinaculum",
+      "Elicits paresthesias in digital branches",
+      "Indicates active regenerating nerve sprouts"
+     ],
+     [
+      "Durkan Carpal Compression",
+      "Direct thumb pressure over carpal tunnel",
+      "Rapid ischemic paresthesia reproduction",
+      "Highest sensitivity and specificity"
+     ],
+     [
+      "Thenar Atrophy",
+      "Inspection of thenar muscular mound",
+      "Abductor pollicis brevis denervation",
+      "Marks severe chronic axonal loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On the medial volar aspect of the wrist lies the **Guyon canal** (ulnar tunnel), bounded medially by the pisiform, laterally by the hook of the hamate, roofed by the volar carpal ligament and palmaris brevis, and floored by the flexor retinaculum. It transmits the ulnar artery and ulnar nerve into the hand.",
+   "say": "On the medial side of the wrist lies the Guyon canal, bounded by the pisiform and hook of hamate, roofed by the volar carpal ligament. It transmits the ulnar artery and ulnar nerve into the hand superficial to the carpal tunnel.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-allens-test.svg",
+    "alt": "Ulnar artery and nerve entering palm via Guyon canal and superficial arch",
+    "caption": "Ulnar neurovascular transit through the Guyon canal into the palm. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Compression of the ulnar nerve within Guyon canal produces **ulnar tunnel syndrome**, frequently seen in long-distance cyclists who exert prolonged hypothenar handlebar pressure (handlebar palsy). Within the canal, the ulnar nerve divides into a superficial sensory branch supplying the medial one and a half digits, and a deep motor branch.",
+   "say": "Ulnar nerve compression in Guyon canal produces ulnar tunnel syndrome, common in cyclists from prolonged handlebar pressure. In the canal, the nerve splits into a superficial sensory branch to the little finger and a deep motor branch.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Carpal Tunnel Syndrome",
+     "points": [
+      "Compresses the median nerve",
+      "Radial 3.5 digits sensory paresthesias",
+      "Thenar muscle atrophy (abductor brevis)",
+      "Nocturnal wrist splinting provides relief"
+     ]
+    },
+    "right": {
+     "title": "Guyon Canal Syndrome",
+     "points": [
+      "Compresses the ulnar nerve",
+      "Ulnar 1.5 digits sensory paresthesias",
+      "Hypothenar and interosseous muscle wasting",
+      "Preserves sensation over dorsal ulnar hand"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Fractures of the **hook of the hamate** from golf club or baseball bat strikes selectively injure the deep motor branch of the ulnar nerve as it curves around the bone hook. This produces isolated motor paralysis of all interossei, the hypothenar muscles, and adductor pollicis without any sensory loss, creating a pure motor claw hand.",
+   "say": "Fractures of the hook of the hamate from golf clubs can injure the deep motor branch of the ulnar nerve. This produces isolated motor weakness of all interossei and hypothenar muscles without sensory loss.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Guyon Canal Zone",
+     "Anatomical Site",
+     "Neural Component Injured",
+     "Clinical Manifestation"
+    ],
+    "rows": [
+     [
+      "Zone 1 (Proximal)",
+      "Main ulnar nerve before bifurcation",
+      "Combined motor and sensory fibres",
+      "Claw hand plus medial 1.5 digit numbness"
+     ],
+     [
+      "Zone 2 (Deep Hook)",
+      "Deep motor branch around hamate hook",
+      "Pure motor branch to interossei/adductor",
+      "Severe motor weakness, zero sensory deficit"
+     ],
+     [
+      "Zone 3 (Superficial)",
+      "Superficial terminal sensory branch",
+      "Pure sensory to medial 1.5 digits",
+      "Numbness in little finger, normal motor power"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

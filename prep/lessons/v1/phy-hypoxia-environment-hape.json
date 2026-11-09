@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phy-hypoxia-environment",
+  "subject": "physiology",
+  "title": "High-Altitude Pulmonary Oedema, Decompression Sickness, and Dysbarism",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "A life-threatening complication of rapid ascent to altitudes exceeding twenty-five hundred metres is **high-altitude pulmonary oedema**, or HAPE. Hypoxia causes patchy, non-uniform pulmonary arteriolar vasoconstriction, forcing high pulmonary artery pressures into unconstricted capillary beds, precipitating microvascular stress failure and protein-rich alveolar flooding.",
+      "say": "High-altitude pulmonary oedema arises when uneven hypoxic vasoconstriction overpressurizes unprotected capillaries, causing leakage.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hypox",
+            "label": "Severe Alveolar Hypoxia at Altitudes Exceeding 2500 Metres"
+          },
+          {
+            "id": "patchy",
+            "label": "Heterogeneous, Non-Uniform Hypoxic Pulmonary Vasoconstriction"
+          },
+          {
+            "id": "overperf",
+            "label": "High Pulmonary Artery Pressure Diverted into Unprotected Capillaries"
+          },
+          {
+            "id": "stress",
+            "label": "Capillary Stress Failure and Alveolar Exudate: Severe HAPE"
+          }
+        ],
+        "edges": [
+          [
+            "hypox",
+            "patchy"
+          ],
+          [
+            "patchy",
+            "overperf"
+          ],
+          [
+            "overperf",
+            "stress"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Unlike cardiogenic pulmonary oedema, HAPE is a non-cardiogenic hydrostatic oedema characterized by normal left atrial and pulmonary capillary wedge pressures. Immediate definitive treatment mandates rapid **emergency descent**, administration of high-flow supplemental oxygen, and portable hyperbaric chambers alongside calcium channel blockers like nifedipine.",
+      "say": "Immediate descent and supplemental oxygen are lifesaving in HAPE, with nifedipine reducing elevated pulmonary vascular pressure.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pulmonary-hypertension-fig1.webp",
+        "alt": "Pulmonary vascular remodeling and hypertension",
+        "caption": "Severe pulmonary vasoconstriction, vascular stress failure, and secondary right ventricular overload."
+      }
+    },
+    {
+      "tx": "Underwater diving exposes the human body to elevated ambient hydrostatic pressures conforming to **Boyle law and Henry law**. For every ten metres of descent in seawater, ambient pressure increases by one atmosphere; Henry law dictates that the amount of ambient gas dissolved in circulating blood increases in direct proportion to ambient pressure.",
+      "say": "Underwater pressure increases by one atmosphere every ten metres, driving more gas into blood according to Henry law.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diving Depth (Metres)",
+          "Ambient Pressure (ATA)",
+          "Alveolar Nitrogen Tension",
+          "Physiological Risks"
+        ],
+        "rows": [
+          [
+            "0 m (Sea Level)",
+            "1.0 ATA",
+            "~570 mmHg",
+            "Normal baseline physiology"
+          ],
+          [
+            "10 m",
+            "2.0 ATA",
+            "~1140 mmHg",
+            "Minimal decompression obligation"
+          ],
+          [
+            "30 m",
+            "4.0 ATA",
+            "~2280 mmHg",
+            "Onset of mild nitrogen narcosis"
+          ],
+          [
+            "60 m",
+            "7.0 ATA",
+            "~3990 mmHg",
+            "Severe nitrogen narcosis (martini effect)"
+          ],
+          [
+            "90 m",
+            "10.0 ATA",
+            "~5700 mmHg",
+            "Extreme narcosis; high risk of decompression sickness"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because nitrogen is highly lipophilic, breathing compressed air at depths exceeding thirty metres forces immense quantities of dissolved nitrogen into neuronal cell membranes. Known as **nitrogen narcosis**, or rapture of the deep, this produces progressive euphoria, impaired cognitive judgement, and motor incoordination similar to alcohol intoxication.",
+      "say": "Dissolved nitrogen dissolves into neuronal membranes at depths beyond thirty metres, producing alcohol-like nitrogen narcosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nitrogen Narcosis",
+          "points": [
+            "Occurs at depths exceeding 30 to 40 metres",
+            "Direct anesthetic effect of lipophilic nitrogen gas",
+            "Produces euphoria, confusion, and sensory loss",
+            "Promptly reverses on ascending to shallower depths"
+          ]
+        },
+        "right": {
+          "title": "High-Pressure Neurological Syndrome",
+          "points": [
+            "Occurs at extreme depths (>150 m) on helium-oxygen trimix",
+            "Direct mechanical effect of hydrostatic pressure on proteins",
+            "Produces tremors, myoclonus, nausea, and EEG changes",
+            "Managed by adding small percentages of narcotic nitrogen"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "If a diver ascends too rapidly toward the surface, ambient pressure drops precipitously, causing supersaturated dissolved nitrogen to come out of physical solution as bubbles, producing **decompression sickness**. Nitrogen bubbles lodge within periarticular tissues causing agonizing joint pain known as the bends, or occlude spinal cord microvessels causing paraplegia.",
+      "say": "Rapid ascent causes dissolved nitrogen to bubble out of solution, causing agonizing joint pain and neurological deficits.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "deep",
+            "label": "Deep Dive: High Ambient Pressure Drives Large Nitrogen Load into Tissues"
+          },
+          {
+            "id": "rapid",
+            "label": "Rapid Ascent Without Staged Decompression Decompresses Gas Abruptly"
+          },
+          {
+            "id": "bubble",
+            "label": "Supersaturated Nitrogen Gas Forms Insoluble Intravascular Bubbles"
+          },
+          {
+            "id": "chokes",
+            "label": "Decompression Sickness: Bends (Joints), Staggers (Vestibular), Chokes (Lungs)"
+          }
+        ],
+        "edges": [
+          [
+            "deep",
+            "rapid"
+          ],
+          [
+            "rapid",
+            "bubble"
+          ],
+          [
+            "bubble",
+            "chokes"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Definitive medical management of severe decompression sickness and arterial gas embolism requires immediate administration of hundred percent normobaric oxygen followed by urgent **hyperbaric recompression therapy**. Placing the patient inside a hyperbaric recompression chamber at two point eight atmospheres mechanically shrinks bubble diameter while delivering super-saturated oxygen to ischaemic tissues.",
+      "say": "Hyperbaric recompression therapy is the definitive treatment for decompression sickness, shrinking nitrogen bubbles and oxygenating tissues.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type I Decompression Sickness",
+          "points": [
+            "Mild form restricted to musculoskeletal and cutaneous systems",
+            "Periarticular dull throbbing joint pain (the bends)",
+            "Cutis marmorata, pruritus, and localized lymphatic swelling",
+            "Excellent prognosis with prompt recompression"
+          ]
+        },
+        "right": {
+          "title": "Type II Decompression Sickness",
+          "points": [
+            "Life-threatening involvement of spinal cord, brain, or lungs",
+            "Spinal cord infarction causing paraplegia and bladder dysfunction",
+            "Pulmonary microvascular embolization causing tachypnoea (the chokes)",
+            "Requires immediate emergency hyperbaric recompression chamber"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Breathing oxygen at excessive partial pressures causes **acute oxygen toxicity**, mediated by unrestrained production of reactive oxygen species. Central nervous system toxicity (the Paul Bert effect) triggers grand mal seizures at pressures above two atmospheres, whereas prolonged pulmonary exposure (the Lorrain Smith effect) causes severe tracheobronchitis and atelectasis.",
+      "say": "Excessive oxygen tension produces reactive oxygen species, triggering seizures in the brain and diffuse damage in the lungs.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Type of O2 Toxicity",
+          "Eponym",
+          "PO2 Threshold",
+          "Primary Manifestations"
+        ],
+        "rows": [
+          [
+            "CNS Oxygen Toxicity",
+            "Paul Bert Effect",
+            "PO2 > 1.6 to 2.0 ATA",
+            "Visual tunnels, ear ringing, twitching, grand mal seizures"
+          ],
+          [
+            "Pulmonary Oxygen Toxicity",
+            "Lorrain Smith Effect",
+            "PO2 > 0.5 ATA (> 24 hrs)",
+            "Substernal burning, dry cough, diffuse alveolar damage"
+          ],
+          [
+            "Ocular Toxicity",
+            "Retinopathy of Prematurity",
+            "High FiO2 in neonates",
+            "Hyperoxia downregulates VEGF; secondary neovascular blindness"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Extreme environmental thermal stress causes severe failure of hypothalamic thermoregulation. When core body temperature rises above forty degrees Celsius accompanied by central nervous system dysfunction and anhidrosis, the patient has **classical heat stroke**. Treatment mandates aggressive, rapid evaporative and conductive whole-body cooling to halt widespread end-organ apoptosis.",
+      "say": "Heat stroke causes hyperthermia above forty degrees Celsius with delirium, demanding immediate evaporative cooling.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/heat-related-illnesses-fig1.webp",
+        "alt": "Heat-related illnesses and thermal regulation",
+        "caption": "Thermoregulatory failure, evaporative cooling breakdown, and systemic heat-stroke pathophysiology."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

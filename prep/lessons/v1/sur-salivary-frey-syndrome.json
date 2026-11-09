@@ -1,0 +1,314 @@
+{
+ "v": 1,
+ "module": "sur-salivary",
+ "subject": "surgery",
+ "title": "Frey Syndrome, Sialolithiasis, and Submandibular Gland Calculi",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Following parotidectomy, blunt facial trauma, or severe parotid abscess drainage, patients may develop gustatory sweating and flushing, known as **Frey syndrome**. Named after the neurologist Lucja Frey, this complication arises from aberrant regeneration of severed parasympathetic nerve fibers. Parasympathetic secretomotor axons traveling within the auriculotemporal nerve, which originally stimulated parotid salivary secretion, mistakenly missprout into adjacent denervated subdermal sympathetic receptors supplying cutaneous sweat glands and subcutaneous arterioles.",
+   "say": "Frey syndrome, or gustatory sweating, occurs after parotidectomy when severed parasympathetic fibers of the auriculotemporal nerve re-innervate cutaneous sweat glands and facial arterioles.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "transect",
+      "label": "Parotidectomy Severs Auriculotemporal Nerve"
+     },
+     {
+      "id": "denervate",
+      "label": "Overlying Preauricular Sweat Glands Denervated"
+     },
+     {
+      "id": "regenerate",
+      "label": "Parasympathetic Secretomotor Fibers Sprout"
+     },
+     {
+      "id": "misdirect",
+      "label": "Aberrant Missprouting into Cutaneous Sweat Receptors"
+     },
+     {
+      "id": "frey",
+      "label": "Mastication Triggers Gustatory Sweating & Flushing"
+     }
+    ],
+    "edges": [
+     [
+      "transect",
+      "denervate"
+     ],
+     [
+      "denervate",
+      "regenerate"
+     ],
+     [
+      "regenerate",
+      "misdirect"
+     ],
+     [
+      "misdirect",
+      "frey"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinically, patients with Frey syndrome experience profuse localized sweating, burning warmth, and vivid erythema over the preauricular cheek skin whenever they masticate or anticipate sour, flavorful foods. Objective confirmation is established using the **Minor starch-iodine test**. The suspect skin is painted with iodine tincture, allowed to air dry completely, and dusted with fine cornstarch. When the patient chews a lemon wedge, gustatory sweating dissolves the iodine-starch mixture, producing a striking dark blue-black reaction.",
+   "say": "Chewing food triggers preauricular sweating and flushing in Frey syndrome. The Minor starch-iodine test confirms the diagnosis, turning dark blue-black as sweat dissolves the painted starch.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Gustatory Sweating",
+     "points": [
+      "Develops several months following parotidectomy",
+      "Triggered reliably by sour, acidic, or spicy food",
+      "Causes social embarrassment from dripping cheek perspiration",
+      "Spontaneous resolution occurs in less than ten percent"
+     ]
+    },
+    "right": {
+     "title": "Minor Starch-Iodine Test",
+     "points": [
+      "Paints ipsilateral preauricular skin with topical iodine",
+      "Dusts area evenly with dry culinary cornstarch",
+      "Administers gustatory stimulus such as lemon juice",
+      "Sweat triggers starch-iodine complex turning dark blue-black"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prevention of Frey syndrome during parotidectomy involves interposing a barrier between the severed parotid bed and overlying subcutaneous tissue, such as a sternocleidomastoid muscle flap, superficial musculoaponeurotic system flap, or acellular dermal matrix. For established, symptomatic Frey syndrome, the therapeutic gold standard is **intracutaneous botulinum toxin** injection. Botulinum toxin type A cleaves SNAP-25, blocking presynaptic acetylcholine exocytosis and abolishing gustatory sweating for nine to twelve months per treatment session.",
+   "say": "Barrier flaps placed during parotidectomy help prevent Frey syndrome. For established symptoms, intracutaneous botulinum toxin type A injections block acetylcholine release and resolve sweating.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Treatment Modality",
+     "Mechanism of Action",
+     "Clinical Efficacy and Duration"
+    ],
+    "rows": [
+     [
+      "Botulinum Toxin Type A",
+      "Cleaves SNAP-25 to block presynaptic acetylcholine release",
+      "Gold standard; produces complete symptom relief for nine to twelve months"
+     ],
+     [
+      "Topical Antiperspirants",
+      "Aluminum chloride hexahydrate plugs distal eccrine sweat ducts",
+      "Mild temporary relief; requires frequent application and irritates skin"
+     ],
+     [
+      "Barrier Flaps (Primary)",
+      "Sternocleidomastoid or SMAS flap creates physical barrier",
+      "Highly effective preventative measure performed during primary parotidectomy"
+     ],
+     [
+      "Tympanic Neurectomy",
+      "Surgical avulsion of Jacobson nerve on promontory in middle ear",
+      "Invasive historical procedure with variable long-term success"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Calculus formation within salivary glandular parenchyma or excretory ducts is termed **sialolithiasis**. Salivary stones arise from the slow deposition of calcium phosphate and calcium carbonate salts around an organic nidus composed of desquamated epithelial cells, bacteria, and mucopolysaccharides. Sialolithiasis exhibits a striking anatomical preference: over eighty to ninety percent develop within the submandibular gland, whereas only ten to twenty percent occur in the parotid gland.",
+   "say": "Sialolithiasis is the formation of stones within salivary ducts. Between eighty and ninety percent arise in the submandibular gland, with only ten to twenty percent forming in the parotid.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Submandibular Sialolithiasis",
+     "points": [
+      "Accounts for eighty to ninety percent of all salivary calculi",
+      "Saliva has higher calcium and phosphate concentration",
+      "Highly alkaline saliva favors precipitation of mineral salts",
+      "Wharton duct has an uphill, anti-gravity course and wide diameter",
+      "Eighty percent of calculi are radio-opaque on plain X-rays"
+     ]
+    },
+    "right": {
+     "title": "Parotid Sialolithiasis",
+     "points": [
+      "Accounts for ten to twenty percent of all salivary calculi",
+      "Saliva is predominantly serous, watery, and slightly acidic",
+      "Stensen duct runs horizontally with dependent gravity drainage",
+      "Calculi have lower mineral density and higher organic matrix",
+      "Eighty percent of calculi are radiolucent on plain X-rays"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The predilection of stone formation in the submandibular gland relates directly to the physical and chemical characteristics of its secretion. Submandibular saliva has a higher viscosity due to high mucin content, contains more than double the calcium and phosphate concentration of parotid saliva, and possesses an alkaline pH that promotes crystallization. Furthermore, the excretory **Wharton duct** runs an uphill, anti-gravity course measuring five centimetres in length, predisposing to stagnant salivary pooling.",
+   "say": "Submandibular stones predominate because Wharton duct is five centimeters long, ascends against gravity, and carries viscous, alkaline saliva rich in calcium and phosphate salts.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physiological Factor",
+     "Submandibular Gland (Wharton)",
+     "Parotid Gland (Stensen)"
+    ],
+    "rows": [
+     [
+      "Secretory Composition",
+      "Mixed seromucinous with high viscous mucin content",
+      "Purely serous, thin, watery secretion"
+     ],
+     [
+      "Salivary pH",
+      "Alkaline (favors calcium salt precipitation)",
+      "Slightly acidic (keeps calcium salts in solution)"
+     ],
+     [
+      "Ductal Direction & Length",
+      "Ascends upward against gravity, 5 cm length",
+      "Runs horizontally across masseter, 5 cm length"
+     ],
+     [
+      "Duct Orifice Calibre",
+      "Narrow punctum on sublingual papilla beside frenulum",
+      "Broader orifice opposite upper second molar crown"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A patient harboring a **submandibular calculus** presents with the classic symptom of salivary colic, characterized by sudden, severe pain and rapid swelling in the submandibular triangle triggered by eating. As mastication stimulates salivary secretion, the stone obstructs the narrow ductal lumen, causing acute upstream hydrostatic distension of the glandular capsule. As the meal concludes and salivation wanes, ductal pressure slowly equilibrates, allowing the painful swelling to subside over one to two hours.",
+   "say": "Salivary colic presents as acute, painful submandibular swelling during meals. As salivation increases, the calculus blocks outflow, stretching the capsule until secretion diminishes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "meal",
+      "label": "Mastication & Gustatory Stimulation"
+     },
+     {
+      "id": "secrete",
+      "label": "High-Volume Salivary Secretion Triggered"
+     },
+     {
+      "id": "block",
+      "label": "Stone Obstructs Wharton Ductal Lumen"
+     },
+     {
+      "id": "pressure",
+      "label": "Acute Upstream Ductal & Capsular Distension"
+     },
+     {
+      "id": "colic",
+      "label": "Severe Submandibular Salivary Colic Pain"
+     }
+    ],
+    "edges": [
+     [
+      "meal",
+      "secrete"
+     ],
+     [
+      "secrete",
+      "block"
+     ],
+     [
+      "block",
+      "pressure"
+     ],
+     [
+      "pressure",
+      "colic"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical physical examination includes bimanual palpation, with one gloved index finger exploring the floor of the mouth along Wharton duct while the opposite hand supports the submandibular gland externally. Because eighty percent of submandibular calculi are radio-opaque, a plain intraoral **occlusal radiograph** readily visualizes stones within the anterior two-thirds of Wharton duct. High-resolution ultrasonography or non-contrast computed tomography confirms stones located within the proximal duct or intraglandular parenchyma.",
+   "say": "Bimanual palpation detects stones along the floor of the mouth. Because eighty percent of submandibular stones are radio-opaque, an intraoral occlusal X-ray confirms the diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Modality",
+     "Imaging Technique",
+     "Diagnostic Accuracy and Utility"
+    ],
+    "rows": [
+     [
+      "Intraoral Occlusal Radiograph",
+      "X-ray plate positioned between upper and lower dental arches",
+      "Ideal for radio-opaque stones in anterior two-thirds of Wharton duct"
+     ],
+     [
+      "High-Resolution Ultrasound",
+      "Transcutaneous submandibular transducer with color Doppler",
+      "Detects acoustic shadowing behind calculi and documents ductal dilatation"
+     ],
+     [
+      "Non-Contrast Helical CT",
+      "Fine-cut axial CT slices through mandibular floor",
+      "Gold standard for identifying all stones, including radiolucent variants"
+     ],
+     [
+      "Diagnostic Sialendoscopy",
+      "Ultra-thin semi-rigid endoscope inserted into duct orifice",
+      "Direct optical visualization of ductal lumen, stones, and strictures"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive management depends on the anatomical position, size, and number of stones. Calculi lodged within the distal Wharton duct near the sublingual papilla are treated by transoral duct incision, known as **sialodochoplasty**, extracting the stone under local anesthesia and marsupializing the duct. Conversely, large proximal stones, recurrent stones, or chronic irreversible intraglandular sialadenitis dictate formal submandibular gland excision, requiring careful surgical protection of the lingual, hypoglossal, and marginal mandibular nerves.",
+   "say": "Distal stones near the duct opening are extracted through transoral sialodochoplasty. Proximal stones or chronic glandular infection require complete submandibular gland excision.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stone",
+      "label": "Submandibular Sialolithiasis Confirmed"
+     },
+     {
+      "id": "loc",
+      "label": "Assess Anatomical Location & Size"
+     },
+     {
+      "id": "distal",
+      "label": "Distal Wharton Duct (<2cm from Orifice)"
+     },
+     {
+      "id": "proximal",
+      "label": "Proximal Duct or Intraglandular Calculus"
+     },
+     {
+      "id": "transoral",
+      "label": "Transoral Sialodochoplasty & Extraction"
+     },
+     {
+      "id": "excision",
+      "label": "Submandibular Gland Excision (Open or Endoscopic)"
+     }
+    ],
+    "edges": [
+     [
+      "stone",
+      "loc"
+     ],
+     [
+      "loc",
+      "distal"
+     ],
+     [
+      "loc",
+      "proximal"
+     ],
+     [
+      "distal",
+      "transoral"
+     ],
+     [
+      "proximal",
+      "excision"
+     ]
+    ]
+   }
+  }
+ ]
+}

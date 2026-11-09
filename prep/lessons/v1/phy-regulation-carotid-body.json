@@ -1,0 +1,233 @@
+{
+  "v": 1,
+  "module": "phy-regulation",
+  "subject": "physiology",
+  "title": "The Carotid Body, Pulmonary Reflexes, and Periodic Breathing",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Peripheral arterial chemoreception is mediated predominantly by paired sensory neurovascular organs located at the bifurcation of common carotid arteries. Each **carotid body** possesses the highest blood flow per unit tissue weight in the entire human body, reaching two thousand millilitres per hundred grams per minute, allowing continuous monitoring of dissolved arterial blood gases.",
+      "say": "Carotid bodies have the highest blood flow per gram of tissue, allowing instant detection of changes in arterial blood gases.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Carotid Body Chemoreceptors",
+          "points": [
+            "Located at common carotid artery bifurcation",
+            "Afferent sensory transmission via Hering nerve to CN IX",
+            "Responds primarily to hypoxaemia (PaO2 < 60 mmHg)",
+            "Also stimulated by hypercapnia and acidosis"
+          ]
+        },
+        "right": {
+          "title": "Aortic Body Chemoreceptors",
+          "points": [
+            "Located along superior and inferior aortic arch",
+            "Afferent sensory transmission via vagus nerve (CN X)",
+            "Modulates primarily cardiovascular circulatory reflexes",
+            "Smaller ventilatory influence than carotid bodies"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Chemosensory transduction in carotid bodies resides in dopamine-rich **glomus type I cells**, which synapse directly upon sensory nerve endings of the glossopharyngeal nerve. When arterial oxygen partial pressure drops below sixty millimetres of mercury, oxygen-sensitive potassium channels close, inducing cellular depolarization and calcium-dependent neurotransmitter release.",
+      "say": "Glomus type one cells depolarize when oxygen drops below sixty millimetres of mercury, releasing neurotransmitters to activate glossopharyngeal afferents.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hypox",
+            "label": "Arterial Hypoxaemia (PaO2 Drops Below 60 mmHg)"
+          },
+          {
+            "id": "k_close",
+            "label": "Inhibition of O2-Sensitive K+ Channels in Glomus Cells"
+          },
+          {
+            "id": "depol",
+            "label": "Membrane Depolarization and Influx of Extracellular Calcium"
+          },
+          {
+            "id": "release",
+            "label": "Exocytosis of Dopamine and ATP Stimulating Hering Nerve Afferents"
+          }
+        ],
+        "edges": [
+          [
+            "hypox",
+            "k_close"
+          ],
+          [
+            "k_close",
+            "depol"
+          ],
+          [
+            "depol",
+            "release"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Over-inflation of the pulmonary parenchyma is prevented by the protective **Hering-Breuer reflex**. When tidal volume exceeds one litre during strenuous exercise, slowly adapting pulmonary stretch receptors in bronchial smooth muscle fire, sending inhibitory vagal impulses to the dorsal respiratory group to terminate inspiration abruptly.",
+      "say": "The Hering-Breuer reflex uses pulmonary stretch receptors to switch off inspiration when lungs inflate beyond one litre.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "distend",
+            "label": "Large Tidal Inspiration Distends Bronchial Tree (> 1000 mL)"
+          },
+          {
+            "id": "stretch",
+            "label": "Activation of Slowly Adapting Pulmonary Stretch Receptors"
+          },
+          {
+            "id": "vagus",
+            "label": "Vagal Afferents Project to Nucleus Tractus Solitarius in Medulla"
+          },
+          {
+            "id": "off",
+            "label": "Inhibition of Inspiratory Ramp Terminates Inspiration, Preventing Overinflation"
+          }
+        ],
+        "edges": [
+          [
+            "distend",
+            "stretch"
+          ],
+          [
+            "stretch",
+            "vagus"
+          ],
+          [
+            "vagus",
+            "off"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Unmyelinated sensory C-fibre endings situated within alveolar walls adjacent to pulmonary capillaries are known as **juxtacapillary J receptors**. Engorgement of pulmonary microvessels or interstitial fluid accumulation in heart failure stimulates J receptors via the vagus nerve, eliciting rapid shallow tachypnoea and dyspnoea.",
+      "say": "Juxtacapillary J receptors detect pulmonary congestion, sending vagal signals that cause rapid shallow breathing and shortness of breath.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/asthma-copd-drugs-fig1.webp",
+        "alt": "Pulmonary receptor pathways and pharmacodynamics",
+        "caption": "Pulmonary neurovascular reflex arcs and receptor regulation in airway dynamics."
+      }
+    },
+    {
+      "tx": "A classic oscillatory respiratory rhythm characterized by waxing and waning tidal volumes separated by central apnoeic pauses is designated **Cheyne-Stokes breathing**. It occurs characteristically in severe congestive heart failure and bilateral cortical brain injury, driven by delayed circulatory transport time between the lungs and brainstem chemoreceptors.",
+      "say": "Cheyne-Stokes breathing features alternating crescendo-decrescendo hyperpnoea and central apnoea caused by circulatory transit delays.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cheyne-Stokes Respirations",
+          "points": [
+            "Smooth crescendo-decrescendo tidal volumes with apnoeic pauses",
+            "Prolonged lung-to-brain circulation time in severe heart failure",
+            "Chemoreceptors continuously overshoot and undershoot ventilation",
+            "Seen also in bilateral hemispheric stroke and high altitude"
+          ]
+        },
+        "right": {
+          "title": "Biot Breathing (Ataxic)",
+          "points": [
+            "Completely irregular breaths of variable depth interspersed with apnoea",
+            "Disorganized medullary respiratory rhythm generator",
+            "Direct damage to dorsal respiratory group in medulla",
+            "Associated with severe raised intracranial pressure and herniation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "During high-altitude exposure, hypoxic hyperventilation induces respiratory alkalosis, causing unstable feedback loops that generate nocturnal **periodic breathing**. These periodic oscillations severely disrupt restful sleep architecture until renal bicarbonate excretion compensates over several days or acetazolamide is administered to stimulate central metabolic acidosis.",
+      "say": "Nocturnal periodic breathing occurs at high altitudes due to hypocapnic alkalosis, which destabilizes the central respiratory drive.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Breathing Pattern",
+          "Waveform Characteristics",
+          "Primary Neurological / Clinical Cause"
+        ],
+        "rows": [
+          [
+            "Cheyne-Stokes Breathing",
+            "Crescendo-decrescendo cycles with apnoea",
+            "Severe heart failure or bilateral cortical lesions"
+          ],
+          [
+            "Biot / Ataxic Breathing",
+            "Irregular chaotic gasps with variable pauses",
+            "Direct medullary damage; impending brainstem herniation"
+          ],
+          [
+            "Kussmaul Breathing",
+            "Rapid, deep, persistent hyperpnoea",
+            "Severe metabolic ketoacidosis or lactic acidosis"
+          ],
+          [
+            "Apneustic Breathing",
+            "Prolonged sustained inspiratory pauses",
+            "Lower pontine tegmental lesions transecting pneumotaxic tract"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Voluntary cessation of respiration is constrained by the physiological **breath holding breaking point**. When arterial carbon dioxide partial pressure climbs to approximately fifty millimetres of mercury, intense stimulation of central and peripheral chemoreceptors overcomes voluntary cortical inhibition, forcing the individual to resume spontaneous breathing.",
+      "say": "The breath holding breaking point occurs when arterial carbon dioxide rises to fifty millimetres of mercury, forcing involuntary breathing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hold",
+            "label": "Voluntary Breath Holding: Alveolar PCO2 Rises; PO2 Declines Steadily"
+          },
+          {
+            "id": "chem",
+            "label": "Arterial PCO2 Reaches ~50 mmHg; PaO2 Falls Toward Hypoxic Range"
+          },
+          {
+            "id": "stim",
+            "label": "Massive Afferent Discharge from Central and Carotid Chemoreceptors"
+          },
+          {
+            "id": "break",
+            "label": "Breaking Point Reached: Involuntary Medullary Drive Overrides Cerebral Cortex"
+          }
+        ],
+        "edges": [
+          [
+            "hold",
+            "chem"
+          ],
+          [
+            "chem",
+            "stim"
+          ],
+          [
+            "stim",
+            "break"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "If an underwater swimmer hyperventilates beforehand, profound hypocapnia suppresses the urge to breathe without significantly increasing total stored oxygen. During subsequent underwater exertion, oxygen drops to fatal levels before carbon dioxide reaches the breaking point, precipitating sudden **shallow water blackout** and silent drowning.",
+      "say": "Prior hyperventilation delays the carbon dioxide breaking point, causing sudden fatal loss of consciousness underwater.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-respiratory-failure-fig1.webp",
+        "alt": "Central respiratory drive failure",
+        "caption": "Ventilatory drive failure, central hypoventilation syndromes, and chemoreceptor insensitivity."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

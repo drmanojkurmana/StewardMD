@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-nerve-injuries",
+ "subject": "anatomy",
+ "title": "Median and Ulnar Neuropathies: Pointing Index and Compression Sites",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The median nerve is formed in the axilla by contributions from medial and lateral cords of the brachial plexus with spinal segments C5 to T1. Descending the arm medial to the brachial artery, it enters the cubital fossa beneath the bicipital aponeurosis and penetrates between the two heads of the **pronator teres** muscle.",
+   "say": "Formed by medial and lateral cords of the brachial plexus, the median nerve carries roots C5 to T1. It descends medial to the brachial artery, enters the cubital fossa under the bicipital aponeurosis, and passes between the two heads of pronator teres.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-brachial-plexus.svg",
+    "alt": "Brachial plexus roots, trunks, divisions, cords, and terminal peripheral nerve branches",
+    "caption": "Anatomical layout of brachial plexus cords and terminal motor nerves. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "High median nerve injury at the elbow or supracondylar fracture of the humerus paralyses flexor digitorum superficialis, flexor pollicis longus, and the lateral half of flexor digitorum profundus. When asked to make a fist, the index finger remains straight and extended, producing the classic **pointing index** sign (Benediction sign).",
+   "say": "High median nerve injury above the elbow paralyses long digital flexors to the index and middle fingers. When asked to make a tight fist, the patient cannot flex the index finger, producing the characteristic pointing index sign.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Digits 1, 2, and 3 Deficit",
+     "points": [
+      "FPL paralysed: no thumb IP flexion",
+      "FDS paralysed: no PIP flexion in any digit",
+      "Lateral FDP lost: index DIP remains straight",
+      "Index finger points forward on fist clenching"
+     ]
+    },
+    "right": {
+     "title": "Digits 4 and 5 Preservation",
+     "points": [
+      "Medial FDP innervated by ulnar nerve",
+      "Deep flexors to ring and little fingers work",
+      "DIP and PIP joints of digits 4 and 5 flex",
+      "Partial fist formed by medial fingers"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Compressive neuropraxia of the radial nerve against the middle third of the humerus occurs during prolonged stupor or heavy intoxication, famously termed **Saturday night palsy**. Compression of the nerve against the spiral groove or a chair back produces transient motor conduction block, yielding wrist drop while retaining triceps strength.",
+   "say": "Compressive neuropraxia of the radial nerve against the humeral shaft during deep stupor produces Saturday night palsy. Sustained pressure causes local ischemia and conduction block, leading to wrist drop with intact triceps extension.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Syndrome",
+     "Site of Vulnerability",
+     "Compressive Mechanism",
+     "Key Motor Finding"
+    ],
+    "rows": [
+     [
+      "Saturday Night Palsy",
+      "Humeral spiral groove",
+      "External arm compression on chair",
+      "Wrist drop with intact triceps"
+     ],
+     [
+      "Crutch Palsy",
+      "Axillary radial nerve",
+      "Direct pressure in axillary vault",
+      "Wrist drop plus triceps paralysis"
+     ],
+     [
+      "Pronator Syndrome",
+      "Between pronator heads",
+      "Fibrous arch hypertrophy",
+      "Forearm ache with median numbness"
+     ],
+     [
+      "Cubital Tunnel",
+      "Postcondylar groove",
+      "Osborne ligament entrapment",
+      "Medial digit sensory loss and claw"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The ulnar nerve courses behind the medial epicondyle through an osteofibrous canal beneath the humero-ulnar aponeurotic arch (Osborne ligament), known as the **cubital tunnel**. Entrapment here causes cubital tunnel syndrome, marked by medial elbow pain, paresthesias in the fourth and fifth digits, and wasting of hypothenar and interosseous muscles.",
+   "say": "The ulnar nerve traverses behind the medial epicondyle through the cubital tunnel beneath Osborne ligament. Entrapment causes medial elbow aching, ring and little finger numbness, and intrinsic hand muscle wasting.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cubital Tunnel Entrapment Cascade",
+    "nodes": [
+     {
+      "id": "flex",
+      "label": "Repetitive Elbow Flexion Narrows Tunnel by 55%"
+     },
+     {
+      "id": "press",
+      "label": "Osborne Ligament Compresses Retroepicondylar Nerve"
+     },
+     {
+      "id": "ischemia",
+      "label": "Intraneural Microvascular Ischemia and Fibrosis"
+     },
+     {
+      "id": "deficit",
+      "label": "Medial Hand Paresthesias and Intrinsic Atrophy"
+     }
+    ],
+    "edges": [
+     [
+      "flex",
+      "press"
+     ],
+     [
+      "press",
+      "ischemia"
+     ],
+     [
+      "ischemia",
+      "deficit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "At the wrist, the ulnar nerve and artery enter the palm through an oblique fibro-osseous tunnel situated superficial to the flexor retinaculum, known as **Guyon canal** (pisohamate canal). Bound laterally by the hook of the hamate and medially by the pisiform, compression here spares elbow sensation while causing intrinsic motor weakness.",
+   "say": "At the wrist, the ulnar nerve passes through Guyon canal between the pisiform and the hook of the hamate. Compression within this canal spares medial forearm sensation while provoking hand intrinsic muscle paresis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Guyon Canal (Ulnar Nerve)",
+     "points": [
+      "Superficial to flexor retinaculum",
+      "Bounded by pisiform and hook of hamate",
+      "Contains ulnar artery and ulnar nerve",
+      "Spares palmar cutaneous ulnar sensation"
+     ]
+    },
+    "right": {
+     "title": "Carpal Tunnel (Median Nerve)",
+     "points": [
+      "Deep to flexor retinaculum",
+      "Bounded by scaphoid, trapezium, hamate",
+      "Contains 9 flexor tendons and median nerve",
+      "Spares palmar cutaneous median sensation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Within Guyon canal, the ulnar nerve divides into superficial and deep terminal branches. The superficial branch provides cutaneous innervation to the palmar surface of the medial one and a half fingers, while the **deep branch** traverses the hypothenar muscles to innervate all interossei, the medial two lumbricals, and adductor pollicis.",
+   "say": "Inside Guyon canal, the ulnar nerve splits into superficial and deep terminal branches. The superficial branch supplies feeling to the medial one and a half digits, while the deep branch innervates interossei and adductor pollicis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Guyon Zone",
+     "Anatomical Site",
+     "Nerve Component",
+     "Clinical Deficit Pattern"
+    ],
+    "rows": [
+     [
+      "Zone 1",
+      "Proximal to bifurcation",
+      "Main trunk (motor + sensory)",
+      "Combined intrinsic motor loss and digit numbness"
+     ],
+     [
+      "Zone 2",
+      "Surrounding deep branch",
+      "Pure deep motor branch",
+      "Pure motor loss of interossei without sensory deficit"
+     ],
+     [
+      "Zone 3",
+      "Surrounding superficial branch",
+      "Pure superficial sensory branch",
+      "Isolated sensory loss to ring and little fingers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Differentiation between cubital tunnel syndrome and Guyon canal entrapment depends critically on the **dorsal cutaneous branch** of the ulnar nerve. Arising five to seven centimeters proximal to the wrist, it bypasses Guyon canal entirely. Normal sensation over the dorsomedial hand proves that ulnar nerve entrapment is localized to Guyon canal.",
+   "say": "Differentiating cubital tunnel from Guyon canal entrapment relies on testing sensation supplied by the dorsal cutaneous branch. Because this branch branches five centimeters above the wrist, normal dorsomedial hand feeling confirms a distal wrist entrapment.",
+   "vis": {
+    "kind": "flow",
+    "title": "Localizing Ulnar Nerve Compression",
+    "nodes": [
+     {
+      "id": "eval",
+      "label": "Patient with Ring and Little Finger Paresthesias"
+     },
+     {
+      "id": "sens",
+      "label": "Test Sensation on Dorsomedial Aspect of Hand"
+     },
+     {
+      "id": "cubital",
+      "label": "Impaired Dorsal Sensation: Cubital Tunnel Lesion"
+     },
+     {
+      "id": "guyon",
+      "label": "Normal Dorsal Sensation: Guyon Canal Lesion"
+     }
+    ],
+    "edges": [
+     [
+      "eval",
+      "sens"
+     ],
+     [
+      "sens",
+      "cubital"
+     ],
+     [
+      "sens",
+      "guyon"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic compression or repetitive vibration trauma from cycling handlebars can compress Guyon canal, precipitating handlebar palsy. Physical examination verifies clawing restricted to the medial digits, accompanied by diagnostic electrophysiological slowing across the wrist, demanding ergonomic **splinting** or surgical unroofing of the canal to avert permanent intrinsic contracture.",
+   "say": "Cyclists experience handlebar palsy when prolonged pressure compresses Guyon canal against the handlebars. Clinical assessment reveals medial finger clawing and motor slowing that respond to splinting or decompression surgery.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/peripheral-nerve-injuries-and-deformities-fig1.webp",
+    "alt": "Clinical representation of hand deformities from peripheral nerve compression and trauma",
+    "caption": "Motor deformities and sensory distribution patterns in upper extremity nerve entrapment syndromes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "3f42d365-4000-8000-3f42-d36512345678",
+  "3c42ceac-4000-8000-3c42-ceac12345678",
+  "3d42d03f-4000-8000-3d42-d03f12345678"
+ ]
+}

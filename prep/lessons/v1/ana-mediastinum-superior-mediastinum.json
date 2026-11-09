@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-mediastinum",
+ "subject": "anatomy",
+ "title": "Mediastinal Compartments: Superior Mediastinum, Aortic Arch, and Great Veins",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The mediastinum is the central interpleural compartment of the thorax, bounded by the thoracic inlet superiorly, the diaphragm inferiorly, and the mediastinal pleura laterally. An imaginary transverse plane extending from the sternal angle anteriorly to the lower border of T4 posteriorly divides it into **superior and inferior** mediastinal compartments.",
+   "say": "The mediastinum is the central chest space between pleural cavities. An imaginary horizontal plane from the sternal angle to the T4 vertebra divides it into superior and inferior compartments.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-mediastinum-divisions.svg",
+    "alt": "Sagittal schematic of mediastinal divisions: superior, anterior, middle, and posterior mediastinum",
+    "caption": "Mediastinal divisions demarcated by the transverse thoracic plane at the sternal angle (T4/T5). [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The inferior mediastinum is further subdivided by the fibrous pericardium into three regions: the anterior mediastinum (containing fat, lymphatics, and thymic remnants), the **middle mediastinum** (housing the pericardium, heart, and roots of the great vessels), and the posterior mediastinum (transmitting the oesophagus, descending aorta, and thoracic duct).",
+   "say": "The inferior mediastinum is subdivided by the pericardium into three spaces: anterior mediastinum, middle mediastinum containing the heart and great vessel roots, and posterior mediastinum transmitting the oesophagus and aorta.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Compartment",
+     "Anterior / Posterior Boundaries",
+     "Principal Contents",
+     "Classic Tumours"
+    ],
+    "rows": [
+     [
+      "Superior Mediastinum",
+      "Manubrium to T1-T4 vertebrae",
+      "Aortic arch, SVC, thymus, trachea, oesophagus",
+      "Thymoma, thyroid retrosternal goitre"
+     ],
+     [
+      "Anterior Mediastinum",
+      "Sternum to anterior pericardium",
+      "Thymic remnants, lymph nodes, internal thoracics",
+      "Teratoma, thymoma, lymphoma (terrible Ts)"
+     ],
+     [
+      "Middle Mediastinum",
+      "Anterior to posterior pericardium",
+      "Heart, ascending aorta, pulmonary trunk, phrenic",
+      "Pericardial cyst, bronchogenic cyst, lymphoma"
+     ],
+     [
+      "Posterior Mediastinum",
+      "Pericardium to T5-T12 vertebrae",
+      "Descending aorta, oesophagus, thoracic duct, azygos",
+      "Neurogenic tumours (schwannoma, neuroblastoma)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Within the superior mediastinum, anatomical structures are arranged in four successive tissue planes from anterior to posterior: first the glandular plane (thymus), second the venous plane (brachiocephalic veins and SVC), third the **arterial plane** (aortic arch and its three branches), and fourth the visceral-neural plane (trachea, oesophagus, and thoracic duct).",
+   "say": "Superior mediastinal structures lie in four planes from front to back: the thymus gland, the venous plane, the arterial plane of the aortic arch, and the visceral plane containing the trachea and oesophagus.",
+   "vis": {
+    "kind": "flow",
+    "title": "Anterior to Posterior Planes of Superior Mediastinum",
+    "nodes": [
+     {
+      "id": "thymus",
+      "label": "Plane 1 (Anterior): Thymus Gland Remnant"
+     },
+     {
+      "id": "venous",
+      "label": "Plane 2: Right and Left Brachiocephalic Veins and SVC"
+     },
+     {
+      "id": "arterial",
+      "label": "Plane 3: Arch of Aorta and Three Great Arterial Trunks"
+     },
+     {
+      "id": "visceral",
+      "label": "Plane 4 (Posterior): Trachea, Oesophagus, Left Recurrent, Duct"
+     }
+    ],
+    "edges": [
+     [
+      "thymus",
+      "venous"
+     ],
+     [
+      "venous",
+      "arterial"
+     ],
+     [
+      "arterial",
+      "visceral"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The venous plane features the formation of the **superior vena cava** by the union of right and left brachiocephalic veins behind the lower border of the first right costal cartilage. The left brachiocephalic vein runs obliquely across the three branches of the aortic arch, measuring over twice the length of the vertical right brachiocephalic vein.",
+   "say": "The superior vena cava forms behind the first right costal cartilage from the merger of the brachiocephalic veins. The left brachiocephalic vein crosses obliquely in front of the aortic arch branches, twice as long as the right.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Left Brachiocephalic Vein",
+     "points": [
+      "Length: 6 cm long, runs obliquely downward",
+      "Crosses anterior to brachiocephalic, carotid, and subclavian arteries",
+      "Receives thoracic duct at left internal jugular junction",
+      "Compressed by aortic arch aneurysms"
+     ]
+    },
+    "right": {
+     "title": "Right Brachiocephalic Vein",
+     "points": [
+      "Length: 2.5 cm long, runs vertically downward",
+      "Accompanied laterally by right phrenic nerve",
+      "Receives right lymphatic duct at junction",
+      "Direct inline continuity with superior vena cava"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Obstruction of the superior vena cava by mediastinal tumors or invasive bronchogenic carcinoma provokes **superior vena cava syndrome**. Patients present with facial edema, neck venous engorgement without pulsation, conjunctival suffusion, and prominent dilated collateral veins coursing across the anterior chest wall.",
+   "say": "Tumor compression of the superior vena cava triggers superior vena cava syndrome. Patients present with facial swelling, non-pulsatile neck vein distension, and prominent chest wall collateral veins.",
+   "vis": {
+    "kind": "flow",
+    "title": "Hemodynamics of Superior Vena Cava Obstruction",
+    "nodes": [
+     {
+      "id": "mass",
+      "label": "Mediastinal Neoplasm or Lymphadenopathy Compresses SVC"
+     },
+     {
+      "id": "hypert",
+      "label": "Venous Pressure Rises to 20-40 cmH2O in Upper Body"
+     },
+     {
+      "id": "collateral",
+      "label": "Collateral Flow Shunted via Azygos and Thoracoepigastric Veins"
+     },
+     {
+      "id": "edema",
+      "label": "Plethoric Facial Edema, Head Fullness, Dilated Chest Veins"
+     }
+    ],
+    "edges": [
+     [
+      "mass",
+      "hypert"
+     ],
+     [
+      "hypert",
+      "collateral"
+     ],
+     [
+      "collateral",
+      "edema"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The arterial plane is formed by the **arch of the aorta**, which arches upwards, backwards, and to the left over the bifurcation of the pulmonary trunk and left main bronchus. From right to left, it gives off three great branches: the brachiocephalic artery, left common carotid artery, and left subclavian artery.",
+   "say": "The arch of the aorta curves over the left main bronchus and pulmonary bifurcation. It gives off three great branches: the brachiocephalic trunk, left common carotid artery, and left subclavian artery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Aortic Arch Branch",
+     "Spatial Position",
+     "Bifurcation Products",
+     "Supplied Vascular Territory"
+    ],
+    "rows": [
+     [
+      "Brachiocephalic Trunk",
+      "First and largest branch, right anterior",
+      "Right common carotid and right subclavian",
+      "Right head, neck, and right upper extremity"
+     ],
+     [
+      "Left Common Carotid",
+      "Second branch, ascends left of trachea",
+      "Internal and external carotid arteries",
+      "Left cerebral hemisphere, face, and neck"
+     ],
+     [
+      "Left Subclavian Artery",
+      "Third and most posterior branch",
+      "Vertebral, internal thoracic, thyrocervical",
+      "Left upper extremity and posterior cerebral"
+     ],
+     [
+      "Thyroidea Ima (10%)",
+      "Rare accessory branch between trunks",
+      "Ascends directly to thyroid isthmus",
+      "Vulnerable during emergency tracheostomy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Traversing the superior mediastinum are the left and right recurrent laryngeal nerves. While the right nerve hooks around the subclavian artery in the root of the neck, the **left recurrent laryngeal nerve** loops under the aortic arch immediately lateral to the ligamentum arteriosum, ascending in the tracheo-oesophageal groove.",
+   "say": "The recurrent laryngeal nerves show marked asymmetry. The left nerve loops under the aortic arch beside the ligamentum arteriosum and ascends in the tracheo-oesophageal groove, vulnerable to aortic aneurysms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Left Recurrent Laryngeal",
+     "points": [
+      "Arises from vagus as it crosses aortic arch",
+      "Loops beneath arch of aorta lateral to ligamentum",
+      "Ascends in left tracheo-oesophageal groove",
+      "Compressed by aortic aneurysms or hilar tumors (Ortner syndrome)"
+     ]
+    },
+    "right": {
+     "title": "Right Recurrent Laryngeal",
+     "points": [
+      "Arises from vagus at base of neck",
+      "Loops beneath right subclavian artery",
+      "Ascends in right tracheo-oesophageal groove",
+      "Does not enter superior mediastinum"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Expanding mediastinal masses, large retrosternal goitres, or massive tension pneumothoraces cause visible lateral displacement of the trachea. Examination by gentle palpation of the trachea in the suprasternal notch demonstrates **tracheal shift**, providing immediate clinical localization of mediastinal displacement toward the side of lung collapse or away from massive effusions.",
+   "say": "Mediastinal masses, large goiters, or tension pneumothorax displace the central airways. Palpating the trachea in the suprasternal notch detects tracheal deviation, localizing tension or collapse.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-paed-resp-tracheal_shift.webp",
+    "alt": "Physical examination technique for tracheal palpation and mediastinal shift mechanisms",
+    "caption": "Tracheal palpation in the suprasternal notch evaluating mediastinal shift. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "6d10e09f-2cfc-4fff-af9d-f87a4d2d925b",
+  "0e37047c-4621-4741-aaa4-75db07eec846",
+  "c1c1f90c-2982-4ee2-9010-84a669d0ea17"
+ ]
+}

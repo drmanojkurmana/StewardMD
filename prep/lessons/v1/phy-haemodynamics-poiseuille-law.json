@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "module": "phy-haemodynamics",
+ "subject": "physiology",
+ "title": "Poiseuille Law, Vascular Resistance, and Turbulent Flow",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The steady laminar flow of a viscous fluid through a rigid cylindrical tube is formulated by the Hagen-Poiseuille relationship, known as **Poiseuille law**. Volume flow rate is directly proportional to the pressure gradient and the fourth power of vessel internal radius, and inversely proportional to fluid viscosity and vessel length.",
+   "say": "Poiseuille law dictates that volume flow rate is proportional to the fourth power of vessel radius and inversely proportional to viscosity and length.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rad",
+      "label": "Arteriolar Radius (r) Doubles: 2 to the 4th Power = 16-Fold Rise"
+     },
+     {
+      "id": "flow",
+      "label": "Vascular Blood Flow Surges 16-Fold at Identical Driving Pressure"
+     },
+     {
+      "id": "res",
+      "label": "Conversely, Vascular Resistance Plummets to 1/16th of Baseline"
+     },
+     {
+      "id": "organ",
+      "label": "Small Caliber Changes Strongly Control Organ Perfusion"
+     }
+    ],
+    "edges": [
+     [
+      "rad",
+      "flow"
+     ],
+     [
+      "flow",
+      "res"
+     ],
+     [
+      "res",
+      "organ"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Because radius is raised to the fourth power, minute changes in arteriolar caliber exert profound effects on **vascular resistance**. Arterioles possess thick circular muscular media richly innervated by sympathetic noradrenergic fibres, accounting for over sixty percent of total systemic peripheral vascular resistance and acting as the primary stopcocks regulating tissue perfusion.",
+   "say": "Because radius is raised to the fourth power, arterioles act as resistance stopcocks, where minor caliber changes control peripheral vascular resistance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vascular Segment",
+     "Percentage of Total SVR",
+     "Structural Feature",
+     "Primary Functional Role"
+    ],
+    "rows": [
+     [
+      "Aorta and Large Arteries",
+      "3 to 5 percent",
+      "Abundant elastic lamellae",
+      "Windkessel dampening of pulsatile pressure"
+     ],
+     [
+      "Small Arteries and Arterioles",
+      "60 to 70 percent",
+      "Dense circular smooth muscle",
+      "Primary site of systemic vascular resistance"
+     ],
+     [
+      "Capillaries",
+      "15 to 20 percent",
+      "Single endothelial cell layer",
+      "Microvascular nutrient and gas exchange"
+     ],
+     [
+      "Venules and Veins",
+      "10 to 15 percent",
+      "High compliance thin walls",
+      "Capacitance storage of circulating blood"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In smooth, unobstructed cylindrical vessels, blood moves in concentric concentric fluid laminae, designated **laminar flow**. Fluid layers in the central axial stream move at maximal velocity, while velocity drops parabolically toward the vascular wall, where fluid remains stationary due to viscous friction, minimizing energy dissipation and preventing audible vascular murmurs.",
+   "say": "In laminar flow, concentric blood layers move smoothly without turbulence. Central axial flow travels fastest while wall friction creates a parabolic profile.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acrocyanosis-fig1.webp",
+    "alt": "Laminar versus turbulent microvascular blood flow.",
+    "caption": "Parabolic velocity profile of laminar blood flow in peripheral microvessels. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When flow velocity exceeds a critical threshold, streamline organisation disintegrates into chaotic vortices and eddies termed **turbulent flow**. Turbulence dissipates kinetic energy into acoustic vibrations and heat, producing audible murmurs across stenotic cardiac valves, vascular bruits over atherosclerotic carotids, and Korotkoff sounds during sphygmomanometric blood pressure cuff deflation.",
+   "say": "Turbulent flow occurs when streamlines break down into chaotic eddies, producing audible murmurs across stenotic valves and arterial bruits.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Laminar (Streamline) Flow",
+     "points": [
+      "Concentric cylindrical fluid layers slide silently",
+      "Parabolic velocity profile across vessel lumen",
+      "Pressure gradient is directly proportional to flow (P ~ Q)",
+      "Minimizes shear stress and energetic pumping cost"
+     ]
+    },
+    "right": {
+     "title": "Turbulent Flow",
+     "points": [
+      "Chaotic eddies, cross-currents, and vortices",
+      "Blunt velocity profile with high wall shear stress",
+      "Pressure gradient increases with square of flow (P ~ Q^2)",
+      "Generates audible bruits, thrills, and heart murmurs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The likelihood of flow transitioning from silent laminar streamlines to chaotic turbulence is calculated by the dimensionless **Reynolds number**. Reynolds number equals fluid velocity multiplied by vessel diameter and fluid density, divided by fluid viscosity. Values exceeding two thousand indicate high probability of turbulence, promoted by high blood velocity, wide vascular caliber, or severe anaemia.",
+   "say": "Reynolds number predicts turbulence: values over 2,000 favor turbulent flow, promoted by high velocity, large diameter, and low viscosity in anaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Determinant Variable",
+     "Effect on Reynolds Number",
+     "Clinical Example"
+    ],
+    "rows": [
+     [
+      "Flow Velocity (v)",
+      "Directly proportional",
+      "Flow acceleration through stenotic aortic valve"
+     ],
+     [
+      "Vessel Diameter (D)",
+      "Directly proportional",
+      "Post-stenotic dilation in ascending aorta"
+     ],
+     [
+      "Blood Density (rho)",
+      "Directly proportional",
+      "Polycythaemic hyperviscosity interactions"
+     ],
+     [
+      "Blood Viscosity (eta)",
+      "Inversely proportional",
+      "Hyperdynamic flow murmur in severe anaemia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In severe anaemia, a reduced red cell haematocrit lowers blood viscosity, accelerating cardiac output and blood velocity. Consequently, the Reynolds number surges, producing audible systolic **flow murmurs** over the precordium without structural valvular stenosis. Restoring haematocrit through blood transfusion elevates viscosity, reducing Reynolds number and silencing the murmur.",
+   "say": "In severe anaemia, reduced viscosity and compensatory high cardiac output drive Reynolds number over 2,000, producing benign systolic flow murmurs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "anaem",
+      "label": "Severe Anaemia Lowers Red Cell Haematocrit Below 25%"
+     },
+     {
+      "id": "visc",
+      "label": "Whole Blood Viscosity Falls to Half of Normal Baseline"
+     },
+     {
+      "id": "rey",
+      "label": "Reynolds Number Surpasses Critical Threshold of 2000"
+     },
+     {
+      "id": "mur",
+      "label": "Turbulent Ejection Generates Audible Hemic Flow Murmurs"
+     }
+    ],
+    "edges": [
+     [
+      "anaem",
+      "visc"
+     ],
+     [
+      "visc",
+      "rey"
+     ],
+     [
+      "rey",
+      "mur"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A critical physical law governing vessel wall stability is **Laplace law**. In a hollow cylindrical blood vessel, transmural distending pressure multiplied by internal vessel radius equals wall tension divided by wall thickness. In abdominal aortic aneurysms, chamber dilation increases radius, which escalates wall tension, predisposing the weakened dilated wall to catastrophic rupture.",
+   "say": "Laplace law dictates that wall tension rises with vessel radius. In aortic aneurysms, increasing diameter escalates wall tension, predisposing to rupture.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/aortic-stenosis-fig1.webp",
+    "alt": "Laplace law and post-stenotic aortic dilation.",
+    "caption": "Aortic wall tension, post-stenotic turbulence, and Laplace law dynamics. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When sympathetic vasoconstrictor tone increases markedly or perfusion pressure plummets, vascular smooth muscle tension overcomes internal distending blood pressure. The transmural pressure at which a microvessel collapses and blood flow ceases entirely is the **critical closing pressure**, normally measuring twenty millimetres of mercury but rising to sixty in intense sympathetic vasoconstriction.",
+   "say": "Critical closing pressure is the threshold where vessels collapse and flow stops completely, elevated during intense sympathetic vasoconstriction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Perfusion State",
+     "points": [
+      "Transmural pressure exceeds active smooth muscle tone",
+      "Arteriolar and capillary lumens remain widely patent",
+      "Continuous capillary perfusion and solute clearance",
+      "Critical closing pressure around 20 mmHg"
+     ]
+    },
+    "right": {
+     "title": "Severe Vasoconstrictor State (Shock)",
+     "points": [
+      "Intense sympathetic stimulation and noradrenaline surge",
+      "Active wall tension overcomes intravascular distending pressure",
+      "Microvessels snap closed, stopping capillary perfusion",
+      "Critical closing pressure shifts upward to 60 mmHg"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

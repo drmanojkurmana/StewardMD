@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-leg-ankle",
+ "subject": "anatomy",
+ "title": "Leg Compartments: Anterior, Lateral, and Superficial Posterior Muscles",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The leg is partitioned into three osteofibrous compartments by the tibia, fibula, interosseous membrane, and anterior and posterior intermuscular septa. The **anterior compartment** houses the foot dorsiflexors and toe extensors, receiving sole innervation from the deep peroneal nerve and arterial supply from the anterior tibial artery.",
+   "say": "The leg is divided into three compartments by the tibia, fibula, and fascial septa. The anterior compartment contains foot dorsiflexors supplied by the deep peroneal nerve and anterior tibial artery.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-leg-nerve-injuries.svg",
+    "alt": "Course and division of common peroneal nerve into deep and superficial branches in the leg",
+    "caption": "Fascial compartments of the leg and branching pattern of the common peroneal nerve. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The chief muscle of the anterior compartment is the **tibialis anterior**, arising from the upper two-thirds of the lateral surface of the tibia. Its robust tendon crosses the front of the ankle beneath the extensor retinacula to insert onto the medial cuneiform and base of the first metatarsal, executing powerful foot dorsiflexion and inversion.",
+   "say": "The tibialis anterior arises from the lateral tibia and passes beneath the extensor retinaculum. Inserting onto the medial cuneiform and first metatarsal, it executes foot dorsiflexion and inversion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tibialis Anterior Action",
+     "points": [
+      "Origin: upper two-thirds of lateral tibia",
+      "Insertion: medial cuneiform and base of metatarsal 1",
+      "Primary dorsiflexor of the ankle joint",
+      "Inverts foot at subtalar joint"
+     ]
+    },
+    "right": {
+     "title": "Antagonist: Peroneus Longus",
+     "points": [
+      "Origin: upper two-thirds of lateral fibula",
+      "Insertion: medial cuneiform and base of metatarsal 1",
+      "Primary everter of the foot",
+      "Plantarflexes first metatarsal head"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The lateral compartment contains two muscles: the peroneus brevis and the **peroneus longus**, both innervated by the superficial peroneal nerve. The tendon of peroneus longus grooves the cuboid bone and traverses obliquely across the sole to insert alongside tibialis anterior, creating a dynamic stirrup supporting the transverse arch.",
+   "say": "The lateral compartment contains the peroneus longus and brevis, supplied by the superficial peroneal nerve. The peroneus longus tendon crosses the sole to insert beside tibialis anterior, forming a muscular sling for the transverse arch.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Leg Compartment",
+     "Muscles Included",
+     "Nerve Supply",
+     "Vascular Supply"
+    ],
+    "rows": [
+     [
+      "Anterior Compartment",
+      "Tibialis anterior, EDL, EHL, peroneus tertius",
+      "Deep peroneal nerve (L4-S1)",
+      "Anterior tibial artery"
+     ],
+     [
+      "Lateral Compartment",
+      "Peroneus longus and peroneus brevis",
+      "Superficial peroneal nerve (L5-S1)",
+      "Perforating peroneal branches"
+     ],
+     [
+      "Superficial Posterior",
+      "Gastrocnemius, soleus, plantaris",
+      "Tibial nerve (S1-S2)",
+      "Posterior tibial and peroneal arteries"
+     ],
+     [
+      "Deep Posterior",
+      "Tibialis posterior, FDL, FHL, popliteus",
+      "Tibial nerve (L4-S2)",
+      "Posterior tibial artery"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The superficial posterior compartment is dominated by the triceps surae, composed of the gastrocnemius and **soleus** muscles. The gastrocnemius arises by medial and lateral heads from the respective femoral condyles, crossing both the knee and ankle joints to flex the knee and forcefully plantarflex the talocrural joint.",
+   "say": "The superficial posterior compartment contains the triceps surae, formed by gastrocnemius and soleus. Gastrocnemius originates by two heads from the femoral condyles, crossing two joints to flex the knee and plantarflex the ankle.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Gastrocnemius Muscle",
+     "points": [
+      "Crosses both knee and ankle joints",
+      "Fast-twitch type II glycolytic fibers",
+      "Recruited during explosive jumping and sprinting",
+      "Weak ankle plantarflexor when knee is flexed"
+     ]
+    },
+    "right": {
+     "title": "Soleus Muscle",
+     "points": [
+      "Crosses only the talocrural ankle joint",
+      "Slow-twitch type I oxidative fatigue-resistant fibers",
+      "Primary antigravity postural stabilizer in standing",
+      "Equally effective plantarflexor whether knee is straight or bent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Deep to gastrocnemius lies the broad soleus, arising from the soleal line of the tibia and the posterior fibula. Its proximal attachment forms a tendinous arch beneath which the **popliteal artery** bifurcates into anterior and posterior tibial arteries, and the tibial nerve descends into the deep posterior compartment.",
+   "say": "Lying deep to gastrocnemius, the soleus arises from the tibia and fibula. Its upper tendinous arch allows the popliteal artery and tibial nerve to enter the deep posterior calf.",
+   "vis": {
+    "kind": "flow",
+    "title": "Neurovascular Passage Beneath Soleal Arch",
+    "nodes": [
+     {
+      "id": "popliteal",
+      "label": "Popliteal Artery and Tibial Nerve Exit Fossa Floor"
+     },
+     {
+      "id": "arch",
+      "label": "Pass Beneath Fibrous Arch of Soleus Origin"
+     },
+     {
+      "id": "bifurc",
+      "label": "Artery Splits into Anterior and Posterior Tibial Trunks"
+     },
+     {
+      "id": "deep",
+      "label": "Enter Deep Posterior Fascial Compartment of Leg"
+     }
+    ],
+    "edges": [
+     [
+      "popliteal",
+      "arch"
+     ],
+     [
+      "arch",
+      "bifurc"
+     ],
+     [
+      "bifurc",
+      "deep"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The fleshy bellies of gastrocnemius and soleus unite into the **tendo calcaneus** (Achilles tendon), the thickest and strongest tendon in the human body. Measuring fifteen centimetres in length, it spirals through ninety degrees as it descends to insert into the middle facet of the posterior surface of the calcaneus.",
+   "say": "Gastrocnemius and soleus merge into the tendo calcaneus, the thickest tendon in the body. Descending fifteen centimeters with a spiral twist, it anchors into the middle facet of the posterior calcaneus.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-sole-nerves.svg",
+    "alt": "Plantar and posterior leg neurovascular anatomy, Achilles tendon insertion, and tibial branching",
+    "caption": "Posterior ankle relationships and distal insertion of the tendo calcaneus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Violent eccentric loading during push-off can cause complete rupture of the tendo calcaneus, typically occurring in the hypovascular watershed zone two to six centimetres proximal to its calcaneal insertion. Clinical diagnosis is established by the **Simmonds-Thompson test**: squeezing the calf belly fails to elicit passive ankle plantarflexion.",
+   "say": "Forceful eccentric loading can snap the Achilles tendon in its hypovascular watershed zone above the heel. In the Simmonds-Thompson test, squeezing the calf muscle fails to produce passive plantarflexion.",
+   "vis": {
+    "kind": "flow",
+    "title": "Evaluation of Achilles Tendon Rupture",
+    "nodes": [
+     {
+      "id": "pop",
+      "label": "Audible Pop and Sensation of Being Struck Behind Ankle"
+     },
+     {
+      "id": "gap",
+      "label": "Palpable Tendinous Defect 2 to 6 cm Above Calcaneus"
+     },
+     {
+      "id": "squeeze",
+      "label": "Calf Squeeze Test (Simmonds-Thompson Maneuver)"
+     },
+     {
+      "id": "absent",
+      "label": "Absent Plantarflexion Confirms Complete Tendon Transection"
+     }
+    ],
+    "edges": [
+     [
+      "pop",
+      "gap"
+     ],
+     [
+      "gap",
+      "squeeze"
+     ],
+     [
+      "squeeze",
+      "absent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The plantaris is a small vestigial fusiform muscle with a long slender ribbon-like tendon that courses between gastrocnemius and soleus. Often called the **freshman nerve** because inexperienced dissectors mistake its white cord for a nerve, its tendon serves as an autologous tendon graft in reconstructive hand and ankle surgery.",
+   "say": "The plantaris has a tiny muscle belly and a long ribbon-like tendon coursing between gastrocnemius and soleus. Often termed the freshman nerve by dissection students, it provides donor tissue for reconstructive tendon grafting.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Posterior Calf Muscle",
+     "Origin Landmark",
+     "Insertion Characteristic",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Gastrocnemius",
+      "Medial and lateral femoral condyles",
+      "Tendo calcaneus posterior calcaneus",
+      "Prone to tennis leg medial head tear"
+     ],
+     [
+      "Soleus",
+      "Soleal line of tibia and fibula",
+      "Tendo calcaneus into calcaneus",
+      "Peripheral muscle pump prevents DVT"
+     ],
+     [
+      "Plantaris",
+      "Lateral supracondylar line of femur",
+      "Medial border of tendo calcaneus",
+      "Freshman nerve; harvested for graft"
+     ],
+     [
+      "Tibialis Posterior",
+      "Interosseous membrane and tibia/fibula",
+      "Tuberosity of navicular and tarsals",
+      "Deficiency causes adult flatfoot deformity"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "76e7bdf5-3051-466c-942a-3c4d80cd3987",
+  "79fed6d1-9ab9-45a0-b7d7-64dd4a46d41c",
+  "20833593-4fdf-4f2c-b1d7-05528ac9c8f6"
+ ]
+}

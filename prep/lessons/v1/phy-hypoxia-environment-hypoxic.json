@@ -1,0 +1,243 @@
+{
+  "v": 1,
+  "module": "phy-hypoxia-environment",
+  "subject": "physiology",
+  "title": "Classification of Hypoxia, Cyanosis, and High-Altitude Acclimatisation",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Cellular oxygen deficiency can be classified pathophysiologically into four distinct categories based on blood gas profiles. Characterized by reduced arterial oxygen partial pressure and decreased percentage saturation, **hypoxic hypoxia** results from extrinsic environmental hypoxia, alveolar hypoventilation, ventilation-perfusion mismatch, right-to-left shunts, or impaired diffusion capacity across alveolar membranes.",
+      "say": "Hypoxic hypoxia features reduced arterial oxygen tension and saturation, caused by low ambient oxygen, hypoventilation, or lung disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Type of Hypoxia",
+          "Arterial PO2",
+          "Haemoglobin Concentration",
+          "Oxygen Content (CaO2)",
+          "Arteriovenous O2 Difference"
+        ],
+        "rows": [
+          [
+            "Hypoxic Hypoxia",
+            "Decreased (< 80 mmHg)",
+            "Normal",
+            "Decreased",
+            "Normal"
+          ],
+          [
+            "Anaemic Hypoxia",
+            "Normal (~ 100 mmHg)",
+            "Decreased or Blocked",
+            "Decreased",
+            "Normal"
+          ],
+          [
+            "Stagnant (Ischaemic) Hypoxia",
+            "Normal (~ 100 mmHg)",
+            "Normal",
+            "Normal",
+            "Significantly Increased"
+          ],
+          [
+            "Histotoxic Hypoxia",
+            "Normal (~ 100 mmHg)",
+            "Normal",
+            "Normal",
+            "Markedly Decreased (narrowed)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In contrast to hypoxic hypoxia, arterial oxygen tension remains normal in **anaemic hypoxia**, but circulating oxygen content is depleted due to inadequate functional haemoglobin. Classic examples include severe nutritional anaemia, methaemoglobinaemia, and carbon monoxide toxicity, in which oxygen cannot bind effectively to ferric or occupied haem sites.",
+      "say": "Anaemic hypoxia maintains normal dissolved oxygen tension, but reduces total carrying capacity due to low or altered haemoglobin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anaemic Hypoxia",
+          "points": [
+            "Normal PaO2 and normal dissolved oxygen fraction",
+            "Reduced total oxygen-carrying capacity (low Hb or HbCO)",
+            "Tissues extract a larger percentage of available oxygen",
+            "Normal resting venous PO2 is significantly reduced"
+          ]
+        },
+        "right": {
+          "title": "Stagnant (Circulatory) Hypoxia",
+          "points": [
+            "Normal PaO2, normal Hb, and normal arterial CaO2",
+            "Sluggish capillary blood flow from low cardiac output or shock",
+            "Prolonged transit time allows extreme tissue oxygen extraction",
+            "Widened arteriovenous oxygen difference (a-v O2 diff > 6 mL/dL)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When tissue blood flow slows dramatically due to cardiogenic shock, peripheral vascular collapse, or localized arterial occlusion, slow capillary transit allows maximal tissue extraction, establishing **stagnant hypoxia**. The hallmark is a markedly widened arteriovenous oxygen difference, with very low mixed venous oxygen tension despite normal arterial oxygen content.",
+      "say": "Stagnant hypoxia occurs when sluggish circulation leads to extreme tissue extraction, producing very low venous oxygen levels.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pulmonary-hypertension-fig1.webp",
+        "alt": "Pulmonary vascular bed and perfusion",
+        "caption": "Microvascular perfusion failure and severe circulatory compromise in hypoperfusion states."
+      }
+    },
+    {
+      "tx": "When cells receive adequate oxygen delivery but cannot utilize it due to intracellular enzymatic poisoning, **histotoxic hypoxia** ensues. Classic cyanide toxicity halts mitochondrial adenosine triphosphate generation by inhibiting cytochrome c oxidase, leaving venous blood bright red and narrowing the arteriovenous oxygen difference.",
+      "say": "Histotoxic hypoxia occurs when cyanide poisons mitochondrial cytochrome oxidase, preventing cells from using available oxygen.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "delivery",
+            "label": "Normal Arterial Oxygen Delivery: Normal PaO2, SaO2, and Cardiac Output"
+          },
+          {
+            "id": "toxin",
+            "label": "Cyanide / Hydrogen Sulfide Poisons Mitochondrial Cytochrome c Oxidase"
+          },
+          {
+            "id": "arrest",
+            "label": "Oxidative Phosphorylation Arrests; Cellular ATP Production Collapses"
+          },
+          {
+            "id": "venous",
+            "label": "Oxygen Leaves Capillaries Unconsumed: Venous Blood Remains Hyperoxygenated"
+          }
+        ],
+        "edges": [
+          [
+            "delivery",
+            "toxin"
+          ],
+          [
+            "toxin",
+            "arrest"
+          ],
+          [
+            "arrest",
+            "venous"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The physical sign of bluish discoloration of skin and mucous membranes is termed **cyanosis**, appearing when deoxyhaemoglobin in subpapillary cutaneous capillaries exceeds five grams per decilitre. Consequently, severely anaemic individuals with haemoglobin below six grams per decilitre rarely develop cyanosis even when critically hypoxic, whereas polycythaemic patients manifest cyanosis readily.",
+      "say": "Cyanosis requires five grams per decilitre of deoxygenated haemoglobin, meaning severely anaemic patients rarely turn blue.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Central Cyanosis",
+          "points": [
+            "Involves warm mucosal surfaces (tongue, oral mucosa, lips)",
+            "Indicates systemic arterial hypoxaemia or right-to-left shunt",
+            "Does not abolish with local warming of extremities",
+            "Requires immediate oxygen therapy or cardiopulmonary intervention"
+          ]
+        },
+        "right": {
+          "title": "Peripheral Cyanosis",
+          "points": [
+            "Confined to cool peripheral extremities (fingertips, nail beds, nose)",
+            "Caused by localized vasoconstriction and sluggish blood flow",
+            "Arterial oxygen saturation remains completely normal",
+            "Promptly resolves with gentle active warming of extremities"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Ascent to terrestrial high altitude exposes the body to **hypobaric hypoxia**, where total barometric pressure drops while atmospheric oxygen fraction remains constant at twenty-one percent. Immediate compensatory hyperventilation initiated by carotid body chemoreceptors expels carbon dioxide, producing acute respiratory alkalosis that temporarily inhibits further ventilatory stimulation.",
+      "say": "At high altitude, low barometric pressure causes hypobaric hypoxia, triggering carotid bodies to drive hyperventilation and respiratory alkalosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "altitude",
+            "label": "High Altitude Ascent: Barometric Pressure Falls (PB < 760 mmHg)"
+          },
+          {
+            "id": "pao2_drop",
+            "label": "Inspired PO2 Drops; Arterial PaO2 Falls Below 60 mmHg"
+          },
+          {
+            "id": "carotid",
+            "label": "Carotid Bodies Stimulate Medullary Ventilation: PaCO2 Falls"
+          },
+          {
+            "id": "alkalosis",
+            "label": "Acute Respiratory Alkalosis Limits Further Ventilatory Increase"
+          }
+        ],
+        "edges": [
+          [
+            "altitude",
+            "pao2_drop"
+          ],
+          [
+            "pao2_drop",
+            "carotid"
+          ],
+          [
+            "carotid",
+            "alkalosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Successful physiological acclimatisation requires progressive renal compensation over two to three days. The kidneys excrete bicarbonate in urine, restoring cerebrospinal fluid pH and allowing ventilation to increase further. Erythropoietin secretion stimulates bone marrow production, producing secondary **compensatory polycythaemia** and raising erythrocyte 2,3-bisphosphoglycerate levels.",
+      "say": "Acclimatisation relies on renal bicarbonate wasting to restore pH, followed by erythropoietin release and polycythaemia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Timeframe",
+          "Adaptive Response",
+          "Primary Physiological Consequence"
+        ],
+        "rows": [
+          [
+            "Immediate (Minutes)",
+            "Carotid body hyperventilation",
+            "Raises alveolar PO2; lowers PaCO2 causing alkalosis"
+          ],
+          [
+            "24 to 72 Hours",
+            "Renal bicarbonate wasting",
+            "Corrects alkalosis; unlocks further ventilatory drive"
+          ],
+          [
+            "48 Hours",
+            "Erythrocyte 2,3-BPG rises",
+            "Shifts curve right; aids peripheral oxygen unloading"
+          ],
+          [
+            "Weeks to Months",
+            "Erythropoietin polycythaemia",
+            "Increases total circulating oxygen carrying capacity"
+          ],
+          [
+            "Months to Years",
+            "Capillary angiogenesis",
+            "Shortens diffusion distances in skeletal muscle and brain"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Rapid ascent by unacclimatised individuals precipitates **acute mountain sickness**, characterized by throbbing frontotemporal headache, nausea, anorexia, insomnia, lightheadedness, and profound fatigue. Prevention involves gradual acclimatisation stages, adequate fluid hydration, and administering acetazolamide to accelerate renal bicarbonate clearance and sustain nocturnal ventilatory drive.",
+      "say": "Acute mountain sickness causes headache, nausea, and fatigue after rapid ascent, preventable with gradual staging and acetazolamide.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-respiratory-failure-fig1.webp",
+        "alt": "High-altitude decompensation and respiratory failure",
+        "caption": "Environmental hypoxia decompensation, mountain sickness, and arterial gas derangements."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

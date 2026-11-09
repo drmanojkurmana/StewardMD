@@ -1,0 +1,252 @@
+{
+  "v": 1,
+  "module": "phy-tubular",
+  "subject": "physiology",
+  "title": "Proximal Tubule Reabsorption, Glucose Transport, and Splay",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The proximal convoluted tubule performs the bulk of nephron reclamation, reabsorbing sixty-five percent of filtered sodium, water, chloride, and potassium, alongside one hundred percent of filtered glucose and amino acids. Characterized by prominent apical brush borders and dense mitochondria, **proximal tubule reabsorption** is isosmotic with surrounding peritubular capillaries.",
+      "say": "The proximal tubule isosmotically reabsorbs sixty-five percent of filtered sodium and water, and all filtered glucose and amino acids.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Filtered Solute",
+          "Percentage Reabsorbed in Proximal Tubule",
+          "Primary Apical Transport Mechanism"
+        ],
+        "rows": [
+          [
+            "Filtered Water (180 L/day)",
+            "~65% (117 L/day)",
+            "Transcellular Aquaporin-1 and paracellular solvent drag"
+          ],
+          [
+            "Filtered Sodium (25,000 mEq/day)",
+            "~65%",
+            "NHE3 antiporter, SGLT2, Na-amino acid cotransporters"
+          ],
+          [
+            "Filtered Glucose",
+            "100% (under physiological conditions)",
+            "SGLT2 (S1 segment) and SGLT1 (S3 segment)"
+          ],
+          [
+            "Filtered Bicarbonate",
+            "~85% to 90%",
+            "Apical NHE3 linked to CA-IV and basolateral NBCe1"
+          ],
+          [
+            "Filtered Amino Acids",
+            "100%",
+            "Diverse Na+-dependent and H+-dependent cotransporters"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Under normal physiological conditions, luminal glucose is completely reclaimed in the early proximal tubule via apical **sodium-glucose cotransporter 2**. SGLT2 couples the downhill electrochemical gradient of sodium maintained by basolateral sodium-potassium ATPases to transport glucose uphill into tubular cells, followed by facilitated basolateral diffusion via GLUT2.",
+      "say": "SGLT2 cotransporters in the early proximal tubule reabsorb filtered glucose using the downhill sodium gradient.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "na_k",
+            "label": "Basolateral Na+/K+-ATPase Pumps Na+ Out, Creating Inward Na+ Gradient"
+          },
+          {
+            "id": "sglt2",
+            "label": "Apical SGLT2 Cotransports 1 Na+ and 1 Glucose Molecule into Epithelial Cell"
+          },
+          {
+            "id": "glut2",
+            "label": "Intracellular Glucose Accumulates; Diffuses across Basolateral Membrane via GLUT2"
+          },
+          {
+            "id": "cap",
+            "label": "Glucose and Sodium Reabsorbed into Low-Pressure Peritubular Capillaries"
+          }
+        ],
+        "edges": [
+          [
+            "na_k",
+            "sglt2"
+          ],
+          [
+            "sglt2",
+            "glut2"
+          ],
+          [
+            "glut2",
+            "cap"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The maximal rate at which proximal tubules can actively reclaim glucose is defined as the **glucose transport maximum**, or TmG. In a healthy adult male, the glucose transport maximum averages three hundred seventy-five milligrams per minute, representing the total saturation point of all nephron glucose cotransporters.",
+      "say": "The glucose transport maximum is three hundred seventy-five milligrams per minute, where all glucose carriers become saturated.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Filtered Load of Glucose",
+          "points": [
+            "Filtered Load = GFR × Plasma Glucose",
+            "At plasma glucose 100 mg/dL: Filtered Load = 125 mg/min",
+            "All filtered glucose is completely reabsorbed (excretion = 0)",
+            "Increases linearly in direct proportion to plasma glucose"
+          ]
+        },
+        "right": {
+          "title": "Transport Maximum (TmG)",
+          "points": [
+            "Averages ~375 mg/min in healthy young adult males",
+            "Averages ~300 mg/min in adult females",
+            "Beyond TmG, all excess filtered glucose appears in urine",
+            "Rate of glucose excretion parallels filtered load slope"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Although theoretical calculation suggests glucosuria should begin only when filtered load reaches three hundred seventy-five milligrams per minute, glucose actually appears in urine at plasma levels around two hundred milligrams per decilitre. This clinical appearance point is termed the **renal threshold for glucose**.",
+      "say": "The renal threshold for glucose is two hundred milligrams per decilitre, where glucose first begins appearing in the urine.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Glucose Metric",
+          "Arterial Plasma Level",
+          "Filtered Load",
+          "Urinary Excretion"
+        ],
+        "rows": [
+          [
+            "Normal Baseline",
+            "80 to 100 mg/dL",
+            "~125 mg/min",
+            "0 mg/min (100% reabsorbed)"
+          ],
+          [
+            "Renal Threshold",
+            "~200 mg/dL",
+            "~250 mg/min",
+            "Initial appearance of glucosuria"
+          ],
+          [
+            "Splay Transition",
+            "200 to 350 mg/dL",
+            "250 to 375 mg/min",
+            "Progressive non-linear glucosuria"
+          ],
+          [
+            "Transport Maximum (TmG)",
+            "> 375 mg/dL",
+            "> 375 mg/min",
+            "Linear excretion parallel to filtered load"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The rounded transition zone between the renal threshold where glucosuria first appears and full saturation at the transport maximum is known as **splay of the glucose titration curve**. Splay arises because nephrons exhibit anatomical heterogeneity in glomerulotubular balance, and glucose carriers possess variable binding affinities at low substrate concentrations.",
+      "say": "Splay is the curved region between initial glucosuria and complete transport saturation, caused by nephron heterogeneity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hetero",
+            "label": "Nephron Heterogeneity: Variable Proximal Tubule Length and SGLT Density"
+          },
+          {
+            "id": "kinetics",
+            "label": "Michaelis-Menten Kinetics: Low Affinity Substrate Binding Near Saturation"
+          },
+          {
+            "id": "early_loss",
+            "label": "Short Nephrons with Low Transport Capacity Spill Glucose at 200 mg/dL"
+          },
+          {
+            "id": "splay_zone",
+            "label": "Titration Curve Bends Gradually (Splay) Until All Nephrons Reach TmG at 375 mg/min"
+          }
+        ],
+        "edges": [
+          [
+            "hetero",
+            "kinetics"
+          ],
+          [
+            "kinetics",
+            "early_loss"
+          ],
+          [
+            "early_loss",
+            "splay_zone"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Selective pharmacological inhibition of SGLT2 with **gliflozin medications** lowers the renal threshold for glucose down to zero, inducing intentional glucosuria in diabetic patients. This excretion of sixty to eighty grams of glucose daily reduces plasma glycaemia, lowers blood pressure, and promotes cardioprotective and nephroprotective outcomes.",
+      "say": "SGLT2 inhibitors lower the glucose threshold, shedding sixty to eighty grams of urinary glucose daily to protect heart and kidneys.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diabetic-nephropathy-fig1.webp",
+        "alt": "Diabetic glomerulopathy and tubular targets",
+        "caption": "SGLT2 inhibition pharmacology, renal glucose excretion, and microvascular preservation."
+      }
+    },
+    {
+      "tx": "Generalized dysfunction of proximal tubular transport machinery results in the clinical entity known as **Fanconi syndrome**. Impaired proximal reabsorption produces combined renal glucosuria at normal blood glucose, generalised aminoaciduria, hypophosphataemic rickets, uricosuria, and hypokalaemic proximal type 2 renal tubular acidosis.",
+      "say": "Fanconi syndrome is generalized proximal tubule failure causing glucosuria, aminoaciduria, phosphaturia, and type two RTA.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/fanconi-syndrome-fig1.webp",
+        "alt": "Fanconi syndrome histopathology and tubular transport defect",
+        "caption": "Proximal tubular epithelial brush border loss, transport failure, and metabolic bone disease in Fanconi syndrome."
+      }
+    },
+    {
+      "tx": "Bicarbonate reabsorption in the proximal tubule is mediated by apical sodium-hydrogen antiporters coupled to luminal carbonic anhydrase type IV. Intracellularly, regenerated bicarbonate exits into the peritubular interstitium via **electrogenic sodium-bicarbonate cotransporters**, maintaining systemic arterial pH and reclaiming roughly eighty-five percent of the total filtered bicarbonate load.",
+      "say": "Proximal bicarbonate reabsorption depends on sodium-hydrogen exchange and carbonic anhydrase to reclaim eighty-five percent of filtered bicarbonate.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "h_sec",
+            "label": "Apical NHE3 Transporter Secretes H+ into Lumen in Exchange for Na+"
+          },
+          {
+            "id": "ca4",
+            "label": "Luminal CA-IV Dehydrates Filtered HCO3- + H+ into CO2 and H2O"
+          },
+          {
+            "id": "co2_in",
+            "label": "Lipid-Soluble CO2 Diffuses Rapidly into Proximal Tubular Epithelium"
+          },
+          {
+            "id": "nbce1",
+            "label": "Cytoplasmic CA-II Hydrates CO2 to HCO3-; Basolateral NBCe1 Cotransports 3 HCO3- with 1 Na+"
+          }
+        ],
+        "edges": [
+          [
+            "h_sec",
+            "ca4"
+          ],
+          [
+            "ca4",
+            "co2_in"
+          ],
+          [
+            "co2_in",
+            "nbce1"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

@@ -1,0 +1,259 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-thigh",
+ "subject": "anatomy",
+ "title": "Femoral Triangle, Femoral Sheath, and Femoral Canal Anatomy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The femoral triangle (Scarpa triangle) is a triangular subfascial depression located in the upper third of the anterior thigh. Its base is formed superiorly by the **inguinal ligament**, its lateral border by the medial margin of sartorius, and its medial border by the medial margin of adductor longus.",
+   "say": "The femoral triangle is a subfascial space in the upper anterior thigh. Superiorly, the inguinal ligament forms its base, while the medial margin of sartorius forms its lateral boundary and adductor longus forms its medial boundary.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Triangle Boundary",
+     "Anatomical Structure",
+     "Spatial Position",
+     "Surgical Signpost"
+    ],
+    "rows": [
+     [
+      "Base (Superior)",
+      "Inguinal Ligament of Poupart",
+      "ASIS to pubic tubercle",
+      "Demarcates abdomen from thigh"
+     ],
+     [
+      "Lateral Margin",
+      "Medial border of Sartorius",
+      "Descends inferomedially",
+      "Meets adductor longus at apex"
+     ],
+     [
+      "Medial Margin",
+      "Medial border of Adductor Longus",
+      "Ascends toward pubic body",
+      "Defines medial limit of triangle"
+     ],
+     [
+      "Floor (Lateral to Medial)",
+      "Iliopsoas, Pectineus, Adductor Longus",
+      "Muscular trough",
+      "Supports femoral neurovascular bundle"
+     ],
+     [
+      "Apex (Inferior)",
+      "Meeting of Sartorius and Adductor Longus",
+      "Continuous into adductor canal",
+      "Guides vascular entry into Hunter canal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The contents of the femoral triangle from lateral to medial are the femoral nerve, femoral artery, femoral vein, and deep inguinal lymphatics. Crucially, the **femoral nerve** lies directly on the iliopsoas muscle outside the femoral sheath, separated from the femoral artery by the deep iliopectineal fascia.",
+   "say": "From lateral to medial, the contents of the femoral triangle are the femoral nerve, artery, vein, and lymphatic channel. Notably, the femoral nerve rests outside the femoral sheath, partitioned from the artery by iliopectineal fascia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Outside Femoral Sheath (Lateral)",
+     "points": [
+      "Femoral nerve (L2, L3, L4)",
+      "Rests directly on iliopsoas muscle",
+      "Divides into anterior and posterior divisions",
+      "Free from sheath entrapment or hernia"
+     ]
+    },
+    "right": {
+     "title": "Inside Femoral Sheath (Medial)",
+     "points": [
+      "Lateral compartment: femoral artery and genitofemoral branch",
+      "Intermediate compartment: femoral vein",
+      "Medial compartment: femoral canal and lymphatics",
+      "Funnel-shaped fascial prolongation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The **femoral sheath** is a funnel-shaped fascial sleeve extending approximately three to four centimeters below the inguinal ligament. Formed by downward prolongation of abdominal transversalis fascia anteriorly and iliac fascia posteriorly, it fuses distally with the adventitia of the femoral vessels.",
+   "say": "The femoral sheath is a funnel of connective tissue extending four centimeters into the upper thigh. Formed by abdominal fascia transversalis anteriorly and fascia iliaca posteriorly, it blends distally into vessel adventitia.",
+   "vis": {
+    "kind": "flow",
+    "title": "Formation and Compartments of Femoral Sheath",
+    "nodes": [
+     {
+      "id": "fascia",
+      "label": "Abdominal Fascia Transversalis and Fascia Iliaca Descend"
+     },
+     {
+      "id": "sheath",
+      "label": "Funnel-shaped Femoral Sheath Surrounds Vascular Inflow"
+     },
+     {
+      "id": "lateral",
+      "label": "Lateral: Femoral Artery and Lumboinguinal Nerve"
+     },
+     {
+      "id": "inter",
+      "label": "Intermediate: Femoral Vein (Receives Great Saphenous)"
+     },
+     {
+      "id": "medial",
+      "label": "Medial: Femoral Canal (1.25 cm Dead Space)"
+     }
+    ],
+    "edges": [
+     [
+      "fascia",
+      "sheath"
+     ],
+     [
+      "sheath",
+      "lateral"
+     ],
+     [
+      "sheath",
+      "inter"
+     ],
+     [
+      "sheath",
+      "medial"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The medial compartment of the femoral sheath is the conical **femoral canal**, measuring approximately 1.25 centimetres in length. It contains loose adipose tissue, efferent lymphatics, and the deep inguinal lymph node of Cloquet (Rosenmuller). Its physiological function is to provide dead space allowing the adjacent femoral vein to expand during exercise.",
+   "say": "The medial compartment of the sheath is the femoral canal, roughly one and a quarter centimeters long. Containing fat and Cloquet lymph node, it provides physiological space for femoral vein distension during exertion.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/sur-femoral-canal.svg",
+    "alt": "Cross section of femoral sheath showing lateral, intermediate, and medial femoral canal compartments",
+    "caption": "Anatomical cross-section of the femoral sheath compartments and boundaries of the femoral ring. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The upper abdominal opening of the femoral canal is the **femoral ring**. Its boundaries are rigid and unforgiving: bounded anteriorly by the inguinal ligament, posteriorly by the pectineus muscle and pectineal ligament of Astley Cooper, medially by the crescentic margin of the lacunar ligament of Gimbernat, and laterally by the femoral vein.",
+   "say": "The proximal entrance to the femoral canal is the femoral ring. It has rigid boundaries: the inguinal ligament anteriorly, Cooper pectineal ligament posteriorly, sharp lacunar ligament medially, and femoral vein laterally.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Femoral Ring Boundary",
+     "Anatomical Structure",
+     "Tissue Character",
+     "Surgical Warning"
+    ],
+    "rows": [
+     [
+      "Anterior",
+      "Inguinal ligament",
+      "Rigid fibrous band",
+      "Cannot be divided without hernia recurrence"
+     ],
+     [
+      "Posterior",
+      "Pectineal ligament (Cooper)",
+      "Dense periosteal thickening",
+      "Anchors sutures during hernia repair"
+     ],
+     [
+      "Medial",
+      "Lacunar ligament (Gimbernat)",
+      "Sharp concave crescent",
+      "Site of stridor; divide carefully to relieve strangulation"
+     ],
+     [
+      "Lateral",
+      "Femoral vein septum",
+      "Thin fibrous partition",
+      "Avoid lateral cuts to prevent catastrophic venous tear"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A **femoral hernia** occurs when abdominal viscera protrude through the femoral ring into the femoral canal, emerging through the cribriform fascia of the saphenous opening into subcutaneous tissue. Presenting as a groin mass below and lateral to the pubic tubercle, it occurs much more frequently in females due to a wider pelvis.",
+   "say": "A femoral hernia develops when abdominal contents enter the femoral canal and emerge through the saphenous opening. Presenting below and lateral to the pubic tubercle, it affects women more frequently due to a broader pelvic architecture.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/groin-hernias-anatomy-and-surgical-repair-fig1.webp",
+    "alt": "Anatomical landmarks distinguishing indirect, direct, and femoral hernia orifices",
+    "caption": "Groin hernia orifices illustrating the position of the femoral canal relative to the inguinal canal. [Credit: Dennis M. DePace, PhD / Wikimedia Commons]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Because the boundaries of the femoral ring are rigid\u2014particularly the sharp medial margin of the lacunar ligament\u2014femoral hernias have the highest rate of **strangulation** of all groin hernias. When relieving a strangulated femoral hernia, incising the lacunar ligament medially risks dividing an abnormal obturator artery present in thirty percent of individuals.",
+   "say": "Because its boundaries are unyielding, particularly the lacunar ligament, femoral hernias carry an exceptionally high risk of strangulation. Relieving constriction by cutting medially risks lacerating an accessory obturator artery.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Femoral Hernia",
+     "points": [
+      "Neck lies below and lateral to pubic tubercle",
+      "Emerges through femoral ring and canal",
+      "Higher incidence in multiparous females",
+      "Extreme risk of strangulation (up to 40%)"
+     ]
+    },
+    "right": {
+     "title": "Inguinal Hernia",
+     "points": [
+      "Neck lies above and medial to pubic tubercle",
+      "Emerges through superficial inguinal ring",
+      "Higher incidence in males",
+      "Lower immediate risk of acute strangulation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Distally, the femoral triangle continues directly into the **adductor canal** (Hunter canal or subsartorial canal). This aponeurotic tunnel in the middle third of the medial thigh extends from the apex of the femoral triangle to the adductor hiatus in adductor magnus, conducting the femoral artery, femoral vein, saphenous nerve, and nerve to vastus medialis.",
+   "say": "At its apex, the femoral triangle transitions into the adductor canal of Hunter. Located in the middle third of the thigh, this aponeurotic tunnel transmits the femoral artery, femoral vein, saphenous nerve, and nerve to vastus medialis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Adductor Canal Boundaries and Transmitted Structures",
+    "nodes": [
+     {
+      "id": "anterolat",
+      "label": "Anterolateral Wall: Vastus Medialis Muscle"
+     },
+     {
+      "id": "postero",
+      "label": "Posterior Wall: Adductor Longus and Adductor Magnus"
+     },
+     {
+      "id": "roof",
+      "label": "Medial Roof: Sartorius Muscle and Subsartorial Fascia"
+     },
+     {
+      "id": "contents",
+      "label": "Contents: Femoral Artery, Vein, Saphenous Nerve, N. to VM"
+     }
+    ],
+    "edges": [
+     [
+      "anterolat",
+      "contents"
+     ],
+     [
+      "postero",
+      "contents"
+     ],
+     [
+      "roof",
+      "contents"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "900888a8-f2c5-477d-bf9d-bc53bf03a01e",
+  "03377881-e8fe-4817-9e0f-bcac552dd332",
+  "1e781a9f-e894-4ef3-8063-98222e23a450"
+ ]
+}

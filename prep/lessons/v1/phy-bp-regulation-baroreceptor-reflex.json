@@ -1,0 +1,216 @@
+{
+ "v": 1,
+ "module": "phy-bp-regulation",
+ "subject": "physiology",
+ "title": "Baroreceptor Reflex, Carotid Sinus, and Chemoreceptor Responses",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Acute beat-to-beat stabilization of arterial blood pressure is mediated by the autonomic **baroreceptor reflex**. Specialized mechanosensitive stretch receptors embedded within the tunica adventitia of the carotid sinus and aortic arch detect alterations in vascular wall stretch, rapidly adjusting autonomic outflow to buffer arterial pressure fluctuations.",
+   "say": "The baroreceptor reflex provides beat-to-beat pressure regulation. Mechanoreceptors in the carotid sinus and aortic arch detect wall stretch to buffer blood pressure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rise",
+      "label": "Acute Elevation of Systemic Arterial Blood Pressure"
+     },
+     {
+      "id": "stretch",
+      "label": "Distension Stretches Mechanosensitive Nerve Terminals in Carotid Sinus"
+     },
+     {
+      "id": "nts",
+      "label": "Afferent Sinus Nerve Impulses (CN IX) Fire Rapidly to Medullary NTS"
+     },
+     {
+      "id": "buffer",
+      "label": "Vagal Outflow Increases & Sympathetic Tone Falls to Lower BP Back to Set Point"
+     }
+    ],
+    "edges": [
+     [
+      "rise",
+      "stretch"
+     ],
+     [
+      "stretch",
+      "nts"
+     ],
+     [
+      "nts",
+      "buffer"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The primary high-pressure sensory organ is the **carotid sinus**, a localized dilation at the bifurcation of the internal carotid artery. Afferent sensory fibres from the carotid sinus travel via the sinus nerve of Hering, a branch of the glossopharyngeal nerve (cranial nerve IX), whereas afferent fibres from the aortic arch travel via the aortic nerve branch of the vagus nerve (cranial nerve X).",
+   "say": "Carotid sinus stretch signals travel via the glossopharyngeal nerve, while aortic arch afferents travel via the vagus nerve to the medulla.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Baroreceptor Receptor Site",
+     "Afferent Cranial Nerve",
+     "Operating Pressure Range",
+     "Physiological Sensitivity"
+    ],
+    "rows": [
+     [
+      "Carotid Sinus",
+      "Glossopharyngeal (CN IX) via Hering nerve",
+      "60 to 180 mmHg (steepest at 90 mmHg)",
+      "Buffers both hypotensive and hypertensive shifts"
+     ],
+     [
+      "Aortic Arch",
+      "Vagus nerve (CN X) sensory fibres",
+      "90 to 200 mmHg (higher threshold)",
+      "Primarily buffers acute hypertensive pressure surges"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The relationship between heart rate and arterial blood pressure in baroreceptor reflexes is described by **Marey law**. Stated classically, heart rate is inversely related to arterial blood pressure: an acute elevation in blood pressure triggers reflex bradycardia, whereas sudden hypotension provokes reflex tachycardia, designed to stabilize cardiac output.",
+   "say": "Marey law states that heart rate is inversely related to arterial blood pressure: acute hypertension causes reflex bradycardia, while hypotension triggers tachycardia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute Hypertensive Stimulus",
+     "points": [
+      "Vascular wall stretch increases baroreceptor afferent firing",
+      "Nucleus tractus solitarius stimulates nucleus ambiguus (vagus)",
+      "NTS inhibits rostral ventrolateral medulla (sympathetic)",
+      "Result: Marked reflex bradycardia and peripheral vasodilation"
+     ]
+    },
+    "right": {
+     "title": "Acute Hypotensive Stimulus (Standing)",
+     "points": [
+      "Vascular stretch decreases; afferent firing drops steeply",
+      "Disinhibits rostral ventrolateral medulla sympathetic outflow",
+      "Suppresses vagal parasympathetic discharge",
+      "Result: Reflex tachycardia, vasoconstriction, and inotropy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Afferent baroreceptor inputs terminate in the medullary **nucleus tractus solitarius** (NTS). Glutamatergic excitation of the NTS activates the caudal ventrolateral medulla, which sends inhibitory GABAergic signals to the rostral ventrolateral medulla (RVLM), shutting down sympathetic vasomotor tone. Concurrently, NTS stimulates the nucleus ambiguus, accelerating vagal parasympathetic outflow to the SA node.",
+   "say": "Baroreceptor afferents activate the nucleus tractus solitarius, which inhibits sympathetic outflow via GABA and excites vagal neurons to slow the heart.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-ace-inhibitors.webp",
+    "alt": "Medullary autonomic pathways regulating blood pressure and vascular tone.",
+    "caption": "Medullary nucleus tractus solitarius and rostral ventrolateral pathways in blood pressure control. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Carotid sinus sensitivity is maximal around normal mean arterial pressure of ninety to one hundred millimetres of mercury. The threshold for afferent firing is approximately sixty millimetres, and firing saturates near one hundred and eighty millimetres. In chronic hypertension, baroreceptors undergo **resetting** within forty-eight hours, shifting their sensitivity curve rightward to defend the higher pressure.",
+   "say": "Baroreceptors reset within forty-eight hours in chronic hypertension, shifting their operating set point upward to defend the elevated pressure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Sensitivity Curve",
+     "points": [
+      "Operating set point centered near 95 mmHg",
+      "Threshold firing begins around 60 mmHg",
+      "Maximum saturation firing reached near 180 mmHg",
+      "Defends physiological normotensive set point"
+     ]
+    },
+    "right": {
+     "title": "Reset Curve (Chronic Hypertension)",
+     "points": [
+      "Operating set point shifts rightward to 140 mmHg",
+      "Threshold firing elevated to 90 mmHg",
+      "Treats chronic high pressure as the new normal",
+      "Buffers acute drops below 140 mmHg by reflex vasoconstriction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Located adjacent to the baroreceptors are the carotid and aortic bodies, functioning as peripheral chemoreceptors. Activated by severe arterial hypoxaemia (PaO2 below sixty millimetres), hypercapnia, and acidosis, the **chemoreceptor reflex** sends excitatory inputs to the medullary vasomotor center, inducing potent vasoconstriction to preserve blood pressure and brain perfusion during asphyxia.",
+   "say": "Peripheral chemoreceptors in carotid bodies sense hypoxia, hypercapnia, and acidosis, firing excitatory signals to stimulate breathing and vasoconstriction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "hypo",
+      "label": "Arterial Hypoxaemia (PaO2 < 60 mmHg) or Hypercapnic Acidosis"
+     },
+     {
+      "id": "glomus",
+      "label": "Carotid Body Glomus Cells Depolarise Releasing Transmitters"
+     },
+     {
+      "id": "rvlm",
+      "label": "Afferent CN IX Fibres Excite Medullary RVLM Vasomotor Center"
+     },
+     {
+      "id": "press",
+      "label": "Systemic Sympathetic Vasoconstriction Elevates Blood Pressure"
+     }
+    ],
+    "edges": [
+     [
+      "hypo",
+      "glomus"
+     ],
+     [
+      "glomus",
+      "rvlm"
+     ],
+     [
+      "rvlm",
+      "press"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Low-pressure volume stretch receptors located in the right atrium and cavoatrial junction mediate the **Bainbridge reflex**. Rapid intravenous volume infusion distends the right atrium, stimulating unmyelinated vagal afferents. This triggers reflex sympathetic activation directed specifically to the SA node, producing tachycardia to pump the venous volume forward and prevent pulmonary congestion.",
+   "say": "The Bainbridge reflex responds to right atrial volume engorgement with reflex tachycardia, preventing venous pooling and clearing the volume load.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bainbridge Reflex (Atrial Volume Stretch)",
+     "points": [
+      "Sensors: Vagal stretch receptors at cavoatrial junction",
+      "Trigger: Rapid intravenous volume loading (atrial distension)",
+      "Afferent: Vagus nerve sensory fibres",
+      "Effector: Selective sympathetic cardiac acceleration",
+      "Result: Tachycardia to clear excessive venous load"
+     ]
+    },
+    "right": {
+     "title": "Baroreceptor Reflex (Arterial Pressure Stretch)",
+     "points": [
+      "Sensors: Carotid sinus and aortic arch mechanoreceptors",
+      "Trigger: Elevation of arterial blood pressure",
+      "Afferents: Glossopharyngeal (CN IX) and Vagus (CN X)",
+      "Effector: Vagal parasympathetic excitation and sympathetic inhibition",
+      "Result: Bradycardia and peripheral vasodilation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "External manual compression of the carotid sinus during bedside examination mimics acute severe arterial hypertension. In **carotid sinus massage**, sustained pressure over the bifurcation distends the mechanoreceptors, triggering intense vagal discharge that slows AV conduction, terminating supraventricular tachycardias like AV nodal re-entrant tachycardia.",
+   "say": "Carotid sinus massage stimulates baroreceptors to trigger intense vagal discharge, terminating supraventricular re-entrant tachycardias.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cardiac-electrophysiology-and-pacemaker-cells-fig1.webp",
+    "alt": "Vagal parasympathetic slowing of cardiac conduction.",
+    "caption": "Carotid sinus stimulation triggering vagal slowing of AV nodal conduction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

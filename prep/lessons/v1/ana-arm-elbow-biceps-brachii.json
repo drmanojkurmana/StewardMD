@@ -1,0 +1,249 @@
+{
+ "v": 1,
+ "module": "ana-arm-elbow",
+ "subject": "anatomy",
+ "title": "Anterior and Posterior Arm Muscle Compartments",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The anterior compartment of the arm contains three flexor muscles: coracobrachialis, biceps brachii, and brachialis, innervated by the **musculocutaneous nerve**. The musculocutaneous nerve arises from the lateral cord of the brachial plexus (C5, C6, C7), pierces coracobrachialis, and descends between biceps and brachialis.",
+   "say": "The anterior arm compartment contains three flexor muscles: coracobrachialis, biceps brachii, and brachialis, all supplied by the musculocutaneous nerve. Arising from the lateral cord, this nerve pierces coracobrachialis and descends between biceps and brachialis.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cubital-fossa.svg",
+    "alt": "Musculocutaneous nerve, biceps brachii tendon, and brachialis insertion",
+    "caption": "Anterior arm compartment musculature and neurovascular relationships. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **biceps brachii** possesses two heads: the long head arises from the supraglenoid tubercle of the scapula and glenoid labrum, traversing the joint cavity inside a synovial sheath. The short head arises from the coracoid process alongside coracobrachialis. Both heads fuse into a common belly inserting into the posterior rough part of the radial tuberosity.",
+   "say": "Biceps brachii possesses two heads: the long head arises from the supraglenoid tubercle and arches inside the joint cavity. The short head arises from the coracoid process. Both unite into a tendon inserting onto the radial tuberosity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Long Head of Biceps",
+     "points": [
+      "Arises from supraglenoid tubercle of scapula",
+      "Intracapsular, extrasynovial course",
+      "Descends through intertubercular groove",
+      "Held by transverse humeral ligament"
+     ]
+    },
+    "right": {
+     "title": "Short Head of Biceps",
+     "points": [
+      "Arises from tip of coracoid process",
+      "Shares conjoint origin with coracobrachialis",
+      "Extracapsular throughout entire course",
+      "Assists shoulder adduction and flexion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The biceps brachii is the most powerful **supinator of the forearm** when the elbow is flexed to ninety degrees, exemplified by driving a screw with the right hand. It also serves as a potent elbow flexor. A membranous expansion termed the bicipital aponeurosis extends medially into deep antebrachial fascia, shielding the underlying brachial artery.",
+   "say": "Biceps brachii is the most powerful forearm supinator when the elbow is flexed at ninety degrees, such as tightening a screw. It is also an elbow flexor. Its bicipital aponeurosis spreads medially to protect the brachial artery in the cubital fossa.",
+   "vis": {
+    "kind": "flow",
+    "title": "Biceps Insertion Architecture",
+    "nodes": [
+     {
+      "id": "belly",
+      "label": "Distal Biceps Brachii Muscle Belly"
+     },
+     {
+      "id": "tend",
+      "label": "Round Tendon: Twists onto Radial Tuberosity"
+     },
+     {
+      "id": "apon",
+      "label": "Flat Bicipital Aponeurosis: Medial Expansion"
+     },
+     {
+      "id": "shield",
+      "label": "Shields Brachial Artery and Median Nerve"
+     }
+    ],
+    "edges": [
+     [
+      "belly",
+      "tend"
+     ],
+     [
+      "belly",
+      "apon"
+     ],
+     [
+      "apon",
+      "shield"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lying deep to biceps brachii is the **brachialis**, arising from the lower half of the anterior humeral shaft and inserting onto the coronoid process and tuberosity of the ulna. As a pure flexor of the elbow in all forearm positions (pronated, supinated, or midprone), it serves as the workhorse flexor of the elbow joint.",
+   "say": "Deep to biceps lies brachialis, arising from the lower anterior humerus and inserting onto the ulnar tuberosity. Functioning as a pure flexor in all forearm postures, it serves as the tireless workhorse of elbow flexion.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Brachialis Muscle",
+     "points": [
+      "Inserts onto coronoid process and ulna",
+      "Pure elbow flexor in all positions",
+      "Dual supply: Musculocutaneous and radial",
+      "Workhorse flexor unaffected by supination"
+     ]
+    },
+    "right": {
+     "title": "Biceps Brachii Muscle",
+     "points": [
+      "Inserts onto the radius tuberosity",
+      "Flexor and powerful supinator",
+      "Innervated purely by musculocutaneous",
+      "Flexion strength maximized in supination"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "After giving off motor branches to coracobrachialis, biceps, and brachialis, the musculocutaneous nerve emerges at the lateral border of the biceps tendon as the **lateral cutaneous nerve of the forearm**, providing sensory innervation to the skin of the lateral antebrachial surface down to the base of the thumb.",
+   "say": "After supplying anterior arm muscles, the musculocutaneous nerve emerges lateral to the biceps tendon as the lateral cutaneous nerve of the forearm, providing sensation to the radial half of the forearm down to the wrist.",
+   "vis": {
+    "kind": "flow",
+    "title": "Musculocutaneous Nerve Pathway",
+    "nodes": [
+     {
+      "id": "lat",
+      "label": "Lateral Cord of Plexus (C5-C7)"
+     },
+     {
+      "id": "pierce",
+      "label": "Pierces Coracobrachialis Muscle"
+     },
+     {
+      "id": "motor",
+      "label": "Motor Innervation to Arm Flexors"
+     },
+     {
+      "id": "sens",
+      "label": "Lateral Cutaneous Nerve of Forearm"
+     }
+    ],
+    "edges": [
+     [
+      "lat",
+      "pierce"
+     ],
+     [
+      "pierce",
+      "motor"
+     ],
+     [
+      "motor",
+      "sens"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The posterior compartment of the arm contains the **triceps brachii**, the sole extensor of the elbow joint, innervated by the radial nerve. The long head arises from the infraglenoid tubercle of the scapula, the lateral head arises above the radial spiral groove, and the medial head arises below the spiral groove. All three heads insert onto the olecranon process.",
+   "say": "The posterior arm contains triceps brachii, the primary extensor of the elbow, innervated by the radial nerve. Its long head arises from the infraglenoid tubercle, and lateral and medial heads arise from the humerus, uniting to insert onto the olecranon.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-radial-levels.svg",
+    "alt": "Radial nerve path in the spiral groove and triceps innervation",
+    "caption": "Radial nerve and profunda brachii artery in the humeral spiral groove. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Accompanied by the profunda brachii artery, the **radial nerve** traverses the triangular interval to enter the spiral (radial) groove on the posterior surface of the humerus, running obliquely between the lateral and medial heads of the triceps. Midshaft humeral shaft fractures frequently lacerate or entrap the radial nerve within this groove.",
+   "say": "Accompanied by the profunda brachii artery, the radial nerve passes through the spiral groove between triceps heads. Midshaft fractures of the humerus frequently damage the radial nerve in this groove, causing wrist drop.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Arm Muscle",
+     "Compartment",
+     "Primary Motor Innervation",
+     "Main Functional Movement"
+    ],
+    "rows": [
+     [
+      "Biceps Brachii",
+      "Anterior compartment",
+      "Musculocutaneous nerve (C5-C6)",
+      "Supination of flexed forearm, elbow flexion"
+     ],
+     [
+      "Brachialis",
+      "Anterior compartment",
+      "Musculocutaneous (radial dual)",
+      "Powerful pure elbow flexion in all poses"
+     ],
+     [
+      "Coracobrachialis",
+      "Anterior compartment",
+      "Musculocutaneous nerve (C5-C7)",
+      "Flexes and adducts arm at shoulder"
+     ],
+     [
+      "Triceps Brachii",
+      "Posterior compartment",
+      "Radial nerve (C6, C7, C8)",
+      "Extends elbow joint; long head stabilizes shoulder"
+     ],
+     [
+      "Anconeus",
+      "Posterior elbow",
+      "Radial nerve (C7, C8)",
+      "Assists elbow extension, stabilizes ulna"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **profunda brachii artery** (deep artery of the arm) is the largest branch of the brachial artery, arising just below teres major. Traversing the spiral groove, it divides into radial collateral and middle collateral arteries, which anastomose around the lateral epicondyle of the elbow to maintain collateral perfusion during joint flexion.",
+   "say": "The profunda brachii artery is the largest branch of the brachial artery. Traversing the spiral groove with the radial nerve, it gives off radial and middle collateral branches that form a rich anastomotic network around the elbow.",
+   "vis": {
+    "kind": "flow",
+    "title": "Elbow Collateral Circulation",
+    "nodes": [
+     {
+      "id": "prof",
+      "label": "Profunda Brachii Artery"
+     },
+     {
+      "id": "rad",
+      "label": "Radial Collateral Branch"
+     },
+     {
+      "id": "recur",
+      "label": "Radial Recurrent Artery"
+     },
+     {
+      "id": "arch",
+      "label": "Perfusion Maintained in Acute Brachial Block"
+     }
+    ],
+    "edges": [
+     [
+      "prof",
+      "rad"
+     ],
+     [
+      "rad",
+      "recur"
+     ],
+     [
+      "recur",
+      "arch"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
