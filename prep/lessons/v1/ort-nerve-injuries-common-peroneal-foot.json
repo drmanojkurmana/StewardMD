@@ -1,0 +1,291 @@
+{
+ "v": 1,
+ "id": "ort-nerve-injuries-common-peroneal-foot",
+ "subject": "orthopaedics",
+ "module": "ort-nerve-injuries",
+ "title": "Common Peroneal Nerve Injury",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Common peroneal nerve** is the most frequently injured major peripheral nerve of the lower extremity. Arising from the posterior divisions of the L4 to S2 spinal roots as the lateral division of the sciatic nerve, it descends through the popliteal fossa along the medial border of the biceps femoris tendon. It then winds anteriorly around the subcutaneous lateral neck of the fibula, where it is tightly bound to periosteum beneath the fibularis longus muscle.",
+   "say": "The common peroneal nerve originates from L4 through S2 roots. It winds tightly around the neck of the fibula right beneath the skin, where its superficial tethered course leaves it exceptionally vulnerable to trauma.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/peripheral-nerve-injury-fig1.webp",
+    "alt": "Anatomical diagram of peripheral nerve trunk and vulnerability points.",
+    "caption": "Anatomical course and superficial tethering points of the common peroneal nerve around the fibular neck. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Mechanism of injury** at the fibular neck commonly involves blunt trauma, lacerations, or traction stretching during knee dislocations. In severe knee dislocations with disruption of the posterolateral corner and fibular collateral ligament, traction forces tear the tethered common peroneal nerve in up to forty percent of cases. Iatrogenic injuries frequently occur from tight circumferential plaster casts, compression bandages, prolonged lithotomy surgical positioning, or retractor pressure during lateral high tibial osteotomy.",
+   "say": "Fibular neck trauma, direct lacerations, and knee dislocations frequently injure the nerve. Iatrogenic causes include tight plaster casts, pressure from surgical leg holders, and retractors during osteotomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Traumatic Traction Mechanisms",
+     "points": [
+      "Severe knee dislocation / multiligament injury",
+      "Disruption of posterolateral corner and FCL",
+      "Severe longitudinal traction neuropraxia or rupture",
+      "High incidence of permanent neurotmesis"
+     ]
+    },
+    "right": {
+     "title": "Compression / Iatrogenic Mechanisms",
+     "points": [
+      "Tight plaster cast over fibular head",
+      "Prolonged lithotomy position in operating room",
+      "Habitual leg crossing in thin individuals",
+      "Primarily neurapraxia with high recovery rate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Deep and superficial divisions** arise as the common peroneal nerve divides within the peroneus longus muscle belly. The deep peroneal nerve pierces the anterior intermuscular septum to innervate the anterior compartment muscles: tibialis anterior, extensor digitorum longus, extensor hallucis longus, and peroneus tertius, terminating as sensory innervation to the first dorsal web space. The superficial peroneal nerve courses through the lateral compartment, supplying peroneus longus and brevis and innervating dorsal foot skin.",
+   "say": "The nerve bifurcates into deep and superficial branches. The deep peroneal nerve drives ankle and toe dorsiflexion and senses the first web space, while the superficial branch powers foot eversion and senses the dorsal foot.",
+   "vis": {
+    "kind": "table",
+    "title": "Innervation Targets of Peroneal Nerve Branches",
+    "cols": [
+     "Peroneal Branch",
+     "Motor Compartment Innervated",
+     "Cutaneous Sensory Territory"
+    ],
+    "rows": [
+     [
+      "Deep peroneal nerve",
+      "Anterior compartment (dorsiflexors)",
+      "First dorsal interdigital web space"
+     ],
+     [
+      "Superficial peroneal nerve",
+      "Lateral compartment (evertors)",
+      "Anterolateral distal leg and dorsal foot"
+     ],
+     [
+      "Common trunk",
+      "Both anterior and lateral compartments",
+      "Dorsum of foot and first web space combined"
+     ],
+     [
+      "Tibial nerve (comparison)",
+      "Posterior compartment (plantarflexors)",
+      "Entire plantar sole of the foot"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Foot drop** represents the cardinal motor presentation of common peroneal nerve palsy. Complete paralysis of the tibialis anterior, extensor digitorum longus, and extensor hallucis longus eliminates active ankle and toe dorsiflexion. Because the lateral evertors are also paralyzed, the unopposed action of the healthy tibialis posterior and gastrocnemius muscles pulls the foot into fixed equinovarus posture. During ambulation, the patient demonstrates a high-stepping equine gait to clear the toes off the floor.",
+   "say": "Foot drop is the hallmark motor sign: loss of active ankle dorsiflexion causes the toes to drag. To compensate and clear the floor during walking, the patient lifts the knee excessively high in a classic stepping gait.",
+   "vis": {
+    "kind": "flow",
+    "title": "Biomechanical Cascade of Foot Drop Gait",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "Nerve Interruption",
+      "sub": "Common peroneal trunk paralysis at fibular neck"
+     },
+     {
+      "id": "d2",
+      "label": "Paralysis of Dorsiflexors",
+      "sub": "Tibialis anterior, EHL, and EDL lose all motor tone"
+     },
+     {
+      "id": "d3",
+      "label": "Equinovarus Deformity",
+      "sub": "Unopposed tibialis posterior pulls foot into inversion"
+     },
+     {
+      "id": "d4",
+      "label": "High-Stepping Gait",
+      "sub": "Exaggerated hip and knee flexion clears dragging toes"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2",
+      "Motor denervation"
+     ],
+     [
+      "d2",
+      "d3",
+      "Muscular imbalance"
+     ],
+     [
+      "d3",
+      "d4",
+      "Gait compensation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**First dorsal web space** anesthesia constitutes the autonomous, pathognomonic sensory landmark of the deep peroneal nerve. In complete common peroneal palsy, sensory loss extends across the anterolateral lower leg and the entire dorsum of the foot. Crucially, the medial side of the foot and medial malleolus retain normal sensation supplied by the saphenous nerve (from the femoral nerve), while the lateral foot border is preserved by the sural nerve.",
+   "say": "The first dorsal web space between the big and second toes is the autonomous sensory zone of the deep peroneal nerve. In complete palsy, numbness covers the dorsal foot, but the medial ankle stays normal via the saphenous nerve.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Peroneal Sensory Deficit",
+     "points": [
+      "First dorsal web space (deep peroneal)",
+      "Anterolateral distal leg (superficial)",
+      "Entire dorsal foot skin numbed",
+      "Sparing of plantar foot and heel"
+     ]
+    },
+    "right": {
+     "title": "Spared Cutaneous Territories",
+     "points": [
+      "Medial ankle and foot (saphenous nerve)",
+      "Lateral border of foot (sural nerve)",
+      "Entire plantar surface (tibial nerve)",
+      "First web numbness confirms deep nerve"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Ankle-foot orthosis** (AFO) represents the mandatory immediate conservative intervention for acute foot drop. A lightweight thermoplastic posterior leaf-spring or carbon-fibre AFO maintains the foot in ninety degrees of neutral dorsiflexion during the swing phase of gait. This eliminates tripping, normalizes ground clearance, and prevents the development of fixed equinus contracture of the Achilles tendon while nerve regeneration proceeds. Daily passive stretching of the heel cord maintains ankle joint mobility.",
+   "say": "An ankle-foot orthosis holds the foot at ninety degrees, preventing the toes from dragging and stopping the Achilles tendon from tightening into a fixed contracture while awaiting nerve recovery.",
+   "vis": {
+    "kind": "table",
+    "title": "Conservative Management Protocol for Foot Drop",
+    "cols": [
+     "Intervention",
+     "Biomechanical Action",
+     "Clinical Objective"
+    ],
+    "rows": [
+     [
+      "Posterior leaf-spring AFO",
+      "Maintains ankle at 90 degrees in swing phase",
+      "Prevents tripping and equine gait"
+     ],
+     [
+      "Passive Achilles stretching",
+      "Maintains full passive ankle dorsiflexion",
+      "Prevents fixed equinus contracture"
+     ],
+     [
+      "Galvanic muscle stimulation",
+      "Electrical stimulation of tibialis anterior",
+      "Retards denervation muscle atrophy"
+     ],
+     [
+      "Cast padding de-bulking",
+      "Remove circumferential pressure at fibula",
+      "Decompresses compressed neurapraxia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Electrodiagnostic studies** including nerve conduction studies and needle electromyography should be performed at three to four weeks post-injury. Testing at three weeks allows time for Wallerian degeneration to establish. Stimulating across the fibular neck differentiates local demyelinating conduction block (neurapraxia) with normal distal responses from axonal transection (axonotmesis or neurotmesis) characterized by absent motor responses and abundant fibrillation potentials.",
+   "say": "Order nerve conduction and electromyography studies at three to four weeks. This timing allows Wallerian degeneration to declare itself, separating simple neurapraxia from complete axonal rupture.",
+   "vis": {
+    "kind": "flow",
+    "title": "Diagnostic and Prognostic Electromyography Timeline",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Acute Injury",
+      "sub": "Immediate foot drop; electrophysiology unhelpful early"
+     },
+     {
+      "id": "e2",
+      "label": "3 to 4 Weeks",
+      "sub": "EMG detects fibrillations and positive sharp waves"
+     },
+     {
+      "id": "e3",
+      "label": "Conduction Block",
+      "sub": "Neurapraxia recovers spontaneously in 6 to 12 weeks"
+     },
+     {
+      "id": "e4",
+      "label": "Axonotmesis",
+      "sub": "Follow advancing Tinel sign regenerating at 1 mm/day"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2",
+      "Wallerian degeneration"
+     ],
+     [
+      "e2",
+      "e3",
+      "Intact axons"
+     ],
+     [
+      "e2",
+      "e4",
+      "Axonal disruption"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Tibialis posterior tendon transfer** represents the definitive surgical salvage reconstruction for permanent, irreversible common peroneal nerve palsy failing to recover after twelve to eighteen months. The healthy, functioning tibialis posterior tendon is harvested from its navicular insertion, rerouted anteriorly through a generous window in the interosseous membrane between tibia and fibula, and securely anchored into the lateral cuneiform or cuboid bone. This transfer successfully converts a deforming inverting force into an active dorsiflexor.",
+   "say": "When recovery fails after a year, transfer the tibialis posterior tendon through the interosseous membrane onto the lateral cuneiform. This converts an inverting force into an active foot dorsiflexor, liberating the patient from an orthosis.",
+   "vis": {
+    "kind": "table",
+    "title": "Surgical Reconstructive Options for Peroneal Palsy",
+    "cols": [
+     "Surgical Technique",
+     "Indication / Timing",
+     "Functional Outcome"
+    ],
+    "rows": [
+     [
+      "Direct epineurial repair",
+      "Sharp transection within 72 hours",
+      "Best potential for biological recovery"
+     ],
+     [
+      "Sural nerve cable graft",
+      "Gap >2 cm in knee dislocation (<6 months)",
+      "Variable reinnervation due to long distance"
+     ],
+     [
+      "Tibialis posterior transfer",
+      "Irreversible palsy (>12 to 18 months)",
+      "Reliable active dorsiflexion, discards AFO"
+     ],
+     [
+      "Triple arthrodesis",
+      "Fixed, neglected equinovarus deformity",
+      "Stable, painless, plantigrade foot"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Common peroneal nerve: autonomous sensory test zone",
+   "b": "First dorsal interdigital web space (supplied by deep peroneal nerve)."
+  },
+  {
+   "f": "Foot drop: definitive tendon transfer for permanent palsy",
+   "b": "Tibialis posterior tendon transferred anteriorly through interosseous membrane to lateral cuneiform."
+  },
+  {
+   "f": "Common peroneal nerve: primary anatomical reason for high injury risk",
+   "b": "Superficial subcutaneous course tethered directly against periosteum of fibular neck."
+  }
+ ],
+ "keys": [
+  "Common peroneal nerve winds around the fibular neck, where it is vulnerable to trauma and tight casts",
+  "Palsy causes foot drop and first web space numbness, treated acutely with an ankle-foot orthosis",
+  "Irreversible palsy is reconstructed using anterior transfer of the tibialis posterior tendon"
+ ]
+}
