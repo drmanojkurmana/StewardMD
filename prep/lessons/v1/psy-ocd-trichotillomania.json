@@ -1,0 +1,292 @@
+{
+ "v": 1,
+ "id": "psy-ocd-trichotillomania",
+ "subject": "psychiatry",
+ "module": "psy-ocd",
+ "title": "Body-Focused Repetitive Behaviors and OCD Therapeutics",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Trichotillomania**, or hair-pulling disorder, involves recurrent pulling out of one's own hair resulting in noticeable hair loss, despite repeated unsuccessful attempts to decrease or stop the behavior. The scalp is the most common site, followed by eyebrows and eyelashes, characteristically yielding irregular, asymmetric patches.",
+   "say": "Trichotillomania involves compulsive pulling of one's hair causing asymmetric bald patches, despite repeated unsuccessful efforts to stop.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Presentation",
+     "points": [
+      "Irregular, non-scarring alopecia patches",
+      "Broken hair shafts of varying lengths",
+      "Scalp, eyebrows, and eyelashes most common",
+      "Absence of scalp erythema or inflammation"
+     ]
+    },
+    "right": {
+     "title": "Alopecia Areata Contrasted",
+     "points": [
+      "Smooth, sharply demarcated round patches",
+      "Exclamation point hairs at margins",
+      "Autoimmune etiology attacking follicles",
+      "Responds to intralesional corticosteroids"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Trichophagia and Rapunzel syndrome** occur when hair pulling is accompanied by eating the plucked hairs, leading to the formation of an undigestible trichobezoar within the stomach. Rapunzel syndrome arises when the hairball extends into the small intestine, causing intestinal obstruction and gastric perforation.",
+   "say": "Ingesting plucked hair forms a gastric trichobezoar. Extension into the small bowel produces Rapunzel syndrome with severe intestinal obstruction.",
+   "vis": {
+    "kind": "flow",
+    "title": "Trichobezoar Progression",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Compulsive plucking and ingestion of hair shafts"
+     },
+     {
+      "id": "n2",
+      "label": "Accumulation of insoluble keratin mass in gastric lumen"
+     },
+     {
+      "id": "n3",
+      "label": "Rapunzel syndrome: tail of hair mass extends past pylorus into ileum"
+     },
+     {
+      "id": "n4",
+      "label": "Mechanical bowel obstruction, ulceration, and perforation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Excoriation disorder**, or skin picking disorder, is characterized by recurrent picking of one's own skin resulting in noticeable cutaneous lesions, despite repeated attempts to discontinue. Patients pick at fingernails, facial blemishes, or scabs for hours daily using fingernails or tweezers, creating scarred, ulcerated areas.",
+   "say": "Excoriation disorder involves chronic skin picking resulting in tissue damage and scars. It functions as a maladaptive emotional regulation habit.",
+   "vis": {
+    "kind": "table",
+    "title": "Body-Focused Repetitive Behaviors",
+    "cols": [
+     "Disorder",
+     "Target Anatomy",
+     "Behavioral Management"
+    ],
+    "rows": [
+     [
+      "Trichotillomania",
+      "Scalp, eyebrows, eyelashes",
+      "Habit reversal training & N-acetylcysteine"
+     ],
+     [
+      "Excoriation disorder",
+      "Face, arms, hands, cuticle beds",
+      "Habit reversal training & selective SSRIs"
+     ],
+     [
+      "Onychophagia",
+      "Fingernails and surrounding nail fold",
+      "Barrier methods & stimulus control techniques"
+     ],
+     [
+      "Cheilophagia",
+      "Lip and inner buccal mucosa biting",
+      "Dental splints & competing response training"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Yale-Brown Obsessive Compulsive Scale**, abbreviated Y-BOCS, is a clinician-rated 10-item instrument designed to assess the severity and type of symptoms in patients with OCD. The scale separately rates time spent, interference, distress, resistance, and control over obsessions and compulsions, scoring from zero to 40.",
+   "say": "The Y-BOCS scores OCD severity from zero to forty across time, interference, distress, resistance, and control over obsessions and rituals.",
+   "vis": {
+    "kind": "table",
+    "title": "Y-BOCS Severity Strata",
+    "cols": [
+     "Total Score",
+     "Severity Classification",
+     "Clinical Benchmark"
+    ],
+    "rows": [
+     [
+      "0 to 7",
+      "Subclinical",
+      "Normal range or complete remission"
+     ],
+     [
+      "8 to 15",
+      "Mild",
+      "Occasional intrusive rituals; mild interference"
+     ],
+     [
+      "16 to 23",
+      "Moderate",
+      "Standard baseline threshold for pharmacological trials"
+     ],
+     [
+      "24 to 31",
+      "Severe",
+      "Extensive daily rituals; marked functional disruption"
+     ],
+     [
+      "32 to 40",
+      "Extreme",
+      "Near-constant paralyzing rituals; requires inpatient care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Exposure and response prevention**, abbreviated ERP, is the first-line evidence-based psychotherapy for OCD, demonstrating efficacy equivalent or superior to medication. ERP systematically exposes the patient to obsession-triggering situations, such as touching a restroom floor, while strictly preventing them from performing the neutralizing compulsive ritual.",
+   "say": "Exposure and response prevention exposes patients to feared triggers while blocking compulsions, allowing conditioned anxiety to naturally habituate.",
+   "vis": {
+    "kind": "flow",
+    "title": "Mechanism of ERP Habituation",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Controlled exposure to contamination or doubt trigger"
+     },
+     {
+      "id": "n2",
+      "label": "Strict prevention of washing, checking, or mental rituals"
+     },
+     {
+      "id": "n3",
+      "label": "Anxiety rises initially, plateaus, and naturally habituates"
+     },
+     {
+      "id": "n4",
+      "label": "Brain learns that catastrophe does not occur without rituals"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Fluvoxamine and high-dose SSRIs** constitute the first-line pharmacotherapy for OCD, requiring substantially higher daily doses and longer durations to achieve therapeutic response than in depression. Doses of fluoxetine up to 80 milligrams or fluvoxamine up to 300 milligrams daily are continued for 12 weeks before declaring non-response.",
+   "say": "Treating OCD requires higher SSRI doses than depression, such as 300 mg of fluvoxamine daily, maintained for twelve weeks before evaluating efficacy.",
+   "vis": {
+    "kind": "table",
+    "title": "OCD Pharmacotherapy Dosing",
+    "cols": [
+     "Medication",
+     "Standard Depression Dose",
+     "Maximal OCD Dose"
+    ],
+    "rows": [
+     [
+      "Fluvoxamine",
+      "100 to 150 mg daily",
+      "Up to 300 mg daily in divided doses"
+     ],
+     [
+      "Fluoxetine",
+      "20 to 40 mg daily",
+      "Up to 80 mg once daily"
+     ],
+     [
+      "Sertraline",
+      "50 to 100 mg daily",
+      "Up to 200 mg once daily"
+     ],
+     [
+      "Clomipramine",
+      "75 to 150 mg daily",
+      "Up to 250 mg daily (monitor ECG QTc)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Clomipramine** is a potent tricyclic antidepressant with exceptionally robust serotonin reuptake inhibition, historically serving as the first drug demonstrated effective in OCD. While demonstrating superior efficacy to SSRIs in meta-analyses, clomipramine is reserved for second-line therapy due to severe anticholinergic effects, sedation, and fatal cardiotoxicity in overdose.",
+   "say": "Clomipramine is an efficacious serotonin-dominant tricyclic for OCD, reserved for second-line use due to anticholinergic and cardiac side effects.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clomipramine Strengths",
+     "points": [
+      "Gold standard efficacy in refractory OCD",
+      "Potent non-selective 5-HT reuptake block",
+      "Active metabolite desmethylclomipramine blocks NET",
+      "Proven in severe pediatric and adult cases"
+     ]
+    },
+    "right": {
+     "title": "Dose-Limiting Toxicities",
+     "points": [
+      "Dose-dependent seizure risk (>250 mg daily)",
+      "Severe dry mouth, constipation, urinary hesitancy",
+      "Cardiac conduction delay (prolonged QRS & QTc)",
+      "Lethal in overdose due to ventricular arrhythmias"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**PANDAS syndrome**, standing for Pediatric Autoimmune Neuropsychiatric Disorders Associated with Streptococcal Infections, describes the abrupt, explosive onset of OCD or tics following Group A streptococcal pharyngitis. It is mediated by autoimmune antineuronal antibodies cross-reacting with basal ganglia antigens through molecular mimicry, managed with antibiotics and immunomodulation.",
+   "say": "PANDAS involves explosive overnight onset of OCD or tics after strep pharyngitis, driven by autoimmune cross-reaction against basal ganglia tissue.",
+   "vis": {
+    "kind": "flow",
+    "title": "PANDAS Pathogenetic Cascade",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Group A beta-haemolytic streptococcal throat infection"
+     },
+     {
+      "id": "n2",
+      "label": "Host generates anti-streptococcal antibodies"
+     },
+     {
+      "id": "n3",
+      "label": "Molecular mimicry: antibodies cross-react with basal ganglia neurons"
+     },
+     {
+      "id": "n4",
+      "label": "Overnight explosive onset of choreiform tics and severe OCD"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
