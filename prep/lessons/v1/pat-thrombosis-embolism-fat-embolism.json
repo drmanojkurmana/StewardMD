@@ -1,0 +1,212 @@
+{
+  "v": 1,
+  "module": "pat-thrombosis-embolism",
+  "subject": "pathology",
+  "title": "Special Embolic Syndromes, Infarction Morphology, and Ischemic Necrosis",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Fractures of long bones or severe orthopedic trauma crush yellow marrow fat and tear intramedullary venules. Released microscopic lipid globules enter venous circulation, occlude pulmonary and systemic capillary beds, and induce toxic free fatty acid endothelial injury during **fat embolism syndrome**.",
+      "say": "Traumatic long bone fractures release marrow fat globules that occlude pulmonary and brain capillaries.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bone_fracture",
+            "label": "Femoral or Pelvic Bone Fracture Tears Medullary Sinusoids"
+          },
+          {
+            "id": "lipid_entry",
+            "label": "Marrow Adipocytes Enter Venous Circulation as Fat Globules"
+          },
+          {
+            "id": "capillary_occlusion",
+            "label": "Mechanical Capillary Blockage in Lungs, Brain, and Skin"
+          },
+          {
+            "id": "toxic_free_fatty_acids",
+            "label": "Lipase Cleavage Generates Toxic Free Fatty Acid Injury"
+          }
+        ],
+        "edges": [
+          [
+            "bone_fracture",
+            "lipid_entry"
+          ],
+          [
+            "lipid_entry",
+            "capillary_occlusion"
+          ],
+          [
+            "capillary_occlusion",
+            "toxic_free_fatty_acids"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Manifesting twenty-four to seventy-two hours following trauma, the classic clinical picture features respiratory insufficiency, neurological confusion, and non-thrombocytopenic skin eruptions. Occlusion of dermal capillaries by circulating microfat globules generates the pathognomonic upper body **petechial rash of fat embolism**, concentrated across the neck and axillae.",
+      "say": "A petechial rash over the upper torso, hypoxemia, and confusion identify fat embolism syndrome.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Domain",
+          "Clinical Manifestation",
+          "Pathologic Mechanism"
+        ],
+        "rows": [
+          [
+            "Pulmonary",
+            "Sudden Dyspnea, Tachypnea, Hypoxemia",
+            "Microvascular Lipid Occlusion and Endothelial Toxicity"
+          ],
+          [
+            "Neurological",
+            "Confusion, Irritability, Progressive Coma",
+            "Cerebral Microvascular Fat Emboli and Petechiae"
+          ],
+          [
+            "Cutaneous",
+            "Anterior Neck, Axillary, and Conjunctival Petechiae",
+            "Dermal Capillary Fat Microembolization"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "During vigorous labor or placental abruption, tears in uterine endocervical veins permit entry of amniotic fluid into maternal venous sinuses. Infusion of fetal squames, hair, vernix caseosa, and procoagulant mucin into maternal circulation causes sudden cardiogenic shock, disseminated intravascular coagulation, and fatal **amniotic fluid embolism**.",
+      "say": "Amniotic fluid embolism introduces fetal squames and procoagulant mucin into maternal blood.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/amniotic-fluid-embolism-fig1.webp",
+        "alt": "Amniotic fluid squames and mucin obstructing maternal pulmonary microvessels",
+        "caption": "Amniotic fluid and fetal squames entering maternal venous sinuses during delivery."
+      }
+    },
+    {
+      "tx": "Introduction of large gas volumes into the venous or arterial circulation produces mechanical vascular outflow obstruction. Accidental puncture of large neck veins during surgery or rapid ascent in scuba diving releasing dissolved nitrogen bubbles into blood causes circulatory collapse from an **air embolism**.",
+      "say": "Air embolism occurs when gas bubbles enter circulation and obstruct ventricular outflow tract flow.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gas_entry",
+            "label": "Surgical Trauma or Rapid Decompression Introduces Gas"
+          },
+          {
+            "id": "gas_coalescence",
+            "label": "Gas Bubbles Coalesce to Form Large Intravascular Froth"
+          },
+          {
+            "id": "outflow_block",
+            "label": "Mechanical Air Lock Obstructs Right Ventricular Outflow"
+          },
+          {
+            "id": "ischemia",
+            "label": "Fatal Hemodynamic Collapse or Focal Cerebral Ischemia"
+          }
+        ],
+        "edges": [
+          [
+            "gas_entry",
+            "gas_coalescence"
+          ],
+          [
+            "gas_coalescence",
+            "outflow_block"
+          ],
+          [
+            "outflow_block",
+            "ischemia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Complete vascular compromise of arterial inflow or venous drainage culminates in localized coagulative or liquefactive necrosis of dependent parenchymal cells. This localized region of ischemic parenchymal necrosis is designated histopathologically as a **tissue infarction**, most commonly caused by occlusive arterial thrombosis or thromboembolism.",
+      "say": "Tissue infarction represents localized ischemic necrosis resulting from abrupt vascular occlusion.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/brainstem-and-alternating-syndromes-fig1.webp",
+        "alt": "Brainstem ischemic infarction and tissue necrosis from arterial occlusion",
+        "caption": "Localized ischemic infarction and parenchymal tissue damage resulting from arterial occlusion."
+      }
+    },
+    {
+      "tx": "Infarcts are categorized morphologically as either red or white based on tissue architecture and vascularity. Hemorrhagic or **red infarct** lesions develop in tissues possessing dual circulations like the lung and intestine, in loose spongy tissues, or when venous outflow is acutely occluded, permitting extensive erythrocyte extravasation.",
+      "say": "Red infarcts develop in spongy tissues, dual-circulation organs, or following venous thrombosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Red (Hemorrhagic) Infarct",
+          "points": [
+            "Characteristically develops in lung, intestine, testis, and ovary",
+            "Seen in tissues with dual arterial circulations or loose alveolar/interstitial architecture",
+            "Frequently results from venous outflow obstruction allowing backward hemorrhage",
+            "Demonstrates abundant extravasated erythrocytes filling necrotic parenchymal spaces"
+          ]
+        },
+        "right": {
+          "title": "White (Pale/Anemic) Infarct",
+          "points": [
+            "Characteristically develops in solid organs like kidney, heart, and spleen",
+            "Seen in compact organs with single terminal end-arterial vascular supplies",
+            "Results exclusively from acute arterial occlusion without significant collateral blood",
+            "Ischemic coagulation necrosis limits erythrocyte entry, leaving pale wedge lesions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Solid organs with single terminal end-arterial circulations and dense parenchymal texture resist collateral hemorrhage following acute arterial occlusion. In myocardial infarction, renal cortical necrosis, and splenic infarction, ischemic coagulation necrosis produces a well-demarcated, pale, wedge-shaped **white infarct**, with its apex pointing toward the occluded vessel.",
+      "say": "White infarcts occur in solid organs with end-arterial supplies, producing pale wedge-shaped necrosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/st-segment-elevation-myocardial-infarction-fig1.webp",
+        "alt": "Acute myocardial white infarction caused by coronary end-artery occlusion",
+        "caption": "White anemic myocardial infarction resulting from acute coronary end-artery occlusion."
+      }
+    },
+    {
+      "tx": "Following ischemic necrosis, the dead parenchymal focus evokes an acute inflammatory border zone. Over several weeks, recruited macrophages remove cellular debris, while proliferating endothelial cells and myofibroblasts lay down granulation tissue, culminating in a firm fibrous **post-infarct scar formation** that contracts and replaces the dead parenchyma.",
+      "say": "Infarct healing replaces necrotic tissue with vascular granulation tissue and dense collagen scar.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "coagulative_necrosis",
+            "label": "Initial Coagulative Necrosis and Neutrophil Demarcation"
+          },
+          {
+            "id": "macrophage_clearance",
+            "label": "Macrophage Infiltration Phagocytoses Necrotic Myocytes"
+          },
+          {
+            "id": "granulation_tissue",
+            "label": "Capillary Angiogenesis and Fibroblast Collagen Ingrowth"
+          },
+          {
+            "id": "dense_fibrous_scar",
+            "label": "Acellular Collagenous Scar Replaces Ischemic Defect"
+          }
+        ],
+        "edges": [
+          [
+            "coagulative_necrosis",
+            "macrophage_clearance"
+          ],
+          [
+            "macrophage_clearance",
+            "granulation_tissue"
+          ],
+          [
+            "granulation_tissue",
+            "dense_fibrous_scar"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}

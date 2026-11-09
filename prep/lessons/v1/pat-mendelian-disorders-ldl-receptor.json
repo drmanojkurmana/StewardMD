@@ -1,0 +1,222 @@
+{
+  "v": 1,
+  "module": "pat-mendelian-disorders",
+  "subject": "pathology",
+  "title": "Receptor Mutations, Neurofibromatosis, and Cystic Fibrosis Pathogenesis",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Receptor-mediated endocytosis of apolipoprotein B-100 particles is orchestrated by a transmembrane protein comprising an extracellular ligand-binding domain, epidermal growth factor precursor homology region, and cytoplasmic internalization sequence known as the **LDL receptor glycoprotein**, which maintains systemic cholesterol homeostasis through hepatic recycling.",
+      "say": "The LDL receptor glycoprotein binds apolipoprotein B-100 to clear cholesterol from circulation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ligand_binding",
+            "label": "Extracellular Cysteine-Rich Repeats Bind Apolipoprotein B-100"
+          },
+          {
+            "id": "internalization",
+            "label": "NPXY Cytoplasmic Motif Directs Receptor into Clathrin Pits"
+          },
+          {
+            "id": "lysosomal_release",
+            "label": "Endosomal Acidification Releases LDL for Lysosomal Cleavage"
+          },
+          {
+            "id": "recycling",
+            "label": "Receptor Recycles to Hepatocyte Surface for Subsequent Cycles"
+          }
+        ],
+        "edges": [
+          [
+            "ligand_binding",
+            "internalization"
+          ],
+          [
+            "internalization",
+            "lysosomal_release"
+          ],
+          [
+            "lysosomal_release",
+            "recycling"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Over two thousand distinct pathogenic mutations have been mapped across the low-density lipoprotein receptor gene. Geneticists classify these molecular lesions into five mechanistic groups, ranging from complete synthesis failure to recycling arrest, designated systematically as **LDL receptor class mutations**, each disrupting a specific biochemical stage of receptor trafficking.",
+      "say": "Five classes of LDL receptor mutations disrupt synthesis, processing, binding, endocytosis, or recycling.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Mutation Class",
+          "Mechanistic Defect",
+          "Molecular Consequence"
+        ],
+        "rows": [
+          [
+            "Class I Mutations",
+            "Receptor Null Alleles",
+            "Complete Absence of Receptor Synthesis in Endoplasmic Reticulum"
+          ],
+          [
+            "Class II Mutations",
+            "Transport Arrest",
+            "Receptor Retained within ER and Golgi; Fails to Reach Surface"
+          ],
+          [
+            "Class III Mutations",
+            "Binding Defect",
+            "Receptor Reaches Cell Surface but Cannot Bind Apo B-100"
+          ],
+          [
+            "Class IV Mutations",
+            "Internalization Defect",
+            "Receptor Binds LDL but Fails to Cluster into Clathrin Pits"
+          ],
+          [
+            "Class V Mutations",
+            "Recycling Defect",
+            "Receptor Trapped in Acidic Endosomes; Degraded in Lysosomes"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Autosomal dominant neurocutaneous syndromes feature benign and malignant neural sheath neoplasms. Inactivating mutations in the NF1 gene on chromosome 17q11.2, which encodes the Ras-GTPase activating protein neurofibromin, lead to unconstrained cellular Ras-MAPK proliferation in **neurofibromatosis type 1**, predisposing to disfiguring peripheral nerve sheath tumors.",
+      "say": "Neurofibromatosis type 1 is caused by NF1 mutations causing loss of Ras-GTPase activation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "nf1_mutation",
+            "label": "Inactivating Mutation in NF1 Tumor Suppressor on 17q11.2"
+          },
+          {
+            "id": "loss_of_neurofibromin",
+            "label": "Loss of Functional Neurofibromin GTPase-Activating Protein"
+          },
+          {
+            "id": "ras_activation",
+            "label": "Unconstrained Active Ras-GTP Signaling via MAPK Cascade"
+          },
+          {
+            "id": "neurofibroma_growth",
+            "label": "Proliferation of Schwann Cells, Fibroblasts, and Perineurial Cells"
+          }
+        ],
+        "edges": [
+          [
+            "nf1_mutation",
+            "loss_of_neurofibromin"
+          ],
+          [
+            "loss_of_neurofibromin",
+            "ras_activation"
+          ],
+          [
+            "ras_activation",
+            "neurofibroma_growth"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical diagnosis of neurofibromatosis type 1 relies on identifying distinct cutaneous and ocular hallmarks. Along with multiple neurofibromas and cafe-au-lait macules, slit-lamp biomicroscopy reveals melanocytic iris hamartomas that do not impair vision, known pathognomonically as **Lisch nodules**, present in greater than ninety percent of adult patients.",
+      "say": "Lisch nodules are asymptomatic melanocytic iris hamartomas pathognomonic for neurofibromatosis type 1.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Neurofibromatosis Type 1",
+          "points": [
+            "NF1 tumor suppressor gene on chromosome 17q11.2 encoding neurofibromin",
+            "Cutaneous neurofibromas, plexiform neurofibromas, and cafe-au-lait macules",
+            "Optic pathway gliomas and sphenoid bone dysplasia",
+            "Diagnostic presence of bilateral melanocytic iris Lisch nodules"
+          ]
+        },
+        "right": {
+          "title": "Neurofibromatosis Type 2",
+          "points": [
+            "NF2 tumor suppressor gene on chromosome 22q12.2 encoding merlin (schwannomin)",
+            "Diagnostic bilateral vestibular schwannomas causing sensorineural hearing loss",
+            "Multiple intracranial and intraspinal meningiomas and ependymomas",
+            "Absence of iris Lisch nodules; posterior subcapsular juvenile cataracts"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The most frequent lethal autosomal recessive disorder among populations of European ancestry affects epithelial chloride transport across exocrine glands. Viscid, dehydrated secretions obstructing respiratory and digestive conduits characterize the severe systemic condition of **cystic fibrosis**, causing progressive bronchiectasis and pancreatic failure.",
+      "say": "Cystic fibrosis is an autosomal recessive epithelial chloride channel disorder causing viscous secretions.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cystic-fibrosis-fig1.webp",
+        "alt": "Multisystem exocrine gland obstruction and airway pathology in cystic fibrosis",
+        "caption": "Multisystem organ involvement and thickened exocrine secretions in cystic fibrosis."
+      }
+    },
+    {
+      "tx": "Approximately seventy percent of cystic fibrosis alleles in patient populations carry a three-base pair deletion resulting in the loss of a phenylalanine residue at codon 508. This classic **delta F508 mutation** provokes protein misfolding in the endoplasmic reticulum, triggering targeted proteasomal degradation.",
+      "say": "The delta F508 mutation causes CFTR protein misfolding and complete degradation within the proteasome.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cystic-fibrosis-fig2.webp",
+        "alt": "Delta F508 mutation causing CFTR misfolding and proteasomal destruction",
+        "caption": "Misfolding and proteasomal destruction of mutant CFTR chloride channel proteins."
+      }
+    },
+    {
+      "tx": "Impaired epithelial chloride conductance prevents adequate luminal water secretion, generating thick inspissated dehydrated mucus plugs. Recurrent severe bronchiectasis caused by Pseudomonas aeruginosa, pancreatic exocrine insufficiency, malabsorption, and neonatal meconium ileus define **cystic fibrosis multisystem pathology**, requiring lifelong comprehensive multidisciplinary clinical management.",
+      "say": "Cystic fibrosis manifests with bronchiectasis, pancreatic insufficiency, and recurrent Pseudomonas infections.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cystic-fibrosis-paed-fig1.webp",
+        "alt": "Pediatric manifestations of cystic fibrosis across lungs, pancreas, and gastrointestinal tract",
+        "caption": "Systemic pediatric consequences of cystic fibrosis affecting lungs, pancreas, and intestine."
+      }
+    },
+    {
+      "tx": "Defective CFTR channel function produces contrasting physiological abnormalities between exocrine glands and sweat ducts. In sweat ducts, failure to reabsorb luminal sodium and chloride creates abnormally salty perspiration, forming the basis of the diagnostic quantitative pilocarpine iontophoresis **sweat chloride test**.",
+      "say": "The sweat chloride test confirms cystic fibrosis by detecting impaired sweat duct chloride reabsorption.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pilocarpine_stimulation",
+            "label": "Pilocarpine Iontophoresis Stimulates Local Sweating"
+          },
+          {
+            "id": "impaired_duct_reabsorption",
+            "label": "Mutant CFTR Fails to Reabsorb Chloride Across Sweat Ducts"
+          },
+          {
+            "id": "obligate_sodium_loss",
+            "label": "Unabsorbed Chloride Retains Sodium in Sweat Lumen"
+          },
+          {
+            "id": "high_sweat_chloride",
+            "label": "Sweat Chloride Elevated Above 60 mEq/L Confirms Diagnosis"
+          }
+        ],
+        "edges": [
+          [
+            "pilocarpine_stimulation",
+            "impaired_duct_reabsorption"
+          ],
+          [
+            "impaired_duct_reabsorption",
+            "obligate_sodium_loss"
+          ],
+          [
+            "obligate_sodium_loss",
+            "high_sweat_chloride"
+          ]
+        ]
+      }
+    }
+  ],
+  "gen": "AI",
+  "quiz": []
+}
