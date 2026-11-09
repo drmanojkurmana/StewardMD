@@ -1,0 +1,248 @@
+{
+  "key": "ped-malnutrition-severe-acute-malnutrition",
+  "v": 1,
+  "module": "ped-malnutrition",
+  "subject": "paediatrics",
+  "title": "Severe Acute Malnutrition: Assessment and Stabilization",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Childhood wasting carries catastrophic mortality risks requiring standardized diagnostic criteria. According to WHO criteria, **severe acute malnutrition** (SAM) is diagnosed in children aged six to fifty-nine months when any one of three independent clinical criteria is present: mid-upper arm circumference (MUAC) under 115 millimetres, weight-for-height/length Z-score (WHZ) below minus 3 standard deviations, or bilateral nutritional pitting pedal oedema.",
+      "say": "Severe acute malnutrition in children under five is diagnosed by MUAC under 115 millimetres, weight-for-height Z-score below minus three, or bilateral pitting pedal oedema.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-anthro-kwashiorkor-marasmus.webp",
+        "alt": "Phenotypic contrast between non-oedematous marasmic wasting and generalized oedematous kwashiorkor.",
+        "caption": "Phenotypic contrast between non-oedematous marasmic wasting and generalized oedematous kwashiorkor.",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Rapid field screening relies on color-coded anthropometric tape measuring muscle and subcutaneous mass. Measuring **mid-upper arm circumference** using a flexible Shakir tape on the relaxed left arm midway between the acromion and olecranon identifies high-risk children. A MUAC reading under 115 millimetres falls into the red zone denoting severe acute malnutrition, while 115 to 124 millimetres defines moderate acute malnutrition (yellow zone), and 125 millimetres or greater is normal (green zone).",
+      "say": "Mid-upper arm circumference under 115 millimetres indicates the red zone of severe acute malnutrition. It accurately predicts high mortality risk independently of age or height.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-anthro-muac-bmi-chest.webp",
+        "alt": "Mid-upper arm circumference assessment technique using Shakir three-colour triage tape.",
+        "caption": "Mid-upper arm circumference assessment technique using Shakir three-colour triage tape.",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Chronic deprivation of energy and macronutrients produces severe balanced tissue wasting. The classic form known as **marasmic wasting** results from severe deficiency of both calories and protein, characterized by extreme muscle wasting, complete loss of subcutaneous fat, wrinkled skin, and an old man facies due to loss of the buccal fat pads (Bichat fat pad). Unlike kwashiorkor, marasmic children are alert, hungry, and exhibit no nutritional oedema.",
+      "say": "Marasmus results from severe calorie and protein starvation, producing extreme wasting, loose wrinkled skin, and an elderly facies from buccal fat pad loss, with preserved appetite and no oedema.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Marasmus Clinical Triad",
+          "points": [
+            "Severe somatic wasting, old man facies (sunken eyes, lost Bichat pads), ravenous appetite",
+            "Absence of oedema"
+          ]
+        },
+        "right": {
+          "title": "Kwashiorkor Clinical Triad",
+          "points": [
+            "Bilateral pedal oedema, apathy/misery, enlarged fatty liver",
+            "Loss of appetite, skin and hair dyspigmentation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Qualitative protein malnutrition produces fluid retention and profound hepatic dysfunction. Characterized primarily by bilateral pitting **nutritional oedema**, kwashiorkor develops from inadequate protein intake in the setting of marginal carbohydrate calories. Fluid retention begins in the feet and lower legs, progressing to generalized anasarca, periorbital puffiness, a moon facies, marked apathy, severe anorexia, and gross hepatomegaly secondary to triglyceride accumulation from impaired apolipoprotein synthesis.",
+      "say": "Kwashiorkor stems from profound protein deficiency with carbohydrate intake, producing bilateral pitting oedema, a moon face, extreme lethargy, anorexia, and fatty liver hepatomegaly.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathological Feature",
+          "Marasmus (Balanced Starvation)",
+          "Kwashiorkor (Protein Depletion)",
+          "Diagnostic Mechanism"
+        ],
+        "rows": [
+          [
+            "Nutritional oedema",
+            "Strictly absent",
+            "Always present (Bilateral pitting)",
+            "Hypoalbuminaemia and capillary leak"
+          ],
+          [
+            "Serum albumin",
+            "Normal or mildly reduced",
+            "Severely depressed (<2.0 g/dL)",
+            "Impaired hepatic protein synthesis"
+          ],
+          [
+            "Liver pathology",
+            "Normal histology",
+            "Gross steatosis (Fatty liver)",
+            "Apolipoprotein B100 synthesis failure"
+          ],
+          [
+            "Mental state",
+            "Alert, irritable, ravenous",
+            "Apathetic, miserable, anorexic",
+            "Neurotransmitter and electrolyte shift"
+          ],
+          [
+            "Subcutaneous fat",
+            "Completely absent",
+            "Partially preserved under oedema",
+            "Lipolysis failure from high insulin"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Dermatological breakdown reflects severe micronutrient and structural protein deficiencies. The pathognomonic cutaneous lesion of kwashiorkor is **flaky paint dermatosis**, also termed crazy pavement dermatosis. Hyperpigmented, thickened, dark patches develop over areas of friction and pressure such as the buttocks, perineum, and thighs, which then desquamate in flakes leaving raw, weeping, pale hypopigmented dermis vulnerable to secondary bacterial sepsis.",
+      "say": "Flaky paint dermatosis produces hyperpigmented plaques over pressure points that peel away like old paint, leaving raw weeping skin that is highly vulnerable to systemic bacterial infection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Flaky Paint Dermatosis",
+          "points": [
+            "Dark patches that peel away in flakes over thighs and buttocks, exposing friable, hypopigmented dermis"
+          ]
+        },
+        "right": {
+          "title": "Flag Sign of Hair",
+          "points": [
+            "Alternating bands of hypopigmented light hair and dark hair reflecting alternating cycles of malnutrition and feeding"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Initial inpatient stabilization requires strict limitation of protein and sodium loads. During the first two to seven days of treatment, the **F-75 starter formula** is administered to prevent lethal metabolic collapse. F-75 provides 75 kilocalories and a low protein content of 0.9 grams per 100 millilitres, designed to support basilar organ function without exceeding the severely reduced renal solute clearance and impaired hepatic transamination capacity of children with SAM.",
+      "say": "F-75 formula provides 75 kilocalories and only 0.9 grams of protein per 100 millilitres. This low protein intake protects impaired kidneys and liver during early stabilization.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Nutrient Profile",
+          "F-75 Starter Diet",
+          "F-100 Catch-up Diet",
+          "Clinical Purpose"
+        ],
+        "rows": [
+          [
+            "Energy density",
+            "75 kcal/100 mL",
+            "100 kcal/100 mL",
+            "F-75 prevents refeeding syndrome; F-100 fuels catch-up"
+          ],
+          [
+            "Protein concentration",
+            "0.9 g/100 mL (Low)",
+            "2.9 g/100 mL (High)",
+            "Low protein avoids overwhelming hepatic urea cycle"
+          ],
+          [
+            "Sodium content",
+            "0.6 mmol/100 mL",
+            "1.9 mmol/100 mL",
+            "Restricted sodium avoids congestive cardiac failure"
+          ],
+          [
+            "Potassium content",
+            "4.0 mmol/100 mL",
+            "5.9 mmol/100 mL",
+            "Corrects total body intracellular potassium deficit"
+          ],
+          [
+            "Magnesium content",
+            "0.43 mmol/100 mL",
+            "0.73 mmol/100 mL",
+            "Essential for cellular sodium-potassium ATPase function"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Life-threatening hypothermia and hypoglycaemia frequently develop insidiously in malnourished children. Because glycogen stores are depleted and gluconeogenesis is impaired, **neonatal and childhood hypoglycaemia** (blood glucose below 54 milligrams per decilitre) is treated immediately with ten percent dextrose (5 mL/kg), followed by two-hourly feeding. Hypothermia (axillary temperature under thirty-five degrees) requires warm blankets, kangaroo skin-to-skin contact, and eradication of occult sepsis.",
+      "say": "Hypoglycaemia under 54 milligrams per decilitre is an emergency treated with intravenous dextrose followed by two-hourly feeds. Keep the child warm to prevent hypothermia from triggering cardiac arrest.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hypoglycaemia Management",
+          "points": [
+            "5 mL/kg of 10% dextrose IV bolus or 50 mL of 10% sugar water orally",
+            "Feed immediately with F-75 every 2 hours"
+          ]
+        },
+        "right": {
+          "title": "Hypothermia Management",
+          "points": [
+            "Warm blankets, indirect heating, kangaroo skin-to-skin contact",
+            "Monitor temperature; avoid water bottles that burn"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Standard micronutrient replacement requires careful temporal staging to prevent toxicity. Routine protocol dictates high-dose vitamin A on day 1, high-dose folic acid (5 mg on day 1, then 1 mg/day), zinc, and copper, but strictly **withholding iron therapy** during the initial stabilization phase. Premature iron administration generates cytotoxic free hydroxyl radicals via the Fenton reaction and promotes systemic proliferation of circulating Gram-negative bacteria.",
+      "say": "Give high dose vitamin A, zinc, and folic acid immediately, but never administer iron during early stabilization. Iron promotes free radical injury and systemic bacterial sepsis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Management Step",
+          "Phase 1: Stabilization (Days 1-2)",
+          "Phase 1: Transition (Days 3-7)",
+          "Phase 2: Rehabilitation (Weeks 2-6)"
+        ],
+        "rows": [
+          [
+            "1. Hypoglycaemia",
+            "Treat and prevent (2-hr feeds)",
+            "Maintain regular feeding",
+            "Ad libitum catch-up feeding"
+          ],
+          [
+            "2. Hypothermia",
+            "Keep warm, monitor temp",
+            "Ensure clothing and warmth",
+            "Normal ambient care"
+          ],
+          [
+            "3. Dehydration",
+            "ReSoMal orally; no IV fluids",
+            "Oral hydration maintenance",
+            "Oral fluid replacement"
+          ],
+          [
+            "4. Electrolytes",
+            "High potassium and magnesium",
+            "Continue F-75 supplements",
+            "F-100 high electrolyte base"
+          ],
+          [
+            "5. Infection",
+            "Broad-spectrum parenteral abx",
+            "Continue antibiotic course",
+            "Eradicate residual parasites"
+          ],
+          [
+            "6. Micronutrients",
+            "Vitamin A, zinc, folic acid; NO iron",
+            "Continue zinc and vitamins",
+            "Add oral iron for catch-up anaemia"
+          ],
+          [
+            "7. Cautious feeding",
+            "F-75 starter diet strictly",
+            "Begin transition to F-100",
+            "Full F-100 / RUTF feeding"
+          ],
+          [
+            "8. Catch-up growth",
+            "Stabilize weight and oedema",
+            "Assess return of appetite",
+            "Target weight gain >10 g/kg/day"
+          ]
+        ]
+      }
+    }
+  ]
+}

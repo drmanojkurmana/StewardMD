@@ -1,0 +1,247 @@
+{
+  "key": "ped-behavioural-night-terrors",
+  "v": 1,
+  "module": "ped-behavioural",
+  "subject": "paediatrics",
+  "title": "Parasomnias, ADHD, Autism and Learning Disorders",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Pediatric parasomnias represent abnormal episodic motor and autonomic behaviors arising from specific sleep architecture stages. A **night terror**, or pavor nocturnus, is a non-rapid eye movement (NREM) stage N3 arousal disorder occurring during the first third of the night. The child abruptly sits up, screams uncontrollably, exhibits intense autonomic arousal with tachycardia, dilated pupils, and diaphoresis, remains completely unresponsive to comforting, and experiences total morning amnesia.",
+      "say": "Night terrors occur during slow wave non-REM sleep in the first third of the night. The child screams with marked tachycardia and diaphoresis, cannot be consoled, and has no memory of the event next morning.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Night Terrors (NREM Stage N3)",
+          "points": [
+            "First third of night",
+            "Inconsolable scream, autonomic agitation, eyes open, unresponsive, complete morning amnesia"
+          ]
+        },
+        "right": {
+          "title": "Nightmares (REM Sleep)",
+          "points": [
+            "Last third of night",
+            "Fully awake, frightened by vivid bad dreams, readily consoled by parents, detailed recall"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Differentiating slow-wave parasomnias from REM dreaming guides reassuring parental guidance. Management of night terrors relies upon ensuring physical safety, avoiding vigorous attempts to awaken the child which only prolongs agitated confusion, and instituting **scheduled awakenings**. Waking the child gently fifteen to thirty minutes prior to the habitual time of terror events alters sleep architecture and successfully suppresses nocturnal episodes.",
+      "say": "Managing night terrors requires ensuring bedroom safety, keeping parents calm, and using scheduled awakenings. Gently waking the child twenty minutes before the typical episode time suppresses attacks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Sleep Disorder",
+          "Sleep Cycle Stage",
+          "Timing in Night",
+          "Morning Dream Recall",
+          "First-Line Therapy"
+        ],
+        "rows": [
+          [
+            "Night terrors",
+            "NREM (Stage N3)",
+            "First 1 to 3 hours",
+            "Zero recall (Amnesia)",
+            "Scheduled awakenings"
+          ],
+          [
+            "Sleep walking",
+            "NREM (Stage N3)",
+            "First 1 to 3 hours",
+            "No recall",
+            "Bedroom environmental safety"
+          ],
+          [
+            "Nightmares",
+            "REM sleep",
+            "Late morning hours",
+            "Vivid frightening recall",
+            "Parental comfort, reassurance"
+          ],
+          [
+            "Confusional arousals",
+            "NREM (Stage N3)",
+            "First third of night",
+            "No recall",
+            "Avoid forced awakening"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Neurodevelopmental deficits in executive functioning cause pervasive educational and social friction. Characterized by developmentally inappropriate levels of inattention, hyperactivity, and impulsivity, **attention deficit hyperactivity disorder** (ADHD) requires persistent symptoms for at least six months with onset before twelve years of age across two or more independent settings, such as home and school, causing clear functional impairment.",
+      "say": "Attention deficit hyperactivity disorder features pervasive inattention, impulsivity, and hyperactivity lasting at least six months. Symptoms must manifest before twelve years of age across home and school.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Symptom Subtype",
+          "Core Manifestations",
+          "Minimum Criteria (DSM-5)",
+          "Functional Setting Requirement"
+        ],
+        "rows": [
+          [
+            "Inattentive subtype",
+            "Careless errors, poor focus, losing items",
+            "6 of 9 specific symptoms",
+            "Present across >=2 settings"
+          ],
+          [
+            "Hyperactive-impulsive",
+            "Fidgeting, leaves seat, interrupts, blurts",
+            "6 of 9 specific symptoms",
+            "Present across >=2 settings"
+          ],
+          [
+            "Combined presentation",
+            "Both inattention and hyperactivity met",
+            "Meets both threshold lists",
+            "Present across >=2 settings"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Therapeutic management of attention deficits blends psychosocial environmental modifications with central nervous system pharmacotherapy. Central stimulant medication using **methylphenidate therapy** serves as first-line pharmacological treatment for school-aged children with moderate to severe ADHD, inhibiting presynaptic dopamine and norepinephrine reuptake transporters. Non-stimulant alternatives like atomoxetine, a selective norepinephrine reuptake inhibitor, are valuable when stimulants provoke severe tics or sleep disruption.",
+      "say": "Methylphenidate is first-line medication for school-aged children with ADHD, blocking dopamine and noradrenaline reuptake. Atomoxetine provides an effective non-stimulant alternative if tics or insomnia arise.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stimulants: Methylphenidate",
+          "points": [
+            "Blocks dopamine and noradrenaline reuptake",
+            "Fast onset",
+            "Monitor appetite, height, weight, and blood pressure"
+          ]
+        },
+        "right": {
+          "title": "Non-stimulants: Atomoxetine",
+          "points": [
+            "Selective noradrenaline reuptake inhibitor",
+            "Takes 2 to 4 weeks",
+            "No abuse liability; ideal if tics coexist"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Early disruption of social interaction and communication constitutes a lifelong neurodevelopmental syndrome. Characterized by persistent deficits in social-emotional reciprocity, nonverbal communication, and developing peer relationships, **autism spectrum disorder** (ASD) also mandates restricted, repetitive patterns of behavior, insistence on sameness, and atypical sensory sensitivities, with features present from the early developmental period.",
+      "say": "Autism spectrum disorder features persistent deficits in social communication alongside restricted repetitive behaviours and intense sensory interests. Signs appear in early toddlerhood.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Core Diagnostic Domain",
+          "Specific Behavioral Markers",
+          "Early Infant Red Flags",
+          "Screening Metric"
+        ],
+        "rows": [
+          [
+            "Social Communication",
+            "Lack of joint attention, poor eye contact",
+            "No babbling or pointing by 12 months",
+            "M-CHAT-R at 18/24 months"
+          ],
+          [
+            "Social Reciprocity",
+            "Impaired peer play, absent shared affect",
+            "No social smile or joyful response",
+            "ADOS-2 diagnostic tool"
+          ],
+          [
+            "Restricted Behaviors",
+            "Hand flapping, spinning, echolalia",
+            "Rigid routines, lining up toys",
+            "CARS clinical rating"
+          ],
+          [
+            "Sensory Sensitivity",
+            "Extreme distress with loud sounds, textures",
+            "Atypical smelling or licking objects",
+            "Occupational sensory audit"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Population surveillance tools identify autistic communication vulnerabilities during routine immunization visits. The Modified Checklist for Autism in Toddlers, Revised (**M-CHAT-R**), is administered routinely at eighteen and twenty-four months of age to screen for social communication deficits. Red flags demanding immediate referral include no babbling or pointing by twelve months, no single words by sixteen months, and any loss of previously acquired language or social skills at any age.",
+      "say": "The M-CHAT-R questionnaire screens toddlers at eighteen and twenty-four months for autism. Immediate warning signs include absent pointing at twelve months, no single words at sixteen months, or regression.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Critical M-CHAT-R Red Flag Items",
+          "points": [
+            "Lack of joint attention pointing, failure to respond to name, absent pretend play, lack of showing items to parents"
+          ]
+        },
+        "right": {
+          "title": "Loss of Acquired Milestones",
+          "points": [
+            "Any regression in speech, vocabulary, or social smiling at any age demands urgent specialist neurodevelopmental referral"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Neurobiological impediments to academic literacy occur despite intact general cognitive capability. The most prevalent specific learning disorder is **developmental dyslexia**, characterized by unexpected difficulty with accurate and fluent word recognition, phonological processing, and decoding skills despite normal intelligence and adequate educational opportunity. Management requires early phonics-based multisensory educational intervention rather than visual-motor training.",
+      "say": "Developmental dyslexia causes difficulty with accurate word recognition, phonological decoding, and spelling despite normal intelligence. Multisensory phonics instruction is the evidence-based treatment.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Academic Deficit",
+          "Clinical Designation",
+          "Primary Deficit Feature",
+          "Evidence-Based Intervention"
+        ],
+        "rows": [
+          [
+            "Reading impairment",
+            "Dyslexia",
+            "Phonological decoding, reading fluency",
+            "Multisensory structured phonics"
+          ],
+          [
+            "Written expression",
+            "Dysgraphia",
+            "Spelling accuracy, handwriting clarity",
+            "Keyboarding, handwriting accommodation"
+          ],
+          [
+            "Mathematical reasoning",
+            "Dyscalculia",
+            "Number sense, arithmetic calculations",
+            "Concrete manipulative math training"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Emotional turmoil surrounding educational attendance reflects underlying anxiety rather than antisocial truancy. Reluctance or refusal to attend class termed **school refusal** is commonly driven by separation anxiety disorder in younger children or social anxiety and bullying in older adolescents. The child typically complains of somatic headaches, nausea, or abdominal pain on school mornings that resolve on weekends, requiring prompt return to school alongside cognitive behavioral therapy.",
+      "say": "School refusal involves morning somatic complaints like nausea and headaches that vanish on weekends. It stems from separation anxiety or social stress, treated by rapid school return and behavioral therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "School Refusal (Anxiety-Based)",
+          "points": [
+            "Stays home with parental knowledge",
+            "Severe panic on school mornings",
+            "Somatic pains vanish on weekends"
+          ]
+        },
+        "right": {
+          "title": "Truancy (Conduct-Based)",
+          "points": [
+            "Skips school without parental knowledge",
+            "Spends day away from home",
+            "Associated with antisocial rule breaking"
+          ]
+        }
+      }
+    }
+  ]
+}

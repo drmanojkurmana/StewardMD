@@ -1,0 +1,241 @@
+{
+  "key": "ped-infant-feeding-baby-friendly-hospital",
+  "v": 1,
+  "module": "ped-infant-feeding",
+  "subject": "paediatrics",
+  "title": "BFHI, Expressed Milk, Weaning and Contraindications",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Institutional maternal-infant policies profoundly influence lactation initiation and sustained exclusivity. The **Baby-Friendly Hospital** Initiative (BFHI), launched by WHO and UNICEF, outlines the Ten Steps to Successful Breastfeeding. Key mandates include initiating breastfeeding within one hour of birth, practicing mother-infant rooming-in twenty-four hours a day, fostering demand feeding, providing no supplementary foods or water unless medically indicated, and prohibiting all free formula samples, bottles, and artificial pacifiers.",
+      "say": "The Baby Friendly Hospital Initiative enforces ten steps including nursing within one hour of birth, rooming in twenty-four hours daily, demand feeding, and banning artificial bottles and pacifiers.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/pae-neo-milk-feeding.webp",
+        "alt": "Maternal lactation support showing rooming-in, cup feeding, and expressed breast milk handling.",
+        "caption": "Maternal lactation support showing rooming-in, cup feeding, and expressed breast milk handling.",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Lactating working mothers and hospitalized neonates depend upon hygienic expression and preservation of maternal milk. Proper **expressed breast milk** storage preserves antimicrobial enzymes and cellular constituents: milk can be safely kept at room temperature (up to twenty-five degrees Celsius) for four hours, inside a standard refrigerator at four degrees Celsius for forty-eight hours, and in a deep freezer at minus twenty degrees Celsius for up to six months.",
+      "say": "Expressed breast milk remains safe for four hours at room temperature, forty-eight hours in a refrigerator at four degrees, and six months in a deep freezer. Never microwave breast milk.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Storage Location",
+          "Temperature Range",
+          "Safe Storage Duration",
+          "Practical Handling Precautions"
+        ],
+        "rows": [
+          [
+            "Room temperature",
+            "Up to 25 degrees Celsius",
+            "4 hours (Up to 6 hours if clean)",
+            "Keep container covered in cool place"
+          ],
+          [
+            "Domestic refrigerator",
+            "2 to 4 degrees Celsius",
+            "48 hours (Optimal)",
+            "Store in main body, never in door shelves"
+          ],
+          [
+            "Freezer compartment",
+            "Minus 15 degrees Celsius",
+            "2 weeks (Internal freezer)",
+            "Freeze in small single-feed aliquots"
+          ],
+          [
+            "Deep chest freezer",
+            "Minus 20 degrees Celsius",
+            "3 to 6 months",
+            "Thaw overnight in fridge; warm in water bath"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "True absolute medical reasons to withhold breast milk are exceptionally rare in clinical practice. The single absolute infant contraindication to all breastfeeding is **classic galactosaemia**, an autosomal recessive deficiency of galactose-1-phosphate uridyltransferase, where lactose ingestion precipitates fatal hepatic failure, cataracts, and Escherichia coli sepsis. Affected infants require immediate, lifelong feeding with soy-based or elemental lactose-free formula.",
+      "say": "Classic galactosaemia is the only absolute infant contraindication to breastfeeding. Because the infant cannot metabolize galactose, exposure leads to liver failure, cataracts, and death.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic Galactosaemia",
+          "points": [
+            "GALT deficiency",
+            "Complete contraindication to breast milk",
+            "Requires strict lactose-free soy/elemental formula"
+          ]
+        },
+        "right": {
+          "title": "Phenylketonuria (PKU)",
+          "points": [
+            "PAH deficiency",
+            "Partial breastfeeding permitted combined with measured phenylalanine-free medical formula"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Maternal infectious status requires discriminating between transmission risks across breast tissue. Absolute maternal contraindications in high-resource nations include maternal **HIV infection**, human T-cell lymphotropic virus type I or II, untreated active brucellosis, and active illicit substance abuse. However, in low-resource settings, WHO strongly advises mothers living with HIV to breastfeed exclusively for six months while adhering strictly to maternal antiretroviral therapy (ART), as formula feeding carries high mortality from diarrhoea and pneumonia.",
+      "say": "Maternal HIV is a contraindication in developed settings, but in low-resource areas WHO recommends exclusive breastfeeding with maternal antiretrovirals, where formula carries lethal infection risks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Maternal Infection",
+          "Resource-Rich Protocol",
+          "Resource-Limited (WHO)",
+          "Rationale and Management"
+        ],
+        "rows": [
+          [
+            "HIV infection",
+            "Avoid breastfeeding (Formula safe)",
+            "Exclusive breastfeeding with ART",
+            "ART suppresses breast milk viral transmission"
+          ],
+          [
+            "Active pulmonary TB",
+            "Separate until 2 weeks of therapy",
+            "Express milk; feed infant",
+            "TB transmits via droplets, not breast milk"
+          ],
+          [
+            "Hepatitis B virus",
+            "Breastfeed immediately",
+            "Breastfeed immediately",
+            "Safe once infant receives Hep B vaccine + HBIG"
+          ],
+          [
+            "Hepatitis C virus",
+            "Breastfeed safely",
+            "Breastfeed safely",
+            "HCV not transmitted; suspend if bleeding nipples"
+          ],
+          [
+            "Herpes simplex (HSV)",
+            "Breastfeed if no breast lesions",
+            "Breastfeed if no breast lesions",
+            "Direct contact with active breast ulcer risks fatal transmission"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Lactational breast pathology requires reassurance and maintenance of uninterrupted drainage. When acute **lactational mastitis** develops, characterized by unilateral breast pain, localized erythema, wedge-shaped induration, and fever, breastfeeding should be actively continued on both breasts, beginning on the affected side to clear ductal stasis. Ceasing breastfeeding causes worsening engorgement and accelerates abscess formation, while the milk remains safe for the infant.",
+      "say": "In lactational mastitis, breastfeeding must continue on the affected breast to relieve ductal stasis. Stopping nursing increases the risk of breast abscess, and the milk poses no danger to the baby.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lactational Mastitis Care",
+          "points": [
+            "Continue frequent breastfeeding",
+            "Warm compresses, oral flucloxacillin or cephalexin, analgesia with paracetamol"
+          ]
+        },
+        "right": {
+          "title": "Breast Abscess Complication",
+          "points": [
+            "Fluctuant tender mass develops",
+            "Requires needle aspiration or surgical drainage; continue nursing on unaffected side"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Nutritional and developmental maturation necessitates transitioning beyond an exclusive milk diet. Initiating **complementary feeding** at six completed months (180 days) is essential because breast milk alone no longer meets the growing infant's energy, protein, iron, and zinc requirements. Foods must be timely, nutritionally adequate, hygienically prepared, and given in age-appropriate quantities while maintaining on-demand breastfeeding up to two years of age or beyond.",
+      "say": "Complementary feeding begins at six completed months because breast milk alone cannot satisfy iron, zinc, and calorie needs. Continue breastfeeding alongside soft nutrient-rich foods up to two years.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Infant Age",
+          "Food Texture and Consistency",
+          "Feeding Frequency",
+          "Nutritional Highlights"
+        ],
+        "rows": [
+          [
+            "6 to 8 months",
+            "Smooth thick pur\u00e9es, well-mashed porridge",
+            "2 to 3 meals daily",
+            "Iron-fortified cereals, pulses, mashed fruit"
+          ],
+          [
+            "9 to 11 months",
+            "Finely chopped, mashed, soft finger foods",
+            "3 to 4 meals plus 1 snack",
+            "Eggs, shredded poultry, soft cooked vegetables"
+          ],
+          [
+            "12 to 24 months",
+            "Family table foods, chopped meats and solids",
+            "3 to 4 meals plus 2 snacks",
+            "Nutrient-dense balanced family diet with dairy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Traditional early feeding errors can compromise intestinal barrier integrity and growth. Premature **early weaning** before six months introduces enteric pathogens causing diarrhoeal dehydration and triggers intestinal micro-haemorrhage from foreign antigens, whereas delaying complementary feeding beyond six months leads to stunting, micronutrient deficiencies, and severe iron-deficiency anaemia. Cereals and pulses should be prepared with adequate caloric density, avoiding overly diluted watery broths.",
+      "say": "Weaning before six months introduces bacterial diarrhoea and allergies, while delaying beyond six months causes stunting and severe iron deficiency. Diets should be energy dense, not watery gruel.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Risks of Too Early Weaning (<6 Months)",
+          "points": [
+            "Diarrhoeal illness, reduced breast milk supply, foreign protein allergy, earlier return of maternal fertility"
+          ]
+        },
+        "right": {
+          "title": "Risks of Too Late Weaning (>6 Months)",
+          "points": [
+            "Growth cessation, severe iron and zinc deficiency, micronutrient depletion, oral-motor feeding aversions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When maternal milk is unavailable despite professional lactation support, regulated substitutes must be safely deployed. Specially designed **infant formula** provides standardized macronutrients, but carries substantial risks of bacterial contamination, diarrhoeal mortality, and unhygienic reconstitution in low-resource environments. Commercial formulas must never be watered down to save money, and feeding bottles should be replaced with clean open cups to prevent gastroenteritis.",
+      "say": "Infant formula requires clean water, proper dilution, and sterile handling. Over-diluting formula causes lethal hyponatraemia and starvation, while feeding cups are much safer than bottles.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hazard Category",
+          "Underlying Mechanism",
+          "Clinical Consequence",
+          "Preventive Guideline"
+        ],
+        "rows": [
+          [
+            "Contaminated water supply",
+            "Pathogenic E. coli, rotavirus in water",
+            "Severe dehydration gastroenteritis",
+            "Boil water vigorously; use open cup"
+          ],
+          [
+            "Poverty-driven over-dilution",
+            "Stretching expensive powder with water",
+            "Water intoxication, marasmus, seizures",
+            "Strictly enforce measured powder scoops"
+          ],
+          [
+            "Unsterile bottle teats",
+            "Biofilm formation in rubber teats",
+            "Recurrent diarrhoeal admissions",
+            "Cup and spoon feeding avoids bottles"
+          ],
+          [
+            "Absent maternal antibodies",
+            "Formula lacks sIgA and lactoferrin",
+            "Higher rates of pneumonia and otitis",
+            "Donor human milk when available"
+          ]
+        ]
+      }
+    }
+  ]
+}
