@@ -1,0 +1,236 @@
+{
+  "v": 1,
+  "module": "pat-skin",
+  "subject": "pathology",
+  "title": "Basal Cell Carcinoma, Palisading, Squamous Cell Carcinoma, and Actinic Keratosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The most common human malignancy is a slow-growing, locally invasive epidermal neoplasm that arises almost exclusively on chronically sun-exposed skin of the head and neck in fair-skinned individuals. It rarely metastasizes to regional lymph nodes or distant organs. The lesion is **basal cell carcinoma**. Clinically, the noduloulcerative variant presents as a pearly, translucent papule or nodule with prominent branching surface telangiectasias and rolled borders, frequently developing central ulceration to form a classic rodent ulcer.",
+      "say": "Basal cell carcinoma is the most common skin cancer, presenting as a pearly telangiectatic nodule with rolled borders on sun-exposed sites.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cutaneous-malignancies-melanoma-and-non-melanoma-fig1.webp",
+        "alt": "Cutaneous malignancies comparison",
+        "caption": "Comparison of cutaneous cancers displaying pearly basal cell carcinoma with telangiectasia, keratotic squamous cell carcinoma, and irregular melanoma."
+      }
+    },
+    {
+      "tx": "Microscopic sections of nodular basal cell carcinoma display nests, cords, and islands of uniform, dark-staining basaloid cells with hyperchromatic oval nuclei and scant cytoplasm embedded in a fibromyxoid stroma. Along the outer edge of each tumour nest, the nuclei line up parallel to one another in an orderly vertical row perpendicular to the stromal margin. That diagnostic arrangement is peripheral **palisading**. Fixation shrinkage artifacts characteristically create optical clefts separating tumour nests from the surrounding reactive fibrocollagenous stroma.",
+      "say": "Basal cell carcinoma exhibits islands of basaloid cells with distinctive peripheral nuclear palisading and stromal retraction clefts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mutations",
+            "label": "PTCH1 receptor inactivation"
+          },
+          {
+            "id": "smoothened",
+            "label": "Unrestrained Smoothened signalling"
+          },
+          {
+            "id": "proliferation",
+            "label": "Basaloid tumour cell proliferation"
+          },
+          {
+            "id": "palisade",
+            "label": "Peripheral palisading nest formation"
+          }
+        ],
+        "edges": [
+          [
+            "mutations",
+            "smoothened"
+          ],
+          [
+            "smoothened",
+            "proliferation"
+          ],
+          [
+            "proliferation",
+            "palisade"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Molecular pathogenesis of basal cell carcinoma centres on dysregulation of the Sonic Hedgehog signalling pathway. Inactivating mutations in the PTCH1 tumour suppressor gene on chromosome 9q22 disinhibit Smoothened, activating GLI transcription factors that drive basaloid proliferation. Inherited germline PTCH1 mutations cause nevoid basal cell carcinoma syndrome, also known as **Gorlin syndrome**. Patients develop dozens to hundreds of basal cell carcinomas before age twenty, accompanied by odontogenic keratocysts of the jaw, palmar and plantar pits, and ectopic calcification of the falx cerebri.",
+      "say": "Gorlin syndrome is caused by germline PTCH1 mutations in Sonic Hedgehog signalling, producing multiple basal cell carcinomas and jaw keratocysts.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Subtype",
+          "Microscopic pattern",
+          "Clinical behaviour"
+        ],
+        "rows": [
+          [
+            "Nodular",
+            "Large nests with peripheral palisading",
+            "Most common, pearly rolled borders"
+          ],
+          [
+            "Superficial",
+            "Multifocal buds from basal epidermis",
+            "Erythematous scaly plaque on trunk"
+          ],
+          [
+            "Infiltrative/Morpheic",
+            "Narrow cords embedded in dense collagen",
+            "Aggressive local infiltration, high recurrence"
+          ],
+          [
+            "Pigmented",
+            "Abundant melanophages in stroma",
+            "Clinically mimics nodular melanoma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Premalignant cutaneous lesion induced by cumulative ultraviolet B radiation damage occurs on sun-exposed sites such as the face, bald scalp, and dorsum of the hands. Lesions present as rough, sandpaper-like, erythematous or tan-brown hyperkeratotic macules and papules that produce a cutaneous horn when keratin accumulates. That precursor lesion is **actinic keratosis**. Pathogenesis involves ultraviolet signature DNA mutations consisting of cytosine to thymine transitions in the TP53 tumour suppressor gene. Up to twenty percent of untreated lesions transform into invasive squamous cell carcinoma.",
+      "say": "Actinic keratosis is an ultraviolet-induced premalignant lesion presenting as rough sandpaper-like plaques with p53 mutations.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/actinic-keratosis-fig1.webp",
+        "alt": "Actinic keratosis histopathology",
+        "caption": "Histological block cutaway displaying basal atypical keratinocyte crowding, solar elastosis in dermis, and overlying parakeratosis."
+      }
+    },
+    {
+      "tx": "Microscopic examination of actinic keratosis demonstrates nuclear atypia, pleomorphism, hyperchromasia, and loss of polarity confined to the lower one-third of the epidermis. Overlying this dysplasia, abnormal keratinization leads to retained nuclei within the thickened stratum corneum, known as **parakeratosis**. Dysplastic keratinocytes characteristically spare hair follicle infundibula and sweat duct ostia, alternating with normal orthokeratosis to create the flag sign. The underlying dermis invariably exhibits basophilic, grey-blue elastotic degeneration of sun-damaged collagen termed solar elastosis.",
+      "say": "Actinic keratosis features lower epidermal atypia, overlying parakeratosis sparing adnexal ostia, and dermal solar elastosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Actinic keratosis",
+          "points": [
+            "Dysplasia in lower 1/3 of epidermis",
+            "Spares hair follicle ostia (flag sign)",
+            "Superficial premalignant lesion",
+            "Associated with solar elastosis"
+          ]
+        },
+        "right": {
+          "title": "Squamous cell carcinoma in situ",
+          "points": [
+            "Full-thickness epidermal atypia",
+            "Involves follicular infundibula",
+            "Bowen disease terminology",
+            "Intact dermal basement membrane"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The second most common skin cancer arises from atypical epidermal keratinocytes that breach the dermoepidermal basement membrane to invade the underlying dermis. Chronic cumulative sun exposure, immunosuppression in organ transplant recipients, and chronic draining fistulas or burn scars (Marjolin ulcer) are potent predisposing factors. That invasive cancer is **squamous cell carcinoma skin**. Clinically, lesions present as firm, indurated, scaling plaques or ulcerated nodules. In contrast to basal cell carcinoma, squamous cell carcinoma carries a five percent risk of regional lymph node metastasis.",
+      "say": "Cutaneous squamous cell carcinoma presents as an indurated, ulcerated plaque that breaches the basement membrane and risks nodal metastasis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Basal cell carcinoma",
+          "Squamous cell carcinoma"
+        ],
+        "rows": [
+          [
+            "Cell of origin",
+            "Basaloid follicular/epidermal stem cell",
+            "Differentiated squamous keratinocyte"
+          ],
+          [
+            "Metastatic potential",
+            "Extremely rare (<0.1%)",
+            "Significant (3% to 5% overall)"
+          ],
+          [
+            "Characteristic histology",
+            "Peripheral palisading nests",
+            "Keratin pearls and intercellular bridges"
+          ],
+          [
+            "High-risk sites",
+            "Cosmetic central face risk",
+            "Ear, lip, and Marjolin scar ulcers"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Microscopic sections of well-differentiated squamous cell carcinoma display irregular sheets and infiltrating cords of polygonal squamous cells with abundant eosinophilic cytoplasm, pleomorphic vesicular nuclei, and prominent nucleoli. Cells are joined by conspicuous intercellular bridges representing desmosomes. Within the centres of invading tumour nests, concentric laminated whorls of bright pink, compact, anucleate keratin form diagnostic **keratin pearls**. In poorly differentiated tumours, keratin pearls and intercellular bridges are absent, requiring immunohistochemical confirmation with p40, p63, or high-molecular-weight cytokeratins.",
+      "say": "Keratin pearls are concentric laminated whorls of keratin diagnostic of well-differentiated squamous cell carcinoma.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "uv",
+            "label": "Ultraviolet DNA damage and p53 loss"
+          },
+          {
+            "id": "dysplasia",
+            "label": "Full-thickness dysplasia in situ"
+          },
+          {
+            "id": "invasion",
+            "label": "Basement membrane breach"
+          },
+          {
+            "id": "pearls",
+            "label": "Dermal nests with keratin pearls"
+          }
+        ],
+        "edges": [
+          [
+            "uv",
+            "dysplasia"
+          ],
+          [
+            "dysplasia",
+            "invasion"
+          ],
+          [
+            "invasion",
+            "pearls"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Rapidly growing, symmetrical, cup-shaped crateriform cutaneous neoplasm arises on sun-exposed limbs of elderly individuals, characterized by a central crater filled with an abundant keratinaceous plug. The lesion is a **keratoacanthoma**. Histologically, large pale glassy keratinocytes mimic well-differentiated squamous cell carcinoma, but the overall architecture exhibits striking symmetry with buttressing epithelial lips overhanging the central crater. After several weeks of rapid enlargement, many lesions undergo spontaneous regression, leaving a depressed scar.",
+      "say": "Keratoacanthoma is a symmetrical, cup-shaped squamous lesion with a central keratin plug that often regresses spontaneously.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Keratoacanthoma",
+          "Invasive squamous carcinoma"
+        ],
+        "rows": [
+          [
+            "Growth kinetics",
+            "Rapid growth over 4 to 6 weeks",
+            "Gradual progressive enlargement"
+          ],
+          [
+            "Gross architecture",
+            "Symmetric volcano crater with plug",
+            "Asymmetric ulcerated indurated nodule"
+          ],
+          [
+            "Histological border",
+            "Smooth rounded pushing lower border",
+            "Jagged infiltrative stromal invasion"
+          ],
+          [
+            "Clinical course",
+            "Spontaneous involution in many cases",
+            "Progressive local and nodal destruction"
+          ]
+        ]
+      }
+    }
+  ]
+}
