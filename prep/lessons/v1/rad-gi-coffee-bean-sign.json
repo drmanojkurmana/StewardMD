@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-gi-coffee-bean-sign",
+ "subject": "radiology",
+ "module": "rad-gi",
+ "title": "Coffee Bean Sign, Rigler Sign and Pneumoperitoneum",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Coffee bean from sigmoid volvulus",
+   "tx": "**Coffee bean sign** is the massively dilated sigmoid loop rising out of the pelvis on a supine abdominal film, its apposed medial walls forming the bean cleft and its apex reaching the upper abdomen. The pictured volvulus film shows that bent loop with no rectal gas beyond the twist. Two dilated loops converging on one pelvic twist point separate sigmoid volvulus from a simple ileus pattern.",
+   "say": "Coffee bean sign is the massively dilated sigmoid loop rising out of the pelvis, its apposed medial walls forming the bean cleft. The pictured film shows that bent loop with no rectal gas beyond the twist. Two loops converging on one pelvic twist point separate sigmoid volvulus from a simple ileus.",
+   "vis": {"kind": "image", "src": "clinix/media/practicals/surg-xray-sigmoid-volvulus.webp", "alt": "Abdominal radiograph showing coffee bean sign of sigmoid volvulus with a massively dilated loop.", "caption": "Coffee bean sign of sigmoid volvulus on abdominal radiograph. Credit: StewardMD library."}
+  },
+  {
+   "title": "Caecal volvulus goes the other way",
+   "tx": "**Caecal volvulus** twists the caecum up into the left upper quadrant or epigastrium as a comma or kidney shaped dilated viscus, emptying the right iliac fossa where the caecum belongs. The pictured caecal film contrasts with the sigmoid bean rising from the pelvis. Small bowel dilatation joins the caecal pattern because the twist obstructs at the ileocaecal junction, while sigmoid volvulus mainly distends colon alone.",
+   "say": "Caecal volvulus twists the caecum into the left upper quadrant as a comma shaped dilated viscus, emptying the right iliac fossa. The pictured film contrasts with the sigmoid bean rising from the pelvis. Small bowel dilatation joins the caecal pattern because the twist obstructs at the ileocaecal junction.",
+   "vis": {"kind": "image", "src": "clinix/media/practicals/surg-xray-caecal-volvulus.webp", "alt": "Abdominal radiograph showing caecal volvulus with dilated caecum displaced to the upper abdomen.", "caption": "Caecal volvulus with displaced dilated caecum. Credit: StewardMD library."}
+  },
+  {
+   "title": "Rigler sign outlines both wall sides",
+   "tx": "**Rigler sign**, also called the double wall sign, appears when free intraperitoneal gas outlines the outside of bowel wall while intraluminal gas outlines the inside, making the wall itself visible as a line. A normal film never shows the serosal surface. Rigler sign therefore proves pneumoperitoneum even on a supine film, where free gas cannot collect under the diaphragm for the classic erect view.",
+   "say": "Rigler sign appears when free intraperitoneal gas outlines the outside of bowel wall while luminal gas outlines the inside, making the wall itself visible. A normal film never shows the serosal surface. It therefore proves pneumoperitoneum even on a supine film, where free gas cannot collect under the diaphragm.",
+   "vis": {"kind": "compare", "left": {"title": "Normal supine film", "points": ["Only inner wall outlined", "Serosa invisible", "Gas inside lumen only", "Wall seen by contrast of contents"]}, "right": {"title": "Rigler positive film", "points": ["Both wall sides outlined", "Wall drawn as a line", "Free gas outside bowel", "Perforation until proven otherwise"]}}
+  },
+  {
+   "title": "Football and falciform signs",
+   "tx": "**Football sign** fills the infant abdomen with one large oval lucency of free gas shaping an American football, and the falciform ligament sign draws that ligament as a vertical line inside the gas. In adults the cupola sign collects gas under the central diaphragm tendon on supine views. Each supine sign rescues the perforation diagnosis when the patient is too sick to sit for an erect chest film.",
+   "say": "Football sign fills the infant abdomen with one large oval lucency of free gas, and the falciform sign draws that ligament as a vertical line inside it. In adults the cupola sign collects gas under the central diaphragm on supine views. Each rescues the diagnosis when the patient is too sick to sit up.",
+   "vis": {"kind": "table", "cols": ["Supine sign", "Appearance", "Setting"], "rows": [["Rigler", "Bowel wall both sides", "Adults and children"], ["Football", "Oval abdominal lucency", "Infants"], ["Falciform ligament", "Vertical line in gas", "Large pneumoperitoneum"], ["Cupola", "Gas under central diaphragm", "Supine adults"]]}
+  },
+  {
+   "title": "Erect film still wins when possible",
+   "tx": "**Erect chest film** remains the most sensitive plain view for free gas, showing a black crescent under the right hemidiaphragm after the patient sits upright for at least ten minutes so gas can rise. As little as a few millilitres can show. A left lateral decubitus film substitutes when sitting is impossible, collecting gas over the liver edge where it silhouettes cleanly against the homogeneous liver density.",
+   "say": "Erect chest film remains the most sensitive plain view for free gas, showing a black crescent under the right hemidiaphragm after sitting upright for ten minutes. A left lateral decubitus film substitutes when sitting is impossible, collecting gas over the liver edge where it silhouettes against homogeneous liver density.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Sit upright ten minutes"}, {"id": "b", "label": "Free gas rises"}, {"id": "c", "label": "Crescent under diaphragm"}, {"id": "d", "label": "Perforation pathway opens"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Target sign in intussusception",
+   "tx": "**Target sign** shows concentric rings on cross section when one bowel segment telescopes into the next, bowel wall, mesenteric fat and lumen stacking as alternating rings. On plain film a soft tissue mass with a crescent of gas around it makes the same point less reliably. Ultrasound shows the target or pseudokidney in children, guiding air enema reduction, while adults need CT and surgery because a tumour usually leads the telescope.",
+   "say": "Target sign shows concentric rings when one bowel segment telescopes into the next, wall, fat and lumen stacking as alternating rings. Ultrasound shows the target in children, guiding air enema reduction, while adults need CT and surgery because a tumour usually leads the telescope.",
+   "vis": {"kind": "compare", "left": {"title": "Childhood intussusception", "points": ["Ultrasound target sign", "Air enema reduction", "Ileocolic typical", "No lead point usually"]}, "right": {"title": "Adult intussusception", "points": ["CT target with fat core", "Tumour lead point common", "Surgery usual", "Colocolic more frequent"]}}
+  },
+  {
+   "title": "Coffee bean sorting at the desk",
+   "tx": "**Volvulus sorting** starts by finding where the dilated loop is born. Sigmoid beans rise from the pelvis with their apex often under the left diaphragm and two loops merging below, while caecal volvulus empties the right iliac fossa and parks a single loop high and left. Pseudo obstruction dilates everything without a twist point and keeps some rectal gas, buying time that true volvulus does not allow.",
+   "say": "Volvulus sorting starts by finding where the dilated loop is born. Sigmoid beans rise from the pelvis with two loops merging below, while caecal volvulus empties the right iliac fossa and parks a single loop high and left. Pseudo obstruction dilates everything without a twist point and keeps some rectal gas.",
+   "vis": {"kind": "table", "cols": ["Feature", "Sigmoid volvulus", "Caecal volvulus"], "rows": [["Loop origin", "Pelvis", "Right iliac fossa emptied"], ["Loop position", "Rises centrally", "Left upper quadrant"], ["Small bowel", "Usually normal", "Often dilated"], ["Definitive care", "Endoscopic untwist then surgery", "Surgery usual"]]}
+  },
+  {
+   "title": "Free gas mimics that trap readers",
+   "tx": "**Chilaiditi sign** parks colon between liver and diaphragm, faking free gas under the right dome until haustral folds inside the lucency expose bowel. Skin folds, subdiaphragmatic fat and basal lung markings fake the crescent in the other direction. Checking for haustra, changing patient position and window width on CT settle the mimic, because true free gas moves to the highest point and carries no folds.",
+   "say": "Chilaiditi sign parks colon between liver and diaphragm, faking free gas until haustral folds inside the lucency expose bowel. Skin folds and fat fake the crescent in the other direction. Checking for haustra and changing position settle the mimic, because true free gas moves and carries no folds.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Lucency under diaphragm"}, {"id": "b", "label": "Haustra inside means colon"}, {"id": "c", "label": "No haustra: reposition"}, {"id": "d", "label": "Gas moves: true perforation"}], "edges": [["a", "b"], ["a", "c"], ["c", "d"]]}
+  }
+ ]
+}
