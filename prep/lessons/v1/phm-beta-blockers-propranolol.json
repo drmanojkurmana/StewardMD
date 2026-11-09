@@ -1,0 +1,254 @@
+{
+  "v": 1,
+  "module": "phm-beta-blockers",
+  "subject": "pharmacology",
+  "title": "Non-Selective Beta Blockers, Vasodilating Agents, and Clinical Therapeutics",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The historic prototypical non-selective beta-adrenergic receptor antagonist is **propranolol**. Possessing equal affinity for beta-1 and beta-2 receptors, propranolol lacks intrinsic sympathomimetic activity and exerts significant quinidine-like membrane-stabilizing local anesthetic action. Because of its high lipid solubility, it crosses the blood-brain barrier extensively, relieving essential tremors, migraine headaches, performance anxiety, and somatic palpitations while causing sleep disturbances and vivid dreams.",
+      "say": "Propranolol is a lipophilic non-selective beta blocker that enters the brain to relieve tremors and anxiety.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical indication",
+          "Target receptor / mechanism",
+          "Clinical therapeutic objective"
+        ],
+        "rows": [
+          [
+            "Migraine prophylaxis",
+            "Cerebral vascular and serotonergic modulation",
+            "Reduces monthly attack frequency and severity"
+          ],
+          [
+            "Essential tremor",
+            "Peripheral skeletal muscle beta-2 antagonism",
+            "Suppresses postural and kinetic hand tremors"
+          ],
+          [
+            "Performance stage fright",
+            "Central and peripheral sympathetic blunting",
+            "Prevents tremor, sweating, and sinus tachycardia"
+          ],
+          [
+            "Portal hypertension",
+            "Splanchnic vasoconstriction via beta-2 blockade",
+            "Reduces portal venous pressure and variceal bleed risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A hydrophilic cardioselective beta-1 adrenergic antagonist with negligible central nervous system penetration is **atenolol**. Because atenolol is water-soluble, it is eliminated almost entirely unchanged by the kidneys without undergoing hepatic first-pass metabolism. Lacking lipid permeability across the blood-brain barrier, atenolol produces a low incidence of central fatigue, depression, or nightmares, making it convenient for hypertension, although it lacks mortality reduction in older hypertensives.",
+      "say": "Atenolol is a water-soluble cardioselective beta blocker eliminated by the kidneys without brain entry.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Atenolol (Hydrophilic)",
+          "points": [
+            "Low lipid solubility; cannot cross blood-brain barrier",
+            "Negligible CNS adverse effects (no nightmares)",
+            "Eliminated unchanged via renal excretion",
+            "Dosing adjustment mandatory in renal impairment"
+          ]
+        },
+        "right": {
+          "title": "Propranolol (Lipophilic)",
+          "points": [
+            "High lipid solubility; crosses blood-brain barrier readily",
+            "High incidence of central fatigue, vivid dreams",
+            "Extensive hepatic first-pass CYP2D6 metabolism",
+            "Safe in severe renal failure without dose change"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A moderately lipophilic beta-1 selective antagonist extensively utilized in angina pectoris and heart failure is **metoprolol**. Formulated as metoprolol tartrate for immediate release and metoprolol succinate for extended release, it reduces myocardial oxygen demand by lowering heart rate, blood pressure, and cardiac contractility. In large clinical trials including MERIT-HF, extended-release metoprolol succinate demonstrated significant reductions in all-cause mortality and sudden cardiac death in chronic heart failure.",
+      "say": "Extended-release metoprolol succinate reduces mortality and sudden death in chronic heart failure with reduced ejection fraction.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/heart-failure-management-fig2.webp",
+        "alt": "Heart failure pharmacotherapy mechanism targets",
+        "caption": "Guideline-directed medical therapy in heart failure highlighting beta-blocker neurohormonal antagonism."
+      }
+    },
+    {
+      "tx": "The most beta-1 selective adrenergic antagonist available for once-daily clinical management of heart failure is **bisoprolol**. Demonstrating a high ratio of beta-1 to beta-2 selectivity exceeding twenty-fold, bisoprolol minimizes off-target bronchospasm in patients with mild reactive airway disease. In the CIBIS-II trial, bisoprolol significantly decreased all-cause mortality, cardiovascular hospitalizations, and sudden death in patients with stable heart failure with reduced ejection fraction.",
+      "say": "Bisoprolol is a highly selective beta-1 blocker with balanced elimination that reduces mortality in heart failure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Heart failure beta blocker",
+          "Beta-1 selectivity ratio",
+          "Elimination pathway",
+          "Major landmark clinical trial"
+        ],
+        "rows": [
+          [
+            "Metoprolol succinate",
+            "75-fold selective",
+            "Hepatic CYP2D6 metabolism",
+            "MERIT-HF trial"
+          ],
+          [
+            "Bisoprolol",
+            "120-fold selective",
+            "Balanced: 50% hepatic, 50% renal",
+            "CIBIS-II trial"
+          ],
+          [
+            "Carvedilol",
+            "Non-selective (plus alpha-1)",
+            "Extensive hepatic glucuronidation",
+            "COPERNICUS and US Carvedilol trials"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The third-generation beta blocker possessing the highest beta-1 selectivity combined with endothelial nitric oxide-mediated vasodilation is **nebivolol**. Consisting of a racemic mixture of d-nebivolol and l-nebivolol, the d-isomer provides potent beta-1 receptor blockade, while the l-isomer stimulates endothelial beta-3 adrenergic receptors to activate endothelial nitric oxide synthase (eNOS). This liberates nitric oxide, reducing systemic vascular resistance without producing erectile dysfunction.",
+      "say": "Nebivolol combines selective beta-1 blockade with nitric oxide-mediated vasodilation, avoiding erectile dysfunction.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dneb",
+            "label": "d-Nebivolol: High-affinity beta-1 selective blockade"
+          },
+          {
+            "id": "lneb",
+            "label": "l-Nebivolol: Stimulates endothelial beta-3 receptors"
+          },
+          {
+            "id": "enos",
+            "label": "Activation of endothelial nitric oxide synthase (eNOS)"
+          },
+          {
+            "id": "no",
+            "label": "Nitric oxide release: Systemic vasodilation and reduced afterload"
+          }
+        ],
+        "edges": [
+          [
+            "dneb",
+            "enos"
+          ],
+          [
+            "lneb",
+            "enos"
+          ],
+          [
+            "enos",
+            "no"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A non-selective third-generation vasodilating beta blocker with antioxidant properties and alpha-1 antagonism is **carvedilol**. In addition to competitive beta-1 and beta-2 receptor blockade, carvedilol blocks vascular alpha-1 receptors in a 10:1 ratio, decreasing systemic vascular resistance and cardiac afterload. Furthermore, carvedilol scavenges reactive oxygen species, suppresses vascular smooth muscle proliferation, and demonstrated robust mortality reduction in the COPERNICUS trial.",
+      "say": "Carvedilol provides combined beta and alpha-1 blockade with antioxidant protection in chronic heart failure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Carvedilol (Vasodilating beta blocker)",
+          "points": [
+            "Combined beta-1, beta-2, and alpha-1 antagonism",
+            "Lowers peripheral vascular resistance (afterload)",
+            "Potent chemical antioxidant scavenging actions",
+            "Proven mortality benefit in severe heart failure"
+          ]
+        },
+        "right": {
+          "title": "Metoprolol (Cardioselective blocker)",
+          "points": [
+            "Pure selective beta-1 receptor antagonist",
+            "No alpha-1 adrenergic blocking activity",
+            "Minimal direct antioxidant or scavenging effects",
+            "Succinate formulation proven in heart failure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Prevention of catastrophic gastrointestinal hemorrhage in cirrhotic portal hypertension relies on non-selective agents via **splanchnic vasoconstriction**. Non-selective beta blockers like propranolol, nadolol, and carvedilol block cardiac beta-1 receptors to diminish cardiac output, while concurrently blocking mesenteric vascular beta-2 receptors. This leaves unopposed sympathetic alpha-1 vasoconstriction across splanchnic arterioles, reducing mesenteric arterial inflow and decompressing hypertensive esophageal and gastric varices.",
+      "say": "Non-selective beta blockers decompress esophageal varices by inducing unopposed splanchnic vasoconstriction.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "nsbb",
+            "label": "Propranolol, nadolol, or carvedilol administration"
+          },
+          {
+            "id": "b1b",
+            "label": "Beta-1 blockade: Decreased cardiac output and pulse"
+          },
+          {
+            "id": "b2b",
+            "label": "Beta-2 blockade: Unopposed alpha-1 splanchnic vasoconstriction"
+          },
+          {
+            "id": "port",
+            "label": "Decreased portal vein inflow: Variceal hemorrhage risk aborted"
+          }
+        ],
+        "edges": [
+          [
+            "nsbb",
+            "b1b"
+          ],
+          [
+            "nsbb",
+            "b2b"
+          ],
+          [
+            "b1b",
+            "port"
+          ],
+          [
+            "b2b",
+            "port"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The hyperadrenergic symptoms and peripheral thyroxine conversion in thyrotoxicosis are controlled promptly by **propranolol in thyroid storm**. In acute hyperthyroid crises, high sympathetic sensitivity triggers dangerous sinus tachycardia, atrial fibrillation, hyperthermia, and motor tremors. Propranolol rapidly alleviates these hyperadrenergic symptoms while uniquely inhibiting peripheral monodeiodinase type 1, blocking conversion of inactive thyroxine (T4) into biologically active triiodothyronine (T3).",
+      "say": "Propranolol controls hyperadrenergic symptoms in thyrotoxicosis and blocks peripheral T4 to T3 conversion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Therapeutic mechanism",
+          "Pharmacological target",
+          "Clinical benefit in thyrotoxicosis"
+        ],
+        "rows": [
+          [
+            "Beta-1 adrenergic blockade",
+            "Cardiac sinoatrial node and myocardium",
+            "Controls tachycardia, palpitation, and arrhythmia"
+          ],
+          [
+            "Beta-2 adrenergic blockade",
+            "Peripheral skeletal muscle spindles",
+            "Suppresses fine distal motor hand tremors"
+          ],
+          [
+            "Type 1 deiodinase inhibition",
+            "Hepatic and peripheral conversion enzymes",
+            "Reduces circulating active triiodothyronine (T3) levels"
+          ],
+          [
+            "Central nervous sedation",
+            "Brainstem sympathetic nuclei",
+            "Relieves hyperthyroid anxiety, restlessness, and agitation"
+          ]
+        ]
+      }
+    }
+  ]
+}

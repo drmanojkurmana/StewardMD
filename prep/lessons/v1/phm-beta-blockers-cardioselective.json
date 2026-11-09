@@ -1,0 +1,284 @@
+{
+  "v": 1,
+  "module": "phm-beta-blockers",
+  "subject": "pharmacology",
+  "title": "Cardioselective Beta-1 Antagonism, Membrane Stabilization, and Withdrawal Hazards",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Preferential competitive antagonism directed against cardiac beta-1 receptors over vascular and bronchial beta-2 receptors is termed **cardioselective**. Cardioselective beta blockers, including metoprolol, atenolol, bisoprolol, and nebivolol, reduce heart rate, myocardial contractility, and cardiac output without provoking severe bronchospasm or peripheral vasoconstriction. However, cardioselectivity is dose-dependent and relative; high supratherapeutic doses lose subtype selectivity and block beta-2 receptors.",
+      "say": "Cardioselective beta blockers target cardiac beta-1 receptors, preserving bronchial and vascular beta-2 functions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Cardioselective agents (Beta-1 specific)",
+          "Non-selective agents (Beta-1 and Beta-2)"
+        ],
+        "rows": [
+          [
+            "Representative drugs",
+            "Metoprolol, atenolol, bisoprolol, nebivolol",
+            "Propranolol, nadolol, timolol, sotalol"
+          ],
+          [
+            "Airway safety",
+            "Lower risk of provoking bronchospasm in mild COPD",
+            "Strictly contraindicated in asthma and COPD"
+          ],
+          [
+            "Peripheral vascular disease",
+            "Less peripheral vasoconstriction and cold extremities",
+            "Aggravates intermittent claudication and Raynaud"
+          ],
+          [
+            "Glycemic control",
+            "Fewer disturbances in hepatic glycogen recovery",
+            "Blunts hypoglycemic counter-regulatory mechanisms"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The direct quinidine-like inhibition of voltage-gated cardiac sodium channels exhibited by specific beta-blockers is **membrane stabilising activity**. Prototypically demonstrated by propranolol, acebutolol, and carvedilol, high concentrations decrease the rate of cardiac action potential upstroke (Phase 0). While conferring local anesthetic properties, membrane-stabilizing activity contributes minimally to therapeutic antiarrhythmic actions at standard clinical doses and exacerbates myocardial depression during massive drug overdoses.",
+      "say": "Membrane-stabilizing activity reflects local sodium channel blockade that exacerbates cardiac toxicity in overdose.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Beta blockers with MSA",
+          "points": [
+            "Propranolol, acebutolol, carvedilol, labetalol",
+            "Inhibit cardiac voltage-gated sodium channels",
+            "Exert local anesthetic corneal numbing",
+            "Produce QRS widening and seizures in overdose"
+          ]
+        },
+        "right": {
+          "title": "Beta blockers without MSA",
+          "points": [
+            "Atenolol, bisoprolol, nebivolol, timolol",
+            "Zero direct sodium channel blockade",
+            "Safe for ophthalmic glaucoma eyedrop formulations",
+            "Overdose presents without cardiac QRS prolongation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In diabetic patients treated with insulin or sulfonylureas, beta-adrenergic antagonists carry dangerous risks of **masked hypoglycaemia**. When plasma glucose plunges, compensatory sympathetic epinephrine release triggers warning autonomic symptoms including tachycardia, tremors, and palpitations; beta blockers extinguish these vital warning signs. Only diaphoresis, which is mediated by sympathetic cholinergic muscarinic receptors on eccrine sweat glands, remains intact as a reliable clinical clue.",
+      "say": "Beta blockers mask warning tachycardia and tremors in hypoglycemia, leaving sweating as the only intact clue.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hypoglycemia warning symptom",
+          "Mediating sympathetic pathway",
+          "Effect of beta-blocker therapy"
+        ],
+        "rows": [
+          [
+            "Sinus tachycardia and palpitations",
+            "Adrenergic beta-1 receptor stimulation",
+            "Completely blunted and masked"
+          ],
+          [
+            "Coarse muscle tremors",
+            "Adrenergic beta-2 receptor stimulation",
+            "Completely blunted and masked"
+          ],
+          [
+            "Diaphoresis and profuse sweating",
+            "Cholinergic muscarinic eccrine stimulation",
+            "Intact (Key warning sign in beta-blocked patients)"
+          ],
+          [
+            "Hepatic glucose mobilization",
+            "Adrenergic beta-2 and alpha-1 glycogenolysis",
+            "Delayed glucose recovery, prolonging coma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Administration of non-selective beta-adrenergic antagonists in patients with underlying bronchial asthma or reactive airway disease triggers fatal **bronchospasm**. Bronchial smooth muscle tone is regulated by circulating epinephrine acting on Gs protein-coupled beta-2 receptors to maintain bronchodilation. Blocking beta-2 receptors removes this physiological relaxing influence, allowing unopposed vagal parasympathetic cholinergic bronchoconstriction, precipitate airway resistance surges, and asphyxiating status asthmaticus.",
+      "say": "Blocking airway beta-2 receptors unleashes unopposed parasympathetic bronchoconstriction in asthmatic patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bb",
+            "label": "Non-selective beta blocker administration (Propranolol or Timolol eyedrops)"
+          },
+          {
+            "id": "b2b",
+            "label": "Blockade of Gs-coupled airway smooth muscle beta-2 receptors"
+          },
+          {
+            "id": "unopp",
+            "label": "Loss of sympathetic bronchodilation tone unmasks vagal tone"
+          },
+          {
+            "id": "spasm",
+            "label": "Severe bronchospasm, wheezing, and acute ventilatory failure"
+          }
+        ],
+        "edges": [
+          [
+            "bb",
+            "b2b"
+          ],
+          [
+            "b2b",
+            "unopp"
+          ],
+          [
+            "unopp",
+            "spasm"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Abrupt discontinuation of long-term beta-blocker therapy precipitates a dangerous rebound hyperadrenergic state termed **beta blocker withdrawal**. Over months of continuous beta-blocker exposure, chronic receptor antagonism induces significant compensatory up-regulation and hypersensitization of cell surface beta-1 and beta-2 receptors. When the blocking drug is suddenly omitted, normal ambient catecholamines encounter an overabundant population of hypersensitive receptors, precipitating unstable angina, malignant ventricular arrhythmias, or fatal myocardial infarction.",
+      "say": "Abrupt beta-blocker cessation exposes up-regulated hypersensitive receptors, triggering rebound angina and arrhythmias.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "chron",
+            "label": "Long-term beta blocker therapy induces receptor up-regulation"
+          },
+          {
+            "id": "abrupt",
+            "label": "Sudden unmonitored cessation of oral beta blocker"
+          },
+          {
+            "id": "hyper",
+            "label": "Endogenous catecholamines bind hypersensitive up-regulated receptors"
+          },
+          {
+            "id": "storm",
+            "label": "Rebound tachycardia, unstable angina, and acute myocardial infarction"
+          }
+        ],
+        "edges": [
+          [
+            "chron",
+            "abrupt"
+          ],
+          [
+            "abrupt",
+            "hyper"
+          ],
+          [
+            "hyper",
+            "storm"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cardiovascular protective benefits following acute myocardial infarction are achieved through **secondary post-infarction prophylaxis**. Extensive randomized clinical trials establish that initiating long-term beta-blocker therapy without intrinsic sympathomimetic activity (such as metoprolol, carvedilol, or propranolol) reduces myocardial oxygen consumption, suppresses malignant ventricular tachyarrhythmias, prevents adverse ventricular remodeling, and decreases post-infarction mortality by twenty-five percent.",
+      "say": "Beta blockers without intrinsic sympathomimetic activity reduce post-myocardial infarction mortality by 25 percent.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pathophysiological mechanism",
+          "Receptor action",
+          "Post-infarction clinical benefit"
+        ],
+        "rows": [
+          [
+            "Myocardial oxygen conservation",
+            "Beta-1 blockade slows heart rate and contractility",
+            "Reduces ischemic infarct size and recurrent ischemia"
+          ],
+          [
+            "Antiarrhythmic threshold elevation",
+            "Beta-1 blockade dampens sympathetic excitability",
+            "Prevents primary ventricular fibrillation and sudden death"
+          ],
+          [
+            "Ventricular remodeling prevention",
+            "Suppression of neurohormonal renin-angiotensin activation",
+            "Reduces progressive left ventricular dilatation and failure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In patients presenting with acute myocardial infarction, rigid safety checklists dictate absolute **contraindications to beta blockers**. Beta blockers must not be initiated if signs of cardiogenic shock or overt acute decompensated heart failure with wet pulmonary rales are present, if systolic blood pressure is below 100 mm Hg, if heart rate is below fifty beats per minute, or if electrocardiography reveals second-degree or third-degree heart block.",
+      "say": "Beta blockers are strictly contraindicated in acute cardiogenic shock, severe bradycardia, or advanced heart block.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical condition",
+          "Contraindication status",
+          "Mechanism of adverse hazard"
+        ],
+        "rows": [
+          [
+            "Cardiogenic shock or acute pulmonary edema",
+            "Absolute contraindication",
+            "Depresses cardiac inotropy, precipitating circulatory collapse"
+          ],
+          [
+            "Second or third-degree AV block",
+            "Absolute contraindication",
+            "Slows AV nodal conduction, causing complete asystole"
+          ],
+          [
+            "Severe sinus bradycardia (< 50 bpm)",
+            "Absolute contraindication",
+            "Further suppresses sinoatrial automaticity"
+          ],
+          [
+            "Severe active asthma or bronchospasm",
+            "Absolute contraindication",
+            "Triggers life-threatening refractory bronchoconstriction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When terminating long-term beta-blocker regimens, clinicians implement structured protocols for **gradual dose tapering**. Doses are reduced step-wise by twenty-five to fifty percent every three to seven days over a two-week period. Concurrently, patients are advised to restrict vigorous physical exertion during tapering and immediately report recurrent angina, palpitations, or hypertension to allow resumption of therapy if withdrawal symptoms appear.",
+      "say": "Beta-blocker therapy must be tapered step-wise over two weeks to avoid dangerous rebound ischemia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dec",
+            "label": "Decision to discontinue chronic beta blocker therapy"
+          },
+          {
+            "id": "step1",
+            "label": "Reduce baseline dose by 50% for 7 to 10 days"
+          },
+          {
+            "id": "step2",
+            "label": "Reduce remaining dose to 25% for 4 to 7 days"
+          },
+          {
+            "id": "stop",
+            "label": "Safely discontinue drug while monitoring resting heart rate"
+          }
+        ],
+        "edges": [
+          [
+            "dec",
+            "step1"
+          ],
+          [
+            "step1",
+            "step2"
+          ],
+          [
+            "step2",
+            "stop"
+          ]
+        ]
+      }
+    }
+  ]
+}
