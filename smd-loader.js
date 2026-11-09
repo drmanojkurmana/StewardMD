@@ -194,7 +194,7 @@
     return (active = c);
   }
   function hide(c) {
-    clearTimeout(c.t);
+    clearTimeout(c.t); clearInterval(c.poll);
     if (active === c) active = null;
     c.el.classList.add("out");
     setTimeout(function () { if (c.el.parentNode) c.el.parentNode.removeChild(c.el); }, 220);
@@ -205,11 +205,17 @@
     var left = c.until - Date.now();
     if (left <= 0) hide(c); else c.t = setTimeout(function () { settle(c); }, left);
   }
-  /* Keep the cover up for at least ms. onBack runs if the person taps back, to close the module opened behind it. */
-  function hold(ms, onBack) {
+  /* Keep the cover up for at least ms. onBack runs if the person taps back, to close the module opened behind it.
+     isOpen lets the cover leave at once if that module opens and then closes behind it (a back swipe). */
+  function hold(ms, onBack, isOpen) {
     var c = cover();
     c.until = Math.max(c.until, Date.now() + ms);
     if (onBack) c.onBack = onBack;
+    if (isOpen && !c.poll) {
+      var seen = false, check = function () { if (active !== c) return; if (isOpen()) seen = true; else if (seen) hide(c); };
+      setTimeout(check, 0);
+      c.poll = setInterval(check, 150);
+    }
     settle(c);
   }
   /* Keep the cover up while p is pending, plus a moment for the module's first paint. The result passes straight through,

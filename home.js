@@ -2298,7 +2298,7 @@
     try {
       var m = window[name];
       if (!window.SMD_LOADER || !m || !m.open || (m.isOpen && m.isOpen())) return;
-      SMD_LOADER.hold(2400, function () { var t = window[name]; if (t && t.close) t.close(); });
+      SMD_LOADER.hold(2400, function () { var t = window[name]; if (t && t.close) t.close(); }, function () { var t = window[name]; return !!(t && t.isOpen && t.isOpen()); });
     } catch (e) {}
   }
   function homeToolByAct(a) {
