@@ -52,11 +52,13 @@
     return loading;
   }
   function fail() { try { if (G.toast) G.toast("Tokós could not load. Check your connection and try again."); } catch (e) {} }
+  // Full-screen loader with a medical fact while the files download (smd-loader.js).
+  function shown(p) { return G.SMD_LOADER ? G.SMD_LOADER.during(p) : p; }
   function real() { return G.TOKOS && G.TOKOS !== stub ? G.TOKOS : null; }
 
   var stub = {
     // Loaded but no host (a script failed to run): the same retry message as a failed download.
-    open: function () { if (!enabled()) return false; load().then(function () { var t = real(); if (t) t.open(); else fail(); }, fail); return true; },
+    open: function () { if (!enabled()) return false; shown(load()).then(function () { var t = real(); if (t) t.open(); else fail(); }, fail); return true; },
     // Review Desk "Read it": false when switched off, as the real openCase answers.
     openCase: function (id) { if (!enabled()) return false; return load().then(function () { var t = real(); if (!t) fail(); return t ? t.openCase(id) : false; }, function () { fail(); return false; }); },
     isOpen: function () { return false; },

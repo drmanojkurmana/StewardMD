@@ -84,10 +84,12 @@
     return loading;
   }
   function fail() { try { if (G.toast) G.toast("PrepNucleus could not load. Check your connection and try again."); } catch (e) {} }
+  // Full-screen loader with a medical fact while the files download (smd-loader.js).
+  function shown(p) { return G.SMD_LOADER ? G.SMD_LOADER.during(p) : p; }
   function real() { return G.PREP && G.PREP !== stub ? G.PREP : null; }
 
   var stub = {
-    open: function (opts) { if (!enabled()) return false; load().then(function () { var p = real(); if (p) p.open(opts); else fail(); }, fail); return true; },
+    open: function (opts) { if (!enabled()) return false; shown(load()).then(function () { var p = real(); if (p) p.open(opts); else fail(); }, fail); return true; },
     isOpen: function () { return false; },
     back: function () { return false; },
     close: function () {}

@@ -49,10 +49,12 @@
     return loading;
   }
   function fail() { try { if (G.toast) G.toast("Kardia could not load. Check your connection and try again."); } catch (e) {} }
+  // Full-screen loader with a medical fact while the files download (smd-loader.js).
+  function shown(p) { return G.SMD_LOADER ? G.SMD_LOADER.during(p) : p; }
   function real() { return G.KARDIA && G.KARDIA !== stub ? G.KARDIA : null; }
 
   var stub = {
-    open: function () { if (!enabled()) return false; var args = arguments; load().then(function () { var t = real(); if (t) t.open.apply(t, args); else fail(); }, fail); return true; },
+    open: function () { if (!enabled()) return false; var args = arguments; shown(load()).then(function () { var t = real(); if (t) t.open.apply(t, args); else fail(); }, fail); return true; },
     openCase: function () { if (!enabled()) return false; return load().then(function () { var t = real(); if (!t) fail(); return t ? t.openCase.apply(t, arguments) : false; }, function () { fail(); return false; }); },
     isOpen: function () { return false; },
     back: function () { return false; },
