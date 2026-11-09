@@ -1,0 +1,231 @@
+{
+ "v": 1,
+ "module": "med-localisation",
+ "subject": "medicine",
+ "title": "Higher Cortical Functions: Aphasia and Lobar Syndromes",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Acquired impairment of language processing caused by focal cerebral cortical damage in the dominant hemisphere (left hemisphere in over ninety-five percent of individuals) is designated as aphasia. Evaluating spontaneous fluency, auditory comprehension, and sentence repetition systematically categorises all classic clinical **aphasia types** and points directly to distinct neurovascular territories.",
+   "say": "Acquired impairment of language processing caused by focal cerebral cortical damage in the dominant hemisphere is designated as aphasia. Evaluating spontaneous fluency, auditory comprehension, and sentence repetition systematically categorises all classic aphasia types and points directly to distinct neurovascular territories.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-brain-gross.webp",
+    "alt": "Gross anatomy of human cerebral cortex and cortical functional territories.",
+    "caption": "Cerebral cortical surface anatomy and classical perisylvian language territories. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A non-fluent, expressive language disorder caused by infarction of the inferior frontal gyrus (Brodmann areas 44 and 45) within the superior division of the left middle cerebral artery is **Broca aphasia**. Patients exhibit halting, agrammatic, telegraphic speech produced with intense effort. Comprehension of spoken and written language is largely preserved, but repetition is markedly impaired.",
+   "say": "A non-fluent expressive language disorder caused by infarction of the inferior frontal gyrus within the superior division of the left middle cerebral artery is Broca aphasia. Patients exhibit halting, telegraphic speech produced with intense effort. Auditory comprehension is largely preserved, but sentence repetition is impaired.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Broca Aphasia (Expressive)",
+     "points": [
+      "Non-fluent, effortful, telegraphic speech",
+      "Inferior frontal gyrus (Brodmann 44, 45)",
+      "Superior division MCA territory",
+      "Auditory comprehension intact; repetition impaired"
+     ]
+    },
+    "right": {
+     "title": "Wernicke Aphasia (Receptive)",
+     "points": [
+      "Fluent, effortless, paraphasic word salad",
+      "Superior temporal gyrus (Brodmann 22)",
+      "Inferior division MCA territory",
+      "Auditory comprehension and repetition both impaired"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In contrast, a fluent, receptive language disorder caused by ischaemic destruction of the posterior third of the superior temporal gyrus (Brodmann area 22) in the inferior division of the left MCA is **Wernicke aphasia**. Speech is effortless, rapid, and melodic but completely devoid of meaning, contaminated by neologisms and phonemic paraphasias. Patients exhibit profound loss of comprehension and lack insight into their deficit.",
+   "say": "In contrast, a fluent receptive language disorder caused by ischemic destruction of the posterior superior temporal gyrus is Wernicke aphasia. Speech is effortless, rapid, and fluent but completely devoid of meaning, filled with neologisms. Patients exhibit profound loss of comprehension and lack insight into their deficit.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-ix-surg-neuroimaging_icsol.webp",
+    "alt": "Neuroimaging showing cerebral hemisphere lesion and cortical localisation.",
+    "caption": "Cross-sectional cerebral imaging demonstrating lobar structural localisation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Direct bidirectional connection between Wernicke and Broca language areas is mediated by a prominent subcortical white matter association tract known as the **arcuate fasciculus**. Lesions interrupting this subcortical perisylvian bridge produce a distinctive disconnection syndrome, leaving cortical speech production and sensory decoding centres intact while destroying their intercommunication.",
+   "say": "Direct connection between Wernicke and Broca language areas is mediated by a prominent subcortical white matter tract known as the arcuate fasciculus. Lesions interrupting this bridge produce a distinctive disconnection syndrome, leaving cortical speech production and sensory decoding centres intact while destroying intercommunication.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "wern",
+      "label": "Wernicke Area (Sensory)"
+     },
+     {
+      "id": "arc",
+      "label": "Arcuate Fasciculus Tract"
+     },
+     {
+      "id": "broc",
+      "label": "Broca Area (Motor Output)"
+     }
+    ],
+    "edges": [
+     [
+      "wern",
+      "arc"
+     ],
+     [
+      "arc",
+      "broc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Interruption of the arcuate fasciculus or supramarginal gyrus produces the classical disconnection syndrome termed **conduction aphasia**. Characterised by fluent spontaneous speech and completely intact auditory comprehension, patients exhibit a disproportionate and severe inability to repeat spoken sentences, accompanied by frequent phonemic paraphasic errors during naming attempts.",
+   "say": "Interruption of the arcuate fasciculus produces the classical disconnection syndrome termed conduction aphasia. Characterized by fluent spontaneous speech and completely intact auditory comprehension, patients exhibit a disproportionate inability to repeat spoken sentences.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Aphasia Subtype",
+     "Fluency",
+     "Comprehension",
+     "Repetition"
+    ],
+    "rows": [
+     [
+      "Broca Aphasia",
+      "Non-fluent (effortful)",
+      "Intact (good)",
+      "Impaired"
+     ],
+     [
+      "Wernicke Aphasia",
+      "Fluent (word salad)",
+      "Impaired (poor)",
+      "Impaired"
+     ],
+     [
+      "Conduction Aphasia",
+      "Fluent",
+      "Intact (good)",
+      "Severely Impaired"
+     ],
+     [
+      "Global Aphasia",
+      "Non-fluent (mute)",
+      "Severely Impaired",
+      "Severely Impaired"
+     ],
+     [
+      "Transcortical Motor",
+      "Non-fluent",
+      "Intact (good)",
+      "Intact (preserved)"
+     ],
+     [
+      "Transcortical Sensory",
+      "Fluent",
+      "Impaired (poor)",
+      "Intact (preserved)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Massive infarction spanning both anterior and posterior branches of the dominant middle cerebral artery causes devastating **global aphasia**. Both expressive fluency and receptive comprehension are completely lost, rendering the patient mute or capable only of repeating stereotyped nonsense syllables. It is almost invariably accompanied by severe contralateral dense spastic hemiplegia and homonymous hemianopia.",
+   "say": "Massive infarction spanning both anterior and posterior branches of the dominant middle cerebral artery causes devastating global aphasia. Both expressive fluency and receptive comprehension are completely lost, rendering the patient mute. It is accompanied by severe contralateral spastic hemiplegia and hemianopia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stem",
+      "label": "Mainstem Left MCA Occlusion"
+     },
+     {
+      "id": "peri",
+      "label": "Total Perisylvian Infarction"
+     },
+     {
+      "id": "glob",
+      "label": "Global Aphasia & Dense Hemiplegia"
+     }
+    ],
+    "edges": [
+     [
+      "stem",
+      "peri"
+     ],
+     [
+      "peri",
+      "glob"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cortical injury outside the language core produces distinct focal cognitive deficits. Infarction of the inferior parietal lobule (angular gyrus) of the dominant hemisphere produces the classic tetrad of **Gerstmann syndrome**: agraphia (inability to write), acalculia (inability to perform mathematical operations), finger agnosia (inability to name or distinguish fingers), and right-left disorientation.",
+   "say": "Cortical injury outside the language core produces distinct focal cognitive deficits. Infarction of the angular gyrus of the dominant hemisphere produces the classic tetrad of Gerstmann syndrome: agraphia, acalculia, finger agnosia, and right-left disorientation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Component Deficit",
+     "Clinical Manifestation",
+     "Anatomical Substrate"
+    ],
+    "rows": [
+     [
+      "Agraphia",
+      "Inability to express thoughts in writing",
+      "Dominant angular gyrus"
+     ],
+     [
+      "Acalculia",
+      "Loss of arithmetic calculating capacity",
+      "Dominant angular gyrus"
+     ],
+     [
+      "Finger Agnosia",
+      "Failure to identify or distinguish fingers",
+      "Dominant parietal cortex"
+     ],
+     [
+      "Right-Left Disorientation",
+      "Inability to distinguish right from left sides",
+      "Dominant parietal cortex"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Conversely, acute injury to the non-dominant (right) parietal lobe produces the profound spatial neglect syndrome termed **hemispatial neglect** (anosognosia). Patients fail to respond to sensory stimuli or visual targets in the contralateral (left) hemispace, ignore the left side of their own body, and are completely unaware of severe left hemiplegia or neurological illness.",
+   "say": "Conversely, acute injury to the non-dominant right parietal lobe produces the profound spatial neglect syndrome termed hemispatial neglect. Patients fail to respond to stimuli in the contralateral left hemispace, ignore the left side of their body, and are completely unaware of left-sided paralysis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dominant (Left) Parietal Lesion",
+     "points": [
+      "Gerstmann syndrome (acalculia, agraphia)",
+      "Finger agnosia and right-left disorientation",
+      "Ideomotor and ideational apraxia",
+      "Bilateral tactile agnosia"
+     ]
+    },
+    "right": {
+     "title": "Non-Dominant (Right) Parietal Lesion",
+     "points": [
+      "Contralateral hemispatial neglect",
+      "Anosognosia (unawareness of neurological deficit)",
+      "Dressing and constructional apraxia",
+      "Loss of prosody (aprosodia)"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 28"
+}
