@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-pelvis-perineum",
+ "subject": "anatomy",
+ "title": "Anal Canal Anatomy, Pectinate Line, Sphincteric Complex, and Haemorrhoids",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The anal canal is the terminal segment of the alimentary tract, measuring approximately 3.8 to 4.0 centimetres in length. It begins at the anorectal junction where the rectum passes through the levator ani sling and terminates at the **anal verge** (anus). It is directed downwards and backwards, surrounded along its entire length by a complex concentric sphincteric apparatus.",
+   "say": "Measuring four centimetres in length, the anal canal runs downwards and backwards from the pelvic floor to the anal verge. A concentric muscular sphincter complex surrounds it completely.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-rectum.svg",
+    "alt": "Anatomical section of the anal canal showing internal and external sphincters, pectinate line, and columns of Morgagni",
+    "caption": "Coronal section of the anal canal displaying the internal sphincter, external sphincter, and mucosal pectinate line. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The mucosal lining is bisected horizontally by the pectinate line (dentate line), which represents the embryological junction between the endodermal hindgut above and the ectodermal proctodeum below. Superior to the **pectinate line**, the mucosa is cast into six to ten vertical folds called the anal columns of Morgagni, united inferiorly by crescentic anal valves.",
+   "say": "The pectinate line marks the fusion between endodermal hindgut and ectodermal proctodeum. Vertical anal columns of Morgagni unite above it to form small mucosal valves.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Anal Columns of Morgagni (Vertical mucosal folds containing terminal radicles of superior rectal vessels)"
+     },
+     {
+      "id": "m2",
+      "label": "Anal Valves (Small semilunar mucosal folds bridging bases of columns)"
+     },
+     {
+      "id": "m3",
+      "label": "Anal Crypts and Sinuses (Recesses behind valves receiving ducts of 6-8 anal glands)"
+     },
+     {
+      "id": "m4",
+      "label": "Pectinate (Dentate) Line (Serrated horizontal boundary of distinct embryonic origin)"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ],
+     [
+      "m3",
+      "m4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The anatomical and physiological divide across the pectinate line is among the most profound in human anatomy. Structures above the line are derived from hindgut endoderm, lined by simple columnar epithelium, supplied by the **superior rectal** artery, drained by the portal venous system, and innervated by autonomic nerves insensitive to sharp pain.",
+   "say": "Above the pectinate line, endodermal lining, superior rectal vessels, and autonomic innervation predominate. Consequently, biopsies and internal piles cause no sharp cutaneous pain.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Above Pectinate Line (Hindgut)",
+     "points": [
+      "Epithelium: Simple columnar",
+      "Arterial supply: Superior rectal artery (IMA)",
+      "Venous drainage: Superior rectal vein to portal system",
+      "Lymphatic drainage: Internal iliac and inferior mesenteric nodes",
+      "Nerve supply: Autonomic via inferior hypogastric plexus (dull stretch only)"
+     ]
+    },
+    "right": {
+     "title": "Below Pectinate Line (Proctodeum)",
+     "points": [
+      "Epithelium: Stratified squamous non-keratinised to keratinised",
+      "Arterial supply: Inferior rectal artery (Internal pudendal)",
+      "Venous drainage: Inferior rectal vein to systemic IVC",
+      "Lymphatic drainage: Superficial inguinal lymph nodes",
+      "Nerve supply: Somatic via inferior rectal nerve (exquisite sharp pain)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Below the pectinate line for approximately 1.5 centimetres lies the pecten, lined by smooth, non-keratinised stratified squamous epithelium devoid of hair follicles and sweat glands. The lower limit of the pecten is the **white line** of Hilton (intersphincteric groove), a palpable landmark where the internal sphincter ends and keratinised perianal skin begins.",
+   "say": "Between the pectinate line and the white line of Hilton lies the pecten. The white line marks the palpable groove separating the internal sphincter from the external sphincter.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Zone of Anal Canal",
+     "Vertical Extent",
+     "Histological Lining",
+     "Special Features"
+    ],
+    "rows": [
+     [
+      "Upper mucosal zone",
+      "Upper 15 mm",
+      "Simple columnar epithelium",
+      "Anal columns of Morgagni, anal valves, crypts"
+     ],
+     [
+      "Intermediate zone (Pecten)",
+      "Middle 15 mm",
+      "Non-keratinised stratified squamous",
+      "Bluish appearance, firmly adherent to underlying tissue"
+     ],
+     [
+      "Lower cutaneous zone",
+      "Lower 10 mm",
+      "Keratinised stratified squamous (perianal skin)",
+      "Contains hair follicles, sebaceous and apocrine sweat glands"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The sphincteric complex consists of two concentric muscular cylinders. The internal anal sphincter is a thickened continuation of the circular smooth muscle coat of the rectum, providing eighty percent of resting anal tone. Being purely involuntary, the **internal sphincter** is innervated by sympathetic fibres from L1-L2 (causing contraction) and parasympathetic fibres from S2-S4 (causing relaxation).",
+   "say": "Generating eighty percent of resting tone, the internal sphincter represents thickened circular rectal smooth muscle. Autonomic nerves govern its involuntary contractions and relaxation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Internal Anal Sphincter",
+     "points": [
+      "Smooth muscle continuation of circular rectal coat",
+      "Involuntary control via autonomic nervous system",
+      "Provides 80 percent of baseline resting anal continence",
+      "Relaxes during rectoanal inhibitory reflex on rectal filling"
+     ]
+    },
+    "right": {
+     "title": "External Anal Sphincter",
+     "points": [
+      "Striated voluntary skeletal muscle cylinder",
+      "Innervated somatically by inferior rectal and perineal nerves",
+      "Provides voluntary squeeze continence against urgency",
+      "Arranged in deep, superficial, and subcutaneous parts"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The external anal sphincter is composed of voluntary striated skeletal muscle arranged into three distinct anatomical parts. The subcutaneous part encircles the lower anal verge; the superficial part attaches anteriorly to the perineal body and posteriorly to the **coccyx** via the anococcygeal ligament; and the deep part blends intimately with the puborectalis muscle.",
+   "say": "The voluntary external sphincter comprises subcutaneous, superficial, and deep muscular tiers. The superficial portion anchors to the coccyx, while the deep tier blends with puborectalis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Subcutaneous Part (Encircles lower anal canal below internal sphincter; no bony attachments)"
+     },
+     {
+      "id": "e2",
+      "label": "Superficial Part (Anchors to perineal body anteriorly and coccyx posteriorly)"
+     },
+     {
+      "id": "e3",
+      "label": "Deep Part (Encircles upper anal canal, blending continuously with puborectalis)"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2"
+     ],
+     [
+      "e2",
+      "e3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Haemorrhoids represent pathological varicosities and sliding downward displacement of the anal vascular cushions. These submucosal cushions reside in three primary anatomical positions: 3 o'clock, 7 o'clock, and 11 o'clock in the lithotomy position. **Internal haemorrhoids** originate above the pectinate line and are covered by insensate columnar mucosa, presenting with painless, bright-red rectal bleeding.",
+   "say": "Arising at the 3, 7, and 11 o'clock positions, internal haemorrhoids originate above the pectinate line. Because they are lined by autonomic mucosa, they bleed bright red without pain.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classification",
+     "Location Relative to Pectinate Line",
+     "Nerve Supply",
+     "Classic Clinical Presentation"
+    ],
+    "rows": [
+     [
+      "Internal haemorrhoids (Piles)",
+      "Above pectinate line (Superior plexus)",
+      "Autonomic (inferior hypogastric)",
+      "Painless bright red bleeding, mucosal prolapse on straining"
+     ],
+     [
+      "External haemorrhoids",
+      "Below pectinate line (Inferior plexus)",
+      "Somatic (inferior rectal nerve)",
+      "Painful perianal swelling, thrombosis causes acute severe agony"
+     ],
+     [
+      "Intero-external (mixed)",
+      "Straddles pectinate line",
+      "Both autonomic and somatic",
+      "Combination of painless prolapse with painful cutaneous tags"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast, external haemorrhoids arise below the pectinate line from the inferior rectal venous plexus and are covered by sensitive stratified squamous epithelium. Thrombosis of an **external haemorrhoid** causes sudden, intense perianal agony because somatic sensory fibres of the inferior rectal nerve register acute stretching and ischaemic inflammation of the richly innervated skin.",
+   "say": "External haemorrhoids lie below the pectinate line under somatic sensory cover. Acute thrombosis causes intense agony due to exquisite somatic pain reception in perianal skin.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-indirect-inguinal-hernial-sac.webp",
+    "alt": "Surgical pathology specimen of excised tissue showing fibrovascular anatomy and mucosal relations",
+    "caption": "Surgical pathology of perianal and pelvic fascial specimens highlighting cutaneous and subfascial margins. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "67286d9a-ec23-455b-bb66-6f29fa75cb27",
+  "723a17e1-8857-41ec-b286-9dc551412853",
+  "77e436f5-5a7a-4286-a36c-940733a1f948"
+ ]
+}
