@@ -1,0 +1,211 @@
+{
+  "v": 1,
+  "module": "mic-immune-response",
+  "subject": "microbiology",
+  "title": "Cytokines, Interleukins, Interferons and Helper T Cell Subsets",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Cytokines** are soluble messengers acting autocrine, paracrine and endocrine, pleiotropic and redundant, in cascades where one induces others (TNF instructing IL 1 and IL 6), named interleukins when between leukocytes, chemokines when chemotactic, colony stimulating factors when marrow directed, and interferons when antiviral. Dose and context, not name alone, decide inflammation versus repair.",
+      "say": "One cytokine, many jobs; many cytokines, one job: context writes cytokine meaning.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cytokine properties",
+          "points": [
+            "Pleiotropy and redundancy",
+            "Synergy and antagonism networks",
+            "Short half lives, local action mostly",
+            "Receptors signal via JAK STAT and NF kappa B roads"
+          ]
+        },
+        "right": {
+          "title": "Families",
+          "points": [
+            "Interleukins numbered",
+            "Interferons alpha beta gamma",
+            "TNF family, chemokines (IL 8 prototype)",
+            "CSFs: G, M, GM colony stimulating"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Th1 responses** (IL 12 and interferon gamma driven, T bet) arm macrophages against intracellular bacteria and viruses: Mycobacterium, Leishmania, Listeria live or die by this axis, whose defects (IL 12 and interferon gamma receptor) present as Mendelian susceptibility to mycobacterial disease with BCG complications.",
+      "say": "Interferon gamma arms macrophages; its pathway defects let BCG become disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Th1 programme",
+          "points": [
+            "Inducers: IL 12, IL 18 from dendritic cells",
+            "Signature: interferon gamma, IL 2, TNF",
+            "Effects: macrophage activation, IgG switching",
+            "Pathology: delayed hypersensitivity and granulomas"
+          ]
+        },
+        "right": {
+          "title": "Th1 failure",
+          "points": [
+            "MSMD: IL12 and IFN gamma axis defects",
+            "BCGosis in infants as presenting sign",
+            "Salmonella and environmental mycobacteria",
+            "Interferon gamma therapy in CGD kinship"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Th2 responses** (IL 4, 5, 13; GATA3) answer helminths and drive allergy: IgE switching, eosinophil recruitment and activation, mucus and smooth muscle programmes, with atopic diseases as their misdirection at harmless antigens. Helminths actively tutor this axis toward regulation to survive it.",
+      "say": "Th2 expels worms and, misdirected, wheezes at dust: same cytokines, two reputations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Th2 programme",
+          "points": [
+            "IL 4: IgE switch and Th2 instruction",
+            "IL 5: eosinophil production and survival",
+            "IL 13: mucus, airway hyperreactivity",
+            "Mast cell and basophil partnerships"
+          ]
+        },
+        "right": {
+          "title": "Th2 therapeutics",
+          "points": [
+            "Anti IL 5 and IL 5R in eosinophilic asthma",
+            "Anti IL 4R alpha (dupilumab) across atopy",
+            "Omalizumab upstream at IgE",
+            "Helminth therapy trials invert the logic experimentally"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Th17 responses** (IL 17, IL 22; induced by IL 6, TGF beta and IL 23) defend mucosal fungi and extracellular bacteria by neutrophil recruitment and epithelial antimicrobials; defects cause chronic mucocutaneous candidiasis (STAT3, IL 17 pathway), excess drives psoriasis and spondyloarthritis whose biologics target IL 17 and IL 23.",
+      "say": "Th17 guards mucosae with neutrophils; too little invites Candida, too much inflames skin and joints.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Th17 programme",
+          "points": [
+            "IL 17A and F: neutrophil chemotaxis factors",
+            "IL 22: epithelial defence and repair",
+            "Induction: IL 23 stabilises phenotype",
+            "Mucosal surfaces principal theatre"
+          ]
+        },
+        "right": {
+          "title": "Th17 extremes",
+          "points": [
+            "Deficiency: chronic mucocutaneous candidiasis",
+            "Excess: psoriasis, psoriatic and axial arthritis",
+            "Anti IL 17: Candida infections as on target cost",
+            "Anti IL 23 p19: psoriasis and bowel indications"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Regulatory T cells** (FoxP3, CD25 high, IL 10 and TGF beta instruments) police all helper programmes, their absence catastrophic (IPEX scurfy phenotype: autoimmunity, enteropathy, eczema in infancy). Checkpoint molecules (CTLA 4, PD 1 from the oncology lessons) are their surface cousins borrowed by tumours.",
+      "say": "No FoxP3 police, no tolerance: IPEX is regulation's absence written in infants.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Treg machinery",
+          "points": [
+            "FoxP3 master transcription factor",
+            "IL 2 dependence (CD25 high consumption)",
+            "Suppression by contact and cytokines",
+            "Induced Tregs at mucosae (oral tolerance)"
+          ]
+        },
+        "right": {
+          "title": "Treg clinical",
+          "points": [
+            "IPEX: FOXP3 mutation",
+            "Low dose IL 2 trials expand Tregs",
+            "Tumours recruit Tregs against immunity",
+            "Transplant tolerance strategies chase them"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Key interleukins** by examination pairing: IL 1 fever and inflammasomes (anakinra blocks), IL 2 T growth (aldesleukin cancer heritage, Treg dependence), IL 6 acute phase and arthritis (tocilizumab), IL 7 lymphopoiesis (receptor defects SCID), IL 10 suppression (EBV mimics it), IL 12 and 23 sharing p40 (ustekinumab target). Each drug in biologics clinics is a cytokine sentence interrupted.",
+      "say": "Learn cytokines by the drug that blocks them; clinics teach the table backwards.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Interleukin pairs",
+          "points": [
+            "IL 1: pyrogen, inflammasome product",
+            "IL 2: T cell growth, Treg survival",
+            "IL 6: CRP instructor, fever partner",
+            "IL 10: macrophage brake"
+          ]
+        },
+        "right": {
+          "title": "Blockade map",
+          "points": [
+            "Anakinra and canakinumab: IL 1",
+            "Tocilizumab: IL 6 receptor",
+            "Ustekinumab: IL 12 and 23 p40",
+            "Secukinumab: IL 17A"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Interferons** divide by receptor and era: type I (alpha, beta) antiviral innate (previous lesson), type II gamma the macrophage activator whose recombinant form serves chronic granulomatous disease and osteopetrosis niches, and type III lambda mucosal. Their flu like toxicity is cytokine physiology experienced from the patient side.",
+      "say": "Gamma activates macrophages, alpha warns against viruses; patients feel both as flu.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Interferon gamma",
+          "points": [
+            "Th1 and NK signature product",
+            "Macrophage oxidative burst amplification",
+            "Therapy: CGD infections reduced",
+            "Defects: mycobacterial susceptibility"
+          ]
+        },
+        "right": {
+          "title": "Type I therapeutics",
+          "points": [
+            "Interferon beta: multiple sclerosis",
+            "Pegylated alpha: myeloproliferative niches",
+            "Ropeginterferon in polycythaemia",
+            "Antiviral era mostly inherited by direct agents"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cytokine storm** is network failure at scale: sepsis, haemophagocytic lymphohistiocytosis (ferritin, cytopenias, hemophagocytosis, IL 18 and interferon gamma signatures), CAR T cytokine release, and macrophage activation in rheumatic disease, treated increasingly by named blockade (IL 1, IL 6, JAK) beside source control. The network metaphor becomes therapy when single nodes are druggable.",
+      "say": "Storms are networks, but single blocked nodes (IL 6, IL 1, JAK) can calm them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Storm portraits",
+          "points": [
+            "Sepsis: TNF, IL 1, IL 6 early",
+            "HLH: interferon gamma axis, ferritin extreme",
+            "CAR T CRS: IL 6 central (tocilizumab)",
+            "COVID era: IL 6 and JAK lessons"
+          ]
+        },
+        "right": {
+          "title": "Storm answers",
+          "points": [
+            "Treat source (infection, malignancy) first",
+            "Tocilizumab, anakinra, emapalumab niches",
+            "JAK inhibitors oral network dampers",
+            "Steroids broad and blunt, still used"
+          ]
+        }
+      }
+    }
+  ]
+}

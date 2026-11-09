@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-innate-antigens",
+  "subject": "microbiology",
+  "title": "CD Markers, Lymphoid Organs and the Thymus",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**CD markers** (cluster of differentiation) are numbered surface molecules that barcode immune cells for counting and sorting: CD3 all T cells, CD4 helpers, CD8 cytotoxic, CD19 and CD20 B cells, CD16 and CD56 NK cells, CD34 stem cells, read by flow cytometry antibodies in immunodeficiency and leukaemia work. The number is an address examiners expect paired with its cell.",
+      "say": "CD numbers are cell addresses; pair each number with its cell or lose the mark.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lineage badges",
+          "points": [
+            "CD3 T, CD4 helper, CD8 cytotoxic",
+            "CD19, CD20 B cells (CD20 is rituximab target)",
+            "CD16, CD56 NK cells",
+            "CD34 haematopoietic stem cells"
+          ]
+        },
+        "right": {
+          "title": "Functional badges",
+          "points": [
+            "CD25 IL 2 receptor (basiliximab target)",
+            "CD40 and CD40L costimulation pair",
+            "CD45 leukocyte common antigen",
+            "CD14 monocyte LPS coreceptor"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Primary lymphoid organs** (bone marrow and thymus) manufacture and educate lymphocytes without antigen, while **secondary lymphoid organs** (nodes, spleen, MALT) stage antigen meetings. Cells failing education die on site; cells graduating naive patrol blood and lymph, homing to nodes via high endothelial venules awaiting their antigen.",
+      "say": "Primary organs educate, secondary organs introduce antigen; geography is immunology.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Primary organs",
+          "points": [
+            "Bone marrow: all blood cells, B maturation",
+            "Thymus: T education and selection",
+            "Antigen independent development",
+            "Failure: primary immunodeficiency"
+          ]
+        },
+        "right": {
+          "title": "Secondary organs",
+          "points": [
+            "Lymph nodes: filtered lymph antigen",
+            "Spleen: blood borne antigen, red cell duties",
+            "MALT: mucosal surfaces (Peyer patches)",
+            "Antigen dependent activation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **thymus** selects T cells by self MHC and self peptide auditions: cortex positive selection keeps MHC readers, medulla negative selection (AIRE displaying tissue antigens) deletes strong self reactors, producing single positive CD4 or CD8 cells. It involutes after puberty, and its congenital absence (DiGeorge) presents in the immunodeficiency module as absent T cells with parathyroid and cardiac neighbours.",
+      "say": "Keep MHC readers, delete self attackers: thymic selection in one audition.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "enter", "label": "Double negative progenitors enter cortex" },
+          { "id": "double", "label": "Double positive: receptor rearranged" },
+          { "id": "pos", "label": "Positive selection on self MHC" },
+          { "id": "neg", "label": "Medullary negative selection deletes self reactive" }
+        ],
+        "edges": [["enter", "double"], ["double", "pos"], ["pos", "neg"]]
+      }
+    },
+    {
+      "tx": "**Lymph node architecture** organises the meeting: cortex B follicles with germinal centres, paracortex T zones with dendritic cells, medullary cords plasma cells, afferent lymph in and efferent out, high endothelial venules admitting naive lymphocytes from blood. Palpable nodes are this architecture inflamed, and biopsy reads its compartments.",
+      "say": "Cortex B, paracortex T, medulla plasma: node anatomy is cell geography.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Node compartments",
+          "points": [
+            "Cortex: B follicles and germinal centres",
+            "Paracortex: T cells and dendritic presentation",
+            "Medulla: cords of plasma cells, sinuses of macrophages",
+            "HEV: naive lymphocyte entry from blood"
+          ]
+        },
+        "right": {
+          "title": "Clinical echoes",
+          "points": [
+            "Follicular hyperplasia: B responses",
+            "Paracortical expansion: viral and T responses",
+            "Sinus histiocytosis patterns",
+            "Metastatic and lymphoma staging reads nodes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **spleen** filters blood without afferent lymphatics: white pulp (periarteriolar T sheaths and B follicles with marginal zones) samples blood borne antigen, red pulp culls old red cells and plates, and its loss (surgery, sickle autoinfarction) invites overwhelming sepsis by encapsulated bacteria, the capsule lesson's organisms returning with vaccination prescriptions.",
+      "say": "No spleen, no marginal zone filter; encapsulated bacteria send the invoice.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "White pulp duties",
+          "points": [
+            "Blood borne antigen surveillance",
+            "Marginal zone B cells: polysaccharide responses",
+            "IgM memory B cell reservoir",
+            "PALS T cell zones"
+          ]
+        },
+        "right": {
+          "title": "Asplenia consequences",
+          "points": [
+            "OPSI: pneumococcus, meningococcus, Hib",
+            "Vaccination before elective splenectomy",
+            "Antibiotic standby and alert cards",
+            "Howell Jolly bodies mark absent filtering"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Flow cytometry** counts CD badges by laser scatter and fluorescence on single cells in fluid, immunophenotyping leukaemias, measuring CD4 counts in HIV, and diagnosing immunodeficiency subsets, with gating strategies (CD45 versus side scatter) as its grammar. It is the CD system's measuring instrument and examination partner.",
+      "say": "Flow cytometry interrogates thousands of cells a second by their CD badges.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Flow outputs",
+          "points": [
+            "CD4 counts and percentages (HIV)",
+            "Leukaemia lymphoma immunophenotypes",
+            "B, T and NK enumeration in immunodeficiency",
+            "Minimal residual disease detection"
+          ]
+        },
+        "right": {
+          "title": "Flow grammar",
+          "points": [
+            "Forward scatter size, side scatter granularity",
+            "Gating on CD45 leukocytes",
+            "Compensation for fluorochrome overlap",
+            "Controls and standardisation decide validity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**MALT** (mucosa associated lymphoid tissue) stations lymphocytes at entry surfaces: Peyer patches sampling gut antigen via M cells, tonsils at the throat, appendix and bronchial tissue, secreting IgA onto surfaces. Its lymphomas (MALT lymphoma of stomach with Helicobacter) and its vaccine route logic (oral and nasal) extend the geography clinically.",
+      "say": "MALT guards the doors microbes actually use; its antibody is IgA.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MALT stations",
+          "points": [
+            "Peyer patches under M cells",
+            "Tonsils and adenoids",
+            "Bronchial and lacrimal tissue",
+            "Lacteal and lamina propria plasma cells"
+          ]
+        },
+        "right": {
+          "title": "MALT consequences",
+          "points": [
+            "Secretory IgA onto mucosae",
+            "Oral vaccines exploit gut sampling",
+            "MALT lymphoma and Helicobacter link",
+            "Common mucosal immune system trafficking"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Stem cell markers and transplantation** close the geography: CD34 selection enriches grafts, HLA matching (immune response module) outranks CD logic, and thymic output assays (TRECs in newborn screening for SCID) measure education in real time. A newborn's absent TRECs are DiGeorge and SCID knocking before infections announce them.",
+      "say": "TRECs count fresh thymic graduates; absent TRECs in a newborn are an emergency referral.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Markers in therapy",
+          "points": [
+            "CD34 graft dosing in transplantation",
+            "CD20 depletion monitoring after rituximab",
+            "CD19 CAR T target selection",
+            "CD52 alemtuzumab depletion depth"
+          ]
+        },
+        "right": {
+          "title": "Screening markers",
+          "points": [
+            "TREC newborn screening for SCID",
+            "CD4 trends in HIV care",
+            "B cell counts guide re vaccination after depletion",
+            "Absolute lymphocyte counts as bedside proxy"
+          ]
+        }
+      }
+    }
+  ]
+}
