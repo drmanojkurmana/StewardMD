@@ -75,7 +75,31 @@
     {
       "tx": "Oligodendrogliomas exhibit distinct histological and cytogenetic characteristics conferring superior chemosensitivity. A definitive diagnosis of **oligodendroglioma** requires both a heterozygous mutation in IDH1 or IDH2 and complete, unbalanced **codeletion** of chromosomal arms **1p and 19q** (1p/19q codeletion). Histopathology displays uniform round cells with perinuclear halos, termed fried-egg appearance. Oligodendrogliomas show durable therapeutic responses to procarbazine, lomustine, and vincristine (PCV) chemotherapy.",
       "say": "Under WHO criteria, diagnosing an oligodendroglioma mandates identifying both an IDH mutation and complete codeletion of chromosomal arms one p and nineteen q. Histologically, tumor cells have uniform round nuclei with clear perinuclear halos. These tumors demonstrate exceptional chemosensitivity and favourable long term survival when treated with alkylating regimens.",
-      "vis": null
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Oligodendroglioma requirement",
+          "Finding"
+        ],
+        "rows": [
+          [
+            "IDH status",
+            "IDH1 or IDH2 mutation present"
+          ],
+          [
+            "Chromosomes",
+            "Whole-arm 1p and 19q codeletion"
+          ],
+          [
+            "Histology",
+            "Fried-egg cells with perinuclear halos"
+          ],
+          [
+            "Treatment response",
+            "Durable response to PCV chemotherapy"
+          ]
+        ]
+      }
     },
     {
       "tx": "Benign glial neoplasms of childhood predominantly affect posterior fossa structures. **Pilocytic astrocytoma** is a circumscribed WHO grade 1 glioma typically arising within the cerebellar hemispheres of children. Brain MRI reveals a cystic mass with an intensely enhancing mural nodule. Histopathology demonstrates biphasic architecture with compact fibrillary zones containing corkscrew-shaped **Rosenthal fibers** and microcystic zones with eosinophilic granular bodies. Complete surgical resection is curative.",
@@ -113,7 +137,31 @@
     {
       "tx": "**Medulloblastoma** is the most common malignant primary pediatric brain tumor, classified as a WHO grade 4 embryonal **small round blue cell** neoplasm arising in the cerebellar vermis. Consensus molecular classification stratifies medulloblastoma into four distinct subgroups: WNT-activated (best prognosis, over 95% survival), SHH-activated, Group 3 (worst prognosis, high metastatic dissemination), and Group 4. Treatment combines maximal safe resection with craniospinal irradiation and chemotherapy.",
       "say": "Medulloblastoma is an aggressive grade four embryonal cerebellar tumour of childhood composed of densely packed small round blue cells. Consensus molecular profiling divides medulloblastoma into four subgroups: WNT, Sonic Hedgehog, Group three, and Group four. The WNT activated subgroup carries an excellent prognosis, whereas Group three tumors carry the highest propensity for leptomeningeal metastasis.",
-      "vis": null
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Medulloblastoma group",
+          "Prognosis clue"
+        ],
+        "rows": [
+          [
+            "WNT-activated",
+            "Best prognosis, over 95 percent survival"
+          ],
+          [
+            "SHH-activated",
+            "Intermediate, age dependent"
+          ],
+          [
+            "Group 3",
+            "Worst prognosis, frequent dissemination"
+          ],
+          [
+            "Group 4",
+            "Common, intermediate"
+          ]
+        ]
+      }
     },
     {
       "tx": "Extra-axial intracranial neoplasms arise from meningeal coverings. **Meningiomas** arise from meningothelial arachnoid cap cells, representing the most common benign intracranial tumor in adults. Contrast-enhanced MRI demonstrates a sharply demarcated, vividly and homogeneously enhancing dural-based mass with a classic **dural tail** sign. The majority are classified as benign WHO grade 1 neoplasms; however, atypical (grade 2) and anaplastic (grade 3) variants exhibit higher rates of local recurrence.",

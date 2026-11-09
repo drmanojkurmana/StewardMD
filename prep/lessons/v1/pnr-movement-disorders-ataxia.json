@@ -11,29 +11,10 @@
       "say": "Acute cerebellar ataxia is the commonest cause of sudden gait disturbance in toddlers. It typically follows a benign viral illness and resolves spontaneously over several months.",
       "tx": "Diagnose **Acute post-infectious cerebellar ataxia** in young preschool children presenting with sudden unsteady gait. Post-infectious acute cerebellar ataxia typically strikes toddlers aged 1 to 4 years within 5 to 21 days following varicella-zoster virus, Epstein-Barr virus, or enterovirus infection. Children present with sudden profound truncal ataxia, dysmetria, tremor, and horizontal nystagmus without fever or encephalopathy. Neuroimaging and CSF are unremarkable; greater than 90% of children achieve spontaneous complete recovery within 2 to 3 months (Opsoclonus-myoclonus).",
       "vis": {
-        "kind": "table",
-        "cols": [
-          "Clinical parameter",
-          "Characteristic findings",
-          "Prognostic course"
-        ],
-        "rows": [
-          [
-            "Onset & demographics",
-            "Ages 1 to 4 years; sudden gait refusal/wobble",
-            "5-21 days after varicella or viral exanthem"
-          ],
-          [
-            "Physical examination",
-            "Truncal ataxia, titubation, dysmetria, nystagmus",
-            "Consciousness preserved; no focal weakness"
-          ],
-          [
-            "Clinical outcome",
-            "Benign self-limiting autoimmune inflammation",
-            "> 90% full spontaneous resolution by 8-12 weeks"
-          ]
-        ]
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-cns-cerebellar-vs-extrapyramidal.webp",
+        "alt": "Cerebellar dysfunction signs contrasted with extrapyramidal basal ganglia signs.",
+        "caption": "Cerebellar versus extrapyramidal signs. Credit: StewardMD."
       }
     },
     {
@@ -183,31 +164,10 @@
       "say": "Segawa syndrome is a dopamine-responsive dystonia characterized by prominent diurnal fluctuation. A diagnostic trial of low dose levodopa leads to dramatic complete symptom resolution.",
       "tx": "Prescribe a **Friedreich ataxia trinucleotide repeat** in any child presenting with unexplained gait dystonia. Segawa syndrome (DYT5a) is an autosomal dominant disorder caused by heterozygous mutations in GCH1 on chromosome 14q22 encoding GTP cyclohydrolase 1, the rate-limiting enzyme in tetrahydrobiopterin and dopamine biosynthesis. Children present at age 4 to 8 with lower extremity dystonic posturing that worsens dramatically towards the evening and improves after sleep. A low-dose trial of oral levodopa/carbidopa (1-5 mg/kg/day) produces near-miraculous, permanent resolution (Wilson copper).",
       "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "gch1",
-            "label": "GCH1 mutation: GTP cyclohydrolase 1 deficiency (low dopamine)"
-          },
-          {
-            "id": "diurn",
-            "label": "Equinovarus foot dystonia with diurnal worsening towards evening"
-          },
-          {
-            "id": "ldopa",
-            "label": "Low-dose Levodopa/Carbidopa trial (1-5 mg/kg/day): Dramatic complete cure"
-          }
-        ],
-        "edges": [
-          [
-            "gch1",
-            "diurn"
-          ],
-          [
-            "diurn",
-            "ldopa"
-          ]
-        ]
+        "kind": "image",
+        "src": "v1/kb/media/friedreich-ataxia-fig1.webp",
+        "alt": "Frataxin gene defect with spinal cord, cardiac, skeletal and foot pathology.",
+        "caption": "Friedreich ataxia: cord, heart, skeleton and feet. Credit: StewardMD."
       }
     },
     {

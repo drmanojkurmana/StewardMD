@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "module": "med-neuromuscular",
+ "subject": "medicine",
+ "title": "Presynaptic Junctionopathies, Muscular Dystrophy, and Myopathies",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "An autoimmune presynaptic disorder of neuromuscular transmission characterised by proximal lower limb weakness, hyporeflexia, and autonomic dysfunction is **Lambert-Eaton syndrome** (LEMS). Driven by pathogenic IgG autoantibodies directed against P/Q-type voltage-gated calcium channels (VGCC) on the presynaptic motor nerve terminal, calcium influx upon nerve depolarization is blocked, preventing quantal release of acetylcholine.",
+   "say": "An autoimmune presynaptic disorder of neuromuscular transmission characterized by proximal leg weakness, hyporeflexia, and autonomic dysfunction is Lambert-Eaton syndrome. Caused by autoantibodies against presynaptic voltage-gated calcium channels, acetylcholine release is severely reduced.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/lambert-eaton-fig1.webp",
+    "alt": "Presynaptic P/Q-type calcium channel autoantibodies and post-exercise facilitation in LEMS.",
+    "caption": "Presynaptic calcium channel blockade and electrophysiological facilitation in LEMS. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In over fifty percent of instances, Lambert-Eaton syndrome represents a paraneoplastic autoimmune phenomenon strongly associated with **small cell lung cancer**. Electrophysiological diagnosis demonstrates low baseline compound muscle action potential amplitudes that display striking post-exercise facilitation, with an incremental response exceeding one-hundred percent following ten seconds of maximal isometric exercise or high-frequency stimulation.",
+   "say": "In over half of cases, Lambert-Eaton syndrome represents a paraneoplastic condition strongly associated with small cell lung cancer. Electrophysiological testing shows low baseline action potential amplitudes with marked post-exercise facilitation exceeding one-hundred percent.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Myasthenia Gravis (MG)",
+     "Lambert-Eaton Syndrome (LEMS)"
+    ],
+    "rows": [
+     [
+      "Synaptic Location",
+      "Postsynaptic acetylcholine receptor",
+      "Presynaptic P/Q-type voltage-gated calcium channel"
+     ],
+     [
+      "Primary Weakness Distribution",
+      "Ocular (ptosis, diplopia) and bulbar early",
+      "Proximal lower limbs; ocular muscles typically spared"
+     ],
+     [
+      "Deep Tendon Reflexes",
+      "Normal and preserved throughout",
+      "Markedly depressed or absent (hyporeflexia/areflexia)"
+     ],
+     [
+      "Autonomic Symptoms",
+      "Strictly absent",
+      "Prominent: dry mouth, constipation, erectile failure"
+     ],
+     [
+      "Underlying Malignancy",
+      "Thymoma (10% to 15%)",
+      "Small cell lung cancer (> 50% paraneoplastic)"
+     ],
+     [
+      "First-Line Symptomatic Drug",
+      "Pyridostigmine",
+      "Amifampridine (3,4-diaminopyridine)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most common and severe childhood hereditary muscular dystrophy is **Duchenne muscular dystrophy** (DMD), an X-linked recessive disorder caused by out-of-frame nonsense or deletion mutations in the DMD gene on chromosome Xp21. Complete absence of the subsarcolemmal structural cytoskeletal protein dystrophin leads to membrane fragility, continuous contraction-induced muscle necrosis, and progressive fatty pseudohypertrophy.",
+   "say": "The most common severe hereditary muscular dystrophy is Duchenne muscular dystrophy, an X-linked recessive disorder caused by mutations in the dystrophin gene. Complete absence of the cytoskeletal protein dystrophin causes contraction-induced muscle necrosis and fatty pseudohypertrophy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mut",
+      "label": "DMD Gene Out-of-Frame Mutation (Xp21)"
+     },
+     {
+      "id": "dys",
+      "label": "Total Absence of Functional Dystrophin"
+     },
+     {
+      "id": "sarco",
+      "label": "Sarcolemmal Tearing, Calcium Influx & Necrosis"
+     }
+    ],
+    "edges": [
+     [
+      "mut",
+      "dys"
+     ],
+     [
+      "dys",
+      "sarco"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Affected boys manifest progressive proximal pelvic girdle weakness between three and five years of age. A classic physical manoeuvre demonstrating pelvic girdle weakness is the **Gowers sign**, wherein the child uses their hands to climb up their own thighs to rise from the floor to an upright standing posture, accompanied by prominent calf pseudohypertrophy, waddling gait, and lumbar lordosis.",
+   "say": "Affected boys present with proximal pelvic girdle weakness in early childhood. A classic physical manoeuvre reflecting pelvic girdle weakness is Gowers sign, where the child uses their hands to climb up their own thighs to stand, accompanied by calf pseudohypertrophy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/neuropathy-myopathy-mg-lambert-duchenne-fig1.webp",
+    "alt": "Clinical demonstration of Gowers sign as child climbs thighs to achieve standing posture.",
+    "caption": "Diagnostic Gowers sign demonstrating pelvic girdle and hip extensor weakness. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The biochemical hallmark of active dystrophic muscle necrosis in Duchenne muscular dystrophy is extreme elevation of serum **creatine kinase** (CK), frequently exceeding ten to fifty times the upper limit of normal even before clinical weakness manifests. A related allelic disorder resulting from in-frame mutations producing truncated but partially functional dystrophin is Becker muscular dystrophy, displaying a milder, later-onset clinical course.",
+   "say": "The biochemical hallmark of active dystrophic muscle necrosis in Duchenne muscular dystrophy is extreme elevation of serum creatine kinase, exceeding ten to fifty times normal. A milder allelic variant producing partially functional dystrophin is Becker muscular dystrophy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Duchenne Muscular Dystrophy (DMD)",
+     "points": [
+      "Out-of-frame frameshift deletion or stop mutation",
+      "Complete absence of functional dystrophin protein",
+      "Onset age 3 to 5 years; wheelchair dependent by age 12",
+      "Dilated cardiomyopathy and respiratory failure by age 20"
+     ]
+    },
+    "right": {
+     "title": "Becker Muscular Dystrophy (BMD)",
+     "points": [
+      "In-frame deletion preserving translational reading frame",
+      "Truncated or reduced dystrophin protein synthesized",
+      "Milder course; remains ambulatory beyond age 16",
+      "Survival into adult decades; cardiomyopathy remains hazard"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most prevalent adult-onset muscular dystrophy is **myotonic dystrophy** type 1 (Steinert disease), an autosomal dominant disorder caused by an expanded CTG trinucleotide repeat in the 3-prime untranslated region of the DMPK gene on chromosome 19q13. Pathological hallmark is myotonia (delayed relaxation of skeletal muscle after voluntary contraction, such as inability to release grip after handshaking).",
+   "say": "The most prevalent adult muscular dystrophy is myotonic dystrophy type one, an autosomal dominant disorder caused by an expanded CTG repeat in the DMPK gene. The clinical hallmark is myotonia, defined as delayed muscle relaxation after voluntary contraction like grip release.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ctg",
+      "label": "CTG Repeat Expansion in DMPK Gene"
+     },
+     {
+      "id": "mrna",
+      "label": "Toxic MBNL1 Splicing Factor Sequestration"
+     },
+     {
+      "id": "myot",
+      "label": "Chloride Channel ClC-1 Splicing Failure & Myotonia"
+     }
+    ],
+    "edges": [
+     [
+      "ctg",
+      "mrna"
+     ],
+     [
+      "mrna",
+      "myot"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Myotonic dystrophy type 1 is a multisystem disorder displaying prominent systemic manifestations: frontal balding, iridescent Christmas tree cataracts on slit-lamp ophthalmology, temporal wasting creating a hatchet facies, cardiac conduction defects (PR prolongation and sudden death risk), testicular atrophy with primary **hypogonadism**, and insulin resistance.",
+   "say": "Myotonic dystrophy type one is a multisystem disorder displaying prominent features: frontal balding, iridescent Christmas tree cataracts, temporal wasting causing a hatchet facies, cardiac conduction blocks, testicular atrophy, and insulin resistance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ System",
+     "Characteristic Clinical Finding",
+     "Clinical Monitoring Strategy"
+    ],
+    "rows": [
+     [
+      "Neuromuscular",
+      "Grip myotonia, distal hand wasting, bilateral ptosis",
+      "Physical therapy, oral Mexiletine for disabling myotonia"
+     ],
+     [
+      "Cardiac",
+      "First-degree AV block, bundle branch block, arrhythmias",
+      "Annual resting ECG and 24-hour Holter monitoring"
+     ],
+     [
+      "Ophthalmology",
+      "Polychromatic Christmas tree cortical cataracts",
+      "Annual slit-lamp biomicroscopy"
+     ],
+     [
+      "Endocrine",
+      "Testicular atrophy, erectile dysfunction, diabetes mellitus",
+      "Serum testosterone, gonadotropins, fasting glucose / HbA1c"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Episodic flaccid quadriparesis triggered by sudden shifts in serum potassium represents **periodic paralysis**, caused by mutations in skeletal muscle voltage-gated calcium (CACNA1S) or sodium (SCN4A) channels. Hypokalemic periodic paralysis is triggered by carbohydrate-rich meals or rest following strenuous exercise, responding acutely to oral potassium chloride while avoiding intravenous glucose infusions.",
+   "say": "Episodic flaccid quadriparesis triggered by shifts in serum potassium represents periodic paralysis, caused by mutations in muscle ion channels. Hypokalemic periodic paralysis is provoked by carbohydrate-rich meals or resting after exertion, responding to oral potassium chloride while avoiding glucose.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hypokalemic Periodic Paralysis",
+     "points": [
+      "Mutations in CACNA1S or SCN4A ion channels",
+      "Triggered by heavy carbohydrate meals and rest after exertion",
+      "Serum potassium low during attacks (< 3.0 mEq/L)",
+      "Treated with oral Potassium chloride; Acetazolamide prevents"
+     ]
+    },
+    "right": {
+     "title": "Hyperkalemic Periodic Paralysis",
+     "points": [
+      "Mutations in SCN4A sodium channel alpha subunit",
+      "Triggered by fasting, cold exposure, potassium ingestion",
+      "Serum potassium elevated during attacks (> 5.0 mEq/L)",
+      "Treated with oral glucose/insulin or inhaled Beta-2 agonists"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 441"
+}

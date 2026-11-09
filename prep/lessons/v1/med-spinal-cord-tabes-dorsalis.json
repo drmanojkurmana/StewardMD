@@ -1,0 +1,204 @@
+{
+ "v": 1,
+ "module": "med-spinal-cord",
+ "subject": "medicine",
+ "title": "Myelopathies and Motor Neuron Disease",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Late tertiary parenchymal neurosyphilis characterised by progressive degeneration and demyelination of the dorsal spinal nerve roots and posterior columns of the spinal cord is **tabes dorsalis**. Pathologically, spirochaetal endarteritis destroys sensory axons entering the spinal cord, causing severe sensory ataxia with a stamping, high-steppage gait, positive Romberg sign, and excruciating, lightning-like paroxysmal pains.",
+   "say": "Late tertiary neurosyphilis characterized by progressive degeneration of dorsal spinal roots and posterior columns is tabes dorsalis. Spirochaetal endarteritis destroys sensory axons, causing severe sensory ataxia with a stamping gait, positive Romberg sign, and lightning pains.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cns-umn-vs-lmn.webp",
+    "alt": "Comparison of spinal tract pathways and clinical sensory/motor deficits.",
+    "caption": "Spinal cord tract anatomy and pathways in degenerative myelopathies. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Compression of multiple lumbosacral nerve roots below the termination of the spinal cord (conus medullaris at L1-L2) produces the surgical emergency designated as **cauda equina syndrome**. Typically precipitated by massive central lumbar disc herniation (L4-L5 or L5-S1), patients present with bilateral sciatica, lower motor neuron flaccid leg weakness, saddle anesthesia across S3-S5 dermatomes, and acute urinary retention with overflow incontinence.",
+   "say": "Compression of multiple lumbosacral nerve roots below the conus medullaris produces cauda equina syndrome. Caused by central lumbar disc herniation, patients present with bilateral sciatica, lower motor neuron leg weakness, saddle anesthesia, and urinary retention with overflow incontinence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Conus Medullaris Syndrome",
+     "points": [
+      "Lesion at L1-L2 vertebral level (terminal spinal cord)",
+      "Sudden onset, symmetrical bilateral deficits",
+      "Mixed UMN and LMN signs (Babinski signs positive)",
+      "Early severe urinary and fecal incontinence"
+     ]
+    },
+    "right": {
+     "title": "Cauda Equina Syndrome",
+     "points": [
+      "Lesion below L2 vertebral level (lumbosacral roots)",
+      "Gradual onset, asymmetrical radicular pain",
+      "Pure lower motor neuron signs (areflexia)",
+      "Late sphincter dysfunction with saddle anesthesia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Emergency surgical decompression within forty-eight hours of symptom onset in cauda equina syndrome is mandatory to prevent permanent neurogenic bladder, fecal incontinence, and erectile dysfunction. Bedside post-void bladder ultrasound confirms urinary retention when post-void residual volume exceeds two-hundred millilitres, while digital rectal examination demonstrates marked reduction or loss of anal **sphincter** tone.",
+   "say": "Emergency surgical decompression within forty-eight hours in cauda equina syndrome is mandatory to prevent permanent neurogenic bladder and fecal incontinence. Bedside ultrasound confirms urinary retention with high residual volume, while rectal exam demonstrates loss of anal sphincter tone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sadd",
+      "label": "Saddle Anesthesia + Urinary Retention"
+     },
+     {
+      "id": "mri",
+      "label": "Emergency Lumbar Spine MRI"
+     },
+     {
+      "id": "dec",
+      "label": "Surgical Decompression Within 48 Hours"
+     }
+    ],
+    "edges": [
+     [
+      "sadd",
+      "mri"
+     ],
+     [
+      "mri",
+      "dec"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A fatal neurodegenerative disorder characterised by relentless concurrent degeneration of both upper motor neurons in the motor cortex and lower motor neurons in the brainstem and spinal cord is **amyotrophic lateral sclerosis** (ALS, Lou Gehrig disease). Pathologically, cytoplasmic inclusions containing aggregated TDP-43 or mutant copper-zinc superoxide dismutase 1 (SOD1) trigger progressive motor cell apoptosis.",
+   "say": "A fatal neurodegenerative disorder characterized by combined degeneration of both upper motor neurons and lower motor neurons is amyotrophic lateral sclerosis. Pathologically, cytoplasmic inclusions containing aggregated TDP-43 trigger progressive motor neuron apoptosis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cns-motor-power.webp",
+    "alt": "Physical examination testing motor power and muscle fasciculations.",
+    "caption": "Motor unit testing and clinical identification of upper and lower motor signs. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The diagnostic clinical hallmark of amyotrophic lateral sclerosis is the coexistence of upper motor neuron signs (spasticity, hyperreflexia, extensor plantars) alongside lower motor neuron signs (profound muscle wasting, flaccid weakness, widespread **fasciculations**) within the same limb and across multiple neuraxial body segments, in the complete absence of sensory deficits or oculomotor paralysis.",
+   "say": "The diagnostic clinical hallmark of ALS is the coexistence of upper motor neuron signs alongside lower motor neuron signs, including muscle wasting and widespread fasciculations, within the same limb and without sensory loss.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neuraxial Segment",
+     "Upper Motor Neuron (UMN) Features",
+     "Lower Motor Neuron (LMN) Features"
+    ],
+    "rows": [
+     [
+      "Bulbar Segment",
+      "Spastic dysarthria, pseudobulbar affect (pathological crying)",
+      "Tongue atrophy, lingual fasciculations, dysphagia"
+     ],
+     [
+      "Cervical Segment",
+      "Brisk finger jerks, Hoffman sign, spastic tone",
+      "Intrinsic hand muscle wasting, shoulder weakness, fasciculations"
+     ],
+     [
+      "Lumbosacral Segment",
+      "Patellar/ankle hyperreflexia, extensor Babinski sign",
+      "Foot drop, anterior tibialis wasting, calf fasciculations"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The only disease-modifying oral pharmacotherapy proven to modestly prolong survival and delay mechanical ventilation in amyotrophic lateral sclerosis is the glutamate antagonist **riluzole**. By inhibiting presynaptic glutamate release and inactivating voltage-dependent sodium channels, riluzole blunts excitotoxic motor neuron death, while the free-radical scavenger edaravone slows functional decline.",
+   "say": "The only disease-modifying oral drug proven to modestly prolong survival in amyotrophic lateral sclerosis is the glutamate antagonist riluzole. By inhibiting presynaptic glutamate release, riluzole blunts excitotoxic motor neuron injury, while edaravone slows functional decline.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "glut",
+      "label": "Synaptic Glutamate Excitotoxicity"
+     },
+     {
+      "id": "ril",
+      "label": "Riluzole Blocks Presynaptic Glutamate"
+     },
+     {
+      "id": "surv",
+      "label": "Modest Survival Prolongation (2-3 Months)"
+     }
+    ],
+    "edges": [
+     [
+      "glut",
+      "ril"
+     ],
+     [
+      "ril",
+      "surv"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An autosomal recessive lower motor neuron disorder of childhood caused by homozygous deletions or loss-of-function mutations in the survival motor neuron 1 (SMN1) gene on chromosome 5q is **spinal muscular atrophy** (SMA). Type 1 (Werdnig-Hoffmann disease) presents in early infancy with profound generalized hypotonia (floppy infant), frog-leg posture, bell-shaped chest from intercostal paralysis, and tongue fasciculations.",
+   "say": "An autosomal recessive lower motor neuron disorder caused by deletions in the SMN1 gene on chromosome 5q is spinal muscular atrophy. Type one presents in early infancy with profound hypotonia, frog-leg posture, bell-shaped chest from intercostal weakness, and tongue fasciculations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spinal Muscular Atrophy (SMA)",
+     "points": [
+      "Pure lower motor neuron degeneration",
+      "Recessive SMN1 deletion; treated with Nusinersen",
+      "Prominent hypotonia, areflexia, and tongue fasciculations",
+      "Cognition and extraocular muscles completely preserved"
+     ]
+    },
+    "right": {
+     "title": "Hereditary Spastic Paraplegia",
+     "points": [
+      "Pure upper motor neuron degeneration",
+      "Progressive length-dependent corticospinal axonopathy",
+      "Severe spastic scissoring gait in lower extremities",
+      "Normal sensory examination in pure forms"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A heterogeneous group of inherited neurodegenerative disorders characterised by progressive length-dependent axonal degeneration of the longest corticospinal motor tracts is **hereditary spastic paraplegia** (HSP). Patients present with slowly progressive, symmetrical lower limb spasticity, hyperreflexia, extensor plantars, and a stiff scissoring gait, while arm strength, sensation, and bulbar musculature remain completely spared in uncomplicated forms.",
+   "say": "A heterogeneous group of inherited neurodegenerative disorders characterized by length-dependent degeneration of corticospinal motor tracts is hereditary spastic paraplegia. Patients present with slowly progressive lower limb spasticity, hyperreflexia, and a stiff scissoring gait, while upper limbs remain spared.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Genetic Category",
+     "Primary Genetic Locus",
+     "Key Clinical Features"
+    ],
+    "rows": [
+     [
+      "Pure HSP (SPG4)",
+      "SPAST gene encoding spastin (AD)",
+      "Isolated progressive spastic paraparesis, hyperreflexia, urinary urgency"
+     ],
+     [
+      "Complex HSP",
+      "Multiple genes (SPG7, SPG11)",
+      "Spastic paraparesis + ataxia, optic atrophy, cognitive decline, neuropathy"
+     ],
+     [
+      "SMA Type 1",
+      "SMN1 homozygous deletion (5q13)",
+      "Infantile severe hypotonia, intercostal weakness, early mortality without therapy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 429"
+}

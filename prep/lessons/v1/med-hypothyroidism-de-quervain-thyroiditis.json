@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "module": "med-hypothyroidism",
+ "subject": "medicine",
+ "title": "Subacute Thyroiditis and Goitre Evaluation",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A post-viral granulomatous destructive inflammatory process produces exquisite tenderness and swelling over the anterior neck. Classically designated as **de quervain thyroiditis**, this condition typically affects females aged thirty to fifty years following an acute upper respiratory infection. Histopathology reveals follicular architecture disruption with characteristic multinucleated giant cells surrounding collapsed colloid globules. Patients present with severe neck pain radiating to the jaw, accompanied by fever and malaise. The course follows a triphasic pattern: transient thyrotoxicosis, transient hypothyroidism, and spontaneous euthyroid recovery.",
+   "say": "A post-viral granulomatous destructive inflammatory process produces exquisite tenderness and swelling over the anterior neck. Designated as de quervain thyroiditis, this condition typically affects females aged thirty to fifty following an acute upper respiratory infection. Histopathology reveals disruption of follicular architecture with multinucleated giant cells surrounding colloid globules. Patients present with severe neck pain radiating to the jaw, accompanied by fever. The course follows a triphasic pattern of transient thyrotoxicosis, transient hypothyroidism, and complete recovery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Phase 1 (Weeks 2-6): Thyrotoxicosis from follicular leak (Low RAIU)"
+     },
+     {
+      "id": "p2",
+      "label": "Phase 2 (Weeks 6-12): Transient hypothyroidism (Follicular exhaustion)"
+     },
+     {
+      "id": "p3",
+      "label": "Phase 3 (Months 3-6): Complete euthyroid recovery in > 90%"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Transient autoimmune follicular inflammation occurring without cervical discomfort produces an insidious destructive thyrotoxic syndrome. Clinically described as **painless thyroiditis** or subacute lymphocytic thyroiditis, this disorder features transient thyrotoxicosis with a non-tender thyroid examination. Laboratory evaluation reveals suppressed TSH, elevated free T4, low radioactive iodine uptake below two percent, and positive anti-TPO antibodies. Because excess hormones reflect follicular leakage rather than de novo synthesis, antithyroid medications are completely ineffective, with management relying on oral beta-blockers for symptomatic control.",
+   "say": "Transient autoimmune follicular inflammation occurring without cervical discomfort produces an insidious destructive thyrotoxic syndrome. Clinically described as painless thyroiditis, this autoimmune disorder features transient thyrotoxicosis with a non-tender thyroid examination. Laboratory evaluation reveals suppressed TSH, elevated free T4, low radioiodine uptake, and positive anti-TPO antibodies. Because circulating hormones reflect follicular leakage rather than new synthesis, antithyroid drugs are ineffective, with therapy relying on beta-blockers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "de Quervain (Painful) Thyroiditis",
+     "points": [
+      "Exquisite anterior neck pain radiating to jaw",
+      "Post-viral aetiology with giant cells on biopsy",
+      "Markedly elevated ESR and CRP (> 50 mm/hr)",
+      "Treated with NSAIDs or oral prednisone"
+     ]
+    },
+    "right": {
+     "title": "Painless (Silent) Thyroiditis",
+     "points": [
+      "Completely painless, non-tender thyroid gland",
+      "Autoimmune lymphocytic infiltration on biopsy",
+      "Normal or minimally elevated ESR and CRP",
+      "Treated with beta-blockers for thyrotoxic symptoms"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Autoimmune thyroid dysfunction arising in the twelve months following childbirth represents a major postpartum endocrine disorder. Developing as **postpartum thyroiditis**, this condition occurs in five to ten percent of all postpartum women, rising to fifty percent in those with positive anti-TPO antibodies. Typically presenting three to six months postpartum with thyrotoxic symptoms including anxiety and palpitations, it frequently progresses to a hypothyroid phase with lethargy. Although most women recover normal euthyroid function within one year, roughly thirty to fifty percent develop permanent primary hypothyroidism within five to ten years.",
+   "say": "Autoimmune thyroid dysfunction arising in the twelve months following childbirth represents a major postpartum endocrine disorder. Developing as postpartum thyroiditis, this condition occurs in five to ten percent of postpartum women, rising to fifty percent in those with anti-TPO antibodies. Typically presenting three to six months postpartum with thyrotoxic symptoms, it frequently progresses to a hypothyroid phase with fatigue and depression. Although most women recover euthyroidism within a year, many develop permanent hypothyroidism long-term.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "imm",
+      "label": "Postpartum immune rebound: Loss of gestational immune tolerance"
+     },
+     {
+      "id": "tri",
+      "label": "Triphasic course: Thyrotoxic (Months 1-3) -> Hypothyroid (Months 3-8) -> Recovery"
+     },
+     {
+      "id": "long",
+      "label": "Long-term surveillance: 30-50% risk of permanent hypothyroidism at 5 years"
+     }
+    ],
+    "edges": [
+     [
+      "imm",
+      "tri"
+     ],
+     [
+      "tri",
+      "long"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A rare, chronic inflammatory disorder featuring dense, invasive fibrosclerosis of the thyroid gland mimics an advanced invasive malignancy. Presenting as **riedel thyroiditis**, this condition forms part of the systemic IgG4-related disease spectrum, accompanied by retroperitoneal fibrosis, sclerosing cholangitis, or mediastinal fibrosis. Proliferating dense hyalinized collagen and inflammatory plasma cells infiltrate the thyroid parenchyma and breach the surgical capsule, invading strap muscles, the trachea, recurrent laryngeal nerves, and carotid sheaths. Patients present with a stony, rock-hard, non-tender, fixed neck mass causing dysphagia, dyspnea, and hoarseness, responding to tamoxifen or systemic corticosteroids.",
+   "say": "A rare, chronic inflammatory disorder featuring dense fibrosclerosis of the thyroid gland mimics an advanced invasive malignancy. Presenting as riedel thyroiditis, this condition forms part of the systemic IgG4-related disease spectrum. Dense hyalinized collagen and plasma cells infiltrate the thyroid and breach the surgical capsule, invading strap muscles, trachea, and carotid sheaths. Patients present with a rock-hard, fixed neck mass causing dysphagia, dyspnea, and hoarseness, managed with corticosteroids or tamoxifen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Riedel Thyroiditis",
+     "points": [
+      "Dense fibro-inflammatory tissue with IgG4+ plasma cells",
+      "Infiltrates beyond thyroid capsule into adjacent strap muscles",
+      "Stony, rock-hard thyroid mimicking anaplastic carcinoma",
+      "Responds to tamoxifen, systemic glucocorticoids, or surgery"
+     ]
+    },
+    "right": {
+     "title": "Anaplastic Thyroid Carcinoma",
+     "points": [
+      "Highly malignant, rapidly expanding pleomorphic neoplasm",
+      "Elderly presentation with rapid local invasion and necrosis",
+      "Extremely poor prognosis (median survival 3-6 months)",
+      "Palliative airway stenting, radiation, and chemotherapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Inadequate dietary intake of essential trace halides represents the most common cause of non-toxic goitre and preventable intellectual disability globally. Developing **iodine deficiency goitre** occurs when daily dietary iodine intake falls below the physiological requirement of one hundred and fifty micrograms per day. Reduced substrate impairs hormone synthesis, elevating circulating thyroid-stimulating hormone. Chronic TSH hyperstimulation triggers diffuse follicular cell hyperplasia, progressively evolving over decades into multinodular goitre. Severe maternal deficiency impairs fetal neurogenesis, causing congenital cretinism, preventable through universal table salt iodisation programmes.",
+   "say": "Inadequate dietary intake of essential trace halides represents the most common cause of goitre and intellectual disability globally. Developing iodine deficiency goitre occurs when daily intake falls below one hundred and fifty micrograms per day. Reduced substrate impairs hormone synthesis, releasing feedback and elevating thyroid-stimulating hormone. Chronic TSH hyperstimulation triggers diffuse follicular hyperplasia, evolving over decades into multinodular goitre. Severe maternal deficiency causes congenital cretinism, preventable through universal salt iodisation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-multinodular-goitre-thyroid.webp",
+    "alt": "Macroscopic gross surgical specimen of multinodular goitre demonstrating colloid nodules and degenerative cystic spaces.",
+    "caption": "Gross surgical pathology of multinodular goitre showing fibrous septa and colloid nodules. [Credit: Wikimedia Commons]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Systematic evaluation of solitary and dominant thyroid nodules discriminates benign adenomatous hyperplasia from malignant thyroid epithelial neoplasms. Initial clinical **thyroid nodule evaluation** begins with measuring serum thyroid-stimulating hormone. If TSH is suppressed, radionuclide scintigraphy is performed to confirm a hyperfunctioning hot nodule, which is almost universally benign. If TSH is normal or elevated, high-resolution diagnostic ultrasound serves as the primary imaging modality. Sonographic features indicating malignancy include marked hypoechogenicity, irregular or microlobulated margins, microcalcifications, solid composition, and a taller-than-wide dimension on transverse views.",
+   "say": "Systematic evaluation of solitary and dominant thyroid nodules discriminates benign hyperplasia from malignant thyroid neoplasms. Initial thyroid nodule evaluation begins with measuring serum thyroid-stimulating hormone. If TSH is suppressed, radionuclide scintigraphy confirms a hyperfunctioning hot nodule, which is almost universally benign. If TSH is normal or elevated, high-resolution ultrasound evaluates features such as marked hypoechogenicity, microcalcifications, and irregular margins.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tsh",
+      "label": "Solitary thyroid nodule: Measure serum TSH"
+     },
+     {
+      "id": "hot",
+      "label": "Low TSH: Radionuclide scan -> Hot nodule (Benign, treat thyrotoxicosis)"
+     },
+     {
+      "id": "us",
+      "label": "Normal/High TSH: Neck ultrasound -> Stratify TI-RADS score for FNAC"
+     }
+    ],
+    "edges": [
+     [
+      "tsh",
+      "hot"
+     ],
+     [
+      "tsh",
+      "us"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ultrasound-guided fine-needle aspiration cytology provides the definitive tissue assessment for stratifying malignant risk and directing surgical management. Cytopathology is standardized internationally using the **bethesda system** for reporting thyroid cytopathology, which defines six diagnostic categories with explicit risks of malignancy. Nodules designated Bethesda category two represent benign colloid or adenomatoid nodules requiring conservative ultrasound surveillance. Bethesda category five and category six represent suspicious for malignancy and malignant neoplasms (typically papillary thyroid carcinoma), mandating surgical resection. Indeterminate categories three and four frequently utilize molecular testing for BRAF and RET mutations.",
+   "say": "Ultrasound-guided fine-needle aspiration cytology provides tissue assessment for stratifying malignant risk and directing surgical management. Cytopathology is standardized internationally using the bethesda system for reporting thyroid cytopathology, which defines six diagnostic categories with explicit risks of malignancy. Bethesda category two represents benign nodules managed with ultrasound surveillance. Categories five and six represent malignant neoplasms mandating surgical resection, while indeterminate categories often utilize molecular testing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Bethesda Class",
+     "Cytological Diagnosis",
+     "Malignancy Risk",
+     "Recommended Clinical Management"
+    ],
+    "rows": [
+     [
+      "Category I",
+      "Non-diagnostic / Unsatisfactory",
+      "1% to 4%",
+      "Repeat ultrasound-guided FNAC"
+     ],
+     [
+      "Category II",
+      "Benign (Colloid nodule, thyroiditis)",
+      "0% to 3%",
+      "Clinical and ultrasound surveillance"
+     ],
+     [
+      "Category III",
+      "Atypia of Undetermined Significance (AUS)",
+      "10% to 30%",
+      "Repeat FNAC or molecular testing"
+     ],
+     [
+      "Category IV",
+      "Follicular Neoplasm / Suspicious for FN",
+      "25% to 40%",
+      "Diagnostic lobectomy / hemithyroidectomy"
+     ],
+     [
+      "Category V",
+      "Suspicious for Malignancy",
+      "50% to 75%",
+      "Near-total or total thyroidectomy"
+     ],
+     [
+      "Category VI",
+      "Malignant (Papillary, medullary, anaplastic)",
+      "97% to 99%",
+      "Total thyroidectomy with lymph node dissection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive surgical extirpation resolves compressive symptoms and eliminates malignancy in refractory or malignant nodular disease. Performing total or subtotal **thyroidectomy** requires meticulous surgical technique to preserve the bilateral recurrent laryngeal nerves and superior laryngeal nerves. Postoperative complications include transient or permanent hypoparathyroidism from accidental parathyroid gland devascularization or excision, resulting in severe hypocalcaemia with positive Chvostek and Trousseau signs. Intraoperative frozen section, nerve monitoring, and routine postoperative calcium and intact parathyroid hormone measurements are mandatory standard protocols.",
+   "say": "Definitive surgical extirpation resolves compressive symptoms and eliminates malignancy in refractory or malignant nodular disease. Performing total or subtotal thyroidectomy requires meticulous surgical technique to preserve bilateral recurrent laryngeal nerves. Postoperative complications include transient or permanent hypoparathyroidism from accidental parathyroid injury, resulting in severe hypocalcaemia with positive Chvostek signs. Routine postoperative calcium and parathyroid hormone measurements are standard protocols.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-subtotal-and-total-thyroidectomy.webp",
+    "alt": "Surgical anatomical planes and techniques for subtotal and total thyroidectomy resection.",
+    "caption": "Surgical techniques for total and subtotal thyroidectomy with recurrent nerve preservation. [Credit: haitham alfalah]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

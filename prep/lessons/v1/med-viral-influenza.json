@@ -1,0 +1,214 @@
+{
+ "v": 1,
+ "module": "med-viral",
+ "subject": "medicine",
+ "title": "Respiratory and Systemic Viral Infections",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "An acute respiratory infection caused by enveloped, segmented negative-sense RNA orthomyxoviruses is **influenza**. Viral envelope surface spikes comprise haemagglutinin (HA, mediating viral attachment to sialic acid host receptors) and neuraminidase (NA, facilitating newly formed virion budding). Point mutations cause annual antigenic drift, whereas genetic reassortment of RNA segments between species produces catastrophic antigenic shift.",
+   "say": "An acute respiratory infection caused by segmented negative-sense RNA viruses is influenza. Surface spikes comprise haemagglutinin, which mediates host cell attachment, and neuraminidase, which enables virion release. Point mutations cause annual antigenic drift, while segment reassortment produces pandemic antigenic shift.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/influenza-fig1.webp",
+    "alt": "Influenza virion surface glycoproteins and mechanism of antigenic shift versus drift.",
+    "caption": "Haemagglutinin attachment, neuraminidase budding, and antigenic reassortment in influenza. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The neuraminidase inhibitor of choice for acute influenza A (including pandemic H1N1) and influenza B in high-risk patients is oral **oseltamivir** (75 mg twice daily for five days). Administered within forty-eight hours of symptom onset, oseltamivir competitive enzyme inhibition prevents cleavage of sialic acid residues, halting progeny viral release from infected respiratory epithelial cells.",
+   "say": "The neuraminidase inhibitor of choice for acute influenza A and B in high-risk patients is oral oseltamivir. Started within forty-eight hours of symptom onset, oseltamivir prevents cleavage of sialic acid residues, halting viral release from infected respiratory epithelial cells.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antiviral Agent",
+     "Mechanism of Action",
+     "Route and Standard Regimen"
+    ],
+    "rows": [
+     [
+      "Oseltamivir (Tamiflu)",
+      "Neuraminidase inhibitor (prevents virion release)",
+      "Oral 75 mg bid for 5 days (treatment) or 75 mg qd (prophylaxis)"
+     ],
+     [
+      "Zanamivir (Relenza)",
+      "Inhaled neuraminidase inhibitor",
+      "Inhalation 10 mg bid; contraindicated in asthma/COPD"
+     ],
+     [
+      "Baloxavir marboxil",
+      "Cap-dependent endonuclease inhibitor",
+      "Single oral weight-based dose within 48 hours of onset"
+     ],
+     [
+      "Remdesivir (Veklury)",
+      "Viral RNA-dependent RNA polymerase inhibitor",
+      "IV infusion for acute severe COVID-19 infection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe acute respiratory syndrome coronavirus 2 (**SARS-CoV-2**) is a positive-sense single-stranded RNA betacoronavirus causing COVID-19. The viral spike glycoprotein binds human host angiotensin-converting enzyme 2 (ACE2) receptors, facilitating cellular entry. While mild illness features fever, cough, and anosmia, severe disease features progressive hypoxic respiratory failure and diffuse alveolar damage.",
+   "say": "Severe acute respiratory syndrome coronavirus 2 is an RNA virus causing COVID-19. Its spike glycoprotein binds host ACE2 receptors to enter cells. While mild infection features fever, cough, and loss of smell, severe disease progresses to hypoxic respiratory failure and diffuse alveolar damage.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ace2",
+      "label": "Spike Glycoprotein Binds Host ACE2 Receptor"
+     },
+     {
+      "id": "entry",
+      "label": "TMPRSS2 Cleavage & Host Cellular Entry"
+     },
+     {
+      "id": "resp",
+      "label": "Viral Pneumonia & Hypoxic Respiratory Failure"
+     }
+    ],
+    "edges": [
+     [
+      "ace2",
+      "entry"
+     ],
+     [
+      "entry",
+      "resp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In severe and critical COVID-19, hyperactivation of macrophages and monocytes triggers an exuberant, dysregulated release of pro-inflammatory cytokines (IL-6, IL-1, TNF-alpha) recognized as a **cytokine storm**. Characterised by soaring ferritin, C-reactive protein, and D-dimer, this hyperinflammatory state produces microvascular pulmonary thrombosis and acute respiratory distress syndrome, successfully suppressed with dexamethasone and baricitinib.",
+   "say": "In severe COVID-19, hyperactivation of immune cells triggers dysregulated release of inflammatory cytokines, recognized as a cytokine storm. Characterized by elevated ferritin, CRP, and D-dimer, this hyperinflammatory state causes microvascular thrombosis, treated with dexamethasone and baricitinib.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Viral Phase (Days 1 to 7)",
+     "points": [
+      "High active viral replication in upper airway",
+      "Symptoms: Fever, dry cough, anosmia, fatigue",
+      "Treatment: Nirmatrelvir/Ritonavir or Remdesivir",
+      "Corticosteroids provide NO benefit here"
+     ]
+    },
+    "right": {
+     "title": "Late Inflammatory Phase (> Day 7)",
+     "points": [
+      "Hyperinflammatory cytokine storm in lung parenchyma",
+      "Hypoxemic respiratory failure, bilateral infiltrates",
+      "Soaring inflammatory biomarkers (Ferritin, D-dimer)",
+      "Treatment: Dexamethasone + Tocilizumab/Baricitinib"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A zoonotic paramyxovirus exhibiting exceptionally high human case-fatality rates (forty to seventy-five percent) in South Asia is **Nipah virus**. Transmitted naturally by Pteropus fruit bats via consumption of raw date palm sap contaminated with bat secretions, or through direct human-to-human droplet contact, it precipitates acute necrotising encephalitis and severe respiratory distress syndrome.",
+   "say": "A zoonotic paramyxovirus with mortality up to seventy-five percent in South Asia is Nipah virus. Transmitted by fruit bats through contaminated date palm sap or direct droplet contact, it causes acute necrotising encephalitis and severe respiratory failure.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bat",
+      "label": "Pteropus Fruit Bat Reservoir"
+     },
+     {
+      "id": "sap",
+      "label": "Consumption of Raw Date Palm Sap"
+     },
+     {
+      "id": "enc",
+      "label": "Acute Necrotising Encephalitis & Coma"
+     }
+    ],
+    "edges": [
+     [
+      "bat",
+      "sap"
+     ],
+     [
+      "sap",
+      "enc"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An acute systemic viral illness occurring predominantly in adolescents and young adults is **infectious mononucleosis** (glandular fever), caused by the gamma-herpesvirus Epstein-Barr virus (EBV, HHV-4). Transmitted via infected oropharyngeal secretions (the kissing disease), EBV infects oral epithelial cells and latently immortalises B lymphocytes via CD21 receptor binding.",
+   "say": "An acute systemic viral illness occurring predominantly in adolescents is infectious mononucleosis, caused by Epstein-Barr virus. Transmitted through oral secretions, EBV infects oral epithelial cells and latently immortalises B lymphocytes via CD21 receptor binding.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/infectious-mononucleosis-fig1.webp",
+    "alt": "Exudative pharyngitis, posterior cervical lymphadenopathy, and atypical lymphocytes in EBV.",
+    "caption": "Diagnostic exudative pharyngitis, posterior cervical lymphadenopathy, and atypical lymphocytosis in EBV. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The classic clinical triad of infectious mononucleosis comprises high fevers, severe exudative pharyngotonsillitis with thick white tonsillar exudates, and prominent symmetrical posterior cervical lymphadenopathy, accompanied by splenomegaly in over fifty percent of patients. Administering ampicillin or amoxicillin in misdiagnosed EBV pharyngitis universally precipitates a characteristic florid, erythematous **maculopapular** rash.",
+   "say": "The classic clinical triad of infectious mononucleosis comprises fever, severe exudative pharyngitis, and symmetrical posterior cervical lymphadenopathy, with splenomegaly in half of patients. Administering amoxicillin in misdiagnosed EBV universally precipitates a florid maculopapular rash.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Epstein-Barr Virus (EBV)",
+     "Group A Streptococcal Pharyngitis"
+    ],
+    "rows": [
+     [
+      "Lymphadenopathy",
+      "Prominent posterior cervical and generalized",
+      "Anterior cervical lymph nodes only"
+     ],
+     [
+      "Splenomegaly",
+      "Present in > 50% (risk of traumatic rupture)",
+      "Strictly absent"
+     ],
+     [
+      "Peripheral Blood Smear",
+      "Atypical reactive CD8+ T lymphocytes (Downey cells)",
+      "Neutrophilic leukocytosis with toxic granulation"
+     ],
+     [
+      "Ampicillin Rash",
+      "Develops in > 90% if given aminopenicillins",
+      "No rash; clears streptococcal infection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rapid diagnostic confirmation of acute infectious mononucleosis utilizes the Monospot test, which detects circulating IgM **heterophile antibody** agglutinins capable of agglutinating horse or sheep erythrocytes (Paul-Bunnell test). Primary cytomegalovirus (CMV) infection produces an identical mononucleosis syndrome in young adults that is characteristically heterophile antibody negative.",
+   "say": "Rapid diagnostic confirmation of acute infectious mononucleosis utilizes the Monospot test, which detects circulating IgM heterophile antibodies that agglutinate sheep red cells. In contrast, cytomegalovirus infection produces an identical mononucleosis syndrome that is heterophile antibody negative.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "EBV Mononucleosis",
+     "points": [
+      "Heterophile antibody (Monospot) POSITIVE",
+      "Severe exudative tonsillitis with white plaques",
+      "Prominent posterior cervical adenopathy",
+      "Risk of traumatic splenic rupture (avoid contact sports)"
+     ]
+    },
+    "right": {
+     "title": "CMV Mononucleosis",
+     "points": [
+      "Heterophile antibody NEGATIVE (Monospot negative)",
+      "Pharyngitis and adenopathy typically mild or absent",
+      "Prolonged systemic fevers and elevated transaminases",
+      "Confirmed via CMV IgM and viral PCR"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 190, 191, 199"
+}

@@ -1,0 +1,196 @@
+{
+ "v": 1,
+ "module": "med-inborn-errors",
+ "subject": "medicine",
+ "title": "Porphyrias, Lysosomal Storage, and Metabolic Inborn Errors",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "An autosomal dominant inborn error of haem biosynthesis resulting from half-normal catalytic activity of hydroxymethylbilane synthase (porphobilinogen deaminase) is **acute intermittent porphyria** (AIP). Attacks are provoked by cytochrome P450 inducing medications (barbiturates, carbamazepine, sulfonamides), fasting, or hormonal changes, which induce hepatic ALAS1, causing accumulation of neurotoxic porphyrin precursors.",
+   "say": "An inborn error of haem biosynthesis resulting from deficiency of porphobilinogen deaminase is acute intermittent porphyria. Attacks are provoked by enzyme-inducing drugs, fasting, or hormones that stimulate hepatic ALAS1, causing accumulation of neurotoxic porphyrin precursors.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/porphyria-fig1.webp",
+    "alt": "Biochemical enzymatic pathway of heme biosynthesis and porphyria enzyme blocks.",
+    "caption": "Enzymatic pathway of heme synthesis and corresponding porphyria enzyme blocks. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Patients with acute intermittent porphyria present with the classic clinical triad of severe colicky abdominal pain without peritoneal signs, peripheral motor-dominant neuropathy (proximal arm weakness and wrist drop), and psychiatric psychosis or confusion, in the complete absence of cutaneous lesions. The diagnostic hallmark during an acute attack is massive urinary excretion of **porphobilinogen** (PBG), turning urine port-wine red upon sunlight exposure.",
+   "say": "Patients with acute intermittent porphyria present with severe colicky abdominal pain, motor-dominant neuropathy, and psychiatric confusion, without cutaneous photosensitivity. The diagnostic hallmark is massive urinary excretion of porphobilinogen, turning urine port-wine red on standing in sunlight.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-intermittent-porphyria-fig1.webp",
+    "alt": "Clinical attack manifestations and dark port-wine urine in acute intermittent porphyria.",
+    "caption": "Abdominal neurovisceral paroxysms and port-wine oxidation of urinary porphobilinogen. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The definitive first-line emergency pharmacotherapy for acute porphyric attacks is intravenous **hemin** (panhematin, 3 to 4 mg/kg daily for four days), alongside high-dose intravenous glucose (three-hundred grams daily). Exogenous hemin provides negative feedback inhibition of hepatic delta-aminolevulinic acid synthase 1 (ALAS1), halting neurotoxic precursor synthesis within twenty-four to forty-eight hours.",
+   "say": "The definitive first-line emergency therapy for acute porphyric attacks is intravenous hemin, alongside high-dose intravenous glucose. Exogenous hemin exerts negative feedback inhibition on hepatic ALAS1, halting neurotoxic precursor production within forty-eight hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "trig",
+      "label": "P450 Inducing Drug / Starvation Fasting"
+     },
+     {
+      "id": "alas1",
+      "label": "Massive ALAS1 Upregulation & ALA/PBG Accumulation"
+     },
+     {
+      "id": "hemin",
+      "label": "IV Hemin Inhibits ALAS1 & Halts Neurotoxicity"
+     }
+    ],
+    "edges": [
+     [
+      "trig",
+      "alas1"
+     ],
+     [
+      "alas1",
+      "hemin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most common porphyria worldwide is the cutaneous disorder **porphyria cutanea tarda** (PCT), caused by deficiency of uroporphyrinogen decarboxylase (UROD). Triggered by hepatic iron overload, chronic hepatitis C virus infection, and alcohol, photoactive circulating uroporphyrins deposit in the skin, producing severe blistering photosensitivity, skin fragility, vesicles on sun-exposed dorsal hands, and hypertrichosis.",
+   "say": "The most common porphyria worldwide is porphyria cutanea tarda, caused by deficiency of uroporphyrinogen decarboxylase. Triggered by hepatic iron overload and hepatitis C, circulating porphyrins deposit in the skin, causing severe blistering photosensitivity and dorsal hand vesicles.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acute Intermittent Porphyria (AIP)",
+     "points": [
+      "Hydroxymethylbilane synthase (PBGD) defect",
+      "Neurovisceral attacks: abdominal pain, neuropathy, psychosis",
+      "Elevated urinary ALA and Porphobilinogen (PBG)",
+      "Strictly ABSENT cutaneous photosensitivity"
+     ]
+    },
+    "right": {
+     "title": "Porphyria Cutanea Tarda (PCT)",
+     "points": [
+      "Uroporphyrinogen decarboxylase (UROD) defect",
+      "Severe cutaneous blistering photosensitivity on hands",
+      "Triggered by iron overload, alcohol, and Hepatitis C",
+      "Treated with Phlebotomy and low-dose Chloroquine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most prevalent lysosomal storage disease is **Gaucher disease**, an autosomal recessive disorder caused by deficiency of lysosomal glucocerebrosidase (acid beta-glucosidase). Insoluble glucocerebroside accumulates within reticuloendothelial macrophages (Gaucher cells), causing massive hepatosplenomegaly, severe pancytopenia, aseptic bone necrosis, Erlenmeyer flask bone deformities, and osteopenia, treated with enzyme replacement.",
+   "say": "The most prevalent lysosomal storage disease is Gaucher disease, an autosomal recessive disorder caused by deficiency of glucocerebrosidase. Glucocerebroside accumulates in macrophages, causing massive hepatosplenomegaly, pancytopenia, aseptic bone necrosis, and Erlenmeyer flask femoral deformities.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gaucher-disease-fig1.webp",
+    "alt": "Gaucher cells with wrinkled tissue paper cytoplasm infiltrating bone marrow.",
+    "caption": "Lipid-laden Gaucher histiocytes with wrinkled tissue paper appearance in bone marrow. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Lysosomal accumulation of sphingomyelin due to deficiency of acid sphingomyelinase causes **Niemann-Pick disease** (type A and B). Type A presents in infancy with failure to thrive, progressive hepatosplenomegaly, rapid neurodegenerative decline, foamy histiocytes in bone marrow, and a pathognomonic cherry-red macular spot on fundoscopy (also seen in Tay-Sachs disease, which lacks hepatosplenomegaly).",
+   "say": "Lysosomal accumulation of sphingomyelin due to deficiency of acid sphingomyelinase causes Niemann-Pick disease. Type A presents in infancy with hepatosplenomegaly, neurodegenerative decline, foamy histiocytes, and a cherry-red macular spot on fundoscopy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Niemann-Pick Disease",
+     "points": [
+      "Acid sphingomyelinase deficiency",
+      "Cherry-red spot on macular fundoscopy",
+      "Hepatosplenomegaly is PROMINENT",
+      "Foamy lipid-laden histiocytes on marrow biopsy"
+     ]
+    },
+    "right": {
+     "title": "Tay-Sachs Disease",
+     "points": [
+      "Hexosaminidase A deficiency (GM2 ganglioside)",
+      "Cherry-red spot on macular fundoscopy",
+      "Hepatosplenomegaly is STRICTLY ABSENT",
+      "Onion-skin lysosomal lamellar inclusions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An autosomal recessive aminoacidopathy caused by deficiency of homogentisate 1,2-dioxygenase in the tyrosine degradation pathway is alkaptonuria. Accumulation of homogentisic acid produces urine that oxidizes to dark black upon standing. Homogentisic acid polymer deposits irreversibly in connective tissue and cartilage, producing blue-black pigmentation of the ear cartilage and sclera termed **ochronosis**, accompanied by severe degenerative arthropathy.",
+   "say": "An autosomal recessive aminoacidopathy caused by deficiency of homogentisate dioxygenase is alkaptonuria. Accumulation of homogentisic acid causes urine to turn black on standing. Tissue deposition produces blue-black cartilage pigmentation termed ochronosis, with severe degenerative arthritis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "tyr",
+      "label": "Tyrosine Degradation Pathway Defect"
+     },
+     {
+      "id": "hga",
+      "label": "Homogentisic Acid Accumulation (Black Urine)"
+     },
+     {
+      "id": "ochr",
+      "label": "Ochronotic Pigmentation & Premature Spine Arthropathy"
+     }
+    ],
+    "edges": [
+     [
+      "tyr",
+      "hga"
+     ],
+     [
+      "hga",
+      "ochr"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Mitochondrial encephalomyopathy with lactic acidosis and stroke-like episodes (**MELAS**) is a maternally inherited mitochondrial disorder caused by a point mutation in the MT-TL1 gene encoding mitochondrial tRNA-leucine. Patients present before age forty with recurrent stroke-like episodes not corresponding to territorial vascular distributions, lactic acidosis, sensorineural hearing loss, and ragged red fibres on Gomori trichrome muscle biopsy.",
+   "say": "MELAS is a maternally inherited mitochondrial disorder caused by an A3243G mutation in mitochondrial tRNA. Patients present before age forty with recurrent non-vascular stroke-like episodes, lactic acidosis, hearing loss, and ragged red fibres on muscle biopsy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Inborn Error Category",
+     "Deficient Enzyme / Gene",
+     "Accumulated Metabolite",
+     "Clinical Presentation"
+    ],
+    "rows": [
+     [
+      "Acute Intermittent Porphyria",
+      "Hydroxymethylbilane synthase (HMBS)",
+      "Porphobilinogen (PBG) & ALA",
+      "Abdominal pain, motor neuropathy, port-wine urine"
+     ],
+     [
+      "Gaucher Disease",
+      "Acid beta-glucosidase (GBA)",
+      "Glucocerebroside (glucosylceramide)",
+      "Hepatosplenomegaly, Erlenmeyer flask femurs, cytopenias"
+     ],
+     [
+      "Fabry Disease",
+      "Alpha-galactosidase A (GLA, X-linked)",
+      "Globotriaosylceramide (Gb3)",
+      "Angiokeratomas, burning acroparesthesias, renal failure"
+     ],
+     [
+      "MELAS Syndrome",
+      "Mitochondrial tRNA-Leu (m.3243A>G)",
+      "Lactic acid / Pyruvate",
+      "Non-vascular stroke-like episodes, ragged red fibres"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 452, 453"
+}

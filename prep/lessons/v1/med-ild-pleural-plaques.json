@@ -1,0 +1,230 @@
+{
+ "v": 1,
+ "module": "med-ild",
+ "subject": "medicine",
+ "title": "Pneumoconioses and occupational lung disorders",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Inhaled microscopic asbestos fibres migrate through lymphatic channels to the parietal pleura, stimulating localized fibrogenesis. Developing discrete **pleural plaques** represents the most common radiological and pathological manifestation of prior occupational asbestos exposure. Plaques consist of well-demarcated, acellular, basket-weave collagen bundles with dystrophic calcification, distributed along the posterolateral chest wall, diaphragm, and mediastinum. Importantly, pleural plaques are entirely benign, non-premalignant lesions that do not cause significant pulmonary restrictive impairment, serving purely as an objective epidemiological marker of past asbestos exposure.",
+   "say": "Inhaled asbestos fibres migrate through lymphatic channels to the parietal pleura to trigger localized fibrogenesis. Developing discrete pleural plaques represents the most common manifestation of past asbestos exposure. These plaques are composed of dense, acellular collagen bundles with calcification. They are non-malignant markers of prior occupational exposure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pleural-plaques-fig1.webp",
+    "alt": "Gross anatomy and histopathology of fibrohyaline parietal pleural plaques.",
+    "caption": "Calcified parietal pleural plaques characteristic of past occupational asbestos exposure. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Chronic inhalation of washed and unwashed respirable coal dust incites progressive pulmonary anthracosis. Pathological development of **coal worker pneumoconiosis** begins with the aggregation of carbon-laden macrophages into distinct coal macules surrounding terminal and respiratory bronchioles in the upper lobes. Localized reticulin synthesis and focal centrilobular emphysema produce simple pneumoconiosis. Over decades, coalescing nodules larger than two centimeters with dense collagen and black pigment progress to complicated disease, designated progressive massive fibrosis, leading to severe architectural lung destruction and cor pulmonale.",
+   "say": "Chronic inhalation of respirable coal mine dust causes progressive anthracosis. Pathological development of coal worker pneumoconiosis begins with carbon-laden macrophages forming macules around respiratory bronchioles. Simple disease features focal emphysema without severe disability. Coalescence into lesions exceeding two centimeters defines progressive massive fibrosis, leading to pulmonary destruction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pneumoconioses-and-environmental-lung-disease-fig1.webp",
+    "alt": "Pathological patterns of pneumoconioses including anthracosis, coal macules, and interstitial nodular fibrosis.",
+    "caption": "Histopathologic spectrum and nodular lesions in occupational pneumoconioses. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Co-existence of systemic seropositive rheumatoid arthritis with occupational pneumoconiosis creates a distinctive nodular pulmonary manifestation. Characterizing **Caplan syndrome** entails the sudden radiological emergence of multiple discrete, round, bilateral peripheral pulmonary nodules measuring 0.5 to 5 centimeters in coal miners, quarry workers, or silicosis patients. Histologically, these nodules exhibit central necrotic collagen surrounded by palisading histiocytes, fibroblasts, and an outer ring of coal dust or silica pigment. Nodules may cavitate, calcify, or appear concurrently with active rheumatoid arthritis flares.",
+   "say": "Co-existence of seropositive rheumatoid arthritis with occupational dust exposure creates a distinctive syndrome. Characterizing Caplan syndrome involves the sudden appearance of multiple discrete round pulmonary nodules on chest radiography in exposed individuals. Histology reveals central necrosis surrounded by palisading histiocytes and dust pigment. Nodules can cavitate or calcify.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Simple coal macules",
+     "points": [
+      "Small 1 to 5 mm carbon aggregates",
+      "Peribronchiolar upper lobe distribution",
+      "Focal surrounding centrilobular emphysema",
+      "Minimal systemic immunological activity"
+     ]
+    },
+    "right": {
+     "title": "Caplan syndrome nodules",
+     "points": [
+      "Large 0.5 to 5 cm well-defined nodules",
+      "Peripheral bilateral lung fields",
+      "Rheumatoid necrobiotic core with dust ring",
+      "Associated with high-titer rheumatoid factor"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Occupational inhalation of unprocessed cotton, flax, hemp, or sisal fibres incites a characteristic airway disease in textile mill operators. Diagnosing **byssinosis** (historically called brown lung disease) involves recognizing bronchoconstriction provoked by bacterial endotoxins contaminating organic cotton dust bracts. Inhaled endotoxins stimulate alveolar macrophages and airway epithelial cells to release histamine and inflammatory cytokines, causing acute reversible bronchospasm. Unlike asthma, symptoms characteristically manifest upon returning to work after weekend leave, giving rise to its traditional designation as Monday morning fever.",
+   "say": "Inhalation of unprocessed textile dust causes occupational airway disease among factory workers. Diagnosing byssinosis involves recognizing bronchoconstriction triggered by bacterial endotoxins contaminating raw cotton fibres. Endotoxin exposure stimulates histamine and cytokine release, causing bronchospasm. Symptoms characteristically manifest on the first day after weekend leave.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cotton",
+      "label": "Inhalation of raw cotton mill dust bracts"
+     },
+     {
+      "id": "endo",
+      "label": "Bacterial endotoxin macrophage activation"
+     },
+     {
+      "id": "hist",
+      "label": "Histamine & leukotriene mediator release"
+     },
+     {
+      "id": "broncho",
+      "label": "Acute reversible bronchial constriction"
+     }
+    ],
+    "edges": [
+     [
+      "cotton",
+      "endo"
+     ],
+     [
+      "endo",
+      "hist"
+     ],
+     [
+      "hist",
+      "broncho"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Clinical staging of textile dust-induced airway disease follows a distinctive temporal progression linked to work schedules. Early in the disease, chest tightness and exertional dyspnoea occur exclusively on the first day of the working week (**Monday fever**), with spontaneous symptom remission over the subsequent workdays. In moderate stages, chest tightness extends to Tuesdays and subsequent working days. Eventually, chronic prolonged exposure induces permanent, non-reversible airflow obstruction indistinguishable from chronic bronchitis or emphysema, with persistent functional impairment continuing even after workplace cessation.",
+   "say": "Clinical staging of textile airway disease follows a characteristic schedule-dependent course. Early in the condition, chest tightness occurs exclusively on the first working day of the week, clearing as the week progresses. With continued exposure, symptoms persist across subsequent days. Long-term disease produces permanent airflow limitation resembling chronic obstructive pulmonary disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Schilling grade",
+     "Clinical presentation",
+     "Reversibility of obstruction"
+    ],
+    "rows": [
+     [
+      "Grade 1/2",
+      "Chest tightness on occasional Mondays only",
+      "Completely reversible upon shift completion"
+     ],
+     [
+      "Grade 1",
+      "Chest tightness on every Monday without fail",
+      "Reversible with post-shift bronchodilators"
+     ],
+     [
+      "Grade 2",
+      "Chest tightness on Monday and other workdays",
+      "Partially reversible airflow limitation"
+     ],
+     [
+      "Grade 3",
+      "Permanent dyspnea and fixed airway obstruction",
+      "Irreversible functional lung impairment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inhaling organic sugarcane dust contaminated by thermophilic bacteria triggers acute hypersensitivity alveolitis. Developing occupational **bagassosis** occurs among agricultural and paper manufacturing workers handling dried sugarcane waste (bagasse) that has been stored under warm, moist conditions. High storage temperatures foster the proliferation of the thermophilic actinomycete Thermoactinomyces sacchari. Inhalation of these bacterial spores incites acute alveolitis four to eight hours later, causing abrupt high pyrexia, non-productive cough, severe dyspnoea, bilateral crepitations, and diffuse fine nodular infiltrates on thoracic radiography.",
+   "say": "Inhaling stored sugarcane residue contaminated with thermophilic organisms provokes acute alveolitis. Developing occupational bagassosis occurs in workers handling dried sugarcane bagasse stored under humid conditions. Warm storage fosters the growth of Thermoactinomyces sacchari. Inhaling these spores incites abrupt high fever, dry cough, breathlessness and diffuse pulmonary infiltrates.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bagassosis",
+     "points": [
+      "Thermoactinomyces sacchari organism",
+      "Dried sugarcane bagasse residue",
+      "Agricultural & paper mill workers",
+      "Acute pyrexia and dyspnoea 4 to 8 hours post-exposure"
+     ]
+    },
+    "right": {
+     "title": "Farmer lung",
+     "points": [
+      "Saccharopolyspora rectivirgula organism",
+      "Mouldy hay and grain silo storage",
+      "Dairy and livestock farming workers",
+      "Upper and mid zone centrilobular ground-glass nodules"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Inhalation of diverse organic antigens produces a wide spectrum of **occupational hypersensitivity** disorders across various industries. Mushroom worker lung occurs from exposure to thermophilic actinomycetes in compost, while malt worker lung arises from Aspergillus clavatus spores in barley malting. Grain handler disease results from wheat weevils (Sitophilus granarius). In each condition, removal of the offending worker from the contaminated environment constitutes the cornerstone of definitive management. Systemic corticosteroids are reserved for severe hypoxaemia or progressive subacute and chronic disease stages.",
+   "say": "Inhalation of varied organic antigens triggers distinct occupational hypersensitivity disorders. Mushroom worker lung results from compost actinomycetes, while malt worker lung stems from Aspergillus in brewing barley. Grain handlers react to wheat weevils. Removing the individual from the contaminated work environment forms the primary therapy. Corticosteroids treat severe or progressive episodes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Occupational syndrome",
+     "Offending antigen / microbe",
+     "Workplace environment"
+    ],
+    "rows": [
+     [
+      "Mushroom worker lung",
+      "Thermoactinomyces vulgaris",
+      "Compost handling and cultivation"
+     ],
+     [
+      "Malt worker lung",
+      "Aspergillus clavatus spores",
+      "Distillery and brewery malting barns"
+     ],
+     [
+      "Suberosis",
+      "Penicillium glabrum mould",
+      "Cork manufacturing and stripping"
+     ],
+     [
+      "Cheese washer lung",
+      "Penicillium casei spores",
+      "Cheese aging and washing rooms"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Effective primary and secondary prevention strategies protect workers from disabling occupational lung disorders. Industrial management mandates **dust suppression** techniques, automated ventilation with high-efficiency particulate air filtration, and continuous air quality monitoring to keep ambient dust concentrations beneath permissible exposure limits. Workers must utilize fit-tested certified respirators in high-risk zones. Health surveillance programs incorporating baseline and annual spirometry, symptom questionnaires, and low-dose thoracic radiography allow early detection of declining lung function, triggering immediate transfer away from contaminated workspaces.",
+   "say": "Primary and secondary prevention programs protect vulnerable workers from disabling lung disease. Industrial engineering requires dust suppression systems, automated exhaust ventilation and regular ambient air monitoring. Employees must wear certified, fit-tested respirators in dusty environments. Routine health screening with spirometry and chest imaging detects early decline, prompting workplace reassignment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "engineer",
+      "label": "Engineering dust extraction & wet suppression"
+     },
+     {
+      "id": "ppe",
+      "label": "Certified personal respiratory protection"
+     },
+     {
+      "id": "screen",
+      "label": "Periodic spirometric & radiographic screening"
+     },
+     {
+      "id": "transfer",
+      "label": "Early reassignment to dust-free environments"
+     }
+    ],
+    "edges": [
+     [
+      "engineer",
+      "ppe"
+     ],
+     [
+      "ppe",
+      "screen"
+     ],
+     [
+      "screen",
+      "transfer"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

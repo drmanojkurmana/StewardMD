@@ -1,0 +1,208 @@
+{
+ "v": 1,
+ "module": "med-jaundice",
+ "subject": "medicine",
+ "title": "Bilirubin metabolism, inherited unconjugated hyperbilirubinaemia, and canalicular transport defects",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Catabolism of senescent erythrocytes by splenic and hepatic reticuloendothelial macrophages generates linear tetrapyrrole pigment intermediates. Physiological **Bilirubin metabolism** begins when haem oxygenase cleaves protoporphyrin into biliverdin, which is subsequently converted into water-insoluble unconjugated bilirubin by biliverdin reductase. Hydrophobic unconjugated pigment binds reversibly to circulating serum albumin for transport to the sinusoidal hepatocyte membrane. Inside the hepatocyte endoplasmic reticulum, uridine 5-diphospho-glucuronosyltransferase (UGT1A1) conjugates bilirubin with glucuronic acid, yielding water-soluble bilirubin monoglucuronides and diglucuronides destined for canalicular excretion.",
+   "say": "Catabolism of senescent red blood cells by macrophages generates pigmented tetrapyrrole intermediates. Normal bilirubin metabolism begins when haem oxygenase produces biliverdin, which biliverdin reductase converts into unconjugated bilirubin. Bound to albumin, this hydrophobic pigment travels to hepatocytes. In the endoplasmic reticulum, glucuronosyltransferase conjugates it with glucuronic acid to form water-soluble bilirubin for excretion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/adult-jaundice-fig1.webp",
+    "alt": "Schematic diagram of physiological bilirubin production, hepatic conjugation, and biliary secretion.",
+    "caption": "Cellular pathways of haem degradation, hepatic conjugation, and excretion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Overproduction of pigment or impaired hepatocyte uptake and conjugation produces elevated circulating indirect pigment fractions without bilirubinuria. Accumulation of **unconjugated hyperbilirubinaemia** (defined as indirect bilirubin constituting over eighty-five percent of total serum bilirubin) occurs in severe haemolytic states, ineffective erythropoiesis, and congenital enzyme deficiencies. Because unconjugated bilirubin remains tightly bound to circulating albumin, it cannot undergo glomerular filtration, leaving urine colour entirely normal. Clinical scleral icterus becomes readily apparent once total serum concentrations exceed two point five to three milligrams per decilitre.",
+   "say": "Overproduction of pigment or impaired conjugation increases circulating indirect bilirubin without pigment appearing in urine. Accumulation of unconjugated hyperbilirubinaemia occurs during severe haemolysis, resorbing haematomas, or hereditary enzyme defects. Because unconjugated pigment binds tightly to albumin, it cannot filter through the glomerulus. Scleral icterus appears when serum levels exceed three milligrams per decilitre.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-gen-jaundice.webp",
+    "alt": "Clinical photograph illustrating scleral icterus and sublingual jaundice examination.",
+    "caption": "Clinical inspection for scleral icterus and mucosal jaundice. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A benign, hereditary defect in the promoter region of the glucuronosyltransferase gene represents the most prevalent familial hyperbilirubinaemia worldwide. Affecting five to ten percent of the global population, **Gilbert syndrome** is inherited in an autosomal recessive manner, caused by homozygous insertion of a TA pair into the TATA box (A[TA]7TAA promoter genotype). This mutation reduces UGT1A1 enzyme transcription to thirty percent of normal activity. Mild unconjugated hyperbilirubinaemia (rarely exceeding four milligrams per decilitre) fluctuates during periods of caloric restriction, vigorous physical exertion, intercurrent viral infection, or physiological dehydration.",
+   "say": "A benign hereditary mutation in the glucuronosyltransferase promoter is the most common cause of familial jaundice. Gilbert syndrome is an autosomal recessive condition caused by a homozygous promoter insertion that reduces enzyme transcription to thirty percent of normal. Mild unconjugated hyperbilirubinaemia fluctuates with fasting, heavy exercise, dehydration, or viral infections, while liver histology and synthetic function remain entirely normal.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical feature",
+     "Gilbert syndrome",
+     "Normal physiology"
+    ],
+    "rows": [
+     [
+      "UGT1A1 activity",
+      "Reduced to ~30% of normal",
+      "100% baseline activity"
+     ],
+     [
+      "Promoter genotype",
+      "A(TA)7TAA homozygous insertion",
+      "A(TA)6TAA wild-type allele"
+     ],
+     [
+      "Total bilirubin",
+      "1.5 to 4.0 mg/dL (unconjugated)",
+      "<1.2 mg/dL"
+     ],
+     [
+      "Liver enzymes & histology",
+      "Completely normal",
+      "Completely normal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe inborn genetic mutations directly affecting the coding exons of the UGT1A1 gene lead to catastrophic neonatal or juvenile unconjugated jaundice. Clinical manifestation of **Crigler-Najjar syndrome** presents in two distinct subtypes. Type 1 represents complete absence of glucuronosyltransferase activity, causing extreme unconjugated hyperbilirubinaemia exceeding twenty milligrams per decilitre, leading to fatal bilirubin encephalopathy (kernicterus) unless managed with aggressive phototherapy and urgent liver transplantation. Type 2 exhibits severe reduction to ten percent of activity, with bilirubin levels declining dramatically in response to phenobarbital enzyme induction.",
+   "say": "Mutations affecting the coding exons of the glucuronosyltransferase gene cause severe unconjugated jaundice in infancy. Crigler-Najjar syndrome presents in two forms. Type 1 exhibits complete absence of enzyme activity, generating severe hyperbilirubinaemia that causes fatal kernicterus without phototherapy or liver transplantation. Type 2 displays partial enzyme deficiency, where bilirubin levels decrease significantly following phenobarbital administration.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Crigler-Najjar Type 1",
+     "points": [
+      "Complete absence of UGT1A1 activity",
+      "Serum bilirubin 20 to 50 mg/dL",
+      "High risk of fatal neonatal kernicterus",
+      "Zero response to phenobarbital; needs liver transplant"
+     ]
+    },
+    "right": {
+     "title": "Crigler-Najjar Type 2 (Arias)",
+     "points": [
+      "Severe reduction (<10% of normal UGT1A1)",
+      "Serum bilirubin typically <20 mg/dL",
+      "Low risk of neurological damage",
+      "Bilirubin falls >25% with oral phenobarbital"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Defective canalicular transport of conjugated bilirubin into bile canaliculi produces isolated conjugated hyperbilirubinaemia with striking dark hepatic pigmentation. Pathophysiology of **Dubin-Johnson syndrome** involves autosomal recessive loss-of-function mutations in the ABCC2 gene encoding multidrug resistance-associated protein 2 (MRP2). Impaired canalicular export causes direct bilirubin to re-enter hepatic sinusoids, producing dark amber urine without pruritus. Macroscopic liver inspection reveals an intensely black liver caused by lysosomal accumulation of coarsely granular melanin-like pigment, while urinary coproporphyrin excretion demonstrates greater than eighty percent coproporphyrin isomer I.",
+   "say": "Defective canalicular export of conjugated bilirubin generates direct hyperbilirubinaemia with striking gross liver pigmentation. Dubin-Johnson syndrome is caused by mutations in the ABCC2 gene encoding the canalicular MRP2 transporter. Impaired canalicular secretion causes conjugated pigment to spill into the blood, producing dark urine. Liver biopsy reveals an intensely black liver caused by melanin-like lysosomal pigments.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dubin-Johnson syndrome",
+     "points": [
+      "Mutated ABCC2 gene (canalicular MRP2)",
+      "Grossly black liver on laparoscopy/biopsy",
+      "Normal total urinary coproporphyrin",
+      "Coproporphyrin isomer I >80% of total"
+     ]
+    },
+    "right": {
+     "title": "Rotor syndrome",
+     "points": [
+      "Mutated SLCO1B1/B3 (OATP1B1 and 1B3)",
+      "Normal liver colour and normal histology",
+      "Markedly elevated total urinary coproporphyrin",
+      "Coproporphyrin isomer I <70% of total"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Impaired sinusoidal re-uptake of conjugated bilirubin by basolateral hepatocyte organic anion transporters results in benign, non-pigmented direct hyperbilirubinaemia. Clinical recognition of **Rotor syndrome** is established through identification of homozygous mutations simultaneously inactivating both SLCO1B1 and SLCO1B3 genes, abolishing OATP1B1 and OATP1B3 transport proteins. Hepatocytes conjugate bilirubin normally, but conjugated pigment escaping into the space of Disse cannot be reabsorbed. Unlike Dubin-Johnson syndrome, the liver displays entirely normal macroscopic colour and histology, while total urinary coproporphyrin excretion is elevated up to five-fold above baseline.",
+   "say": "Defective re-uptake of conjugated bilirubin by basolateral transporters causes benign direct hyperbilirubinaemia. Rotor syndrome results from mutations inactivating both OATP1B1 and OATP1B3 transport proteins. Conjugated pigment escaping hepatocytes cannot be reabsorbed from the space of Disse. Unlike Dubin-Johnson syndrome, the liver displays normal colour and architecture, with elevated total urinary coproporphyrin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "conjugation",
+      "label": "Normal intracellular glucuronidation"
+     },
+     {
+      "id": "leakage",
+      "label": "Conjugated pigment leaks into sinusoidal space"
+     },
+     {
+      "id": "transport_defect",
+      "label": "OATP1B1/B3 deficiency prevents hepatocyte re-uptake"
+     }
+    ],
+    "edges": [
+     [
+      "conjugation",
+      "leakage"
+     ],
+     [
+      "leakage",
+      "transport_defect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Enzymatic leakage from damaged hepatocyte cytosol provides the most specific circulating biochemical indicator of active hepatocellular necroinflammation. Serum **ALT** (alanine aminotransferase) resides almost exclusively within the cytoplasm of hepatocytes, catalyzing the reversible transamination of alanine to pyruvate. Serum concentrations rise dramatically in acute viral hepatitis, ischaemic liver injury (shock liver), and toxic paracetamol overdose, frequently exceeding one thousand units per litre. ALT elevations correlate with acute hepatocyte membrane disruption rather than residual functional synthetic reserve.",
+   "say": "Enzymatic leakage from damaged hepatocyte cytoplasm provides the most specific biochemical marker of active liver injury. Alanine aminotransferase, or ALT, is localized almost entirely within hepatocyte cytosol. Circulating levels rise dramatically in acute viral hepatitis, shock liver, and paracetamol toxicity, frequently exceeding one thousand units per litre. ALT reflects acute membrane permeability rather than residual synthetic capacity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ALT (Alanine Aminotransferase)",
+     "points": [
+      "Localized primarily in hepatocyte cytosol",
+      "High specificity for liver parenchymal damage",
+      "Half-life approximately 47 hours",
+      "Elevates >1000 U/L in viral & ischaemic necrosis"
+     ]
+    },
+    "right": {
+     "title": "AST (Aspartate Aminotransferase)",
+     "points": [
+      "Found in liver, cardiac & skeletal muscle, brain",
+      "Located in both mitochondria (80%) and cytosol",
+      "Half-life approximately 17 hours",
+      "AST:ALT ratio >2 characteristic of alcohol"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cellular compartmentalization of aminotransferases between mitochondria and cytoplasm provides critical diagnostic clues regarding the specific aetiology of liver injury. Serum **AST** (aspartate aminotransferase) is distributed across mitochondria (eighty percent) and cytosol (twenty percent) in liver, heart, skeletal muscle, and kidneys. In alcoholic liver disease, ethanol-induced mitochondrial toxicity and pyridoxine deficiency preferentially elevate AST, yielding an AST:ALT ratio greater than two to one. Conversely, viral hepatitis, non-alcoholic steatohepatitis, and autoimmune hepatitis typically demonstrate a ratio below one.",
+   "say": "Compartmentalization of aminotransferases between mitochondria and cytoplasm offers diagnostic clues regarding the underlying aetiology of injury. Aspartate aminotransferase, or AST, is located within both mitochondria and cytosol. In alcoholic hepatitis, ethanol-induced mitochondrial toxicity and pyridoxine depletion produce an AST to ALT ratio exceeding two to one. Most other causes of hepatitis show an AST to ALT ratio under one.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical pattern",
+     "AST:ALT ratio",
+     "Typical aetiologies"
+    ],
+    "rows": [
+     [
+      "Alcoholic hepatitis",
+      "Ratio >2.0 (rarely >3.0)",
+      "Mitochondrial toxicity and low B6"
+     ],
+     [
+      "Viral hepatitis (acute)",
+      "Ratio <1.0 (ALT > AST)",
+      "Hepatitis A, B, C, D, E"
+     ],
+     [
+      "Ischaemic / Toxic necrosis",
+      "Both >1000 U/L; early AST peak",
+      "Shock liver, paracetamol overdose"
+     ],
+     [
+      "Cirrhosis of any cause",
+      "Ratio gradually rises >1.0",
+      "Advanced fibrosis and low clearance"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

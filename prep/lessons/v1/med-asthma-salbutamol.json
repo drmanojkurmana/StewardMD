@@ -1,0 +1,289 @@
+{
+ "v": 1,
+ "module": "med-asthma",
+ "subject": "medicine",
+ "title": "Asthma pharmacotherapy: bronchodilators, leukotriene antagonists, and biologics",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Rapid reversal of acute bronchospasm relies on selective stimulation of beta-2 adrenergic receptors. Administering inhaled **salbutamol** stimulates adenylate cyclase in bronchial smooth muscle, elevating intracellular cyclic adenosine monophosphate (cAMP) and activating protein kinase A. This cascades into smooth muscle relaxation within three to five minutes, lasting four to six hours. Frequent systemic adverse effects include fine skeletal muscle tremors, sinus tachycardia, and hypokalaemia from intracellular potassium shifts.",
+   "say": "Rapid reversal of acute bronchoconstriction relies on selective stimulation of beta-2 adrenergic receptors. Administering inhaled salbutamol activates adenylate cyclase, elevating intracellular cyclic AMP and relaxing airway smooth muscle within minutes. The bronchodilator effect remains active for four to six hours. Frequent systemic adverse reactions involve muscle tremors, tachycardia and hypokalaemia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "beta2",
+      "label": "Salbutamol binds beta-2 adrenergic receptor"
+     },
+     {
+      "id": "ac",
+      "label": "Gs protein activation of adenylate cyclase"
+     },
+     {
+      "id": "camp",
+      "label": "Elevated intracellular cyclic AMP"
+     },
+     {
+      "id": "pka",
+      "label": "Protein kinase A decreases intracellular calcium"
+     },
+     {
+      "id": "relax",
+      "label": "Airway smooth muscle bronchodilation"
+     }
+    ],
+    "edges": [
+     [
+      "beta2",
+      "ac"
+     ],
+     [
+      "ac",
+      "camp"
+     ],
+     [
+      "camp",
+      "pka"
+     ],
+     [
+      "pka",
+      "relax"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Sustained twelve-hour to twenty-four-hour bronchodilation is achieved using lipophilic beta-agonist formulations. Adding a **long-acting beta agonist** (LABA) such as formoterol or salmeterol to inhaled corticosteroids provides superior symptom control and prevents nocturnal asthma awakenings. Formoterol possesses a unique rapid onset of action matching salbutamol alongside a twelve-hour duration, enabling its dual role as both maintenance and reliever medication in the SMART protocol.",
+   "say": "Sustained bronchodilation over twelve hours is achieved using lipophilic beta-agonist medications. Adding a long-acting beta agonist like formoterol or salmeterol to inhaled corticosteroids improves control and prevents nocturnal awakenings. Formoterol combines a rapid onset matching salbutamol with a twelve-hour duration, allowing its dual role as maintenance and reliever therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug agent",
+     "Class category",
+     "Onset of action",
+     "Duration of bronchodilation",
+     "Clinical role"
+    ],
+    "rows": [
+     [
+      "Salbutamol",
+      "SABA",
+      "1 to 5 minutes",
+      "4 to 6 hours",
+      "Acute rescue bronchodilator"
+     ],
+     [
+      "Formoterol",
+      "LABA (rapid onset)",
+      "1 to 3 minutes",
+      "12 hours",
+      "Maintenance and SMART reliever"
+     ],
+     [
+      "Salmeterol",
+      "LABA (slow onset)",
+      "15 to 30 minutes",
+      "12 hours",
+      "Maintenance therapy with ICS"
+     ],
+     [
+      "Vilanterol",
+      "Ultra-LABA",
+      "5 to 10 minutes",
+      "24 hours",
+      "Once-daily maintenance therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cysteinyl leukotrienes generated via 5-lipoxygenase drive potent bronchoconstriction, vascular permeability, and mucus hypersecretion. Administering oral **montelukast**, a selective cysteinyl leukotriene receptor-1 (CysLT1) antagonist, blocks leukotriene D4-mediated smooth muscle spasm. Montelukast is particularly beneficial in exercise-induced bronchospasm, aspirin-exacerbated respiratory disease, and pediatric asthma with allergic rhinitis. Clinicians must monitor for neuropsychiatric adverse effects including vivid dreams, insomnia, and mood alterations.",
+   "say": "Leukotrienes synthesised through five-lipoxygenase cause potent bronchospasm, vascular permeability and mucus hypersecretion. Administering oral montelukast blocks leukotriene receptor activation. Montelukast is particularly useful in exercise-induced bronchospasm, aspirin-exacerbated disease and allergic rhinitis. Clinicians should observe for neuropsychiatric side effects including sleep disturbances and mood changes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/asthma-copd-drugs-fig1.webp",
+    "alt": "Pathways of airway inflammation and pharmacotherapy targets in asthma.",
+    "caption": "Receptor targets for beta-agonists, leukotriene inhibitors, and steroids. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Severe allergic asthma driven by elevated circulating immunoglobulin E responds to targeted monoclonal antibody therapy. Administering subcutaneous **omalizumab** neutralizes circulating free IgE by binding to the constant Fc region, preventing IgE from attaching to high-affinity Fc-epsilon-RI receptors on mast cells and basophils. This downregulates receptor expression, suppresses allergen-induced histamine and leukotriene degranulation, and significantly reduces severe exacerbations in patients with refractory atopic asthma.",
+   "say": "Severe allergic asthma driven by elevated immunoglobulin E responds to monoclonal antibody therapy. Administering subcutaneous omalizumab binds circulating immunoglobulin E, preventing it from attaching to receptors on mast cells and basophils. This suppresses allergen-triggered mediator release and significantly decreases exacerbations in severe atopic disease.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "ige",
+      "label": "Elevated circulating allergen-specific IgE"
+     },
+     {
+      "id": "oma",
+      "label": "Omalizumab binds free IgE Fc region"
+     },
+     {
+      "id": "block",
+      "label": "Blocks IgE binding to mast cell Fc-epsilon-RI"
+     },
+     {
+      "id": "degran",
+      "label": "Inhibits histamine and mediator release"
+     },
+     {
+      "id": "exac",
+      "label": "Reduces asthma exacerbations & steroid doses"
+     }
+    ],
+    "edges": [
+     [
+      "ige",
+      "oma"
+     ],
+     [
+      "oma",
+      "block"
+     ],
+     [
+      "block",
+      "degran"
+     ],
+     [
+      "degran",
+      "exac"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prescribing **targeted biologic therapies** blocks specific type-2 inflammatory cytokine pathways in severe eosinophilic asthma. Monoclonal antibodies targeting interleukin-5 (mepolizumab, reslizumab) or the IL-5 receptor alpha subunit (benralizumab) deplete circulating and tissue eosinophils. The dual IL-4 and IL-13 receptor antagonist dupilumab blocks signal transducer and activator of transcription-6 (STAT6) signalling, while tezepelumab blocks thymic stromal lymphopoietin (TSLP), providing upstream non-phenotype-specific control.",
+   "say": "Additional targeted biologics block specific cytokine pathways in severe eosinophilic asthma. Monoclonal antibodies targeting interleukin-five like mepolizumab or its receptor like benralizumab deplete eosinophils. The dual interleukin-four and thirteen blocker dupilumab suppresses cytokine signalling, while tezepelumab targets thymic stromal lymphopoietin to provide upstream disease control.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Biologic agent",
+     "Targeted molecular mechanism",
+     "Indicating asthma phenotype",
+     "Key clinical outcome"
+    ],
+    "rows": [
+     [
+      "Omalizumab",
+      "Anti-IgE (blocks Fc-epsilon-RI binding)",
+      "Severe allergic asthma, high total IgE",
+      "Decreases exacerbations and ED visits"
+     ],
+     [
+      "Mepolizumab / Reslizumab",
+      "Anti-IL-5 (neutralises IL-5 cytokine)",
+      "Severe eosinophilic asthma (blood eos >= 300)",
+      "Reduces oral corticosteroid requirements"
+     ],
+     [
+      "Benralizumab",
+      "Anti-IL-5R alpha (induces ADCC depletion)",
+      "Severe eosinophilic asthma",
+      "Direct NK-cell mediated eosinophil lysis"
+     ],
+     [
+      "Dupilumab",
+      "Anti-IL-4R alpha (blocks IL-4 & IL-13)",
+      "Eosinophilic asthma or high FeNO",
+      "Improves FEV1 and reduces exacerbations"
+     ],
+     [
+      "Tezepelumab",
+      "Anti-TSLP (blocks epithelial alarmin)",
+      "Severe asthma regardless of biomarkers",
+      "Upstream broad anti-inflammatory control"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A life-threatening medical emergency develops when acute bronchospasm fails to respond to routine inhaled bronchodilators. Managing **acute severe asthma** requires immediate high-concentration oxygen to maintain arterial saturation between 93% and 95%, combined with continuous nebulized salbutamol and ipratropium bromide. Systemic corticosteroids with intravenous hydrocortisone (100 mg every six hours) or oral prednisolone (40 to 50 mg daily) must be initiated immediately to resolve inflammatory mucosal edema.",
+   "say": "A medical emergency develops when acute bronchospasm fails to respond to routine inhaled bronchodilators. Managing acute severe asthma requires immediate oxygen to maintain saturation between ninety-three and ninety-five percent, combined with nebulized salbutamol and ipratropium. Systemic corticosteroids with intravenous hydrocortisone or oral prednisolone must be started immediately to resolve airway edema.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-asthma-steps.svg",
+    "alt": "Stepwise pharmacological progression and emergency acute management in asthma.",
+    "caption": "Acute severe asthma emergency management and pharmacotherapy ladder. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Adjunctive intravenous therapies offer powerful rescue bronchodilation in refractory acute severe exacerbations. Infusing **intravenous magnesium sulphate** (two grams over twenty minutes) inhibits calcium influx into bronchial smooth muscle cells, promoting rapid muscular relaxation in patients with severe obstruction failing initial nebulization. If exhaustion or hemodynamic instability supervenes, intravenous aminophylline or non-invasive mechanical support is evaluated while preparing for definitive endotracheal intubation.",
+   "say": "Adjunctive intravenous therapies provide rescue bronchodilation in refractory exacerbations. Infusing intravenous magnesium sulphate inhibits calcium entry into airway smooth muscle, providing rapid relaxation in patients failing initial nebulizers. If exhaustion or hemodynamic instability appears, clinicians prepare for intensive care transfer and endotracheal intubation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intravenous magnesium sulphate",
+     "points": [
+      "2 g single infusion over 20 minutes",
+      "Blocks voltage-dependent calcium channels",
+      "Safe, rapid bronchodilator in severe attacks",
+      "Indicated if PEFR < 50% after 1 hour"
+     ]
+    },
+    "right": {
+     "title": "Intravenous aminophylline",
+     "points": [
+      "Phosphodiesterase inhibitor and adenosine antagonist",
+      "Narrow therapeutic index requiring blood monitoring",
+      "Risk of cardiac arrhythmias and seizures",
+      "Reserved only when other treatments fail"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Inhaled anticholinergic bronchodilators provide additive synergistic relaxation alongside adrenergic agents. Administering **ipratropium bromide** blocks muscarinic M3 receptors on airway smooth muscle, preventing acetylcholine-mediated bronchoconstriction and reducing mucus hypersecretion. In acute severe exacerbations, adding 500 micrograms of nebulized ipratropium to salbutamol every twenty minutes for the first hour significantly enhances FEV1 recovery and reduces hospitalisation rates compared to beta-agonist monotherapy alone.",
+   "say": "Inhaled anticholinergic medications deliver synergistic airway relaxation alongside beta-agonists. Giving ipratropium bromide blocks muscarinic receptors on airway muscle, preventing acetylcholine-induced bronchoconstriction. In acute severe exacerbations, combining nebulized ipratropium with salbutamol during the first hour significantly enhances lung function recovery and lowers admission rates.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "vagus",
+      "label": "Vagal parasympathetic outflow to airways"
+     },
+     {
+      "id": "ach",
+      "label": "Acetylcholine release binds muscarinic M3 receptors"
+     },
+     {
+      "id": "ipra",
+      "label": "Ipratropium blocks M3 muscarinic receptors"
+     },
+     {
+      "id": "cyclic",
+      "label": "Inhibits IP3-mediated calcium release"
+     },
+     {
+      "id": "synerg",
+      "label": "Synergistic smooth muscle relaxation with SABA"
+     }
+    ],
+    "edges": [
+     [
+      "vagus",
+      "ach"
+     ],
+     [
+      "ach",
+      "ipra"
+     ],
+     [
+      "ipra",
+      "cyclic"
+     ],
+     [
+      "cyclic",
+      "synerg"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

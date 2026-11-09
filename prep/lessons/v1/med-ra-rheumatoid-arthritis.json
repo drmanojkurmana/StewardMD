@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "med-ra",
+ "subject": "medicine",
+ "title": "Rheumatoid Arthritis and Deformities",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A chronic systemic autoimmune inflammatory polyarthritis primarily targeting diarthrodial synovial joints characterizes **rheumatoid arthritis**. Driven by autoreactive CD4 T-helper cells, B lymphocytes, and macrophages producing pro-inflammatory cytokines (TNF-alpha, IL-1, IL-6), synovial tissue undergoes marked hyperplastic proliferation. This invasive fibrovascular granulation tissue, termed pannus, secretes matrix metalloproteinases that erode articular cartilage and subchondral bone. Patients present with symmetrical joint swelling, tenderness, and prolonged morning stiffness lasting over an hour that improves with physical activity.",
+   "say": "A chronic systemic autoimmune inflammatory polyarthritis primarily targeting diarthrodial synovial joints characterizes rheumatoid arthritis. Driven by autoreactive T cells and macrophages producing cytokines, synovial tissue undergoes marked hyperplastic proliferation. This invasive tissue, termed pannus, secretes metalloproteinases that erode cartilage and bone. Patients present with symmetrical joint swelling, tenderness, and morning stiffness lasting over an hour.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/rheumatoid-fig1.webp",
+    "alt": "Pathophysiological diagram illustrating synovial inflammation, pannus formation, and bone erosion in rheumatoid arthritis.",
+    "caption": "Synovial hyperplastic pannus formation driving cartilage destruction and marginal bone erosions. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Diagnostic serological testing evaluates circulating autoantibodies directed against self immunoglobulins and post-translationally modified peptides. The classic **rheumatoid factor** (RF) is an IgM autoantibody directed against the Fc portion of human IgG, present in seventy to eighty percent of patients. While sensitive, RF is non-specific, occurring in systemic lupus erythematosus, Sjögren syndrome, and chronic infections like hepatitis C. In contrast, antibodies targeting cyclic citrullinated peptides (anti-CCP) exhibit comparable sensitivity (75%) with exceptional specificity exceeding ninety-five percent, strongly predicting aggressive erosive joint destruction.",
+   "say": "Diagnostic serological testing evaluates circulating autoantibodies directed against self immunoglobulins and modified peptides. The classic rheumatoid factor is an IgM antibody targeting human IgG, present in seventy percent of patients. While sensitive, rheumatoid factor occurs in other autoimmune diseases and hepatitis C. In contrast, anti-CCP antibodies demonstrate exceptional specificity exceeding ninety-five percent, strongly predicting aggressive erosive joint destruction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rheumatoid Factor (IgM anti-IgG Fc)",
+     "points": [
+      "Sensitivity: 70% to 80%",
+      "Specificity: Moderate (75-85%)",
+      "Cross-reactive in SLE, Sjögren, Hepatitis C",
+      "Correlates with extra-articular rheumatoid nodules",
+      "Can be negative in early disease (seronegative RA)"
+     ]
+    },
+    "right": {
+     "title": "Anti-CCP / ACPA Antibodies",
+     "points": [
+      "Targets citrullinated arginine residues",
+      "Sensitivity: 70% to 75%",
+      "Specificity: Exceptional (> 95-98%)",
+      "Detectable years prior to clinical arthritis",
+      "Strongest predictor of radiographic joint erosion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Modern diagnostic classification emphasizes early identification of inflammatory synovitis before irreversible bony erosions develop. Under the **acr/eular criteria** (2010), patients presenting with at least one joint displaying definite clinical synovitis not explained by another diagnosis are scored across four domains: joint involvement (up to 5 points for small joints), serology (RF or anti-CCP up to 3 points), acute-phase reactants (elevated CRP or ESR earns 1 point), and symptom duration (>= 6 weeks earns 1 point). Achieving a composite score of six or more out of ten confirms rheumatoid arthritis.",
+   "say": "Modern diagnostic classification emphasizes early identification of inflammatory synovitis before irreversible bony erosions develop. Under the ACR/EULAR criteria, patients presenting with definite clinical synovitis are scored across four domains: joint involvement, serology, acute-phase reactants, and symptom duration. Achieving a composite score of six or more out of ten confirms rheumatoid arthritis, mandating prompt initiation of disease-modifying antirheumatic therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classification Domain",
+     "Clinical Parameter Evaluated",
+     "Point Allocation",
+     "Diagnostic Threshold"
+    ],
+    "rows": [
+     [
+      "Joint Involvement",
+      "1 large joint (0 pt) to > 10 joints with >= 1 small joint (5 pt)",
+      "0 to 5 Points",
+      "Cumulative score"
+     ],
+     [
+      "Serological Biomarkers",
+      "Negative RF and anti-CCP (0 pt) to High-positive (3 pt)",
+      "0 to 3 Points",
+      "Score >= 6 / 10 confirms RA"
+     ],
+     [
+      "Acute-Phase Reactants",
+      "Abnormal CRP or abnormal ESR (1 pt)",
+      "0 to 1 Point",
+      "Reflects active systemic inflammation"
+     ],
+     [
+      "Symptom Duration",
+      "Duration of synovitis < 6 weeks (0 pt) vs >= 6 weeks (1 pt)",
+      "0 to 1 Point",
+      "Distinguishes viral transient arthritis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic synovial proliferation stretching extensor tendons, collateral ligaments, and volar plates produces characteristic late hand deformities. In **swan neck deformity**, contracture of intrinsic hand muscles combined with volar plate stretching produces hyperextension of the proximal interphalangeal (PIP) joint paired with compensatory flexion of the distal interphalangeal (DIP) joint. Conversely, boutonnière deformity features rupture or attenuation of the central slip of the extensor digitorum tendon, allowing lateral bands to slip volarly and producing fixed flexion of the PIP joint with hyperextension of the DIP joint.",
+   "say": "Chronic synovial proliferation stretching extensor tendons, collateral ligaments, and volar plates produces characteristic late hand deformities. In swan neck deformity, contracture of intrinsic hand muscles produces hyperextension of the proximal interphalangeal joint with flexion of the distal interphalangeal joint. Conversely, boutonniere deformity features central extensor tendon rupture, producing flexion of the proximal interphalangeal joint with hyperextension of the distal joint.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Swan Neck Deformity",
+     "points": [
+      "PIP joint: Hyperextension",
+      "DIP joint: Flexion",
+      "Pathology: Volar plate stretching, intrinsic tightness",
+      "Functional deficit: Impaired hand grasp",
+      "Management: Splinting or soft-tissue reconstruction"
+     ]
+    },
+    "right": {
+     "title": "Boutonnière Deformity",
+     "points": [
+      "PIP joint: Fixed Flexion",
+      "DIP joint: Hyperextension",
+      "Pathology: Rupture of central extensor tendon slip",
+      "Volar migration of lateral tendon bands",
+      "Management: Dynamic PIP extension splinting"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Progressive destruction of the metacarpophalangeal (MCP) joint capsules and collateral ligaments by aggressive synovial pannus produces characteristic angular malalignment. Chronic volar subluxation and extensor digitorum tendon slippage toward the ulnar side results in pronounced **ulnar deviation** of the digits at the MCP joints. Additionally, radial deviation of the carpal bones at the wrist creates the classic zigzag deformity of the rheumatoid hand. Early aggressive initiation of disease-modifying antirheumatic drugs (DMARDs) halts destructive synovitis, effectively preventing these disfiguring permanent mechanical deformities.",
+   "say": "Progressive destruction of the metacarpophalangeal joint capsules by aggressive synovial pannus produces characteristic angular malalignment. Chronic volar subluxation and extensor tendon slippage toward the ulnar side results in pronounced ulnar deviation of the digits at the metacarpophalangeal joints. Concurrently, radial deviation at the wrist creates a zigzag appearance. Early disease-modifying antirheumatic therapy halts synovitis, preventing these permanent mechanical deformities.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/osteoarthritis-fig2.webp",
+    "alt": "Comparative diagram illustrating rheumatoid joint erosions, ulnar deviation, and osteoarthritis osteophytes.",
+    "caption": "Comparative articular pathology: symmetrical erosive pannus in RA versus asymmetric osteophytes in OA. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A potentially fatal neurological complication arises from synovial pannus erosion of the transverse atlantal ligament in the upper cervical spine. In **atlantoaxial subluxation**, synovial inflammation between the atlas (C1) and odontoid peg (axis, C2) erodes the transverse ligament, allowing the atlas to shift anteriorly during neck flexion. Severe subluxation risks catastrophic spinal cord compression, spastic quadriparesis, and sudden respiratory arrest. Patients report occipital neck pain and radiating paresthesias; lateral cervical spine radiographs in full flexion showing an anterior atlantodental interval exceeding three millimetres establish the diagnosis.",
+   "say": "A potentially fatal neurological complication arises from synovial pannus erosion of the transverse atlantal ligament in the upper cervical spine. In atlantoaxial subluxation, synovial inflammation erodes the transverse ligament, allowing the atlas to shift anteriorly during neck flexion. Severe subluxation risks spinal cord compression, quadriparesis, and sudden respiratory arrest. Patients present with occipital pain, requiring lateral flexion cervical radiographs before any endotracheal intubation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "synov",
+      "label": "Rheumatoid Synovitis at Retro-Odontoid / Atlantoaxial Joint"
+     },
+     {
+      "id": "lig",
+      "label": "Erosion & Incompetence of Transverse Atlantal Ligament"
+     },
+     {
+      "id": "sublux",
+      "label": "Anterior C1-C2 Subluxation (ADI > 3 mm on Flexion X-ray)"
+     },
+     {
+      "id": "cord",
+      "label": "Cervical Myelopathy Risk: Requires C1-C2 Surgical Fusion"
+     }
+    ],
+    "edges": [
+     [
+      "synov",
+      "lig"
+     ],
+     [
+      "lig",
+      "sublux"
+     ],
+     [
+      "sublux",
+      "cord"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Systemic rheumatoid disease extends beyond articular structures to cause diverse extra-articular manifestations in seropositive patients. Firm, non-tender subcutaneous **rheumatoid nodules** develop in twenty to thirty percent of patients, characteristically localized over extensor pressure surfaces like the olecranon process, Achilles tendon, and bridge of the nose. Histologically, nodules exhibit central fibrinoid necrosis encircled by palisading epithelioid histiocytes. Other extra-articular manifestations include secondary keratoconjunctivitis sicca (secondary Sjögren syndrome), episcleritis, scleromalacia perforans, rheumatoid vasculitis with digital gangrene, and accelerated atherosclerotic coronary artery disease.",
+   "say": "Systemic rheumatoid disease extends beyond articular structures to cause diverse extra-articular manifestations in seropositive patients. Firm subcutaneous rheumatoid nodules develop in up to thirty percent of patients, localized over extensor pressure surfaces such as the olecranon. Histology reveals central fibrinoid necrosis surrounded by palisading histiocytes. Other manifestations include keratoconjunctivitis sicca, episcleritis, rheumatoid vasculitis with digital gangrene, and accelerated coronary artery disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ System",
+     "Extra-Articular Manifestation",
+     "Histopathological Basis",
+     "Clinical Management"
+    ],
+    "rows": [
+     [
+      "Cutaneous",
+      "Rheumatoid nodules (extensor surfaces)",
+      "Central fibrinoid necrosis, palisading histiocytes",
+      "Treat underlying RA; intralesional steroids"
+     ],
+     [
+      "Ophthalmic",
+      "Episcleritis / Scleromalacia perforans",
+      "Scleral necrotizing vasculitis and thinning",
+      "Topical/systemic steroids, urgent ophthalmology"
+     ],
+     [
+      "Pulmonary",
+      "Rheumatoid interstitial lung disease (UIP/NSIP)",
+      "Fibrosing alveolitis, pleuritis",
+      "High-resolution chest CT, avoid methotrexate if ILD"
+     ],
+     [
+      "Vascular",
+      "Rheumatoid vasculitis, digital gangrene",
+      "Immune-complex small-to-medium arteritis",
+      "High-dose intravenous methylprednisolone + Cyclophosphamide"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Establishing a treat-to-target strategy utilizing conventional synthetic disease-modifying antirheumatic drugs immediately upon diagnosis achieves sustained clinical remission. Oral **methotrexate** represents the universal first-line anchor DMARD, acting as a competitive folate antagonist that inhibits dihydrofolate reductase and promotes adenosine release at inflammatory sites. Administering folic acid co-prescription mitigates methotrexate-induced stomatitis, nausea, and hepatotoxicity. If moderate-to-high disease activity persists after three to six months despite optimized methotrexate, biologic DMARDs (TNF inhibitors, IL-6 receptor antagonists) or targeted synthetic JAK inhibitors are added.",
+   "say": "Establishing a treat-to-target strategy utilizing conventional disease-modifying antirheumatic drugs immediately upon diagnosis achieves sustained clinical remission. Oral methotrexate represents the universal first-line anchor therapy, acting as a folate antagonist that promotes extracellular adenosine release. Administering folic acid mitigates stomatitis, nausea, and liver enzyme elevations. If high disease activity persists despite methotrexate, biologic therapies or targeted synthetic JAK inhibitors are added.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "diag",
+      "label": "Confirmed Early Rheumatoid Arthritis"
+     },
+     {
+      "id": "mtx",
+      "label": "First-Line Anchor: Oral Methotrexate (15-25 mg/wk) + Folic Acid"
+     },
+     {
+      "id": "eval",
+      "label": "Assess CDAI / DAS28 at 3 Months (Treat to Target)"
+     },
+     {
+      "id": "bio",
+      "label": "If Target Not Met: Add Biologic DMARD (TNF / IL-6) or JAK Inhibitor"
+     }
+    ],
+    "edges": [
+     [
+      "diag",
+      "mtx"
+     ],
+     [
+      "mtx",
+      "eval"
+     ],
+     [
+      "eval",
+      "bio"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

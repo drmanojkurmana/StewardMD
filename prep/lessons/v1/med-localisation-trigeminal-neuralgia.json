@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "med-localisation",
+ "subject": "medicine",
+ "title": "Trigeminal Neuralgia and Ocular Motor Localisation",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A severe paroxysmal facial pain syndrome characterised by excruciating, lancinating, shock-like electrical sensations is **trigeminal neuralgia** (tic douloureux). The pain is strictly confined to the sensory distribution of one or more branches of the fifth cranial nerve, most commonly the second (maxillary, V2) and third (mandibular, V3) divisions, and typically affects adults older than fifty years.",
+   "say": "A severe paroxysmal facial pain syndrome characterized by excruciating lancinating electrical sensations is trigeminal neuralgia. The pain is strictly confined to the sensory distribution of the fifth cranial nerve, most commonly the maxillary and mandibular divisions, typically affecting adults over age fifty.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-cns-cn5-trigeminal.webp",
+    "alt": "Trigeminal nerve sensory divisions across ophthalmic, maxillary, and mandibular zones.",
+    "caption": "Cutaneous sensory divisions of the trigeminal nerve and clinical examination. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Pain paroxysms in trigeminal neuralgia last from a fraction of a second up to two minutes and are triggered by innocuous mechanical stimulation of sensitive cutaneous trigger zones. Light touch, gentle washing, cold breeze, chewing, or tooth brushing reliably precipitates attacks. The neurological examination remains completely normal in classical trigeminal neuralgia, with preserved facial sensation and an intact **corneal** reflex.",
+   "say": "Pain paroxysms in trigeminal neuralgia last from seconds to two minutes and are triggered by innocuous tactile stimulation of cutaneous trigger zones. Light touch, cold breezes, chewing, or brushing teeth precipitates attacks. The physical neurological examination remains normal, with intact facial sensation and corneal reflexes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "trig",
+      "label": "Innocuous Cutaneous Stimulus"
+     },
+     {
+      "id": "eph",
+      "label": "Ephaptic Axonal Cross-Talk"
+     },
+     {
+      "id": "pain",
+      "label": "Severe Paroxysmal Electric Pain"
+     }
+    ],
+    "edges": [
+     [
+      "trig",
+      "eph"
+     ],
+     [
+      "eph",
+      "pain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pathophysiologically, classical trigeminal neuralgia is driven by mechanical vascular pulsation at the root entry zone where the trigeminal nerve root enters the pons. The primary anatomical culprit in over eighty percent of surgical cases is **neurovascular compression** caused by an aberrant or tortuous loop of the superior cerebellar artery. Chronic arterial pulsation induces focal axonal demyelination and pathological ephaptic transmission between neighbouring nerve fibres.",
+   "say": "Pathophysiologically, classical trigeminal neuralgia is driven by mechanical vascular pulsation at the root entry zone where the nerve enters the pons. The primary culprit in over eighty percent of cases is neurovascular compression caused by a loop of the superior cerebellar artery, inducing focal demyelination.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/trigeminal-neuralgia-bell-s-palsy-fig1.webp",
+    "alt": "Neurovascular compression of trigeminal root entry zone and secondary demyelination.",
+    "caption": "Vascular loop compression and root entry demyelination in trigeminal neuralgia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The initial pharmacotherapy of choice and diagnostic standard for classical trigeminal neuralgia is the voltage-gated sodium channel blocker **carbamazepine**. By stabilising hyperexcitable neuronal membranes and suppressing high-frequency repetitive firing, carbamazepine provides prompt pain relief in over seventy percent of patients, while oxcarbazepine provides equivalent efficacy with improved tolerability.",
+   "say": "The initial pharmacotherapy of choice for classical trigeminal neuralgia is the voltage-gated sodium channel blocker carbamazepine. By stabilizing hyperexcitable neuronal membranes and suppressing repetitive firing, carbamazepine provides prompt pain relief in over seventy percent of patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Strategy",
+     "Mechanism of Action",
+     "Key Clinical Considerations"
+    ],
+    "rows": [
+     [
+      "Carbamazepine",
+      "Voltage-gated sodium channel blocker",
+      "First-line; monitor for hyponatremia and bone marrow suppression"
+     ],
+     [
+      "Oxcarbazepine",
+      "Keto-analogue sodium channel blocker",
+      "First-line alternative; fewer CYP450 drug interactions"
+     ],
+     [
+      "Microvascular Decompression",
+      "Surgical interposition of Teflon felt pad",
+      "Definitive cure; relieves superior cerebellar artery compression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Coordination of conjugate horizontal gaze requires rapid signal transmission between the contralateral abducens nucleus in the pons and the ipsilateral oculomotor subnucleus in the midbrain. The heavily myelinated brainstem interneuron pathway mediating this conjugate coupling is the **medial longitudinal fasciculus** (MLF). Demyelination or ischaemic infarction of the MLF disrupts coordinated horizontal saccades.",
+   "say": "Coordination of conjugate horizontal gaze requires rapid signal transmission between the abducens nucleus in the pons and the oculomotor subnucleus in the midbrain. The myelinated brainstem interneuron pathway mediating this coupling is the medial longitudinal fasciculus. Injury to this pathway disrupts horizontal saccades.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "pprf",
+      "label": "Paramedian Pontine Reticular Formation"
+     },
+     {
+      "id": "cn6",
+      "label": "Abducens CN VI Nucleus"
+     },
+     {
+      "id": "mlf",
+      "label": "Medial Longitudinal Fasciculus (MLF)"
+     },
+     {
+      "id": "cn3",
+      "label": "Contralateral Oculomotor CN III"
+     }
+    ],
+    "edges": [
+     [
+      "pprf",
+      "cn6"
+     ],
+     [
+      "cn6",
+      "mlf"
+     ],
+     [
+      "mlf",
+      "cn3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lesions disrupting the medial longitudinal fasciculus produce the pathognomonic oculomotor disorder termed **internuclear ophthalmoplegia** (INO). On attempted horizontal gaze directed away from the lesion, the ipsilateral eye fails to adduct fully toward the nose, while the abducting contralateral eye exhibits prominent horizontal jerk nystagmus. Crucially, convergence is preserved because convergence circuits bypass the MLF.",
+   "say": "Lesions disrupting the medial longitudinal fasciculus produce internuclear ophthalmoplegia. On attempted horizontal gaze, the ipsilateral eye fails to adduct, while the abducting eye exhibits horizontal jerk nystagmus. Crucially, convergence remains preserved because convergence circuits bypass the medial longitudinal fasciculus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bilateral INO (Demyelinating)",
+     "points": [
+      "Characteristic hallmark of Multiple Sclerosis",
+      "Common in young adults (< 45 years)",
+      "Bilateral adduction lag and abduction nystagmus",
+      "Preserved convergence reflexes"
+     ]
+    },
+    "right": {
+     "title": "Unilateral INO (Vascular)",
+     "points": [
+      "Small lacunar brainstem stroke",
+      "Common in elderly patients with hypertension",
+      "Unilateral adduction paresis on lateral gaze",
+      "Occlusion of basilar paramedian branches"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Oculosympathetic pathway interruption causes ipsilateral ptosis, miosis, and anhidrosis, recognised as **Horner syndrome**. Pharmacological confirmation utilizes topical apraclonidine drops (an alpha-2 and weak alpha-1 agonist), which reverses the miosis and ptosis in Horner syndrome due to denervation supersensitivity of alpha-1 receptors, confirming sympathetic disruption.",
+   "say": "Oculosympathetic pathway interruption causes ipsilateral ptosis, miosis, and anhidrosis, recognized as Horner syndrome. Pharmacological confirmation utilizes topical apraclonidine drops, which reverses the miosis and ptosis in Horner syndrome due to denervation supersensitivity, confirming sympathetic disruption.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Drop Test",
+     "Normal Eye Response",
+     "Horner Syndrome Eye Response"
+    ],
+    "rows": [
+     [
+      "Apraclonidine (0.5% or 1%)",
+      "No pupillary dilatation (slight constriction)",
+      "Pupil dilates and ptosis reverses (supersensitivity)"
+     ],
+     [
+      "Cocaine (4% or 10%)",
+      "Pupil dilates robustly (blocks NET uptake)",
+      "Pupil fails to dilate (impaired noradrenaline release)"
+     ],
+     [
+      "Hydroxyamphetamine (1%)",
+      "Pupil dilates (releases stored noradrenaline)",
+      "Fails to dilate only in third-order postganglionic lesions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Localising Horner syndrome anatomically depends on identifying the level of disruption along the three-neuron sympathetic chain. First-order central lesions involve the posterolateral hypothalamus or brainstem (as seen in Wallenberg syndrome). Second-order preganglionic lesions involve the T1 spinal root or sympathetic chain, classically invaded by an apical lung **Pancoast** tumour. Third-order postganglionic lesions involve the internal carotid artery plexus.",
+   "say": "Localising Horner syndrome anatomically depends on identifying the level along the three-neuron chain. First-order central lesions involve the brainstem in stroke. Second-order preganglionic lesions involve the thoracic sympathetic chain, classically invaded by an apical lung Pancoast tumour. Third-order lesions involve the internal carotid artery plexus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cent",
+      "label": "1st Order: Hypothalamus to C8-T2"
+     },
+     {
+      "id": "pre",
+      "label": "2nd Order: Sympathetic Chain to Superior Ganglion"
+     },
+     {
+      "id": "post",
+      "label": "3rd Order: Carotid Plexus to Eye"
+     }
+    ],
+    "edges": [
+     [
+      "cent",
+      "pre"
+     ],
+     [
+      "pre",
+      "post"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 29"
+}

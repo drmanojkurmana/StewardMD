@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "med-inheritance",
+ "subject": "medicine",
+ "title": "Chromosomal Aneuploidies, Translocations, and Fragile X",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The most common chromosomal aneuploidy in liveborn infants and leading genetic cause of intellectual disability is trisomy 21, universally designated as **Down syndrome**. Over ninety-five percent of cases result from maternal meiotic non-disjunction strongly correlating with advancing maternal age, while four percent arise from an unbalanced Robertsonian translocation involving chromosome 21 and acrocentric chromosomes (typically 14 or 22).",
+   "say": "The most common chromosomal aneuploidy in liveborn infants is trisomy 21, universally designated as Down syndrome. Over ninety-five percent of cases result from maternal meiotic non-disjunction, while four percent arise from an unbalanced Robertsonian translocation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-misc-downs.webp",
+    "alt": "Craniofacial, cardiac, and extremity features of Down syndrome.",
+    "caption": "Characteristic dysmorphic features and organ anomalies in Down syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Clinical features of Down syndrome include flat facial profile, upslanting palpebral fissures, epicanthal folds, Brushfield spots on the iris, single transverse palmar crease (simian crease), and sandal-gap toe space. Major congenital anomalies comprise endocardial cushion defects (atrioventricular septal defect in forty percent), duodenal atresia (double-bubble sign on abdominal radiography), and early-onset Alzheimer **neuropathology**.",
+   "say": "Clinical features of Down syndrome include flat facial profile, epicanthal folds, Brushfield spots, and a single transverse palmar crease. Major anomalies include atrioventricular septal defects, duodenal atresia, and early-onset Alzheimer disease.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ System",
+     "Characteristic Clinical Malformation",
+     "Long-Term Health Hazard"
+    ],
+    "rows": [
+     [
+      "Cardiovascular (40%)",
+      "Atrioventricular Septal Defect (AVSD)",
+      "Eisenmenger syndrome if unrepaired"
+     ],
+     [
+      "Gastrointestinal (10%)",
+      "Duodenal atresia, Hirschsprung disease",
+      "Neonatal bilious vomiting (double-bubble sign)"
+     ],
+     [
+      "Hematological",
+      "Transient myeloproliferative disorder, Acute Leukemia",
+      "20-fold increased risk of ALL and AML (M7)"
+     ],
+     [
+      "Neurological",
+      "Hypotonia, developmental delay, atlantoaxial subluxation",
+      "Alzheimer disease neuropathology by age 40"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The only viable monosomy in humans is complete or partial absence of one X chromosome in females (45,X karyotype), designated as **Turner syndrome**. Manifesting with short stature, primary amenorrhoea, streak gonads, webbed neck (pterygium colli) with low posterior hairline, shield chest with widely spaced nipples, and cubitus valgus, cardiovascular hallmarks comprise bicuspid aortic valve and coarctation of the aorta.",
+   "say": "The only viable monosomy in humans is absence of one X chromosome in females, designated as Turner syndrome. Manifesting with short stature, primary amenorrhoea, and webbed neck, key cardiovascular anomalies comprise bicuspid aortic valve and aortic coarctation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/amenorrhoea-primary-secondary-turner-asherman-fig1.webp",
+    "alt": "Physical stigmata and cardiovascular anomalies of Turner syndrome.",
+    "caption": "Short stature, gonadal dysgenesis, and aortic coarctation in Turner syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Cytogenetic confirmation of chromosomal abnormalities utilizes standard Giemsa-banded **karyotyping**, which visualizes metaphase chromosome number and major structural rearrangements at a resolution of five to ten megabases. For detecting submicroscopic microdeletions below karyotypic resolution (such as 22q11.2 DiGeorge syndrome or 7q11.23 Williams syndrome), targeted fluorescence in situ hybridization (FISH) provides rapid, definitive single-cell identification.",
+   "say": "Cytogenetic confirmation utilizes Giemsa-banded karyotyping to visualize metaphase chromosomes. For detecting submicroscopic microdeletions below karyotypic resolution like DiGeorge syndrome, targeted fluorescence in situ hybridization provides definitive identification.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "G-Banded Karyotyping",
+     "points": [
+      "Visualizes full numerical set (aneuploidies)",
+      "Detects large structural translocations (> 5 Mb)",
+      "Requires live culturing of dividing metaphase cells",
+      "Turnaround time typically 1 to 2 weeks"
+     ]
+    },
+    "right": {
+     "title": "Fluorescence in situ Hybridization (FISH)",
+     "points": [
+      "Fluorescent DNA probe binds specific sequence",
+      "Detects submicroscopic microdeletions (< 1 Mb)",
+      "Performed rapidly on interphase or metaphase nuclei",
+      "Standard for DiGeorge, Williams, and Prader-Willi"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The presence of two or more genetically distinct cell lines originating from a single post-zygotic mitotic mutation in an individual is **mosaicism**. Post-zygotic non-disjunction early in embryogenesis produces somatic mosaicism, leading to a milder, attenuated clinical phenotype in Turner or Down syndrome, whereas germline gonadal mosaicism explains recurrence of severe autosomal dominant conditions in offspring of healthy parents.",
+   "say": "The presence of two or more genetically distinct cell lines originating from a single zygote is mosaicism. Post-zygotic mitotic errors produce somatic mosaicism with milder clinical features in aneuploidies, whereas gonadal mosaicism explains recurrent autosomal dominant disorders in healthy parents.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "zyg",
+      "label": "Normal Diploid 46,XX Zygote"
+     },
+     {
+      "id": "mit",
+      "label": "Post-Zygotic Mitotic Non-Disjunction"
+     },
+     {
+      "id": "mos",
+      "label": "Coexisting 45,X / 46,XX Mosaic Lines (Attenuated Phenotype)"
+     }
+    ],
+    "edges": [
+     [
+      "zyg",
+      "mit"
+     ],
+     [
+      "mit",
+      "mos"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A structural chromosomal rearrangement formed by centric fusion of the whole long arms of two acrocentric chromosomes (13, 14, 15, 21, and 22) with loss of their short satellite arms is a **Robertsonian translocation**. Balanced carriers have forty-five chromosomes and remain completely healthy, but carry significant reproductive risks of recurrent spontaneous abortions and transmitting unbalanced translocation Down syndrome.",
+   "say": "A structural rearrangement formed by fusion of the long arms of two acrocentric chromosomes is a Robertsonian translocation. Balanced carriers have forty-five chromosomes and are healthy, but carry high reproductive risks of miscarriages and translocation Down syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Robertsonian Carrier Type",
+     "Theoretical Recurrence Risk",
+     "Observed Empirical Risk for Down Syndrome"
+    ],
+    "rows": [
+     [
+      "Maternal rob(14;21)",
+      "Theoretical risk 33% for liveborn Down",
+      "Empirical liveborn risk is 10% to 15%"
+     ],
+     [
+      "Paternal rob(14;21)",
+      "Theoretical risk 33% for liveborn Down",
+      "Empirical liveborn risk is low (1% to 2%)"
+     ],
+     [
+      "Carrier rob(21;21) (Either Parent)",
+      "Theoretical risk 100% for liveborn Down",
+      "100% of all viable offspring have Down syndrome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The leading inherited genetic cause of intellectual disability and autism in males is **Fragile X syndrome**, an X-linked dominant condition caused by an expanded CGG trinucleotide repeat in the 5-prime untranslated region of the FMR1 gene on chromosome Xq27.3. Normal alleles have under forty-four repeats; expansion beyond two-hundred repeats triggers hypermethylation, transcriptional gene silencing, and loss of FMRP protein.",
+   "say": "The leading inherited cause of intellectual disability in males is Fragile X syndrome, caused by an expanded CGG repeat in the FMR1 gene on chromosome X. Expansion beyond two hundred repeats triggers hypermethylation and transcriptional silencing of the FMRP protein.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "cgg",
+      "label": "Full Mutation (> 200 CGG Repeats)"
+     },
+     {
+      "id": "meth",
+      "label": "CpG Island Hypermethylation & FMR1 Silencing"
+     },
+     {
+      "id": "pheno",
+      "label": "Macroorchidism + Long Face + Large Everted Ears"
+     }
+    ],
+    "edges": [
+     [
+      "cgg",
+      "meth"
+     ],
+     [
+      "meth",
+      "pheno"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Phenotypically, post-pubertal males with Fragile X syndrome display a characteristic long narrow face, prominent jaw prognathism, large everted ears, joint hypermobility, mitral valve prolapse, and dramatic bilateral post-pubertal macro-orchidism with abnormally enlarged **testes**, accompanied by moderate to severe intellectual disability, hyperactivity, stereotypic autistic hand flapping, and poor eye contact.",
+   "say": "Post-pubertal males with Fragile X syndrome display a long narrow face, prominent jaw, large everted ears, joint laxity, and bilateral post-pubertal macro-orchidism, accompanied by intellectual disability, hyperactivity, and autistic features.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "FMR1 Repeat Status",
+     "CGG Repeat Copy Number",
+     "Clinical Phenotype and Health Risks"
+    ],
+    "rows": [
+     [
+      "Normal Allele",
+      "5 to 44 repeats",
+      "Normal healthy individual; no transmission risk"
+     ],
+     [
+      "Intermediate Allele",
+      "45 to 54 repeats",
+      "Normal individual; slight risk of expansion"
+     ],
+     [
+      "Premutation Allele",
+      "55 to 200 repeats",
+      "FXTAS (tremor/ataxia in males) & FXPOI (ovarian failure in females)"
+     ],
+     [
+      "Full Mutation Allele",
+      "> 200 repeats (hypermethylated)",
+      "Fragile X syndrome with macroorchidism and intellectual disability"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 450, 451"
+}

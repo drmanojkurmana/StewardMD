@@ -1,0 +1,262 @@
+{
+ "v": 1,
+ "module": "med-thrombosis-transfusion",
+ "subject": "medicine",
+ "title": "Thrombophilia and Heparin Therapy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The most prevalent inherited thrombophilia among individuals of European ancestry results from resistance to activated protein C. In **factor v leiden**, a single point mutation (G1691A) in the F5 gene substitutes glutamine for arginine at position 506. This mutation eliminates the primary cleavage site utilized by activated protein C to inactivate factor Va, leaving factor Va resistant to proteolytic degradation. Persistent procoagulant factor Va activity drives continuous prothrombinase complex assembly, increasing the relative risk of deep vein thrombosis and pulmonary embolism four-to-eight-fold in heterozygotes and eighty-fold in homozygotes.",
+   "say": "The most prevalent inherited thrombophilia among individuals of European ancestry results from resistance to activated protein C. In factor v leiden, a point mutation substitutes glutamine for arginine at position 506. This mutation eliminates the cleavage site utilized by activated protein C, leaving factor Va resistant to degradation. Persistent factor Va activity drives continuous thrombin generation, increasing the risk of venous thromboembolism several-fold in heterozygotes.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/deep-venous-thrombosis-and-pulmonary-fig1.webp",
+    "alt": "Pathophysiological mechanisms of venous thrombosis and pulmonary thromboembolism.",
+    "caption": "Deep venous thrombosis and pulmonary embolism pathophysiology in inherited thrombophilia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A gain-of-function mutation in the 3-prime untranslated region of the prothrombin gene increases circulating prothrombin concentrations. The **prothrombin gene mutation** (G20210A) alters mRNA polyadenylation, increasing transcription efficiency and elevating plasma prothrombin (factor II) levels by roughly thirty percent. Higher circulating zymogen concentrations accelerate thrombin generation upon coagulation trigger, conferring a two-to-three-fold increased risk of venous thromboembolism. After Factor V Leiden, the prothrombin G20210A variant represents the second commonest inherited thrombophilia in Caucasian populations, diagnosed via polymerase chain reaction DNA testing.",
+   "say": "A gain-of-function mutation in the non-coding region of the prothrombin gene increases circulating prothrombin concentrations. The prothrombin gene mutation alters mRNA stability, elevating plasma prothrombin levels by roughly thirty percent. Higher circulating levels accelerate thrombin generation, conferring a two-to-three-fold increased risk of venous thromboembolism. After Factor V Leiden, this variant represents the second commonest inherited thrombophilia in Caucasian populations.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Inherited Thrombophilia",
+     "Genetic Mutation / Defect",
+     "Population Prevalence",
+     "Relative Risk of VTE"
+    ],
+    "rows": [
+     [
+      "Factor V Leiden (Heterozygous)",
+      "Arg506Gln (APC Resistance)",
+      "3% to 8% (Caucasians)",
+      "4 to 8-fold increased risk"
+     ],
+     [
+      "Prothrombin G20210A (Heterozygous)",
+      "3'-UTR G-to-A transition",
+      "2% to 3% (Caucasians)",
+      "2 to 3-fold increased risk"
+     ],
+     [
+      "Antithrombin Deficiency",
+      "Heterozygous SERPINC1 mutations",
+      "0.02% to 0.2%",
+      "20 to 50-fold increased risk (Highest)"
+     ],
+     [
+      "Protein C Deficiency",
+      "Heterozygous PROC mutations",
+      "0.2% to 0.5%",
+      "10 to 15-fold increased risk"
+     ],
+     [
+      "Protein S Deficiency",
+      "Heterozygous PROS1 mutations",
+      "0.1% to 0.7%",
+      "5 to 10-fold increased risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Congenital deficiencies of natural endogenous anticoagulant proteins lead to severe recurrent venous thromboembolic disease in young adults. Vitamin K-dependent **protein c deficiency** and its cofactor protein S deficiency impair the inactivation of procoagulant factors Va and VIIIa. Antithrombin deficiency represents the most thrombogenic inherited thrombophilia, characterized by impaired neutralization of thrombin (factor IIa) and factor Xa. Patients with antithrombin deficiency exhibit heparin resistance, requiring higher doses of unfractionated heparin or concurrent antithrombin concentrate infusion to achieve therapeutic anticoagulation.",
+   "say": "Congenital deficiencies of natural endogenous anticoagulant proteins lead to severe recurrent venous thromboembolism in young adults. Vitamin K-dependent protein c deficiency and its cofactor protein S deficiency impair the inactivation of factors Va and VIIIa. Antithrombin deficiency represents the most thrombogenic defect, causing impaired neutralization of thrombin and factor Xa, frequently manifesting as heparin resistance during acute thrombosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/arterial-and-venous-thrombosis-fig1.webp",
+    "alt": "Diagram comparing mechanisms and targets in arterial versus venous thrombosis.",
+    "caption": "Comparative pathophysiology and cellular drivers in arterial and venous thrombosis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Initiating oral vitamin K antagonist therapy without parenteral anticoagulant bridging risks a catastrophic prothrombotic complication. Administering **warfarin** inhibits vitamin K epoxide reductase, suppressing factors II, VII, IX, and X, alongside anticoagulant proteins C and S. Because protein C has a short half-life of only six hours, early warfarin therapy depletes protein C long before prothrombin (half-life 60 hours) declines, creating a transient prothrombotic state. In patients with underlying protein C deficiency, this precipitates warfarin-induced skin necrosis, characterized by microvascular thrombosis in subcutaneous fat of the breasts, thighs, and buttocks.",
+   "say": "Initiating oral vitamin K antagonist therapy without parenteral anticoagulant bridging risks a catastrophic prothrombotic complication. Administering warfarin inhibits vitamin K epoxide reductase, suppressing factors two, seven, nine, and ten, alongside anticoagulant proteins C and S. Because protein C has a short half-life of six hours, initial warfarin therapy depletes protein C before prothrombin declines, creating a prothrombotic state that can cause microvascular skin necrosis in fatty tissues.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "warf",
+      "label": "Unbridged High-Dose Warfarin Initiation"
+     },
+     {
+      "id": "pc",
+      "label": "Rapid Fall in Protein C (Half-Life 6 Hours)"
+     },
+     {
+      "id": "f2",
+      "label": "Prothrombin Persists (Half-Life 60 Hours): Transient Hypercoagulability"
+     },
+     {
+      "id": "nec",
+      "label": "Microvascular Thrombosis: Warfarin Skin Necrosis"
+     }
+    ],
+    "edges": [
+     [
+      "warf",
+      "pc"
+     ],
+     [
+      "pc",
+      "f2"
+     ],
+     [
+      "f2",
+      "nec"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Therapeutic monitoring of warfarin relies on a standardized mathematical transformation of the prothrombin time to eliminate reagent variability. Calculating the **inr** (International Normalized Ratio) raises the patient's prothrombin time divided by control prothrombin time to the power of the International Sensitivity Index (ISI). For treatment of deep vein thrombosis, pulmonary embolism, and non-valvular atrial fibrillation, the target therapeutic INR range is 2.0 to 3.0. In patients with mechanical mechanical prosthetic mitral valves, the target INR is maintained at 2.5 to 3.5 to prevent valve thrombosis.",
+   "say": "Therapeutic monitoring of warfarin relies on a standardized mathematical transformation of the prothrombin time to eliminate reagent variability. Calculating the INR normalizes the patient's prothrombin time using the International Sensitivity Index of the thromboplastin reagent. For treatment of deep vein thrombosis, pulmonary embolism, and atrial fibrillation, the target therapeutic INR is 2.0 to 3.0, whereas mechanical mitral valves require 2.5 to 3.5.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Indication",
+     "Target INR Range",
+     "Duration of Anticoagulation",
+     "Reversal Agent for Over-anticoagulation"
+    ],
+    "rows": [
+     [
+      "DVT / PE (Provoked)",
+      "2.0 to 3.0",
+      "3 Months",
+      "Oral / IV Vitamin K1 (Phytonadione)"
+     ],
+     [
+      "DVT / PE (Unprovoked / Recurrent)",
+      "2.0 to 3.0",
+      "Indefinite / Extended",
+      "Prothrombin Complex Concentrate (4-Factor PCC)"
+     ],
+     [
+      "Non-Valvular Atrial Fibrillation",
+      "2.0 to 3.0",
+      "Lifelong (based on CHA2DS2-VASc)",
+      "4-Factor PCC if life-threatening bleed"
+     ],
+     [
+      "Mechanical Mitral Prosthetic Valve",
+      "2.5 to 3.5",
+      "Lifelong mandatory",
+      "4-Factor PCC + IV Vitamin K1 if intracranial bleed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Parenteral glycosaminoglycans accelerate endogenous antithrombin activity to deliver rapid therapeutic anticoagulation. Administering **unfractionated heparin** binds antithrombin via a specific high-affinity pentasaccharide sequence, inducing a conformational change that accelerates antithrombin inhibition of thrombin and factor Xa by one-thousand-fold. To inhibit thrombin, heparin must form a ternary bridge contacting both antithrombin and thrombin (requiring >= 18 saccharide units). Unfractionated heparin is cleared by reticuloendothelial macrophages and endothelial cells, with a short half-life of ninety minutes, monitored using the activated partial thromboplastin time (target 1.5 to 2.5 times control).",
+   "say": "Parenteral glycosaminoglycans accelerate endogenous antithrombin activity to deliver rapid therapeutic anticoagulation. Administering unfractionated heparin binds antithrombin via a pentasaccharide sequence, accelerating antithrombin inhibition of thrombin and factor Xa by a thousand-fold. To inhibit thrombin, heparin must form a bridge contacting both antithrombin and thrombin. Unfractionated heparin has a short half-life of ninety minutes, monitored using the activated partial thromboplastin time.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Unfractionated Heparin (UFH)",
+     "points": [
+      "Molecular weight: 15,000 Daltons",
+      "Equal anti-IIa and anti-Xa activity (1:1 ratio)",
+      "Requires continuous IV infusion and aPTT monitoring",
+      "Cleared via reticuloendothelial uptake (non-renal)",
+      "Reversed 100% by Protamine sulfate"
+     ]
+    },
+    "right": {
+     "title": "Low-Molecular-Weight Heparin (LMWH)",
+     "points": [
+      "Molecular weight: 4,000 to 5,000 Daltons",
+      "Predominant anti-Xa activity (3:1 to 4:1 ratio)",
+      "Subcutaneous once or twice daily dosing",
+      "Cleared predominantly via renal excretion",
+      "Reversed partially (~ 60%) by Protamine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Chemical or enzymatic depolymerization of unfractionated heparin generates short polysaccharide fragments with superior pharmacokinetic predictability. Prescribing **lmwh** such as enoxaparin or dalteparin yields smaller molecules (mean 4,500 Daltons) that retain anti-factor Xa activity but lack sufficient chain length to bridge thrombin, conferring a high anti-Xa to anti-IIa ratio (3:1). Low-molecular-weight heparins exhibit high bioavailability and predictable dose-response, permitting once-daily subcutaneous dosing without routine laboratory monitoring. Because LMWH undergoes renal elimination, dose reduction is required in renal impairment.",
+   "say": "Depolymerization of unfractionated heparin generates short polysaccharide fragments with superior pharmacokinetic predictability. Prescribing LMWH such as enoxaparin yields smaller molecules that retain anti-factor Xa activity but lack chain length to bridge thrombin, conferring a high anti-Xa to anti-IIa ratio. Low-molecular-weight heparins exhibit high bioavailability and predictable dose-response relationships, permitting subcutaneous dosing without routine monitoring, though renal dose adjustments are necessary in renal impairment.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "lmwh",
+      "label": "Subcutaneous Enoxaparin (1 mg/kg twice daily)"
+     },
+     {
+      "id": "at",
+      "label": "Binds Antithrombin via Pentasaccharide Sequence"
+     },
+     {
+      "id": "xa",
+      "label": "Selective Allosteric Inhibition of Factor Xa (3:1 vs Thrombin)"
+     },
+     {
+      "id": "effect",
+      "label": "Predictable Anticoagulation without Routine Monitoring"
+     }
+    ],
+    "edges": [
+     [
+      "lmwh",
+      "at"
+     ],
+     [
+      "at",
+      "xa"
+     ],
+     [
+      "xa",
+      "effect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rapid neutralization of heparin anticoagulation is necessary during life-threatening haemorrhage or emergent cardiopulmonary bypass reversal. Administering **protamine sulfate**, a positively charged alkaline polycationic peptide derived from salmon sperm, binds negatively charged acidic heparin molecules via electrostatic attraction to form an inactive, stable salt complex. One milligram of protamine neutralizes approximately one hundred units of unfractionated heparin. Crucially, protamine must be infused slowly intravenously; rapid infusion provokes severe hypotension, bradycardia, catastrophic pulmonary hypertension from anaphylactoid complement activation, and transient bronchospasm.",
+   "say": "Rapid neutralization of heparin anticoagulation is necessary during life-threatening haemorrhage or emergent surgical reversal. Administering protamine sulfate, a positively charged alkaline peptide, binds negatively charged acidic heparin via electrostatic attraction to form an inactive salt complex. One milligram of protamine neutralizes one hundred units of unfractionated heparin. Crucially, protamine must be infused slowly to prevent severe hypotension, pulmonary hypertension, and bronchospasm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bleed",
+      "label": "Life-Threatening Bleed on Unfractionated Heparin"
+     },
+     {
+      "id": "prot",
+      "label": "Slow IV Infusion of Protamine Sulfate (1 mg / 100 U Heparin)"
+     },
+     {
+      "id": "salt",
+      "label": "Electrostatic Complexation Neutralizes Acidic Heparin"
+     },
+     {
+      "id": "norm",
+      "label": "Rapid Normalization of aPTT within 5 Minutes"
+     }
+    ],
+    "edges": [
+     [
+      "bleed",
+      "prot"
+     ],
+     [
+      "prot",
+      "salt"
+     ],
+     [
+      "salt",
+      "norm"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

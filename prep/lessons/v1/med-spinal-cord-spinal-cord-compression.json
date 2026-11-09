@@ -1,0 +1,211 @@
+{
+ "v": 1,
+ "module": "med-spinal-cord",
+ "subject": "medicine",
+ "title": "Spinal Cord Syndromes and Syringomyelia",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Extrinsic mechanical indentation of the spinal cord by epidural metastatic malignancy (from breast, prostate, or lung carcinoma), epidural abscess, or acute disc herniation causes acute **spinal cord compression**. An acute neurosurgical emergency, patients present with progressive localized band-like spinal pain, spastic paraparesis, sensory loss below a dermatomal level, and late sphincter incontinence.",
+   "say": "Extrinsic mechanical compression of the spinal cord by epidural metastasis, abscess, or disc herniation causes spinal cord compression. An emergency, patients present with focal back pain, spastic paraparesis, a sensory level below the lesion, and late sphincter incontinence.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-paed-cns-meningeal.webp",
+    "alt": "Examination of spinal cord meningeal and root signs in compressive myelopathy.",
+    "caption": "Assessment of vertebral tenderness, dermatomal sensory levels, and myelopathy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Immediate management of suspected malignant epidural cord compression requires high-dose intravenous **dexamethasone** (sixteen to twenty-four milligrams initial bolus) to reduce vasogenic peritumoral spinal cord oedema, paired with emergency whole-spine magnetic resonance imaging. Definitive decompression requires urgent surgical decompression with posterior spinal stabilization, followed by external beam radiation therapy.",
+   "say": "Immediate management of suspected cord compression requires high-dose intravenous dexamethasone to reduce spinal cord edema, paired with urgent whole-spine MRI. Definitive decompression requires emergency surgical intervention followed by radiation therapy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "susp",
+      "label": "Back Pain + Paraparesis + Sensory Level"
+     },
+     {
+      "id": "dex",
+      "label": "Immediate High-Dose IV Dexamethasone"
+     },
+     {
+      "id": "mri",
+      "label": "Emergency Whole-Spine MRI & Surgical Decompression"
+     }
+    ],
+    "edges": [
+     [
+      "susp",
+      "dex"
+     ],
+     [
+      "dex",
+      "mri"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hemi-section of the lateral spinal cord produces the classic neurovascular cross-syndrome designated as **Brown-Sequard syndrome**. Interruption of uncrossed descending corticospinal motor and ascending dorsal column tracts produces ipsilateral upper motor neuron spastic paralysis and ipsilateral loss of proprioception and vibration sense below the lesion, paired with contralateral loss of pain and temperature sensation.",
+   "say": "Hemi-section of the lateral spinal cord produces Brown-Sequard syndrome. Interruption of descending corticospinal and dorsal column tracts produces ipsilateral spastic paralysis and loss of vibration sense below the lesion, paired with contralateral loss of pain and temperature.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ipsilateral Deficits Below Lesion",
+     "points": [
+      "Upper motor neuron spastic paralysis (corticospinal)",
+      "Loss of vibration and proprioception (dorsal column)",
+      "Hyperreflexia and extensor Babinski sign",
+      "Vasomotor paralysis from sympathetic loss"
+     ]
+    },
+    "right": {
+     "title": "Contralateral Deficits Below Lesion",
+     "points": [
+      "Loss of pain and temperature sensation (spinothalamic)",
+      "Begins 1 to 2 segments below anatomical lesion",
+      "Motor strength completely preserved",
+      "Proprioception and light touch intact"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Ischaemic infarction within the territory of the anterior spinal artery (typically during thoracic aortic aneurysm repair or severe hypotension) produces **anterior cord syndrome**. The anterior two-thirds of the spinal cord is destroyed, causing bilateral flaccid paraplegia transitioning to spastic paraparesis, bilateral loss of pain and temperature, and acute urinary retention, while posterior column proprioception and vibration are completely spared.",
+   "say": "Ischemic infarction within the anterior spinal artery territory produces anterior cord syndrome. Destroying the anterior two-thirds of the cord, it causes bilateral paraplegia, loss of pain and temperature, and urinary retention, while dorsal column proprioception remains spared.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Spinal Cord Syndrome",
+     "Primary Tracts Destroyed",
+     "Preserved Sensory / Motor Modalities"
+    ],
+    "rows": [
+     [
+      "Anterior Cord Syndrome",
+      "Bilateral corticospinal & spinothalamic tracts",
+      "Dorsal columns completely spared (vibration/proprioception intact)"
+     ],
+     [
+      "Central Cord Syndrome",
+      "Central gray matter & crossing decussating fibers",
+      "Sacral sensation spared (sacral sparing); arms weaker than legs"
+     ],
+     [
+      "Posterior Cord Syndrome",
+      "Bilateral dorsal columns (fasciculus gracilis/cuneatus)",
+      "Motor power and spinothalamic pain/temperature preserved"
+     ],
+     [
+      "Brown-Sequard Hemicord",
+      "Ipsilateral motor & dorsal columns; contra spinothalamic",
+      "Contralateral motor and ipsilateral spinothalamic intact"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A chronic progressive fluid-filled cavitation within the central periependymal parenchyma of the spinal cord is **syringomyelia**. Most commonly involving the cervical cord, it is strongly associated in over seventy percent of cases with Chiari type I malformation (congenital downward displacement of cerebellar tonsils through the foramen magnum).",
+   "say": "A progressive fluid-filled cavity within the central spinal cord is syringomyelia. Most commonly involving the cervical cord, it is strongly associated with Chiari type one malformation with downward herniation of cerebellar tonsils through the foramen magnum.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/syringomyelia-fig1.webp",
+    "alt": "Sagittal cervical MRI demonstrating intramedullary syrinx cavity and tonsillar descent.",
+    "caption": "Intramedullary cervical syrinx cavity and Chiari I cerebellar tonsillar ectopia on MRI. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The expanding central syrinx selectively compresses and transects the unmyelinated spinothalamic axons decussating obliquely across the anterior white commissure. This produces the pathognomonic cape-like or shawl-like **dissociated sensory loss**, characterised by loss of pain and temperature sensation across the shoulders and upper extremities with complete preservation of light touch, joint position, and vibration senses.",
+   "say": "The expanding central syrinx selectively interrupts spinothalamic axons crossing the anterior white commissure. This produces a pathognomonic cape-like dissociated sensory loss, with loss of pain and temperature across the shoulders while vibration and position sense remain preserved.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Abolished Sensory Modalities",
+     "points": [
+      "Pain and thermal discrimination abolished",
+      "Bilateral cape-like (shawl) distribution across arms",
+      "Painless burns and unnoticed trophic hand injuries",
+      "Due to anterior commissure decussation transection"
+     ]
+    },
+    "right": {
+     "title": "Preserved Sensory Modalities",
+     "points": [
+      "Light touch, vibration, and proprioception preserved",
+      "Dorsal columns structurally intact in early disease",
+      "Defines classic sensory dissociation",
+      "Distinguishes central cord lesion from root avulsion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "As the syrinx cavity expands radially, anterior horn lower motor neurons are destroyed, causing flaccid hand weakness, wasting of intrinsic hand muscles, and absent biceps and supinator jerks. Eventually, compression of lateral descending corticospinal tracts produces spastic paraparesis, hyperreflexia, and extensor plantars in the **lower extremities**.",
+   "say": "As the syrinx cavity expands, anterior horn motor neurons are destroyed, causing flaccid wasting of intrinsic hand muscles and absent arm reflexes. Eventually, compression of lateral corticospinal tracts produces spastic paraparesis and hyperreflexia in the lower extremities.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "syr",
+      "label": "Central Syrinx Expansion"
+     },
+     {
+      "id": "horn",
+      "label": "Anterior Horn Cell Lysis (Flaccid Arm Wasting)"
+     },
+     {
+      "id": "pyr",
+      "label": "Lateral Corticospinal Compression (Spastic Leg Paresis)"
+     }
+    ],
+    "edges": [
+     [
+      "syr",
+      "horn"
+     ],
+     [
+      "horn",
+      "pyr"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An acute, inflammatory, non-compressive immune-mediated demyelination spanning both transverse halves of the spinal cord is **transverse myelitis**. Occurring post-infectiously or in association with multiple sclerosis or neuromyelitis optica, patients rapidly develop paraplegia, a sharp sensory level on the trunk, and urinary retention over hours to days, managed urgently with high-dose intravenous methylprednisolone.",
+   "say": "An acute inflammatory demyelination spanning both halves of the spinal cord is transverse myelitis. Occurring post-infectiously or in multiple sclerosis, patients develop paraplegia, a sharp sensory level, and urinary retention over days, treated with high-dose intravenous methylprednisolone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "post",
+      "label": "Post-Viral Immune Trigger"
+     },
+     {
+      "id": "mye",
+      "label": "Transverse Bilateral Cord Inflammation"
+     },
+     {
+      "id": "tx",
+      "label": "High-Dose IV Methylprednisolone (1 g/day)"
+     }
+    ],
+    "edges": [
+     [
+      "post",
+      "mye"
+     ],
+     [
+      "mye",
+      "tx"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 433"
+}

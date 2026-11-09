@@ -1,0 +1,209 @@
+{
+ "v": 1,
+ "module": "med-nutrition",
+ "subject": "medicine",
+ "title": "Malnutrition Syndromes: Kwashiorkor, Marasmus, and Refeeding",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "A spectrum of nutritional depletion resulting from chronic inadequate dietary intake of energy and protein is **protein energy malnutrition** (PEM). Presenting along a continuous spectrum, pure severe energy deficiency with calorie starvation causes marasmus, whereas inadequate dietary protein intake despite relatively preserved carbohydrate caloric consumption produces the edematous syndrome termed kwashiorkor.",
+   "say": "A spectrum of nutritional depletion resulting from inadequate dietary intake of energy and protein is protein energy malnutrition. Pure calorie starvation causes marasmus, whereas inadequate protein intake despite carbohydrate consumption produces the edematous syndrome kwashiorkor.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-anthro-kwashiorkor-marasmus.webp",
+    "alt": "Clinical phenotypic comparison between kwashiorkor and marasmus in severe malnutrition.",
+    "caption": "Pitting edema and flaky-paint dermatosis in kwashiorkor versus broomstick wasting in marasmus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The pathognomonic physical hallmark of kwashiorkor is symmetrical dependent pitting oedema resulting from profound hypoalbuminaemia and increased capillary permeability. Characteristically accompanied by fatty liver infiltration (hepatomegaly), listless apathy, flag sign hair discolouration, and extensive peeling hyperpigmented skin lesions designated as flaky-paint dermatosis, marasmus in contrast displays severe generalised muscle wasting and loss of **subcutaneous fat**.",
+   "say": "The pathognomonic physical hallmark of kwashiorkor is symmetrical pitting edema from hypoalbuminaemia. Accompanied by hepatomegaly from fatty liver, apathy, and flaky-paint dermatosis, it contrasts with marasmus, which displays severe wasting of muscle and subcutaneous fat.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Kwashiorkor (Protein Deficient)",
+     "points": [
+      "Inadequate protein intake with adequate calories",
+      "Bilateral pitting edema of lower extremities",
+      "Fatty liver hepatomegaly from failed apolipoprotein synthesis",
+      "Flaky-paint dermatosis and alternating hair hypopigmentation"
+     ]
+    },
+    "right": {
+     "title": "Marasmus (Calorie Starvation)",
+     "points": [
+      "Severe total deficiency of calories and protein",
+      "Absence of edema; serum albumin is normal or mild decrease",
+      "Severe generalized muscle wasting (broomstick limbs)",
+      "Old man wizened facies from buccal fat pad loss"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Inpatient stabilization of severe acute malnutrition must follow the ten-step protocol established by the World Health Organization (**WHO**). Initial stabilization prevents hypothermia, hypoglycemia, and fluid overload (avoiding rapid IV fluids due to myocardial atrophy), feeding cautiously with starter formula F-75, and providing broad-spectrum antibiotics, transitioning to catch-up formula F-100 only after oedema resolves.",
+   "say": "Inpatient stabilization of severe malnutrition follows the WHO ten-step protocol. Initial care treats hypothermia, hypoglycemia, and dehydration cautiously with F-75 formula to prevent heart failure, followed by catch-up formula F-100 once edema resolves.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-misc-severe-malnutrition.webp",
+    "alt": "WHO ten-step inpatient management timeline for severe acute malnutrition.",
+    "caption": "Timeline of WHO ten-step inpatient protocol for severe acute malnutrition. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A potentially fatal metabolic complication occurring when nutrition is aggressively reintroduced in chronically starved or severely malnourished individuals is **refeeding syndrome**. Ingested carbohydrates stimulate rapid endogenous insulin secretion, driving extracellular phosphate, potassium, and magnesium into cells to support glycogen, protein, and ATP synthesis.",
+   "say": "A potentially fatal metabolic complication occurring when nutrition is aggressively reintroduced in starved patients is refeeding syndrome. Carbohydrates stimulate insulin release, driving extracellular phosphate, potassium, and magnesium into cells to synthesize ATP.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "starv",
+      "label": "Chronic Malnutrition / Glycogen Depletion"
+     },
+     {
+      "id": "carb",
+      "label": "Abrupt Carbohydrate Re-feeding & Insulin Spike"
+     },
+     {
+      "id": "shift",
+      "label": "Massive Cellular Influx of PO4, K+, Mg2+ & Thiamine"
+     }
+    ],
+    "edges": [
+     [
+      "starv",
+      "carb"
+     ],
+     [
+      "carb",
+      "shift"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The signature biochemical hallmark of refeeding syndrome is severe acute **hypophosphataemia**. Intracellular trapping of phosphate depletes 2,3-diphosphoglycerate and ATP, precipitating acute congestive heart failure, fatal cardiac arrhythmias, acute rhabdomyolysis, respiratory failure from diaphragmatic weakness, and acute hemolytic anaemia, requiring immediate prophylactic phosphate supplementation.",
+   "say": "The signature biochemical hallmark of refeeding syndrome is severe acute hypophosphataemia. Phosphate depletion impairs cellular ATP synthesis, causing acute heart failure, cardiac arrhythmias, rhabdomyolysis, and diaphragmatic respiratory failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Serum Electrolyte",
+     "Pathophysiological Shift",
+     "Acute Clinical Complications"
+    ],
+    "rows": [
+     [
+      "Hypophosphataemia",
+      "Intracellular shift to phosphorylate glucose into ATP",
+      "Acute heart failure, rhabdomyolysis, diaphragmatic paralysis"
+     ],
+     [
+      "Hypokalaemia",
+      "Insulin-mediated cellular uptake via Na+/K+ ATPase",
+      "Cardiac arrhythmias, QT prolongation, paralytic ileus"
+     ],
+     [
+      "Hypomagnesaemia",
+      "Intracellular enzyme cofactor consumption",
+      "Torsades de pointes, refractory hypocalcaemia, tremors"
+     ],
+     [
+      "Thiamine Depletion",
+      "Cofactor consumed in aerobic carbohydrate glycolysis",
+      "Wernicke encephalopathy, lactic acidosis, acute beriberi"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Deficiency of water-soluble vitamin B1 (thiamine) leads to impaired pyruvate dehydrogenase kinetics and aerobic glycolysis failure. Dry **beriberi** manifests as symmetrical peripheral sensorimotor polyneuropathy with distal muscle wasting and foot drop. Wet beriberi presents as high-output congestive heart failure with peripheral vasodilation, warm extremities, marked tachycardia, and generalised oedema.",
+   "say": "Deficiency of vitamin B1 causes impaired carbohydrate metabolism. Dry beriberi manifests as symmetrical peripheral polyneuropathy with foot drop. Wet beriberi presents as high-output congestive heart failure with peripheral vasodilation and severe edema.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dry Beriberi (Neurological)",
+     "points": [
+      "Chronic symmetrical distal sensorimotor polyneuropathy",
+      "Severe calf tenderness, foot drop, wrist drop",
+      "Areflexia in lower extremities",
+      "Absence of cardiac failure or edema"
+     ]
+    },
+    "right": {
+     "title": "Wet Beriberi (Cardiovascular)",
+     "points": [
+      "High-output congestive heart failure",
+      "Systemic vasodilation with warm extremities and bounding pulse",
+      "Marked tachycardia, cardiomegaly, orthopnea",
+      "Rapid response to intravenous Thiamine replacement"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An acute neurological emergency resulting from thiamine deficiency in chronic alcohol use disorder or hyperemesis gravidarum is **Wernicke encephalopathy**. Characterized by the classical clinical triad of acute global confusion, ataxia, and ophthalmoplegia (bilateral sixth nerve palsy and horizontal nystagmus), failure to administer immediate intravenous thiamine prior to glucose causes progression to irreversible Korsakoff psychosis.",
+   "say": "An acute neurological emergency caused by thiamine deficiency in alcohol use disorder is Wernicke encephalopathy. Characterized by confusion, ataxia, and ophthalmoplegia, failure to give intravenous thiamine before glucose causes progression to irreversible Korsakoff memory psychosis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "alcoh",
+      "label": "Chronic Alcohol Dependence & Malnutrition"
+     },
+     {
+      "id": "triad",
+      "label": "Triad: Confusion + Ataxia + Ophthalmoplegia"
+     },
+     {
+      "id": "thiam",
+      "label": "Immediate IV Thiamine (500 mg tid) BEFORE Glucose"
+     }
+    ],
+    "edges": [
+     [
+      "alcoh",
+      "triad"
+     ],
+     [
+      "triad",
+      "thiam"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Deficiency of vitamin B3 (niacin or its precursor tryptophan) precipitates the classical deficiency syndrome designated as **pellagra**. Classically occurring in maize-dependent populations or carcinoid syndrome, it manifests with the classic four Ds: bilateral symmetrical photosensitive dermatitis (Casal necklace on the neck), secretory diarrhoea, dementia with encephalopathy, and death if untreated.",
+   "say": "Deficiency of vitamin B3 or tryptophan causes pellagra, classically seen in maize-dependent diets or carcinoid syndrome. It manifests with the classic four Ds: photosensitive dermatitis including Casal necklace, watery diarrhea, dementia, and death if untreated.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Vitamin Deficiency",
+     "Active Coenzyme Form",
+     "Pathognomonic Clinical Syndrome"
+    ],
+    "rows": [
+     [
+      "Vitamin B1 (Thiamine)",
+      "Thiamine Pyrophosphate (TPP)",
+      "Beriberi (dry/wet) & Wernicke-Korsakoff encephalopathy"
+     ],
+     [
+      "Vitamin B3 (Niacin)",
+      "NAD+ and NADP+",
+      "Pellagra (Dermatitis Casal necklace, Diarrhea, Dementia)"
+     ],
+     [
+      "Vitamin C (Ascorbic Acid)",
+      "Hydroxylation of Proline/Lysine",
+      "Scurvy (Perifollicular petechiae, corkscrew hairs, bleeding gums)"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 326, 327"
+}

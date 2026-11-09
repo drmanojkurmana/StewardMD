@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "module": "med-myeloma",
+ "subject": "medicine",
+ "title": "Plasma Cell Dyscrasias and Hyperviscosity",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "An asymptomatic premalignant clonal plasma cell proliferation characterized by low paraprotein levels without end-organ damage defines **mgus** (monoclonal gammopathy of undetermined significance). Diagnostic criteria require a serum monoclonal M spike under 3.0 grams per decilitre, bone marrow clonal plasma cells under ten percent, and strict absence of CRAB end-organ damage (no hypercalcaemia, renal insufficiency, anaemia, or lytic bone lesions). Present in over three percent of individuals over age fifty, MGUS carries a lifelong risk of progression to active multiple myeloma of roughly one percent per year, requiring periodic surveillance.",
+   "say": "An asymptomatic premalignant clonal plasma cell proliferation characterized by low paraprotein levels without end-organ damage defines MGUS. Diagnostic criteria require a serum M spike under 3.0 grams per decilitre, bone marrow plasma cells under ten percent, and strict absence of CRAB end-organ damage. Present in three percent of adults over fifty, MGUS carries a progression risk to multiple myeloma of one percent annually, requiring periodic observation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Plasma Cell Disorder",
+     "Serum Monoclonal Protein",
+     "Bone Marrow Plasma Cells",
+     "CRAB Organ Damage"
+    ],
+    "rows": [
+     [
+      "MGUS",
+      "< 3.0 g/dL",
+      "< 10% Clonal cells",
+      "Strictly Absent (0%)"
+     ],
+     [
+      "Smouldering Multiple Myeloma",
+      ">= 3.0 g/dL (or urinary M >= 500 mg/24h)",
+      "10% to 59% Clonal cells",
+      "Strictly Absent (0%)"
+     ],
+     [
+      "Active Multiple Myeloma",
+      "Monoclonal protein present",
+      ">= 10% (or plasmacytoma)",
+      "Present: CRAB criteria or SLiM biomarkers"
+     ],
+     [
+      "Waldenström Macroglobulinaemia",
+      "Monoclonal IgM (any level)",
+      ">= 10% Lymphoplasmacytic cells",
+      "Absent osteolytic lesions; Hyperviscosity present"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "An intermediate clinical stage characterized by significant marrow plasma cell infiltration without symptomatic end-organ impairment is designated as **smouldering myeloma**. Defined by a serum M spike of 3.0 grams per decilitre or higher, or bone marrow clonal plasma cells between ten and fifty-nine percent, patients exhibit no CRAB features. Progression risk is highest in the first five years. High-risk smouldering myeloma, identified by the 20/2/20 model, benefits from early intervention with lenalidomide to delay progression to symptomatic myeloma.",
+   "say": "An intermediate clinical stage characterized by significant marrow plasma cell infiltration without symptomatic end-organ impairment is designated as smouldering myeloma. Defined by an M spike of 3.0 grams per decilitre or higher, or bone marrow plasma cells between ten and fifty-nine percent, patients exhibit no CRAB features. High-risk patients benefit from early intervention with lenalidomide to delay progression to symptomatic multiple myeloma.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Smouldering Myeloma",
+     "points": [
+      "Serum M spike >= 3.0 g/dL",
+      "Bone marrow plasma cells 10% to 59%",
+      "No CRAB end-organ damage",
+      "High progression risk in first 5 years (10%/yr)",
+      "Select high-risk candidates receive Lenalidomide"
+     ]
+    },
+    "right": {
+     "title": "Active Multiple Myeloma",
+     "points": [
+      "Bone marrow plasma cells >= 10%",
+      "Documented CRAB end-organ damage",
+      "SLiM biomarkers (>= 60% plasma cells, FLC >= 100)",
+      "Requires immediate systemic therapy (D-VRd)",
+      "Transplant evaluation if eligible"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Targeted proteasome inhibition paired with immunomodulatory cereblon modulators constitutes the cornerstone of modern anti-myeloma therapy. Administering **bortezomib** reversibly blocks the 26S proteasome, disrupting protein degradation and downregulating NF-kappa-B signaling. Concurrently, lenalidomide binds cereblon to trigger the ubiquitination and degradation of Ikaros and Aiolos transcription factors, stimulating T-cell and natural killer cell antitumour responses while arresting plasma cell proliferation. Subcutaneous administration of bortezomib significantly reduces treatment-emergent peripheral neuropathy, while thromboprophylaxis with aspirin or direct oral anticoagulants is mandatory alongside lenalidomide.",
+   "say": "Targeted proteasome inhibition paired with immunomodulatory cereblon modulators constitutes the cornerstone of modern anti-myeloma therapy. Administering bortezomib reversibly blocks the 26S proteasome, disrupting protein degradation and downregulating NF-kappa-B signaling. Concurrently, lenalidomide triggers degradation of Ikaros and Aiolos transcription factors, arresting plasma cell growth. Subcutaneous bortezomib minimizes peripheral neuropathy, while thromboprophylaxis is required with lenalidomide.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bort",
+      "label": "Bortezomib: 26S Proteasome Inhibition"
+     },
+     {
+      "id": "lena",
+      "label": "Lenalidomide: Cereblon Binding & Ikaros Degradation"
+     },
+     {
+      "id": "stress",
+      "label": "Endoplasmic Reticulum Stress & NF-kB Suppression"
+     },
+     {
+      "id": "death",
+      "label": "Selective Apoptosis of Malignant Plasma Cells"
+     }
+    ],
+    "edges": [
+     [
+      "bort",
+      "stress"
+     ],
+     [
+      "lena",
+      "stress"
+     ],
+     [
+      "stress",
+      "death"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A low-grade lymphoplasmacytic lymphoma characterized by bone marrow infiltration and autonomous production of monoclonal IgM paraprotein defines **waldenstrom macroglobulinaemia**. Over ninety percent of patients harbour the somatic MYD88 L265P point mutation, which promotes downstream IRAK-mediated NF-kappa-B activation. Neoplastic lymphoplasmacytic cells secrete bulky pentameric IgM molecules that remain confined to the intravascular compartment, causing progressive serum hyperviscosity without osteolytic bone lesions or hypercalcaemia. Patients present with visual disturbances, mucosal bleeding, fatigue, lymphadenopathy, and hepatosplenomegaly, demonstrating Dutcher bodies within plasma cell nuclei.",
+   "say": "A low-grade lymphoplasmacytic lymphoma characterized by bone marrow infiltration and autonomous production of monoclonal IgM paraprotein defines waldenstrom macroglobulinaemia. Over ninety percent of patients harbour the somatic MYD88 L265P mutation, promoting constitutive NF-kappa-B activation. Neoplastic cells secrete bulky pentameric IgM molecules that remain intravascular, causing progressive serum hyperviscosity without osteolytic lesions. Patients present with visual changes, epistaxis, and hepatosplenomegaly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/waldenstrom-fig1.webp",
+    "alt": "Bone marrow aspirate and peripheral smear displaying lymphoplasmacytic infiltration in Waldenström macroglobulinaemia.",
+    "caption": "Marrow histology demonstrating lymphoplasmacytic infiltration and intranuclear Dutcher bodies in Waldenström. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Extreme accumulation of large pentameric monoclonal IgM molecules increases internal vascular shear resistance, precipitating circulatory impairment. Developing clinical **hyperviscosity** syndrome manifests typically when serum viscosity exceeds four centipoise (relative to water). Microvascular sluggishness produces headaches, dizziness, ataxia, stupor, and fluctuating somnolence. Funduscopic examination reveals pathognomonic sausage-link venous engorgement (boxcar segmentation), retinal haemorrhages, and papilloedema. Emergency therapeutic intervention requires urgent therapeutic plasma exchange (plasmapheresis) to rapidly remove circulating pentameric IgM from the intravascular volume before initiating definitive clone-directed chemoimmunotherapy.",
+   "say": "Extreme accumulation of large pentameric monoclonal IgM molecules increases vascular shear resistance, precipitating circulatory impairment. Developing clinical hyperviscosity syndrome manifests when serum viscosity exceeds four centipoise. Microvascular sluggishness produces headaches, dizziness, ataxia, and fluctuating somnolence. Funduscopic examination reveals sausage-link venous engorgement and retinal haemorrhages. Emergency intervention requires urgent therapeutic plasma exchange to rapidly remove circulating IgM.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "igm",
+      "label": "High Monoclonal Pentameric IgM Production"
+     },
+     {
+      "id": "visc",
+      "label": "Serum Relative Viscosity Rises (> 4.0 Centipoise)"
+     },
+     {
+      "id": "sludge",
+      "label": "Microvascular Sludging: Visual Loss, Neuropathy, Epistaxis"
+     },
+     {
+      "id": "plasmaph",
+      "label": "Urgent Therapeutic Plasma Exchange (Plasmapheresis)"
+     }
+    ],
+    "edges": [
+     [
+      "igm",
+      "visc"
+     ],
+     [
+      "visc",
+      "sludge"
+     ],
+     [
+      "sludge",
+      "plasmaph"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A rare multisystem paraneoplastic syndrome driven by an underlying clonal plasma cell dyscrasia features characteristic cutaneous and endocrine abnormalities. Designated as **poems syndrome**, the mnemonic acronym denotes Polyneuropathy (sensorimotor demyelinating neuropathy), Organomegaly (hepatosplenomegaly and lymphadenopathy), Endocrinopathy (hypogonadism, hypothyroidism, diabetes, adrenal insufficiency), Monoclonal gammopathy (almost exclusively lambda light chain), and Skin changes (hyperpigmentation, hypertrichosis, glomeruloid haemangiomas). Marked elevation of vascular endothelial growth factor (VEGF) mediates widespread capillary hyperpermeability, papilloedema, extravascular volume overload, and sclerotic bone lesions.",
+   "say": "A rare multisystem paraneoplastic syndrome driven by an underlying clonal plasma cell dyscrasia features characteristic endocrine and cutaneous abnormalities. Designated as poems syndrome, the mnemonic denotes Polyneuropathy, Organomegaly, Endocrinopathy, Monoclonal protein, and Skin changes. Marked elevation of vascular endothelial growth factor mediates widespread capillary leak, papilloedema, volume overload, and osteosclerotic bone lesions. Identifying lambda-restricted monoclonal plasma cells confirms the diagnosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/poems-syndrome-fig1.webp",
+    "alt": "Clinical and multisystem features of POEMS syndrome including polyneuropathy, organomegaly, and endocrine failure.",
+    "caption": "Diagnostic clinical pentad and osteosclerotic bone features defining POEMS syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Radiographic and biochemical features clearly differentiate POEMS syndrome from classic multiple myeloma. Unlike multiple myeloma which produces osteolytic bone lesions, POEMS syndrome characteristically produces single or multiple osteosclerotic bone lesions that lack osteoclast activation. Serum **vascular endothelial growth factor** (VEGF) levels are markedly elevated, correlating with disease activity and serving as a sensitive biomarker for therapeutic monitoring. Isolated solitary osteosclerotic plasmacytomas are treated curatively with localized external-beam radiation therapy, whereas widespread systemic bone involvement requires autologous stem cell transplantation.",
+   "say": "Radiographic and biochemical features clearly differentiate POEMS syndrome from classic multiple myeloma. Unlike multiple myeloma which produces punched-out lytic lesions, POEMS syndrome characteristically produces osteosclerotic bone lesions without osteoclast destruction. Serum vascular endothelial growth factor levels are markedly elevated, correlating with disease activity. Solitary osteosclerotic lesions respond curatively to localized radiation, whereas systemic disease requires autologous stem cell transplantation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "POEMS Syndrome",
+     "points": [
+      "Osteosclerotic bone lesions",
+      "Lambda light-chain restricted monoclonal protein",
+      "Profound demyelinating peripheral sensorimotor neuropathy",
+      "VEGF levels markedly elevated (> 1000 pg/mL)",
+      "Endocrinopathies and hypertrichosis common"
+     ]
+    },
+    "right": {
+     "title": "Multiple Myeloma",
+     "points": [
+      "Punched-out osteolytic bone lesions",
+      "Kappa or lambda light chains (kappa more common)",
+      "Neuropathy typically secondary to amyloid or drugs",
+      "VEGF levels normal or mildly elevated",
+      "Hypercalcaemia and renal cast nephropathy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Systemic amyloid light-chain deposition resulting from clonal plasma cell dyscrasias produces progressive extracellular organ infiltration and failure. In **al amyloidosis**, misfolded monoclonal immunoglobulin light chains (predominantly lambda) aggregate into insoluble beta-pleated fibrils that deposit in the heart, kidneys, liver, and peripheral nerves. Cardiac amyloidosis causes restrictive cardiomyopathy with low-voltage QRS complexes despite concentric ventricular thickening, while renal deposition produces nephrotic-range proteinuria. Pathognomonic clinical signs include periorbital purpura (raccoon eyes) and macroglossia. Biopsy reveals apple-green birefringence under polarized light after Congo red staining.",
+   "say": "Systemic amyloid light-chain deposition resulting from clonal plasma cell dyscrasias produces progressive extracellular organ infiltration and failure. In al amyloidosis, misfolded monoclonal light chains aggregate into insoluble beta-pleated fibrils that deposit in the heart, kidneys, and nerves. Cardiac amyloidosis causes restrictive cardiomyopathy, while renal involvement produces nephrotic-range proteinuria. Pathognomonic signs include periorbital purpura and macroglossia, confirmed by Congo red apple-green birefringence.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Organ Infiltration",
+     "Clinical Manifestation",
+     "Diagnostic Modality",
+     "Pathognomonic Finding"
+    ],
+    "rows": [
+     [
+      "Cardiac",
+      "Restrictive cardiomyopathy, diastolic HF",
+      "Echocardiogram / Cardiac MRI",
+      "Low voltage QRS with thick septum, late gadolinium"
+     ],
+     [
+      "Renal",
+      "Heavy nephrotic syndrome, renal failure",
+      "24-Hour Urine Protein / Renal Biopsy",
+      "Glomerular Congo red positive apple-green deposits"
+     ],
+     [
+      "Cutaneous / Mucosal",
+      "Macroglossia, submandibular swelling",
+      "Physical Examination",
+      "Periorbital purpura ('raccoon eyes') after cough"
+     ],
+     [
+      "Neurological",
+      "Autonomic neuropathy, sensory loss",
+      "Nerve conduction / Orthostatic vitals",
+      "Severe postural hypotension, gastroparesis"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
