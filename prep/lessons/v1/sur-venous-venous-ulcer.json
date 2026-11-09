@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "sur-venous",
+ "subject": "surgery",
+ "title": "Venous Ulcer, Compression and Deep Vein Thrombosis",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A chronic skin break above the ankle from venous hypertension is a **venous ulcer**. It sits in the gaiter area, has sloping edges and a granulating base. Surrounding skin shows pigmentation and eczema from years of high venous pressure. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "A venous ulcer breaks skin in the gaiter area from years of high venous pressure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chronic-venous-insufficiency-fig1.webp",
+    "alt": "Chronic venous insufficiency with ulceration.",
+    "caption": "Venous insufficiency and ulceration. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Brown pigmentation with hard woody skin around the ankle is **lipodermatosclerosis**. Chronic inflammation scars fat and skin into an inverted champagne bottle shape. It often precedes ulceration and signals severe venous disease. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Lipodermatosclerosis hardens ankle skin into a champagne bottle shape before ulceration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Sign",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Pigmentation",
+      "Blood pigment in skin"
+     ],
+     [
+      "Eczema",
+      "Venous inflammation"
+     ],
+     [
+      "Lipodermatosclerosis",
+      "Scarred fat and skin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Graduated external pressure forming the mainstay of ulcer healing is **compression therapy**. Bandages or stockings squeeze hardest at the ankle, pushing blood upward. Arterial supply must be checked first, because compression harms ischaemic legs. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Compression therapy squeezes hardest at the ankle to heal ulcers, after checking arterial supply first.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Arterial index checked"
+     },
+     {
+      "id": "n1",
+      "label": "Compression applied graduated"
+     },
+     {
+      "id": "n2",
+      "label": "Ulcer dressed weekly"
+     },
+     {
+      "id": "n3",
+      "label": "Healing over weeks"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The international staging system for venous disease is the **CEAP classification**. It records clinical signs, cause, anatomy and pathophysiology. Higher clinical classes progress from thread veins to active ulceration. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "The CEAP classification stages venous disease from thread veins to active ulceration.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-ceap_classification.webp",
+    "alt": "CEAP classification of venous disease progression.",
+    "caption": "CEAP classification stages. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Clot formation in the deep veins of the leg is **deep vein thrombosis**. Calf pain and swelling follow, and fragments can travel to the lungs as embolism. Anticoagulation prevents extension while the body dissolves clot. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Deep vein thrombosis clots leg veins and can embolise to the lungs without anticoagulation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Symptoms",
+      "Calf pain and swelling"
+     ],
+     [
+      "Danger",
+      "Pulmonary embolism"
+     ],
+     [
+      "Treatment",
+      "Anticoagulation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Massive iliofemoral thrombosis making the leg swollen, pale and painful is **phlegmasia alba dolens**. Its blue congested progression, phlegmasia cerulea dolens, threatens the limb itself. Both need urgent anticoagulation and specialist review. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Massive deep thrombosis turns the leg pale then blue and threatened, needing urgent specialist care.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Alba dolens",
+     "points": [
+      "Pale swollen leg",
+      "Arterial spasm",
+      "Urgent anticoagulation"
+     ]
+    },
+    "right": {
+     "title": "Cerulea dolens",
+     "points": [
+      "Blue congested leg",
+      "Limb threatened",
+      "Emergency review"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Compression of the left iliac vein by the right iliac artery is **May-Thurner syndrome**. It causes left sided deep vein thrombosis in younger patients. Stenting the compressed vein may follow clot treatment. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "May-Thurner syndrome compresses the left iliac vein and causes left sided thrombosis in younger patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Artery compresses vein"
+     },
+     {
+      "id": "n1",
+      "label": "Left leg clots form"
+     },
+     {
+      "id": "n2",
+      "label": "Clot treated first"
+     },
+     {
+      "id": "n3",
+      "label": "Vein stented if needed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Healing a venous ulcer also requires treating reflux, a combined approach of **compression plus ablation**. Closing faulty surface veins after healing reduces recurrence greatly. Ulcers that fail to shrink need biopsy to exclude cancer. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Compression plus ablation after healing cuts ulcer recurrence, and non healing ulcers need biopsy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chronic-venous-disease-ceap-and-endovenous-ablation-fig1.webp",
+    "alt": "Endovenous ablation to prevent ulcer recurrence.",
+    "caption": "Ablation preventing ulcer recurrence. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Long term stocking use after healing prevents return, termed **recurrence prevention**. Leg elevation, walking and skin care support the stockings. Annual review catches early skin change before breakdown. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Recurrence prevention uses stockings, elevation, walking and skin care after ulcer healing.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Ulcer healed"
+     },
+     {
+      "id": "n1",
+      "label": "Stockings continued"
+     },
+     {
+      "id": "n2",
+      "label": "Legs elevated daily"
+     },
+     {
+      "id": "n3",
+      "label": "Skin reviewed regularly"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

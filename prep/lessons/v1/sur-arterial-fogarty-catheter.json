@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "module": "sur-arterial",
+ "subject": "surgery",
+ "title": "Fogarty Catheter, Buerger Disease and Raynaud Phenomenon",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A thin catheter with an inflatable balloon at its tip used to extract clots is the **Fogarty catheter**. Passed beyond the clot through an arteriotomy, the inflated balloon drags thrombus out as it withdraws. It revolutionised emergency embolectomy through small incisions. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "The Fogarty catheter drags clot out with an inflated balloon through small incisions.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-tub-fogarty-embolectomy-catheter.webp",
+    "alt": "Fogarty embolectomy catheter with balloon tip.",
+    "caption": "Fogarty balloon embolectomy catheter. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Inflammatory blockage of small limb arteries in young male smokers is **Buerger disease**. Thromboangiitis obliterans causes claudication of feet and hands, progressing to ulcers and gangrene. Complete tobacco abstinence is the only treatment that halts it. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Buerger disease blocks small arteries in young smokers, and only complete tobacco abstinence halts it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Buerger disease"
+    ],
+    "rows": [
+     [
+      "Patient",
+      "Young male smoker"
+     ],
+     [
+      "Vessels",
+      "Small arteries"
+     ],
+     [
+      "Treatment",
+      "Stop all tobacco"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Episodic white, blue then red colour change of fingers in cold is **Raynaud phenomenon**. Vessel spasm starves the fingers briefly before flow returns painfully. Most cases are primary and benign, though some herald connective tissue disease. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Raynaud phenomenon turns fingers white, blue then red in cold through episodic vessel spasm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Raynaud",
+     "points": [
+      "Young women common",
+      "Symmetrical, benign",
+      "No tissue damage"
+     ]
+    },
+    "right": {
+     "title": "Secondary Raynaud",
+     "points": [
+      "Underlying disease",
+      "Asymmetric, ulcers possible",
+      "Needs investigation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Tissue death from prolonged blood flow failure is termed **gangrene**. Dry gangrene mummifies tissue slowly, while wet gangrene adds infection and spreads dangerously. The line between dead and living tissue guides amputation planning. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Gangrene kills tissue, dry when mummified and wet when infection spreads dangerously within it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Flow failure prolonged"
+     },
+     {
+      "id": "n1",
+      "label": "Tissue dies"
+     },
+     {
+      "id": "n2",
+      "label": "Dry mummification or wet infection"
+     },
+     {
+      "id": "n3",
+      "label": "Demarcation guides surgery"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Choosing where to remove a dead limb segment follows the rule of **amputation levels**. The lowest level with healing blood supply that preserves function is chosen. Preserving the knee joint transforms rehabilitation prospects. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Amputation levels choose the lowest healable site, and preserving the knee transforms rehabilitation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Level",
+     "Note"
+    ],
+    "rows": [
+     [
+      "Toe or ray",
+      "Minor, walking preserved"
+     ],
+     [
+      "Below knee",
+      "Knee saved, good function"
+     ],
+     [
+      "Above knee",
+      "Heals reliably, harder walking"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After embolectomy, searching for the clot source is essential, termed **source control**. Echocardiography and rhythm monitoring find cardiac emboli. Anticoagulation prevents recurrence once the source is understood. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "After embolectomy the clot source is sought with heart imaging and rhythm monitoring.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Clot removed"
+     },
+     {
+      "id": "n1",
+      "label": "Heart imaging done"
+     },
+     {
+      "id": "n2",
+      "label": "Rhythm monitored"
+     },
+     {
+      "id": "n3",
+      "label": "Anticoagulation tailored"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Calcium channel blockers ease Raynaud attacks by relaxing vessel spasm, a form of **vasodilator therapy**. Keeping hands warm and avoiding smoking matter as much as drugs. Severe secondary cases may need stronger agents. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Vasodilator therapy with calcium blockers eases Raynaud attacks alongside warmth and smoking avoidance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/arterial-diseases-of-the-extremities-fig1.webp",
+    "alt": "Extremity arterial disorders including vasospasm.",
+    "caption": "Extremity arterial disorders. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Young patients with gangrene should prompt thought of unusual causes, grouped as **vasculitis and vasospasm**. Buerger disease, Raynaud phenomenon and autoimmune vasculitis head the list. This differs from atherosclerosis of older smokers. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Gangrene in young patients suggests Buerger disease or vasculitis rather than ordinary atherosclerosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Young patient gangrene",
+     "points": [
+      "Buerger or vasculitis",
+      "Small vessels",
+      "Stop tobacco, treat cause"
+     ]
+    },
+    "right": {
+     "title": "Older patient gangrene",
+     "points": [
+      "Atherosclerosis",
+      "Large vessels",
+      "Bypass or angioplasty"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Digital sympathectomy is occasionally used for severe Raynaud tissue loss, an operation of last resort called **sympathetic interruption**. Removing sympathetic drive dilates digital arteries temporarily. Results fade with time, so patient selection is careful. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Sympathetic interruption dilates digital arteries for severe Raynaud loss, though benefits fade with time.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Severe digital ischaemia"
+     },
+     {
+      "id": "n1",
+      "label": "Medical therapy exhausted"
+     },
+     {
+      "id": "n2",
+      "label": "Sympathectomy considered"
+     },
+     {
+      "id": "n3",
+      "label": "Benefit often temporary"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

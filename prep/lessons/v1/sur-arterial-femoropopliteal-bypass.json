@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "module": "sur-arterial",
+ "subject": "surgery",
+ "title": "Femoropopliteal Bypass and Acute Limb Ischaemia",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A graft carrying blood from the femoral artery to the popliteal artery past a blockage is a **femoropopliteal bypass**. The patients own leg vein is the preferred conduit because it stays open longest. It is used for long occlusions causing rest pain or tissue loss when balloon treatment cannot succeed.",
+   "say": "Femoropopliteal bypass uses the patients own vein to carry blood past long blockages causing tissue loss.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/peripheral-arterial-disease-fig1.webp",
+    "alt": "Peripheral arterial disease requiring bypass surgery.",
+    "caption": "Severe leg arterial disease needing bypass. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Sudden loss of blood flow to a limb threatening its survival is **acute limb ischaemia**. Causes include embolus from the heart and thrombosis on existing narrowing. Without flow restoration within hours, muscle and nerve die irreversibly. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Acute limb ischaemia suddenly threatens a limb, and flow must return within hours to save it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Sudden flow loss"
+     },
+     {
+      "id": "n1",
+      "label": "Muscle and nerve starve"
+     },
+     {
+      "id": "n2",
+      "label": "Hours only to intervene"
+     },
+     {
+      "id": "n3",
+      "label": "Irreversible damage follows delay"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The classic features of acute limb ischaemia are remembered as the **six Ps**. They are pain, pallor, pulselessness, paraesthesia, paralysis and perishing cold. Loss of movement and sensation means the limb is in immediate danger. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "The six Ps describe acute limb ischaemia, and lost movement or sensation means immediate danger.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "P",
+     "Feature"
+    ],
+    "rows": [
+     [
+      "Pain",
+      "Sudden severe"
+     ],
+     [
+      "Pallor",
+      "Pale cold limb"
+     ],
+     [
+      "Pulseless",
+      "No distal pulse"
+     ],
+     [
+      "Paraesthesia",
+      "Numbness"
+     ],
+     [
+      "Paralysis",
+      "Cannot move"
+     ],
+     [
+      "Perishing cold",
+      "Cold to touch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical removal of a blood clot from an artery is **embolectomy**. A balloon catheter passed beyond the clot drags it out and restores flow. Heparin is given immediately when acute ischaemia is diagnosed to stop clot extension. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Embolectomy drags clot out with a balloon catheter, and heparin starts immediately to stop extension.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-tub-fogarty-embolectomy-catheter.webp",
+    "alt": "Fogarty arterial embolectomy catheter.",
+    "caption": "Fogarty catheter for embolectomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Vein grafts need regular ultrasound surveillance after bypass, a programme of **graft surveillance**. Narrowings inside the graft are corrected before they cause thrombosis. Once a vein graft clots, results of rescue are much poorer. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Graft surveillance scans vein grafts so narrowings are corrected before thrombosis occurs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Bypass completed"
+     },
+     {
+      "id": "n1",
+      "label": "Ultrasound surveillance scans"
+     },
+     {
+      "id": "n2",
+      "label": "Narrowing detected early"
+     },
+     {
+      "id": "n3",
+      "label": "Correction before thrombosis"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "When bypass is impossible and the limb cannot survive, removal of part of the leg is **major amputation**. Below knee amputation preserves walking potential far better than above knee. The level is chosen where blood supply can heal the stump. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Major amputation is chosen at a level that can heal when bypass cannot save the limb.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Below knee",
+     "points": [
+      "Knee preserved",
+      "Better walking potential",
+      "Needs adequate calf flow"
+     ]
+    },
+    "right": {
+     "title": "Above knee",
+     "points": [
+      "Knee lost",
+      "Higher energy walking",
+      "Heals more reliably"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Compartment pressure rising after flow restoration can crush muscle, a complication called **compartment syndrome**. Reperfusion swells muscle inside tight fascial compartments. Emergency splitting of the compartments, fasciotomy, prevents permanent damage. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Compartment syndrome after reperfusion swells muscle in tight compartments and needs emergency fasciotomy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Flow restored"
+     },
+     {
+      "id": "n1",
+      "label": "Muscle swells"
+     },
+     {
+      "id": "n2",
+      "label": "Compartment pressure rises"
+     },
+     {
+      "id": "n3",
+      "label": "Fasciotomy releases pressure"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A graft taken with its valves rendered useless by cutting them is an **in situ vein graft**. Leaving the vein in place preserves its wall nutrition. Valvulotomy lets blood flow the natural arterial direction. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "In situ vein grafts leave the vein in place with valves cut to preserve wall nutrition.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Graft type",
+     "Feature"
+    ],
+    "rows": [
+     [
+      "Reversed vein",
+      "Vein turned around"
+     ],
+     [
+      "In situ vein",
+      "Left in place, valves cut"
+     ],
+     [
+      "Synthetic graft",
+      "Man made tube"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Successful bypass depends more on outflow quality than graft length, the principle of **runoff**. A graft into a leg with open foot arteries stays patent far longer. Imaging runoff carefully is therefore essential before surgery. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Good runoff into foot arteries keeps bypass grafts open longer, so outflow imaging is essential.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/arterial-diseases-of-the-extremities-fig1.webp",
+    "alt": "Extremity arterial disease and runoff assessment.",
+    "caption": "Arterial runoff assessment before bypass. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

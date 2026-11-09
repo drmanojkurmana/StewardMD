@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "module": "sur-lymphatic",
+ "subject": "surgery",
+ "title": "Lymphoedema: Primary, Secondary and Filarial",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Swelling from failure of lymph drainage present from early life is **primary lymphoedema**. Underdeveloped lymph vessels cannot clear tissue fluid, so a limb slowly swells. It is classified by age at appearance into congenital, praecox and tarda forms. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Primary lymphoedema comes from underdeveloped lymph vessels and slowly swells a limb from early life.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-surg-isl_lymphedema_stages.webp",
+    "alt": "Lymphoedema staging of the leg.",
+    "caption": "Lymphoedema stages. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Congenital lymphoedema present at birth, often familial, is **Milroy disease**. Swelling affects both legs below the knees from infancy. Genetic counselling is offered because inheritance is dominant in many families. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Milroy disease causes congenital leg lymphoedema from birth and often runs in families.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Onset"
+    ],
+    "rows": [
+     [
+      "Milroy disease",
+      "At birth"
+     ],
+     [
+      "Praecox",
+      "Puberty to 35 years"
+     ],
+     [
+      "Tarda",
+      "After 35 years"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The commonest primary form appearing around puberty, mainly in girls, is **lymphoedema praecox**. One leg swells progressively without any injury or infection. It is also called Meige disease when familial. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Lymphoedema praecox appears around puberty, mainly in girls, and swells one leg progressively.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Puberty onset"
+     },
+     {
+      "id": "n1",
+      "label": "One leg swells"
+     },
+     {
+      "id": "n2",
+      "label": "No injury or infection"
+     },
+     {
+      "id": "n3",
+      "label": "Lifelong care begins"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lymphoedema caused by damage to previously normal lymphatics is **secondary lymphoedema**. Cancer surgery removing nodes and radiotherapy are leading causes in developed countries. Worldwide, filarial infection dominates. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Secondary lymphoedema follows node removal, radiotherapy or filarial damage to normal lymphatics.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary",
+     "points": [
+      "Vessels born underdeveloped",
+      "Early life onset",
+      "No external cause"
+     ]
+    },
+    "right": {
+     "title": "Secondary",
+     "points": [
+      "Vessels damaged later",
+      "After surgery or infection",
+      "Cause identifiable"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Parasitic worms blocking lymphatics in tropical regions cause **filarial lymphoedema**. Repeated mosquito borne infection scars lymph channels over years. Massive enlargement of leg or scrotum follows, the picture called elephantiasis. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Filarial lymphoedema blocks lymphatics through tropical worms and can progress to elephantiasis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cutaneous-angiosarcoma-fig1.webp",
+    "alt": "Cutaneous angiosarcoma arising in chronic lymphoedema.",
+    "caption": "Angiosarcoma risk in chronic lymphoedema. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Gross chronic enlargement of a limb with thickened skin is **elephantiasis**. Skin becomes rough, fissured and prone to repeated infection. Each infection further scars lymphatics, creating a vicious cycle. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Elephantiasis grossly enlarges limbs with thick fissured skin and repeated infection cycles.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage",
+     "Feature"
+    ],
+    "rows": [
+     [
+      "Early",
+      "Pitting swelling"
+     ],
+     [
+      "Middle",
+      "Non pitting, thick skin"
+     ],
+     [
+      "Late",
+      "Elephantiasis, fissures"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Nuclear imaging tracking tracer movement through lymphatics is **lymphoscintigraphy**. Delayed or absent uptake confirms lymphatic failure and distinguishes it from venous swelling. It remains the standard confirmatory investigation. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Lymphoscintigraphy confirms lymphatic failure by showing delayed tracer movement through lymphatics.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Tracer injected in foot"
+     },
+     {
+      "id": "n1",
+      "label": "Movement tracked upward"
+     },
+     {
+      "id": "n2",
+      "label": "Delay confirms failure"
+     },
+     {
+      "id": "n3",
+      "label": "Venous causes excluded"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inability to pinch skin at the base of the second toe is the **Stemmer sign**. Thickened skin and fat of lymphoedema prevent the pinch possible in other swellings. It is a quick, useful bedside discriminator. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "The Stemmer sign cannot pinch second toe skin in lymphoedema, a quick bedside discriminator.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Positive Stemmer",
+     "points": [
+      "Toe skin cannot pinch",
+      "Lymphoedema likely",
+      "Skin thickened"
+     ]
+    },
+    "right": {
+     "title": "Negative Stemmer",
+     "points": [
+      "Toe skin pinches easily",
+      "Venous or fat swelling",
+      "Other causes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Combined massage, bandaging, exercise and skin care form **complex decongestive therapy**. It is the mainstay of lymphoedema control at every stage. Surgery such as the Charles operation, removing diseased tissue, is reserved for extreme cases, while lymphangiosarcoma, the Stewart-Treves tumour, is a rare malignant complication of chronic swelling, and chylous ascites means milky lymph fluid in the abdomen.",
+   "say": "Complex decongestive therapy is the mainstay, while extreme cases may need tissue removal surgery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Massage and bandaging"
+     },
+     {
+      "id": "n1",
+      "label": "Exercise programme"
+     },
+     {
+      "id": "n2",
+      "label": "Skin care daily"
+     },
+     {
+      "id": "n3",
+      "label": "Garments maintain reduction"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}
