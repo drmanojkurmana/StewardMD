@@ -1,0 +1,236 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-skull-cranial-cavity",
+ "subject": "anatomy",
+ "title": "Skull Base Foramina: Anterior, Middle, and Posterior Cranial Fossae",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The internal base of the skull is stepped into three cranial fossae (anterior, middle, and posterior) that accommodate the frontal lobes, temporal lobes, and cerebellum with brainstem respectively. Numerous canals and foramina pierce the floor of each **cranial fossa**, serving as critical conduit portals through which cranial nerves, arterial trunks, and emissary veins pass between intracranial and extracranial compartments.",
+   "say": "The internal skull base descends into anterior, middle, and posterior fossae. Multiple foramina perforate these compartments to transmit cranial nerves and vascular channels.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-skull-sutures.svg",
+    "alt": "Anatomical diagram of skull base osteology showing cranial fossae and major foramen openings",
+    "caption": "Osteological architecture of the cranial fossae displaying landmark foramina and suture lines. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The anterior cranial fossa houses the frontal lobes and olfactory apparatus, formed by the frontal bone, ethmoid, and lesser wings of the sphenoid. In the midline depression lies the **cribriform plate** of the ethmoid, perforated by fifteen to twenty minute apertures that transmit the olfactory nerve fila (cranial nerve I) from the nasal olfactory mucosa to the olfactory bulb.",
+   "say": "In the anterior cranial fossa, the cribriform plate of the ethmoid transmits olfactory nerve bundles. Fracture of this delicate plate causes cerebrospinal fluid rhinorrhoea and anosmia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Cribriform Plate Apertures (Transmit 15-20 olfactory fila into olfactory bulb)"
+     },
+     {
+      "id": "c2",
+      "label": "Foramen Caecum (Transmits an emissary vein from nasal mucosa to superior sagittal sinus)"
+     },
+     {
+      "id": "c3",
+      "label": "Anterior and Posterior Ethmoidal Foramina (Transmit ethmoidal nerves and vessels)"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "At the junction of the anterior and middle cranial fossae, piercing the lesser wing of the sphenoid, is the optic canal. It transmits the **optic nerve** (cranial nerve II) surrounded by its three meningeal sheaths, accompanied inferolaterally by the ophthalmic artery. Sphenoid ridge meningiomas or trauma compromising the optic canal can cause progressive compressive visual loss or ipsilateral blindness.",
+   "say": "Traversing the lesser wing of the sphenoid, the optic canal conveys the optic nerve and ophthalmic artery. Compressive lesions here cause progressive ipsilateral visual deficits.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Optic Canal",
+     "points": [
+      "Location: Lesser wing of sphenoid bone",
+      "Neural content: Optic nerve (CN II) with CSF meningeal sheaths",
+      "Vascular content: Ophthalmic artery",
+      "Trauma causes direct avulsion or compressive optic neuropathy"
+     ]
+    },
+    "right": {
+     "title": "Superior Orbital Fissure",
+     "points": [
+      "Location: Gap between greater and lesser sphenoid wings",
+      "Neural content: CN III, IV, VI, and branches of V1",
+      "Vascular content: Superior and inferior ophthalmic veins",
+      "Trauma causes complete orbital apex syndrome"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The middle cranial fossa is shaped like a butterfly, housing the temporal lobes laterally and the pituitary gland centrally within the sella turcica. Its crescentic arrangement of four foramina in the greater wing of the sphenoid can be remembered by the mnemonic **ROSE**: foramen Rotundum, foramen Ovale, foramen Spinosum, and the irregular foramen lacerum.",
+   "say": "In the middle cranial fossa, four sphenoid openings follow the crescentic mnemonic ROSE: foramen Rotundum, foramen Ovale, foramen Spinosum, and foramen lacerum.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Foramen",
+     "Cranial Base Location",
+     "Transmitted Structures",
+     "Key Clinical Landmark"
+    ],
+    "rows": [
+     [
+      "Foramen rotundum",
+      "Anteromedial greater wing",
+      "Maxillary nerve (CN V2)",
+      "Directs sensory nerve into pterygopalatine fossa"
+     ],
+     [
+      "Foramen ovale",
+      "Posterolateral to rotundum",
+      "Mandibular nerve (V3), accessory meningeal, lesser petrosal, emissary vein (MALE)",
+      "Site of percutaneous trigeminal rhizotomy needle entry"
+     ],
+     [
+      "Foramen spinosum",
+      "Posterolateral to ovale",
+      "Middle meningeal artery and nervus spinosus",
+      "Fracture triggers laceration of middle meningeal artery"
+     ],
+     [
+      "Foramen lacerum",
+      "Medial to foramen ovale",
+      "Internal carotid artery courses horizontally across upper opening",
+      "Filled with fibrocartilage in life; traversed only by meningeal twigs"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The contents of the foramen ovale are recalled by the classic mnemonic MALE: **mandibular nerve** (sensory and motor roots of CN V3), accessory meningeal artery, lesser petrosal nerve (carrying preganglionic parasympathetic fibres from glossopharyngeal to the otic ganglion), and an emissary vein connecting the cavernous sinus with the pterygoid venous plexus.",
+   "say": "Foramen ovale transmits the MALE structures: Mandibular nerve, Accessory meningeal artery, Lesser petrosal nerve, and an Emissary vein connecting to the pterygoid plexus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "M: Mandibular Nerve (V3 motor and sensory roots)"
+     },
+     {
+      "id": "m2",
+      "label": "A: Accessory Meningeal Artery (Branch of maxillary artery)"
+     },
+     {
+      "id": "m3",
+      "label": "L: Lesser Petrosal Nerve (Preganglionic parasympathetic to otic ganglion)"
+     },
+     {
+      "id": "m4",
+      "label": "E: Emissary Vein (Connects cavernous sinus with pterygoid plexus)"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ],
+     [
+      "m3",
+      "m4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The posterior cranial fossa is the deepest and most voluminous cranial compartment, bounded anteriorly by the dorsum sellae and clivus and laterally by the petrous temporal bone. In the petrous temporal posterior surface lies the **internal acoustic meatus**, which transmits the facial nerve (CN VII), vestibulocochlear nerve (CN VIII), nervus intermedius of Wrisberg, and the labyrinthine artery.",
+   "say": "Piercing the petrous temporal bone, the internal acoustic meatus transmits the facial and vestibulocochlear nerves along with the labyrinthine artery into the inner ear.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Posterior Fossa Foramen",
+     "Bony Boundaries",
+     "Major Conduits Transmitted"
+    ],
+    "rows": [
+     [
+      "Internal acoustic meatus",
+      "Petrous temporal posterior surface",
+      "Facial nerve (VII), vestibulocochlear nerve (VIII), labyrinthine artery"
+     ],
+     [
+      "Jugular foramen",
+      "Between petrous temporal and occipital",
+      "Glossopharyngeal (IX), vagus (X), accessory (XI), internal jugular vein"
+     ],
+     [
+      "Hypoglossal canal",
+      "Above anterolateral margin of foramen magnum",
+      "Hypoglossal nerve (XII) and meningeal branch of ascending pharyngeal"
+     ],
+     [
+      "Foramen magnum",
+      "Centrally in occipital bone",
+      "Medulla oblongata, vertebral arteries, spinal roots of accessory nerves"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The jugular foramen is a large, irregular aperture situated between the petrous temporal bone and the occipital bone. It is divided by fibrous or bony septa into three compartments. The intermediate compartment transmits cranial nerves **nine, ten, and eleven** (glossopharyngeal, vagus, and accessory), while the posterior compartment accommodates the terminal sigmoid sinus continuing as the internal jugular vein.",
+   "say": "Between the petrous temporal and occipital bones, the jugular foramen transmits cranial nerves nine, ten, and eleven, alongside the sigmoid sinus forming the internal jugular vein.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "j1",
+      "label": "Anterior Compartment (Inferior petrosal sinus draining into internal jugular vein)"
+     },
+     {
+      "id": "j2",
+      "label": "Intermediate Compartment (Glossopharyngeal IX, vagus X, accessory XI nerves)"
+     },
+     {
+      "id": "j3",
+      "label": "Posterior Compartment (Sigmoid sinus becoming internal jugular vein, meningeal arteries)"
+     }
+    ],
+    "edges": [
+     [
+      "j1",
+      "j2"
+     ],
+     [
+      "j2",
+      "j3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immediately above the anterolateral margin of the foramen magnum lies the hypoglossal canal (anterior condylar canal). This bony conduit directs the **hypoglossal nerve** (cranial nerve XII) out of the skull to provide motor innervation to all intrinsic and extrinsic tongue muscles except palatoglossus. Fracture of the occipital condyle can lacerate the canal, producing ipsilateral tongue deviation.",
+   "say": "Positioned above the occipital condyle, the hypoglossal canal transmits cranial nerve twelve to innervate tongue muscles. Damage causes tongue deviation toward the paralysed side.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-cavernous-sinus.svg",
+    "alt": "Anatomical cross section of intracranial venous sinuses and adjacent skull base nerves",
+    "caption": "Cross-sectional skull base relations highlighting cranial nerve pathways and dural reflections. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "1b239bb7-bbf8-4eeb-b177-c1d84921d8f9",
+  "0b63d5ed-2923-42da-b429-409f0c2fa8d6",
+  "0c512e55-c21c-4959-bb2e-ee3990a760d1"
+ ]
+}
