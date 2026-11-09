@@ -3,182 +3,185 @@
  "id": "ort-forearm-wrist-injuries-monteggia-fracture-dislocation",
  "subject": "orthopaedics",
  "module": "ort-forearm-wrist-injuries",
- "title": "Monteggia Fracture Dislocation",
+ "title": "Monteggia Fracture-Dislocation",
  "minutes": 6,
  "gen": "AI",
  "steps": [
   {
-   "tx": "**Monteggia fracture-dislocation** anchors this lesson. Recognition of Monteggia fracture-dislocation starts with naming the finding precisely, because the named finding selects the examination, investigation and referral that follow in clinic practice. {f} is recognised at the bedside or on the first investigation, and precise naming prevents the vague label that delays correct management for patients.",
-   "say": "Monteggia fracture-dislocation gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/osteoarthritis-fig1.webp",
-    "alt": "Monteggia Fracture Dislocation teaching image.",
-    "caption": "Monteggia Fracture Dislocation illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Galeazzi fracture** anchors this lesson. The mechanism behind Galeazzi fracture explains why the presentation behaves as it does, linking structure or physiology to the symptom pattern the patient reports. Understanding mechanism turns memorised association into reasoning, so the clinician predicts severity, likely complications and the direction of treatment without waiting for senior prompting.",
-   "say": "Galeazzi fracture gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "A **Monteggia fracture-dislocation** comprises a fracture of the proximal or middle third of the ulnar shaft accompanied by dislocation of the proximal radiocapitellar joint. Giovanni Monteggia described this lesion in 1814. Because the radius and ulna operate as a closed parallelogram linked by the interosseous membrane, isolated displacement of one forearm bone cannot occur without dislocation of the opposite joint.",
+   "say": "A Monteggia fracture is a break of the proximal ulna accompanied by dislocation of the radial head. Described by Monteggia in 1814, it illustrates the rule of forearm biomechanics. Because the radius and ulna act as a rigid ring, a displaced fracture of one bone invariably dislocates the other joint.",
    "vis": {
     "kind": "table",
-    "title": "Monteggia Fracture Dislocation set",
+    "title": "Forearm Ring Biomechanics",
     "cols": [
-     "Item",
-     "Point"
+     "Feature",
+     "Monteggia Injury",
+     "Galeazzi Injury"
     ],
     "rows": [
      [
-      "Galeazzi fracture",
-      "Central fact in this lesson"
+      "Fracture component",
+      "Proximal or middle third ulnar shaft",
+      "Distal third radial shaft"
      ],
      [
-      "Both bone forearm fracture",
-      "Companion fact to revise together"
+      "Dislocation component",
+      "Proximal radiocapitellar joint",
+      "Distal radioulnar joint (DRUJ)"
      ],
      [
-      "First step",
-      "Name finding, grade severity, act"
+      "Peak age group",
+      "Children 4 to 10 years and adults",
+      "Adults 20 to 40 years"
      ]
     ]
    }
   },
   {
-   "tx": "**Both bone forearm fracture** anchors this lesson. Clinically, both bone forearm fracture presents with a pattern that history and focused examination can confirm, separating it from close mimics that share early features. A focused examination tests the predicted pattern directly, and documenting positive and negative discriminators makes the record useful for the next clinician reviewing the case.",
-   "say": "Both bone forearm fracture gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "The classic **Bado classification** subdivides Monteggia lesions into four distinct mechanical patterns based on the direction of radial head dislocation. Type I, the most common, features anterior dislocation of the radial head with anteriorly angulated ulnar fracture. Type II features posterior dislocation. Type III involves lateral or anterolateral dislocation with ulnar metaphyseal fracture. Type IV involves fractures of both forearm bones.",
+   "say": "Bado classified these into four types according to which way the radial head pops out. Type one is most common, with anterior radial head dislocation and anterior ulnar angulation. Type two has posterior dislocation. Type three has lateral dislocation. Type four has fractures of both the radius and ulna with anterior radial head dislocation.",
+   "vis": {
+    "kind": "table",
+    "title": "Bado Classification System",
+    "cols": [
+     "Bado Type",
+     "Radial Head Dislocation",
+     "Ulna Fracture Angulation",
+     "Incidence"
+    ],
+    "rows": [
+     [
+      "Type I",
+      "Anterior dislocation",
+      "Anterior apex angulation",
+      "70 to 75 percent"
+     ],
+     [
+      "Type II",
+      "Posterior / posterolateral",
+      "Posterior apex angulation",
+      "10 to 15 percent"
+     ],
+     [
+      "Type III",
+      "Lateral / anterolateral",
+      "Metaphyseal greenstick / fracture",
+      "15 to 20 percent (common in children)"
+     ],
+     [
+      "Type IV",
+      "Anterior dislocation",
+      "Both radius and ulna fractured",
+      "Under 5 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The primary neurological hazard is injury to the **posterior interosseous nerve**, a motor branch of the radial nerve that winds around the radial neck beneath the arcade of Frohse. Stretching over an anteriorly displaced radial head produces wrist drop sparing, because extensor carpi radialis longus remains innervated, but causes complete paralysis of metacarpophalangeal extension (finger drop) without sensory deficit.",
+   "say": "The posterior interosseous nerve is at high risk as it winds around the radial neck. When the radial head dislocates anteriorly, it stretches this nerve. The patient develops finger drop with loss of thumb extension, but wrist extension is preserved because radial wrist extensors branch higher up. There is zero sensory loss.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "PIN Neuropathy Deficits",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "Paralysis of extensor digitorum communis",
+      "Inability to extend thumb MCP joint",
+      "Preserved sensation over dorsum of hand",
+      "Spontaneous recovery in 80 to 90 percent"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Radial Nerve Trunk Deficits",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Complete wrist drop with wrist flexion",
+      "Loss of brachioradialis reflex",
+      "Sensory numbness over first web space",
+      "Requires high humeral exploration"
      ]
     }
    }
   },
   {
-   "tx": "**Colles fracture dinner fork deformity** anchors this lesson. Investigation choice for Colles fracture dinner fork deformity follows the question being asked: confirm the finding, grade its severity, or exclude the dangerous alternative diagnosis. Each investigation answers a stated question rather than forming a routine bundle, and results are read against the pretest expectation recorded before the test was requested.",
-   "say": "Colles fracture dinner fork deformity gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/osteoporosis-fig1.webp",
-    "alt": "Monteggia Fracture Dislocation teaching image.",
-    "caption": "Monteggia Fracture Dislocation illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Smith fracture** anchors this lesson. Separation of Smith fracture from its nearest mimics depends on one or two discriminating features that examinations repeatedly test and clinics repeatedly use. Naming the discriminator in the note protects against premature closure, because the mimic often needs opposite treatment or a different referral destination entirely.",
-   "say": "Smith fracture gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "table",
-    "title": "Monteggia Fracture Dislocation set",
-    "cols": [
-     "Item",
-     "Point"
-    ],
-    "rows": [
-     [
-      "Smith fracture",
-      "Central fact in this lesson"
-     ],
-     [
-      "Barton fracture",
-      "Companion fact to revise together"
-     ],
-     [
-      "First step",
-      "Name finding, grade severity, act"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "**Barton fracture** anchors this lesson. Management of Barton fracture follows staged principles: relieve the immediate problem, correct the underlying driver, and protect function while recovery or control proceeds. Staging keeps urgent relief and definitive correction in order, and function is stated as an outcome alongside symptom relief from the very first treatment plan.",
-   "say": "Barton fracture gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "Radiographic verification requires confirming that the **radiocapitellar line** remains uninterrupted on every projection. On both anteroposterior and lateral elbow radiographs, a line drawn through the longitudinal center of the radial shaft and neck must pass directly through the capitellum. If this line points anywhere away from the capitellum, an unrecognized radial head dislocation is present.",
+   "say": "Always check the radiocapitellar line on both AP and lateral views. A straight line drawn along the central axis of the radial neck must point directly into the center of the capitellum, no matter how the elbow is rotated. If it misses the capitellum, the radial head is dislocated.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Named precisely",
+     "title": "Normal Radiocapitellar Alignment",
      "points": [
-      "Discriminator sought",
-      "Severity graded"
+      "Line bisects radial neck and shaft",
+      "Passes through center of capitellum",
+      "True on all rotation projections"
      ]
     },
     "right": {
-     "title": "Labelled vaguely",
+     "title": "Dislocation Pitfall",
      "points": [
-      "Mimic missed",
-      "Referral misdirected"
+      "Wrist films alone miss elbow joint",
+      "Line diverges from capitellar core",
+      "Missed dislocation causes chronic disability"
      ]
     }
    }
   },
   {
-   "tx": "**Monteggia fracture-dislocation** anchors this lesson. Complications of Monteggia fracture-dislocation are anticipated rather than discovered, with review intervals and safety advice matched to the period of highest risk. Anticipation converts follow up into surveillance with a purpose, and patients leave knowing which change should trigger urgent return rather than routine waiting.",
-   "say": "Monteggia fracture-dislocation gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/hip-fracture-fig1.webp",
-    "alt": "Monteggia Fracture Dislocation teaching image.",
-    "caption": "Monteggia Fracture Dislocation illustration. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "**Galeazzi fracture** anchors this lesson. Anchoring Galeazzi fracture beside its companion facts fixes the set in memory: the definition, the discriminator and the first management step travel together. Companion facts are revised as one set, because examinations and clinics both ask for the linked triad rather than any isolated fragment of knowledge.",
-   "say": "Galeazzi fracture gives the central fact in this step for clinic and examination use. That fact gives direction because mechanism links the finding to severity and likely course. Documentation gives value additionally when the discriminator and next step are recorded plainly together.",
+   "tx": "Definitive management in adults necessitates anatomic **rigid plate fixation** of the fractured ulna using a dynamic compression plate. Anatomical restoration of ulnar length, alignment, and rotation usually achieves spontaneous, concentric reduction of the radial head. If the radial head remains stubbornly dislocated, open exploration of the joint is mandatory to extract an interposed annular ligament or capsule flap.",
+   "say": "In adults, treat Monteggia fractures with rigid plate and screw fixation of the ulna. Restoring the exact length and rotation of the ulna almost always pops the radial head back into place spontaneously. If it stays out, open the elbow joint immediately to clear out a folded annular ligament.",
    "vis": {
     "kind": "table",
-    "title": "Monteggia Fracture Dislocation set",
+    "title": "Treatment Principles by Age",
     "cols": [
-     "Item",
-     "Point"
+     "Patient Population",
+     "Ulna Management",
+     "Radial Head Management",
+     "Failure Strategy"
     ],
     "rows": [
      [
-      "Galeazzi fracture",
-      "Central fact in this lesson"
+      "Children",
+      "Closed reduction of greenstick ulna",
+      "Indirect closed reduction by traction",
+      "Open reduction if annular ligament blocks"
      ],
      [
-      "Both bone forearm fracture",
-      "Companion fact to revise together"
+      "Adults",
+      "Open reduction 3.5 mm dynamic plate",
+      "Spontaneous reduction after plating",
+      "Open capsulotomy and ligament repair"
      ],
      [
-      "First step",
-      "Name finding, grade severity, act"
+      "Chronic missed injury",
+      "Corrective ulnar osteotomy",
+      "Radial head relocation or excision",
+      "Annular ligament reconstruction with fascia lata"
      ]
     ]
    }
   }
  ],
- "quiz": [],
- "cards": [
+ "quiz": [
   {
-   "f": "Monteggia Fracture Dislocation: central fact",
-   "b": "Monteggia fracture-dislocation is the anchor fact; name it precisely and grade severity."
+   "q": "Which motor deficit is characteristic of posterior interosseous nerve injury in a Monteggia fracture?",
+   "options": [
+    "Loss of finger metacarpophalangeal extension with spared wrist extension",
+    "Complete wrist drop with numbness over the anatomical snuffbox",
+    "Weakness of forearm pronation and index finger flexion",
+    "Loss of thumb adduction and clawing of the fourth and fifth digits"
+   ],
+   "correct": 0,
+   "explain": "PIN palsy spares the extensor carpi radialis longus (branching above the elbow), preserving wrist extension, but paralyses the extensor digitorum, producing finger drop with zero sensory deficit."
   },
   {
-   "f": "Monteggia Fracture Dislocation: discriminator",
-   "b": "Galeazzi fracture separates this topic from its nearest mimics."
-  },
-  {
-   "f": "Monteggia Fracture Dislocation: first step",
-   "b": "Name the finding, state severity, start staged management and set a review interval."
+   "q": "Which Bado classification type features posterior dislocation of the radial head?",
+   "options": [
+    "Bado Type II",
+    "Bado Type I",
+    "Bado Type III",
+    "Bado Type IV"
+   ],
+   "correct": 0,
+   "explain": "Bado Type II is defined by posterior or posterolateral dislocation of the radial head accompanied by posterior angulation of the ulnar shaft fracture."
   }
- ],
- "keys": [
-  "Monteggia fracture-dislocation anchors the topic",
-  "Galeazzi fracture is the discriminator",
-  "Name, grade, act and review in order"
  ]
 }
