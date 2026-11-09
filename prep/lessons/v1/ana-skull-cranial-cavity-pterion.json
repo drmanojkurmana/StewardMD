@@ -1,0 +1,244 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-skull-cranial-cavity",
+ "subject": "anatomy",
+ "title": "Pterion Anatomy, Middle Meningeal Artery, and Extradural Haematoma",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The pterion is an H-shaped craniometric landmark located in the temporal fossa approximately 3.5 centimetres behind and 1.5 centimetres above the frontozygomatic suture. It marks the confluence where four bones articulate: the greater wing of the sphenoid, the squamous part of the **temporal bone**, the frontal bone, and the anteroinferior angle of the parietal bone.",
+   "say": "Located in the temporal fossa, the pterion is an H-shaped suture junction where frontal, parietal, sphenoid, and temporal bones meet. It overlies vulnerable meningeal vessels.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-skull-sutures.svg",
+    "alt": "Lateral view of the cranium illustrating the H-shaped pterion junction between sphenoid, frontal, parietal, and temporal bones",
+    "caption": "Craniometric landmark of the pterion and suture confluence in the temporal fossa. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The bone forming the floor of the temporal fossa at the pterion is remarkably thin and brittle. Deep to the inner calvarial surface of the pterion lies a bony groove, and occasionally a complete bony tunnel, that houses the anterior (frontal) division of the **middle meningeal artery** and its accompanying venae comitantes, which supply the dura mater and overlying calvaria.",
+   "say": "At the pterion, the calvaria is paper-thin. In a groove on its inner table runs the anterior division of the middle meningeal artery, vulnerable to blunt lateral trauma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anatomical Layer",
+     "Pterion Structure",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Superficial muscular layer",
+      "Temporalis muscle and dense temporal fascia",
+      "Provides muscular padding, but masks underlying swelling"
+     ],
+     [
+      "Bony floor",
+      "H-shaped suture between frontal, parietal, sphenoid, temporal",
+      "Thin calvaria fractures easily under direct lateral blunt impact"
+     ],
+     [
+      "Inner calvarial groove",
+      "Groove for anterior division of middle meningeal artery",
+      "Fracture lines shear the tethered arterial trunk"
+     ],
+     [
+      "Deep cerebral relation",
+      "Stem of lateral sulcus and Broca motor speech area (dominant left)",
+      "Expanding haematoma precipitates expressive aphasia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The middle meningeal artery is the largest branch of the maxillary artery, arising within the infratemporal fossa. It ascends vertically through the foramen spinosum into the middle cranial fossa, where it runs forward and laterally on the floor before dividing into an anterior and a **posterior division**. The anterior branch ascends towards the pterion before arching toward the vertex.",
+   "say": "Arising from the maxillary artery, the middle meningeal enters through foramen spinosum. Its anterior branch ascends towards the pterion, supplying the anterior dura mater.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Maxillary Artery (First part in infratemporal fossa)"
+     },
+     {
+      "id": "a2",
+      "label": "Foramen Spinosum (Enters middle cranial fossa accompanied by nervus spinosus)"
+     },
+     {
+      "id": "a3",
+      "label": "Anterior Division (Traverses inner table groove beneath pterion towards sagittal sinus)"
+     },
+     {
+      "id": "a4",
+      "label": "Posterior Division (Curves backward across squamous temporal towards transverse sinus)"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2"
+     ],
+     [
+      "a2",
+      "a3"
+     ],
+     [
+      "a2",
+      "a4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A blow to the side of the head, such as from a cricket ball or fist, characteristically fractures the thin pterion. The bony fragment lacerates the anterior division of the middle meningeal artery. Because the artery is high-pressure and the outer endosteal layer of the dura is stripped off the inner table of bone, an **extradural haematoma** (epidural haematoma) rapidly accumulates.",
+   "say": "Blunt trauma fracturing the pterion lacerates the middle meningeal artery. High arterial pressure strips dura from the calvaria, accumulating a biconvex extradural haematoma.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Lateral Calvarial Impact (Fracture lines propagate across thin pterion)"
+     },
+     {
+      "id": "t2",
+      "label": "Arterial Laceration (Anterior middle meningeal artery torn within its bony groove)"
+     },
+     {
+      "id": "t3",
+      "label": "Endosteal Dura Stripping (High arterial pressure dissects dura away from inner table)"
+     },
+     {
+      "id": "t4",
+      "label": "Expanding Haematoma (Lentiform biconvex haematoma creates uncal herniation risk)"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2"
+     ],
+     [
+      "t2",
+      "t3"
+     ],
+     [
+      "t3",
+      "t4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "On non-contrast computed tomography of the brain, an extradural haematoma exhibits a classic hyperdense, biconvex or lenticular configuration. Because the periosteal dura is firmly attached to the cranial sutures, the expanding **epidural collection** cannot cross cranial suture lines. This anatomical restriction forces the haematoma to bulge inward, compressing the cerebral cortex and ventricles.",
+   "say": "On CT, an extradural haematoma appears biconvex and lentiform. Because the dura is glued to cranial sutures, the haematoma cannot cross suture lines.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Extradural Haematoma (EDH)",
+     "points": [
+      "Vascular source: Middle meningeal artery (arterial)",
+      "Location: Between skull inner table and endosteal dura",
+      "CT morphology: Biconvex, lens-shaped hyperdensity",
+      "Suture boundary: Cannot cross cranial suture lines",
+      "Clinical course: Classic lucid interval followed by rapid coma"
+     ]
+    },
+    "right": {
+     "title": "Subdural Haematoma (SDH)",
+     "points": [
+      "Vascular source: Bridging cortical veins (venous)",
+      "Location: Between dura mater and arachnoid mater",
+      "CT morphology: Crescentic, concave shape tracking along hemisphere",
+      "Suture boundary: Crosses suture lines freely across hemisphere",
+      "Clinical course: Insidious headache and progressive neurological decline"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The classic clinical hallmark of an acute extradural haematoma is the lucid interval. Following initial concussive loss of consciousness at the moment of impact, the patient temporarily regains full consciousness. As the arterial collection expands and reaches critical volume, progressive brain compression triggers secondary deterioration with headache, vomiting, ipsilateral **mydriasis**, and contralateral hemiparesis.",
+   "say": "The lucid interval features temporary recovery followed by rapid collapse as the haematoma expands. Ipsilateral pupillary dilatation and contralateral hemiparesis indicate uncal herniation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Primary Concussion (Transient loss of consciousness from initial mechanical shock)"
+     },
+     {
+      "id": "c2",
+      "label": "Lucid Interval (Patient temporarily alert and oriented while haematoma slowly expands)"
+     },
+     {
+      "id": "c3",
+      "label": "Transtentorial Herniation (Expanding mass pushes uncus through tentorial notch)"
+     },
+     {
+      "id": "c4",
+      "label": "Oculomotor Compression and Hemiparesis (Ipsilateral blown pupil and contralateral weakness)"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2"
+     ],
+     [
+      "c2",
+      "c3"
+     ],
+     [
+      "c3",
+      "c4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ipsilateral pupillary dilatation in an expanding temporal haematoma results from compression of the oculomotor nerve (cranial nerve III). As the medial aspect of the temporal lobe (uncus) herniates over the free edge of the tentorium cerebelli, it crushes the **oculomotor nerve** against the petroclinoid ligament, selectively paralysing its superficial parasympathetic pupilloconstrictor fibres.",
+   "say": "Uncal herniation crushes the oculomotor nerve against the tentorial edge. Compressing superficial parasympathetic fibres causes uninhibited sympathetic mydriasis, producing a blown pupil.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stage of Herniation",
+     "Oculomotor Nerve Effect",
+     "Pupillary Sign"
+    ],
+    "rows": [
+     [
+      "Early uncal compression",
+      "Sluggish pupillary constriction to direct light",
+      "Ipsilateral pupil becomes larger (anisocoria)"
+     ],
+     [
+      "Full uncal herniation",
+      "Complete parasympathetic pupilloconstrictor paralysis",
+      "Ipsilateral pupil becomes fixed and dilated (blown pupil)"
+     ],
+     [
+      "Bilateral tentorial herniation",
+      "Midbrain distortion and bilateral oculomotor palsy",
+      "Bilateral fixed dilated pupils (imminent brainstem death)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Emergency management of an expanding extradural haematoma demands urgent surgical decompression. A burr hole is trephined precisely over the pterion, located two fingerbreadths above the mid-zygomatic arch and two fingerbreadths behind the **frontal process** of the zygomatic bone. Evacuation of clot and ligation of the bleeding middle meningeal artery prevents irreversible brainstem infarction.",
+   "say": "Emergency craniotomy over the pterion evacuates the clot and secures the bleeding artery. Rapid decompression prevents irreversible secondary midbrain infarction.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-venous-sinuses.svg",
+    "alt": "Anatomical schematic showing relationship between cranium, dural vessels, and intracranial sinuses",
+    "caption": "Surgical anatomy of the calvarial vault, middle meningeal vessels, and underlying dural reflections. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "1b239bb7-bbf8-4eeb-b177-c1d84921d8f9",
+  "0b63d5ed-2923-42da-b429-409f0c2fa8d6",
+  "0c512e55-c21c-4959-bb2e-ee3990a760d1"
+ ]
+}

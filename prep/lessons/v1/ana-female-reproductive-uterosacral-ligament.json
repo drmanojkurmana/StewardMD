@@ -1,0 +1,217 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-female-reproductive",
+ "subject": "anatomy",
+ "title": "Uterosacral Ligaments, Uterine Artery, and Ovarian Annexa",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The uterosacral ligaments are prominent condensations of pelvic fascia and smooth muscle that originate from the posterolateral aspect of the supravaginal cervix and vaginal fornix. Arched backwards on either side of the rectum, each **uterosacral ligament** inserts into the presacral fascia overlying the second and third sacral vertebrae.",
+   "say": "Originating from the posterolateral cervix, the uterosacral ligaments arch around the rectum to insert into the sacrum. They tether the cervix posteriorly to maintain anteversion.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-uterine-ligaments.svg",
+    "alt": "Anatomical schematic showing uterosacral ligaments embracing the rectum and inserting onto the sacrum",
+    "caption": "Posterior pelvic attachments of the uterosacral ligaments flanking the pouch of Douglas. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "By exerting continuous posterosuperior traction upon the cervix, the uterosacral ligaments hold the lower uterine segment backwards towards the sacrum. This posterior anchorage pivots the uterine fundus forward over the bladder into the normal anteverted posture. During vaginal hysterectomy or apical suspension procedures, the **sacrouterine** bands provide robust tissue for vaginal vault reconstruction.",
+   "say": "Continuous posterosuperior traction pulls the cervix toward the sacrum, rotating the fundus forward. Surgeons anchor the vaginal vault to these sturdy bands during prolapse repairs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "u1",
+      "label": "Posterior Anchorage: Uterosacral Ligaments Pull Cervix Toward S2-S3"
+     },
+     {
+      "id": "u2",
+      "label": "Fulcrum Effect: Cervix Retained Backwards Pivots Uterine Fundus Forwards"
+     },
+     {
+      "id": "u3",
+      "label": "Anterior Fundal Tilt: Preserves Stable 90-Degree Anteversion Over Bladder Dome"
+     }
+    ],
+    "edges": [
+     [
+      "u1",
+      "u2"
+     ],
+     [
+      "u2",
+      "u3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The uterine artery is the dominant vascular conduit to the female internal reproductive tract, arising from the anterior trunk of the internal iliac artery. Coursing medially through the base of the broad ligament, the **uterine artery** crosses directly above and anterior to the ureter approximately 1.5 to 2.0 centimetres lateral to the supravaginal cervix.",
+   "say": "Arising from the internal iliac anterior division, the uterine artery runs medially in the broad ligament. It crosses anterior and superior to the ureter two centimetres lateral to the cervix.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-internal-iliac-artery-ligation.webp",
+    "alt": "Surgical exposure showing internal iliac branches and the crucial crossing of uterine artery over the ureter",
+    "caption": "Surgical exposure of retroperitoneal pelvic vessels demonstrating the water under the bridge relationship. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The anatomical crossing of the uterine artery and the ureter is famously epitomised by the surgical aphorism water under the bridge. The ureter (water) passes beneath the uterine artery (bridge) within the cardinal ligament. During total abdominal hysterectomy, clamping of the uterine artery must occur flush against the uterine wall to prevent accidental ligational injury to the **ureter**.",
+   "say": "The ureter runs beneath the uterine artery like water under a bridge. During hysterectomy, surgeons clamp the uterine artery directly on the uterine wall to avoid ureteric ligation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Water (The Ureter)",
+     "points": [
+      "Travels in retroperitoneal sheath from pelvic brim",
+      "Courses inferior and posterior to uterine artery",
+      "Lies 1.5 to 2.0 cm lateral to supravaginal cervix",
+      "Vulnerable to kinking, clamping, or transection"
+     ]
+    },
+    "right": {
+     "title": "Bridge (The Uterine Artery)",
+     "points": [
+      "Arises from anterior trunk of internal iliac artery",
+      "Courses medially within base of broad ligament",
+      "Crosses anterior and superior to the ureter",
+      "Ascends tortuously along lateral uterine margin"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The ovary is a paired almond-shaped reproductive gland situated in the lateral wall of the lesser pelvis within a shallow peritoneal depression termed the ovarian fossa of Krause. The **ovarian fossa** is bounded superiorly by the external iliac vessels, posteriorly by the internal iliac vessels and ureter, and anteriorly by the obliterated umbilical artery (lateral umbilical fold).",
+   "say": "Nestled in the lateral pelvic wall, each ovary occupies the ovarian fossa of Krause. The fossa is bounded by external iliac vessels above and the ureter and internal iliac behind.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fossa Boundary",
+     "Anatomical Landmark",
+     "Clinical Surgical Implication"
+    ],
+    "rows": [
+     [
+      "Superior boundary",
+      "External iliac vessels",
+      "Delineates upper pelvic lymph node dissection field"
+     ],
+     [
+      "Posterior boundary",
+      "Internal iliac vessels and ureter",
+      "Ureter descends immediately behind ovarian fossa; vulnerable in oophorectomy"
+     ],
+     [
+      "Floor of fossa",
+      "Obturator nerve and vessels",
+      "Ovarian irritation or cancer causes referred pain along medial thigh to knee"
+     ],
+     [
+      "Anterior boundary",
+      "Obliterated umbilical artery",
+      "Forms peritoneal fold bounding anterior margin of fossa"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The floor of the ovarian fossa is crossed by the obturator nerve, artery, and vein as they course towards the obturator canal. Because the **obturator nerve** shares segmental sensory innervation (L2-L4) with the medial compartment of the thigh, ovarian pathology such as endometriosis, cysts, or malignant deposits can cause referred sensory pain radiating down the inner thigh to the knee.",
+   "say": "Crossing the floor of the ovarian fossa, the obturator nerve carries sensation from L2 through L4. Ovarian inflammation frequently refers dull pain to the medial thigh and knee.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "o1",
+      "label": "Ovarian Inflammation / Neoplasm (Irritation of peritoneal floor of Krause fossa)"
+     },
+     {
+      "id": "o2",
+      "label": "Obturator Nerve Involvement (Sensory irritation of L2, L3, L4 fibres crossing floor)"
+     },
+     {
+      "id": "o3",
+      "label": "Referred Pain Distribution (Patient reports aching pain along medial thigh to knee)"
+     }
+    ],
+    "edges": [
+     [
+      "o1",
+      "o2"
+     ],
+     [
+      "o2",
+      "o3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The fallopian tube (uterine tube) extends laterally from the uterine cornu to open into the peritoneal cavity near the ovary, measuring ten centimetres in length. Anatomically, the **fallopian tube** is divided into four consecutive parts: the intramural uterine part (1 cm), the narrow cord-like isthmus (2-3 cm), the wide convoluted ampulla (5 cm), and the trumpet-shaped infundibulum (1-2 cm).",
+   "say": "Ten centimetres long, the fallopian tube connects the uterine cornu to the peritoneal cavity. It divides into intramural, isthmus, ampulla, and infundibulum segments.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tubal Segment",
+     "Length and Calibre",
+     "Key Functional Significance"
+    ],
+    "rows": [
+     [
+      "Intramural (interstitial)",
+      "1.0 cm, narrowest lumen (1 mm)",
+      "Pierces myometrial wall; interstitial ectopic pregnancy bleeds catastrophically"
+     ],
+     [
+      "Isthmus",
+      "2.0 to 3.0 cm, thick muscular wall",
+      "Straight narrow segment; site of elective tubal ligation (Pomeroy technique)"
+     ],
+     [
+      "Ampulla",
+      "5.0 cm, wide tortuous lumen",
+      "Most dilated segment; standard site of normal human fertilisation and ectopic gestation"
+     ],
+     [
+      "Infundibulum",
+      "1.0 to 2.0 cm, trumpet-shaped",
+      "Terminates in 20-30 fimbriae, including fimbria ovarica which sweeps the ovary"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The ampulla is the longest, widest, and most tortuous section of the fallopian tube, characterized by elaborate, branching mucosal plicae. The **tubal ampulla** is the physiological site where fertilization normally takes place. Due to its extensive luminal folds, it is also the most frequent location for ectopic tubal gestation, accounting for over seventy percent of cases.",
+   "say": "Featuring extensive mucosal folds, the ampulla is the widest segment of the tube. Human fertilisation occurs here, and it hosts over seventy percent of ectopic tubal pregnancies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ampullary Tubal Segment",
+     "points": [
+      "Convoluted lumen with highly branched mucosa",
+      "Site of sperm-egg fusion (fertilisation)",
+      "Accounts for 70 to 75% of all ectopic pregnancies",
+      "Tends to terminate in tubal abortion through fimbriae"
+     ]
+    },
+    "right": {
+     "title": "Isthmic Tubal Segment",
+     "points": [
+      "Straight, thick-walled segment with narrow lumen",
+      "Acts as a physiological sperm reservoir",
+      "Accounts for 12% of ectopic pregnancies",
+      "Prone to early catastrophic rupture at 6 to 8 weeks"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "a246e3a3-23d8-4d13-8842-adddb441c211",
+  "cf89682a-4aa2-4c7a-bffe-bb819022bd22",
+  "e60f51ab-3827-4ddd-9649-a6d601b9682c"
+ ]
+}
