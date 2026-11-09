@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-contraception-condom",
+  "subject": "community-medicine",
+  "module": "cm-contraception",
+  "title": "Barrier Methods, Vasectomy, and Tubectomy: Permanent Contraception",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Male condom: dual protection",
+      "tx": "The **male condom (Nirodh)** is a latex sheath that collects semen and blocks sperm, giving a typical use Pearl index near thirteen per hundred woman years and near two with perfect use. It alone among contraceptives also protects against human immunodeficiency virus and other sexually transmitted infections, which is why programmes call it the dual protection method and distribute it free through health facilities and social marketing.",
+      "say": "Condoms prevent pregnancy and infections together. Perfect use fails about two per hundred yearly; typical use fails about thirteen.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "co1", "label": "Apply before any genital contact" },
+          { "id": "co2", "label": "Leave reservoir space, unroll fully" },
+          { "id": "co3", "label": "Withdraw held at base, single use only" }
+        ],
+        "edges": [["co1", "co2"], ["co2", "co3"]]
+      }
+    },
+    {
+      "title": "Female condom and diaphragm",
+      "tx": "The **female condom** is a polyurethane pouch with rings at both ends that lines the vagina, controlled by the woman, reusable in no circumstance, and protective against infections like its male counterpart. The diaphragm is a latex dome fitted over the cervix with spermicide, sized by examination, left in for six hours after intercourse, and rarely used in India because fitting and follow up are provider dependent.",
+      "say": "The female condom gives women barrier control with infection protection. Diaphragms need fitting and spermicide, so India barely uses them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Female condom",
+          "points": ["Woman controlled insertion", "Covers external genitalia partly", "Infection protection included"]
+        },
+        "right": {
+          "title": "Diaphragm",
+          "points": ["Provider fitted dome size", "Needs spermicidal jelly", "Leave 6 hours after intercourse"]
+        }
+      }
+    },
+    {
+      "title": "Spermicides and their limits",
+      "tx": "Chemical **spermicides in contraception** (nonoxynol nine foams, gels, and the Indian Today sponge of polyurethane impregnated with spermicide) kill sperm on contact but fail in fifteen to thirty per hundred woman years alone, and frequent nonoxynol use can irritate mucosa and paradoxically raise HIV acquisition risk. Their rational role is as diaphragm partners or backup, never as a programme mainstay.",
+      "say": "Spermicides alone fail too often to recommend solo. The sponge and foams belong as backups, not primary family planning.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Barrier or chemical", "Typical failure per 100 woman years"],
+        "rows": [
+          ["Male condom typical use", "About 13"],
+          ["Female condom typical use", "About 21"],
+          ["Diaphragm with spermicide", "About 17"],
+          ["Spermicide alone", "About 21 to 28"]
+        ]
+      }
+    },
+    {
+      "title": "No scalpel vasectomy",
+      "tx": "**No scalpel vasectomy** reaches the vas deferens through a tiny puncture with special forceps, occluding both ends by ligation, excision of a segment, cautery, or fascial interposition, in a ten minute outpatient procedure under local anaesthesia. It does not affect erection, ejaculation volume noticeably, testosterone, or libido. Sterility is confirmed only after semen examination shows azoospermia, typically after twenty ejaculations or three months.",
+      "say": "No scalpel vasectomy takes ten minutes through a puncture. It changes neither potency nor hormones, but needs a semen check before reliance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "vs1", "label": "Puncture, vas delivered and occluded" },
+          { "id": "vs2", "label": "Backup contraception for 3 months" },
+          { "id": "vs3", "label": "Semen azoospermia confirms sterility" }
+        ],
+        "edges": [["vs1", "vs2"], ["vs2", "vs3"]]
+      }
+    },
+    {
+      "title": "Tubectomy and minilaparotomy",
+      "tx": "Female sterilisation occludes both fallopian tubes, most often by **minilaparotomy tubectomy** through a small suprapubic incision in the postpartum or interval period. Failure runs near five per thousand procedures, and when pregnancy occurs after tubectomy the ectopic share is high, so any missed period after sterilisation needs urgent evaluation. Reversal succeeds best after clip or ring occlusion with long remaining tube length.",
+      "say": "Tubectomy blocks both tubes through a small incision. Failure is rare, but a later pregnancy is often ectopic and dangerous.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Approach", "Programme notes"],
+        "rows": [
+          ["Postpartum minilaparotomy", "Within 7 days of delivery, commonest timing"],
+          ["Interval minilaparotomy", "Any time, pregnancy excluded, follicular phase preferred"],
+          ["Laparoscopic sterilisation", "Camp based, clips or rings, trained teams"],
+          ["Post abortion sterilisation", "With first trimester evacuation after counselling"]
+        ]
+      }
+    },
+    {
+      "title": "Vasectomy versus tubectomy for the couple",
+      "tx": "For a couple sure their family is complete, **vasectomy versus tubectomy comparison** favours vasectomy on safety, cost, failure rate, and recovery, yet tubectomy dominates Indian statistics because of camp organisation, incentives history, and male myths. Counselling must state permanence honestly: both are intended irreversible, reversal is uncertain microsurgery, and regret concentrates in young, low parity, or pressured acceptors.",
+      "say": "Vasectomy is safer, cheaper, and surer than tubectomy, yet India does far more tubectomies. Both must be counselled as permanent.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vasectomy advantages",
+          "points": ["Outpatient, local anaesthesia", "Failure about 1 per 1000", "Cheapest per couple year protected"]
+        },
+        "right": {
+          "title": "Tubectomy realities",
+          "points": ["Abdominal procedure, hospital stay", "Failure about 5 per 1000", "Dominates Indian programme volume"]
+        }
+      }
+    },
+    {
+      "title": "Sterilisation eligibility and consent",
+      "tx": "Indian standards for **sterilisation eligibility and consent** require a married client aged twenty two to forty nine years with at least one child above one year, free informed consent of the client (spousal consent is not legally mandatory though joint counselling is encouraged), sound mind, and no past sterilisation. Medical officers certify fitness, and compensation covers wage loss through programme insurance that also indemnifies failure and complications.",
+      "say": "Sterilisation needs age twenty two to forty nine, a living child, and the client's own free consent. Programme insurance covers failure and complications.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "el1", "label": "Confirm eligibility and counsel jointly" },
+          { "id": "el2", "label": "Written informed consent, fitness certified" },
+          { "id": "el3", "label": "Procedure with insurance and follow up" }
+        ],
+        "edges": [["el1", "el2"], ["el2", "el3"]]
+      }
+    },
+    {
+      "title": "Complications and failure handling",
+      "tx": "Sterilisation **complications and failure management** spans anaesthetic events, bowel or vessel injury in tubectomy, haematoma and chronic pain after vasectomy, and method failure presenting as pregnancy. The family planning indemnity scheme pays defined compensation for failure, complication treatment, and death, provided claims are filed within the stipulated period with procedure records, converting rare mishaps into a trust preserving system.",
+      "say": "Rare failures and injuries are covered by the indemnity scheme. Document the procedure well so genuine claims succeed quickly.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Event", "Programme response"],
+        "rows": [
+          ["Method failure pregnancy", "Fixed compensation after verification"],
+          ["Major complication", "Free treatment plus compensation"],
+          ["Death attributable to procedure", "Highest tier family compensation"],
+          ["Vasectomy haematoma", "Conservative care, review, analgesia"]
+        ]
+      }
+    },
+    {
+      "title": "Couple years of protection",
+      "tx": "Programmes compare methods by **couple years of protection**, the estimated protected years from one unit: roughly fifteen years credited per sterilisation, ten per Copper T 380A in extended conventions, one hundred twenty condoms per couple year, and fifteen pill cycles per couple year. The metric lets stores convert commodities into equivalent protection and exposes why long acting methods dominate cost effectiveness tables.",
+      "say": "Couple years of protection converts commodities into protected time. One sterilisation credits about fifteen years, which is why it tops value tables.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "High protection per unit",
+          "points": ["Sterilisation about 15 couple years", "Copper T 380A about 10 couple years", "Implant 3 to 5 couple years"]
+        },
+        "right": {
+          "title": "Low protection per unit",
+          "points": ["120 condoms per couple year", "15 pill cycles per couple year", "4 injections per couple year"]
+        }
+      }
+    }
+  ]
+}
