@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phy-pancreas",
+  "subject": "physiology",
+  "title": "The Insulin Receptor, GLUT4 Translocation, and Glucagon",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Insulin exerts its anabolic actions by binding the cell-surface **insulin tyrosine kinase receptor**, a disulfide-linked heterotetramer consisting of two extracellular alpha subunits and two transmembrane beta subunits. Insulin binding induces trans-autophosphorylation of tyrosine residues on the beta subunits, activating intrinsic tyrosine kinase activity.",
+      "say": "Insulin binds extracellular alpha subunits, triggering autophosphorylation of intracellular beta tyrosine kinase domains.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ins_bind",
+            "label": "Insulin Binds Extracellular Alpha Subunits of Heterotetrameric Receptor"
+          },
+          {
+            "id": "auto_phos",
+            "label": "Beta Subunits Undergo Tyrosine Trans-Autophosphorylation"
+          },
+          {
+            "id": "irs_recruit",
+            "label": "Recruitment and Phosphorylation of Insulin Receptor Substrates (IRS-1 / IRS-2)"
+          },
+          {
+            "id": "bifurcate",
+            "label": "Bifurcation into Metabolic (PI3K-Akt) and Mitogenic (MAPK) Signaling Arms"
+          }
+        ],
+        "edges": [
+          [
+            "ins_bind",
+            "auto_phos"
+          ],
+          [
+            "auto_phos",
+            "irs_recruit"
+          ],
+          [
+            "irs_recruit",
+            "bifurcate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Downstream signaling bifurcates into two distinct cascades: the mitogenic MAP kinase pathway regulating gene transcription and cell growth, and the metabolic **phosphatidylinositol-3-kinase pathway**. Activated PI3-kinase converts PIP2 into PIP3, recruiting and activating Akt (protein kinase B), which mediates virtually all metabolic actions of insulin.",
+      "say": "The metabolic arm acts via PI3K and Akt, driving glucose uptake, glycogen synthesis, and lipogenesis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PI3K-Akt Pathway (Metabolic)",
+          "points": [
+            "Recruits and activates Protein Kinase B (Akt)",
+            "Drives exocytic translocation of GLUT4 to plasma membrane",
+            "Inactivates glycogen synthase kinase-3, activating glycogen synthase",
+            "Stimulates SREBP-1c to accelerate de novo lipogenesis"
+          ]
+        },
+        "right": {
+          "title": "MAPK Pathway (Mitogenic / Growth)",
+          "points": [
+            "Recruits Grb2-SOS complex to activate Ras GTPase",
+            "Activates sequential Raf, MEK, and ERK kinase cascade",
+            "Phosphorylates nuclear transcription factors regulating mitosis",
+            "Drives cellular proliferation, differentiation, and survival"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In striated skeletal muscle and adipose tissue, basal glucose uptake is restricted because glucose carriers are sequestered in intracellular vesicles. Activated Akt phosphorylates AS160, triggering rapid exocytosis and membrane insertion of the insulin-sensitive **GLUT4 glucose transporter**, accelerating glucose clearance into myocytes and adipocytes by twenty-fold.",
+      "say": "Akt stimulates GLUT4 vesicles to fuse with muscle and fat membranes, increasing glucose uptake twenty-fold.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "akt_act",
+            "label": "Akt Phosphorylates Rab-GTPase Activating Protein AS160"
+          },
+          {
+            "id": "vesicle_mob",
+            "label": "Mobilization of Intracellular Vesicles Containing Sequestered GLUT4"
+          },
+          {
+            "id": "membrane_fuse",
+            "label": "Fusion with Plasma Membrane Increases Surface GLUT4 Carrier Density 20-Fold"
+          },
+          {
+            "id": "uptake",
+            "label": "Rapid Facilitated Influx of Glucose into Skeletal Muscle and Adipose Tissue"
+          }
+        ],
+        "edges": [
+          [
+            "akt_act",
+            "vesicle_mob"
+          ],
+          [
+            "vesicle_mob",
+            "membrane_fuse"
+          ],
+          [
+            "membrane_fuse",
+            "uptake"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "During physical exercise, skeletal muscle contraction stimulates glucose uptake completely independently of insulin. Muscle contraction activates **AMP-activated protein kinase**, which directly triggers GLUT4 translocation to muscle sarcolemma, providing a major therapeutic mechanism whereby regular aerobic exercise improves glycaemia in type 2 diabetes.",
+      "say": "Muscle contraction activates AMPK, moving GLUT4 to the membrane to absorb glucose without needing insulin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Insulin-Mediated GLUT4 Translocation",
+          "points": [
+            "Operates postprandially in response to beta-cell insulin secretion",
+            "Requires intact insulin receptor, IRS-1, and PI3K-Akt signaling",
+            "Severely blunted in peripheral insulin resistance and obesity",
+            "Inhibited by elevated free fatty acids and inflammatory TNF-alpha"
+          ]
+        },
+        "right": {
+          "title": "Exercise-Mediated GLUT4 Translocation",
+          "points": [
+            "Operates during active muscular exercise and contraction",
+            "Triggered by rising intracellular AMP and Ca2+-calmodulin kinase",
+            "Completely bypasses insulin receptor and PI3K pathways",
+            "Remains fully functional even in severe type 2 diabetic insulin resistance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The primary physiological counter-regulatory antagonist to insulin is the twenty-nine amino acid peptide **glucagon**, synthesized and secreted by islet alpha cells. Released during fasting, hypoglycemia, or exercise, glucagon binds Gs-coupled hepatic receptors to stimulate glycogenolysis and gluconeogenesis, elevating blood glucose within minutes.",
+      "say": "Glucagon is the main antagonist to insulin, stimulating hepatic glycogenolysis and gluconeogenesis via cyclic AMP.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hypoglyc",
+            "label": "Arterial Hypoglycemia (< 70 mg/dL) or Sympathetic Surge Stimulates Alpha Cells"
+          },
+          {
+            "id": "gluc_rel",
+            "label": "Alpha Cells Secrete Glucagon into Portal Vein (Direct to Liver)"
+          },
+          {
+            "id": "gs_camp",
+            "label": "Hepatic Glucagon Receptors Activate Gs -> Adenylyl Cyclase -> Cyclic AMP -> PKA"
+          },
+          {
+            "id": "output",
+            "label": "PKA Activates Glycogen Phosphorylase and PEPCK, Releasing Glucose into Blood"
+          }
+        ],
+        "edges": [
+          [
+            "hypoglyc",
+            "gluc_rel"
+          ],
+          [
+            "gluc_rel",
+            "gs_camp"
+          ],
+          [
+            "gs_camp",
+            "output"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Defending against life-threatening hypoglycemia recruits a tiered hierarchy of counter-regulatory hormones. As glucose falls below eighty milligrams per decilitre, insulin secretion shuts off; at seventy milligrams, glucagon and adrenaline surge; at sixty milligrams, **cortisol and growth hormone** activate to sustain prolonged gluconeogenesis.",
+      "say": "As glucose falls, insulin shuts off first, followed by surges in glucagon, adrenaline, cortisol, and growth hormone.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Glycaemic Threshold",
+          "Endocrine / Physiological Response",
+          "Primary Biological Mechanism"
+        ],
+        "rows": [
+          [
+            "~80 to 85 mg/dL",
+            "Inhibition of Beta-Cell Insulin Secretion",
+            "Halts peripheral glucose uptake and storage"
+          ],
+          [
+            "~68 to 70 mg/dL",
+            "Surge in Glucagon and Adrenaline",
+            "Immediate hepatic glycogenolysis and sympathoadrenal activation"
+          ],
+          [
+            "~60 to 65 mg/dL",
+            "Surge in Cortisol and Growth Hormone",
+            "Sustained hepatic gluconeogenesis and lipolysis"
+          ],
+          [
+            "~50 to 55 mg/dL",
+            "Autonomic Symptoms (Shakiness, Sweating)",
+            "Cholinergic sympathetic discharge"
+          ],
+          [
+            "< 50 mg/dL",
+            "Neuroglycopenia (Confusion, Seizures, Coma)",
+            "Direct neuronal cerebral glucose deprivation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Absolute autoimmune destruction of pancreatic beta cells by autoreactive T lymphocytes produces **type 1 diabetes mellitus**. Absence of endogenous insulin leads to unrestrained lipolysis, flooding the liver with free fatty acids that are oxidized into acetoacetate and beta-hydroxybutyrate, precipitating life-threatening diabetic ketoacidosis.",
+      "say": "Type 1 diabetes is autoimmune beta cell destruction, causing absolute insulin deficiency and ketoacidosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diabetes-mellitus-management-and-therapies-fig1.webp",
+        "alt": "Diabetic ketoacidosis pathophysiology and metabolic derangements",
+        "caption": "Insulin deficiency, uninhibited lipolysis, hepatic ketogenesis, and metabolic ketoacidosis."
+      }
+    },
+    {
+      "tx": "In contrast, **type 2 diabetes mellitus** arises from progressive peripheral insulin resistance coupled with relative beta-cell secretory failure. While persistent basal insulin levels prevent massive lipolysis and ketoacidosis, chronic glucotoxicity and lipotoxicity cause severe hyperosmolar hyperglycemic state accompanied by progressive microvascular and macrovascular complications.",
+      "say": "Type 2 diabetes combines peripheral insulin resistance with relative beta cell failure, leading to hyperosmolar state.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/multiple-endocrine-neoplasia-fig1.webp",
+        "alt": "Endocrine pancreatic neoplasia and metabolic insulin resistance",
+        "caption": "Pancreatic neuroendocrine pathology, insulinoma, and systemic metabolic counter-regulation."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
