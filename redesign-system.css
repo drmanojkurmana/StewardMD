@@ -1318,3 +1318,32 @@ html[data-appearance="frosted"] #homeV2#homeV2.rnav{--hrf-fill:color-mix(in srgb
 html[data-appearance="liquid"] #homeV2#homeV2.rnav{--hrf-fill:color-mix(in srgb,var(--hrf-card) 36%,transparent);--hrf-blur:blur(24px) saturate(200%);--hrf-extra:inset 0 1px 0 rgba(255,255,255,.7),inset 0 -1px 0 rgba(255,255,255,.18),0 10px 28px -10px var(--hrf-sh)}
 html[data-appearance="tinted3d"] #homeV2#homeV2.rnav{--hrf-fill:linear-gradient(160deg,color-mix(in srgb,var(--sphere-hi) 12%,var(--hrf-card)),color-mix(in srgb,var(--sphere-hi) 30%,var(--hrf-card)));--hrf-extra:0 2px 3px var(--hrf-sh),0 14px 26px -10px var(--hrf-sh),inset 0 1px 0 rgba(255,255,255,.55),inset 0 -4px 8px -3px var(--hrf-lo)}
 html[data-appearance="blend"] #homeV2#homeV2.rnav{--hrf-fill:linear-gradient(135deg,color-mix(in srgb,var(--sphere-hi) 24%,var(--hrf-card)),var(--hrf-card) 55%,color-mix(in srgb,var(--sphere-mid) 16%,var(--hrf-card)));--hrf-extra:0 6px 18px -8px var(--hrf-sh)}
+/* About sheet: one-line segmented tabs and the Facts page. */
+#aboutModal .smd-ab-tabs{position:sticky;top:-1px;z-index:3;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;margin:0 0 18px;padding:3px;border:0;border-radius:13px;background:color-mix(in srgb,var(--paper,#f2f4f7) 86%,#8a9099);overflow:visible;box-shadow:0 -32px 0 var(--mdl-bg,var(--panel,#fff)),0 -16px 0 var(--mdl-bg,var(--panel,#fff)),0 8px 0 var(--mdl-bg,var(--panel,#fff))}
+#aboutModal{--mdl-bg:var(--panel,#fff)}
+#aboutModal .smd-ab-tab{min-width:0;min-height:40px;margin:0;padding:0 2px;border:0;border-radius:10px;background:transparent;box-shadow:none;color:var(--slate,#51626d);font-size:13.5px;font-weight:600;white-space:nowrap;text-align:center}
+#aboutModal .smd-ab-tab::after{display:none}
+#aboutModal .smd-ab-tab.on{background:var(--panel,#fff);color:var(--ink,#13262b);border:0;box-shadow:0 1px 3px rgba(13,27,36,.16)}
+#aboutModal .smd-fx-hero{margin:0 0 6px;padding:4px 18px;border-radius:18px;background:linear-gradient(150deg,var(--sphere-mid,#12564a),var(--sphere-base,#06231e));color:#fff}
+#aboutModal .smd-fx-claim{padding:15px 0}
+#aboutModal .smd-fx-claim+.smd-fx-claim{border-top:1px solid rgba(255,255,255,.16)}
+#aboutModal .smd-fx-claim b{display:block;font-size:20px;line-height:1.2;font-weight:700;letter-spacing:-.01em}
+#aboutModal .smd-fx-claim span{display:block;margin-top:5px;font-size:14px;line-height:1.4;color:rgba(255,255,255,.76)}
+#aboutModal .smd-fx-list{list-style:none;margin:0;padding:0}
+#aboutModal .smd-fx-list li{padding:13px 2px;border-bottom:1px solid var(--line,#dfe6ea)}
+#aboutModal .smd-fx-list li:last-child{border-bottom:0}
+#aboutModal .smd-fx-list b{display:block;font-size:15.5px;font-weight:600;color:var(--ink,#13262b)}
+#aboutModal .smd-fx-list span{display:block;margin-top:2px;font-size:13.5px;line-height:1.4;color:var(--slate,#51626d)}
+#aboutModal .smd-fx-h{margin:24px 2px 12px;font-size:19px;font-weight:700;letter-spacing:-.01em;color:var(--ink,#13262b)}
+#aboutModal .smd-fx-stats{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0}
+#aboutModal .smd-fx-stats>div{padding:14px;border:1px solid var(--line,#dfe6ea);border-radius:14px;background:var(--panel,#fff)}
+#aboutModal .smd-fx-stats dt{font-size:25px;line-height:1.1;font-weight:700;letter-spacing:-.02em;color:var(--teal,#0f766e);font-variant-numeric:tabular-nums;white-space:nowrap}
+#aboutModal .smd-fx-stats dd{margin:6px 0 0;font-size:12.5px;line-height:1.35;color:var(--slate,#51626d)}
+#aboutModal .smd-fx-time{list-style:none;margin:0;padding:0 0 0 14px;border-left:1px solid var(--line,#dfe6ea)}
+#aboutModal .smd-fx-time li{position:relative;padding:0 0 16px 4px}
+#aboutModal .smd-fx-time li::before{content:"";position:absolute;left:-18.5px;top:5px;width:8px;height:8px;border-radius:50%;background:var(--teal,#0f766e)}
+#aboutModal .smd-fx-time time{display:block;font-size:12.5px;font-weight:700;color:var(--teal,#0f766e)}
+#aboutModal .smd-fx-time p{margin:3px 0 0;font-size:14px;line-height:1.42;color:var(--ink,#13262b)}
+#aboutModal .smd-fx-sign{margin:8px 2px 4px;font-size:12px;line-height:1.45;color:var(--slate-soft,#708089)}
+@media (min-width:640px){#aboutModal .smd-fx-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+#homeV2.rnav .hrf-banner[data-act]:active{transform:scale(.99)}
