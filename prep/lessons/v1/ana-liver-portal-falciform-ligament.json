@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-liver-portal",
+ "subject": "anatomy",
+ "title": "Peritoneal Attachments, Embryonic Remnants, and Portal Vein Genesis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The liver develops within the embryonic ventral mesogastrium, acquiring extensive peritoneal folds connecting it to the anterior abdominal wall and diaphragm. The sickle-shaped **falciform ligament** is a two-layered peritoneal fold attached superiorly to the under-surface of the diaphragm and inferiorly to the anterior abdominal wall down to the umbilicus.",
+   "say": "Developing in the ventral mesogastrium, the liver forms extensive peritoneal folds. The sickle-shaped falciform ligament connects the liver to the diaphragm and anterior abdominal wall down to the umbilicus.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-xray-pneumoperitoneum-gas-under-diaphragm.webp",
+    "alt": "Chest radiograph showing falciform ligament outlined by free intraperitoneal gas",
+    "caption": "Radiographic visualization of the falciform ligament outlined by massive pneumoperitoneum. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Within the free, thickened lower margin of the falciform ligament runs the **ligamentum teres hepatis** (round ligament of the liver). This fibrous cord represents the obliterated embryonic left umbilical vein, which transported oxygenated, nutrient-rich placental blood directly from the umbilical cord to the fetal liver.",
+   "say": "Inside the lower free margin of the falciform ligament runs the ligamentum teres. This fibrous cord is the obliterated embryonic left umbilical vein that carried oxygenated blood from the placenta.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ligamentum Teres Hepatis",
+     "points": [
+      "Fibrous cord in free border of falciform ligament",
+      "Runs from umbilicus to left branch of portal vein",
+      "Obliterated embryonic left umbilical vein",
+      "Accompanied by paraumbilical veins of Sappey"
+     ]
+    },
+    "right": {
+     "title": "Ligamentum Venosum",
+     "points": [
+      "Fibrous band in deep fissure on posterior liver",
+      "Runs from left portal vein to inferior vena cava",
+      "Obliterated embryonic ductus venosus",
+      "Bypassed hepatic sinusoids during fetal life"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In fetal circulation, the ductus venosus served as a physiological vascular conduit shunting oxygenated blood from the left umbilical vein directly into the inferior vena cava, bypassing the hepatic sinusoidal capillary bed. Following birth, functional muscular constriction and fibrous occlusion transform it into the **ligamentum venosum**.",
+   "say": "In the fetus, the ductus venosus shunted umbilical venous blood directly into the IVC, bypassing hepatic sinusoids. At birth, muscular closure transforms it into the ligamentum venosum.",
+   "vis": {
+    "kind": "flow",
+    "title": "Fetal to Adult Transformation of Umbilical Shunts",
+    "nodes": [
+     {
+      "id": "placenta",
+      "label": "Placental Oxygenated Blood Enters via Left Umbilical Vein"
+     },
+     {
+      "id": "shunt",
+      "label": "Ductus Venosus Shunts 50% Direct to Inferior Vena Cava"
+     },
+     {
+      "id": "birth",
+      "label": "Clamping of Umbilical Cord Induces Immediate Vascular Spasm"
+     },
+     {
+      "id": "adult",
+      "label": "Remnants: Ligamentum Teres Hepatis and Ligamentum Venosum"
+     }
+    ],
+    "edges": [
+     [
+      "placenta",
+      "shunt"
+     ],
+     [
+      "shunt",
+      "birth"
+     ],
+     [
+      "birth",
+      "adult"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **portal vein** is the primary functional afferent vessel of the liver, providing seventy-five percent of total hepatic blood flow and fifty percent of hepatic oxygenation. Measuring eight centimetres in length, it is formed behind the neck of the pancreas by the union of the splenic vein and superior mesenteric vein at vertebral level L2.",
+   "say": "The portal vein delivers seventy-five percent of the liver's blood flow. Formed behind the neck of the pancreas at L2 by the union of the splenic and superior mesenteric veins, it is eight centimeters long.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Portal System Feature",
+     "Anatomical Specification",
+     "Hemodynamic Contribution",
+     "Surgical Landmark"
+    ],
+    "rows": [
+     [
+      "Site of Formation",
+      "Behind the neck of the pancreas",
+      "Confluence of SMV and splenic vein",
+      "Vertebral level L2"
+     ],
+     [
+      "Total Length",
+      "Approximately 8 cm (3 inches)",
+      "Traverses hepatoduodenal ligament",
+      "Posterior member of portal triad"
+     ],
+     [
+      "Blood Flow Volume",
+      "1000 to 1200 mL/min (75% total)",
+      "Low-pressure system (5 to 10 mmHg)",
+      "Lacks valves; pressure transmits retrograde"
+     ],
+     [
+      "Oxygen Delivery",
+      "Delivers 50% of hepatic oxygen",
+      "Nutrient-rich venous return from gut",
+      "Buffers hepatic arterial hypoperfusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ascending in the free right margin of the lesser omentum (hepatoduodenal ligament), the portal vein lies posterior to both the common bile duct and the proper hepatic artery. At the porta hepatis, it divides into right and left **terminal portal branches**, which ramify to supply the eight functional Couinaud segments.",
+   "say": "Ascending in the hepatoduodenal ligament, the portal vein lies behind the bile duct and hepatic artery. At the porta hepatis, it splits into right and left branches supplying the eight segments.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Right Portal Vein Branch",
+     "points": [
+      "Short, wide trunk (1-2 cm long)",
+      "Enters right hepatic parenchyma directly",
+      "Divides into anterior (V, VIII) and posterior (VI, VII) branches",
+      "Torn easily during right lobectomy retraction"
+     ]
+    },
+    "right": {
+     "title": "Left Portal Vein Branch",
+     "points": [
+      "Longer, narrower trunk (3-4 cm long)",
+      "Courses along base of quadrate lobe",
+      "Joined by ligamentum teres and ligamentum venosum",
+      "Supplies segments II, III, and IV"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Normal portal venous pressure ranges between five and ten millimetres of mercury. Pathological elevation above twelve millimetres of mercury defines **portal hypertension**, commonly provoked by intrahepatic sinusoidal fibrosis in alcoholic or viral cirrhosis. Increased backward pressure engorges pre-existing portosystemic anastomotic channels.",
+   "say": "Normal portal pressure is five to ten millimeters of mercury. Cirrhotic scarring raises pressure above twelve millimeters, causing portal hypertension that engorges portosystemic collateral veins.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathophysiology of Portal Hypertension",
+    "nodes": [
+     {
+      "id": "cirrhosis",
+      "label": "Cirrhotic Fibrosis and Regenerative Nodules Distort Sinusoids"
+     },
+     {
+      "id": "resist",
+      "label": "Intrahepatic Vascular Resistance to Portal Inflow Increases"
+     },
+     {
+      "id": "press",
+      "label": "Portal Venous Pressure Rises Above 12 mmHg"
+     },
+     {
+      "id": "shunt",
+      "label": "Retrograde Flow Diverted into Low-pressure Portosystemic Shunts"
+     }
+    ],
+    "edges": [
+     [
+      "cirrhosis",
+      "resist"
+     ],
+     [
+      "resist",
+      "press"
+     ],
+     [
+      "press",
+      "shunt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Percutaneous transhepatic liver biopsy is performed to evaluate parenchymal hepatitis or cirrhosis. The needle is introduced through the eighth, ninth, or **tenth intercostal space** in the midaxillary line during full held expiration, passing through skin, intercostal muscles, costodiaphragmatic recess, diaphragm, and peritoneum into the right hepatic lobe.",
+   "say": "Percutaneous liver biopsy is performed in the eighth, ninth, or tenth intercostal space in the midaxillary line during full expiration, guiding the needle into the right hepatic lobe.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-proc-liver-biopsy.webp",
+    "alt": "Clinical procedure illustration showing liver biopsy needle trajectory in the midaxillary line",
+    "caption": "Percutaneous liver biopsy trajectory in the right midaxillary line during suspended expiration. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Suspended full expiration during liver biopsy is critical to elevate the lung base away from the costodiaphragmatic recess, preventing inadvertent pneumothorax or lung laceration. Immediate post-biopsy ultrasound rules out intra-abdominal hemorrhage or **biliary peritonitis**, which can occur if the needle lacerates an intrahepatic bile duct or subcapsular hematoma.",
+   "say": "Holding expiration lifts the lung base away from the needle path, avoiding pneumothorax. Post-biopsy monitoring checks for subcapsular bleeding or bile leaks.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Biopsy Precaution",
+     "Anatomical Rationale",
+     "Complication Prevented",
+     "Procedural Action"
+    ],
+    "rows": [
+     [
+      "Held Full Expiration",
+      "Diaphragm ascends; lung base clears recess",
+      "Avoids lung laceration and pneumothorax",
+      "Patient coached to hold breath on exhale"
+     ],
+     [
+      "Midaxillary Line (8th-10th)",
+      "Direct path into thickest right lobe",
+      "Avoids gallbladder and colon injury",
+      "Confirmed by percussion dullness"
+     ],
+     [
+      "Depth Under 3 cm",
+      "Avoids major hilar portal vessels",
+      "Prevents catastrophic intrahepatic bleeding",
+      "Pre-set needle depth stopper"
+     ],
+     [
+      "Post-procedure Right Side",
+      "Body weight compresses puncture site",
+      "Arrests microvascular oozing",
+      "Patient kept in right lateral decubitus"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "01736105-4c43-437d-9e43-ab96502ee8c1",
+  "06da6a39-ef70-4737-93b0-cf32eadf1146",
+  "02de87ba-bea9-4632-b077-06ca1d713df1"
+ ]
+}
