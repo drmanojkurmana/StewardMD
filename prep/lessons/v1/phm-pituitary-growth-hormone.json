@@ -1,0 +1,159 @@
+{
+  "v": 1,
+  "module": "phm-pituitary",
+  "subject": "pharmacology",
+  "title": "Pituitary Pharmacology: Growth Hormone, Somatostatin Analogues, Prolactin and GnRH Agents, Oxytocin and Vasopressin",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Growth hormone** (somatropin, recombinant human GH) replaces deficiency in children (height velocity) and adults (body composition, bone and quality of life), and serves Turner syndrome, chronic kidney disease growth failure and other licensed niches, dosed daily subcutaneously against IGF 1 levels. **Mecasermin**, recombinant IGF 1, rescues severe primary IGF 1 deficiency where GH cannot work, with hypoglycaemia as its shadow. GH excess, not deficiency, occupies the therapeutic second half of this lesson.",
+      "say": "Somatropin replaces what the pituitary withholds; dose it against IGF 1 and growth, not enthusiasm.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acromegaly-fig2.webp",
+        "alt": "Acromegaly growth hormone and IGF 1 axis diagram",
+        "caption": "The GH IGF 1 axis that somatropin replaces and acromegaly therapy suppresses at three different levels."
+      }
+    },
+    {
+      "tx": "**Octreotide** and lanreotide, somatostatin analogues preferring SSTR2 receptors, suppress growth hormone (and TSH, insulin, glucagon and gut peptides) for acromegaly control, neuroendocrine tumour symptom and hormone syndromes, variceal bleeding (splanchnic vasoconstriction) and pancreatic fistula niches. Monthly depot injections anchor adherence. Gallstones from gallbladder stasis, steatorrhoea, glucose excursions in both directions and bradycardia write their review list.",
+      "say": "Octreotide is somatostatin with staying power: acromegaly, hormone syndromes and varices share its brake pedal.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Somatostatin analogue territory",
+          "points": [
+            "Acromegaly: GH and IGF 1 suppression",
+            "Neuroendocrine tumours: symptom and growth control",
+            "Acute variceal bleeding adjunct",
+            "Monthly long acting depot formulations"
+          ]
+        },
+        "right": {
+          "title": "Analogue adverse set",
+          "points": [
+            "Gallstones and biliary sludge",
+            "Steatorrhoea and fat soluble vitamin loss",
+            "Hyper or hypoglycaemia by tumour context",
+            "Bradycardia and injection site reactions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pegvisomant**, a growth hormone receptor antagonist (pegylated modified GH that occupies without activating), normalises IGF 1 in acromegaly resistant to or intolerant of somatostatin analogues, while GH levels rise uselessly behind the blockade, so IGF 1 alone steers dosing. Tumour size is watched by imaging because the pituitary adenoma loses GH feedback. Liver enzyme monitoring and daily injection burden complete its specialist profile.",
+      "say": "Pegvisomant blocks the receptor and lets GH shout unheard; steer it by IGF 1 and image the tumour.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "resist", "label": "Acromegaly uncontrolled on somatostatin analogues" },
+          { "id": "peg", "label": "Pegvisomant blocks peripheral GH receptors" },
+          { "id": "igf", "label": "IGF 1 normalises, GH rises behind blockade" },
+          { "id": "image", "label": "Adenoma imaged periodically, liver enzymes monitored" }
+        ],
+        "edges": [["resist", "peg"], ["peg", "igf"], ["igf", "image"]]
+      }
+    },
+    {
+      "tx": "Dopamine agonists treat the pituitary from the hypothalamic side: **cabergoline** (long acting, twice weekly) and bromocriptine suppress prolactin secretion from lactotroph adenomas, shrinking most prolactinomas and restoring gonadal function, first line ahead of surgery for most. **Hyperprolactinaemia** differentials (pregnancy, hypothyroidism, dopamine blocking drugs, stalk compression with its modest elevations) must be sorted before lifelong labels attach, and macroprolactin assays unmask laboratory artefacts.",
+      "say": "Cabergoline shrinks prolactinomas better than surgery for most; exclude pregnancy, thyroid and drug causes first.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-cabergoline.webp",
+        "alt": "Cabergoline dopamine agonist illustration for hyperprolactinaemia",
+        "caption": "Cabergoline, the long acting dopamine agonist that is first line therapy for prolactinoma. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**GnRH analogues** exploit pulse physiology: continuous leuprolide or goserelin first flare gonadotropins (a week of worsening prostate cancer or precocious puberty symptoms) then downregulate receptors into medical castration, serving prostate cancer, endometriosis, uterine fibroids, precocious puberty and IVF protocols, with add back oestrogen strategies protecting bone in long gynaecological use. Antagonists **degarelix** and relugolix skip the flare entirely where spinal cord compression or symptoms forbid it.",
+      "say": "Continuous GnRH first flares then castrates; antagonists skip the flare where cancer cannot afford it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "GnRH agonists (leuprolide, goserelin)",
+          "points": [
+            "Initial flare over about a week",
+            "Then receptor downregulation and suppression",
+            "Depot monthly to quarterly formulations",
+            "Add back therapy protects bone in long use"
+          ]
+        },
+        "right": {
+          "title": "GnRH antagonists (degarelix, relugolix)",
+          "points": [
+            "Immediate suppression, no flare",
+            "Prostate cancer where flare is dangerous",
+            "Oral relugolix daily or degarelix injections",
+            "Histamine type injection reactions with degarelix"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Acromegaly** therapy assembles the lesson's three levels in guideline order: transsphenoidal surgery first where resectable, somatostatin analogues as primary medical therapy and tumour control, pegvisomant for IGF 1 normalisation in resistance (often combined), cabergoline for mild disease especially with prolactin co secretion, and radiotherapy as the slow last line. Biochemical targets (IGF 1 normalisation, GH thresholds) and comorbidity clinics (cardiac, metabolic, sleep apnoea, colon) define success beyond the hormone printout.",
+      "say": "Surgery, somatostatin, pegvisomant, cabergoline for the mild: acromegaly is a ladder, not a drug.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "surgery", "label": "Transsphenoidal resection where feasible" },
+          { "id": "ssa", "label": "Somatostatin analogue for residual disease" },
+          { "id": "peg", "label": "Pegvisomant added or substituted for IGF 1 control" },
+          { "id": "caber", "label": "Cabergoline for mild or prolactin co secreting disease" }
+        ],
+        "edges": [["surgery", "ssa"], ["ssa", "peg"], ["ssa", "caber"]]
+      }
+    },
+    {
+      "tx": "Posterior pituitary pharmacology pairs **oxytocin** (labour induction and augmentation, postpartum haemorrhage prevention and treatment, with hypotension and water intoxication at infusion excess from its ADH like structure) against **vasopressin** and desmopressin from the diuretic lessons (V1 pressor rescue, V2 water conservation). Terlipressin, a vasopressin prodrug, serves variceal bleeding and hepatorenal syndrome where splanchnic constriction is the therapeutic point.",
+      "say": "Oxytocin contracts uterus and, in careless infusion volumes, retains water; vasopressin's family runs pressure and urine on separate receptors.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oxytocin territory",
+          "points": [
+            "Labour induction and augmentation protocols",
+            "Postpartum haemorrhage prevention and treatment",
+            "Hypotension with rapid bolus, tachycardia",
+            "Water intoxication with prolonged high volume infusions"
+          ]
+        },
+        "right": {
+          "title": "Vasopressin family recap",
+          "points": [
+            "Vasopressin: V1 pressor in shock, varices via terlipressin",
+            "Desmopressin: V2, central diabetes insipidus, von Willebrand release",
+            "Tolvaptan: V2 blockade from the diuretic lessons",
+            "Receptor geography predicts every indication"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Bromocriptine's second career in acromegaly and its first in prolactinoma share dopamine's pituitary logic, while **cabergoline** at Parkinson doses (previous module) imported valvular fibrosis surveillance from the ergot family, a dose dependent concern largely spared at endocrine micro doses. Quinagolide offers a non ergot dopamine agonist alternative where ergot effects forbid. Every pituitary prescription in this lesson is therefore also a cardiac, hepatic or pregnancy conversation scheduled in advance.",
+      "say": "Endocrine cabergoline doses spare valves that Parkinson doses threaten; dose writes the surveillance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dopamine agonists in pituitary disease",
+          "points": [
+            "Cabergoline twice weekly: prolactinoma first line",
+            "Bromocriptine: older, shorter acting, more nausea",
+            "Quinagolide: non ergot alternative",
+            "Restore gonadal function and shrink tumour"
+          ]
+        },
+        "right": {
+          "title": "Surveillance by dose",
+          "points": [
+            "Endocrine doses: fibrosis risk low, periodic review",
+            "Parkinson doses: echocardiographic valve surveillance",
+            "Impulse control effects shared with agonist class",
+            "Pregnancy: tumour expansion vigilance, drug often stopped"
+          ]
+        }
+      }
+    }
+  ]
+}

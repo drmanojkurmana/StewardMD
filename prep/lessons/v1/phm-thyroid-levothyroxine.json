@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-thyroid",
+  "subject": "pharmacology",
+  "title": "Thyroid Drugs: Levothyroxine, Antithyroid Drugs, Radioactive Iodine and Lugol Iodine",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Levothyroxine**, synthetic T4 identical to the gland's own product, is hypothyroidism's replacement standard: converted peripherally to active T3, half life about seven days forgiving missed doses, dosed near 1.6 microgram per kg in full replacement and titrated by TSH after six week equilibration. Absorption demands an empty stomach and separation from iron, calcium, bile resins and coffee, the mundane interactions behind most apparent treatment failures.",
+      "say": "Levothyroxine is replacement, not stimulation: empty stomach, six weeks, then TSH judges.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dose",
+            "label": "Levothyroxine on waking, empty stomach"
+          },
+          {
+            "id": "separate",
+            "label": "Iron, calcium and resins spaced by 4 hours"
+          },
+          {
+            "id": "six",
+            "label": "Six weeks to steady state and TSH check"
+          },
+          {
+            "id": "adjust",
+            "label": "Adjust by 12.5 to 25 microgram increments"
+          }
+        ],
+        "edges": [
+          [
+            "dose",
+            "separate"
+          ],
+          [
+            "separate",
+            "six"
+          ],
+          [
+            "six",
+            "adjust"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Liothyronine**, synthetic T3, acts within hours and leaves within a day, which makes it pharmacologically impatient: reserved for myxoedema coma protocols (contested), specific perioperative niches and combination therapy debates, it is never routine replacement because peaks provoke palpitations and steady state is fiction on its kinetics. Most T3 the body uses is made from T4 at the tissues, which is precisely the design levothyroxine exploits.",
+      "say": "Liothyronine is T3 in a hurry: niche and coma protocols, never the routine replacement.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Levothyroxine (T4)",
+          "points": [
+            "Half life about 7 days, smooth levels",
+            "Peripheral conversion supplies tissue T3",
+            "TSH titration after 6 weeks",
+            "Full replacement about 1.6 microgram per kg"
+          ]
+        },
+        "right": {
+          "title": "Liothyronine (T3)",
+          "points": [
+            "Half life about 1 day, peaky kinetics",
+            "Myxoedema coma and niche protocols",
+            "Palpitations and arrhythmia at peaks",
+            "Combination therapy evidence contested"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Thionamides **carbimazole** (converted to methimazole) and methimazole block thyroid peroxidase, halting iodide oxidation, organification and coupling so new hormone synthesis stops, while stored hormone leaks out over weeks before control lands. They do not block release or peripheral conversion, which is why beta blockers carry the symptomatic first month. Carbimazole's teratogenicity pattern (aplasia cutis, choanal atresia) moves first trimester prescribing to propylthiouracil in the next step.",
+      "say": "Thionamides stop the factory, not the warehouse; expect weeks, and cover symptoms meanwhile.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Methimazole and carbimazole",
+          "points": [
+            "Thyroid peroxidase inhibition, once daily dosing",
+            "Control over 4 to 8 weeks as stores deplete",
+            "First trimester embryopathy pattern",
+            "Rash, arthralgia and agranulocytosis shared below"
+          ]
+        },
+        "right": {
+          "title": "What thionamides cannot do",
+          "points": [
+            "No block on stored hormone release",
+            "No peripheral T4 to T3 conversion block",
+            "Beta blockers cover the symptomatic interval",
+            "Iodine loads can refuel the gland against them"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Propylthiouracil** adds peripheral T4 to T3 conversion blockade at high dose (its thyroid storm credential) at the price of thrice daily dosing and the class's hepatotoxicity black box, including fulminant failure in children that demoted it to first trimester pregnancy and storm niches. Both thionamides share **agranulocytosis** around 0.2 to 0.5 percent, heralded by sore throat and fever demanding a same day neutrophil count and drug cessation, never rechallenge with the sibling either.",
+      "say": "PTU blocks conversion for storms and first trimesters, and carries the liver warning that fenced it there.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sore",
+            "label": "Sore throat or fever on a thionamide"
+          },
+          {
+            "id": "fbc",
+            "label": "Same day full blood count"
+          },
+          {
+            "id": "stop",
+            "label": "Stop drug if neutrophils collapsed"
+          },
+          {
+            "id": "never",
+            "label": "Never rechallenge with either thionamide"
+          }
+        ],
+        "edges": [
+          [
+            "sore",
+            "fbc"
+          ],
+          [
+            "fbc",
+            "stop"
+          ],
+          [
+            "stop",
+            "never"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Radioactive iodine** (I 131) is taken up by the sodium iodide symporter and ablates thyroid tissue by beta emission over weeks to months, definitively treating Graves disease and toxic nodular goitre in one visit at the price of eventual hypothyroidism in most, radiation precautions for days, worsened orbitopathy risk in smokers with active eye disease, and absolute contraindication in pregnancy and breastfeeding. It is the treatment patients choose when drugs relapse and surgery frightens, counselled as controlled hypothyroidism traded for cure.",
+      "say": "Radioiodine cures by ablation and bills in hypothyroidism; pregnancy forbids it absolutely.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Radioiodine strengths",
+          "points": [
+            "Definitive, single visit therapy",
+            "Graves and toxic nodular disease",
+            "Hypothyroidism expected and easily replaced",
+            "Avoids surgical and anaesthetic risks"
+          ]
+        },
+        "right": {
+          "title": "Radioiodine fences",
+          "points": [
+            "Pregnancy and breastfeeding contraindicated",
+            "Orbitopathy may worsen, steroids cover high risk",
+            "Radiation contact precautions for days",
+            "Weeks to months before full effect"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Lugol iodine** (potassium iodide solution) exploits the Wolff Chaikoff physiology detailed next lesson: pharmacological iodide acutely blocks organification and, more usefully, hormone release, while reducing gland vascularity, making it the preoperative preparation for Graves thyroidectomy and a thyroid storm adjunct given after thionamide blockade is aboard. Its effect escapes within days to weeks, so it is a bridge, never a strategy, and starting it before thionamides in storm can refuel synthesis against them.",
+      "say": "Lugol iodine dams hormone release for days: after the thionamide in storm, before the surgeon in Graves.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "thio",
+            "label": "Thionamide blockade established first in storm"
+          },
+          {
+            "id": "lugol",
+            "label": "Lugol iodine at least an hour later"
+          },
+          {
+            "id": "release",
+            "label": "Hormone release blocked, vascularity falls"
+          },
+          {
+            "id": "window",
+            "label": "Effect escapes in days to weeks: bridge only"
+          }
+        ],
+        "edges": [
+          [
+            "thio",
+            "lugol"
+          ],
+          [
+            "lugol",
+            "release"
+          ],
+          [
+            "release",
+            "window"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Titration strategies** for antithyroid drugs split into titration regimens (adjust dose against free T4, lowest maintenance, preferred for adverse effects) and block and replace (full blockade plus levothyroxine, steadier but more drug exposure), with remission after 12 to 18 months in roughly half of Graves patients and relapse predicted by TSH receptor antibody levels, goitre size and smoking. Definitive therapy conversations begin at diagnosis, not at the first relapse.",
+      "say": "Titrate low or block and replace; half remit by eighteen months and antibodies predict who will not.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Titration regimen",
+          "points": [
+            "Dose adjusted to free hormone levels",
+            "Lowest exposure, fewer adverse effects",
+            "Preferred default in most guidelines",
+            "Remission trialled after 12 to 18 months"
+          ]
+        },
+        "right": {
+          "title": "Block and replace",
+          "points": [
+            "Full thionamide blockade plus levothyroxine",
+            "Stable levels, more drug exposure",
+            "Not in pregnancy (fetal blockade imbalance)",
+            "Relapse predictors: antibodies, goitre, smoking"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hypothyroid replacement** special situations close the lesson: pregnancy raises levothyroxine requirements by about a third from the first weeks (TSH targets trimester specific), malabsorption workups chase coeliac disease and atrophic gastritis behind escalating doses, subclinical hypothyroidism (raised TSH, normal free T4) treats selectively by level, pregnancy plans and symptoms, and elderly or cardiac patients start low (25 microgram) and climb slowly lest replacement unmask ischaemia.",
+      "say": "Pregnancy adds a third, malabsorption explains resistance, and old hearts start at twenty five micrograms.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Replacement adjustments",
+          "points": [
+            "Pregnancy: increase about 30 percent early",
+            "Rising dose needs: coeliac and gastritis review",
+            "Interacting drugs spaced or dose rebalanced",
+            "TSH rechecked 6 weeks after any change"
+          ]
+        },
+        "right": {
+          "title": "Cautious starts",
+          "points": [
+            "Elderly and ischaemic hearts: 25 microgram starts",
+            "Subclinical disease: treat by TSH band and context",
+            "Central hypothyroidism: free T4, not TSH, steers",
+            "Myxoedema coma: intravenous, steroid covered, intensive care"
+          ]
+        }
+      }
+    }
+  ]
+}
