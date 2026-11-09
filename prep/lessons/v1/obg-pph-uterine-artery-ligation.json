@@ -1,0 +1,202 @@
+{
+ "v": 1,
+ "module": "obg-pph",
+ "subject": "obstetrics-gynaecology",
+ "title": "Artery Ligation, Retained Placenta, Inversion and Amniotic Embolism",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Tying the ascending uterine artery at the lower segment devascularises the uterus stepwise as **uterine artery ligation**. Adding tubo ovarian anastomosis ligation completes the stepwise devascularisation ladder. Fertility and menstruation usually survive the procedure. Pulse pressure in the uterine arteries falls by about 85 percent after bilateral ligation, letting clot stabilise.",
+   "say": "Uterine artery ligation stepwise devascularises the uterus while preserving fertility usually.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Ligated"
+    ],
+    "rows": [
+     [
+      "One",
+      "Uterine arteries"
+     ],
+     [
+      "Two",
+      "Tubo ovarian anastomoses"
+     ],
+     [
+      "Three",
+      "Internal iliac arteries"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ligating the anterior division of the internal iliac artery reduces pelvic pulse pressure in **internal iliac ligation**. Collaterals prevent tissue necrosis while clotting catches up. It demands retroperitoneal skill and ureter identification. The ureter crosses under the internal iliac artery origin and is the structure most at risk during the tie.",
+   "say": "Internal iliac ligation reduces pelvic pulse pressure while collaterals prevent necrosis.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-internal-iliac-artery-ligation.webp",
+    "alt": "Internal iliac artery ligation.",
+    "caption": "Internal iliac ligation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Placenta failing to deliver beyond thirty minutes with ongoing management is **retained placenta**. Manual removal under anaesthesia follows, with accreta the feared finding. Prophylactic antibiotics cover the intrauterine manipulation. A placenta that shows no separation signs with a contracted uterus raises accreta before traction is tried.",
+   "say": "Retained placenta needs manual removal under anaesthesia with accreta feared.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-manual-removal-of-placenta.webp",
+    "alt": "Manual removal of retained placenta.",
+    "caption": "Manual removal. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The uterus turning inside out through the cervix, usually from cord traction on an unseparated placenta, is **uterine inversion**. A vaginal mass with absent fundus and shock out of proportion announces it. Immediate manual replacement under relaxation, the Johnson manoeuvre, precedes any placental removal.",
+   "say": "Uterine inversion turns the uterus inside out and needs immediate manual replacement.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Fundus absent, mass vaginal"
+     },
+     {
+      "id": "n1",
+      "label": "Relax uterus"
+     },
+     {
+      "id": "n2",
+      "label": "Johnson replacement"
+     },
+     {
+      "id": "n3",
+      "label": "Then remove placenta"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fetal debris entering maternal circulation causing collapse, seizures and DIC is **amniotic fluid embolism**. Now called anaphylactoid syndrome of pregnancy, it strikes during labour or just after delivery. Supportive critical care is the only treatment. Blood gases show a wide anion gap acidosis, and seizures come from cerebral oedema rather than a primary brain injury.",
+   "say": "Amniotic fluid embolism collapses the mother with seizures and DIC needing critical care.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Presentation",
+     "points": [
+      "Sudden hypoxia and hypotension",
+      "Seizures possible",
+      "DIC follows"
+     ]
+    },
+    "right": {
+     "title": "Treatment",
+     "points": [
+      "Supportive critical care",
+      "Blood products",
+      "No specific antidote"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Interventional radiology embolising pelvic arteries controls bleeding without laparotomy as **arterial embolisation**. It suits stable patients in equipped centres, often after caesarean haemorrhage. Fertility preservation is its great attraction. Success rates exceed 90 percent for post caesarean bleeding in centres that offer it round the clock.",
+   "say": "Arterial embolisation controls bleeding without laparotomy in stable equipped patients.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/postpartum-haemorrhage-fig1.webp",
+    "alt": "Embolisation within haemorrhage options.",
+    "caption": "Haemorrhage options. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Hysterectomy decisions made earlier save lives, following the principle of **timely hysterectomy**. Subtotal hysterectomy is faster when the cervix is not the bleeding source. Pride and fertility hopes must not postpone it past survivability. Subtotal hysterectomy leaves the cervix and is quicker, unless the bleeding comes from the lower segment or cervix.",
+   "say": "Timely hysterectomy saves lives and subtotal operation is faster when suitable.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Conservative steps failing"
+     },
+     {
+      "id": "n1",
+      "label": "Senior decision early"
+     },
+     {
+      "id": "n2",
+      "label": "Subtotal if cervix innocent"
+     },
+     {
+      "id": "n3",
+      "label": "Total if cervix involved"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Secondary haemorrhage days to weeks after delivery usually means infection with retained tissue, termed **secondary PPH**. Ultrasound, antibiotics and gentle evacuation treat it. Ergometrine has a specific role here unlike in primary atony protocols. Curettage is gentle and ultrasound guided, because the infected postpartum uterus perforates easily.",
+   "say": "Secondary PPH days later means infection with retained tissue needing evacuation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Timing",
+     "Usual cause"
+    ],
+    "rows": [
+     [
+      "Primary, under 24h",
+      "Atony"
+     ],
+     [
+      "Secondary, days to weeks",
+      "Infection, retained tissue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Blood product ratios approximating whole blood guide massive transfusion as **balanced transfusion**. Red cells, plasma and platelets run together with fibrinogen and calcium. Point of care viscoelastic tests refine the recipe. Calcium falls during massive transfusion from citrate binding, so ionised calcium is checked and replaced.",
+   "say": "Balanced transfusion runs cells, plasma, platelets and fibrinogen together.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Massive transfusion in obstetric haemorrhage.",
+    "caption": "Massive transfusion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

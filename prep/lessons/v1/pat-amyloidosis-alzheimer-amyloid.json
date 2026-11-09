@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-amyloidosis",
+  "subject": "pathology",
+  "title": "Alzheimer Amyloid, Sago and Lardaceous Spleen, and Amyloid Biopsy Sites",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "In Alzheimer disease the amyloid precursor protein is cut by beta and gamma secretases into sticky Abeta peptides that aggregate in neuritic plaques and cerebral vessel walls, while tau forms intracellular tangles. The deposited peptide is **Abeta amyloid**, making Alzheimer disease the commonest localised amyloidosis of ageing brain.",
+      "say": "Alzheimer plaques are localised Abeta amyloid in brain, paired with tau tangles inside neurons.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/alzheimers-disease-fig2.webp",
+        "alt": "Alzheimer disease neuropathology",
+        "caption": "Alzheimer disease neuropathology with amyloid plaques and neurofibrillary tangles."
+      }
+    },
+    {
+      "tx": "Cerebral amyloid angiopathy weakens cortical and leptomeningeal vessels until they rupture, causing lobar haemorrhages in elderly patients that contrast with the deep hypertensive bleeds of basal ganglia and pons. Boston criteria combine imaging and pathology for diagnosis, and the vessel fragility comes from **cerebral amyloid angiopathy**.",
+      "say": "Amyloid laden cortical vessels rupture into lobar haemorrhages; that location separates amyloid bleeds from hypertensive ones.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Amyloid angiopathy bleed",
+          "points": [
+            "Lobar, cortical, elderly patient",
+            "Multiple microbleeds on MRI",
+            "Recurrent haemorrhage risk"
+          ]
+        },
+        "right": {
+          "title": "Hypertensive bleed",
+          "points": [
+            "Basal ganglia, thalamus, pons, cerebellum",
+            "Chronic hypertension history",
+            "Deep perforator vessel rupture"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Amyloid PET ligands and cerebrospinal fluid Abeta and phosphorylated tau now confirm Alzheimer pathology during life, shifting diagnosis from exclusion toward biology, and anti-amyloid antibodies modestly slow early disease in selected patients. Brain imaging of plaque burden is achieved with **amyloid PET scanning**.",
+      "say": "Amyloid PET and spinal fluid biomarkers now prove Alzheimer pathology during life rather than only at autopsy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/alzheimers-disease-fig1.webp",
+        "alt": "Brain amyloid PET scans",
+        "caption": "Brain PET imaging demonstrating cerebral amyloid burden in Alzheimer disease."
+      }
+    },
+    {
+      "tx": "In the spleen, amyloid limited to follicles produces pale discrete nodules likened to grains of sago, while deposition expanded into red pulp and sinus walls gives a diffuse waxy organ likened to lard. Generations of pathologists have distinguished these patterns as **sago spleen** and lardaceous spleen respectively.",
+      "say": "Follicular amyloid gives a sago spleen of discrete grains; diffuse red pulp deposition gives the waxy lardaceous spleen.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sago spleen",
+          "points": [
+            "Amyloid confined to splenic follicles",
+            "Discrete pale grains on cut surface",
+            "Follicular pattern on microscopy"
+          ]
+        },
+        "right": {
+          "title": "Lardaceous spleen",
+          "points": [
+            "Amyloid in red pulp and sinus walls",
+            "Diffuse firm waxy enlargement",
+            "More advanced splenic involvement"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Splenic amyloid rarely declares itself clinically beyond enlargement, yet a fragile amyloid laden spleen can rupture spontaneously, and hyposplenism from advanced deposition raises encapsulated organism risk. The spleen therefore teaches gross pathology patterns beautifully while seldom driving management; its follicular pattern remains the **sago spleen** of textbooks.",
+      "say": "The sago spleen is a gross pathology classic; clinically, splenic amyloid matters mainly through rupture and hyposplenism risk.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Organ",
+          "Amyloid pattern",
+          "Clinical consequence"
+        ],
+        "rows": [
+          [
+            "Spleen, follicular",
+            "Sago spleen nodules",
+            "Usually silent enlargement"
+          ],
+          [
+            "Spleen, diffuse",
+            "Lardaceous spleen",
+            "Rupture and hyposplenism risk"
+          ],
+          [
+            "Liver",
+            "Sinusoidal, space of Disse",
+            "Firm hepatomegaly, mild enzyme rise"
+          ],
+          [
+            "Kidney",
+            "Glomerular and vascular",
+            "Nephrotic syndrome"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Abdominal fat pad aspiration remains the favoured first biopsy for suspected systemic amyloidosis because it is quick, safe, and positive in most systemic AL and many AA cases. Sensitivity falls in transthyretin disease, so a negative aspirate with a suspicious heart still earns an endomyocardial biopsy; the screening site is the **abdominal fat pad**.",
+      "say": "Fat pad aspiration is the safe first biopsy for systemic amyloid, though cardiac transthyretin disease often needs heart tissue.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Suspect systemic amyloidosis clinically"
+          },
+          {
+            "id": "b",
+            "label": "Aspirate abdominal fat, stain with Congo red"
+          },
+          {
+            "id": "c",
+            "label": "Type any positive deposit precisely"
+          },
+          {
+            "id": "d",
+            "label": "Biopsy involved organ if negative and suspicion persists"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Rectal biopsy, sampling submucosal vessels where amyloid deposits early, was the historical workhorse before fat aspiration and still helps when abdominal tissue is inadequate, as do minor salivary gland and gingival biopsies. Whichever site is chosen, Congo red confirmation plus typing is mandatory; the traditional alternative site is **rectal biopsy**.",
+      "say": "Rectal submucosal vessels were the classic biopsy target and remain a useful alternative when fat aspiration fails.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Biopsy site",
+          "Strength",
+          "Limitation"
+        ],
+        "rows": [
+          [
+            "Abdominal fat pad",
+            "Safe, quick, good in AL",
+            "Less sensitive in ATTR"
+          ],
+          [
+            "Rectal submucosa",
+            "Vessels deposit early",
+            "Needs endoscopy, small samples"
+          ],
+          [
+            "Minor salivary gland",
+            "Office procedure",
+            "Moderate sensitivity"
+          ],
+          [
+            "Involved organ",
+            "Highest yield",
+            "Bleeding risk in heart or kidney"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "One thread ties brain plaques to sago spleens: identical beta pleated chemistry produces localised disease where precursor is made locally and systemic disease where it circulates. Recognising which compartment a patient inhabits prevents futile systemic therapy for Alzheimer amyloid and missed clones in systemic disease; that distinction is **localised versus systemic amyloidosis**.",
+      "say": "Ask whether amyloid is localised, like Alzheimer brain disease, or systemic with a circulating precursor; treatment depends on the answer.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Localised amyloid",
+          "points": [
+            "Precursor made at the site",
+            "Alzheimer Abeta, endocrine tumours",
+            "Organ directed management"
+          ]
+        },
+        "right": {
+          "title": "Systemic amyloid",
+          "points": [
+            "Circulating precursor protein",
+            "AL, AA, ATTR, dialysis types",
+            "Precursor directed systemic therapy"
+          ]
+        }
+      }
+    }
+  ]
+}

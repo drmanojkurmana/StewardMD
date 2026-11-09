@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "pat-immunodeficiency",
+  "subject": "pathology",
+  "title": "Wiskott-Aldrich Syndrome, Ataxia Telangiectasia, and AIDS Pathogenesis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A boy with eczema from infancy, bleeding from small dysfunctional platelets, and recurrent infections carries a cytoskeletal defect in haematopoietic cells caused by mutation of the WAS gene on the X chromosome. Small platelet size distinguishes this condition, the classic triad defining **Wiskott-Aldrich syndrome**, from other bleeding disorders of childhood.",
+      "say": "Eczema, bleeding with small platelets, and recurrent infections in a boy spell Wiskott-Aldrich syndrome.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Wiskott-Aldrich syndrome",
+          "points": [
+            "Eczema, infections, bleeding triad",
+            "Small platelets, low platelet count",
+            "Low IgM, raised IgA and IgE"
+          ]
+        },
+        "right": {
+          "title": "Immune thrombocytopenia",
+          "points": [
+            "Isolated bleeding, well child",
+            "Large young platelets, normal count recovery",
+            "Normal immunoglobulins, no eczema"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Progressive cerebellar ataxia appearing in a toddler, followed by oculocutaneous telangiectasia of the conjunctiva and ears, recurrent sinopulmonary infection, and extreme clinical radiosensitivity, reflects failure to repair DNA double strand breaks after ionising radiation and normal metabolic damage. The ATM kinase defect behind it also raises alpha-fetoprotein and lymphoma risk, defining **ataxia-telangiectasia**.",
+      "say": "Toddler ataxia plus conjunctival telangiectasia and raised alpha-fetoprotein point to ataxia telangiectasia, a DNA repair disorder.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ataxia-telangiectasia-like-disorder-fig1.webp",
+        "alt": "DNA double strand break repair defect",
+        "caption": "DNA double strand break repair failure, the molecular basis of ataxia telangiectasia and its radiosensitivity."
+      }
+    },
+    {
+      "tx": "Human immunodeficiency virus enters CD4 T cells and macrophages through its gp120 envelope protein binding CD4 with CCR5 or CXCR4 coreceptors, then integrates proviral DNA using reverse transcriptase and integrase. Preferential loss of gut associated CD4 cells occurs within weeks, beginning the long depletion that ends as **acquired immunodeficiency syndrome**.",
+      "say": "HIV uses gp120 to bind CD4 and a coreceptor, integrates into the host genome, and depletes gut CD4 cells within weeks.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hiv-aids-fig1.webp",
+        "alt": "HIV progression and markers",
+        "caption": "HIV progression with falling CD4 count, rising viral load, and stage defining opportunistic illnesses."
+      }
+    },
+    {
+      "tx": "Without treatment, viral replication and immune activation destroy roughly fifty to one hundred CD4 cells per microlitre each year, while viral load set point predicts the speed of that decline. Opportunistic diseases cluster at predictable thresholds, Pneumocystis below two hundred and CMV or MAC below fifty; the measurement guiding all staging is the **CD4 count**.",
+      "say": "The CD4 count stages HIV: Pneumocystis appears below two hundred, while CMV and MAC wait until below fifty.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "CD4 count (per microlitre)",
+          "Typical illnesses",
+          "Action"
+        ],
+        "rows": [
+          [
+            "Above 500",
+            "Acute seroconversion, lymphadenopathy",
+            "Start ART, monitor viral load"
+          ],
+          [
+            "200 to 500",
+            "Tuberculosis, herpes zoster, candidiasis",
+            "Continue ART, screen for TB"
+          ],
+          [
+            "Below 200",
+            "Pneumocystis pneumonia, toxoplasmosis",
+            "Add co-trimoxazole prophylaxis"
+          ],
+          [
+            "Below 50",
+            "CMV retinitis, MAC infection",
+            "Add MAC prophylaxis if not virally suppressed"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Kaposi sarcoma, caused by human herpesvirus 8, produces violaceous plaques and nodules on skin, mouth, gut, and lung in advanced HIV, and can flare paradoxically when immunity recovers after starting therapy. Effective antiretroviral therapy is itself the first treatment, with chemotherapy for visceral disease; the virus driving these lesions is **human herpesvirus 8**.",
+      "say": "Violaceous plaques in advanced HIV mean Kaposi sarcoma driven by HHV-8; starting effective ART is its first treatment.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/kaposi-sarcoma-fig1.webp",
+        "alt": "Kaposi sarcoma violaceous plaques",
+        "caption": "Kaposi sarcoma violaceous plaques of skin in advanced HIV infection."
+      }
+    },
+    {
+      "tx": "HIV associated lymphomas, including diffuse large B cell, Burkitt, and primary CNS lymphoma, arise at higher rates because failed T cell surveillance releases Epstein-Barr virus driven B cell proliferation. Primary CNS lymphoma in AIDS is almost always EBV positive and typically appears below fifty CD4 cells; the surveillance failure centres on lost **EBV-specific T cell control**.",
+      "say": "When T cell surveillance fails, EBV driven lymphomas emerge, including primary CNS lymphoma at very low CD4 counts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "At higher CD4 counts",
+          "points": [
+            "Kaposi sarcoma can still occur",
+            "Hodgkin lymphoma risk raised",
+            "ART reduces but does not erase risk"
+          ]
+        },
+        "right": {
+          "title": "At CD4 below 50 to 100",
+          "points": [
+            "Primary CNS lymphoma, EBV positive",
+            "Diffuse large B cell lymphoma",
+            "CMV and MAC opportunistic infections"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Modern antiretroviral therapy combining two nucleoside agents with an integrase inhibitor suppresses viral load to undetectable levels, restores CD4 counts, and makes sexual transmission effectively zero. Treatment is offered to every patient regardless of CD4 count, a policy summarised as **universal antiretroviral therapy** with treatment as prevention.",
+      "say": "Treat everyone with HIV regardless of CD4 count; an undetectable viral load means the virus is not sexually transmitted.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Diagnose HIV, baseline CD4 and viral load"
+          },
+          {
+            "id": "b",
+            "label": "Start integrase inhibitor based ART promptly"
+          },
+          {
+            "id": "c",
+            "label": "Viral load undetectable within months"
+          },
+          {
+            "id": "d",
+            "label": "CD4 recovery, prophylaxis reviewed, U equals U"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Wiskott-Aldrich and ataxia telangiectasia share a warning with HIV care: immune defects declare themselves through pattern recognition, unusual organisms, unusual severity, or autoimmunity and malignancy arriving too early. Splenectomy is avoided in Wiskott-Aldrich where possible because of sepsis risk, and definitive cure needs stem cell transplant; that pattern habit is **immunodeficiency pattern recognition**.",
+      "say": "Unusual organisms, unusual severity, and early autoimmunity or malignancy should always trigger an immunodeficiency workup.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clue",
+          "Points toward",
+          "First test"
+        ],
+        "rows": [
+          [
+            "Eczema, small platelets, infections",
+            "Wiskott-Aldrich syndrome",
+            "Platelet size, WAS protein, genetics"
+          ],
+          [
+            "Ataxia, telangiectasia, high AFP",
+            "Ataxia-telangiectasia",
+            "AFP, immunoglobulins, ATM genetics"
+          ],
+          [
+            "Oral candidiasis, PCP, weight loss",
+            "Advanced HIV",
+            "HIV test, CD4 count, viral load"
+          ],
+          [
+            "Recurrent meningococcal disease",
+            "Complement deficiency",
+            "CH50 and complement levels"
+          ]
+        ]
+      }
+    }
+  ]
+}

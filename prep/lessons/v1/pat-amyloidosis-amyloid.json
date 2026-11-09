@@ -1,0 +1,199 @@
+{
+  "v": 1,
+  "module": "pat-amyloidosis",
+  "subject": "pathology",
+  "title": "Amyloid: Beta-Pleated Sheets, Congo Red, and AL Amyloidosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Diverse misfolded proteins share one final architecture: insoluble fibrils built from cross beta-pleated sheets that resist proteolysis and deposit between cells, distorting tissue architecture and strangling organ function. The material itself, defined by that ultrastructure rather than by its precursor protein, is **amyloid**.",
+      "say": "Amyloid is not one protein; it is the shared beta pleated sheet fibril that many misfolded proteins converge upon.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Precursor protein misfolds into beta sheets"
+          },
+          {
+            "id": "b",
+            "label": "Insoluble fibrils resist proteolysis"
+          },
+          {
+            "id": "c",
+            "label": "Extracellular deposition distorts tissue"
+          },
+          {
+            "id": "d",
+            "label": "Progressive organ dysfunction follows"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "On routine staining amyloid appears as amorphous eosinophilic extracellular material, but its identity is proven when Congo red dye aligns along the fibrils and rotates polarised light into a diagnostic colour. That colour change under crossed polarisers, described in every examination, is **apple-green birefringence**.",
+      "say": "Congo red staining with apple green birefringence under polarised light is the defining test for amyloid.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/amyloidosis-fig1.webp",
+        "alt": "Amyloidosis Congo red stain",
+        "caption": "Congo red staining of amyloid deposits, which show apple green birefringence under polarised light."
+      }
+    },
+    {
+      "tx": "The beta-pleated sheet explains bedside paradoxes: deposits stain weakly with periodic acid Schiff, resist enzymatic digestion, and bind thioflavin dyes, while organs become enlarged, firm, and waxy rather than shrunken. A big firm tongue, hepatomegaly, and nephrotic syndrome together should trigger biopsy for **systemic amyloidosis**.",
+      "say": "A waxy enlarged tongue, firm hepatomegaly, and nephrotic syndrome together should make you biopsy for amyloid.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Suggests amyloid",
+          "points": [
+            "Macroglossia and firm hepatomegaly",
+            "Nephrotic range proteinuria",
+            "Restrictive cardiomyopathy with low ECG voltage"
+          ]
+        },
+        "right": {
+          "title": "Argues against amyloid",
+          "points": [
+            "Shrunken firm organs",
+            "High ECG voltage with true hypertrophy",
+            "Deposits digestible and Congo red negative"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In AL disease a clonal plasma cell population secretes free light chains, usually lambda, whose variable regions misfold into fibrils that injure heart, kidney, nerves, and gut. Because the precursor is a light chain, serum free light chain assay and bone marrow examination join tissue typing in every workup for **AL amyloidosis**.",
+      "say": "AL amyloidosis comes from clonal plasma cell light chains, so free light chains and marrow examination belong in every workup.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/al-amyloidosis-fig1.webp",
+        "alt": "AL amyloidosis organ infiltration",
+        "caption": "AL amyloidosis organ infiltration affecting heart, kidney, nerves, and gastrointestinal tract."
+      }
+    },
+    {
+      "tx": "Typing the deposit is not academic decoration: mass spectrometry of laser dissected Congo red positive tissue is the reference standard, because AL, AA, and transthyretin disease demand entirely different treatments. Mistaking transthyretin cardiac amyloid for AL exposes a patient to needless chemotherapy, so precise **amyloid typing** precedes therapy.",
+      "say": "Never treat amyloid before typing it; mass spectrometry prevents the classic error of giving chemotherapy for transthyretin disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Type",
+          "Precursor",
+          "Typical setting"
+        ],
+        "rows": [
+          [
+            "AL",
+            "Immunoglobulin light chain",
+            "Plasma cell clone, myeloma spectrum"
+          ],
+          [
+            "AA",
+            "Serum amyloid A",
+            "Chronic inflammation, FMF, rheumatoid disease"
+          ],
+          [
+            "ATTR",
+            "Transthyretin",
+            "Ageing heart, carpal tunnel, neuropathy"
+          ],
+          [
+            "A-beta2M",
+            "Beta2 microglobulin",
+            "Long term dialysis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The kidney is the commonest biopsy proven target: glomerular mesangial expansion by amyloid produces nephrotic syndrome, while vascular deposits narrow vessels and tubular deposits impair concentration. Renal involvement also dominates AA disease in chronic inflammation, and the organ pattern is charted as **renal amyloidosis** presenting with heavy proteinuria.",
+      "say": "Kidney involvement usually presents as nephrotic syndrome, whether the amyloid is AL or AA in type.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/amyloid-nephropathy-fig1.webp",
+        "alt": "Renal amyloidosis pathologic features",
+        "caption": "Renal amyloidosis with glomerular and vascular amyloid deposition causing nephrotic syndrome."
+      }
+    },
+    {
+      "tx": "Abdominal fat pad aspiration offers a low risk first biopsy that detects most systemic AL cases, with rectal, minor salivary gland, and involved organ biopsy reserved for negative results with persistent suspicion. A negative fat pad never excludes disease, a limitation students must state when proposing **fat pad biopsy**.",
+      "say": "Fat pad aspiration is the safe first biopsy, but a negative result never excludes amyloidosis when suspicion remains high.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Suspect amyloid from organ pattern and clues"
+          },
+          {
+            "id": "b",
+            "label": "Abdominal fat pad aspiration with Congo red"
+          },
+          {
+            "id": "c",
+            "label": "Type positive deposits by mass spectrometry"
+          },
+          {
+            "id": "d",
+            "label": "Biopsy involved organ if fat pad is negative"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cardiac involvement decides survival in AL amyloidosis: restrictive physiology, conduction disease, and biomarker staging with troponin and NT-proBNP guide how aggressively the plasma cell clone can be treated. Daratumumab based chemotherapy has transformed haematological response rates, and success is measured by falling free light chains, the strategy of **clone-directed therapy**.",
+      "say": "In AL disease, treat the plasma cell clone and stage the heart; falling free light chains are the measure of success.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "AL cardiac amyloid",
+          "points": [
+            "Clone directed chemotherapy urgently",
+            "Troponin and NT-proBNP stage prognosis",
+            "Avoid digoxin and calcium channel blockers"
+          ]
+        },
+        "right": {
+          "title": "ATTR cardiac amyloid",
+          "points": [
+            "Transthyretin stabiliser or silencer therapy",
+            "Bone scintigraphy can diagnose without biopsy",
+            "Chemotherapy has no role"
+          ]
+        }
+      }
+    }
+  ]
+}

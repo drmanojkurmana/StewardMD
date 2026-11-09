@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-tumour-diagnosis",
+  "subject": "pathology",
+  "title": "Cancer Cachexia and Paraneoplastic Syndromes",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Cancer cachexia wastes skeletal muscle and fat through tumour and host cytokines such as TNF, interleukin 6, and proteolysis inducing factor, and unlike starvation it cannot be reversed by feeding alone. Loss exceeding five percent of weight with anorexia and inflammation defines **cancer cachexia**, a staging and survival marker in its own right.",
+      "say": "Cachexia is cytokine driven wasting that feeding alone cannot reverse; it predicts survival independently of tumour stage.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cancer-cachexia-fig1.webp",
+        "alt": "Cancer cachexia pathophysiologic mechanisms",
+        "caption": "Pathophysiologic mechanisms of cancer cachexia, from cytokines to muscle and fat wasting."
+      }
+    },
+    {
+      "tx": "Paraneoplastic syndromes are remote effects of cancer not explained by metastasis or mass effect, produced by hormones, cytokines, or autoimmunity the tumour provokes, and they often announce an occult primary. Recognising the pattern starts the tumour hunt; the umbrella concept is **paraneoplastic syndromes**.",
+      "say": "Paraneoplastic syndromes are the tumour's remote effects; they frequently reveal a cancer nobody yet knew existed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Endocrine paraneoplasia",
+          "points": [
+            "PTHrP hypercalcaemia, SIADH, ectopic ACTH",
+            "Biochemistry betrays the tumour",
+            "Treat tumour and hormone effect"
+          ]
+        },
+        "right": {
+          "title": "Neurological paraneoplasia",
+          "points": [
+            "Onconeural antibodies attack nervous system",
+            "Syndrome may precede tumour by years",
+            "Immunotherapy plus tumour treatment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Squamous lung and other tumours secreting parathyroid hormone related protein drive bone resorption and renal calcium retention until confusion, constipation, polyuria, and stones supervene with suppressed native PTH. This humoral mechanism accounts for most malignancy hypercalcaemia; the mediator is **PTHrP**.",
+      "say": "PTHrP from squamous tumours causes most cancer hypercalcaemia, with native PTH suppressed on testing.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hypercalcemia-fig1.webp",
+        "alt": "Hypercalcaemia of malignancy pathophysiology",
+        "caption": "Hypercalcaemia of malignancy pathophysiology, dominated by tumour secreted PTHrP."
+      }
+    },
+    {
+      "tx": "Small cell lung cancer cells release antidiuretic hormone autonomously, concentrating urine while diluting serum sodium until seizures threaten, a syndrome graded by symptoms and corrected cautiously to avoid osmotic demyelination. The eponymous disorder is **SIADH**, syndrome of inappropriate antidiuretic hormone secretion.",
+      "say": "Small cell lung cancer secreting ADH causes SIADH; correct the sodium slowly to protect the pons.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Syndrome",
+          "Tumour prototype",
+          "Bedside clue"
+        ],
+        "rows": [
+          [
+            "PTHrP hypercalcaemia",
+            "Squamous lung carcinoma",
+            "High calcium, low PTH"
+          ],
+          [
+            "SIADH",
+            "Small cell lung carcinoma",
+            "Low sodium, concentrated urine"
+          ],
+          [
+            "Ectopic ACTH Cushing",
+            "Small cell, carcinoid",
+            "Rapid Cushing, hypokalaemia, pigmentation"
+          ],
+          [
+            "Trousseau migratory thrombosis",
+            "Pancreatic adenocarcinoma",
+            "Recurrent migratory vein inflammation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Ectopic ACTH from small cell lung cancer or bronchial carcinoid floods the body with cortisol faster than classic pituitary disease, so hypokalaemia, hypertension, hyperpigmentation, and weakness dominate over slow centripetal obesity. The speed of onset is the diagnostic gift of **ectopic ACTH syndrome**.",
+      "say": "Ectopic ACTH moves fast: hypokalaemia, pigmentation, and weakness arrive before the classic Cushing body habitus can form.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pituitary Cushing disease",
+          "points": [
+            "Slow years of centripetal obesity",
+            "Striae, bruising, proximal weakness",
+            "ACTH from pituitary adenoma"
+          ]
+        },
+        "right": {
+          "title": "Ectopic ACTH syndrome",
+          "points": [
+            "Weeks to months, weight may fall",
+            "Hypokalaemia, pigmentation, oedema",
+            "Small cell lung cancer, carcinoid"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Migratory superficial thrombophlebitis appearing in unusual sites, resolving then recurring elsewhere, betrays the prothrombotic mucin and tissue factor biology of pancreatic and other adenocarcinomas. Trousseau described it in himself before dying of gastric cancer; the sign is **Trousseau syndrome** of migratory thrombophlebitis.",
+      "say": "Migratory thrombophlebitis in odd places means occult adenocarcinoma, classically pancreatic; Trousseau diagnosed himself this way.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Adenocarcinoma secretes mucin and tissue factor"
+          },
+          {
+            "id": "b",
+            "label": "Platelets and clotting activate systemically"
+          },
+          {
+            "id": "c",
+            "label": "Superficial veins inflame, settle, recur elsewhere"
+          },
+          {
+            "id": "d",
+            "label": "Venous thromboembolism risk stays high"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cachexia management combines treating the cancer, early dietetic support, appetite stimulants in selected patients, exercise where possible, and honest prognostic conversation, because tubes and drips do not reverse cytokine wasting. Multimodal supportive care organised early is **integrated palliative nutrition care**.",
+      "say": "Feed the patient, treat the cancer, move the muscles, and talk honestly; artificial feeding does not reverse cachexia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cachexia element",
+          "Intervention",
+          "Realistic goal"
+        ],
+        "rows": [
+          [
+            "Anorexia",
+            "Dietitian review, small energy dense meals",
+            "Comfort and enjoyment of food"
+          ],
+          [
+            "Muscle loss",
+            "Resistance activity as able",
+            "Function and independence"
+          ],
+          [
+            "Inflammation",
+            "Treat cancer, manage symptoms",
+            "Slow the wasting trajectory"
+          ],
+          [
+            "Distress",
+            "Family counselling on weight loss",
+            "Reduce guilt around eating"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The examination lesson is symmetrical: unexplained hypercalcaemia, hyponatraemia, Cushing features, migratory clots, or wasting in an adult obliges a search for the tumour behind the curtain. Each syndrome in this lesson is a tumour marker written in physiology rather than in a laboratory tube; that habit is **paraneoplastic pattern recognition**.",
+      "say": "Treat strange biochemistry in an adult as a possible tumour announcement and hunt for the primary behind it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Syndrome shouts tumour",
+          "points": [
+            "PTH suppressed hypercalcaemia",
+            "SIADH with lung mass risk",
+            "Migratory thrombophlebitis"
+          ]
+        },
+        "right": {
+          "title": "First responses",
+          "points": [
+            "Hydrate, bisphosphonate for calcium",
+            "Fluid restrict, correct sodium slowly",
+            "Anticoagulate and image for primary"
+          ]
+        }
+      }
+    }
+  ]
+}

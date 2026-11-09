@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "pat-carcinogenic-agents",
+  "subject": "pathology",
+  "title": "Chemical Carcinogens: Initiators, Promoters, Aflatoxin, Asbestos, and Benzene",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Chemical carcinogenesis unfolds in stages: an initiator permanently mutates DNA in a brief irreversible encounter, promoters then expand the initiated clone reversibly without mutating, and progression adds malignant autonomy. Separating the mutating spark from the expanding pressure gives the classic **initiation and promotion** model.",
+      "say": "Initiators mutate permanently in a moment; promoters expand the clone reversibly; progression completes the cancer.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Initiator causes irreversible DNA mutation"
+          },
+          {
+            "id": "b",
+            "label": "Promoter expands initiated clone reversibly"
+          },
+          {
+            "id": "c",
+            "label": "Further mutations accumulate"
+          },
+          {
+            "id": "d",
+            "label": "Progression to autonomous malignancy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Most chemical initiators are procarcinogens needing metabolic activation, often by cytochrome P450 enzymes, into ultimate carcinogens that bind DNA as adducts, which is why liver and lung, the activating organs, suffer first. Individual P450 variation partly explains differing susceptibility; the activation step is **metabolic activation**.",
+      "say": "Most initiators need P450 activation before they can bind DNA, which is why liver and lung take the first hit.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Initiator",
+          "points": [
+            "Mutagenic, irreversible, no threshold assumed",
+            "Single brief exposure can suffice",
+            "Polycyclic hydrocarbons, aflatoxin"
+          ]
+        },
+        "right": {
+          "title": "Promoter",
+          "points": [
+            "Non-mutagenic, reversible, needs repetition",
+            "Hormones, chronic irritation, some drugs",
+            "Effect lost when promoter withdrawn early"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Aflatoxin B1, made by Aspergillus flavus growing on warm stored grain and groundnuts, is activated to an epoxide that stamps a signature TP53 mutation and synergises violently with hepatitis B to cause hepatocellular carcinoma. Food storage and hepatitis vaccination are therefore cancer prevention; the mycotoxin is **aflatoxin B1**.",
+      "say": "Aflatoxin B1 from mouldy grain plus hepatitis B multiplies liver cancer risk; dry storage and vaccination prevent it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hepatocellular-carcinoma-fig1.webp",
+        "alt": "Hepatocellular carcinoma imaging features",
+        "caption": "Hepatocellular carcinoma, the cancer driven jointly by aflatoxin exposure and chronic hepatitis B."
+      }
+    },
+    {
+      "tx": "Vinyl chloride monomer, inhaled by polyvinyl chloride workers, causes hepatic angiosarcoma, a tumour so rare that its appearance in workers exposed the culprit, while arsenic causes skin cancers and thorotrast caused the same liver tumour historically. Rare tumour plus shared workplace equals occupational carcinogen; the vinyl chloride product is **hepatic angiosarcoma**.",
+      "say": "Hepatic angiosarcoma in PVC workers exposed vinyl chloride; rare tumours in shared workplaces always demand an exposure history.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/angiosarcoma-fig1.webp",
+        "alt": "Angiosarcoma features",
+        "caption": "Angiosarcoma, the rare vascular liver tumour linked to vinyl chloride exposure."
+      }
+    },
+    {
+      "tx": "Asbestos fibres resist clearance, frustrate macrophage digestion, and generate decades of pleural inflammation culminating in mesothelioma and lung cancer, with smoking multiplying the lung risk. Latency stretches twenty to forty years, so exposure histories must reach back to first jobs; the signature pleural tumour is **mesothelioma**.",
+      "say": "Asbestos causes mesothelioma after twenty to forty years; take exposure histories back to the patient's first job.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mesothelioma-fig1.webp",
+        "alt": "Mesothelioma pleural mass on CT",
+        "caption": "Mesothelioma as a pleural mass on CT, decades after asbestos exposure."
+      }
+    },
+    {
+      "tx": "Benzene, absorbed from solvents and fuels, injures marrow stem cells and causes aplastic anaemia and acute myeloid leukaemia, while aromatic amines from dye industries concentrate in urine and cause bladder cancer generations of workers later. Aniline dye bladder cancer was among the first occupational cancers recognised; the marrow toxin is **benzene**.",
+      "say": "Benzene causes leukaemia through marrow injury; aromatic amines from dye work cause bladder cancer through urinary concentration.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Agent",
+          "Exposure setting",
+          "Signature cancer"
+        ],
+        "rows": [
+          [
+            "Aflatoxin B1",
+            "Mouldy grain and groundnuts",
+            "Hepatocellular carcinoma"
+          ],
+          [
+            "Vinyl chloride",
+            "PVC manufacture",
+            "Hepatic angiosarcoma"
+          ],
+          [
+            "Asbestos",
+            "Insulation, shipyards, construction",
+            "Mesothelioma, lung cancer"
+          ],
+          [
+            "Benzene and aniline dyes",
+            "Solvents, dye manufacture",
+            "Leukaemia, bladder cancer"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Nitrosamines formed in cured meats, tobacco, and the acid stomach alkylate DNA in oesophagus, stomach, and pancreas, and alcohol promotes several cancers while also initiating through acetaldehyde. Dietary and lifestyle chemistry thus joins industrial chemistry in one framework of **nitrosamine and lifestyle carcinogenesis**.",
+      "say": "Nitrosamines from tobacco and cured foods, plus alcohol's acetaldehyde, extend chemical carcinogenesis into everyday life.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Industrial exposures",
+          "points": [
+            "Asbestos, benzene, vinyl chloride",
+            "Regulation and substitution protect",
+            "Compensable occupational disease"
+          ]
+        },
+        "right": {
+          "title": "Lifestyle exposures",
+          "points": [
+            "Tobacco nitrosamines, alcohol, aflatoxin",
+            "Cessation and food safety protect",
+            "Population level prevention"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Prevention completes the lesson: substitute safer chemicals, ventilate and enclose processes, monitor exposed workers, vaccinate against hepatitis B, store food dry, and stop smoking, each removing an initiator or promoter. Occupational cancer is the most preventable cancer class of all; that conviction drives **carcinogen exposure control**.",
+      "say": "Substitute, ventilate, monitor, vaccinate, and stop smoking; occupational cancers are the most preventable cancers we know.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Control level",
+          "Example",
+          "Cancer prevented"
+        ],
+        "rows": [
+          [
+            "Substitution",
+            "Replace benzene solvents",
+            "Leukaemia"
+          ],
+          [
+            "Engineering",
+            "Enclosed vinyl chloride process",
+            "Hepatic angiosarcoma"
+          ],
+          [
+            "Medical",
+            "Hepatitis B vaccination",
+            "Hepatocellular carcinoma"
+          ],
+          [
+            "Behavioural",
+            "Smoking cessation",
+            "Lung, bladder, pancreatic cancer"
+          ]
+        ]
+      }
+    }
+  ]
+}

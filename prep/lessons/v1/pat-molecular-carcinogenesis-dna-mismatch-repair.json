@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-molecular-carcinogenesis",
+  "subject": "pathology",
+  "title": "DNA Mismatch Repair, Microsatellite Instability, Warburg Effect, and Telomerase",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Mismatch repair proteins patrol newly replicated DNA, excising mispaired bases and insertion loops, and their loss lets mutations accumulate a hundredfold faster, especially in repetitive microsatellite tracts. Cancers arising through this mutator route display **microsatellite instability**, detectable by PCR or by lost repair protein staining.",
+      "say": "Failed mismatch repair creates microsatellite instability, a mutator state that stamps Lynch syndrome cancers.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Replication slips at microsatellite repeats"
+          },
+          {
+            "id": "b",
+            "label": "Normal repair excises the error"
+          },
+          {
+            "id": "c",
+            "label": "Repair lost: mutations accumulate rapidly"
+          },
+          {
+            "id": "d",
+            "label": "Frameshifts in growth genes drive cancer"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Lynch syndrome, inherited loss of MLH1, MSH2, MSH6, or PMS2, produces colorectal and endometrial cancers decades early with few polyps, plus ovarian, gastric, and urothelial tumours. Universal tumour staining for repair proteins now hunts these families; the syndrome remains **Lynch syndrome**, formerly hereditary nonpolyposis colorectal cancer.",
+      "say": "Lynch syndrome gives early colon and endometrial cancers without polyposis; stain every such tumour for mismatch repair proteins.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/colorectal-polyps-and-carcinoma-fig1.webp",
+        "alt": "Colorectal polyps and carcinoma",
+        "caption": "Colorectal polyps and carcinoma, the tumour spectrum spanning adenoma pathways and Lynch syndrome."
+      }
+    },
+    {
+      "tx": "Microsatellite unstable tumours manufacture thousands of abnormal peptides, making them conspicuous to the immune system and unusually responsive to checkpoint inhibitor therapy. MSI-high status therefore selects patients for pembrolizumab across tumour types; the predictive biomarker is **MSI-high status**. Tissue microenvironments in these tumours teem with tumour infiltrating lymphocytes as a visible consequence.",
+      "say": "Microsatellite unstable cancers are immunologically loud, which is why checkpoint inhibitors work so well in them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MSI-high tumour",
+          "points": [
+            "Many neoantigens, dense lymphocytes",
+            "Checkpoint inhibitor responsive",
+            "Lynch testing triggered"
+          ]
+        },
+        "right": {
+          "title": "Microsatellite stable tumour",
+          "points": [
+            "Fewer mutations, quieter immunity",
+            "Immunotherapy less reliable",
+            "Conventional pathways dominate"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Even bathed in oxygen, cancer cells ferment glucose to lactate, wasting yield for speed and building blocks, a metabolic rewiring described a century ago and now imaged daily by FDG-PET. This aerobic glycolysis is the **Warburg effect**, driven by MYC, hypoxia signalling, and growth pathways.",
+      "say": "The Warburg effect, aerobic glycolysis, explains why cancers light up on FDG-PET scans hungry for glucose.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Metabolic trait",
+          "Normal oxidative cell",
+          "Warburg cancer cell"
+        ],
+        "rows": [
+          [
+            "Glucose fate",
+            "Fully oxidised to CO2",
+            "Mostly lactate despite oxygen"
+          ],
+          [
+            "ATP strategy",
+            "High yield per glucose",
+            "Fast, lower yield, high uptake"
+          ],
+          [
+            "Side benefits",
+            "Efficiency",
+            "Building blocks for growth"
+          ],
+          [
+            "Clinical use",
+            "Baseline imaging quiet",
+            "FDG-PET detects tumour burden"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Telomerase, the enzyme extending chromosome end repeats, is silenced in most adult tissues but reactivated in the great majority of cancers, granting unlimited divisions. Its reverse transcriptase component TERT is recruited by promoter mutations in melanoma and glioblastoma; the immortalising enzyme is **telomerase**.",
+      "say": "Telomerase reactivation immortalises cancers; TERT promoter mutations are among the commonest noncoding mutations known.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/telomere-biology-and-cellular-senescence-fig1.webp",
+        "alt": "Telomeres and cellular senescence",
+        "caption": "Telomere biology and senescence, the replicative limit telomerase allows cancers to escape."
+      }
+    },
+    {
+      "tx": "Repair failure and metabolic rewiring cooperate: mismatch repair loss accelerates mutation supply, Warburg metabolism feeds the resulting growth, and telomerase removes the division ceiling. Teaching them together cures the misconception that carcinogenesis is a single gene story; the integrated process is **genomic instability with metabolic adaptation**.",
+      "say": "Mutator repair, Warburg metabolism, and telomerase together supply variation, fuel, and immortality to the evolving cancer.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Genome instability engines",
+          "points": [
+            "Mismatch repair loss",
+            "Chromosomal instability and aneuploidy",
+            "Defective checkpoints, TP53 loss"
+          ]
+        },
+        "right": {
+          "title": "Growth support systems",
+          "points": [
+            "Warburg glycolysis",
+            "Telomerase reactivation",
+            "Angiogenesis and stromal support"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sporadic MSI cancers usually silence MLH1 by promoter methylation, often beside BRAF mutation and right sided colon tumours in older women, a signature distinguishing them from Lynch cases. Methylation testing therefore triages germline referral; the sporadic mechanism is **MLH1 promoter hypermethylation**.",
+      "say": "Older women with right sided, BRAF mutated, MLH1 methylated colon cancers usually have sporadic MSI, not Lynch syndrome.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Tumour loses MLH1 and PMS2 staining"
+          },
+          {
+            "id": "b",
+            "label": "Test BRAF mutation and MLH1 methylation"
+          },
+          {
+            "id": "c",
+            "label": "Methylated: likely sporadic, observe family risk"
+          },
+          {
+            "id": "d",
+            "label": "Unmethylated: germline Lynch testing"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Every colorectal and endometrial cancer now earns repair protein immunohistochemistry in good practice, because one stain can find a family, choose immunotherapy, and prevent the next cancer. That cascade from a slide to a pedigree is **universal mismatch repair testing**.",
+      "say": "One immunostain on a colon cancer can diagnose Lynch syndrome, select immunotherapy, and protect an entire family.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stain lost",
+          "Gene suspected",
+          "Next step"
+        ],
+        "rows": [
+          [
+            "MLH1 and PMS2",
+            "MLH1",
+            "BRAF and methylation triage"
+          ],
+          [
+            "MSH2 and MSH6",
+            "MSH2",
+            "Germline testing offered"
+          ],
+          [
+            "MSH6 alone",
+            "MSH6",
+            "Germline testing offered"
+          ],
+          [
+            "PMS2 alone",
+            "PMS2",
+            "Germline testing offered"
+          ]
+        ]
+      }
+    }
+  ]
+}

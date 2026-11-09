@@ -1,0 +1,212 @@
+{
+ "v": 1,
+ "module": "obg-preterm-prom-postterm",
+ "subject": "obstetrics-gynaecology",
+ "title": "Preterm Labour, Tocolysis, Steroids and PPROM",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Labour with cervical change before thirty seven completed weeks is **preterm labour**. It drives most neonatal mortality and disability worldwide. Distinguishing true labour from false alarms avoids unnecessary admissions and steroids. Fetal fibronectin in cervicovaginal fluid and a cervical length under 25 millimetres separate true from false labour.",
+   "say": "Preterm labour changes the cervix before thirty seven weeks and drives neonatal disability.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/preterm-labour-fig1.webp",
+    "alt": "Preterm labour cervical changes.",
+    "caption": "Preterm labour. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Drugs suppressing contractions to gain forty eight hours for steroids form **tocolysis**. The aim is never long term delay but a window for corticosteroids and transfer. Maintenance tocolysis does not improve outcomes. Atosiban and nifedipine are first line in most guidelines; indomethacin is limited by fetal duct effects after 32 weeks.",
+   "say": "Tocolysis gains forty eight hours for steroids and transfer, never long term delay.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Class"
+    ],
+    "rows": [
+     [
+      "Nifedipine",
+      "Calcium blocker"
+     ],
+     [
+      "Atosiban",
+      "Oxytocin antagonist"
+     ],
+     [
+      "Indomethacin",
+      "Prostaglandin inhibitor, short course"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The calcium channel blocker most used as first line tocolytic is **nifedipine**. Oral loading then maintenance suppresses contractions with a friendly side effect profile. It must not combine casually with magnesium infusions. A 20 milligram oral load, then 10 to 20 milligrams every four to six hours, is the common regimen.",
+   "say": "Nifedipine is the first line tocolytic with a friendly side effect profile.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Contractions confirmed"
+     },
+     {
+      "id": "n1",
+      "label": "Nifedipine loading given"
+     },
+     {
+      "id": "n2",
+      "label": "Steroids administered"
+     },
+     {
+      "id": "n3",
+      "label": "Transfer arranged"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The oxytocin receptor antagonist designed specifically for tocolysis is **atosiban**. It has the fewest maternal side effects of any tocolytic. Cost limits its use where nifedipine serves equally well. It blocks oxytocin receptors competitively and needs an intravenous loading bolus over the first hour.",
+   "say": "Atosiban blocks oxytocin receptors with the fewest maternal side effects but high cost.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nifedipine",
+     "points": [
+      "Cheap, oral",
+      "First line most units"
+     ]
+    },
+    "right": {
+     "title": "Atosiban",
+     "points": [
+      "Costly, intravenous",
+      "Fewest side effects"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Injections maturing fetal lungs before preterm birth are **antenatal corticosteroids**. Betamethasone two doses twenty four hours apart is the classic course. They halve respiratory distress and neonatal death when delivery follows within a week. Benefit is greatest when delivery follows two to seven days after the course, and it works from 24 to 34 weeks.",
+   "say": "Antenatal corticosteroids halve respiratory distress when delivery follows within a week.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-betamethasone.webp",
+    "alt": "Betamethasone for fetal lung maturity.",
+    "caption": "Betamethasone. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The standard steroid for lung maturity given as two intramuscular doses is **betamethasone**. Dexamethasone in four doses is the accepted alternative where betamethasone is unavailable. Repeat courses are restricted to selected ongoing high risk cases. Four 6 milligram dexamethasone doses twelve hours apart cover units where betamethasone is out of stock.",
+   "say": "Betamethasone in two doses is standard, with dexamethasone as accepted alternative.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Drug",
+     "Course"
+    ],
+    "rows": [
+     [
+      "Betamethasone",
+      "Two doses, 24 hours apart"
+     ],
+     [
+      "Dexamethasone",
+      "Four doses, 12 hours apart"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Magnesium before early preterm birth protects the fetal brain, termed **magnesium neuroprotection**. Given below thirty two weeks it reduces cerebral palsy. It runs alongside tocolysis and steroids in threatened early delivery. The infusion is 4 grams over twenty minutes, then 1 gram hourly for up to 24 hours or until birth.",
+   "say": "Magnesium neuroprotection below thirty two weeks reduces cerebral palsy.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-magnesium-sulphate.webp",
+    "alt": "Magnesium neuroprotection.",
+    "caption": "Magnesium. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A placental protein in vaginal fluid predicting delivery within a fortnight is **fetal fibronectin**. A negative test powerfully reassures that delivery is unlikely in seven to fourteen days. Cervical length under twenty five millimetres on scan carries similar weight, and vaginal progesterone prevents preterm birth in short cervix, while antibiotics prolong latency after preterm membrane rupture and steroids plus surveillance watch for chorioamnionitis.",
+   "say": "Fetal fibronectin negativity reassures against delivery within a fortnight.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Threatened preterm labour"
+     },
+     {
+      "id": "n1",
+      "label": "Fibronectin or length tested"
+     },
+     {
+      "id": "n2",
+      "label": "Negative reassures home"
+     },
+     {
+      "id": "n3",
+      "label": "Positive admits and treats"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Membrane rupture before labour and before term is PPROM, managed with **latency antibiotics** prolonging pregnancy safely. Erythromycin based regimens extend latency and improve neonatal outcomes, while co-amoxiclav is avoided for necrotising enterocolitis risk. Post term pregnancy beyond forty two weeks is induced because stillbirth risk climbs, and membrane sweeping from forty weeks nudges labour naturally.",
+   "say": "Latency antibiotics prolong PPROM pregnancy safely while post term pregnancy is induced.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PPROM",
+     "points": [
+      "Latency antibiotics",
+      "Steroids given",
+      "Watch for chorioamnionitis"
+     ]
+    },
+    "right": {
+     "title": "Post term",
+     "points": [
+      "Induction offered",
+      "Stillbirth risk climbs",
+      "Sweeping first"
+     ]
+    }
+   }
+  }
+ ]
+}

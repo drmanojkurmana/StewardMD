@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-molecular-carcinogenesis",
+  "subject": "pathology",
+  "title": "Hallmarks of Cancer, Oncogenes, RAS, MYC, and BCR-ABL",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Cancers from different organs converge on shared capabilities: self sufficiency in growth signals, insensitivity to growth inhibitors, evasion of apoptosis, limitless replication, angiogenesis, invasion, altered metabolism, and immune escape. This organising framework, updated twice since its proposal, is the **hallmarks of cancer**.",
+      "say": "The hallmarks give every cancer the same eight capabilities, whatever organ it starts in; use them as your revision scaffold.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Hallmark",
+          "Typical mechanism",
+          "Therapeutic angle"
+        ],
+        "rows": [
+          [
+            "Growth self sufficiency",
+            "Oncogene activation, RAS, HER2",
+            "Kinase inhibitors"
+          ],
+          [
+            "Apoptosis evasion",
+            "TP53 loss, BCL2 excess",
+            "BH3 mimetics"
+          ],
+          [
+            "Limitless replication",
+            "Telomerase reactivation",
+            "Research target"
+          ],
+          [
+            "Angiogenesis and invasion",
+            "VEGF, EMT programmes",
+            "Anti-VEGF antibodies"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Oncogenes are mutated or amplified versions of normal growth promoting proto-oncogenes, and a single activated allele suffices because their action is dominant at the cellular level. Growth factor receptors, signal transducers, transcription factors, and cell cycle proteins all appear on this list; the cancer promoting gene class is the **oncogene** family.",
+      "say": "One activated oncogene allele is enough; these dominant genes are the accelerators of the cancer cell.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oncogenes, accelerators",
+          "points": [
+            "Gain of function, one allele enough",
+            "RAS, MYC, HER2, BCR-ABL",
+            "Druggable kinases feature heavily"
+          ]
+        },
+        "right": {
+          "title": "Suppressor genes, brakes",
+          "points": [
+            "Loss of function, both alleles lost",
+            "RB, TP53, APC, BRCA",
+            "Restoration is therapeutically hard"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "RAS proteins are molecular switches that relay growth signals from receptors to the MAP kinase cascade, and point mutations locking RAS in its active GTP bound state occur in roughly a fifth of human cancers, led by pancreatic and colorectal tumours. The most frequently mutated oncogene family is **RAS**.",
+      "say": "Mutant RAS is stuck in the on position in a fifth of cancers, especially pancreatic and colorectal tumours.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Growth factor activates receptor tyrosine kinase"
+          },
+          {
+            "id": "b",
+            "label": "RAS exchanges GDP for GTP and switches on"
+          },
+          {
+            "id": "c",
+            "label": "MAP kinase cascade drives proliferation genes"
+          },
+          {
+            "id": "d",
+            "label": "Mutant RAS cannot switch off"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "MYC is a master transcription factor amplifying expression of thousands of growth, metabolism, and ribosome genes, and its deregulation by translocation in Burkitt lymphoma or amplification in many solid tumours drives relentless proliferation. The Burkitt t(8;14) places MYC beside immunoglobulin enhancers; the gene is **MYC**.",
+      "say": "MYC turns up the volume on thousands of growth genes; its translocation beside immunoglobulin genes defines Burkitt lymphoma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Oncogene",
+          "Mechanism",
+          "Signature tumour"
+        ],
+        "rows": [
+          [
+            "MYC",
+            "Translocation t(8;14)",
+            "Burkitt lymphoma"
+          ],
+          [
+            "HER2 (ERBB2)",
+            "Gene amplification",
+            "Breast and gastric cancer"
+          ],
+          [
+            "BCR-ABL",
+            "Translocation t(9;22)",
+            "Chronic myeloid leukaemia"
+          ],
+          [
+            "RAS",
+            "Point mutation",
+            "Pancreatic, colorectal, lung cancer"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Chronic myeloid leukaemia is built on a single translocation: t(9;22) fuses BCR to ABL, creating a permanently active tyrosine kinase that drives myeloid proliferation and formed the Philadelphia chromosome. Imatinib blocking that kinase converted a fatal disease into a chronic one; the fusion is **BCR-ABL**.",
+      "say": "BCR-ABL from t(9;22) drives chronic myeloid leukaemia, and imatinib against it began the targeted therapy era.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chronic-myeloid-leukemia-fig1.webp",
+        "alt": "Chronic myeloid leukaemia pathogenesis",
+        "caption": "Chronic myeloid leukaemia pathogenesis driven by the BCR-ABL fusion kinase."
+      }
+    },
+    {
+      "tx": "Replicative immortality separates cancer from normal clones: as telomeres shorten with each division most cells senesce, but cancers reactivate telomerase or lengthen telomeres by recombination to divide indefinitely. Telomere maintenance therefore underwrites the hallmark called **limitless replicative potential**. Most adult somatic cells lack this enzyme entirely, which is why their division count stays finite.",
+      "say": "Cancers reactivate telomerase to maintain telomeres and divide forever; normal clones senesce when telomeres run out.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/telomere-biology-and-cellular-senescence-fig1.webp",
+        "alt": "Telomeres and cellular senescence",
+        "caption": "Telomere shortening and cellular senescence, the barrier cancers overcome by telomerase reactivation."
+      }
+    },
+    {
+      "tx": "Sustained angiogenesis feeds expansion beyond diffusion limits: hypoxic tumour cells secrete VEGF, recruiting vessels that are leaky, tortuous, and therapeutically targetable. Bevacizumab and VEGF pathway inhibitors exploit this dependence, embodying the hallmark of **induced angiogenesis** in routine oncology practice. Antibodies and small molecules against this pathway now feature in colorectal, renal, and lung regimens.",
+      "say": "Tumours recruit their own leaky blood supply through VEGF; blocking that signal is now standard cancer therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dormant micrometastasis",
+          "points": [
+            "No vessel recruitment yet",
+            "Size limited by diffusion",
+            "Proliferation balanced by death"
+          ]
+        },
+        "right": {
+          "title": "Angiogenic switch on",
+          "points": [
+            "VEGF recruits tumour vessels",
+            "Rapid expansion becomes possible",
+            "Anti-VEGF therapy target"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cancer development is multistep: sequential mutations in oncogenes, suppressors, and repair genes accumulate over years, which is why incidence climbs steeply with age and why adenomas precede carcinomas. Vogelstein's colorectal sequence remains the teaching model of **multistep carcinogenesis**. Each successive clone therefore grows faster and behaves worse than the one before it.",
+      "say": "Cancer takes many hits over many years; the adenoma to carcinoma sequence shows each mutation arriving in turn.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "APC loss initiates adenoma"
+          },
+          {
+            "id": "b",
+            "label": "KRAS activation grows the adenoma"
+          },
+          {
+            "id": "c",
+            "label": "TP53 loss permits carcinoma"
+          },
+          {
+            "id": "d",
+            "label": "Further hits enable metastasis"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,218 @@
+{
+  "v": 1,
+  "module": "pat-iron-deficiency",
+  "subject": "pathology",
+  "title": "Plummer-Vinson Syndrome, Anaemia of Chronic Disease, and Sideroblastic Anaemia",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A middle aged woman with iron deficiency, dysphagia for solids from postcricoid oesophageal webs, koilonychia, and glossitis carries a syndrome with raised squamous cancer risk of the postcricoid region. Iron repletion can dissolve early webs; the eponymous triad is **Plummer-Vinson syndrome**, also called Paterson-Kelly syndrome.",
+      "say": "Iron deficiency plus oesophageal webs plus dysphagia is Plummer-Vinson syndrome, with postcricoid cancer risk attached.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/plummer-vinson-syndrome-fig1.webp",
+        "alt": "Plummer-Vinson syndrome manifestations",
+        "caption": "Plummer-Vinson syndrome manifestations with oesophageal webs and iron deficiency features."
+      }
+    },
+    {
+      "tx": "Anaemia of chronic disease is iron sequestration by design: inflammation raises hepcidin, ferroportin closes on macrophages and enterocytes, and iron is locked away from marrow despite adequate stores. Ferritin is normal or high while saturation falls; the master hormone is **hepcidin**.",
+      "say": "Inflammation raises hepcidin and locks iron inside macrophages; the anaemia of chronic disease is sequestration, not absence.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/iron-deficiency-anemia-fig2.webp",
+        "alt": "Systemic iron homeostasis and transport",
+        "caption": "Systemic iron homeostasis showing hepcidin control of iron release and absorption."
+      }
+    },
+    {
+      "tx": "Comparing the two microcytic giants saves endless confusion: true deficiency empties stores with low ferritin and high binding capacity, while inflammation hoards iron with high ferritin and low binding capacity. Transferrin saturation falls in both; the separating test remains **serum ferritin** read beside CRP.",
+      "say": "Both diseases lower saturation; ferritin beside CRP separates empty stores from locked stores every time.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Iron deficiency",
+          "points": [
+            "Ferritin low, TIBC high",
+            "Stores empty on marrow stain",
+            "Responds to iron alone"
+          ]
+        },
+        "right": {
+          "title": "Anaemia of chronic disease",
+          "points": [
+            "Ferritin high, TIBC low",
+            "Stores present, iron sequestered",
+            "Treat inflammation; iron selectively"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sideroblastic anaemia traps iron inside erythroblast mitochondria because haem synthesis fails, classically from ALAS2 mutation, alcohol, lead, isoniazid, or myelodysplasia, producing dimorphic blood with basophilic stippling. The marrow signature is the **ring sideroblast**, iron granules circling the nucleus on Perls stain.",
+      "say": "Ring sideroblasts are mitochondria choked with unused iron; look for alcohol, lead, isoniazid, and myelodysplasia behind them.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cause",
+          "Mechanism",
+          "Clue"
+        ],
+        "rows": [
+          [
+            "ALAS2 mutation",
+            "Inherited haem synthesis failure",
+            "X-linked, pyridoxine responsive some"
+          ],
+          [
+            "Alcohol, isoniazid",
+            "Acquired enzyme inhibition",
+            "Reversible on withdrawal or B6"
+          ],
+          [
+            "Lead poisoning",
+            "Ferrochelatase and ALA dehydratase block",
+            "Stippling, abdominal colic"
+          ],
+          [
+            "Myelodysplasia",
+            "Clonal ring sideroblasts",
+            "Older age, other cytopenias"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Lead deserves its second appearance here because it manufactures sideroblastic change while also causing colic, wrist drop, gum lines, and encephalopathy, unifying environmental and haematological pathology. Blood lead measurement settles suspicion; the unifying toxin is **lead**. Chelation and exposure removal together protect the brain, kidneys, and marrow from further injury.",
+      "say": "Lead ties the two halves together: sideroblastic anaemia plus colic, wrist drop, and Burton gum lines.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Lead blocks haem synthesis enzymes"
+          },
+          {
+            "id": "b",
+            "label": "Ring sideroblasts and stippled cells"
+          },
+          {
+            "id": "c",
+            "label": "Colic, neuropathy, gum lines develop"
+          },
+          {
+            "id": "d",
+            "label": "Remove exposure, chelate when indicated"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Iron overload threatens sideroblastic and thalassaemic patients through transfusions and inappropriate iron, injuring liver, heart, and endocrine glands, so chelation and phlebotomy decisions need ferritin trends and imaging. The Perls stain that diagnoses marrow iron also grades this excess; tissue iron is graded by **Perls Prussian blue staining**.",
+      "say": "Perls blue both convicts absent marrow iron and grades dangerous overload; the same stain serves both extremes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Iron absent",
+          "points": [
+            "Perls stain empty marrow",
+            "Ferritin low, microcytosis",
+            "Replace iron, find the leak"
+          ]
+        },
+        "right": {
+          "title": "Iron overloaded",
+          "points": [
+            "Perls stain heavy deposits",
+            "Ferritin very high, organ injury",
+            "Chelation, avoid iron supplements"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Oesophageal webs in Plummer-Vinson syndrome are thin mucosal folds at the postcricoid level shown by barium swallow or endoscopy, and dilatation relieves dysphagia when iron alone does not. Surveillance for postcricoid squamous carcinoma accompanies follow up; the web itself is a **postcricoid oesophageal web**.",
+      "say": "Barium swallow shows the postcricoid web; dilate if iron does not restore swallowing, and keep cancer surveillance.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Finding",
+          "Action"
+        ],
+        "rows": [
+          [
+            "Dysphagia",
+            "Solids worse than liquids",
+            "Barium swallow, endoscopy"
+          ],
+          [
+            "Web",
+            "Postcricoid mucosal fold",
+            "Iron first, dilatation if persistent"
+          ],
+          [
+            "Cancer risk",
+            "Postcricoid squamous carcinoma",
+            "Long term surveillance"
+          ],
+          [
+            "Iron state",
+            "Deficiency correctable",
+            "Recheck ferritin after therapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Close the microcytic differential deliberately at the bedside: iron deficiency, thalassaemia trait, chronic disease, and sideroblastic anaemia each own a laboratory fingerprint and a story. Naming which one you are treating before prescribing iron is **microcytic anaemia discipline**. Prescribing iron to thalassaemia trait by mistake is the commonest error this discipline prevents.",
+      "say": "Four diseases share small red cells; fingerprint ferritin, saturation, and haemoglobin analysis before iron is prescribed.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disease",
+          "Ferritin",
+          "Decisive test"
+        ],
+        "rows": [
+          [
+            "Iron deficiency",
+            "Low",
+            "Iron studies and source hunt"
+          ],
+          [
+            "Thalassaemia trait",
+            "Normal",
+            "Haemoglobin analysis, Mentzer under 13"
+          ],
+          [
+            "Chronic disease",
+            "High",
+            "CRP, hepcidin physiology, treat cause"
+          ],
+          [
+            "Sideroblastic",
+            "High",
+            "Marrow Perls ring sideroblasts"
+          ]
+        ]
+      }
+    }
+  ]
+}

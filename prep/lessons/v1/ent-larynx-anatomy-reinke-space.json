@@ -1,0 +1,252 @@
+{
+ "v": 1,
+ "id": "ent-larynx-anatomy-reinke-space",
+ "subject": "ent",
+ "module": "ent-larynx-anatomy",
+ "title": "Reinke Space, Deep Laryngeal Spaces and Phonation",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Reinke space** is the loose superficial layer over the vocal fold ligament where fluid collects with voice abuse, smoking and hypothyroidism, producing bilateral fusiform swelling and low rough hoarseness. Because the layer lacks glands and lymphatics, oedema persists rather than clearing quickly. Stroboscopy gives reduced mucosal wave over the swollen segment, confirming mechanical stiffness as the voice problem rather than nerve failure.",
+   "say": "Loose lining over the fold ligament collects fluid and produces low rough hoarseness. Absent glands and lymphatics make oedema persist rather than clear quickly. Reduced mucosal wave on stroboscopy confirms stiffness as the problem.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/laryngeal-framework-and-vocal-cords-fig1.webp",
+    "alt": "Laryngeal framework diagram with vocal folds and layered fold structure shown.",
+    "caption": "Vocal fold framework and layers. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **pre-epiglottic space** is a fat filled compartment in front of the epiglottis bounded by hyoid, thyrohyoid membrane and thyroid cartilage, into which supraglottic cancers expand before any mucosal ulcer betrays them. Breach of this space upstages tumours and changes larynx preservation decisions. Magnetic resonance imaging gives the assessment because endoscopy sees only the mucosal surface above a potentially deep tumour.",
+   "say": "Fat in front of the epiglottis gives supraglottic cancer a silent expansion route. Deep invasion is advanced disease and changes preservation decisions significantly. Resonance imaging provides assessment because endoscopy sees surface only.",
+   "vis": {
+    "kind": "table",
+    "title": "Deep laryngeal spaces",
+    "cols": [
+     "Space",
+     "Clinical importance"
+    ],
+    "rows": [
+     [
+      "Reinke space",
+      "Oedema layer, mucosal wave"
+     ],
+     [
+      "Pre-epiglottic space",
+      "Silent supraglottic spread"
+     ],
+     [
+      "Paraglottic space",
+      "Deep transglottic spread"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **paraglottic space** lies lateral to the ventricle and thyroarytenoid muscle, continuous with the pre-epiglottic space above, so cancers cross between compartments without mucosal continuity. Fixation of the vocal fold is the clinical hint that this deep space is occupied, because tumour stiffens the muscle itself. Imaging that ignores this space understages transglottic disease and misleads organ preservation selection.",
+   "say": "Lateral deep space continuity allows cancer spread without mucosal continuity visible. Fold fixation indicates deep muscle occupation by tumour clinically. Imaging must include this space for preservation selection.",
+   "vis": {
+    "kind": "table",
+    "title": "Fixation as deep sign",
+    "cols": [
+     "Finding",
+     "Meaning"
+    ],
+    "rows": [
+     [
+      "Mobile fold",
+      "Mucosal disease likely"
+     ],
+     [
+      "Fixed fold",
+      "Deep space invasion"
+     ],
+     [
+      "Imaging",
+      "Stages paraglottic extent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Laryngeal lymphatics** follow the level division taught anatomically: rich bilateral drainage above the cords, sparse drainage at the cords and prelaryngeal drainage below. Supraglottic cancers therefore receive bilateral elective neck treatment even with a normal feeling neck, while early glottic cancers observe the neck safely. The Delphian node in front of the cricothyroid membrane warns of subglottic or thyroid extension when enlarged.",
+   "say": "Drainage is rich above cords, sparse at cords and prelaryngeal below cords. Supraglottic cancer needs bilateral neck treatment despite normal examination. Early glottic cancer allows safe neck observation comparatively.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Supraglottic drainage",
+     "points": [
+      "Rich lymphatic network",
+      "Bilateral jugular nodes",
+      "Elective neck treatment routine"
+     ]
+    },
+    "right": {
+     "title": "Glottic drainage",
+     "points": [
+      "Sparse lymphatics at folds",
+      "Late nodal spread",
+      "Neck observation safe early"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Phonation** begins when expired air pressure separates the folds and ends each cycle when elasticity with the Bernoulli effect restores closure, repeating hundreds of times per second. Pitch is set mainly by fold length and tension through cricothyroid action, while loudness follows subglottic pressure. Hoarseness therefore localises to mass, stiffness, gap or irregularity of the fold edge, and stroboscopy separates these mechanisms visually.",
+   "say": "Air pressure separates folds while elasticity restores closure in rapid vibration cycles. Tension sets pitch while pressure sets loudness in voice production. Stroboscopy separates mass, stiffness and gap mechanisms visually.",
+   "vis": {
+    "kind": "flow",
+    "title": "One phonation cycle",
+    "nodes": [
+     {
+      "id": "press",
+      "label": "Subglottic pressure builds"
+     },
+     {
+      "id": "open",
+      "label": "Folds blow apart"
+     },
+     {
+      "id": "close",
+      "label": "Elasticity restores closure"
+     },
+     {
+      "id": "sound",
+      "label": "Vibration heard as voice"
+     }
+    ],
+    "edges": [
+     [
+      "press",
+      "open"
+     ],
+     [
+      "open",
+      "close"
+     ],
+     [
+      "close",
+      "sound"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **myoelastic theory** states that nerves position and tense the folds once, after which aerodynamics and tissue elasticity sustain vibration without individual nerve impulses per cycle. This explains why recurrent nerve palsy hoarsens by position and gap rather than by stopping vibration outright. Voice therapy exploits the same mechanics by adjusting airflow, posture and resonance before any surgical medialisation is considered.",
+   "say": "Nerves position folds once while air and elasticity sustain vibration without repeated impulses. Nerve palsy gives hoarseness by position and gap mechanically. Therapy adjusts airflow and resonance before surgery is considered.",
+   "vis": null
+  },
+  {
+   "tx": "Reinke oedema management starts with smoking cessation and voice therapy, reserving microsurgical drainage for bulky disease that obstructs breathing or resists conservative care. Surgery preserves the superficial layer and epithelium to protect the mucosal wave. **Hypothyroidism** screening accompanies bilateral oedema because myxoedema collects in the same layer and returns after surgery unless the endocrine cause is corrected.",
+   "say": "Smoking cessation with voice therapy gives first treatment for fold oedema. Bulky obstructive disease needs careful microsurgery that preserves surface layer. Thyroid screening accompanies bilateral disease because myxoedema recurs untreated.",
+   "vis": {
+    "kind": "table",
+    "title": "Reinke oedema care",
+    "cols": [
+     "Step",
+     "Action"
+    ],
+    "rows": [
+     [
+      "First",
+      "Stop smoking, voice therapy"
+     ],
+     [
+      "Screen",
+      "Exclude hypothyroidism"
+     ],
+     [
+      "Surgery",
+      "Drain bulky disease, preserve wave"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cancer staging uses these spaces directly: pre-epiglottic or paraglottic invasion, inner thyroid cartilage erosion and extralaryngeal spread each advance stage and favour surgery over preservation in many protocols. A mobile fold with mucosal disease only is a different disease from a fixed fold with identical surface appearance. **Fold mobility** is therefore recorded at every laryngoscopy as staging information, not descriptive decoration.",
+   "say": "Deep space invasion is advanced stage and favours surgery over preservation protocols. Mobile and fixed folds with identical surfaces are different diseases prognostically. Mobility recording provides staging information at every examination.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/laryngeal-cancer-fig1.webp",
+    "alt": "Glottic laryngeal carcinoma pathology diagram showing tumour of the vocal fold region.",
+    "caption": "Glottic carcinoma of the fold region. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Paediatric laryngeal anatomy inverts adult proportions: the cricoid ring is narrowest in children, the larynx sits higher and the epiglottis is floppy and omega shaped. Small oedema volumes therefore obstruct children disproportionately, which is why stridor lessons follow this anatomy. **Subglottic diameter** decides tube size in children, while glottic diameter decides it in adults, a contrast examinations test repeatedly.",
+   "say": "Child airways are narrowest at the cricoid ring with higher larynx position. Small swelling obstructs children disproportionately compared with adults. Tube sizing follows subglottic diameter in children characteristically.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adult larynx",
+     "points": [
+      "Narrowest at glottis",
+      "Lower neck position",
+      "Larger oedema reserve"
+     ]
+    },
+    "right": {
+     "title": "Child larynx",
+     "points": [
+      "Narrowest at cricoid ring",
+      "Higher, floppy epiglottis",
+      "Obstructs with little oedema"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Applied summary for the larynx runs in layers. Surface lesions hoarsen, deep spaces hide spread, lymphatics decide necks and fold mobility stages disease before histology returns. Reinke oedema is a layer disease treated by habit change first, while fixation is a deep space sign treated as advanced disease. **Stroboscopy** bridges anatomy and function by making stiffness visible in clinic.",
+   "say": "Surface lesions hoarsen while deep spaces hide spread beyond view. Lymphatics decide neck treatment and mobility stages disease early. Stroboscopy makes stiffness visible and bridges anatomy with function.",
+   "vis": {
+    "kind": "table",
+    "title": "Larynx layer summary",
+    "cols": [
+     "Layer or space",
+     "Examination lesson"
+    ],
+    "rows": [
+     [
+      "Reinke layer",
+      "Oedema and wave stiffness"
+     ],
+     [
+      "Deep spaces",
+      "Hidden cancer spread"
+     ],
+     [
+      "Lymphatics",
+      "Neck treatment by level"
+     ],
+     [
+      "Mobility",
+      "Fixation means deep invasion"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Reinke space disease",
+   "b": "Smoker oedema of superficial fold layer; stop smoking and voice therapy first, screen thyroid, preserve wave at surgery."
+  },
+  {
+   "f": "Fold fixation meaning",
+   "b": "Paraglottic deep invasion until disproved; advanced stage that changes preservation decisions."
+  },
+  {
+   "f": "Myoelastic theory",
+   "b": "Nerves set tension once; air pressure and elasticity sustain vibration without impulses per cycle."
+  }
+ ],
+ "keys": [
+  "Supraglottis drains bilaterally, glottis barely drains",
+  "Fixed fold means deep space disease",
+  "Child airway is narrowest at the cricoid"
+ ]
+}

@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-immunodeficiency",
+  "subject": "pathology",
+  "title": "X-Linked Agammaglobulinaemia, CVID, IgA Deficiency, Hyper-IgM, and SCID",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A boy who was protected by maternal antibody for his first months then develops recurrent pneumonia, sinusitis, and otitis with encapsulated bacteria, while his tonsils and lymph nodes are strikingly absent, has failed B cell development. Mutations in the BTK gene arrest maturation at the pre-B stage in **X-linked agammaglobulinaemia**, also called Bruton agammaglobulinemia.",
+      "say": "Recurrent bacterial infections after six months of age with absent tonsils in a boy mean Bruton agammaglobulinaemia until proven otherwise.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "BTK mutation blocks pre-B cell maturation"
+          },
+          {
+            "id": "b",
+            "label": "Mature B cells and plasma cells nearly absent"
+          },
+          {
+            "id": "c",
+            "label": "All immunoglobulin classes profoundly low"
+          },
+          {
+            "id": "d",
+            "label": "Recurrent encapsulated bacterial infections"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Flow cytometry showing CD19 B cells below one percent with intact T cell numbers separates Bruton disease from combined defects, and immunoglobulin replacement plus prompt antibiotics transforms survival. Live vaccines, especially oral polio, are dangerous in these boys, so the therapeutic cornerstone remains lifelong **immunoglobulin replacement therapy**.",
+      "say": "Almost absent B cells with normal T cells confirm the picture; lifelong immunoglobulin replacement is the cornerstone of care.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "X-linked agammaglobulinaemia",
+          "points": [
+            "Boys, onset after maternal antibody wanes",
+            "B cells nearly absent, tonsils absent",
+            "Encapsulated bacteria, enteroviruses"
+          ]
+        },
+        "right": {
+          "title": "Common variable immunodeficiency",
+          "points": [
+            "Adults, both sexes, later onset",
+            "B cells present but plasma cells fail",
+            "Sinopulmonary infections, autoimmunity, granulomas"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Common variable immunodeficiency presents in adults with recurrent sinopulmonary infections, low IgG plus low IgA or IgM, and poor vaccine responses despite near normal B cell counts. Noninfectious complications, autoimmune cytopenias, granulomatous lung disease, enteropathy, and lymphoma, often dominate prognosis in **common variable immunodeficiency**.",
+      "say": "CVID is the adult antibody failure: low IgG with poor vaccine responses and a heavy burden of autoimmune and granulomatous complications.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/common-variable-immunodeficiency-fig1.webp",
+        "alt": "Common variable immunodeficiency features",
+        "caption": "Common variable immunodeficiency with recurrent sinopulmonary infection and immune dysregulation features."
+      }
+    },
+    {
+      "tx": "Selective IgA deficiency is the commonest primary immunodeficiency in many populations, and most affected people remain entirely well, which is why population screening is not recommended. Problems arise as recurrent mucosal infections, associated autoimmunity and coeliac serology pitfalls, and anaphylaxis to blood products containing IgA in the minority with **selective IgA deficiency**.",
+      "say": "Most people with selective IgA deficiency are well; remember the coeliac testing pitfall and transfusion reaction risk.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Defect",
+          "Infection pattern",
+          "Key association"
+        ],
+        "rows": [
+          [
+            "X-linked agammaglobulinaemia",
+            "Encapsulated bacteria from infancy",
+            "Absent tonsils, enterovirus meningoencephalitis"
+          ],
+          [
+            "CVID",
+            "Sinopulmonary, giardia enteropathy",
+            "Autoimmunity, granulomas, lymphoma"
+          ],
+          [
+            "Selective IgA deficiency",
+            "Often none, mucosal infections",
+            "Coeliac disease, transfusion anaphylaxis"
+          ],
+          [
+            "Hyper-IgM syndrome",
+            "Bacterial plus Pneumocystis",
+            "Failed class switching, neutropenia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When CD40 ligand on T cells or CD40 on B cells fails, B cells receive no switch signal and produce IgM alone, leaving IgG, IgA, and IgE absent while IgM is normal or raised. Cryptosporidium sclerosing cholangitis and Pneumocystis pneumonia betray the combined nature of **hyper-IgM syndrome**, most often X-linked CD40 ligand deficiency.",
+      "say": "High IgM with absent IgG and IgA means failed class switching; think CD40 ligand deficiency and watch for Pneumocystis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cd40-ligand-deficiency-fig1.webp",
+        "alt": "CD40 ligand deficiency syndrome",
+        "caption": "CD40 ligand deficiency with failed immunoglobulin class switching and opportunistic infection susceptibility."
+      }
+    },
+    {
+      "tx": "Severe combined immunodeficiency presents in early infancy with chronic diarrhoea, failure to thrive, persistent candidiasis, and opportunistic infection because both T and B cell immunity fail together. Absent thymic shadow and profound lymphopenia are emergencies: live vaccines can kill, and definitive treatment is **haematopoietic stem cell transplantation**.",
+      "say": "SCID is a paediatric emergency; absent thymus with severe early infections needs urgent transplant referral and no live vaccines.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Infant with diarrhoea, thrush, failure to thrive"
+          },
+          {
+            "id": "b",
+            "label": "Profound lymphopenia, absent thymic shadow"
+          },
+          {
+            "id": "c",
+            "label": "Protective isolation, no live vaccines, irradiated blood"
+          },
+          {
+            "id": "d",
+            "label": "Urgent stem cell transplant or gene therapy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The commonest autosomal recessive SCID results from adenosine deaminase deficiency, whose toxic metabolites destroy developing lymphocytes while also causing skeletal and hepatic abnormalities. It was the first inherited disease treated by gene therapy, and enzyme replacement can bridge to transplant; the eponymous metabolic defect is **adenosine deaminase deficiency**.",
+      "say": "ADA deficiency is the classic metabolic SCID and the first disease treated by gene therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "X-linked SCID",
+          "points": [
+            "Commonest SCID, gamma chain defect",
+            "T cells absent, B cells present but useless",
+            "Boys affected in early infancy"
+          ]
+        },
+        "right": {
+          "title": "ADA-deficient SCID",
+          "points": [
+            "Autosomal recessive metabolic toxicity",
+            "T, B, and NK cells all depleted",
+            "Gene therapy historically first here"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Across all antibody defects one examination rule holds: replace what is missing, prevent what is preventable, and never give a live vaccine to a child whose immune system cannot contain it. Newborn TREC screening now catches SCID before infections begin, embodying the principle of **pre-symptomatic immunodeficiency screening**.",
+      "say": "Replace immunoglobulin, prevent infection, avoid live vaccines, and value newborn screening that catches SCID before disaster.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Principle",
+          "In practice",
+          "Why it matters"
+        ],
+        "rows": [
+          [
+            "Replace",
+            "Regular immunoglobulin infusions",
+            "Prevents bacterial sepsis and bronchiectasis"
+          ],
+          [
+            "Prevent",
+            "Prophylactic antibiotics, vaccination of contacts",
+            "Fewer breakthrough infections"
+          ],
+          [
+            "Avoid harm",
+            "No live vaccines; irradiated blood in SCID",
+            "Prevents vaccine strain disease and GVHD"
+          ],
+          [
+            "Detect early",
+            "Newborn TREC screening",
+            "Transplant before infections scar organs"
+          ]
+        ]
+      }
+    }
+  ]
+}

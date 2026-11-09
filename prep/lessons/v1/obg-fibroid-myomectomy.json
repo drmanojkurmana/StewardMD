@@ -1,0 +1,212 @@
+{
+ "v": 1,
+ "module": "obg-fibroid",
+ "subject": "obstetrics-gynaecology",
+ "title": "Myomectomy, Embolisation and Fibroid Surgery Choices",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Surgical removal of fibroids preserving the uterus is **myomectomy**. It is the fertility preserving answer to symptomatic fibroids. Recurrence reaches a third by five years, so family completion should not dawdle. Open, laparoscopic and hysteroscopic routes divide by fibroid site, and route choice decides blood loss, recovery and adhesion burden.",
+   "say": "Myomectomy preserves the uterus for fertility, with a third recurring by five years.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-myomectomy.webp",
+    "alt": "Myomectomy operation.",
+    "caption": "Myomectomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Hysteroscopic resection suits submucosal fibroids entirely within reach of the resectoscope, termed **hysteroscopic myomectomy**. Fluid deficit monitoring guards against absorption syndromes. It is day surgery with the fastest recovery. Only fibroids distorting the cavity justify hysteroscopic removal, because purely intramural lesions lie beyond safe resectoscope reach.",
+   "say": "Hysteroscopic myomectomy resects submucosal fibroids as day surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Approach"
+    ],
+    "rows": [
+     [
+      "0",
+      "Hysteroscopic single step"
+     ],
+     [
+      "1",
+      "Hysteroscopic expert"
+     ],
+     [
+      "2",
+      "Often two stage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vasopressin injection, tourniquets and careful planes minimise myomectomy blood loss as **haemostasis technique**. Tranexamic acid adds systemic cover. Multiple fibroid beds are closed in layers to restore wall strength. Blood loss decides transfusion risk more than fibroid size, so consent always covers transfusion and possible hysterectomy for uncontrolled bleeding.",
+   "say": "Haemostasis technique with vasopressin and layered closure minimises myomectomy loss.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Vasopressin infiltrated"
+     },
+     {
+      "id": "n1",
+      "label": "Incision on fibroid"
+     },
+     {
+      "id": "n2",
+      "label": "Enucleation by plane"
+     },
+     {
+      "id": "n3",
+      "label": "Layered closure"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Delivery after myomectomy entering the cavity is by elective caesarean, following the **scar rule**. Superficial subserosal removals may labour. Operative notes must state cavity entry explicitly for this decision. The operative record of cavity entry follows the woman into every later pregnancy and decides her delivery plan years afterwards.",
+   "say": "The scar rule delivers by caesarean after cavity entering myomectomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cavity entered",
+     "points": [
+      "Elective caesarean"
+     ]
+    },
+    "right": {
+     "title": "Serosal only",
+     "points": [
+      "Labour allowed usually"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Embolisation versus myomectomy trades reintervention against surgery in **choice counselling**. Embolisation recovers faster but reintervenes in a third by five years. Fertility data favour myomectomy where pregnancy is planned. Embolisation avoids incisions and general anaesthesia, while myomectomy removes the lesions themselves, so priorities differ between recovery and recurrence.",
+   "say": "Choice counselling trades embolisation reintervention against myomectomy surgery.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-uterine-artery-embolisation.webp",
+    "alt": "Embolisation choice counselling.",
+    "caption": "Embolisation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Focused ultrasound ablation under MRI guidance destroys fibroids without incisions as **MRgFUS therapy**. Suitability is narrow by fibroid position and bowel interposition. It suits surgery refusers with accessible lesions. Bowel loops, bladder or abdominal wall scarring between sound waves and fibroid exclude treatment, however keen the woman is to avoid surgery.",
+   "say": "MRgFUS ablates fibroids without incisions in narrowly suitable lesions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "MRgFUS"
+    ],
+    "rows": [
+     [
+      "Incisions",
+      "None"
+     ],
+     [
+      "Suitability",
+      "Narrow"
+     ],
+     [
+      "Recovery",
+      "Fastest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hysterectomy remains definitive for completed families with failed lesser options, termed **definitive surgery**. Subtotal versus total and ovarian conservation are individualised. Satisfaction after hysterectomy for fibroids is consistently high. Removing the uterus ends bleeding and recurrence together, which is why satisfaction stays high when family is complete and symptoms severe.",
+   "say": "Definitive hysterectomy satisfies completed families after lesser options fail.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Family complete"
+     },
+     {
+      "id": "n1",
+      "label": "Lesser options failed"
+     },
+     {
+      "id": "n2",
+      "label": "Hysterectomy discussed"
+     },
+     {
+      "id": "n3",
+      "label": "Route by anatomy"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Medical bridges including tranexamic acid, LNG IUS and GnRH analogues control symptoms while awaiting surgery or menopause, grouped as **medical bridges**. Fibroids shrink after menopause, so bridging to it is a real strategy near fifty. Bridging suits women close to menopause most, because natural shrinkage after menopause may make surgery unnecessary altogether.",
+   "say": "Medical bridges control symptoms to surgery or natural menopause shrinkage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/abnormal-uterine-bleeding-fig1.webp",
+    "alt": "Medical bridges in fibroid AUB.",
+    "caption": "Medical bridges. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Newer oral GnRH antagonists with add back therapy shrink bleeding while protecting bone, termed **antagonist therapy**. Add back oestrogen prevents flushes and bone loss during treatment. These combinations bridge women to surgery or substitute for it when surgery is refused altogether.",
+   "say": "Antagonist therapy with add back therapy reduces fibroid bleeding while bone stays protected.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Antagonist plus add back",
+     "points": [
+      "Bleeding controlled",
+      "Bone protected"
+     ]
+    },
+    "right": {
+     "title": "Agonist alone",
+     "points": [
+      "Flare then suppression",
+      "Bone loss limits"
+     ]
+    }
+   }
+  }
+ ]
+}

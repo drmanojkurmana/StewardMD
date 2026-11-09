@@ -1,0 +1,228 @@
+{
+  "v": 1,
+  "module": "pat-autoimmune",
+  "subject": "pathology",
+  "title": "Anticentromere Antibody, CREST, Mixed Connective Tissue Disease, and Myopathies",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A speckled centromere pattern on ANA testing in a patient with longstanding Raynaud phenomenon, tight fingers, telangiectasia, and heartburn predicts limited cutaneous systemic sclerosis and a comparatively favourable skin prognosis. The antibody producing that pattern, directed against centromere proteins, is the **anticentromere antibody**.",
+      "say": "Anticentromere antibody predicts limited cutaneous systemic sclerosis, with slow skin progression but late vascular risks.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/systemic-sclerosis-limited-fig1.webp",
+        "alt": "Limited systemic sclerosis syndrome features",
+        "caption": "Limited systemic sclerosis with sclerodactyly and telangiectasia, the subset linked to anticentromere antibody."
+      }
+    },
+    {
+      "tx": "The limited subset is remembered by its five features: calcinosis, Raynaud phenomenon, oesophageal dysmotility, sclerodactyly, and telangiectasia, developing over years distal to elbows and knees. Older books package this pentad as the **CREST syndrome**, and examiners still use the acronym as a rapid recognition cue.",
+      "say": "CREST packages limited systemic sclerosis: calcinosis, Raynaud, oesophageal dysmotility, sclerodactyly, and telangiectasia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Letter",
+          "Feature",
+          "Bedside clue"
+        ],
+        "rows": [
+          [
+            "C",
+            "Calcinosis cutis",
+            "Chalky deposits on fingers and elbows"
+          ],
+          [
+            "R",
+            "Raynaud phenomenon",
+            "Triphasic colour change on cold exposure"
+          ],
+          [
+            "E",
+            "Oesophageal dysmotility",
+            "Heartburn and dysphagia for solids"
+          ],
+          [
+            "S",
+            "Sclerodactyly",
+            "Tapered tight fingers with pulp loss"
+          ],
+          [
+            "T",
+            "Telangiectasia",
+            "Dilated vessels on face, lips, palms"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Raynaud attacks in systemic sclerosis are structural as well as vasospastic: intimal proliferation narrows digital arteries, so severe attacks ulcerate fingertips and occasionally threaten digits. Nailfold capillaroscopy showing giant capillaries and avascular dropout separates secondary from primary Raynaud, and the vascular culprit is obliterative **digital vasculopathy**.",
+      "say": "Digital ulcers mean structural vasculopathy, not simple spasm; capillaroscopy separates secondary Raynaud from the primary kind.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/raynaud-phenomenon-fig1.webp",
+        "alt": "Raynaud phenomenon clinical features",
+        "caption": "Raynaud phenomenon with episodic digital pallor and cyanosis on cold exposure."
+      }
+    },
+    {
+      "tx": "The late killer in limited disease is isolated pulmonary arterial hypertension, heralded by exertional breathlessness, a loud pulmonary second sound, and falling gas transfer with preserved lung volumes. Annual echocardiographic screening is therefore mandatory in anticentromere positive patients, because the feared complication is **pulmonary arterial hypertension**.",
+      "say": "Screen anticentromere positive patients yearly for pulmonary arterial hypertension; falling gas transfer is an early warning.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Annual echocardiogram and lung function screening"
+          },
+          {
+            "id": "b",
+            "label": "Falling DLCO with preserved volumes raises suspicion"
+          },
+          {
+            "id": "c",
+            "label": "Right heart catheterisation confirms PAH"
+          },
+          {
+            "id": "d",
+            "label": "Endothelin, phosphodiesterase, prostacyclin pathway therapy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Some patients blend features of lupus, systemic sclerosis, and polymyositis with puffy hands, Raynaud phenomenon, and arthritis, yet follow a milder course dominated by lung disease. High titre antibody against U1 ribonucleoprotein defines this overlap, classified as **mixed connective tissue disease**, and pulmonary hypertension again determines its prognosis.",
+      "say": "Puffy hands and overlapping lupus, sclerosis, and myositis features with anti-U1 RNP define mixed connective tissue disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mixed connective tissue disease",
+          "points": [
+            "Anti-U1 RNP in high titre",
+            "Puffy hands, Raynaud, overlap features",
+            "Lung disease decides prognosis"
+          ]
+        },
+        "right": {
+          "title": "Undifferentiated disease",
+          "points": [
+            "Autoimmune features without a defining antibody",
+            "May evolve into a named disease over years",
+            "Observed with periodic reassessment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Dermatomyositis announces itself on skin before muscle: a violet heliotrope rash on the eyelids, scaly Gottron papules over knuckles, and shawl and V-sign photosensitive eruptions accompany proximal weakness. Perifascicular atrophy on muscle biopsy and anti-Mi-2 antibodies support the diagnosis, and the classic eyelid sign is the **heliotrope rash**.",
+      "say": "Heliotrope eyelids and Gottron papules over the knuckles point to dermatomyositis even before weakness is tested.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disease",
+          "Skin or pattern clue",
+          "Biopsy pattern"
+        ],
+        "rows": [
+          [
+            "Dermatomyositis",
+            "Heliotrope rash, Gottron papules",
+            "Perifascicular atrophy, perivascular inflammation"
+          ],
+          [
+            "Polymyositis",
+            "No rash, proximal weakness",
+            "Endomysial CD8 invasion of fibres"
+          ],
+          [
+            "Inclusion body myositis",
+            "Finger flexor and quadriceps weakness",
+            "Rimmed vacuoles, inclusion bodies"
+          ],
+          [
+            "Immune mediated necrotising myopathy",
+            "Severe weakness, very high CK",
+            "Necrotic fibres, scant inflammation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In polymyositis, cytotoxic T cells invade non-necrotic muscle fibres endomysially, whereas dermatomyositis injures capillaries first with complement deposition and perifascicular fibre loss. Adult dermatomyositis also carries an increased internal malignancy association, so age appropriate cancer screening is part of management; the capillary centred mechanism is **complement-mediated microangiopathy**.",
+      "say": "Dermatomyositis is a complement driven microangiopathy of muscle, and adults need a malignancy search at diagnosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dermatomyositis",
+          "points": [
+            "Complement deposits in muscle capillaries",
+            "Perifascicular atrophy on biopsy",
+            "Cancer screening in adults"
+          ]
+        },
+        "right": {
+          "title": "Polymyositis",
+          "points": [
+            "CD8 T cells invade muscle fibres",
+            "Endomysial inflammation on biopsy",
+            "Diagnosis of exclusion after mimics removed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Treatment of inflammatory myopathy starts with high dose glucocorticoids plus early methotrexate or azathioprine, physiotherapy to preserve function, and intravenous immunoglobulin or rituximab for refractory disease. Creatine kinase tracks muscle injury but function tracks the patient, so rehabilitation is prescribed alongside immunosuppression as **combined immunosuppressive therapy** with structured exercise.",
+      "say": "Steroids plus an early steroid sparing drug and physiotherapy form the backbone of inflammatory myopathy treatment.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Confirm with CK, EMG, MRI, and muscle biopsy"
+          },
+          {
+            "id": "b",
+            "label": "High dose glucocorticoid induction"
+          },
+          {
+            "id": "c",
+            "label": "Methotrexate or azathioprine started early"
+          },
+          {
+            "id": "d",
+            "label": "Physiotherapy and malignancy screening in parallel"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

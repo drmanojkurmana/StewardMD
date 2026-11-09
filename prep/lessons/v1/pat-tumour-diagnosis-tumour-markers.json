@@ -1,0 +1,228 @@
+{
+  "v": 1,
+  "module": "pat-tumour-diagnosis",
+  "subject": "pathology",
+  "title": "Tumour Markers: AFP, CEA, CA-125, PSA, and Immunohistochemistry",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Tumour markers are substances produced by tumours or by the host response, measurable in blood, whose real value lies in monitoring treatment, detecting recurrence, and supporting prognosis rather than screening healthy people. Ordering them without a clinical question wastes money and generates false alarms; the discipline is **tumour marker stewardship**.",
+      "say": "Tumour markers monitor known cancer best; as screening tests in healthy people they mostly manufacture anxiety.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Marker",
+          "Cancer association",
+          "Best use"
+        ],
+        "rows": [
+          [
+            "AFP",
+            "Hepatocellular carcinoma, germ cell",
+            "Monitoring, prognosis with imaging"
+          ],
+          [
+            "CEA",
+            "Colorectal carcinoma",
+            "Recurrence surveillance after surgery"
+          ],
+          [
+            "CA-125",
+            "Ovarian carcinoma",
+            "Response and relapse monitoring"
+          ],
+          [
+            "PSA",
+            "Prostate carcinoma",
+            "Screening debate, monitoring after treatment"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Alpha-fetoprotein, the fetal albumin analogue, rises in hepatocellular carcinoma and nonseminomatous germ cell tumours, and a level above four hundred in a cirrhotic liver with a characteristic mass nearly seals the diagnosis. Falling levels track successful therapy; the marker is **alpha-fetoprotein (AFP)**.",
+      "say": "AFP serves liver cancer and germ cell tumours; very high levels in cirrhosis with a typical mass approach diagnostic certainty.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hepatocellular-carcinoma-fig1.webp",
+        "alt": "Hepatocellular carcinoma imaging features",
+        "caption": "Hepatocellular carcinoma imaging, the tumour whose blood marker is alpha-fetoprotein."
+      }
+    },
+    {
+      "tx": "Carcinoembryonic antigen, an adhesion glycoprotein re-expressed by colorectal and other adenocarcinomas, also rises with smoking, hepatitis, and inflammation, which disqualifies it for screening but suits it for postoperative recurrence surveillance. A rising trend after curative surgery triggers imaging; the marker is **CEA**.",
+      "say": "CEA cannot screen because smokers and inflamed livers raise it too, but a rising postoperative trend hunts recurrence well.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Good marker use",
+          "points": [
+            "Baseline before treatment",
+            "Serial trends after therapy",
+            "Rise triggers imaging search"
+          ]
+        },
+        "right": {
+          "title": "Poor marker use",
+          "points": [
+            "Screening unselected healthy people",
+            "Single borderline value panics",
+            "Ignoring benign causes of elevation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "CA-125, a mucin shed by coelomic epithelium, rises in most advanced ovarian cancers but also in endometriosis, menstruation, pregnancy, heart failure, and peritonitis, so its home is monitoring known ovarian cancer and triaging pelvic masses with other data. The ovarian associated marker is **CA-125**.",
+      "say": "CA-125 monitors ovarian cancer and helps triage pelvic masses, but endometriosis and even menstruation raise it too.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Pelvic mass found on examination or scan"
+          },
+          {
+            "id": "b",
+            "label": "CA-125 with ultrasound features and menopausal status"
+          },
+          {
+            "id": "c",
+            "label": "Risk algorithm triages to cancer pathway"
+          },
+          {
+            "id": "d",
+            "label": "Serial CA-125 later monitors chemotherapy response"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Prostate specific antigen is organ specific, not cancer specific: benign enlargement, prostatitis, ejaculation, and instrumentation raise it, while some cancers produce little, fuelling decades of screening controversy. Shared decision making around benefits and overdiagnosis harms governs its use; the marker is **PSA**.",
+      "say": "PSA marks the prostate organ, not prostate cancer; screening decisions must weigh overdiagnosis honestly with the patient.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/prostate-bph-turp-psa-fig1.webp",
+        "alt": "Normal versus benign prostatic hyperplasia prostate",
+        "caption": "Normal prostate compared with benign prostatic hyperplasia, the benign condition that also raises PSA."
+      }
+    },
+    {
+      "tx": "Germ cell tumours showcase markers at their best: AFP, beta-hCG, and LDH together stage nonseminomatous tumours, predict prognosis, and expose residual disease after chemotherapy. Seminomas raise beta-hCG modestly and LDH, but never AFP, a distinction examiners love; the panel is the **germ cell marker triad**.",
+      "say": "AFP, beta-hCG, and LDH together stage germ cell tumours; a raised AFP excludes pure seminoma by definition.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Marker",
+          "Seminoma",
+          "Nonseminoma",
+          "Pearl"
+        ],
+        "rows": [
+          [
+            "AFP",
+            "Never raised",
+            "Yolk sac elements raise it",
+            "Raised AFP means nonseminoma treatment"
+          ],
+          [
+            "Beta-hCG",
+            "Modestly raised in some",
+            "Choriocarcinoma very high",
+            "Also raised in pregnancy"
+          ],
+          [
+            "LDH",
+            "Raised with burden",
+            "Raised with burden",
+            "Prognostic in advanced disease"
+          ],
+          [
+            "PLAP",
+            "Often positive on staining",
+            "Variable",
+            "Tissue marker, less used in blood"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Immunohistochemistry converts morphology into lineage: panels of antibodies against keratins, lineage transcription factors, and hormones assign an unknown primary to lung, bowel, prostate, breast, or germ cell origin. TTF-1, CDX2, PSA, and GATA3 form a first panel vocabulary; the technique is diagnostic **immunohistochemistry**.",
+      "say": "Immunohistochemistry gives an unknown tumour a passport; TTF-1, CDX2, PSA, and GATA3 are the first stamps to learn.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Blood markers",
+          "points": [
+            "AFP, CEA, CA-125, PSA in serum",
+            "Trend over time matters most",
+            "Benign disease causes false rises"
+          ]
+        },
+        "right": {
+          "title": "Tissue markers",
+          "points": [
+            "Antibody stains on biopsy sections",
+            "Lineage assigned at diagnosis",
+            "Panels, never single stains alone"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The mature habit is Bayesian: markers refine a probability created by history, examination, and imaging, and a marker discordant with everything else is questioned before the patient is alarmed. Trend, context, and assay interference explain most surprises; that habit is **contextual marker interpretation**.",
+      "say": "Interpret every marker inside its clinical story; a lone discordant value is a question, not a diagnosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Clinical and imaging probability formed first"
+          },
+          {
+            "id": "b",
+            "label": "Marker obtained for a stated question"
+          },
+          {
+            "id": "c",
+            "label": "Trend compared with baseline and treatment"
+          },
+          {
+            "id": "d",
+            "label": "Discordance investigated before alarming patient"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

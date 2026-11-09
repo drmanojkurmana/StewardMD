@@ -1,0 +1,208 @@
+{
+ "v": 1,
+ "module": "obg-fibroid",
+ "subject": "obstetrics-gynaecology",
+ "title": "Fibroids: Types, Symptoms and Degeneration",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Benign smooth muscle tumours of the uterus, oestrogen responsive, are **leiomyomas** or fibroids. They affect most women by fifty, though many never cause symptoms. Size, number and especially location decide clinical importance. Growth depends on oestrogen and progesterone, so fibroids enlarge during reproductive years and shrink once the menopause removes hormonal drive.",
+   "say": "Fibroids are benign smooth muscle tumours whose location decides importance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/abnormal-uterine-bleeding-fig1.webp",
+    "alt": "Fibroids within AUB classification.",
+    "caption": "Fibroids in AUB. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "FIGO types grade fibroids by cavity relationship, the **FIGO fibroid system**. Submucosal types project into the cavity and bleed and block fertility most. Intramural types sit within the wall, while subserosal types grow outward on the surface and may never trouble. That single distinction predicts bleeding, fertility impact and the surgical route better than fibroid size alone ever does.",
+   "say": "FIGO fibroid types zero to two bleed most by projecting into the cavity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Group",
+     "Position"
+    ],
+    "rows": [
+     [
+      "Submucosal",
+      "Projects into cavity"
+     ],
+     [
+      "Intramural",
+      "Within the wall"
+     ],
+     [
+      "Subserosal",
+      "Grows outward"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Heavy menstrual bleeding is the cardinal fibroid symptom through cavity distortion and surface increase, termed **fibroid bleeding**. Pressure, urinary frequency and infertility follow by site. Anaemia quantifies the bleeding burden. Bleeding resists simple hormonal control when the cavity is distorted, because the enlarged surface outgrows what progestogens can stabilise.",
+   "say": "Fibroid bleeding from cavity distortion is the cardinal symptom, with anaemia quantifying it.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Cavity distorted"
+     },
+     {
+      "id": "n1",
+      "label": "Surface increased"
+     },
+     {
+      "id": "n2",
+      "label": "Periods heavy"
+     },
+     {
+      "id": "n3",
+      "label": "Anaemia develops"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Painful degeneration when a fibroid outgrows its blood supply in pregnancy is **red degeneration**. Localised pain, tenderness and low fever settle with analgesia alone. It needs no surgery during pregnancy. Carneous change is the same event named in older texts, and its pain typically peaks in the second half of pregnancy.",
+   "say": "Red degeneration causes painful ischaemic change in pregnancy and settles with analgesia alone.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-gynae_abdominal.webp",
+    "alt": "Fibroid abdominal examination.",
+    "caption": "Fibroid examination. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Calcified, hyaline and cystic changes accumulate in older fibroids as **secondary degenerations**. Postmenopausal growth, by contrast, is never degeneration and earns sarcoma exclusion. Rapid growth alone in younger women poorly predicts sarcoma. Hyaline change is the commonest degeneration of all, turning firm whorled muscle into glassy acellular tissue that may later calcify.",
+   "say": "Postmenopausal fibroid growth requires sarcoma exclusion, unlike benign degenerations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Degeneration",
+     "points": [
+      "Painful or incidental",
+      "Age related changes"
+     ]
+    },
+    "right": {
+     "title": "Postmenopausal growth",
+     "points": [
+      "Never assume benign",
+      "Sarcoma excluded"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A fibroid on a stalk from the fundus or cervix can twist or prolapse as a **pedunculated fibroid**, detailed next lesson. Subserosal stalk torsion causes acute abdomen. Cervical fibroid polyps present at the os. A stalked subserosal fibroid twists suddenly, while a cervical fibroid grows slowly downward until it fills the vagina as a mass.",
+   "say": "Pedunculated fibroids twist on stalks or prolapse through the cervix.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Stalk site",
+     "Event"
+    ],
+    "rows": [
+     [
+      "Subserosal",
+      "Torsion, acute abdomen"
+     ],
+     [
+      "Cervical",
+      "Prolapse through os"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Distinguishing fibroid uterus from ovarian mass uses movement with the cervix on examination, termed **uterine origin test**. A mass moving with the cervix is uterine. Ultrasound settles what examination cannot. Movement with the cervix fails when adhesions fix an ovarian mass to the uterus, which is why imaging confirms doubtful examinations.",
+   "say": "Uterine origin test moves the mass with the cervix to prove fibroid origin.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/adenomyosis-fig1.webp",
+    "alt": "Uterine enlargement differential on MRI.",
+    "caption": "Uterine differential. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Sarcoma risk in presumed fibroids is under one in a thousand in most series, quoted as **sarcoma rarity**. It justifies morcellation debates rather than universal open surgery. MRI features guide selective suspicion. Age and postmenopausal status raise suspicion far more than size, so selective imaging targets older women with growing masses.",
+   "say": "Sarcoma in presumed fibroids is rare and requires selective suspicion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Presumed fibroid"
+     },
+     {
+      "id": "n1",
+      "label": "MRI if suspicious"
+     },
+     {
+      "id": "n2",
+      "label": "Morcellation avoided then"
+     },
+     {
+      "id": "n3",
+      "label": "Open removal chosen"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Expectant management suits asymptomatic fibroids of any size with review, following **watchful waiting**. Growth in premenopausal women alone is not an operation. Intervention follows symptoms, anaemia or fertility plans. Review watches size, bleeding and bladder symptoms, and many fibroids under surveillance never need any procedure at all.",
+   "say": "Watchful waiting suits asymptomatic fibroids, intervening only for symptoms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Asymptomatic",
+     "points": [
+      "Observe with review"
+     ]
+    },
+    "right": {
+     "title": "Symptomatic",
+     "points": [
+      "Treat by priority"
+     ]
+    }
+   }
+  }
+ ]
+}
