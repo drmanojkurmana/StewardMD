@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "phy-autonomic",
+  "subject": "physiology",
+  "title": "Autonomic Nervous System Organization, Receptors, and Horner Syndrome",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The sympathetic division of the autonomic nervous system originates from preganglionic neuronal cell bodies located within the intermediolateral grey columns of the spinal cord spanning T1 through L2. Operating as the **thoracolumbar sympathetic outflow**, myelinated preganglionic axons exit via ventral roots and enter paravertebral sympathetic chain ganglia through white rami communicantes.",
+      "say": "Sympathetic outflow originates in the T1 to L2 intermediolateral horns as the thoracolumbar system.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sympathomimetics-adrenergic-agonists-fig1.webp",
+        "caption": "Adrenergic receptor subtypes and intracellular secondary messenger signaling cascades.",
+        "alt": "Alpha and beta adrenergic receptor signaling pathways and systemic physiological targets"
+      }
+    },
+    {
+      "tx": "In contrast to sympathetic architecture, the parasympathetic division arises from cranial nerve motor nuclei in the brainstem and sacral spinal cord segments S2 through S4. This **craniosacral parasympathetic outflow** utilizes cranial nerves three, seven, nine, and ten alongside pelvic splanchnic nerves, traveling long distances to synapse in microscopic ganglia located immediately adjacent to target organs.",
+      "say": "Craniosacral parasympathetic outflow travels in cranial nerves and pelvic nerves to terminal ganglia near organs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sympathetic Division (Thoracolumbar)",
+          "points": [
+            "Preganglionic cell bodies located in T1 to L2 intermediolateral horns",
+            "Short myelinated preganglionic fibers terminate in paravertebral chains",
+            "Long unmyelinated postganglionic fibers distribute widely to target tissues",
+            "High divergence ratio (1:20) enabling widespread coordinated mass discharge"
+          ]
+        },
+        "right": {
+          "title": "Parasympathetic Division (Craniosacral)",
+          "points": [
+            "Preganglionic cell bodies in brainstem (CN III, VII, IX, X) and S2 to S4",
+            "Long myelinated preganglionic axons travel directly to target viscera",
+            "Short postganglionic fibers arise from terminal or intramural ganglia",
+            "Low divergence ratio (1:1 to 1:3) delivering discrete, localized organ responses"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Neurotransmission across autonomic ganglia uses acetylcholine binding to ligand-gated pentameric cation channels. Both sympathetic and parasympathetic preganglionic terminals release acetylcholine onto **ganglionic nicotinic receptors**, permitting rapid inward sodium and calcium currents that depolarize postganglionic neurons to trigger explosive action potential discharge.",
+      "say": "All autonomic preganglionic terminals release acetylcholine onto nicotinic cation channel receptors in ganglia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pregang_depol",
+            "label": "Action Potential Invades Preganglionic Varicosity, Opening Cav2.2 Channels"
+          },
+          {
+            "id": "ach_exocytosis",
+            "label": "Vesicles Dock and Exocytose Acetylcholine into Ganglionic Synaptic Cleft"
+          },
+          {
+            "id": "nn_activation",
+            "label": "Binds Pentameric Nicotinic Receptors (Alpha-3-Beta-4), Opening Central Pore"
+          },
+          {
+            "id": "postgang_fire",
+            "label": "Rapid Influx of Sodium Generates Fast EPSP, Firing Postganglionic Axon"
+          }
+        ],
+        "edges": [
+          [
+            "pregang_depol",
+            "ach_exocytosis"
+          ],
+          [
+            "ach_exocytosis",
+            "nn_activation"
+          ],
+          [
+            "nn_activation",
+            "postgang_fire"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "At target visceral tissues, postganglionic parasympathetic terminals release acetylcholine onto five distinct metabotropic muscarinic receptor subtypes. In the heart, **muscarinic M2 receptors** coupled to Gi proteins open inwardly rectifying potassium channels to slow heart rate, whereas muscarinic M3 receptors on smooth muscle and glands couple to Gq to drive contraction and profuse secretion.",
+      "say": "Parasympathetic postganglionic nerves stimulate cardiac M2 receptors to slow heart rate and M3 to drive secretion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "M2 Muscarinic Receptors (Cardiac)",
+          "points": [
+            "Coupled to Gi/o inhibitory heterotrimeric G-proteins",
+            "Inhibits adenylyl cyclase, lowering intracellular cyclic AMP",
+            "Beta-gamma subunits open GIRK potassium channels in SA and AV nodes",
+            "Hyperpolarizes pacemaker cells, slowing heart rate and AV conduction velocity"
+          ]
+        },
+        "right": {
+          "title": "M3 Muscarinic Receptors (Smooth Muscle / Glands)",
+          "points": [
+            "Coupled to Gq/11 proteins to stimulate phospholipase C-beta",
+            "Generates inositol trisphosphate (IP3) and diacylglycerol (DAG)",
+            "Elevates intracellular calcium, triggering smooth muscle contraction",
+            "Directs bronchoconstriction, gut peristalsis, pupillary miosis, and salivation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Postganglionic sympathetic axons release norepinephrine from extensive beaded axonal networks termed varicosities. Released norepinephrine stimulates **alpha and beta adrenergic receptors**, with vascular alpha-one receptors mediating intense vasoconstriction via Gq-IP3 signaling, and cardiac beta-one receptors mediating increased inotropy and chronotropy via Gs-cAMP-protein kinase A cascades.",
+      "say": "Sympathetic norepinephrine stimulates vascular alpha-one receptors to constrict vessels and cardiac beta-one to boost heart rate.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "norepi_release",
+            "label": "Sympathetic Varicosities Release Norepinephrine Across Target Tissues"
+          },
+          {
+            "id": "alpha1_vasoconstrict",
+            "label": "Alpha-1 Receptors (Gq) Contract Vascular Smooth Muscle, Raising SVR"
+          },
+          {
+            "id": "beta1_cardiac",
+            "label": "Beta-1 Receptors (Gs) Accelerate SA Nodal Firing and Myocardial Inotropy"
+          },
+          {
+            "id": "beta2_bronchodilate",
+            "label": "Beta-2 Receptors (Gs) Relax Bronchial and Skeletal Muscle Vasculature"
+          }
+        ],
+        "edges": [
+          [
+            "norepi_release",
+            "alpha1_vasoconstrict"
+          ],
+          [
+            "norepi_release",
+            "beta1_cardiac"
+          ],
+          [
+            "norepi_release",
+            "beta2_bronchodilate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "During acute physiological crisis, stress, or hemorrhage, the sympathetic nervous system fires synchronously as an integrated whole. This coordinated **sympathetic mass discharge** simultaneously dilates pupils, elevates heart rate and blood pressure, bronchodilates airways, mobilizes liver glycogen into glucose, and redirects blood flow from gut viscera toward skeletal muscle.",
+      "say": "Sympathetic mass discharge coordinates an all-out fight-or-flight response, shifting blood from viscera to muscle.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sympathetic Mass Discharge (Fight-or-Flight)",
+          "points": [
+            "Hypothalamus activates entire thoracolumbar outflow synchronously",
+            "Adrenal medulla co-secretes 80% epinephrine and 20% norepinephrine",
+            "Pupils dilate (mydriasis) and bronchioles widen to maximize ventilation",
+            "Glycogenolysis elevates blood glucose; blood shunts to skeletal muscles"
+          ]
+        },
+        "right": {
+          "title": "Parasympathetic State (Rest-and-Digest)",
+          "points": [
+            "Operates discrete, localized, non-synchronized organ-specific reflexes",
+            "Slows heart rate and promotes digestive glandular secretions",
+            "Enhances gastrointestinal motility, bile expulsion, and nutrient absorption",
+            "Facilitates bladder detrusor emptying and restorative energy conservation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When sympathetic or parasympathetic efferent nerves are severed, denervated target tissues display paradoxically augmented sensitivity to subsequent exposure to circulating neurotransmitter agonists. Termed **denervation hypersensitivity**, target cells upregulate postsynaptic receptor density and dismantle reuptake transporter proteins, amplifying downstream physiological responsiveness to tiny agonist doses.",
+      "say": "Denervation hypersensitivity occurs when severed nerves cause target cells to upregulate receptor density.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "postgang_transect",
+            "label": "Surgical Transection or Trauma Destroys Postganglionic Autonomic Axons"
+          },
+          {
+            "id": "loss_neurotransmit",
+            "label": "Target Tissue Loses Tonic Baseline Exposure to Neurotransmitter"
+          },
+          {
+            "id": "receptor_upregulate",
+            "label": "Compensatory Upregulation Increases Postsynaptic Adrenergic/Muscarinic Density"
+          },
+          {
+            "id": "hypersensitive_flush",
+            "label": "Traces of Exogenous Agonist Now Evoke Exaggerated Muscle Spasm or Secretion"
+          }
+        ],
+        "edges": [
+          [
+            "postgang_transect",
+            "loss_neurotransmit"
+          ],
+          [
+            "loss_neurotransmit",
+            "receptor_upregulate"
+          ],
+          [
+            "receptor_upregulate",
+            "hypersensitive_flush"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Interruption of the three-neuron oculosympathetic pathway at any point along its course from hypothalamus to orbit produces a classic clinical constellation. Known as **Horner syndrome**, the patient presents with ipsilateral pupillary miosis due to unopposed parasympathetic sphincter tone, partial blepharoptosis from denervated superior tarsal muscle, and facial anhidrosis.",
+      "say": "Horner syndrome produces ipsilateral pupillary miosis, ptosis, and anhidrosis from lost sympathetic drive.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/strabismus-fig1.webp",
+        "caption": "Ocular motor and pupillary pathway asymmetry illustrating disruptions in sympathetic and cranial innervation.",
+        "alt": "Ocular asymmetry and pupillary autonomic disruptions"
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

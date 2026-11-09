@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "phy-hypothalamus-limbic",
+  "subject": "physiology",
+  "title": "Hypothalamic Nuclei, Feeding Regulation, Leptin, and Ghrelin",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Situated in the diencephalon beneath the thalamus and forming the floor of the third ventricle, the hypothalamus orchestrates whole-body physiological homeostasis. Critical **hypothalamic homeostatic functions** encompass neuroendocrine pituitary control, central autonomic regulation, body temperature maintenance, circadian timekeeping, thirst and water balance, feeding drive, and emotional expression.",
+      "say": "The hypothalamus integrates autonomic, endocrine, and behavioral systems to maintain body homeostasis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cushing-disease-fig1.webp",
+        "caption": "Hypothalamic-pituitary neuroendocrine feedback loops regulating peripheral adrenocortical hormones.",
+        "alt": "Hypothalamic corticotropin-releasing hormone drive to pituitary corticotropes"
+      }
+    },
+    {
+      "tx": "Bilateral experimental stimulation or natural activation of the lateral hypothalamic area induces voracious, continuous food consumption. Acting as the physiological **feeding centre**, lateral hypothalamic neurons synthesize orexigenic neuropeptides including melanin-concentrating hormone and orexin, whereas bilateral lesions of this region result in severe aphagia and starvation.",
+      "say": "The lateral hypothalamic feeding centre promotes appetite, and its destruction leads to starvation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lateral Hypothalamus (Feeding Centre)",
+          "points": [
+            "Promotes hyperphagia and feeding drive upon stimulation",
+            "Synthesizes orexin-A, orexin-B, and melanin-concentrating hormone",
+            "Bilateral ablation causes complete refusal to eat (aphagia) and cachexia",
+            "Receives inhibitory projections from satiety center following meal ingestion"
+          ]
+        },
+        "right": {
+          "title": "Ventromedial Nucleus (Satiety Centre)",
+          "points": [
+            "Terminates meal consumption upon gastrointestinal and nutrient signals",
+            "Expresses high concentrations of insulin and leptin receptors",
+            "Bilateral ablation causes relentless hyperphagia and morbid obesity",
+            "Exerts tonic inhibition over lateral hypothalamic feeding centers"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In opposition to the lateral feeding center, the ventromedial hypothalamic nucleus functions as the physiological **satiety centre**. Stimulation of the ventromedial nucleus abruptly halts feeding, whereas bilateral destructive lesions eliminate postprandial satiety, producing unstoppable voracious hyperphagia, rapid gastric emptying, and intractable hypothalamic obesity.",
+      "say": "The ventromedial satiety centre stops eating, and its destruction causes voracious hyperphagia and obesity.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/anorexia-nervosa-fig1.webp",
+        "caption": "Severe neuroendocrine and metabolic dysregulation resulting from distorted central appetite circuits.",
+        "alt": "Profound metabolic and endocrine suppression in severe nutritional deprivation"
+      }
+    },
+    {
+      "tx": "Circulating long-term nutritional status is integrated within the arcuate nucleus by two competing neuronal populations. Pro-opiomelanocortin and cocaine-and-amphetamine-regulated transcript neurons synthesize alpha-melanocyte-stimulating hormone to activate melanocortin-4 receptors, promoting satiety, whereas **NPY and AgRP neurons** synthesize neuropeptide Y and agouti-related peptide to potently stimulate voracious eating.",
+      "say": "Arcuate POMC neurons promote satiety while NPY and AgRP neurons potently stimulate eating.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "POMC / CART Neurons (Anorexigenic)",
+          "points": [
+            "Stimulated by leptin, insulin, and postprandial gut hormones (GLP-1, PYY)",
+            "Cleaves POMC to release alpha-melanocyte-stimulating hormone (alpha-MSH)",
+            "Alpha-MSH binds melanocortin-4 receptors (MC4R) in paraventricular nucleus",
+            "Suppresses appetite and elevates basal metabolic energy expenditure"
+          ]
+        },
+        "right": {
+          "title": "NPY / AgRP Neurons (Orexigenic)",
+          "points": [
+            "Inhibited by leptin and insulin; stimulated by fasting and ghrelin",
+            "Releases neuropeptide Y (NPY) to stimulate Y1/Y5 hypothalamic receptors",
+            "Releases AgRP, an endogenous competitive antagonist at MC4 receptors",
+            "Drives relentless hunger, foraging behavior, and decreases metabolic rate"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Secreted into the bloodstream by white adipose tissue in direct proportion to total body triglyceride stores, an essential protein hormone signals long-term energy sufficiency. This adipokine is **leptin**, which crosses the blood-brain barrier to stimulate anorexigenic POMC neurons while inhibiting orexigenic NPY/AgRP neurons within the arcuate nucleus.",
+      "say": "White adipose tissue secretes leptin in proportion to fat mass to signal satiety to the hypothalamus.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "adipose_expand",
+            "label": "Adipocyte Triglyceride Accumulation Increases Proportional Leptin Secretion"
+          },
+          {
+            "id": "arcuate_transport",
+            "label": "Circulating Leptin Crosses Median Eminence to Bind LepRb Receptors"
+          },
+          {
+            "id": "jak_stat_fire",
+            "label": "Activates JAK2-STAT3 Signaling, Stimulating POMC and Suppressing NPY/AgRP"
+          },
+          {
+            "id": "mc4r_anorexia",
+            "label": "Alpha-MSH Activates Paraventricular MC4R, Decreasing Intake and Raising Energy Output"
+          }
+        ],
+        "edges": [
+          [
+            "adipose_expand",
+            "arcuate_transport"
+          ],
+          [
+            "arcuate_transport",
+            "jak_stat_fire"
+          ],
+          [
+            "jak_stat_fire",
+            "mc4r_anorexia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "While leptin provides chronic adiposity feedback, meal initiation is triggered acutely by a peptide hormone synthesized primarily by oxyntic P/D1 endocrine cells of the gastric fundus. Designated **ghrelin**, this twenty-eight amino acid acylated peptide surges prior to expected meal times, stimulating arcuate NPY/AgRP neurons to provoke intense preprandial hunger.",
+      "say": "Gastric fundus cells secrete ghrelin before meals to stimulate NPY neurons and provoke acute hunger.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "empty_stomach",
+            "label": "Gastric Fundus Empties During Fasting, Stimulating Oxyntic Ghrelin Release"
+          },
+          {
+            "id": "ghsr_binding",
+            "label": "Acylated Ghrelin Binds Growth Hormone Secretagogue Receptors (GHS-R1a)"
+          },
+          {
+            "id": "agrp_discharge",
+            "label": "Depolarizes Arcuate NPY/AgRP Neurons to Trigger Acute Preprandial Hunger"
+          },
+          {
+            "id": "postprandial_drop",
+            "label": "Gastric Distension and Nutrient Ingestion Rapidly Suppress Plasma Ghrelin"
+          }
+        ],
+        "edges": [
+          [
+            "empty_stomach",
+            "ghsr_binding"
+          ],
+          [
+            "ghsr_binding",
+            "agrp_discharge"
+          ],
+          [
+            "agrp_discharge",
+            "postprandial_drop"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Following meal consumption, physical distension of the gastrointestinal tract and chemical nutrient absorption stimulate the rapid release of anorexigenic satiety peptides. Enteroendocrine L cells in the ileum and colon release **peptide YY and glucagon-like peptide 1**, which signal centrally via the vagus nerve and arcuate nucleus to terminate meal consumption.",
+      "say": "Intestinal L cells release GLP-1 and PYY after meals to terminate feeding and promote fullness.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Peptide YY (PYY3-36)",
+          "points": [
+            "Secreted by mucosal L-cells of ileum and colon in response to fat and protein",
+            "Binds inhibitory presynaptic Y2 receptors on arcuate NPY/AgRP neurons",
+            "Inhibits NPY release, thereby lifting tonic inhibition on POMC neurons",
+            "Acts as an effective physiological brake on postprandial meal continuation"
+          ]
+        },
+        "right": {
+          "title": "Glucagon-Like Peptide 1 (GLP-1)",
+          "points": [
+            "Co-secreted with PYY from intestinal L-cells upon luminal nutrient transit",
+            "Activates vagal sensory afferents and hypothalamic GLP-1 receptors",
+            "Slows gastric emptying and centrally suppresses hunger sensations",
+            "Potentiates glucose-stimulated insulin secretion from pancreatic beta cells"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Congenital genetic mutations affecting the melanocortin signaling pathway disrupt central energy homeostasis. In humans, heterozygous or homozygous loss-of-function mutations in the **melanocortin-4 receptor** represent the most common monogenic cause of severe early-onset obesity, producing insatiable post-weaning hyperphagia, accelerated linear growth, and hyperinsulinemia.",
+      "say": "Mutations in the melanocortin-4 receptor cause severe early-onset obesity due to uninhibited hunger.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mc4r_mutation",
+            "label": "Loss-of-Function Nonsense or Missense Mutation in MC4R Gene on Chromosome 18q"
+          },
+          {
+            "id": "failed_coupling",
+            "label": "Receptor Fails to Couple with Gs to Activate Adenylyl Cyclase in Paraventricular Nucleus"
+          },
+          {
+            "id": "unresponsive_satiety",
+            "label": "Anorexigenic Signals from Alpha-MSH Cannot Be Transduced into Satiety"
+          },
+          {
+            "id": "morbid_hyperphagia",
+            "label": "Relentless Voracious Appetite Leads to Early Severe Childhood Morbid Obesity"
+          }
+        ],
+        "edges": [
+          [
+            "mc4r_mutation",
+            "failed_coupling"
+          ],
+          [
+            "failed_coupling",
+            "unresponsive_satiety"
+          ],
+          [
+            "unresponsive_satiety",
+            "morbid_hyperphagia"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

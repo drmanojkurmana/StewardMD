@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "phy-hypothalamus-limbic",
+  "subject": "physiology",
+  "title": "Thirst Mechanisms, Thermoregulation, and Fever Pathophysiology",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Maintenance of extracellular fluid volume and effective osmolality relies upon conscious behavioral drinking drives triggered by specialized sensory circumventricular organs. The central **thirst mechanism** is activated when systemic plasma osmolarity rises by as little as one to two percent, or when circulating blood volume falls by ten to fifteen percent.",
+      "say": "Thirst is triggered when plasma osmolarity rises by one percent or blood volume drops by ten percent.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/vasovagal-syncope-fig1.webp",
+        "caption": "Central autonomic and hemodynamic reflex integration responding to acute changes in intravascular volume.",
+        "alt": "Baroreceptor and volume reflex pathways regulating central hemodynamics"
+      }
+    },
+    {
+      "tx": "Specialized sensory neurons located outside the blood-brain barrier within the organum vasculosum of the lamina terminalis and subfornical organ detect microscopic changes in fluid tonicity. These **central osmoreceptors** shrink when extracellular sodium concentration rises, opening stretch-inactivated cation channels that fire to stimulate posterior pituitary vasopressin release and drive thirst.",
+      "say": "Central osmoreceptors in the lamina terminalis shrink when plasma osmolality rises, firing to stimulate thirst.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hyperosmolar",
+            "label": "Water Deprivation Raises Extracellular Fluid Osmolarity Above 285 mOsm/kg"
+          },
+          {
+            "id": "osmotic_shrink",
+            "label": "Water Leaves Osmoreceptor Cells, Causing Mechanical Cellular Shrinkage"
+          },
+          {
+            "id": "cation_open",
+            "label": "Opening of Non-Selective TRPV4 Cation Channels Depolarizes the Cell"
+          },
+          {
+            "id": "avp_thirst",
+            "label": "Triggers Vasopressin Secretion from Supraoptic Nuclei and Intense Thirst Drive"
+          }
+        ],
+        "edges": [
+          [
+            "hyperosmolar",
+            "osmotic_shrink"
+          ],
+          [
+            "osmotic_shrink",
+            "cation_open"
+          ],
+          [
+            "cation_open",
+            "avp_thirst"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Core body temperature is monitored and defended within a narrow homeostatic window around thirty-seven degrees Celsius by preoptic hypothalamic neurons. Operating as the **hypothalamic thermostat**, the anterior preoptic area integrates warm and cold inputs from cutaneous thermoreceptors and local arterial blood temperature to direct coordinated heat dissipation or conservation responses.",
+      "say": "The anterior preoptic hypothalamus functions as the body thermostat, keeping core temperature near 37 degrees.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Heat Loss Mechanisms (Anterior Preoptic)",
+          "points": [
+            "Activated when core blood temperature rises above 37.0 C set point",
+            "Sympathetic cholinergic activation of eccrine sweat glands for evaporation",
+            "Inhibition of sympathetic vasoconstrictor tone produces cutaneous vasodilation",
+            "Apathy, lethargy, and behavioral Seeking of shade or cool environments"
+          ]
+        },
+        "right": {
+          "title": "Heat Conservation Mechanisms (Posterior Nucleus)",
+          "points": [
+            "Activated when core temperature drops beneath set point threshold",
+            "Intense cutaneous sympathetic vasoconstriction to insulate body core",
+            "Shivering thermogenesis: rhythmic involuntary primary motor center shaking",
+            "Non-shivering thermogenesis: sympathetic stimulation of brown adipose UCP-1"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When the body experiences excessive cold, the posterior hypothalamic nucleus activates involuntary rhythmic skeletal muscle contractions. Termed **shivering thermogenesis**, motor centers in the midbrain reticular formation drive reciprocal alpha and gamma motor neuron oscillations at ten to twelve hertz, multiplying metabolic heat production four- to five-fold without performing external mechanical work.",
+      "say": "Shivering thermogenesis uses involuntary muscle contractions to increase metabolic heat production up to five times.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pheochromocytoma-fig1.webp",
+        "caption": "Catecholamine surges and hypermetabolism showing sympathetic-driven thermogenesis and vascular tone.",
+        "alt": "Massive catecholamine secretion stimulating peripheral metabolic heat generation"
+      }
+    },
+    {
+      "tx": "During systemic bacterial or viral infections, immune phagocytes release endogenous pyrogenic cytokines including interleukin-one, interleukin-six, and tumor necrosis factor alpha. These mediators stimulate the vascular endothelium of the organum vasculosum to produce **prostaglandin E2**, which diffuses into the preoptic area to elevate the hypothalamic thermoregulatory set point.",
+      "say": "Pyrogenic cytokines induce endothelial prostaglandin E2, which raises the hypothalamic set point, causing fever.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bacterial_lps",
+            "label": "Microbial Endotoxins Stimulate Macrophages to Release IL-1, IL-6, and TNF-Alpha"
+          },
+          {
+            "id": "ovlt_endothelium",
+            "label": "Circulating Pyrogens Bind Receptors on Brain Endothelium in OVLT"
+          },
+          {
+            "id": "pge2_synthesis",
+            "label": "Induction of Cyclooxygenase-2 and mPGES-1 Generates Prostaglandin E2 (PGE2)"
+          },
+          {
+            "id": "ep3_activation",
+            "label": "PGE2 Binds EP3 Receptors on Preoptic Neurons, Raising Thermoregulatory Set Point"
+          }
+        ],
+        "edges": [
+          [
+            "bacterial_lps",
+            "ovlt_endothelium"
+          ],
+          [
+            "ovlt_endothelium",
+            "pge2_synthesis"
+          ],
+          [
+            "pge2_synthesis",
+            "ep3_activation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The upward displacement of the hypothalamic set point in fever creates a subjective mismatch where existing normal thirty-seven degree body temperature is perceived as freezing cold. Consequently, patients develop **chills and rigors**, experiencing intense cutaneous vasoconstriction and shivering until core body temperature climbs to match the elevated thirty-nine degree set point.",
+      "say": "When the set point rises, normal body temperature feels cold, provoking shivering until fever matches the set point.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fever (Pyrexia)",
+          "points": [
+            "Upward elevation of the hypothalamic thermoregulatory set point by PGE2",
+            "Thermoregulatory effector mechanisms intact and working to raise heat",
+            "Cutaneous vasoconstriction, shivering, and subjective chills early on",
+            "Responds effectively to antipyretics like paracetamol, aspirin, and NSAIDs"
+          ]
+        },
+        "right": {
+          "title": "Hyperthermia (Heat Stroke)",
+          "points": [
+            "Uncontrolled rise in core temperature above unchanged normal set point",
+            "Failure of heat dissipation (e.g., hot humid environment, anticholinergics)",
+            "Hot, flushed, dry skin with cessation of sweating and delirium",
+            "Antipyretics completely ineffective; requires urgent external physical cooling"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Antipyretic medications such as paracetamol, ibuprofen, and aspirin relieve fever by inhibiting the cyclooxygenase enzymes responsible for central prostaglandin E2 synthesis. By blocking PGE2 formation within the hypothalamic vasculature, antipyretics restore the **normal thermoregulatory set point**, triggering intense diaphoresis and cutaneous vasodilation as fever breaks.",
+      "say": "Antipyretics inhibit cyclooxygenase to abolish PGE2, restoring the normal set point and causing sweating.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cox_inhibitor",
+            "label": "Antipyretic Agent (Paracetamol, NSAID) Inhibits Central Cyclooxygenase-2"
+          },
+          {
+            "id": "pge2_plummets",
+            "label": "Hypothalamic Interstitial Prostaglandin E2 Concentrations Fall Rapidly"
+          },
+          {
+            "id": "setpoint_restored",
+            "label": "Preoptic Thermostat Resets Abruptly Back Downward to Normal 37.0 C"
+          },
+          {
+            "id": "sweat_flush",
+            "label": "Body Senses Heat Excess: Sweating (Diaphoresis) and Vasodilation Break Fever"
+          }
+        ],
+        "edges": [
+          [
+            "cox_inhibitor",
+            "pge2_plummets"
+          ],
+          [
+            "pge2_plummets",
+            "setpoint_restored"
+          ],
+          [
+            "setpoint_restored",
+            "sweat_flush"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Endogenous biological oscillations that cycle with a period of approximately twenty-four hours coordinate diurnal hormonal surges, core body temperature, alertness, and renal electrolyte excretion. Governed by hypothalamic molecular clocks, these autonomous cycles constitute **circadian rhythms**, which persist reliably even in the total absence of external environmental time cues.",
+      "say": "Circadian rhythms are 24-hour biological cycles governing hormone peaks, body temperature, and sleepiness.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Diurnal Peak Windows",
+          "points": [
+            "Serum cortisol peaks sharply upon waking in morning (cortisol awakening response)",
+            "Arterial blood pressure and alertness peak in late morning hours",
+            "Core body temperature reaches highest daily peak in late afternoon (around 17:00)",
+            "Hemoglobin and hematocrit demonstrate late afternoon concentration crest"
+          ]
+        },
+        "right": {
+          "title": "Nocturnal Trough / Peak Windows",
+          "points": [
+            "Melatonin secretion surges from pineal gland across dark night hours",
+            "Core body temperature drops to its lowest daily nadir around 04:00 to 05:00",
+            "Pituitary growth hormone and prolactin surge during slow-wave sleep",
+            "Renal glomerular filtration and urine production decrease overnight"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

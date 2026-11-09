@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "phy-cerebellum-basal-ganglia",
+  "subject": "physiology",
+  "title": "Cerebellar Functional Divisions, Comparator Action, and Ataxia",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The cerebellum coordinates skilled voluntary motor activity and maintains equilibrium through three phylogenetically distinct functional subdivisions. Formed by the vermis and intermediate cerebellar hemispheres, the **spinocerebellum** receives extensive proprioceptive sensory feedback from spinal cord tracts, using this ascending stream to regulate ongoing limb execution and muscle tone.",
+      "say": "The spinocerebellum receives spinal proprioceptive inputs to regulate ongoing limb movements and muscle tone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "proprioceptive_in",
+            "label": "Dorsal and Ventral Spinocerebellar Tracts Relay Peripheral Joint and Muscle Feedback"
+          },
+          {
+            "id": "spinocerebellar_cortex",
+            "label": "Inputs Processed Within Vermis and Intermediate Hemispheric Cortex"
+          },
+          {
+            "id": "interposed_nuclei",
+            "label": "Purkinje Inhibitory Output Relays Through Fastigial and Interposed Deep Nuclei"
+          },
+          {
+            "id": "rubrospinal_corticospinal",
+            "label": "Projects to Red Nucleus and Motor Thalamus to Adjust Ongoing Muscle Force"
+          }
+        ],
+        "edges": [
+          [
+            "proprioceptive_in",
+            "spinocerebellar_cortex"
+          ],
+          [
+            "spinocerebellar_cortex",
+            "interposed_nuclei"
+          ],
+          [
+            "interposed_nuclei",
+            "rubrospinal_corticospinal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The oldest phylogenetic division of the cerebellum comprises the flocculonodular lobe and adjacent vermian cortex. Operating as the **vestibulocerebellum**, it receives direct primary afferents from the vestibular labyrinth and semicircular canals to coordinate head position, bodily balance, posture, and compensatory conjugate vestibulo-ocular eye tracking reflexes.",
+      "say": "The vestibulocerebellum connects with the labyrinth to govern equilibrium, posture, and vestibulo-ocular tracking.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vestibulocerebellum (Archicerebellum)",
+          "points": [
+            "Composed of flocculus, nodulus, and inferior vermis",
+            "Reciprocal connections with brainstem vestibular nuclei",
+            "Maintains axial equilibrium, balance, and spatial orientation",
+            "Directs conjugate compensatory vestibulo-ocular eye reflexes"
+          ]
+        },
+        "right": {
+          "title": "Cerebrocerebellum (Neocerebellum)",
+          "points": [
+            "Composed of large lateral cerebellar hemispheres",
+            "Massive reciprocal loops with contralateral cerebral cortex via pons",
+            "Plans, times, and initiates complex multi-joint voluntary movements",
+            "Participates in motor learning and procedural cognitive sequences"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Occupying the vast lateral cerebellar hemispheres, the neocerebellar cortex connects reciprocally with the contralateral premotor and motor cerebral cortices via pontine nuclei. Acting as the **cerebrocerebellum**, this system plans the velocity, direction, and multi-joint sequence of voluntary motor programs prior to corticospinal discharge.",
+      "say": "The cerebrocerebellum plans timing and trajectory of voluntary motor sequences with the cerebral cortex.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/spinocerebellar-ataxia-fig1.webp",
+        "caption": "Progressive cerebellar cortical atrophy demonstrating loss of coordination and timing circuits.",
+        "alt": "Cerebellar hemispheric and vermian degeneration causing severe motor uncoordination"
+      }
+    },
+    {
+      "tx": "The cerebellum acts as a real-time error-correcting servo-mechanism during motor performance. Through its **comparator function**, the cerebellar cortex compares the intended motor command relayed from the motor cortex via corticopontocerebellar fibers with actual physical limb position reported by spinocerebellar afferents, instantly sending corrective dampening signals.",
+      "say": "Through its comparator function, the cerebellum compares intended motor commands with actual movement to correct errors.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "intended_plan",
+            "label": "Motor Cortex Sends Efference Copy of Intended Movement via Pontine Mossy Fibers"
+          },
+          {
+            "id": "actual_feedback",
+            "label": "Spinocerebellar Afferents Report Real-Time Physical Trajectory and Load"
+          },
+          {
+            "id": "purkinje_compare",
+            "label": "Purkinje Layer Integrates Mossy and Climbing Fiber Error Discrepancies"
+          },
+          {
+            "id": "ventrolateral_relay",
+            "label": "Corrective Signals Sent via Dentate Nucleus to Ventrolateral Motor Thalamus"
+          }
+        ],
+        "edges": [
+          [
+            "intended_plan",
+            "purkinje_compare"
+          ],
+          [
+            "actual_feedback",
+            "purkinje_compare"
+          ],
+          [
+            "purkinje_compare",
+            "ventrolateral_relay"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Destruction or ischemic injury to the cerebellar hemispheres degrades the smooth coordination of agonist, antagonist, and synergist muscle groups across joints. This uncoordinated movement represents **cerebellar ataxia**, marked clinically by dysmetria, past-pointing, dysdiadochokinesia during rapid alternating movements, and a broad-based staggering gait.",
+      "say": "Cerebellar ataxia impairs multi-joint coordination, causing dysmetria, dysdiadochokinesia, and a reeling gait.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/syne1-ataxia-fig1.webp",
+        "caption": "Genetic cerebellar ataxia neuroimaging displaying vermian and hemispheric volumetric loss.",
+        "alt": "Ataxia imaging revealing cerebellar folial atrophy and dilated fourth ventricle"
+      }
+    },
+    {
+      "tx": "When cerebellar dampening and predictive braking mechanisms fail, voluntary targeted movements oscillate with increasing amplitude as the limb approaches its goal. Termed **intention tremor**, this kinetic shaking is absent at rest but intensifies markedly during the terminal decelerating phase of the finger-to-nose or heel-to-shin coordination tests.",
+      "say": "Intention tremor appears during targeted voluntary reaching, worsening as the limb nears its target.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cerebellar Intention Tremor",
+          "points": [
+            "Kinetic tremor absent when the limb is relaxed at rest",
+            "Oscillates perpendicular to trajectory of voluntary reaching",
+            "Amplifies progressively as limb approaches intended target",
+            "Arises from failure of cerebellar predictive braking dampening"
+          ]
+        },
+        "right": {
+          "title": "Basal Ganglia Resting Tremor",
+          "points": [
+            "Low-frequency (4 to 6 Hz) pill-rolling oscillation present at rest",
+            "Attenuates or disappears completely during active voluntary reaching",
+            "Prominently involves fingers, thumbs, wrist, and jaw",
+            "Arises from uninhibited oscillatory subthalamic and pallidal loops"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In parallel with cerebellar timing, the basal ganglia control movement initiation through dual opposing striatopallidal loops. The striatal **direct motor pathway** expresses dopamine D1 receptors that directly inhibit the internal globus pallidus and substantia nigra reticulata, disinhibiting the motor thalamus to facilitate targeted cortical motor programs.",
+      "say": "The direct basal ganglia pathway activates D1 receptors to disinhibit the thalamus and initiate movement.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cortex_striatum",
+            "label": "Cerebral Cortex Releases Glutamate to Excite Striatal D1 Projection Neurons"
+          },
+          {
+            "id": "direct_gaba",
+            "label": "Striatal GABA and Substance P Axons Directly Inhibit GPi / Substantia Nigra"
+          },
+          {
+            "id": "thalamus_disinhibit",
+            "label": "Basal Tonic Inhibition of Ventral Anterior and Ventrolateral Thalamus Lifted"
+          },
+          {
+            "id": "motor_facilitate",
+            "label": "Thalamocortical Projections Fire Robustly to Execute Desired Movement"
+          }
+        ],
+        "edges": [
+          [
+            "cortex_striatum",
+            "direct_gaba"
+          ],
+          [
+            "direct_gaba",
+            "thalamus_disinhibit"
+          ],
+          [
+            "thalamus_disinhibit",
+            "motor_facilitate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Conversely, the striatal **indirect motor pathway** suppresses unwanted competing motor programs to ensure precise execution. Striatal neurons expressing dopamine D2 receptors project to the external globus pallidus, disinhibiting the subthalamic nucleus, which in turn delivers robust glutamatergic excitation to the internal globus pallidus, driving profound thalamic suppression.",
+      "say": "The indirect pathway engages the subthalamic nucleus to increase pallidal inhibition, suppressing unwanted movements.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "d2_striatum",
+            "label": "Striatal D2 Neurons Project GABA and Enkephalin to External Globus Pallidus"
+          },
+          {
+            "id": "gpe_inhibit",
+            "label": "GPe Inhibition Disinhibits Excitatory Subthalamic Nucleus (STN)"
+          },
+          {
+            "id": "stn_glutamate",
+            "label": "STN Sends Glutamatergic Drive to Internal Globus Pallidus (GPi)"
+          },
+          {
+            "id": "thalamic_clamp",
+            "label": "Hyperactive GPi Clamps Motor Thalamus, Suppressing Involuntary Movements"
+          }
+        ],
+        "edges": [
+          [
+            "d2_striatum",
+            "gpe_inhibit"
+          ],
+          [
+            "gpe_inhibit",
+            "stn_glutamate"
+          ],
+          [
+            "stn_glutamate",
+            "thalamic_clamp"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}

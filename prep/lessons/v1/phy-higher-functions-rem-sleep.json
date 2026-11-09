@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "phy-higher-functions",
+  "subject": "physiology",
+  "title": "REM Sleep, Sleep Microarchitecture, and Long-Term Potentiation",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Recurring roughly every ninety to one hundred and twenty minutes throughout normal nocturnal sleep, episodes of active brain metabolism characterize **rapid eye movement sleep**. Also known as paradoxical sleep, the electroencephalogram exhibits low-voltage desynchronized activity resembling alert wakefulness, accompanied by vivid emotional dreams and autonomic variability.",
+      "say": "REM sleep is paradoxical sleep where an active desynchronized EEG accompanies vivid dreaming and ocular bursts.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/narcolepsy-fig1.webp",
+        "caption": "Orexin hypocretin deficiency resulting in inappropriate intrusion of REM sleep phenomena into wakefulness.",
+        "alt": "Hypocretin loss causing sleep-onset REM episodes and cataplexy"
+      }
+    },
+    {
+      "tx": "Despite intense cortical activation and rapid conjugate eye movements during rapid eye movement sleep, somatic motor output is completely suppressed. Mediated by cholinergic pontine neurons activating glycinergic inhibitory interneurons in the spinal cord, profound **skeletal muscle atonia** prevents the physical behavioral acting out of vivid nocturnal dreams.",
+      "say": "Glycinergic spinal interneurons produce complete skeletal muscle atonia during REM sleep, sparing the diaphragm.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "REM Sleep Motor Features",
+          "points": [
+            "Profound postural muscle atonia mediated by glycine in anterior horn",
+            "Diaphragm, extraocular muscles, and middle ear ossicular muscles spared",
+            "Phasic bursts of rapid conjugate saccadic eye movements",
+            "Occasional distal muscle twitches of digits and facial vibrissae"
+          ]
+        },
+        "right": {
+          "title": "REM Sleep Autonomic Features",
+          "points": [
+            "Autonomic instability: irregular respirations and fluctuating heart rate",
+            "Loss of central homeostatic poikilothermic thermoregulation",
+            "Penile tumescence in males and clitoral engorgement in females",
+            "Significant vulnerability to myocardial ischemia and ventricular arrhythmias"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Triggering of rapid eye movement episodes originates within the dorsal pons, driven by cholinergic neurons within the pedunculopontine and laterodorsal tegmental nuclei. These neurons emit **ponto-geniculo-occipital spikes**, originating in the pons, traveling through the lateral geniculate nucleus, and terminating in the primary visual cortex to initiate saccades.",
+      "say": "Ponto-geniculo-occipital spikes originate in the pons and propagate to the visual cortex during REM sleep.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cholinergic_pontine",
+            "label": "Pedunculopontine Tegmental Cholinergic Neurons Disinhibit and Fire Rapidly"
+          },
+          {
+            "id": "pgo_spikes",
+            "label": "Ponto-Geniculo-Occipital (PGO) Wavefronts Propagate to Thalamic Lateral Geniculate"
+          },
+          {
+            "id": "occipital_burst",
+            "label": "Phasic PGO Spikes Invade Primary Occipital Visual Cortex to Drive Saccades"
+          },
+          {
+            "id": "dream_imagery",
+            "label": "Generates Endogenous Phasic Neural Substrate for Vivid Visual Dream Imagery"
+          }
+        ],
+        "edges": [
+          [
+            "cholinergic_pontine",
+            "pgo_spikes"
+          ],
+          [
+            "pgo_spikes",
+            "occipital_burst"
+          ],
+          [
+            "occipital_burst",
+            "dream_imagery"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Maintenance of daytime cognitive alertness and wakefulness depends upon an ascending network of subcortical arousal nuclei situated throughout the brainstem tegmentum and diencephalon. Known as the **reticular activating system**, this diffuse polysynaptic core projects cholinergic, noradrenergic, serotonergic, dopaminergic, and histaminergic projections to depolarize thalamocortical networks.",
+      "say": "The reticular activating system sends diffuse ascending projections to keep the cerebral cortex awake.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/delirium-fig1.webp",
+        "caption": "Acute brainstem and cortical network dysfunction leading to fluctuations in consciousness and alertness.",
+        "alt": "Acute encephalopathy and reticular activating network disruption causing delirium"
+      }
+    },
+    {
+      "tx": "Stabilization of the behavioral switch between alert wakefulness and sleep is orchestrated by lateral hypothalamic neuropeptide transmitters. Peptides known as **orexin or hypocretin** excite ascending monoaminergic arousal nuclei, reinforcing daytime vigilance and preventing inappropriate spontaneous transitions into rapid eye movement sleep during working hours.",
+      "say": "Lateral hypothalamic orexin stabilizes wakefulness by stimulating monoaminergic brainstem nuclei.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Wake-Promoting Monoaminergic System",
+          "points": [
+            "Locus coeruleus: norepinephrine promotes vigilance and sensory focus",
+            "Tuberomammillary nucleus: histamine maintains alert wakefulness",
+            "Raphe nuclei: serotonin stabilizes cortical responsiveness",
+            "Basal forebrain: acetylcholine promotes desynchronized cortical processing"
+          ]
+        },
+        "right": {
+          "title": "Sleep-Promoting VLPO System",
+          "points": [
+            "Ventrolateral preoptic nucleus (VLPO) located in anterior hypothalamus",
+            "Releases inhibitory GABA and galanin onto all monoaminergic arousal centers",
+            "Forms flip-flop bistable switch that ensures crisp behavioral transitions",
+            "Activated by homeostatic sleep pressure driven by extracellular adenosine"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Persistent synaptic strengthening following brief high-frequency repetitive stimulation represents the cellular neurobiological basis of memory consolidation and neural plasticity. First characterized in the hippocampal perforant path, this activity-dependent synaptic enhancement is **long-term potentiation**, producing enduring elevations in postsynaptic excitatory potential amplitude.",
+      "say": "Long-term potentiation is persistent synaptic strengthening following high-frequency stimulation in the hippocampus.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tetanic_stim",
+            "label": "High-Frequency Tetanic Stimulation Invades Presynaptic Hippocampal Bouton"
+          },
+          {
+            "id": "glutamate_flood",
+            "label": "Massive Glutamate Release Binds Postsynaptic Non-NMDA AMPA Receptors"
+          },
+          {
+            "id": "strong_depol",
+            "label": "Intense Depolarisation Electrotonically Expels Magnesium Ion from NMDA Pore"
+          },
+          {
+            "id": "calcium_entry",
+            "label": "Unblocked NMDA Receptor Permits Heavy Calcium Influx into Dendritic Spine"
+          }
+        ],
+        "edges": [
+          [
+            "tetanic_stim",
+            "glutamate_flood"
+          ],
+          [
+            "glutamate_flood",
+            "strong_depol"
+          ],
+          [
+            "strong_depol",
+            "calcium_entry"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Induction of classical Schaffer collateral long-term potentiation requires opening of glutamate receptors that act as molecular coincidence detectors. At resting membrane potentials, the pore of the **NMDA receptor** is plugged by extracellular magnesium, which is expelled only when concurrent AMPA receptor activation strongly depolarizes the postsynaptic membrane.",
+      "say": "The NMDA receptor expels its magnesium plug only when postsynaptic depolarisation coincides with glutamate release.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "resting_plug",
+            "label": "Extracellular Magnesium (Mg2+) Plugs NMDA Receptor Pore at Resting Potential"
+          },
+          {
+            "id": "ampa_depolarize",
+            "label": "AMPA Receptor Inward Sodium Current Strongly Depolarizes the Dendritic Spine"
+          },
+          {
+            "id": "mg_expelled",
+            "label": "Positive Intracellular Potential Electrotonically Repels and Expels Mg2+ Ion"
+          },
+          {
+            "id": "calcium_influx",
+            "label": "Calcium Enters to Activate Calmodulin Kinase II (CaMKII) and PKC Cascades"
+          }
+        ],
+        "edges": [
+          [
+            "resting_plug",
+            "ampa_depolarize"
+          ],
+          [
+            "ampa_depolarize",
+            "mg_expelled"
+          ],
+          [
+            "mg_expelled",
+            "calcium_influx"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Following calcium entry through unblocked NMDA channels, calcium-calmodulin-dependent protein kinase two phosphorylates existing AMPA receptors to increase their single-channel conductance. Simultaneously, vesicle trafficking delivers newly synthesized **AMPA receptors inserted into postsynaptic membranes**, permanently magnifying synaptic responsiveness to subsequent baseline glutamate release.",
+      "say": "Calcium activates CaMKII to insert additional AMPA receptors, permanently increasing synaptic strength.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early-Phase LTP (1 to 3 Hours)",
+          "points": [
+            "Dependent entirely on post-translational protein phosphorylation",
+            "CaMKII and PKC phosphorylate GluA1 AMPA subunits to increase conductance",
+            "Exocytosis inserts pre-formed AMPA receptors into postsynaptic density",
+            "Independent of new protein synthesis or nuclear gene transcription"
+          ]
+        },
+        "right": {
+          "title": "Late-Phase LTP (Days to Weeks)",
+          "points": [
+            "Requires adenylyl cyclase, protein kinase A, and MAP kinase cascades",
+            "Phosphorylates CREB transcription factor to drive nuclear gene expression",
+            "Synthesizes structural proteins, neurotrophins, and scaffolding molecules",
+            "Forms new dendritic spines and duplicates functional synaptic boutons"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI"
+}
