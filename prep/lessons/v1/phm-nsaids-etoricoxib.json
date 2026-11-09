@@ -1,0 +1,245 @@
+{
+  "v": 1,
+  "module": "phm-nsaids",
+  "subject": "pharmacology",
+  "title": "Coxibs, Cyclooxygenase Isoforms, Analgesic Nephropathy, and Gastropathy",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The bipyridine derivative exhibiting the highest selectivity for the cyclooxygenase-2 enzyme among clinically approved coxibs is **etoricoxib**. Demonstrating a COX-2 to COX-1 selectivity ratio exceeding one hundred-fold, etoricoxib provides potent once-daily anti-inflammatory efficacy at doses of 60 to 90 mg in osteoarthritis, rheumatoid arthritis, ankylosing spondylitis, and acute gouty flares. Because it completely spares gastric mucosal COX-1, etoricoxib causes minimal dyspepsia or upper gastrointestinal bleeding. However, it carries a significant risk of worsening systemic arterial hypertension, necessitating regular blood pressure monitoring throughout therapy.",
+      "say": "Etoricoxib provides more than 100-fold COX-2 selectivity for arthritis and gout, but requires monitoring for hypertension.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Coxib drug entity",
+          "COX-2 to COX-1 selectivity ratio",
+          "Standard daily clinical dosing",
+          "Prominent clinical indication"
+        ],
+        "rows": [
+          [
+            "Etoricoxib",
+            "106-fold selective",
+            "60 to 120 mg once daily",
+            "Acute gouty arthritis and ankylosing spondylitis"
+          ],
+          [
+            "Celecoxib",
+            "30-fold selective",
+            "100 to 200 mg twice daily",
+            "Osteoarthritis, rheumatoid arthritis, familial polyposis"
+          ],
+          [
+            "Parecoxib",
+            "60-fold selective (prodrug)",
+            "40 mg IV or IM injection",
+            "Short-term postoperative surgical analgesia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The constitutive cyclooxygenase isoform encoded on chromosome 9 that maintains baseline homeostatic physiology across multiple organ systems is **COX-1**. Structurally containing a narrower substrate-binding hydrophobic channel than its sister isoform, COX-1 is continuously transcribed in gastric epithelial cells, vascular endothelium, renal parenchyma, and circulating platelets. Selective inhibition of COX-1 impairs platelet aggregation by abolishing thromboxane A2, but strips the gastrointestinal mucosa of cytoprotective prostaglandin E2, explaining the ulcerogenic hazard of aspirin, indomethacin, and piroxicam.",
+      "say": "COX-1 is constitutively expressed in platelets and gastric mucosa to maintain homeostasis and clotting.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "COX-1 Active Site Channel",
+          "points": [
+            "Contains bulky isoleucine residue at position 523",
+            "Narrow, rigid substrate-binding hydrophobic channel",
+            "Sterically excludes bulky sulfonamide and sulfone coxib drugs",
+            "Targeted selectively by low-dose aspirin and traditional NSAIDs"
+          ]
+        },
+        "right": {
+          "title": "COX-2 Active Site Channel",
+          "points": [
+            "Contains smaller valine residue at position 523",
+            "Generates accessible secondary side pocket",
+            "Accommodates bulky diaryl coxib chemical structures",
+            "Selectively occupied by celecoxib, etoricoxib, and parecoxib"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The immediate-early gene-encoded cyclooxygenase isoform induced by inflammatory cytokines and mitogens at sites of tissue injury is **COX-2**. Containing a larger catalytic channel with an accessible side pocket created by a valine substitution at position 523, COX-2 accommodates bulky diaryl-substituted coxibs. While inducible in inflamed synovium, atherosclerotic plaques, and colorectal adenomas, COX-2 is constitutively expressed in the brain, renal macula densa, and vascular endothelium, where it generates cardioprotective prostacyclin. Pharmacologic coxibs selectively suppress this enzyme, relieving pain and inflammation without inducing gastric ulceration.",
+      "say": "COX-2 is induced by inflammatory cytokines at sites of damage, but constitutively produces endothelial prostacyclin.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "stim",
+            "label": "Inflammatory cytokines (IL-1, TNF-alpha) and endotoxins"
+          },
+          {
+            "id": "nfkb",
+            "label": "Transcriptional activation of immediate-early COX-2 gene"
+          },
+          {
+            "id": "prosta",
+            "label": "Marked production of inflammatory PGE2 and PGI2"
+          },
+          {
+            "id": "pain",
+            "label": "Peripheral nociceptor sensitization, fever, and synovial inflammation"
+          }
+        ],
+        "edges": [
+          [
+            "stim",
+            "nfkb"
+          ],
+          [
+            "nfkb",
+            "prosta"
+          ],
+          [
+            "prosta",
+            "pain"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A chronic progressive renal parenchymal disorder provoked by daily, long-term ingestion of analgesic combinations containing paracetamol or aspirin is **analgesic nephropathy**. Pathologically characterized by bilateral renal papillary necrosis and chronic tubulointerstitial nephritis, medullary ischemia results from prolonged suppression of renal vasodilatory prostaglandins. Patients present with sterile pyuria, mild proteinuria, anemia out of proportion to renal impairment, renal colic from sloughed necrotic papillae, and an elevated long-term risk of transitional cell urothelial carcinoma of the renal pelvis and ureters.",
+      "say": "Analgesic nephropathy causes renal papillary necrosis and interstitial nephritis from chronic analgesic abuse.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/tubulointerstitial-disease-fig1.webp",
+        "alt": "Renal biopsy showing tubulointerstitial nephritis and papillary changes",
+        "caption": "Histopathologic renal section demonstrating marked interstitial inflammatory infiltrate, tubular atrophy, and medullary papillary necrosis."
+      }
+    },
+    {
+      "tx": "The constellation of subepithelial hemorrhages, mucosal erosions, and deep peptic ulcerations induced by non-steroidal anti-inflammatory drugs is designated as **NSAID gastropathy**. Developing through dual mechanisms, NSAIDs exert topical irritant effects by trapping weak acid molecules within neutral gastric epithelial cells, while concurrently depriving the mucosa of systemic COX-1-derived prostaglandins. High-risk features include age over sixty-five, previous peptic ulcer hemorrhage, high-dose NSAID regimens, concomitant corticosteroid or anticoagulant therapy, and Helicobacter pylori infection. Prevention requires co-prescribing proton pump inhibitors or misoprostol.",
+      "say": "NSAID gastropathy combines topical cellular acid trapping with systemic prostaglandin depletion to erode the stomach lining.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Risk stratification category",
+          "Clinical patient risk factors",
+          "Recommended gastroprotective strategy"
+        ],
+        "rows": [
+          [
+            "High gastrointestinal risk",
+            "Prior complicated ulcer; multiple risk factors",
+            "Avoid NSAIDs; if mandatory, use coxib plus PPI"
+          ],
+          [
+            "Moderate gastrointestinal risk",
+            "Age >65, high dose, steroid or anticoagulant co-therapy",
+            "Coxib alone or non-selective NSAID plus PPI"
+          ],
+          [
+            "Low gastrointestinal risk",
+            "No identifiable risk factors; young patient",
+            "Non-selective traditional NSAID (lowest effective dose)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The occurrence of acute coronary syndromes triggered by mast cell and basophil activation during acute allergic or hypersensitivity reactions is **Kounis syndrome**. Provoked by hypersensitivity to drugs, including NSAIDs, beta-lactam antibiotics, or radiocontrast agents, degranulating mast cells release massive concentrations of histamine, leukotrienes, thromboxane, and neutral proteases adjacent to coronary vessels. This elicits coronary artery vasospasm with normal coronary arteries (Type I), acute plaque erosion or rupture with coronary thrombosis (Type II), or acute stent thrombosis (Type III), manifesting as acute allergic angina.",
+      "say": "Kounis syndrome is an allergic acute coronary syndrome caused by mast cell mediator release triggering coronary vasospasm.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "allergen",
+            "label": "Exposure to allergic trigger (NSAID, beta-lactam, contrast media)"
+          },
+          {
+            "id": "mast",
+            "label": "Cardiac mast cell degranulation via IgE or anaphylatoxins"
+          },
+          {
+            "id": "mediator",
+            "label": "Massive release of histamine, cysteinyl leukotrienes, and tryptase"
+          },
+          {
+            "id": "coronary",
+            "label": "Coronary artery vasospasm, plaque disruption, and acute myocardial infarction"
+          }
+        ],
+        "edges": [
+          [
+            "allergen",
+            "mast"
+          ],
+          [
+            "mast",
+            "mediator"
+          ],
+          [
+            "mediator",
+            "coronary"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The ischemic coagulative necrosis of the renal medullary pyramids that represents the hallmark anatomical lesion of advanced analgesic nephropathy is **renal papillary necrosis**. Because the inner renal medulla exists under baseline hypoxic conditions with low blood flow, medullary perfusion is uniquely dependent on cyclooxygenase-derived prostaglandin E2 to maintain vasa recta vasodilation. Chronic NSAID therapy causes microvascular medullary constriction, starving the papillae of oxygen and nutrients, leading to sloughing of necrotic papillae into the ureter.",
+      "say": "Renal papillary necrosis results from medullary vasa recta ischemia when protective renal prostaglandins are chronically suppressed.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Etiological category",
+          "Clinical condition",
+          "Pathophysiologic mechanism"
+        ],
+        "rows": [
+          [
+            "Analgesic abuse",
+            "Chronic NSAID and paracetamol ingestion",
+            "Prostaglandin inhibition causing vasa recta medullary ischemia"
+          ],
+          [
+            "Hemoglobinopathy",
+            "Sickle cell disease or trait",
+            "Hypertonic medulla causes erythrocyte sickling and microvascular infarction"
+          ],
+          [
+            "Endocrine metabolic",
+            "Diabetic nephropathy",
+            "Diabetic microangiopathy exacerbated by acute pyelonephritis"
+          ],
+          [
+            "Urological obstruction",
+            "Chronic urinary tract obstruction",
+            "Elevated retrograde tubular hydrostatic pressure compressing papillae"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most effective prophylactic pharmacological agents co-prescribed with non-selective NSAIDs to prevent mucosal erosions and bleeding are **proton pump inhibitors** (PPIs). By irreversibly blocking the gastric parietal cell apical H+/K+ ATPase enzyme, agents like omeprazole, pantoprazole, and esomeprazole maintain intragastric pH above 4 for prolonged periods. This neutralizes luminal acid aggression, allowing mucosal re-epithelialization even during ongoing NSAID therapy, drastically decreasing the incidence of symptomatic endoscopic ulcers and life-threatening upper gastrointestinal hemorrhages.",
+      "say": "Proton pump inhibitors block parietal H+/K+ ATPase pumps to maintain gastric pH above 4, preventing NSAID ulcers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Proton Pump Inhibitors (Omeprazole, Pantoprazole)",
+          "points": [
+            "Irreversibly inhibits apical parietal H+/K+ ATPase proton pump",
+            "Maintains gastric pH >4 throughout the day and night",
+            "Superior healing and prevention of NSAID-induced gastric ulcers",
+            "Well tolerated with minimal diarrhea or abdominal cramps"
+          ]
+        },
+        "right": {
+          "title": "Prostaglandin Analogue (Misoprostol)",
+          "points": [
+            "Replaces depleted mucosal PGE1 to stimulate mucus and bicarbonate",
+            "Proven reduction in NSAID ulcer complications and perforation",
+            "High incidence of dose-limiting diarrhea and abdominal cramps (up to 30%)",
+            "Strictly contraindicated in pregnancy due to abortifacient uterotonic action"
+          ]
+        }
+      }
+    }
+  ]
+}

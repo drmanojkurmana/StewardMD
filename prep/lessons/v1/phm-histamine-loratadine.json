@@ -1,0 +1,255 @@
+{
+  "v": 1,
+  "module": "phm-histamine",
+  "subject": "pharmacology",
+  "title": "Second-Generation Antihistamines, Mast Cell Stabilisers, and Antiserotonergic Agents",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The long-acting second-generation piperidine H1 receptor antagonist that undergoes extensive first-pass hepatic conversion to desloratadine is **loratadine**. Characterized by convenient once-daily 10 mg oral dosing, loratadine exhibits high selectivity for peripheral H1 receptors with negligible central nervous system penetration. It does not cause daytime sedation or psychomotor impairment at therapeutic doses. Furthermore, unlike terfenadine or astemizole, neither loratadine nor its active metabolite desloratadine blocks cardiac delayed rectifier potassium channels, preventing cardiotoxicity when co-administered with macrolides or azoles.",
+      "say": "Loratadine is a once-daily second-generation antihistamine metabolized to desloratadine without causing cardiac arrhythmias.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lorat",
+            "label": "Oral loratadine administration (10 mg daily)"
+          },
+          {
+            "id": "cyp",
+            "label": "Hepatic CYP3A4 and CYP2D6 first-pass metabolism"
+          },
+          {
+            "id": "deslor",
+            "label": "Active desloratadine metabolite generation"
+          },
+          {
+            "id": "h1block",
+            "label": "Selective peripheral H1 inverse agonism without cardiac IKr blockade"
+          }
+        ],
+        "edges": [
+          [
+            "lorat",
+            "cyp"
+          ],
+          [
+            "cyp",
+            "deslor"
+          ],
+          [
+            "deslor",
+            "h1block"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A unique first-generation antihistamine possessing combined potent H1 receptor blockade, prominent 5-HT2 serotonergic antagonism, and mild anticholinergic action is **cyproheptadine**. Beyond its application in allergic rhinitis and urticaria, cyproheptadine is specifically employed for appetite stimulation in children and cachectic patients due to hypothalamic serotonergic inhibition. Crucially, it serves as the first-line oral pharmacological antidote in mild to moderate serotonin syndrome to counter life-threatening hyperthermia, autonomic instability, and neuromuscular clonus provoked by serotonergic overdoses.",
+      "say": "Cyproheptadine combines H1 and 5-HT2 receptor blockade to stimulate appetite and treat serotonin syndrome.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical therapeutic indication",
+          "Receptor mechanism involved",
+          "Primary clinical endpoint"
+        ],
+        "rows": [
+          [
+            "Serotonin syndrome reversal",
+            "Antagonism of central 5-HT2A receptors",
+            "Suppresses hyperthermia, hyperreflexia, and clonus"
+          ],
+          [
+            "Appetite stimulation in cachexia",
+            "Inhibition of hypothalamic serotonin satiety tone",
+            "Promotes caloric intake and weight gain"
+          ],
+          [
+            "Cold urticaria and dermographism",
+            "Combined H1 and serotonergic blockade",
+            "Suppresses localized mast cell wheal and flare"
+          ],
+          [
+            "Carcinoid syndrome diarrhea",
+            "Intestinal 5-HT receptor antagonism",
+            "Decreases hypermotility and secretory fluid loss"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "An orally active histamine analogue that acts as a weak H1 agonist and potent presynaptic H3 receptor antagonist is **betahistine**. By blocking inhibitory presynaptic H3 autoreceptors in the inner ear and vestibular nuclei, betahistine enhances local histamine synthesis and release. This dilates microcirculatory arterioles in the stria vascularis of the inner ear, reducing endolymphatic hydrops pressure. Consequently, betahistine is the primary disease-modifying pharmacotherapy for Meniere disease, decreasing the frequency, severity, and duration of paroxysmal vertigo attacks and associated tinnitus.",
+      "say": "Betahistine blocks presynaptic H3 receptors to improve inner ear microcirculation and relieve Meniere vertigo.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Betahistine (H3 Antagonist)",
+          "points": [
+            "Acts as presynaptic H3 antagonist and weak H1 agonist",
+            "Dilates stria vascularis microvasculature",
+            "Reduces endolymphatic hydrops fluid accumulation",
+            "Maintenance therapy to reduce Meniere vertigo frequency"
+          ]
+        },
+        "right": {
+          "title": "Cinnarizine (Calcium channel blocker / H1)",
+          "points": [
+            "Blocks vascular T-type and L-type calcium channels",
+            "Potent central anti-H1 and anticholinergic sedation",
+            "Sedates vestibular sensory apparatus directly",
+            "Acute symptomatic control of active vertigo episodes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Pharmacological agents that prevent the immunological degranulation of tissue mast cells without blocking histamine receptors directly are classified as a **mast cell stabiliser**. Upon antigen cross-linking with surface IgE antibodies, these agents block calcium influx through membrane channels, preserving mast cell membrane integrity and aborting the exocytosis of preformed granules containing histamine, leukotrienes, and chemotactic factors. They are strictly prophylactic agents: they cannot reverse established smooth muscle spasm and are ineffective during an acute asthmatic attack.",
+      "say": "Mast cell stabilisers block calcium entry to prevent degranulation, functioning strictly as prophylactic agents.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/drug-allergy-fig1.webp",
+        "alt": "Mechanism of mast cell degranulation and cutaneous hypersensitivity",
+        "caption": "Diagram depicting antigen-IgE crosslinking on mast cell surfaces leading to calcium influx and exocytosis of inflammatory autacoids."
+      }
+    },
+    {
+      "tx": "The synthetic bischromone derivative that serves as the prototypical topical mast cell stabilizer is **cromolyn**. Because of its extremely poor oral bioavailability under one percent, cromolyn sodium is administered via inhalation as a pressurized powder or solution, as nasal spray for allergic rhinitis, or as eye drops for vernal keratoconjunctivitis. Administered prophylactically three to four times daily before allergen exposure, cromolyn suppresses both early and late phase asthmatic responses and prevents exercise-induced bronchospasm without corticosteroid side effects.",
+      "say": "Cromolyn is an inhaled or topical bischromone that prevents antigen-induced mast cell degranulation in asthma and allergies.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cromo",
+            "label": "Topical or inhaled cromolyn sodium administration"
+          },
+          {
+            "id": "phospho",
+            "label": "Phosphorylation of mast cell moesin protein"
+          },
+          {
+            "id": "ca_block",
+            "label": "Inhibition of transmembrane calcium channel influx"
+          },
+          {
+            "id": "protect",
+            "label": "Arrested degranulation: early and late phase bronchospasm aborted"
+          }
+        ],
+        "edges": [
+          [
+            "cromo",
+            "phospho"
+          ],
+          [
+            "phospho",
+            "ca_block"
+          ],
+          [
+            "ca_block",
+            "protect"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The traditional first-generation H1 antagonists characterized by lipophilic chemical structures, low molecular weights, and non-polar properties are **sedating antihistamines**. Agents such as diphenhydramine, promethazine, hydroxyzine, and chlorpheniramine cross the blood-brain barrier readily to disrupt ascending histaminergic arousal projections from the tuberomammillary nucleus. While valuable as nighttime sedatives, antiemetics, and antipruritics, they produce daytime somnolence, impaired motor coordination, cognitive slowing, and dangerous impairment when driving. Alcohol and central depressants markedly potentiate these sedative hazards.",
+      "say": "Sedating antihistamines penetrate the central nervous system to suppress wakefulness, creating motor and cognitive hazards.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "First-Generation Sedating Antihistamines",
+          "points": [
+            "Lipophilic molecules readily cross blood-brain barrier",
+            "Marked central sedation, psychomotor slowing, daytime drowsiness",
+            "Significant muscarinic anticholinergic side effects",
+            "Short duration of action requiring dosing 3 to 4 times daily"
+          ]
+        },
+        "right": {
+          "title": "Second-Generation Non-Sedating Antihistamines",
+          "points": [
+            "Polar, zwitterionic, or P-glycoprotein substrates",
+            "Minimal to zero blood-brain barrier penetration",
+            "Negligible anticholinergic or alpha-blocking activity",
+            "Prolonged duration of action allowing once-daily dosing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The historic pharmacological tragedy that led to the worldwide withdrawal of the early second-generation antihistamine terfenadine was fatal ventricular arrhythmia linked to **QT prolongation terfenadine**. Terfenadine was an inactive prodrug requiring hepatic CYP3A4 clearance to its non-toxic active metabolite fexofenadine. When co-administered with CYP3A4 enzyme inhibitors such as ketoconazole, itraconazole, erythromycin, or clarithromycin, parent terfenadine accumulated, blocking cardiac hERG delayed rectifier potassium channels. This triggered severe QT prolongation, polymorphic ventricular tachycardia, torsades de pointes, and sudden death.",
+      "say": "Terfenadine accumulated during CYP3A4 inhibition to block potassium channels, provoking fatal torsades de pointes arrhythmias.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Compound entity",
+          "Metabolic dependence",
+          "Cardiac hERG potassium channel block",
+          "Ventricular arrhythmia hazard"
+        ],
+        "rows": [
+          [
+            "Terfenadine (Withdrawn)",
+            "High (CYP3A4 oxidation required)",
+            "Potent blocker at elevated plasma levels",
+            "Severe torsades de pointes with CYP inhibitors"
+          ],
+          [
+            "Astemizole (Withdrawn)",
+            "High (CYP3A4 clearance required)",
+            "Potent blocker and tissue accumulation",
+            "Severe torsades de pointes with CYP inhibitors"
+          ],
+          [
+            "Fexofenadine (Active drug)",
+            "None (excreted unchanged)",
+            "Zero blockade at therapeutic doses",
+            "No documented cardiotoxicity or arrhythmias"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The active descarboethoxy metabolite of loratadine that provides potent, long-acting, non-sedating peripheral H1 blockade is **desloratadine**. Exhibiting three to four times the receptor binding affinity of loratadine, desloratadine has an elimination half-life of twenty-seven hours, supporting once-daily 5 mg dosing. It stabilizes mast cells and basophils, inhibits pro-inflammatory cytokine release including interleukin-4 and interleukin-13, and does not depend on hepatic CYP3A4 oxidation for activation. Consequently, it maintains consistent pharmacokinetic efficacy without interacting with macrolide antibiotics or azole antifungals.",
+      "say": "Desloratadine provides once-daily non-sedating H1 blockade with additional anti-inflammatory cytokine suppression.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Second-generation agent",
+          "Elimination half-life",
+          "Recommended adult daily dose",
+          "Distinctive pharmacological asset"
+        ],
+        "rows": [
+          [
+            "Desloratadine",
+            "27 hours",
+            "5 mg once daily",
+            "Suppresses pro-inflammatory cytokines IL-4 and IL-13"
+          ],
+          [
+            "Levocetirizine",
+            "8 hours",
+            "5 mg once daily evening",
+            "Active R-enantiomer with twice the potency of cetirizine"
+          ],
+          [
+            "Bilastine",
+            "14 hours",
+            "20 mg once daily fasting",
+            "Fastest onset with absolute zero brain receptor occupancy"
+          ],
+          [
+            "Rupatadine",
+            "6 hours (active metabolites)",
+            "10 mg once daily",
+            "Dual antagonism of H1 and platelet activating factor"
+          ]
+        ]
+      }
+    }
+  ]
+}
