@@ -58,7 +58,7 @@
       }
     },
     {
-      "tx": "**Nocardia therapy** anchors on co trimoxazole (sulfonamides historically) with susceptibility guided partners (imipenem, amikacin, linezolid near universal, ceftriaxone, minocycline), combinations in severe and CNS disease, six to twelve months duration, longer in immunocompromise, species predicting patterns (farcinica resistant reputation).",
+      "tx": "**Nocardia therapy** anchors on co trimoxazole (sulfonamides historically) with susceptibility guided partners (imipenem, amikacin, linezolid near universal, ceftriaxone, minocycline), combinations in severe and CNS disease, six to twelve months duration, longer in immunocompromise, species predicting patterns (farcinica resistant reputation). Treatment response is judged clinically and radiologically over weeks, because sterilising tissue cultures is neither practical nor required.",
       "say": "Sulphonamide anchor, combination for brain, year for the immunocompromised: Nocardia therapy arithmetic.",
       "vis": {
         "kind": "compare",
@@ -88,12 +88,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "suspect", "label": "Immunocompromised pneumonia or abscess" },
-          { "id": "warn", "label": "Laboratory warned: hold cultures, modified ZN" },
-          { "id": "grow", "label": "Chalky colonies in days to weeks" },
-          { "id": "species", "label": "MALDI and sequencing speciation and referral susceptibilities" }
+          {
+            "id": "suspect",
+            "label": "Immunocompromised pneumonia or abscess"
+          },
+          {
+            "id": "warn",
+            "label": "Laboratory warned: hold cultures, modified ZN"
+          },
+          {
+            "id": "grow",
+            "label": "Chalky colonies in days to weeks"
+          },
+          {
+            "id": "species",
+            "label": "MALDI and sequencing speciation and referral susceptibilities"
+          }
         ],
-        "edges": [["suspect", "warn"], ["warn", "grow"], ["grow", "species"]]
+        "edges": [
+          [
+            "suspect",
+            "warn"
+          ],
+          [
+            "warn",
+            "grow"
+          ],
+          [
+            "grow",
+            "species"
+          ]
+        ]
       }
     },
     {
@@ -122,7 +147,7 @@
       }
     },
     {
-      "tx": "**Rhodococcus, Gordonia and Tsukamurella** are Nocardia's aerobic acid fast cousins (Rhodococcus equi foal pathogen causing cavitary pneumonia in advanced HIV, weakly acid fast coccobacilli, combination therapy), aerobic actinomycete bench reports increasingly speciated by MALDI and sequencing.",
+      "tx": "**Rhodococcus, Gordonia and Tsukamurella** are Nocardia's aerobic acid fast cousins (Rhodococcus equi foal pathogen causing cavitary pneumonia in advanced HIV, weakly acid fast coccobacilli, combination therapy), aerobic actinomycete bench reports increasingly speciated by MALDI and sequencing. This group also reminds clinicians that partial acid-fastness is a staining property on a spectrum rather than a yes or no identity.",
       "say": "Rhodococcus in advanced HIV cavitates like TB and Nocardia combined in differential.",
       "vis": {
         "kind": "compare",
@@ -172,7 +197,7 @@
       }
     },
     {
-      "tx": "**Streptomyces and Actinomadura** complete actinomycetes (soil filaments, mycetoma and rare invasive), Streptomyces famous as antibiotic producers (streptomycin, tetracyclines, macrolides ancestry) infecting seldom. The order that medicated the century occasionally needs its own medicines.",
+      "tx": "**Streptomyces and Actinomadura** complete actinomycetes (soil filaments, mycetoma and rare invasive), Streptomyces famous as antibiotic producers (streptomycin, tetracyclines, macrolides ancestry) infecting seldom. The order that medicated the century occasionally needs its own medicines. Rare human disease does not diminish its importance in soil ecology, where Streptomyces filaments dominate microbial chemical warfare.",
       "say": "Streptomyces gave the antibiotic era and occasionally asks for it back.",
       "vis": {
         "kind": "compare",

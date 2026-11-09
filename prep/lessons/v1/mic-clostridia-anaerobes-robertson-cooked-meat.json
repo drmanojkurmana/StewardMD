@@ -38,12 +38,37 @@
       "vis": {
         "kind": "flow",
         "nodes": [
-          { "id": "inoc", "label": "Specimen into plates plus cooked meat backup" },
-          { "id": "incub", "label": "Anaerobic incubation 48 hours minimum" },
-          { "id": "aero", "label": "Aerotolerance and colony work" },
-          { "id": "id", "label": "MALDI and susceptibility for sterile sites" }
+          {
+            "id": "inoc",
+            "label": "Specimen into plates plus cooked meat backup"
+          },
+          {
+            "id": "incub",
+            "label": "Anaerobic incubation 48 hours minimum"
+          },
+          {
+            "id": "aero",
+            "label": "Aerotolerance and colony work"
+          },
+          {
+            "id": "id",
+            "label": "MALDI and susceptibility for sterile sites"
+          }
         ],
-        "edges": [["inoc", "incub"], ["incub", "aero"], ["aero", "id"]]
+        "edges": [
+          [
+            "inoc",
+            "incub"
+          ],
+          [
+            "incub",
+            "aero"
+          ],
+          [
+            "aero",
+            "id"
+          ]
+        ]
       }
     },
     {
@@ -172,7 +197,7 @@
       }
     },
     {
-      "tx": "**Cooked meat descendants** (chopped meat glucose broth in automated era, thioglycollate in every laboratory) persist because redox insurance is timeless; identification moved to MALDI and sequencing, enrichment logic did not retire. Culture modules age asymmetrically: chemistry endures, names accelerate.",
+      "tx": "**Cooked meat descendants** (chopped meat glucose broth in automated era, thioglycollate in every laboratory) persist because redox insurance is timeless; identification moved to MALDI and sequencing, enrichment logic did not retire. Culture modules age asymmetrically: chemistry endures, names accelerate. That asymmetry explains why older microbiologists defend broths that younger molecular scientists initially wanted to discard.",
       "say": "The broth is a century old; the names it grows are read in minutes now.",
       "vis": {
         "kind": "compare",
