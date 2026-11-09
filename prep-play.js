@@ -862,7 +862,7 @@
     V.readyP = prepareVoice(V);
     paintVoiceBar();
     var st = V.step[r.i] || (V.step[r.i] = { asked: false, told: false });
-    if (r.ans[r.i] < 0) st.asked = false;   // an unanswered question is read again; an answered one tells its feedback
+    if (r.ans[r.i] < 0) st.asked = false; else st.told = false;   // an unanswered question is read again; an answered one retells its feedback and moves on
     voiceStep(r);
   }
   // Repeat: stop speech and mic, clear the miss count, then re-read (the question, or the feedback after
@@ -905,7 +905,7 @@
   }
   function paintVoiceBar() {
     var root = H && H.root && H.root(), chip = root && root.querySelector("#pvVoice"); if (!chip) return;
-    var prev = chip.querySelector("#pvVoiceT"), keep = prev ? prev.textContent : "", off = !P.voice, rate = voiceRate();
+    var prev = chip.querySelector("#pvVoiceT"), off = !P.voice, keep = !off && prev && prev.textContent !== "Voice off" ? prev.textContent : "", rate = voiceRate();
     chip.innerHTML = '<span class="pv-vstat">' + ic(IC.voice, 18) + ' <span id="pvVoiceT">' + esc(keep || (off ? "Voice off" : "Voice mode")) + '</span></span>' +
       '<span class="pv-vbtns"><button type="button" class="pn-link pv-vspd" data-act="v-voicespeed" aria-label="Reading speed ' + rate + ' times, change">' + esc(speedLabelOf(rate)) + '</button>' +
       (off ? '<button type="button" class="pn-link" data-act="v-voicestart">Start voice</button>' : '<button type="button" class="pn-link" data-act="v-voicerepeat">Repeat</button><button type="button" class="pn-link" data-act="v-voicestop">Stop voice</button>') + '</span>';
