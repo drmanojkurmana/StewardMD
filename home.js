@@ -562,6 +562,7 @@
     hrfHospital: '<path d="M5 21V8.5A1.5 1.5 0 0 1 6.5 7h6A1.5 1.5 0 0 1 14 8.5V21"/><path d="M14 11h3.5A1.5 1.5 0 0 1 19 12.5V21"/><path d="M3.5 21h17"/><path d="M9.5 9.5v4M7.5 11.5h4"/>',
     hrfHome: '<path d="M12 3.8 3.8 11.2h2.4v8.6h11.6v-8.6h2.4Z" fill="currentColor" stroke="none"/><path d="M10.2 19.8v-4.6h3.6v4.6" fill="none" stroke="#fff" stroke-width="1.6"/>',
     hrfFolder: '<path d="M3.5 6.5A1.5 1.5 0 0 1 5 5h4l2 2.5h8A1.5 1.5 0 0 1 20.5 9v8.5a1.5 1.5 0 0 1-1.5 1.5H5a1.5 1.5 0 0 1-1.5-1.5Z"/>',
+    hrfMore: '<circle cx="5" cy="12" r="1.7" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.7" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.7" fill="currentColor" stroke="none"/>',
     hrfGrid4: '<rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/>',
     hrfSparkle: '<path d="M11 4c.6 3.8 2.2 5.4 6 6-3.8.6-5.4 2.2-6 6-.6-3.8-2.2-5.4-6-6 3.8-.6 5.4-2.2 6-6Z" fill="currentColor" stroke="none"/><path d="M18.5 3.5c.3 1.8 1 2.5 2.8 2.8-1.8.3-2.5 1-2.8 2.8-.3-1.8-1-2.5-2.8-2.8 1.8-.3 2.5-1 2.8-2.8Z" fill="currentColor" stroke="none"/>'
   };
@@ -2822,8 +2823,7 @@
         '<div class="rnav-brand"><img src="/logo.png" alt="StewardMD"><span>Steward<b>MD</b></span><span class="hrf-pro" id="hrfProChip"' + (pro ? '' : ' hidden') + '>Pro</span></div>' +
         '<div class="rnav-head-sp"></div>' +
         '<button class="rds-icon-btn" data-act="search" aria-label="Search">' + ric("search") + '</button>' +
-        '<button class="rds-icon-btn" id="v4ThemeBtn" data-act="theme" aria-label="Toggle light / dark theme">' + ric("dark_mode") + '</button>' +
-        '<button class="rds-icon-btn rnav-bell v3-dotbadge" id="v3BellBtn" data-act="notifications" aria-label="Notifications">' + ric("notifications") + '</button>' +
+        '<button type="button" class="rds-icon-btn hrf-more" id="hrfMore" aria-haspopup="true" aria-expanded="false" aria-controls="hrfMenu" aria-label="Notifications, theme and privacy">' + svg("hrfMore", "hrf-more-ic") + '</button>' +
       '</header>' +
         '<div class="rnav-greet"><div class="rnav-eyebrow hrf-date">' + dateV4() + '</div><div class="rnav-hi hrf-greet">' + greetHeroV4() + '</div><div class="hrf-rule" aria-hidden="true"></div></div></div>' +
         '<div class="rnav-qa hrf-qa">' +
@@ -2854,7 +2854,11 @@
         '<button class="rnav-tab rnav-tab-maik" data-act="askai" aria-label="Ask MaiK"><span class="hrf-maik-circle" aria-hidden="true">' + (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.html("tile", { size: 43 }) : svg("hrfSparkle", "hrf-sparkle")) + '</span><span>' + (window.SMD_MAIK_MARK ? window.SMD_MAIK_MARK.label("Ask MaiK") : "Ask MaiK") + '</span></button>' +
         '<button class="rnav-tab" data-act="drugmenu" aria-label="Drugs">' + svg("hrfCapsule", "hrf-tab-ic") + '<span>Drugs</span></button>' +
         '<button class="rnav-tab" data-act="more" aria-label="More">' + svg("hrfGrid4", "hrf-tab-ic") + '<span>More</span></button>' +
-      '</nav>';
+      '</nav>' +
+      '<div class="hrf-menu" id="hrfMenu" hidden>' +
+        '<button class="rds-icon-btn" id="v4ThemeBtn" data-act="theme" aria-label="Toggle light / dark theme">' + ric("dark_mode") + '</button>' +
+        '<button class="rds-icon-btn rnav-bell v3-dotbadge" id="v3BellBtn" data-act="notifications" aria-label="Notifications">' + ric("notifications") + '</button>' +
+      '</div>';
   }
   // Populate the dashboard cards from REAL data only (no placeholders). Anything with
   // no real data is left empty. data-act clicks route via the delegated handler; data-rid
@@ -3006,6 +3010,7 @@
         _sync(); _tb.addEventListener("click", function () { setTimeout(_sync, 40); }); }
     }
     try { mountKuChip(root); } catch (e) {}   // KU: header chip (both header variants)
+    try { wireHrfMenu(root); } catch (e) {}
     try { mountPrivacyToggle(root); } catch (e) {}   // B2 privacy mode: one tap masks patient identifiers on screen
 
     try {
@@ -3176,13 +3181,23 @@
       + ".ku-note{color:var(--hmut,#64748b);font:500 11.5px var(--hfont,system-ui);margin-top:16px;line-height:1.45}";
     document.head.appendChild(s);
   }
+  // The header's single button: root survives re-renders, so this delegates once and looks the menu up each time.
+  function wireHrfMenu(root) {
+    if (root.__hrfMenu) return; root.__hrfMenu = true;
+    function set(open) { var m = root.querySelector("#hrfMenu"), b = root.querySelector("#hrfMore"); if (!m || !b) return; m.hidden = !open; b.setAttribute("aria-expanded", String(open)); }
+    function isOpen() { var m = root.querySelector("#hrfMenu"); return !!m && !m.hidden; }
+    root.addEventListener("click", function (e) { if (e.target.closest("#hrfMore")) set(!isOpen()); else if (isOpen()) set(false); });
+    root.addEventListener("keydown", function (e) { if (e.key === "Escape" && isOpen()) { set(false); var b = root.querySelector("#hrfMore"); if (b) b.focus(); } });
+    root.addEventListener("scroll", function () { if (isOpen()) set(false); }, true);
+  }
   function mountPrivacyToggle(root) {
     var P = window.SMD_PRIVACY_MODE;
     if (!P || !P.enabled()) return;   // kill switch: localStorage smd_privacy_mode_enabled = "0"
     var hdr = root.querySelector(".rnav-head, .v3-header"); if (!hdr) return;
     var rnav = hdr.classList.contains("rnav-head");
-    var anchor = hdr.querySelector("#v4ThemeBtn") || hdr.querySelector('[data-act="theme"]') || hdr.querySelector("#v3BellBtn");
-    P.mountToggle(hdr, anchor, rnav ? ric("visibility_off") : svg("eyeOff"), rnav ? "rds-icon-btn" : "v3-ic");
+    var host = root.querySelector("#hrfMenu") || hdr;   // the home's single header button keeps privacy in its menu
+    var anchor = host.querySelector("#v4ThemeBtn") || host.querySelector('[data-act="theme"]') || host.querySelector("#v3BellBtn");
+    P.mountToggle(host, anchor, rnav ? ric("visibility_off") : svg("eyeOff"), rnav ? "rds-icon-btn" : "v3-ic");
   }
   function mountKuChip(root) {
     if (!window.SMD_KU) return;
@@ -3198,7 +3213,7 @@
       chip.style.display = SMD_KU.signedIn() ? "inline-flex" : "none";
     }
     paint(); try { SMD_KU.onChange(paint); } catch (e) {}
-    var anchor = hdr.querySelector("#v4ThemeBtn") || hdr.querySelector("#v3BellBtn");
+    var anchor = hdr.querySelector("#hrfMore") || hdr.querySelector("#v4ThemeBtn") || hdr.querySelector("#v3BellBtn");
     if (anchor) hdr.insertBefore(chip, anchor); else hdr.appendChild(chip);
     try { SMD_KU.summary(); } catch (e) {}   // refresh balance from server on home mount
   }

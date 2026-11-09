@@ -476,3 +476,9 @@ body.dark #sbrSettings[data-settings-ui] .settings-card .sbr-chev,body.v3-dark #
 #sbrSettings[data-settings-ui] #otaProg .otp-bar i{border-radius:3px}
 @media (prefers-reduced-transparency:reduce){#sbrSettings[data-settings-ui] .sbr-set-head.is-scrolled{background:var(--st-bg);-webkit-backdrop-filter:none;backdrop-filter:none}}
 @media (prefers-reduced-motion:reduce){#sbrSettings[data-settings-ui] *{scroll-behavior:auto}}
+/* iPad: one centred grouped column with the floating search, replacing the old category-rail grid in ipad-account.css. */
+html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .sbr-set-body{display:block;max-width:760px;margin:0 auto}
+html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .sbr-set-body>.settings-tools{position:fixed;top:auto;left:50%;right:auto;transform:translateX(-50%);bottom:max(14px,calc(env(safe-area-inset-bottom,0px) - 6px));width:min(calc(100% - 32px),520px);margin:0}
+html.smd-tablet #sbrSettings#sbrSettings[data-settings-ui] .sbr-set-head{padding-inline:max(16px,calc((100% - 760px)/2 + 16px))}
+/* Opening the page focuses Back for keyboards and screen readers; on touch that must not draw a box. */
+@media (hover:none){#sbrSettings[data-settings-ui] .sbr-set-back:focus{outline:none}}

@@ -1132,7 +1132,7 @@ body.dark #homeV2.rnav .rnav-main{background:#071318}
 #homeV2.rnav .hrf-head .rds-icon-btn{color:#fff;background:transparent;min-width:38px;width:38px;height:38px}
 #homeV2.rnav .hrf-head .rds-icon{font-size:22px;color:#fff}
 #homeV2.rnav .hrf-head .rnav-brand{color:#fff;font:600 19px/1.1 var(--rds-font);letter-spacing:-.01em;gap:7px;padding-left:2px}
-#homeV2.rnav .hrf-head .rnav-brand b{color:#fff;font-weight:600}
+#homeV2.rnav .hrf-head .rnav-brand b{color:var(--hrf-mint);font-weight:600}
 #homeV2.rnav .hrf-head .rnav-brand img{width:27px;height:27px;filter:brightness(0) invert(1)}
 #homeV2.rnav .hrf-head [data-act="search"]{margin-left:auto}
 /* One surface: header + greeting sit on a single art layer. html[data-appearance] outranks appearance.css. */
@@ -1141,10 +1141,10 @@ html[data-appearance] #homeV2.rnav .hrf-hero .hrf-head{position:relative;z-index
 #homeV2.rnav .rnav-greet .hrf-date{font:400 14px/1.3 var(--rds-font);letter-spacing:0;text-transform:none;color:var(--hrf-date)}
 #homeV2.rnav .rnav-greet .hrf-rule{width:36px;height:4px;border-radius:99px;background:var(--hrf-mint);margin:9px 0 0 2px}
 #homeV2.rnav .hrf-banner::after{content:"";position:absolute;inset:0;pointer-events:none;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 361 112' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='0' x2='1'%3E%3Cstop stop-color='%233fd6ae' stop-opacity='0'/%3E%3Cstop offset='.55' stop-color='%233fd6ae' stop-opacity='.6'/%3E%3Cstop offset='1' stop-color='%233fd6ae' stop-opacity='.05'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath fill='%23fff' fill-opacity='.05' d='M205 112C255 72 270 30 361 0V112Z'/%3E%3Cpath fill='url(%23a)' d='M130 112C180 92 225 92 260 100C300 109 335 104 361 88V112Z'/%3E%3C/svg%3E") center/100% 100% no-repeat}
-html[data-appearance] #homeV2.rnav .hrf-hero,#homeV2.rnav .hrf-hero{position:relative;isolation:isolate;overflow:hidden;margin:-8px -15px 0;padding:0 0 126px;border-radius:0;background:linear-gradient(180deg,var(--hrf-h0) 0,var(--hrf-h1) 100px,var(--hrf-h2) 205px,var(--hrf-h3) 225px,var(--hrf-h4) 250px,var(--hrf-h5) 275px,var(--hrf-h6) 300px,var(--hrf-page) 320px)}
-body.dark #homeV2.rnav{--hrf-h3:#174544;--hrf-h4:#123a3a;--hrf-h5:#0c2a2c;--hrf-h6:#091d21;--hrf-sh:rgba(0,0,0,.55);--hrf-hl:rgba(255,255,255,.08);--hrf-lo:rgba(0,0,0,.28)}
-#homeV2.rnav .hrf-art{position:absolute;top:0;left:0;width:100%;height:auto;-webkit-mask-image:linear-gradient(180deg,#000 70%,transparent 100%);mask-image:linear-gradient(180deg,#000 70%,transparent 100%);pointer-events:none}
-#homeV2.rnav .hrf-qa{position:relative;z-index:3;margin-top:-109px;gap:8px}
+html[data-appearance] #homeV2.rnav .hrf-hero,#homeV2.rnav .hrf-hero{position:relative;isolation:isolate;overflow:hidden;margin:-8px -15px 0;padding:0 0 206px;border-radius:0;background:linear-gradient(180deg,var(--hrf-h0) 0,var(--hrf-h1) 25%,var(--hrf-h2) 50%,color-mix(in oklab,var(--hrf-h2) 90%,var(--hrf-page)) 57%,color-mix(in oklab,var(--hrf-h2) 72%,var(--hrf-page)) 65%,color-mix(in oklab,var(--hrf-h2) 48%,var(--hrf-page)) 73%,color-mix(in oklab,var(--hrf-h2) 27%,var(--hrf-page)) 81%,color-mix(in oklab,var(--hrf-h2) 11%,var(--hrf-page)) 89%,color-mix(in oklab,var(--hrf-h2) 3%,var(--hrf-page)) 95%,var(--hrf-page) 100%)}
+body.dark #homeV2.rnav{--hrf-sh:rgba(0,0,0,.55);--hrf-hl:rgba(255,255,255,.08);--hrf-lo:rgba(0,0,0,.28)}
+#homeV2.rnav .hrf-art{position:absolute;top:0;left:0;width:100%;height:auto;-webkit-mask-image:linear-gradient(180deg,#000 62%,rgba(0,0,0,.72) 76%,rgba(0,0,0,.42) 86%,rgba(0,0,0,.15) 94%,transparent 100%);mask-image:linear-gradient(180deg,#000 62%,rgba(0,0,0,.72) 76%,rgba(0,0,0,.42) 86%,rgba(0,0,0,.15) 94%,transparent 100%);pointer-events:none}
+#homeV2.rnav .hrf-qa{position:relative;z-index:3;margin-top:-189px;gap:8px}
 html[data-appearance] #homeV2#homeV2.rnav .hrf-qa-btn{height:88.4px!important;min-height:88.4px!important}
 html[data-appearance] #homeV2#homeV2.rnav .hrf-qc{height:82px!important;min-height:82px!important}
 html[data-appearance] #homeV2#homeV2.rnav .hrf-qa-btn,html[data-appearance] #homeV2#homeV2.rnav .hrf-qc{background:var(--hrf-tile)!important;border-color:rgba(255,255,255,.9)!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
@@ -1226,10 +1226,10 @@ body.dark #homeV2.rnav .hrf-tabbar .rnav-tab-maik span:last-child{color:#e9f4ef}
 #homeV2.rnav .hrf-head .rds-icon-btn:focus-visible,#homeV2.rnav .hrf-banner:focus-visible,#homeV2.rnav .hrf-pillsrow .rnav-htab:focus-visible,#homeV2.rnav .hrf-tabbar .rnav-tab:focus-visible{outline:2px solid var(--hrf-mint);outline-offset:2px}
 @media (max-width:340px){#homeV2.rnav .hrf-greet-line{font-size:21px}#homeV2.rnav .hrf-greet-name{font-size:24px}#homeV2.rnav .hrf-qa-btn,#homeV2.rnav .hrf-qc{font-size:11px}#homeV2.rnav .hrf-pillsrow .rnav-htab{font-size:12px;padding:0 3px}}
 @media (prefers-reduced-motion:reduce){#homeV2.rnav .hrf-qa-btn,#homeV2.rnav .hrf-qc,#homeV2.rnav .rnav-tile{transition:none}}
-#homeV2.rnav{--hrf-h0:#0c3b3e;--hrf-h1:#09373b;--hrf-h2:#1a4e4e;--hrf-h3:#316c67;--hrf-h4:#579089;--hrf-h5:#90bab6;--hrf-h6:#c9dfe0;--hrf-date:#a9d6cf;--hrf-first1:#d4f7ec;--hrf-first2:#a9efd9;--hrf-firstb:#7fd8bc;--hrf-firstink:#0b352a;--hrf-b1:#03463e;--hrf-b2:#05725f;--hrf-b3:#076958;--hrf-sh:rgba(6,60,50,.2);--hrf-hl:rgba(255,255,255,.95);--hrf-lo:rgba(6,60,50,.08)}
+#homeV2.rnav{--hrf-h0:#0c3b3e;--hrf-h1:#09373b;--hrf-h2:#1a4e4e;--hrf-date:#a9d6cf;--hrf-first1:#d4f7ec;--hrf-first2:#a9efd9;--hrf-firstb:#7fd8bc;--hrf-firstink:#0b352a;--hrf-b1:#03463e;--hrf-b2:#05725f;--hrf-b3:#076958;--hrf-sh:rgba(6,60,50,.2);--hrf-hl:rgba(255,255,255,.95);--hrf-lo:rgba(6,60,50,.08)}
 /* Every non-Classic Settings theme derives the look from its own sphere palette; Classic keeps the mockup's sampled colours. */
-html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) #homeV2.rnav{--hrf-h0:color-mix(in srgb,var(--sphere-base) 62%,var(--sphere-mid));--hrf-h1:var(--hrf-h0);--hrf-h2:var(--sphere-mid);--hrf-h3:color-mix(in srgb,var(--sphere-mid) 60%,var(--sphere-hi));--hrf-h4:color-mix(in srgb,var(--sphere-hi) 72%,var(--hrf-page));--hrf-h5:color-mix(in srgb,var(--sphere-hi) 40%,var(--hrf-page));--hrf-h6:color-mix(in srgb,var(--sphere-hi) 16%,var(--hrf-page));--hrf-mint:color-mix(in srgb,var(--sphere-hi) 45%,#fff);--hrf-date:color-mix(in srgb,var(--sphere-hi) 30%,#fff);--hrf-first1:color-mix(in srgb,var(--sphere-hi) 16%,#fff);--hrf-first2:color-mix(in srgb,var(--sphere-hi) 40%,#fff);--hrf-firstb:color-mix(in srgb,var(--sphere-hi) 60%,#fff);--hrf-firstink:var(--sphere-base);--hrf-b1:var(--sphere-base);--hrf-b2:var(--sphere-mid);--hrf-b3:color-mix(in srgb,var(--sphere-mid) 70%,var(--sphere-hi));--hrf-green:var(--sphere-mid);--hrf-deep:var(--sphere-mid);--hrf-page:color-mix(in srgb,var(--sphere-hi) 9%,#f4f8fb);--rds-bg:var(--hrf-page);--hrf-sh:color-mix(in srgb,var(--sphere-base) 22%,transparent);--hrf-lo:color-mix(in srgb,var(--sphere-base) 9%,transparent);background:var(--hrf-page)}
-html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) body.dark #homeV2.rnav{--hrf-page:#000;--hrf-deep:var(--hrf-mint);--hrf-green:var(--sphere-mid);--hrf-h3:color-mix(in srgb,var(--sphere-mid) 60%,#000);--hrf-h4:color-mix(in srgb,var(--sphere-mid) 42%,#000);--hrf-h5:color-mix(in srgb,var(--sphere-mid) 26%,#000);--hrf-h6:color-mix(in srgb,var(--sphere-mid) 12%,#000);--hrf-tile:#0c0c0e;--hrf-sh:rgba(0,0,0,.55);--hrf-lo:rgba(0,0,0,.28);background:#000}
+html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) #homeV2.rnav{--hrf-h0:color-mix(in srgb,var(--sphere-base) 62%,var(--sphere-mid));--hrf-h1:var(--hrf-h0);--hrf-h2:var(--sphere-mid);--hrf-mint:color-mix(in srgb,var(--sphere-hi) 45%,#fff);--hrf-date:color-mix(in srgb,var(--sphere-hi) 30%,#fff);--hrf-first1:color-mix(in srgb,var(--sphere-hi) 16%,#fff);--hrf-first2:color-mix(in srgb,var(--sphere-hi) 40%,#fff);--hrf-firstb:color-mix(in srgb,var(--sphere-hi) 60%,#fff);--hrf-firstink:var(--sphere-base);--hrf-b1:var(--sphere-base);--hrf-b2:var(--sphere-mid);--hrf-b3:color-mix(in srgb,var(--sphere-mid) 70%,var(--sphere-hi));--hrf-green:var(--sphere-mid);--hrf-deep:var(--sphere-mid);--hrf-page:color-mix(in srgb,var(--sphere-hi) 9%,#f4f8fb);--rds-bg:var(--hrf-page);--hrf-sh:color-mix(in srgb,var(--sphere-base) 22%,transparent);--hrf-lo:color-mix(in srgb,var(--sphere-base) 9%,transparent);background:var(--hrf-page)}
+html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) body.dark #homeV2.rnav{--hrf-page:#000;--hrf-deep:var(--hrf-mint);--hrf-green:var(--sphere-mid);--hrf-tile:#0c0c0e;--hrf-sh:rgba(0,0,0,.55);--hrf-lo:rgba(0,0,0,.28);background:#000}
 /* Dark mode resets --sphere-* and --teal to green app-wide; home pins each theme's own palette so the theme still shows. */
 html[data-theme="amber"] body.dark #homeV2.rnav{--sphere-hi:#f59e0b;--sphere-mid:#b45309;--sphere-base:#451a03;--sphere-glow:rgba(69,26,3,.6);--teal:#a86412;--rds-primary:#a86412;--hrf-mint:color-mix(in srgb,#f59e0b 45%,#fff)}
 /* Owner 2026-11-08: Blue reads navy on home, not royal blue. */
@@ -1263,3 +1263,58 @@ body.dark #homeV2#homeV2.rnav .hrf-tabbar .rnav-tab.active{color:var(--hrf-mint)
 #homeV2#homeV2.rnav .hrf-tab-ic{width:27px;height:27px;stroke-width:2}
 #homeV2#homeV2.rnav .hrf-maik-circle{width:46px;height:46px;margin-top:0;box-shadow:inset 0 2px 5px rgba(255,255,255,.28),inset 0 -6px 10px rgba(0,0,0,.42),0 6px 12px -3px var(--sphere-glow,rgba(8,40,35,.6))}
 @media (prefers-reduced-motion:reduce){#homeV2#homeV2.rnav .hrf-tabbar .rnav-tab{transition:none}#homeV2#homeV2.rnav .hrf-tabbar .rnav-tab:active{transform:none}}
+/* The Pro chip is the one Pro mark on Home: pro-badge.js appends its own dark label to these same elements. */
+#homeV2#homeV2.rnav .hrf-head .smd-probadge,#homeV2#homeV2.rnav .hrf-banner .smd-probadge{display:none!important}
+body.pro-verified #homeV2#homeV2.rnav .hrf-pro[hidden]{display:inline-flex!important}
+/* Wider than a phone: full-bleed hero, content centred up to 1040 px, art anchored right at hero height. */
+@media (min-width:561px){
+  #homeV2#homeV2.rnav .rnav-stack{max-width:none;padding-inline:0}
+  #homeV2#homeV2.rnav .rnav-stack>*:not(.hrf-hero){align-self:center;box-sizing:border-box;width:calc(100% - 56px);max-width:1040px}
+  html[data-appearance] #homeV2#homeV2.rnav .hrf-hero{align-self:stretch;margin-inline:0}
+  html[data-appearance] #homeV2#homeV2.rnav .hrf-hero .hrf-head{padding-inline:max(22px,calc((100% - 1040px)/2))}
+  #homeV2#homeV2.rnav .hrf-hero .rnav-greet{padding-inline:max(28px,calc((100% - 1040px)/2))}
+  #homeV2#homeV2.rnav .hrf-art{left:auto;right:0;top:0;width:auto;height:min(272px,70%);-webkit-mask-image:linear-gradient(to right,transparent 0,rgba(0,0,0,.1) 14%,rgba(0,0,0,.42) 30%,rgba(0,0,0,.82) 46%,#000 58%),linear-gradient(180deg,transparent 0,#000 16%,#000 58%,rgba(0,0,0,.72) 76%,rgba(0,0,0,.42) 86%,rgba(0,0,0,.15) 94%,transparent 100%);-webkit-mask-composite:source-in;mask-image:linear-gradient(to right,transparent 0,rgba(0,0,0,.1) 14%,rgba(0,0,0,.42) 30%,rgba(0,0,0,.82) 46%,#000 58%),linear-gradient(180deg,transparent 0,#000 16%,#000 58%,rgba(0,0,0,.72) 76%,rgba(0,0,0,.42) 86%,rgba(0,0,0,.15) 94%,transparent 100%);mask-composite:intersect}
+}
+@media (min-width:561px){#homeV2#homeV2#homeV2.rnav .rnav-main{padding-inline:0;margin-inline:0;max-width:none;width:100%}}
+/* Quiet ledger (owner's pick 2026-11-09): the eight tiles sit in two flat hairline cards with a slim banner between. */
+#homeV2.rnav{--hrf-card:#fff;--hrf-hair:rgba(11,79,67,.13);--hrf-card-sh:0 1px 2px rgba(6,60,50,.06)}
+body.dark #homeV2.rnav{--hrf-card:var(--hrf-tile);--hrf-hair:rgba(255,255,255,.11);--hrf-card-sh:0 1px 2px rgba(0,0,0,.4)}
+html:is([data-theme]:not([data-theme="classic"]),[data-home-color]) body:not(.dark) #homeV2.rnav{--hrf-hair:color-mix(in srgb,var(--sphere-base) 14%,transparent)}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qrow{gap:0;overflow:hidden;border-radius:14px;background:var(--hrf-card);box-shadow:var(--hrf-card-sh),0 0 0 1px var(--hrf-hair)}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qc,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn.is-first{position:relative;height:84px!important;min-height:84px!important;gap:7px;border:0!important;border-radius:0;background:transparent!important;box-shadow:none!important;color:var(--hrf-ink);font-weight:500;font-size:12.5px;transition:background-color .1s ease}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn.is-first{color:var(--hrf-deep);font-weight:700}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn+.hrf-qa-btn::before,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qc+.hrf-qc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:1px;background:var(--hrf-hair)}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn:active,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qc:active{transform:none;background:color-mix(in srgb,var(--hrf-ink) 7%,transparent)!important}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn:focus-visible,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qc:focus-visible{outline:2px solid var(--hrf-deep);outline-offset:-3px}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-ic,body.dark #homeV2#homeV2#homeV2.rnav .hrf-ic{width:27px;height:27px;stroke-width:1.5;filter:none;color:var(--hrf-ink)}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn.is-first .hrf-ic{color:var(--hrf-deep)}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-banner{height:74px;margin-top:11px;padding:0 18px;border-radius:14px;background:var(--hrf-b1);box-shadow:var(--hrf-card-sh)}
+body.dark #homeV2#homeV2#homeV2.rnav .hrf-banner{box-shadow:var(--hrf-card-sh),0 0 0 1px var(--hrf-hair)}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-banner::after,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-dots,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-banner .rnav-hero-p{display:none}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-banner .rnav-hero-tt{font-size:19px;font-weight:700}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-banner-tag{margin-top:3px;font-size:9.5px}
+html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-banner-logo{width:58px;height:58px;margin-right:-6px}
+@media (max-width:340px){html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qc,html[data-appearance] #homeV2#homeV2#homeV2.rnav .hrf-qa-btn.is-first{font-size:11px}}
+/* Smallest phones: the header cannot fit the chip and four icons; the banner still says Pro. */
+@media (max-width:350px){body #homeV2#homeV2#homeV2.rnav .hrf-head .hrf-pro{display:none!important}}
+/* One header button: Notifications, theme and privacy live in its menu, leaving room for Knowledge Units. */
+#homeV2#homeV2#homeV2.rnav .hrf-more{position:relative}
+#homeV2#homeV2#homeV2.rnav .hrf-more-ic{width:24px;height:24px;color:#fff}
+#homeV2#homeV2#homeV2.rnav:has(#v3BellBtn.has-unread) .hrf-more::after{content:"";position:absolute;top:6px;right:5px;width:8px;height:8px;border-radius:50%;background:var(--hrf-mint);box-shadow:0 0 0 2px rgba(0,0,0,.25)}
+#homeV2#homeV2#homeV2.rnav .hrf-head .v3-ku{position:relative;margin:0 2px;padding:6px 10px;gap:4px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.12);color:#fff;font:700 13px var(--rds-font);font-variant-numeric:tabular-nums}
+#homeV2#homeV2#homeV2.rnav .hrf-head .v3-ku .kudia{color:var(--hrf-mint)}
+#homeV2#homeV2#homeV2.rnav .hrf-head .v3-ku::before{content:"";position:absolute;inset:-7px -2px}
+#homeV2#homeV2#homeV2.rnav .hrf-menu{position:absolute;z-index:40;top:calc(env(safe-area-inset-top,0px) + 50px);right:10px;display:flex;flex-direction:column;gap:1px;width:216px;box-sizing:border-box;padding:6px;border-radius:18px;background:color-mix(in srgb,var(--hrf-card) 88%,transparent);-webkit-backdrop-filter:blur(24px) saturate(180%);backdrop-filter:blur(24px) saturate(180%);box-shadow:0 0 0 1px var(--hrf-hair),0 18px 40px -12px rgba(0,0,0,.42);transform-origin:top right;animation:hrfMenuIn .16s cubic-bezier(.2,.8,.2,1)}
+#homeV2#homeV2#homeV2.rnav .hrf-menu[hidden]{display:none}
+@keyframes hrfMenuIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:none}}
+#homeV2#homeV2#homeV2.rnav .hrf-menu .rds-icon-btn{position:relative;display:flex;align-items:center;justify-content:flex-start;gap:12px;width:100%;min-width:0;height:46px;padding:0 12px;border:0;border-radius:12px;background:transparent;color:var(--hrf-ink);font:500 15px var(--rds-font);box-shadow:none}
+#homeV2#homeV2#homeV2.rnav .hrf-menu .rds-icon-btn:active{background:color-mix(in srgb,var(--hrf-ink) 8%,transparent)}
+#homeV2#homeV2#homeV2.rnav .hrf-menu .rds-icon-btn .rds-icon{order:1;font-size:22px;color:var(--hrf-deep)}
+#homeV2#homeV2#homeV2.rnav .hrf-menu .rds-icon-btn::before{order:2;position:static;inset:auto;width:auto;height:auto;background:none;color:inherit}
+#homeV2#homeV2#homeV2.rnav .hrf-menu #v4ThemeBtn::before{content:"Dark mode"}
+body.dark #homeV2#homeV2#homeV2.rnav .hrf-menu #v4ThemeBtn::before{content:"Light mode"}
+#homeV2#homeV2#homeV2.rnav .hrf-menu #v3BellBtn::before{content:"Notifications"}
+#homeV2#homeV2#homeV2.rnav .hrf-menu .smd-pv-btn::before{content:"Privacy mode"}
+@media (min-width:561px){#homeV2#homeV2#homeV2.rnav .hrf-menu{right:max(22px,calc((100% - 1040px)/2))}}
+@media (prefers-reduced-motion:reduce){#homeV2#homeV2#homeV2.rnav .hrf-menu{animation:none}}
+@media (prefers-reduced-transparency:reduce){#homeV2#homeV2#homeV2.rnav .hrf-menu{background:var(--hrf-card);-webkit-backdrop-filter:none;backdrop-filter:none}}

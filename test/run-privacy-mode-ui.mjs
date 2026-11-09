@@ -114,8 +114,8 @@ try {
 
   /* ---------- 1. the toggle, default off ---------- */
   await fresh(BASE, `localStorage.setItem("smd_icu_groups","0");`);
-  const btn = JSON.parse(await ev(`var b=document.querySelector("#homeV2 .smd-pv-btn"); return JSON.stringify(b ? {label:b.getAttribute("aria-label"), pressed:b.getAttribute("aria-pressed"), n:document.querySelectorAll(".smd-pv-btn").length, inHeader:!!b.closest(".rnav-head, .v3-header")} : null);`));
-  ok(btn && btn.label === "Privacy mode" && btn.inHeader, "one toggle named \"Privacy mode\" sits in the home header", btn);
+  const btn = JSON.parse(await ev(`var b=document.querySelector("#homeV2 .smd-pv-btn"); return JSON.stringify(b ? {label:b.getAttribute("aria-label"), pressed:b.getAttribute("aria-pressed"), n:document.querySelectorAll(".smd-pv-btn").length, inHeader:!!b.closest("#hrfMenu, .rnav-head, .v3-header")} : null);`));
+  ok(btn && btn.label === "Privacy mode" && btn.inHeader, "one toggle named \"Privacy mode\" sits in the home header menu", btn);
   ok(btn && btn.n === 1, "exactly one toggle", btn && btn.n);
   ok(btn && btn.pressed === "false", "aria-pressed is false by default", btn && btn.pressed);
   ok(await ev(`return document.documentElement.classList.contains("smd-privacy");`) === false, "mode is off by default");
