@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-firearm-rifled-firearm",
+ "subject": "forensic-medicine",
+ "module": "fmt-firearm",
+ "title": "Rifled Firearms, Shotguns, Choke and Cartridges",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Rifling gives the bullet its spin",
+   "tx": "A **rifled firearm** has shallow spiral grooves cut inside the barrel, two to more than twenty in number and most commonly six. The raised ridges between grooves are called lands. As the bullet travels, the lands bite into it and spin it around its long axis, about 2500 revolutions per second in a service rifle. Spin gives a straight course, greater penetration and no tumbling in flight.",
+   "say": "Six spiral grooves spin the bullet thousands of times a second, keeping it straight, stable and deeply penetrating.",
+   "vis": {"kind": "table", "cols": ["Barrel feature", "Name", "Effect on bullet"], "rows": [["Spiral grooves", "Rifling", "Spins the projectile"], ["Ridges between grooves", "Lands", "Engrave and grip the bullet"], ["Smooth bore", "Shotgun barrel", "Fires pellets or a slug"], ["Narrowed muzzle end", "Choke", "Controls pellet spread"]]}
+  },
+  {
+   "title": "Smoothbore shotgun and its bore",
+   "tx": "A **smoothbore shotgun** has a plain barrel 55 to 72 centimetres long, single or double barrelled, firing a single ball, a slug or a charge of shot. For larger bores the gauge counts how many lead balls of bore diameter make one pound, 454 grams, of lead: a 12 bore ball is one of twelve. Common gauges are 12, 16 and 20, and the smaller the gauge number, the wider the bore.",
+   "say": "Shotgun gauge counts lead balls to the pound, so a twelve bore is wider than a twenty bore.",
+   "vis": {"kind": "compare", "left": {"title": "Rifled weapon clues", "points": ["Spiral grooves inside barrel", "Single bullet per shot", "Calibre measured land to land", "Range up to thousands of metres"]}, "right": {"title": "Shotgun clues", "points": ["Smooth barrel, break open action", "Pellets, slug or ball per shot", "Gauge by balls per pound", "Effective to about thirty metres"]}}
+  },
+  {
+   "title": "Choke tightens the pellet pattern",
+   "tx": "In a choke bore barrel the last seven to ten centimetres narrow down, and that **choke constriction** lessens the rate at which shot spreads after leaving the muzzle. Degrees run from true cylinder with no constriction, through quarter, half and three quarter, to full choke at one millimetre of narrowing. Choking also raises velocity and explosive force. Some guns accept interchangeable barrels of different choke for different work.",
+   "say": "Full choke narrows the muzzle by a millimetre and holds pellets together far longer than a plain cylinder bore.",
+   "vis": {"kind": "table", "cols": ["Choke degree", "Constriction", "Pattern behaviour"], "rows": [["Full choke", "1.00 mm", "Tightest, spreads latest"], ["Half choke", "0.50 mm", "Moderate spread"], ["Quarter choke", "0.25 mm", "Early spread begins"], ["True cylinder", "None", "Spread from the muzzle"]]}
+  },
+  {
+   "title": "Anatomy of a cartridge",
+   "tx": "A **cartridge** packs primer, powder and projectile into one unit. In a rifled cartridge a metal case grips the bullet base, gunpowder fills the middle, and a primer cup sits in a central hole in the base with a flash hole into the powder space. Centrefire, rimfire and pinfire describe where the firing pin strikes. A circumferential groove near the bullet base, the cannelure, is where the case mouth is crimped tight.",
+   "say": "Primer at the base, powder in the middle and bullet gripped at the mouth make one self contained cartridge.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Firing pin crushes the primer"}, {"id": "b", "label": "Flash passes through the flash hole"}, {"id": "c", "label": "Powder charge ignites"}, {"id": "d", "label": "Gas drives the bullet out"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Primers, powders and gas volumes",
+   "tx": "Modern primers contain compounds of lead, barium and antimony sulphide, and their particles travel only 7.5 to 15 centimetres, under the **primer residue range** rule. Black powder is potassium nitrate 75 percent, charcoal 15 percent and sulphur 10 percent, yielding 3000 to 4500 cubic centimetres of gas per gram. Smokeless nitrocellulose powders yield 12000 to 13000 cubic centimetres per gram with far less flame and smoke.",
+   "say": "Black powder makes a third of the gas of smokeless powder, and primer particles die out within fifteen centimetres.",
+   "vis": {"kind": "compare", "left": {"title": "Black powder", "points": ["Nitrate 75, charcoal 15, sulphur 10", "Much flame, heat and smoke", "3000 to 4500 cc gas per gram", "Grains travel 60 to 90 cm"]}, "right": {"title": "Smokeless powder", "points": ["Nitrocellulose based", "Little flame or smoke", "12000 to 13000 cc gas per gram", "Burns more completely"]}}
+  },
+  {
+   "title": "Bullet types and mushrooming",
+   "tx": "Bullets are lead hardened with antimony, often jacketed in steel, copper, nickel or zinc under the family of **bullet designs that change wounding**. A full metal jacket covers all but the base and penetrates deeply. Semi jacketed and hollow point bullets expose the nose so it expands or mushrooms on impact and dumps energy early. A dumdum bullet fragments extensively on striking. Hollow point designs are also called express bullets.",
+   "say": "Exposed noses mushroom and fragment for wide shallow damage, while full jackets punch deep narrow tracks.",
+   "vis": {"kind": "table", "cols": ["Bullet type", "Nose design", "Wounding style"], "rows": [["Full metal jacket", "Fully covered", "Deep penetration"], ["Semi jacketed", "Nose partly exposed", "Expands on impact"], ["Hollow point", "Cavity in the nose", "Mushrooms widely"], ["Dumdum", "Weakened jacket", "Fragments extensively"]]}
+  },
+  {
+   "title": "Calibre, velocity and kinetic energy",
+   "tx": "Wounding power follows physics: **kinetic energy equals half mass times velocity squared**, so doubling velocity quadruples the energy delivered. Rifle bores run 5.6 to 7.7 millimetres with muzzle velocities up to 800 metres per second in military rifles and killing range near 3000 metres. Revolvers are low velocity weapons at 150 to 180 metres per second. Dense tissue such as bone extracts far more energy than soft tissue does.",
+   "say": "Energy rises with the square of velocity, which is why a fast rifle bullet shatters bone that a revolver bullet only dents.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bullet strikes with its kinetic energy"}, {"id": "b", "label": "Dense bone absorbs energy fast"}, {"id": "c", "label": "Bone comminutes and splinters"}, {"id": "d", "label": "Soft tissue alone may pass cleanly"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "What leaves the muzzle besides the bullet",
+   "tx": "Behind the bullet comes a cone of **muzzle discharge products**: hot compressed gas, flame, smoke, partly burnt and unburnt powder, metal and wad fragments and grease. For shotguns, smoke reaches about 30 centimetres, flame about 15 centimetres and powder grains 60 to 90 centimetres, while cards travel two metres and wads two to five metres. These ranges are the entire basis of range estimation in the next lesson.",
+   "say": "Flame dies at fifteen centimetres, smoke at thirty and powder near ninety, and those cut offs estimate the range.",
+   "vis": {"kind": "table", "cols": ["Discharge product", "Shotgun reach", "Skin effect"], "rows": [["Flame", "About 15 cm", "Singeing and burning"], ["Smoke", "About 30 cm", "Blackening or smudging"], ["Powder grains", "60 to 90 cm", "Tattooing stipple"], ["Wad and cards", "2 to 5 metres", "Found inside the wound"]]}
+  },
+  {
+   "title": "Recovering cartridge evidence at autopsy",
+   "tx": "Every recovered item narrows the weapon: collect the **plastic sleeve, wadding and cardboard** from inside shotgun wounds, because wad size reveals the bore. X ray the body to locate bullets, pellets, fragments and jackets and to show the track before dissection disturbs it. Handle a suspected explosive bullet with long rubber covered forceps into a padded container, and never expose it to ultrasound or microwave devices that could detonate it.",
+   "say": "Wads name the bore, X rays map the track before dissection, and suspected explosive bullets are handled at forceps length.",
+   "vis": {"kind": "compare", "left": {"title": "Always recover", "points": ["Wads and plastic sleeves", "Bullets and separated jackets", "Pellets from the track", "Clothing with bullet wipe"]}, "right": {"title": "Always avoid", "points": ["Probing tracks blindly", "Ultrasound near explosive bullets", "Bare hands on a suspect bullet", "Discarding wadding as debris"]}}
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,207 @@
+{
+ "v": 1,
+ "id": "oph-investigations-lasers-slit-lamp-biomicroscopy",
+ "subject": "ophthalmology",
+ "module": "oph-investigations-lasers",
+ "title": "Slit Lamp, Ophthalmoscopy and Biometry",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Slit lamp biomicroscopy** examines anterior segment under magnified focal illumination whose slit width, height and angle localise lesions by optical section through cornea, chamber and lens. Cells and flare grading in anterior chamber, corneal layer localisation and lens opacity mapping all depend on slit technique. It is the ophthalmic equivalent of palpation, the test every red eye pathway begins with before fundus work.",
+   "say": "Magnified slit illumination gives layer localisation through anterior segment optically. Chamber grading and lens mapping are dependent on slit technique. Red eye assessment starts here always.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m92-oph-investigations-lasers-slit-lamp-biomicroscopy.webp",
+    "alt": "Slit lamp optical section cutting through the cornea and anterior chamber, showing their layers in profile.",
+    "caption": "A narrow slit beam forms an optical section through cornea and anterior chamber, separating their layers in profile. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Direct ophthalmoscopy** gives upright magnified fundus view through undilated or dilated pupil with narrow field, best for optic disc detail at bedside and in neurology. **Indirect ophthalmoscopy** with condensing lens gives wide inverted stereoscopic field for retinal detachment, periphery and media opacity work. Field versus magnification trade explains why both survive: disc detail direct, retinal breadth indirect.",
+   "say": "Direct viewing gives magnified disc detail with narrow field bedside. Indirect viewing gives wide stereoscopic retinal field with lens. Trade of field against magnification explains both.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Direct ophthalmoscopy",
+     "points": [
+      "Upright, highly magnified",
+      "Narrow field, disc detail",
+      "Bedside and neurology use"
+     ]
+    },
+    "right": {
+     "title": "Indirect ophthalmoscopy",
+     "points": [
+      "Inverted, wide field stereo",
+      "Periphery and detachment work",
+      "Needs condensing lens skill"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**A-scan biometry** measures axial length by ultrasound time of flight for implant power calculation, while keratometry measures corneal curvature, together feeding modern formulas. Optical biometry has replaced ultrasound for routine cases with better precision, ultrasound persisting for dense cataract that blocks light. Each tenth millimetre axial error costs roughly quarter dioptre refractive surprise classically taught.",
+   "say": "Ultrasound axial measurement gives implant power calculation input with keratometry together. Optical methods give routine precision improvement currently. Axial error gives refractive surprise proportionally.",
+   "vis": {
+    "kind": "table",
+    "title": "Biometry inputs",
+    "cols": [
+     "Input",
+     "Method"
+    ],
+    "rows": [
+     [
+      "Axial length",
+      "Optical or A scan ultrasound"
+     ],
+     [
+      "Corneal power",
+      "Keratometry or topography"
+     ],
+     [
+      "Formula output",
+      "Implant power for target refraction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**B-scan ultrasonography** images globe and orbit through opaque media, distinguishing retinal detachment funnel, vitreous haemorrhage, tumour and foreign body when fundus is invisible. Axial, longitudinal and transverse scans orient lesions by clock hour and depth. It is the investigation that keeps opaque eye surgery planned rather than exploratory in trauma and dense cataract with suspected posterior disease.",
+   "say": "Ultrasound imaging gives posterior assessment through opaque media reliably in clinic. Detachment and tumour separation guides surgical planning. Trauma assessment needs scan before exploration.",
+   "vis": {
+    "kind": "table",
+    "title": "B scan lesion separation",
+    "cols": [
+     "Appearance",
+     "Likely lesion"
+    ],
+    "rows": [
+     [
+      "Funnel membrane",
+      "Retinal detachment"
+     ],
+     [
+      "Diffuse low echoes",
+      "Vitreous haemorrhage"
+     ],
+     [
+      "Solid mass echoes",
+      "Tumour assessment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A normal fovea on OCT has an architecture worth memorising before judging any swollen one. The **foveal contour** dips at the centre where inner retinal layers are pushed aside, letting the segmented bands run in orderly parallel lines down to the pigment epithelium. Each bright and dark band corresponds to layers already met in retinal histology. When fluid, traction or atrophy distorts this profile, naming exactly which band is broken turns a picture into a diagnosis.",
+   "say": "A normal OCT shows the foveal dip with orderly segmented layers down to pigment epithelium. Naming which band is broken turns the scan into a diagnosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m184-oph-investigations-lasers-slit-lamp-biomicroscopy.webp",
+    "alt": "Spectral domain OCT scan of a normal fovea, retinal layers segmented with the central foveal contour preserved.",
+    "caption": "Segmented retinal layers curve into a normal foveal dip on spectral domain OCT. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Optical coherence tomography** gives micron resolution cross sections of macula and nerve fibre layer by low coherence interferometry, quantifying oedema, holes, membranes and ganglion loss numerically. Fluid compartments intraretinal, subretinal and sub pigment epithelial direct macular treatment choices visit by visit. It is the macular equivalent of slit section, layer localisation made quantitative.",
+   "say": "Micron cross sections give quantitative macular layer assessment in clinic visits. Fluid compartment location gives treatment direction visit by visit. Layer localisation is quantitative here."
+  },
+  {
+   "tx": "**Keratometry** measures central corneal power from mire reflections, feeding implant maths and contact fitting, while topography maps whole corneal shape for keratoconus and surgical planning. Placido rings distort over irregular corneas visibly before numbers are read. Tomography adds posterior cornea and pachymetry mapping that topography alone misses in ectasia screening.",
+   "say": "Central corneal power measurement gives implant and contact inputs routinely. Whole shape mapping gives keratoconus and surgical planning. Posterior mapping gives ectasia screening completeness.",
+   "vis": {
+    "kind": "flow",
+    "title": "Investigation selection logic",
+    "nodes": [
+     {
+      "id": "media",
+      "label": "Media clear or opaque assessed"
+     },
+     {
+      "id": "scan",
+      "label": "Tomography if clear, B scan if opaque"
+     },
+     {
+      "id": "biom",
+      "label": "Biometry before lens surgery"
+     },
+     {
+      "id": "plan",
+      "label": "Plan by layer and length"
+     }
+    ],
+    "edges": [
+     [
+      "media",
+      "scan"
+     ],
+     [
+      "scan",
+      "biom"
+     ],
+     [
+      "biom",
+      "plan"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gonioscopy, though glaucoma owned, is an investigation lesson bridge: contact lens with mirrors views angle structures slit lamp cannot see directly. Indentation separates appositional from synechial closure therapeutically during the same examination. **Mirror examination** therefore diagnoses mechanism, not only anatomy grade, in angle closure workup.",
+   "say": "Mirror contact viewing gives angle structure assessment beyond direct slit lamp view in glaucoma workup. Indentation gives mechanism separation during the examination itself at the slit lamp. Gonioscopy therefore gives diagnosis of closure mechanism completely.",
+   "vis": {
+    "kind": "table",
+    "title": "Core investigations mapped",
+    "cols": [
+     "Test",
+     "Question answered"
+    ],
+    "rows": [
+     [
+      "Slit lamp",
+      "Which anterior layer is diseased"
+     ],
+     [
+      "Indirect ophthalmoscopy",
+      "Peripheral retina state"
+     ],
+     [
+      "B scan",
+      "Posterior state behind opaque media"
+     ],
+     [
+      "Tomography",
+      "Macular layer and fluid map"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Investigation discipline is question first, machine second: red eye needs slit, opaque eye needs sound, macular symptoms need tomography, implant needs length and power. Ordering every test for every patient wastes the diagnostic value each was built for. **Layer localisation** repeated across this module is the habit examinations reward in investigation choices.",
+   "say": "Clinical question gives investigation selection before machine choice in disciplined assessment always. Layer localisation gives diagnostic value to each test that is ordered. Blanket ordering of every test wastes diagnostic specificity significantly.",
+   "vis": null
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Direct versus indirect ophthalmoscopy",
+   "b": "Direct: upright magnified disc detail, narrow field. Indirect: inverted wide stereo periphery with condensing lens."
+  },
+  {
+   "f": "B scan indication",
+   "b": "Posterior assessment through opaque media: detachment, haemorrhage, tumour and foreign body."
+  },
+  {
+   "f": "Biometry error rule",
+   "b": "About a quarter dioptre refractive surprise per tenth millimetre axial length error classically."
+  }
+ ],
+ "keys": [
+  "Slit lamp localises anterior layers",
+  "Opaque media means ultrasound first",
+  "Tomography quantifies macular layers"
+ ]
+}

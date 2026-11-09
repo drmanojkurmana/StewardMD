@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-musculoskeletal-ewing-sarcoma",
+ "subject": "radiology",
+ "module": "rad-musculoskeletal",
+ "title": "Ewing Sarcoma, Round Cell Tumours and Bone Infection Mimics",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Ewing fills the diaphysis",
+   "tx": "**Ewing sarcoma** attacks the diaphysis and flat bones of children and adolescents with a permeative lytic lesion, onion peel periosteal reaction and a large soft tissue mass out of proportion to visible bone change. The pictured imaging and histology set pairs that film pattern with the small round blue cell sheets and CD99 membrane staining that confirm it. Pelvis, femur, tibia and ribs host most cases.",
+   "say": "Ewing sarcoma attacks the diaphysis and flat bones of children with a permeative lytic lesion, onion peel reaction and a large soft tissue mass. The pictured set pairs that film pattern with small round blue cell histology. Pelvis, femur, tibia and ribs host most cases.",
+   "vis": {"kind": "image", "src": "v1/kb/media/ewing-sarcoma-fig1.webp", "alt": "Ewing sarcoma imaging and histology illustration with permeative bone lesion.", "caption": "Ewing sarcoma imaging and histology. Illustration: StewardMD."}
+  },
+  {
+   "title": "The fever trap",
+   "tx": "**Systemic upset** with fever, weight loss, raised ESR and leucocytosis accompanies Ewing sarcoma often enough that first prescriptions are frequently antibiotics for presumed osteomyelitis. Both diseases permeate diaphyseal bone and lift periosteum in a febrile child. A soft tissue mass without a sequestrum, failure to settle in a week, and a lesion crossing toward the epiphysis should trigger biopsy with fresh tissue sent for culture and histology together.",
+   "say": "Systemic upset with fever and raised inflammatory markers accompanies Ewing sarcoma often enough that first prescriptions are antibiotics for osteomyelitis. A soft tissue mass without sequestrum and failure to settle in a week should trigger biopsy, with fresh tissue sent for culture and histology together.",
+   "vis": {"kind": "compare", "left": {"title": "Favours Ewing", "points": ["Large soft tissue mass", "No sequestrum or cloaca", "Not settling on antibiotics", "Diaphyseal permeation"]}, "right": {"title": "Favours osteomyelitis", "points": ["Sequestrum present", "Cloaca and sinus track", "Settles on antibiotics", "Adjacent joint or skin source"]}}
+  },
+  {
+   "title": "Translocation confirms the family",
+   "tx": "**EWSR1 rearrangement**, most often t(11;22) creating the EWS FLI1 fusion, defines Ewing family tumours at the molecular level and separates them from other round cell mimics. Lymphoma, neuroblastoma metastasis, small cell osteosarcoma and rhabdomyosarcoma share the small round blue cell look under the microscope. Immunostains and fusion testing therefore finish every paediatric round cell biopsy, because chemotherapy regimens for these lookalikes diverge completely.",
+   "say": "EWSR1 rearrangement, most often the eleven twenty two translocation, defines Ewing family tumours and separates them from round cell mimics. Lymphoma, neuroblastoma and rhabdomyosarcoma share the microscopic look, so fusion testing finishes every paediatric biopsy because chemotherapy regimens diverge completely.",
+   "vis": {"kind": "table", "cols": ["Round cell tumour", "Confirmatory test", "Favourite clue"], "rows": [["Ewing sarcoma", "EWS FLI1 fusion, CD99", "Diaphysis, onion peel"], ["Lymphoma of bone", "Lymphoid markers", "Older child, permeative"], ["Neuroblastoma spread", "Urine catecholamines", "Under five, primary adrenal"], ["Small cell osteosarcoma", "Osteoid by tumour cells", "Metaphysis like osteosarcoma"]]}
+  },
+  {
+   "title": "MRI shows the true mass",
+   "tx": "**Soft tissue mass** in Ewing is often far larger on MRI than the bone destruction suggests, because tumour permeates cortex through vascular channels without immediately destroying it. Whole bone MRI catches skip deposits, and chest CT plus bone scan or PET stage the lungs and skeleton where Ewing spreads. Response to neoadjuvant chemotherapy, measured by shrinking soft tissue mass, stratifies the surgery and radiation plan.",
+   "say": "Soft tissue mass in Ewing is often far larger on MRI than bone destruction suggests, because tumour permeates cortex without immediately destroying it. Whole bone MRI catches skip deposits, and chest CT with bone imaging stage lungs and skeleton. Chemotherapy response stratifies the surgery plan.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Diaphyseal lesion on film"}, {"id": "b", "label": "Whole bone MRI extent"}, {"id": "c", "label": "Chest and bone staging"}, {"id": "d", "label": "Chemotherapy response plan"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Osteosarcoma versus Ewing desk split",
+   "tx": "**Age and zone** split the two great paediatric bone sarcomas at the desk: osteosarcoma is metaphyseal in the older adolescent growth spurt with mineralised matrix, Ewing is diaphyseal or flat bone in the younger child with no matrix and systemic upset. The pictured pattern chart lines those reactions side by side. Both need the same discipline: plain film tempo read, MRI local staging, chest CT, planned biopsy, in that order.",
+   "say": "Age and zone split the two great paediatric sarcomas: osteosarcoma is metaphyseal in the older adolescent with mineralised matrix, Ewing is diaphyseal in the younger child with systemic upset. The pictured chart lines those reactions side by side. Both need plain film, MRI, chest staging and planned biopsy in order.",
+   "vis": {"kind": "image", "src": "v1/kb/media/bone-tumours-osteosarcoma-ewing-paget-fig1.webp", "alt": "Bone lesion pattern chart comparing osteosarcoma and Ewing sarcoma radiographic signs.", "caption": "Osteosarcoma versus Ewing pattern chart. Illustration: StewardMD."}
+  },
+  {
+   "title": "Flat bone and chest wall primaries",
+   "tx": "**Flat bone Ewing** in pelvis and ribs hides behind bowel gas and lung markings, presenting late with big soft tissue masses and misleading back or chest pain. The pelvis is also the site where radiation often substitutes for unresectable surgery, at the cost of growth and fertility effects counselled upfront. A permeative scapula or rib lesion in a teenager with fever belongs to the same biopsy pathway as the textbook femur case.",
+   "say": "Flat bone Ewing in pelvis and ribs hides behind bowel gas and lung markings, presenting late with big soft tissue masses. The pelvis is also where radiation often substitutes for unresectable surgery. A permeative rib lesion in a teenager with fever belongs to the same biopsy pathway as the femur case.",
+   "vis": {"kind": "compare", "left": {"title": "Long bone Ewing", "points": ["Diaphyseal femur or tibia", "Onion peel visible early", "Limb salvage surgery usual", "Palpable mass common"]}, "right": {"title": "Flat bone Ewing", "points": ["Pelvis, ribs, scapula", "Presents late and large", "Radiation more often used", "Pain misattributed longer"]}}
+  },
+  {
+   "title": "Metastatic neuroblastoma in the toddler",
+   "tx": "**Neuroblastoma metastases** pepper the metaphyses of toddlers with symmetric lytic lesions, periosteal reaction and a moth eaten skull, beside an adrenal or paraspinal primary. Periorbital deposits blacken both eyes as raccoon eyes. Age under five, symmetric disease and urinary catecholamines separate it from Ewing, which is solitary and in older children. The desk rule is simple: a round cell bone lesion under five is neuroblastoma or leukaemia until proven otherwise.",
+   "say": "Neuroblastoma metastases pepper toddler metaphyses with symmetric lytic lesions beside an adrenal primary. Periorbital deposits blacken both eyes. Age under five, symmetric disease and urinary catecholamines separate it from solitary Ewing in older children. Under five, think neuroblastoma or leukaemia first.",
+   "vis": {"kind": "table", "cols": ["Feature", "Neuroblastoma spread", "Ewing sarcoma"], "rows": [["Typical age", "Under 5 years", "5 to 20 years"], ["Lesion number", "Multiple symmetric", "Solitary"], ["Primary found", "Adrenal or paraspinal", "The bone lesion itself"], ["Key test", "Urine catecholamines", "EWS fusion study"]]}
+  },
+  {
+   "title": "Never curette a permeative lesion",
+   "tx": "**Biopsy discipline** forbids casual curettage of a permeative paediatric bone lesion through an unplanned approach, because contaminating compartments can cost the limb its salvage option. The resecting surgeon or the referral centre should own the track, with cores that sample soft tissue mass and send fresh material for culture, histology and molecular studies in one pass. That single discipline point is worth more marks than any reaction name in this module.",
+   "say": "Biopsy discipline forbids casual curettage of a permeative paediatric lesion through an unplanned approach, because contaminating compartments can cost limb salvage. The resecting centre should own the track, sampling soft tissue mass for culture, histology and molecular studies in one pass.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Permeative lesion found"}, {"id": "b", "label": "Refer before biopsy"}, {"id": "c", "label": "Planned core track"}, {"id": "d", "label": "Culture, histology, molecular"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}

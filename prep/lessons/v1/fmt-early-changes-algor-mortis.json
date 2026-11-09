@@ -1,0 +1,329 @@
+{
+ "v": 1,
+ "id": "fmt-early-changes-algor-mortis",
+ "subject": "forensic-medicine",
+ "module": "fmt-early-changes",
+ "title": "Thanatology: Postmortem Cooling, Algor Mortis and Postmortem Caloricity",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Physical thermodynamics of postmortem cooling",
+   "tx": "Following somatic death, metabolic heat production ceases while heat loss continues until equilibrium with the ambient environment is reached. In thanatology, this physical phenomenon is termed **algor mortis postmortem cooling**. The dead corpse loses thermal energy to the surroundings through radiation, convection, conduction, and surface evaporation, serving as one of the primary forensic markers for estimating the postmortem interval in early death scenes.",
+   "say": "Algor mortis is the progressive cooling of a dead body until it reaches room temperature, providing a vital tool for estimating time since death.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Heat loss mechanism",
+     "Physical process",
+     "Factors modifying cooling rate"
+    ],
+    "rows": [
+     [
+      "Thermal radiation",
+      "Emission of infrared energy into surrounding air",
+      "Ambient air temperature and body surface area"
+     ],
+     [
+      "Air convection",
+      "Air currents carrying heat away from skin",
+      "Wind velocity, ventilation, and moving fan drafts"
+     ],
+     [
+      "Direct conduction",
+      "Heat transfer to cold floor, ice, or earth",
+      "Nature of contact surface (concrete, tile vs mattress)"
+     ],
+     [
+      "Surface evaporation",
+      "Loss of latent heat through wet clothes or moisture",
+      "Rapid cooling in wet drowning casualties or rain"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The sigmoid cooling curve and the temperature plateau",
+   "tx": "Postmortem thermal decline does not follow simple linear progression, but conforms to a **sigmoid postmortem cooling curve**. During the initial temperature plateau lasting thirty to ninety minutes, deep core temperature remains unchanged due to lingering anaerobic glycogenolysis and skin insulation. This is followed by a steep linear descent lasting twelve to sixteen hours, before tapering into a shallow asymptotic curve as ambient temperature is approached.",
+   "say": "Cooling follows an S-shaped curve: temperature stays flat for the first hour during a plateau, drops rapidly for several hours, and then slows down.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Phase 1: Initial temperature plateau (30 to 90 min post-demise)"
+     },
+     {
+      "id": "b",
+      "label": "Phase 2: Rapid linear descent (Steep drop of ~0.5-1.0 deg C/hr)"
+     },
+     {
+      "id": "c",
+      "label": "Phase 3: Shallow asymptotic phase (Approaching ambient baseline)"
+     },
+     {
+      "id": "d",
+      "label": "Thermal equilibrium established with environmental air"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Techniques for measuring core postmortem temperature",
+   "tx": "To measure algor mortis accurately, examiners use a specialized **chemical postmortem thermometer technique**. The instrument possesses an extended twenty-five-centimeter probe calibrated from zero to fifty degrees Celsius. The probe is inserted deep into the rectum to a depth of ten to twelve centimeters, or introduced directly into the liver parenchyma through a subhepatic abdominal incision, avoiding superficial axillary measurements which cool too rapidly.",
+   "say": "Core temperature is measured by inserting a long chemical thermometer ten centimeters into the rectum or directly into the liver, avoiding inaccurate skin readings.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Long forensic thermometer inspected and calibrated"
+     },
+     {
+      "id": "b",
+      "label": "Insertion into rectum to depth of 10 to 12 cm"
+     },
+     {
+      "id": "c",
+      "label": "Maintained in position for at least two full minutes"
+     },
+     {
+      "id": "d",
+      "label": "Simultaneous measurement of ambient air temperature at scene"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Rates of cooling across temperate and tropical climates",
+   "tx": "The speed of postmortem thermal decline varies across geographic latitudes according to the **climatic cooling rate differential**. In temperate climates, a clothed adult corpse cools at approximately zero-point-five to zero-point-seven degrees Celsius per hour for the first few hours, accelerating to one degree per hour. In tropical climates like India, cooling proceeds more slowly, averaging zero-point-four to zero-point-seven degrees Celsius per hour.",
+   "say": "In cold climates, bodies cool at roughly one degree Celsius per hour, while in warm tropical climates like India, they cool more slowly at about half a degree per hour.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Climatic environment",
+     "Average cooling rate",
+     "Time to reach ambient equilibrium"
+    ],
+    "rows": [
+     [
+      "Temperate climate (15-20 deg C)",
+      "0.7 to 1.0 deg C per hour",
+      "15 to 20 hours after demise"
+     ],
+     [
+      "Tropical climate (India, 28-35 deg C)",
+      "0.4 to 0.7 deg C per hour",
+      "12 to 16 hours after demise"
+     ],
+     [
+      "Cold water submersion",
+      "Twice as rapid as air cooling",
+      "6 to 10 hours to reach water temperature"
+     ],
+     [
+      "Moving cold wind draft",
+      "Accelerates cooling markedly",
+      "Shortens the initial temperature plateau"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Factors modifying the rate of postmortem cooling",
+   "tx": "Numerous intrinsic and environmental variables dictate the **cooling rate modifying factors**, which must be evaluated before calculating time since death. Heavy clothing, blankets, obesity, and enclosed rooms retard cooling. Conversely, emaciation, nakedness, cold weather, rapid air drafts, and water immersion accelerate heat dissipation. Infants possess large surface-area-to-mass ratios and minimal insulating subcutaneous fat, cooling to room temperature within a few hours.",
+   "say": "Obesity and heavy clothing slow down cooling, while thin bodies, nakedness, cold winds, and water immersion speed up heat loss dramatically.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Factors retarding cooling",
+     "points": [
+      "Adipose subcutaneous insulation (obesity)",
+      "Multiple layers of woollen clothing",
+      "Enclosed unventilated warm rooms",
+      "High ambient summer temperatures"
+     ]
+    },
+    "right": {
+     "title": "Factors accelerating cooling",
+     "points": [
+      "Emaciation, malnutrition, and childhood",
+      "Naked body exposed on cold cement floor",
+      "Submersion in cold flowing water",
+      "Active air conditioning or wind drafts"
+     ]
+    }
+   }
+  },
+  {
+   "title": "The phenomenon of postmortem caloricity",
+   "tx": "Under specialized pathological circumstances, a body exhibits **postmortem caloricity temperature elevation**, wherein internal core temperature rises or remains elevated above thirty-seven degrees Celsius for one to three hours after death. This paradoxical phenomenon arises from massive pre-mortem heat generation combined with impaired dissipation, or unchecked post-mortem bacterial activity, confounding conventional algor mortis calculations unless recognized by the pathologist.",
+   "say": "Postmortem caloricity is an abnormal rise in body temperature after death, seen in heat stroke, tetanus, brain hemorrhage, and severe infections.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathological condition",
+     "Mechanism of postmortem caloricity",
+     "Clinical manifestation"
+    ],
+    "rows": [
+     [
+      "Severe heat stroke / sunstroke",
+      "Failure of hypothalamic thermoregulatory center",
+      "Core temperature exceeds 42 deg C at death"
+     ],
+     [
+      "Tetanus / strychnine poisoning",
+      "Violent sustained muscular spasms releasing heat",
+      "High post-mortem fever and rapid rigor mortis"
+     ],
+     [
+      "Pontine brain hemorrhage",
+      "Direct trauma to central thermoregulatory tracts",
+      "Extreme hyperpyrexia persisting post-demise"
+     ],
+     [
+      "Fulminant septicemia / peritonitis",
+      "Massive bacterial pyrogen release and autolysis",
+      "Continuous postmortem heat production"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Mathematical formulas for estimating time since death",
+   "tx": "Forensic scientists deploy mathematical equations including the **Henssge nomogram cooling calculation** to estimate the postmortem interval. The Henssge nomogram incorporates rectal temperature, ambient air temperature, body weight, and dynamic corrective factors for clothing, air movement, or water immersion. A classic rule-of-thumb formula calculates time since death as normal body temperature minus rectal temperature divided by the local hourly cooling rate.",
+   "say": "Henssge's nomogram calculates time since death using body temperature, room temperature, weight, and clothing, providing a statistical time window.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Simultaneous measurement of rectal and ambient temperature"
+     },
+     {
+      "id": "b",
+      "label": "Determination of body weight on mortuary scales"
+     },
+     {
+      "id": "c",
+      "label": "Selection of corrective factor (naked, clothed, or submerged)"
+     },
+     {
+      "id": "d",
+      "label": "Plotting on Henssge nomogram yields time window with 95% confidence"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Introduction to postmortem lividity and hypostasis",
+   "tx": "While the body cools, gravity acts upon the stagnant circulating volume, initiating **postmortem hypostasis circulatory settling**. Once the heart ceases pumping, red blood cells sink under gravity through relaxed vessels into the dependent capillaries and venules of the lowest anatomical regions. This produces reddish-purple cutaneous patches known as livor mortis, which develop concurrently with postmortem cooling.",
+   "say": "As a body cools, gravity pulls stagnant blood into the lowest capillaries, creating purple skin patches called postmortem lividity or hypostasis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Cardiac pumping ceases and intravascular pressure drops"
+     },
+     {
+      "id": "b",
+      "label": "Gravitational settling of erythrocytes into dependent venules"
+     },
+     {
+      "id": "c",
+      "label": "Dilation of engorged dermal capillaries in lowest skin areas"
+     },
+     {
+      "id": "d",
+      "label": "Formation of confluent purplish livor mortis discoloration"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Correlating cooling and hypostasis in the death scene",
+   "tx": "By correlating the degree of algor mortis with the extent of postmortem hypostasis, the forensic examiner establishes an **integrated early postmortem chronology**. If the body is warm and exhibits early mottled hypostasis that blanches completely under digital pressure, death occurred within two to four hours. If the corpse is cold and lividity is fixed, the postmortem interval exceeds eight to twelve hours.",
+   "say": "Combining body temperature with lividity creates an accurate time window: a warm body with faint lividity died recently, while a cold, fixed body died hours earlier.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Postmortem interval: 1 to 4 hours",
+     "points": [
+      "Body feels warm to touch (plateau / early cooling)",
+      "Livor mortis appears as mottled dependent patches",
+      "Lividity blanches completely under finger pressure",
+      "Rigor mortis limited to face, jaw, and neck"
+     ]
+    },
+    "right": {
+     "title": "Postmortem interval: 8 to 12 hours",
+     "points": [
+      "Core body temperature noticeably cold",
+      "Livor mortis confluent, fully fixed, and non-blanching",
+      "Lividity does not shift upon rolling corpse",
+      "Rigor mortis generalized across entire skeleton"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

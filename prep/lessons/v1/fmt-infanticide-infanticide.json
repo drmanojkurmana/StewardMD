@@ -1,0 +1,72 @@
+{
+ "v": 1,
+ "id": "fmt-infanticide-infanticide",
+ "subject": "forensic-medicine",
+ "module": "fmt-infanticide",
+ "title": "Infanticide, Live Birth Tests, Battered Baby and Sudden Infant Death",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Infanticide and the Indian position",
+   "tx": "**Infanticide** is the unlawful destruction of a child under one year, but India has no special Infanticide Act, so killing a newborn is tried as murder like any other homicide. England's 1938 Act lets a mother be charged with infanticide rather than murder when mental disturbance from pregnancy, delivery or lactation unbalanced her mind. Neonaticide is deliberate killing within four weeks of birth; filicide is killing by a parent; foeticide is killing before birth.",
+   "say": "India tries newborn killing as ordinary murder, while England's Act softens the charge for a mentally disturbed mother.",
+   "vis": {"kind": "table", "cols": ["Term", "Victim and timing", "Perpetrator"], "rows": [["Foeticide", "Fetus before birth", "Any person"], ["Neonaticide", "Within four weeks of birth", "Usually the mother"], ["Infanticide", "Under one year", "Mother in English law"], ["Filicide", "Child of any young age", "A parent"]]}
+  },
+  {
+   "title": "Five questions in every infant death",
+   "tx": "The examination answers **five infant death questions** in order. Was the child stillborn or deadborn? Had it attained viability? Was it born alive? If liveborn, how long did it live? What caused death? The alleged mother is examined for signs of recent delivery and her mental state is recorded. Most infanticide is committed at or within minutes to hours of birth, usually by a young unmarried woman or widow.",
+   "say": "Stillborn, viable, liveborn, survival time and cause of death: answer all five before naming any crime.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Stillborn or deadborn first"}, {"id": "b", "label": "Viability assessed next"}, {"id": "c", "label": "Live birth proved or excluded"}, {"id": "d", "label": "Survival time and cause last"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Stillbirth, deadbirth and maceration",
+   "tx": "A **stillborn child** was alive in the uterus but died during birth after the twenty eighth week, showing no breathing or sign of life after complete delivery. A **deadborn child** died in the uterus and shows rigor at delivery or maceration: aseptic autolysis after three to four days retained in liquor with air excluded. Maceration reddens and peels the skin within twelve hours, raises red fluid blebs by twenty four hours and softens every viscus except lungs and uterus.",
+   "say": "Death during birth is stillbirth, death retained in the womb is maceration, with peeling skin and softened organs.",
+   "vis": {"kind": "compare", "left": {"title": "Stillbirth clues", "points": ["Died during the birth process", "Caput and severe moulding", "Lungs dark red, unexpanded", "Sterile, decays from outside"]}, "right": {"title": "Maceration clues", "points": ["Died days before delivery", "Skin reddens, peels, blebs", "Bones flexible, joints loose", "Skull bones separate, brain pulpy"]}}
+  },
+  {
+   "title": "Spalding sign and Robert sign",
+   "tx": "Two radiological signs date fetal death in the womb. **Spalding sign** is loss of alignment with overriding of the cranial vault bones from shrinkage of the cerebrum after death, developing over days to two or three weeks, earlier with vertex presentation. **Robert sign** is gas in the great vessels, the aorta within about twelve hours, indicating fetal death. Both help separate a child dead long before delivery from one lost during it.",
+   "say": "Overriding skull bones take days to develop after fetal death, while aortic gas appears within about twelve hours.",
+   "vis": {"kind": "table", "cols": ["Sign", "Finding", "Timing after fetal death"], "rows": [["Robert sign", "Gas in aorta and great vessels", "About twelve hours"], ["Spalding sign early", "Loss of vault alignment", "Days"], ["Spalding sign late", "Overriding of skull bones", "Up to two or three weeks"], ["Maceration", "Skin peeling and blebs", "Twelve to twenty four hours"]]}
+  },
+  {
+   "title": "Viability at one hundred eighty to two hundred ten days",
+   "tx": "**Viability** is the physical ability of a fetus to lead a separate existence apart from its mother. A child is viable after two hundred ten days of intrauterine life, and in some cases after one hundred eighty days. The smallest recorded survivor weighed two hundred forty two grams and measured twenty five centimetres. Viability matters because the hydrostatic test is unnecessary before one hundred eighty days, and killing a non viable fetus is not infanticide.",
+   "say": "Viable means able to live apart, usually after two hundred ten days and sometimes after one hundred eighty.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Assess gestational development"}, {"id": "b", "label": "210 days, viable ordinarily"}, {"id": "c", "label": "180 days, viable sometimes"}, {"id": "d", "label": "Below 180, test unnecessary"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Hydrostatic test for respired lungs",
+   "tx": "The **hydrostatic or Raygat test** asks whether the lungs have breathed: respired lung has specific gravity near 940 and floats, unrespired lung near 1050 and sinks. Lungs are removed with bronchi ligated, floated whole, then in twelve to twenty pieces, then squeezed under water and in cloth to expel tidal air; pieces still floating hold residual air and prove respiration. A liver piece serves as control, and if the liver floats the test is useless.",
+   "say": "Float whole, float pieces, squeeze and float again: residual air keeping lung afloat after squeezing proves breathing.",
+   "vis": {"kind": "table", "cols": ["Lung trait", "Before respiration", "After respiration"], "rows": [["Weight ratio", "One seventieth of body", "One thirty fifth of body"], ["Consistency", "Dense, firm, non crepitant", "Soft, spongy, crepitant"], ["Colour", "Uniform reddish brown", "Mottled or marbled"], ["Floatation", "Whole and parts sink", "Parts float after squeezing"]]}
+  },
+  {
+   "title": "Fallacies of the hydrostatic test",
+   "tx": "The hydrostatic test fails both ways in **hydrostatic test fallacies**. Expanded lungs may sink from oedema, pneumonia, congenital syphilis or atelectasis, or because feeble respiration was absorbed. Unexpanded lungs may float from putrefactive gas, whose large bubbles collapse on pricking, or from artificial inflation by tube or mouth to mouth resuscitation. The test is unnecessary when the fetus is a monster, macerated, below one hundred eighty days, or has milk in the stomach.",
+   "say": "Disease sinks breathed lungs and putrefaction floats unbreathed ones, so the float test never decides alone.",
+   "vis": {"kind": "compare", "left": {"title": "Breathed lungs may sink", "points": ["Pneumonia or oedema", "Atelectasis, feeble breathing", "Air absorbed after circulation", "Congenital syphilis"]}, "right": {"title": "Unbreathed lungs may float", "points": ["Putrefactive gas bubbles", "Artificial inflation at rescue", "Cardiac massage with oxygen", "Gas collapses on pricking"]}}
+  },
+  {
+   "title": "Breslau second life test and Wredin test",
+   "tx": "Two companion tests support the lung evidence. **Breslau second life test** floats the stomach and intestines tied with double ligatures at each end: swallowed air floats them if respiration occurred, though stillborn children can swallow air struggling to free their passages, so its value is small and nil in decomposition. **Wredin test** opens the middle ear under water; a bubble escapes when breathing has replaced its gelatinous embryonic tissue with air.",
+   "say": "Floating stomach and bowel and an air bubble from the middle ear support breathing, but both tests stay secondary.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Tie stomach and bowel ends"}, {"id": "b", "label": "Floatation suggests swallowed air"}, {"id": "c", "label": "Open middle ear under water"}, {"id": "d", "label": "Air bubble supports respiration"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Battered baby syndrome, Caffey syndrome",
+   "tx": "**Battered baby syndrome**, also Caffey syndrome or non accidental injury of childhood, is repetitive physical injury inflicted by a parent or guardian, usually under three years of age. Its classical marks are an explanation that does not fit the injuries, unexplained delay in seeking care, and injuries of different ages progressing from minor to severe. The most characteristic lesion is a torn upper lip fraenulum from a blow or forced silencing; subdural haemorrhage appears in about forty percent of fatal cases.",
+   "say": "Mismatched story, delayed care and injuries of many ages define the battered baby, with a torn lip fraenulum most characteristic.",
+   "vis": {"kind": "table", "cols": ["Battered baby feature", "Finding", "Why it matters"], "rows": [["Story", "Does not fit the injuries", "Changes on repetition"], ["Timing", "Unexplained treatment delay", "Classic triad member"], ["Injury ages", "Many ages, escalating", "Repetition is constant"], ["Skeleton", "Metaphyseal chips, rib beads", "Specific on whole body X ray"]]}
+  },
+  {
+   "title": "Shaken baby, Munchausen by proxy and cot death",
+   "tx": "Three linked syndromes complete the module. **Shaken baby syndrome** grips the chest between adult hands and shakes, causing subdural haemorrhage and intraocular bleeding with grip bruises beside the axillae. **Munchausen syndrome by proxy**, usually the mother in over ninety percent, fabricates or induces illness for attention; symptoms regress when child and parent are separated. **Sudden infant death syndrome** is the unexplained death of a seemingly healthy infant, peaking at two to four months, after full investigation and autopsy.",
+   "say": "Shaking bleeds the brain and eyes, fabricated illness fades on separation, and cot death stays unexplained after everything.",
+   "vis": {"kind": "compare", "left": {"title": "Shaken and battered", "points": ["Grip bruises beside axillae", "Subdural and retinal bleeding", "Metaphyseal injuries specific", "Head injury kills most often"]}, "right": {"title": "Proxy and sudden death", "points": ["Mother fabricates illness", "Symptoms regress on separation", "SIDS peaks two to four months", "Diagnosis only after full autopsy"]}}
+  }
+ ],
+ "quiz": []
+}

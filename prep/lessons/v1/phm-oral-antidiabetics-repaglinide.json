@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-oral-antidiabetics",
+  "subject": "pharmacology",
+  "title": "Meglitinides, Pioglitazone and DPP 4 Inhibitors: Repaglinide, Sitagliptin, Vildagliptin",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Repaglinide** and nateglinide, the meglitinide (glinide) secretagogues, close the same beta cell KATP channel as sulfonylureas at a neighbouring binding site but with minutes scale kinetics: taken before each meal, peaking within the hour and gone by the next, they sculpt postprandial glucose with a skip a meal, skip a dose flexibility sulfonylureas cannot offer. Hypoglycaemia still occurs, weight gain persists, and gemfibrozil's CYP2C8 blockade multiplies repaglinide levels dangerously.",
+      "say": "Glinides are sulfonylureas on a meal timer: dose per plate, skip per fast.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Meglitinide profile",
+          "points": [
+            "Pre meal dosing, onset within 15 to 30 minutes",
+            "Postprandial glucose targeted",
+            "Skip dose when meal is skipped",
+            "Repaglinide CYP2C8: gemfibrozil contraindicated"
+          ]
+        },
+        "right": {
+          "title": "Sulfonylurea contrast",
+          "points": [
+            "Long action across meals and overnight",
+            "Fasting and interprandial hypoglycaemia risk",
+            "Once daily adherence simpler",
+            "Weight gain shared between families"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pioglitazone**, a PPAR gamma agonist, reprograms adipose tissue (more, smaller, insulin sensitive adipocytes), redistributes fat from viscera to subcutaneous stores, and improves peripheral insulin sensitivity over weeks without any hypoglycaemia alone. Its benefits include durable control and fatty liver improvement signals; its bills are weight gain (fluid plus fat), oedema and heart failure precipitation, distal fractures in women, and a bladder cancer signal that shaped labelling. Rosiglitazone's cardiovascular controversy retired its sibling from most markets.",
+      "say": "Pioglitazone retrains fat over weeks and bills in kilos, fluid and fractures; hearts that fail are excluded.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pioglitazone gains",
+          "points": [
+            "Insulin sensitisation via PPAR gamma in adipose",
+            "No hypoglycaemia as monotherapy",
+            "Durable control, low secondary failure",
+            "Triglycerides fall, HDL rises modestly"
+          ]
+        },
+        "right": {
+          "title": "Pioglitazone bills",
+          "points": [
+            "Weight gain and fluid retention, heart failure risk",
+            "Distal fractures in postmenopausal women",
+            "Bladder cancer signal in labelling",
+            "Weeks to months before full effect"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Dipeptidyl peptidase 4 normally beheads the incretin hormones GLP 1 and GIP within minutes; **sitagliptin** and vildagliptin inhibit DPP 4, doubling incretin half life so insulin rises and glucagon falls only when glucose is present, a glucose dependent politeness yielding effective, weight neutral, hypoglycaemia free therapy ideal for the elderly and renal impairment (dose adjusted except linagliptin's biliary route). Their modesty is their ceiling: HbA1c falls of 0.5 to 0.8 percent rarely rescue poor control alone.",
+      "say": "DPP 4 inhibitors let incretins live longer and behave politely: gentle, weight neutral and hypoglycaemia free.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diabetes-mellitus-management-and-therapies-fig1.webp",
+        "alt": "Antidiabetic medication target organs diagram showing gut incretin targets",
+        "caption": "Antidiabetic targets including the gut incretin axis that DPP 4 inhibitors prolong and GLP 1 agonists next lesson amplify."
+      }
+    },
+    {
+      "tx": "**Sitagliptin** once daily is the family reference, renally dosed in bands, with nasopharyngitis and headache as plain tolls and rare severe arthralgia and bullous pemphigoid in post marketing ledgers. **Vildagliptin** twice daily adds hepatic enzyme monitoring traditions. Saxagliptin carries a heart failure hospitalisation signal from its outcome trial that fences it from failure prone patients, a within class distinction examinations test precisely because the class otherwise looks interchangeable.",
+      "say": "Sitagliptin is the reference gliptin; saxagliptin alone carries the heart failure hospitalisation fence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sitagliptin and vildagliptin",
+          "points": [
+            "Sitagliptin once daily, renal dose bands",
+            "Vildagliptin twice daily, liver monitoring tradition",
+            "Nasopharyngitis, headache, rare arthralgia",
+            "Bullous pemphigoid reported across class rarely"
+          ]
+        },
+        "right": {
+          "title": "Class cautions",
+          "points": [
+            "Saxagliptin: heart failure hospitalisation signal",
+            "Pancreatitis signals debated across incretin therapies",
+            "Never combine with GLP 1 agonists (same axis, no gain)",
+            "Dose by eGFR except linagliptin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Incretin physiology** binds this lesson to the next: GLP 1 from intestinal L cells (glucose dependent insulin, glucagon suppression, slowed gastric emptying, satiety) and GIP from K cells are the hormones DPP 4 destroys and GLP 1 receptor agonists impersonate at pharmacological concentrations. Endogenous range doubling (gliptins) therefore cannot reproduce pharmacological range agonism (weight loss, gastric slowing), a quantitative distinction that predicts the entire efficacy gap between the two classes.",
+      "say": "Gliptins double a whisper, agonists shout pharmacologically; that volume gap is the efficacy gap.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "meal",
+            "label": "Meal stimulates intestinal L and K cells"
+          },
+          {
+            "id": "incretin",
+            "label": "GLP 1 and GIP released, DPP 4 degrades in minutes"
+          },
+          {
+            "id": "gliptin",
+            "label": "DPP 4 inhibition doubles incretin exposure"
+          },
+          {
+            "id": "agonist",
+            "label": "GLP 1 agonism exceeds physiology many fold (next lesson)"
+          }
+        ],
+        "edges": [
+          [
+            "meal",
+            "incretin"
+          ],
+          [
+            "incretin",
+            "gliptin"
+          ],
+          [
+            "gliptin",
+            "agonist"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Choosing a third line** after metformin and lifestyle is phenotype arithmetic from the metformin lesson, now with prices attached: pioglitazone where cost and insulin resistance dominate and heart failure and bone risk permit; a gliptin where hypoglycaemia must be impossible and modest falls suffice (elderly, erratic meals, renal bands); repaglinide where postprandial spikes and variable meals rule and adherence to per meal dosing is credible.",
+      "say": "Pioglitazone for resistance on a budget, gliptin for safety, glinide for meal shaped chaos; phenotype signs the choice.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Favour pioglitazone or gliptin",
+          "points": [
+            "Pioglitazone: severe resistance, fatty liver, low cost need",
+            "Gliptin: elderly, renal impairment, hypoglycaemia terror",
+            "Both hypoglycaemia free alone",
+            "Both slow or modest: set expectations"
+          ]
+        },
+        "right": {
+          "title": "Avoid or deprioritise",
+          "points": [
+            "Pioglitazone: heart failure, fracture risk, bladder history",
+            "Gliptin: where HbA1c gap exceeds 1 percent",
+            "Repaglinide: where per meal adherence is fiction",
+            "Any: where GLP 1 or SGLT2 indications already argue first"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Renal dosing** separates the careful prescriber throughout this lesson: metformin fenced by eGFR, sitagliptin and most gliptins banded downward as filtration falls (linagliptin the biliary exception needing no adjustment), repaglinide hepatically cleared but started low, and pioglitazone unadjusted yet fluid cautious. Diabetes and kidney disease travel together, so these bands are weekly practice, not examination garnish.",
+      "say": "Kidneys set half the doses in diabetes; linagliptin is the gliptin that ignores them.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "egfr",
+            "label": "eGFR measured before incretin or metformin decisions"
+          },
+          {
+            "id": "band",
+            "label": "Sitagliptin dose banded 100, 50 or 25 mg"
+          },
+          {
+            "id": "lina",
+            "label": "Linagliptin unchanged across renal bands"
+          },
+          {
+            "id": "review",
+            "label": "Recheck with illness and contrast events"
+          }
+        ],
+        "edges": [
+          [
+            "egfr",
+            "band"
+          ],
+          [
+            "egfr",
+            "lina"
+          ],
+          [
+            "band",
+            "review"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Elderly diabetes prescribing** gathers every caution in the module: hypoglycaemia avoidance crowns gliptins and condemns glibenclamide, renal bands shrink doses, pioglitazone's fluid and fracture bills argue against it where falls already threaten, and HbA1c targets themselves relax with frailty and limited life expectancy because the trials' benefits need years the patient may not be buying. Deprescribing reviews belong in the same appointment as intensification ones.",
+      "say": "In frailty, impossible hypoglycaemia beats perfect HbA1c; relax targets and prune secretagogues.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Frailty friendly",
+          "points": [
+            "DPP 4 inhibitors at renal adjusted doses",
+            "Metformin while eGFR and appetite allow",
+            "Relaxed HbA1c targets individualised",
+            "Hypoglycaemia education for family"
+          ]
+        },
+        "right": {
+          "title": "Frailty hazardous",
+          "points": [
+            "Glibenclamide and long secretagogue tails",
+            "Pioglitazone fluid and fracture burdens",
+            "Tight targets with polypharmacy",
+            "Unreviewed decade old regimens"
+          ]
+        }
+      }
+    }
+  ]
+}

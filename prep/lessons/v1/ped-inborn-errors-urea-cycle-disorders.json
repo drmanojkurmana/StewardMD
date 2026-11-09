@@ -1,0 +1,252 @@
+{
+ "key": "ped-inborn-errors-urea-cycle-disorders",
+ "v": 1,
+ "module": "ped-inborn-errors",
+ "subject": "paediatrics",
+ "title": "Urea Cycle Defects, Hyperammonaemia and Glycogen Storage Diseases",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Enzymatic defects in nitrogen waste detoxification provoke severe catastrophic neonatal neurotoxicity. The liver utilizes six sequential enzymes within **urea cycle disorders** to convert neurotoxic ammonia into excretable urea. When any enzyme in this cascade is deficient, unexcreted ammonia rapidly crosses the blood-brain barrier, swelling astrocytic end-feet through glutamine accumulation, resulting in cerebral oedema, brainstem herniation, and severe neurological damage.",
+   "say": "Urea cycle disorders prevent ammonia conversion into urea. Ammonia crosses into the brain, causing astrocyte swelling via glutamine accumulation, resulting in cerebral oedema and encephalopathy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/glycogen-storage-diseases-and-gluconeogenesis-fig1.webp",
+    "alt": "Biochemical pathways of hepatic glycogenolysis, gluconeogenesis, and nitrogen catabolism.",
+    "caption": "Hepatic metabolic pathways detailing glycogen breakdown and metabolic intermediate detoxification. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "X-linked inheritance distinguishes the most common enzymatic defect from other autosomal recessive urea cycle errors. Deficiency of **ornithine transcarbamylase deficiency** (OTC) accounts for over half of all urea cycle cases, transmitted as an X-linked recessive trait on chromosome Xp21. Affected hemizygous males present with catastrophic hyperammonaemia shortly after birth, while heterozygous females display variable symptoms ranging from protein aversion to episodic hyperammonaemic encephalopathy.",
+   "say": "Ornithine transcarbamylase deficiency is the only X-linked urea cycle disorder. Hemizygous males present with severe neonatal hyperammonaemia, while carrier females show protein aversion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Urea Cycle Enzyme Defect",
+     "Mode of Inheritance",
+     "Key Biochemical Hallmarks",
+     "Diagnostic Urine Marker"
+    ],
+    "rows": [
+     [
+      "Ornithine transcarbamylase (OTC)",
+      "X-linked recessive",
+      "Severe hyperammonaemia, low citrulline",
+      "Markedly elevated urinary orotic acid"
+     ],
+     [
+      "Carbamoyl phosphate synthetase (CPS1)",
+      "Autosomal recessive",
+      "Severe hyperammonaemia, low citrulline",
+      "Normal or low urinary orotic acid"
+     ],
+     [
+      "Argininosuccinate synthetase (ASS)",
+      "Autosomal recessive",
+      "Citrullinaemia type I, high ammonia",
+      "Massively elevated plasma citrulline"
+     ],
+     [
+      "Argininosuccinate lyase (ASL)",
+      "Autosomal recessive",
+      "Argininosuccinic aciduria, trichorrhexis nodosa",
+      "High plasma argininosuccinic acid"
+     ],
+     [
+      "Arginase 1 (ARG1)",
+      "Autosomal recessive",
+      "Progressive spastic diplegia, mild ammonia",
+      "Massively elevated plasma arginine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The biochemical hallmark of urea cycle blocks contrasts fundamentally with organic acid disorders. Neonates with urea cycle defects present with **neonatal hyperammonaemia respiratory alkalosis**, lacking substantial metabolic acidosis or ketonuria. Ammonia directly stimulates the brainstem respiratory center, driving hyperventilation and respiratory alkalosis; in contrast, organic acidurias present with severe high anion gap metabolic acidosis and profound ketonuria.",
+   "say": "Urea cycle disorders cause severe hyperammonaemia with central respiratory alkalosis and absent ketonuria. In contrast, organic acidurias feature high anion gap acidosis and ketonuria.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Urea Cycle Disorders (UCD)",
+     "points": [
+      "Marked hyperammonaemia (>200 to 1000+ umol/L)",
+      "Central respiratory alkalosis from hyperventilation",
+      "Absence of significant metabolic acidosis",
+      "Absence of urinary ketones"
+     ]
+    },
+    "right": {
+     "title": "Organic Acidurias (MMA, PA, IVA)",
+     "points": [
+      "Moderate hyperammonaemia (150 to 500 umol/L)",
+      "High anion gap metabolic acidosis",
+      "Severe ketonuria and hypoglycaemia",
+      "Massive urinary organic acid excretion"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Emergency management rapidly halts protein catabolism and eliminates circulating neurotoxins. Acute hyperammonaemic crises demand immediate **nitrogen scavenger therapy**, utilizing intravenous sodium benzoate and sodium phenylacetate to bind glycine and glutamine, creating hippurate and phenylacetylglutamine for alternative renal excretion. Dietary protein is stopped, ten percent dextrose with insulin is infused to suppress catabolism, and emergency hemodialysis is initiated when ammonia exceeds five hundred micromoles per litre.",
+   "say": "Treat hyperammonaemic crises with intravenous sodium benzoate and phenylacetate to scavenge nitrogen. Stop protein, infuse dextrose to stop catabolism, and start hemodialysis if ammonia exceeds 500.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Action",
+     "Pharmacological Agent",
+     "Biochemical Mechanism",
+     "Clinical Target"
+    ],
+    "rows": [
+     [
+      "Alternative pathway excretion",
+      "Intravenous sodium benzoate",
+      "Conjugates glycine to form hippurate",
+      "Bypasses urea cycle via kidneys"
+     ],
+     [
+      "Alternative pathway excretion",
+      "Intravenous sodium phenylacetate",
+      "Conjugates glutamine to phenylacetylglutamine",
+      "Excretes 2 nitrogen atoms per molecule"
+     ],
+     [
+      "Arrest protein catabolism",
+      "10% Dextrose plus IV insulin",
+      "Suppresses endogenous muscle proteolysis",
+      "Halts generation of new ammonia"
+     ],
+     [
+      "Extracorporeal clearance",
+      "Continuous venovenous hemodialysis",
+      "Rapid physical clearance of ammonia",
+      "Mandatory if ammonia >500 umol/L"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inherited enzyme blocks in glycogenolysis prevent hepatic glucose release during fasting. The prototypical condition **von Gierke disease type 1A** is caused by autosomal recessive deficiency of glucose-6-phosphatase on chromosome 17q21, which catalyzes the terminal step of both glycogenolysis and gluconeogenesis. Inability to dephosphorylate glucose-6-phosphate traps glucose within hepatocytes and renal tubular cells, producing massive organomegaly and severe fasting hypoglycaemia.",
+   "say": "Von Gierke disease results from glucose-6-phosphatase deficiency. Inability to release free glucose causes massive hepatomegaly, lactic acidosis, and profound fasting hypoglycaemia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/glycogen-storage-diseases-and-other-fig1.webp",
+    "alt": "Classification and metabolic defects of Glycogen Storage Diseases Types 1 through 5.",
+    "caption": "Glycogen storage disease enzymatic defects comparing von Gierke, Pompe, Cori, and McArdle diseases. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Clinical presentation features striking physical stigmata and a pathognomonic metabolic quartet. Infants with type 1A GSD present around three to four months with **doll-like facial features**, displaying rounded chubby cheeks, thin extremities, short stature, and massive protuberant abdominal distension from huge hepatomegaly without splenomegaly. Laboratory investigation reveals a metabolic quartet: severe fasting hypoglycaemia, profound lactic acidosis, hypertriglyceridaemia, and hyperuricaemia.",
+   "say": "Children with von Gierke disease display doll-like chubby cheeks, thin limbs, and massive hepatomegaly without splenomegaly. Laboratory tests reveal hypoglycaemia, lactic acidosis, high lipids, and high uric acid.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Metabolic Abnormality",
+     "Underlying Biochemical Mechanism",
+     "Clinical Complication",
+     "Diagnostic Hallmark"
+    ],
+    "rows": [
+     [
+      "Severe fasting hypoglycaemia",
+      "Glucose-6-phosphatase block",
+      "Lethargy, seizures after 2-4 hr fast",
+      "Blood glucose <40 mg/dL upon fasting"
+     ],
+     [
+      "Profound lactic acidosis",
+      "Glycolytic shunting of glucose-6-P",
+      "Metabolic tachypnoea, vomiting",
+      "Elevated plasma lactate (>5 mmol/L)"
+     ],
+     [
+      "Severe hypertriglyceridaemia",
+      "Excess acetyl-CoA drives lipogenesis",
+      "Eruptive xanthomas, acute pancreatitis",
+      "Milky, lipaemic serum appearance"
+     ],
+     [
+      "Severe hyperuricaemia",
+      "Degradation of ATP plus lactate block",
+      "Gouty arthritis and nephrolithiasis",
+      "Elevated serum uric acid (>8 mg/dL)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Continuous dietary starch delivery prevents dangerous nocturnal hypoglycaemic crashes. Maintenance management in von Gierke disease relies upon **uncooked cornstarch therapy**, administered every three to four hours during the day and overnight. Because uncooked cornstarch is a complex, slowly digested glucose polymer, it provides continuous steady enteral glucose release, preventing hypoglycaemia, suppressing counter-regulatory lactic acidosis, and halting progressive hepatic enlargement.",
+   "say": "Uncooked cornstarch provides slow, continuous glucose absorption, preventing fasting hypoglycaemia and suppressing lactic acidosis. Frequent daytime and nocturnal doses are essential.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dietary Principles in Type 1 GSD",
+     "points": [
+      "Uncooked cornstarch (1.6 to 2.5 g/kg every 4 hr)",
+      "Frequent high-complex-carbohydrate meals",
+      "Strict avoidance of galactose and fructose",
+      "Allopurinol for secondary hyperuricaemia"
+     ]
+    },
+    "right": {
+     "title": "Long-Term Hepatic & Renal Risks",
+     "points": [
+      "Hepatic adenomas developing in adolescence",
+      "Risk of malignant transformation to HCC",
+      "Proteinuria, glomerulosclerosis, renal failure",
+      "Annual liver ultrasound and AFP tracking"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Differentiating among glycogen storage phenotypes directs organ-specific therapeutic and prognostic management. Type II glycogenosis, known as **Pompe disease**, results from lysosomal acid alpha-glucosidase deficiency, featuring massive cardiomegaly, hypertrophic cardiomyopathy, and profound muscular hypotonia with normal blood glucose. Type III (Cori disease, debrancher deficiency) presents with hepatosplenomegaly and myopathy, whereas Type V (McArdle disease) causes muscle cramps and myoglobinuria without hepatic involvement.",
+   "say": "Pompe disease features massive cardiomegaly and severe hypotonia with normal glucose. Cori disease involves hepatosplenomegaly and muscle weakness, while McArdle disease causes exercise muscle cramps.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "GSD Type & Name",
+     "Deficient Enzyme",
+     "Primary Organs Involved",
+     "Distinctive Clinical Signature"
+    ],
+    "rows": [
+     [
+      "Type I (von Gierke)",
+      "Glucose-6-phosphatase",
+      "Liver and kidneys (Spleen normal)",
+      "Severe fasting hypoglycaemia, lactic acidosis"
+     ],
+     [
+      "Type II (Pompe)",
+      "Lysosomal acid alpha-glucosidase",
+      "Heart, skeletal muscle, liver",
+      "Massive cardiomegaly, floppy infant, normal glucose"
+     ],
+     [
+      "Type III (Cori/Forbes)",
+      "Debranching enzyme",
+      "Liver, skeletal and cardiac muscle",
+      "Hepatosplenomegaly, mild fasting hypoglycaemia"
+     ],
+     [
+      "Type IV (Andersen)",
+      "Branching enzyme",
+      "Liver and heart",
+      "Hepatosplenomegaly, cirrhosis, early death"
+     ],
+     [
+      "Type V (McArdle)",
+      "Muscle glycogen phosphorylase",
+      "Skeletal muscle exclusively",
+      "Exercise intolerance, cramps, myoglobinuria"
+     ]
+    ]
+   }
+  }
+ ]
+}

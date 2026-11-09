@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-asphyxia-bansdola",
+ "subject": "forensic-medicine",
+ "module": "fmt-asphyxia",
+ "title": "Bansdola, Garrotting, Smothering, Gagging and Choking",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Bansdola, strangulation by bamboo",
+   "tx": "**Bansdola** squeezes the neck between two strong bamboo sticks or similar staves, one across the front and one across the back, their ends tied with rope so the victim is compressed to death. Sometimes one stick crosses the front of the neck and the assailant stands with a foot on each end. A bruise crosses the centre of the neck over the windpipe matching the stick's width; two sticks add a matching mark behind.",
+   "say": "Two bamboos tied at the ends crush the neck in bansdola, stamping a stick wide bruise front and back.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Sticks placed front and back"}, {"id": "b", "label": "Ends tied or stood upon"}, {"id": "c", "label": "Neck squeezed between staves"}, {"id": "d", "label": "Width matched bruises remain"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Bansdola applied to the chest",
+   "tx": "The same device can crush the upper chest in **chest bansdola**, with sticks across the front and back of the upper thorax tied or weighted together. Respiration is interfered with mechanically while the compression lacerates muscle and fractures ribs. The picture then merges with traumatic asphyxia: a fixed chest that cannot expand, rib fractures and deep muscle tearing, rather than the neck marks of the classic neck application.",
+   "say": "Bansdola across the chest fixes the thorax, tears muscle and breaks ribs, killing as traumatic asphyxia does.",
+   "vis": {"kind": "compare", "left": {"title": "Neck bansdola", "points": ["Sticks across front and back", "Bruise width matches stick", "Windpipe compressed centrally", "Strangulation picture"]}, "right": {"title": "Chest bansdola", "points": ["Sticks across upper chest", "Chest expansion prevented", "Muscles lacerated, ribs broken", "Traumatic asphyxia picture"]}}
+  },
+  {
+   "title": "Garrotting from behind",
+   "tx": "**Garrotting** attacks from behind without warning: the throat is grasped, or a ligature is thrown over the neck and tightened instantly by twisting it with a lever such as a rod, stick or ruler inside the loop. One assailant can then tie off the ligature and kill a healthy adult male alone. It was historically used in lonely places to kill and rob travellers, and as judicial execution in Spain by an iron collar tightened with a screw.",
+   "say": "A lever twisted inside a thrown ligature lets one garrotter kill a strong man from behind within seconds.",
+   "vis": {"kind": "table", "cols": ["Garrotting element", "Detail", "Advantage to attacker"], "rows": [["Attack direction", "From behind, no warning", "Victim cannot defend"], ["Tightening", "Lever twisted in the loop", "Great force, one hand"], ["Victim", "Healthy adult overpowered", "Single assailant suffices"], ["Historical form", "Spanish iron collar and screw", "Judicial execution method"]]}
+  },
+  {
+   "title": "Smothering closes the external orifices",
+   "tx": "**Smothering** is asphyxia by closing the external respiratory orifices with a hand or other means, or by blocking the nose and mouth cavities with mud, paper or cloth. Homicidal smothering needs an incapacitated victim: drunk, drugged, weak, a child, elderly or stunned by a blow. The force required is so minor that trauma may be absent entirely. Suicidal smothering by one's own hand is impossible, though a plastic bag tied over the head can achieve it.",
+   "say": "A hand over nose and mouth smothers the helpless with almost no force and often no injury to find.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Nose and mouth sealed"}, {"id": "b", "label": "Air entry stops completely"}, {"id": "c", "label": "Victim too weak to resist"}, {"id": "d", "label": "Death with minimal trauma"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Accidental smothering and plastic bags",
+   "tx": "Most fatal smothering is accidental under **accidental smothering patterns**: epileptic or intoxicated persons burying the face in an impervious pillow, infants turning face down into soft bedding, and children locked inside disused refrigerators. Plastic bag deaths show faint or absent asphyxial signs with moisture collected inside the bag, and occur in glue sniffing and autoerotic practice as well as suicide. Overlaying accusations against parents need particular care and evidence.",
+   "say": "Pillows, bedding and plastic bags smother accidentally, and the quiet signs demand scene evidence before any blame.",
+   "vis": {"kind": "compare", "left": {"title": "Accidental settings", "points": ["Epileptic face down in pillow", "Infant in soft bedding", "Child locked in refrigerator", "Intoxicated person in bedclothes"]}, "right": {"title": "Plastic bag deaths", "points": ["Moisture inside the bag", "Asphyxial signs faint", "Glue sniffing association", "Autoerotic or suicidal context"]}}
+  },
+  {
+   "title": "Gagging blocks the mouth from inside",
+   "tx": "**Gagging** obstructs the airway by packing the mouth and pharynx itself, classically with cloth forced deep enough to block the larynx from above. It differs from smothering, which seals the orifices from outside, and from choking, where a foreign body lodges in the airway. A gag combined with a sealed mouth and nose is a recognised homicidal method in robbery, and the packed material recovered at autopsy is primary evidence that must be photographed in place.",
+   "say": "A gag packs the pharynx from inside, unlike the external seal of smothering, and it is photographed before removal.",
+   "vis": {"kind": "table", "cols": ["Method", "Site of block", "Agent"], "rows": [["Smothering", "External nose and mouth", "Hand, pillow, cloth"], ["Gagging", "Mouth and pharynx packed", "Cloth forced inward"], ["Choking", "Larynx or trachea lumen", "Food bolus, foreign body"], ["Burking", "Mouth, nose plus chest", "Kneeling on chest"]]}
+  },
+  {
+   "title": "Choking and the impacted food bolus",
+   "tx": "**Choking** kills when a foreign body impacts in the larynx or trachea; a body at the tracheal bifurcation can also trigger parasympathetic cardiac inhibition rather than pure asphyxia. Aspirated food particles embedded in thick mucus within bronchi and bronchioles prove antemortem inhalation, separating true choking from food that fell into the larynx from the oesophagus after death. Foreign body impaction in a bronchus may likewise cause reflex cardiac inhibition.",
+   "say": "Food deep in bronchioles inside mucus proves live inhalation, while a bolus at the bifurcation can stop the heart reflexly.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bolus impacts in the airway"}, {"id": "b", "label": "Airflow blocked or reflex fired"}, {"id": "c", "label": "Particles reach bronchioles in mucus"}, {"id": "d", "label": "Antemortem choking confirmed"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Burking, smothering plus chest compression",
+   "tx": "**Burking** combines homicidal smothering with traumatic asphyxia: the victim, plied with alcohol, is thrown down while one killer kneels or sits on the chest and closes nose and mouth with his hands and the other drags him by the feet. Burke and Hare killed sixteen persons in Edinburgh in 1827 and 1828 and sold the bodies for dissection. The method's lesson endures: combined chest fixation and smothering leaves few marks relative to its certainty of death.",
+   "say": "Burking kneels on the chest while sealing the face, a historical method whose quiet marks still teach caution.",
+   "vis": {"kind": "compare", "left": {"title": "Burking components", "points": ["Victim first intoxicated", "Weight kneeling on chest", "Hands seal nose and mouth", "Body dragged by the feet"]}, "right": {"title": "Why it matters now", "points": ["Two mechanisms combined", "External marks stay slight", "Scene history carries weight", "Named method in examinations"]}}
+  },
+  {
+   "title": "Suffocation in enclosed spaces",
+   "tx": "Under the umbrella of suffocation, air itself can fail: **environmental suffocation** occurs in airtight places or where ventilation is negligible, as when children lock themselves in disused refrigerators or large trunks. Oxygen falling toward five percent causes rapid unconsciousness and death within minutes, with sixteen percent or less already dangerous. These deaths show no neck or facial injury at all, and the diagnosis rests on the scene and exclusion of other causes.",
+   "say": "Sealed refrigerators and trunks suffocate by oxygen failure alone, leaving the body unmarked and the scene to speak.",
+   "vis": {"kind": "table", "cols": ["Oxygen level", "Effect", "Setting"], "rows": [["About 16 percent or less", "Dangerous to life", "Poorly ventilated space"], ["About 5 percent", "Rapid unconsciousness", "Airtight enclosure"], ["Normal air, orifices sealed", "Smothering death", "Hand or bedding"], ["Normal air, pharynx packed", "Gagging death", "Cloth forced inside"]]}
+  }
+ ],
+ "quiz": []
+}

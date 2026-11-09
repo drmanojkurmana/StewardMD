@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-virginity-pregnancy-criminal-abortion",
+ "subject": "forensic-medicine",
+ "module": "fmt-virginity-pregnancy",
+ "title": "Criminal Abortion, Abortion Stick, MTP Act and Legitimacy",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Criminal abortion defined by intent and law",
+   "tx": "**Criminal abortion** is the unlawful procuring of miscarriage outside the protection of the Medical Termination of Pregnancy Act. The same evacuation performed by a registered practitioner, in an approved place, on a statutory ground and with consent is lawful therapeutic termination. Everything turns on who performed it, where, why and with whose consent. A doctor acting in good faith under the Act is protected from the abortion sections that would otherwise apply.",
+   "say": "The identical procedure is therapy under the MTP Act and crime outside it, decided by person, place, ground and consent.",
+   "vis": {"kind": "table", "cols": ["Element", "Lawful MTP", "Criminal abortion"], "rows": [["Practitioner", "Registered and trained", "Unqualified or unapproved"], ["Place", "Government or recognised hospital", "Unrecognised premises"], ["Ground", "Statutory indication present", "On demand outside statute"], ["Consent", "Woman's own consent", "Absent, forced or irrelevant"]]}
+  },
+  {
+   "title": "The abortion stick, the classic instrument",
+   "tx": "The **abortion stick** is a thin wood or bamboo stick twelve to eighteen centimetres long, wrapped at one end with cotton or cloth soaked in marking nut or calotropis juice, jequirity, asafoetida, or pastes of arsenious oxide, arsenic sulphate, mercuric chloride or red lead. Professional abortionists introduce it into the vagina or uterus and retain it until contractions begin. Twig pieces of calotropis, nerium, cerbera or plumbago serve the same criminal purpose.",
+   "say": "A twelve to eighteen centimetre stick carrying irritant paste into the uterus is the abortionist's classic and deadly instrument.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Stick wrapped with irritant paste"}, {"id": "b", "label": "Introduced through the cervix"}, {"id": "c", "label": "Retained until contractions start"}, {"id": "d", "label": "Sepsis and perforation may follow"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Other criminal methods: tents, air and pastes",
+   "tx": "Criminal abortion also uses **cervical tents, air insufflation and abortifacient pastes**. Laminaria or slippery elm tents and compressed sponges swell with moisture, dilate the cervix and provoke expulsion. Air pumped into vagina and uterus can kill by air embolism. Injected pastes of soap, thymol, potassium iodide or mercury detach placenta and necrose the uterine wall with high failure and infection rates. Curettage under anaesthesia by unqualified hands completes the list.",
+   "say": "Swelling tents, pumped air and injected pastes all abort by destroying the uterine lining, with embolism and sepsis as killers.",
+   "vis": {"kind": "compare", "left": {"title": "Mechanical methods", "points": ["Abortion stick retained", "Laminaria tents swell and dilate", "Curettage by unqualified hands", "Foreign bodies in cervical canal"]}, "right": {"title": "Fluid and air methods", "points": ["Air insufflation, embolism risk", "Soap and chemical pastes injected", "Syringing the uterus", "Electric current across cervix"]}}
+  },
+  {
+   "title": "MTP Act grounds for lawful termination",
+   "tx": "The **Medical Termination of Pregnancy Act** permits termination on therapeutic grounds where continuance endangers life or seriously injures physical or mental health, eugenic grounds where the child risks serious physical or mental abnormality, humanitarian grounds for pregnancy caused by rape, social grounds for contraceptive failure, and environmental grounds where social or economic circumstances injure the mother's health. Rubella in the first three months is the classic eugenic example, with ten to twelve percent congenital defects.",
+   "say": "Life, health, fetal abnormality, rape and contraceptive failure are the statutory doors through which lawful termination passes.",
+   "vis": {"kind": "table", "cols": ["MTP ground", "Situation", "Example"], "rows": [["Therapeutic", "Life or health seriously endangered", "Severe cardiac disease"], ["Eugenic", "Child risks serious abnormality", "Rubella in first trimester"], ["Humanitarian", "Pregnancy caused by rape", "Statement alone suffices"], ["Social and environmental", "Contraceptive failure, poor circumstances", "Mental health injury"]]}
+  },
+  {
+   "title": "MTP rules: who, where and whose consent",
+   "tx": "Only a **registered medical practitioner with prescribed training** may terminate, in government or recognised hospitals; assisting in twenty five cases in a recognised hospital is one qualifying route. The woman's own consent is required, a guardian's written consent for a minor or mentally ill woman, and the husband's consent is never necessary. Termination on the husband's request against the woman's will is forbidden. A single doctor's opinion suffices in early pregnancy; two doctors are required at later gestations under the current limits.",
+   "say": "Trained registered hands, approved places and the woman's own consent are compulsory, and the husband's consent is never required.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Confirm statutory ground"}, {"id": "b", "label": "Take the woman's consent"}, {"id": "c", "label": "One or two opinions by gestation"}, {"id": "d", "label": "Terminate in approved hospital"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "MTP confidentiality and punishment outside the Act",
+   "tx": "**MTP confidentiality** is statutory: the admission register is a secret document kept five years, the patient's name enters no case sheet or theatre register, and a serial number replaces it on every other document, with consent and opinion forms sealed in a marked envelope. Termination by an unregistered person or in an unrecognised hospital draws rigorous imprisonment of two to seven years. Professional secrecy here is not courtesy but a legal duty enforceable against the hospital itself.",
+   "say": "Names stay out of every register in MTP care, secrecy is law for five years, and backstreet termination earns two to seven years.",
+   "vis": {"kind": "compare", "left": {"title": "Confidentiality duties", "points": ["Secret admission register, five years", "Serial number replaces name", "Forms sealed in marked envelope", "Monthly statement to health director"]}, "right": {"title": "Outside the Act", "points": ["Unregistered practitioner", "Unrecognised hospital", "Two to seven years imprisonment", "No good faith protection"]}}
+  },
+  {
+   "title": "Legitimacy and its presumption",
+   "tx": "**Legitimacy** is the legal state of a person born in lawful marriage. The law presumes a child born during the continuance of a valid marriage, or within the recognised period after its dissolution, to be the husband's child unless non access is proved. A posthumous child is born after the father's death from his conception, raising legitimacy, inheritance and compensation questions. Medical evidence on gestation length, viability and paternity testing informs, but never replaces, the legal presumption.",
+   "say": "Birth inside a valid marriage presumes legitimacy, and doctors supply gestation and paternity facts while courts hold the presumption.",
+   "vis": {"kind": "table", "cols": ["Question", "Medical contribution", "Legal rule"], "rows": [["Gestation length", "Viability and maturity signs", "Maximum periods debated"], ["Posthumous birth", "Conception timing evidence", "Inheritance may follow"], ["Paternity dispute", "Blood group and DNA testing", "Exclusion is strongest"], ["Artificial insemination child", "Donor facts if known", "Legitimacy by adoption or statute"]]}
+  },
+  {
+   "title": "Artificial insemination and its legal shadow",
+   "tx": "**Artificial insemination** deposits semen in the vagina, cervix or uterus; with the husband's semen it is homologous, with a donor's it is heterologous. Written consent of the woman and her husband, a witness at insemination, Rh compatibility and donor screening are required safeguards. India has no comprehensive statute in the older framework: a donor child was treated as illegitimate for inheritance unless adopted, and insemination for impotence could ground nullity, while insemination itself is neither adultery nor a divorce ground.",
+   "say": "Husband semen raises no paternity shadow, donor semen historically made the child illegitimate without adoption, and consent must be written.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Written consent of both spouses"}, {"id": "b", "label": "Donor screened, Rh matched"}, {"id": "c", "label": "Witness present at insemination"}, {"id": "d", "label": "Status settled by adoption or law"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Superfecundation and superfetation",
+   "tx": "**Superfecundation** is fertilisation of two ova discharged in the same cycle by two separate acts of coitus at short intervals, possibly by different men; certain proof needs twins of different blood groups or parentage. **Superfetation** is fertilisation of a second ovum in a woman already pregnant, possible while ovulation continues in the first trimester, giving twins of different developmental stages or two mature births one to three months apart. A flattened dead twin is a fetus papyraceus.",
+   "say": "Two ova in one cycle make superfecundation, a second conception during pregnancy makes superfetation, and blood groups can prove the first.",
+   "vis": {"kind": "compare", "left": {"title": "Superfecundation", "points": ["Two ova, same cycle", "Two acts at short interval", "Fathers may differ", "Proved by blood groups"]}, "right": {"title": "Superfetation", "points": ["Second ovum while pregnant", "First trimester ovulation", "Twins of different maturity", "Births months apart possible"]}}
+  }
+ ],
+ "quiz": []
+}

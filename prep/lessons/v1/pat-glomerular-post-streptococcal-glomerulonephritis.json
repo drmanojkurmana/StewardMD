@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-glomerular",
+  "subject": "pathology",
+  "title": "Post-Streptococcal GN, Subepithelial Humps, and IgA Nephropathy Mesangial Deposits",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Post-streptococcal glomerulonephritis follows nephritogenic streptococcal throat or skin infection by latent weeks, immune complexes swelling children with haematuria, oedema, hypertension, and low C3 recovering usually. That latent nephritis is **post-streptococcal glomerulonephritis (PSGN)**. Skin infection gives a longer latent period, often three to six weeks, compared with one to three weeks after pharyngitis.",
+      "say": "Cola urine, swollen face, high pressure two weeks after strep throat in a child means PSGN.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "PSGN pattern",
+          "Pearl"
+        ],
+        "rows": [
+          [
+            "Latency",
+            "Throat 1 to 3 weeks, skin longer",
+            "Separates from IgA synpharyngitic"
+          ],
+          [
+            "Complement",
+            "C3 low, C4 usually normal",
+            "Recovers by eight weeks expected"
+          ],
+          [
+            "Course in children",
+            "Recovery usual",
+            "Adults fare worse"
+          ],
+          [
+            "Biopsy need",
+            "Atypical features only",
+            "Crescents or persistent course biopsied"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Subepithelial humps, large immune deposits bulging beneath podocytes on electron microscopy with endocapillary neutrophils, sign postinfectious glomerulonephritis under glass. Those humps are the **subepithelial humps of postinfectious GN**. Immunofluorescence shows granular IgG and C3 in a starry sky pattern along capillary walls and mesangium.",
+      "say": "Humps on the epithelial side mean postinfectious deposits; neutrophils flooding capillaries agree.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Postinfectious GN",
+          "points": [
+            "Subepithelial humps",
+            "Low C3, strep evidence",
+            "Children recover usually"
+          ]
+        },
+        "right": {
+          "title": "Membranous nephropathy",
+          "points": [
+            "Subepithelial deposits with spikes",
+            "Complement usually normal",
+            "Nephrotic adults, PLA2R"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "IgA nephropathy deposits polymeric IgA in mesangium world wide, synpharyngitic haematuria arriving with sore throats within days, mesangial hypercellularity and Oxford scores staging progression. The mesangial disease is **IgA nephropathy (Berger disease)**. It is the commonest primary glomerulonephritis worldwide, especially in East Asian and European populations.",
+      "say": "Visible blood with the sore throat, not weeks after, is IgA nephropathy signing its timing.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/iga-nephropathy-fig1.webp",
+        "alt": "IgA nephropathy pathogenesis",
+        "caption": "IgA nephropathy pathogenesis from galactose deficient IgA to mesangial deposits."
+      }
+    },
+    {
+      "tx": "Galactose deficient IgA forms immune complexes with anti-glycan antibodies depositing mesangially and activating complement, a four hit model explaining familial and mucosal associations. That model is the **four-hit pathogenesis of IgA nephropathy**. The Oxford MEST-C score grades mesangial and endocapillary cellularity, sclerosis, tubular atrophy and crescents on biopsy.",
+      "say": "Defective IgA sugar, anti-sugar antibodies, complexes, mesangial injury: IgA nephropathy in four hits.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Galactose deficient IgA produced"
+          },
+          {
+            "id": "b",
+            "label": "Anti-glycan antibodies recognise it"
+          },
+          {
+            "id": "c",
+            "label": "Immune complexes deposit mesangially"
+          },
+          {
+            "id": "d",
+            "label": "Complement and mesangial injury progress"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "IgA vasculitis, Henoch-Schonlein, shares mesangial IgA with systemic small vessel disease of skin, gut, and joints, kidney histology indistinguishable from IgA nephropathy. That systemic sibling is **IgA vasculitis nephritis versus IgA nephropathy**. Palpable purpura over buttocks and legs with colicky abdominal pain is the classic extrarenal presentation in children.",
+      "say": "Palpable purpura plus mesangial IgA is IgA vasculitis; kidney alone keeps the nephropathy name.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/henoch-schonlein-purpura-fig1.webp",
+        "alt": "IgA vasculitis palpable purpura and mesangial IgA",
+        "caption": "IgA vasculitis with lower limb palpable purpura and glomerular mesangial IgA deposition, the systemic sibling of IgA nephropathy."
+      }
+    },
+    {
+      "tx": "Persistent low C3 beyond eight to twelve weeks after apparent PSGN rewrites differential toward C3 glomerulopathy or lupus, demanding biopsy rather than continued reassurance. That deadline is **persistent hypocomplementaemia after postinfectious GN**. In uncomplicated PSGN, C3 typically returns to normal by six to eight weeks from presentation.",
+      "say": "C3 still low at twelve weeks is not slow PSGN recovery; biopsy toward C3 disease or lupus.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Course point",
+          "Expected PSGN",
+          "Alarm instead"
+        ],
+        "rows": [
+          [
+            "Haematuria",
+            "Fades weeks to months",
+            "Persists with rising creatinine"
+          ],
+          [
+            "C3 complement",
+            "Normal by 8 weeks usually",
+            "Low beyond 12 weeks"
+          ],
+          [
+            "Proteinuria",
+            "Settles as inflammation clears",
+            "Nephrotic range emerges"
+          ],
+          [
+            "Blood pressure",
+            "Normalises with diuresis",
+            "Progressive kidney failure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Supportive care, salt restriction, diuretics, pressure control, and streptococcal eradication treat most childhood PSGN without immunosuppression unless crescents supervene. Restraint defines **supportive management of post-streptococcal GN**. Loop diuretics control the volume driven hypertension of acute nephritis far better than vasodilators alone.",
+      "say": "Most childhood PSGN needs diuretics, salt sense, and time, not steroids; crescents change that.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Supportive course",
+          "points": [
+            "Diuresis and pressure control",
+            "Antibiotic eradication course",
+            "Recovery surveillance urine and C3"
+          ]
+        },
+        "right": {
+          "title": "Escalate",
+          "points": [
+            "Rapidly progressive failure",
+            "Crescents on biopsy",
+            "Immunosuppression by pattern"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "IgA nephropathy therapy now layers optimised RAAS and SGLT2 support, targeted budesonide for intestinal immune modulation, and trials for high risk proteinuria despite support. That layering is **contemporary IgA nephropathy therapy**. Targeted release budesonide acts at ileal Peyer's patches, reducing production of the galactose deficient IgA itself.",
+      "say": "Support first, then gut targeted budesonide and trials select IgA patients still leaking protein.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Biopsy Oxford score and risk assessed"
+          },
+          {
+            "id": "b",
+            "label": "RAAS, pressure, SGLT2 optimised"
+          },
+          {
+            "id": "c",
+            "label": "Persistent proteinuria regraded"
+          },
+          {
+            "id": "d",
+            "label": "Targeted or trial therapy added"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

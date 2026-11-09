@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "id": "cm-health-programmes-national-health-mission",
+ "subject": "community-medicine",
+ "module": "cm-health-programmes",
+ "title": "National Health Mission: NRHM, NUHM, Flexible Financing and Governance",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "2005: the rural mission reset",
+   "tx": "The **National Rural Health Mission** (2005) attacked rural system's known failures with five architectural shifts: ASHA community workers, untied funds to facilities, Rogi Kalyan Samiti governance, district health planning, and public health management through flexible programme pools. It became the National Health Mission in 2013 when the urban sub-mission (NUHM) joined.",
+   "say": "Two thousand five reset rural care. Community workers, untied money, facility committees, district plans, flexible pools. Eight years later the urban mission folded it into one National Health Mission.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Shift", "Instrument"],
+    "rows": [
+     ["Community worker", "ASHA per 1000 population"],
+     ["Facility autonomy", "Untied funds, maintenance grants"],
+     ["Governance", "Rogi Kalyan Samiti committees"],
+     ["Planning", "District health action plans"]
+    ]
+   }
+  },
+  {
+   "title": "Flexible pools replaced rigid schemes",
+   "tx": "**Flexible financing** pools funds (reproductive and child health flexi-pool, mission flexi-pool, immunisation, disease programmes) that states allocate across activities within approved programme implementation plans (PIPs) negotiated yearly with the centre. The reform trusted districts with money against plans and outcomes rather than line-item permission from Delhi.",
+   "say": "Pools replaced line items. States plan yearly implementation plans and move money across activities inside approved pools. Trust against outcomes replaced permission for every rupee from the centre.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "District and state PIP drafted"},
+     {"id": "b", "label": "National appraisal and approval"},
+     {"id": "c", "label": "Flexible pools released"},
+     {"id": "d", "label": "Expenditure against outcomes audited"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "NUHM: the urban half arrives late",
+   "tx": "The **National Urban Health Mission** covers cities and towns (statutory towns above 50000, state capitals and district headquarters in phased design), building urban PHCs per about 50000 population, urban wellness centres, and outreach to slum and vulnerable populations listed by name. Urban primary care had historically been municipal patchwork; NUHM nationalised its floor.",
+   "say": "Cities arrived late to the mission. Urban PHCs per fifty thousand, slum lists by name, outreach to pavement and migrant populations. Municipal patchwork gained a national floor in 2013.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Urban element", "Design"],
+    "rows": [
+     ["Urban PHC", "About 1 per 50000 population"],
+     ["Urban HWC", "Comprehensive primary care in wards"],
+     ["Outreach", "Slum and vulnerable population sessions"],
+     ["Mahila Arogya Samiti", "Women's community groups in slums"]
+    ]
+   }
+  },
+  {
+   "title": "Communitisation as doctrine",
+   "tx": "**Communitisation** made community ownership a formal pillar: village health sanitation and nutrition committees with untied grants, ASHA selection by community, facility committees, and community monitoring pilots where report cards on services were read publicly. The doctrine holds that accountable systems are built by user voice with money attached, not inspection alone.",
+   "say": "Ownership became doctrine. Village committees with grants, community-chosen workers, public report cards on facilities. User voice with money attached, not inspection alone, builds accountability in this theory.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Voice mechanisms",
+     "points": ["VHSNC with untied grant", "Community monitoring report cards", "Public hearings historically piloted"]
+    },
+    "right": {
+     "title": "Money mechanisms",
+     "points": ["Facility untied funds", "RKS spending authority", "ASHA performance incentives"]
+    }
+   }
+  },
+  {
+   "title": "Mainstreaming AYUSH and the plus in systems",
+   "tx": "**AYUSH mainstreaming** co-located Ayurveda, Yoga, Unani, Siddha and Homoeopathy practitioners and facilities within public campuses to widen choice and fill vacancies, later institutionalised under the AYUSH ministry (2014) and wellness centre yoga and wellness activities. Stems use it to test whether candidates know NHM was a systems, not single-programme, reform.",
+   "say": "Traditional systems entered the campus. Co-located AYUSH widened choice and filled gaps, later gaining its own ministry and wellness roles. The mission reformed systems, not single diseases.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Reform strand", "Example"],
+    "rows": [
+     ["Human resources", "Contractual hiring, AYUSH co-location"],
+     ["Infrastructure", "IPHS upgrading drives"],
+     ["Drugs and logistics", "Free drug and diagnostic initiatives in states"],
+     ["Governance", "Societies replacing departmental rigidity"]
+    ]
+   }
+  },
+  {
+   "title": "Health societies: the parallel engine",
+   "tx": "**Registered health societies** at state and district level receive and spend mission funds outside treasury delays, employing contractual staff at market-flexible terms. The society model's speed created its own audit and job-security debates, and regularisation of contractual NHM staff remains a live state policy argument in examinations on health governance.",
+   "say": "Societies became the engine room. Registered bodies spend faster than treasuries and hire contractually, buying speed with job insecurity. Regularisation debates follow the model into every governance essay.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Centre releases to state society"},
+     {"id": "b", "label": "District society allocates by PIP"},
+     {"id": "c", "label": "Facilities and staff paid flexibly"},
+     {"id": "d", "label": "Utilisation certificates return upward"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Free drugs and diagnostics: the FIFTH promise",
+   "tx": "**Free essential services** initiatives under NHM committed states to free essential drugs in public facilities and free essential diagnostics (with free dialysis and other additions in many states), attacking out-of-pocket expenditure at its commonest source. Prescription audits and essential drug lists with pooled procurement decide whether the promise survives contact with budgets.",
+   "say": "Free medicines attack the commonest bill. Essential drug and diagnostic guarantees under the mission target out-of-pocket spending directly. Pooled procurement and prescription audits decide if promises survive budgets.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Promise", "Failure mode audited"],
+    "rows": [
+     ["Free essential drugs", "Stock-outs pushing outside purchase"],
+     ["Free diagnostics", "Machine downtime, reagent gaps"],
+     ["Free dialysis (many states)", "Session capacity versus demand"]
+    ]
+   }
+  },
+  {
+   "title": "What evaluations credited and criticised",
+   "tx": "**Evaluations credit** NHM with institutional delivery transformation, immunisation strengthening, infrastructure and workforce expansion, and infant mortality acceleration, while criticising specialist vacancies, urban lag, out-of-pocket persistence and quality gaps. Common review missions (joint centre-state teams) became its signature self-audit ritual, findings published state by state.",
+   "say": "Credit and criticism share the ledger. Deliveries, immunisation and workforce up; specialists, urban care and household spending lagging. Joint review missions publish the audit state by state.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Credited gains",
+     "points": ["Institutional delivery transformation", "Workforce and infrastructure growth", "Mortality decline acceleration"]
+    },
+    "right": {
+     "title": "Standing criticisms",
+     "points": ["Specialist vacancies persist", "Out-of-pocket spending stubborn", "Quality and urban care lag"]
+    }
+   }
+  },
+  {
+   "title": "NHM inside Ayushman Bharat's two arms",
+   "tx": "Since 2018 the mission **hosts Ayushman Bharat's** primary arm operationally: wellness centres are NHM facilities upgraded, their staff NHM cadres, while PM-JAY insurance runs through the National Health Authority with state health agencies. Examiners separate the arms cleanly: comprehensive primary care (supply, public) versus hospitalisation assurance (purchasing, empanelled public and private).",
+   "say": "The mission hosts one arm, an authority the other. Wellness centres upgrade mission facilities with mission staff; hospitalisation assurance purchases care through a separate authority. Supply versus purchasing is the clean distinction.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Arm", "Runs through", "Buys or builds"],
+    "rows": [
+     ["Wellness centres (AAM)", "NHM and states", "Builds public primary care"],
+     ["PM-JAY assurance", "National Health Authority", "Purchases hospitalisation care"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

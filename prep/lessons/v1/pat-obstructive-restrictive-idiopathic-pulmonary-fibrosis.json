@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-obstructive-restrictive",
+  "subject": "pathology",
+  "title": "Idiopathic Pulmonary Fibrosis, Usual Interstitial Pneumonia, Honeycomb Lung, ARDS, and Hyaline Membranes",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Idiopathic pulmonary fibrosis scars lungs of older adults progressively from subpleural bases upward, clubbing fingers and crackling like Velcro, with median survival once measured in a few years. Antifibrotics slowed its march: **idiopathic pulmonary fibrosis (IPF)**. Pirfenidone and nintedanib each slow the annual forced vital capacity decline by roughly half compared with placebo treatment.",
+      "say": "Older age, clubbing, Velcro crackles, basal fibrosis: idiopathic pulmonary fibrosis until multidisciplinary review clears it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ipf-fig1.webp",
+        "alt": "IPF HRCT and clinical signs",
+        "caption": "IPF high resolution CT with basal subpleural fibrosis and honeycombing."
+      }
+    },
+    {
+      "tx": "Usual interstitial pneumonia pattern mixes normal lung, fibroblastic foci, and honeycomb change side by side in patchy subpleural distribution, that temporal heterogeneity distinguishing UIP from uniform patterns. The patchwork pattern is **usual interstitial pneumonia (UIP pattern)**. Subpleural sparing argues against UIP and toward NSIP, a distinction that changes both prognosis and the treatment offered.",
+      "say": "Old scar beside active fibroblastic foci beside normal lung: UIP heterogeneity is its fingerprint.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "UIP pattern",
+          "points": [
+            "Subpleural basal predominance",
+            "Fibroblastic foci, honeycombing",
+            "Patchy, temporally heterogeneous"
+          ]
+        },
+        "right": {
+          "title": "NSIP pattern",
+          "points": [
+            "Uniform interstitial thickening",
+            "Ground glass prominent",
+            "Better steroid and prognosis profile"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Honeycomb lung ends fibrotic roads with clustered cystic spaces and thick walls where alveoli once breathed, visible on CT as stacked subpleural cysts marking irreversible destruction. The terminal cystic pattern is **honeycombing of end stage fibrosis**. Individual cysts usually measure only a few millimetres across, yet their stacked subpleural rows make them hard to miss.",
+      "say": "Honeycomb cysts are lung architecture's ashes; no therapy breathes life back into them.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pulmonary-fibrosis-fig1.webp",
+        "alt": "Idiopathic pulmonary fibrosis pathology",
+        "caption": "Pulmonary fibrosis pathology progressing toward honeycomb lung."
+      }
+    },
+    {
+      "tx": "Fibroblastic foci, domes of young myofibroblasts at scar edges, are UIP's active front where epithelial injury and aberrant repair keep laying collagen despite antifibrotic therapy. That advancing edge is the **fibroblastic focus of usual interstitial pneumonia**. More numerous fibroblastic foci on biopsy predict faster subsequent decline, giving them prognostic weight beyond their diagnostic role.",
+      "say": "Fibroblastic foci are fibrosis under construction; their abundance tracks how fast UIP advances.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pattern",
+          "Histology accent",
+          "Usual course"
+        ],
+        "rows": [
+          [
+            "UIP and IPF",
+            "Foci, honeycombing, heterogeneity",
+            "Progressive, antifibrotics slow"
+          ],
+          [
+            "NSIP",
+            "Uniform inflammation and fibrosis",
+            "More treatment responsive"
+          ],
+          [
+            "Organising pneumonia",
+            "Masson bodies in airspaces",
+            "Steroid responsive usually"
+          ],
+          [
+            "DIP and RB-ILD",
+            "Smoker macrophage filling",
+            "Cessation central"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute respiratory distress syndrome floods alveoli through diffuse alveolar damage after sepsis, aspiration, trauma, or pneumonia, stiffening lungs into refractory hypoxaemia graded by Berlin definition oxygen thresholds. The alveolar catastrophe is **acute respiratory distress syndrome (ARDS)**. Berlin grading splits severity by oxygen ratio: mild above 200, moderate from 100 to 200, and severe below 100.",
+      "say": "ARDS is alveolar flooding from diffuse damage; Berlin grades its hypoxaemia while lungs stiffen.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Sepsis, aspiration, trauma insult"
+          },
+          {
+            "id": "b",
+            "label": "Diffuse alveolar damage, capillary leak"
+          },
+          {
+            "id": "c",
+            "label": "Protein rich oedema floods alveoli"
+          },
+          {
+            "id": "d",
+            "label": "Refractory hypoxaemia, stiff lungs"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Hyaline membranes line denuded alveoli in exudative ARDS, fibrin rich protein plastered against walls before organising fibroblastic phases, identical to neonatal respiratory distress membranes of prematurity. The alveolar lining is the **hyaline membrane of diffuse alveolar damage**. Type 2 pneumocyte hyperplasia during organisation attempts epithelial repair, sometimes succeeding and sometimes laying down permanent intra-alveolar fibrosis.",
+      "say": "Hyaline membranes plaster alveoli in early ARDS, the same morphology as premature infants' distress.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Exudative phase (week 1)",
+          "points": [
+            "Hyaline membranes, oedema",
+            "Neutrophils, necrosis of type 1 cells",
+            "Worst oxygenation"
+          ]
+        },
+        "right": {
+          "title": "Organising phase (after week 1)",
+          "points": [
+            "Type 2 hyperplasia, fibroblasts",
+            "Membranes incorporate",
+            "Fibrosis or resolution decided"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Lung protective ventilation with low tidal volumes by predicted body weight, plateau pressure limits, prone positioning in severe disease, and conservative fluids saves ARDS lives without any drug. That ventilator discipline is **lung protective ventilation in ARDS**. Prone sessions lasting at least 16 hours daily delivered the clearest survival gain in trials of severe disease.",
+      "say": "Small breaths, limited pressures, prone when severe: ventilation strategy, not drugs, saves ARDS lives.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Setting",
+          "Protective target",
+          "Harm avoided"
+        ],
+        "rows": [
+          [
+            "Tidal volume",
+            "About 6 ml per kg predicted weight",
+            "Volutrauma"
+          ],
+          [
+            "Plateau pressure",
+            "Under 30 cm water",
+            "Barotrauma and overdistension"
+          ],
+          [
+            "Prone position",
+            "Severe hypoxaemia, long sessions",
+            "Ventilation perfusion mismatch"
+          ],
+          [
+            "Fluids",
+            "Conservative after resuscitation",
+            "Alveolar oedema burden"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Acute exacerbation of IPF accelerates breathlessness with new ground glass over honeycomb bases, mimicking infection and ARDS, carrying grave prognosis and demanding exclusion of reversible causes. That cliff edge is **acute exacerbation of idiopathic pulmonary fibrosis**. Survival after such an exacerbation often measures under six months, so early goals of care conversations carry real weight.",
+      "say": "Sudden decline over IPF fibrosis means exacerbation until infection, clot, and heart failure are excluded.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Known IPF, weeks of acceleration"
+          },
+          {
+            "id": "b",
+            "label": "Exclude infection, embolism, cardiac cause"
+          },
+          {
+            "id": "c",
+            "label": "New bilateral ground glass on CT"
+          },
+          {
+            "id": "d",
+            "label": "Supportive care, steroids debated, palliation"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,268 @@
+{
+  "v": 1,
+  "gen": "AI",
+  "module": "pat-coagulation-disorders",
+  "key": null,
+  "title": "Disseminated Intravascular Coagulation, D-Dimer, Vitamin K Deficiency, and Lupus Anticoagulant",
+  "steps": [
+    {
+      "tx": "Disseminated intravascular coagulation is an acquired, life-threatening clinicopathological syndrome characterized by uncontrolled, systemic activation of coagulation throughout the microvasculature. Extensive **disseminated intravascular microthrombosis** compromises organ perfusion, precipitating multiorgan dysfunction syndrome, particularly acute tubular necrosis in kidneys and diffuse cortical necrosis. Paradoxically, the massive, unchecked consumption of platelets, fibrinogen, prothrombin, and factors V and VIII outstrips hepatic and marrow synthesis, culminating in profound consumptive coagulopathy characterized by uncontrollable oozing from puncture wounds, petechiae, and visceral haemorrhage.",
+      "say": "Disseminated intravascular coagulation is an acquired emergency where systemic intravascular coagulation occurs simultaneously throughout the microcirculation. Microthrombi lodge in small vessels, causing ischaemic tissue necrosis and multiorgan failure. Simultaneously, explosive consumption of platelets and clotting factors depletes circulating reserves faster than the liver and bone marrow can replace them, resulting in paradoxically catastrophic systemic haemorrhage.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/dic-fig1.webp",
+        "alt": "Pathophysiological flowchart of disseminated intravascular coagulation showing systemic thrombin generation and consumptive bleeding",
+        "caption": "DIC mechanism with systemic thrombin generation, consumption, and fibrinolysis."
+      }
+    },
+    {
+      "tx": "A broad spectrum of severe underlying systemic illnesses can trigger disseminated intravascular coagulation via two main pathways: massive release of tissue factor or widespread endothelial damage. Severe **septic shock syndromes**, particularly Gram-negative bacteremia releasing lipopolysaccharide endotoxin, stimulate monocytes and endothelial cells to express abundant tissue factor via tumour necrosis factor and interleukin-1. Obstetric emergencies, including abruptio placentae and amniotic fluid embolism, infuse procoagulant trophoblastic tissue factor directly into maternal circulation, while acute promyelocytic leukaemia releases procoagulant granules.",
+      "say": "Disseminated intravascular coagulation is never a primary disease; it always arises secondary to severe underlying pathology. In septic shock, bacterial endotoxins trigger monocytes and endothelial cells to express vast amounts of tissue factor. In obstetric catastrophes like amniotic fluid embolism or abruptio placentae, thromboplastic fetal antigens flood maternal blood. In acute promyelocytic leukaemia, procoagulants released from abnormal promyelocyte granules drive rapid thrombin generation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tissue Factor Driven DIC",
+          "points": [
+            "Obstetric accidents (amniotic fluid embolism, abruption)",
+            "Malignancies (APL, mucin-secreting adenocarcinomas)",
+            "Massive neurotrauma and crush injuries",
+            "Explosive extrinsic pathway activation"
+          ]
+        },
+        "right": {
+          "title": "Endothelial Injury Driven DIC",
+          "points": [
+            "Gram-negative sepsis (endotoxin LPS release)",
+            "Severe meningococcemia (Waterhouse-Friderichsen)",
+            "Extensive thermal burns and hypothermia",
+            "Diffuse endothelial denudation and platelet activation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Laboratory evaluation in acute disseminated intravascular coagulation confirms rapid, simultaneous consumption of procoagulants alongside vigorous secondary fibrinolysis. Hallmark findings include severe progressive thrombocytopenia (platelet count typically under fifty thousand per microliter), profound hypofibrinogenemia under one hundred milligrams per deciliter, marked prolongation of both prothrombin time and activated partial thromboplastin time, and dramatically elevated fibrin degradation products. Examination of the peripheral blood smear reveals **microangiopathic red cell fragmentation**, demonstrating helmet cells and triangular schistocytes sliced across intravascular fibrin strands.",
+      "say": "Diagnosing acute DIC requires demonstrating consumptive coagulopathy paired with active fibrinolysis. Blood tests show plunging platelet counts, severe hypofibrinogenemia, and prolonged PT and APTT. Fibrin split products and D-dimers are dramatically elevated. On the peripheral smear, look for schistocytes, which are fragmented, helmet-shaped erythrocytes sliced by rigid intravascular fibrin strands as blood flows through partially occluded capillaries.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/dic-fig2.webp",
+        "alt": "Laboratory profiling chart in DIC showing thrombocytopenia, low fibrinogen, prolonged clotting times, and schistocytes",
+        "caption": "DIC laboratory pattern across platelets, fibrinogen, PT, and fibrin markers."
+      }
+    },
+    {
+      "tx": "The laboratory quantification of **plasma D-dimer levels** provides critical diagnostic discrimination in suspected disseminated intravascular coagulation. D-dimer is a specific neoantigen produced when plasmin cleaves insoluble, factor XIIIa-cross-linked fibrin polymer meshworks, releasing two covalently linked D domains. Because D-dimers are generated exclusively from cross-linked fibrin rather than soluble circulating fibrinogen, an elevated D-dimer conclusively proves that both thrombin generation and subsequent plasmin activation have occurred in vivo, cleanly separating secondary fibrinolysis from primary fibrinogenolysis.",
+      "say": "Measuring D-dimer is indispensable when evaluating suspected DIC. D-dimer represents a specific degradation fragment released when plasmin digests insoluble fibrin that has already been covalently cross-linked by factor thirteen-a. Unlike non-specific fibrinogen split products, finding high D-dimer levels proves that thrombin first created a fibrin clot and plasmin subsequently broke it down, establishing active in vivo thrombosis and fibrinolysis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "d1",
+            "label": "Soluble Fibrinogen"
+          },
+          {
+            "id": "d2",
+            "label": "Thrombin Cleavage"
+          },
+          {
+            "id": "d3",
+            "label": "XIIIa Cross-Linked Fibrin"
+          },
+          {
+            "id": "d4",
+            "label": "Plasmin Digestion"
+          },
+          {
+            "id": "d5",
+            "label": "D-Dimer Fragments Released"
+          }
+        ],
+        "edges": [
+          [
+            "d1",
+            "d2",
+            "Fibrinopeptides A & B Lost"
+          ],
+          [
+            "d2",
+            "d3",
+            "Covalent Isopeptide Bonds"
+          ],
+          [
+            "d3",
+            "d4",
+            "Secondary Fibrinolysis"
+          ],
+          [
+            "d4",
+            "d5",
+            "Specific Neoantigen in Plasma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Fat-soluble vitamin K is an essential dietary cofactor required for the post-translational modification of blood coagulation proteins. Hepatic **gamma-glutamyl carboxylase activity** utilizes reduced vitamin K hydroquinone to convert specific glutamic acid residues into gamma-carboxyglutamic acid within the amino-terminal Gla domains of factors II, VII, IX, X, protein C, and protein S. The paired negative charges of dicarboxylic Gla residues enable critical calcium-dependent binding to negatively charged phospholipid surfaces on activated platelets, without which coagulation factor assembly cannot proceed.",
+      "say": "Vitamin K is an indispensable cofactor for hepatic synthesis of functional clotting factors two, seven, nine, and ten, as well as regulatory proteins C and S. Inside hepatocytes, vitamin K-dependent carboxylase adds a carboxyl group to glutamic acid residues, creating gamma-carboxyglutamate. These modified residues bind calcium ions, anchoring the factors to negatively charged platelet phospholipid membranes. Without vitamin K, factors are synthesized but remain inactive.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Carboxylated Coagulation Factors",
+          "points": [
+            "Contain paired negative charges on Gla residues",
+            "Form calcium bridges to platelet phospholipids",
+            "Assemble into active tenase and prothrombinase",
+            "Synthesized in presence of reduced vitamin K"
+          ]
+        },
+        "right": {
+          "title": "PIVKA (Decarboxy-Factors)",
+          "points": [
+            "Protein induced by vitamin K absence or antagonism",
+            "Lacks dicarboxylic gamma-carboxyglutamate residues",
+            "Cannot bind calcium or platelet membranes",
+            "Functionally inactive, resulting in coagulopathy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Clinical deficiency of vitamin K arises in three classical scenarios: prolonged broad-spectrum antibiotic therapy eliminating gut microflora synthesis, severe fat malabsorption secondary to biliary tract obstruction or pancreatic insufficiency, and neonatal haemorrhagic disease. In **vitamin K deficiency states**, the prothrombin time prolongs first due to the rapid six-hour turnover of factor VII, followed by activated partial thromboplastin time prolongation as factors IX, X, and prothrombin decay. Parenteral administration of phytonadione (vitamin K1) rapidly reverses coagulopathy within twelve to twenty-four hours.",
+      "say": "Vitamin K deficiency commonly develops in malnourished hospitalized patients receiving broad-spectrum antibiotics that wipe out vitamin K-producing gut bacteria, or in biliary obstruction where lack of bile salts prevents fat-soluble vitamin absorption. Newborns are also vulnerable due to low liver stores and sterile intestines. Because factor seven has the shortest half-life of only six hours, prothrombin time prolongs first, followed later by the APTT.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Etiology",
+          "Underlying Pathophysiology",
+          "Diagnostic Laboratory Findings",
+          "Therapeutic Management"
+        ],
+        "rows": [
+          [
+            "Broad-Spectrum Antibiotics",
+            "Eradication of vitamin K2-producing gut bacteria",
+            "Prolonged PT/INR; normal platelets and fibrinogen",
+            "Oral or subcutaneous phytonadione (vitamin K1)"
+          ],
+          [
+            "Biliary Tract Obstruction",
+            "Absence of bile salts prevents fat absorption",
+            "Prolonged PT/INR with elevated conjugated bilirubin",
+            "Parenteral vitamin K1 administration"
+          ],
+          [
+            "Haemorrhagic Disease of Newborn",
+            "Sterile neonatal bowel and poor placental transfer",
+            "Severe bleeding from umbilical stump, long PT/APTT",
+            "Universal neonatal intramuscular vitamin K prophylaxis"
+          ],
+          [
+            "Warfarin Overdose",
+            "Inhibition of vitamin K epoxide reductase enzyme",
+            "Markedly supratherapeutic INR, variable bleeding",
+            "Hold drug, give oral vitamin K1 or four-factor PCC"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The lupus anticoagulant is an acquired autoantibody directed against phospholipid-protein complexes, primarily beta-2 glycoprotein I and prothrombin. In diagnostic in vitro coagulometers, the antibody binds test reagent phospholipids, creating a **paradoxical in vitro APTT prolongation** that fails to correct on 1:1 mixing studies. However, inside the human body, the lupus anticoagulant promotes platelet activation and endothelial perturbation, predisposing patients in vivo to severe arterial and venous thrombosis, including deep vein thrombosis, pulmonary embolism, stroke, and recurrent first-trimester pregnancy losses.",
+      "say": "The lupus anticoagulant presents a notorious clinical paradox: in the laboratory test tube, it binds reagent phospholipids, producing a prolonged APTT that fails to correct on mixing studies. Yet in the human body, it does not cause bleeding; instead, it is a potent prothrombotic antibody that causes arterial and venous clots. Patients present with recurrent deep vein thrombosis, pulmonary embolism, stroke, and recurrent pregnancy loss.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "In Vitro Laboratory Behavior",
+          "points": [
+            "Prolongs phospholipid-dependent clotting tests (APTT, dRVVT)",
+            "Fails to correct on 1:1 normal plasma mixing study",
+            "Shortens or corrects upon adding excess phospholipid",
+            "Creates artifactual appearance of bleeding tendency"
+          ]
+        },
+        "right": {
+          "title": "In Vivo Clinical Consequences",
+          "points": [
+            "Profoundly increased risk of venous thromboembolism",
+            "Arterial thrombosis causing strokes and ischemic limbs",
+            "Recurrent spontaneous early miscarriages and fetal death",
+            "Hallmark feature of antiphospholipid syndrome"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Establishing a definitive diagnosis of **antiphospholipid antibody syndrome** requires fulfilling the revised Sapporo criteria, combining at least one clinical criterion with at least one persistent laboratory criterion. Clinical criteria encompass confirmed vascular thrombosis (arterial, venous, or small vessel) or pregnancy morbidity, defined as three or more consecutive unexplained miscarriages before ten weeks gestation, fetal death past ten weeks, or severe preeclampsia. Laboratory criteria require detecting lupus anticoagulant, IgG/IgM anticardiolipin antibodies, or anti-beta-2-glycoprotein I antibodies on two occasions twelve weeks apart.",
+      "say": "Antiphospholipid syndrome is diagnosed by satisfying the Sapporo criteria, requiring at least one clinical event and one persistent laboratory finding. Clinical events include documented venous or arterial thrombosis, or pregnancy morbidity such as three consecutive early miscarriages or unexplained fetal death past ten weeks. Laboratory criteria mandate demonstrating lupus anticoagulant, anticardiolipin antibodies, or anti-beta-2-glycoprotein-one antibodies on two separate occasions at least twelve weeks apart.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Domain",
+          "Specific Sapporo Criteria",
+          "Required Threshold",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "Vascular Thrombosis",
+            "Arterial, venous, or small vessel thrombosis",
+            ">=1 confirmed objective episode",
+            "DVT, stroke, or peripheral arterial occlusion"
+          ],
+          [
+            "Pregnancy Morbidity",
+            "Recurrent early loss or late unexplained fetal death",
+            ">=3 losses <10 wks or >=1 loss >=10 wks",
+            "Placental infarction and spiral artery thrombosis"
+          ],
+          [
+            "Lupus Anticoagulant",
+            "Positive on dilute Russell viper venom time (dRVVT)",
+            "Persistent on two tests >=12 weeks apart",
+            "Highest correlation with clinical thrombosis"
+          ],
+          [
+            "Anticardiolipin Antibodies",
+            "IgG or IgM isotype by standardized ELISA",
+            "Medium to high titer (>40 GPL or MPL units)",
+            "Confirms autoimmune antiphospholipid profile"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "What laboratory test result distinguishes secondary fibrinolysis in DIC from primary fibrinogenolysis?",
+      "options": [
+        "Significantly elevated plasma D-dimer levels",
+        "Prolongation of the prothrombin time (PT)",
+        "Severe reduction in plasma fibrinogen concentration",
+        "Prolongation of the activated partial thromboplastin time (APTT)"
+      ],
+      "correct": 0,
+      "explain": "D-dimer is generated only when plasmin degrades cross-linked fibrin clots; in primary fibrinogenolysis, plasmin degrades uncrosslinked fibrinogen, producing fibrin split products without D-dimer."
+    },
+    {
+      "q": "What is the characteristic clinical and laboratory paradox seen with the lupus anticoagulant?",
+      "options": [
+        "Prolonged APTT in vitro but increased risk of arterial and venous thrombosis in vivo",
+        "Shortened PT in vitro but severe mucocutaneous bleeding in vivo",
+        "Isolated thrombocytopenia on automated counter that normalizes with heparin",
+        "Marked elevation of fibrinogen with complete absence of D-dimer"
+      ],
+      "correct": 0,
+      "explain": "Lupus anticoagulant antibodies bind test phospholipids to prolong in vitro clotting tests (APTT), but in vivo they promote platelet and endothelial activation, causing severe thrombosis."
+    },
+    {
+      "q": "Which clotting factor deficiency first causes prothrombin time prolongation in acute vitamin K deficiency?",
+      "options": [
+        "Factor VII due to its short 6-hour plasma half-life",
+        "Factor II / Prothrombin due to high molecular mass",
+        "Factor IX due to impaired splenic clearance",
+        "Factor X due to rapid transudation across capillaries"
+      ],
+      "correct": 0,
+      "explain": "Factor VII has the shortest half-life (~6 hours) among the vitamin K-dependent factors, making the PT the first test to prolong in acute vitamin K deficiency."
+    }
+  ]
+}

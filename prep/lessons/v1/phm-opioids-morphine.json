@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-opioids",
+  "subject": "pharmacology",
+  "title": "Opioid Agonists: Morphine, Codeine, Pethidine, Fentanyl and Tramadol",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Morphine**, the reference mu opioid receptor agonist, converts to morphine 6 glucuronide (more potent, renally cleared and accumulating in kidney failure) and morphine 3 glucuronide (neuroexcitatory) in the liver. Oral bioavailability near 30 percent sets the oral to intravenous dose ratio of about 3 to 1 that conversion tables enshrine. Histamine release (itching, flushing, hypotension) is a morphine accent fentanyl largely spares, a distinction examinations harvest regularly.",
+      "say": "Morphine is the yardstick: oral three to intravenous one, active metabolite hostage to the kidneys.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-pain-management-fig1.webp",
+        "alt": "Acute pain pathway targets diagram showing opioid action sites",
+        "caption": "Pain pathway targets with opioid receptors at spinal and supraspinal levels, morphine's twin theatres."
+      }
+    },
+    {
+      "tx": "**Codeine** is a prodrug whose analgesia depends on CYP2D6 conversion to morphine (about 10 percent), so poor metabolisers (roughly 7 to 10 percent of Europeans) get placebo with constipation, while ultra rapid metabolisers (gene duplications, up to a third in some North African populations) flood with morphine, the mechanism behind breastfeeding neonatal deaths that rewrote paediatric and obstetric labelling. Its antitussive and antidiarrhoeal cousins (low dose codeine preparations, diphenoxylate) exploit mu effects outside analgesia.",
+      "say": "Codeine is morphine by genetics: nothing for poor metabolisers, overdose for ultra rapid ones.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CYP2D6 poor metabolisers",
+          "points": [
+            "Little conversion to morphine",
+            "Analgesic failure despite adherence",
+            "Constipation without benefit",
+            "Choose a non codeine analgesic"
+          ]
+        },
+        "right": {
+          "title": "CYP2D6 ultra rapid metabolisers",
+          "points": [
+            "Excess morphine from ordinary doses",
+            "Sedation and respiratory depression",
+            "Breastfeeding neonatal opioid toxicity",
+            "Codeine contraindicated in children and breastfeeding"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pethidine** (meperidine) survives mainly as a cautionary tale: its metabolite norpethidine accumulates in renal failure and repeated dosing, lowers seizure threshold and provokes tremor and convulsions, while its serotonin reuptake inhibition makes it the opioid most dangerous with MAO inhibitors (fatal serotonin syndrome historically). Obstetric and shivering niches have safer owners (tramadol for post anaesthetic shivering ironically among them). Most formularies deleted it; examinations keep it for the metabolite and the interaction.",
+      "say": "Pethidine poisons by metabolite and kills with MAO inhibitors; know it to avoid it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "peth",
+            "label": "Pethidine repeated doses or renal impairment"
+          },
+          {
+            "id": "norp",
+            "label": "Norpethidine accumulates, half life 15 to 30 hours"
+          },
+          {
+            "id": "seize",
+            "label": "Tremor, myoclonus and seizures"
+          },
+          {
+            "id": "maoi",
+            "label": "With MAO inhibitors: potentially fatal serotonin syndrome"
+          }
+        ],
+        "edges": [
+          [
+            "peth",
+            "norp"
+          ],
+          [
+            "norp",
+            "seize"
+          ],
+          [
+            "peth",
+            "maoi"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Fentanyl** is morphine distilled: 80 to 100 times the potency, high lipid solubility for intravenous onset in minutes, transdermal patches and transmucosal systems, minimal histamine release and cardiovascular stability that made it anaesthesia's opioid. Its contexts are equally defined: patches only for opioid tolerant chronic pain (naive patients die from depot kinetics and heat accelerated absorption), rigidity of chest wall at rapid high intravenous doses, and illicit fentanyl driving overdose epidemics where naloxone doses multiply.",
+      "say": "Fentanyl is potency with kinetics to respect: patches for the tolerant only, and heat speeds them dangerously.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fentanyl virtues",
+          "points": [
+            "100 fold morphine potency, rapid CNS entry",
+            "Cardiovascular stability, minimal histamine",
+            "Anaesthesia, breakthrough and patch formulations",
+            "Short intravenous duration by redistribution"
+          ]
+        },
+        "right": {
+          "title": "Fentanyl hazards",
+          "points": [
+            "Patches lethal in opioid naive patients",
+            "Heat and fever accelerate patch absorption",
+            "Chest wall rigidity with rapid high doses",
+            "Illicit supply drives overdose mortality"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Tramadol** is two drugs in one racemate: weak mu agonism (mainly through its CYP2D6 metabolite O desmethyltramadol, importing codeine's genetic lottery) plus serotonin and noradrenaline reuptake inhibition, giving neuropathic leaning analgesia with seizure and serotonin syndrome ceilings. It interacts with SSRIs both pharmacodynamically (syndrome) and kinetically, lowers seizure threshold in overdose and predisposed patients, and its dependence scheduling tightened as real world misuse outgrew its gentle reputation.",
+      "say": "Tramadol is an opioid wearing an SNRI coat: seizures and serotonin syndrome are its ceilings.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tramadol mechanisms",
+          "points": [
+            "Mu agonism via CYP2D6 active metabolite",
+            "Serotonin and noradrenaline reuptake inhibition",
+            "Neuropathic pain contribution from monoamine arm",
+            "Genetic variability inherited from the metabolite"
+          ]
+        },
+        "right": {
+          "title": "Tramadol ceilings",
+          "points": [
+            "Seizures in overdose and predisposed patients",
+            "Serotonin syndrome with SSRI and MAOI partners",
+            "Hyponatraemia and hypoglycaemia signals",
+            "Dependence led to controlled scheduling"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **mu receptor's adverse signature** is class property and should be recited as one breath: respiratory depression (the lethal effect, CO2 responsiveness blunted), miosis, nausea via chemoreceptor trigger zone and vestibular sensitisation, constipation that never tolerises (peripherally mediated, prophylactic laxatives always), urinary retention, pruritus, euphoria and dysphoria, and with chronicity, tolerance, dependence and opioid induced hyperalgesia. Sedation precedes respiratory depression and is the ward's earliest alarm.",
+      "say": "Sedation warns before breathing fails; constipation never tolerises and always gets a laxative.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Central mu effects",
+          "points": [
+            "Respiratory depression, sedation heralds it",
+            "Miosis, nausea and vomiting",
+            "Euphoria, dysphoria and dependence",
+            "Tolerance to most effects with chronicity"
+          ]
+        },
+        "right": {
+          "title": "Peripheral mu effects",
+          "points": [
+            "Constipation without tolerance: co prescribe laxatives",
+            "Urinary retention and biliary spasm",
+            "Pruritus and histamine effects by agent",
+            "Methylnaltrexone class rescues gut selectively"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Equianalgesic conversion** is arithmetic with a safety discount: oral morphine 30 mg approximates oral oxycodone 20 mg, oral hydromorphone 6 to 7.5 mg, intravenous morphine 10 mg, with transdermal systems charted separately. Switching for toxicity or route (rotation) cuts the calculated new dose by 25 to 50 percent for incomplete cross tolerance, more in the elderly and renally impaired, then titrates to effect with breakthrough doses at a tenth to a sixth of the daily total.",
+      "say": "Convert by table, discount by a quarter to a half, and let breakthrough doses teach the titration.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "total",
+            "label": "Total current opioid as oral morphine equivalents"
+          },
+          {
+            "id": "table",
+            "label": "Convert by equianalgesic table to the new agent"
+          },
+          {
+            "id": "discount",
+            "label": "Reduce 25 to 50 percent for cross tolerance"
+          },
+          {
+            "id": "titr",
+            "label": "Titrate with breakthrough doses and review"
+          }
+        ],
+        "edges": [
+          [
+            "total",
+            "table"
+          ],
+          [
+            "table",
+            "discount"
+          ],
+          [
+            "discount",
+            "titr"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cancer pain's WHO ladder** still organises opioid initiation (non opioid, then weak, then strong opioid around the clock with breakthrough doses), modernised by early strong opioid use at low dose where prognosis argues, laxative and antiemetic co prescription, and review against function rather than pain scores alone. Morphine remains the strong opioid yardstick against which cost, familiarity and metabolite behaviour judge every rival in this and the next lesson.",
+      "say": "Around the clock, by the ladder, with laxatives attached; function, not scores, judges success.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Initiation bundle",
+          "points": [
+            "Regular oral morphine, immediate release titration first",
+            "Breakthrough doses a tenth to a sixth of daily total",
+            "Laxative always, antiemetic available",
+            "Review sedation, bowels and function daily"
+          ]
+        },
+        "right": {
+          "title": "Escalation signals",
+          "points": [
+            "Renal impairment: switch from morphine's metabolites",
+            "Neuropathic components: adjuvants added early",
+            "Delirium or myoclonus: rotate opioid",
+            "Specialist palliative input before exotic agents"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+ "v": 1,
+ "id": "cm-macronutrients-icmr-reference-man",
+ "subject": "community-medicine",
+ "module": "cm-macronutrients",
+ "title": "Energy Requirements: ICMR Reference Man and Balanced Diets",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The revised ICMR reference man standards",
+   "tx": "To establish baseline nutritional and energy standards, the Indian Council of Medical Research defines the **ICMR reference man**, updated to reflect contemporary Indian anthropometry. He is an Indian adult male aged nineteen to thirty-nine years, weighing sixty-five kilograms, standing one point seven seven metres tall (height 177 cm), with a normal body mass index of twenty point seven, free from disease, engaged in eight hours of occupational work.",
+   "say": "The ICMR reference man is between nineteen and thirty-nine years old, weighs sixty-five kilograms, stands one hundred and seventy-seven centimetres tall, and works an eight-hour shift daily.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Physical characteristic", "ICMR Reference Man standard", "ICMR Reference Woman standard"],
+    "rows": [
+     ["Age range", "19 to 39 years", "19 to 39 years"],
+     ["Reference body weight", "65.0 kilograms (updated from 60 kg)", "55.0 kilograms (updated from 50 kg)"],
+     ["Reference standing height", "1.77 metres (177 centimetres)", "1.62 metres (162 centimetres)"],
+     ["Body Mass Index (BMI)", "20.7 kg/m2 (normal healthy range)", "21.0 kg/m2 (normal healthy range)"],
+     ["Daily physical activity", "8 hours work + 8 hours sleep + leisure", "8 hours work + 8 hours sleep + leisure"]
+    ]
+   }
+  },
+  {
+   "title": "The ICMR reference woman standards",
+   "tx": "Complementing the male standard, the updated **ICMR reference woman** is defined as an Indian adult female between nineteen and thirty-nine years of age, weighing fifty-five kilograms, standing one point six two metres tall (height 162 cm), with a normal body mass index of twenty-one point zero. When calculating nutritional needs, pregnancy demands an extra three hundred and fifty kilocalories daily, while lactation requires an additional six hundred kilocalories.",
+   "say": "The ICMR reference woman weighs fifty-five kilograms and stands one hundred and sixty-two centimetres tall. Pregnancy requires an extra three hundred and fifty calories every day.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Physiological state", "Additional daily energy need", "Additional daily protein need"],
+    "rows": [
+     ["Non-pregnant reference woman", "Baseline by activity level", "46.0 grams total daily protein"],
+     ["Second trimester pregnancy", "+ 350 kilocalories daily", "+ 9.5 grams protein daily"],
+     ["Third trimester pregnancy", "+ 350 kilocalories daily", "+ 22.0 grams protein daily"],
+     ["Lactation (0 to 6 months)", "+ 600 kilocalories daily", "+ 17.0 grams protein daily"],
+     ["Lactation (7 to 12 months)", "+ 520 kilocalories daily", "+ 13.0 grams protein daily"]
+    ]
+   }
+  },
+  {
+   "title": "Physical activity levels: sedentary, moderate, heavy",
+   "tx": "Energy expenditure varies fundamentally with occupational exertion, categorized into three standardized tiers: sedentary, moderate and heavy work. A sedentary man requires approximately two thousand one hundred and ten kilocalories daily, moderate work (agriculturalists, domestic chores) requires two thousand seven hundred and ten kilocalories, while heavy manual labour (stone cutters, rickshaw pullers, blacksmiths) demands three thousand four hundred and seventy kilocalories to meet **occupational energy requirement**.",
+   "say": "Daily calorie needs depend on occupational exertion. A sedentary man requires about two thousand one hundred calories, moderate work needs two thousand seven hundred, and heavy manual labor needs three thousand five hundred.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Physical activity tier", "Adult male daily energy (kcal)", "Adult female daily energy (kcal)"],
+    "rows": [
+     ["Sedentary lifestyle (desk work)", "2,110 kcal / day", "1,660 kcal / day"],
+     ["Moderate activity (farming, light trade)", "2,710 kcal / day", "2,130 kcal / day"],
+     ["Heavy physical labour (construction)", "3,470 kcal / day", "2,720 kcal / day"]
+    ]
+   }
+  },
+  {
+   "title": "Components of total energy expenditure",
+   "tx": "Daily caloric expenditure comprises three distinct physiological components: basal metabolic rate, diet-induced thermogenesis, and the energy cost of physical activity. The **basal metabolic rate** accounts for sixty to seventy percent of total daily energy expenditure, representing the obligatory energy expended to maintain cellular respiration, autonomic cardiac contraction, renal filtration and ionic membrane gradients in a thermal neutral resting state.",
+   "say": "Basal metabolic rate accounts for nearly two-thirds of your daily calories, powering breathing, brain activity, heartbeat and body temperature even while you sleep.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Basal metabolic rate: 60-70% total energy"},
+     {"id": "b", "label": "Thermic effect of food (digestion): 10%"},
+     {"id": "c", "label": "Physical activity expenditure: 20-30%"},
+     {"id": "d", "label": "Total Daily Energy Expenditure (TDEE)"}
+    ],
+    "edges": [["a", "d"], ["b", "d"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "The concept of a balanced diet",
+   "tx": "A scientifically constructed **balanced diet framework** supplies all required macronutrients and micronutrients in proper quantities and exact proportions to sustain optimal physiological function, support physical growth, maintain cellular repair, and provide a small buffer reserve for brief periods of starvation or acute illness. No single foodstuff is nutritionally complete on its own, demanding diverse combinations across all five essential food groups.",
+   "say": "A balanced diet provides all nutrients in the right proportions to maintain health, repair tissues, and provide a safety reserve during illness, drawn across all food groups.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Essential food group", "Nutritional contribution", "Daily portion goal"],
+    "rows": [
+     ["Cereals, millets and grains", "Complex carbohydrates, B vitamins, energy", "250 to 300 grams daily"],
+     ["Pulses, legumes and beans", "Plant protein, iron, folate, soluble fibre", "75 to 100 grams daily"],
+     ["Milk and dairy products", "Calcium, riboflavin, high-quality protein", "300 to 400 millilitres daily"],
+     ["Vegetables and green leaves", "Carotenes, vitamin C, minerals, roughage", "350 to 400 grams daily"],
+     ["Fresh fruits", "Antioxidants, potassium, flavonoids", "100 to 150 grams daily"]
+    ]
+   }
+  },
+  {
+   "title": "The five food groups and plate model",
+   "tx": "To translate complex nutrient numbers into practical kitchen plates, the National Institute of Nutrition promotes the **My Plate for the Day** visual model. Recommending a total daily food mass of two kilograms (including water), the circular plate dictates that half the plate should consist of vegetables, green leafy vegetables and fresh fruits, one quarter should be cereals and millets, and the remaining quarter shared between pulses and dairy.",
+   "say": "The national plate model dictates that half your plate should be vegetables and fresh fruits, one quarter whole grains and millets, and one quarter protein-rich pulses and dairy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Traditional cereal-heavy plate",
+     "points": ["70 to 80% white polished rice or maida", "Minimal vegetables and low pulse intake", "Drives high glycaemic spikes and visceral fat"]
+    },
+    "right": {
+     "title": "My Plate for the Day model",
+     "points": ["50% vegetables, greens and fresh fruits", "25% whole grains, brown rice, millets", "25% lentils, pulses, curd or paneer"]
+    }
+   }
+  },
+  {
+   "title": "Protein requirement standards in grams per kilogram",
+   "tx": "The updated Indian nutritional guidelines establish an **adult protein requirement** of zero point eight three grams of good quality protein per kilogram body weight per day (rounded to approximately fifty-four grams for the reference man and forty-six grams for the reference woman). Meeting this target through plant-based diets demands selecting combinations that provide diverse amino acids, avoiding exclusive reliance on a single polished cereal.",
+   "say": "Healthy adults need zero point eight three grams of protein per kilogram body weight daily, totaling about fifty-four grams for men and forty-six grams for women.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Demographic category", "Protein standard (g/kg/day)", "Total daily protein goal (g/day)"],
+    "rows": [
+     ["Adult Reference Man (65 kg)", "0.83 g / kg body weight", "54.0 grams daily"],
+     ["Adult Reference Woman (55 kg)", "0.83 g / kg body weight", "46.0 grams daily"],
+     ["Third trimester pregnant woman", "Additional +22.0 g daily", "68.0 grams daily"],
+     ["Growing infants (6 to 12 months)", "1.12 g / kg body weight", "10.0 to 11.0 grams daily"]
+    ]
+   }
+  },
+  {
+   "title": "Dietary diversity score and micronutrient adequacy",
+   "tx": "At the household level, community health officers measure diet quality using the **dietary diversity score**, which tallies the number of distinct food groups consumed over the preceding twenty-four hours. Consuming items from at least five out of ten standardized food groups correlates robustly with micronutrient adequacy, protecting mothers and young children against hidden hunger, iron deficiency anaemia, and subclinical zinc deficits.",
+   "say": "The dietary diversity score counts how many food groups a family ate over the past day. Eating from five or more groups guarantees adequate vitamins and minerals.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "24-hour household dietary recall"},
+     {"id": "b", "label": "Classification into 10 standardized food groups"},
+     {"id": "c", "label": "Minimum Dietary Diversity score >= 5"},
+     {"id": "d", "label": "Guaranteed micronutrient sufficiency achieved"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Nutrition transition and the double burden of malnutrition",
+   "tx": "Developing economies in South Asia face the perilous **double burden of malnutrition**, characterized by the simultaneous coexistence of childhood undernutrition, stunting and wasting alongside adult overweight, central adiposity, type 2 diabetes and hypertension within the same communities or households. This nutrition transition stems from easy availability of cheap ultra-processed refined foods combined with declining occupational physical activity, demanding integrated policy responses.",
+   "say": "The double burden of malnutrition means families suffer from child stunting and adult diabetes at the same time. Cheap processed snacks replace nutritious foods, fueling the chronic disease crisis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Undernutrition burden",
+     "points": ["Child stunting, wasting and underweight", "Maternal iron deficiency anaemia", "Persistent rural and tribal pockets"]
+    },
+    "right": {
+     "title": "Overnutrition burden",
+     "points": ["Adult abdominal obesity and hypertension", "Type 2 diabetes striking young adults", "Driven by ultra-processed foods and sedentariness"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

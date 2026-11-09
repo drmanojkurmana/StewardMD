@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-exanthems-koplik-spots",
+ "subject": "community-medicine",
+ "module": "cm-exanthems",
+ "title": "Measles and Koplik Spots: Recognising the Prodrome",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "A paramyxovirus that empties lymphoid tissue",
+   "tx": "**Measles virus** is a highly contagious paramyxovirus spread by airborne droplets and aerosols, with secondary attack rates above ninety percent among susceptible household contacts. After respiratory entry it multiplies in lymphoid tissue, causing a viraemia that seeds skin and mucosa. Humans are the only reservoir, which is why eradication remains biologically plausible.",
+   "say": "Airborne, over ninety percent attack rates in susceptible households, lymphoid viraemia seeding skin. Humans alone carry it. Few infections spread this efficiently indoors.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Fact"],
+    "rows": [
+     ["Family", "Paramyxovirus"],
+     ["Spread", "Airborne droplets and aerosols"],
+     ["Household attack rate", "Above 90 percent if susceptible"],
+     ["Reservoir", "Humans only"]
+    ]
+   }
+  },
+  {
+   "title": "Koplik spots: the window before the rash",
+   "tx": "**Koplik spots** are tiny bluish white grains on a red base, like salt grains, scattered on the buccal mucosa opposite the lower molars during the prodrome, one to two days before the skin rash. They are pathognomonic: no other common febrile exanthem produces them, so a deliberate torch examination of the mouth buys diagnosis a day early.",
+   "say": "Salt grains on red buccal mucosa opposite lower molars, a day or two before rash. Nothing else makes them. Torch the mouth in every febrile coughing child.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/measles-fig1.webp",
+    "alt": "Clinical features of measles including Koplik spots and the morbilliform rash",
+    "caption": "Measles: Koplik spots in the prodrome followed by the confluent morbilliform rash. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "The three Cs of the prodrome",
+   "tx": "The **prodrome** announces measles with the three Cs: cough, coryza and conjunctivitis, riding on rising fever for two to four days before eruption. Photophobia and a brassy cough deepen suspicion in an unvaccinated child during an outbreak. Infectiousness begins in this phase, roughly four days before the rash, defeating rash based isolation if used alone.",
+   "say": "Cough, coryza, conjunctivitis on rising fever. Infectious four days before any rash appears. Waiting for spots on skin to isolate always arrives late.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Prodrome sign", "Detail"],
+    "rows": [
+     ["Cough", "Brassy, persistent"],
+     ["Coryza", "Profuse nasal discharge"],
+     ["Conjunctivitis", "Red eyes, photophobia"],
+     ["Infectious window", "4 days before to 4 after rash"]
+    ]
+   }
+  },
+  {
+   "title": "The rash: head to toe in order",
+   "tx": "The **morbilliform rash** erupts first behind the ears and at the hairline, then spreads downward over face, trunk and limbs across three days, becoming confluent on the face while fever peaks as it appears. It fades in the same order with fine desquamation and brownish staining, a sequence parents can recount precisely.",
+   "say": "Behind ears first, marching downward three days, fever peaking as it blooms. Fading follows the same order with staining. Ask the sequence; it discriminates.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Behind ears and hairline"},
+     {"id": "b", "label": "Face and trunk spread down"},
+     {"id": "c", "label": "Limbs involved by day three"},
+     {"id": "d", "label": "Fades in order with staining"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Immune amnesia: the hidden cost",
+   "tx": "**Immune amnesia** describes measles erasing previously acquired antibody memory, leaving children more vulnerable to other infections for months to years after apparent recovery. Much measles mortality is therefore indirect, arriving later as pneumonia or diarrhoea in a child whose immune library was partly wiped. Vaccination prevents both the rash and the amnesia.",
+   "say": "Measles deletes immune memory, inviting other infections for months afterwards. Later pneumonia deaths belong partly to measles. The vaccine protects the library, not just the skin.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Effect", "Consequence"],
+    "rows": [
+     ["Antibody memory erased", "Prior protection weakened"],
+     ["Lymphocyte depletion", "Secondary infections rise"],
+     ["Duration", "Months to years"],
+     ["Prevention", "Two dose vaccination"]
+    ]
+   }
+  },
+  {
+   "title": "Complications: ears, lungs, brain and late SSPE",
+   "tx": "**Complications** include otitis media as the commonest, pneumonia as the commonest killer, diarrhoea with dehydration, acute encephalitis in about one per thousand cases, and subacute sclerosing panencephalitis years later in a small fraction, especially after infection in infancy. Vitamin A deficiency sharply worsens eye damage and mortality in undernourished children.",
+   "say": "Ears commonly, lungs fatally, brain rarely now and very rarely years later as SSPE. Undernutrition and vitamin A deficiency turn measles lethal.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Complication", "Note"],
+    "rows": [
+     ["Otitis media", "Commonest complication"],
+     ["Pneumonia", "Commonest cause of death"],
+     ["Encephalitis", "About 1 per 1000 cases"],
+     ["SSPE", "Late, years after infancy infection"]
+    ]
+   }
+  },
+  {
+   "title": "Vitamin A: two doses that save sight and life",
+   "tx": "**Vitamin A therapy** with two age appropriate doses on consecutive days reduces measles mortality and corneal damage in deficient populations and is recommended for hospitalised and high risk children. Keratitis progressing to corneal ulceration and blindness was historically a leading cause of acquired childhood blindness where measles and malnutrition travelled together.",
+   "say": "Two vitamin A doses on consecutive days cut deaths and save corneas in deficient children. Measles plus malnutrition once blinded children at scale.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Child", "Vitamin A action"],
+    "rows": [
+     ["Hospitalised measles", "Two doses, consecutive days"],
+     ["Eye signs present", "Treat and refer urgently"],
+     ["Malnourished", "Treat, do not wait for eye signs"],
+     ["Community recovery", "Dietary diversification advice"]
+    ]
+   }
+  },
+  {
+   "title": "Outbreak response and catch up vaccination",
+   "tx": "**Outbreak response** isolates cases through four days after rash onset, excludes susceptible contacts from school where advised, and runs catch up measles rubella vaccination for the affected age band without waiting for records when documentation is absent. Supplementary campaigns target at least ninety five percent two dose coverage, the herd threshold measles demands.",
+   "say": "Isolate to four days past rash, catch up the affected age band, aim ninety five percent two doses. Measles punishes every coverage pocket left behind.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Case notified, line list opened"},
+     {"id": "b", "label": "Isolation and contact listing"},
+     {"id": "c", "label": "Catch up vaccination round"},
+     {"id": "d", "label": "Coverage survey of the pocket"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Modified and atypical measles",
+   "tx": "**Modified measles** is the milder illness in partially immune infants carrying maternal antibody or in recipients of immunoglobulin, with a longer incubation, faint rash and absent Koplik spots, yet still infectious. Atypical measles after old killed vaccine exposure is now historical. Mild does not mean irrelevant: modified cases seed outbreaks silently.",
+   "say": "Partial immunity softens measles: faint rash, no Koplik spots, longer incubation, still infectious. Mild cases move outbreaks quietly through schools.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic measles",
+     "points": ["Three Cs prodrome", "Koplik spots present", "Confluent downward rash", "High fever at eruption"]
+    },
+    "right": {
+     "title": "Modified measles",
+     "points": ["Partial immunity background", "Koplik spots absent", "Faint, brief rash", "Still infectious to others"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

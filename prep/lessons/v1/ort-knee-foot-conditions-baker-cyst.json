@@ -1,0 +1,316 @@
+{
+ "v": 1,
+ "id": "ort-knee-foot-conditions-baker-cyst",
+ "subject": "orthopaedics",
+ "module": "ort-knee-foot-conditions",
+ "title": "Baker Cyst",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Baker cyst** is a distended, fluid-filled synovial collection arising in the posteromedial popliteal fossa between the medial head of the gastrocnemius muscle and the semimembranosus tendon. The cyst communicates directly with the knee joint capsule through a transverse, slit-like opening that behaves as a one-way ball-valve mechanism. Synovial fluid is pumped from the joint cavity into the bursa during repetitive flexion and extension cycles, but cannot readily flow backward, resulting in progressive cystic distension.",
+   "say": "A Baker cyst, or popliteal cyst, arises in the posteromedial knee between the medial gastrocnemius and semimembranosus. A one-way slit-valve pumps synovial fluid from the joint cavity into the bursa, maintaining the cystic swelling.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adult Baker Cyst",
+     "points": [
+      "Secondary to intra-articular disease",
+      "Communicates with knee joint cavity",
+      "High association with meniscal tears",
+      "Recurs if underlying pathology untreated"
+     ]
+    },
+    "right": {
+     "title": "Childhood Popliteal Cyst",
+     "points": [
+      "Primary idiopathic presentation",
+      "Rarely communicates with joint space",
+      "No associated intra-articular pathology",
+      "Typically resolves spontaneously without surgery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Look behind the knee on this longitudinal ultrasound scan. A dark, fluid filled sac sits in the posteromedial popliteal fossa and narrows into a neck that reaches towards the joint between the gastrocnemius and semimembranosus tendons. That communicating channel identifies the swelling as a **Baker cyst** rather than a solid tumour or a simple haematoma in the calf.",
+   "say": "On this popliteal ultrasound a black fluid collection narrows into a neck joining the bursa behind the knee. That neck is the clue that the swelling is a Baker cyst, not a tumour or haematoma.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m175-ort-knee-foot-conditions-baker-cyst.webp",
+    "alt": "Longitudinal ultrasound of the popliteal fossa showing an anechoic fluid collection communicating through a neck with the gastrocnemio-semimembranosus bursa",
+    "caption": "Longitudinal ultrasound of the popliteal fossa showing an anechoic fluid collection communicating through a neck with the gastrocnemio-semimembranosus bursa. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Intra-articular pathology** is present in over ninety percent of adult patients with a Baker cyst, driving reactive synovial fluid hypersecretion. The most common underlying causes include degenerative tears of the medial meniscus posterior horn, knee osteoarthritis, and inflammatory arthropathies such as rheumatoid arthritis. Treating the cyst in isolation without addressing the internal joint derangement inevitably leads to prompt fluid re-accumulation. Accurate diagnosis of the associated intra-articular trigger dictates long-term management success.",
+   "say": "Over ninety percent of adult popliteal cysts are secondary to internal joint disease such as medial meniscal tears or osteoarthritis. Always investigate the joint interior, because excising the cyst without treating the meniscal tear guarantees recurrence.",
+   "vis": {
+    "kind": "table",
+    "title": "Associated Intra-Articular Triggers in Adult Baker Cyst",
+    "cols": [
+     "Primary Pathology",
+     "Prevalence in Patients",
+     "Mechanism of Cyst Genesis"
+    ],
+    "rows": [
+     [
+      "Medial meniscus tear",
+      "50% to 70% of adult cases",
+      "Mechanical irritation and synovial effusion"
+     ],
+     [
+      "Knee osteoarthritis",
+      "40% to 60% of older adults",
+      "Cartilage wear and recurrent synovitis"
+     ],
+     [
+      "Rheumatoid arthritis",
+      "10% to 15% of inflammatory cases",
+      "Massive proliferative synovial fluid production"
+     ],
+     [
+      "Anterior cruciate tear",
+      "10% to 20% in young athletes",
+      "Rotational instability and joint effusion"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Foucher sign** represents the characteristic physical examination finding used to confirm a popliteal cyst at the bedside. When the knee is placed in full active or passive extension, the taut overlying gastrocnemius and semimembranosus tendons compress the bursa, making the cyst firm, tense, and prominent. Conversely, flexing the knee to forty-five degrees relaxes the surrounding musculotendinous borders, causing the swelling to soften, diminish in volume, or completely disappear on gentle palpation.",
+   "say": "Foucher sign confirms a popliteal cyst: with the knee fully extended, the cyst becomes firm and prominent; when the knee is flexed to forty-five degrees, the relaxed tendons allow the swelling to soften and disappear.",
+   "vis": {
+    "kind": "flow",
+    "title": "Bedside Evaluation with Foucher Sign",
+    "nodes": [
+     {
+      "id": "f1",
+      "label": "Posteromedial Mass",
+      "sub": "Palpable swelling in medial popliteal space"
+     },
+     {
+      "id": "f2",
+      "label": "Full Knee Extension",
+      "sub": "Tension from gastrocnemius makes cyst firm"
+     },
+     {
+      "id": "f3",
+      "label": "45-Degree Knee Flexion",
+      "sub": "Muscular relaxation softens and shrinks mass"
+     },
+     {
+      "id": "f4",
+      "label": "Foucher Sign Positive",
+      "sub": "Confirms gastrocnemio-semimembranosus origin"
+     }
+    ],
+    "edges": [
+     [
+      "f1",
+      "f2",
+      "Extend leg"
+     ],
+     [
+      "f2",
+      "f3",
+      "Flex leg"
+     ],
+     [
+      "f3",
+      "f4",
+      "Diagnostic confirmation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pseudothrombophlebitis** occurs when a tense Baker cyst abruptly ruptures or dissects into the posterior calf fascial planes, allowing irritating synovial fluid to track downward through muscle compartments. Patients experience sudden, excruciating calf pain, erythematous swelling, and pitting oedema that closely mimics acute deep vein thrombosis. A distinctive physical sign is the crescent sign, characterized by dependent ecchymosis tracking over the medial or lateral malleolus below the ankle joint margin.",
+   "say": "A ruptured popliteal cyst causes pseudothrombophlebitis: synovial fluid dissects into the calf, creating sudden pain, swelling, and warmth that mimics deep vein thrombosis. Look for the crescent sign of bruising around the malleolus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pseudothrombophlebitis",
+     "points": [
+      "Sudden onset after exertion or squatting",
+      "Crescent ecchymosis around malleolus",
+      "Anechoic fluid dissecting calf fascia",
+      "Compressible patent popliteal vein"
+     ]
+    },
+    "right": {
+     "title": "Deep Vein Thrombosis",
+     "points": [
+      "Insidious aching calf tightness",
+      "No malleolar crescent ecchymosis",
+      "Non-compressible popliteal thrombus",
+      "Mandates immediate anticoagulation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Duplex ultrasonography** represents the mandatory initial diagnostic investigation for any patient presenting with a popliteal mass or suspected cyst rupture. Ultrasound reliably differentiates a cystic lesion from a popliteal artery aneurysm, popliteal vein thrombosis, and soft tissue tumours. It demonstrates an anechoic or hypoechoic fluid collection with a well-defined neck extending between the medial gastrocnemius head and semimembranosus tendon, while compression Doppler confirms patency and compressibility of the adjacent deep venous system.",
+   "say": "Duplex ultrasound is the first investigation to perform, differentiating a benign fluid cyst from a dangerous popliteal artery aneurysm or deep vein thrombosis. It identifies the fluid neck tracking between the semimembranosus and gastrocnemius tendons.",
+   "vis": {
+    "kind": "table",
+    "title": "Differential Diagnosis of Popliteal Fossa Swellings",
+    "cols": [
+     "Condition",
+     "Physical Features",
+     "Ultrasound Findings"
+    ],
+    "rows": [
+     [
+      "Baker cyst",
+      "Posteromedial, positive Foucher sign",
+      "Anechoic fluid with communicating neck"
+     ],
+     [
+      "Popliteal artery aneurysm",
+      "Midline, expansile pulsation, thrill",
+      "Arterial dilation with turbulent flow"
+     ],
+     [
+      "Deep vein thrombosis",
+      "Diffuse unilateral calf edema, tenderness",
+      "Non-compressible intraluminal clot"
+     ],
+     [
+      "Synovial sarcoma",
+      "Firm, fixed, progressive deep mass",
+      "Solid hypoechoic vascular tissue"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Magnetic resonance imaging** is the gold standard imaging modality for comprehensive evaluation of adult Baker cysts and accompanying intra-articular pathology. MRI confirms cyst morphology, defines multi-loculated internal septations, and identifies loose bodies or cartilage debris trapped within the cyst fluid. More importantly, MRI precisely delineates meniscal pathology, particularly posterior horn tears of the medial meniscus, as well as the extent of chondral loss, directing the arthroscopic surgical plan.",
+   "say": "Magnetic resonance imaging is the gold standard investigation in adults. Beyond mapping cyst extensions and loose bodies, it details underlying articular cartilage defects and medial meniscal tears that require arthroscopic repair.",
+   "vis": {
+    "kind": "flow",
+    "title": "Diagnostic and Therapeutic Algorithm for Popliteal Swellings",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "Popliteal Fossa Mass",
+      "sub": "History, examination, Foucher sign"
+     },
+     {
+      "id": "d2",
+      "label": "Duplex Ultrasound",
+      "sub": "Exclude DVT and popliteal aneurysm"
+     },
+     {
+      "id": "d3",
+      "label": "Knee MRI Examination",
+      "sub": "Identify meniscal tears and chondral wear"
+     },
+     {
+      "id": "d4",
+      "label": "Targeted Joint Therapy",
+      "sub": "Arthroscopic treatment of internal derangement"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2",
+      "First-line safety scan"
+     ],
+     [
+      "d2",
+      "d3",
+      "Confirm cyst origin"
+     ],
+     [
+      "d3",
+      "d4",
+      "Definitive surgical planning"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Aspiration** and intra-articular corticosteroid injection provides effective non-operative relief in symptomatic patients, particularly when large cysts restrict knee flexion. Under ultrasound guidance, fluid is evacuated from the cyst cavity to decompress the bursa, followed by injection of forty milligrams of triamcinolone acetonide into the knee joint rather than the cyst alone. Treating intra-articular synovitis dampens the effusion that pumps the cyst, delivering longer-lasting symptom relief alongside structured quadriceps physical therapy.",
+   "say": "Under ultrasound guidance, aspirate the popliteal cyst and inject corticosteroids directly into the knee joint cavity. Suppressing the primary joint inflammation halts synovial fluid production and prevents the valve from refilling the cyst.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Aspiration and Injection",
+     "points": [
+      "Immediate decompression of popliteal fullness",
+      "Intra-articular steroid stops effusion pump",
+      "Minimally invasive bedside procedure",
+      "High recurrence if meniscal tear unaddressed"
+     ]
+    },
+    "right": {
+     "title": "Arthroscopic Joint Management",
+     "points": [
+      "Corrects underlying medial meniscal tear",
+      "Debrides loose cartilage fragments",
+      "Unroofs internal slit valve from within joint",
+      "Lowest long-term recurrence rate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Arthroscopic debridement** of intra-articular pathology has supplanted open cyst excision as the definitive treatment for adult Baker cysts. During knee arthroscopy, the surgeon addresses the underlying driver, such as performing a partial medial meniscectomy for an unstable posterior horn tear. The one-way valve slit on the posteromedial capsule is identified, widened, and debrided from within the joint, allowing free bidirectional fluid flow and spontaneous cyst involution without formal open posterior excision.",
+   "say": "Modern surgical treatment avoids posterior open incisions. The surgeon enters the joint arthroscopically, trims the torn meniscus, and widens the communicating valve opening, allowing the cyst to decompress and involute naturally.",
+   "vis": {
+    "kind": "table",
+    "title": "Surgical Options for Refractory Baker Cyst",
+    "cols": [
+     "Approach",
+     "Operative Technique",
+     "Clinical Outcome"
+    ],
+    "rows": [
+     [
+      "Arthroscopic valve enlargement",
+      "Internal decompression of slit valve and meniscectomy",
+      "High success, low morbidity, fast recovery"
+     ],
+     [
+      "Open surgical excision",
+      "Posteromedial S-shaped incision with stalk ligation",
+      "Higher recurrence if joint derangement neglected"
+     ],
+     [
+      "Cyst wall marsupialization",
+      "Wide communication into posterior compartment",
+      "Prevents isolated fluid entrapment"
+     ],
+     [
+      "Arthroplasty with cyst debridement",
+      "Performed alongside total knee replacement",
+      "Permanent resolution of secondary cyst"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Baker cyst: anatomical location between tendons",
+   "b": "Posteromedial popliteal fossa between medial gastrocnemius head and semimembranosus."
+  },
+  {
+   "f": "Foucher sign: characteristic physical response",
+   "b": "Cyst becomes firm and tense on full knee extension and softens or shrinks at 45 degrees flexion."
+  },
+  {
+   "f": "Pseudothrombophlebitis: distinguishing clinical sign",
+   "b": "Dependent crescent ecchymosis over malleolus following acute popliteal cyst rupture."
+  }
+ ],
+ "keys": [
+  "Baker cyst is a gastrocnemio-semimembranosus distension maintained by a one-way communicating valve",
+  "Adult cysts are almost invariably secondary to internal joint disease such as medial meniscus tears",
+  "Cyst rupture mimics deep vein thrombosis, and definitive therapy addresses the intra-articular driver"
+ ]
+}

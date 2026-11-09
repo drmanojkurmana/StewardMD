@@ -1,0 +1,285 @@
+{
+  "v": 1,
+  "gen": "AI",
+  "module": "pat-hodgkin-lymphoma",
+  "key": null,
+  "title": "Lymphocyte-Depleted Hodgkin, NLPHL Popcorn Cells, Ann Arbor Staging, and B Symptoms",
+  "steps": [
+    {
+      "tx": "Representing under one percent of classical Hodgkin lymphoma diagnoses, **lymphocyte-depleted classical Hodgkin lymphoma** predominantly affects elderly individuals and immunocompromised patients, particularly those living with human immunodeficiency virus. Histological examination reveals a marked paucity of background reactive small lymphocytes accompanied by diffuse stromal fibrosis and an overwhelming abundance of pleomorphic, bizarre Reed-Sternberg variants. This subtype frequently presents with advanced abdominal lymphadenopathy, marrow infiltration, and systemic B symptoms, conferring the least favorable prognosis among classical subtypes.",
+      "say": "Lymphocyte-depleted classical Hodgkin lymphoma is the rarest subtype, accounting for less than one percent of cases. It predominantly strikes elderly or HIV-positive patients, presenting with deep retroperitoneal lymphadenopathy, bone marrow involvement, and severe constitutional symptoms. Under the microscope, reactive background lymphocytes are scarce, replaced by diffuse fibrosis and numerous pleomorphic Reed-Sternberg cells. It carries the poorest prognosis among all classical subtypes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lymphocyte-Depleted Classical",
+          "points": [
+            "Elderly and HIV-positive patients",
+            "Paucity of reactive lymphocytes",
+            "Abundant bizarre Reed-Sternberg cells",
+            "Over 90% positive for EBV-LMP1"
+          ]
+        },
+        "right": {
+          "title": "Lymphocyte-Rich Classical",
+          "points": [
+            "Younger to middle-aged adults",
+            "Abundant small mature lymphocytes",
+            "Scattered classic Reed-Sternberg cells",
+            "Favorable response to standard ABVD"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Accounting for five percent of Hodgkin cases, **nodular lymphocyte predominant Hodgkin lymphoma** represents a distinct clinicopathological entity biologically related to germinal centre B-cells rather than classical Hodgkin disease. It displays a strong male predominance, typically presenting as localized, non-tender cervical or axillary lymphadenopathy in patients aged thirty to fifty. Unlike classical Hodgkin lymphoma, it follows an indolent, relapsing clinical course with late recurrences, lacking constitutional B symptoms and rarely involving mediastinal or subdiaphragmatic nodes.",
+      "say": "Nodular lymphocyte predominant Hodgkin lymphoma is biologically distinct from classical Hodgkin lymphoma, behaving as an indolent germinal center B-cell neoplasm. It primarily affects males presenting with localized, painless cervical or axillary nodal enlargement. Constitutional B symptoms and mediastinal masses are typically absent. While it carries an excellent overall survival rate, it exhibits a characteristic pattern of late, indolent relapses.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hodgkin-lymphoma-fig1.webp",
+        "alt": "Histological appearance of nodular lymphocyte predominant Hodgkin lymphoma showing nodular expansion",
+        "caption": "Hodgkin lymphoma histology contrasting classical and lymphocyte predominant patterns."
+      }
+    },
+    {
+      "tx": "The pathognomonic neoplastic element in nodular lymphocyte predominant Hodgkin lymphoma is the **popcorn cell**, formally termed the lymphocytic and histiocytic (L&H) variant. These large neoplastic B-cells feature delicate, multilobed, folded nuclei resembling popped corn kernels, with small nucleoli and pale cytoplasm. In striking contrast to classical Reed-Sternberg cells, popcorn cells consistently express B-cell markers including CD20, CD79a, and leukocyte common antigen (CD45), while remaining strictly negative for CD15 and CD30.",
+      "say": "The diagnostic hallmark of nodular lymphocyte predominant Hodgkin lymphoma is the popcorn cell, also called the lymphocytic and histiocytic variant. These cells possess folded, polylobated nuclei that genuinely mimic popped corn kernels. Crucially, their immunophenotype reflects their true B-cell origin: popcorn cells express CD20, CD79a, and CD45, but are negative for CD15 and CD30, completely separating them from classical Reed-Sternberg cells.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Popcorn Cell (NLPHL)",
+          "Classic Reed-Sternberg Cell",
+          "Diagnostic Significance"
+        ],
+        "rows": [
+          [
+            "Nuclear Morphology",
+            "Multilobed, delicate, folded (popcorn-like)",
+            "Binucleate or bilobed owl-eye nuclei",
+            "Distinguishes cell variant on H&E"
+          ],
+          [
+            "B-Cell Markers",
+            "Positive for CD20, CD79a, and PAX5",
+            "CD20 usually negative or weak; PAX5 dim",
+            "Confirms true B-cell origin in NLPHL"
+          ],
+          [
+            "Leukocyte Antigen",
+            "Positive for CD45 (LCA)",
+            "Negative for CD45",
+            "Separates non-classical from classical"
+          ],
+          [
+            "Activation Markers",
+            "Negative for CD15 and CD30",
+            "Positive for CD15 and CD30",
+            "Key flow and staining diagnostic seam"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Anatomical extent in Hodgkin lymphoma is mapped using the **Ann Arbor staging system**, originally developed to guide radiation therapy fields and systemic chemotherapy selection. Clinical staging integrates physical examination, contrast-enhanced computed tomography, bone marrow assessment, and functional positron emission tomography. Staging determines whether patients present with limited early-stage disease (stages I and II) amenable to abbreviated chemotherapy combined with involved-site radiation, or advanced-stage disease (stages III and IV) requiring six full cycles of multiagent chemotherapy.",
+      "say": "The Ann Arbor staging system maps the anatomical distribution of lymphoma throughout the body. Staging evaluates the number of involved lymph node regions and determines their relationship to the diaphragm. Correct staging separates localized stage one and two disease, which can be managed with shortened chemotherapy regimens and involved-site radiotherapy, from advanced stage three and four presentations requiring full-course systemic chemotherapy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/leukaemia-all-aml-hodgkin-fig1.webp",
+        "alt": "Diagram illustrating lymph node stations and Ann Arbor stages in Hodgkin lymphoma",
+        "caption": "Reed-Sternberg cell morphology at the centre of Hodgkin lymphoma diagnosis and staging."
+      }
+    },
+    {
+      "tx": "The diaphragm acts as the primary anatomical boundary dividing the body into supradiaphragmatic and subdiaphragmatic compartments. Under the **Cotswolds modified Ann Arbor classification**, Stage I denotes involvement of a single lymph node region or localized lymphoid structure. Stage II designates two or more lymph node regions on the same side of the diaphragm. Stage III requires nodal involvement on both sides of the diaphragm, while Stage IV indicates diffuse, disseminated infiltration of one or more extralymphatic organs.",
+      "say": "The diaphragm is the critical anatomical dividing line in lymphoma staging. Stage one involves a single lymph node station. Stage two involves two or more node stations confined to one side of the diaphragm, typically cervical and mediastinal nodes. Stage three means nodal involvement on both sides of the diaphragm, involving nodes above and below. Stage four denotes disseminated spread to non-contiguous extralymphatic organs such as the bone marrow or liver.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "Single Region: Stage I"
+          },
+          {
+            "id": "n2",
+            "label": "Same Side: Stage II"
+          },
+          {
+            "id": "n3",
+            "label": "Both Sides: Stage III"
+          },
+          {
+            "id": "n4",
+            "label": "Visceral Spread: Stage IV"
+          }
+        ],
+        "edges": [
+          [
+            "n1",
+            "n2",
+            "More Nodes Confined"
+          ],
+          [
+            "n2",
+            "n3",
+            "Crosses Diaphragm"
+          ],
+          [
+            "n3",
+            "n4",
+            "Disseminated Infiltration"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Each Ann Arbor stage carries an essential letter suffix indicating the presence or absence of specific systemic manifestations termed **constitutional B symptoms**. The defining triad comprises unexplained recurrent fever with body temperatures exceeding thirty-eight degrees Celsius, drenching night sweats requiring bedding changes, and unintentional loss of more than ten percent of baseline body weight over the preceding six months. Presence of B symptoms reflects massive cytokine release by reactive stromal cells, signaling higher disease burden.",
+      "say": "Every Ann Arbor stage is assigned suffix A or suffix B based on the presence of constitutional B symptoms. The three strict criteria are unexplained fever above thirty-eight degrees Celsius, drenching night sweats, and unintentional weight loss exceeding ten percent of total body weight in six months. These symptoms are driven by tumor cytokine release and indicate adverse prognosis, placing patients into higher-risk treatment groups.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Suffix A (Asymptomatic)",
+          "points": [
+            "No systemic constitutional symptoms",
+            "Normal metabolic activity outside nodes",
+            "Lower inflammatory cytokine levels",
+            "Favorable baseline prognosis"
+          ]
+        },
+        "right": {
+          "title": "Suffix B (Symptomatic)",
+          "points": [
+            "Unexplained fever >38 degrees Celsius",
+            "Drenching nocturnal sweats",
+            "Unintentional weight loss >10% in 6 mo",
+            "Indicates high interleukin-6 and TNF-alpha"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The relationship between **Epstein-Barr virus infection** and classical Hodgkin lymphoma varies strikingly across histological subtypes and geographical regions. Viral genomes reside within clonal Reed-Sternberg cells, expressing latent membrane protein 1 (LMP1), an oncogenic viral protein that mimics active CD40 signalling to activate nuclear factor kappa B and inhibit apoptosis. While mixed cellularity Hodgkin displays viral positivity in seventy percent of cases and lymphocyte-depleted approaches ninety percent, nodular sclerosis shows viral integration in less than twenty percent.",
+      "say": "Epstein-Barr virus is causally linked to classical Hodgkin lymphoma, with viral DNA demonstrable directly inside Reed-Sternberg cells. The viral oncogene LMP1 mimics CD40 receptor stimulation, turning on the NF-kappa-B transcription factor and rescuing crippled B-cells from programmed death. EBV positivity is highest in mixed cellularity and lymphocyte-depleted subtypes, but occurs in under twenty percent of nodular sclerosis cases in developed countries.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Classical Subtype",
+          "EBV Association Rate",
+          "Primary Demographics",
+          "Typical Presentation"
+        ],
+        "rows": [
+          [
+            "Mixed Cellularity",
+            "65% to 75% positive",
+            "Biphasic: young children and older adults",
+            "Abdominal nodes, systemic B symptoms"
+          ],
+          [
+            "Lymphocyte-Depleted",
+            "80% to 90% positive",
+            "Elderly and HIV-infected cohorts",
+            "Retroperitoneal disease, cytopenias"
+          ],
+          [
+            "Nodular Sclerosis",
+            "10% to 25% positive",
+            "Adolescents and young adult females",
+            "Mediastinal mass, cervical adenopathy"
+          ],
+          [
+            "Lymphocyte-Rich",
+            "30% to 40% positive",
+            "Middle-aged adults, male predominance",
+            "Peripheral nodes, early-stage disease"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Whole-body **fluorodeoxyglucose positron emission tomography** combined with computed tomography represents the reference standard for baseline staging, interim response assessment, and post-treatment evaluation in Hodgkin lymphoma. The five-point Deauville criteria grade metabolic uptake within target lesions relative to background mediastinal blood pool and normal liver parenchyma. Deauville scores of 1 and 2 indicate complete metabolic response, score 3 represents minimal residual activity considered negative in standard protocols, while scores 4 and 5 indicate treatment refractory disease requiring escalated salvage regimens.",
+      "say": "Integrated FDG-PET and CT scanning is the standard modality to stage and monitor Hodgkin lymphoma. Because Reed-Sternberg cells and their reactive milieu have high glucose metabolism, PET differentiates viable tumor from inert post-treatment fibrous scar. Treatment response is graded on the five-point Deauville scale against liver and mediastinal blood pool uptake. Scores of one to three indicate metabolic remission, whereas scores of four and five mandate regimen escalation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "Baseline 18F-FDG PET-CT"
+          },
+          {
+            "id": "n2",
+            "label": "Two Cycles ABVD"
+          },
+          {
+            "id": "n3",
+            "label": "Interim PET (Deauville)"
+          },
+          {
+            "id": "n4",
+            "label": "Deauville 1-3: De-escalate"
+          },
+          {
+            "id": "n5",
+            "label": "Deauville 4-5: Escalated BEACOPP"
+          }
+        ],
+        "edges": [
+          [
+            "n1",
+            "n2",
+            "Induction"
+          ],
+          [
+            "n2",
+            "n3",
+            "Mid-treatment Assessment"
+          ],
+          [
+            "n3",
+            "n4",
+            "Uptake <= Liver"
+          ],
+          [
+            "n3",
+            "n5",
+            "Uptake > Liver (Refractory)"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "Which immunophenotypic profile is characteristic of popcorn cells in nodular lymphocyte predominant Hodgkin lymphoma?",
+      "options": [
+        "CD20 positive, CD45 positive, CD15 negative, CD30 negative",
+        "CD15 positive, CD30 positive, CD20 negative, CD45 negative",
+        "CD3 positive, CD5 positive, CD20 negative, TdT positive",
+        "CD10 positive, BCL2 positive, CD15 positive, CD30 positive"
+      ],
+      "correct": 0,
+      "explain": "Popcorn cells (L&H variants) retain their germinal centre B-cell program, expressing CD20 and CD45 while lacking the CD15 and CD30 expression seen in classical Reed-Sternberg cells."
+    },
+    {
+      "q": "Which criterion qualifies as a constitutional B symptom in the Ann Arbor staging system for lymphoma?",
+      "options": [
+        "Unexplained fever with body temperature exceeding 38 degrees Celsius",
+        "Pruritus after warm water bathing",
+        "Alcohol-induced lymph node pain",
+        "Mild non-drenching daytime perspiration"
+      ],
+      "correct": 0,
+      "explain": "The three defining Ann Arbor B symptoms are unexplained fever >38 C, drenching night sweats, and unintentional loss of >10% of body weight within 6 months."
+    },
+    {
+      "q": "Under the Ann Arbor staging system, involvement of lymph node regions on both sides of the diaphragm is classified as which stage?",
+      "options": [
+        "Stage III",
+        "Stage I",
+        "Stage II",
+        "Stage IV"
+      ],
+      "correct": 0,
+      "explain": "Stage III denotes involvement of lymph node regions or structures on both sides of the diaphragm (supradiaphragmatic and infradiaphragmatic)."
+    }
+  ]
+}

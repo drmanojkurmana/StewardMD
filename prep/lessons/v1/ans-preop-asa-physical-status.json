@@ -1,0 +1,242 @@
+{
+    "v": 1,
+    "id": "ans-preop-asa-physical-status",
+    "subject": "anaesthesia",
+    "module": "ans-preop",
+    "title": "Preoperative Evaluation: ASA Physical Status, Fasting Rules, and Airway Assessment",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "ASA Physical Status Classification",
+            "tx": "**ASA physical status classification** categorizes patients according to systemic physiological fitness prior to surgery. Class I represents a completely healthy patient, Class II indicates mild systemic disease without functional limitation, Class III denotes severe systemic illness limiting activity, Class IV signifies an incapacitating life-threatening disease, Class V is a moribund patient not expected to survive 24 hours without surgery, and Class VI is a declared brain-dead organ donor.",
+            "say": "ASA physical status classification categorizes patients according to systemic physiological fitness prior to surgery. Class I represents a completely healthy patient, Class II indicates mild systemic disease without functional limitation, Class III denotes severe systemic illness limiting activity, Class IV signifies an incapacitating life-threatening disease, Class V is a moribund patient not expected to survive 24 hours without surgery, and Class VI is a declared brain-dead organ donor.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "ASA Class",
+                    "Systemic Health Definition",
+                    "Representative Clinical Example",
+                    "Perioperative Mortality Risk"
+                ],
+                "rows": [
+                    [
+                        "Class I",
+                        "Healthy non-smoking patient",
+                        "Young adult with localized inguinal hernia",
+                        "Under 0.1 percent"
+                    ],
+                    [
+                        "Class II",
+                        "Mild disease without functional limitation",
+                        "Well-controlled hypertension or mild asthma",
+                        "Approximately 0.2 percent"
+                    ],
+                    [
+                        "Class III",
+                        "Severe disease limiting daily activity",
+                        "Stable angina or poorly controlled diabetes mellitus",
+                        "Approximately 1.8 percent"
+                    ],
+                    [
+                        "Class IV",
+                        "Incapacitating constant threat to life",
+                        "Unstable angina or severe end-stage renal disease",
+                        "Exceeds 7.8 percent"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Emergency Suffix and Mortality",
+            "tx": "**Emergency surgery ASA designation** appends the letter E to any numeric class whenever surgical delay substantially increases risk to life or limb, such as an emergent ruptured abdominal aortic aneurysm in a hypertensive patient classified as ASA IV-E. Emergency designation doubles the baseline perioperative mortality risk within each category due to inadequate physiological resuscitation and absence of pre-procedural optimization.",
+            "say": "Emergency surgery ASA designation appends the letter E to any numeric class whenever surgical delay substantially increases risk to life or limb, such as an emergent ruptured abdominal aortic aneurysm in a hypertensive patient classified as ASA IV-E. Emergency designation doubles the baseline perioperative mortality risk within each category due to inadequate physiological resuscitation and absence of pre-procedural optimization.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Elective Surgical Setting",
+                    "points": [
+                        "Comprehensive preoperative multi-organ optimization",
+                        "Strict compliance with fasting guidelines",
+                        "Baseline mortality risk matched to intrinsic medical fitness"
+                    ]
+                },
+                "right": {
+                    "title": "Emergency Surgical Setting (Suffix E)",
+                    "points": [
+                        "Uncorrected shock or metabolic derangements",
+                        "High risk of pulmonary aspiration from unemptied stomach",
+                        "Doubled perioperative cardiac and respiratory mortality"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Preoperative Fasting Guidelines",
+            "tx": "**Preoperative fasting two-four-six-eight rule** minimizes pulmonary aspiration of gastric contents without provoking dehydration or hypoglycemia. Patients may ingest clear water, fruit juices without pulp, and black coffee up to two hours prior to induction. Ingested human breast milk requires four hours, an infant formula or light non-fat meal requires six hours, while fatty, fried, or meat meals demand eight hours of fasting.",
+            "say": "Preoperative fasting two-four-six-eight rule minimizes pulmonary aspiration of gastric contents without provoking dehydration or hypoglycemia. Patients may ingest clear water, fruit juices without pulp, and black coffee up to two hours prior to induction. Ingested human breast milk requires four hours, an infant formula or light non-fat meal requires six hours, while fatty, fried, or meat meals demand eight hours of fasting.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Ingested Ingesta Type",
+                    "Minimum Fasting Interval",
+                    "Gastric Clearance Mechanism",
+                    "Key Clinical Exclusions"
+                ],
+                "rows": [
+                    [
+                        "Clear Carbohydrate Liquids",
+                        "2 hours minimum",
+                        "Rapid pyloric transit without solids",
+                        "Excludes milk, alcohol, and particulate juice"
+                    ],
+                    [
+                        "Infant Breast Milk",
+                        "4 hours minimum",
+                        "Intermediate fat curd gastric emulsion",
+                        "Applies specifically to maternal breast milk"
+                    ],
+                    [
+                        "Light Non-Fat Meal",
+                        "6 hours minimum",
+                        "Protein breakdown and liquid separation",
+                        "Toast and clear tea without butter"
+                    ],
+                    [
+                        "Fried or Fatty Foods",
+                        "8 hours minimum",
+                        "Cholecystokinin-mediated gastric delay",
+                        "Requires complete overnight fasting"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Mallampati Airway Classification",
+            "tx": "**Mallampati airway classification** correlates oropharyngeal visualization with glottic exposure difficulty, assessed with the patient sitting upright, head in neutral posture, mouth opened maximally, and tongue protruded without phonation. Class I reveals the soft palate, fauces, uvula, and pillars; Class II exposes the soft palate, fauces, and uvula; Class III visualizes the soft palate and base of uvula; Class IV visualizes the hard palate exclusively.",
+            "say": "Mallampati airway classification correlates oropharyngeal visualization with glottic exposure difficulty, assessed with the patient sitting upright, head in neutral posture, mouth opened maximally, and tongue protruded without phonation. Class I reveals the soft palate, fauces, uvula, and pillars; Class II exposes the soft palate, fauces, and uvula; Class III visualizes the soft palate and base of uvula; Class IV visualizes the hard palate exclusively.",
+            "vis": {
+                "kind": "image",
+                "src": "clinix/media/skills/skill-exam-ana-airway_mouth.webp",
+                "alt": "Mallampati airway examination showing oropharyngeal visualization of palate and uvula",
+                "caption": "Mallampati airway examination showing oropharyngeal visualization of palate and uvula"
+            }
+        },
+        {
+            "title": "Metabolic Equivalents Capacity",
+            "tx": "**Metabolic equivalents functional capacity** quantifies cardiorespiratory reserve: one MET equals 3.5 milliliters of oxygen consumption per kilogram per minute at complete rest. Functional capacity exceeding four METs, demonstrated by climbing two flights of stairs or walking briskly on level ground without dyspnoea, indicates adequate cardiorespiratory reserve associated with minimal perioperative myocardial infarction risk during non-cardiac surgery.",
+            "say": "Metabolic equivalents functional capacity quantifies cardiorespiratory reserve: one MET equals 3.5 milliliters of oxygen consumption per kilogram per minute at complete rest. Functional capacity exceeding four METs, demonstrated by climbing two flights of stairs or walking briskly on level ground without dyspnoea, indicates adequate cardiorespiratory reserve associated with minimal perioperative myocardial infarction risk during non-cardiac surgery.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Poor Functional Capacity (under 4 METs)",
+                    "points": [
+                        "Inability to climb one flight of stairs without stopping",
+                        "High incidence of perioperative myocardial ischaemia",
+                        "Mandates formal preoperative cardiac stress testing"
+                    ]
+                },
+                "right": {
+                    "title": "Good Functional Capacity (greater than 4 METs)",
+                    "points": [
+                        "Carrying heavy groceries or climbing two flights smoothly",
+                        "Low risk of major adverse cardiac events perioperatively",
+                        "Allows proceeding directly to elective intermediate surgery"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Thyromental Distance and Neck Mobility",
+            "tx": "**Thyromental distance measurement** reflects the mandibular space into which the tongue must be displaced during direct laryngoscopy. A distance measured from the thyroid notch to the lower border of the mandibular symphysis of under six centimeters (or under three fingerbreadths) reliably warns of anterior larynx and difficult direct visualization, especially when coupled with atlanto-occipital extension of under 35 degrees.",
+            "say": "Thyromental distance measurement reflects the mandibular space into which the tongue must be displaced during direct laryngoscopy. A distance measured from the thyroid notch to the lower border of the mandibular symphysis of under six centimeters (or under three fingerbreadths) reliably warns of anterior larynx and difficult direct visualization, especially when coupled with atlanto-occipital extension of under 35 degrees.",
+            "vis": {
+                "kind": "image",
+                "src": "clinix/media/skills/skill-exam-ana-airway_jaw_neck.webp",
+                "alt": "Measurement of thyromental distance and assessment of cervical spine mobility",
+                "caption": "Measurement of thyromental distance and assessment of cervical spine mobility"
+            }
+        },
+        {
+            "title": "Premedication with Glycopyrrolate",
+            "tx": "**Antisialagogue action of glycopyrrolate** stems from its completely synthetic quaternary ammonium structure. Unlike tertiary amines such as atropine and scopolamine, glycopyrrolate cannot traverse the lipophilic blood-brain barrier, totally preventing central anticholinergic delirium and post-anaesthetic sedation. It provides potent drying of copious oral secretions while inducing substantially less reflex tachyarrhythmia than atropine, making it ideal before awake fiberoptic intubation.",
+            "say": "Antisialagogue action of glycopyrrolate stems from its completely synthetic quaternary ammonium structure. Unlike tertiary amines such as atropine and scopolamine, glycopyrrolate cannot traverse the lipophilic blood-brain barrier, totally preventing central anticholinergic delirium and post-anaesthetic sedation. It provides potent drying of copious oral secretions while inducing substantially less reflex tachyarrhythmia than atropine, making it ideal before awake fiberoptic intubation.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Pharmacological Parameter",
+                    "Glycopyrrolate",
+                    "Atropine Sulphate",
+                    "Scopolamine Hydrobromide"
+                ],
+                "rows": [
+                    [
+                        "Chemical Structure",
+                        "Synthetic quaternary amine",
+                        "Tertiary belladonna alkaloid",
+                        "Tertiary belladonna alkaloid"
+                    ],
+                    [
+                        "Blood-Brain Barrier Passage",
+                        "Zero crossing into CNS",
+                        "Moderate central penetration",
+                        "Extensive rapid central entry"
+                    ],
+                    [
+                        "Antisialagogue Potency",
+                        "Twice as potent as atropine",
+                        "Moderate drying effect",
+                        "Three times more potent than atropine"
+                    ],
+                    [
+                        "Tachycardia Tendency",
+                        "Minimal heart rate surge",
+                        "Marked vagolytic tachycardia",
+                        "Mild transient bradycardia"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Premedication with Midazolam",
+            "tx": "**Premedication using midazolam** allays preoperative anxiety through selective positive allosteric modulation of gamma-aminobutyric acid type A (GABA-A) receptors. Oral midazolam (0.5 milligrams per kilogram in children) or intravenous midazolam (1 to 2 milligrams in adults) produces profound anterograde amnesia and muscle relaxation within minutes while preserving hemodynamic stability, sparing patients traumatic recall of separation and theatre transfer.",
+            "say": "Premedication using midazolam allays preoperative anxiety through selective positive allosteric modulation of gamma-aminobutyric acid type A (GABA-A) receptors. Oral midazolam (0.5 milligrams per kilogram in children) or intravenous midazolam (1 to 2 milligrams in adults) produces profound anterograde amnesia and muscle relaxation within minutes while preserving hemodynamic stability, sparing patients traumatic recall of separation and theatre transfer.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Administer parenteral midazolam"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Bind GABA-A receptor benzodiazepine site"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Accelerate neuronal chloride influx"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Induce anxiolysis and anterograde amnesia"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

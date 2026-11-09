@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-sedative-hypnotics",
+  "subject": "pharmacology",
+  "title": "Eszopiclone, Barbiturates and Non GABA Hypnotics: Ramelteon and Suvorexant",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Eszopiclone**, the active S enantiomer of zopiclone, binds GABA A receptors near the benzodiazepine site with a six hour half life suited to sleep maintenance as well as onset. A metallic bitter taste announces it to a third of users. Regulators cut its starting dose after next morning driving impairment studies, and it shares the Z drug warnings on complex sleep behaviours and dependence despite marketing distance from benzodiazepines.",
+      "say": "Eszopiclone is the maintenance Z drug with a metallic signature; start low for the morning after.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Eszopiclone profile",
+          "points": [
+            "S enantiomer of zopiclone, GABA A modulator",
+            "Half life about 6 hours: onset and maintenance",
+            "Metallic taste in about a third of users",
+            "Starting dose reduced for next day impairment"
+          ]
+        },
+        "right": {
+          "title": "Z drug class warnings",
+          "points": [
+            "Complex sleep behaviours: driving, cooking, eating",
+            "Dependence and rebound insomnia occur",
+            "Avoid alcohol and other sedatives concurrently",
+            "Elderly fall and fracture risk persists"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Barbiturates** prolong GABA A channel opening and, at high concentrations, open the channel without GABA and block excitatory AMPA transmission, abolishing the ceiling that protects benzodiazepine users. The result is a dose ladder from sedation through general anaesthesia to medullary respiratory and vasomotor collapse, with no antagonist. Phenobarbital's week long tail, enzyme induction empire and dependence retired the class from anxiety and insomnia to epilepsy, anaesthesia and assisted dying protocols in a few jurisdictions.",
+      "say": "Barbiturates remove the ceiling: anaesthesia at one end, apnoea at the other, and no antidote in between.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "low",
+            "label": "Low dose: sedation and anxiolysis"
+          },
+          {
+            "id": "mid",
+            "label": "Rising dose: hypnosis and anaesthesia"
+          },
+          {
+            "id": "high",
+            "label": "High dose: direct channel opening, AMPA blockade"
+          },
+          {
+            "id": "collapse",
+            "label": "Respiratory and vasomotor medullary depression"
+          }
+        ],
+        "edges": [
+          [
+            "low",
+            "mid"
+          ],
+          [
+            "mid",
+            "high"
+          ],
+          [
+            "high",
+            "collapse"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Phenobarbitone** (phenobarbital) survives where its flaws become features: a half life of days forgives missed doses in epilepsy (including neonatal seizures and resource limited settings where it remains first line by economics), and potent induction of hepatic enzymes and bilirubin conjugation treats specific metabolic niches. That induction slashes levels of warfarin, contraceptives, antiretrovirals and most co prescribed drugs, while its alkaline urine elimination is exploited in overdose by urinary alkalinisation.",
+      "say": "Phenobarbital endures for its long tail and enzyme induction; everything co prescribed must be re dosed around it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Where phenobarbital still works",
+          "points": [
+            "Epilepsy including neonatal seizures",
+            "Resource limited settings: cheap and forgiving",
+            "Sedation in specific intensive care protocols",
+            "Enzyme induction exploited in bilirubin disorders rarely"
+          ]
+        },
+        "right": {
+          "title": "Its liabilities",
+          "points": [
+            "Potent CYP and UGT enzyme induction",
+            "Cognitive dulling, dependence and overdose lethality",
+            "Osteomalacia and folate depletion chronically",
+            "Interactions across contraception, warfarin, antiretrovirals"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "At the **GABA A receptor** the whole sedative story assembles: GABA binds at alpha beta interfaces, benzodiazepines and Z drugs at the alpha gamma pocket raising opening frequency or selecting alpha 1, barbiturates at transmembrane sites prolonging openings, and general anaesthetics and ethanol at further pockets of their own. Competitive antagonists map the pockets back: flumazenil for benzodiazepines, bicuculline experimentally for GABA, and no clinical antagonist at all for barbiturates.",
+      "say": "One channel, many pockets; the pocket decides the ceiling, the selectivity and whether an antidote exists.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pocket pharmacology",
+          "points": [
+            "GABA site: alpha beta interface, bicuculline blocks",
+            "Benzodiazepine pocket: alpha gamma interface",
+            "Barbiturate sites: transmembrane, duration of opening",
+            "Anaesthetic and ethanol pockets overlap partially"
+          ]
+        },
+        "right": {
+          "title": "Clinical translations",
+          "points": [
+            "Frequency modulators keep a safety ceiling",
+            "Duration modulators lose it at high dose",
+            "Alpha 1 selection targets sleep over anxiety",
+            "Only the benzodiazepine pocket has a clinical antagonist"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Melatonin receptor agonist **ramelteon** works the circadian side of the street, stimulating MT1 and MT2 receptors in the suprachiasmatic nucleus to signal biological night and shorten sleep latency. It has no GABA activity, no dependence or abuse scheduling in the United States, no rebound insomnia and no respiratory depression, making it attractive in elderly and COPD patients, at the cost of modest efficacy confined to sleep onset and a fluvoxamine interaction through CYP1A2.",
+      "say": "Ramelteon tells the clock it is night instead of sedating the brain; gentle, safe and onset only.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ram",
+            "label": "Ramelteon taken before bed"
+          },
+          {
+            "id": "mt",
+            "label": "MT1 and MT2 agonism in suprachiasmatic nucleus"
+          },
+          {
+            "id": "night",
+            "label": "Circadian night signal strengthened"
+          },
+          {
+            "id": "onset",
+            "label": "Sleep latency shortens without GABA sedation"
+          }
+        ],
+        "edges": [
+          [
+            "ram",
+            "mt"
+          ],
+          [
+            "mt",
+            "night"
+          ],
+          [
+            "night",
+            "onset"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Wakefulness has its own transmitter, orexin (hypocretin), whose absence causes narcolepsy and whose blockade induces sleep: dual orexin receptor antagonist **suvorexant** turns wake drive down rather than inhibition up. Sleep onset and maintenance both improve, next morning somnolence and driving warnings follow longer half lives, and narcolepsy is an absolute contraindication for obvious mechanistic reasons. CYP3A4 inhibitors multiply its levels, and abnormal dreams and sleep paralysis colour its adverse list.",
+      "say": "Suvorexant switches wakefulness off at the orexin switch; never in narcolepsy, and mind the morning after.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Orexin antagonism",
+          "points": [
+            "Blocks OX1R and OX2R wake signalling",
+            "Onset and maintenance insomnia both improved",
+            "No GABA mediated respiratory depression signal",
+            "Narcolepsy absolutely contraindicated"
+          ]
+        },
+        "right": {
+          "title": "Costs and cautions",
+          "points": [
+            "Next day somnolence and driving impairment",
+            "Abnormal dreams, sleep paralysis, cataplexy like events rare",
+            "Strong CYP3A4 inhibitors contraindicated",
+            "Dependence potential keeps it controlled"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Barbiturate overdose** management is supportive physiology because no flumazenil equivalent exists: airway and ventilation, vasopressors for the medullary vasomotor failure, activated charcoal early, urinary alkalinisation and multiple dose charcoal for phenobarbital, and haemodialysis in severe long acting poisoning. The contrast with benzodiazepine overdose, often survivable with observation alone in isolation, is the examination's favourite quantification of therapeutic index differences between the two eras.",
+      "say": "Barbiturate poisoning is an intensive care disease; benzodiazepine poisoning alone usually is not. That gap is the lesson.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "od",
+            "label": "Barbiturate overdose: coma, apnoea, hypotension"
+          },
+          {
+            "id": "abc",
+            "label": "Airway, ventilation and vasopressor support"
+          },
+          {
+            "id": "elim",
+            "label": "Urinary alkalinisation and repeat charcoal (phenobarbital)"
+          },
+          {
+            "id": "dial",
+            "label": "Haemodialysis for severe long acting poisoning"
+          }
+        ],
+        "edges": [
+          [
+            "od",
+            "abc"
+          ],
+          [
+            "abc",
+            "elim"
+          ],
+          [
+            "elim",
+            "dial"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Insomnia prescribing** assembles the module into an order of operations: cognitive behavioural therapy for insomnia first and durably, ramelteon or low dose doxepin where onset or maintenance patterns fit, orexin antagonists and Z drugs for defined short to medium courses with driving counsel, benzodiazepines reserved and brief, and barbiturates never. Every hypnotic prescription carries a stop date, because tolerance converts tonight's solution into next quarter's dependence with industrial reliability.",
+      "say": "Therapy first, gentlest drug that fits, stop date always; barbiturates never for sleep.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Preferred sequence",
+          "points": [
+            "CBT for insomnia as durable first line",
+            "Ramelteon for onset, orexin antagonists for maintenance",
+            "Z drugs in defined courses with warnings",
+            "Treat apnoea, pain and mood drivers directly"
+          ]
+        },
+        "right": {
+          "title": "Avoid or reserve",
+          "points": [
+            "Benzodiazepines: brief and exceptional for insomnia",
+            "Barbiturates: no insomnia role whatsoever",
+            "Sedating antihistamines: anticholinergic harm in elderly",
+            "Alcohol as nightcap: fragmented sleep and dependence"
+          ]
+        }
+      }
+    }
+  ]
+}

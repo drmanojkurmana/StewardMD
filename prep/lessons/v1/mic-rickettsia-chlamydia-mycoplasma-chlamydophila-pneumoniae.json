@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-rickettsia-chlamydia-mycoplasma",
+  "subject": "microbiology",
+  "title": "Chlamydophila pneumoniae, Psittacosis and Mycoplasma pneumoniae",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Chlamydia pneumoniae**, historically called Chlamydophila pneumoniae, spreads person to person by respiratory secretions and causes pharyngitis, sinusitis, bronchitis and community acquired pneumonia. Illness may be biphasic, with sore throat improving before cough and pneumonia appear. Reinfections occur through life. Its intracellular cycle resembles C trachomatis, although respiratory inclusions have distinctive dense morphology in cell culture.",
+      "say": "C pneumoniae is a human respiratory intracellular pathogen with frequent reinfection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical pattern",
+          "points": [
+            "Gradual onset cough",
+            "Sore throat and hoarseness may precede pneumonia",
+            "Low grade fever and prolonged cough",
+            "Outbreaks in schools, barracks and care facilities"
+          ]
+        },
+        "right": {
+          "title": "Testing",
+          "points": [
+            "Respiratory NAAT where available",
+            "Serology needs careful timing and paired samples",
+            "Culture is research specialised",
+            "Routine atypical serology often adds little for individual care"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Psittacosis** is caused by Chlamydia psittaci acquired by inhaling dried secretions or droppings from parrots and other birds. It causes fever, headache, dry cough, relative bradycardia sometimes and atypical pneumonia. Exposure history may involve pet shops, pigeon lofts, poultry processing or veterinary work. Doxycycline is treatment of choice, and early suspicion prevents progression to respiratory failure.",
+      "say": "A parrot keeper with atypical pneumonia should trigger psittacosis and doxycycline.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clues",
+          "points": [
+            "Bird purchase, illness or death",
+            "Severe headache and myalgia",
+            "Dry cough and patchy infiltrates",
+            "Hepatosplenomegaly or hepatitis occasionally"
+          ]
+        },
+        "right": {
+          "title": "Actions",
+          "points": [
+            "Ask detailed bird exposure history",
+            "Send PCR or serology as available",
+            "Start doxycycline promptly",
+            "Notify public health where required"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mycoplasma pneumoniae** lacks a peptidoglycan cell wall and has sterols in its cell membrane. It attaches to respiratory epithelium with a specialised tip containing P1 adhesin and injures cilia through local oxidative products. Because there is no cell wall, beta-lactam antibiotics have no target. This single structural fact explains both Gram stain invisibility and antibiotic selection.",
+      "say": "No cell wall means no Gram stain target and no beta-lactam activity for Mycoplasma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Structure",
+          "points": [
+            "Smallest free living bacteria classically taught",
+            "No peptidoglycan wall",
+            "Sterol containing membrane",
+            "Requires cholesterol enriched special media"
+          ]
+        },
+        "right": {
+          "title": "Consequences",
+          "points": [
+            "Cannot be seen usefully by Gram stain",
+            "Beta lactams intrinsically ineffective",
+            "Macrolide, doxycycline or fluoroquinolone options",
+            "Cold agglutinins are host antibodies, not organism stains"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Mycoplasma pneumonia often affects school-age children and young adults in cyclical community outbreaks, with gradual fever, headache and a persistent dry cough. Chest imaging can look worse than auscultation. **Extrapulmonary manifestations** include cold agglutinin haemolysis, erythema multiforme and Stevens Johnson patterns, mucositis, meningoencephalitis, transverse myelitis and arthritis. Immune mechanisms explain much disease beyond the lung.",
+      "say": "Walking pneumonia can continue as immune disease in blood, skin and nervous system.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Respiratory disease",
+          "points": [
+            "Slowly progressive tracheobronchitis",
+            "Patchy infiltrates despite modest crackles",
+            "Cough persists for weeks",
+            "Household and dormitory spread"
+          ]
+        },
+        "right": {
+          "title": "Extrapulmonary disease",
+          "points": [
+            "Cold agglutinin haemolytic anaemia",
+            "Mucositis and Stevens Johnson spectrum",
+            "Encephalitis and demyelination",
+            "Rash and arthralgia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cold agglutinins** are usually IgM antibodies against red cell I antigen that agglutinate erythrocytes in the cold and can cause haemolysis in Mycoplasma infection. They are supportive, not specific, and also occur with Epstein Barr virus and lymphoproliferative disease. PCR from throat specimens is more direct; IgM serology can cross react or remain positive. Testing is most useful when the result will change antibiotics or outbreak management.",
+      "say": "Cold agglutinins support Mycoplasma but do not identify it uniquely.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cold agglutinin clues",
+          "points": [
+            "Agglutination reverses on warming",
+            "Can cause acrocyanosis and haemolysis",
+            "Direct antiglobulin test may show complement",
+            "Titre height alone is not proof"
+          ]
+        },
+        "right": {
+          "title": "Diagnostic hierarchy",
+          "points": [
+            "Respiratory PCR during acute illness",
+            "Paired serology is retrospective",
+            "IgM can persist after infection",
+            "Macrolide resistance testing is regionally important"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Macrolide resistance in **M pneumoniae** has become common in parts of East Asia and is rising elsewhere. Doxycycline is an important alternative in age appropriate patients; fluoroquinolones are used in selected adults. Treatment shortens illness modestly if begun early, while established immune mediated complications may need supportive or specialist therapy independent of antimicrobial choice. Prevention rests on respiratory hygiene because no vaccine is licensed.",
+      "say": "Macrolide failure in Mycoplasma may be resistance, not simply poor adherence.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "suspect",
+            "label": "Gradual pneumonia and dry cough"
+          },
+          {
+            "id": "test",
+            "label": "PCR targeted to M pneumoniae"
+          },
+          {
+            "id": "treat",
+            "label": "Macrolide or alternative by region"
+          },
+          {
+            "id": "review",
+            "label": "Review resistance and extrapulmonary complications"
+          }
+        ],
+        "edges": [
+          [
+            "suspect",
+            "test"
+          ],
+          [
+            "test",
+            "treat"
+          ],
+          [
+            "treat",
+            "review"
+          ]
+        ]
+      }
+    }
+  ]
+}

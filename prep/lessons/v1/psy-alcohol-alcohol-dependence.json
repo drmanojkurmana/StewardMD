@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "id": "psy-alcohol-alcohol-dependence",
+ "subject": "psychiatry",
+ "module": "psy-alcohol",
+ "title": "Alcohol Dependence Syndrome and Screening Instruments",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Alcohol dependence syndrome**, formulated by Edwards and Gross, comprises a cluster of physiological, behavioral, and cognitive phenomena where alcohol consumption assumes a much higher priority than other behaviors. Cardinal criteria include a strong internal compulsion to drink, impaired control over consumption, physiological withdrawal, and evidence of tolerance.",
+   "say": "Alcohol dependence features a powerful compulsion to drink, loss of control, narrowing of repertoire, physiological withdrawal, and marked tolerance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/alcohol-and-alcohol-use-disorders-fig1.webp",
+    "alt": "Hepatic alcohol dehydrogenase pathways and neurochemical dependence mechanisms",
+    "caption": "Hepatic alcohol dehydrogenase pathways and neurochemical dependence mechanisms.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Tolerance** describes a state of neuroadaptation wherein markedly increased amounts of alcohol are required to achieve intoxication or the desired subjective effect, or where continued consumption of the same quantity results in a markedly diminished effect. Metabolic tolerance arises from hepatic CYP2E1 induction, while cellular tolerance involves down-regulated GABA-A receptors.",
+   "say": "Tolerance demands increasing alcohol quantities to achieve intoxication, resulting from hepatic enzyme induction and down-regulated GABA receptors.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pharmacokinetic Tolerance",
+     "points": [
+      "Induction of hepatic CYP2E1 enzyme system",
+      "Accelerated rate of ethanol clearance",
+      "Decreased peak blood alcohol concentrations",
+      "Reversible upon sustained abstinence"
+     ]
+    },
+    "right": {
+     "title": "Pharmacodynamic Tolerance",
+     "points": [
+      "Down-regulation of inhibitory GABA-A receptors",
+      "Up-regulation of excitatory NMDA receptors",
+      "Cellular neuroadaptation in cerebral cortex",
+      "Permits sober appearance at lethal blood levels"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**CAGE questionnaire** is a rapid, validated four-question clinical screening instrument for alcohol use disorder. The acronym stands for: Cut down (feeling a need to reduce drinking), Annoyed (criticized by others), Guilty (feeling bad about drinking), and Eye-opener (drinking first thing in the morning to steady nerves).",
+   "say": "The CAGE questionnaire screens for alcohol misuse through Cut down, Annoyed, Guilty, and Eye-opener questions. Two affirmative answers indicate dependence.",
+   "vis": {
+    "kind": "table",
+    "title": "CAGE Screening Instrument",
+    "cols": [
+     "Letter",
+     "Question Phrasing",
+     "Diagnostic Threshold"
+    ],
+    "rows": [
+     [
+      "C",
+      "Have you ever felt you ought to Cut down on your drinking?",
+      "One positive: raises clinical suspicion"
+     ],
+     [
+      "A",
+      "Have people Annoyed you by criticizing your drinking?",
+      "Two positives: clinically significant problem"
+     ],
+     [
+      "G",
+      "Have you ever felt bad or Guilty about your drinking?",
+      "Sensitivity 93% and specificity 76%"
+     ],
+     [
+      "E",
+      "Have you ever had an Eye-opener drink in the morning?",
+      "Strongest predictor of physical dependence"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Alcohol Use Disorders Identification Test**, abbreviated AUDIT, is a comprehensive 10-item screening tool developed by the World Health Organization covering alcohol intake, dependence signs, and alcohol-related problems. Total scores range from zero to 40, where scores of eight or higher indicate hazardous alcohol consumption.",
+   "say": "The WHO AUDIT tool scores drinking from zero to forty across ten questions, identifying hazardous drinking at scores of eight and above.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-alcohol.webp",
+    "alt": "Standard drink calculation and organ-specific pathology of chronic alcohol misuse",
+    "caption": "Standard drink calculation and organ-specific pathology of chronic alcohol misuse.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Standard drink measurement** defines a standard unit of alcohol as containing approximately 10 grams (or 12.7 milliliters) of absolute ethanol in international guidelines. Calculating consumption in standard units allows clinicians to objectively assess metabolic load and stratify long-term risks of cirrhosis, cardiomyopathy, and cerebellar degeneration.",
+   "say": "A standard drink contains ten grams of pure alcohol. Tracking units quantifies consumption and assesses risks of cirrhosis and neuropathy.",
+   "vis": {
+    "kind": "table",
+    "title": "Standard Drink Equivalencies",
+    "cols": [
+     "Beverage Type",
+     "Volume Served",
+     "Alcohol By Volume",
+     "Standard Units"
+    ],
+    "rows": [
+     [
+      "Standard regular beer",
+      "330 mL (one can)",
+      "5 percent ABV",
+      "1.3 units (approx 10g ethanol)"
+     ],
+     [
+      "Table wine",
+      "100 mL (small glass)",
+      "12 percent ABV",
+      "1.0 unit (approx 10g ethanol)"
+     ],
+     [
+      "Distilled spirits / whisky",
+      "30 mL (one peg)",
+      "40 percent ABV",
+      "1.0 unit (approx 10g ethanol)"
+     ],
+     [
+      "Fortified wine / port",
+      "60 mL (small measure)",
+      "20 percent ABV",
+      "1.0 unit (approx 10g ethanol)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Alcohol withdrawal pathophysiology** results from chronic alcohol consumption suppressing glutamate neurotransmission at NMDA receptors while enhancing GABA-A inhibitory currents. Abrupt cessation unmasks a profound hyper-excitable rebound state, characterized by unrestrained NMDA glutamate excitation, sympathetic locus coeruleus hyperactivity, and severe GABA deficiency.",
+   "say": "Alcohol withdrawal stems from sudden unmasking of NMDA excitation paired with GABA deficiency, unleashing life-threatening autonomic rebound hyperactivity.",
+   "vis": {
+    "kind": "flow",
+    "title": "Neurochemical Imbalance in Withdrawal",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Chronic alcohol consumption: GABA-A enhanced & NMDA suppressed"
+     },
+     {
+      "id": "n2",
+      "label": "Abrupt alcohol cessation: sudden loss of external inhibition"
+     },
+     {
+      "id": "n3",
+      "label": "Glutamate flood at up-regulated NMDA receptors & loss of GABA tone"
+     },
+     {
+      "id": "n4",
+      "label": "Severe autonomic storm, diaphoresis, tremors, seizures, & delirium"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Uncomplicated alcohol withdrawal** typically begins six to eight hours after the last drink, presenting with fine motor tremors of the outstretched hands, insomnia, nausea, tachycardia, hypertension, and marked anxiety. Symptoms peak at 24 to 48 hours and gradually subside over four to five days.",
+   "say": "Uncomplicated withdrawal begins six hours after the last drink with tremors, sweating, tachycardia, and anxiety, peaking at twenty-four hours.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Uncomplicated Withdrawal",
+     "points": [
+      "Begins 6 to 8 hours after last drink",
+      "Coarse hand tremor, tachycardia, sweating",
+      "Preserved orientation and consciousness",
+      "Resolves within 48 to 72 hours with oral sedatives"
+     ]
+    },
+    "right": {
+     "title": "Complicated Withdrawal",
+     "points": [
+      "Withdrawal seizures (rum fits) at 12 to 48 hours",
+      "Alcoholic hallucinosis with clear sensorium",
+      "Delirium tremens peaking at 72 to 96 hours",
+      "Requires aggressive parenteral benzodiazepines"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Biological markers of chronic alcohol abuse** provide objective laboratory evidence of excessive intake and monitor abstinence adherence. Key biochemical markers include elevated serum gamma-glutamyl transferase, elevated mean corpuscular volume of erythrocytes on complete blood counts, and carbohydrate-deficient transferrin, which offers the highest diagnostic specificity.",
+   "say": "Laboratory markers of alcohol abuse include elevated gamma-glutamyl transferase, macrocytic erythrocyte MCV, and carbohydrate-deficient transferrin.",
+   "vis": {
+    "kind": "table",
+    "title": "Biochemical Markers of Alcohol Abuse",
+    "cols": [
+     "Laboratory Marker",
+     "Physiological Basis",
+     "Diagnostic Specificity & Half-Life"
+    ],
+    "rows": [
+     [
+      "Carbohydrate-deficient transferrin",
+      "Ethanol inhibits transferrin glycosylation",
+      "Most specific marker (>90%); half-life 2 weeks"
+     ],
+     [
+      "Gamma-glutamyl transferase (GGT)",
+      "Hepatic microsomal enzyme induction",
+      "Sensitive but non-specific; normalizes in 4 weeks"
+     ],
+     [
+      "Mean corpuscular volume (MCV)",
+      "Direct erythrocyte membrane toxicity",
+      "Macrocytosis (>96 fL); half-life 120 days"
+     ],
+     [
+      "AST to ALT ratio > 2",
+      "Pyridoxal 5-phosphate hepatic depletion",
+      "Classic indicator of alcoholic liver disease"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

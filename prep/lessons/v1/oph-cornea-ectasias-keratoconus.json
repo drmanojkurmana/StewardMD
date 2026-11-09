@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "id": "oph-cornea-ectasias-keratoconus",
+ "subject": "ophthalmology",
+ "module": "oph-corneal-degenerations",
+ "title": "Keratoconus",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Keratoconus** is progressive corneal thinning and cone protrusion in adolescents and young adults, irregular astigmatism, scissoring retinoscopy and falling acuity corrected increasingly poorly by spectacles. Eye rubbing and atopy associate strongly, progression usually until thirties stabilisation. Topography detects forme fruste before slit signs in refractive screening and family assessment.",
+   "say": "Progressive cone thinning together gives irregular astigmatism in young patients characteristically during adolescent years in clinic. Rubbing association gives prevention instruction value. Topography gives early detection additionally.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/corneal-degenerations-dystrophies-keratoconus-fig1.webp",
+    "alt": "Keratoconus topography with iron ring and corneal ectasia signs composite.",
+    "caption": "Keratoconus corneal topography, Fleischer iron ring, and ectasia signs. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Munson sign** tents lower lid on downgaze by cone, Fleischer ring deposits iron at cone base, Vogt striae stress lines fade with pressure, and conical protrusion with apical scar complete slit set. Rizzuti and oil droplet reflexes give bedside and retinoscopy companions. Signs accumulate with severity, early disease topography only in many screened patients.",
+   "say": "Lid tenting together gives Munson evidence in advanced keratoconus at bedside examination in clinic for students characteristically. Iron ring gives cone base marking additionally. Early disease gives topography only often.",
+   "vis": {
+    "kind": "table",
+    "title": "Keratoconus sign set",
+    "cols": [
+     "Sign",
+     "Finding"
+    ],
+    "rows": [
+     [
+      "Munson",
+      "Lower lid tented downgaze"
+     ],
+     [
+      "Fleischer ring",
+      "Iron at cone base"
+     ],
+     [
+      "Vogt striae",
+      "Stress lines fade pressure"
+     ],
+     [
+      "Scissoring",
+      "Retinoscopy reflex split"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Corneal hydrops** is acute Descemet rupture flooding stroma with aqueous, sudden painful white cornea and vision drop in advanced keratoconus, resolving over months with scar. Hypertonic and pressure lowering temporise, gas injection selected, graft after quiet scar assessment. Hydrops eye must exclude perforation and infection before reassurance by course familiarity.",
+   "say": "Membrane rupture together gives sudden white painful cornea in advanced keratoconus at emergency presentation in young patients. Resolution gives scar over months afterward. Exclusion gives safety first always.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Progressive keratoconus",
+     "points": [
+      "Topography steepening serially",
+      "Rigid lens rehabilitation",
+      "Cross linking candidate"
+     ]
+    },
+    "right": {
+     "title": "Acute hydrops",
+     "points": [
+      "Sudden white painful cornea",
+      "Descemet rupture flooding",
+      "Settle, scar, graft later"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Collagen cross linking** stiffens cornea by riboflavin ultraviolet photochemistry halting progression in documented progressive keratoconus, not reversing established cone or removing scar. Thickness minimums protect endothelium during ultraviolet exposure by protocol. Progression documentation before treatment repeats refractive surgery stability logic in ectasia care.",
+   "say": "Photochemical stiffening together gives progression halt in documented keratoconus at corneal services for young patients over follow up. Reversal absence gives counselling honesty additionally. Thickness gives endothelial safety gate.",
+   "vis": {
+    "kind": "flow",
+    "title": "Keratoconus progression pathway",
+    "nodes": [
+     {
+      "id": "doc",
+      "label": "Document topography progression"
+     },
+     {
+      "id": "link",
+      "label": "Cross link if thickness safe"
+     },
+     {
+      "id": "lens",
+      "label": "Rigid lens rehabilitation"
+     },
+     {
+      "id": "graft",
+      "label": "Lamellar graft if scarred"
+     }
+    ],
+    "edges": [
+     [
+      "doc",
+      "link"
+     ],
+     [
+      "link",
+      "lens"
+     ],
+     [
+      "lens",
+      "graft"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "This optical section makes the endpoint of ectasia visible rather than described. In **acute corneal hydrops**, aqueous bursts through a torn Descemet membrane into the stroma, turning a pointed cone suddenly white and swollen. The topography beside it shows how steep the cone had become before rupture. Vision drops abruptly, pain and watering follow, and the eye needs protection and pressure lowering while the break seals over weeks, often leaving a scar at the apex.",
+   "say": "Acute hydrops is aqueous flooding the stroma through a torn Descemet membrane, suddenly whitening the cone. The eye needs protection while the break seals over weeks.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m212-oph-cornea-ectasias-keratoconus.webp",
+    "alt": "Slit lamp optical section and corneal topography of acute corneal hydrops, with a ruptured Descemet membrane and stromal oedema.",
+    "caption": "A torn Descemet membrane with stromal oedema is shown in optical section beside steep corneal topography in acute hydrops. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Rigid gas permeable and scleral lenses vault cone irregularity giving acuity spectacles cannot, fitting success deciding graft deferral in many moderate cases. Deep anterior lamellar graft replaces ectatic stroma preserving host endothelium where Descemet intact. **Lens rehabilitation** therefore precedes graft listing unless scar or hydrops damage precludes fitting.",
+   "say": "Vaulting lenses together give acuity beyond spectacles in moderate keratoconus at contact clinics for young patients over years. Lamellar replacement gives endothelium preservation additionally. Fitting success gives graft deferral."
+  },
+  {
+   "tx": "Associations include atopy, Down syndrome, connective tissue disease and vernal rubbing from previous module, family screening by topography in first degree relatives. Rubbing cessation counselling is disease modifying instruction at every visit. **Atopy control** therefore belongs to keratoconus progression care, not separate allergy trivia.",
+   "say": "Atopy control together gives progression care in keratoconus beyond optics at corneal clinics for adolescents over follow up visits. Family topography gives screening value additionally. Rubbing cessation gives repeated instruction.",
+   "vis": {
+    "kind": "table",
+    "title": "Keratoconus associations",
+    "cols": [
+     "Association",
+     "Action"
+    ],
+    "rows": [
+     [
+      "Eye rubbing atopy",
+      "Treat allergy, stop rubbing"
+     ],
+     [
+      "Family history",
+      "Topography screening relatives"
+     ],
+     [
+      "Down syndrome",
+      "Early topography surveillance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Topography patterns inferior steepening, skewed axes and thinning at cone apex quantify severity and progression serially with same device protocols. Keratometry values alone miss early cones that topography catches in refractive candidates. **Serial steepening** is cross linking trigger phrase in ectasia referrals.",
+   "say": "Serial steepening together gives cross linking trigger in ectasia referrals at corneal services for progressive young patients over visits. Same device gives comparability value additionally. Keratometry gives early miss risk.",
+   "vis": {
+    "kind": "table",
+    "title": "Ectasia severity inputs",
+    "cols": [
+     "Input",
+     "Use"
+    ],
+    "rows": [
+     [
+      "Topography steepening",
+      "Progression documentation"
+     ],
+     [
+      "Pachymetry thinning",
+      "Cross link safety, staging"
+     ],
+     [
+      "Rigid lens acuity",
+      "Graft deferral decision"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: young cone scissoring topography, Munson tents and iron rings base. Cross linking halts, rigid lenses rehabilitate, lamellar grafts replace stroma. Hydrops whites suddenly and rubbing modifies progression behaviourally. **Progression documented** gates stiffening treatment as stability gates laser. Serial topography with the same device protocol protects progression claims from measurement noise.",
+   "say": "Young cone pattern together gives keratoconus recognition while serial topography gives progression proof at corneal clinics for adolescents reliably. Lens rehabilitation gives graft deferral additionally. Rubbing control gives behavioural therapy.",
+   "vis": {
+    "kind": "table",
+    "title": "Keratoconus anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Cross linking",
+      "Halts progression, no reversal"
+     ],
+     [
+      "Rigid lens",
+      "Vaults irregularity for acuity"
+     ],
+     [
+      "Hydrops",
+      "Descemet rupture, sudden white"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Keratoconus signs",
+   "b": "Munson lid tenting, Fleischer iron ring, Vogt striae and scissoring retinoscopy in young cone."
+  },
+  {
+   "f": "Cross linking role",
+   "b": "Halts documented progression by stiffening; does not reverse cone or scar, thickness gated."
+  },
+  {
+   "f": "Acute hydrops",
+   "b": "Descemet rupture floods stroma, sudden white painful cornea resolving to scar over months."
+  }
+ ],
+ "keys": [
+  "Stop rubbing is keratoconus therapy",
+  "Rigid lenses defer graft in moderate disease",
+  "Topography finds cones keratometry misses"
+ ]
+}

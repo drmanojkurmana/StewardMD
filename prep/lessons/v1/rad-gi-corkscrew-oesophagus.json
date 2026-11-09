@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-gi-corkscrew-oesophagus",
+ "subject": "radiology",
+ "module": "rad-gi",
+ "title": "Corkscrew Oesophagus, Achalasia and Oesophageal Signs",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Corkscrew from spasm",
+   "tx": "**Corkscrew oesophagus** twists the barium column into a helical, rosary like pattern during diffuse oesophageal spasm, when simultaneous non peristaltic contractions segment the tube instead of sweeping in sequence. The illustrated cutaway places that corkscrew beside reflux damage and hiatus hernia, the three oesophageal patterns examiners rotate. Between spasms the oesophagus can look completely normal, so a single quiet swallow never excludes the diagnosis.",
+   "say": "Corkscrew oesophagus twists the barium column into a helical pattern during diffuse spasm, when simultaneous contractions segment the tube instead of sweeping in sequence. The illustrated cutaway places that corkscrew beside reflux damage and hiatus hernia. Between spasms the oesophagus can look normal, so one quiet swallow never excludes it.",
+   "vis": {"kind": "image", "src": "v1/kb/media/esophageal-motility-gerd-and-esophagectomy-fig1.webp", "alt": "Cutaway illustration showing corkscrew oesophagus beside sliding hiatus hernia and reflux change.", "caption": "Corkscrew oesophagus with hiatus hernia and reflux patterns. Illustration: StewardMD."}
+  },
+  {
+   "title": "Spasm versus achalasia",
+   "tx": "**Diffuse spasm** keeps a working lower sphincter that relaxes on swallowing, so barium eventually empties and the oesophagus stays near normal calibre. Achalasia fails sphincter relaxation from lost myenteric neurons, dilating the oesophagus into a sigmoid reservoir ending in a smooth beak. Chest pain dominates spasm presentations, while regurgitation of undigested food and weight loss dominate achalasia, matching their opposite mechanics.",
+   "say": "Diffuse spasm keeps a working lower sphincter that relaxes on swallowing, so barium empties and calibre stays near normal. Achalasia fails sphincter relaxation from lost myenteric neurons, dilating the oesophagus into a sigmoid reservoir ending in a smooth beak. Chest pain dominates spasm, regurgitation dominates achalasia.",
+   "vis": {"kind": "compare", "left": {"title": "Diffuse spasm", "points": ["Corkscrew barium column", "Sphincter relaxes", "Normal calibre tube", "Chest pain dominant"]}, "right": {"title": "Achalasia", "points": ["Smooth bird beak tip", "Sphincter fails to relax", "Dilated sigmoid reservoir", "Regurgitation dominant"]}}
+  },
+  {
+   "title": "Manometry settles motility",
+   "tx": "**High resolution manometry** measures pressure along the oesophagus during test swallows and classifies motility by the Chicago system. Achalasia shows a raised integrated relaxation pressure with absent peristalsis, split into subtypes by whether the body pressurises or spasms. Diffuse spasm instead shows premature rapid contractions with normal sphincter relaxation. Barium suggests the pattern, but manometry names it and steers dilation, myotomy or medical therapy.",
+   "say": "High resolution manometry measures pressure along the oesophagus during test swallows and classifies motility by the Chicago system. Achalasia shows raised relaxation pressure with absent peristalsis. Diffuse spasm shows premature rapid contractions with normal sphincter relaxation. Barium suggests the pattern, manometry names it and steers treatment.",
+   "vis": {"kind": "table", "cols": ["Disorder", "Sphincter relaxation", "Body pattern"], "rows": [["Achalasia type 1", "Failed", "No pressurisation"], ["Achalasia type 2", "Failed", "Panoesophageal pressurisation"], ["Diffuse spasm", "Normal", "Premature contractions"], ["Nutcracker", "Normal", "Very high amplitude waves"]]}
+  },
+  {
+   "title": "Schatzki ring and webs",
+   "tx": "**Schatzki ring** is a thin mucosal ring at the squamocolumnar junction that narrows the lumen only when it measures under about 13 mm, causing episodic solid food dysphagia called steakhouse syndrome. Oesophageal webs sit higher, thin shelves from the anterior wall of the cervical oesophagus, and pair with iron deficiency in Plummer Vinson syndrome. Both show best on a prone full column barium swallow distending the tube.",
+   "say": "Schatzki ring is a thin mucosal ring at the squamocolumnar junction that narrows the lumen under about thirteen millimetres, causing episodic solid food dysphagia. Oesophageal webs sit higher in the cervical oesophagus and pair with iron deficiency in Plummer Vinson syndrome. Both show best on a prone distended swallow.",
+   "vis": {"kind": "compare", "left": {"title": "Schatzki ring", "points": ["Lower oesophagus ring", "Symptoms under 13 mm", "Steakhouse episodes", "Full circumferential shelf"]}, "right": {"title": "Oesophageal web", "points": ["Cervical oesophagus", "Anterior wall shelf", "Iron deficiency link", "Plummer Vinson syndrome"]}}
+  },
+  {
+   "title": "Feline oesophagus and eosinophils",
+   "tx": "**Feline oesophagus** draws fine transverse rings across the barium column from transient muscular folding, named after the cat oesophagus it resembles. Fixed concentric rings with longitudinal furrows and white exudates instead mark eosinophilic oesophagitis in a young atopic patient with food impactions. The barium study can look near normal in eosinophilic disease, so endoscopy with biopsies from several levels makes the diagnosis even through healthy looking mucosa.",
+   "say": "Feline oesophagus draws fine transverse rings from transient muscular folding, named after the cat oesophagus it resembles. Fixed rings with furrows instead mark eosinophilic oesophagitis in a young atopic patient with food impactions. Endoscopy with biopsies makes that diagnosis even through healthy looking mucosa.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Young patient, food impaction"}, {"id": "b", "label": "Rings and furrows at endoscopy"}, {"id": "c", "label": "Biopsies several levels"}, {"id": "d", "label": "Eosinophil count confirms"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Candida and viral oesophagitis patterns",
+   "tx": "**Candida oesophagitis** coats barium with shaggy, plaque like filling defects giving a cobblestone or snakeskin wall in immunocompromised patients with odynophagia. Herpes simplex instead punches out multiple small discrete ulcers on normal mucosa, while cytomegalovirus cuts one or a few giant flat ulcers in advanced HIV. The barium pattern triages the organism, but endoscopic brushings and biopsies confirm before antifungal or antiviral therapy commits.",
+   "say": "Candida oesophagitis coats barium with shaggy plaque like defects giving a cobblestone wall in immunocompromised patients. Herpes punches out multiple small discrete ulcers, while cytomegalovirus cuts a few giant flat ulcers in advanced HIV. Endoscopic brushings confirm the organism before therapy commits.",
+   "vis": {"kind": "table", "cols": ["Organism", "Barium pattern", "Host clue"], "rows": [["Candida", "Shaggy cobblestone plaques", "Steroids, diabetes, HIV"], ["Herpes simplex", "Many small discrete ulcers", "Immunocompromised"], ["Cytomegalovirus", "Giant flat ulcer", "Advanced HIV"], ["Pill induced", "Single kissing ulcer", "Doxycycline, bisphosphonate"]]}
+  },
+  {
+   "title": "Extrinsic impressions on the oesophagus",
+   "tx": "**Extrinsic compression** indents the barium column with smooth mucosa from structures crossing the oesophagus: an aberrant right subclavian artery slanting behind it causes dysphagia lusoria, and an enlarged left atrium pushes its anterior wall. The impression moves with the compressing structure and the mucosa stays intact, separating it from a submucosal tumour like leiomyoma, which makes a smooth obtuse defect inside the wall itself.",
+   "say": "Extrinsic compression indents the barium column with smooth mucosa from structures crossing the oesophagus: an aberrant right subclavian artery causes dysphagia lusoria, and an enlarged left atrium pushes its wall. Mucosa stays intact, separating compression from a submucosal leiomyoma making an obtuse defect inside the wall.",
+   "vis": {"kind": "compare", "left": {"title": "Extrinsic impression", "points": ["Smooth intact mucosa", "Oblique posterior slant", "Aberrant subclavian artery", "Left atrial push"]}, "right": {"title": "Submucosal tumour", "points": ["Smooth obtuse defect", "Arises within the wall", "Leiomyoma typical", "Endoscopic ultrasound stages"]}}
+  },
+  {
+   "title": "Zenker diverticulum points backward",
+   "tx": "**Zenker diverticulum** pouches posteriorly through Killian dehiscence between the thyropharyngeus and cricopharyngeus muscles, just above the upper sphincter. Barium fills the sac behind the cervical oesophagus, and retained food inside it explains halitosis, regurgitation and aspiration in older patients. Endoscopy risks perforating the sac, so the barium study comes first and maps the neck of the pouch for the surgeon or stapling team.",
+   "say": "Zenker diverticulum pouches posteriorly through Killian dehiscence just above the upper sphincter. Barium fills the sac behind the cervical oesophagus, and retained food explains halitosis and aspiration in older patients. Endoscopy risks perforating the sac, so the barium study comes first and maps the pouch neck.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Weakness at Killian dehiscence"}, {"id": "b", "label": "Posterior pouch forms"}, {"id": "c", "label": "Food retained in sac"}, {"id": "d", "label": "Barium maps before surgery"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}

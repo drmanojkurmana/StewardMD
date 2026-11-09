@@ -56,7 +56,22 @@
   var SKIP_AFTER_CUE = { is: 1, its: 1, s: 1, would: 1, be: 1, number: 1 };
   var PHRASE_LEAD = { i: 1, ill: 1, ll: 1, im: 1, think: 1, thinks: 1, go: 1, going: 1, with: 1, definitely: 1, my: 1, would: 1, be: 1, it: 1, its: 1, s: 1, is: 1, choose: 1, pick: 1, say: 1, want: 1, the: 1, probably: 1, maybe: 1, just: 1, answer: 1 };
   var PARTIAL_MS = 500, SETTLE_MS = 1200;
-  function words(s) { return String(s || "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(Boolean); }
+  // Greek symbols are spoken as words (β heard as "beta"); hyphens already become spaces below.
+  function words(s) { return String(s || "").toLowerCase().replace(/[\u03b1\u0391]/g, " alpha ").replace(/[\u03b2\u0392]/g, " beta ").replace(/[\u03b3\u0393]/g, " gamma ").replace(/[\u03b4\u0394]/g, " delta ").replace(/[^a-z0-9 ]+/g, " ").split(/\s+/).filter(Boolean); }
+  /* Unambiguous spoken letter forms. The NATO/example words alone count only as the whole utterance and
+     only when no option contains that word (an option's own words win); "A for apple" is handled in
+     parseVoice before the "for" homophone can be read as D. */
+  var APPLE_W = { apple: 0, ball: 1, cat: 2, dog: 3, elephant: 4 };
+  var NATO_W = { alpha: 0, bravo: 1, charlie: 2, delta: 3, echo: 4 };
+  /* Whole-utterance commands (after "please"/"kindly" are dropped): natural phrasing, still one exact
+     phrase, so a longer sentence that merely contains the word never fires. Speed returns slower/faster. */
+  var CMD_W = {};
+  ["repeat", "repeat that", "repeat the question", "repeat it", "say again", "say that again", "say it again", "read again", "read it again", "again", "one more time", "once more", "come again", "pardon", "sorry what", "can you repeat", "can you repeat that", "could you repeat", "could you repeat that", "what was the question"].forEach(function (p) { CMD_W[p] = "repeat"; });
+  ["skip", "skip this", "skip it", "skip question", "skip this question", "skip this one", "next", "next question", "next one", "pass", "move on", "go next", "i don t know", "don t know", "dont know", "no idea"].forEach(function (p) { CMD_W[p] = "skip"; });
+  ["stop", "stop voice", "stop voice mode", "stop listening", "stop reading", "voice off", "exit voice", "quit", "end voice mode"].forEach(function (p) { CMD_W[p] = "stop"; });
+  ["slower", "go slower", "slow down", "read slower"].forEach(function (p) { CMD_W[p] = "slower"; });
+  ["faster", "go faster", "speed up", "read faster"].forEach(function (p) { CMD_W[p] = "faster"; });
+  function cmdKey(c) { return c.filter(function (t) { return t !== "please" && t !== "kindly"; }).join(" "); }
   // Joined cue forms ("optionb") become two tokens; brackets and stops already became spaces in words().
   function voiceTokens(text) {
     var out = [];
@@ -86,24 +101,47 @@
     }
     return prev[n];
   }
-  // Most of an option's own words (3+ letters): the best option over 60%, and only a clear winner. A recogniser
-  // may split a drug name ("met forming"), so adjacent spoken words may join, and words of 5+ letters tolerate a
-  // small edit distance. A tie between options is no answer. Exact words win first: near-identical medical
-  // words (hypo/hyperkalemia, ileum/ilium) are within fuzzy distance of each other, so a fuzzy tie must never
-  // erase an exact clear winner. Fuzzy is tried only when exact matching has no clear winner, and a fuzzy
-  // result must still have a clear winner.
+  /* Option words, normalised on both sides the same way: Greek symbols as words (words()), hyphens as
+     spaces, number words as digits ("five"/"twenty five" -> "5"/"25"), "%" as "percent". Content tokens
+     are 3+ letter words, numbers, single letters an option needs ("Vitamin D", "ACE" spelled out joins to
+     "ace") and dose units. Matching: most of an option's words (over 60%, one clear winner), or one word
+     found in only one option ("beta" with Beta/Calcium channel blocker; shared "blocker" picks nothing).
+     Exact wins first: near-identical medical words (hypo/hyperkalemia, ileum/ilium) are within fuzzy
+     distance of each other, so fuzzy runs only when exact matching has no winner, and still needs one
+     clear winner. Identical options or a full tie return null. */
+  var NUM_ONES = { zero: 0, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9, ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16, seventeen: 17, eighteen: 18, nineteen: 19 };
+  var NUM_TENS = { twenty: 20, thirty: 30, forty: 40, fifty: 50, sixty: 60, seventy: 70, eighty: 80, ninety: 90 };
+  var UNIT_W = { mg: 1, ml: 1, kg: 1, mcg: 1, iu: 1, percent: 1, g: 1, dl: 1, meq: 1 };
+  function numTokens(toks) {
+    var out = [], cur = 0, has = false;
+    function flush() { if (has) out.push(String(cur)); cur = 0; has = false; }
+    (toks || []).forEach(function (t) {
+      if (NUM_ONES[t] != null || NUM_TENS[t] != null || t === "hundred" || t === "thousand") {
+        has = true;
+        if (NUM_TENS[t] != null) cur += NUM_TENS[t]; else if (t === "hundred") cur = (cur || 1) * 100; else if (t === "thousand") cur = (cur || 1) * 1000; else cur += NUM_ONES[t];
+      } else { flush(); out.push(t); }
+    });
+    flush();
+    return out;
+  }
+  function optionTokens(o) { return numTokens(words(String(o || "").replace(/%/g, " percent "))).filter(function (t) { return t.length >= 3 || /^[0-9]+$/.test(t) || /^[a-z]$/.test(t) || UNIT_W[t]; }); }
+  // An option word is heard when spoken whole, or when adjacent spoken words join to it ("met forming",
+  // spelled out "a c e" for "ace").
+  function tokenHit(x, w) {
+    if (w.indexOf(x) >= 0) return true;
+    for (var i = 0; i < w.length; i++) { var acc = ""; for (var j = i; j < Math.min(w.length, i + 4); j++) { acc += w[j]; if (j > i && acc === x) return true; if (acc.length > x.length) break; } }
+    return false;
+  }
   function optionScores(w, options, fuzzy) {
-    var scores = [];
+    var wn = numTokens(w), scores = [];
     (options || []).forEach(function (o, k) {
-      var ow = words(o).filter(function (x) { return x.length >= 3; }); if (!ow.length) { scores[k] = 0; return; }
+      var ow = optionTokens(o); if (!ow.length) { scores[k] = 0; return; }
       var hit = 0;
       ow.forEach(function (x) {
-        if (w.indexOf(x) >= 0) { hit++; return; }
-        var i;
-        for (i = 0; i + 1 < w.length; i++) if (x === w[i] + w[i + 1]) { hit++; return; }
-        if (!fuzzy || x.length < 5) return;
-        var cap = x.length >= 8 ? 2 : 1;
-        for (i = 0; i < w.length; i++) { if (lev(x, w[i], cap) <= cap || (i + 1 < w.length && lev(x, w[i] + w[i + 1], cap) <= cap)) { hit++; return; } }
+        if (tokenHit(x, wn)) { hit++; return; }
+        if (!fuzzy || x.length < 5 || /^[0-9]+$/.test(x)) return;
+        var cap = x.length >= 8 ? 2 : 1, i;
+        for (i = 0; i < wn.length; i++) { if (lev(x, wn[i], cap) <= cap || (i + 1 < wn.length && lev(x, wn[i] + wn[i + 1], cap) <= cap)) { hit++; return; } }
       });
       scores[k] = hit / ow.length;
     });
@@ -114,10 +152,32 @@
     scores.forEach(function (sc, k) { if (sc > bs) { ss = bs; bs = sc; best = k; } else if (sc > ss) ss = sc; });
     return bs >= 0.6 && bs > ss ? best : null;
   }
+  // Every spoken word is part of this option (spoken whole, or joined into one of its words): a fragment
+  // like "a beta" (of "a beta blocker") is not covered, so it never commits on its own.
+  function spokenCovered(wn, ow) {
+    for (var i = 0; i < wn.length; i++) {
+      if (ow.indexOf(wn[i]) >= 0) continue;
+      var ok = false, acc = "";
+      for (var a = Math.max(0, i - 3); a <= i && !ok; a++) { acc = ""; for (var b = a; b < Math.min(wn.length, a + 4); b++) { acc += wn[b]; if (b >= i && ow.indexOf(acc) >= 0) { ok = true; break; } if (acc.length > 24) break; } }
+      if (!ok) return false;
+    }
+    return true;
+  }
+  // A heard word (never a bare unit) that lives in exactly one option picks that option, when everything
+  // heard belongs to that option; words pointing at two different options cancel out.
+  function uniqueWinner(w, options) {
+    var wn = numTokens(w), lists = (options || []).map(optionTokens), votes = {};
+    lists.forEach(function (ow, k) { if (!spokenCovered(wn, ow)) return; ow.forEach(function (x) { if (UNIT_W[x] || !tokenHit(x, wn)) return; for (var j = 0; j < lists.length; j++) if (j !== k && lists[j].indexOf(x) >= 0) return; votes[k] = 1; }); });
+    var ks = Object.keys(votes);
+    return ks.length === 1 ? +ks[0] : null;
+  }
+  function optionHasWord(options, word) { return (options || []).some(function (o) { return optionTokens(o).indexOf(word) >= 0; }); }
   function matchOptionsExact(w, options) { return clearWinner(optionScores(w, options, false)); }
   function matchOptions(w, options) {
     var ex = matchOptionsExact(w, options);
-    return ex != null ? ex : clearWinner(optionScores(w, options, true));
+    if (ex != null) return ex;
+    var uq = uniqueWinner(w, options);
+    return uq != null ? uq : clearWinner(optionScores(w, options, true));
   }
   // A word in LET_RISKY_CUE that got its letter only from that risky table (not a bare b-f letter, not a safe
   // homophone): it is an ordinary English word too, so after a cue it counts only when nothing but a closing
@@ -159,6 +219,8 @@
     }
     // The whole utterance is one letter (risky words count here), or one letter said twice ("A A", "B B").
     if (c.length === 1 || (c.length === 2 && c[0] === c[1])) { var wk = letterOrNum(c[0], "whole"); if (wk != null && wk < n) return { k: wk }; }
+    // "A for apple": the letter before "for" answers, so "for" is never read as D.
+    if (c.length === 3 && c[1] === "for") { var fk = letterOf(c[0], "whole"); if (fk != null && fk < n) return { k: fk }; }
     // A natural short phrase ending in the answer: "I'll go with B", "I think C", "definitely A".
     if (c.length >= 2 && c.length <= 6) {
       var lk = letterOrNum(c[c.length - 1], "mid"), lead = lk != null;
@@ -166,20 +228,24 @@
       if (lead && lk < n) return { k: lk };
     }
     // The option's own words beat a command word inside them: "stop codon" is the option, not Stop.
-    var om = matchOptions(c, options);
+    // A leading "I think" or a trailing "is the answer" must not stop the option matching either.
+    var mw = c.slice();
+    if (mw[0] === "i" && mw[1] === "think") mw = mw.slice(2);
+    if (mw.length >= 3 && mw[mw.length - 3] === "is" && mw[mw.length - 2] === "the" && mw[mw.length - 1] === "answer") mw = mw.slice(0, -3);
+    var om = matchOptions(mw, options);
     if (om != null) return { k: om };
+    // Bare example/NATO words ("apple", "bravo") as the whole utterance, only when no option uses the word.
+    if (c.length === 1) { var bw = APPLE_W[c[0]] != null ? APPLE_W[c[0]] : NATO_W[c[0]]; if (bw != null && bw < n && !optionHasWord(options, c[0])) return { k: bw }; }
+    // A command is the whole utterance (CMD_W phrases, "please" dropped): a longer sentence that merely
+    // contains the word never fires. Before the number scan, so "next one" is Skip, not option one.
+    var cmd = CMD_W[cmdKey(c)];
+    if (cmd) return { cmd: cmd };
     // Two words at most: a safe homophone, a number or a B-F letter (never the article "a", never a risky word).
     if (c.length <= 2) {
       var seen = {}, cnt = 0;
       for (var s2 = 0; s2 < c.length; s2++) { var sk = /^[b-f]$/.test(c[s2]) ? letterOf(c[s2], "mid") : (LET_SAFE[c[s2]] != null ? LET_SAFE[c[s2]] : numOf(c[s2])); if (sk != null && sk < n && !seen[sk]) { seen[sk] = 1; cnt++; } }
       if (cnt === 1) return { k: +Object.keys(seen)[0] };
       if (cnt > 1) return null;
-    }
-    // A command must be a short utterance that is plainly a command.
-    if (c.length <= 3) {
-      if (c.indexOf("stop") >= 0) return { cmd: "stop" };
-      if (c.indexOf("skip") >= 0 || c.indexOf("next") >= 0) return { cmd: "skip" };
-      if (c.indexOf("repeat") >= 0 || c.indexOf("again") >= 0) return { cmd: "repeat" };
     }
     return null;
   }
@@ -212,7 +278,7 @@
   function partialVote(seen, text, options, now) {
     var p = parseVoice(text, options);
     if (!p) return { seen: null, commit: null };
-    var norm = voiceTokens(text).join(" "), ms = fastLetter(text, options) ? PARTIAL_MS : SETTLE_MS;
+    var norm = voiceTokens(text).join(" "), ms = (p.cmd || fastLetter(text, options)) ? PARTIAL_MS : SETTLE_MS;
     if (!seen || seen.text !== norm) return { seen: { k: p.k != null ? p.k : null, text: norm, at: now, ms: ms }, commit: null };
     return now - seen.at >= (seen.ms || ms) ? { seen: seen, commit: p } : { seen: seen, commit: null };
   }
@@ -232,6 +298,12 @@
     var ls = L.slice(0, n);
     return "say " + (ls.length === 1 ? ls[0] : ls.slice(0, -1).join(", ") + " or " + ls[ls.length - 1]);
   }
+  // "option B" is recognised far better than a lone "B" (owner benchmark): every prompt steers to it,
+  // following the real option count.
+  function optionRange(n) { n = Math.max(1, Math.min(L.length, n || 4)); return n === 1 ? L[0] : L[0] + " to " + L[n - 1]; }
+  function listenText(n) { return "Listening\u2026 say option " + optionRange(n) + ", or read it"; }
+  function missSay(n) { return "Sorry, say option " + optionRange(n) + ", or read the option."; }
+  function missHeard(t, n) { var x = String(t || "").trim().slice(0, 80); return x ? "Heard \u201C" + x + "\u201D. Say option " + optionRange(n) + ", or read it" : "Nothing heard. Say option " + optionRange(n) + ", or read it"; }
   // Which voice reads: Phonon when ready and fast enough, the system voice otherwise, "wait" while it loads.
   function voiceChoice(v) {
     if (!v || !v.available) return "system";
@@ -239,8 +311,8 @@
     if (v.state === "ready") return v.usable ? "phonon" : "system";
     return "wait";
   }
-  // No say() may hang the session: allow the spoken time plus rendering slack, by length.
-  function sayWatchdogMs(text) { var ms = 6000 + String(text || "").length * 150; return ms > 60000 ? 60000 : ms; }
+  // No say() may hang the session: allow the spoken time (longer at slow rates) plus rendering slack.
+  function sayWatchdogMs(text, rate) { var ms = 6000 + String(text || "").length * 150 / (rate > 0 ? rate : 1); return ms > 60000 ? 60000 : ms; }
   // sayChunks may end a piece at "Option B."; keep the letter with its option text.
   function joinOptionChunks(chunks) {
     var out = [];
@@ -298,7 +370,7 @@
       persona: persona(s.hr), spot: spot, bosses: bosses, focus: (s.fxm && s.fxm[month]) || 0 };
   }
 
-  var PURE = { hashStr: hashStr, shuffled: shuffled, spotPick: spotPick, istDay: istDay, parseVoice: parseVoice, standaloneLetter: standaloneLetter, partialVote: partialVote, pickAlternative: pickAlternative, choicePrompt: choicePrompt, voiceChoice: voiceChoice, sayWatchdogMs: sayWatchdogMs, joinOptionChunks: joinOptionChunks, PARTIAL_MS: PARTIAL_MS, SETTLE_MS: SETTLE_MS, earnFreeze: earnFreeze, applyFreezes: applyFreezes,
+  var PURE = { hashStr: hashStr, shuffled: shuffled, spotPick: spotPick, istDay: istDay, parseVoice: parseVoice, standaloneLetter: standaloneLetter, partialVote: partialVote, pickAlternative: pickAlternative, choicePrompt: choicePrompt, optionRange: optionRange, listenText: listenText, missSay: missSay, missHeard: missHeard, voiceChoice: voiceChoice, sayWatchdogMs: sayWatchdogMs, joinOptionChunks: joinOptionChunks, PARTIAL_MS: PARTIAL_MS, SETTLE_MS: SETTLE_MS, earnFreeze: earnFreeze, applyFreezes: applyFreezes,
     bossPick: bossPick, livesLeft: livesLeft, firstSentence: firstSentence, feedCards: feedCards, persona: persona, wrapped: wrapped, ym: ym, FREEZE_MAX: FREEZE_MAX, FREEZE_EXTRA: FREEZE_EXTRA, BOSS_N: BOSS_N, BOSS_LIVES: BOSS_LIVES };
   if (NODE) { module.exports = PURE; return; }
 
@@ -585,6 +657,13 @@
     return T.getSupportedVoices().then(function (r) { sysIx = bestVoiceOf(r && r.voices); return sysIx; }, function () { sysIx = -1; return -1; });
   }
   function webVoicePick() { try { var vs = G.speechSynthesis.getVoices ? G.speechSynthesis.getVoices() : [], i = bestVoiceOf(vs); return i >= 0 ? vs[i] : null; } catch (e) { return null; } }
+  // The lessons' speed helpers and saved rate (store lsp.r): one speed for lessons and Voice mode.
+  function speedsOf() { var P = lessonPure(); return (P && P.SPEEDS) || [0.75, 1, 1.25, 1.5]; }
+  function nextSpeedOf(r) { var P = lessonPure(); if (P && P.nextSpeed) return P.nextSpeed(r); var ss = speedsOf(), i = ss.indexOf(r); return ss[(i + 1) % ss.length]; }
+  function speedLabelOf(r) { var P = lessonPure(); if (P && P.speedLabel) return P.speedLabel(r); return String(r).replace(/^0\./, ".") + "x"; }
+  function voiceRate() { try { var s = store(); return (s && s.lsp && +s.lsp.r) || 1; } catch (e) { return 1; } }
+  function setVoiceRate(r) { try { var s = store(); if (!s.lsp) s.lsp = { r: 1, au: 0 }; s.lsp.r = r; H.save(); } catch (e) {} }
+  function sayStatus(t) { var el = H && H.root && H.root().querySelector("#pvVoiceT"); if (el) el.textContent = t; }
   function hush() {
     try { var V = phonon(); if (V && V.stop) V.stop(); } catch (e) {}
     try { var T = tts(); if (T && T.stop) T.stop().catch(function () {}); else if (G.speechSynthesis) G.speechSynthesis.cancel(); } catch (e) {}
@@ -625,16 +704,16 @@
   // One sentence on the system voice (the lessons' bestVoice choice); done runs on end, on error or on watchdog.
   // alive, when given, is checked again right before speaking: sysVoiceIx resolves async, and a session
   // stopped meanwhile must never start a sentence.
-  function systemSay(part, done, alive) {
-    var settled = false, wd = G.setTimeout(fin, sayWatchdogMs(part) + 4000);
+  function systemSay(part, done, alive, rate) {
+    var settled = false, wd = G.setTimeout(fin, sayWatchdogMs(part, rate) + 4000);
     function fin() { if (settled) return; settled = true; G.clearTimeout(wd); done(); }
     try {
       var T = tts();
-      if (T) { sysVoiceIx(T).then(function (vi) { if (alive && !alive()) { fin(); return; } var o = { text: part, lang: "en-IN", rate: 1, pitch: 1, volume: 1, category: "playback" }; if (vi >= 0) o.voice = vi; return T.speak(o); }).then(fin, fin); return; }
+      if (T) { sysVoiceIx(T).then(function (vi) { if (alive && !alive()) { fin(); return; } var o = { text: part, lang: "en-IN", rate: rate || 1, pitch: 1, volume: 1, category: "playback" }; if (vi >= 0) o.voice = vi; return T.speak(o); }).then(fin, fin); return; }
       if (G.speechSynthesis && G.SpeechSynthesisUtterance) {
         if (alive && !alive()) { fin(); return; }
         var u = new G.SpeechSynthesisUtterance(part), wv = webVoicePick();
-        u.lang = "en-IN"; if (wv) { u.voice = wv; u.lang = wv.lang || u.lang; }
+        u.lang = "en-IN"; u.rate = rate || 1; if (wv) { u.voice = wv; u.lang = wv.lang || u.lang; }
         u.onend = fin; u.onerror = fin;
         G.speechSynthesis.speak(u); return;
       }
@@ -644,9 +723,11 @@
   /* Speak a text (or a list of segments, so "Option B." stays with its option) a chunk at a time through Phonon,
      the next chunk rendered ahead; a chunk Phonon fails on, or one that overruns its watchdog, is read by the
      system voice and reading carries on. done fires only while this speak is still the session's current one. */
-  function speak(text, done) {
+  function speak(text, done, block) {
     var V = P.voice; if (!V) return;
-    var tok = ++V.tok, fin = function () { if (P.voice === V && tok === V.tok) done(); };
+    var tok = ++V.tok, rate = voiceRate();
+    V.speakingBlock = block || null;
+    var fin = function () { if (P.voice === V && tok === V.tok) { V.speakingBlock = null; done(); } };
     hush();
     var segs = Object.prototype.toString.call(text) === "[object Array]" ? text : [text], chunks = [];
     segs.forEach(function (s) { sayChunksOf(s).forEach(function (c) { chunks.push(c); }); });
@@ -658,23 +739,23 @@
       if (idx >= chunks.length) { fin(); return; }
       var part = chunks[idx++], settled = false, routed = false;
       function after() { if (settled) return; settled = true; G.setTimeout(next, idx >= chunks.length ? 0 : 120); }
-      function sys() { if (routed) return; routed = true; systemSay(part, after, function () { return P.voice === V && tok === V.tok; }); }
+      function sys() { if (routed) return; routed = true; systemSay(part, after, function () { return P.voice === V && tok === V.tok; }, rate); }
       var PV = phonon();
       if (!V.usePhonon || !PV || !(PV.usable && PV.usable())) { sys(); return; }
       try { if (V.afterMic) { V.afterMic = false; PV.unlock(); } } catch (e) {}   // the mic session may have quieted <audio>; re-prime it
-      try { if (chunks[idx]) PV.prefetch(chunks[idx]); } catch (e) {}
-      var wd = G.setTimeout(function () { try { PV.stop(); } catch (e) {} sys(); }, sayWatchdogMs(part));
+      try { if (chunks[idx]) PV.prefetch(chunks[idx], rate); } catch (e) {}
+      var wd = G.setTimeout(function () { try { PV.stop(); } catch (e) {} sys(); }, sayWatchdogMs(part, rate));
       function ok() { if (routed) return; routed = true; G.clearTimeout(wd); after(); }
       function bad() { G.clearTimeout(wd); sys(); }
-      try { PV.say(part, 1).then(ok, bad); } catch (e) { bad(); }
+      try { PV.say(part, rate).then(ok, bad); } catch (e) { bad(); }
     }
     if (V.usePhonon == null && V.readyP) V.readyP.then(function (ok) { if (P.voice !== V || tok !== V.tok) return; if (V.usePhonon == null) V.usePhonon = !!ok; next(); });
     else next();
   }
-  function stopListen(V) { G.clearTimeout(V.lt); G.clearTimeout(V.gt); G.clearTimeout(V.pt); if (V.stopL) { try { V.stopL(); } catch (e) {} V.stopL = null; } }
+  function stopListen(V) { V.listening = false; G.clearTimeout(V.lt); G.clearTimeout(V.gt); G.clearTimeout(V.pt); if (V.stopL) { try { V.stopL(); } catch (e) {} V.stopL = null; } }
   function listen(done) {
     var V = P.voice; if (!V) return;
-    var got = false, fin = function (t) { if (got) return; got = true; stopListen(V); V.afterMic = true; if (P.voice === V) done(String(t || "")); };
+    var got = false, fin = function (t, err) { if (got) return; got = true; V.listening = false; stopListen(V); V.afterMic = true; if (P.voice === V) done(String(t || ""), err || ""); };
     function hint(t) { var el = H.root().querySelector("#pvVoiceT"); if (el && t) el.textContent = "Listening… \u201C" + String(t).slice(0, 60) + "\u201D"; }
     // A partial commits only from its top-ranked text, never from a lower-ranked alternative, and only once
     // the whole transcript has settled (partialVote). The V.pt timer fires the commit with no further
@@ -698,15 +779,18 @@
         if (v2.seen) armSettle(Math.max(10, (v2.seen.at + (v2.seen.ms || PARTIAL_MS)) - Date.now()));
       }, ms);
     }
+    V.listening = true;
     try {
       if (nativeListen()) {
-        V.stopL = G.SMD_NATIVE.transcribe({ language: "en-IN", onDevice: "prefer",
+        V.stopL = G.SMD_NATIVE.transcribe({ language: "en-IN", onDevice: "prefer", partialResults: true, maxResults: 5,
           onPartial: function (t) { partial(t); },
           onMatches: function (ms) { if (ms && ms.length) partial(String(ms[0])); },
           // Only this final event's own text: alternatives from an earlier partial are stale and once
           // resurrected the wrong answer ("a kidney problem I think" + a stale "a" recorded A).
           onFinal: function (t) { fin(t); },
-          onError: function () { fin(""); } });
+          // A recogniser error (permission, busy mic, no on-device en-IN) is not a heard-nothing miss:
+          // it must not burn a miss or speak over a broken mic; the caller waits for a tap or Repeat.
+          onError: function () { fin("", "error"); } });
       } else {
         var SR = G.SpeechRecognition || G.webkitSpeechRecognition, rec = new SR();
         rec.lang = "en-IN"; rec.interimResults = true; rec.maxAlternatives = 3;
@@ -715,11 +799,11 @@
           for (var i = 0; i < res.length; i++) alts.push(res[i].transcript);
           if (res.isFinal === false) partial(alts[0]); else fin(pickAlternative(alts, V.opts));
         };
-        rec.onerror = function () { fin(""); }; rec.onend = function () { fin(V.heard || ""); };
+        rec.onerror = function () { fin(V.heard || ""); }; rec.onend = function () { fin(V.heard || ""); };
         V.stopL = function () { try { rec.stop(); } catch (e) {} };
         rec.start();
       }
-    } catch (e) { return fin(""); }
+    } catch (e) { return fin("", "error"); }
     // About 10 s to think; a word still arriving at the limit buys a little more rather than being cut off.
     V.lt = G.setTimeout(function check() {
       if (got) return;
@@ -734,7 +818,7 @@
     if (!canSpeak()) return H.toast("Voice mode needs speech on this phone.");
     if (!proOk()) return;
     if (P.voice) stopVoice();
-    var V = P.voice = { tok: 0, step: {}, listen: canListen(), heard: "", heardAt: 0, opts: [], dl: null, usePhonon: null, readyP: null };
+    var V = P.voice = { tok: 0, step: {}, listen: canListen(), heard: "", heardAt: 0, opts: [], dl: null, usePhonon: null, readyP: null, listening: false, speakingBlock: null };
     V.readyP = prepareVoice(V);
     H.loadingScreen("Voice mode", "Picking 10 questions…");
     draw(3, "voice" + Date.now()).then(function (items) {
@@ -745,70 +829,167 @@
       if (!V.listen) H.toast("Listening is not available here: tap your answer after each question.");
     }, function () { if (P.voice !== V) return; stopVoice(); H.toast("Voice mode needs a connection the first time."); H.rerender(); });
   }
+  // Full clear (leaving or finishing): no voice bar on any later screen or run.
   function stopVoice() {
-    var V = P.voice; if (!V) return;
+    var V = P.voice; P.voiceOff = null; if (!V) return;
     P.voice = null;
-    stopListen(V);
+    V.tok++; stopListen(V);
     hush();
     try { var PV = phonon(); if (PV && PV.release) PV.release(); } catch (e) {}   // as the lessons do on leaving
   }
-  function voiceStep(r) {
+  // The Stop voice button / spoken "stop": the session ends (and release()s, like leaving), but the bar
+  // stays for the rest of this run as "Voice off" with Start voice, across re-renders.
+  function userStopVoice() {
     var V = P.voice; if (!V) return;
+    P.voiceOff = { r: V.r || (H && H.run_ ? H.run_() : null), step: V.step || {} };
+    P.voice = null;
+    V.tok++; stopListen(V);
+    hush();
+    try { var PV = phonon(); if (PV && PV.release) PV.release(); } catch (e) {}
+    paintVoiceBar();
+  }
+  // Start voice after stopping: the same run and questions, answers kept. unlock() runs synchronously
+  // in the tap; a saved voice loads again quietly through prepareVoice (no download card when saved).
+  function resumeVoice() {
+    var PV0 = phonon();
+    if (PV0 && PV0.available && PV0.available()) { try { PV0.unlock(); } catch (e) {} }
+    var off = P.voiceOff; if (!off || !off.r) return;
+    var r = off.r;
+    if ((H.run_ && H.run_()) !== r || r.done) { P.voiceOff = null; return; }
+    if (!canSpeak()) return H.toast("Voice mode needs speech on this phone.");
+    var V = P.voice = { tok: 0, step: off.step || {}, listen: canListen(), heard: "", heardAt: 0, opts: [], dl: null, usePhonon: null, readyP: null, r: r, listening: false, speakingBlock: null };
+    P.voiceOff = null;
+    V.readyP = prepareVoice(V);
+    paintVoiceBar();
+    var st = V.step[r.i] || (V.step[r.i] = { asked: false, told: false });
+    if (r.ans[r.i] < 0) st.asked = false; else st.told = false;   // an unanswered question is read again; an answered one retells its feedback and moves on
+    voiceStep(r);
+  }
+  // Repeat: stop speech and mic, clear the miss count, then re-read (the question, or the feedback after
+  // answering, which advances as usual). Also the way back from "Tap your answer" after backgrounding.
+  function repeatVoice() {
+    var PV0 = phonon();
+    if (PV0 && PV0.available && PV0.available()) { try { PV0.unlock(); } catch (e) {} }
+    var V = P.voice; if (!V || !V.r) return;
+    var r = V.r, i = r.i; if (r.done) return;
+    var st = V.step[i] || (V.step[i] = { asked: false, told: false });
+    V.muted = false;
+    V.lgen = (V.lgen || 0) + 1;   // a final still owed by the stopped recogniser must not answer now
+    V.tok++; stopListen(V); hush();
+    st.miss = 0;
+    if (r.ans[i] < 0) st.asked = false; else st.told = false;
+    voiceStep(r);
+  }
+  // The speed button: lessons' next step, same saved rate. Only saves while listening; during reading it
+  // restarts the current block at the new speed (tok + hush, so nothing overlaps or goes stale).
+  function cycleVoiceSpeed() {
+    setVoiceRate(nextSpeedOf(voiceRate()));
+    paintVoiceBar();
+    var V = P.voice; if (!V || V.listening) return;
+    if (V.speakingBlock === "ask" || V.speakingBlock === "fb") {
+      var r = V.r, block = V.speakingBlock; if (!r) return;
+      V.tok++; stopListen(V); hush();
+      if (block === "ask") speakAsk(r, r.i); else speakFb(r, r.i);
+    }
+  }
+  // Spoken slower/faster: one clamped step, a brief status only (no spoken sentence), then listen again.
+  function spokenSpeed(cmd, r, i) {
+    var ss = speedsOf(), ix = ss.indexOf(voiceRate()); if (ix < 0) ix = ss.indexOf(1);
+    var n = cmd === "slower" ? Math.max(0, ix - 1) : Math.min(ss.length - 1, ix + 1);
+    setVoiceRate(ss[n]);
+    paintVoiceBar();
+    sayStatus((cmd === "slower" ? "Slower \u00B7 " : "Faster \u00B7 ") + speedLabelOf(ss[n]));
+    var V = P.voice; if (!V) return;
+    G.clearTimeout(V.gt);
+    V.gt = G.setTimeout(function () { doListen(r, i); }, 900);
+  }
+  function paintVoiceBar() {
+    var root = H && H.root && H.root(), chip = root && root.querySelector("#pvVoice"); if (!chip) return;
+    var prev = chip.querySelector("#pvVoiceT"), off = !P.voice, keep = !off && prev && prev.textContent !== "Voice off" ? prev.textContent : "", rate = voiceRate();
+    chip.innerHTML = '<span class="pv-vstat">' + ic(IC.voice, 18) + ' <span id="pvVoiceT">' + esc(keep || (off ? "Voice off" : "Voice mode")) + '</span></span>' +
+      '<span class="pv-vbtns"><button type="button" class="pn-link pv-vspd" data-act="v-voicespeed" aria-label="Reading speed ' + rate + ' times, change">' + esc(speedLabelOf(rate)) + '</button>' +
+      (off ? '<button type="button" class="pn-link" data-act="v-voicestart">Start voice</button>' : '<button type="button" class="pn-link" data-act="v-voicerepeat">Repeat</button><button type="button" class="pn-link" data-act="v-voicestop">Stop voice</button>') + '</span>';
+  }
+  function ensureVoiceBar() {
+    var bar = H.root().querySelector(".pn-bar");
+    if (bar && !H.root().querySelector("#pvVoice")) bar.insertAdjacentHTML("afterend", '<div class="pv-voicebar" id="pvVoice" role="status"></div><div id="pvVoiceDl"></div>');
+    paintVoiceBar();
+    voiceDlPaint();
+  }
+  function speakAsk(r, i) {
+    var V = P.voice, it = r.items[i]; if (!V || !it) return;
+    V.opts = it.o;
+    sayStatus("Reading the question");
+    speak([it.q + "."].concat(it.o.map(function (o, k) { return "Option " + L[k] + ". " + o + "."; })), function () {
+      if (P.voice !== V || V.r !== r || r.i !== i) return;
+      if (!V.listen || r.ans[i] >= 0) return sayStatus("Tap your answer");
+      doListen(r, i);
+    }, "ask");
+  }
+  function speakFb(r, i) {
+    var V = P.voice, it = r.items[i]; if (!V || !it) return;
+    stopListen(V);
+    var ok = r.ans[i] === it.a, why = firstSentence(it.exp || (it.x && it.x.key), 240);
+    sayStatus(ok ? "Right" : "The answer is " + L[it.a]);
+    speak([(ok ? "Right. " : "Not quite. The answer is " + L[it.a] + ", " + it.o[it.a] + ". "), why], function () {
+      if (P.voice !== V || V.r !== r || r.i !== i) return;
+      var nx = H.root().querySelector("[data-act=next]"); if (nx) nx.click();
+    }, "fb");
+  }
+  // The mic opens only once playback has fully ended, with a short gap so the voice's own tail is not heard.
+  function doListen(r, i) {
+    var V = P.voice; if (!V || V.muted) return;
+    var it = r.items[i]; if (!it) return;
+    var st = V.step[i] || (V.step[i] = { asked: false, told: false });
+    if (V.r !== r || r.i !== i || r.ans[i] >= 0) return;
+    sayStatus(listenText(it.o.length));
+    V.heard = ""; V.seen = null; V.extended = false;
+    var gen = (V.lgen = (V.lgen || 0) + 1);
+    V.gt = G.setTimeout(function () {
+      if (P.voice !== V || V.r !== r || r.i !== i || r.ans[i] >= 0) return;
+      listen(function (t, err) {
+        if (P.voice !== V || V.muted || V.lgen !== gen || V.r !== r || r.i !== i || r.ans[i] >= 0) return;
+        if (err) return sayStatus("Tap your answer");
+        var p = parseVoice(t, it.o);
+        if (p && p.cmd === "stop") return userStopVoice();
+        if (p && p.cmd === "repeat") { st.miss = 0; st.asked = false; return voiceStep(r); }
+        if (p && p.cmd === "skip") { var nx = H.root().querySelector("[data-act=next]"); r.ans[i] = -2; return nx ? nx.click() : H.finish(); }
+        if (p && (p.cmd === "slower" || p.cmd === "faster")) return spokenSpeed(p.cmd, r, i);
+        if (!p) {
+          // Two misses on a question: stop asking and wait for a tap (no endless "sorry" loop). A first
+          // miss shows what was heard and repeats the short prompt; "repeat" re-reads the whole question.
+          // The heard text is only ever shown here: never logged or sent anywhere.
+          st.miss = (st.miss || 0) + 1;
+          if (st.miss >= 2) return sayStatus("Tap your answer");
+          sayStatus(missHeard(t, it.o.length));
+          return speak(missSay(it.o.length), function () { doListen(r, i); });
+        }
+        var b = H.root().querySelector('.pn-opt[data-k="' + p.k + '"]'); if (b) b.click();
+      });
+    }, 250);
+  }
+  function voiceStep(r) {
+    if (!P.voice) {
+      // Stopped earlier in this run: the "Voice off" bar survives re-renders of this run only.
+      var off = P.voiceOff;
+      if (off && r && off.r === r && !r.done) ensureVoiceBar();
+      else if (off) P.voiceOff = null;
+      return;
+    }
+    var V = P.voice;
     if (!V.r) V.r = r;   // the first paint happens inside H.run, before startVoice can note the run
     if (V.r !== r) return;
     if (r.done) return stopVoice();
-    var i = r.i, it = r.items[i], st = V.step[i] || (V.step[i] = { asked: false, told: false });
-    var bar = H.root().querySelector(".pn-bar"), chip = H.root().querySelector("#pvVoice");
-    if (bar && !chip) bar.insertAdjacentHTML("afterend", '<div class="pv-voicebar" id="pvVoice" role="status"><span>' + ic(IC.voice, 18) + ' <span id="pvVoiceT">Voice mode</span></span><button type="button" class="pn-link" data-act="v-voicestop">Stop voice</button></div><div id="pvVoiceDl"></div>');
-    voiceDlPaint();
-    var say = function (t) { var el = H.root().querySelector("#pvVoiceT"); if (el) el.textContent = t; };
-    // The mic opens only once playback has fully ended, with a short gap so the voice's own tail is not heard.
-    function doListen() {
-      if (P.voice !== V || V.r !== r || r.i !== i || r.ans[i] >= 0) return;
-      say("Listening… " + choicePrompt(it.o.length));
-      V.heard = ""; V.seen = null; V.extended = false;
-      V.gt = G.setTimeout(function () {
-        if (P.voice !== V || V.r !== r || r.i !== i || r.ans[i] >= 0) return;
-        listen(function (t) {
-          if (P.voice !== V || V.r !== r || r.i !== i || r.ans[i] >= 0) return;
-          var p = parseVoice(t, it.o);
-          if (p && p.cmd === "stop") { stopVoice(); var c = H.root().querySelector("#pvVoice"); if (c) c.remove(); var d = H.root().querySelector("#pvVoiceDl"); if (d) d.remove(); return; }
-          if (p && p.cmd === "repeat") { st.asked = false; return voiceStep(r); }
-          if (p && p.cmd === "skip") { var nx = H.root().querySelector("[data-act=next]"); r.ans[i] = -2; return nx ? nx.click() : H.finish(); }
-          if (!p) {
-            // Two misses on a question: stop asking and wait for a tap (no endless "sorry" loop). A first miss
-            // only repeats the short prompt and listens again; "repeat" is what re-reads the whole question.
-            st.miss = (st.miss || 0) + 1;
-            if (st.miss >= 2) return say("Tap your answer");
-            say("Did not catch that. Say it again");
-            return speak("Sorry, " + choicePrompt(it.o.length) + ".", function () { doListen(); });
-          }
-          var b = H.root().querySelector('.pn-opt[data-k="' + p.k + '"]'); if (b) b.click();
-        });
-      }, 250);
-    }
-    if (r.ans[i] < 0 && !st.asked) {
-      st.asked = true; V.opts = it.o;
-      say("Reading the question");
-      speak([it.q + "."].concat(it.o.map(function (o, k) { return "Option " + L[k] + ". " + o + "."; })), function () {
-        if (!V.listen || r.ans[i] >= 0) return say("Tap your answer");
-        doListen();
-      });
-    } else if (r.ans[i] >= 0 && !st.told) {
-      st.told = true;
-      stopListen(V);
-      var ok = r.ans[i] === it.a, why = firstSentence(it.exp || (it.x && it.x.key), 240);
-      say(ok ? "Right" : "The answer is " + L[it.a]);
-      speak([(ok ? "Right. " : "Not quite. The answer is " + L[it.a] + ", " + it.o[it.a] + ". "), why], function () {
-        if (P.voice !== V || r.i !== i) return;
-        var nx = H.root().querySelector("[data-act=next]"); if (nx) nx.click();
-      });
-    }
+    ensureVoiceBar();
+    var i = r.i, it = r.items[i]; if (!it) return;
+    var st = V.step[i] || (V.step[i] = { asked: false, told: false });
+    if (r.ans[i] < 0 && !st.asked) { st.asked = true; speakAsk(r, i); }
+    else if (r.ans[i] >= 0 && !st.told) { st.told = true; speakFb(r, i); }
   }
   // Backgrounding must never leave audio or the mic running, nor fire a stale callback afterwards.
   if (G.document && G.document.addEventListener) G.document.addEventListener("visibilitychange", function () {
     if (G.document.visibilityState !== "hidden" || !P.voice) return;
-    var V = P.voice; V.tok++;
+    var V = P.voice; V.tok++; V.muted = true; V.listening = false; V.speakingBlock = null;
     stopListen(V);
     hush();
     // Nothing resumes while hidden, so do not leave a stale "Listening…" behind: the tap path is live.
@@ -992,7 +1173,10 @@
     if (a === "v-bossgo") { if (H.stackTop() !== renderBossList) { var stk = H.stack(); while (stk.length > 1 && stk[stk.length - 1] !== renderBossList) stk.pop(); } return startBoss(v); }
     if (a === "v-quick") return quick();
     if (a === "v-voice") return startVoice();
-    if (a === "v-voicestop") { stopVoice(); var c = H.root().querySelector("#pvVoice"); if (c) c.remove(); return; }
+    if (a === "v-voicestop") return userStopVoice();
+    if (a === "v-voicestart") return resumeVoice();
+    if (a === "v-voicerepeat") return repeatVoice();
+    if (a === "v-voicespeed") return cycleVoiceSpeed();
     if (a === "v-focus") { P.focusN = null; return H.push(renderFocus); }
     if (a === "v-fstart") return startFocus(Number(v) || 25);
     if (a === "v-fend") return endFocus(false);

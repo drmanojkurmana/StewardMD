@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "pat-pituitary-adrenal",
+  "subject": "pathology",
+  "title": "Pituitary Adenomas, Prolactinoma, Acromegaly, Sheehan, Cushing, Conn, Addison, and Phaeochromocytoma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Pituitary adenomas, now pituitary neuroendocrine tumours, arise from hormone cell lineages causing hormone excess, deficiency by compression, and bitemporal hemianopia from optic chiasm pressure above. Function plus mass organises them: **pituitary adenoma (PitNET)**. Lesions under 10 mm are microadenomas and those above are macroadenomas, a size split that predicts visual field loss and guides the urgency of neurosurgical referral.",
+      "say": "Hormone excess, hormone loss, and chiasm pressure: pituitary tumours present in those three voices.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Presentation",
+          "Mechanism",
+          "Example"
+        ],
+        "rows": [
+          [
+            "Hormone excess",
+            "Autonomous secretion",
+            "Prolactin, GH, ACTH adenomas"
+          ],
+          [
+            "Hypopituitarism",
+            "Compression of normal gland",
+            "Thyroid, adrenal, gonadal failure"
+          ],
+          [
+            "Mass effect",
+            "Chiasm and cavernous invasion",
+            "Bitemporal hemianopia, headache"
+          ],
+          [
+            "Apoplexy",
+            "Haemorrhage into adenoma",
+            "Emergency vision and cortisol crisis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Prolactinoma, commonest functioning adenoma, raises prolactin causing galactorrhoea, amenorrhoea, infertility, and low libido, dopamine agonists cabergoline shrinking most without surgery. That dopamine cured tumour is the **prolactinoma**. Cabergoline normalises prolactin in most microadenomas and many macroadenomas, so surgery is reserved for drug intolerance, resistance, cerebrospinal fluid leak or apoplexy with deteriorating vision.",
+      "say": "Cabergoline first for prolactinoma, even large ones; surgery waits for resistance, intolerance, or apoplexy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/prolactinoma-fig1.webp",
+        "alt": "Prolactinoma sellar anatomy",
+        "caption": "Prolactinoma sellar anatomy beside optic chiasm and cavernous sinuses."
+      }
+    },
+    {
+      "tx": "Stalk effect modestly raises prolactin from any sellar mass interrupting dopamine delivery, separating prolactinomas with levels often above two hundred from compression hyperprolactinaemia. That level logic is **stalk effect versus prolactinoma prolactin levels**. Stalk compression seldom pushes prolactin beyond about 100 to 150 ng per mL, and the hook effect can falsely lower readings in giant prolactinomas unless the sample is diluted.",
+      "say": "Prolactin over two hundred thinks adenoma; modest elevation beside a big mass thinks stalk compression.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "True prolactinoma",
+          "points": [
+            "Prolactin very high, matches size",
+            "Cabergoline shrinks tumour",
+            "Hook effect excluded by dilution in giants"
+          ]
+        },
+        "right": {
+          "title": "Stalk effect",
+          "points": [
+            "Prolactin modestly raised",
+            "Any sellar mass compressing stalk",
+            "Treat mass cause, not dopamine alone"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Acromegaly grows jaw, hands, feet, and organs from growth hormone adenoma IGF-1 excess over years, diabetes hypertension sleep apnoea and cardiomyopathy shortening untreated life. That slow giantism is **acromegaly of growth hormone excess**. Age matched IGF-1 screens the disease, and failure of growth hormone to suppress below threshold after an oral glucose load confirms autonomous secretion before MRI hunting begins.",
+      "say": "Enlarging rings, shoes, jaw, and blood pressure over years mean acromegaly; IGF-1 screens it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acromegaly-fig1.webp",
+        "alt": "Acromegaly clinical features",
+        "caption": "Acromegaly clinical features across face, hands, and metabolic systems."
+      }
+    },
+    {
+      "tx": "Sheehan syndrome necroses the pregnancy enlarged pituitary after postpartum haemorrhagic shock, lactation failure first herald, empty sella and hypopituitarism following variably for years. That obstetric necrosis is **Sheehan syndrome (postpartum pituitary necrosis)**. Prolactin failure shows first as inability to lactate, while ACTH deficiency may surface years later as fatigue and hyponatraemia during an intercurrent illness.",
+      "say": "Failure to lactate after postpartum haemorrhage opens Sheehan syndrome; cortisol deficiency may hide for years.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Pregnancy enlarged pituitary"
+          },
+          {
+            "id": "b",
+            "label": "Postpartum haemorrhage and shock"
+          },
+          {
+            "id": "c",
+            "label": "Pituitary necrosis, lactation failure"
+          },
+          {
+            "id": "d",
+            "label": "Empty sella, hormone replacement sequenced"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Craniopharyngioma grows calcified cystic suprasellar tumours from Rathke remnants in children and older adults, diabetes insipidus and growth failure beside visual loss, surgery and radiation balancing hypothalamic harm. That cystic tumour is **craniopharyngioma**. Adamantinomatous tumours of childhood carry CTNNB1 changes and wet keratin nodules, while papillary tumours of adults often harbour BRAF V600E and behave somewhat less aggressively.",
+      "say": "Calcified cystic suprasellar mass in a child with growth failure thinks craniopharyngioma first.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Diabetes insipidus central",
+          "points": [
+            "ADH absent, dilute polyuria",
+            "Desmopressin responds",
+            "Sellar and stalk causes"
+          ]
+        },
+        "right": {
+          "title": "Diabetes insipidus nephrogenic",
+          "points": [
+            "Kidney resists ADH",
+            "Lithium, hypercalcaemia causes",
+            "Desmopressin fails, treat cause"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cushing syndrome cortisols from pituitary ACTH adenoma Cushing disease commonest endogenous, adrenal adenoma, or ectopic ACTH, Conn syndrome aldosterone hypertension hypokalaemia beside it in adrenal teaching. Those adrenal voices are **Cushing disease versus Conn syndrome (primary aldosteronism)**. A raised aldosterone to renin ratio screens for Conn syndrome, while late night salivary cortisol and dexamethasone suppression testing open the Cushing workup before imaging either gland.",
+      "say": "Cortisol rounds and weakens, aldosterone pressurises and wastes potassium; adrenal syndromes separate by hormone.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cortisol-producing-adenoma-fig1.webp",
+        "alt": "Cortisol adenoma Cushing syndrome",
+        "caption": "Cortisol producing adenoma causing adrenal Cushing syndrome."
+      }
+    },
+    {
+      "tx": "Addison disease destroys adrenal cortex autoimmune chiefly, hyperpigmentation ACTH driven beside fatigue salt craving hypotension, Waterhouse-Friderichsen haemorrhage collapsing meningococcal sepsis patients, phaeochromocytoma catecholamine storms completing adrenal emergencies with its rule of ten teaching. Those catastrophes are **Addison disease, Waterhouse-Friderichsen, and phaeochromocytoma rule of ten**. Suspected adrenal crisis earns immediate hydrocortisone and saline without waiting for cortisol results, because delay, not diagnostic purity, is what kills in that first hour.",
+      "say": "Pigmented exhaustion means Addison; catecholamine storms mean phaeochromocytoma, ten percent bilateral, malignant, extra adrenal, familial classically.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Emergency",
+          "Signature",
+          "First move"
+        ],
+        "rows": [
+          [
+            "Adrenal crisis (Addison)",
+            "Hypotension, pigmentation, hyponatraemia",
+            "Steroids and fluids without waiting"
+          ],
+          [
+            "Waterhouse-Friderichsen",
+            "Meningococcal sepsis, adrenal haemorrhage",
+            "Antibiotics, steroids, intensive care"
+          ],
+          [
+            "Phaeochromocytoma crisis",
+            "Paroxysmal hypertension, sweating, palpitations",
+            "Alpha blockade before beta, fluids"
+          ],
+          [
+            "Pituitary apoplexy",
+            "Thunderclap headache, vision loss",
+            "Steroids, neurosurgery review"
+          ]
+        ]
+      }
+    }
+  ]
+}

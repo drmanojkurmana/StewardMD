@@ -1,0 +1,243 @@
+{
+ "v": 1,
+ "id": "psy-other-substances-cannabis",
+ "subject": "psychiatry",
+ "module": "psy-other-substances",
+ "title": "Cannabis, Cocaine, and Psychostimulant Misuse Syndromes",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Cannabis pharmacology** is driven by its primary psychoactive cannabinoid delta-9-tetrahydrocannabinol (THC), which acts as a partial agonist at presynaptic CB1 receptors in the basal ganglia, cerebellum, and cerebral cortex. Acute intoxication characteristically causes bilateral conjunctival injection (ciliary flush), dry mouth, resting tachycardia, and intense hyperphagia.",
+   "say": "Cannabis THC activates central CB1 receptors, producing acute intoxication marked by conjunctival injection, dry mouth, tachycardia, and increased appetite.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/substance-use-disorder-fig1.webp",
+    "alt": "Mesolimbic dopamine reward pathway activation and monoamine transporter blockade by psychostimulants",
+    "caption": "Mesolimbic dopamine reward pathway activation and monoamine transporter blockade by psychostimulants.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Amotivational syndrome** represents a chronic neurobehavioral disturbance developing in regular, heavy cannabis users, characterized by pervasive apathy, avolition, loss of ambition, and severe cognitive slowing. Sufferers become chronically indifferent to academic achievement, career advancement, and personal hygiene, displaying blunted emotional reactivity.",
+   "say": "Amotivational syndrome arises from heavy chronic cannabis use, causing persistent apathy, loss of ambition, and academic and social decline.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Amotivational Syndrome",
+     "points": [
+      "Pervasive apathy and loss of personal drive",
+      "Impaired concentration and working memory",
+      "Dropping out of employment or university",
+      "Slow insidious onset with heavy cannabis use"
+     ]
+    },
+    "right": {
+     "title": "Cannabis-Induced Psychosis",
+     "points": [
+      "Acute onset of persecutory delusions",
+      "Auditory and visual hallucinations",
+      "Marked paranoia and panic agitation",
+      "Precipitated by high-potency synthetic THC"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cannabis-induced psychotic disorder** presents as an acute psychotic episode triggered by high-potency THC consumption, featuring prominent paranoid persecutory delusions, auditory hallucinations, depersonalisation, and acute panic. While symptoms typically resolve within days of cessation, adolescent exposure substantially increases lifetime vulnerability to developing chronic schizophrenia.",
+   "say": "Cannabis can trigger acute paranoia and auditory hallucinations. Heavy adolescent use significantly increases the lifetime risk of developing schizophrenia.",
+   "vis": {
+    "kind": "flow",
+    "title": "Cannabis and Psychosis Vulnerability",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Adolescent cannabis exposure during active prefrontal pruning"
+     },
+     {
+      "id": "n2",
+      "label": "Dysregulation of central endocannabinoid and dopaminergic pathways"
+     },
+     {
+      "id": "n3",
+      "label": "Acute cannabis-induced psychotic decompensation with paranoia"
+     },
+     {
+      "id": "n4",
+      "label": "Substantial permanent increase in schizophrenia transition risk"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cocaine mechanism of action** operates by binding to and blocking presynaptic monoamine reuptake transporters, specifically the dopamine transporter (DAT), noradrenaline transporter (NET), and serotonin transporter (SERT). The resultant massive accumulation of synaptic dopamine in the nucleus accumbens drives intense euphoria, hyper-alertness, grandiosity, and intense addiction.",
+   "say": "Cocaine blocks dopamine, noradrenaline, and serotonin reuptake transporters, flooding the nucleus accumbens to induce intense euphoria and addiction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Central Effects",
+     "points": [
+      "Dopamine transporter (DAT) blockade",
+      "Intense orgasmic euphoria and alertness",
+      "Grandiose self-confidence and hypersexuality",
+      "Rapid psychological dependence"
+     ]
+    },
+    "right": {
+     "title": "Peripheral Sympathetic Effects",
+     "points": [
+      "Noradrenaline transporter (NET) blockade",
+      "Severe arterial hypertension & tachycardia",
+      "Coronary artery vasospasm & infarction",
+      "Mydriasis and hyperpyrexia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Magnan sign and formication** describe a bizarre tactile hallucinatory phenomenon classically encountered in chronic cocaine intoxication and delirium. Patients experience vivid sensations of insects, parasites, or worms crawling across or beneath their skin ('cocaine bugs'), prompting frantic, excoriating scratching that produces extensive ulcerations and needle-like skin gouges.",
+   "say": "Magnan sign is a tactile hallucination in chronic cocaine use where patients feel bugs crawling under their skin, causing frantic scratching and ulcers.",
+   "vis": {
+    "kind": "table",
+    "title": "Tactile Hallucinations Compared",
+    "cols": [
+     "Eponym / Term",
+     "Substance / Condition",
+     "Somatic Perception"
+    ],
+    "rows": [
+     [
+      "Magnan sign",
+      "Chronic cocaine psychosis",
+      "Insects or lice crawling under cutaneous tissue"
+     ],
+     [
+      "Formication",
+      "Alcohol withdrawal & delirium",
+      "Small ants crawling across skin surface"
+     ],
+     [
+      "Ekbom syndrome",
+      "Delusional parasitosis (primary)",
+      "Fixed non-bizarre belief of skin parasite infection"
+     ],
+     [
+      "Tactile aura",
+      "Focal sensory epilepsy",
+      "Unilateral tingling or electric shock sensations"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cardiovascular complications of cocaine** stem from potent sympathomimetic stimulation combined with local anaesthetic blockade of cardiac voltage-gated sodium channels. Cocaine induces severe coronary artery vasoconstriction, accelerates platelet aggregation, and drastically increases myocardial oxygen demand, precipitating acute myocardial infarction even in young individuals.",
+   "say": "Cocaine causes coronary vasospasm, accelerated platelet thrombosis, and arrhythmias, precipitating acute myocardial infarction in young healthy individuals.",
+   "vis": {
+    "kind": "table",
+    "title": "Cocaine Cardiovascular Complications",
+    "cols": [
+     "Complication",
+     "Underlying Mechanism",
+     "Clinical Management"
+    ],
+    "rows": [
+     [
+      "Coronary vasospasm",
+      "Alpha-1 mediated coronary vasoconstriction",
+      "Benzodiazepines & nitroglycerin; avoid beta-blockers"
+     ],
+     [
+      "Myocardial infarction",
+      "Vasospasm combined with acute platelet thrombosis",
+      "Aspirin, nitrates, emergent coronary catheterization"
+     ],
+     [
+      "Aortic dissection",
+      "Acute severe malignant hypertension spike",
+      "Intravenous nitroprusside or labetalol with caution"
+     ],
+     [
+      "Ventricular arrhythmia",
+      "Blockade of cardiac sodium channels (Class I effect)",
+      "Intravenous sodium bicarbonate and lidocaine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Amphetamine psychosis** develops during binge consumption of methamphetamine or dextroamphetamine, presenting with persecutory delusions, auditory hallucinations, extreme paranoia, and aggressive agitation. Clinically identical to paranoid schizophrenia, it is driven by massive amphetamine-induced vesicular release and reverse transport of dopamine via DAT.",
+   "say": "Amphetamine psychosis mimics paranoid schizophrenia with delusions and auditory hallucinations, driven by massive reverse-transport release of dopamine.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Amphetamine Psychosis",
+     "points": [
+      "Vesicular release and reverse DAT transport",
+      "Prominent tactile and visual hallucinations",
+      "Extreme hyperactivity and marked bruxism",
+      "Typically resolves within days of abstinence"
+     ]
+    },
+    "right": {
+     "title": "Paranoid Schizophrenia",
+     "points": [
+      "Primary neurodevelopmental dopamine dysregulation",
+      "Predominantly third-person auditory hallucinations",
+      "Affective blunting and formal thought disorder",
+      "Lifelong chronic deteriorating course"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**LSD flashbacks**, formally categorized as Hallucinogen Persisting Perception Disorder (HPPD), involve the spontaneous, distressing recurrence of perceptual distortions experienced during previous lysergic acid diethylamide (LSD) intoxication. Sufferers experience geometric visual hallucinations, false perceptions of movement in peripheral fields, flashes of color, and trailing images (palinopsia).",
+   "say": "LSD flashbacks involve recurrent visual disturbances like trailing images and halos months after drug use, designated hallucinogen persisting perception disorder.",
+   "vis": {
+    "kind": "table",
+    "title": "HPPD Perceptual Phenomena",
+    "cols": [
+     "Phenomenon",
+     "Visual Experience",
+     "Distinguishing Feature"
+    ],
+    "rows": [
+     [
+      "Palinopsia",
+      "Trailing visual images following moving objects",
+      "Persists across visual field after movement ceases"
+     ],
+     [
+      "Visual snow",
+      "Pervasive flickering dots resembling TV static",
+      "Constant graininess across entire visual field"
+     ],
+     [
+      "Halos & glares",
+      "Intense glowing rings encircling objects",
+      "Particularly prominent in low-light environments"
+     ],
+     [
+      "Micropsia / Macropsia",
+      "Objects appear abnormally tiny or magnified",
+      "Cortical visual processing distortion without retinal lesion"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

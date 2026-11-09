@@ -1,0 +1,254 @@
+{
+ "key": "ped-thyroid-adrenal-congenital-adrenal-hyperplasia",
+ "v": 1,
+ "module": "ped-thyroid-adrenal",
+ "subject": "paediatrics",
+ "title": "Pediatric Adrenal Crisis: CAH, 21-Hydroxylase, and Salt Wasting",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Autosomal recessive enzymatic blocks in adrenal steroidogenesis impair cortisol biosynthesis while triggering compensatory pituitary hypersecretion. Accounting for over ninety percent of cases, **pediatric congenital adrenal hyperplasia** (CAH) results from mutations in the CYP21A2 gene on chromosome 6p21 encoding 21-hydroxylase enzyme. Deficient cortisol synthesis abolishes negative feedback, driving massive ACTH hypersecretion and severe bilateral adrenocortical hyperplasia.",
+   "say": "Congenital adrenal hyperplasia is an autosomal recessive disorder caused by 21-hydroxylase deficiency in ninety percent of cases. Absent cortisol drives ACTH hypersecretion and adrenal hyperplasia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/congenital-adrenal-hyperplasia-fig1.webp",
+    "alt": "Clinical photograph showing clitoromegaly and labioscrotal fusion in a virilized 46,XX infant with congenital adrenal hyperplasia.",
+    "caption": "Ambiguous virilized external genitalia with clitoromegaly and labioscrotal fusion in a 46,XX newborn with CAH. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Blockade of the 21-hydroxylase enzymatic pathway diverts upstream steroid precursors into unchecked adrenal androgen synthesis. Accumulation of steroid intermediates behind the enzymatic block drives massive shunting into the androgenic pathway, generating excess **17-hydroxyprogesterone and androgens in CAH**, including androstenedione and testosterone. In genetically female 46,XX fetuses, exposure to high circulating androgens during embryogenesis causes intrauterine virilization of external genitalia.",
+   "say": "Enzymatic blockade shunts accumulated 17-hydroxyprogesterone into androgens. This virilizes the external genitalia of 46,XX female infants in utero.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Enzymatic Step in Adrenal Steroidogenesis",
+     "Substrate Precursor Accumulation",
+     "Deficient Downstream Product",
+     "Clinical Pathological Consequence"
+    ],
+    "rows": [
+     [
+      "21-Hydroxylase (CYP21A2)",
+      "Massive 17-OH progesterone & Progesterone",
+      "Deficient Cortisol & Aldosterone",
+      "Salt-wasting crisis + Ambiguous genitalia in 46,XX"
+     ],
+     [
+      "11-beta-Hydroxylase (CYP11B1)",
+      "11-Deoxycortisol & 11-Deoxycorticosterone",
+      "Deficient Cortisol; excess DOC (mineralocorticoid)",
+      "Virilization + Systemic Hypertension + Hypokalaemia"
+     ],
+     [
+      "17-alpha-Hydroxylase (CYP17A1)",
+      "Progesterone & Corticosterone excess",
+      "Deficient Cortisol & Sex Androgens",
+      "Systemic Hypertension + Sexual Infantilism"
+     ],
+     [
+      "3-beta-Hydroxysteroid dehydrogenase",
+      "Pregnenolone, DHEA accumulation",
+      "Deficient all steroids (Cortisol, Aldosterone, Sex)",
+      "Severe salt-wasting + Incomplete virilization in males"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anatomical masculinization of external genitalia in female neonates spans a spectrum from mild clitoromegaly to complete urethral penile transposition. Standardized classification under the **Prader staging of virilization** categorizes genital ambiguity from Stage I, marked by isolated clitoral hypertrophy, to Stage V, characterized by a completely masculinized phallus with a penile tip urethral meatus and empty bifid scrotum.",
+   "say": "Prader staging categorizes virilization from Stage one clitoromegaly to Stage five complete penile masculinization. In genetic females, ovaries and uterus are normal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prader Virilization Stages",
+     "points": [
+      "Stage I: clitoromegaly without labial fusion",
+      "Stage II: clitoromegaly with posterior labial fusion",
+      "Stage III: enlarged phallus with common urogenital sinus",
+      "Stage IV & V: phallic urethra, complete scrotal fusion"
+     ]
+    },
+    "right": {
+     "title": "Internal Mullerian Structures",
+     "points": [
+      "Absence of testes means zero Anti-Mullerian Hormone (AMH)",
+      "Fallopian tubes, uterus, and upper vagina develop normally",
+      "Pelvic ultrasound confirms normal female internal genitalia",
+      "Urgent karyotype confirms 46,XX chromosomal status"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Concomitant aldosterone deficiency prevents distal renal tubular sodium reabsorption and potassium excretion. In seventy-five percent of infants with classical 21-hydroxylase deficiency, the **neonatal salt-wasting crisis in CAH** emerges acutely between seven and twenty-one days of life. Male infants appear completely normal at birth without ambiguous genitalia, presenting late with poor feeding, vomiting, dehydration, shock, and profound failure to thrive.",
+   "say": "Aldosterone deficiency causes a salt-wasting crisis at one to three weeks of life. Male infants have normal genitalia and present with vomiting, shock, and hyperkalemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Laboratory / Clinical Parameter",
+     "Diagnostic Finding in Salt-Wasting Crisis",
+     "Underlying Pathophysiology",
+     "Emergency Clinical Action"
+    ],
+    "rows": [
+     [
+      "Serum sodium concentration",
+      "Severe hyponatraemia (<125 mEq/L)",
+      "Renal wasting of sodium from zero aldosterone",
+      "Resuscitate with 0.9% normal saline bolus"
+     ],
+     [
+      "Serum potassium concentration",
+      "Severe hyperkalaemia (>6.5-8.0 mEq/L)",
+      "Impaired distal potassium secretion",
+      "Continuous ECG monitoring; calcium gluconate"
+     ],
+     [
+      "Blood glucose concentration",
+      "Hypoglycaemia (<50 mg/dL)",
+      "Absent cortisol-mediated gluconeogenesis",
+      "Administer 10% dextrose bolus (2 mL/kg)"
+     ],
+     [
+      "Venous blood gas (ABG)",
+      "Normal anion gap metabolic acidosis",
+      "Impaired distal hydrogen ion excretion",
+      "Reverses with volume and steroid replacement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Measurement of markedly elevated steroid precursors provides definitive biochemical confirmation in suspected CAH. Measuring serum **17-hydroxyprogesterone diagnostic levels** demonstrates dramatic elevations, typically exceeding one thousand to ten thousand nanograms per decilitre (normal below one hundred). Universal newborn screening utilizes heel-prick dried blood spots, measuring 17-OHP by immunoassay at forty-eight to seventy-two hours of life.",
+   "say": "Markedly elevated serum 17-hydroxyprogesterone exceeding one thousand nanograms confirms 21-hydroxylase deficiency. Universal newborn heel-prick screening saves lives.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diagnostic Biochemical Markers",
+     "points": [
+      "Serum 17-hydroxyprogesterone (17-OHP) >1,000-10,000 ng/dL",
+      "Markedly elevated plasma renin activity (PRA)",
+      "Elevated serum ACTH and adrenal androstenedione",
+      "Low or undetectable serum cortisol and aldosterone"
+     ]
+    },
+    "right": {
+     "title": "Newborn Dried Blood Screening",
+     "points": [
+      "Heel-prick dried blood spot on filter paper",
+      "Optimal sampling at 48 to 72 hours of life",
+      "Thresholds adjusted for birth weight and gestational age",
+      "Identifies affected male infants before fatal shock"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acute adrenal crisis represents a hyperkalemic, hyponatremic, hypovolemic emergency demanding immediate intravenous resuscitation. Immediate therapy for an **acute adrenal crisis protocol** begins with aggressive volume expansion using twenty millilitres per kilogram of isotonic 0.9% normal saline with ten percent dextrose, followed by immediate intravenous stress-dose hydrocortisone (fifty to one hundred milligrams per square metre bolus). Potassium solutions are strictly contraindicated.",
+   "say": "Treat adrenal crisis with normal saline and dextrose boluses, followed immediately by IV stress-dose hydrocortisone. Never administer fluids containing potassium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Resuscitation Step",
+     "Medication / Fluid Administered",
+     "Dosing Protocol",
+     "Clinical Therapeutic Target"
+    ],
+    "rows": [
+     [
+      "Fluid expansion",
+      "Isotonic 0.9% normal saline + 10% dextrose",
+      "20 mL/kg bolus over 30 to 60 minutes",
+      "Restores intravascular volume & corrects hypoglycaemia"
+     ],
+     [
+      "Stress-dose glucocorticoid",
+      "Intravenous hydrocortisone sodium succinate",
+      "50-100 mg/m2 stat bolus, then divided q6h",
+      "Provides immediate glucocorticoid & mineralocorticoid action"
+     ],
+     [
+      "Hyperkalaemia stabilization",
+      "10% Calcium gluconate (0.5 mL/kg IV over 10 min)",
+      "Membrane stabilization if ECG shows peaked T",
+      "Does not lower potassium; protects myocardium"
+     ],
+     [
+      "Potassium-lowering agents",
+      "Salbutamol nebulization or IV glucose-insulin",
+      "Promotes intracellular potassium shift",
+      "Eliminates dangerous cardiac arrhythmias"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lifelong dual hormonal replacement therapy substitutes deficient physiological hormones while suppressing abnormal androgen hypersecretion. Long-term maintenance therapy utilizes **oral hydrocortisone and fludrocortisone in CAH**, administering physiological hydrocortisone (ten to fifteen milligrams per square metre daily in three divided doses) to suppress pituitary ACTH, alongside mineralocorticoid replacement with oral fludrocortisone (0.05 to 0.2 milligrams daily) and sodium chloride supplementation.",
+   "say": "Lifelong treatment requires oral hydrocortisone to suppress ACTH and fludrocortisone to replace aldosterone. Infant diets require supplemental sodium chloride.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hydrocortisone Replacement (Glucocorticoid)",
+     "points": [
+      "Dose: 10 to 15 mg/m2/day divided in 3 doses",
+      "Highest dose in early morning to blunt ACTH surge",
+      "Suppresses excessive adrenal androgen production",
+      "Prevents precocious pseudopuberty and bone age advancement"
+     ]
+    },
+    "right": {
+     "title": "Fludrocortisone Replacement (Mineralocorticoid)",
+     "points": [
+      "Dose: 0.05 to 0.2 mg once daily orally",
+      "Normalizes serum sodium, potassium, and plasma renin",
+      "Oral sodium chloride (1-2 g/day) added in infancy",
+      "Dose adjusted based on blood pressure and renin levels"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "During physiological stress, infection, or surgery, steroid clearance accelerates, necessitating immediate dose escalation to avert fatal crisis. Parents are instructed in **stress dosing rules in adrenal insufficiency**, requiring tripling of the baseline oral hydrocortisone dose during febrile illnesses or minor procedures. If persistent vomiting or diarrhea prevents oral absorption, parents must immediately administer intramuscular hydrocortisone and seek emergency medical care.",
+   "say": "Triple the oral hydrocortisone dose during fever or minor illnesses. If the child vomits, administer intramuscular hydrocortisone immediately to prevent collapse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physiological Stress Setting",
+     "Hydrocortisone Dose Adjustment",
+     "Route of Administration",
+     "Parental Emergency Action"
+    ],
+    "rows": [
+     [
+      "Febrile illness (Temp >38.5 C)",
+      "Triple the maintenance dose (3x normal)",
+      "Oral divided three times daily",
+      "Continue until fever resolves completely"
+     ],
+     [
+      "Gastroenteritis with vomiting",
+      "Administer stress dose parenterally",
+      "Intramuscular hydrocortisone (50-100 mg)",
+      "Immediate transport to emergency department"
+     ],
+     [
+      "Major surgical procedure",
+      "High-dose stress regimen (100 mg/m2/day)",
+      "Continuous IV or divided q6h",
+      "Preoperative bolus on call to operating room"
+     ],
+     [
+      "Medical alert identification",
+      "Emergency medical jewelry / wallet card",
+      "Specifies diagnosis and hydrocortisone need",
+      "Crucial for emergency medical responders"
+     ]
+    ]
+   }
+  }
+ ]
+}

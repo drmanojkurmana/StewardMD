@@ -1,0 +1,146 @@
+{
+  "v": 1,
+  "id": "cm-behavioural-bg-prasad-scale",
+  "subject": "community-medicine",
+  "module": "cm-behavioural",
+  "title": "BG Prasad and Udai Pareek Scales, Maslow, Sick Role, and Social Security",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "BG Prasad scale: per capita income",
+      "tx": "The **BG Prasad socioeconomic scale** classifies families by per capita monthly income alone into five classes (class I highest), designed in 1961 for both rural and urban India. Because income bands fossilise, they are updated with the All India Consumer Price Index through a linking factor chain (1961 base to current). Examiners ask its basis (per capita income), its five classes, and why revision is mandatory.",
+      "say": "BG Prasad uses per capita monthly income only, five classes, rural and urban. Update it with the price index or it misclassifies everyone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "bg1", "label": "Total family income over family size" },
+          { "id": "bg2", "label": "Per capita monthly income obtained" },
+          { "id": "bg3", "label": "Match to updated class I to V bands" }
+        ],
+        "edges": [["bg1", "bg2"], ["bg2", "bg3"]]
+      }
+    },
+    {
+      "title": "Kuppuswamy versus BG Prasad",
+      "tx": "The perennial viva duel **Kuppuswamy versus BG Prasad**: Kuppuswamy sums education, occupation, and income of the head for urban families, while BG Prasad uses per capita income alone for rural and urban alike. Kuppuswamy misleads where the head's status misrepresents the family; Prasad misleads where income is seasonal or concealed. Choosing the scale to the setting is the methodological mark being tested.",
+      "say": "Kuppuswamy: three scores, urban. Prasad: income per head, everywhere. Name the setting before naming the scale.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Kuppuswamy scale",
+          "points": ["Education plus occupation plus income", "Head of family scored", "Urban families, total 3 to 29"]
+        },
+        "right": {
+          "title": "BG Prasad scale",
+          "points": ["Per capita monthly income only", "Whole family income divided", "Rural and urban, classes I to V"]
+        }
+      }
+    },
+    {
+      "title": "Updating income scales with CPI",
+      "tx": "Inflation silently demotes every family on a fixed income scale, so **updating socioeconomic scales** multiplies old bands by the consumer price index linking chain: each new base year's factor compounds onto 1961 values. Revised BG Prasad and Kuppuswamy income slabs are published periodically (including recent rounds using CPI for industrial workers). A thesis quoting unrevised 1961 rupees signals methodological illiteracy instantly.",
+      "say": "Multiply old income bands by the price index chain. Unrevised rupee bands from 1961 classify nobody correctly today.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Scale maintenance", "Method"],
+        "rows": [
+          ["Price index used", "All India CPI (industrial workers)"],
+          ["Linking factors", "Chained across base year revisions"],
+          ["Publication rhythm", "Periodic revised income slabs"],
+          ["Thesis requirement", "State scale version and year used"]
+        ]
+      }
+    },
+    {
+      "title": "Udai Pareek scale for rural families",
+      "tx": "The **Udai Pareek socioeconomic scale** was built for rural India from nine weighted items: caste, occupation, education, level of participation, land holding, housing, farm power (animals and implements), material possessions, and family type and size. Land and farm power capture agrarian wealth that cash income misses seasonally, which is precisely why a rural specific instrument exists beside the income scales.",
+      "say": "Udai Pareek scores nine rural items including land and farm power. Village wealth hides in assets, not monthly cash.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Pareek item", "What it captures"],
+        "rows": [
+          ["Land holding and farm power", "Agrarian productive wealth"],
+          ["Housing and possessions", "Accumulated living standard"],
+          ["Caste and participation", "Social standing and influence"],
+          ["Education and occupation", "Human capital"]
+        ]
+      }
+    },
+    {
+      "title": "Maslow hierarchy of needs",
+      "tx": "**Maslow hierarchy of needs** stacks human motivation in five levels: physiological (food, water, rest), safety, love and belonging, esteem, and self actualisation at the apex. Lower needs dominate until reasonably met, which explains why health advice fails amid hunger and insecurity: a food insecure mother cannot prioritise clinic visits. Programmes sequencing food, safety, and shelter support before behaviour demands apply Maslow whether they name him or not.",
+      "say": "Food and safety before esteem and self growth. Hungry families cannot hear clinic advice until survival is secured.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ma1", "label": "Physiological and safety needs first" },
+          { "id": "ma2", "label": "Belonging and esteem needs next" },
+          { "id": "ma3", "label": "Self actualisation at the apex" }
+        ],
+        "edges": [["ma1", "ma2"], ["ma2", "ma3"]]
+      }
+    },
+    {
+      "title": "The sick role (Parsons)",
+      "tx": "Talcott Parsons defined the **sick role** as a socially sanctioned status with two rights (exemption from normal duties, and freedom from blame for being ill) balanced by two duties (to want to get well, and to seek and cooperate with competent help). The contract legitimises rest while preventing malingering as a lifestyle; chronic and stigmatised illnesses strain the model, which sociology teaching expects candidates to critique.",
+      "say": "The sick role grants rest and absolves blame, in exchange for seeking help and trying to recover. Rights balanced by duties.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rights of the sick role",
+          "points": ["Exempt from normal role duties", "Not blamed for the illness"]
+        },
+        "right": {
+          "title": "Duties of the sick role",
+          "points": ["Obligation to try to get well", "Seek and cooperate with competent care"]
+        }
+      }
+    },
+    {
+      "title": "Doctor patient relationship models",
+      "tx": "Szasz and Hollender graded the **doctor patient relationship** into three models by illness acuity: activity passivity (emergency, anaesthesia; doctor acts, patient receives), guidance cooperation (acute illness; doctor directs, patient obeys), and mutual participation (chronic disease; partners negotiate). Modern Indian practice and ethics push toward mutual participation with informed consent, shared decisions, and documented communication, especially in lifestyle disease care.",
+      "say": "Emergencies justify doctor led care; chronic disease demands partnership. Match the relationship model to the illness phase.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Model", "Fits which situation"],
+        "rows": [
+          ["Activity passivity", "Coma, emergency surgery, anaesthesia"],
+          ["Guidance cooperation", "Acute infection, short treatment"],
+          ["Mutual participation", "Diabetes, hypertension, lifestyle change"]
+        ]
+      }
+    },
+    {
+      "title": "Social security for workers and families",
+      "tx": "**Social security in health** cushions income against sickness, maternity, injury, old age, and death of the earner through instruments already met in occupational health (ESI benefits, provident fund, pension schemes) plus welfare pensions for the unorganised poor. The International Labour Organization frames social security as a human right; India's code on social security attempts to extend a floor to gig and unorganised workers.",
+      "say": "Social security replaces income when sickness, injury, or age stops work. ESI covers the organised; codes now reach for the rest.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ss1", "label": "Risk strikes: sickness, injury, old age" },
+          { "id": "ss2", "label": "Insurance or pension replaces income" },
+          { "id": "ss3", "label": "Family avoids destitution and debt" }
+        ],
+        "edges": [["ss1", "ss2"], ["ss2", "ss3"]]
+      }
+    },
+    {
+      "title": "Scale selection: final drill",
+      "tx": "The closing drill for **socioeconomic scale selection**: urban clinic study (Kuppuswamy), rural village survey (BG Prasad for simplicity or Udai Pareek for depth), income only stem (BG Prasad), nine items stem (Pareek), head of family education occupation income stem (Kuppuswamy). Each scale name in a stem is a fingerprint; examiners plant exactly one per question and reward instant recognition.",
+      "say": "Urban three score Kuppuswamy, income only Prasad, nine rural items Pareek. The stem's fingerprint names the scale.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stem fingerprints",
+          "points": ["Per capita income: BG Prasad", "Nine items with land: Udai Pareek", "Head's education job income: Kuppuswamy"]
+        },
+        "right": {
+          "title": "Setting checks",
+          "points": ["Urban study favours Kuppuswamy", "Rural study favours Prasad or Pareek", "Always quote updated version"]
+        }
+      }
+    }
+  ]
+}

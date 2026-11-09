@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-micronutrients-iodine",
+ "subject": "community-medicine",
+ "module": "cm-micronutrients",
+ "title": "Trace Minerals: Iodine Deficiency Disorders, Iron and Folate",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Iodine physiology and thyroid hormone synthesis",
+   "tx": "The essential trace element **dietary iodine absorption** is concentrated within the thyroid gland via sodium-iodide symporters, where thyroid peroxidase oxidizes iodide to organify thyroglobulin tyrosyl residues. Monoiodotyrosine and diiodotyrosine couple to generate thyroxine (T4) and triiodothyronine (T3), hormones indispensable for fetal brain neurogenesis, auditory development, skeletal linear growth and regulation of basal metabolic rate.",
+   "say": "Iodine is concentrated in the thyroid to synthesize thyroid hormones. These hormones are essential for baby brain development, hearing, bone growth and body metabolism.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/thyroid-levothyroxine-antithyroid-storm-coma-fig1.webp",
+    "alt": "Diagram showing thyroid hormone synthesis, iodine organification, and hypothalamic-pituitary-thyroid feedback axis",
+    "caption": "Thyroid hormone synthesis: Iodide uptake, thyroid peroxidase organification, T3/T4 secretion and TSH feedback. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Spectrum of iodine deficiency disorders",
+   "tx": "Because environmental leaching from monsoon floods depletes soil and groundwater iodine across river basins, populations suffer from the wide spectrum of **iodine deficiency disorders**. Beyond simple endemic euthyroid goitre, deficiency in pregnant women leads to spontaneous abortions, stillbirths, congenital anomalies, deaf-mutism, spastic diplegia, and neurological or myxoedematous cretinism marked by profound, irreversible cognitive impairment.",
+   "say": "Iodine deficiency causes much more than neck goitres. In pregnancy, it causes miscarriages, deaf-mutism, severe physical stunting, and irreversible intellectual disability in cretinism.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Life stage", "Clinical manifestations of iodine deficiency", "Public health severity"],
+    "rows": [
+     ["Fetus / Neonate", "Spontaneous abortion, stillbirth, neurological cretinism", "Severe brain damage and deaf-mutism"],
+     ["Infant / Child", "Subclinical intellectual loss (13.5 IQ point reduction)", "Impaired school performance and growth"],
+     ["Adolescent / Adult", "Endemic goitre, multinodular goitre, hypothyroidism", "Decreased productivity and lethargy"]
+    ]
+   }
+  },
+  {
+   "title": "Universal salt iodisation policy in India",
+   "tx": "India addresses deficiency through the **National Iodine Deficiency Disorders Control Programme**, enforcing mandatory universal iodisation of all edible cooking salt using potassium iodate. Statutory regulations require a minimum iodine concentration of thirty parts per million at the manufacturing production stage and at least fifteen parts per million at the retail and household consumer level, ensuring a daily adult intake of one hundred and fifty micrograms.",
+   "say": "Universal salt iodisation requires at least thirty parts per million of iodine at production and fifteen parts per million in homes, ensuring everyone gets their daily microgram requirement.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Production point standard",
+     "points": ["Minimum 30 parts per million (ppm)", "Added as stable potassium iodate", "Monitored at salt refinery exit"]
+    },
+    "right": {
+     "title": "Household consumer level",
+     "points": ["Minimum 15 parts per million (ppm)", "Compensates for transport and storage losses", "Tested by ASHA using MBI testing kits"]
+    }
+   }
+  },
+  {
+   "title": "Urinary iodine excretion as the gold standard",
+   "tx": "Because over ninety percent of ingested iodine is excreted in urine, epidemiologists evaluate community iodine sufficiency using **median urinary iodine concentration**. A population median between one hundred and one hundred and ninety-nine micrograms per litre indicates optimal community iodine nutrition; values between fifty and ninety-nine reflect mild deficiency, twenty to forty-nine reflect moderate deficiency, and below twenty reflect severe deficiency.",
+   "say": "Urine iodine testing is the gold standard for measuring community iodine levels. A community median between one hundred and two hundred micrograms per litre confirms healthy iodine intake.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Median urinary iodine (mcg/L)", "Iodine nutritional status", "Recommended public action"],
+    "rows": [
+     ["Less than 20 mcg/L", "Severe iodine deficiency", "Urgent iodised salt supply and monitoring"],
+     ["20 to 49 mcg/L", "Moderate iodine deficiency", "Enforce refinery quality control and testing"],
+     ["50 to 99 mcg/L", "Mild iodine deficiency", "Strengthen consumer awareness campaigns"],
+     ["100 to 199 mcg/L", "Optimal iodine nutrition", "Maintain universal iodisation standards"],
+     ["200 to 299 mcg/L", "More than adequate", "Monitor for iodine-induced hyperthyroidism"]
+    ]
+   }
+  },
+  {
+   "title": "Iron metabolism and nutritional anaemia burden",
+   "tx": "Essential for haemoglobin, myoglobin and mitochondrial cytochromes, **nutritional iron deficiency** affects over fifty percent of pregnant women and preschool children in India. Bioavailability of non-haem iron in plant-based cereal-pulse diets is severely suppressed by dietary phytates, polyphenols, tannins in tea, and calcium, limiting gastrointestinal absorption to less than five to eight percent of ingested elemental iron.",
+   "say": "Over half of Indian women and young children suffer from iron deficiency. Plant iron is poorly absorbed because phytates in grains and tannins in tea block iron absorption in the gut.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Diet rich in plant non-haem iron"},
+     {"id": "b", "label": "Phytates and tannins inhibit duodenal absorption"},
+     {"id": "c", "label": "Depletion of bone marrow ferritin stores"},
+     {"id": "d", "label": "Microcytic hypochromic anaemia development"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Clinical stages of iron deficiency",
+   "tx": "Iron deficiency develops through three progressive stages: iron depletion, iron-deficient erythropoiesis, and overt **iron deficiency anaemia**. In stage one, bone marrow storage iron and serum ferritin drop below fifteen nanograms per millilitre while haemoglobin remains normal; stage two sees falling serum iron and rising total iron-binding capacity; stage three manifests with microcytic, hypochromic red blood cells, pallor, fatigue, koilonychia and pica.",
+   "say": "Iron deficiency progresses from depleted marrow stores to low serum iron and finally frank microcytic anaemia. Symptoms include extreme fatigue, spoon-shaped nails and cravings for clay.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Laboratory parameter", "Normal healthy value", "Iron deficiency anaemia finding"],
+    "rows": [
+     ["Haemoglobin", ">= 12 g/dl (women), >= 13 g/dl (men)", "Decreased below normal cut-offs"],
+     ["Serum ferritin", "30 to 200 ng/ml", "Severely reduced (< 15 ng/ml)"],
+     ["Serum iron", "60 to 170 mcg/dl", "Reduced (< 30 mcg/dl)"],
+     ["Total Iron Binding Capacity (TIBC)", "250 to 400 mcg/dl", "Markedly elevated (> 400 mcg/dl)"],
+     ["Transferrin saturation", "20 to 50 percent", "Severely depressed (< 16 percent)"]
+    ]
+   }
+  },
+  {
+   "title": "Anemia Mukt Bharat life-stage intervention",
+   "tx": "To break intergenerational cycles of anaemia, the Ministry of Health implements the **Anemia Mukt Bharat strategy**, utilizing the 6x6x6 framework across six target beneficiary groups, six interventions and six institutional mechanisms. The programme provides age-stratified prophylactic iron and folic acid (IFA) supplementation, combining weekly pink IFA syrup for infants, weekly blue tablets for adolescents, and daily red tablets for pregnant women.",
+   "say": "The Anemia Mukt Bharat programme provides colour-coded iron tablets across life stages: pink syrup for toddlers, blue tablets for teenagers, and daily red tablets for pregnant mothers.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Target beneficiary group", "IFA formulation and dose", "Frequency and colour coding"],
+    "rows": [
+     ["Children 6 to 59 months", "20 mg elemental iron + 100 mcg folic acid", "Biweekly (1 ml pink syrup)"],
+     ["Children 5 to 9 years", "45 mg elemental iron + 400 mcg folic acid", "Weekly (1 pink tablet)"],
+     ["Adolescents 10 to 19 years", "60 mg elemental iron + 500 mcg folic acid", "Weekly (1 blue tablet)"],
+     ["Pregnant women (from 2nd tri)", "60 mg elemental iron + 500 mcg folic acid", "Daily for 180 days (1 red tablet)"],
+     ["Lactating mothers (0-6 mos)", "60 mg elemental iron + 500 mcg folic acid", "Daily for 180 days (1 red tablet)"]
+    ]
+   }
+  },
+  {
+   "title": "Folic acid and neural tube defect prevention",
+   "tx": "As an indispensable coenzyme in purine and thymidylate nucleotide synthesis, maternal **periconceptional folic acid supplementation** is essential during embryonic neural tube closure in the first twenty-eight days post-conception. Daily administration of four hundred micrograms (zero point four milligrams) of folic acid from pre-conception through the first trimester reduces neural tube defects, specifically anencephaly and spina bifida, by up to seventy percent.",
+   "say": "Taking four hundred micrograms of folic acid daily before conception and during the first month of pregnancy cuts devastating birth defects like spina bifida by seventy percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Periconceptional folic acid 400 mcg daily"},
+     {"id": "b", "label": "Optimal nucleotide synthesis and DNA methylation"},
+     {"id": "c", "label": "Complete embryonic neural tube closure by day 28"},
+     {"id": "d", "label": "70% reduction in spina bifida and anencephaly"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Food fortification and national deworming synergy",
+   "tx": "Complementing direct pill supplementation, national health schemes scale up **food fortification with micronutrients**, distributing fortified rice enriched with iron, folic acid and vitamin B12 across the public distribution system and school lunch schemes. Furthermore, biannual deworming with single-dose albendazole on National Deworming Day eliminates intestinal hookworm and roundworm infections, preventing chronic gastrointestinal blood loss and restoring iron retention.",
+   "say": "Distributing rice fortified with iron and folic acid through rations, combined with biannual school deworming tablets, stops intestinal hookworm blood loss and cures anaemia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fortified staple distribution",
+     "points": ["Fortified rice kernels with iron, folate, B12", "Distributed via ration shops and school meals", "Universal population reach without pill fatigue"]
+    },
+    "right": {
+     "title": "Biannual deworming (NDD)",
+     "points": ["Single 400 mg albendazole chewable tablet", "February and August National Deworming Days", "Eliminates Ancylostoma hookworm blood loss"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

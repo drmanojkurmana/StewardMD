@@ -1,0 +1,296 @@
+{
+ "v": 1,
+ "id": "der-sti-chancroid",
+ "subject": "dermatology",
+ "module": "der-sti",
+ "title": "Chancroid",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Haemophilus ducreyi** is the causative etiological agent of chancroid, a sexually transmitted ulcerative disease. It is a fastidious, facultatively anaerobic, Gram-negative, pleomorphic streptobacillus that demands factor X (hemin) for growth on enriched chocolate agar. Transmission occurs through microscopic abrasions of the genital epithelium during unprotected sexual contact. The organism adheres to host fibroblasts and keratinocytes using specialized fimbriae, secreting cytolethal distending toxin to induce targeted epidermal cell death.",
+   "say": "Chancroid is caused by Haemophilus ducreyi, a Gram-negative bacillus requiring factor X for growth. It enters through microabrasions during sexual intercourse, releasing cytolethal distending toxin to cause painful genital ulceration.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chancroid-fig1.webp",
+    "alt": "Clinical illustration showing characteristic ulcer and inguinal bubo of chancroid.",
+    "caption": "Painful genital ulceration with ragged undermined borders and fluctuant unilateral inguinal lymphadenitis. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Soft chancre** describes the typical ulcer morphology in chancroid, emerging after a short incubation period of three to seven days. The lesion begins as an inflammatory erythematous macule that rapidly progresses to a pustule, which promptly ruptures into an exquisitely painful, non-indurated ulcer. The ulcer edges are ragged, raggedly undermined, and surrounded by an erythematous inflammatory halo. The ulcer base is soft, friable, bleeds readily upon touching, and is covered with a foul-smelling, purulent, grey-yellow necrotic slough.",
+   "say": "Following a brief incubation of three to seven days, a tender pustule breaks down into a soft chancre. Unlike syphilis, the ulcer is exquisitely painful, completely soft without induration, and surrounded by undermined edges.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chancroid (Soft Chancre)",
+     "points": [
+      "Exquisitely painful and tender",
+      "Soft base without induration",
+      "Ragged, sharply undermined borders",
+      "Purulent grey exudate, bleeds easily"
+     ]
+    },
+    "right": {
+     "title": "Primary Syphilis (Hard Chancre)",
+     "points": [
+      "Painless and asymptomatic",
+      "Markedly indurated, button-like base",
+      "Clean, smooth, non-undermined margin",
+      "Serous exudate, clean red floor"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Inguinal bubo** develops in approximately fifty percent of patients with chancroid, typically emerging one to two weeks following the initial genital ulceration. Lymphadenitis is characteristically unilateral, acutely painful, and intensely erythematous. Multiple matted lymph nodes fuse to form a single, tense, unilocular fluctuant abscess known as a bubo. Without timely medical intervention, the overlying skin thins and ruptures spontaneously, creating a deep, chronic, discharging sinus tract with undermined margins.",
+   "say": "Half of patients develop an inguinal bubo: an acutely painful, fluctuant lymph node mass that threatens to rupture through the skin. Decompress fluctuant buboes using needle aspiration through healthy adjacent skin, never open surgical incision.",
+   "vis": {
+    "kind": "flow",
+    "title": "Evolution of Chancroid Inguinal Lymphadenitis",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Genital Inoculation",
+      "sub": "Haemophilus ducreyi enters microtrauma"
+     },
+     {
+      "id": "b2",
+      "label": "Ulcer Formation",
+      "sub": "Painful soft chancre within 3 to 7 days"
+     },
+     {
+      "id": "b3",
+      "label": "Suppurative Bubo",
+      "sub": "Unilateral fluctuant inguinal lymphadenopathy"
+     },
+     {
+      "id": "b4",
+      "label": "Needle Aspiration",
+      "sub": "Aspiration prevents chronic sinus formation"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2",
+      "Local necrosis"
+     ],
+     [
+      "b2",
+      "b3",
+      "Lymphatic drainage"
+     ],
+     [
+      "b3",
+      "b4",
+      "Controlled decompression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**School of fish** appearance on Gram stain of ulcer exudate or bubo aspirate provides a classic diagnostic clue for chancroid. Direct microscopy demonstrates small, Gram-negative coccobacilli arranged in parallel chains, clusters, or pairs, frequently likened to a school of fish or railroad tracks. However, direct microscopy has a sensitivity of less than fifty percent due to polymicrobial contamination, making nucleic acid amplification testing the diagnostic method of choice where available.",
+   "say": "Gram stain of chancroid discharge reveals Gram-negative coccobacilli aligned in parallel chains, resembling a school of fish. Because sensitivity is modest, nucleic acid amplification testing provides definitive confirmation.",
+   "vis": {
+    "kind": "table",
+    "title": "Laboratory Diagnostic Methods for Chancroid",
+    "cols": [
+     "Diagnostic Technique",
+     "Characteristic Finding",
+     "Diagnostic Sensitivity"
+    ],
+    "rows": [
+     [
+      "Direct Gram stain",
+      "School of fish parallel coccobacillary chains",
+      "Moderate (40% to 50%)"
+     ],
+     [
+      "Chocolate agar culture",
+      "Small translucent colonies requiring hemin (factor X)",
+      "Low to moderate (60% to 80%)"
+     ],
+     [
+      "PCR / NAAT testing",
+      "Detection of Haemophilus ducreyi DNA",
+      "Gold standard (>95%)"
+     ],
+     [
+      "Darkfield microscopy",
+      "Absence of motile spirochetes",
+      "Excludes primary syphilis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Azithromycin** administered as a single oral dose of one gram achieves cure rates exceeding ninety-five percent for uncomplicated chancroid, representing a World Health Organization regimen of choice. An equally efficacious first-line alternative is a single intramuscular injection of ceftriaxone 250 milligrams. Both single-dose regimens guarantee patient compliance, resolve painful ulcers within seven to fourteen days, and interrupt transmission cycles, making them ideal for syndromic management in high-prevalence settings.",
+   "say": "A single one-gram oral dose of azithromycin or a single intramuscular injection of 250 milligrams of ceftriaxone cures chancroid in over ninety-five percent of cases. Single-dose therapy guarantees adherence and halts transmission.",
+   "vis": {
+    "kind": "table",
+    "title": "Recommended Treatment Regimens for Chancroid",
+    "cols": [
+     "Antimicrobial Agent",
+     "Dosage and Route",
+     "Advantages / Considerations"
+    ],
+    "rows": [
+     [
+      "Azithromycin",
+      "1 gram orally as single dose",
+      "Directly observed single-dose oral cure"
+     ],
+     [
+      "Ceftriaxone",
+      "250 mg intramuscular single dose",
+      "Ideal for non-compliant or vomiting patients"
+     ],
+     [
+      "Ciprofloxacin",
+      "500 mg orally twice daily for 3 days",
+      "Contraindicated in pregnant women and children"
+     ],
+     [
+      "Erythromycin base",
+      "500 mg orally four times daily for 7 days",
+      "Alternative multi-day oral course"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Needle aspiration** of fluctuant inguinal buboes is mandatory to relieve painful capsular tension and prevent spontaneous cutaneous breakdown. The needle is inserted through adjacent, non-erythematous healthy skin bevelled upward into the fluctuant node, allowing sterile evacuation of purulent contents. Incision and drainage is strictly contraindicated because surgical incision reliably produces non-healing, chronic, draining sinus tracts and secondary bacterial superinfections that require protracted surgical wound care.",
+   "say": "Always decompress a fluctuant bubo by inserting an eighteen-gauge needle through adjacent healthy skin. Never perform open incision and drainage, because cutting the node creates permanent discharging sinuses.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Needle Aspiration Technique",
+     "points": [
+      "Enter through adjacent healthy intact skin",
+      "Relieves pain and reduces skin necrosis",
+      "May be repeated if fluid re-accumulates",
+      "Prevents chronic draining sinus formation"
+     ]
+    },
+    "right": {
+     "title": "Incision and Drainage Hazard",
+     "points": [
+      "Strictly contraindicated in chancroid",
+      "Creates persistent non-healing sinus tract",
+      "Promotes severe secondary bacterial infection",
+      "Leaves extensive disfiguring inguinal scars"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Autoinoculation** of Haemophilus ducreyi frequently produces multiple satellite ulcers along adjacent cutaneous surfaces, particularly where opposing skin folds make direct contact. Classic kissing lesions emerge on opposing thighs, the scrotum, or the labia majora. In men, secondary complications include severe inflammatory phimosis, paraphimosis, and extensive destructive ulceration of the glans and prepuce, demanding early therapeutic intervention to forestall permanent anatomical disfigurement.",
+   "say": "Chancroid organisms autoinoculate readily, producing kissing ulcers on opposing mucosal surfaces of the thighs and scrotum. Secondary phimosis can strangulate the glans, requiring prompt antibiotic rescue.",
+   "vis": {
+    "kind": "flow",
+    "title": "Secondary Anatomical Complications of Chancroid",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Primary Ulcer",
+      "sub": "Painful soft chancre on prepuce or frenulum"
+     },
+     {
+      "id": "c2",
+      "label": "Autoinoculation",
+      "sub": "Kissing ulcers develop on opposing skin surfaces"
+     },
+     {
+      "id": "c3",
+      "label": "Severe Edema",
+      "sub": "Preputial swelling causes acute phimosis"
+     },
+     {
+      "id": "c4",
+      "label": "HIV Co-transmission",
+      "sub": "Epithelial ulceration accelerates HIV acquisition"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2",
+      "Direct mucosal contact"
+     ],
+     [
+      "c2",
+      "c3",
+      "Inflammatory obstruction"
+     ],
+     [
+      "c3",
+      "c4",
+      "Epithelial disruption"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Syphilis co-infection** must be formally investigated in every patient presenting with genital ulceration. The epidemiological association is so pronounced that chancroid ulcers dramatically augment the risk of human immunodeficiency virus transmission and acquisition due to loss of mucosal barrier integrity. Serological testing for syphilis (VDRL and treponemal assays) and HIV should be performed at baseline and repeated three months later to detect incubating secondary infections.",
+   "say": "Every patient with chancroid must be tested for syphilis and HIV. Genital ulcer disease shatters mucosal defenses, increasing HIV transmission risk up to ten-fold. Repeat serological testing at three months is essential.",
+   "vis": {
+    "kind": "table",
+    "title": "Genital Ulcer Differential Diagnosis",
+    "cols": [
+     "Infection",
+     "Ulcer Pain",
+     "Induration Base",
+     "Lymphadenopathy Pattern"
+    ],
+    "rows": [
+     [
+      "Chancroid",
+      "Severely painful",
+      "Soft, non-indurated",
+      "Painful, fluctuant, unilateral bubo"
+     ],
+     [
+      "Primary syphilis",
+      "Completely painless",
+      "Cartilaginous hard",
+      "Painless, rubbery, bilateral nodes"
+     ],
+     [
+      "Genital herpes",
+      "Painful vesicles/erosions",
+      "Soft, non-indurated",
+      "Tender, discrete, bilateral nodes"
+     ],
+     [
+      "Lymphogranuloma venereum",
+      "Painless transient ulcer",
+      "Soft, transient",
+      "Painful multilocular groove sign bubo"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Chancroid: pathognomonic Gram stain arrangement",
+   "b": "Small Gram-negative coccobacilli arranged in parallel chains like a school of fish."
+  },
+  {
+   "f": "Chancroid bubo: essential surgical rule",
+   "b": "Needle aspiration through healthy skin only; incision and drainage is strictly contraindicated."
+  },
+  {
+   "f": "Chancroid: first-line single-dose oral antibiotic regimen",
+   "b": "Oral azithromycin 1 gram as a single supervised dose."
+  }
+ ],
+ "keys": [
+  "Chancroid produces painful soft ulcers with ragged borders caused by Haemophilus ducreyi",
+  "Suppurative buboes require needle aspiration through adjacent healthy skin, never incision",
+  "First-line cure is achieved with single-dose oral azithromycin or intramuscular ceftriaxone"
+ ]
+}

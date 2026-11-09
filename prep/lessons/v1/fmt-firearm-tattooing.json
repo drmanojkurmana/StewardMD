@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-firearm-tattooing",
+ "subject": "forensic-medicine",
+ "module": "fmt-firearm",
+ "title": "Tattooing, Blackening and Singeing: Estimating Range",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Three skin marks of close discharge",
+   "tx": "Close firearm discharge stamps three distinct marks. **Burning and singeing** come from flame and hot gas. **Blackening or smudging** is smoke deposit that spreads widely and wipes off with a wet cloth. **Tattooing, stippling or peppering** is unburnt or partly burnt powder driven into the skin, which cannot be wiped away. Singed hairs may melt at the tips and solidify into clubbed ends as they cool.",
+   "say": "Flame singes, smoke smudges and wipes off, but powder tattooing is embedded in skin and stays for the pathologist.",
+   "vis": {"kind": "table", "cols": ["Mark", "Caused by", "Removed by wiping"], "rows": [["Singeing", "Flame and hot gas", "No, hair is burnt"], ["Blackening", "Smoke deposit", "Yes, with a wet cloth"], ["Tattooing", "Powder grains in skin", "No, grains are embedded"], ["Hyperaemic flare", "Heat around the wound", "Fades, may blister"]]}
+  },
+  {
+   "title": "Contact wounds and the muzzle imprint",
+   "tx": "In a tight contact shot the muzzle seals against skin, so soiling stays minimal outside while gases blast into the wound and tear deeper tissues in a **contact firearm wound**. Gas expanding under the skin lifts it back against the muzzle rim and stamps a muzzle imprint, a copy or recoil abrasion. Blood, hair and cloth fibres may be sucked back into the barrel by the vacuum after discharge, the back spatter phenomenon.",
+   "say": "Tight contact hides soot outside, tears tissue inside, stamps the muzzle print and can suck blood back into the barrel.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Muzzle pressed firmly to skin"}, {"id": "b", "label": "Gas blasts into the wound"}, {"id": "c", "label": "Skin lifts against the muzzle rim"}, {"id": "d", "label": "Imprint stamped, back spatter possible"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Contact over bone splits the wound",
+   "tx": "Where thick bone lies just under skin, as on the skull, contact discharge blows the wound open into **cruciate or stellate tears** because trapped gas has nowhere to expand. Margins split with subsidiary linear tears and the skull shows a large irregular hole with fissured fractures, burning and blackening in its margins. On the abdomen, by contrast, gas entering the peritoneal cavity can push coils of small intestine out through the entry wound.",
+   "say": "Contact over skull bursts the entry into a star, while contact over belly can blow bowel out of the hole.",
+   "vis": {"kind": "compare", "left": {"title": "Contact over bone", "points": ["Cruciate stellate splitting", "Fissured skull fractures", "Burning in bone margins", "Face contour may be destroyed"]}, "right": {"title": "Contact over soft parts", "points": ["Single round hole", "Deep tissue disruption", "Fat may extrude from wound", "Intestine may herniate out"]}}
+  },
+  {
+   "title": "Close range up to thirty centimetres",
+   "tx": "Within about thirty centimetres, the **close range wound** shows all three marks together: tissues are singed by flame, blackened by smoke and tattooed by powder. If the powder is smokeless the deposit may look greyish or white instead of black. A circular burnt area means the gun fired at a right angle; an oval area means an angled shot, with the wound sitting nearer the end from which the shot travelled.",
+   "say": "Inside thirty centimetres expect singeing, smudge and stipple together, round for square shots and oval for angled ones.",
+   "vis": {"kind": "table", "cols": ["Range band", "Marks present", "Wound look"], "rows": [["Contact", "Imprint, deep tearing", "Round, bore sized"], ["Up to 30 cm", "Singe, blacken, tattoo", "Single circular hole"], ["30 cm to 1 m", "Tattoo, cherry red track", "Rat hole rim may form"], ["Beyond 1 m", "No burn marks", "Shot begins to spread"]]}
+  },
+  {
+   "title": "Thirty centimetres to one metre",
+   "tx": "From thirty centimetres to one metre the flame and smoke effects fade, but tattooing persists and the tissues along the track turn cherry red from carbon monoxide in the gases, the **cherry red wound track** sign. Margins grow irregular and scalloped into the so called rat hole, with annular bruising from gas entry. Wads and plastic cups are found deep inside, and a plastic cup opening between thirty and sixty centimetres can print a Maltese cross abrasion.",
+   "say": "Past thirty centimetres the stipple and cherry red track remain, the rim turns rat hole, and wads hide deep inside.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Flame and smoke drop away"}, {"id": "b", "label": "Powder tattooing continues"}, {"id": "c", "label": "Track turns cherry red from CO"}, {"id": "d", "label": "Wads lodge deep in the wound"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Short and intermediate shotgun ranges",
+   "tx": "Shotgun pattern grows with distance in a predictable ladder of **shotgun range patterns**. Between one and two metres the shot mass still enters as one round hole of four to five centimetres for every gauge and choke. From two metres the mass begins to spread and separate pellet holes appear around a shrinking centre. At three metres the central hole is ringed by satellites across eight to ten centimetres.",
+   "say": "One solid hole to two metres, satellites by three metres: the pellet pattern is a measuring tape on the skin.",
+   "vis": {"kind": "table", "cols": ["Distance", "Shotgun pattern", "Diameter guide"], "rows": [["60 to 90 cm", "Single aperture", "2.5 to 4 cm"], ["1 to 2 metres", "Single round hole", "4 to 5 cm"], ["About 3 metres", "Centre plus satellites", "8 to 10 cm spread"], ["4 metres and beyond", "Separate pellet holes", "10 to 15 cm spread"]]}
+  },
+  {
+   "title": "Distant range and choke effects",
+   "tx": "Beyond four metres every pellet travels alone in the **distant shotgun wound**, each making its own small opening with an abrasion rim. Spread from a fully choked barrel widens steadily at ten, fifteen and twenty metres, which lets the examiner work backward to distance. A sawn off barrel starts spreading as early as one metre, while a full choke gun may hold together to four metres, so barrel length must be known.",
+   "say": "Past four metres pellets fly solo, and the same spread means a shorter range from a sawn off than a choked barrel.",
+   "vis": {"kind": "compare", "left": {"title": "Full choke barrel", "points": ["Holds together to 4 metres", "Spread widens slowly", "Tight distant patterns", "Long barrel, standard use"]}, "right": {"title": "Sawn off barrel", "points": ["Spreads from about 1 metre", "Pattern opens very early", "Wide close patterns mislead", "Range underestimated if ignored"]}}
+  },
+  {
+   "title": "Rifle and pistol range markers",
+   "tx": "Rifled weapons leave tighter limits: flame reaches 15 to 20 centimetres, smoke vanishes beyond thirty centimetres and unburnt grains are not found past one metre in **rifle discharge range signs**. The rifle entry is usually smaller than the bullet, like a lead pencil hole, sometimes without an abrasion collar, ringed by one to two millimetre micro tears and a reddish zone that browns on drying. Clothing may hold the only range evidence.",
+   "say": "Rifle flame stops near twenty centimetres and powder near a metre, so the shirt may carry more range evidence than skin.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Examine clothing layer by layer"}, {"id": "b", "label": "Look for cross shaped perforation"}, {"id": "c", "label": "Check inner surfaces for smoke"}, {"id": "d", "label": "Match bullet wipe rim on fabric"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Traps that falsify range estimation",
+   "tx": "Several devices and conditions corrupt the pattern. **Silencers, muzzle brakes and flash hiders** cut smoke and powder or throw them in odd directions, imitating long range. A shortened barrel deforms bullets. Clothing layers can filter out every discharge product except the bullet itself, while smoke trapped between skin and cloth blackens inner garment surfaces even in contact shots. Infrared photography can still reveal blackening and tattooing on dark skin and fabric.",
+   "say": "Silencers, sawn barrels and layered clothing all fake a longer range, so reconstruct the whole firing setup before opining.",
+   "vis": {"kind": "table", "cols": ["Trap", "Effect on marks", "Countermeasure"], "rows": [["Silencer fitted", "Smoke and powder reduced", "Ask about attachments"], ["Clothing layers", "Products filtered out", "Examine every layer"], ["Dark skin", "Tattooing hard to see", "Infrared photography"], ["Sawn off barrel", "Early wide spread", "Measure barrel length"]]}
+  }
+ ],
+ "quiz": []
+}

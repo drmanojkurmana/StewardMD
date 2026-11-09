@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "pat-oesophagus-stomach",
+  "subject": "pathology",
+  "title": "Acute and Helicobacter Gastritis, Autoimmune Gastritis, Peptic Ulcer, and Gastric Cancer",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Acute gastritis erodes gastric mucosa abruptly through NSAIDs, alcohol, stress critical illness, or bile reflux, bleeding from superficial erosions that heal fast when the insult withdraws. The erosive emergency pattern is **acute erosive (haemorrhagic) gastritis**. Curling ulcers follow severe burns, while Cushing ulcers accompany raised intracranial pressure after head injury.",
+      "say": "NSAIDs, alcohol, and critical illness erode stomachs acutely; remove the insult and acid suppression heals.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute erosive gastritis",
+          "points": [
+            "NSAID, alcohol, stress triggers",
+            "Superficial erosions, bleeding",
+            "Heals days after withdrawal"
+          ]
+        },
+        "right": {
+          "title": "Chronic gastritis",
+          "points": [
+            "Helicobacter or autoimmune drivers",
+            "Atrophy and metaplasia over years",
+            "Cancer risk surveillance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Helicobacter pylori gastritis inflames antrum first, raising acid toward duodenal ulcers, or spreads pangastric lowering acid toward atrophy, intestinal metaplasia, and adenocarcinoma by host and strain lottery. That divergent river is **Helicobacter pylori gastritis outcomes**. The CagA strain raises ulcer and cancer risk more than CagA negative strains do.",
+      "say": "Antral Helicobacter feeds duodenal ulcers; pangastric Helicobacter starves acid toward cancer.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/helicobacter-pylori-infection-fig1.webp",
+        "alt": "Helicobacter pylori pathogenesis and outcomes",
+        "caption": "Helicobacter pylori gastritis progressing toward ulcer and gastric malignancy outcomes."
+      }
+    },
+    {
+      "tx": "Autoimmune gastritis destroys corpus parietal cells through antiparietal and intrinsic factor antibodies, achlorhydria raising gastrin and enterochromaffin tumours while B12 fails into pernicious anaemia. The corpus autoimmune disease is **autoimmune (type A) gastritis**. Enterochromaffin like cell hyperplasia under high gastrin can progress to type one gastric neuroendocrine tumours.",
+      "say": "Corpus atrophy, high gastrin, low B12: autoimmune gastritis completes its own triad.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Autoimmune gastritis",
+          "Helicobacter gastritis"
+        ],
+        "rows": [
+          [
+            "Distribution",
+            "Corpus predominant",
+            "Antrum first, may extend"
+          ],
+          [
+            "Acid and gastrin",
+            "Achlorhydria, gastrin high",
+            "Variable by pattern"
+          ],
+          [
+            "B12",
+            "Pernicious anaemia risk",
+            "Less direct"
+          ],
+          [
+            "Cancer accent",
+            "Neuroendocrine tumours, adenocarcinoma",
+            "Adenocarcinoma, MALT lymphoma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Peptic ulcers breach muscularis mucosae in duodenum and stomach from Helicobacter or NSAIDs overwhelming mucosal defence, declaring pain rhythms, bleeding, perforation, or gastric outlet obstruction. Defence failure defines the **peptic ulcer, Helicobacter and NSAID disease**. Unlike erosions, a true ulcer extends through the muscularis mucosae into the submucosa.",
+      "say": "Helicobacter or NSAIDs behind nearly every peptic ulcer; test, eradicate, and stop the drug.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/peptic-ulcer-disease-and-related-fig1.webp",
+        "alt": "Peptic ulcer disease anatomy",
+        "caption": "Peptic ulcer disease anatomy across duodenum and stomach."
+      }
+    },
+    {
+      "tx": "Duodenal ulcers pain when empty and ease with food, gastric ulcers pain with meals and demand biopsy because malignancy mimics them, while all ulcers earn Helicobacter testing and NSAID review. That biopsy duty is **gastric ulcer malignancy exclusion**. Endoscopic follow up at six to eight weeks confirms healing and catches missed malignancy early.",
+      "say": "Every gastric ulcer earns biopsy and follow up healing; duodenal ulcers almost never hide cancer.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Duodenal ulcer",
+          "points": [
+            "Empty stomach pain, night pain",
+            "Helicobacter dominant cause",
+            "Malignancy exceedingly rare"
+          ]
+        },
+        "right": {
+          "title": "Gastric ulcer",
+          "points": [
+            "Meal provoked pain, weight loss possible",
+            "NSAID accent stronger",
+            "Biopsy and healing confirmation mandatory"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Eradication therapy combining acid suppression with two antibiotics and sometimes bismuth cures Helicobacter ulcers and cuts recurrence from most patients to few, confirmed by urea breath or stool antigen testing. Cure confirmation matters: **Helicobacter eradication and test of cure**. Wait at least four weeks after antibiotics and two weeks off acid suppression before retesting.",
+      "say": "Eradicate, then prove eradication; ulcer recurrence usually means persisting Helicobacter or NSAIDs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Ulcer found, Helicobacter tested"
+          },
+          {
+            "id": "b",
+            "label": "Fourteen day eradication regimen"
+          },
+          {
+            "id": "c",
+            "label": "NSAIDs stopped or protected"
+          },
+          {
+            "id": "d",
+            "label": "Test of cure after interval"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Gastric adenocarcinoma divides into intestinal type marching through Helicobacter atrophy and metaplasia, and diffuse signet ring type from E-cadherin loss infiltrating without mass. Those Lauren paths are **intestinal versus diffuse gastric adenocarcinoma**. Loss of E-cadherin from CDH1 mutation underlies the diffuse type and its silent peritoneal spread.",
+      "say": "Intestinal type follows the atrophy sequence; diffuse type infiltrates silently without forming a mass.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hereditary-diffuse-gastric-cancer-fig1.webp",
+        "alt": "Diffuse gastric adenocarcinoma with signet ring cells",
+        "caption": "Diffuse gastric adenocarcinoma with linitis plastica and signet ring cells, contrasting with intestinal type tumours."
+      }
+    },
+    {
+      "tx": "Alarm features, weight loss, anaemia, dysphagia, vomiting, family history, or age thresholds, convert dyspepsia from empiric acid suppression into urgent endoscopy seeking ulcer complications and cancer. That triage is **dyspepsia alarm feature endoscopy referral**. Persistent vomiting with a succussion splash points instead toward gastric outlet obstruction needing imaging.",
+      "say": "Alarm features end empiric dyspepsia care; scope first when weight, blood, or age warn.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Alarm feature",
+          "Fear",
+          "Action"
+        ],
+        "rows": [
+          [
+            "Weight loss, anaemia",
+            "Gastric malignancy",
+            "Urgent endoscopy"
+          ],
+          [
+            "Progressive dysphagia",
+            "Oesophageal cancer or stricture",
+            "Urgent endoscopy and imaging"
+          ],
+          [
+            "Persistent vomiting",
+            "Outlet obstruction",
+            "Endoscopy, electrolytes"
+          ],
+          [
+            "Family gastric cancer",
+            "Hereditary diffuse risk",
+            "CDH1 counselling considered"
+          ]
+        ]
+      }
+    }
+  ]
+}

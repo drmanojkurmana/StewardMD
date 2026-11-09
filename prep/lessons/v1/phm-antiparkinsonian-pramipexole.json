@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-antiparkinsonian",
+  "subject": "pharmacology",
+  "title": "Pramipexole, MAO B and COMT Inhibitors, and Amantadine",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Pramipexole**, a non ergot D3 preferring dopamine agonist, serves Parkinson disease and restless legs syndrome at different dose altitudes, renally cleared and long acting enough for twice or thrice daily dosing. Its adverse signature defines agonist counselling: somnolence with sudden sleep attacks (driving warnings mandatory), peripheral oedema, hallucinations in older patients, and impulse control disorders that families often report before patients volunteer them.",
+      "say": "Pramipexole works smoothly and sedates suddenly; ask the family about sleep, ankles and impulses.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pramipexole profile",
+          "points": [
+            "Non ergot D2 D3 agonist, renal clearance",
+            "Parkinson adjunct and restless legs indications",
+            "Once daily extended release formulations exist",
+            "No ergot fibrosis burden"
+          ]
+        },
+        "right": {
+          "title": "Counselling essentials",
+          "points": [
+            "Sudden sleep episodes: driving and machinery warnings",
+            "Impulse control disorders screened with family input",
+            "Oedema and orthostatic symptoms reviewed",
+            "Taper on withdrawal: dopamine agonist withdrawal syndrome"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Selegiline** irreversibly inhibits monoamine oxidase B at low oral doses, slowing striatal dopamine breakdown and modestly extending levodopa action, with selectivity lost as dose climbs toward MAO A and the tyramine cheese reaction territory. Its amphetamine metabolites can disturb sleep, so morning dosing rules. Transdermal selegiline in depression deliberately exploits higher exposure. In Parkinson practice it suits early mild disease and wearing off adjunct duty.",
+      "say": "Selegiline guards dopamine from MAO B; keep the dose selective, take it early, respect tyramine at the margins.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "maob",
+            "label": "MAO B irreversibly inhibited in striatum"
+          },
+          {
+            "id": "da",
+            "label": "Dopamine breakdown slows, levodopa effect extends"
+          },
+          {
+            "id": "select",
+            "label": "Selectivity lost as dose rises toward MAO A"
+          },
+          {
+            "id": "tyr",
+            "label": "Tyramine pressor risk returns with lost selectivity"
+          }
+        ],
+        "edges": [
+          [
+            "maob",
+            "da"
+          ],
+          [
+            "da",
+            "select"
+          ],
+          [
+            "select",
+            "tyr"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Rasagiline**, the second generation MAO B inhibitor, is more potent, once daily, and free of amphetamine metabolites, with trials in early monotherapy and wearing off adjunct roles mirroring selegiline's map. Serotonin syndrome warnings with antidepressants and meperidine attach to the whole class by mechanism vigilance, though MAO B selectivity keeps absolute risk low at licensed doses. Ciprofloxacin and other CYP1A2 inhibitors raise rasagiline levels, its main metabolic flag.",
+      "say": "Rasagiline is selegiline refined: once daily, no amphetamine baggage, same serotonin vigilance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Selegiline",
+          "points": [
+            "Irreversible MAO B inhibition, twice daily oral",
+            "Amphetamine metabolites: insomnia if dosed late",
+            "Orally disintegrating and transdermal variants exist",
+            "Selectivity dose limited"
+          ]
+        },
+        "right": {
+          "title": "Rasagiline",
+          "points": [
+            "Once daily, more potent MAO B inhibition",
+            "No amphetamine metabolites",
+            "CYP1A2 inhibitors raise its levels",
+            "Early monotherapy and adjunct evidence"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Catechol O methyltransferase (COMT) degrades levodopa peripherally to useless 3 O methyldopa; **entacapone** blocks COMT only outside the brain, taken with every levodopa dose to stretch its half life and smooth wearing off, tinting urine orange red harmlessly and adding dyskinesia and diarrhoea. Fixed triple tablets (levodopa carbidopa entacapone) package the choreography. Entacapone never works alone because it has no antiparkinsonian action without levodopa aboard.",
+      "say": "Entacapone rides with every levodopa dose, stretches it, and paints the urine orange for free.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ld",
+            "label": "Levodopa dose taken with entacapone"
+          },
+          {
+            "id": "comt",
+            "label": "Peripheral COMT blocked, 3 O methyldopa falls"
+          },
+          {
+            "id": "longer",
+            "label": "Levodopa half life and on time extend"
+          },
+          {
+            "id": "adj",
+            "label": "Levodopa dose often trimmed as dyskinesia appears"
+          }
+        ],
+        "edges": [
+          [
+            "ld",
+            "comt"
+          ],
+          [
+            "comt",
+            "longer"
+          ],
+          [
+            "longer",
+            "adj"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Tolcapone** crosses into brain as well, inhibiting COMT centrally and peripherally with greater potency, and carries the class's dark history: fatal fulminant hepatitis in early use imposed strict liver enzyme surveillance schedules and reserve status behind entacapone failure. The contrast is a perfect examination dyad: same target, different barrier penetration, different monitoring universe. Any patient on tolcapone carries documented liver test cadence or should not be on it.",
+      "say": "Tolcapone is entacapone plus brain entry plus a liver monitoring contract; sign it or do not prescribe it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Entacapone",
+          "points": [
+            "Peripheral COMT inhibition only",
+            "With every levodopa dose",
+            "Orange urine, diarrhoea, dyskinesia increase",
+            "No liver monitoring programme required"
+          ]
+        },
+        "right": {
+          "title": "Tolcapone",
+          "points": [
+            "Central plus peripheral COMT inhibition",
+            "Thrice daily dosing, more potent smoothing",
+            "Fulminant hepatitis history: scheduled liver tests",
+            "Reserved after entacapone inadequacy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Amantadine**, an old antiviral, weakly blocks NMDA glutamate receptors, promotes dopamine release and blocks its reuptake, a scatter of actions that uniquely suppresses levodopa induced dyskinesia while mildly helping parkinsonism itself, now formulated in extended release for that antidyskinetic niche. Its adverse set is equally distinctive: livedo reticularis (mottled legs), ankle oedema, confusion and hallucinations in the elderly, and withdrawal precipitating delirium or neuroleptic malignant like states if stopped abruptly.",
+      "say": "Amantadine is the dyskinesia damper with mottled legs; taper it, never drop it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Amantadine actions",
+          "points": [
+            "NMDA antagonism plus dopaminergic facilitation",
+            "Only oral drug with clear antidyskinetic effect",
+            "Mild antiparkinsonian benefit of its own",
+            "Extended release formulations for dyskinesia"
+          ]
+        },
+        "right": {
+          "title": "Amantadine adverse set",
+          "points": [
+            "Livedo reticularis and ankle oedema",
+            "Confusion and hallucinations in older patients",
+            "Renal clearance: dose by kidney function",
+            "Abrupt withdrawal risks delirium and rigidity crises"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Impulse control disorders** deserve a full step because they destroy households quietly: pathological gambling, hypersexuality, compulsive shopping and binge eating emerge in roughly one in six agonist treated patients, dose related, D3 mediated, and characteristically concealed by shame until debts announce them. Screening with direct, permission giving questions and family collateral, dose reduction or agonist withdrawal (tapering against withdrawal syndrome), and documentation protect patients better than any after the fact rescue.",
+      "say": "Ask about gambling, spending and sexuality directly; patients hide impulse disorders until the money is gone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "agonist",
+            "label": "Dopamine agonist dose escalates"
+          },
+          {
+            "id": "icd",
+            "label": "Impulse control disorder emerges, concealed by shame"
+          },
+          {
+            "id": "screen",
+            "label": "Direct questions and family collateral surface it"
+          },
+          {
+            "id": "taper",
+            "label": "Gradual agonist reduction with withdrawal vigilance"
+          }
+        ],
+        "edges": [
+          [
+            "agonist",
+            "icd"
+          ],
+          [
+            "icd",
+            "screen"
+          ],
+          [
+            "screen",
+            "taper"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Assemble wearing off therapy** as a ladder this module built: shorten levodopa intervals, add entacapone with each dose or an MAO B inhibitor once daily, add or adjust a dopamine agonist, deploy amantadine where dyskinesia caps levodopa, and refer for device aided therapies (apomorphine infusion, levodopa intestinal gel, deep brain stimulation) when oral choreography fails. Each rung is chosen against the patient's cognitive, psychiatric and autonomic reserve, not by algorithm alone.",
+      "say": "Fractionate, inhibit an enzyme, add an agonist, damp dyskinesia, then refer for devices; in that order, individualised.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oral ladder rungs",
+          "points": [
+            "Levodopa fractionation and protein timing",
+            "Entacapone per dose or MAO B inhibitor daily",
+            "Dopamine agonist added or optimised",
+            "Amantadine where dyskinesia limits levodopa"
+          ]
+        },
+        "right": {
+          "title": "Device aided rung",
+          "points": [
+            "Apomorphine intermittent rescue or infusion",
+            "Levodopa carbidopa intestinal gel infusion",
+            "Deep brain stimulation in suitable candidates",
+            "Criteria: refractory fluctuations despite oral optimisation"
+          ]
+        }
+      }
+    }
+  ]
+}

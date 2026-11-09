@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-antiplatelets-fibrinolytics",
+  "subject": "pharmacology",
+  "title": "Fibrinolytics: Alteplase, Tenecteplase, Reteplase, Urokinase and Antifibrinolytic Rescue",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Recombinant tissue plasminogen activator **alteplase** mimics the endothelium's own clot surveillance: it binds fibrin and converts the plasminogen trapped in clot to plasmin exactly there, sparing most circulating fibrinogen at therapeutic doses. Its five minute half life demands infusion rather than bolus. Fibrin specificity is relative, not absolute, so systemic bleeding still stalks every indication from stroke to infarction to massive pulmonary embolism.",
+      "say": "Alteplase works where fibrin holds its substrate; five minute half life, infusion required, bleeding never abolished.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/haemostasis-platelets-cascade-fibrinolysis-fig1.webp",
+        "alt": "Mechanisms of haemostasis and fibrinolysis diagram showing plasminogen activation on fibrin",
+        "caption": "Fibrinolysis on the fibrin surface, the reaction alteplase and its successors accelerate."
+      }
+    },
+    {
+      "tx": "Protein engineering sharpened the successors: **tenecteplase** carries mutations granting greater fibrin specificity, resistance to plasminogen activator inhibitor 1 and a longer half life permitting single bolus dosing by weight band, now preferred in many infarction and stroke protocols for speed. **Reteplase**, a deletion variant, is given as two boluses thirty minutes apart. Both trade streptokinase's antigenicity away entirely, so readministration carries no immune memory problem.",
+      "say": "Tenecteplase is alteplase re engineered for one bolus; reteplase needs two; neither is antigenic.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tenecteplase",
+          "points": [
+            "Single weight banded intravenous bolus",
+            "Most fibrin specific of the class",
+            "Resistant to plasminogen activator inhibitor 1",
+            "Favoured where door to needle time is audited"
+          ]
+        },
+        "right": {
+          "title": "Reteplase and alteplase",
+          "points": [
+            "Reteplase: double bolus 30 minutes apart",
+            "Alteplase: infusion over 60 to 90 minutes, indication dependent",
+            "All recombinant agents non antigenic",
+            "Bleeding profiles broadly similar at equipotent doses"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Urokinase**, originally isolated from human urine and now produced in cell culture, activates plasminogen directly without fibrin binding, occupying niches like occluded central venous catheters (low dose local instillation) and selected peripheral arterial occlusions. Its systemic use shrank as fibrin specific agents spread. The family portrait is thus a gradient: streptokinase and urokinase systemic and promiscuous, alteplase intermediate, tenecteplase the most clot focused.",
+      "say": "Urokinase survives in catheters and niches; the class gradient runs from systemic streptokinase to focused tenecteplase.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sys",
+            "label": "Systemic activators: streptokinase, urokinase"
+          },
+          {
+            "id": "mid",
+            "label": "Intermediate: alteplase, reteplase infusions"
+          },
+          {
+            "id": "focus",
+            "label": "Most fibrin focused: tenecteplase bolus"
+          },
+          {
+            "id": "bleed",
+            "label": "Bleeding risk present at every point of the gradient"
+          }
+        ],
+        "edges": [
+          [
+            "sys",
+            "mid"
+          ],
+          [
+            "mid",
+            "focus"
+          ],
+          [
+            "focus",
+            "bleed"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Time windows** govern every indication because plasmin cannot resurrect dead tissue: myocardial infarction thrombolysis helps within 12 hours and most in the first three, ischaemic stroke alteplase or tenecteplase within 4.5 hours of known onset after imaging excludes haemorrhage, and massive pulmonary embolism with shock justifies lysis at almost any hour. Each window is a negotiation between salvageable tissue and intracranial bleeding risk near one in fifteen in stroke practice.",
+      "say": "Windows are tissue clocks: three hours golden for heart, four and a half for brain, shock any time for lung.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Indication windows",
+          "points": [
+            "STEMI: within 12 hours, best under 3, when PCI unavailable in time",
+            "Ischaemic stroke: within 4.5 hours, haemorrhage excluded on imaging",
+            "Massive PE with shock: justified by haemodynamics",
+            "Catheter directed low dose lysis for selected submassive PE"
+          ]
+        },
+        "right": {
+          "title": "Absolute barriers",
+          "points": [
+            "Any prior intracranial haemorrhage (stroke lysis)",
+            "Recent major surgery, trauma or active bleeding",
+            "Severe uncontrolled hypertension unresponsive to treatment",
+            "Known structural cerebral vascular lesions or malignancy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When lysis bleeds, the antidote logic reassembles this module: stop the infusion, send fibrinogen and full coagulation, replace fibrinogen with cryoprecipitate aiming above 1.5 g per litre, give tranexamic acid to block further plasmin activity, and transfuse to physiology while neurosurgery judges intracranial events. **Epsilon aminocaproic acid** is the older antifibrinolytic alternative where tranexamic acid is unavailable, weaker and dosed in grams with renal adjustment.",
+      "say": "Lytic bleeding wants fibrinogen replaced and plasmin blocked: cryoprecipitate plus tranexamic acid, fast.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antiplatelets-dapt-fibrinolytics-txa-fig1.webp",
+        "alt": "Antiplatelet, fibrinolytic and tranexamic acid target mechanisms diagram",
+        "caption": "The fibrinolytic and antifibrinolytic targets on one map; tranexamic acid is the pharmacological brake when lysis overshoots."
+      }
+    },
+    {
+      "tx": "**Anticoagulation choreography** surrounds the lytic: heparin accompanies alteplase in infarction protocols to prevent rethrombosis of the reopened artery, aspirin and P2Y12 therapy load alongside, yet every added agent compounds bleeding. Post lysis angiography and rescue PCI pathways decide what happens when pain and ST segments refuse to settle within ninety minutes. In stroke, antithrombotics wait twenty four hours and a repeat scan, the mirror image discipline.",
+      "say": "Heparin guards the reopened artery, antithrombotics wait a day after stroke lysis; timing is the therapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lyse",
+            "label": "Fibrinolytic given within window"
+          },
+          {
+            "id": "assess",
+            "label": "Reperfusion assessed at 60 to 90 minutes (STEMI)"
+          },
+          {
+            "id": "rescue",
+            "label": "Failed reperfusion: rescue PCI transfer"
+          },
+          {
+            "id": "stroke",
+            "label": "Stroke pathway: antithrombotics after 24 hours and rescan"
+          }
+        ],
+        "edges": [
+          [
+            "lyse",
+            "assess"
+          ],
+          [
+            "assess",
+            "rescue"
+          ],
+          [
+            "lyse",
+            "stroke"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Catheter directed therapy** shrank doses and widened the map: low dose alteplase infused through a catheter parked in pulmonary or peripheral arterial clot over hours achieves local lysis at a fraction of systemic exposure, with ultrasound assisted variants claiming further efficiency. The pharmacology is unchanged, only the geography improves, a principle students should generalise: concentration at the target, not novelty of molecule, is often the real innovation.",
+      "say": "Catheter directed lysis is old pharmacology with better geography: small doses parked inside the clot.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Systemic lysis",
+          "points": [
+            "Full weight based dose through a peripheral vein",
+            "Fastest where catheter facilities are absent",
+            "Highest intracranial and systemic bleeding exposure",
+            "STEMI, stroke and massive PE protocols"
+          ]
+        },
+        "right": {
+          "title": "Catheter directed lysis",
+          "points": [
+            "Fractional doses infused inside the clot over hours",
+            "Pulmonary, peripheral arterial and graft occlusions",
+            "Lower bleeding exposure, slower reperfusion",
+            "Demands interventional suites and intensive monitoring"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Close the module by opposing its **two hands**: fibrinolytics (streptokinase, alteplase family, urokinase) manufacture plasmin to dissolve fibrin, while antifibrinolytics (tranexamic acid, epsilon aminocaproic acid) prevent plasmin from ever gripping fibrin. Giving the wrong hand, lytic after recent tranexamic acid or antifibrinolytic into active thrombosis, writes the cautionary vignettes. The patient's clock, clot location and bleeding reserve decide which hand, if either, should move.",
+      "say": "Dissolve or preserve: name the hand before you move it, and let the clock and the clot decide.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fibrinolytic hand",
+          "points": [
+            "Agents: streptokinase, alteplase, tenecteplase, urokinase",
+            "Action: plasmin generation on and off fibrin",
+            "Territory: occlusive clot inside a time window",
+            "Antidote: stop, fibrinogen, tranexamic acid"
+          ]
+        },
+        "right": {
+          "title": "Antifibrinolytic hand",
+          "points": [
+            "Agents: tranexamic acid, epsilon aminocaproic acid",
+            "Action: plasminogen kept off fibrin",
+            "Territory: bleeding with hyperfibrinolysis, early",
+            "Caution: active thrombosis and obstructive urinary clots"
+          ]
+        }
+      }
+    }
+  ]
+}

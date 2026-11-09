@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-renal-urinary-tumours",
+  "subject": "pathology",
+  "title": "Wilms Tumour, Urothelial Carcinoma, Bladder CIS, and Schistosomal Squamous Carcinoma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Wilms tumour**, or nephroblastoma, is the commonest renal malignancy of childhood, usually appearing as a painless abdominal mass in a well child aged 2 to 5 years. Histology recapitulates kidney development with triphasic blastema, primitive tubules and stroma. WT1 related syndromes, WAGR and Denys-Drash, plus the overgrowth syndrome Beckwith-Wiedemann, each confer predisposition and mandate screening ultrasounds.",
+      "say": "A painless abdominal mass in a three year old is Wilms tumour until imaging and staging prove otherwise.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/paediatric-urology-hypospadias-cryptorchidism-and-wilms-tumor-fig1.webp",
+        "alt": "Wilms tumour in paediatric urology conditions",
+        "caption": "Wilms tumour among paediatric renal and urological conditions."
+      }
+    },
+    {
+      "tx": "Two cooperative traditions treat Wilms tumour differently: the **SIOP approach** gives preoperative chemotherapy before nephrectomy, while the North American COG approach operates upfront for precise staging. Both converge on stage and histology to set later therapy. Diffuse anaplasia, with huge hyperchromatic nuclei and abnormal mitoses, marks unfavourable histology needing intensified regimens, whereas favourable histology now exceeds 90 percent survival.",
+      "say": "Chemotherapy first or surgery first divides Wilms traditions; anaplasia and stage unite their intensity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Favourable histology Wilms",
+          "points": [
+            "Triphasic, no anaplasia",
+            "Excellent survival expected",
+            "Stage guides chemotherapy length"
+          ]
+        },
+        "right": {
+          "title": "Anaplastic Wilms",
+          "points": [
+            "Nuclear anaplasia, TP53 accent",
+            "Intensified therapy",
+            "Guarded prognosis by stage"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The entire urinary tract from renal pelvis to urethra shares urothelial lining, so carcinogens in urine create a field change across it. **Urothelial carcinoma** therefore presents most often with painless visible haematuria in a smoker or dye worker exposed to aromatic amines. Low grade papillary tumours recur frequently but rarely invade, while high grade lesions progress dangerously.",
+      "say": "Painless visible haematuria in a smoker is urothelial cancer until cystoscopy and imaging acquit the tract.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bladder-cancer-fig1.webp",
+        "alt": "Urothelial carcinoma sites and types",
+        "caption": "Urothelial carcinoma across bladder and upper tract sites."
+      }
+    },
+    {
+      "tx": "Flat, high grade **carcinoma in situ of bladder** spreads as a velvety red patch that cystoscopy can nearly miss, yet shed cells make urine cytology strongly positive. Unlike low grade papillary tumours it invades early if untreated. Intravesical BCG immunotherapy after resection is the bladder-sparing backbone, and failure to respond to BCG pushes discussion toward radical cystectomy.",
+      "say": "Positive cytology with near normal cystoscopy hunts flat carcinoma in situ; BCG treats what eyes barely see.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pattern",
+          "Growth",
+          "Behaviour"
+        ],
+        "rows": [
+          [
+            "Low grade papillary",
+            "Exophytic fronds",
+            "Recurs, rarely invades"
+          ],
+          [
+            "High grade papillary",
+            "Disordered fronds",
+            "Progression risk real"
+          ],
+          [
+            "Carcinoma in situ",
+            "Flat, invisible accent",
+            "BCG responsive, cystectomy if not"
+          ],
+          [
+            "Muscle invasive",
+            "Through detrusor",
+            "Radical therapy staging"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Eggs of **Schistosoma haematobium** lodged in bladder wall provoke decades of granulomatous inflammation, calcification and squamous metaplasia, ending in keratinising squamous cell carcinoma in endemic parts of Africa and the Middle East. This cancer arises younger than urothelial carcinoma and often presents with terminal haematuria plus bladder wall calcification. It is a parasite-driven cancer, not a smoking-driven one.",
+      "say": "Endemic haematuria plus bladder wall calcification thinks schistosomal squamous cancer, not urothelial.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Urothelial bladder cancer",
+          "points": [
+            "Smoking and dye exposure",
+            "Papillary or CIS patterns",
+            "BCG for non muscle invasive high risk"
+          ]
+        },
+        "right": {
+          "title": "Squamous bladder cancer",
+          "points": [
+            "Schistosoma, chronic stones, catheters",
+            "Keratinising squamous histology",
+            "Radical surgery accent earlier"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Chronic irritation from stones, long-term catheters or recurrent infection can push bladder mucosa into **cystitis glandularis** and intestinal metaplasia, where goblet cells appear in urothelium. Whether these are true precursors or fellow travellers of adenocarcinoma risk remains debated. Bladder exstrophy carries a clearer adenocarcinoma risk, which is why such patients receive long-term endoscopic surveillance.",
+      "say": "Chronically irritated bladders metaplase; cystitis glandularis earns surveillance respect without panic.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Visible haematuria pathway entered"
+          },
+          {
+            "id": "b",
+            "label": "Cystoscopy plus upper tract imaging"
+          },
+          {
+            "id": "c",
+            "label": "Resection stages muscle invasion"
+          },
+          {
+            "id": "d",
+            "label": "BCG, surgery, or systemic therapy by stage"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A high haemoglobin beside a renal mass may reflect tumour-secreted **erythropoietin** rather than polycythaemia vera, and levels normalise after nephrectomy. The classic triad of haematuria, flank pain and palpable mass appears in only a minority of modern patients, most tumours being incidental imaging finds. Fever, hypercalcaemia from PTHrP and hepatic dysfunction without metastases complete the paraneoplastic repertoire.",
+      "say": "High haemoglobin beside a renal mass may be tumour erythropoietin, not polycythaemia vera.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Paraneoplasia",
+          "Mediator",
+          "Renal link"
+        ],
+        "rows": [
+          [
+            "Polycythaemia",
+            "Erythropoietin ectopic",
+            "RCC classic"
+          ],
+          [
+            "Hypercalcaemia",
+            "PTHrP",
+            "RCC and squamous cancers"
+          ],
+          [
+            "Hypertension",
+            "Renin or compression",
+            "Mass effect and secretion"
+          ],
+          [
+            "Fever and weight loss",
+            "Cytokines",
+            "Prognostic burden"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Cancer of the renal pelvis or ureter is treated by **radical nephroureterectomy** removing kidney, full ureter and a cuff of bladder around the ureteric orifice. Leaving a ureteric stump invites recurrence in that remnant, reflecting the field change concept. Because bladder recurrence afterwards is common, patients also need cystoscopic surveillance, and a single postoperative intravesical chemotherapy dose reduces that risk.",
+      "say": "Upper tract disease takes kidney, ureter, and bladder cuff because the field, not the lump, is diseased.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Non muscle invasive bladder",
+          "points": [
+            "Resection plus risk adapted BCG",
+            "Surveillance cystoscopy years",
+            "Progression watched closely"
+          ]
+        },
+        "right": {
+          "title": "Muscle invasive bladder",
+          "points": [
+            "Chemotherapy plus cystectomy or trimodality",
+            "Node staging decisive",
+            "Urinary diversion counselling central"
+          ]
+        }
+      }
+    }
+  ]
+}

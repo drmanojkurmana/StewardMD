@@ -1,0 +1,220 @@
+{
+  "v": 1,
+  "module": "mic-blood-tissue-protozoa",
+  "subject": "microbiology",
+  "title": "Plasmodium falciparum, Plasmodium vivax and Hepatic Hypnozoites",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Human malaria is transmitted during nocturnal blood feeding by infected female Anopheles mosquitoes that inoculate microscopic motile sporozoites into the subcutaneous microcirculation. Sporozoites rapidly travel through blood to invade parenchymal hepatocytes within sixty minutes, initiating asymptomatic exo-erythrocytic schizogony. The four principal human species are **Plasmodium falciparum**, Plasmodium vivax, Plasmodium malariae, and Plasmodium ovale, with Plasmodium knowlesi causing zoonotic simian infections.",
+      "say": "Nocturnal mosquito bites inject sporozoites that target hepatic parenchymal cells within an hour.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/malaria-fig1.webp",
+        "alt": "Malaria parasite transmission life cycle",
+        "caption": "Malaria life cycle illustrating mosquito vector inoculation and hepatic exo-erythrocytic schizogony [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "In infections caused by Plasmodium vivax and Plasmodium ovale, a subset of intrahepatic sporozoites arrest development, transforming into dormant, quiescent parasitic stages termed **hypnozoites**. These dormant liver forms can reactivate months or years later, initiating secondary rounds of erythrocytic schizogony that cause classic clinical relapses. In sharp contrast, Plasmodium falciparum and Plasmodium malariae never form hypnozoites; their recurrences represent recrudescence from persistent subpatent blood parasitaemia.",
+      "say": "Dormant hepatic hypnozoites cause true clinical relapses in vivax and ovale malaria.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Relapsing species (vivax & ovale)",
+          "points": [
+            "Produce dormant intrahepatic hypnozoites",
+            "Relapse occurs months or years after primary attack",
+            "Require radical cure with 8-aminoquinolines",
+            "Primaquine or tafenoquine clears liver hypnozoites"
+          ]
+        },
+        "right": {
+          "title": "Non-relapsing species (falciparum & malariae)",
+          "points": [
+            "Exo-erythrocytic liver schizogony completes fully",
+            "Hypnozoite stage is completely absent in liver",
+            "Recrudescence stems from surviving blood parasites",
+            "Blood schizonticides suffice for definitive cure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Erythrocyte invasion selectivity dictates the severity of parasitaemia. Plasmodium vivax selectively invades young reticulocytes, which constitute less than two percent of circulating erythrocytes, capping parasitaemia at modest levels. Furthermore, vivax merozoites depend strictly on binding the **Duffy antigen** chemokine receptor (Fy6) on erythrocytes; individuals of West African ancestry lacking Duffy blood group expression are naturally refractory to vivax malaria.",
+      "say": "Vivax merozoites strictly require red cell Duffy antigen receptors and infect only young reticulocytes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Species",
+          "Target Erythrocyte Age",
+          "Receptor Dependency"
+        ],
+        "rows": [
+          [
+            "Plasmodium vivax",
+            "Reticulocytes only (under 2% of total cells)",
+            "Duffy antigen (Fy glycoprotein receptor)"
+          ],
+          [
+            "Plasmodium falciparum",
+            "All erythrocyte ages (reticulocytes and mature cells)",
+            "Glycophorin A, B and basigin (CD147)"
+          ],
+          [
+            "Plasmodium malariae",
+            "Aging, mature senescent erythrocytes only",
+            "Unknown non-Duffy surface receptors"
+          ],
+          [
+            "Plasmodium knowlesi",
+            "All erythrocyte ages; rapid 24-hour cycle",
+            "Normocyte-binding protein homologues"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In contrast, Plasmodium falciparum merozoites promiscuously invade red blood cells of all ages via multiple surface pathways including glycophorin A and basigin. Consequently, **parasitaemia** can escalate rapidly, frequently exceeding five to ten percent of all circulating erythrocytes. This massive, unrestricted red blood cell destruction precipitates profound haemolytic anaemia, blackwater fever from intravascular haemolysis, and life-threatening lactic acidosis.",
+      "say": "Unrestricted invasion of red cells of all ages produces heavy parasitaemia and life-threatening acidosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fal1",
+            "label": "Merozoites invade erythrocytes of all ages indiscriminately"
+          },
+          {
+            "id": "fal2",
+            "label": "Unrestricted multiplication drives parasitaemia over 5 to 10 percent"
+          },
+          {
+            "id": "fal3",
+            "label": "Massive intravascular lysis precipitates severe anaemia and blackwater fever"
+          }
+        ],
+        "edges": [
+          [
+            "fal1",
+            "fal2"
+          ],
+          [
+            "fal2",
+            "fal3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Falciparum-infected erythrocytes express parasite-derived erythrocyte membrane protein one, which concentrates within surface membrane knobby protrusions. This adhesin binds endothelial intercellular adhesion molecule one and CD36 in deep microvessels, producing massive **cytoadherence** and vascular sequestration. Microvascular sludging in cerebral capillaries blocks local perfusion, causing unarousable coma in cerebral malaria.",
+      "say": "Parasite membrane knobs mediate cytoadherence to cerebral capillaries, precipitating coma and cerebral malaria.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/malaria-fig2.webp",
+        "alt": "Cerebral malaria capillary sequestration",
+        "caption": "Histopathological section demonstrating cerebral capillaries packed with sequestered falciparum-infected erythrocytes [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Because late trophozoites and schizonts remain firmly sequestered within deep visceral capillary beds, conventional peripheral blood smears in uncomplicated falciparum malaria demonstrate only young **ring forms** and mature gametocytes. The unexpected finding of mature schizonts on a peripheral smear indicates overwhelming parasitaemia and implies an ominous, life-threatening clinical prognosis.",
+      "say": "Vascular sequestration hides mature schizonts in deep organs; their presence on peripheral smear signals severe disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Peripheral Smear Stage",
+          "Plasmodium falciparum",
+          "Plasmodium vivax"
+        ],
+        "rows": [
+          [
+            "Ring trophozoites",
+            "Delicate, thin, multiple rings per red cell",
+            "Large, coarse ring with thicker cytoplasm"
+          ],
+          [
+            "Late trophozoites & schizonts",
+            "Sequestered in deep tissues; absent in blood",
+            "Routinely visible in peripheral blood smears"
+          ],
+          [
+            "Host erythrocyte appearance",
+            "Normal size and contour; no enlargement",
+            "Markedly enlarged, pale and distorted"
+          ],
+          [
+            "Gametocyte morphology",
+            "Crescentic, banana-shaped or sausage-shaped",
+            "Large, spherical shape filling host cell"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For the radical cure of Plasmodium vivax and Plasmodium ovale, eliminating dormant liver hypnozoites requires a fourteen-day course of the 8-aminoquinoline **primaquine**, or single-dose tafenoquine. Because 8-aminoquinolines cause severe acute haemolytic anaemia in patients with glucose-6-phosphate dehydrogenase deficiency, testing for G6PD activity is mandatory before initiating therapy.",
+      "say": "Primaquine eliminates dormant liver hypnozoites but requires screening for G6PD enzyme deficiency.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pq1",
+            "label": "Confirm Plasmodium vivax or ovale malaria on blood examination"
+          },
+          {
+            "id": "pq2",
+            "label": "Screen patient for glucose-6-phosphate dehydrogenase deficiency"
+          },
+          {
+            "id": "pq3",
+            "label": "If G6PD normal: administer oral primaquine 0.25 to 0.5 mg/kg daily for 14 days"
+          }
+        ],
+        "edges": [
+          [
+            "pq1",
+            "pq2"
+          ],
+          [
+            "pq2",
+            "pq3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For acute blood-stage falciparum malaria, the global therapeutic standard is **artemisinin-based combination therapy** such as artemether-lumefantrine or artesunate-mefloquine. Fast-acting artemisinin derivatives rapidly reduce parasite biomass by several orders of magnitude, while the longer-acting partner drug clears residual parasites. Intravenous artesunate represents the definitive life-saving first-line therapy for severe complicated malaria.",
+      "say": "Artemisinin combination therapy is the worldwide standard, with intravenous artesunate mandatory in severe disease.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Presentation",
+          "First-Line Antimalarial Regimen",
+          "Key Therapeutic Rationale"
+        ],
+        "rows": [
+          [
+            "Uncomplicated P. falciparum",
+            "Oral artemisinin combination therapy (ACT)",
+            "Rapid parasite clearance with partner drug prophylaxis"
+          ],
+          [
+            "Severe falciparum malaria",
+            "Intravenous artesunate for at least 24 hours",
+            "Superior reduction in mortality over IV quinine"
+          ],
+          [
+            "Uncomplicated P. vivax",
+            "Chloroquine or ACT plus 14 days primaquine",
+            "Dual therapy clears blood stages and liver hypnozoites"
+          ],
+          [
+            "G6PD-deficient vivax",
+            "Weekly primaquine 0.75 mg/kg for 8 weeks",
+            "Close haematological monitoring prevents fatal haemolysis"
+          ]
+        ]
+      }
+    }
+  ]
+}

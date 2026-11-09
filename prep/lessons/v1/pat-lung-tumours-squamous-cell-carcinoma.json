@@ -1,0 +1,217 @@
+{
+  "v": 1,
+  "module": "pat-lung-tumours",
+  "subject": "pathology",
+  "title": "Lung Squamous Carcinoma, Adenocarcinoma EGFR ALK, Small Cell Carcinoma, and Neuroendocrine Markers",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Squamous cell carcinoma of lung grows centrally in smokers' bronchi with keratin pearls and intercellular bridges, cavitating, obstructing, and secreting PTHrP into hypercalcaemia more than other lung cancers. The central keratinising cancer is **pulmonary squamous cell carcinoma**. Keratin pearls identify well differentiated tumours under the microscope, and p40 staining supports squamous lineage when morphology alone blurs.",
+      "say": "Central, cavitating, keratinising, hypercalcaemic: squamous lung cancer in smokers, four clues at once.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/lung-cancer-fig1.webp",
+        "alt": "Lung carcinoma patterns and metastasis",
+        "caption": "Lung carcinoma patterns across squamous, adeno, and small cell types."
+      }
+    },
+    {
+      "tx": "Hypercalcaemia in lung cancer usually means squamous histology secreting parathyroid hormone related protein, while adenocarcinoma prefers hyponatraemia less and small cell owns SIADH and Cushing syndromes. That endocrine sorting is **paraneoplastic patterns by lung histology**. PTHrP driven hypercalcaemia typically leaves parathyroid hormone suppressed, a pairing that separates humoral hypercalcaemia from primary hyperparathyroidism.",
+      "say": "Calcium up suggests squamous, sodium down suggests small cell; paraneoplastic chemistry sorts lung histology.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Histology",
+          "Position",
+          "Signature association"
+        ],
+        "rows": [
+          [
+            "Squamous cell",
+            "Central bronchi",
+            "Keratin, cavitation, PTHrP calcium"
+          ],
+          [
+            "Adenocarcinoma",
+            "Peripheral lung",
+            "EGFR, ALK, KRAS drivers, glands"
+          ],
+          [
+            "Small cell",
+            "Central, bulky nodes",
+            "Neuroendocrine, SIADH, rapid growth"
+          ],
+          [
+            "Large cell",
+            "Peripheral large mass",
+            "Diagnosis of exclusion, undifferentiated"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Adenocarcinoma, commonest lung cancer overall and in never smokers, grows peripherally as glands or mucin producers and carries druggable EGFR, ALK, ROS1, and KRAS alterations demanding molecular profiling. The peripheral glandular cancer is **lung adenocarcinoma, molecularly profiled**. Tissue sparing matters greatly here, since scant biopsy material must stretch across morphology, immunostains, and subsequent molecular assays.",
+      "say": "Every lung adenocarcinoma earns EGFR, ALK, and wider profiling; histology alone no longer prescribes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "EGFR mutated",
+          "points": [
+            "Never or light smokers, Asian enrichment",
+            "Tyrosine kinase inhibitors first",
+            "Resistance T790M and beyond historically"
+          ]
+        },
+        "right": {
+          "title": "ALK rearranged",
+          "points": [
+            "Younger, never smokers",
+            "ALK inhibitors, crizotinib lineage",
+            "Brain penetration guides choice"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Small cell carcinoma crushes blue small cells with scant cytoplasm, nuclear moulding, and necrosis from heavy smoking exposure, doubling fast, metastasising early, and answering chemotherapy briefly before relapse. The neuroendocrine sprinter is **small cell lung carcinoma**. Near universal TP53 and RB1 loss drives this tumour, and its Ki-67 proliferation index frequently exceeds 80 percent of tumour nuclei.",
+      "say": "Crush artefact, moulded nuclei, huge nodes, paraneoplasia: small cell carcinoma runs fastest and relapses hardest.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Central mass, bulky mediastinal nodes"
+          },
+          {
+            "id": "b",
+            "label": "Biopsy: small blue moulded cells"
+          },
+          {
+            "id": "c",
+            "label": "Stage limited versus extensive"
+          },
+          {
+            "id": "d",
+            "label": "Chemoimmunotherapy, thoracic RT selected"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Neuroendocrine markers chromogranin, synaptophysin, CD56, and INSM1 stain small cell and carcinoid tumours, while TTF1 supports lung origin in both small cell and adenocarcinoma contexts. That panel performs **neuroendocrine differentiation in lung tumours**. INSM1 adds sensitivity where chromogranin staining runs weak, particularly inside poorly differentiated small cell tumours with scant cytoplasm.",
+      "say": "Synaptophysin, chromogranin, CD56: neuroendocrine stains separate small cell and carcinoid families.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Marker",
+          "Supports",
+          "Caution"
+        ],
+        "rows": [
+          [
+            "TTF1",
+            "Lung adenocarcinoma, small cell",
+            "Also thyroid origin"
+          ],
+          [
+            "p40 and p63",
+            "Squamous differentiation",
+            "Guides non squamous therapy exclusion"
+          ],
+          [
+            "Synaptophysin, chromogranin",
+            "Neuroendocrine tumours",
+            "Carcinoid to small cell spectrum"
+          ],
+          [
+            "Napsin A",
+            "Lung adenocarcinoma",
+            "Pairs with TTF1"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Large cell carcinoma diagnoses exclusion in large peripheral undifferentiated tumours lacking glandular, squamous, or neuroendocrine commitment after full panels, increasingly dissolved into molecular categories. The shrinking wastebasket is **large cell lung carcinoma, diagnosis of exclusion**. Modern immunostains reclassify many former large cell cases as adenocarcinoma or squamous carcinoma once lineage markers finally declare themselves.",
+      "say": "Large cell carcinoma shrinks as panels grow; undifferentiated today is molecularly classified tomorrow.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Limited stage small cell",
+          "points": [
+            "Confined to one radiation field",
+            "Chemoradiation combined",
+            "Prophylactic cranial RT debated individually"
+          ]
+        },
+        "right": {
+          "title": "Extensive stage small cell",
+          "points": [
+            "Beyond one field, metastases",
+            "Chemoimmunotherapy backbone",
+            "Response brisk, relapse usual"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Targeted therapy transformed adenocarcinoma: EGFR inhibitors, ALK and ROS1 inhibitors, KRAS G12C drugs, and immunotherapy by PD-L1 now sequence by molecular report like a menu. That report driven practice is **molecular sequencing of lung adenocarcinoma therapy**. Osimertinib penetrates the blood brain barrier well, which matters because EGFR mutated tumours relapse inside the brain so often.",
+      "say": "Read the molecular report before the chemotherapy chart in lung adenocarcinoma; drivers order first.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Adenocarcinoma confirmed on biopsy"
+          },
+          {
+            "id": "b",
+            "label": "EGFR, ALK, ROS1, KRAS, PD-L1 profiled"
+          },
+          {
+            "id": "c",
+            "label": "Driver positive: targeted inhibitor"
+          },
+          {
+            "id": "d",
+            "label": "Driver negative: chemoimmunotherapy by PD-L1"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "b",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Smoking prevention and cessation remain lung cancer's largest therapy, cutting squamous and small cell incidence most, while screening low dose CT saves selected heavy smokers' lives. That hierarchy defines **lung cancer prevention and screening priorities**. Annual low dose computed tomography screening suits adults aged 50 to 80 years holding at least a 20 pack year smoking history.",
+      "say": "No targeted drug outperforms never smoking; low dose CT screening serves those already heavily exposed."
+    }
+  ]
+}
