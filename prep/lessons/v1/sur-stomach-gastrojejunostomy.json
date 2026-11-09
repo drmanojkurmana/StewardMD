@@ -1,0 +1,263 @@
+{
+ "v": 1,
+ "module": "sur-stomach",
+ "subject": "surgery",
+ "title": "Gastrojejunostomy, Postgastrectomy Dumping Syndrome, and Gastric Cancer Bypass",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A gastrojejunostomy is a surgical bypass that establishes a direct lumen-to-lumen anastomosis between the stomach and the proximal jejunum. It is indicated for benign gastric outlet obstruction from chronic peptic scarring, advanced unresectable **distal carcinoma of the stomach** causing pyloric stenosis, or as the reconstructive limb following a distal partial gastrectomy (Billroth II procedure) or Roux-en-Y gastric bypass.",
+   "say": "Gastrojejunostomy connects the stomach directly to the jejunum to bypass distal gastric obstruction caused by peptic scarring or unresectable carcinoma of the stomach.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-spc-carcinoma-stomach-ulcerative.webp",
+    "alt": "Gross pathology photograph of an ulcerative adenocarcinoma of the distal gastric antrum causing pyloric obstruction.",
+    "caption": "Ulcerative carcinoma of the gastric antrum: classic indication for surgical bypass or oncological resection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Surgically, the anastomosis can be oriented anterior or posterior to the transverse colon. In a retrocolic gastrojejunostomy, the surgeon creates a defect in the avascular space of the transverse mesocolon, pulls a loop of proximal jejunum through the opening, and sutures it to the dependent posterior gastric wall. Anchoring the **edges of the mesocolon** to the gastric wall is critical to prevent internal herniation and bowel strangulation.",
+   "say": "In a retrocolic gastrojejunostomy, the jejunum is brought through the transverse mesocolon to the posterior gastric wall. The mesocolon defect is sutured to the stomach to prevent internal herniation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Retrocolic Anastomosis",
+     "points": [
+      "Traverses transverse mesocolic window",
+      "Provides shortest, most dependent loop",
+      "Lower incidence of post-surgical stasis",
+      "Mesocolic defect must be carefully closed"
+     ]
+    },
+    "right": {
+     "title": "Antecolic Anastomosis",
+     "points": [
+      "Brought anterior to transverse colon",
+      "Technically easier in malignant involvement",
+      "Requires longer jejunal loop to avoid tension",
+      "Preferred when mesocolon is infiltrated by cancer"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "By eliminating the mechanical reservoir function of the stomach and bypassing the pyloric regulatory sphincter, gastrojejunostomy alters postprandial gastrointestinal physiology. The most frequent metabolic complication is postgastrectomy dumping syndrome. **Early dumping syndrome** occurs fifteen to thirty minutes after ingestion of a meal, precipitated by the rapid transit of a hyperosmolar chyme bolus into the upper small intestine.",
+   "say": "Bypassing the pylorus can cause early dumping syndrome fifteen to thirty minutes after eating, triggered by hyperosmolar food rapidly entering the jejunum.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "meal",
+      "label": "Ingestion of High-Carbohydrate Hyperosmolar Meal"
+     },
+     {
+      "id": "bolus",
+      "label": "Rapid Dumping of Unregulated Chyme into Upper Jejunum"
+     },
+     {
+      "id": "fluid",
+      "label": "Massive Osmotic Fluid Shift from Plasma into Intestinal Lumen"
+     },
+     {
+      "id": "hypo",
+      "label": "Acute Circulatory Hypovolaemia & Vasoactive Peptide Release"
+     },
+     {
+      "id": "symp",
+      "label": "Diaphoresis, Palpitations, Cramping Abdominal Pain & Diarrhea"
+     }
+    ],
+    "edges": [
+     [
+      "meal",
+      "bolus"
+     ],
+     [
+      "bolus",
+      "fluid"
+     ],
+     [
+      "fluid",
+      "hypo"
+     ],
+     [
+      "hypo",
+      "symp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The hyperosmolar food bolus draws fluid rapidly from the intravascular space into the bowel lumen through osmosis, causing acute circulating hypovolaemia and profound jejunal distension. Simultaneously, neuroendocrine cells release vasoactive mediators like serotonin, bradykinin, and neurotensin. Patients experience systemic vasomotor symptoms including diaphoresis, flushing, palpitations, lightheadedness, and hypotension, accompanied by **gastrointestinal cramping and explosive diarrhea**.",
+   "say": "Fluid shifts into the bowel lumen cause sudden hypovolemia, while gut peptides trigger flushing, sweating, tachycardia, and explosive diarrhea within half an hour of eating.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Early Dumping Syndrome",
+     "Late Dumping Syndrome"
+    ],
+    "rows": [
+     [
+      "Timing after Meals",
+      "15 to 30 minutes postprandially",
+      "2 to 3 hours postprandially"
+     ],
+     [
+      "Primary Mechanism",
+      "Hyperosmolar fluid shift & vasoactive release",
+      "Reactive hyperinsulinism causing hypoglycemia"
+     ],
+     [
+      "Gastrointestinal Signs",
+      "Abdominal colic, bloating, explosive diarrhea",
+      "Absent (Primarily neurological & adrenergic)"
+     ],
+     [
+      "Vasomotor Signs",
+      "Flushing, diaphoresis, tachycardia, hypotension",
+      "Tremor, hunger, confusion, palpitations"
+     ],
+     [
+      "Aggravating Diet",
+      "Hypertonic carbohydrate-rich liquids",
+      "Simple refined sugars and starches"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In contrast, **late dumping syndrome** occurs two to three hours after eating and is mediated through a completely different endocrine pathway. Rapid emptying of simple carbohydrates into the jejunum leads to rapid glucose absorption and an exaggerated spike in systemic blood glucose. This triggers an overshooting release of insulin from pancreatic beta cells, culminating in a severe episode of reactive rebound hypoglycemia.",
+   "say": "Late dumping occurs two to three hours after meals due to rapid glucose absorption triggering excess insulin release, causing reactive hypoglycemia with tremors and sweating.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "carb",
+      "label": "Rapid Delivery of Glucose into Proximal Jejunum"
+     },
+     {
+      "id": "abs",
+      "label": "Accelerated Intestinal Glucose Absorption & Blood Sugar Spike"
+     },
+     {
+      "id": "ins",
+      "label": "Massive Incretin Release (GLP-1) & Pancreatic Insulin Surge"
+     },
+     {
+      "id": "drop",
+      "label": "Rapid Peripheral Glucose Uptake Exceeding Inflow"
+     },
+     {
+      "id": "hypo",
+      "label": "Severe Adrenergic & Neuroglycopenic Hypoglycemia"
+     }
+    ],
+    "edges": [
+     [
+      "carb",
+      "abs"
+     ],
+     [
+      "abs",
+      "ins"
+     ],
+     [
+      "ins",
+      "drop"
+     ],
+     [
+      "drop",
+      "hypo"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Initial management for both forms of dumping relies on dietary modifications. Patients are advised to consume six small, dry meals daily, rich in complex proteins and dietary fiber, while strictly eliminating simple refined sugars and hypertonic liquids. Liquids must be consumed at least thirty to forty-five minutes before or after meals rather than with food. For refractory cases, the somatostatin analogue **subcutaneous octreotide** effectively inhibits gastrointestinal peptide release and delays transit.",
+   "say": "Management focuses on eating small, frequent meals high in protein and fiber while separating liquids from solids. Severe refractory cases respond to octreotide injections.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dietary Management",
+     "points": [
+      "Small, frequent meals (6 times daily)",
+      "High protein, high fat, and high soluble fiber",
+      "Strict elimination of simple sugars",
+      "Separate liquids from solids by 45 minutes"
+     ]
+    },
+    "right": {
+     "title": "Medical & Surgical Therapy",
+     "points": [
+      "Pectin or guar gum to delay absorption",
+      "Acarbose to inhibit carbohydrate breakdown",
+      "Subcutaneous octreotide inhibits peptide release",
+      "Conversion to Roux-en-Y reconstruction"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Another distressing sequela of loop Billroth II reconstruction is **alkaline reflux gastritis**. Reflux of bile salts, lysolecithin, and alkaline pancreatic secretions through the gastrojejunostomy into the unprotected gastric remnant damages the gastric mucosal barrier. Patients present with chronic, burning epigastric pain that is aggravated by food and accompanied by bilious vomiting. Unlike peptic ulcer pain, vomiting does not relieve the pain of alkaline gastritis.",
+   "say": "Alkaline reflux gastritis occurs when bile and pancreatic juice wash back into the gastric remnant, causing burning epigastric pain that is not relieved by vomiting.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-stomach-gross.webp",
+    "alt": "Anatomical schematic illustrating loop gastrojejunostomy with duodenal bile reflux versus Roux-en-Y diversion.",
+    "caption": "Alkaline gastritis: diversion of enterobiliary secretions using a 50-centimetre Roux-en-Y reconstruction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Medical therapy with bile acid sequestrants like cholestyramine or sucralfate is notoriously ineffective for alkaline reflux gastritis. The definitive surgical remedy is revision of the loop gastrojejunostomy to a **Roux-en-Y gastrojejunostomy**. The surgeon constructs a Roux jejunal limb measuring fifty to sixty centimetres in length between the stomach and the jejunojejunostomy, effectively diverting corrosive bile and pancreatic juices far downstream from the vulnerable gastric mucosa.",
+   "say": "Alkaline reflux gastritis fails medical therapy and is cured surgically by converting to a Roux-en-Y gastrojejunostomy with a fifty-centimeter Roux limb to divert bile away from the stomach.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "loop",
+      "label": "Loop Gastrojejunostomy with Chronic Bile Reflux Gastritis"
+     },
+     {
+      "id": "div",
+      "label": "Division of Afferent Jejunal Limb Close to Gastric Anastomosis"
+     },
+     {
+      "id": "limb",
+      "label": "Creation of 50 to 60 cm Defunctionalized Roux Efferent Limb"
+     },
+     {
+      "id": "jj",
+      "label": "Construction of End-to-Side Jejunojejunostomy Downstream"
+     },
+     {
+      "id": "cure",
+      "label": "Complete Prevention of Bile and Pancreatic Reflux into Stomach"
+     }
+    ],
+    "edges": [
+     [
+      "loop",
+      "div"
+     ],
+     [
+      "div",
+      "limb"
+     ],
+     [
+      "limb",
+      "jj"
+     ],
+     [
+      "jj",
+      "cure"
+     ]
+    ]
+   }
+  }
+ ]
+}

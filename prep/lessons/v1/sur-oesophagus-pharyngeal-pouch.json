@@ -1,0 +1,245 @@
+{
+ "v": 1,
+ "module": "sur-oesophagus",
+ "subject": "surgery",
+ "title": "Pharyngeal Pouch, Killian Dehiscence, and Iatrogenic Oesophageal Perforation",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A Zenker diverticulum, historically known as a **pharyngeal pouch**, is a pulsion false diverticulum arising in the posterior midline of the hypopharynx. It represents a herniation of mucosal and submucosal layers through a pre-existing anatomical triangle of muscular weakness known as Killian dehiscence. Because the pouch lacks an outer covering of muscularis propria, it is vulnerable to progressive distension, retention of ingested food, and iatrogenic instrumental perforation.",
+   "say": "A pharyngeal pouch, or Zenker diverticulum, is a false diverticulum herniating through Killian dehiscence in the posterior hypopharynx due to lack of a muscular coat.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/zenker-diverticulum-fig1.webp",
+    "alt": "Anatomical schematic showing Killian dehiscence between the oblique thyropharyngeus and transverse cricopharyngeus.",
+    "caption": "Zenker diverticulum: herniation of mucosa through Killian dehiscence in the posterior hypopharynx. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The boundaries of Killian dehiscence are defined by the two functional components of the inferior pharyngeal constrictor muscle. The superior border is formed by the oblique fibers of the thyropharyngeus muscle, while the inferior border is formed by the transverse horizontal fibers of the **cricopharyngeus muscle**. Dyscoordination between pharyngeal contraction and cricopharyngeal sphincter relaxation during deglutition generates elevated intraluminal pressure, forcing the mucosa to herniate posteriorly.",
+   "say": "Killian dehiscence lies between the oblique thyropharyngeus above and transverse cricopharyngeus below. Failure of the cricopharyngeus to relax creates high pressure that herniates the pouch.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "swal",
+      "label": "Deglutition Bolus Propulsion by Thyropharyngeus"
+     },
+     {
+      "id": "spasm",
+      "label": "Premature Contraction or Spasm of Cricopharyngeus"
+     },
+     {
+      "id": "press",
+      "label": "Marked Elevation of Intraluminal Hypopharyngeal Pressure"
+     },
+     {
+      "id": "hernia",
+      "label": "Posterior Herniation of Mucosa Through Killian Dehiscence"
+     },
+     {
+      "id": "pouch",
+      "label": "Progressive Enlargement of Dependent Zenker Sac"
+     }
+    ],
+    "edges": [
+     [
+      "swal",
+      "spasm"
+     ],
+     [
+      "spasm",
+      "press"
+     ],
+     [
+      "press",
+      "hernia"
+     ],
+     [
+      "hernia",
+      "pouch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Patients typically present with high cervical dysphagia, regurgitation of undigested, non-acidic foul food hours after eating, chronic halitosis, and gurgling noises in the neck on swallowing, termed **Boyce sign**. As the dependent sac enlarges, it compresses the adjacent cervical esophagus anteriorly, exacerbating dysphagia and causing nocturnal coughing, choking episodes, recurrent aspiration bronchopneumonia, and progressive nutritional cachexia.",
+   "say": "Patients report high cervical dysphagia, foul breath, regurgitation of undigested food, and gurgling in the neck termed Boyce sign. The expanding sac compresses the esophagus, risking aspiration.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Manifestation",
+     "Pathophysiological Mechanism",
+     "Diagnostic Clue"
+    ],
+    "rows": [
+     [
+      "Cervical Dysphagia",
+      "Compression of true esophageal lumen by pouch",
+      "Sticking sensation localized to suprasternal notch"
+     ],
+     [
+      "Regurgitation of Food",
+      "Stasis of meals within mucosal pouch",
+      "Food particles are undigested and non-acidic"
+     ],
+     [
+      "Halitosis",
+      "Putrefaction of retained food by oral flora",
+      "Severe chronic foul breath"
+     ],
+     [
+      "Boyce Sign",
+      "Displacement of trapped gas and fluid on palpation",
+      "Audible gurgling on external neck pressure"
+     ],
+     [
+      "Aspiration Pneumonia",
+      "Nocturnal overflow of pouch contents into trachea",
+      "Recurrent basal lung consolidation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive diagnostic gold standard for evaluating a pharyngeal pouch is a **barium swallow esophagogram**. Lateral and oblique fluoroscopic projections demonstrate a smooth, rounded, contrast-filled sac originating from the posterior hypopharyngeal wall at the C5 to C6 vertebral level, clearly distinct from the anteriorly displaced cervical esophagus. Standard flexible upper endoscopy is strictly contraindicated until a barium study outlines the anatomy, as blind intubation risks fatal pouch perforation.",
+   "say": "Barium swallow is the investigation of choice, outlining a rounded sac projecting from the posterior hypopharyngeal wall. Blind endoscopy is avoided to prevent perforating the pouch.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Barium Esophagogram",
+     "points": [
+      "Non-invasive diagnostic gold standard",
+      "Outlines size, position, and orientation of pouch",
+      "Evaluates cricopharyngeal bar muscle spasm",
+      "Zero risk of instrumental pouch perforation"
+     ]
+    },
+    "right": {
+     "title": "Upper Gastrointestinal Endoscopy",
+     "points": [
+      "Carries high risk of pouch fundus perforation",
+      "Endoscope tip readily enters dependent blind sac",
+      "Should only be performed over a guidewire",
+      "Essential only if suspicious filling defect suggests cancer"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Minimally invasive management of pharyngeal pouches larger than three centimetres is achieved using **endoscopic stapled diverticulotomy**, originally pioneered by Dohlman. Under general anaesthesia, a specialized bivalved Weerda diverticuloscope is inserted to expose the tissue bridge separating the esophageal lumen from the diverticulum. An endoscopic linear stapler divides this party wall, which contains the hypertonic cricopharyngeus muscle, simultaneously dividing the muscle and incorporating the pouch back into the esophageal lumen.",
+   "say": "Endoscopic stapled diverticulotomy uses a linear cutter to divide the common party wall containing the cricopharyngeus, incorporating the pouch into the esophagus without skin incisions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "scope",
+      "label": "Insertion of Rigid Bivalved Weerda Diverticuloscope"
+     },
+     {
+      "id": "bridge",
+      "label": "Visualization of Tissue Bridge Between Pouch & Esophagus"
+     },
+     {
+      "id": "staple",
+      "label": "Application of Endo-GIA Linear Cutting Stapler Across Bridge"
+     },
+     {
+      "id": "myo",
+      "label": "Complete Division of Hypertonic Cricopharyngeus Fibers"
+     },
+     {
+      "id": "integ",
+      "label": "Marsupialization of Pouch Cavity into Esophageal Lumen"
+     }
+    ],
+    "edges": [
+     [
+      "scope",
+      "bridge"
+     ],
+     [
+      "bridge",
+      "staple"
+     ],
+     [
+      "staple",
+      "myo"
+     ],
+     [
+      "myo",
+      "integ"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Open surgical excision via a left cervical incision anterior to the sternocleidomastoid muscle is preferred for small pouches under three centimetres, where stapler jaws cannot seat, or when endoscopic exposure is precluded by neck rigidity. The surgeon mobilizes the sac, performs an essential **cricopharyngeal myotomy** to abolish the outflow obstruction, and either resects the pouch with a linear stapler (diverticulectomy) or suspends it upside-down to the prevertebral fascia (diverticulopexy).",
+   "say": "Open surgery via a left neck incision is used for small pouches under three centimeters. It involves dividing the cricopharyngeus muscle combined with pouch excision or suspension.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Endoscopic Diverticulotomy",
+     "points": [
+      "Transoral approach without skin incisions",
+      "Significantly shorter operative duration",
+      "Oral fluids resumed on postoperative day one",
+      "Preferred for elderly and frail patients"
+     ]
+    },
+    "right": {
+     "title": "Open Cervical Excision",
+     "points": [
+      "Left transverse or oblique cervical incision",
+      "Enables complete physical diverticulectomy",
+      "Direct myotomy of entire cricopharyngeus",
+      "Preferred for small pouches under 3 cm"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Instrumental instrumentation accounts for over seventy percent of all clinical cases of **iatrogenic oesophageal perforation**. The most common site of injury during rigid or flexible upper endoscopy is the cervical esophagus, specifically at the cricopharyngeal narrowing. Here, the esophageal lumen is narrowest and posterior wall support is deficient. Perforation also occurs during therapeutic pneumatic balloon dilatation for achalasia, sclerotherapy for varices, and transesophageal echocardiography.",
+   "say": "Instrumentation during endoscopy causes over seventy percent of esophageal perforations, most frequently occurring at the narrow cricopharyngeal junction in the posterior neck.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/boerhaave-syndrome-fig1.webp",
+    "alt": "Anatomical schematic highlighting common sites of instrumental perforation in the cervical, thoracic, and abdominal esophagus.",
+    "caption": "Esophageal perforation locations: cricopharyngeus narrowing, aortic arch crossing, and diaphragmatic hiatus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Cervical esophageal perforations present with neck pain, stiffness, localized surgical emphysema on palpation, dysphagia, and fever. Unlike thoracic ruptures, cervical leaks are often confined by deep fascial planes in the retrovisceral space. Patients presenting early without systemic sepsis are managed conservatively with complete bowel rest, intravenous broad-spectrum antibiotics, and total parenteral nutrition, whereas expanding collections require prompt **cervical drainage and debridement**.",
+   "say": "Cervical perforations present with neck pain, fever, and crepitus. Confined cervical leaks can be managed with antibiotics and bowel rest, while spreading collections require surgical drainage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Perforation Level",
+     "Common Etiology",
+     "Clinical Presentation & Management"
+    ],
+    "rows": [
+     [
+      "Cervical Esophagus",
+      "Diagnostic endoscopy, Zenker intubation",
+      "Neck pain, crepitus, fever; conservative or neck drain"
+     ],
+     [
+      "Mid-Thoracic Esophagus",
+      "Foreign bodies, stenting, dilatation",
+      "Retrosternal chest pain, mediastinitis; thoracotomy repair"
+     ],
+     [
+      "Distal Esophagus",
+      "Pneumatic achalasia dilation, Boerhaave",
+      "Epigastric pain, peritonitis, shock; urgent laparotomy"
+     ]
+    ]
+   }
+  }
+ ]
+}
