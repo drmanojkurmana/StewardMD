@@ -1,0 +1,232 @@
+{
+ "v": 1,
+ "module": "obg-pph",
+ "subject": "obstetrics-gynaecology",
+ "title": "Misoprostol, Tranexamic Acid, Bakri Balloon and B-Lynch",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The prostaglandin E1 tablet used sublingually or rectally when oxytocin fails or is unavailable is **misoprostol**. Eight hundred micrograms sublingual is the treatment dose. Fever and shivering are common, expected and self limiting. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Misoprostol eight hundred micrograms sublingual treats haemorrhage when oxytocin fails.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-misoprostol.webp",
+    "alt": "Misoprostol for postpartum haemorrhage.",
+    "caption": "Misoprostol. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The antifibrinolytic halving death from bleeding when given within three hours is **tranexamic acid**. One gram intravenously is the WOMAN trial dose, with a second gram if bleeding continues. Beyond three hours it no longer helps. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Tranexamic acid within three hours halves bleeding death at one gram intravenously.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Haemorrhage recognised"
+     },
+     {
+      "id": "n1",
+      "label": "Tranexamic within 3 hours"
+     },
+     {
+      "id": "n2",
+      "label": "One gram IV"
+     },
+     {
+      "id": "n3",
+      "label": "Second gram if ongoing"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Firm fundal rubbing stimulating contraction plus expelling clots is **uterine massage**. It is both diagnosis and treatment for atony in the first seconds. Bimanual compression escalates it when external massage fails. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Uterine massage diagnoses and treats atony in the first seconds of haemorrhage.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/postpartum-haemorrhage-fig1.webp",
+    "alt": "Massage within PPH pathway.",
+    "caption": "PPH massage. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An inflatable silicone balloon tamponading the uterine cavity is the **Bakri balloon**. Filled with three to five hundred millilitres, it controls atony while resuscitation catches up. Drainage through its lumen reveals ongoing loss honestly. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "The Bakri balloon tamponades the cavity and honestly reveals ongoing loss by drainage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Detail"
+    ],
+    "rows": [
+     [
+      "Insert",
+      "Through cervix, ultrasound guided"
+     ],
+     [
+      "Fill",
+      "300 to 500 ml saline"
+     ],
+     [
+      "Remove",
+      "Deflate after 12 to 24 hours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The brace suture compressing the uterus like a rucksacks straps is the **B-Lynch suture**. Placed at laparotomy, it controls atony while preserving the uterus. Success avoids hysterectomy in most properly selected cases. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "The B-Lynch brace suture compresses the uterus and avoids hysterectomy in most cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Laparotomy for refractory atony"
+     },
+     {
+      "id": "n1",
+      "label": "Test compression first"
+     },
+     {
+      "id": "n2",
+      "label": "Brace suture placed"
+     },
+     {
+      "id": "n3",
+      "label": "Uterus preserved"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Condom catheter tamponade improvises balloon control where Bakri balloons are unaffordable, termed **condom tamponade**. A condom tied on a catheter and filled works remarkably. It exemplifies frugal innovation saving lives in low resource settings. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Condom tamponade improvises balloon control affordably in low resource settings.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bakri balloon",
+     "points": [
+      "Commercial, drain lumen",
+      "Costly"
+     ]
+    },
+    "right": {
+     "title": "Condom catheter",
+     "points": [
+      "Improvised, cheap",
+      "Widely available"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Stepping from drugs to balloon to surgery without delay follows the **escalation principle**. Each failed step gets minutes, not half hours, while blood flows. Hysterectomy delayed too long converts a survivable bleed into a death. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Escalation moves from drugs to balloon to surgery in minutes per failed step.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Haemorrhage escalation assessment.",
+    "caption": "Escalation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Aortic compression against the spine buys minutes in catastrophic bleeding as a **rescue manoeuvre**. A fist pressed just above the umbilicus slows pelvic flow during transfer or laparotomy preparation. It is a bridge, never a treatment. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Aortic compression buys minutes in catastrophic bleeding as a bridge only.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Catastrophic bleeding"
+     },
+     {
+      "id": "n1",
+      "label": "Fist compresses aorta"
+     },
+     {
+      "id": "n2",
+      "label": "Transfer or laparotomy readied"
+     },
+     {
+      "id": "n3",
+      "label": "Definitive control"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After control, haemoglobin, coagulation and observations continue on a **post haemorrhage protocol**. Thromboprophylaxis timing balances clot against rebleed once stable. Debrief and documentation, including estimated loss method, complete the episode. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Post haemorrhage protocol continues observations and times thromboprophylaxis once stable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Watch",
+     "Why"
+    ],
+    "rows": [
+     [
+      "Haemoglobin",
+      "Delayed fall"
+     ],
+     [
+      "Observations",
+      "Rebleed detection"
+     ],
+     [
+      "VTE prophylaxis",
+      "Timed when safe"
+     ]
+    ]
+   }
+  }
+ ]
+}

@@ -1,0 +1,228 @@
+{
+ "v": 1,
+ "module": "obg-puerperium",
+ "subject": "obstetrics-gynaecology",
+ "title": "Postpartum Blues, Depression, Psychosis and Sheehan Syndrome",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Tearfulness, irritability and lability peaking at day four or five in most mothers are the **postpartum blues**. Hormonal withdrawal and sleep deprivation drive them. They resolve within two weeks without treatment beyond support and reassurance from family and staff. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Postpartum blues peak at day four and resolve within two weeks with support.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Condition",
+     "Timing"
+    ],
+    "rows": [
+     [
+      "Blues",
+      "Days 3 to 5, resolves"
+     ],
+     [
+      "Depression",
+      "Any first year, persists"
+     ],
+     [
+      "Psychosis",
+      "Days to 2 weeks, severe"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Persistent low mood, anhedonia and impaired functioning in the first year is **postpartum depression**. It affects about one in seven mothers and impairs bonding and infant development. Validated questionnaires screen for it at postnatal contacts in most services. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
+   "say": "Postpartum depression affects one in seven mothers and impairs bonding.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Screening questionnaire"
+     },
+     {
+      "id": "n1",
+      "label": "Depression identified"
+     },
+     {
+      "id": "n2",
+      "label": "Psychological therapy first"
+     },
+     {
+      "id": "n3",
+      "label": "Medication if moderate severe"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A psychiatric emergency with delusions, mania and disorganisation in the first fortnight is **puerperal psychosis**. Risk concentrates in bipolar disorder and previous puerperal episodes. Mother and baby unit admission keeps them together under close supervision. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
+   "say": "Puerperal psychosis is an emergency needing mother and baby unit admission.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Blues",
+     "points": [
+      "Mild, brief",
+      "Support only"
+     ]
+    },
+    "right": {
+     "title": "Psychosis",
+     "points": [
+      "Delusions, mania",
+      "Emergency admission"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Pituitary necrosis after severe postpartum haemorrhage causing failure to lactate and amenorrhoea is **Sheehan syndrome**. The enlarged pregnant pituitary outgrows its blood supply during shock. Hormone replacement is lifelong once the diagnosis is established. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
+   "say": "Sheehan syndrome necroses the pituitary after haemorrhage, failing lactation first.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hormone lost",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Prolactin",
+      "No lactation"
+     ],
+     [
+      "Gonadotrophins",
+      "Amenorrhoea"
+     ],
+     [
+      "TSH and ACTH",
+      "Hypothyroid, adrenal failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Autoimmune thyroid dysfunction within a year of delivery, often missed as normal fatigue, is **postpartum thyroiditis**. Its hypothyroid phase needs levothyroxine when symptomatic or planning pregnancy. A third develop permanent hypothyroidism in later years. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
+   "say": "Postpartum thyroiditis is missed as fatigue and a third become permanently hypothyroid.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Postpartum endocrine review.",
+    "caption": "Postpartum review. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Thrombosis risk peaks in the first three weeks after delivery, mandating **deep vein thrombosis** vigilance. Risk assessment before discharge assigns prophylaxis by caesarean, obesity and thrombophilia. Leg pain or breathlessness earns same day assessment without delay. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
+   "say": "Deep vein thrombosis risk peaks in the first three postpartum weeks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Risk assessed at delivery"
+     },
+     {
+      "id": "n1",
+      "label": "Prophylaxis assigned"
+     },
+     {
+      "id": "n2",
+      "label": "Symptoms safety netted"
+     },
+     {
+      "id": "n3",
+      "label": "Same day review if symptomatic"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Suicide is a leading cause of late maternal death, making **mental health enquiry** mandatory at every contact. Asking directly does not plant ideas and opens disclosure. Known bipolar or previous psychosis earns a written perinatal mental health plan. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
+   "say": "Mental health enquiry is mandatory because suicide leads late maternal deaths.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/postpartum-haemorrhage-fig1.webp",
+    "alt": "Postpartum care including mental health.",
+    "caption": "Postpartum care. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Contraception counselling before discharge prevents short interval pregnancies, termed **postpartum contraception planning**. Long acting methods placed immediately have the highest continuation rates. Ovulation can precede the first period, even while breastfeeding partially. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
+   "say": "Postpartum contraception planning uses immediate long acting methods for continuation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Immediate implant or IUD",
+     "points": [
+      "Placed before discharge",
+      "Highest continuation"
+     ]
+    },
+    "right": {
+     "title": "Deferred",
+     "points": [
+      "Return visit needed",
+      "Pregnancy gap risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Hair shedding, night sweats and lochia changes frighten uninformed mothers, covered by **normal puerperium counselling**. Forewarning converts panic calls into reassurance. Written discharge information lists true danger signs separately and clearly. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
+   "say": "Normal puerperium counselling forewarns about hair shedding and night sweats.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Normal",
+     "Danger"
+    ],
+    "rows": [
+     [
+      "Hair shedding",
+      "Foul lochia with fever"
+     ],
+     [
+      "Night sweats",
+      "Heavy bleeding"
+     ],
+     [
+      "Afterpains",
+      "Severe headache, visual change"
+     ]
+    ]
+   }
+  }
+ ]
+}
