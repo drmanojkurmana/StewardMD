@@ -1,0 +1,242 @@
+{
+ "v": 1,
+ "module": "ana-organ-systems",
+ "subject": "anatomy",
+ "title": "Respiratory and Renal Microscopic Functional Barriers",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The conducting airway is lined by pseudostratified ciliated columnar epithelium populated by ciliated cells, goblet cells, and basal stem cells. As the respiratory tree branches distally into terminal and respiratory bronchioles, goblet cells disappear and the epithelium transitions into a simple cuboidal epithelium featuring domed **club cells** (Clara cells).",
+   "say": "The conducting airway is lined by pseudostratified ciliated columnar epithelium. In terminal bronchioles, goblet cells vanish and the lining becomes simple cuboidal epithelium marked by dome-shaped club cells.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-airway-epithelium.svg",
+    "alt": "Respiratory epithelium transition to bronchioles and alveoli",
+    "caption": "Airway epithelial transition from conducting tracts to gas-exchanging alveoli. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Club cells secrete uteroglobin and surfactant-like components to maintain airway patency, metabolize inhaled toxins via cytochrome P450 enzymes, and act as reserve stem cells to regenerate bronchiolar epithelium. In the gas-exchanging alveolus, ninety-five percent of the alveolar surface is paved by extremely attenuated, flat **type I pneumocytes** joined by tight junctions.",
+   "say": "Club cells secrete uteroglobin, metabolize airborne toxins with cytochrome enzymes, and serve as stem cells for the airway. In the alveolus, ninety-five percent of the surface is covered by paper-thin type one pneumocytes that minimize diffusion distance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type I Pneumocytes",
+     "points": [
+      "Cover 95% of alveolar surface area",
+      "Extremely thin squamous architecture",
+      "Joined by occluding tight junctions",
+      "Incapable of cell division after injury"
+     ]
+    },
+    "right": {
+     "title": "Type II Pneumocytes",
+     "points": [
+      "Cover remaining 5% of alveolar surface",
+      "Cuboidal cells with apical microvilli",
+      "Contain lamellar bodies synthesizing surfactant",
+      "Serve as stem cells to regenerate type I pneumocytes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cuboidal **type II pneumocytes** occupy the remaining five percent of the alveolar wall, containing characteristic cytoplasmic lamellar bodies packed with pulmonary surfactant. By reducing surface tension, surfactant prevents alveolar collapse (atelectasis) at end-expiration. In neonatal respiratory distress syndrome, prematurity before thirty-two weeks causes surfactant deficiency.",
+   "say": "Cuboidal type two pneumocytes contain lamellar bodies that manufacture pulmonary surfactant. Surfactant reduces surface tension to prevent alveolar collapse at expiration. In premature infants, surfactant deficiency causes respiratory distress syndrome.",
+   "vis": {
+    "kind": "flow",
+    "title": "Alveolar Surfactant Dynamic",
+    "nodes": [
+     {
+      "id": "synth",
+      "label": "Type II Pneumocyte Lamellar Body Synthesis"
+     },
+     {
+      "id": "exo",
+      "label": "Dipalmitoylphosphatidylcholine Exocytosis"
+     },
+     {
+      "id": "layer",
+      "label": "Monolayer Spreading at Air-Liquid Interface"
+     },
+     {
+      "id": "stab",
+      "label": "Surface Tension Reduction and Alveolar Stability"
+     }
+    ],
+    "edges": [
+     [
+      "synth",
+      "exo"
+     ],
+     [
+      "exo",
+      "layer"
+     ],
+     [
+      "layer",
+      "stab"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Gas exchange occurs across the ultra-thin **blood-air barrier**, which measures less than zero point five micrometers in thickness. It comprises three continuous anatomical layers: the attenuated cytoplasm of the type I pneumocyte, the fused basement membranes of the pneumocyte and capillary, and the attenuated cytoplasm of the pulmonary capillary endothelial cell.",
+   "say": "Gas exchange proceeds across the blood-air barrier, measuring under half a micrometer thick. It comprises three layers: the type one pneumocyte cytoplasm, the fused epithelial-endothelial basement membrane, and the capillary endothelial cytoplasm.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Barrier Layer",
+     "Constituent Cell / Structure",
+     "Ultrastructural Thickness",
+     "Pathological Disruption"
+    ],
+    "rows": [
+     [
+      "Alveolar Epithelium",
+      "Type I pneumocyte cytoplasm",
+      "Under 0.1 micrometers",
+      "Diffuse alveolar damage in ARDS"
+     ],
+     [
+      "Basement Membrane",
+      "Fused basal laminae (type IV collagen)",
+      "0.1 to 0.2 micrometers",
+      "Goodpasture anti-GBM antibodies"
+     ],
+     [
+      "Capillary Endothelium",
+      "Non-fenestrated capillary cytoplasm",
+      "Under 0.1 micrometers",
+      "High-altitude pulmonary edema"
+     ],
+     [
+      "Surfactant Monolayer",
+      "Acellular phospholipid film",
+      "Molecular layer",
+      "Infant respiratory distress syndrome"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the renal cortex, the glomerular filtration barrier filters blood into Bowman space. The visceral layer of Bowman capsule consists of specialized epithelial cells termed **podocytes**, which wrap around glomerular capillaries. Podocytes extend primary trabeculae that branch into interdigitating secondary foot processes (pedicels).",
+   "say": "In the kidney, the glomerular filtration barrier filters plasma into Bowman space. The visceral layer consists of podocytes that envelope glomerular capillaries, extending interdigitating foot processes called pedicels.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-kidney-development.svg",
+    "alt": "Renal glomerulus, podocyte filtration slits, and tubule segments",
+    "caption": "Renal filtration barrier: podocytes, filtration slits, and nephron tubules. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Between adjacent pedicels lie filtration slits bridged by an extracellular porous diaphragm composed of nephrin and podocin. The **filtration slit** diaphragm works in concert with the thick glomerular basement membrane and fenestrated endothelium to prevent passage of plasma albumin. Effacement of podocyte foot processes causes massive proteinuria in minimal change disease.",
+   "say": "Between pedicels lie filtration slits bridged by nephrin diaphragms. This slit barrier combines with the glomerular basement membrane to block albumin loss. Effacement of foot processes causes massive proteinuria in minimal change disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Proximal Convoluted Tubule",
+     "points": [
+      "Simple cuboidal epithelium with dense brush border",
+      "Extensive apical microvilli amplify reabsorption",
+      "Abundant basal mitochondria for active Na+ transport",
+      "Reabsorbs 65% of filtered water and solutes"
+     ]
+    },
+    "right": {
+     "title": "Distal Convoluted Tubule",
+     "points": [
+      "Simple cuboidal epithelium lacking brush border",
+      "Clear lumen with distinct individual cell borders",
+      "Forms macula densa at vascular pole contact",
+      "Regulated by aldosterone and parathyroid hormone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Reabsorbing two-thirds of the glomerular filtrate, the proximal convoluted tubule is lined by simple cuboidal cells with a prominent apical **brush border** of microvilli. In contrast, the distal convoluted tubule lacks a brush border. Where the distal tubule contacts the afferent arteriole, its cells pack into the dense sensor plaque termed the macula densa.",
+   "say": "Reabsorbing most filtered water, the proximal tubule features a dense apical brush border of microvilli. In contrast, the distal tubule lacks a brush border. Where the distal tubule touches the afferent arteriole, its cells condense into the macula densa.",
+   "vis": {
+    "kind": "flow",
+    "title": "Tubuloglomerular Feedback at JGA",
+    "nodes": [
+     {
+      "id": "nacl",
+      "label": "Macula Densa Senses Luminal NaCl"
+     },
+     {
+      "id": "aden",
+      "label": "Adenosine and ATP Paracrine Release"
+     },
+     {
+      "id": "jg",
+      "label": "Juxtaglomerular Cell Renin Modulation"
+     },
+     {
+      "id": "gfr",
+      "label": "Afferent Arteriolar Vasomotion and GFR"
+     }
+    ],
+    "edges": [
+     [
+      "nacl",
+      "aden"
+     ],
+     [
+      "aden",
+      "jg"
+     ],
+     [
+      "jg",
+      "gfr"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **juxtaglomerular apparatus** coordinates systemic blood pressure and renal hemodynamics, comprising the macula densa, renin-secreting juxtaglomerular cells (modified vascular smooth muscle of the afferent arteriole), and extraglomerular mesangial cells. A drop in renal perfusion pressure stimulates juxtaglomerular cells to release renin, activating the renin-angiotensin-aldosterone axis.",
+   "say": "The juxtaglomerular apparatus regulates systemic pressure, comprising the macula densa, renin-secreting juxtaglomerular cells in the afferent arteriole, and extraglomerular mesangial cells. Low perfusion triggers renin release, driving the angiotensin cascade.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "JGA Component",
+     "Cellular Identity",
+     "Anatomical Site",
+     "Specific Function"
+    ],
+    "rows": [
+     [
+      "Macula Densa",
+      "Tall crowded tubular epithelial cells",
+      "Terminal thick ascending limb / DCT",
+      "Osmoreceptor sensing sodium chloride delivery"
+     ],
+     [
+      "Juxtaglomerular Cells",
+      "Modified smooth muscle cells",
+      "Tunica media of afferent arteriole",
+      "Baroreceptor synthesizing and releasing renin"
+     ],
+     [
+      "Lacis Cells",
+      "Extraglomerular mesangial cells",
+      "Vascular pole triangle",
+      "Transmits tubuloglomerular feedback signals"
+     ],
+     [
+      "Intraglomerular Mesangium",
+      "Phagocytic contractile pericytes",
+      "Between capillary loops in glomerulus",
+      "Structural support, matrix synthesis, cleaning"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
