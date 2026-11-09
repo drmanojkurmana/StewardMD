@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-renal-urinary-tumours",
+  "subject": "pathology",
+  "title": "Wilms Tumour, Urothelial Carcinoma, Bladder CIS, and Schistosomal Squamous Carcinoma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Wilms tumour, nephroblastoma, grows triphasic blastema, tubules, and stroma in young children as painless abdominal mass, WT1 syndromes WAGR and Denys-Drash and Beckwith-Wiedemann overgrowth predisposing. The childhood renal cancer is **Wilms tumour (nephroblastoma)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "A painless abdominal mass in a three year old is Wilms tumour until imaging and staging prove otherwise.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/paediatric-urology-hypospadias-cryptorchidism-and-wilms-tumor-fig1.webp",
+        "alt": "Wilms tumour in paediatric urology conditions",
+        "caption": "Wilms tumour among paediatric renal and urological conditions."
+      }
+    },
+    {
+      "tx": "Wilms protocols divide between upfront nephrectomy staging and preoperative chemotherapy traditions, anaplasia and stage deciding intensity, survival now excellent in favourable histology. That protocol split is **Wilms tumour treatment traditions, SIOP versus COG**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Chemotherapy first or surgery first divides Wilms traditions; anaplasia and stage unite their intensity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Favourable histology Wilms",
+          "points": [
+            "Triphasic, no anaplasia",
+            "Excellent survival expected",
+            "Stage guides chemotherapy length"
+          ]
+        },
+        "right": {
+          "title": "Anaplastic Wilms",
+          "points": [
+            "Nuclear anaplasia, TP53 accent",
+            "Intensified therapy",
+            "Guarded prognosis by stage"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Urothelial carcinoma lines renal pelvis, ureter, bladder, and urethra with field change from smoking and aromatic amine exposure, painless haematuria its herald, papillary low grade or flat high grade habits. The field cancer is **urothelial (transitional cell) carcinoma**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Painless visible haematuria in a smoker is urothelial cancer until cystoscopy and imaging acquit the tract.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bladder-cancer-fig1.webp",
+        "alt": "Urothelial carcinoma sites and types",
+        "caption": "Urothelial carcinoma across bladder and upper tract sites."
+      }
+    },
+    {
+      "tx": "Bladder carcinoma in situ spreads flat high grade cancer invisibly across mucosa, urinary cytology positive while cystoscopy may show only red patches, BCG immunotherapy its bladder sparing backbone. The flat danger is **carcinoma in situ of bladder**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Positive cytology with near normal cystoscopy hunts flat carcinoma in situ; BCG treats what eyes barely see.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pattern",
+          "Growth",
+          "Behaviour"
+        ],
+        "rows": [
+          [
+            "Low grade papillary",
+            "Exophytic fronds",
+            "Recurs, rarely invades"
+          ],
+          [
+            "High grade papillary",
+            "Disordered fronds",
+            "Progression risk real"
+          ],
+          [
+            "Carcinoma in situ",
+            "Flat, invisible accent",
+            "BCG responsive, cystectomy if not"
+          ],
+          [
+            "Muscle invasive",
+            "Through detrusor",
+            "Radical therapy staging"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Schistosoma haematobium ova inflame bladder walls for years into squamous metaplasia and squamous cell carcinoma in endemic Africa and Middle East, keratinising cancer without urothelial ancestry. That parasitic cancer is **schistosomal squamous cell carcinoma of bladder**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Endemic haematuria plus bladder wall calcification thinks schistosomal squamous cancer, not urothelial.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Urothelial bladder cancer",
+          "points": [
+            "Smoking and dye exposure",
+            "Papillary or CIS patterns",
+            "BCG for non muscle invasive high risk"
+          ]
+        },
+        "right": {
+          "title": "Squamous bladder cancer",
+          "points": [
+            "Schistosoma, chronic stones, catheters",
+            "Keratinising squamous histology",
+            "Radical surgery accent earlier"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cystitis glandularis and intestinal metaplasia of bladder respond to chronic irritation, debated precursors watched beside stones, catheters, and exstrophy cancer risks. That irritation family is **cystitis glandularis and bladder metaplasia**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Chronically irritated bladders metaplase; cystitis glandularis earns surveillance respect without panic.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Visible haematuria pathway entered"
+          },
+          {
+            "id": "b",
+            "label": "Cystoscopy plus upper tract imaging"
+          },
+          {
+            "id": "c",
+            "label": "Resection stages muscle invasion"
+          },
+          {
+            "id": "d",
+            "label": "BCG, surgery, or systemic therapy by stage"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Paraneoplastic polycythaemia from ectopic erythropoietin joins renal carcinoma's classic triad teaching beside haematuria, flank pain, and mass rarely complete together. That hormone signature is **erythropoietin paraneoplasia in renal carcinoma**. Remembering it prevents the commonest errors made with this presentation entirely. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "High haemoglobin beside a renal mass may be tumour erythropoietin, not polycythaemia vera.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Paraneoplasia",
+          "Mediator",
+          "Renal link"
+        ],
+        "rows": [
+          [
+            "Polycythaemia",
+            "Erythropoietin ectopic",
+            "RCC classic"
+          ],
+          [
+            "Hypercalcaemia",
+            "PTHrP",
+            "RCC and squamous cancers"
+          ],
+          [
+            "Hypertension",
+            "Renin or compression",
+            "Mass effect and secretion"
+          ],
+          [
+            "Fever and weight loss",
+            "Cytokines",
+            "Prognostic burden"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Upper tract urothelial carcinoma shares bladder field biology yet hides behind ureteric obstruction and cytology, nephroureterectomy with bladder cuff its classic radical answer. That field operation is **nephroureterectomy for upper tract urothelial carcinoma**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Upper tract disease takes kidney, ureter, and bladder cuff because the field, not the lump, is diseased.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Non muscle invasive bladder",
+          "points": [
+            "Resection plus risk adapted BCG",
+            "Surveillance cystoscopy years",
+            "Progression watched closely"
+          ]
+        },
+        "right": {
+          "title": "Muscle invasive bladder",
+          "points": [
+            "Chemotherapy plus cystectomy or trimodality",
+            "Node staging decisive",
+            "Urinary diversion counselling central"
+          ]
+        }
+      }
+    }
+  ]
+}

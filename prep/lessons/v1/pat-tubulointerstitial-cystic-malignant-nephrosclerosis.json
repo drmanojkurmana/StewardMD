@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-tubulointerstitial-cystic",
+  "subject": "pathology",
+  "title": "Malignant Nephrosclerosis, Flea-Bitten Kidney, ADPKD, and Renal Stones",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Malignant nephrosclerosis devastates kidneys in malignant hypertension with fibrinoid arteriolar necrosis, hyperplastic onion skinning, and petechial cortical haemorrhages flecking surfaces. That flecked emergency kidney is the **flea-bitten kidney of malignant hypertension**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Petechial flea bitten kidneys mean malignant hypertension has necrotised arterioles; lower pressure controlledly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Benign nephrosclerosis",
+          "points": [
+            "Fine granular surface",
+            "Hyaline arterioles only",
+            "Years of pressure, slow decline"
+          ]
+        },
+        "right": {
+          "title": "Malignant nephrosclerosis",
+          "points": [
+            "Flea bitten petechial surface",
+            "Fibrinoid necrosis, onion skinning",
+            "Emergency, AKI and retinopathy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Malignant hypertension's triad of severe pressure, grade three or four retinopathy, and kidney injury demands controlled reduction avoiding precipitous falls that ischaemically extend injury. That tempo defines **controlled pressure lowering in malignant hypertension**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Lower malignant pressure by quarters over days, not to normal by lunch; organs adapted to height.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Organ",
+          "Malignant phase sign",
+          "Urgency clue"
+        ],
+        "rows": [
+          [
+            "Kidney",
+            "AKI, haematuria, proteinuria",
+            "Flea bitten pathology behind"
+          ],
+          [
+            "Retina",
+            "Haemorrhages, exudates, papilloedema",
+            "Grades three and four"
+          ],
+          [
+            "Brain",
+            "Encephalopathy, headache, seizures",
+            "Imaging excludes haemorrhage"
+          ],
+          [
+            "Blood",
+            "Microangiopathic haemolysis sometimes",
+            "Schistocytes, thrombocytopenia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Autosomal dominant polycystic kidney disease replaces kidneys with expanding cysts from PKD1 and PKD2 tubule defects, hypertension and pain preceding failure, berry aneurysms its feared extrarenal strike. That cystic giant is **autosomal dominant polycystic kidney disease (ADPKD)**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Huge cystic kidneys plus a family history and berry aneurysm risk name ADPKD and its genes.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/adpkd-fig1.webp",
+        "alt": "ADPKD renal and extrarenal manifestations",
+        "caption": "ADPKD with massive renal cysts and extrarenal manifestations including berry aneurysms."
+      }
+    },
+    {
+      "tx": "Tolvaptan, vasopressin V2 blockade, slows cyst growth in rapidly progressing ADPKD at liver monitoring cost, while blood pressure RAAS control and aneurysm screening structure lifelong care. That disease modifier is **tolvaptan in rapidly progressing ADPKD**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Tolvaptan slows cysts in selected rapid progressors; blood pressure control protects every ADPKD kidney.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Imaging classifies progression risk"
+          },
+          {
+            "id": "b",
+            "label": "Pressure controlled, RAAS based"
+          },
+          {
+            "id": "c",
+            "label": "Tolvaptan if rapid and tolerant"
+          },
+          {
+            "id": "d",
+            "label": "Aneurysm and family screening offered"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Autosomal recessive polycystic disease fuses infantile kidneys with fusiform collecting duct cysts and congenital hepatic fibrosis, a different childhood tempo from dominant disease. That recessive pair is **ARPKD with congenital hepatic fibrosis**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Enlarged echogenic infant kidneys plus liver fibrosis mean recessive, not dominant, polycystic disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ckd-fig1.webp",
+        "alt": "Chronic kidney disease histopathology",
+        "caption": "Chronic kidney histopathology contrasting cystic and sclerotic progression."
+      }
+    },
+    {
+      "tx": "Renal stones crystallise calcium oxalate commonest, uric acid radiolucent, struvite infected staghorns, and cystine hexagonal inherited, each chemistry dictating prevention fluids and metabolic therapy. That chemistry map is **renal stone types and prevention**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Name the stone's chemistry or lose the prevention plan; oxalate, urate, struvite, cystine obey different rules.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stone",
+          "Imaging and shape",
+          "Prevention accent"
+        ],
+        "rows": [
+          [
+            "Calcium oxalate",
+            "Radiopaque, most common",
+            "Fluids, citrate, oxalate sense"
+          ],
+          [
+            "Uric acid",
+            "Radiolucent on plain film",
+            "Alkalinise urine, allopurinol"
+          ],
+          [
+            "Struvite staghorn",
+            "Infection moulded cast",
+            "Complete clearance, antibiotics"
+          ],
+          [
+            "Cystine",
+            "Hexagonal crystals, inherited",
+            "High fluids, alkalinisation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Obstructing infected stones are urological emergencies because pus behind pressure seeds sepsis faster than antibiotics penetrate, demanding decompression by stent or nephrostomy before stone surgery. That priority is **infected obstructed kidney, decompress first**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Fever plus obstructed kidney means drain tonight and fragment later; sepsis sets the order.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Uncomplicated colic",
+          "points": [
+            "Pain controlled, no infection",
+            "NSAID analgesia, strain urine",
+            "Imaging by persistence"
+          ]
+        },
+        "right": {
+          "title": "Obstructed and infected",
+          "points": [
+            "Fever, hypotension risk",
+            "Antibiotics plus urgent drainage",
+            "Definitive stone surgery delayed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Medullary sponge kidney, nephrocalcinosis, and renal tubular acidosis complete stone soil differentials where anatomy and acid base manufacture crystals repeatedly. That soil thinking is **recurrent stone metabolic evaluation**. The clinical payoff comes from applying it early, before complications accumulate further. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Recurrent stones earn metabolic workup; anatomy and urine chemistry manufacture repeat offenders.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Stone analysed when passed"
+          },
+          {
+            "id": "b",
+            "label": "Serum calcium, urate, bicarbonate"
+          },
+          {
+            "id": "c",
+            "label": "Urine volume chemistry profiled"
+          },
+          {
+            "id": "d",
+            "label": "Targeted fluids and drug prevention"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

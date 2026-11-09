@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-breast",
+  "subject": "pathology",
+  "title": "Medullary and Mucinous Breast Cancers, Paget Disease, ER PR HER2, Triple Negative, and Nottingham Grade",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Medullary carcinoma patterns syncytial high grade sheets with lymphoid stroma and pushing borders, BRCA1 associated, paradoxically favourable despite triple negative immunophenotype in strict definitions. That paradox is **medullary pattern breast carcinoma**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "High grade yet lymphocyte rich and pushing: medullary pattern behaves kinder than its grade threatens.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Medullary pattern",
+          "points": [
+            "Syncytial sheets, lymphoid stroma",
+            "Pushing border, BRCA1 accent",
+            "Prognosis better than grade"
+          ]
+        },
+        "right": {
+          "title": "Mucinous carcinoma",
+          "points": [
+            "Tumour nests floating in mucin",
+            "Older women, ER positive",
+            "Indolent, node sparing tendency"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Mucinous carcinoma floats low grade tumour clusters in extracellular mucin lakes of older women, pure forms node sparing and indolent, mixed forms behaving by their solid components. Those mucin lakes define **pure mucinous carcinoma of breast**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Pure mucinous cancers float indolently and spare nodes; mixed forms follow their solid partners.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/breast-cancer-fig1.webp",
+        "alt": "Breast cancer subtypes and metastasis",
+        "caption": "Breast cancer molecular subtypes guiding receptor directed therapy."
+      }
+    },
+    {
+      "tx": "Paget disease of nipple crusts eczema like from malignant ductal cells migrating epidermally, almost always announcing underlying DCIS or invasive cancer needing full imaging and biopsy. That eczema warning is **Paget disease of the nipple**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Unilateral nipple eczema that ignores steroids is Paget disease until biopsy acquits underlying cancer.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Nipple change",
+          "Likely cause",
+          "Duty"
+        ],
+        "rows": [
+          [
+            "Unilateral crusting persistent",
+            "Paget disease",
+            "Punch biopsy and imaging"
+          ],
+          [
+            "Bilateral eczema itchy",
+            "Dermatitis usual",
+            "Treat, review persistence"
+          ],
+          [
+            "Bloody single duct discharge",
+            "Papilloma or DCIS",
+            "Imaging and surgical referral"
+          ],
+          [
+            "New nipple inversion",
+            "Underlying mass tethering",
+            "Full triple assessment"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Oestrogen and progesterone receptors invite endocrine therapy, HER2 amplification invites targeted antibodies, their absence triple negative status directing chemotherapy and immunotherapy conversations. That receptor triage is **ER, PR, and HER2 testing in breast cancer**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "ER, PR, HER2: three stains prescribe endocrine, targeted, or chemotherapy roads in breast cancer.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/breast-cancer-staging-subtypes-and-surgical-management-fig1.webp",
+        "alt": "Breast cancer staging subtypes surgical management",
+        "caption": "Breast cancer staging and subtype management across surgery and systemic therapy."
+      }
+    },
+    {
+      "tx": "Triple negative breast cancer lacks all three targets, enriching in BRCA1 carriers and younger women, chemotherapy and immunotherapy dependent, earlier visceral relapse pattern. That targetless group is **triple negative breast cancer (TNBC)**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Triple negative means chemotherapy carries the load BRCA testing and immunotherapy now share.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Luminal cancers",
+          "points": [
+            "ER positive, endocrine responsive",
+            "Later bone relapse accent",
+            "CDK inhibitors advanced care"
+          ]
+        },
+        "right": {
+          "title": "Triple negative",
+          "points": [
+            "No ER PR HER2 targets",
+            "Early visceral relapse",
+            "BRCA and PD-L1 guide additions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "BRCA1 germline mutation predisposes triple negative and medullary pattern cancers plus ovarian serous disease, cascade testing and risk reducing surgery and PARP therapy organising families. That hereditary axis is **BRCA1 associated breast and ovarian cancer**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Triple negative under sixty earns BRCA testing; families inherit both risk and prevention options.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Triple negative or family pattern"
+          },
+          {
+            "id": "b",
+            "label": "Germline BRCA testing offered"
+          },
+          {
+            "id": "c",
+            "label": "PARP therapy eligibility known"
+          },
+          {
+            "id": "d",
+            "label": "Cascade screening and risk surgery counselled"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Nottingham grade sums tubule formation, nuclear pleomorphism, and mitotic count into grades one to three, prognostic beside stage receptors and genomic assays. That three part score is the **Nottingham (Scarff-Bloom-Richardson) grade**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Tubules, nuclei, mitoses: Nottingham adds three observations into breast cancer's grade.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Component",
+          "Score one favours",
+          "Score three"
+        ],
+        "rows": [
+          [
+            "Tubule formation",
+            "Mostly glandular",
+            "Solid sheets"
+          ],
+          [
+            "Nuclear pleomorphism",
+            "Small uniform",
+            "Bizarre marked variation"
+          ],
+          [
+            "Mitotic count",
+            "Low per field set",
+            "High per field set"
+          ],
+          [
+            "Total grade",
+            "3 to 5 grade one",
+            "8 to 9 grade three"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Gynaecomastia enlarges male glandular breast from oestrogen androgen imbalance of puberty, ageing, drugs, liver disease, and tumours, male breast cancer rare but later staged by identical receptor logic. That male differential is **gynaecomastia versus male breast cancer**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Tender subareolar tissue favours gynaecomastia; hard eccentric mass in an older man earns cancer workup.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Gynaecomastia",
+          "points": [
+            "Subareolar rubbery tenderness",
+            "Drugs, liver, puberty causes",
+            "Reassure or treat cause"
+          ]
+        },
+        "right": {
+          "title": "Male breast cancer",
+          "points": [
+            "Hard eccentric painless mass",
+            "Nipple change, nodes",
+            "Same staging and receptors"
+          ]
+        }
+      }
+    }
+  ]
+}

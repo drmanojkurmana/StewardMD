@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-male-genital",
+  "subject": "pathology",
+  "title": "Cryptorchidism, Seminoma, Embryonal and Yolk Sac Tumours, and Choriocarcinoma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Cryptorchidism arrests testicular descent in inguinal canal or abdomen, impairing spermatogenesis and multiplying germ cell cancer risk even after orchidopexy, which eases examination rather than erasing malignancy. That undescended risk is **cryptorchidism and testicular cancer**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Bring the testis down early for fertility and examination; cancer risk falls but never vanishes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Descent arrests inguinal or abdominal"
+          },
+          {
+            "id": "b",
+            "label": "Heat impairs spermatogenesis"
+          },
+          {
+            "id": "c",
+            "label": "Germ cell neoplasia risk rises"
+          },
+          {
+            "id": "d",
+            "label": "Orchidopexy by six to twelve months"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Seminoma, commonest germ cell tumour, grows sheets of uniform clear cells with lymphocytic septa in men thirty to fifty, exquisitely radio and chemosensitive with excellent cure. Those sheets define **seminoma of testis**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Uniform clear sheets, lymphocyte septa, superb cure: seminoma is germ cell oncology's success story.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/testicular-cancer-fig1.webp",
+        "alt": "Testicular cancer treatment based on staging",
+        "caption": "Testicular germ cell tumours staged and treated by type and spread."
+      }
+    },
+    {
+      "tx": "Fried egg cells describe seminoma's clear cytoplasm, central nucleus, and prominent nucleolus on microscopy, glycogen washing out around squared cell borders. That breakfast image is the **fried egg appearance of seminoma cells**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Fried egg cells with lymphocyte rich septa let microscopy name seminoma before markers return.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Seminoma",
+          "points": [
+            "Fried egg uniform sheets",
+            "PLAP positive, AFP never raised",
+            "Stage I surveillance or single carboplatin debates"
+          ]
+        },
+        "right": {
+          "title": "Embryonal carcinoma",
+          "points": [
+            "Primitive pleomorphic glands",
+            "CD30 positive, haemorrhagic",
+            "Chemotherapy accent stronger"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Placental alkaline phosphatase stains seminoma and intratubular germ cell neoplasia, while AFP marks yolk sac elements and beta-hCG syncytiotrophoblast, markers triaging mixed tumours. That enzyme is **PLAP (placental alkaline phosphatase) in seminoma**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "PLAP stains seminoma, AFP never rises in pure seminoma; a raised AFP rewrites the tumour as mixed.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/testicular-germ-cell-tumor-fig1.webp",
+        "alt": "Testicular germ cell tumor pathology",
+        "caption": "Germ cell tumour pathology across seminoma and nonseminomatous types."
+      }
+    },
+    {
+      "tx": "Embryonal carcinoma grows primitive epithelial malignancy with glandular and papillary chaos, CD30 expression, early metastasis, and chemotherapy responsiveness despite aggressive tempo. The primitive component is **embryonal carcinoma of testis**. In practice this distinction decides the next test, treatment, or referral made. That is why this detail earns its place in every examination and ward round.",
+      "say": "Embryonal carcinoma is the primitive engine inside many mixed germ cell tumours; chemotherapy respects it.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumour",
+          "Marker accent",
+          "Histology cue"
+        ],
+        "rows": [
+          [
+            "Seminoma",
+            "PLAP, beta-hCG sometimes mild",
+            "Fried egg sheets, septal lymphocytes"
+          ],
+          [
+            "Embryonal carcinoma",
+            "CD30, AFP variable by mix",
+            "Primitive glands, necrosis"
+          ],
+          [
+            "Yolk sac tumour",
+            "AFP strongly",
+            "Schiller-Duval bodies"
+          ],
+          [
+            "Choriocarcinoma",
+            "Beta-hCG very high",
+            "Haemorrhagic syncytiotrophoblast"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Yolk sac tumour, childhood germ cell prototype and adult mixed component, builds Schiller-Duval bodies of papillae around vessels mimicking glomeruli, AFP pouring from its endodermal sinus pattern. Those glomeruloid papillae are **Schiller-Duval bodies of yolk sac tumour**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "Schiller-Duval bodies plus high AFP name yolk sac tumour from childhood to mixed adult disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Childhood yolk sac",
+          "points": [
+            "Pure tumour, AFP tracked",
+            "Chemotherapy curative mostly",
+            "Sacrococcygeal and testicular sites"
+          ]
+        },
+        "right": {
+          "title": "Adult mixed component",
+          "points": [
+            "Within mixed germ cell tumours",
+            "Worst component guides therapy",
+            "Markers map components imperfectly"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Choriocarcinoma haemorrhages syncytiotrophoblast and cytotrophoblast without villi, beta-hCG soaring, lungs and brain bleeding early from tiny primaries sometimes burned out in testis. The haemorrhagic hormone tumour is **testicular choriocarcinoma**. The clinical payoff comes from applying it early, before complications accumulate further. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Beta-hCG in tens of thousands plus haemorrhagic lung lesions means choriocarcinoma, however small the testis feels.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Painless testicular lump or marker rise"
+          },
+          {
+            "id": "b",
+            "label": "Ultrasound, AFP, beta-hCG, LDH"
+          },
+          {
+            "id": "c",
+            "label": "Radical inguinal orchidectomy"
+          },
+          {
+            "id": "d",
+            "label": "Stage, surveillance or chemotherapy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Transscrotal violation and scrotal ultrasound guided biopsy are forbidden in suspected testicular cancer because inguinal orchidectomy with high cord ligation is both diagnosis and first therapy. That surgical law is **radical inguinal orchidectomy principle**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Never biopsy a testicular mass through scrotum; radical inguinal orchidectomy diagnoses and treats first.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stage",
+          "Extent",
+          "Typical path"
+        ],
+        "rows": [
+          [
+            "Stage I",
+            "Testis confined, markers normalised",
+            "Surveillance favoured many"
+          ],
+          [
+            "Stage II",
+            "Retroperitoneal nodes",
+            "Chemo or node dissection selected"
+          ],
+          [
+            "Stage III",
+            "Visceral metastases",
+            "Combination chemotherapy"
+          ],
+          [
+            "Marker only relapse",
+            "Imaging silent, markers rising",
+            "Chemotherapy generally"
+          ]
+        ]
+      }
+    }
+  ]
+}

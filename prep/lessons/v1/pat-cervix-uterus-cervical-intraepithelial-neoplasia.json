@@ -1,0 +1,170 @@
+{
+  "v": 1,
+  "module": "pat-cervix-uterus",
+  "subject": "pathology",
+  "title": "CIN, HPV Koilocytes, Pap Screening, Cervical and Endometrial Cancers, Endometriosis, Leiomyoma, and Molar Pregnancy",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Cervical intraepithelial neoplasia dysplasias transformation zone squamous epithelium after persistent high risk HPV, graded by thirds CIN one to three, carcinoma in situ full thickness before invasion. That graded precursor is **cervical intraepithelial neoplasia (CIN)**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Persistent HPV dysplasias the transformation zone by thirds; CIN three is carcinoma in situ awaiting invasion's breach.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "High risk HPV persists in transformation zone"
+          },
+          {
+            "id": "b",
+            "label": "E6 E7 disable p53 and RB"
+          },
+          {
+            "id": "c",
+            "label": "CIN grades through epithelial thirds"
+          },
+          {
+            "id": "d",
+            "label": "Invasion breaches basement membrane"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Koilocytes hollow perinuclear halos with wrinkled raisin nuclei in superficial squamous cells, HPV cytopathic effect signing low grade lesions on Pap and biopsy. That halo cell is the **koilocyte of HPV infection**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Perinuclear halo plus raisin nucleus equals koilocyte; HPV signs its work in superficial cells.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cervix-uterus-hpv-endometrial-leiomyoma-fig1.webp",
+        "alt": "Cervical and uterine pathology HPV leiomyoma",
+        "caption": "Cervical HPV disease and uterine pathology including leiomyoma."
+      }
+    },
+    {
+      "tx": "Pap smear cytology screening and now primary HPV testing catch precursors treatable by excision, vaccination preventing infection upstream in the most successful cancer prevention chain. That chain is **cervical screening and HPV vaccination**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Vaccinate, screen by HPV, excise precursors: cervical cancer prevention is prevention's proof of concept.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cytology screening",
+          "points": [
+            "Pap smear morphology",
+            "Triage by HPV reflex increasingly",
+            "Catches established lesions"
+          ]
+        },
+        "right": {
+          "title": "Primary HPV screening",
+          "points": [
+            "Viral test first, longer intervals",
+            "Cytology triages positives",
+            "Vaccination reshapes prevalence"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Squamous cell carcinoma dominates cervical cancer histology, adenocarcinoma rising proportionally, staging clinical and imaging based with chemoradiation for locally advanced disease. HPV drives both: **squamous cell carcinoma of cervix**. Students should anchor this fact before moving to rarer causes and exceptions. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Cervical cancer stages by spread, treats locally advanced disease with chemoradiation, and traces to HPV.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ss-gyn-cervix-endometrium-staging-therapy-fig1.webp",
+        "alt": "Endometrial and cervical cancer invasion and therapy",
+        "caption": "Cervical and endometrial cancer invasion patterns guiding staging therapy."
+      }
+    },
+    {
+      "tx": "Endometrial hyperplasia thickens glands under unopposed oestrogen, atypical hyperplasia or endometrioid intraepithelial neoplasia carrying concurrent and future carcinoma risk demanding progestin or hysterectomy decisions. That precursor is **atypical endometrial hyperplasia (EIN)**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Atypical hyperplasia is endometrial cancer's antechamber; a third already harbour carcinoma at hysterectomy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Endometrial lesion",
+          "Driver accent",
+          "Cancer risk"
+        ],
+        "rows": [
+          [
+            "Hyperplasia without atypia",
+            "Unopposed oestrogen",
+            "Low, progestin responsive"
+          ],
+          [
+            "Atypical hyperplasia EIN",
+            "Clonal precancer",
+            "High concurrent carcinoma"
+          ],
+          [
+            "Endometrioid carcinoma",
+            "Oestrogen, PTEN pathway",
+            "Grade by solid share"
+          ],
+          [
+            "Serous carcinoma",
+            "TP53, older atrophic background",
+            "Aggressive from inception"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Endometriosis implants endometrial glands and stroma outside uterus, ovaries chocolate cysts, pelvis pain and infertility, cyclically bleeding into fibrosis and adhesions. Those ectopic implants define **endometriosis and endometrioma**. Remembering it prevents the commonest errors made with this presentation entirely. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Chocolate cysts and cyclical pelvic pain mean endometriosis; glands plus stroma outside uterus prove it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/endometriosis-fig1.webp",
+        "alt": "Endometriosis common locations and appearance",
+        "caption": "Endometriosis locations and appearances across ovary and pelvis."
+      }
+    },
+    {
+      "tx": "Leiomyomas, benign smooth muscle uterine tumours, bulk, bleed, and pressure through reproductive years shrinking after menopause, while leiomyosarcoma arises independently usually postmenopausal rapid growth warning. The fibroid is **uterine leiomyoma versus leiomyosarcoma**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Fibroids shrink after menopause; a growing postmenopausal uterine mass thinks sarcoma instead.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Leiomyoma",
+          "points": [
+            "Reproductive years, multiple whorled",
+            "Shrinks after menopause",
+            "Bleeding by submucosal site"
+          ]
+        },
+        "right": {
+          "title": "Leiomyosarcoma",
+          "points": [
+            "Postmenopausal growth, solitary",
+            "Necrosis and mitoses histologically",
+            "Haematogenous lung spread"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Hydatidiform moles swell chorionic villi grape like without or with embryo by paternal genome excess, beta-hCG soaring, gestational trophoblastic neoplasia and choriocarcinoma following in monitored minority. Those grapes are **complete and partial hydatidiform moles**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Grape villi, sky high beta-hCG, no fetus in complete mole; evacuate and follow hCG to zero.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/gestational-trophoblastic-disease-fig1.webp",
+        "alt": "Molar pregnancy ultrasound",
+        "caption": "Molar pregnancy imaging with vesicular snowstorm pattern."
+      }
+    }
+  ]
+}
