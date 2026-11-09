@@ -1,0 +1,227 @@
+{
+ "v": 1,
+ "module": "ana-forearm-hand",
+ "subject": "anatomy",
+ "title": "Deep Palmar Spaces, Pulp Infections and Lumbrical Anatomy",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Deep to the long flexor tendons and palmar aponeurosis lie two potential fascial compartments bounded by fibrous septa: the thenar space laterally and the **midpalmar space** medially. Separated by an intermediate septum extending from the palmar aponeurosis to the third metacarpal bone, these spaces can harbor deep, closed-space hand infections.",
+   "say": "Beneath the flexor tendons and palmar aponeurosis lie two potential fascial compartments: the thenar space laterally and the midpalmar space medially. Divided by a fibrous septum anchoring to the third metacarpal, they can harbor deep closed-space infections.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-allens-test.svg",
+    "alt": "Palmar fascial spaces, thenar space, and midpalmar space boundaries",
+    "caption": "Deep fascial spaces of the palm and synovial flexor bursa pathways. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **thenar space** lies anterior to the fascia of adductor pollicis, bounded medially by the intermediate palmar septum and laterally by the lateral septum on the first metacarpal. It communicates distally with the first lumbrical canal. Infection produces intense throbbing pain, ballooning of the thenar web space, and forced thumb abduction.",
+   "say": "The thenar space lies in front of adductor pollicis, bounded by the intermediate septum medially and the first metacarpal laterally. Infection balloons the first web space with throbbing pain, pushing the thumb into fixed abduction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Thenar Space Infection",
+     "points": [
+      "Lies anterior to adductor pollicis muscle",
+      "Balloons the first interdigital web space",
+      "Forces thumb into fixed palmar abduction",
+      "Drained via dorsal web space incision"
+     ]
+    },
+    "right": {
+     "title": "Midpalmar Space Infection",
+     "points": [
+      "Lies anterior to 3rd, 4th, 5th metacarpals",
+      "Obliterates normal concavity of the central palm",
+      "Causes marked swelling on dorsum of hand",
+      "Drained via transverse palmar incision"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The midpalmar space lies anterior to interosseous fascia over the third, fourth, and fifth metacarpals, bounded medially by the hypothenar septum and laterally by the intermediate septum. Infection obliterates the normal **concavity of the palm**, causing bulging of the central palm accompanied by massive compensatory dorsal hand edema due to loose dorsal subcutaneous lymphatic drainage.",
+   "say": "The midpalmar space lies over the third to fifth metacarpals beneath flexor tendons. Infection erases the normal concave hollow of the palm, producing a bulging palm with dramatic swelling on the dorsum of the hand from loose lymphatic fluid.",
+   "vis": {
+    "kind": "flow",
+    "title": "Spread of Palmar Infections",
+    "nodes": [
+     {
+      "id": "punc",
+      "label": "Puncture Wound of Central Palm or Finger"
+     },
+     {
+      "id": "space",
+      "label": "Suppuration in Midpalmar / Thenar Space"
+     },
+     {
+      "id": "lumb",
+      "label": "Tracking Along Lumbrical Canal to Web Space"
+     },
+     {
+      "id": "dors",
+      "label": "Massive Dorsal Subcutaneous Swelling"
+     }
+    ],
+    "edges": [
+     [
+      "punc",
+      "space"
+     ],
+     [
+      "space",
+      "lumb"
+     ],
+     [
+      "lumb",
+      "dors"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The distal volar pulp of each digit is partitioned into multiple closed tight compartments by vertical fibrous septa extending from the dermis to the periosteum of the terminal phalanx. Acute infection of this closed fibrofatty space is designated a **felon** (whitlow), typically caused by a minor thorn puncture inoculating Staphylococcus aureus.",
+   "say": "The fingertip pulp is divided into closed compartments by vertical fibrous septa bridging skin to the distal phalanx. Acute closed infection of this pulp space is a felon, typically caused by a minor pinprick introducing staphylococci.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-articular-layers.svg",
+    "alt": "Terminal phalanx pulp space, fibrous septa, and digital artery supply",
+    "caption": "Digital pulp compartmentalization and blood supply to the distal phalanx. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "As purulent pressure surges within the unyielding pulp compartments, tension compresses digital artery branches supplying the distal phalanx, leading rapidly to ischemic osteomyelitis and necrosis of the **distal phalanx**. Crucially, the extreme proximal base of the phalanx is spared because its epiphyseal blood vessel enters proximal to the closed pulp space.",
+   "say": "As pressure spikes in the closed pulp space, digital capillaries collapse, leading to ischemic necrosis of the distal phalanx. The base of the phalanx is spared because its epiphyseal vessels enter proximal to the closed pulp space.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Felon (Pulp Space Whitlow)",
+     "points": [
+      "Closed infection of distal volar pulp",
+      "Intense throbbing pain, tense erythematous pad",
+      "Causes avascular necrosis of distal phalanx diaphysis",
+      "Drained via mid-lateral or longitudinal volar incision"
+     ]
+    },
+    "right": {
+     "title": "Paronychia",
+     "points": [
+      "Superficial infection of lateral nail fold",
+      "Erythema, swelling, and pus around nail bed",
+      "Does not compromise distal phalanx blood supply",
+      "Drained by elevating eponychial fold"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Infection localized to the lateral nail fold is a **paronychia**, presenting with painful erythema and a localized abscess tracking along the eponychium, managed by elevating the nail fold or partial nail plate avulsion. Unlike a felon, a paronychia does not threaten the nutrient blood supply to the distal phalanx.",
+   "say": "Infection along the lateral nail fold is a paronychia, presenting with redness and pus around the nail border. Treated by elevating the cuticle, it does not jeopardize the arterial supply of the underlying phalanx.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hand Infection Type",
+     "Anatomical Tissue Site",
+     "Pathognomonic Risk",
+     "Primary Drainage Approach"
+    ],
+    "rows": [
+     [
+      "Felon (Whitlow)",
+      "Closed distal volar pulp space",
+      "Osteomyelitis of distal phalanx",
+      "Mid-lateral incision sparing tactile pad"
+     ],
+     [
+      "Paronychia",
+      "Lateral nail fold / eponychium",
+      "Nail bed deformity, run-around abscess",
+      "Elevation of eponychial fold with scalpel"
+     ],
+     [
+      "Thenar Space Infection",
+      "Thenar space beneath flexor tendons",
+      "Spread to forearm space of Parona",
+      "Dorsal web-space longitudinal incision"
+     ],
+     [
+      "Midpalmar Space Abscess",
+      "Midpalmar space over metacarpals",
+      "Tendon necrosis, web space collar button",
+      "Palmar incision parallel to flexion crease"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Deep hand kinematics are coordinated by the **lumbrical muscles**, which arise from the four tendons of flexor digitorum profundus. The first and second lumbricals are unipennate and innervated by the median nerve, while the third and fourth lumbricals are bipennate and innervated by the deep branch of the ulnar nerve.",
+   "say": "Intrinsic finger movements are coordinated by lumbrical muscles arising from flexor digitorum profundus tendons. The first two lumbricals are unipennate and supplied by the median nerve, while the medial two are bipennate and supplied by the deep ulnar nerve.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lumbrical Muscle",
+     "Tendon of Origin",
+     "Innervating Nerve",
+     "Fascicular Shape"
+    ],
+    "rows": [
+     [
+      "1st Lumbrical",
+      "Lateral side of 1st FDP tendon (index)",
+      "Median nerve (digital branch)",
+      "Unipennate architecture"
+     ],
+     [
+      "2nd Lumbrical",
+      "Lateral side of 2nd FDP tendon (middle)",
+      "Median nerve (digital branch)",
+      "Unipennate architecture"
+     ],
+     [
+      "3rd Lumbrical",
+      "Adjacent sides of 2nd/3rd FDP tendons",
+      "Deep branch of ulnar nerve",
+      "Bipennate architecture"
+     ],
+     [
+      "4th Lumbrical",
+      "Adjacent sides of 3rd/4th FDP tendons",
+      "Deep branch of ulnar nerve",
+      "Bipennate architecture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lumbricals pass anterior to the deep transverse metacarpal ligament to insert into the lateral margins of the dorsal extensor expansions, flexing the metacarpophalangeal joints and extending the interphalangeal joints. The **interosseous muscles** comprise four dorsal (bipennate, abductors, DAB) and three palmar (unipennate, adductors, PAD), all innervated by the deep ulnar nerve.",
+   "say": "Lumbricals insert into extensor hoods to flex MCP joints and extend fingers. The interossei comprise four dorsal abductors that spread fingers away from the middle finger, and three palmar adductors that bring fingers together, all innervated by the deep ulnar nerve.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dorsal Interossei (DAB)",
+     "points": [
+      "Four bipennate muscles in intermetacarpal spaces",
+      "Abduct digits 2, 3, and 4 away from middle axis",
+      "Middle finger has two dorsal interossei (no palmar)",
+      "Innervated by deep branch of ulnar nerve"
+     ]
+    },
+    "right": {
+     "title": "Palmar Interossei (PAD)",
+     "points": [
+      "Three unipennate muscles on palmar metacarpals",
+      "Adduct digits 2, 4, and 5 toward middle finger",
+      "Middle finger possesses zero palmar interossei",
+      "Innervated by deep branch of ulnar nerve"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

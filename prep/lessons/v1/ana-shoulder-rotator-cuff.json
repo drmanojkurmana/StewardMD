@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "ana-shoulder",
+ "subject": "anatomy",
+ "title": "Rotator Cuff Muscles and Subacromial Impingement",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The **glenohumeral joint** is a multiaxial synovial ball-and-socket articulation designed for wide mobility at the expense of intrinsic bony stability. The large hemispherical head of the humerus articulates with the shallow, pear-shaped glenoid cavity of the scapula. Stability is provided primarily by dynamic muscular reinforcement rather than rigid bony architecture.",
+   "say": "The glenohumeral joint is a ball-and-socket articulation that sacrifices bony stability for extensive mobility. The large humeral head articulates with the shallow glenoid fossa. Dynamic stability depends upon muscular reinforcement rather than bony sockets.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-abduction-phases.svg",
+    "alt": "Glenohumeral joint abduction mechanics, rotator cuff and scapular rotators",
+    "caption": "Glenohumeral kinematics and muscle activation during arm abduction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Dynamic stability is maintained by the **rotator cuff**, an anatomical cuff of four flattened tendons that fuse directly with the fibrous capsule of the shoulder joint. Remembered by the acronym SITS, these four muscles comprise the subscapularis anteriorly, supraspinatus superiorly, and infraspinatus and teres minor posteriorly.",
+   "say": "Dynamic stability is provided by the rotator cuff, formed by four tendons that blend into the fibrous joint capsule. Designated by the acronym SITS, these muscles are the subscapularis anteriorly, supraspinatus superiorly, and infraspinatus and teres minor posteriorly.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Rotator Cuff Muscle",
+     "Scapular Origin",
+     "Humeral Insertion",
+     "Primary Action and Nerve"
+    ],
+    "rows": [
+     [
+      "Subscapularis",
+      "Subscapular fossa",
+      "Lesser tubercle of humerus",
+      "Medial rotation; upper/lower subscapular"
+     ],
+     [
+      "Supraspinatus",
+      "Supraspinous fossa",
+      "Highest facet of greater tubercle",
+      "Initiates abduction (0-15); suprascapular"
+     ],
+     [
+      "Infraspinatus",
+      "Infraspinous fossa",
+      "Middle facet of greater tubercle",
+      "Lateral rotation; suprascapular nerve"
+     ],
+     [
+      "Teres Minor",
+      "Lateral border of scapula",
+      "Lowest facet of greater tubercle",
+      "Lateral rotation; axillary nerve"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **subscapularis** is the sole anterior member of the rotator cuff, arising from the subscapular fossa and inserting onto the lesser tubercle of the humerus. Acting as a powerful medial rotator of the arm, it is innervated by the upper and lower subscapular nerves from the posterior cord.",
+   "say": "Subscapularis forms the anterior wall of the cuff, originating in the subscapular fossa and inserting onto the lesser tubercle. It medially rotates the arm and is supplied by upper and lower subscapular nerves.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anterior Cuff (Subscapularis)",
+     "points": [
+      "Inserts on the lesser tubercle",
+      "Innervated by subscapular nerves (C5-C6)",
+      "Chief medial rotator of the humerus",
+      "Prevents anterior humeral subluxation"
+     ]
+    },
+    "right": {
+     "title": "Posterior Cuff (Infra/Teres Minor)",
+     "points": [
+      "Insert on middle and lower greater tubercle facets",
+      "Infraspinatus supplied by suprascapular nerve",
+      "Teres minor supplied by axillary nerve",
+      "Primary lateral rotators of the humerus"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The superior cuff is formed by the **supraspinatus**, which passes beneath the rigid coracoacromial arch and the acromion process to insert onto the highest facet of the greater tubercle. It initiates the first fifteen degrees of glenohumeral abduction, after which the deltoid muscle continues abduction up to ninety degrees.",
+   "say": "Supraspinatus builds the superior cuff, passing under the coracoacromial arch to insert onto the top facet of the greater tubercle. It initiates the first fifteen degrees of arm abduction, before the deltoid takes over abduction to ninety degrees.",
+   "vis": {
+    "kind": "flow",
+    "title": "Phases of Arm Abduction",
+    "nodes": [
+     {
+      "id": "supra",
+      "label": "0 to 15 Degrees: Supraspinatus Initiation"
+     },
+     {
+      "id": "delt",
+      "label": "15 to 90 Degrees: Deltoid Muscle Elevation"
+     },
+     {
+      "id": "rot",
+      "label": "90 to 180 Degrees: Serratus and Trapezius Scapular Rotation"
+     }
+    ],
+    "edges": [
+     [
+      "supra",
+      "delt"
+     ],
+     [
+      "delt",
+      "rot"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Separating the supraspinatus tendon from the overlying acromion, coracoacromial ligament, and deltoid muscle is the extensive **subacromial bursa**. This fluid-filled synovial bursa lubricates and cushions frictionless gliding movements of the humeral head and rotator cuff beneath the rigid osteoligamentous coracoacromial arch during overhead arm elevation and sports activities.",
+   "say": "Cushioning the supraspinatus tendon from the acromion is the subacromial bursa. This synovial sac facilitates smooth gliding of the humeral head beneath the coracoacromial arch during overhead arm movements.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/periarticular-disorders-of-the-extremities-fig1.webp",
+    "alt": "Subacromial bursa, rotator cuff tendinopathy, and impingement anatomy",
+    "caption": "Subacromial bursa and site of supraspinatus impingement. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Chronic repetitive overhead friction compresses the supraspinatus tendon and subacromial bursa against the anterior acromial spur, producing **subacromial impingement**. Clinically, this presents as painful arc syndrome: active abduction is painless between zero and sixty degrees, sharply painful between sixty and one hundred and twenty degrees as the tendon impinges, and painless above one hundred and twenty.",
+   "say": "Repetitive overhead friction pinches the supraspinatus tendon and bursa, creating subacromial impingement. This manifests as painful arc syndrome: arm elevation is painless up to sixty degrees, severely painful between sixty and one hundred twenty degrees, and comfortable above that arc.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Abduction Arc Range",
+     "Kinematic Event",
+     "Pain Perception",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "0 to 60 Degrees",
+      "Supraspinatus initiation and early deltoid",
+      "Painless arc",
+      "Tendon has not yet contacted acromion"
+     ],
+     [
+      "60 to 120 Degrees",
+      "Humeral greater tubercle passes under arch",
+      "Severe acute pain",
+      "Supraspinatus and bursa pinched against bone"
+     ],
+     [
+      "120 to 180 Degrees",
+      "Greater tubercle cleared, scapula rotates",
+      "Pain subsides",
+      "Acromial impingement is relieved"
+     ],
+     [
+      "Neer Test",
+      "Forced forward flexion with internal rotation",
+      "Positive pain sign",
+      "Confirms subacromial impingement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Posterior reinforcement is provided by the **infraspinatus** (middle facet) and teres minor (lowest facet), acting as external rotators that clear the greater tubercle from the acromion during abduction. Weakness of external rotation with arm at the side indicates an infraspinatus tear, evaluated by the external rotation lag sign.",
+   "say": "Posterior stability is maintained by infraspinatus and teres minor, external rotators that rotate the greater tubercle away from the acromion during abduction. External rotation weakness with the elbow flexed indicates an infraspinatus tear.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Infraspinatus Muscle",
+     "points": [
+      "Arises from infraspinous fossa",
+      "Innervated by suprascapular nerve",
+      "Tested by external rotation against resistance",
+      "Compensates for superior cuff loss"
+     ]
+    },
+    "right": {
+     "title": "Teres Minor Muscle",
+     "points": [
+      "Arises from middle lateral scapular border",
+      "Innervated by axillary nerve posterior branch",
+      "Tested by Hornblower sign in 90 abduction",
+      "Forms superior border of quadrangular space"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The rotator cuff lacks inferior reinforcement: no tendon supports the capsule below the humeral head, leaving the **inferior capsular pouch** as the anatomical weak spot. Consequently, almost all traumatic glenohumeral dislocations initially dislocate through this unsupported inferior defect before displacement into the anterior subcoracoid position.",
+   "say": "The rotator cuff lacks an inferior tendon: no muscular cuff supports the inferior capsule. This anatomical void creates the weakest region of the shoulder, explaining why glenohumeral dislocations penetrate through this inferior pouch.",
+   "vis": {
+    "kind": "flow",
+    "title": "Capsular Vulnerability Axis",
+    "nodes": [
+     {
+      "id": "sup",
+      "label": "Superior: Supraspinatus Reinforcement"
+     },
+     {
+      "id": "ant",
+      "label": "Anterior: Subscapularis Reinforcement"
+     },
+     {
+      "id": "post",
+      "label": "Posterior: Infraspinatus and Teres Minor"
+     },
+     {
+      "id": "inf",
+      "label": "Inferior Gap: Unsupported Capsule (Dislocation Site)"
+     }
+    ],
+    "edges": [
+     [
+      "sup",
+      "inf"
+     ],
+     [
+      "ant",
+      "inf"
+     ],
+     [
+      "post",
+      "inf"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
