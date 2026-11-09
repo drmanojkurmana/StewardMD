@@ -1,0 +1,213 @@
+{
+ "v": 1,
+ "module": "med-ich",
+ "subject": "medicine",
+ "title": "Raised Intracranial Pressure, Cushing Reflex, and Coma",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "The rigid non-compliant cranial vault encloses brain parenchyma (eighty percent), cerebrospinal fluid (ten percent), and intravascular blood (ten percent). Under the **Monro-Kellie doctrine**, because the total intracranial volume remains constant, any volumetric expansion of an intracranial mass or haematoma requires an equal reciprocal displacement of venous blood and cerebrospinal fluid before intracranial pressure rises exponentially.",
+   "say": "The rigid cranial vault encloses brain parenchyma, cerebrospinal fluid, and intravascular blood. Under the Monro-Kellie doctrine, because the total intracranial volume is constant, any volumetric expansion of an intracranial mass requires an equal reciprocal displacement of venous blood and cerebrospinal fluid before pressure spikes.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-paed-cns-meningeal.webp",
+    "alt": "Physical signs of meningeal irritation and raised intracranial pressure.",
+    "caption": "Clinical assessment of raised intracranial pressure and meningeal signs. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "When intracranial pressure approaches mean arterial pressure, critical reduction of cerebral perfusion pressure triggers a profound medullary baroreceptor and autonomic response termed the **Cushing reflex**. This classic triad comprises marked systemic hypertension with widened pulse pressure, reflex bradycardia mediated by vagal activation, and irregular, agonal respiratory breathing patterns reflecting severe brainstem compression.",
+   "say": "When intracranial pressure approaches mean arterial pressure, critical reduction of cerebral perfusion pressure triggers a medullary autonomic response termed the Cushing reflex. This classic triad comprises severe systemic hypertension with widened pulse pressure, reflex bradycardia, and irregular respiratory breathing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cushing Triad Component",
+     "Pathophysiological Mechanism",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Systemic Hypertension",
+      "Massive sympathetic discharge via medullary ischaemia",
+      "Compensatory drive to preserve cerebral perfusion"
+     ],
+     [
+      "Reflex Bradycardia",
+      "Carotid baroreceptor activation & parasympathetic vagal stimulation",
+      "Decompensating raised intracranial pressure"
+     ],
+     [
+      "Irregular Respirations",
+      "Mechanical compression of pontomedullary respiratory centres",
+      "Imminent terminal transtentorial herniation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Axoplasmic stasis within the optic nerve sheath resulting from elevated cerebrospinal fluid pressure in the optic nerve subarachnoid space produces optic disc swelling termed **papilloedema**. Fundoscopy reveals hyperaemic, elevated optic disc margins, loss of physiological disc cupping, absence of spontaneous venous pulsations, and peripapillary flame-shaped retinal haemorrhages.",
+   "say": "Axoplasmic stasis within the optic nerve sheath from elevated cerebrospinal fluid pressure produces optic disc swelling termed papilloedema. Fundoscopy reveals hyperaemic elevated disc margins, loss of physiological cupping, absence of spontaneous venous pulsations, and peripapillary flame haemorrhages.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "icp",
+      "label": "Elevated Subarachnoid CSF Pressure"
+     },
+     {
+      "id": "axop",
+      "label": "Optic Nerve Axoplasmic Flow Stasis"
+     },
+     {
+      "id": "pap",
+      "label": "Optic Disc Elevation & Blurring"
+     }
+    ],
+    "edges": [
+     [
+      "icp",
+      "axop"
+     ],
+     [
+      "axop",
+      "pap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rapid volumetric expansion of a supratentorial mass forces the uncus of the medial temporal lobe through the tentorial notch, causing **transtentorial herniation** (uncal herniation). The displacing uncus compresses the adjacent ipsilateral oculomotor nerve, producing an unreactive, sluggishly dilating pupil, followed by compression of the ipsilateral cerebral peduncle, causing contralateral dense hemiplegia.",
+   "say": "Rapid volumetric expansion of a supratentorial mass forces the medial temporal uncus through the tentorial notch, causing transtentorial herniation. The herniating uncus compresses the ipsilateral oculomotor nerve, producing an unreactive dilated pupil, followed by peduncular compression causing contralateral hemiplegia.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-ix-surg-neuroimaging_icsol.webp",
+    "alt": "Cross-sectional neuroimaging demonstrating intracranial herniation and midline shift.",
+    "caption": "Subfalcine and transtentorial cerebral herniation with severe midline shift. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Acute impairment of consciousness is universally quantified using the fifteen-point **Glasgow Coma Scale** (GCS), evaluating Eye opening (one to four points), Verbal response (one to five points), and Motor response (one to six points). A total GCS score of eight or lower defines clinical coma and represents an absolute indication for emergency endotracheal intubation.",
+   "say": "Acute impairment of consciousness is universally quantified using the fifteen-point Glasgow Coma Scale, evaluating eye opening, verbal response, and motor response. A total GCS score of eight or lower defines clinical coma and represents an absolute indication for emergency endotracheal intubation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "GCS Domain",
+     "Maximum Points",
+     "Assessment Criteria for Lowest / Highest Score"
+    ],
+    "rows": [
+     [
+      "Eye Opening (E)",
+      "4 points",
+      "E1 = None; E2 = To pain; E3 = To speech; E4 = Spontaneous"
+     ],
+     [
+      "Verbal Response (V)",
+      "5 points",
+      "V1 = None; V2 = Incomprehensible; V3 = Inappropriate; V4 = Confused; V5 = Oriented"
+     ],
+     [
+      "Motor Response (M)",
+      "6 points",
+      "M1 = None; M2 = Decerebrate; M3 = Decorticate; M4 = Withdrawal; M5 = Localises; M6 = Obeys"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ventral pontine infarction destroying bilateral corticospinal and corticobulbar tracts while sparing the ascending reticular activating system causes **locked-in syndrome**. Patients remain fully conscious, awake, and cognitively intact with intact sleep-wake cycles, but are completely quadriplegic and anarthric, capable of communicating exclusively through vertical eye movements and upper eyelid blinking.",
+   "say": "Ventral pontine infarction destroying bilateral corticospinal and corticobulbar tracts while sparing reticular activating pathways causes locked-in syndrome. Patients remain fully awake and cognitively intact, but are quadriplegic and mute, communicating exclusively through vertical eye movements and blinking.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Coma / Persistent Vegetative State",
+     "points": [
+      "Reticular activating system or bihemispheric injury",
+      "Absence of awareness and purposeful responsiveness",
+      "Cannot follow commands or communicate",
+      "Abnormal EEG with generalized slowing"
+     ]
+    },
+    "right": {
+     "title": "Locked-In Syndrome",
+     "points": [
+      "Selective ventral pontine infarct (basilar artery)",
+      "Normal consciousness, perception, and cognition",
+      "Preserved vertical eye movements and blinking",
+      "Normal reactive EEG background rhythm"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The irreversible, permanent cessation of all clinical functions of the brain, including the brainstem, is defined legally and clinically by **brain death criteria**. Confirmation mandates demonstration of deep unreactive coma, complete absence of brainstem reflexes (pupillary, corneal, vestibulo-ocular, gag, and cough), and absence of spontaneous respiratory drive during a formal positive apnoea test.",
+   "say": "The permanent cessation of all functions of the brain, including the brainstem, is defined legally and clinically by brain death criteria. Confirmation mandates demonstration of deep coma, complete absence of brainstem reflexes, and absence of spontaneous respiratory drive during a formal apnoea test.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Brainstem Reflex Test",
+     "Stimulus Applied",
+     "Brain Death Finding"
+    ],
+    "rows": [
+     [
+      "Pupillary Light Reflex",
+      "Bright light beam directed into both eyes",
+      "Fixed, unreactive pupils (usually 4 to 9 mm)"
+     ],
+     [
+      "Corneal Reflex",
+      "Sterile saline or cotton wisp across cornea",
+      "Complete absence of eyelid blink"
+     ],
+     [
+      "Oculovestibular (Cold Caloric)",
+      "50 mL ice-cold water irrigated into ear canal",
+      "Complete absence of conjugate ocular movement"
+     ],
+     [
+      "Gag and Cough Reflexes",
+      "Suction catheter irritating posterior pharynx & carina",
+      "Complete absence of pharyngeal or carinal contractions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Performance of the apnoea test requires pre-oxygenation with one-hundred percent oxygen, disconnection from mechanical ventilation, and continuous tracheal insufflation of oxygen. Arterial blood gas must confirm arterial carbon dioxide tension rising above sixty mmHg (or twenty mmHg above baseline) without any observed spontaneous respiratory effort, establishing irreversible cessation of the **medullary** respiratory pacemaker.",
+   "say": "Performance of the apnoea test requires pre-oxygenation with one-hundred percent oxygen, disconnection from mechanical ventilation, and continuous oxygen insufflation. Arterial carbon dioxide tension must rise above sixty mmHg without any spontaneous respiratory effort, establishing cessation of medullary respiratory drive.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "preox",
+      "label": "100% FiO2 Pre-oxygenation"
+     },
+     {
+      "id": "apn",
+      "label": "Disconnect Ventilator & Monitor PCO2"
+     },
+     {
+      "id": "pco2",
+      "label": "PaCO2 >= 60 mmHg Without Breathing"
+     }
+    ],
+    "edges": [
+     [
+      "preox",
+      "apn"
+     ],
+     [
+      "apn",
+      "pco2"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 29"
+}

@@ -1,0 +1,225 @@
+{
+ "v": 1,
+ "module": "med-movement",
+ "subject": "medicine",
+ "title": "Advanced Parkinsonian Therapies and Atypical Parkinsonism",
+ "minutes": 6,
+ "steps": [
+  {
+   "tx": "Non-ergot synthetic compounds that directly stimulate striatal dopamine D2 and D3 receptors independent of presynaptic neuronal degeneration are **dopamine agonists** (such as pramipexole and ropinirole). Primarily utilized as initial monotherapy in younger onset Parkinson patients or adjunctive therapy with levodopa, they carry a high risk of neuropsychiatric impulse control disorders (pathological gambling, hypersexuality, compulsive shopping).",
+   "say": "Non-ergot synthetic compounds that directly stimulate striatal dopamine receptors are dopamine agonists, such as pramipexole and ropinirole. Primarily used as initial monotherapy in younger patients or adjunctive therapy with levodopa, they carry a high risk of neuropsychiatric impulse control disorders including pathological gambling.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/movement-disorders-fig1.webp",
+    "alt": "Classification and neuroanatomy of hypokinetic and hyperkinetic movement disorders.",
+    "caption": "Extrapyramidal basal ganglia circuitry and movement disorder classifications. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "With advancing disease and progressive loss of striatal presynaptic dopamine storage capacity, patients develop motor fluctuations where the therapeutic benefit of a levodopa dose shortens to under three to four hours. Termed the **wearing-off** phenomenon, patients alternate between functional mobility during on periods and severe bradykinesia and rigidity during off periods.",
+   "say": "With advancing disease and loss of striatal dopamine storage capacity, patients develop motor fluctuations where the therapeutic benefit of each levodopa dose shortens. Termed the wearing-off phenomenon, patients alternate between functional mobility during on periods and severe rigidity during off periods.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "deg",
+      "label": "Severe Striatal Terminal Loss"
+     },
+     {
+      "id": "stor",
+      "label": "Loss of Presynaptic Dopamine Buffer"
+     },
+     {
+      "id": "wear",
+      "label": "Plasma-Dependent Wearing-Off Fluctuations"
+     }
+    ],
+    "edges": [
+     [
+      "deg",
+      "stor"
+     ],
+     [
+      "stor",
+      "wear"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Fluctuating plasma levodopa concentrations also induce peak-dose involuntary choreiform and dystonic movements known as levodopa-induced **dyskinesias**. Management options include smoothing levodopa delivery using catechol-O-methyltransferase (COMT) inhibitors like entacapone, adding the NMDA antagonist amantadine, or evaluating patients for deep brain stimulation of the subthalamic nucleus.",
+   "say": "Fluctuating plasma levodopa concentrations also induce peak-dose involuntary choreiform and dystonic movements known as dyskinesias. Management includes smoothing levodopa delivery using COMT inhibitors, adding amantadine, or performing subthalamic nucleus deep brain stimulation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Motor Complication",
+     "Underlying Mechanism",
+     "Therapeutic Management Strategy"
+    ],
+    "rows": [
+     [
+      "Wearing-off phenomenon",
+      "Shortened duration of levodopa clinical response",
+      "Fractionate doses, add Entacapone or long-acting dopamine agonist"
+     ],
+     [
+      "Peak-dose dyskinesias",
+      "Excess pulsatile striatal dopaminergic stimulation",
+      "Reduce individual levodopa doses, add oral Amantadine"
+     ],
+     [
+      "Freezing of gait (FOG)",
+      "Frontostriatal locomotor circuit failure",
+      "Visual and auditory sensory cueing, physical therapy"
+     ],
+     [
+      "Off-period dystonia",
+      "Profound morning dopamine trough (foot inversion)",
+      "Controlled-release bedtime levodopa or rotigotine patch"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neurodegenerative conditions that share parkinsonian features but fail to respond robustly to levodopa are designated as atypical parkinsonian syndromes. A 4-repeat tauopathy characterised by early postural instability, frequent backward falls within the initial year, and vertical supranuclear gaze palsy (impairing downward voluntary saccades) is **progressive supranuclear palsy** (PSP, Steele-Richardson-Olszewski syndrome).",
+   "say": "Neurodegenerative conditions that share parkinsonian features but fail to respond to levodopa are designated as atypical parkinsonisms. A tauopathy characterized by early postural instability, frequent backward falls, and vertical supranuclear gaze palsy is progressive supranuclear palsy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Parkinson Disease (Idiopathic)",
+     "points": [
+      "Asymmetrical onset with resting tremor",
+      "Falls occur late (after 5-10 years)",
+      "Normal vertical eye movements",
+      "Exquisite sustained response to levodopa"
+     ]
+    },
+    "right": {
+     "title": "Progressive Supranuclear Palsy",
+     "points": [
+      "Symmetrical axial rigidity with upright posture",
+      "Early backward falls within first year",
+      "Vertical supranuclear downward gaze palsy",
+      "Poor or absent response to levodopa"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An alpha-synucleinopathy characterised by prominent oligodendroglial cytoplasmic inclusions, profound autonomic failure (severe orthostatic hypotension, urinary incontinence, erectile dysfunction), and either cerebellar ataxia or parkinsonism is **multiple system atrophy** (MSA). MRI of the brain demonstrates characteristic midbrain hummingbird sign in PSP and pontine hot cross bun sign in MSA-C.",
+   "say": "An alpha-synucleinopathy characterized by oligodendroglial cytoplasmic inclusions, severe autonomic failure with orthostatic hypotension, and either cerebellar ataxia or parkinsonism is multiple system atrophy. Brain MRI shows the midbrain hummingbird sign in PSP and the pontine hot cross bun sign in cerebellar MSA.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/drug-induced-parkinsonism-fig1.webp",
+    "alt": "Clinical and anatomical features of drug-induced parkinsonism and atypical syndromes.",
+    "caption": "Clinical distinctions between idiopathic Parkinson disease, drug-induced parkinsonism, and atypical syndromes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The most common pathological movement disorder in adults is **essential tremor**, an autosomal dominant monosymptomatic tremor disorder. In sharp contrast to Parkinson disease, essential tremor is a high-frequency (eight to twelve Hertz) postural and kinetic action tremor affecting the bilateral upper extremities during active motor tasks (pouring water, writing) and head (titubation), completely lacking bradykinesia, rigidity, or resting tremor.",
+   "say": "The most common pathological movement disorder in adults is essential tremor, an autosomal dominant disorder. In contrast to Parkinson disease, essential tremor is a high-frequency postural action tremor affecting bilateral hands during motor tasks like writing, completely lacking bradykinesia or rigidity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Essential Tremor",
+     "Parkinsonian Tremor"
+    ],
+    "rows": [
+     [
+      "Tremor Type",
+      "Postural and kinetic action tremor",
+      "Resting tremor (dampens during action)"
+     ],
+     [
+      "Symmetry",
+      "Bilateral and largely symmetrical",
+      "Typically unilateral or asymmetrical at onset"
+     ],
+     [
+      "Head Involvement",
+      "Frequent yes-yes or no-no head titubation",
+      "Rare (chin or perioral tremor only)"
+     ],
+     [
+      "Pharmacological Response",
+      "Marked temporary improvement with alcohol",
+      "No improvement with alcohol; responds to Levodopa"
+     ],
+     [
+      "First-Line Therapy",
+      "Propranolol OR Primidone",
+      "Levodopa / Carbidopa OR Dopamine Agonists"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Secondary parkinsonism induced by pharmacological dopamine receptor blockade is a common iatrogenic mimic termed drug-induced parkinsonism. Typical first-generation antipsychotics (haloperidol, fluphenazine) and gastrointestinal prokinetic agents (metoclopramide) block striatal D2 receptors, precipitating acute **dystonia**, parkinsonian rigidity, akathisia (motor restlessness), and delayed tardive dyskinesias.",
+   "say": "Secondary parkinsonism induced by dopamine receptor blockade is a common iatrogenic mimic termed drug-induced parkinsonism. First-generation antipsychotics and prokinetics like metoclopramide block striatal D2 receptors, precipitating acute dystonias, rigidity, akathisia, and delayed tardive dyskinesias.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "d2b",
+      "label": "D2 Receptor Antagonism (Metoclopramide)"
+     },
+     {
+      "id": "stri",
+      "label": "Striatal Dopaminergic Blockade"
+     },
+     {
+      "id": "dyst",
+      "label": "Acute Oculogyric Crisis & Parkinsonism"
+     }
+    ],
+    "edges": [
+     [
+      "d2b",
+      "stri"
+     ],
+     [
+      "stri",
+      "dyst"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Surgical neuromodulation has revolutionized the management of medically refractory Parkinson disease with motor fluctuations. High-frequency electrical stimulation of the **subthalamic** nucleus (STN) or internal segment of the globus pallidus (GPi) via implanted deep brain stimulation electrodes normalizes aberrant basal ganglia output, dramatically reducing off-time, dyskinesias, and medication requirements.",
+   "say": "Surgical neuromodulation has revolutionized the management of medically refractory Parkinson disease. High-frequency electrical deep brain stimulation of the subthalamic nucleus or internal globus pallidus normalizes aberrant basal ganglia output, dramatically reducing off-time, dyskinesias, and medication needs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fluc",
+      "label": "Severe Refractory Motor Fluctuations"
+     },
+     {
+      "id": "dbs",
+      "label": "Bilateral Subthalamic Nucleus DBS"
+     },
+     {
+      "id": "opt",
+      "label": "Sustained On-Time & Reduced Levodopa Need"
+     }
+    ],
+    "edges": [
+     [
+      "fluc",
+      "dbs"
+     ],
+     [
+      "dbs",
+      "opt"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": "Harrison 22e, Ch. 427"
+}
