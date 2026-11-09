@@ -1,0 +1,233 @@
+{
+  "v": 1,
+  "module": "phy-gfr",
+  "subject": "physiology",
+  "title": "Renal Blood Flow Autoregulation and the Myogenic Mechanism",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Although the human kidneys account for less than zero point five percent of total body weight, they receive approximately twenty to twenty-five percent of total resting cardiac output. This immense **renal blood flow**, measuring twelve hundred millilitres per minute, provides abundant plasma delivery to fuel glomerular filtration rather than meeting purely metabolic oxygen requirements.",
+      "say": "Kidneys receive twenty to twenty-five percent of cardiac output, ensuring massive plasma delivery for continuous glomerular filtration.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Renal Perfusion Parameter",
+          "Normal Resting Value",
+          "Physiological Significance"
+        ],
+        "rows": [
+          [
+            "Renal Blood Flow (RBF)",
+            "~1200 mL / min",
+            "20% to 25% of total resting cardiac output"
+          ],
+          [
+            "Renal Plasma Flow (RPF)",
+            "~600 to 650 mL / min",
+            "Calculated as RBF × (1 - Haematocrit)"
+          ],
+          [
+            "Glomerular Filtration Rate (GFR)",
+            "~125 mL / min (180 L / day)",
+            "Ultrafiltrate formed across glomerular capillaries"
+          ],
+          [
+            "Renal Oxygen Extraction",
+            "~8% to 10%",
+            "Very low extraction; oxygen delivery vastly exceeds metabolic demand"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Remarkably, renal blood flow and glomerular filtration rate remain nearly constant despite substantial fluctuations in systemic arterial blood pressure between eighty and one hundred eighty millimetres of mercury. This vital protective phenomenon is termed **renal autoregulation**, shielding fragile glomerular capillaries from hypertensive barotrauma and preserving solute excretion during hypotension.",
+      "say": "Renal autoregulation maintains steady blood flow and filtration across arterial pressures from eighty to one hundred eighty millimetres of mercury.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Autoregulation Range (80 to 180 mmHg)",
+          "points": [
+            "RBF and GFR remain essentially constant",
+            "Mediated intrinsically within the kidney parenchyma",
+            "Persists in completely denervated and isolated perfused kidneys",
+            "Prevents massive pressure diuresis and glomerular sclerosis"
+          ]
+        },
+        "right": {
+          "title": "Outside Autoregulation Range",
+          "points": [
+            "Below 80 mmHg: Afferent arterioles maximally dilated; RBF and GFR drop",
+            "Severe hypotension (<50 mmHg) leads to acute oliguria and anuria",
+            "Above 180 mmHg: Afferent constriction fails; barotrauma and proteinuria occur",
+            "Overridden by intense systemic sympathetic discharge during haemorrhage"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The primary rapid component of autoregulation is the intrinsic **myogenic mechanism**, residing in the vascular smooth muscle of preglomerular afferent arterioles. When systemic arterial pressure rises, increased intraluminal wall tension mechanically stretches vascular smooth muscle cells, triggering stretch-activated cation channels and calcium influx that elicit compensatory vasoconstriction.",
+      "say": "The myogenic mechanism rapidly constricts afferent arterioles when stretched by high blood pressure, keeping capillary flow steady.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bp_rise",
+            "label": "Systemic Blood Pressure Rises -> Stretches Afferent Arteriolar Wall"
+          },
+          {
+            "id": "stretch_ch",
+            "label": "Activation of Stretch-Activated Non-Selective Cation Channels"
+          },
+          {
+            "id": "ca_influx",
+            "label": "Smooth Muscle Depolarization and Influx via L-Type Calcium Channels"
+          },
+          {
+            "id": "constrict",
+            "label": "Afferent Arteriolar Vasoconstriction Normalizes Downstream Glomerular Pressure"
+          }
+        ],
+        "edges": [
+          [
+            "bp_rise",
+            "stretch_ch"
+          ],
+          [
+            "stretch_ch",
+            "ca_influx"
+          ],
+          [
+            "ca_influx",
+            "constrict"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Renal vascular resistance is distributed primarily between two distinct resistance vessels arranged in series: preglomerular afferent arterioles and postglomerular efferent arterioles. Glomerular capillary hydrostatic pressure, which drives filtration, is precisely governed by the ratio of **afferent and efferent arteriolar resistance**.",
+      "say": "Glomerular capillary pressure depends on the delicate balance between afferent and efferent arteriolar resistance.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/glomerular-diseases-fig1.webp",
+        "alt": "Glomerular vascular architecture and capillary tuft",
+        "caption": "Glomerular capillary microcirculation, vascular resistance points, and filtration dynamics."
+      }
+    },
+    {
+      "tx": "Selective constriction of the afferent arteriole increases upstream vascular resistance, reducing renal blood flow and diminishing downstream glomerular capillary hydrostatic pressure, which causes glomerular filtration rate to plummet. Conversely, selective constriction of the efferent arteriole dams blood back into the glomerular capillary bed, preserving or elevating **glomerular capillary pressure**.",
+      "say": "Constricting the afferent arteriole lowers glomerular pressure and filtration, whereas constricting the efferent arteriole elevates filtration.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Vascular Tone Change",
+          "Renal Blood Flow",
+          "Glomerular Capillary Pressure",
+          "Glomerular Filtration Rate"
+        ],
+        "rows": [
+          [
+            "Afferent Constriction",
+            "Decreased",
+            "Decreased",
+            "Decreased"
+          ],
+          [
+            "Afferent Dilation",
+            "Increased",
+            "Increased",
+            "Increased"
+          ],
+          [
+            "Efferent Constriction",
+            "Decreased",
+            "Increased",
+            "Increased (or preserved)"
+          ],
+          [
+            "Efferent Dilation",
+            "Increased",
+            "Decreased",
+            "Decreased"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Low concentrations of angiotensin II selectively constrict the efferent arteriole more potently than the afferent arteriole, maintaining glomerular capillary hydrostatic pressure during moderate hypovolaemia. Pharmacological blockade of angiotensin II with **angiotensin converting enzyme inhibitors** dilates efferent arterioles, causing an acute drop in filtration pressure that can precipitate prerenal azotemia.",
+      "say": "ACE inhibitors dilate the efferent arteriole, reducing glomerular filtration pressure in patients with renal artery stenosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aki-ckd-hus-dialysis-transplant-fig1.webp",
+        "alt": "Acute kidney injury and hemodynamic decompensation",
+        "caption": "Hemodynamic acute kidney injury patterns, perfusion failure, and nephron preservation."
+      }
+    },
+    {
+      "tx": "Locally produced renal prostaglandins, including prostacyclin and prostaglandin E2, act as crucial counter-regulatory vasodilators that maintain patency of afferent arterioles during sympathetic stimulation. Administration of non-steroidal anti-inflammatory drugs inhibits **renal prostaglandin synthesis**, leaving afferent arterioles vulnerable to unopposed vasoconstriction and ischaemic acute kidney injury.",
+      "say": "NSAIDs block protective prostaglandins, causing severe afferent arteriolar constriction and acute kidney injury.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "symp",
+            "label": "Hypovolaemia Stimulates Sympathetic Outflow and Angiotensin II Release"
+          },
+          {
+            "id": "pg",
+            "label": "Compensatory Synthesis of Vasodilatory Prostaglandins (PGE2, PGI2)"
+          },
+          {
+            "id": "nsaid",
+            "label": "NSAID Administration Inhibits Cyclooxygenase Enzymes (COX-1 / COX-2)"
+          },
+          {
+            "id": "aki",
+            "label": "Unopposed Afferent Constriction Causes Severe Glomerular Ischaemia and AKI"
+          }
+        ],
+        "edges": [
+          [
+            "symp",
+            "pg"
+          ],
+          [
+            "pg",
+            "nsaid"
+          ],
+          [
+            "nsaid",
+            "aki"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Extreme sympathetic stimulation during severe circulatory shock overrides autoregulatory protection completely. Intense alpha-1 adrenergic receptor activation constricts afferent and efferent vessels equally, causing profound **renal vascular collapse** that shunts blood volume away from the kidneys toward vital coronary and cerebral beds.",
+      "say": "Massive sympathetic discharge during shock constricts all renal vessels, diverting blood to the heart and brain.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Basal Autoregulated State",
+          "points": [
+            "Mean arterial pressure between 80 and 180 mmHg",
+            "Minimal sympathetic tone",
+            "RBF and GFR kept stable at 1200 mL/min and 125 mL/min",
+            "Normal urine output and solute clearance"
+          ]
+        },
+        "right": {
+          "title": "Severe Circulatory Shock",
+          "points": [
+            "MAP falls below 60 mmHg; massive sympathetic surge",
+            "Widespread intense renal vasoconstriction",
+            "RBF falls by over 80%; GFR drops to near zero",
+            "Prone to ischaemic acute tubular necrosis"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

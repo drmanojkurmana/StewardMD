@@ -1,0 +1,218 @@
+{
+  "v": 1,
+  "module": "phy-gfr",
+  "subject": "physiology",
+  "title": "The Glomerular Barrier, Inulin Clearance, and Creatinine Estimation",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The glomerular ultrafiltration barrier is a highly specialized tripartite macromolecular sieve that permits unimpeded passage of water and small solutes while strictly excluding cellular elements and plasma proteins. The outermost epithelial layer consists of visceral **podocyte foot processes**, which interdigitate to form narrow filtration slits.",
+      "say": "The glomerular filtration barrier uses fenestrated endothelium, basement membrane, and podocyte foot processes to filter blood.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/minimal-change-disease-fig1.webp",
+        "alt": "Podocyte foot process architecture",
+        "caption": "Ultrastructure of podocyte pedicels, slit diaphragms, and nephrin complexes in glomerular filtration."
+      }
+    },
+    {
+      "tx": "The innermost layer of the barrier is the fenestrated glomerular endothelium, containing large transcellular pores measuring seventy to one hundred nanometres. Sandwiched in the middle is the **glomerular basement membrane**, an acellular meshwork of type IV collagen, laminin, and polyanionic heparan sulfate proteoglycans.",
+      "say": "The glomerular basement membrane provides structural support and negative charge selectivity through heparan sulfate proteoglycans.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Barrier Layer",
+          "Anatomical Structure",
+          "Pore Diameter",
+          "Primary Selectivity Role"
+        ],
+        "rows": [
+          [
+            "Fenestrated Endothelium",
+            "Endothelial cytoplasm with transcellular pores",
+            "70 to 100 nm",
+            "Excludes cellular blood elements (RBCs, WBCs, platelets)"
+          ],
+          [
+            "Glomerular Basement Membrane",
+            "Type IV collagen, laminin, nidogen, perlecan",
+            "Hydrated gel network",
+            "Size restriction and dense negative electrostatic barrier"
+          ],
+          [
+            "Visceral Podocyte Epithelium",
+            "Interdigitating pedicels with slit diaphragms",
+            "4 to 14 nm slits",
+            "Final critical molecular sieve; nephrin-based size gate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Selectivity of the glomerular sieve is governed strictly by solute molecular radius and electrical charge. Neutral molecules smaller than two nanometres filter freely, whereas molecules exceeding four nanometres are completely excluded. Because basement membrane and podocalyxin carry abundant fixed negative charges, **charge selectivity** repels negatively charged plasma albumin.",
+      "say": "Glomerular filtration excludes molecules based on size and negative charge, repelling polyanionic albumin at physiological pH.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Molecular Size Selectivity",
+          "points": [
+            "Solute radius < 2.0 nm: Freely filtered (water, urea, glucose, inulin)",
+            "Solute radius 2.0 to 4.2 nm: Progressive filtration restriction",
+            "Solute radius > 4.2 nm: Completely excluded from Bowman space",
+            "Serum albumin radius: 3.6 nm (restricted by size and charge)"
+          ]
+        },
+        "right": {
+          "title": "Electrostatic Charge Selectivity",
+          "points": [
+            "Fixed polyanionic charges (heparan sulfate, podocalyxin)",
+            "Repels circulating polyanions (plasma albumin is strongly anionic)",
+            "Permits easier filtration of neutral or polycationic dextrans",
+            "Selectively lost in minimal change disease causing pure albuminuria"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Selective effacement of podocyte foot processes and loss of glomerular polyanionic charges allows massive leakage of serum albumin into the urine, precipitating **selective albuminuria**. In minimal change disease, podocyte charge disruption causes nephrotic syndrome without altering size selectivity, maintaining exclusion of larger immunoglobulins.",
+      "say": "Loss of negative charges in minimal change disease causes selective proteinuria, leaking albumin while retaining larger proteins.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/membranous-nephropathy-fig1.webp",
+        "alt": "Membranous nephropathy and glomerular immune deposition",
+        "caption": "Subepithelial immune complex deposition, basement membrane thickening, and non-selective proteinuria."
+      }
+    },
+    {
+      "tx": "The volume of plasma completely cleared of a substance by the kidneys per unit time is defined as **renal clearance**. Calculated as urinary concentration multiplied by urine flow rate divided by arterial plasma concentration, clearance serves as the fundamental clinical metric for measuring renal excretory performance.",
+      "say": "Renal clearance is the volume of plasma completely cleared of a substance per minute, calculated as UV divided by P.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Renal Clearance (Cx)",
+          "points": [
+            "Formula: Cx = (Ux × V) / Px",
+            "Volume of plasma cleared of substance x per unit time",
+            "Expressed in millilitres per minute (mL/min)",
+            "Cx < GFR implies net tubular reabsorption"
+          ]
+        },
+        "right": {
+          "title": "Clearance Ratio (Cx / Cinulin)",
+          "points": [
+            "Fractional clearance relative to inulin",
+            "Ratio = 1.0 indicates pure filtration (inulin)",
+            "Ratio < 1.0 indicates net reabsorption (Na+, glucose)",
+            "Ratio > 1.0 indicates net tubular secretion (PAH, creatinine)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The gold standard reference substance for measuring glomerular filtration rate is the fructose polymer **inulin**. Because inulin is freely filtered across the glomerular barrier and is neither reabsorbed, secreted, synthesized, nor metabolized by renal tubules, inulin clearance precisely equals true glomerular filtration rate.",
+      "say": "Inulin is the gold standard for measuring GFR because it is freely filtered and undergoes zero tubular reabsorption or secretion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "free",
+            "label": "Inulin Freely Filters Across Glomerular Membrane (Sieving Ratio = 1.0)"
+          },
+          {
+            "id": "no_reabs",
+            "label": "Zero Reabsorption Along Proximal, Henle, or Distal Tubular Epithelium"
+          },
+          {
+            "id": "no_sec",
+            "label": "Zero Active or Passive Secretion by Peritubular Capillaries"
+          },
+          {
+            "id": "gfr_eq",
+            "label": "Amount Excreted (Uin × V) = Amount Filtered (GFR × Pin) -> GFR = Cin"
+          }
+        ],
+        "edges": [
+          [
+            "free",
+            "no_reabs"
+          ],
+          [
+            "no_reabs",
+            "no_sec"
+          ],
+          [
+            "no_sec",
+            "gfr_eq"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because inulin requires continuous intravenous infusion, routine clinical practice measures endogenous **creatinine clearance** to estimate glomerular filtration rate. Creatinine is produced at a constant rate from skeletal muscle creatine phosphate; however, approximately ten to twenty percent of excreted creatinine is actively secreted by proximal tubules.",
+      "say": "Creatinine clearance approximates GFR but slightly overestimates it because ten to twenty percent is actively secreted by proximal tubules.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Inulin Clearance (Cin)",
+          "points": [
+            "Exogenous plant polysaccharide; requires continuous IV infusion",
+            "Purely filtered: zero tubular reabsorption or secretion",
+            "Cin precisely equals true GFR (~125 mL/min)",
+            "Strict research benchmark; impractical for daily clinical ward care"
+          ]
+        },
+        "right": {
+          "title": "Creatinine Clearance (Ccr)",
+          "points": [
+            "Endogenous breakdown product of skeletal muscle creatine",
+            "Freely filtered but 10% to 20% actively secreted by organic cation transporters",
+            "Slightly overestimates true GFR (Ccr ~ 135 to 140 mL/min)",
+            "Serum creatinine has an inverse hyperbolic relationship with GFR"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Because of tubular creatinine secretion, serum creatinine remains within normal reference ranges until glomerular filtration rate falls by more than fifty percent. Furthermore, drugs like cimetidine and trimethoprim inhibit **tubular creatinine secretion**, causing an artificial rise in serum creatinine without any true change in glomerular filtration rate.",
+      "say": "Serum creatinine does not rise significantly until GFR falls by half, and drugs like trimethoprim can artificially elevate it.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "True GFR Level",
+          "Serum Creatinine Level",
+          "Clinical Interpretation",
+          "Diagnostic Caution"
+        ],
+        "rows": [
+          [
+            "120 mL/min (100%)",
+            "1.0 mg / dL",
+            "Normal baseline renal function",
+            "Optimal nephron reserve"
+          ],
+          [
+            "60 mL/min (50%)",
+            "1.5 to 2.0 mg / dL",
+            "Loss of 50% functional renal mass",
+            "Creatinine begins noticeable upward trajectory"
+          ],
+          [
+            "30 mL/min (25%)",
+            "3.0 to 4.0 mg / dL",
+            "Severe renal impairment (CKD Stage 4)",
+            "Substantial metabolic toxin accumulation"
+          ],
+          [
+            "15 mL/min (12%)",
+            "6.0 to 8.0 mg / dL",
+            "End-stage kidney disease (CKD Stage 5)",
+            "Uraemia requiring renal replacement therapy"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
