@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phy-mechanics",
+  "subject": "physiology",
+  "title": "FEV1, Spirometry, and Obstructive Versus Restrictive Patterns",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Dynamic spirometry records the volume of gas exhaled against time during an abrupt, maximal expiration initiated from total lung capacity. The total gas volume forcefully expelled during this standardized maneuver is designated the **forced vital capacity**. In healthy individuals without airway pathology, forced vital capacity closely equals slow vital capacity.",
+      "say": "Forced vital capacity is the total air forcefully exhaled from full inspiration to maximal expiration in spirometry.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Forced Vital Capacity (FVC)",
+          "points": [
+            "Total volume forcefully evacuated from full TLC",
+            "Standard benchmark: ≥ 80% of predicted reference values",
+            "Reduced in restrictive defects due to low total lung capacity",
+            "May appear reduced in severe obstructive air trapping"
+          ]
+        },
+        "right": {
+          "title": "Slow Vital Capacity (SVC)",
+          "points": [
+            "Measured during relaxed, unforced complete exhalation",
+            "Avoids dynamic airway collapse caused by high pleural pressure",
+            "Significantly exceeds FVC in obstructive lung diseases",
+            "Provides accurate baseline vital capacity in emphysema"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The volume of gas expired during the very first second of the forced vital capacity maneuver is the **forced expiratory volume in one second**. Known universally as FEV1, this critical parameter reflects the caliber of large and medium conducting airways and serves as the primary metric for grading obstructive airflow limitation.",
+      "say": "The forced expiratory volume in one second, or FEV1, measures flow through conducting airways during the initial second.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/asthma-exac-fig1.webp",
+        "alt": "Forced expiratory spirogram",
+        "caption": "Dynamic spirometric tracings and forced expiratory curves during bronchodilator evaluation."
+      }
+    },
+    {
+      "tx": "Dividing FEV1 by forced vital capacity generates the **Tiffeneau-Pinelli index**, typically expressed as a percentage or fraction. In young healthy adults, this ratio normally ranges between seventy-five and eighty-five percent, demonstrating that approximately eighty percent of total vital capacity can be forcefully emptied within the first second.",
+      "say": "The FEV1 to FVC ratio averages seventy-five to eighty-five percent in healthy individuals, establishing normal baseline expiratory speed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal Spirometry",
+          "points": [
+            "FEV1 / FVC ratio ≥ 0.70 (usually 0.75 to 0.85)",
+            "FVC ≥ 80% predicted",
+            "FEV1 ≥ 80% predicted",
+            "Prompt alveolar emptying within 3 to 4 seconds"
+          ]
+        },
+        "right": {
+          "title": "Obstructive Defect",
+          "points": [
+            "FEV1 / FVC ratio < 0.70 (post-bronchodilator)",
+            "FEV1 reduced disproportionately to FVC",
+            "Prolonged expiration exceeding 6 to 10 seconds",
+            "Concave scooped expiratory flow-volume loop"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The hallmark of an obstructive ventilatory defect is an abnormal disproportionate reduction in airflow, diagnosed when the post-bronchodilator **FEV1/FVC ratio** falls below seventy percent. Common clinical etiologies include bronchial asthma, chronic bronchitis, pulmonary emphysema, bronchiectasis, and cystic fibrosis, all characterized by increased airway resistance.",
+      "say": "An FEV1 to FVC ratio below seventy percent defines obstructive airway disease, characteristic of asthma and chronic obstructive pulmonary disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/asthma-copd-drugs-fig1.webp",
+        "alt": "Airway caliber and bronchodilation",
+        "caption": "Airway caliber and pharmacological responsiveness in obstructive ventilatory disorders."
+      }
+    },
+    {
+      "tx": "In pure restrictive ventilatory defects, such as idiopathic pulmonary fibrosis, sarcoidosis, or chest wall kyphoscoliosis, total lung volume is reduced while conducting airways remain widely patent. Consequently, both FEV1 and FVC decrease proportionally, maintaining a normal or even supranormal **elevated FEV1/FVC ratio** exceeding eighty-five percent.",
+      "say": "In restrictive diseases, both FEV1 and FVC decrease proportionally, keeping the FEV1 to FVC ratio normal or supranormal.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Spirometric Parameter",
+          "Obstructive Pattern",
+          "Restrictive Pattern"
+        ],
+        "rows": [
+          [
+            "FEV1",
+            "Significantly Reduced (< 80%)",
+            "Reduced in proportion to FVC"
+          ],
+          [
+            "FVC",
+            "Normal or Mildly Reduced",
+            "Significantly Reduced (< 80%)"
+          ],
+          [
+            "FEV1 / FVC Ratio",
+            "Reduced (< 0.70)",
+            "Normal or Elevated (> 0.70 to 0.85)"
+          ],
+          [
+            "Total Lung Capacity",
+            "Normal or Increased (hyperinflation)",
+            "Reduced (< 80% predicted)"
+          ],
+          [
+            "Residual Volume",
+            "Markedly Increased (air trapping)",
+            "Reduced proportionally with TLC"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "During forced expiration, airway compression occurs because pleural pressure becomes positive, compressing intrathoracic airways downstream from the alveoli. The location where intraluminal pressure exactly equals surrounding pleural pressure is called the **equal pressure point**. Downstream from this point, external transmural pressure promotes dynamic airway collapse.",
+      "say": "At the equal pressure point, intraluminal pressure equals pleural pressure. Downstream from this site, dynamic compression limits flow.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "alveolus",
+            "label": "Alveolar Pressure = Pleural Pressure + Elastic Recoil Pressure"
+          },
+          {
+            "id": "drop",
+            "label": "Pressure Drops Along Airways Due to Frictional and Resistive Losses"
+          },
+          {
+            "id": "epp",
+            "label": "Equal Pressure Point (EPP): Intraluminal Pressure Equals Pleural Pressure"
+          },
+          {
+            "id": "limit",
+            "label": "Downstream Dynamic Compression Limits Flow Independently of Effort"
+          }
+        ],
+        "edges": [
+          [
+            "alveolus",
+            "drop"
+          ],
+          [
+            "drop",
+            "epp"
+          ],
+          [
+            "epp",
+            "limit"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Assessing mid-expiratory flow rates provides sensitive insight into peripheral small airway caliber. The **forced expiratory flow 25-75** represents the average flow rate measured between twenty-five and seventy-five percent of expired vital capacity. Being effort-independent, this parameter is frequently the earliest abnormality detected in early smoking-related small airway disease.",
+      "say": "Forced expiratory flow twenty-five to seventy-five reflects small airway caliber and is often the earliest abnormal finding in smokers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "FEF25-75 Significance",
+          "points": [
+            "Reflects resistance in small airways (<2 mm diameter)",
+            "Effort-independent mid-expiratory flow curve",
+            "Decreases early before FEV1/FVC falls significantly",
+            "Sensitive marker in asymptomatic early cigarette smokers"
+          ]
+        },
+        "right": {
+          "title": "Peak Expiratory Flow (PEF)",
+          "points": [
+            "Highly effort-dependent initial expiratory burst",
+            "Reflects large central airway resistance (trachea, bronchi)",
+            "Used for diurnal home monitoring in bronchial asthma",
+            "Generated within the first 100 milliseconds of effort"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Differentiating asthma from irreversible chronic obstructive pulmonary disease requires testing **bronchodilator reversibility**. Following inhalation of a short-acting beta-2 agonist like salbutamol, an increase in FEV1 or FVC of at least twelve percent and two hundred millilitres establishes significant acute reversibility, strongly supporting a diagnosis of bronchial asthma.",
+      "say": "Bronchodilator reversibility requires at least a twelve percent and two hundred millilitre improvement in FEV1 or FVC after salbutamol.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "base",
+            "label": "Baseline Spirometry: Demonstrates Airflow Limitation (FEV1/FVC < 0.70)"
+          },
+          {
+            "id": "salb",
+            "label": "Administer 4 Puffs (400 mcg) Inhaled Salbutamol via Spacer; Wait 15 Minutes"
+          },
+          {
+            "id": "eval",
+            "label": "Repeat Spirometry: Calculate Absolute and Percentage Change in FEV1 and FVC"
+          },
+          {
+            "id": "pos",
+            "label": "Significant Reversibility: Δ FEV1 ≥ 12% and ≥ 200 mL Above Baseline"
+          }
+        ],
+        "edges": [
+          [
+            "base",
+            "salb"
+          ],
+          [
+            "salb",
+            "eval"
+          ],
+          [
+            "eval",
+            "pos"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

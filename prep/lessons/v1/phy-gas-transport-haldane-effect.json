@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phy-gas-transport",
+  "subject": "physiology",
+  "title": "The Haldane Effect and 2,3-Bisphosphoglycerate Regulation",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "While the Bohr effect describes how carbon dioxide and acidity alter oxygen binding, reciprocal regulation of carbon dioxide transport by oxygenation is designated the **Haldane effect**. Specifically, deoxygenation of blood increases its capacity to carry carbon dioxide, whereas oxygenation in the lungs promotes rapid carbon dioxide unloading.",
+      "say": "The Haldane effect describes how deoxygenated blood carries more carbon dioxide, whereas oxygenation promotes carbon dioxide release.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bohr Effect (Oxygen Affinity)",
+          "points": [
+            "Describes effect of PCO2 and pH on Hb-O2 affinity",
+            "Increased CO2 and H+ promote O2 unloading",
+            "Operates primarily at systemic tissue capillaries",
+            "Stabilizes deoxygenated T-state conformation"
+          ]
+        },
+        "right": {
+          "title": "Haldane Effect (CO2 Carriage)",
+          "points": [
+            "Describes effect of PO2 on Hb-CO2 carrying capacity",
+            "Deoxygenation promotes CO2 uptake and proton buffering",
+            "Operates reciprocally at tissue and alveolar capillaries",
+            "Accounts for ~50% of total CO2 exchange in blood"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "At the molecular level, deoxygenated haemoglobin is a significantly weaker acid and superior buffer compared to oxyhaemoglobin. When haemoglobin releases oxygen in peripheral tissues, the resulting deoxygenated conformation readily absorbs protons released by carbonic acid dissociation, buffering tissue acidity and driving **carbon dioxide uptake**.",
+      "say": "Deoxyhaemoglobin buffers hydrogen ions released during carbonic acid formation, pulling more carbon dioxide into venous blood.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "unload",
+            "label": "Peripheral Capillaries: Oxyhaemoglobin (HbO2) Releases Oxygen into Tissues"
+          },
+          {
+            "id": "deoxy",
+            "label": "Deoxy-Hb Formed: Becomes a Weaker Acid with Higher pKa"
+          },
+          {
+            "id": "buffer",
+            "label": "Deoxy-Hb Binds Free H+ Ions Generated from Carbonic Acid Dissociation"
+          },
+          {
+            "id": "uptake",
+            "label": "Equilibrium Pulls CO2 Inward: Venous Blood Carries Extra CO2 Without Acidosis"
+          }
+        ],
+        "edges": [
+          [
+            "unload",
+            "deoxy"
+          ],
+          [
+            "deoxy",
+            "buffer"
+          ],
+          [
+            "buffer",
+            "uptake"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Furthermore, deoxygenated globin amine termini bind carbon dioxide directly with three times greater affinity than oxyhaemoglobin, forming **carbaminohaemoglobin complexes**. In peripheral capillaries, this affinity allows venous blood to transport substantial quantities of metabolic carbon dioxide with minimal change in venous carbon dioxide partial pressure.",
+      "say": "Deoxygenated globin binds carbon dioxide directly to form carbamino complexes with threefold higher affinity than oxyhaemoglobin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Peripheral Tissue Capillaries",
+          "points": [
+            "Low PO2 favours deoxyhaemoglobin formation",
+            "Enhanced binding of H+ ions buffers carbonic acid",
+            "Carbamino binding capacity triples",
+            "Haldane effect accounts for ~50% of CO2 exchange"
+          ]
+        },
+        "right": {
+          "title": "Pulmonary Capillaries",
+          "points": [
+            "High PO2 converts deoxyhaemoglobin to oxyhaemoglobin",
+            "Protons released from globin displace CO2 from bicarbonate",
+            "Carbamino groups rapidly dissociate",
+            "CO2 is released into alveoli and exhaled"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The clinical relevance of the Haldane effect is starkly illustrated during oxygen therapy in severe chronic obstructive pulmonary disease. Administering high-flow oxygen displaces carbon dioxide from haemoglobin into plasma before ventilation can eliminate it, precipitating acute **worsening hypercapnia** alongside loss of hypoxic ventilatory drive.",
+      "say": "Administering high-flow oxygen in severe COPD can acutely elevate blood carbon dioxide by displacing it from haemoglobin.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chronic-obstructive-pulmonary-disease-fig1.webp",
+        "alt": "CO2 retention and Haldane effect",
+        "caption": "Carbon dioxide retention mechanisms and controlled oxygen therapy in advanced obstructive disease."
+      }
+    },
+    {
+      "tx": "Intracellular regulation of oxygen unloading in red blood cells is controlled by **2,3-bisphosphoglycerate**, synthesized via the Rapoport-Luebering glycolytic shunt. A single molecule of this highly negatively charged polyanion binds within the positively charged central cavity between the two beta-globin chains of deoxygenated haemoglobin.",
+      "say": "Two, three-bisphosphoglycerate binds the central cavity between beta chains, stabilizing the deoxygenated state and releasing oxygen.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "glyc",
+            "label": "Glycolytic Intermediate: 1,3-Bisphosphoglycerate in Erythrocyte Cytoplasm"
+          },
+          {
+            "id": "shunt",
+            "label": "Bypass via BPG Mutase: Produces 2,3-Bisphosphoglycerate (Rapoport-Luebering Shunt)"
+          },
+          {
+            "id": "cavity",
+            "label": "Binds Positively Charged Lysine and Histidine in Beta-Globin Central Cavity"
+          },
+          {
+            "id": "stabil",
+            "label": "Cross-Links Beta Chains: Stabilizes Deoxy T-State and Raises P50"
+          }
+        ],
+        "edges": [
+          [
+            "glyc",
+            "shunt"
+          ],
+          [
+            "shunt",
+            "cavity"
+          ],
+          [
+            "cavity",
+            "stabil"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "By stabilizing the tense deoxygenated conformation through ionic cross-links, 2,3-BPG reduces oxygen affinity and increases P50. Chronic exposure to hypobaric hypoxia at high altitude or severe chronic anaemia triggers adaptive increases in **erythrocyte 2,3-BPG synthesis**, shifting the dissociation curve rightward to maintain tissue delivery.",
+      "say": "Chronic hypoxia and anaemia stimulate 2,3-BPG synthesis, shifting the curve rightward to improve tissue oxygen delivery.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Scenario",
+          "2,3-BPG Levels",
+          "Effect on Oxygen-Hb Curve",
+          "Physiological Consequence"
+        ],
+        "rows": [
+          [
+            "High Altitude Acclimatisation",
+            "Elevated within 24 to 48 hours",
+            "Rightward shift (P50 increases)",
+            "Improves peripheral tissue oxygen unloading"
+          ],
+          [
+            "Chronic Severe Anaemia",
+            "Markedly Elevated",
+            "Rightward shift (P50 increases)",
+            "Compensates for reduced total Hb concentration"
+          ],
+          [
+            "Stored Banked Blood",
+            "Progressively Depleted",
+            "Marked leftward shift (low P50)",
+            "Impaired oxygen release to tissues on transfusion"
+          ],
+          [
+            "Acidosis (Low pH)",
+            "Decreased synthesis (inhibits mutase)",
+            "Counterbalances direct H+ right shift",
+            "Minimizes extreme fluctuations in P50"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "During prolonged storage in citrate-phosphate-dextrose anticoagulants, red blood cells experience progressive **2,3-BPG depletion**. Consequently, massively transfused patients receive red blood cells with abnormally high oxygen affinity, impairing immediate capillary oxygen release until recipient hepatic and glycolytic enzymes regenerate 2,3-BPG over twelve to twenty-four hours.",
+      "say": "Stored blood depletes 2,3-BPG, causing tight oxygen binding that takes hours to recover after massive transfusion.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-respiratory-failure-fig1.webp",
+        "alt": "Tissue oxygenation and transfusion",
+        "caption": "Microvascular oxygen delivery impairment and cellular hypoxia in critical transfusion settings."
+      }
+    },
+    {
+      "tx": "In contrast to normal adult haemoglobin A, human fetal haemoglobin replaces beta-globin with gamma-globin chains containing neutral serine residues at position one hundred forty-three. Lacking the necessary positive charges, fetal haemoglobin cannot effectively bind **intracellular 2,3-BPG**, ensuring higher oxygen affinity than maternal blood across the placenta.",
+      "say": "Fetal haemoglobin lacks the positive binding site for 2,3-BPG, maintaining high oxygen affinity to extract maternal oxygen.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adult Haemoglobin A (α2β2)",
+          "points": [
+            "Beta-chain position 143 has positively charged Histidine",
+            "Forms strong electrostatic salt bridges with anionic 2,3-BPG",
+            "Moderate baseline oxygen affinity (P50 ~ 26.8 mmHg)",
+            "Releases oxygen readily to maternal peripheral tissues"
+          ]
+        },
+        "right": {
+          "title": "Fetal Haemoglobin F (α2γ2)",
+          "points": [
+            "Gamma-chain position 143 replaces Histidine with Serine",
+            "Neutral serine cannot bind polyanionic 2,3-BPG effectively",
+            "Significantly higher oxygen affinity (P50 ~ 19 mmHg)",
+            "Extracts oxygen across placental syncytiotrophoblast gradient"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

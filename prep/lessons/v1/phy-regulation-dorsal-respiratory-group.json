@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phy-regulation",
+  "subject": "physiology",
+  "title": "The Dorsal Respiratory Group, Brainstem Centers, and Chemoreception",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "Autonomous generation of the basic respiratory rhythm originates within interconnected neuronal assemblies in the brainstem. The primary pacemaker driving quiet resting inspiration is the **dorsal respiratory group**, located bilaterally in the ventrolateral subnucleus of the tractus solitarius within the dorsal medulla oblongata.",
+      "say": "The dorsal respiratory group in the medulla sets the basic rhythm of quiet inspiration, sending impulses to the diaphragm.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dorsal Respiratory Group (DRG)",
+          "points": [
+            "Located in nucleus tractus solitarius of dorsal medulla",
+            "Primary driver of normal quiet resting inspiration",
+            "Integrates sensory afferents from cranial nerves IX and X",
+            "Emits rhythmic phrenic nerve inspiratory ramp signals"
+          ]
+        },
+        "right": {
+          "title": "Ventral Respiratory Group (VRG)",
+          "points": [
+            "Located in nucleus ambiguus and retroambiguus",
+            "Remains quiescent during normal quiet tidal breathing",
+            "Recruited during heavy exercise or respiratory distress",
+            "Contains both inspiratory and active expiratory neurons"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Neurons of the dorsal respiratory group emit an **inspiratory ramp signal**, which begins weakly and increases steadily in strength for approximately two seconds before ceasing abruptly for three seconds. This gradual ramping prevents abrupt gasping and promotes smooth, progressive inflation of the pulmonary parenchyma during normal resting ventilation.",
+      "say": "An inspiratory ramp signal builds smoothly for two seconds before cutting off abruptly, allowing passive exhalation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ramp_start",
+            "label": "Inspiratory Ramp Initiates: Latent Firing Gradually Increases in Strength"
+          },
+          {
+            "id": "ramp_build",
+            "label": "Progressive 2-Second Phrenic Activation Steadily Inflates Lungs"
+          },
+          {
+            "id": "cut_off",
+            "label": "Abrupt Ramp Cut-Off: Pneumotaxic Center and Pulmonary Stretch Receptors"
+          },
+          {
+            "id": "passive_exp",
+            "label": "Passive Elastic Recoil of Lungs and Chest Wall for Next 3 Seconds"
+          }
+        ],
+        "edges": [
+          [
+            "ramp_start",
+            "ramp_build"
+          ],
+          [
+            "ramp_build",
+            "cut_off"
+          ],
+          [
+            "cut_off",
+            "passive_exp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Located in the ventrolateral medulla, the **ventral respiratory group** remains almost entirely quiescent during normal quiet tidal breathing. However, during heavy physical exercise or intense ventilatory stress, it activates vigorously, providing powerful motor outflow to both accessory inspiratory muscles and active expiratory abdominal muscles.",
+      "say": "The ventral respiratory group remains quiet at rest, but drives accessory muscles during exercise and heavy breathing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Quiet Tidal Breathing",
+          "points": [
+            "Inspiration is active via DRG phrenic motor output",
+            "Expiration is completely passive via elastic recoil",
+            "VRG remains electrically quiescent",
+            "Metabolic oxygen cost of breathing is less than 5%"
+          ]
+        },
+        "right": {
+          "title": "Forced Breathing (Exercise)",
+          "points": [
+            "VRG fires vigorously to assist inspiration and expiration",
+            "Accessory muscles (scalenes, sternocleidomastoids) recruited",
+            "Abdominal wall muscles forcefully depress lower ribs",
+            "Expiratory flow accelerated to maximize minute ventilation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Within the rostral pole of the ventral respiratory group lies the **pre-Botzinger complex**, a specialized cluster of interneurons exhibiting intrinsic rhythmic pacemaker properties. These pacemaker neurons generate the fundamental baseline rhythmicity that drives the entire brainstem respiratory network, establishing primordial breathing patterns.",
+      "say": "The pre-Bötzinger complex houses pacemaker neurons that generate the essential baseline rhythm of respiration.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/asthma-copd-drugs-fig1.webp",
+        "alt": "Brainstem respiratory control and drugs",
+        "caption": "Respiratory centre pharmacodynamics and pontomedullary ventilatory regulation."
+      }
+    },
+    {
+      "tx": "Modulation of medullary rhythmicity is coordinated by pontine respiratory centers. Located in the upper pons, the **pneumotaxic centre** in the nucleus parabrachialis controls the inspiratory ramp cut-off point. Strong pneumotaxic signaling cuts off inspiration prematurely, shortening total cycle duration and increasing overall respiratory rate.",
+      "say": "The pontine pneumotaxic centre limits inspiration duration, speeding up breathing when strong, and deepening it when weak.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pneu",
+            "label": "Pneumotaxic Centre (Upper Pons: Nucleus Parabrachialis)"
+          },
+          {
+            "id": "signal",
+            "label": "Transmits Continuous Inhibitory Signals to Medullary Inspiratory Ramp"
+          },
+          {
+            "id": "strong",
+            "label": "Strong Signal: Cuts Off Ramp in 0.5s -> Rapid, Shallow Breaths (30-40 bpm)"
+          },
+          {
+            "id": "weak",
+            "label": "Weak Signal: Ramp Fires for 5s -> Slow, Deep Breathing (3-5 bpm)"
+          }
+        ],
+        "edges": [
+          [
+            "pneu",
+            "signal"
+          ],
+          [
+            "signal",
+            "strong"
+          ],
+          [
+            "signal",
+            "weak"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Situated in the lower pons, the **apneustic centre** sends excitatory signals to the dorsal respiratory group, delaying ramp switch-off and prolonging inspiration. Lesions of the upper pons that transect pneumotaxic pathways while leaving vagus nerves severed trigger apneustic breathing, marked by prolonged, gasping inspiratory spasms.",
+      "say": "The lower pontine apneustic centre prolongs inspiration. Damaging inhibitory pontine tracts causes prolonged gasping apneustic breathing.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Brainstem Center",
+          "Anatomical Location",
+          "Primary Function",
+          "Effect of Experimental Ablation"
+        ],
+        "rows": [
+          [
+            "Dorsal Respiratory Group",
+            "Dorsal Medulla (NTS)",
+            "Inspiratory ramp pacemaker",
+            "Complete cessation of rhythmic breathing"
+          ],
+          [
+            "Ventral Respiratory Group",
+            "Ventrolateral Medulla",
+            "Forceful inspiration and active expiration",
+            "Loss of active ventilatory reserve"
+          ],
+          [
+            "Pneumotaxic Centre",
+            "Dorsal Upper Pons",
+            "Switches off inspiratory ramp",
+            "Prolonged inspiration, slower respiratory rate"
+          ],
+          [
+            "Apneustic Centre",
+            "Lower Pons",
+            "Promotes sustained inspiration",
+            "Relieves apneustic spasm if upper pons is intact"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Chemical regulation of ventilation is dominated by the **central chemoreceptors**, located bilaterally on the ventrolateral surface of the medulla oblongata bathed in cerebrospinal fluid. Highly sensitive to surrounding hydrogen ion concentration, central chemoreceptors account for roughly eighty percent of the ventilatory response to arterial hypercapnia.",
+      "say": "Central chemoreceptors on the medulla monitor cerebrospinal fluid acidity, driving eighty percent of the response to hypercapnia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "art_co2",
+            "label": "Systemic Arterial Hypercapnia: Elevated PaCO2 in Cerebral Circulation"
+          },
+          {
+            "id": "bbb",
+            "label": "CO2 Crosses Blood-Brain Barrier Rapidly (H+ and HCO3- Cannot Cross)"
+          },
+          {
+            "id": "csf",
+            "label": "CSF Carbonic Anhydrase Hydrates CO2 -> H2CO3 -> H+ + HCO3-"
+          },
+          {
+            "id": "stim",
+            "label": "Free H+ Strongly Stimulates Central Chemoreceptors, Driving Hyperventilation"
+          }
+        ],
+        "edges": [
+          [
+            "art_co2",
+            "bbb"
+          ],
+          [
+            "bbb",
+            "csf"
+          ],
+          [
+            "csf",
+            "stim"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because hydrogen ions cannot traverse the lipid blood-brain barrier, arterial acidosis cannot directly stimulate central chemoreceptors immediately. Instead, lipid-soluble carbon dioxide rapidly diffuses across into cerebrospinal fluid, generating hydrogen ions that stimulate receptors and drive **compensatory hyperventilation**, safeguarding systemic acid-base equilibrium.",
+      "say": "Carbon dioxide crosses the blood-brain barrier easily, generating local hydrogen ions that trigger hyperventilation to restore pH.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-respiratory-failure-fig1.webp",
+        "alt": "Central respiratory failure",
+        "caption": "Ventilatory drive failure, central hypoventilation syndromes, and chemoreceptor insensitivity."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}

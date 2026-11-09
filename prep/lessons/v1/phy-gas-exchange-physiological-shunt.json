@@ -1,0 +1,244 @@
+{
+  "v": 1,
+  "module": "phy-gas-exchange",
+  "subject": "physiology",
+  "title": "Physiological Shunt, the A-a Gradient, and West Zones",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "A physiological shunt occurs when deoxygenated mixed venous blood bypasses ventilated alveoli and enters the arterial system unchanged, producing hypoxaemia. The total **physiological shunt fraction** combines anatomical shunts (such as bronchial veins and thebesian veins draining to left heart chambers) with intrapulmonary pathological shunts.",
+      "say": "A physiological shunt occurs when venous blood bypasses ventilated alveoli to enter arterial circulation, worsening hypoxaemia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anatomical Shunts",
+          "points": [
+            "Normal physiological bypass in all healthy humans",
+            "Bronchial venous drainage into pulmonary veins",
+            "Thebesian veins draining directly into left ventricle",
+            "Accounts for normal baseline shunt fraction of 2% to 5%"
+          ]
+        },
+        "right": {
+          "title": "Pathological Intrapulmonary Shunts",
+          "points": [
+            "Alveoli completely fluid-filled or collapsed (V/Q = 0)",
+            "Seen in acute respiratory distress syndrome, pneumonia, atelectasis",
+            "Refractory hypoxaemia unresponsive to 100% supplemental oxygen",
+            "Requires mechanical alveolar recruitment via positive end-expiratory pressure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The cardinal hallmark distinguishing true right-to-left shunting from simple ventilation-perfusion mismatch is the diagnostic response to supplemental hundred percent oxygen. Because shunted blood completely bypasses gas-exchanging alveolar surfaces, true **intrapulmonary right-to-left shunting** fails to correct arterial oxygen tension with pure oxygen therapy.",
+      "say": "True right-to-left shunts fail to correct with one hundred percent oxygen, because the shunted blood never contacts alveolar gas.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "V/Q Mismatch (e.g., COPD, Asthma)",
+          "points": [
+            "Low V/Q units with sluggish ventilation",
+            "Arterial PO2 readily corrects with 100% O2",
+            "High inspired PO2 overcomes poor ventilation",
+            "Commonest cause of clinical hypoxaemia"
+          ]
+        },
+        "right": {
+          "title": "True Shunt (e.g., ARDS, Atelectasis, VSD)",
+          "points": [
+            "V/Q ratio equals absolute zero in affected units",
+            "Refractory hypoxaemia unresponsive to 100% O2",
+            "Deoxygenated blood completely bypasses alveolar contact",
+            "Requires positive end-expiratory pressure to recruit alveoli"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "To localize the physiological cause of arterial hypoxaemia, clinicians calculate the difference between ideal alveolar oxygen tension and measured arterial oxygen tension, designated the **alveolar-arterial oxygen gradient**. In a healthy young adult breathing room air at sea level, the normal A-a gradient is under ten to fifteen millimetres of mercury.",
+      "say": "The alveolar-arterial oxygen gradient helps pinpoint the cause of hypoxaemia, normally measuring under fifteen millimetres of mercury.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "calc",
+            "label": "Compute Ideal PAO2 via Alveolar Gas Equation; Measure PaO2 via ABG"
+          },
+          {
+            "id": "diff",
+            "label": "A-a Gradient = PAO2 - PaO2 (Normal Young Adult: 5 to 15 mmHg)"
+          },
+          {
+            "id": "age",
+            "label": "Age-Adjusted Normal Upper Limit: (Age in Years / 4) + 4"
+          },
+          {
+            "id": "interp",
+            "label": "Elevated Gradient Signifies V/Q Mismatch, Shunt, or Diffusion Impairment"
+          }
+        ],
+        "edges": [
+          [
+            "calc",
+            "diff"
+          ],
+          [
+            "diff",
+            "age"
+          ],
+          [
+            "age",
+            "interp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "An elevated A-a gradient definitively isolates hypoxaemia to intrinsic pulmonary pathology, including ventilation-perfusion mismatch, right-to-left shunting, or impaired diffusion capacity. Conversely, hypoxaemia with a strictly **normal A-a gradient** occurs only in two specific clinical circumstances: environmental high altitude with reduced inspired oxygen, and pure central alveolar hypoventilation.",
+      "say": "A normal A-a gradient in a hypoxaemic patient points exclusively to central hypoventilation or low environmental oxygen.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Etiology of Hypoxaemia",
+          "PaCO2 Level",
+          "A-a Gradient",
+          "Response to 100% O2"
+        ],
+        "rows": [
+          [
+            "High Altitude",
+            "Decreased (hyperventilation)",
+            "Normal (< 15 mmHg)",
+            "Rapidly Corrects"
+          ],
+          [
+            "Hypoventilation (Opioids)",
+            "Elevated (> 45 mmHg)",
+            "Normal (< 15 mmHg)",
+            "Rapidly Corrects"
+          ],
+          [
+            "V/Q Mismatch (COPD)",
+            "Variable / Normal",
+            "Elevated (> 20 mmHg)",
+            "Rapidly Corrects"
+          ],
+          [
+            "Shunt (Severe ARDS)",
+            "Normal / Decreased",
+            "Markedly Elevated (> 30 mmHg)",
+            "Poor / Refractory"
+          ],
+          [
+            "Diffusion Block (Fibrosis)",
+            "Normal / Decreased",
+            "Elevated (worse on exercise)",
+            "Rapidly Corrects"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Unlike systemic arterioles which dilate during regional tissue hypoxia, pulmonary arterioles exhibit an intrinsic, unique physiological reaction termed **hypoxic pulmonary vasoconstriction**. When local alveolar oxygen tension falls below seventy millimetres of mercury, surrounding precapillary pulmonary smooth muscle cells constrict, diverting perfusion away from underventilated hypoxic alveoli.",
+      "say": "Hypoxic pulmonary vasoconstriction diverts blood flow away from hypoxic alveoli to preserve overall ventilation-perfusion matching.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hypox",
+            "label": "Local Alveolar Hypoxia (PAO2 < 70 mmHg) Inhibits Voltage-Gated K+ Channels"
+          },
+          {
+            "id": "depol",
+            "label": "Depolarization of Pulmonary Vascular Smooth Muscle Cells; Ca2+ Influx"
+          },
+          {
+            "id": "constrict",
+            "label": "Precapillary Arteriolar Vasoconstriction in Poorly Ventilated Lung Zones"
+          },
+          {
+            "id": "redist",
+            "label": "Redistribution of Pulmonary Perfusion Toward Well-Ventilated Alveoli"
+          }
+        ],
+        "edges": [
+          [
+            "hypox",
+            "depol"
+          ],
+          [
+            "depol",
+            "constrict"
+          ],
+          [
+            "constrict",
+            "redist"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "While localized hypoxic pulmonary vasoconstriction beneficially optimizes global ventilation-perfusion matching, generalized chronic alveolar hypoxia causes diffuse arteriolar constriction throughout the pulmonary bed. This marked increase in pulmonary vascular resistance leads inexorably to **pulmonary arterial hypertension** and secondary right ventricular hypertrophy, known clinically as cor pulmonale.",
+      "say": "Generalized alveolar hypoxia triggers diffuse arteriolar constriction, causing pulmonary hypertension and right ventricular hypertrophy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/pulmonary-hypertension-fig1.webp",
+        "alt": "Pulmonary vascular remodeling",
+        "caption": "Pulmonary vascular remodeling, elevated vascular resistance, and right ventricular pressure overload."
+      }
+    },
+    {
+      "tx": "Pulmonary blood flow distribution is modeled by the classic **West zones of the lung**, dictated by interactions between pulmonary arterial pressure, alveolar gas pressure, and pulmonary venous pressure. In Zone 1 at the apex, alveolar pressure exceeds arterial pressure, collapsing capillaries and creating non-perfused alveolar dead space.",
+      "say": "The West zones explain pulmonary perfusion. In Zone 1, alveolar pressure exceeds arterial pressure, collapsing capillaries into dead space.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "West Zone",
+          "Pressure Hierarchy",
+          "Blood Flow Characteristics",
+          "Clinical Occurrence"
+        ],
+        "rows": [
+          [
+            "Zone 1 (Apex)",
+            "PA > Pa > Pv",
+            "Capillaries collapsed; zero perfusion",
+            "Only in hypovolaemic shock or high PEEP ventilation"
+          ],
+          [
+            "Zone 2 (Mid-lung)",
+            "Pa > PA > Pv",
+            "Waterfall effect; flow driven by (Pa - PA)",
+            "Normal upright physiological resting state"
+          ],
+          [
+            "Zone 3 (Base)",
+            "Pa > Pv > PA",
+            "Continuous flow driven by (Pa - Pv)",
+            "Maximal perfusion at gravity-dependent lung base"
+          ],
+          [
+            "Zone 4 (Extreme Base)",
+            "Ppa > Pis > Ppv > PA",
+            "Interstitial pressure compresses vessels",
+            "Occurs in severe pulmonary venous congestion and oedema"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Under normal upright resting conditions, Zone 1 is virtually absent because pulmonary arterial pressure is sufficient to perfuse the lung apex. However, when arterial pressure falls during hypovolaemic shock or alveolar pressure is artificially raised by positive-pressure mechanical ventilation, Zone 1 expands, generating massive **ventilatory dead space**.",
+      "say": "Zone 1 expands during hypovolaemic shock or positive-pressure ventilation, creating extensive dead space that impairs gas exchange.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acute-respiratory-failure-fig1.webp",
+        "alt": "Ventilation-perfusion mismatch and shunt",
+        "caption": "Mechanical ventilation interactions, alveolar overdistension, and dead space expansion in critical care."
+      }
+    }
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
+}
