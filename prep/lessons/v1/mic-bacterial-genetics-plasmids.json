@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-bacterial-genetics",
+  "subject": "microbiology",
+  "title": "Bacterial Genetics I: Plasmids, Transposons and Gene Transfer",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Plasmids** are self replicating extrachromosomal DNA circles (occasionally linear) carrying accessory cargo: antibiotic resistance, toxins, adhesion factors, bacteriocins, heavy metal resistance and the fertility machinery itself, classified by incompatibility groups and copy number, curable by acridines and growth stress, and lost when their cargo stops paying rent. They are bacteria's luggage, traded at borders this lesson maps.",
+      "say": "Plasmids are tradeable luggage; resistance and toxins travel as cargo, not chromosomes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Plasmid cargo",
+          "points": [
+            "Resistance (R plasmids, multiple drugs)",
+            "Virulence: toxins, pili, invasins",
+            "Fertility F factor for conjugation",
+            "Bacteriocins and metabolic extras"
+          ]
+        },
+        "right": {
+          "title": "Plasmid behaviour",
+          "points": [
+            "Autonomous replication, copy number classes",
+            "Incompatibility groups exclude relatives",
+            "Curing by dyes, heat and stress in vitro",
+            "Fitness cost when cargo unneeded"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Transposons** are jumping genes flanked by insertion sequences that hop between chromosome and plasmids carrying resistance cassettes (Tn3 beta lactamases, vanA vancomycin transposons), building multi resistance plasmids gene by gene; integrons beneath them run cassette capture systems that stack aminoglycoside and other resistances in promoter driven arrays. Hospital resistance is largely transposon architecture assembled.",
+      "say": "Transposons hop, integrons stack; hospital resistance is assembled luggage.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mobile elements",
+          "points": [
+            "Insertion sequences: transposase only",
+            "Composite transposons: resistance flanked",
+            "Integrons: cassette capture and expression",
+            "Conjugative transposons: transfer plus hopping"
+          ]
+        },
+        "right": {
+          "title": "Clinical assemblies",
+          "points": [
+            "ESBL genes on plasmids worldwide",
+            "vanA transposon in enterococci",
+            "Carbapenemase plasmids in Klebsiella",
+            "MRSA SCCmec chromosomal cassette"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Transformation** is naked DNA uptake by competent bacteria (Griffith's pneumococcal experiment, Avery's DNA proof), natural in Streptococcus pneumoniae, Haemophilus, Neisseria and Bacillus, letting resistance and capsule genes cross species at mucosal surfaces. The transforming principle founded molecular biology while continuing to shuffle pneumococcal penicillin resistance via mosaic genes assembled from commensal DNA.",
+      "say": "Griffith's mice proved DNA carries heredity; pneumococci still transform resistance at mucosae.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transformation facts",
+          "points": [
+            "Competence induced in defined growth states",
+            "DNA from lysed neighbours imported",
+            "Pneumococcus, Neisseria, Haemophilus naturally competent",
+            "Laboratory: calcium and electroporation artificial competence"
+          ]
+        },
+        "right": {
+          "title": "Historical anchor",
+          "points": [
+            "Griffith 1928: rough to smooth pneumococcus in mice",
+            "Avery McLeod McCarty 1944: DNA is the principle",
+            "Mosaic PBPs build penicillin resistance",
+            "Capsule switching by transformation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Transduction** ships bacterial DNA inside bacteriophage heads: generalised (any fragment, P1 in E coli, P22 in Salmonella) and specialised (adjacent genes only, lambda carrying gal), converting recipients to new traits including toxin production where phages lysogenise. Phage typing once fingerprinted staphylococci epidemiologically by their transducing phage patterns.",
+      "say": "A phage head full of host DNA is a parcel service with addressing errors.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Generalised transduction",
+          "points": [
+            "Random host fragments packaged",
+            "Any marker transferable at low frequency",
+            "P1 and P22 classic phages",
+            "Plasmids also transduced"
+          ]
+        },
+        "right": {
+          "title": "Specialised transduction",
+          "points": [
+            "Prophage excision errors carry adjacent genes",
+            "Lambda gal and bio loci",
+            "Limited gene neighbourhood",
+            "Bridge to lysogenic conversion next step"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Lysogenic conversion** is a prophage changing its host's phenotype: diphtheria toxin (beta phage), cholera toxin (CTX phi filamentous phage), botulinum toxins C and D, Shiga toxins of EHEC and streptococcal erythrogenic toxins all ride phages, so toxigenicity is infection of the bacterium. Cure the prophage and the pathogen disarms, a fact Elek plates quietly presuppose.",
+      "say": "Many famous toxins are phage genes; the bacterium is infected with its own weapon.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Phage borne toxins",
+          "points": [
+            "Diphtheria toxin: corynephage beta",
+            "Cholera toxin: CTX phi",
+            "Shiga toxin: lambdoid prophages",
+            "Scarlet fever erythrogenic toxins"
+          ]
+        },
+        "right": {
+          "title": "Lysogeny mechanics",
+          "points": [
+            "Prophage integrated, repressor maintained",
+            "Induction exits to lytic cycle (SOS triggers)",
+            "Immunity to superinfection by same phage",
+            "Conversion lost when prophage cured"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Conjugation** is plasmid driven sex: F plasmid donors (F plus) build sex pili, transfer a single strand through the mating bridge, and convert recipients to donors (F minus to F plus), high frequency recombination (Hfr) strains having integrated F into the chromosome and dragging chromosomal genes behind it. R plasmids generalised this highway to resistance traffic between gut genera.",
+      "say": "One mating bridge converts recipient into donor; resistance goes epidemic by touch.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "donor", "label": "F+ donor extends sex pilus" },
+          { "id": "bridge", "label": "Mating bridge, single strand transfers" },
+          { "id": "copy", "label": "Both cells synthesise complementary strands" },
+          { "id": "convert", "label": "Recipient becomes F+ donor" }
+        ],
+        "edges": [["donor", "bridge"], ["bridge", "copy"], ["copy", "convert"]]
+      }
+    },
+    {
+      "tx": "The **F factor** integrates and excises: integrated as Hfr it transfers chromosome in a timed linear order (interrupted mating mapped E coli genes in minutes before sequencing), excised imprecisely as F prime it carries chromosomal passengers (sexduction). Conjugation's mapping era founded bacterial genetics, its resistance era now runs hospital epidemiology.",
+      "say": "Interrupted mating once mapped genomes in minutes; the same bridge now maps outbreaks.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hfr behaviour",
+          "points": [
+            "F integrated into chromosome",
+            "Transfer begins inside F, chromosome follows",
+            "Complete transfer rare (100 minutes E coli)",
+            "Recipient rarely becomes donor"
+          ]
+        },
+        "right": {
+          "title": "F prime",
+          "points": [
+            "Imprecise excision carries host genes",
+            "Sexduction transfers them plasmid style",
+            "Partial diploids for complementation tests",
+            "Mapping by time of entry historically"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Horizontal transfer triage** answers examination scenarios by mechanism clues: transfer without cell contact and DNase sensitive is transformation, phage dependent is transduction, contact dependent and DNase resistant is conjugation, and trait appearing with prophage induction suggests lysogenic conversion. Each mechanism predicts which interventions (DNase, filtration, separation) block it in the classic experiments.",
+      "say": "DNase blocks transformation, filters block conjugation, phages define transduction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mechanism clues",
+          "points": [
+            "Transformation: DNase abolishes, no contact needed",
+            "Transduction: phage filtrate transfers, DNase resistant",
+            "Conjugation: contact required, pili and donors",
+            "Conversion: phage curing removes trait"
+          ]
+        },
+        "right": {
+          "title": "Modern relevance",
+          "points": [
+            "Gut conjugation spreads carbapenemases",
+            "Transformation builds mosaic resistance",
+            "Phages move toxins and resistance",
+            "Sequencing traces plasmid outbreaks"
+          ]
+        }
+      }
+    }
+  ]
+}
