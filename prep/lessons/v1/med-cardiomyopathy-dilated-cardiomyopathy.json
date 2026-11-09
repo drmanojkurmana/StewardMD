@@ -1,0 +1,234 @@
+{
+ "v": 1,
+ "module": "med-cardiomyopathy",
+ "subject": "medicine",
+ "title": "Dilated, hypertrophic, and restrictive cardiomyopathies",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Primary myocardial disorders are classified into distinctive phenotypes based on ventricular geometry and contractility. Presenting with ventricular enlargement and impaired systolic function defines **dilated cardiomyopathy**, where left ventricular ejection fraction drops below forty percent. Mutations in the TTN gene encoding titin account for twenty-five percent of familial cases, while alcohol toxicity, chronic cocaine use, cytotoxic chemotherapy with doxorubicin, and viral myocarditis represent key acquired triggers.",
+   "say": "Primary diseases of the heart muscle are categorized into three patterns based on chamber dimensions and contractile performance. The presence of ventricular dilatation with systolic impairment defines dilated cardiomyopathy, characterized by an ejection fraction below forty percent. Mutations in the titin gene cause many familial cases, whereas alcohol, chemotherapy and viral myocarditis represent frequent secondary triggers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dilated cardiomyopathy",
+     "points": [
+      "Ventricular dilatation with thin walls",
+      "Impaired systolic function (EF < 40%)",
+      "Volume overload and S3 gallop",
+      "Titin mutations, alcohol, doxorubicin"
+     ]
+    },
+    "right": {
+     "title": "Hypertrophic cardiomyopathy",
+     "points": [
+      "Asymmetric septal thickening",
+      "Preserved or hyperdynamic systolic function",
+      "Impaired diastolic filling and S4 gallop",
+      "Sarcomeric mutations (MYH7, MYBPC3)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Autosomal dominant mutations in genes encoding cardiac sarcomere components drive hypertrophic remodelling. Clinicians recognize **hypertrophic obstructive cardiomyopathy** by marked myocardial thickening occurring without an afterload trigger like hypertension or aortic stenosis. Mutations in beta-myosin heavy chain (MYH7) and myosin-binding protein C (MYBPC3) trigger myocyte disarray, interstitial fibrosis, and dynamic left ventricular outflow tract obstruction that worsens with dehydration or physical exertion.",
+   "say": "Autosomal dominant mutations affecting sarcomeric proteins cause pathological myocardial hypertrophy. Clinicians identify hypertrophic obstructive cardiomyopathy through marked ventricular thickening without secondary causes like hypertension. Mutations in beta-myosin heavy chain or myosin-binding protein C produce myofibre disarray, fibrosis and dynamic outflow tract obstruction that intensifies with exercise or dehydration.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-cardiomyopathy.svg",
+    "alt": "Pathological diagrams comparing dilated, hypertrophic, and restrictive cardiomyopathies.",
+    "caption": "Ventricular geometry across dilated, hypertrophic, and restrictive cardiomyopathy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The classical anatomical hallmark of hypertrophic disease involves disproportionate thickening of the interventricular septum. This **asymmetric septal hypertrophy** narrows the left ventricular outflow tract during systole. Venturi forces pull the anterior leaflet of the mitral valve toward the thickened septum, a phenomenon termed systolic anterior motion (SAM). This produces dynamic subaortic obstruction accompanied by a harsh crescendo-decrescendo murmur that intensifies during the strain phase of Valsalva.",
+   "say": "The classical structural hallmark in hypertrophic cardiomyopathy is disproportionate thickening of the interventricular septum. This asymmetric hypertrophy narrows the subaortic outflow tract during contraction. Venturi suction pulls the anterior mitral leaflet toward the septum, known as systolic anterior motion. This produces dynamic obstruction and a crescendo-decrescendo systolic murmur that gets louder during Valsalva strain.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "sept",
+      "label": "Asymmetric septal hypertrophy"
+     },
+     {
+      "id": "flow",
+      "label": "Accelerated subaortic blood velocity"
+     },
+     {
+      "id": "sam",
+      "label": "Systolic anterior motion (SAM) of mitral valve"
+     },
+     {
+      "id": "lvot",
+      "label": "Dynamic left ventricular outflow obstruction"
+     },
+     {
+      "id": "murmur",
+      "label": "Crescendo-decrescendo systolic murmur"
+     }
+    ],
+    "edges": [
+     [
+      "sept",
+      "flow"
+     ],
+     [
+      "flow",
+      "sam"
+     ],
+     [
+      "sam",
+      "lvot"
+     ],
+     [
+      "lvot",
+      "murmur"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Young competitive athletes with undiagnosed sarcomeric disease face an elevated risk of lethal ventricular tachyarrhythmias. Preventing **sudden cardiac death** in hypertrophic cardiomyopathy requires systematic clinical risk scoring. High-risk features include massive hypertrophy exceeding thirty millimetres, unexplained syncope, non-sustained ventricular tachycardia on Holter monitoring, extensive late gadolinium enhancement on cardiac MRI, and a family history of premature death, which warrant implanting a cardioverter-defibrillator.",
+   "say": "Young athletes with undiagnosed sarcomeric mutations face a heightened risk of lethal arrhythmias. Preventing sudden cardiac death in hypertrophic cardiomyopathy requires calculating clinical risk scores. High-risk markers include extreme wall thickness over thirty millimetres, unexplained syncope, ventricular tachycardia on Holter recording, and extensive fibrosis on magnetic resonance imaging, indicating the need for an implantable defibrillator.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Risk feature",
+     "Measurement threshold",
+     "Pathologic significance",
+     "Clinical intervention"
+    ],
+    "rows": [
+     [
+      "Massive LV hypertrophy",
+      "Wall thickness >= 30 mm",
+      "High ventricular arrhythmogenicity",
+      "Implantable cardioverter-defibrillator (ICD)"
+     ],
+     [
+      "Unexplained syncope",
+      "Recent within 6 months",
+      "Transient ventricular tachycardia / collapse",
+      "ICD implantation indicated"
+     ],
+     [
+      "Non-sustained VT",
+      ">= 3 beats at >= 120 bpm",
+      "Unstable myocardial electrophysiology",
+      "ICD risk calculator evaluation"
+     ],
+     [
+      "Extensive late gadolinium",
+      ">= 15% LV myocardial mass",
+      "Diffuse replacement fibrosis",
+      "Upgrades arrhythmogenic risk profile"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pharmacological therapy in hypertrophic obstructive disease aims to prolong ventricular diastole and reduce inotropy. Prescribing **first-line medical therapy** relies on non-vasodilating beta blockers such as metoprolol or atenolol, or non-dihydropyridine calcium channel blockers like verapamil. Novel cardiac myosin inhibitors like mavacamten directly decrease actin-myosin cross-bridging. Inotropic agents such as digoxin and vasodilators like nitroglycerin are strictly contraindicated because reducing chamber volume worsens outflow obstruction.",
+   "say": "Medical management in obstructive hypertrophic disease focuses on slowing the heart rate and reducing contractility. First-line therapy relies on beta blockers like metoprolol, or calcium antagonists such as verapamil. Novel myosin inhibitors like mavacamten directly attenuate excessive cross-bridge formation. Conversely, inotropes like digoxin and vasodilating nitrates are strictly avoided because shrinking ventricular volume aggravates obstruction.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Beneficial interventions",
+     "points": [
+      "Beta blockers (metoprolol, atenolol)",
+      "Verapamil or diltiazem (if beta-blocker intolerant)",
+      "Mavacamten (cardiac myosin ATPase inhibitor)",
+      "Surgical septal myectomy or alcohol ablation"
+     ]
+    },
+    "right": {
+     "title": "Contraindicated drugs",
+     "points": [
+      "Digoxin and positive inotropic agents",
+      "Nitroglycerin and systemic vasodilators",
+      "Dihydropyridine calcium channel blockers",
+      "High-dose volume-depleting diuretics"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rigid non-compliant myocardium causing severe diastolic filling impairment with preserved ejection fraction defines the restrictive phenotype. Patients developing **restrictive cardiomyopathy** present with marked biatrial enlargement, elevated venous pressures with Kussmaul sign, and hepatic congestion mimicking constrictive pericarditis. Unlike constrictive disease where myocardial relaxation remains pristine, restrictive cardiomyopathy demonstrates reduced early diastolic tissue Doppler velocities (e') and markedly elevated ventricular filling pressures.",
+   "say": "Rigid ventricular myocardium producing severe diastolic stiffness with preserved ejection fraction characterizes restrictive cardiomyopathy. Patients exhibit pronounced biatrial dilatation, raised jugular venous pressure with Kussmaul sign, and liver congestion. Unlike constrictive pericarditis where myocardial tissue relaxes normally, restrictive disease demonstrates impaired tissue Doppler velocities and elevated filling pressures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Restrictive cardiomyopathy",
+     "points": [
+      "Myocardial stiffness with impaired relaxation",
+      "Tissue Doppler e prime velocity < 8 cm/s",
+      "No ventricular interdependence on echo",
+      "Normal pericardial thickness on CT/MRI"
+     ]
+    },
+    "right": {
+     "title": "Constrictive pericarditis",
+     "points": [
+      "Rigid, calcified pericardial constraint",
+      "Tissue Doppler e prime preserved (> 8 cm/s)",
+      "Marked ventricular interdependence with respiration",
+      "Pericardial thickening and calcification on imaging"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extracellular deposition of insoluble protein fibrils within the cardiac interstitium is the commonest cause of restrictive cardiomyopathy. Developing **cardiac amyloidosis** occurs predominantly as light chain (AL) amyloidosis from plasma cell dyscrasia or transthyretin (ATTR) amyloidosis from misfolded liver transthyretin. Echocardiography demonstrates concentric ventricular wall thickening with a granular, sparkling ground-glass appearance, while the electrocardiogram paradoxically shows low QRS voltage.",
+   "say": "Deposition of insoluble protein fibrils within the myocardial interstitium represents the leading cause of restrictive disease. Cardiac amyloidosis arises as light-chain AL amyloidosis from plasma cell dyscrasias, or transthyretin ATTR amyloidosis from misfolded transthyretin. Echocardiography shows thickened ventricular walls with a sparkling appearance, while electrocardiography displays low QRS voltages.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/al-amyloidosis-fig1.webp",
+    "alt": "Illustration of amyloid light chain fibril deposition in the heart.",
+    "caption": "AL amyloid light chain infiltration and myocardial wall thickening. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Definitive diagnosis and classification of myocardial amyloidosis dictates targeted disease-modifying therapy. Detecting **transthyretin amyloid cardiomyopathy** non-invasively utilizes technetium-99m pyrophosphate (PYP) or DPD bone scintigraphy, which shows intense myocardial radiotracer uptake (grade 2 or 3). The oral transthyretin tetramer stabilizer tafamidis halts misfolding and reduces mortality. In contrast, AL amyloidosis requires emergency haematological therapy with bortezomib, cyclophosphamide, dexamethasone, and the anti-CD38 antibody daratumumab.",
+   "say": "Accurate diagnosis and typing of cardiac amyloidosis dictates targeted medical therapy. Identifying transthyretin amyloidosis non-invasively uses technetium pyrophosphate bone scintigraphy, showing intense cardiac radiotracer uptake. The oral stabiliser tafamidis prevents transthyretin tetramer dissociation, improving survival. Conversely, light-chain amyloidosis requires immediate chemotherapy with bortezomib, dexamethasone and daratumumab.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "thick",
+      "label": "Unexplained concentric LV thickening"
+     },
+     {
+      "id": "test",
+      "label": "Serum/urine free light chains & bone scintigraphy"
+     },
+     {
+      "id": "al",
+      "label": "AL: Clonal plasma cell chemotherapy"
+     },
+     {
+      "id": "attr",
+      "label": "ATTR: Tafamidis tetramer stabilization"
+     }
+    ],
+    "edges": [
+     [
+      "thick",
+      "test"
+     ],
+     [
+      "test",
+      "al"
+     ],
+     [
+      "test",
+      "attr"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

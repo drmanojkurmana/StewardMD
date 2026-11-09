@@ -1,0 +1,268 @@
+{
+ "v": 1,
+ "module": "med-hypertension",
+ "subject": "medicine",
+ "title": "Aortic dissection, thoracic aortic syndromes, and peripheral arterial disease",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "A breach in the aortic intima allowing blood to enter the media and cleave the vascular wall constitutes a vascular emergency. Developing acute **aortic dissection** is driven primarily by long-standing systemic hypertension and cystic medial necrosis from Marfan or Ehlers-Danlos syndromes. Patients present with sudden, excruciating tearing or ripping retrosternal chest pain that characteristically radiates to the interscapular region of the back. Pulsatile blood dissects along the media, creating a false lumen that can compress branch arteries or rupture.",
+   "say": "A tear in the aortic intima allowing blood to penetrate the media constitutes an acute vascular emergency. Developing aortic dissection is driven by chronic hypertension and connective tissue disorders like Marfan syndrome. Patients experience sudden, excruciating tearing chest pain radiating between the shoulder blades. High-pressure blood dissects through the media, creating a false channel that can compress branches or rupture.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "htn",
+      "label": "Chronic hypertension and cystic medial necrosis"
+     },
+     {
+      "id": "tear",
+      "label": "Intimal tear in ascending or descending aorta"
+     },
+     {
+      "id": "false",
+      "label": "High-pressure false lumen dissects through media"
+     },
+     {
+      "id": "comp",
+      "label": "Branch vessel occlusion & malperfusion syndromes"
+     },
+     {
+      "id": "rupt",
+      "label": "Catastrophic pericardial or pleural rupture"
+     }
+    ],
+    "edges": [
+     [
+      "htn",
+      "tear"
+     ],
+     [
+      "tear",
+      "false"
+     ],
+     [
+      "false",
+      "comp"
+     ],
+     [
+      "comp",
+      "rupt"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anatomical localization of the intimal tear dictates emergency surgical versus medical triage. The widely utilized **Stanford classification** categorizes dissections based on involvement of the ascending aorta. Stanford Type A dissections involve the ascending aorta, regardless of the site of the primary intimal tear, and represent surgical emergencies requiring immediate cardiopulmonary bypass repair. Stanford Type B dissections involve only the descending aorta distal to the origin of the left subclavian artery and are initially managed medically.",
+   "say": "Anatomical location of the intimal tear dictates whether emergency surgery or medical therapy is required. The Stanford classification divides dissections based on involvement of the ascending aorta. Type A dissections involve the ascending aorta and represent surgical emergencies requiring immediate operative repair. Type B dissections originate distal to the left subclavian artery and are initially treated with intensive medical therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classification system",
+     "Anatomical involvement",
+     "Initial management strategy",
+     "Prognostic urgency"
+    ],
+    "rows": [
+     [
+      "Stanford Type A",
+      "Ascending aorta involved (with or without descending)",
+      "Immediate emergency surgical repair",
+      "Mortality 1% to 2% per hour if untreated"
+     ],
+     [
+      "Stanford Type B",
+      "Descending aorta only (distal to left subclavian)",
+      "Medical hemodynamic therapy first-line",
+      "TEVAR indicated for complicated disease"
+     ],
+     [
+      "DeBakey Type I",
+      "Originates in ascending, propagates to descending",
+      "Emergency surgical replacement of root/arch",
+      "High risk of pericardial tamponade"
+     ],
+     [
+      "DeBakey Type II",
+      "Confined exclusively to the ascending aorta",
+      "Emergency surgical resection of ascending aorta",
+      "High risk of acute aortic regurgitation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Physical examination in acute aortic dissection reveals distinctive vascular and auscultatory signs of proximal or distal extension. Proximal dissection into the aortic root causes acute aortic regurgitation with an early diastolic murmur and wide pulse pressure. Dissection across major aortic branches produces a marked **pulse deficit** between the arms or blood pressure disparity exceeding twenty millimetres of mercury. Retrograde dissection into the pericardial reflection leads to hemopericardium and acute cardiac tamponade.",
+   "say": "Bedside examination in aortic dissection demonstrates distinctive vascular and auscultatory signs of extension. Proximal dissection into the valve root causes acute aortic regurgitation with an early diastolic murmur. Occlusion of branch arteries produces a pulse deficit between the limbs or blood pressure disparity over twenty millimetres of mercury. Retrograde rupture into the pericardial space causes cardiac tamponade.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-murmur-as-ar.svg",
+    "alt": "Auscultation characteristics of aortic murmurs and regurgitation.",
+    "caption": "Early diastolic murmur of aortic regurgitation in proximal dissection. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Contrast-enhanced computed tomography angiography of the chest and abdomen is the diagnostic investigation of choice in haemodynamically stable patients. The pathognomonic radiological finding is an **intimal flap** that separates the true lumen from the false lumen. The true lumen typically displays smooth borders and continuous forward pulsatile flow, while the false lumen is frequently larger, demonstrates delayed contrast opacification, and exhibits internal cobweb signs representing residual strands of cleaved media.",
+   "say": "Computed tomography angiography represents the diagnostic investigation of choice in stable patients. The pathognomonic finding is a visible intimal flap separating the true lumen from the false channel. The true lumen exhibits smooth walls and forward pulsatile flow, whereas the false lumen is larger with delayed opacification and media strands termed cobwebs.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-pulsatile_mass.webp",
+    "alt": "Diagram illustrating expansile aortic aneurysm and vascular wall cleavage.",
+    "caption": "Aortic pathology, vascular wall cleavage, and pulsatile mass dynamics. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Immediate medical management focuses on halting progression of the dissection flap by reducing aortic wall shear stress. Initiating **intravenous beta blockers** such as esmolol or labetalol is the essential first step, targeting a heart rate below sixty beats per minute. Only after achieving adequate heart rate control are vasodilators like nitroprusside or nicardipine added to lower systolic blood pressure to 100 to 120 mmHg, avoiding reflex sympathetic tachycardia that would accelerate dissection propagation.",
+   "say": "Immediate medical therapy focuses on halting flap progression by minimizing aortic shear stress. Giving intravenous beta blockers like esmolol is the essential first action, aiming for a heart rate below sixty beats per minute. Only after controlling heart rate are vasodilators added to lower systolic pressure to one hundred to one hundred twenty, avoiding reflex tachycardia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "beta",
+      "label": "Immediate IV beta blockade (esmolol/labetalol)"
+     },
+     {
+      "id": "hr",
+      "label": "Achieve target heart rate < 60 beats/min"
+     },
+     {
+      "id": "vaso",
+      "label": "Add IV vasodilator (nicardipine/nitroprusside)"
+     },
+     {
+      "id": "bp",
+      "label": "Achieve target systolic BP 100 to 120 mmHg"
+     }
+    ],
+    "edges": [
+     [
+      "beta",
+      "hr"
+     ],
+     [
+      "hr",
+      "vaso"
+     ],
+     [
+      "vaso",
+      "bp"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Uncomplicated Stanford Type B dissections respond well to intensive medical anti-impulse therapy, but complications mandate intervention. Thoracic endovascular aortic repair (TEVAR) is indicated for **complicated Type B dissection**, defined by persistent refractory pain, uncontrolled hypertension, progressive false lumen expansion, or malperfusion of renal, mesenteric, or iliac vessels. Deploying an endovascular stent-graft seals the primary intimal tear, depressurizes the false lumen, and induces false lumen thrombosis while preserving true lumen branch perfusion.",
+   "say": "Uncomplicated type B dissections respond to intensive medical therapy, but complications require intervention. Endovascular stent repair is indicated for complicated type B disease, marked by refractory pain, uncontrolled hypertension, false lumen expansion or visceral malperfusion. Deploying a covered stent seals the entry tear and depressurises the false channel.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Uncomplicated Type B",
+     "points": [
+      "Hemodynamically stable on medical therapy",
+      "No branch vessel ischemia or malperfusion",
+      "Controlled pain and blood pressure",
+      "Managed with long-term oral beta-blockers"
+     ]
+    },
+    "right": {
+     "title": "Complicated Type B",
+     "points": [
+      "Persistent or recurrent severe tearing pain",
+      "Renal, visceral, or limb malperfusion",
+      "Rapid aortic dilatation or periaortic rupture",
+      "Urgent thoracic endovascular aortic repair (TEVAR)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Systemic atherosclerosis frequently affects the peripheral arterial vasculature of the lower extremities. Developing symptomatic **peripheral arterial disease** presents classically with intermittent claudication, characterized by reproducible cramping pain in the calf, thigh, or buttock triggered by walking and relieved promptly by rest. Critical limb-threatening ischemia represents the end-stage manifestation, characterized by ischemic rest pain in the distal foot, non-healing ulcerations, or frank gangrene requiring urgent revascularization.",
+   "say": "Atherosclerosis frequently occludes the peripheral arterial circulation of the lower limbs. Developing peripheral arterial disease presents with intermittent claudication, described as cramping muscle pain during walking that resolves with rest. Critical limb-threatening ischaemia represents end-stage disease, featuring rest pain in the toes, non-healing ulcers or gangrene requiring urgent revascularisation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "athero",
+      "label": "Atherosclerotic plaque in femoral/popliteal artery"
+     },
+     {
+      "id": "claud",
+      "label": "Intermittent claudication on exertion"
+     },
+     {
+      "id": "rest",
+      "label": "Ischemic rest pain (worse supine, relieved hanging)"
+     },
+     {
+      "id": "gang",
+      "label": "Critical limb ischemia: Ulcers and gangrene"
+     }
+    ],
+    "edges": [
+     [
+      "athero",
+      "claud"
+     ],
+     [
+      "claud",
+      "rest"
+     ],
+     [
+      "rest",
+      "gang"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bedside vascular assessment relies on measuring the ratio of systolic blood pressure at the ankle to that in the arm. Calculating the **ankle brachial index** provides an objective, non-invasive assessment of lower extremity arterial perfusion. A normal resting index ranges between 1.00 and 1.40. An index of 0.90 or less is diagnostic of peripheral arterial disease, with values under 0.40 indicating severe ischemia. Values exceeding 1.40 reflect non-compressible, calcified medial arteries common in diabetes and end-stage renal disease.",
+   "say": "Bedside vascular evaluation relies on comparing the systolic blood pressure in the ankle against the arm. Calculating the ankle-brachial index provides an objective assessment of arterial perfusion. A normal resting value ranges from one point zero to one point four. A ratio of zero point nine or lower establishes the diagnosis, while values under zero point four indicate severe ischaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ABI value range",
+     "Clinical interpretation",
+     "Perfusion severity",
+     "Management strategy"
+    ],
+    "rows": [
+     [
+      "> 1.40",
+      "Non-compressible calcified vessels",
+      "Inconclusive (Mönckeberg sclerosis)",
+      "Measure toe-brachial index (TBI)"
+     ],
+     [
+      "1.00 to 1.40",
+      "Normal arterial perfusion",
+      "No vascular limitation",
+      "Standard cardiovascular risk reduction"
+     ],
+     [
+      "0.91 to 0.99",
+      "Borderline arterial disease",
+      "Equivocal perfusion",
+      "Post-exercise treadmill ABI testing"
+     ],
+     [
+      "0.41 to 0.90",
+      "Mild to moderate arterial disease",
+      "Intermittent claudication",
+      "Supervised exercise, statin, cilostazol"
+     ],
+     [
+      "<= 0.40",
+      "Severe peripheral arterial disease",
+      "Critical limb ischemia / rest pain",
+      "Urgent imaging and revascularization"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

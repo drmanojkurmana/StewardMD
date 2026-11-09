@@ -1,0 +1,265 @@
+{
+ "v": 1,
+ "module": "med-hypertension",
+ "subject": "medicine",
+ "title": "Essential hypertension, blood pressure staging, and hypertensive crises",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Sustained elevation of systemic arterial pressure without an identifiable secondary cause accounts for over ninety percent of hypertensive individuals. Developing **essential hypertension** arises from complex multifactorial interactions between polygenic susceptibility, excessive dietary sodium intake, sympathetic nervous system overactivity, and impaired renal sodium excretion. Chronic vascular shear stress induces arterial wall remodelling, progressive endothelial dysfunction, and increased systemic vascular resistance that damages cerebral, coronary, and renal vascular beds.",
+   "say": "Sustained arterial pressure elevation without an identifiable secondary cause accounts for ninety percent of cases. Essential hypertension arises from interactions between genetic factors, high salt intake, sympathetic overactivity and impaired renal sodium handling. Chronic vascular stress causes arterial remodelling and endothelial dysfunction that damages the brain, heart and kidneys.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "genes",
+      "label": "Polygenic susceptibility and dietary sodium"
+     },
+     {
+      "id": "sns",
+      "label": "Sympathetic and RAAS axis overactivation"
+     },
+     {
+      "id": "endo",
+      "label": "Endothelial dysfunction and vascular remodeling"
+     },
+     {
+      "id": "svr",
+      "label": "Elevated systemic vascular resistance"
+     },
+     {
+      "id": "org",
+      "label": "Target organ vascular damage"
+     }
+    ],
+    "edges": [
+     [
+      "genes",
+      "sns"
+     ],
+     [
+      "sns",
+      "endo"
+     ],
+     [
+      "endo",
+      "svr"
+     ],
+     [
+      "svr",
+      "org"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Accurate clinical decision-making requires standardized measurement and classification of arterial pressure. International guidelines establish precise **blood pressure staging** based on multiple seated office readings. Normal blood pressure is defined as systolic below 120 and diastolic below 80 mmHg. Elevated blood pressure spans 120 to 129 systolic with diastolic under 80. Stage 1 hypertension ranges from 130 to 139 systolic or 80 to 89 diastolic, while Stage 2 represents systolic 140 or higher, or diastolic 90 mmHg or higher.",
+   "say": "Clinical management requires standardized measurement and staging of arterial pressure. Guidelines classify blood pressure into categories based on seated office readings. Normal pressure is below one hundred twenty systolic and eighty diastolic. Elevated pressure spans one hundred twenty to one hundred twenty-nine systolic. Stage one ranges from one hundred thirty to one hundred thirty-nine systolic, while stage two begins at one hundred forty over ninety.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Blood pressure category",
+     "Systolic reading (mmHg)",
+     "Diastolic reading (mmHg)",
+     "Initial management strategy"
+    ],
+    "rows": [
+     [
+      "Normal",
+      "Under 120",
+      "and under 80",
+      "Promote healthy lifestyle"
+     ],
+     [
+      "Elevated",
+      "120 to 129",
+      "and under 80",
+      "Lifestyle modification and reassessment"
+     ],
+     [
+      "Stage 1 hypertension",
+      "130 to 139",
+      "or 80 to 89",
+      "Lifestyle plus monotherapy if high CVD risk"
+     ],
+     [
+      "Stage 2 hypertension",
+      ">= 140",
+      "or >= 90",
+      "Prompt dual-agent antihypertensive therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe elevation of blood pressure exceeding 180 mmHg systolic or 120 mmHg diastolic constitutes a clinical crisis. We diagnose a **hypertensive emergency** when this marked pressure rise is accompanied by evidence of acute, progressive target organ damage. Life-threatening manifestations include hypertensive encephalopathy, acute intracerebral haemorrhage, acute coronary syndromes, acute pulmonary oedema, aortic dissection, and acute kidney injury, demanding immediate admission to an intensive care unit.",
+   "say": "Severe blood pressure elevation exceeding one hundred eighty systolic or one hundred twenty diastolic represents a crisis. A hypertensive emergency exists when this severe elevation causes acute, progressive target organ damage. Life-threatening complications include encephalopathy, stroke, acute pulmonary oedema, aortic dissection and acute kidney injury, requiring immediate intensive care admission.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hypertensive emergency",
+     "points": [
+      "BP > 180/120 mmHg WITH acute target organ damage",
+      "Encephalopathy, acute stroke, pulmonary oedema, dissection",
+      "Requires immediate ICU admission and IV medications",
+      "Target: Reduce MAP by max 25% in hour 1 (except dissection)"
+     ]
+    },
+    "right": {
+     "title": "Hypertensive urgency",
+     "points": [
+      "BP > 180/120 mmHg WITHOUT acute target organ damage",
+      "Headache, mild dizziness, or completely asymptomatic",
+      "Managed in outpatient or observation unit with oral drugs",
+      "Target: Gradual BP reduction over 24 to 48 hours"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Patients presenting with severe pressure elevation without acute end-organ compromise represent a different clinical scenario. Clinicians categorize this state as **hypertensive urgency**, where asymptomatic individuals or those with mild headache require gradual pressure reduction rather than rapid intravenous lowering. Overly aggressive rapid blood pressure drops can precipitate cerebral hypoperfusion, stroke, or myocardial ischemia. Oral medications such as amlodipine, labetalol, or captopril safely lower pressures over twenty-four to forty-eight hours.",
+   "say": "Patients presenting with severe pressure elevation without organ dysfunction require different management. Clinicians classify this state as hypertensive urgency, where asymptomatic individuals require gradual oral reduction. Rapid blood pressure lowering can cause cerebral hypoperfusion or myocardial ischaemia. Oral medications like amlodipine, labetalol or captopril provide safe pressure reduction over twenty-four to forty-eight hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "bp",
+      "label": "Office blood pressure > 180/120 mmHg"
+     },
+     {
+      "id": "eval",
+      "label": "Screen for acute organ damage (ECG, renal, neuro)"
+     },
+     {
+      "id": "urg",
+      "label": "No acute damage: Hypertensive urgency"
+     },
+     {
+      "id": "oral",
+      "label": "Initiate or adjust oral antihypertensive agents"
+     },
+     {
+      "id": "grad",
+      "label": "Gradual reduction over 24 to 48 hours"
+     }
+    ],
+    "edges": [
+     [
+      "bp",
+      "eval"
+     ],
+     [
+      "eval",
+      "urg"
+     ],
+     [
+      "urg",
+      "oral"
+     ],
+     [
+      "oral",
+      "grad"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Intravenous pharmacotherapy in hypertensive emergencies must follow rigorous hemodynamic targets to preserve cerebral perfusion. Administering continuous **intravenous labetalol** or nicardipine allows precise titration while avoiding precipitous pressure drops. The standard clinical target is to reduce mean arterial pressure by no more than twenty to twenty-five percent within the first hour. The critical exception is acute aortic dissection, where systolic blood pressure must be rapidly lowered below 120 mmHg within twenty minutes.",
+   "say": "Intravenous medications in hypertensive emergencies must follow strict targets to maintain brain perfusion. Giving intravenous infusions of labetalol or nicardipine enables precise pressure titration. The standard target is to reduce mean arterial pressure by no more than twenty-five percent in the first hour. The vital exception is aortic dissection, where systolic pressure must drop below one hundred twenty within twenty minutes.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-labetalol.webp",
+    "alt": "Illustration of labetalol mechanism of action on adrenergic receptors.",
+    "caption": "Combined alpha and beta-adrenergic blockade with intravenous labetalol. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Approximately ten percent of adult hypertensive patients have an identifiable, potentially curable underlying cause. Thorough evaluation for **secondary hypertension** is indicated in young patients under thirty, individuals with abrupt-onset severe hypertension, resistant hypertension failing three drugs, or those with abnormal laboratory findings. Leading causes include primary aldosteronism, renal parenchymal disease, renal artery stenosis, obstructive sleep apnoea, phaeochromocytoma, and Cushing syndrome.",
+   "say": "Around ten percent of adult hypertensive patients have an identifiable and potentially treatable underlying disorder. Screening for secondary hypertension is warranted in patients under thirty, sudden-onset severe disease, resistant cases or those with unprovoked hypokalaemia. Leading secondary causes include primary aldosteronism, renal artery stenosis, parenchymal kidney disease, sleep apnoea and phaeochromocytoma.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Secondary etiology",
+     "Typical clinical profile",
+     "Screening investigation",
+     "Definitive confirmatory test"
+    ],
+    "rows": [
+     [
+      "Primary aldosteronism",
+      "Hypertension with spontaneous hypokalaemia",
+      "Plasma aldosterone-to-renin ratio (ARR)",
+      "Oral sodium loading or saline infusion test"
+     ],
+     [
+      "Renal artery stenosis",
+      "Abdominal bruit, flash pulmonary oedema",
+      "Renal duplex ultrasound or CT angiography",
+      "Catheter renal angiography"
+     ],
+     [
+      "Phaeochromocytoma",
+      "Paroxysmal headache, sweating, palpitations",
+      "Plasma free metanephrines / 24-hr urine",
+      "CT/MRI abdomen with MIBG scintigraphy"
+     ],
+     [
+      "Cushing syndrome",
+      "Central obesity, purple striae, plethoric facies",
+      "24-hr urine free cortisol or low-dose dex",
+      "High-dose dexamethasone suppression / ACTH"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic hypertension inflicts progressive microvascular and macrovascular injury across major target organs. Developing **target organ damage** manifests as left ventricular hypertrophy on echocardiography, microalbuminuria progressing to nephrosclerosis, accelerated carotid atheroma, and hypertensive retinopathy. Staging retinopathy using the Keith-Wagener-Barker classification grades arteriolar narrowing, copper wiring, flame haemorrhages, cotton-wool spots, and bilateral optic disc oedema (papilloedema) indicating malignant hypertension.",
+   "say": "Chronic hypertension causes progressive damage across major vascular territories. The onset of target organ damage manifests as left ventricular hypertrophy, microalbuminuria, carotid atherosclerosis and hypertensive retinopathy. Retinopathy staging classifies vessel changes from mild arteriolar narrowing and silver wiring to retinal haemorrhages, cotton-wool spots and papilloedema in malignant phases.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-aki-fena.svg",
+    "alt": "Pathology and indices of renal parenchymal vascular damage.",
+    "caption": "Renal vascular injury and indices of impaired renal perfusion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Non-pharmacological lifestyle modifications form the indispensable foundation of all antihypertensive management strategies. Adopting the **DASH dietary pattern**, rich in fruits, vegetables, whole grains, and low-fat dairy products while restricting saturated fats, lowers systolic blood pressure by up to eleven millimetres of mercury. Dietary sodium restriction below two grams daily, weight loss of five to ten percent, regular aerobic physical activity, and moderation of alcohol consumption provide substantial additive reductions.",
+   "say": "Lifestyle changes form the foundation of all blood pressure management strategies. Adopting the DASH dietary pattern, rich in fruits, vegetables and whole grains while restricting saturated fats, lowers systolic pressure by up to eleven millimetres of mercury. Restricting salt under two grams daily, losing excess weight, exercising regularly and limiting alcohol provide valuable additional pressure reductions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lifestyle intervention",
+     "Expected SBP reduction",
+     "Clinical recommendation"
+    ],
+    "rows": [
+     [
+      "DASH dietary pattern",
+      "8 to 11 mmHg",
+      "Diet rich in fruits, vegetables, low-fat dairy"
+     ],
+     [
+      "Dietary sodium restriction",
+      "5 to 6 mmHg",
+      "Target sodium intake under 2 g daily"
+     ],
+     [
+      "Aerobic physical exercise",
+      "4 to 8 mmHg",
+      "150 minutes weekly of brisk walking or cycling"
+     ],
+     [
+      "Weight reduction",
+      "1 mmHg per kg lost",
+      "Achieve and maintain normal BMI under 25"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

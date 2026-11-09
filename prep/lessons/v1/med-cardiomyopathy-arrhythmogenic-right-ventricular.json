@@ -1,0 +1,259 @@
+{
+ "v": 1,
+ "module": "med-cardiomyopathy",
+ "subject": "medicine",
+ "title": "Arrhythmogenic right ventricular cardiomyopathy, takotsubo, and myocarditis",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Genetic disruption of cardiac desmosomal adhesion complexes causes progressive fibrofatty infiltration of the right ventricle. Clinicians recognize **arrhythmogenic right ventricular cardiomyopathy** through ventricular arrhythmias, structural right ventricular dilatation, and sudden death in young individuals. Pathogenic mutations in genes encoding plakophilin-2 (PKP2), desmoplakin, and desmoglein-2 impair intercellular mechanical junctions. Mechanical stretch during vigorous physical exertion accelerates myocyte detachment, apoptosis, and fibrofatty replacement in the triangle of dysplasia.",
+   "say": "Genetic defects in cardiac desmosomal proteins cause progressive fibrofatty replacement of the right ventricle. Clinicians identify arrhythmogenic right ventricular cardiomyopathy by ventricular arrhythmias, right ventricular enlargement and sudden death in young athletes. Mutations in plakophilin-2 affect cell-cell adhesion. Vigorous physical training accelerates cellular detachment and progressive fibrofatty infiltration.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-cardiomyopathy.svg",
+    "alt": "Pathological schematic of right ventricular cardiomyopathy.",
+    "caption": "Right ventricular fibrofatty remodelling and chamber dilatation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Twelve-lead electrocardiography provides highly specific diagnostic markers for right ventricular desmosomal disruption. Observing a terminal notch or deflection at the end of the QRS complex in leads V1 to V3 defines the pathognomonic **epsilon wave**. This delayed electrical activation reflects slow intraventricular conduction through patches of fibrofatty tissue. Additional electrocardiographic features include T-wave inversions in right precordial leads (V1 to V3) and sustained ventricular tachycardia with left bundle branch block morphology.",
+   "say": "The twelve-lead electrocardiogram demonstrates specific diagnostic clues in right ventricular cardiomyopathy. Finding a small terminal deflection at the end of the QRS complex in leads V1 through V3 defines the classic epsilon wave. This notched waveform represents delayed electrical conduction through fibrofatty tissue. Patients also exhibit anterior T-wave inversions and ventricular tachycardia displaying left bundle branch block morphology.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "fibro",
+      "label": "Right ventricular fibrofatty infiltration"
+     },
+     {
+      "id": "slow",
+      "label": "Delayed regional electrical conduction"
+     },
+     {
+      "id": "eps",
+      "label": "Terminal QRS notch: Epsilon wave in V1-V3"
+     },
+     {
+      "id": "vt",
+      "label": "Ventricular tachycardia with LBBB morphology"
+     },
+     {
+      "id": "icd",
+      "label": "Implantable cardioverter-defibrillator placement"
+     }
+    ],
+    "edges": [
+     [
+      "fibro",
+      "slow"
+     ],
+     [
+      "slow",
+      "eps"
+     ],
+     [
+      "eps",
+      "vt"
+     ],
+     [
+      "vt",
+      "icd"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute emotional or physical stress can precipitate transient apical ventricular ballooning in the absence of obstructive coronary disease. Developing **takotsubo** cardiomyopathy predominantly affects postmenopausal women following intense physiological stress like bereavement or critical illness. A massive surge of endogenous catecholamines induces microvascular coronary spasm, direct myocyte catecholamine toxicity, and apical myocardial stunning. The clinical presentation closely mimics acute myocardial infarction with ischemic chest pain, ST elevation, and elevated troponin.",
+   "say": "Severe emotional or physical stress can induce transient apical ballooning without obstructive coronary stenosis. Takotsubo cardiomyopathy predominantly affects postmenopausal females following catastrophic emotional stress or critical medical illness. A massive surge of catecholamines causes microvascular spasm, direct toxicity and apical myocardial stunning. Patients present identically to acute infarction with chest pain, ST elevation and elevated troponins.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Takotsubo syndrome",
+     "points": [
+      "Triggered by acute emotional/physical stress",
+      "Transient apical ballooning and akinesis",
+      "Normal epicardial coronaries on angiography",
+      "Complete recovery of ejection fraction in weeks"
+     ]
+    },
+    "right": {
+     "title": "Anterior STEMI",
+     "points": [
+      "Triggered by plaque rupture and thrombus",
+      "Regional wall motion defect matching LAD",
+      "Obstructive coronary occlusion on angiography",
+      "Permanent myocardial necrosis without revascularisation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Coronary angiography and ventriculography confirm the diagnosis by demonstrating pristine coronary arteries with distinctive chamber morphology. Left ventriculography displays **apical ballooning** with compensatory basal hyperkinesia during systole, resembling a Japanese round-bottomed octopus trap. Management focuses on supportive care, gentle volume repletion, and short-term heart failure medications. Myocardial contractility and ejection fraction typically recover completely to baseline within four to eight weeks.",
+   "say": "Emergency coronary catheterisation confirms the diagnosis by showing unobstructed coronary arteries and characteristic chamber contraction. Left ventriculography reveals apical ballooning with basal hyperkinesia during systole, resembling a traditional octopus pot. Therapy involves supportive haemodynamic care and heart failure medications. Ventricular function characteristically improves completely within four to eight weeks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "stress",
+      "label": "Catecholamine surge from acute stress"
+     },
+     {
+      "id": "stun",
+      "label": "Apical myocardial catecholamine stunning"
+     },
+     {
+      "id": "cath",
+      "label": "Angiography: Normal coronaries & apical ballooning"
+     },
+     {
+      "id": "supp",
+      "label": "Supportive care with ACE inhibitors & beta blockers"
+     },
+     {
+      "id": "recov",
+      "label": "Complete recovery of function in 4 to 8 weeks"
+     }
+    ],
+    "edges": [
+     [
+      "stress",
+      "stun"
+     ],
+     [
+      "stun",
+      "cath"
+     ],
+     [
+      "cath",
+      "supp"
+     ],
+     [
+      "supp",
+      "recov"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Unexplained heart failure developing in late pregnancy or the early postpartum months requires urgent evaluation. Developing **peripartum cardiomyopathy** presents as heart failure with an ejection fraction under forty-five percent during the final month of gestation or up to five months following delivery. Pathogenesis involves cleavage of the pituitary hormone prolactin into an antiangiogenic, proapoptotic sixteen-kilodalton fragment. Standard heart failure therapy combined with the prolactin-cleavage inhibitor bromocriptine significantly enhances myocardial recovery.",
+   "say": "Unexplained congestive heart failure developing near delivery or in early postpartum months demands swift investigation. Peripartum cardiomyopathy manifests as ventricular dysfunction with an ejection fraction under forty-five percent during the last gestational month or up to five months postpartum. Cleavage of prolactin into an antiangiogenic sixteen-kilodalton fragment causes myocyte apoptosis. Adding bromocriptine to standard heart failure medications enhances recovery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic criterion",
+     "Required clinical finding",
+     "Therapeutic implication"
+    ],
+    "rows": [
+     [
+      "Timing of onset",
+      "Last month of pregnancy to 5 months postpartum",
+      "Exclude pre-existing structural heart disease"
+     ],
+     [
+      "Ejection fraction",
+      "Left ventricular ejection fraction < 45%",
+      "Guideline-directed medical therapy for HFrEF"
+     ],
+     [
+      "Pathogenic driver",
+      "Proapoptotic 16-kDa prolactin cleavage fragment",
+      "Adjunctive bromocriptine therapy with anticoagulation"
+     ],
+     [
+      "Future pregnancy",
+      "High recurrence risk if LVEF remains depressed",
+      "Contraceptive counselling and multidisciplinary planning"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute inflammation of the myocardium most commonly results from cardiotropic viral infections. Developing **viral myocarditis** typically follows an upper respiratory or gastrointestinal illness by one to two weeks, with Coxsackie B enteroviruses, parvovirus B19, and adenovirus serving as frequent culprits. Direct viral cytolysis and secondary autoimmune cytotoxic T-cell responses cause myocyte necrosis, presenting with precordial chest pain, dyspnoea, arrhythmias, and elevated cardiac enzymes mimicking an acute coronary syndrome.",
+   "say": "Acute inflammation of heart muscle tissue most frequently arises from viral infections. Viral myocarditis typically follows a respiratory or diarrhoeal illness by several weeks, with Coxsackie B enteroviruses and parvovirus B19 acting as common pathogens. Direct viral destruction and host immune responses produce myocyte necrosis, presenting with chest pain, breathlessness, arrhythmias and elevated troponin.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "virus",
+      "label": "Cardiotropic viral infection (Coxsackie B)"
+     },
+     {
+      "id": "myo",
+      "label": "Direct viral replication in myocytes"
+     },
+     {
+      "id": "auto",
+      "label": "Cytotoxic T-cell inflammatory response"
+     },
+     {
+      "id": "necr",
+      "label": "Myocellular necrosis & troponin release"
+     },
+     {
+      "id": "mri",
+      "label": "Cardiac MRI: Mid-wall late gadolinium enhancement"
+     }
+    ],
+    "edges": [
+     [
+      "virus",
+      "myo"
+     ],
+     [
+      "myo",
+      "auto"
+     ],
+     [
+      "auto",
+      "necr"
+     ],
+     [
+      "necr",
+      "mri"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic protozoan infection with Trypanosoma cruzi represents a leading cause of cardiomyopathy in Latin America. Transmitted by triatomine bugs, **Chagas disease** leads to progressive biventricular enlargement, cardiac conduction disturbances, and ventricular tachyarrhythmias decades after initial infection. The pathognomonic lesion is a thin-walled left ventricular apical aneurysm that predisposes to mural thrombus and thromboembolic stroke. Concomitant enteric parasympathetic denudation frequently causes megaoesophagus and megacolon.",
+   "say": "Chronic infection with the parasite Trypanosoma cruzi causes extensive cardiomyopathy in endemic regions of the Americas. Transmitted by kissing bugs, Chagas disease produces progressive biventricular enlargement, conduction blocks and arrhythmias decades after infection. The characteristic hallmark is a thin-walled apical aneurysm harbouring mural thrombi. Autonomic nerve destruction also causes megaoesophagus and megacolon.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/chagas-trypanosomiasis-fig2.webp",
+    "alt": "Infographic showing triatomine vector with Romana sign, dilated cardiomyopathy heart section, megaoesophagus, megacolon, and drug boxes.",
+    "caption": "Chagas disease vector transmission, cardiomyopathy, megaoesophagus, and megacolon complications. Credit: StewardMD.",
+    "ar": 1.3405
+   }
+  },
+  {
+   "tx": "Severe obliterative cardiomyopathy restricted to tropical regions is known as Davies disease. Developing **endomyocardial fibrosis** predominantly affects children and young adults in sub-Saharan Africa and coastal South India. Dense fibrous thickening of the ventricular inflow tract and apices entraps the papillary muscles and obliterates chamber volume, producing severe restrictive filling and secondary tricuspid or mitral regurgitation. Progressive hypereosinophilia and parasitic infections like filariasis contribute to chronic subendocardial damage.",
+   "say": "Severe obliterative cardiomyopathy occurring in tropical regions is known as Davies disease. Endomyocardial fibrosis affects children and young adults in tropical zones. Dense fibrous tissue lines the ventricular inflow tracts and apices, tethering the papillary muscles and shrinking chamber volume. This generates severe restrictive filling alongside valvular regurgitation, driven by chronic eosinophilic degranulation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Endomyocardial fibrosis",
+     "points": [
+      "Tropical endemic distribution",
+      "Fibrous obliteration of ventricular apices",
+      "Papillary muscle tethering and regurgitation",
+      "Severe restrictive filling pattern"
+     ]
+    },
+    "right": {
+     "title": "Loeffler endocarditis",
+     "points": [
+      "Temperate climates with severe eosinophilia",
+      "Eosinophilic major basic protein toxicity",
+      "Eosinophilic infiltration and mural thrombi",
+      "Responds to corticosteroids and tyrosine kinase inhibitors"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
