@@ -39,6 +39,8 @@
 .pn-root .pv-voicebar { display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; padding: 4px 16px; background: var(--pn-pri-soft); color: var(--pn-pri-ink); font-weight: 600; }
 .pn-root .pv-voicebar > span { display: inline-flex; align-items: center; gap: 8px; }
 .pn-root .pv-voicebar .pn-link { min-height: 44px; }
+/* The one-time natural-voice download card inside Voice mode (reuses the lessons' .pn-vdl rows and track). */
+.pn-root #pvVoiceDl .pv-vdl { margin: 10px 12px 0; padding: 12px 14px; border-radius: var(--pn-r-lg); background: var(--pn-s1); border: 1px solid var(--pn-edge); }
 
 /* Focus room */
 .pn-root .pv-focus .pn-panel { display: flex; flex-direction: column; gap: 12px; }
