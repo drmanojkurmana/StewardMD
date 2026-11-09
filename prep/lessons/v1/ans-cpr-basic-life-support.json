@@ -1,0 +1,271 @@
+{
+    "v": 1,
+    "id": "ans-cpr-basic-life-support",
+    "subject": "anaesthesia",
+    "module": "ans-cpr",
+    "title": "Resuscitation: Basic Life Support, Defibrillation, and Capnography in CPR",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "High-Quality Chest Compressions",
+            "tx": "**High-quality chest compression metrics** form the foundation of successful cardiopulmonary resuscitation (CPR) according to International Liaison Committee on Resuscitation (ILCOR) guidelines: compress the lower half of the sternum to a depth of 5 to 6 centimeters (2 to 2.4 inches) in adults, maintain a compression rate of 100 to 120 beats per minute, allow complete chest wall recoil between compressions, and minimize hands-off interruptions to under 10 seconds.",
+            "say": "High-quality chest compression metrics form the foundation of successful cardiopulmonary resuscitation (CPR) according to International Liaison Committee on Resuscitation (ILCOR) guidelines: compress the lower half of the sternum to a depth of 5 to 6 centimeters (2 to 2.4 inches) in adults, maintain a compression rate of 100 to 120 beats per minute, allow complete chest wall recoil between compressions, and minimize hands-off interruptions to under 10 seconds.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/kb/media/anaesthesia-cpr-periarrest-long-case-fig1.webp",
+                "alt": "High-quality chest compression positioning and cardiopulmonary resuscitation algorithm",
+                "caption": "High-quality chest compression positioning and cardiopulmonary resuscitation algorithm"
+            }
+        },
+        {
+            "title": "Compression-to-Ventilation Ratios",
+            "tx": "**Standard CPR compression-ventilation ratios** dictate a 30:2 ratio (30 chest compressions followed by 2 rescue breaths) for single rescuers across adults, children, and infants. For healthcare providers executing two-rescuer CPR in children and infants, the ratio shifts to 15:2 to prioritize higher ventilatory demands. Once an advanced endotracheal airway is secured, deliver continuous chest compressions with one asynchronous breath every 6 seconds (10 breaths per minute).",
+            "say": "Standard CPR compression-ventilation ratios dictate a 30:2 ratio (30 chest compressions followed by 2 rescue breaths) for single rescuers across adults, children, and infants. For healthcare providers executing two-rescuer CPR in children and infants, the ratio shifts to 15:2 to prioritize higher ventilatory demands. Once an advanced endotracheal airway is secured, deliver continuous chest compressions with one asynchronous breath every 6 seconds (10 breaths per minute).",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Patient Population",
+                    "Single-Rescuer Ratio",
+                    "Two-Rescuer Healthcare Ratio",
+                    "Advanced Airway Ventilatory Rate"
+                ],
+                "rows": [
+                    [
+                        "Adult Cardiac Arrest",
+                        "30 compressions to 2 ventilations",
+                        "30 compressions to 2 ventilations",
+                        "Continuous compressions; 1 breath every 6 seconds"
+                    ],
+                    [
+                        "Pediatric Cardiac Arrest",
+                        "30 compressions to 2 ventilations",
+                        "15 compressions to 2 ventilations",
+                        "Continuous compressions; 1 breath every 2 to 3 seconds"
+                    ],
+                    [
+                        "Infant Cardiac Arrest",
+                        "30 compressions to 2 ventilations",
+                        "15 compressions to 2 ventilations",
+                        "Continuous compressions; 1 breath every 2 to 3 seconds"
+                    ],
+                    [
+                        "Neonatal Delivery Arrest",
+                        "3 compressions to 1 ventilation",
+                        "3 compressions to 1 ventilation",
+                        "90 compressions and 30 breaths per minute"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Defibrillation Shockable versus Non-Shockable",
+            "tx": "**Cardiac arrest rhythm stratification** divides into shockable rhythms (ventricular fibrillation and pulseless ventricular tachycardia) and non-shockable rhythms (asystole and pulseless electrical activity). Shockable rhythms require immediate defibrillation with a single shock of 120 to 200 Joules for biphasic waveforms (or 360 Joules for monophasic), immediately followed by two minutes of uninterrupted CPR before rhythm re-checking.",
+            "say": "Cardiac arrest rhythm stratification divides into shockable rhythms (ventricular fibrillation and pulseless ventricular tachycardia) and non-shockable rhythms (asystole and pulseless electrical activity). Shockable rhythms require immediate defibrillation with a single shock of 120 to 200 Joules for biphasic waveforms (or 360 Joules for monophasic), immediately followed by two minutes of uninterrupted CPR before rhythm re-checking.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Shockable Rhythms (VF / Pulseless VT)",
+                    "points": [
+                        "Chaotic ventricular fibrillation or broad-complex pulseless VT",
+                        "Immediate defibrillation with 120 to 200 Joules biphasic energy",
+                        "Administer amiodarone (300 mg) after the third shock"
+                    ]
+                },
+                "right": {
+                    "title": "Non-Shockable Rhythms (Asystole / PEA)",
+                    "points": [
+                        "Flatline asystole or organized rhythm without palpable pulse",
+                        "Defibrillation is completely ineffective and contraindicated",
+                        "Administer IV adrenaline (1 mg) immediately; hunt for reversible causes"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Adrenaline and Amiodarone Dosing",
+            "tx": "**Pharmacotherapy algorithms in cardiac arrest** dictate administering intravenous adrenaline (1 milligram of 1:10,000 solution) every 3 to 5 minutes: given immediately in non-shockable rhythms, or after the second defibrillation shock in shockable rhythms. For refractory ventricular fibrillation or pulseless ventricular tachycardia persisting after the third shock, administer intravenous amiodarone at 300 milligrams (with a second dose of 150 mg after the fifth shock), or lidocaine (1 to 1.5 mg/kg).",
+            "say": "Pharmacotherapy algorithms in cardiac arrest dictate administering intravenous adrenaline (1 milligram of 1:10,000 solution) every 3 to 5 minutes: given immediately in non-shockable rhythms, or after the second defibrillation shock in shockable rhythms. For refractory ventricular fibrillation or pulseless ventricular tachycardia persisting after the third shock, administer intravenous amiodarone at 300 milligrams (with a second dose of 150 mg after the fifth shock), or lidocaine (1 to 1.5 mg/kg).",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Pharmacological Agent",
+                    "First-Line Clinical Dose",
+                    "Timing of Initial Administration",
+                    "Repeat Dosing Interval"
+                ],
+                "rows": [
+                    [
+                        "Adrenaline (Epinephrine)",
+                        "1 milligram IV / IO (10 mL 1:10,000)",
+                        "Immediate in PEA/asystole; post-shock 2 in VF",
+                        "Repeat every 3 to 5 minutes until ROSC"
+                    ],
+                    [
+                        "Amiodarone Hydrochloride",
+                        "300 milligrams IV push diluted in D5W",
+                        "Administered after 3rd shock in refractory VF",
+                        "Second dose of 150 mg after 5th shock"
+                    ],
+                    [
+                        "Lignocaine (Lidocaine)",
+                        "1.0 to 1.5 milligrams per kilogram",
+                        "Alternative to amiodarone for shockable VF",
+                        "Second dose of 0.5 to 0.75 mg/kg"
+                    ],
+                    [
+                        "Magnesium Sulphate",
+                        "2 grams IV bolus over 1 to 2 minutes",
+                        "Indicated strictly for Torsades de Pointes",
+                        "Repeat once if polymorphic VT persists"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Reversible Causes: 4 Hs and 4 Ts",
+            "tx": "**Reversible causes of cardiac arrest** must be methodically identified and corrected during CPR cycles, categorized into the 4 Hs: Hypoxia (ventilate 100% O2), Hypovolaemia (rapid fluid/blood bolus), Hypothermia (active warming), and Hyper/Hypokalaemia and metabolic disorders. The 4 Ts comprise: Tension pneumothorax (needle decompression), cardiac Tamponade (pericardiocentesis), Toxins (antidotes), and Thrombosis (pulmonary embolus or coronary thrombosis).",
+            "say": "Reversible causes of cardiac arrest must be methodically identified and corrected during CPR cycles, categorized into the 4 Hs: Hypoxia (ventilate 100% O2), Hypovolaemia (rapid fluid/blood bolus), Hypothermia (active warming), and Hyper/Hypokalaemia and metabolic disorders. The 4 Ts comprise: Tension pneumothorax (needle decompression), cardiac Tamponade (pericardiocentesis), Toxins (antidotes), and Thrombosis (pulmonary embolus or coronary thrombosis).",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Reversible Category",
+                    "Underlying Pathology",
+                    "Bedside Clinical Clue",
+                    "Target Emergency Intervention"
+                ],
+                "rows": [
+                    [
+                        "Hypovolaemia (H)",
+                        "Haemorrhage, dehydration, sepsis",
+                        "Flat neck veins, narrow QRS complex",
+                        "Rapid intravenous fluid and blood resuscitation"
+                    ],
+                    [
+                        "Hyperkalaemia (H)",
+                        "Renal failure, crush, succinylcholine",
+                        "Peaked T waves, wide QRS on ECG",
+                        "Administer calcium chloride and insulin-dextrose"
+                    ],
+                    [
+                        "Tension Pneumothorax (T)",
+                        "Barotrauma, rib fracture, CVC cannulation",
+                        "Absent unilateral breath sounds, tracheal deviation",
+                        "Immediate needle thoracocentesis in 2nd ICS"
+                    ],
+                    [
+                        "Cardiac Tamponade (T)",
+                        "Pericardial effusion, aortic dissection",
+                        "Distended neck veins, muffled heart sounds",
+                        "Emergency bedside subxiphoid pericardiocentesis"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Capnography as a Quality Indicator",
+            "tx": "**End-tidal carbon dioxide monitoring during CPR** serves as an objective real-time indicator of resuscitation quality and cardiac output. An EtCO2 under 10 mmHg indicates inadequate chest compression depth or fatigue, demanding immediate improvement in compression technique. An EtCO2 consistently between 15 and 20 mmHg confirms high-quality CPR generating adequate pulmonary blood flow.",
+            "say": "End-tidal carbon dioxide monitoring during CPR serves as an objective real-time indicator of resuscitation quality and cardiac output. An EtCO2 under 10 mmHg indicates inadequate chest compression depth or fatigue, demanding immediate improvement in compression technique. An EtCO2 consistently between 15 and 20 mmHg confirms high-quality CPR generating adequate pulmonary blood flow.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "EtCO2 Under 10 mmHg",
+                    "points": [
+                        "Inadequate chest compression depth or improper hand placement",
+                        "Rescuer physical exhaustion or severe systemic hypoperfusion",
+                        "Predicts zero chance of survival if persistent for 20 minutes"
+                    ]
+                },
+                "right": {
+                    "title": "EtCO2 Greater than 15 to 20 mmHg",
+                    "points": [
+                        "Confirms high-quality effective chest compressions",
+                        "Generates sufficient pulmonary blood flow to transport CO2",
+                        "Associated with significantly improved resuscitation survival"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Return of Spontaneous Circulation (ROSC)",
+            "tx": "**Capnographic sign of return of spontaneous circulation** is a sudden, dramatic jump in end-tidal carbon dioxide to 35 to 45 mmHg or higher. This abrupt surge occurs because restored spontaneous cardiac output instantly delivers accumulated metabolic carbon dioxide from peripheral tissues to the pulmonary circulation, providing an early sign of ROSC without needing to pause chest compressions for pulse palpation.",
+            "say": "Capnographic sign of return of spontaneous circulation is a sudden, dramatic jump in end-tidal carbon dioxide to 35 to 45 mmHg or higher. This abrupt surge occurs because restored spontaneous cardiac output instantly delivers accumulated metabolic carbon dioxide from peripheral tissues to the pulmonary circulation, providing an early sign of ROSC without needing to pause chest compressions for pulse palpation.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "CPR in progress with baseline EtCO2 of 15 mmHg"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Heart resumes spontaneous coordinated contractions (ROSC)"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Sudden massive surge of EtCO2 jumping to 35 to 45 mmHg"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Halt compressions, palpate carotid pulse, and initiate post-resuscitation care"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Targeted Temperature Management Post-ROSC",
+            "tx": "**Post-cardiac arrest targeted temperature management** (TTM) prevents secondary ischemic reperfusion brain injury in comatose adult patients following ROSC. Current guidelines mandate maintaining a constant core temperature strictly between 32 and 36 degrees Celsius for at least 24 hours using surface cooling blankets or intravascular catheters, actively preventing fever (temperature above 37.7C) for 72 hours.",
+            "say": "Post-cardiac arrest targeted temperature management (TTM) prevents secondary ischemic reperfusion brain injury in comatose adult patients following ROSC. Current guidelines mandate maintaining a constant core temperature strictly between 32 and 36 degrees Celsius for at least 24 hours using surface cooling blankets or intravascular catheters, actively preventing fever (temperature above 37.7C) for 72 hours.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Post-ROSC Component",
+                    "Guideline Target Metric",
+                    "Neuroprotective Mechanism",
+                    "Critical Intensive Care Monitoring"
+                ],
+                "rows": [
+                    [
+                        "Target Temperature Target",
+                        "Constant 32 to 36 degrees Celsius",
+                        "Suppresses cerebral free radical generation and apoptosis",
+                        "Distal oesophageal or bladder core temperature probe"
+                    ],
+                    [
+                        "Duration of TTM",
+                        "Continuous for at least 24 hours",
+                        "Prevents hyperthermic reperfusion neurovascular injury",
+                        "Slow controlled re-warming at 0.25 to 0.5C per hour"
+                    ],
+                    [
+                        "Arterial Oxygenation Target",
+                        "Normoxaemia (PaO2 75 to 100 mmHg)",
+                        "Prevents oxygen free radical brain toxicity",
+                        "Avoid hyperoxia (PaO2 >200 mmHg)"
+                    ],
+                    [
+                        "Arterial Carbon Dioxide Target",
+                        "Strict normocapnia (PaCO2 35 to 45 mmHg)",
+                        "Prevents cerebral vasoconstriction or intracranial hypertension",
+                        "Serial arterial blood gas analysis every 2 to 4 hours"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

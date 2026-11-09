@@ -1,0 +1,261 @@
+{
+    "v": 1,
+    "id": "ans-intraop-complications-malignant-hyperthermia",
+    "subject": "anaesthesia",
+    "module": "ans-intraop-complications",
+    "title": "Malignant Hyperthermia: Ryanodine Pathology, Dantrolene Therapy, and Airway Crises",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Ryanodine Receptor Gene Mutations",
+            "tx": "**Malignant hyperthermia pharmacogenetic pathology** is an autosomal dominant skeletal muscle channelopathy triggered by volatile inhalational anaesthetics (sevoflurane, desflurane, isoflurane, halothane) or the depolarizing relaxant succinylcholine. Mutations in the skeletal ryanodine receptor gene (RYR1 on chromosome 19q13.1) or L-type voltage-gated calcium channel (CACNA1S) disrupt calcium channel regulation, causing massive uninhibited sarcoplasmic calcium release into the myoplasm.",
+            "say": "Malignant hyperthermia pharmacogenetic pathology is an autosomal dominant skeletal muscle channelopathy triggered by volatile inhalational anaesthetics (sevoflurane, desflurane, isoflurane, halothane) or the depolarizing relaxant succinylcholine. Mutations in the skeletal ryanodine receptor gene (RYR1 on chromosome 19q13.1) or L-type voltage-gated calcium channel (CACNA1S) disrupt calcium channel regulation, causing massive uninhibited sarcoplasmic calcium release into the myoplasm.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/kb/media/general-anaesthesia-inhaled-iv-mh-fig1.webp",
+                "alt": "Sarcoplasmic reticulum ryanodine receptor mutation and myoplasmic calcium surge in malignant hyperthermia",
+                "caption": "Sarcoplasmic reticulum ryanodine receptor mutation and myoplasmic calcium surge in malignant hyperthermia"
+            }
+        },
+        {
+            "title": "Hypermetabolic Clinical Cascade",
+            "tx": "**Hypermetabolic crisis of malignant hyperthermia** erupts as sustained intracellular calcium floods contractile myofibrils, driving continuous actin-myosin cross-bridging and overwhelming sarcoplasmic ATP pumps. Massive consumption of adenosine triphosphate generates extreme cellular hypermetabolism, manifesting as soaring carbon dioxide production (EtCO2 doubling unexpectedly), profound mixed metabolic-respiratory acidosis, generalized skeletal muscle rigidity, and secondary hyperpyrexia rising 1 to 2 degrees Celsius every five minutes.",
+            "say": "Hypermetabolic crisis of malignant hyperthermia erupts as sustained intracellular calcium floods contractile myofibrils, driving continuous actin-myosin cross-bridging and overwhelming sarcoplasmic ATP pumps. Massive consumption of adenosine triphosphate generates extreme cellular hypermetabolism, manifesting as soaring carbon dioxide production (EtCO2 doubling unexpectedly), profound mixed metabolic-respiratory acidosis, generalized skeletal muscle rigidity, and secondary hyperpyrexia rising 1 to 2 degrees Celsius every five minutes.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Physiological Manifestation",
+                    "Earliest vs Late Sign",
+                    "Biochemical Pathophysiology",
+                    "Diagnostic Confirmation"
+                ],
+                "rows": [
+                    [
+                        "End-Tidal CO2 Surge (>70 mmHg)",
+                        "Earliest, most sensitive herald sign",
+                        "Massive cellular aerobic/anaerobic respiration",
+                        "Refractory to doubling minute ventilation"
+                    ],
+                    [
+                        "Sinus Tachycardia and Tachypnoea",
+                        "Early clinical compensatory sign",
+                        "Sympathetic activation from hypercapnia",
+                        "Earliest physical sign in spontaneously breathing patients"
+                    ],
+                    [
+                        "Masseter Muscle Spasm",
+                        "Early post-succinylcholine sign",
+                        "Sustained jaw rigidity ('jaws of steel')",
+                        "Prevents mouth opening for laryngoscopy"
+                    ],
+                    [
+                        "Extreme Hyperthermia (>40C)",
+                        "Late, confirmatory manifestation",
+                        "Excessive exothermic ATP hydrolysis in muscle",
+                        "Core temperature spikes rapidly if untreated"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Masseter Muscle Spasm Herald Sign",
+            "tx": "**Masseter muscle spasm jaws of steel** describes acute contracture of the temporomandibular masseter muscles preventing mouth opening immediately following intravenous succinylcholine. While mild increased jaw stiffness occurs occasionally in normal children, complete inability to open the mouth signifies masseter spasm, serving as a critical herald warning that carries a 50 percent risk of evolving into fulminant malignant hyperthermia.",
+            "say": "Masseter muscle spasm jaws of steel describes acute contracture of the temporomandibular masseter muscles preventing mouth opening immediately following intravenous succinylcholine. While mild increased jaw stiffness occurs occasionally in normal children, complete inability to open the mouth signifies masseter spasm, serving as a critical herald warning that carries a 50 percent risk of evolving into fulminant malignant hyperthermia.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Normal Incomplete Relaxation",
+                    "points": [
+                        "Mild resistance to manual jaw depression",
+                        "Mouth can be opened with gentle upward force",
+                        "Normal end-tidal carbon dioxide and heart rate"
+                    ]
+                },
+                "right": {
+                    "title": "Pathological Masseter Spasm",
+                    "points": [
+                        "Impenetrable trismus and jaw rigidity ('jaws of steel')",
+                        "Cannot open mouth even with forceful laryngoscopy attempts",
+                        "Demands halting elective surgery and monitoring for MH"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Dantrolene Sodium Emergency Protocol",
+            "tx": "**Dantrolene sodium specific antidote mechanism** binds directly to the RYR1 ryanodine receptor on the sarcoplasmic reticulum, blocking calcium release channels and halting uninhibited calcium efflux into the myoplasm. The initial intravenous dose is 2.5 milligrams per kilogram administered as a rapid push, repeated every 5 to 10 minutes until hypercapnia, muscle rigidity, and tachycardia subside, up to a maximal cumulative dose of 10 mg/kg.",
+            "say": "Dantrolene sodium specific antidote mechanism binds directly to the RYR1 ryanodine receptor on the sarcoplasmic reticulum, blocking calcium release channels and halting uninhibited calcium efflux into the myoplasm. The initial intravenous dose is 2.5 milligrams per kilogram administered as a rapid push, repeated every 5 to 10 minutes until hypercapnia, muscle rigidity, and tachycardia subside, up to a maximal cumulative dose of 10 mg/kg.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Discontinue all volatile agents and succinylcholine immediately"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Hyperventilate with 100% O2 at maximal fresh gas flows (>10 L/min)"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Administer IV dantrolene sodium 2.5 mg/kg push via large-bore IV"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Repeat 2.5 mg/kg boluses every 5-10 minutes until EtCO2 normalizes"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Ryanodex Formulations and Preparation",
+            "tx": "**Dantrolene preparation engineering advances** contrast classical dantrolene with modern nanocrystalline Ryanodex. Classical dantrolene (Dantrium) comes in 20-milligram glass vials containing 3 grams of mannitol; each vial requires reconstitution with 60 milliliters of sterile preservative-free water, requiring 36 vials and up to 20 minutes of vigorous shaking. Modern Ryanodex contains 250 milligrams of nanocrystalline suspension per vial, reconstituting in under one minute with 5 mL of water.",
+            "say": "Dantrolene preparation engineering advances contrast classical dantrolene with modern nanocrystalline Ryanodex. Classical dantrolene (Dantrium) comes in 20-milligram glass vials containing 3 grams of mannitol; each vial requires reconstitution with 60 milliliters of sterile preservative-free water, requiring 36 vials and up to 20 minutes of vigorous shaking. Modern Ryanodex contains 250 milligrams of nanocrystalline suspension per vial, reconstituting in under one minute with 5 mL of water.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Formulation Characteristic",
+                    "Classical Dantrolene (Dantrium)",
+                    "Modern Nanocrystalline Ryanodex"
+                ],
+                "rows": [
+                    [
+                        "Vial Drug Content",
+                        "20 milligrams dantrolene per vial",
+                        "250 milligrams dantrolene per vial"
+                    ],
+                    [
+                        "Reconstitution Fluid Volume",
+                        "60 milliliters sterile water per vial",
+                        "5 milliliters sterile water per vial"
+                    ],
+                    [
+                        "Vials Needed for 70-kg Patient (2.5 mg/kg)",
+                        "9 to 10 vials (total 600 mL fluid)",
+                        "Single vial (total 5 mL fluid)"
+                    ],
+                    [
+                        "Reconstitution Time Required",
+                        "15 to 20 minutes of vigorous shaking",
+                        "Under 60 seconds with simple inversion"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Active Cooling and Supportive Care",
+            "tx": "**Supportive critical care in malignant hyperthermia** mandates active external and internal physical cooling: infuse iced 0.9 percent saline intravenously (avoid potassium-containing Ringer lactate), apply surface ice packs over groin, axillae, and neck, and perform cold gastric or bladder lavage, terminating active cooling once core temperature drops to 38.5 degrees Celsius to prevent overshoot hypothermia. Serial blood gases monitor for hyperkalaemia and metabolic acidosis.",
+            "say": "Supportive critical care in malignant hyperthermia mandates active external and internal physical cooling: infuse iced 0.9 percent saline intravenously (avoid potassium-containing Ringer lactate), apply surface ice packs over groin, axillae, and neck, and perform cold gastric or bladder lavage, terminating active cooling once core temperature drops to 38.5 degrees Celsius to prevent overshoot hypothermia. Serial blood gases monitor for hyperkalaemia and metabolic acidosis.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Active Cooling Interventions",
+                    "points": [
+                        "Infuse chilled intravenous normal saline (1,000 mL at 4C)",
+                        "Apply ice bags to femoral, axillary, and carotid triangles",
+                        "Halt active cooling once core temperature drops to 38.5C"
+                    ]
+                },
+                "right": {
+                    "title": "Hyperkalaemia Management",
+                    "points": [
+                        "Administer intravenous calcium chloride (10 mg/kg) to stabilize myocardium",
+                        "Infuse 50 mL of 50% dextrose with 10 units regular insulin",
+                        "Administer sodium bicarbonate (1-2 mEq/kg) for severe acidosis"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Aspiration Pneumonitis and Mendelson Syndrome",
+            "tx": "**Chemical aspiration pneumonitis pathogenesis** (Mendelson syndrome) occurs when acidic gastric juice is inhaled into the bronchial tree, destroying surfactant-producing type II pneumocytes and disrupting alveolar-capillary endothelial membranes within minutes. Treatment relies on immediate endotracheal suctioning before positive-pressure ventilation, supportive mechanical ventilation with PEEP, and bronchodilators; prophylactic antibiotics and high-dose steroids are strictly ineffective and unindicated.",
+            "say": "Chemical aspiration pneumonitis pathogenesis (Mendelson syndrome) occurs when acidic gastric juice is inhaled into the bronchial tree, destroying surfactant-producing type II pneumocytes and disrupting alveolar-capillary endothelial membranes within minutes. Treatment relies on immediate endotracheal suctioning before positive-pressure ventilation, supportive mechanical ventilation with PEEP, and bronchodilators; prophylactic antibiotics and high-dose steroids are strictly ineffective and unindicated.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Clinical Dimension",
+                    "Chemical Pneumonitis (Mendelson)",
+                    "Bacterial Aspiration Pneumonia"
+                ],
+                "rows": [
+                    [
+                        "Underlying Etiology",
+                        "Direct chemical burn by sterile gastric acid (pH <2.5)",
+                        "Inhalation of colonized oropharyngeal anaerobic bacteria"
+                    ],
+                    [
+                        "Onset Latency",
+                        "Immediate onset (within 1 to 2 hours of aspiration)",
+                        "Delayed onset (develops over 48 to 72 hours)"
+                    ],
+                    [
+                        "Initial Clinical Presentation",
+                        "Severe bronchospasm, cyanosis, pulmonary edema",
+                        "Purulent sputum, fever, new focal pulmonary infiltrate"
+                    ],
+                    [
+                        "Role of Antibiotics",
+                        "Zero role initially; antibiotics unindicated",
+                        "Mandated targeted broad-spectrum antibiotic coverage"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Acute Intraoperative Laryngospasm",
+            "tx": "**Acute laryngospasm emergency algorithm** reflects reflex adduction of laryngeal vocal cords and aryepiglottic folds mediated by the superior laryngeal nerve during light anaesthesia. Immediate management consists of removing surgical stimulation, applying jaw thrust with firm inward digital pressure at the Larson notch (laryngospasm notch behind the earlobe), delivering 100 percent oxygen via continuous positive airway pressure, and administering succinylcholine (0.1 to 0.2 mg/kg IV).",
+            "say": "Acute laryngospasm emergency algorithm reflects reflex adduction of laryngeal vocal cords and aryepiglottic folds mediated by the superior laryngeal nerve during light anaesthesia. Immediate management consists of removing surgical stimulation, applying jaw thrust with firm inward digital pressure at the Larson notch (laryngospasm notch behind the earlobe), delivering 100 percent oxygen via continuous positive airway pressure, and administering succinylcholine (0.1 to 0.2 mg/kg IV).",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Identify inspiratory stridor or silent chest wall rocking"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Cease surgical stimulation and clear pharyngeal secretions"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Apply Larson notch bilateral digital pressure with CPAP 100% O2"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Inject low-dose IV succinylcholine (0.2 mg/kg) if spasm persists"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}
