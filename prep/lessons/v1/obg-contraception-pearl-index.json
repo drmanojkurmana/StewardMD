@@ -1,0 +1,223 @@
+{
+ "key": "obg-contraception-pearl-index",
+ "v": 1,
+ "module": "obg-contraception",
+ "subject": "obstetrics-gynaecology",
+ "title": "Pearl Index and Combined Hormonal Contraception",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The universally accepted statistical metric for evaluating contraceptive effectiveness is the **Pearl index formula**. It quantifies the number of accidental pregnancies per one hundred woman-years of exposure. Calculated as total unplanned pregnancies multiplied by twelve hundred and divided by total months of exposure, lower values indicate superior contraceptive efficacy.",
+   "say": "The Pearl index calculates accidental pregnancies per hundred woman-years to measure contraceptive efficacy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Contraceptive Method",
+     "Perfect Use Pearl Index",
+     "Typical Use Pearl Index"
+    ],
+    "rows": [
+     [
+      "Subdermal etonogestrel implant",
+      "0.05",
+      "0.05"
+     ],
+     [
+      "Levonorgestrel intrauterine system",
+      "0.1",
+      "0.2"
+     ],
+     [
+      "Copper T 380A",
+      "0.6",
+      "0.8"
+     ],
+     [
+      "Combined oral contraceptive pill",
+      "0.3",
+      "7.0"
+     ],
+     [
+      "Male latex condom",
+      "2.0",
+      "13.0"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Standard oral formulations combine an estrogen and a progestogen to create the **combined oral contraceptive pill**. Most modern preparations contain twenty to thirty-five micrograms of ethinylestradiol paired with synthetic progestins like levonorgestrel, desogestrel, or drospirenone. Packets supply twenty-one active hormonal tablets followed by seven hormone-free placebo pills.",
+   "say": "Combined pills pair ethinylestradiol with a synthetic progestin across a twenty-eight day cycle.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-con-combined-pill.webp",
+    "alt": "Combined oral contraceptive pill pack and target organs.",
+    "caption": "Combined oral contraceptive pill pack and reproductive target organ mechanisms. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The primary pharmacological mechanism of combined hormonal pills is **ovulation suppression**. Ethinylestradiol exerts continuous negative feedback on the anterior pituitary gland, suppressing follicle-stimulating hormone and arresting follicular development. Concurrently, the progestogenic component blunts the mid-cycle luteinizing hormone surge, completely preventing follicular rupture and ovum release.",
+   "say": "Combined pills primarily prevent pregnancy by suppressing pituitary FSH and LH to arrest ovulation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Estrogenic Actions",
+     "points": [
+      "Suppresses pituitary FSH release",
+      "Prevents dominant follicle recruitment",
+      "Provides endometrial cycle stability"
+     ]
+    },
+    "right": {
+     "title": "Progestogenic Actions",
+     "points": [
+      "Abolishes mid-cycle LH surge",
+      "Thickens cervical mucus against sperm",
+      "Induces atrophic, unreceptive endometrium"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Complementary peripheral actions include creating a thick, scanty, and cellular **cervical mucus barrier**. High progestin levels prevent the physiological mid-cycle thinning and spinnbarkeit of mucus, impeding sperm penetration into the uterine cavity. Furthermore, persistent progestin exposure induces premature secretory exhaustion, leaving an atrophic endometrium hostile to blastocyst implantation.",
+   "say": "Progestin thickens cervical mucus to physically block sperm ingress and induces an unreceptive endometrium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Biological Barrier",
+     "Physiological State",
+     "Hormonal Contraceptive State"
+    ],
+    "rows": [
+     [
+      "Cervical mucus",
+      "Watery, acellular, ferns on drying",
+      "Thick, viscous, cellular, no ferning"
+     ],
+     [
+      "Endometrium",
+      "Proliferative then secretory thickening",
+      "Exhausted, thin, atrophic glands"
+     ],
+     [
+      "Tubal motility",
+      "Ciliary rhythmic forward sweep",
+      "Altered peristalsis slowing gamete transit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Long-term epidemiological studies reveal profound non-contraceptive benefits, including **ovarian and endometrial cancer reduction**. Taking combined pills for five years reduces lifetime ovarian cancer risk by fifty percent, an oncological protection that persists for over thirty years after stopping. Significant risk reductions also occur for endometrial adenocarcinoma and colorectal carcinoma.",
+   "say": "Combined pills halve the lifetime risk of ovarian cancer and significantly reduce endometrial cancer.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Malignancy Protection",
+     "points": [
+      "50 percent drop in epithelial ovarian cancer",
+      "50 percent drop in endometrial adenocarcinoma",
+      "Protective effect endures for decades"
+     ]
+    },
+    "right": {
+     "title": "Benign Symptom Relief",
+     "points": [
+      "Substantial reduction in dysmenorrhoea",
+      "Decreased risk of benign fibrocystic breast disease",
+      "Control of menorrhagia and iron deficiency anaemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most important serious clinical adverse effect associated with estrogen-containing pills is **venous thromboembolism**. Ethinylestradiol stimulates hepatic synthesis of clotting factors two, seven, nine, and ten while decreasing antithrombin three and protein S. The baseline risk of three per ten thousand woman-years increases three- to fourfold in pill users.",
+   "say": "Ethinylestradiol elevates hepatic clotting factor synthesis, increasing venous thromboembolism risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical State",
+     "VTE Incidence per 10,000 Woman-Years",
+     "Thrombotic Risk"
+    ],
+    "rows": [
+     [
+      "Non-pregnant, non-user",
+      "1 to 5",
+      "Baseline baseline risk"
+     ],
+     [
+      "COCP user (levonorgestrel)",
+      "5 to 7",
+      "Mildly elevated relative risk"
+     ],
+     [
+      "COCP user (drospirenone/desogestrel)",
+      "9 to 12",
+      "Moderately elevated relative risk"
+     ],
+     [
+      "Normal pregnancy",
+      "10 to 20",
+      "Markedly elevated physiological risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Absolute contraindications categorized as WHO category four include women thirty-five years or older who are **heavy cigarette smokers**. Smoking fifteen or more cigarettes daily combined with estrogen multiplies the risk of myocardial infarction, thrombotic stroke, and fatal vascular collapse, rendering combined hormonal methods unacceptable in this patient population.",
+   "say": "Smoking fifteen or more cigarettes daily at age thirty-five or older is an absolute contraindication to combined pills.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Major Vascular Hazards",
+     "points": [
+      "Myocardial infarction and coronary spasm",
+      "Ischaemic and haemorrhagic cerebrovascular stroke",
+      "Fatal pulmonary embolism"
+     ]
+    },
+    "right": {
+     "title": "Recommended Alternatives",
+     "points": [
+      "Progestogen-only pills or implants",
+      "Levonorgestrel intrauterine system",
+      "Copper intrauterine device"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Women presenting with **migraine with aura** face an unacceptable risk of ischaemic stroke if prescribed combined estrogen contraceptives. The cortical spreading depression of aura combines with estrogen-induced hypercoagulability to trigger cerebral infarction. Progestogen-only preparations or intrauterine devices must be selected for migraineurs with neurological focal deficits.",
+   "say": "Migraine with neurological aura is an absolute contraindication to combined hormonal contraceptives due to stroke risk.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Headache Type",
+     "WHO MEC for Combined Pill",
+     "WHO MEC for Progestin Only"
+    ],
+    "rows": [
+     [
+      "Migraine with aura at any age",
+      "Category 4 (Unacceptable risk)",
+      "Category 2 (Advantages outweigh risks)"
+     ],
+     [
+      "Migraine without aura under 35",
+      "Category 2 (Can initiate)",
+      "Category 1 (No restriction)"
+     ],
+     [
+      "Migraine without aura age 35 or older",
+      "Category 3 (Risks outweigh benefits)",
+      "Category 1 (No restriction)"
+     ]
+    ]
+   }
+  }
+ ]
+}
