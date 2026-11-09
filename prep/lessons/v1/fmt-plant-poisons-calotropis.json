@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-plant-poisons-calotropis",
+ "subject": "forensic-medicine",
+ "module": "fmt-plant-poisons",
+ "title": "Calotropis, Marking Nut, Snake Bite and the Big Four",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Calotropis, the madar plant",
+   "tx": "**Calotropis**, akdo or madar, grows wild throughout India, gigantea with purple flowers and procera with white. Leaves and stem when incised yield a thick acrid milky juice holding uscharin, calotoxin, calactin and the glycoside calotropin, plus trypsin. On skin it reddens and vesicates; swallowed, it irritates the gut violently. The juice is a traditional abortifacient applied to the cervix and an ingredient of criminal abortion pastes and sticks, which is where most examiners meet it.",
+   "say": "Milky madar juice blisters skin, inflames gut and serves abortionists, with calotropin as its glycoside heart.",
+   "vis": {"kind": "table", "cols": ["Calotropis feature", "Detail", "Forensic use"], "rows": [["Juice", "Thick, acrid, milky", "Skin vesication"], ["Principles", "Calotoxin, calotropin, uscharin", "Cardiac glycoside kin"], ["Criminal use", "Abortifacient application", "Abortion stick ingredient"], ["Wild growth", "Throughout India", "Easily available poison"]]}
+  },
+  {
+   "title": "Marking nut, Semecarpus anacardium",
+   "tx": "**Semecarpus anacardium**, the marking nut or bhilawa, is a black heart shaped nut with a thick cellular pericarp holding an irritant juice, brownish and oily, turning black in air, with semecarpol and fifteen to seventeen percent bhilawanol. Applied to skin it raises a painful blister of acrid serum that eczematises neighbouring skin and itches, later ulcerating, and the lesion resembles a bruise. Five to ten grams kill in twelve to twenty four hours when swallowed with severe gut irritation.",
+   "say": "Black juice that blisters like a bruise is marking nut, weaponised for false assault charges and abortion alike.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Nut juice applied to skin"}, {"id": "b", "label": "Painful acrid blister rises"}, {"id": "c", "label": "Lesion imitates a bruise"}, {"id": "d", "label": "False charge supported or refuted"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Marking nut and fabricated injury",
+   "tx": "The bruise imitation is the point in **marking nut fabricated lesions**. The juice is applied to skin to manufacture a bruise supporting a false charge of assault, thrown on the body to injure, introduced into the vagina as punishment for alleged infidelity, applied to the cervical os for criminal abortion, and used by malingerers to produce ophthalmia. A true bruise shows colour evolution and tenderness of extravasated blood; the nut blister shows acrid serum, itching, eczema at the edges and no blood in the tissue.",
+   "say": "Itching blister with eczema and no extravasated blood unmasks marking nut juice pretending to be a bruise.",
+   "vis": {"kind": "compare", "left": {"title": "Marking nut lesion", "points": ["Painful blister, acrid serum", "Itching and edge eczema", "No blood in tissues", "Black juice staining possible"]}, "right": {"title": "True bruise", "points": ["Flat colour change, no blister", "Tender extravasated blood", "Colour parade over days", "No itching or eczema"]}}
+  },
+  {
+   "title": "Poisonous versus non poisonous snakes",
+   "tx": "India has about two hundred sixteen snake species, fifty two poisonous, and five dangerous to man. **Poisonous snakes** are recognised by small head scales in vipers or large ones with a pit, a third labial touching eye and nasal shield in cobra and coral snakes, or enlarged central back scales with four infralabials in kraits; belly scales cover the entire breadth, fangs are hollow like hypodermic needles, the tail is compressed and habits are usually nocturnal. Non poisonous snakes reverse each trait.",
+   "say": "Hollow fangs, full width belly scales and a compressed tail mark the poisonous snake in the standard table.",
+   "vis": {"kind": "table", "cols": ["Trait", "Poisonous snake", "Non poisonous snake"], "rows": [["Fangs", "Hollow, hypodermic like", "Short and solid"], ["Teeth", "Two long fangs", "Several small teeth"], ["Belly scales", "Cover entire breadth", "Do not cover breadth"], ["Habits", "Usually nocturnal", "Not characteristically"]]}
+  },
+  {
+   "title": "The big four of India",
+   "tx": "The **big four** dangerously poisonous snakes of India are the common cobra, the common krait, Russell's viper and the saw scaled viper, with the king cobra of the Western Ghats a fifth. Common krait is the most common poisonous snake and is seen all over India; banded krait favours the east. Polyvalent antivenom is raised in horses against exactly these four venoms, which is why identifying the quartet matters more than naming any other Indian snake.",
+   "say": "Cobra, krait, Russell's viper and saw scaled viper are the big four, and Indian antivenom is built against them alone.",
+   "vis": {"kind": "compare", "left": {"title": "Elapids of the four", "points": ["Common cobra, hooded", "Common krait, steel blue bands", "Neurotoxic venoms", "Ptosis is the herald sign"]}, "right": {"title": "Vipers of the four", "points": ["Russell's viper, diamond rows", "Saw scaled viper, bird foot mark", "Haemotoxic venoms", "Incoagulable blood is the herald"]}}
+  },
+  {
+   "title": "Cobra identification",
+   "tx": "The **common cobra**, nag or kala samp, grows to about two metres with a dilatable neck forming a hood that often bears a double or single spectacle mark, darker speckled skin around it, two black spots and three black bands under the hood, and double caudal scales. Head scales are large and the third labial touches eye and nasal shield; maxillary bone extends beyond the palate with fangs followed by one or two small teeth. A dead cobra shows no hood, the neck having stiffened.",
+   "say": "Spectacle hood, third labial to eye and nasal, and two metres of brown snake identify the common cobra.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Hood with spectacle mark"}, {"id": "b", "label": "Third labial touches eye, nasal"}, {"id": "c", "label": "Fangs plus one or two teeth"}, {"id": "d", "label": "Dead snake shows no hood"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Common krait, the nocturnal killer",
+   "tx": "The **common krait**, karayat or manyar, is steel blue and shining, one to one and a half metres, with single or double white bands across the back indistinct toward the head, a creamy white belly, large head shields, four shields either side of the lower lip, a round tail and, constant through all kraits, large hexagonal scales in the central row down the back. It is nocturnal, bites sleeping victims on the floor, and its bite is often painless with no local swelling.",
+   "say": "Steel blue bands, hexagonal back scales and painless night bites on floor sleepers are the common krait's calling card.",
+   "vis": {"kind": "table", "cols": ["Krait trait", "Finding", "Clinical echo"], "rows": [["Colour", "Steel blue, white bands", "Nocturnal species"], ["Back scales", "Large hexagonal central row", "Constant krait key"], ["Bite site", "Often trunk or limbs at night", "Minimal local signs"], ["Venom effect", "Neurotoxic, drowsiness intense", "Abdominal pain may lead"]]}
+  },
+  {
+   "title": "Russell's viper and saw scaled viper",
+   "tx": "**Russell's viper**, daboia or khadchitro, has a flat triangular head with a white V mark pointing forwards, three rows of diamond shaped dark spots ringed white along the back, broad entire belly plates, small head scales, a tail shield divided in two rows, and a loud continuous hiss. The **saw scaled viper**, afai, is half a metre, brown, with wavy white flank lines, diamond areas between them and a bird's footprint mark on the triangular head.",
+   "say": "A forward V on a triangular head with three diamond rows is Russell's, and a bird's footprint at half a metre is the saw scaled.",
+   "vis": {"kind": "compare", "left": {"title": "Russell's viper", "points": ["Triangular head, V mark forward", "Three rows of diamond spots", "Loud continuous hiss", "Divided tail shield"]}, "right": {"title": "Saw scaled viper", "points": ["Half a metre, brown", "Wavy white flank lines", "Bird footprint head mark", "Entire tail shields"]}}
+  },
+  {
+   "title": "Sea snakes and pit vipers",
+   "tx": "**Sea snakes**, twenty types in Indian waters and all poisonous, have small eyes, nostrils on top of the head, broad ventrals, small tuberculated dorsal scales and paddle shaped flat tails, and they seldom bite. **Pit vipers** carry a heat sensing pit between nostril and eye; the hump nosed pit viper of the Western Ghats is the regional danger. Rat snake, the common look alike of fields and houses, is not poisonous and kills by constriction, not venom.",
+   "say": "Paddle tails at sea and a pit before the eye in forests mark two more poisonous families beyond the big four.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Paddle flat tail, top nostrils"}, {"id": "b", "label": "Sea snake, seldom bites"}, {"id": "c", "label": "Pit between nostril and eye"}, {"id": "d", "label": "Pit viper, Western Ghats risk"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}
