@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "module": "sur-shock-transfusion",
+ "subject": "surgery",
+ "title": "Trauma-Induced Coagulopathy, Tranexamic Acid, and Compartment Syndrome",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Severe mechanical injury and tissue hypoperfusion trigger **trauma-induced coagulopathy**, an early endogenous disorder distinct from simple iatrogenic dilution. Shock damages endothelial glycocalyx layers and activates protein C, which inactivates factors five and eight while disinhibiting tissue plasminogen activator. The resulting state promotes severe hyperfibrinolysis and platelet dysfunction, which is markedly exacerbated by the lethal triad of hypothermia, metabolic acidosis, and fluid dilution.",
+   "say": "Trauma-induced coagulopathy develops within minutes of severe injury driven by shock and hypoperfusion. Endothelial damage activates protein C, suppressing clotting factors and accelerating fibrinolysis before dilution even occurs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "shock",
+      "label": "Tissue hypoperfusion and cellular ischaemia"
+     },
+     {
+      "id": "glyco",
+      "label": "Endothelial injury and thrombomodulin upregulation"
+     },
+     {
+      "id": "apc",
+      "label": "Activated protein C suppresses FVa and FVIIIa"
+     },
+     {
+      "id": "lysis",
+      "label": "Systemic hyperfibrinolysis and coagulopathic bleeding"
+     }
+    ],
+    "edges": [
+     [
+      "shock",
+      "glyco"
+     ],
+     [
+      "glyco",
+      "apc"
+     ],
+     [
+      "apc",
+      "lysis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rapid goal-directed assessment relies on **viscoelastic haemostatic assays** such as rotational thromboelastometry and thromboelastography rather than conventional coagulation panels. Conventional tests like prothrombin time reflect only initial clotting factor levels in isolation. Viscoelastic testing evaluates the entire dynamic process of clot initiation, kinetics of formation, maximum clot strength, and subsequent fibrinolysis within twenty minutes, allowing targeted transfusion of platelets, plasma, or fibrinogen concentrates.",
+   "say": "Viscoelastic assays provide rapid whole-blood evaluations of clot initiation, strength, and lysis. Unlike standard laboratory panels, they guide targeted blood product administration in real time during ongoing haemorrhage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Assay Parameter",
+     "ROTEM Value",
+     "Physiological Meaning",
+     "Targeted Blood Component"
+    ],
+    "rows": [
+     [
+      "Clotting Time",
+      "CT prolonged",
+      "Thrombin generation delay",
+      "Fresh Frozen Plasma or PCC"
+     ],
+     [
+      "Clot Kinetics",
+      "CFT prolonged / alpha low",
+      "Fibrin meshwork formation",
+      "Fibrinogen or Cryoprecipitate"
+     ],
+     [
+      "Maximum Firmness",
+      "MCF reduced",
+      "Platelet and fibrin structure",
+      "Platelet Concentrate or Cryo"
+     ],
+     [
+      "Clot Lysis Index",
+      "LI30 under 85%",
+      "Accelerated hyperfibrinolysis",
+      "Tranexamic Acid"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The antifibrinolytic agent **tranexamic acid** serves as a cornerstone pharmacological intervention in severe traumatic haemorrhage. Tranexamic acid is a synthetic lysine analogue that reversibly occupies lysine-binding sites on plasminogen molecules. By blocking plasminogen binding to fibrin surfaces, it prevents plasmin activation and halts premature enzymatic clot degradation, stabilizing newly formed haemostatic plugs without triggering uncontrolled systemic thrombosis.",
+   "say": "Tranexamic acid competitively blocks lysine-binding sites on plasminogen, preventing its activation into plasmin. This action preserves newly formed fibrin clots and halts pathological hyperfibrinolysis in bleeding trauma patients.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-tranexamic-acid.webp",
+    "alt": "Mechanism of plasminogen lysine-binding blockade by tranexamic acid.",
+    "caption": "Tranexamic acid blockade of plasminogen activation preventing fibrinolysis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Clinical application of tranexamic acid is guided by the **CRASH-2 trial**, which demonstrated a significant reduction in all-cause mortality among bleeding trauma patients. The standard protocol prescribes one gram given intravenously over ten minutes, followed by an intravenous infusion of one gram over eight hours. Benefit occurs only when administered within three hours of injury; delayed treatment beyond three hours increases mortality due to vascular thrombosis.",
+   "say": "The landmark CRASH-2 trial proved that tranexamic acid reduces mortality when administered within three hours of injury. Giving this medication after three hours is contraindicated because it increases vascular thrombosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Administration Within 3 Hours",
+     "points": [
+      "Significantly reduces all-cause mortality",
+      "Reduces risk of death from bleeding",
+      "Halts early hyperfibrinolytic cascades",
+      "One gram bolus followed by one gram infusion"
+     ]
+    },
+    "right": {
+     "title": "Administration After 3 Hours",
+     "points": [
+      "No survival benefit demonstrated",
+      "Significantly increases mortality risk",
+      "Enhances microvascular thrombotic risk",
+      "Strictly contraindicated in trauma protocols"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Extremity trauma and prolonged reperfusion often lead to **acute compartment syndrome**, where pressure within an inelastic osteofascial compartment rises above capillary perfusion pressure. Progressive muscular swelling compresses thin-walled venules, impeding venous outflow and elevating capillary hydrostatic pressures. This triggers an unrelenting cycle of tissue ischaemia and progressive oedema that culminates in anoxic necrosis of peripheral nerves and skeletal muscle fibers.",
+   "say": "Acute compartment syndrome arises when swelling inside a closed fascial envelope exceeds capillary perfusion pressure. Impaired venous return elevates capillary pressure, worsening intramuscular oedema until irreversible neuromuscular necrosis occurs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "trauma",
+      "label": "Fracture or reperfusion injury within closed compartment"
+     },
+     {
+      "id": "press",
+      "label": "Elevated intracompartmental pressure collapses venules"
+     },
+     {
+      "id": "ischaem",
+      "label": "Capillary perfusion ceases causing tissue ischaemia"
+     },
+     {
+      "id": "necrosis",
+      "label": "Irreversible muscle and nerve necrosis within 6 hours"
+     }
+    ],
+    "edges": [
+     [
+      "trauma",
+      "press"
+     ],
+     [
+      "press",
+      "ischaem"
+     ],
+     [
+      "ischaem",
+      "necrosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Early clinical diagnosis relies on detecting severe **pain out of proportion** to the initial skeletal injury, which is markedly exacerbated by passive muscle stretching. Palpation reveals a tense, woody compartment. While paresthesias reflect early ischaemia of passing sensory nerves, loss of distal arterial pulses is an exceedingly late finding signifying established tissue gangrene. Objective measurement showing a delta pressure of thirty millimetres of mercury or less confirms the diagnosis.",
+   "say": "Severe pain out of proportion to injury exacerbated by passive muscle stretch is the earliest and most sensitive sign of compartment syndrome. Loss of pulses is a late sign indicating established necrosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Sign",
+     "Timing",
+     "Clinical Presentation",
+     "Diagnostic Value"
+    ],
+    "rows": [
+     [
+      "Pain on Passive Stretch",
+      "Early",
+      "Exquisite pain when stretching compartment muscles",
+      "Most sensitive early physical sign"
+     ],
+     [
+      "Tense Swelling",
+      "Early",
+      "Woody, firm, non-yielding compartment",
+      "Indicates high compartment pressure"
+     ],
+     [
+      "Paraesthesia",
+      "Intermediate",
+      "Numbness in peripheral nerve distribution",
+      "Signals impending axonal ischaemia"
+     ],
+     [
+      "Pulselessness",
+      "Late",
+      "Absent peripheral arterial Doppler signals",
+      "Indicates irreversible gangrene"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive management of established compartment syndrome is **emergency fasciotomy** to decompress all involved osteofascial compartments. In the lower leg, full decompression mandates opening all four compartments: anterior, lateral, superficial posterior, and deep posterior, typically achieved through two generous longitudinal incisions. The overlying skin and fascia are left widely open, followed by delayed closure or skin grafting once soft tissue swelling subsides.",
+   "say": "Emergency fasciotomy provides immediate decompression of elevated compartmental pressure. In the leg, two longitudinal incisions must release all four muscular compartments to avoid permanent disability or amputation.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/surg-prc-wound-debridement-and-toilet.webp",
+    "alt": "Surgical fasciotomy decompressing traumatic compartment syndrome.",
+    "caption": "Extremity fasciotomy and wound debridement restoring tissue perfusion. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Unrelieved muscle ischaemia leads to irreversible **Volkmann ischaemic contracture**, causing permanent clawing and functional loss of the extremity. Dead skeletal muscle is gradually replaced by dense, unyielding fibrous scar tissue that contracts progressively over months. Concurrently, extensive myocyte necrosis releases intracellular contents, precipitating rhabdomyolysis, dangerous hyperkalaemia, metabolic acidosis, and acute renal failure secondary to renal tubular myoglobin precipitation.",
+   "say": "Neglected compartment syndrome leads to Volkmann ischaemic contracture, replacing necrotic muscle with unyielding fibrous scar. Massive myoglobin release causes rhabdomyolysis and life-threatening acute tubular necrosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Timely Fasciotomy (<6 Hours)",
+     "points": [
+      "Complete recovery of muscle viability",
+      "Preservation of sensation and motor power",
+      "Prevention of myoglobinuric renal injury",
+      "Low risk of permanent limb contracture"
+     ]
+    },
+    "right": {
+     "title": "Delayed Decompression (>12 Hours)",
+     "points": [
+      "Irreversible myonecrosis and nerve death",
+      "Volkmann ischaemic flexion contracture",
+      "High risk of severe systemic sepsis",
+      "May necessitate primary limb amputation"
+     ]
+    }
+   }
+  }
+ ]
+}
