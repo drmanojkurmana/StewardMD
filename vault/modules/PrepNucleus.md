@@ -1858,9 +1858,25 @@ Owner: "features that make PrepNucleus unique, Gen Z oriented, build all". Decis
 - **Quick fire:** one question (a due one when the draw has one). Deep link `PREP.open({ play: "quick" | "spot" | "feed" |
   "focus" })` for widgets, watch and notifications; the native widget and watch faces themselves are NOT changed yet
   (Swift/Kotlin, needs a Mac build).
-- **Voice mode:** reads question and options (Capacitor TextToSpeech, else speechSynthesis), listens through
-  `SMD_NATIVE.transcribe` only when `Capacitor.Plugins.SpeechRecognition` exists (it throws otherwise), else Web Speech;
-  `parseVoice` takes letters, ordinals, option words, skip/repeat/stop. Two misses on a question: waits for a tap.
+- **Voice mode:** all speech goes through `window.PREP_VOICE` (Phonon 31M, as the lessons) since `prep131`: `unlock()`
+  synchronously in the Play row tap, a first download shows the `.pn-vdl` card ("One time, 65 MB") in the voice bar and
+  reading waits for it, a saved voice loads quietly; missing/unavailable/error/too-slow (`voiceChoice`) or one failed
+  sentence falls back to the system voice chosen by the lessons' `bestVoice`, text shaped by their `sayText`/`sayChunks`
+  (no copy in prep-play.js). `hush`/`stopVoice` stop Phonon too, `stopVoice` `release()`s it like the lessons' leave,
+  backgrounding hushes and invalidates the token, a length-based watchdog (`sayWatchdogMs`) keeps a hung `say()` from
+  stalling the session, and the mic opens 250 ms after playback ends (re-`unlock()` after a mic session, system fallback
+  when `play()` rejects). Listens through `SMD_NATIVE.transcribe` only when `Capacitor.Plugins.SpeechRecognition` exists
+  (it throws otherwise), else Web Speech; native ranked alternatives now reach JS via `opts.onMatches` in
+  `native-bridge.js` (the plugin already sent them; JS used to keep only the first). `parseVoice`: risky letter words
+  (a, to, for, be, see, the, eight…) count only as the whole utterance or after a strong cue (option/answer/letter/
+  choice), natural phrases ("I'll go with B", "my answer would be D"), joined forms (optionb, b.), repeats, numbers,
+  corrections after "wait", negations and letter ties give null, option words match fuzzily (joined splits, small edit
+  distance, clear winner only) and beat command words inside them ("stop codon"); commands need a short plainly-command
+  utterance. Partials commit only a standalone letter held 500 ms (`partialVote`), the prompt follows the real option
+  count (`choicePrompt`, E for 5 options), a first miss re-listens on the short prompt without re-reading the question
+  ("repeat" still re-reads), two misses wait for a tap, listening runs about 10 s and extends briefly mid-word, and the
+  heard text shows in the voice bar while listening. Not verified on a phone; the iOS speech plugin never restores the
+  `AVAudioSession` it sets in `start` (no `setActive(false)` in `Plugin.swift`), which only a device can confirm.
 - **Focus room:** 25/50/90 min, `localStorage smd_prep_focus`, heartbeat POST each minute; live count = heartbeats in
   150 s (`play/focus`). Minutes in `fxm[month]` (under a minute logs nothing).
 - **Wrapped:** story cards from the store only (`days`, `wm[month][subject]`, `mod`, `hr`, `boss`, `spoth`, `fxm`), then a
