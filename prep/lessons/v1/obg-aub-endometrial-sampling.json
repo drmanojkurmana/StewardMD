@@ -1,210 +1,298 @@
 {
  "v": 1,
- "module": "obg-aub",
+ "id": "obg-aub-endometrial-sampling",
  "subject": "obstetrics-gynaecology",
- "title": "Endometrial Sampling and AUB Management",
+ "module": "obg-aub",
+ "title": "Endometrial Sampling",
  "minutes": 6,
  "gen": "AI",
- "quiz": [],
  "steps": [
   {
-   "tx": "Office sampling of endometrium with a thin suction catheter is **endometrial sampling** by pipelle. It detects hyperplasia and cancer with high sensitivity in postmenopausal bleeding. Blind sampling can miss focal lesions like polyps. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
-   "say": "Endometrial sampling by pipelle detects cancer sensitively but can miss polyps.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Indication",
-     "Age"
-    ],
-    "rows": [
-     [
-      "Postmenopausal bleeding",
-      "Any"
-     ],
-     [
-      "Persistent AUB",
-      "Over 45, or younger with risk"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Persistent intermenstrual bleeding with a negative pipelle still needs cavity inspection because of the **focal lesion caveat**. Hysteroscopy sees what blind sampling misses. This sequence prevents delayed polyp and focal cancer diagnosis. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
-   "say": "Focal lesion caveat sends persistent bleeding to hysteroscopy despite negative pipelle.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Pipelle negative"
-     },
-     {
-      "id": "n1",
-      "label": "Bleeding persists"
-     },
-     {
-      "id": "n2",
-      "label": "Hysteroscopy inspects"
-     },
-     {
-      "id": "n3",
-      "label": "Polyp found and removed"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Thickened endometrium over four to five millimetres in postmenopausal bleeding triggers sampling, the **thickness threshold**. Below it, cancer risk is under one percent and sampling can wait. Thresholds never override persistent bleeding. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
-   "say": "Thickness threshold at four to five millimetres triggers postmenopausal sampling.",
+   "tx": "**Endometrial sampling** is a vital diagnostic procedure used to evaluate the uterine cavity for hyperplasia and endometrial adenocarcinoma in women presenting with abnormal uterine bleeding. The primary clinical indication is any episode of postmenopausal bleeding, where cancer risk reaches ten percent. In premenopausal women, sampling is mandatory in all patients aged forty-five and older, as well as those under forty-five with risk factors for unopposed estrogen exposure, including chronic anovulation, obesity with BMI over thirty, or Lynch syndrome.",
+   "say": "Endometrial biopsy rules out cancer in women with abnormal bleeding. It is mandatory for any postmenopausal bleeding, in all women aged forty-five and older with abnormal bleeding, and in younger women with obesity or PCOS.",
    "vis": {
     "kind": "image",
-    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
-    "alt": "Endometrial thickness assessment.",
-    "caption": "Thickness assessment. [Credit: StewardMD]",
+    "src": "clinix/media/practicals/obg-ins-pipelle-curette.webp",
+    "alt": "Photograph of Pipelle endometrial biopsy curette showing flexible sheath and internal piston.",
+    "caption": "Flexible Pipelle endometrial suction curette for office-based histopathological sampling. Illustration: StewardMD original.",
     "ar": 1.5
    }
   },
   {
-   "tx": "Non atypical hyperplasia carries under five percent cancer risk and reverses with progestogen, termed **hyperplasia without atypia**. Atypical hyperplasia, now endometrial intraepithelial neoplasia, carries thirty percent concurrent cancer and needs hysterectomy usually. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
-   "say": "Hyperplasia without atypia reverses with progestogen, while atypical disease needs hysterectomy.",
+   "tx": "**Transvaginal ultrasonography** serves as the initial, non-invasive triage investigation for postmenopausal bleeding, measuring double-layer endometrial thickness in the mid-sagittal plane. In postmenopausal women not using hormone replacement therapy, an endometrial thickness of four millimetres or less carries a negative predictive value exceeding ninety-nine percent for endometrial cancer, permitting safe clinical observation. If the endometrial echo measures greater than four millimetres, or appears heterogeneous, irregular, or poorly visualized, immediate tissue histological sampling is mandatory.",
+   "say": "Transvaginal ultrasound measures endometrial thickness in postmenopausal bleeding. A measurement of four millimetres or less virtually excludes endometrial cancer, whereas thickness over four millimetres demands an immediate biopsy.",
+   "vis": {
+    "kind": "table",
+    "title": "Endometrial Thickness Thresholds in Postmenopausal Bleeding",
+    "cols": [
+     "Endometrial Thickness (TVUS)",
+     "Cancer Probability",
+     "Mandatory Clinical Action"
+    ],
+    "rows": [
+     [
+      "4 mm or less (thin, homogeneous)",
+      "Under 1% (high NPV >99%)",
+      "Reassurance and observation"
+     ],
+     [
+      "Greater than 4 mm",
+      "Approximately 10% to 15%",
+      "Mandatory histological endometrial biopsy"
+     ],
+     [
+      "Heterogeneous or fluid collection",
+      "High suspicion for malignancy",
+      "Hysteroscopy and directed biopsy"
+     ],
+     [
+      "On tamoxifen therapy",
+      "TVUS unreliable (subepithelial edema)",
+      "Low threshold for direct hysteroscopy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pipelle suction curettage** is the current standard of care for outpatient office-based endometrial biopsy, replacing formal inpatient curettage under general anaesthesia. The instrument consists of a flexible 3.1 millimetre polypropylene sheath containing an internal plunger. After sterile bivalve speculum insertion, the Pipelle is gently advanced through the cervical os to the uterine fundus. Withdrawing the internal plunger creates negative suction, and the curette is rotated three hundred and sixty degrees while being drawn back to capture tissue strips.",
+   "say": "The Pipelle is an outpatient plastic curette that works through suction. Once inserted to the fundus, the piston is pulled back to create a vacuum, and the sheath is rotated three-sixty degrees to harvest tissue strips.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pipelle Office Endometrial Biopsy Technique",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Cervical Insertion",
+      "sub": "Pass flexible 3.1 mm sheath to fundus without dilation"
+     },
+     {
+      "id": "p2",
+      "label": "Create Vacuum",
+      "sub": "Withdraw internal piston fully to generate suction"
+     },
+     {
+      "id": "p3",
+      "label": "Rotational Scraping",
+      "sub": "Rotate 360 degrees while stroking fundus to os"
+     },
+     {
+      "id": "p4",
+      "label": "Fixation",
+      "sub": "Expel tissue strips into formalin for histology"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2",
+      "Fundal contact"
+     ],
+     [
+      "p2",
+      "p3",
+      "Vacuum established"
+     ],
+     [
+      "p3",
+      "p4",
+      "Tissue harvest"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Diagnostic accuracy** of the Pipelle biopsy exceeds ninety-nine percent for detecting global, diffuse endometrial adenocarcinoma in postmenopausal women. However, because blind Pipelle sampling samples approximately four to five percent of the internal endometrial surface area, its sensitivity falls significantly to sixty percent for localized focal lesions such as small polyps or focal malignancy. When blind sampling yields insufficient tissue, or when abnormal postmenopausal bleeding persists despite a benign biopsy result, definitive diagnostic hysteroscopy is urgently required.",
+   "say": "Pipelle biopsy detects over ninety-nine percent of diffuse endometrial cancers, but misses localized focal polyps in forty percent of cases. When bleeding continues despite a negative biopsy, perform hysteroscopy.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Without atypia",
+     "title": "Diffuse Malignancy Detection",
      "points": [
-      "Progestogen reverses",
-      "Sample to confirm"
+      "Involves over fifty percent of cavity",
+      "Pipelle sensitivity exceeds ninety-nine percent",
+      "Readily yields diagnostic neoplastic strips",
+      "Office procedure confirms adenocarcinoma"
      ]
     },
     "right": {
-     "title": "With atypia EIN",
+     "title": "Focal Pathology Limitation",
      "points": [
-      "30 percent concurrent cancer",
-      "Hysterectomy usual"
+      "Confined to small polyp or fundal corner",
+      "Pipelle sensitivity drops to sixty percent",
+      "Blind cannula passes alongside lesion",
+      "Mandates hysteroscopy with targeted biopsy"
      ]
     }
    }
   },
   {
-   "tx": "The levonorgestrel intrauterine system is first line treatment for heavy menstrual bleeding, termed **LNG IUS first line**. It outperforms oral medicines and rivals ablation in trials. Five years of treatment also protect the endometrium. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
-   "say": "LNG IUS is first line for heavy menstrual bleeding outperforming oral medicines.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/practicals/obg-con-progesterone-only-pill.webp",
-    "alt": "Progestogen therapy for AUB.",
-    "caption": "Progestogen therapy. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Tranexamic acid taken only during menstruation cuts loss by forty percent as **antifibrinolytic therapy**. It suits women avoiding hormones. Thrombosis history is checked before prescribing. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
-   "say": "Antifibrinolytic tranexamic acid during menstruation cuts loss by forty percent.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Drug",
-     "Reduction"
-    ],
-    "rows": [
-     [
-      "Tranexamic acid",
-      "About 40 percent"
-     ],
-     [
-      "NSAIDs",
-      "About 25 percent"
-     ],
-     [
-      "LNG IUS",
-      "Over 80 percent"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Endometrial ablation destroys the lining for women whose families are complete, termed **ablation**. Second generation balloon and radiofrequency devices need no hysteroscopy skills. Hysterectomy remains definitive when lesser methods fail or pathology demands. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
-   "say": "Ablation destroys the lining when families are complete, with hysterectomy definitive.",
+   "tx": "**Hysteroscopy** with directed biopsy represents the definitive gold standard for direct visual inspection of the uterine cavity. Utilizing normal saline as an optical distension medium, a fine diagnostic hysteroscope visualizes the entire endocervical canal, uterine cavity, tubal ostia, and vascular patterns. Any focal polypoid projection, submucosal leiomyoma, or friable atypical vascular tufting is biopsied under direct vision using miniature grasp forceps, entirely eliminating the sampling errors inherent to blind aspiration techniques.",
+   "say": "Hysteroscopy directly visualizes the endometrial cavity using saline distension. It inspects every millimeter under magnification, allowing targeted biopsy of focal polyps and suspicious vessels that blind biopsies miss.",
    "vis": {
     "kind": "flow",
+    "title": "Endometrial Evaluation Pathway in AUB",
     "nodes": [
      {
-      "id": "n0",
-      "label": "Medical therapy failed"
+      "id": "h1",
+      "label": "Postmenopausal Bleed",
+      "sub": "History, clinical exam, cervical cytology"
      },
      {
-      "id": "n1",
-      "label": "Family complete"
+      "id": "h2",
+      "label": "Transvaginal Ultrasound",
+      "sub": "Measure double-layer endometrial thickness"
      },
      {
-      "id": "n2",
-      "label": "Ablation offered"
+      "id": "h3",
+      "label": "Pipelle Office Biopsy",
+      "sub": "First-line outpatient histological harvest"
      },
      {
-      "id": "n3",
-      "label": "Hysterectomy last resort"
+      "id": "h4",
+      "label": "Hysteroscopic Biopsy",
+      "sub": "Indicated if TVUS >4 mm, Pipelle fails, or bleeding recurs"
      }
     ],
     "edges": [
      [
-      "n0",
-      "n1"
+      "h1",
+      "h2",
+      "Initial triage"
      ],
      [
-      "n1",
-      "n2"
+      "h2",
+      "h3",
+      "Thickness > 4 mm"
      ],
      [
-      "n2",
-      "n3"
+      "h3",
+      "h4",
+      "Inconclusive or recurrent"
      ]
     ]
    }
   },
   {
-   "tx": "Acute AUB with haemodynamic instability follows intravenous oestrogen or high dose progestogen protocols as **acute AUB management**. Balloon tamponade of the cavity buys time rarely. Dilatation and curettage is diagnostic more than therapeutic here. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
-   "say": "Acute AUB management stabilises with hormones and resuscitation in parallel.",
+   "tx": "**Endometrial hyperplasia** represents a spectrum of proliferative glandular alterations grouped by the World Health Organization into two distinct biological categories: hyperplasia without atypia and atypical hyperplasia (also designated endometrial intraepithelial neoplasia, EIN). Non-atypical hyperplasia reflects prolonged, unopposed estrogen stimulation with crowded, dilated glands that retain cytological polarity, carrying a progression risk to cancer under two percent. In contrast, atypical hyperplasia displays nuclear stratification, rounded vesicular nuclei, and prominent nucleoli.",
+   "say": "Endometrial hyperplasia is divided into non-atypical and atypical types. Hyperplasia without atypia has under two percent cancer risk, while atypical hyperplasia carries a significant forty percent risk of harboring cancer.",
    "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/pelvic-inflammatory-disease-and-vaginitis-fig1.webp",
-    "alt": "AUB acute care context.",
-    "caption": "Acute AUB care. [Credit: StewardMD]",
-    "ar": 1.5
+    "kind": "table",
+    "title": "WHO Classification of Endometrial Hyperplasia",
+    "cols": [
+     "Hyperplasia Category",
+     "Histological Characteristics",
+     "Progression Risk to Adenocarcinoma"
+    ],
+    "rows": [
+     [
+      "Hyperplasia without atypia",
+      "Crowded glands, normal nuclear cytology",
+      "Under 2% progression over 20 years"
+     ],
+     [
+      "Atypical hyperplasia (EIN)",
+      "Loss of nuclear polarity, enlarged pleomorphic nuclei",
+      "30% to 40% risk of concurrent cancer"
+     ],
+     [
+      "Well-differentiated adenocarcinoma",
+      "Glandular confluence, cribriforming, stromal invasion",
+      "Definitive invasive malignancy"
+     ]
+    ]
    }
   },
   {
-   "tx": "Iron deficiency accompanies most chronic AUB and is corrected alongside bleeding control, termed **anaemia co management**. Ferritin guides oral versus intravenous iron. Ignoring it leaves women symptomatic despite controlled bleeding. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
-   "say": "Anaemia co management corrects iron alongside bleeding control in chronic AUB.",
+   "tx": "**Levonorgestrel-releasing intrauterine system** (LNG-IUS 52 mg) provides the first-line medical therapy for endometrial hyperplasia without atypia. Delivering twenty micrograms of levonorgestrel daily directly into the uterine cavity, it induces profound glandular atrophy and extensive decidualization of the stroma, achieving regression rates exceeding ninety percent within six months. Oral progestogens such as medroxyprogesterone acetate ten milligrams daily or continuous micronized progesterone represent second-line alternatives, requiring surveillance biopsy every six months until two consecutive negative specimens are confirmed.",
+   "say": "The 52-milligram levonorgestrel intrauterine system is the first-line medical treatment for non-atypical hyperplasia, achieving over ninety percent regression. Re-biopsy every six months until two clear specimens are documented.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Oral iron",
+     "title": "Hyperplasia Without Atypia",
      "points": [
-      "Mild deficiency",
-      "Weeks to correct"
+      "Levonorgestrel intrauterine system (LNG-IUS)",
+      "High regression rates exceeding 90%",
+      "Preserves uterus and fertility",
+      "Surveillance biopsy every 6 months"
      ]
     },
     "right": {
-     "title": "IV iron",
+     "title": "Atypical Hyperplasia / EIN",
      "points": [
-      "Severe or intolerant",
-      "Rapid correction"
+      "Total laparoscopic hysterectomy with BSO",
+      "Mandated due to concurrent cancer hazard",
+      "Frozen section examination intraoperatively",
+      "High-dose progestins only if preserving fertility"
      ]
     }
+   }
+  },
+  {
+   "tx": "**Total hysterectomy** with bilateral salpingo-oophorectomy represents the definitive surgical standard of care for atypical hyperplasia and endometrial intraepithelial neoplasia. Because concurrent, undetected invasive endometrial adenocarcinoma is discovered in thirty to forty percent of hysterectomy specimens following a preoperative biopsy of atypical hyperplasia, medical therapy is inherently hazardous. Conservative high-dose progestogen therapy is reserved strictly for premenopausal women who strongly desire future childbearing, requiring mandatory endometrial surveillance biopsies every three months.",
+   "say": "Total hysterectomy with bilateral salpingo-oophorectomy is the standard treatment for atypical hyperplasia because up to forty percent of surgical specimens harbor coexisting adenocarcinoma that the biopsy missed.",
+   "vis": {
+    "kind": "flow",
+    "title": "Management Decision Algorithm for Hyperplasia",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Biopsy Result",
+      "sub": "Review cytological atypia status on histology"
+     },
+     {
+      "id": "m2",
+      "label": "Without Atypia",
+      "sub": "Insert 52 mg LNG-IUS for minimum 6 months"
+     },
+     {
+      "id": "m3",
+      "label": "Atypical (EIN)",
+      "sub": "High risk of occult invasive adenocarcinoma"
+     },
+     {
+      "id": "m4",
+      "label": "Total Hysterectomy",
+      "sub": "Laparoscopic removal of uterus, cervix, ovaries"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2",
+      "Cytology benign"
+     ],
+     [
+      "m1",
+      "m3",
+      "Atypia confirmed"
+     ],
+     [
+      "m3",
+      "m4",
+      "Definitive surgical cure"
+     ]
+    ]
    }
   }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Postmenopausal bleeding: TVUS endometrial thickness threshold for biopsy",
+   "b": "Thickness greater than 4 mm mandates immediate histological endometrial biopsy."
+  },
+  {
+   "f": "Pipelle biopsy: primary diagnostic limitation",
+   "b": "Lower sensitivity (60%) for small localized focal lesions like endometrial polyps."
+  },
+  {
+   "f": "Atypical endometrial hyperplasia: standard treatment of choice",
+   "b": "Total hysterectomy with bilateral salpingo-oophorectomy due to 30-40% concurrent cancer risk."
+  }
+ ],
+ "keys": [
+  "Endometrial sampling is mandatory for postmenopausal bleeding and AUB in women aged 45 and older",
+  "Transvaginal ultrasound thickness of 4 mm or less virtually excludes postmenopausal endometrial cancer",
+  "Atypical hyperplasia warrants total hysterectomy due to significant concurrent occult adenocarcinoma risk"
  ]
 }

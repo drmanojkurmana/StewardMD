@@ -1,210 +1,308 @@
 {
  "v": 1,
- "module": "obg-pcos-hirsutism",
+ "id": "obg-pcos-hirsutism-lh-fsh-ratio",
  "subject": "obstetrics-gynaecology",
- "title": "LH FSH Ratio, Metabolic Screening and Weight Management",
+ "module": "obg-pcos-hirsutism",
+ "title": "LH-FSH Ratio in PCOS",
  "minutes": 6,
  "gen": "AI",
- "quiz": [],
  "steps": [
   {
-   "tx": "Inappropriate gonadotropin secretion with LH exceeding FSH was the classic **LH FSH ratio** of PCOS. Ratios over two were once diagnostic fashion. Modern criteria dropped it because obesity blunts LH and assays vary. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
-   "say": "The LH FSH ratio was classic in PCOS but modern criteria dropped it.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Era",
-     "LH FSH use"
-    ],
-    "rows": [
-     [
-      "Historical",
-      "Ratio over 2 supportive"
-     ],
-     [
-      "Modern",
-      "Not a criterion"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Rapid GnRH pulses favour LH over FSH secretion, explaining the ratio by **pulse frequency encoding**. The persistently fast pulse generator of PCOS also prevents the FSH rise needed for ovulation. This is the neuroendocrine heart of the syndrome. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
-   "say": "Pulse frequency encoding favours LH in PCOS and starves FSH for ovulation.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "GnRH pulses too fast"
-     },
-     {
-      "id": "n1",
-      "label": "LH favoured over FSH"
-     },
-     {
-      "id": "n2",
-      "label": "Follicles arrest"
-     },
-     {
-      "id": "n3",
-      "label": "Androgens rise"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Glucose tolerance, lipids and blood pressure form the **metabolic screening panel** at diagnosis. Impaired glucose tolerance affects a third of women with PCOS. Screening repeats by risk, at least every few years. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
-   "say": "Metabolic screening at diagnosis finds impaired glucose tolerance in a third.",
+   "tx": "**Luteinizing hormone** hypersecretion accompanied by an altered LH to FSH ratio of 2:1 or 3:1 represents a classic neuroendocrine hallmark of polycystic ovary syndrome. Accelerated hypothalamic GnRH pulse frequency selectively stimulates transcription of the luteinizing hormone beta-subunit over the follicle-stimulating hormone beta-subunit. Although historically prized in diagnostic evaluations, international consensus guidelines no longer mandate an elevated LH to FSH ratio as an obligatory criterion because normal ratios occur in over forty percent of confirmed cases.",
+   "say": "An inverted LH to FSH ratio of two-to-one or three-to-one is a classic neuroendocrine feature of PCOS, driven by fast GnRH pulses. However, international guidelines no longer require it for diagnosis because many patients have normal ratios.",
    "vis": {
     "kind": "image",
     "src": "v1/kb/media/polycystic-ovary-syndrome-fig1.webp",
-    "alt": "PCOS metabolic screening.",
-    "caption": "Metabolic screening. [Credit: StewardMD]",
+    "alt": "Diagram showing neuroendocrine signaling and ovarian theca-granulosa cell interactions in PCOS.",
+    "caption": "Hypothalamic GnRH pulse acceleration, elevated LH, and ovarian theca cell hyperandrogenism in PCOS. Illustration: StewardMD original.",
     "ar": 1.5
    }
   },
   {
-   "tx": "Five to ten percent weight loss restoring ovulation in over half is the power of **weight management first**. It precedes fertility drugs in overweight PCOS by every guideline. Structured programmes beat advice alone substantially. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
-   "say": "Weight management first restores ovulation in over half with five percent loss.",
+   "tx": "**Theca cell hyperplasia** develops in response to chronically elevated circulating luteinizing hormone levels acting on theca interna cells. LH stimulates the key steroidogenic regulatory enzyme CYP17A1 (possessing 17-alpha-hydroxylase and 17,20-lyase activities), driving marked overproduction of androstenedione and testosterone. Hyperinsulinaemia acts synergistically with LH at the theca cell level, amplifying androgen synthesis. Excess androgens enter the circulation, provoking clinical hirsutism, cystic acne, and male-pattern androgenic alopecia.",
+   "say": "High LH directly stimulates ovarian theca cells, up-regulating the CYP17A1 enzyme to overproduce testosterone and androstenedione. Hyperinsulinaemia acts synergistically with LH, worsening hyperandrogenism.",
+   "vis": {
+    "kind": "flow",
+    "title": "Two-Cell Two-Gonadotropin Dysregulation in PCOS",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "High LH Pulses",
+      "sub": "Accelerated GnRH stimulates theca LH receptors"
+     },
+     {
+      "id": "t2",
+      "label": "Theca Androgens",
+      "sub": "CYP17A1 up-regulation pumps out androstenedione"
+     },
+     {
+      "id": "t3",
+      "label": "Relative FSH Lack",
+      "sub": "Inadequate FSH impairs granulosa aromatase"
+     },
+     {
+      "id": "t4",
+      "label": "Follicular Arrest",
+      "sub": "Preantral follicles arrest at 2 to 9 mm stage"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t2",
+      "Enzyme induction"
+     ],
+     [
+      "t2",
+      "t3",
+      "Androgen excess"
+     ],
+     [
+      "t3",
+      "t4",
+      "Aromatase failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Follicular arrest** occurs in polycystic ovary syndrome because relatively deficient follicle-stimulating hormone levels fail to cross the threshold required to induce granulosa cell aromatase (CYP19A1). The androgen-rich microenvironment within developing follicles suppresses normal granulosa cell proliferation. Follicles arrest development at the small antral stage, measuring two to nine millimetres in diameter, and fail to select a dominant pre-ovulatory follicle. These arrested follicles accumulate in the ovarian cortex, producing the characteristic necklace of pearls ultrasound appearance.",
+   "say": "Follicles arrest at the two to nine millimetre stage because relatively low FSH cannot stimulate granulosa aromatase to convert androgens into estrogen. No follicle becomes dominant, creating the string-of-pearls appearance.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "5 percent loss",
+     "title": "Normal Follicular Selection",
      "points": [
-      "Ovulation often returns",
-      "Cycles regulate"
+      "Adequate cyclic FSH rises above threshold",
+      "Robust granulosa cell aromatase induction",
+      "Single dominant follicle selected (>10 mm)",
+      "Normal mid-cycle LH surge triggers ovulation"
      ]
     },
     "right": {
-     "title": "No loss",
+     "title": "PCOS Follicular Arrest",
      "points": [
-      "Drugs less effective",
-      "Metabolic risk persists"
+      "Relative FSH deficit below induction threshold",
+      "High local androgens suppress granulosa cells",
+      "Arrest of 20 or more follicles at 2 to 9 mm",
+      "Chronic anovulation with peripheral string-of-pearls"
      ]
     }
    }
   },
   {
-   "tx": "Metformin improves insulin sensitivity and modestly aids ovulation as **metabolic therapy**. Its best role is impaired glucose tolerance and diabetes prevention. Gastrointestinal effects limit dose escalation in many. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
-   "say": "Metformin aids ovulation modestly and prevents diabetes in impaired tolerance.",
+   "tx": "**Anti-Mullerian hormone** (AMH) is produced exclusively by the granulosa cells of preantral and small antral follicles up to eight millimetres in diameter. In polycystic ovary syndrome, serum AMH concentrations are elevated two- to four-fold above age-matched reference ranges, directly reflecting the massive expansion of arrested small antral follicles. Circulating AMH acts as a physiological inhibitor of follicular maturation, suppressing FSH-induced aromatase expression and further reinforcing the cycle of anovulation.",
+   "say": "Serum anti-Mullerian hormone is elevated two- to four-fold in PCOS, produced by the massive pool of arrested small follicles. AMH actively inhibits FSH sensitivity, worsening ovulatory arrest.",
    "vis": {
     "kind": "table",
+    "title": "Endocrine Biomarkers in Polycystic Ovary Syndrome",
     "cols": [
-     "Role",
-     "Strength"
+     "Biomarker",
+     "Typical PCOS Concentration",
+     "Pathological Significance"
     ],
     "rows": [
      [
-      "Diabetes prevention",
-      "Strongest"
+      "Luteinizing hormone (LH)",
+      "Elevated (often >10 IU/L)",
+      "Theca cell hypertrophy and hyperandrogenism"
      ],
      [
-      "Ovulation aid",
-      "Modest"
+      "Follicle-stimulating hormone",
+      "Low to normal (LH:FSH >2:1)",
+      "Subthreshold levels fail to select dominant follicle"
      ],
      [
-      "Weight",
-      "Neutral to slight loss"
+      "Anti-Mullerian hormone (AMH)",
+      "Elevated (often >35 pmol/L)",
+      "Reflects expanded pool of arrested antral follicles"
+     ],
+     [
+      "Sex hormone-binding globulin",
+      "Markedly suppressed (<30 nmol/L)",
+      "Elevates free active bioavailable testosterone"
      ]
     ]
    }
   },
   {
-   "tx": "Sleep apnoea, fatty liver and depression cluster with PCOS as **associated comorbidities**. Screening questions for snoring and mood belong in reviews. Treating them improves fertility outcomes indirectly. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
-   "say": "Associated comorbidities include sleep apnoea, fatty liver and depression in PCOS.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/pcos-hirsutism-rotterdam-metabolic-induction-fig1.webp",
-    "alt": "PCOS comorbidity management.",
-    "caption": "Comorbidity care. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Endometrial protection with progestogen at least every three months prevents hyperplasia in amenorrhoeic PCOS, termed **endometrial protection rule**. Withdrawal bleeds are induced when cycles exceed ninety days. This simple rule prevents cancers. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
-   "say": "Endometrial protection induces withdrawal when cycles exceed ninety days in PCOS.",
+   "tx": "**Sex hormone-binding globulin** (SHBG) synthesis by hepatocytes is powerfully suppressed by circulating hyperinsulinaemia. Even in patients whose total testosterone remains in the high-normal or borderline range, suppressed SHBG levels drastically increase the free, unbound, biologically active fraction of testosterone. Free androgen index (FAI), calculated as total testosterone divided by SHBG multiplied by one hundred, exceeding a cut-off of four to five serves as a sensitive biochemical indicator of hyperandrogenism.",
+   "say": "Hyperinsulinaemia suppresses liver production of sex hormone-binding globulin. This drives up free active testosterone, meaning patients can have severe hirsutism even when total testosterone is only borderline elevated.",
    "vis": {
     "kind": "flow",
+    "title": "Insulin-Driven Bioavailable Androgen Amplification",
     "nodes": [
      {
-      "id": "n0",
-      "label": "Cycle exceeds 90 days"
+      "id": "i1",
+      "label": "Hyperinsulinaemia",
+      "sub": "Insulin resistance down-regulates hepatic SHBG"
      },
      {
-      "id": "n1",
-      "label": "Progestogen given"
+      "id": "i2",
+      "label": "Suppressed SHBG",
+      "sub": "Reduced plasma binding capacity for androgens"
      },
      {
-      "id": "n2",
-      "label": "Withdrawal bleed"
+      "id": "i3",
+      "label": "Elevated Free Fraction",
+      "sub": "Unbound bioavailable testosterone rises sharply"
      },
      {
-      "id": "n3",
-      "label": "Hyperplasia prevented"
+      "id": "i4",
+      "label": "Target Organ Binding",
+      "sub": "Hair follicle 5-alpha reductase converts to DHT"
      }
     ],
     "edges": [
      [
-      "n0",
-      "n1"
+      "i1",
+      "i2",
+      "Hepatic suppression"
      ],
      [
-      "n1",
-      "n2"
+      "i2",
+      "i3",
+      "Binding failure"
      ],
      [
-      "n2",
-      "n3"
+      "i3",
+      "i4",
+      "Receptor saturation"
      ]
     ]
    }
   },
   {
-   "tx": "Anti Mullerian hormone runs two to three times normal in PCOS reflecting follicle excess, an emerging **AMH criterion**. Adult criteria increasingly accept it instead of ultrasound morphology. Adolescents remain excluded from this substitution. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
-   "say": "AMH runs high in PCOS and increasingly substitutes for ultrasound in adults.",
+   "tx": "**Early follicular phase** testing on menstrual cycle day two, three, or four is mandatory when obtaining basal gonadotropin and androgen levels. Testing during this quiescent phase avoids confounding physiological LH surges that occur during ovulation. If a patient is amenorrhoeic, blood testing can be performed randomly, provided serum progesterone is under five nanomoles per litre to exclude recent ovulation, alongside measurement of serum human chorionic gonadotropin to rule out unrecognized pregnancy.",
+   "say": "Draw blood for LH, FSH, and androgens on cycle days two through four. Testing during the early follicular phase avoids mid-cycle LH surges that distort the true baseline ratio.",
    "vis": {
     "kind": "table",
+    "title": "Diagnostic Blood Panel Protocol in Suspected PCOS",
     "cols": [
-     "Group",
-     "AMH use"
+     "Hormonal Parameter",
+     "Optimal Sampling Timing",
+     "Exclusionary Threshold"
     ],
     "rows": [
      [
-      "Adults",
-      "May replace ultrasound"
+      "Serum LH and FSH",
+      "Day 2 to 4 of menses (early follicular)",
+      "Elevated FSH >25 IU/L indicates ovarian insufficiency"
      ],
      [
-      "Adolescents",
-      "Not used"
+      "Total testosterone",
+      "Morning fasting sample (08:00 to 10:00)",
+      "Values >5 nmol/L suggest androgen-secreting tumour"
+     ],
+     [
+      "17-hydroxyprogesterone",
+      "Early morning follicular phase",
+      "Values >6 nmol/L mandate CAH synacthen test"
+     ],
+     [
+      "Serum TSH and prolactin",
+      "Random non-stress sample",
+      "Excludes primary hypothyroidism and prolactinoma"
      ]
     ]
    }
   },
   {
-   "tx": "Bariatric surgery in severe obesity restores ovulation and fertility dramatically, termed **surgical metabolic therapy**. Pregnancy is deferred twelve to eighteen months while weight stabilises. Diabetes remission accompanies the fertility return. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
-   "say": "Surgical metabolic therapy restores ovulation in severe obesity after weight stabilises.",
+   "tx": "**Non-classic congenital adrenal hyperplasia** represents the most critical endocrine mimic that must be differentiated from an altered LH to FSH ratio. Caused by partial 21-hydroxylase deficiency, it presents with identical clinical features of hirsutism, oligomenorrhoea, and polycystic ovaries. Baseline morning follicular phase 17-hydroxyprogesterone (17-OHP) must be measured: values below 6 nanomoles per litre exclude the disease, while values exceeding 30 nanomoles per litre confirm it, with intermediate values requiring an ACTH stimulation test.",
+   "say": "Always exclude late-onset congenital adrenal hyperplasia by checking 17-hydroxyprogesterone. Partial 21-hydroxylase deficiency mimics PCOS perfectly but requires glucocorticoids rather than standard ovarian therapy.",
    "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/hirsutism-fig1.webp",
-    "alt": "Hirsutism improving with metabolic therapy.",
-    "caption": "Metabolic improvement. [Credit: StewardMD]",
-    "ar": 1.5
+    "kind": "compare",
+    "left": {
+     "title": "Polycystic Ovary Syndrome",
+     "points": [
+      "Elevated LH:FSH ratio in 60%",
+      "Normal morning 17-OHP (<6 nmol/L)",
+      "Ovarian theca cell androgen source",
+      "Primary therapy with COCPs and lifestyle"
+     ]
+    },
+    "right": {
+     "title": "Non-Classic 21-OHD (NCAH)",
+     "points": [
+      "Normal LH:FSH ratio",
+      "Elevated morning 17-OHP (>6 nmol/L)",
+      "Adrenal cortex precursor accumulation",
+      "Managed with physiological hydrocortisone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Combined oral contraceptives** containing anti-androgenic progestins provide the cornerstone pharmacotherapy for normalizing gonadotropin ratios and controlling hyperandrogenism in PCOS patients not seeking pregnancy. Exogenous ethinylestradiol suppresses hypothalamic GnRH pulsatility and pituitary LH secretion, depriving theca cells of stimulation and halting ovarian androgen production. Simultaneously, oral estrogen stimulates hepatic synthesis of sex hormone-binding globulin, clearing free bioavailable testosterone and resolving acne and hirsutism.",
+   "say": "Combined oral contraceptive pills are the mainstay of medical treatment. Estrogen shuts down excessive pituitary LH secretion, starving theca cells of androgen-stimulating signals, while doubling SHBG to soak up free testosterone.",
+   "vis": {
+    "kind": "flow",
+    "title": "Therapeutic Normalization with Oral Contraceptives",
+    "nodes": [
+     {
+      "id": "c1",
+      "label": "Oral Contraceptive",
+      "sub": "Ethinylestradiol plus anti-androgenic progestin"
+     },
+     {
+      "id": "c2",
+      "label": "Pituitary Suppression",
+      "sub": "Negative feedback halts excessive LH pulsatility"
+     },
+     {
+      "id": "c3",
+      "label": "Hepatic SHBG Rise",
+      "sub": "Estrogen stimulates hepatic synthesis of SHBG"
+     },
+     {
+      "id": "c4",
+      "label": "Clinical Remission",
+      "sub": "Free testosterone plunges; hirsutism and acne clear"
+     }
+    ],
+    "edges": [
+     [
+      "c1",
+      "c2",
+      "Central gonadotropin shutoff"
+     ],
+     [
+      "c1",
+      "c3",
+      "Hepatic protein synthesis"
+     ],
+     [
+      "c2",
+      "c4",
+      "Androgen deprivation"
+     ],
+     [
+      "c3",
+      "c4",
+      "Free hormone clearance"
+     ]
+    ]
    }
   }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "PCOS neuroendocrine defect: primary driver of elevated LH:FSH ratio",
+   "b": "Accelerated hypothalamic GnRH pulse frequency favoring LH beta-subunit transcription."
+  },
+  {
+   "f": "PCOS androgen amplification: primary effect of hyperinsulinaemia on SHBG",
+   "b": "Suppresses hepatic SHBG synthesis, markedly elevating free bioavailable testosterone."
+  },
+  {
+   "f": "PCOS endocrine mimic: diagnostic test for non-classic adrenal hyperplasia",
+   "b": "Early morning follicular phase 17-hydroxyprogesterone (values >6 nmol/L require workup)."
+  }
+ ],
+ "keys": [
+  "Accelerated GnRH pulses stimulate theca cells via high LH, driving ovarian androgen excess",
+  "Relative FSH deficiency prevents granulosa cell aromatization, causing small antral follicular arrest",
+  "Suppressed SHBG elevates free testosterone, and combined oral contraceptives normalize the endocrine axis"
  ]
 }

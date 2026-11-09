@@ -1,208 +1,303 @@
 {
  "v": 1,
- "module": "obg-puberty-menopause",
+ "id": "obg-puberty-menopause-perimenopause",
  "subject": "obstetrics-gynaecology",
- "title": "Perimenopause, Menopause and Hormone Therapy",
+ "module": "obg-puberty-menopause",
+ "title": "Perimenopause",
  "minutes": 6,
  "gen": "AI",
- "quiz": [],
  "steps": [
   {
-   "tx": "The transition years of irregular cycles and fluctuating hormones before the final period form the **perimenopause**. Vasomotor symptoms often start here while cycles continue. Contraception is still needed until menopause is confirmed. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
-   "say": "Perimenopause brings irregular cycles and vasomotor symptoms before the final period.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/menopause-and-hormone-replacement-therapy-fig1.webp",
-    "alt": "Menopause systemic manifestations.",
-    "caption": "Menopause manifestations. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Twelve months without periods after forty five, diagnosed retrospectively, is the **menopause**. Average age is fifty one in most populations. Earlier menopause between forty and forty five earns bone and heart protection review. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
-   "say": "Menopause is twelve period free months, averaging fifty one years.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Age",
-     "Term"
-    ],
-    "rows": [
-     [
-      "Under 40",
-      "Premature insufficiency"
-     ],
-     [
-      "40 to 45",
-      "Early menopause"
-     ],
-     [
-      "Around 51",
-      "Average"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Hot flushes and night sweats from thermoregulatory narrowing are **vasomotor symptoms**. They average seven years and disrupt sleep profoundly. Hormone therapy remains their most effective treatment by far. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
-   "say": "Vasomotor symptoms average seven years and hormone therapy treats them best.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Flushes disrupt sleep"
-     },
-     {
-      "id": "n1",
-      "label": "Hormone therapy assessed"
-     },
-     {
-      "id": "n2",
-      "label": "Lowest effective dose"
-     },
-     {
-      "id": "n3",
-      "label": "Reviewed annually"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Vaginal dryness, dyspareunia and urinary urgency from oestrogen loss form the **genitourinary syndrome** of menopause. Unlike flushes it progresses without treatment. Low dose vaginal oestrogen is safe long term for most. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
-   "say": "Genitourinary syndrome progresses without treatment and vaginal oestrogen is safe long term.",
+   "tx": "**Perimenopause** spans the biological transition from the late reproductive years through the postmenopause, commencing with initial menstrual cycle variability and concluding twelve months after the final menstrual period. According to the Stages of Reproductive Aging Workshop (STRAW+10) staging criteria, perimenopause encompasses stages -2 (early menopausal transition) and -1 (late menopausal transition). The transition typically lasts between four and eight years, driven by progressive exhaustion of the ovarian follicular pool.",
+   "say": "Perimenopause begins with menstrual cycle irregularities and ends twelve months after the final period. Staged by the STRAW criteria, it typically lasts four to eight years as the ovarian follicular reserve depletes.",
    "vis": {
     "kind": "image",
     "src": "v1/kb/media/menopause-and-postmenopausal-hormone-thera-fig1.webp",
-    "alt": "Hormone changes in menopause.",
-    "caption": "Hormone changes. [Credit: StewardMD]",
+    "alt": "Diagram showing endocrine hormonal fluctuations during the perimenopausal transition.",
+    "caption": "Endocrine transitions in perimenopause: declining inhibin B, fluctuating estradiol, and rising pituitary FSH. Illustration: StewardMD original.",
     "ar": 1.5
    }
   },
   {
-   "tx": "Systemic hormone therapy needs a progestogen added whenever the uterus is present, the **uterine protection rule**. Unopposed oestrogen causes hyperplasia and cancer. Hysterectomised women take oestrogen alone. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
-   "say": "Uterine protection adds progestogen to oestrogen whenever a uterus is present.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Uterus present",
-     "points": [
-      "Oestrogen plus progestogen"
-     ]
-    },
-    "right": {
-     "title": "Hysterectomised",
-     "points": [
-      "Oestrogen alone"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Transdermal oestrogen avoids first pass liver effects and clot risk of oral therapy, termed **route selection**. Obese and thrombosis prone women are steered transdermal. Micronised progesterone is the gentlest partner for breast and clot profiles. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
-   "say": "Route selection steers clot prone women to transdermal oestrogen.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Route",
-     "Clot risk"
-    ],
-    "rows": [
-     [
-      "Oral oestrogen",
-      "Increased"
-     ],
-     [
-      "Transdermal",
-      "Neutral"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Starting hormone therapy under sixty or within ten years of menopause gives the favourable **timing window**. Benefit risk is best here for symptoms and bone. Starting later raises cardiovascular and dementia concerns from trial data. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
-   "say": "The timing window under sixty favours hormone therapy benefit over risk.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/practicals/obg-drug-tibolone.webp",
-    "alt": "Tibolone tissue selective therapy.",
-    "caption": "Tibolone. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Non hormonal options including some antidepressants and gabapentin serve women who cannot take hormones, grouped as **non hormonal therapy**. Effects are smaller than hormones but real. Bone specific drugs replace hormones when osteoporosis is the only issue. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
-   "say": "Non hormonal therapy serves women who cannot take hormones with smaller effects.",
+   "tx": "**Inhibin B** decline represents the earliest detectable endocrine harbinger of the perimenopausal transition. Produced by healthy granulosa cells of recruited preantral and early antral follicles, inhibin B falls as the primordial follicle pool depletes below critical reserves. The loss of negative feedback selective for follicle-stimulating hormone allows pituitary FSH to rise progressively during the early follicular phase, even while serum estradiol levels remain normal or transiently elevated due to hyperstimulation of remaining follicles.",
+   "say": "A drop in inhibin B is the first hormonal change of perimenopause. Because inhibin B normally restrains FSH, its decline triggers a compensatory rise in early follicular FSH while estradiol levels fluctuate wildly.",
    "vis": {
     "kind": "flow",
+    "title": "Endocrine Dynamics Across the Menopausal Transition",
     "nodes": [
      {
-      "id": "n0",
-      "label": "Hormones unsuitable"
+      "id": "e1",
+      "label": "Follicular Depletion",
+      "sub": "Primordial follicle reserve falls below 1000"
      },
      {
-      "id": "n1",
-      "label": "Antidepressant class tried"
+      "id": "e2",
+      "label": "Falling Inhibin B",
+      "sub": "Loss of negative feedback on pituitary gonadotrophs"
      },
      {
-      "id": "n2",
-      "label": "Flushes reduce partially"
+      "id": "e3",
+      "label": "Compensatory FSH Rise",
+      "sub": "FSH >25 IU/L with erratic estradiol peaks"
      },
      {
-      "id": "n3",
-      "label": "Bone drugs if needed"
+      "id": "e4",
+      "label": "Final Menstrual Period",
+      "sub": "Permanent follicular exhaustion and estrogen loss"
      }
     ],
     "edges": [
      [
-      "n0",
-      "n1"
+      "e1",
+      "e2",
+      "Ovarian depletion"
      ],
      [
-      "n1",
-      "n2"
+      "e2",
+      "e3",
+      "Pituitary disinhibition"
      ],
      [
-      "n2",
-      "n3"
+      "e3",
+      "e4",
+      "Complete anovulation"
      ]
     ]
    }
   },
   {
-   "tx": "Bleeding on hormone therapy beyond the settling months needs endometrial assessment, following the **bleeding on HRT rule**. Unscheduled bleeding after six months or after amenorrhoea earns a pipelle. Most causes are benign but cancer hides among them. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
-   "say": "Bleeding on HRT beyond settling months earns endometrial assessment.",
+   "tx": "**Menstrual irregularity** constitutes the cardinal clinical hallmark of perimenopause. In the early transition (STRAW stage -2), menstrual cycle length fluctuates by seven days or more between consecutive cycles, often with cycles shortening to twenty-one to twenty-four days due to accelerated follicular phases. In the late transition (STRAW stage -1), cycles skip entirely, marked by two or more skipped cycles and episodes of amenorrhoea lasting sixty days or longer, heralding the approach of the final menses.",
+   "say": "Early perimenopause causes cycles to vary by seven days or more, often shortening first. Late perimenopause brings skipped cycles and sixty days or more of amenorrhoea, signaling that menopause is near.",
+   "vis": {
+    "kind": "table",
+    "title": "STRAW+10 Criteria for the Menopausal Transition",
+    "cols": [
+     "STRAW Stage",
+     "Menstrual Cycle Pattern",
+     "Endocrine Findings"
+    ],
+    "rows": [
+     [
+      "Stage -2 (Early Transition)",
+      "Persistent difference of >=7 days in cycle length",
+      "Variable FSH; declining AMH and inhibin B"
+     ],
+     [
+      "Stage -1 (Late Transition)",
+      "Interval of amenorrhoea >=60 days",
+      "FSH elevated (>25 IU/L); low estradiol"
+     ],
+     [
+      "Stage +1a (Early Postmenopause)",
+      "12 months of persistent amenorrhoea",
+      "Very high FSH (>40 IU/L); low estradiol"
+     ],
+     [
+      "Stage +2 (Late Postmenopause)",
+      "Permanent cessation of ovarian function",
+      "Stable high gonadotropins, urogenital atrophy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vasomotor symptoms** represent the most common distressing complaint, affecting up to eighty percent of women during perimenopause. Characterized by sudden, intense sensations of heat spreading across the chest, neck, and face, followed by cutaneous vasodilation, profuse perspiration, and subsequent chilling. Symptoms are driven by rapid fluctuations in circulating estrogen that destabilize central noradrenergic and serotonergic neurotransmission in the preoptic hypothalamus, narrowing the thermoneutral zone and triggering heat-dissipation mechanisms at normal core temperatures.",
+   "say": "Hot flushes and night sweats affect eighty percent of perimenopausal women. Erratic estrogen drops disrupt hypothalamic thermoreceptors, narrowing the neutral temperature zone and triggering sudden inappropriate sweating.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "First 3 to 6 months",
+     "title": "Vasomotor Presentations",
      "points": [
-      "Settling spotting common",
-      "Observe"
+      "Sudden flushing, palpitations, sweating",
+      "Night sweats provoking severe sleep fragmentation",
+      "Triggered by warm rooms, alcohol, caffeine",
+      "Median symptom duration of 7.4 years"
      ]
     },
     "right": {
-     "title": "Beyond, or after gap",
+     "title": "Neuropsychiatric Complications",
      "points": [
-      "Pipelle indicated",
-      "Exclude cancer"
+      "Irritability, anxiety, and new-onset depression",
+      "Brain fog, memory lapses, poor concentration",
+      "Fatigue compounded by chronic insomnia",
+      "Responds robustly to systemic estrogen therapy"
      ]
     }
    }
+  },
+  {
+   "tx": "**Genitourinary syndrome of menopause** encompasses progressive atrophic anatomical changes affecting the labia, clitoris, vagina, urethra, and bladder base resulting from oestrogen receptor deprivation. As vaginal stratified squamous epithelium atrophies, glycogen content plummets, causing depletion of protective hydrogen peroxide-producing lactobacilli and a rise in vaginal pH above 5.0. Patients suffer from vaginal dryness, burning dyspareunia, dysuria, and recurrent urinary tract infections, responding rapidly to low-dose local topical vaginal oestrogens.",
+   "say": "The genitourinary syndrome of menopause causes vaginal dryness, dyspareunia, and recurrent urinary infections. Without estrogen, lactobacilli vanish, vaginal pH rises over 5.0, and local topical vaginal estrogens provide targeted relief.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathogenesis of Genitourinary Syndrome of Menopause",
+    "nodes": [
+     {
+      "id": "u1",
+      "label": "Estrogen Loss",
+      "sub": "Receptor deprivation in urogenital mucosa"
+     },
+     {
+      "id": "u2",
+      "label": "Mucosal Thinning",
+      "sub": "Loss of rugae, collagen, and glycogen stores"
+     },
+     {
+      "id": "u3",
+      "label": "Lactobacilli Decline",
+      "sub": "Vaginal pH rises above 5.0; pathogen overgrowth"
+     },
+     {
+      "id": "u4",
+      "label": "Topical Estrogen",
+      "sub": "Local estradiol cream restores flora without systemic risk"
+     }
+    ],
+    "edges": [
+     [
+      "u1",
+      "u2",
+      "Cellular atrophy"
+     ],
+     [
+      "u2",
+      "u3",
+      "Microbiome collapse"
+     ],
+     [
+      "u3",
+      "u4",
+      "Targeted therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Contraception guidelines** in perimenopausal women mandate that fertility control must be continued despite irregular menses until permanent menopause is established. Spontaneous, unexpected ovulation can occur even after months of amenorrhoea. Contraception is required for two full years following the last menstrual period in women under fifty years of age, and for one full year in women aged fifty and older. The levonorgestrel intrauterine system is ideal, providing highly effective contraception while controlling heavy perimenopausal bleeding.",
+   "say": "Perimenopausal women must maintain contraception: continue for two years after the last period if under fifty, or one year if fifty or older. Spontaneous ovulation can still occur despite long stretches of amenorrhoea.",
+   "vis": {
+    "kind": "table",
+    "title": "Contraceptive Rules During the Menopausal Transition",
+    "cols": [
+     "Patient Age at Final Menses",
+     "Mandatory Contraception Duration",
+     "Optimal Contraceptive Method"
+    ],
+    "rows": [
+     [
+      "Under 50 years of age",
+      "2 years of persistent amenorrhoea",
+      "Levonorgestrel intrauterine system (LNG-IUS)"
+     ],
+     [
+      "50 years of age and older",
+      "1 year of persistent amenorrhoea",
+      "LNG-IUS or progestogen-only implant / pill"
+     ],
+     [
+      "Combined oral pills",
+      "Stop at age 50 due to VTE and stroke risks",
+      "Switch to non-hormonal or progestogen-only"
+     ],
+     [
+      "Steroid-induced amenorrhoea",
+      "FSH testing unreliable; continue to age 55",
+      "Stop all contraception automatically at age 55"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Systemic hormone replacement therapy** represents the most efficacious treatment for moderate-to-severe vasomotor symptoms and prevention of accelerated postmenopausal bone mineral loss. In women with an intact uterus, systemic estrogen must unconditionally be combined with a progestogen (such as oral micronized progesterone or a levonorgestrel IUS) to prevent unopposed estrogen-induced endometrial hyperplasia and adenocarcinoma. In women who have undergone a prior hysterectomy, estrogen-alone therapy is prescribed without progestogen.",
+   "say": "Hormone replacement therapy is the most effective treatment for hot flushes. If a woman has an intact uterus, always add a progestin to protect against endometrial cancer. Hysterectomized women take estrogen alone.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Intact Uterus (Combined HRT)",
+     "points": [
+      "Estrogen plus progestogen mandatory",
+      "Sequential regimen if still having menses",
+      "Continuous combined if postmenopausal",
+      "Prevents endometrial hyperplasia and cancer"
+     ]
+    },
+    "right": {
+     "title": "Prior Hysterectomy (Estrogen Alone)",
+     "points": [
+      "Unmodified estrogen monotherapy",
+      "No progestogen required (no endometrium)",
+      "Zero risk of endometrial neoplasia",
+      "Lower breast cancer risk than combined HRT"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Transdermal estradiol** patches or gels are preferred over oral formulations in perimenopausal women possessing cardiovascular risk factors, including obesity with BMI over thirty, hypertension, diabetes mellitus, or elevated risk of venous thromboembolism. Transdermal administration avoids first-pass hepatic metabolism, preventing hepatic synthesis of clotting factors and avoiding elevations in serum triglycerides. Initiating therapy within ten years of menopause in women under age sixty maximizes cardioprotective and bone benefits while minimizing vascular risks.",
+   "say": "Transdermal estrogen patches bypass the liver, avoiding the rise in clotting factors caused by oral tablets. They are the safest choice for women with obesity, high blood pressure, or elevated thrombosis risk.",
+   "vis": {
+    "kind": "flow",
+    "title": "Route Selection for Systemic Estrogen Therapy",
+    "nodes": [
+     {
+      "id": "r1",
+      "label": "Assess VTE Risk",
+      "sub": "Evaluate BMI, smoking, and thrombophilia history"
+     },
+     {
+      "id": "r2",
+      "label": "Low Baseline Risk",
+      "sub": "Oral 17-beta-estradiol or transdermal patch"
+     },
+     {
+      "id": "r3",
+      "label": "Elevated VTE Risk",
+      "sub": "BMI >30, migraine, hypertension, smoker"
+     },
+     {
+      "id": "r4",
+      "label": "Transdermal Route",
+      "sub": "Estradiol patch/gel avoids hepatic first-pass clotting"
+     }
+    ],
+    "edges": [
+     [
+      "r1",
+      "r2",
+      "Normal risk profile"
+     ],
+     [
+      "r1",
+      "r3",
+      "High vascular risk"
+     ],
+     [
+      "r3",
+      "r4",
+      "Safer route selection"
+     ]
+    ]
+   }
   }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Perimenopause: earliest biochemical endocrine indicator",
+   "b": "Decline in circulating inhibin B, triggering an early follicular rise in FSH."
+  },
+  {
+   "f": "Perimenopausal contraception rule: duration under age 50",
+   "b": "Contraception must continue for 2 full years following the final menstrual period."
+  },
+  {
+   "f": "HRT in intact uterus: mandatory safety requirement",
+   "b": "Progestogen must be added to systemic estrogen to prevent endometrial cancer."
+  }
+ ],
+ "keys": [
+  "Perimenopause is marked by falling inhibin B, erratic estrogen swings, and skipped menstrual cycles",
+  "Contraception must continue for two years after the final period under age 50, or one year over age 50",
+  "Combined estrogen and progestogen therapy relieves vasomotor symptoms while protecting the endometrium"
  ]
 }

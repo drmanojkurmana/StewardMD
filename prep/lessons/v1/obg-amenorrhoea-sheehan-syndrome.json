@@ -1,214 +1,317 @@
 {
  "v": 1,
- "module": "obg-amenorrhoea",
+ "id": "obg-amenorrhoea-sheehan-syndrome",
  "subject": "obstetrics-gynaecology",
- "title": "Sheehan Syndrome and Hypothalamic Amenorrhoea",
+ "module": "obg-amenorrhoea",
+ "title": "Sheehan Syndrome",
  "minutes": 6,
  "gen": "AI",
- "quiz": [],
  "steps": [
   {
-   "tx": "Pituitary infarction after severe postpartum haemorrhage and shock is **Sheehan syndrome**. The physiologically enlarged gland outstrips its portal blood supply during hypotension. Failure to lactate is characteristically the first sign noticed. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
-   "say": "Sheehan syndrome infarcts the pituitary after haemorrhage, failing lactation first.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Order lost",
-     "Hormone"
-    ],
-    "rows": [
-     [
-      "First often",
-      "Prolactin, growth hormone"
-     ],
-     [
-      "Later",
-      "Gonadotropins"
-     ],
-     [
-      "Last",
-      "TSH, ACTH variable"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Inability to breastfeed after a haemorrhagic delivery is the sentinel **failure to lactate**. Agalactia from prolactin loss precedes amenorrhoea by months. Any such history earns pituitary function testing. Correlating this finding with imaging and laboratory results prevents both delayed treatment and unnecessary intervention in most patients.",
-   "say": "Failure to lactate after haemorrhage is the sentinel sign earning pituitary testing.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Severe haemorrhage"
-     },
-     {
-      "id": "n1",
-      "label": "No lactation"
-     },
-     {
-      "id": "n2",
-      "label": "Amenorrhoea follows"
-     },
-     {
-      "id": "n3",
-      "label": "Pituitary tests confirm"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Empty or partially empty sella on MRI years later confirms the **empty sella** endpoint. The infarcted gland shrinks away from its fossa. Imaging follows biochemical hypopituitarism, never precedes it usefully. Early recognition matters because timely treatment gives clearly better outcomes than waiting for complications to develop first.",
-   "say": "Empty sella on MRI confirms Sheehan syndrome years after the infarction.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
-    "alt": "Sheehan syndrome follow up.",
-    "caption": "Sheehan follow up. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Replacement follows the rule of cortisol before thyroxine, termed **replacement sequence**. Starting levothyroxine first accelerates cortisol clearance and can precipitate adrenal crisis. Hydrocortisone education and emergency cards accompany it. Students should connect this fact with the presenting symptoms, since examination questions usually test that clinical link directly.",
-   "say": "Replacement sequence gives cortisol before thyroxine to avoid adrenal crisis.",
+   "tx": "**Sheehan syndrome** refers to postpartum anterior pituitary necrosis provoked by catastrophic obstetric haemorrhage and profound hypovolaemic shock during delivery. During pregnancy, the anterior pituitary gland hypertrophies up to twice its normal volume without an increase in its vascular supply. When severe postpartum haemorrhage occurs, severe arterial hypotension triggers intense vasospasm and microthrombi within the low-pressure hypophyseal-portal capillary plexus. This causes ischaemic necrosis of seventy-five percent or more of anterior pituitary parenchymal tissue.",
+   "say": "Sheehan syndrome results from ischaemic anterior pituitary necrosis following massive postpartum haemorrhage. The hypertrophied pituitary gland collapses into avascular infarction when severe hypotension shuts down the low-pressure portal capillary circulation.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Correct order",
+     "title": "Anterior Pituitary Vulnerability",
      "points": [
-      "Hydrocortisone first",
-      "Then levothyroxine"
+      "Low-pressure portal venous blood supply",
+      "Doubles in volume during normal pregnancy",
+      "Prone to ischaemic infarction during shock",
+      "Destruction of over 75% causes panhypopituitarism"
      ]
     },
     "right": {
-     "title": "Dangerous order",
+     "title": "Posterior Pituitary Resilience",
      "points": [
-      "Thyroxine first",
-      "Adrenal crisis risk"
+      "Direct arterial blood supply from internal carotid",
+      "Inferior hypophyseal arteries maintain flow",
+      "Spared in classical Sheehan syndrome",
+      "Diabetes insipidus is exceedingly uncommon"
      ]
     }
    }
   },
   {
-   "tx": "Functional suppression of GnRH by low weight, exercise or stress is **hypothalamic amenorrhoea**. Gonadotropins sit low with low oestrogen despite a normal pituitary. Bone density falls silently while periods are absent. Documenting this finding clearly in the notes guides the next clinician and supports safe, well planned further management.",
-   "say": "Hypothalamic amenorrhoea suppresses GnRH from low weight, exercise or stress.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Cause",
-     "Clue"
-    ],
-    "rows": [
-     [
-      "Low weight",
-      "BMI under 18.5"
-     ],
-     [
-      "Exercise",
-      "Athlete, dancer"
-     ],
-     [
-      "Stress",
-      "Exams, illness"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The energy availability hormone leptin gates hypothalamic function, explaining the **leptin gate**. Fat mass below a threshold silences kisspeptin and GnRH pulses. Weight restoration, not hormones, is the true treatment. When this picture is seen in practice, urgent senior review is wise whenever there is any doubt about severity.",
-   "say": "The leptin gate silences GnRH below a fat threshold, and weight restoration treats it.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/amenorrhoea-primary-secondary-turner-asherman-fig1.webp",
-    "alt": "Hypothalamic amenorrhoea context.",
-    "caption": "Amenorrhoea context. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Bone protection in hypoestrogenic young women uses oestrogen replacement until natural menopause age, termed **bone protection replacement**. The combined pill is commonly used though bone specific regimens exist. Calcium, vitamin D and weight bearing exercise add support. Understanding this mechanism explains the symptoms, the investigation findings and the logic behind each step of treatment given.",
-   "say": "Bone protection replacement gives oestrogen until natural menopause age in young women.",
+   "tx": "**Failure of lactation** in the immediate postpartum puerperium represents the earliest, most characteristic clinical harbinger of Sheehan syndrome. Destruction of pituitary lactotroph cells produces absolute prolactin deficiency, preventing physiological breast engorgement and milk synthesis. The woman is entirely unable to breastfeed her newborn. Months later, persistent secondary amenorrhoea supervenes due to gonadotroph destruction and deficient luteinizing hormone and follicle-stimulating hormone secretion, signaling irreversible hypothalamic-pituitary-ovarian axis collapse.",
+   "say": "The earliest clinical sign is the sudden inability to lactate after delivery due to prolactin deficiency. Months later, failure of menses to return despite not breastfeeding confirms anterior pituitary failure.",
    "vis": {
     "kind": "flow",
+    "title": "Sequential Clinical Emergence of Endocrine Deficits",
     "nodes": [
      {
-      "id": "n0",
-      "label": "Hypoestrogenism confirmed"
+      "id": "s1",
+      "label": "Severe PPH",
+      "sub": "Obstetric haemorrhage and hypovolaemic shock"
      },
      {
-      "id": "n1",
-      "label": "Oestrogen replaced"
+      "id": "s2",
+      "label": "Failure of Lactation",
+      "sub": "Prolactin lack causes agalactia in puerperium"
      },
      {
-      "id": "n2",
-      "label": "DEXA monitored"
+      "id": "s3",
+      "label": "Secondary Amenorrhoea",
+      "sub": "Gonadotropin loss prevents ovarian cycles"
      },
      {
-      "id": "n3",
-      "label": "Weight restored"
+      "id": "s4",
+      "label": "Panhypopituitarism",
+      "sub": "Secondary hypothyroidism and adrenal crisis"
      }
     ],
     "edges": [
      [
-      "n0",
-      "n1"
+      "s1",
+      "s2",
+      "Ischaemic necrosis"
      ],
      [
-      "n1",
-      "n2"
+      "s2",
+      "s3",
+      "Immediate puerperium"
      ],
      [
-      "n2",
-      "n3"
+      "s3",
+      "s4",
+      "Progressive loss"
      ]
     ]
    }
   },
   {
-   "tx": "Sheehan presentations can be acute with hyponatraemia and hypoglycaemia in the puerperium, an **acute presentation** variant. It mimics other postpartum collapses. Sodium and glucose with pituitary failure after haemorrhage should trigger the thought. This distinction changes management, so it should be settled early rather than after empirical treatment has already begun.",
-   "say": "Acute Sheehan presentation mimics postpartum collapse with low sodium and glucose.",
+   "tx": "**Panhypopituitarism** develops insidiously as hormone deficiencies unfold in a classic chronological order: growth hormone and prolactin fail first, followed sequentially by luteinizing hormone, follicle-stimulating hormone, thyroid-stimulating hormone, and adrenocorticotropic hormone. Progressive hypopituitarism leads to dry, prematurely aged skin, fine perioral wrinkling, cold intolerance, profound asthenia, bradycardia, and orthostatic hypotension. Because posterior pituitary vascular supply arises directly from internal carotid arteries, diabetes insipidus occurs in fewer than five percent of cases.",
+   "say": "Panhypopituitarism develops sequentially, losing growth hormone and prolactin first, followed by gonadotropins, TSH, and ACTH. Patients develop cold intolerance, lethargy, bradycardia, and orthostatic hypotension, while diabetes insipidus remains exceptionally rare.",
+   "vis": {
+    "kind": "table",
+    "title": "Sequential Pituitary Hormone Deficits and Clinical Signs",
+    "cols": [
+     "Pituitary Hormone",
+     "Target Organ Response",
+     "Resulting Clinical Manifestation"
+    ],
+    "rows": [
+     [
+      "Prolactin (PRL)",
+      "Mammary gland alveolar cells",
+      "Complete failure of postpartum lactation"
+     ],
+     [
+      "LH and FSH",
+      "Ovarian follicular maturation",
+      "Secondary amenorrhoea and breast atrophy"
+     ],
+     [
+      "Thyroid-stimulating hormone (TSH)",
+      "Thyroid follicular cells",
+      "Secondary hypothyroidism and cold intolerance"
+     ],
+     [
+      "Adrenocorticotropic hormone (ACTH)",
+      "Adrenal zona fasciculata",
+      "Secondary adrenal insufficiency and shock"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Axillary hair loss** and complete loss of pubic hair (trichotillomania-like depilation) constitute cardinal physical examination findings in established Sheehan syndrome. Loss of adrenal androgens driven by ACTH deficiency, coupled with ovarian failure from absent gonadotropins, causes complete involution of secondary sexual hair. Physical inspection also demonstrates marked regression of breast tissue, urogenital mucosal atrophy causing severe dyspareunia, and distinctive alabaster-like cutaneous pallor resulting from combined anaemia and lack of melanocyte-stimulating hormone.",
+   "say": "Loss of pubic and axillary hair is a classic physical sign, driven by combined adrenal androgen and ovarian hormone deficiency. Look also for breast atrophy, urogenital dryness, and pale alabaster skin.",
    "vis": {
     "kind": "compare",
     "left": {
-     "title": "Acute",
+     "title": "Primary Adrenal Failure (Addison)",
      "points": [
-      "Days after haemorrhage",
-      "Low sodium and glucose"
+      "High ACTH stimulates melanocytes",
+      "Marked cutaneous hyperpigmentation",
+      "Mineralocorticoid aldosterone lost",
+      "Severe hyperkalaemia and hyponatraemia"
      ]
     },
     "right": {
-     "title": "Chronic",
+     "title": "Secondary Adrenal Failure (Sheehan)",
      "points": [
-      "Years later",
-      "Fatigue, amenorrhoea"
+      "Low ACTH fails to stimulate melanocytes",
+      "Distinctive alabaster cutaneous pallor",
+      "Aldosterone preserved via renin-angiotensin",
+      "Normal potassium balance maintained"
      ]
     }
    }
   },
   {
-   "tx": "Fertility with gonadotropin therapy is possible in Sheehan syndrome because ovaries are intact, termed **fertility restoration**. Ovulation induction replaces the missing pituitary signals. Pregnancies thereafter need endocrine co care. Careful history taking and examination help place this finding in the right clinical context before treatment is planned.",
-   "say": "Fertility restoration uses gonadotropins in Sheehan syndrome because ovaries remain intact.",
+   "tx": "**Empty sella** sign on high-resolution sagittal cranial magnetic resonance imaging provides definitive radiological confirmation of chronic Sheehan syndrome. In the acute necrotic phase, imaging reveals an enlarged, non-enhancing, infarcted pituitary gland with surrounding ring enhancement. Over subsequent years, necrotic pituitary parenchyma undergoes autolysis and shrinkage, allowing the arachnoid space to herniate downward through the diaphragma sellae. Cerebrospinal fluid fills the sella turcica, flattening a thin sliver of residual pituitary tissue against the floor.",
+   "say": "Magnetic resonance imaging confirms Sheehan syndrome by displaying an empty sella. The necrotic pituitary tissue atrophies over time, allowing cerebrospinal fluid to fill the sella turcica and compress the residual gland against the bone floor.",
    "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/mayer-rokitansky-kuster-hauser-fig1.webp",
-    "alt": "Amenorrhoea fertility pathways.",
-    "caption": "Fertility pathways. [Credit: StewardMD]",
-    "ar": 1.5
+    "kind": "flow",
+    "title": "Radiological Evolution of the Sella Turcica",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Acute Necrosis",
+      "sub": "Enlarged non-enhancing infarcted pituitary"
+     },
+     {
+      "id": "m2",
+      "label": "Tissue Autolysis",
+      "sub": "Parenchymal shrinkage over months to years"
+     },
+     {
+      "id": "m3",
+      "label": "Arachnoid Herniation",
+      "sub": "CSF descends through incompetent diaphragma"
+     },
+     {
+      "id": "m4",
+      "label": "Empty Sella",
+      "sub": "Flattened rim of residual pituitary tissue"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2",
+      "Cellular reabsorption"
+     ],
+     [
+      "m2",
+      "m3",
+      "Pressure transmission"
+     ],
+     [
+      "m3",
+      "m4",
+      "Established appearance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Corticosteroid replacement** must unconditionally precede the initiation of thyroid hormone replacement in patients with Sheehan syndrome. Administering levothyroxine before hydrocortisone accelerates hepatic metabolic clearance of circulating cortisol while increasing basal metabolic tissue demands. In a patient with compromised adrenal reserve, this precipitous drop in available cortisol triggers a fatal, life-threatening acute addisonian crisis with refractory cardiovascular collapse. Hydrocortisone fifteen to twenty milligrams daily is initiated first, followed several days later by cautious levothyroxine titration.",
+   "say": "Never start levothyroxine before hydrocortisone in Sheehan syndrome. Thyroid hormone accelerates cortisol breakdown, which will trigger a fatal adrenal crisis in an un-supplemented patient. Always replace steroids first.",
+   "vis": {
+    "kind": "flow",
+    "title": "Critical Hierarchy of Hormone Replacement Therapy",
+    "nodes": [
+     {
+      "id": "h1",
+      "label": "Hydrocortisone First",
+      "sub": "15 to 20 mg daily in divided morning doses"
+     },
+     {
+      "id": "h2",
+      "label": "Adrenal Protection",
+      "sub": "Restores baseline glucocorticoid levels"
+     },
+     {
+      "id": "h3",
+      "label": "Levothyroxine Second",
+      "sub": "Start 50 mcg daily after glucocorticoid cover"
+     },
+     {
+      "id": "h4",
+      "label": "Steroid Safety Rule",
+      "sub": "Double glucocorticoid dose during acute illness"
+     }
+    ],
+    "edges": [
+     [
+      "h1",
+      "h2",
+      "Prioritized replacement"
+     ],
+     [
+      "h2",
+      "h3",
+      "Safe introduction"
+     ],
+     [
+      "h3",
+      "h4",
+      "Stress adaptation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Hormone replacement therapy** incorporating cyclical physiological estrogen and progestogen is essential in premenopausal women with Sheehan syndrome to prevent severe premature osteoporotic fractures and alleviate urogenital atrophy. Conjugated equine estrogen 0.625 mg daily or transdermal estradiol patches are combined with micronized progesterone 200 mg for twelve days per month to induce scheduled withdrawal bleeding and protect the endometrium. In addition to preserving bone mineral density, cyclical therapy restores secondary sexual characteristics, libido, and well-being.",
+   "say": "Premenopausal women require physiological estrogen and progestin replacement to preserve bone density, maintain secondary sexual characteristics, and protect the endometrium from unopposed proliferation.",
+   "vis": {
+    "kind": "table",
+    "title": "Comprehensive Replacement Protocols in Panhypopituitarism",
+    "cols": [
+     "Hormonal Axis",
+     "Replacement Medication",
+     "Therapeutic Monitoring Target"
+    ],
+    "rows": [
+     [
+      "Glucocorticoid axis",
+      "Oral hydrocortisone 15 to 20 mg daily",
+      "Clinical well-being, blood pressure, weight"
+     ],
+     [
+      "Thyroid axis",
+      "Levothyroxine 50 to 100 mcg daily",
+      "Serum free T4 in upper half of normal range"
+     ],
+     [
+      "Gonadal axis",
+      "Cyclical estrogen plus progestin",
+      "Symptom relief, bone mineral density DEXA"
+     ],
+     [
+      "Growth hormone axis",
+      "Recombinant human GH (optional)",
+      "Serum IGF-1 levels in age-matched range"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Ovulation induction** for women with Sheehan syndrome seeking pregnancy cannot be achieved with clomiphene citrate because endogenous hypothalamic-pituitary gonadotroph function is permanently destroyed. Instead, successful conception requires exogenous gonadotropin therapy, administering daily subcutaneous injections of recombinant follicle-stimulating hormone or human menopausal gonadotropins to promote ovarian follicular growth. Once the dominant follicle reaches eighteen millimetres on transvaginal ultrasonography, human chorionic gonadotropin is injected to trigger ovulation, followed by luteal phase progesterone support.",
+   "say": "Clomiphene citrate will not work for ovulation induction in Sheehan syndrome because the pituitary gland cannot produce gonadotropins. Exogenous gonadotropin injections containing FSH and LH are mandatory to stimulate follicles.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clomiphene Citrate Ineffective",
+     "points": [
+      "Requires functional pituitary gonadotrophs",
+      "Acts by blocking hypothalamic estrogen feedback",
+      "Cannot elicit LH/FSH release from necrotic gland",
+      "Zero ovulatory response in panhypopituitarism"
+     ]
+    },
+    "right": {
+     "title": "Exogenous Gonadotropins Required",
+     "points": [
+      "Bypasses necrotic pituitary gland entirely",
+      "Recombinant FSH or hMG directly stimulates ovary",
+      "Follicular monitoring via serial ultrasound",
+      "hCG injection administered to trigger oocyte release"
+     ]
+    }
    }
   }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Sheehan syndrome: earliest clinical symptom in puerperium",
+   "b": "Complete failure of lactation due to severe prolactin deficiency."
+  },
+  {
+   "f": "Sheehan syndrome: critical prescribing hierarchy rule",
+   "b": "Always start corticosteroid replacement before levothyroxine to prevent acute adrenal crisis."
+  },
+  {
+   "f": "Ovulation induction in Sheehan syndrome: essential pharmacological requirement",
+   "b": "Exogenous gonadotropins (FSH/hMG); clomiphene fails due to absent pituitary function."
+  }
+ ],
+ "keys": [
+  "Sheehan syndrome causes anterior pituitary ischaemic necrosis following severe postpartum haemorrhage",
+  "Failure of lactation and secondary amenorrhoea represent the earliest cardinal presenting signs",
+  "Hydrocortisone must always be initiated prior to levothyroxine to avoid triggering fatal adrenal crisis"
  ]
 }
