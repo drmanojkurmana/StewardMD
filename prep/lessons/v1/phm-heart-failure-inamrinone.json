@@ -1,0 +1,148 @@
+{
+  "v": 1,
+  "module": "phm-heart-failure",
+  "subject": "pharmacology",
+  "title": "Inodilators and Modern Heart Failure Pillars: Inamrinone, Levosimendan, Sacubitril, Spironolactone, Carvedilol",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "By inhibiting phosphodiesterase 3, **inamrinone** (amrinone) prevents cyclic AMP breakdown in myocytes and vascular smooth muscle alike, so contractility rises while vessels dilate: an inodilator in a single infusion. Because it bypasses the beta receptor entirely, it keeps working in beta blocked or receptor downregulated hearts where dobutamine fades. Its signature toxicity is dose and duration related thrombocytopenia, checked by platelet counts during longer infusions.",
+      "say": "Inamrinone raises cyclic AMP downstream of the receptor, contracting the heart and dilating vessels at once.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "pde3", "label": "Phosphodiesterase 3 inhibited in heart and vessels" },
+          { "id": "camp", "label": "Cyclic AMP accumulates in both tissues" },
+          { "id": "heart", "label": "Myocyte calcium handling strengthens contraction" },
+          { "id": "vessel", "label": "Smooth muscle relaxes: afterload falls" }
+        ],
+        "edges": [["pde3", "camp"], ["camp", "heart"], ["camp", "vessel"]]
+      }
+    },
+    {
+      "tx": "Its better tolerated successor **milrinone** shares the mechanism with a shorter half life of about two to four hours, prolonged substantially in renal failure where the drug accumulates and hypotension lingers after the pump stops. Trials of oral and prolonged PDE3 inhibition in chronic failure showed increased mortality, the standing warning for this class: powerful haemodynamics, worse survival when exposure stretches. Intravenous use stays short, monitored and purposeful.",
+      "say": "Milrinone is the usable inodilator; chronic PDE3 inhibition killed patients in trials, so infusions stay brief.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/heart-failure-fig1.webp",
+        "alt": "Acute left heart failure illustration showing pulmonary congestion and ventricular dysfunction",
+        "caption": "Acute decompensated heart failure, the monitored setting where short inodilator infusions are used as a bridge."
+      }
+    },
+    {
+      "tx": "A different trick altogether, **levosimendan** sensitises troponin C to the calcium already present, strengthening contraction without raising intracellular calcium or oxygen demand, and opens ATP sensitive potassium channels to dilate vessels. Its active metabolite lingers for a week after a day's infusion, giving prolonged effect and prolonged hypotension risk in equal measure. It is used widely in Europe for acute decompensation; arrhythmia and headache are its common costs.",
+      "say": "Levosimendan makes the filament listen harder to calcium instead of shouting louder, and its metabolite stays a week.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Calcium sensitisation gains",
+          "points": [
+            "More force from the same calcium transient",
+            "Myocardial oxygen demand rises little",
+            "Potassium channel opening dilates vessels",
+            "Active metabolite prolongs effect about a week"
+          ]
+        },
+        "right": {
+          "title": "Levosimendan cautions",
+          "points": [
+            "Hypotension can persist after infusion ends",
+            "Atrial fibrillation and ventricular ectopy reported",
+            "Avoid in severe hypotension or outflow obstruction",
+            "Dose reduction in severe renal or hepatic impairment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Returning to oral pillars, **sacubitril valsartan** (detailed in the RAAS module) replaced ACE inhibitors as preferred renin system therapy in reduced ejection fraction failure after beating enalapril on mortality outcomes. The 36 hour ACE inhibitor washout before starting, titration to 97/103 mg twice daily, and pressure, potassium and creatinine surveillance from that module apply unchanged in failure practice, where diuretic doses often need trimming as it takes effect.",
+      "say": "In failure, sacubitril valsartan is the RAAS pillar: wash out, titrate, and watch pressure and potassium.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "switch", "label": "Stop ACE inhibitor, wait 36 hours" },
+          { "id": "start", "label": "Start sacubitril valsartan by prior dose band" },
+          { "id": "titrate", "label": "Double every 2 to 4 weeks toward 97/103 mg twice daily" },
+          { "id": "trim", "label": "Trim diuretics if pressure or volume falls too far" }
+        ],
+        "edges": [["switch", "start"], ["start", "titrate"], ["titrate", "trim"]]
+      }
+    },
+    {
+      "tx": "Aldosterone escapes back to harmful levels during chronic ACE inhibition, driving fibrosis, potassium loss and sympathetic activation, which is why **spironolactone** 25 mg daily cut mortality by 30 percent in severe failure in the RALES trial. The price is hyperkalaemia and kidney injury when monitoring lapses, plus gynaecomastia and breast pain in about one in ten men from its antiandrogen activity; eplerenone, met earlier among diuretics, trades potency for endocrine cleanliness.",
+      "say": "Spironolactone blocks the escaped aldosterone and saves lives; potassium checks and gynaecomastia are its tolls.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mineralocorticoid blockade gains",
+          "points": [
+            "Mortality reduced in severe reduced ejection fraction failure",
+            "Less myocardial and vascular fibrosis signalling",
+            "Potassium and magnesium retained, arrhythmia substrate calms",
+            "Low doses used: spironolactone 25 to 50 mg daily"
+          ]
+        },
+        "right": {
+          "title": "Monitoring obligations",
+          "points": [
+            "Potassium and creatinine at 1 week, 1 month, then quarterly",
+            "Avoid starting above potassium 5 mmol per litre",
+            "Gynaecomastia prompts switch to eplerenone",
+            "Sick day pauses during dehydrating illness"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Among beta blockers, only agents with outcome trials belong in reduced ejection fraction failure, and **carvedilol** is the archetype: beta 1, beta 2 and alpha 1 blockade plus antioxidant properties, titrated from 3.125 mg twice daily toward 25 mg or more. Metoprolol succinate and bisoprolol share the evidence; the class cuts mortality by about a third when started in stable, euvolaemic patients and uptitrated slowly, the famous start low, go slow discipline.",
+      "say": "Carvedilol, bisoprolol and metoprolol succinate are the proven three; start low in stable patients and go slow.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/heart-failure-fig2.webp",
+        "alt": "Frank Starling curve in heart failure showing the flattened relationship between filling pressure and stroke volume",
+        "caption": "The flattened Frank Starling relationship of the failing ventricle that beta blockade and the other pillars gradually remodel."
+      }
+    },
+    {
+      "tx": "Starting a beta blocker during decompensated, wet failure worsens congestion, so initiation waits for euvolaemia, while established users usually continue through decompensation unless shock or severe bradycardia intervenes. **COPD** (chronic obstructive pulmonary disease) is not an absolute bar because cardioselective agents at failure doses spare most beta 2 bronchodilator response, but true asthma still commands caution. Fatigue and masked hypoglycaemia warnings complete the counselling set.",
+      "say": "Start beta blockers dry and stable, keep them through most decompensations, and do not let COPD alone veto them.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "wet", "label": "Decompensated and congested: diurese first" },
+          { "id": "dry", "label": "Euvolaemic and stable: start low dose" },
+          { "id": "slow", "label": "Double every two weeks as tolerated" },
+          { "id": "hold", "label": "Hold only for shock, severe bradycardia or bronchospasm" }
+        ],
+        "edges": [["wet", "dry"], ["dry", "slow"], ["slow", "hold"]]
+      }
+    },
+    {
+      "tx": "Assemble the modern sequence and this lesson's logic shows: four mortality reducing pillars (ARNI or ACE blocker, evidence beta blocker, mineralocorticoid antagonist, and the SGLT2 inhibitor of the next lesson) started early and titrated, diuretics for congestion, digoxin and ivabradine as rate and symptom adjuncts, and infusions like **inamrinone**, milrinone, dobutamine and levosimendan held in reserve for low output crises. Examinations test the sequence as much as any single drug.",
+      "say": "Four pillars first, diuretics for water, infusions only for low output crises; that sequence is the examinable summary.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pillars (mortality benefit)",
+          "points": [
+            "Sacubitril valsartan or ACE inhibitor or blocker",
+            "Carvedilol, bisoprolol or metoprolol succinate",
+            "Spironolactone or eplerenone",
+            "Dapagliflozin or empagliflozin (next lesson)"
+          ]
+        },
+        "right": {
+          "title": "Adjuncts and reserves",
+          "points": [
+            "Loop diuretics titrated to congestion",
+            "Digoxin for symptoms or rate, ivabradine for rate in sinus rhythm",
+            "Hydralazine nitrate where pillars are impossible",
+            "Inodilator infusions for monitored low output states"
+          ]
+        }
+      }
+    }
+  ]
+}
