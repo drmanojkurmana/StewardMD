@@ -1,0 +1,190 @@
+{
+ "key": "obg-infertility-hysterosalpingography",
+ "v": 1,
+ "module": "obg-infertility",
+ "subject": "obstetrics-gynaecology",
+ "title": "Hysterosalpingography and Ovarian Reserve Evaluation",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The primary radiological screening examination for evaluating uterine architecture and tubal patency is **hysterosalpingography**. Under fluoroscopic guidance, water-soluble iodinated contrast is slowly injected into the endocervical canal. The procedure is performed during the early follicular phase between cycle days seven and ten, following cessation of menstrual flow but before ovulation.",
+   "say": "Hysterosalpingography assesses tubal patency and the uterine cavity during the early follicular phase.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/female-infertility-fig1.webp",
+    "alt": "Comprehensive female infertility diagnostic workup pathways.",
+    "caption": "Diagnostic evaluation of female subfertility and anatomical tubal testing. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Normal patency on fluoroscopy is demonstrated by smooth filling of the triangular uterine cavity, bilateral filling of the fallopian tubes, and free **peritoneal contrast spill**. Absence of spill with localized tubal dilatation indicates distal tubal occlusion, whereas non-filling of the cornua suggests proximal tubal obstruction or cornual spasm.",
+   "say": "Free spill of contrast into the peritoneal cavity confirms open, patent fallopian tubes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal HSG Findings",
+     "points": [
+      "Smooth inverted triangular cavity",
+      "Slender bilateral tubal lumens",
+      "Free, unloculated peritoneal spill"
+     ]
+    },
+    "right": {
+     "title": "Abnormal Pathological Findings",
+     "points": [
+      "Intraluminal filling defects (polyps, synechiae)",
+      "Clubbed dilated ampulla without spill",
+      "Cornual cutoff with absent tubal filling"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Transient smooth muscle contraction at the uterotubal junction frequently causes **cornual spasm**, masquerading as true organic proximal tubal occlusion on imaging. Differentiating spasm from true fibrosis requires administration of intravenous antispasmodics or performing selective hysteroscopic tubal cannulation. Laparoscopic chromopertubation is the definitive gold standard to verify true obstruction.",
+   "say": "Cornual spasm mimics organic proximal obstruction and resolves with antispasmodic agents or laparoscopy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Obstruction Site",
+     "Fluoroscopic Appearance",
+     "Confirmatory Test"
+    ],
+    "rows": [
+     [
+      "Cornual spasm",
+      "Abrupt cutoff at uterine horn",
+      "Antispasmodic administration, cannulation"
+     ],
+     [
+      "Hydrosalpinx",
+      "Distal clubbing with retained contrast",
+      "Diagnostic laparoscopy"
+     ],
+     [
+      "Salpingitis isthmica nodosa",
+      "Diverticular outpouchings in isthmus",
+      "Histological evaluation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The absolute diagnostic gold standard for evaluating tubal architecture and pelvic pathology is **laparoscopic chromopertubation**. Performed under general anesthesia, a uterine manipulator injects dilute methylene blue into the cervical canal while direct laparoscopy observes dye egress from the fimbrial ends. This allows simultaneous identification and treatment of pelvic endometriosis and peritubal adhesions.",
+   "say": "Laparoscopic chromopertubation provides direct visualization of dye egress and concurrent treatment of adhesions.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-diagnostic_laparoscopy_gynae.webp",
+    "alt": "Diagnostic laparoscopy and pelvic inspection.",
+    "caption": "Diagnostic laparoscopy and pelvic inspection during chromopertubation evaluation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Quantitative assessment of the remaining follicular pool within both ovaries is termed **ovarian reserve testing**. It predicts the ovarian response to pharmacological gonadotropin stimulation during assisted reproductive cycles. While ovarian reserve testing reliably anticipates the quantity of retrievable oocytes, it does not reliably predict natural monthly fecundity or oocyte quality.",
+   "say": "Ovarian reserve testing predicts response to gonadotropin stimulation but does not determine natural fecundity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Follicular Quantity Markers",
+     "points": [
+      "Serum anti-Mullerian hormone (AMH)",
+      "Antral follicle count (AFC) on TVS",
+      "Day 3 basal FSH and estradiol"
+     ]
+    },
+    "right": {
+     "title": "Follicular Quality Factors",
+     "points": [
+      "Strictly dependent on chronological age",
+      "Aneuploidy rate in embryos",
+      "Not captured by hormonal blood tests"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Secreted by the granulosa cells of preantral and small antral follicles, **anti-Mullerian hormone** represents the most reliable circulating biochemical marker of ovarian reserve. Because AMH production occurs independently of pituitary gonadotropin release, circulating concentrations remain relatively constant throughout the menstrual cycle, enabling blood sampling on any cycle day.",
+   "say": "Anti-Mullerian hormone remains stable across the menstrual cycle and mirrors the growing follicular pool.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Serum AMH Level",
+     "Ovarian Reserve Category",
+     "Anticipated Stimulation Response"
+    ],
+    "rows": [
+     [
+      "Below 1.0 ng/mL",
+      "Diminished ovarian reserve",
+      "Poor response, high cycle cancellation risk"
+     ],
+     [
+      "1.0 to 3.5 ng/mL",
+      "Normal ovarian reserve",
+      "Standard gonadotropin response"
+     ],
+     [
+      "Above 3.5 ng/mL",
+      "High reserve or PCOS",
+      "Hyper-response, high OHSS risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Measurement of **day three FSH and estradiol** provides supplementary endocrine evaluation of the hypothalamic-pituitary-ovarian axis. As the follicular pool diminishes, reduced granulosa inhibin B feedback results in compensatory elevation of early follicular FSH. A basal FSH concentration exceeding ten to twelve international units per liter suggests declining functional reserve.",
+   "say": "Elevated early follicular FSH reflects lost inhibin feedback from a depleted follicular cohort.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Basal FSH Interpretation",
+     "points": [
+      "Normal: under 10 IU/L",
+      "Borderline: 10 to 15 IU/L",
+      "Markedly elevated: over 15 to 20 IU/L"
+     ]
+    },
+    "right": {
+     "title": "Concomitant Estradiol Check",
+     "points": [
+      "Must be under 50 to 80 pg/mL",
+      "Early follicular recruitment raises estradiol",
+      "Suppresses FSH falsely into normal range"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Transvaginal ultrasound measurement of **antral follicle count** directly tallies resting follicles measuring two to ten millimeters in diameter across both ovaries during the early follicular phase. Combined with serum AMH, antral follicle count serves as the premier clinical predictor for individualizing starting gonadotropin dosages in IVF protocols.",
+   "say": "Antral follicle count directly quantifies responsive follicles and guides personalized IVF stimulation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antral Follicle Count",
+     "Classification",
+     "Clinical Implication"
+    ],
+    "rows": [
+     [
+      "Fewer than 5 to 7 follicles",
+      "Low antral count",
+      "Poor response to stimulation"
+     ],
+     [
+      "8 to 15 follicles",
+      "Normal antral count",
+      "Predictable optimal response"
+     ],
+     [
+      "Greater than 16 to 20 follicles",
+      "Polycystic appearance",
+      "High risk of ovarian hyperstimulation"
+     ]
+    ]
+   }
+  }
+ ]
+}

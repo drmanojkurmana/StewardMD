@@ -1,0 +1,185 @@
+{
+ "key": "obg-ovarian-cancer-inhibin",
+ "v": 1,
+ "module": "obg-ovarian-cancer",
+ "subject": "obstetrics-gynaecology",
+ "title": "Inhibin Biomarkers, Krukenberg Tumours and Cytoreductive Surgery",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The dimeric glycoprotein hormone **serum inhibin B** functions as the primary diagnostic and monitoring tumor marker for granulosa cell tumors. Secreted directly by proliferation-active granulosa cells, inhibin suppresses pituitary follicle-stimulating hormone. Post-resection levels decline to undetectable amounts, making rising inhibin B levels a sensitive indicator of asymptomatic tumor recurrence.",
+   "say": "Inhibin B is a sensitive serum marker for monitoring disease activity in granulosa cell tumors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tumor Type",
+     "Primary Biomarker",
+     "Physiological Function"
+    ],
+    "rows": [
+     [
+      "Granulosa cell tumor",
+      "Inhibin B and AMH",
+      "Suppresses pituitary FSH secretion"
+     ],
+     [
+      "Dysgerminoma",
+      "Lactate dehydrogenase (LDH)",
+      "Reflects rapid glycolytic turnover"
+     ],
+     [
+      "Yolk sac tumor",
+      "Alpha-fetoprotein (AFP)",
+      "Fetal embryonic serum glycoprotein"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Metastatic adenocarcinoma to the ovaries containing mucin-producing signet-ring cells is known as **Krukenberg tumour**. Classic lesions present as bilateral, solid, nodular, bosselated ovarian enlargements that retain the original anatomical contour of the ovary. The primary malignancy arises in the gastrointestinal tract, predominantly from gastric signet-ring cell adenocarcinoma.",
+   "say": "Krukenberg tumors are bilateral ovarian metastases containing mucin-filled signet-ring cells.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/krukenberg-tumour-fig1.webp",
+    "alt": "Gross and microscopic histology of Krukenberg tumor.",
+    "caption": "Krukenberg tumor gross lobulated appearance and mucin-rich signet ring cells. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Histological examination reveals individual malignant **signet ring cells** dispersed within a dense, reactive, cellular pseudosarcomatous stroma. The cytoplasm of each tumor cell is swollen with abundant intracytoplasmic mucin that compresses the hyperchromatic nucleus against the cell membrane. Intracellular mucin is highlighted using mucicarmine, periodic acid-Schiff, or alcian blue special stains.",
+   "say": "Intracellular mucin droplets displace the nucleus peripherally, creating the signet-ring appearance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Signet Ring Cell Morphology",
+     "points": [
+      "Eccentric flattened nucleus at periphery",
+      "Abundant intracytoplasmic mucin vacuole",
+      "Stains positively with mucicarmine and PAS"
+     ]
+    },
+    "right": {
+     "title": "Ovarian Stroma Reaction",
+     "points": [
+      "Dense cellular pseudosarcomatous stroma",
+      "Marked non-neoplastic stromal hyperplasia",
+      "Thecal luteinization causing androgenicity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The cornerstone of management for advanced epithelial ovarian carcinoma is **primary cytoreductive surgery**. The surgical goal is maximum tumor debulking, comprising total abdominal hysterectomy, bilateral salpingo-oophorectomy, infragastric omentectomy, peritoneal stripping, and bowel resections as necessary. Residual tumor diameter is the single most important independent prognostic factor.",
+   "say": "Maximum surgical cytoreduction to remove all visible macroscopic disease directly dictates long-term survival.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Debulking Outcome",
+     "Residual Tumor Size",
+     "Prognostic Significance"
+    ],
+    "rows": [
+     [
+      "Complete cytoreduction",
+      "No macroscopic residual tumor",
+      "Highest median overall survival"
+     ],
+     [
+      "Optimal cytoreduction",
+      "Residual nodules under 1 cm",
+      "Significant survival advantage"
+     ],
+     [
+      "Suboptimal debulking",
+      "Residual nodules 1 cm or greater",
+      "Poor survival, high chemoresistance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Peritoneal metastases extending beyond the pelvic brim define **FIGO stage three** ovarian carcinoma. Stage 3A is characterized by microscopic retroperitoneal lymph node metastasis or microscopic extra-pelvic peritoneal seeding. Stage 3B features macroscopic peritoneal implants up to two centimeters, while stage 3C involves peritoneal deposits exceeding two centimeters or retroperitoneal lymphadenopathy.",
+   "say": "Stage three ovarian cancer features abdominal peritoneal implants outside the pelvis or nodal metastases.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/ovarian-cancer-staging-and-cytoreduction-fig1.webp",
+    "alt": "Anatomical staging and surgical cytoreduction diagram for ovarian cancer.",
+    "caption": "FIGO stage III peritoneal implants and debulking principles. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Distant extra-abdominal dissemination is categorized as **FIGO stage four** ovarian carcinoma. Stage 4A is diagnosed when pleural effusion demonstrates positive cytological confirmation of malignant cells. Stage 4B indicates parenchymal metastases to liver or spleen, transmural bowel infiltration, or extra-abdominal lymph node metastases including supraclavicular and inguinal nodes.",
+   "say": "Stage four ovarian cancer denotes malignant pleural effusion or distant parenchymal organ metastases.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stage 4A Classification",
+     "points": [
+      "Pleural effusion present",
+      "Cytological confirmation of malignant cells",
+      "Peritoneal washings do not upstage to 4A"
+     ]
+    },
+    "right": {
+     "title": "Stage 4B Classification",
+     "points": [
+      "Hepatic or splenic parenchymal metastases",
+      "Transmural gastrointestinal invasion",
+      "Inguinal or supraclavicular nodal spread"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "When extensive disease burden or medical comorbidity precludes upfront complete resection, **interval cytoreductive surgery** is adopted. Patients receive three cycles of neoadjuvant platinum-taxane chemotherapy to shrink tumor volume, followed by interval debulking surgery and three further cycles of adjuvant chemotherapy. Overall survival matches upfront surgery with significantly lower perioperative morbidity.",
+   "say": "Interval cytoreduction following neoadjuvant chemotherapy offers comparable survival with reduced surgical morbidity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Approach",
+     "Indication",
+     "Surgical Timing"
+    ],
+    "rows": [
+     [
+      "Primary cytoreduction",
+      "Resectable disease, good performance",
+      "Initial upfront intervention"
+     ],
+     [
+      "Interval debulking",
+      "Unresectable disease, poor performance",
+      "After 3 cycles of neoadjuvant chemotherapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Maintenance therapy with targeted **PARP inhibitor maintenance** has transformed long-term progression-free survival in advanced high grade serous ovarian cancer. In patients exhibiting homologous recombination deficiency, olaparib or niraparib maintains remission following platinum response. Bevacizumab, a vascular endothelial growth factor antagonist, is added in high-risk suboptimal stage four disease.",
+   "say": "PARP inhibitors maintain chemotherapy response by exploiting homologous recombination repair deficiency.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "PARP Inhibitor Mechanism",
+     "points": [
+      "Blocks base excision single-strand repair",
+      "Causes replication fork collapse",
+      "Triggers synthetic lethality in HRD cells"
+     ]
+    },
+    "right": {
+     "title": "Clinical Applications",
+     "points": [
+      "First-line maintenance after platinum",
+      "Olaparib, niraparib, or rucaparib",
+      "Major PFS extension in BRCA mutants"
+     ]
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,195 @@
+{
+ "key": "obg-infertility-male-infertility",
+ "v": 1,
+ "module": "obg-infertility",
+ "subject": "obstetrics-gynaecology",
+ "title": "Male Infertility, Semen Analysis and Tubal Pathology",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Evaluation of the infertile couple begins with concurrent assessment of **male factor infertility**, contributing to approximately forty to fifty percent of all childbearing delays. Diagnostic evaluation requires a detailed history of testicular trauma, mumps orchitis, cryptorchidism, heat exposure, gonadotoxic medications, and a comprehensive physical examination assessing testicular volume and secondary sexual characteristics.",
+   "say": "Male factor contributes to half of all infertility cases and mandates simultaneous initial assessment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/male-infertility-fig1.webp",
+    "alt": "Anatomical etiologies of male infertility.",
+    "caption": "Etiologies of male infertility including varicocele, obstruction, and testicular failure. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The cornerstone diagnostic laboratory investigation is standardized **WHO semen analysis**, performed after two to seven days of sexual abstinence. Modern sixth edition World Health Organization reference limits define lower fifth percentile thresholds: semen volume of 1.4 milliliters, sperm concentration of sixteen million per milliliter, and total motility of forty-two percent.",
+   "say": "WHO guidelines define normal lower reference limits for volume, sperm concentration, and motility.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Parameter",
+     "Lower Reference Limit (WHO 6th)",
+     "Clinical Unit"
+    ],
+    "rows": [
+     [
+      "Semen volume",
+      "1.4",
+      "Milliliters"
+     ],
+     [
+      "Sperm concentration",
+      "16",
+      "Million per milliliter"
+     ],
+     [
+      "Total motility (PR + NP)",
+      "42",
+      "Percentage"
+     ],
+     [
+      "Progressive motility (PR)",
+      "30",
+      "Percentage"
+     ],
+     [
+      "Normal morphology (Kruger)",
+      "4",
+      "Percentage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Strict evaluation of cellular contours using **Kruger strict morphology** requires that at least four percent of spermatozoa exhibit perfect head, neck, and tail parameters. Sperm morphology below four percent, designated teratozoospermia, reflects impaired acrosomal cap formation, defective zona pellucida binding, and impaired fertilization capacity, often requiring intracytoplasmic sperm injection.",
+   "say": "Strict morphology thresholds identify teratozoospermia and guide the need for assisted fertilisation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Sperm Criteria",
+     "points": [
+      "Smooth oval head contour",
+      "Acrosome covers 40 to 70 percent of head",
+      "Straight slender midpiece and uniform tail"
+     ]
+    },
+    "right": {
+     "title": "Morphological Defects",
+     "points": [
+      "Tapered, amorphous, or round heads",
+      "Large cytoplasmic droplets on midpiece",
+      "Coiled, duplicate, or absent tails"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The complete absence of spermatozoa from the centrifuged ejaculate pellet defines **clinical azoospermia**. Diagnostic workup requires distinguishing obstructive from non-obstructive etiologies by measuring serum follicle-stimulating hormone and assessing testicular size. Obstructive cases feature normal testicular volume and normal serum FSH, while non-obstructive testicular failure exhibits elevated FSH and small soft testes.",
+   "say": "Azoospermia is divided into obstructive and non-obstructive types based on FSH and testicular volume.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-con-vasectomy.webp",
+    "alt": "Diagram of male reproductive tract and vas deferens occlusion.",
+    "caption": "Anatomical pathways of the male reproductive tract and vas deferens obstruction. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "A common genetic etiology of obstructive azoospermia is **congenital bilateral absence of the vas deferens**, found in over ninety-five percent of men with cystic fibrosis. Mutations in the CFTR gene cause failure of mesonephric duct development. Genetic testing of both partners is mandatory before performing surgical sperm aspiration and intracytoplasmic sperm injection.",
+   "say": "Bilateral absence of the vas deferens is linked to CFTR mutations and requires genetic counselling.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CFTR Pathophysiology",
+     "points": [
+      "Loss of CFTR chloride conductance",
+      "Incomplete Wolffian duct maturation",
+      "Absent vas deferens and seminal vesicles"
+     ]
+    },
+    "right": {
+     "title": "Clinical Features",
+     "points": [
+      "Low volume acidic ejaculate (pH under 7.2)",
+      "Absent seminal fructose",
+      "Normal spermatogenesis on testicular biopsy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Non-obstructive testicular failure frequently arises from the chromosomal anomaly **Klinefelter syndrome**, sporting a 47,XXY karyotype. Patients present with hypergonadotropic hypogonadism, small firm atrophic testes, gynecomastia, tall eunuchoid proportions, and azoospermia. Microdissection testicular sperm extraction recovers focal islands of spermatogenesis in approximately fifty percent of cases.",
+   "say": "Klinefelter syndrome presents with small firm testes, elevated gonadotropins, and non-obstructive azoospermia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Finding",
+     "Underlying Mechanism",
+     "Diagnostic Tool"
+    ],
+    "rows": [
+     [
+      "Small firm testes",
+      "Hyalinization of seminiferous tubules",
+      "Physical palpation with orchidometer"
+     ],
+     [
+      "High FSH and LH",
+      "Loss of inhibin B and testosterone feedback",
+      "Serum gonadotropin profile"
+     ],
+     [
+      "Azoospermia",
+      "Aplastic germ cell lining",
+      "Chromosomal karyotyping (47,XXY)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Accounting for thirty percent of all female subfertility cases, **tubal factor infertility** represents mechanical hindrance to ovum pickup and gamete transport. The primary cause is previous pelvic inflammatory disease, with Chlamydia trachomatis causing silent insidious salpingitis, mucosal deciliation, and intraluminal fimbrial agglutination resulting in hydrosalpinx formation.",
+   "say": "Pelvic inflammatory disease from Chlamydia is the leading cause of tubal occlusive infertility.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Infectious Pathogens",
+     "points": [
+      "Chlamydia trachomatis silent salpingitis",
+      "Neisseria gonorrhoeae acute PID",
+      "Polymicrobial anaerobic pelvic abscess"
+     ]
+    },
+    "right": {
+     "title": "Tubal Structural Sequelae",
+     "points": [
+      "Loss of mucosal ciliary transport",
+      "Fimbrial phimosis and agglutination",
+      "Hydrosalpinx and peritubal adhesions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The presence of a fluid-distended fallopian tube, termed **hydrosalpinx**, severely impairs natural conception and reduces in vitro fertilization implantation rates by half. Toxic retrograde leakage of hydrosalpinx fluid into the uterine cavity exerts direct embryotoxic effects and impairs endometrial receptivity. Laparoscopic salpingectomy or proximal tubal clipping prior to IVF restores standard implantation success.",
+   "say": "Hydrosalpinx fluid leaks retrogradely into the uterus, halving IVF success until the tube is excised or clipped.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pathology",
+     "Adverse Effect on Fertility",
+     "Corrective Intervention"
+    ],
+    "rows": [
+     [
+      "Hydrosalpinx leakage",
+      "Direct embryotoxicity, washes out embryo",
+      "Pre-IVF laparoscopic salpingectomy"
+     ],
+     [
+      "Peritubal adhesions",
+      "Prevents ovum pickup by fimbria",
+      "Laparoscopic adhesiolysis"
+     ]
+    ]
+   }
+  }
+ ]
+}
