@@ -1,0 +1,207 @@
+{
+  "v": 1,
+  "module": "pat-environmental-nutritional",
+  "subject": "pathology",
+  "title": "Smoking, Poisons, Pneumoconiosis, and Nutritional Deficiency Pathology",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Cigarette smoke delivers polycyclic hydrocarbons, nitrosamines, and aromatic amines to lung, bladder, pancreas, cervix, and vessels, and remains the single largest preventable cause of cancer and vascular death. Dose in pack years predicts risk, and cessation benefits accrue for decades; the exposure is simply **tobacco smoking**.",
+      "say": "Smoking remains the largest preventable cause of cancer and vascular death; every pack year counts and quitting always pays.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Exposure",
+          "Signature diseases",
+          "Pearl"
+        ],
+        "rows": [
+          [
+            "Tobacco smoke",
+            "Lung, bladder, pancreas cancers; COPD",
+            "Pack years quantify dose"
+          ],
+          [
+            "Alcohol",
+            "Liver cirrhosis, aerodigestive cancers",
+            "Synergy with smoking and hepatitis"
+          ],
+          [
+            "Lead",
+            "Encephalopathy, anaemia, wrist drop",
+            "Basophilic stippling, Burton lines"
+          ],
+          [
+            "Carbon monoxide",
+            "Cherry red lividity, hypoxic injury",
+            "Carboxyhaemoglobin measured"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Alcohol injures liver through steatosis, hepatitis, and cirrhosis, pancreas through repeated pancreatitis, heart through dilated cardiomyopathy, and the fetus through growth and facial abnormalities, while acetaldehyde adds carcinogenicity. Folate deficiency and withdrawal seizures complete the ward picture of **chronic alcohol injury**.",
+      "say": "Alcohol writes its pathology across liver, pancreas, heart, brain, and the unborn child; ask about it in every system review.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lead poisoning",
+          "points": [
+            "Abdominal colic, anaemia, neuropathy",
+            "Basophilic stippling of red cells",
+            "Children: encephalopathy, development delay"
+          ]
+        },
+        "right": {
+          "title": "Mercury and arsenic",
+          "points": [
+            "Mercury: tremor, erethism, Minamata disease",
+            "Arsenic: skin cancers, blackfoot disease",
+            "Both demand exposure history detective work"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Inhaled mineral dusts scar lungs in patterns named for their trades: silica gives upper lobe nodular fibrosis and tuberculosis susceptibility, coal dust gives progressive massive fibrosis, and asbestos gives pleural plaques and mesothelioma. The family name is **pneumoconiosis**, and silicosis eggshell nodal calcification is its radiological signature.",
+      "say": "Silica, coal, and asbestos each scar the lung in a trade shaped pattern; the exposure history is the diagnostic test.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/silicosis-fig1.webp",
+        "alt": "Silicosis pulmonary pathology",
+        "caption": "Silicosis pulmonary pathology with nodular fibrosis from inhaled silica dust."
+      }
+    },
+    {
+      "tx": "Radiation injury divides into acute whole body syndromes, haematopoietic, gastrointestinal, and cerebrovascular at ascending doses, and late fibrosis, strictures, infertility, and second cancers in treated fields. Deterministic effects have thresholds while stochastic cancer risk may not; the framework is **radiation injury** classification.",
+      "say": "Acute radiation syndromes climb from marrow to gut to brain with dose; late fibrosis and second cancers follow survivors for life.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Rising whole body dose absorbed"
+          },
+          {
+            "id": "b",
+            "label": "Haematopoietic syndrome: infection, bleeding"
+          },
+          {
+            "id": "c",
+            "label": "Gastrointestinal syndrome: mucosal denudation"
+          },
+          {
+            "id": "d",
+            "label": "Cerebrovascular syndrome: rapidly fatal"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Protein energy malnutrition splits by pattern: kwashiorkor brings oedema, flaky paint dermatosis, hair depigmentation, and fatty liver with relatively preserved weight, while marasmus wastes fat and muscle without oedema in a wizened child. Oedema is the dividing sign between **kwashiorkor and marasmus**.",
+      "say": "Oedema, flaky paint skin, and a fatty liver mean kwashiorkor; marasmus wastes without oedema. That one sign separates them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Kwashiorkor",
+          "points": [
+            "Oedema masks weight loss",
+            "Flaky paint dermatosis, pale hair",
+            "Fatty liver, low albumin"
+          ]
+        },
+        "right": {
+          "title": "Marasmus",
+          "points": [
+            "Severe wasting, no oedema",
+            "Old man facies, loss of fat pads",
+            "Albumin relatively preserved"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Vitamin A deficiency dries the conjunctiva into Bitot spots, blinds through corneal keratomalacia, and disables immunity, remaining a leading preventable cause of childhood blindness where diets lack dairy, eggs, and green vegetables. Night blindness is its earliest complaint; the ocular sequence is **xerophthalmia**.",
+      "say": "Night blindness progressing to Bitot spots and corneal melting makes vitamin A deficiency a preventable blinding emergency.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/vitamin-a-deficiency-fig1.webp",
+        "alt": "Ocular signs of xerophthalmia in vitamin A deficiency",
+        "caption": "Ocular signs of xerophthalmia, the blinding sequence of vitamin A deficiency."
+      }
+    },
+    {
+      "tx": "The remaining deficiency classics reward pattern memory: scurvy bleeds gums and wounds for want of vitamin C in collagen hydroxylation, rickets bows growing bones without vitamin D, beriberi fails hearts and nerves without thiamine, and pellagra gives diarrhoea, dermatitis, and dementia without niacin. Each vitamin owns a syndrome: **scurvy, rickets, beriberi, pellagra**.",
+      "say": "Scurvy, rickets, beriberi, and pellagra each belong to one missing vitamin; the patterns are pure examination gold.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Deficiency",
+          "Vitamin",
+          "Signature signs"
+        ],
+        "rows": [
+          [
+            "Scurvy",
+            "Vitamin C",
+            "Bleeding gums, perifollicular haemorrhage, poor healing"
+          ],
+          [
+            "Rickets and osteomalacia",
+            "Vitamin D",
+            "Bow legs, rachitic rosary; adult bone pain"
+          ],
+          [
+            "Beriberi",
+            "Thiamine B1",
+            "Wet cardiac and dry neuropathic forms"
+          ],
+          [
+            "Pellagra",
+            "Niacin B3",
+            "Diarrhoea, dermatitis, dementia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Obesity completes the nutritional spectrum at the opposite pole: adipose tissue secretes leptin as its satiety signal, and leptin pathway mutations cause rare severe early obesity while common obesity resists the hormone. Insulin resistance, sleep apnoea, osteoarthritis, and cancers follow the adiposity; the adipocyte hormone is **leptin**.",
+      "say": "Leptin reports fat stores to the brain; common obesity resists it, while rare pathway mutations cause severe childhood obesity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Deficiency pole",
+          "points": [
+            "Kwashiorkor, marasmus, vitamin syndromes",
+            "Growth failure and immune weakness",
+            "Refeeding given cautiously"
+          ]
+        },
+        "right": {
+          "title": "Excess pole",
+          "points": [
+            "Obesity, insulin resistance, sleep apnoea",
+            "Cancer and joint disease risk",
+            "Leptin resistance, sustained management"
+          ]
+        }
+      }
+    }
+  ]
+}
