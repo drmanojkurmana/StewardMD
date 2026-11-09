@@ -1,0 +1,258 @@
+{
+    "v": 1,
+    "id": "ans-neuraxial-subarachnoid-block",
+    "subject": "anaesthesia",
+    "module": "ans-neuraxial",
+    "title": "Spinal Anaesthesia: Anatomy, Hyperbaric Solutions, and Needle Designs",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Anatomical Layers Traversed",
+            "tx": "**Anatomical layers traversed in midline spinal puncture** from posterior skin to the subarachnoid space comprise skin, subcutaneous fat, supraspinous ligament (joining spinous process tips), interspinous ligament, ligamentum flavum (dense yellow elastin providing characteristic tactile resistance), epidural space containing fat and internal vertebral venous plexus, dura mater, and arachnoid mater.",
+            "say": "Anatomical layers traversed in midline spinal puncture from posterior skin to the subarachnoid space comprise skin, subcutaneous fat, supraspinous ligament (joining spinous process tips), interspinous ligament, ligamentum flavum (dense yellow elastin providing characteristic tactile resistance), epidural space containing fat and internal vertebral venous plexus, dura mater, and arachnoid mater.",
+            "vis": {
+                "kind": "image",
+                "src": "clinix/media/skills/skill-exam-ana-spinal_position_asepsis.webp",
+                "alt": "Patient positioning and anatomical palpation landmarks for subarachnoid spinal block",
+                "caption": "Patient positioning and anatomical palpation landmarks for subarachnoid spinal block"
+            }
+        },
+        {
+            "title": "Spinal Cord Termination Levels",
+            "tx": "**Spinal cord and dural sac anatomical landmarks** establish safety boundaries for needle insertion: the adult spinal cord terminates at the conus medullaris at the lower border of L1 (or upper border of L2), while in full-term neonates it terminates lower at L3. The dural sac extends to S2 in adults (S3 to S4 in infants). Lumbar puncture is performed strictly at or below the L3-L4 interspace to prevent traumatic spinal cord injury.",
+            "say": "Spinal cord and dural sac anatomical landmarks establish safety boundaries for needle insertion: the adult spinal cord terminates at the conus medullaris at the lower border of L1 (or upper border of L2), while in full-term neonates it terminates lower at L3. The dural sac extends to S2 in adults (S3 to S4 in infants). Lumbar puncture is performed strictly at or below the L3-L4 interspace to prevent traumatic spinal cord injury.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Anatomical Structure",
+                    "Adult Vertebral Termination",
+                    "Neonatal Vertebral Termination",
+                    "Clinical Safety Landmark"
+                ],
+                "rows": [
+                    [
+                        "Spinal Cord (Conus Medullaris)",
+                        "Lower border of L1 (or L1-L2)",
+                        "Level of L3 vertebra",
+                        "Perform spinal puncture strictly at or below L3-L4"
+                    ],
+                    [
+                        "Dural Sac (Thecal Sac)",
+                        "Lower border of S2 vertebra",
+                        "Level of S3 to S4 vertebra",
+                        "Caudal blocks risk accidental dural puncture in infants"
+                    ],
+                    [
+                        "Tuffier Line (Intercristal Line)",
+                        "L4 spinous process or L4-L5 space",
+                        "L4-L5 intervertebral space",
+                        "Palpated across superior margins of iliac crests"
+                    ],
+                    [
+                        "Filum Terminale Internum",
+                        "Terminates on coccyx",
+                        "Terminates on coccyx",
+                        "Pia mater extension anchoring cord to dural sac"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Ligamentum Flavum and Tactile 'Pop'",
+            "tx": "**Ligamentum flavum tactile resistance** represents the thickest ligament traversed during neuraxial entry, composed of 80 percent elastin fibers running between adjacent laminae. Advancing the spinal or epidural needle produces a characteristic dense gritty resistance, followed by a sudden distinct loss of resistance ('pop') as the bevel pierces the tough ligamentum flavum and enters the epidural space.",
+            "say": "Ligamentum flavum tactile resistance represents the thickest ligament traversed during neuraxial entry, composed of 80 percent elastin fibers running between adjacent laminae. Advancing the spinal or epidural needle produces a characteristic dense gritty resistance, followed by a sudden distinct loss of resistance ('pop') as the bevel pierces the tough ligamentum flavum and enters the epidural space.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Advance spinal needle through supraspinous and interspinous ligaments"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Encounter dense rubbery resistance of ligamentum flavum"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Pierce ligamentum flavum and dura-arachnoid with tactile 'pop'"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Remove stylet to confirm free flow of clear cerebrospinal fluid"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Hyperbaric versus Isobaric Solutions",
+            "tx": "**Baricity of intrathecal local anaesthetics** compares solution density against human cerebrospinal fluid (normal CSF density 1.0003 to 1.0008 g/mL at 37 degrees Celsius). Hyperbaric bupivacaine (0.5 percent bupivacaine formulated with 8 percent dextrose, density 1.026) sinks down toward gravitationally dependent areas of the spinal canal, allowing predictable control of sensory block height by tilting the operating table.",
+            "say": "Baricity of intrathecal local anaesthetics compares solution density against human cerebrospinal fluid (normal CSF density 1.0003 to 1.0008 g/mL at 37 degrees Celsius). Hyperbaric bupivacaine (0.5 percent bupivacaine formulated with 8 percent dextrose, density 1.026) sinks down toward gravitationally dependent areas of the spinal canal, allowing predictable control of sensory block height by tilting the operating table.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Solution Baricity",
+                    "Specific Gravity Relative to CSF",
+                    "Formulation Additive",
+                    "Gravitational Spread in CSF"
+                ],
+                "rows": [
+                    [
+                        "Hyperbaric Solution",
+                        "Specific gravity >1.0015 (dense)",
+                        "8 percent dextrose added to bupivacaine",
+                        "Sinks to dependent valleys (thoracic kyphosis T4)"
+                    ],
+                    [
+                        "Isobaric Solution",
+                        "Specific gravity 0.9995 to 1.0008",
+                        "Plain 0.5% bupivacaine in saline",
+                        "Remains localized around injection site; position-independent"
+                    ],
+                    [
+                        "Hypobaric Solution",
+                        "Specific gravity <0.9990 (light)",
+                        "Diluted with sterile water or warm saline",
+                        "Floats upward to non-dependent regions (prone jack-knife)"
+                    ],
+                    [
+                        "Normal Cerebrospinal Fluid",
+                        "Specific gravity 1.0003 to 1.0008",
+                        "Natural physiological electrolyte fluid",
+                        "Standard reference density for baricity calculation"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Controlling Sensory Block Height",
+            "tx": "**Factors governing spinal sensory block height** divide into drug-related and patient-related factors: the primary determinant of block level is the total mass (dose in milligrams) and baricity of local anaesthetic injected, combined with patient positioning during the initial 15 to 20 minutes (before fixation). Vertebral column curvature (thoracic kyphosis pooling hyperbaric solution at T4 in the supine position) shapes the final dermatomal spread.",
+            "say": "Factors governing spinal sensory block height divide into drug-related and patient-related factors: the primary determinant of block level is the total mass (dose in milligrams) and baricity of local anaesthetic injected, combined with patient positioning during the initial 15 to 20 minutes (before fixation). Vertebral column curvature (thoracic kyphosis pooling hyperbaric solution at T4 in the supine position) shapes the final dermatomal spread.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Major Determinants of Block Height",
+                    "points": [
+                        "Total drug dose (milligram mass) administered",
+                        "Baricity of local anaesthetic solution injected",
+                        "Patient positioning on table during first 15 to 20 minutes"
+                    ]
+                },
+                "right": {
+                    "title": "Insignificant or Minor Factors",
+                    "points": [
+                        "Speed of intrathecal injection has minimal effect",
+                        "Direction of needle bevel produces negligible differences",
+                        "Gender and patient weight have minimal clinical impact"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Cutting versus Pencil-Point Needles",
+            "tx": "**Spinal needle tip geometry classification** divides into sharp cutting needles and non-cutting pencil-point needles. The traditional Quincke needle features a sharp cutting bevel that slices longitudinally through dural fibers, creating a gaping hole. Pencil-point needles (Whitacre, Sprotte, Pencan) feature a rounded solid tip with a lateral eye, which separates and stretches dural elastic fibers without cutting, reducing post-dural puncture headache rates.",
+            "say": "Spinal needle tip geometry classification divides into sharp cutting needles and non-cutting pencil-point needles. The traditional Quincke needle features a sharp cutting bevel that slices longitudinally through dural fibers, creating a gaping hole. Pencil-point needles (Whitacre, Sprotte, Pencan) feature a rounded solid tip with a lateral eye, which separates and stretches dural elastic fibers without cutting, reducing post-dural puncture headache rates.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Spinal Needle Type",
+                    "Tip Geometry Design",
+                    "Dural Fiber Interaction",
+                    "PDPH Incidence (25-Gauge)"
+                ],
+                "rows": [
+                    [
+                        "Quincke-Babcock Needle",
+                        "Sharp cutting beveled tip",
+                        "Cuts dural collagen fibers tranversely",
+                        "High incidence (approx 5 to 10 percent)"
+                    ],
+                    [
+                        "Whitacre Needle",
+                        "Rounded pencil-point with lateral side port",
+                        "Separates and spreads dural fibers apart",
+                        "Very low incidence (under 1 percent)"
+                    ],
+                    [
+                        "Sprotte Needle",
+                        "Conical pencil-point with elongated lateral eye",
+                        "Spreads dural fibers; high CSF flow rate",
+                        "Very low incidence (under 1 percent)"
+                    ],
+                    [
+                        "Greene Needle",
+                        "Rounded non-cutting bevel",
+                        "Intermediate fiber spreading",
+                        "Intermediate PDPH incidence (approx 2 percent)"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Subarachnoid Additives and Opioids",
+            "tx": "**Intrathecal adjuvants and additive pharmacology** enhance sensory block quality and prolong postoperative analgesia: preservative-free morphine (100 to 200 micrograms) produces up to 18 to 24 hours of profound visceral analgesia via spinal cord substantia gelatinosa mu-opioid receptor binding, but requires respiratory monitoring for delayed central depression at 6 to 12 hours. Lipophilic fentanyl (15 to 25 micrograms) accelerates onset and prolongs analgesia for 2 to 4 hours.",
+            "say": "Intrathecal adjuvants and additive pharmacology enhance sensory block quality and prolong postoperative analgesia: preservative-free morphine (100 to 200 micrograms) produces up to 18 to 24 hours of profound visceral analgesia via spinal cord substantia gelatinosa mu-opioid receptor binding, but requires respiratory monitoring for delayed central depression at 6 to 12 hours. Lipophilic fentanyl (15 to 25 micrograms) accelerates onset and prolongs analgesia for 2 to 4 hours.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Intrathecal Adjuvant",
+                    "Standard Intrathecal Dose",
+                    "Duration of Analgesia",
+                    "Key Adverse Risk"
+                ],
+                "rows": [
+                    [
+                        "Preservative-Free Morphine",
+                        "100 to 200 micrograms",
+                        "18 to 24 hours prolonged analgesia",
+                        "Delayed respiratory depression at 6 to 12 hours"
+                    ],
+                    [
+                        "Fentanyl (Lipophilic)",
+                        "15 to 25 micrograms",
+                        "2 to 4 hours intermediate analgesia",
+                        "Early pruritus and mild sedation"
+                    ],
+                    [
+                        "Clonidine (Alpha-2 Agonist)",
+                        "15 to 30 micrograms",
+                        "Prolongs sensory and motor block",
+                        "Dose-dependent bradycardia and hypotension"
+                    ],
+                    [
+                        "Adrenaline (Epinephrine)",
+                        "100 to 200 micrograms",
+                        "Prolongs block duration by 30 to 50%",
+                        "Can cause transient local ischaemia if excessive"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Post-Spinal Monitoring and Aftercare",
+            "tx": "**Subarachnoid block post-procedure care** requires continuous vital sign surveillance: the clinician confirms sensory dermatomal block height using cold ice or pinprick discrimination, verifies motor block using the Bromage score, and monitors non-invasive blood pressure every two to three minutes during the initial 15 minutes to catch sympathetic blockade hypotension.",
+            "say": "Subarachnoid block post-procedure care requires continuous vital sign surveillance: the clinician confirms sensory dermatomal block height using cold ice or pinprick discrimination, verifies motor block using the Bromage score, and monitors non-invasive blood pressure every two to three minutes during the initial 15 minutes to catch sympathetic blockade hypotension.",
+            "vis": {
+                "kind": "image",
+                "src": "clinix/media/skills/skill-exam-ana-spinal_inject_aftercare.webp",
+                "alt": "Clinical assessment of sensory dermatome block level and post-spinal hemodynamic monitoring",
+                "caption": "Clinical assessment of sensory dermatome block level and post-spinal hemodynamic monitoring"
+            }
+        }
+    ],
+    "quiz": []
+}
