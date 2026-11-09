@@ -1,0 +1,219 @@
+{
+ "v": 1,
+ "module": "med-autoimmune-metabolic-liver",
+ "subject": "medicine",
+ "title": "Autoimmune hepatitis, primary biliary cholangitis, and Wilson disease",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Unchecked immune-mediated destruction of hepatic parenchyma produces a chronic progressive necroinflammatory disorder characterized by fluctuating clinical activity. Diagnosing **Autoimmune hepatitis** features marked hypergammaglobulinaemia with selective polyclonal elevation of immunoglobulin G, circulating autoantibodies, and characteristic histological hallmarks on liver biopsy. Microscopic evaluation demonstrates dense lymphoplasmacytic infiltration of portal tracts with prominent interface hepatitis (piecemeal necrosis), hepatocyte ballooning, and regenerating hepatocyte rosette formation. Without timely immunosuppressive intervention, the condition progresses relentlessly toward cirrhosis and end-stage liver failure.",
+   "say": "Unchecked immune-mediated destruction of liver tissue produces a progressive necroinflammatory disorder characterized by fluctuating clinical activity. Diagnosing Autoimmune hepatitis features high immunoglobulin G levels, circulating autoantibodies, and interface hepatitis on liver biopsy. Histology reveals dense portal plasma cell infiltrates, ballooning, and rosette formation that advance toward cirrhosis without immunosuppressive therapy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/autoimmune-hepatitis-fig1.webp",
+    "alt": "Histopathological appearance of interface hepatitis with lymphoplasmacytic infiltrate in autoimmune hepatitis.",
+    "caption": "Dense portal lymphoplasmacytic infiltrate, interface hepatitis, and rosettes in autoimmune hepatitis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Serological profiling categorizes autoimmune hepatitis into distinct immunological variants displaying unique demographic and prognostic features. Differentiating **autoantibody subtypes** establishes type one autoimmune hepatitis through positive antinuclear antibodies and **anti-smooth muscle antibody** (ASMA) directed specifically against filamentous actin (F-actin), predominantly affecting adolescent and middle-aged females. Conversely, type two autoimmune hepatitis is defined by antibodies against liver-kidney microsome type one (**anti-LKM1**), which target cytochrome P450 2D6, presenting in young pediatric patients with an aggressive, treatment-refractory clinical course.",
+   "say": "Serological profiling classifies autoimmune hepatitis into distinct variants with unique demographic and prognostic features. Differentiating autoantibody subtypes identifies type one disease through antinuclear and anti-smooth muscle antibodies directed against actin. In contrast, type two disease is defined by anti-LKM1 antibodies, occurring primarily in young children with aggressive clinical progression.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type 1 Autoimmune Hepatitis",
+     "points": [
+      "Antinuclear antibody (ANA) positive",
+      "Anti-smooth muscle antibody (ASMA / anti-actin)",
+      "Bimodal distribution (adolescents and middle age)",
+      "Favourable response to standard glucocorticoids"
+     ]
+    },
+    "right": {
+     "title": "Type 2 Autoimmune Hepatitis",
+     "points": [
+      "Anti-liver-kidney microsome 1 (anti-LKM1)",
+      "Anti-liver cytosol type 1 (anti-LC1)",
+      "Young children and infants (female predominance)",
+      "Aggressive course with frequent treatment failure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Inducing and sustaining biochemical and histological remission requires combined immunosuppressive protocols designed to minimize long-term steroid toxicity. Standard **AIH immunosuppressive management** initiates high-dose oral prednisolone (thirty to sixty milligrams daily) to halt active parenchymal inflammation, rapidly tapering as oral azathioprine (one to two milligrams per kilogram daily) is co-administered as a steroid-sparing maintenance agent. Testing thiopurine methyltransferase (TPMT) enzymatic activity prior to azathioprine initiation prevents life-threatening myelosuppression. Maintenance therapy continues for a minimum of two to three years before attempting guarded cessation.",
+   "say": "Inducing and sustaining disease remission requires combined immunosuppressive therapy designed to minimize steroid toxicity. Standard AIH immunosuppressive management starts with high-dose oral prednisolone, tapering gradually as azathioprine is added for long-term maintenance. Measuring thiopurine methyltransferase activity before starting azathioprine prevents severe bone marrow toxicity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "induction",
+      "label": "Induction: Oral Prednisolone 30-60 mg daily"
+     },
+     {
+      "id": "tpmt",
+      "label": "Screen TPMT activity -> Add Azathioprine 1-2 mg/kg/day"
+     },
+     {
+      "id": "maintenance",
+      "label": "Taper steroid to low-dose or stop; maintain Azathioprine >= 2-3 years"
+     }
+    ],
+    "edges": [
+     [
+      "induction",
+      "tpmt"
+     ],
+     [
+      "tpmt",
+      "maintenance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic autoimmune destruction of interlobular and septal bile ducts leads to progressive cholestatic ductopenia, biliary fibrosis, and eventual cirrhosis. Clinically presenting as **primary biliary cholangitis** (PBC, formerly termed primary biliary cirrhosis), the condition predominantly affects females aged forty to sixty years. Patients classically present with insidious, severe pruritus preceding the emergence of overt jaundice by months or years, accompanied by chronic debilitating fatigue, melanoderma, and cutaneous xanthelasma. Serum alkaline phosphatase and gamma-glutamyl transferase demonstrate marked elevations.",
+   "say": "Chronic autoimmune destruction of small intrahepatic bile ducts leads to progressive ductopenia and cirrhosis. Clinically presenting as primary biliary cholangitis, this condition predominantly affects middle-aged females. Patients present with severe pruritus preceding jaundice by months or years, accompanied by debilitating fatigue, skin hyperpigmentation, and elevated alkaline phosphatase levels.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/autoimmune-hepatitis-fig2.webp",
+    "alt": "Microscopic view of granulomatous florid duct lesions and ductopenia in primary biliary cholangitis.",
+    "caption": "Granulomatous bile duct destruction (florid duct lesion) and ductopenia in PBC. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Serological identification of highly specific autoantibodies directed against mitochondrial inner membrane complexes provides definitive non-invasive confirmation of primary biliary cholangitis. Circulating **antimitochondrial antibody** (AMA) titre of one in forty or higher is detectable in over ninety-five percent of affected individuals, targeting the E2 subunit of the pyruvate dehydrogenase multienzyme complex. When persistent cholestatic alkaline phosphatase elevation coincides with positive antimitochondrial antibodies in an adult female, the diagnosis of primary biliary cholangitis is firmly established without requiring routine liver biopsy confirmation.",
+   "say": "Serological detection of specific autoantibodies targeting mitochondrial complexes provides definitive confirmation of primary biliary cholangitis. Circulating antimitochondrial antibody titres of one in forty or greater occur in ninety-five percent of patients, targeting the pyruvate dehydrogenase complex. When elevated alkaline phosphatase coincides with positive mitochondrial antibodies, liver biopsy is unnecessary for diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Biliary Cholangitis (PBC)",
+     "points": [
+      "Intrahepatic interlobular small bile duct destruction",
+      "Antimitochondrial antibody (AMA) positive (>95%)",
+      "Marked elevation of serum IgM immunoglobulin",
+      "Middle-aged females; associated with Sjogren and thyroiditis"
+     ]
+    },
+    "right": {
+     "title": "Primary Sclerosing Cholangitis (PSC)",
+     "points": [
+      "Large intra- and extrahepatic duct structuring",
+      "pANCA positive (60-80%); AMA negative",
+      "Beaded biliary tree on MRCP imaging",
+      "Young males; 70-80% have ulcerative colitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Targeted replacement of cytotoxic hydrophobic bile acids with hydrophilic cytoprotective species halts inflammatory ductal destruction and delays histological progression. Prescribing **ursodeoxycholic acid** (UDCA) at an oral dose of thirteen to fifteen milligrams per kilogram daily represents the foundational first-line medical therapy for all patients with primary biliary cholangitis. Ursodeoxycholic acid displaces toxic endogenous hydrophobic bile salts from the circulating pool, stimulates hepatocellular and cholangiocellular bicarbonate secretion, and suppresses cholangiocyte apoptosis, significantly prolonging transplant-free survival.",
+   "say": "Targeted replacement of cytotoxic hydrophobic bile acids with hydrophilic molecules halts ductal destruction and slows disease progression. Prescribing ursodeoxycholic acid at thirteen to fifteen milligrams per kilogram daily represents the foundational first-line therapy for primary biliary cholangitis. This agent displaces toxic bile salts and stimulates bicarbonate secretion, significantly extending transplant-free survival.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Pharmacological agent",
+     "Therapeutic mechanism",
+     "Dosing & administration",
+     "Clinical response monitoring"
+    ],
+    "rows": [
+     [
+      "Ursodeoxycholic acid (UDCA)",
+      "Hydrophilic bile acid displacement, cytoprotective",
+      "13 to 15 mg/kg/day orally in 1-2 divided doses",
+      "Evaluate ALP reduction at 12 months (Paris criteria)"
+     ],
+     [
+      "Obeticholic acid",
+      "Farnesoid X receptor (FXR) agonist",
+      "5 to 10 mg daily (second-line)",
+      "Indicated for UDCA non-responders; causes pruritus"
+     ],
+     [
+      "Fibrates (Bezafibrate/Fenofibrate)",
+      "PPAR-alpha agonist (anti-cholestatic)",
+      "Off-label adjunctive therapy",
+      "Synergistic alkaline phosphatase reduction with UDCA"
+     ],
+     [
+      "Pruritus management",
+      "Bile acid sequestrant (Cholestyramine)",
+      "4 g orally 1 hour before or 4 hours after UDCA",
+      "Separate administration to avoid drug binding"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inborn errors of copper transport leading to toxic systemic metal accumulation precipitate devastating hepatic, neurological, and psychiatric manifestations. Inherited as an autosomal recessive trait, **Wilson disease** (hepatolenticular degeneration) results from loss-of-function mutations in the ATP7B gene on chromosome thirteen, encoding a canalicular copper-transporting P-type ATPase. Defective ATP7B function impairs both copper incorporation into circulating apoceruloplasmin and biliary copper excretion. Non-excreted free copper accumulates initially within hepatocytes, eventually spilling into systemic circulation to deposit in the brain, corneas, and kidneys.",
+   "say": "Inborn errors of copper transport causing systemic metal accumulation produce devastating hepatic, neurological, and psychiatric manifestations. Inherited as an autosomal recessive trait, Wilson disease results from mutations in the ATP7B gene on chromosome thirteen. Impaired canalicular copper export prevents normal biliary excretion, causing toxic copper accumulation within liver tissue, basal ganglia, and corneas.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "gene",
+      "label": "ATP7B Gene Mutation on Chromosome 13"
+     },
+     {
+      "id": "block",
+      "label": "Defective Canalicular Copper Excretion & Ceruloplasmin Loading"
+     },
+     {
+      "id": "accum",
+      "label": "Toxic Copper Deposition in Liver, Basal Ganglia, and Cornea"
+     }
+    ],
+    "edges": [
+     [
+      "gene",
+      "block"
+     ],
+     [
+      "block",
+      "accum"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ocular copper accumulation produces pathognomonic physical examination findings that confirm systemic copper overload in suspected individuals. Detecting a **Kayser-Fleischer ring** involves slit-lamp biomicroscopy, which identifies golden-brown, greenish copper granules deposited within Descemet membrane of the peripheral corneal limbus. Present in over ninety-five percent of patients with neurological or psychiatric Wilson disease (and fifty percent of hepatic presentations), the ring resolves following successful chelation therapy. Companion sunflower cataracts occur from copper deposition in the anterior lens capsule.",
+   "say": "Ocular copper deposition produces pathognomonic physical examination signs confirming systemic copper overload. Detecting a Kayser-Fleischer ring requires slit-lamp examination, which reveals greenish copper granules deposited in Descemet membrane of the peripheral cornea. Found in ninety-five percent of neurological presentations, these rings gradually resolve after successful copper chelation therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic investigation",
+     "Characteristic finding in Wilson disease",
+     "Diagnostic utility & limitations"
+    ],
+    "rows": [
+     [
+      "Slit-lamp examination",
+      "Kayser-Fleischer rings in Descemet membrane",
+      "Present in >95% neurological and ~50% hepatic cases"
+     ],
+     [
+      "Serum ceruloplasmin",
+      "Low (< 20 mg/dL or <0.2 g/L)",
+      "Reduced in 90% (false normal during acute inflammation)"
+     ],
+     [
+      "24-hour urinary copper",
+      "Markedly elevated (>100 ug/24 hr or >1.6 umol)",
+      "Confirms increased renal free copper excretion"
+     ],
+     [
+      "Hepatic copper concentration",
+      "Quantitative copper > 250 ug/g dry weight",
+      "Gold standard confirmatory threshold on liver biopsy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

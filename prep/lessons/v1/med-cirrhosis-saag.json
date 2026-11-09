@@ -1,0 +1,218 @@
+{
+ "v": 1,
+ "module": "med-cirrhosis",
+ "subject": "medicine",
+ "title": "Serum-ascites albumin gradient, spontaneous bacterial peritonitis, and hepatorenal syndrome",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Pathophysiological classification of peritoneal effusions relies upon oncotic pressure gradients rather than legacy transudate-exudate protein cutoffs. Calculating the **SAAG** (serum-ascites albumin gradient) involves subtracting the ascitic fluid albumin concentration from a simultaneously drawn serum albumin sample. A calculated gradient of one point one grams per decilitre (eleven grams per litre) or greater confirms underlying portal hypertension with ninety-seven percent diagnostic accuracy, reflecting increased sinusoidal hydrostatic pressure driving transudation of protein-poor fluid into the peritoneal cavity.",
+   "say": "Classifying peritoneal effusions relies on oncotic pressure gradients rather than outdated protein distinctions. Calculating the SAAG involves subtracting the ascitic albumin concentration from a simultaneous serum sample. A gradient of one point one grams per decilitre or higher confirms portal hypertension with ninety-seven percent diagnostic accuracy.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/med-saag.svg",
+    "alt": "Diagnostic algorithm demonstrating high versus low serum-ascites albumin gradient interpretation.",
+    "caption": "Diagnostic algorithm using the serum-ascites albumin gradient to distinguish portal hypertension. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Combining the calculated gradient with total ascitic protein concentration refines the differential diagnosis to specific anatomical and physiological categories. Evaluating **ascitic total protein** in patients with a high gradient distinguishes sinusoidal cirrhosis (total protein under two point five grams per decilitre) from post-sinusoidal congestion such as cardiac ascites or Budd-Chiari syndrome (total protein two point five grams per decilitre or higher). In low-gradient effusions, elevated protein points toward peritoneal carcinomatosis or peritoneal tuberculosis, whereas low protein characterizes nephrotic syndrome.",
+   "say": "Combining the albumin gradient with total ascitic protein concentration refines the underlying cause. Evaluating ascitic total protein in patients with a high gradient distinguishes cirrhosis from cardiac failure or Budd-Chiari syndrome. In low-gradient ascites, high protein indicates peritoneal tuberculosis or cancer, whereas low protein marks nephrotic syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "SAAG category",
+     "Ascitic total protein",
+     "Haemodynamic mechanism",
+     "Characteristic clinical conditions"
+    ],
+    "rows": [
+     [
+      "High (>= 1.1 g/dL)",
+      "< 2.5 g/dL",
+      "Sinusoidal portal hypertension",
+      "Cirrhosis, alcoholic hepatitis, massive liver metastases"
+     ],
+     [
+      "High (>= 1.1 g/dL)",
+      ">= 2.5 g/dL",
+      "Post-sinusoidal portal hypertension",
+      "Congestive heart failure, constrictive pericarditis, Budd-Chiari"
+     ],
+     [
+      "Low (< 1.1 g/dL)",
+      "< 2.5 g/dL",
+      "Systemic hypoproteinaemic transudation",
+      "Nephrotic syndrome, severe protein-losing enteropathy"
+     ],
+     [
+      "Low (< 1.1 g/dL)",
+      ">= 2.5 g/dL",
+      "Peritoneal inflammation or exudation",
+      "Peritoneal carcinomatosis, peritoneal tuberculosis, pancreatitis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Spontaneous bacterial translocation across compromised intestinal mucosa infects pre-existing ascitic fluid in the absence of an identifiable surgically treatable source. Diagnosing **spontaneous bacterial peritonitis** (SBP) requires identifying an ascitic fluid absolute polymorphonuclear neutrophil count of two hundred and fifty cells per microlitre or greater. Monomicrobial enteric Gram-negative bacilli, predominantly Escherichia coli and Klebsiella pneumoniae, account for the majority of episodes, with Streptococcus species responsible for most remaining presentations. Presentation ranges from overt peritonitis to subtle fever or unexplained encephalopathy.",
+   "say": "Spontaneous bacterial translocation across the intestinal wall causes infection of ascitic fluid without any surgical source. Diagnosing spontaneous bacterial peritonitis requires finding an ascitic neutrophil count of two hundred and fifty cells per microlitre or higher. Monomicrobial enteric organisms such as Escherichia coli cause most cases, presenting with fever, pain, or subtle encephalopathy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spontaneous Bacterial Peritonitis",
+     "points": [
+      "Monomicrobial (E. coli, Klebsiella, Streptococcus)",
+      "Neutrophils >= 250/uL; protein typically <1.0 g/dL",
+      "Normal glucose (>50 mg/dL) and normal LDH",
+      "Managed with intravenous antibiotics and albumin"
+     ]
+    },
+    "right": {
+     "title": "Secondary Bacterial Peritonitis",
+     "points": [
+      "Polymicrobial infection from hollow viscus rupture",
+      "Runyon criteria: Protein >1 g/dL, glucose <50, high LDH",
+      "Marked abdominal rigidity and free air on imaging",
+      "Mandates urgent surgical exploration and broad coverage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prompt initiation of targeted parenteral antimicrobial therapy combined with plasma volume expansion prevents renal shutdown and improves survival in infected cirrhotic patients. Administering **SBP antimicrobial therapy** involves immediate delivery of intravenous third-generation cephalosporins such as ceftriaxone or cefotaxime for five days. Concurrently, delivering intravenous twenty percent albumin at a dose of one point five grams per kilogram at diagnosis followed by one gram per kilogram on day three diminishes the incidence of hepatorenal syndrome from thirty percent down to ten percent.",
+   "say": "Prompt initiation of targeted intravenous antibiotics combined with plasma expansion prevents renal shutdown and improves survival. Administering SBP antimicrobial therapy combines five days of intravenous ceftriaxone with albumin infusions at diagnosis and day three. This combined regimen reduces the incidence of hepatorenal syndrome and cuts hospital mortality.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "dx",
+      "label": "Ascitic Fluid PMN >= 250 cells/uL"
+     },
+     {
+      "id": "abx",
+      "label": "IV Ceftriaxone 2 g daily for 5 days"
+     },
+     {
+      "id": "alb",
+      "label": "IV Albumin: 1.5 g/kg on Day 1, then 1.0 g/kg on Day 3"
+     }
+    ],
+    "edges": [
+     [
+      "dx",
+      "abx"
+     ],
+     [
+      "dx",
+      "alb"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "High recurrence rates following initial resolution of spontaneous bacterial peritonitis mandate continuous antibacterial prophylaxis until clinical transplantation or death. Prescribing **SBP secondary prophylaxis** with daily oral fluoroquinolones (norfloxacin four hundred milligrams or ciprofloxacin five hundred milligrams daily) or trimethoprim-sulfamethoxazole reduces twelve-month recurrence from seventy percent to under twenty percent. Primary prophylaxis is indicated in patients with low ascitic protein (under one point five grams per decilitre) accompanied by severe liver failure or renal dysfunction, as well as during acute variceal haemorrhage.",
+   "say": "High recurrence rates following initial infection mandate continuous antimicrobial prophylaxis until liver transplantation occurs. Prescribing SBP secondary prophylaxis with daily norfloxacin or trimethoprim-sulfamethoxazole reduces recurrence from seventy percent to under twenty percent. Primary prophylaxis is also indicated during acute variceal bleeding episodes or in severe cirrhosis with low ascitic protein.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Prophylaxis setting",
+     "Target patient cohort",
+     "Standard pharmacological regimen",
+     "Duration of therapy"
+    ],
+    "rows": [
+     [
+      "Secondary prophylaxis",
+      "Any patient surviving an episode of SBP",
+      "Norfloxacin 400 mg daily or TMP-SMX 1 DS daily",
+      "Lifelong or until liver transplantation"
+     ],
+     [
+      "Acute variceal bleeding",
+      "Cirrhotic patients with active GI haemorrhage",
+      "IV Ceftriaxone 1 g/day (or oral Norfloxacin)",
+      "7 days duration"
+     ],
+     [
+      "Primary prophylaxis (high risk)",
+      "Ascitic protein <1.5 g/dL with Child-Pugh >=9",
+      "Norfloxacin 400 mg daily or Rifaximin",
+      "Indefinite while high-risk criteria persist"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Profound renal vasoconstriction secondary to extreme splanchnic arterial pooling produces functional acute kidney failure in advanced decompensated cirrhosis. Developing **hepatorenal syndrome** (HRS-AKI) features an acute rise in serum creatinine of zero point three milligrams per decilitre within forty-eight hours or a fifty percent increase from baseline, in the absence of intrinsic nephrotoxic injury, shock, proteinuria, or microhaematuria. Renal biopsy demonstrates pristine, histologically normal parenchymal architecture, confirming that severe hypoperfusion from intense cortical vasoconstriction underpins the synthetic and excretory failure.",
+   "say": "Profound renal vasoconstriction secondary to splanchnic arterial pooling causes functional renal failure in advanced cirrhosis. Developing hepatorenal syndrome features an acute rise in serum creatinine without intrinsic parenchymal injury, proteinuria, or structural damage. Renal histology reveals normal architecture, confirming that severe cortical vasoconstriction drives the excretory failure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/decomp-cirrhosis-fig1.webp",
+    "alt": "Renal hypoperfusion and splanchnic hemodynamic changes in hepatorenal syndrome.",
+    "caption": "Splanchnic vasodilation, effective arterial hypovolaemia, and renal vasoconstriction in HRS. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Reversing intense renal cortical vasoconstriction requires pharmacological splanchnic vasoconstriction combined with oncotic intravascular volume expansion. Treating **hepatorenal syndrome management** begins with immediate withdrawal of all diuretics and nephrotoxic drugs, followed by two days of volume expansion using intravenous twenty percent albumin at one gram per kilogram daily. If creatinine remains elevated, administering terlipressin continuous infusion (or boluses) along with albumin reverses splanchnic pooling, restoring renal perfusion pressure in over sixty percent of treated individuals until definitive liver transplantation.",
+   "say": "Reversing intense renal vasoconstriction requires splanchnic vasoconstrictor therapy combined with intravascular albumin volume expansion. Treating hepatorenal syndrome begins by discontinuing all diuretics and infusing intravenous albumin for two days. If renal function fails to improve, administering terlipressin alongside albumin restores renal blood flow until liver transplantation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "susp",
+      "label": "Suspected HRS-AKI: Discontinue Diuretics & Hold Nephrotoxins"
+     },
+     {
+      "id": "albumin",
+      "label": "IV Albumin 1 g/kg/day for 48 hours to exclude prerenal azotaemia"
+     },
+     {
+      "id": "vaso",
+      "label": "If non-responsive: Initiate Terlipressin + IV Albumin"
+     }
+    ],
+    "edges": [
+     [
+      "susp",
+      "albumin"
+     ],
+     [
+      "albumin",
+      "vaso"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Accumulation of neurotoxic nitrogenous gut-derived metabolites escaping hepatic clearance triggers reversible cognitive, motor, and psychiatric impairment. Reversing acute **hepatic encephalopathy** requires prompt identification and correction of precipitating factors including infection, gastrointestinal bleeding, hypokalaemic alkalosis, and constipation. Administering **lactulose**, an unabsorbable synthetic disaccharide, serves as initial first-line therapy. Colonic bacteria ferment lactulose into lactic and acetic acids, lowering intraluminal pH, which traps diffusible ammonia as non-absorbable ammonium ions (NH4+) and facilitates bowel evacuation, titrated to achieve two to three soft bowel movements daily.",
+   "say": "Accumulation of gut-derived nitrogenous toxins escaping hepatic clearance causes reversible cognitive and motor disturbances. Reversing acute hepatic encephalopathy requires identifying precipitants such as infection, bleeding, or constipation. Administering lactulose serves as first-line therapy, acidifying the colonic lumen to trap ammonia as ammonium ions and promoting bowel clearance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lactulose Mechanism",
+     "points": [
+      "Non-absorbable synthetic disaccharide",
+      "Colonic fermentation lowers luminal pH below 5.0",
+      "Traps NH3 as unabsorbable NH4+ (ammonia trapping)",
+      "Titrated to 2 to 3 soft stools per day"
+     ]
+    },
+    "right": {
+     "title": "Encephalopathy Precipitants",
+     "points": [
+      "Spontaneous bacterial peritonitis and sepsis",
+      "Upper gastrointestinal variceal haemorrhage",
+      "Diuretic-induced hypokalaemia and dehydration",
+      "Constipation and excessive dietary animal protein"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}

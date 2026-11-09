@@ -1,0 +1,214 @@
+{
+ "v": 1,
+ "module": "med-autoimmune-metabolic-liver",
+ "subject": "medicine",
+ "title": "Serum ceruloplasmin, hereditary haemochromatosis, and drug-induced liver injury",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Assessing systemic copper transport dynamics requires measuring circulating metalloprotein carriers synthesized and secreted by the liver. Measuring serum **ceruloplasmin**, an alpha-two globulin carrying over ninety percent of circulating copper, demonstrates marked reduction below twenty milligrams per decilitre in approximately ninety percent of patients with Wilson disease. Failed incorporation of copper into apoceruloplasmin due to ATP7B mutations yields an unstable apoprotein that undergoes rapid degradation in circulation. Because ceruloplasmin acts as an acute phase reactant, concurrent acute hepatic necrosis can elevate values into the deceptively normal range.",
+   "say": "Assessing systemic copper transport requires measuring circulating metalloprotein carriers synthesized by the liver. Measuring serum ceruloplasmin shows marked reduction below twenty milligrams per decilitre in ninety percent of Wilson disease cases. Impaired copper incorporation yields an unstable apoprotein that is rapidly cleared, though severe inflammation can falsely elevate levels into the normal range.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/wilsons-disease-fig1.webp",
+    "alt": "Biochemical pathways of copper handling and ceruloplasmin synthesis in hepatocytes.",
+    "caption": "Copper metabolism, ceruloplasmin synthesis, and ATP7B canalicular transport defect. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Medical removal of toxic systemic copper stores prevents progressive neurocognitive deterioration and restores hepatic synthetic function. Directing **copper chelation therapy** employs penicillamine or trientine hydrochloride as first-line chelating agents that form soluble copper complexes excreted in urine. Concurrently, oral zinc acetate or zinc sulfate stimulates intestinal enterocyte metallothionein synthesis, which binds dietary copper and blocks its systemic absorption. Because penicillamine acts as an antimetabolite of vitamin B6, daily oral pyridoxine co-administration is mandatory to prevent peripheral neuropathy.",
+   "say": "Medical removal of toxic copper stores prevents progressive brain damage and restores liver synthetic function. Directing copper chelation therapy employs penicillamine or trientine to promote urinary excretion of toxic copper. Concurrently, oral zinc therapy induces intestinal metallothionein to block dietary absorption, with pyridoxine supplementation given alongside penicillamine to prevent neuropathy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chelating Agents (Penicillamine / Trientine)",
+     "points": [
+      "Promotes massive urinary copper excretion",
+      "First-line induction therapy for symptomatic disease",
+      "Requires Pyridoxine co-administration with penicillamine",
+      "Adverse effects: nephrotic syndrome, bone marrow suppression"
+     ]
+    },
+    "right": {
+     "title": "Zinc Salts (Zinc Acetate / Sulfate)",
+     "points": [
+      "Induces intestinal enterocyte metallothionein",
+      "Binds dietary copper in gut cells, sloughed in stool",
+      "Maintenance therapy and treatment of presymptomatic patients",
+      "Must not be ingested simultaneously with chelators"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Unregulated intestinal iron absorption leads to progressive parenchymal iron deposition across multiple vital organ systems over decades. Characterized as hereditary **haemochromatosis**, the classic clinical tetrad comprises micronodular cirrhosis, hyperpigmented bronze skin discoloration, secondary diabetes mellitus (bronze diabetes) from pancreatic islet destruction, and pseudogout arthropathy affecting the second and third metacarpophalangeal joints. Additional systemic complications include dilated or restrictive cardiomyopathy, cardiac conduction blocks, and hypogonadotropic hypogonadism from pituitary iron loading, accompanied by a markedly heightened risk of hepatocellular carcinoma.",
+   "say": "Unregulated intestinal iron absorption causes progressive iron accumulation across multiple vital organs over decades. Characterized as hereditary haemochromatosis, the classic clinical picture comprises cirrhosis, bronze skin pigmentation, secondary diabetes, and metacarpophalangeal arthropathy. Cardiac deposition leads to heart failure or conduction blocks, while endocrine deposition causes hypogonadism.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hemochromatosis-fig1.webp",
+    "alt": "Gross and microscopic Prussian blue staining of iron deposition in hereditary haemochromatosis.",
+    "caption": "Parenchymal hemosiderin iron accumulation highlighted by Prussian blue staining. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Molecular pathogenesis of primary hereditary iron overload involves loss-of-function genetic defects that disrupt systemic iron homeostasis and hepcidin synthesis. Screening for the **HFE gene** on the short arm of chromosome six identifies homozygous C282Y missense mutations (cysteine to tyrosine substitution at position two hundred and eighty-two) in over eighty-five percent of classic phenotypic presentations. The mutant HFE protein fails to interact with transferrin receptor one, suppressing hepatic hepcidin production. In the absence of hepcidin, intestinal basolateral ferroportin channels remain continuously open, driving relentless iron hyperabsorption.",
+   "say": "The molecular cause of primary iron overload involves genetic defects that disrupt hepcidin synthesis and iron regulation. Screening for the HFE gene on chromosome six reveals homozygous C282Y mutations in most classic presentations. Defective HFE signaling suppresses hepatic hepcidin production, allowing basolateral ferroportin channels to remain open and hyperabsorb dietary iron.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "mutation",
+      "label": "Homozygous HFE C282Y Mutation on Chromosome 6"
+     },
+     {
+      "id": "hepcidin",
+      "label": "Impaired Hepatosyte Hepcidin Synthesis"
+     },
+     {
+      "id": "iron",
+      "label": "Uninhibited Ferroportin Channels -> Relentless Iron Absorption"
+     }
+    ],
+    "edges": [
+     [
+      "mutation",
+      "hepcidin"
+     ],
+     [
+      "hepcidin",
+      "iron"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Early laboratory detection of systemic iron overload relies upon physiological saturation parameters before irreversible tissue fibrosis occurs. Measuring fasting **transferrin saturation** represents the single most sensitive initial screening investigation, calculated by dividing serum iron by total iron-binding capacity. A fasting transferrin saturation exceeding forty-five percent in premenopausal females or fifty percent in males warrants subsequent serum ferritin testing. Confirmed iron overload is managed with therapeutic phlebotomy (removing five hundred millilitres of whole blood weekly) until serum ferritin reaches fifty to one hundred micrograms per litre.",
+   "say": "Early laboratory detection of iron overload uses saturation measurements before irreversible tissue fibrosis develops. Measuring fasting transferrin saturation represents the most sensitive initial screening test, with values above forty-five to fifty percent indicating abnormal iron accumulation. Confirmed overload is managed by weekly phlebotomy until serum ferritin falls below one hundred micrograms per litre.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic parameter",
+     "Haemochromatosis threshold",
+     "Physiological role & management"
+    ],
+    "rows": [
+     [
+      "Transferrin saturation",
+      "> 45% (women) or > 50% (men)",
+      "Most sensitive initial screening test for iron overload"
+     ],
+     [
+      "Serum ferritin",
+      "> 200 ug/L (women) or > 300 ug/L (men)",
+      "Reflects total body iron stores; >1000 marks cirrhosis risk"
+     ],
+     [
+      "HFE genetic testing",
+      "C282Y / H63D mutations",
+      "Confirmatory genotyping on chromosome 6"
+     ],
+     [
+      "Therapeutic phlebotomy",
+      "Remove 500 mL blood weekly",
+      "Maintains ferritin target between 50 and 100 ug/L"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Defective folding of a circulating serine protease inhibitor leads to dual-organ pathology affecting the liver and respiratory system. Caused by mutations in the SERPINA1 gene, **alpha-1 antitrypsin** deficiency involves abnormal polymerization of the mutant Z protein within the rough endoplasmic reticulum of hepatocytes. Histological examination reveals characteristic periodic acid-Schiff (PAS) positive, diastase-resistant eosinophilic cytoplasmic globules within periportal hepatocytes. Intrahepatic protein accumulation triggers childhood cholestasis and adult cirrhosis, while deficient circulating antiprotease levels allow unchecked neutrophil elastase activity, precipitating severe panacinar pulmonary emphysema.",
+   "say": "Defective folding of a protective protease inhibitor produces disease affecting both the liver and respiratory system. Caused by mutations in the SERPINA1 gene, alpha-1 antitrypsin deficiency causes abnormal protein folding within liver cells. Histology demonstrates classic PAS-positive, diastase-resistant globules, while deficient circulating enzyme levels permit unchecked elastase activity in the lungs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Hepatic Pathology (Toxic Gain-of-Function)",
+     "points": [
+      "Mutant Z-protein misfolding and ER polymerization",
+      "Periodic acid-Schiff (PAS) positive, diastase-resistant globules",
+      "Periportal hepatocyte accumulation causing chronic hepatitis",
+      "Progresses to juvenile cirrhosis and hepatocellular carcinoma"
+     ]
+    },
+    "right": {
+     "title": "Pulmonary Pathology (Loss-of-Function)",
+     "points": [
+      "Circulating serum alpha-1 antitrypsin levels severely reduced",
+      "Unchecked neutrophil elastase destroys alveolar elastica",
+      "Accelerated panacinar (panlobular) lower-lobe emphysema",
+      "Dramatically worsened by concurrent cigarette smoking"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Iatrogenic hepatic damage constitutes a major diagnostic challenge characterized by diverse morphological phenotypes and variable clinical latency periods. Classifying **drug-induced liver injury** (DILI) distinguishes intrinsic, predictable, dose-dependent hepatotoxins like acetaminophen from idiosyncratic, unpredictable reactions that occur independently of drug dose. Idiosyncratic injury splits biochemically into hepatocellular patterns (elevated transaminases), cholestatic patterns (elevated alkaline phosphatase), or mixed presentations. The Roussel Uclaf Causality Assessment Method (RUCAM) provides a standardized scoring framework evaluating drug latency, dechallenge responses, and exclusion of competing causes.",
+   "say": "Iatrogenic hepatic injury represents a frequent diagnostic challenge displaying diverse clinical and biochemical phenotypes. Classifying drug-induced liver injury distinguishes predictable dose-dependent toxins from unpredictable idiosyncratic reactions. Idiosyncratic injury presents with hepatocellular, cholestatic, or mixed patterns, with validated scoring systems establishing diagnostic causality.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Injury pattern",
+     "Biochemical criteria (R-ratio)",
+     "Common causative medications"
+    ],
+    "rows": [
+     [
+      "Hepatocellular",
+      "R >= 5.0 (ALT / ALP ratio)",
+      "Isoniazid, Paracetamol, Phenytoin, Valproate"
+     ],
+     [
+      "Cholestatic",
+      "R <= 2.0 (ALP elevation predominant)",
+      "Amoxicillin-clavulanate, Anabolic steroids, OCPs"
+     ],
+     [
+      "Mixed",
+      "R = 2.0 to 5.0",
+      "Azathioprine, Enalapril, Co-trimoxazole"
+     ],
+     [
+      "Granulomatous",
+      "Epithelioid non-caseating granulomas",
+      "Allopurinol, Diltiazem, Sulphonamides"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "First-line antitubercular pharmacotherapy requires regular monitoring to prevent catastrophic drug-induced acute hepatocellular necrosis. Managing suspected **isoniazid hepatotoxicity** recognizes that up to twenty percent of patients exhibit asymptomatic, self-limiting transaminase elevations during initial weeks of therapy. However, severe toxic hepatitis mediated by toxic hydrazine metabolites generated via hepatic N-acetyltransferase occurs particularly in slow acetylators and elderly patients. Guidelines mandate immediate discontinuation of isoniazid if alanine aminotransferase rises to three times the upper limit of normal with symptoms, or five times normal in asymptomatic patients.",
+   "say": "First-line antitubercular therapy requires regular monitoring to prevent catastrophic drug-induced liver necrosis. Managing suspected isoniazid hepatotoxicity recognizes that mild asymptomatic transaminase rises occur frequently during initial therapy. However, severe necrosis mediated by hydrazine metabolites can occur, mandating drug cessation if liver enzymes exceed three times normal with symptoms, or five times normal without symptoms.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "screen",
+      "label": "Routine Monitoring on Isoniazid Therapy"
+     },
+     {
+      "id": "symptom",
+      "label": "ALT >= 3x ULN with symptoms (nausea, pain, jaundice) -> Stop Isoniazid"
+     },
+     {
+      "id": "asymptom",
+      "label": "ALT >= 5x ULN without symptoms -> Stop Isoniazid immediately"
+     }
+    ],
+    "edges": [
+     [
+      "screen",
+      "symptom"
+     ],
+     [
+      "screen",
+      "asymptom"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
+}
