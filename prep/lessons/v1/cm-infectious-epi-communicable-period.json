@@ -68,6 +68,17 @@
    }
   },
   {
+   "tx": "The **serial interval** runs from onset of symptoms in a primary case to onset in the secondary case it infects, and it approximates incubation plus the early infectious portion of the communicable period. That is why a bar for one patient can show infectiousness starting before symptoms. Generation time, measured from infection of the infector to infection of the infectee, cannot be observed directly. Chains plotted with the observable serial interval reveal growth generation by generation and show whether control is bending transmission.",
+   "say": "Serial interval is symptom onset in one case to symptom onset in the next, roughly incubation plus early infectiousness, which may start before symptoms. The time from one infection to the next infection cannot be seen directly. Plotting the observable interval shows whether control is slowing the chain.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n256-cm-infectious-epi-communicable-period.webp",
+    "alt": "Gantt bars for one case show incubation, a latent period, and a communicable period that starts before symptoms.",
+    "caption": "Infectiousness begins during incubation, before symptoms, and continues across a communicable bar that is longer than the latent bar. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "title": "Latent period versus incubation period",
    "tx": "The **latent period** runs from infection to infectiousness, while incubation runs from infection to symptoms; their difference decides whether presymptomatic spread occurs. Diseases infectious before symptoms, like influenza and COVID-era respiratory viruses in exam stems, defeat symptom-based isolation. Diseases infectious only after symptoms, like SARS in 2003, surrendered to it.",
    "say": "Compare two clocks from infection. One ends at infectiousness, the other at symptoms. Infectious first means presymptomatic spread defeats symptom-based isolation; symptoms first means isolation can actually win.",
@@ -110,6 +121,17 @@
      ["Lower vaccine efficacy", "More doses for same protection"],
      ["Denser contact patterns", "Cities need higher shares"]
     ]
+   }
+  },
+  {
+   "tx": "The **herd immunity threshold** is the immune proportion above which a disease may no longer persist. It varies with virulence, with vaccine efficacy, and with how often people contact one another. Highly transmissible measles demands a far higher threshold than slower infections. The unimmunised child in the centre of the diagram is protected only when the immune share around that child sits above the threshold. Serological surveys measure the actual immune share, letting a programme compare reality with the threshold instead of guessing from doses delivered.",
+   "say": "Above a threshold immune share, infection may fail to keep circulating. Measles sets that bar much higher than slower diseases, and vaccine efficacy and contact patterns move it as well. Serological surveys measure the real immune proportion, which is more honest than counting vials used.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n257-cm-infectious-epi-communicable-period.webp",
+    "alt": "A crowd diagram shows immune people above a threshold surrounding one unimmunised child who remains protected.",
+    "caption": "Most of the population is immune, and a single susceptible child in the centre is shielded because spread cannot continue. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
