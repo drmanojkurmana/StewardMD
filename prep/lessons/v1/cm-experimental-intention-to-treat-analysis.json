@@ -24,6 +24,17 @@
    }
   },
   {
+   "tx": "**Intention to treat** analysis keeps every randomised participant in the arm assignment gave them, whether they took that treatment, switched, finished, or left. Crossovers, dropouts, and people who broke protocol stay in the original group. That choice protects the balance randomisation created. The answer is then the practical one: what happens when this treatment is offered to real patients, not only what happens in the subset who followed every instruction.",
+   "say": "Everyone stays in the group randomisation assigned, including people who crossed over, dropped out, or ignored the protocol. Keeping them there preserves the comparability that randomisation bought. The result then describes what offering the treatment achieves in ordinary patients, not only in those who completed it perfectly.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n196-cm-experimental-intention-to-treat-analysis.webp",
+    "alt": "A trial flow in which people who cross over or drop out remain inside the groups they were randomised to.",
+    "caption": "Arrows keep crossovers, dropouts, and protocol breakers inside the arms assigned at randomisation rather than the treatment they actually took. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "title": "Why per protocol alone misleads",
    "tx": "**Per protocol** analysis quietly rebuilds selection bias: patients who tolerate and complete treatment differ from those who quit through side effects or deterioration. Removing them flatters the drug and can reverse a trial's verdict. Journals therefore demand the randomised-groups analysis as primary, with completer analysis offered only as supporting evidence beside it.",
    "say": "Completers are survivors, not samples. Patients who tolerate treatment differ from those who quit through side effects or decline, so deleting them flatters the drug. Randomised groups stay primary; completer analysis supports, never replaces.",
@@ -124,6 +135,17 @@
      ["10 percent", "9 percent", "100 patients"],
      ["50 percent", "25 percent", "4 patients"]
     ]
+   }
+  },
+  {
+   "tx": "The **number needed to treat** is the reciprocal of the absolute risk reduction, rounded up, and it counts how many people must receive the treatment to prevent one extra bad outcome. If events fall from 20 percent to 15 percent, the reduction is 0.05 and the number is 20. Relative risk does not carry the starting risk inside it. This number does, so a clinician can say how much effort buys one extra success at that baseline.",
+   "say": "Divide one by the absolute risk reduction and round up. A drop from 20 percent to 15 percent is a reduction of 0.05, so 20 patients are treated for one extra success. Unlike relative risk, the starting event rate is built into the figure, which lets you quote effort per success.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n197-cm-experimental-intention-to-treat-analysis.webp",
+    "alt": "A grid of 20 treated patients in which event rates fall from 20 percent to 15 percent, marking one extra success.",
+    "caption": "Twenty figures stand for the patients who must be treated to gain one extra good outcome when events drop from 20 percent to 15 percent. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
