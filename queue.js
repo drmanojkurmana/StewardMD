@@ -210,52 +210,64 @@
   }
   function priV2(t) { return t.priority >= 2 ? '<span class="q2-tag danger">Emergency</span>' : t.priority === 1 ? '<span class="q2-tag warn">' + esc(prioLabel(t)) + "</span>" : ""; }
   function nameV2(t) { return tok(t) + phi("name", t.name, esc(t.name || "Patient")); }
+  function statV2(icon, text) { return '<span class="q2-stat">' + ms(icon) + "<span>" + esc(text) + "</span></span>"; }
+  // One strip: running late (only when true), how many are waiting, the longest wait, the doctor's own pace.
   function statusV2(state, k, ordered) {
     var s = state.session || {}, paused = s.status === "paused", longest = 0;
     ordered.forEach(function (t) { var w = now() - (t.registeredAt || now()); if (w > longest) longest = w; });
-    var late = longest > 30 * 60000, parts = [k.waiting ? k.waiting + " waiting" : "No one waiting"];
-    if (k.waiting && mins(longest) >= 1) parts.push("Longest " + mins(longest) + " min");
-    if (k.avgConsult) parts.push("You average " + k.avgConsult + " min a patient");
+    var late = longest > 30 * 60000;
     return '<section class="q2-status' + (late ? " late" : "") + '" role="status">' +
-      (late ? '<span class="q2-tag warn">Running late</span>' : "") + "<p>" + esc(parts.join(". ") + ".") + "</p>" +
-      (s.doctorStatus === "emergency" ? '<div class="q2-hold">' + ms("warning") + '<span>You marked an emergency. Patients see that you are held up.</span><button class="q2-btn" data-q-act="emergency">Emergency over</button></div>' : "") +
-      (paused ? '<div class="q2-hold">' + ms("pause_circle") + '<span>Queue paused. No one is being called.</span><button class="q2-btn" data-q-act="pause">Resume</button></div>' : "") +
+      (late ? '<span class="q2-tag warn">' + ms("schedule") + "Running late</span>" : "") +
+      statV2("groups", k.waiting ? k.waiting + " waiting" : "No one waiting") +
+      (k.waiting && mins(longest) >= 1 ? statV2("hourglass_empty", "Longest " + mins(longest) + " min") : "") +
+      (k.avgConsult ? statV2("timer", "Avg " + k.avgConsult + " min") : "") +
+      (s.doctorStatus === "emergency" ? '<div class="q2-hold">' + ms("warning") + '<span>You marked an emergency. Patients see that you are held up.</span><button class="q2-btn sm" data-q-act="emergency">Emergency over</button></div>' : "") +
+      (paused ? '<div class="q2-hold">' + ms("pause_circle") + '<span>Queue paused. No one is being called.</span><button class="q2-btn sm" data-q-act="pause">Resume</button></div>' : "") +
       "</section>";
   }
+  // The patient in the room. Open assessment is the one filled button on the screen while a consult is on.
   function nowV2(cur) {
     if (!cur) return "";
-    var since = cur.consultStartAt || 0;
-    return '<section class="q2-now" aria-label="With you now"><h2 class="q2-h">With you now</h2>' +
-      '<div class="q2-idline"><div class="q2-name">' + nameV2(cur) + '</div><span class="q2-tag">' + (cur.visitType === "followup" ? "Follow-up" : "New") + "</span></div>" +
-      '<p class="q2-muted">' + (since ? '<span data-q2-since="' + esc(since) + '">In consult ' + mins(now() - since) + " min</span>" : "In consult") + "</p>" +
-      '<button class="q2-btn primary" data-q-act="assess:' + esc(cur.id) + '">' + ms("assignment") + "<span>Open assessment</span></button>" +
+    var since = cur.consultStartAt || 0, id = esc(cur.id);
+    return '<section class="q2-now" aria-label="With you now">' +
+      '<div class="q2-meta"><span class="q2-dot" aria-hidden="true"></span><b>With you now</b>' +
+        (since ? '<span data-q2-since="' + esc(since) + '">In consult ' + mins(now() - since) + " min</span>" : "<span>In consult</span>") +
+        '<span class="q2-tag">' + (cur.visitType === "followup" ? "Follow-up" : "New") + "</span></div>" +
+      '<div class="q2-name">' + nameV2(cur) + "</div>" +
+      '<div class="q2-acts">' +
+        '<button class="q2-btn primary" data-q-act="assess:' + id + '">' + ms("assignment") + "<span>Open assessment</span></button>" +
+        '<button class="q2-btn icon" data-q-act="row:' + id + '" aria-label="More for this patient">' + ms("more_horiz") + "</button>" +
+      "</div>" +
       // A real <button>: a tap, Enter or a screen reader asks "End this consult?". The swipe still ends it in one move.
       '<button type="button" class="q-swipe q2-swipe" id="qSwipe" data-q-act="endask" aria-label="End consultation">' +
-        '<span class="q-swipe-fill"></span><span class="q-swipe-txt">Swipe to end consultation</span>' +
-        '<span class="q-swipe-knob" id="qSwipeKnob">' + ms("chevron_right") + "</span></button>" +
-      '<button class="q2-link" data-q-act="row:' + esc(cur.id) + '">More for this patient</button>' +
+        '<span class="q-swipe-fill"></span><span class="q-swipe-txt">Swipe to end consult</span>' +
+        '<span class="q-swipe-knob" id="qSwipeKnob">' + ms("keyboard_double_arrow_right") + "</span></button>" +
       "</section>";
   }
-  function nextV2(t) {
-    var w = whenV2(t), called = t.status === "called", id = esc(t.id);
-    return '<section class="q2-next" aria-label="Next patient"><h2 class="q2-h">Next</h2>' +
-      '<div class="q2-idline"><div class="q2-name">' + nameV2(t) + "</div>" + priV2(t) + "</div>" +
-      '<p class="q2-muted' + (w.late ? " late" : "") + '">' + esc(w.text) + "</p>" +
+  // The next patient. Its main button is filled only when the room is empty, so it never competes with Open assessment.
+  function nextV2(t, busy) {
+    var w = whenV2(t), called = t.status === "called", id = esc(t.id), main = busy ? "tonal" : "primary";
+    return '<section class="q2-next" aria-label="Next patient">' +
+      '<div class="q2-meta"><b>Next</b><span' + (w.late ? ' class="late"' : "") + ">" + esc(w.text) + "</span>" + priV2(t) + "</div>" +
+      '<div class="q2-name">' + nameV2(t) + "</div>" +
       '<div class="q2-acts">' +
         (called
-          ? '<button class="q2-btn primary" data-q-act="start:' + id + '">' + ms("play_arrow") + "<span>Start consult</span></button>" +
+          ? '<button class="q2-btn ' + main + '" data-q-act="start:' + id + '">' + ms("play_arrow") + "<span>Start consult</span></button>" +
             '<button class="q2-btn" data-q-act="noshow:' + id + '">Did not come</button>'
-          : '<button class="q2-btn primary" data-q-act="call:' + id + '">' + ms("campaign") + "<span>Call in</span></button>" +
+          : '<button class="q2-btn ' + main + '" data-q-act="call:' + id + '">' + ms("campaign") + "<span>Call in</span></button>" +
             '<button class="q2-btn" data-q-act="start:' + id + '">Start consult</button>') +
         '<button class="q2-btn icon" data-q-act="row:' + id + '" aria-label="More actions for this patient">' + ms("more_horiz") + "</button>" +
       "</div></section>";
   }
+  // A waiting patient: place, token, name, priority, wait, then Start and the rest of the actions.
   function rowV2(t, pos) {
-    var w = whenV2(t);
-    return '<button type="button" class="q2-row" data-q-act="row:' + esc(t.id) + '" data-q-tid="' + esc(t.id) + '">' +
-      '<span class="q2-pos">' + pos + "</span>" +
-      '<span class="q2-rinfo"><span class="q2-rname">' + nameV2(t) + '</span><span class="q2-rmeta">' + priV2(t) + '<span class="q2-rwhen' + (w.late ? " late" : "") + '">' + esc(w.text) + "</span></span></span>" +
-      ms("chevron_right") + "</button>";
+    var w = whenV2(t), id = esc(t.id), who = t.token ? "token " + t.token : "this patient";
+    return '<div class="q2-row" data-q-tid="' + id + '">' +
+      '<span class="q2-pos">' + pos + "</span>" + (tok(t) || '<span class="q-tok q2-notok" aria-hidden="true">-</span>') +
+      '<span class="q2-rinfo"><span class="q2-rname">' + phi("name", t.name, esc(t.name || "Patient")) + '</span><span class="q2-rmeta">' + priV2(t) + '<span class="q2-rwhen' + (w.late ? " late" : "") + '">' + esc(w.text) + "</span></span></span>" +
+      '<button class="q2-btn sm" data-q-act="start:' + id + '" aria-label="Start consult, ' + esc(who) + '">' + ms("play_arrow") + "<span>Start</span></button>" +
+      '<button class="q2-btn sm icon" data-q-act="row:' + id + '" aria-label="More actions, ' + esc(who) + '">' + ms("more_horiz") + "</button>" +
+      "</div>";
   }
   // The rows under "Next". While searching, every match is listed (the next patient too) with its true place.
   function rowsV2(state) {
@@ -276,8 +288,8 @@
         '<button class="q2-link" data-q-act="noshows">Recall a no-show</button></section>';
     }
     var search = ordered.length >= 6 ? '<div class="q-tl-search-wrap">' + ms("search") + '<input class="q-tl-search" data-phi-input type="search" autocomplete="off" autocapitalize="off" aria-label="Search the queue" placeholder="Search name or ID" value="' + esc(state.search || "") + '" oninput="try{window.QUEUE&&QUEUE._search&&QUEUE._search(this.value)}catch(e){}"><button class="q-tl-search-x" data-q-act="clearsearch" aria-label="Clear search" style="' + (state.search ? "" : "display:none") + '">' + ms("close") + "</button></div>" : "";
-    return head + nowV2(cur) + (ordered.length ? nextV2(ordered[0]) : '<section class="q2-next"><h2 class="q2-h">Next</h2><p class="q2-muted">No one is waiting.</p></section>') +
-      '<section class="q2-list" aria-label="Waiting"><div class="q2-listh"><h2 class="q2-h">Waiting' + (ordered.length > 1 ? " · " + (ordered.length - 1) + " more" : "") + '</h2><button class="q2-link" data-q-act="noshows">No-shows</button></div>' +
+    return head + nowV2(cur) + (ordered.length ? nextV2(ordered[0], !!cur) : '<section class="q2-next"><div class="q2-meta"><b>Next</b><span>No one is waiting.</span></div></section>') +
+      '<section class="q2-list" aria-label="Waiting"><div class="q2-listh"><h2 class="q2-h">Waiting' + (ordered.length > 1 ? '<span class="q2-count">' + (ordered.length - 1) + "</span>" : "") + '</h2><button class="q2-link" data-q-act="noshows">No-shows</button></div>' +
       noShowPanel(state) + search + '<div id="qTlRows">' + rowsV2(state) + "</div></section>";
   }
   function headerV2(state, view, doctorName, dept) {
@@ -310,23 +322,23 @@
         sheetItem("prio:" + id, "priority_high", t.priority ? "Change priority" : "Set priority") +
         sheetItem("assess:" + id, "assignment", "Open assessment") +
         (emrOn() && t.ghisPatientId ? sheetItem("profile:" + id, "clinical_notes", "Open record") : "") +
-        '<div class="q2-sep"></div>' + sheetItem("remove:" + id, "person_remove", "Remove from queue", "danger");
+        "</div>" + '<div class="q2-items q2-danger">' + sheetItem("remove:" + id, "person_remove", "Remove from queue", "danger");
     }
-    return '<div class="q-sheet" data-q-act="row-close"><div class="q-profile q2-sheet" data-q-act="row-stop" role="dialog" aria-label="Actions for this patient">' +
-      '<div class="q-profile-head"><button class="q-ic q-profile-x" data-q-act="row-close" aria-label="Close">' + ms("close") + "</button></div>" +
-      '<div class="q2-name">' + nameV2(t) + priV2(t) + '</div><p class="q2-muted">' + esc(t.status === "in_consultation" ? "With you now" : whenV2(t).text) + "</p>" +
-      items + "</div></div>";
+    return '<div class="q-sheet q2-over" data-q-act="row-close"><div class="q-profile q2-sheet" data-q-act="row-stop" role="dialog" aria-label="Actions for this patient">' +
+      '<div class="q2-sheet-h"><div><div class="q2-name">' + nameV2(t) + '</div><div class="q2-meta">' + priV2(t) + "<span>" + esc(t.status === "in_consultation" ? "With you now" : whenV2(t).text) + "</span></div></div>" +
+      '<button class="q-ic q-profile-x" data-q-act="row-close" aria-label="Close">' + ms("close") + "</button></div>" +
+      '<div class="q2-items">' + items + "</div></div></div>";
   }
   function renderConfirm(c) {
-    return '<div class="q-sheet" data-q-act="confirm-close"><div class="q-profile q2-sheet" data-q-act="row-stop" role="alertdialog" aria-label="' + esc(c.title) + '">' +
+    return '<div class="q-sheet q2-over" data-q-act="confirm-close"><div class="q-profile q2-sheet q2-ask" data-q-act="row-stop" role="alertdialog" aria-label="' + esc(c.title) + '">' +
       '<div class="q2-name">' + esc(c.title) + "</div>" + (c.bodyHtml ? '<p class="q2-muted">' + c.bodyHtml + "</p>" : "") +
       '<button class="q2-btn ' + (c.danger ? "danger" : "primary") + '" data-q-act="confirm-ok">' + esc(c.ok) + "</button>" +
       '<button class="q2-btn" data-q-act="confirm-close">Cancel</button></div></div>';
   }
   function renderRecallSheet(r) {
-    return '<div class="q-sheet" data-q-act="recall-close"><div class="q-profile q2-sheet" data-q-act="row-stop" role="dialog" aria-label="Recall this patient">' +
-      '<div class="q-profile-head"><button class="q-ic q-profile-x" data-q-act="recall-close" aria-label="Close">' + ms("close") + "</button></div>" +
-      '<div class="q2-name">Recall this patient</div><p class="q2-muted">They keep the same token and go back to waiting. The reason is recorded in the audit trail.</p>' +
+    return '<div class="q-sheet q2-over" data-q-act="recall-close"><div class="q-profile q2-sheet q2-ask" data-q-act="row-stop" role="dialog" aria-label="Recall this patient">' +
+      '<div class="q2-sheet-h"><div class="q2-name">Recall this patient</div><button class="q-ic q-profile-x" data-q-act="recall-close" aria-label="Close">' + ms("close") + "</button></div>" +
+      '<p class="q2-muted">They keep the same token and go back to waiting. The reason is recorded in the audit trail.</p>' +
       '<label class="q-gate-lbl" for="qRecallWhy">Reason</label><input id="qRecallWhy" class="q-gate-in" type="text" maxlength="120" value="' + esc(r.reason || "Patient arrived late") + '">' +
       '<button class="q2-btn primary" data-q-act="recall-ok">Recall</button></div></div>';
   }

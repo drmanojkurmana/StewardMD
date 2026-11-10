@@ -111,7 +111,11 @@ try {
   const next = await txt(".q2-next");
   ok(/Sita Devi/.test(next) && /Start consult/.test(next) && /Did not come/.test(next), "Next (already called): Start consult and Did not come, in words", next);
   ok(await b.ev("return document.querySelectorAll('#qTlRows .q2-row').length") === 3, "the rest of the queue is three plain rows");
-  ok(await b.ev("return document.querySelectorAll('#qTlRows .q2-row button, .q2-row .q-ic').length") === 0, "rows carry no icon buttons");
+  ok(await b.ev("return [].slice.call(document.querySelectorAll('#qTlRows .q2-row')).every(function(r){var s=r.querySelector('[data-q-act^=\"start:\"]'),m=r.querySelector('[data-q-act^=\"row:\"]');return s&&/Start/.test(s.innerText)&&m&&m.getAttribute('aria-label')&&r.querySelector('.q-tok')&&r.querySelector('.q2-rwhen')})"), "each row: token, wait, a worded Start and a named More");
+  ok(await b.ev("return document.querySelectorAll('#smdQueue .q2 .q2-btn.primary').length") === 1 && /Open assessment/.test(await txt("#smdQueue .q2 .q2-btn.primary")), "during a consult, Open assessment is the only filled button");
+  const nowH = await b.ev("return Math.round(document.querySelector('.q2-now').getBoundingClientRect().height)");
+  ok(nowH <= 228, "the active card is at least 20% shorter than the first build (285px)", nowH);
+  ok(await b.ev("return Math.round(document.getElementById('qSwipe').getBoundingClientRect().height)") === 44, "the end-consult track is 44px, the height of a control");
   ok(/rough estimate/.test(await txt("#qTlRows")), "a low-confidence estimate says it is rough");
   await clean("queue 390");
   await b.shot(join(OUT, "opd-q2-10-queue-390.png"));
@@ -146,13 +150,15 @@ try {
   ok(await b.until("return !!document.querySelector('#smdQueue .q2-now')"), "and the patient is in the room");
 
   // ---- 8. a row opens worded actions; remove asks in the app ----
-  await b.click("#qTlRows .q2-row");
-  ok(await b.until("return !!document.querySelector('.q2-sheet .q2-item')"), "tapping a row opens its actions");
+  await b.click('#qTlRows .q2-row [data-q-act^="row:"]');
+  ok(await b.until("return !!document.querySelector('.q2-sheet .q2-item')"), "a row's More opens its actions");
+  await b.sleep(450);
+  ok(await b.ev("var c=document.querySelector('.q2-sheet').getBoundingClientRect(); return Math.abs(c.bottom-innerHeight)<2 && c.left<2"), "the sheet sits on the bottom edge, in thumb reach");
+  ok(await b.ev("var d=document.querySelector('.q2-item.danger').getBoundingClientRect(), p=[].slice.call(document.querySelectorAll('.q2-item:not(.danger)')).pop().getBoundingClientRect(); return d.top-p.bottom>=16"), "Remove stands apart from the other actions");
   const sheet = await txt(".q2-sheet");
   ok(["Start consult", "Call in", "Change priority", "Open assessment", "Remove from queue"].every((w) => sheet.includes(w)), "every action is written out", sheet);
   ok(await b.ev("var i=[].slice.call(document.querySelectorAll('.q2-sheet .q2-item')); return i[i.length-1].classList.contains('danger') && /Remove/.test(i[i.length-1].innerText)"), "Remove is last and marked as destructive");
   await clean("row sheet");
-  await b.sleep(400);
   await b.shot(join(OUT, "opd-q2-20-row-sheet.png"));
   const rmId = await b.ev(`return document.querySelector('.q2-sheet [data-q-act^="remove:"]').getAttribute('data-q-act').slice(7)`);
   await clickAct("remove", ".q2-sheet");
@@ -163,7 +169,7 @@ try {
   ok(await b.ev("return window.__confirms + window.__prompts + window.__opens") === 0, "no window.confirm, prompt or open anywhere in the new flow");
 
   // ---- 9. priority and recall sheets ----
-  await b.click("#qTlRows .q2-row"); await b.until("return !!document.querySelector('.q2-sheet .q2-item')"); await clickAct("prio", ".q2-sheet");
+  await b.click('#qTlRows .q2-row [data-q-act^="row:"]'); await b.until("return !!document.querySelector('.q2-sheet .q2-item')"); await clickAct("prio", ".q2-sheet");
   ok(await b.until(`return !!document.querySelector('[aria-label="Set priority"]')`) && !(await has(".q2-sheet .q2-item")), "Set priority opens the reason sheet and closes the action sheet");
   await clickAct("prio-close");
   await clickAct("noshow", ".q2-next") ; await b.sleep(300);

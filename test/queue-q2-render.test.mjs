@@ -54,13 +54,15 @@ test("flag on: a status sentence, Now, Next with worded buttons, plain rows", ()
   const Q = load({ smd_opd_q2: "1" });
   const h = Q._render(state()), t = text(h);
   assert.ok(!/class="q-kpis"/.test(h) && !/class="q-ai/.test(h), "no stat cards, no insight card");
-  assert.match(t, /2 waiting\. Longest 44 min\./);
+  assert.match(t, /2 waiting .*Longest 44 min/);
   assert.match(t, /Running late/);
-  assert.match(t, /With you now .*Arjun Rao.*In consult 5 min/);
+  assert.match(t, /With you now .*In consult 5 min .*Arjun Rao/);
   assert.match(h, /<section class="q2-next"[\s\S]*Sita Devi[\s\S]*data-q-act="call:n"[\s\S]*Call in[\s\S]*data-q-act="start:n"[\s\S]*Start consult/);
-  assert.match(h, /<button type="button" class="q2-row" data-q-act="row:w"/);
+  assert.match(h, /<div class="q2-row" data-q-tid="w">[\s\S]*data-q-act="start:w" aria-label="Start consult, token A3"[\s\S]*data-q-act="row:w" aria-label="More actions, token A3"/);
+  assert.equal((h.match(/class="q2-btn primary"/g) || []).length, 1, "one filled button while a consult is on: Open assessment");
   assert.match(t, /About 18 min, rough estimate/, "an estimate under 60% confidence says so");
   assert.ok(!/<button class="q-ic"[^>]*data-q-act="(call|start|remove|prio)/.test(h), "no icon-only action buttons");
+  assert.match(Q._render(state({ tickets: state().tickets.slice(1) })), /class="q2-btn primary" data-q-act="call:n"/, "with the room empty, the next patient's button is the filled one");
 });
 
 test("flag on: patient names are escaped everywhere they are drawn", () => {
@@ -88,7 +90,7 @@ test("flag on: the end control is a button a screen reader can press", () => {
 test("flag on: an empty day gives the one action that fills it", () => {
   const Q = load({ smd_opd_q2: "1" });
   const h = Q._render(state({ tickets: [] }));
-  assert.match(text(h), /No patients yet Add your first patient/);
+  assert.match(text(h), /No patients yet\s+Add your first patient/);
   assert.match(h, /q2-empty[\s\S]*data-q-act="add"/);
 });
 

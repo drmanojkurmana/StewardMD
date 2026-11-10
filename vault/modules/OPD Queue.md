@@ -91,8 +91,26 @@ Plan and evidence: `design-plans/opd-queue-10-of-10.md`. Switch: OPD Queue > Set
 - The header's X CLOSES the queue (on the earlier screen the arrow means "switch workplace and forget it");
   Switch and Pause are in the profile sheet. The header is titled with the clinic (`loadClinicName`).
 - Settings autosave on this screen (`onChange`, 600 ms, no repaint).
-- CSS: `.q2-*` at the end of `queue.css`, tokens only, radius 20 / 10 / 6 (`--r-card`, `--r-ctl`, `--r-tag`),
-  amber via `--warn-container`. A unit test fails on a raw hex in that block.
+- CSS: `.q2-*` at the end of `queue.css`, tokens only, amber via `--warn-container`. A unit test fails on a raw
+  hex in that block.
+- **Visual pass 2 (owner, 2026-11-10: "looks so bad", wants refined clinical OPD, emerald and white, no
+  gradients, no heavy shadows).** Radius is now 16 / 12 / 6 (`--r-card`, `--r-ctl`, `--r-tag`), an 8px grid,
+  buttons 48 high, row buttons and header controls 44, icons 20. Structure:
+  - a status STRIP (Running late tag, N waiting, Longest N min, Avg N min), not a sentence;
+  - the active card is about 200px (was 285): meta line, name, Open assessment plus a More button, and a
+    44px end-consult track. Open assessment is the ONLY filled button while a consult is on; the next
+    patient's button is `tonal` then and `primary` only when the room is empty (`nextV2(t, busy)`);
+  - waiting rows are a `<div>` in one bordered surface: token, name, priority tag, wait, a worded Start and
+    a named More. The place number shows from 480px wide; on a phone the row order says it;
+  - sheets (`.q2-over`) sit on the bottom edge on a phone and are centred from 901px; Remove is a
+    separate red-tinted block 16px below the other actions;
+  - settings controls are restyled only under `.q2` (48px inputs at 16px text so iOS does not zoom,
+    48 by 28 switches with a 44px hit area), so the earlier screen is untouched.
+  The owner's reference images also showed tabs (Queue / In consult / No-shows), a bell, search in the
+  header, patient age and sex, and a clinic switcher in the title. None were built: they are features or
+  data this screen does not have, and the brief said not to invent any.
+- GOTCHA: `.q-canvas` is a flex column that scrolls; its children shrink unless `flex-shrink: 0`, and a
+  wrapped status strip slid under the card below it.
 - Tests: `test/queue-q2-render.test.mjs`, browser `test/run-opd-q2-ui.mjs` on `test/opd-q2-harness.html`
   (a STATEFUL fake of /api/queue; 320 and 390 wide, dark; asserts 44px targets and a name on every
   control). Both run in `.github/workflows/opd-console-ui.yml`.
