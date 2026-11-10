@@ -342,29 +342,35 @@
     if (D.getElementById("dcCss")) return;
     var s = D.createElement("style"); s.id = "dcCss";
     s.textContent = [
-      "#doseCalc{--dc-bg:#f4f7f6;--dc-panel:#fff;--dc-ink:#12202a;--dc-mut:#5b6b75;--dc-line:#dce4e2;--dc-acc:#0f766e;--dc-acc-soft:#e3f2ef;--dc-warn:#9a5b00;--dc-warn-soft:#fff3dd;--dc-bad:#b42318;--dc-bad-soft:#fdecea;--dc-f:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;--dc-mono:ui-monospace,'SF Mono',Menlo,monospace;position:fixed;inset:0;z-index:10050;background:var(--dc-bg);color:var(--dc-ink);font:15px/1.45 var(--dc-f);display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}",
+      "#doseCalc{--dc-bg:#f4f7f6;--dc-panel:#fff;--dc-ink:#12202a;--dc-mut:#5b6b75;--dc-line:#dce4e2;--dc-acc:#0f766e;--dc-acc-soft:#e3f2ef;--dc-warn:#9a5b00;--dc-warn-soft:#fff3dd;--dc-bad:#b42318;--dc-bad-soft:#fdecea;--dc-fill:rgba(118,118,128,.12);--dc-on:#fff;--dc-f:-apple-system,BlinkMacSystemFont,'SF Pro Text',system-ui,sans-serif;--dc-mono:ui-monospace,'SF Mono',Menlo,monospace;position:fixed;inset:0;z-index:10050;background:var(--dc-bg);color:var(--dc-ink);font:15px/1.45 var(--dc-f);display:flex;flex-direction:column;-webkit-font-smoothing:antialiased}",
       // The rule above sets display:flex, which beats the UA [hidden]{display:none}: without this line a
       // "closed" calculator stayed on screen and swallowed every tap (SMD-MSCQX9).
       "#doseCalc[hidden]{display:none!important}",
-      "body.dark #doseCalc,body.v3-dark #doseCalc{--dc-bg:#0d1417;--dc-panel:#151f23;--dc-ink:#e3ecea;--dc-mut:#93a4a8;--dc-line:#26363b;--dc-acc:#37b8a6;--dc-acc-soft:#153430;--dc-warn:#f0b454;--dc-warn-soft:#352812;--dc-bad:#ff7b6e;--dc-bad-soft:#3a1714}",
-      "#doseCalc .dc-top{display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 10px) 16px 10px;border-bottom:1px solid var(--dc-line);background:var(--dc-panel)}",
-      "#doseCalc .dc-x{border:0;background:none;color:var(--dc-acc);font:600 16px var(--dc-f);padding:6px 4px;min-height:40px;cursor:pointer}",
-      "#doseCalc .dc-t{flex:1;font:700 17px var(--dc-f)}",
-      "#doseCalc .dc-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 16px calc(env(safe-area-inset-bottom,0px) + 30px);display:flex;flex-direction:column;gap:14px}",
-      "#doseCalc .dc-card{background:var(--dc-panel);border:1px solid var(--dc-line);border-radius:14px;padding:14px;display:flex;flex-direction:column;gap:10px}",
-      "#doseCalc h3{margin:0;font:700 13px var(--dc-f);letter-spacing:.06em;text-transform:uppercase;color:var(--dc-mut)}",
+      "body.dark #doseCalc,body.v3-dark #doseCalc{--dc-bg:#0d1417;--dc-panel:#151f23;--dc-ink:#e3ecea;--dc-mut:#93a4a8;--dc-line:#26363b;--dc-acc:#37b8a6;--dc-acc-soft:#153430;--dc-warn:#f0b454;--dc-warn-soft:#352812;--dc-bad:#ff7b6e;--dc-bad-soft:#3a1714;--dc-fill:rgba(118,118,128,.26);--dc-on:#4a5a5f}",
+      "#doseCalc .dc-top{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:calc(env(safe-area-inset-top,0px) + 6px) 8px 6px;box-shadow:0 1px 0 var(--dc-line);background:var(--dc-panel);position:relative;z-index:1}",
+      "#doseCalc .dc-x{justify-self:start;display:inline-flex;align-items:center;gap:3px;border:0;background:none;color:var(--dc-acc);font:400 17px var(--dc-f);padding:0 8px;min-height:44px;cursor:pointer}#doseCalc .dc-x svg{flex:none}",
+      "#doseCalc .dc-t{font:600 17px var(--dc-f);text-align:center}",
+      "#doseCalc .dc-body{flex:1;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:12px 16px calc(env(safe-area-inset-bottom,0px) + 30px);display:flex;flex-direction:column;gap:20px}",
+      "#doseCalc .dc-card{background:var(--dc-panel);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:10px}#doseCalc#doseCalc .dc-card.dc-form{background:none!important;border:0!important;box-shadow:none!important;-webkit-backdrop-filter:none!important;backdrop-filter:none!important;padding:0;gap:6px;border-radius:0}#doseCalc .dc-form .dc-hrow{padding:0 16px;min-height:44px}#doseCalc #dcDer{padding:2px 16px 0}#doseCalc #dcDer:empty{display:none}",
+      "#doseCalc h3{margin:0;font:500 13px var(--dc-f);letter-spacing:.02em;text-transform:uppercase;color:var(--dc-mut)}",
       "#doseCalc .dc-hrow{display:flex;align-items:center;justify-content:space-between;gap:8px}",
-      "#doseCalc .dc-pick{border:1px solid var(--dc-acc);color:var(--dc-acc);background:transparent;border-radius:10px;font:600 13.5px var(--dc-f);padding:7px 11px;min-height:36px;cursor:pointer}",
-      "#doseCalc .dc-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}",
+      "#doseCalc .dc-pick{border:0;color:var(--dc-acc);background:none;font:400 15px var(--dc-f);padding:0;min-height:44px;cursor:pointer}",
+      "#doseCalc .dc-grid{display:flex;flex-direction:column;background:var(--dc-panel);border-radius:12px;overflow:hidden}",
+      "#doseCalc .dc-grid>*{position:relative;display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;min-height:48px;padding:0 16px;font:400 16px var(--dc-f);color:var(--dc-ink);white-space:nowrap}",
+      "#doseCalc .dc-grid>*+*::before{content:'';position:absolute;left:16px;right:0;top:0;height:1px;background:var(--dc-line);transform:scaleY(.5)}",
+      "#doseCalc .dc-grid>label:focus-within{background:var(--dc-acc-soft)}",
+      "#doseCalc .dc-grid input:not([type=checkbox]){flex:1;width:auto;min-width:0;text-align:right;background:none;border-radius:0;padding:0;min-height:48px;font-variant-numeric:tabular-nums;caret-color:var(--dc-acc);text-overflow:ellipsis}",
+      "#doseCalc .dc-grid input:focus,#doseCalc .dc-grid select:focus{outline:none}",
+      "#doseCalc input::placeholder{color:var(--dc-mut);opacity:1}",
       "#doseCalc label{display:flex;flex-direction:column;gap:4px;font:600 12.5px var(--dc-f);color:var(--dc-mut);min-width:0}",
-      "#doseCalc input,#doseCalc select{width:100%;box-sizing:border-box;font:500 16px var(--dc-f);color:var(--dc-ink);background:var(--dc-bg);border:1.5px solid var(--dc-line);border-radius:10px;padding:10px 11px;min-height:44px;-webkit-appearance:none;appearance:none}",
-      "#doseCalc input:focus,#doseCalc select:focus{outline:none;border-color:var(--dc-acc)}",
+      "#doseCalc input,#doseCalc select{width:100%;box-sizing:border-box;font:400 16px var(--dc-f);color:var(--dc-ink);background:var(--dc-fill);border:0;border-radius:10px;padding:10px 12px;min-height:44px;-webkit-appearance:none;appearance:none}",
+      "#doseCalc input:focus,#doseCalc select:focus{outline:2px solid var(--dc-acc);outline-offset:-2px}",
       "#doseCalc .dc-req{color:var(--dc-bad)}",
-      "#doseCalc .dc-age{display:flex;gap:6px}#doseCalc .dc-age input{flex:1;min-width:0}#doseCalc .dc-age select{flex:0 0 92px}",
-      "#doseCalc .dc-seg{display:flex;border:1.5px solid var(--dc-line);border-radius:10px;overflow:hidden;min-height:44px}#doseCalc .dc-seg button{flex:1;border:0;background:var(--dc-bg);color:var(--dc-ink);font:600 14px var(--dc-f);cursor:pointer}#doseCalc .dc-seg button+button{border-left:1.5px solid var(--dc-line)}#doseCalc .dc-seg button[aria-pressed=true]{background:var(--dc-acc);color:#fff}",
-      "#doseCalc .dc-tog{display:flex;flex-direction:row;align-items:center;justify-content:space-between;gap:10px;font:600 14px var(--dc-f);color:var(--dc-ink);grid-column:1/-1}#doseCalc .dc-tog input{width:48px;height:28px;min-height:0;padding:0;border-radius:14px;flex:0 0 auto;position:relative;cursor:pointer;background:var(--dc-line);border:0}#doseCalc .dc-tog input:checked{background:var(--dc-acc)}#doseCalc .dc-tog input::after{content:'';position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;transition:left .15s}#doseCalc .dc-tog input:checked::after{left:23px}",
+      "#doseCalc .dc-age{display:flex;align-items:center;flex:1;min-width:0;gap:10px}#doseCalc .dc-age input{flex:1;min-width:0}#doseCalc .dc-age select{flex:0 0 78px;width:78px;background:url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='9' height='14' fill='none' stroke='%23808b90' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 5l3.5-3.5L8 5M1 9l3.5 3.5L8 9'/%3E%3C/svg%3E\") right center no-repeat;color:var(--dc-acc);padding:0 14px 0 0;min-height:44px;border-radius:0;text-align:right;text-align-last:right}",
+      "#doseCalc .dc-seg{display:flex;flex:0 0 190px;background:var(--dc-fill);border-radius:9px;padding:2px}#doseCalc .dc-seg button{position:relative;flex:1;min-height:32px;border:0;border-radius:7px;background:none;color:var(--dc-ink);font:500 14px var(--dc-f);cursor:pointer;transition:background-color .16s ease-out,box-shadow .16s ease-out}#doseCalc .dc-seg button::after{content:'';position:absolute;inset:-6px 0}#doseCalc .dc-seg button[aria-pressed=true]{background:var(--dc-on);font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.16)}#doseCalc button{touch-action:manipulation;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}#doseCalc button:active{opacity:.65}",
+      "#doseCalc .dc-tog input{width:51px;height:31px;min-height:0;padding:0;border-radius:16px;flex:0 0 auto;position:relative;cursor:pointer;background:var(--dc-fill);transition:background-color .2s ease-out}#doseCalc .dc-tog input:checked{background:var(--dc-acc)}#doseCalc .dc-tog input::after{content:'';position:absolute;top:2px;left:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.22);transition:transform .22s cubic-bezier(.32,.72,0,1)}#doseCalc .dc-tog input:checked::after{transform:translateX(20px)}",
       "#doseCalc .dc-der{font:500 13px var(--dc-f);color:var(--dc-mut)}#doseCalc .dc-der b{color:var(--dc-ink);font-variant-numeric:tabular-nums}",
-      "#doseCalc .dc-full{grid-column:1/-1}",
+      "#doseCalc .dc-grid>.dc-full{flex-direction:column;align-items:stretch;gap:9px;padding:12px 16px}#doseCalc .dc-full .dc-seg{flex:none}",
       "#doseCalc .dc-err{font:600 13.5px var(--dc-f);color:var(--dc-bad);background:var(--dc-bad-soft);border-radius:10px;padding:9px 12px}",
       "#doseCalc .dc-hits{display:flex;flex-direction:column}#doseCalc .dc-hit{display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;border:0;border-top:1px solid var(--dc-line);background:none;color:var(--dc-ink);font:600 15px var(--dc-f);padding:11px 2px;min-height:44px;cursor:pointer}#doseCalc .dc-hit:first-child{border-top:0}",
       "#doseCalc .dc-k{flex:0 0 auto;font:600 11px var(--dc-f);color:var(--dc-acc);background:var(--dc-acc-soft);border-radius:999px;padding:3px 8px}#doseCalc .dc-k.f{color:var(--dc-mut);background:var(--dc-bg)}",
@@ -384,45 +390,52 @@
       "#doseCalc details summary{font:600 13.5px var(--dc-f);color:var(--dc-acc);cursor:pointer;min-height:36px;display:flex;align-items:center}",
       "#doseCalc .dc-foot{font:500 12px var(--dc-f);color:var(--dc-mut);text-align:center;padding:4px 8px}",
       "#doseCalc .dc-plist{display:flex;flex-direction:column;gap:2px;max-height:50vh;overflow:auto}#doseCalc .dc-pl{text-align:left;border:0;border-top:1px solid var(--dc-line);background:none;color:var(--dc-ink);padding:10px 2px;cursor:pointer;font:600 15px var(--dc-f)}#doseCalc .dc-pl small{display:block;font:500 12.5px var(--dc-f);color:var(--dc-mut)}",
-      "@media(min-width:720px){#doseCalc .dc-body{max-width:720px;margin:0 auto;width:100%}#doseCalc .dc-grid{grid-template-columns:repeat(4,minmax(0,1fr))}#doseCalc .dc-grid>label:has(.dc-age){grid-column:span 2}}"
+      "@media(min-width:720px){#doseCalc .dc-body{max-width:720px;margin:0 auto;width:100%}}"
     ].join("\n");
     D.head.appendChild(s);
   }
 
   function field(k, label, attrs) { return '<label>' + label + '<input id="dc_' + k + '" data-k="' + k + '" inputmode="decimal" autocomplete="off" value="' + esc(S.p[k]) + '"' + (attrs || "") + "></label>"; }
-  function patientHtml() {
-    var p = S.p, d = derive(p), der = [];
+  function derivedHtml() {
+    var d = derive(S.p), der = [];
     if (d.ibw) der.push("Ideal weight <b>" + d.ibw + " kg</b>");
     if (d.bsa) der.push("BSA <b>" + d.bsa + " m²</b>");
     if (d.bmi) der.push("BMI <b>" + d.bmi + "</b>" + (d.obese ? " (obese)" : ""));
     if (d.renal) der.push((d.ageY != null && d.ageY < 18 && d.renal.how !== "entered" ? "eGFR" : "CrCl") + " <b>" + d.renal.value + " mL/min</b> <span>(" + esc(d.renal.how) + ")</span>");
-    return '<section class="dc-card" aria-labelledby="dcPt"><div class="dc-hrow"><h3 id="dcPt">Patient' + (S.source ? " · " + sourceHtml(S.source) : "") + '</h3><button class="dc-pick" data-dc="pick">Select patient</button></div>' +
+    return der.join(" · ");
+  }
+  function patientTitle() { return "Patient" + (S.source ? " · " + sourceHtml(S.source) : ""); }
+  function patientHtml() {
+    var p = S.p;
+    return '<section class="dc-card dc-form" aria-labelledby="dcPt"><div class="dc-hrow"><h3 id="dcPt">' + patientTitle() + '</h3><button class="dc-pick" data-dc="pick">Select patient</button></div>' +
       '<div class="dc-grid">' +
         field("weight", '<span>Weight (kg) <span class="dc-req">*</span></span>', ' placeholder="e.g. 55"') +
         '<label>Age<span class="dc-age"><input id="dc_age" data-k="age" inputmode="decimal" autocomplete="off" value="' + esc(p.age) + '" placeholder="e.g. 45"><select id="dc_ageUnit" data-k="ageUnit"><option value="years"' + (p.ageUnit === "years" ? " selected" : "") + '>years</option><option value="months"' + (p.ageUnit === "months" ? " selected" : "") + '>months</option><option value="days"' + (p.ageUnit === "days" ? " selected" : "") + '>days</option></select></span></label>' +
-        '<label>Sex<span class="dc-seg" role="group" aria-label="Sex"><button type="button" data-sex="M" aria-pressed="' + (p.sex === "M") + '">Male</button><button type="button" data-sex="F" aria-pressed="' + (p.sex === "F") + '">Female</button></span></label>' +
+        '<div><span>Sex</span><span class="dc-seg" role="group" aria-label="Sex"><button type="button" data-sex="M" aria-pressed="' + (p.sex === "M") + '">Male</button><button type="button" data-sex="F" aria-pressed="' + (p.sex === "F") + '">Female</button></span></div>' +
         field("height", "Height (cm)", ' placeholder="for ideal weight, BSA"') +
         field("scr", "Creatinine (mg/dL)", ' placeholder="for CrCl"') +
         field("crcl", "Or CrCl (mL/min)", ' placeholder="if known"') +
-        '<label class="dc-full">Liver (Child-Pugh)<span class="dc-seg" role="group" aria-label="Child-Pugh class">' + [["", "Normal"], ["A", "A"], ["B", "B"], ["C", "C"]].map(function (c) { return '<button type="button" data-cp="' + c[0] + '" aria-pressed="' + (p.childPugh === c[0]) + '">' + c[1] + "</button>"; }).join("") + "</span></label>" +
+        '<div class="dc-full"><span>Liver (Child-Pugh)</span><span class="dc-seg" role="group" aria-label="Child-Pugh class">' + [["", "Normal"], ["A", "A"], ["B", "B"], ["C", "C"]].map(function (c) { return '<button type="button" data-cp="' + c[0] + '" aria-pressed="' + (p.childPugh === c[0]) + '">' + c[1] + "</button>"; }).join("") + "</span></div>" +
         '<label class="dc-tog">On dialysis<input type="checkbox" id="dc_dialysis" data-k="dialysis"' + (p.dialysis ? " checked" : "") + "></label>" +
-      "</div>" + (der.length ? '<div class="dc-der">' + der.join(" · ") + "</div>" : "") + "</section>";
+      "</div>" + '<div class="dc-der" id="dcDer">' + derivedHtml() + "</div></section>";
   }
 
-  function drugPickerHtml() {
+  function drugHitsHtml() {
     var hits = S.q ? search(S.q, 30) : [];
+    return (!_data ? '<div class="dc-der">Loading our drug database…</div>' : S.q && !hits.length ? '<div class="dc-der">No drug in our database matches "' + esc(S.q) + '".</div>' :
+        '<div class="dc-hits">' + hits.map(function (x) { return '<button class="dc-hit" data-drug="' + esc(x.n) + '"><span>' + esc(x.n) + '</span><span class="dc-k' + (x.k === "perkg" || x.k === "perm2" ? "" : " f") + '">' + (x.k === "perkg" ? "per kg" : x.k === "perm2" ? "per m²" : x.k === "fixed" ? "fixed dose" : "see text") + "</span></button>"; }).join("") + "</div>");
+  }
+  function drugPickerHtml() {
     return '<section class="dc-card" aria-labelledby="dcDr"><h3 id="dcDr">Drug</h3>' +
       '<input id="dc_q" type="search" placeholder="Search a drug, e.g. amikacin" autocomplete="off" autocorrect="off" autocapitalize="off" value="' + esc(S.q) + '" aria-label="Search a drug">' +
-      (!_data ? '<div class="dc-der">Loading our drug database…</div>' : S.q && !hits.length ? '<div class="dc-der">No drug in our database matches "' + esc(S.q) + '".</div>' :
-        '<div class="dc-hits">' + hits.map(function (x) { return '<button class="dc-hit" data-drug="' + esc(x.n) + '"><span>' + esc(x.n) + '</span><span class="dc-k' + (x.k === "perkg" || x.k === "perm2" ? "" : " f") + '">' + (x.k === "perkg" ? "per kg" : x.k === "perm2" ? "per m²" : x.k === "fixed" ? "fixed dose" : "see text") + "</span></button>"; }).join("") + "</div>") +
-      "</section>";
+      '<div id="dcHits">' + drugHitsHtml() + "</div></section>";
   }
 
   /* Neonatal layer on for this device (neo-flags.js): a neonate is dosed from the neonatal band table. */
   function neoOn() { try { return !!(G.SMD_NEO_FLAGS && G.SMD_NEO_FLAGS.feature("dose") && G.SMD_NEO_DOSE); } catch (e) { return false; } }
   function neoBlock(x, res) {
     var ND = G.SMD_NEO_DOSE, N = G.SMD_NEO;
-    if (!ND.loaded()) { ND.load().then(function () { render(); }, function () {}); return { html: '<div class="dc-der">Loading neonatal doses…</div>', has: false }; }
+    if (!ND.loaded()) { ND.load().then(function () { refresh(); }, function () {}); return { html: '<div class="dc-der">Loading neonatal doses…</div>', has: false }; }
     var band = ND.find(x.n);
     if (!band) {
       // No band: the neonate rows (or "No neonatal dose on file") stand; add what the monograph itself says about newborns.
@@ -496,14 +509,30 @@
     return h + other + '<div class="dc-foot">Calculated from the StewardMD monograph shown above. Decision support: verify before prescribing.</div></section>';
   }
 
-  function render(keepFocus) {
-    if (!root) return;
-    var fid = keepFocus && D.activeElement && D.activeElement.id, pos = fid && D.activeElement.selectionStart;
-    var body = root.querySelector(".dc-body");
-    body.innerHTML = patientHtml() + (S.drug ? resultHtml() : drugPickerHtml());
+  function wireNeo(body) {
     var blk = body.querySelector("[data-neo-blk]");
     if (blk && G.SMD_NEO_DOSE) { var bd = G.SMD_NEO_DOSE.find(S.drug.n); if (bd) G.SMD_NEO_DOSE.wireGuards(blk, bd, G.SMD_NEO.derived()); }
-    if (fid) { var el = D.getElementById(fid); if (el) { el.focus(); try { if (pos != null) el.setSelectionRange(pos, pos); } catch (e) {} } }
+  }
+  function render() {
+    if (!root) return;
+    var body = root.querySelector(".dc-body");
+    body.innerHTML = patientHtml() + (S.drug ? resultHtml() : drugPickerHtml());
+    wireNeo(body);
+  }
+  // While the user types, only the output changes. The inputs must stay the same DOM nodes:
+  // rebuilding a focused input makes iOS drop the keyboard after every character.
+  function refresh() {
+    if (!root) return;
+    var body = root.querySelector(".dc-body"), card = body.querySelector('[aria-labelledby="dcPt"]');
+    if (!card) { render(); return; }
+    card.querySelector("#dcPt").innerHTML = patientTitle();
+    card.querySelector("#dcDer").innerHTML = derivedHtml();
+    if (S.drug) { var side = card.nextElementSibling; if (side) side.outerHTML = resultHtml(); wireNeo(body); }
+    else { var hits = body.querySelector("#dcHits"); if (hits) hits.innerHTML = drugHitsHtml(); }
+  }
+  function syncSegs() {
+    root.querySelectorAll("[data-sex]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.sex === S.p.sex)); });
+    root.querySelectorAll("[data-cp]").forEach(function (b) { b.setAttribute("aria-pressed", String(b.dataset.cp === S.p.childPugh)); });
   }
 
   function verifiedRenal(name, crcl) {
@@ -526,8 +555,8 @@
   function onClick(e) {
     var t = e.target;
     if (t.closest("[data-dc=close]")) { close(); return; }
-    var sx = t.closest("[data-sex]"); if (sx) { S.p.sex = S.p.sex === sx.dataset.sex ? "" : sx.dataset.sex; haptic(); render(); return; }
-    var cp = t.closest("[data-cp]"); if (cp) { S.p.childPugh = cp.dataset.cp; haptic(); render(); return; }
+    var sx = t.closest("[data-sex]"); if (sx) { S.p.sex = S.p.sex === sx.dataset.sex ? "" : sx.dataset.sex; haptic(); syncSegs(); refresh(); return; }
+    var cp = t.closest("[data-cp]"); if (cp) { S.p.childPugh = cp.dataset.cp; haptic(); syncSegs(); refresh(); return; }
     if (t.closest("[data-dc=pick]")) { openPatientPicker(); return; }
     if (t.closest("[data-dc=back]")) { render(); return; }
     var pi = t.closest("[data-pi]");
@@ -538,12 +567,14 @@
   }
   function onInput(e) {
     var t = e.target, k = t.getAttribute && t.getAttribute("data-k");
-    if (t.id === "dc_q") { S.q = t.value; render(true); return; }
+    if (t.id === "dc_q") { if (S.q !== t.value) { S.q = t.value; refresh(); } return; }
     if (!k) return;
-    S.p[k] = t.type === "checkbox" ? t.checked : t.value;
+    var val = t.type === "checkbox" ? t.checked : t.value;
+    if (S.p[k] === val) return;   // "change" repeats "input" on blur; a rebuild then would eat a tap on the result
+    S.p[k] = val;
     if (k !== "ageUnit") S.source = S.source ? S.source + " (edited)" : "";
     if (/ \(edited\) \(edited\)$/.test(S.source)) S.source = S.source.replace(/ \(edited\)$/, "");
-    render(true);
+    refresh();
   }
 
   function open(opts) {
@@ -551,7 +582,7 @@
     css();
     if (!root) {
       root = D.createElement("div"); root.id = "doseCalc"; root.setAttribute("role", "dialog"); root.setAttribute("aria-modal", "true"); root.setAttribute("aria-label", "Dose calculator");
-      root.innerHTML = '<div class="dc-top"><button class="dc-x" data-dc="close" aria-label="Close dose calculator">‹ Close</button><div class="dc-t">Dose calculator</div></div><div class="dc-body"></div>';
+      root.innerHTML = '<div class="dc-top"><button class="dc-x" data-dc="close" aria-label="Close dose calculator"><svg width="11" height="19" viewBox="0 0 11 19" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 2 2 9.5 9 17"/></svg>Close</button><div class="dc-t">Dose calculator</div></div><div class="dc-body"></div>';
       root.addEventListener("click", onClick);
       root.addEventListener("input", onInput);
       root.addEventListener("change", onInput);

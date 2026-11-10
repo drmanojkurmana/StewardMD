@@ -1,0 +1,233 @@
+{
+  "v": 1,
+  "module": "phm-absorption-routes",
+  "subject": "pharmacology",
+  "title": "Inhalational Route, Prodrug Activation, First-Pass Clearance, and Bioavailability",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Administration of aerosolized droplets or dry powders directly into the tracheobronchial tree defines the clinical **inhalational route**. Particles sized one to five micrometers penetrate deeply into terminal bronchioles and alveoli, enabling targeted treatment of asthma and chronic obstructive pulmonary disease. Delivering beta-2 agonists like salbutamol by inhalation produces rapid bronchodilation within minutes while minimizing peripheral beta-1 cardiac stimulation and skeletal muscle tremors seen with systemic dosing.",
+      "say": "Inhaled aerosols sized one to five micrometers target terminal bronchioles directly, accelerating bronchodilation while blunting systemic tremors.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-proc-mdi.webp",
+        "alt": "Metered dose inhaler with spacer",
+        "caption": "Metered-dose inhaler with valved spacer chamber improving aerosol deposition into lower airways and reducing oropharyngeal impaction."
+      }
+    },
+    {
+      "tx": "Handheld breath-actuated devices containing micronized solid drug blended with carrier lactose particles are classified as a **dry powder inhaler**. Unlike pressurized metered-dose inhalers requiring precise hand-breath coordination, dry powder inhalers rely entirely on the patient's inspiratory effort to de-aggregate and aerosolize the medication. High peak inspiratory flow rates are required to disperse drug particles, making them challenging for fatigued acute asthmatics or young children under five years of age.",
+      "say": "Dry powder inhalers require adequate inspiratory effort to disperse micronized drug particles without requiring propellant coordination.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-proc-dpi.webp",
+        "alt": "Dry powder inhaler",
+        "caption": "Breath-actuated dry powder inhaler device containing micronized drug capsules for targeted pulmonary delivery."
+      }
+    },
+    {
+      "tx": "Pharmacologically inactive chemical compounds designed to undergo predictable in vivo enzymatic or chemical biotransformation into active therapeutic metabolites are known as a **prodrug**. This synthetic strategy overcomes unfavorable pharmacokinetic profiles, enhances poor oral gastrointestinal absorption, reduces local mucosal irritation, and targets specific anatomical sites. Notable examples include levodopa crossing the blood-brain barrier before decarboxylation into dopamine, and enalapril undergoing hepatic esterase cleavage to form active enalaprilat.",
+      "say": "Prodrugs are inactive precursors that convert into active drugs in vivo to overcome poor absorption or mucosal irritation.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Prodrug precursor",
+          "Biotransforming enzyme",
+          "Active metabolite",
+          "Pharmacokinetic rationale"
+        ],
+        "rows": [
+          [
+            "Levodopa",
+            "DOPA decarboxylase",
+            "Dopamine",
+            "Crosses blood-brain barrier via LAT1"
+          ],
+          [
+            "Enalapril",
+            "Hepatic esterases",
+            "Enalaprilat",
+            "Improves oral gastrointestinal absorption"
+          ],
+          [
+            "Sulindac",
+            "Hepatic reductases",
+            "Sulindac sulfide",
+            "Reduces direct gastric mucosal ulceration"
+          ],
+          [
+            "Clopidogrel",
+            "Hepatic CYP2C19",
+            "Active thiol metabolite",
+            "Delivers stable antiplatelet P2Y12 blockade"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The enzymatic degradation of an orally administered drug during its initial transit across the intestinal enterocyte wall and hepatic parenchyma before reaching systemic circulation is termed **first-pass metabolism**. Highly extracted drugs like lidocaine, propranolol, and nitroglycerin undergo extensive presystemic clearance, resulting in substantially lower oral bioavailability compared to parenteral injection. Consequently, lidocaine cannot be administered orally for cardiac ventricular arrhythmias, requiring continuous intravenous infusion to sustain therapeutic plasma levels.",
+      "say": "Extensive first-pass hepatic metabolism clears drugs like lidocaine and nitroglycerin before they reach systemic blood vessels.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gut",
+            "label": "Intestinal lumen absorption"
+          },
+          {
+            "id": "enterocyte",
+            "label": "Gut enterocyte CYP3A4 metabolism"
+          },
+          {
+            "id": "portal",
+            "label": "Portal venous circulation to liver"
+          },
+          {
+            "id": "hepatic",
+            "label": "Hepatic sinusoidal CYP clearance"
+          },
+          {
+            "id": "systemic",
+            "label": "Residual systemic circulation (bioavailable fraction)"
+          }
+        ],
+        "edges": [
+          [
+            "gut",
+            "enterocyte"
+          ],
+          [
+            "enterocyte",
+            "portal"
+          ],
+          [
+            "portal",
+            "hepatic"
+          ],
+          [
+            "hepatic",
+            "systemic"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The fraction of an administered dose of drug that reaches the systemic circulation in an unchanged, active form is defined as **bioavailability**. Intravenously administered drugs exhibit an absolute bioavailability of one hundred percent (fraction F equals 1.0). For extravascular routes, bioavailability is determined by comparing the total area under the plasma concentration-time curve (AUC) after oral dosing against the area after an equivalent intravenous dose.",
+      "say": "Bioavailability measures the fraction of an administered dose reaching systemic circulation unchanged, reaching one hundred percent intravenously.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Absolute bioavailability",
+          "points": [
+            "Compares oral AUC to intravenous AUC",
+            "Standard reference is 100% IV route",
+            "Measures true systemic drug delivery",
+            "Calculated as (AUC oral / AUC IV) * (Dose IV / Dose oral)"
+          ]
+        },
+        "right": {
+          "title": "Relative bioavailability",
+          "points": [
+            "Compares two non-intravenous formulations",
+            "Tests generic tablet against brand capsule",
+            "Determines pharmaceutical equivalence",
+            "Calculated as (AUC generic / AUC innovator) * 100"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Passive transcellular permeation across lipoidal biological membranes is governed by the ionization state and lipid solubility of the molecule, summarized as the **pH partition hypothesis**. Most pharmaceuticals exist as weak acids or weak bases that dissociate into ionized (water-soluble, charged) and non-ionized (lipid-soluble, uncharged) fractions. Only the uncharged, non-ionized fraction readily permeates the hydrophobic lipid bilayer of cell membranes via simple passive diffusion down a chemical concentration gradient.",
+      "say": "The pH partition hypothesis dictates that only uncharged, non-ionized molecules cross lipoidal cell membranes by passive diffusion.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Drug chemical nature",
+          "Acidic environment (pH < pKa)",
+          "Basic environment (pH > pKa)",
+          "Preferred absorption site"
+        ],
+        "rows": [
+          [
+            "Weak acid (e.g. aspirin)",
+            "Predominantly non-ionized (lipid-soluble)",
+            "Predominantly ionized (water-soluble)",
+            "Stomach and proximal duodenum"
+          ],
+          [
+            "Weak base (e.g. morphine)",
+            "Predominantly ionized (water-soluble)",
+            "Predominantly non-ionized (lipid-soluble)",
+            "Distal jejunum and ileum"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The quantitative ratio of ionized to non-ionized drug species within any biological fluid compartment is calculated using the **Henderson-Hasselbalch equation**. For a weakly acidic drug like aspirin (pKa 3.5), the acidic gastric lumen (pH 1.5) maintains the molecule predominantly in its non-ionized, lipid-soluble state, favoring gastric mucosal absorption. Conversely, in the alkaline small intestine (pH 7.5), extensive ionization occurs, but the massive villous surface area still drives the majority of total systemic drug absorption.",
+      "say": "The Henderson-Hasselbalch equation calculates drug ionization based on environmental pH and the drug dissociation constant pKa.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "formula",
+            "label": "pH = pKa + log([Ionized] / [Non-ionized])"
+          },
+          {
+            "id": "gastric",
+            "label": "Stomach pH 1.5: 99% non-ionized weak acid"
+          },
+          {
+            "id": "diffusion",
+            "label": "Transcellular lipid membrane diffusion"
+          },
+          {
+            "id": "plasma",
+            "label": "Plasma pH 7.4: 99.9% ionized trapping"
+          }
+        ],
+        "edges": [
+          [
+            "formula",
+            "gastric"
+          ],
+          [
+            "gastric",
+            "diffusion"
+          ],
+          [
+            "diffusion",
+            "plasma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Systemic drug absorption following oral administration varies widely between individuals due to altered gastrointestinal physiology and formulation factors. Co-administration of multivalent cations like calcium, iron, or aluminium precipitates insoluble non-absorbable chelates with tetracyclines and fluoroquinolones, causing complete **absorption failure**. Additionally, accelerated gastric emptying delivers drugs rapidly to the absorptive small intestine, while delayed gastric emptying slows the onset of therapeutic action for analgesics and hypnotics.",
+      "say": "Co-ingesting multivalent cations chelates tetracyclines and fluoroquinolones into insoluble complexes, causing severe oral absorption failure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Enhanced oral absorption",
+          "points": [
+            "Rapid gastric emptying into duodenum",
+            "Large small intestinal mucosal surface area",
+            "High splanchnic blood perfusion",
+            "Fatty meals for lipophilic griseofulvin"
+          ]
+        },
+        "right": {
+          "title": "Impaired oral absorption",
+          "points": [
+            "Multivalent cation chelation (Fe, Ca, Al)",
+            "Severe diarrhoea with hypermotility",
+            "Intestinal mucosal atrophy in celiac disease",
+            "Anticholinergic gastric hypomotility"
+          ]
+        }
+      }
+    }
+  ]
+}

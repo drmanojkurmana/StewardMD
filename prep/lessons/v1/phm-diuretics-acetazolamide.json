@@ -1,0 +1,246 @@
+{
+  "v": 1,
+  "module": "phm-diuretics",
+  "subject": "pharmacology",
+  "title": "Carbonic Anhydrase Inhibitors, Osmotic Diuresis, and Vasopressin Analogues",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The prototypical non-bacteriostatic sulfonamide derivative that acts as a reversible competitive inhibitor of carbonic anhydrase is **acetazolamide**. Acting predominantly at the luminal brush border and intracellular cytoplasm of the renal proximal convoluted tubule, acetazolamide blocks the hydration of carbon dioxide and dehydration of carbonic acid. This abolishes the reabsorption of up to eighty-five percent of filtered sodium bicarbonate, causing alkaline diuresis with heavy urinary bicarbonate, sodium, and potassium loss, resulting in hyperchloremic metabolic acidosis. Self-limiting efficacy occurs as systemic acidosis depletes filtered bicarbonate substrate.",
+      "say": "Acetazolamide inhibits proximal carbonic anhydrase, causing bicarbonate diuresis and hyperchloremic metabolic acidosis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "aceta",
+            "label": "Oral or intravenous acetazolamide administration"
+          },
+          {
+            "id": "ca_block",
+            "label": "Inhibition of apical CA IV and cytoplasmic CA II in proximal tubule"
+          },
+          {
+            "id": "bicarb",
+            "label": "Failure of filtered NaHCO3 reabsorption and H+ secretion"
+          },
+          {
+            "id": "diuresis",
+            "label": "Alkaline diuresis, urinary potassium wasting, and systemic metabolic acidosis"
+          }
+        ],
+        "edges": [
+          [
+            "aceta",
+            "ca_block"
+          ],
+          [
+            "ca_block",
+            "bicarb"
+          ],
+          [
+            "bicarb",
+            "diuresis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The low-molecular-weight hexitol polyol that functions as the non-reabsorbable intravenous osmotic diuretic of choice is **mannitol**. Freely filtered at the glomerulus without undergoing tubular reabsorption or metabolic transformation, mannitol remains inside the tubular lumen, elevating luminal fluid osmolality. This counteracts osmotic water reabsorption primarily along the proximal convoluted tubule and thin descending limb of Henle, expanding urinary volume. It is clinically indicated for reducing intracranial pressure in cerebral edema and lowering intraocular pressure in acute glaucoma attacks, but contraindicated in active pulmonary edema.",
+      "say": "Mannitol is a non-reabsorbable filtered osmotic diuretic that extracts water from brain and ocular compartments.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mannitol (Intravenous Osmotic Diuretic)",
+          "points": [
+            "Freely filtered at glomerulus with zero tubular reabsorption",
+            "Retains water in proximal tubule and descending thin limb of Henle",
+            "Draws fluid into vascular space: relieves cerebral and ocular edema",
+            "Can precipitate acute left ventricular failure and pulmonary edema"
+          ]
+        },
+        "right": {
+          "title": "Acetazolamide (Proximal Carbonic Anhydrase Blocker)",
+          "points": [
+            "Pharmacologically blocks brush-border and cytoplasmic enzymes",
+            "Causes massive alkaline sodium bicarbonate saluresis",
+            "Self-limiting diuretic action due to progressive metabolic acidosis",
+            "Indicated for acute mountain sickness, glaucoma, metabolic alkalosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The endogenous nonapeptide neurohypophyseal hormone synthesized in the supraoptic and paraventricular nuclei of the hypothalamus is **vasopressin** (antidiuretic hormone). Released from the posterior pituitary in response to hyperosmolality or hypovolemia, vasopressin acts on vascular V1a receptors to stimulate Gq-mediated vasoconstriction, raising blood pressure in septic shock, while stimulating Gs-coupled V2 receptors in collecting duct principal cells to promote water reabsorption. Synthetic vasopressin infusions serve as a second-line vasopressor in refractory septic shock, reducing norepinephrine requirements while preserving renal perfusion.",
+      "say": "Vasopressin constricts systemic vessels via V1a receptors and drives water retention via collecting duct V2 receptors.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vasopressin V1a Receptor (Vascular)",
+          "points": [
+            "Coupled to Gq protein and phospholipase C pathway",
+            "Mobilizes intracellular calcium in vascular smooth muscle",
+            "Induces potent systemic and splanchnic arterial vasoconstriction",
+            "Targeted by terlipressin in bleeding esophageal varices and HRS"
+          ]
+        },
+        "right": {
+          "title": "Vasopressin V2 Receptor (Renal)",
+          "points": [
+            "Coupled to Gs protein and adenylyl cyclase pathway",
+            "Elevates intracellular cyclic AMP and protein kinase A",
+            "Drives apical insertion of aquaporin-2 water channels",
+            "Targeted by desmopressin for antidiuresis and coagulation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The synthetic deaminated analogue of 8-arginine vasopressin engineered with selective V2 receptor agonism is **desmopressin** (DDAVP). Possessing approximately four thousand times the antidiuretic to pressor selectivity ratio of native vasopressin, desmopressin avoids systemic vasoconstriction while stimulating collecting duct water reabsorption. Delivered intranasally, orally, or parenterally, desmopressin is the drug of choice for central diabetes insipidus, nocturnal enuresis, and stimulates endothelial release of von Willebrand factor and factor VIII in mild hemophilia A and type 1 von Willebrand disease.",
+      "say": "Desmopressin selectively activates V2 receptors to treat central diabetes insipidus and release von Willebrand factor.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical therapeutic indication",
+          "Route of administration",
+          "Vasopressin receptor mechanism",
+          "Primary therapeutic objective"
+        ],
+        "rows": [
+          [
+            "Central diabetes insipidus",
+            "Oral tablet or intranasal spray",
+            "Selective V2 receptor stimulation in collecting ducts",
+            "Normalizes urinary output and urine osmolality"
+          ],
+          [
+            "Primary nocturnal enuresis",
+            "Oral disintegrating sublingual tablet",
+            "Suppresses nocturnal urine production volume",
+            "Prevents bedwetting episodes in pediatric patients"
+          ],
+          [
+            "Type 1 von Willebrand disease",
+            "Intravenous infusion or high-dose nasal",
+            "Weibel-Palade body exocytosis from endothelium",
+            "Releases endogenous von Willebrand factor and FVIII"
+          ],
+          [
+            "Mild hemophilia A prophylaxis",
+            "Intravenous infusion pre-procedure",
+            "Endothelial factor VIII mobilization",
+            "Elevates circulating FVIII levels to prevent bleeding"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The crucial apical water-selective membrane channel that mediates vasopressin-dependent water permeability in the collecting duct is **aquaporin-2 water channels**. Binding of vasopressin or desmopressin to basolateral V2 receptors activates adenylyl cyclase, generating cyclic AMP and activating protein kinase A. PKA phosphorylates aquaporin-2 tetramers residing in intracellular vesicles, triggering their exocytic insertion into the apical plasma membrane, permitting rapid transcellular osmotic water reabsorption into the hypertonic medullary interstitium. Upon hormone removal, aquaporin-2 channels undergo clathrin-mediated endocytic internalization.",
+      "say": "Vasopressin drives protein kinase A phosphorylation to insert aquaporin-2 channels into apical collecting membranes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "v2",
+            "label": "Vasopressin binds basolateral V2 Gs-protein coupled receptor"
+          },
+          {
+            "id": "camp",
+            "label": "Adenylyl cyclase activation elevates cyclic AMP"
+          },
+          {
+            "id": "pka",
+            "label": "Protein kinase A phosphorylates aquaporin-2 storage vesicles"
+          },
+          {
+            "id": "insert",
+            "label": "Exocytic apical membrane insertion allows transcellular water reabsorption"
+          }
+        ],
+        "edges": [
+          [
+            "v2",
+            "camp"
+          ],
+          [
+            "camp",
+            "pka"
+          ],
+          [
+            "pka",
+            "insert"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A high-altitude hypoxic hypobaric syndrome characteristically prevented and treated by the carbonic anhydrase inhibitor acetazolamide is **acute mountain sickness** (AMS). At high altitudes, ambient hypoxia triggers compensatory hyperventilation, which blows off carbon dioxide, producing respiratory alkalosis that suppresses the central medullary respiratory drive. By inducing renal bicarbonate diuresis, acetazolamide causes mild metabolic acidosis, which lowers blood and CSF pH, stimulating central and peripheral chemoreceptors to sustain hyperventilation and nighttime arterial oxygenation.",
+      "say": "Acetazolamide induces mild metabolic acidosis to stimulate ventilation, preventing acute mountain sickness.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "High-altitude clinical syndrome",
+          "Pathophysiologic mechanism",
+          "First-line pharmacological agent",
+          "Definitive emergency treatment"
+        ],
+        "rows": [
+          [
+            "Acute mountain sickness (AMS)",
+            "Hypoxia-induced hypocapnic respiratory alkalosis",
+            "Acetazolamide (125 to 250 mg twice daily)",
+            "Halt ascent; descend if symptoms worsen"
+          ],
+          [
+            "High-altitude cerebral edema (HACE)",
+            "Hypoxic cerebral vasodilation and vasogenic edema",
+            "Dexamethasone (8 mg stat, then 4 mg q6h)",
+            "Immediate emergency descent and hyperbaric bag"
+          ],
+          [
+            "High-altitude pulmonary edema (HAPE)",
+            "Hypoxic pulmonary vasoconstriction and capillary leak",
+            "Nifedipine (extended-release 30 mg daily)",
+            "Immediate descent, oxygen, phosphodiesterase inhibitors"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The therapeutic enhancement of renal elimination of weakly acidic toxic drugs achieved by inducing heavy bicarbonate excretion is **urinary alkalinization**. Administering acetazolamide or intravenous sodium bicarbonate elevates urinary pH above 7.5. In alkaline urine, weak acids such as methotrexate, phenobarbital, and salicylates exist predominantly in their ionized, polar, lipid-insoluble conjugate base forms. This prevents passive reabsorption across tubular epithelial cell membranes, trapping the toxin in the tubular lumen for rapid excretion, a technique termed ion trapping.",
+      "say": "Urinary alkalinization ionizes acidic toxins like salicylates and methotrexate, trapping them in urine for rapid elimination.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Urinary Alkalinization (Urine pH > 7.5)",
+          "points": [
+            "Achieved with IV sodium bicarbonate or acetazolamide",
+            "Ionizes acidic drugs into lipid-insoluble conjugate bases",
+            "Traps drug in tubular lumen, preventing passive reabsorption",
+            "Indicated for overdose of salicylates, phenobarbital, methotrexate"
+          ]
+        },
+        "right": {
+          "title": "Urinary Acidification (Urine pH < 5.5)",
+          "points": [
+            "Historically achieved with ammonium chloride or ascorbic acid",
+            "Ionizes weak basic drugs into protonated cations",
+            "Carries high risk of severe systemic acidosis and rhabdomyolysis",
+            "Largely abandoned in modern emergency clinical toxicology"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The physiological architecture that generates and sustains the deep hypertonic osmotic gradient of the renal medulla is the **renal medullary countercurrent multiplier**. Comprising the hairpin loops of Henle and adjacent vasa recta in the renal medulla, active NaCl reabsorption by the water-impermeable thick ascending limb progressively concentrates interstitial osmolality from 300 mOsm/kg at the corticomedullary junction up to 1200 mOsm/kg at the papillary tip. Osmotic diuretics like mannitol flush out this medullary gradient, collapsing the driving force for concentrated urine formation.",
+      "say": "The countercurrent multiplier builds the hypertonic medullary gradient required for vasopressin-mediated water reabsorption.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ap-kidney-gross.webp",
+        "alt": "Longitudinal renal cross section showing cortex, medullary pyramids, and papillae",
+        "caption": "Renal gross architecture detailing cortex and medullary pyramids housing countercurrent loops of Henle and collecting ducts."
+      }
+    }
+  ]
+}

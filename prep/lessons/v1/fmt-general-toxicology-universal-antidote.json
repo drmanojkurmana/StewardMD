@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-general-toxicology-universal-antidote",
+ "subject": "forensic-medicine",
+ "module": "fmt-general-toxicology",
+ "title": "Universal Antidote, Activated Charcoal and Chelating Agents",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The so called universal antidote",
+   "tx": "The historical **universal antidote** mixed activated charcoal or burnt toast two parts, magnesium oxide one part and tannic acid or strong tea one part. Each ingredient had a logic: charcoal adsorbs, magnesia neutralises acids and tannic acid precipitates alkaloids and metals. Modern practice has abandoned the mixture because charcoal alone performs better and the other ingredients can interfere with its adsorption. Knowing its composition remains a favourite examination question.",
+   "say": "Two parts charcoal, one part magnesia and one part tannic acid made the universal antidote that charcoal alone has retired.",
+   "vis": {"kind": "table", "cols": ["Ingredient", "Parts", "Intended action"], "rows": [["Charcoal or burnt toast", "Two parts", "Adsorbs poisons"], ["Magnesium oxide", "One part", "Neutralises acids"], ["Tannic acid or strong tea", "One part", "Precipitates alkaloids and metals"], ["Modern verdict", "Abandoned", "Charcoal alone is superior"]]}
+  },
+  {
+   "title": "Activated charcoal, dose and preparation",
+   "tx": "**Activated charcoal** is a fine black odourless powder from destructive distillation of wood pulp, activated with steam or carbon dioxide to an enormous surface area. It is mixed as a slurry with eight millilitres of water per gram. The initial dose is sixty to one hundred grams in adults and fifteen to thirty grams in children, given as one gram per kilogram where weight based dosing is preferred. Superactivated charcoal doubles the adsorbing surface.",
+   "say": "Sixty to one hundred grams for adults in eight millilitres of water per gram is the charcoal dose that matters.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Charcoal activated for surface area"}, {"id": "b", "label": "Slurry at 8 ml water per gram"}, {"id": "c", "label": "60 to 100 g adult dose"}, {"id": "d", "label": "Poison adsorbed inside pores"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "What charcoal adsorbs and what it cannot",
+   "tx": "Charcoal binds many poisons well in **charcoal adsorption scope**: barbiturates, atropine, benzodiazepines, opiates, quinine, strychnine, phenothiazines, digitalis, amphetamines, antidepressants, antiepileptics, chloroquine, theophylline and aluminium phosphide. Phenol, salicylates, kerosene and paracetamol adsorb moderately. It is not useful for corrosives, heavy metals, cyanide, hydrocarbons and alcohol, and giving it in corrosive poisoning adds aspiration risk without benefit.",
+   "say": "Drugs from barbiturates to theophylline bind well, but corrosives, metals, cyanide, hydrocarbons and alcohol escape charcoal entirely.",
+   "vis": {"kind": "compare", "left": {"title": "Well adsorbed", "points": ["Barbiturates and benzodiazepines", "Opiates, quinine, strychnine", "Digitalis and theophylline", "Tricyclics and antiepileptics"]}, "right": {"title": "Not adsorbed usefully", "points": ["Corrosive acids and alkalis", "Heavy metals", "Cyanide and alcohol", "Hydrocarbons like kerosene"]}}
+  },
+  {
+   "title": "Multidose charcoal and gut dialysis",
+   "tx": "**Multidose activated charcoal** keeps poison moving from plasma into the bowel lumen down a concentration gradient, a form of gut dialysis, significantly shortening the half life of several drugs. Loading is one to two grams per kilogram, then nought point five to one gram per kilogram every four to six hours, or a continuous infusion of nought point two five to nought point five grams per kilogram per hour. Aspirin, phenobarbital, theophylline and carbamazepine are the standard candidates.",
+   "say": "Repeated charcoal pulls drug back into the gut and halves elimination time for phenobarbital, theophylline and carbamazepine.",
+   "vis": {"kind": "table", "cols": ["Regimen", "Dose", "Best candidates"], "rows": [["Loading dose", "1 to 2 g per kg", "Significant ingestion"], ["Repeat doses", "0.5 to 1 g per kg, 4 to 6 hourly", "Phenobarbital, theophylline"], ["Continuous infusion", "0.25 to 0.5 g per kg per hour", "Nasogastric administration"], ["Duration", "Up to two days in listed drugs", "Aspirin, carbamazepine"]]}
+  },
+  {
+   "title": "Demulcents and bulky food",
+   "tx": "**Demulcents** such as milk, starch, egg white, mineral oil, milk of magnesia and aluminium hydroxide gel coat the gastric mucosa and limit a poison's contact damage. Bulky food is the mechanical antidote to swallowed glass powder, imprisoning sharp particles in its meshes. Fats and oils are forbidden for oil soluble poisons, kerosene, phosphorus, organophosphates, DDT, phenol, turpentine, aniline, acetone and carbon tetrachloride, because they dissolve and deliver the poison faster.",
+   "say": "Milk and egg white coat the stomach, bulky food traps glass, and oils are banned where the poison dissolves in fat.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Identify the poison class first"}, {"id": "b", "label": "Demulcent coats gastric mucosa"}, {"id": "c", "label": "Bulky food traps sharp particles"}, {"id": "d", "label": "No oils for fat soluble poisons"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Chemical antidotes inside the stomach",
+   "tx": "**Chemical antidotes** neutralise poison by direct reaction: common salt precipitates silver nitrate as insoluble silver chloride, albumen precipitates mercuric chloride, dialysed iron neutralises arsenic, copper sulphate precipitates phosphorus, and Lugol iodine precipitates most alkaloids and several metals. Neutralising acids with alkali and the reverse is avoided despite its logic, because the exothermic reaction adds thermal injury; only harmless weak agents such as magnesia, vinegar or lemon juice are used cautiously.",
+   "say": "Salt throws down silver and albumen throws down mercury, but strong acid alkali neutralisation burns its way out of favour.",
+   "vis": {"kind": "compare", "left": {"title": "Precipitating antidotes", "points": ["Salt for silver nitrate", "Albumen for mercuric chloride", "Copper sulphate for phosphorus", "Iodine for alkaloids and metals"]}, "right": {"title": "Neutralisation caution", "points": ["Exothermic reaction risk", "Bicarbonate gas may rupture stomach", "Weak magnesia preferred", "Vinegar or lemon juice for alkalis"]}}
+  },
+  {
+   "title": "Chelation: how metal antidotes work",
+   "tx": "**Chelating agents** are metal complexing drugs with greater affinity for heavy metals than the body's own enzymes. The metal chelate complex is water soluble, non toxic and excreted intact in urine. Heavy metals poison by binding sulphydryl groups of respiratory enzymes; a chelator with its own sulphydryl groups offers itself instead, frees the enzyme and carries the metal out. Choice among BAL, EDTA, penicillamine and the newer dithiols follows the metal.",
+   "say": "Chelators out compete body enzymes for the metal, wrap it in a soluble complex and send it out in urine.",
+   "vis": {"kind": "table", "cols": ["Chelator", "Full name", "Hallmark use"], "rows": [["BAL", "Dimercaprol, British anti lewisite", "Arsenic and mercury, intramuscular"], ["EDTA", "Calcium disodium versenate", "Treatment of choice in lead"], ["Penicillamine", "Dimethyl cysteine product", "Maximum efficiency for copper"], ["Desferrioxamine", "Iron chelator", "Acute iron poisoning"]]}
+  },
+  {
+   "title": "BAL, British anti lewisite",
+   "tx": "**BAL or dimercaprol** carries two unsaturated sulphydryl groups that combine with arsenic, lead, bismuth, copper, mercury, gold, thallium and antimony before the metal can disable tissue enzymes. In severe poisoning three to four milligrams per kilogram is injected deep intramuscularly, three millilitres of the ten percent preparation in arachis oil with benzyl benzoate, four hourly for two days then twice daily for ten days. It is avoided in liver damage and may cause haemolysis in G6PD deficiency.",
+   "say": "Three to four milligrams per kilo deep intramuscular is severe poisoning BAL, withheld in liver damage and G6PD deficiency.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Confirm heavy metal poisoning"}, {"id": "b", "label": "Check liver and G6PD status"}, {"id": "c", "label": "Deep intramuscular BAL given"}, {"id": "d", "label": "Metal complex excreted in urine"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "EDTA, treatment of choice for lead",
+   "tx": "**Calcium disodium EDTA** chelates lead, mercury, copper, cobalt, cadmium, iron and nickel into soluble non ionised complexes excreted unchanged in urine, and it is the treatment of choice in lead poisoning and superior to BAL for arsenic and mercury in Reddy's assessment. The dose is twenty five to thirty five milligrams per kilogram in two hundred fifty to five hundred millilitres of five percent glucose or saline intravenously over one to two hours, twice daily for five days.",
+   "say": "EDTA at twenty five to thirty five milligrams per kilo intravenously is the lead antidote of choice, five days per course.",
+   "vis": {"kind": "compare", "left": {"title": "EDTA strengths", "points": ["Treatment of choice in lead", "Water soluble urinary excretion", "Covers cadmium, cobalt, nickel", "Superior for arsenic, mercury here"]}, "right": {"title": "EDTA regimen", "points": ["25 to 35 mg per kg per dose", "In glucose or saline infusion", "Twice daily for five days", "Repeat after two to three days gap"]}}
+  }
+ ],
+ "quiz": []
+}

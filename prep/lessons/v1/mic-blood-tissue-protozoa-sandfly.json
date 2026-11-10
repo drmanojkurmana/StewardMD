@@ -1,0 +1,235 @@
+{
+  "v": 1,
+  "module": "mic-blood-tissue-protozoa",
+  "subject": "microbiology",
+  "title": "Sandfly Transmission, Trypanosoma cruzi and Chagas Disease",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Transmission of visceral leishmaniasis in the Indian subcontinent depends strictly upon the female **Phlebotomus argentipes** sandfly vector. This tiny, hairy nematoceran dipteran measures one point five to three millimetres in length, possesses long slender legs, and rests characteristically with wings held upward in a prominent V-shaped posture. Its short mouthparts limit feeding to painless hopping bites around ankles and mud-plastered dwellings.",
+      "say": "Small hairy sandflies resting with wings held in a V-shape transmit leishmaniasis during nocturnal feeding.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Phlebotomus sandfly vector",
+          "points": [
+            "Size: 2 to 3 millimetres, delicate hairy body",
+            "Flight: short erratic hopping flights near ground",
+            "Resting posture: wings held erect in V-shape",
+            "Habitat: cracks in mud walls and damp cattle sheds"
+          ]
+        },
+        "right": {
+          "title": "Mosquito vectors (Anopheles / Culex)",
+          "points": [
+            "Size: 4 to 8 millimetres, larger smooth wings",
+            "Flight: sustained directional flight across distances",
+            "Resting posture: wings folded flat over abdomen",
+            "Habitat: open water collections and drainage ditches"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In the Americas, zoonotic flagellates belong to the genus Trypanosoma. The protozoan **Trypanosoma cruzi** causes American trypanosomiasis, known universally as Chagas disease, endemic from Mexico through Central and South America. The parasite alternates between circulating C-shaped flagellated trypomastigotes in blood and intracellular round aflagellate amastigotes inside cardiac myocytes, gastrointestinal plexus neurons, and reticuloendothelial cells.",
+      "say": "Trypanosoma cruzi shifts between circulating blood trypomastigotes and intracellular amastigotes in myocardium.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/malaria-leishmania-trypanosoma-toxoplasma-babesia-fig1.webp",
+        "alt": "Hemoflagellate and tissue protozoa comparative morphology",
+        "caption": "Comparative morphology showing C-shaped Trypanosoma cruzi trypomastigotes in blood [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Transmission of Trypanosoma cruzi is mediated by nocturnal blood-sucking triatomine bugs of the family Reduviidae, popularly termed **kissing bugs** or assassin bugs, including Triatoma infestans and Rhodnius prolixus. Triatomines infest cracks in adobe walls and thatched roofs, emerging at night to bite exposed sleeping faces. The bug defecates metacyclic trypomastigotes onto host skin while feeding, and scratching rubs contaminated feces into the bite wound.",
+      "say": "Reduviid kissing bugs defecate infectious trypomastigotes while feeding, which scratching rubs into the wound.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tb1",
+            "label": "Triatomine kissing bug takes nocturnal blood meal on sleeping host"
+          },
+          {
+            "id": "tb2",
+            "label": "Bug defecates infectious metacyclic trypomastigotes on adjacent skin"
+          },
+          {
+            "id": "tb3",
+            "label": "Host scratches pruritic site, rubbing feces into bite wound or conjunctiva"
+          }
+        ],
+        "edges": [
+          [
+            "tb1",
+            "tb2"
+          ],
+          [
+            "tb2",
+            "tb3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When metacyclic trypomastigotes contaminate the ocular conjunctiva or palpebral margins, patients develop **Roma\u00f1a sign**, the pathognomonic clinical hallmark of acute Chagas disease. It presents as unilateral, painless, brawny periorbital and palpebral oedema accompanied by regional preauricular lymphadenopathy and conjunctivitis. Inoculation through skin produces an erythematous, indurated subcutaneous nodule termed a chagoma.",
+      "say": "Painless unilateral eyelid swelling and preauricular lymphadenopathy constitute the pathognomonic Roma\u00f1a sign.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Acute Clinical Sign",
+          "Pathological Mechanism",
+          "Clinical Significance"
+        ],
+        "rows": [
+          [
+            "Roma\u00f1a sign",
+            "Conjunctival contamination by bug feces",
+            "Unilateral painless palpebral oedema with preauricular lymph node"
+          ],
+          [
+            "Chagoma",
+            "Percutaneous inoculation through skin abrasion",
+            "Indurated erythematous inflammatory subcutaneous nodule"
+          ],
+          [
+            "Acute myocarditis",
+            "Amastigote multiplication in myocardial fibres",
+            "Sinus tachycardia, prolonged PR interval, low ejection fraction"
+          ],
+          [
+            "Meningoencephalitis",
+            "Amoeboid tissue invasion in infants",
+            "High mortality acute presentation in congenital infection"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Following an asymptomatic latent phase lasting decades, thirty percent of chronically infected individuals progress to **Chagas cardiomyopathy**. Intracellular amastigote proliferation combined with autoimmune destruction of cardiac myocytes and conduction fibers induces chronic fibrosing myocarditis. Characteristic features include cardiac enlargement, refractory congestive heart failure, apical left ventricular aneurysm with mural thrombosis, and right bundle branch block.",
+      "say": "Chronic myocardial fibrosis leads to apical left ventricular aneurysms and right bundle branch block.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cardiac manifestations",
+          "points": [
+            "Biventricular dilated cardiomyopathy",
+            "Thinned apical aneurysm with thrombus",
+            "Right bundle branch block and bifascicular block",
+            "Malignant ventricular arrhythmias and sudden death"
+          ]
+        },
+        "right": {
+          "title": "Digestive manifestations",
+          "points": [
+            "Loss of myenteric Auerbach plexus neurons",
+            "Mega-oesophagus presenting with progressive dysphagia",
+            "Megacolon presenting with severe chronic obstipation",
+            "Sigmoid volvulus and secondary intestinal perforation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In the gastrointestinal tract, parasite-mediated destruction of postganglionic parasympathetic neurons in Auerbach's myenteric plexus produces denervation and smooth muscle dilatation, resulting in **megadisease**. Loss of esophageal lower sphincter relaxation mimics primary achalasia, creating mega-oesophagus with progressive dysphagia, regurgitation, and nocturnal aspiration. Destruction of colonic plexuses causes megacolon with intractable constipation, fecaloma impaction, and sigmoid volvulus.",
+      "say": "Myenteric plexus neuronal loss drives denervation and dilatation, creating mega-oesophagus and megacolon.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Alimentary Organ",
+          "Denervation Pathology",
+          "Clinical Consequences"
+        ],
+        "rows": [
+          [
+            "Oesophagus",
+            "Auerbach plexus neuronal loss",
+            "Mega-oesophagus, progressive dysphagia, food regurgitation"
+          ],
+          [
+            "Colon",
+            "Myenteric ganglion degeneration",
+            "Megacolon, intractable obstipation, fecaloma, volvulus"
+          ],
+          [
+            "Stomach & Duodenum",
+            "Plexus hypoganglionosis",
+            "Delayed gastric emptying and megaduodenum"
+          ],
+          [
+            "Ureter",
+            "Neurogenic vesical and ureteral dilatation",
+            "Megaureter and secondary urinary tract infections"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "During the acute phase, direct examination of Giemsa-stained blood films demonstrates typical C-shaped or S-shaped **trypomastigotes** measuring twenty micrometres in length with a central nucleus and a prominent, subterminal posterior kinetoplast. In chronic indeterminate disease where blood parasitaemia is subpatent, historical diagnosis utilized xenodiagnosis, where uninfected laboratory-reared triatomine bugs fed on the patient are dissected weeks later to inspect gut flagellates.",
+      "say": "Acute infection reveals C-shaped trypomastigotes in blood; xenodiagnosis or serology confirms chronic disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ch1",
+            "label": "Acute phase: identify C-shaped trypomastigotes on peripheral blood film"
+          },
+          {
+            "id": "ch2",
+            "label": "Chronic phase: perform dual serology (ELISA plus indirect immunofluorescence)"
+          },
+          {
+            "id": "ch3",
+            "label": "Indeterminate status: perform blood polymerase chain reaction targeting satellite DNA"
+          }
+        ],
+        "edges": [
+          [
+            "ch1",
+            "ch2"
+          ],
+          [
+            "ch2",
+            "ch3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "First-line antiparasitic therapy relies on the nitroheterocyclic agents **benznidazole** or nifurtimox, which generate reactive oxygen radicals that damage trypanosomal nucleic acids. Treatment is highly curative during acute infection, congenital transmission, and early chronic infection in children. In long-standing chronic cardiomyopathy with established organ dilatation, antiparasitic efficacy is markedly reduced, and therapy centers on heart failure management, anticoagulation, and pacemaker implantation.",
+      "say": "Benznidazole or nifurtimox clears acute parasitaemia but has limited impact once megadisease is established.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Treatment Stage",
+          "Antiparasitic Drug Regimen",
+          "Clinical Objective"
+        ],
+        "rows": [
+          [
+            "Acute & congenital Chagas",
+            "Oral benznidazole 5-7 mg/kg/day for 60 days",
+            "High cure rate exceeding 70 to 80 percent"
+          ],
+          [
+            "Alternative acute regimen",
+            "Oral nifurtimox 8-10 mg/kg/day for 60-90 days",
+            "Curative alternative with frequent GI side effects"
+          ],
+          [
+            "Early chronic in children",
+            "Oral benznidazole course",
+            "Halts progression toward cardiac and digestive damage"
+          ],
+          [
+            "Advanced cardiomyopathy",
+            "Standard HF therapy, amiodarone, ICD, transplant",
+            "Symptomatic control and prevention of sudden death"
+          ]
+        ]
+      }
+    }
+  ]
+}

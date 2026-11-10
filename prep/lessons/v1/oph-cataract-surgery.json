@@ -1,0 +1,224 @@
+{
+ "v": 1,
+ "id": "oph-cataract-surgery",
+ "subject": "ophthalmology",
+ "module": "oph-cataract",
+ "title": "Cataract Surgery: ECCE, SICS and Capsulorhexis",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Cataract surgery** evolution from intracapsular extraction through extracapsular to phaco shares one goal, remove opaque lens and implant focused replacement with capsule support where possible. Extracapsular retains posterior capsule for bag implant, intracapsular historical removes lens whole with aphakic corrections. Modern small incision variants differ by nucleus delivery mechanics and wound astigmatism.",
+   "say": "Capsule retention together gives modern cataract evolution in surgical teaching at training centres for adult cataract worldwide. Bag implant gives goal additionally. Incision gives astigmatism difference.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cataract-lens-surgery-fig1.webp",
+    "alt": "Cataract surgery diagram with capsular bag and implant steps.",
+    "caption": "Cataract extraction surgery with foldable intraocular lens implantation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Capsulorhexis** is continuous curvilinear tear of anterior capsule giving smooth strong rim for bag work, resisting radial tears better than jagged can opener openings historically. Size centred over lens decides implant optic capture and stability years later. Rhexis control is therefore foundational phaco skill examined in surgical competency assessments.",
+   "say": "Continuous tear together gives strong rim in capsulorhexis during phaco training at surgical centres for cataract trainees. Centration gives stability additionally. Control gives competency foundation.",
+   "vis": {
+    "kind": "table",
+    "title": "Extraction generations",
+    "cols": [
+     "Generation",
+     "Capsule fate"
+    ],
+    "rows": [
+     [
+      "Intracapsular historical",
+      "Lens whole out, no bag"
+     ],
+     [
+      "Extracapsular planned",
+      "Posterior capsule retained"
+     ],
+     [
+      "Phaco small incision",
+      "Rhexis bag, foldable implant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Small incision cataract surgery** manual nucleus delivery through self sealing tunnel suits dense cataracts and resource settings with outcomes approaching phaco in experienced hands. Tunnel construction and nucleus prolapse technique replace ultrasound energy with mechanical skill. Cost and hard nucleus advantages explain persistence beside phaco dominance in high income settings.",
+   "say": "Manual delivery together gives dense cataract solution in resource settings at high volume centres in endemic regions. Tunnel gives self sealing wound additionally. Hard nucleus gives advantage logic.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Manual small incision",
+     "points": [
+      "Tunnel nucleus delivery",
+      "Dense cataract friendly",
+      "Lower equipment cost"
+     ]
+    },
+    "right": {
+     "title": "Phacoemulsification",
+     "points": [
+      "Ultrasound in bag fragments",
+      "Smallest incision foldable",
+      "Next lesson detail"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Posterior capsule rupture with vitreous loss is pivotal intraoperative complication converting routine surgery to anterior vitrectomy, altered implant and endophthalmitis surveillance pathway. Recognition by nucleus sinking or pupil snap signs needs immediate technique change. **Rupture response** therefore rehearsed as drill in cataract training programmes globally.",
+   "say": "Rupture recognition together gives technique conversion in cataract complications at operating theatres for training surgeons urgently. Vitreous management gives implant change additionally. Drill gives preparedness value.",
+   "vis": {
+    "kind": "flow",
+    "title": "Capsule rupture response",
+    "nodes": [
+     {
+      "id": "rec",
+      "label": "Rupture signs recognised"
+     },
+     {
+      "id": "stop",
+      "label": "Stop, stabilise chamber"
+     },
+     {
+      "id": "vit",
+      "label": "Anterior vitrectomy performed"
+     },
+     {
+      "id": "iol",
+      "label": "Alternative implant fixation"
+     }
+    ],
+    "edges": [
+     [
+      "rec",
+      "stop"
+     ],
+     [
+      "stop",
+      "vit"
+     ],
+     [
+      "vit",
+      "iol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Before any incision, this printout decides which plastic lens will live in the eye for decades. Axial length and corneal curvature feed the **SRK-T formula**, which predicts where the implant should sit to focus light exactly on the retina. A millimetre of measurement error here becomes a dioptre of surprise afterwards, so biometry is repeated whenever readings disagree. Patients promised spectacle freedom forgive many things, but not a preventable refractive miss born from a rushed preoperative measurement.",
+   "say": "SRK-T biometry converts axial length and keratometry into the implant power that decides the refractive result.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m257-oph-cataract-surgery.webp",
+    "alt": "Optical biometry printout and diagram demonstrating SRK-T formula IOL calculation using axial length and keratometry",
+    "caption": "Optical biometry printout and diagram demonstrating SRK-T formula IOL calculation using axial length and keratometry. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Intraocular lens power calculation by biometry from investigations lesson decides refractive outcome more than surgical elegance, axial and corneal inputs with formula generations. Target refraction discussion emmetropia versus monovision belongs consent before biometry locked. **Biometry before booking** therefore gates cataract lists in modern services.",
+   "say": "Biometry inputs together give refractive outcome in cataract services at preoperative clinics for adults with cataract. Target discussion gives consent value additionally. Formula gives power output."
+  },
+  {
+   "tx": "Anaesthesia evolution topical with intracameral supplementation replacing blocks in routine phaco, patient cooperation and surgeon speed deciding suitability. Dense, subluxated or anxious cases still earn block or general routes individually. **Cooperation assessment** therefore is anaesthesia selection, not default topical assumption for every list patient.",
+   "say": "Cooperation assessment together gives anaesthesia selection in cataract lists at day surgery centres for elderly patients routinely. Topical gives routine suitability additionally. Dense complexity gives block route.",
+   "vis": {
+    "kind": "table",
+    "title": "Cataract anaesthesia split",
+    "cols": [
+     "Case pattern",
+     "Route tendency"
+    ],
+    "rows": [
+     [
+      "Routine cooperative phaco",
+      "Topical with supplementation"
+     ],
+     [
+      "Dense subluxated complex",
+      "Block considered individually"
+     ],
+     [
+      "Child or unable cooperate",
+      "General anaesthesia pathway"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endophthalmitis prophylaxis intracameral antibiotic where protocolled, povidone antisepsis universally, wound integrity checked at close in every technique generation. Postoperative steroid antibiotic tapers and red flag education complete surgical episode from endophthalmitis lesson. **Wound check** at table end is infection prevention documented, not habit.",
+   "say": "Wound integrity together gives infection prevention at table end in cataract surgery at all technique generations in services. Antisepsis gives universal base additionally. Education gives postoperative completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Surgery episode checklist",
+    "cols": [
+     "Phase",
+     "Gate"
+    ],
+    "rows": [
+     [
+      "Before booking",
+      "Biometry and target agreed"
+     ],
+     [
+      "At table end",
+      "Wound sealed documented"
+     ],
+     [
+      "Discharge",
+      "Red flag education given"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: rhexis rims bag, capsule rupture converts, biometry decides refraction and wound seals infection out. Technique generations share bag goal where capsule allows. **Continuous tear** phrase answers capsulorhexis against can opener history in examinations. Audit therefore tracks rupture and refractive outcomes by surgeon and difficulty grade continuously.",
+   "say": "Continuous tear together gives capsulorhexis recognition in surgical examinations for cataract trainees reliably in vivas. Biometry gives refractive decision additionally. Rupture gives conversion drill value.",
+   "vis": {
+    "kind": "table",
+    "title": "Cataract surgery anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Capsulorhexis",
+      "Continuous rim, bag stability"
+     ],
+     [
+      "Rupture response",
+      "Vitrectomy, alternative implant"
+     ],
+     [
+      "Refractive outcome",
+      "Biometry over elegance"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Capsulorhexis advantage",
+   "b": "Continuous curvilinear rim resists tears and stabilises bag implant over years."
+  },
+  {
+   "f": "Capsule rupture response",
+   "b": "Stop and stabilise, anterior vitrectomy, alternative implant fixation, infection surveillance."
+  },
+  {
+   "f": "SICS persistence reason",
+   "b": "Manual tunnel delivery suits dense cataracts and resource settings with low equipment cost."
+  }
+ ],
+ "keys": [
+  "Biometry gates cataract booking",
+  "Wound integrity documented at close",
+  "Technique follows nucleus density and setting"
+ ]
+}

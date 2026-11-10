@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-beta-lactams",
+  "subject": "pharmacology",
+  "title": "Penicillins: Penicillin G, Benzathine Penicillin, Cloxacillin and Ampicillin",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Penicillin G** (benzylpenicillin), acid destroyed and therefore intravenous, remains the definitive answer to Streptococcus pyogenes, syphilis in most stages, meningococcus and sensitive pneumococcus, binding penicillin binding proteins to block transpeptidation, weaken peptidoglycan and lyse dividing bacteria. Its spectrum is narrow because beta lactamases and altered targets, not potency, evict it elsewhere. Nothing invented since beats it where it still works, a sentence examinations repeat because clinicians forget.",
+      "say": "Penicillin G is narrow, intravenous and still unbeatable wherever its targets remain sensitive.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pbp",
+            "label": "Penicillin binds penicillin binding proteins"
+          },
+          {
+            "id": "trans",
+            "label": "Peptidoglycan transpeptidation blocked"
+          },
+          {
+            "id": "wall",
+            "label": "Cell wall weakens during division"
+          },
+          {
+            "id": "lyse",
+            "label": "Osmotic lysis: bactericidal killing"
+          }
+        ],
+        "edges": [
+          [
+            "pbp",
+            "trans"
+          ],
+          [
+            "trans",
+            "wall"
+          ],
+          [
+            "wall",
+            "lyse"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Benzathine penicillin** suspends penicillin G as an insoluble salt whose intramuscular depot leaches therapeutic levels for two to four weeks, converting adherence into a single injection: early syphilis in one dose, latent stages in three weekly doses, rheumatic fever secondary prophylaxis monthly for years, and streptococcal pharyngitis where ten days of oral therapy is fiction. It must never enter a vein (cardiopulmonary arrest from microcrystalline embolisation), a warning written on every vial and examination.",
+      "say": "Benzathine is adherence in a syringe for a month; intramuscular only, intravenous never.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Benzathine territory",
+          "points": [
+            "Early syphilis single dose, latent three weekly",
+            "Rheumatic fever prophylaxis monthly for years",
+            "Streptococcal pharyngitis single injection option",
+            "Levels low but prolonged over 2 to 4 weeks"
+          ]
+        },
+        "right": {
+          "title": "Benzathine fences",
+          "points": [
+            "Never intravenous: embolic catastrophe",
+            "Not for meningitis or high burden deep infection",
+            "Neurosyphilis needs intravenous aqueous regimens",
+            "Injection site pain managed, expected"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cloxacillin** (and flucloxacillin, dicloxacillin, nafcillin by region) armours the beta lactam ring with bulky side chains that staphylococcal penicillinase cannot hydrolyse, making them the definitive anti staphylococcal penicillins for methicillin sensitive Staphylococcus aureus (MSSA): bacteraemia, endocarditis, osteomyelitis and skin infection where they outperform vancomycin head to head. Their empire ends exactly at MRSA's altered PBP2a, the next lessons' border.",
+      "say": "Cloxacillin shrugs off staphylococcal penicillinase and beats vancomycin for MSSA; MRSA is another country.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/staphylococcus-aureus-mrsa-fig1.webp",
+        "alt": "Staphylococcus aureus identification and skin signs illustration",
+        "caption": "Staphylococcus aureus, whose penicillinase cloxacillin resists and whose MRSA variant redraws therapy later."
+      }
+    },
+    {
+      "tx": "**Ampicillin** extends penicillin's reach across the Gram negative moat (Haemophilus, E coli subsets, Salmonella, Shigella historically) and owns enterococcus, Listeria (pregnancy and neonatal meningitis, where its addition to cephalosporins is protocol) and susceptible streptococci, while its inactive twin amoxicillin next lesson wins the oral route. The ampicillin rash of Epstein Barr virus infection, a non allergic morbilliform eruption in most, still mislabels generations as penicillin allergic.",
+      "say": "Ampicillin adds Listeria and enterococcus to penicillin's map; its EBV rash is not the allergy it gets called.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ampicillin empire",
+          "points": [
+            "Listeria in pregnancy, neonates and elderly meningitis",
+            "Enterococcus, susceptible Haemophilus and E coli",
+            "Intravenous for meningitis and endocarditis synergy",
+            "Oral absorption inferior to amoxicillin"
+          ]
+        },
+        "right": {
+          "title": "Ampicillin footnotes",
+          "points": [
+            "EBV associated rash usually not true allergy",
+            "Beta lactamase destroys it without inhibitor cover",
+            "High dose meningitis dosing by weight",
+            "Rash with allopurinol co therapy commoner"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Aqueous penicillin G** dosing spans two worlds: million unit intravenous regimens every four hours for meningitis, neurosyphilis and endocarditis, against procaine and benzathine depot forms for ambulatory syphilis and prophylaxis, with renal dose adjustment preventing the seizures of accumulated beta lactam neurotoxicity. Potassium salt loads matter at massive doses in renal failure (hyperkalaemia from the formulation itself), a footnote that separates pharmacists' favourite examination traps.",
+      "say": "Same molecule, depot or flood by indication; kidneys set the ceiling before seizures do.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "indication",
+            "label": "Indication graded: meningitis versus syphilis versus prophylaxis"
+          },
+          {
+            "id": "form",
+            "label": "Aqueous IV, procaine or benzathine depot selected"
+          },
+          {
+            "id": "renal",
+            "label": "Renal dose adjustment, potassium load remembered"
+          },
+          {
+            "id": "review",
+            "label": "Response and Jarisch Herxheimer warning in syphilis"
+          }
+        ],
+        "edges": [
+          [
+            "indication",
+            "form"
+          ],
+          [
+            "form",
+            "renal"
+          ],
+          [
+            "renal",
+            "review"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Penicillin's adverse core** is hypersensitivity immunology graded by mechanism: immediate IgE anaphylaxis (minutes, adrenaline territory), accelerated urticaria, delayed morbilliform rash, serum sickness, interstitial nephritis, haemolytic anaemia and Stevens Johnson rarely, each with different rechallenge rules that the allergy lesson formalises. Cross reactivity mythology with cephalosporins (the inherited 10 percent) collapses under modern data to near 1 to 2 percent driven by side chains, not the shared ring.",
+      "say": "Grade the reaction by timing and type before banning a class; the ten percent cross reactivity is folklore.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Reaction taxonomy",
+          "points": [
+            "Immediate: anaphylaxis, urticaria within hours",
+            "Delayed: morbilliform rash days in",
+            "Organ specific: nephritis, hepatitis, cytopenias",
+            "Severe cutaneous: Stevens Johnson, DRESS rarely"
+          ]
+        },
+        "right": {
+          "title": "Modern cross reactivity",
+          "points": [
+            "Cephalosporin cross reaction near 1 to 2 percent",
+            "Side chains, not the beta lactam ring, drive it",
+            "Carbapenem cross reactivity under 1 percent",
+            "Delabelling programmes recover first line therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Syphilis concentrates this** lesson's drugs into public health: benzathine penicillin remains the only proven therapy in pregnancy (desensitising the allergic rather than substituting, because alternatives fail the fetus), Jarisch Herxheimer warnings ride the first dose, and partner treatment and follow up titres are part of the prescription. Doxycycline substitutes in non pregnant penicillin allergy for early disease, ceftriaxone with thinner evidence, and macrolide resistance has retired azithromycin in many regions.",
+      "say": "In pregnancy, syphilis gets penicillin or desensitisation, never an alternative; warn about Herxheimer.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Syphilis prescribing",
+          "points": [
+            "Benzathine IM by stage, IV aqueous for neurosyphilis",
+            "Pregnancy: penicillin only, desensitise if allergic",
+            "Partners treated, titres followed to response",
+            "Herxheimer reaction counselled, not feared into delay"
+          ]
+        },
+        "right": {
+          "title": "Substitutes and limits",
+          "points": [
+            "Doxycycline in non pregnant early disease allergy",
+            "Ceftriaxone evidence thinner, specialist use",
+            "Azithromycin retired by resistance in many regions",
+            "HIV co infection follows same penicillin backbone"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Streptococcal pharyngitis closes** the oral circle: penicillin V or amoxicillin for ten days (or single benzathine injection) prevents rheumatic fever when given within nine days, a prevention window no modern broad agent improves. Penicillin remains universally susceptible in Streptococcus pyogenes after eight decades, the stewardship parable that narrow therapy preserved its own drug while broad habits spent others.",
+      "say": "Ten days of narrow penicillin still prevents rheumatic fever; nothing broader does it better.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sore",
+            "label": "Streptococcal pharyngitis confirmed or high suspicion"
+          },
+          {
+            "id": "penv",
+            "label": "Penicillin V or amoxicillin 10 days, or benzathine once"
+          },
+          {
+            "id": "window",
+            "label": "Rheumatic fever prevention within 9 days"
+          },
+          {
+            "id": "allergy",
+            "label": "Allergy pathway: cephalexin or macrolide by history grade"
+          }
+        ],
+        "edges": [
+          [
+            "sore",
+            "penv"
+          ],
+          [
+            "penv",
+            "window"
+          ],
+          [
+            "window",
+            "allergy"
+          ]
+        ]
+      }
+    }
+  ]
+}

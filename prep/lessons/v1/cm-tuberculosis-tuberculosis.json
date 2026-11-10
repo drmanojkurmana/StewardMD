@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "id": "cm-tuberculosis-tuberculosis",
+ "subject": "community-medicine",
+ "module": "cm-tuberculosis",
+ "title": "Tuberculosis and NTEP: The Programme in One View",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "India carries the world's largest share",
+   "tx": "**Tuberculosis burden** in India remains the highest of any country, roughly a quarter of global cases, driven by undernutrition, diabetes, smoking, alcohol, indoor air pollution and crowded housing amplifying an airborne infection. The National TB Elimination Programme, renamed from the earlier control programme in 2020, commits to ending TB ahead of global timelines.",
+   "say": "A quarter of the world's TB, fed by nutrition, diabetes, smoke and crowding. The elimination programme renamed itself in 2020 to match its ambition.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Driver", "Contribution"],
+    "rows": [
+     ["Undernutrition", "Largest population risk share"],
+     ["Diabetes", "Roughly triples individual risk"],
+     ["Smoking and alcohol", "Raise incidence and death"],
+     ["Crowding, poor ventilation", "Household transmission"]
+    ]
+   }
+  },
+  {
+   "title": "From control to elimination: what changed",
+   "tx": "The **NTEP shift** replaced passive, smear based, alternate day treatment with active case finding, upfront molecular diagnosis, daily fixed dose combinations, digital notification and adherence tracking, nutritional support and preventive therapy for contacts. Each change targeted a measured leak: cases never found, found late, treated irregularly, or lost silently.",
+   "say": "Active finding, molecular first tests, daily combinations, digital tracking, food support, contact prevention. Every reform plugs a leak the old programme measured.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Earlier control era",
+     "points": ["Passive case finding", "Smear first diagnosis", "Alternate day regimens", "Paper registers"]
+    },
+    "right": {
+     "title": "Elimination era",
+     "points": ["Active case finding drives", "Upfront molecular tests", "Daily fixed dose combinations", "Nikshay digital tracking"]
+    }
+   }
+  },
+  {
+   "title": "Active case finding among the vulnerable",
+   "tx": "**Active case finding** screens mapped vulnerable groups, household contacts, people with HIV or diabetes, slum and tribal populations, prisoners, miners and the elderly, using symptom enquiry, chest radiography including handheld and AI read films, and molecular confirmation. Yield per thousand screened justifies the effort only where vulnerability mapping is honest.",
+   "say": "Screen the mapped vulnerable, radiograph the symptomatic, confirm molecularly. Contacts, HIV, diabetes, slums, prisons, mines. Honest mapping decides whether drives find cases or theatre.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Vulnerable groups mapped"},
+     {"id": "b", "label": "Symptom and radiograph screen"},
+     {"id": "c", "label": "Molecular test for suspects"},
+     {"id": "d", "label": "Treatment and contact evaluation"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "The daily fixed dose regimen",
+   "tx": "The **daily regimen** for drug sensitive TB gives two months of isoniazid, rifampicin, pyrazinamide and ethambutol followed by four months of the first two plus ethambutol per current guidance, in weight banded fixed dose tablets with pyridoxine cover where indicated. Daily dosing replaced alternate day schedules to cut resistance selection and simplify supporters' work.",
+   "say": "Two months of four drugs, four months of continuation, daily weight banded tablets. Daily replaced alternate day to starve resistance and simplify support.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Phase", "Drugs and duration"],
+    "rows": [
+     ["Intensive", "HRZE for 2 months"],
+     ["Continuation", "HRE for 4 months"],
+     ["Packaging", "Weight band fixed dose tablets"],
+     ["Cover", "Pyridoxine where indicated"]
+    ]
+   }
+  },
+  {
+   "title": "Notification: the private sector frontier",
+   "tx": "**Mandatory notification** since 2012 obliges every provider, public or private, to report diagnosed TB, backed by Nikshay enrolment, free programme drugs and diagnostics offered to private patients, and incentives for notification and outcome reporting. A large share of India's cases first touch private care, so elimination arithmetic fails without this sector inside the tent.",
+   "say": "Notification has been mandatory since 2012. Free drugs and tests woo private patients into Nikshay. Elimination fails if private care stays outside the count.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Device", "Purpose"],
+    "rows": [
+     ["Legal mandate", "Every provider notifies"],
+     ["Free drugs via programme", "Removes cost barrier"],
+     ["Incentives", "Notification and outcomes paid"],
+     ["Patient tracking", "Nikshay across sectors"]
+    ]
+   }
+  },
+  {
+   "title": "Adherence technologies and human supporters",
+   "tx": "**Adherence support** blends human treatment supporters with digital options such as video observed therapy, medication event monitors and the 99DOTS blister call system, chosen by patient circumstance rather than fashion. Missed doses trigger escalating retrieval: calls, home visits and clinical review. The supporter relationship, not the gadget, predicts completion most strongly.",
+   "say": "Gadgets witness doses; people retrieve patients. Video, blister calls or human supporters by circumstance, escalation on every miss. Relationships finish treatments.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Option", "Suits"],
+    "rows": [
+     ["Human supporter", "Complex lives, low connectivity"],
+     ["Video observed therapy", "Smartphone equipped patients"],
+     ["99DOTS calls", "Blister based confirmation"],
+     ["Event monitor boxes", "Silent non adherence patterns"]
+    ]
+   }
+  },
+  {
+   "title": "TB and diabetes, HIV and tobacco: bidirectional work",
+   "tx": "**Comorbidity screening** runs both ways under the programme: every TB patient is tested for HIV and diabetes, and diabetes and HIV clinics screen for TB symptoms at visits. Tobacco and alcohol counselling ride along because both worsen outcomes. Collaborative frameworks with the HIV and noncommunicable disease programmes formalise these crossings at district level.",
+   "say": "Test every TB patient for HIV and sugar; screen every HIV and diabetes clinic for cough. Tobacco counselling rides free. Silos lose these patients twice.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Crossing", "Routine"],
+    "rows": [
+     ["TB clinic to HIV", "Offer HIV test to all"],
+     ["TB clinic to diabetes", "Blood sugar at diagnosis"],
+     ["HIV clinic to TB", "Four symptom screen each visit"],
+     ["Diabetes clinic to TB", "Cough enquiry, radiograph if positive"]
+    ]
+   }
+  },
+  {
+   "title": "Annual risk and the infection reservoir",
+   "tx": "The **annual risk of tuberculous infection** estimates the yearly probability of acquiring TB infection in a population, historically derived from tuberculin surveys in children, with roughly one percent annual risk translating to a heavy future case load. Latent infection in contacts and risk groups is the reservoir from which tomorrow's cases reactivate, justifying preventive therapy scale up.",
+   "say": "Annual infection risk forecasts tomorrow's cases from today's infected children. Latent infection is the reservoir. Preventive therapy drains it before reactivation speaks.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Concept", "Meaning"],
+    "rows": [
+     ["Annual risk of infection", "Yearly infection probability"],
+     ["Tuberculin surveys", "Measured in child cohorts"],
+     ["Latent infection", "Future reactivation reservoir"],
+     ["Preventive therapy", "Reservoir reduction tool"]
+    ]
+   }
+  },
+  {
+   "title": "Targets, incentives and the last mile",
+   "tx": "**Elimination targets** track incidence and mortality decline against 2015 baselines, with TB free certification claimed by villages, blocks and districts meeting verified thresholds, backed by community engagement and incentives. The last mile concentrates in urban slums, tribal belts and migrant corridors where addresses, employers and clinics change faster than registers.",
+   "say": "Certify villages and districts only on verified decline. The last mile hides among migrants and slums where registers age fastest. That is where elimination is won.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Incidence and mortality tracked"},
+     {"id": "b", "label": "Subnational certification claims"},
+     {"id": "c", "label": "Independent verification surveys"},
+     {"id": "d", "label": "Last mile groups intensively served"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

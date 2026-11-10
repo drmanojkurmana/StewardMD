@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-brachytherapy-brachytherapy",
+ "subject": "radiology",
+ "module": "rad-brachytherapy",
+ "title": "Brachytherapy, Manchester System Point A and Radioiodine Therapy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Short distance, steep fall",
+   "tx": "**Brachytherapy** places sealed radioactive sources inside or beside the tumour, so dose follows the inverse square law and falls steeply within centimetres. That geometry treats cervix, prostate, breast and skin with high target dose while bladder, rectum and distant tissue escape. Sources arrive as needles, seeds, wires or afterloading pellets pushed through catheters by machine, keeping staff out of the radiation field entirely.",
+   "say": "Brachytherapy places sealed sources inside or beside the tumour, so dose falls steeply within centimetres by the inverse square law. That geometry treats cervix, prostate and breast while bladder and rectum escape. Afterloading machines push pellets through catheters, keeping staff out of the field.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Applicator placed at tumour"}, {"id": "b", "label": "Source afterloaded in"}, {"id": "c", "label": "Steep dose fall off"}, {"id": "d", "label": "Source retracted to safe"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Dose rate families",
+   "tx": "**Dose rate** splits brachytherapy into low dose rate under about 2 gray per hour delivered over days, medium, high dose rate above 12 gray per hour delivered in minutes, and pulsed schemes imitating low rate hourly. Iridium 192, half life 74 days, powers modern high dose rate afterloaders. High dose rate outpatient fractions replaced most inpatient low dose rate cervix work without losing control, provided fractionation respects late tissue repair.",
+   "say": "Dose rate splits brachytherapy into low dose rate over days, high dose rate above twelve gray per hour in minutes, and pulsed schemes between. Iridium 192 powers modern high dose rate afterloaders. Outpatient high dose rate fractions replaced most inpatient cervix work, provided fractionation respects late repair.",
+   "vis": {"kind": "table", "cols": ["Regime", "Dose rate", "Typical use"], "rows": [["Low dose rate", "0.4 to 2 gray per hour", "Classic cervix implants"], ["Pulsed dose rate", "Hourly pulses", "Imitates low rate biology"], ["High dose rate", "Over 12 gray per hour", "Outpatient cervix, prostate boost"], ["Permanent seeds", "Continuous decay", "Prostate iodine 125 implants"]]}
+  },
+  {
+   "title": "Manchester Point A",
+   "tx": "**Point A** of the Manchester system sits 2 cm above the external cervical os and 2 cm lateral to the uterine canal, the prescription point where cervix dose is quoted and compared across decades of results. Point B lies 3 cm further lateral at the pelvic wall for node dose estimation. Modern image guided practice contours cervix and organs directly, but Point A remains the examination language and the fallback where MRI planning is unavailable.",
+   "say": "Point A sits two centimetres above the external os and two centimetres lateral to the canal, the prescription point where cervix dose is quoted. Point B lies three centimetres further lateral for pelvic wall dose. Image guided practice contours organs directly, but Point A remains the examination language.",
+   "vis": {"kind": "compare", "left": {"title": "Point A", "points": ["2 cm up, 2 cm lateral", "Prescription point", "Cervix dose quoted here", "Ureter crosses nearby"]}, "right": {"title": "Point B", "points": ["3 cm beyond Point A", "Pelvic wall level", "Node dose estimate", "Obturator nodes region"]}}
+  },
+  {
+   "title": "Tandem and ovoid applicators",
+   "tx": "**Intracavitary applicators** for cervix pair a central tandem tube inside the uterus with two ovoids or a ring in the vaginal fornices, shaping a pear shaped dose cloud around cervix and inner parametria. Bladder and rectum are packed and measured with dose constraints that decide source dwell times. Interstitial needles join when tumour bulges beyond the pear, in bulky or eccentric disease the intracavitary cloud cannot cover.",
+   "say": "Intracavitary applicators pair a uterine tandem with vaginal ovoids or a ring, shaping a pear shaped dose cloud around the cervix. Bladder and rectum constraints decide dwell times. Interstitial needles join when tumour bulges beyond the pear in bulky or eccentric disease.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Tandem and ring placed"}, {"id": "b", "label": "Imaging checks geometry"}, {"id": "c", "label": "Dwell times optimised"}, {"id": "d", "label": "Bladder rectum limits respected"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Isotope menu by half life",
+   "tx": "**Brachytherapy isotopes** are chosen by half life and energy: caesium 137, half life thirty years, powered classic low dose rate tubes; iridium 192 at seventy four days drives afterloaders; iodine 125 at sixty days and palladium 103 at seventeen days make permanent prostate seeds. Radium 226, the original, was retired for its radon gas daughter and long hazard. Source strength is quoted as activity and air kerma strength on the treatment plan.",
+   "say": "Brachytherapy isotopes are chosen by half life and energy: caesium 137 powered classic tubes, iridium 192 drives afterloaders, iodine 125 and palladium 103 make permanent prostate seeds. Radium was retired for its radon daughter. Source strength is quoted as activity on the plan.",
+   "vis": {"kind": "table", "cols": ["Isotope", "Half life", "Role"], "rows": [["Iridium 192", "74 days", "High dose rate afterloading"], ["Caesium 137", "30 years", "Classic low dose rate"], ["Iodine 125", "60 days", "Permanent prostate seeds"], ["Palladium 103", "17 days", "Permanent prostate seeds"]]}
+  },
+  {
+   "title": "Prostate seeds and boosts",
+   "tx": "**Prostate brachytherapy** works two ways: permanent iodine seeds implanted under ultrasound guidance delivering dose over months as monotherapy for low risk disease, or a high dose rate temporary implant boosting external beam in higher risk disease. Urinary irritation peaks weeks after seeds as prostate swells, and stranded seeds reduce migration to lung, a rare and usually silent event. Rectal spacing gels now widen the safety margin behind the gland.",
+   "say": "Prostate brachytherapy works two ways: permanent iodine seeds delivering dose over months for low risk disease, or a temporary high dose rate implant boosting external beam in higher risk disease. Urinary irritation peaks weeks after seeds as the prostate swells, and spacing gels widen the rectal margin.",
+   "vis": {"kind": "compare", "left": {"title": "Permanent seeds", "points": ["Iodine 125 implants", "Dose over months", "Low risk monotherapy", "Urinary flare at weeks"]}, "right": {"title": "High dose rate boost", "points": ["Temporary catheters", "Minutes per fraction", "Boost after external beam", "Higher risk disease"]}}
+  },
+  {
+   "title": "Radioiodine treats thyroid",
+   "tx": "**Iodine 131 therapy** exploits thyroid trapping: the isotope concentrates in remnant thyroid and differentiated cancer, emitting beta particles with a millimetre range that ablate locally while its gamma rays allow imaging. It follows thyroidectomy in selected differentiated cancers and treats hyperthyroidism definitively in Graves and toxic nodules. Patients observe radiation precautions at home for days scaled to activity, and pregnancy is excluded before every administration.",
+   "say": "Iodine 131 therapy exploits thyroid trapping: it concentrates in remnant thyroid and differentiated cancer, ablating locally with beta particles while gamma rays allow imaging. It follows thyroidectomy in selected cancers and treats hyperthyroidism definitively. Pregnancy is excluded before every administration.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Thyroid tissue traps iodine"}, {"id": "b", "label": "Beta dose ablates locally"}, {"id": "c", "label": "Gamma image confirms uptake"}, {"id": "d", "label": "Home precautions by activity"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Bone seeking isotopes palliate",
+   "tx": "**Bone seeking radioisotopes** such as strontium 89, samarium 153 and radium 223 home to osteoblastic turnover and irradiate diffuse skeletal metastases that no external field can chase. Radium 223, an alpha emitter, improved survival in castration resistant prostate cancer confined to bone, beyond pain relief alone. Marrow suppression is the shared ceiling, so blood counts gate every administration and chemotherapy spacing is planned around the nadir.",
+   "say": "Bone seeking radioisotopes home to osteoblastic turnover and irradiate diffuse skeletal metastases no field can chase. Radium 223 improved survival in castration resistant prostate cancer confined to bone. Marrow suppression is the shared ceiling, so blood counts gate every administration.",
+   "vis": {"kind": "table", "cols": ["Agent", "Emission", "Niche"], "rows": [["Strontium 89", "Beta", "Painful blastic metastases"], ["Samarium 153", "Beta plus gamma", "Pain relief with imaging"], ["Radium 223", "Alpha", "Survival gain, bone only prostate"], ["Yttrium 90 microspheres", "Beta", "Liver directed radioembolisation"]]}
+  }
+ ]
+}

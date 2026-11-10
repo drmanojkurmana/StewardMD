@@ -1,0 +1,145 @@
+{
+  "v": 1,
+  "id": "cm-vital-statistics-census",
+  "subject": "community-medicine",
+  "module": "cm-vital-statistics",
+  "title": "Vital Statistics: Census, Civil Registration, NFHS, ICD, and Life Tables",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Census: the decennial backbone",
+      "tx": "The **Census of India** counts every person every ten years (last full count 2011) through houselisting then population enumeration under the Census Act 1948, yielding age, sex, literacy, occupation, migration, and household amenities down to village level. It supplies denominators for rates, sampling frames for surveys, and delimitation data for governance, remaining irreplaceable despite its decade long silences.",
+      "say": "The census counts everyone every ten years. Its village level denominators anchor every rate and survey frame.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ce1", "label": "Phase 1: houselisting and amenities" },
+          { "id": "ce2", "label": "Phase 2: population enumeration" },
+          { "id": "ce3", "label": "Tables: denominators and frames" }
+        ],
+        "edges": [["ce1", "ce2"], ["ce2", "ce3"]]
+      }
+    },
+    {
+      "title": "Civil registration of births and deaths",
+      "tx": "The **Registration of Births and Deaths Act 1969** (amended since to strengthen digital systems) obliges reporting of every birth and death to the local registrar (twenty one days conventionally, now with online portals), issuing certificates that unlock schooling, inheritance, and insurance. Completeness has climbed above ninety percent for births nationally, converting registration from legal ritual into a live statistical system.",
+      "say": "Every birth and death must be registered with the local registrar. Certificates serve the family; completeness serves statistics.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Registration element", "Programme fact"],
+        "rows": [
+          ["Governing law", "Registration of Births and Deaths Act 1969"],
+          ["Informant duty", "Head of household or institution"],
+          ["Free registration window", "Within 21 days of the event"],
+          ["Late registration", "Affidavit and magistrate route beyond one year"]
+        ]
+      }
+    },
+    {
+      "title": "Medical certification of cause of death",
+      "tx": "Registered deaths gain statistical value only with the **medical certification of cause of death (MCCD)**: the treating doctor records the causal chain (immediate cause, antecedent causes, underlying cause) in the international form, and coders assign the underlying cause for mortality statistics. Coverage and quality lag behind registration counts, so garbage codes (senility, heart failure as underlying cause) still blunt Indian mortality data.",
+      "say": "Cause certification turns a death count into mortality intelligence. The underlying cause, not the final event, gets coded.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "mc1", "label": "Doctor writes causal chain Part I" },
+          { "id": "mc2", "label": "Contributory conditions in Part II" },
+          { "id": "mc3", "label": "Coder selects underlying cause" }
+        ],
+        "edges": [["mc1", "mc2"], ["mc2", "mc3"]]
+      }
+    },
+    {
+      "title": "Sample Registration System revisited",
+      "tx": "Between censuses the **Sample Registration System** dual records births and deaths continuously in sampled units (a resident enumerator plus independent half yearly survey, unmatched events verified), producing annual state level birth, death, infant mortality, and fertility rates. Its cause of death arm uses verbal autopsy (RHIME method) to assign causes where medical certification is absent, powering India's mortality cause estimates.",
+      "say": "Dual recording fills the census gap with annual rates. Verbal autopsy supplies causes where doctors never certified.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Census",
+          "points": ["Complete count, every ten years", "Stock denominators by village", "No annual vital rates"]
+        },
+        "right": {
+          "title": "Sample Registration System",
+          "points": ["Sampled continuous dual record", "Annual birth and death rates", "Verbal autopsy cause data"]
+        }
+      }
+    },
+    {
+      "title": "National Family Health Survey",
+      "tx": "The **National Family Health Survey (NFHS)** interviews households and measures biomarkers (haemoglobin, blood pressure, glucose, anthropometry) in rounds (NFHS five in 2019 to 2021), delivering fertility, nutrition, anaemia, immunisation, and disease prevalence by district. Unlike registration systems it measures what families actually experience (stunting thirty five point five percent, wasting nineteen point three percent in NFHS five), including the unregistered.",
+      "say": "NFHS measures bodies, not just records: anaemia, stunting, pressure, and glucose by district. It catches what registers miss.",
+      "vis": {
+        "kind": "table",
+        "cols": ["NFHS-5 headline (children under 5)", "Value"],
+        "rows": [
+          ["Stunting", "35.5 percent"],
+          ["Wasting", "19.3 percent"],
+          ["Underweight", "32.1 percent"],
+          ["Child anaemia (6 to 59 months)", "67.1 percent"]
+        ]
+      }
+    },
+    {
+      "title": "ICD: classifying diseases and deaths",
+      "tx": "The **International Classification of Diseases (ICD)** codes every diagnosis and cause of death into standard chapters so mortality and morbidity compare across places and decades; ICD ten served a generation, and ICD eleven (digital, stem plus extension codes) is rolling out. Coding the underlying cause by ICD rules, not local habit, is what makes a district's malaria deaths comparable with a nation's.",
+      "say": "ICD coding standardises causes worldwide. ICD eleven now succeeds ICD ten with digital stem and extension codes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ic1", "label": "Clinician states cause in words" },
+          { "id": "ic2", "label": "Coder applies ICD selection rules" },
+          { "id": "ic3", "label": "Underlying cause tabulated and compared" }
+        ],
+        "edges": [["ic1", "ic2"], ["ic2", "ic3"]]
+      }
+    },
+    {
+      "title": "Notification and HMIS flows",
+      "tx": "Legally dangerous diseases flow through **notification of infectious diseases** (cholera, plague, and listed conditions under state public health acts and the Integrated Disease Surveillance Programme), while routine service data (deliveries, immunisations, outpatients) flow monthly through the Health Management Information System portal from facility to nation. Notification is immediate and case based; HMIS is periodic and aggregate, and confusing their purposes corrupts outbreak response.",
+      "say": "Notify dangerous diseases immediately by case; report routine services monthly in aggregate. Different speeds, different jobs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Notification (IDSP style)",
+          "points": ["Named case, immediate", "Outbreak trigger and response", "Weekly plus epidemic prone alerts"]
+        },
+        "right": {
+          "title": "HMIS routine reporting",
+          "points": ["Aggregate counts, monthly", "Programme monitoring and planning", "Facility to district to national portal"]
+        }
+      }
+    },
+    {
+      "title": "Life tables and their uses",
+      "tx": "A **life table** follows a synthetic cohort through current age specific mortality, yielding survivors (lx), deaths, person years, and life expectancy at each age (ex). India life expectancy at birth approaches seventy years. Life tables feed insurance premia, net reproduction rates, years of potential life lost, and the mortality half of burden of disease calculations in every planning office.",
+      "say": "Life tables turn death rates into life expectancy and survival curves. They also feed reproduction rates and insurance.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Life table output", "Used for"],
+        "rows": [
+          ["lx survivors", "Survival curves, NRR weights"],
+          ["ex life expectancy", "Population health summaries"],
+          ["qx death probability", "Age specific risk comparison"],
+          ["Person years Lx", "Rates and burden calculations"]
+        ]
+      }
+    },
+    {
+      "title": "Morbidity surveys and record linkage",
+      "tx": "Mortality data miss living illness, so **morbidity measurement** adds periodic surveys (NFHS, National Sample Survey health rounds), disease registries (cancer, stroke), and record linkage joining a person's events across registers by unique identifiers to build incidence and follow up cohorts. The Ayushman Bharat Digital Mission's ABHA identifier is India's current bet on linkable records, with privacy safeguards as its governing tension.",
+      "say": "Surveys and registries measure living illness; linkage follows one person across records. ABHA is India's linkage bet.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "mb1", "label": "Surveys and registries capture morbidity" },
+          { "id": "mb2", "label": "Unique ID links events per person" },
+          { "id": "mb3", "label": "Incidence and outcomes become computable" }
+        ],
+        "edges": [["mb1", "mb2"], ["mb2", "mb3"]]
+      }
+    }
+  ]
+}

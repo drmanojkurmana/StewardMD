@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-nutrition-iodine-deficiency-disorders",
+ "subject": "community-medicine",
+ "module": "cm-nutrition",
+ "title": "Iodine Deficiency Disorders: Goitre Grading, Salt Iodisation and NIDDCP",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "A spectrum, not just a swelling",
+   "tx": "**Iodine deficiency disorders** span the life course: abortion and stillbirth, neonatal hypothyroidism, cretinism with deaf-mutism and intellectual disability, goitre at all ages, and impaired cognition in schoolchildren losing measurable IQ points. Framing deficiency as only a neck swelling is the historical error the spectrum concept was coined to kill.",
+   "say": "Deficiency writes across a lifetime. Lost pregnancies, cretinism, deaf-mutism, dull schooling, goitre last. The spectrum framing exists because neck swellings were the least of the damage all along.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Life stage", "Disorder"],
+    "rows": [
+     ["Fetus", "Abortion, stillbirth, cretinism"],
+     ["Neonate", "Neonatal hypothyroidism"],
+     ["Child and adolescent", "Goitre, impaired cognition"],
+     ["Adult", "Goitre and its complications"]
+    ]
+   }
+  },
+  {
+   "title": "Goitre grading at survey speed",
+   "tx": "**Goitre grading** runs Grade 0 (no palpable or visible goitre), Grade 1 (palpable but not visible with neck in normal position), Grade 2 (visible with neck normal). Total goitre rate above 5 percent in school-age children marks a public health problem. Palpation surveys of 6 to 12 year olds are the standard field instrument.",
+   "say": "Three grades, fingers and eyes. Palpable only, then visible at rest. Over five percent in schoolchildren declares a public health problem. School surveys by palpation remain the standard field instrument.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Grade", "Finding"],
+    "rows": [
+     ["0", "Neither palpable nor visible"],
+     ["1", "Palpable, not visible in normal position"],
+     ["2", "Visible in normal neck position"]
+    ]
+   }
+  },
+  {
+   "title": "Urinary iodine reads the present",
+   "tx": "**Median urinary iodine** in schoolchildren judges current intake at population level: under 20 micrograms per litre severe deficiency, 20 to 49 moderate, 50 to 99 mild, 100 to 199 adequate. Individuals vary day to day, so medians of groups, never single urines, classify districts. Neonatal TSH screening adds a sensitive newborn window.",
+   "say": "Urine reads the present, groups only. Median under twenty severe, one hundred to one ninety nine adequate in schoolchildren. Single urines mislead by daily variation; district medians classify. Newborn TSH adds a sensitive second window.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Population tools",
+     "points": ["Median urinary iodine, schoolchildren", "Total goitre rate by palpation", "Neonatal TSH proportions"]
+    },
+    "right": {
+     "title": "Misuses to avoid",
+     "points": ["Single urine diagnosing a person", "Goitre rate reflecting last month's intake", "Old surveys guiding current salt policy"]
+    }
+   }
+  },
+  {
+   "title": "Salt iodisation: the vehicle logic",
+   "tx": "**Universal salt iodisation** chose salt because everyone eats it daily in small steady amounts, production is centralised enough to fortify, and cost stays paise per person yearly. Potassium iodate suits tropical stability better than iodide. India mandates iodised salt nationally, banning non-iodised salt for human consumption in programme design, with 30 ppm at production and 15 ppm at consumer level as the classic standards.",
+   "say": "Salt carries iodine because everyone eats a little daily and factories are few. Iodate survives tropics better. Thirty parts per million at production, fifteen at the consumer's kitchen in classic standards.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Iodate added at production, 30 ppm"},
+     {"id": "b", "label": "Storage and transport losses"},
+     {"id": "c", "label": "Consumer level target, 15 ppm"},
+     {"id": "d", "label": "Daily intake meets requirement"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Daily requirement and the pregnancy premium",
+   "tx": "**Daily iodine need** is about 150 micrograms for adults, rising to roughly 250 in pregnancy and lactation, against goitrogenic pressures from cassava and cruciferous thiocyanates in some ecologies. The fetal brain taxes the premium: deficiency in the first half of pregnancy damages neurodevelopment irreversibly before goitre appears in anyone.",
+   "say": "Pregnancy pays the premium: one fifty rising toward two fifty micrograms daily. Fetal brains suffer first and permanently, before any neck swells. Goitrogen foods add pressure in cassava ecologies.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Group", "Approximate daily need"],
+    "rows": [
+     ["Adult", "150 micrograms"],
+     ["Pregnancy", "About 250 micrograms"],
+     ["Lactation", "About 250 micrograms"],
+     ["Schoolchild", "90 to 120 micrograms by age"]
+    ]
+   }
+  },
+  {
+   "title": "NIDDCP machinery",
+   "tx": "The **National Iodine Deficiency Disorders Control Programme** (from the 1962 goitre control programme, renamed 1992) runs surveys, supplies iodised salt, checks salt iodine at production and retail (spot kits qualitatively, titration quantitatively), and educates against stored-salt iodine loss. District resurveys every few years verify that elimination sustains, because goitre memory outlives intake correction by years.",
+   "say": "Programme machinery surveys, supplies, tests and teaches. Salt checked at factory and shop, districts resurveyed on rotation. Goitre shrinks years behind intake correction, so vigilance outlasts early victories.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Component", "Instrument"],
+    "rows": [
+     ["Surveys", "Goitre palpation, urinary iodine"],
+     ["Salt monitoring", "Spot testing kits, titration"],
+     ["Supply policy", "Iodised salt mandate"],
+     ["Education", "Storage in dry closed containers"]
+    ]
+   }
+  },
+  {
+   "title": "Storage and cooking losses at home",
+   "tx": "**Household losses** silently defeat factory dosing: salt stored open near heat, bought loose from humid sacks, or added early to prolonged boiling loses iodine before eating. Teaching points are concrete: closed dry storage away from the stove, purchase of packaged iodised salt, and late addition in cooking where habits allow. Salt test kits in community hands make the invisible visible during campaigns.",
+   "say": "Kitchens undo factories. Open storage by the stove, humid loose sacks, long boiling: iodine leaves before eating. Closed dry jars, packaged salt and late addition are the teachable fixes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Iodine lost",
+     "points": ["Salt stored open near heat", "Loose salt from humid sacks", "Prolonged boiling after early addition"]
+    },
+    "right": {
+     "title": "Iodine kept",
+     "points": ["Closed dry container away from stove", "Packaged iodised salt purchased", "Salt added late in cooking"]
+    }
+   }
+  },
+  {
+   "title": "Excess and the U-shaped caution",
+   "tx": "**Iodine excess** after rapid correction can trigger iodine-induced hyperthyroidism in older nodular goitre patients and autoimmune flares at population extremes, so monitoring includes harm surveillance during scale-up. The dose-response is U-shaped: deficiency and excess both injure thyroid function. This caution refines, never reverses, iodisation policy in deficient populations.",
+   "say": "Correction carries a small backlash. Older nodular glands can tip into hyperthyroidism as iodine returns, so scale-up watches for harm. The curve is U-shaped; that refines dosing vigilance, never reverses policy.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Intake zone", "Risk"],
+    "rows": [
+     ["Deficient", "Goitre, cretinism, cognitive loss"],
+     ["Adequate", "Normal thyroid development"],
+     ["Excessive", "Iodine-induced hyperthyroidism, autoimmune flare"]
+    ]
+   }
+  },
+  {
+   "title": "Elimination criteria districts aim at",
+   "tx": "**Elimination as a public health problem** is certified by combined indicators: total goitre rate under 5 percent in schoolchildren, median urinary iodine at or above 100, over 90 percent households consuming adequately iodised salt (15 ppm or more), and neonatal TSH signals low. No single indicator certifies alone, the composite logic examiners test with district data sets.",
+   "say": "Certification is composite. Goitre under five percent, urinary medians adequate, nine of ten households on properly iodised salt, newborn signals quiet. Single indicators never certify alone in examination data sets.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Salt coverage above 90 percent"},
+     {"id": "b", "label": "Urinary iodine adequate median"},
+     {"id": "c", "label": "Goitre rate under 5 percent"},
+     {"id": "d", "label": "Elimination verified, surveillance continues"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

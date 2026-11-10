@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-opioids",
+  "subject": "pharmacology",
+  "title": "Tapentadol, Methadone, Buprenorphine and Pentazocine: Atypical and Mixed Opioids",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Tapentadol** fuses mu agonism with noradrenaline reuptake inhibition in one molecule, aiming at mixed nociceptive and neuropathic pain with less constipation and nausea than equianalgesic oxycodone in trials (no serotonin arm separates it from tramadol, and no CYP2D6 lottery governs it: glucuronidation clears it directly). Seizure caution and serotonin syndrome warnings still attach through its monoamine action, and it is scheduled wherever misuse data demanded.",
+      "say": "Tapentadol is tramadol redesigned: direct mu action, noradrenaline only, no genetic lottery.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tapentadol design",
+          "points": [
+            "Mu agonism plus noradrenaline reuptake inhibition",
+            "Active as parent drug, glucuronidated directly",
+            "Neuropathic pain contribution from monoamine arm",
+            "Less gastrointestinal burden than oxycodone in trials"
+          ]
+        },
+        "right": {
+          "title": "Tapentadol cautions",
+          "points": [
+            "Serotonin syndrome with serotonergic partners",
+            "Seizure caution in predisposed patients",
+            "Controlled scheduling for misuse potential",
+            "Avoid with MAO inhibitors"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Methadone** is a racemic shapeshifter: mu agonist, NMDA antagonist and monoamine reuptake inhibitor with a half life averaging 24 hours but ranging tenfold between patients, making accumulation across the first week its defining danger. It serves opioid substitution therapy, complex and neuropathic cancer pain in specialist hands, and QT prolongation (torsades at higher doses and with interacting drugs) walks beside it. Induction deaths cluster in days 3 to 7 when yesterday's doses are still arriving.",
+      "say": "Methadone accumulates silently for a week and stretches the QT; induction is its killing season.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Methadone started at low dose"
+          },
+          {
+            "id": "accum",
+            "label": "Long variable half life accumulates over days"
+          },
+          {
+            "id": "peak",
+            "label": "Sedation peaks days 3 to 7, not day 1"
+          },
+          {
+            "id": "review",
+            "label": "Slow titration, ECG and interaction surveillance"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "accum"
+          ],
+          [
+            "accum",
+            "peak"
+          ],
+          [
+            "peak",
+            "review"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Buprenorphine**, a partial mu agonist with fierce receptor affinity and slow dissociation, delivers analgesia with a ceiling on respiratory depression (though not on sedation with benzodiazepines aboard) and doubles as opioid substitution therapy sublingually, by depot injection and by patch. Its affinity lets it evict full agonists and precipitate withdrawal in dependent patients dosed too early, the induction choreography (wait for moderate withdrawal, COWS scored) that substitution clinics ritualise.",
+      "say": "Buprenorphine hugs the receptor hardest and activates it least; time its start to withdrawal or it causes it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Partial agonist advantages",
+          "points": [
+            "Ceiling on respiratory depression alone",
+            "Long duration: patches, depot and sublingual forms",
+            "Substitution therapy with lower overdose lethality",
+            "Analgesia adequate for moderate to severe pain"
+          ]
+        },
+        "right": {
+          "title": "Partial agonist traps",
+          "points": [
+            "Precipitates withdrawal if started too early",
+            "Blocks full agonist analgesia at high occupancy",
+            "Benzodiazepine co sedation removes the ceiling's comfort",
+            "Naloxone reversal needs higher, infused doses"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pentazocine**, the ageing kappa agonist and mu partial antagonist, produces dysphoria and psychotomimetic effects through kappa receptors, raises cardiac work (unwelcome after infarction), and precipitates withdrawal in mu dependent patients while providing ceiling limited analgesia. Its historical pairing with antihistamines (the T's and blues abuse era) and skin fibrosis from chronic injection complete an adverse museum. Modern formularies retired it; examinations keep it as the kappa dysphoria archetype.",
+      "say": "Pentazocine is kappa's dysphoria made pharmaceutical: historically interesting, clinically retired.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Kappa agonism signature",
+          "points": [
+            "Dysphoria, hallucinations and depersonalisation",
+            "Analgesia with a low ceiling",
+            "Miosis less reliable than mu agents",
+            "Cardiac stimulation: avoid after infarction"
+          ]
+        },
+        "right": {
+          "title": "Mixed agonist antagonist rules",
+          "points": [
+            "Precipitates withdrawal in mu dependence",
+            "Never layer onto full agonist therapy casually",
+            "Pentazocine, nalbuphine and butorphanol share the pattern",
+            "Chronic injection sites fibrose and ulcerate"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Substitution therapy** for opioid dependence rests on this lesson's pharmacology: methadone (full agonist, daily supervised then take home) and buprenorphine (partial agonist, safer ceiling, office based in many systems) both cut mortality by half or more versus no treatment, retain patients better at adequate doses, and are tapered only when stability argues, because relapse after detoxification, with tolerance lost, is the overdose epidemic's favourite mechanism.",
+      "say": "Methadone and buprenorphine halve dependence mortality; detox without them is the dangerous intervention.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "assess",
+            "label": "Opioid dependence assessed with withdrawal scales"
+          },
+          {
+            "id": "induct",
+            "label": "Buprenorphine in withdrawal, methadone titrated slowly"
+          },
+          {
+            "id": "stable",
+            "label": "Adequate maintenance dose, psychosocial support"
+          },
+          {
+            "id": "taper",
+            "label": "Taper only when stability and patient choice align"
+          }
+        ],
+        "edges": [
+          [
+            "assess",
+            "induct"
+          ],
+          [
+            "induct",
+            "stable"
+          ],
+          [
+            "stable",
+            "taper"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Methadone's interaction web** punishes inattention in both directions: enzyme inducers (rifampicin, carbamazepine, efavirenz) plunge levels into withdrawal, inhibitors (azole antifungals, some SSRIs) push toward sedation and QT events, and its own QT effect stacks with antipsychotics, macrolides and hypokalaemia. ECG thresholds (QTc beyond 450 ms caution, beyond 500 act) and electrolyte care are protocol, not garnish, in substitution and pain services alike.",
+      "say": "Methadone levels swing with every inducer and inhibitor; the ECG is part of its prescription.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Levels falling (withdrawal)",
+          "points": [
+            "Rifampicin, carbamazepine, phenytoin induction",
+            "Efavirenz and nevirapine in HIV therapy",
+            "Pregnancy increases clearance in later trimesters",
+            "Split dosing sometimes required"
+          ]
+        },
+        "right": {
+          "title": "Levels rising (toxicity)",
+          "points": [
+            "Azole antifungals and fluvoxamine inhibition",
+            "QT stacking: antipsychotics, macrolides, low potassium",
+            "QTc beyond 500 ms demands dose action",
+            "Sedation review at every medication change"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Analgesic ceiling concepts** sort this lesson for examinations: full agonists (morphine, methadone, fentanyl) have no analgesic ceiling short of toxicity, partial agonists (buprenorphine) ceiling respiratory depression while analgesia largely persists at clinical doses, and mixed agonist antagonists (pentazocine, nalbuphine) ceiling analgesia itself early. Asking which ceiling a vignette describes, respiratory or analgesic, separates the three families faster than any structural recall.",
+      "say": "Name the ceiling: analgesia, respiration or both, and the opioid family names itself.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ceiling taxonomy",
+          "points": [
+            "Full agonists: no analgesic ceiling",
+            "Buprenorphine: respiratory ceiling, analgesia retained",
+            "Pentazocine class: early analgesic ceiling",
+            "Tramadol and tapentadol: ceilings set by seizures and syndrome"
+          ]
+        },
+        "right": {
+          "title": "Clinical translations",
+          "points": [
+            "Escalating cancer pain: full agonist territory",
+            "Dependence treatment: partial agonist safety exploited",
+            "Postoperative mixed agents largely historical",
+            "Ceilings vanish when sedatives combine"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Perioperative planning** for patients on these agents is a specialist choreography: buprenorphine continued (its analgesic contribution real, full agonists layered atop at higher doses), methadone baseline continued exactly with acute pain treated additionally, and never a mixed agonist antagonist introduced for postoperative pain in a dependent patient. Withdrawal prevention outranks theoretical receptor purity in every guideline, because uncontrolled pain plus withdrawal is the relapse recipe hospitals keep baking by accident.",
+      "say": "Continue the baseline opioid, treat acute pain on top, and keep mixed agents out of dependent patients.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "baseline",
+            "label": "Baseline methadone or buprenorphine continued"
+          },
+          {
+            "id": "acute",
+            "label": "Acute pain treated with layered full agonists"
+          },
+          {
+            "id": "avoid",
+            "label": "Mixed agonist antagonists avoided"
+          },
+          {
+            "id": "liaise",
+            "label": "Addiction and pain teams co own the chart"
+          }
+        ],
+        "edges": [
+          [
+            "baseline",
+            "acute"
+          ],
+          [
+            "acute",
+            "avoid"
+          ],
+          [
+            "avoid",
+            "liaise"
+          ]
+        ]
+      }
+    }
+  ]
+}

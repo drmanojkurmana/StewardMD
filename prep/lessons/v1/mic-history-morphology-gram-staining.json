@@ -1,0 +1,210 @@
+{
+  "v": 1,
+  "module": "mic-history-morphology",
+  "subject": "microbiology",
+  "title": "Gram Staining, Acid-Fast Staining and the Peptidoglycan Cell Wall",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Gram staining** divides bacteria by cell wall architecture in four reagents: crystal violet primary stain, Gram iodine mordant, alcohol or acetone decolouriser (the decisive step), and safranin counterstain. Gram positive cells retain the crystal violet iodine complex in their thick peptidoglycan and read purple; gram negative cells lose it through a thin wall and outer membrane and read pink. Hans Christian Gram published the method in 1884 trying to see bacteria in lung tissue.",
+      "say": "Purple kept the dye, pink lost it; the decolouriser second decides every Gram stain.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/gonorrhea-fig1.webp",
+        "alt": "Gram stain showing gram negative diplococci inside neutrophils",
+        "caption": "Gram stain of Neisseria gonorrhoeae, pink diplococci within neutrophils."
+      }
+    },
+    {
+      "tx": "**Peptidoglycan** is the wall's load bearing mesh: alternating N acetylglucosamine and N acetylmuramic acid chains crosslinked by short peptides, thick and multilayered (20 to 80 nm, with teichoic acids) in gram positives, thin (2 to 7 nm) beneath an outer membrane in gram negatives. Lysozyme in tears cleaves its sugar backbone and penicillin blocks its peptide crosslinks, which is why wall anatomy predicts antibiotic behaviour.",
+      "say": "Thick mesh, no outer membrane: gram positive. Thin mesh plus outer membrane: gram negative.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Gram positive wall",
+          "points": [
+            "Peptidoglycan 20 to 80 nm, multilayered",
+            "Teichoic and lipoteichoic acids embedded",
+            "No outer membrane, no periplasmic LPS",
+            "Retains crystal violet complex"
+          ]
+        },
+        "right": {
+          "title": "Gram negative wall",
+          "points": [
+            "Peptidoglycan 2 to 7 nm in periplasm",
+            "Outer membrane with LPS and porins",
+            "Lipid A is endotoxin",
+            "Decolourises, takes safranin pink"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Ziehl Neelsen staining** answers the wall Gram cannot read: mycobacteria wrap themselves in mycolic acid wax that refuses aqueous dyes, so carbol fuchsin is driven in with heat (or detergent in the cold Kinyoun method), acid alcohol cannot decolourise acid fast bacilli, and methylene blue counterstains the background. Auramine fluorescence screening is the same chemistry read by fluorescence microscopy at lower magnification.",
+      "say": "Mycolic wax refuses ordinary dye; hot carbol fuchsin enters and acid cannot evict it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ZN steps",
+          "points": [
+            "Carbol fuchsin with heat (steaming)",
+            "Acid alcohol decolouriser (3 percent HCl in ethanol)",
+            "Methylene blue counterstain",
+            "Red bacilli on blue ground: acid fast positive"
+          ]
+        },
+        "right": {
+          "title": "Acid fast cast",
+          "points": [
+            "Mycobacterium tuberculosis and leprae (leprae weaker, Fite)",
+            "Nocardia partially acid fast",
+            "Cryptosporidium oocysts modified ZN",
+            "Sputum smear grading guides infectiousness"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Gram stain errors** are wall biology plus technique: old cultures and antibiotic damaged gram positives decolourise falsely gram negative (gram variable), thick smears under decolourise, mycobacteria stain weakly gram positive ghostly, and wall less organisms (Mycoplasma) and intracellular chlamydiae and rickettsiae do not Gram stain usefully at all. The report should name morphology and arrangement (cocci in chains, clusters, diplococci) because arrangement is diagnostic information.",
+      "say": "Report shape and arrangement, not only colour; old cultures lie about their Gram reaction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Morphology vocabulary",
+          "points": [
+            "Cocci in clusters (staphylococci) versus chains (streptococci)",
+            "Diplococci: pneumococcus lancet, Neisseria kidney shaped",
+            "Bacilli, coccobacilli, curved vibrios, spirals",
+            "Intracellular location noted (Neisseria in neutrophils)"
+          ]
+        },
+        "right": {
+          "title": "Gram pitfalls",
+          "points": [
+            "Over decolourisation flips gram positives",
+            "Old or damaged cells stain gram variable",
+            "Mycoplasma has no wall to stain",
+            "Thick smears trap primary stain"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Special stains complete** the morphology bench: Albert stain for Corynebacterium metachromatic (volutin) granules, India ink and nigrosin negative staining for capsules, Schaeffer Fulton for green endospores against red vegetative cells, silver impregnation (Fontana) for thin spirochaetes, and Giemsa for blood parasites and chlamydial inclusions. Each stain exists because one structure refuses the routine pair.",
+      "say": "Every special stain commemorates a structure the routine stains cannot show.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Structure stains",
+          "points": [
+            "Albert: diphtheria metachromatic granules",
+            "Schaeffer Fulton: endospores green",
+            "India ink: cryptococcal capsule halo",
+            "Fontana silver: spirochaetes"
+          ]
+        },
+        "right": {
+          "title": "Specimen stains",
+          "points": [
+            "Giemsa: malaria and blood parasites",
+            "Acridine orange: sensitive bacterial screening",
+            "Calcofluor white: fungal elements",
+            "Dark ground: living spirochaetes unstained"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The gram negative **outer membrane** is a pharmacological border: porins admit small hydrophilic molecules (size and charge filtered), exclude vancomycin and many hydrophobics, and its lipopolysaccharide lipid A triggers Toll like receptor 4 into endotoxic shock physiology. Gram positive teichoic acids and peptidoglycan fragments inflame through TLR2 instead. Wall anatomy therefore predicts both drug entry and sepsis signalling.",
+      "say": "Porins decide drug entry, lipid A decides endotoxic signalling; the wall writes both.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "porin",
+            "label": "Drug crosses gram negative outer membrane via porin"
+          },
+          {
+            "id": "pbg",
+            "label": "Peptidoglycan synthesis blocked inside"
+          },
+          {
+            "id": "lps",
+            "label": "Shed LPS engages TLR4 on macrophages"
+          },
+          {
+            "id": "shock",
+            "label": "Cytokine cascade: endotoxic physiology"
+          }
+        ],
+        "edges": [
+          [
+            "porin",
+            "pbg"
+          ],
+          [
+            "porin",
+            "lps"
+          ],
+          [
+            "lps",
+            "shock"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Gram stain remains** the fastest antibiotic compass in the laboratory: gram positive cocci in clusters in pus starts anti staphylococcal thinking, gram negative diplococci in urethral discharge or CSF redirects within the hour, long before culture identification. Its predictive value is highest in normally sterile fluids (CSF, joint, pleural) and weakest where colonising flora mixes, a specimen logic examinations test repeatedly.",
+      "say": "In sterile fluids the Gram stain prescribes the first antibiotic hour; in colonised sites it merely suggests.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "High value Gram stains",
+          "points": [
+            "CSF: diplococci versus bacilli redirect empiric therapy",
+            "Joint and pleural fluid in sepsis",
+            "Positive blood culture broth Gram stain",
+            "Urethral discharge diplococci"
+          ]
+        },
+        "right": {
+          "title": "Low value Gram stains",
+          "points": [
+            "Sputum with squamous contamination (screen first)",
+            "Wound swabs over mixed flora",
+            "Stool (culture and toxin logic instead)",
+            "Throat swabs for pharyngitis bacteria"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cell wall deficient** and wall unusual organisms close the topic: Mycoplasma and Ureaplasma (no peptidoglycan, sterols in membrane, beta lactam proof), mycobacteria (mycolic fortress), chlamydiae (developmental forms with minimal wall), and fungi (chitin and glucan, a different kingdom's wall). Beta lactam failure in atypical pneumonia is this paragraph arriving at the bedside on schedule.",
+      "say": "No peptidoglycan, no beta lactam effect; atypical pneumonia is wall anatomy presenting clinically.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Wall exceptions",
+          "points": [
+            "Mycoplasma: no wall, sterol membrane",
+            "Chlamydia: elementary and reticulate bodies",
+            "Mycobacteria: mycolic acid wax",
+            "Fungi: chitin and beta glucan wall"
+          ]
+        },
+        "right": {
+          "title": "Clinical consequences",
+          "points": [
+            "Beta lactams useless in mycoplasma pneumonia",
+            "Acid fast methods for mycobacteria",
+            "Antifungals target glucan and ergosterol",
+            "Serology and NAAT replace Gram stain"
+          ]
+        }
+      }
+    }
+  ]
+}

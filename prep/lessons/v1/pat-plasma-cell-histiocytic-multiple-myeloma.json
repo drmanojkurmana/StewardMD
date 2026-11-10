@@ -1,0 +1,286 @@
+{
+ "v": 1,
+ "gen": "AI",
+ "module": "pat-plasma-cell-histiocytic",
+ "key": null,
+ "title": "Multiple Myeloma: M Spike, Bence Jones Proteins, and Punched-Out Lytic Lesions",
+ "steps": [
+  {
+   "tx": "Multiple myeloma is a malignant clonal neoplasm of terminally differentiated plasma cells originating within the bone marrow cavity. Clonal plasma cells infiltrate haematopoietic tissue, constituting ten percent or more of total nucleated cells on bone marrow aspirate or trephine core biopsy. These neoplastic cells synthesize and secrete immense quantities of a single homogeneous immunoglobulin or free light chain, designated a monoclonal paraprotein. Progressive marrow replacement suppresses physiological haematopoiesis, producing normocytic normochromic anaemia and profound **monoclonal paraproteinaemia** that impairs normal antibody synthesis.",
+   "say": "Multiple myeloma is a clonal malignancy of post-germinal center plasma cells that proliferate within the bone marrow. Diagnostic criteria require finding ten percent or more clonal plasma cells on marrow examination or a biopsy-proven plasmacytoma. These neoplastic cells produce an identical monoclonal immunoglobulin or light chain, while simultaneously suppressing normal polyclonal antibody production, leaving patients highly vulnerable to severe encapsulated bacterial infections.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/myeloma-fig1.webp",
+    "alt": "Pathophysiological cascade of multiple myeloma from clonal plasma cell expansion to end-organ damage",
+    "caption": "Multiple myeloma pathophysiology from clonal plasma cells to bone and kidney injury."
+   }
+  },
+  {
+   "tx": "Initial diagnostic screening for multiple myeloma utilizes **serum protein electrophoresis**, which separates circulating proteins based on charge and molecular size. Densitometric scanning demonstrates a sharp, narrow, symmetric spike termed the M spike, most frequently located within the gamma globulin region or occasionally the beta region. Immunofixation electrophoresis subsequently characterizes the specific heavy-chain and light-chain isotypes: immunoglobulin G represents fifty-five percent of myeloma cases, immunoglobulin A accounts for twenty percent, while light-chain-only myeloma constitutes fifteen percent.",
+   "say": "Serum protein electrophoresis is the premier screening tool for suspected multiple myeloma. The test separates serum proteins into albumin and globulin bands. In myeloma, a narrow, tall spike called the M spike appears in the gamma or beta region, reflecting a homogeneous monoclonal protein. Subsequent immunofixation identifies the exact immunoglobulin class: IgG is most common in fifty-five percent of cases, followed by IgA in twenty percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Serum Protein Electrophoresis"
+     },
+     {
+      "id": "e2",
+      "label": "Narrow Monoclonal M Spike"
+     },
+     {
+      "id": "e3",
+      "label": "Immunofixation Electrophoresis"
+     },
+     {
+      "id": "e4",
+      "label": "Isotype: IgG, IgA, or Light Chain"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2",
+      "Identifies Peak"
+     ],
+     [
+      "e2",
+      "e3",
+      "Characterization"
+     ],
+     [
+      "e3",
+      "e4",
+      "Confirms Heavy & Light Chain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Free monoclonal light chains produced in excess of heavy chains are small enough to be filtered across the glomerular filtration barrier into the urine, historically termed **Bence Jones proteins**. Bence Jones proteinuria demonstrates a unique thermal solubility property: precipitates form upon heating urine to forty-five to sixty degrees Celsius, completely redissolve near boiling at one hundred degrees, and reprecipitate upon cooling. Routine urine dipsticks fail to detect Bence Jones proteins because they react solely with albumin, necessitating urine protein electrophoresis or serum free light-chain assays.",
+   "say": "Bence Jones proteins are monoclonal free kappa or lambda light chains that pass freely through the glomerular filter due to their low molecular weight. They display a classic thermal reaction, precipitating when urine is heated between forty-five and sixty degrees Celsius and redissolving completely near the boiling point. A crucial clinical trap is that standard urine dipsticks detect only albumin, remaining falsely negative despite massive Bence Jones proteinuria.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bence Jones Light Chains",
+     "points": [
+      "Molecular weight 22 to 44 kDa (filtered by glomerulus)",
+      "Precipitates at 50 C, redissolves near 100 C",
+      "Completely invisible on standard urine dipstick",
+      "Detected by urine protein electrophoresis and free light assay"
+     ]
+    },
+    "right": {
+     "title": "Albuminuria",
+     "points": [
+      "Molecular weight 66 kDa (retained by normal glomerulus)",
+      "Does not display thermal solubility reversal",
+      "Readily detected by colorimetric urine dipstick",
+      "Reflects glomerular podocyte and endothelial damage"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Skeletal destruction in multiple myeloma produces characteristic **punched-out osteolytic bone lesions** visible on skeletal radiographic surveys, computed tomography, and magnetic resonance imaging. Neoplastic plasma cells secrete macrophage inflammatory protein-1 alpha and upregulate receptor activator of nuclear factor kappa B ligand (RANKL) on stromal cells, while simultaneously secreting dickkopf-1 to inhibit Wnt signalling. This dual action stimulates massive osteoclastic bone resorption while completely shutting down osteoblastic bone formation, resulting in purely destructive osteolytic defects without reactive sclerotic bone rims.",
+   "say": "Bone destruction is a devastating hallmark of multiple myeloma. Myeloma cells produce cytokines that upregulate RANK-ligand on osteoblasts and secrete inhibitors of Wnt signaling like dickkopf-1. This shifts bone turnover entirely toward osteoclast activation while paralyzing osteoblasts. The resulting punched-out lytic lesions show zero osteoblastic new bone formation, predisposing patients to excruciating bone pain, hypercalcemia, and pathological fractures.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/son-myeloma-gen1.webp",
+    "alt": "Side skull film shows multiple punched out lytic lesions without sclerotic rims.",
+    "caption": "Side skull film shows multiple punched out lytic lesions without sclerotic rims. Raindrop skull lesions mark myeloma bone disease. Illustration: StewardMD original.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "Establishing a definitive diagnosis of active multiple myeloma requiring systemic therapy hinges on fulfilling the classic **CRAB criteria** indicating myeloma-induced end-organ damage. Hypercalcaemia (C) requires corrected serum calcium greater than eleven milligrams per deciliter. Renal insufficiency (R) is defined as serum creatinine exceeding two milligrams per deciliter. Anaemia (A) mandates a haemoglobin level below ten grams per deciliter or two grams below normal baseline. Bone lesions (B) require one or more osteolytic lesions identified on plain radiographs, computed tomography, or positron emission tomography.",
+   "say": "The classic CRAB criteria define end-organ damage requiring therapy in multiple myeloma. C stands for hypercalcaemia with corrected calcium exceeding eleven milligrams per deciliter. R indicates renal failure with creatinine over two milligrams per deciliter. A represents anaemia with haemoglobin under ten grams per deciliter. B denotes one or more osteolytic bone lesions on imaging. Finding any CRAB feature alongside clonal plasma cells mandates immediate therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CRAB Feature",
+     "Diagnostic Threshold",
+     "Underlying Pathophysiology",
+     "Immediate Clinical Risk"
+    ],
+    "rows": [
+     [
+      "Hypercalcaemia (C)",
+      "Serum calcium >11.0 mg/dL",
+      "Excessive osteoclastic bone resorption",
+      "Confusion, lethargy, cardiac arrhythmias"
+     ],
+     [
+      "Renal Insufficiency (R)",
+      "Serum creatinine >2.0 mg/dL",
+      "Light chain cast nephropathy in distal tubules",
+      "Oliguric acute kidney failure"
+     ],
+     [
+      "Anaemia (A)",
+      "Haemoglobin <10.0 g/dL",
+      "Extensive marrow plasma cell replacement",
+      "Profound fatigue, exertional dyspnoea"
+     ],
+     [
+      "Bone Lesions (B)",
+      ">=1 osteolytic defect on imaging",
+      "Uncoupled osteoclast activation via RANKL",
+      "Pathological fractures, spinal cord compression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Distinguishing active myeloma from asymptomatic plasma cell disorders is critical to prevent premature chemotherapy. **Monoclonal gammopathy of undetermined significance** is an asymptomatic premalignant state defined by serum M protein under three grams per deciliter, bone marrow clonal plasma cells under ten percent, and complete absence of CRAB end-organ damage. Present in three percent of adults older than fifty years, it progresses to multiple myeloma at a predictable rate of one percent per year. Smoldering myeloma exhibits higher marrow involvement (ten to sixty percent) without CRAB damage.",
+   "say": "Monoclonal gammopathy of undetermined significance, or MGUS, is an asymptomatic premalignant condition present in three percent of individuals over age fifty. MGUS is diagnosed when serum M protein is below three grams per deciliter, marrow plasma cells are under ten percent, and no CRAB organ damage exists. It requires only periodic observation, progressing to overt myeloma at a rate of one percent per year. Smoldering myeloma has higher tumor burden but still lacks CRAB features.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MGUS (Premalignant)",
+     "points": [
+      "Serum M spike under 3.0 g/dL",
+      "Marrow clonal plasma cells under 10%",
+      "Complete absence of CRAB end-organ damage",
+      "Risk of progression 1% per year (watchful waiting)"
+     ]
+    },
+    "right": {
+     "title": "Active Multiple Myeloma",
+     "points": [
+      "Marrow clonal plasma cells >=10% or plasmacytoma",
+      "Presence of >=1 CRAB end-organ feature",
+      "Marrow light chain ratio >=100",
+      "Mandates immediate systemic multi-agent chemotherapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Renal failure represents a frequent medical emergency in multiple myeloma, most commonly caused by **light chain cast nephropathy**, also known as myeloma kidney. Filtered monoclonal free light chains exceed the reabsorptive capacity of proximal tubular cells and reach distal convoluted tubules. There, light chains bind Tamm-Horsfall mucoprotein (uromodulin), forming dense, tubular casts that obstruct nephrons. The surrounding tubular epithelium undergoes intense foreign-body giant-cell inflammatory reaction and interstitial fibrosis, leading to progressive renal failure exacerbated by volume depletion, hypercalcaemia, and non-steroidal anti-inflammatory drugs.",
+   "say": "Myeloma kidney, or light chain cast nephropathy, is the leading cause of renal failure in multiple myeloma. Filtered monoclonal free light chains overwhelm proximal tubular absorption and combine with Tamm-Horsfall mucoprotein in distal tubules. This forms dense, fractured proteinaceous casts that block tubular lumen, exciting a foreign-body multinucleated giant-cell reaction. Dehydration, hypercalcemia, and radiocontrast agents drastically accelerate cast formation, plunging patients into acute renal failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Renal Complication",
+     "Underlying Pathophysiology",
+     "Diagnostic Histopathology",
+     "Clinical Management"
+    ],
+    "rows": [
+     [
+      "Cast Nephropathy",
+      "Light chains bind Tamm-Horsfall mucoprotein",
+      "Dense fractured casts with multinucleated giant cells",
+      "Aggressive intravenous hydration, chemotherapy"
+     ],
+     [
+      "AL Amyloidosis",
+      "Deposition of fibrillar monoclonal light chains",
+      "Congo red positive with apple-green birefringence",
+      "Daratumumab-based systemic therapy"
+     ],
+     [
+      "Light Chain Deposition",
+      "Non-fibrillar light chain deposition on GBM",
+      "Thickened basement membranes on electron microscopy",
+      "Bortezomib-based clone reduction"
+     ],
+     [
+      "Hypercalcaemic Nephropathy",
+      "High calcium inducing natriuresis and spasm",
+      "Tubular calcium deposition without casts",
+      "Normal saline diuresis, intravenous bisphosphonates"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Modern first-line therapy for transplant-eligible multiple myeloma utilizes a **triplet induction regimen** combining a proteasome inhibitor such as bortezomib, an immunomodulatory drug like lenalidomide, and high-dose dexamethasone (VRd). Bortezomib reversibly blocks the 26S proteasome, causing toxic accumulation of polyubiquitinated misfolded immunoglobulin chains within neoplastic plasma cells that triggers endoplasmic reticulum stress and apoptosis. Following three to four cycles of induction, patients undergo haematopoietic stem cell mobilization followed by high-dose melphalan conditioning and autologous stem cell transplantation.",
+   "say": "First-line therapy for transplant-eligible myeloma combines a proteasome inhibitor like bortezomib, an immunomodulatory drug like lenalidomide, and dexamethasone. Bortezomib blocks the 26S proteasome, drowning neoplastic plasma cells in their own misfolded immunoglobulin chains and triggering apoptosis. After induction, peripheral blood stem cells are harvested, followed by high-dose melphalan conditioning and autologous stem cell transplantation, which significantly extends progression-free survival.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "v1",
+      "label": "Triplet VRd Induction"
+     },
+     {
+      "id": "v2",
+      "label": "Stem Cell Harvest"
+     },
+     {
+      "id": "v3",
+      "label": "High-Dose Melphalan"
+     },
+     {
+      "id": "v4",
+      "label": "Autologous Stem Cell Rescue"
+     },
+     {
+      "id": "v5",
+      "label": "Lenalidomide Maintenance"
+     }
+    ],
+    "edges": [
+     [
+      "v1",
+      "v2",
+      "3-4 Cycles VRd"
+     ],
+     [
+      "v2",
+      "v3",
+      "G-CSF Mobilization"
+     ],
+     [
+      "v3",
+      "v4",
+      "Myeloablation"
+     ],
+     [
+      "v4",
+      "v5",
+      "Haematopoietic Recovery"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which criterion constitutes an essential feature of the CRAB diagnostic criteria for active multiple myeloma?",
+   "options": [
+    "Corrected serum calcium greater than 11.0 mg/dL",
+    "Serum creatinine less than 1.0 mg/dL",
+    "Peripheral white blood cell count greater than 20,000 / uL",
+    "Serum M spike exceeding 10.0 g/dL"
+   ],
+   "correct": 0,
+   "explain": "Hypercalcaemia (C) in CRAB criteria is defined as corrected serum calcium >11.0 mg/dL (or >1 mg/dL above the upper limit of normal)."
+  },
+  {
+   "q": "What is the primary histological and biochemical mechanism underlying light chain cast nephropathy (myeloma kidney)?",
+   "options": [
+    "Filtered free light chains combine with Tamm-Horsfall mucoprotein to form obstructive distal tubular casts",
+    "Immune complex deposition in subepithelial humps with capillary basement membrane duplication",
+    "Ascending bacterial infection causing acute suppurative pyelonephritis with white cell casts",
+    "Extensive calcium phosphate deposition in the proximal convoluted tubular brush border"
+   ],
+   "correct": 0,
+   "explain": "In myeloma kidney, excessive filtered monoclonal free light chains bind Tamm-Horsfall mucoprotein in distal convoluted tubules, creating dense fractured casts that obstruct tubules."
+  },
+  {
+   "q": "Why does a routine urine dipstick fail to detect Bence Jones proteinuria in multiple myeloma?",
+   "options": [
+    "The colorimetric indicator on standard dipsticks detects albumin, not free light chains",
+    "Light chains are completely degraded by renal tubular epithelial cells before entering urine",
+    "Bence Jones proteins bind Tamm-Horsfall protein and cannot react with tetrabromphenol blue",
+    "Light chains are positively charged and repel the negative charge on the dipstick pad"
+   ],
+   "correct": 0,
+   "explain": "Standard urine dipsticks are designed to detect albumin via tetrabromphenol blue colorimetry and are notoriously insensitive to immunoglobulin free light chains."
+  }
+ ]
+}

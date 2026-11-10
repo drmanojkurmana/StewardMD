@@ -1,0 +1,280 @@
+{
+    "v": 1,
+    "id": "psy-psychotherapy-cognitive-behaviour-therapy",
+    "subject": "psychiatry",
+    "module": "psy-psychotherapy",
+    "title": "Cognitive Behaviour Therapy, Behavioural Modification, and Relaxation Techniques",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Beck Cognitive Triad",
+            "tx": "**Beck cognitive triad of depression** conceptualizes depressive pathology as emerging from pervasive negative core schemas regarding the self ('I am fundamentally defective'), the ongoing world experience ('the entire world is excessively demanding'), and the future ('my personal future is completely hopeless'). These latent dysfunctional cognitive schemas become activated during stressful life events, generating automatic negative thoughts.",
+            "say": "Beck cognitive triad of depression conceptualizes depressive pathology as emerging from pervasive negative core schemas regarding the self ('I am fundamentally defective'), the ongoing world experience ('the entire world is excessively demanding'), and the future ('my personal future is completely hopeless'). These latent dysfunctional cognitive schemas become activated during stressful life events, generating automatic negative thoughts.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Triad Dimension",
+                    "Pathological Cognitive Content",
+                    "Typical Automatic Thought",
+                    "Therapeutic Reframing Target"
+                ],
+                "rows": [
+                    [
+                        "The Self",
+                        "Viewed as incompetent, unlovable, and deficient",
+                        "'I ruin everything that I attempt'",
+                        "Identify individual strengths and achievements"
+                    ],
+                    [
+                        "The World",
+                        "Viewed as hostile, defeating, and overly burdensome",
+                        "'Everyone expects me to fail'",
+                        "Examine objective interpersonal feedback"
+                    ],
+                    [
+                        "The Future",
+                        "Viewed as hopeless, bleak, and permanently futile",
+                        "'Things will never improve for me'",
+                        "Establish graded achievable micro-goals"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "Three circles overlap in this diagram, and depression lives in all of them at once. The patient judges the self worthless, reads the world as hostile, and expects the future to stay bleak, Beck's **cognitive triad** feeding itself in a loop. Therapy works by catching the automatic thoughts these circles generate and testing them against evidence the patient collects between sessions. Drawn simply, the triad still gives patients a map of why one rejection can darken their whole outlook within minutes.",
+            "say": "Beck cognitive triad links negative views of self, world and future at the core of depression.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m463-psy-psychotherapy-cognitive-behaviour-therapy.webp",
+                "alt": "Beck cognitive triad diagram illustrating negative views of self, world, and future",
+                "caption": "Beck cognitive triad diagram illustrating negative views of self, world, and future. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "Identifying Cognitive Distortions",
+            "tx": "**Common cognitive distortion categories** represent systematic logical errors that reinforce maladaptive schemas: arbitrary inference involves jumping to negative conclusions without supporting proof, dichotomous thinking categorizes situations into absolute all-or-nothing extremes, and overgeneralization extracts a universal rule from an isolated negative incident. Patients track these errors using structured dysfunctional thought records.",
+            "say": "Common cognitive distortion categories represent systematic logical errors that reinforce maladaptive schemas: arbitrary inference involves jumping to negative conclusions without supporting proof, dichotomous thinking categorizes situations into absolute all-or-nothing extremes, and overgeneralization extracts a universal rule from an isolated negative incident. Patients track these errors using structured dysfunctional thought records.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Arbitrary Inference",
+                    "points": [
+                        "Drawing a catastrophic conclusion when objective evidence is lacking or completely contradicts the premise"
+                    ]
+                },
+                "right": {
+                    "title": "Selective Abstraction",
+                    "points": [
+                        "Focusing exclusively on a solitary negative detail while totally blinding oneself to the positive whole picture"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Socratic Questioning and Restructuring",
+            "tx": "**Socratic questioning in cognitive restructuring** employs collaborative empiricism, wherein the therapist and patient act as investigative co-scientists. Instead of debating the patient, the clinician poses targeted open-ended questions that gently uncover logical inconsistencies in irrational beliefs, enabling the patient to evaluate objective counter-evidence and independently formulate rational, balanced alternative thoughts.",
+            "say": "Socratic questioning in cognitive restructuring employs collaborative empiricism, wherein the therapist and patient act as investigative co-scientists. Instead of debating the patient, the clinician poses targeted open-ended questions that gently uncover logical inconsistencies in irrational beliefs, enabling the patient to evaluate objective counter-evidence and independently formulate rational, balanced alternative thoughts.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Identify automatic negative thought"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Gather evidence for and against"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Apply guided Socratic inquiry"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Synthesize balanced rational alternative"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Systematic Desensitisation Principles",
+            "tx": "**Joseph Wolpe systematic desensitization** is grounded in classical conditioning and reciprocal inhibition, postulating that an individual cannot simultaneously experience physiological relaxation and psychological fear. Patients construct an anxiety stimulus hierarchy ranging from mild discomfort to extreme dread, progressively confronting each fear tier while maintaining profound muscular relaxation until the conditioned anxiety response extinguishes.",
+            "say": "Joseph Wolpe systematic desensitization is grounded in classical conditioning and reciprocal inhibition, postulating that an individual cannot simultaneously experience physiological relaxation and psychological fear. Patients construct an anxiety stimulus hierarchy ranging from mild discomfort to extreme dread, progressively confronting each fear tier while maintaining profound muscular relaxation until the conditioned anxiety response extinguishes.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Hierarchy Tier",
+                    "Subjective Units of Distress (SUDs)",
+                    "Phobic Stimulus Example (Spider)",
+                    "Target Patient Response"
+                ],
+                "rows": [
+                    [
+                        "Tier 1 (Mild)",
+                        "SUDs 20-30",
+                        "Looking at cartoon drawings of spiders",
+                        "Maintain calm breathing and muscle relaxation"
+                    ],
+                    [
+                        "Tier 2 (Moderate)",
+                        "SUDs 40-50",
+                        "Viewing high-resolution video of spiders",
+                        "Relaxation maintained until SUDs drops below 25"
+                    ],
+                    [
+                        "Tier 3 (Marked)",
+                        "SUDs 60-75",
+                        "Observing live spider enclosed in glass jar",
+                        "Extinguish sympathetic tachycardia through paced respiration"
+                    ],
+                    [
+                        "Tier 4 (Extreme)",
+                        "SUDs 80-100",
+                        "Allowing live harmless spider to crawl on palm",
+                        "Complete habituation and fear extinction achieved"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Exposure and Response Prevention",
+            "tx": "**Exposure and response prevention protocol** stands as the definitive first-line behavioural intervention for obsessive-compulsive disorder. The patient is exposed systematically to distressing obsession-provoking environmental triggers (such as touching contaminated floor tiles) while strictly refraining from executing habitual anxiety-reducing compulsive rituals (such as repetitive hand washing), driving neurological extinction and habituation.",
+            "say": "Exposure and response prevention protocol stands as the definitive first-line behavioural intervention for obsessive-compulsive disorder. The patient is exposed systematically to distressing obsession-provoking environmental triggers (such as touching contaminated floor tiles) while strictly refraining from executing habitual anxiety-reducing compulsive rituals (such as repetitive hand washing), driving neurological extinction and habituation.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Prolonged In Vivo Exposure",
+                    "points": [
+                        "Direct confrontation with anxiety-provoking triggers",
+                        "triggers initial steep surge in subjective autonomic panic"
+                    ]
+                },
+                "right": {
+                    "title": "Rigid Response Prevention",
+                    "points": [
+                        "Strict blockage of compulsive neutralizing rituals",
+                        "demonstrates that anxiety peaks and naturally dissipates over time"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Operant Conditioning and Token Economy",
+            "tx": "**Token economy behavioural modification** applies Skinnerian operant conditioning principles within institutional psychiatric wards, rehabilitation facilities, and specialized classrooms. Patients earn secondary reinforcers, such as plastic tokens or reward points, immediately upon performing target adaptive behaviors (personal hygiene, room maintenance, group participation), which are subsequently exchanged for desired primary privileges.",
+            "say": "Token economy behavioural modification applies Skinnerian operant conditioning principles within institutional psychiatric wards, rehabilitation facilities, and specialized classrooms. Patients earn secondary reinforcers, such as plastic tokens or reward points, immediately upon performing target adaptive behaviors (personal hygiene, room maintenance, group participation), which are subsequently exchanged for desired primary privileges.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Define concrete target behaviors"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Award tokens immediately upon execution"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Accumulate secondary reinforcers"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Redeem tokens for desirable primary reinforcers"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Aversion Therapy versus Flooding",
+            "tx": "**Aversion therapy and flooding techniques** utilize contrasting conditioning models: aversion therapy couples an undesirable maladaptive habit with an intensely noxious stimulus, such as administering emetic apomorphine or disulfiram with alcohol, or bitter nail paint for onychophagia. Flooding involves immediate, sustained immersion in the most frightening phobic situation without gradual hierarchical steps until autonomic exhaustion forces extinction.",
+            "say": "Aversion therapy and flooding techniques utilize contrasting conditioning models: aversion therapy couples an undesirable maladaptive habit with an intensely noxious stimulus, such as administering emetic apomorphine or disulfiram with alcohol, or bitter nail paint for onychophagia. Flooding involves immediate, sustained immersion in the most frightening phobic situation without gradual hierarchical steps until autonomic exhaustion forces extinction.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Aversion Therapy Model",
+                    "points": [
+                        "Pairs maladaptive target behavior with noxious chemical or electrical shock to forge an inhibitory avoidance reflex"
+                    ]
+                },
+                "right": {
+                    "title": "Flooding Technique",
+                    "points": [
+                        "Continuous maximum-intensity in vivo exposure without escape",
+                        "fear response exhausts sympathetic neurotransmitters"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Jacobson Progressive Relaxation",
+            "tx": "**Jacobson progressive muscle relaxation** instructs patients to systematically tense specific muscle groups for 5 to 7 seconds, followed by sudden complete release for 20 to 30 seconds, traversing 16 major anatomical muscle regions. This exercise cultivates somatic awareness of muscular tension, enabling patients to extinguish sympathetic arousal during panic attacks, generalized anxiety, and tension headaches.",
+            "say": "Jacobson progressive muscle relaxation instructs patients to systematically tense specific muscle groups for 5 to 7 seconds, followed by sudden complete release for 20 to 30 seconds, traversing 16 major anatomical muscle regions. This exercise cultivates somatic awareness of muscular tension, enabling patients to extinguish sympathetic arousal during panic attacks, generalized anxiety, and tension headaches.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Anatomical Muscle Group",
+                    "Tension Technique (5-7 Seconds)",
+                    "Relaxation Phase (20-30 Seconds)",
+                    "Physiological Mechanism"
+                ],
+                "rows": [
+                    [
+                        "Hands and Forearms",
+                        "Clench fists tightly against palm",
+                        "Release completely; open fingers loosely",
+                        "Reduces somatic motor corticospinal tone"
+                    ],
+                    [
+                        "Biceps and Triceps",
+                        "Bend elbows and tense upper arms",
+                        "Drop arms heavily to resting surface",
+                        "Increases local peripheral capillary blood flow"
+                    ],
+                    [
+                        "Facial and Jaw Musculature",
+                        "Wrinkle forehead and clench teeth",
+                        "Soften jaw; allow tongue to rest passively",
+                        "Extinguishes trigeminal-autonomic tension"
+                    ],
+                    [
+                        "Calves and Feet",
+                        "Dorsiflex toes upward toward shins",
+                        "Allow feet to turn outward naturally",
+                        "Promotes parasympathetic dominance and bradycardia"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

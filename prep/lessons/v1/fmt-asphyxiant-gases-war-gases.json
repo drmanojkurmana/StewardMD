@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-asphyxiant-gases-war-gases",
+ "subject": "forensic-medicine",
+ "module": "fmt-asphyxiant-gases",
+ "title": "War Gases: Vesicants, Lung Irritants, Nerve Agents and Tear Gases",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "War gases classified by action",
+   "tx": "**War gases** are chemicals, gaseous, liquid or solid, used to injure or kill in war, dispersed as droplets by shells, spray tanks, bombs and missiles and acting by inhalation, ingestion or skin and mucosal contact. The classical classes are vesicants or blistering agents, asphyxiants or lung irritants, lachrymators or tear gases, sternutators or nasal irritants, paralysants and nerve gases. Classification by action, not by chemistry, is what first aid and hospital reception actually use.",
+   "say": "Blister, choke, tear, sneeze, paralyse or block nerves: war gases are triaged by what they do, not what they are.",
+   "vis": {"kind": "table", "cols": ["Class", "Target", "Examples"], "rows": [["Vesicants", "Skin, eyes, airways", "Mustard, lewisite"], ["Lung irritants", "Alveoli", "Chlorine, phosgene"], ["Lachrymators", "Eyes", "CAP, bromobenzyl cyanide"], ["Nerve agents", "Cholinesterase", "Tabun, sarin, VX"]]}
+  },
+  {
+   "title": "Mustard gas, the vesicant",
+   "tx": "**Mustard gas** and the other vesicants, phosgene oxime and lewisite among them, are volatile liquids discharged in shells to saturate an area. Mustard irritates eyes, nose, throat and respiratory passages and, passing through clothes into skin, produces intense itching, redness, vesication and ulceration especially of moist areas, with nausea, vomiting and abdominal pain. Treatment is thorough washing of affected parts, eye wash with sodium bicarbonate solution, and BAL for lewisite, the arsenical vesicant it was designed against.",
+   "say": "Mustard blisters through clothing into moist skin, lewisite is its arsenical cousin, and BAL answers lewisite by name.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Vesicant droplets contaminate skin"}, {"id": "b", "label": "Itching, redness, then blisters"}, {"id": "c", "label": "Wash parts thoroughly at once"}, {"id": "d", "label": "BAL for lewisite exposure"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Lung irritants: chlorine and phosgene",
+   "tx": "**Asphyxiant or lung irritant gases** are chlorine and phosgene from tanks and shells, with chloropicrin and diphosgene as liquids in shells; phosgene is ten times and chloropicrin four times as toxic as chlorine. Acting mainly on pulmonary alveoli they cause watering eyes, coughing, dyspnoea, chest tightness, headache, vomiting, restlessness, stertorous breathing, cyanosis and collapse, death in twenty four to forty eight hours from acute pulmonary oedema. Treatment is boric acid eye wash, oxygen, adrenaline, antitussives and antibiotics.",
+   "say": "Phosgene at ten times chlorine's toxicity floods alveoli a day later, so the quiet casualty is observed, not discharged.",
+   "vis": {"kind": "compare", "left": {"title": "Lung irritant course", "points": ["Eyes water, cough begins", "Chest tightness, dyspnoea", "Stertorous breathing, cyanosis", "Oedema kills at 24 to 48 hours"]}, "right": {"title": "Lung irritant care", "points": ["Boric acid eye wash", "Oxygen and adrenaline", "Antitussives for cough", "Antibiotics against infection"]}}
+  },
+  {
+   "title": "Delayed pulmonary oedema is the trap",
+   "tx": "The medicolegal trap of lung irritants is **delayed oedema after a well interval**: a casualty who coughs, recovers and walks can flood his alveoli a day later as capillary injury matures. Phosgene is notorious for this latency. Discharge decisions, death certification timing and compensation all turn on the twenty four to forty eight hour window. Any significant exposure is therefore observed through the window with serial chest examination, whatever the first hour suggested.",
+   "say": "A walking phosgene casualty can drown in his own oedema tomorrow, so observation spans the full two day window.",
+   "vis": {"kind": "table", "cols": ["Time after exposure", "Possible state", "Action"], "rows": [["First hour", "Cough, eye watering", "Wash, oxygen, observe"], ["Well interval", "Deceptively settled", "Continue observation"], ["24 to 48 hours", "Acute pulmonary oedema", "Intensive respiratory care"], ["After window", "Risk recedes", "Discharge with advice"]]}
+  },
+  {
+   "title": "Lachrymators: tear gases",
+   "tx": "**Lachrymators or tear gases** are chloracetophenone, a solid, and ethyliodoacetate and bromobenzyl cyanide, liquids, fired in shells or pen guns. Their vapours intensely irritate the eyes with copious tears, eyelid spasm and temporary blindness, and irritate air passages; prolonged exposure adds nausea, vomiting and skin blistering, but effects are transitory. Treatment is removal to fresh air, eyes washed with warm normal saline or boric acid, weak sodium bicarbonate to skin, and aminophylline or salbutamol for bronchospasm.",
+   "say": "Tear gas blinds briefly with streaming eyes and clenched lids, then clears in fresh air with saline washing.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Vapour reaches the eyes"}, {"id": "b", "label": "Tears flow, lids spasm shut"}, {"id": "c", "label": "Remove to fresh air"}, {"id": "d", "label": "Wash eyes with warm saline"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Sternutators: the sickening gases",
+   "tx": "**Sternutators or nasal irritants** are solid organic arsenic compounds fired in shells: diphenyl chlorarsine, diphenylamine chlorarsine and diphenylcyanarsine. Diphenylamine chlorarsine, sickening gas, is about six times as heavy as air and acts specifically on the vomiting centre. Vapours cause intense pain and irritation in nose and sinuses, sneezing, headache, salivation, nausea, vomiting, chest tightness and prostration, incapacitating without usually killing. Their arsenical nature links them back to the metallic poisons module.",
+   "say": "Arsenical sternutators sicken and prostrate through nose and vomiting centre, incapacitating soldiers without lethal intent.",
+   "vis": {"kind": "compare", "left": {"title": "Sternutator effects", "points": ["Nose and sinus pain", "Sneezing, salivation", "Vomiting centre driven", "Prostration follows"]}, "right": {"title": "Class contrasts", "points": ["Tear gases target eyes", "Sternutators target nose and gut", "Vesicants target skin", "Lung agents target alveoli"]}}
+  },
+  {
+   "title": "Paralysants: cyanide, H2S and CO",
+   "tx": "The **paralysant class** groups hydrocyanic acid, sulphuretted hydrogen and carbon monoxide, the systemic asphyxiants of the last lessons, which kill by blocking oxygen carriage or cellular respiration rather than by injuring airways. Their shared forensic discipline is speed: scene safety for rescuers, immediate removal, oxygen, and specific antidotal logic, nitrites for cyanide and sulphide, pressure oxygen for monoxide. In war they were delivered to produce rapid collapse without warning properties the victim could flee.",
+   "say": "Cyanide, sulphide and monoxide paralyse respiration from inside the blood and cell, and rescuers fall beside victims without protection.",
+   "vis": {"kind": "table", "cols": ["Paralysant", "Blockade site", "Antidote logic"], "rows": [["Hydrocyanic acid", "Cytochrome oxidase", "Nitrites then thiosulphate"], ["Hydrogen sulphide", "Cytochrome oxidase", "Nitrites, oxygen"], ["Carbon monoxide", "Haemoglobin carriage", "Oxygen, hyperbaric"], ["Shared rule", "Rescuer safety first", "No unprotected entry"]]}
+  },
+  {
+   "title": "Nerve gases are organophosphates",
+   "tx": "**Nerve gases** are misnamed: the agents GA tabun, GB sarin, GD soman and the V agents are liquids, esters of phosphoric acid identical in biological activity to organophosphate insecticides, colourless, odourless, vapours heavier than air sinking into valleys, trenches and basements, absorbed through lungs, gut, skin and conjunctivae. Large vapour exposure loses consciousness within seconds, convulses minutes later, then muscles go flaccid and breathing stops. Treatment is similar to organophosphates: atropine and oximes, urgently.",
+   "say": "Sarin and VX are farm chemistry weaponised: cholinesterase blockers treated with the same atropine and oximes, faster.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Nerve agent vapour inhaled"}, {"id": "b", "label": "Consciousness lost in seconds"}, {"id": "c", "label": "Convulsions, then flaccid paralysis"}, {"id": "d", "label": "Atropine and oximes as for OP"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Crowd control agents: CS, CN and pepper spray",
+   "tx": "**Chemical crowd control agents** are orthochlorobenzylidene malononitrile, CS tear gas, used by law enforcement and military; CN or Mace in self protection devices; and oleoresin capsaicin, pepper spray, one percent in public canisters and five to ten percent for police. Delivered as stream, spray, foam, aerosol or grenade to incapacitate temporarily or disperse groups, they cause burning stinging eyes, conjunctivitis, tearing, blepharospasm and transient visual impairment, with burning nose and mouth. Medicolegal work is injury documentation and exclusion of excess force injury behind the chemical screen.",
+   "say": "CS, CN and pepper spray incapacitate through eyes and airways briefly, and the doctor documents both chemical and baton injury.",
+   "vis": {"kind": "compare", "left": {"title": "Crowd agents", "points": ["CS tear gas, standard", "CN Mace, self protection", "Pepper spray 1 to 10 percent", "Grenade, spray or foam delivery"]}, "right": {"title": "Medical duties", "points": ["Wash eyes and skin", "Document all injuries found", "Separate chemical from force injury", "Record agent and exposure time"]}}
+  }
+ ],
+ "quiz": []
+}

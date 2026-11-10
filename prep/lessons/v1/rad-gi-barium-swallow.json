@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-gi-barium-swallow",
+ "subject": "radiology",
+ "module": "rad-gi",
+ "title": "Barium Swallow, Meal, Follow Through and Enema Signs",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Barium swallow maps the oesophagus",
+   "tx": "**Barium swallow** coats the oesophagus with barium while fluoroscopy watches swallowing in real time, catching strictures, rings, diverticula and motility failure in one study. The pictured examination shows achalasia, where the lower oesophagus tapers smoothly to a beak while the body above dilates and holds food residue. A malignant stricture instead shoulders abruptly with irregular mucosa, and that shoulder separates cancer from benign narrowing.",
+   "say": "Barium swallow coats the oesophagus while fluoroscopy watches swallowing in real time, catching strictures, rings and motility failure. The pictured study shows achalasia, where the lower oesophagus tapers smoothly to a beak while the body above dilates. A malignant stricture shoulders abruptly instead, separating cancer from benign narrowing.",
+   "vis": {"kind": "image", "src": "clinix/media/practicals/surg-xray-barium-swallow-achalasia-cardia.webp", "alt": "Barium swallow showing dilated oesophagus tapering to a smooth beak in achalasia cardia.", "caption": "Barium swallow in achalasia cardia with smooth tapered beak. Credit: StewardMD library."}
+  },
+  {
+   "title": "Bird beak versus rat tail",
+   "tx": "**Bird beak sign** is the smooth tapered narrowing of achalasia at the gastro oesophageal junction, with a dilated barium filled oesophagus above it. Rat tail appearance describes the long irregular tapered stricture of oesophageal carcinoma eating through the wall. Both narrow the same junction, but the beak keeps a smooth mucosal line and a dilated proximal tube, while the rat tail destroys mucosa and fixes the segment.",
+   "say": "Bird beak sign is the smooth tapered narrowing of achalasia at the gastro oesophageal junction, with dilated oesophagus above it. Rat tail describes the long irregular stricture of carcinoma eating through the wall. The beak keeps a smooth mucosal line, while the rat tail destroys mucosa and fixes the segment.",
+   "vis": {"kind": "compare", "left": {"title": "Bird beak: achalasia", "points": ["Smooth tapered tip", "Dilated oesophagus above", "Mucosa intact", "Bird beak at junction"]}, "right": {"title": "Rat tail: carcinoma", "points": ["Irregular tapered stricture", "Mucosa destroyed", "Shouldered upper edge", "Fixed narrowed segment"]}}
+  },
+  {
+   "title": "Barium meal reads stomach and duodenum",
+   "tx": "**Barium meal** follows swallowed barium through stomach and duodenal cap to find ulcers, tumours and outlet obstruction. A benign gastric ulcer projects beyond the expected stomach contour as a niche on the lesser curve, while a malignant ulcer sits inside the contour within a mass. Duodenal ulcer craters fill in the cap and deform it into a clover leaf after repeated scarring episodes.",
+   "say": "Barium meal follows barium through stomach and duodenal cap to find ulcers, tumours and outlet obstruction. A benign gastric ulcer projects beyond the expected contour as a niche on the lesser curve, while a malignant ulcer sits inside the contour within a mass. Repeated duodenal scarring deforms the cap into a clover leaf.",
+   "vis": {"kind": "table", "cols": ["Finding", "Benign ulcer", "Malignant ulcer"], "rows": [["Crater position", "Projects beyond contour", "Inside a mass contour"], ["Folds", "Reach crater edge smoothly", "Stop short, nodular"], ["Surrounding mass", "Absent", "Present"], ["Healing on therapy", "Expected in weeks", "Fails to heal fully"]]}
+  },
+  {
+   "title": "Follow through and the string sign",
+   "tx": "**Barium follow through** tracks a meal through jejunum and ileum over hours, photographing the terminal ileum where Crohn disease declares itself. The string sign of Kantor is a thread thin barium stream through a long inflamed, spastic and later fibrotic terminal ileal segment. Skip lesions, cobblestoning from longitudinal ulcers and separation of loops by thickened walls complete the Crohn pattern that colonoscopy then biopsies.",
+   "say": "Barium follow through tracks a meal through small bowel over hours, photographing the terminal ileum where Crohn disease declares itself. The string sign of Kantor is a thread thin stream through a long inflamed terminal ileal segment. Skip lesions and cobblestoning complete the pattern that colonoscopy then biopsies.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Barium meal swallowed"}, {"id": "b", "label": "Small bowel transit films"}, {"id": "c", "label": "Terminal ileum reached"}, {"id": "d", "label": "String sign assessed"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Barium enema and apple core",
+   "tx": "**Barium enema** fills the colon from below, and its cancer signature is the apple core lesion: a short circumferential narrowing with shouldered ends and destroyed mucosa, pictured here in carcinoma of the colon. Benign strictures taper longer and smoother with intact mucosa. Double contrast technique coats the wall with thin barium and distends with air, exposing polyps as filling defects that single contrast studies bury in the pool.",
+   "say": "Barium enema fills the colon from below, and its cancer signature is the apple core lesion pictured here: a short narrowing with shouldered ends and destroyed mucosa. Benign strictures taper longer and smoother. Double contrast coats the wall thinly and distends with air, exposing polyps as filling defects.",
+   "vis": {"kind": "image", "src": "clinix/media/practicals/surg-xray-barium-enema-carcinoma-colon.webp", "alt": "Barium enema showing apple core circumferential narrowing in carcinoma of the colon.", "caption": "Apple core lesion of colonic carcinoma on barium enema. Credit: StewardMD library."}
+  },
+  {
+   "title": "Lead pipe colon and thumbprinting",
+   "tx": "**Lead pipe colon** is the featureless, shortened, rigid colon of chronic ulcerative colitis after years of inflammation burn out the haustral folds. Thumbprinting instead marks acute submucosal oedema and haemorrhage swelling the folds into thumb shaped indentations, seen in ischaemic colitis and acute severe colitis. One sign is chronic burnout over years, the other is an acute swollen wall over days, and examiners swap them deliberately.",
+   "say": "Lead pipe colon is the featureless shortened colon of chronic ulcerative colitis after years of inflammation burn out the haustra. Thumbprinting marks acute submucosal oedema swelling folds into thumb shaped indentations in ischaemic or severe colitis. One is chronic burnout over years, the other an acute swollen wall over days.",
+   "vis": {"kind": "compare", "left": {"title": "Lead pipe colon", "points": ["Haustra lost", "Colon shortened and rigid", "Chronic ulcerative colitis", "Years of inflammation"]}, "right": {"title": "Thumbprinting", "points": ["Thumb shaped fold swelling", "Submucosal oedema", "Ischaemic or severe colitis", "Days of acute illness"]}}
+  },
+  {
+   "title": "When barium is forbidden",
+   "tx": "**Suspected perforation** forbids barium because leaked barium sulphate in peritoneum or mediastinum provokes severe chemical inflammation and granulomas that complicate surgery. Water soluble Gastrografin goes first and surgery follows a positive leak without waiting for barium detail. After a negative Gastrografin study with continuing suspicion, thin barium may follow because its coating finds small leaks the water soluble agent washed past.",
+   "say": "Suspected perforation forbids barium because leaked barium in peritoneum or mediastinum provokes severe chemical inflammation complicating surgery. Water soluble Gastrografin goes first and surgery follows a positive leak. After a negative study with continuing suspicion, thin barium may follow because its coating finds small leaks.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Perforation suspected"}, {"id": "b", "label": "Gastrografin study first"}, {"id": "c", "label": "Leak shown: operate"}, {"id": "d", "label": "No leak: thin barium check"}], "edges": [["a", "b"], ["b", "c"], ["b", "d"]]}
+  },
+  {
+   "title": "Filling defect versus coating defect",
+   "tx": "**Filling defect** means something occupies space where barium should be: polyp, tumour, bezoar or an extrinsic impression pushing the wall inward. Extrinsic compression keeps mucosa smooth and shifts with the compressing organ, while a polyp rises from the wall itself and traps a barium fleck on its surface. Reporting the defect size, stalk and mucosal state decides whether colonoscopy, CT or simple follow up comes next.",
+   "say": "Filling defect means something occupies space where barium should be: polyp, tumour, bezoar or an extrinsic impression. Extrinsic compression keeps mucosa smooth, while a polyp rises from the wall and traps barium on its surface. Size, stalk and mucosal state decide whether colonoscopy, CT or follow up comes next.",
+   "vis": {"kind": "table", "cols": ["Defect type", "Mucosa", "Likely cause"], "rows": [["Pedunculated", "Smooth cap", "Polyp on a stalk"], ["Sessile broad", "Irregular surface", "Carcinoma"], ["Smooth indentation", "Intact, slides", "Extrinsic compression"], ["Multiple round", "Normal between", "Polyposis syndrome"]]}
+  }
+ ]
+}

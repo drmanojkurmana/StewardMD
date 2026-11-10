@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-hepatobiliary-gallstone-sonography",
+ "subject": "radiology",
+ "module": "rad-hepatobiliary",
+ "title": "Gallstone Sonography, Wall Echo Shadow and Pancreatic Imaging",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Stone triad on ultrasound",
+   "tx": "**Gallstone sonography** rests on a triad: a bright echogenic focus inside the gallbladder lumen, a clean posterior acoustic shadow behind it, and movement to the dependent wall when the patient rolls. All three together separate a stone from a polyp, which stays fixed and shadowless, and from sludge, which layers and shifts slowly but casts no shadow and holds no discrete bright surface.",
+   "say": "Gallstone sonography rests on a triad: a bright focus inside the gallbladder, a clean shadow behind it, and movement to the dependent wall when the patient rolls. A polyp stays fixed and shadowless, while sludge layers slowly with no shadow and no discrete bright surface.",
+   "vis": {"kind": "table", "cols": ["Feature", "Stone", "Polyp", "Sludge"], "rows": [["Echogenic focus", "Bright surface", "Soft tissue echo", "Low level echoes"], ["Shadow", "Clean shadow", "None", "None"], ["Moves on rolling", "Yes, falls dependently", "No, fixed", "Slow layering shift"], ["Wall attachment", "Free in lumen", "Attached to wall", "Layers on wall"]]}
+  },
+  {
+   "title": "Wall echo shadow complex",
+   "tx": "**Wall echo shadow** complex packs three parallel lines: the gallbladder wall, the bright echo of stones filling the lumen, and the dark shadow behind them, with no black bile gap visible. It means a gallbladder contracted around multiple stones, a chronic cholecystitis pattern easily missed because no anechoic bile outlines the stones. Recognising the complex stops the loop being reported as bowel gas and ends the search correctly.",
+   "say": "Wall echo shadow complex packs three parallel lines: gallbladder wall, the bright echo of stones filling the lumen, and the dark shadow behind them. It means a gallbladder contracted around multiple stones, easily missed because no black bile outlines them. Recognising it stops the loop being reported as bowel gas.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Gallbladder wall line"}, {"id": "b", "label": "Stone echo line"}, {"id": "c", "label": "Shadow behind"}, {"id": "d", "label": "Contracted stone filled sac"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Stone specimens explain echoes",
+   "tx": "**Gallstone types** in the pictured specimens explain why echoes vary: a solitary pale cholesterol stone, dozens of black pigment stones and mixed faceted stones all reflect sound from their front surface regardless of chemistry. Ultrasound cannot type a stone by composition, because the shadow comes from the surface, not the interior. CT sees only the calcified minority, which is why ultrasound remains the first test for biliary colic.",
+   "say": "Gallstone types in the pictured specimens explain why echoes vary: a solitary cholesterol stone, black pigment stones and mixed faceted stones all reflect sound from their front surface. Ultrasound cannot type a stone by chemistry because the shadow comes from the surface, so it remains the first test for colic.",
+   "vis": {"kind": "image", "src": "clinix/media/practicals/surg-spc-cholelithiasis-mixed-calculi.webp", "alt": "Bisected gallbladder specimen containing multiple faceted mixed gallstones with thickened wall.", "caption": "Gallbladder specimen with mixed gallstones and thickened wall. Credit: StewardMD library."}
+  },
+  {
+   "title": "Sonographic Murphy and wall thickening",
+   "tx": "**Sonographic Murphy sign** is maximal tenderness elicited by the probe pressing exactly over the gallbladder, sharper than the clinical hand sign because the probe localises the organ. Gallbladder wall thickening above 3 mm with pericholecystic fluid and impacted neck stone completes acute cholecystitis imaging. Wall thickening alone also appears in hepatitis, heart failure and low albumin states, so it never makes the diagnosis by itself.",
+   "say": "Sonographic Murphy sign is maximal tenderness from the probe pressing exactly over the gallbladder, sharper than the hand sign because the probe localises the organ. Wall thickening above three millimetres with pericholecystic fluid completes the picture, but thickening alone also appears in hepatitis and heart failure.",
+   "vis": {"kind": "compare", "left": {"title": "Acute cholecystitis set", "points": ["Probe tenderness over gallbladder", "Wall over 3 mm", "Pericholecystic fluid", "Impacted neck stone"]}, "right": {"title": "Thick wall mimics", "points": ["Hepatitis", "Heart failure", "Low albumin", "Post prandial contraction"]}}
+  },
+  {
+   "title": "Porcelain gallbladder",
+   "tx": "**Porcelain gallbladder** calcifies the wall into a brittle shell visible as a curvilinear bright line with shadowing on ultrasound and a calcified rim on CT. It follows chronic inflammation and was long taught as premalignant, prompting prophylactic cholecystectomy when the patient is fit. Modern series put the cancer risk lower than classic teaching, but a focal mass inside a porcelain wall still demands urgent surgical review.",
+   "say": "Porcelain gallbladder calcifies the wall into a brittle shell, a curvilinear bright line with shadowing on ultrasound and a calcified rim on CT. It follows chronic inflammation and was long taught as premalignant. A focal mass inside a porcelain wall still demands urgent surgical review.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Chronic gallbladder inflammation"}, {"id": "b", "label": "Wall calcifies"}, {"id": "c", "label": "Curvilinear echo with shadow"}, {"id": "d", "label": "Surgical review for mass"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Common duct stones and dilatation",
+   "tx": "**Common bile duct** diameter above 6 mm in a native gallbladder patient, adding roughly 1 mm per decade after sixty, suggests downstream obstruction. A stone inside the duct shows the same bright focus and shadow as in the gallbladder, often at the ampulla where the duct narrows. MRCP then maps the whole tree before endoscopic extraction, finding the intrahepatic stones ultrasound cannot reach through bowel gas.",
+   "say": "Common bile duct diameter above six millimetres suggests downstream obstruction, adding roughly one millimetre per decade after sixty. A duct stone shows the same bright focus and shadow, often at the ampulla. MRCP then maps the whole tree before endoscopic extraction, finding stones ultrasound cannot reach.",
+   "vis": {"kind": "table", "cols": ["Duct finding", "Guide value", "Meaning"], "rows": [["Native duct diameter", "Up to 6 mm", "Normal"], ["After cholecystectomy", "Up to 10 mm", "Expected dilatation"], ["Age adjustment", "Plus 1 mm per decade over 60", "Normal ageing"], ["Stone in duct", "Focus plus shadow", "Extraction planning"]]}
+  },
+  {
+   "title": "Pancreatic calcification and double duct",
+   "tx": "**Pancreatic calcification** scattered through a shrunken gland on CT is chronic pancreatitis until proven otherwise, most often alcoholic in adults and genetic or tropical in the young. Double duct sign dilates both common bile duct and pancreatic duct together, pointing to a mass in the pancreatic head or ampulla blocking both channels. A smooth tapered double duct can occur in chronic pancreatitis, so the abrupt cutoff and mass decide malignancy.",
+   "say": "Pancreatic calcification through a shrunken gland on CT is chronic pancreatitis until proven otherwise. Double duct sign dilates both bile and pancreatic ducts together, pointing to a pancreatic head mass blocking both channels. An abrupt cutoff with a mass decides malignancy over smooth inflammatory tapering.",
+   "vis": {"kind": "compare", "left": {"title": "Chronic pancreatitis", "points": ["Calcified shrunken gland", "Irregular beaded duct", "Smooth duct tapering", "Alcohol or genetic cause"]}, "right": {"title": "Head malignancy", "points": ["Double duct dilatation", "Abrupt duct cutoff", "Hypoenhancing mass", "Vascular involvement staged"]}}
+  },
+  {
+   "title": "Pseudocyst on CT",
+   "tx": "**Pancreatic pseudocyst** matures four or more weeks after pancreatitis into a round fluid collection with a fibrous wall and no epithelial lining, homogeneous near water density on CT. Unlike an abscess it holds no solid debris and little gas, and unlike a cystic tumour it follows a documented pancreatitis episode. Drainage waits for symptoms, infection or growth, and endoscopic routes now beat open surgery for most mature collections.",
+   "say": "Pancreatic pseudocyst matures four or more weeks after pancreatitis into a round fluid collection with a fibrous wall and no epithelial lining. Unlike abscess it holds no solid debris, and unlike a cystic tumour it follows a documented pancreatitis episode. Drainage waits for symptoms, infection or growth.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Acute pancreatitis episode"}, {"id": "b", "label": "Fluid collection forms"}, {"id": "c", "label": "Wall matures after 4 weeks"}, {"id": "d", "label": "Drain only if symptomatic"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}

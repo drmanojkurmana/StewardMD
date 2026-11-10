@@ -1,0 +1,215 @@
+{
+ "v": 1,
+ "id": "oph-glaucoma-optic-disc",
+ "subject": "ophthalmology",
+ "module": "oph-glaucoma",
+ "title": "Optic Disc Assessment in Glaucoma",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Optic disc** assessment in glaucoma reads neuroretinal rim, cup contour, nerve fibre layer and disc haemorrhages stereoscopically through dilated pupil or imaging. Rim pallor exceeding cupping suggests neurological disease over glaucoma because glaucoma cups more than pales early. Colour therefore discriminates disc cupping aetiology at first examination.",
+   "say": "Rim reading together gives glaucoma disc assessment at fundus clinics for adults with suspicious cups. Pallor gives neurological redirection additionally. Stereo gives contour value.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ap-eye-gross.webp",
+    "alt": "Optic nerve head anatomy diagram relevant to rim and cup assessment.",
+    "caption": "Glaucomatous optic disc cupping, neuroretinal rim loss, and nerve fiber layer atrophy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Neuroretinal rim** thinning focal notch at inferior or superior pole with corresponding fibre wedge and field defect completes glaucomatous triad correlation. Structure function correlation therefore validates disc reading before progression labelling. Disc photograph baseline anchors serial comparison better than drawing memory across years.",
+   "say": "Structure function correlation together gives disc validation in glaucoma follow up at imaging clinics over years. Photograph gives baseline anchoring additionally. Notch gives focal evidence.",
+   "vis": {
+    "kind": "table",
+    "title": "Disc reading set",
+    "cols": [
+     "Element",
+     "Glaucoma reading"
+    ],
+    "rows": [
+     [
+      "Rim notch poles",
+      "Focal axon loss"
+     ],
+     [
+      "Fibre wedge defect",
+      "Bundle to field defect"
+     ],
+     [
+      "Disc haemorrhage",
+      "Progression risk flag"
+     ],
+     [
+      "Pallor exceeds cup",
+      "Neurology redirection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Disc size measurement corrects cup ratio interpretation because large discs carry large physiological cups and small discs hide glaucoma in small cups. Vertical diameter by slit beam or imaging therefore accompanies ratio in records. **Small disc danger** is undercalling glaucoma where ratio looks reassuring numerically.",
+   "say": "Disc size together gives ratio correction in disc records at glaucoma screening for adults with small discs. Small cup gives hidden danger additionally. Measurement gives record completeness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Large disc large cup",
+     "points": [
+      "Physiological possible",
+      "Rim order preserved check"
+     ]
+    },
+    "right": {
+     "title": "Small disc small cup",
+     "points": [
+      "Glaucoma may hide",
+      "Rim focal signs decide"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Disc haemorrhage** flame shaped at rim margin associates progression and normal tension disease, transient weeks so serial photography catches more than single examination. Its presence lowers target and shortens review even where fields stable currently. Haemorrhage therefore is action finding, not descriptive curiosity, in glaucoma notes.",
+   "say": "Haemorrhage action together gives target lowering in glaucoma follow up at disc clinics for progressing adults. Transience gives photography value additionally. Stability gives false comfort warning.",
+   "vis": {
+    "kind": "flow",
+    "title": "Disc assessment sequence",
+    "nodes": [
+     {
+      "id": "size",
+      "label": "Disc size measured"
+     },
+     {
+      "id": "rim",
+      "label": "Rim order and notch read"
+     },
+     {
+      "id": "photo",
+      "label": "Photograph baseline stored"
+     },
+     {
+      "id": "corr",
+      "label": "Field correlation checked"
+     }
+    ],
+    "edges": [
+     [
+      "size",
+      "rim"
+     ],
+     [
+      "rim",
+      "photo"
+     ],
+     [
+      "photo",
+      "corr"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Imaging nerve fibre and ganglion complex thickness quantifies structure where disc reading subjective, tomography thinning maps corresponding field sectors. Structure may progress before field in early disease, field before structure in some advanced patterns. **Both modalities** therefore trend in glaucoma, neither dismissed by single normal result.",
+   "say": "Both modalities together give glaucoma trending in early disease at imaging clinics for adults under surveillance. Sector mapping gives correlation additionally. Single normal gives insufficient reassurance."
+  },
+  {
+   "tx": "Myopic discs tilt, enlarge and peripapillary atrophy confound rim reading needing glaucoma specialist correlation in high myopes from refraction lesson. Tilted insertion mimics thinning where anatomy oblique. **Myopic caution** therefore qualifies disc rules in young high myopia screening. Refraction and axial length therefore accompany disc referral letters in young suspicious cases.",
+   "say": "Myopic caution together gives disc rule qualification in high myopia screening at glaucoma clinics for young adults. Tilt gives mimicry awareness additionally. Correlation gives specialist value.",
+   "vis": {
+    "kind": "table",
+    "title": "Disc confounders",
+    "cols": [
+     "Confounder",
+     "Protection"
+    ],
+    "rows": [
+     [
+      "Large physiological cup",
+      "Size and rim order check"
+     ],
+     [
+      "Tilted myopic disc",
+      "Specialist correlation"
+     ],
+     [
+      "Pallor dominant cup",
+      "Neurology pathway first"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Progression at disc by rim loss or haemorrhage may precede field change requiring target revision without waiting functional loss in preperimetric progression. Event comparison to baseline photographs therefore scheduled even where fields automated trend quiet. **Photograph cadence** is glaucoma visit structure, not archive luxury.",
+   "say": "Photograph cadence together gives progression capture in glaucoma visits at disc clinics for adults under targets. Rim event gives revision trigger additionally. Field quiet gives insufficient delay reason.",
+   "vis": {
+    "kind": "table",
+    "title": "Disc action triggers",
+    "cols": [
+     "Trigger",
+     "Action"
+    ],
+    "rows": [
+     [
+      "New rim notch",
+      "Lower target, correlate field"
+     ],
+     [
+      "Disc haemorrhage",
+      "Closer trend, lower target"
+     ],
+     [
+      "Pallor exceeds cup",
+      "Neuro imaging pathway"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors disc: size corrects ratio, rim order and notch localise, haemorrhage acts and pallor redirects neurology. Photography baselines progression, imaging quantifies fibres. **Cup with pallor** phrase therefore leaves glaucoma pathway in disc differential teaching. Imaging reports therefore state disc size and rim interpretation together rather than ratio alone.",
+   "say": "Size correction together gives disc reading accuracy in glaucoma examinations for students reliably in screening cases. Haemorrhage gives action additionally. Pallor gives exit pathway value.",
+   "vis": {
+    "kind": "table",
+    "title": "Disc anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Rim first reading",
+      "Order, notch, fibre wedge"
+     ],
+     [
+      "Haemorrhage present",
+      "Progression action trigger"
+     ],
+     [
+      "Pallor greater than cup",
+      "Think neurology not glaucoma"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Disc size rule",
+   "b": "Large discs have large physiological cups; small discs hide glaucoma in small cups, measure size."
+  },
+  {
+   "f": "Disc haemorrhage action",
+   "b": "Progression flag: lower target and shorten trend review even if fields stable."
+  },
+  {
+   "f": "Pallor split",
+   "b": "Pallor exceeding cupping suggests neurological disease over glaucoma."
+  }
+ ],
+ "keys": [
+  "Photograph baseline anchors disc progression",
+  "Structure and field both trend, neither alone",
+  "Myopic tilted discs need specialist correlation"
+ ]
+}

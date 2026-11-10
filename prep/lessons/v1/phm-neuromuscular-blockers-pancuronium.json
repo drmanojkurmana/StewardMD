@@ -1,0 +1,216 @@
+{
+  "v": 1,
+  "module": "phm-neuromuscular-blockers",
+  "subject": "pharmacology",
+  "title": "Long-Acting Muscle Relaxants, Sugammadex Reversal, and Spasmolytics",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The historic long-acting bisquaternary aminosteroid non-depolarizing neuromuscular blocking agent is **pancuronium**. Providing complete skeletal muscle paralysis spanning ninety to one hundred twenty minutes, pancuronium is excreted predominantly by the kidneys. It uniquely exhibits vagolytic activity by blocking cardiac M2 muscarinic receptors and inducing sympathetic norepinephrine release, producing characteristic sinus tachycardia and hypertension that benefits cardiothoracic surgery while complicating ischemic heart disease.",
+      "say": "Pancuronium provides long-acting muscle paralysis but causes vagolytic sinus tachycardia and hypertension.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Pancuronium",
+          "Rocuronium"
+        ],
+        "rows": [
+          [
+            "Duration of block",
+            "Long (90 to 120 minutes)",
+            "Intermediate (30 to 45 minutes)"
+          ],
+          [
+            "Cardiovascular action",
+            "Vagolytic tachycardia and hypertension",
+            "Completely cardiovascularly neutral"
+          ],
+          [
+            "Renal elimination",
+            "80% unchanged in urine",
+            "Minimal (30% renal excretion)"
+          ],
+          [
+            "Clinical niche",
+            "Lengthy cardiac surgery bypass",
+            "Routine intubation and rapid-sequence induction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Instantaneous pharmacological reversal of rocuronium-induced and vecuronium-induced neuromuscular blockade is achieved using **sugammadex**. A chemically modified gamma-cyclodextrin with eight lipophilic cavity side chains, sugammadex encapsulates free steroidal neuromuscular blockers in plasma at a 1:1 molecular stoichiometry. This tight chelation lowers free drug concentration to zero, driving rapid dissociation of rocuronium from motor endplate receptors and restoring full voluntary muscle power within three minutes.",
+      "say": "Sugammadex encapsulates rocuronium in a 1:1 molecular ring, reversing profound paralysis within three minutes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Depth of neuromuscular block",
+          "Monitoring criteria",
+          "Sugammadex dosage"
+        ],
+        "rows": [
+          [
+            "Routine reversal",
+            "Reappearance of second twitch (T2)",
+            "2 mg/kg intravenously"
+          ],
+          [
+            "Deep block reversal",
+            "1 to 2 post-tetanic counts (PTC)",
+            "4 mg/kg intravenously"
+          ],
+          [
+            "Immediate emergency reversal",
+            "3 minutes after 1.2 mg/kg rocuronium",
+            "16 mg/kg intravenously"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The life-saving definitive antidote for malignant hyperthermia crises triggered by volatile anesthetics or succinylcholine is **dantrolene**. Functioning as a direct-acting skeletal muscle relaxant, dantrolene binds specifically to the ryanodine receptor type 1 (RyR1) on sarcoplasmic reticulum membranes. By blocking uncontrolled calcium release into the myoplasm, dantrolene terminates hypermetabolic muscle rigidity, lactic acidosis, rhabdomyolysis, and lethal body temperature spikes.",
+      "say": "Dantrolene blocks sarcoplasmic ryanodine receptors to halt uncontrolled calcium release in malignant hyperthermia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mut",
+            "label": "RyR1 ryanodine channel trigger by halothane or succinylcholine"
+          },
+          {
+            "id": "ca",
+            "label": "Unchecked myoplasmic calcium surge and hypermetabolism"
+          },
+          {
+            "id": "dan",
+            "label": "Intravenous dantrolene infusion binds RyR1"
+          },
+          {
+            "id": "res",
+            "label": "Sarcoplasmic Ca release blocked: Rigidity and hyperpyrexia abort"
+          }
+        ],
+        "edges": [
+          [
+            "mut",
+            "ca"
+          ],
+          [
+            "ca",
+            "dan"
+          ],
+          [
+            "dan",
+            "res"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Centrally acting antispasticity therapy for managing muscle rigidity in multiple sclerosis and spinal cord transection relies on **baclofen**. As a lipophilic derivative of gamma-aminobutyric acid, baclofen selectively stimulates metabotropic GABAB receptors coupled to Gi proteins in the spinal dorsal horn. Receptor activation increases potassium conductance and inhibits voltage-gated calcium channels, hyperpolarizing motor interneurons and suppressing mono- and polysynaptic spastic stretch reflexes.",
+      "say": "Baclofen activates spinal GABAB receptors to suppress hyperactive reflexes in spasticity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Baclofen mechanism",
+          "points": [
+            "Selective GABAB receptor agonist",
+            "Hyperpolarizes neurons via potassium efflux",
+            "Inhibits presynaptic excitatory transmitter release",
+            "Can be delivered via intrathecal pump"
+          ]
+        },
+        "right": {
+          "title": "Diazepam mechanism",
+          "points": [
+            "Positive allosteric modulator of GABAA receptors",
+            "Increases chloride channel opening frequency",
+            "Prominent sedative-hypnotic side effects",
+            "Risk of physical dependence and tolerance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Reducing spasticity without inducing severe voluntary skeletal muscle weakness is achieved with the centrally acting agent **tizanidine**. Tizanidine functions as a selective alpha-2 adrenergic agonist in the brainstem and spinal cord. By stimulating presynaptic alpha-2 receptors on spinal interneurons, it inhibits release of excitatory amino acids like aspartate and glutamate, diminishing painful flexor spasms with substantially less direct muscle flaccidity than baclofen.",
+      "say": "Tizanidine activates central alpha-2 receptors to suppress spastic reflexes while preserving voluntary muscle strength.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Spasmolytic agent",
+          "Primary target",
+          "Mechanism of action",
+          "Major side effect"
+        ],
+        "rows": [
+          [
+            "Baclofen",
+            "GABAB receptors",
+            "Spinal interneuron hyperpolarization",
+            "Sedation, muscle weakness, withdrawal seizures"
+          ],
+          [
+            "Tizanidine",
+            "Alpha-2 adrenergic",
+            "Presynaptic excitatory amino acid inhibition",
+            "Hypotension, dry mouth, hepatotoxicity"
+          ],
+          [
+            "Dantrolene",
+            "RyR1 ryanodine receptor",
+            "Direct inhibition of sarcoplasmic calcium release",
+            "Generalized muscle weakness, hepatotoxicity"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The historic natural plant alkaloid extracted from Chondrodendron tomentosum arrow poisons is **tubocurarine**. Functioning as the classical prototype non-depolarizing neuromuscular blocker, tubocurarine competitively antagonizes nicotinic acetylcholine receptors at the motor endplate. However, its tendency to induce profound histamine release and block autonomic sympathetic ganglia causes bronchospasm and severe hypotension, leading to its complete replacement by modern synthetic relaxants.",
+      "say": "Tubocurarine is the historical prototype competitive blocker that fell out of favor due to histamine release and hypotension.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tubocurarine",
+          "points": [
+            "Natural quaternary benzylisoquinoline alkaloid",
+            "Causes massive histamine release and flushing",
+            "Blocks autonomic ganglia producing hypotension",
+            "Prolonged duration with unpredictable recovery"
+          ]
+        },
+        "right": {
+          "title": "Modern non-depolarizing relaxants",
+          "points": [
+            "Synthetic aminosteroids and stereoisomers",
+            "Negligible or zero histamine release",
+            "Devoid of autonomic ganglion blockade",
+            "Predictable, reversible intermediate durations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Non-depolarizing muscle relaxants achieve flaccid surgical paralysis through competitive antagonism at the **skeletal motor endplate**. Competitive blockers bind to one or both alpha subunits of the pentameric nicotinic acetylcholine receptor without triggering channel opening. By physically obstructing acetylcholine access, they prevent endplate depolarization; when seventy-five to eighty percent of receptors are occupied, transmission fails and voluntary muscular contraction ceases completely.",
+      "say": "Competitive blockers occupy motor endplate nicotinic receptors, preventing acetylcholine from opening cation channels.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/myasthenia-gravis-fig1.webp",
+        "alt": "Skeletal motor endplate receptor architecture",
+        "caption": "Postjunctional nicotinic acetylcholine receptor targets on folded skeletal muscle motor endplate membranes."
+      }
+    },
+    {
+      "tx": "Objective clinical quantification of intraoperative neuromuscular blockade depth requires electric peripheral nerve stimulation and the **train-of-four ratio**. Four supramaximal electrical impulses delivered at two hertz to the ulnar nerve evoke adductor pollicis twitches. Non-depolarizing relaxants cause progressive twitch fade; clinical recovery sufficient for safe tracheal extubation requires a train-of-four ratio of the fourth twitch height to first twitch exceeding 0.9.",
+      "say": "Safe tracheal extubation requires a train-of-four ratio over 0.9 to prevent postoperative respiratory failure.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/nmj-endplate-myasthenia-blockers-fig1.webp",
+        "alt": "Motor endplate transmission and monitoring",
+        "caption": "Train-of-four monitoring assesses motor endplate nicotinic receptor recovery to guide safe reversal and extubation."
+      }
+    }
+  ]
+}

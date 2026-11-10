@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "phm-sedative-hypnotics",
+  "subject": "pharmacology",
+  "title": "Ethanol, Disulfiram, Methanol Poisoning and Alcohol Dependence Treatments",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Ethanol** is a small promiscuous molecule that enhances GABA A inhibition, blocks NMDA glutamate excitation and touches dopamine reward circuitry, producing dose climbing disinhibition, ataxia, respiratory depression and coma. Its metabolism by alcohol dehydrogenase to acetaldehyde then aldehyde dehydrogenase to acetate runs at a fixed zero order pace of roughly one standard drink per hour, immune to coffee, cold showers and willpower. Chronic induction of the microsomal MEOS pathway accelerates tolerance and drug interactions.",
+      "say": "Ethanol sedates by GABA and excites reward by dopamine, and leaves at one drink an hour whatever you do.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/alcohol-and-alcohol-use-disorders-fig1.webp",
+        "alt": "Ethanol metabolism pathways diagram showing alcohol dehydrogenase, acetaldehyde and MEOS",
+        "caption": "Ethanol metabolism through acetaldehyde, the pathway disulfiram blocks and methanol competes for."
+      }
+    },
+    {
+      "tx": "**Disulfiram** irreversibly inhibits aldehyde dehydrogenase, so drinking on it floods the drinker with acetaldehyde: flushing, throbbing headache, vomiting, palpitations and hypotension within minutes, lasting hours. Prescribed as aversive deterrent therapy to patients who choose abstinence with full knowledge, it demands alcohol abstinence including sauces, mouthwashes and aftershaves, and its effect persists up to two weeks after the last tablet while new enzyme is synthesised. Liver enzymes and neuropathy are monitored on long courses.",
+      "say": "Disulfiram makes one drink a punishment by trapping acetaldehyde; the effect outlives the tablet by two weeks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "disu",
+            "label": "Disulfiram irreversibly blocks aldehyde dehydrogenase"
+          },
+          {
+            "id": "drink",
+            "label": "Alcohol consumed, acetaldehyde accumulates"
+          },
+          {
+            "id": "reaction",
+            "label": "Flushing, vomiting, palpitations and hypotension"
+          },
+          {
+            "id": "persist",
+            "label": "Risk persists up to 14 days after stopping"
+          }
+        ],
+        "edges": [
+          [
+            "disu",
+            "drink"
+          ],
+          [
+            "drink",
+            "reaction"
+          ],
+          [
+            "reaction",
+            "persist"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Methanol poisoning** is ethanol metabolism weaponised in reverse: methanol itself mildly intoxicates, but alcohol dehydrogenase converts it to formaldehyde and formic acid, which destroy the retina (snow field vision progressing to blindness) and drive a profound high anion gap metabolic acidosis with basal ganglia injury. Sources are adulterated spirits, antifreeze and solvents, and outbreaks still kill where illicit liquor circulates. Osmolal gap early, anion gap late, is the biochemical clock.",
+      "say": "Methanol blinds through formic acid after a deceptive latent interval; the gaps tell you where the clock stands.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Methanol poisoning course",
+          "points": [
+            "Latent 12 to 24 hours after ingestion",
+            "Visual snow, photophobia progressing to blindness",
+            "High anion gap acidosis, abdominal pain",
+            "Basal ganglia haemorrhage and necrosis on imaging"
+          ]
+        },
+        "right": {
+          "title": "Bedside chemistry clock",
+          "points": [
+            "Early: osmolal gap raised, anion gap normal",
+            "Late: osmolal gap normalises, anion gap soars",
+            "Formate levels confirm where available",
+            "Ethylene glycol sibling: oxalate crystals, kidney failure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Treatment blocks the enzyme before it poisons: **fomepizole**, a potent alcohol dehydrogenase inhibitor without ethanol's intoxication, is first line where stocked, dosed to methanol or ethylene glycol levels and continued through haemodialysis, which removes parent alcohols and acids while correcting acidosis. Ethanol itself, titrated to 100 to 150 mg per dl, is the older competitive substrate where fomepizole is unavailable. Folinic acid accelerates formate disposal; delays cost retinas, so treatment starts on suspicion.",
+      "say": "Fomepizole freezes the enzyme, dialysis clears the poison, folate burns the formate; start on suspicion, not confirmation.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-poisoning-antidotes.webp",
+        "alt": "Five panels showing antidotes for common paediatric poisonings",
+        "caption": "Antidote panels for common poisonings, the family to which fomepizole belongs for toxic alcohols. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Relapse prevention after detoxification divides by mechanism: **acamprosate**, a glutamate modulating agent dosed three times daily and renally cleared, steadies the hyperexcitable post alcohol brain and improves abstinence rates modestly, safe in liver disease; **naltrexone**, a mu opioid receptor antagonist daily or monthly depot, blunts alcohol's reward and reduces heavy drinking days, demanding opioid freedom and liver enzyme respect. Disulfiram's aversion completes the trio for supervised, motivated abstinence.",
+      "say": "Acamprosate calms the glutamate storm, naltrexone mutes the reward, disulfiram threatens the consequence; match drug to patient.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acamprosate",
+          "points": [
+            "Glutamate modulation, restores excitatory balance",
+            "Three times daily, renally cleared",
+            "Safe in liver disease, started after detoxification",
+            "Diarrhoea the commonest adverse effect"
+          ]
+        },
+        "right": {
+          "title": "Naltrexone",
+          "points": [
+            "Mu opioid antagonism blunts alcohol reward",
+            "Daily tablet or monthly depot injection",
+            "Reduces heavy drinking days in trials",
+            "Blocks opioids: pain planning and alert cards needed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Alcohol withdrawal is the sedative lessons applied at full stakes: chronic ethanol's GABA enhancement and NMDA suppression adapt the brain, so cessation unleashes tremor, autonomic storm, seizures at 24 to 48 hours and delirium tremens at 48 to 96, treated with benzodiazepine tapers (symptom triggered where monitoring allows), thiamine before glucose against Wernicke encephalopathy, and electrolyte correction. The same **ethanol** pharmacology that sedates acutely kills by rebound excitation when withdrawn abruptly from the dependent brain.",
+      "say": "Withdrawal is rebound excitation on a timetable; benzodiazepines, thiamine first, and watch days two to four.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/alcohol-withdrawal-fig1.webp",
+        "alt": "Alcohol withdrawal pathophysiology diagram showing glutamate surge after chronic GABA adaptation",
+        "caption": "Alcohol withdrawal pathophysiology: adapted GABA and glutamate systems rebounding into excitotoxicity."
+      }
+    },
+    {
+      "tx": "**Genetic pharmacology** writes population patterns: ALDH2 deficiency, common in East Asian populations, traps acetaldehyde after drinking and produces the alcohol flush reaction with markedly elevated upper aerodigestive cancer risk in those who drink through it, nature's disulfiram with carcinogenic interest. Metronidazole, certain cephalosporins and sulfonylureas carry disulfiram like warnings of variable reliability, yet counselling patients on them to abstain remains cheap insurance.",
+      "say": "The East Asian flush is inherited disulfiram; drinking through it trades pleasure for cancer risk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ALDH2 deficiency",
+          "points": [
+            "Acetaldehyde accumulation after small intake",
+            "Flushing, tachycardia and nausea",
+            "Reduced alcohol dependence rates protectively",
+            "Higher oesophageal cancer risk in persistent drinkers"
+          ]
+        },
+        "right": {
+          "title": "Drug induced equivalents",
+          "points": [
+            "Disulfiram: deliberate and longest lasting",
+            "Metronidazole and some cephalosporins: debated, counselled",
+            "Chlorpropamide historically notorious",
+            "Abstinence advice costs nothing beside any of them"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Acute ethanol intoxication** management is protective, not corrective: airway and aspiration precautions, glucose checked and thiamine given, other sedatives and trauma surveyed, and observation while zero order clearance proceeds at its unhurried pace. There is no ethanol antagonist; flumazenil does not reverse it. The examination contrast is deliberate: benzodiazepines have flumazenil, opioids naloxone, toxic alcohols fomepizole, and ethanol only time and vigilance.",
+      "say": "No antidote reverses drunkenness; protect the airway, feed thiamine, and let the fixed clearance run.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "coma",
+            "label": "Ethanol intoxication with depressed consciousness"
+          },
+          {
+            "id": "airway",
+            "label": "Airway protection, lateral position, aspiration precautions"
+          },
+          {
+            "id": "thiam",
+            "label": "Thiamine and glucose checked and corrected"
+          },
+          {
+            "id": "time",
+            "label": "Observation while zero order clearance proceeds"
+          }
+        ],
+        "edges": [
+          [
+            "coma",
+            "airway"
+          ],
+          [
+            "airway",
+            "thiam"
+          ],
+          [
+            "thiam",
+            "time"
+          ]
+        ]
+      }
+    }
+  ]
+}

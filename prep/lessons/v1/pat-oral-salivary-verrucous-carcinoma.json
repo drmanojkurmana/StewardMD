@@ -1,0 +1,194 @@
+{
+  "v": 1,
+  "module": "pat-oral-salivary",
+  "subject": "pathology",
+  "title": "Verrucous Carcinoma and Pleomorphic Adenoma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Verrucous carcinoma grows as a broad warty exophytic mass of extremely well differentiated squamous epithelium pushing rather than infiltrating, rarely metastasising yet locally destructive in tobacco chewers' mouths. The pushing warty cancer is **verrucous carcinoma (Ackerman tumour)**. Buccal mucosa in tobacco chewers and gingiva in older women are favoured oral sites.",
+      "say": "A broad warty pushing mass that never metastasises is verrucous carcinoma; surgery, not radiation debate, cures it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Verrucous carcinoma",
+          "points": [
+            "Warty exophytic, pushing border",
+            "Minimal atypia, no metastasis habit",
+            "Wide surgical excision curative"
+          ]
+        },
+        "right": {
+          "title": "Conventional squamous carcinoma",
+          "points": [
+            "Infiltrative nests, nodal spread",
+            "Atypia and invasion obvious",
+            "Stage driven multimodal therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Biopsy depth betrays verrucous carcinoma diagnosis: superficial shaves show only bland hyperkeratosis, so deep incisional samples including the pushing base are required before malignancy is acquitted. Sampling depth principle is **deep biopsy in verrucous lesions**. Broad pushing rete ridges with keratin plugging at the base clinch the histological diagnosis.",
+      "say": "Shave biopsies acquit verrucous carcinoma falsely; sample deep enough to judge its pushing base.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/oral-cancer-fig1.webp",
+        "alt": "Oral cancer presentations",
+        "caption": "Oral cancer presentations including exophytic verrucous growth patterns."
+      }
+    },
+    {
+      "tx": "Hybrid tumours mixing verrucous surface with conventional squamous carcinoma pockets metastasise like their worse half, so thorough sampling of resected specimens searches for conventional areas. That search defines **hybrid verrucous carcinoma sampling**. Hybrid tumours occur in up to a fifth of cases, justifying exhaustive block sampling after excision.",
+      "say": "Hunt conventional pockets inside verrucous tumours; the worst area writes the prognosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Pure verrucous",
+          "Hybrid tumour"
+        ],
+        "rows": [
+          [
+            "Metastasis",
+            "Essentially never",
+            "Follows conventional component"
+          ],
+          [
+            "Radiotherapy",
+            "Reserved, transformation debated",
+            "By conventional staging"
+          ],
+          [
+            "Surgery",
+            "Wide local excision",
+            "Plus neck management by stage"
+          ],
+          [
+            "Sampling duty",
+            "Confirm pushing base",
+            "Exclude conventional invasion widely"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pleomorphic adenoma, commonest salivary tumour overall, forms a painless slow parotid mass of epithelial and myoepithelial cells in chondromyxoid stroma, benign yet capsularly deceptive. The mixed tumour returns as **pleomorphic adenoma, commonest salivary neoplasm**. The parotid tail is its favourite home, and most patients notice a painless lump behind the jaw angle.",
+      "say": "A slow painless parotid lump is pleomorphic adenoma until histology speaks; plan surgery around the facial nerve.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/salivary-gland-disorders-ent-fig1.webp",
+        "alt": "Salivary gland disorders",
+        "caption": "Salivary gland disorders including pleomorphic adenoma presentation."
+      }
+    },
+    {
+      "tx": "Pseudopods breach pleomorphic adenoma's capsule invisibly, so enucleation seeds multifocal recurrence a decade later while proper superficial parotidectomy with nerve preservation cures primarily. That surgical moral is **capsular pseudopods in pleomorphic adenoma excision**. Recurrence after simple enucleation was historically reported in a quarter or more of cases.",
+      "say": "Shelling out pleomorphic adenoma plants its recurrence; excise with a tissue cuff and the nerve preserved.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Parotid mass assessed, FNAC sampled"
+          },
+          {
+            "id": "b",
+            "label": "Facial nerve mapped and preserved"
+          },
+          {
+            "id": "c",
+            "label": "Superficial parotidectomy with cuff"
+          },
+          {
+            "id": "d",
+            "label": "Histology confirms, surveillance brief"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Carcinoma ex pleomorphic adenoma transforms longstanding or recurrent adenomas, announced by rapid growth, pain, or facial weakness in a previously quiet parotid mass of many years. That awakening defines **carcinoma ex pleomorphic adenoma**. Noninvasive carcinoma ex adenoma stays curable by complete excision, unlike widely invasive transformation.",
+      "say": "A ten year parotid lump suddenly growing or weakening the face has transformed until proven otherwise.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Quiet adenoma",
+          "points": [
+            "Years of slow painless growth",
+            "Mobile, nerve intact",
+            "Elective nerve sparing surgery"
+          ]
+        },
+        "right": {
+          "title": "Transformed tumour",
+          "points": [
+            "Rapid growth, pain, nerve palsy",
+            "Fixation, nodes possible",
+            "Cancer surgery and staging"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Facial nerve function grades parotid mass urgency: weakness almost never accompanies benign disease and therefore declares malignancy until histology acquits. That bedside rule is **facial palsy in parotid mass means malignancy**. Preoperative facial mapping documents baseline function before consent for parotid surgery is signed.",
+      "say": "A parotid lump with facial weakness is malignant until proven otherwise; benign tumours spare the nerve.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/oral-cavity-and-salivary-glands-fig1.webp",
+        "alt": "Oral cavity and salivary glands anatomy and histology",
+        "caption": "Salivary gland anatomy centred on parotid and facial nerve relations."
+      }
+    },
+    {
+      "tx": "Fine needle aspiration triages salivary masses into inflammatory, benign, suspicious, and malignant categories guiding surgery, while core biopsy serves selected cases respecting nerve and seeding concerns. That triage is **salivary mass cytology by Milan system thinking**. Milan categories carry graded malignancy risks, letting cytology shape how radical the first operation becomes.",
+      "say": "Cytology sorts salivary lumps before surgery; a malignant report changes consent, nerve planning, and neck management.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cytology category",
+          "Meaning",
+          "Surgical effect"
+        ],
+        "rows": [
+          [
+            "Non-neoplastic",
+            "Sialadenitis, cysts",
+            "Conservative options open"
+          ],
+          [
+            "Benign neoplasm",
+            "Pleomorphic or Warthin pattern",
+            "Nerve sparing excision"
+          ],
+          [
+            "Suspicious for malignancy",
+            "Atypia, cannot exclude",
+            "Cancer consent, frozen section plan"
+          ],
+          [
+            "Malignant",
+            "Carcinoma named",
+            "Oncological resection and staging"
+          ]
+        ]
+      }
+    }
+  ]
+}

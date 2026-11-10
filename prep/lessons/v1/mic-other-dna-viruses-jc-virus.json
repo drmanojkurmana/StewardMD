@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-other-dna-viruses",
+  "subject": "microbiology",
+  "title": "JC Virus, BK Virus, Parvovirus B19 and Aplastic Crisis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**JC virus** causes progressive multifocal leukoencephalopathy when cellular immunity is profoundly impaired. It infects oligodendrocytes, destroying myelin in multiple cerebral white-matter areas without a strong inflammatory response in many patients. Subacute focal weakness, visual loss, gait disturbance and cognitive change progress over weeks. MRI shows asymmetric subcortical lesions without the mass effect expected from tumour or abscess.",
+      "say": "PML is JC virus demyelination released by failed cellular immune surveillance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Risk settings",
+          "points": [
+            "Advanced HIV",
+            "Natalizumab and other potent immunotherapies",
+            "Haematologic malignancy",
+            "Transplant immunosuppression"
+          ]
+        },
+        "right": {
+          "title": "Diagnosis",
+          "points": [
+            "Compatible MRI white matter lesions",
+            "CSF JC virus PCR",
+            "Brain biopsy when molecular test is negative but suspicion remains",
+            "No dependable direct antiviral treatment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**BK polyomavirus** reactivates in the urinary tract after transplantation. In kidney recipients, tubular infection and inflammation can progress to BK nephropathy and graft loss. Plasma BK DNA screening catches rising replication before creatinine rises. The central intervention is careful reduction of immunosuppression, balancing rejection risk; urine decoy cells are suggestive but cannot alone prove nephropathy, which may need biopsy.",
+      "say": "Rising plasma BK DNA is an early warning to lower immunosuppression before graft injury advances.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "BK urinary disease",
+          "points": [
+            "Viruria common and often harmless",
+            "Viraemia predicts nephropathy risk better",
+            "Haemorrhagic cystitis in stem cell recipients",
+            "Ureteric stenosis can occur"
+          ]
+        },
+        "right": {
+          "title": "Control principles",
+          "points": [
+            "Routine plasma DNA monitoring",
+            "Stepwise reduction in immunosuppression",
+            "Biopsy for graft dysfunction when indicated",
+            "Adjunct drugs lack strong universal evidence"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Parvovirus B19** is a small single-stranded DNA virus that infects erythroid progenitors through blood group P antigen. It halts red cell production for about a week. Healthy people may barely notice, but those with haemolysis or high red-cell turnover can develop transient aplastic crisis. Immunocompromised patients unable to make neutralising antibody may develop chronic pure red cell aplasia.",
+      "say": "B19 stops the erythroid factory briefly; short red cell survival turns that pause into crisis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pathogenesis",
+          "points": [
+            "P antigen or globoside is the receptor",
+            " Pronormoblasts are infected and lysed",
+            "Reticulocyte count falls sharply",
+            "Giant pronoblasts may be seen in marrow"
+          ]
+        },
+        "right": {
+          "title": "High-risk hosts",
+          "points": [
+            "Sickle cell disease",
+            "Hereditary spherocytosis and thalassaemia",
+            "Chronic haemolysis of any cause",
+            "Immunodeficiency with persistent viraemia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Erythema infectiosum**, or fifth disease, causes a slapped cheek facial rash followed by a lacy reticular rash on limbs and trunk in children. Adults more often develop symmetric small joint arthropathy, sometimes without the childhood rash. By the time the immune-mediated rash appears, patients are usually no longer highly infectious. Respiratory spread occurs earlier and is difficult to recognise.",
+      "say": "The slapped cheek arrives after the most infectious phase in parvovirus B19.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Childhood pattern",
+          "points": [
+            "Bright red cheeks",
+            "Lacy rash on extensor surfaces",
+            "Mild fever or no prodrome",
+            "Rash may recur with heat or sunlight"
+          ]
+        },
+        "right": {
+          "title": "Adult pattern",
+          "points": [
+            "Symmetric arthralgia of hands, wrists and knees",
+            "Rash less prominent",
+            "Can mimic early rheumatoid arthritis",
+            "Usually self limited over weeks"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "During pregnancy, **B19** can cross the placenta, infect fetal erythroid tissue and myocardium, and cause severe anaemia, hydrops fetalis or fetal loss, especially in the first half of pregnancy. Maternal IgM and PCR support recent infection. Ultrasound looks for hydrops and middle cerebral artery Doppler evidence of fetal anaemia; intrauterine transfusion can be lifesaving. Most maternal infections do not cause severe fetal disease.",
+      "say": "Pregnancy B19 matters because fetal red cell production has little reserve.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "exposure",
+            "label": "Maternal exposure or illness"
+          },
+          {
+            "id": "serology",
+            "label": "B19 IgM and IgG or PCR"
+          },
+          {
+            "id": "doppler",
+            "label": "Serial fetal anaemia surveillance"
+          },
+          {
+            "id": "transfuse",
+            "label": "Intrauterine transfusion if severe"
+          }
+        ],
+        "edges": [
+          [
+            "exposure",
+            "serology"
+          ],
+          [
+            "serology",
+            "doppler"
+          ],
+          [
+            "doppler",
+            "transfuse"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Diagnosis of acute **aplastic crisis** shows anaemia with an inappropriately low reticulocyte count during B19 activity. B19 IgM or high-level DNA supports recent infection; immunocompromised chronic infection often needs PCR because antibody may be absent. Intravenous immunoglobulin can clear persistent B19 in antibody deficiency by supplying neutralising antibody. Transfusion support bridges the normal week-long production pause in transient crisis.",
+      "say": "Low reticulocytes during B19 separates production failure from peripheral haemolysis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transient crisis",
+          "points": [
+            "Underlying chronic haemolysis",
+            " abrupt haemoglobin fall",
+            "Reticulocytopenia",
+            "Recovery as neutralising antibody appears"
+          ]
+        },
+        "right": {
+          "title": "Chronic infection",
+          "points": [
+            "Persistent pure red cell aplasia",
+            "Antibody response inadequate",
+            "PCR often strongly positive",
+            "IVIG can induce remission"
+          ]
+        }
+      }
+    }
+  ]
+}

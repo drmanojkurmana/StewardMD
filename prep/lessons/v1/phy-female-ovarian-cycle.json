@@ -1,237 +1,237 @@
 {
- "v": 1,
- "module": "phy-female",
- "subject": "physiology",
- "title": "The Ovarian Cycle, Folliculogenesis, and the LH Surge",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "The normal female reproductive cycle operates under periodic hypothalamic gonadotropin-releasing hormone pulses that drive anterior pituitary gonadotropin secretion. Over an average twenty-eight-day duration, rhythmic follicular maturation, ovulation, and luteal transformation define the **ovarian cycle**, establishing coordinate hormonal fluctuations that simultaneously direct uterine endometrial development and prepare maternal tissues for potential pregnancy.",
-   "say": "The ovarian cycle coordinates follicular growth, ovulation, and luteal transformation under pulsatile pituitary gonadotropin drive.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "gnrh",
-      "label": "Pulsatile Hypothalamic GnRH Secretion into Portal Circulation"
-     },
-     {
-      "id": "pit",
-      "label": "Anterior Pituitary Secretes Pulsatile FSH and LH Glycoproteins"
-     },
-     {
-      "id": "ovary",
-      "label": "Ovarian Folliculogenesis, Steroidogenesis, and Oocyte Maturation"
-     },
-     {
-      "id": "endometrium",
-      "label": "Endometrial Cycling Synchronized with Ovarian Steroid Waves"
-     }
-    ],
-    "edges": [
-     [
-      "gnrh",
-      "pit"
-     ],
-     [
-      "pit",
-      "ovary"
-     ],
-     [
-      "ovary",
-      "endometrium"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "During the initial twelve to fourteen days of the ovarian cycle, follicle-stimulating hormone stimulates the recruitment and growth of a cohort of antral follicles. Under progressive gonadotropin support, granulosa cells proliferate and secrete follicular fluid, constituting the **follicular phase** of the cycle where a single dominant Graafian follicle emerges while subordinate follicles undergo apoptotic atresia.",
-   "say": "FSH drives granulosa cell proliferation and fluid accumulation during the follicular phase, selecting a single dominant follicle.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/menstrual-cycle-reproductive-hormones-fig1.webp",
-    "caption": "The 28-day menstrual cycle aligned: gonadotropin surges, follicular development through ovulation to corpus luteum, steroid levels and endometrial change. Illustration: StewardMD original.",
-    "alt": "Structural and ovulatory causes of abnormal uterine bleeding"
-   }
-  },
-  {
-   "tx": "As the dominant follicle enlarges, its proliferating granulosa layer secretes progressively mounting concentrations of estradiol. When sustained circulating estradiol concentrations exceed two hundred picograms per milliliter for more than thirty-six hours, pituitary feedback paradoxically switches from negative to positive, triggering the explosive **LH surge** that initiates resumption of oocyte meiosis.",
-   "say": "High sustained estradiol levels trigger positive pituitary feedback, producing the massive LH surge that drives ovulation.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "granulosa",
-      "label": "Granulosa Cells Produce Rising Concentrations of 17-Beta Estradiol"
-     },
-     {
-      "id": "threshold",
-      "label": "Circulating Estradiol Surpasses Critical 200 pg/mL Threshold for >36 Hours"
-     },
-     {
-      "id": "pos_feedback",
-      "label": "Hypothalamic-Pituitary Switch to Positive Feedback Stimulates GnRH Receptors"
-     },
-     {
-      "id": "surge",
-      "label": "Explosive Preovulatory Surge of Luteinizing Hormone with Secondary FSH Peak"
-     }
-    ],
-    "edges": [
-     [
-      "granulosa",
-      "threshold"
-     ],
-     [
-      "threshold",
-      "pos_feedback"
-     ],
-     [
-      "pos_feedback",
-      "surge"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Approximately thirty-four to thirty-six hours following the onset of the luteinizing hormone surge, follicular rupture expels the cumulus-oocyte complex into the peritoneal cavity. This mechanical and enzymatic extrusion of the mature secondary oocyte arrested in metaphase two represents **ovulation**, facilitated by prostaglandin-mediated local vasodilation and collagenase digestion of the follicular apex.",
-   "say": "Ovulation expels the mature secondary oocyte thirty-six hours after the LH surge begins, aided by collagenase enzymes.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Preovulatory Follicular Events",
-     "points": [
-      "Granulosa cells express LH receptors under FSH stimulation",
-      "Local prostaglandins and histamine increase follicular blood flow",
-      "Collagenase dissolves tunica albuginea and theca externa",
-      "Follicular stigma bulges on ovarian surface prior to rupture"
-     ]
+  "v": 1,
+  "module": "phy-female",
+  "subject": "physiology",
+  "title": "The Ovarian Cycle, Folliculogenesis, and the LH Surge",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The normal female reproductive cycle operates under periodic hypothalamic gonadotropin-releasing hormone pulses that drive anterior pituitary gonadotropin secretion. Over an average twenty-eight-day duration, rhythmic follicular maturation, ovulation, and luteal transformation define the **ovarian cycle**, establishing coordinate hormonal fluctuations that simultaneously direct uterine endometrial development and prepare maternal tissues for potential pregnancy.",
+      "say": "The ovarian cycle coordinates follicular growth, ovulation, and luteal transformation under pulsatile pituitary gonadotropin drive.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "gnrh",
+            "label": "Pulsatile Hypothalamic GnRH Secretion into Portal Circulation"
+          },
+          {
+            "id": "pit",
+            "label": "Anterior Pituitary Secretes Pulsatile FSH and LH Glycoproteins"
+          },
+          {
+            "id": "ovary",
+            "label": "Ovarian Folliculogenesis, Steroidogenesis, and Oocyte Maturation"
+          },
+          {
+            "id": "endometrium",
+            "label": "Endometrial Cycling Synchronized with Ovarian Steroid Waves"
+          }
+        ],
+        "edges": [
+          [
+            "gnrh",
+            "pit"
+          ],
+          [
+            "pit",
+            "ovary"
+          ],
+          [
+            "ovary",
+            "endometrium"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Post-Rupture Extrusion Events",
-     "points": [
-      "Oocyte completes first meiotic division with first polar body extrusion",
-      "Secondary oocyte arrests in metaphase of second meiosis",
-      "Cumulus-oocyte complex sweeps into fallopian tube fimbriae",
-      "Ruptured follicle collapses and hemorrhages into antral cavity"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Following follicular rupture, the collapsed follicle wall undergoes extensive vascularization and luteinization of its granulosa and theca cells under the trophic support of luteinizing hormone. The resulting endocrine gland is the **corpus luteum**, which rapidly assumes intense steroidogenic output to dominate the second half of the ovarian cycle.",
-   "say": "The ruptured follicle transforms into the vascularized corpus luteum, which secretes abundant progesterone and estrogen.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/practicals/obg-drug-hcg.webp",
-    "caption": "Preovulatory Graafian follicle with oocyte, hCG receptor signalling and formation of the corpus luteum after ovulation. [Credit: StewardMD]",
-    "alt": "Endometrial shedding and steroid hormone withdrawal patterns"
-   }
-  },
-  {
-   "tx": "Granulosa lutein cells within the corpus luteum synthesize and release large quantities of progesterone, supported by modest amounts of estradiol and inhibin A. Circulating **progesterone** converts estrogen-primed proliferative endometrium into a tortuous, glycogen-rich secretory mucosa, while simultaneously exerting potent negative feedback on hypothalamic gonadotropin-releasing hormone release to suppress new follicular recruitment.",
-   "say": "Progesterone from granulosa lutein cells turns the endometrium secretory while suppressing new follicular development.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "luteal_cells",
-      "label": "Granulosa Lutein Cells Express LDL Receptors and StAR Protein"
-     },
-     {
-      "id": "prog_synth",
-      "label": "Mitochondrial Cholesterol Side-Chain Cleavage Produces Progesterone"
-     },
-     {
-      "id": "endo_effect",
-      "label": "Endometrial Glands Become Tortuous with Glycogen-Rich Secretions"
-     },
-     {
-      "id": "neg_feedback",
-      "label": "Progesterone Suppresses Hypothalamic GnRH Pulse Frequency"
-     }
-    ],
-    "edges": [
-     [
-      "luteal_cells",
-      "prog_synth"
-     ],
-     [
-      "prog_synth",
-      "endo_effect"
-     ],
-     [
-      "prog_synth",
-      "neg_feedback"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "If fertilisation and blastocyst implantation fail to occur, the absence of chorionic gonadotropin leads to autonomous regression of the corpus luteum approximately ten to twelve days after ovulation. As steroidogenesis terminates, the gland involutes into a fibrous avascular scar termed the **corpus albicans**, removing negative feedback inhibition on pituitary gonadotropin release.",
-   "say": "Without pregnancy, the corpus luteum regresses into a fibrous corpus albicans, allowing FSH levels to rise again.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Luteal Involution (No Pregnancy)",
-     "points": [
-      "Corpus luteum lifespan is fixed at twelve to fourteen days",
-      "Local endothelin-1 and PGF2-alpha promote luteolysis",
-      "Steroid hormone concentrations crash abruptly",
-      "Involutes into white fibrous connective tissue corpus albicans"
-     ]
+    {
+      "tx": "During the initial twelve to fourteen days of the ovarian cycle, follicle-stimulating hormone stimulates the recruitment and growth of a cohort of antral follicles. Under progressive gonadotropin support, granulosa cells proliferate and secrete follicular fluid, constituting the **follicular phase** of the cycle where a single dominant Graafian follicle emerges while subordinate follicles undergo apoptotic atresia.",
+      "say": "FSH drives granulosa cell proliferation and fluid accumulation during the follicular phase, selecting a single dominant follicle.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/menstrual-cycle-reproductive-hormones-fig1.webp",
+        "caption": "The 28-day menstrual cycle aligned: gonadotropin surges, follicular development through ovulation to corpus luteum, steroid levels and endometrial change. Illustration: StewardMD original.",
+        "alt": "Structural and ovulatory causes of abnormal uterine bleeding"
+      }
     },
-    "right": {
-     "title": "Luteal Rescue (Pregnancy)",
-     "points": [
-      "Implanting syncytiotrophoblast secretes chorionic gonadotropin (hCG)",
-      "hCG binds LH receptors to maintain corpus luteum viability",
-      "High progesterone output maintained through first trimester",
-      "Placental steroidogenesis assumes maintenance by eight to ten weeks"
-     ]
+    {
+      "tx": "As the dominant follicle enlarges, its proliferating granulosa layer secretes progressively mounting concentrations of estradiol. When sustained circulating estradiol concentrations exceed two hundred picograms per milliliter for more than thirty-six hours, pituitary feedback paradoxically switches from negative to positive, triggering the explosive **LH surge** that initiates resumption of oocyte meiosis.",
+      "say": "High sustained estradiol levels trigger positive pituitary feedback, producing the massive LH surge that drives ovulation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "granulosa",
+            "label": "Granulosa Cells Produce Rising Concentrations of 17-Beta Estradiol"
+          },
+          {
+            "id": "threshold",
+            "label": "Circulating Estradiol Surpasses Critical 200 pg/mL Threshold for >36 Hours"
+          },
+          {
+            "id": "pos_feedback",
+            "label": "Hypothalamic-Pituitary Switch to Positive Feedback Stimulates GnRH Receptors"
+          },
+          {
+            "id": "surge",
+            "label": "Explosive Preovulatory Surge of Luteinizing Hormone with Secondary FSH Peak"
+          }
+        ],
+        "edges": [
+          [
+            "granulosa",
+            "threshold"
+          ],
+          [
+            "threshold",
+            "pos_feedback"
+          ],
+          [
+            "pos_feedback",
+            "surge"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Approximately thirty-four to thirty-six hours following the onset of the luteinizing hormone surge, follicular rupture expels the cumulus-oocyte complex into the peritoneal cavity. This mechanical and enzymatic extrusion of the mature secondary oocyte arrested in metaphase two represents **ovulation**, facilitated by prostaglandin-mediated local vasodilation and collagenase digestion of the follicular apex.",
+      "say": "Ovulation expels the mature secondary oocyte thirty-six hours after the LH surge begins, aided by collagenase enzymes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Preovulatory Follicular Events",
+          "points": [
+            "Granulosa cells express LH receptors under FSH stimulation",
+            "Local prostaglandins and histamine increase follicular blood flow",
+            "Collagenase dissolves tunica albuginea and theca externa",
+            "Follicular stigma bulges on ovarian surface prior to rupture"
+          ]
+        },
+        "right": {
+          "title": "Post-Rupture Extrusion Events",
+          "points": [
+            "Oocyte completes first meiotic division with first polar body extrusion",
+            "Secondary oocyte arrests in metaphase of second meiosis",
+            "Cumulus-oocyte complex sweeps into fallopian tube fimbriae",
+            "Ruptured follicle collapses and hemorrhages into antral cavity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Following follicular rupture, the collapsed follicle wall undergoes extensive vascularization and luteinization of its granulosa and theca cells under the trophic support of luteinizing hormone. The resulting endocrine gland is the **corpus luteum**, which rapidly assumes intense steroidogenic output to dominate the second half of the ovarian cycle.",
+      "say": "The ruptured follicle transforms into the vascularized corpus luteum, which secretes abundant progesterone and estrogen.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-hcg.webp",
+        "caption": "Corpus luteum formation after ovulation under hCG signalling. [Credit: StewardMD]",
+        "alt": "Corpus luteum formation after ovulation under hCG signalling."
+      }
+    },
+    {
+      "tx": "Granulosa lutein cells within the corpus luteum synthesize and release large quantities of progesterone, supported by modest amounts of estradiol and inhibin A. Circulating **progesterone** converts estrogen-primed proliferative endometrium into a tortuous, glycogen-rich secretory mucosa, while simultaneously exerting potent negative feedback on hypothalamic gonadotropin-releasing hormone release to suppress new follicular recruitment.",
+      "say": "Progesterone from granulosa lutein cells turns the endometrium secretory while suppressing new follicular development.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "luteal_cells",
+            "label": "Granulosa Lutein Cells Express LDL Receptors and StAR Protein"
+          },
+          {
+            "id": "prog_synth",
+            "label": "Mitochondrial Cholesterol Side-Chain Cleavage Produces Progesterone"
+          },
+          {
+            "id": "endo_effect",
+            "label": "Endometrial Glands Become Tortuous with Glycogen-Rich Secretions"
+          },
+          {
+            "id": "neg_feedback",
+            "label": "Progesterone Suppresses Hypothalamic GnRH Pulse Frequency"
+          }
+        ],
+        "edges": [
+          [
+            "luteal_cells",
+            "prog_synth"
+          ],
+          [
+            "prog_synth",
+            "endo_effect"
+          ],
+          [
+            "prog_synth",
+            "neg_feedback"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "If fertilisation and blastocyst implantation fail to occur, the absence of chorionic gonadotropin leads to autonomous regression of the corpus luteum approximately ten to twelve days after ovulation. As steroidogenesis terminates, the gland involutes into a fibrous avascular scar termed the **corpus albicans**, removing negative feedback inhibition on pituitary gonadotropin release.",
+      "say": "Without pregnancy, the corpus luteum regresses into a fibrous corpus albicans, allowing FSH levels to rise again.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Luteal Involution (No Pregnancy)",
+          "points": [
+            "Corpus luteum lifespan is fixed at twelve to fourteen days",
+            "Local endothelin-1 and PGF2-alpha promote luteolysis",
+            "Steroid hormone concentrations crash abruptly",
+            "Involutes into white fibrous connective tissue corpus albicans"
+          ]
+        },
+        "right": {
+          "title": "Luteal Rescue (Pregnancy)",
+          "points": [
+            "Implanting syncytiotrophoblast secretes chorionic gonadotropin (hCG)",
+            "hCG binds LH receptors to maintain corpus luteum viability",
+            "High progesterone output maintained through first trimester",
+            "Placental steroidogenesis assumes maintenance by eight to ten weeks"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The abrupt withdrawal of circulating estrogen and progesterone resulting from luteal regression triggers intense spiral arteriolar vasospasm within the superficial stratum functionale of the uterine endometrium. Ischemia, tissue necrosis, and leukocyte infiltration culminate in shedding of the necrotic mucosa, marking the **menstrual phase** that designates day one of the concurrent endometrial cycle.",
+      "say": "Steroid withdrawal causes spiral artery vasospasm and ischemic shedding of the functionalis layer during menstruation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "steroid_drop",
+            "label": "Luteal Involution Causes Precipitous Drop in Estrogen and Progesterone"
+          },
+          {
+            "id": "spiral_spasm",
+            "label": "Prostaglandin F2-Alpha Triggers Intense Spiral Artery Vasospasm"
+          },
+          {
+            "id": "ischemia",
+            "label": "Endometrial Stratum Functionale Undergoes Hypoxic Ischemic Necrosis"
+          },
+          {
+            "id": "sloughing",
+            "label": "Menses Sloughs Functional Layer While Preserving Basal Regenerative Layer"
+          }
+        ],
+        "edges": [
+          [
+            "steroid_drop",
+            "spiral_spasm"
+          ],
+          [
+            "spiral_spasm",
+            "ischemia"
+          ],
+          [
+            "ischemia",
+            "sloughing"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "The abrupt withdrawal of circulating estrogen and progesterone resulting from luteal regression triggers intense spiral arteriolar vasospasm within the superficial stratum functionale of the uterine endometrium. Ischemia, tissue necrosis, and leukocyte infiltration culminate in shedding of the necrotic mucosa, marking the **menstrual phase** that designates day one of the concurrent endometrial cycle.",
-   "say": "Steroid withdrawal causes spiral artery vasospasm and ischemic shedding of the functionalis layer during menstruation.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "steroid_drop",
-      "label": "Luteal Involution Causes Precipitous Drop in Estrogen and Progesterone"
-     },
-     {
-      "id": "spiral_spasm",
-      "label": "Prostaglandin F2-Alpha Triggers Intense Spiral Artery Vasospasm"
-     },
-     {
-      "id": "ischemia",
-      "label": "Endometrial Stratum Functionale Undergoes Hypoxic Ischemic Necrosis"
-     },
-     {
-      "id": "sloughing",
-      "label": "Menses Sloughs Functional Layer While Preserving Basal Regenerative Layer"
-     }
-    ],
-    "edges": [
-     [
-      "steroid_drop",
-      "spiral_spasm"
-     ],
-     [
-      "spiral_spasm",
-      "ischemia"
-     ],
-     [
-      "ischemia",
-      "sloughing"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [],
- "gen": "AI"
+  ],
+  "quiz": [],
+  "gen": "AI"
 }

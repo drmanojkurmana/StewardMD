@@ -1,0 +1,242 @@
+{
+ "key": "ped-immunology-rheumatology-digeorge",
+ "v": 1,
+ "module": "ped-immunology-rheumatology",
+ "subject": "paediatrics",
+ "title": "Pediatric Rheumatology and 22q11: DiGeorge, Systemic JIA, and SLE",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Microdeletions of chromosome 22q11.2 disrupt embryonic development of the third and fourth pharyngeal pouches and branchial arches. The resulting neurocristopathy known as **DiGeorge anomaly in neonates** presents with a classic clinical tetrad comprising congenital conotruncal cardiac malformations (interrupted aortic arch, truncus arteriosus, tetralogy of Fallot), neonatal hypocalcaemic tetany from parathyroid hypoplasia, thymic hypoplasia causing T-cell deficiency, and cleft palate.",
+   "say": "DiGeorge syndrome arises from 22q11.2 microdeletions affecting the third and fourth pharyngeal pouches. It features conotruncal heart defects, hypocalcemia, and thymic aplasia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "CATCH-22 Clinical Spectrum",
+     "points": [
+      "Cardiac defects: truncus arteriosus, interrupted arch, TOF",
+      "Abnormal facies: hooded eyelids, low-set ears, micrognathia",
+      "Thymic hypoplasia: T-cell immunodeficiency",
+      "Cleft palate: submucous cleft or velopharyngeal insufficiency",
+      "Hypocalcaemia: parathyroid gland aplasia / hypoplasia"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic & Emergency Management",
+     "points": [
+      "Fluorescence in situ hybridization (FISH) for 22q11.2",
+      "Or chromosomal microarray for microdeletion",
+      "Intravenous calcium gluconate for neonatal tetany",
+      "Irradiate all blood products to prevent fatal GVHD"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Persistent inflammatory arthritis of unknown etiology lasting longer than six weeks in children under sixteen years defines juvenile idiopathic arthritis. Categorized under the International League of Associations for Rheumatology (ILAR), **juvenile idiopathic arthritis subtypes** comprise oligoarthritis (affecting four or fewer joints, accounting for fifty percent), polyarthritis (five or more joints), systemic JIA, enthesitis-related arthritis, and psoriatic arthritis.",
+   "say": "Juvenile idiopathic arthritis requires persistent joint inflammation for at least six weeks in children under sixteen. Oligoarthritis is the most common subtype, affecting four or fewer joints.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "ILAR JIA Category",
+     "Number of Joints Involved",
+     "Unique Extrarticular Manifestation",
+     "Specific Biomarker / Autoantibody"
+    ],
+    "rows": [
+     [
+      "Oligoarthritis (50%)",
+      "<=4 joints (knee, ankle large joints)",
+      "Chronic asymptomatic anterior uveitis (20%)",
+      "Antinuclear antibody (ANA) positive (70-80%)"
+     ],
+     [
+      "Polyarthritis (RF negative)",
+      ">=5 joints, symmetrical small & large",
+      "Low-grade uveitis, joint contractures",
+      "ANA positive (30-40%); RF negative"
+     ],
+     [
+      "Polyarthritis (RF positive)",
+      ">=5 joints, small joints of hands/feet",
+      "Rheumatoid nodules, progressive erosions",
+      "Rheumatoid factor (RF) and anti-CCP positive"
+     ],
+     [
+      "Systemic JIA (10-15%)",
+      "Variable arthritis + quotidian fever",
+      "Salmon-pink evanescent rash, organomegaly",
+      "Ferritin markedly elevated; negative ANA/RF"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Asymptomatic chronic non-granulomatous anterior uveitis threatens irreversible visual loss in young girls with oligoarticular arthritis. Characterized by high positivity for antinuclear antibodies, **chronic uveitis in oligoarticular JIA** develops insidiously without pain, redness, or photophobia. Regular routine slit-lamp biomicroscopy every three to four months is mandatory to detect anterior chamber inflammatory flare and cells before posterior synechiae, band keratopathy, or cataracts develop.",
+   "say": "Chronic anterior uveitis in oligoarticular JIA is completely silent and painless in ANA-positive toddlers. Regular slit-lamp exams detect cells before cataracts and blindness ensue.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Silent Uveitis Risk Profile",
+     "points": [
+      "Young girls (onset <6 years of age)",
+      "Oligoarticular joint involvement pattern",
+      "Positive antinuclear antibody (ANA) serology",
+      "Completely white, painless eye without symptoms"
+     ]
+    },
+    "right": {
+     "title": "Slit-Lamp Surveillance Rules",
+     "points": [
+      "Screening every 3 months for high-risk ANA-positive girls",
+      "Identifies anterior chamber cells and protein flare",
+      "Topical corticosteroid drops (prednisolone acetate)",
+      "Methotrexate or anti-TNF (adalimumab) for refractory uveitis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A distinctive autoinflammatory presentation driven by interleukin-1 and interleukin-6 cytokine cascades manifests with spiking fevers and systemic toxicity. Classically designated Still disease, **systemic juvenile idiopathic arthritis** (sJIA) is characterized by quotidian spiking fevers touching baseline daily, an evanescent salmon-pink macular rash that peaks with the fever spike, generalized lymphadenopathy, hepatosplenomegaly, serositis, and severe polyarthritis.",
+   "say": "Systemic JIA features daily quotidian spiking fevers, an evanescent salmon-pink rash, lymphadenopathy, and high inflammatory markers. It is driven by IL-1 and IL-6 cytokines.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/juvenile-idiopathic-arthritis-fig1.webp",
+    "alt": "Clinical and laboratory collage showing quotidian fever chart, salmon-pink evanescent rash, and polyarthritis in systemic JIA.",
+    "caption": "Diagnostic features of systemic juvenile idiopathic arthritis showing quotidian fever spikes and transient salmon rash. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Uncontrolled hyperactivation of T-lymphocytes and well-differentiated macrophages triggers life-threatening hemophagocytic cytokine storm in systemic arthritis. The most dangerous complication of sJIA is **macrophage activation syndrome** (MAS), presenting with persistent non-remitting fever, profound coagulopathy with falling fibrinogen, paradoxical drop in erythrocyte sedimentation rate from fibrinogen consumption, massive hyperferritinaemia, cytopenias, and hemophagocytosis on bone marrow biopsy.",
+   "say": "Macrophage activation syndrome is a fatal cytokine storm in systemic JIA. A sudden drop in ESR, paradoxical falling platelets, and ferritin in the thousands are classic signs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Laboratory / Clinical Biomarker",
+     "MAS Diagnostic Threshold Finding",
+     "Pathophysiological Mechanism",
+     "Clinical Alert Value"
+    ],
+    "rows": [
+     [
+      "Serum ferritin concentration",
+      "Extreme elevation (>5,000-10,000 ng/mL)",
+      "Massive macrophage secretion of ferritin",
+      "Sensitive biomarker for acute MAS onset"
+     ],
+     [
+      "Erythrocyte sedimentation rate (ESR)",
+      "Paradoxical dramatic drop (from >100 to <20)",
+      "Consumption of plasma fibrinogen in DIC",
+      "Pathognomonic indicator of evolving crisis"
+     ],
+     [
+      "Serum fibrinogen level",
+      "Markedly depressed (<150 mg/dL)",
+      "Consumption coagulopathy & microthrombosis",
+      "High risk of life-threatening bleeding"
+     ],
+     [
+      "Emergency medical therapy",
+      "High-dose intravenous pulse methylprednisolone",
+      "Combined with cyclosporine or anakinra (IL-1)",
+      "Rapid initiation halts multi-organ failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Targeted biologic monoclonal antibodies neutralize specific cytokine mediators in refractory juvenile arthritis. While conventional disease-modifying antirheumatic drugs like weekly subcutaneous methotrexate remain first-line for polyarthritis, **biologic therapies in juvenile arthritis** utilize interleukin-1 receptor antagonists (anakinra, canakinumab) and interleukin-6 inhibitors (tocilizumab) to induce dramatic clinical remission in systemic JIA, and TNF inhibitors (etanercept, adalimumab) in polyarthritis.",
+   "say": "Interleukin-1 blockers like anakinra and interleukin-6 inhibitors like tocilizumab have revolutionized systemic JIA treatment. TNF blockers control polyarthritis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Systemic JIA Biologics (IL-1 / IL-6)",
+     "points": [
+      "Anakinra: recombinant IL-1 receptor antagonist",
+      "Canakinumab: monoclonal anti-IL-1-beta antibody",
+      "Tocilizumab: monoclonal anti-IL-6 receptor antibody",
+      "Rapidly resolves fevers, rash, and arthritis"
+     ]
+    },
+    "right": {
+     "title": "Polyarticular JIA Biologics (TNF-alpha)",
+     "points": [
+      "Etanercept: recombinant TNF receptor fusion protein",
+      "Adalimumab: fully human anti-TNF monoclonal antibody",
+      "Methotrexate is co-administered to prevent antidrug antibodies",
+      "Annual screening for latent tuberculosis mandatory"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Multisystem autoimmune disease driven by pathogenic antinuclear autoantibodies and immune complex deposition affects adolescent females. In **pediatric systemic lupus erythematosus** (pSLE), presenting features are more severe than in adults, frequently presenting with malar butterfly rash, photosensitivity, oral mucosal ulcers, non-erosive polyarthritis, serositis, and autoimmune cytopenias (Coombs-positive hemolytic anemia, leukopenia, thrombocytopenia).",
+   "say": "Pediatric lupus is more aggressive than adult SLE, with higher rates of renal involvement. Classic features include a malar butterfly rash, photosensitivity, arthritis, and cytopenias.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Lupus Autoantibody Test",
+     "Diagnostic Sensitivity / Specificity",
+     "Clinical Correlation / Organ System",
+     "Diagnostic Role"
+    ],
+    "rows": [
+     [
+      "Antinuclear antibodies (ANA)",
+      "Extremely high sensitivity (>98%); low specificity",
+      "Best initial screening test for pSLE",
+      "Negative ANA virtually rules out lupus"
+     ],
+     [
+      "Anti-double-stranded DNA (anti-dsDNA)",
+      "High specificity (>95%); tracks disease flares",
+      "Strong correlation with active lupus nephritis",
+      "Serial titres guide immunosuppressive therapy"
+     ],
+     [
+      "Anti-Smith antibodies (anti-Sm)",
+      "Most specific autoantibody for SLE (>99%)",
+      "Remains positive indefinitely; no flare tracking",
+      "Confirmatory diagnostic criterion"
+     ],
+     [
+      "Complement C3 and C4 levels",
+      "Markedly depressed during active disease flares",
+      "Consumption via classical immune complex pathway",
+      "Normalizes with successful disease remission"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Renal involvement occurs in up to eighty percent of pediatric lupus patients, dictating long-term survival and morbidity. Evaluation of **pediatric lupus nephritis** requires routine screening with urinalysis for proteinuria, microscopic haematuria, and cellular red blood cell casts. Percutaneous core renal biopsy is mandatory to classify glomerular involvement from Class I (minimal mesangial) to Class IV (diffuse proliferative, the most severe), guiding mycophenolate or cyclophosphamide therapy.",
+   "say": "Lupus nephritis affects eighty percent of pediatric SLE patients. Core renal biopsy is mandatory to classify disease, with diffuse proliferative Class four requiring intense therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ISN/RPS Nephritis Classification",
+     "points": [
+      "Class I: Minimal mesangial lupus nephritis",
+      "Class II: Mesangial proliferative lupus nephritis",
+      "Class III: Focal proliferative lupus nephritis (<50% glomeruli)",
+      "Class IV: Diffuse proliferative lupus nephritis (>50% glomeruli)",
+      "Class V: Membranous nephropathy; Class VI: Advanced sclerosis"
+     ]
+    },
+    "right": {
+     "title": "Class IV Induction Chemotherapy",
+     "points": [
+      "High-dose intravenous pulse methylprednisolone",
+      "Combined with oral mycophenolate mofetil (MMF)",
+      "Or intravenous pulse cyclophosphamide (Euro-Lupus protocol)",
+      "Hydroxychloroquine is universally prescribed for all pSLE"
+     ]
+    }
+   }
+  }
+ ]
+}

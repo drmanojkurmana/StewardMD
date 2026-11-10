@@ -1,0 +1,146 @@
+{
+  "v": 1,
+  "id": "cm-demography-literacy-rate",
+  "subject": "community-medicine",
+  "module": "cm-demography",
+  "title": "Literacy, Urbanisation, and Fertility Rates: GFR, TFR, and Replacement Level",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Literacy rate and its health dividend",
+      "tx": "The census counts a person aged seven years and above who can read and write with understanding as literate, giving the **literacy rate in India** of seventy three percent in 2011 (eighty point nine for males, sixty four point six for females, and ninety four percent in Kerala). Female literacy delays marriage, lowers fertility, improves child survival, and raises contraceptive use more powerfully than income alone.",
+      "say": "Literacy in 2011 was seventy three percent, with Kerala at ninety four. Educating girls delays marriage and cuts both fertility and child deaths.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Literacy 2011", "Percent"],
+        "rows": [
+          ["Total (age 7 plus)", "73.0"],
+          ["Male", "80.9"],
+          ["Female", "64.6"],
+          ["Kerala total", "94.0"]
+        ]
+      }
+    },
+    {
+      "title": "Crude birth and death rates",
+      "tx": "The **crude birth rate** counts live births per thousand mid year population, and the crude death rate mirrors it for deaths; India's values approached nineteen point five and six per thousand in recent Sample Registration System reports. Because both use the whole population as denominator, age structure distorts them: an old population shows a high crude death rate despite excellent medicine, which is why standardisation exists.",
+      "say": "Crude rates divide by the whole population. An ageing country can show a high crude death rate even with excellent health care.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "b1", "label": "Count births in one calendar year" },
+          { "id": "b2", "label": "Divide by mid year population" },
+          { "id": "b3", "label": "Multiply by 1000 for the crude rate" }
+        ],
+        "edges": [["b1", "b2"], ["b2", "b3"]]
+      }
+    },
+    {
+      "title": "General fertility rate",
+      "tx": "Restricting the denominator to women aged fifteen to forty nine sharpens the birth rate into the **general fertility rate**: live births per thousand women of reproductive age in one year. It corrects for populations with few women of childbearing age, such as Gulf migrant workforces, but still ignores how those women spread across the fertile span, which the next two rates repair.",
+      "say": "General fertility rate divides births by women aged fifteen to forty nine. It beats the crude rate when the age structure is skewed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Crude birth rate",
+          "points": ["Denominator: whole population", "Distorted by age and sex structure", "Quick but crude comparison"]
+        },
+        "right": {
+          "title": "General fertility rate",
+          "points": ["Denominator: women 15 to 49", "Removes male and child dilution", "Still ignores age spread within span"]
+        }
+      }
+    },
+    {
+      "title": "Age specific fertility and total fertility rate",
+      "tx": "Births per thousand women in each five year age group give age specific fertility rates, and summing them yields the **total fertility rate**: the average children a woman would bear if she lived through her reproductive years at current rates. India's rate fell to about two point zero in the National Family Health Survey five, below the replacement level of two point one in many states already.",
+      "say": "Total fertility rate sums age specific rates into children per woman. India is near two point zero, close to replacement level.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Age group", "What its rate shows"],
+        "rows": [
+          ["15 to 19", "Adolescent fertility, early marriage signal"],
+          ["20 to 29", "Peak childbearing years in India"],
+          ["30 to 39", "Falling tail as family size completes"],
+          ["40 to 49", "Low residual fertility"]
+        ]
+      }
+    },
+    {
+      "title": "Replacement level and population stabilisation",
+      "tx": "A total fertility rate of two point one is called **replacement level fertility** because one daughter must survive to replace her mother after allowing for child mortality and the sex ratio at birth. Below replacement fertility, each generation shrinks once momentum exhausts. India's national goal pairs replacement fertility with full registration of births, deaths, and marriages, later marriage for girls, and lower infant and maternal mortality.",
+      "say": "Replacement level is two point one children per woman. Below it, populations eventually shrink once the young age structure works through.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "r1", "label": "TFR reaches 2.1 replacement level" },
+          { "id": "r2", "label": "Momentum keeps growth for decades" },
+          { "id": "r3", "label": "Population stabilises then ages" }
+        ],
+        "edges": [["r1", "r2"], ["r2", "r3"]]
+      }
+    },
+    {
+      "title": "Urbanisation and fertility",
+      "tx": "Town living reliably lowers family size through later marriage, schooling costs, housing constraints, and contraceptive access, a pattern termed the **urban fertility advantage** in survey data: urban total fertility in India runs near one point six against about two point one rurally. Yet slum fertility stays higher than planned township fertility, which is why the National Urban Health Mission targets informal settlements explicitly.",
+      "say": "City women average fewer children, about one point six in urban India. Slums are the exception and need focused family planning outreach.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Urban fertility drivers down",
+          "points": ["Later marriage and higher schooling", "Costly housing and child education", "Easy contraceptive and abortion access"]
+        },
+        "right": {
+          "title": "Slum fertility stays up",
+          "points": ["Early marriage persists", "Services crowded and distant", "Higher child mortality fears"]
+        }
+      }
+    },
+    {
+      "title": "Child woman ratio and parity measures",
+      "tx": "Where registration is weak, the **child woman ratio** (children under five per thousand women aged fifteen to forty nine from a census) proxies fertility without birth records. Parity counts pregnancies reaching viability a woman has completed, and birth interval measures spacing between successive births; intervals under three years raise anaemia, prematurity, and infant death, which spacing methods directly prevent.",
+      "say": "Child woman ratio estimates fertility from census counts alone. Short birth intervals under three years harm both mother and baby.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Measure", "Needs birth registration?"],
+        "rows": [
+          ["Child woman ratio", "No, census counts suffice"],
+          ["General fertility rate", "Yes, annual births required"],
+          ["Parity distribution", "Survey history based"],
+          ["Birth interval", "Survey or register dates"]
+        ]
+      }
+    },
+    {
+      "title": "Fertility determinants: marriage age",
+      "tx": "The single strongest fertility lever in India remains age at effective marriage: raising the **mean age at marriage for girls** beyond twenty years truncates the reproductive span, spaces the first birth, improves maternal schooling completion, and lowers teenage pregnancy complications. The Prohibition of Child Marriage Act sets eighteen years for girls and twenty one for boys, and enforcement pairs with secondary schooling incentives.",
+      "say": "Delaying marriage is the most powerful fertility lever. Legal ages are eighteen for girls and twenty one for boys.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "m1", "label": "Girl completes secondary schooling" },
+          { "id": "m2", "label": "Marriage and first birth delayed" },
+          { "id": "m3", "label": "Fewer, healthier, better spaced children" }
+        ],
+        "edges": [["m1", "m2"], ["m2", "m3"]]
+      }
+    },
+    {
+      "title": "Reading fertility data in examinations",
+      "tx": "Exam stems reward exact denominators: the **general marital fertility rate** further restricts the denominator to married women, adolescent fertility isolates ages fifteen to nineteen, and completed fertility describes women ending their reproductive span. A stem quoting children per woman without age detail almost always wants total fertility rate, while one quoting births per thousand women fifteen to forty nine wants the general fertility rate.",
+      "say": "Match the denominator to the stem. Children per woman means total fertility; births per thousand women fifteen to forty nine means general fertility.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Stem wording", "Rate intended"],
+        "rows": [
+          ["Children per woman over lifetime", "Total fertility rate"],
+          ["Births per 1000 women 15 to 49", "General fertility rate"],
+          ["Births per 1000 married women", "General marital fertility rate"],
+          ["Births per 1000 population", "Crude birth rate"]
+        ]
+      }
+    }
+  ]
+}

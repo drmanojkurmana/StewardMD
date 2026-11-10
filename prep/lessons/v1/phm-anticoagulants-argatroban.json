@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-anticoagulants",
+  "subject": "pharmacology",
+  "title": "Direct Thrombin Inhibitors and Antifibrinolytics: Argatroban, Bivalirudin, Tranexamic Acid",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Argatroban** is a small molecule direct thrombin inhibitor given by continuous infusion, binding the active site of free and clot bound thrombin reversibly without needing antithrombin or touching platelet factor 4. Hepatic metabolism makes it the default anticoagulant in heparin induced thrombocytopenia with renal failure, where renally cleared alternatives stumble. The aPTT steers it to 1.5 to 3 times baseline, and its prolongation of the INR complicates warfarin transitions unless chromogenic factor X assays arbitrate.",
+      "say": "Argatroban blocks thrombin directly, clears through the liver, and owns HIT with renal failure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hit",
+            "label": "HIT confirmed or strongly suspected, heparin stopped"
+          },
+          {
+            "id": "arga",
+            "label": "Argatroban infusion started, hepatic clearance"
+          },
+          {
+            "id": "aptt",
+            "label": "aPTT held at 1.5 to 3 times baseline"
+          },
+          {
+            "id": "trans",
+            "label": "Transition to warfarin only after platelet recovery"
+          }
+        ],
+        "edges": [
+          [
+            "hit",
+            "arga"
+          ],
+          [
+            "arga",
+            "aptt"
+          ],
+          [
+            "aptt",
+            "trans"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Synthetic heir of leech hirudin, **bivalirudin** binds thrombin bivalently at active site and exosite, then thrombin itself cleaves the bond and frees itself, giving bivalirudin a self limiting 25 minute half life sharpened by renal clearance. That tidy profile made it an interventional cardiology anticoagulant for percutaneous coronary intervention, particularly with HIT history, where heparin is forbidden and argatroban's infusion habits fit the catheter laboratory less naturally.",
+      "say": "Bivalirudin borrows the leech's trick and lets thrombin cut it loose after twenty five minutes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Argatroban",
+          "points": [
+            "Univalent active site thrombin blockade",
+            "Hepatic clearance: renal failure friendly",
+            "Continuous infusion steered by aPTT",
+            "Home ground: HIT treatment and prophylaxis"
+          ]
+        },
+        "right": {
+          "title": "Bivalirudin",
+          "points": [
+            "Bivalent binding, cleaved by thrombin itself",
+            "Half life about 25 minutes, partly renal",
+            "Catheter laboratory and HIT with intervention",
+            "Effect fades quickly when infusion stops"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Oral thrombin blockade begins and ends clinically with **dabigatran**, whose etexilate prodrug converts to the active inhibitor, twice daily, 80 percent renally cleared, and reversed by idarucizumab from the previous module. Twice daily adherence and renal vigilance are its tolls; dyspepsia from its tartaric acid core formulation and a small myocardial infarction signal in early comparisons are its footnotes. It remains the only oral agent aimed at thrombin rather than factor Xa.",
+      "say": "Dabigatran is the oral thrombin inhibitor: kidneys carry it, idarucizumab reverses it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/coagulation-disorders-fig2.webp",
+        "alt": "Coagulation cascade diagram showing drug targets including direct thrombin inhibitors",
+        "caption": "Cascade drug targets with thrombin at the final common step, blocked directly by dabigatran, argatroban and bivalirudin."
+      }
+    },
+    {
+      "tx": "On the other side of haemostasis, **tranexamic acid** is a lysine analogue that occupies plasminogen's lysine binding sites, preventing its grip on fibrin and therefore its conversion to clot dissolving plasmin at the surface where it matters. Clots already formed are preserved; none are created by the drug itself. Dosing is early or useless: within three hours of trauma, childbirth bleeding or surgery, because fibrinolysis peaks early and late administration loses benefit.",
+      "say": "Tranexamic acid guards existing clots from plasmin; give it inside three hours or not at all.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antiplatelets-dapt-fibrinolytics-txa-fig1.webp",
+        "alt": "Antiplatelet, fibrinolytic and tranexamic acid target mechanisms diagram",
+        "caption": "Antiplatelet, fibrinolytic and antifibrinolytic targets, with tranexamic acid preserving fibrin by blocking plasminogen binding."
+      }
+    },
+    {
+      "tx": "The **outcome evidence** is unusually quotable: CRASH 2 in trauma and WOMAN in postpartum haemorrhage each showed mortality or bleeding death reductions when tranexamic acid 1 g was given within three hours, with no thrombosis excess detected. Surgical blood conservation, heavy menstrual bleeding and hereditary angioedema prophylaxis extend its map. High doses, particularly in cardiac surgery, add seizures through GABA and glycine antagonism in the brain, capping enthusiasm for heroic dosing.",
+      "say": "One gram inside three hours saves lives in trauma and childbirth bleeding; mega doses seize, so respect the ceiling.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Proven early uses",
+          "points": [
+            "Trauma: 1 g within 3 hours, then infusion (CRASH 2)",
+            "Postpartum haemorrhage within 3 hours (WOMAN)",
+            "Surgical blood loss reduction across specialties",
+            "Heavy menstrual bleeding orally on bleeding days"
+          ]
+        },
+        "right": {
+          "title": "Limits and cautions",
+          "points": [
+            "No benefit started beyond 3 hours in bleeding trials",
+            "High dose: seizures, especially cardiac surgery",
+            "Active thromboembolic disease: caution",
+            "Upper urinary tract clots can obstruct the ureter"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Its older sibling **epsilon aminocaproic acid** shares the lysine analogue mechanism with weaker potency and a heavier adverse burden, surviving in niches like cardiac surgery where tranexamic supply or seizures argue alternatives, and in dental bleeding for haemophilia protocols. Both drugs are renally cleared, so impairment demands dose reduction. Neither treats the cause of bleeding; they hold the clot while someone else fixes the vessel, the uterus or the coagulopathy.",
+      "say": "Aminocaproic acid is tranexamic's weaker elder; both hold clots, neither fixes holes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bleed",
+            "label": "Bleeding with hyperfibrinolysis suspected or proven"
+          },
+          {
+            "id": "txa",
+            "label": "Tranexamic acid 1 g intravenously within 3 hours"
+          },
+          {
+            "id": "source",
+            "label": "Source control proceeds in parallel"
+          },
+          {
+            "id": "renal",
+            "label": "Dose reduced in renal impairment"
+          }
+        ],
+        "edges": [
+          [
+            "bleed",
+            "txa"
+          ],
+          [
+            "txa",
+            "source"
+          ],
+          [
+            "source",
+            "renal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Argatroban's warfarin transition** deserves its own paragraph because examinations mine it: both drugs prolong the INR, argatroban substantially, so stopping argatroban when the combined INR passes 4 and rechecking the INR hours later reveals warfarin's true contribution. Chromogenic factor X activity below about 45 percent signals therapeutic warfarin independently where available. Premature argatroban cessation on a flattering combined INR has clothed many a vignette patient in recurrent thrombosis.",
+      "say": "The combined INR lies during argatroban overlap; stop, wait, and remeasure before trusting it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "The trap",
+          "points": [
+            "Argatroban prolongs INR independently of warfarin",
+            "Combined INR looks therapeutic before warfarin is",
+            "Stopping early leaves the patient unanticoagulated",
+            "HIT patients rethrombose in the gap"
+          ]
+        },
+        "right": {
+          "title": "The technique",
+          "points": [
+            "Overlap at least 5 days and until platelets recover",
+            "Stop argatroban when combined INR exceeds 4",
+            "Recheck INR 4 to 6 hours later off argatroban",
+            "Chromogenic factor X arbitrates where available"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Close the **anticoagulant arc** by sorting every agent by target and antidote: antithrombin mediated (heparins, fondaparinux), vitamin K antagonism (warfarin, reversed by vitamin K and PCC), direct Xa (rivaroxaban, apixaban; andexanet), direct thrombin (dabigatran, argatroban, bivalirudin; idarucizumab for dabigatran), and clot preservation (tranexamic acid). That two axis map, target by reversal, answers most stems this module can generate.",
+      "say": "Sort by target, then by antidote; that grid is the module in one breath.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "By target",
+          "points": [
+            "Antithrombin: heparins, fondaparinux",
+            "Vitamin K cycle: warfarin",
+            "Factor Xa: rivaroxaban, apixaban, edoxaban",
+            "Thrombin: dabigatran, argatroban, bivalirudin"
+          ]
+        },
+        "right": {
+          "title": "By reversal",
+          "points": [
+            "Protamine: unfractionated heparin fully, LMWH partly",
+            "Vitamin K plus PCC: warfarin",
+            "Idarucizumab: dabigatran; andexanet: Xa inhibitors",
+            "Time and support: argatroban, bivalirudin (short half lives)"
+          ]
+        }
+      }
+    }
+  ]
+}

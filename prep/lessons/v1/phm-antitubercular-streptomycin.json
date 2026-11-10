@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-antitubercular",
+  "subject": "pharmacology",
+  "title": "Streptomycin in Tuberculosis, Isoniazid Neuropathy, Pyridoxine and Hepatotoxicity Management",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Streptomycin**, tuberculosis' first effective drug (1943) and its first resistance lesson (monotherapy relapsed resistant within months, inventing combination therapy), is an intramuscular aminoglycoside now demoted to reserve roles by its oto and nephrotoxicity, injection burden and the oral era. It survives in defined drug resistant regimens historically, plague, tularaemia and brucellosis partnerships, and in examinations as the aminoglycoside whose vestibular toxicity named the class effect.",
+      "say": "Streptomycin cured and relapsed tuberculosis in one trial and thereby invented combination therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Streptomycin heritage",
+          "points": [
+            "First antitubercular, first resistance demonstration",
+            "Intramuscular aminoglycoside pharmacology",
+            "Plague, tularaemia and brucellosis partnerships",
+            "Reserve tuberculosis roles historically"
+          ]
+        },
+        "right": {
+          "title": "Why it demoted",
+          "points": [
+            "Vestibular and cochlear toxicity cumulative",
+            "Nephrotoxicity with prolonged courses",
+            "Daily injections over months untenable",
+            "Oral rifampicin era replaced it"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Peripheral neuropathy** is isoniazid's signature: the drug inactivates pyridoxine (vitamin B6) by hydrazone formation and inhibits its activation, starving glutamic acid decarboxylase and axonal maintenance, producing distal symmetrical sensory neuropathy (and, rarely, seizures from GABA failure). Slow acetylators, diabetics, alcohol use, pregnancy, HIV, renal failure and malnutrition stack risk. It is preventable entirely by co prescribed pyridoxine, which is negligence law in tablet form where omitted in risk groups.",
+      "say": "Isoniazid steals vitamin B6 and nerves pay; pyridoxine beside it is not optional in risk groups.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "inh",
+            "label": "Isoniazid forms hydrazones with pyridoxine"
+          },
+          {
+            "id": "b6",
+            "label": "Active B6 falls, GABA synthesis threatened"
+          },
+          {
+            "id": "nerve",
+            "label": "Distal sensory neuropathy (seizures rarely)"
+          },
+          {
+            "id": "prevent",
+            "label": "Pyridoxine 10 to 25 mg daily prevents"
+          }
+        ],
+        "edges": [
+          [
+            "inh",
+            "b6"
+          ],
+          [
+            "b6",
+            "nerve"
+          ],
+          [
+            "nerve",
+            "prevent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Pyridoxine** dosing is bidirectional teaching: prophylaxis at 10 to 25 mg daily in risk groups (higher in some HIV and pregnancy protocols), treatment of established neuropathy at larger divided doses while isoniazid continues where possible, and gram scale pyridoxine as the antidote to isoniazid overdose seizures (equal grams to the isoniazid ingested, infused slowly, with benzodiazepines bridging because diazepam needs B6 to work). Excess pyridoxine itself causes sensory neuropathy, closing the loop examiners love.",
+      "say": "Ten milligrams prevents, grams rescue overdose seizures, and chronic excess causes the very neuropathy it treats.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pyridoxine prophylaxis and treatment",
+          "points": [
+            "10 to 25 mg daily with isoniazid in risk groups",
+            "Risk: diabetes, alcohol, pregnancy, HIV, renal failure",
+            "Neuropathy treatment: higher doses, isoniazid reviewed",
+            "Breastfed infants of treated mothers supplemented"
+          ]
+        },
+        "right": {
+          "title": "Pyridoxine as antidote",
+          "points": [
+            "Isoniazid overdose seizures refractory to diazepam alone",
+            "Grams equal to isoniazid ingested, slow infusion",
+            "Benzodiazepines co administered",
+            "Chronic pyridoxine excess itself neurotoxic"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hepatotoxicity** across the regimen was sequenced previously; here the fingerprints separate: isoniazid causes hepatocellular necrosis (hydrazine metabolites, age gradient, alcohol, rifampicin induction multiplying toxic metabolites in the famous synergy of injury), rifampicin adds cholestatic and competitive bilirubin uptake elevation (transient hyperbilirubinaemia without injury), and pyrazinamide contributes dose related hepatocellular damage that historically removed it from American regimens for a generation.",
+      "say": "Isoniazid injures hepatocytes, rifampicin colours bilirubin, pyrazinamide doses the liver; read the pattern before stopping all three.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hepatocellular culprits",
+          "points": [
+            "Isoniazid: metabolite necrosis, age and alcohol risk",
+            "Pyrazinamide: dose related, intensive phase window",
+            "Reintroduction order identifies the agent",
+            "Most injury reversible on cessation"
+          ]
+        },
+        "right": {
+          "title": "Non injury mimics",
+          "points": [
+            "Rifampicin transient bilirubin rise alone",
+            "Enzyme adaptation with normal bilirubin",
+            "Viral and alcohol histories rechecked",
+            "Thresholds (3x symptomatic, 5x silent) govern stopping"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Isoniazid's wider adverse** and interaction set completes its portrait: lupus like syndrome in slow acetylators, euphoria and psychosis rarely, gynaecomastia, and CYP inhibition raising phenytoin and carbamazepine toward toxicity (the mirror of rifampicin's induction in the same regimen, a combination that keeps pharmacists employed). MAO and histaminase inhibition explain tyramine and histamine fish (skipjack) reactions counselled in older texts.",
+      "say": "Isoniazid inhibits where rifampicin induces; phenytoin caught between them needs levels.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "inh",
+            "label": "Isoniazid inhibits several CYP pathways"
+          },
+          {
+            "id": "pheny",
+            "label": "Phenytoin clearance falls, levels climb"
+          },
+          {
+            "id": "rif",
+            "label": "Rifampicin induction pulls the opposite way"
+          },
+          {
+            "id": "level",
+            "label": "Phenytoin levels arbitrate the tug of war"
+          }
+        ],
+        "edges": [
+          [
+            "inh",
+            "pheny"
+          ],
+          [
+            "pheny",
+            "level"
+          ],
+          [
+            "rif",
+            "level"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Streptomycin's aminoglycoside monitoring** from the previous module applies unchanged and harder: baseline and serial audiometry where courses lengthen, vestibular enquiry (oscillopsia, imbalance) at every visit, renal dose spacing, pregnancy prohibition (congenital deafness), and cumulative dose ceilings respected across a treatment lifetime that may span relapses. Its modern reserve use is specialist signed for exactly these reasons.",
+      "say": "Streptomycin courses carry audiograms and dose ledgers; pregnancy forbids it outright.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Monitoring bundle",
+          "points": [
+            "Baseline hearing and vestibular enquiry",
+            "Creatinine and dose spacing by kidney function",
+            "Cumulative dose recorded across episodes",
+            "Stop at first vestibular complaint, not the last"
+          ]
+        },
+        "right": {
+          "title": "Absolute fences",
+          "points": [
+            "Pregnancy: fetal eighth nerve injury",
+            "Myasthenia gravis: neuromuscular blockade",
+            "Prior aminoglycoside deafness",
+            "Concurrent loop diuretics where avoidable"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Second line injectables** inherited streptomycin's chair and its toxicities: amikacin and kanamycin (with capreomycin, a polypeptide, beside them) anchored MDR regimens for decades at the cost of deafness wards, until all oral bedaquiline regimens (next lessons) displaced them from guidelines between 2019 and 2022. Their fall is the module's happiest pharmacology revision and examinations now test the displacement as much as the drugs.",
+      "say": "Injectables deafened a generation of MDR patients; oral regimens retired them within three guideline years.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Injectable era (to about 2019)",
+          "points": [
+            "Amikacin, kanamycin or capreomycin daily injections",
+            "Hearing loss in a substantial minority",
+            "18 to 24 month total regimens",
+            "Success barely half in many cohorts"
+          ]
+        },
+        "right": {
+          "title": "All oral era",
+          "points": [
+            "Bedaquiline, pretomanid, linezolid regimens (next lessons)",
+            "Six to nine month courses",
+            "Success approaching 90 percent in trials",
+            "Audiometry burden lifted with the injections"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Patient counselling for** the standard regimen compresses this and the previous lesson into adherence saving sentences: orange urine is rifampicin and harmless, numb feet are isoniazid and preventable if reported early, yellow eyes stop everything and phone today, contraception and other medicines must be re argued with the team, and finishing month six after feeling cured at month two is where relapses and resistance are prevented.",
+      "say": "Orange is fine, numbness is early, yellow is urgent, and month six is the cure month two promises.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "orange",
+            "label": "Orange fluids: rifampicin, harmless"
+          },
+          {
+            "id": "numb",
+            "label": "Numb feet: report early, pyridoxine reviewed"
+          },
+          {
+            "id": "yellow",
+            "label": "Jaundice or vomiting: stop and contact same day"
+          },
+          {
+            "id": "six",
+            "label": "Completion at month 6 prevents relapse and resistance"
+          }
+        ],
+        "edges": [
+          [
+            "orange",
+            "numb"
+          ],
+          [
+            "numb",
+            "yellow"
+          ],
+          [
+            "yellow",
+            "six"
+          ]
+        ]
+      }
+    }
+  ]
+}

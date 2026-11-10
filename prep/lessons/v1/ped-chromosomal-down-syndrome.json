@@ -1,0 +1,240 @@
+{
+ "key": "ped-chromosomal-down-syndrome",
+ "v": 1,
+ "module": "ped-chromosomal",
+ "subject": "paediatrics",
+ "title": "Down Syndrome: Cytogenetics, Features and Complications",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Aneuploidy of human autosomes underlies profound dysmorphic and neurodevelopmental alterations. As the most prevalent chromosomal aberration compatible with postnatal survival, **Down syndrome** occurs in approximately one in eight hundred live births. The phenotypic features and cognitive disabilities stem from gene dosage imbalance on the distal long arm of chromosome 21, specifically within the critical region spanning bands 21q22.1 to 21q22.3.",
+   "say": "Down syndrome is the most common live-born autosomal aneuploidy, occurring in one in eight hundred births. Triplication of the critical 21q22 region disrupts fetal organogenesis and neurodevelopment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m377-ped-chromosomal-down-syndrome.webp",
+    "alt": "Metaphase karyotype with three copies of chromosome 21 in a standard female free trisomy 21 spread.",
+    "caption": "Metaphase spread karyotype showing three copies of chromosome 21, confirming standard female free trisomy 21. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Chromosomal analysis uncovers three distinct cytogenetic mechanisms with profound differences in recurrence risk. Over ninety-five percent of cases arise from maternal meiotic **nondisjunction trisomy 21**, predominantly occurring during maternal meiosis I and strongly correlating with advanced maternal age. The resulting karyotype is 47,XX,+21 or 47,XY,+21, carrying an empiric recurrence risk of approximately one percent in subsequent pregnancies.",
+   "say": "Meiotic nondisjunction causes ninety-five percent of Down syndrome cases, linked to advanced maternal age. The karyotype shows forty-seven chromosomes with an extra free chromosome twenty-one.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cytogenetic Subtype",
+     "Population Prevalence",
+     "Underlying Mechanism",
+     "Recurrence Risk in Siblings"
+    ],
+    "rows": [
+     [
+      "Free Trisomy 21",
+      "95 percent of cases",
+      "Maternal meiotic nondisjunction (75% Meiosis I)",
+      "Roughly 1 percent (or maternal age risk)"
+     ],
+     [
+      "Robertsonian translocation",
+      "3 to 4 percent of cases",
+      "Unbalanced translocation (e.g. rob 14;21)",
+      "10 to 15% if mother carrier; 2% if father"
+     ],
+     [
+      "Translocation (21;21)",
+      "Under 1 percent of cases",
+      "Isochromosome 21q translocation",
+      "100 percent recurrence risk"
+     ],
+     [
+      "Mosaic Down syndrome",
+      "1 to 2 percent of cases",
+      "Post-zygotic mitotic nondisjunction",
+      "Low baseline maternal risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Structural chromosomal rearrangements involve fusion of acrocentric long arms. The form designated **Robertsonian translocation** accounts for roughly four percent of cases, most commonly fusing the long arms of chromosome 14 and chromosome 21, designated as 46,XX,rob(14;21)(q10;q10),+21. Roughly half are inherited from a phenotypically normal balanced carrier parent, where maternal carriers carry a ten to fifteen percent recurrence risk.",
+   "say": "Robertsonian translocations account for four percent of cases, typically fusing chromosomes fourteen and twenty-one. Balanced carrier mothers carry a ten to fifteen percent recurrence risk for future pregnancies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Maternal Carrier rob(14;21)",
+     "points": [
+      "Carrier has 45 chromosomes with balanced translocation",
+      "10 to 15 percent risk of live-born Down child",
+      "Additional risk of recurrent first-trimester miscarriages"
+     ]
+    },
+    "right": {
+     "title": "Paternal Carrier rob(14;21)",
+     "points": [
+      "Carrier has 45 chromosomes with balanced translocation",
+      "Only 1 to 2 percent recurrence risk in offspring",
+      "Sperm bearing unbalanced translocations undergo negative selection"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Post-zygotic mitotic errors give rise to coexisting normal and trisomic cell lines. Children with **mosaic Down syndrome** possess both a normal 46-chromosome cell population and a 47,+21 trisomic cell line arising from mitotic nondisjunction after fertilization. The clinical phenotype is generally milder, displaying fewer physical stigmata and higher intellectual capability, directly depending on the proportion and tissue distribution of trisomic cells.",
+   "say": "Mosaic Down syndrome results from mitotic errors after fertilization, creating both normal and trisomic cell lines. Patients often present with milder physical features and higher cognitive scores.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic Free Trisomy 21",
+     "points": [
+      "100% of somatic and germline cells are trisomic",
+      "Uniform full phenotypic expressivity",
+      "Moderate to severe intellectual disability"
+     ]
+    },
+    "right": {
+     "title": "Mosaic Down Syndrome",
+     "points": [
+      "Dual cell lines (46,XX and 47,XX,+21)",
+      "Variable proportion of normal diploid cells",
+      "Milder phenotype and higher IQ potential"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Neonatal physical assessment identifies a recognizable constellation of craniofacial and somatic stigmata. The most universal neonatal physical sign is profound generalized **neonatal hypotonia**, accompanied by a flat facial profile, brachycephaly, upslanting palpebral fissures, epicanthal folds, depressed nasal bridge, and small low-set ears. Brushfield spots are visible as silver-grey speckles around the iris periphery, alongside a protruding tongue.",
+   "say": "Severe neonatal hypotonia and joint hyperflexibility are the most consistent early signs. Craniofacial stigmata include upward slanting eyes, flat nasal bridge, epicanthal folds, and small ears.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Physical Anatomical Sign",
+     "Clinical Descriptive Landmark",
+     "Diagnostic Specificity",
+     "Underlying Structural Pathology"
+    ],
+    "rows": [
+     [
+      "Generalized hypotonia",
+      "Rag-doll limpness and joint laxity",
+      "Present in 80% of neonates",
+      "Central nervous system hypoplasia"
+     ],
+     [
+      "Brachycephaly",
+      "Flattened occiput, short AP head length",
+      "High clinical reliability",
+      "Premature spheno-occipital synostosis"
+     ],
+     [
+      "Brushfield spots",
+      "Ring of white/grey speckles on iris",
+      "Common in lightly pigmented eyes",
+      "Connective tissue hyperplasia in iris stroma"
+     ],
+     [
+      "Simian crease",
+      "Single transverse palmar crease",
+      "Present in 45% of patients",
+      "Altered embryonic hand flexion pads"
+     ],
+     [
+      "Sandal gap sign",
+      "Wide space between 1st and 2nd toes",
+      "Present in 45% of patients",
+      "Plantar dermal ridge displacement"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Congenital cardiovascular malformations affect nearly half of all infants with trisomy 21. Over forty percent of neonates exhibit **atrioventricular septal defect** (endocardial cushion defect), which represents the most characteristic cardiac lesion, followed by ventricular septal defects, patent ductus arteriosus, and atrial septal defects. Every newborn with Down syndrome mandates routine echocardiography before hospital discharge to detect left-to-right shunts before pulmonary hypertension develops.",
+   "say": "Atrioventricular septal defect affects nearly half of children with Down syndrome. Routine echocardiography is mandatory in all newborns to detect shunts before irreversible pulmonary hypertension develops.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Atrioventricular Septal Defect (AVSD)",
+     "points": [
+      "Ostium primum ASD, inlet VSD, common AV valve",
+      "Accounts for 60% of Down syndrome cardiac defects",
+      "Rapid progression to pulmonary vascular disease",
+      "Requires surgical correction within 3 to 6 months"
+     ]
+    },
+    "right": {
+     "title": "Other Cardiac Lesions in Down",
+     "points": [
+      "Isolated ventricular septal defect (VSD, 30%)",
+      "Isolated secundum atrial septal defect (ASD, 10%)",
+      "Patent ductus arteriosus (PDA, 5%)",
+      "Tetralogy of Fallot (6%)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Gastrointestinal and haematological disorders occur with markedly increased frequency. Gastrointestinal anomalies include **congenital duodenal atresia**, classically manifesting on plain abdominal radiographs with the double bubble sign of gas in the stomach and dilated first duodenal segment, alongside annular pancreas and Hirschsprung disease. Neonates frequently exhibit transient myeloproliferative disorder, and children face a twenty-fold increased risk of developing acute leukemia.",
+   "say": "Duodenal atresia produces the double bubble sign on abdominal X-rays. Children also carry a twenty-fold increased risk of acute lymphoblastic leukaemia and acute megakaryoblastic leukaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Associated Systemic Disease",
+     "Primary Pathology",
+     "Diagnostic Evaluation",
+     "Therapeutic Action"
+    ],
+    "rows": [
+     [
+      "Duodenal atresia",
+      "Failed recanalization of duodenum",
+      "Plain abdominal X-ray (double bubble)",
+      "Duodenoduodenostomy bypass surgery"
+     ],
+     [
+      "Acute leukemia",
+      "ALL (80%) and AML-M7 megakaryoblastic",
+      "Bone marrow aspirate and GATA1 assay",
+      "Tailored chemotherapy protocols"
+     ],
+     [
+      "Congenital hypothyroidism",
+      "Thyroid dysgenesis or autoimmune",
+      "Annual serum TSH and free T4 assays",
+      "Lifelong oral levothyroxine replacement"
+     ],
+     [
+      "Atlantoaxial instability",
+      "Laxity of transverse odontoid ligament",
+      "Cervical spine flexion-extension X-rays",
+      "Screen prior to contact sports/anaesthesia"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Longitudinal multidisciplinary surveillance ensures timely intervention for neuro-endocrine and sensory impairments. Annual screening for **congenital hypothyroidism** is essential due to high rates of autoimmune thyroiditis and dysgenesis. Children require regular audiological testing to treat conductive hearing loss from narrow ear canals and recurrent otitis media, ophthalmological checks for congenital cataracts and refractive errors, and screening for atlantoaxial subluxation before participating in sports.",
+   "say": "Children with Down syndrome need annual thyroid screening, regular hearing tests, and vision checks. Cervical spine X-rays evaluate atlantoaxial instability before sports participation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sensory and Endocrine Audits",
+     "points": [
+      "Annual serum TSH and free T4 testing",
+      "Hearing checks every 6 months to detect glue ear",
+      "Ophthalmology audits for strabismus and cataracts"
+     ]
+    },
+    "right": {
+     "title": "Orthopaedic and Neurological Audits",
+     "points": [
+      "Lateral cervical spine X-rays at 3 to 5 years",
+      "Watch for gait changes, hyperreflexia, torticollis",
+      "Early intervention physiotherapy and speech therapy"
+     ]
+    }
+   }
+  }
+ ]
+}

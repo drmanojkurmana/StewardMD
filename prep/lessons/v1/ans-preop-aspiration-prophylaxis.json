@@ -1,0 +1,271 @@
+{
+    "v": 1,
+    "id": "ans-preop-aspiration-prophylaxis",
+    "subject": "anaesthesia",
+    "module": "ans-preop",
+    "title": "Aspiration Prophylaxis, Perioperative Medication Management, and Cardiac Risk",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Mendelson Syndrome Criteria",
+            "tx": "**Mendelson syndrome risk criteria** define chemical pneumonitis resulting from aspiration of acidic gastric contents during induction or emergence. Severe pulmonary tissue destruction occurs when aspirated gastric juice volume exceeds 0.4 milliliters per kilogram (approximately 25 milliliters in adults) with a pH under 2.5, precipitating immediate bronchospasm, alveolar-capillary membrane disruption, hypoxaemia, and non-cardiogenic pulmonary edema.",
+            "say": "Mendelson syndrome risk criteria define chemical pneumonitis resulting from aspiration of acidic gastric contents during induction or emergence. Severe pulmonary tissue destruction occurs when aspirated gastric juice volume exceeds 0.4 milliliters per kilogram (approximately 25 milliliters in adults) with a pH under 2.5, precipitating immediate bronchospasm, alveolar-capillary membrane disruption, hypoxaemia, and non-cardiogenic pulmonary edema.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/kb/media/general-anaesthesia-inhaled-iv-mh-fig1.webp",
+                "alt": "Induction mechanisms and physiological protection against pulmonary aspiration",
+                "caption": "Induction mechanisms and physiological protection against pulmonary aspiration"
+            }
+        },
+        {
+            "title": "Aspiration Prophylaxis Regimen",
+            "tx": "**Pharmacological aspiration prophylaxis** targets both gastric juice acidity and residual volume in high-risk patients, including full stomachs, pregnant parturients, severe obesity, and hiatus hernia. Non-particulate sodium citrate (0.3 molar, 30 milliliters orally) rapidly neutralizes preexisting stomach acid within five minutes without causing lung granuloma formation if aspirated, unlike particulate magnesium or aluminum hydroxide antacids.",
+            "say": "Pharmacological aspiration prophylaxis targets both gastric juice acidity and residual volume in high-risk patients, including full stomachs, pregnant parturients, severe obesity, and hiatus hernia. Non-particulate sodium citrate (0.3 molar, 30 milliliters orally) rapidly neutralizes preexisting stomach acid within five minutes without causing lung granuloma formation if aspirated, unlike particulate magnesium or aluminum hydroxide antacids.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Pharmacological Agent",
+                    "Mechanism of Action",
+                    "Onset of Action",
+                    "Primary Clinical Advantage"
+                ],
+                "rows": [
+                    [
+                        "0.3 M Sodium Citrate",
+                        "Chemical acid neutralization",
+                        "Under 5 minutes orally",
+                        "Non-particulate; zero lung granuloma risk"
+                    ],
+                    [
+                        "Intravenous Famotidine",
+                        "Histamine H2 receptor blockade",
+                        "30 to 60 minutes",
+                        "Sustained suppression of gastric acid production"
+                    ],
+                    [
+                        "Intravenous Metoclopramide",
+                        "Dopamine D2 antagonism and 5-HT4 agonism",
+                        "15 to 30 minutes",
+                        "Elevates LES tone and accelerates gastric emptying"
+                    ],
+                    [
+                        "Intravenous Pantoprazole",
+                        "Proton pump H+/K+ ATPase blockade",
+                        "60 to 90 minutes",
+                        "Raises gastric pH above 4.0 for prolonged cases"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Metoclopramide Actions",
+            "tx": "**Prokinetic actions of metoclopramide** stem from central and peripheral dopamine D2 receptor antagonism combined with cholinergic activation and 5-HT4 receptor agonism. Metoclopramide enhances lower esophageal sphincter resting tone, coordinates antroduodenal contractions, and accelerates gastric emptying of liquids into the duodenum without stimulating acid secretion, though it is contraindicated in mechanical intestinal obstruction.",
+            "say": "Prokinetic actions of metoclopramide stem from central and peripheral dopamine D2 receptor antagonism combined with cholinergic activation and 5-HT4 receptor agonism. Metoclopramide enhances lower esophageal sphincter resting tone, coordinates antroduodenal contractions, and accelerates gastric emptying of liquids into the duodenum without stimulating acid secretion, though it is contraindicated in mechanical intestinal obstruction.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Upper Gastrointestinal Actions",
+                    "points": [
+                        "Elevates lower esophageal sphincter resting tone",
+                        "Relaxes pyloric sphincter and upper duodenum",
+                        "Accelerates clearance of residual gastric liquids"
+                    ]
+                },
+                "right": {
+                    "title": "Adverse Reactions and Traps",
+                    "points": [
+                        "Induces acute extrapyramidal dystonic reactions",
+                        "Strictly contraindicated in complete bowel obstruction",
+                        "Exacerbates Parkinson disease tremors via central D2 block"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Managing Renin-Angiotensin Drugs",
+            "tx": "**Withholding ACE inhibitors and ARBs** on the morning of major surgery prevents severe, refractory vasoplegic hypotension upon induction of general anaesthesia. Blunting angiotensin II vasoconstrictor mechanisms leaves vascular smooth muscle refractory to conventional alpha-adrenergic agonists like ephedrine and phenylephrine, often mandating emergency infusion of intravenous vasopressin or methylene blue to restore systemic vascular resistance.",
+            "say": "Withholding ACE inhibitors and ARBs on the morning of major surgery prevents severe, refractory vasoplegic hypotension upon induction of general anaesthesia. Blunting angiotensin II vasoconstrictor mechanisms leaves vascular smooth muscle refractory to conventional alpha-adrenergic agonists like ephedrine and phenylephrine, often mandating emergency infusion of intravenous vasopressin or methylene blue to restore systemic vascular resistance.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Patient takes morning lisinopril or telmisartan"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "General anaesthetic induction drops sympathetic tone"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Absence of angiotensin II backup triggers vasoplegia"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Administer IV vasopressin or terlipressin"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Perioperative Medication Continuation",
+            "tx": "**Essential chronic drugs to continue** on the morning of surgery include beta-blockers, statins, clonidine, and most neuropsychiatric agents, ingested with a minimal sip of water. Abrupt cessation of chronic beta-blockers triggers dangerous rebound sympathetic tachycardia, hypertension, and myocardial ischemia, whereas stopping clonidine precipitates life-threatening rebound hypertensive crisis from acute uninhibited norepinephrine surges.",
+            "say": "Essential chronic drugs to continue on the morning of surgery include beta-blockers, statins, clonidine, and most neuropsychiatric agents, ingested with a minimal sip of water. Abrupt cessation of chronic beta-blockers triggers dangerous rebound sympathetic tachycardia, hypertension, and myocardial ischemia, whereas stopping clonidine precipitates life-threatening rebound hypertensive crisis from acute uninhibited norepinephrine surges.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Drug Category",
+                    "Action on Morning of Surgery",
+                    "Pathophysiological Rationale",
+                    "Complication of Improper Management"
+                ],
+                "rows": [
+                    [
+                        "Beta-Adrenergic Blockers",
+                        "Continue with sip of water",
+                        "Maintains heart rate stability and reduces ischemia",
+                        "Rebound tachycardia and myocardial infarction"
+                    ],
+                    [
+                        "Clonidine (Alpha-2 Agonist)",
+                        "Continue with sip of water",
+                        "Preserves central sympatholytic tone",
+                        "Catastrophic rebound malignant hypertension"
+                    ],
+                    [
+                        "Oral Hypoglycaemics",
+                        "Withhold morning dose",
+                        "Prevents unmonitored intraoperative hypoglycemia",
+                        "Severe neuroglycopenic coma under anaesthesia"
+                    ],
+                    [
+                        "SGLT2 Inhibitors",
+                        "Withhold 3 to 4 days prior",
+                        "Diminishes risk of starvation ketoacidosis",
+                        "Life-threatening euglycaemic diabetic ketoacidosis"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Perioperative Anticoagulant Timing",
+            "tx": "**Anticoagulation interruption guidelines** dictate stopping warfarin five days before elective surgery to achieve an international normalized ratio (INR) under 1.5, bridging with therapeutic low molecular weight heparin in high thrombotic risk patients. Direct oral anticoagulants (DOACs) like apixaban and rivaroxaban are held for 48 hours (or 72 hours if renal clearance is impaired) prior to high-bleeding-risk procedures or neuraxial block.",
+            "say": "Anticoagulation interruption guidelines dictate stopping warfarin five days before elective surgery to achieve an international normalized ratio (INR) under 1.5, bridging with therapeutic low molecular weight heparin in high thrombotic risk patients. Direct oral anticoagulants (DOACs) like apixaban and rivaroxaban are held for 48 hours (or 72 hours if renal clearance is impaired) prior to high-bleeding-risk procedures or neuraxial block.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Antithrombotic Agent",
+                    "Required Withholding Interval",
+                    "Primary Laboratory Monitor",
+                    "Neuraxial Block Safety Clearance"
+                ],
+                "rows": [
+                    [
+                        "Warfarin",
+                        "5 full days prior",
+                        "Prothrombin time and INR under 1.5",
+                        "Document normal INR before spinal needle entry"
+                    ],
+                    [
+                        "Low Molecular Weight Heparin",
+                        "12 hours (prophylactic) or 24 hours (therapeutic)",
+                        "Anti-factor Xa level if renal failure",
+                        "12 hours post-prophylaxis, 24 hours post-treatment"
+                    ],
+                    [
+                        "Apixaban / Rivaroxaban",
+                        "48 hours (normal renal function)",
+                        "Specific anti-Xa chromogenic assay",
+                        "Hold 72 hours for neuraxial intervention"
+                    ],
+                    [
+                        "Clopidogrel",
+                        "5 to 7 days prior",
+                        "Platelet function aggregation testing",
+                        "Hold full 7 days before spinal or epidural"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Revised Cardiac Risk Index",
+            "tx": "**Revised Cardiac Risk Index criteria** established by Lee identify six independent predictors of major adverse cardiac events in non-cardiac surgery: high-risk surgical procedure (intraperitoneal, intrathoracic, suprainguinal vascular), history of ischemic heart disease, history of congestive heart failure, history of cerebrovascular disease, preoperative insulin therapy for diabetes mellitus, and preoperative serum creatinine exceeding 2.0 milligrams per deciliter.",
+            "say": "Revised Cardiac Risk Index criteria established by Lee identify six independent predictors of major adverse cardiac events in non-cardiac surgery: high-risk surgical procedure (intraperitoneal, intrathoracic, suprainguinal vascular), history of ischemic heart disease, history of congestive heart failure, history of cerebrovascular disease, preoperative insulin therapy for diabetes mellitus, and preoperative serum creatinine exceeding 2.0 milligrams per deciliter.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "RCRI Zero or One Predictor",
+                    "points": [
+                        "Estimated major cardiac event rate 0.4 to 0.9 percent",
+                        "Proceed directly with scheduled elective non-cardiac surgery",
+                        "Standard non-invasive hemodynamic monitoring"
+                    ]
+                },
+                "right": {
+                    "title": "RCRI Two or More Predictors",
+                    "points": [
+                        "Estimated cardiac complication rate exceeds 6.6 to 11 percent",
+                        "Cardiology consultation and echocardiography required",
+                        "Postoperative troponin surveillance and invasive monitoring"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Informed Consent Standards",
+            "tx": "**Essential elements of anaesthesia consent** demand transparent disclosure of common minor risks (postoperative nausea, sore throat, dental trauma, transient shivering) alongside rare catastrophic complications (anaphylaxis, malignant hyperthermia, awareness under anaesthesia, perioperative stroke, and death). The signed consent document confirms voluntary acceptance of the proposed anaesthetic plan and emergency resuscitation contingencies.",
+            "say": "Essential elements of anaesthesia consent demand transparent disclosure of common minor risks (postoperative nausea, sore throat, dental trauma, transient shivering) alongside rare catastrophic complications (anaphylaxis, malignant hyperthermia, awareness under anaesthesia, perioperative stroke, and death). The signed consent document confirms voluntary acceptance of the proposed anaesthetic plan and emergency resuscitation contingencies.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Review medical history and airway findings"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Explain planned anaesthetic technique and alternatives"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Discuss common and catastrophic risks"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Obtain signed voluntary informed consent"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

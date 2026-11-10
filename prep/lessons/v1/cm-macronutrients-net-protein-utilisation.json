@@ -1,0 +1,152 @@
+{
+ "v": 1,
+ "id": "cm-macronutrients-net-protein-utilisation",
+ "subject": "community-medicine",
+ "module": "cm-macronutrients",
+ "title": "Nutritional Protein Quality: Biological Value and Amino Acid Scores",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Protein quality versus quantity in human nutrition",
+   "tx": "In community nutritional assessment, evaluating dietary protein requires analyzing both total quantity and intrinsic quality, which dictates how efficiently ingested nitrogen is retained for tissue synthesis and maintenance. While animal proteins from eggs and milk supply all nine essential amino acids in optimal proportions, cereal-heavy vegetarian diets often contain lower protein densities that demand careful biochemical evaluation of **protein nutritional quality**.",
+   "say": "Total protein intake matters, but biological quality is what determines how well the body uses it for growth and tissue repair. Vegetarian diets require careful evaluation of protein quality.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Complete reference proteins (egg, milk)",
+     "points": ["Contains all 9 essential amino acids", "Proportions match human tissue synthesis", "High digestibility and nitrogen retention"]
+    },
+    "right": {
+     "title": "Incomplete plant proteins (cereals, pulses)",
+     "points": ["Lacks one or more essential amino acids", "Lower digestibility due to phytates and fibre", "Requires mutual dietary supplementation"]
+    }
+   }
+  },
+  {
+   "title": "Biological value: retained nitrogen proportion",
+   "tx": "The classical physiological index of protein quality is the **biological value calculation**, defined as the percentage of absorbed nitrogen that is retained by the body for growth and cellular maintenance. Experimentally measured using nitrogen balance studies in human volunteers, whole hen egg protein achieves a biological value of roughly ninety-six to one hundred, serving as the biological reference standard against which all other dietary proteins are judged.",
+   "say": "Biological value measures the percentage of absorbed nitrogen that the body retains for repair. Whole egg sets the international gold standard with a biological value near one hundred.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Food protein source", "Biological Value (BV)", "Digestibility Coefficient (%)"],
+    "rows": [
+     ["Whole hen egg", "96 to 100", "97 to 100"],
+     ["Cow milk", "84 to 90", "95 to 97"],
+     ["Fish and meat", "76 to 80", "94 to 97"],
+     ["Soybean meal", "74 to 75", "85 to 90"],
+     ["Rice protein", "68 to 70", "80 to 85"],
+     ["Wheat protein", "60 to 65", "85 to 90"]
+    ]
+   }
+  },
+  {
+   "title": "Digestibility coefficient and nitrogen absorption",
+   "tx": "Before protein nitrogen can be utilized for protein synthesis, it must be hydrolyzed by gastrointestinal enzymes and absorbed across the enterocyte brush border, measured as the **digestibility coefficient calculation**. Expressed as absorbed nitrogen divided by total ingested food nitrogen times one hundred, animal proteins demonstrate digestibility exceeding ninety-five percent, whereas plant grains average seventy-five to eighty-five percent due to indigestible cell wall fibres and phytates.",
+   "say": "The digestibility coefficient is the percentage of eaten protein that the gut actually absorbs into the bloodstream. Plant proteins are absorbed less efficiently because plant fibres trap nutrients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Ingested food nitrogen intake"},
+     {"id": "b", "label": "Faecal nitrogen loss subtracted"},
+     {"id": "c", "label": "Absorbed nitrogen / Ingested nitrogen x 100"},
+     {"id": "d", "label": "Digestibility coefficient (DC)"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Net protein utilisation: integrating absorption and retention",
+   "tx": "To capture both digestibility and subsequent physiological retention in a single comprehensive metric, nutritionists calculate **net protein utilisation**. Computed mathematically as biological value multiplied by the digestibility coefficient divided by one hundred, it directly measures the percentage of ingested dietary nitrogen that is retained by the body; whole egg yields an index around ninety to ninety-five, while polished rice averages fifty-five to sixty.",
+   "say": "Net protein utilisation multiplies biological value by digestibility. It reveals the exact percentage of eaten protein that the body keeps for growth and tissue repair.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Biological value (nitrogen retention)"},
+     {"id": "b", "label": "Digestibility coefficient (nitrogen absorption)"},
+     {"id": "c", "label": "Net Protein Utilisation = (BV x DC) / 100"},
+     {"id": "d", "label": "Percentage of eaten protein retained by body"}
+    ],
+    "edges": [["a", "c"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Amino acid score and provisional reference pattern",
+   "tx": "At the molecular level, nutritional chemists evaluate food proteins using the **amino acid score calculation**, also termed chemical score. The concentration of each essential amino acid in one gram of test protein is expressed as a percentage of the concentration of the same amino acid in an ideal provisional reference pattern established by the FAO and WHO, with whole egg or human milk serving as reference profiles.",
+   "say": "The amino acid score compares each essential amino acid in a food against an ideal pattern set by the World Health Organization. It reveals exactly which amino acids fall short.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Amino acid chemical score",
+     "points": ["(mg of amino acid in 1 g test protein / mg in reference) x 100", "Identifies chemical amino acid deficits", "Does not account for digestive losses in the gut"]
+    },
+    "right": {
+     "title": "PDCAAS (Digestibility corrected)",
+     "points": ["Amino acid score multiplied by faecal digestibility", "Modern regulatory standard for nutrition labeling", "Truncated at a maximum score of 1.0"]
+    }
+   }
+  },
+  {
+   "title": "Limiting amino acids in staple grains",
+   "tx": "In any incomplete plant protein, the specific essential amino acid showing the lowest chemical percentage relative to the reference standard is designated the **limiting amino acid**. Because protein synthesis ceases as soon as any single essential building block is exhausted, the limiting amino acid dictates overall biological value; in cereals such as wheat, rice and maize, lysine is limiting, whereas in pulses, methionine and cysteine are limiting.",
+   "say": "The limiting amino acid is the essential amino acid present in the smallest amount relative to need. In wheat and rice, lysine is limiting; in lentils and pulses, methionine is limiting.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Staple dietary food", "Primary limiting amino acid", "Secondary limiting amino acid"],
+    "rows": [
+     ["Wheat and rice cereals", "Lysine (severely deficient)", "Threonine"],
+     ["Maize (corn)", "Lysine and Tryptophan", "Methionine"],
+     ["Pulses, lentils and beans", "Methionine and Cysteine", "Tryptophan"],
+     ["Soybean meal", "Methionine", "Threonine"],
+     ["Groundnut (peanut)", "Methionine and Lysine", "Threonine"]
+    ]
+   }
+  },
+  {
+   "title": "Mutual supplementation in Indian traditional diets",
+   "tx": "Traditional Indian culinary practices intuitively overcome plant amino acid deficits through **mutual dietary supplementation**, combining cereals and pulses in a single meal. Because cereals are rich in sulfur amino acids (methionine) but poor in lysine, while pulses are rich in lysine but poor in methionine, eating rice with dal or roti with lentils in a four to one ratio achieves an amino acid score rivaling animal protein.",
+   "say": "Eating rice and dal or roti and lentils together creates a complete protein. The excess methionine in rice covers the deficit in dal, while the lysine in dal fixes the deficit in rice.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Cereals: Rich in methionine, poor in lysine"},
+     {"id": "b", "label": "Pulses: Rich in lysine, poor in methionine"},
+     {"id": "c", "label": "Traditional 4:1 cereal-pulse combination"},
+     {"id": "d", "label": "Near-complete protein equivalent to milk"}
+    ],
+    "edges": [["a", "c"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Protein-energy ratio in community diets",
+   "tx": "To determine whether a community diet supplies adequate protein density to support child growth, nutritionists calculate the **protein-energy percentage ratio**, expressing energy derived from protein as a percentage of total daily dietary calories. For healthy adults, protein should contribute ten to fifteen percent of total energy, while pregnant women and convalescing children require ratios approaching twelve to fifteen percent to support rapid lean tissue deposition.",
+   "say": "Protein should supply ten to fifteen percent of your daily calories. Growing children and pregnant mothers require the higher end of this range to build new muscle and organs.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Population group", "Recommended PE percentage", "Dietary implication"],
+    "rows": [
+     ["Healthy adult man / woman", "10 to 12 percent of total kcal", "Easily met by balanced cereal-pulse diet"],
+     ["Infants and young children", "10 to 12 percent of total kcal", "Demands nutrient-dense complementary foods"],
+     ["Pregnant and lactating mothers", "12 to 15 percent of total kcal", "Requires extra pulse, milk or egg portions"],
+     ["Severe acute malnutrition recovery", "12 to 15 percent of total kcal", "Therapeutic feeds (F-75, F-100, RUTF)"]
+    ]
+   }
+  },
+  {
+   "title": "Protein quality in Supplementary Nutrition programs",
+   "tx": "National supplementary feeding programs, including the Integrated Child Development Services and PM POSHAN school lunches, mandate strict **supplementary nutrition standards** to safeguard growing children. Hot cooked meals must provide at least four hundred and fifty to five hundred kilocalories and twelve to fifteen grams of protein for primary schoolchildren, combining sprouted legumes, groundnuts, fortified millets and eggs to ensure high biological value.",
+   "say": "School lunch programmes mandate hot meals providing five hundred calories and fifteen grams of high-quality protein, using lentils, fortified grains and eggs to support child growth.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Primary school child: 450 kcal + 12g protein"},
+     {"id": "b", "label": "Upper primary child: 700 kcal + 20g protein"},
+     {"id": "c", "label": "Use of sprouted pulses, millets and eggs"},
+     {"id": "d", "label": "Prevention of stunting, wasting and anaemia"}
+    ],
+    "edges": [["a", "c"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

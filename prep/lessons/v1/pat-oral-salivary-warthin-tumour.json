@@ -1,0 +1,208 @@
+{
+  "v": 1,
+  "module": "pat-oral-salivary",
+  "subject": "pathology",
+  "title": "Warthin Tumour and Mucoepidermoid Carcinoma",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Warthin tumour fills older male smokers' parotid tails with cystic oncocytic epithelium over lymphoid stroma, sometimes bilateral, benign and occasionally multifocal, second commonest parotid neoplasm. The smoker's cystic parotid tumour is **Warthin tumour (papillary cystadenoma lymphomatosum)**. Bilateral tumours appear in roughly one in ten patients, a clue few other parotid neoplasms offer.",
+      "say": "An older male smoker with a cystic parotid tail mass, sometimes both sides, carries Warthin tumour.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m118-pat-oral-salivary-warthin-tumour.webp",
+        "alt": "Warthin tumour parotid histology with oncocytic epithelium over lymphoid stroma",
+        "caption": "Warthin tumour parotid histology with oncocytic epithelium over lymphoid stroma. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Technetium uptake concentrates in Warthin oncocytes historically, while modern FNAC showing oncocytic sheets with lymphocytes and ultrasound cystic patterns usually suffice beside examination. Cytological recognition is **Warthin tumour oncocytic cytology**. Brown proteinaceous cyst fluid on aspiration supports Warthin tumour before formal cytology reports arrive.",
+      "say": "Oncocytes plus lymphocytes on parotid cytology spell Warthin tumour before the specimen confirms it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Warthin tumour",
+          "points": [
+            "Older male smokers, parotid tail",
+            "Cystic, bilateral sometimes",
+            "Benign, observation possible selected"
+          ]
+        },
+        "right": {
+          "title": "Pleomorphic adenoma",
+          "points": [
+            "Any adult, commonest overall",
+            "Solid, chondromyxoid stroma",
+            "Excision with cuff advised"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Mucoepidermoid carcinoma, commonest salivary malignancy, mixes mucous, intermediate, and epidermoid cells cystically in low grades mimicking benign lesions, solidly in high grades invading nerve and node. Grading governs it: **mucoepidermoid carcinoma, commonest salivary malignancy**. CRTC1 MAML2 fusion supports mucoepidermoid carcinoma when morphology alone leaves grade uncertain.",
+      "say": "Commonest salivary cancer is mucoepidermoid; low grade cysts deceive, high grade solids declare war.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Grade",
+          "Histology accent",
+          "Behaviour"
+        ],
+        "rows": [
+          [
+            "Low grade",
+            "Cystic, mucous cells plentiful",
+            "Excision often curative"
+          ],
+          [
+            "Intermediate",
+            "Mixed cystic and solid",
+            "Neck and adjuvant by stage"
+          ],
+          [
+            "High grade",
+            "Solid epidermoid, atypia, necrosis",
+            "Nodes, perineural spread, guarded"
+          ],
+          [
+            "Any grade clue",
+            "MAML2 rearrangement frequent",
+            "Supports diagnosis molecularly"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Minor salivary mucoepidermoid carcinoma favours palate, presenting as bluish fluctuant swellings mimicking mucoceles until biopsy reveals malignancy beneath innocent surface. That mimicry is **palatal mucoepidermoid carcinoma masquerading as mucocele**. Palate is the commonest minor gland site, followed by buccal mucosa and upper lip.",
+      "say": "A palatal mucocele that persists earns biopsy; mucoepidermoid carcinoma hides under that disguise.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/oral-cavity-and-salivary-glands-fig1.webp",
+        "alt": "Oral cavity and salivary glands anatomy and histology",
+        "caption": "Minor salivary gland distribution across palate and oral cavity."
+      }
+    },
+    {
+      "tx": "Parotid malignancy declares through pain, rapid growth, fixation, skin involvement, nodes, and facial weakness, each converting elective lump surgery into cancer staging and nerve sacrifice discussions. Red flag assembly is **parotid malignancy clinical red flags**. Skin fixation over a parotid mass suggests direct invasion and widens the planned resection.",
+      "say": "Pain, fixation, nodes, or nerve weakness convert a parotid lump into a cancer pathway immediately.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Parotid mass red flags assessed"
+          },
+          {
+            "id": "b",
+            "label": "FNAC and MRI staging obtained"
+          },
+          {
+            "id": "c",
+            "label": "Nerve involvement mapped preoperatively"
+          },
+          {
+            "id": "d",
+            "label": "Resection extent and neck planned"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Facial nerve sacrifice follows invasion, not proximity, with immediate grafting reconstruction when oncologically cleared, while uninvolved nerves are preserved even when tumour abuts them. That principle is **facial nerve preservation versus sacrifice in parotid cancer**. Cable grafting from great auricular or sural nerve restores tone when a segment must go.",
+      "say": "Sacrifice the nerve only when tumour invades it; graft immediately when sacrifice is unavoidable.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nerve preserved",
+          "points": [
+            "Encapsulated or abutting tumour",
+            "Function monitored postoperatively",
+            "Adjuvant RT by pathology"
+          ]
+        },
+        "right": {
+          "title": "Nerve sacrificed",
+          "points": [
+            "Gross invasion or encasement",
+            "Cable graft reconstruction",
+            "Eye protection and rehabilitation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Salivary cancers spread perineurally and to nodes variably by grade and type, so elective neck treatment and postoperative radiotherapy follow pathology risk rather than habit. Risk adaptation is **adjuvant therapy selection in salivary malignancy**. High grade histology with involved margins is the pairing most often sent for postoperative radiotherapy.",
+      "say": "Grade, perineural invasion, margins, and nodes, not habit, prescribe neck treatment and radiotherapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Risk feature",
+          "Consequence",
+          "Response"
+        ],
+        "rows": [
+          [
+            "High grade histology",
+            "Nodal relapse risk",
+            "Elective neck treatment"
+          ],
+          [
+            "Perineural invasion",
+            "Skull base relapse route",
+            "Radiotherapy fields extended"
+          ],
+          [
+            "Close or positive margin",
+            "Local recurrence",
+            "Adjuvant radiotherapy"
+          ],
+          [
+            "Facial nerve involvement",
+            "Advanced local disease",
+            "Combined modality planning"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Children's salivary masses invert adult probabilities toward malignancy proportionally more often, with mucoepidermoid carcinoma leading, so paediatric parotid lumps earn faster tissue diagnosis. That age inversion is **paediatric salivary mass malignancy vigilance**. Mucoepidermoid carcinoma also leads paediatric salivary malignancy lists, reinforcing that faster tissue diagnosis.",
+      "say": "A child's parotid lump is malignant proportionally oftener than an adult's; diagnose it faster.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adult parotid mass",
+          "points": [
+            "About four fifths benign",
+            "Pleomorphic adenoma leads",
+            "Measured workup acceptable"
+          ]
+        },
+        "right": {
+          "title": "Childhood parotid mass",
+          "points": [
+            "Malignancy share far higher",
+            "Mucoepidermoid leads cancers",
+            "Prompt specialist pathway"
+          ]
+        }
+      }
+    }
+  ]
+}

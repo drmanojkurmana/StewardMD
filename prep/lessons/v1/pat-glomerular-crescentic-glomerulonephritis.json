@@ -1,0 +1,218 @@
+{
+  "v": 1,
+  "module": "pat-glomerular",
+  "subject": "pathology",
+  "title": "Crescentic GN, Anti-GBM Disease, and Alport Syndrome Basement Membrane Splitting",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Crescents fill Bowman space with fibrin, macrophages, and epithelial proliferation when capillary walls rupture, crescentic glomerulonephritis collapsing filtration within days to weeks without treatment. That emergency pattern is **crescentic glomerulonephritis (rapidly progressive GN)**. When over half the glomeruli carry crescents, renal recovery becomes unlikely even with prompt immunosuppression.",
+      "say": "Crescents mean kidneys failing in days; biopsy and induction therapy race the scar together.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Type",
+          "Immunofluorescence",
+          "Prototype"
+        ],
+        "rows": [
+          [
+            "Type 1 anti-GBM",
+            "Linear IgG along membrane",
+            "Goodpasture disease"
+          ],
+          [
+            "Type 2 immune complex",
+            "Granular deposits",
+            "Lupus, postinfectious, IgA severe"
+          ],
+          [
+            "Type 3 pauci-immune",
+            "Little or no deposit",
+            "ANCA vasculitis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Anti-GBM disease paints glomerular and alveolar basement membranes with linear IgG against collagen IV alpha three chains, haemoptysis and renal failure as Goodpasture syndrome when lungs join. The linear disease is **anti-GBM (Goodpasture) disease**. Immunofluorescence shows smooth linear IgG along the membrane, unlike the granular lumpy deposits of immune complex disease.",
+      "say": "Linear IgG, lung haemorrhage, renal failure: anti-GBM disease earns plasma exchange immediately.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anti-GBM disease",
+          "points": [
+            "Linear membrane IgG",
+            "Lung haemorrhage common",
+            "Exchange plus immunosuppression"
+          ]
+        },
+        "right": {
+          "title": "ANCA crescentic disease",
+          "points": [
+            "Pauci-immune biopsy",
+            "Systemic vasculitis features",
+            "Rituximab or cyclophosphamide induction"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Plasma exchange in anti-GBM disease removes pathogenic antibody while steroids and cyclophosphamide stop production, dialysis dependence at presentation and crescent burden forecasting renal recovery. That urgency defines **plasma exchange in anti-GBM disease**. Exchange is usually continued daily for about two weeks or until anti-GBM antibody becomes undetectable in serum.",
+      "say": "Exchange the antibody out today in anti-GBM disease; oliguric dialysis patients rarely recover kidneys.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "RPGN suspected clinically"
+          },
+          {
+            "id": "b",
+            "label": "Urgent biopsy, ANCA and anti-GBM sent"
+          },
+          {
+            "id": "c",
+            "label": "Exchange and induction by type"
+          },
+          {
+            "id": "d",
+            "label": "Infection prophylaxis accompanies therapy"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Alport syndrome mutates collagen IV alpha three to five chains, splitting and lamellating basement membranes into basket weave electron microscopy beside haematuria, sensorineural deafness, and lenticonus. That woven membrane is **Alport syndrome basement membrane splitting**. Anterior lenticonus, a conical protrusion of the lens, is almost specific to Alport syndrome on eye examination.",
+      "say": "Basket weave basement membrane plus deafness and eye signs name Alport syndrome's collagen failure.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/alport-syndrome-fig1.webp",
+        "alt": "Alport syndrome organ pathology",
+        "caption": "Alport syndrome across kidney, ear, and eye from collagen IV mutation."
+      }
+    },
+    {
+      "tx": "X-linked Alport males progress to kidney failure by young adulthood while carrier females haematuria variably, autosomal forms distributing risk differently for genetic counselling. Early RAAS blockade delays progression: **Alport syndrome inheritance and early RAAS therapy**. About 85 percent of Alport families are X linked COL4A5, so an affected father never passes it to his sons.",
+      "say": "Start RAAS blockade at microalbuminuria in Alport syndrome; years of filtration are bought cheaply.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Childhood Alport clues",
+          "points": [
+            "Persistent microscopic haematuria",
+            "Family deafness and kidney failure",
+            "Hearing screen abnormal"
+          ]
+        },
+        "right": {
+          "title": "Adult progression",
+          "points": [
+            "Proteinuria and falling eGFR",
+            "Anterior lenticonus on eye exam",
+            "Transplant without recurrence generally"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Thin basement membrane disease thins glomerular membrane uniformly causing familial benign haematuria, yet overlapping collagen genes with Alport carriers demand longitudinal respect. That overlap counsels **thin basement membrane and Alport carrier continuum**. Normal adult membrane measures roughly 300 to 400 nanometres; diffuse thinning below 250 nanometres supports this diagnosis.",
+      "say": "Thin membranes explain benign family haematuria, but collagen genetics blur into Alport respect.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/thin-basement-membrane-nephropathy-fig1.webp",
+        "alt": "Thin basement membrane glomerular pathology",
+        "caption": "Diffusely thinned glomerular basement membrane with a red cell crossing into Bowman space in thin basement membrane disease."
+      }
+    },
+    {
+      "tx": "Rapidly progressive presentation triage never waits for every antibody: oliguria, active sediment, and rising creatinine earn biopsy within days and pulse steroids when infection excluded. That tempo is **rapidly progressive GN emergency pathway**. Dysmorphic red cells and red cell casts in fresh urine confirm the bleeding is glomerular, not from stones or prostate.",
+      "say": "In rapidly progressive GN, biopsy in days not weeks; kidneys scar while panels travel.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Signal",
+          "Tempo",
+          "Action"
+        ],
+        "rows": [
+          [
+            "Creatinine doubling in days",
+            "Emergency",
+            "Same week biopsy and serology"
+          ],
+          [
+            "Lung haemorrhage joined",
+            "Life threatening",
+            "Exchange considered immediately"
+          ],
+          [
+            "Crescents over half glomeruli",
+            "Poor renal prognosis",
+            "Still treat lung and systemic disease"
+          ],
+          [
+            "Chronicity dominant biopsy",
+            "Scar outweighs activity",
+            "Avoid futile toxic therapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Goodpasture antigen exposure by smoking, hydrocarbons, and infection unmasks alveolar collagen to circulating antibody, explaining pulmonary predominance in smokers with anti-GBM disease. That exposure link is **environmental unmasking in anti-GBM lung disease**. Hydrocarbon solvent inhalation is another recognised trigger, so an occupational history belongs in every suspected case.",
+      "say": "Smoking opens alveolar membranes to anti-GBM antibody; advise cessation as immunology, not lifestyle garnish.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Collagen IV antibody forms"
+          },
+          {
+            "id": "b",
+            "label": "Smoking injures alveolar membrane"
+          },
+          {
+            "id": "c",
+            "label": "Antibody reaches alveolar antigen"
+          },
+          {
+            "id": "d",
+            "label": "Haemorrhage beside renal failure"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

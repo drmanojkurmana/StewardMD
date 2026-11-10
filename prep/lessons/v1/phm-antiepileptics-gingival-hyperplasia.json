@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-antiepileptics",
+  "subject": "pharmacology",
+  "title": "Antiepileptic Adverse Effects and Teratogenicity: Gingival Hyperplasia, Fetal Hydantoin and Neural Tube Defects",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Gingival hyperplasia** is phenytoin's signature on the dental chair: painless fibrotic overgrowth of the gums beginning in the interdental papillae within months, worsened by plaque and poor hygiene, milder counterparts trailing cyclosporine and calcium channel blockers in a famous three drug differential. Folate depletion may contribute. Management is oral hygiene obsession, dental referral, dose review and switching agent where epilepsy allows, because surgical debulking without drug change simply regrows.",
+      "say": "Overgrown gums on phenytoin need the dentist and the drug chart together; surgery alone regrows.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Drug induced gingival overgrowth trio",
+          "points": [
+            "Phenytoin: the classic, dose and hygiene related",
+            "Ciclosporin: transplant populations",
+            "Calcium channel blockers: nifedipine and amlodipine",
+            "All worsened by plaque accumulation"
+          ]
+        },
+        "right": {
+          "title": "Management sequence",
+          "points": [
+            "Intensive oral hygiene and plaque control",
+            "Dental review and folate status",
+            "Dose reduction or agent switch where possible",
+            "Gingivectomy reserved, relapse expected without change"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Fetal hydantoin syndrome** names the phenytoin exposed child's pattern: prenatal and postnatal growth restriction, craniofacial features (broad nasal bridge, hypertelorism, short neck), nail and distal phalanx hypoplasia, and developmental delay, attributed partly to epoxide metabolites and folate antagonism. Modern framing avoids implying certainty per child (many exposed children are unaffected) while keeping the counselling duty. Carbamazepine carries its own smaller craniofacial and neural tube ledger below.",
+      "say": "Fetal hydantoin is a pattern, not a prophecy; counsel the pattern and plan the pregnancy before it starts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "expose",
+            "label": "First trimester phenytoin exposure"
+          },
+          {
+            "id": "epox",
+            "label": "Epoxide metabolites and folate antagonism implicated"
+          },
+          {
+            "id": "pattern",
+            "label": "Growth restriction, craniofacial and nail hypoplasia pattern"
+          },
+          {
+            "id": "plan",
+            "label": "Preconception switch and folate reduce the risk"
+          }
+        ],
+        "edges": [
+          [
+            "expose",
+            "epox"
+          ],
+          [
+            "epox",
+            "pattern"
+          ],
+          [
+            "pattern",
+            "plan"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Neural tube defects** distribute across the cabinet with valproate carrying the heaviest share (1 to 2 percent, spina bifida predominating), carbamazepine around 0.5 to 1 percent, and lamotrigine and levetiracetam near background in registry data. Folic acid supplementation (higher dose 5 mg in many guidelines for antiepileptic users) begins before conception because the tube closes by day 28, usually before pregnancy is recognised; supplementation after that date decorates rather than prevents.",
+      "say": "The tube closes by day twenty eight; folate is a preconception drug or it is a garnish.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Neural tube defect risk ladder",
+          "points": [
+            "Valproate: 1 to 2 percent, dose related",
+            "Carbamazepine: about 0.5 to 1 percent",
+            "Lamotrigine and levetiracetam: near background rates",
+            "Background population risk about 0.1 percent"
+          ]
+        },
+        "right": {
+          "title": "Prevention choreography",
+          "points": [
+            "Folate 5 mg daily before conception in many guidelines",
+            "Lowest effective monotherapy dose",
+            "Anomaly scanning at 18 to 20 weeks",
+            "Registry enrolment offered for outcome data"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Neurodevelopment** may matter more than anatomy in counselling arithmetic: valproate exposure associates with IQ reductions averaging around 7 to 10 points at higher doses and two to three fold increases in autism spectrum diagnoses in cohort studies, outcomes no scan can exclude at 20 weeks. This is why regulators restrict valproate by programme rather than by leaflet, and why preconception switches need months of seizure stability testing on the new agent before conception is attempted.",
+      "say": "The valproate conversation is about IQ and autism odds, not only spina bifida; switch early and prove stability first.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "counsel",
+            "label": "Counsel anatomy plus neurodevelopment risks together"
+          },
+          {
+            "id": "switch",
+            "label": "Switch agent with months of stability proven"
+          },
+          {
+            "id": "conceive",
+            "label": "Conceive on lowest effective monotherapy with folate"
+          },
+          {
+            "id": "monitor",
+            "label": "Levels and anomaly surveillance through pregnancy"
+          }
+        ],
+        "edges": [
+          [
+            "counsel",
+            "switch"
+          ],
+          [
+            "switch",
+            "conceive"
+          ],
+          [
+            "conceive",
+            "monitor"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Idiosyncratic reactions** cut across mechanisms and demand recognition drills: Stevens Johnson syndrome and toxic epidermal necrolysis with lamotrigine (titration dependent), carbamazepine (HLA flagged) and phenytoin; DRESS (drug reaction with eosinophilia and systemic symptoms) arriving at two to eight weeks with fever, rash, eosinophilia and hepatitis; and aplastic anaemia historically chained to felbamate and carbamazepine. Any new rash with mucosal involvement or systemic features on a recent antiepileptic means stop and escalate the same day.",
+      "say": "Rash plus fever, mucosa or eosinophils on a new antiepileptic is a same day stop and escalate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Severe reaction patterns",
+          "points": [
+            "Stevens Johnson and toxic epidermal necrolysis: mucosal, blistering",
+            "DRESS: 2 to 8 weeks, fever, eosinophilia, hepatitis",
+            "Aplastic anaemia: felbamate and carbamazepine history",
+            "HLA B*1502 and A*3101 screening for carbamazepine"
+          ]
+        },
+        "right": {
+          "title": "Immediate responses",
+          "points": [
+            "Stop the suspect drug the same day",
+            "Dermatology and burns or critical care for skin failure",
+            "Never rechallenge after Stevens Johnson or DRESS",
+            "Cross reacting aromatic agents avoided (phenytoin, carbamazepine, lamotrigine care)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hyponatraemia, bone disease and endocrine ripples** form the cabinet's slow adverse weather: carbamazepine and oxcarbazepine waste sodium through SIADH like action, enzyme inducers catabolise vitamin D and sex steroids (osteoporosis, contraceptive failure, sexual dysfunction), valproate nudges weight and insulin resistance upward, and gabapentinoids sedate. Annual review measuring sodium on the carbamazepine family, vitamin D and bone health on inducers, and weight and glucose on valproate converts these from examination lists into clinic habits.",
+      "say": "Sodium, bones, weight and contraception: the annual review is where slow toxicities are caught.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Slow adverse weather",
+          "points": [
+            "Hyponatraemia: carbamazepine, oxcarbazepine, eslicarbazepine",
+            "Bone loss: enzyme inducers and valproate",
+            "Weight and metabolic gain: valproate, gabapentinoids",
+            "Sexual and reproductive effects across the cabinet"
+          ]
+        },
+        "right": {
+          "title": "Annual review instruments",
+          "points": [
+            "Sodium, full blood count and liver profile by agent",
+            "Vitamin D and densitometry where risk accumulates",
+            "Weight, glucose and lipids on valproate",
+            "Contraception and pregnancy intention revisited"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Enzyme inducing antiepileptics and contraception** deserve unhurried arithmetic: combined pills, patches, rings and progestogen only pills can fail at standard doses, so guidance favours copper or levonorgestrel intrauterine methods unaffected by induction, or depot and implant strategies with caveats, planned with the same seriousness as seizure control because an unplanned pregnancy on valproate or phenytoin is the catastrophe both clinics exist to prevent. Lamotrigine levels, meanwhile, halve on oestrogen contraceptives, risking breakthrough seizures.",
+      "say": "Inducers defeat pills in both directions: contraception fails, and oestrogen halves lamotrigine levels.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "inducer",
+            "label": "Enzyme inducing antiepileptic prescribed"
+          },
+          {
+            "id": "pill",
+            "label": "Hormonal contraceptive metabolism accelerated"
+          },
+          {
+            "id": "iud",
+            "label": "Intrauterine methods preferred, unaffected by induction"
+          },
+          {
+            "id": "lamo",
+            "label": "Oestrogen halves lamotrigine: seizure and rash vigilance"
+          }
+        ],
+        "edges": [
+          [
+            "inducer",
+            "pill"
+          ],
+          [
+            "pill",
+            "iud"
+          ],
+          [
+            "inducer",
+            "lamo"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Sudden unexpected death in epilepsy (SUDEP)** completes honest counselling: risk near one per thousand patient years, concentrated in uncontrolled generalised tonic clonic seizures, nocturnal seizures and non adherence, reduced by seizure control, night supervision or listening devices, and adherence support rather than any drug choice. Mentioning SUDEP is now expected practice; the conversation itself improves adherence, which is its own intervention.",
+      "say": "Name SUDEP, count tonic clonic control, and treat adherence as the modifiable risk it is.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "SUDEP risk concentration",
+          "points": [
+            "Frequent generalised tonic clonic seizures",
+            "Nocturnal seizures unwitnessed",
+            "Non adherence and abrupt drug cessation",
+            "Living and sleeping alone"
+          ]
+        },
+        "right": {
+          "title": "Risk reduction conversation",
+          "points": [
+            "Optimise tonic clonic seizure control",
+            "Adherence support and supply continuity",
+            "Night supervision or detection devices",
+            "Document the discussion and the plan"
+          ]
+        }
+      }
+    }
+  ]
+}

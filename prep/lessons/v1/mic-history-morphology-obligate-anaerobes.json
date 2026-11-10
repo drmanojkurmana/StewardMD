@@ -1,0 +1,239 @@
+{
+  "v": 1,
+  "module": "mic-history-morphology",
+  "subject": "microbiology",
+  "title": "Obligate Anaerobes and Microscopy: Dark Ground, Phase Contrast and Electron Methods",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Obligate anaerobes** are poisoned by oxygen because they lack or scant superoxide dismutase and catalase, letting superoxide and hydrogen peroxide accumulate fatally; aerotolerant species (many clostridia, lactobacilli) endure oxygen without using it. The roster that matters clinically: Clostridium, Bacteroides and Prevotella, Fusobacterium, Peptostreptococcus and Actinomyces, dominating abscesses below the diaphragm and wherever tissue dies.",
+      "say": "Oxygen is a poison these bacteria cannot detoxify; dead tissue is their invitation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oxygen defence ladder",
+          "points": [
+            "Obligate aerobes: full SOD and catalase",
+            "Facultative: inducible defences",
+            "Aerotolerant anaerobes: partial SOD",
+            "Obligate anaerobes: defences absent, oxygen lethal"
+          ]
+        },
+        "right": {
+          "title": "Clinical roster",
+          "points": [
+            "Bacteroides fragilis group: abdominal abscesses",
+            "Clostridium species: spores plus toxins",
+            "Fusobacterium: Lemierre and oral sepsis",
+            "Actinomyces: chronic lumpy jaw and IUD infections"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anaerobic culture is** an engineering discipline: specimens in anaerobic transport media (never refrigerated swabs drying in air), Robertson cooked meat and thioglycollate broths, anaerobic jars with GasPak hydrogen and catalyst or McIntosh Fildes evacuation, indicator methylene blue staying colourless, and prereduced media in cabinets for the fastidious. A pus Gram stain showing bacteria that refuse aerobic culture is anaerobes announcing a transport failure, not their absence.",
+      "say": "No growth aerobically from foul pus means the transport failed the anaerobes, not that pus was sterile.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "collect",
+            "label": "Aspirate or tissue into anaerobic transport medium"
+          },
+          {
+            "id": "plate",
+            "label": "Plated on blood agar, incubated anaerobically"
+          },
+          {
+            "id": "verify",
+            "label": "Indicator confirms anaerobiosis"
+          },
+          {
+            "id": "id",
+            "label": "Aerotolerance test separates true anaerobes"
+          }
+        ],
+        "edges": [
+          [
+            "collect",
+            "plate"
+          ],
+          [
+            "plate",
+            "verify"
+          ],
+          [
+            "verify",
+            "id"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Dark ground microscopy** makes the invisible luminous: a special condenser illuminates obliquely so only light scattered by organisms reaches the eye, showing living thin spirochaetes (Treponema pallidum in chancre fluid) bright on black, unstained and motile. It remains the immediate test of early syphilis where serology still sleeps, with oral commensal treponemes as its specificity trap in mouth lesions.",
+      "say": "Spirochaetes too thin to stain shine in dark ground; use it on genital chancres, not mouths.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dark ground facts",
+          "points": [
+            "Oblique illumination, scattered light image",
+            "Detects motile T pallidum in primary chancre",
+            "Immediate result before serology converts",
+            "False friends: oral commensal spirochaetes"
+          ]
+        },
+        "right": {
+          "title": "Microscopy family",
+          "points": [
+            "Phase contrast: living unstained cells by phase shifts",
+            "Fluorescence: auramine, immunofluorescence",
+            "Bright field with stains: routine bench",
+            "Electron microscopy: viruses and ultrastructure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Phase contrast** converts invisible phase shifts through transparent living cells into brightness, letting laboratories watch motility, spores and cell division without killing the specimen, while fluorescence microscopy (auramine for acid fast screening, fluorescein tagged antibodies for direct antigen detection) trades natural contrast for labelled specificity. Each method answers a different specimen question, which is why the microscope bench keeps all three.",
+      "say": "Phase shows living structure, fluorescence shows labelled identity, dark ground shows the unstainable.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Phase contrast uses",
+          "points": [
+            "Wet mounts: motility and morphology alive",
+            "Spore and inclusion observation",
+            "Urine and stool parasite screening",
+            "No staining artefacts"
+          ]
+        },
+        "right": {
+          "title": "Fluorescence uses",
+          "points": [
+            "Auramine screening of sputum (faster scans)",
+            "Direct fluorescent antibody: Legionella, rabies",
+            "Immunofluorescence serology patterns (ANA)",
+            "Calcofluor for fungi in tissue"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Electron microscopy resolves** what light cannot: transmission EM shows viral morphology (rotavirus wheels, poxvirus bricks, coronavirus crowns that named an era), internal bacterial ultrastructure and immune EM aggregation, while scanning EM renders surfaces (biofilms on catheters) in three dimensional theatre. Negative staining with phosphotungstate made stool virus diagnosis possible before molecular methods inherited the work.",
+      "say": "EM named viruses by silhouette for decades; PCR inherited the diagnosis, not the portraits.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transmission EM",
+          "points": [
+            "Negative stain viral morphology in stool and vesicles",
+            "Ultrathin sections: intracellular organisms",
+            "Immune electron microscopy aggregation",
+            "Resolution to nanometres"
+          ]
+        },
+        "right": {
+          "title": "Scanning EM",
+          "points": [
+            "Surface topography of cells and biofilms",
+            "Device colonisation studies",
+            "No internal structure",
+            "Research rather than routine diagnosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anaerobic infection signatures** teach recognition before culture returns: foul smelling pus, gas in tissues, black discharge, sulphur granules (Actinomyces), infections hugging mucosal surfaces (below diaphragm, oral, pelvic), failure of aminoglycosides (oxygen dependent uptake from the pharmacology lessons) and polymicrobial Gram stains. Metronidazole's anaerobic spectrum exists precisely for this roster.",
+      "say": "Foul smell, gas and mucosal neighbourhood: prescribe for anaerobes before the jar opens.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical signatures",
+          "points": [
+            "Putrid odour and gas in tissue",
+            "Abscesses near mucosae",
+            "Gram stain mixed, culture aerobic silent",
+            "Thrombophlebitis syndromes (Lemierre)"
+          ]
+        },
+        "right": {
+          "title": "Therapy logic",
+          "points": [
+            "Drainage is primary, antibiotics adjuvant",
+            "Metronidazole anaerobic anchor",
+            "Aminoglycosides inactive against anaerobes",
+            "Beta lactamase shields in B fragilis covered"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Microscope maintenance of** diagnostic value needs magnification literacy: oil immersion at 1000 fold total for bacteria, low power scanning for fluorescence sputum screens and tissue parasites, wet mount powers for ova and motility, and the discipline that morphology without specimen quality misleads (squamous cells marking sputum as saliva). The microscope rewards those who grade the specimen before naming the organism.",
+      "say": "Grade the specimen first; a beautiful organism in saliva is still saliva.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Magnification map",
+          "points": [
+            "100x oil: bacteria and acid fast bacilli",
+            "40x: fungi, ova, crystals screening",
+            "10x: tissue sections and parasite scans",
+            "Fluorescence low power: rapid sputum screening"
+          ]
+        },
+        "right": {
+          "title": "Quality gates",
+          "points": [
+            "Sputum: neutrophils many, squamous few (Bartlett)",
+            "CSF: cytocentrifuge concentrates scanty organisms",
+            "Thick and thin films divide malaria tasks",
+            "Repeat sampling beats single negative microscopy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anaerobe identification finishes** with aerotolerance testing (growth in air separates facultative impostors), spot tests (B fragilis bile tolerance and catalase), gas liquid chromatography heritage, and MALDI TOF and 16S sequencing from the culture module increasingly naming what jars only grew. The physiology lesson ends where identification begins: oxygen class is the first line of every anaerobe report.",
+      "say": "An anaerobe report begins with oxygen class and ends, increasingly, with a mass spectrum.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "grow",
+            "label": "Growth only under anaerobic incubation"
+          },
+          {
+            "id": "aero",
+            "label": "Aerotolerance checked in air and CO2"
+          },
+          {
+            "id": "tests",
+            "label": "Bile, catalase and spot indole tests"
+          },
+          {
+            "id": "maldi",
+            "label": "MALDI TOF or sequencing confirms species"
+          }
+        ],
+        "edges": [
+          [
+            "grow",
+            "aero"
+          ],
+          [
+            "aero",
+            "tests"
+          ],
+          [
+            "tests",
+            "maldi"
+          ]
+        ]
+      }
+    }
+  ]
+}

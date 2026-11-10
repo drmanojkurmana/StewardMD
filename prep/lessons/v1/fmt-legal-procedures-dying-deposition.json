@@ -1,0 +1,329 @@
+{
+ "v": 1,
+ "id": "fmt-legal-procedures-dying-deposition",
+ "subject": "forensic-medicine",
+ "module": "fmt-legal-procedures",
+ "title": "Court Procedures: Dying Deposition, Oath and Examination in Chief",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Definition and structure of a dying deposition",
+   "tx": "In legal proceedings, a formal **dying deposition judicial statement** represents the recorded evidence of a critically injured person taken under oath by a presiding magistrate in the direct presence of the accused or the accused's legal counsel. Because the opposing defense counsel enjoys the immediate legal opportunity to cross-examine the declarant, a dying deposition carries significantly superior evidentiary weight compared to a simple dying declaration.",
+   "say": "A dying deposition is taken by a magistrate on oath in the presence of the accused and defense counsel, who has the right to cross-examine the victim immediately.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dying declaration",
+     "points": [
+      "Recorded without oath",
+      "Accused is not present",
+      "No cross-examination possible",
+      "Recorded by doctor, magistrate or police"
+     ]
+    },
+    "right": {
+     "title": "Dying deposition",
+     "points": [
+      "Recorded under solemn oath",
+      "Accused and counsel must be present",
+      "Immediate cross-examination allowed",
+      "Recorded exclusively by a magistrate"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Evidentiary value and cross-examination in dying depositions",
+   "tx": "The elevated status of the **dying deposition evidentiary standing** stems from the core constitutional guarantee of testing witness veracity through adversarial challenge. When a magistrate administers the oath and permits defense cross-examination at the patient's bedside, the recorded deposition becomes fully admissible substantive evidence under Section 27 BSA, regardless of whether the declarant subsequently dies or survives the traumatic injuries.",
+   "say": "Because it includes oath administration and defense cross-examination, a dying deposition is admissible as complete substantive evidence whether the patient dies or lives.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Magistrate arrives at hospital with defense counsel"
+     },
+     {
+      "id": "b",
+      "label": "Doctor certifies patient compos mentis on record"
+     },
+     {
+      "id": "c",
+      "label": "Solemn oath administered and direct testimony taken"
+     },
+     {
+      "id": "d",
+      "label": "Defense conducts bedside cross-examination"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The statutory requirement and meaning of an oath",
+   "tx": "Under the Indian Oaths Act, every witness entering the witness box must undergo **solemn oath or affirmation** before giving evidence in a court of law. The witness declares that the evidence about to be given shall be the truth, the whole truth, and nothing but the truth. The oath serves as a solemn moral and legal undertaking that binds the conscience of the testifying clinician.",
+   "say": "Before testifying, every witness must take a solemn oath or affirmation to tell the truth, creating a binding moral and legal duty under the Oaths Act.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Witness category",
+     "Oath requirement",
+     "Statutory exception"
+    ],
+    "rows": [
+     [
+      "Adult medical witness",
+      "Mandatory oath or solemn affirmation",
+      "No exemption permitted in criminal trials"
+     ],
+     [
+      "Child under 12 years",
+      "Court assesses understanding of truth",
+      "May testify without oath if understanding is sound"
+     ],
+     [
+      "Solemn affirmation",
+      "Available for non-religious witnesses",
+      "Carries identical legal status and penalty as oath"
+     ],
+     [
+      "Perjury warning",
+      "Section 227 BNS (old 193 IPC)",
+      "False testimony under oath risks criminal imprisonment"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Perjury and penalties for false evidence under oath",
+   "tx": "A witness who deliberately delivers false evidence while bound by oath commits the statutory **criminal offence of perjury**, codified under Section 227 of the Bharatiya Nyaya Sanhita. If a medical officer fabricates injury reports, alters autopsy findings, or provides knowingly deceptive oral testimony to shield a criminal or falsely implicate an innocent party, the presiding court can initiate summary prosecution punishable by imprisonment up to seven years.",
+   "say": "Giving knowingly false testimony under oath is perjury, punishable by up to seven years imprisonment. Doctors must remain scrupulously honest and objective in court.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Witness takes oath or affirmation in open court"
+     },
+     {
+      "id": "b",
+      "label": "Knowingly false statement made on material fact"
+     },
+     {
+      "id": "c",
+      "label": "Court discovers deliberate fabrication of findings"
+     },
+     {
+      "id": "d",
+      "label": "Prosecution initiated for criminal perjury under BNS"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The three sequential stages of witness examination",
+   "tx": "During trial proceedings, judicial protocol dictates that a medical expert must navigate the **three sequential examination stages** in strict chronological order. The examination commences with the examination-in-chief conducted by the party calling the witness, transitions into the cross-examination conducted by the adverse opposing party, and concludes with the re-examination conducted by the original calling party to clarify ambiguities.",
+   "say": "Court examination proceeds through three stages: examination in chief by the calling lawyer, cross-examination by opposing counsel, and re-examination for clarification.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Stage 1: Examination-in-chief by public prosecutor"
+     },
+     {
+      "id": "b",
+      "label": "Stage 2: Cross-examination by defense advocate"
+     },
+     {
+      "id": "c",
+      "label": "Stage 3: Re-examination by prosecutor if permitted"
+     },
+     {
+      "id": "d",
+      "label": "Questions from presiding trial judge if required"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Examination-in-chief procedure and objectives",
+   "tx": "In criminal trials, the **examination-in-chief procedural phase** is conducted by the public prosecutor who summoned the medical officer to the witness box. The primary purpose is to introduce the doctor's professional qualifications, place original autopsy or casualty reports onto the record, establish injury chronologies, describe pathological findings, and present the doctor's expert medical opinion regarding the probable weapon and cause of death.",
+   "say": "In examination-in-chief, the prosecutor introduces the doctor, submits original reports into evidence, and asks for professional opinions on the cause of death.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step in chief",
+     "Prosecutor action",
+     "Medical witness responsibility"
+    ],
+    "rows": [
+     [
+      "Identity and qualifications",
+      "Asks name, designation, experience",
+      "State medical degrees and hospital attachment"
+     ],
+     [
+      "Document presentation",
+      "Shows original injury or autopsy sheet",
+      "Verify signature and identify document as original"
+     ],
+     [
+      "Injury description",
+      "Asks witness to read findings",
+      "Describe wounds clearly in plain language"
+     ],
+     [
+      "Opinion solicitation",
+      "Asks for cause and weapon type",
+      "Deliver unbiased opinion based on anatomical evidence"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Prohibition of leading questions during examination-in-chief",
+   "tx": "Under the law of evidence, an absolute **leading questions statutory prohibition** governs examination-in-chief and re-examination. A leading question is one that suggests the desired answer within the phrasing of the question itself. Except for introductory undisputed matters such as the doctor's name or official designation, the calling advocate cannot ask leading questions without special leave of the presiding judge.",
+   "say": "Leading questions suggest the desired answer and are forbidden during examination-in-chief unless the judge grants special permission on introductory matters.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Leading question (Forbidden in chief)",
+     "points": [
+      "Suggests the answer directly: 'Did you see a stab wound?'",
+      "Requires simple yes/no agreement",
+      "Forbidden during examination-in-chief",
+      "Permitted freely during cross-examination"
+     ]
+    },
+    "right": {
+     "title": "Open question (Required in chief)",
+     "points": [
+      "Non-suggestive: 'What injuries did you observe?'",
+      "Invites witness to narrate observed facts",
+      "Mandatory during examination-in-chief",
+      "Allows doctor to present independent findings"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Refreshing memory using contemporaneous clinical notes",
+   "tx": "Because trials often take place months or years after an autopsy, the **refreshing memory legal privilege** under Section 162 BSA permits a medical witness to consult their original case sheet or postmortem report while testifying. To qualify, the notes must have been made contemporaneously with the examination or while the clinical facts were still fresh in the practitioner's recollection.",
+   "say": "Doctors can refresh their memory by looking at original notes or autopsy reports written at the time of examination, as permitted under Section 162 BSA.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Doctor enters witness box months after incident"
+     },
+     {
+      "id": "b",
+      "label": "Requests permission from judge to consult notes"
+     },
+     {
+      "id": "c",
+      "label": "Court verifies notes are contemporaneous original records"
+     },
+     {
+      "id": "d",
+      "label": "Doctor refreshes memory and provides precise testimony"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Court questions and judicial clarification powers",
+   "tx": "To discover truth and achieve justice, statutory rules grant extensive **judicial question examination powers** to the presiding trial judge. Under Section 168 BSA, the judge can interrogate the medical expert at any stage, demand clarification on conflicting injury dimensions, query alternative weapon possibilities, or order the production of excised histological blocks to resolve lingering doubts before concluding the witness examination.",
+   "say": "The trial judge has full power to question the medical expert at any stage of the trial to clarify injury mechanisms and ensure a just verdict.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Judicial power",
+     "Statutory scope",
+     "Objective in trial"
+    ],
+    "rows": [
+     [
+      "Interrogate at any time",
+      "Ask questions during chief or cross",
+      "Clarifies confusing medical terminology"
+     ],
+     [
+      "Order document production",
+      "Demand any hospital register or block",
+      "Prevents suppression of material evidence"
+     ],
+     [
+      "Recall medical witness",
+      "Summon doctor back for re-testing",
+      "Resolves newly uncovered defense evidence"
+     ],
+     [
+      "Appoint independent expert",
+      "Refer dispute to medical board",
+      "Obtains balanced consensus in complex disputes"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

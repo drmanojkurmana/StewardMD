@@ -1,0 +1,189 @@
+{
+  "v": 1,
+  "module": "mic-rickettsia-chlamydia-mycoplasma",
+  "subject": "microbiology",
+  "title": "Chlamydia Elementary Body, Reticulate Body, Inclusions and LGV",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **elementary body** is the small, dense, infectious form of Chlamydia that survives outside cells and attaches to epithelial surfaces. After uptake it sits inside a membrane-bound **inclusion** and reorganises into a reticulate body. Elementary bodies have a rigid cross-linked outer membrane and little metabolic activity, explaining environmental stability and infectivity. Antibiotics must reach the intracellular niche where replication actually occurs.",
+      "say": "Elementary bodies infect; reticulate bodies replicate inside the inclusion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "eb",
+            "label": "Elementary body attaches"
+          },
+          {
+            "id": "inclusion",
+            "label": "Inclusion forms in cytoplasm"
+          },
+          {
+            "id": "rb",
+            "label": "Reticulate bodies divide"
+          },
+          {
+            "id": "release",
+            "label": "New elementary bodies exit"
+          }
+        ],
+        "edges": [
+          [
+            "eb",
+            "inclusion"
+          ],
+          [
+            "inclusion",
+            "rb"
+          ],
+          [
+            "rb",
+            "release"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **reticulate body** is larger, metabolically active and fragile outside the host cell. It divides by binary fission inside the inclusion and uses host energy and nutrients. After many divisions, reticulate bodies condense back into elementary bodies. Interferon gamma, nutrient limitation and some antibiotics can drive aberrant persistent forms that stop dividing yet remain viable, contributing to chronic inflammation and treatment complexity.",
+      "say": "Persistent aberrant bodies can pause replication without surrendering viability.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Elementary body",
+          "points": [
+            "Small and electron dense",
+            "Infectious extracellular form",
+            "Metabolically inert",
+            "Rigid cross linked envelope"
+          ]
+        },
+        "right": {
+          "title": "Reticulate body",
+          "points": [
+            "Large and metabolically active",
+            "Divides within inclusion",
+            "Osmotically fragile",
+            "Not directly infectious"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Different Chlamydia species form inclusions with different appearances. **Chlamydia trachomatis** inclusions can accumulate glycogen and stain with iodine, whereas Chlamydia pneumoniae inclusions are denser and do not show the same glycogen pattern. Intracytoplasmic **inclusion bodies** on Giemsa or fluorescent antibody staining were historically diagnostic, but culture and cytology have been displaced by nucleic acid amplification tests for genital and ocular specimens.",
+      "say": "Inclusion morphology once diagnosed Chlamydia; NAAT now does the work more sensitively.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Historical clues",
+          "points": [
+            "Halberstaedter Prowazek inclusions in trachoma",
+            "Basophilic intracytoplasmic inclusions",
+            "Iodine staining glycogen in C trachomatis",
+            "Cell culture required specialised handling"
+          ]
+        },
+        "right": {
+          "title": "Modern practice",
+          "points": [
+            "NAAT detects DNA from swab or urine",
+            "Culture is rarely available clinically",
+            "Serology has limited role in uncomplicated genital disease",
+            "LGV needs genotyping after a positive NAAT"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Lymphogranuloma venereum** is invasive C trachomatis disease from L serovars. A transient painless ulcer can be missed, followed by painful inguinal adenopathy, the groove sign when nodes on both sides of the inguinal ligament enlarge, and chronic fibrosis or strictures if untreated. In many current outbreaks, proctocolitis predominates, causing rectal pain, discharge, bleeding and tenesmus that mimic inflammatory bowel disease.",
+      "say": "LGV can begin invisibly and return as painful nodes or severe proctocolitis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stages",
+          "points": [
+            "Primary transient papule or ulcer",
+            "Secondary inguinal or rectal syndrome",
+            "Groove sign in inguinal disease",
+            "Late fibrosis, fistula and stricture"
+          ]
+        },
+        "right": {
+          "title": "Management clues",
+          "points": [
+            "Rectal NAAT positive for C trachomatis",
+            "Request LGV genotyping where available",
+            "Doxycycline for twenty one days usually",
+            "Drain fluctuant nodes by aspiration, not incision where possible"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Inclusion conjunctivitis** in adults usually follows genital C trachomatis exposure, while neonatal inclusion conjunctivitis appears after the first few days of life and must be distinguished from more fulminant gonococcal ophthalmia. Ocular samples and genital testing should be paired because treating only the eye does not clear the genital reservoir or protect partners. Systemic therapy is required for neonatal disease.",
+      "say": "Adult and neonatal inclusion conjunctivitis are ocular markers of a genital reservoir.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adult disease",
+          "points": [
+            "Chronic follicular conjunctivitis",
+            "Often unilateral at onset",
+            "Associated genital infection may be silent",
+            "Topical treatment alone is insufficient"
+          ]
+        },
+        "right": {
+          "title": "Neonatal disease",
+          "points": [
+            "Usually begins five to fourteen days after birth",
+            "Watery then mucopurulent discharge",
+            "Systemic macrolide treatment needed",
+            "Also assess for chlamydial pneumonia later"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Because Chlamydia lacks a typical peptidoglycan sacculus around most forms and lives intracellularly, **beta lactams are not dependable primary therapy**. Doxycycline or azithromycin reach infected cells. Reinfection is common when partners are untreated or sex resumes too soon, so retesting, partner treatment and testing for other sexually transmitted infections are part of microbiology, not optional clinic extras.",
+      "say": "Effective chlamydia care treats cells, partners and reinfection risk together.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "naat",
+            "label": "Positive NAAT"
+          },
+          {
+            "id": "treat",
+            "label": "Doxycycline or indicated alternative"
+          },
+          {
+            "id": "partner",
+            "label": "Treat partners and pause sex"
+          },
+          {
+            "id": "retest",
+            "label": "Retest for reinfection"
+          }
+        ],
+        "edges": [
+          [
+            "naat",
+            "treat"
+          ],
+          [
+            "treat",
+            "partner"
+          ],
+          [
+            "partner",
+            "retest"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,249 @@
+{
+  "v": 1,
+  "module": "mic-cestodes-trematodes",
+  "subject": "microbiology",
+  "title": "Taenia solium, Taenia saginata and Neurocysticercosis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The cyclophyllidean tapeworms **Taenia solium** (the pork tapeworm) and Taenia saginata (the beef tapeworm) cause intestinal taeniasis when humans ingest undercooked meat containing larval cysticerci. While both tapeworms produce mild gastrointestinal symptoms in the human small intestine, only Taenia solium can cause human cysticercosis, making it one of the most clinically dangerous helminthic infections.",
+      "say": "Ingesting undercooked pork or beef larvae causes intestinal tapeworms, but only pork tapeworm causes tissue cysticercosis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cestodes-trematodes-hydatid-schistosoma-flukes-fig1.webp",
+        "alt": "Neurocysticercosis MRI neuroimaging features",
+        "caption": "Brain MRI demonstrating multiple vesicular and calcified neurocysticercosis lesions [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "A vital parasitological distinction tested on examinations is the mechanism of human **cysticercosis**. This condition occurs exclusively when humans ingest embryonated Taenia solium eggs through fecal-oral contamination or reverse peristaltic autoinfection. Gastric acid dissolves the egg shell, releasing hexacanth oncospheres that penetrate mesenteric venules, encysting as Cysticercus cellulosae within striated muscle, subcutaneous tissues, and the central nervous system.",
+      "say": "Human cysticercosis develops strictly from ingesting embryonated pork tapeworm eggs, never from eating pork larvae.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cy1",
+            "label": "Human ingests Taenia solium eggs from fecally contaminated food or autoinfection"
+          },
+          {
+            "id": "cy2",
+            "label": "Gastric acid activates hexacanth oncospheres to penetrate gut venules"
+          },
+          {
+            "id": "cy3",
+            "label": "Larvae encyst in brain, eyes, and muscles as Cysticercus cellulosae"
+          }
+        ],
+        "edges": [
+          [
+            "cy1",
+            "cy2"
+          ],
+          [
+            "cy2",
+            "cy3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The adult tapeworms display distinct scolex and proglottid anatomy. The scolex of Taenia solium is armed with four muscular suckers and a rounded rostellum bearing a double crown of twenty-five to thirty chitinous hooks, whereas **Taenia saginata** possesses an unarmed scolex without rostellum or hooks. Furthermore, gravid proglottids of T. solium have seven to thirteen primary lateral uterine branches, while T. saginata has fifteen to thirty branches.",
+      "say": "Pork tapeworm has a hooked rostellum and fewer uterine branches; beef tapeworm lacks hooks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Anatomical Feature",
+          "Taenia solium (Pork Tapeworm)",
+          "Taenia saginata (Beef Tapeworm)"
+        ],
+        "rows": [
+          [
+            "Scolex armature",
+            "Armed: 4 suckers plus rostellum with 2 rows of hooks",
+            "Unarmed: 4 suckers only; no rostellum or hooks"
+          ],
+          [
+            "Gravid uterine branches",
+            "7 to 13 lateral branches per side (tree-like)",
+            "15 to 30 lateral branches per side (dichotomous)"
+          ],
+          [
+            "Proglottid motility",
+            "Non-motile; shed passively in stool chains",
+            "Actively motile; crawls out of anal sphincter singly"
+          ],
+          [
+            "Human cysticercosis",
+            "Yes, ingestion of eggs causes tissue cysticercosis",
+            "No, human cysticercosis does not occur"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In developing countries, **neurocysticercosis** represents the leading cause of preventable adult-onset epilepsy. Larval cysticerci lodge within the cerebral parenchyma, subarachnoid space, or ventricular system. In the parenchymal vesicular stage, the viable cyst contains clear fluid with an invaginated larval scolex appearing as a pathognomonic dot-in-hole or mural nodule on magnetic resonance imaging.",
+      "say": "Parenchymal cysts with a dot-in-hole mural scolex on MRI represent the commonest cause of adult epilepsy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vesicular stage (viable)",
+          "points": [
+            "Thin-walled round cyst with clear translucent fluid",
+            "Mural scolex visible as bright dot on T1 MRI",
+            "Minimal surrounding host inflammatory oedema",
+            "Anticonvulsants plus albendazole effective"
+          ]
+        },
+        "right": {
+          "title": "Colloidal vesicular stage (dying)",
+          "points": [
+            "Larva dies, fluid becomes turbid and thick",
+            "Intense host immune reaction with ring enhancement",
+            "Marked surrounding vasogenic cerebral oedema",
+            "Co-administration of corticosteroids is mandatory"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "As the larva undergoes immune-mediated degradation, it progresses through four radiological stages: vesicular, colloidal vesicular, granular nodular, and final inactive **calcified granuloma**. The colloidal stage triggers intense host lymphocytic inflammation, manifesting as ring-enhancing lesions with surrounding vasogenic oedema. The final burnt-out calcified nodules appear as dense punctate hyperdensities on non-contrast computed tomography, serving as permanent epileptogenic foci.",
+      "say": "Dying cysts progress from ring enhancement with oedema to permanently epileptogenic calcified nodules.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "st1",
+            "label": "Vesicular stage: viable cyst with mural scolex dot and no oedema"
+          },
+          {
+            "id": "st2",
+            "label": "Colloidal stage: dying larva causes intense ring enhancement and oedema"
+          },
+          {
+            "id": "st3",
+            "label": "Granular nodular stage: cyst retracts into an involuting nodule"
+          },
+          {
+            "id": "st4",
+            "label": "Calcified stage: dense punctate calcification remains as chronic seizure focus"
+          }
+        ],
+        "edges": [
+          [
+            "st1",
+            "st2"
+          ],
+          [
+            "st2",
+            "st3"
+          ],
+          [
+            "st3",
+            "st4"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A particularly dangerous anatomical variant is **racemose neurocysticercosis**, where cysts lodge in the basal subarachnoid cisterns or Sylvian fissures. Lacking a rigid host tissue capsule, the cysts proliferate into large, lobulated, multi-vesicular clusters resembling bunches of grapes without internal scolices. This form causes severe chronic arachnoiditis, hydrocephalus from basilar cistern obstruction, and basilar arterial vasculitis leading to ischaemic strokes.",
+      "say": "Basal subarachnoid racemose cysts proliferate into grape-like clusters, causing obstructive hydrocephalus.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Anatomical Form",
+          "Pathological Features",
+          "Clinical Complications"
+        ],
+        "rows": [
+          [
+            "Parenchymal cysts",
+            "Discrete 5-10 mm cysts with internal scolex",
+            "Focal motor seizures and localized neurological deficits"
+          ],
+          [
+            "Racemose (cisternal)",
+            "Large multi-lobulated cysts without scolex",
+            "Basilar meningitis, hydrocephalus, and stroke"
+          ],
+          [
+            "Intraventricular",
+            "Mobile cysts in fourth or third ventricle",
+            "Bruns syndrome with acute obstructive hydrocephalus"
+          ],
+          [
+            "Ocular cysticercosis",
+            "Subretinal or vitreous cyst with visible scolex",
+            "Retinal detachment, blindness; anthelmintics contraindicated"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Antiparasitic treatment of viable neurocysticercosis requires oral **albendazole** administered at fifteen milligrams per kilogram daily, often combined with praziquantel for synergistic killing in heavy burden. Because parasitic death provokes acute perilesional inflammation, concurrent high-dose systemic dexamethasone must be initiated prior to anthelmintics to prevent fatal intracranial hypertension and status epilepticus.",
+      "say": "Albendazole eliminates viable cysts but requires concurrent corticosteroids to control cerebral oedema.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rx1",
+            "label": "Confirm viable parenchymal neurocysticercosis on neuroimaging"
+          },
+          {
+            "id": "rx2",
+            "label": "Initiate antiepileptic therapy and high-dose oral dexamethasone"
+          },
+          {
+            "id": "rx3",
+            "label": "Administer oral albendazole 15 mg/kg/day for 10 to 14 days"
+          }
+        ],
+        "edges": [
+          [
+            "rx1",
+            "rx2"
+          ],
+          [
+            "rx2",
+            "rx3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In ocular and spinal intra-medullary cysticercosis, anthelmintic chemotherapy is strictly contraindicated because inflammatory swelling can cause irreversible blindness or cord transection. These sequestered lesions require primary **surgical excision**. For uncomplicated intestinal taeniasis, a single oral dose of praziquantel or niclosamide rapidly paralyzes adult tapeworms, which are expelled intact in stool.",
+      "say": "Ocular and spinal cysts demand surgical removal, while single-dose praziquantel cures intestinal tapeworms.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Infection Site",
+          "Primary Treatment Modality",
+          "Contraindicated Therapies"
+        ],
+        "rows": [
+          [
+            "Intestinal taeniasis",
+            "Single-dose oral praziquantel (5-10 mg/kg)",
+            "Not applicable; single dose curative"
+          ],
+          [
+            "Parenchymal brain cysts",
+            "Oral albendazole plus systemic corticosteroids",
+            "Anthelmintics without steroid cover contraindicated"
+          ],
+          [
+            "Intraocular cyst",
+            "Surgical vitrectomy or pars plana excision",
+            "Anthelmintics contraindicated (causes severe uveitis)"
+          ],
+          [
+            "Ventricular cysts",
+            "Neuroendoscopic cyst retrieval or shunt",
+            "Medical lysis can precipitate ependymitis and blockage"
+          ]
+        ]
+      }
+    }
+  ]
+}

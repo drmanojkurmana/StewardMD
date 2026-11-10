@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-protein-synthesis-inhibitors",
+  "subject": "pharmacology",
+  "title": "Tetracyclines: Doxycycline, Minocycline, Tigecycline, Teeth and Fanconi Syndrome",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Tetracyclines block the bacterial **30S ribosome** aminoacyl tRNA entry, bacteriostatic against an unusually broad parish: Gram positives and negatives, atypicals (Mycoplasma, Chlamydia, Legionella adjunct), rickettsiae, spirochaetes, Vibrio, H pylori and acne's Cutibacterium. **Doxycycline**, lipophilic and long acting, is the family's modern default: respiratory and atypical cover, rickettsial fevers (drug of choice even in children for short courses), malaria prophylaxis, leptospirosis, acne and pelvic infection partnerships.",
+      "say": "Doxycycline is the broad static answer for atypicals and rickettsiae; teeth rules bent for life threatening fevers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Doxycycline empire",
+          "points": [
+            "Community pneumonia atypical cover",
+            "Rickettsial disease drug of choice",
+            "Chlamydia and pelvic infection partnerships",
+            "Malaria prophylaxis and leptospirosis"
+          ]
+        },
+        "right": {
+          "title": "Doxycycline manners",
+          "points": [
+            "Twice daily, well absorbed orally",
+            "Food delays but scarcely reduces absorption",
+            "Photosensitivity and oesophagitis counselled",
+            "Safe in renal impairment (faecal elimination)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Teeth discolouration** is the class's paediatric fence: tetracyclines chelate calcium in developing teeth and bone, staining enamel yellow grey brown permanently and slowing skeletal growth, banning routine use under eight years and in pregnancy. Modern evidence and guidelines carve rickettsial disease out of the ban (short doxycycline courses show no visible staining in studies), because untreated Rocky Mountain spotted fever kills children whom the fence was built to protect cosmetically.",
+      "say": "Under eight, teeth vote no, except rickettsiae, where the fever outvotes the enamel.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "child",
+            "label": "Child under 8 with suspected rickettsial fever"
+          },
+          {
+            "id": "doxy",
+            "label": "Doxycycline started without delay"
+          },
+          {
+            "id": "course",
+            "label": "Short course completed"
+          },
+          {
+            "id": "teeth",
+            "label": "No visible staining in modern short course data"
+          }
+        ],
+        "edges": [
+          [
+            "child",
+            "doxy"
+          ],
+          [
+            "doxy",
+            "course"
+          ],
+          [
+            "course",
+            "teeth"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Minocycline** trades doxycycline's profile for lipophilicity into skin, CNS and vestibular apparatus: acne and rosacea niches, rheumatoid whispers historically, and adverse signatures of vertigo, blue grey pigmentation of skin, teeth and sclerae with chronic use, autoimmune hepatitis and lupus like syndromes, and drug induced intracranial hypertension shared with the class. Its vestibular toll made it the acne prescription patients abandon first.",
+      "say": "Minocycline reaches skin and brain and bills in vertigo and blue grey pigment; acne adherence notices.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Minocycline profile",
+          "points": [
+            "Most lipophilic classic tetracycline",
+            "Acne and rosacea oral therapy",
+            "CNS penetration for niche infections",
+            "Once or twice daily dosing"
+          ]
+        },
+        "right": {
+          "title": "Minocycline adverse set",
+          "points": [
+            "Vestibular dizziness and vertigo",
+            "Blue grey pigmentation chronically",
+            "Autoimmune hepatitis and lupus like reactions",
+            "Intracranial hypertension (class effect)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Tigecycline**, a glycylcycline engineered to dodge tetracycline efflux and ribosomal protection resistance, covers MRSA, VRE and resistant Gram negatives and anaerobes intravenously for complicated skin, intra abdominal and community pneumonia salvage, while missing Pseudomonas and Proteus intrinsically and carrying nausea of legend plus a mortality imbalance signal in pooled trials that confines it to options exhausted territory. Its huge volume of distribution leaves blood levels low, forbidding bacteraemia reliance.",
+      "say": "Tigecycline covers the resistant shelf and fails the bloodstream; salvage intravenous, never bacteraemia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tigecycline reach",
+          "points": [
+            "MRSA, VRE and resistant Gram negatives",
+            "Anaerobes and atypicals included",
+            "Complicated skin and intra abdominal salvage",
+            "Efflux and ribosomal protection evaded"
+          ]
+        },
+        "right": {
+          "title": "Tigecycline gaps",
+          "points": [
+            "Pseudomonas and Proteus intrinsically resistant",
+            "Low serum levels: not for bacteraemia",
+            "Nausea and vomiting prominent",
+            "Mortality signal: last resort positioning"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Expired tetracyclines write the **Fanconi syndrome** lesson: degraded products (epianhydrotetracycline) poison proximal tubules into wasting glucose, amino acids, phosphate and bicarbonate, a historical toxicity of outdated stock that modern formulations and expiry discipline retired. It survives examinations as the reason pharmacies discard, not discount, old antibiotics, and pairs with demeclocycline's nephrogenic diabetes insipidus (its SIADH therapy from earlier modules) as the family's renal footnotes.",
+      "say": "Expired tetracyclines poison tubules; Fanconi is the expiry date's enforcement story.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "expired",
+            "label": "Outdated tetracycline stock ingested"
+          },
+          {
+            "id": "tubule",
+            "label": "Degradation products injure proximal tubule"
+          },
+          {
+            "id": "waste",
+            "label": "Glucose, amino acids, phosphate wasted in urine"
+          },
+          {
+            "id": "discard",
+            "label": "Expiry discipline prevents the syndrome"
+          }
+        ],
+        "edges": [
+          [
+            "expired",
+            "tubule"
+          ],
+          [
+            "tubule",
+            "waste"
+          ],
+          [
+            "waste",
+            "discard"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Absorption is the** family's daily pharmacology: divalent and trivalent cations (iron, calcium, antacids, dairy) chelate tetracyclines into silence, spacing rules as strict as quinolones', while doxycycline and minocycline forgive food partially. Photosensitivity (doxycycline worst, exaggerated sunburn and photo onycholysis), pill oesophagitis (take upright with water), vestibular and intracranial hypertension effects, and hepatic necrosis at high intravenous doses in pregnancy complete the adverse syllabus.",
+      "say": "Cations cage tetracyclines like quinolones; sun and oesophagus are doxycycline's counselling pair.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Absorption discipline",
+          "points": [
+            "Iron, calcium and antacids spaced hours away",
+            "Doxycycline and minocycline food tolerant relatively",
+            "Upright dosing with full water for oesophagus",
+            "Enzyme inducers shorten half lives (classics)"
+          ]
+        },
+        "right": {
+          "title": "Signature adverse effects",
+          "points": [
+            "Photosensitivity, doxycycline foremost",
+            "Pill oesophagitis and ulceration",
+            "Intracranial hypertension class warning",
+            "Superinfection and candidiasis with breadth"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Newer tetracyclines refine** the scaffold: omadacycline (oral and intravenous, community pneumonia and skin, efflux proofed) and eravacycline (intravenous intra abdominal) market convenience and resistance geography, while sarecycline narrows to acne with vestibular sparing design. Their examinable point is class continuity: 30S blockade, cation chelation, photosensitivity and teeth fences descend to each new name until evidence says otherwise.",
+      "say": "New names, same ribosome: judge every new tetracycline by the family fences first.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Modern entrants",
+          "points": [
+            "Omadacycline: oral and IV community infections",
+            "Eravacycline: intravenous intra abdominal salvage",
+            "Sarecycline: acne narrowed spectrum",
+            "Resistance mechanisms evaded by design"
+          ]
+        },
+        "right": {
+          "title": "Inherited fences",
+          "points": [
+            "Pregnancy and childhood teeth caution",
+            "Cation chelation spacing",
+            "Photosensitivity counselling",
+            "Class intracranial hypertension awareness"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Doxycycline's prophylaxis portfolio** deserves the final step: malaria (daily, sun counselled), leptospirosis in exposure windows, scrub typhus empiricism in endemic fevers, sexually transmitted infection post exposure prophylaxis (doxy PEP) in defined high risk populations per current guidelines, and Lyme disease after tick bite in defined criteria. Each indication is a risk window matched to a short course, stewardship's prophylaxis principle from the opening lessons operating exactly as designed.",
+      "say": "Doxycycline prevents on windows: malaria, leptospirosis and defined post exposure niches, each time boxed.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "window",
+            "label": "Defined exposure window identified"
+          },
+          {
+            "id": "doxy",
+            "label": "Doxycycline course matched to window"
+          },
+          {
+            "id": "sun",
+            "label": "Photosensitivity and oesophageal counselling"
+          },
+          {
+            "id": "stop",
+            "label": "Course ends with the window, not beyond"
+          }
+        ],
+        "edges": [
+          [
+            "window",
+            "doxy"
+          ],
+          [
+            "doxy",
+            "sun"
+          ],
+          [
+            "sun",
+            "stop"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "id": "oph-retina-vascular-choroidal-effusion",
+ "subject": "ophthalmology",
+ "module": "oph-retinal-vascular",
+ "title": "Serous Choroidal Detachment",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Serous choroidal detachment** collects fluid in suprachoroidal space from hypotony, inflammation or venous congestion, lifting choroid and ciliary body with shallow chamber and low pressure often. Brown smooth peripheral elevation on examination separates serous mound from retinal detachment folds. Low pressure context therefore explains suprachoroidal fluid in postoperative or inflamed eyes.",
+   "say": "Pressure context together gives choroidal diagnosis in postoperative clinics for adults with shallow chamber after surgery or inflammation. Brown gives mound appearance additionally. Hypotony gives fluid driver.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m282-oph-retina-vascular-choroidal-effusion.webp",
+    "alt": "B-scan ultrasonography and ocular diagram of choroidal detachment showing smooth, dome-shaped, thick choroidal elevation extending anterior to equator",
+    "caption": "B-scan ultrasonography and ocular diagram of choroidal detachment showing smooth, dome-shaped, thick choroidal elevation extending anterior to equator. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Haemorrhagic choroidal detachment instead fills space with blood after sudden pressure drop or trauma, painful with high pressure sometimes and dark mound examination. Serous versus haemorrhagic therefore forks by pain, pressure and ultrasound echogenicity. **Fluid or blood** ultrasound question therefore directs choroidal management after globe surgery complications.",
+   "say": "Ultrasound forking together gives choroidal typing in postoperative care for adults with peripheral mound presentations after surgery. Pain gives haemorrhagic clue additionally. Echogenicity gives imaging answer.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Serous choroidal",
+     "points": [
+      "Low pressure shallow chamber",
+      "Clear fluid ultrasound space"
+     ]
+    },
+    "right": {
+     "title": "Haemorrhagic choroidal",
+     "points": [
+      "Painful dark mound",
+      "Blood echoes ultrasound"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Causes cluster around wound leak hypotony, overfiltration after glaucoma surgery, uveal inflammation effusion syndromes and nanophthalmos anatomy. Cause therefore treats first: seal leak, deepen chamber, suppress inflammation by context. **Cause deepens chamber** therefore precedes drainage decisions in serous choroidal paperwork.",
+   "say": "Cause treatment together gives serous sequence in glaucoma clinics for adults with overfiltering blebs and shallow chambers. Leak gives seal priority additionally. Inflammation gives suppression route.",
+   "vis": {
+    "kind": "table",
+    "title": "Choroidal cause map",
+    "cols": [
+     "Cause",
+     "First direction"
+    ],
+    "rows": [
+     [
+      "Wound leak hypotony",
+      "Seal and reform chamber"
+     ],
+     [
+      "Overfiltering bleb",
+      "Reduce flow deepen chamber"
+     ],
+     [
+      "Uveal effusion inflammation",
+      "Anti inflammatory pathway"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ultrasound confirms extent, height and associated retinal detachment where view obscured by shallow chamber or media opacity in complicated eyes. Imaging therefore decides observation versus drainage with surgeon. **Extent decides** therefore pairs ultrasound report with intervention threshold in choroidal reviews.",
+   "say": "Extent pairing together gives intervention threshold at choroidal reviews for postoperative adults with obscured fundus views. Height gives drainage input additionally. Retina gives associated check.",
+   "vis": {
+    "kind": "flow",
+    "title": "Choroidal flow",
+    "nodes": [
+     {
+      "id": "cause",
+      "label": "Find hypotony or inflammation"
+     },
+     {
+      "id": "treat",
+      "label": "Treat cause deepen chamber"
+     },
+     {
+      "id": "scan",
+      "label": "Ultrasound extent review"
+     },
+     {
+      "id": "drain",
+      "label": "Drain only selected cases"
+     }
+    ],
+    "edges": [
+     [
+      "cause",
+      "treat"
+     ],
+     [
+      "treat",
+      "scan"
+     ],
+     [
+      "scan",
+      "drain"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "This scan catches the vitreous in the act of pulling the fovea out of shape. A translucent sheet stays glued to the centre while its edges have lifted away, tenting the retinal layers into a distorted peak. That persistent attachment defines **vitreomacular traction**, and it explains metamorphopsia better than any amount of macular swelling alone. Some eyes release spontaneously and settle, but progressive distortion or a brewing hole tips the balance towards vitrectomy and surgical release of the pull.",
+   "say": "Persistent hyaloid adhesion tenting the fovea on OCT is vitreomacular traction distorting central vision.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m283-oph-retina-vascular-choroidal-effusion.webp",
+    "alt": "Optical coherence tomography (OCT) scan showing vitreomacular traction syndrome with persistent hyaloid adhesion and foveal distortion",
+    "caption": "Optical coherence tomography (OCT) scan showing vitreomacular traction syndrome with persistent hyaloid adhesion and foveal distortion. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Most serous detachments settle as pressure normalises and chamber deepens, observed with cycloplegic support and cause therapy over days to weeks. Drainage reserved for flat chamber, corneal touch, retinal apposition choroidals or persistent haemorrhagic cases surgically. **Settle first** therefore prevents premature drainage in typical serous postoperative courses.",
+   "say": "Settling expectation together gives observation plan in serous care for postoperative adults whose pressure recovers steadily. Cycloplegia gives support additionally. Flat gives drainage exception."
+  },
+  {
+   "tx": "Uveal effusion in nanophthalmic small eyes recurs by thick sclera impairing vortex drainage, needing specialist scleral approaches rather than repeated simple drainage. Small eye therefore changes choroidal prognosis fundamentally. **Small eye different** therefore flags nanophthalmos in effusion clerking for surgical planning.",
+   "say": "Anatomy flagging together gives effusion planning for small eyed adults with recurrent choroidal presentations at tertiary clinics. Sclera gives drainage barrier additionally. Specialist gives approach change.",
+   "vis": {
+    "kind": "table",
+    "title": "Effusion counselling",
+    "cols": [
+     "Point",
+     "Wording"
+    ],
+    "rows": [
+     [
+      "Why fluid collected",
+      "Pressure and fluid space imbalance"
+     ],
+     [
+      "Usual course",
+      "Settles as chamber deepens"
+     ],
+     [
+      "When surgery",
+      "Flat chamber or touching structures"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Prevention reviews surgical pressure control: gradual decompression and chamber maintenance during high risk operations reduce sudden choroidal events in hypertensive or nanophthalmic eyes. Theatre technique therefore appears in choroidal lesson as upstream prevention. **Gradual decompression** therefore enters high risk operating lists as choroidal protection habit.",
+   "say": "Theatre prevention together gives operating habit for high risk eyes in surgical lists for adults with pressure or anatomy risks. Maintenance gives chamber support additionally. Sudden gives event mechanism.",
+   "vis": {
+    "kind": "table",
+    "title": "Choroidal prevention",
+    "cols": [
+     "Habit",
+     "Protects against"
+    ],
+    "rows": [
+     [
+      "Gradual decompression",
+      "Sudden suprachoroidal events"
+     ],
+     [
+      "Chamber maintenance",
+      "Hypotony fluid collection"
+     ],
+     [
+      "Cause treatment early",
+      "Prolonged shallow chamber"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors choroidal: low pressure serous fluid usually settles by cause treatment, blood and flat chamber select drainage, small eyes recur by scleral barrier. Ultrasound extent therefore guides patience versus surgery. **Deepen before drain** phrase therefore closes serous choroidal teaching for postoperative shallow chambers.",
+   "say": "Patience guidance together gives choroidal anchors in examinations for students reliably in postoperative cases everywhere reliably. Hypotony gives mechanism centre additionally. Extent gives drainage completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Choroidal anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Serous driver",
+      "Hypotony inflammation congestion"
+     ],
+     [
+      "Usual course",
+      "Settles with cause treatment"
+     ],
+     [
+      "Drain triggers",
+      "Flat chamber touch persistent blood"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Serous choroidal mechanism",
+   "b": "Suprachoroidal fluid from hypotony, inflammation or congestion; low pressure shallow chamber."
+  },
+  {
+   "f": "Choroidal fork",
+   "b": "Serous clear settles by cause; haemorrhagic painful blood may select drainage by extent."
+  },
+  {
+   "f": "Effusion anatomy rule",
+   "b": "Nanophthalmic thick sclera recurs; specialist scleral approaches over simple drainage."
+  }
+ ],
+ "keys": [
+  "Deepen chamber before drainage",
+  "Ultrasound extent sets intervention",
+  "Gradual decompression prevents events"
+ ]
+}

@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "id": "cm-micronutrients-niacin",
+ "subject": "community-medicine",
+ "module": "cm-micronutrients",
+ "title": "Water-Soluble B-Complex: Niacin, Pellagra and Riboflavin",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Niacin biochemistry and the tryptophan pathway",
+   "tx": "The water-soluble pyridine compound **niacin coenzyme synthesis** generates nicotinamide adenine dinucleotide (NAD) and its phosphate (NADP), essential hydrogen-carrying coenzymes in hundreds of cellular oxidation-reduction reactions. Humans synthesize niacin endogenously from the essential amino acid tryptophan in the liver, with sixty milligrams of dietary tryptophan yielding approximately one milligram of niacin under normal vitamin B6-dependent enzymatic function.",
+   "say": "Niacin forms the coenzymes NAD and NADP that power cellular energy metabolism. The liver can convert sixty milligrams of dietary tryptophan into one milligram of active niacin.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vitamin-deficiencies-and-cofactors-fig1.webp",
+    "alt": "Diagram illustrating water-soluble vitamin deficiency signs including pellagra, angular stomatitis and cheilosis",
+    "caption": "Vitamin B-complex deficiency: Pellagra dermatosis on sun-exposed skin, riboflavin angular stomatitis, and cheilosis. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Pellagra: the classic triad of the four Ds",
+   "tx": "Severe dietary deficiency of niacin or its precursor tryptophan causes **endemic pellagra disease**, traditionally memorized by the classic triad or four Ds: dermatitis, diarrhoea, dementia, and death if untreated. The hallmark cutaneous lesion presents as a symmetrical, bilateral, well-demarcated photosensitive erythema over sun-exposed surfaces of the face, neck, hands and forearms, evolving from sunburn-like erythema to hyperkeratotic, pigmented, desquamating crusts.",
+   "say": "Pellagra causes the four Ds: dermatitis, diarrhoea, dementia and death. A symmetrical, sunburn-like crust erupts over exposed skin, accompanied by bowel looseness and mental confusion.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Pellagra sign (The 4 Ds)", "Pathological manifestation", "Underlying biochemical defect"],
+    "rows": [
+     ["Dermatitis", "Symmetrical photosensitive hyperkeratotic rash", "Impaired cellular DNA repair following UV exposure"],
+     ["Diarrhoea", "Chronic watery stools, glossitis, stomatitis", "Severe atrophy and ulceration of mucosal enterocytes"],
+     ["Dementia", "Insomnia, memory loss, depression, psychosis", "Neuronal ATP depletion and cerebral chromatolysis"],
+     ["Death", "Circulatory collapse and secondary infections", "Terminal outcome if oral nicotinamide is withheld"]
+    ]
+   }
+  },
+  {
+   "title": "Casal necklace and maize-staple diets",
+   "tx": "A pathognomonic clinical feature of pellagra is the **Casal necklace dermatosis**, a prominent broad collar of hyperpigmented, rough, scaly skin encircling the lower anterior neck along the unbuttoned collar line. Pellagra historically devastated communities relying exclusively on maize (corn) or jowar (sorghum) as staples; maize contains bound niacytin that resists digestion, while jowar possesses excessive leucine that biochemically inhibits tryptophan conversion.",
+   "say": "The Casal necklace is a dark scaly collar encircling the neck where sunlight strikes bare skin. It strikes populations eating maize or jowar, which block tryptophan conversion into niacin.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Maize-based diet mechanism",
+     "points": ["Niacin present in bound form (niacytin)", "Poor in tryptophan building blocks", "Alkali lime treatment (nixtamalisation) frees it"]
+    },
+    "right": {
+     "title": "Jowar (sorghum) diet mechanism",
+     "points": ["Contains high levels of amino acid leucine", "Leucine inhibits quinolinate phosphoribosyltransferase", "Blocks endogenous conversion of tryptophan to niacin"]
+    }
+   }
+  },
+  {
+   "title": "Therapeutic management of pellagra",
+   "tx": "Clinical recovery from pellagra is achieved through oral **nicotinamide replacement therapy**, administered at three hundred to five hundred milligrams daily in divided doses for several weeks. Nicotinamide is preferred over nicotinic acid because it does not trigger uncomfortable prostaglandin-mediated cutaneous flushing, burning or pruritus, combined with a high-protein diet rich in milk, eggs, groundnuts and pulses to restore endogenous tryptophan reserves.",
+   "say": "Treat pellagra with oral nicotinamide in divided doses. Nicotinamide is chosen over nicotinic acid because it avoids facial flushing while curing the rash, diarrhoea and confusion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Oral nicotinamide 300 to 500 mg daily"},
+     {"id": "b", "label": "Diarrhea and tongue erythema resolve in 48 hours"},
+     {"id": "c", "label": "Cerebral confusion clears over 1 to 2 weeks"},
+     {"id": "d", "label": "High-protein diet to replenish body tryptophan"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Riboflavin (vitamin B2) coenzymatic roles",
+   "tx": "The yellow fluorescent flavin compound **riboflavin metabolic activation** phosphorylates to flavin mononucleotide (FMN) and flavin adenine dinucleotide (FAD), which act as vital prosthetic groups in the mitochondrial electron transport chain, fatty acid beta-oxidation, and the conversion of pyridoxine to its active coenzyme form. Because riboflavin is light-sensitive, prolonged phototherapy for neonatal jaundice significantly accelerates urinary riboflavin photodegradation.",
+   "say": "Riboflavin forms FMN and FAD to power mitochondrial energy generation and fat burning. Because light destroys riboflavin, jaundiced newborns on phototherapy need extra supplementation.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Flavin coenzyme", "Representative dependent enzyme", "Biochemical pathway"],
+    "rows": [
+     ["FAD", "Succinate dehydrogenase", "Krebs citric acid cycle"],
+     ["FAD", "Acyl-CoA dehydrogenase", "Fatty acid mitochondrial beta-oxidation"],
+     ["FAD", "Glutathione reductase", "Antioxidant protection against peroxides"],
+     ["FMN", "NADH dehydrogenase (Complex I)", "Mitochondrial electron transport chain"]
+    ]
+   }
+  },
+  {
+   "title": "Ariboflavinosis: orofacial and ocular lesions",
+   "tx": "Deficiency of vitamin B2 produces **clinical ariboflavinosis manifestations**, characterized by painful lesions confined predominantly to mucous membranes and mucocutaneous junctions. The earliest finding is angular stomatitis, presenting as macerated, painful fissures at the oral commissures, followed by cheilosis (red, swollen, cracked lips), glossitis with a magenta-red cobblestone tongue, nasolabial seborrhoeic dyssebacia, and corneal circumcorneal vascularisation.",
+   "say": "Riboflavin deficiency cracks the corners of the mouth with angular stomatitis. The lips swell and peel with cheilosis, and the tongue turns a characteristic magenta-red cobblestone color.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Anatomical structure", "Characteristic ariboflavinosis sign", "Diagnostic clue"],
+    "rows": [
+     ["Oral commissures", "Angular stomatitis", "Bilateral painful fissures at mouth corners"],
+     ["Vermilion border of lips", "Cheilosis", "Vertical fissuring, redness and scaling"],
+     ["Tongue surface", "Magenta glossitis", "Purplish-red cobblestone papillary engorgement"],
+     ["Nasolabial folds / scrotum", "Seborrhoeic dyssebacia", "Greasy, scaly follicular plugs on red skin"],
+     ["Corneal limbus", "Corneal vascularisation", "Capillary loops invade the clear cornea"]
+    ]
+   }
+  },
+  {
+   "title": "Dietary sources and cooking retention of B vitamins",
+   "tx": "Rich **B-vitamin dietary sources** of riboflavin and niacin include cow milk, curd, paneer, eggs, liver, whole pulses, and green leafy vegetables. Because riboflavin decomposes rapidly under ultraviolet light, storing fresh milk in clear transparent bottles exposed to direct sunlight destroys over fifty percent of its riboflavin within two hours, mandating opaque milk cartons and discarding cooking water from soaked pulses to prevent nutrient leaching.",
+   "say": "Milk, eggs, lentils and green leaves are rich in riboflavin and niacin. Sunlight rapidly destroys riboflavin in clear bottles, so milk must be kept in opaque cartons.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Riboflavin preservation",
+     "points": ["Destroyed rapidly by ultraviolet sunlight", "Relatively stable to dry kitchen heat", "Store milk in opaque pouches or amber glass"]
+    },
+    "right": {
+     "title": "Niacin preservation",
+     "points": ["Remarkably stable to heat, acid and light", "Leaches readily into discarded cooking water", "Consume cooking broths to retain dissolved vitamin"]
+    }
+   }
+  },
+  {
+   "title": "Erythrocyte glutathione reductase activity coefficient",
+   "tx": "The biochemical gold standard for diagnosing subclinical riboflavin deficiency is the **erythrocyte glutathione reductase assay**, which measures enzyme activity in red blood cell haemolysates in the presence and absence of exogenous FAD coenzyme. An activation coefficient greater than one point four indicates significant intracellular riboflavin depletion, providing an objective nutritional biomarker before overt oral fissures and magenta tongue lesions appear.",
+   "say": "Testing red blood cell glutathione reductase measures internal riboflavin status. An activation ratio above one point four proves subclinical deficiency before lips and mouth crack.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Red cell haemolysate prepared"},
+     {"id": "b", "label": "Glutathione reductase measured +/- added FAD"},
+     {"id": "c", "label": "Activity Coefficient (AC) = Stimulated / Basal"},
+     {"id": "d", "label": "AC > 1.4 confirms functional riboflavin deficiency"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Community-based B-complex supplementation",
+   "tx": "In community health centers, patients presenting with stomatitis receive oral **B-complex therapeutic supplementation**, combining five to ten milligrams of riboflavin with fifty to one hundred milligrams of nicotinamide, thiamine and pyridoxine daily for two weeks. Rapid epithelial re-epithelialisation of oral commissures and healing of tongue papillae within five to seven days confirms clinical diagnosis, accompanied by dietary advice to increase consumption of curd and sprouted pulses.",
+   "say": "Patients with mouth ulcers and cracked lips receive daily B-complex tablets for two weeks. Rapid healing within five days confirms the diagnosis and relieves oral pain.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Oral angular fissures and glossitis noted"},
+     {"id": "b", "label": "Daily multi-B-complex tablets for 14 days"},
+     {"id": "c", "label": "Prompt epithelial healing within 5 to 7 days"},
+     {"id": "d", "label": "Diet counseling on sprouted lentils and dairy"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

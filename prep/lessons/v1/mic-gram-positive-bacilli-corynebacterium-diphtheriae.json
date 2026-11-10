@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-gram-positive-bacilli",
+  "subject": "microbiology",
+  "title": "Corynebacterium diphtheriae and Albert Stain",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Corynebacterium diphtheriae** is a pleomorphic gram positive bacillus in Chinese letter and palisade arrangements, non sporing, non motile, aerobic, whose lysogenic beta phage toxin (genetics lesson) creates diphtheria: pseudomembranous pharyngitis, bull neck, myocarditis and neuropathy, now rare where toxoid vaccination holds and returning where it lapses.",
+      "say": "Chinese letters on the smear, phage toxin in the throat: diphtheria's two signatures.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Organism portrait",
+          "points": [
+            "Club shaped (coryne) pleomorphic rods",
+            "V and L forms, palisades",
+            "Metachromatic granules pole bodies",
+            "Gravis, mitis, intermedius, belfanti biotypes heritage"
+          ]
+        },
+        "right": {
+          "title": "Disease portrait",
+          "points": [
+            "Adherent grey pseudomembrane, bleeds on removal",
+            "Bull neck lymphadenopathy",
+            "Toxin myocarditis (week 1 to 2) and neuropathy (later)",
+            "Cutaneous diphtheria in tropics and outbreaks"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Albert stain** paints granules bluish black and bacilli green (Albert I toluidine blue and malachite green, Albert II iodine), metachromatic volutin (Babes Ernst) granules at poles on Loeffler slope grown organisms. Its positive smear supports but never proves diphtheria without toxigenicity.",
+      "say": "Green rods with black polar granules support diphtheria; toxin testing convicts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Albert technique",
+          "points": [
+            "Smear from Loeffler slope growth",
+            "Granules bluish black, cytoplasm green",
+            "Granules best in young serum cultures",
+            "Gram stain parallel for morphology"
+          ]
+        },
+        "right": {
+          "title": "Interpretation",
+          "points": [
+            "Diphtheroids share granules",
+            "Toxigenicity separate question (Elek, PCR)",
+            "Culture before antibiotics, antitoxin before culture results",
+            "Notify public health immediately on suspicion"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Antitoxin first** is diphtheria's therapeutic law: equine diphtheria antitoxin neutralises only unbound toxin, given on clinical diagnosis after sensitivity testing, antibiotics (penicillin or macrolide) eradicating organism and toxin production, airway secured (membrane obstructs), contacts cultured and prophylaxed, case isolated droplet. Waiting for culture loses myocardium.",
+      "say": "Antitoxin on sight, antibiotics behind it, airway above all: hours decide myocardium.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "suspect", "label": "Pseudomembrane and bull neck recognised" },
+          { "id": "airway", "label": "Airway secured, ENT and critical care" },
+          { "id": "antitoxin", "label": "Antitoxin after test dose (do not wait culture)" },
+          { "id": "abx", "label": "Antibiotics, isolation, contacts and notification" }
+        ],
+        "edges": [["suspect", "airway"], ["airway", "antitoxin"], ["antitoxin", "abx"]]
+      }
+    },
+    {
+      "tx": "**Diphtheria toxin mechanism** (A B exotoxin, ADP ribosylation of elongation factor 2) halts protein synthesis in heart, nerve, kidney and mucosa, the AB toxin archetype of the pharmacology toxin lessons, encoded by tox gene on beta corynephage so non toxigenic strains colonise harmlessly until phage converts them.",
+      "say": "One enzyme shuts off EF2 in heart and nerve; the gene arrives by phage.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Toxin mechanics",
+          "points": [
+            "B binds, A ADP ribosylates EF2",
+            "Protein synthesis arrest and cell death",
+            "Iron regulates expression (DtxR repressor)",
+            "Toxoid vaccine: formaldehyde detoxified toxin"
+          ]
+        },
+        "right": {
+          "title": "Clinical timing",
+          "points": [
+            "Local membrane days",
+            "Myocarditis 1 to 2 weeks (conduction disease)",
+            "Neuropathy weeks (palate, then limbs)",
+            "Antitoxin only neutralises circulating free toxin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Other corynebacteria** (diphtheroids) graduate from contaminants by site and repetition: jeikeium (multidrug resistant, device and neutropenic sepsis, vancomycin susceptible), urealyticum (struvite urinary stones, urease), pseudotuberculosis and ulcerans (zoonotic, ulcerans can carry toxin and cause diphtheria like disease, now outnumbering classic in some countries).",
+      "say": "Diphtheroid on one plate is skin; jeikeium in neutropenic blood is a vancomycin problem.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Coryneform cast",
+          "points": [
+            "C jeikeium: devices, neutropenia, multidrug",
+            "C urealyticum: alkaline urine and stones",
+            "C ulcerans: cattle and pets, toxigenic possible",
+            "C striatum: emerging device pathogen"
+          ]
+        },
+        "right": {
+          "title": "Significance rules",
+          "points": [
+            "Sterile site and repeated isolation",
+            "Device and immunocompromise context",
+            "Species identification by MALDI",
+            "Susceptibility always (resistance patterns genus wide)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Vaccination architecture** (DTaP childhood, Td and Tdap adult, toxoid not anti colonisation) prevents toxin disease while carriage persists in pockets, so outbreaks exploit coverage gaps and adult waning; toxigenic culture from contacts, chemoprophylaxis (erythromycin, penicillin) and immunisation of contacts close an introduced case's circle.",
+      "say": "Toxoid stops toxin, not carriage; adult boosters are diphtheria's forgotten perimeter.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vaccine facts",
+          "points": [
+            "Toxoid adsorbed, combination products",
+            "Childhood series plus decennial boosters",
+            "Pregnancy Tdap for pertussis mainly",
+            "No effect on carriage prevalence direct"
+          ]
+        },
+        "right": {
+          "title": "Outbreak responses",
+          "points": [
+            "Culture and tox test cases and close contacts",
+            "Prophylaxis antibiotics for carriers",
+            "Immunisation status completion",
+            "Respiratory isolation until cultures clear"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cutaneous diphtheria** (tropical ulcers colonised by toxigenic strains, punched out chronic sores) seeds respiratory disease and community spread in crowded and homeless outbreaks, culture of skin lesions mandatory in suspected clusters, systemic toxin complications rarer but real. Skin is diphtheria's quieter reservoir.",
+      "say": "Chronic punched ulcers can carry diphtheria silently into communities.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cutaneous portrait",
+          "points": [
+            "Chronic non healing ulcers with membrane",
+            "Often mixed flora, corynebacteria buried",
+            "Shelters and tropical settings",
+            "Toxin systemic effects less frequent"
+          ]
+        },
+        "right": {
+          "title": "Control points",
+          "points": [
+            "Culture lesions in clusters",
+            "Wound care and hygiene",
+            "Contact assessment respiratory and skin",
+            "Vaccination of affected communities"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Laboratory biosafety and notification** complete: diphtheria is immediately notifiable, isolates referred for toxigenicity, laboratory exposures assessed (aerosols), and Schick replaced by antitoxin antibody levels where immunity documented for health workers. The bench treats this organism as public health specimen, not routine throat flora.",
+      "say": "Notify first, refer the isolate, protect the bench: diphtheria is never routine.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Reference pathway",
+          "points": [
+            "tox gene PCR rapid",
+            "Elek and cytotoxicity confirmation",
+            "Whole genome outbreak typing",
+            "Culture collections preserve lineages"
+          ]
+        },
+        "right": {
+          "title": "Safety",
+          "points": [
+            "BSL2 with aerosol care",
+            "Staff vaccination verified",
+            "Exposure risk assessment after spills",
+            "Immediate public health liaison"
+          ]
+        }
+      }
+    }
+  ]
+}

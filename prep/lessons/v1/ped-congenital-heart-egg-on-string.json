@@ -1,0 +1,235 @@
+{
+ "key": "ped-congenital-heart-egg-on-string",
+ "v": 1,
+ "module": "ped-congenital-heart",
+ "subject": "paediatrics",
+ "title": "Classic Cardiac Silhouettes: Egg-on-String and Snowman TAPVC",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Pathological alterations in cardiac chamber architecture and great vessel alignment generate recognizable **characteristic cardiac silhouettes** on plain chest radiography. Frontal radiography provides an indispensable bedside screening tool in cyanotic neonates, where specific cardiac contours reflect underlying embryological misalignments. Well-defined radiographic patterns include the narrow mediastinal pedicle of transposed great arteries, the supracardiac figure-of-eight contour of anomalous pulmonary venous return, and the upturned cardiac apex of tetralogy.",
+   "say": "Distinctive cardiac silhouettes on chest X-rays reveal underlying congenital heart anomalies. The egg-on-a-string pattern signals TGA, while the snowman appearance indicates TAPVC.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-ix-paed-cxr_chd.webp",
+    "alt": "Frontal chest radiographs demonstrating classic cardiac silhouettes in cyanotic heart diseases.",
+    "caption": "Radiographic comparison of egg-on-string TGA, snowman TAPVC, and boot-shaped TOF silhouettes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Anterior-posterior alignment of transposed vessels and thymic involution produce a distinctive mediastinal silhouette. In transposition of the great arteries, chest radiography demonstrates the classic **egg on a string silhouette**, characterized by an enlarged, oval, globular cardiac contour (the egg) paired with a strikingly narrow superior mediastinal vascular pedicle (the string). Increased pulmonary vascular markings reflect pulmonary plethora.",
+   "say": "The egg-on-a-string appearance in TGA combines an enlarged oval heart with a narrow mediastinal pedicle. The aorta sitting directly anterior to the pulmonary artery narrows the shadow.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Narrow Mediastinal Pedicle (The String)",
+     "points": [
+      "Aorta lies directly anterior to pulmonary artery",
+      "Great vessels superimpose in AP view, narrowing pedicle",
+      "Stress-induced thymic atrophy narrows upper shadow"
+     ]
+    },
+    "right": {
+     "title": "Globular Cardiac Base (The Egg)",
+     "points": [
+      "Right ventricular and left ventricular volume enlargement",
+      "Egg-shaped oval contour lying on left diaphragm",
+      "Prominent pulmonary vascular plethora across lungs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Failure of pulmonary veins to join the left atrium redirects all pulmonary venous return into systemic veins. The anomaly termed **total anomalous pulmonary venous connection** (TAPVC) occurs when all four pulmonary veins fail to connect directly to the left atrium, instead draining anomalously into the right atrium or systemic venous tributaries. The right atrium receives both systemic and pulmonary venous blood, requiring an interatrial communication for systemic cardiac output.",
+   "say": "Total anomalous pulmonary venous connection drains all pulmonary veins into systemic venous circulation. Oxygenated and deoxygenated blood mix entirely in the right atrium.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "TAPVC Anatomical Type",
+     "Venous Drainage Route",
+     "Proportion of Cases",
+     "Obstruction Frequency"
+    ],
+    "rows": [
+     [
+      "Type I: Supracardiac",
+      "Left vertical vein -> Innominate vein -> SVC",
+      "45 to 50 percent",
+      "Low (Unobstructed in majority)"
+     ],
+     [
+      "Type II: Cardiac",
+      "Drains directly into coronary sinus or RA",
+      "25 to 30 percent",
+      "Low obstruction risk"
+     ],
+     [
+      "Type III: Infracardiac",
+      "Descending vein through diaphragm -> Portal vein/IVC",
+      "20 to 25 percent",
+      "High (>95% obstructed; neonatal crisis)"
+     ],
+     [
+      "Type IV: Mixed",
+      "Multiple anomalous connections",
+      "5 to 10 percent",
+      "Variable obstruction patterns"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Dilated supracardiac venous conduits superimpose above the heart to create a two-tiered silhouette. In supracardiac TAPVC, chest radiography demonstrates the classic **snowman heart figure of 8**, where a wide upper mediastinal shadow sits atop an enlarged globular heart. The upper circle of the snowman is formed by the dilated left vertical vein, horizontal left innominate vein, and dilated superior vena cava carrying massive pulmonary blood flow.",
+   "say": "Supracardiac TAPVC generates the snowman or figure-of-eight sign on chest X-rays. Dilated vertical and innominate veins form the upper head, resting on an enlarged cardiac body.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Upper Mediastinal Loop (Snowman Head)",
+     "points": [
+      "Dilated left vertical vein on the left",
+      "Engorged horizontal innominate vein across top",
+      "Massive superior vena cava on the right"
+     ]
+    },
+    "right": {
+     "title": "Lower Cardiac Silhouette (Snowman Body)",
+     "points": [
+      "Right atrial and right ventricular dilatation",
+      "Normal-sized left atrium and left ventricle",
+      "Prominent active pulmonary plethora throughout lung fields"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Subdiaphragmatic venous passage creates severe mechanical compression and acute pulmonary edema. In infracardiac TAPVC, the common pulmonary venous channel traverses the diaphragm through the oesophageal hiatus to join the portal vein or ductus venosus, precipitating **infracardiac TAPVC obstruction**. Compression by the diaphragm and constriction of hepatic sinusoids trigger acute pulmonary venous hypertension, severe pulmonary edema, ground-glass lung fields, and refractory hypoxaemia mimicking respiratory distress syndrome.",
+   "say": "Infracardiac TAPVC veins traverse the diaphragm, becoming severely compressed. High pulmonary venous pressure causes acute pulmonary edema with ground-glass X-rays, requiring emergency surgery.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Parameter",
+     "Obstructed TAPVC (Infracardiac)",
+     "Unobstructed TAPVC (Supracardiac)",
+     "Diagnostic Implication"
+    ],
+    "rows": [
+     [
+      "Onset of symptoms",
+      "Immediate hours after birth",
+      "Weeks to months after birth",
+      "Obstructed TAPVC is an extreme emergency"
+     ],
+     [
+      "Chest radiograph",
+      "Small heart with severe pulmonary edema",
+      "Large heart with snowman sign and plethora",
+      "Ground-glass haze in obstructed form"
+     ],
+     [
+      "Severity of cyanosis",
+      "Profound, dark central cyanosis",
+      "Mild, dusky arterial desaturation (85-90%)",
+      "Marked hypoxaemia signals obstruction"
+     ],
+     [
+      "Pulmonary pressure",
+      "Suprasystemic pulmonary hypertension",
+      "Normal or mildly elevated pulmonary pressure",
+      "Emergency surgical anastomosis required"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complete intracardiac mixing at the right atrial level equalizes chamber oxygen saturation. In unobstructed TAPVC, **interatrial mixing physiology** produces nearly identical oxygen saturation values across all four cardiac chambers, typically between eighty-five and ninety percent. Blood flow to the pulmonary bed is four to five times higher than systemic output, resulting in mild clinical cyanosis masked by severe tachypnoea and progressive right heart failure.",
+   "say": "Complete mixing in the right atrium equalizes oxygen saturations across all four chambers. High pulmonary blood flow causes mild cyanosis with tachypnoea and right heart failure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Haemodynamic Saturation Profile",
+     "points": [
+      "Right atrium receives all venous blood",
+      "Saturation in RA, RV, LA, and LV is identical (88%)",
+      "Mild cyanosis often missed clinically in nursery"
+     ]
+    },
+    "right": {
+     "title": "Auscultatory Physical Signs",
+     "points": [
+      "Wide fixed split S2 sound (similar to ASD)",
+      "Systolic ejection murmur at pulmonary area",
+      "Mid-diastolic tricuspid flow rumble",
+      "Marked right ventricular parasternal heave"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Surgical redirection of pulmonary venous flow establishes anatomical series circulation. Definitive management of TAPVC requires **surgical pulmonary venous anastomosis**, where the common pulmonary venous confluence is anastomosed directly to the posterior wall of the left atrium. The anomalous vertical vein or descending channel is ligated, and the obligate atrial septal defect is closed with a pericardial patch to restore separate systemic and pulmonary circulations.",
+   "say": "Surgical repair connects the pulmonary venous confluence directly into the left atrium, ligates anomalous draining veins, and closes the atrial septal defect.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Step",
+     "Operative Action",
+     "Anatomical Result",
+     "Potential Complication"
+    ],
+    "rows": [
+     [
+      "Confluence anastomosis",
+      "Side-to-side anastomosis to left atrium",
+      "Diverts pulmonary venous flow into LA",
+      "Late pulmonary venous stenosis (10%)"
+     ],
+     [
+      "Vertical vein ligation",
+      "Surgical clip or suture ligation",
+      "Obliterates anomalous systemic shunt",
+      "Must ensure adequate LA compliance first"
+     ],
+     [
+      "Atrial septal closure",
+      "Pericardial patch closure of ASD",
+      "Separates right and left atrial chambers",
+      "Avoids residual interatrial shunting"
+     ],
+     [
+      "Postoperative monitoring",
+      "Left atrial line and pulmonary arterial monitoring",
+      "Detects transient pulmonary hypertensive crises",
+      "Inhaled nitric oxide for pulmonary hypertension"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Serial echocardiographic evaluation monitors for late anastomotic narrowing and pulmonary hypertension. Following repair, patients require lifelong surveillance for **postoperative pulmonary venous stenosis**, a fibromuscular narrowing of the surgical anastomosis occurring in up to ten percent of cases. Recurrent stenosis manifests with progressive dyspnoea, haemoptysis, and recurrent pulmonary hypertension, requiring transcatheter balloon angioplasty, cutting balloon dilation, stenting, or sutureless reoperation.",
+   "say": "Postoperative anastomotic narrowing occurs in ten percent of cases, causing recurrent pulmonary hypertension. Serial echocardiography detects stenosis, treatable by balloon angioplasty or stenting.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Anastomotic Stenosis Warning Signs",
+     "points": [
+      "Recurrent exertional tachypnoea and cough",
+      "Doppler mean gradient across anastomosis >4 mmHg",
+      "Loss of phasic pulmonary venous Doppler flow",
+      "Unilateral or bilateral pulmonary venous hypertension"
+     ]
+    },
+    "right": {
+     "title": "Therapeutic Catheter Options",
+     "points": [
+      "High-pressure balloon angioplasty dilation",
+      "Cutting balloon disruption of fibrotic scar",
+      "Intravascular stent implantation across veins",
+      "Sutureless pericardial pouch reoperation"
+     ]
+    }
+   }
+  }
+ ]
+}

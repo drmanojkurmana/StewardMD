@@ -1,0 +1,254 @@
+{
+ "v": 1,
+ "id": "psy-antipsychotics-olanzapine-metabolic-syndrome",
+ "subject": "psychiatry",
+ "module": "psy-antipsychotics",
+ "title": "Atypical Antipsychotics, Metabolic Syndrome, and Acute Movement Disorders",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Metabolic syndrome induced by atypical antipsychotics** represents a major cardiometabolic hazard, characterized by rapid weight gain, visceral adiposity, hypertriglyceridaemia, hypertension, and accelerated insulin resistance. Olanzapine and clozapine carry the highest metabolic liability, driven by potent antagonism at histamine H1 and serotonin 5-HT2C hypothalamic receptors.",
+   "say": "Olanzapine and clozapine cause severe weight gain, dyslipidemia, and diabetes by blocking hypothalamic H1 and 5-HT2C satiety receptors.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antipsychotics-d2-eps-clozapine-nms-fig1.webp",
+    "alt": "Extrapyramidal motor syndromes and receptor mechanisms of atypical antipsychotics",
+    "caption": "Extrapyramidal motor syndromes and receptor mechanisms of atypical antipsychotics.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Metabolic risk stratification across atypicals** guides clinical drug selection: clozapine and olanzapine produce the greatest weight gain and diabetic risk, quetiapine and risperidone confer intermediate risk, while aripiprazole, ziprasidone, and lurasidone are weight-neutral and metabolically friendly. Patients with pre-existing metabolic syndrome or type 2 diabetes must avoid high-risk second-generation agents whenever feasible.",
+   "say": "Clozapine and olanzapine carry the highest metabolic risk. In contrast, aripiprazole and ziprasidone are weight-neutral and metabolically safe.",
+   "vis": {
+    "kind": "table",
+    "title": "Antipsychotic Metabolic Risk Tiers",
+    "cols": [
+     "Metabolic Risk Tier",
+     "Antipsychotic Agents",
+     "Monitoring Protocol"
+    ],
+    "rows": [
+     [
+      "Highest metabolic risk",
+      "Clozapine, Olanzapine",
+      "Fasting glucose & lipid profile at 3, 6, 12 months"
+     ],
+     [
+      "Intermediate risk",
+      "Risperidone, Quetiapine, Paliperidone",
+      "Monitor weight monthly for initial 3 months"
+     ],
+     [
+      "Lowest / Weight-neutral",
+      "Aripiprazole, Ziprasidone, Lurasidone",
+      "Preferred in pre-existing diabetes or obesity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Risperidone and hyperprolactinaemia** occurs because risperidone potently blocks dopamine D2 receptors on lactotroph cells in the anterior pituitary tuberoinfundibular tract. Unrestrained prolactin secretion produces galactorrhoea, amenorrhoea, anovulation, gynecomastia in males, decreased libido, erectile dysfunction, and accelerated long-term trabecular bone osteopenia.",
+   "say": "Risperidone potently blocks pituitary D2 receptors, elevating prolactin to cause galactorrhoea, amenorrhoea, gynecomastia, and bone loss.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prolactin-Elevating Agents",
+     "points": [
+      "Risperidone and paliperidone",
+      "All first-generation typical antipsychotics",
+      "Continuous tuberoinfundibular D2 block",
+      "Amenorrhoea, galactorrhoea, and gynecomastia"
+     ]
+    },
+    "right": {
+     "title": "Prolactin-Sparing Agents",
+     "points": [
+      "Aripiprazole (D2 partial agonist)",
+      "Clozapine and quetiapine",
+      "Spares anterior pituitary lactotrophs",
+      "Preserves normal reproductive endocrine axis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Aripiprazole pharmacology** operates uniquely as a partial agonist at dopamine D2 receptors with high intrinsic affinity, functioning as a functional dopamine stabilizer. In hyperdopaminergic mesolimbic states, it acts as an antagonist to suppress psychosis; in hypodopaminergic mesocortical and tuberoinfundibular states, it acts as an agonist.",
+   "say": "Aripiprazole is a D2 partial agonist, dampening excessive mesolimbic dopamine while maintaining basal tone in pituitary and cortical pathways.",
+   "vis": {
+    "kind": "flow",
+    "title": "D2 Partial Agonism Dynamics",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Aripiprazole binds D2 receptors with thirty percent intrinsic activity"
+     },
+     {
+      "id": "n2",
+      "label": "Mesolimbic excess: acts as net antagonist to extinguish delusions"
+     },
+     {
+      "id": "n3",
+      "label": "Tuberoinfundibular: provides basal dopamine tone to suppress prolactin"
+     },
+     {
+      "id": "n4",
+      "label": "Metabolically friendly profile with zero prolactin elevation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acute dystonia** is an extrapyramidal movement disorder developing within hours to days of initiating high-potency D2 blockers, characterized by acute, painful, sustained muscle spasms. Presentations include oculogyric crisis (upward deviated eyes), torticollis (neck twisting), retrocollis, trismus, and life-threatening laryngeal dystonia.",
+   "say": "Acute dystonia produces painful muscle spasms like oculogyric crisis and torticollis within hours of starting D2 blockers, reversed by anticholinergics.",
+   "vis": {
+    "kind": "table",
+    "title": "Acute Dystonic Manifestations",
+    "cols": [
+     "Dystonic Syndrome",
+     "Anatomical Muscles Affected",
+     "Emergency Presentation"
+    ],
+    "rows": [
+     [
+      "Oculogyric crisis",
+      "Extraocular muscles",
+      "Persistent involuntary upward fixed deviation of eyes"
+     ],
+     [
+      "Spasmodic torticollis",
+      "Sternocleidomastoid & trapezius",
+      "Painful lateral twisting and extension of neck"
+     ],
+     [
+      "Trismus",
+      "Masseter and temporalis muscles",
+      "Involuntary forceful clenching of the jaw"
+     ],
+     [
+      "Laryngeal dystonia",
+      "Laryngeal adductor muscles",
+      "Acute stridor and asphyxiation; medical emergency"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Look at the neck pulled backward and the eyes rolled upward in this picture. That sustained, involuntary posturing is an **acute dystonic reaction**, an early extrapyramidal effect that can follow dopamine blockade by antipsychotics or antiemetics. It frightens patients and can threaten the airway when laryngeal muscles are involved, so prompt parenteral anticholinergic treatment is needed rather than reassurance alone in the emergency department.",
+   "say": "Retrocollis with eyes deviated upward is acute dystonia, an early effect of dopamine blockade. It needs prompt parenteral anticholinergic treatment, especially if the airway is threatened.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m433-psy-antipsychotics-olanzapine-metabolic-syndrome.webp",
+    "alt": "Clinical illustration of an acute dystonic reaction showing retrocollis of the neck and an oculogyric crisis with eyes deviated upward",
+    "caption": "Clinical illustration of acute dystonic reaction showing retrocollis and oculogyric crisis. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Emergency reversal of acute dystonia** requires immediate parenteral administration of central anticholinergic agents, such as promethazine (25 to 50 milligrams IM/IV) or benztropine/trihexyphenidyl. Anticholinergics rapidly restore balance to the dopaminergic-cholinergic striatal axis, resolving painful muscular spasms within minutes, followed by oral prophylactic anticholinergic coverage for several weeks.",
+   "say": "Emergency dystonia reversal requires intravenous promethazine or benztropine to restore striatal dopamine-acetylcholine balance rapidly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Emergency Antidotes",
+     "points": [
+      "Promethazine (25 to 50 mg IM or slow IV)",
+      "Diphenhydramine (25 to 50 mg IV)",
+      "Benztropine (1 to 2 mg IM or IV)",
+      "Complete muscular spasm resolution in 10 minutes"
+     ]
+    },
+    "right": {
+     "title": "Maintenance Prophylaxis",
+     "points": [
+      "Oral trihexyphenidyl (2 mg twice daily)",
+      "Maintained for two to four weeks post-dystonia",
+      "Taper gradually to prevent cholinergic rebound",
+      "Consider switching to atypical antipsychotic"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Akathisia** is a distressing extrapyramidal movement disorder emerging within days to weeks of starting antipsychotics, defined by subjective inner motor restlessness and an irresistible urge to constantly move the legs. Patients continuously pace the room, rock back and forth, and shift weight from foot to foot.",
+   "say": "Akathisia is an intense subjective motor restlessness forcing patients to pace constantly, frequently misdiagnosed as worsening psychotic agitation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Akathisia Features",
+     "points": [
+      "Subjective inner mental motor restlessness",
+      "Inability to sit still; continuous pacing",
+      "Shifting weight while standing (marching in place)",
+      "Causes severe dysphoria and acute suicidality"
+     ]
+    },
+    "right": {
+     "title": "Treatment of Choice",
+     "points": [
+      "Propranolol (20 to 80 mg daily orally)",
+      "First-line evidence-based pharmacotherapy",
+      "Adjunctive low-dose benzodiazepine (clonazepam)",
+      "Reduce antipsychotic dose or switch to quetiapine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Clinical distinction between akathisia and psychotic agitation** is crucial to prevent fatal medication errors: increasing the antipsychotic dose relieves psychotic agitation but catastrophically exacerbates akathisia, potentially driving impulsive suicide. When doubt exists, administering a trial dose of oral propranolol provides rapid diagnostic and therapeutic clarity.",
+   "say": "Increasing antipsychotics relieves psychotic agitation but worsens akathisia. Propranolol trial clarifies diagnosis and relieves akathisia.",
+   "vis": {
+    "kind": "flow",
+    "title": "Diagnostic Dilemma: Akathisia vs Agitation",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Patient with schizophrenia displays severe motor pacing and restlessness"
+     },
+     {
+      "id": "n2",
+      "label": "Assess subjective feeling: 'My legs are jumpy' vs paranoid delusions"
+     },
+     {
+      "id": "n3",
+      "label": "Trial oral propranolol (20 mg); if restlessness resolves, akathisia is confirmed"
+     },
+     {
+      "id": "n4",
+      "label": "If pacing continues with delusional themes, treat psychotic agitation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n2",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

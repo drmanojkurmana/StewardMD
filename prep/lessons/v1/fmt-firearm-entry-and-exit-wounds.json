@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-firearm-entry-and-exit-wounds",
+ "subject": "forensic-medicine",
+ "module": "fmt-firearm",
+ "title": "Entry and Exit Wounds, Kennedy Phenomenon and Ricochet",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The entry versus exit table",
+   "tx": "Examiners separate the two holes with the classic **entrance and exit wound differences**. Entry is smaller than the bullet, inverted, collared, less bloody, and may show burning, blackening or tattooing with cherry red tissues. Exit is bigger than the bullet, everted, puckered or torn, bloodier, with fat often protruding and no discharge marks at all. With high velocity bullets the two wounds may end up the same size, so no single trait decides alone.",
+   "say": "Small, inverted and collared means entry; large, everted and fatty means exit, judged as a pattern, not one trait.",
+   "vis": {"kind": "table", "cols": ["Trait", "Entry wound", "Exit wound"], "rows": [["Size", "Smaller than bullet", "Bigger than bullet"], ["Edges", "Inverted", "Everted, puckered or torn"], ["Burn marks", "May be present", "Absent"], ["Fat protrusion", "Only in contact shots", "Commonly seen"]]}
+  },
+  {
+   "title": "Why exits are larger and messier",
+   "tx": "By the time a bullet leaves, it may tumble, deform, fragment or carry bone chips ahead of it, producing the **large irregular exit wound**. Unsupported skin tears and breaks into pieces as the missile pushes out. Exit shapes vary through round, stellate, cruciate, elliptical and crescent forms, and head exits are usually star shaped like contact entries. A tumbling bullet exiting sideways can leave an elongated slit resembling a stab or incised wound.",
+   "say": "Tumbling, fragments and bone chips blast a wide torn exit, which on the head can star like a contact entry.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bullet yaws or breaks up"}, {"id": "b", "label": "Bone fragments driven ahead"}, {"id": "c", "label": "Skin tears without support"}, {"id": "d", "label": "Large irregular exit forms"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "When entry is larger than exit",
+   "tx": "The size rule reverses in defined situations collected as **large entry wound causes**: inrushing gases tear soft tissue at contact, a yawing or tumbling bullet strikes sideways, the bullet breaks with only part exiting, tangential entry avulses tissue, or the bullet enters through folded skin. Finding entry bigger than exit therefore does not overturn the diagnosis if inverted collared margins, discharge marks and an inward track all agree on the entry side.",
+   "say": "Gas tearing, yaw and skin folds can enlarge an entry beyond its exit, so margins and track outrank size alone.",
+   "vis": {"kind": "compare", "left": {"title": "Entry enlarged by", "points": ["Inrushing muzzle gases", "Sideways yawing impact", "Bullet breaking on entry", "Entry through folded skin"]}, "right": {"title": "Still confirms entry", "points": ["Inverted collared margins", "Tattooing or blackening", "Fibres carried inward", "Track leads to the exit"]}}
+  },
+  {
+   "title": "Single entry with multiple exits",
+   "tx": "One hole in and several out occurs when the **bullet fragments inside the body** into three or four pieces, each exiting separately. Bone struck on the way can shatter into secondary missiles that make their own exits. A jacket may separate from its core on a button, coin or bone, and each part cuts a separate track; with semi jacketed bullets the lead core usually exits while the jacket stays behind inside the body.",
+   "say": "Fragmenting bullets and bone chips multiply the exits from one entry, and a shed jacket often remains inside.",
+   "vis": {"kind": "table", "cols": ["Mechanism", "Entry holes", "Exit holes"], "rows": [["Bullet breaks into pieces", "One", "Three or four"], ["Bone fragments driven out", "One", "Several small"], ["Jacket separates from core", "One", "Two separate tracks"], ["Bullet through arm then chest", "Two re entries", "Four wounds total"]]}
+  },
+  {
+   "title": "Re entry wounds and missing bullets",
+   "tx": "A bullet crossing an arm and then the chest makes four wounds, and irregular surfaces such as breast or buttock can produce several exits and re entries in **multiple wound track puzzles**. The opposite puzzle also occurs: an entry with no bullet inside, because a bullet entering the stomach may be vomited, one in the windpipe coughed up, one in the mouth spat out, and one in the gut passed in faeces, or it may exit through its own entry hole.",
+   "say": "Count tracks, not holes, because limbs add re entries and swallowed or coughed bullets can vanish from the body.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Entry found, bullet missing"}, {"id": "b", "label": "Check mouth, airway and gut"}, {"id": "c", "label": "Consider exit through entry hole"}, {"id": "d", "label": "X ray the whole body anyway"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Kennedy phenomenon, surgery erases the answer",
+   "tx": "Surgical alteration or suturing of gunshot wounds creates the **Kennedy phenomenon**: after emergency care, evaluation of whether a defect was entrance or exit becomes difficult or impossible. Wound excision, drain placement and stitching destroy collars, margins and discharge marks. The lesson for practice is to photograph and describe every wound before theatre whenever the patient's condition allows, and to record exactly what surgery changed.",
+   "say": "Once surgeons excise and stitch a gunshot wound its entry or exit nature may be lost, so document before theatre.",
+   "vis": {"kind": "compare", "left": {"title": "Before surgery, record", "points": ["Photographs with scale", "Margins and collar state", "Tattooing and blackening", "Clothing hole positions"]}, "right": {"title": "After surgery, lost", "points": ["Collar excised away", "Margins trimmed and stitched", "Discharge marks washed off", "Kennedy phenomenon results"]}}
+  },
+  {
+   "title": "Ricochet bullets arrive deformed",
+   "tx": "A **ricochet bullet** strikes an intervening hard surface first, rebounds at an angle smaller than its impact angle, and then hits the body. The critical angle for ricochet on hard surfaces is ten to thirty degrees. The bullet arrives deformed and flattened, gyroscopic spin lost, and makes a large irregular oval, triangular or cruciate entry with abraded margins, no abrasion collar and no burn marks. Soil, paint or fibres from the surface may cling to it.",
+   "say": "A bullet bounced at ten to thirty degrees arrives flattened and spinless, leaving a ragged collarless entry that mimics long range.",
+   "vis": {"kind": "table", "cols": ["Ricochet feature", "Finding", "Interpretation"], "rows": [["Impact angle", "Ten to thirty degrees", "Rebound angle is smaller"], ["Bullet state", "Deformed and flattened", "Struck a hard surface first"], ["Entry wound", "Large, irregular, abraded", "No collar, no burns"], ["Bullet surface", "Soil, paint or fibres", "Names the intervening object"]]}
+  },
+  {
+   "title": "Internal ricochet inside the skull",
+   "tx": "A spent bullet that cannot pierce the far skull table can rebound off the inner table like a billiard ball in **internal ricochet**, cutting a second track through the brain, and occasionally a third. Entering at an acute angle, it may instead run along the dura, tearing leptomeninges and vessels in a shallow surface track. X ray and careful track dissection reveal these paths and fix the direction of fire inside the head.",
+   "say": "Bullets bounce off the inner skull table into second tracks, so an odd extra track does not mean a second shot.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bullet crosses the brain"}, {"id": "b", "label": "Energy too low to exit skull"}, {"id": "c", "label": "Rebound off inner table"}, {"id": "d", "label": "Second or third track formed"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Gutter wounds and grazes on the skull",
+   "tx": "A bullet striking the skull tangentially may carve entry and exit holes in the scalp two to three centimetres apart with an oval gutter in the bone between them, the **gutter or keyhole wound**. It may also deviate and run under the skin following the skull curvature for a considerable distance without penetrating. A still shallower strike makes a graze or slap: a reddish brown elliptical furrow with ecchymosed neighbouring skin and no perforation at all.",
+   "say": "Tangential bullets gutter the outer skull or merely slap a bruised furrow into scalp without entering the head.",
+   "vis": {"kind": "compare", "left": {"title": "Gutter wound signs", "points": ["Scalp entry and exit close together", "Oval groove in outer table", "Track may run under skin", "Skull curvature guides bullet"]}, "right": {"title": "Graze or slap signs", "points": ["Elliptical reddish furrow", "No skin perforation", "Adjacent skin ecchymosed", "Bullet falls away spent"]}}
+  }
+ ],
+ "quiz": []
+}

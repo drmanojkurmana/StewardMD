@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-beta-lactams",
+  "subject": "pharmacology",
+  "title": "Penicillin Allergy, MRSA and Penicillin Binding Proteins Integrated",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Penicillin allergy** labels ride on roughly one in ten charts while true IgE allergy lives in under one in twenty of the labelled, because childhood rashes, viral exanthems, EBV ampicillin eruptions and family folklore harden into lifelong bans that exile patients to broader, costlier, more toxic therapy. Structured history (drug, timing, phenotype, tolerated agents since) stratifies risk, and delabelling by direct challenge in low risk patients is now guideline endorsed stewardship with measurable mortality and resistance dividends.",
+      "say": "Most penicillin labels are wrong and expensive; a structured history is the cheapest antibiotic upgrade available.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "label",
+            "label": "Penicillin allergy label encountered"
+          },
+          {
+            "id": "history",
+            "label": "Structured history: drug, timing, phenotype, tolerance since"
+          },
+          {
+            "id": "risk",
+            "label": "Risk stratified: low, moderate or high"
+          },
+          {
+            "id": "challenge",
+            "label": "Delabel by challenge or refer for testing"
+          }
+        ],
+        "edges": [
+          [
+            "label",
+            "history"
+          ],
+          [
+            "history",
+            "risk"
+          ],
+          [
+            "risk",
+            "challenge"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Reaction phenotypes assign** the fences: immediate reactions (anaphylaxis, urticaria, angioedema within hours) forbid the culprit and demand testing before any beta lactam cousin, severe delayed reactions (Stevens Johnson, DRESS, organ injury) forbid the whole class tent and often all beta lactams permanently, while benign delayed rashes and childhood exanthems permit graded challenge or direct oral amoxicillin challenge under observation in modern pathways.",
+      "say": "Anaphylaxis and Stevens Johnson fence hard; benign childhood rashes earn a supervised challenge, not a lifetime ban.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hard fences",
+          "points": [
+            "Anaphylaxis or angioedema history",
+            "Stevens Johnson, toxic epidermal necrolysis, DRESS",
+            "Drug induced organ injury (liver, kidney, marrow)",
+            "Specialist testing before any beta lactam"
+          ]
+        },
+        "right": {
+          "title": "Challenge candidates",
+          "points": [
+            "Benign delayed rash beyond childhood years",
+            "Unknown or family only histories",
+            "Tolerated penicillins since the event",
+            "Direct oral challenge with observation protocols"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**MRSA** is Staphylococcus aureus that acquired mecA, encoding **PBP** 2a, a transpeptidase with low affinity for every beta lactam except the fifth generation cephalosporins, rendering the entire class (penicillins, cephalosporins generations one to four, carbapenems) useless regardless of in vitro temptation. Community strains add Panton Valentine leukocidin and skin tropism; hospital strains add resistance luggage. Screening, decolonisation (mupirocin, chlorhexidine) and isolation are its infection control pharmacology.",
+      "say": "MRSA is one altered binding protein defeating a whole class; only PBP2a binders answer it among beta lactams.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/staphylococcus-aureus-mrsa-fig1.webp",
+        "alt": "Staphylococcus aureus identification and skin signs illustration",
+        "caption": "Staphylococcus aureus skin infection, the organism whose mecA acquisition creates MRSA."
+      }
+    },
+    {
+      "tx": "**Penicillin binding proteins** are the transpeptidases, transglycosylases and carboxypeptidases that build peptidoglycan, named for binding penicillin in the assay that discovered them. Beta lactam spectra are PBP affinity profiles in disguise (PBP2 preference in mecillinam's urinary niche, PBP3 in many cephalosporins' Gram negative killing), and resistance by PBP alteration (MRSA's acquired 2a, pneumococcal mosaic PBPs from streptococcal gene sharing, gonococcal stepwise changes) writes the resistance chapter target modification from the principles lesson.",
+      "say": "Every beta lactam spectrum is a PBP affinity list; resistance rewrites the list by mosaic theft.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PBP pharmacology",
+          "points": [
+            "Transpeptidation builds peptidoglycan cross links",
+            "Affinity profiles define spectra",
+            "Lysis follows wall failure in dividing cells",
+            "Non dividing cells tolerate beta lactams phenotypically"
+          ]
+        },
+        "right": {
+          "title": "PBP resistance",
+          "points": [
+            "MRSA: acquired low affinity PBP2a",
+            "Pneumococcus: mosaic PBPs from gene transfer",
+            "Gonococcus: stepwise PBP changes raise MICs",
+            "Ceftaroline: engineered PBP2a affinity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**MSSA versus MRSA** therapy is the allergy lesson's clinical payoff: for MSSA, cloxacillin or cefazolin are superior (lower mortality in bacteraemia series) to vancomycin, so every false allergy label that forces vancomycin costs measurable survival. Delabelling a bacteraemic patient's benign rash history to permit cefazolin is therefore an acute therapeutic intervention, not administrative tidiness, and infectious diseases teams perform it at the bedside with challenge protocols where risk allows.",
+      "say": "Vancomycin for MSSA is the consolation prize; delabel to cefazolin and survival improves measurably.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mssa",
+            "label": "MSSA bacteraemia with penicillin allergy label"
+          },
+          {
+            "id": "stratify",
+            "label": "History risk stratified urgently"
+          },
+          {
+            "id": "delabel",
+            "label": "Low risk: challenge or graded cefazolin pathway"
+          },
+          {
+            "id": "gain",
+            "label": "First line beta lactam replaces vancomycin"
+          }
+        ],
+        "edges": [
+          [
+            "mssa",
+            "stratify"
+          ],
+          [
+            "stratify",
+            "delabel"
+          ],
+          [
+            "delabel",
+            "gain"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Desensitisation occupies the** narrow bridge where the drug is irreplaceable and allergy is real: syphilis in pregnancy (previous lessons), where penicillin alone protects the fetus, is the canonical case, performed with incremental doubling doses under monitoring to induce temporary tolerance that lapses when therapy stops. It is never performed for severe delayed cutaneous reactions, and it buys one course, not a label removal, distinctions consent must spell out.",
+      "say": "Desensitisation rents tolerance for one irreplaceable course; pregnancy syphilis is its canonical rent.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Desensitisation candidates",
+          "points": [
+            "Pregnancy syphilis with true penicillin allergy",
+            "Selected infections where no alternative serves",
+            "Immediate reaction histories under specialist protocols",
+            "Inpatient monitoring with resuscitation ready"
+          ]
+        },
+        "right": {
+          "title": "Desensitisation exclusions",
+          "points": [
+            "Stevens Johnson, DRESS or organ injury histories",
+            "Where an adequate alternative exists",
+            "Outpatient or unmonitored settings",
+            "Expectation of permanent delabelling"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cross reactivity numbers** close the mythology opened earlier: penicillin to cephalosporin shared side chain adjusted risk near 1 to 2 percent, carbapenems under 1 percent, aztreonam negligible (ceftazidime twin excepted), and cefazolin's unique side chain permitting use in nearly all penicillin labels. Prescribing by ring fear instead of side chain fact demonstrably worsens surgical prophylaxis and sepsis outcomes, which is why guidelines now instruct the substitution explicitly.",
+      "say": "Side chains, not rings, predict cross reaction; cefazolin rescues most penicillin labelled operations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Folklore numbers",
+          "points": [
+            "Ten percent cephalosporin cross reactivity (inherited)",
+            "All beta lactams banned by one label",
+            "Vancomycin default in surgical prophylaxis",
+            "Labels inherited unchallenged for decades"
+          ]
+        },
+        "right": {
+          "title": "Evidence numbers",
+          "points": [
+            "Cephalosporins: 1 to 2 percent, side chain driven",
+            "Carbapenems: under 1 percent",
+            "Aztreonam: negligible, ceftazidime exception",
+            "Delabelling programmes: majority tolerate challenge"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**The prescriber's allergy** workflow, compressed: ask what drug, what happened, how fast, what since; photograph or document phenotypes in the record rather than free text 'penicillin allergy'; refer high risk, challenge low risk, desensitise the irreplaceable, and update every downstream label (GP, hospital, pharmacy, alert bracelets) when the verdict changes, because a delabelled patient re labelled by an old summary has gained nothing.",
+      "say": "Document the phenotype, propagate the verdict everywhere, and the label stays fixed.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ask",
+            "label": "Ask drug, timing, phenotype and tolerance since"
+          },
+          {
+            "id": "document",
+            "label": "Document phenotype precisely in every record"
+          },
+          {
+            "id": "verdict",
+            "label": "Challenge, test, desensitise or confirm by risk"
+          },
+          {
+            "id": "propagate",
+            "label": "Update all records, summaries and alerts"
+          }
+        ],
+        "edges": [
+          [
+            "ask",
+            "document"
+          ],
+          [
+            "document",
+            "verdict"
+          ],
+          [
+            "verdict",
+            "propagate"
+          ]
+        ]
+      }
+    }
+  ]
+}

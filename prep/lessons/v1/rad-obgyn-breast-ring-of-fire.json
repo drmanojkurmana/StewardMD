@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-obgyn-breast-ring-of-fire",
+ "subject": "radiology",
+ "module": "rad-obgyn-breast",
+ "title": "Ring of Fire Sign, Ectopic Pregnancy and Ovarian Torsion Imaging",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Ring of fire is peripheral flow",
+   "tx": "**Ring of fire sign** is the circle of peripheral colour Doppler flow around an adnexal ring structure, produced by the low resistance vessels of a corpus luteum or the trophoblast of a tubal ectopic pregnancy. The ring alone cannot separate those two, because a corpus luteum lives in the ovary while the ectopic ring sits separate from it. Finding the ovary and sliding the mass independently, the sliding organs sign, makes that anatomical call.",
+   "say": "Ring of fire sign is the circle of peripheral Doppler flow around an adnexal ring, produced by a corpus luteum or a tubal ectopic pregnancy. The ring alone cannot separate them. Finding the ovary and sliding the mass independently makes that anatomical call.",
+   "vis": {"kind": "compare", "left": {"title": "Corpus luteum ring", "points": ["Inside the ovary", "Moves with ovary on pressure", "Thick crenulated wall", "Normal early pregnancy partner"]}, "right": {"title": "Tubal ectopic ring", "points": ["Separate from ovary", "Slides independently", "Tubal ring or bagel sign", "Free fluid may accompany"]}}
+  },
+  {
+   "title": "Ectopic ultrasound triad",
+   "tx": "**Ectopic pregnancy** imaging combines an empty uterus beyond the discriminatory hormone zone, an adnexal mass or ring separate from the ovary, and echogenic free fluid suggesting blood in the peritoneum. The pictured ectopic surgery set belongs to the same pathway when rupture forces theatre. A live embryo outside the uterus is rare and absolute, but waiting for it misses most cases, so the triad plus pain and a positive test already earns emergency gynaecology review.",
+   "say": "Ectopic pregnancy imaging combines an empty uterus, an adnexal mass separate from the ovary and echogenic free fluid suggesting blood. A live embryo outside the uterus is rare, so waiting for it misses most cases. The triad plus pain and a positive test earns emergency review.",
+   "vis": {"kind": "image", "src": "clinix/media/practicals/obg-prc-ectopic-pregnancy-surgeries.webp", "alt": "Surgical procedures illustration for ectopic pregnancy management.", "caption": "Ectopic pregnancy surgical pathway illustrations. Credit: StewardMD library."}
+  },
+  {
+   "title": "Discriminatory zone used carefully",
+   "tx": "**Discriminatory zone** is the hormone level above which an intrauterine sac should be visible transvaginally, roughly 1500 to 3500 international units per litre depending on the unit protocol. Above it, an empty uterus means ectopic or completed loss until proven otherwise. Below it, pregnancy of unknown location is rescanned with serial hormone rises: a viable intrauterine pregnancy roughly doubles in forty eight hours, while ectopic and failing pregnancies rise slowly, plateau or fall atypically.",
+   "say": "Discriminatory zone is the hormone level above which an intrauterine sac should be visible transvaginally, roughly fifteen hundred to thirty five hundred units. Above it, an empty uterus means ectopic or completed loss. Below it, serial hormone rises separate viable, ectopic and failing pregnancies.",
+   "vis": {"kind": "table", "cols": ["Hormone pattern 48 hours", "Favours", "Action"], "rows": [["Rough doubling", "Viable intrauterine", "Rescan to locate"], ["Slow rise or plateau", "Ectopic", "Urgent review, locate mass"], ["Falling fast", "Failing pregnancy", "Expectant or medical pathway"], ["Falling slowly", "Ectopic not excluded", "Continue surveillance"]]}
+  },
+  {
+   "title": "Interstitial and scar ectopics hide",
+   "tx": "**Interstitial ectopic** implants in the cornual segment inside the uterine wall, showing an empty cavity with a sac high and lateral, wrapped by a myometrial mantle thinner than 5 mm. It ruptures late and catastrophically because the myometrium stretches before it tears. Caesarean scar ectopic implants into the anterior scar niche instead, and both variants forbid blind curettage, going to specialist medical or surgical planning first.",
+   "say": "Interstitial ectopic implants in the cornual segment, showing an empty cavity with a sac wrapped by myometrium thinner than five millimetres. It ruptures late and catastrophically. Caesarean scar ectopic implants into the scar niche, and both variants forbid blind curettage before specialist planning.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Sac high, lateral or in scar"}, {"id": "b", "label": "Myometrial mantle thin"}, {"id": "c", "label": "Specialist review first"}, {"id": "d", "label": "No blind curettage"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Ovarian torsion twists the pedicle",
+   "tx": "**Ovarian torsion** twists the adnexa on its pedicle, usually around a cyst or dermoid over 5 cm, showing an enlarged oedematous ovary with peripherally strung follicles and a midline location. The whirlpool sign twists vessels on Doppler, while absent venous then arterial flow arrives late, so present flow never excludes torsion in a screaming patient. Ultrasound suggests, laparoscopy decides, and detorsion with ovarian conservation is the modern operation.",
+   "say": "Ovarian torsion twists the adnexa around a cyst over five centimetres, showing an enlarged oedematous ovary with peripheral follicles. The whirlpool sign twists vessels on Doppler, but present flow never excludes torsion. Ultrasound suggests, laparoscopy decides, with ovarian conservation the modern operation.",
+   "vis": {"kind": "compare", "left": {"title": "Torsion clues", "points": ["Enlarged oedematous ovary", "Follicles pushed peripheral", "Whirlpool vessel twist", "Pain outranks flow findings"]}, "right": {"title": "False reassurance traps", "points": ["Arterial flow still present", "Dual ovarian blood supply", "Intermittent torsion flows", "Normal scan, toxic pain: scope"]}}
+  },
+  {
+   "title": "Placenta praevia measured from the os",
+   "tx": "**Placenta praevia** is declared when the placental edge reaches or covers the internal os on transvaginal measurement in the late second and third trimesters, graded by that edge to os distance rather than the old four grades alone. A low lying placenta ends within 20 mm of the os and earns a thirty six week recheck, since most migrate clear as the lower segment grows. Transvaginal scanning is safe and more accurate than the abdominal view it replaces.",
+   "say": "Placenta praevia is declared when the placental edge reaches or covers the internal os on transvaginal measurement. A low lying placenta ends within twenty millimetres and earns a thirty six week recheck, since most migrate clear. Transvaginal scanning is safe and more accurate than the abdominal view.",
+   "vis": {"kind": "table", "cols": ["Edge to os distance", "Label", "Usual plan"], "rows": [["Covers the os", "Praevia", "Caesarean planning"], ["0 to 20 mm", "Low lying", "Recheck at 36 weeks"], ["Over 20 mm", "Normal site", "Vaginal birth expected"], ["Vasa praevia vessels at os", "Emergency risk", "Specialist caesarean plan"]]}
+  },
+  {
+   "title": "Breast ultrasound separates cyst from solid",
+   "tx": "**Breast ultrasound** answers the mammogram with tissue character: a simple cyst is anechoic with posterior enhancement and thin wall, a complicated cyst holds debris, and a solid mass is judged by shape, margin and orientation. Taller than wide orientation, spiculated or microlobulated margins and posterior shadowing vote malignant, while a wider than tall oval with circumscribed margins votes benign fibroadenoma in a young woman. Core biopsy, not aspiration, settles solid suspicious masses.",
+   "say": "Breast ultrasound answers the mammogram with tissue character: a simple cyst is echo free with enhancement, while a solid mass is judged by shape, margin and orientation. Taller than wide with spiculated margins votes malignant. Core biopsy settles solid suspicious masses.",
+   "vis": {"kind": "compare", "left": {"title": "Benign votes", "points": ["Wider than tall oval", "Circumscribed margins", "Posterior enhancement", "Fibroadenoma pattern"]}, "right": {"title": "Malignant votes", "points": ["Taller than wide", "Spiculated margins", "Posterior shadowing", "BIRADS 4 or 5 biopsy"]}}
+  },
+  {
+   "title": "Axilla and implant checks",
+   "tx": "**Axillary nodes** join every diagnostic breast ultrasound because a cortical thickness over 3 mm, lost fatty hilum or round shape converts a screening visit into a staging one with node sampling. Implants are checked for intracapsular rupture as linguine like lines inside the shell and extracapsular silicone in tissue. MRI is the definitive implant study, while mammography uses displaced Eklund views to free the native tissue from the implant shadow.",
+   "say": "Axillary nodes join every diagnostic breast ultrasound because a thick cortex or lost fatty hilum converts screening into staging with node sampling. Implants are checked for rupture lines inside the shell. MRI is the definitive implant study, while mammography uses displaced views to free native tissue.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Diagnostic breast ultrasound"}, {"id": "b", "label": "Scan axilla same visit"}, {"id": "c", "label": "Abnormal node sampled"}, {"id": "d", "label": "Staging completed before surgery"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}

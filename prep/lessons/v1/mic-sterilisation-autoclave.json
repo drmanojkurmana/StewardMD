@@ -1,0 +1,239 @@
+{
+  "v": 1,
+  "module": "mic-sterilisation",
+  "subject": "microbiology",
+  "title": "Moist and Dry Heat Sterilisation: Autoclave, Hot Air Oven and Tyndallisation",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **autoclave** sterilises with saturated steam under pressure: 121 degrees Celsius at 15 pounds per square inch for 15 to 20 minutes kills vegetative bacteria, viruses and the benchmark spores by denaturing proteins with moisture's efficient heat transfer. Gravity and prevacuum cycles, load wrapping and air removal decide whether the centre of the pack ever meets steam, which is why cycle parameters are validated per load, not per machine dial.",
+      "say": "121 degrees, 15 pounds, 15 minutes: steam under pressure is sterilisation's benchmark sentence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Standard cycles",
+          "points": [
+            "121 C at 15 psi for 15 to 20 minutes (wrapped loads longer)",
+            "134 C for 3 to 4 minutes (prevacuum flash traditions)",
+            "Liquids need slow exhaust cycles",
+            "Air pockets defeat steam contact"
+          ]
+        },
+        "right": {
+          "title": "Suitable loads",
+          "points": [
+            "Surgical instruments and dressings",
+            "Culture media (sugar media excepted at lower settings)",
+            "Rubber and most plastics rated for steam",
+            "Never oils, powders or closed sealed containers"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Moist heat kills at lower temperatures than dry heat because water denatures and coagulates protein efficiently and steam condensing on cool loads releases latent heat exactly where needed; dry heat must oxidise, demanding the **hot air oven**'s 160 degrees for two hours (or 170 for one, 180 for thirty minutes). Oils, powders, glassware and sharp instruments that steam would dull or corrode take the dry route.",
+      "say": "Steam denatures wet and fast; dry heat oxidises slow and hot. Match load to physics.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hot air oven",
+          "points": [
+            "160 C for 2 hours holding time",
+            "Glassware, oils, powders, sharp instruments",
+            "No corrosion or dulling",
+            "Slow penetration, load spacing critical"
+          ]
+        },
+        "right": {
+          "title": "Moist heat family",
+          "points": [
+            "Autoclave: full sterilisation",
+            "Boiling: disinfection, spores survive",
+            "Pasteurisation: pathogens only (next lesson)",
+            "Inspissation: media solidified gently"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Tyndallisation** (fractional sterilisation) outwits spores by patience: steam at 100 degrees for thirty minutes on three successive days kills vegetative cells day one, lets surviving spores germinate overnight in the nutrient medium, and kills the hatchlings on days two and three. It served heat sensitive sugar and egg media before filtration and autoclave safe formulations retired it to examination permanence.",
+      "say": "Three days of steaming ambush spores at germination; patience substitutes for pressure.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "day1",
+            "label": "Day 1 steam: vegetative cells die, spores survive"
+          },
+          {
+            "id": "germ",
+            "label": "Overnight: spores germinate in medium"
+          },
+          {
+            "id": "day2",
+            "label": "Day 2 steam: germinated cells die"
+          },
+          {
+            "id": "day3",
+            "label": "Day 3 steam: final clearance"
+          }
+        ],
+        "edges": [
+          [
+            "day1",
+            "germ"
+          ],
+          [
+            "germ",
+            "day2"
+          ],
+          [
+            "day2",
+            "day3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Sterilisation monitoring is** three layered: physical (cycle printouts of time, temperature, pressure), chemical (autoclave tape and integrators changing colour, Bowie Dick tests for air removal in prevacuum sterilisers), and biological (Geobacillus stearothermophilus spore ampoules incubated after the cycle, growth meaning failure). Biological indicators are the only proof that spores died, the same organism this module keeps appointing as referee.",
+      "say": "Tape proves exposure, printouts prove parameters, spores prove sterilisation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Indicator layers",
+          "points": [
+            "Physical: gauges and cycle records",
+            "Chemical: tape, strips, Bowie Dick daily",
+            "Biological: G stearothermophilus spores weekly and per implant load",
+            "Failed biological: recall loads since last pass"
+          ]
+        },
+        "right": {
+          "title": "Dry heat referee",
+          "points": [
+            "Bacillus atrophaeus (subtilis) spores",
+            "Higher temperature resistance profile",
+            "Chemical indicators for hot air cycles",
+            "Load thermocouples in validation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Below sterilisation sit** the heat disinfections: boiling at 100 degrees for 10 to 30 minutes kills vegetative pathogens (hepatitis B virus included with time) but not spores, pasteurisation trims milk pathogens at defined curves, and inspissation solidifies egg media (Lowenstein Jensen) at 80 to 85 degrees over days while disinfecting gently. Naming the level correctly (sterilisation versus disinfection) is itself an examination answer.",
+      "say": "Boiling disinfects, autoclaving sterilises; the difference is spores, and examiners charge for it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Heat disinfection",
+          "points": [
+            "Boiling 100 C: vegetative kill, spores survive",
+            "Pasteurisation: targeted pathogen reduction",
+            "Inspissation: egg media set at 80 to 85 C",
+            "Hot water disinfection for linen and utensils"
+          ]
+        },
+        "right": {
+          "title": "Full sterilisation",
+          "points": [
+            "Autoclave and hot air oven cycles",
+            "Ethylene oxide and plasma (next lessons)",
+            "Radiation for factory disposables",
+            "Filtration for heat labile fluids"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Autoclave failure modes** are load crimes, not machine mysteries: overpacking, sealed containers, air trapped in lumens and textiles, wet packs that wick contamination after the cycle, and cycles chosen for the dial rather than the load. Wrapped sterile items carry event related sterility (compromised when wet, torn or dropped) more than calendar expiry in modern practice.",
+      "say": "Wet, torn or dropped means unsterile regardless of date; sterility is an event, not a birthday.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Load crimes",
+          "points": [
+            "Overfilled chambers block steam paths",
+            "Closed containers exclude steam",
+            "Lumens need validated cycles",
+            "Wet packs wick microbes inward"
+          ]
+        },
+        "right": {
+          "title": "Storage discipline",
+          "points": [
+            "Event related sterility policies",
+            "Inspect wrap before opening",
+            "Cool loads before handling (condensation)",
+            "Traceability of loads to patients for implants"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Prion reality bends** sterilisation rules at the extreme: conventional cycles do not reliably inactivate prions, so instruments from high risk tissues in suspected Creutzfeldt Jakob disease take extended prevacuum cycles (134 degrees for 18 minutes), sodium hydroxide soaks, or single use destruction pathways. The spore benchmark fails here, and policy, not habit, decides instrument fate.",
+      "say": "Prions outlast spore cycles; suspected CJD instruments follow destruction pathways, not routine ones.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prion facts",
+          "points": [
+            "Protein only, no nucleic acid",
+            "Resists standard autoclaving and disinfectants",
+            "High risk tissues: brain, dura, posterior eye",
+            "Extended cycles plus NaOH in protocols"
+          ]
+        },
+        "right": {
+          "title": "Policy responses",
+          "points": [
+            "Single use instruments for high risk cases",
+            "Quarantine instruments pending diagnosis",
+            "Incineration pathways for contaminated sets",
+            "Tracking of exposed instrument sets"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Choosing a sterilisation** method is a four question algorithm asked per item: does it tolerate moisture, does it tolerate heat, is it a fluid or device, and what bioburden and material (oils, powders, lumens, electronics) constrain contact. This algorithm, not memorised lists, answers the viva variations examiners improvise around autoclave and oven.",
+      "say": "Moisture, heat, fluid or device, material: four questions choose every sterilisation method.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "heat",
+            "label": "Tolerates moist heat? Autoclave"
+          },
+          {
+            "id": "dry",
+            "label": "Heat yes, moisture no (oils, powders)? Hot air oven"
+          },
+          {
+            "id": "cold",
+            "label": "Heat labile device? EtO, plasma or chemical"
+          },
+          {
+            "id": "fluid",
+            "label": "Heat labile fluid? Membrane filtration"
+          }
+        ],
+        "edges": [
+          [
+            "heat",
+            "dry"
+          ],
+          [
+            "dry",
+            "cold"
+          ],
+          [
+            "cold",
+            "fluid"
+          ]
+        ]
+      }
+    }
+  ]
+}

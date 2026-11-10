@@ -1,0 +1,273 @@
+{
+ "v": 1,
+ "id": "psy-anxiety-propranolol-performance-anxiety",
+ "subject": "psychiatry",
+ "module": "psy-anxiety",
+ "title": "Performance Anxiety and Behavioral Exposure Therapies",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Performance anxiety**, a discrete circumscribed subtype of social anxiety disorder, manifests exclusively when an individual must perform, speak, or play music before an audience. Somatic distress is driven by an acute sympathetic surge, provoking visible hand tremors, voice quivering, palpitations, dry mouth, and cognitive freezing.",
+   "say": "Performance anxiety occurs during public speaking or recitals, triggering acute sympathetic tremors, voice shaking, and palpitations.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Performance Anxiety",
+     "points": [
+      "Confined strictly to public performance",
+      "Normal social functioning in informal settings",
+      "Prominent peripheral somatic signs",
+      "Responsive to targeted beta-blocker therapy"
+     ]
+    },
+    "right": {
+     "title": "Generalized Social Anxiety",
+     "points": [
+      "Pervasive fear across all social interactions",
+      "Avoidance of dining, writing, and meeting people",
+      "Profound interpersonal rejection sensitivity",
+      "Requires continuous maintenance SSRIs"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Propranolol cannot calm racing thoughts, yet it quiets the body that betrays them. By blocking peripheral beta receptors in heart and skeletal muscle, it slows the pulse and damps the fine tremor running through the hands. Performers take it before an audition so shaking fingers and a pounding chest stop feeding the fear. This targeted action is **peripheral beta blockade**, useful only where bodily symptoms dominate the complaint.",
+   "say": "Propranolol blocks beta receptors in heart and muscle, easing tremor and palpitations during performance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m348-psy-anxiety-propranolol-performance-anxiety.webp",
+    "alt": "Diagram of propranolol blocking peripheral beta receptors at the heart and skeletal muscle, reducing tremor and fast heartbeat",
+    "caption": "Propranolol acting at peripheral beta receptors in the heart and skeletal muscle, slowing the pulse and steadying tremulous hands. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Propranolol in performance anxiety** provides targeted symptomatic relief when administered 30 to 60 minutes before a performance at doses of 10 to 40 milligrams. As a non-selective beta-adrenergic antagonist, propranolol blocks peripheral beta-1 and beta-2 receptors, effectively suppressing somatic tremors, palpitations, and vocal shakiness without impairing cognitive alertness.",
+   "say": "Propranolol taken one hour before a performance blocks beta receptors, extinguishing tremors and palpitations without causing cognitive sedation.",
+   "vis": {
+    "kind": "table",
+    "title": "Propranolol Pharmacology Profile",
+    "cols": [
+     "Parameter",
+     "Clinical Specification",
+     "Relevance in Performance Anxiety"
+    ],
+    "rows": [
+     [
+      "Timing of dose",
+      "30 to 60 minutes pre-event",
+      "Matches peak plasma concentration to performance onset"
+     ],
+     [
+      "Dosing range",
+      "10 to 40 mg orally",
+      "Suppresses tremor without causing orthostatic hypotension"
+     ],
+     [
+      "Primary targets",
+      "Beta-1 (cardiac) & Beta-2 (skeletal muscle)",
+      "Halts tachycardia and peripheral hand tremor"
+     ],
+     [
+      "Contraindications",
+      "Bronchial asthma & AV block",
+      "Risk of fatal bronchospasm via beta-2 antagonism"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Systematic desensitisation** is a classical conditioning behavioral therapy developed by Joseph Wolpe based on the principle of reciprocal inhibition. The core physiological premise asserts that an individual cannot concurrently experience relaxation and anxiety; hence, establishing deep muscular relaxation systematically inhibits conditioned phobic anxiety responses.",
+   "say": "Systematic desensitisation pairs deep relaxation with a fear hierarchy to extinguish phobias through the mechanism of reciprocal inhibition.",
+   "vis": {
+    "kind": "flow",
+    "title": "Systematic Desensitisation Steps",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Train patient in Jacobson progressive muscle relaxation"
+     },
+     {
+      "id": "n2",
+      "label": "Construct detailed 10 to 15 step graded anxiety hierarchy"
+     },
+     {
+      "id": "n3",
+      "label": "Pair relaxation with imaginal exposure to lowest hierarchy item"
+     },
+     {
+      "id": "n4",
+      "label": "Ascend hierarchy sequentially once each step elicits zero distress"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Subjective Units of Distress Scale**, abbreviated SUDS, quantifies a patient's perceived anxiety level on a numerical rating scale from zero (complete tranquility) to 100 (catastrophic terror). SUDS ratings guide clinicians through the anxiety hierarchy, advancing to subsequent challenges only when distress drops below 20.",
+   "say": "The SUDS scale measures anxiety from zero to one hundred. Patients master each hierarchy tier until distress scores consistently drop below twenty.",
+   "vis": {
+    "kind": "table",
+    "title": "SUDS Rating Framework",
+    "cols": [
+     "SUDS Score",
+     "Subjective State",
+     "Therapeutic Protocol Rule"
+    ],
+    "rows": [
+     [
+      "0 to 10",
+      "Total tranquility & peace",
+      "Baseline physiological state achieved"
+     ],
+     [
+      "20 to 40",
+      "Mild noticeable tension",
+      "Target zone for successful exposure mastery"
+     ],
+     [
+      "50 to 70",
+      "Moderate anxiety & somatic signs",
+      "Hold exposure steady; do not retreat or escape"
+     ],
+     [
+      "80 to 100",
+      "Extreme panic & acute terror",
+      "Never terminate prematurely; allow habituation curve"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Flooding** is an intensive behavioral therapy technique wherein the patient is exposed directly and continuously to the highest-intensity phobic stimulus in vivo or through prolonged imagination without any relaxation pairing. Because physiological panic cannot be maintained indefinitely, autonomic exhaustion and cognitive habituation rapidly extinguish the phobic response.",
+   "say": "Flooding exposes the patient directly to the most feared stimulus until autonomic exhaustion and habituation naturally dissolve the phobia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Flooding Technique",
+     "points": [
+      "Direct presentation of maximal fear stimulus",
+      "No relaxation training or pacing",
+      "Patient prevented from escaping the situation",
+      "Rapid extinction via autonomic exhaustion"
+     ]
+    },
+    "right": {
+     "title": "Systematic Desensitisation",
+     "points": [
+      "Gradual ascent through structured hierarchy",
+      "Coupled with progressive muscle relaxation",
+      "Gentle pacing across multiple sessions",
+      "High patient comfort and low drop-out rate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Implosion therapy** is a variant of flooding conducted entirely in imagination, where the therapist presents exaggerated, psychodynamically charged catastrophic scenarios involving the feared object. Exposure continues uninterrupted for up to two hours until the patient's conditioned emotional responsiveness undergoes complete extinction.",
+   "say": "Implosion therapy presents exaggerated imaginal catastrophic scenarios for prolonged durations until internal conditioned emotional reactions extinguish.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Implosion Therapy",
+     "points": [
+      "Exclusively imaginal exposure format",
+      "Exaggerated, terrifying scenarios used",
+      "Incorporates psychodynamic conflict themes",
+      "Zero real-world physical danger"
+     ]
+    },
+    "right": {
+     "title": "In Vivo Flooding",
+     "points": [
+      "Real-world physical encounter format",
+      "Actual physical contact with feared object",
+      "Immediate corrective sensory reality testing",
+      "Requires intense therapist accompaniment"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**In vivo exposure therapy** involves real-world confrontation with feared objects or environments, standing as the undisputed empirical gold standard treatment for agoraphobia and specific phobias. Graded real-world immersion allows corrective reality testing, dismantling superstitious avoidance rituals and rebuilding personal self-efficacy.",
+   "say": "In vivo exposure therapy requires real-world contact with feared environments, providing the most robust empirical treatment for phobias and agoraphobia.",
+   "vis": {
+    "kind": "flow",
+    "title": "In Vivo Exposure Protocol",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Establish real-world behavioral target (riding an elevator)"
+     },
+     {
+      "id": "n2",
+      "label": "Enter situation and record initial peak SUDS score"
+     },
+     {
+      "id": "n3",
+      "label": "Remain in situation until SUDS drops by fifty percent"
+     },
+     {
+      "id": "n4",
+      "label": "Consolidate cognitive habituation through daily homework"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Virtual reality exposure therapy** utilizes interactive computer-generated environments to simulate phobic scenarios, such as commercial flight, high bridges, or public auditoriums, with complete therapist control over stimulus parameters. This modality achieves therapeutic outcomes comparable to in vivo exposure while ensuring privacy, safety, and repeatable pacing.",
+   "say": "Virtual reality exposure provides controlled simulations of flights, heights, and auditoriums, matching in vivo therapy while offering controlled safety.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Virtual Reality Strengths",
+     "points": [
+      "Complete therapist control of stimulus intensity",
+      "Repeatable scenarios without travel expenses",
+      "Safe, confidential clinic environment",
+      "Preferred by patients fearful of in vivo exposure"
+     ]
+    },
+    "right": {
+     "title": "Clinical Applications",
+     "points": [
+      "Aviophobia (fear of commercial flying)",
+      "Acrophobia (fear of heights and ledges)",
+      "Glossophobia (public speaking anxiety)",
+      "Combat-related post-traumatic stress"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-mood-stabilisers",
+  "subject": "pharmacology",
+  "title": "Lamotrigine and Carbamazepine in Bipolar Prophylaxis, Buspirone and Anti Anxiety Adjuncts",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Lamotrigine** owns bipolar depression prophylaxis: it prevents depressive relapses significantly, manic relapses weakly, and treats acute bipolar depression modestly, the mirror image of lithium's manic pole strength, so the two are rational partners across the poles. Its price is patience (the slow rash avoiding titration from the epilepsy lessons, halved further beside valproate) and the absence of acute antimanic power, which forbids it as monotherapy where mania is the presenting danger.",
+      "say": "Lamotrigine guards the depressive pole while lithium guards the manic; pair them by pole, not by habit.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bipolar-disorder-fig1.webp",
+        "alt": "Bipolar mood spectrum diagram showing manic, hypomanic, euthymic and depressive poles",
+        "caption": "The bipolar spectrum whose depressive pole lamotrigine preferentially protects."
+      }
+    },
+    {
+      "tx": "**Bipolar disorder prophylaxis** assembles by episode history: lithium for classic euphoric mania and suicide risk, valproate for rapid cycling and mixed features (teratogenicity fenced), lamotrigine for depressive predominance, carbamazepine as later line where its interaction empire can be afforded, and atypical antipsychotics (quetiapine across all phases, aripiprazole manic pole) woven through. Maintenance is measured in years, reviewed against relapse calendars, and antidepressants are never left unopposed by a stabiliser in bipolar depression.",
+      "say": "Prophylaxis is chosen by the pole that hurts the patient most, and antidepressants never ride alone in bipolar illness.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pole matched prophylaxis",
+          "points": [
+            "Manic pole: lithium, valproate, aripiprazole, quetiapine",
+            "Depressive pole: lamotrigine, quetiapine, lithium",
+            "Mixed and rapid cycling: valproate or carbamazepine traditions",
+            "Suicide risk: lithium evidence unique"
+          ]
+        },
+        "right": {
+          "title": "Maintenance discipline",
+          "points": [
+            "Years, not months, after recurrent episodes",
+            "Relapse signature taught to patient and family",
+            "Levels and organs monitored by agent",
+            "Antidepressant monotherapy avoided in bipolar depression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Carbamazepine** in bipolar care is the veteran third line: antimanic and prophylactic efficacy proven historically, burdened by autoinduction, contraceptive and antipsychotic level sabotage, hyponatraemia, blood dyscrasias and HLA flagged skin reactions from the epilepsy lessons. Its niche persists where lithium and valproate fail or are forbidden and its interactions can be actively managed, a shrinking but examinable territory. Levels, sodium, full blood count and liver profile accompany it by schedule.",
+      "say": "Carbamazepine stabilises mood third in line; its interaction empire must be governed, not discovered.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "third",
+            "label": "Lithium and valproate failed or forbidden"
+          },
+          {
+            "id": "hla",
+            "label": "HLA screening and baseline bloods completed"
+          },
+          {
+            "id": "titrate",
+            "label": "Titration with autoinduction anticipated at weeks 3 to 5"
+          },
+          {
+            "id": "audit",
+            "label": "Interaction audit at every co prescription"
+          }
+        ],
+        "edges": [
+          [
+            "third",
+            "hla"
+          ],
+          [
+            "hla",
+            "titrate"
+          ],
+          [
+            "titrate",
+            "audit"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Buspirone**, a serotonin 5 HT1A partial agonist, treats generalised anxiety without sedation, dependence, withdrawal or sexual dysfunction, and without helping panic attacks acutely because benefit needs two to four weeks of thrice daily dosing (short half life). It does not substitute for benzodiazepines in dependent patients (no cross tolerance, withdrawal proceeds untreated) and augments SSRIs in depression protocols. Grapefruit and CYP3A4 inhibitors raise its levels; dizziness and headache are its plain tolls.",
+      "say": "Buspirone is the patient anxiolytic: no sedation, no dependence, no use in a hurry.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Buspirone profile",
+          "points": [
+            "5 HT1A partial agonism, no GABA activity",
+            "Generalised anxiety over 2 to 4 weeks",
+            "No dependence, sedation or withdrawal",
+            "SSRI augmentation role in depression"
+          ]
+        },
+        "right": {
+          "title": "Buspirone limits",
+          "points": [
+            "Useless for acute panic relief",
+            "No benzodiazepine cross cover in withdrawal",
+            "Thrice daily dosing from short half life",
+            "CYP3A4 inhibitors multiply exposure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Propranolol in performance anxiety** is applied autonomic pharmacology: beta blockade silences the peripheral tremor, palpitation and flushing that feed stage fright's vicious circle, dosed 10 to 40 mg an hour before the event in patients without asthma or bradycardia, without touching the cognitive worry itself. It is not a treatment for generalised anxiety or panic disorder, and examinations reward that boundary. Musicians, speakers and examinees are its classic vignettes; test doses precede performances.",
+      "say": "Propranolol mutes the body's stage fright instruments; it does nothing for the mind's, and asthma bans it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "event",
+            "label": "Performance with tremor and palpitation dread"
+          },
+          {
+            "id": "prop",
+            "label": "Propranolol test dose on a safe day first"
+          },
+          {
+            "id": "dose",
+            "label": "Event dose 60 to 90 minutes beforehand"
+          },
+          {
+            "id": "check",
+            "label": "No asthma, bradycardia or hypotension history"
+          }
+        ],
+        "edges": [
+          [
+            "event",
+            "prop"
+          ],
+          [
+            "prop",
+            "dose"
+          ],
+          [
+            "dose",
+            "check"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Hydroxyzine**, a first generation antihistamine with anxiolytic licensing, sedates through H1 blockade with anticholinergic baggage, QT prolongation warnings that capped its dose and duration in regulators' reviews, and next day impairment that limits it to short courses where benzodiazepines are being avoided. It illustrates the sedative antihistamine trap in elderly patients, where anticholinergic burden trades anxiety for confusion and falls, and guidelines increasingly steer chronic anxiety to SSRIs, SNRIs, buspirone and psychological therapy.",
+      "say": "Hydroxyzine sedates anxiety at an anticholinergic and QT price; short courses only, rarely in the elderly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hydroxyzine facts",
+          "points": [
+            "H1 antihistamine anxiolytic, rapid sedation",
+            "QT prolongation: dose and duration capped by regulators",
+            "Anticholinergic effects, next day impairment",
+            "Short term bridging role at best"
+          ]
+        },
+        "right": {
+          "title": "Chronic anxiety hierarchy",
+          "points": [
+            "Psychological therapy foundational",
+            "SSRIs and SNRIs first line pharmacotherapy",
+            "Buspirone and pregabalin in defined niches",
+            "Benzodiazepines brief and exceptional"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Switching stabilisers** obeys each drug's clocks: lithium levels five days after dose changes, lamotrigine rash windows on every re titration after interruptions beyond five days (restart the full slow escalation), valproate's teratogenicity paperwork renewed annually, carbamazepine's autoinduction re levelling co prescriptions at a month. Cross tapers are choreographed on paper with the patient holding a copy, because bipolar relapse punishes improvisational pharmacology more than almost any other prescribing in this module.",
+      "say": "Every stabiliser switch is written choreography with dates; relapse is the critic of improvisation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clock watching by agent",
+          "points": [
+            "Lithium: level 5 days after change, 12 hour sample",
+            "Lamotrigine: restart titration after 5 days missed",
+            "Valproate: annual risk acknowledgement where mandated",
+            "Carbamazepine: re level at autoinduction completion"
+          ]
+        },
+        "right": {
+          "title": "Patient held plan",
+          "points": [
+            "Written cross taper calendar",
+            "Early warning signs personalised",
+            "Crisis contacts and relapse actions",
+            "Family briefed with consent"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pregnancy in bipolar disorder** concentrates every prior lesson: lithium's Ebstein arithmetic, valproate's prohibition tier, carbamazepine's folate story, lamotrigine's relative favour with level monitoring as clearance rises, and postpartum psychosis risk (highest after first delivery, with bipolar history) demanding prophylaxis plans written in the third trimester. Untreated relapse is the comparator in every cell of that table, which is why perinatal psychiatry co owns these prescriptions.",
+      "say": "Perinatal bipolar care weighs relapse against teratogenicity cell by cell, with lamotrigine and lithium usually surviving the audit.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pre",
+            "label": "Preconception stabiliser audit with psychiatry"
+          },
+          {
+            "id": "folate",
+            "label": "Folate, lowest effective monotherapy, level plan"
+          },
+          {
+            "id": "scan",
+            "label": "Anomaly and fetal cardiac surveillance as indicated"
+          },
+          {
+            "id": "post",
+            "label": "Postpartum relapse prophylaxis activated at delivery"
+          }
+        ],
+        "edges": [
+          [
+            "pre",
+            "folate"
+          ],
+          [
+            "folate",
+            "scan"
+          ],
+          [
+            "scan",
+            "post"
+          ]
+        ]
+      }
+    }
+  ]
+}

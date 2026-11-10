@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "id": "cm-malnutrition-anaemia-kwashiorkor",
+ "subject": "community-medicine",
+ "module": "cm-malnutrition-anaemia",
+ "title": "Protein Energy Malnutrition: Kwashiorkor, Marasmus and Classifications",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Protein energy malnutrition spectrum",
+   "tx": "In developing countries, protein energy malnutrition encompasses a lethal spectrum of childhood nutritional deprivation, spanning from chronic mild growth faltering to life-threatening **severe acute malnutrition presentation**. Driven by inadequate caloric intake, early discontinuation of breastfeeding, recurrent diarrhoeal infections, and poverty, malnutrition impairs cell-mediated immunity, blunts mucosal epithelial regeneration, and accounts for over one-third of global under-five child deaths.",
+   "say": "Protein energy malnutrition ranges from mild growth stunting to life-threatening acute wasting. Inadequate food and recurrent diarrhoea combine to destroy child immunity.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/severe-acute-malnutrition-fig1.webp",
+    "alt": "Clinical photographs comparing the clinical manifestations of kwashiorkor oedema and marasmic severe wasting",
+    "caption": "Severe acute malnutrition: Bilateral pitting pedal oedema in kwashiorkor and extreme muscular wasting in marasmus. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Kwashiorkor: clinical hallmarks and hypoalbuminaemia",
+   "tx": "Derived from the Ga language describing the sickness of the deposed child displaced from the breast by a newborn sibling, **kwashiorkor oedematous malnutrition** results from acute qualitative protein deprivation despite borderline caloric intake. The cardinal defining sign is bilateral symmetrical pitting pedal oedema, accompanied by moon facies, apathy, marked hepatomegaly from fatty infiltration, flag sign of alternating hair pigmentation, and flaky-paint dermatosis.",
+   "say": "Kwashiorkor strikes when a weaned toddler receives sugar water or starch without protein. Bilateral pitting foot swelling, moon face, enlarged fatty liver, and peeling skin are hallmarks.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Clinical feature", "Kwashiorkor finding", "Underlying pathophysiology"],
+    "rows": [
+     ["Bilateral pedal oedema", "Pitting swelling over dorsum of feet and shins", "Severe hypoalbuminaemia (< 2.0 g/dl) and low oncotic pressure"],
+     ["Facial appearance", "Moon facies (swollen, rounded cheeks)", "Fluid retention and oedematous subcutaneous tissue"],
+     ["Mental state", "Profound apathy, misery, irritability", "Electrolyte imbalance and cerebral metabolic changes"],
+     ["Liver enlargement", "Soft, smooth, palpable hepatomegaly", "Massive triglyceride accumulation in hepatocytes"],
+     ["Hair changes", "Flag sign (alternating light/dark bands), sparse hair", "Depleted sulfur amino acids disrupting melanin synthesis"],
+     ["Skin dermatosis", "Flaky paint dermatosis (crazy pavement peeling)", "Keratinocyte dyskeratosis and epidermal desquamation"]
+    ]
+   }
+  },
+  {
+   "title": "Nutritional marasmus: severe wasting",
+   "tx": "In stark contrast to kwashiorkor, **nutritional marasmus wasting** stems from chronic balanced starvation, characterized by severe deficiency of both dietary protein and total calories occurring typically in infants under one year. The infant exhibits extreme generalised loss of muscle and subcutaneous fat, presenting with a wizened, wrinkled old man facies, prominent rib cage, sunken eyes, bag of bones appearance, and voracious appetite without oedema.",
+   "say": "Marasmus is balanced starvation in infants under one year. The child loses all fat and muscle, developing an old man face, sunken eyes and visible ribs, but never has swelling.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Kwashiorkor (oedematous)",
+     "points": ["Bilateral pitting oedema present", "Moon facies and profound misery", "Enlarged fatty liver, poor appetite", "Flaky paint skin lesions and flag sign hair"]
+    },
+    "right": {
+     "title": "Marasmus (severe wasting)",
+     "points": ["No oedema; extreme muscle wasting", "Wizened, wrinkled old man face", "Normal liver size, voracious appetite", "Skin is loose, dry and folded like trousers"]
+    }
+   }
+  },
+  {
+   "title": "Gomez classification based on weight-for-age",
+   "tx": "Historically, epidemiological screening categorized child undernutrition using the **Gomez classification system**, which expresses an infant's actual body weight as a percentage of the fiftieth centile expected weight for age derived from the Boston reference standard. Grade 1 (mild) spans seventy-five to ninety percent of expected weight, Grade 2 (moderate) spans sixty to seventy-four percent, and Grade 3 (severe) encompasses weight below sixty percent.",
+   "say": "The Gomez system grades undernutrition by weight for age. Weight between seventy-five and ninety percent is mild, sixty to seventy-four is moderate, and below sixty percent is severe.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Gomez malnutrition tier", "Percentage of expected weight-for-age", "Severity grading"],
+    "rows": [
+     ["Normal nutritional status", "90 percent or higher", "Healthy growth"],
+     ["Grade I malnutrition", "75 to 89 percent of expected", "Mild undernutrition"],
+     ["Grade II malnutrition", "60 to 74 percent of expected", "Moderate undernutrition"],
+     ["Grade III malnutrition", "Less than 60 percent of expected", "Severe malnutrition (or any oedema)"]
+    ]
+   }
+  },
+  {
+   "title": "Waterlow classification: stunting versus wasting",
+   "tx": "To overcome the inability of weight-for-age to separate acute starvation from chronic deprivation, the **Waterlow classification framework** separates nutritional status into height-for-age (measuring stunting) and weight-for-height (measuring wasting). Stunting reflects chronic long-term linear growth restriction, whereas wasting reflects acute current body mass loss; a child who is both stunted and wasted suffers from concurrent chronic and acute malnutrition.",
+   "say": "The Waterlow system separates stunting from wasting. Stunting is low height for age from chronic deprivation, while wasting is low weight for height from acute starvation.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Classification axis", "Anthropometric formula", "Public health interpretation"],
+    "rows": [
+     ["Stunting (Chronic deficit)", "Height-for-age < 90% of expected", "Past chronic socioeconomic deprivation and recurrent illness"],
+     ["Wasting (Acute deficit)", "Weight-for-height < 80% of expected", "Recent acute starvation, famine or severe diarrhoeal illness"],
+     ["Wasted and Stunted", "Both height-for-age and weight-for-height low", "Severe combined chronic and acute nutritional emergency"]
+    ]
+   }
+  },
+  {
+   "title": "Indian Academy of Pediatrics classification",
+   "tx": "In Indian clinical practice, paediatricians utilize the **IAP classification of malnutrition**, which simplifies weight-for-age based on Harvard reference standards while separating oedematous cases. Grade I spans seventy-one to eighty percent of expected weight, Grade II spans sixty-one to seventy percent, Grade III spans fifty-one to sixty percent, and Grade IV encompasses children below fifty percent; any child with nutritional oedema is automatically classified as Grade IV.",
+   "say": "The Indian Academy of Pediatrics system grades weight for age into four twenty-percent bands. Any child with nutritional swelling is automatically placed in the most severe Grade four.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/malnutrition-and-nutritional-assessment-fig1.webp",
+    "alt": "Chart illustrating nutritional assessment parameters including Gomez, Waterlow and IAP classification grids",
+    "caption": "Nutritional assessment: Cross-classification of wasting, stunting, weight-for-age grids and clinical oedema. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Severe acute malnutrition diagnostic criteria",
+   "tx": "Under the World Health Organization and national protocols, a child aged six to fifty-nine months is diagnosed with **severe acute malnutrition criteria** if any of three specific criteria is fulfilled: weight-for-height Z-score below minus three standard deviations (-3 SD) of the WHO growth standards, presence of bilateral pitting pedal oedema of nutritional origin, or mid-upper arm circumference below one hundred and fifteen millimetres.",
+   "say": "A child has severe acute malnutrition if weight for height is below minus three Z-scores, if feet have pitting swelling, or if the arm circumference tape measures below one hundred and fifteen millimetres.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Child aged 6 to 59 months screened"},
+     {"id": "b", "label": "Weight-for-height < -3 SD on WHO chart"},
+     {"id": "c", "label": "Bilateral pitting pedal oedema present"},
+     {"id": "d", "label": "Mid-upper arm circumference < 115 mm"},
+     {"id": "e", "label": "Diagnosis: Severe Acute Malnutrition (SAM)"}
+    ],
+    "edges": [["a", "b"], ["a", "c"], ["a", "d"], ["b", "e"], ["c", "e"], ["d", "e"]]
+   }
+  },
+  {
+   "title": "Mid-upper arm circumference screening tape",
+   "tx": "In community mass screening, frontline workers measure **mid-upper arm circumference** using a colour-coded Shakir strip, taken at the midpoint of the left upper arm between the acromion and olecranon with the arm hanging relaxed. MUAC is age-independent between one and five years; a red reading below one hundred and fifteen millimetres indicates severe acute malnutrition, yellow (115 to 125 mm) indicates moderate acute malnutrition, and green indicates normal.",
+   "say": "The colour-coded arm tape screens toddlers for wasting. Red below one hundred and fifteen millimetres indicates severe acute malnutrition, requiring immediate nutritional rehabilitation.",
+   "vis": {
+    "kind": "table",
+    "cols": ["MUAC tape colour band", "Circumference measurement range", "Nutritional status classification"],
+    "rows": [
+     ["Red colour band", "Less than 115 mm (< 11.5 cm)", "Severe Acute Malnutrition (urgent hospital referral)"],
+     ["Yellow colour band", "115 to 124 mm (11.5 to 12.4 cm)", "Moderate Acute Malnutrition (community supplementary food)"],
+     ["Green colour band", "125 mm or greater (>= 12.5 cm)", "Normal healthy nutritional status"]
+    ]
+   }
+  },
+  {
+   "title": "The appetite test: triage for inpatient vs home care",
+   "tx": "Before deciding whether to hospitalize a malnourished child, clinicians conduct the standardized **appetite test protocol** by offering ready-to-use therapeutic food in a calm environment. If the child fails the appetite test or exhibits medical complications (high fever, severe anaemia, hypothermia, extensive skin lesions), inpatient admission to a Nutrition Rehabilitation Centre is mandatory; children passing without complications receive community-based therapeutic care at home.",
+   "say": "The appetite test feeds therapeutic paste to the child. If the child eats eagerly without medical complications, they can recover at home; if they refuse to eat, hospital admission is required.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "SAM child offered therapeutic food packet"},
+     {"id": "b", "label": "Passes test: Eagerly consumes required portion"},
+     {"id": "c", "label": "Fails test or medical complication present"},
+     {"id": "d", "label": "Inpatient admission to Nutrition Rehabilitation Centre"}
+    ],
+    "edges": [["a", "b"], ["a", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

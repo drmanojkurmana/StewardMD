@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-corrosive-metallic-thallium",
+ "subject": "forensic-medicine",
+ "module": "fmt-corrosive-metallic",
+ "title": "Thallium, Reinsch Test and Yellow Phosphorus",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Thallium, the tasteless rodenticide",
+   "tx": "**Thallium** sulphate and acetate are odourless, tasteless, water soluble salts used in dye and glass industries and as rodenticides and insecticides, a combination that made thallium a quiet homicidal and accidental poison. Symptoms are treacherously delayed one to twelve days: joint pains in legs and feet, appetite loss, stomatitis and drowsiness in mild cases; colic, vomiting, muscle and nerve pain, convulsions, psychosis, optic neuritis and tremor in severe ones. One gram is the fatal dose, killing in twenty four to thirty six hours once established.",
+   "say": "Odourless, tasteless and delayed by days, thallium at one gram hides behind joint pains before nerves and mind fail.",
+   "vis": {"kind": "table", "cols": ["Thallium trait", "Finding", "Consequence"], "rows": [["Taste and smell", "None, water soluble", "Easy covert administration"], ["Onset", "Delayed 1 to 12 days", "Source hard to trace"], ["Fatal dose", "About one gram", "Death in 24 to 36 hours"], ["Uses", "Rodenticide, dye, glass", "Accidental access common"]]}
+  },
+  {
+   "title": "The thallium triad and hair loss",
+   "tx": "**Chronic thallium poisoning shows a triad** of alopecia, skin rashes and painful peripheral neuropathy with mental confusion and lethargy. Hair loss after one to two weeks is dramatic, large tufts coming away, and loss of the outer third of the eyebrows is said to be very significant. A maculopapular eruption in butterfly distribution crosses the face, and Mees lines may appear on the nails, as in arsenic. Death follows respiratory muscle paralysis, and recovery can leave a Guillain Barre like peripheral neuritis.",
+   "say": "Hair falling in tufts, outer eyebrows lost, butterfly rash and burning neuropathy form the thallium triad examiners hunt.",
+   "vis": {"kind": "compare", "left": {"title": "Thallium triad", "points": ["Alopecia in large tufts", "Skin rashes, butterfly on face", "Painful peripheral neuropathy", "Mental confusion, lethargy"]}, "right": {"title": "Supporting clues", "points": ["Outer third eyebrows lost", "Mees lines on nails", "Optic neuritis possible", "Death by respiratory paralysis"]}}
+  },
+  {
+   "title": "Treating thallium with Prussian blue",
+   "tx": "**Thallium treatment** washes the stomach with one percent potassium iodide or Prussian blue, gives activated charcoal, and then Prussian blue itself, potassium ferric cyanoferrate, at two hundred fifty milligrams per kilogram daily orally in two divided doses, which traps thallium in the gut and interrupts its enterohepatic circulation. Haemodialysis with haemoperfusion and forced diuresis assist elimination. At autopsy, signs of asphyxia, inflamed stomach with submucous petechiae, alopecia, fatty heart and liver and renal damage are found, and thallium survives in burnt body ash.",
+   "say": "Prussian blue in the gut is thallium's specific trap, dosed at two hundred fifty milligrams per kilo while dialysis assists.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Iodide or Prussian blue lavage"}, {"id": "b", "label": "Activated charcoal given"}, {"id": "c", "label": "Oral Prussian blue traps thallium"}, {"id": "d", "label": "Dialysis and diuresis assist"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Reinsch test: the copper foil test",
+   "tx": "The **Reinsch test** is the classical bedside chemical test for arsenic, mercury, antimony and bismuth: bright copper foil or wire boiled in the acidified suspect solution takes a deposit of the metal. Mercury coats copper silver, arsenic coats it dark grey to black, which is also why the mercury lesson's test describes a silver coating forming on copper wire in hydrochloric acid. Marsh and Reinsch tests are now obsolete, replaced by atomic absorption spectroscopy, but their deposits remain standard viva material.",
+   "say": "Copper foil in hot acidified fluid wears silver for mercury and dark grey for arsenic in the old Reinsch test.",
+   "vis": {"kind": "table", "cols": ["Metal tested", "Deposit on copper", "Modern replacement"], "rows": [["Mercury", "Silver coating", "Atomic absorption spectroscopy"], ["Arsenic", "Dark grey to black coating", "Atomic absorption spectroscopy"], ["Antimony and bismuth", "Dark deposits also form", "Instrumental analysis"], ["Test status", "Classical, now obsolete", "Retain for theory examinations"]]}
+  },
+  {
+   "title": "Yellow phosphorus, the luminous poison",
+   "tx": "**Yellow phosphorus** is a waxy, luminous, garlic smelling poison once used in matches and fireworks. It glows in the dark and its vomit and stools can be phosphorescent, smoking and garlic scented, a bedside sign no other common poison shares. Red phosphorus by contrast is inert and non poisonous, the form now used on matchbox striking surfaces. Yellow phosphorus is fat soluble, which is why oils are forbidden demulcents in its poisoning: they dissolve and absorb it faster.",
+   "say": "Glowing garlic scented vomit in the dark is yellow phosphorus, and oily demulcents are banned because fat dissolves it.",
+   "vis": {"kind": "compare", "left": {"title": "Yellow phosphorus", "points": ["Waxy and luminous", "Garlic odour, smoking stools", "Fat soluble, oils forbidden", "Highly poisonous"]}, "right": {"title": "Red phosphorus", "points": ["Inert, non poisonous", "Matchbox striking surface", "Not luminous", "Safe form by design"]}}
+  },
+  {
+   "title": "Three phases of phosphorus poisoning",
+   "tx": "Phosphorus poisoning classically unfolds through **gastrointestinal, latent and hepatic phases**. Burning pain, garlic taste, vomiting and diarrhoea dominate the first day. A deceptive quiet interval follows while the absorbed poison injures the liver. Then jaundice, an enlarged tender liver, bleeding from failure of clotting factors, encephalopathy and acute hepatic necrosis declare the third phase, with death from hepatic failure or gastrointestinal haemorrhage. Chronic exposure in match workers produced phossy jaw, necrosis of the jaw bone.",
+   "say": "Burning gut, a quiet day, then a failing bleeding liver: phosphorus kills in three acts, and its chronic form ate match workers' jaws.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Phase one: burning gut symptoms"}, {"id": "b", "label": "Phase two: deceptive quiet"}, {"id": "c", "label": "Liver necrosis and jaundice"}, {"id": "d", "label": "Bleeding, encephalopathy, death"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Managing phosphorus poisoning",
+   "tx": "**Phosphorus management** removes and destroys the poison without feeding it: gastric lavage with potassium permanganate one in five thousand, which oxidises phosphorus, repeated until washings no longer glow or smell of garlic, medicinal charcoal, and a saline purgative, with strict avoidance of oils, fats and milk that dissolve phosphorus. Copper sulphate was the historical chemical antidote precipitating phosphide coatings, now superseded. Supportive care guards the liver through the delayed hepatic phase with observation for days.",
+   "say": "Permanganate lavage until the glow fades, charcoal and saline purge, no oils ever, and watch the liver for days.",
+   "vis": {"kind": "table", "cols": ["Step", "Action", "Reason"], "rows": [["Lavage", "Permanganate 1 in 5000", "Oxidises phosphorus"], ["Repeat until", "No glow, no garlic smell", "Poison exhausted"], ["Purgation", "Saline purgative", "Clears the bowel"], ["Forbidden", "Oils, fats and milk", "Dissolve and absorb phosphorus"]]}
+  },
+  {
+   "title": "Postmortem phosphorus and putrefaction clues",
+   "tx": "At autopsy, **phosphorus leaves a fatty, bleeding picture**: an enlarged yellow fatty liver with necrosis, haemorrhages under skin and serous membranes, garlic odour and occasional luminescence of stomach contents in a darkened room, and subendocardial and subperitoneal petechiae shared with arsenic. A practical warning from the arsenic lesson applies here too: colour of postmortem staining can be dark brown or yellow in phosphorus poisoning. Preserved viscera must exclude spirit, because phosphorus is on the rectified spirit exception list.",
+   "say": "A yellow fatty liver, garlic smell and glowing stomach contents mark phosphorus, whose viscera must never sit in spirit.",
+   "vis": {"kind": "compare", "left": {"title": "Phosphorus autopsy", "points": ["Yellow fatty necrotic liver", "Garlic odour present", "Contents may luminesce", "Haemorrhages widespread"]}, "right": {"title": "Preservation rule", "points": ["No rectified spirit", "Phosphorus dissolves in spirit", "Saturated saline instead", "Preserve early before oxidation"]}}
+  },
+  {
+   "title": "Metal tests and the modern laboratory",
+   "tx": "Classical metal tests survive as orientation inside **modern metal analysis**. Reinsch deposits, barium precipitates for sulphate and oxalate, ammonium hydroxide turning copper solutions deep blue in excess, and ferrocyanide precipitating copper all triage samples at the bench. Quantification belongs to atomic absorption spectroscopy and neutron activation analysis of blood, urine, hair, nails and bone. The chain from bedside colour to instrumental number is the medicolegal standard every metal case should document.",
+   "say": "Bench colours point the way and atomic absorption gives the number, and both belong in a documented metal poisoning file.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Bedside colour or deposit test"}, {"id": "b", "label": "Samples preserved correctly"}, {"id": "c", "label": "Atomic absorption quantification"}, {"id": "d", "label": "Hair and nail dating where needed"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}

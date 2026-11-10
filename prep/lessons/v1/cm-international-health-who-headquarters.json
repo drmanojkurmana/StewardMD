@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-international-health-who-headquarters",
+  "subject": "community-medicine",
+  "module": "cm-international-health",
+  "title": "WHO, UNICEF, and the United Nations Health Agencies",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "WHO headquarters and constitution",
+      "tx": "The **World Health Organization headquarters** sits in Geneva, Switzerland, where the agency was founded on 7 April 1948 (celebrated yearly as World Health Day) under a constitution defining health as complete physical, mental, and social well being. The World Health Assembly of member states meets each May to set policy, approve budgets, and elect the Director General.",
+      "say": "WHO was born in Geneva on 7 April 1948. Its assembly of nations meets every May to set global health policy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "w1", "label": "World Health Assembly sets policy yearly" },
+          { "id": "w2", "label": "Executive Board prepares and follows up" },
+          { "id": "w3", "label": "Secretariat (Director General) executes" }
+        ],
+        "edges": [["w1", "w2"], ["w2", "w3"]]
+      }
+    },
+    {
+      "title": "Regional offices and SEARO",
+      "tx": "Six regional offices decentralise WHO work, and India belongs to the **South East Asia Regional Office (SEARO)** in New Delhi, covering eleven member countries including Bangladesh, Indonesia, Myanmar, Nepal, Sri Lanka, and Thailand. The Pan American office doubles as the Americas regional office. Regional directors are elected by member states of the region, giving SEARO priorities (tuberculosis, neglected tropical diseases, disaster prone health systems) their own weight.",
+      "say": "India sits in the South East Asia region headquartered in New Delhi. Six regional offices bring WHO close to member problems.",
+      "vis": {
+        "kind": "table",
+        "cols": ["WHO region", "Headquarters city"],
+        "rows": [
+          ["South East Asia (SEARO)", "New Delhi, India"],
+          ["Africa (AFRO)", "Brazzaville, Congo"],
+          ["Europe (EURO)", "Copenhagen, Denmark"],
+          ["Western Pacific (WPRO)", "Manila, Philippines"]
+        ]
+      }
+    },
+    {
+      "title": "What WHO actually does",
+      "tx": "WHO's **functions of the World Health Organization** cluster into norms and standards (drug and disease classifications, guidelines), surveillance and outbreak response (International Health Regulations, eradication campaigns), technical support to countries, and research agenda setting. It commands no hospitals and few field armies; its currency is legitimacy, standards, and coordination, which is why its emergency declarations move markets and ministries alike.",
+      "say": "WHO sets norms, watches outbreaks, and coordinates nations. It runs no hospital chain; its power is standards and trust.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normative power",
+          "points": ["ICD and essential medicines lists", "Treatment and safety guidelines", "Prequalification of vaccines and drugs"]
+        },
+        "right": {
+          "title": "Operational power",
+          "points": ["Outbreak alerts under IHR 2005", "Eradication initiatives (polio, Guinea worm)", "Country technical cooperation"]
+        }
+      }
+    },
+    {
+      "title": "UNICEF and the child mandate",
+      "tx": "**UNICEF (United Nations Children's Fund)** was created in 1946 for emergency relief to children after the Second World War and became permanent with a child survival and development mandate: immunisation supply (it procures vaccines for a large share of the world's children), nutrition, water and sanitation, education, and protection. Its GOBI campaign historically championed growth monitoring, oral rehydration, breastfeeding, and immunisation.",
+      "say": "UNICEF feeds, vaccinates, and protects children worldwide. It buys vaccines for much of the world's childhood schedule.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "u1", "label": "1946: emergency relief for war children" },
+          { "id": "u2", "label": "Permanent child survival mandate" },
+          { "id": "u3", "label": "GOBI: growth, ORS, breastfeeding, immunisation" }
+        ],
+        "edges": [["u1", "u2"], ["u2", "u3"]]
+      }
+    },
+    {
+      "title": "GOBI and GOBI FFF",
+      "tx": "The child survival revolution compressed into **GOBI and GOBI FFF**: Growth monitoring, Oral rehydration, Breastfeeding, and Immunisation, extended by Food supplementation, Female education, and Family planning. The mnemonic let village workers carry four (then seven) highest yield interventions into every home. Examinations ask both expansions verbatim and UNICEF as their sponsoring agency, not WHO.",
+      "say": "GOBI is growth, oral rehydration, breastfeeding, immunisation. Add food, female education, and family planning for GOBI FFF.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Letter", "Intervention"],
+        "rows": [
+          ["G O B I", "Growth monitoring, ORS, Breastfeeding, Immunisation"],
+          ["First F", "Food supplementation"],
+          ["Second F", "Female education"],
+          ["Third F", "Family planning"]
+        ]
+      }
+    },
+    {
+      "title": "World Bank and health financing",
+      "tx": "The **World Bank in global health** lends and grants for health systems, nutrition, and disease programmes, publishes the World Development Report (its 1993 edition, Investing in Health, launched cost effectiveness and DALY thinking in policy), and co finances immunisation and HIV programmes. Unlike WHO it moves money at scale; unlike UNICEF it serves all ages. Its loans carry conditions ministries negotiate carefully.",
+      "say": "The World Bank finances health systems at scale. Its 1993 report put cost per DALY into every ministry's vocabulary.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "WHO versus World Bank",
+          "points": ["Norms and standards versus loans", "Technical legitimacy versus financing muscle", "Geneva secretariat versus Washington bank"]
+        },
+        "right": {
+          "title": "Shared ground",
+          "points": ["Disease burden measurement (DALY)", "Health system strengthening funds", "Joint programme evaluations"]
+        }
+      }
+    },
+    {
+      "title": "FAO, ILO, and UNFPA roles",
+      "tx": "Three sister agencies complete the circuit: the **Food and Agriculture Organization** guards food security, safety standards (Codex Alimentarius jointly with WHO), and zoonoses at the animal interface; the International Labour Organization sets occupational safety conventions and social security floors; and the United Nations Population Fund leads reproductive health, contraceptive supply, and population data support. One Health collaboration binds the first two to WHO daily.",
+      "say": "FAO guards food, ILO guards workers, UNFPA guards reproductive health. Examiners map each agency to one mandate.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Agency", "Health mandate"],
+        "rows": [
+          ["FAO", "Food security, Codex food standards, zoonoses"],
+          ["ILO", "Occupational safety, social security conventions"],
+          ["UNFPA", "Reproductive health and contraceptive supply"],
+          ["UNDP", "Development coordination, SDG support"]
+        ]
+      }
+    },
+    {
+      "title": "International Health Regulations 2005",
+      "tx": "The **International Health Regulations (2005)** legally bind member states to detect, assess, and notify events that may constitute a public health emergency of international concern (the Director General's declaration, as for COVID 19 and mpox), maintain core surveillance capacities at points of entry, and avoid excessive trade and travel interference. IHR compliance is self assessed and jointly evaluated, sovereignty intact throughout.",
+      "say": "The 2005 regulations oblige nations to detect and report international health emergencies fast. Declaration power rests with WHO's Director General.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ih1", "label": "Nation detects unusual health event" },
+          { "id": "ih2", "label": "Assess and notify WHO within framework" },
+          { "id": "ih3", "label": "PHEIC declared if criteria met" }
+        ],
+        "edges": [["ih1", "ih2"], ["ih2", "ih3"]]
+      }
+    },
+    {
+      "title": "Agency headquarters trap map",
+      "tx": "The surest marks in this module are headquarters pairings for **international health agencies**: WHO Geneva, UNICEF New York, World Bank and Pan American Health Organization Washington, FAO Rome, ILO Geneva, UNFPA New York, UNDP New York. Stems that relocate UNICEF to Geneva or FAO to New York are testing the map, not medicine, and repay thirty seconds of memorisation every examination season.",
+      "say": "Geneva WHO and ILO, New York UNICEF and UNFPA, Rome FAO, Washington the Bank. Learn the map once, harvest yearly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Geneva cluster",
+          "points": ["WHO headquarters", "ILO headquarters", "ICRC and UNAIDS neighbourhood"]
+        },
+        "right": {
+          "title": "New York and elsewhere",
+          "points": ["UNICEF, UNFPA, UNDP: New York", "FAO: Rome", "World Bank: Washington DC"]
+        }
+      }
+    }
+  ]
+}

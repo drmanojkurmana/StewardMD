@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-oral-antidiabetics",
+  "subject": "pharmacology",
+  "title": "Metformin and Sulfonylureas: Glibenclamide, Glimepiride and Lactic Acidosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Metformin**, a biguanide descended from French lilac, suppresses hepatic glucose output (mitochondrial and AMPK related mechanisms debated) and improves peripheral insulin sensitivity without stimulating insulin secretion, so it never causes hypoglycaemia alone and is weight neutral or reducing. That profile keeps it first line in type 2 diabetes across guidelines, dosed to 2 to 2.5 grams daily in divided or extended release forms against gastrointestinal tolerance.",
+      "say": "Metformin starves the liver's glucose tap without touching insulin; effective, weight kind, hypoglycaemia free alone.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/diabetes-mellitus-management-and-therapies-fig1.webp",
+        "alt": "Antidiabetic medication target organs diagram showing hepatic, pancreatic, gut and renal targets",
+        "caption": "Antidiabetic drug targets by organ, with metformin's hepatic glucose suppression the foundation stone."
+      }
+    },
+    {
+      "tx": "**Lactic acidosis** is metformin's feared rarity (well under 10 per 100,000 patient years, usually with a second catastrophe aboard): metformin accumulates when kidneys fail acutely, lactate generation outruns clearance in shock, sepsis or liver failure, and the drug takes the blame its pharmacology half deserves. Rules therefore fence eGFR (reduce below 45, stop below 30 in most guidance), pause during acute illness and around iodinated contrast where kidney injury threatens, and resume when the storm passes.",
+      "say": "Metformin lactic acidosis needs a second catastrophe; eGFR fences and sick day pauses keep it theoretical.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "stable",
+            "label": "Stable kidney function: metformin continued"
+          },
+          {
+            "id": "ill",
+            "label": "Acute illness, dehydration or contrast risk"
+          },
+          {
+            "id": "pause",
+            "label": "Pause metformin, monitor kidney function"
+          },
+          {
+            "id": "resume",
+            "label": "Resume when recovered and eGFR confirmed"
+          }
+        ],
+        "edges": [
+          [
+            "stable",
+            "ill"
+          ],
+          [
+            "ill",
+            "pause"
+          ],
+          [
+            "pause",
+            "resume"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Metformin's everyday costs are gastrointestinal (nausea, diarrhoea, metallic taste in a fifth to a quarter, tamed by slow titration, food and extended release coats) and vitamin **B12 malabsorption** over years, worth periodic measurement because its neuropathy and anaemia impersonate diabetic complications. It also carries polycystic ovary syndrome ovulation benefits (previous modules' neighbour) and a mortality friendly trial heritage (UKPDS overweight substudy) no successor has cleanly replicated.",
+      "say": "Titrate slowly with food for the gut, and check B12 before blaming diabetes for the neuropathy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tolerability tactics",
+          "points": [
+            "Start 500 mg with the evening meal",
+            "Increase weekly against symptoms",
+            "Extended release for persistent intolerance",
+            "Split doses across meals"
+          ]
+        },
+        "right": {
+          "title": "Long term surveillance",
+          "points": [
+            "Vitamin B12 periodically, neuropathy differential",
+            "eGFR at least annually, oftener when borderline",
+            "Sick day rules taught and documented",
+            "Weight and HbA1c confirm the dividend"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Sulfonylureas close the beta cell's ATP sensitive potassium channel, depolarising it into insulin secretion regardless of glucose, which is why they work in type 2 diabetes with functioning beta cells and why they cause hypoglycaemia and weight gain by design. **Glibenclamide** (glyburide) is long acting with active metabolites, the class's hypoglycaemia heavyweight, particularly dangerous in the elderly and renal impairment; gliclazide and glipizide sit kinder, glimepiride once daily in between.",
+      "say": "Sulfonylureas squeeze insulin out glucose blind; glibenclamide squeezes longest and lands the elderly hardest.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Glibenclamide (glyburide)",
+          "points": [
+            "Long acting, active renally cleared metabolites",
+            "Most hypoglycaemia in class comparisons",
+            "Avoid in elderly and renal impairment",
+            "Once or twice daily dosing"
+          ]
+        },
+        "right": {
+          "title": "Kinder sulfonylureas",
+          "points": [
+            "Gliclazide modified release: pancreatic selective reputation",
+            "Glipizide: shorter, hepatic metabolites inactive",
+            "Glimepiride: once daily, weight gentler claims",
+            "All still cause hypoglycaemia and weight gain"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Sulfonylurea** hypoglycaemia is the prolonged, relapsing kind: long half lives and active metabolites plus poor oral intake in hospital generate days of recurrent lows after dextrose boluses wear off, managed by admission, dextrose infusions and octreotide (which suppresses the insulin secretion sulfonylureas provoke), never by discharge after one corrected reading. Precipitants are a formulary of caution: renal impairment, alcohol, interacting inhibitors (co trimoxazole, azoles) and the simple missed meal.",
+      "say": "Sulfonylurea lows relapse for days: admit, infuse dextrose, octreotide ready, and hunt the precipitant.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "low",
+            "label": "Hypoglycaemia on a sulfonylurea"
+          },
+          {
+            "id": "dextrose",
+            "label": "Dextrose bolus then infusion, hourly glucose"
+          },
+          {
+            "id": "octreo",
+            "label": "Octreotide suppresses provoked insulin secretion"
+          },
+          {
+            "id": "observe",
+            "label": "Admit for days matched to agent half life"
+          }
+        ],
+        "edges": [
+          [
+            "low",
+            "dextrose"
+          ],
+          [
+            "dextrose",
+            "octreo"
+          ],
+          [
+            "octreo",
+            "observe"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The **KATP channel** is a shared address with opposite tenants: sulfonylureas close it in beta cells (insulin out), diazoxide opens it (insulin suppressed, used in insulinoma), and vascular and cardiac channels explain sulfonylurea selectivity debates and neonatal diabetes genetics, where activating KCNJ11 mutations cause diabetes treatable by high dose sulfonylureas instead of insulin, one of pharmacogenetics' cleanest examination stories.",
+      "say": "One channel, two directions: sulfonylureas close it for insulin, diazoxide opens it against insulinoma.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Channel closers (secretion)",
+          "points": [
+            "Sulfonylureas bind SUR1 subunit",
+            "Depolarisation opens calcium channels",
+            "Insulin exocytosis regardless of glucose",
+            "Neonatal KATP diabetes switched from insulin to sulfonylurea"
+          ]
+        },
+        "right": {
+          "title": "Channel openers (suppression)",
+          "points": [
+            "Diazoxide hyperpolarises the beta cell",
+            "Insulinoma hypoglycaemia controlled",
+            "Minoxidil's vascular channel opening from hypertension lessons",
+            "Selectivity by SUR subunit geography"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Secondary failure** writes the natural history: sulfonylureas lose roughly 5 to 10 percent of responders yearly as beta cell function declines beneath them, so HbA1c creep on maximal tolerated therapy is disease progression, not patient failure, and triggers addition (metformin partner classically) rather than dose heroics. Cardiovascular safety in modern trials (glimepiride versus linagliptin neutrality) rehabilitated the class partially, while cost keeps it globally indispensable.",
+      "say": "When sulfonylureas fade it is the beta cell retiring, not the patient failing; add, do not just escalate.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "respond",
+            "label": "Initial sulfonylurea response"
+          },
+          {
+            "id": "fade",
+            "label": "Beta cell decline: HbA1c creeps yearly"
+          },
+          {
+            "id": "add",
+            "label": "Add metformin or another class by comorbidity"
+          },
+          {
+            "id": "insulin",
+            "label": "Basal insulin when oral combinations exhaust"
+          }
+        ],
+        "edges": [
+          [
+            "respond",
+            "fade"
+          ],
+          [
+            "fade",
+            "add"
+          ],
+          [
+            "add",
+            "insulin"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Combination logic** for this pair is complementary: metformin suppresses hepatic output fasting while sulfonylureas squeeze prandial insulin, and fixed dose tablets aid adherence where both are stable. Modern prescribing sequences them by patient phenotype against the GLP 1, SGLT2 and DPP 4 agents of the next lessons, where cardiovascular or renal disease, weight and hypoglycaemia risk, not HbA1c alone, now choose the second drug after metformin.",
+      "say": "Metformin for the liver, sulfonylurea for the meal; after that, comorbidity chooses the drug, not habit.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Phenotype first questions",
+          "points": [
+            "Cardiovascular or kidney disease present?",
+            "Weight gain or loss therapeutic?",
+            "Hypoglycaemia risk and occupation?",
+            "Cost and formulary reality?"
+          ]
+        },
+        "right": {
+          "title": "Class answers (next lessons)",
+          "points": [
+            "SGLT2 inhibitors for cardiac and renal protection",
+            "GLP 1 agonists for weight and cardiovascular benefit",
+            "DPP 4 inhibitors for gentle, hypoglycaemia free control",
+            "Sulfonylureas where cost governs and risk allows"
+          ]
+        }
+      }
+    }
+  ]
+}

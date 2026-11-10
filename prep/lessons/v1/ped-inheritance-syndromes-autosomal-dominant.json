@@ -1,0 +1,271 @@
+{
+ "key": "ped-inheritance-syndromes-autosomal-dominant",
+ "v": 1,
+ "module": "ped-inheritance-syndromes",
+ "subject": "paediatrics",
+ "title": "Mendelian Inheritance, Genomic Imprinting and Prader-Willi",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Single-gene disorders follow classical transmission rules governed by chromosomal location and allelic dominance. The pattern termed **autosomal dominant inheritance** exhibits vertical transmission across consecutive generations, affecting males and females with equal frequency. Each child of an affected heterozygous parent carries a fifty percent recurrence risk, with male-to-male transmission serving as the diagnostic hallmark that definitively excludes X-linked inheritance.",
+   "say": "Autosomal dominant inheritance displays vertical transmission across generations with a fifty percent offspring recurrence risk. Male-to-male transmission definitively excludes X-linked inheritance.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mendelian Inheritance Pattern",
+     "Generational Pattern",
+     "Offspring Recurrence Risk",
+     "Male-to-Male Transmission"
+    ],
+    "rows": [
+     [
+      "Autosomal dominant",
+      "Vertical transmission (every generation)",
+      "50% for each child of affected parent",
+      "Present (rules out X-linkage)"
+     ],
+     [
+      "Autosomal recessive",
+      "Horizontal (affected siblings, normal parents)",
+      "25% for each child of carrier parents",
+      "Present between carrier fathers/sons"
+     ],
+     [
+      "X-linked recessive",
+      "Knight-move transmission (males affected)",
+      "50% of sons of carrier mother affected",
+      "Strictly absent (father gives Y)"
+     ],
+     [
+      "Mitochondrial inheritance",
+      "Maternal transmission exclusively",
+      "100% of offspring of affected mother",
+      "Strictly absent (sperm lacks mtDNA)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Horizontal pedigree distributions characterize recessive metabolic enzymopathies. In **autosomal recessive inheritance**, affected individuals typically appear in a single sibship with unaffected carrier parents, conferring a twenty-five percent recurrence risk for each subsequent pregnancy. Parental consanguinity significantly amplifies the probability of both parents inheriting an identical rare pathogenic mutant allele from a shared common ancestor.",
+   "say": "Autosomal recessive diseases affect siblings with unaffected carrier parents, carrying a twenty-five percent recurrence risk. Parental consanguinity significantly increases recessive disease frequency.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Consanguinity and Recessive Disease",
+     "points": [
+      "Sharing of common ancestral mutant alleles",
+      "Higher rate of inborn errors of metabolism",
+      "Examples: Cystic fibrosis, Wilson disease, SMA"
+     ]
+    },
+    "right": {
+     "title": "X-Linked Recessive Transmission",
+     "points": [
+      "Carrier mothers transmit to 50% of sons",
+      "Daughters of carrier mothers are 50% carriers",
+      "Examples: Haemophilia A, Duchenne dystrophy, G6PD"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Non-Mendelian maternal transmission governs mitochondrial energy transduction disorders. Because the ovum contributes virtually all cytoplasm to the zygote, **mitochondrial inheritance** dictates that an affected mother transmits mutant mitochondrial DNA to one hundred percent of her children, whereas affected males never transmit the condition. Replicative segregation and heteroplasmy, describing variable proportions of mutant and wild-type genomes across tissues, explain marked intrafamilial phenotypic variability.",
+   "say": "Mitochondrial inheritance passes exclusively from mothers to all offspring, while affected fathers never transmit the trait. Variable proportions of mutant DNA create diverse tissue phenotypes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Mitochondrial Syndrome",
+     "Genetic Mechanism",
+     "Primary Clinical Features",
+     "Diagnostic Hallmarks"
+    ],
+    "rows": [
+     [
+      "MELAS",
+      "m.3243A>G in MT-TL1 (tRNA leu)",
+      "Mitochondrial encephalomyopathy, stroke-like episodes",
+      "Ragged red fibres on muscle biopsy, high lactate"
+     ],
+     [
+      "MERRF",
+      "m.8344A>G in MT-TK (tRNA lys)",
+      "Myoclonic epilepsy with ragged red fibres",
+      "Progressive myoclonus, ataxia, hearing loss"
+     ],
+     [
+      "LHON",
+      "Complex I mtDNA point mutations",
+      "Leber hereditary optic neuropathy",
+      "Bilateral painless subacute central vision loss"
+     ],
+     [
+      "NARP",
+      "m.8993T>G in MT-ATP6",
+      "Neuropathy, ataxia, retinitis pigmentosa",
+      "Sensory neuropathy and retinal degeneration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Epigenetic gene silencing depending upon parent of origin creates parent-specific phenotypic vulnerability. The epigenetic mechanism **genomic imprinting** utilizes differential DNA methylation and chromatin remodelling during gametogenesis to silence specific maternal or paternal alleles. Consequently, expression of imprinted genes relies exclusively on the functional allele inherited from the non-imprinted parent, making localized microdeletions clinically consequential only when inherited from a specific parent.",
+   "say": "Genomic imprinting silences specific genes depending on whether they come from mother or father. Only the allele from the non-imprinted parent is active and expressed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Paternal Allele Expression",
+     "points": [
+      "Paternally expressed genes are active on paternal 15",
+      "Maternally imprinted (silenced) in normal females",
+      "Paternal deletion causes Prader-Willi syndrome"
+     ]
+    },
+    "right": {
+     "title": "Maternal Allele Expression",
+     "points": [
+      "Maternally expressed UBE3A active on maternal 15",
+      "Paternally imprinted (silenced) in normal males",
+      "Maternal deletion causes Angelman syndrome"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Imprinting tests read parental origin rather than DNA sequence. At the SNRPN locus a normal sample yields two bands after **methylation specific PCR**, one methylated maternal band and one unmethylated paternal band. Here only the maternal band survives, meaning the active paternal contribution is deleted, silenced or duplicated from the mother, each route converging on the same diagnosis of Prader-Willi syndrome.",
+   "say": "Methylation PCR at SNRPN normally shows maternal and paternal bands. Only the maternal band appears in Prader-Willi syndrome, showing the active paternal copy is missing.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m382-ped-inheritance-syndromes-autosomal-dominant.webp",
+    "alt": "Gel lanes from a methylation test of the SNRPN region, showing only the methylated maternal band and no unmethylated paternal band.",
+    "caption": "Methylation specific PCR at the 15q11 to q13 SNRPN locus showing the absent unmethylated paternal band in Prader-Willi syndrome. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Loss of active paternal alleles at the 15q11-q13 locus produces a classical biphasic neurobehavioral disorder. The condition **Prader-Willi syndrome** arises from absent expression of paternally active genes on chromosome 15q11-q13, caused by paternal microdeletion in seventy percent, maternal uniparental disomy in twenty-five percent, or imprinting center defects. Neonates present with severe hypotonia, poor sucking, and failure to thrive, followed in toddlerhood by insatiable hyperphagia, morbid obesity, and hypogonadism.",
+   "say": "Prader-Willi syndrome results from loss of active paternal genes on chromosome 15q11-q13. Infantile hypotonia and feeding failure give way to voracious hyperphagia and morbid obesity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Developmental Phase",
+     "Clinical Stigmata",
+     "Endocrine and Metabolic Deficit",
+     "Management Intervention"
+    ],
+    "rows": [
+     [
+      "Phase 1: Infancy (0-1 yr)",
+      "Severe hypotonia, poor suck, cryptorchidism",
+      "Hypothalamic failure, failure to thrive",
+      "Gavage feeding, recombinant growth hormone"
+     ],
+     [
+      "Phase 2: Toddlerhood (1-3 yr)",
+      "Weight gain without excess calories",
+      "Decreased basal metabolic rate",
+      "Strict dietary supervision, physical therapy"
+     ],
+     [
+      "Phase 3: Childhood (3+ yr)",
+      "Insatiable hyperphagia, food foraging",
+      "Leptin-ghrelin satiety pathway disruption",
+      "Locked kitchen cupboards, bariatric lifestyle"
+     ],
+     [
+      "Adolescence/Adulthood",
+      "Short stature, hypogonadism, sleep apnoea",
+      "Growth hormone and gonadotropin deficiency",
+      "Hormone replacement, polysomnography"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Loss of active maternal UBE3A expression at the identical chromosomal locus provokes a severe neurological phenotype. Termed the happy puppet condition, **Angelman syndrome** results from absent maternal expression of the UBE3A ubiquitin ligase gene on chromosome 15q11-q13, caused by maternal microdeletion in seventy percent or paternal uniparental disomy. Children exhibit profound intellectual disability, complete absence of speech, microcephaly, paroxysmal unprovoked laughter, hand flapping, and severe ataxic jerky gait.",
+   "say": "Angelman syndrome stems from loss of the maternal UBE3A gene on chromosome 15. It features severe developmental delay, absent speech, unprovoked laughter, hand flapping, and ataxic gait.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prader-Willi Hallmark Features",
+     "points": [
+      "Infantile floppiness transitioning to severe hyperphagia",
+      "Almond-shaped eyes, small hands and feet",
+      "Morbid obesity, diabetes, hypogonadotropic hypogonadism"
+     ]
+    },
+    "right": {
+     "title": "Angelman Hallmark Features",
+     "points": [
+      "Severe intellectual disability with zero speech",
+      "Inappropriate paroxysms of laughter and giggling",
+      "Jerky puppet-like ataxic gait and refractory seizures"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Inheriting both homologous chromosomal copies from a single parent mimics contiguous gene deletion syndromes. The genetic mechanism **uniparental disomy** occurs when an individual inherits two copies of a chromosome from one parent and none from the other parent, arising from trisomy rescue of an aneuploid zygote. Maternal uniparental disomy of chromosome 15 causes Prader-Willi syndrome, whereas paternal uniparental disomy of chromosome 15 causes Angelman syndrome.",
+   "say": "Uniparental disomy occurs when a child inherits both chromosome copies from one parent. Maternal disomy 15 causes Prader-Willi, while paternal disomy 15 produces Angelman syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Genomic Mechanism",
+     "Origin of Chromosome 15 Pair",
+     "Syndrome Produced",
+     "Proportion of Cases"
+    ],
+    "rows": [
+     [
+      "Paternal 15q11-q13 microdeletion",
+      "Maternal intact, paternal deleted",
+      "Prader-Willi syndrome",
+      "70 percent of PWS cases"
+     ],
+     [
+      "Maternal uniparental disomy (UPD 15)",
+      "Both copies inherited from mother",
+      "Prader-Willi syndrome",
+      "25 percent of PWS cases"
+     ],
+     [
+      "Maternal 15q11-q13 microdeletion",
+      "Paternal intact, maternal deleted",
+      "Angelman syndrome",
+      "70 percent of Angelman cases"
+     ],
+     [
+      "Paternal uniparental disomy (UPD 15)",
+      "Both copies inherited from father",
+      "Angelman syndrome",
+      "3 to 5 percent of Angelman"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Molecular diagnostic assays differentiate between parental deletion and disomy to guide family counselling. Initial diagnostic evaluation for both Prader-Willi and Angelman syndromes utilizes **methylation-specific PCR** at the 15q11-q13 SNRPN locus, which detects abnormal parent-specific DNA methylation patterns in over ninety-nine percent of patients. If abnormal methylation is confirmed, fluorescence in situ hybridization or chromosomal microarray distinguishes a structural microdeletion from uniparental disomy.",
+   "say": "Methylation-specific PCR confirms abnormal parent-specific imprinting in over ninety-nine percent of cases. Subsequent chromosomal microarray distinguishes microdeletions from uniparental disomy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Methylation-Specific PCR",
+     "points": [
+      "Detects presence or absence of maternal/paternal imprint",
+      "First-tier diagnostic test for suspected PWS/Angelman",
+      "99% sensitive for establishing epigenetic diagnostic status"
+     ]
+    },
+    "right": {
+     "title": "FISH and Microsatellite Polymorphisms",
+     "points": [
+      "FISH identifies physical 15q11-q13 microdeletion",
+      "Microsatellite markers confirm uniparental disomy",
+      "Vital for accurate sibling recurrence risk counselling"
+     ]
+    }
+   }
+  }
+ ]
+}

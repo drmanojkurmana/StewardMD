@@ -1,0 +1,232 @@
+{
+  "v": 1,
+  "module": "mic-superficial-subcutaneous-mycoses",
+  "subject": "microbiology",
+  "title": "Superficial Mycoses: Pityriasis Versicolor, Tinea Nigra and Piedra",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The most common superficial fungal dermatosis of young adults is **pityriasis versicolor**, an asymptomatic infection restricted strictly to the outermost stratum corneum. Patients present with finely scaly, fawn, hyperpigmented or hypopigmented macules over the chest, back, and upper arms. Lesions become conspicuous following ultraviolet sun exposure because fungal azelaic acid competitively inhibits melanocyte tyrosinase.",
+      "say": "Finely scaling trunk macules become visible when sun exposure tans surrounding normal skin.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical distribution",
+          "points": [
+            "Upper trunk, chest, and shoulder regions",
+            "Fine branny cigarette-paper scales on scraping",
+            "Besnier sign or scratch sign is positive",
+            "Absence of dermal induration or severe pruritus"
+          ]
+        },
+        "right": {
+          "title": "Pathophysiology",
+          "points": [
+            "Malassezia globosa and furfur overgrowth",
+            "Azelaic acid blocks melanin pigment synthesis",
+            "Pitirialactone creates ultraviolet fluorescence",
+            "Stratum corneum barrier remains intact"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Bedside demonstration of fungal scales relies on evoking the **scratch sign** or coup d'ongle by gently scraping the macule with a fingernail or glass slide. In untouched skin, scales may be imperceptible, but firm lateral stroking produces fine collarette desquamation. Scrapings mounted in potassium hydroxide with blue Parker Quink reveal classical short curved hyphae alongside clustered round blastoconidia.",
+      "say": "Gentle scraping unmasks fine powdery desquamation across the macular surface.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "s1",
+            "label": "Firm lateral stroke across smooth macule with scalpel"
+          },
+          {
+            "id": "s2",
+            "label": "Elicitation of fine branny scale flakes (Besnier sign)"
+          },
+          {
+            "id": "s3",
+            "label": "Mounting scales in 10% KOH with Parker ink for microscopy"
+          }
+        ],
+        "edges": [
+          [
+            "s1",
+            "s2"
+          ],
+          [
+            "s2",
+            "s3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Brownish or black asymptomatic macules on the palms or soles characterize **tinea nigra**, a superficial dematiaceous phaeohyphomycosis. The causative agent is Hortaea werneckii, a halotolerant black yeast found in soil and rotting vegetation in tropical coastal environments. The pigment results from dihydroxynaphthalene melanin embedded within fungal cell walls rather than human epidermal melanin deposition.",
+      "say": "Blackish palmar patches mimic melanoma but represent fungal melanin in the outer horny layer.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hortaea werneckii features",
+          "points": [
+            "Dematiaceous, halotolerant dimorphic black yeast",
+            "Endemic in humid tropical coastal zones",
+            "Inoculation via micro-trauma from soil or sand"
+          ]
+        },
+        "right": {
+          "title": "Differential diagnosis",
+          "points": [
+            "Acral lentiginous malignant melanoma",
+            "Junctional melanocytic naevus of the palm",
+            "Chemical staining or silver nitrate staining"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Microscopic examination of skin scrapings in tinea nigra confirms diagnosis without requiring invasive biopsy. Mounting tissue in **potassium hydroxide** reveals light brown to olive-coloured, branching, septate hyphae and budding two-celled elongated yeast cells with central annellidic scars. Culture on Sabouraud agar yields shiny, moist, black yeast-like colonies that gradually develop dark olive-black aerial hyphae.",
+      "say": "Brownish septate hyphae in superficial horny cells rule out invasive malignancy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "Scraping of brown palmar macule without anaesthesia"
+          },
+          {
+            "id": "t2",
+            "label": "Direct KOH reveals pigmented septate dematiaceous hyphae"
+          },
+          {
+            "id": "t3",
+            "label": "Topical keratolytic azole clears pigmentation completely"
+          }
+        ],
+        "edges": [
+          [
+            "t1",
+            "t2"
+          ],
+          [
+            "t2",
+            "t3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Fungal colonisation of the external hair shaft resulting in discrete nodular concretions is termed **piedra**. Two distinct clinical forms exist based on nodule firmness and pigmentation. Black piedra produces hard, stony, dark nodules firmly attached to scalp hair, whereas white piedra forms softer, lighter, yellowish-white nodules along facial, axillary, and pubic hair shafts.",
+      "say": "Firm stony nodules cemented onto hair shafts distinguish this superficial hair infection.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Black piedra",
+          "points": [
+            "Caused by Piedraia hortae ascomycete",
+            "Hard, gritty, carbonaceous dark nodules",
+            "Scalp hair affected predominantly",
+            "Contains asci with eight curved ascospores"
+          ]
+        },
+        "right": {
+          "title": "White piedra",
+          "points": [
+            "Caused by Trichosporon beigelii complex",
+            "Soft, sleeve-like yellowish white concretions",
+            "Beard, moustache, and pubic hair involved",
+            "Composed of arthroconidia and blastoconidia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The ascomycetous agent of black piedra is **Piedraia hortae**, which thrives in humid tropical rainforests of Central America, Africa, and Southeast Asia. Nodules consist of a dense cemented stroma enclosing locules that contain fusiform asci. Cracking a hair between glass slides releases eight curved, tapering ascospores each possessing a delicate terminal flagellum-like filament.",
+      "say": "Microscopic crush mounts release eight curved ascospores bearing terminal whip-like filaments.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "p1",
+            "label": "Piedraia hortae hyphae adhere to cuticle of hair shaft"
+          },
+          {
+            "id": "p2",
+            "label": "Production of cementing substance forming hard dark nodule"
+          },
+          {
+            "id": "p3",
+            "label": "Formation of sexual ascostromata holding spindle-shaped asci"
+          }
+        ],
+        "edges": [
+          [
+            "p1",
+            "p2"
+          ],
+          [
+            "p2",
+            "p3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "White piedra is caused by members of the **Trichosporon** ovoides and inkin species complex, basidiomycetous yeasts possessing urease activity. Soft gelatinous collars wrap around the hair shaft without invading the cortex deeply. In severely neutropenic leukaemia patients, Trichosporon species can breach mucosal surfaces to produce fatal disseminated trichosporonosis with purpuric skin lesions and renal failure.",
+      "say": "Urease-positive budding yeasts form soft collars around hairs and cause invasive disease in neutropenia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Superficial white piedra",
+          "points": [
+            "Soft mucilaginous yellowish collar around shaft",
+            "Arthroconidia and blastoconidia on KOH mount",
+            "Readily shaved or treated with topical azoles"
+          ]
+        },
+        "right": {
+          "title": "Disseminated trichosporonosis",
+          "points": [
+            "Occurs in profound prolonged neutropenia",
+            "Refractory fungaemia with renal microabscesses",
+            "Naturally resistant to echinocandin caspofungin",
+            "Voriconazole is drug of choice"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Management of superficial hair and stratum corneum mycoses relies predominantly on **topical antifungals** and mechanical removal. Shaving infected hair shafts instantly cures both varieties of piedra. Pityriasis versicolor and tinea nigra clear with topical selenium sulfide two percent shampoo, zinc pyrithione, or topical terbinafine and clotrimazole applied daily for two to three weeks.",
+      "say": "Shaving hair or applying topical ketoconazole resolves these non-invasive external infections.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "m1",
+            "label": "Mechanical hair clipping or daily ketoconazole shampoo"
+          },
+          {
+            "id": "m2",
+            "label": "Topical imidazole or terbinafine application for two weeks"
+          },
+          {
+            "id": "m3",
+            "label": "Single-dose oral fluconazole for extensive recalcitrant disease"
+          }
+        ],
+        "edges": [
+          [
+            "m1",
+            "m2"
+          ],
+          [
+            "m2",
+            "m3"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,259 @@
+{
+ "v": 1,
+ "id": "psy-anxiety-social-anxiety-disorder",
+ "subject": "psychiatry",
+ "module": "psy-anxiety",
+ "title": "Social Anxiety, Separation Anxiety, and Anxiolytic Pharmacology",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Social anxiety disorder**, historically termed social phobia, is characterized by marked, persistent fear of social or performance situations in which the person is exposed to scrutiny by others. Patients dread acting in a way or showing anxiety symptoms, such as blushing or trembling, that will cause severe humiliation.",
+   "say": "Social anxiety disorder involves intense fear of negative scrutiny in social or performance settings, driven by terror of embarrassing oneself publicly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Feared Situations",
+     "points": [
+      "Public speaking and presentations",
+      "Dining or writing in front of colleagues",
+      "Initiating conversations with strangers",
+      "Attending parties or networking gatherings"
+     ]
+    },
+    "right": {
+     "title": "Core Cognitive Fears",
+     "points": [
+      "Visible blushing, sweating, or shaking",
+      "Saying foolish or incoherent statements",
+      "Judged as weak, incompetent, or foolish",
+      "Pervasive anticipatory social dread"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Notice how the person in this picture reacts to being watched and judged by the group. Blushing, trembling, and a racing heart under scrutiny are the visible surface of **social anxiety disorder**, in which everyday encounters provoke fear of humiliation far beyond any real threat. Anticipation alone can trigger the same response, leading to avoidance that narrows education, work, and relationships over time.",
+   "say": "Being scrutinised triggers flushing, trembling and fear of humiliation in social anxiety disorder. Avoidance then grows, shrinking school, work and social life.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m347-psy-anxiety-social-anxiety-disorder.webp",
+    "alt": "Medical illustration of social anxiety disorder showing a person facing public scrutiny with facial flushing, trembling, and urge to escape",
+    "caption": "Medical illustration of social anxiety disorder demonstrating fear of public scrutiny, autonomic flushing, and trembling. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Separation anxiety disorder** involves developmentally inappropriate, excessive fear concerning separation from primary attachment figures, persisting for at least four weeks in children or six months in adults. Sufferers experience persistent nightmares involving separation, refusal to leave home, and anticipatory somatic complaints like abdominal pain upon imminent separation.",
+   "say": "Separation anxiety involves excessive distress when parting from attachment figures, persisting for weeks and causing school refusal or bedtime panic.",
+   "vis": {
+    "kind": "table",
+    "title": "Separation Anxiety Across Ages",
+    "cols": [
+     "Feature",
+     "Pediatric Presentation",
+     "Adult Presentation"
+    ],
+    "rows": [
+     [
+      "Core attachment",
+      "Parents or primary caregivers",
+      "Spouse, domestic partner, or offspring"
+     ],
+     [
+      "Manifestation",
+      "School refusal and bedtime tantrums",
+      "Excessive checking calls & reluctance to travel"
+     ],
+     [
+      "Somatic signs",
+      "Morning nausea, vomiting, headaches",
+      "Palpitations, gastrointestinal spasms, insomnia"
+     ],
+     [
+      "Duration threshold",
+      "Minimum four weeks duration",
+      "Minimum six months duration"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**First-line pharmacotherapy with SSRIs** forms the gold standard foundation for treating generalized social anxiety disorder, panic disorder, and generalized anxiety disorder. Agents such as sertraline, escitalopram, and paroxetine demonstrate proven efficacy over long-term trials, requiring higher starting doses and longer therapeutic titration periods than in depression.",
+   "say": "Selective serotonin reuptake inhibitors are the first-line medical therapy for chronic anxiety disorders, requiring consistent dosing over several months.",
+   "vis": {
+    "kind": "table",
+    "title": "Anxiolytic Dosing Benchmarks",
+    "cols": [
+     "Agent",
+     "Therapeutic Starting Dose",
+     "Target Maintenance Dose"
+    ],
+    "rows": [
+     [
+      "Escitalopram",
+      "5 to 10 mg daily",
+      "10 to 20 mg once daily"
+     ],
+     [
+      "Sertraline",
+      "25 to 50 mg daily",
+      "100 to 200 mg once daily"
+     ],
+     [
+      "Paroxetine",
+      "10 to 20 mg daily",
+      "20 to 50 mg once daily"
+     ],
+     [
+      "Venlafaxine XR",
+      "37.5 to 75 mg daily",
+      "150 to 225 mg once daily"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Benzodiazepines in anxiety management**, including alprazolam, lorazepam, and clonazepam, act as positive allosteric modulators at the GABA-A receptor complex. While providing rapid, dramatic symptomatic relief during acute panic crises, their long-term clinical utility is severely constrained by tolerance, physical dependence, sedation, and cognitive blunting.",
+   "say": "Benzodiazepines enhance GABA-A receptor currents to rapidly halt acute panic. Long-term use is restricted due to tolerance and addiction liability.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-lorazepam.webp",
+    "alt": "Lorazepam GABA-A receptor positive allosteric modulation and anxiolytic mechanism",
+    "caption": "Lorazepam GABA-A receptor positive allosteric modulation enhancing chloride conductance to produce rapid anxiolysis.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**GABA-A receptor chloride modulation** by benzodiazepines increases the opening frequency of the pentameric receptor's central chloride channel without altering channel open duration. The resulting inward influx of chloride anions hyperpolarizes neuronal membranes, dampening postsynaptic excitability across the limbic amygdala and ascending reticular activating system.",
+   "say": "Benzodiazepines increase GABA-A chloride channel opening frequency, hyperpolarizing neuronal membranes and dampening limbic amygdalar arousal.",
+   "vis": {
+    "kind": "flow",
+    "title": "GABA-A Receptor Activation",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Benzodiazepine binds allosteric pocket between alpha & gamma subunits"
+     },
+     {
+      "id": "n2",
+      "label": "Conformational change enhances endogenous GABA binding affinity"
+     },
+     {
+      "id": "n3",
+      "label": "Increased frequency of central chloride channel opening"
+     },
+     {
+      "id": "n4",
+      "label": "Neuronal hyperpolarization & rapid suppression of limbic anxiety"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Benzodiazepine withdrawal syndrome** emerges upon abrupt cessation following chronic administration, manifesting as rebound anxiety, severe insomnia, tremors, perceptual distortions, delirium, and life-threatening withdrawal seizures. Discontinuation requires gradual tapering over weeks to months, often switching short-acting agents like alprazolam to long-acting diazepam.",
+   "say": "Abrupt benzodiazepine cessation triggers rebound anxiety, tremors, insomnia, delirium, and seizures. Tapering requires gradual dose reduction over months.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Withdrawal Symptoms",
+     "points": [
+      "Severe rebound anxiety and restlessness",
+      "Coarse tremors and profuse diaphoresis",
+      "Sensory hypersensitivity to sound and light",
+      "Grand mal withdrawal seizures and delirium"
+     ]
+    },
+    "right": {
+     "title": "Tapering Protocol",
+     "points": [
+      "Switch to long-acting diazepam equivalents",
+      "Reduce daily dose by ten percent every fortnight",
+      "Adjunctive carbamazepine or propranolol",
+      "Psychological relapse prevention support"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Buspirone** serves as a non-benzodiazepine anxiolytic indicated specifically for generalized anxiety disorder, operating pharmacologically as a high-affinity partial agonist at central 5-HT1A serotonin receptors. Crucially, buspirone carries zero risk of physical dependence, produces no sedation, lacks cross-tolerance with benzodiazepines, but requires several weeks of administration.",
+   "say": "Buspirone acts as a 5-HT1A partial agonist for generalized anxiety. It causes no sedation or dependence, but therapeutic onset requires two to four weeks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Buspirone Characteristics",
+     "points": [
+      "Partial agonist at 5-HT1A receptors",
+      "Zero abuse potential or dependence",
+      "Does not cause sedation or ataxia",
+      "Delayed therapeutic onset (2 to 4 weeks)"
+     ]
+    },
+    "right": {
+     "title": "Benzodiazepine Profile",
+     "points": [
+      "Positive allosteric GABA-A modulator",
+      "Significant abuse and dependence liability",
+      "Pronounced sedation and cognitive blunting",
+      "Immediate rapid onset within minutes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Cognitive restructuring in social phobia** directly dismantles distorted negative automatic thoughts regarding peer scrutiny and perfectionistic social standards. Exposure protocols systematically eliminate covert safety behaviors, such as wearing sunglasses, avoiding eye contact, or gripping glasses tightly, which paradoxically perpetuate social distress.",
+   "say": "Cognitive restructuring challenges social scrutiny fears while exposure exercises dismantle covert safety behaviors like avoiding eye contact.",
+   "vis": {
+    "kind": "flow",
+    "title": "Extinction of Safety Behaviors",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Identify covert safety crutches: avoiding eye contact, soft voice"
+     },
+     {
+      "id": "n2",
+      "label": "Conduct in vivo behavioral experiments without safety crutches"
+     },
+     {
+      "id": "n3",
+      "label": "Gather objective feedback contradicting catastrophic beliefs"
+     },
+     {
+      "id": "n4",
+      "label": "Extinction of conditioned social fear and natural confidence"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-mechanical-injuries-stab-wound",
+ "subject": "forensic-medicine",
+ "module": "fmt-mechanical-injuries",
+ "title": "Stab Wounds, Chop Wounds and Hesitation Cuts",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "A stab wound is deeper than it is long",
+   "tx": "A **stab or punctured wound** is produced when force travels along the long axis of a pointed object such as a knife, dagger, scissors, nail or screwdriver into the body. Its depth exceeds its length and width on the skin, the reverse of an incised wound. It can arise by driving the object in or by the body falling against it. Kitchen knives and penknives cause most civilian stabbings.",
+   "say": "Depth greater than surface length defines a stab, whether the blade moved into the body or the body onto the blade.",
+   "vis": {"kind": "table", "cols": ["Dimension", "Stab wound", "Incised wound"], "rows": [["Depth", "Greatest dimension", "Less than length"], ["Margins", "Clean cut and inverted", "Clean cut and everted"], ["Track", "Passes through tissues or cavities", "Confined to the cut plane"], ["Typical agent", "Knife point, scissors, nail", "Knife edge, razor, sickle"]]}
+  },
+  {
+   "title": "Penetrating and perforating stabs",
+   "tx": "Stabs are sorted by how far they travel under **stab wound types by depth**. A puncture stays in soft tissue. A penetrating wound enters a body cavity or a viscus. A perforating or through and through wound enters one side and exits the other; the entry is larger with inverted edges and the exit smaller with everted edges because the blade tapers. A victim of a fatal penetrating injury may show few symptoms for hours.",
+   "say": "Penetrating stabs enter a cavity, perforating stabs pass right through, and the smaller everted exit follows the tapering blade.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Point breaches the skin"}, {"id": "b", "label": "Puncture stays in soft tissue"}, {"id": "c", "label": "Penetrating enters a cavity"}, {"id": "d", "label": "Perforating exits the far side"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Why depth can exceed blade length",
+   "tx": "On yielding surfaces the thrust indents tissue before it pierces, so **stab depth on the abdomen** can exceed the length of the blade that made it. The anterior abdominal wall, breast, buttock and thigh all compress under a full thrust, and a young mobile chest does the same. Never probe a stab track to measure depth: probing can disturb a clot, restart fatal bleeding and cut false tracks through soft organs.",
+   "say": "Compressed belly or chest lets a track run deeper than the blade, and probing that track risks restarting fatal bleeding.",
+   "vis": {"kind": "compare", "left": {"title": "Depth overestimates blade", "points": ["Abdominal wall indents deeply", "Breast and buttock compress", "Young chest wall is mobile", "Lung collapse lengthens chest tracks"]}, "right": {"title": "Safe depth assessment", "points": ["Never probe before opening", "Measure at operation or autopsy", "Examine organs in situ first", "Allow for posture at the attack"]}}
+  },
+  {
+   "title": "Reading blade shape from skin wounds",
+   "tx": "Skin wound shape hints at the weapon through **single edged versus double edged patterns**. A double edged blade leaves an elliptical slit with two sharp angles. A single edged blade tends to leave a wedge with one sharp and one blunt angle, sometimes with small fishtail splits at the blunt end. Examining several wounds together reveals the pattern far better than any single wound, whose shape also shifts with skin tension and Langer lines.",
+   "say": "Two sharp angles suggest a double edge and a wedge with fishtailing a single edge, judged best across several wounds.",
+   "vis": {"kind": "table", "cols": ["Weapon", "Skin wound shape", "Angles"], "rows": [["Double edged dagger", "Elliptical slit", "Both sharp"], ["Single edged knife", "Wedge or boat shape", "One sharp, one blunt"], ["Screwdriver", "Slit with squared ends", "Abraded margins"], ["Fork", "Cluster of two or three", "Matches prong spacing"]]}
+  },
+  {
+   "title": "Hilt marks, bevelling and direction",
+   "tx": "When a blade sinks to the guard, the hilt can stamp an abrasion or bruise around the wound, the **hilt mark**, whose position shows the angle of attack. An oblique stab bevels one margin and undermines the other, so subcutaneous tissue shows on the side the knife came from. Describe direction in order, for example backwards and to the right, and record entry, track and exit in sequence for perforating wounds.",
+   "say": "A hilt stamp and a bevelled margin together reveal both how deep the blade sank and the direction it travelled.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Note hilt abrasion position"}, {"id": "b", "label": "Find bevelled and undermined margins"}, {"id": "c", "label": "Trace the track organ by organ"}, {"id": "d", "label": "Record direction in sequence"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Chop wounds from heavy edged weapons",
+   "tx": "A **chop wound** is a deep gaping injury struck with the sharp edge of a heavy weapon such as an axe, hatchet, sword, chopper or meat cleaver. The wound dimensions mirror the cross section of the blade portion that struck. Margins are sharp but may show slight abrasion and bruising, with heavy destruction beneath. The heel of an axe usually lands first and cuts deeper, marking the assailant's side; extremities may be partly amputated.",
+   "say": "Heavy edged weapons chop deep gaping wounds, and the deeper heel end of an axe cut points back to the attacker.",
+   "vis": {"kind": "compare", "left": {"title": "Chop wound clues", "points": ["Deep and widely gaping", "Size mirrors the blade section", "Slight marginal bruising possible", "Bone cut, one edge smooth"]}, "right": {"title": "Usual circumstances", "points": ["Mostly homicidal attacks", "Head, neck, shoulders, limbs", "Accidents from fans and saws", "Suicidal chop wounds very rare"]}}
+  },
+  {
+   "title": "Hesitation cuts in suicidal incised wounds",
+   "tx": "At the start of a suicidal cut throat or wrist wound sit multiple small superficial **hesitation cuts or tentative cuts**, often involving skin only and running parallel into the main wound. They are multiple, uniform in depth and direction, and relatively minor beside the fatal cut. Sites of election are the front of the throat, the flexor wrist and the front of the chest. Unintentional finger cuts appear where a razor blade was gripped.",
+   "say": "Clusters of shallow parallel trial cuts at the wound's start are hesitation marks, the signature of a self inflicted cut.",
+   "vis": {"kind": "table", "cols": ["Feature", "Suicidal cut", "Homicidal cut"], "rows": [["Hesitation marks", "Present at the start", "Absent"], ["Level on neck", "High, above thyroid cartilage", "Low, on or below it"], ["Direction", "Left to right in right handers", "Any, often crossing"], ["Defence wounds", "Absent", "Often present"]]}
+  },
+  {
+   "title": "Suicidal, homicidal and accidental stabs",
+   "tx": "Pattern recognition across the whole body separates the manners of stabbing under **circumstances of stab wounds**. Suicidal stabs favour the accessible precordium, run upwards, backwards and to the right, and spare the clothing, which is opened first. Homicidal stabs are multiple, scattered, deeply penetrating and often paired with defence cuts. Accidental stabs are usually single, from falling on projecting glass or nails, and an upward or downward track argues against accident.",
+   "say": "Precordial sparing of clothes suggests suicide, scattered deep stabs with defence cuts suggest homicide, single falls suggest accident.",
+   "vis": {"kind": "compare", "left": {"title": "Suicidal stab pattern", "points": ["Accessible precordial site", "Clothing opened, not cut", "Tentative wounds may surround it", "Weapon often left in place"]}, "right": {"title": "Homicidal stab pattern", "points": ["Multiple and widely scattered", "Clothing cut over wounds", "Defence cuts on the hands", "Overkill beyond death occurs"]}}
+  },
+  {
+   "title": "Concealed punctures and wound examination",
+   "tx": "Fatal punctures can hide in the **concealed sites of stab wounds**: nostrils, fontanelle, upper eyelid fornix, axilla, vagina, rectum and nape of the neck, where a needle can reach brain or medulla leaving almost no surface mark. Examination therefore labels every wound with height from the heel and distances from fixed landmarks, notes margins, ends, direction and depth, and checks clothing layer by layer before the body is washed.",
+   "say": "Search nostrils, fontanelle, axilla and nape for hidden punctures, and label every wound against fixed landmarks before washing.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Label cuts in the clothing"}, {"id": "b", "label": "Remove clothing layer by layer"}, {"id": "c", "label": "Number and photograph each wound"}, {"id": "d", "label": "Search concealed sites deliberately"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}

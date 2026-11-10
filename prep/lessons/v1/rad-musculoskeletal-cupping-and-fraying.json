@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-musculoskeletal-cupping-and-fraying",
+ "subject": "radiology",
+ "module": "rad-musculoskeletal",
+ "title": "Cupping and Fraying in Rickets, Looser Zones and Metabolic Bone Signs",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Rickets attacks the growth plate",
+   "tx": "**Cupping and fraying** widen the growth plate of a growing child: the metaphysis cups inward, its edge frays into brush strokes and the provisional calcification line vanishes because osteoid cannot mineralise without vitamin D driven calcium and phosphate. The pictured wrist films show that widened plate beside the growth plate diagram. Knees, wrists and costochondral junctions, the fastest growing ends, declare the disease first.",
+   "say": "Cupping and fraying widen the growth plate of a growing child: the metaphysis cups, its edge frays and the calcification line vanishes without vitamin D. The pictured wrist films show that widened plate. Knees, wrists and rib junctions, the fastest growing ends, declare it first.",
+   "vis": {"kind": "image", "src": "clinix/media/skills/skill-ix-paed-xray_rickets.webp", "alt": "Wrist radiographs showing rickets cupping, fraying and widened growth plates with diagram.", "caption": "Rickets wrist signs with growth plate diagram. Illustration: StewardMD."}
+  },
+  {
+   "title": "Rachitic rosary and bowing",
+   "tx": "**Rachitic rosary** beads the costochondral junctions with swollen unmineralised cartilage, palpable as a row of knobs along the chest, while weight bearing softens femora and tibiae into bow legs. The pictured bone radiograph pairs those limb signs with the wrist changes in one child. Delayed dentition, frontal bossing, hypotonia and a waddling gait complete the bedside picture that the wrist film then confirms in minutes.",
+   "say": "Rachitic rosary beads the rib junctions with swollen cartilage while softened femora bow under weight. The pictured radiograph pairs those limb signs with wrist changes in one child. Delayed dentition, frontal bossing and a waddling gait complete the bedside picture the wrist film confirms.",
+   "vis": {"kind": "image", "src": "clinix/media/practicals/paed-xray-rickets.webp", "alt": "Bone radiograph showing rickets changes with bowed bones and widened metaphyses.", "caption": "Rickets bone radiograph with metaphyseal changes. Credit: StewardMD library."}
+  },
+  {
+   "title": "Healing draws a new white line",
+   "tx": "**Healing rickets** announces itself with a fresh dense line of provisional calcification appearing at the metaphysis within weeks of vitamin D replacement, separated from the frayed edge by the still widening plate that then narrows back to normal. That returning line is the earliest proof therapy works, preceding clinical and biochemical normalisation. Failure to heal on adequate doses reroutes the diagnosis toward vitamin D dependent or hypophosphataemic resistant forms.",
+   "say": "Healing rickets draws a fresh dense calcification line at the metaphysis within weeks of vitamin D replacement. That returning line is the earliest proof therapy works. Failure to heal on adequate doses reroutes the diagnosis toward vitamin D dependent or phosphate wasting resistant forms.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Vitamin D started"}, {"id": "b", "label": "New calcification line appears"}, {"id": "c", "label": "Plate narrows to normal"}, {"id": "d", "label": "Cupping remodels away"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Osteomalacia is adult rickets",
+   "tx": "**Osteomalacia** softens mature bone with the same mineralisation failure, but fused growth plates cannot cup or fray, so adults instead collect Looser zones and lose trabecular sharpness. The pictured osteomalacia set shows those histological and skeletal changes beside bone pain, proximal myopathy and a waddling gait. Alkaline phosphatase rises, calcium and phosphate sag, and vitamin D sits low except in phosphate wasting causes where it misleads.",
+   "say": "Osteomalacia softens mature bone with the same mineralisation failure, but fused plates cannot cup or fray, so adults collect Looser zones instead. The pictured set shows those changes beside bone pain and proximal weakness. Phosphate wasting causes keep vitamin D misleadingly normal.",
+   "vis": {"kind": "image", "src": "v1/kb/media/osteomalacia-fig1.webp", "alt": "Osteomalacia skeletal and histological manifestations illustration.", "caption": "Osteomalacia skeletal and histological manifestations. Illustration: StewardMD."}
+  },
+  {
+   "title": "Looser zones are ribbon lucencies",
+   "tx": "**Looser zones**, also called Milkman lines or pseudofractures, are transverse lucent ribbons crossing bone at right angles to the cortex, bilaterally symmetric at the femoral neck, pubic rami, axillary scapula border and ribs. They are insufficiency cracks through osteoid seams, not true fractures, and they heal with the underlying mineral treatment. A solitary asymmetric lucency with callus is a stress fracture instead, with a training history to match.",
+   "say": "Looser zones are transverse lucent ribbons crossing bone at right angles, bilaterally symmetric at femoral neck, pubic rami and scapula. They are insufficiency cracks through osteoid, healing with mineral treatment. A solitary asymmetric lucency with callus is a stress fracture instead.",
+   "vis": {"kind": "table", "cols": ["Site", "Looser zone clue", "Mimic"], "rows": [["Femoral neck medial", "Bilateral ribbons", "Stress fracture if single"], ["Pubic rami", "Symmetric lucencies", "Insufficiency fracture"], ["Scapula axillary border", "Classic Milkman line", "Metastasis if destructive"], ["Ribs", "Multiple, symmetric", "Traumatic fractures if aligned"]]}
+  },
+  {
+   "title": "Resistant rickets keeps phosphate low",
+   "tx": "**Hypophosphataemic rickets** bows the legs and frays the plates with normal vitamin D and calcium but wasted urinary phosphate, most famously X linked through FGF23 excess. The film looks identical to nutritional rickets, so healing failure on vitamin D plus a low phosphate with high alkaline phosphatase makes the call. Burosumab, the FGF23 antibody, has replaced much of the old phosphate and calcitriol burden in confirmed X linked disease.",
+   "say": "Hypophosphataemic rickets bows legs and frays plates with normal vitamin D but wasted urinary phosphate, most famously X linked through FGF23 excess. Healing failure on vitamin D plus low phosphate makes the call. Burosumab, the FGF23 antibody, now replaces much of the old phosphate burden.",
+   "vis": {"kind": "compare", "left": {"title": "Nutritional rickets", "points": ["Vitamin D low", "Calcium low or normal", "Heals on vitamin D", "Diet and sunlight story"]}, "right": {"title": "Phosphate wasting rickets", "points": ["Vitamin D normal", "Phosphate low, urine wasting", "Fails vitamin D alone", "Family history, FGF23"]}}
+  },
+  {
+   "title": "Scurvy draws opposite lines",
+   "tx": "**Scurvy** starves collagen instead of mineral, drawing a dense white line of Frankel at the metaphysis with a lucent Trummerfeld zone beneath it, corner fractures and a Wimberger ring around epiphyses. Where rickets loses the calcification line, scurvy thickens it, the cleanest desk split between the two great childhood bone deficiencies. Periosteal haemorrhage lifts painful swellings, gums bleed around teeth, and vitamin C reverses the picture in weeks.",
+   "say": "Scurvy starves collagen, drawing a dense white metaphyseal line with a lucent zone beneath it and corner fractures. Where rickets loses the calcification line, scurvy thickens it, the cleanest desk split between the two deficiencies. Vitamin C reverses the picture in weeks.",
+   "vis": {"kind": "table", "cols": ["Sign", "Rickets", "Scurvy"], "rows": [["Provisional calcification line", "Absent", "Thick dense white line"], ["Metaphysis", "Cupped and frayed", "Corner fractures, spurs"], ["Epiphysis", "Normal ring", "Wimberger ring sign"], ["Deficiency", "Vitamin D minerals", "Vitamin C collagen"]]}
+  },
+  {
+   "title": "Metaphyseal lines of poisoning and therapy",
+   "tx": "**Dense metaphyseal lines** also record lead poisoning, healed rickets and bisphosphonate cycles as zebra stripes counting treatment courses in osteogenesis imperfecta. Lead lines need remodelling failure over months in a growing child and travel with abdominal pain, anaemia and a lead source history. Reading any dense line therefore asks three questions: growing or grown, single insult or repeated cycles, and deficiency healing or poison deposited.",
+   "say": "Dense metaphyseal lines also record lead poisoning, healed rickets and bisphosphonate cycles as zebra stripes in osteogenesis imperfecta. Lead lines travel with abdominal pain, anaemia and a lead source history. Reading any dense line asks whether bone is growing, and whether cycles repeat.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Dense metaphyseal line seen"}, {"id": "b", "label": "One line or many stripes"}, {"id": "c", "label": "History: poison, healing, cycles"}, {"id": "d", "label": "Cause named correctly"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}

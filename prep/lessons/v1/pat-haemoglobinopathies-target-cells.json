@@ -1,0 +1,181 @@
+{
+ "v": 1,
+ "id": "pat-haemoglobinopathies-target-cells",
+ "subject": "pathology",
+ "module": "pat-haemoglobinopathies",
+ "title": "Target Cells (Codocytes)",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "A **target cell**, designated scientifically as a codocyte or Mexican hat cell, represents an abnormal erythrocyte characterized by a central rounded area of hemoglobin surrounded by a clear concentric halo and an outer hemoglobinized rim. The pathognomonic biophysical defect responsible for target cell formation is an increased surface-area-to-volume ratio of the red blood cell.",
+   "say": "Target cells, or codocytes, look like miniature archery targets or Mexican hats on blood films. They feature a central bullseye of pink hemoglobin, surrounded by a clear ring, enclosed by an outer pink rim. This distinctive look occurs whenever the red blood cell has an increased surface area relative to its internal volume.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sickle-cell-disease-and-thalassaemias-fig1.webp",
+    "alt": "Peripheral blood smear displaying target cells and sickle cells under high power magnification.",
+    "caption": "Target cells displaying central hemoglobin disc and outer peripheral rim on blood smear.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "An increased surface-to-volume ratio arises through two distinct physiological mechanisms: **absolute membrane excess** or decreased intracellular hemoglobin content. Absolute membrane expansion occurs when excess cholesterol and phospholipids incorporate into the lipid bilayer, as seen in obstructive liver disease. Conversely, decreased cytoplasmic volume occurs when defective globin chain or heme synthesis produces underfilled, microcytic hypochromic cells.",
+   "say": "Target cells form through two main pathways: too much membrane or too little hemoglobin. In obstructive jaundice, excess cholesterol piles into the outer cell membrane, making it floppy. In thalassaemias and severe iron deficiency, the cell lacks hemoglobin, so the normal membrane droops like a deflated balloon.",
+   "vis": {
+    "kind": "table",
+    "title": "Mechanisms and Clinical Associations",
+    "cols": [
+     "Mechanism",
+     "Biochemical Pathway",
+     "Clinical Conditions",
+     "Associated Blood Smear Features"
+    ],
+    "rows": [
+     [
+      "Membrane lipid excess",
+      "LCAT enzyme inhibition; cholesterol load",
+      "Obstructive jaundice, cholestatic liver disease",
+      "Macrocytic target cells, stomatocytes"
+     ],
+     [
+      "Deficient haemoglobin",
+      "Impaired globin or iron synthesis",
+      "Beta-thalassaemia, alpha-thalassaemia, IDA",
+      "Microcytic hypochromic, teardrop cells"
+     ],
+     [
+      "Abnormal haemoglobin",
+      "Precipitation of mutant Hb polymers",
+      "Haemoglobin C disease (HbCC), HbSC, HbE",
+      "HbC crystals, microspherocytes"
+     ],
+     [
+      "Absence of splenic pitting",
+      "Loss of splenic macrophage conditioning",
+      "Post-splenectomy, autosplenectomy",
+      "Howell-Jolly bodies, acanthocytes, Pappenheimers"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Hold this skull film up to the light. The diploic space is widened and the bone texture runs in fine vertical strands, brushed outwards from a thinned outer table by years of marrow expansion. This **hair on end appearance** belongs to thalassaemia major, where relentless erythroid hyperplasia remodels the skull and produces the chipmunk facies shown in the inset.",
+   "say": "On this skull film expanded marrow brushes the bone into vertical strands under a thinned outer table. That hair on end appearance comes from thalassaemia major, with chipmunk facies in the inset.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m95-pat-haemoglobinopathies-target-cells.webp",
+    "alt": "Hair on end skull radiograph in thalassaemia major with an inset of chipmunk facies",
+    "caption": "Hair on end skull radiograph in thalassaemia major with an inset of chipmunk facies. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "In severe hemoglobinopathies, **haemoglobin C disease** produces the highest percentage of target cells, often exceeding forty to fifty percent of all circulating erythrocytes. Hemoglobin C results from a point mutation at codon six substituting lysine for glutamic acid. The mutant hemoglobin has low aqueous solubility, precipitating into dense rod-shaped or hexagonal intraerythrocytic crystals that force residual hemoglobin into a central bullseye target.",
+   "say": "Hemoglobin C disease produces more target cells than almost any other condition, often over forty percent of the smear. A point mutation substitutes lysine for glutamic acid. Hemoglobin C crystallizes easily into hexagonal, rod-shaped crystals inside the cell, leaving behind classic, rigid target cells.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Haemoglobin C Disease (HbCC)",
+     "points": [
+      "Lysine substituted at codon 6 of beta chain",
+      "Target cells exceed 40 to 50 percent",
+      "Intraerythrocytic hexagonal crystals",
+      "Mild chronic extravascular haemolysis"
+     ]
+    },
+    "right": {
+     "title": "Thalassaemia Major / Minor",
+     "points": [
+      "Imbalanced globin chain synthesis",
+      "Target cells combined with microcytosis",
+      "Marked basophilic stippling",
+      "Severe hypochromia with low MCV (<70 fL)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In liver disease, target cell genesis is driven by **lecithin-cholesterol acyltransferase** (LCAT) deficiency. Biliary obstruction elevates circulating unesterified cholesterol and bile salts, which inhibit LCAT activity. Excess free cholesterol and phosphatidylcholine transfer directly from plasma lipoproteins into the erythrocyte outer leaflet. The surface area expands by up to twenty percent without any change in cell volume, buckling the central membrane.",
+   "say": "In obstructive liver disease, bile stasis shuts down the enzyme LCAT. Unesterified free cholesterol in plasma transfers directly into the red cell outer membrane, expanding its surface area by twenty percent. The floppy excess membrane folds into the center, creating macrocytic target cells.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Liver Disease Target Cells",
+     "points": [
+      "LCAT enzyme inhibition by biliary obstruction",
+      "Direct lipid transfer expands outer membrane",
+      "Cells are macrocytic or normocytic (high MCV)",
+      "Normal intracellular haemoglobin concentration"
+     ]
+    },
+    "right": {
+     "title": "Thalassaemic Target Cells",
+     "points": [
+      "Normal membrane lipid composition",
+      "Severe intracellular haemoglobin deficit",
+      "Cells are strikingly microcytic (low MCV)",
+      "Prominent hypochromia with low MCH"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The critical diagnostic pitfall is confusing target cells with **stomatocytes or artefacts**. True target cells display symmetric concentric rings across the entire smear, whereas drying artefacts exhibit irregular off-center puddles. Splenectomy universally increases target cells because the spleen normally conditions erythrocytes, plucking out redundant lipid. Target cells possess increased osmotic resistance, shifting the osmotic fragility curve to the left.",
+   "say": "Be careful not to confuse real target cells with drying artefacts. True target cells show crisp concentric rings throughout the film. Remember that target cells have excess membrane, making them unusually resistant to bursting in hypotonic water, which shifts the osmotic fragility curve to the left, the exact opposite of spherocytes.",
+   "vis": {
+    "kind": "table",
+    "title": "Osmotic Fragility Comparison",
+    "cols": [
+     "Erythrocyte Morphology",
+     "Surface-to-Volume Ratio",
+     "Osmotic Fragility Behavior",
+     "Diagnostic Conditions"
+    ],
+    "rows": [
+     [
+      "Target cells (Codocytes)",
+      "Increased surface-to-volume",
+      "Decreased fragility (resistant to lysis)",
+      "Thalassaemia, liver disease, splenectomy"
+     ],
+     [
+      "Spherocytes",
+      "Decreased surface-to-volume",
+      "Increased fragility (lyse readily)",
+      "Hereditary spherocytosis, warm AIHA"
+     ],
+     [
+      "Normal biconcave disc",
+      "Normal physiological ratio",
+      "Normal standard sigmoidal curve",
+      "Healthy individuals"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "What is the primary biophysical abnormality responsible for target cell (codocyte) formation?",
+   "options": [
+    "Increased surface-area-to-volume ratio",
+    "Decreased surface-area-to-volume ratio",
+    "Complete absence of spectrin-actin cross-linking",
+    "Enzymatic deficiency of pyruvate kinase"
+   ],
+   "correct": 0,
+   "explain": "Target cells form due to an increased surface-area-to-volume ratio, caused either by absolute membrane lipid excess or by decreased intracellular hemoglobin content."
+  },
+  {
+   "q": "How does the presence of target cells affect the red blood cell osmotic fragility curve?",
+   "options": [
+    "Shifts the curve to the left, indicating increased resistance to osmotic lysis",
+    "Shifts the curve to the right, indicating premature lysis in hypotonic saline",
+    "Has zero effect on osmotic fragility parameters",
+    "Causes immediate instantaneous lysis in isotonic saline"
+   ],
+   "correct": 0,
+   "explain": "Because target cells have redundant surface membrane, they can take up more water before their membrane stretches to the lytic threshold, shifting the curve to the left (decreased fragility)."
+  }
+ ]
+}

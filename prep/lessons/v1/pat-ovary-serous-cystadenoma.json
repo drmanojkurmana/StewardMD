@@ -1,0 +1,205 @@
+{
+  "v": 1,
+  "module": "pat-ovary",
+  "subject": "pathology",
+  "title": "Ovarian Tumours: Serous and Mucinous, Teratoma, Granulosa, Meigs, Krukenberg, and CA-125",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Serous cystadenoma** lines a simple unilocular cyst with ciliated tubal-type epithelium and remains benign, typically in younger women. Borderline serous tumours add epithelial proliferation and detached cell clusters without stromal invasion. Beyond them the pathway splits: low grade serous carcinoma follows KRAS-type mutations stepwise, while high grade disease is a separate TP53-driven cancer often starting in the fallopian tube fimbria.",
+      "say": "Serous tumours mimic fallopian epithelium; high grade serous carcinoma is a TP53 disease of tubal origin often.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Low grade serous carcinoma",
+          "points": [
+            "KRAS pathway, borderline precursor",
+            "Indolent, chemoresistant accent",
+            "Younger patients"
+          ]
+        },
+        "right": {
+          "title": "High grade serous carcinoma",
+          "points": [
+            "TP53 universal, tubal STIC origin",
+            "Peritoneal spread at presentation",
+            "Platinum and PARP era therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "This ovary no longer looks like a tidy cyst but a solid malignant mass, and the peritoneum behind it is peppered with pale seed like deposits. Concentric rings of calcification, the **psammoma bodies** in the inset, pepper the tumour sections of serous carcinoma. Such studding explains why women present late with distension and ascites rather than a palpable lump, since disease has already escaped the pelvis. High grade serous carcinoma is therefore staged and treated as a peritoneal illness from the outset.",
+      "say": "Peritoneal studding with psammoma bodies shows high grade serous carcinoma already spread beyond the ovary.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m136-pat-ovary-serous-cystadenoma.webp",
+        "alt": "High-grade serous ovarian carcinoma with peritoneal studding and psammoma bodies inset",
+        "caption": "High-grade serous ovarian carcinoma with peritoneal studding and psammoma bodies inset. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Concentrically lamellated calcified whorls called **psammoma bodies** appear where tumour cells die slowly and mineral layers accrete. They are classic in serous ovarian tumours, papillary thyroid carcinoma and meningioma, an odd trio worth memorising together. Their presence suggests one of those diagnoses but never proves malignancy alone, since benign serous cystadenomas can contain them as well.",
+      "say": "Psammoma bodies appear in serous, thyroid papillary, and meningioma pathology; context gives them meaning.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tumour",
+          "Psammoma accent",
+          "Companion clue"
+        ],
+        "rows": [
+          [
+            "Serous ovarian carcinoma",
+            "Frequent in low grade",
+            "Peritoneal studding"
+          ],
+          [
+            "Papillary thyroid carcinoma",
+            "Classic",
+            "Orphan Annie nuclei"
+          ],
+          [
+            "Meningioma",
+            "Whorls calcify",
+            "Dural based mass"
+          ],
+          [
+            "Mesothelioma",
+            "Occasional",
+            "Pleural rind"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A huge unilateral multilocular mucin-filled mass, sometimes exceeding 20 cm, favours a **primary mucinous ovarian tumour**. Bilateral smaller mucinous deposits, surface involvement and a known gastrointestinal primary instead suggest metastasis, especially from appendix, pancreas or stomach. This size and laterality rule saves women from ovarian cancer chemotherapy aimed at what is really metastatic bowel-type disease.",
+      "say": "Bilateral mucinous ovarian masses think appendix and pancreas first; huge unilateral thinks ovary.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/functional-ovarian-cyst-fig1.webp",
+        "alt": "Functional ovarian cyst types",
+        "caption": "Ovarian cyst types from functional cysts toward neoplastic differentials."
+      }
+    },
+    {
+      "tx": "Jelly belly, where mucinous ascites progressively fills and scallops the liver edge, is **pseudomyxoma peritonei**. Modern pathology traces almost every case to a ruptured appendiceal mucinous neoplasm, not to the ovary. Ovarian mucinous deposits in this setting are secondary passengers. Missing the appendiceal primary during surgery is the operative trap, so the appendix is always removed and examined.",
+      "say": "Pseudomyxoma usually starts in appendix, not ovary; remove the appendix story from every case.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Appendiceal mucinous neoplasm ruptures"
+          },
+          {
+            "id": "b",
+            "label": "Mucin redistributes by peritoneal flow"
+          },
+          {
+            "id": "c",
+            "label": "Ovaries secondarily involved often"
+          },
+          {
+            "id": "d",
+            "label": "Cytoreduction and HIPEC considered"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A **mature cystic teratoma**, or dermoid cyst, is a germ cell tumour containing skin, hair, sebaceous material, teeth and sometimes thyroid tissue projecting as a Rokitansky nodule. Ultrasound may show a fat-fluid level or calcified tooth. Torsion is its emergency presentation in young women, while malignant transformation, usually squamous carcinoma, is a rare event mainly after age 50.",
+      "say": "Hair, teeth, and sebum in an ovarian cyst mean dermoid; torsion is its emergency, cancer its rarity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mature teratoma",
+          "points": [
+            "All germ layers organised",
+            "Teeth and hair on imaging",
+            "Torsion emergency"
+          ]
+        },
+        "right": {
+          "title": "Immature teratoma",
+          "points": [
+            "Immature neuroepithelium graded",
+            "Younger patients, malignant",
+            "Chemotherapy by stage and grade"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Small rosettes of granulosa cells around eosinophilic material, called **Call-Exner bodies**, characterise adult granulosa cell tumour, alongside longitudinally grooved coffee-bean nuclei. The tumour secretes oestrogen and inhibin, causing precocious puberty in girls or postmenopausal bleeding in older women. Recurrences can surface 20 years after removal, so follow-up for this sex cord tumour never truly ends.",
+      "say": "Oestrogen symptoms plus Call-Exner bodies name granulosa cell tumour; its recurrences arrive decades late.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/granulosa-cell-tumour-fig1.webp",
+        "alt": "Granulosa cell tumour Call-Exner bodies",
+        "caption": "Granulosa cell tumour with Call-Exner bodies and oestrogenic effects."
+      }
+    },
+    {
+      "tx": "**Meigs syndrome** combines a benign ovarian fibroma, ascites and a pleural effusion, usually right sided, in a triad that convincingly mimics disseminated ovarian cancer. The decisive feature is behaviour after surgery: both fluids disappear once the fibroma is removed and do not return. Cytology negative for malignant cells supports the syndrome, but only resolution after excision confirms it.",
+      "say": "Fibroma plus effusion plus ascites that vanish after excision spell Meigs syndrome, malignancy's innocent mimic.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ovarian-surface-germ-sexcord-markers-fig1.webp",
+        "alt": "Ovarian tumour markers surface germ cell sex cord",
+        "caption": "Ovarian tumour marker map across surface, germ cell, and sex cord families."
+      }
+    },
+    {
+      "tx": "**CA-125** tracks epithelial ovarian cancer burden and recurrence, but endometriosis, fibroids, peritonitis and pregnancy also raise it, so the marker never diagnoses cancer alone. Bilateral solid ovarian masses full of mucin-laden signet ring cells define a Krukenberg tumour, usually metastatic from stomach. That histology should launch an upper gastrointestinal primary hunt before any ovarian debulking plan.",
+      "say": "CA-125 trends treat, never diagnose alone; bilateral signet masses send endoscopes to the stomach.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Marker",
+          "Ovarian family",
+          "Use"
+        ],
+        "rows": [
+          [
+            "CA-125",
+            "Epithelial serous accent",
+            "Monitoring, triage with imaging"
+          ],
+          [
+            "AFP",
+            "Yolk sac germ cell",
+            "Diagnosis and follow up"
+          ],
+          [
+            "Beta-hCG",
+            "Choriocarcinoma, dysgerminoma mild",
+            "Marker surveillance"
+          ],
+          [
+            "Inhibin",
+            "Granulosa cell",
+            "Recurrence detection"
+          ]
+        ]
+      }
+    }
+  ]
+}

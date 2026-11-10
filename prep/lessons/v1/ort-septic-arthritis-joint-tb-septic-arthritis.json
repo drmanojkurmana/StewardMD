@@ -1,0 +1,199 @@
+{
+ "v": 1,
+ "id": "ort-septic-arthritis-joint-tb-septic-arthritis",
+ "subject": "orthopaedics",
+ "module": "ort-septic-arthritis-joint-tb",
+ "title": "Septic Arthritis",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "An acute **septic arthritis** constitutes a true orthopaedic surgical emergency requiring rapid joint decompression to prevent irreversible chondral degradation. Bacterial proliferation in the synovial cavity provokes intense polymorphonuclear leukocyte influx. Released lysosomal enzymes, bacterial proteases, and matrix metalloproteinases destroy articular hyaline cartilage within twenty-four to forty-eight hours, causing permanent joint destruction.",
+   "say": "Septic arthritis is an absolute emergency. Bacteria in the joint trigger a massive flood of neutrophils. The combination of bacterial toxins and neutrophil elastases can destroy articular cartilage within twenty-four to forty-eight hours. Decompressing and washing out the joint immediately is the only way to save it.",
+   "vis": {
+    "kind": "table",
+    "title": "Etiological Agents in Septic Arthritis",
+    "cols": [
+     "Patient Cohort",
+     "Primary Pathogen",
+     "Alternative Pathogens",
+     "Clinical Feature"
+    ],
+    "rows": [
+     [
+      "All adults and older children",
+      "Staphylococcus aureus (>60%)",
+      "Streptococcus pneumoniae, MRSA",
+      "Monoarticular hot swollen knee"
+     ],
+     [
+      "Sexually active young adults",
+      "Neisseria gonorrhoeae",
+      "S. aureus",
+      "Migratory tenosynovitis with pustules"
+     ],
+     [
+      "Children under 4 years",
+      "Kingella kingae",
+      "S. aureus, Group A Streptococcus",
+      "Subtle subacute onset with limp"
+     ],
+     [
+      "Prosthetic joint implants",
+      "Staphylococcus epidermidis",
+      "S. aureus, Cutibacterium acnes",
+      "Biofilm formation on metal hardware"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The validated **Kocher criteria** reliably differentiate pediatric septic arthritis of the hip from self-limiting transient synovitis. The four clinical predictive criteria include: inability to bear weight on the affected limb, oral temperature exceeding 38.5 degrees Celsius, erythrocyte sedimentation rate greater than forty millimeters per hour, and serum white blood cell count exceeding twelve thousand per microliter. Meeting all four confers a ninety-nine percent probability of septic arthritis.",
+   "say": "The Kocher criteria distinguish septic arthritis of the hip from transient synovitis in a limping child. The four criteria are: refusal to bear weight, fever over 38.5 degrees, ESR over forty, and white blood cell count over twelve thousand. If all four are present, the probability of septic arthritis is ninety-nine percent.",
+   "vis": {
+    "kind": "table",
+    "title": "Kocher Criteria and Probability Table",
+    "cols": [
+     "Number of Criteria Present",
+     "Calculated Septic Probability",
+     "Serum CRP Additive Value",
+     "Clinical Recommendation"
+    ],
+    "rows": [
+     [
+      "1 of 4 criteria",
+      "3 percent",
+      "CRP under 20 mg/L confirms low risk",
+      "Outpatient observation and review"
+     ],
+     [
+      "2 of 4 criteria",
+      "40 percent",
+      "Intermediate probability",
+      "Close observation, consider ultrasound"
+     ],
+     [
+      "3 of 4 criteria",
+      "93 percent",
+      "CRP over 20 mg/L strengthens diagnosis",
+      "Urgent hip aspiration under sedation"
+     ],
+     [
+      "4 of 4 criteria",
+      "99 percent",
+      "Definitive bacterial infection",
+      "Emergency arthrotomy and drainage"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immediate **diagnostic arthrocentesis** represents the gold-standard diagnostic procedure and must be performed prior to initiating systemic antibiotic therapy. Synovial fluid in septic arthritis appears frankly turbid or purulent. Analysis demonstrates a synovial white blood cell count exceeding fifty thousand per microliter with more than seventy-five percent polymorphonuclear neutrophils, markedly reduced synovial glucose, and high lactate concentrations.",
+   "say": "Aspirate the joint immediately before giving antibiotics. In septic arthritis, the synovial fluid is cloudy or thick with pus. A synovial white blood cell count over fifty thousand with more than seventy-five percent polymorphs confirms infection. Low joint fluid glucose and elevated lactate further cement the diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Septic Synovial Fluid",
+     "points": [
+      "Turbid, purulent yellowish appearance",
+      "WBC count exceeding 50,000 / mm3",
+      "Over 75 to 90 percent neutrophils",
+      "Synovial glucose < 50% blood glucose"
+     ]
+    },
+    "right": {
+     "title": "Inflammatory (RA/Gout) Fluid",
+     "points": [
+      "Translucent to cloudy yellow fluid",
+      "WBC count 2,000 to 50,000 / mm3",
+      "Neutrophils roughly 50 to 70 percent",
+      "Normal or mildly depressed glucose"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Emergency management requires urgent **surgical drainage** via open arthrotomy or arthroscopic joint lavage to clear proteolytic enzymes, purulent debris, and decompress elevated intra-articular pressure. In the hip joint, capsular distension compromises retinacular blood flow, risking avascular necrosis of the femoral head. Copious irrigation with six to nine liters of sterile saline washes out the intra-articular bacterial burden.",
+   "say": "Take the patient to the operating room for emergency open arthrotomy or arthroscopic joint lavage. In the hip, swelling inside the unyielding capsule strangles blood flow to the femoral head, leading to rapid osteonecrosis. Flush the joint with six to nine liters of sterile saline to wash away bacterial enzymes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Arthroscopic Lavage",
+     "points": [
+      "Standard for knee and shoulder joints",
+      "Direct visual inspection of cartilage",
+      "Low morbidity, excellent joint clearance",
+      "Allows placement of suction drains"
+     ]
+    },
+    "right": {
+     "title": "Open Arthrotomy",
+     "points": [
+      "Mandatory in pediatric septic hip",
+      "Anterior or posterior capsular approach",
+      "Decompresses intracapsular tamponade",
+      "Guards against femoral head necrosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Following surgical decompression, targeted **intravenous antibiotic** therapy is administered for two to three weeks, transitioned to oral agents once clinical defervescence and normalisation of C-reactive protein are confirmed. Delayed intervention beyond twenty-four to forty-eight hours results in catastrophic sequelae, including complete chondrolysis, fibrous or bony joint ankylosis, and pathological joint dislocation in infants (Tom Smith arthritis).",
+   "say": "Follow surgical drainage with high dose intravenous antibiotics for two to three weeks, switching to oral therapy once fever settles and C reactive protein drops back to normal. If treatment is delayed past forty-eight hours, cartilage dissolves completely, leaving the child with joint stiffness or pathological hip dislocation.",
+   "vis": {
+    "kind": "table",
+    "title": "Late Complications of Delayed Treatment",
+    "cols": [
+     "Complication",
+     "Mechanism",
+     "Peak Demographic",
+     "Long-Term Consequence"
+    ],
+    "rows": [
+     [
+      "Chondrolysis",
+      "Enzymatic matrix proteoglycan breakdown",
+      "Any age group with delayed drainage",
+      "Premature secondary osteoarthritis"
+     ],
+     [
+      "Tom Smith arthritis",
+      "Septic dislocation with capital femoral loss",
+      "Infants under 12 months of age",
+      "Limb shortening and unstable pseudarthrosis"
+     ],
+     [
+      "Fibrous / bony ankylosis",
+      "Pannus organization across eroded bone",
+      "Untreated or chronic septic joints",
+      "Permanent loss of joint mobility"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which synovial fluid white blood cell count threshold strongly indicates septic arthritis?",
+   "options": [
+    "Greater than 50,000 / mm3 with >75% polymorphonuclear cells",
+    "Between 2,000 and 10,000 / mm3 with predominantly lymphocytes",
+    "Less than 200 / mm3 with clear straw-colored appearance",
+    "Between 5,000 and 15,000 / mm3 with monocyte predominance"
+   ],
+   "correct": 0,
+   "explain": "A synovial fluid white blood cell count exceeding 50,000 / mm3 with more than 75 to 90 percent polymorphonuclear leukocytes is the hallmark laboratory finding of septic arthritis."
+  },
+  {
+   "q": "According to the Kocher criteria, what is the probability of septic arthritis in a child meeting all four criteria?",
+   "options": [
+    "99 percent",
+    "40 percent",
+    "75 percent",
+    "10 percent"
+   ],
+   "correct": 0,
+   "explain": "When all four Kocher criteria are present (non-weight-bearing, fever >38.5C, ESR >40 mm/hr, WBC >12,000/uL), the probability of septic arthritis reaches 99 percent."
+  }
+ ]
+}

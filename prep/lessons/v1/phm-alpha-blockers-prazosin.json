@@ -1,0 +1,227 @@
+{
+  "v": 1,
+  "module": "phm-alpha-blockers",
+  "subject": "pharmacology",
+  "title": "Selective Alpha-1 Blockers, Uroselective Antagonists, and Non-Selective Agents",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The prototypic selective competitive alpha-1 adrenergic receptor antagonist is **prazosin**. By selectively blocking postjunctional vascular alpha-1 receptors with approximately one-thousand-fold higher affinity than presynaptic alpha-2 receptors, prazosin dilates both systemic resistance arterioles and capacitance veins without interrupting presynaptic auto-inhibitory feedback. Consequently, norepinephrine release is not augmented, and reflex tachycardia is significantly less prominent than with non-selective alpha antagonists.",
+      "say": "Prazosin selectively blocks alpha-1 receptors, dilating arterioles and veins with minimal reflex tachycardia.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/alpha-blockers-pharmacology-fig1.webp",
+        "alt": "Alpha-adrenergic blocker mechanism of action",
+        "caption": "Pharmacologic blockade of postjunctional vascular and prostatic alpha-1 adrenergic receptors."
+      }
+    },
+    {
+      "tx": "Longer-acting structural congeners of prazosin sharing quinazoline cores include **terazosin and doxazosin**. Terazosin provides an elimination half-life of twelve hours, whereas doxazosin exhibits a prolonged half-life of twenty hours, allowing once-daily dosing in essential hypertension and benign prostatic hyperplasia. In addition to lowering vascular resistance, both agents relax prostatic smooth muscle and induce gradual apoptosis of prostatic stromal cells, improving peak urinary flow rates.",
+      "say": "Terazosin and doxazosin provide once-daily alpha-1 blockade, lowering blood pressure and improving urinary flow in BPH.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Alpha-1 blocker",
+          "Elimination half-life",
+          "Dosing frequency",
+          "Receptor selectivity profile"
+        ],
+        "rows": [
+          [
+            "Prazosin",
+            "2 to 3 hours",
+            "Twice or thrice daily",
+            "Non-subtype selective alpha-1 antagonist"
+          ],
+          [
+            "Terazosin",
+            "12 hours",
+            "Once daily at bedtime",
+            "Non-subtype selective alpha-1 antagonist"
+          ],
+          [
+            "Doxazosin",
+            "20 hours",
+            "Once daily in morning or bedtime",
+            "Non-subtype selective alpha-1 antagonist"
+          ],
+          [
+            "Tamsulosin",
+            "10 hours",
+            "Once daily after same meal",
+            "Uroselective alpha-1A and alpha-1D antagonist"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Targeted pharmacological relief of lower urinary tract symptoms without vascular hypotension is achieved with **tamsulosin**. As an uroselective antagonist, tamsulosin exhibits high selectivity for alpha-1A and alpha-1D adrenergic receptor subtypes localized in the prostate stroma, bladder neck, and proximal urethra, with negligible affinity for vascular alpha-1B receptors. It significantly enhances maximum urinary flow rates and relieves bladder outlet obstruction without altering systemic blood pressure.",
+      "say": "Tamsulosin selectively blocks alpha-1A prostatic receptors to improve urination without causing hypotension.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/benign-prostatic-hyperplasia-fig1.webp",
+        "alt": "Normal prostate versus benign prostatic hyperplasia",
+        "caption": "Anatomical compression of the prostatic urethra in benign prostatic hyperplasia targeted by uroselective alpha-1A antagonists."
+      }
+    },
+    {
+      "tx": "An ultra-selective alpha-1A receptor antagonist offering the highest ratio of prostatic to vascular selectivity is **silodosin**. Possessing thirty-fold greater affinity for alpha-1A over alpha-1B receptors, silodosin produces rapid clinical improvement in American Urological Association symptom scores in men with benign prostatic hyperplasia. Because alpha-1A receptors also govern smooth muscle contraction in the vas deferens and seminal vesicles, retrograde ejaculation is the most common side effect.",
+      "say": "Silodosin offers extreme alpha-1A selectivity for bladder outlet symptoms, frequently causing retrograde ejaculation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Silodosin (Alpha-1A ultra-selective)",
+          "points": [
+            "162-fold selectivity for alpha-1A over alpha-1B",
+            "Minimal risk of systemic orthostatic hypotension",
+            "High incidence of retrograde ejaculation (28%)",
+            "Rapid onset of urinary flow improvement"
+          ]
+        },
+        "right": {
+          "title": "Prazosin (Alpha-1 non-selective)",
+          "points": [
+            "Equal affinity for alpha-1A, 1B, and 1D",
+            "Significant arterial vasodilation and hypotension",
+            "Rare incidence of retrograde ejaculation",
+            "Requires dosage titration to avoid syncope"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The historic irreversible, non-competitive alpha-adrenergic antagonist is **phenoxybenzamine**. As a haloalkylamine derivative, phenoxybenzamine undergoes spontaneous cyclization in body fluids to form a reactive ethyleniminium intermediate that forms a permanent covalent bond with alpha-1 and alpha-2 adrenergic receptors. Recovery of tissue responsiveness requires de novo synthesis of fresh receptor proteins over three to four days, making it the definitive preoperative agent in pheochromocytoma.",
+      "say": "Phenoxybenzamine covalently binds alpha receptors, providing irreversible blockade essential before pheochromocytoma surgery.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pbz",
+            "label": "Oral phenoxybenzamine administration"
+          },
+          {
+            "id": "cycl",
+            "label": "Spontaneous intramolecular cyclization to ethyleniminium ion"
+          },
+          {
+            "id": "coval",
+            "label": "Covalent alkylation of alpha-1 and alpha-2 receptor binding sites"
+          },
+          {
+            "id": "irr",
+            "label": "Irreversible blockade: Recovery requires new receptor protein synthesis"
+          }
+        ],
+        "edges": [
+          [
+            "pbz",
+            "cycl"
+          ],
+          [
+            "cycl",
+            "coval"
+          ],
+          [
+            "coval",
+            "irr"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A rapid-acting, reversible competitive non-selective alpha-1 and alpha-2 antagonist is **phentolamine**. Administered intravenously, phentolamine blocks vascular alpha-1 receptors to relieve acute hypertensive crises precipitated by clonidine withdrawal, MAO inhibitor-tyramine interactions, or intraoperative catecholamine surges during pheochromocytoma manipulation. Concurrently blocking presynaptic alpha-2 receptors enhances norepinephrine release, producing prominent reflex tachycardia and cardiac arrhythmias that limit its long-term outpatient utility.",
+      "say": "Phentolamine reversibly blocks alpha-1 and alpha-2 receptors to rescue acute hypertensive crises.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Phentolamine (Reversible competitive)",
+          "points": [
+            "Competitive imidazoline alpha antagonist",
+            "Rapid onset (minutes) and short duration",
+            "Used intravenously in hypertensive crises",
+            "Rescues noradrenaline subcutaneous extravasation"
+          ]
+        },
+        "right": {
+          "title": "Phenoxybenzamine (Irreversible covalent)",
+          "points": [
+            "Covalent alkylating haloalkylamine",
+            "Slow onset (hours) and prolonged action (days)",
+            "Used orally for preoperative pheochromocytoma",
+            "Overcomes surge spikes during tumor resection"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A selective competitive alpha-2 adrenergic receptor antagonist historically investigated for erectile dysfunction is **yohimbine**. Extracted from the bark of Pausinystalia yohimbe, yohimbine blocks presynaptic inhibitory alpha-2 autoreceptors in the brainstem and peripheral sympathetic endings. This enhances central sympathetic outflow, increases norepinephrine release, elevates blood pressure and heart rate, and promotes penile cavernosal engorgement while inducing prominent central anxiety and tremors.",
+      "say": "Yohimbine selectively blocks alpha-2 receptors, boosting sympathetic outflow and norepinephrine release.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Alpha antagonist",
+          "Selectivity",
+          "Receptor interaction",
+          "Primary clinical utility"
+        ],
+        "rows": [
+          [
+            "Prazosin",
+            "Selective Alpha-1",
+            "Competitive reversible",
+            "Essential hypertension, PTSD nightmares"
+          ],
+          [
+            "Tamsulosin",
+            "Uroselective Alpha-1A/1D",
+            "Competitive reversible",
+            "Benign prostatic hyperplasia urinary retention"
+          ],
+          [
+            "Phentolamine",
+            "Non-selective Alpha-1 / Alpha-2",
+            "Competitive reversible",
+            "Pheochromocytoma surgery, extravasation rescue"
+          ],
+          [
+            "Yohimbine",
+            "Selective Alpha-2",
+            "Competitive reversible",
+            "Experimental research, historical erectile dysfunction"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "An intraoperative surgical complication uniquely associated with systemic alpha-1A antagonist exposure is **intraoperative floppy iris syndrome**. In patients taking tamsulosin or silodosin, prolonged blockade of iris dilator smooth muscle alpha-1A receptors causes permanent muscular flaccidity and pupillary constriction. During cataract phacoemulsification, the iris flutters billowingly, prolapses into corneal incisions, and constricts progressively, substantially elevating risks of posterior lens capsule rupture and vitreous loss.",
+      "say": "Tamsulosin causes intraoperative floppy iris syndrome, complicating cataract surgery with iris prolapse.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Triad feature of IFIS",
+          "Underlying pathophysiology",
+          "Surgical preventive strategy"
+        ],
+        "rows": [
+          [
+            "Flaccid iris stroma",
+            "Atrophy and tone loss in iris dilator muscle",
+            "Inform ophthalmologist prior to cataract surgery"
+          ],
+          [
+            "Progressive intraoperative miosis",
+            "Loss of sympathetic pupil dilation tone",
+            "Intracameral phenylephrine or epinephrine injection"
+          ],
+          [
+            "Iris prolapse through incisions",
+            "Passive iris billowing toward fluid outflow",
+            "Use of mechanical iris retractors or pupil expansion rings"
+          ]
+        ]
+      }
+    }
+  ]
+}

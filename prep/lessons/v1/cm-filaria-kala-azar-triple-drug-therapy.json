@@ -1,0 +1,140 @@
+{
+ "v": 1,
+ "id": "cm-filaria-kala-azar-triple-drug-therapy",
+ "subject": "community-medicine",
+ "module": "cm-filaria-kala-azar",
+ "title": "Visceral Leishmaniasis and Triple Drug Elimination Regimens",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Triple drug therapy (IDA) for filariasis elimination",
+   "tx": "To dramatically shorten elimination timelines from decades to years, the World Health Organization and national authorities adopted **triple drug therapy**, combining Ivermectin at two hundred micrograms per kilogram, Diethylcarbamazine at six milligrams per kilogram, and Albendazole at a fixed four hundred milligrams in a single annual observed dose. This three-drug regimen clears circulating microfilariae for twenty-four months, reducing required mass rounds from six to two.",
+   "say": "Triple drug therapy combines ivermectin, diethylcarbamazine and albendazole into a single annual treatment. It clears microfilariae for two full years, slashing elimination timelines.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Drug in IDA protocol", "Prescribed dosage", "Key biological effect"],
+    "rows": [
+     ["Ivermectin", "200 mcg/kg body weight", "Paralyses microfilariae pharynx and clears blood"],
+     ["Diethylcarbamazine (DEC)", "6 mg/kg body weight", "Kills microfilariae and sterilises adult worms"],
+     ["Albendazole", "400 mg fixed oral dose", "Disrupts adult worm metabolism and clears helminths"]
+    ]
+   }
+  },
+  {
+   "title": "Kala-azar epidemiology and Indian focus",
+   "tx": "In the fertile Gangetic plain, visceral leishmaniasis or **kala-azar** represents a severe parasitic infection caused by Leishmania donovani and transmitted between humans with no animal reservoir. Over ninety percent of Indian cases occur in rural agricultural communities across Bihar, Jharkhand, West Bengal and eastern Uttar Pradesh, where poverty, malnutrition, poorly plastered mud huts and cattle sheds create ideal ecological niches for vector breeding.",
+   "say": "Kala-azar is caused by Leishmania donovani and concentrated in the rural Gangetic plain. Impoverished rural homes with mud walls and nearby cattle provide an ideal breeding environment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/leishmaniasis-fig1.webp",
+    "alt": "Micrograph of intracellular Leishmania amastigotes inside reticuloendothelial macrophages",
+    "caption": "Intracellular Leishmania amastigotes inside macrophages in bone marrow and splenic aspirates. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Vector biology: Phlebotomus argentipes",
+   "tx": "The tiny sandfly **Phlebotomus argentipes** serves as the exclusive insect vector of visceral leishmaniasis across India. Breeding in humid, decaying organic debris in cracks of unpaved mud floors and cattle sheds, this weak flier moves with characteristic short hopping motions rarely exceeding several hundred metres from breeding sites; it feeds quietly at night and rests during daylight hours in damp cattle stalls.",
+   "say": "The sandfly Phlebotomus argentipes transmits kala-azar. It breeds in damp mud wall cracks and cattle sheds, flying with short hops and biting silently after dark.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Sandfly trait", "Biological manifestation", "Control intervention"],
+    "rows": [
+     ["Breeding substrate", "Damp mud floors mixed with cattle dung", "Pucca flooring and plastering of mud walls"],
+     ["Flight dynamics", "Weak short hopping flight under 300 metres", "Focal spraying within a village perimeter"],
+     ["Feeding time", "Nocturnal twilight and midnight biting", "Bed nets and indoor residual insecticide sprays"],
+     ["Insecticide sensitivity", "Susceptible to synthetic pyrethroids and DDT", "Two rounds of indoor residual spraying yearly"]
+    ]
+   }
+  },
+  {
+   "title": "Clinical hallmarks: hepatosplenomegaly and fever",
+   "tx": "Classic systemic presentation exhibits the **visceral leishmaniasis triad** consisting of persistent, irregular or double-quotidian fever lasting over two weeks, massive splenomegaly extending into the right iliac fossa, and progressive pancytopenia. Extensive reticuloendothelial parasitism causes severe normocytic anaemia, leukopenia, secondary bacterial infections, profound emaciation and characteristic darkening of the skin over the forehead, abdomen and hands, giving the illness its name of black fever.",
+   "say": "Patients present with long-standing irregular fever, massive spleen enlargement, anaemia and wasting. The skin often develops a dark pigmentation, giving the disease the name black fever.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Macrophage multiplication of Leishmania"},
+     {"id": "b", "label": "Massive splenomegaly and hypersplenism"},
+     {"id": "c", "label": "Pancytopenia, severe anaemia, cachexia"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Rapid serodiagnosis: rK39 strip test",
+   "tx": "Field diagnostic workflows rely on the **rK39 antigen** strip test, an immunochromatographic lateral flow dipstick that detects antibodies directed against a thirty-nine amino acid repeat recombinant antigen of Leishmania donovani. With a sensitivity and specificity exceeding ninety-eight percent in untreated patients, the test delivers diagnostic confirmation within fifteen minutes from a single drop of finger-prick blood, eliminating the hazards of invasive splenic aspiration in remote health posts.",
+   "say": "The rK39 dipstick confirms kala-azar from a finger-prick drop within fifteen minutes with over ninety-eight percent accuracy, replacing dangerous needle aspiration of the enlarged spleen.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "rK39 rapid dipstick",
+     "points": ["Fast finger-prick blood test in 15 minutes", "Over 98% sensitive in acute disease", "Non-invasive, safe at primary health centres"]
+    },
+    "right": {
+     "title": "Splenic or marrow aspiration",
+     "points": ["Direct demonstration of amastigotes", "Hazard of fatal splenic haemorrhage", "Requires hospital setting and specialist"]
+    }
+   }
+  },
+  {
+   "title": "First-line chemotherapy: liposomal amphotericin B",
+   "tx": "The national elimination guidelines establish **liposomal amphotericin B** as the undisputed first-line chemotherapy, administered as a single intravenous infusion of ten milligrams per kilogram body weight diluted in five percent dextrose over two hours. This single-dose regimen achieves cure rates exceeding ninety-five percent with negligible renal toxicity, revolutionizing treatment by replacing prolonged, painful twenty-eight-day hospitalizations required by historical antimony injections.",
+   "say": "A single intravenous infusion of liposomal amphotericin B cures over ninety-five percent of kala-azar patients. It avoids kidney damage and discharges patients within twenty-four hours.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Positive rK39 test with fever > 2 weeks"},
+     {"id": "b", "label": "Single IV infusion of 10 mg/kg over 2 hours"},
+     {"id": "c", "label": "Complete parasitological cure and rapid discharge"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Oral miltefosine and combination options",
+   "tx": "When parenteral amphotericin B is unavailable, oral **miltefosine therapy** is deployed as an alternative antileishmanial agent, administered at fifty milligrams twice daily for twenty-eight days with food. Because miltefosine is severely teratogenic, strict female contraception is mandatory during treatment and for three months post-therapy; combination regimens pairing paromomycin intramuscularly with miltefosine are also utilized to accelerate cure and mitigate resistance risk.",
+   "say": "Miltefosine is an oral medication taken for twenty-eight days. Because it damages the developing fetus, women must avoid pregnancy during treatment and for three months after.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Therapeutic regimen", "Route and duration", "Operational consideration"],
+    "rows": [
+     ["Liposomal Amphotericin B", "Single IV dose 10 mg/kg", "Preferred national first-line, cures in 1 day"],
+     ["Miltefosine oral", "50 mg twice daily for 28 days", "Strict contraception mandatory; gastrointestinal nausea"],
+     ["Paromomycin + Miltefosine", "IM injection + oral for 10 days", "Shortened combination regimen in special settings"]
+    ]
+   }
+  },
+  {
+   "title": "Post-kala-azar dermal leishmaniasis as an infectious reservoir",
+   "tx": "A major barrier to final eradication is **post-kala-azar dermal leishmaniasis**, which develops in five to ten percent of apparently cured visceral leishmaniasis patients months to years following treatment. Presenting as hypopigmented macules, papules and nodular lesions containing teeming amastigotes without systemic fever or visceral signs, these individuals feel entirely healthy but serve as a potent human reservoir that perpetuates sandfly transmission.",
+   "say": "Months after recovery, some patients develop skin rashes teeming with parasites without having any fever. These patients feel well but quietly transmit the infection back to sandflies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Visceral kala-azar",
+     "points": ["Systemic fever, wasting and anaemia", "Massive splenomegaly and hepatomegaly", "Low skin parasite density"]
+    },
+    "right": {
+     "title": "Post-kala-azar dermal leishmaniasis",
+     "points": ["No fever; patient feels physically healthy", "Nodular and macular hypopigmented skin rash", "High skin parasite density that infects vectors"]
+    }
+   }
+  },
+  {
+   "title": "Elimination targets and sub-district validation",
+   "tx": "The national programme enforces a rigorous **kala-azar elimination target** defined as maintaining an annual incidence below one case per ten thousand population at the administrative block or sub-district level. Achieving this milestone requires active house-to-house fever search campaigns, two rounds of indoor residual spraying with synthetic pyrethroids covering human dwellings and cattle sheds, and wage compensation for patients to complete care.",
+   "say": "The national goal is fewer than one kala-azar case per ten thousand population in every administrative block. Intensive search drives, indoor spraying and patient wage support make this possible.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Active door-to-door fever searches"},
+     {"id": "b", "label": "Indoor residual pyrethroid spraying"},
+     {"id": "c", "label": "Block incidence maintained < 1 per 10,000"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  }
+ ],
+ "quiz": []
+}

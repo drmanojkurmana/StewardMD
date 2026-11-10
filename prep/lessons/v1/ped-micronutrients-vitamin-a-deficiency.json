@@ -1,0 +1,202 @@
+{
+ "key": "ped-micronutrients-vitamin-a-deficiency",
+ "v": 1,
+ "module": "ped-micronutrients",
+ "subject": "paediatrics",
+ "title": "Vitamin A Deficiency, Xerophthalmia and Nutritional Rickets",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Fat-soluble vitamin deficiencies provoke progressive epithelial metaplasia and skeletal mineralization failure. Severe dietary deprivation of retinol produces systemic **vitamin A deficiency**, predisposing young children to infectious mortality and preventable childhood blindness. Retinol is essential for maintaining differentiated mucosal epithelium and synthesizing rhodopsin photopigments within retinal rod photoreceptors, making ocular symptoms sensitive diagnostic harbingers of systemic depletion.",
+   "say": "Vitamin A deficiency is a major preventable cause of childhood blindness. Retinol is essential for epithelial integrity and rhodopsin synthesis in retinal rods, making ocular signs prime diagnostic markers.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vitamin-a-deficiency-fig1.webp",
+    "alt": "Clinical progression of xerophthalmia from conjunctival xerosis to keratomalacia.",
+    "caption": "WHO xerophthalmia staging illustrating progressive ocular lesions in vitamin A deficiency. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Clinical manifestations of ocular vitamin A deficiency evolve along a defined architectural hierarchy. The earliest functional symptom of ocular involvement is **night blindness nyctalopia**, reflecting delayed rhodopsin regeneration following light exposure in scotopic conditions. As epithelial drying advances across the ocular surface, conjunctival xerosis develops, followed by the appearance of pathognomonic foamy plaques adjacent to the limbus.",
+   "say": "Night blindness represents the earliest clinical symptom of vitamin A deficiency. Impaired rhodopsin regeneration prevents dark adaptation, followed by progressive dryness of the bulbar conjunctiva.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "WHO Xerophthalmia Stage",
+     "Ocular Pathological Feature",
+     "Reversibility Potential",
+     "Clinical Emergency Status"
+    ],
+    "rows": [
+     [
+      "XN",
+      "Night blindness (nyctalopia)",
+      "Completely reversible with oral retinol",
+      "Early diagnostic warning"
+     ],
+     [
+      "X1A",
+      "Conjunctival xerosis (dryness)",
+      "Reversible within 2 to 7 days",
+      "Subclinical epithelial disease"
+     ],
+     [
+      "X1B",
+      "Bitot spots on bulbar conjunctiva",
+      "Reversible over several weeks",
+      "Pathognomonic clinical hallmark"
+     ],
+     [
+      "X2",
+      "Corneal xerosis (hazy cornea)",
+      "Rapidly reversible with therapy",
+      "Impending visual crisis"
+     ],
+     [
+      "X3A / X3B",
+      "Keratomalacia ulceration",
+      "Irreversible scarring and blindness",
+      "Absolute medical emergency"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pathognomonic conjunctival lesions indicate profound depletion of hepatic retinyl palmitate stores. Distinctive **Bitot spots** manifest as triangular, pearly-white or silver-grey foamy plaques situated on the bulbar conjunctiva, predominantly located temporal to the corneal limbus. They consist of heaped keratinized squamous epithelial debris populated by gas-producing Corynebacterium xerosis, reflecting loss of normal mucus-secreting goblet cells.",
+   "say": "Bitot spots are triangular silver foamy plaques located temporal to the limbus. Heaped keratin debris and bacterial gas replace normal mucus-secreting conjunctival goblet cells.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-anthro-vitamin-mineral-signs.webp",
+    "alt": "Clinical photographs of Bitot spots and cutaneous vitamin deficiency manifestations.",
+    "caption": "Temporal bulbar conjunctival Bitot spot and cutaneous follicular hyperkeratosis in pediatric vitamin A deficiency. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Destructive corneal melting represents an urgent ophthalmological emergency threatening permanent bilateral vision. Unchecked deficiency culminates in **keratomalacia liquefactive necrosis**, causing rapid stromal softening, corneal ulceration, and perforation with subsequent iris prolapse and anterior staphyloma. Stage X3A involves less than one-third of the corneal diameter, while stage X3B destroys more than one-third, resulting in dense permanent cicatrization.",
+   "say": "Keratomalacia is a catastrophic emergency where the cornea undergoes rapid liquefactive necrosis. Extensive ulceration and perforation cause permanent blindness unless treated immediately with high-dose retinol.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stage X3A Keratomalacia",
+     "points": [
+      "Corneal ulceration under one-third diameter",
+      "Stromal thinning localized to periphery",
+      "Prompt therapy may preserve central vision"
+     ]
+    },
+    "right": {
+     "title": "Stage X3B Keratomalacia",
+     "points": [
+      "Ulceration exceeding one-third cornea",
+      "Extensive central stromal liquefaction",
+      "Perforation, iris prolapse, permanent blindness"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Standard therapeutic protocols administer massive age-stratified doses of oily retinyl palmitate. Active clinical xerophthalmia demands immediate **therapeutic vitamin A** dosing: children aged twelve months or older receive 200,000 international units orally on day 1, day 2, and day 14. Infants aged six to eleven months receive 100,000 units, while neonates under six months receive 50,000 units on the same three-dose schedule.",
+   "say": "Treat xerophthalmia with 200,000 units of vitamin A on days 1, 2, and 14 for children over one year. Infants receive halved doses on the same three-dose schedule.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Patient Age Category",
+     "Therapeutic Dose (IU)",
+     "Administration Schedule",
+     "National Prophylaxis Regimen"
+    ],
+    "rows": [
+     [
+      "Under 6 months",
+      "50,000 IU orally",
+      "Doses on Days 1, 2, and 14",
+      "Not routinely supplemented"
+     ],
+     [
+      "6 to 11 months",
+      "100,000 IU orally",
+      "Doses on Days 1, 2, and 14",
+      "100,000 IU at 9 months with MR"
+     ],
+     [
+      "12 months and older",
+      "200,000 IU orally",
+      "Doses on Days 1, 2, and 14",
+      "200,000 IU every 6 months to 5 years"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Impaired calcification of newly formed osteoid matrix at growing physeal growth plates causes classic skeletal deformities. The disease **nutritional rickets** arises from inadequate cutaneous cholecalciferol synthesis or insufficient dietary calcium intake, causing defective mineralization of hypertrophic chondrocytes. Rapidly growing bone sites exhibit disorganized growth plate architecture, leading to pathognomonic skeletal expansion and mechanical bowing.",
+   "say": "Nutritional rickets results from vitamin D or calcium deficiency, impairing growth plate osteoid mineralization. Rapidly expanding physes show hypertrophic chondrocyte disorganization and painful bone softening.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vitamin-d-deficiency-fig1.webp",
+    "alt": "Skeletal signs and biochemical cascade of nutritional rickets.",
+    "caption": "Skeletal abnormalities, parathyroid hormone elevation, and mineralization failure in pediatric rickets. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Somatic examination reveals characteristic cranial, thoracic, and appendicular osseous deformities. Early clinical signs include **craniotabes skull softening**, where gentle compression of the parietal bones yields a ping-pong ball sensation in infants under three months of age. Thoracic findings include palpable beading at costochondral junctions termed rachitic rosary, alongside Harrison sulcus indentation and widening of wrist and ankle epiphyses.",
+   "say": "Craniotabes produces a ping-pong ball sensation upon pressing infant parietal bones. Rachitic rosary beading at costochondral junctions and widened wrist epiphyses are prominent physical signs.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-xray-rickets.webp",
+    "alt": "Wrist radiograph demonstrating cupping, splaying, and fraying of the distal radius and ulna.",
+    "caption": "Plain radiography of wrists showing metaphyseal cupping, fraying, and widening of the radiolucent physis in rickets. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Diagnostic radiographic imaging reveals classical changes at distal metaphyseal boundaries. Radiographs of the wrist and knee demonstrate **metaphyseal cupping and fraying**, accompanied by widening of the radiolucent physeal cartilage zone and cortical thinning. Serum biochemical testing reveals elevated alkaline phosphatase as the most sensitive marker, accompanied by secondary hyperparathyroidism, low serum phosphate, and circulating 25-hydroxyvitamin D concentrations below twenty nanograms per millilitre.",
+   "say": "Wrist X-rays show metaphyseal cupping, fraying, and widening of the radiolucent growth plate. High alkaline phosphatase and low 25-hydroxyvitamin D confirm the diagnosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Laboratory Marker",
+     "Nutritional Rickets",
+     "Hypoparathyroidism",
+     "Renal Osteodystrophy"
+    ],
+    "rows": [
+     [
+      "Serum calcium",
+      "Normal or mildly depressed",
+      "Severely low",
+      "Severely low"
+     ],
+     [
+      "Serum phosphate",
+      "Markedly depressed",
+      "Markedly elevated",
+      "Markedly elevated"
+     ],
+     [
+      "Alkaline phosphatase",
+      "Markedly elevated",
+      "Normal",
+      "Markedly elevated"
+     ],
+     [
+      "Parathyroid hormone (PTH)",
+      "Markedly elevated",
+      "Undetectable or low",
+      "Markedly elevated"
+     ],
+     [
+      "25-hydroxyvitamin D",
+      "Depressed (<20 ng/mL)",
+      "Normal",
+      "Normal or low"
+     ]
+    ]
+   }
+  }
+ ]
+}

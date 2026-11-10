@@ -1,0 +1,185 @@
+{
+ "v": 1,
+ "id": "oph-systemic-lisch-nodules",
+ "subject": "ophthalmology",
+ "module": "oph-systemic",
+ "title": "Lisch Nodules, Tuberous Sclerosis, Myasthenia and Sarcoid Eyes",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Lisch nodules** are pale tan iris hamartomas seen on slit lamp in neurofibromatosis type one, increasing in number with age and harming vision rarely. Their value is diagnostic: multiple bilateral nodules strongly support the syndrome in a child with skin patches. Slit lamp therefore contributes syndrome confirmation without invasive testing.",
+   "say": "Diagnostic value together gives Lisch understanding in syndrome clinics for children with café coloured skin patches. Slit lamp gives iris detection additionally. Hamartoma gives benign nature.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m318-oph-systemic-lisch-nodules.webp",
+    "alt": "Slit lamp photograph of iris Lisch nodules showing multiple well-defined dome-shaped melanocytic hamartomas in neurofibromatosis type 1",
+    "caption": "Slit lamp photograph of iris Lisch nodules showing multiple well-defined dome-shaped melanocytic hamartomas in neurofibromatosis type 1. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Tuberous sclerosis produces retinal astrocytic hamartomas, pale raised lesions that may calcify over time and usually need observation rather than treatment. Brain, skin, kidney and heart lesions dominate systemic management while eye lesions support diagnosis. **Retinal hamartoma** therefore appears in tuberous sclerosis diagnostic criteria discussions.",
+   "say": "Diagnostic support together gives tuberous eye value in syndrome clinics for children with seizures and skin signs. Hamartoma gives retinal lesion additionally. Calcification gives ageing sign."
+  },
+  {
+   "tx": "**Myasthenia gravis** causes fatigable ptosis and variable double vision that worsens through the day and improves with rest, mimicking several nerve palsies while pupils stay normal. Ice pack improvement and fluctuating measurements are classic bedside clues in eye clinics. Normal pupils therefore separate myasthenia from most structural palsy causes.",
+   "say": "Fatigue pattern together gives myasthenia recognition in eye clinics for adults with variable ptosis worsening by evening. Ice gives bedside clue additionally. Pupils gives normal separation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/myasthenia-gravis-fig1.webp",
+    "alt": "Myasthenia gravis pathophysiology and ptosis diagram.",
+    "caption": "Myasthenia gravis neuromuscular junction pathophysiology with acetylcholine receptor autoantibodies. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Ocular myasthenia may remain eye limited or generalise, so new diagnoses need systemic assessment for thymus disease and generalised weakness risk. Eye signs therefore trigger neurological referral rather than isolated lid surgery. **Refer before lifting** therefore governs ptosis surgery decisions in fluctuating myasthenic cases.",
+   "say": "Neurological referral together gives myasthenia safety before lid surgery in eye clinics for adults with fluctuating ptosis. Thymus gives systemic association additionally. Generalisation gives weakness risk.",
+   "vis": {
+    "kind": "flow",
+    "title": "Myasthenia eye flow",
+    "nodes": [
+     {
+      "id": "vary",
+      "label": "Variable ptosis diplopia"
+     },
+     {
+      "id": "test",
+      "label": "Ice and fatigue clues"
+     },
+     {
+      "id": "refer",
+      "label": "Neurology systemic assessment"
+     },
+     {
+      "id": "plan",
+      "label": "Surgery only when stable"
+     }
+    ],
+    "edges": [
+     [
+      "vary",
+      "test"
+     ],
+     [
+      "test",
+      "refer"
+     ],
+     [
+      "refer",
+      "plan"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Two images from distant organs are telling the same story here. The chest film shows both hila swollen with the glandular enlargement of sarcoidosis, while the fundus diagram maps the retinal periphlebitis the same disease plants in the eye. Pairing **bilateral hilar lymphadenopathy** with ocular inflammation converts a vague uveitis workup into a targeted hunt for biopsy tissue, often in those very chest nodes. Sarcoidosis rewards clinicians who connect compartments, because the eye complaint and the radiograph are one diagnosis wearing two costumes.",
+   "say": "Bilateral hilar lymphadenopathy paired with retinal periphlebitis points the uveitis workup firmly at sarcoidosis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m320-oph-systemic-lisch-nodules.webp",
+    "alt": "Chest radiograph and ocular fundus diagram showing bilateral hilar lymphadenopathy and retinal periphlebitis in systemic sarcoidosis",
+    "caption": "Chest radiograph and ocular fundus diagram showing bilateral hilar lymphadenopathy and retinal periphlebitis in systemic sarcoidosis. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Ocular sarcoidosis** most often presents as granulomatous anterior uveitis with large greasy keratic precipitates, iris nodules and sometimes lacrimal gland enlargement. Posterior disease adds retinal perivascular sheathing and choroidal granulomas in systemic sarcoid patterns. Chest imaging and tissue pathways therefore follow granulomatous eye inflammation.",
+   "say": "A granulomatous pattern together gives sarcoid routing in uveitis clinics for adults who present with greasy deposits. One iris nodule gives an anterior clue additionally. Chest imaging gives the systemic pathway."
+  },
+  {
+   "tx": "Separating sarcoid uveitis from infective granulomatous disease matters because steroid therapy without infection exclusion can worsen tuberculosis driven inflammation. Systemic workup therefore precedes confident sarcoid labelling in endemic settings. **Exclude infection first** therefore protects granulomatous uveitis patients starting immunosuppression. Endemic exposure history therefore belongs in the first clerking.",
+   "say": "Infection exclusion together gives safe labelling in uveitis clinics for adults with granulomatous inflammation needing steroid therapy. Workup gives systemic route additionally. Endemic gives tuberculosis caution.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Sarcoid pattern",
+     "points": [
+      "Greasy precipitates nodules",
+      "Systemic granuloma evidence"
+     ]
+    },
+    "right": {
+     "title": "Infective pattern",
+     "points": [
+      "Endemic exposure clues",
+      "Steroid alone dangerous"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Tuberous and neurofibromatosis eye lesions share hamartoma biology: benign tumours that diagnose syndromes more than they threaten sight directly. Surveillance therefore focuses on the minority lesions near macula or optic pathway that can harm vision. **Hamartoma watch** therefore means targeted imaging rather than blanket intervention.",
+   "say": "Targeted watching together gives hamartoma surveillance in syndrome clinics for children with retinal or iris lesions. Macula gives risk location additionally. Intervention gives minority need.",
+   "vis": {
+    "kind": "table",
+    "title": "Hamartoma map",
+    "cols": [
+     "Syndrome",
+     "Eye lesion"
+    ],
+    "rows": [
+     [
+      "Neurofibromatosis one",
+      "Iris Lisch nodules"
+     ],
+     [
+      "Tuberous sclerosis",
+      "Retinal astrocytic hamartoma"
+     ],
+     [
+      "Both",
+      "Observe unless vision threatened"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors here: Lisch and retinal hamartomas diagnose phakomatoses, fatigable ptosis with normal pupils means myasthenia, and greasy precipitates mean granulomatous sarcoid type uveitis after infection exclusion. **Pattern names syndrome** therefore closes this systemic eye lesson. Students therefore rehearse these three patterns together before clinics.",
+   "say": "Pattern naming together gives systemic anchors in examinations for students reliably in syndrome cases everywhere. Fatigue gives myasthenia centre additionally. Precipitates gives sarcoid completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Lisch group anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Lisch nodules",
+      "Neurofibromatosis one iris sign"
+     ],
+     [
+      "Fatigable ptosis",
+      "Myasthenia, pupils normal"
+     ],
+     [
+      "Greasy precipitates",
+      "Granulomatous uveitis, exclude infection"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Lisch nodules",
+   "b": "Iris hamartomas supporting neurofibromatosis type one diagnosis."
+  },
+  {
+   "f": "Myasthenia eye rule",
+   "b": "Fatigable ptosis and diplopia, normal pupils; neurology before lid surgery."
+  },
+  {
+   "f": "Sarcoid eye rule",
+   "b": "Granulomatous uveitis with greasy precipitates; exclude infection before steroids."
+  }
+ ],
+ "keys": [
+  "Hamartomas diagnose more than they harm",
+  "Refer myasthenia before lifting lids",
+  "Granulomatous uveitis earns systemic workup"
+ ]
+}

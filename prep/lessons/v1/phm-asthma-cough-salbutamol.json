@@ -1,0 +1,231 @@
+{
+  "v": 1,
+  "module": "phm-asthma-cough",
+  "subject": "pharmacology",
+  "title": "Short- and Long-Acting Beta-2 Agonists, Methylxanthines, and Bronchodilator Therapeutics",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The prototypical short-acting selective beta-2 adrenergic receptor agonist utilized worldwide for rapid relief of acute bronchospasm is **salbutamol** (albuterol). Delivered via pressurized metered-dose inhaler or nebulization, salbutamol selectively stimulates beta-2 receptors on bronchial smooth muscle, activating adenylyl cyclase to increase cyclic AMP and lower intracellular calcium, producing smooth muscle relaxation within five minutes that persists for four to six hours. Systemic absorption of higher doses stimulates skeletal muscle beta-2 receptors, causing fine motor tremors, while cardiac beta-1 and beta-2 stimulation provokes sinus tachycardia and palpitations.",
+      "say": "Salbutamol delivers rapid bronchodilation within five minutes by elevating cyclic AMP in bronchial smooth muscle.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-proc-mdi.webp",
+        "alt": "Metered dose inhaler with auxiliary spacer and mask attachment",
+        "caption": "Pressurized metered-dose inhaler with spacer holding chamber designed to optimize pulmonary aerosol delivery and minimize systemic side effects."
+      }
+    },
+    {
+      "tx": "A lipophilic, long-acting beta-2 agonist characterized by a prolonged twelve-hour duration of bronchodilation but an insidious slow onset of action is **salmeterol**. Possessing an extensive lipophilic flexible hydrocarbon tail, salmeterol anchors firmly to an exosite adjacent to the beta-2 receptor active binding site, allowing its active head to repeatedly engage and stimulate the receptor. Because its onset requires fifteen to thirty minutes, salmeterol is strictly inappropriate for acute rescue relief of bronchospasm. Instead, it is combined with inhaled corticosteroids for maintenance prophylaxis in chronic asthma and COPD.",
+      "say": "Salmeterol anchors to exosite receptors to provide twelve-hour bronchodilation, but its slow onset precludes rescue use.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/asthma-copd-drugs-fig1.webp",
+        "alt": "Airway mucosal architecture and asthma pharmacotherapy molecular targets",
+        "caption": "Airway smooth muscle receptors and signaling pathways illustrating beta-2 adrenergic, muscarinic, and corticosteroid molecular targets."
+      }
+    },
+    {
+      "tx": "A unique long-acting beta-2 adrenergic agonist distinguished by possessing both a rapid onset of bronchodilation within two minutes and a prolonged twelve-hour duration of action is **formoterol**. Because it combines immediate rescue efficacy with sustained maintenance control, formoterol is formulated in combination with inhaled budesonide in the SMART (Single Maintenance and Reliever Therapy) protocol for moderate-to-severe persistent asthma. This strategy allows patients to use a single combination inhaler for both daily maintenance and as-needed symptom relief, reducing exacerbation risk.",
+      "say": "Formoterol combines rapid two-minute onset with twelve-hour duration, enabling single maintenance and reliever therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Formoterol (Rapid-Onset LABA)",
+          "points": [
+            "Rapid bronchodilation onset within 1 to 3 minutes",
+            "Prolonged duration of action lasting 12 hours",
+            "Moderate lipophilicity allows rapid receptor access",
+            "Approved for SMART single-inhaler maintenance and rescue"
+          ]
+        },
+        "right": {
+          "title": "Salmeterol (Slow-Onset LABA)",
+          "points": [
+            "Slow onset of bronchodilation (15 to 30 minutes)",
+            "Prolonged duration of action lasting 12 hours",
+            "High lipophilicity with dedicated exosite micro-reservoir",
+            "Restricted strictly to maintenance; useless for acute rescue"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The prototypical naturally occurring methylxanthine alkaloid that serves as an orally active bronchodilator and respiratory stimulant is **theophylline**. Its therapeutic mechanisms comprise non-selective inhibition of cyclic nucleotide phosphodiesterases (PDE3 and PDE4), preventing cyclic AMP breakdown, alongside competitive antagonism of cell-surface adenosine A1 and A2A receptors. In addition, low-dose theophylline activates histone deacetylase-2 (HDAC2), reversing corticosteroid resistance in severe COPD and smoking asthmatics. It stimulates medullary respiratory centers and enhances diaphragmatic contractility, preventing respiratory muscle fatigue.",
+      "say": "Theophylline inhibits phosphodiesterase, blocks adenosine receptors, and restores steroid responsiveness via histone deacetylase-2.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "theo",
+            "label": "Theophylline administration (oral or parenteral)"
+          },
+          {
+            "id": "pde",
+            "label": "Non-selective inhibition of phosphodiesterases PDE3 and PDE4"
+          },
+          {
+            "id": "camp",
+            "label": "Elevated intracellular cAMP and cGMP concentrations"
+          },
+          {
+            "id": "broncho",
+            "label": "Bronchial smooth muscle relaxation, diaphragmatic inotropy, and HDAC2 activation"
+          }
+        ],
+        "edges": [
+          [
+            "theo",
+            "pde"
+          ],
+          [
+            "pde",
+            "camp"
+          ],
+          [
+            "camp",
+            "broncho"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The water-soluble stable ethylenediamine salt complex of theophylline formulated specifically for slow intravenous infusion in acute refractory bronchospasm is **aminophylline**. Containing approximately eighty percent anhydrous theophylline, intravenous aminophylline was historically employed as second-line adjuvant therapy in life-threatening status asthmaticus failing inhaled bronchodilators. Infusion must proceed slowly over thirty minutes under continuous electrocardiographic monitoring because rapid bolus administration precipitates severe hypotension, diaphoresis, fatal ventricular tachyarrhythmias, and intractable generalized seizures.",
+      "say": "Aminophylline is an intravenous theophylline complex requiring slow infusion under ECG monitoring to prevent fatal arrhythmias.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Methylxanthine formulation",
+          "Active theophylline equivalent",
+          "Route of delivery",
+          "Clinical application profile"
+        ],
+        "rows": [
+          [
+            "Theophylline sustained-release",
+            "100% anhydrous theophylline",
+            "Oral tablet once or twice daily",
+            "Nocturnal asthma and COPD maintenance"
+          ],
+          [
+            "Aminophylline",
+            "80% to 85% active theophylline",
+            "Slow IV infusion in 5% dextrose",
+            "Acute refractory status asthmaticus"
+          ],
+          [
+            "Doxofylline",
+            "Modified dioxolane methylxanthine",
+            "Oral or intravenous injection",
+            "Lower affinity for adenosine; fewer cardiac side effects"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Because theophylline exhibits a remarkably narrow therapeutic index and non-linear saturable elimination kinetics, **therapeutic drug monitoring** is essential. Serum levels between 10 and 15 mcg/mL provide optimal bronchodilation, whereas levels exceeding 20 mcg/mL trigger nausea, vomiting, gastroesophageal reflux, headache, and insomnia. Levels above 30 mcg/mL provoke life-threatening supraventricular tachycardia, ventricular fibrillation, and refractory seizures. Hepatic CYP1A2 clearance is accelerated by tobacco smoking and inhibited by ciprofloxacin, erythromycin, and cimetidine.",
+      "say": "Theophylline demands therapeutic drug monitoring because levels above twenty micrograms per milliliter provoke severe arrhythmias and seizures.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Serum theophylline range",
+          "Clinical therapeutic status",
+          "Observed pharmacological effect",
+          "Typical clinical toxicity signs"
+        ],
+        "rows": [
+          [
+            "Under 10 mcg/mL",
+            "Subtherapeutic",
+            "Mild anti-inflammatory action; HDAC2 activation",
+            "None (suboptimal bronchodilation)"
+          ],
+          [
+            "10 to 15 mcg/mL",
+            "Optimal therapeutic window",
+            "Effective bronchodilation and diaphragm stimulation",
+            "Well tolerated in majority of patients"
+          ],
+          [
+            "15 to 20 mcg/mL",
+            "High therapeutic border",
+            "Maximal smooth muscle relaxation",
+            "Anorexia, mild nausea, nervousness, insomnia"
+          ],
+          [
+            "Exceeding 20 mcg/mL",
+            "Toxic range",
+            "Phosphodiesterase saturation and adenosine block",
+            "Protracted vomiting, tachydysrhythmias, tonic seizures"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "An essential auxiliary holding chamber fitted between a pressurized metered-dose inhaler and the patient's mouth is an **inhaler spacer device**. By slowing the velocity of aerosolized aerosol droplets and allowing propellant evaporation, a spacer eliminates the need for strict hand-breath coordination. It significantly decreases high-velocity drug impaction in the oropharynx from eighty percent down to fifteen percent, thereby minimizing systemic drug absorption, hoarseness, and oropharyngeal candidiasis, while doubling deep pulmonary deposition into small airways, particularly in pediatric and elderly populations.",
+      "say": "Spacer holding chambers eliminate coordination errors, increase lung deposition, and reduce throat impaction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MDI Alone (Direct Actuation)",
+          "points": [
+            "Requires precise synchronization of actuation and inhalation",
+            "High plume velocity impacts oropharynx (up to 80% swallowed)",
+            "Only 10% to 15% of aerosol dose reaches lower airways",
+            "High incidence of local candidiasis and systemic absorption"
+          ]
+        },
+        "right": {
+          "title": "MDI With Spacer Holding Chamber",
+          "points": [
+            "Aerosol is trapped in chamber, eliminating timing coordination",
+            "Coarse droplets settle on chamber walls, reducing throat hit",
+            "Deep lung delivery increases to 25% to 35% of nominal dose",
+            "Substantially reduces oral thrush and systemic side effects"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A critical pharmacological phenomenon resulting from chronic, excessive, or unmonitored use of beta-2 agonists in bronchial asthma is **beta-2 receptor down-regulation**. Persistent continuous stimulation by agonists like salbutamol or LABAs triggers phosphorylation by G protein-coupled receptor kinases, leading to beta-arrestin binding, receptor uncoupling from Gs, endocytosis, and lysosomal degradation. Crucially, concomitant administration of inhaled corticosteroids upregulates beta-2 receptor gene transcription, reversing tolerance and preventing fatal asthma exacerbations.",
+      "say": "Excessive beta agonist use triggers receptor down-regulation, an uncoupling reversed by inhaled corticosteroids.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "agon",
+            "label": "Chronic continuous beta-2 agonist exposure (salbutamol overuse)"
+          },
+          {
+            "id": "grk",
+            "label": "GRK phosphorylation and beta-arrestin recruitment"
+          },
+          {
+            "id": "endo",
+            "label": "Receptor desensitization, endocytic internalization, and degradation"
+          },
+          {
+            "id": "rescue",
+            "label": "Inhaled corticosteroid restores receptor transcription and membrane density"
+          }
+        ],
+        "edges": [
+          [
+            "agon",
+            "grk"
+          ],
+          [
+            "grk",
+            "endo"
+          ],
+          [
+            "endo",
+            "rescue"
+          ]
+        ]
+      }
+    }
+  ]
+}
