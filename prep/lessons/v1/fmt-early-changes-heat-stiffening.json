@@ -14,6 +14,17 @@
    "vis": {"kind": "table", "cols": ["Feature", "Heat stiffening", "Rigor mortis"], "rows": [["Cause", "Protein coagulation by heat above 65 C", "ATP loss after death"], ["Strength", "Very marked, hard to overcome", "Moderate, yields to force"], ["Muscle look", "Dry, contracted, cooked meat zone", "Normal colour, firm"], ["Later course", "Stays until tissues soften by decay", "Passes off in sequence"]]}
   },
   {
+    "tx": "A charred limb held in rigid flexion shows **heat stiffening** after exposure above 65 degrees Celsius. The rigidity exceeds ordinary rigor mortis and follows burning, high voltage shock, or immersion in hot liquid. Heat coagulates muscle protein in the same way cooking does, so the fibres shorten, dry, and may blacken at the surface. Beneath the carbonised layer a brownish pink band of cooked muscle overlies still red tissue.",
+    "say": "A charred limb held in rigid flexion shows heat stiffening after exposure above 65 degrees Celsius. The rigidity exceeds ordinary rigor mortis and follows burning, high voltage shock, or immersion in hot liquid. Heat coagulates muscle protein in the same way cooking does, so the fibres shorten, dry, and may blacken at the surface. Beneath the carbonised layer a brownish pink band of cooked muscle overlies still red tissue.",
+    "vis": {
+      "kind": "image",
+      "src": "v1/lessons/media/need-n725-fmt-early-changes-heat-stiffening.webp",
+      "alt": "Charred limb fixed by heat stiffening, with a cooked muscle zone under the surface",
+      "caption": "A burnt limb is fixed in heat stiffening, and a cut surface shows a brownish pink zone of cooked muscle over red muscle. Illustration: StewardMD original.",
+      "ar": 1.3393
+    }
+  },
+  {
    "title": "Flexion posture produced by heat",
    "tx": "Because flexor muscles are bulkier than extensors, heat contraction bends the limbs into a **flexed pugilistic posture** even though nobody moved the body after death. Students often mistake this attitude for a defensive pose adopted during life. The stiffening persists until muscles and ligaments soften from decomposition. True rigor mortis never develops in muscle that has already been heat stiffened, which helps separate the two processes at the scene.",
    "say": "Stronger flexors bend the heated body into a boxer like pose, and that pose proves nothing about a struggle.",
@@ -48,6 +59,17 @@
    "tx": "Vitreous humour resists early decay, and its **potassium rise after death** is fairly linear for up to 120 hours. Potassium climbs by about 0.2 millimoles per litre each hour from a starting value near 5 to 8. The Madea and Henssge formula reads: postmortem interval equals 5.26 times the potassium concentration minus 30.9. Even then the 95 percent confidence limits stretch to plus or minus 20 hours at 100 hours.",
    "say": "Vitreous potassium rises steadily, and the formula converts it to hours, but the error band stays wide.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Aspirate vitreous from the eye"}, {"id": "b", "label": "Measure potassium concentration"}, {"id": "c", "label": "Apply PMI equals 5.26 K minus 30.9"}, {"id": "d", "label": "Quote interval with plus minus 20 hour limits"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+    "tx": "A syringe enters the globe to draw vitreous humour, whose **potassium rise after death** remains close to a straight line through the first 120 hours. From a starting level near 5 to 8 millimoles per litre, the value gains about 0.2 millimoles in each litre every hour. Madea and Henssge estimate hours since death as 5.26 multiplied by that potassium reading, then subtract 30.9. Even at 100 hours, ninety five percent limits still reach roughly plus or minus 20 hours.",
+    "say": "A syringe enters the globe to draw vitreous humour, whose potassium rise after death remains close to a straight line through the first 120 hours. From a starting level near 5 to 8 millimoles per litre, the value gains about 0.2 millimoles in each litre every hour. Madea and Henssge estimate hours since death as 5.26 multiplied by that potassium reading, then subtract 30.9. Even at 100 hours, ninety five percent limits still reach roughly plus or minus 20 hours.",
+    "vis": {
+      "kind": "image",
+      "src": "v1/lessons/media/need-n726-fmt-early-changes-heat-stiffening.webp",
+      "alt": "Syringe aspirating vitreous humour from the globe at autopsy",
+      "caption": "At autopsy a syringe is placed at the globe to aspirate vitreous humour for a potassium estimate of the postmortem interval. Illustration: StewardMD original.",
+      "ar": 1.3393
+    }
   },
   {
    "title": "Other fluids used for timing",
