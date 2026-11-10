@@ -1,0 +1,239 @@
+{
+  "v": 1,
+  "module": "phm-targeted-anticancer",
+  "subject": "pharmacology",
+  "title": "Targeted Anticancer II: Bevacizumab, Cetuximab, Rituximab, Bortezomib and APL Differentiation Therapy",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Bevacizumab**, antibody against VEGF A, starves tumour angiogenesis across colorectal, lung, ovarian, cervical and brain niches, billing the vascular ledger at class scale: hypertension (treat through, rarely stop), proteinuria (monitor, hold at nephrotic), bleeding (squamous lung and untreated brain metastases fences), arterial thrombosis, gastrointestinal perforation and fistula, and wound dehiscence that schedules surgery weeks away from doses.",
+      "say": "Bevacizumab bills every vessel in the body for the tumour vessels it starves.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vascular ledger",
+          "points": [
+            "Hypertension dose related, treated through",
+            "Proteinuria monitored by urine protein",
+            "Perforation and fistula (bowel primaries at risk)",
+            "Wound healing: surgical windows respected"
+          ]
+        },
+        "right": {
+          "title": "Eligibility fences",
+          "points": [
+            "Recent major surgery or non healing wounds",
+            "Uncontrolled hypertension",
+            "High bleeding risk tumours (squamous, cavitating)",
+            "Recent arterial thrombotic events"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cetuximab**, antibody against EGFR's extracellular domain, treats RAS wild type colorectal cancer (left sided benefit strongest) and head and neck cancer with radiation, billing acneiform rash (again tracking benefit), hypomagnesaemia (renal wasting over months), and infusion reactions including anaphylaxis from preformed IgE to galactose alpha 1,3 galactose in tick exposed populations, where panitumumab (fully human) substitutes.",
+      "say": "Cetuximab needs wild type RAS and a magnesium level; its allergy is a tick bite's legacy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cetuximab territory",
+          "points": [
+            "RAS wild type colorectal (left sided strongest)",
+            "Head and neck with radiation or platinum",
+            "Rash correlates with benefit",
+            "Magnesium wasted renally, repleted"
+          ]
+        },
+        "right": {
+          "title": "Reaction geography",
+          "points": [
+            "Alpha gal IgE in tick exposed regions",
+            "First infusion anaphylaxis pattern",
+            "Panitumumab fully human alternative",
+            "Premedication and observation protocols"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Rituximab**, anti CD20 antibody, empties B cells across lymphomas (R CHOP), rheumatoid arthritis, ANCA vasculitis and pemphigus, billing infusion reactions (cytokine, first dose), hepatitis B reactivation (screening and prophylaxis mandatory from earlier lessons), late neutropenia and hypogammaglobulinaemia with repeated courses, and rare progressive multifocal leukoencephalopathy. Biosimilars made it affordable; the screening obligations travelled with the copies.",
+      "say": "Rituximab empties B cells for a year; hepatitis B screening travels with every biosimilar.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "screen",
+            "label": "Hepatitis B, immunoglobulins and infection screen"
+          },
+          {
+            "id": "pre",
+            "label": "Premedication: steroid, antihistamine, paracetamol"
+          },
+          {
+            "id": "infuse",
+            "label": "Slow first infusion with reaction readiness"
+          },
+          {
+            "id": "watch",
+            "label": "Months: B cell recovery, vaccine timing, late neutropenia"
+          }
+        ],
+        "edges": [
+          [
+            "screen",
+            "pre"
+          ],
+          [
+            "pre",
+            "infuse"
+          ],
+          [
+            "infuse",
+            "watch"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Bortezomib**, a proteasome inhibitor, drowns myeloma cells in undegraded immunoglobulin protein stress, given subcutaneously weekly to soften its dose limiting painful peripheral neuropathy, with herpes zoster prophylaxis routine and thrombocytopenia cycling predictably. Carfilzomib (irreversible, cardiac ledger) and ixazomib (oral) inherit the mechanism, while daratumumab (anti CD38) joined myeloma's antibody wing.",
+      "say": "Bortezomib clogs the myeloma cell's protein drain; nerves and zoster write its orders.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Proteasome logic",
+          "points": [
+            "Myeloma's immunoglobulin load weaponised",
+            "Subcutaneous weekly softens neuropathy",
+            "Zoster prophylaxis routine",
+            "Platelets cycle and recover"
+          ]
+        },
+        "right": {
+          "title": "Myeloma partners",
+          "points": [
+            "Carfilzomib: cardiac and renal vigilance",
+            "Ixazomib: oral convenience",
+            "Daratumumab: CD38 antibody, transfusion interference",
+            "Lenalidomide IMiDs from thalidomide lineage"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**All trans retinoic acid** (ATRA) plus **arsenic trioxide** cured acute promyelocytic leukaemia by differentiation rather than killing: ATRA forces the PML RARA blocked blast to mature, arsenic degrades the fusion protein, together replacing chemotherapy for most risk groups, billing differentiation syndrome (fever, oedema, pulmonary infiltrates, treated by immediate dexamethasone) and arsenic's QT and liver ledgers. Molecular remission by PCR is the endpoint language.",
+      "say": "APL is cured by maturing blasts, not killing them; differentiation syndrome gets steroids at first fever.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Differentiation pair",
+          "points": [
+            "ATRA releases the PML RARA maturation block",
+            "Arsenic degrades the fusion oncoprotein",
+            "Chemotherapy free for low intermediate risk",
+            "Coagulopathy support until differentiation begins"
+          ]
+        },
+        "right": {
+          "title": "Differentiation syndrome",
+          "points": [
+            "Fever, weight gain, infiltrates, effusions",
+            "Dexamethasone immediately, do not await certainty",
+            "White count control partners (hydroxyurea rules)",
+            "Arsenic QT and electrolyte surveillance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**VEGF kinase inhibitors** (sunitinib, sorafenib, lenvatinib, regorafenib) multiply bevacizumab's ledger orally: hypertension, hand foot syndrome, hypothyroidism (scheduled TSH surveillance), diarrhoea, fatigue and bleeding, in kidney, liver, thyroid and colorectal niches. Their multikinase promiscuity is the adverse event list, and dose interruptions for hand foot and blood pressure are management, not failure.",
+      "say": "Oral VEGF kinase drugs bill vessels, thyroid and palms together; interruptions are part of the prescription.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Multikinase ledger",
+          "points": [
+            "Hypertension managed and monitored at home",
+            "TSH checked: hypothyroidism common",
+            "Hand foot dose interruptions",
+            "Bleeding and wound cautions from bevacizumab"
+          ]
+        },
+        "right": {
+          "title": "Territory",
+          "points": [
+            "Renal cell: sunitinib and successors",
+            "Hepatocellular: sorafenib and lenvatinib",
+            "Radioiodine refractory thyroid: lenvatinib",
+            "Colorectal later lines: regorafenib, fruquintinib geography"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**PARP inhibitors** (olaparib and kin) exploit synthetic lethality from principles: BRCA mutated cells, already homologous recombination deficient, die when PARP's backup repair is blocked, serving ovarian, breast, prostate and pancreatic niches billing marrow (anaemia), nausea and rare MDS, with germline testing as prescription gate and somatic testing widening eligibility. Resistance by reversion mutations restores repair and closes the trap.",
+      "say": "PARP inhibitors kill only cells that already lost the other repair road; BRCA is the gate.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "brca",
+            "label": "BRCA loss: homologous repair broken"
+          },
+          {
+            "id": "parp",
+            "label": "PARP blocked: backup repair removed"
+          },
+          {
+            "id": "die",
+            "label": "Tumour cell dies, normal cell survives on BRCA"
+          },
+          {
+            "id": "resist",
+            "label": "Reversion mutations restore repair: resistance"
+          }
+        ],
+        "edges": [
+          [
+            "brca",
+            "parp"
+          ],
+          [
+            "parp",
+            "die"
+          ],
+          [
+            "die",
+            "resist"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Antibody grammar** closes the lesson: chimeric versus humanised versus fully human suffixes (ximab, zumab, mumab from the basiliximab lesson), infusion reaction premedication, immunogenicity with antidrug antibodies, target mediated clearance making doses nonlinear, and infection screening by target biology (B cell, integrin, complement each fencing different microbes). The suffix is a pharmacology summary in four letters.",
+      "say": "Read the suffix, predict the reaction; the target names the infection fence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Suffix grammar",
+          "points": [
+            "o: mouse; xi: chimeric; zu: humanised; u: human",
+            "Immunogenicity falls along the sequence",
+            "Premedication scaled to first dose risk",
+            "Antidrug antibodies erode response"
+          ]
+        },
+        "right": {
+          "title": "Target fences",
+          "points": [
+            "CD20: hepatitis B screening",
+            "Integrins: PML vigilance (natalizumab)",
+            "Complement C5: meningococcal vaccination",
+            "TNF: tuberculosis screening from earlier lessons"
+          ]
+        }
+      }
+    }
+  ]
+}
