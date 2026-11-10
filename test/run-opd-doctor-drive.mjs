@@ -11,11 +11,15 @@ import { fileURLToPath } from "node:url";
 const HERE = dirname(fileURLToPath(import.meta.url));
 const PORT = 8802, DBG = 9391, userDir = (process.env.CLAUDE_JOB_DIR || "/tmp") + "/opd-doctor-chrome";
 const BASE = `http://localhost:${PORT}/`;
-const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
+import { existsSync } from "node:fs";
+const CHROME = process.env.CHROME || ["/opt/pw-browsers/chromium", "/usr/bin/google-chrome", "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"].find((p) => existsSync(p));
+const CHROME_FLAGS = (process.env.CHROME_FLAGS != null ? process.env.CHROME_FLAGS : (process.platform === "linux" ? "--no-sandbox --disable-dev-shm-usage" : "")).split(" ").filter(Boolean);
 
 const serveProc = spawn("node", [join(HERE, "serve.mjs"), join(HERE, ".."), String(PORT)], { stdio: "ignore" });
 for (let i = 0; i < 30; i++) { try { await fetch(BASE); break; } catch { await sleep(200); } }
-const chrome = spawn(CHROME, ["--headless=new", `--remote-debugging-port=${DBG}`, `--user-data-dir=${userDir}`, "--no-first-run", "--disable-gpu", "--mute-audio", "--window-size=430,900"], { stdio: "ignore" });
+// A fresh profile every run: the workplace remembered in localStorage by the last run skips the chooser.
+try { (await import("node:fs")).rmSync(userDir, { recursive: true, force: true }); } catch {}
+const chrome = spawn(CHROME, [...CHROME_FLAGS, "--headless=new", `--remote-debugging-port=${DBG}`, `--user-data-dir=${userDir}`, "--no-first-run", "--disable-gpu", "--mute-audio", "--window-size=430,900"], { stdio: "ignore" });
 
 let msgId = 1; const pending = new Map(); let ws, sessionId;
 const consoleErrs = [];
@@ -79,7 +83,9 @@ try {
   await act("Emergency toggle", "emergency");
   await act("Pause / resume queue", "pause");
   await act("Doctor status chip", "docstatus");
-  await act("Add patient (prompts)", "add", 300);
+  await act("Add patient (check-in sheet)", "add", 300);
+  ok((await ev(`return !!document.getElementById("smdPatReg");`)) === true, "[sheet] Add patient opens the check-in sheet");
+  await ev(`var d=document.getElementById("smdPatReg"); if(d) d.remove(); return 1;`);
   await act("Import / refresh queue", "importopd", 400);
 
   // ---- profile sheet + clinic staff admin ----

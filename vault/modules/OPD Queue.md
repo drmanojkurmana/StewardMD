@@ -56,8 +56,101 @@ card's "Write NFC Tag" (`writeNfc`, Text + /opd?uid= deep link, read-back verifi
 - Tests: `test/smd-nfc.test.mjs`, `test/smd-nfc-ios.test.mjs`, `test/opd-nfc-barcode.test.mjs`, `test/run-nfc-ui.mjs`.
 - Decision: Decisions.md 2026-10-29 "iPhone Ni-Key NFC".
 
+## One device record per patient (fixed 2026-11-09)
+`localClinicId` (`queue.js`) keyed the on-device clinic record by TICKET id. A returning patient gets a new
+ticket each visit, so every visit made a new record with a second number (`SMD-<code>-<seq>`) and the
+earlier notes were not in front of the doctor. The key is now the PATIENT: the server's MR number on the
+ticket (`t.ghisPatientId`, format `SMD-<CLINIC>-NNNNN`, so two clinics cannot collide). Lookup order: this
+phone's map by ticket, the map by `mrn:<NUMBER>`, then a scan of the store by MR number (a record restored
+from backup is not in the map). A ticket with no MR number still gets its own record, numbered one past the
+highest in use (the old `length + 1` repeated a number after a delete). Kill switch
+`smd_opd_patient_key=0`. Test: `test/queue-patient-key.test.mjs`.
+- NOT done: records duplicated before this fix are not merged. `personal-clinic.js addPatient` still uses
+  `length + 1` when it mints a number itself (its own Add patient form). Both are in [[Roadmap]].
+
+## GOTCHA - `SMD_CLINIC.hasPassword()` is a Promise
+The storage card tested it with `!!`, which is always true, so "Back up to Drive now" and an On switch
+showed on a phone with no backup set up. `loadBackupState()` resolves it into `st.backup` (`hasPw`: null =
+not known yet, false = not set up) and `paintStorageCard()` swaps only `#qStorageCard`, because a full
+repaint of Settings wipes numbers the doctor has typed. The card now says "Not backed up", or the last
+backup time from `lastBackupAt()`.
+
+## The 2026-11 queue screen (flag `smd_opd_q2`, default OFF until the owner approves it on a phone)
+Plan and evidence: `design-plans/opd-queue-10-of-10.md`. Switch: OPD Queue > Settings > Queue screen, or
+`?q2=1`, or `localStorage.smd_opd_q2`. Off renders the earlier screen exactly.
+- Built around one decision: who is next, and am I running behind. A status sentence replaces the four stat
+  cards and the insight card; "With you now"; "Next" with one labelled primary button (Call in, then Start
+  consult); the rest as plain rows that open a sheet of worded actions, Remove last.
+- Every action is the SAME `data-q-act` command the earlier screen sends, so server calls, permissions and
+  audit are unchanged. New commands are presentation only: `row`, `row-close`, `endask`, `confirm-ok`,
+  `confirm-close`, `recall-ok`, `recall-close`, `snack-undo`, `q2toggle`.
+- No `window.confirm` / `prompt` on this screen: Remove asks in an in-app sheet; Did not come runs at once
+  with a 7 second Undo (it recalls with the same token); recall asks its reason in a sheet.
+- The swipe to end a consult is now a real `<button>`: a tap, Enter or a screen reader gets "End this
+  consult?". A mouse drag leaves a click behind; `swipeAt` ignores it for 500 ms.
+- The header's X CLOSES the queue (on the earlier screen the arrow means "switch workplace and forget it");
+  Switch and Pause are in the profile sheet. The header is titled with the clinic (`loadClinicName`).
+- Settings autosave on this screen (`onChange`, 600 ms, no repaint).
+- CSS: `.q2-*` at the end of `queue.css`, tokens only, amber via `--warn-container`. A unit test fails on a raw
+  hex in that block.
+- **Visual pass 2 (owner, 2026-11-10: "looks so bad", wants refined clinical OPD, emerald and white, no
+  gradients, no heavy shadows).** Radius is now 16 / 12 / 6 (`--r-card`, `--r-ctl`, `--r-tag`), an 8px grid,
+  buttons 48 high, row buttons and header controls 44, icons 20. Structure:
+  - a status STRIP (Running late tag, N waiting, Longest N min, Avg N min), not a sentence;
+  - the active card is about 200px (was 285): meta line, name, Open assessment plus a More button, and a
+    44px end-consult track. Open assessment is the ONLY filled button while a consult is on; the next
+    patient's button is `tonal` then and `primary` only when the room is empty (`nextV2(t, busy)`);
+  - waiting rows are a `<div>` in one bordered surface: token, name, priority tag, wait, a worded Start and
+    a named More. The place number shows from 480px wide; on a phone the row order says it;
+  - sheets (`.q2-over`) sit on the bottom edge on a phone and are centred from 901px; Remove is a
+    separate red-tinted block 16px below the other actions;
+  - settings controls are restyled only under `.q2` (48px inputs at 16px text so iOS does not zoom,
+    48 by 28 switches with a 44px hit area), so the earlier screen is untouched.
+  The owner's reference images also showed tabs (Queue / In consult / No-shows), a bell, search in the
+  header, patient age and sex, and a clinic switcher in the title. None were built: they are features or
+  data this screen does not have, and the brief said not to invent any.
+- **Visual pass 3 (owner, 2026-11-10: "still looks vibe coded", asked for the Appllama skills, a new font
+  and colours).** Supersedes pass 2's look; the structure and commands are the same.
+  - Palette and face are tokens on `.q2app` (the `.q-app` root and the gates get that class when the flag
+    is on), so every existing rule under it follows: profile and priority sheets, analytics, settings.
+    One accent, emerald `#0a7556` (dark `#3ecf9a`); one grey family, green-tinted; face Manrope (already
+    bundled for Home) with the Telugu and Devanagari faces behind it.
+  - Shape lock: surfaces 24, controls 14, tags and tokens 8. Buttons 50 high, row controls 44, rows 68.
+    Surfaces are flat white on a grey ground with NO outlines; lists use inset hairlines.
+  - The screen title is the queue's state ("4 waiting") with one line under it; the active patient is the
+    ONE solid emerald surface, with a white Open assessment button; the tab bar is plain icons and labels
+    on a blurred bar, no pill.
+  - Choices on the entry screens are neutral rows; only the button that commits is emerald. The inline
+    `style="background:..."` on the earlier gate buttons is overridden with `!important` under `.q2app`.
+  - Outcome haptics through `SMD_HAPTICS` (`hap()`): a tick when the swipe knob crosses the line, success
+    when a consult ends, warning on a confirmed Remove. Taps are already ticked app-wide by `haptics.js`.
+  - The Appllama MCP was not connected in the session, so no reference screens were pulled; the skill's
+    written laws were applied instead. Nothing was run in a simulator or on a phone.
+  - **Font changed again the same day (owner: "Apple like font").** `--q-sans` under `.q2app` is now
+    `-apple-system` first, so an iPhone draws San Francisco; Android has no San Francisco (Apple does not
+    license it for bundling), so it falls to the bundled Inter, then the Noto faces. Weights follow
+    Apple's: bold titles, semibold names and buttons, regular text. Manrope is no longer used here.
+    The headless tests run on Linux, so their screenshots show the Inter (Android) rendering.
+    The owner asked for an "apple-design" skill; none is installed in `.claude/skills`.
+- GOTCHA: token chips do not use `tabular-nums` (in some faces it opens a gap inside "A11").
+- GOTCHA: `.q-canvas` is a flex column that scrolls; its children shrink unless `flex-shrink: 0`, and a
+  wrapped status strip slid under the card below it.
+- Tests: `test/queue-q2-render.test.mjs`, browser `test/run-opd-q2-ui.mjs` on `test/opd-q2-harness.html`
+  (a STATEFUL fake of /api/queue; 320 and 390 wide, dark; asserts 44px targets and a name on every
+  control). Both run in `.github/workflows/opd-console-ui.yml`.
+- GOTCHA: `test/queue-staff-entry.test.mjs` greps for lines containing `st.clinicAdmin.code =`; write to a
+  local alias instead (see `loadClinicName`).
+- GOTCHA: `_render` is pure, so anything it draws must read the `state` it is given. `renderRowSheet`
+  first looked the ticket up in module state and drew nothing under a unit test.
+
+## Clinic set-up in the app (2026-11-09)
+"New clinic" opens a form in the queue (`_newClinicForm`, `createClinic`) and posts to the route the staff
+console's wizard already uses, `POST /api/queue/onboard/clinic` (native org plus one room with this doctor
+in it). It used to `window.open("https://stewardmd.in/opd")`. The staff helper text now tells staff to sign
+in through "I'm front-desk staff" in the app. Still a browser link: `addhosp` (Connect EMR wizard).
+
 ## Flags
-`smd_opd_queue`, `smd_opd_emr` (EMR overlay), `smd_opd_emr_write` (+ server `QUEUE_EMR_WRITE=1`),
+`smd_opd_q2` (the 2026-11 screen, default off), `smd_opd_patient_key` (default on), `smd_opd_queue`, `smd_opd_emr` (EMR overlay), `smd_opd_emr_write` (+ server `QUEUE_EMR_WRITE=1`),
 `smd_opd_maik` (localStorage-only kill switch, not in queue-flags DEFS), `smd_opd_wp` ("0" restores
 token-first routing), `smd_opd_storage_mode` (device | shared).
 

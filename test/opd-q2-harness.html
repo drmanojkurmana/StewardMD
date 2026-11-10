@@ -1,0 +1,84 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>OPD queue (2026-11 screen) harness</title>
+<link rel="stylesheet" href="/motion.css">
+<link rel="stylesheet" href="/queue.css">
+<style>
+/* What index.html gives every screen: border-box and the bundled icon font. */
+*{box-sizing:border-box}
+@font-face{font-family:"Material Symbols Rounded";src:url("/assets/fonts/material-symbols-rounded.woff2") format("woff2");font-weight:100 700;font-display:block}
+@font-face{font-family:"Inter Variable";src:url("/assets/fonts/inter-variable.woff2") format("woff2");font-weight:100 900}
+@font-face{font-family:"Manrope";src:url("/assets/fonts/manrope-latin.woff2") format("woff2");font-weight:200 800}
+@font-face{font-family:"Noto Sans Telugu";src:url("/assets/fonts/noto-sans-telugu.woff2") format("woff2");font-weight:100 900}
+html,body{margin:0;height:100%;background:#f7f9fb}
+</style>
+</head><body>
+<script>
+// A STATEFUL fake of /api/queue: Call, Start, Did not come, Remove and End really change the list, so the
+// test reads the screen after the server answered, not a canned reply.
+window.__errs = [];
+window.addEventListener("error", function (e) { window.__errs.push("error: " + (e && (e.message || e.error) || "?")); });
+window.addEventListener("unhandledrejection", function (e) { window.__errs.push("reject: " + (e && e.reason && (e.reason.message || e.reason) || "?")); });
+window.__toasts = []; window.toast = function (m) { window.__toasts.push(String(m)); };
+window.__confirms = 0; window.confirm = function () { window.__confirms++; return true; };
+window.__prompts = 0; window.prompt = function () { window.__prompts++; return "x"; };
+window.__opens = 0; window.open = function () { window.__opens++; return null; };
+window.OPDEMR = { openProfile: function (o) { window.__lastOpen = o; } };
+window.SMD_AUTH = { currentUser: { uid: "u1", email: "doctor@example.test", getIdToken: function () { return Promise.resolve("tok"); } } };
+// The device clinic store with NO backup set up: the storage card must say so.
+window.__hasPw = false;
+window.SMD_CLINIC = { hasPassword: function () { return Promise.resolve(window.__hasPw); }, lastBackupAt: function () { return 0; }, listPatients: function () { return []; }, getPatient: function () { return null; }, addPatient: function () { return "p1"; }, localStore: {} };
+
+var M = 60000, T0 = Date.now();
+var DB = {
+  orgs: [],
+  session: { id: "sess1", doctorName: "Dr Asha Rao", department: "General Medicine", status: "active", doctorStatus: "consulting", currentTicketId: "t3" },
+  config: { early: 5, prep: 2, noShowTimeoutMin: 10, defaultConsultMin: 12, etaLearning: true, smsEnabled: true, waEnabled: false },
+  tickets: [
+    { id: "t3", token: "A11", name: "Arjun Rao", status: "in_consultation", registeredAt: T0 - 30 * M, calledAt: T0 - 8 * M, consultStartAt: T0 - 5 * M, visitType: "new", priority: 0, ghisPatientId: "SMD-SUN-00011", mrnLast4: "0011" },
+    { id: "t2", token: "A12", name: "Sita Devi", status: "called", position: 1, registeredAt: T0 - 20 * M, calledAt: T0 - 2 * M, visitType: "followup", priority: 0, ghisPatientId: "SMD-SUN-00004", mrnLast4: "0004" },
+    { id: "t1", token: "A13", name: "Ramesh Kumar", status: "waiting", position: 2, registeredAt: T0 - 12 * M, etaStart: T0 + 10 * M, confidence: 82, visitType: "new", priority: 0, ghisPatientId: "SMD-SUN-00012", mrnLast4: "0012" },
+    { id: "t4", token: "A14", name: "Lakshmi Narasimhan", status: "waiting", position: 3, registeredAt: T0 - 44 * M, etaStart: T0 + 22 * M, confidence: 70, visitType: "new", priority: 1, priorityReason: "senior", mrnLast4: "" },
+    { id: "t5", token: "A15", name: "వెంకట సుబ్రహ్మణ్య శాస్త్రి గారు చిరంజీవి", status: "waiting", position: 4, registeredAt: T0 - 6 * M, etaStart: T0 + 34 * M, confidence: 48, visitType: "new", priority: 0, mrnLast4: "" }
+  ]
+};
+window.__DB = DB; window.__posts = [];
+function find(id) { return DB.tickets.filter(function (t) { return t.id === id; })[0]; }
+function reorder() { var n = 0; DB.tickets.forEach(function (t) { if (t.status === "registered" || t.status === "waiting" || t.status === "called") t.position = ++n; else t.position = 0; }); }
+window.fetch = function (url, opts) {
+  url = String(url); var method = (opts && opts.method) || "GET", body = {};
+  try { body = opts && opts.body ? JSON.parse(opts.body) : {}; } catch (e) {}
+  var path = url.replace(/^.*\/api\/queue/, "").split("?")[0];
+  if (method === "POST") window.__posts.push({ path: path, body: body });
+  function J(o) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(o); } }); }
+  var live = function () { return { ok: true, session: DB.session, tickets: DB.tickets.filter(function (t) { return t.status !== "cancelled" && t.status !== "completed" && t.status !== "no_show"; }) }; };
+  if (path === "/orgs") return J({ ok: true, orgs: DB.orgs });
+  if (path === "/onboard/clinic") { var o = { id: "org1", name: body.name, code: "SMD-SUN001", mode: "native" }; DB.orgs.push(o); return J({ ok: true, org: o, room: { id: "r1", name: body.roomName } }); }
+  if (path === "/my-room") { var l = live(); l.resolved = true; l.room = { name: "Consulting Room", number: "1", department: "General Medicine" }; return J(l); }
+  if (path === "/org") return J({ ok: true, org: { id: "org1", name: (DB.orgs[0] || {}).name || "Sunrise Clinic", code: "SMD-SUN001" }, departments: [] });
+  if (path === "/members") return J({ ok: true, members: [] });
+  if (path === "/list") return J(live());
+  if (path === "/config") { if (method === "POST") DB.config = body.config; return J({ ok: true, config: DB.config }); }
+  if (path === "/analytics") return J({ ok: true, analytics: { total: 5, waiting: 4, completed: 0, noShow: 0, cancelled: 0, avgWaitMin: 8, avgConsultMin: 11, etaAccuracyPct: 82, peakHours: [] } });
+  if (path === "/status") {
+    var t = find(body.ticketId); if (!t) return J({ ok: false, error: "not_found" });
+    t.status = body.status;
+    if (body.status === "called") t.calledAt = Date.now();
+    if (body.status === "no_show") t.noShowAt = Date.now();
+    if (body.status === "in_consultation") { t.consultStartAt = Date.now(); DB.session.currentTicketId = t.id; }
+    if (body.status === "waiting" && DB.session.currentTicketId === t.id) DB.session.currentTicketId = "";
+    reorder(); return J(live());
+  }
+  if (path === "/advance") { var c = find(DB.session.currentTicketId); if (c) { c.status = "completed"; c.consultEndAt = Date.now(); } DB.session.currentTicketId = ""; reorder(); return J(live()); }
+  if (path === "/no-show/recall") { var r = find(body.ticketId); if (!r || r.status !== "no_show") return J({ ok: false, error: "not_no_show" }); r.status = body.to || "waiting"; reorder(); return J(live()); }
+  if (path === "/no-show/list") return J({ ok: true, noShows: DB.tickets.filter(function (t) { return t.status === "no_show"; }).map(function (t) { return { id: t.id, token: t.token, name: t.name, noShowAt: t.noShowAt, recallableUntil: t.noShowAt + 4 * 3600e3 }; }) });
+  if (path === "/session/status") { if (body.status) DB.session.status = body.status; if (body.doctorStatus) DB.session.doctorStatus = body.doctorStatus; return J({ ok: true, session: DB.session }); }
+  if (path === "/priority") { var p = find(body.ticketId); if (p) { p.priority = body.reason === "clear" ? 0 : body.reason === "emergency" ? 2 : 1; p.priorityReason = body.reason; } return J(live()); }
+  return J({ ok: true });
+};
+window.__ready = false;
+</script>
+<script src="/queue-flags.js"></script>
+<script src="/patient-register.js"></script>
+<script src="/queue.js" onload="window.__ready = !!(window.QUEUE && window.QUEUE.open)"></script>
+</body></html>

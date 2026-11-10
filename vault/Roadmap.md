@@ -246,3 +246,20 @@ Gotcha: our levothyroxine record says 1.6 mcg/kg/day (the owner's example used 1
 - [ ] Device check on iPhone + Android: running `?v=` token, 360 px, dark mode, Copy/Print in the WebView.
 - [x] "No neonatal dose on file. Do not extrapolate." now applies to all users (flag ON by default, 2026-10-01).
 
+## OPD Queue to 10/10 (plan `design-plans/opd-queue-10-of-10.md`, started 2026-11-09)
+Done 2026-11-09: one record per patient, truthful backup card, clinic set-up in the app, the new queue
+screen behind `smd_opd_q2`, tests in CI. See [[OPD Queue]].
+- [ ] Owner: run one clinic session on a phone with the new layout on (Settings > Queue screen), then decide the default.
+- [ ] Native rebuild so the phone gets it (`build-www` > `cap sync` > rebuild); nothing was checked on a device.
+- [ ] Merge screen for records duplicated before the fix (same name plus same phone or MR number; doctor confirms each).
+- [ ] `personal-clinic.js addPatient`: same `length + 1` number reuse when it mints an ID itself.
+- [ ] Last-visit summary on top of the assessment for a returning patient (`opd-emr.js`).
+- [ ] Check-in sheet (`patient-register.js`) and assessment screen: visual audit, not done.
+- [ ] Patients as a view inside the queue (today the tab opens My Clinic).
+- [ ] Analytics: titles that state the question; the four stat figures moved off the queue live nowhere else yet.
+- [ ] Earlier screen still uses `window.confirm` / `prompt`; goes away when `smd_opd_q2` becomes the only screen.
+- [ ] `addhosp` still opens the Connect EMR wizard in a browser.
+- [ ] AI evals in CI: run `test/run-dx-audit.mjs` and a scored scribe-extraction set; fail on a drop.
+- [ ] Split `functions/api/queue/[[path]].js` (7,679 lines) and `opd-emr.js` (419 KB). Move-only, tests unchanged.
+- [ ] `PRODUCT.md` / `DESIGN.md` (impeccable init needs the owner).
+
