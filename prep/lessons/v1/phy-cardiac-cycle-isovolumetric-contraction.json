@@ -1,234 +1,234 @@
 {
- "v": 1,
- "module": "phy-cardiac-cycle",
- "subject": "physiology",
- "title": "Wiggers Diagram, Isovolumetric Phases, and PV Loops",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "The repeating sequence of coordinated electrical, mechanical, valvular, and volumetric events occurring during a single heartbeat is formulated in the classical **Wiggers diagram**. Spanning approximately zero point eight seconds at a resting heart rate of seventy-five beats per minute, the cycle divides into ventricular systole lasting zero point three seconds and ventricular diastole lasting zero point five seconds.",
-   "say": "The Wiggers diagram integrates electrical, pressure, and volume events during a heartbeat, dividing into 0.3 seconds of systole and 0.5 seconds of diastole.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/need-n57-phy-cardiac-cycle-isovolumetric-contraction.webp",
-    "alt": "Wiggers diagram aligning ECG, left ventricular and aortic pressures, volume, heart sounds and valve events in one cycle",
-    "caption": "Wiggers diagram aligning ECG, left ventricular and aortic pressures, volume, heart sounds and valve events in one cycle. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "Ventricular systole begins with **isovolumetric contraction**. As ventricular pressure rises above left atrial pressure, the mitral valve snaps shut, generating the first heart sound. Because left ventricular pressure remains below aortic diastolic pressure of eighty millimetres of mercury, the aortic valve remains closed. All four valves are closed; myocyte tension surges dramatically while ventricular volume remains strictly constant.",
-   "say": "Isovolumetric contraction begins when the mitral valve closes. With all valves shut, left ventricular pressure surges from zero to eighty while volume is unchanged.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "qrs",
-      "label": "Ventricular Depolarisation Triggers Myocardial Contraction"
-     },
-     {
-      "id": "mcl",
-      "label": "LV Pressure Exceeds Left Atrial Pressure: Mitral Valve Closes (S1)"
-     },
-     {
-      "id": "iso",
-      "label": "All Valves Closed: Pressure Rises Rapidly from 10 to 80 mmHg"
-     },
-     {
-      "id": "aopen",
-      "label": "LV Pressure Surpasses Aortic Pressure: Aortic Valve Opens"
-     }
-    ],
-    "edges": [
-     [
-      "qrs",
-      "mcl"
-     ],
-     [
-      "mcl",
-      "iso"
-     ],
-     [
-      "iso",
-      "aopen"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Once left ventricular pressure exceeds aortic diastolic pressure, the aortic valve opens, initiating the **rapid ejection** phase. During this first third of ejection, two-thirds of the stroke volume is propelled into the aorta under high pressure, peaking at one hundred and twenty millimetres of mercury. Reduced ejection follows as ventricular pressure and ejection velocity decline.",
-   "say": "Opening of the aortic valve initiates rapid ejection, discharging two-thirds of stroke volume into the aorta as pressure peaks at 120 millimetres of mercury.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Rapid Ejection Phase",
-     "points": [
-      "Spans first third of total ejection duration",
-      "Expels two-thirds of total stroke volume (~45 mL)",
-      "Left ventricular and aortic pressures peak at 120 mmHg",
-      "Aortic flow acceleration reaches maximum velocity"
-     ]
+  "v": 1,
+  "module": "phy-cardiac-cycle",
+  "subject": "physiology",
+  "title": "Wiggers Diagram, Isovolumetric Phases, and PV Loops",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The repeating sequence of coordinated electrical, mechanical, valvular, and volumetric events occurring during a single heartbeat is formulated in the classical **Wiggers diagram**. Spanning approximately zero point eight seconds at a resting heart rate of seventy-five beats per minute, the cycle divides into ventricular systole lasting zero point three seconds and ventricular diastole lasting zero point five seconds.",
+      "say": "The Wiggers diagram integrates electrical, pressure, and volume events during a heartbeat, dividing into 0.3 seconds of systole and 0.5 seconds of diastole.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n57-phy-cardiac-cycle-isovolumetric-contraction.webp",
+        "alt": "Wiggers diagram aligning ECG, left ventricular and aortic pressures, volume, heart sounds and valve events in one cycle",
+        "caption": "Wiggers diagram aligning ECG, left ventricular and aortic pressures, volume, heart sounds and valve events in one cycle. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
     },
-    "right": {
-     "title": "Reduced Ejection Phase",
-     "points": [
-      "Spans final two-thirds of ejection duration",
-      "Expels remaining one-third of stroke volume (~25 mL)",
-      "Ventricular repolarisation begins (T wave on ECG)",
-      "Outward momentum carries blood despite declining pressure"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "When ventricular pressure falls below aortic pressure, blood momentum reverses slightly, snapping the aortic valve closed to produce the second heart sound and the dicrotic incisure. The ventricle enters **isovolumetric relaxation**. With all valves closed, active myocyte relaxation causes left ventricular pressure to plummet precipitously from one hundred to zero while ventricular volume remains constant at end-systolic volume.",
-   "say": "Closing of the aortic valve initiates isovolumetric relaxation. With all valves shut, ventricular pressure plummets from 100 to near zero at constant volume.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "t",
-      "label": "Ventricular Repolarisation Initiates Active Myocyte Relaxation"
-     },
-     {
-      "id": "acl",
-      "label": "Aortic Pressure Exceeds LV Pressure: Aortic Valve Closes (S2)"
-     },
-     {
-      "id": "fall",
-      "label": "All Valves Closed: LV Pressure Drops Steeply from 100 to 5 mmHg"
-     },
-     {
-      "id": "mop",
-      "label": "LV Pressure Falls Below Atrial Pressure: Mitral Valve Opens"
-     }
-    ],
-    "edges": [
-     [
-      "t",
-      "acl"
-     ],
-     [
-      "acl",
-      "fall"
-     ],
-     [
-      "fall",
-      "mop"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Diastolic filling proceeds through three phases: rapid filling, diastasis, and atrial systole. When ventricular pressure falls below atrial pressure, the atrioventricular valves open, producing **rapid ventricular filling** that delivers seventy percent of ventricular volume. Diastasis accounts for ten percent, and atrial systole adds the final twenty percent of end-diastolic volume.",
-   "say": "When AV valves open, rapid ventricular filling delivers seventy percent of volume. Diastasis contributes ten percent, and atrial contraction delivers twenty percent.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Filling Phase",
-     "Proportion of Filling",
-     "Valve Status",
-     "Associated Heart Sound"
-    ],
-    "rows": [
-     [
-      "Rapid Passive Filling",
-      "70 percent of volume",
-      "Mitral / Tricuspid wide open",
-      "Physiological Third Heart Sound (S3)"
-     ],
-     [
-      "Diastasis (Reduced Filling)",
-      "10 percent of volume",
-      "Mitral open; flow passive",
-      "No normal sound"
-     ],
-     [
-      "Atrial Systole (Atrial Kick)",
-      "20 percent of volume",
-      "Mitral open; active atrial contraction",
-      "Pathological Fourth Heart Sound (S4)"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Plotting left ventricular pressure against volume across the cardiac cycle generates the **pressure-volume loop**. The rectangular loop displays four distinct corners: mitral valve closure at end-diastolic volume (point A), aortic valve opening (point B), aortic valve closure at end-systolic volume (point C), and mitral valve opening (point D).",
-   "say": "The pressure-volume loop plots pressure against volume. The width of the loop represents stroke volume, and the area inside reflects stroke work.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/aortic-regurgitation-fig1.webp",
-    "alt": "Left ventricular pressure-volume loop corners and volumetric shifts.",
-    "caption": "Left ventricular pressure-volume loop defining stroke volume and work phases. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "The horizontal width of the pressure-volume loop reflects the **stroke volume**, defined as end-diastolic volume minus end-systolic volume (normally one hundred and twenty minus fifty, equaling seventy millilitres). The total area enclosed within the perimeter of the loop represents the external mechanical stroke work performed by the left ventricle with each contraction.",
-   "say": "Stroke volume is the horizontal width of the loop, normally 70 millilitres. The area inside the loop measures the mechanical stroke work performed.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Increased Preload on PV Loop",
-     "points": [
-      "Shifts rightward boundary (point A) to larger volume",
-      "Increases end-diastolic volume without altering ESV",
-      "Widens the loop horizontally, increasing stroke volume",
-      "Increases total stroke work via Frank-Starling mechanism"
-     ]
+    {
+      "tx": "Ventricular systole begins with **isovolumetric contraction**. As ventricular pressure rises above left atrial pressure, the mitral valve snaps shut, generating the first heart sound. Because left ventricular pressure remains below aortic diastolic pressure of eighty millimetres of mercury, the aortic valve remains closed. All four valves are closed; myocyte tension surges dramatically while ventricular volume remains strictly constant.",
+      "say": "Isovolumetric contraction begins when the mitral valve closes. With all valves shut, left ventricular pressure surges from zero to eighty while volume is unchanged.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "qrs",
+            "label": "Ventricular Depolarisation Triggers Myocardial Contraction"
+          },
+          {
+            "id": "mcl",
+            "label": "LV Pressure Exceeds Left Atrial Pressure: Mitral Valve Closes (S1)"
+          },
+          {
+            "id": "iso",
+            "label": "All Valves Closed: Pressure Rises Rapidly from 10 to 80 mmHg"
+          },
+          {
+            "id": "aopen",
+            "label": "LV Pressure Surpasses Aortic Pressure: Aortic Valve Opens"
+          }
+        ],
+        "edges": [
+          [
+            "qrs",
+            "mcl"
+          ],
+          [
+            "mcl",
+            "iso"
+          ],
+          [
+            "iso",
+            "aopen"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Increased Afterload on PV Loop",
-     "points": [
-      "Increases peak systolic pressure (point C shifts upward)",
-      "Shortens the ejection phase and increases end-systolic volume",
-      "Narrows the loop horizontally, decreasing stroke volume",
-      "Increases myocardial oxygen consumption significantly"
-     ]
+    {
+      "tx": "Once left ventricular pressure exceeds aortic diastolic pressure, the aortic valve opens, initiating the **rapid ejection** phase. During this first third of ejection, two-thirds of the stroke volume is propelled into the aorta under high pressure, peaking at one hundred and twenty millimetres of mercury. Reduced ejection follows as ventricular pressure and ejection velocity decline.",
+      "say": "Opening of the aortic valve initiates rapid ejection, discharging two-thirds of stroke volume into the aorta as pressure peaks at 120 millimetres of mercury.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rapid Ejection Phase",
+          "points": [
+            "Spans first third of total ejection duration",
+            "Expels two-thirds of total stroke volume (~45 mL)",
+            "Left ventricular and aortic pressures peak at 120 mmHg",
+            "Aortic flow acceleration reaches maximum velocity"
+          ]
+        },
+        "right": {
+          "title": "Reduced Ejection Phase",
+          "points": [
+            "Spans final two-thirds of ejection duration",
+            "Expels remaining one-third of stroke volume (~25 mL)",
+            "Ventricular repolarisation begins (T wave on ECG)",
+            "Outward momentum carries blood despite declining pressure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When ventricular pressure falls below aortic pressure, blood momentum reverses slightly, snapping the aortic valve closed to produce the second heart sound and the dicrotic incisure. The ventricle enters **isovolumetric relaxation**. With all valves closed, active myocyte relaxation causes left ventricular pressure to plummet precipitously from one hundred to zero while ventricular volume remains constant at end-systolic volume.",
+      "say": "Closing of the aortic valve initiates isovolumetric relaxation. With all valves shut, ventricular pressure plummets from 100 to near zero at constant volume.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t",
+            "label": "Ventricular Repolarisation Initiates Active Myocyte Relaxation"
+          },
+          {
+            "id": "acl",
+            "label": "Aortic Pressure Exceeds LV Pressure: Aortic Valve Closes (S2)"
+          },
+          {
+            "id": "fall",
+            "label": "All Valves Closed: LV Pressure Drops Steeply from 100 to 5 mmHg"
+          },
+          {
+            "id": "mop",
+            "label": "LV Pressure Falls Below Atrial Pressure: Mitral Valve Opens"
+          }
+        ],
+        "edges": [
+          [
+            "t",
+            "acl"
+          ],
+          [
+            "acl",
+            "fall"
+          ],
+          [
+            "fall",
+            "mop"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Diastolic filling proceeds through three phases: rapid filling, diastasis, and atrial systole. When ventricular pressure falls below atrial pressure, the atrioventricular valves open, producing **rapid ventricular filling** that delivers seventy percent of ventricular volume. Diastasis accounts for ten percent, and atrial systole adds the final twenty percent of end-diastolic volume.",
+      "say": "When AV valves open, rapid ventricular filling delivers seventy percent of volume. Diastasis contributes ten percent, and atrial contraction delivers twenty percent.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Filling Phase",
+          "Proportion of Filling",
+          "Valve Status",
+          "Associated Heart Sound"
+        ],
+        "rows": [
+          [
+            "Rapid Passive Filling",
+            "70 percent of volume",
+            "Mitral / Tricuspid wide open",
+            "Physiological Third Heart Sound (S3)"
+          ],
+          [
+            "Diastasis (Reduced Filling)",
+            "10 percent of volume",
+            "Mitral open; flow passive",
+            "No normal sound"
+          ],
+          [
+            "Atrial Systole (Atrial Kick)",
+            "20 percent of volume",
+            "Mitral open; active atrial contraction",
+            "Pathological Fourth Heart Sound (S4)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Plotting left ventricular pressure against volume across the cardiac cycle generates the **pressure-volume loop**. The rectangular loop displays four distinct corners: mitral valve closure at end-diastolic volume (point A), aortic valve opening (point B), aortic valve closure at end-systolic volume (point C), and mitral valve opening (point D).",
+      "say": "The pressure-volume loop plots pressure against volume. The width of the loop represents stroke volume, and the area inside reflects stroke work.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/aortic-regurgitation-fig1.webp",
+        "alt": "Left ventricular pressure-volume loop corners and volumetric shifts.",
+        "caption": "Left ventricular pressure-volume loop defining stroke volume and work phases. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "The horizontal width of the pressure-volume loop reflects the **stroke volume**, defined as end-diastolic volume minus end-systolic volume (normally one hundred and twenty minus fifty, equaling seventy millilitres). The total area enclosed within the perimeter of the loop represents the external mechanical stroke work performed by the left ventricle with each contraction.",
+      "say": "Stroke volume is the horizontal width of the loop, normally 70 millilitres. The area inside the loop measures the mechanical stroke work performed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Increased Preload on PV Loop",
+          "points": [
+            "Shifts rightward boundary (point A) to larger volume",
+            "Increases end-diastolic volume without altering ESV",
+            "Widens the loop horizontally, increasing stroke volume",
+            "Increases total stroke work via Frank-Starling mechanism"
+          ]
+        },
+        "right": {
+          "title": "Increased Afterload on PV Loop",
+          "points": [
+            "Increases peak systolic pressure (point C shifts upward)",
+            "Shortens the ejection phase and increases end-systolic volume",
+            "Narrows the loop horizontally, decreasing stroke volume",
+            "Increases myocardial oxygen consumption significantly"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Shifts in the end-systolic pressure-volume relationship (ESPVR) reflect myocardial inotropy. Administration of positive inotropic agents like adrenaline steepens the slope of the **end-systolic elastance** line, shifting the left border of the loop leftward to a smaller end-systolic volume and increasing both stroke volume and ejection fraction.",
+      "say": "Positive inotropic agents steepen the end-systolic elastance slope, reducing end-systolic volume and increasing stroke volume and ejection fraction.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "b1",
+            "label": "Beta-1 Adrenergic Stimulation Raises Cytosolic Calcium Transient"
+          },
+          {
+            "id": "espvr",
+            "label": "Steepens Slope of End-Systolic Pressure-Volume Relationship"
+          },
+          {
+            "id": "esv",
+            "label": "Reduces End-Systolic Volume from 50 mL Down to 30 mL"
+          },
+          {
+            "id": "ef",
+            "label": "Widens PV Loop Horizontally, Raising Ejection Fraction Above 70%"
+          }
+        ],
+        "edges": [
+          [
+            "b1",
+            "espvr"
+          ],
+          [
+            "espvr",
+            "esv"
+          ],
+          [
+            "esv",
+            "ef"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Shifts in the end-systolic pressure-volume relationship (ESPVR) reflect myocardial inotropy. Administration of positive inotropic agents like adrenaline steepens the slope of the **end-systolic elastance** line, shifting the left border of the loop leftward to a smaller end-systolic volume and increasing both stroke volume and ejection fraction.",
-   "say": "Positive inotropic agents steepen the end-systolic elastance slope, reducing end-systolic volume and increasing stroke volume and ejection fraction.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "b1",
-      "label": "Beta-1 Adrenergic Stimulation Raises Cytosolic Calcium Transient"
-     },
-     {
-      "id": "espvr",
-      "label": "Steepens Slope of End-Systolic Pressure-Volume Relationship"
-     },
-     {
-      "id": "esv",
-      "label": "Reduces End-Systolic Volume from 50 mL Down to 30 mL"
-     },
-     {
-      "id": "ef",
-      "label": "Widens PV Loop Horizontally, Raising Ejection Fraction Above 70%"
-     }
-    ],
-    "edges": [
-     [
-      "b1",
-      "espvr"
-     ],
-     [
-      "espvr",
-      "esv"
-     ],
-     [
-      "esv",
-      "ef"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [],
- "gen": "AI",
- "src": []
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
 }

@@ -1,251 +1,251 @@
 {
- "v": 1,
- "gen": "AI",
- "module": "ana-peritoneum",
- "subject": "anatomy",
- "title": "Peritoneal Spaces: Morison Pouch, Pelvic Pouches, and Gutters",
- "minutes": 8,
- "steps": [
-  {
-   "tx": "The complex embryological rotations of the gut divide the peritoneal cavity into interconnecting recesses and gutters. The **Morison pouch** (hepatorenal recess) is the lowest gravity-dependent space of the upper peritoneal cavity in a supine patient, situated between the visceral surface of the right hepatic lobe and the anterior surface of the right kidney.",
-   "say": "Gut rotations divide the peritoneal cavity into interconnected recesses and gutters. Morison pouch between the liver and right kidney is the lowest space in a supine patient, collecting dependent fluid.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/need-n17-ana-peritoneum-morison-pouch.webp",
-    "alt": "Morison hepatorenal pouch between liver and right kidney as the dependent upper abdominal recess in a supine patient",
-    "caption": "Morison hepatorenal pouch between liver and right kidney as the dependent upper abdominal recess in a supine patient. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "In the erect posture, the lowest point of the entire peritoneal cavity in females is the **rectouterine pouch** of Douglas, situated between the posterior wall of the uterus and the anterior wall of the rectum. In males, the corresponding dependent pelvic space is the rectovesical pouch between rectum and urinary bladder.",
-   "say": "In the standing female, the lowest point of the peritoneal cavity is the rectouterine pouch of Douglas. In males, the corresponding dependent pelvic pocket is the rectovesical pouch.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Female: Pouch of Douglas",
-     "points": [
-      "Between posterior uterus and rectum",
-      "Separated from posterior vaginal fornix by 1.5 cm",
-      "Accessible to culdocentesis through posterior fornix",
-      "Common site for pelvic abscess or endometriosis"
-     ]
+  "v": 1,
+  "gen": "AI",
+  "module": "ana-peritoneum",
+  "subject": "anatomy",
+  "title": "Peritoneal Spaces: Morison Pouch, Pelvic Pouches, and Gutters",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "The complex embryological rotations of the gut divide the peritoneal cavity into interconnecting recesses and gutters. The **Morison pouch** (hepatorenal recess) is the lowest gravity-dependent space of the upper peritoneal cavity in a supine patient, situated between the visceral surface of the right hepatic lobe and the anterior surface of the right kidney.",
+      "say": "Gut rotations divide the peritoneal cavity into interconnected recesses and gutters. Morison pouch between the liver and right kidney is the lowest space in a supine patient, collecting dependent fluid.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n17-ana-peritoneum-morison-pouch.webp",
+        "alt": "Morison hepatorenal pouch between liver and right kidney as the dependent upper abdominal recess in a supine patient",
+        "caption": "Morison hepatorenal pouch between liver and right kidney as the dependent upper abdominal recess in a supine patient. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
     },
-    "right": {
-     "title": "Male: Rectovesical Pouch",
-     "points": [
-      "Between bladder/seminal vesicles and rectum",
-      "Lies 7.5 cm from the anal verge",
-      "Palpable on digital rectal examination",
-      "Accumulates infected exudate or malignant deposits"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Aspiration of fluid from the rectouterine pouch via the posterior vaginal fornix is termed **culdocentesis**. A needle advanced through the posterior fornix directly punctures the pouch of Douglas: non-clotting blood confirms ruptured ectopic pregnancy, purulent fluid confirms pelvic inflammatory disease, and malignant ascites confirms ovarian carcinomatosis.",
-   "say": "Aspiration of the rectouterine pouch through the posterior vaginal fornix is called culdocentesis. Obtaining non-clotting blood confirms a ruptured ectopic pregnancy, while pus indicates pelvic peritonitis.",
-   "vis": {
-    "kind": "flow",
-    "title": "Diagnostic Algorithm of Culdocentesis",
-    "nodes": [
-     {
-      "id": "puncture",
-      "label": "Needle Puncture Through Posterior Vaginal Fornix"
-     },
-     {
-      "id": "blood",
-      "label": "Non-clotting Dark Blood: Ruptured Ectopic Pregnancy"
-     },
-     {
-      "id": "pus",
-      "label": "Turbid Purulent Exudate: Pelvic Abscess / Tubo-ovarian Sepsis"
-     },
-     {
-      "id": "clear",
-      "label": "Dry Tap: Inconclusive; Mandates Diagnostic Laparoscopy"
-     }
-    ],
-    "edges": [
-     [
-      "puncture",
-      "blood"
-     ],
-     [
-      "puncture",
-      "pus"
-     ],
-     [
-      "puncture",
-      "clear"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The small intestine is anchored to the posterior abdominal wall by the **mesentery** (mesentery proper), a fan-shaped double peritoneal fold. Its root measures fifteen centimetres in length, extending obliquely downwards and to the right from the duodenojejunal flexure (L2) to the upper border of the right sacroiliac joint.",
-   "say": "The small intestine is suspended by the fan-shaped mesentery. Its root spans fifteen centimeters obliquely from the duodenojejunal flexure at L2 to the right sacroiliac joint.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Mesentery Feature",
-     "Anatomical Characteristic",
-     "Dimensions",
-     "Contained Structures"
-    ],
-    "rows": [
-     [
-      "Root of Mesentery",
-      "Oblique line from L2 to right SI joint",
-      "15 cm (6 inches) long",
-      "Superior mesenteric vessels, lymphatics, nerves"
-     ],
-     [
-      "Intestinal Border",
-      "Convoluted ruffled attachment to gut",
-      "6 meters (20 feet) long",
-      "Jejunum and ileum, mesenteric arcades"
-     ],
-     [
-      "Transverse Mesocolon",
-      "Horizontal fold across anterior pancreas",
-      "Spans between hepatic/splenic flexures",
-      "Middle colic vessels, lymph nodes"
-     ],
-     [
-      "Sigmoid Mesocolon",
-      "Inverted V-shaped pelvic attachment",
-      "Apex at bifurcation of left common iliac",
-      "Sigmoid vessels and superior rectal artery"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Lateral to the ascending and descending colons lie the longitudinal **paracolic gutters**. The right paracolic gutter is deeper and continuous superiorly with the hepatorenal pouch and subphrenic spaces, while the left paracolic gutter is separated from the left subphrenic space by the phrenicocolic ligament (sustentaculum lienis).",
-   "say": "Lateral to the colons lie the paracolic gutters. The right gutter communicates freely with the hepatorenal space, while the left is blocked from the spleen by the phrenicocolic ligament.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Right Paracolic Gutter",
-     "points": [
-      "Wider and deeper than left gutter",
-      "Direct conduit from appendix to Morison pouch",
-      "Transmits appendiceal pus upward to subphrenic space",
-      "Uninterrupted by transverse peritoneal folds"
-     ]
+    {
+      "tx": "In the erect posture, the lowest point of the entire peritoneal cavity in females is the **rectouterine pouch** of Douglas, situated between the posterior wall of the uterus and the anterior wall of the rectum. In males, the corresponding dependent pelvic space is the rectovesical pouch between rectum and urinary bladder.",
+      "say": "In the standing female, the lowest point of the peritoneal cavity is the rectouterine pouch of Douglas. In males, the corresponding dependent pelvic pocket is the rectovesical pouch.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Female: Pouch of Douglas",
+          "points": [
+            "Between posterior uterus and rectum",
+            "Separated from posterior vaginal fornix by 1.5 cm",
+            "Accessible to culdocentesis through posterior fornix",
+            "Common site for pelvic abscess or endometriosis"
+          ]
+        },
+        "right": {
+          "title": "Male: Rectovesical Pouch",
+          "points": [
+            "Between bladder/seminal vesicles and rectum",
+            "Lies 7.5 cm from the anal verge",
+            "Palpable on digital rectal examination",
+            "Accumulates infected exudate or malignant deposits"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Left Paracolic Gutter",
-     "points": [
-      "Narrower and shallower than right gutter",
-      "Blocked superiorly by phrenicocolic ligament",
-      "Prevents pelvic infection from reaching spleen",
-      "Conveys fluid primarily downward toward pelvis"
-     ]
+    {
+      "tx": "Aspiration of fluid from the rectouterine pouch via the posterior vaginal fornix is termed **culdocentesis**. A needle advanced through the posterior fornix directly punctures the pouch of Douglas: non-clotting blood confirms ruptured ectopic pregnancy, purulent fluid confirms pelvic inflammatory disease, and malignant ascites confirms ovarian carcinomatosis.",
+      "say": "Aspiration of the rectouterine pouch through the posterior vaginal fornix is called culdocentesis. Obtaining non-clotting blood confirms a ruptured ectopic pregnancy, while pus indicates pelvic peritonitis.",
+      "vis": {
+        "kind": "flow",
+        "title": "Diagnostic Algorithm of Culdocentesis",
+        "nodes": [
+          {
+            "id": "puncture",
+            "label": "Needle Puncture Through Posterior Vaginal Fornix"
+          },
+          {
+            "id": "blood",
+            "label": "Non-clotting Dark Blood: Ruptured Ectopic Pregnancy"
+          },
+          {
+            "id": "pus",
+            "label": "Turbid Purulent Exudate: Pelvic Abscess / Tubo-ovarian Sepsis"
+          },
+          {
+            "id": "clear",
+            "label": "Dry Tap: Inconclusive; Mandates Diagnostic Laparoscopy"
+          }
+        ],
+        "edges": [
+          [
+            "puncture",
+            "blood"
+          ],
+          [
+            "puncture",
+            "pus"
+          ],
+          [
+            "puncture",
+            "clear"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The small intestine is anchored to the posterior abdominal wall by the **mesentery** (mesentery proper), a fan-shaped double peritoneal fold. Its root measures fifteen centimetres in length, extending obliquely downwards and to the right from the duodenojejunal flexure (L2) to the upper border of the right sacroiliac joint.",
+      "say": "The small intestine is suspended by the fan-shaped mesentery. Its root spans fifteen centimeters obliquely from the duodenojejunal flexure at L2 to the right sacroiliac joint.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Mesentery Feature",
+          "Anatomical Characteristic",
+          "Dimensions",
+          "Contained Structures"
+        ],
+        "rows": [
+          [
+            "Root of Mesentery",
+            "Oblique line from L2 to right SI joint",
+            "15 cm (6 inches) long",
+            "Superior mesenteric vessels, lymphatics, nerves"
+          ],
+          [
+            "Intestinal Border",
+            "Convoluted ruffled attachment to gut",
+            "6 meters (20 feet) long",
+            "Jejunum and ileum, mesenteric arcades"
+          ],
+          [
+            "Transverse Mesocolon",
+            "Horizontal fold across anterior pancreas",
+            "Spans between hepatic/splenic flexures",
+            "Middle colic vessels, lymph nodes"
+          ],
+          [
+            "Sigmoid Mesocolon",
+            "Inverted V-shaped pelvic attachment",
+            "Apex at bifurcation of left common iliac",
+            "Sigmoid vessels and superior rectal artery"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Lateral to the ascending and descending colons lie the longitudinal **paracolic gutters**. The right paracolic gutter is deeper and continuous superiorly with the hepatorenal pouch and subphrenic spaces, while the left paracolic gutter is separated from the left subphrenic space by the phrenicocolic ligament (sustentaculum lienis).",
+      "say": "Lateral to the colons lie the paracolic gutters. The right gutter communicates freely with the hepatorenal space, while the left is blocked from the spleen by the phrenicocolic ligament.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Right Paracolic Gutter",
+          "points": [
+            "Wider and deeper than left gutter",
+            "Direct conduit from appendix to Morison pouch",
+            "Transmits appendiceal pus upward to subphrenic space",
+            "Uninterrupted by transverse peritoneal folds"
+          ]
+        },
+        "right": {
+          "title": "Left Paracolic Gutter",
+          "points": [
+            "Narrower and shallower than right gutter",
+            "Blocked superiorly by phrenicocolic ligament",
+            "Prevents pelvic infection from reaching spleen",
+            "Conveys fluid primarily downward toward pelvis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The spaces between the diaphragm and the superior surface of the liver are the **subphrenic spaces**, partitioned into right and left spaces by the falciform ligament. Subphrenic abscesses typically develop following gastric or duodenal ulcer perforation, presenting with high spiking fevers, right shoulder tip pain, and diaphragmatic immobility.",
+      "say": "The subphrenic spaces lie between the diaphragm and liver, divided by the falciform ligament. Subphrenic abscesses follow perforated ulcers, presenting with fever and referred shoulder pain.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-spc-indirect-inguinal-hernial-sac.webp",
+        "alt": "Peritoneal reflections and compartments illustrating subphrenic and paracolic anatomy",
+        "caption": "Anatomy of the subphrenic spaces and peritoneal compartmentalization of peritonitis. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Organs covered only on their anterior surfaces by parietal peritoneum are classified as **retroperitoneal organs**. Easily remembered by the mnemonic SAD PUCKER, these comprise: Suprarenal glands, Aorta/IVC, Duodenum (second and third parts), Pancreas (except tail), Ureters, Colon (ascending and descending), Kidneys, Esophagus, and Rectum.",
+      "say": "Organs covered only anteriorly by peritoneum are retroperitoneal, recalled by the mnemonic SAD PUCKER: suprarenals, aorta, duodenum, pancreas, ureters, colon, kidneys, esophagus, and rectum.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Mnemonic Letter",
+          "Retroperitoneal Organ",
+          "Specific Retroperitoneal Parts",
+          "Surgical Signpost"
+        ],
+        "rows": [
+          [
+            "S",
+            "Suprarenal (adrenal) glands",
+            "Entirety of both glands",
+            "Capped above kidneys in Gerota fascia"
+          ],
+          [
+            "A",
+            "Aorta and Inferior Vena Cava",
+            "Abdominal great vessels",
+            "Directly anterior to lumbar vertebrae"
+          ],
+          [
+            "D",
+            "Duodenum",
+            "Second, third, and fourth parts",
+            "Kocher mobilization frees from retroperitoneum"
+          ],
+          [
+            "P",
+            "Pancreas",
+            "Head, neck, and body (tail is intraperitoneal)",
+            "Traversed by splenic vessels in retroperitoneum"
+          ],
+          [
+            "U",
+            "Ureters",
+            "Abdominal segments",
+            "Cross common or external iliac bifurcation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Retroperitoneal organ injuries produce insidious clinical signs because extravasated blood and digestive enzymes are sequestered behind the peritoneum, delaying overt signs of **peritonitis**. Traumatic duodenal or pancreatic ruptures initially cause back pain rather than acute anterior guarding, demanding urgent contrast-enhanced CT scanning.",
+      "say": "Retroperitoneal injuries produce subtle early signs because extravasated fluid is trapped behind the peritoneum. Pancreatic or duodenal rupture causes back pain rather than anterior guarding.",
+      "vis": {
+        "kind": "flow",
+        "title": "Diagnostic Challenge of Retroperitoneal Trauma",
+        "nodes": [
+          {
+            "id": "blunt",
+            "label": "Blunt Compression Trauma (Handlebar or Seatbelt Impact)"
+          },
+          {
+            "id": "rupture",
+            "label": "Retroperitoneal Rupture of Duodenum or Pancreatic Neck"
+          },
+          {
+            "id": "delayed",
+            "label": "Absence of Acute Anterior Abdominal Peritonism"
+          },
+          {
+            "id": "ct",
+            "label": "Immediate Contrast-enhanced CT Identifies Retroperitoneal Gas"
+          }
+        ],
+        "edges": [
+          [
+            "blunt",
+            "rupture"
+          ],
+          [
+            "rupture",
+            "delayed"
+          ],
+          [
+            "delayed",
+            "ct"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "The spaces between the diaphragm and the superior surface of the liver are the **subphrenic spaces**, partitioned into right and left spaces by the falciform ligament. Subphrenic abscesses typically develop following gastric or duodenal ulcer perforation, presenting with high spiking fevers, right shoulder tip pain, and diaphragmatic immobility.",
-   "say": "The subphrenic spaces lie between the diaphragm and liver, divided by the falciform ligament. Subphrenic abscesses follow perforated ulcers, presenting with fever and referred shoulder pain.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/practicals/surg-spc-indirect-inguinal-hernial-sac.webp",
-    "alt": "Peritoneal reflections and compartments illustrating subphrenic and paracolic anatomy",
-    "caption": "Anatomy of the subphrenic spaces and peritoneal compartmentalization of peritonitis. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Organs covered only on their anterior surfaces by parietal peritoneum are classified as **retroperitoneal organs**. Easily remembered by the mnemonic SAD PUCKER, these comprise: Suprarenal glands, Aorta/IVC, Duodenum (second and third parts), Pancreas (except tail), Ureters, Colon (ascending and descending), Kidneys, Esophagus, and Rectum.",
-   "say": "Organs covered only anteriorly by peritoneum are retroperitoneal, recalled by the mnemonic SAD PUCKER: suprarenals, aorta, duodenum, pancreas, ureters, colon, kidneys, esophagus, and rectum.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Mnemonic Letter",
-     "Retroperitoneal Organ",
-     "Specific Retroperitoneal Parts",
-     "Surgical Signpost"
-    ],
-    "rows": [
-     [
-      "S",
-      "Suprarenal (adrenal) glands",
-      "Entirety of both glands",
-      "Capped above kidneys in Gerota fascia"
-     ],
-     [
-      "A",
-      "Aorta and Inferior Vena Cava",
-      "Abdominal great vessels",
-      "Directly anterior to lumbar vertebrae"
-     ],
-     [
-      "D",
-      "Duodenum",
-      "Second, third, and fourth parts",
-      "Kocher mobilization frees from retroperitoneum"
-     ],
-     [
-      "P",
-      "Pancreas",
-      "Head, neck, and body (tail is intraperitoneal)",
-      "Traversed by splenic vessels in retroperitoneum"
-     ],
-     [
-      "U",
-      "Ureters",
-      "Abdominal segments",
-      "Cross common or external iliac bifurcation"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Retroperitoneal organ injuries produce insidious clinical signs because extravasated blood and digestive enzymes are sequestered behind the peritoneum, delaying overt signs of **peritonitis**. Traumatic duodenal or pancreatic ruptures initially cause back pain rather than acute anterior guarding, demanding urgent contrast-enhanced CT scanning.",
-   "say": "Retroperitoneal injuries produce subtle early signs because extravasated fluid is trapped behind the peritoneum. Pancreatic or duodenal rupture causes back pain rather than anterior guarding.",
-   "vis": {
-    "kind": "flow",
-    "title": "Diagnostic Challenge of Retroperitoneal Trauma",
-    "nodes": [
-     {
-      "id": "blunt",
-      "label": "Blunt Compression Trauma (Handlebar or Seatbelt Impact)"
-     },
-     {
-      "id": "rupture",
-      "label": "Retroperitoneal Rupture of Duodenum or Pancreatic Neck"
-     },
-     {
-      "id": "delayed",
-      "label": "Absence of Acute Anterior Abdominal Peritonism"
-     },
-     {
-      "id": "ct",
-      "label": "Immediate Contrast-enhanced CT Identifies Retroperitoneal Gas"
-     }
-    ],
-    "edges": [
-     [
-      "blunt",
-      "rupture"
-     ],
-     [
-      "rupture",
-      "delayed"
-     ],
-     [
-      "delayed",
-      "ct"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [
-  "4b202811-14cb-4088-b18b-e3d1b5dea501",
-  "b92e71f8-4654-48a5-a23d-c3d939e40ff6",
-  "406fd27f-5c84-4863-a5e4-0cb1388ca73c"
- ]
+  ],
+  "quiz": [
+    "4b202811-14cb-4088-b18b-e3d1b5dea501",
+    "b92e71f8-4654-48a5-a23d-c3d939e40ff6",
+    "406fd27f-5c84-4863-a5e4-0cb1388ca73c"
+  ]
 }

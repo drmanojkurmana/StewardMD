@@ -1,255 +1,266 @@
 {
- "v": 1,
- "id": "ent-nasopharynx-juvenile-nasopharyngeal-angiofibroma",
- "subject": "ent",
- "module": "ent-nasopharynx",
- "title": "Juvenile Nasopharyngeal Angiofibroma",
- "minutes": 7,
- "gen": "AI",
- "steps": [
-  {
-   "tx": "**Juvenile nasopharyngeal angiofibroma** is a benign but highly vascular tumour of adolescent males that arises near the sphenopalatine foramen and expands into nose, sinuses, orbit and cranial cavity by pressure. Recurrent severe epistaxis with progressive unilateral nasal obstruction in a teenage boy is the classic presentation. Despite benign histology, local destruction and operative bleeding make it one of the most demanding tumours in rhinology.",
-   "say": "A vascular tumour of teenage boys gives recurrent severe nosebleeds with one sided blockage. Origin near the sphenopalatine opening explains expansion into sinuses and orbit. Operative bleeding risk makes resection demanding despite benign histology.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/nasopharyngeal-tumours-fig1.webp",
-    "alt": "Diagram of nasopharyngeal tumour spread patterns from the nasopharynx to adjacent spaces.",
-    "caption": "Nasopharyngeal tumour spread patterns. Illustration: StewardMD original.",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "The tumour grows from the posterolateral nasal wall at the **sphenopalatine foramen**, fed initially by the sphenopalatine branch of maxillary artery and later recruiting internal carotid branches as it enlarges. Anterior bowing of the posterior maxillary wall on computed tomography is the Holman Miller sign, a radiological classic. Extension routes include pterygopalatine fossa, infratemporal fossa, orbit through inferior orbital fissure and middle cranial fossa through eroded skull base.",
-   "say": "Growth starts at the sphenopalatine opening with maxillary artery supply initially. Forward bowing of the back maxillary wall gives the classic radiological sign. Enlargement involves carotid branches and reaches orbit with skull base erosion.",
-   "vis": {
-    "kind": "table",
-    "title": "Angiofibroma extension routes",
-    "cols": [
-     "Route",
-     "Structure reached"
-    ],
-    "rows": [
-     [
-      "Pterygopalatine fossa",
-      "Maxillary vessels and nerves"
-     ],
-     [
-      "Inferior orbital fissure",
-      "Orbit with proptosis"
-     ],
-     [
-      "Skull base erosion",
-      "Middle cranial fossa"
-     ],
-     [
-      "Sphenoid sinus",
-      "Cavernous region risk"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The blush on this angiogram begins at a fixed point on the posterolateral nasal wall. The tumour arises at the **sphenopalatine foramen** and is fed first by the sphenopalatine branch of the maxillary artery. Internal carotid branches are recruited only later, as the mass enlarges. Anterior bowing of the posterior maxillary wall on computed tomography is the Holman Miller sign. From the foramen, spread can reach the pterygopalatine fossa, the infratemporal fossa, the orbit via the inferior orbital fissure, and the middle cranial fossa through an eroded skull base.",
-   "say": "Juvenile nasopharyngeal angiofibroma starts at the sphenopalatine foramen and is supplied first by the sphenopalatine branch of the maxillary artery. Carotid branches join only as it enlarges. Forward bowing of the posterior maxillary wall is the Holman Miller sign, and the mass may reach orbit and middle cranial fossa.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/need-m65-ent-nasopharynx-juvenile-nasopharyngeal-angiofibroma.webp",
-    "alt": "A lateral angiogram shows a dense nasopharyngeal blush supplied by the sphenopalatine artery.",
-    "caption": "Contrast outlines a juvenile nasopharyngeal angiofibroma through the sphenopalatine branch of the maxillary artery. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "**Holman-Miller sign** deserves separate memory because it converts anatomy into a one line examination answer: anterior displacement of the posterior wall of the maxillary sinus by an expanding pterygopalatine mass. Computed tomography shows bone remodelling and the sign, while magnetic resonance shows flow voids within the vascular mass and separates tumour from obstructed sinus secretions. Angiography maps feeders and prepares embolisation in the same sitting.",
-   "say": "Forward displacement of the back maxillary wall is the named radiological sign here. Bone scanning shows remodelling while resonance imaging separates tumour from trapped secretions. Vessel mapping prepares embolisation in the same sitting.",
-   "vis": null
-  },
-  {
-   "tx": "**Fisch staging** grades angiofibroma by extension, from tumour limited to nose and nasopharynx through sinus and pterygopalatine involvement to infratemporal, orbital and intracranial spread. Stage decides approach, embolisation need and consent for blood loss and recurrence. Limited tumours suit endoscopic resection, while intracranial extradural disease may still be resected and intradural residual sometimes observes or receives radiosurgery rather than heroic clearance.",
-   "say": "Staging by extension decides approach, embolisation need and consent discussions. Limited tumours suit endoscopic removal through the nose in modern practice. Intracranial residue sometimes needs observation or focused radiation instead of heroic clearance.",
-   "vis": {
-    "kind": "flow",
-    "title": "Angiofibroma staging logic",
-    "nodes": [
-     {
-      "id": "lim",
-      "label": "Limited to nose and nasopharynx"
-     },
-     {
-      "id": "sin",
-      "label": "Sinus and pterygopalatine spread"
-     },
-     {
-      "id": "inf",
-      "label": "Infratemporal and orbital spread"
-     },
-     {
-      "id": "ic",
-      "label": "Intracranial extension"
-     }
-    ],
-    "edges": [
-     [
-      "lim",
-      "sin"
-     ],
-     [
-      "sin",
-      "inf"
-     ],
-     [
-      "inf",
-      "ic"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Biopsy is contraindicated in suspected angiofibroma because clinic sampling of this vascular mass can provoke torrential bleeding without diagnostic need. Diagnosis rests on demographic, endoscopic and imaging pattern in the classic case. **Endoscopy** shows a smooth reddish vascular mass behind the middle turbinate, and any temptation to sample it in clinic must be resisted until theatre, embolisation and blood cover are all arranged.",
-   "say": "Clinic biopsy risks torrential bleeding and is contraindicated in suspected vascular tumour. Age, sex, endoscopy and imaging give diagnosis without tissue sampling initially. Theatre with embolisation and blood cover provides the safe setting.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Angiofibroma pattern",
-     "points": [
-      "Adolescent male patient",
-      "Severe recurrent epistaxis",
-      "Vascular mass, no clinic biopsy",
-      "Holman Miller sign on CT"
-     ]
+  "v": 1,
+  "id": "ent-nasopharynx-juvenile-nasopharyngeal-angiofibroma",
+  "subject": "ent",
+  "module": "ent-nasopharynx",
+  "title": "Juvenile Nasopharyngeal Angiofibroma",
+  "minutes": 7,
+  "gen": "AI",
+  "steps": [
+    {
+      "tx": "**Juvenile nasopharyngeal angiofibroma** is a benign but highly vascular tumour of adolescent males that arises near the sphenopalatine foramen and expands into nose, sinuses, orbit and cranial cavity by pressure. Recurrent severe epistaxis with progressive unilateral nasal obstruction in a teenage boy is the classic presentation. Despite benign histology, local destruction and operative bleeding make it one of the most demanding tumours in rhinology.",
+      "say": "A vascular tumour of teenage boys gives recurrent severe nosebleeds with one sided blockage. Origin near the sphenopalatine opening explains expansion into sinuses and orbit. Operative bleeding risk makes resection demanding despite benign histology.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/nasopharyngeal-tumours-fig1.webp",
+        "alt": "Diagram of nasopharyngeal tumour spread patterns from the nasopharynx to adjacent spaces.",
+        "caption": "Nasopharyngeal tumour spread patterns. Illustration: StewardMD original.",
+        "ar": 1.5
+      }
     },
-    "right": {
-     "title": "Antrochoanal polyp pattern",
-     "points": [
-      "Young patient, either sex",
-      "Blockage without major bleeding",
-      "Pale avascular polyp",
-      "Dumbbell from maxillary sinus"
-     ]
+    {
+      "tx": "The tumour grows from the posterolateral nasal wall at the **sphenopalatine foramen**, fed initially by the sphenopalatine branch of maxillary artery and later recruiting internal carotid branches as it enlarges. Anterior bowing of the posterior maxillary wall on computed tomography is the Holman Miller sign, a radiological classic. Extension routes include pterygopalatine fossa, infratemporal fossa, orbit through inferior orbital fissure and middle cranial fossa through eroded skull base.",
+      "say": "Growth starts at the sphenopalatine opening with maxillary artery supply initially. Forward bowing of the back maxillary wall gives the classic radiological sign. Enlargement involves carotid branches and reaches orbit with skull base erosion.",
+      "vis": {
+        "kind": "table",
+        "title": "Angiofibroma extension routes",
+        "cols": [
+          "Route",
+          "Structure reached"
+        ],
+        "rows": [
+          [
+            "Pterygopalatine fossa",
+            "Maxillary vessels and nerves"
+          ],
+          [
+            "Inferior orbital fissure",
+            "Orbit with proptosis"
+          ],
+          [
+            "Skull base erosion",
+            "Middle cranial fossa"
+          ],
+          [
+            "Sphenoid sinus",
+            "Cavernous region risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The blush on this angiogram begins at a fixed point on the posterolateral nasal wall. The tumour arises at the **sphenopalatine foramen** and is fed first by the sphenopalatine branch of the maxillary artery. Internal carotid branches are recruited only later, as the mass enlarges. Anterior bowing of the posterior maxillary wall on computed tomography is the Holman Miller sign. From the foramen, spread can reach the pterygopalatine fossa, the infratemporal fossa, the orbit via the inferior orbital fissure, and the middle cranial fossa through an eroded skull base.",
+      "say": "Juvenile nasopharyngeal angiofibroma starts at the sphenopalatine foramen and is supplied first by the sphenopalatine branch of the maxillary artery. Carotid branches join only as it enlarges. Forward bowing of the posterior maxillary wall is the Holman Miller sign, and the mass may reach orbit and middle cranial fossa.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m65-ent-nasopharynx-juvenile-nasopharyngeal-angiofibroma.webp",
+        "alt": "A lateral angiogram shows a dense nasopharyngeal blush supplied by the sphenopalatine artery.",
+        "caption": "Contrast outlines a juvenile nasopharyngeal angiofibroma through the sphenopalatine branch of the maxillary artery. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "**Holman-Miller sign** deserves separate memory because it converts anatomy into a one line examination answer: anterior displacement of the posterior wall of the maxillary sinus by an expanding pterygopalatine mass. Computed tomography shows bone remodelling and the sign, while magnetic resonance shows flow voids within the vascular mass and separates tumour from obstructed sinus secretions. Angiography maps feeders and prepares embolisation in the same sitting.",
+      "say": "Forward displacement of the back maxillary wall is the named radiological sign here. Bone scanning shows remodelling while resonance imaging separates tumour from trapped secretions. Vessel mapping prepares embolisation in the same sitting.",
+      "vis": null
+    },
+    {
+      "tx": "**Fisch staging** grades angiofibroma by extension, from tumour limited to nose and nasopharynx through sinus and pterygopalatine involvement to infratemporal, orbital and intracranial spread. Stage decides approach, embolisation need and consent for blood loss and recurrence. Limited tumours suit endoscopic resection, while intracranial extradural disease may still be resected and intradural residual sometimes observes or receives radiosurgery rather than heroic clearance.",
+      "say": "Staging by extension decides approach, embolisation need and consent discussions. Limited tumours suit endoscopic removal through the nose in modern practice. Intracranial residue sometimes needs observation or focused radiation instead of heroic clearance.",
+      "vis": {
+        "kind": "flow",
+        "title": "Angiofibroma staging logic",
+        "nodes": [
+          {
+            "id": "lim",
+            "label": "Limited to nose and nasopharynx"
+          },
+          {
+            "id": "sin",
+            "label": "Sinus and pterygopalatine spread"
+          },
+          {
+            "id": "inf",
+            "label": "Infratemporal and orbital spread"
+          },
+          {
+            "id": "ic",
+            "label": "Intracranial extension"
+          }
+        ],
+        "edges": [
+          [
+            "lim",
+            "sin"
+          ],
+          [
+            "sin",
+            "inf"
+          ],
+          [
+            "inf",
+            "ic"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Biopsy is contraindicated in suspected angiofibroma because clinic sampling of this vascular mass can provoke torrential bleeding without diagnostic need. Diagnosis rests on demographic, endoscopic and imaging pattern in the classic case. **Endoscopy** shows a smooth reddish vascular mass behind the middle turbinate, and any temptation to sample it in clinic must be resisted until theatre, embolisation and blood cover are all arranged.",
+      "say": "Clinic biopsy risks torrential bleeding and is contraindicated in suspected vascular tumour. Age, sex, endoscopy and imaging give diagnosis without tissue sampling initially. Theatre with embolisation and blood cover provides the safe setting.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Angiofibroma pattern",
+          "points": [
+            "Adolescent male patient",
+            "Severe recurrent epistaxis",
+            "Vascular mass, no clinic biopsy",
+            "Holman Miller sign on CT"
+          ]
+        },
+        "right": {
+          "title": "Antrochoanal polyp pattern",
+          "points": [
+            "Young patient, either sex",
+            "Blockage without major bleeding",
+            "Pale avascular polyp",
+            "Dumbbell from maxillary sinus"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Biopsy in clinic is contraindicated once juvenile nasopharyngeal angiofibroma is suspected, because sampling this vascular mass can cause torrential bleeding and is not required for diagnosis. Age, sex, **endoscopy**, and imaging are enough in the classic case. Endoscopy shows a smooth reddish mass behind the middle turbinate. Any tissue sample waits for theatre, after angiography has mapped external carotid feeders, those feeders have been embolised, and blood is ready.",
+      "say": "Clinic biopsy of suspected angiofibroma can provoke torrential bleeding and is unnecessary for diagnosis. Demographics, a smooth reddish mass behind the middle turbinate on endoscopy, and imaging suffice. External carotid feeders are mapped and embolised, with blood available, before any sample or excision in theatre.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n24-ent-nasopharynx-juvenile-nasopharyngeal-angiofibroma.webp",
+        "alt": "An angiogram of external carotid branches feeding a juvenile nasopharyngeal angiofibroma, with those feeders blocked before surgery.",
+        "caption": "Contrast outlines external carotid feeders to a nasopharyngeal vascular mass, and embolisation occludes them before excision. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Preoperative **embolisation** of external carotid feeders twenty four to seventy two hours before surgery reduces intraoperative blood loss and improves visualisation of tumour margins. Internal carotid supply cannot be embolised safely and predicts residual bleeding risk that consent must name. Blood grouping, cross match and cell salvage planning accompany large tumours, and hypotensive anaesthesia assists dissection in selected patients without end organ risk.",
+      "say": "Blocking external carotid feeders before surgery reduces blood loss and improves visualisation. Carotid supply cannot be blocked safely and predicts residual bleeding risk. Blood cover with cell salvage planning accompanies large tumour surgery.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n24-ent-nasopharynx-juvenile-nasopharyngeal-angiofibroma.webp",
+        "alt": "Preoperative embolisation of external carotid feeders to a juvenile nasopharyngeal angiofibroma on angiography before surgery",
+        "caption": "Preoperative embolisation of external carotid feeders to a juvenile nasopharyngeal angiofibroma on angiography before surgery. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Surgical resection is complete removal with drilling of the sphenoid and pterygoid base where tumour inserts, because residue at the vidian canal and pterygoid base drives recurrence. Endoscopic approaches now clear even many advanced tumours in experienced centres, with open approaches reserved for far lateral or intracranial extent. **Recurrence** most often declares within two years as renewed epistaxis or mass on surveillance endoscopy and imaging.",
+      "say": "Complete removal with drilling of the insertion base prevents recurrence from residue. Endoscopic surgery clears many advanced tumours in experienced centres currently. Renewed bleeding or mass within two years indicates recurrence on surveillance.",
+      "vis": {
+        "kind": "table",
+        "title": "Recurrence surveillance",
+        "cols": [
+          "Interval",
+          "Action"
+        ],
+        "rows": [
+          [
+            "First two years",
+            "Endoscopy and imaging review"
+          ],
+          [
+            "New epistaxis",
+            "Urgent reassessment"
+          ],
+          [
+            "Residual intracranial",
+            "Multidisciplinary review"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Radiotherapy is reserved for unresectable intracranial residual or recurrence where further surgery risks carotid or optic injury, because irradiating an adolescent carries secondary malignancy and growth concerns over decades. Chemotherapy has no routine role in this benign tumour. **Androgen influence** explains male predominance and occasional pubertal growth spurts, but hormonal therapy is not standard treatment outside research settings.",
+      "say": "Radiation is reserved for unresectable residue because adolescent irradiation carries late malignancy risk. Chemotherapy has no routine role in benign tumour management here. Hormonal treatment remains research based without standard indication.",
+      "vis": {
+        "kind": "table",
+        "title": "Angiofibroma treatment by extent",
+        "cols": [
+          "Extent",
+          "Approach"
+        ],
+        "rows": [
+          [
+            "Limited nasal disease",
+            "Endoscopic resection"
+          ],
+          [
+            "Pterygopalatine spread",
+            "Embolisation plus resection"
+          ],
+          [
+            "Intracranial extradural",
+            "Combined resection planning"
+          ],
+          [
+            "Unresectable residual",
+            "Consider focused radiotherapy"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Differential diagnosis of a bleeding adolescent nasal mass includes antrochoanal polyp, inverted papilloma in older patients, rhabdomyosarcoma in younger children and nasopharyngeal carcinoma in endemic populations. Age and sex therefore narrow the field before imaging refines it further. **Unilateral serous otitis** from tubal obstruction may accompany any nasopharyngeal mass and should trigger nasopharyngeal inspection in adults, a habit that also protects against missed carcinoma.",
+      "say": "Age and sex narrow the differential before imaging refines diagnosis further. Polyp, sarcoma and carcinoma are considered at different ages characteristically. Ear effusion with any nasopharyngeal mass needs direct inspection.",
+      "vis": null
+    },
+    {
+      "tx": "Examination anchors for angiofibroma are demographic and radiological. Teenage boy plus torrential epistaxis plus vascular mass equals angiofibroma until disproved, biopsy is forbidden in clinic, Holman Miller sign bows the maxillary wall forward, and embolisation precedes resection. **Staging by extension** then decides endoscopic feasibility, blood preparation and whether intracranial residue is chased or observed after multidisciplinary discussion.",
+      "say": "Teenage sex with torrential bleeding and vascular mass gives diagnosis until disproved. Clinic biopsy is forbidden and vessel blocking precedes resection routinely. Extension staging decides approach with blood preparation and residue policy.",
+      "vis": {
+        "kind": "table",
+        "title": "Angiofibroma examination anchors",
+        "cols": [
+          "Anchor",
+          "Fact"
+        ],
+        "rows": [
+          [
+            "Patient",
+            "Adolescent male almost exclusively"
+          ],
+          [
+            "Symptoms",
+            "Obstruction plus severe epistaxis"
+          ],
+          [
+            "Sign",
+            "Holman Miller anterior bowing"
+          ],
+          [
+            "Rule",
+            "No clinic biopsy, embolise first"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Preoperative **embolisation** of external carotid feeders twenty four to seventy two hours before surgery reduces intraoperative blood loss and improves visualisation of tumour margins. Internal carotid supply cannot be embolised safely and predicts residual bleeding risk that consent must name. Blood grouping, cross match and cell salvage planning accompany large tumours, and hypotensive anaesthesia assists dissection in selected patients without end organ risk.",
-   "say": "Blocking external carotid feeders before surgery reduces blood loss and improves visualisation. Carotid supply cannot be blocked safely and predicts residual bleeding risk. Blood cover with cell salvage planning accompanies large tumour surgery.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/need-n24-ent-nasopharynx-juvenile-nasopharyngeal-angiofibroma.webp",
-    "alt": "Preoperative embolisation of external carotid feeders to a juvenile nasopharyngeal angiofibroma on angiography before surgery",
-    "caption": "Preoperative embolisation of external carotid feeders to a juvenile nasopharyngeal angiofibroma on angiography before surgery. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "Surgical resection is complete removal with drilling of the sphenoid and pterygoid base where tumour inserts, because residue at the vidian canal and pterygoid base drives recurrence. Endoscopic approaches now clear even many advanced tumours in experienced centres, with open approaches reserved for far lateral or intracranial extent. **Recurrence** most often declares within two years as renewed epistaxis or mass on surveillance endoscopy and imaging.",
-   "say": "Complete removal with drilling of the insertion base prevents recurrence from residue. Endoscopic surgery clears many advanced tumours in experienced centres currently. Renewed bleeding or mass within two years indicates recurrence on surveillance.",
-   "vis": {
-    "kind": "table",
-    "title": "Recurrence surveillance",
-    "cols": [
-     "Interval",
-     "Action"
-    ],
-    "rows": [
-     [
-      "First two years",
-      "Endoscopy and imaging review"
-     ],
-     [
-      "New epistaxis",
-      "Urgent reassessment"
-     ],
-     [
-      "Residual intracranial",
-      "Multidisciplinary review"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Radiotherapy is reserved for unresectable intracranial residual or recurrence where further surgery risks carotid or optic injury, because irradiating an adolescent carries secondary malignancy and growth concerns over decades. Chemotherapy has no routine role in this benign tumour. **Androgen influence** explains male predominance and occasional pubertal growth spurts, but hormonal therapy is not standard treatment outside research settings.",
-   "say": "Radiation is reserved for unresectable residue because adolescent irradiation carries late malignancy risk. Chemotherapy has no routine role in benign tumour management here. Hormonal treatment remains research based without standard indication.",
-   "vis": {
-    "kind": "table",
-    "title": "Angiofibroma treatment by extent",
-    "cols": [
-     "Extent",
-     "Approach"
-    ],
-    "rows": [
-     [
-      "Limited nasal disease",
-      "Endoscopic resection"
-     ],
-     [
-      "Pterygopalatine spread",
-      "Embolisation plus resection"
-     ],
-     [
-      "Intracranial extradural",
-      "Combined resection planning"
-     ],
-     [
-      "Unresectable residual",
-      "Consider focused radiotherapy"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Differential diagnosis of a bleeding adolescent nasal mass includes antrochoanal polyp, inverted papilloma in older patients, rhabdomyosarcoma in younger children and nasopharyngeal carcinoma in endemic populations. Age and sex therefore narrow the field before imaging refines it further. **Unilateral serous otitis** from tubal obstruction may accompany any nasopharyngeal mass and should trigger nasopharyngeal inspection in adults, a habit that also protects against missed carcinoma.",
-   "say": "Age and sex narrow the differential before imaging refines diagnosis further. Polyp, sarcoma and carcinoma are considered at different ages characteristically. Ear effusion with any nasopharyngeal mass needs direct inspection.",
-   "vis": null
-  },
-  {
-   "tx": "Examination anchors for angiofibroma are demographic and radiological. Teenage boy plus torrential epistaxis plus vascular mass equals angiofibroma until disproved, biopsy is forbidden in clinic, Holman Miller sign bows the maxillary wall forward, and embolisation precedes resection. **Staging by extension** then decides endoscopic feasibility, blood preparation and whether intracranial residue is chased or observed after multidisciplinary discussion.",
-   "say": "Teenage sex with torrential bleeding and vascular mass gives diagnosis until disproved. Clinic biopsy is forbidden and vessel blocking precedes resection routinely. Extension staging decides approach with blood preparation and residue policy.",
-   "vis": {
-    "kind": "table",
-    "title": "Angiofibroma examination anchors",
-    "cols": [
-     "Anchor",
-     "Fact"
-    ],
-    "rows": [
-     [
-      "Patient",
-      "Adolescent male almost exclusively"
-     ],
-     [
-      "Symptoms",
-      "Obstruction plus severe epistaxis"
-     ],
-     [
-      "Sign",
-      "Holman Miller anterior bowing"
-     ],
-     [
-      "Rule",
-      "No clinic biopsy, embolise first"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [],
- "cards": [
-  {
-   "f": "Juvenile angiofibroma triad",
-   "b": "Adolescent male, recurrent severe epistaxis, unilateral obstruction from sphenopalatine foramen tumour; no clinic biopsy."
-  },
-  {
-   "f": "Holman Miller sign",
-   "b": "Anterior bowing of posterior maxillary wall by pterygopalatine mass on CT in angiofibroma."
-  },
-  {
-   "f": "Embolisation timing",
-   "b": "External carotid feeders embolised 24 to 72 hours before resection to reduce blood loss."
-  }
- ],
- "keys": [
-  "Vascular nasal mass in a teenage boy: never biopsy in clinic",
-  "Drill the pterygoid base to prevent recurrence",
-  "Fisch stage by extension decides approach"
- ]
+  ],
+  "quiz": [],
+  "cards": [
+    {
+      "f": "Juvenile angiofibroma triad",
+      "b": "Adolescent male, recurrent severe epistaxis, unilateral obstruction from sphenopalatine foramen tumour; no clinic biopsy."
+    },
+    {
+      "f": "Holman Miller sign",
+      "b": "Anterior bowing of posterior maxillary wall by pterygopalatine mass on CT in angiofibroma."
+    },
+    {
+      "f": "Embolisation timing",
+      "b": "External carotid feeders embolised 24 to 72 hours before resection to reduce blood loss."
+    }
+  ],
+  "keys": [
+    "Vascular nasal mass in a teenage boy: never biopsy in clinic",
+    "Drill the pterygoid base to prevent recurrence",
+    "Fisch stage by extension decides approach"
+  ]
 }

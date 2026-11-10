@@ -1,206 +1,217 @@
 {
- "v": 1,
- "module": "obg-hypertensive-disorders",
- "subject": "obstetrics-gynaecology",
- "title": "Gestational Hypertension, Pre-eclampsia, Eclampsia and HELLP",
- "minutes": 6,
- "gen": "AI",
- "quiz": [],
- "steps": [
-  {
-   "tx": "New blood pressure elevation after twenty weeks without proteinuria or organ features is **gestational hypertension**. Many cases progress to pre-eclampsia, so surveillance is close. It resolves by twelve weeks after delivery by definition. Up to half develop pre-eclampsia within one to three weeks, the figure that justifies twice weekly checks.",
-   "say": "Gestational hypertension rises after twenty weeks without organ features and needs close surveillance.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Disorder",
-     "Proteinuria"
-    ],
-    "rows": [
-     [
-      "Gestational hypertension",
-      "Absent"
-     ],
-     [
-      "Pre-eclampsia",
-      "Present or organ features"
-     ],
-     [
-      "Chronic hypertension",
-      "Before 20 weeks"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Hypertension with proteinuria or maternal organ dysfunction after twenty weeks defines **preeclampsia** in modern spelling pre-eclampsia. Placental disease drives widespread endothelial dysfunction in the mother. Delivery of the placenta remains the only cure. Proteinuria is no longer compulsory for diagnosis when platelets, liver, kidney or brain features appear.",
-   "say": "Pre-eclampsia combines hypertension with proteinuria or organ dysfunction and delivery cures it.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/preeclampsia-fig1.webp",
-    "alt": "Pre-eclampsia pathophysiology.",
-    "caption": "Pre-eclampsia pathophysiology. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Features marking dangerous disease include severe headache, visual disturbance, epigastric pain and very high pressure, grouped as **severe features**. Any one mandates urgent hospital assessment and delivery planning. Blood pressure of one sixty over one ten is itself a severe feature. Blood pressure at or above 160 over 110 needs treatment within 30 to 60 minutes to prevent maternal stroke.",
-   "say": "Severe features like headache, visual change and epigastric pain mandate urgent delivery planning.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Severe feature appears"
-     },
-     {
-      "id": "n1",
-      "label": "Urgent hospital assessment"
-     },
-     {
-      "id": "n2",
-      "label": "Pressure controlled"
-     },
-     {
-      "id": "n3",
-      "label": "Delivery planned"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Generalised convulsions in a woman with pre-eclampsia, not explained otherwise, define **eclampsia**. Most fits are brief and self limiting, but maternal hypoxia endangers both lives. Magnesium sulphate prevents and treats these seizures. Most fits last one to two minutes, and only about one in ten women who fit has no prior documented hypertension.",
-   "say": "Eclampsia convulses women with pre-eclampsia and magnesium sulphate treats the seizures.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/eclampsia-fig1.webp",
-    "alt": "Eclampsia immediate management.",
-    "caption": "Eclampsia management. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Haemolysis, elevated liver enzymes and low platelets together form **HELLP syndrome**. It complicates severe pre-eclampsia and can occur without very high pressure. Epigastric pain with malaise in late pregnancy should always trigger its exclusion. HELLP can present after delivery, and right upper quadrant pain with nausea is its commonest calling card.",
-   "say": "HELLP syndrome combines haemolysis, raised liver enzymes and low platelets in severe disease.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/hypertensive-disorders-preeclampsia-eclampsia-hellp-fig1.webp",
-    "alt": "Pre-eclampsia and HELLP mechanism.",
-    "caption": "HELLP mechanism. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Failed spiral artery remodelling in early pregnancy starts the disease, a process of **defective placentation**. The ischaemic placenta releases antiangiogenic factors into maternal blood. These injure endothelium everywhere, explaining the multisystem picture. Soluble Flt1 rises and placental growth factor falls weeks before symptoms, the imbalance behind newer blood tests.",
-   "say": "Defective placentation releases antiangiogenic factors that injure maternal endothelium everywhere.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Stage one",
-     "points": [
-      "Poor placentation",
-      "Silent",
-      "First half of pregnancy"
-     ]
+  "v": 1,
+  "module": "obg-hypertensive-disorders",
+  "subject": "obstetrics-gynaecology",
+  "title": "Gestational Hypertension, Pre-eclampsia, Eclampsia and HELLP",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "New blood pressure elevation after twenty weeks without proteinuria or organ features is **gestational hypertension**. Many cases progress to pre-eclampsia, so surveillance is close. It resolves by twelve weeks after delivery by definition. Up to half develop pre-eclampsia within one to three weeks, the figure that justifies twice weekly checks.",
+      "say": "Gestational hypertension rises after twenty weeks without organ features and needs close surveillance.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Disorder",
+          "Proteinuria"
+        ],
+        "rows": [
+          [
+            "Gestational hypertension",
+            "Absent"
+          ],
+          [
+            "Pre-eclampsia",
+            "Present or organ features"
+          ],
+          [
+            "Chronic hypertension",
+            "Before 20 weeks"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Stage two",
-     "points": [
-      "Endothelial dysfunction",
-      "Hypertension and protein leak",
-      "After 20 weeks"
-     ]
+    {
+      "tx": "Hypertension with proteinuria or maternal organ dysfunction after twenty weeks defines **preeclampsia** in modern spelling pre-eclampsia. Placental disease drives widespread endothelial dysfunction in the mother. Delivery of the placenta remains the only cure. Proteinuria is no longer compulsory for diagnosis when platelets, liver, kidney or brain features appear.",
+      "say": "Pre-eclampsia combines hypertension with proteinuria or organ dysfunction and delivery cures it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/preeclampsia-fig1.webp",
+        "alt": "Pre-eclampsia pathophysiology.",
+        "caption": "Pre-eclampsia pathophysiology. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Features marking dangerous disease include severe headache, visual disturbance, epigastric pain and very high pressure, grouped as **severe features**. Any one mandates urgent hospital assessment and delivery planning. Blood pressure of one sixty over one ten is itself a severe feature. Blood pressure at or above 160 over 110 needs treatment within 30 to 60 minutes to prevent maternal stroke.",
+      "say": "Severe features like headache, visual change and epigastric pain mandate urgent delivery planning.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Severe feature appears"
+          },
+          {
+            "id": "n1",
+            "label": "Urgent hospital assessment"
+          },
+          {
+            "id": "n2",
+            "label": "Pressure controlled"
+          },
+          {
+            "id": "n3",
+            "label": "Delivery planned"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Generalised convulsions in a woman with pre-eclampsia, not explained otherwise, define **eclampsia**. Most fits are brief and self limiting, but maternal hypoxia endangers both lives. Magnesium sulphate prevents and treats these seizures. Most fits last one to two minutes, and only about one in ten women who fit has no prior documented hypertension.",
+      "say": "Eclampsia convulses women with pre-eclampsia and magnesium sulphate treats the seizures.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/eclampsia-fig1.webp",
+        "alt": "Eclampsia immediate management.",
+        "caption": "Eclampsia management. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Haemolysis, elevated liver enzymes and low platelets together form **HELLP syndrome**. It complicates severe pre-eclampsia and can occur without very high pressure. Epigastric pain with malaise in late pregnancy should always trigger its exclusion. HELLP can present after delivery, and right upper quadrant pain with nausea is its commonest calling card.",
+      "say": "HELLP syndrome combines haemolysis, raised liver enzymes and low platelets in severe disease.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hypertensive-disorders-preeclampsia-eclampsia-hellp-fig1.webp",
+        "alt": "Pre-eclampsia and HELLP mechanism.",
+        "caption": "HELLP mechanism. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Failed spiral artery remodelling in early pregnancy starts the disease, a process of **defective placentation**. The ischaemic placenta releases antiangiogenic factors into maternal blood. These injure endothelium everywhere, explaining the multisystem picture. Soluble Flt1 rises and placental growth factor falls weeks before symptoms, the imbalance behind newer blood tests.",
+      "say": "Defective placentation releases antiangiogenic factors that injure maternal endothelium everywhere.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stage one",
+          "points": [
+            "Poor placentation",
+            "Silent",
+            "First half of pregnancy"
+          ]
+        },
+        "right": {
+          "title": "Stage two",
+          "points": [
+            "Endothelial dysfunction",
+            "Hypertension and protein leak",
+            "After 20 weeks"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Low dose aspirin started before sixteen weeks prevents pre-eclampsia in high risk women, termed **aspirin prophylaxis**. Previous pre-eclampsia, chronic hypertension and diabetes qualify. It is taken at night until about thirty six weeks. Aspirin started after 16 weeks loses most benefit, so the first dose belongs in the late first trimester.",
+      "say": "Aspirin prophylaxis before sixteen weeks prevents pre-eclampsia in high risk women.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "High risk factor",
+          "Example"
+        ],
+        "rows": [
+          [
+            "Previous pre-eclampsia",
+            "Strongest"
+          ],
+          [
+            "Chronic hypertension",
+            "Qualifies"
+          ],
+          [
+            "Pregestational diabetes",
+            "Qualifies"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Calcium supplementation prevents disease where dietary intake is low, an intervention of **calcium prophylaxis**. One to two grams daily from mid pregnancy is the studied dose. It complements rather than replaces aspirin in high risk women. It works best in populations eating under 600 milligrams of calcium a day, common in low income diets.",
+      "say": "Calcium prophylaxis prevents pre-eclampsia where dietary intake is low.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Low intake identified"
+          },
+          {
+            "id": "n1",
+            "label": "Calcium started mid pregnancy"
+          },
+          {
+            "id": "n2",
+            "label": "Aspirin added if high risk"
+          },
+          {
+            "id": "n3",
+            "label": "Surveillance continues"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Where diet is poor in calcium, supplementation prevents preeclampsia, an intervention called **calcium prophylaxis**. One to two grams daily from mid pregnancy is the dose that was studied, and it adds to aspirin rather than replacing it in high risk women. Benefit is greatest when intake is under 600 milligrams a day, as in many low income diets. After birth the pressure curve can still worsen for days before it resolves, so eclampsia watch continues through that postpartum rise.",
+      "say": "Calcium at one to two grams a day from mid pregnancy prevents preeclampsia where intake is low, especially under 600 milligrams daily, and it is added to aspirin rather than used instead of it. Delivery does not end the risk at once. Pressure may climb for several days and then fall, and fits must still be watched for during that rise.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n31-obg-hypertensive-disorders-gestational-hypertension.webp",
+        "alt": "A postpartum blood pressure chart that rises for several days after delivery and then falls, with a note to watch for eclampsia.",
+        "caption": "Pressure climbs in the days after birth and then settles, while surveillance for seizures continues through the rise. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "After delivery, hypertension may worsen before improving over days, called **postpartum evolution**. A quarter of eclampsia occurs after birth, so vigilance continues on postnatal wards. Persistent hypertension beyond twelve weeks reclassifies as chronic. Blood pressure peaks around day three to five after birth, so discharge on day one needs a planned early review.",
+      "say": "Postpartum evolution can worsen hypertension after delivery, with a quarter of eclampsia postnatal.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n31-obg-hypertensive-disorders-gestational-hypertension.webp",
+        "alt": "Postpartum hypertension course after delivery with worsening then resolution over days and eclampsia vigilance",
+        "caption": "Postpartum hypertension course after delivery with worsening then resolution over days and eclampsia vigilance. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
     }
-   }
-  },
-  {
-   "tx": "Low dose aspirin started before sixteen weeks prevents pre-eclampsia in high risk women, termed **aspirin prophylaxis**. Previous pre-eclampsia, chronic hypertension and diabetes qualify. It is taken at night until about thirty six weeks. Aspirin started after 16 weeks loses most benefit, so the first dose belongs in the late first trimester.",
-   "say": "Aspirin prophylaxis before sixteen weeks prevents pre-eclampsia in high risk women.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "High risk factor",
-     "Example"
-    ],
-    "rows": [
-     [
-      "Previous pre-eclampsia",
-      "Strongest"
-     ],
-     [
-      "Chronic hypertension",
-      "Qualifies"
-     ],
-     [
-      "Pregestational diabetes",
-      "Qualifies"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Calcium supplementation prevents disease where dietary intake is low, an intervention of **calcium prophylaxis**. One to two grams daily from mid pregnancy is the studied dose. It complements rather than replaces aspirin in high risk women. It works best in populations eating under 600 milligrams of calcium a day, common in low income diets.",
-   "say": "Calcium prophylaxis prevents pre-eclampsia where dietary intake is low.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Low intake identified"
-     },
-     {
-      "id": "n1",
-      "label": "Calcium started mid pregnancy"
-     },
-     {
-      "id": "n2",
-      "label": "Aspirin added if high risk"
-     },
-     {
-      "id": "n3",
-      "label": "Surveillance continues"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "After delivery, hypertension may worsen before improving over days, called **postpartum evolution**. A quarter of eclampsia occurs after birth, so vigilance continues on postnatal wards. Persistent hypertension beyond twelve weeks reclassifies as chronic. Blood pressure peaks around day three to five after birth, so discharge on day one needs a planned early review.",
-   "say": "Postpartum evolution can worsen hypertension after delivery, with a quarter of eclampsia postnatal.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/need-n31-obg-hypertensive-disorders-gestational-hypertension.webp",
-    "alt": "Postpartum hypertension course after delivery with worsening then resolution over days and eclampsia vigilance",
-    "caption": "Postpartum hypertension course after delivery with worsening then resolution over days and eclampsia vigilance. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  }
- ]
+  ]
 }

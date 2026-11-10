@@ -1,228 +1,239 @@
 {
- "v": 1,
- "gen": "AI",
- "module": "ana-larynx",
- "subject": "anatomy",
- "title": "Laryngeal Cartilages, Vocal Folds, and the Cricothyroid Muscle",
- "minutes": 8,
- "steps": [
-  {
-   "tx": "The larynx is a specialised musculo-cartilaginous sphincter situated in the anterior midline of the neck opposite vertebral levels C3 to C6. Acting primarily as a protective valve guarding the lower respiratory tract against aspiration, the **larynx** also serves as the principal organ of phonation. Its skeletal framework is composed of nine cartilages: three unpaired and three paired.",
-   "say": "Spanning C3 to C6, the larynx serves as an essential airway protector and phonatory organ. Nine cartilages construct its framework: three unpaired and three paired.",
-   "vis": {
-    "kind": "image",
-    "src": "prep/lessons/media/ana-laryngeal-nerves.svg",
-    "alt": "Anatomical schematic showing thyroid and cricoid cartilages, vocal cords, and laryngeal innervation",
-    "caption": "Cartilaginous framework of the larynx and associated motor and sensory laryngeal nerves. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "The three unpaired cartilages of the larynx are the thyroid, cricoid, and epiglottic cartilages. The **thyroid cartilage** is the largest, composed of two quadrilateral laminae that fuse anteriorly in the midline at an acute angle (ninety degrees in males, 120 degrees in females), forming the subcutaneous laryngeal prominence known as the Adam's apple.",
-   "say": "The thyroid cartilage is the largest laryngeal cartilage. Its laminae fuse anteriorly to form the Adam's apple, projecting more prominently in post-pubertal males.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Unpaired Cartilage",
-     "Histological Type",
-     "Structural Morphology and Function"
-    ],
-    "rows": [
-     [
-      "Thyroid cartilage",
-      "Hyaline cartilage (calcifies in late life)",
-      "Shield-shaped; anterior fusion forms Adam's apple; superior and inferior cornu"
-     ],
-     [
-      "Cricoid cartilage",
-      "Hyaline cartilage (calcifies in late life)",
-      "Complete signet ring; narrow anterior arch and tall posterior quadrate lamina"
-     ],
-     [
-      "Epiglottic cartilage",
-      "Elastic fibrocartilage (never calcifies)",
-      "Leaf-shaped; attached via thyroepiglottic ligament; diverts food boluses laterally"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The cricoid cartilage is shaped like a signet ring, comprising a narrow anterior arch and a broad posterior lamina. The **cricoid cartilage** is of supreme mechanical importance because it is the only complete, unbroken cartilaginous ring in the entire respiratory tract. External compression of the cricoid ring backwards against C6 (Sellick maneuver) occludes the oesophagus, preventing gastric aspiration during emergency rapid sequence intubation.",
-   "say": "The cricoid is the only complete ring in the respiratory airway. Backward compression during the Sellick maneuver collapses the esophagus against C6 to prevent aspiration.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "c1",
-      "label": "Anatomical Level (Located opposite C6 vertebral level at inferior laryngeal border)"
-     },
-     {
-      "id": "c2",
-      "label": "Complete Rigid Signet Ring (Narrow 5 mm anterior arch and broad 25 mm posterior lamina)"
-     },
-     {
-      "id": "c3",
-      "label": "Sellick Maneuver (Posterior cricoid pressure compresses soft cervical oesophagus against C6 body)"
-     },
-     {
-      "id": "c4",
-      "label": "Aspiration Prevention (Blocks passive regurgitation of gastric contents during induction)"
-     }
-    ],
-    "edges": [
-     [
-      "c1",
-      "c2"
-     ],
-     [
-      "c2",
-      "c3"
-     ],
-     [
-      "c3",
-      "c4"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The three paired cartilages are the arytenoid, corniculate, and cuneiform cartilages. The **arytenoid cartilages** are pyramidal structures resting upon the superior border of the cricoid lamina. Each arytenoid features a sharp anterior vocal process giving attachment to the vocal ligament, and a blunt lateral muscular process giving attachment to the posterior and lateral cricoarytenoid muscles.",
-   "say": "Paired pyramidal arytenoids perch atop the posterior cricoid ring. Each features a vocal process anchoring the vocal fold and a muscular process for intrinsic muscles.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Vocal Process of Arytenoid",
-     "points": [
-      "Projects horizontally forward from base",
-      "Gives attachment to the vocal ligament",
-      "Forms the intercartilaginous part of rima glottidis",
-      "Adduction brings true vocal cords into apposition"
-     ]
+  "v": 1,
+  "gen": "AI",
+  "module": "ana-larynx",
+  "subject": "anatomy",
+  "title": "Laryngeal Cartilages, Vocal Folds, and the Cricothyroid Muscle",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "The larynx is a specialised musculo-cartilaginous sphincter situated in the anterior midline of the neck opposite vertebral levels C3 to C6. Acting primarily as a protective valve guarding the lower respiratory tract against aspiration, the **larynx** also serves as the principal organ of phonation. Its skeletal framework is composed of nine cartilages: three unpaired and three paired.",
+      "say": "Spanning C3 to C6, the larynx serves as an essential airway protector and phonatory organ. Nine cartilages construct its framework: three unpaired and three paired.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ana-laryngeal-nerves.svg",
+        "alt": "Anatomical schematic showing thyroid and cricoid cartilages, vocal cords, and laryngeal innervation",
+        "caption": "Cartilaginous framework of the larynx and associated motor and sensory laryngeal nerves. [Credit: StewardMD]",
+        "ar": 1.5
+      }
     },
-    "right": {
-     "title": "Muscular Process of Arytenoid",
-     "points": [
-      "Projects posterolaterally from base",
-      "Gives insertion to posterior cricoarytenoid (abductor)",
-      "Gives insertion to lateral cricoarytenoid (adductor)",
-      "Acts as rotational lever for vocal cord positioning"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "The vocal folds (true vocal cords) are two pearly-white mucosal folds that control the airway aperture and phonation. Each fold contains the **vocal ligament**, which represents the thickened free upper border of the conus elasticus (cricovocal membrane), extending from the angle of the thyroid cartilage to the vocal process of the arytenoid. The vocal folds are covered by stratified squamous epithelium devoid of submucosa.",
-   "say": "The vocal folds contain the vocal ligament, the thickened edge of the conus elasticus. Covered by stratified squamous epithelium, they lack submucosa and lymphatic vessels.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/need-n12-ana-larynx-laryngeal-cartilages.webp",
-    "alt": "Vocal fold section showing the vocal ligament as the thickened upper border of the conus elasticus",
-    "caption": "Vocal fold section showing the vocal ligament as the thickened upper border of the conus elasticus. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "The rima glottidis is the narrowest fissure in the adult laryngeal cavity, bounded laterally by the vocal folds and medial surfaces of the arytenoid cartilages. It is subdivided into an anterior intermembranous part between the vocal ligaments and a posterior **intercartilaginous part** between the arytenoid cartilages. The shape and width of the rima glottidis vary continuously during respiration and speech.",
-   "say": "The rima glottidis is the narrowest fissure of the larynx. It divides into an anterior intermembranous portion and a posterior intercartilaginous part between the arytenoids.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Respiratory / Vocal State",
-     "Shape of Rima Glottidis",
-     "Position of Vocal Folds"
-    ],
-    "rows": [
-     [
-      "Quiet respiration",
-      "Narrow triangular / lanceolate slit",
-      "Folds slightly abducted; intermembranous part wide open"
-     ],
-     [
-      "Forced inspiration",
-      "Wide diamond-shaped / pentagonal aperture",
-      "Folds maximally abducted by posterior cricoarytenoid"
-     ],
-     [
-      "Phonation (Speaking / Singing)",
-      "Tightly closed linear chink",
-      "Folds fully adducted and tensed in midline; vibrates with expired air"
-     ],
-     [
-      "Whispering",
-      "Inverted Y-shaped opening",
-      "Intermembranous part closed, posterior intercartilaginous part open"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The cricothyroid muscle is a fan-shaped muscle situated on the external anterior surface of the larynx. Arising from the anterolateral arch of the cricoid cartilage, its fibres sweep upward and backward to insert into the inferior border and inferior cornu of the **thyroid cartilage**. It is the only intrinsic laryngeal muscle situated entirely on the external surface of the skeletal frame.",
-   "say": "Located on the external anterior larynx, the cricothyroid muscle bridges the cricoid arch and thyroid cartilage. It is the only intrinsic muscle situated externally.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "m1",
-      "label": "Cricothyroid Contraction (Pulls anterior thyroid cartilage downward and forward)"
-     },
-     {
-      "id": "m2",
-      "label": "Rotational Hinge Effect (Tilts thyroid lamina forward around cricothyroid joints)"
-     },
-     {
-      "id": "m3",
-      "label": "Increased Distance (Lengthens distance between thyroid angle and arytenoid vocal processes)"
-     },
-     {
-      "id": "m4",
-      "label": "Vocal Fold Tension (Tenses and elongates true vocal folds, raising vocal pitch)"
-     }
-    ],
-    "edges": [
-     [
-      "m1",
-      "m2"
-     ],
-     [
-      "m2",
-      "m3"
-     ],
-     [
-      "m3",
-      "m4"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Functionally, the cricothyroid is the sole tensor of the vocal folds. Uniquely among all intrinsic laryngeal muscles, the cricothyroid is innervated not by the recurrent laryngeal nerve, but by the **external laryngeal nerve** (branch of superior laryngeal nerve CN X). Contraction increases longitudinal tension on the vocal ligaments, which elevates the acoustic pitch of the voice.",
-   "say": "Cricothyroid is the sole vocal cord tensor and the only muscle innervated by the external laryngeal nerve. Contraction tightens the vocal cords to elevate voice pitch.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Cricothyroid Muscle",
-     "points": [
-      "Location: External anterior surface of larynx",
-      "Motor nerve supply: External laryngeal nerve (CN X)",
-      "Physiological action: Sole tensor of the vocal folds",
-      "Acoustic effect: Raises phonatory pitch"
-     ]
+    {
+      "tx": "The three unpaired cartilages of the larynx are the thyroid, cricoid, and epiglottic cartilages. The **thyroid cartilage** is the largest, composed of two quadrilateral laminae that fuse anteriorly in the midline at an acute angle (ninety degrees in males, 120 degrees in females), forming the subcutaneous laryngeal prominence known as the Adam's apple.",
+      "say": "The thyroid cartilage is the largest laryngeal cartilage. Its laminae fuse anteriorly to form the Adam's apple, projecting more prominently in post-pubertal males.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Unpaired Cartilage",
+          "Histological Type",
+          "Structural Morphology and Function"
+        ],
+        "rows": [
+          [
+            "Thyroid cartilage",
+            "Hyaline cartilage (calcifies in late life)",
+            "Shield-shaped; anterior fusion forms Adam's apple; superior and inferior cornu"
+          ],
+          [
+            "Cricoid cartilage",
+            "Hyaline cartilage (calcifies in late life)",
+            "Complete signet ring; narrow anterior arch and tall posterior quadrate lamina"
+          ],
+          [
+            "Epiglottic cartilage",
+            "Elastic fibrocartilage (never calcifies)",
+            "Leaf-shaped; attached via thyroepiglottic ligament; diverts food boluses laterally"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Thyroarytenoid / Vocalis",
-     "points": [
-      "Location: Internal submucosal vocal cord core",
-      "Motor nerve supply: Recurrent laryngeal nerve (CN X)",
-      "Physiological action: Relaxes and fine-tunes vocal folds",
-      "Acoustic effect: Modulates vocal timbre and lowers pitch"
-     ]
+    {
+      "tx": "The cricoid cartilage is shaped like a signet ring, comprising a narrow anterior arch and a broad posterior lamina. The **cricoid cartilage** is of supreme mechanical importance because it is the only complete, unbroken cartilaginous ring in the entire respiratory tract. External compression of the cricoid ring backwards against C6 (Sellick maneuver) occludes the oesophagus, preventing gastric aspiration during emergency rapid sequence intubation.",
+      "say": "The cricoid is the only complete ring in the respiratory airway. Backward compression during the Sellick maneuver collapses the esophagus against C6 to prevent aspiration.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "c1",
+            "label": "Anatomical Level (Located opposite C6 vertebral level at inferior laryngeal border)"
+          },
+          {
+            "id": "c2",
+            "label": "Complete Rigid Signet Ring (Narrow 5 mm anterior arch and broad 25 mm posterior lamina)"
+          },
+          {
+            "id": "c3",
+            "label": "Sellick Maneuver (Posterior cricoid pressure compresses soft cervical oesophagus against C6 body)"
+          },
+          {
+            "id": "c4",
+            "label": "Aspiration Prevention (Blocks passive regurgitation of gastric contents during induction)"
+          }
+        ],
+        "edges": [
+          [
+            "c1",
+            "c2"
+          ],
+          [
+            "c2",
+            "c3"
+          ],
+          [
+            "c3",
+            "c4"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The three paired cartilages are the arytenoid, corniculate, and cuneiform cartilages. The **arytenoid cartilages** are pyramidal structures resting upon the superior border of the cricoid lamina. Each arytenoid features a sharp anterior vocal process giving attachment to the vocal ligament, and a blunt lateral muscular process giving attachment to the posterior and lateral cricoarytenoid muscles.",
+      "say": "Paired pyramidal arytenoids perch atop the posterior cricoid ring. Each features a vocal process anchoring the vocal fold and a muscular process for intrinsic muscles.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vocal Process of Arytenoid",
+          "points": [
+            "Projects horizontally forward from base",
+            "Gives attachment to the vocal ligament",
+            "Forms the intercartilaginous part of rima glottidis",
+            "Adduction brings true vocal cords into apposition"
+          ]
+        },
+        "right": {
+          "title": "Muscular Process of Arytenoid",
+          "points": [
+            "Projects posterolaterally from base",
+            "Gives insertion to posterior cricoarytenoid (abductor)",
+            "Gives insertion to lateral cricoarytenoid (adductor)",
+            "Acts as rotational lever for vocal cord positioning"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **arytenoid cartilages** are paired pyramids sitting on the upper border of the cricoid lamina. Each has a sharp anterior vocal process that anchors the vocal ligament and a blunt lateral muscular process for the posterior and lateral cricoarytenoid muscles. On a fold section that ligament is the thickened upper border of the conus elasticus, the elastic membrane rising from the cricoid. Corniculate and cuneiform cartilages complete the three paired cartilages of the larynx, but the vocal process is the attachment the ligament uses.",
+      "say": "Paired arytenoid cartilages rest on the cricoid lamina. The vocal process at the front holds the vocal ligament, and the muscular process at the side holds the cricoarytenoid muscles. In section the ligament is the thick upper edge of the conus elasticus. Corniculate and cuneiform cartilages are the other paired laryngeal cartilages.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n12-ana-larynx-laryngeal-cartilages.webp",
+        "alt": "A coronal section of a vocal fold in which the vocal ligament is the thickened upper edge of the conus elasticus.",
+        "caption": "The vocal ligament runs in the fold as a thickened free upper border of the conus elasticus, reaching the vocal process. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "The vocal folds (true vocal cords) are two pearly-white mucosal folds that control the airway aperture and phonation. Each fold contains the **vocal ligament**, which represents the thickened free upper border of the conus elasticus (cricovocal membrane), extending from the angle of the thyroid cartilage to the vocal process of the arytenoid. The vocal folds are covered by stratified squamous epithelium devoid of submucosa.",
+      "say": "The vocal folds contain the vocal ligament, the thickened edge of the conus elasticus. Covered by stratified squamous epithelium, they lack submucosa and lymphatic vessels.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n12-ana-larynx-laryngeal-cartilages.webp",
+        "alt": "Vocal fold section showing the vocal ligament as the thickened upper border of the conus elasticus",
+        "caption": "Vocal fold section showing the vocal ligament as the thickened upper border of the conus elasticus. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "The rima glottidis is the narrowest fissure in the adult laryngeal cavity, bounded laterally by the vocal folds and medial surfaces of the arytenoid cartilages. It is subdivided into an anterior intermembranous part between the vocal ligaments and a posterior **intercartilaginous part** between the arytenoid cartilages. The shape and width of the rima glottidis vary continuously during respiration and speech.",
+      "say": "The rima glottidis is the narrowest fissure of the larynx. It divides into an anterior intermembranous portion and a posterior intercartilaginous part between the arytenoids.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Respiratory / Vocal State",
+          "Shape of Rima Glottidis",
+          "Position of Vocal Folds"
+        ],
+        "rows": [
+          [
+            "Quiet respiration",
+            "Narrow triangular / lanceolate slit",
+            "Folds slightly abducted; intermembranous part wide open"
+          ],
+          [
+            "Forced inspiration",
+            "Wide diamond-shaped / pentagonal aperture",
+            "Folds maximally abducted by posterior cricoarytenoid"
+          ],
+          [
+            "Phonation (Speaking / Singing)",
+            "Tightly closed linear chink",
+            "Folds fully adducted and tensed in midline; vibrates with expired air"
+          ],
+          [
+            "Whispering",
+            "Inverted Y-shaped opening",
+            "Intermembranous part closed, posterior intercartilaginous part open"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The cricothyroid muscle is a fan-shaped muscle situated on the external anterior surface of the larynx. Arising from the anterolateral arch of the cricoid cartilage, its fibres sweep upward and backward to insert into the inferior border and inferior cornu of the **thyroid cartilage**. It is the only intrinsic laryngeal muscle situated entirely on the external surface of the skeletal frame.",
+      "say": "Located on the external anterior larynx, the cricothyroid muscle bridges the cricoid arch and thyroid cartilage. It is the only intrinsic muscle situated externally.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "m1",
+            "label": "Cricothyroid Contraction (Pulls anterior thyroid cartilage downward and forward)"
+          },
+          {
+            "id": "m2",
+            "label": "Rotational Hinge Effect (Tilts thyroid lamina forward around cricothyroid joints)"
+          },
+          {
+            "id": "m3",
+            "label": "Increased Distance (Lengthens distance between thyroid angle and arytenoid vocal processes)"
+          },
+          {
+            "id": "m4",
+            "label": "Vocal Fold Tension (Tenses and elongates true vocal folds, raising vocal pitch)"
+          }
+        ],
+        "edges": [
+          [
+            "m1",
+            "m2"
+          ],
+          [
+            "m2",
+            "m3"
+          ],
+          [
+            "m3",
+            "m4"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Functionally, the cricothyroid is the sole tensor of the vocal folds. Uniquely among all intrinsic laryngeal muscles, the cricothyroid is innervated not by the recurrent laryngeal nerve, but by the **external laryngeal nerve** (branch of superior laryngeal nerve CN X). Contraction increases longitudinal tension on the vocal ligaments, which elevates the acoustic pitch of the voice.",
+      "say": "Cricothyroid is the sole vocal cord tensor and the only muscle innervated by the external laryngeal nerve. Contraction tightens the vocal cords to elevate voice pitch.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cricothyroid Muscle",
+          "points": [
+            "Location: External anterior surface of larynx",
+            "Motor nerve supply: External laryngeal nerve (CN X)",
+            "Physiological action: Sole tensor of the vocal folds",
+            "Acoustic effect: Raises phonatory pitch"
+          ]
+        },
+        "right": {
+          "title": "Thyroarytenoid / Vocalis",
+          "points": [
+            "Location: Internal submucosal vocal cord core",
+            "Motor nerve supply: Recurrent laryngeal nerve (CN X)",
+            "Physiological action: Relaxes and fine-tunes vocal folds",
+            "Acoustic effect: Modulates vocal timbre and lowers pitch"
+          ]
+        }
+      }
     }
-   }
-  }
- ],
- "quiz": [
-  "9fd3f752-fcd1-46c4-aa0d-6fba2635cd69",
-  "b54ac627-187e-4258-a8a5-2dcff6964ce6",
-  "d5723b69-10dd-437f-90fd-a3ce8cbdd2d7"
- ]
+  ],
+  "quiz": [
+    "9fd3f752-fcd1-46c4-aa0d-6fba2635cd69",
+    "b54ac627-187e-4258-a8a5-2dcff6964ce6",
+    "d5723b69-10dd-437f-90fd-a3ce8cbdd2d7"
+  ]
 }

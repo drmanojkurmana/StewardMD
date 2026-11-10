@@ -1,242 +1,253 @@
 {
- "v": 1,
- "gen": "AI",
- "module": "ana-skull-cranial-cavity",
- "subject": "anatomy",
- "title": "Dural Folds: Falx Cerebri, Tentorium Cerebelli, and Herniation Syndromes",
- "minutes": 8,
- "steps": [
-  {
-   "tx": "The cranial dura mater consists of an outer endosteal layer adherent to the skull and an inner meningeal layer facing the arachnoid. The meningeal layer reflects inwards to form four rigid, fibrous dural septa that partition the cranial cavity into interlocking compartments: the falx cerebri, tentorium cerebelli, **falx cerebelli**, and diaphragma sellae.",
-   "say": "Four inward reflections of meningeal dura partition the cranial vault: falx cerebri, tentorium cerebelli, falx cerebelli, and diaphragma sellae. They restrain brain movement during head acceleration.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/need-m773-ana-skull-cranial-cavity-falx-cerebri.webp",
-    "alt": "Anatomical diagram of the falx cerebelli, the small dural fold between the cerebellar hemispheres.",
-    "caption": "The falx cerebelli is drawn as a small sickle of dura descending between the two cerebellar hemispheres. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "The falx cerebri is a large, sickle-shaped sickle of dura mater descending vertically in the longitudinal cerebral fissure between the two cerebral hemispheres. Anteriorly, its narrow apex attaches to the **crista galli** of the ethmoid bone and frontal crest. Posteriorly, its broad base blends centrally with the superior surface of the tentorium cerebelli along the straight sinus.",
-   "say": "The sickle-shaped falx cerebri descends between the cerebral hemispheres. It anchors anteriorly to the crista galli and posteriorly to the tentorium cerebelli.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "f1",
-      "label": "Anterior Apex: Attaches firmly to crista galli and frontal crest"
-     },
-     {
-      "id": "f2",
-      "label": "Superior Convex Border: Attached along sagittal sulcus; encloses superior sagittal sinus"
-     },
-     {
-      "id": "f3",
-      "label": "Inferior Concave Border: Free edge arching over corpus callosum; encloses inferior sagittal sinus"
-     },
-     {
-      "id": "f4",
-      "label": "Posterior Base: Blends with tentorium cerebelli; encloses the straight sinus"
-     }
-    ],
-    "edges": [
-     [
-      "f1",
-      "f2"
-     ],
-     [
-      "f2",
-      "f4"
-     ],
-     [
-      "f1",
-      "f3"
-     ],
-     [
-      "f3",
-      "f4"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The tentorium cerebelli is a crescentic, tent-like horizontal dural sheet that roofs over the posterior cranial fossa, separating the occipital lobes of the cerebrum above from the cerebellum below. It possesses a fixed outer margin attached to the **transverse sulcus** of the occipital bone and superior border of petrous temporal, and a free anterior concave margin.",
-   "say": "Roofing over the cerebellum, the tentorium cerebelli separates the occipital lobes from the cerebellum. It features an outer fixed margin and an inner free concave edge.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Fixed Border of Tentorium",
-     "points": [
-      "Attached to transverse ridges of occipital bone (encloses transverse sinus)",
-      "Attached to superior border of petrous temporal (encloses superior petrosal sinus)",
-      "Terminates anteriorly by attaching to posterior clinoid processes",
-      "Provides unyielding perimeter anchor for tentorial roof"
-     ]
+  "v": 1,
+  "gen": "AI",
+  "module": "ana-skull-cranial-cavity",
+  "subject": "anatomy",
+  "title": "Dural Folds: Falx Cerebri, Tentorium Cerebelli, and Herniation Syndromes",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "The cranial dura mater consists of an outer endosteal layer adherent to the skull and an inner meningeal layer facing the arachnoid. The meningeal layer reflects inwards to form four rigid, fibrous dural septa that partition the cranial cavity into interlocking compartments: the falx cerebri, tentorium cerebelli, **falx cerebelli**, and diaphragma sellae.",
+      "say": "Four inward reflections of meningeal dura partition the cranial vault: falx cerebri, tentorium cerebelli, falx cerebelli, and diaphragma sellae. They restrain brain movement during head acceleration.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m773-ana-skull-cranial-cavity-falx-cerebri.webp",
+        "alt": "Anatomical diagram of the falx cerebelli, the small dural fold between the cerebellar hemispheres.",
+        "caption": "The falx cerebelli is drawn as a small sickle of dura descending between the two cerebellar hemispheres. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
     },
-    "right": {
-     "title": "Free Border (Tentorial Notch)",
-     "points": [
-      "U-shaped free concave border facing anteriorly",
-      "Encloses the narrow tentorial notch (incisura tentorii)",
-      "Transmits the midbrain connecting forebrain to hindbrain",
-      "Crosses over fixed border to attach to anterior clinoid processes"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "The free concave border of the tentorium cerebelli forms the tentorial notch (incisura tentorii), an oval aperture through which the midbrain passes to connect the supratentorial forebrain with the infratentorial brainstem. The **tentorial notch** is bounded anteriorly by the dorsum sellae and sphenoid, leaving a narrow space vulnerable to herniation.",
-   "say": "The tentorial notch is an oval aperture through which the midbrain traverses. Bounded by rigid dura and bone, it forms a hazardous choke point during brain swelling.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n1",
-      "label": "Supratentorial Mass Effect (Haematoma, edema, or tumour expands one hemisphere)"
-     },
-     {
-      "id": "n2",
-      "label": "Medial Uncal Displacement (Uncus of temporal lobe forced into tentorial notch)"
-     },
-     {
-      "id": "n3",
-      "label": "Midbrain Compression (Direct distortion of cerebral peduncles and reticular activating system)"
-     },
-     {
-      "id": "n4",
-      "label": "Coma and Decerebrate Posturing (Brainstem ischemia and downward fatal herniation)"
-     }
-    ],
-    "edges": [
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ],
-     [
-      "n3",
-      "n4"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "When an expanding unilateral supratentorial mass displaces the medial temporal lobe medially, the uncus herniates across the rigid free edge of the tentorium cerebelli. This is termed **uncal herniation** (lateral transtentorial herniation). The herniating uncus compresses the ipsilateral oculomotor nerve, posterior cerebral artery, and ipsilateral cerebral peduncle against the tentorial rim.",
-   "say": "Uncal herniation forces the medial temporal lobe over the tentorial edge. Compressing the oculomotor nerve and posterior cerebral artery causes mydriasis and cortical ischemia.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Structure Compressed",
-     "Mechanism of Injury",
-     "Classic Clinical Manifestation"
-    ],
-    "rows": [
-     [
-      "Ipsilateral CN III",
-      "Crushed against tentorial edge and petroclinoid ligament",
-      "Ipsilateral fixed dilated pupil (blown pupil) and ptosis"
-     ],
-     [
-      "Posterior cerebral artery (PCA)",
-      "Compressed against tentorial notch edge",
-      "Occipital lobe infarction causing contralateral homonymous hemianopia"
-     ],
-     [
-      "Ipsilateral cerebral peduncle",
-      "Direct pressure on descending corticospinal tract",
-      "Contralateral spastic hemiparesis"
-     ],
-     [
-      "Contralateral cerebral peduncle",
-      "Pushed against opposite tentorial edge (Kernohan notch)",
-      "Paradoxical ipsilateral hemiparesis (Kernohan phenomenon)"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "In severe uncal herniation, the midbrain may be pushed across to the opposite side, striking the contralateral free edge of the tentorium. The resulting compression of the contralateral cerebral peduncle produces an ipsilateral hemiparesis, a false localizing sign termed the **Kernohan notch phenomenon**. Clinicians must recognise that weakness on the side of the dilated pupil indicates advanced brain shift.",
-   "say": "Midbrain displacement against the opposite tentorial edge creates Kernohan notch phenomenon. This produces paradoxical weakness on the same side as the dilated pupil.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Classic Uncal Presentation",
-     "points": [
-      "Ipsilateral dilated, non-reactive pupil (CN III compression)",
-      "Contralateral hemiparesis (Ipsilateral peduncle compression)",
-      "Reliable localising neurological sign",
-      "Direct anatomical correspondence to haematoma side"
-     ]
+    {
+      "tx": "The falx cerebri is a large, sickle-shaped sickle of dura mater descending vertically in the longitudinal cerebral fissure between the two cerebral hemispheres. Anteriorly, its narrow apex attaches to the **crista galli** of the ethmoid bone and frontal crest. Posteriorly, its broad base blends centrally with the superior surface of the tentorium cerebelli along the straight sinus.",
+      "say": "The sickle-shaped falx cerebri descends between the cerebral hemispheres. It anchors anteriorly to the crista galli and posteriorly to the tentorium cerebelli.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "f1",
+            "label": "Anterior Apex: Attaches firmly to crista galli and frontal crest"
+          },
+          {
+            "id": "f2",
+            "label": "Superior Convex Border: Attached along sagittal sulcus; encloses superior sagittal sinus"
+          },
+          {
+            "id": "f3",
+            "label": "Inferior Concave Border: Free edge arching over corpus callosum; encloses inferior sagittal sinus"
+          },
+          {
+            "id": "f4",
+            "label": "Posterior Base: Blends with tentorium cerebelli; encloses the straight sinus"
+          }
+        ],
+        "edges": [
+          [
+            "f1",
+            "f2"
+          ],
+          [
+            "f2",
+            "f4"
+          ],
+          [
+            "f1",
+            "f3"
+          ],
+          [
+            "f3",
+            "f4"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Kernohan Notch Presentation",
-     "points": [
-      "Ipsilateral dilated, non-reactive pupil (CN III compression)",
-      "Paradoxical ipsilateral hemiparesis (Contralateral peduncle compression)",
-      "False localising sign in advanced herniation",
-      "Demands urgent bilateral imaging to avoid operating on wrong side"
-     ]
+    {
+      "tx": "The tentorium cerebelli is a crescentic, tent-like horizontal dural sheet that roofs over the posterior cranial fossa, separating the occipital lobes of the cerebrum above from the cerebellum below. It possesses a fixed outer margin attached to the **transverse sulcus** of the occipital bone and superior border of petrous temporal, and a free anterior concave margin.",
+      "say": "Roofing over the cerebellum, the tentorium cerebelli separates the occipital lobes from the cerebellum. It features an outer fixed margin and an inner free concave edge.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fixed Border of Tentorium",
+          "points": [
+            "Attached to transverse ridges of occipital bone (encloses transverse sinus)",
+            "Attached to superior border of petrous temporal (encloses superior petrosal sinus)",
+            "Terminates anteriorly by attaching to posterior clinoid processes",
+            "Provides unyielding perimeter anchor for tentorial roof"
+          ]
+        },
+        "right": {
+          "title": "Free Border (Tentorial Notch)",
+          "points": [
+            "U-shaped free concave border facing anteriorly",
+            "Encloses the narrow tentorial notch (incisura tentorii)",
+            "Transmits the midbrain connecting forebrain to hindbrain",
+            "Crosses over fixed border to attach to anterior clinoid processes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The free concave border of the tentorium cerebelli forms the tentorial notch (incisura tentorii), an oval aperture through which the midbrain passes to connect the supratentorial forebrain with the infratentorial brainstem. The **tentorial notch** is bounded anteriorly by the dorsum sellae and sphenoid, leaving a narrow space vulnerable to herniation.",
+      "say": "The tentorial notch is an oval aperture through which the midbrain traverses. Bounded by rigid dura and bone, it forms a hazardous choke point during brain swelling.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n1",
+            "label": "Supratentorial Mass Effect (Haematoma, edema, or tumour expands one hemisphere)"
+          },
+          {
+            "id": "n2",
+            "label": "Medial Uncal Displacement (Uncus of temporal lobe forced into tentorial notch)"
+          },
+          {
+            "id": "n3",
+            "label": "Midbrain Compression (Direct distortion of cerebral peduncles and reticular activating system)"
+          },
+          {
+            "id": "n4",
+            "label": "Coma and Decerebrate Posturing (Brainstem ischemia and downward fatal herniation)"
+          }
+        ],
+        "edges": [
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ],
+          [
+            "n3",
+            "n4"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "When an expanding unilateral supratentorial mass displaces the medial temporal lobe medially, the uncus herniates across the rigid free edge of the tentorium cerebelli. This is termed **uncal herniation** (lateral transtentorial herniation). The herniating uncus compresses the ipsilateral oculomotor nerve, posterior cerebral artery, and ipsilateral cerebral peduncle against the tentorial rim.",
+      "say": "Uncal herniation forces the medial temporal lobe over the tentorial edge. Compressing the oculomotor nerve and posterior cerebral artery causes mydriasis and cortical ischemia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Structure Compressed",
+          "Mechanism of Injury",
+          "Classic Clinical Manifestation"
+        ],
+        "rows": [
+          [
+            "Ipsilateral CN III",
+            "Crushed against tentorial edge and petroclinoid ligament",
+            "Ipsilateral fixed dilated pupil (blown pupil) and ptosis"
+          ],
+          [
+            "Posterior cerebral artery (PCA)",
+            "Compressed against tentorial notch edge",
+            "Occipital lobe infarction causing contralateral homonymous hemianopia"
+          ],
+          [
+            "Ipsilateral cerebral peduncle",
+            "Direct pressure on descending corticospinal tract",
+            "Contralateral spastic hemiparesis"
+          ],
+          [
+            "Contralateral cerebral peduncle",
+            "Pushed against opposite tentorial edge (Kernohan notch)",
+            "Paradoxical ipsilateral hemiparesis (Kernohan phenomenon)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In severe uncal herniation, the midbrain may be pushed across to the opposite side, striking the contralateral free edge of the tentorium. The resulting compression of the contralateral cerebral peduncle produces an ipsilateral hemiparesis, a false localizing sign termed the **Kernohan notch phenomenon**. Clinicians must recognise that weakness on the side of the dilated pupil indicates advanced brain shift.",
+      "say": "Midbrain displacement against the opposite tentorial edge creates Kernohan notch phenomenon. This produces paradoxical weakness on the same side as the dilated pupil.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic Uncal Presentation",
+          "points": [
+            "Ipsilateral dilated, non-reactive pupil (CN III compression)",
+            "Contralateral hemiparesis (Ipsilateral peduncle compression)",
+            "Reliable localising neurological sign",
+            "Direct anatomical correspondence to haematoma side"
+          ]
+        },
+        "right": {
+          "title": "Kernohan Notch Presentation",
+          "points": [
+            "Ipsilateral dilated, non-reactive pupil (CN III compression)",
+            "Paradoxical ipsilateral hemiparesis (Contralateral peduncle compression)",
+            "False localising sign in advanced herniation",
+            "Demands urgent bilateral imaging to avoid operating on wrong side"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A different herniation syndrome occurs when expanding medial frontal lobes are forced beneath the free inferior margin of the falx cerebri, termed subfalcine or **cingulate herniation**. The cingulate gyrus herniates across the midline beneath the falx, which can compress the pericallosal and callosomarginal branches of the anterior cerebral artery, causing bilateral lower extremity weakness.",
+      "say": "Subfalcine herniation forces the cingulate gyrus beneath the falx cerebri. Compressing the anterior cerebral artery branches causes lower extremity motor weakness.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "s1",
+            "label": "Frontal Lobe Mass (Tumour, contusion, or subdural collection)"
+          },
+          {
+            "id": "s2",
+            "label": "Subfalcine Shift (Cingulate gyrus herniates under free lower margin of falx cerebri)"
+          },
+          {
+            "id": "s3",
+            "label": "Anterior Cerebral Artery Compression (Infarction of medial motor cortex homunculus)"
+          },
+          {
+            "id": "s4",
+            "label": "Paraparesis / Lower Limb Weakness (Loss of leg and foot motor control)"
+          }
+        ],
+        "edges": [
+          [
+            "s1",
+            "s2"
+          ],
+          [
+            "s2",
+            "s3"
+          ],
+          [
+            "s3",
+            "s4"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cingulate herniation**, also called subfalcine herniation, occurs when an expanding medial frontal lobe is driven under the free lower edge of the falx cerebri. The cingulate gyrus crosses the midline and can pinch pericallosal and callosomarginal branches of the anterior cerebral artery, weakening both lower limbs. Tonsillar herniation is another descent: the cerebellar tonsils are forced through the foramen magnum, compress the medulla, and threaten breathing from that medullary squeeze.",
+      "say": "Subfalcine herniation pushes the cingulate gyrus under the falx and can compress anterior cerebral artery branches, weakening the legs. Tonsillar herniation instead drives the cerebellar tonsils through the foramen magnum onto the medulla. That medullary compression endangers breathing in a way the frontal descent does not.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n19-ana-skull-cranial-cavity-falx-cerebri.webp",
+        "alt": "Cerebellar tonsils forced down through the foramen magnum and pressing on the medulla.",
+        "caption": "The cerebellar tonsils pass through the foramen magnum and compress the medulla in the upper cervical canal. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "In the posterior fossa, elevated intracranial pressure forces the cerebellar tonsils downward through the foramen magnum, producing tonsillar herniation or coning. The **cerebellar tonsils** compress the medulla oblongata, crushing the cardiac and respiratory centres. This triggers immediate respiratory arrest and catastrophic systemic circulatory collapse, the fatal end-stage of uncal or central herniation.",
+      "say": "Tonsillar herniation forces the cerebellar tonsils through the foramen magnum. Compressing the medulla oblongata crushes vital respiratory centres, causing sudden death.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n19-ana-skull-cranial-cavity-falx-cerebri.webp",
+        "alt": "Tonsillar herniation with cerebellar tonsils forced through the foramen magnum compressing the medulla",
+        "caption": "Tonsillar herniation with cerebellar tonsils forced through the foramen magnum compressing the medulla. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
     }
-   }
-  },
-  {
-   "tx": "A different herniation syndrome occurs when expanding medial frontal lobes are forced beneath the free inferior margin of the falx cerebri, termed subfalcine or **cingulate herniation**. The cingulate gyrus herniates across the midline beneath the falx, which can compress the pericallosal and callosomarginal branches of the anterior cerebral artery, causing bilateral lower extremity weakness.",
-   "say": "Subfalcine herniation forces the cingulate gyrus beneath the falx cerebri. Compressing the anterior cerebral artery branches causes lower extremity motor weakness.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "s1",
-      "label": "Frontal Lobe Mass (Tumour, contusion, or subdural collection)"
-     },
-     {
-      "id": "s2",
-      "label": "Subfalcine Shift (Cingulate gyrus herniates under free lower margin of falx cerebri)"
-     },
-     {
-      "id": "s3",
-      "label": "Anterior Cerebral Artery Compression (Infarction of medial motor cortex homunculus)"
-     },
-     {
-      "id": "s4",
-      "label": "Paraparesis / Lower Limb Weakness (Loss of leg and foot motor control)"
-     }
-    ],
-    "edges": [
-     [
-      "s1",
-      "s2"
-     ],
-     [
-      "s2",
-      "s3"
-     ],
-     [
-      "s3",
-      "s4"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "In the posterior fossa, elevated intracranial pressure forces the cerebellar tonsils downward through the foramen magnum, producing tonsillar herniation or coning. The **cerebellar tonsils** compress the medulla oblongata, crushing the cardiac and respiratory centres. This triggers immediate respiratory arrest and catastrophic systemic circulatory collapse, the fatal end-stage of uncal or central herniation.",
-   "say": "Tonsillar herniation forces the cerebellar tonsils through the foramen magnum. Compressing the medulla oblongata crushes vital respiratory centres, causing sudden death.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/need-n19-ana-skull-cranial-cavity-falx-cerebri.webp",
-    "alt": "Tonsillar herniation with cerebellar tonsils forced through the foramen magnum compressing the medulla",
-    "caption": "Tonsillar herniation with cerebellar tonsils forced through the foramen magnum compressing the medulla. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  }
- ],
- "quiz": [
-  "1b239bb7-bbf8-4eeb-b177-c1d84921d8f9",
-  "0b63d5ed-2923-42da-b429-409f0c2fa8d6",
-  "0c512e55-c21c-4959-bb2e-ee3990a760d1"
- ]
+  ],
+  "quiz": [
+    "1b239bb7-bbf8-4eeb-b177-c1d84921d8f9",
+    "0b63d5ed-2923-42da-b429-409f0c2fa8d6",
+    "0c512e55-c21c-4959-bb2e-ee3990a760d1"
+  ]
 }

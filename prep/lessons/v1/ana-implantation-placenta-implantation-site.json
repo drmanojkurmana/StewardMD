@@ -1,242 +1,253 @@
 {
- "v": 1,
- "module": "ana-implantation-placenta",
- "subject": "anatomy",
- "title": "Implantation Site and Placental Villi Architecture",
- "minutes": 8,
- "steps": [
-  {
-   "tx": "Human blastocyst implantation begins around day six following fertilisation and completes by day eleven. The normal physiological site is the **posterior superior uterine wall** near the midline in the upper uterine segment. Implantation into the lower uterine segment near the internal os leads pathologically to placenta previa with antepartum hemorrhage.",
-   "say": "Blastocyst implantation begins on day six and finishes by day eleven. The physiological implantation site is the posterior superior uterine wall near the fundus. Attachment in the lower segment risks placenta previa and catastrophic antepartum bleeding.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/need-n9-ana-implantation-placenta-implantation-site.webp",
-    "alt": "A blastocyst embedding in the endometrium of the posterior superior uterine wall.",
-    "caption": "The blastocyst is shown embedding in the posterior superior uterine wall between day six and day eleven. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "Upon contacting maternal endometrium, the trophoblast differentiates into two distinct cellular layers. The inner mononucleated stem layer is the **cytotrophoblast**, characterized by distinct cellular borders and active mitosis. It continually divides and donates daughter cells outward into the invasive multinucleated mantle.",
-   "say": "Upon endometrial contact, the trophoblast splits into two specialized layers. The inner cellular layer is the cytotrophoblast, marked by discrete cell boundaries and high mitotic activity. It constantly feeds new cells into the outer syncytial mantle.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Cytotrophoblast Layer",
-     "points": [
-      "Inner cellular Langhans layer",
-      "Well-defined individual cell borders",
-      "High mitotic index generating daughter cells",
-      "Invades spiral arterioles in early gestation"
-     ]
+  "v": 1,
+  "module": "ana-implantation-placenta",
+  "subject": "anatomy",
+  "title": "Implantation Site and Placental Villi Architecture",
+  "minutes": 8,
+  "steps": [
+    {
+      "tx": "Human blastocyst implantation begins around day six following fertilisation and completes by day eleven. The normal physiological site is the **posterior superior uterine wall** near the midline in the upper uterine segment. Implantation into the lower uterine segment near the internal os leads pathologically to placenta previa with antepartum hemorrhage.",
+      "say": "Blastocyst implantation begins on day six and finishes by day eleven. The physiological implantation site is the posterior superior uterine wall near the fundus. Attachment in the lower segment risks placenta previa and catastrophic antepartum bleeding.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n9-ana-implantation-placenta-implantation-site.webp",
+        "alt": "A blastocyst embedding in the endometrium of the posterior superior uterine wall.",
+        "caption": "The blastocyst is shown embedding in the posterior superior uterine wall between day six and day eleven. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
     },
-    "right": {
-     "title": "Syncytiotrophoblast Layer",
-     "points": [
-      "Outer multinucleated protoplasmic mass",
-      "Lacks individual cell membranes",
-      "Secretes human chorionic gonadotropin",
-      "Directly erodes maternal uterine stroma"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "The outer invasive mantle is the multinucleated **syncytiotrophoblast**, formed by fusion of cytotrophoblastic cells without intervening cell borders. It secretes proteolytic enzymes that erode maternal endometrial stroma and maternal capillaries, creating syncytial lacunae. It also synthesizes human chorionic gonadotropin to maintain the ovarian corpus luteum.",
-   "say": "The outer invasive layer is the syncytiotrophoblast, a multinucleated sheet devoid of cell borders. It releases enzymes that erode maternal tissue and blood vessels, forming trophoblastic lacunae. It also secretes human chorionic gonadotropin to preserve the corpus luteum.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/need-n10-ana-implantation-placenta-implantation-site.webp",
-    "alt": "Syncytiotrophoblast as the outer multinucleated invasive layer eroding maternal stroma and capillaries at implantation",
-    "caption": "Syncytiotrophoblast as the outer multinucleated invasive layer eroding maternal stroma and capillaries at implantation. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "Placental villi evolve through three architectural stages. In late week two, a **primary chorionic villus** develops as a solid core of proliferating cytotrophoblast covered by an outer jacket of syncytiotrophoblast. These cords sprout into maternal blood-filled lacunar spaces to expand surface contact.",
-   "say": "Placental villi evolve through three sequential stages. In late week two, a primary villus forms as a solid cylinder of cytotrophoblast capped by syncytiotrophoblast. These finger-like projections extend into maternal lacunae to enhance nutrient exchange.",
-   "vis": {
-    "kind": "flow",
-    "title": "Chorionic Villus Maturation",
-    "nodes": [
-     {
-      "id": "prim",
-      "label": "Primary: Cyto plus Syncytio"
-     },
-     {
-      "id": "sec",
-      "label": "Secondary: Mesenchymal Core Invades"
-     },
-     {
-      "id": "tert",
-      "label": "Tertiary: Capillary Loops Connect"
-     },
-     {
-      "id": "plac",
-      "label": "Definitive Hemochorial Barrier"
-     }
-    ],
-    "edges": [
-     [
-      "prim",
-      "sec"
-     ],
-     [
-      "sec",
-      "tert"
-     ],
-     [
-      "tert",
-      "plac"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Early in week three, extraembryonic somatic mesoderm invades the central core, converting the structure into a **secondary chorionic villus**. The villus now comprises three layers: an inner loose mesenchymal connective tissue core, an intermediate cytotrophoblastic sheath, and the outer syncytiotrophoblast layer.",
-   "say": "Early in week three, extraembryonic mesoderm penetrates the core, transforming it into a secondary villus. The structure now contains three layers: a central mesenchymal connective tissue core, an intermediate cytotrophoblast sleeve, and the outer syncytial coat.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Secondary Villus Core",
-     "points": [
-      "Loose extraembryonic mesenchyme",
-      "Avascular during early formation",
-      "Surrounded by complete cytotrophoblast",
-      "Outer syncytiotrophoblast lining"
-     ]
+    {
+      "tx": "Upon contacting maternal endometrium, the trophoblast differentiates into two distinct cellular layers. The inner mononucleated stem layer is the **cytotrophoblast**, characterized by distinct cellular borders and active mitosis. It continually divides and donates daughter cells outward into the invasive multinucleated mantle.",
+      "say": "Upon endometrial contact, the trophoblast splits into two specialized layers. The inner cellular layer is the cytotrophoblast, marked by discrete cell boundaries and high mitotic activity. It constantly feeds new cells into the outer syncytial mantle.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cytotrophoblast Layer",
+          "points": [
+            "Inner cellular Langhans layer",
+            "Well-defined individual cell borders",
+            "High mitotic index generating daughter cells",
+            "Invades spiral arterioles in early gestation"
+          ]
+        },
+        "right": {
+          "title": "Syncytiotrophoblast Layer",
+          "points": [
+            "Outer multinucleated protoplasmic mass",
+            "Lacks individual cell membranes",
+            "Secretes human chorionic gonadotropin",
+            "Directly erodes maternal uterine stroma"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Tertiary Villus Core",
-     "points": [
-      "Contains fetal capillaries and red cells",
-      "Vascular cords unite with umbilical vessels",
-      "Cytotrophoblast thins to form vasculosyncytial membrane",
-      "Direct site of physiological gas transfer"
-     ]
+    {
+      "tx": "Once trophoblast meets endometrium it splits into two layers. The inner stem layer is the **cytotrophoblast**, a sheet of separate mononucleated cells with clear borders and brisk mitosis. Those cells keep dividing and push daughter cells outward into the multinucleated mantle. That outer syncytiotrophoblast has no cell boundaries, erodes endometrial stroma, and opens maternal capillaries so lacunae fill with maternal blood at the implantation site. The inner layer is the source. The outer layer does the invasion.",
+      "say": "At implantation the trophoblast forms two layers. Inner cytotrophoblast cells stay separate, show clear borders, and divide actively. Their daughters join the outer syncytiotrophoblast, a multinucleated sheet without cell borders that eats into endometrial stroma and maternal capillaries. The inner layer supplies cells. The outer layer does the erosion.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n10-ana-implantation-placenta-implantation-site.webp",
+        "alt": "Implanting trophoblast with an outer multinucleated syncytial layer eroding endometrial stroma and maternal capillaries.",
+        "caption": "The outer syncytiotrophoblast, lacking cell borders, invades maternal stroma and opens capillaries while an inner cell layer feeds it. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "The outer invasive mantle is the multinucleated **syncytiotrophoblast**, formed by fusion of cytotrophoblastic cells without intervening cell borders. It secretes proteolytic enzymes that erode maternal endometrial stroma and maternal capillaries, creating syncytial lacunae. It also synthesizes human chorionic gonadotropin to maintain the ovarian corpus luteum.",
+      "say": "The outer invasive layer is the syncytiotrophoblast, a multinucleated sheet devoid of cell borders. It releases enzymes that erode maternal tissue and blood vessels, forming trophoblastic lacunae. It also secretes human chorionic gonadotropin to preserve the corpus luteum.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n10-ana-implantation-placenta-implantation-site.webp",
+        "alt": "Syncytiotrophoblast as the outer multinucleated invasive layer eroding maternal stroma and capillaries at implantation",
+        "caption": "Syncytiotrophoblast as the outer multinucleated invasive layer eroding maternal stroma and capillaries at implantation. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Placental villi evolve through three architectural stages. In late week two, a **primary chorionic villus** develops as a solid core of proliferating cytotrophoblast covered by an outer jacket of syncytiotrophoblast. These cords sprout into maternal blood-filled lacunar spaces to expand surface contact.",
+      "say": "Placental villi evolve through three sequential stages. In late week two, a primary villus forms as a solid cylinder of cytotrophoblast capped by syncytiotrophoblast. These finger-like projections extend into maternal lacunae to enhance nutrient exchange.",
+      "vis": {
+        "kind": "flow",
+        "title": "Chorionic Villus Maturation",
+        "nodes": [
+          {
+            "id": "prim",
+            "label": "Primary: Cyto plus Syncytio"
+          },
+          {
+            "id": "sec",
+            "label": "Secondary: Mesenchymal Core Invades"
+          },
+          {
+            "id": "tert",
+            "label": "Tertiary: Capillary Loops Connect"
+          },
+          {
+            "id": "plac",
+            "label": "Definitive Hemochorial Barrier"
+          }
+        ],
+        "edges": [
+          [
+            "prim",
+            "sec"
+          ],
+          [
+            "sec",
+            "tert"
+          ],
+          [
+            "tert",
+            "plac"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Early in week three, extraembryonic somatic mesoderm invades the central core, converting the structure into a **secondary chorionic villus**. The villus now comprises three layers: an inner loose mesenchymal connective tissue core, an intermediate cytotrophoblastic sheath, and the outer syncytiotrophoblast layer.",
+      "say": "Early in week three, extraembryonic mesoderm penetrates the core, transforming it into a secondary villus. The structure now contains three layers: a central mesenchymal connective tissue core, an intermediate cytotrophoblast sleeve, and the outer syncytial coat.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Secondary Villus Core",
+          "points": [
+            "Loose extraembryonic mesenchyme",
+            "Avascular during early formation",
+            "Surrounded by complete cytotrophoblast",
+            "Outer syncytiotrophoblast lining"
+          ]
+        },
+        "right": {
+          "title": "Tertiary Villus Core",
+          "points": [
+            "Contains fetal capillaries and red cells",
+            "Vascular cords unite with umbilical vessels",
+            "Cytotrophoblast thins to form vasculosyncytial membrane",
+            "Direct site of physiological gas transfer"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "By the end of the third week, embryonic mesenchyme differentiates into arteriocapillary loops, creating a functional **tertiary chorionic villus**. These capillaries link to embryonic vessels in the connecting stalk, establishing the embryonic-placental circulation. As gestation advances, the cytotrophoblastic layer thins to form efficient vasculosyncytial membranes.",
+      "say": "By late week three, embryonic blood vessels sprout within the mesenchyme, establishing the tertiary villus. These capillaries join umbilical vessels in the connecting stalk, initiating fetoplacental circulation. Progressive cytotrophoblast thinning creates a minimal barrier for gas exchange.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Villus Stage",
+          "Timing of Appearance",
+          "Core Composition",
+          "Outer Sheath"
+        ],
+        "rows": [
+          [
+            "Primary Villus",
+            "Day 13 to 14",
+            "Solid cytotrophoblast core",
+            "Syncytiotrophoblast cap"
+          ],
+          [
+            "Secondary Villus",
+            "Day 15 to 18",
+            "Extraembryonic mesoderm core",
+            "Cytotrophoblast and syncytiotrophoblast"
+          ],
+          [
+            "Tertiary Villus",
+            "Day 19 to 21",
+            "Fetal capillaries and red blood cells",
+            "Vasculosyncytial thinning membrane"
+          ],
+          [
+            "Stem Villus",
+            "Second trimester",
+            "Anchoring collagen and main vessels",
+            "Attaches to maternal decidual plate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Under progesterone stimulation, the maternal endometrium transforms into decidua. The specialized portion lying directly deep to the implanting conceptus is the **decidua basalis**, which forms the maternal component of the definitive placenta. Decidual cells swell with glycogen and lipids, providing nutrition and restraining trophoblastic penetration.",
+      "say": "Maternal endometrium transforms into decidua under progesterone influence. The region directly beneath the conceptus is the decidua basalis, forming the maternal contribution to the placenta. Glycogen-rich decidual cells nourish the embryo and curb excessive trophoblast invasion.",
+      "vis": {
+        "kind": "flow",
+        "title": "Decidual Topographical Subdivisions",
+        "nodes": [
+          {
+            "id": "bas",
+            "label": "Decidua Basalis: Under Conceptus"
+          },
+          {
+            "id": "cap",
+            "label": "Decidua Capsularis: Over Conceptus"
+          },
+          {
+            "id": "par",
+            "label": "Decidua Parietalis: Remainder of Cavity"
+          },
+          {
+            "id": "oblit",
+            "label": "Fusion and Cavity Obliteration"
+          }
+        ],
+        "edges": [
+          [
+            "bas",
+            "oblit"
+          ],
+          [
+            "cap",
+            "oblit"
+          ],
+          [
+            "par",
+            "oblit"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Defective decidualization permits pathological trophoblast invasion into the underlying myometrium. In **placenta accreta**, chorionic villi adhere directly to the myometrium without intervening decidua basalis. In placenta increta villi invade deep muscle, while placenta percreta breaches the uterine serosa, creating life-threatening postpartum hemorrhage requiring emergency peripartum hysterectomy.",
+      "say": "Inadequate decidualization leads to pathological myometrial invasion. In placenta accreta, chorionic villi adhere directly to the myometrium without intervening decidua. In placenta increta they penetrate muscle, while placenta percreta invades through the uterine serosa, demanding urgent hysterectomy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Invasive Anomaly",
+          "Depth of Penetration",
+          "Intervening Decidua",
+          "Surgical Implication"
+        ],
+        "rows": [
+          [
+            "Placenta Accreta",
+            "Villi adhere directly to superficial myometrium",
+            "Absent decidua basalis",
+            "Failure of placental separation"
+          ],
+          [
+            "Placenta Increta",
+            "Villi penetrate deep into myometrial wall",
+            "Complete absence of plane",
+            "Severe intrapartum hemorrhage"
+          ],
+          [
+            "Placenta Percreta",
+            "Villi erode full-thickness serosa into bladder",
+            "Penetrates uterine wall",
+            "Massive transfusion, hysterectomy"
+          ],
+          [
+            "Placenta Previa",
+            "Implantation over or near internal os",
+            "Normal decidua present",
+            "Painless antepartum bleeding"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "By the end of the third week, embryonic mesenchyme differentiates into arteriocapillary loops, creating a functional **tertiary chorionic villus**. These capillaries link to embryonic vessels in the connecting stalk, establishing the embryonic-placental circulation. As gestation advances, the cytotrophoblastic layer thins to form efficient vasculosyncytial membranes.",
-   "say": "By late week three, embryonic blood vessels sprout within the mesenchyme, establishing the tertiary villus. These capillaries join umbilical vessels in the connecting stalk, initiating fetoplacental circulation. Progressive cytotrophoblast thinning creates a minimal barrier for gas exchange.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Villus Stage",
-     "Timing of Appearance",
-     "Core Composition",
-     "Outer Sheath"
-    ],
-    "rows": [
-     [
-      "Primary Villus",
-      "Day 13 to 14",
-      "Solid cytotrophoblast core",
-      "Syncytiotrophoblast cap"
-     ],
-     [
-      "Secondary Villus",
-      "Day 15 to 18",
-      "Extraembryonic mesoderm core",
-      "Cytotrophoblast and syncytiotrophoblast"
-     ],
-     [
-      "Tertiary Villus",
-      "Day 19 to 21",
-      "Fetal capillaries and red blood cells",
-      "Vasculosyncytial thinning membrane"
-     ],
-     [
-      "Stem Villus",
-      "Second trimester",
-      "Anchoring collagen and main vessels",
-      "Attaches to maternal decidual plate"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Under progesterone stimulation, the maternal endometrium transforms into decidua. The specialized portion lying directly deep to the implanting conceptus is the **decidua basalis**, which forms the maternal component of the definitive placenta. Decidual cells swell with glycogen and lipids, providing nutrition and restraining trophoblastic penetration.",
-   "say": "Maternal endometrium transforms into decidua under progesterone influence. The region directly beneath the conceptus is the decidua basalis, forming the maternal contribution to the placenta. Glycogen-rich decidual cells nourish the embryo and curb excessive trophoblast invasion.",
-   "vis": {
-    "kind": "flow",
-    "title": "Decidual Topographical Subdivisions",
-    "nodes": [
-     {
-      "id": "bas",
-      "label": "Decidua Basalis: Under Conceptus"
-     },
-     {
-      "id": "cap",
-      "label": "Decidua Capsularis: Over Conceptus"
-     },
-     {
-      "id": "par",
-      "label": "Decidua Parietalis: Remainder of Cavity"
-     },
-     {
-      "id": "oblit",
-      "label": "Fusion and Cavity Obliteration"
-     }
-    ],
-    "edges": [
-     [
-      "bas",
-      "oblit"
-     ],
-     [
-      "cap",
-      "oblit"
-     ],
-     [
-      "par",
-      "oblit"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Defective decidualization permits pathological trophoblast invasion into the underlying myometrium. In **placenta accreta**, chorionic villi adhere directly to the myometrium without intervening decidua basalis. In placenta increta villi invade deep muscle, while placenta percreta breaches the uterine serosa, creating life-threatening postpartum hemorrhage requiring emergency peripartum hysterectomy.",
-   "say": "Inadequate decidualization leads to pathological myometrial invasion. In placenta accreta, chorionic villi adhere directly to the myometrium without intervening decidua. In placenta increta they penetrate muscle, while placenta percreta invades through the uterine serosa, demanding urgent hysterectomy.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Invasive Anomaly",
-     "Depth of Penetration",
-     "Intervening Decidua",
-     "Surgical Implication"
-    ],
-    "rows": [
-     [
-      "Placenta Accreta",
-      "Villi adhere directly to superficial myometrium",
-      "Absent decidua basalis",
-      "Failure of placental separation"
-     ],
-     [
-      "Placenta Increta",
-      "Villi penetrate deep into myometrial wall",
-      "Complete absence of plane",
-      "Severe intrapartum hemorrhage"
-     ],
-     [
-      "Placenta Percreta",
-      "Villi erode full-thickness serosa into bladder",
-      "Penetrates uterine wall",
-      "Massive transfusion, hysterectomy"
-     ],
-     [
-      "Placenta Previa",
-      "Implantation over or near internal os",
-      "Normal decidua present",
-      "Painless antepartum bleeding"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [],
- "gen": "AI",
- "src": []
+  ],
+  "quiz": [],
+  "gen": "AI",
+  "src": []
 }

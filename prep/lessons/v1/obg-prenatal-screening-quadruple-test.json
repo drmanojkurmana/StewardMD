@@ -1,274 +1,285 @@
 {
- "v": 1,
- "module": "obg-prenatal-screening",
- "subject": "obstetrics-gynaecology",
- "title": "Quadruple Test, Maternal Serum AFP and Inhibin A",
- "minutes": 6,
- "gen": "AI",
- "quiz": [],
- "steps": [
-  {
-   "tx": "Four second trimester markers screening for Down syndrome form the **quadruple test**. Alpha fetoprotein, hCG, unconjugated oestriol and inhibin A are combined with maternal age. It suits women presenting after the first trimester window has closed. It is offered between 15 and 20 weeks, with 16 to 18 weeks giving the most reliable marker ranges.",
-   "say": "The quadruple test combines four second trimester markers with maternal age.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Marker",
-     "Direction in Down"
-    ],
-    "rows": [
-     [
-      "AFP",
-      "Low"
-     ],
-     [
-      "hCG",
-      "High"
-     ],
-     [
-      "Oestriol",
-      "Low"
-     ],
-     [
-      "Inhibin A",
-      "High"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "One protein in maternal blood reports on placenta, fetus and dates at once. **Maternal serum AFP** rises with open neural tube and abdominal wall defects, falls in Down syndrome patterns, and confuses everyone when gestation is misdated. It is read as multiples of the median for that exact week. An unexplained high value also flags placental problems and earns growth surveillance even when anatomy looks normal.",
-   "say": "Maternal serum AFP screens for open fetal defects and contributes to Down syndrome patterns. Values are read against the median for that gestation week.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/need-m663-obg-prenatal-screening-quadruple-test.webp",
-    "alt": "Image showing maternal serum alpha fetoprotein testing in pregnancy screening.",
-    "caption": "A maternal blood sample is shown being analysed for alpha fetoprotein concentration. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "A fetal protein leaking into maternal blood, raised by open fetal defects, is **maternal serum AFP**. Alpha fetoprotein rises in neural tube and abdominal wall defects. Low values instead associate with Down syndrome. Results are reported as multiples of the median, and 2.0 to 2.5 times the median triggers the defect pathway.",
-   "say": "Maternal serum AFP rises in open fetal defects and falls in Down syndrome.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/practicals/obg-drug-folic-acid.webp",
-    "alt": "Folic acid preventing neural tube defects.",
-    "caption": "Folate and neural tube prevention. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "The placental hormone adding most accuracy to the quadruple test is **inhibin A**. Raised levels in Down syndrome distinguish the quadruple from the older triple test. This single addition lifts detection by about ten percent. Detection rises from about 70 percent for the triple test to near 80 percent with inhibin A added.",
-   "say": "Inhibin A addition lifts quadruple test detection above the older triple test.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Triple markers measured"
-     },
-     {
-      "id": "n1",
-      "label": "Inhibin A added"
-     },
-     {
-      "id": "n2",
-      "label": "Detection improves"
-     },
-     {
-      "id": "n3",
-      "label": "Fewer invasive tests needed"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Raised AFP needs ultrasound to find the cause, following an **AFP elevation pathway**. Dating error is the commonest explanation, then twins, defects and placental problems. Amniotic fluid AFP and acetylcholinesterase confirm neural defects historically. Wrong dates explain most raised results, and a dating scan resolves the majority without further testing.",
-   "say": "Raised AFP follows a pathway starting with ultrasound for dating, twins and defects.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Raised AFP causes",
-     "points": [
-      "Wrong dates commonest",
-      "Twins",
-      "Open defects"
-     ]
+  "v": 1,
+  "module": "obg-prenatal-screening",
+  "subject": "obstetrics-gynaecology",
+  "title": "Quadruple Test, Maternal Serum AFP and Inhibin A",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Four second trimester markers screening for Down syndrome form the **quadruple test**. Alpha fetoprotein, hCG, unconjugated oestriol and inhibin A are combined with maternal age. It suits women presenting after the first trimester window has closed. It is offered between 15 and 20 weeks, with 16 to 18 weeks giving the most reliable marker ranges.",
+      "say": "The quadruple test combines four second trimester markers with maternal age.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Marker",
+          "Direction in Down"
+        ],
+        "rows": [
+          [
+            "AFP",
+            "Low"
+          ],
+          [
+            "hCG",
+            "High"
+          ],
+          [
+            "Oestriol",
+            "Low"
+          ],
+          [
+            "Inhibin A",
+            "High"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Low AFP causes",
-     "points": [
-      "Down syndrome",
-      "Wrong dates",
-      "Fetal death"
-     ]
+    {
+      "tx": "One protein in maternal blood reports on placenta, fetus and dates at once. **Maternal serum AFP** rises with open neural tube and abdominal wall defects, falls in Down syndrome patterns, and confuses everyone when gestation is misdated. It is read as multiples of the median for that exact week. An unexplained high value also flags placental problems and earns growth surveillance even when anatomy looks normal.",
+      "say": "Maternal serum AFP screens for open fetal defects and contributes to Down syndrome patterns. Values are read against the median for that gestation week.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m663-obg-prenatal-screening-quadruple-test.webp",
+        "alt": "Image showing maternal serum alpha fetoprotein testing in pregnancy screening.",
+        "caption": "A maternal blood sample is shown being analysed for alpha fetoprotein concentration. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "A fetal protein leaking into maternal blood, raised by open fetal defects, is **maternal serum AFP**. Alpha fetoprotein rises in neural tube and abdominal wall defects. Low values instead associate with Down syndrome. Results are reported as multiples of the median, and 2.0 to 2.5 times the median triggers the defect pathway.",
+      "say": "Maternal serum AFP rises in open fetal defects and falls in Down syndrome.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-folic-acid.webp",
+        "alt": "Folic acid preventing neural tube defects.",
+        "caption": "Folate and neural tube prevention. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "The placental hormone adding most accuracy to the quadruple test is **inhibin A**. Raised levels in Down syndrome distinguish the quadruple from the older triple test. This single addition lifts detection by about ten percent. Detection rises from about 70 percent for the triple test to near 80 percent with inhibin A added.",
+      "say": "Inhibin A addition lifts quadruple test detection above the older triple test.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Triple markers measured"
+          },
+          {
+            "id": "n1",
+            "label": "Inhibin A added"
+          },
+          {
+            "id": "n2",
+            "label": "Detection improves"
+          },
+          {
+            "id": "n3",
+            "label": "Fewer invasive tests needed"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Raised AFP needs ultrasound to find the cause, following an **AFP elevation pathway**. Dating error is the commonest explanation, then twins, defects and placental problems. Amniotic fluid AFP and acetylcholinesterase confirm neural defects historically. Wrong dates explain most raised results, and a dating scan resolves the majority without further testing.",
+      "say": "Raised AFP follows a pathway starting with ultrasound for dating, twins and defects.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Raised AFP causes",
+          "points": [
+            "Wrong dates commonest",
+            "Twins",
+            "Open defects"
+          ]
+        },
+        "right": {
+          "title": "Low AFP causes",
+          "points": [
+            "Down syndrome",
+            "Wrong dates",
+            "Fetal death"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Accurate gestational dating underpins every serum screen because markers change weekly, a principle of **dating dependence**. A week of error can flip a result from low to high risk. This is why early ultrasound dating precedes screening. Markers are adjusted for weight, insulin dependent diabetes, smoking and IVF conception in the calculation software.",
+      "say": "Dating dependence means a week of error can flip serum screening results.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Error",
+          "Effect"
+        ],
+        "rows": [
+          [
+            "Overestimated age",
+            "Falsely low AFP ratio"
+          ],
+          [
+            "Underestimated age",
+            "Falsely high AFP ratio"
+          ],
+          [
+            "Correct dating",
+            "Valid risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Maternal weight, diabetes and smoking all shift marker levels and are entered as **adjustment factors**. Heavier women dilute markers, lowering concentrations. Software corrects results into multiples of the median for each woman. A multiple of the median of 1.0 is exactly average, and each marker contributes its own likelihood ratio.",
+      "say": "Adjustment factors like weight and diabetes correct marker levels into multiples of the median.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Raw marker measured"
+          },
+          {
+            "id": "n1",
+            "label": "Weight and diabetes entered"
+          },
+          {
+            "id": "n2",
+            "label": "Corrected MoM calculated"
+          },
+          {
+            "id": "n3",
+            "label": "Risk issued"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Maternal weight, diabetes, and smoking shift serum marker levels and are entered as **adjustment factors**. Heavier women dilute the markers, so raw concentrations fall. Software turns each result into a multiple of the median for that woman. A multiple of 1.0 is exactly average, and each marker then adds its own likelihood ratio. In a late booking the quadruple test can still be offered up to twenty weeks, after which the anomaly scan and the option of NIPT carry the pathway forward.",
+      "say": "Weight, diabetes, and smoking change marker concentrations and are entered before the result is read. Heavier women dilute the levels. Each corrected value becomes a multiple of the median, where 1.0 is average, and each marker supplies a likelihood ratio. Booked late, the quadruple test remains available to twenty weeks, then the anomaly scan and NIPT are the next choices.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n38-obg-prenatal-screening-quadruple-test.webp",
+        "alt": "A late booking pathway offering the quadruple test up to twenty weeks, then an anomaly scan and NIPT.",
+        "caption": "The screening path for a late booking runs the quadruple test through twenty weeks and then offers anomaly scanning and NIPT. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Results are expressed relative to the normal median for that gestation as **multiples of the median**. A value of two means twice the typical level. This standardisation lets laboratories share reference ranges meaningfully. A value of 2.0 means twice the typical level for that week, and the software multiplies each marker ratio into one risk.",
+      "say": "Multiples of the median standardise marker results against gestation specific norms.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "MoM",
+          "Meaning"
+        ],
+        "rows": [
+          [
+            "0.5",
+            "Half the median"
+          ],
+          [
+            "1.0",
+            "Typical"
+          ],
+          [
+            "2.0",
+            "Twice the median"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Booking late in pregnancy changes which screening doors are still open. **Late booking provision** means the first trimester tests are gone, so care substitutes the quadruple test, a careful anomaly scan and a review of risks accumulated unseen. The consultation also catches anaemia, infections and social needs that early visits exist to find. None of this is second class care; it is the same safety net rehung at a later point.",
+      "say": "Late booking replaces first trimester screening with the quadruple test and a careful anomaly scan. It also catches anaemia, infection and social needs.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m945-obg-prenatal-screening-quadruple-test.webp",
+        "alt": "Image showing antenatal care arranged at a late first booking visit in pregnancy.",
+        "caption": "A clinician is shown organising screening and checks at a late booking appointment. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Women booking late still deserve screening through quadruple or cell free routes, a matter of **late booking provision**. Gestation up to twenty weeks allows quadruple testing in most programmes. Beyond that, anomaly scanning and NIPT remain options. Beyond 20 weeks the quadruple test loses accuracy, leaving anomaly scanning and cell free DNA as the routes.",
+      "say": "Late booking provision offers quadruple testing to twenty weeks and NIPT beyond.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n38-obg-prenatal-screening-quadruple-test.webp",
+        "alt": "Late booking antenatal screening pathway with quadruple test to twenty weeks then anomaly scan and NIPT options",
+        "caption": "Late booking antenatal screening pathway with quadruple test to twenty weeks then anomaly scan and NIPT options. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "A high risk quadruple result is followed by an offer of diagnostic testing or cell free DNA, called **result pathway**. Many couples choose cell free DNA first to avoid invasive risk. Diagnostic testing remains necessary after a positive cell free result. A diagnostic test stays the only route to certainty, and uptake of amniocentesis falls as more couples choose the blood test first.",
+      "say": "A high risk result pathway offers cell free DNA first, with diagnostic confirmation after positives.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "High risk result"
+          },
+          {
+            "id": "n1",
+            "label": "Counselling offered"
+          },
+          {
+            "id": "n2",
+            "label": "NIPT or invasive chosen"
+          },
+          {
+            "id": "n3",
+            "label": "Diagnosis confirmed if positive"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Accurate gestational dating underpins every serum screen because markers change weekly, a principle of **dating dependence**. A week of error can flip a result from low to high risk. This is why early ultrasound dating precedes screening. Markers are adjusted for weight, insulin dependent diabetes, smoking and IVF conception in the calculation software.",
-   "say": "Dating dependence means a week of error can flip serum screening results.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Error",
-     "Effect"
-    ],
-    "rows": [
-     [
-      "Overestimated age",
-      "Falsely low AFP ratio"
-     ],
-     [
-      "Underestimated age",
-      "Falsely high AFP ratio"
-     ],
-     [
-      "Correct dating",
-      "Valid risk"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Maternal weight, diabetes and smoking all shift marker levels and are entered as **adjustment factors**. Heavier women dilute markers, lowering concentrations. Software corrects results into multiples of the median for each woman. A multiple of the median of 1.0 is exactly average, and each marker contributes its own likelihood ratio.",
-   "say": "Adjustment factors like weight and diabetes correct marker levels into multiples of the median.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Raw marker measured"
-     },
-     {
-      "id": "n1",
-      "label": "Weight and diabetes entered"
-     },
-     {
-      "id": "n2",
-      "label": "Corrected MoM calculated"
-     },
-     {
-      "id": "n3",
-      "label": "Risk issued"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Results are expressed relative to the normal median for that gestation as **multiples of the median**. A value of two means twice the typical level. This standardisation lets laboratories share reference ranges meaningfully. A value of 2.0 means twice the typical level for that week, and the software multiplies each marker ratio into one risk.",
-   "say": "Multiples of the median standardise marker results against gestation specific norms.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "MoM",
-     "Meaning"
-    ],
-    "rows": [
-     [
-      "0.5",
-      "Half the median"
-     ],
-     [
-      "1.0",
-      "Typical"
-     ],
-     [
-      "2.0",
-      "Twice the median"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Booking late in pregnancy changes which screening doors are still open. **Late booking provision** means the first trimester tests are gone, so care substitutes the quadruple test, a careful anomaly scan and a review of risks accumulated unseen. The consultation also catches anaemia, infections and social needs that early visits exist to find. None of this is second class care; it is the same safety net rehung at a later point.",
-   "say": "Late booking replaces first trimester screening with the quadruple test and a careful anomaly scan. It also catches anaemia, infection and social needs.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/need-m945-obg-prenatal-screening-quadruple-test.webp",
-    "alt": "Image showing antenatal care arranged at a late first booking visit in pregnancy.",
-    "caption": "A clinician is shown organising screening and checks at a late booking appointment. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "Women booking late still deserve screening through quadruple or cell free routes, a matter of **late booking provision**. Gestation up to twenty weeks allows quadruple testing in most programmes. Beyond that, anomaly scanning and NIPT remain options. Beyond 20 weeks the quadruple test loses accuracy, leaving anomaly scanning and cell free DNA as the routes.",
-   "say": "Late booking provision offers quadruple testing to twenty weeks and NIPT beyond.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/need-n38-obg-prenatal-screening-quadruple-test.webp",
-    "alt": "Late booking antenatal screening pathway with quadruple test to twenty weeks then anomaly scan and NIPT options",
-    "caption": "Late booking antenatal screening pathway with quadruple test to twenty weeks then anomaly scan and NIPT options. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "A high risk quadruple result is followed by an offer of diagnostic testing or cell free DNA, called **result pathway**. Many couples choose cell free DNA first to avoid invasive risk. Diagnostic testing remains necessary after a positive cell free result. A diagnostic test stays the only route to certainty, and uptake of amniocentesis falls as more couples choose the blood test first.",
-   "say": "A high risk result pathway offers cell free DNA first, with diagnostic confirmation after positives.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "High risk result"
-     },
-     {
-      "id": "n1",
-      "label": "Counselling offered"
-     },
-     {
-      "id": "n2",
-      "label": "NIPT or invasive chosen"
-     },
-     {
-      "id": "n3",
-      "label": "Diagnosis confirmed if positive"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  }
- ]
+  ]
 }
