@@ -33,6 +33,17 @@
       }
     },
     {
+      "tx": "Phagocytes, natural killer cells and mast cells display different receptors for the antibody stem. The **Fc fragment** carries class sequence that gamma receptors read as IgG, epsilon as IgE, and alpha as IgA, while mu receptors and neonatal FcRn handle other jobs. C1q and placental or mucosal transporters read the same stem. Matching antigen binding arms on another stem can tag microbes for phagocytes or fire a mast cell.",
+      "say": "Phagocytes, natural killer cells and mast cells display different receptors for the antibody stem. The Fc fragment carries class sequence that gamma receptors read as IgG, epsilon as IgE, and alpha as IgA, while mu receptors and neonatal FcRn handle other jobs. C1q and placental or mucosal transporters read the same stem. Matching antigen binding arms on another stem can tag microbes for phagocytes or fire a mast cell.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n351-mic-antibodies-complement-fc-fragment.webp",
+        "alt": "Fc receptors on a phagocyte, natural killer cell and mast cell binding antibody stems",
+        "caption": "Fc receptors on phagocytes, natural killer cells and mast cells read the antibody stem according to class. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
       "tx": "**Idiotypes** are the variable region's own antigenic fingerprints (the unique shapes of one clone's binding site), isotypes are class constants shared by all humans (IgG versus IgM), and allotypes are inherited constant region variants differing between individuals (Gm and Km markers). Anti idiotype antibodies can mimic antigen (vaccine experiments, autoimmunity networks in Jerne's theory).",
       "say": "Isotype is class, allotype is inheritance, idiotype is the clone's fingerprint.",
       "vis": {
@@ -69,6 +80,17 @@
           { "id": "igg", "label": "IgG, IgA or IgE with same specificity" }
         ],
         "edges": [["igm", "signal"], ["signal", "aid"], ["aid", "igg"]]
+      }
+    },
+    {
+      "tx": "In a germinal centre, a B cell keeps its antigen binding variable region while the constant gene is exchanged. **Class switch recombination** uses activation induced deaminase on switch regions, then deletes the DNA loop so IgM becomes IgG, IgA or IgE under T cell cytokines. Hyper IgM syndromes from CD40 ligand, CD40 or AID defects leave the repertoire stuck at IgM, proving the pathway by what fails to appear.",
+      "say": "In a germinal centre, a B cell keeps its antigen binding variable region while the constant gene is exchanged. Class switch recombination uses activation induced deaminase on switch regions, then deletes the DNA loop so IgM becomes IgG, IgA or IgE under T cell cytokines. Hyper IgM syndromes from CD40 ligand, CD40 or AID defects leave the repertoire stuck at IgM, proving the pathway by what fails to appear.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n350-mic-antibodies-complement-fc-fragment.webp",
+        "alt": "Germinal centre B cell switching from IgM toward IgG, IgA or IgE",
+        "caption": "Class switch recombination in a germinal centre replaces the IgM constant region while the variable region stays. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {

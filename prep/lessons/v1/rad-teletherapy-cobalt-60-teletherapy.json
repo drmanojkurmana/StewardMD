@@ -50,6 +50,17 @@
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Frame or frameless fixation"}, {"id": "b", "label": "Submillimetre targeting"}, {"id": "c", "label": "Hundreds of converging beams"}, {"id": "d", "label": "Ablative focal dose"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
   },
   {
+    "tx": "Photon depth dose falls steadily after a short build up, so tissue beyond a target still receives dose. A proton curve stays modest until the **proton Bragg peak**, then drops almost to nothing once the particles stop. Gamma knife pools about two hundred cobalt sources onto metastases, acoustic neuromas or arteriovenous malformations, and body stereotaxis uses three to five fractions for lung or spine. Submillimetre aim, not raw energy, is what permits ablative doses beside cord and optic pathways.",
+    "say": "Photon depth dose falls steadily after a short build up, so tissue beyond a target still receives dose. A proton curve stays modest until the proton Bragg peak, then drops almost to nothing once the particles stop. Gamma knife pools about two hundred cobalt sources onto metastases, acoustic neuromas or arteriovenous malformations, and body stereotaxis uses three to five fractions for lung or spine. Submillimetre aim, not raw energy, is what permits ablative doses beside cord and optic pathways.",
+    "vis": {
+      "kind": "image",
+      "src": "v1/lessons/media/need-n230-rad-teletherapy-cobalt-60-teletherapy.webp",
+      "alt": "Depth dose curves comparing steady photon fall off with a sharp proton Bragg peak",
+      "caption": "Depth dose curves compare gradual photon fall off beyond the target with the sharp rise and stop of a proton Bragg peak. Illustration: StewardMD original.",
+      "ar": 1.3393
+    }
+  },
+  {
    "title": "Proton Bragg peak stops",
    "tx": "**Bragg peak** is the dose spike protons deposit at the end of their range before stopping completely, with almost no exit dose beyond the tumour. Depth is dialled by beam energy, and multiple energies stack peaks into a spread out plateau covering the target. Children and skull base tumours gain most, sparing growing tissue and the brain beyond, at several times photon cost and with range uncertainty margins that planning must respect.",
    "say": "Bragg peak is the dose spike protons deposit at the end of their range before stopping, with almost no exit dose beyond the tumour. Multiple energies stack peaks to cover the target. Children and skull base tumours gain most, at several times photon cost and with range uncertainty margins.",

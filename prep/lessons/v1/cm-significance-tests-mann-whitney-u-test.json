@@ -84,6 +84,17 @@
       }
     },
     {
+      "tx": "Points climbing from lower left to upper right display a **positive correlation** between two continuous measures, such as dose and response. The line drawn through the cloud is the regression fit used for prediction, not the correlation itself. Correlation only summarises how tightly the points follow a straight pattern in this sample. A curved cloud or a few extreme outliers can still yield a misleading coefficient, so the scatter is read before any number.",
+      "say": "Points climbing from lower left to upper right display a positive correlation between two continuous measures, such as dose and response. The line drawn through the cloud is the regression fit used for prediction, not the correlation itself. Correlation only summarises how tightly the points follow a straight pattern in this sample. A curved cloud or a few extreme outliers can still yield a misleading coefficient, so the scatter is read before any number.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n709-cm-significance-tests-mann-whitney-u-test.webp",
+        "alt": "Scatter plot of points rising left to right with a fitted regression line",
+        "caption": "A scatter plot shows a positive linear association, with points rising from lower left to upper right and a regression line fitted through the cloud. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
       "title": "Pearson versus Spearman coefficients",
       "tx": "The **Pearson correlation coefficient (r)** measures linear association on raw values, needing near normal continuous data, while Spearman's rank coefficient repeats the calculation on ranks, tolerating skew, ordinal data, and outliers. Both span minus one to plus one: sign gives direction, absolute value gives strength (above zero point seven strong, zero point four to zero point seven moderate, below weak, by common teaching bands).",
       "say": "Pearson uses values; Spearman uses ranks. Both run minus one to plus one for direction and strength.",
