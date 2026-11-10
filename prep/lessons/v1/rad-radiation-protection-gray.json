@@ -107,6 +107,17 @@
             }
         },
         {
+            "tx": "Three dose quantities answer three different questions, and mixing them up misleads patients. **Absorbed dose** in gray counts energy deposited per kilogram, equivalent dose weights that by radiation type, and effective dose weights again by organ sensitivity to estimate whole person risk. Only the last belongs in most risk conversations. A schematic comparing the three keeps a clinic honest when a scan dose is translated into plain language.",
+            "say": "Absorbed, equivalent and effective dose add radiation and tissue weighting step by step. Effective dose is the quantity for whole person risk talk.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m552-rad-radiation-protection-gray.webp",
+                "alt": "Schematic comparing absorbed dose, equivalent dose and effective dose quantities.",
+                "caption": "Three dose measures build from deposited energy to organ weighted risk. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
             "title": "Radiation Weighting Factors",
             "tx": "**Radiation weighting factor** values normalize different radiation modalities according to their relative biological effectiveness and linear energy transfer. Photons, including diagnostic X-rays and gamma emissions, share a baseline weighting factor of 1. Electrons and beta particles also carry a factor of 1. In contrast, densely ionizing alpha particles and heavy fission fragments carry a factor of 20.",
             "say": "Radiation weighting factor values normalize different radiation modalities according to their relative biological effectiveness and linear energy transfer. Photons, including diagnostic X-rays and gamma emissions, share a baseline weighting factor of 1. Electrons and beta particles also carry a factor of 1. In contrast, densely ionizing alpha particles and heavy fission fragments carry a factor of 20.",
@@ -216,6 +227,17 @@
                         "Pooled risk across remaining somatic structures"
                     ]
                 ]
+            }
+        },
+        {
+            "tx": "Risk from radiation is not spread evenly through the body, and this map shows the weighting. **Tissue weighting factors** give red marrow, colon, lung, stomach and breast the highest shares, reflecting cancer sensitivity, while skin and bone surface carry the lowest. Multiplying organ doses by these factors builds the effective dose used in protection standards. The map explains at a glance why the same absorbed dose means different things in different organs.",
+            "say": "Tissue weighting factors rank organs by radiation cancer sensitivity, led by marrow, colon and lung. They convert organ doses into effective dose.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m553-rad-radiation-protection-gray.webp",
+                "alt": "Human body schematic showing ICRP tissue weighting factors across major organs.",
+                "caption": "Organs on a body outline are labelled with their tissue weighting factors. Illustration: StewardMD original.",
+                "ar": 1.3393
             }
         },
         {

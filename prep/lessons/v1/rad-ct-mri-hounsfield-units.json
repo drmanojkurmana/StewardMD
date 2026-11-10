@@ -48,6 +48,17 @@
             }
         },
         {
+            "tx": "Every CT number is a comparison with water wearing a numerical scale. The **Hounsfield scale** sets water at zero, air near minus one thousand, fat below zero, soft tissue modestly positive and cortical bone in the high hundreds and beyond. Reading a scan begins by placing each grey structure on that line. A region of interest measurement ends arguments about whether a lesion is fat, fluid or soft tissue in seconds.",
+            "say": "Hounsfield units run from air at minus one thousand through water at zero to dense bone. Measuring a region settles tissue arguments quickly.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m557-rad-ct-mri-hounsfield-units.webp",
+                "alt": "Diagram of the Hounsfield unit scale from air to dense cortical bone with tissue values.",
+                "caption": "A scale from black air to white cortical bone carries labelled tissue values. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
             "title": "Biological Tissue CT Numbers",
             "tx": "**Tissue CT attenuation values** characterize human pathology through numerical ranges. Acute clotted hematoma measures 50 to 80 HU due to concentrated globin proteins, distinguishing it from circulating unclotted blood at 30 to 45 HU. Simple serous fluid measures 0 to 15 HU, subcutaneous and retroperitoneal adipose tissue measures minus 50 to minus 100 HU, and normal aerated lung parenchyma measures minus 700 to minus 900 HU.",
             "say": "Tissue CT attenuation values characterize human pathology through numerical ranges. Acute clotted hematoma measures 50 to 80 HU due to concentrated globin proteins, distinguishing it from circulating unclotted blood at 30 to 45 HU. Simple serous fluid measures 0 to 15 HU, subcutaneous and retroperitoneal adipose tissue measures minus 50 to minus 100 HU, and normal aerated lung parenchyma measures minus 700 to minus 900 HU.",
@@ -246,6 +257,17 @@
                         "Standard bone and lung windows visualize trabeculae and vessels"
                     ]
                 }
+            }
+        },
+        {
+            "tx": "The same scan data can be repainted for brain, lung or bone by moving two controls. **Window width and level** choose which slice of Hounsfield values stretches across the visible greys: narrow windows at low levels for brain detail, wide high windows for lung and bone. Everything outside the chosen range clips to black or white and vanishes. A lesion missed on one window may be obvious on another, so window discipline is diagnostic skill.",
+            "say": "Window width and level select which Hounsfield range fills the grey scale for brain, lung or bone. Checking several windows is diagnostic skill.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m558-rad-ct-mri-hounsfield-units.webp",
+                "alt": "Schematic of CT window width and level mapping greyscale for brain, lung and bone windows.",
+                "caption": "Three greyscale mappings show the same data windowed for brain, lung and bone. Illustration: StewardMD original.",
+                "ar": 1.3393
             }
         },
         {
