@@ -12172,3 +12172,12 @@ The plan's ui-ux-pro-max style suggestion for healthcare (Neumorphism / Claymorp
 contrast surfaces fight a dense clinical list. Recovery point: commit `6649970a`, the parent of the change (the tag `opd-queue-pre-revamp` could not be pushed from the cloud session).
 Reversible: `smd_opd_q2=0` (the default) and `smd_opd_patient_key=0`.
 
+## OPD Queue new screen: Manrope, one emerald, flat grouped surfaces (owner, 2026-11-10)
+The owner reviewed two builds of the new queue screen (`smd_opd_q2`) and called both "vibe coded", then asked
+for a new font, new colours and a premium feel using the Appllama skills. This supersedes the 2026-11-09
+"refine the existing Clinical Precision look" choice FOR THE NEW SCREEN ONLY: the earlier screen and the staff
+console keep theirs. Chosen: Manrope (already bundled, so no install-size cost and no new file for the bundle
+to miss) over staying on Inter or adding a new download; one accent, emerald `#0a7556`, over the teal
+`#0e6e63`; borderless white surfaces on a grey ground over outlined cards. Rejected: the reference images'
+gradient header, stat tiles and tabs (features and data the screen does not have).
+Not verified on a phone. Reversible: `smd_opd_q2=0` (the default).

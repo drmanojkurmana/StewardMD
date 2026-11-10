@@ -187,6 +187,7 @@ try {
   const prof = await txt(".q-profile");
   ok(/front-desk staff/.test(prof) && !/stewardmd\.in/.test(prof), "staff are told to sign in in the app, not at a web address");
   await clean("profile sheet");
+  await b.sleep(400); await b.shot(join(OUT, "opd-q2-25-profile.png"));
   await clickAct("profile-close");
 
   // ---- 12. small phone, dark, empty ----

@@ -109,6 +109,25 @@ Plan and evidence: `design-plans/opd-queue-10-of-10.md`. Switch: OPD Queue > Set
   The owner's reference images also showed tabs (Queue / In consult / No-shows), a bell, search in the
   header, patient age and sex, and a clinic switcher in the title. None were built: they are features or
   data this screen does not have, and the brief said not to invent any.
+- **Visual pass 3 (owner, 2026-11-10: "still looks vibe coded", asked for the Appllama skills, a new font
+  and colours).** Supersedes pass 2's look; the structure and commands are the same.
+  - Palette and face are tokens on `.q2app` (the `.q-app` root and the gates get that class when the flag
+    is on), so every existing rule under it follows: profile and priority sheets, analytics, settings.
+    One accent, emerald `#0a7556` (dark `#3ecf9a`); one grey family, green-tinted; face Manrope (already
+    bundled for Home) with the Telugu and Devanagari faces behind it.
+  - Shape lock: surfaces 24, controls 14, tags and tokens 8. Buttons 50 high, row controls 44, rows 68.
+    Surfaces are flat white on a grey ground with NO outlines; lists use inset hairlines.
+  - The screen title is the queue's state ("4 waiting") with one line under it; the active patient is the
+    ONE solid emerald surface, with a white Open assessment button; the tab bar is plain icons and labels
+    on a blurred bar, no pill.
+  - Choices on the entry screens are neutral rows; only the button that commits is emerald. The inline
+    `style="background:..."` on the earlier gate buttons is overridden with `!important` under `.q2app`.
+  - Outcome haptics through `SMD_HAPTICS` (`hap()`): a tick when the swipe knob crosses the line, success
+    when a consult ends, warning on a confirmed Remove. Taps are already ticked app-wide by `haptics.js`.
+  - The Appllama MCP was not connected in the session, so no reference screens were pulled; the skill's
+    written laws were applied instead. Nothing was run in a simulator or on a phone.
+- GOTCHA: Manrope's tabular figures open a gap inside a token like "A11"; token chips do not use
+  `tabular-nums`.
 - GOTCHA: `.q-canvas` is a flex column that scrolls; its children shrink unless `flex-shrink: 0`, and a
   wrapped status strip slid under the card below it.
 - Tests: `test/queue-q2-render.test.mjs`, browser `test/run-opd-q2-ui.mjs` on `test/opd-q2-harness.html`

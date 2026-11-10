@@ -210,17 +210,18 @@
   }
   function priV2(t) { return t.priority >= 2 ? '<span class="q2-tag danger">Emergency</span>' : t.priority === 1 ? '<span class="q2-tag warn">' + esc(prioLabel(t)) + "</span>" : ""; }
   function nameV2(t) { return tok(t) + phi("name", t.name, esc(t.name || "Patient")); }
-  function statV2(icon, text) { return '<span class="q2-stat">' + ms(icon) + "<span>" + esc(text) + "</span></span>"; }
-  // One strip: running late (only when true), how many are waiting, the longest wait, the doctor's own pace.
+  /* The screen's title IS the state of the queue ("4 waiting"), the way a native list screen is titled with
+   * what it holds. One line under it carries the longest wait and the doctor's own pace. */
   function statusV2(state, k, ordered) {
     var s = state.session || {}, paused = s.status === "paused", longest = 0;
     ordered.forEach(function (t) { var w = now() - (t.registeredAt || now()); if (w > longest) longest = w; });
-    var late = longest > 30 * 60000;
+    var late = longest > 30 * 60000, sub = [];
+    if (k.waiting && mins(longest) >= 1) sub.push("Longest " + mins(longest) + " min");
+    if (k.avgConsult) sub.push("Avg consult " + k.avgConsult + " min");
+    if (!sub.length) sub.push(k.waiting ? "Just arrived" : "The queue is clear");
     return '<section class="q2-status' + (late ? " late" : "") + '" role="status">' +
-      (late ? '<span class="q2-tag warn">' + ms("schedule") + "Running late</span>" : "") +
-      statV2("groups", k.waiting ? k.waiting + " waiting" : "No one waiting") +
-      (k.waiting && mins(longest) >= 1 ? statV2("hourglass_empty", "Longest " + mins(longest) + " min") : "") +
-      (k.avgConsult ? statV2("timer", "Avg " + k.avgConsult + " min") : "") +
+      '<h1 class="q2-lt">' + (k.waiting ? k.waiting + " waiting" : "No one waiting") + "</h1>" +
+      '<p class="q2-sub">' + (late ? '<span class="q2-tag warn">Running late</span>' : "") + "<span>" + esc(sub.join(" · ")) + "</span></p>" +
       (s.doctorStatus === "emergency" ? '<div class="q2-hold">' + ms("warning") + '<span>You marked an emergency. Patients see that you are held up.</span><button class="q2-btn sm" data-q-act="emergency">Emergency over</button></div>' : "") +
       (paused ? '<div class="q2-hold">' + ms("pause_circle") + '<span>Queue paused. No one is being called.</span><button class="q2-btn sm" data-q-act="pause">Resume</button></div>' : "") +
       "</section>";
@@ -377,7 +378,7 @@
     var savedTab = '<button class="q-nav" data-q-act="savedpatients" title="Patients seen (saved on this device / Drive)">' + ms("recent_actors") + "<span>Patients</span></button>";
     var bottom = '<nav class="q-bottomnav">' + navItem("dashboard", "Queue", view === "dashboard") + savedTab + navItem("analytics", "Analytics", view === "analytics") + navItem("settings", "Settings", view === "settings") + "</nav>";
     var main = '<div class="q-main' + (v2 ? " q2" : "") + '">' + header + '<div class="q-canvas">' + canvas + "</div>" + (v2 && state.snack ? snackV2(state.snack) : "") + bottom + "</div>";
-    return '<div class="q-app">' + sidebar(view, doctorName, dept) + main + (state.profileOpen ? renderProfile(state, doctorName, dept) : "") + (state.prioSheet ? renderPrioSheet(state.prioSheet) : "") +
+    return '<div class="q-app' + (v2 ? " q2app" : "") + '">' + sidebar(view, doctorName, dept) + main + (state.profileOpen ? renderProfile(state, doctorName, dept) : "") + (state.prioSheet ? renderPrioSheet(state.prioSheet) : "") +
       (state.rowSheet ? renderRowSheet(state) : "") + (state.recallSheet ? renderRecallSheet(state.recallSheet) : "") + (state.confirm ? renderConfirm(state.confirm) : "") + "</div>";
   }
   function cap(s) { s = String(s || ""); return s.charAt(0).toUpperCase() + s.slice(1); }
@@ -779,6 +780,8 @@
   function root() { var el = document.getElementById("smdQueue"); if (!el) { el = document.createElement("div"); el.id = "smdQueue"; document.body.appendChild(el); } return el; }
   // Swipe-to-end control on the Currently Consulting card. Rebound after each full paint;
   // move/up listeners live only during an active drag (added on down, removed on up) so no leak.
+  // Outcome haptics only (haptics.js already ticks on every tap): one per action, on the frame it lands.
+  function hap(kind) { try { var H = G.SMD_HAPTICS; if (H && H[kind]) H[kind](); } catch (e) {} }
   var swipeAt = 0;
   function initConsultSwipe() {
     var track = document.getElementById("qSwipe"), knob = document.getElementById("qSwipeKnob");
@@ -792,7 +795,9 @@
       curX = Math.max(0, Math.min(maxX, px(e) - startX));
       knob.style.transform = "translateX(" + curX + "px)";
       if (fill) fill.style.width = (curX + knob.offsetWidth + 4) + "px";
-      track.classList.toggle("armed", !!maxX && curX / maxX > DONE);
+      var armedNow = !!maxX && curX / maxX > DONE;
+      if (armedNow !== track.classList.contains("armed")) hap("selection");   // the knob crossed the line
+      track.classList.toggle("armed", armedNow);
       if (e.cancelable) e.preventDefault();
     }
     function up() {
@@ -800,7 +805,7 @@
       document.removeEventListener("touchmove", move); document.removeEventListener("touchend", up);
       document.removeEventListener("mousemove", move); document.removeEventListener("mouseup", up);
       knob.style.transition = ""; if (fill) fill.style.transition = "";
-      if (maxX && curX / maxX > DONE) { knob.style.transform = "translateX(" + maxX + "px)"; try { if (st.session) act(st.session.id, "/advance"); } catch (e) {} }
+      if (maxX && curX / maxX > DONE) { knob.style.transform = "translateX(" + maxX + "px)"; hap("success"); try { if (st.session) act(st.session.id, "/advance"); } catch (e) {} }
       else { curX = 0; knob.style.transform = "translateX(0)"; if (fill) fill.style.width = ""; track.classList.remove("armed"); }
     }
     function down(e) {
@@ -996,7 +1001,7 @@
     if (cmd === "endask") {
       if (now() - swipeAt < 500) return;   // the click a mouse drag leaves behind
       var ct = findTicket(st.session && st.session.currentTicketId) || (st.tickets || []).filter(function (x) { return x.status === "in_consultation"; })[0];
-      ask({ title: "End this consult?", bodyHtml: ct ? nameV2(ct) + " leaves the room and the queue moves on." : "", ok: "End consult", run: function () { act(sid, "/advance"); } });
+      ask({ title: "End this consult?", bodyHtml: ct ? nameV2(ct) + " leaves the room and the queue moves on." : "", ok: "End consult", run: function () { hap("success"); act(sid, "/advance"); } });
       return;
     }
     if (cmd === "recall-ok") {
@@ -1009,7 +1014,7 @@
     if (q2On() && cmd === "remove") {
       var rt = findTicket(arg);
       ask({ title: "Remove from the queue?", bodyHtml: (rt ? nameV2(rt) + ". " : "") + "For a mistaken, duplicate or wrongly routed entry. This cannot be undone and is recorded in the audit trail.", ok: "Remove from queue", danger: true,
-        run: function () { act(sid, "/status", { ticketId: arg, status: "cancelled" }).then(function (r) { if (!(r && r.ok)) { try { G.toast && G.toast("Not removed: " + ((r && (r.message || r.error)) || "no response")); } catch (e) {} } }); } });
+        run: function () { hap("warning"); act(sid, "/status", { ticketId: arg, status: "cancelled" }).then(function (r) { if (!(r && r.ok)) { try { G.toast && G.toast("Not removed: " + ((r && (r.message || r.error)) || "no response")); } catch (e) {} } }); } });
       return;
     }
     if (q2On() && cmd === "noshow") {
@@ -1249,7 +1254,7 @@
 
   // ---- OPD entry chooser: Doctor vs Staff; Doctor -> My clinic (StewardMD) vs Hospital (GITAM/GHIS) ----
   function _wrap(inner) {
-    return '<div class="q-gate"><div class="q-gate-card">' +
+    return '<div class="q-gate' + (q2On() ? " q2app" : "") + '"><div class="q-gate-card">' +
       '<div class="q-brand q-gate-brand"><span class="q-logo-mark" aria-hidden="true"></span><span class="q-wordmark">Steward<span>MD</span></span></div>' +
       '<h2 class="q-gate-h">OPD Queue</h2>' + inner + "</div></div>";
   }
