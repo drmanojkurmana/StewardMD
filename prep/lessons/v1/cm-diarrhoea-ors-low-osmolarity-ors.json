@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-diarrhoea-ors-low-osmolarity-ors",
+ "subject": "community-medicine",
+ "module": "cm-diarrhoea-ors",
+ "title": "Low Osmolarity ORS: Composition 245 and Why It Replaced the Old Formula",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The universal formula, number by number",
+   "tx": "**Low osmolarity ORS** contains sodium 75, chloride 65, anhydrous glucose 75, potassium 20 and citrate 10 mmol per litre, totalling 245 mOsm per litre. Recommended jointly by WHO and UNICEF and adopted nationally, it is now the single universal solution for children and adults, cholera included, replacing separate formulas.",
+   "say": "Memorise five numbers and a total. Sodium seventy five, chloride sixty five, glucose seventy five, potassium twenty, citrate ten: two hundred forty five milliosmoles per litre. One universal solution replaced the older split formulas.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Constituent", "mmol per litre", "Job"],
+    "rows": [
+     ["Sodium", "75", "Replaces stool sodium losses"],
+     ["Glucose (anhydrous)", "75", "Drives sodium water absorption"],
+     ["Potassium", "20", "Replaces potassium losses"],
+     ["Citrate", "10", "Corrects acidosis as bicarbonate source"],
+     ["Total osmolarity", "245 mOsm/L", "Below plasma, favours absorption"]
+    ]
+   }
+  },
+  {
+   "title": "Why lower osmolarity absorbs better",
+   "tx": "**Reduced osmolarity** (245 against plasma near 290) pulls water inward more reliably and reduces stool output and vomiting compared with the older 311 mOsm formula. Trials showed less unscheduled intravenous therapy without clinically significant hyponatraemia. Sodium at 75 balances childhood gastroenteritis losses while remaining safe, with monitoring, in cholera's saltier stools.",
+   "say": "Thinner pulls better. At two forty five against plasma's two ninety, water follows inward, stool and vomiting fall, and unscheduled drips decline without dangerous sodium drops. One formula serves gastroenteritis and, monitored, cholera.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Old formula, 311 mOsm/L",
+     "points": ["Higher sodium and glucose", "More stool output in trials", "More vomiting reported"]
+    },
+    "right": {
+     "title": "Low osmolarity, 245 mOsm/L",
+     "points": ["Sodium 75, glucose 75", "Less stool, less vomiting", "Fewer unscheduled IV infusions"]
+    }
+   }
+  },
+  {
+   "title": "Citrate instead of bicarbonate",
+   "tx": "**Citrate** replaced bicarbonate in packets because it survives storage in hot humid climates without degrading or browning with glucose, while converting to bicarbonate in the body to correct acidosis. Packet chemistry is programme chemistry: a formula that dies in a warehouse treats nobody, however elegant its physiology.",
+   "say": "Citrate survives warehouses. Bicarbonate degraded and browned with glucose in heat and humidity; citrate stores stably and becomes bicarbonate after swallowing. Packet chemistry is programme chemistry in tropical supply chains.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Base used", "Fate in storage", "Fate in body"],
+    "rows": [
+     ["Bicarbonate (old)", "Degrades, browns with glucose", "Corrects acidosis directly"],
+     ["Citrate (current)", "Stable in heat and humidity", "Converts to bicarbonate"]
+    ]
+   }
+  },
+  {
+   "title": "Mixing errors that kill",
+   "tx": "**Mixing accuracy** decides safety: one packet in exactly one litre of clean water. Too little water concentrates salts toward hypernatraemia; extra sugar or salt by spoon improvisation does the same. Solution keeps 24 hours, then is discarded. Tasting should suggest tears, not soup: noticeably salty means remake it, a household rule worth teaching verbatim.",
+   "say": "One packet, one litre, exactly. Concentrated mixes risk dangerous sodium levels; spoons of extra sugar or salt do the same. Discard after twenty four hours. It should taste like tears, not soup; saltier means remake.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "One litre clean water measured"},
+     {"id": "b", "label": "Whole packet dissolved"},
+     {"id": "c", "label": "Taste check: like tears, not salty"},
+     {"id": "d", "label": "Discard after 24 hours"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Sugar-salt solution when packets run out",
+   "tx": "Home **sugar-salt solution** bridges packet absence: a level measure taught locally (commonly six level teaspoons of sugar and half a level teaspoon of salt in one litre of water in standard teaching). Its weakness is measurement error in both directions, which is why programmes prefer packets and reserve home mixing for the first hours of illness.",
+   "say": "Kitchens bridge packet gaps. Six level teaspoons of sugar, half a level teaspoon of salt, one litre of water in standard teaching. Spoon error cuts both ways, so packets lead and home mixing covers first hours only.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Packet ORS",
+     "points": ["Factory measured salts", "Universal 245 formula", "Preferred by programmes"]
+    },
+    "right": {
+     "title": "Home sugar-salt solution",
+     "points": ["Available immediately at night", "Spoon measurement error risk", "Bridge, not replacement"]
+    }
+   }
+  },
+  {
+   "title": "What ORS does not do",
+   "tx": "**ORS limitations** surprise families: stool frequency and duration barely change at first, because ORS replaces losses rather than stopping secretion. Antibiotics stay reserved for dysentery, cholera suspicion and specific indications; antimotility drugs harm children. Setting this expectation keeps mothers administering fluid through day two instead of abandoning a working therapy that looks inactive.",
+   "say": "Warn families early. Stools continue while fluid saves; ORS replaces losses without switching secretion off. Antibiotics stay narrow, gut-slowing drugs harm children. Expectation set honestly keeps mothers pouring through day two.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Expectation", "Reality"],
+    "rows": [
+     ["Stools stop quickly", "Stools continue, volume replaced"],
+     ["Antibiotic for every diarrhoea", "Only dysentery and specific indications"],
+     ["Stop the gut with drugs", "Antimotility agents dangerous in children"]
+    ]
+   }
+  },
+  {
+   "title": "Cholera stools and sodium vigilance",
+   "tx": "**Cholera** purges sodium richer than childhood gastroenteritis, so high-volume cholera losses are watched for sodium balance even on the universal formula, with intravenous Ringer lactate for severe purging and antibiotics shortening illness in confirmed outbreaks. Eighty to ninety percent of cholera patients still need no drip when ORS starts early and keeps pace with losses.",
+   "say": "Cholera tests the universal formula. Saltier purges demand sodium vigilance and rapid matching of losses; severe cases take Ringer lactate and antibiotics. Started early, ORS alone still carries eighty to ninety percent.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Profuse watery purging assessed"},
+     {"id": "b", "label": "Severe: IV Ringer lactate first"},
+     {"id": "c", "label": "ORS about 5 ml/kg/hour when drinking"},
+     {"id": "d", "label": "Match ongoing losses continuously"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Reading composition stems",
+   "tx": "Stems quote numbers as fingerprints: **sodium 75 with total 245** names the current universal formula; sodium 90 with 311 names its predecessor. Citrate 10 distinguishes modern packets from bicarbonate ancestors. A stem describing hypernatraemia after home mixing is testing litre accuracy, not formula choice, and the answer is teaching exact measurement.",
+   "say": "Numbers fingerprint formulas. Seventy five and two forty five mean current universal; ninety and three eleven mean the ancestor. Harm after home mixing tests litre accuracy, and the corrective answer is exact measurement teaching.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fingerprint", "Formula named"],
+    "rows": [
+     ["Sodium 75, total 245", "Current low osmolarity ORS"],
+     ["Sodium 90, total 311", "Older standard ORS"],
+     ["Citrate present", "Modern shelf-stable packet"]
+    ]
+   }
+  },
+  {
+   "title": "One solution for the world: programme logic",
+   "tx": "**Universal adoption** simplified procurement, training and caregiver teaching to a single packet: one composition to manufacture, stock, teach and trust across ages and causes. Fragmented formulas had multiplied errors at every level. The 245 solution is therefore as much a logistics intervention as a pharmacological one, which is the community medicine point of the whole lesson.",
+   "say": "Universality is logistics medicine. One packet to manufacture, stock, teach and trust across ages and causes replaced fragmented formulas multiplying errors. The formula's triumph is supply chain design as much as physiology.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Fragmented formulas era",
+     "points": ["Different packets by cause and age", "Teaching and stocking errors multiply", "Caregiver confusion at home"]
+    },
+    "right": {
+     "title": "Universal formula era",
+     "points": ["One packet everywhere", "One teaching message", "Simpler procurement and audit"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

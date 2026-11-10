@@ -1,0 +1,248 @@
+{
+  "v": 1,
+  "module": "mic-cestodes-trematodes",
+  "subject": "microbiology",
+  "title": "Echinococcus granulosus: Hydatid Cysts, Casoni Test and Diphyllobothrium",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The tiny cyclophyllidean tapeworm **Echinococcus granulosus**, measuring only three to six millimetres with just three proglottids, causes cystic hydatid disease. Dogs and wild canids serve as definitive hosts harboring adult worms, while sheep and herbivores act as intermediate hosts. Humans become accidental dead-end intermediate hosts upon ingesting embryonated tapeworm eggs shed in dog feces.",
+      "say": "Canids harbor adult tapeworms while accidental ingestion of dog fecal eggs causes hydatid cysts in humans.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cestodes-trematodes-hydatid-schistosoma-flukes-fig1.webp",
+        "alt": "Hydatid cyst comparison",
+        "caption": "Hydatid cyst demonstrating laminated ectocyst, inner germinal layer, and brood capsules [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Following ingestion, oncospheres penetrate the duodenal mucosa and enter the portal vein to reach the liver, which acts as the primary capillary filter, arresting seventy percent of embryos in the right hepatic lobe. Escaping larvae lodge in the lungs or disseminate systemically. The larva expands slowly over decades into a fluid-filled **hydatid cyst** enveloped by three distinct pathological layers.",
+      "say": "Oncospheres lodge in the right hepatic lobe, expanding slowly inside a three-layered hydatid cyst.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cyst Wall Layer",
+          "Origin & Structure",
+          "Pathological Role"
+        ],
+        "rows": [
+          [
+            "Pericyst",
+            "Host reactive fibrous tissue capsule",
+            "Vascularized fibrous wall encasing the parasite"
+          ],
+          [
+            "Ectocyst",
+            "Parasite-derived acellular laminated layer",
+            "Chitinous, non-living elastic white supportive membrane"
+          ],
+          [
+            "Endocyst (germinal)",
+            "Parasite-derived cellular nucleated layer",
+            "Metabolically active layer budding brood capsules"
+          ],
+          [
+            "Hydatid sand",
+            "Free protoscolices, hooklets, and capsules",
+            "Precipitate inside fluid; highly infectious if spilled"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The inner cellular germinal layer buds off pedunculated brood capsules into the central cyst cavity. Each capsule generates multiple microscopic invaginated **protoscolices** bearing suckers and a crown of refractile hooklets. Rupture of brood capsules releases these elements into the clear, alkaline, antigenic hydatid fluid, accumulating as a sediment known diagnostically as hydatid sand.",
+      "say": "The germinal endocyst generates brood capsules filled with protoscolices that precipitate as hydatid sand.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ec1",
+            "label": "Cellular germinal endocyst buds hollow brood capsules internally"
+          },
+          {
+            "id": "ec2",
+            "label": "Invaginated protoscolices develop with hooks and suckers inside capsules"
+          },
+          {
+            "id": "ec3",
+            "label": "Capsule rupture deposits protoscolices and hooklets as hydatid sand"
+          }
+        ],
+        "edges": [
+          [
+            "ec1",
+            "ec2"
+          ],
+          [
+            "ec2",
+            "ec3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Hydatid cyst fluid contains potent parasitic proteins capable of inducing severe immediate type one hypersensitivity. Spontaneous trauma or accidental needle puncture releasing fluid triggers life-threatening **anaphylactic shock** and widespread secondary peritoneal seeding, where thousands of liberated protoscolices mature into secondary hydatid cysts throughout the abdomen.",
+      "say": "Fluid leakage triggers catastrophic anaphylactic shock and secondary seeding of multiple peritoneal cysts.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Immediate fluid rupture risks",
+          "points": [
+            "Severe systemic type I anaphylactic shock",
+            "Acute hypotension, bronchospasm, urticaria",
+            "Requires immediate intravenous adrenaline",
+            "Emergency airway management needed"
+          ]
+        },
+        "right": {
+          "title": "Long-term secondary echinococcosis",
+          "points": [
+            "Peritoneal dissemination of hydatid sand",
+            "Protoscolices differentiate into secondary cysts",
+            "Innumerable recurrent cysts across mesentery",
+            "Incurable without repeated surgical interventions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The historical immunological screening tool is the **Casoni test**, an immediate hypersensitivity skin test performed by injecting zero point two millilitres of sterile hydatid fluid intradermally on the forearm. A positive result produces an immediate wheal with pseudopodia within twenty minutes, often followed by a delayed induration at twenty-four hours. Due to low specificity and risk of sensitization, it is now superseded by enzyme immunoassays.",
+      "say": "The Casoni skin test injected hydatid fluid to produce an immediate wheal, but is replaced by ELISA.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Test",
+          "Biological Substrate",
+          "Clinical Utility"
+        ],
+        "rows": [
+          [
+            "Casoni intradermal test",
+            "Sterile bovine or sheep hydatid fluid",
+            "Historical immediate skin wheal test; high false-positive rate"
+          ],
+          [
+            "Serum IgG ELISA",
+            "Purified hydatid antigen B and antigen 5",
+            "Modern reference serology; sensitivity over 85% in hepatic cysts"
+          ],
+          [
+            "Ultrasonography",
+            "WHO staging (CE1 to CE5 classifications)",
+            "Definitive imaging; detects hydatid sand and floating membranes"
+          ],
+          [
+            "Computed tomography",
+            "Non-contrast and contrast hepatic CT",
+            "Evaluates cyst wall calcification and operative anatomical depth"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A minimally invasive alternative to open surgery is the **PAIR technique**, which stands for Percutaneous Aspiration, Injection of scolicidal agent, and Re-aspiration under real-time ultrasound guidance. Following cyst puncture and fluid aspiration, a hypertonic scolicidal solution such as twenty percent sodium chloride or absolute alcohol is instilled for twenty minutes to kill germinal elements before final re-aspiration.",
+      "say": "The PAIR technique punctures, aspirates, instills scolicidal hypertonic saline, and re-aspirates hepatic cysts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pair1",
+            "label": "P: Percutaneous puncture under real-time ultrasound guidance"
+          },
+          {
+            "id": "pair2",
+            "label": "A: Aspiration of initial clear antigenic hydatid fluid"
+          },
+          {
+            "id": "pair3",
+            "label": "I: Injection of scolicidal agent (20% hypertonic saline) for 20 minutes"
+          },
+          {
+            "id": "pair4",
+            "label": "R: Re-aspiration of fluid; patient maintained on oral albendazole"
+          }
+        ],
+        "edges": [
+          [
+            "pair1",
+            "pair2"
+          ],
+          [
+            "pair2",
+            "pair3"
+          ],
+          [
+            "pair3",
+            "pair4"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The largest tapeworm infecting humans is the broad fish tapeworm **Diphyllobothrium latum**, which can reach lengths of ten to fifteen metres in the small intestine. Transmission occurs through the consumption of raw, undercooked, or pickled freshwater fish containing plerocercoid larvae (spargana). The ribbon-like strobila contains thousands of broad proglottids wider than they are long.",
+      "say": "Undercooked freshwater fish transmits the giant Diphyllobothrium tapeworm, which spans over ten metres.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Diphyllobothrium latum",
+          "points": [
+            "Scolex bears two longitudinal sucking slits (bothria)",
+            "Gravid proglottids wider than long with rosette uterus",
+            "Operculated eggs with terminal abopercular knob",
+            "Requires two intermediate hosts (copepod, fish)"
+          ]
+        },
+        "right": {
+          "title": "Taenia species",
+          "points": [
+            "Scolex bears four cupped muscular suckers",
+            "Gravid proglottids longer than wide with branched uterus",
+            "Spherical eggs with radial striated embryophore",
+            "Requires single intermediate host (pig or cow)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The scolex of Diphyllobothrium latum lacks hooks and suckers, anchoring itself to mucosal folds using two lateral longitudinal sucking grooves called **bothria**. Unlike cyclophyllidean tapeworms whose proglottids detach to release eggs, pseudophyllideans release operculated eggs directly from a central rosette-shaped uterine pore, enabling routine stool microscopy diagnosis.",
+      "say": "The scolex anchors using two slit-like bothria, discharging operculated eggs from a rosette uterine pore.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Cestode Order",
+          "Scolex Organ",
+          "Egg Morphology",
+          "Key Representative"
+        ],
+        "rows": [
+          [
+            "Pseudophyllidea",
+            "Paired longitudinal bothria slits",
+            "Operculated, bile-stained, abopercular knob",
+            "Diphyllobothrium latum"
+          ],
+          [
+            "Cyclophyllidea",
+            "Four cup-shaped muscular suckers",
+            "Non-operculated, thick radially striated wall",
+            "Taenia, Echinococcus, Hymenolepis"
+          ],
+          [
+            "Definitive therapy",
+            "Oral praziquantel (single dose 10 mg/kg)",
+            "Paralyzes worm musculature; complete expulsion",
+            "Both cestode orders cure reliably"
+          ],
+          [
+            "Scolicidal caution",
+            "Formalin must never be used in hydatid cysts",
+            "Toxic sclerosing cholangitis risk if biliary leak",
+            "Hypertonic saline is preferred agent"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,277 @@
+{
+  "v": 1,
+  "module": "phm-raas",
+  "subject": "pharmacology",
+  "title": "Sacubitril Valsartan, Bradykinin, Cough and Angioedema",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The enzyme **neprilysin** degrades the natriuretic peptides, bradykinin and several other vasoactive peptides, and blocking it raises cyclic GMP mediated vasodilatation and natriuresis. Neprilysin inhibition alone failed as therapy because the same enzyme also clears angiotensin II, so pressure rose. Pairing its inhibitor sacubitril with the AT1 blocker valsartan solved that problem in a single molecule complex, creating the first angiotensin receptor neprilysin inhibitor, or ARNI.",
+      "say": "Sacubitril raises helpful natriuretic peptides, and valsartan stops the angiotensin rise that sank neprilysin blockade alone.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-ace-inhibitors.webp",
+        "alt": "Renin angiotensin cascade diagram showing ACE inhibition, vasodilatation and fetal nephrotoxicity warnings",
+        "caption": "The angiotensin limb of the combination: valsartan occupies the AT1 receptor while sacubitril protects natriuretic peptides. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Sacubitril itself is a prodrug converted by esterases to **sacubitrilat**, the active neprilysin inhibitor, while valsartan is delivered with better bioavailability from the complex than from its plain tablet. Doses are written as the paired amounts, 24/26 mg, 49/51 mg and 97/103 mg twice daily, titrated every two to four weeks toward the top dose as pressure and laboratories allow. Food does not meaningfully change exposure.",
+      "say": "Remember the paired doses and titrate to 97 over 103 twice daily when the patient tolerates it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start 24/26 or 49/51 mg twice daily by prior dose"
+          },
+          {
+            "id": "check",
+            "label": "Check pressure, potassium and creatinine in 1 to 2 weeks"
+          },
+          {
+            "id": "double",
+            "label": "Double every 2 to 4 weeks if tolerated"
+          },
+          {
+            "id": "target",
+            "label": "Target 97/103 mg twice daily for full benefit"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "check"
+          ],
+          [
+            "check",
+            "double"
+          ],
+          [
+            "double",
+            "target"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In the pivotal heart failure trial, sacubitril valsartan beat enalapril on cardiovascular death and heart failure hospitalisation in reduced ejection fraction disease, earning a class one place in guidelines. The price is more **hypotension**, because two vasodilating systems are amplified at once. Patients need a systolic pressure comfortably above 100 mmHg before starting, and diuretic doses often need trimming as the new therapy takes hold.",
+      "say": "It beat enalapril on deaths and admissions; the trade is hypotension, so check pressure room before starting.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Gains over ACE inhibition alone",
+          "points": [
+            "Fewer cardiovascular deaths in reduced ejection fraction failure",
+            "Fewer heart failure hospitalisations",
+            "Better natriuresis from protected natriuretic peptides",
+            "Reverse remodelling with sustained therapy"
+          ]
+        },
+        "right": {
+          "title": "Costs to manage",
+          "points": [
+            "More symptomatic hypotension than enalapril",
+            "Hyperkalaemia and creatinine rise still occur",
+            "Needs systolic pressure above roughly 100 mmHg",
+            "Diuretic dose often reduced after initiation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "One switching rule is absolute: an ACE inhibitor must be stopped a full **36 hours** before the first ARNI dose. ACE and neprilysin both degrade bradykinin, so overlapping blockade floods airways with bradykinin and invites angioedema; an earlier combined ACE and neprilysin inhibitor, omapatrilat, was abandoned for exactly that toxicity. No washout is needed when switching from a receptor blocker, because bradykinin handling was never impaired.",
+      "say": "Thirty six hours between the last ACE inhibitor dose and the first ARNI dose. No exceptions, no shortcut.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lastace",
+            "label": "Last dose of ACE inhibitor taken"
+          },
+          {
+            "id": "wash",
+            "label": "Wait 36 hours with no ACE or ARNI cover"
+          },
+          {
+            "id": "first",
+            "label": "First sacubitril valsartan dose given"
+          },
+          {
+            "id": "never",
+            "label": "Never prescribe ACE inhibitor and ARNI together"
+          }
+        ],
+        "edges": [
+          [
+            "lastace",
+            "wash"
+          ],
+          [
+            "wash",
+            "first"
+          ],
+          [
+            "first",
+            "never"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Bradykinin** deserves its own minute: this nine amino acid peptide dilates vessels through endothelial nitric oxide and prostacyclin, increases vascular permeability, and sensitises airway sensory nerves. ACE, also called kininase II, is its main destroyer, which is why ACE inhibition raises bradykinin within days. The same peptide mediates much of the blood pressure benefit, the cough, and the angioedema risk across this whole drug family.",
+      "say": "Bradykinin is the thread through the benefit, the cough and the swelling in every lesson of this module.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bradykinin actions",
+          "points": [
+            "Endothelial nitric oxide and prostacyclin release",
+            "Arteriolar dilatation and lower vascular resistance",
+            "Increased capillary permeability in airways",
+            "Sensitised cough receptors in bronchial mucosa"
+          ]
+        },
+        "right": {
+          "title": "Bradykinin disposal routes",
+          "points": [
+            "ACE (kininase II): the dominant pathway",
+            "Neprilysin: a secondary degrading enzyme",
+            "Aminopeptidase P and DPP 4 contribute further",
+            "Blocking two routes at once multiplies accumulation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The dry **cough** of ACE inhibition follows bradykinin and substance P pooling in bronchial mucosa, where sensitised C fibres fire at trivial stimuli. Reported rates run from 5 to 35 percent depending on ascertainment, women and East Asian patients are affected more, and onset can lag months behind the first tablet. It is not dose related, does not respond to inhalers, and settles one to four weeks after withdrawal in almost everyone.",
+      "say": "The cough is bradykinin pooling around airway nerves; only stopping the drug switches it off.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "acei",
+            "label": "ACE blocked, kininase II activity lost"
+          },
+          {
+            "id": "pool",
+            "label": "Bradykinin and substance P pool in bronchial mucosa"
+          },
+          {
+            "id": "cfibre",
+            "label": "Sensitised C fibres trigger at trivial stimuli"
+          },
+          {
+            "id": "cough",
+            "label": "Dry cough until 1 to 4 weeks after withdrawal"
+          }
+        ],
+        "edges": [
+          [
+            "acei",
+            "pool"
+          ],
+          [
+            "pool",
+            "cfibre"
+          ],
+          [
+            "cfibre",
+            "cough"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Angioedema** is bradykinin mediated vascular leakage into deep skin and mucosa, swelling lips, tongue, face and sometimes bowel wall or larynx without urticaria or itch. Incidence with ACE inhibitors is around 0.1 to 0.7 percent, risk is higher in Black patients and with concomitant DPP 4 inhibitors or mTOR inhibitors that share bradykinin disposal. Because histamine is not the mediator, antihistamines, steroids and even adrenaline are unreliable; early airway control saves the patient.",
+      "say": "Bradykinin angioedema has no hives and ignores antihistamines; watch the airway, not the drug chart.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bradykinin mediated angioedema",
+          "points": [
+            "No urticaria, no itch, sometimes abdominal pain attacks",
+            "Lips, tongue and larynx swell over hours",
+            "Antihistamines and steroids unreliable",
+            "Airway first; icatibant or C1 inhibitor used by specialists"
+          ]
+        },
+        "right": {
+          "title": "Histamine mediated angioedema",
+          "points": [
+            "Urticaria and itch usually present",
+            "Often with anaphylaxis features and bronchospasm",
+            "Responds to adrenaline, antihistamines, steroids",
+            "Trigger is allergy, not a blood pressure tablet"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A practical **classification** tidies the family: ACE inhibitors raise bradykinin and commonly cough, receptor blockers leave bradykinin alone and rarely cough, and the ARNI raises natriuretic peptides while blocking AT1, with cough rates between the two and angioedema uncommon but real. Prior angioedema on any agent in this family demands specialist advice before another is tried, and hereditary angioedema from C1 inhibitor deficiency is an absolute warning flag in the history.",
+      "say": "Cough risk ranks ACE inhibitor highest, ARNI in the middle, receptor blocker lowest; any prior swelling means specialist advice.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cough and swelling by class",
+          "points": [
+            "ACE inhibitor: cough common, angioedema 0.1 to 0.7 percent",
+            "ARNI: cough less than ACE inhibitor, angioedema uncommon",
+            "Receptor blocker: cough at placebo rates, angioedema rare",
+            "Aliskiren: cough uncommon, angioedema rare reports"
+          ]
+        },
+        "right": {
+          "title": "History questions that protect",
+          "points": [
+            "Any previous lip or tongue swelling on any tablet",
+            "Family history of hereditary angioedema",
+            "Current DPP 4 inhibitor or mTOR inhibitor use",
+            "Ethnicity and sex, which shift baseline risk"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Monitoring** the ARNI mirrors its parents: potassium and creatinine one to two weeks after each titration, pressure at every visit, and natriuretic peptide interpretation adjusted because BNP (B type natriuretic peptide) is a neprilysin substrate and rises on therapy while NT-proBNP, which is not a substrate, falls with improvement. Choosing NT-proBNP for follow up avoids chasing a drug effect instead of the patient's trajectory.",
+      "say": "Follow NT-proBNP, not BNP, on an ARNI; the drug itself pushes BNP up while the patient improves.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "titrate",
+            "label": "Each dose increase of sacubitril valsartan"
+          },
+          {
+            "id": "labs",
+            "label": "Potassium, creatinine and pressure checked"
+          },
+          {
+            "id": "nt",
+            "label": "NT-proBNP tracked for heart failure trajectory"
+          },
+          {
+            "id": "bnp",
+            "label": "BNP ignored for monitoring: drug raises it directly"
+          }
+        ],
+        "edges": [
+          [
+            "titrate",
+            "labs"
+          ],
+          [
+            "labs",
+            "nt"
+          ],
+          [
+            "nt",
+            "bnp"
+          ]
+        ]
+      }
+    }
+  ]
+}

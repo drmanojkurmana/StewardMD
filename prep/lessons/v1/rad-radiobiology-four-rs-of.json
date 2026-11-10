@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-radiobiology-four-rs-of",
+ "subject": "radiology",
+ "module": "rad-radiobiology",
+ "title": "Four Rs of Radiobiology, Alpha Beta Ratio and Oxygen Effect",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Repair between fractions",
+   "tx": "**Repair** of sublethal damage is the first R: cells mend radiation injury over hours, and splitting dose into daily fractions lets normal late responding tissues repair more completely than most tumours. That repair gap is the entire biological excuse for fractionation. It half completes in roughly one to two hours for many tissues, which is why same day fractions are spaced at least six hours apart.",
+   "say": "Repair of sublethal damage is the first R: cells mend radiation injury over hours, and daily fractions let normal tissues repair more completely than most tumours. That repair gap is the biological excuse for fractionation. Same day fractions are spaced at least six hours apart for it.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Fraction causes sublethal damage"}, {"id": "b", "label": "Hours of repair follow"}, {"id": "c", "label": "Normal tissue recovers more"}, {"id": "d", "label": "Next fraction next day"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Reoxygenation opens the tumour",
+   "tx": "**Reoxygenation** is the second R: each fraction kills the oxygenated outer tumour cells, letting previously hypoxic deeper cells move closer to vessels and oxygenate before the next fraction. Hypoxic cells resist radiation about threefold, so a single massive dose wastes itself on that resistant core. Fractionation therefore converts the tumours own geography into a conveyor that keeps feeding sensitive cells into the kill zone.",
+   "say": "Reoxygenation is the second R: each fraction kills oxygenated outer cells, letting hypoxic deeper cells oxygenate before the next fraction. Hypoxic cells resist radiation about threefold, so one massive dose wastes itself on that core. Fractionation keeps feeding sensitive cells into the kill zone.",
+   "vis": {"kind": "compare", "left": {"title": "Single large dose", "points": ["Kills oxygenated rim", "Hypoxic core survives", "No time to reoxygenate", "Tumour regrows from core"]}, "right": {"title": "Fractionated course", "points": ["Rim killed each fraction", "Core oxygenates between", "Sensitivity restored", "Sterilisation becomes possible"]}}
+  },
+  {
+   "title": "Redistribution into sensitive phases",
+   "tx": "**Redistribution** is the third R: cells in late S phase resist radiation while cells in G2 and mitosis die easily, and survivors redistribute around the cycle between fractions into sensitive phases. A single dose catches only the fraction of tumour sitting in a sensitive window that hour. Daily fractions repeatedly sample the cycle, so asynchronous tumours steadily present new sensitive targets while arrested normal stem cells shelter in resistant phases.",
+   "say": "Redistribution is the third R: late S phase cells resist radiation while G2 and mitosis cells die easily, and survivors redistribute into sensitive phases between fractions. One dose catches only that hours sensitive window. Daily fractions repeatedly sample the cycle, presenting new sensitive targets.",
+   "vis": {"kind": "table", "cols": ["Cell cycle phase", "Sensitivity", "Reason"], "rows": [["Mitosis and G2", "Most sensitive", "Chromatin condensed, no repair time"], ["G1", "Intermediate", "Variable by cell type"], ["Late S", "Most resistant", "Repair templates abundant"], ["G0 resting", "Resistant", "Out of cycle entirely"]]}
+  },
+  {
+   "title": "Repopulation fights back",
+   "tx": "**Repopulation** is the fourth R and the enemy inside the list: surviving tumour clonogens accelerate their division weeks into a course, replacing killed cells faster each day. Head and neck cancers repopulate at a rate costing roughly 0.6 gray per day after about four weeks, so unnecessary breaks and protracted courses surrender control. Accelerated schedules that compress treatment exist precisely to outrun this clock, at the price of fiercer acute mucosal reactions.",
+   "say": "Repopulation is the fourth R and the enemy: surviving tumour cells accelerate division weeks into a course. Head and neck cancers repopulate costing roughly zero point six gray per day after four weeks, so breaks surrender control. Accelerated schedules outrun this clock at the price of mucosal reactions.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Weeks of fractions pass"}, {"id": "b", "label": "Survivors divide faster"}, {"id": "c", "label": "Control lost per extra day"}, {"id": "d", "label": "Avoid unplanned breaks"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Alpha beta ratio sets fraction size",
+   "tx": "**Alpha beta ratio** from the linear quadratic model measures fractionation sensitivity in gray: tumours and early reacting tissues sit high near 10, repairing little between fractions, while late tissues like cord sit low near 2 to 3 and are spared by small fractions. Hypofractionation exploits a low tumour ratio, prostate near 1.5, where bigger fractions actually favour tumour over the rectum and bladder beside it.",
+   "say": "Alpha beta ratio measures fractionation sensitivity: tumours and early tissues sit high near ten, while late tissues like cord sit near two to three and are spared by small fractions. Prostate near one point five lets bigger fractions favour tumour over rectum and bladder.",
+   "vis": {"kind": "table", "cols": ["Tissue", "Alpha beta guide", "Fraction lesson"], "rows": [["Most tumours", "About 10 gray", "Standard fractions fine"], ["Prostate tumour", "About 1.5 gray", "Hypofractionation favoured"], ["Spinal cord", "About 2 gray", "Small fractions protect"], ["Skin early reaction", "About 10 gray", "Reacts during course"]]}
+  },
+  {
+   "title": "Oxygen enhancement and LET",
+   "tx": "**Oxygen enhancement ratio** compares doses needed for the same kill without and with oxygen, reaching about 2.5 to 3 for standard low LET photons, because oxygen fixes DNA radical damage into permanent breaks. High LET radiation like neutrons and carbon ions barely needs oxygen, with ratios near 1, and packs ionisations densely for a higher relative biological effectiveness. That physics is the sales case for particle therapy in hypoxic, radioresistant tumours.",
+   "say": "Oxygen enhancement ratio compares doses needed without and with oxygen, reaching about two point five to three for photons, because oxygen fixes DNA damage permanently. High LET particles barely need oxygen, with ratios near one, and pack ionisations densely for higher biological effectiveness.",
+   "vis": {"kind": "compare", "left": {"title": "Low LET photons", "points": ["Oxygen ratio near 3", "Sparse ionisation", "Repair common", "Standard radiotherapy"]}, "right": {"title": "High LET particles", "points": ["Oxygen ratio near 1", "Dense ionisation tracks", "Relative effectiveness high", "Hypoxic tumour niche"]}}
+  },
+  {
+   "title": "Bergonie Tribondeau law",
+   "tx": "**Bergonie Tribondeau law** states that radiosensitivity rises with mitotic rate and proliferative future and falls with differentiation, explaining why lymphocytes, spermatogonia, marrow and gut lining die first while neurons and muscle endure. Lymphocytes break the mitotic rule by dying in interphase at tiny doses, the famous exception examiners plant. The law ranks tissue sensitivity for every acute syndrome and protection question in this module.",
+   "say": "Bergonie Tribondeau law states sensitivity rises with mitotic rate and falls with differentiation, explaining why marrow and gut lining die first while neurons endure. Lymphocytes break the rule by dying in interphase at tiny doses, the famous exception examiners plant.",
+   "vis": {"kind": "table", "cols": ["Sensitivity rank", "Tissue", "Clinical echo"], "rows": [["Highest", "Lymphocytes, spermatogonia", "Counts fall within hours"], ["High", "Marrow, gut lining, gonads", "Acute syndromes start here"], ["Intermediate", "Skin, endothelium, lens", "Dermatitis, cataract"], ["Lowest", "Neurons, muscle, bone matrix", "Late effects only"]]}
+  },
+  {
+   "title": "Radiosensitisers and protectors",
+   "tx": "**Radiosensitisers** widen the therapeutic gap from the tumour side: concurrent cisplatin adds DNA crosslinks in head and neck and cervical cancers, oxygen and nimorazole attack hypoxia, and hyperthermia disables repair enzymes. Protectors widen it from the normal side, amifostine scavenging radicals in salivary glands being the textbook example. Every combined modality protocol in the clinical lessons is one of these radiobiology levers pulled deliberately.",
+   "say": "Radiosensitisers widen the therapeutic gap from the tumour side: cisplatin adds DNA crosslinks, nimorazole attacks hypoxia and heat disables repair. Protectors like amifostine widen it from the normal side. Every combined protocol in the clinical lessons is one of these radiobiology levers pulled deliberately.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Radiation dose delivered"}, {"id": "b", "label": "Sensitiser boosts tumour kill"}, {"id": "c", "label": "Protector shields normal tissue"}, {"id": "d", "label": "Therapeutic gap widens"}], "edges": [["a", "b"], ["a", "c"], ["b", "d"], ["c", "d"]]}
+  }
+ ]
+}

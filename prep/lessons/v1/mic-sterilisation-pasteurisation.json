@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "mic-sterilisation",
+  "subject": "microbiology",
+  "title": "Pasteurisation, Inspissation and Low-Temperature Disinfection",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Pasteurisation** is targeted disinfection, not sterilisation: holder method 63 degrees for 30 minutes or flash (HTST) 72 degrees for 15 seconds kills milk's vegetative pathogens (Mycobacterium tuberculosis historically, Coxiella burnetii the benchmark, Salmonella, Brucella, Listeria, Campylobacter) while sparing flavour and leaving spores and thermoduric organisms alive, which is why pasteurised milk still refrigerates and still spoils.",
+      "say": "Pasteurisation kills milk's pathogens, not its spores; refrigeration finishes the job.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Methods",
+          "points": [
+            "Holder: 63 C for 30 minutes",
+            "HTST flash: 72 C for 15 seconds",
+            "UHT: 135 C seconds, near sterilisation shelf stable",
+            "Phosphatase test verifies pasteurisation (enzyme inactivated)"
+          ]
+        },
+        "right": {
+          "title": "Targets and survivors",
+          "points": [
+            "Coxiella burnetii: thermal benchmark organism",
+            "TB, Brucella, Salmonella, Listeria killed",
+            "Spores and thermoduric bacteria survive",
+            "Post pasteurisation contamination remains possible"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Inspissation** solidifies egg and serum media by gentle heating (80 to 85 degrees for thirty minutes on successive days in an inspissator), the heat coagulating egg protein into Lowenstein Jensen slopes while disinfecting them; Loeffler serum slopes for diphtheria work share the technique. Fractional gentle heat here serves texture and sterility together, Tyndallisation's close cousin in the media kitchen.",
+      "say": "Inspissation cooks egg media just enough to set and disinfect, never to sterilise.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Inspissation facts",
+          "points": [
+            "80 to 85 C, sloped media solidify",
+            "Lowenstein Jensen for mycobacteria",
+            "Loeffler serum slope for Corynebacterium",
+            "Successive day heating (fractional logic)"
+          ]
+        },
+        "right": {
+          "title": "Media kitchen neighbours",
+          "points": [
+            "Autoclaved basal media (nutrient agar)",
+            "Heat labile additives after cooling to 50 C (blood agar)",
+            "Chocolate agar: blood heated to release factors",
+            "Filter sterilised sugars and urea added aseptically"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Vaccine and serum** heat treatments borrow pasteurisation logic: water bath inactivation of complement in serum at 56 degrees for thirty minutes (serology's routine), heat killed vaccines historically, and blood product viral inactivation by pasteurisation and solvent detergent methods. Each is pathogen reduction tuned to preserve a fragile biological product, the same compromise milk taught.",
+      "say": "Fifty six degrees for thirty minutes inactivates complement; heat is dosed like a drug everywhere.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Heat preserved biologics",
+          "points": [
+            "Serum complement inactivation 56 C 30 min",
+            "Pasteurised albumin and clotting factors",
+            "Solvent detergent viral inactivation partners",
+            "Heat killed vaccines historically (TAB)"
+          ]
+        },
+        "right": {
+          "title": "Verification tests",
+          "points": [
+            "Alkaline phosphatase negative in milk",
+            "Methylene blue reductase keeps quality grade",
+            "Phosphatase reactivation pitfalls known",
+            "Coliform counts audit post process contamination"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Cold sterilisation by **filtration** handles what no heat survives: sera, antibiotic solutions, sugar media, and air (HEPA filters in laminar flows and theatres) pass through 0.22 micrometre membranes that retain bacteria while viruses and mycoplasma (0.1 to 0.3 micrometre filters respectively) challenge finer grades. Filter integrity (bubble point) testing certifies the invisible barrier.",
+      "say": "A 0.22 micrometre membrane sterilises fluids heat would ruin; viruses pass and must be handled otherwise.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Filtration territory",
+          "points": [
+            "Heat labile fluids: sera, antibiotics, vitamins",
+            "0.22 um retains bacteria, 0.1 um targets mycoplasma",
+            "HEPA air in laminar flow and theatres",
+            "Viruses and prions not retained reliably"
+          ]
+        },
+        "right": {
+          "title": "Filter discipline",
+          "points": [
+            "Bubble point integrity testing",
+            "Prefiltration for particulate loads",
+            "Aseptic assembly after sterilising filter",
+            "Endotoxin not removed (separate depyrogenation)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Radiation sterilises at** factory scale: gamma from cobalt 60 (and electron beam) penetrates packaged syringes, gloves and sutures in sealed cartons, dosed in kilograys against spore benchmarks, while ultraviolet stays a surface and air adjunct (theatres, cabinets) because shadows and poor penetration betray it. Radiation leaves no residue but demands licensed facilities, dividing factory from hospital methods.",
+      "say": "Gamma sterilises sealed cartons by the pallet; UV only disinfects what it can see.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ionising radiation",
+          "points": [
+            "Gamma cobalt 60, e beam alternatives",
+            "Single use devices in final packaging",
+            "Dose mapped and biologically validated",
+            "No heat, moisture or residue"
+          ]
+        },
+        "right": {
+          "title": "Ultraviolet limits",
+          "points": [
+            "254 nm germicidal range",
+            "Surface and air only, shadowed areas survive",
+            "Laminar flow and theatre adjunct",
+            "Eye and skin protection for staff"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pasteurisation failures teach** outbreak literacy: raw milk outbreaks (Campylobacter, E coli O157, Listeria in soft cheeses) persist where pasteurisation is refused or post process contamination intrudes, and Listeria's refrigerator growth turns small contaminations into late pregnancy and immunocompromised tragedies. The phosphatase test distinguishes unpasteurised from contaminated after the fact in investigations.",
+      "say": "Pasteurised milk outbreaks usually mean contamination after, or defiance before, the process.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "raw",
+            "label": "Raw milk pathogens present"
+          },
+          {
+            "id": "pasteur",
+            "label": "Pasteurisation kills vegetative pathogens"
+          },
+          {
+            "id": "contam",
+            "label": "Post process contamination or raw bypass"
+          },
+          {
+            "id": "listeria",
+            "label": "Listeria grows even refrigerated: outbreak"
+          }
+        ],
+        "edges": [
+          [
+            "raw",
+            "pasteur"
+          ],
+          [
+            "pasteur",
+            "contam"
+          ],
+          [
+            "contam",
+            "listeria"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Holder versus flash** is an engineering trade worth stating once: holder batches suit small dairies and gentler flavour, HTST continuous flow dominates industry with regeneration heat exchange saving energy, and both are validated against Coxiella's thermal death curve rather than opinion. UHT plus aseptic packaging extends the same curve to shelf stability at quality cost.",
+      "say": "All pasteurisation curves are negotiated with Coxiella's death curve, not with preference.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Holder method",
+          "points": [
+            "Batch vats, 63 C 30 minutes",
+            "Simple, small scale",
+            "Flavour gentler",
+            "Cooling discipline critical"
+          ]
+        },
+        "right": {
+          "title": "HTST and UHT",
+          "points": [
+            "Continuous plate exchange, 72 C 15 seconds",
+            "Energy regeneration efficiency",
+            "UHT 135 C: shelf stable, cooked flavour",
+            "Aseptic packaging completes UHT system"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **level vocabulary must** stay exact across this module: sterilisation (all forms including spores), high level disinfection (spores mostly, endoscopes), intermediate (tuberculosis and viruses, not spores reliably), low level (vegetative bacteria), pasteurisation filed under thermal disinfection for food. Misnaming a level on a protocol is how instruments and patients meet the wrong process.",
+      "say": "Sterilise, disinfect high, intermediate or low: the level word is a safety word.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Levels ladder",
+          "points": [
+            "Sterilisation: spores included",
+            "High level: endoscope standard",
+            "Intermediate: TB and most viruses",
+            "Low level: vegetative bacteria and fungi"
+          ]
+        },
+        "right": {
+          "title": "Device matching (Spaulding)",
+          "points": [
+            "Critical (sterile tissue): sterilise",
+            "Semicritical (mucosa): high level disinfect minimum",
+            "Noncritical (intact skin): low level",
+            "Pasteurisation serves food and respiratory equipment niches"
+          ]
+        }
+      }
+    }
+  ]
+}

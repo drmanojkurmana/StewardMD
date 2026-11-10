@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-cytotoxic-anticancer",
+  "subject": "pharmacology",
+  "title": "Cytotoxic Anticancer II: Platinum Compounds, Cisplatin Nephrotoxicity, Ototoxicity and Emetogenicity",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Platinum compounds** are alkylator like rather than true alkylators: cisplatin, carboplatin and oxaliplatin aquate inside cells and weld intrastrand DNA crosslinks (1,2 dGpG principally) that bend the helix into repair machinery alarms, killing in any phase with characteristic organ signatures replacing marrow as the dose ceiling for two of the three. Germ cell, ovarian, bladder, lung, colorectal and head and neck regimens divide among them by those signatures.",
+      "say": "Three platinums, three organ ceilings; choose by kidney, marrow or nerve tolerance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Shared mechanism",
+          "points": [
+            "Aquation activates intracellularly (low chloride)",
+            "Intrastrand crosslinks bend DNA helix",
+            "Cell cycle non specific",
+            "No cross resistance fully with alkylators"
+          ]
+        },
+        "right": {
+          "title": "Dividing signatures",
+          "points": [
+            "Cisplatin: kidney, ear, emesis ceilings",
+            "Carboplatin: marrow ceiling, AUC dosing",
+            "Oxaliplatin: nerve ceiling, colorectal crown"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cisplatin nephrotoxicity** is proximal and distal tubular injury by cumulative dose, prevented (never treated) by chloride rich forced saline diuresis before and after, magnesium and potassium repletion by protocol, mannitol in high dose traditions, and avoidance of aminoglycoside partners; creatinine clearance thresholds reassign patients to carboplatin instead. The kidney injury is the price list that built carboplatin's entire career.",
+      "say": "You prevent cisplatin kidneys with salt water and magnesium; you never treat your way back.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "eligible",
+            "label": "Creatinine clearance, hearing and neuropathy baselined"
+          },
+          {
+            "id": "hydrate",
+            "label": "Forced saline diuresis before and after dose"
+          },
+          {
+            "id": "replace",
+            "label": "Magnesium and potassium repleted by protocol"
+          },
+          {
+            "id": "avoid",
+            "label": "Aminoglycosides and contrast clustered away"
+          }
+        ],
+        "edges": [
+          [
+            "eligible",
+            "hydrate"
+          ],
+          [
+            "hydrate",
+            "replace"
+          ],
+          [
+            "replace",
+            "avoid"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Ototoxicity** writes cisplatin's paediatric tragedy: irreversible high frequency sensorineural hearing loss beginning beyond speech frequencies and descending, cumulative and worse in children, monitored by audiometry where protocols demand and fenced by dose caps and carboplatin substitution in the youngest. Peripheral neuropathy (stocking glove, cumulative) and Raynaud phenomena queue behind the ear in the chronic ledger.",
+      "say": "Cisplatin deafens from the top frequencies down, children first; audiograms are dose instruments.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ototoxicity facts",
+          "points": [
+            "High frequency loss first, speech frequencies later",
+            "Irreversible, cumulative dose related",
+            "Children at highest risk",
+            "Tinnitus may herald or accompany"
+          ]
+        },
+        "right": {
+          "title": "Mitigation habits",
+          "points": [
+            "Baseline and serial audiometry in paediatrics",
+            "Cumulative dose ceilings respected",
+            "Sodium thiosulfate in defined paediatric settings",
+            "Carboplatin substitution where cure permits"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Highly emetogenic** is cisplatin's third crown: over 90 percent vomiting untreated, acute (serotonin, day one) and delayed (substance P, days 2 to 5) phases demanding the antiemetic lesson's full triple or quadruple prophylaxis (NK1 antagonist, 5HT3 antagonist, dexamethasone, with or without olanzapine) scheduled rather than rescued. Breakthrough failure here teaches patients to fear cycle two more than cancer, making antiemetic precision an adherence drug.",
+      "say": "Cisplatin vomiting has two phases and four drug answers; schedule them, never chase them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Emesis phases",
+          "points": [
+            "Acute (first 24 h): serotonin mediated",
+            "Delayed (days 2 to 5): substance P dominant",
+            "Anticipatory: conditioned, prevention by early control",
+            "Cisplatin classed highly emetogenic (over 90 percent)"
+          ]
+        },
+        "right": {
+          "title": "Prophylaxis architecture",
+          "points": [
+            "NK1 antagonist plus 5HT3 antagonist plus dexamethasone",
+            "Olanzapine fourth drug in guidelines",
+            "Delayed phase cover continued at home",
+            "Rescue and regimen revision after breakthrough"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Carboplatin** trades cisplatin's kidney, ear and emesis ceilings for marrow (thrombocytopenia principal) and is dosed by renal function arithmetic, the Calvert formula (dose equals target AUC times GFR plus 25), oncology's most used equation. Hypersensitivity reactions accumulate with lifetime exposure (cycle 8 onward vigilance, desensitisation protocols), a platinum allergy career distinct from first dose reactions.",
+      "say": "Carboplatin is dosed by an equation and allergies arrive by the eighth cycle, not the first.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Calvert dosing",
+          "points": [
+            "Dose = AUC x (GFR + 25)",
+            "AUC 5 to 7 typical targets",
+            "Thrombocytopenia the dose ceiling",
+            "GFR estimation method changes the dose really"
+          ]
+        },
+        "right": {
+          "title": "Hypersensitivity career",
+          "points": [
+            "Risk climbs after 6 to 8 lifetime cycles",
+            "Rechallenge and desensitisation protocols exist",
+            "Premedication does not abolish risk",
+            "Cross reactivity between platinums partial"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Oxaliplatin** owns colorectal cancer (FOLFOX) and a two faced neuropathy: acute cold triggered paraesthesia and jaw tightness within hours (calcium channel mediated, cold avoidance counselled, infusion prolongation softens) and chronic cumulative sensory neuropathy that caps total therapy and recovers slowly. Its marrow and emesis are moderate, kidneys largely spared, and calcium magnesium infusions failed their neuropathy trials while duloxetine treats established pain.",
+      "say": "Oxaliplatin nerves tingle with cold today and numb cumulatively tomorrow; both write the orders.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute neuropathy",
+          "points": [
+            "Cold triggered paraesthesia and throat tightness",
+            "Hours to days, reversible",
+            "Cold avoidance and longer infusions",
+            "Laryngospasm sensation coached in advance"
+          ]
+        },
+        "right": {
+          "title": "Chronic neuropathy",
+          "points": [
+            "Cumulative sensory loss, dose capping",
+            "Recovery months, occasionally incomplete",
+            "Stop and go strategies (OPTIMOX) spare nerves",
+            "Duloxetine for established painful neuropathy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Platinum resistance** frame the examination synthesis: nucleotide excision repair capacity, glutathione conjugation and copper transporter trafficking decide tumour sensitivity; germ cell tumours' exquisite cisplatin cure (BEP regimens) versus ovarian and lung partial answers map that biology clinically. Non cross resistance with taxanes and antimetabolites is why platinum doublets anchor so many first line regimens.",
+      "say": "Testicular cancer is platinum biology's triumph; repair capacity writes every other tumour's partial answer.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sensitivity biology",
+          "points": [
+            "Excision repair capacity limits kill",
+            "Germ cell tumours: cure with cisplatin combinations",
+            "Glutathione and transporter efflux resist",
+            "BRCA and homologous repair defects sensitise"
+          ]
+        },
+        "right": {
+          "title": "Regimen architecture",
+          "points": [
+            "Platinum doublets across lung and ovarian first lines",
+            "BEP in germ cell disease",
+            "FOLFOX and FOLFIRI sequences in colorectal",
+            "Carboplatin where cisplatin ceilings forbid"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Electrolyte wasting** is cisplatin's quiet chronic signature: renal magnesium wasting persisting years, potassium and calcium dragged behind it, presenting as cramps, tetany or arrhythmia long after therapy and requiring oral magnesium discipline. Survivorship clinics inherit these ledgers (kidney, ear, nerve, magnesium) which is why the baseline tests before cycle one are really survivorship documents written in advance.",
+      "say": "Cisplatin wastes magnesium for years; the baseline bloods are survivorship's first page.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "waste",
+            "label": "Tubular injury wastes magnesium and potassium"
+          },
+          {
+            "id": "symptom",
+            "label": "Cramps, tetany or arrhythmia months later"
+          },
+          {
+            "id": "check",
+            "label": "Survivorship electrolytes checked deliberately"
+          },
+          {
+            "id": "replete",
+            "label": "Oral magnesium discipline maintained"
+          }
+        ],
+        "edges": [
+          [
+            "waste",
+            "symptom"
+          ],
+          [
+            "symptom",
+            "check"
+          ],
+          [
+            "check",
+            "replete"
+          ]
+        ]
+      }
+    }
+  ]
+}

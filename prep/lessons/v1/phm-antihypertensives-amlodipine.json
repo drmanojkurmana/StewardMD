@@ -1,0 +1,157 @@
+{
+  "v": 1,
+  "module": "phm-antihypertensives",
+  "subject": "pharmacology",
+  "title": "Calcium Channel Blockers and Centrally Acting Antihypertensives",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The dihydropyridine that dominates modern hypertension practice is **amlodipine**, a vascular selective blocker of L type calcium channels in arteriolar smooth muscle. Its slow onset and 30 to 50 hour half life give once daily dosing with gentle 24 hour control and no sharp peaks to trigger reflex responses. Arteriolar dilatation lowers peripheral resistance while veins, cardiac conduction and contractility stay essentially untouched at ordinary doses.",
+      "say": "Amlodipine relaxes arterioles slowly and for a full day, which is why it is so forgiving to prescribe.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-nifedipine.webp",
+        "alt": "L type calcium channel blockade causing vascular and myometrial smooth muscle relaxation",
+        "caption": "L type calcium blockade relaxing vascular smooth muscle, the shared mechanism of amlodipine and nifedipine. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Ankle **oedema** stops more amlodipine prescriptions than any failure of efficacy: precapillary arterioles dilate while postcapillary venules do not, so capillary pressure rises and fluid transudes into dependent tissues. It is dose related, worse on standing, and not fluid retention, so diuretics disappoint. Adding an ACE inhibitor or blocker, which dilates the venous side, often settles it; otherwise reduce the dose or change class.",
+      "say": "Amlodipine ankle swelling is a pressure imbalance, not fluid overload; balance the venous side or switch.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Amlodipine oedema",
+          "points": [
+            "Precapillary dilatation without venodilatation",
+            "Raised capillary pressure transudes fluid",
+            "Pitting is mild, worse by evening and on standing",
+            "Diuretics help little; RAAS blocker combination helps"
+          ]
+        },
+        "right": {
+          "title": "Fluid retention oedema",
+          "points": [
+            "Weight gain accompanies the swelling",
+            "Raised jugular pressure or lung crackles may coexist",
+            "Causes include heart failure and kidney disease",
+            "Diuretics and treating the cause are effective"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Short acting **nifedipine** capsules write the cautionary history of this class: swallowing or biting them crashed pressure within minutes, provoking reflex tachycardia, myocardial ischaemia and strokes, and the practice was abandoned for hypertension. Modern nifedipine survives in extended release form for hypertension and pregnancy, and as a tocolytic, where its smooth muscle relaxation delays preterm labour while steroids mature fetal lungs.",
+      "say": "Never crash pressure with short acting nifedipine; its modern roles are slow release tablets and tocolysis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "rapid", "label": "Short acting nifedipine absorbed in minutes" },
+          { "id": "crash", "label": "Abrupt vasodilatation and pressure crash" },
+          { "id": "reflex", "label": "Reflex tachycardia raises myocardial oxygen demand" },
+          { "id": "harm", "label": "Ischaemia and stroke reported; practice abandoned" }
+        ],
+        "edges": [["rapid", "crash"], ["crash", "reflex"], ["reflex", "harm"]]
+      }
+    },
+    {
+      "tx": "Stimulating presynaptic alpha 2 receptors in the brainstem, **clonidine** throttles sympathetic outflow so heart rate, renin release and vascular tone all fall together. It works, but dry mouth and sedation burden most patients, and its party trick is dangerous: sudden withdrawal after chronic use unleashes rebound sympathetic surge with hypertensive crisis. Taper over days, and suspect missed clonidine doses in any unexplained pressure spike with tremor and headache.",
+      "say": "Clonidine turns down the sympathetic tap centrally; stop it suddenly and pressure rebounds dangerously.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-clonidine.webp",
+        "alt": "Presynaptic alpha 2 stimulation inhibiting sympathetic outflow from the brainstem",
+        "caption": "Central alpha 2 stimulation reducing sympathetic outflow, the mechanism of clonidine and methyldopa. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Converted in the brain to alpha methylnoradrenaline, **methyldopa** is the false transmitter that made central agents respectable and remains a first line drug for chronic hypertension in pregnancy on decades of fetal safety data. Its own adverse list includes sedation, a positive direct Coombs test in up to 20 percent of users, and rare autoimmune haemolytic anaemia or hepatitis, so new anaemia on methyldopa deserves a haemolysis screen rather than iron tablets.",
+      "say": "Methyldopa is the pregnancy veteran; remember its Coombs positivity and rare haemolysis when anaemia appears.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Methyldopa in pregnancy",
+          "points": [
+            "Longest fetal safety record of any antihypertensive",
+            "Central alpha 2 agonism via a false transmitter",
+            "Twice or thrice daily dosing, sedation common early",
+            "No teratogenic signal across decades of use"
+          ]
+        },
+        "right": {
+          "title": "Methyldopa adverse effects",
+          "points": [
+            "Positive direct Coombs test in up to 20 percent",
+            "Rare autoimmune haemolytic anaemia",
+            "Drug induced hepatitis and fever reported",
+            "Sedation and postural hypotension limit dosing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Opening arteriolar potassium channels directly, **hydralazine** dilates resistance vessels with reflex tachycardia and fluid retention that historically forced it into triple therapy with a beta blocker and diuretic. In heart failure it partners isosorbide dinitrate where RAAS blockers are impossible, with particular outcome data in Black patients. Slow acetylators on higher doses risk the drug induced lupus detailed in the next lesson of this module.",
+      "say": "Hydralazine dilates arterioles directly and needs partners to tame its reflexes; in failure it pairs with nitrates.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "hyd", "label": "Hydralazine opens arteriolar potassium channels" },
+          { "id": "drop", "label": "Peripheral resistance and afterload fall" },
+          { "id": "reflex", "label": "Reflex tachycardia and salt retention follow" },
+          { "id": "partners", "label": "Beta blocker plus diuretic complete the classic triple" }
+        ],
+        "edges": [["hyd", "drop"], ["drop", "reflex"], ["reflex", "partners"]]
+      }
+    },
+    {
+      "tx": "Also a potassium channel opener but far more potent, **minoxidil** rescues refractory hypertension when little else works, at the cost of near universal hypertrichosis that was famously redirected into a topical hair loss product. Fluid retention can be torrential, pericardial effusion is reported, and it is never prescribed without a loop diuretic and usually a beta blocker riding alongside to contain its reflex consequences.",
+      "say": "Minoxidil is the last resort vasodilator: powerful, hairy, and never given without a loop diuretic partner.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Minoxidil strengths",
+          "points": [
+            "Works in refractory and renal hypertension",
+            "Oral active metabolite opens ATP sensitive potassium channels",
+            "Long tissue effect allows once or twice daily dosing"
+          ]
+        },
+        "right": {
+          "title": "Minoxidil burdens",
+          "points": [
+            "Hypertrichosis in most patients within months",
+            "Marked salt and water retention, weight gain",
+            "Pericardial effusion, occasionally tamponade",
+            "Requires loop diuretic, usually beta blocker too"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For hypertensive emergencies the intravenous vasodilator **sodium nitroprusside** remains the pharmacology benchmark: it donates nitric oxide, dilates arteries and veins within seconds, and wears off within minutes of stopping, allowing minute to minute titration. Each molecule carries five cyanide ions, so prolonged high dose infusion, especially with renal or hepatic impairment, risks cyanide and thiocyanate toxicity heralded by lactic acidosis and confusion.",
+      "say": "Nitroprusside titrates by the minute and poisons by cyanide if left running; know both facts together.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "snp", "label": "Nitroprusside infusion donates nitric oxide" },
+          { "id": "dilate", "label": "Balanced arterial and venous dilatation in seconds" },
+          { "id": "titrate", "label": "Stop the infusion and effect fades in minutes" },
+          { "id": "cyanide", "label": "Prolonged high dose: cyanide accumulates, acidosis warns" }
+        ],
+        "edges": [["snp", "dilate"], ["dilate", "titrate"], ["snp", "cyanide"]]
+      }
+    },
+    {
+      "tx": "Blocking alpha, beta 1 and beta 2 receptors in one molecule, **labetalol** lowers pressure without reflex tachycardia and is the intravenous and oral workhorse for severe hypertension in pregnancy and many emergencies. The alpha to beta ratio differs by route, about 1:7 intravenously, so oral dosing leans more on alpha blockade. It avoids the cyanide question entirely, which is one reason nitroprusside has retreated to niche roles in modern units.",
+      "say": "Labetalol blocks alpha and beta together, which is why pregnancy and emergency practice reach for it first.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-labetalol.webp",
+        "alt": "Concurrent alpha 1 and beta adrenergic blockade by labetalol lowering blood pressure",
+        "caption": "Combined alpha and beta blockade by labetalol, lowering pressure without reflex tachycardia. Credit: StewardMD."
+      }
+    }
+  ]
+}

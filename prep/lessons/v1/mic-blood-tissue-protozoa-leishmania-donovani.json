@@ -1,0 +1,211 @@
+{
+  "v": 1,
+  "module": "mic-blood-tissue-protozoa",
+  "subject": "microbiology",
+  "title": "Visceral Leishmaniasis: Kala-Azar, LD Bodies and Reticuloendothelial Pathology",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The digenetic protozoan **Leishmania donovani** is the etiological agent of visceral leishmaniasis, historically named kala-azar or black fever due to characteristic gray-brown hyperpigmentation of the hands, feet, and abdomen. The organism alternates between an intracellular aflagellate amastigote inside human host reticuloendothelial macrophages and an extracellular motile flagellated promastigote inside the digestive tract of the sandfly vector.",
+      "say": "Intracellular amastigotes multiply within human macrophages, causing visceral leishmaniasis or kala-azar.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/kala-azar-fig1.webp",
+        "alt": "Visceral leishmaniasis clinical and microscopic features",
+        "caption": "Visceral leishmaniasis showing massive splenomegaly and intracellular amastigotes [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Within splenic, hepatic, and bone marrow mononuclear phagocytes, amastigotes replicate by simple binary fission. These intracellular structures, known diagnostically as **LD bodies** or Leishman-Donovan bodies, measure two to four micrometres across, possess a round or oval contour, and display a distinctive large spherical nucleus alongside a rod-shaped kinetoplast containing mitochondrial DNA.",
+      "say": "Tiny Leishman-Donovan bodies inside macrophages show a round nucleus and rod-like kinetoplast.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/leishmaniasis-fig1.webp",
+        "alt": "Leishmania amastigotes on smear",
+        "caption": "Splenic aspirate smear demonstrating multiple Leishman-Donovan bodies inside macrophage cytoplasm [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Unchecked reticuloendothelial proliferation drives progressive, painless, massive **splenomegaly**, where the enlarged spleen frequently descends into the right iliac fossa, accompanied by moderate hepatomegaly and generalized lymphadenopathy. Bone marrow replacement and splenic sequestration precipitate severe pancytopenia, resulting in microcytic or normocytic anaemia, profound leukopenia below two thousand cells per microlitre, and secondary bacterial infections.",
+      "say": "Massive splenomegaly and bone marrow suppression precipitate profound pancytopenia and secondary infections.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Haematological Finding",
+          "Laboratory Value",
+          "Pathological Mechanism"
+        ],
+        "rows": [
+          [
+            "Leukopenia",
+            "WBC under 2000 cells/microlitre",
+            "Splenic pooling and reticuloendothelial infiltration"
+          ],
+          [
+            "Thrombocytopenia",
+            "Platelets under 50,000/uL",
+            "Hypersplenism and autoimmune peripheral destruction"
+          ],
+          [
+            "Severe anaemia",
+            "Hemoglobin often 5 to 7 g/dL",
+            "Dyserythropoiesis, hemolysis, and marrow replacement"
+          ],
+          [
+            "A:G ratio reversal",
+            "Globulin exceeds albumin markedly",
+            "Polyclonal B-cell hypergammaglobulinaemia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A remarkable immunological hallmark of visceral leishmaniasis is intense non-specific polyclonal B-cell activation, yielding massive hypergammaglobulinaemia. This reversal of the albumin-globulin ratio forms the basis of historical bedside screening tests such as the **Napier aldehyde test**, where adding one drop of commercial formalin to patient serum induces solid white jelling like boiled egg white within twenty minutes.",
+      "say": "Formalin addition solidifies serum into a white gel, demonstrating marked polyclonal hypergammaglobulinaemia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ald1",
+            "label": "Add 1 drop of 40% commercial formalin to 1 mL of patient serum"
+          },
+          {
+            "id": "ald2",
+            "label": "Serum high in polyclonal IgG polymerizes with formaldehyde"
+          },
+          {
+            "id": "ald3",
+            "label": "Positive test: complete solidification and opacification within 20 minutes"
+          }
+        ],
+        "edges": [
+          [
+            "ald1",
+            "ald2"
+          ],
+          [
+            "ald2",
+            "ald3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Definitive parasitological confirmation requires demonstrating LD bodies in stained smears of splenic, bone marrow, or lymph node aspirates. **Splenic aspiration** delivers the highest diagnostic sensitivity exceeding ninety-five percent, but carries a finite risk of catastrophic intraperitoneal haemorrhage. Bone marrow aspiration provides an equally specific alternative with eighty percent sensitivity and zero risk of visceral rupture.",
+      "say": "Splenic aspiration provides highest sensitivity but carries a risk of life-threatening haemorrhage.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Splenic aspiration",
+          "points": [
+            "Diagnostic sensitivity exceeds 95 percent",
+            "Highest yield of intracellular amastigotes",
+            "Requires normal platelet count and prothrombin time",
+            "Contraindicated in bleeding diathesis or soft spleen"
+          ]
+        },
+        "right": {
+          "title": "Bone marrow aspiration",
+          "points": [
+            "Diagnostic sensitivity ranges from 70 to 85 percent",
+            "Zero risk of internal visceral laceration",
+            "Safe in severe thrombocytopenia and bleeding",
+            "First-line diagnostic approach in clinical guidelines"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In vitro cultivation of aspirates on diphasic **NNN medium**, consisting of rabbit blood agar overlaid with sterile physiological saline, demonstrates flagellated promastigotes multiplying at twenty-four degrees Celsius over one to three weeks. In non-invasive point-of-care diagnostics, lateral flow strips detecting recombinant k39 kinesin-related antigen yield sensitivity and specificity exceeding ninety-eight percent in Indian visceral leishmaniasis.",
+      "say": "Novy-MacNeal-Nicolle rabbit blood agar culture yields flagellated promastigotes at room temperature.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Tool",
+          "Substrate / Specimen",
+          "Clinical Performance"
+        ],
+        "rows": [
+          [
+            "rK39 immunochromatography",
+            "Fingerprick whole blood / serum",
+            "Rapid screening; sensitivity >98% in Indian focus"
+          ],
+          [
+            "NNN culture medium",
+            "Bone marrow or splenic aspirate",
+            "Promastigotes appear within 1 to 3 weeks at 24C"
+          ],
+          [
+            "Leishmanin skin test",
+            "Intradermal killed promastigotes",
+            "Negative in active disease; converts positive after cure"
+          ],
+          [
+            "Direct agglutination test",
+            "Patient serum with stained antigen",
+            "High titer agglutination confirms exposure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Following clinical cure of visceral disease, up to ten percent of Indian patients develop **post-kala-azar dermal leishmaniasis** one to five years later. Patients present with asymptomatic hypopigmented macules that progress into erythematous indurated papules and nodular granulomas across the face, butterfly area, and extremities. Because nodular lesions teem with infectious amastigotes, PKDL cases serve as the critical human transmission reservoir.",
+      "say": "Nodular facial lesions developing years after visceral cure teem with amastigotes, maintaining community transmission.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Macular PKDL",
+          "points": [
+            "Hypopigmented non-anaesthetic skin patches",
+            "Commonly over trunk, face and extremities",
+            "Few parasites visible on skin slit smears",
+            "Resembles lepromatous leprosy or vitiligo"
+          ]
+        },
+        "right": {
+          "title": "Nodular PKDL",
+          "points": [
+            "Erythematous succulent facial nodules",
+            "Butterfly distribution resembling lupus vulgaris",
+            "Abundant LD bodies in skin slit aspirates",
+            "Requires prolonged courses of miltefosine"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The therapeutic standard in the Indian subcontinent is single-dose intravenous **liposomal amphotericin B** administered at ten milligrams per kilogram. This ultra-short targeted regimen delivers cure rates exceeding ninety-five percent with negligible nephrotoxicity. Oral miltefosine, an alkylphosphocholine analog, provides an effective oral alternative but requires strict contraindication in pregnancy due to severe teratogenicity.",
+      "say": "Single dose liposomal amphotericin B achieves cure, while oral miltefosine provides an effective alternative.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rx1",
+            "label": "Diagnose active visceral leishmaniasis via rK39 and bone marrow smear"
+          },
+          {
+            "id": "rx2",
+            "label": "Administer single IV infusion of liposomal amphotericin B 10 mg/kg"
+          },
+          {
+            "id": "rx3",
+            "label": "Monitor for rapid defervescence, spleen regression, and reticulocytosis"
+          }
+        ],
+        "edges": [
+          [
+            "rx1",
+            "rx2"
+          ],
+          [
+            "rx2",
+            "rx3"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,173 @@
+{
+  "v": 1,
+  "module": "phm-diuretics",
+  "subject": "pharmacology",
+  "title": "Diuretic Ototoxicity, Diabetes Insipidus and SIADH: Matching the Drug to Water Balance",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The dose related inner ear injury caused by high dose loop diuretics is **ototoxicity**. Furosemide and ethacrynic acid inhibit the Na K 2Cl cotransporter in the stria vascularis, the secretory epithelium that maintains potassium rich endolymph. Endolymph composition collapses, hair cells fail, and the patient notices tinnitus, aural fullness and high frequency hearing loss. Rapid intravenous boluses, renal failure and very high plasma peaks carry the greatest risk.",
+      "say": "Loop diuretics can poison the stria vascularis; slow the infusion and the hearing usually recovers.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sudden-sensorineural-hearing-loss-fig1.webp",
+        "alt": "Diagram of the cochlea showing the cochlear nerve, tectorial membrane, outer hair cells and stria vascularis",
+        "caption": "Cochlear anatomy with the stria vascularis and hair cells, the structures injured when loop diuretic levels peak too high."
+      }
+    },
+    {
+      "tx": "Loop diuretic hearing loss is usually **reversible** within hours to weeks of stopping the drug, unlike the permanent injury of aminoglycosides. Ethacrynic acid is the worst offender and can deafen permanently, which is why it survives only as a reserve agent for true sulfonamide allergy. Giving furosemide no faster than 4 mg per minute, and avoiding needless mega doses, keeps endolymph transport intact in most patients.",
+      "say": "Furosemide deafness usually reverses; ethacrynic acid is the dangerous one and is kept in reserve.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Loop diuretic ototoxicity",
+          "points": [
+            "Stria vascularis cotransporter blocked",
+            "Tinnitus and high frequency loss at peak levels",
+            "Usually reversible after withdrawal",
+            "Risk cut by infusing at 4 mg per minute or slower"
+          ]
+        },
+        "right": {
+          "title": "Aminoglycoside ototoxicity",
+          "points": [
+            "Hair cell death in cochlea and vestibule",
+            "Cochlear and vestibular loss often permanent",
+            "Worsened by renal failure and long courses",
+            "Risk cut by level monitoring and once daily dosing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Two ototoxins together multiply the damage, so the loop diuretic plus **aminoglycoside** combination is the classic exam trap. Gentamicin accumulates in perilymph and kills outer hair cells while furosemide opens the stria barrier and lets more drug in. Cisplatin, vancomycin at high levels and loop agents form other hazardous pairs. When the combination is unavoidable, use the lowest diuretic dose, monitor levels and ask daily about tinnitus and imbalance.",
+      "say": "Never stack a loop diuretic on an aminoglycoside casually; together they can take hearing permanently.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-gentamicin.webp",
+        "alt": "Gentamicin panel showing bacterial entry through porins, 30S ribosome blockade, nephrotoxicity and ototoxicity",
+        "caption": "Gentamicin, the aminoglycoside whose cochlear and vestibular toxicity is potentiated by loop diuretics. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Failure to make vasopressin, or failure of the kidney to answer it, produces **diabetes insipidus**, with 3 to 20 litres of dilute urine daily. Central disease follows pituitary or hypothalamic injury and lacks the hormone itself. Nephrogenic disease has plenty of hormone but unresponsive collecting ducts, classically from lithium, hypercalcaemia or hypokalaemia. Both forms share urine osmolality under 300 mOsm per kg with rising serum osmolality and intense thirst.",
+      "say": "Diabetes insipidus is litres of dilute urine: either no vasopressin, or a kidney that cannot hear it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Central diabetes insipidus",
+          "points": [
+            "Vasopressin synthesis or release lost",
+            "Causes: surgery, trauma, tumours, infiltration",
+            "Urine concentrates after desmopressin",
+            "Treatment: desmopressin by nasal, oral or parenteral route"
+          ]
+        },
+        "right": {
+          "title": "Nephrogenic diabetes insipidus",
+          "points": [
+            "Collecting duct resistant to vasopressin",
+            "Causes: lithium, hypercalcaemia, hypokalaemia",
+            "Little response to desmopressin challenge",
+            "Treatment: remove cause, thiazide plus low salt diet"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The synthetic vasopressin analogue with almost pure V2 activity and no pressor effect is **desmopressin** (DDAVP). Amino acid changes extend its half life to several hours and remove V1 vasoconstriction, making it safe for nightly use in central diabetes insipidus and nocturnal enuresis. Its other party trick is releasing von Willebrand factor from endothelium, which earns it a place in mild haemophilia A and von Willebrand disease before procedures.",
+      "say": "Desmopressin is V2 only: it holds water, treats central diabetes insipidus, and releases von Willebrand factor.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ddavp", "label": "Desmopressin given nasally, orally or parenterally" },
+          { "id": "v2", "label": "V2 receptors insert aquaporin 2 in collecting duct" },
+          { "id": "water", "label": "Water reabsorbed, urine volume falls and concentrates" },
+          { "id": "vwf", "label": "Endothelial von Willebrand factor also released" }
+        ],
+        "edges": [["ddavp", "v2"], ["v2", "water"], ["ddavp", "vwf"]]
+      }
+    },
+    {
+      "tx": "It seems backwards, yet a thiazide is standard treatment for nephrogenic diabetes insipidus through **paradoxical antidiuresis**. Blocking distal sodium chloride uptake contracts extracellular volume slightly, the proximal tubule then reclaims more sodium and water, and less filtrate ever reaches the unresponsive collecting duct. Adding dietary salt restriction, and amiloride when lithium is the culprit because it blocks lithium entry through epithelial sodium channels, can halve the urine volume.",
+      "say": "A thiazide treats nephrogenic diabetes insipidus by moving reabsorption upstream, before the broken segment.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "thiaz", "label": "Thiazide blocks distal NaCl cotransporter" },
+          { "id": "vol", "label": "Mild volume contraction develops" },
+          { "id": "prox", "label": "Proximal sodium and water reabsorption increases" },
+          { "id": "less", "label": "Less fluid reaches collecting duct, urine volume falls" }
+        ],
+        "edges": [["thiaz", "vol"], ["vol", "prox"], ["prox", "less"]]
+      }
+    },
+    {
+      "tx": "Excess vasopressin action with euvolaemic hyponatraemia defines **SIADH**, the syndrome of inappropriate ADH secretion. Water is retained, urine stays inappropriately concentrated above 100 mOsm per kg, and serum sodium drifts down while urine sodium exceeds 40 mmol per litre. Culprits include small cell lung cancer secreting ADH ectopically, pneumonia, meningitis, and drugs such as carbamazepine, SSRIs (selective serotonin reuptake inhibitors) and cyclophosphamide.",
+      "say": "In SIADH the urine is concentrated when it should be dilute, and the patient is euvolaemic with a low sodium.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "SIADH pattern",
+          "points": [
+            "Euvolaemic hyponatraemia, low serum osmolality",
+            "Urine osmolality above 100 despite dilute serum",
+            "Urine sodium typically above 40 mmol per litre",
+            "Thyroid, adrenal and renal function normal"
+          ]
+        },
+        "right": {
+          "title": "Common culprits",
+          "points": [
+            "Small cell lung carcinoma with ectopic ADH",
+            "Pneumonia, meningitis and head injury",
+            "Carbamazepine, SSRIs and cyclophosphamide",
+            "Postoperative pain, nausea and stress responses"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "First line treatment of chronic SIADH is **fluid restriction** to 800 to 1000 ml daily, stopping the offending drug and treating the cause; severe symptomatic hyponatraemia instead needs hypertonic saline in a monitored bed. Where restriction fails, options include oral urea, demeclocycline induced nephrogenic resistance, and tolvaptan under hospital supervision. Loop diuretic plus salt tablets is another specialist combination that forces free water loss.",
+      "say": "Restrict fluid first in SIADH; reserve hypertonic saline for severe symptoms and vaptans for hospital use.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "find", "label": "Confirm SIADH and stop culprit drugs" },
+          { "id": "restrict", "label": "Restrict fluid to 800 to 1000 ml daily" },
+          { "id": "severe", "label": "Severe symptoms: hypertonic saline, monitored bed" },
+          { "id": "refract", "label": "Refractory: urea, demeclocycline or tolvaptan" }
+        ],
+        "edges": [["find", "restrict"], ["find", "severe"], ["restrict", "refract"]]
+      }
+    },
+    {
+      "tx": "One bedside contrast locks this lesson in: the diabetes insipidus patient makes **dilute urine** with a rising sodium and will dehydrate catastrophically without water access, while the SIADH patient makes concentrated urine with a falling sodium and deteriorates if given unrestricted fluid or isotonic saline. The water deprivation test separates insipidus from primary polydipsia, and the desmopressin response then splits central from nephrogenic disease.",
+      "say": "Dilute urine with high sodium is insipidus; concentrated urine with low sodium is SIADH. The treatments are opposites.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Diabetes insipidus",
+          "points": [
+            "Urine osmolality under 300, volume over 3 litres",
+            "Serum sodium normal high or frankly raised",
+            "Danger: dehydration when water is unavailable",
+            "Test: water deprivation, then desmopressin response"
+          ]
+        },
+        "right": {
+          "title": "SIADH",
+          "points": [
+            "Urine osmolality above 100, volume normal or low",
+            "Serum sodium low with euvolaemia",
+            "Danger: cerebral oedema from water retention",
+            "Test: paired osmolalities, urine sodium, drug review"
+          ]
+        }
+      }
+    }
+  ]
+}

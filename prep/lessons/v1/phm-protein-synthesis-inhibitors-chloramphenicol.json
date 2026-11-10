@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-protein-synthesis-inhibitors",
+  "subject": "pharmacology",
+  "title": "Chloramphenicol, Gray Baby Syndrome, Aplastic Anaemia and the Macrolide Bridge",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Chloramphenicol** blocks the 50S peptidyl transferase reaction with beautiful breadth (Gram positives, negatives, anaerobes, rickettsiae) and CNS penetration that once made it meningitis royalty, before its haematological price retired it wherever alternatives exist. It remains in topical eye preparations (where systemic exposure is trivial and debate continues), resource limited typhoid and meningitis niches, and Rocky Mountain spotted fever pregnancy alternatives by specialist judgement.",
+      "say": "Chloramphenicol does everything and is forgiven almost nothing; the marrow writes its formulary status.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chloramphenicol virtues",
+          "points": [
+            "50S blockade, broad and bactericidal against key pathogens",
+            "Excellent CNS and ocular penetration",
+            "Anaerobes including Bacteroides",
+            "Inexpensive and heat stable globally"
+          ]
+        },
+        "right": {
+          "title": "Why it retired",
+          "points": [
+            "Aplastic anaemia, rare and fatal",
+            "Gray baby syndrome in neonates",
+            "Safer rivals for every first world indication",
+            "Levels and blood counts where used systemically"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Gray baby syndrome** is neonatal pharmacokinetics made visible: immature hepatic glucuronidation and renal excretion accumulate chloramphenicol, which poisons mitochondrial protein synthesis (mammalian ribosomes resemble bacterial), producing ashen grey cyanosis, abdominal distension, hypothermia, vasomotor collapse and death in the first days of dosed life. Weight based neonatal dosing caps and level monitoring were written from this syndrome, and its mechanism previews mitochondrial toxicities across the antibiotic cabinet.",
+      "say": "The gray baby is a metabolism lesson: no conjugation, mitochondrial poisoning, grey collapse.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "neonate",
+            "label": "Neonate given adult scaled chloramphenicol"
+          },
+          {
+            "id": "accum",
+            "label": "Immature glucuronidation accumulates drug"
+          },
+          {
+            "id": "mito",
+            "label": "Mitochondrial protein synthesis poisoned"
+          },
+          {
+            "id": "gray",
+            "label": "Ashen cyanosis, distension and cardiovascular collapse"
+          }
+        ],
+        "edges": [
+          [
+            "neonate",
+            "accum"
+          ],
+          [
+            "accum",
+            "mito"
+          ],
+          [
+            "mito",
+            "gray"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Aplastic anaemia** after chloramphenicol divides into two diseases students must separate: a dose dependent, reversible marrow suppression (reticulocytopenia, rising serum iron) monitored by counts during therapy, and an idiosyncratic, dose independent aplasia (roughly 1 in 25,000 to 40,000 courses) appearing weeks to months after exposure, often fatal and the reason the drug is banned from casual use even topically in some jurisdictions' anxieties.",
+      "say": "Reversible suppression is dose; aplasia is destiny at one in thirty thousand, and only the second retired the drug.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dose dependent suppression",
+          "points": [
+            "Predictable at high levels",
+            "Reticulocytes fall, iron rises",
+            "Reverses on cessation",
+            "Counts and levels police it"
+          ]
+        },
+        "right": {
+          "title": "Idiosyncratic aplasia",
+          "points": [
+            "Dose independent, delayed weeks to months",
+            "Pancytopenia, often irreversible",
+            "Approximately 1 in 25,000 to 40,000 courses",
+            "No monitoring can prevent it: avoidance does"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Erythromycin**, the original macrolide, binds the 50S exit tunnel and blocks translocation, covering atypicals (Legionella, Mycoplasma, Chlamydia), Campylobacter, Bordetella and penicillin allergic streptococcal niches, while its motilin agonism (next lesson) makes gastrointestinal misery its signature and intravenous phlebitis its rite. Its CYP3A4 inhibition and QT effects preview clarithromycin's fuller treatment next lesson; here it stands as the class founder whose inconveniences successors engineered away.",
+      "say": "Erythromycin founded the macrolides and billed in cramps; successors kept the ribosome and fired the gut.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antibacterials-fq-vanco-metronidazole-uti-fig1.webp",
+        "alt": "Bacterial targets of three antibacterials diagram showing ribosomal and cell wall targets",
+        "caption": "Bacterial target map locating the 50S ribosomal agents of this lesson among wall and DNA agents."
+      }
+    },
+    {
+      "tx": "**Azithromycin** re engineered erythromycin into tissue: a 15 member azalide concentrating intracellularly and in phagocytes with a 68 hour half life permitting single dose chlamydia therapy, three to five day respiratory courses and once weekly prophylaxis (MAC in advanced HIV historically). Its QT effect exists but CYP inhibition is minor beside clarithromycin's, and mass drug administration for trachoma and childhood mortality programmes made it public health infrastructure in the tropics.",
+      "say": "Azithromycin lives in tissues for days after the course ends; short courses, long shadows.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Azithromycin profile",
+          "points": [
+            "Tissue and phagocyte concentration extreme",
+            "Single dose chlamydia, short respiratory courses",
+            "Trachoma mass administration programmes",
+            "Minor CYP footprint, QT present"
+          ]
+        },
+        "right": {
+          "title": "Azithromycin cautions",
+          "points": [
+            "QT stacking in predisposed patients",
+            "Hearing effects at high prolonged doses",
+            "Infantile hypertrophic pyloric stenosis signal early in life",
+            "Resistance rises with community consumption"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Macrolide resistance travels** by two roads, efflux (mef, low level) and ribosomal methylation (erm, high level and inducible, making clindamycin falsely susceptible unless the D test unmasks it in the laboratory). Pneumococcal macrolide resistance above 25 percent in many regions retired macrolide monotherapy for pneumonia where bacteraemia threatens, a stewardship arithmetic repeated with every generation of this family since erythromycin's debut.",
+      "say": "Efflux whispers resistance, methylation shouts it, and the D test catches clindamycin lying.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "erm",
+            "label": "erm methylation modifies the 23S target"
+          },
+          {
+            "id": "mlsb",
+            "label": "Macrolide, lincosamide and streptogramin resistance"
+          },
+          {
+            "id": "dtest",
+            "label": "Inducible clindamycin resistance unmasked by D test"
+          },
+          {
+            "id": "avoid",
+            "label": "Clindamycin avoided despite susceptible printout"
+          }
+        ],
+        "edges": [
+          [
+            "erm",
+            "mlsb"
+          ],
+          [
+            "mlsb",
+            "dtest"
+          ],
+          [
+            "dtest",
+            "avoid"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Chloramphenicol's surviving systemic** niches are geography and desperation: typhoid fever where fluoroquinolone and ceftriaxone resistance circles back (with its own resistance history read first), bacterial meningitis in beta lactam catastrophe settings, brain abscess anaerobic cover in resource limited theatres, and topical ocular therapy everywhere. Each niche is a place where its marrow price buys something alternatives locally cannot, never a preference where they can.",
+      "say": "Chloramphenicol survives where resistance or poverty closes every other door, and nowhere else.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Surviving niches",
+          "points": [
+            "Typhoid in defined resistance geographies",
+            "Meningitis where beta lactams are impossible",
+            "Topical bacterial conjunctivitis preparations",
+            "Rickettsial alternatives by specialists"
+          ]
+        },
+        "right": {
+          "title": "Retired indications",
+          "points": [
+            "Routine respiratory and urinary infections",
+            "Neonatal therapy without level mastery",
+            "Any casual prolonged systemic course",
+            "Prophylaxis of any kind"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Drug interactions complete** chloramphenicol: it inhibits CYP enzymes and prolongs phenytoin, sulfonylurea, warfarin and cyclosporine effects, while rifampicin induction collapses its levels and phenobarbital does both directions in sequence. In the resource limited theatres where it survives, these interactions are managed by levels and vigilance rather than formulary exile, the pragmatic pharmacology of places whose alternatives are stockouts.",
+      "say": "Chloramphenicol slows everyone else's metabolism while inducers erase its own; levels arbitrate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chloramphenicol raises",
+          "points": [
+            "Phenytoin levels toward toxicity",
+            "Sulfonylurea hypoglycaemia prolonged",
+            "Warfarin and ciclosporin effects",
+            "Monitoring intensified on co therapy"
+          ]
+        },
+        "right": {
+          "title": "Chloramphenicol is lowered by",
+          "points": [
+            "Rifampicin induction",
+            "Phenobarbital chronic induction",
+            "Subtherapeutic levels risk typhoid failure",
+            "Level guided dosing where available"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "mic-sterilisation",
+  "subject": "microbiology",
+  "title": "Disinfectant Testing: Rideal-Walker, Chick-Martin and Biological Indicators",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **Rideal Walker test** grades a disinfectant against phenol itself: dilutions of test agent and phenol are challenged with Salmonella Typhi for set times at set temperature, subcultured, and the ratio of the weakest effective test dilution to phenol's is the phenol coefficient (above 1 beats phenol). It ignores organic matter and other organisms, which is precisely its historical limitation and its examination point.",
+      "say": "Phenol coefficient above one beats phenol, in clean water, against one organism only.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rideal Walker method",
+          "points": [
+            "Salmonella Typhi suspension standardised",
+            "Contact times sampled at intervals",
+            "Coefficient: test dilution over phenol dilution",
+            "Clean conditions, no organic load"
+          ]
+        },
+        "right": {
+          "title": "Its limitations",
+          "points": [
+            "One organism, not spectrum",
+            "No faecal or protein challenge",
+            "Temperature and timing laboratory bound",
+            "Coefficients marketed beyond meaning historically"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Chick Martin test** repairs Rideal Walker's cleanliness by adding organic matter (dried faeces or yeast suspension) to the challenge, giving coefficients nearer ward reality and usually lower. Modern successors (capacity and suspension tests, EN and ASTM standards, in use dilution confirmations) extend the same scepticism: a disinfectant is only its tested conditions, organism panel and contact time.",
+      "say": "Add dirt and coefficients fall; modern standards test the conditions of actual use.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chick Martin repair",
+          "points": [
+            "Organic load in the test mixture",
+            "Longer contact conventions",
+            "Coefficients lower and more realistic",
+            "Still suspension based, not surfaces"
+          ]
+        },
+        "right": {
+          "title": "Modern testing",
+          "points": [
+            "Suspension and carrier (surface) tests",
+            "Defined organism panels per claim",
+            "In use dilution and capacity tests",
+            "Regulatory lists by spectrum claim"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Geobacillus stearothermophilus** (formerly Bacillus stearothermophilus) spores are moist heat's biological indicator because this thermophile's spores resist steam more than any pathogen's, grow at 55 to 60 degrees where contaminants rest, and announce failure by growth and colour change after the cycle. Bacillus atrophaeus spores referee dry heat and ethylene oxide with the same logic in different armour.",
+      "say": "The indicator organism is chosen to be harder to kill than anything the load could carry.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Indicator pairings",
+          "points": [
+            "Steam and peroxide: G stearothermophilus",
+            "Dry heat and EtO: B atrophaeus (subtilis group)",
+            "Radiation: historical Bacillus pumilus",
+            "Self contained ampoules with growth medium"
+          ]
+        },
+        "right": {
+          "title": "Reading discipline",
+          "points": [
+            "Incubate with an unprocessed control",
+            "Rapid readout fluorescence systems hours",
+            "Positive result quarantines loads back to last negative",
+            "Implant loads quarantined until result where policy demands"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Chemical indicators speak** in classes worth one clean pass: external tape (exposure only), single variable strips, multi variable integrators tracking time temperature and steam, and emulating indicators tuned to specific cycles, the Bowie Dick test daily proving air removal and steam penetration in prevacuum sterilisers before loads run. Colour change is exposure evidence, never sterility itself.",
+      "say": "Integrators approach the spore's testimony; tape merely proves the pack travelled.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Indicator classes",
+          "points": [
+            "Class 1 tape: process exposure",
+            "Class 3 and 4: single and multi variable",
+            "Class 5 integrating: correlates with biological",
+            "Class 6 emulating: cycle specific"
+          ]
+        },
+        "right": {
+          "title": "Bowie Dick",
+          "points": [
+            "Daily prevacuum air removal test",
+            "Uniform colour change required",
+            "Failure stops the steriliser, not the paperwork",
+            "Leaks and vacuum faults detected early"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Sterility testing of** finished products (pharmacopoeial membrane filtration or direct inoculation into aerobic, anaerobic and fungal media for fourteen days) samples statistically and can never prove every unit, which is why parametric release by validated processes replaced end product testing wherever regulators allow. The indicator philosophy of this lesson scales: process proof beats product sampling.",
+      "say": "You cannot test sterility into a batch; you validate it in and sample for reassurance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Sterility testing",
+          "points": [
+            "Membrane filtration preferred where possible",
+            "Thioglycollate and soybean casein media pair",
+            "Fourteen day incubation",
+            "Sampling statistics limit certainty"
+          ]
+        },
+        "right": {
+          "title": "Parametric philosophy",
+          "points": [
+            "Validated cycles release loads",
+            "Bioburden controlled before sterilisation",
+            "Environmental monitoring in cleanrooms",
+            "End product tests as final audit"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Disinfectant failure investigation** follows the test logic backwards: wrong dilution (concentration strips), expired or topped up solutions, contact time shortened, organic load uncleaned, organism outside spectrum (spores, naked viruses, mycobacteria), and water quality diluting actives. Each failure mode maps to one variable the standard tests isolate, which is why the old tests still teach troubleshooting.",
+      "say": "Every disinfection failure is one test variable violated in the wild.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fail",
+            "label": "Disinfection failure suspected (outbreak or audit)"
+          },
+          {
+            "id": "conc",
+            "label": "Concentration and expiry checked"
+          },
+          {
+            "id": "spectrum",
+            "label": "Organism spectrum versus label claim"
+          },
+          {
+            "id": "practice",
+            "label": "Cleaning, contact time and dilution practice audited"
+          }
+        ],
+        "edges": [
+          [
+            "fail",
+            "conc"
+          ],
+          [
+            "conc",
+            "spectrum"
+          ],
+          [
+            "spectrum",
+            "practice"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Susceptibility of microbes** to disinfectants descends a resistance ladder worth memorising as one image: prions above spores, spores above mycobacteria (waxy walls), naked viruses and protozoan cysts mid ladder, fungi and vegetative bacteria below, enveloped viruses most fragile at the base. Selecting an agent is choosing a rung and paying its contact time.",
+      "say": "Prions, spores, mycobacteria, naked viruses, bacteria, enveloped viruses: pick your rung.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hard to kill",
+          "points": [
+            "Prions: essentially chemical proof",
+            "Bacterial spores: sterilants only",
+            "Mycobacteria: intermediate level benchmark",
+            "Naked viruses and cysts: variable resistance"
+          ]
+        },
+        "right": {
+          "title": "Easy to kill",
+          "points": [
+            "Vegetative bacteria: low level agents",
+            "Fungi: most disinfectants",
+            "Enveloped viruses: detergents suffice",
+            "Ladder guides outbreak escalation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Examination pairing closes** the sterilisation module: Rideal Walker (phenol coefficient, clean, Typhi), Chick Martin (organic matter), stearothermophilus (steam biological), Bowie Dick (air removal), phosphatase (pasteurisation), MEC strips (glutaraldehyde in use). Each test guards one variable, and viva questions ask which guard was asleep in a described failure.",
+      "say": "Match each test to the variable it guards and sterilisation vivas answer themselves.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Test to variable",
+          "points": [
+            "Rideal Walker and Chick Martin: potency",
+            "Biological indicators: lethality achieved",
+            "Bowie Dick: air removal",
+            "MEC strips: in use concentration"
+          ]
+        },
+        "right": {
+          "title": "Process verifications",
+          "points": [
+            "Phosphatase: pasteurisation completed",
+            "Integrators: exposure conditions inside pack",
+            "Sterility tests: product sampling audit",
+            "Environmental cultures: cleanroom state"
+          ]
+        }
+      }
+    }
+  ]
+}

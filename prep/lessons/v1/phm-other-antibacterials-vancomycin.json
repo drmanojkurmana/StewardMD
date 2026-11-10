@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-other-antibacterials",
+  "subject": "pharmacology",
+  "title": "Vancomycin, Teicoplanin, Daptomycin, Linezolid and Clindamycin",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Vancomycin**, a glycopeptide too large for Gram negative outer membranes, binds D Ala D Ala termini of peptidoglycan precursors and sterically halts wall synthesis in Gram positives, bactericidal slowly and indispensably against MRSA until MIC creep and toxicity argue alternatives. Oral vancomycin is unabsorbed and owns C difficile colitis from the lumen next lesson, a route split (intravenous for body, oral for bowel) that students must never cross.",
+      "say": "Intravenous vancomycin for the body, oral for the bowel, and never the twain shall swap.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antibacterials-fq-vanco-metronidazole-uti-fig1.webp",
+        "alt": "Bacterial targets of three antibacterials diagram including vancomycin at the cell wall",
+        "caption": "Vancomycin's D Ala D Ala target on the bacterial target map, Gram positive wall synthesis halted."
+      }
+    },
+    {
+      "tx": "**Red man syndrome** is vancomycin's infusion rate histamine flush (face, neck and torso erythema and itch within minutes) prevented by infusing at most 1 gram per 1.5 to 2 hours and treated by slowing and antihistamines, and it is not allergy, a distinction that preserves a needed drug. True adverse weight sits elsewhere: nephrotoxicity (dose, troughs beyond need, pip tazo partnership, aminoglycosides) and ototoxicity debates, governed by AUC guided monitoring that replaced trough only targets in modern guidance.",
+      "say": "Red man is rate and histamine, not allergy: slow the pump, keep the drug.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Red man syndrome",
+          "points": [
+            "Flushing of face, neck and torso during infusion",
+            "Histamine mediated, rate dependent",
+            "Slow infusion and antihistamines manage",
+            "Not a contraindication to future vancomycin"
+          ]
+        },
+        "right": {
+          "title": "Monitoring modernised",
+          "points": [
+            "AUC guided dosing replaces trough only targets",
+            "Nephrotoxicity: dose, duration, partner drugs",
+            "Creatinine and levels by protocol",
+            "Hearing enquiry on long courses"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Teicoplanin**, vancomycin's long acting glycopeptide cousin (once daily after loading, intramuscular possible), serves European MRSA practice with less nephrotoxicity and no red man at ordinary rates, demanding loading doses its half life makes unforgiving if forgotten and levels where courses lengthen. Newer lipoglycopeptides (dalbavancin weekly, oritavancin single dose) stretch the same target into outpatient skin infection logistics at specialist prices.",
+      "say": "Teicoplanin is vancomycin on a daily clock; load it properly or the first week is placebo.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Teicoplanin profile",
+          "points": [
+            "Loading doses essential, then once daily",
+            "Intramuscular administration possible",
+            "Less nephrotoxicity than vancomycin",
+            "Levels on prolonged or deep infections"
+          ]
+        },
+        "right": {
+          "title": "Long acting heirs",
+          "points": [
+            "Dalbavancin: weekly or single dose skin therapy",
+            "Oritavancin: single dose, coagulation test interference",
+            "Telavancin: nephrotoxicity warnings fence use",
+            "All Gram positive only, MRSA included"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Daptomycin**, a lipopeptide, inserts into Gram positive membranes calcium dependently and depolarises them to death in minutes, owning MRSA bacteraemia and right sided endocarditis while being digested by pulmonary surfactant, which absolutely forbids its use in pneumonia. Weekly creatine kinase guards its myopathy (statins paused by many), and eosinophilic pneumonia is its rare pulmonary treason weeks into therapy for other sites.",
+      "say": "Daptomycin kills MRSA in blood and dies in lung surfactant; pneumonia is its forbidden country.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mrsa",
+            "label": "MRSA bacteraemia or right sided endocarditis"
+          },
+          {
+            "id": "dapto",
+            "label": "Daptomycin daily, calcium dependent membrane killing"
+          },
+          {
+            "id": "ck",
+            "label": "Weekly creatine kinase, muscle symptoms reviewed"
+          },
+          {
+            "id": "lung",
+            "label": "Never for pneumonia: surfactant inactivates"
+          }
+        ],
+        "edges": [
+          [
+            "mrsa",
+            "dapto"
+          ],
+          [
+            "dapto",
+            "ck"
+          ],
+          [
+            "ck",
+            "lung"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Linezolid**, the oxazolidinone blocking initiation complex formation at the 50S, is oral bioavailability incarnate (100 percent) against MRSA and VRE in pneumonia and skin, stepping patients off drips without losing cover. Its price list is haematological (thrombocytopenia beyond two weeks, counts monitored), neurological (peripheral and optic neuropathy beyond a month), serotonergic (weak MAO inhibition meeting SSRIs and tyramine) and lactic, making duration discipline its prescribing core. Tedizolid refines the class with daily dosing and gentler counts in shorter courses.",
+      "say": "Linezolid is intravenous power in a tablet with a two week haematology fuse; count and calendar it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Linezolid virtues",
+          "points": [
+            "Complete oral bioavailability",
+            "MRSA pneumonia and skin, VRE cover",
+            "No renal dose adjustment",
+            "Step down therapy without cover loss"
+          ]
+        },
+        "right": {
+          "title": "Linezolid limits",
+          "points": [
+            "Thrombocytopenia beyond about 2 weeks",
+            "Neuropathy beyond a month, optic vigilance",
+            "Serotonin syndrome with serotonergic stacks",
+            "Weekly blood counts on therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Clindamycin**, the lincosamide at the 50S tunnel, covers anaerobes above the diaphragm, streptococci and staphylococci (D test permitting from the macrolide lesson) and brings toxin suppression that makes it the partner drug in streptococcal toxic shock and necrotising fasciitis and staphylococcal toxin syndromes. Its C difficile propensity is the class tax at maximum rate, and inducible resistance is the laboratory trap its prescriptions must check.",
+      "say": "Clindamycin switches off toxin factories in necrotising infections and switches on C difficile risk everywhere.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clindamycin territory",
+          "points": [
+            "Toxin suppression in toxic shock and fasciitis",
+            "Anaerobes, dental and aspiration niches",
+            "Babesiosis and toxoplasmosis partnerships",
+            "Acne topical preparations"
+          ]
+        },
+        "right": {
+          "title": "Clindamycin taxes",
+          "points": [
+            "Highest C difficile propensity among common agents",
+            "Inducible erm resistance: D test checked",
+            "Diarrhoea warns early",
+            "No Gram negative aerobic cover"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**MRSA therapy divides** by syndrome across this lesson and examinations repeat the map until it is reflex: bacteraemia vancomycin (AUC guided) or daptomycin, pneumonia vancomycin or linezolid (never daptomycin), skin oral options (cotrimoxazole, doxycycline, linezolid by severity), bone and prosthetic infections with biofilm partners (rifampicin combinations by specialists), and source control (line removal, drainage, echo) deciding outcomes more than agent auctions.",
+      "say": "Bacteraemia, pneumonia, skin: syndrome chooses the MRSA drug, source control chooses the outcome.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "syndrome",
+            "label": "MRSA syndrome defined and source controlled"
+          },
+          {
+            "id": "blood",
+            "label": "Blood: vancomycin AUC or daptomycin"
+          },
+          {
+            "id": "lung",
+            "label": "Lung: vancomycin or linezolid"
+          },
+          {
+            "id": "skin",
+            "label": "Skin: oral options by severity and susceptibility"
+          }
+        ],
+        "edges": [
+          [
+            "syndrome",
+            "blood"
+          ],
+          [
+            "syndrome",
+            "lung"
+          ],
+          [
+            "syndrome",
+            "skin"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Vancomycin resistance rewrites** the target itself: enterococci swapping D Ala D Ala for D Ala D Lac (vanA, high level, teicoplanin included) or D Ala D Ser, collapsing glycopeptide binding a thousand fold, while staphylococcal VISA phenotypes thicken walls into vancomycin sponges. Linezolid, daptomycin and tigecycline divide the VRE map by site, and infection control (screening, isolation, plasmid awareness) is pharmacology's non drug half of the answer.",
+      "say": "VRE edits the wall's last amino acid and glycopeptides fall a thousand fold; site then chooses among the heirs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Resistance mechanisms",
+          "points": [
+            "vanA: D Ala D Lac, high level, both glycopeptides lost",
+            "vanB and vanC: graded phenotypes",
+            "VISA: thickened wall sequesters vancomycin",
+            "Linezolid resistance: 23S mutations and cfr plasmids"
+          ]
+        },
+        "right": {
+          "title": "VRE therapy by site",
+          "points": [
+            "Linezolid: urinary, pneumonia and general use",
+            "Daptomycin: bacteraemia at high dose by specialists",
+            "Tigecycline: tissue salvage, never blood",
+            "Infection control contains plasmid spread"
+          ]
+        }
+      }
+    }
+  ]
+}

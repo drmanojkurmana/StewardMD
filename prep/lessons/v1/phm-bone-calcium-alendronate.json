@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-bone-calcium",
+  "subject": "pharmacology",
+  "title": "Bone and Calcium Pharmacology: Bisphosphonates, Denosumab, Teriparatide, Romosozumab and Calcimimetics",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Alendronate**, the oral reference bisphosphonate, adsorbs onto hydroxyapatite at resorption surfaces and is ingested by osteoclasts, where nitrogen containing bisphosphonates block farnesyl pyrophosphate synthase, collapse the ruffled border and apoptose the cell. Oral bioavailability under 1 percent demands the famous ritual: fasting, full glass of plain water, remain upright 30 minutes, nothing else swallowed, because food, calcium and iron annihilate absorption and a lying patient earns oesophagitis.",
+      "say": "Alendronate works at one percent absorption with a strict morning ritual; the ritual is the pharmacology.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bone-calcium-bisphosphonates-hypercalcaemia-fig1.webp",
+        "alt": "Calcium homeostasis and bone remodeling diagram showing bisphosphonate action on osteoclasts",
+        "caption": "Calcium homeostasis and bone remodelling, with bisphosphonates disabling the osteoclast at the resorption surface."
+      }
+    },
+    {
+      "tx": "**Zoledronic acid**, the most potent bisphosphonate, given as a yearly intravenous infusion for osteoporosis or monthly in oncology, skips the gut entirely at the price of an acute phase reaction (fever, myalgia for days after the first dose, paracetamol responsive) and renal dose vigilance. Its skeletal retention lasts years, which is both the convenience and the commitment: drug holidays are planned around a reservoir that cannot be switched off once infused.",
+      "say": "Zoledronate is a yearly infusion with a flu like first toll and a skeletal memory of years.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oral bisphosphonates",
+          "points": [
+            "Alendronate weekly, risedronate weekly or monthly",
+            "Fasting ritual, upright posture",
+            "Oesophagitis and upper gut intolerance",
+            "Adherence decays within a year for many"
+          ]
+        },
+        "right": {
+          "title": "Zoledronic acid",
+          "points": [
+            "Yearly infusion, guaranteed delivery",
+            "Acute phase reaction after first dose",
+            "Renal function and calcium checked before dosing",
+            "Oncology schedules monthly at higher intensity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Osteonecrosis of jaw** is the class's feared rarity: exposed necrotic maxillofacial bone, risk concentrated in oncology dose intensity, dental extractions, poor oral hygiene, steroids and diabetes, and rare (well under 1 in 1000) at osteoporosis doses. Prevention is dental clearance before high dose therapy, conservative dental surgery during it, and drug holidays negotiated with dentists rather than improvised. Atypical femoral fractures with prolonged suppression complete the long exposure ledger examinations pair with it.",
+      "say": "Jaw necrosis lives at oncology doses and dental extraction sites; clear the mouth before the infusion, not after.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Risk concentration",
+          "points": [
+            "Oncology dose intensity and duration",
+            "Dental extraction or implant during therapy",
+            "Poor oral hygiene, steroids, diabetes",
+            "Osteoporosis doses: risk far lower"
+          ]
+        },
+        "right": {
+          "title": "Prevention practice",
+          "points": [
+            "Dental review before high dose therapy",
+            "Complete invasive dental work first where possible",
+            "Oral hygiene surveillance during therapy",
+            "Atypical thigh pain on long therapy imaged promptly"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Denosumab**, a monoclonal antibody against RANKL, prevents osteoclast formation entirely and is given six monthly subcutaneously with no renal restriction, but its effect evaporates on schedule: a missed or stopped dose unleashes rebound resorption with multiple vertebral fractures reported within months, so cessation must hand over to a bisphosphonate. Hypocalcaemia, especially in kidney failure without vitamin D repletion, is its initiation trap; calcium is checked and repleted first.",
+      "say": "Denosumab stops cleanly and rebounds dangerously; never let it lapse without a bisphosphonate heir.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/osteoporosis-fig2.webp",
+        "alt": "Bone remodelling and drug sites diagram showing RANKL and denosumab action",
+        "caption": "Remodelling drug sites including RANKL blockade by denosumab upstream of the osteoclast."
+      }
+    },
+    {
+      "tx": "Anabolic therapy builds rather than preserves: **teriparatide** (recombinant PTH 1 34, daily injection up to two years) stimulates osteoblasts ahead of osteoclasts in its early anabolic window, and **abaloparatide** tunes the same receptor with less hypercalcaemia. Both serve severe osteoporosis with fractures on antiresorptives, both must be followed by an antiresorptive to keep the gains, and both carry osteosarcoma warnings from rat data that fence duration and prior skeletal radiation.",
+      "say": "Teriparatide builds bone for two years maximum, then an antiresorptive must guard what was built.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "severe",
+            "label": "Severe osteoporosis or fractures on antiresorptives"
+          },
+          {
+            "id": "teri",
+            "label": "Teriparatide daily for up to 24 months"
+          },
+          {
+            "id": "gain",
+            "label": "Formation outruns resorption early: density climbs"
+          },
+          {
+            "id": "keep",
+            "label": "Antiresorptive follows to preserve gains"
+          }
+        ],
+        "edges": [
+          [
+            "severe",
+            "teri"
+          ],
+          [
+            "teri",
+            "gain"
+          ],
+          [
+            "gain",
+            "keep"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Romosozumab**, an antisclerostin antibody, releases Wnt signalling to build bone while also trimming resorption, a dual action delivering the fastest densitometry gains in the cabinet over twelve monthly doses, followed mandatorily by antiresorptive maintenance. A cardiovascular event signal in one comparator trial fences it from recent myocardial infarction or stroke. It is the anabolic era's strongest and most carefully gated entrant.",
+      "say": "Romosozumab builds and preserves for twelve doses only, with a cardiovascular fence at the gate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Romosozumab profile",
+          "points": [
+            "Sclerostin inhibition unleashes Wnt formation signals",
+            "Formation up and resorption down simultaneously",
+            "Twelve monthly doses, then antiresorptive mandatory",
+            "Largest early density gains in class comparisons"
+          ]
+        },
+        "right": {
+          "title": "Romosozumab fences",
+          "points": [
+            "Avoid after recent infarction or stroke",
+            "Hypocalcaemia corrected before starting",
+            "Not combined casually with other anabolics",
+            "Specialist initiation in most systems"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Calcitonin**, salmon derived for potency, weakly inhibits osteoclasts for hypercalcaemia bridge duty and historical osteoporosis nasal sprays, its role shrunken by tachyphylaxis within days and a malignancy signal in long term analyses. **Calcitriol**, active vitamin D, treats hypoparathyroidism and renal osteodystrophy where hydroxylation fails, with hypercalcaemia and hypercalciuria as its narrow window's edges, while nutritional vitamin D repletion underpins every other agent in this lesson and is checked before any of them is blamed for failure.",
+      "say": "Calcitonin bridges calcium down briefly, calcitriol replaces a missing activation step, and vitamin D underpins all of it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Calcitonin niche",
+          "points": [
+            "Hypercalcaemia adjunct after fluids and bisphosphonates",
+            "Effect within hours, tachyphylaxis in days",
+            "Analgesic reputation in acute vertebral fracture",
+            "Osteoporosis role largely retired"
+          ]
+        },
+        "right": {
+          "title": "Vitamin D axis",
+          "points": [
+            "Cholecalciferol repletion for deficiency",
+            "Calcitriol where renal or parathyroid activation fails",
+            "Calcium and phosphate monitored on active forms",
+            "Repletion precedes antiresorptive verdicts"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cinacalcet**, a calcimimetic allosterically sensitising the parathyroid calcium sensing receptor, lowers PTH and calcium in secondary hyperparathyroidism of kidney failure and in parathyroid carcinoma or inoperable primary disease, at the price of nausea and hypocalcaemia. **Osteoporosis** sequencing, **Paget disease** (bisphosphonates calming chaotic remodelling, zoledronate first) and hypercalcaemia of malignancy (fluids, bisphosphonates, calcitonin bridge, denosumab and glucocorticoids by mechanism) assemble this lesson's diseases around its drugs in the final step.",
+      "say": "Cinacalcet whispers to the calcium sensor that calcium is higher than it is; Paget and malignant calcium borrow the same shelf.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "paget",
+            "label": "Paget disease: zoledronate calms chaotic remodelling"
+          },
+          {
+            "id": "malig",
+            "label": "Malignant hypercalcaemia: fluids, bisphosphonate, calcitonin"
+          },
+          {
+            "id": "pth",
+            "label": "Hyperparathyroidism: cinacalcet where surgery cannot go"
+          },
+          {
+            "id": "osteo",
+            "label": "Osteoporosis: sequence anabolic and antiresorptive by risk"
+          }
+        ],
+        "edges": [
+          [
+            "paget",
+            "osteo"
+          ],
+          [
+            "malig",
+            "osteo"
+          ],
+          [
+            "pth",
+            "osteo"
+          ]
+        ]
+      }
+    }
+  ]
+}

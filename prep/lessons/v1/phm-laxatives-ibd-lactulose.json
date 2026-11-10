@@ -1,0 +1,261 @@
+{
+  "v": 1,
+  "module": "phm-laxatives-ibd",
+  "subject": "pharmacology",
+  "title": "Osmotic Laxatives, Opioid Antidiarrheals, and Targeted Therapeutics in Inflammatory Bowel Disease",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The synthetic non-absorbable disaccharide composed of galactose and fructose utilized as an osmotic laxative and in hepatic encephalopathy is **lactulose**. In the colon, resident bacterial flora ferment lactulose into low-molecular-weight organic acids, lowering colonic luminal pH below 5.0. This acidic environment converts diffusible, neurotoxic free ammonia into polar, non-absorbable ammonium ions, trapping them in the stool for evacuation while exerting a mild osmotic laxative effect. It reduces blood ammonia levels, reversing neurological cognitive impairment in cirrhotic portal-systemic encephalopathy.",
+      "say": "Lactulose is fermented into organic acids to acidify the colon, trapping ammonia as ammonium to treat hepatic encephalopathy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ingest",
+            "label": "Oral lactulose traverses small intestine intact without absorption"
+          },
+          {
+            "id": "ferment",
+            "label": "Colonic bacterial fermentation into lactic and acetic acids"
+          },
+          {
+            "id": "trap",
+            "label": "Luminal pH drops <5.0: NH3 protonation to unabsorbable NH4+ ions"
+          },
+          {
+            "id": "expel",
+            "label": "Osmotic fluid draw and rapid fecal evacuation of trapped nitrogenous waste"
+          }
+        ],
+        "edges": [
+          [
+            "ingest",
+            "ferment"
+          ],
+          [
+            "ferment",
+            "trap"
+          ],
+          [
+            "trap",
+            "expel"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "An inert, non-absorbable, non-metabolized high-molecular-weight polymer that acts as an iso-osmotic laxative is **polyethylene glycol** (PEG 3350). By forming hydrogen bonds with water molecules, polyethylene glycol traps ingested fluid within the intestinal lumen without drawing endogenous body water or altering systemic electrolyte gradients. Administered in large volumes with balanced electrolyte solutions, it serves as the gold standard bowel preparation prior to colonoscopy and colorectal surgery, and in smaller daily doses represents first-line maintenance therapy for chronic idiopathic constipation.",
+      "say": "Polyethylene glycol binds water molecules to soften stool and cleanses the bowel without shifting systemic electrolytes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Polyethylene Glycol (Iso-Osmotic PEG)",
+          "points": [
+            "Inert, biologically non-absorbable and non-fermentable polymer",
+            "Retains ingested fluid without shifting intravascular electrolytes",
+            "Zero abdominal bloating, flatulence, or gaseous cramping",
+            "Gold standard agent for full colonoscopic mucosal lavage"
+          ]
+        },
+        "right": {
+          "title": "Saline / Osmotic Disaccharides (Lactulose, Magnesium)",
+          "points": [
+            "Fermented by colonic bacteria into organic acids and gas",
+            "Produces marked flatulence, meteorism, and abdominal cramps",
+            "Risk of hypermagnesemia in renal failure (magnesium salts)",
+            "Draws endogenous fluid from vascular compartments into gut lumen"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The prototypical diphenylmethane stimulant laxative that acts directly on the colonic mucosa to induce vigorous peristalsis is **bisacodyl**. Following oral ingestion or rectal suppository insertion, bisacodyl is hydrolyzed by intestinal and bacterial esterases into its active desacetyl metabolite. This active form irritates sensory nerve endings in the submucosal and myenteric plexuses, stimulating active chloride and water secretion while initiating high-amplitude propagated colonic contractions. Chronic unmonitored overuse damages the myenteric plexus, leading to cathartic colon syndrome and melanosis coli.",
+      "say": "Bisacodyl is converted to an active metabolite that stimulates enteric nerves, but chronic overuse damages the colon.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Stimulant laxative",
+          "Chemical drug class",
+          "Onset of action",
+          "Key pharmacological characteristic"
+        ],
+        "rows": [
+          [
+            "Bisacodyl",
+            "Diphenylmethane derivative",
+            "6 to 10 hours oral; 30 minutes rectal",
+            "Enteric-coated tablet; avoid milk or antacids"
+          ],
+          [
+            "Senna",
+            "Anthraquinone glycoside",
+            "6 to 12 hours oral",
+            "Bacterial activation; causes melanosis coli"
+          ],
+          [
+            "Sodium picosulfate",
+            "Diphenylmethane prodrug",
+            "3 to 6 hours",
+            "Cleaved exclusively by colonic bacteria"
+          ],
+          [
+            "Castor oil",
+            "Ricinoleic acid triglyceride",
+            "2 to 3 hours oral",
+            "Irritates small intestine; obsolete in routine care"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The synthetic peripheral mu-opioid receptor agonist that functions as the first-line antimotility antidiarrheal agent is **loperamide**. By selectively binding to mu-opioid receptors on circular and longitudinal smooth muscle in the myenteric plexus, loperamide inhibits presynaptic acetylcholine and prostaglandin release. This slows gastrointestinal transit time, enhances fluid and electrolyte absorption, and tightens anal sphincter resting pressure. Because it is actively pumped out of the central nervous system by P-glycoprotein efflux pumps, loperamide lacks central opioid euphoric or addictive liability at therapeutic doses.",
+      "say": "Loperamide stimulates peripheral intestinal mu receptors to slow transit, excluded from the brain by P-glycoprotein.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Loperamide (P-Glycoprotein Excluded)",
+          "points": [
+            "Avid substrate for blood-brain barrier P-glycoprotein efflux pump",
+            "Zero central euphoria, analgesia, or respiratory depression",
+            "Available over-the-counter without controlled substance scheduling",
+            "High safety margin in acute non-invasive traveler diarrhea"
+          ]
+        },
+        "right": {
+          "title": "Diphenoxylate (Central Opioid Congener)",
+          "points": [
+            "Crosses blood-brain barrier with potential for central dependence",
+            "Co-formulated with subtherapeutic atropine to deter recreational abuse",
+            "Anticholinergic side effects (dry mouth, blurred vision, tachycardia)",
+            "Scheduled controlled prescription substance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The orally active, peripheral enkephalinase inhibitor that functions as a pure antisecretory antidiarrheal agent is **racecadotril**. As a prodrug hydrolyzed to active thiorphan, it inhibits membrane-bound neutral endopeptidase, protecting endogenous enkephalins from degradation within the gastrointestinal tract. Elevated enkephalins stimulate mucosal delta-opioid receptors, selectively suppressing cholera toxin-induced or rotavirus-induced hypersecretion of water and electrolytes into the gut lumen without altering intestinal motility or prolonging bacterial clearance, avoiding secondary post-treatment constipation.",
+      "say": "Racecadotril protects mucosal enkephalins to selectively suppress hypersecretion without slowing bowel motility.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "race",
+            "label": "Oral racecadotril prodrug rapidly cleaved to active thiorphan"
+          },
+          {
+            "id": "enk",
+            "label": "Selective inhibition of mucosal neutral endopeptidase (enkephalinase)"
+          },
+          {
+            "id": "delta",
+            "label": "Protection of endogenous enkephalins acting on enterocyte delta-receptors"
+          },
+          {
+            "id": "secrete",
+            "label": "Selective suppression of cyclic AMP-driven secretory diarrhea without motility arrest"
+          }
+        ],
+        "edges": [
+          [
+            "race",
+            "enk"
+          ],
+          [
+            "enk",
+            "delta"
+          ],
+          [
+            "delta",
+            "secrete"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The active therapeutic moiety 5-aminosalicylic acid that serves as first-line therapy for induction and maintenance of remission in mild-to-moderate ulcerative colitis is **mesalamine**. Acting locally on the colonic mucosal surface, mesalamine activates peroxisome proliferator-activated receptor-gamma, inhibits cyclooxygenase and lipoxygenase pathways, and scavenges reactive oxygen metabolites, suppressing mucosal inflammation. Formulated as delayed-release pH-dependent tablets, extended-release microgranules, and rectal suppositories or enemas, it provides targeted topical delivery without the sulfapyridine toxicity of sulfasalazine.",
+      "say": "Mesalamine delivers targeted 5-ASA to the colonic mucosa via delayed-release formulations to maintain ulcerative colitis remission.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/intestinal-malabsorption-ibd-polyps-hirschsprung-fig1.webp",
+        "alt": "Pathologic comparison of Crohn disease and ulcerative colitis",
+        "caption": "Comparison of continuous superficial mucosal inflammation in ulcerative colitis versus transmural skip lesions and cobblestoning in Crohn disease."
+      }
+    },
+    {
+      "tx": "The synthetic fourteen-amino-acid peptide that acts as a minimally absorbed guanylate cyclase-C receptor agonist is **linaclotide**. By binding to the extracellular domain of guanylate cyclase-C on the apical surface of intestinal enterocytes, linaclotide stimulates intracellular cyclic GMP production. Elevated cyclic GMP activates the cystic fibrosis transmembrane conductance regulator chloride channel, driving luminal secretion of chloride and bicarbonate, accelerating gastrointestinal transit, and dampening visceral pain nociceptors in irritable bowel syndrome with constipation.",
+      "say": "Linaclotide activates guanylate cyclase-C to stimulate chloride secretion and relieve constipation and pain.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lina",
+            "label": "Oral linaclotide binds apical enterocyte guanylate cyclase-C"
+          },
+          {
+            "id": "cgmp",
+            "label": "Intracellular accumulation of cyclic GMP (cGMP)"
+          },
+          {
+            "id": "cftr",
+            "label": "Activation of CFTR channels: chloride and bicarbonate secreted into lumen"
+          },
+          {
+            "id": "relief",
+            "label": "Osmotic water draw accelerates transit; extracellular cGMP dampens pain nerves"
+          }
+        ],
+        "edges": [
+          [
+            "lina",
+            "cgmp"
+          ],
+          [
+            "cgmp",
+            "cftr"
+          ],
+          [
+            "cftr",
+            "relief"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The synthetic eight-amino-acid somatostatin analogue that exerts potent inhibitory actions across gastrointestinal secretion and splanchnic blood flow is **octreotide**. With an elimination half-life of ninety minutes compared to three minutes for native somatostatin, octreotide binds to somatostatin sst2 and sst5 receptors to suppress gastric, pancreatic, and biliary secretions, inhibit gut motility, and induce selective splanchnic arterial vasoconstriction. It is the drug of choice for acute variceal hemorrhage in cirrhosis, severe secretory diarrhea of carcinoid and VIPoma tumors, and dampening dumping syndrome.",
+      "say": "Octreotide is a long-acting somatostatin analogue that constricts splanchnic vessels and halts severe secretory diarrhea.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical therapeutic indication",
+          "Somatostatin receptor mechanism",
+          "Primary clinical endpoint"
+        ],
+        "rows": [
+          [
+            "Acute esophageal variceal bleed",
+            "Selective splanchnic mesenteric vasoconstriction",
+            "Reduces portal venous pressure and arrests variceal hemorrhage"
+          ],
+          [
+            "Carcinoid syndrome flushing and diarrhea",
+            "Inhibits neuroendocrine serotonin and peptide release",
+            "Rapid cessation of watery diarrhea and cutaneous flushing"
+          ],
+          [
+            "VIPoma watery diarrhea (WDHA syndrome)",
+            "Suppresses vasoactive intestinal peptide secretion",
+            "Corrects profound secretory hypokalemic diarrhea"
+          ],
+          [
+            "Gastrointestinal cutaneous fistulas",
+            "Decreases volume of gastric and pancreatic secretion",
+            "Promotes spontaneous closure of high-output fistulas"
+          ]
+        ]
+      }
+    }
+  ]
+}

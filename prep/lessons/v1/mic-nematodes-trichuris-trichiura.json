@@ -1,0 +1,220 @@
+{
+  "v": 1,
+  "module": "mic-nematodes",
+  "subject": "microbiology",
+  "title": "Trichuris Whipworm, Trichinella and Lymphatic Filariasis",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The human whipworm **Trichuris trichiura** is an intestinal nematode with a distinctive whip-like anatomy: an attenuated, thread-like anterior three-fifths that threads deep into the colonic mucosal epithelium, and a stout, thickened posterior two-fifths that hangs free within the caecal lumen. Ingestion of embryonated eggs from fecally contaminated soil initiates infection without requiring any heart-lung larval migration.",
+      "say": "Trichuris whipworms embed their thread-like anterior portion into the caecal mucosa without lung migration.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/intestinal-nematode-infections-fig1.webp",
+        "alt": "Intestinal nematode morphology and eggs",
+        "caption": "Diagnostic barrel-shaped Trichuris trichiura egg showing prominent clear bipolar plugs [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "In children harboring heavy whipworm burdens, continuous mechanical irritation and mucosal inflammation provoke chronic mucoid bloody diarrhoea, painful tenesmus, and iron deficiency anaemia. Severe relentless tenesmus combined with loss of anal sphincter muscle tone can precipitate complete **rectal prolapse**, where the edematous, hyperaemic rectal mucosa turns inside out, revealing hundreds of tiny embedded white adult worms resembling coconut fibers.",
+      "say": "Heavy whipworm burdens cause chronic dysentery and tenesmus, precipitating rectal prolapse in children.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Feature",
+          "Underlying Pathophysiology",
+          "Diagnostic Marker"
+        ],
+        "rows": [
+          [
+            "Rectal prolapse",
+            "Severe persistent tenesmus and perineal muscle hypotonia",
+            "Everted mucosa studded with embedded white adult whipworms"
+          ],
+          [
+            "Trichuris dysentery",
+            "Mucosal capillary damage from anterior thread burrowing",
+            "Chronic bloody mucoid diarrhoea and growth stunting"
+          ],
+          [
+            "Microcytic anaemia",
+            "Continuous oozing of blood from caecal mucosal sites",
+            "Low serum ferritin, microcytic hypochromic indices"
+          ],
+          [
+            "Stool microscopy",
+            "Direct saline wet mount of fecal suspension",
+            "Characteristic barrel-shaped eggs with bipolar mucosal plugs"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Stool microscopy delivers definitive confirmation by revealing unmistakable **barrel-shaped eggs** measuring fifty by twenty-five micrometres with a thick, smooth, golden-brown shell and a prominent, clear, refractile mucus plug protruding at each pole. The eggs are unsegmented when passed in fresh stool, requiring three weeks in warm moist soil to become infective. Treatment requires oral albendazole or mebendazole for three consecutive days.",
+      "say": "Smooth barrel-shaped eggs with clear protruding bipolar plugs are pathognomonic for Trichuris.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Trichuris trichiura egg",
+          "points": [
+            "Barrel-shaped, tea-tray or football contour",
+            "Clear refractile mucoid plug at each pole",
+            "Smooth, thick, golden-brown shell wall",
+            "Requires 3-day course of mebendazole or albendazole"
+          ]
+        },
+        "right": {
+          "title": "Ascaris lumbricoides egg",
+          "points": [
+            "Broadly oval, rounded symmetrical contour",
+            "No polar plugs; uniform closed ends",
+            "Thick, bumpy, mammillated albuminous coat",
+            "Curable with a single dose of albendazole"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The zoonotic tissue nematode **Trichinella spiralis** is transmitted by eating undercooked meat, particularly domestic pork or wild boar, containing encysted larvae. In the duodenum, larvae excyst, mature, and mate within intestinal mucosa. Viviparous females release newborn larvae directly into mesenteric lymphatics, which enter the systemic circulation to encyst exclusively inside striated skeletal muscle cells, termed nurse cells.",
+      "say": "Undercooked pork introduces Trichinella larvae, which migrate systemically to encyst in striated nurse cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tr1",
+            "label": "Ingest undercooked pork containing nurse cells with coiled larvae"
+          },
+          {
+            "id": "tr2",
+            "label": "Adults mate in bowel; females release newborn larvae into lymphatics"
+          },
+          {
+            "id": "tr3",
+            "label": "Larvae invade striated skeletal muscle fibres (masseters, diaphragm, deltoids)"
+          }
+        ],
+        "edges": [
+          [
+            "tr1",
+            "tr2"
+          ],
+          [
+            "tr2",
+            "tr3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Larval skeletal muscle invasion triggers an intense systemic inflammatory reaction manifesting with high fever, bilateral **periorbital oedema**, severe chemosis, subungual splinter haemorrhages, and agonizing myalgias affecting the diaphragm and extraocular muscles. Marked peripheral blood eosinophilia exceeding twenty to fifty percent and dramatically elevated serum creatine kinase levels provide crucial diagnostic clues, confirmed by muscle biopsy.",
+      "say": "Bilateral periorbital oedema, severe muscle pain, and extreme eosinophilia signify acute trichinosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Finding",
+          "Pathological Basis",
+          "Clinical Presentation"
+        ],
+        "rows": [
+          [
+            "Bilateral periorbital oedema",
+            "Larval vasculitis and facial capillary leakage",
+            "Swollen eyelids, chemosis, subconjunctival petechiae"
+          ],
+          [
+            "Splinter haemorrhages",
+            "Microvascular thrombosis and endothelial damage",
+            "Linear dark red streaks under distal fingernails"
+          ],
+          [
+            "Elevated creatine kinase",
+            "Direct disruption of striated myofibrillar architecture",
+            "Severe myalgia, muscle tenderness, pain with chewing"
+          ],
+          [
+            "Muscle biopsy",
+            "Deltoid or gastrocnemius biopsy examination",
+            "Coiled encysted larva inside basophilic nurse cell"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Lymphatic filariasis is caused primarily by the filarial nematodes **Wuchereria bancrofti** (accounting for ninety percent of global cases) and Brugia malayi. Slender adult worms reside inside human afferent lymphatic vessels and lymph nodes, particularly the pelvic, inguinal, and scrotal channels. Mechanical obstruction and adult worm death provoke acute adenolymphangitis, retrograde lymphangitis, funiculitis, hydrocele, and late irreversible elephantiasis.",
+      "say": "Adult filarial worms obstruct deep pelvic and scrotal lymphatics, causing retrograde lymphangitis and elephantiasis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/nematodes-ascaris-hookworm-strongyloides-filaria-fig1.webp",
+        "alt": "Microfilaria sheath and terminal nuclear morphology",
+        "caption": "Diagnostic morphology of sheathed Wuchereria bancrofti microfilariae in blood [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Gravid female filariae release microscopic embryos called microfilariae into the bloodstream. In most endemic regions, microfilariae exhibit strict **nocturnal periodicity**, where parasites circulate in high numbers in peripheral blood exclusively between ten in the evening and two in the morning. During daylight hours, they sequester within deep pulmonary capillaries, synchronizing their appearance with the nocturnal biting habits of vector mosquitoes.",
+      "say": "Microfilariae circulate in peripheral blood strictly at night, matching the feeding habits of vector mosquitoes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "nf1",
+            "label": "Daytime: microfilariae sequester in deep pulmonary microvasculature"
+          },
+          {
+            "id": "nf2",
+            "label": "10 PM to 2 AM: surge of microfilariae into peripheral blood circulation"
+          },
+          {
+            "id": "nf3",
+            "label": "Night-biting Culex or Mansonia mosquitoes ingest microfilariae during blood meal"
+          }
+        ],
+        "edges": [
+          [
+            "nf1",
+            "nf2"
+          ],
+          [
+            "nf2",
+            "nf3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Microscopic differentiation of microfilariae on Giemsa-stained thick blood films relies on sheath characteristics and tail nuclei. Wuchereria bancrofti possesses a loose sheath, smooth curves, and an elongated tail tip that is completely free of nuclei, whereas **Brugia malayi** displays stiff angular kinks, a tightly fitting sheath, and two distinct terminal nuclei at the tip of the tail separated by a constriction.",
+      "say": "Wuchereria has a tail free of nuclei; Brugia malayi displays two distinct terminal nuclei in the tail tip.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Wuchereria bancrofti",
+          "Brugia malayi"
+        ],
+        "rows": [
+          [
+            "Vector mosquito",
+            "Culex quinquefasciatus (urban/peri-urban)",
+            "Mansonia and Anopheles (rural water bodies)"
+          ],
+          [
+            "Tail nuclei",
+            "Nuclei do not extend to tail tip (clear tip)",
+            "Two distinct terminal nuclei separated by constriction"
+          ],
+          [
+            "Sheath staining",
+            "Translucent sheath; does not stain with Giemsa",
+            "Sheath stains bright pink or purple with Giemsa"
+          ],
+          [
+            "Cephalic space",
+            "Length equals breadth (1:1 ratio)",
+            "Length is twice the breadth (2:1 ratio)"
+          ]
+        ]
+      }
+    }
+  ]
+}

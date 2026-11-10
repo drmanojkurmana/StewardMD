@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-other-antibacterials",
+  "subject": "pharmacology",
+  "title": "Pseudomembranous Colitis and C difficile, Polymyxins, Colistin and Fosfomycin",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Pseudomembranous colitis** is Clostridioides difficile's toxins made visible: antibiotic cleared flora lets spores germinate, toxins A and B glucosylate colonic Rho proteins, epithelium dies into fibrinous pseudomembranes, and diarrhoea escalates to ileus, toxic megacolon and perforation at the far end. The antibiotics blamed most (clindamycin historically, cephalosporins, fluoroquinolones, broad penicillins) share ecological breadth, which is why the stewardship lessons keep invoicing this disease.",
+      "say": "C difficile is an ecological invoice: broad antibiotics clear the tenants and toxins evict the wall.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/c-diff-fig1.webp",
+        "alt": "Clostridioides difficile colitis pathogenesis diagram showing toxin effects on colon",
+        "caption": "C difficile toxin pathogenesis in the colon, from spore germination to pseudomembrane formation."
+      }
+    },
+    {
+      "tx": "**Treatment inverts the** cause: stop the provoking antibiotic where possible, then oral vancomycin or fidaxomicin (superior for recurrence) as first line, metronidazole demoted to historical and mild non severe corners, bezlotoxumab (anti toxin B antibody) and faecal microbiota transplantation owning multiply recurrent disease, and surgery consulted where megacolon threatens. Oral vancomycin is unabsorbed by design (previous lesson's route rule), and intravenous vancomycin treats nothing in the lumen.",
+      "say": "Stop the culprit, treat from the lumen with vancomycin or fidaxomicin, and transplant the multiply recurrent.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "First line colitis therapy",
+          "points": [
+            "Stop provoking antibiotics where possible",
+            "Fidaxomicin preferred where recurrence matters",
+            "Oral vancomycin 125 mg four times daily standard",
+            "Severity graded by counts, creatinine and ileus"
+          ]
+        },
+        "right": {
+          "title": "Recurrence ladder",
+          "points": [
+            "Tapered or pulsed vancomycin regimens",
+            "Bezlotoxumab antibody adjunct in high risk",
+            "Faecal microbiota transplantation after recurrences",
+            "Metronidazole retired to constrained niches"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Diagnosis and infection** control complete the colitis discipline: toxin and PCR algorithms on unformed stool only (testing formed stool manufactures carriers into cases), isolation and sporicidal cleaning because alcohol gel does not kill spores (soap and water return to fashion), and antimicrobial review of every continuing broad agent on the chart. Recurrence in a fifth to a quarter after first episodes makes the follow up plan part of the initial prescription.",
+      "say": "Test liquid stool only, wash spores off with soap, and review every antibiotic still running.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "diarrhoea",
+            "label": "Unformed stool with antibiotic exposure"
+          },
+          {
+            "id": "test",
+            "label": "Toxin and PCR algorithm on liquid stool"
+          },
+          {
+            "id": "isolate",
+            "label": "Isolation, soap and water, sporicidal cleaning"
+          },
+          {
+            "id": "treat",
+            "label": "Luminal therapy plus antibiotic chart review"
+          }
+        ],
+        "edges": [
+          [
+            "diarrhoea",
+            "test"
+          ],
+          [
+            "test",
+            "isolate"
+          ],
+          [
+            "isolate",
+            "treat"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Polymyxin B** and colistin (polymyxin E) are cationic detergents that bind lipopolysaccharide and dissolve Gram negative outer membranes, resurrected from 1950s retirement by carbapenem resistant Acinetobacter, Pseudomonas and Enterobacterales with nowhere else to go. **Colistin** is dosed as its inactive prodrug colistimethate with treacherous unit conventions (international units versus milligrams of base activity) that have killed by arithmetic, demanding pharmacist verified dosing in every order.",
+      "say": "Polymyxins dissolve Gram negative membranes and prescribers with their unit arithmetic; verify every dose twice.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Polymyxin territory",
+          "points": [
+            "Carbapenem resistant Gram negative salvage",
+            "No Gram positive or anaerobic activity",
+            "Inhaled colistin in bronchiectasis niches",
+            "Combination regimens by specialist design"
+          ]
+        },
+        "right": {
+          "title": "Dosing hazards",
+          "points": [
+            "Colistimethate prodrug conversion variable",
+            "Units versus milligrams confusion lethal historically",
+            "Renal dose adjustment complex",
+            "Loading doses required for timely levels"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Polymyxin toxicities explain** their thirty year exile: dose dependent nephrotoxicity (acute tubular injury in a third or more of modern courses, usually reversible) and neurotoxicity (paraesthesia, confusion, neuromuscular blockade with apnoea, especially with relaxants and renal failure). Their resurrection is stewardship's morality play: drugs too toxic for 1980 became indispensable when resistance outran invention, and every course is infectious diseases co signed.",
+      "say": "Kidneys and nerves priced polymyxins out in 1980 and resistance priced them back in; co sign every course.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "resistant",
+            "label": "Carbapenem resistant Gram negative confirmed"
+          },
+          {
+            "id": "colistin",
+            "label": "Colistin or polymyxin B by site and kidney function"
+          },
+          {
+            "id": "monitor",
+            "label": "Creatinine, neurology and levels reviewed daily"
+          },
+          {
+            "id": "combo",
+            "label": "Combination partner and duration specialist set"
+          }
+        ],
+        "edges": [
+          [
+            "resistant",
+            "colistin"
+          ],
+          [
+            "colistin",
+            "monitor"
+          ],
+          [
+            "monitor",
+            "combo"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Fosfomycin**, a 1969 phosphonic acid blocking MurA at the first cytoplasmic step of wall synthesis, concentrates in urine to levels that forgive its modest serum life, owning single dose uncomplicated cystitis (including many ESBL producers) and intravenous salvage partnerships in Europe for resistant systemic infection. Resistance emerges briskly on monotherapy in deep infections (transporter mutations), confining its solo career to the bladder where inoculum and concentration argue its side.",
+      "say": "Fosfomycin is a single dose bladder answer and a partnered salvage drug; alone in deep tissue it breeds resistance.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fosfomycin strengths",
+          "points": [
+            "Unique MurA target, no cross resistance",
+            "Single 3 g dose for uncomplicated cystitis",
+            "ESBL urinary producers often susceptible",
+            "Intravenous salvage combinations abroad"
+          ]
+        },
+        "right": {
+          "title": "Fosfomycin limits",
+          "points": [
+            "Rapid resistance in deep monotherapy",
+            "Not for pyelonephritis orally",
+            "Diarrhoea and taste effects",
+            "Susceptibility testing method sensitive"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Urinary antiseptic strategy** gathers the bladder confined agents (nitrofurantoin, fosfomycin, methenamine next lesson) into a stewardship doctrine: reserve systemic fluoroquinolones and cephalosporins by treating cystitis with drugs that never leave the bladder, sparing collateral flora and C difficile pressure. Asymptomatic bacteriuria outside pregnancy and urological procedures takes no antibiotic at all, the doctrine's most violated clause.",
+      "say": "Treat cystitis from inside the bladder and leave asymptomatic bacteriuria alone; both spare the colon.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bladder confined choices",
+          "points": [
+            "Nitrofurantoin for cystitis, eGFR permitting",
+            "Fosfomycin single dose, ESBL niches",
+            "Methenamine prophylaxis (next lesson)",
+            "Pivmecillinam where regional formularies stock it"
+          ]
+        },
+        "right": {
+          "title": "Do not treat",
+          "points": [
+            "Asymptomatic bacteriuria outside defined exceptions",
+            "Pyuria or smell alone in catheterised elderly",
+            "Positive dipsticks without urinary symptoms",
+            "Test of cure cultures in the asymptomatic"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Fidaxomicin deserves its** mechanistic coda: a macrocyclic RNA polymerase inhibitor bactericidal against C difficile while sparing Bacteroides and gut flora (its narrowness is its recurrence advantage), absorbed negligibly, dosed twice daily for ten days at a price that formulary committees debate against vancomycin's pennies. Cost effectiveness arguments turn on recurrence costs, which is stewardship arithmetic at health system scale rather than the bedside.",
+      "say": "Fidaxomicin spares the flora it treats among; recurrence, not cure, is where its price argues.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cdiff",
+            "label": "C difficile colitis diagnosed"
+          },
+          {
+            "id": "fida",
+            "label": "Fidaxomicin narrowly kills C difficile"
+          },
+          {
+            "id": "flora",
+            "label": "Commensal flora largely spared"
+          },
+          {
+            "id": "recur",
+            "label": "Recurrence rates fall versus vancomycin"
+          }
+        ],
+        "edges": [
+          [
+            "cdiff",
+            "fida"
+          ],
+          [
+            "fida",
+            "flora"
+          ],
+          [
+            "flora",
+            "recur"
+          ]
+        ]
+      }
+    }
+  ]
+}

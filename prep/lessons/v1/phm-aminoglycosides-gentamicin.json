@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-aminoglycosides",
+  "subject": "pharmacology",
+  "title": "Aminoglycosides: Gentamicin, Amikacin, Tobramycin, Streptomycin and the 30S Ribosome",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Gentamicin** and its aminoglycoside family enter Gram negative bacteria through oxygen dependent transport (why anaerobes are intrinsically immune), bind the **30S ribosome** decoding site, cause misreading of messenger RNA and insert faulty proteins into membranes, producing rapid concentration dependent bactericidal killing with a post antibiotic effect. They never work alone inside cells or abscesses (acid and anaerobic defeat), and synergy with beta lactams (wall damage easing entry) is their endocarditis partnership.",
+      "say": "Oxygen in, ribosome misread, membrane breached; aminoglycosides kill fast where oxygen and partners allow.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-gentamicin.webp",
+        "alt": "Gentamicin entering through porins, blocking 30S ribosomes, causing nephrotoxicity and ototoxicity illustration",
+        "caption": "Gentamicin at the 30S ribosome with its two organ toxicities, the whole lesson in one frame. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**Amikacin**, kanamycin's semi synthetic armour, resists most aminoglycoside modifying enzymes that destroy gentamicin, reserving it for gentamicin resistant Gram negatives and mycobacterial regimens. **Tobramycin** leans hardest against Pseudomonas (inhaled in cystic fibrosis), **streptomycin** is the elder statesman of tuberculosis and plague, **neomycin** is too nephrotoxic for injection and lives in gut and skin preparations, and netilmicin fills regional formularies between them.",
+      "say": "Amikacin outlives the enzymes, tobramycin hunts Pseudomonas, neomycin never enters a vein.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Family members",
+          "points": [
+            "Gentamicin: workhorse Gram negative synergy",
+            "Tobramycin: Pseudomonas accent, inhaled CF form",
+            "Amikacin: enzyme resistant reserve",
+            "Streptomycin: tuberculosis, plague, brucellosis heritage"
+          ]
+        },
+        "right": {
+          "title": "Restricted members",
+          "points": [
+            "Neomycin: topical and oral gut use only",
+            "Paromomycin: gut luminal amoeba and leishmania niches",
+            "Netilmicin: regional alternative profile",
+            "Spectinomycin: gonorrhoea antique (later lesson)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Ototoxicity** from the diuretic lessons returns in permanent form here: aminoglycosides accumulate in inner ear fluids, generate reactive oxygen species in hair cells, and destroy cochlear (gentamicin relatively vestibular, streptomycin famously so) function irreversibly, beginning at high frequencies beyond speech. Risk stacks with duration, peak levels, renal impairment, loop diuretics, vancomycin partners and inherited mitochondrial mutations that make a single course deafening in susceptible families.",
+      "say": "Ear damage here does not come back; duration, peaks and loop diuretics stack the risk.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cochlear versus vestibular",
+          "points": [
+            "Gentamicin and tobramycin: vestibular emphasis",
+            "Amikacin and kanamycin: cochlear emphasis",
+            "Streptomycin: the vestibular prototype",
+            "High frequency hearing falls first"
+          ]
+        },
+        "right": {
+          "title": "Risk stacking",
+          "points": [
+            "Prolonged courses and high trough levels",
+            "Renal impairment slowing clearance",
+            "Loop diuretic and vancomycin co therapy",
+            "Mitochondrial A1555G family susceptibility"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Therapeutic drug monitoring** is inseparable from the prescription: peak levels prove killing exposure (or are inferred from once daily nomograms), trough levels guard toxicity (gentamicin trough under 1 to 2 mg per litre by regimen), and creatinine is checked every two to three days because the kidney that clears the drug is the kidney it injures. Courses beyond five to seven days need a documented reason and audiology awareness in the elderly.",
+      "say": "Troughs guard the ear and kidney, peaks prove the kill; no levels, no long course.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dose",
+            "label": "Weight and renal function set the first dose"
+          },
+          {
+            "id": "level",
+            "label": "Trough (and peak or nomogram) checked by protocol"
+          },
+          {
+            "id": "creat",
+            "label": "Creatinine every 2 to 3 days"
+          },
+          {
+            "id": "review",
+            "label": "Day 5 to 7: continue only with documented reason"
+          }
+        ],
+        "edges": [
+          [
+            "dose",
+            "level"
+          ],
+          [
+            "level",
+            "creat"
+          ],
+          [
+            "creat",
+            "review"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Synergy dosing in** endocarditis splits the family from sepsis dosing: low dose gentamicin (1 mg per kg) aims for synergy peaks with beta lactams or vancomycin against enterococci and staphylococci on prosthetic material, shortened to two weeks in modern enterococcal regimens to spare organs, while Gram negative sepsis uses full once daily dosing from the next lesson. Same drug, two philosophies, and confusing them poisons or underdoses the patient in the vignette.",
+      "say": "Synergy peaks are low and brief, sepsis peaks are high and daily; name which game you are playing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Synergy dosing",
+          "points": [
+            "Gentamicin about 1 mg per kg per dose",
+            "Partnered with cell wall agents in endocarditis",
+            "Courses shortened to spare ear and kidney",
+            "Levels targeted low by design"
+          ]
+        },
+        "right": {
+          "title": "Full dosing",
+          "points": [
+            "Once daily 5 to 7 mg per kg in Gram negative sepsis",
+            "Peak driven killing with post antibiotic effect",
+            "Nomogram or level monitoring by protocol",
+            "De escalation at cultures without exception"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Resistance assembles enzymatically**: aminoglycoside modifying enzymes (acetyl, nucleotidyl and phosphoryl transferases) decorate the drug off its ribosome, plasmid borne and often travelling with beta lactamases, while amikacin's side chain dodges most of them and plazomicin was engineered to dodge nearly all (16S methyltransferases still defeat the whole class absolutely). Efflux and permeability changes complete a resistance chapter that stewardship answers with once daily peaks and short courses.",
+      "say": "Enzymes decorate the drug off its target; amikacin dodges most decorators, methyltransferases defeat everyone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Modifying enzymes",
+          "points": [
+            "Acetyl, phosphoryl and nucleotidyl transferases",
+            "Plasmid borne, often with beta lactamases",
+            "Amikacin and plazomicin engineered resistant",
+            "Local enzyme epidemiology guides empiricism"
+          ]
+        },
+        "right": {
+          "title": "Absolute resistance",
+          "points": [
+            "16S ribosomal methyltransferases: pan aminoglycoside",
+            "Anaerobic organisms: transport never occurs",
+            "Enterococci low level intrinsic: synergy only",
+            "Intracellular pathogens unreachable"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pregnancy fences aminoglycosides** for fetal eighth nerve risk (streptomycin's congenital deafness is the historical proof), myasthenia gravis fears their neuromuscular blockade (next lesson), and the elderly pay double for every decibel and glomerulus. Their empire is therefore deliberate: severe Gram negative infection, synergy, mycobacteria and defined prophylaxis, always with levels, durations and organ surveillance as part of the order, not the afterthought.",
+      "say": "Aminoglycosides are prescribed with their monitoring attached or not at all.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "indicate",
+            "label": "Severe Gram negative, synergy or mycobacterial indication"
+          },
+          {
+            "id": "base",
+            "label": "Baseline creatinine, weight, hearing enquiry"
+          },
+          {
+            "id": "dose",
+            "label": "Regimen chosen: once daily or synergy"
+          },
+          {
+            "id": "stop",
+            "label": "Levels, creatinine and stop date reviewed serially"
+          }
+        ],
+        "edges": [
+          [
+            "indicate",
+            "base"
+          ],
+          [
+            "base",
+            "dose"
+          ],
+          [
+            "dose",
+            "stop"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Inhaled aminoglycosides write** the site concentration coda: nebulised tobramycin (and colistin) in cystic fibrosis and bronchiectasis achieves airway levels hundreds of times intravenous with negligible systemic exposure, suppressing Pseudomonas between exacerbations in alternating month cycles. The principles lesson made flesh: concentration at the site, toxicity spared elsewhere, and resistance surveillance by sputum cultures completing the contract.",
+      "say": "Nebulised tobramycin buys airway concentrations no vein could afford; the ear and kidney never see them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Inhaled therapy gains",
+          "points": [
+            "Airway levels far beyond intravenous reach",
+            "Systemic toxicity negligible",
+            "Exacerbation frequency reduced in CF",
+            "Alternating month cycles limit resistance (debated)"
+          ]
+        },
+        "right": {
+          "title": "Inhaled therapy costs",
+          "points": [
+            "Bronchospasm and cough at inhalation",
+            "Twice daily nebuliser burden",
+            "Voice alteration and tinnitus occasionally",
+            "Sputum surveillance for emerging resistance"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "id": "cm-bias-causation-bradford-hill-criteria",
+ "subject": "community-medicine",
+ "module": "cm-bias-causation",
+ "title": "Bradford Hill Criteria, Confounding and the Web of Causation",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Spurious association: artefact and chance",
+   "tx": "A **spurious association** is an artefact: either indirect linkage through a third factor, as when altitude and goitre associate only because iodine deficiency tracks terrain, or simple sampling variation. Hospital based sampling manufactures such ghosts routinely. Before causation is even debated, artefact and chance must be excluded by design and by statistical testing.",
+   "say": "Ghosts come first. An association can be pure artefact: altitude links to goitre only through iodine in the soil, and sampling variation fakes the rest. Exclude artefact and chance by design before debating causation at all.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Association type", "Reality behind it"],
+    "rows": [
+     ["Spurious", "Artefact of sampling or a third factor"],
+     ["Indirect", "Exposure linked through a confounder"],
+     ["Direct or causal", "Exposure itself produces the disease"]
+    ]
+   }
+  },
+  {
+   "title": "Temporality: cause must come first",
+   "tx": "**Temporality** is the one indispensable criterion: exposure must precede disease, the criterion cohort studies guarantee by design and case-control studies struggle to prove. Smoking histories taken after lung cancer diagnosis cannot alone establish order. Reverse causation, where early disease changes the exposure, is the trap this criterion exists to catch.",
+   "say": "One criterion is non-negotiable. Exposure must precede disease. Cohorts guarantee that order by design; retrospective histories struggle to prove it. Early disease changing behaviour, the reverse causation trap, is exactly what this test catches.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Temporality secure",
+     "points": ["Exposure recorded before disease", "Cohort design guarantees order", "Reverse causation excluded"]
+    },
+    "right": {
+     "title": "Temporality doubtful",
+     "points": ["Exposure recalled after diagnosis", "Early disease may change habits", "Order asserted, not observed"]
+    }
+   }
+  },
+  {
+   "title": "Strength and dose response together",
+   "tx": "**Strength of association** asks whether relative risk is large, and whether incidence climbs with dose and duration of exposure. Smoking and lung cancer remain the showcase: large relative risks plus a clear biological gradient, where heavier smoking meant proportionally more cancer. Absence of any gradient argues against causation, though it cannot alone acquit an exposure.",
+   "say": "Bigger and graded associations persuade. Large relative risk plus incidence climbing with dose and duration built the smoking verdict. No gradient argues against causation, though a flat gradient alone cannot acquit an exposure either.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Dose pattern", "Causal reading"],
+    "rows": [
+     ["Risk rises steadily with dose", "Supports causation, biological gradient"],
+     ["Risk flat at every dose", "Argues against causation"],
+     ["Risk falls as dose rises", "Suggests protection or artefact"]
+    ]
+   }
+  },
+  {
+   "title": "Specificity, the weakest criterion",
+   "tx": "**Specificity** asks whether one exposure produces one disease, satisfied beautifully by occupational pairs such as vinyl chloride and hepatic angiosarcoma. Most chronic exposures fail it: smoking causes many diseases, and lung cancer has other causes. Modern teaching therefore treats specificity as supportive when present and unimportant when absent.",
+   "say": "One cause, one disease persuades when it appears, as with vinyl chloride and one rare liver tumour. Smoking fails it completely yet still causes lung cancer. Treat specificity as a bonus when present, never a requirement.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Specificity present",
+     "points": ["Vinyl chloride and angiosarcoma", "Strong supportive evidence", "Rare in chronic disease"]
+    },
+    "right": {
+     "title": "Specificity absent",
+     "points": ["Smoking, many diseases", "Lung cancer, several causes", "Causation still possible"]
+    }
+   }
+  },
+  {
+   "title": "Consistency across studies and places",
+   "tx": "**Consistency** demands the association reappear in different populations, places, times and study designs. Doll and Hill's doctors, American cohorts and case-control series all convicted smoking independently. A single study, however large, invites replication before policy, because local artefact and local confounding cannot be excluded from one dataset.",
+   "say": "Repetition across settings persuades. Different populations, places, times and designs convicted smoking independently. One study, however large, cannot exclude its own local artefact, so replication precedes policy.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "First study finds association"},
+     {"id": "b", "label": "Other populations repeat it"},
+     {"id": "c", "label": "Other designs repeat it"},
+     {"id": "d", "label": "Causal confidence grows"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Plausibility and coherence",
+   "tx": "**Biological plausibility** asks whether known mechanisms can carry the effect, as tar carcinogens in smoke plausibly reach bronchial epithelium. Coherence asks whether the association fits the disease's natural history, distribution and laboratory facts without contradiction. Both criteria depend on current knowledge, so today's implausible claim may become tomorrow's textbook mechanism.",
+   "say": "Two knowledge tests follow. Mechanisms must be able to carry the effect, and the claim must cohere with natural history and laboratory facts. Both depend on what is known today, so implausibility expires as science moves.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Criterion", "Question asked"],
+    "rows": [
+     ["Plausibility", "Can known biology carry this effect?"],
+     ["Coherence", "Does it fit distribution and laboratory facts?"],
+     ["Experiment (added evidence)", "Does removing exposure cut disease?"]
+    ]
+   }
+  },
+  {
+   "title": "Confounding: the third factor",
+   "tx": "A **confounding factor** associates with both exposure and disease, is distributed unequally between groups, and independently risks the disease: smoking confounds alcohol and oesophageal cancer on all three counts. Matching, restriction and stratified analysis neutralise known confounders. Unknown confounders yield only to randomisation, which is why trials outrank observational designs.",
+   "say": "Name the third factor precisely. It travels with the exposure, risks the disease alone, and sits unequally across groups: smoking inside alcohol studies. Matching and stratification handle known ones; only randomisation scatters the unknown.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Confounder test", "Smoking in alcohol studies"],
+    "rows": [
+     ["Associated with exposure", "Drinkers smoke more"],
+     ["Independent risk factor", "Smoking alone causes the cancer"],
+     ["Unequal across groups", "Cases smoke more than controls"]
+    ]
+   }
+  },
+  {
+   "title": "Selection and measurement bias",
+   "tx": "**Selection bias** enters when cases or controls fail to represent their source populations, while measurement bias distorts exposure or outcome recording, from recall differences to observer expectation. The Hawthorne effect, where observation itself changes behaviour, and Neyman bias, where prevalent cases over-represent long survivors, complete the named set examiners rotate through stems.",
+   "say": "Two error families distort results. Selection bias corrupts who enters; measurement bias corrupts what gets recorded. Being watched changes behaviour, and prevalent cases over-represent survivors. Name which mechanism a stem describes before proposing its cure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Selection problems",
+     "points": ["Unrepresentative cases or controls", "Berkesonian hospital distortion", "Neyman prevalent case bias"]
+    },
+    "right": {
+     "title": "Measurement problems",
+     "points": ["Recall differences by outcome", "Observer expectation effects", "Hawthorne behaviour change"]
+    }
+   }
+  },
+  {
+   "title": "Web of causation for chronic disease",
+   "tx": "The **web of causation** replaces single-cause thinking for chronic disease: myocardial infarction emerges from interacting strands of lipids, pressure, smoking, diabetes, stress and heredity, proposed by MacMahon and Pugh. Crucially, cutting one sufficiently important strand can still control the disease, so multifactorial origin never excuses single intervention where a dominant link exists.",
+   "say": "Chronic disease hangs in a web, not a chain. Lipids, pressure, smoking, diabetes, stress and heredity interact toward one infarction. Cutting a single dominant strand can still control the outcome, so many causes never excuse inaction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Lipids, pressure, smoking"},
+     {"id": "b", "label": "Diabetes, stress, heredity"},
+     {"id": "c", "label": "Strands interact over years"},
+     {"id": "d", "label": "Myocardial infarction"}
+    ],
+    "edges": [["a", "c"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

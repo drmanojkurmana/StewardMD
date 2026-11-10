@@ -1,0 +1,240 @@
+{
+ "key": "ped-neuro-disorders-cerebral-palsy",
+ "v": 1,
+ "module": "ped-neuro-disorders",
+ "subject": "paediatrics",
+ "title": "Pediatric Neurodevelopmental Pathology: Cerebral Palsy and Hydrocephalus",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Non-progressive insults to the developing immature brain produce permanent disorders of movement and posture. The most prevalent physical disability originating in childhood is **pediatric cerebral palsy**, resulting from prenatal, perinatal, or postnatal neurological injury occurring prior to two years of life. Clinical hallmarks include motor delays, abnormal tone with spasticity or dystonia, persistent primitive reflexes, and impaired motor coordination.",
+   "say": "Cerebral palsy is a non-progressive permanent disorder of posture and movement caused by early brain injury. Spasticity and delayed gross motor milestones are cardinal findings.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cerebral-palsy-fig1.webp",
+    "alt": "Classification chart and brain MRI scans displaying periventricular leukomalacia and motor topography in cerebral palsy.",
+    "caption": "Motor subtypes and periventricular leukomalacia on MRI in spastic cerebral palsy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Anatomical distribution of neurological deficits guides motor classification and underlying etiology in cerebral palsy. Accounting for seventy to eighty percent of cases, **spastic diplegic cerebral palsy** predominantly affects bilateral lower extremities, exhibiting a powerful epidemiological link to prematurity and periventricular leukomalacia. Affected children demonstrate classic scissoring gait, tight heel cords with toe walking, brisk hyperreflexia, and sustained ankle clonus.",
+   "say": "Spastic diplegia affects the legs more than the arms, linked to prematurity and periventricular leukomalacia. It causes a scissoring gait and toe-walking.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Motor Topography Subtype",
+     "Anatomical Limb Distribution",
+     "Primary Perinatal Risk Factor",
+     "Characteristic Clinical Signs"
+    ],
+    "rows": [
+     [
+      "Spastic diplegia (40%)",
+      "Lower limbs markedly > Upper limbs",
+      "Prematurity, periventricular leukomalacia",
+      "Scissoring gait, crouch posture, tight adductors"
+     ],
+     [
+      "Spastic hemiplegia (30%)",
+      "Unilateral arm and leg on one side",
+      "Perinatal arterial stroke, vascular occlusion",
+      "Fisting of hand, circumductive hemiplegic gait"
+     ],
+     [
+      "Spastic quadriplegia (20%)",
+      "All four limbs and trunk severely involved",
+      "Severe perinatal asphyxia, multicystic encephalomalacia",
+      "Pseudobulbar palsy, severe cognitive and seizure burden"
+     ],
+     [
+      "Dyskinetic / Athetoid (10%)",
+      "Involuntary writhing choreoathetosis",
+      "Bilirubin encephalopathy (kernicterus), hypoxia",
+      "Basal ganglia injury, sensorineural deafness"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Standardized functional grading scales establish functional mobility and guide multidisciplinary therapeutic goals. Assessing children with the **Gross Motor Function Classification System** (GMFCS) stratifies ambulatory ability from Level I, where children walk without restrictions, to Level V, where children require manual wheelchair transport with extensive head and trunk support, guiding interventions including physiotherapy, orthoses, botulinum toxin, and selective dorsal rhizotomy.",
+   "say": "The GMFCS classifies motor function from Level one walking independently to Level five requiring a wheelchair. It guides physical therapy, orthotics, and botulinum toxin injections.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "GMFCS Functional Level",
+     "Independent Ambulatory Ability",
+     "Equipment / Mobility Aids Needed",
+     "Long-term Functional Goals"
+    ],
+    "rows": [
+     [
+      "GMFCS Level I",
+      "Walks independently indoors & outdoors",
+      "Climbs stairs without rail; runs and jumps",
+      "Maximize sports participation, posture"
+     ],
+     [
+      "GMFCS Level II",
+      "Walks independently in most settings",
+      "Climbs stairs holding railing; difficulty running",
+      "Address fatigue and uneven terrain balance"
+     ],
+     [
+      "GMFCS Level III",
+      "Walks using hand-held mobility aids",
+      "Uses crutches or walker; manual wheelchair for long trips",
+      "Optimize assisted indoor community ambulation"
+     ],
+     [
+      "GMFCS Level IV & V",
+      "Self-mobility severely limited or dependent",
+      "Requires powered or attendant-propelled wheelchair",
+      "Prevent contractures, hip subluxation, scoliosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Imbalance between cerebrospinal fluid production and reabsorption drives progressive ventricular enlargement and raised intracranial pressure. In infants prior to cranial suture fusion, **congenital pediatric hydrocephalus** manifests with rapid head circumference enlargement crossing growth percentiles, a tense bulging anterior fontanelle, splayed cranial sutures, distended scalp veins, cracked-pot Macewen sign on skull percussion, and setting sun eye sign.",
+   "say": "Hydrocephalus in infants causes rapid head growth crossing percentiles, bulging fontanelle, and setting sun eye sign. Macewen sign reveals a cracked-pot resonance on percussion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hydrocephalus-fig1.webp",
+    "alt": "Cranial ultrasound and MRI displaying massive enlargement of lateral and third ventricles with aqueductal stenosis.",
+    "caption": "Neuroimaging demonstrating ventricular dilatation and transependymal edema in obstructive hydrocephalus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Obstruction along the ventricular flow pathways separates communicating from non-communicating anatomical hydrocephalus. The commonest cause of congenital non-communicating hydrocephalus is **aqueductal stenosis in hydrocephalus**, obstructing cerebrospinal fluid outflow between the third and fourth ventricles. By contrast, communicating hydrocephalus arises from impaired arachnoid villi reabsorption following neonatal intraventricular hemorrhage or bacterial meningitis, causing symmetrical dilatation of all four ventricles.",
+   "say": "Aqueductal stenosis is the commonest congenital cause of obstructive hydrocephalus, blocking CSF flow to the fourth ventricle. Communicating hydrocephalus follows meningitis or hemorrhage.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Non-Communicating (Obstructive)",
+     "points": [
+      "Physical obstruction within ventricular system",
+      "Aqueductal stenosis, Dandy-Walker malformation",
+      "Chiari II malformation with myelomeningocele",
+      "Lateral and third ventricles dilated; fourth ventricle small"
+     ]
+    },
+    "right": {
+     "title": "Communicating Hydrocephalus",
+     "points": [
+      "Impaired absorption at arachnoid villi granulations",
+      "Post-intraventricular haemorrhage of prematurity",
+      "Post-meningitic basal exudates and fibrosis",
+      "Symmetrical enlargement of all four ventricles"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Surgical diversion of cerebrospinal fluid relieves raised intracranial tension and preserves cognitive potential. Definitive treatment utilizes **ventriculoperitoneal shunt placement**, redirecting CSF from the lateral cerebral ventricle into the peritoneal cavity via a pressure-regulated subcutaneous valve. In select cases of pure aqueductal stenosis, endoscopic third ventriculostomy (ETV) provides an elegant shunt-free alternative by creating a fenestration in the floor of the third ventricle.",
+   "say": "Ventriculoperitoneal shunting diverts fluid to the peritoneal cavity. Endoscopic third ventriculostomy creates a bypass fenestration for patients with aqueductal stenosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Procedure",
+     "Surgical Technique & Anatomy",
+     "Primary Clinical Indication",
+     "Potential Long-Term Complications"
+    ],
+    "rows": [
+     [
+      "Ventriculoperitoneal shunt (VP)",
+      "Silastic catheter from ventricle to peritoneum",
+      "All communicating & obstructive hydrocephalus",
+      "Shunt infection, mechanical blockage, overdrainage"
+     ],
+     [
+      "Endoscopic third ventriculostomy",
+      "Fenestration in tuber cinereum of 3rd ventricle",
+      "Pure obstructive aqueductal stenosis (>6 months)",
+      "Basilar artery injury, stoma closure, CSF leak"
+     ],
+     [
+      "Shunt malfunction signs",
+      "Early morning vomiting, lethargy, headache",
+      "Bulging fontanelle, upward gaze palsy",
+      "Emergency neurosurgical revision required"
+     ],
+     [
+      "External ventricular drain",
+      "Temporary catheter draining to external bag",
+      "Acute ventriculitis or shunt infection",
+      "Temporary decompression until CSF clears"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure of embryonic neural tube closure by the twenty-eighth post-conceptional day produces congenital spinal malformations. Prevention of **congenital neural tube defects** is achieved through maternal periconceptional folic acid supplementation, supplying 400 micrograms daily to low-risk women and four milligrams daily to high-risk women with previous affected pregnancies, reducing occurrence by seventy percent when initiated one month before conception.",
+   "say": "Periconceptional folic acid reduces neural tube defects by seventy percent. Take four hundred micrograms daily for low risk, and four milligrams for high-risk mothers.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Folic Acid Dosing Guidelines",
+     "points": [
+      "Low-risk women: 400 mcg (0.4 mg) daily",
+      "Start at least 1 month prior to planned conception",
+      "Continue throughout the entire first trimester",
+      "Reduces neural tube defect risk by 70 percent"
+     ]
+    },
+    "right": {
+     "title": "High-Risk Indication: 4 mg Daily",
+     "points": [
+      "Previous child with anencephaly or spina bifida",
+      "Maternal pre-gestational diabetes mellitus",
+      "Maternal anticonvulsant therapy (valproate, carbamazepine)",
+      "Family history of first-degree neural tube defects"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The spectrum of congenital spinal dysraphism ranges from occult bony arches to complete neural placode herniation. The most severe viable form is **open lumbar meningomyelocele**, where the spinal cord and nerve roots herniate through a vertebral defect into an open, fluid-filled sac covered by a leaky arachnoid membrane, almost universally associated with Chiari II malformation, hydrocephalus, and neurogenic bladder.",
+   "say": "Meningomyelocele involves herniation of the spinal cord and nerve roots through a vertebral defect. It is associated with Chiari II malformation and hydrocephalus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Spinal Dysraphism Category",
+     "Vertebral & Dural Pathology",
+     "Spinal Cord Involvement",
+     "Associated Clinical Features"
+    ],
+    "rows": [
+     [
+      "Spina bifida occulta",
+      "Vertebral arch defect without herniation",
+      "Normal spinal cord position",
+      "Tuft of hair, dimple, lipoma, or port-wine stain"
+     ],
+     [
+      "Meningocele",
+      "Sac containing meninges and CSF only",
+      "Spinal cord remains within canal",
+      "Neurologically intact; normal motor function"
+     ],
+     [
+      "Meningomyelocele",
+      "Herniation of meninges and spinal neural placode",
+      "Dysplastic cord and nerve roots in sac",
+      "Flaccid paraparesis, sensory loss, neurogenic bladder"
+     ],
+     [
+      "Antenatal screening",
+      "Elevated maternal serum alpha-fetoprotein (MSAFP)",
+      "Amniotic fluid acetylcholinesterase +",
+      "Targeted level II ultrasound confirms spinal lesion"
+     ]
+    ]
+   }
+  }
+ ]
+}

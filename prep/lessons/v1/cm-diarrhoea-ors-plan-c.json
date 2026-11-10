@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-diarrhoea-ors-plan-c",
+ "subject": "community-medicine",
+ "module": "cm-diarrhoea-ors",
+ "title": "Plan C: Rapid Intravenous Rehydration for Severe Dehydration",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Severe dehydration is a race",
+   "tx": "**Plan C** treats severe dehydration with rapid intravenous rehydration because circulation, not comfort, is failing: lethargy, very sunken eyes, inability to drink and skin pinch returning very slowly mark hypovolaemia approaching shock. Minutes matter more than elegance here; venous access and volume precede every other investigation.",
+   "say": "Severe dehydration is circulatory failure arriving. Lethargy, deeply sunken eyes, no drinking, skin lingering seconds after pinch. Access and volume precede every other investigation; minutes outrank elegance.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Severe sign", "Physiology it announces"],
+    "rows": [
+     ["Lethargic or unconscious", "Brain perfusion failing"],
+     ["Drinks poorly or unable", "Oral route unavailable"],
+     ["Skin pinch very slow", "Interstitial volume depleted"],
+     ["Weak or absent radial pulse", "Shock present or imminent"]
+    ]
+   }
+  },
+  {
+   "title": "The fluid: Ringer lactate, 100 ml per kg",
+   "tx": "**Ringer lactate** (or normal saline if unavailable; plain dextrose is ineffective and never used alone) is given at 100 ml per kg total. Its sodium and lactate buffer approximate plasma and stool losses better than saline alone. The dose is divided by age because infant hearts and veins tolerate speed differently from older children's.",
+   "say": "Fluid choice is physiological. Ringer lactate at one hundred millilitres per kilogram total; saline substitutes, plain dextrose never. Age splits the speed because infant circulation tolerates haste differently.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Use",
+     "points": ["Ringer lactate first choice", "Normal saline acceptable", "Volume 100 ml per kg total"]
+    },
+    "right": {
+     "title": "Never use alone",
+     "points": ["Plain dextrose, ineffective", "Colloids as routine first fluid", "Slow cautious dripping in shock"]
+    }
+   }
+  },
+  {
+   "title": "Infants: 30 then 70, over six hours",
+   "tx": "For **infants under 12 months**, give 30 ml per kg in the first hour, then 70 ml per kg over the next 5 hours. Reassess every 15 to 30 minutes until a strong radial pulse returns; if hydration is not improving, run faster. After 6 hours, reclassify dehydration and choose Plan A, B or continued C logic.",
+   "say": "Infant pacing: thirty per kilogram in hour one, seventy over five more. Pulse checks every fifteen to thirty minutes; no improvement means faster. Reclassify at six hours and step to the matching plan.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "30 ml/kg in first hour"},
+     {"id": "b", "label": "70 ml/kg over next 5 hours"},
+     {"id": "c", "label": "Pulse reassessed every 15 to 30 min"},
+     {"id": "d", "label": "Reclassify at 6 hours"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Older children: same volume, faster",
+   "tx": "For **children 12 months to 5 years**, give 30 ml per kg in 30 minutes, then 70 ml per kg over 2.5 hours. Reassessment after 3 hours decides the next plan. The identical total volume with compressed timing reflects stronger cardiovascular reserve, and stems test exactly this age-based split of the same 100 ml per kg.",
+   "say": "Older children compress the clock: thirty per kilogram in half an hour, seventy over two and a half hours, reclassify at three. Same total volume, faster delivery. Stems test this age split precisely.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Age band", "First 30 ml/kg", "Next 70 ml/kg", "Reassess fully"],
+    "rows": [
+     ["Under 12 months", "Over 1 hour", "Over 5 hours", "At 6 hours"],
+     ["12 months to 5 years", "Over 30 minutes", "Over 2.5 hours", "At 3 hours"]
+    ]
+   }
+  },
+  {
+   "title": "ORS joins as soon as drinking returns",
+   "tx": "**Oral fluid restarts early**: about 5 ml per kg per hour of ORS as soon as the child can drink, alongside the drip, because gut absorption resumes before veins finish. Breastfeeding continues throughout. The drip buys circulation; the gut then resumes its cheaper, safer maintenance role, and total therapy stays physiological.",
+   "say": "Mouths rejoin early. About five millilitres per kilogram hourly of ORS once drinking returns, breastfeeding throughout. The drip buys circulation; the gut resumes cheaper maintenance. Waiting for drip completion wastes a recovered route.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "IV volume restoring pulse"},
+     {"id": "b", "label": "Child begins drinking"},
+     {"id": "c", "label": "ORS 5 ml/kg/hour added"},
+     {"id": "d", "label": "IV tapered as oral takes over"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "No vein: nasogastric and referral bridges",
+   "tx": "When **intravenous access fails** and referral will take time, nasogastric ORS at supervised rates bridges severe cases where the gut works and the airway is protected, while intraosseous access serves trained emergency settings. Unconscious children never receive oral or tube fluids unprotected. The bridge buys transport time; it never replaces definitive volume in shock.",
+   "say": "Failed veins need bridges, not surrender. Supervised nasogastric ORS where guts work and airways are protected, bone access where trained, rapid referral throughout. Unconscious children never take unprotected tube fluids.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Situation", "Bridge chosen"],
+    "rows": [
+     ["No IV access, conscious, gut working", "Nasogastric ORS supervised"],
+     ["Shock, trained team present", "Intraosseous then IV fluids"],
+     ["Unconscious", "Protect airway, IV route only"]
+    ]
+   }
+  },
+  {
+   "title": "Reassessment decides everything",
+   "tx": "**Reassessment rhythm** governs Plan C: pulse every 15 to 20 minutes until strong, hydration review every 1 to 2 hours, then full reclassification (6 hours infants, 3 hours older children). Improving children step down to Plan B or A; static or worsening children accelerate fluids and seek senior help, because persistent shock after calculated volume signals another pathology, from sepsis to surgical abdomen.",
+   "say": "Clocks govern this plan. Pulse until strong, hydration hourly, full reclassification on schedule. Step down when winning. Static shock after calculated volume accuses another pathology and demands senior help.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Improving",
+     "points": ["Pulse strong, eyes recovering", "Drinking resumes", "Step down to Plan B or A"]
+    },
+    "right": {
+     "title": "Not improving",
+     "points": ["Run IV faster, reassess cause", "Consider sepsis or surgical disease", "Escalate and refer urgently"]
+    }
+   }
+  },
+  {
+   "title": "Cholera Plan C runs hotter",
+   "tx": "In **cholera**, purging can exceed a litre hourly in adults, so Plan C volumes repeat as losses continue and the endpoint is matched output, not a fixed bag count. Ringer lactate's potassium and base suit rice-water losses. Antibiotics shorten purging once rehydration leads; fluids always lead, drugs follow, the ordering stems love to invert.",
+   "say": "Cholera outruns fixed prescriptions. Volumes repeat against measured losses until output is matched. Ringer lactate suits the losses; antibiotics shorten purging after fluids lead. Stems invert that order to trap you.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Cholera feature", "Plan C adaptation"],
+    "rows": [
+     ["Purging exceeds fixed volumes", "Repeat volume to match losses"],
+     ["Rice-water stool losses", "Ringer lactate preferred"],
+     ["Antibiotic role", "After fluids, shortens purging"]
+    ]
+   }
+  },
+  {
+   "title": "Discharge criteria and the teaching moment",
+   "tx": "**Discharge** requires drinking well, no dehydration signs, a caregiver who has mixed ORS correctly in front of staff, zinc supplied, and return precautions stated (blood in stool, poor drinking, fever, worsening). Plan C saves the night; Plan A teaching saves the next episode, which is statistically already on its way in high-burden settings.",
+   "say": "Discharge is a teaching examination. Child drinking, signs resolved, caregiver mixing correctly before staff, zinc in hand, danger signs recited. The drip saved tonight; home teaching saves the next episode.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Drinking well, signs resolved"},
+     {"id": "b", "label": "Caregiver mixes ORS observed"},
+     {"id": "c", "label": "Zinc and packets supplied"},
+     {"id": "d", "label": "Danger signs recited back"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}
