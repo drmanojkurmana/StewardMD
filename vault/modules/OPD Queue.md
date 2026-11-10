@@ -126,8 +126,13 @@ Plan and evidence: `design-plans/opd-queue-10-of-10.md`. Switch: OPD Queue > Set
     when a consult ends, warning on a confirmed Remove. Taps are already ticked app-wide by `haptics.js`.
   - The Appllama MCP was not connected in the session, so no reference screens were pulled; the skill's
     written laws were applied instead. Nothing was run in a simulator or on a phone.
-- GOTCHA: Manrope's tabular figures open a gap inside a token like "A11"; token chips do not use
-  `tabular-nums`.
+  - **Font changed again the same day (owner: "Apple like font").** `--q-sans` under `.q2app` is now
+    `-apple-system` first, so an iPhone draws San Francisco; Android has no San Francisco (Apple does not
+    license it for bundling), so it falls to the bundled Inter, then the Noto faces. Weights follow
+    Apple's: bold titles, semibold names and buttons, regular text. Manrope is no longer used here.
+    The headless tests run on Linux, so their screenshots show the Inter (Android) rendering.
+    The owner asked for an "apple-design" skill; none is installed in `.claude/skills`.
+- GOTCHA: token chips do not use `tabular-nums` (in some faces it opens a gap inside "A11").
 - GOTCHA: `.q-canvas` is a flex column that scrolls; its children shrink unless `flex-shrink: 0`, and a
   wrapped status strip slid under the card below it.
 - Tests: `test/queue-q2-render.test.mjs`, browser `test/run-opd-q2-ui.mjs` on `test/opd-q2-harness.html`

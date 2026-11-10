@@ -12181,3 +12181,5 @@ to miss) over staying on Inter or adding a new download; one accent, emerald `#0
 `#0e6e63`; borderless white surfaces on a grey ground over outlined cards. Rejected: the reference images'
 gradient header, stat tiles and tabs (features and data the screen does not have).
 Not verified on a phone. Reversible: `smd_opd_q2=0` (the default).
+Update, same day: the owner asked for an Apple-like font and said the rest is fine. The new screen now uses the
+system face (`-apple-system`, San Francisco on iPhone) with Inter as the Android fallback, in place of Manrope.
