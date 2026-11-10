@@ -1,245 +1,245 @@
 {
- "v": 1,
- "module": "sur-liver",
- "subject": "surgery",
- "title": "Benign and Malignant Liver Tumours",
- "minutes": 6,
- "gen": "AI",
- "quiz": [],
- "steps": [
-  {
-   "tx": "The most frequent primary benign neoplasm identified within the hepatic parenchyma is **hepatic haemangioma**. Composed of cavernous vascular channels lined by a single endothelial layer, these lesions are typically diagnosed as incidental solitary nodules in adult females. While smaller haemangiomas remain clinically silent and require no surgical therapy, giant haemangiomas exceeding four centimetres may provoke abdominal fullness or undergo spontaneous rupture.",
-   "say": "Hepatic haemangioma represents the most common benign liver tumour, consisting of cavernous vascular channels that usually require observation rather than surgical resection.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/need-n88-sur-liver-hepatic-haemangioma.webp",
-    "alt": "Hepatic cavernous haemangioma with peripheral nodular enhancement and centripetal fill-in distinguishing it from HCC",
-    "caption": "Hepatic cavernous haemangioma with peripheral nodular enhancement and centripetal fill-in distinguishing it from HCC. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "On dynamic contrast-enhanced computed tomography, hepatic haemangiomas display classic early peripheral nodular puddling of contrast during the arterial phase. Over subsequent venous phases, progressive centripetal fill-in gradually opacifies the central matrix until the lesion becomes isodense with surrounding liver parenchyma. Percutaneous needle biopsy is strictly contraindicated because puncturing these high-flow vascular channels carries an unacceptable hazard of fatal **intraperitoneal haemorrhage**.",
-   "say": "Contrast imaging shows early peripheral nodular enhancement followed by progressive centripetal fill-in, while needle biopsy is avoided due to severe bleeding risks.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "arterial",
-      "label": "Arterial Phase: Peripheral Nodular Puddling"
-     },
-     {
-      "id": "portal",
-      "label": "Portal Venous Phase: Centripetal Inward Filling"
-     },
-     {
-      "id": "delayed",
-      "label": "Delayed Phase: Complete Uniform Opacification"
-     },
-     {
-      "id": "danger",
-      "label": "Percutaneous Biopsy: Severe Haemorrhage Risk"
-     }
-    ],
-    "edges": [
-     [
-      "arterial",
-      "portal"
-     ],
-     [
-      "portal",
-      "delayed"
-     ],
-     [
-      "delayed",
-      "danger"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The second most common benign liver lesion is **focal nodular hyperplasia**, which arises as a hyperplastic parenchymal response to a pre-existing congenital arteriovenous malformation. Histopathological examination demonstrates abnormal radiating fibrous septa, polyclonal hepatocytes, and a distinctive central stellate scar containing a prominent feeding artery. Unlike neoplastic tumours, focal nodular hyperplasia possesses no intrinsic malignant potential and rarely bleeds spontaneously.",
-   "say": "Focal nodular hyperplasia develops as a response to vascular malformation, featuring a diagnostic central stellate scar and carrying virtually no malignant potential.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Focal Nodular Hyperplasia",
-     "points": [
-      "Hyperplastic vascular response",
-      "Polyclonal hepatocytes",
-      "Central stellate scar with feeding artery",
-      "Malignant transformation absent"
-     ]
+  "v": 1,
+  "module": "sur-liver",
+  "subject": "surgery",
+  "title": "Benign and Malignant Liver Tumours",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The most frequent primary benign neoplasm identified within the hepatic parenchyma is **hepatic haemangioma**. Composed of cavernous vascular channels lined by a single endothelial layer, these lesions are typically diagnosed as incidental solitary nodules in adult females. While smaller haemangiomas remain clinically silent and require no surgical therapy, giant haemangiomas exceeding four centimetres may provoke abdominal fullness or undergo spontaneous rupture.",
+      "say": "Hepatic haemangioma represents the most common benign liver tumour, consisting of cavernous vascular channels that usually require observation rather than surgical resection.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n88-sur-liver-hepatic-haemangioma.webp",
+        "alt": "Hepatic cavernous haemangioma with peripheral nodular enhancement and centripetal fill-in distinguishing it from HCC",
+        "caption": "Hepatic cavernous haemangioma with peripheral nodular enhancement and centripetal fill-in distinguishing it from HCC. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
     },
-    "right": {
-     "title": "Hepatic Adenoma",
-     "points": [
-      "Monoclonal true neoplasm",
-      "Hepatocyte sheets without bile ducts",
-      "Absence of fibrous central scar",
-      "Malignant transformation risk present"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "A benign monoclonal neoplasm strongly associated with prolonged oral contraceptive steroid usage or anabolic hormone exposure is **hepatic adenoma**. Histology reveals sheets of glycogen-rich hepatocytes lacking portal triads, interlobular bile ducts, and fibrous supporting stroma. Because these lesions receive an exclusively arterial blood supply unsupported by connective tissue, they are prone to life-threatening spontaneous rupture and necrosis.",
-   "say": "Hepatic adenoma is a true neoplasm linked to oral contraceptive steroids, lacking bile ducts and fibrous stroma, predisposing to sudden internal bleeding.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/hepatic-adenoma-fig1.webp",
-    "alt": "Diagram illustrating hepatic adenoma arterial vascularity, absence of portal triads, and propensity for acute intraperitoneal rupture.",
-    "caption": "Hepatic adenoma: hormone-responsive benign neoplasm with risk of rupture and malignant transformation. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "Management of hepatic adenoma begins with immediate cessation of all exogenous estrogens and serial imaging for smaller subcentimetric nodules. Surgical resection is definitively indicated for any adenoma larger than five centimetres, lesions showing interval growth, male patients, or tumours possessing the beta-catenin mutation due to elevated risks of **malignant transformation**.",
-   "say": "Resection of hepatic adenoma is indicated when diameter exceeds five centimetres, in male patients, or with beta-catenin mutations that risk malignant progression.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Feature",
-     "Haemangioma",
-     "Focal Nodular Hyperplasia",
-     "Hepatic Adenoma"
-    ],
-    "rows": [
-     [
-      "Hormone dependence",
-      "Minimal",
-      "None",
-      "Strongly associated with OCPs"
-     ],
-     [
-      "Central scar",
-      "Absent (central thrombosis)",
-      "Present (stellate scar)",
-      "Absent"
-     ],
-     [
-      "Kupffer cells",
-      "Absent",
-      "Present and functional",
-      "Markedly reduced or absent"
-     ],
-     [
-      "Rupture risk",
-      "Extremely rare",
-      "Negligible",
-      "High (up to 30% if >5 cm)"
-     ],
-     [
-      "Malignant potential",
-      "Zero",
-      "Zero",
-      "Up to 10% (beta-catenin type)"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "The predominant primary liver malignancy worldwide is **hepatocellular carcinoma**, which develops in over eighty percent of instances on a background of chronic cirrhosis. Major predisposing aetiological factors include chronic hepatitis B or hepatitis C infection, alcohol abuse, metabolic dysfunction-associated steatohepatitis, and dietary aflatoxin exposure. Surveillance protocols recommend semi-annual abdominal ultrasonography paired with serum alpha-fetoprotein measurement in all cirrhotic candidates.",
-   "say": "Hepatocellular carcinoma develops predominantly in cirrhotic livers, warranting surveillance with six-monthly abdominal ultrasound and alpha-fetoprotein monitoring.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "etiology",
-      "label": "Cirrhosis: HBV, HCV, Alcohol, MASH"
-     },
-     {
-      "id": "surv",
-      "label": "Bi-Annual Ultrasound & Alpha-Fetoprotein"
-     },
-     {
-      "id": "ct",
-      "label": "Triphasic CT: Arterial Wash-In & Venous Washout"
-     },
-     {
-      "id": "stag",
-      "label": "BCLC Staging Guides Curative vs Palliative Care"
-     }
-    ],
-    "edges": [
-     [
-      "etiology",
-      "surv"
-     ],
-     [
-      "surv",
-      "ct"
-     ],
-     [
-      "ct",
-      "stag"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Diagnosis of hepatocellular carcinoma in a cirrhotic liver can be confirmed non-invasively using multiphasic contrast-enhanced computed tomography or magnetic resonance imaging without requiring tissue biopsy. The pathognomonic radiological hallmark is rapid intense arterial enhancement followed by prominent **venous washout** during the portal venous and delayed equilibrium phases. This unique enhancement pattern occurs because tumour neoangiogenesis derives entirely from the hepatic artery.",
-   "say": "Hepatocellular carcinoma demonstrates intense arterial phase enhancement followed by rapid portal venous washout, permitting non-invasive radiological confirmation in cirrhosis.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Arterial Phase CT",
-     "points": [
-      "Hypervascular tumour neoangiogenesis",
-      "Direct feeding from hepatic artery branches",
-      "Intense early contrast enhancement",
-      "Parenchyma remains relatively dark"
-     ]
+    {
+      "tx": "On dynamic contrast-enhanced computed tomography, hepatic haemangiomas display classic early peripheral nodular puddling of contrast during the arterial phase. Over subsequent venous phases, progressive centripetal fill-in gradually opacifies the central matrix until the lesion becomes isodense with surrounding liver parenchyma. Percutaneous needle biopsy is strictly contraindicated because puncturing these high-flow vascular channels carries an unacceptable hazard of fatal **intraperitoneal haemorrhage**.",
+      "say": "Contrast imaging shows early peripheral nodular enhancement followed by progressive centripetal fill-in, while needle biopsy is avoided due to severe bleeding risks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "arterial",
+            "label": "Arterial Phase: Peripheral Nodular Puddling"
+          },
+          {
+            "id": "portal",
+            "label": "Portal Venous Phase: Centripetal Inward Filling"
+          },
+          {
+            "id": "delayed",
+            "label": "Delayed Phase: Complete Uniform Opacification"
+          },
+          {
+            "id": "danger",
+            "label": "Percutaneous Biopsy: Severe Haemorrhage Risk"
+          }
+        ],
+        "edges": [
+          [
+            "arterial",
+            "portal"
+          ],
+          [
+            "portal",
+            "delayed"
+          ],
+          [
+            "delayed",
+            "danger"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Venous Phase CT",
-     "points": [
-      "Rapid clearing of contrast medium",
-      "Tumour appears hypodense (washout)",
-      "Delayed pseudocapsule enhancement",
-      "Surrounding liver enhances via portal vein"
-     ]
+    {
+      "tx": "The second most common benign liver lesion is **focal nodular hyperplasia**, which arises as a hyperplastic parenchymal response to a pre-existing congenital arteriovenous malformation. Histopathological examination demonstrates abnormal radiating fibrous septa, polyclonal hepatocytes, and a distinctive central stellate scar containing a prominent feeding artery. Unlike neoplastic tumours, focal nodular hyperplasia possesses no intrinsic malignant potential and rarely bleeds spontaneously.",
+      "say": "Focal nodular hyperplasia develops as a response to vascular malformation, featuring a diagnostic central stellate scar and carrying virtually no malignant potential.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Focal Nodular Hyperplasia",
+          "points": [
+            "Hyperplastic vascular response",
+            "Polyclonal hepatocytes",
+            "Central stellate scar with feeding artery",
+            "Malignant transformation absent"
+          ]
+        },
+        "right": {
+          "title": "Hepatic Adenoma",
+          "points": [
+            "Monoclonal true neoplasm",
+            "Hepatocyte sheets without bile ducts",
+            "Absence of fibrous central scar",
+            "Malignant transformation risk present"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A benign monoclonal neoplasm strongly associated with prolonged oral contraceptive steroid usage or anabolic hormone exposure is **hepatic adenoma**. Histology reveals sheets of glycogen-rich hepatocytes lacking portal triads, interlobular bile ducts, and fibrous supporting stroma. Because these lesions receive an exclusively arterial blood supply unsupported by connective tissue, they are prone to life-threatening spontaneous rupture and necrosis.",
+      "say": "Hepatic adenoma is a true neoplasm linked to oral contraceptive steroids, lacking bile ducts and fibrous stroma, predisposing to sudden internal bleeding.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hepatic-adenoma-fig1.webp",
+        "alt": "Diagram illustrating hepatic adenoma arterial vascularity, absence of portal triads, and propensity for acute intraperitoneal rupture.",
+        "caption": "Hepatic adenoma: hormone-responsive benign neoplasm with risk of rupture and malignant transformation. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "Management of hepatic adenoma begins with immediate cessation of all exogenous estrogens and serial imaging for smaller subcentimetric nodules. Surgical resection is definitively indicated for any adenoma larger than five centimetres, lesions showing interval growth, male patients, or tumours possessing the beta-catenin mutation due to elevated risks of **malignant transformation**.",
+      "say": "Resection of hepatic adenoma is indicated when diameter exceeds five centimetres, in male patients, or with beta-catenin mutations that risk malignant progression.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Haemangioma",
+          "Focal Nodular Hyperplasia",
+          "Hepatic Adenoma"
+        ],
+        "rows": [
+          [
+            "Hormone dependence",
+            "Minimal",
+            "None",
+            "Strongly associated with OCPs"
+          ],
+          [
+            "Central scar",
+            "Absent (central thrombosis)",
+            "Present (stellate scar)",
+            "Absent"
+          ],
+          [
+            "Kupffer cells",
+            "Absent",
+            "Present and functional",
+            "Markedly reduced or absent"
+          ],
+          [
+            "Rupture risk",
+            "Extremely rare",
+            "Negligible",
+            "High (up to 30% if >5 cm)"
+          ],
+          [
+            "Malignant potential",
+            "Zero",
+            "Zero",
+            "Up to 10% (beta-catenin type)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The predominant primary liver malignancy worldwide is **hepatocellular carcinoma**, which develops in over eighty percent of instances on a background of chronic cirrhosis. Major predisposing aetiological factors include chronic hepatitis B or hepatitis C infection, alcohol abuse, metabolic dysfunction-associated steatohepatitis, and dietary aflatoxin exposure. Surveillance protocols recommend semi-annual abdominal ultrasonography paired with serum alpha-fetoprotein measurement in all cirrhotic candidates.",
+      "say": "Hepatocellular carcinoma develops predominantly in cirrhotic livers, warranting surveillance with six-monthly abdominal ultrasound and alpha-fetoprotein monitoring.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "etiology",
+            "label": "Cirrhosis: HBV, HCV, Alcohol, MASH"
+          },
+          {
+            "id": "surv",
+            "label": "Bi-Annual Ultrasound & Alpha-Fetoprotein"
+          },
+          {
+            "id": "ct",
+            "label": "Triphasic CT: Arterial Wash-In & Venous Washout"
+          },
+          {
+            "id": "stag",
+            "label": "BCLC Staging Guides Curative vs Palliative Care"
+          }
+        ],
+        "edges": [
+          [
+            "etiology",
+            "surv"
+          ],
+          [
+            "surv",
+            "ct"
+          ],
+          [
+            "ct",
+            "stag"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Diagnosis of hepatocellular carcinoma in a cirrhotic liver can be confirmed non-invasively using multiphasic contrast-enhanced computed tomography or magnetic resonance imaging without requiring tissue biopsy. The pathognomonic radiological hallmark is rapid intense arterial enhancement followed by prominent **venous washout** during the portal venous and delayed equilibrium phases. This unique enhancement pattern occurs because tumour neoangiogenesis derives entirely from the hepatic artery.",
+      "say": "Hepatocellular carcinoma demonstrates intense arterial phase enhancement followed by rapid portal venous washout, permitting non-invasive radiological confirmation in cirrhosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Arterial Phase CT",
+          "points": [
+            "Hypervascular tumour neoangiogenesis",
+            "Direct feeding from hepatic artery branches",
+            "Intense early contrast enhancement",
+            "Parenchyma remains relatively dark"
+          ]
+        },
+        "right": {
+          "title": "Venous Phase CT",
+          "points": [
+            "Rapid clearing of contrast medium",
+            "Tumour appears hypodense (washout)",
+            "Delayed pseudocapsule enhancement",
+            "Surrounding liver enhances via portal vein"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Curative options for localized hepatocellular carcinoma encompass surgical hepatic resection, thermal radiofrequency ablation, and orthotopic liver transplantation. In non-cirrhotic patients or compensated cirrhotics with preserved functional reserve and normal portal pressures, anatomic **partial hepatectomy** yields five-year survival rates exceeding fifty percent. For patients with uncorrectable background cirrhosis, total organ replacement via transplantation simultaneously removes the tumour and resolves end-stage liver failure.",
+      "say": "Curative management includes partial hepatectomy in preserved liver function or liver transplantation to cure both malignancy and cirrhosis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Modality",
+          "Primary Candidate",
+          "Key Advantage",
+          "Limitation"
+        ],
+        "rows": [
+          [
+            "Surgical resection",
+            "Child-Pugh A, normal portal pressure",
+            "Immediate oncological extirpation",
+            "Risk of postoperative liver failure"
+          ],
+          [
+            "Liver transplant",
+            "Milan criteria, cirrhotic liver",
+            "Treats tumour and underlying cirrhosis",
+            "Donor organ scarcity, waitlist drop"
+          ],
+          [
+            "Radiofrequency ablation",
+            "Single tumour <3 cm, non-surgical",
+            "Minimally invasive, parenchymal sparing",
+            "High local recurrence if near vessels"
+          ],
+          [
+            "TACE",
+            "Multifocal intermediate stage HCC",
+            "Controls tumour burden via ischemia",
+            "Palliative only, does not achieve cure"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "Curative options for localized hepatocellular carcinoma encompass surgical hepatic resection, thermal radiofrequency ablation, and orthotopic liver transplantation. In non-cirrhotic patients or compensated cirrhotics with preserved functional reserve and normal portal pressures, anatomic **partial hepatectomy** yields five-year survival rates exceeding fifty percent. For patients with uncorrectable background cirrhosis, total organ replacement via transplantation simultaneously removes the tumour and resolves end-stage liver failure.",
-   "say": "Curative management includes partial hepatectomy in preserved liver function or liver transplantation to cure both malignancy and cirrhosis.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Modality",
-     "Primary Candidate",
-     "Key Advantage",
-     "Limitation"
-    ],
-    "rows": [
-     [
-      "Surgical resection",
-      "Child-Pugh A, normal portal pressure",
-      "Immediate oncological extirpation",
-      "Risk of postoperative liver failure"
-     ],
-     [
-      "Liver transplant",
-      "Milan criteria, cirrhotic liver",
-      "Treats tumour and underlying cirrhosis",
-      "Donor organ scarcity, waitlist drop"
-     ],
-     [
-      "Radiofrequency ablation",
-      "Single tumour <3 cm, non-surgical",
-      "Minimally invasive, parenchymal sparing",
-      "High local recurrence if near vessels"
-     ],
-     [
-      "TACE",
-      "Multifocal intermediate stage HCC",
-      "Controls tumour burden via ischemia",
-      "Palliative only, does not achieve cure"
-     ]
-    ]
-   }
-  }
- ]
+  ]
 }

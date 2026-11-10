@@ -1,248 +1,259 @@
 {
- "v": 1,
- "module": "sur-bladder",
- "subject": "surgery",
- "title": "Radical Cystectomy, Diversion and Bladder Dysfunction",
- "minutes": 6,
- "gen": "AI",
- "quiz": [],
- "steps": [
-  {
-   "tx": "Removal of the whole bladder with nearby lymph nodes is a **radical cystectomy**. It is the standard curative operation for muscle invasive bladder cancer. In men the prostate is removed too, and in women the uterus and front vaginal wall. Removing the pelvic lymph nodes is both staging and treatment, because node spread is the strongest predictor of recurrence after surgery.",
-   "say": "Radical cystectomy removes the whole bladder with nodes as the standard cure for muscle invasive cancer.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Patient",
-     "Organs removed"
-    ],
-    "rows": [
-     [
-      "Men",
-      "Bladder, prostate, nodes"
-     ],
-     [
-      "Women",
-      "Bladder, uterus, nodes"
-     ],
-     [
-      "Both",
-      "Urinary diversion created"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "A segment of ileum used as a simple urine channel to a skin bag is an **ileal conduit**. Urine flows continuously into an external appliance after this diversion. It is technically simpler than internal reservoirs and suits most patients. The ileal segment is usually taken well away from the ileocaecal junction to protect vitamin B12 and bile salt absorption.",
-   "say": "An ileal conduit channels urine through ileum to a skin bag and suits most patients after cystectomy.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Ileum segment isolated"
-     },
-     {
-      "id": "n1",
-      "label": "Ureters joined to segment"
-     },
-     {
-      "id": "n2",
-      "label": "End brought to skin"
-     },
-     {
-      "id": "n3",
-      "label": "Bag collects urine"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "A bladder that cannot store or empty properly from nerve damage is a **neurogenic bladder**. Causes include spinal injury, multiple sclerosis and diabetic nerve damage. High storage pressures silently damage the kidneys. Storage pressures above about 40 centimetres of water on urodynamic testing warn that the upper kidneys are at risk.",
-   "say": "A neurogenic bladder from nerve damage stores urine at high pressure and silently damages the kidneys.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/lessons/media/need-n82-sur-bladder-radical-cystectomy.webp",
-    "alt": "Neurogenic bladder with high storage pressures threatening the upper tracts after spinal injury on urodynamics",
-    "caption": "Neurogenic bladder with high storage pressures threatening the upper tracts after spinal injury on urodynamics. Illustration: StewardMD original.",
-    "ar": 1.3393
-   }
-  },
-  {
-   "tx": "Pressure and flow studies that measure how the bladder stores and empties are **urodynamics**. They distinguish weak muscle from blocked outlet when symptoms overlap. Results guide whether drugs, catheterisation or surgery will help. High pressure with a weak stream suggests blockage, while low pressure with poor flow points instead to a weak bladder muscle.",
-   "say": "Urodynamics measures bladder pressures and flow to separate weak muscle from blocked outlet.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Finding",
-     "Meaning"
-    ],
-    "rows": [
-     [
-      "High pressure, low flow",
-      "Outlet obstruction"
-     ],
-     [
-      "Low pressure, low flow",
-      "Weak bladder muscle"
-     ],
-     [
-      "Overactive contractions",
-      "Storage problem"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Sudden painful inability to pass urine with a swollen bladder is **acute urinary retention**. Prostate enlargement is the commonest cause in older men. A catheter relieves it immediately, and the cause is assessed afterwards. After relief, watch for post obstructive diuresis, a large urine output that can dehydrate a patient whose kidneys were blocked.",
-   "say": "Acute urinary retention causes sudden painful inability to void, and a catheter relieves it immediately.",
-   "vis": {
-    "kind": "image",
-    "src": "clinix/media/skills/skill-exam-surg-distended_bladder.webp",
-    "alt": "Examination of a distended bladder in urinary retention.",
-    "caption": "Distended bladder on examination in retention. [Credit: StewardMD]",
-    "ar": 1.5
-   }
-  },
-  {
-   "tx": "An outpouching of bladder lining through a weak spot in the wall is a **bladder diverticulum**. Urine stagnates inside it because it has no muscle to squeeze. Stones and tumours can develop within long standing diverticula. Because the pouch has no muscle, infection keeps recurring inside it, and any diverticulum needs a careful search for a hidden tumour.",
-   "say": "A bladder diverticulum pouches through the wall, stagnates urine, and can develop stones or tumours.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Wall weak spot"
-     },
-     {
-      "id": "n1",
-      "label": "Lining pouches outward"
-     },
-     {
-      "id": "n2",
-      "label": "Urine stagnates inside"
-     },
-     {
-      "id": "n3",
-      "label": "Stones or tumour may form"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Tuberculosis spreading down the urinary tract causes **genitourinary tuberculosis**. It produces frequent urination with sterile pus in the urine. Late disease shrinks the bladder into a small stiff thimble bladder. Sterile pus in urine that fails standard antibiotics is the classic clue, and late bladder capacity can fall below 100 millilitres.",
-   "say": "Genitourinary tuberculosis causes sterile pus in urine and late disease shrinks the bladder severely.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Bacterial cystitis",
-     "points": [
-      "Pus with bacteria grown",
-      "Responds to antibiotics",
-      "Common and acute"
-     ]
+  "v": 1,
+  "module": "sur-bladder",
+  "subject": "surgery",
+  "title": "Radical Cystectomy, Diversion and Bladder Dysfunction",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Removal of the whole bladder with nearby lymph nodes is a **radical cystectomy**. It is the standard curative operation for muscle invasive bladder cancer. In men the prostate is removed too, and in women the uterus and front vaginal wall. Removing the pelvic lymph nodes is both staging and treatment, because node spread is the strongest predictor of recurrence after surgery.",
+      "say": "Radical cystectomy removes the whole bladder with nodes as the standard cure for muscle invasive cancer.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Patient",
+          "Organs removed"
+        ],
+        "rows": [
+          [
+            "Men",
+            "Bladder, prostate, nodes"
+          ],
+          [
+            "Women",
+            "Bladder, uterus, nodes"
+          ],
+          [
+            "Both",
+            "Urinary diversion created"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Genitourinary tuberculosis",
-     "points": [
-      "Pus without bacteria",
-      "Needs anti tubercular drugs",
-      "Chronic, bladder shrinks"
-     ]
+    {
+      "tx": "A segment of ileum used as a simple urine channel to a skin bag is an **ileal conduit**. Urine flows continuously into an external appliance after this diversion. It is technically simpler than internal reservoirs and suits most patients. The ileal segment is usually taken well away from the ileocaecal junction to protect vitamin B12 and bile salt absorption.",
+      "say": "An ileal conduit channels urine through ileum to a skin bag and suits most patients after cystectomy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Ileum segment isolated"
+          },
+          {
+            "id": "n1",
+            "label": "Ureters joined to segment"
+          },
+          {
+            "id": "n2",
+            "label": "End brought to skin"
+          },
+          {
+            "id": "n3",
+            "label": "Bag collects urine"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A segment of ileum used only as a urine channel to a bag on the skin is an **ileal conduit**. Urine runs continuously into the appliance. The operation is simpler than an internal reservoir and suits most patients, and the segment is taken well clear of the ileocaecal junction so vitamin B12 and bile salt absorption are protected. In a neurogenic bladder after spinal injury, urodynamics that show high storage pressure threatening the kidneys are one reason such a diversion is considered.",
+      "say": "An ileal conduit uses a length of ileum, taken away from the ileocaecal junction to spare vitamin B12 and bile salts, as a channel to a bag on the skin. Urine flows all the time, and the operation is simpler than an internal pouch. High pressure storage on urodynamics after spinal injury can be the reason the native bladder is abandoned.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n82-sur-bladder-radical-cystectomy.webp",
+        "alt": "Urodynamics of a neurogenic bladder after spinal injury, with high storage pressure putting the kidneys at risk.",
+        "caption": "The pressure trace stays high during filling, a pattern that threatens the upper tracts after spinal injury. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "A bladder that cannot store or empty properly from nerve damage is a **neurogenic bladder**. Causes include spinal injury, multiple sclerosis and diabetic nerve damage. High storage pressures silently damage the kidneys. Storage pressures above about 40 centimetres of water on urodynamic testing warn that the upper kidneys are at risk.",
+      "say": "A neurogenic bladder from nerve damage stores urine at high pressure and silently damages the kidneys.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n82-sur-bladder-radical-cystectomy.webp",
+        "alt": "Neurogenic bladder with high storage pressures threatening the upper tracts after spinal injury on urodynamics",
+        "caption": "Neurogenic bladder with high storage pressures threatening the upper tracts after spinal injury on urodynamics. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Pressure and flow studies that measure how the bladder stores and empties are **urodynamics**. They distinguish weak muscle from blocked outlet when symptoms overlap. Results guide whether drugs, catheterisation or surgery will help. High pressure with a weak stream suggests blockage, while low pressure with poor flow points instead to a weak bladder muscle.",
+      "say": "Urodynamics measures bladder pressures and flow to separate weak muscle from blocked outlet.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Finding",
+          "Meaning"
+        ],
+        "rows": [
+          [
+            "High pressure, low flow",
+            "Outlet obstruction"
+          ],
+          [
+            "Low pressure, low flow",
+            "Weak bladder muscle"
+          ],
+          [
+            "Overactive contractions",
+            "Storage problem"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Sudden painful inability to pass urine with a swollen bladder is **acute urinary retention**. Prostate enlargement is the commonest cause in older men. A catheter relieves it immediately, and the cause is assessed afterwards. After relief, watch for post obstructive diuresis, a large urine output that can dehydrate a patient whose kidneys were blocked.",
+      "say": "Acute urinary retention causes sudden painful inability to void, and a catheter relieves it immediately.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-exam-surg-distended_bladder.webp",
+        "alt": "Examination of a distended bladder in urinary retention.",
+        "caption": "Distended bladder on examination in retention. [Credit: StewardMD]",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "An outpouching of bladder lining through a weak spot in the wall is a **bladder diverticulum**. Urine stagnates inside it because it has no muscle to squeeze. Stones and tumours can develop within long standing diverticula. Because the pouch has no muscle, infection keeps recurring inside it, and any diverticulum needs a careful search for a hidden tumour.",
+      "say": "A bladder diverticulum pouches through the wall, stagnates urine, and can develop stones or tumours.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Wall weak spot"
+          },
+          {
+            "id": "n1",
+            "label": "Lining pouches outward"
+          },
+          {
+            "id": "n2",
+            "label": "Urine stagnates inside"
+          },
+          {
+            "id": "n3",
+            "label": "Stones or tumour may form"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Tuberculosis spreading down the urinary tract causes **genitourinary tuberculosis**. It produces frequent urination with sterile pus in the urine. Late disease shrinks the bladder into a small stiff thimble bladder. Sterile pus in urine that fails standard antibiotics is the classic clue, and late bladder capacity can fall below 100 millilitres.",
+      "say": "Genitourinary tuberculosis causes sterile pus in urine and late disease shrinks the bladder severely.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bacterial cystitis",
+          "points": [
+            "Pus with bacteria grown",
+            "Responds to antibiotics",
+            "Common and acute"
+          ]
+        },
+        "right": {
+          "title": "Genitourinary tuberculosis",
+          "points": [
+            "Pus without bacteria",
+            "Needs anti tubercular drugs",
+            "Chronic, bladder shrinks"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A new bladder made from bowel joined to the urethra is a **neobladder**. It lets suitable patients pass urine naturally without a bag. Careful patient selection and training in timed voiding are essential. Patients must accept timed night time emptying and mucus in the urine, because bowel segments keep secreting mucus after surgery.",
+      "say": "A bowel neobladder lets selected patients void naturally without a bag after cystectomy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diversion",
+          "Urine route"
+        ],
+        "rows": [
+          [
+            "Ileal conduit",
+            "Skin bag"
+          ],
+          [
+            "Neobladder",
+            "Natural urethra"
+          ],
+          [
+            "Continent pouch",
+            "Catheter through skin"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Failure of bladder emptying after surgery or childbirth is often managed first by **intermittent catheterisation**. Clean self catheterisation protects kidneys better than a permanent tube. It also reduces infection compared with long term indwelling catheters. Catheterising four to six times a day mimics natural filling and emptying and prevents silent overdistension of the bladder.",
+      "say": "Intermittent self catheterisation protects kidneys and reduces infection compared with permanent tubes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "n0",
+            "label": "Bladder fails to empty"
+          },
+          {
+            "id": "n1",
+            "label": "Clean catheterisation taught"
+          },
+          {
+            "id": "n2",
+            "label": "Residual urine controlled"
+          },
+          {
+            "id": "n3",
+            "label": "Kidneys protected"
+          }
+        ],
+        "edges": [
+          [
+            "n0",
+            "n1"
+          ],
+          [
+            "n1",
+            "n2"
+          ],
+          [
+            "n2",
+            "n3"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "A new bladder made from bowel joined to the urethra is a **neobladder**. It lets suitable patients pass urine naturally without a bag. Careful patient selection and training in timed voiding are essential. Patients must accept timed night time emptying and mucus in the urine, because bowel segments keep secreting mucus after surgery.",
-   "say": "A bowel neobladder lets selected patients void naturally without a bag after cystectomy.",
-   "vis": {
-    "kind": "table",
-    "cols": [
-     "Diversion",
-     "Urine route"
-    ],
-    "rows": [
-     [
-      "Ileal conduit",
-      "Skin bag"
-     ],
-     [
-      "Neobladder",
-      "Natural urethra"
-     ],
-     [
-      "Continent pouch",
-      "Catheter through skin"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Failure of bladder emptying after surgery or childbirth is often managed first by **intermittent catheterisation**. Clean self catheterisation protects kidneys better than a permanent tube. It also reduces infection compared with long term indwelling catheters. Catheterising four to six times a day mimics natural filling and emptying and prevents silent overdistension of the bladder.",
-   "say": "Intermittent self catheterisation protects kidneys and reduces infection compared with permanent tubes.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "n0",
-      "label": "Bladder fails to empty"
-     },
-     {
-      "id": "n1",
-      "label": "Clean catheterisation taught"
-     },
-     {
-      "id": "n2",
-      "label": "Residual urine controlled"
-     },
-     {
-      "id": "n3",
-      "label": "Kidneys protected"
-     }
-    ],
-    "edges": [
-     [
-      "n0",
-      "n1"
-     ],
-     [
-      "n1",
-      "n2"
-     ],
-     [
-      "n2",
-      "n3"
-     ]
-    ]
-   }
-  }
- ]
+  ]
 }
