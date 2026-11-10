@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "id": "cm-screening-screening-test",
+ "subject": "community-medicine",
+ "module": "cm-screening",
+ "title": "Screening Tests: Sensitivity, Specificity and the Two-by-Two Table",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Screening searches the apparently healthy",
+   "tx": "A **screening test** is the search for unrecognised disease in apparently healthy people using rapidly applied tests or examinations. Positives are not diagnosed; they are referred for diagnostic work-up, because screening sorts likely from unlikely. Initiative rests with the service, not with a patient complaining of symptoms.",
+   "say": "Screening hunts among people who feel well. A positive result sorts someone as likely, never diagnosed; referral for work-up follows. The service takes the initiative, unlike diagnostic care where a complaint opens the door.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Screening test",
+     "points": ["Done on apparently healthy people", "Applied to groups, one cut-off", "Not a basis for treatment"]
+    },
+    "right": {
+     "title": "Diagnostic test",
+     "points": ["Done on the sick or indicated", "Applied to single patients", "Basis for treatment decisions"]
+    }
+   }
+  },
+  {
+   "title": "Reading the two-by-two table",
+   "tx": "Every evaluation rests on four cells: **true positives** diseased and positive (a), false positives healthy but positive (b), false negatives diseased but negative (c), and true negatives healthy and negative (d). Fix the letters before any formula, because every index in this lesson is a ratio drawn from these four counts.",
+   "say": "Four cells carry every formula. Diseased and positive, healthy but positive, diseased but negative, healthy and negative. Letters a, b, c and d in that reading order. Fix them first; every index that follows is a ratio of these counts.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Test result", "Diseased", "Not diseased"],
+    "rows": [
+     ["Positive", "a: true positive", "b: false positive"],
+     ["Negative", "c: false negative", "d: true negative"]
+    ]
+   }
+  },
+  {
+   "title": "Sensitivity: catching the diseased",
+   "tx": "**Sensitivity** is a over (a plus c) times 100: the share of diseased people the test catches. In the standard worked table only 40 of 140 diseased test positive, giving 28.57 percent, a deliberately weak test. High sensitivity matters when missing disease is dangerous, because few false negatives escape.",
+   "say": "Sensitivity grades the diseased column. True positives over all diseased, times one hundred. The worked example catches only forty of one hundred forty, twenty eight point six percent. Dangerous diseases demand better, because misses become false reassurance.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Quantity", "Worked value"],
+    "rows": [
+     ["Diseased total (a plus c)", "140 people"],
+     ["Caught (a)", "40 people"],
+     ["Sensitivity", "28.57 percent"]
+    ]
+   }
+  },
+  {
+   "title": "Specificity: clearing the healthy",
+   "tx": "**Specificity** is d over (b plus d) times 100: the share of healthy people the test correctly clears. The same table clears 9840 of 9860 healthy people, 99.79 percent, with only 20 false positives. High specificity matters when false alarms are costly, invasive or stigmatising to chase.",
+   "say": "Specificity grades the healthy column. True negatives over all healthy, times one hundred: ninety nine point eight percent in the worked table, with twenty false alarms. Costly or stigmatising follow-up demands this quality most.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Quantity", "Worked value"],
+    "rows": [
+     ["Healthy total (b plus d)", "9860 people"],
+     ["Cleared (d)", "9840 people"],
+     ["Specificity", "99.79 percent"]
+    ]
+   }
+  },
+  {
+   "title": "Cut-offs trade sensitivity against specificity",
+   "tx": "Moving a **cut-off point** trades the pair against each other: at 2-hour glucose of 80 mg per 100 ml, sensitivity is 100 percent but specificity 1.2 percent; at 180, sensitivity falls to 50 percent while specificity reaches 99.8. Overlapping distributions guarantee no level separates diabetics from non-diabetics perfectly, so programmes choose their error deliberately.",
+   "say": "One dial trades the pair. Lower the glucose cut-off and sensitivity climbs while specificity collapses; raise it and the reverse happens. Overlapping curves forbid perfection, so programmes choose which error they prefer to make.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Glucose cut-off mg/100 ml", "Sensitivity", "Specificity"],
+    "rows": [
+     ["80", "100.0 percent", "1.2 percent"],
+     ["120", "88.6 percent", "68.2 percent"],
+     ["180", "50.0 percent", "99.8 percent"]
+    ]
+   }
+  },
+  {
+   "title": "EEG versus CAT: comparing two tests",
+   "tx": "For brain tumours, **EEG screening** reached 90 percent sensitivity (36 of 40) and 85 percent specificity, while computerised tomography reached 97.5 percent sensitivity (39 of 40) and 95 percent specificity. The pair comparison teaches the reading habit: quote both indices together, because a test winning on one axis may lose on the other.",
+   "say": "Compare tests on both axes. The electrical test caught ninety percent of tumours and cleared eighty five percent of healthy scans; tomography reached ninety seven point five and ninety five. Quote both indices together, always.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "EEG for brain tumour",
+     "points": ["Sensitivity 90 percent", "Specificity 85 percent", "Cheaper, weaker on both axes"]
+    },
+    "right": {
+     "title": "CAT scan for brain tumour",
+     "points": ["Sensitivity 97.5 percent", "Specificity 95 percent", "Stronger, costlier on both axes"]
+    }
+   }
+  },
+  {
+   "title": "Repeatability before validity",
+   "tx": "**Repeatability** demands consistent results on repetition, eroded by intra-observer variation (one reader, two readings), inter-observer variation (readers disagreeing, as when one radiologist finds malaria parasites another misses), biological variation in the subject, and technical errors of instruments or reagents. Standardisation, training, duplicate reading and averaging replicates form the standard defences.",
+   "say": "Consistency precedes accuracy. One observer repeating a reading, two observers disagreeing, the subject's own biology fluctuating, and faulty instruments all erode it. Standardised procedure, training, duplicate reading and averaged replicates form the defence.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Variation source", "Example"],
+    "rows": [
+     ["Intra-observer", "Same reader, different blood pressure twice"],
+     ["Inter-observer", "One sees parasites, another calls slide normal"],
+     ["Biological", "Blood pressure varies through the day"],
+     ["Technical", "Defective instrument or faulty reagent"]
+    ]
+   }
+  },
+  {
+   "title": "Tests in series and in parallel",
+   "tx": "Combining tests steers the pair: **tests in series**, where the second test judges only first-test positives (RPR then FTA-ABS for syphilis), raise net specificity; tests in parallel, where either positive counts, raise net sensitivity. Series suits confirmation before labelling; parallel suits not missing dangerous disease at first contact.",
+   "say": "Combinations steer accuracy. A second test judging only positives, as in syphilis confirmation, raises specificity. Either-positive-counts raises sensitivity. Confirm before labelling with the first pattern; miss nothing dangerous with the second.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Sensitive first test for all"},
+     {"id": "b", "label": "Positives go to specific test"},
+     {"id": "c", "label": "Positive twice: labelled diseased"},
+     {"id": "d", "label": "Net specificity rises"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Acceptability, yield and the ideal that never exists",
+   "tx": "**Yield** counts previously unrecognised disease found per screening effort, rising with prevalence, test accuracy and participation, which is why screening over-40s finds more diabetes than screening all adults. Painful or embarrassing tests destroy participation and yield with it. The ideal test, 100 percent sensitive and specific, acceptable, cheap and rapid, does not exist; every programme compromises openly.",
+   "say": "Yield rewards targeting. Prevalence, accuracy and participation multiply into cases found, so screening older adults finds more diabetes. Painful tests kill participation and yield together. No test is perfect on every axis; programmes compromise openly.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Yield rises with", "Programme lever"],
+    "rows": [
+     ["Higher prevalence", "Screen high-risk and older groups"],
+     ["Better sensitivity", "Choose the catching test first"],
+     ["Higher participation", "Keep the test acceptable and painless"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

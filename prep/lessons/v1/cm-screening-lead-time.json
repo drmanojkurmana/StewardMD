@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "id": "cm-screening-lead-time",
+ "subject": "community-medicine",
+ "module": "cm-screening",
+ "title": "Lead Time, Lead Time Bias, Length Bias and Screening Types",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Lead time: the advantage screening claims",
+   "tx": "**Lead time** is the interval between diagnosis by screening and the moment diagnosis would have occurred clinically. It is only worth having if treatment inside that window changes outcome before the final critical point, beyond which damage is irreversible. Programmes therefore target diseases with a long lag between onset and that critical point.",
+   "say": "Screening buys time; the question is whether time helps. The gap between screen detection and clinical detection only matters if treatment inside it beats the final critical point. Long silent lags make suitable targets.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Disease onset, silent"},
+     {"id": "b", "label": "Screen detects disease"},
+     {"id": "c", "label": "Symptoms would have declared"},
+     {"id": "d", "label": "Final critical point"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Lead time bias: survival that only looks longer",
+   "tx": "**Lead time bias** inflates survival statistics without delaying death: screening advances the diagnosis date, so time from diagnosis to death lengthens even when the death date never moves. Comparing survival in screened and unscreened groups therefore flatters screening automatically. Mortality rates in whole randomised populations are the honest endpoint instead.",
+   "say": "Earlier labels fake longer lives. Move diagnosis forward and survival from diagnosis stretches while the death date stands still. Survival comparisons flatter screening automatically; population mortality in randomised groups tells the truth.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "What changes",
+     "points": ["Diagnosis date moves earlier", "Survival after diagnosis lengthens", "Statistics appear improved"]
+    },
+    "right": {
+     "title": "What does not change",
+     "points": ["Date of death unmoved", "Disease course unaltered", "Patient gains no time"]
+    }
+   }
+  },
+  {
+   "title": "Length bias: slow cases get caught",
+   "tx": "**Length bias** arises because screening sweeps preferentially catch slow-growing, long-latent cases, while fast aggressive cases surface clinically between screening rounds. Screen-detected series therefore look prognostically better even with useless treatment. Interval cancers, the aggressive cases appearing between rounds, expose the bias in every organised programme audit.",
+   "say": "Slow disease gets caught; fast disease escapes between rounds. Screen-detected cases therefore look luckier even under useless treatment. Aggressive interval cancers appearing between sweeps expose exactly this bias in programme audits.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Case type", "Where it appears"],
+    "rows": [
+     ["Slow-growing, long latent phase", "Caught at screening sweeps"],
+     ["Fast-growing, short latent phase", "Presents clinically between rounds"],
+     ["Interval cancer", "Proof that sweeps miss aggression"]
+    ]
+   }
+  },
+  {
+   "title": "Overdiagnosis, the third distortion",
+   "tx": "**Overdiagnosis** detects disease that would never have caused symptoms or death, turning healthy people into patients for life. It grows where sensitive tests meet slow biology, as in some prostate and thyroid cancers. Unlike false positives, the pathology is real; unlike useful detection, treatment can only harm, never help, the person found.",
+   "say": "Some detected disease would never have mattered. Real pathology, destined to stay silent, converts healthy people into lifelong patients. Treatment there can only harm. Sensitive tests on slow biology manufacture this third distortion quietly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Useful detection",
+     "points": ["Disease destined to harm", "Early treatment changes outcome", "Person gains healthy years"]
+    },
+    "right": {
+     "title": "Overdiagnosis",
+     "points": ["Disease destined to stay silent", "Treatment cannot improve outcome", "Person gains only patienthood"]
+    }
+   }
+  },
+  {
+   "title": "Mass screening and its critical reviews",
+   "tx": "**Mass screening** offers the test to a whole population or subgroup irrespective of individual risk, as early tuberculosis campaigns did. Critical review found little justification where suitable treatment did not back detection, or yield stayed low. Indiscriminate mass screening is therefore no longer defended as prevention unless therapy changes duration or outcome.",
+   "say": "Offering everyone the test sounds generous and often wastes it. Early mass campaigns faced critical review: without effective treatment behind detection, or with low yield, justification collapsed. Risk-blind mass screening survives only where therapy changes outcomes.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Question", "Mass screening verdict"],
+    "rows": [
+     ["Effective treatment exists?", "Required before offering to all"],
+     ["Yield in low prevalence?", "Usually too low to justify"],
+     ["Follow-up capacity?", "Must absorb every positive found"]
+    ]
+   }
+  },
+  {
+   "title": "High-risk selective screening raises yield",
+   "tx": "**Selective screening** aims at groups defined by epidemiological research: lower social groups for cervical cancer, relatives of diabetics and hypertensives for family-aggregated disease, older adults for diabetes. Yield per test climbs, resources concentrate where prevalence lives, and risk factor screening for cholesterol and blood pressure extends the same logic before disease begins.",
+   "say": "Aim where prevalence lives. Relatives of diabetics, older adults, defined social groups: yield per test climbs and resources concentrate. Screening cholesterol and pressure extends the logic to risk factors before disease itself begins.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Epidemiology defines high-risk group"},
+     {"id": "b", "label": "Test offered selectively"},
+     {"id": "c", "label": "Prevalence in group is high"},
+     {"id": "d", "label": "Yield per test rises"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Multiphasic screening and its disappointing trials",
+   "tx": "**Multiphasic screening** applies two or more tests in combination to many people at one visit, bundling questionnaires, examination, blood and urine chemistry, lung function, audiometry and vision. Randomised studies in the United Kingdom and United States found no mortality or morbidity reduction, while costs rose and most bundled tests were never validated individually.",
+   "say": "Bundling feels efficient and disappointed in trials. Many tests at one visit, yet randomised studies found no fewer deaths or illnesses, higher costs, and components never individually validated. The bundle survives as cautionary tale, not model.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Bundle element", "Trial finding"],
+    "rows": [
+     ["Mortality and morbidity", "No reduction shown"],
+     ["Health service costs", "Increased without benefit"],
+     ["Individual test validity", "Most never validated"]
+    ]
+   }
+  },
+  {
+   "title": "Evaluating a programme honestly",
+   "tx": "**Randomised evaluation** of screening assigns one group the test and another none, then compares disease mortality over years; low frequency diseases with long incubation may need tens of thousands followed 10 to 20 years. Uncontrolled survival comparisons mislead through lead time and length bias. Case-control evaluation and trend comparisons between areas offer cheaper, weaker alternatives.",
+   "say": "Honest evaluation randomises. One group screened, one not, mortality compared over years, sometimes tens of thousands followed for decades. Survival comparisons without randomisation drown in lead time and length bias. Cheaper designs answer more weakly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Strong evaluation",
+     "points": ["Randomised screened versus unscreened", "Disease mortality as endpoint", "Bias designed out"]
+    },
+    "right": {
+     "title": "Weak evaluation",
+     "points": ["Survival of detected cases only", "Lead time bias inflates benefit", "Length bias flatters prognosis"]
+    }
+   }
+  },
+  {
+   "title": "Uses beyond case detection",
+   "tx": "Screening also serves **disease control** for others' benefit (immigrant and donor screening), research into natural history (first sweep gives prevalence, later sweeps incidence), and education of public and professionals. Prescriptive screening for the person's own benefit, like neonatal testing, obliges the service to guarantee treatment for what it finds.",
+   "say": "Detection for the person is only one use. Donor and immigrant screening protects others; repeated sweeps teach natural history; campaigns educate. Whoever initiates detection for someone's benefit owes them treatment for what surfaces.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Use", "Beneficiary", "Example"],
+    "rows": [
+     ["Case detection (prescriptive)", "Person screened", "Neonatal screening"],
+     ["Control (prospective)", "Other people", "Blood donor serology"],
+     ["Research and education", "Knowledge and awareness", "Repeat diabetes sweeps"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}
