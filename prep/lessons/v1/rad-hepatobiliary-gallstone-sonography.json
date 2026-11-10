@@ -15,10 +15,32 @@
    "vis": {"kind": "table", "cols": ["Feature", "Stone", "Polyp", "Sludge"], "rows": [["Echogenic focus", "Bright surface", "Soft tissue echo", "Low level echoes"], ["Shadow", "Clean shadow", "None", "None"], ["Moves on rolling", "Yes, falls dependently", "No, fixed", "Slow layering shift"], ["Wall attachment", "Free in lumen", "Attached to wall", "Layers on wall"]]}
   },
   {
+   "tx": "**Gallstone sonography** rests on three findings used together: a bright echogenic focus in the gallbladder lumen, a clean posterior acoustic shadow, and movement onto the dependent wall when the patient rolls. A polyp stays fixed to the wall and casts no shadow. Sludge layers and shifts slowly, yet it has no discrete bright surface and casts no clean shadow. All three stone features are required before the bright focus is called a calculus rather than one of those lookalikes.",
+   "say": "A gallbladder stone is a bright focus with a clean shadow that rolls onto the dependent wall. A polyp stays fixed and casts no shadow. Sludge moves slowly, lacks a sharp bright surface, and does not throw a clean shadow. One bright echo without the other two findings is not enough.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n208-rad-hepatobiliary-gallstone-sonography.webp",
+    "alt": "A gallbladder ultrasound shows an echogenic stone with a clean posterior shadow that has moved to the dependent wall.",
+    "caption": "A bright focus inside the gallbladder casts a sharp acoustic shadow and sits against the dependent wall. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "title": "Wall echo shadow complex",
    "tx": "**Wall echo shadow** complex packs three parallel lines: the gallbladder wall, the bright echo of stones filling the lumen, and the dark shadow behind them, with no black bile gap visible. It means a gallbladder contracted around multiple stones, a chronic cholecystitis pattern easily missed because no anechoic bile outlines the stones. Recognising the complex stops the loop being reported as bowel gas and ends the search correctly.",
    "say": "Wall echo shadow complex packs three parallel lines: gallbladder wall, the bright echo of stones filling the lumen, and the dark shadow behind them. It means a gallbladder contracted around multiple stones, easily missed because no black bile outlines them. Recognising it stops the loop being reported as bowel gas.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Gallbladder wall line"}, {"id": "b", "label": "Stone echo line"}, {"id": "c", "label": "Shadow behind"}, {"id": "d", "label": "Contracted stone filled sac"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "The **wall echo shadow** complex is three parallel lines: gallbladder wall, the bright echo of stones filling the lumen, and the dark shadow behind them, with no black bile gap. The gallbladder has contracted around multiple stones, a chronic cholecystitis pattern that is easy to miss because anechoic bile never outlines the calculi. Reporting the complex as bowel gas stops the search in the wrong place. Naming the three lines correctly ends the examination on the gallbladder.",
+   "say": "Wall, a continuous bright stone echo, and a posterior shadow, with no bile gap, mean the gallbladder has contracted around many stones. No black bile is left to outline them, so the pattern is easy to call bowel gas. Recognising the three lines identifies chronic calculous disease.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n209-rad-hepatobiliary-gallstone-sonography.webp",
+    "alt": "An ultrasound shows the wall echo shadow complex of a contracted gallbladder packed with stones.",
+    "caption": "Three parallel bands, the gallbladder wall, a bright stone echo, and a dark shadow, appear with no bile space between them. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Stone specimens explain echoes",

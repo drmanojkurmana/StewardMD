@@ -15,6 +15,17 @@
    "vis": {"kind": "table", "cols": ["Tracer", "Mechanism", "Niche"], "rows": [["Thallium 201", "Potassium analogue, redistributes", "Viability assessment"], ["Sestamibi technetium", "Mitochondrial retention", "Gated perfusion workhorse"], ["Tetrofosmin technetium", "Lipophilic cation", "Faster liver clearance"], ["Rubidium 82 PET", "Generator potassium analogue", "Quantitative flow reserve"]]}
   },
   {
+   "tx": "**Myocardial perfusion imaging** injects thallium 201, a potassium analogue taken up by living myocytes in proportion to flow, or technetium sestamibi and tetrofosmin, which supply better photons and allow gating. A stress defect that refills at rest is ischaemia. A defect that remains fixed is scar. Over several hours thallium redistributes into viable but ischaemic muscle, the property that made it the classic viability tracer. An inferior defect limited to the stress polar map fits reversible ischaemia rather than completed infarction.",
+   "say": "Thallium enters living heart muscle in proportion to blood flow, and technetium perfusion agents image the same comparison with clearer photons. A stress defect that fills at rest means ischaemia. A defect on both studies means scar. Thallium also seeps back into viable ischaemic muscle over several hours.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n242-rad-nm-scans-thallium-myocardial-perfusion.webp",
+    "alt": "A myocardial perfusion polar map shows an inferior defect at stress that fills in at rest.",
+    "caption": "The stress map has a dark inferior segment that returns toward normal intensity on the resting map. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "title": "Reversible versus fixed defects",
    "tx": "**Reversible defect** territory is alive but underperfused at stress, the angina producing segment that revascularisation can rescue, while a fixed defect matching a prior infarct territory with wall thinning is scar that no stent revives. Partially reversible defects mix scar with peri infarct ischaemia and often drive the angioplasty decision hardest. Balanced three vessel ischaemia can hide as a globally faint stress study with transient cavity dilatation, the trap that punishes single territory reading.",
    "say": "Reversible defect territory is alive but underperfused at stress, rescuable by revascularisation, while a fixed defect with wall thinning is scar. Partially reversible defects mix both. Balanced three vessel ischaemia can hide as a globally faint study, the trap punishing single territory reading.",
@@ -25,6 +36,17 @@
    "tx": "**V/Q scan** diagnoses pulmonary embolism by mismatch: lung segments perfused defectively by technetium albumin particles yet ventilated normally by inhaled tracer, because clot blocks artery but not airway. Matched defects where ventilation and perfusion fail together point to lung disease instead. A normal perfusion scan excludes embolism as firmly as a negative CT angiogram, and the study still serves pregnancy and contrast failure patients where CT falters.",
    "say": "V/Q scan diagnoses embolism by mismatch: segments perfused defectively yet ventilated normally, because clot blocks artery not airway. Matched defects point to lung disease instead. A normal perfusion scan excludes embolism firmly, serving pregnancy and contrast failure patients where CT falters.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Perfusion defect found"}, {"id": "b", "label": "Ventilation normal there"}, {"id": "c", "label": "Mismatch declared"}, {"id": "d", "label": "Embolism probability high"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "A **V/Q scan** diagnoses pulmonary embolism by mismatch. Technetium albumin particles show a segment that is not perfused, while inhaled tracer shows that the same segment is ventilated normally, because clot blocks artery and not airway. Defects in which ventilation and perfusion fail together point to lung disease rather than embolus. A normal perfusion scan excludes embolism about as firmly as a negative CT pulmonary angiogram. The study still serves pregnancy and patients who cannot receive iodinated contrast, settings where CT is a poor fit.",
+   "say": "Embolism on a V/Q scan is a segmental perfusion defect with normal ventilation, because clot blocks the artery and spares the airway. Matching loss of both images suggests primary lung disease. Normal perfusion excludes embolism with confidence close to a negative CT angiogram, which matters in pregnancy and when contrast is unsafe.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n243-rad-nm-scans-thallium-myocardial-perfusion.webp",
+    "alt": "Paired ventilation and perfusion scans show a segmental perfusion defect with normal ventilation.",
+    "caption": "One lung segment receives no perfusion particles while the matching ventilation image of that segment remains normal. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "MIBG finds catecholamine tissue",

@@ -15,6 +15,17 @@
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "FDG injected, patient rests"}, {"id": "b", "label": "Transporters import FDG"}, {"id": "c", "label": "Hexokinase traps it"}, {"id": "d", "label": "Tumour glows on PET"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
   },
   {
+   "tx": "**FDG PET CT** injects fluorodeoxyglucose, a glucose analogue that glucose transporters carry in and hexokinase phosphorylates. The cell cannot metabolise the product further, so it stays trapped. Tumours overexpress both the transporters and the enzyme, the Warburg effect, and they glow against quieter tissue after a sixty minute uptake rest. Standardised uptake value compares lesion concentration with injected dose divided by body weight. That number is for follow up. It is not, by itself, a cancer meter. Brain and bladder activity on the image are physiological.",
+   "say": "Fluorodeoxyglucose enters on glucose transporters and is trapped once hexokinase adds phosphate. Tumours overexpress both steps and glow after about sixty minutes of uptake. Standardised uptake value relates lesion concentration to dose and body weight and is used to follow disease, not to prove cancer on its own. Brain and bladder uptake are normal.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n238-rad-nm-scans-fdg-pet-ct.webp",
+    "alt": "A whole body FDG PET maximum intensity image shows tumour uptake plus physiological activity in brain and bladder.",
+    "caption": "Dark foci mark tumour consumption of tracer while the brain and the urinary bladder are also hot, as expected for this glucose analogue. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "title": "Physiological uptake traps readers",
    "tx": "**Physiological FDG uptake** lights brain cortex, myocardium variably, urinary tract excretion, bowel, muscle after exertion or insulin, brown fat in cold young necks and healing inflammation, each a false positive factory. Fasting, warmth and quiet rest tame muscle and brown fat, while infection and post treatment inflammation stay honestly hot for weeks. A new glow after radiotherapy therefore waits twelve weeks before anyone calls it recurrence on PET alone.",
    "say": "Physiological FDG uptake lights brain, urinary tract, bowel, exercised muscle, brown fat and healing inflammation, each a false positive factory. Fasting, warmth and rest tame muscle and brown fat. A new glow after radiotherapy waits twelve weeks before anyone calls it recurrence on PET alone.",
@@ -31,6 +42,17 @@
    "tx": "**Superscan** washes the whole skeleton uniformly and intensely hot with faint or absent kidney activity on a technetium MDP bone scan, because diffuse prostate or breast metastases, or metabolic hyperparathyroid bone, drink the entire tracer dose. The trap is its beauty: symmetric perfection reads normal to the hurried eye. Checking for missing kidneys and comparing skull and limb intensity with a normal study exposes the pattern before it is signed off as clean.",
    "say": "Superscan washes the whole skeleton uniformly hot with faint kidneys on a bone scan, because diffuse metastases or metabolic bone drink the entire dose. Its symmetric perfection reads normal to the hurried eye. Checking for missing kidneys exposes the pattern before it is signed off clean.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Whole skeleton uniformly hot"}, {"id": "b", "label": "Kidneys faint or absent"}, {"id": "c", "label": "Too perfect to be normal"}, {"id": "d", "label": "Superscan declared"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "A **superscan** renders the whole skeleton uniformly and intensely hot on a technetium MDP bone scan, with kidney activity faint or absent. Diffuse metastases from prostate or breast cancer, or metabolic bone disease in hyperparathyroidism, take up essentially the entire tracer dose. The trap is the symmetry. A hurried reader can sign perfect, even uptake as normal. Absent kidneys, and skull or limb intensity far above a normal study, expose the pattern before that clean report is issued.",
+   "say": "On a superscan the skeleton is evenly and intensely hot and the kidneys nearly vanish, because widespread metastases or hyperparathyroid bone drink the whole MDP dose. The symmetry can look falsely normal. Missing renal activity is the clue that the study is not healthy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n239-rad-nm-scans-fdg-pet-ct.webp",
+    "alt": "A technetium MDP bone scan shows a uniformly hot skeleton with almost no kidney activity.",
+    "caption": "Every part of the skeleton is intensely and evenly active, and the kidneys that should be seen are missing. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Thyroid scintigraphy sorts nodules",

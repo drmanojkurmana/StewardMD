@@ -15,10 +15,32 @@
    "vis": {"kind": "compare", "left": {"title": "Ground glass part", "points": ["Hazy density increase", "Vessels still visible", "Partly filled alveoli", "Forms the paving stone"]}, "right": {"title": "Septal part", "points": ["Thickened interlobular septa", "Smooth white network", "Draws the stone borders", "Fluid or cells in septa"]}}
   },
   {
+   "tx": "**Crazy paving** is ground glass opacity laid over interlobular septal thickening, so high resolution CT looks like uneven paving stones. The hazy ground glass fills each stone and the thickened septa draw its edges. Pulmonary alveolar proteinosis is the answer expected in examinations. In ordinary practice, pulmonary oedema, alveolar haemorrhage, and infection make the same pattern much more often, so the history and the rest of the scan have to choose the cause.",
+   "say": "Ground glass haze plus thickened interlobular septa makes the irregular paving look of crazy paving on high resolution CT. Protein filling the alveoli is the classic examination cause. Oedema, bleeding into alveoli, and infection produce the identical lines and haze far more often, so the clinical story picks among them.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n200-rad-chest-crazy-paving.webp",
+    "alt": "An HRCT slice of crazy paving, with ground glass lobules outlined by thickened interlobular septa in alveolar proteinosis.",
+    "caption": "Ground glass fills polygonal lobules while bright septal lines draw the borders, the paving pattern of alveolar proteinosis. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "title": "Alveolar proteinosis fills alveoli with surfactant",
    "tx": "**Pulmonary alveolar proteinosis** accumulates surfactant like material inside alveoli because macrophages fail to clear it, most often from antibodies against granulocyte macrophage colony stimulating factor. It favours central and symmetric lung zones while sparing apices and costophrenic angles. Patients pick up Nocardia infections, including brain abscess, and about thirty percent progress toward fibrosis. Whole lung lavage washes out the material and remains the defining treatment.",
    "say": "Pulmonary alveolar proteinosis accumulates surfactant like material inside alveoli because macrophages fail to clear it, most often from antibodies against a macrophage growth factor. It favours central symmetric zones while sparing apices and costophrenic angles. Patients pick up Nocardia infections, and whole lung lavage remains the defining treatment.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Macrophage clearance fails"}, {"id": "b", "label": "Surfactant fills alveoli"}, {"id": "c", "label": "Crazy paving on CT"}, {"id": "d", "label": "Whole lung lavage"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "**Pulmonary alveolar proteinosis** fills alveoli with surfactant like material because macrophages fail to clear it, most often when antibodies block granulocyte macrophage colony stimulating factor. The distribution favours central, symmetric lung and spares the apices and the costophrenic angles. Patients are liable to Nocardia infection, including brain abscess, and about thirty percent move toward fibrosis. Whole lung lavage washes the material out and remains the defining treatment.",
+   "say": "Macrophages fail to clear surfactant like material in pulmonary alveolar proteinosis, usually because antibodies block a macrophage growth factor. The crazy paving is central and symmetric and spares the apices and costophrenic angles. Nocardia infection is a recognised complication. Whole lung lavage is the defining treatment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n201-rad-chest-crazy-paving.webp",
+    "alt": "Axial chest CT shows central symmetric crazy paving that spares the lung apices.",
+    "caption": "Ground glass and septal lines form central crazy paving in both lungs while the apices stay relatively clear. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "The CRAZY causes list",
