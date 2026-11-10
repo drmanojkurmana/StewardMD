@@ -1,236 +1,236 @@
 {
-  "v": 1,
-  "module": "pat-cns-non-neoplastic",
-  "subject": "pathology",
-  "title": "Cerebral Oedema, Herniation, Neural Tube Defects, Berry Aneurysm, and Subarachnoid Haemorrhage",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "Excessive accumulation of fluid within brain parenchyma increases intracranial pressure because the rigid bony cranium has fixed volume. Vasogenic oedema results from disruption of the blood-brain barrier, allowing fluid to leak into intercellular spaces around brain tumors or inflammation. Cytotoxic oedema involves intracellular fluid accumulation within neurons and glia due to failed sodium-potassium pumps during ischaemia. That swelling is **cerebral oedema**. Macroscopically, gyri become flattened, sulci are effaced, and ventricular cavities are compressed.",
-      "say": "Cerebral oedema expands brain parenchyma through vasogenic blood-brain barrier leakage or cytotoxic intracellular energy failure.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Type",
-          "Primary cause",
-          "Location of excess fluid"
-        ],
-        "rows": [
-          [
-            "Vasogenic oedema",
-            "Blood-brain barrier breakdown",
-            "Extracellular white matter"
-          ],
-          [
-            "Cytotoxic oedema",
-            "Cellular membrane pump failure",
-            "Intracellular grey and white matter"
-          ],
-          [
-            "Interstitial oedema",
-            "Transependymal CSF transudation",
-            "Periventricular white matter"
-          ],
-          [
-            "Osmotic oedema",
-            "Hyponatraemic plasma dilution",
-            "Intracellular compartment"
-          ]
-        ]
-      }
+ "v": 1,
+ "module": "pat-cns-non-neoplastic",
+ "subject": "pathology",
+ "title": "Cerebral Oedema, Herniation, Neural Tube Defects, Berry Aneurysm, and Subarachnoid Haemorrhage",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Excessive accumulation of fluid within brain parenchyma increases intracranial pressure because the rigid bony cranium has fixed volume. Vasogenic oedema results from disruption of the blood-brain barrier, allowing fluid to leak into intercellular spaces around brain tumors or inflammation. Cytotoxic oedema involves intracellular fluid accumulation within neurons and glia due to failed sodium-potassium pumps during ischaemia. That swelling is **cerebral oedema**. Macroscopically, gyri become flattened, sulci are effaced, and ventricular cavities are compressed.",
+   "say": "Cerebral oedema expands brain parenchyma through vasogenic blood-brain barrier leakage or cytotoxic intracellular energy failure.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Type",
+     "Primary cause",
+     "Location of excess fluid"
+    ],
+    "rows": [
+     [
+      "Vasogenic oedema",
+      "Blood-brain barrier breakdown",
+      "Extracellular white matter"
+     ],
+     [
+      "Cytotoxic oedema",
+      "Cellular membrane pump failure",
+      "Intracellular grey and white matter"
+     ],
+     [
+      "Interstitial oedema",
+      "Transependymal CSF transudation",
+      "Periventricular white matter"
+     ],
+     [
+      "Osmotic oedema",
+      "Hyponatraemic plasma dilution",
+      "Intracellular compartment"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Expanding intracranial mass lesions displace brain tissue from one compartment into another across rigid dural partitions. Subfalcine herniation forces the cingulate gyrus beneath the falx cerebri, compressing the anterior cerebral artery. Transtentorial uncal herniation pushes the medial temporal lobe over the tentorial notch, compressing cranial nerve III to produce an ipsilateral fixed dilated pupil, while tonsillar herniation forces cerebellar tonsils into the foramen magnum. That displacement is **herniation**. Tonsillar impaction compresses the medulla, precipitating fatal cardiorespiratory arrest.",
+   "say": "Herniation syndromes displace brain tissue across dural edges, leading to cranial nerve compression and fatal medullary impaction.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-ix-surg-neuroimaging_icsol.webp",
+    "alt": "Cerebral herniation on neuroimaging",
+    "caption": "Axial CT, MRI, and coronal diagram illustrating mass effect, midline shift, subfalcine herniation, and transtentorial uncal displacement."
+   }
+  },
+  {
+   "tx": "Abnormal expansion of the ventricular system from excessive cerebrospinal fluid accumulation elevates intracranial pressure. Non-communicating obstructive forms result from structural blockage of the ventricular pathways, such as aqueductal stenosis or fourth ventricular tumours. Communicating forms involve impaired CSF resorption at the arachnoid villi following meningitis or subarachnoid hemorrhage. The condition is **hydrocephalus**. In infants before suture closure, head circumference expands markedly; in adults, normal pressure hydrocephalus causes the classic triad of gait ataxia, urinary incontinence, and dementia.",
+   "say": "Hydrocephalus expands the ventricles due to outflow obstruction or impaired arachnoid granulation resorption of cerebrospinal fluid.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "obstruction",
+      "label": "Outflow obstruction"
+     },
+     {
+      "id": "expansion",
+      "label": "Ventricular expansion"
+     },
+     {
+      "id": "pressure",
+      "label": "Raised intracranial pressure"
+     },
+     {
+      "id": "atrophy",
+      "label": "Periventricular white matter loss"
+     }
+    ],
+    "edges": [
+     [
+      "obstruction",
+      "expansion"
+     ],
+     [
+      "expansion",
+      "pressure"
+     ],
+     [
+      "pressure",
+      "atrophy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure of embryonic closure of the neural tube by the twenty-eighth day of development produces severe axial dysraphic malformations. Complete failure of anterior neuropore closure causes anencephaly, characterized by absence of the calvarium and exposed disorganized brain tissue. Failure of posterior closure causes spina bifida, varying from spina bifida occulta to open myelomeningocele. Those congenital anomalies are **neural tube defects**. Antenatal screening detects marked elevation of alpha-fetoprotein and acetylcholinesterase in amniotic fluid, while maternal periconceptional folic acid supplementation prevents over seventy percent of cases.",
+   "say": "Neural tube defects result from failed neural groove closure by day twenty-eight and are prevented by periconceptional folic acid.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Anomaly",
+     "Anatomical defect",
+     "Covering tissues"
+    ],
+    "rows": [
+     [
+      "Anencephaly",
+      "Absent calvarium and forebrain",
+      "Exposed angiomatous stroma"
+     ],
+     [
+      "Spina bifida occulta",
+      "Defective vertebral neural arch",
+      "Intact skin with hair tuft"
+     ],
+     [
+      "Meningocele",
+      "Dural sac herniation",
+      "Skin and meninges present"
+     ],
+     [
+      "Myelomeningocele",
+      "Spinal cord and nerve roots in sac",
+      "Thin membrane or open defect"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Congenital posterior fossa malformations involve caudal displacement of hindbrain elements. Type I malformation consists of low-lying, peg-like cerebellar tonsils protruding more than five millimeters beneath the foramen magnum into the upper cervical canal, presenting in adults with headache and syringomyelia. In contrast, type II malformation exhibits caudal herniation of the cerebellar vermis, medulla, and fourth ventricle with aqueductal stenosis and lumbar myelomeningocele. That hindbrain anomaly is **Arnold-Chiari malformation**.",
+   "say": "Arnold-Chiari malformations involve cerebellar tonsillar herniation through the foramen magnum, with type II closely linked to myelomeningocele.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Chiari type I",
+     "points": [
+      "Cerebellar tonsils >5mm low",
+      "Presents in young adults",
+      "Frequent syringomyelia",
+      "No lumbar myelomeningocele"
+     ]
     },
-    {
-      "tx": "Expanding intracranial mass lesions displace brain tissue from one compartment into another across rigid dural partitions. Subfalcine herniation forces the cingulate gyrus beneath the falx cerebri, compressing the anterior cerebral artery. Transtentorial uncal herniation pushes the medial temporal lobe over the tentorial notch, compressing cranial nerve III to produce an ipsilateral fixed dilated pupil, while tonsillar herniation forces cerebellar tonsils into the foramen magnum. That displacement is **herniation**. Tonsillar impaction compresses the medulla, precipitating fatal cardiorespiratory arrest.",
-      "say": "Herniation syndromes displace brain tissue across dural edges, leading to cranial nerve compression and fatal medullary impaction.",
-      "vis": {
-        "kind": "image",
-        "src": "clinix/media/skills/skill-ix-surg-neuroimaging_icsol.webp",
-        "alt": "Cerebral herniation on neuroimaging",
-        "caption": "Axial CT, MRI, and coronal diagram illustrating mass effect, midline shift, subfalcine herniation, and transtentorial uncal displacement."
-      }
-    },
-    {
-      "tx": "Abnormal expansion of the ventricular system from excessive cerebrospinal fluid accumulation elevates intracranial pressure. Non-communicating obstructive forms result from structural blockage of the ventricular pathways, such as aqueductal stenosis or fourth ventricular tumours. Communicating forms involve impaired CSF resorption at the arachnoid villi following meningitis or subarachnoid hemorrhage. The condition is **hydrocephalus**. In infants before suture closure, head circumference expands markedly; in adults, normal pressure hydrocephalus causes the classic triad of gait ataxia, urinary incontinence, and dementia.",
-      "say": "Hydrocephalus expands the ventricles due to outflow obstruction or impaired arachnoid granulation resorption of cerebrospinal fluid.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "obstruction",
-            "label": "Outflow obstruction"
-          },
-          {
-            "id": "expansion",
-            "label": "Ventricular expansion"
-          },
-          {
-            "id": "pressure",
-            "label": "Raised intracranial pressure"
-          },
-          {
-            "id": "atrophy",
-            "label": "Periventricular white matter loss"
-          }
-        ],
-        "edges": [
-          [
-            "obstruction",
-            "expansion"
-          ],
-          [
-            "expansion",
-            "pressure"
-          ],
-          [
-            "pressure",
-            "atrophy"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Failure of embryonic closure of the neural tube by the twenty-eighth day of development produces severe axial dysraphic malformations. Complete failure of anterior neuropore closure causes anencephaly, characterized by absence of the calvarium and exposed disorganized brain tissue. Failure of posterior closure causes spina bifida, varying from spina bifida occulta to open myelomeningocele. Those congenital anomalies are **neural tube defects**. Antenatal screening detects marked elevation of alpha-fetoprotein and acetylcholinesterase in amniotic fluid, while maternal periconceptional folic acid supplementation prevents over seventy percent of cases.",
-      "say": "Neural tube defects result from failed neural groove closure by day twenty-eight and are prevented by periconceptional folic acid.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Anomaly",
-          "Anatomical defect",
-          "Covering tissues"
-        ],
-        "rows": [
-          [
-            "Anencephaly",
-            "Absent calvarium and forebrain",
-            "Exposed angiomatous stroma"
-          ],
-          [
-            "Spina bifida occulta",
-            "Defective vertebral neural arch",
-            "Intact skin with hair tuft"
-          ],
-          [
-            "Meningocele",
-            "Dural sac herniation",
-            "Skin and meninges present"
-          ],
-          [
-            "Myelomeningocele",
-            "Spinal cord and nerve roots in sac",
-            "Thin membrane or open defect"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Congenital posterior fossa malformations involve caudal displacement of hindbrain elements. Type I malformation consists of low-lying, peg-like cerebellar tonsils protruding more than five millimeters beneath the foramen magnum into the upper cervical canal, presenting in adults with headache and syringomyelia. In contrast, type II malformation exhibits caudal herniation of the cerebellar vermis, medulla, and fourth ventricle with aqueductal stenosis and lumbar myelomeningocele. That hindbrain anomaly is **Arnold-Chiari malformation**.",
-      "say": "Arnold-Chiari malformations involve cerebellar tonsillar herniation through the foramen magnum, with type II closely linked to myelomeningocele.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Chiari type I",
-          "points": [
-            "Cerebellar tonsils >5mm low",
-            "Presents in young adults",
-            "Frequent syringomyelia",
-            "No lumbar myelomeningocele"
-          ]
-        },
-        "right": {
-          "title": "Chiari type II",
-          "points": [
-            "Vermis and medulla displaced",
-            "Presents in neonates",
-            "Obstructive hydrocephalus",
-            "Associated with myelomeningocele"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Saccular outpouchings arising at arterial branching points in the circle of Willis develop from developmental defects in the muscular media and internal elastic lamina. The most frequent site is the junction of the anterior communicating artery with the anterior cerebral artery. That saccular lesion is a **berry aneurysm**. Factors accelerating wall weakening include systemic hypertension and cigarette smoking. Berry aneurysms occur with high frequency in patients with autosomal dominant polycystic kidney disease, fibromuscular dysplasia, and coarctation of the aorta.",
-      "say": "Berry aneurysms form at circle of Willis arterial branching points from focal media and elastic lamina absence, often linked to polycystic kidneys.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/adpkd-fig1.webp",
-        "alt": "ADPKD and intracranial berry aneurysm",
-        "caption": "Diagram and anatomical view illustrating bilateral polycystic kidneys with extrarenal intracranial saccular berry aneurysms."
-      }
-    },
-    {
-      "tx": "Rupture of an intracranial berry aneurysm releases arterial blood directly into the subarachnoid space under systemic pressure. Patients experience an instantaneous, excruciating thunderclap headache classically described as the worst headache of life, followed by vomiting, photophobia, and neck stiffness. That vascular catastrophe is a **subarachnoid haemorrhage**. Lumbar puncture yields grossly xanthochromic cerebrospinal fluid that does not clear across successive collection tubes. A major delayed complication between days four and fourteen is cerebral arterial vasospasm, which causes secondary ischaemic infarction.",
-      "say": "Subarachnoid haemorrhage presents with sudden thunderclap headache from ruptured aneurysmal bleeding and risks delayed cerebral vasospasm.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "rupture",
-            "label": "Aneurysm rupture"
-          },
-          {
-            "id": "haemorrhage",
-            "label": "Subarachnoid bleed"
-          },
-          {
-            "id": "vasospasm",
-            "label": "Delayed arterial vasospasm"
-          },
-          {
-            "id": "infarct",
-            "label": "Secondary cerebral infarction"
-          }
-        ],
-        "edges": [
-          [
-            "rupture",
-            "haemorrhage"
-          ],
-          [
-            "haemorrhage",
-            "vasospasm"
-          ],
-          [
-            "vasospasm",
-            "infarct"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Severe acute global cerebral ischaemia produces morphological changes in neurons within twelve to twenty-four hours after the insult. Vulnerable cell populations include CA1 pyramidal neurons of the hippocampus, cerebellar Purkinje cells, and cerebral cortical pyramidal neurons. Microscopically, the cell body shrinks, the nucleus becomes intensely pyknotic with loss of the nucleolus, and cytoplasmic Nissl substance dissolves, leaving deeply eosinophilic, brilliant pink cytoplasm. Those dying cells are **red neurons**. Neutrophils subsequently infiltrate the necrotic tissue as liquefactive necrosis begins.",
-      "say": "Red neurons represent the earliest microscopic evidence of irreversible neuronal ischaemic death, showing pyknosis and eosinophilia.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Time post-infarct",
-          "Microscopic morphology",
-          "Key cellular finding"
-        ],
-        "rows": [
-          [
-            "12 to 24 hours",
-            "Red neurons with pyknotic nuclei",
-            "Intense cytoplasmic eosinophilia"
-          ],
-          [
-            "24 to 72 hours",
-            "Neutrophil infiltration",
-            "Tissue pallor and softening"
-          ],
-          [
-            "3 to 7 days",
-            "Macrophage phagocytosis",
-            "Foamy histiocytes clearing debris"
-          ],
-          [
-            "Weeks to months",
-            "Astrocytic gliosis",
-            "Cavitation with glial scar rim"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Chiari type II",
+     "points": [
+      "Vermis and medulla displaced",
+      "Presents in neonates",
+      "Obstructive hydrocephalus",
+      "Associated with myelomeningocele"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "Saccular outpouchings arising at arterial branching points in the circle of Willis develop from developmental defects in the muscular media and internal elastic lamina. The most frequent site is the junction of the anterior communicating artery with the anterior cerebral artery. That saccular lesion is a **berry aneurysm**. Factors accelerating wall weakening include systemic hypertension and cigarette smoking. Berry aneurysms occur with high frequency in patients with autosomal dominant polycystic kidney disease, fibromuscular dysplasia, and coarctation of the aorta.",
+   "say": "Berry aneurysms form at circle of Willis arterial branching points from focal media and elastic lamina absence, often linked to polycystic kidneys.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/sah-fig1.webp",
+    "alt": "ADPKD and intracranial berry aneurysm",
+    "caption": "Ruptured saccular berry aneurysm of the circle of Willis with subarachnoid blood, cerebral vasospasm and unenhanced axial head CT. Illustration: StewardMD original."
+   }
+  },
+  {
+   "tx": "Rupture of an intracranial berry aneurysm releases arterial blood directly into the subarachnoid space under systemic pressure. Patients experience an instantaneous, excruciating thunderclap headache classically described as the worst headache of life, followed by vomiting, photophobia, and neck stiffness. That vascular catastrophe is a **subarachnoid haemorrhage**. Lumbar puncture yields grossly xanthochromic cerebrospinal fluid that does not clear across successive collection tubes. A major delayed complication between days four and fourteen is cerebral arterial vasospasm, which causes secondary ischaemic infarction.",
+   "say": "Subarachnoid haemorrhage presents with sudden thunderclap headache from ruptured aneurysmal bleeding and risks delayed cerebral vasospasm.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "rupture",
+      "label": "Aneurysm rupture"
+     },
+     {
+      "id": "haemorrhage",
+      "label": "Subarachnoid bleed"
+     },
+     {
+      "id": "vasospasm",
+      "label": "Delayed arterial vasospasm"
+     },
+     {
+      "id": "infarct",
+      "label": "Secondary cerebral infarction"
+     }
+    ],
+    "edges": [
+     [
+      "rupture",
+      "haemorrhage"
+     ],
+     [
+      "haemorrhage",
+      "vasospasm"
+     ],
+     [
+      "vasospasm",
+      "infarct"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Severe acute global cerebral ischaemia produces morphological changes in neurons within twelve to twenty-four hours after the insult. Vulnerable cell populations include CA1 pyramidal neurons of the hippocampus, cerebellar Purkinje cells, and cerebral cortical pyramidal neurons. Microscopically, the cell body shrinks, the nucleus becomes intensely pyknotic with loss of the nucleolus, and cytoplasmic Nissl substance dissolves, leaving deeply eosinophilic, brilliant pink cytoplasm. Those dying cells are **red neurons**. Neutrophils subsequently infiltrate the necrotic tissue as liquefactive necrosis begins.",
+   "say": "Red neurons represent the earliest microscopic evidence of irreversible neuronal ischaemic death, showing pyknosis and eosinophilia.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Time post-infarct",
+     "Microscopic morphology",
+     "Key cellular finding"
+    ],
+    "rows": [
+     [
+      "12 to 24 hours",
+      "Red neurons with pyknotic nuclei",
+      "Intense cytoplasmic eosinophilia"
+     ],
+     [
+      "24 to 72 hours",
+      "Neutrophil infiltration",
+      "Tissue pallor and softening"
+     ],
+     [
+      "3 to 7 days",
+      "Macrophage phagocytosis",
+      "Foamy histiocytes clearing debris"
+     ],
+     [
+      "Weeks to months",
+      "Astrocytic gliosis",
+      "Cavitation with glial scar rim"
+     ]
+    ]
+   }
+  }
+ ]
 }
