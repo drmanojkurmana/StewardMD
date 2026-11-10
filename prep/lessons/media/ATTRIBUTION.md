@@ -6901,3 +6901,227 @@ turns = 8 - 1 = 7; HepB window inside HBsAg clearance and anti-HBs rise; HIV 5 n
 | need-m922-obg-cervical-cancer-bethesda-system.webp (R2) | Programme principle. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m925-obg-cervical-cancer-vili.webp (R2) | VILI for cervical s). | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
 | need-m927-obg-contraception-ulipristal.webp (R2) | Ulipristal acetate. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1000-phy-calcium-osteoblast.webp (R2) | Neuromuscular hyperexcitability and tetany. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1003-phy-cardiac-electro-plateau.webp (R2) | QT interval. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1004-phy-cerebellum-basal-ganglia-dopamine.webp (R2) | Resting tremor. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1005-phy-concentration-countercurrent-multiplier.webp (R2) | Vaptan aquaretic agents. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1006-phy-female-proliferative-phase.webp (R2) | Aromatase activity. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1008-phy-gas-transport-haldane-effect.webp (R2) | Worsening hypercapnia. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1010-phy-gfr-tubuloglomerular-feedback.webp (R2) | Ultrafiltration coefficient. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1011-phy-haemodynamics-compliance.webp (R2) | Capacitance vessels. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1013-phy-higher-functions-eeg-waves.webp (R2) | Electroencephalography waves. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1014-phy-hormone-pituitary-hormone-receptors.webp (R2) | Janus kinase 2 proteins. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1017-phy-mechanics-fev1.webp (R2) | FEV1/FVC ratio. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1019-phy-rbc-haemoglobin-mcv.webp (R2) | Fetal haemoglobin. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1020-phy-regulation-carotid-body.webp (R2) | Shallow water blackout. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1021-phy-secretions-hormones-gip.webp (R2) | Dipeptidyl peptidase-4. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1024-phy-tubular-free-water-clearance.webp (R2) | Uninhibited neurogenic bladder. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1026-phy-vision-photoreceptors.webp (R2) | Rods. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1028-psy-classification-mse-icd-11.webp (R2) | General appearance and psychomotor behavior. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1030-psy-psychology-theories-piaget-cognitive-stages.webp (R2) | Jean Piaget cognitive developmental theory. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1036-psy-schizophrenia-bleuler-four-as.webp (R2) | Intravenous lorazepam. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1038-sur-arterial-femoropopliteal-bypass.webp (R2) | Femoropopliteal bypass. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m1051-sur-mis-laparoscopy.webp (R2) | Pneumoperitoneum. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m124-oph-glaucoma-gonioscopy.webp (R2) | Gonioscopy view showing angle structures labelled in order. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m125-oph-glaucoma-trabeculectomy.webp (R2) | Slit lamp photo of diffuse functioning bleb versus thin cystic bleb. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m126-oph-glaucoma-molteno-implant.webp (R2) | Diagram of tube plate drainage device in eye. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m147-ort-elbow-injuries-supracondylar-fracture-humerus.webp (R2) | Clinical or imaging photo for Orthopaedics batch 2 core topic. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m150-ort-malignant-bone-tumours-t.webp (R2) | Specialist labelled diagram for Orthopaedics batch 4 core topic. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m153-ort-arthritis-ulnar-deviation.webp (R2) | Clinical or imaging photo for Orthopaedics batch 5 core topic. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m155-der-structure-lesions-epidermis-layers.webp (R2) | Clinical or imaging photo for Dermatology batch 1 core topic. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m176-obg-contraception-pearl-index.webp (R2) | Pearl index failure rate comparison chart across reversible contraceptives. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m179-obg-contraception-ulipristal.webp (R2) | Follicular rupture inhibition timing comparison between ulipristal and levonorgestrel across LH surge. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m183-oph-investigations-lasers-slit-lamp-biomicroscopy.webp (R2) | Diagram of slit lamp illumination techniques showing optical section, diffuse illumination, specular reflection, and retroillumination. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m205-oph-lacrimal-acute-dacryocystitis.webp (R2) | Clinical photograph of acute dacryocystitis showing erythema, tense painful swelling below the medial canthal tendon, and lacrimal abscess. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m207-oph-orbit-carotid-cavernous-fistula.webp (R2) | Diagram of cavernous sinus anatomy and Barrow classification of direct and indirect carotid-cavernous fistulas. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m210-oph-orbit-dermoid-cyst.webp (R2) | Clinical photograph showing smooth painless superotemporal orbital mass at frontozygomatic suture in a child. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m240-ped-preterm-lbw-intraventricular-haemorrhage.webp (R2) | Cranial ultrasound parasagittal view demonstrating periventricular leukomalacia cyst formation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m268-oph-glaucoma-cup-disc-ratio.webp (R2) | Diagram of optic disc neuroretinal rim sectors illustrating normal ISNT rule thickness versus glaucomatous inferior rim notching. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m269-oph-glaucoma-gonioscopy.webp (R2) | Diagram of Goldmann 3-mirror and Sussman 4-mirror gonioscopy lenses with total internal reflection ray optics. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m270-oph-glaucoma-gonioscopy.webp (R2) | Gonioscopic Shaffer angle grading diagram comparing Grade 4 (wide open, 45 deg) to Grade 0 (closed). | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m271-oph-glaucoma-laser-trabeculoplasty.webp (R2) | Gonioscopic view and diagram of selective laser trabeculoplasty (SLT) spot placement along pigmented trabecular meshwork. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m272-oph-glaucoma-molteno-implant.webp (R2) | Diagram of glaucoma drainage device (Ahmed or Baerveldt tube) showing anterior chamber tube entry and equatorial plate with fibrous bleb capsule. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m273-oph-glaucoma-molteno-implant.webp (R2) | Clinical IOP timeline graph following tube shunt implantation showing early hypotony, hypertensive phase at 4 to 6 weeks, and plateau pressure. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m274-oph-glaucoma-open-angle-glaucoma.webp (R2) | Automated visual field (Humphrey 24-2) pattern deviation plot showing classic superior Bjerrum arcuate scotoma and Roenne nasal step. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m275-oph-glaucoma-optic-disc.webp (R2) | Histological cross-section and diagram of the lamina cribrosa showing pores and axon bundle compression under elevated intraocular pressure. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m276-oph-glaucoma-pilocarpine.webp (R2) | Diagram of ciliary body non-pigmented epithelium showing carbonic anhydrase II inhibition reducing bicarbonate secretion and aqueous production. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m277-oph-glaucoma-prostaglandin-analogues.webp (R2) | Diagram of ciliary process beta-2 adrenergic receptors and aqueous production suppression by topical timolol. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m280-oph-glaucoma-trabeculectomy.webp (R2) | Slit lamp photograph showing positive Seidel test with fluorescent aqueous leakage from a thin cystic trabeculectomy bleb. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m323-psy-schizophrenia-expressed-emotion.webp (R2) | Axial brain CT or MRI showing bilateral lateral ventricular enlargement and prominence of cortical sulci in schizophrenia. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m325-psy-other-psychoses-persistent-delusional-disorder.webp (R2) | Diagram of delusional misidentification syndromes contrasting Capgras double replacement and Fregoli disguise identification. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m327-psy-depression-major-depressive-disorder.webp (R2) | Comparative diagram of depressive subtypes contrasting melancholic features with atypical depression. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m331-psy-bipolar-mania.webp (R2) | Comparative diagram illustrating mood trajectories across unipolar depression, bipolar I, bipolar II, and cyclothymia. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m349-psy-anxiety-propranolol-performance-anxiety.webp (R2) | Stepwise anxiety hierarchy ladder used in systematic desensitisation and exposure therapy. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m36-sur-neck-metastatic-neck-node.webp (R2) | Clinical photograph of Ludwig angina showing massive submandibular woody swelling and elevation of tongue. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m383-ped-inheritance-syndromes-trinucleotide-repeat.webp (R2) | Southern blot and capillary electrophoresis PCR analysis of FMR1 gene showing CGG repeat expansion beyond 200 repeats in Fragile X syndrome. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m390-ort-septic-arthritis-joint-tb-septic-arthritis.webp (R2) | Hip ultrasound scan demonstrating anechoic capsular distension and fluid collection measuring > 5 mm indicating septic hip effusion. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m417-phm-antimuscarinics-atropine.webp (R2) | Inhaled tiotropium dry powder inhaler device showing capsule insertion chamber and mouth inhalation port. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m437-phm-antimuscarinics-atropine.webp (R2) | Inhaled tiotropium dry powder inhaler device showing capsule insertion chamber and mouth inhalation port. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m473-ans-machine-boyle-machine.webp (R2) | Anaesthesia workstation schematic illustrating high, intermediate, and low pressure zones. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m489-ans-iv-agents-dissociative-anaesthesia.webp (R2) | Clinical illustration of dissociative anaesthesia state showing open nystagmic gaze and preserved airway tone. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m495-ans-nmb-dibucaine-number.webp (R2) | Dibucaine enzyme inhibition percentage curves distinguishing typical (80), heterozygous (50-60), and atypical (20) genotypes. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m499-ped-gi-disorders-red-currant-jelly.webp (R2) | Technetium-99m pertechnetate scintigraphy scan demonstrating focal uptake in Meckel diverticulum in right lower quadrant. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m521-ans-specialty-neuroanaesthesia.webp (R2) | Cerebral autoregulation curve plotting cerebral blood flow across mean arterial pressures 50-150 mmHg. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m527-ped-thyroid-adrenal-congenital-hypothyroidism.webp (R2) | Photograph of neonatal dried blood spot collection on Guthrie filter paper card for TSH screening. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m528-ped-thyroid-adrenal-congenital-adrenal-hyperplasia.webp (R2) | Diagram of adrenal steroidogenesis pathway highlighting 21-hydroxylase enzymatic block and androgen shunting. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m530-ped-diabetes-puberty-type-1-diabetes.webp (R2) | Clinical photograph of large unilateral jagged café-au-lait pigmentation (coast of Maine) in McCune-Albright syndrome. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m532-ped-immunology-rheumatology-primary-immunodeficiency.webp (R2) | Microscopic photomicrograph of nitroblue tetrazolium test showing dark blue formazan deposits in normal versus clear in CGD. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m533-ped-immunology-rheumatology-digeorge.webp (R2) | Light microscopy renal biopsy of Class IV diffuse proliferative lupus nephritis with wire-loop capillary lesions. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m534-phm-gout-arthritis-etanercept.webp (R2) | Flow cytometric diagram demonstrating targeted anti-CD20 monoclonal antibody binding and complement-mediated B-cell lysis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m537-phm-asthma-cough-expectorants.webp (R2) | Clinical photograph of bedside peak expiratory flow meter with color-coded green, yellow, and red zones indicating asthmatic airflow obstruction. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m539-phm-antiemetics-dronabinol.webp (R2) | Synaptic diagram illustrating presynaptic cannabinoid CB1 receptor activation inhibiting calcium entry and neurotransmitter vesicle release in the dorsal vagal complex. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m540-phm-laxatives-ibd-lactulose.webp (R2) | Colonoscopic view of distal sigmoid colon in active ulcerative colitis showing continuous friable mucosal erythema, loss of vascular pattern, and inflammatory pseudopolyps. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m541-rad-xray-cathode.webp (R2) | Dual focus X-ray tube diagram showing tungsten filaments and molybdenum cup. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m542-rad-xray-cathode.webp (R2) | Line focus principle geometry showing actual versus effective focal spot. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m543-rad-xray-thermionic-emission.webp (R2) | Bremsstrahlung radiation generation diagram showing electron deceleration near tungsten nucleus. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m544-rad-xray-thermionic-emission.webp (R2) | Diagnostic X-ray energy spectrum showing continuous bremsstrahlung curve and K-shell characteristic spikes. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m546-rad-xray-kvp.webp (R2) | X-ray beam filtration diagram showing attenuation of low-energy soft photons by aluminium filter. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m547-rad-xray-grid.webp (R2) | Antiscatter grid cross-section diagram showing transmission of primary rays and absorption of scattered rays. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m548-rad-xray-grid.webp (R2) | Anode heel effect diagram showing intensity variation across cathode and anode sides of beam. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m550-rad-xray-image-intensifier.webp (R2) | Photostimulable phosphor plate computed radiography cycle showing exposure, laser readout, and erasure. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m551-rad-xray-roentgen.webp (R2) | Historic first human diagnostic radiograph of Anna Bertha Roentgen hand with wedding ring. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m552-rad-radiation-protection-gray.webp (R2) | Comparison schematic of radiation dosimetry quantities: absorbed dose, equivalent dose, and effective dose. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m553-rad-radiation-protection-gray.webp (R2) | Human body schematic showing ICRP tissue weighting factors across major organs. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m554-rad-radiation-protection-alara.webp (R2) | Cutaway diagram of thermoluminescent dosimeter (TLD) badge showing Teflon card and CaSO4:Dy discs. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m557-rad-ct-mri-hounsfield-units.webp (R2) | Hounsfield unit scale diagram showing standard CT attenuation values from air to dense cortical bone. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m558-rad-ct-mri-hounsfield-units.webp (R2) | CT window width and window level schematic demonstrating greyscale mapping of brain, lung, and bone windows. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m561-obg-abnormal-labour-occipitoposterior-position.webp (R2) | Clinical illustration of maternal position changes and sacral counterpressure techniques for persistent occipitoposterior labour support. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m565-obg-abortion-recurrent-pregnancy-loss.webp (R2) | Three-dimensional coronal ultrasound view of the uterus demonstrating a septate uterine malformation with normal fundal contour. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m569-obg-amenorrhoea-primary-amenorrhoea.webp (R2) | Endocrine chart demonstrating fluctuating serum FSH and estradiol levels characteristic of premature ovarian insufficiency. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m572-obg-anatomy-development-gartner-duct-cyst.webp (R2) | Clinical perineal inspection photograph showing tense bulging bluish-domed membrane of imperforate hymen occluding vaginal introitus. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m583-obg-aph-increta.webp (R2) | Sagittal T2-weighted pelvic MRI demonstrating placenta percreta with loss of the retroplacental T2-dark zone and bladder wall tenting. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m589-obg-pid-genital-tb-pelvic-inflammatory-disease.webp (R2) | Silent PID: laparoscopic or histological view of chronic tubal damage / perihepatic adhesions without acute signs. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m591-obg-anatomy-development-bicornuate-uterus.webp (R2) | Bicornuate uterus: 3D ultrasound or MRI showing two uterine horns with single cervix. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m594-obg-fetal-growth-surveillance-fetal-growth-restriction.webp (R2) | Umbilical artery Doppler waveform in fetal growth restriction showing absent/reversed end-diastolic flow. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m596-obg-anatomy-development-unicornuate.webp (R2) | Uterus didelphys: MRI or ultrasound showing two uterine bodies and two cervices. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m597-obg-normal-labour-stages-of-labour.webp (R2) | Cardinal movements. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m598-obg-normal-labour-stages-of-labour.webp (R2) | WHO labour care guide. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m599-obg-pid-genital-tb-pelvic-inflammatory-disease.webp (R2) | Silent PID. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m601-obg-placenta-fetus-amniotic-fluid-formation.webp (R2) | Amniocentesis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m602-obg-placenta-fetus-amniotic-fluid-formation.webp (R2) | Higher affinity. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m604-obg-amenorrhoea-primary-amenorrhoea.webp (R2) | POI fluctuation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m605-obg-multiple-pregnancy-twin-twin-transfusion.webp (R2) | Discordant growth. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m609-obg-hypertensive-disorders-labetalol.webp (R2) | Posterior reversible encephalopathy. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m611-obg-menstrual-physiology-ovulation.webp (R2) | Mittelschmerz. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m613-obg-amenorrhoea-hyperprolactinaemia.webp (R2) | Drug cause pathway. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m614-obg-abnormal-labour-shoulder-dystocia.webp (R2) | Plexus injury. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m619-obg-anatomy-development-gartner-duct-cyst.webp (R2) | Post drainage review. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m620-obg-vaginitis-sti-trichomoniasis-strawberry-cervix.webp (R2) | HIV interaction. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m621-obg-vaginitis-sti-lgv.webp (R2) | LGV proctocolitis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m622-obg-fibroid-leiomyoma.webp (R2) | Leiomyomas. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m625-obg-anatomy-development-levator-ani.webp (R2) | Classification guided care. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m626-obg-prenatal-screening-amniocentesis.webp (R2) | Anomaly scan. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m627-obg-prenatal-screening-amniocentesis.webp (R2) | Sensitisation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m629-obg-puerperium-postpartum-blues.webp (R2) | Postpartum thyroiditis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m630-obg-maternal-physiology-thyroid-binding-globulin.webp (R2) | First trimester TSH fall. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m634-obg-maternal-physiology-gfr-increase.webp (R2) | Renal enlargement. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m637-obg-teratogens-teratogenic-drugs.webp (R2) | Lithium Ebstein. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m639-obg-abnormal-labour-cord-prolapse.webp (R2) | Impending obstruction. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m643-obg-amenorrhoea-mrkh.webp (R2) | Sensitive disclosure. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m645-obg-abnormal-labour-occipitoposterior-position.webp (R2) | Deep transverse arrest. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m649-obg-aph-increta.webp (R2) | Future risk counselling. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m650-obg-induction-induction-of-labour.webp (R2) | Dinoprostone. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m651-obg-abnormal-labour-face-presentation.webp (R2) | Brow presentation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m652-obg-abnormal-labour-face-presentation.webp (R2) | Facial swelling. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m654-obg-ectopic-ectopic-pregnancy.webp (R2) | Positive FAST equivalent. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m658-obg-prenatal-screening-cell-free-fetal.webp (R2) | NIPT. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m659-obg-prenatal-screening-cell-free-fetal.webp (R2) | Vanishing twin effect. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m660-obg-pph-misoprostol.webp (R2) | Uterine massage. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m661-obg-pph-misoprostol.webp (R2) | Escalation principle. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m663-obg-prenatal-screening-quadruple-test.webp (R2) | Maternal serum AFP. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m664-obg-aph-dic.webp (R2) | Fibrinogen first. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m666-obg-maternal-physiology-plasma-volume-expansion.webp (R2) | Supine hypotension syndrome. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m675-obg-diagnosis-antenatal-care-hegar-sign.webp (R2) | Urine pregnancy test. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m678-obg-anatomy-development-uterine-artery-ureter.webp (R2) | Ureter protection strategies. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m680-obg-endometriosis-adenomyosis-diagnostic-laparoscopy.webp (R2) | Excision versus ablation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m681-obg-endometriosis-adenomyosis-diagnostic-laparoscopy.webp (R2) | Negative scope pathway. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m682-obg-puerperium-involution-of-uterus.webp (R2) | Lactation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m685-obg-anatomy-development-transverse-vaginal-septum.webp (R2) | Haematocolpos. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m687-obg-anatomy-development-transverse-vaginal-septum.webp (R2) | Birth after repair. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m689-phy-skeletal-muscle-excitation-contraction-coupling.webp (R2) | Calsequestrin. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m690-phy-higher-functions-eeg-waves.webp (R2) | Theta waves. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m692-phy-cardiac-cycle-preload.webp (R2) | Preload. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m693-phy-cardiac-cycle-preload.webp (R2) | Contractility. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m694-phy-cardiac-electro-pacemaker-potential.webp (R2) | Purkinje fibres. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m695-phy-mechanics-lung-volumes.webp (R2) | Inspiratory reserve volume. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m696-phy-mechanics-lung-volumes.webp (R2) | Vital capacity. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m698-phy-concentration-osmoreceptors.webp (R2) | Solute osmotic diuresis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m699-phy-smooth-cardiac-muscle-single-unit-and-multiunit-smooth-m.webp (R2) | Latch state. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m700-phy-smooth-cardiac-muscle-single-unit-and-multiunit-smooth-m.webp (R2) | Calcium-induced calcium release. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m702-phy-gas-transport-chloride-shift.webp (R2) | Acetazolamide. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m704-phy-sensory-ruffini-ending.webp (R2) | Anterolateral system. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m706-phy-nerve-fibres-erlanger-gasser-classification.webp (R2) | C fibres. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m708-phy-haemodynamics-poiseuille-law.webp (R2) | Laminar flow. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m71-pat-hypersensitivity-serum-sickness.webp (R2) | Serum sickness immune complex deposition diagram showing antigen-antibody complexes lodging in a vessel wall, joint, and glomerulus with complement activation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m711-phy-gfr-pah-clearance.webp (R2) | Juxtaglomerular apparatus. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m713-phy-tubular-principal-cells.webp (R2) | ROMK potassium channels. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m715-phy-hypothalamus-limbic-suprachiasmatic-nucleus.webp (R2) | Kluver-Bucy syndrome. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m722-phy-gas-transport-myoglobin.webp (R2) | Clinical methaemoglobinaemia. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m723-phy-cerebellum-basal-ganglia-spinocerebellum.webp (R2) | Cerebrocerebellum. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m724-phy-skeletal-muscle-cross-bridge-cycle.webp (R2) | Length-tension relationship. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m725-phy-skeletal-muscle-cross-bridge-cycle.webp (R2) | Size principle. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m726-phy-hypoxia-environment-hypoxic.webp (R2) | Stagnant hypoxia. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m733-phy-gas-exchange-physiological-shunt.webp (R2) | Ventilatory dead space. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m736-phy-secretions-hormones-gastrin.webp (R2) | Secretin stimulation test. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m741-phy-cardiac-cycle-heart-sounds.webp (R2) | Frank-Starling law. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m743-phy-nerve-fibres-susceptibility-to-hypoxia.webp (R2) | Nogo-A. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m745-phy-hypothalamus-limbic-hypothalamic-functions.webp (R2) | Satiety centre. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m748-phy-motility-deglutition.webp (R2) | Migrating motor complex. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m749-phy-rbc-haemoglobin-plasma-proteins.webp (R2) | Reticulocytes. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m750-phy-regulation-dorsal-respiratory-group.webp (R2) | Pre-Botzinger complex. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m751-phy-body-fluids-inulin.webp (R2) | Tonicity. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m752-phy-regional-circulation-coronary-blood-flow.webp (R2) | Vasoconstrictor tone. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m754-phy-digestion-absorption-vitamin-b12-absorption.webp (R2) | Hydrogen breath test. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m755-phy-motility-peristalsis.webp (R2) | Intrinsic defecation reflex. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m757-phy-male-spermatogenesis-regulation.webp (R2) | Testicular immune privilege. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m760-ana-intestines-jejunum-versus-ileum.webp (R2) | Ileocaecal junction. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m761-ana-submandibular-tongue-submandibular-gland.webp (R2) | Submandibular parenchyma. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m763-ana-parotid-infratemporal-tmj-dislocation.webp (R2) | Infratemporal fossa. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m767-ana-forearm-hand-thenar-and-hypothenar.webp (R2) | Palmar aponeurosis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m773-ana-skull-cranial-cavity-falx-cerebri.webp (R2) | Falx cerebelli. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m774-ana-axilla-plexus-trunks.webp (R2) | Lateral cord. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m779-ana-peritoneum-greater-omentum.webp (R2) | Kidney parenchyma. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m780-ana-heart-vessels-fetal-circulation.webp (R2) | Prostaglandin E2. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m781-ana-axilla-plexus-klumpke-palsy.webp (R2) | C8 and T1 dermatomes. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m782-ana-cerebrum-association-fibres.webp (R2) | Genu. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m783-ana-male-reproductive-epididymis.webp (R2) | Vas deferens. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m785-ana-pharyngeal-pharyngeal-clefts.webp (R2) | Sternocleidomastoid. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m897-phm-raas-losartan.webp (R2) | AT1 receptor blockade diagram showing angiotensin II unable to bind, AT2 receptor left free. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m928-obg-ectopic-discriminatory-zone.webp (R2) | PUL. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m929-obg-fibroid-pedunculated.webp (R2) | Preoperative shrinkage. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m931-obg-infertility-hysterosalpingography.webp (R2) | Hysterosalpingography. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m932-obg-infertility-ivf.webp (R2) | In vitro fertilisation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m933-obg-menstrual-physiology-hypothalamic-pituitary-ovarian.webp (R2) | LH surge. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m934-obg-menstrual-physiology-hypothalamic-pituitary-ovarian.webp (R2) | Menopausal transition. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m936-obg-normal-labour-partograph-alert-line.webp (R2) | Active management of third stage. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m938-obg-operative-obstetrics-wrigley-forceps.webp (R2) | Symphysiotomy. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m942-obg-pid-genital-tb-tobacco-pouch-tube.webp (R2) | Cancer mimic. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m943-obg-pid-genital-tb-tobacco-pouch-tube.webp (R2) | Partner evaluation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m945-obg-prenatal-screening-quadruple-test.webp (R2) | Late booking provision. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m946-obg-preterm-prom-postterm-preterm-labour.webp (R2) | Antenatal corticosteroids. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m949-pat-acute-inflammation-chediak-higashi-syndrome.webp (R2) | Inflammatory exudate. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m950-pat-acute-inflammation-chediak-higashi-syndrome.webp (R2) | Fibrinous or purulent exudates. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m951-pat-acute-inflammation-phagocytosis.webp (R2) | Chronic granulomatous disease. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m952-pat-acute-inflammation-vascular-permeability.webp (R2) | Vascular permeability. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m955-pat-adaptations-accumulations-hyaline-change.webp (R2) | Haemosiderin. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m956-pat-adaptations-accumulations-hyaline-change.webp (R2) | Ultraviolet radiation. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m958-pat-apoptosis-annexin-v.webp (R2) | Necroptosis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m959-pat-apoptosis-caspases.webp (R2) | BCL-2 and BCL-XL. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m960-pat-apoptosis-caspases.webp (R2) | Apoptosome. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m961-pat-apoptosis-ferroptosis.webp (R2) | Ferroptotic cell death. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m962-pat-carcinogenic-agents-chemical-carcinogens.webp (R2) | Aflatoxin B1. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m964-pat-carcinogenic-agents-ultraviolet-radiation.webp (R2) | Epstein-Barr virus. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m965-pat-cell-injury-necrosis-free-radicals.webp (R2) | Ischemia-reperfusion injury. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m966-pat-cell-injury-necrosis-pyknosis.webp (R2) | Pyknosis, karyorrhexis, and karyolysis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m968-pat-chronic-granulomatous-cat-scratch-disease.webp (R2) | M2 activation drives pathological fibrosis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m970-pat-haematopoiesis-marrow-failure-haematopoietic-stem-cells.webp (R2) | Myelophthisic anaemia. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m971-pat-hypersensitivity-serum-sickness.webp (R2) | Glomerulonephritis. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m974-pat-mediators-chemokines.webp (R2) | Inhibits leukocyte adhesion to endothelium. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m975-pat-mediators-crp.webp (R2) | Long-term disease monitoring. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m979-pat-mendelian-disorders-haemochromatosis.webp (R2) | Bronze diabetes. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m986-pat-nonclassic-inheritance-angelman-syndrome.webp (R2) | Maternal mitochondrial inheritance. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m987-pat-oedema-haemorrhage-starling-forces.webp (R2) | Capillary hydrostatic pressure. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m988-pat-oedema-haemorrhage-starling-forces.webp (R2) | Lymphatic obstruction. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m991-pat-tumour-biology-benign.webp (R2) | Epithelial dysplasia. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-m996-phy-body-fluids-inulin.webp (R2) | Cerebral oedema. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
+| need-s69-pnr-status-epilepticus-protocol.webp (R2) | De-identified real-style continuous EEG trace of a child in refractory status epilepticus with ongoing electrographic seizures. | generated (Gemini Nano Banana) | CC BY 4.0 (StewardMD original) |
