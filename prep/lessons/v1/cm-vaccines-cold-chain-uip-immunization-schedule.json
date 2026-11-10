@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "id": "cm-vaccines-cold-chain-uip-immunization-schedule",
+ "subject": "community-medicine",
+ "module": "cm-vaccines-cold-chain",
+ "title": "Universal Immunization Programme and the National Immunization Schedule",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "From EPI 1974 to UIP 1985",
+   "tx": "The **Expanded Programme on Immunization** launched globally in May 1974 against six diseases: diphtheria, whooping cough, tetanus, polio, tuberculosis and measles, reaching India in January 1978. India's Universal Immunization Programme followed on 19 November 1985, dedicated to the memory of Indira Gandhi, targeting universal coverage of the eligible population by 1990.",
+   "say": "Dates anchor this lesson. Global expansion began in May 1974 against six diseases and reached India in 1978. The universal programme followed on 19 November 1985, aiming at full eligible coverage by 1990.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Year", "Milestone"],
+    "rows": [
+     ["May 1974", "WHO launches Expanded Programme on Immunization"],
+     ["January 1978", "EPI launched in India"],
+     ["19 November 1985", "Universal Immunization Programme launched"]
+    ]
+   }
+  },
+  {
+   "title": "Four tests a schedule must pass",
+   "tx": "A sound **immunization schedule** must be epidemiologically relevant (public health problems with effective vaccines), immunologically effective (given when maternal antibody has waned and the infant can respond, before natural exposure), operationally feasible (few visits, simultaneous administration, affordable coverage), and socially acceptable (fitting customs, seasons and daily work). Every schedule revision argues on these four axes.",
+   "say": "Four tests judge any schedule. Disease must matter, timing must suit infant immunity, visits must stay few and affordable, and customs must accept it. Every revision debate examiners quote argues on these four axes.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Test", "Failure looks like"],
+    "rows": [
+     ["Epidemiologically relevant", "Vaccine for a trivial local problem"],
+     ["Immunologically effective", "Dose wasted under maternal antibody"],
+     ["Operationally feasible", "Too many visits, coverage collapses"],
+     ["Socially acceptable", "Sessions clash with work and custom"]
+    ]
+   }
+  },
+  {
+   "title": "Birth doses: BCG, OPV zero, hepatitis B",
+   "tx": "**Birth doses** open the schedule: BCG 0.1 ml intradermal over the left upper arm (0.05 ml below one month), OPV zero dose 2 drops orally within the first 15 days, and hepatitis B birth dose 0.5 ml intramuscular into the anterolateral thigh within 24 hours. Sites are standardised so any worker reads a child's record from the body.",
+   "say": "Three vaccines greet the newborn. BCG intradermally on the left arm, polio drops within fifteen days, hepatitis B into the thigh within twenty four hours. Standard sites let any worker read the record from the body itself.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Vaccine", "Dose and route", "Site and timing"],
+    "rows": [
+     ["BCG", "0.1 ml intradermal", "Left upper arm, at birth"],
+     ["OPV-0", "2 drops oral", "Within first 15 days"],
+     ["Hepatitis B birth dose", "0.5 ml intramuscular", "Anterolateral thigh, within 24 hours"]
+    ]
+   }
+  },
+  {
+   "title": "Six, ten and fourteen weeks: the primary series",
+   "tx": "At **6, 10 and 14 weeks** the infant receives pentavalent vaccine 0.5 ml intramuscular, OPV drops, and rotavirus vaccine orally, with fractional IPV 0.1 ml intradermal at 6 and 14 weeks and pneumococcal conjugate at 6 and 14 weeks (booster at 9 to 12 months). Clustering antigens into three visits is operational feasibility made visible.",
+   "say": "Three visits carry the primary series. Pentavalent, polio drops and rotavirus at six, ten and fourteen weeks; fractional polio injection at six and fourteen; pneumococcal at six and fourteen with a later booster. Clustering is feasibility made visible.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "6 weeks: pentavalent 1, OPV 1, rota 1, fIPV 1, PCV 1"},
+     {"id": "b", "label": "10 weeks: pentavalent 2, OPV 2, rota 2"},
+     {"id": "c", "label": "14 weeks: pentavalent 3, OPV 3, rota 3, fIPV 2, PCV 2"},
+     {"id": "d", "label": "9 months: MR 1, PCV booster window opens"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Nine months and the second year",
+   "tx": "**Measles-rubella first dose** falls at 9 completed to 12 months, subcutaneous in the right upper arm, with vitamin A first dose 1 ml (1 lakh IU) orally alongside, and JE first dose in endemic districts. At 16 to 24 months come MR second dose, DPT and OPV boosters, JE second dose and vitamin A second dose, then six-monthly vitamin A to age five.",
+   "say": "Nine months brings measles-rubella vaccine plus the first vitamin A dose. The second year stacks measles-rubella second dose with DPT and polio boosters. Vitamin A then repeats six-monthly until age five.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Age", "Due vaccines"],
+    "rows": [
+     ["9 to 12 months", "MR-1, vitamin A 1 ml, JE-1 in endemic districts"],
+     ["16 to 24 months", "MR-2, DPT booster-1, OPV booster, JE-2"],
+     ["5 to 6 years", "DPT booster-2"],
+     ["10 and 16 years", "Td doses"]
+    ]
+   }
+  },
+  {
+   "title": "Pregnancy doses and the thigh-arm map",
+   "tx": "**Td in pregnancy** gives two doses 4 weeks apart early in pregnancy (one booster if two doses were received within the last 3 years), 0.5 ml intramuscular in the upper arm. The body map is systematic: BCG and fractional IPV on arms, MR right arm, JE left arm, injectable infant vaccines in the anterolateral thigh, never the gluteal region.",
+   "say": "Pregnancy takes two tetanus-diphtheria doses a month apart, or one booster after recent cover. Sites map systematically: arms for BCG, fractional polio and measles vaccines, thigh for infant injections, gluteal region never.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Arm sites",
+     "points": ["BCG left upper arm, intradermal", "MR right upper arm, subcutaneous", "Td upper arm, intramuscular"]
+    },
+    "right": {
+     "title": "Thigh sites",
+     "points": ["Pentavalent anterolateral thigh", "Hepatitis B birth dose thigh", "DPT boosters thigh in toddlers"]
+    }
+   }
+  },
+  {
+   "title": "Delayed doses never restart the series",
+   "tx": "An interrupted schedule **never restarts**: immunity from earlier doses persists, so the next due dose is simply given and spacing continues. Longer gaps do not invalidate prior doses for most antigens. This single rule rescues migrant and defaulting children at every session, and its denial, restarting series wastefully, is the classic community error the schedule explicitly rejects.",
+   "say": "Late children resume, never restart. Earlier doses still count; give the next due dose and continue. Restarting wastes vaccine and visits, and the schedule rejects that belief explicitly. Migrant children benefit most from this rule.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Situation", "Correct action"],
+    "rows": [
+     ["Second dose 3 months late", "Give it now, continue spacing"],
+     ["Family migrated, card lost", "Reconstruct from history and scars, resume"],
+     ["Child ill with mild fever", "Vaccinate, minor illness is no contraindication"]
+    ]
+   }
+  },
+  {
+   "title": "Minor illness is not a contraindication",
+   "tx": "**False contraindications** deny more children protection than true ones: low-grade fever, mild respiratory infection, diarrhoea and malnutrition do not defer vaccination, and malnourished children need it most, being likeliest to die of vaccine-preventable disease. True deferrals are few: severe acute illness for stabilisation, and live vaccine cautions in significant immunodeficiency and pregnancy.",
+   "say": "Myths deny more doses than medicine does. Mild fever, colds, diarrhoea and malnutrition never defer; malnourished children need vaccine most. True deferrals stay few: severe acute illness briefly, live vaccines in major immune deficiency and pregnancy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vaccinate anyway",
+     "points": ["Low-grade fever, mild cold", "Diarrhoea on the day", "Malnutrition at any grade"]
+    },
+    "right": {
+     "title": "Defer or avoid",
+     "points": ["Severe acute illness, stabilise first", "Live vaccine in significant immunodeficiency", "Most live vaccines in pregnancy"]
+    }
+   }
+  },
+  {
+   "title": "Coverage, dropout and left-outs",
+   "tx": "**Dropout rate** between first and third pentavalent doses exposes service failure better than raw coverage: children reached once are being lost. Left-outs never contacted and dropouts contacted-then-lost need different remedies, microplanning by name versus reminder and defaulter tracking. Coverage surveys validate register figures that sessions inflate under target pressure.",
+   "say": "Two leaks empty the programme. Left-outs never arrive; dropouts arrive once and vanish, measured between first and third pentavalent doses. Names-based microplans catch the first, defaulter tracking the second. Surveys audit inflated registers.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Eligible children listed by name"},
+     {"id": "b", "label": "Session held as microplanned"},
+     {"id": "c", "label": "Absent children traced same week"},
+     {"id": "d", "label": "Dropout rate reviewed monthly"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

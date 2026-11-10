@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "id": "cm-vaccines-cold-chain-pentavalent-vaccine",
+ "subject": "community-medicine",
+ "module": "cm-vaccines-cold-chain",
+ "title": "Pentavalent Vaccine and Combination Vaccines",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Five antigens, one injection",
+   "tx": "The **pentavalent vaccine** combines diphtheria and pertussis and tetanus components with hepatitis B and Haemophilus influenzae type b conjugate in one 0.5 ml intramuscular injection. It replaced separate DPT, hepatitis B and Hib vaccines at 6, 10 and 14 weeks in the national schedule, so the three infant visits carry five protections without extra needles.",
+   "say": "Five protections share one needle. Diphtheria, pertussis, tetanus, hepatitis B and Hib together at six, ten and fourteen weeks. Separate products for the last two antigens became unnecessary at those visits.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Component", "Disease prevented"],
+    "rows": [
+     ["Diphtheria toxoid", "Diphtheria"],
+     ["Whole-cell pertussis", "Whooping cough"],
+     ["Tetanus toxoid", "Tetanus"],
+     ["Hepatitis B surface antigen", "Hepatitis B"],
+     ["Hib conjugate", "Hib meningitis and pneumonia"]
+    ]
+   }
+  },
+  {
+   "title": "Why combinations win operationally",
+   "tx": "**Combination vaccines** cut visits, injections, cold chain volume, record lines and missed opportunities simultaneously. Separate administration of five antigens would demand far more contacts than any poor family can sustain, and each extra visit leaks dropouts. Fewer injections also mean fewer injection-site reactions per protected antigen and happier caregivers returning for the next dose.",
+   "say": "Combinations win on logistics. Fewer visits, needles, cold chain volume and record lines; fewer missed opportunities and dropouts. Caregivers facing one injection instead of five come back. Protection per visit is the metric that matters.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Separate antigens",
+     "points": ["Many visits and injections", "Dropouts at every extra visit", "Large cold chain volume"]
+    },
+    "right": {
+     "title": "Pentavalent combination",
+     "points": ["Three visits cover five diseases", "One record line per visit", "Caregivers more likely to return"]
+    }
+   }
+  },
+  {
+   "title": "What combinations demand in return",
+   "tx": "**Adsorbed combination** products carry aluminium adjuvant, making them freeze-sensitive: one frozen night destroys all five components together, the combined product's combined risk. Shake test discipline and conditioned ice packs therefore matter more, not less, as combinations spread. Sedating premedication is not routine; fever and local reactions are managed expectantly.",
+   "say": "Combinations concentrate risk too. One frozen night destroys five adsorbed components together. Shake tests and conditioned packs matter more as combinations spread. Fever and local soreness are managed expectantly, not premedicated routinely.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Property", "Consequence"],
+    "rows": [
+     ["Aluminium adsorbed", "Freeze damage destroys potency"],
+     ["Whole-cell pertussis inside", "Fever and local reactions commoner"],
+     ["Liquid multidose vial", "Open vial policy applies, 28 days"]
+    ]
+   }
+  },
+  {
+   "title": "Reactions expected and reactions feared",
+   "tx": "**Minor reactions** after pentavalent vaccine include local pain, swelling and redness and fever in a substantial minority, settling in a day or two, while hypotonic-hyporesponsive episodes and persistent crying are rare reported events needing evaluation, not panic. Anaphylaxis remains very rare and manageable with adrenaline at session sites, which is why post-vaccination observation and an AEFI kit travel together.",
+   "say": "Expect soreness and fever in a minority, settling in days. Rare collapse-like episodes need evaluation, not panic. Anaphylaxis stays very rare, and adrenaline plus observation at every session site covers it.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Common and minor",
+     "points": ["Pain, swelling, redness at site", "Fever for a day or two", "Irritability and poor feeding briefly"]
+    },
+    "right": {
+     "title": "Rare, evaluate",
+     "points": ["Hypotonic-hyporesponsive episode", "Persistent inconsolable crying", "Anaphylaxis, adrenaline ready"]
+    }
+   }
+  },
+  {
+   "title": "Contraindications, true and false",
+   "tx": "True **contraindications** to continuing pertussis-containing vaccine are narrow: anaphylaxis to a prior dose and encephalopathy within 7 days not otherwise explained. Fever after a dose, family seizure history, prematurity and stable neurological conditions do not contraindicate. Over-wide refusal converts manageable risk into unprotected cohorts, the error examiners probe with stem variants.",
+   "say": "Refusals stay narrow. Prior anaphylaxis and unexplained encephalopathy after a dose stop the pertussis component. Prior fever, family seizures, prematurity and stable neurology do not. Over-wide refusal manufactures unprotected cohorts.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Situation", "Action"],
+    "rows": [
+     ["Anaphylaxis to previous dose", "Do not repeat that vaccine"],
+     ["Fever after previous dose", "Vaccinate, warn and treat fever"],
+     ["Preterm infant", "Vaccinate by chronological age"],
+     ["Stable cerebral palsy", "Vaccinate normally"]
+    ]
+   }
+  },
+  {
+   "title": "Missed pentavalent and catch-up logic",
+   "tx": "**Catch-up vaccination** gives pentavalent vaccine up to one year of age in the schedule's wording, three doses at least 4 weeks apart, without restarting for delays. Beyond infancy, age-appropriate DPT-containing strategies take over. Every contact, curative visits included, triggers a card check so a sick visit doubles as an immunisation opportunity rather than a missed one.",
+   "say": "Late infants catch up simply: doses at least four weeks apart, never restarting, within the schedule's age window. Every curative contact triggers a card check, turning sick visits into immunisation opportunities.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Child presents for any care"},
+     {"id": "b", "label": "Immunisation card checked"},
+     {"id": "c", "label": "Due doses given same visit"},
+     {"id": "d", "label": "Next date written and told"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Hib and hepatitis B: why they joined",
+   "tx": "**Hib conjugate** prevents Haemophilus meningitis and pneumonia deaths that antibiotics reached too late, and its polysaccharide needed protein conjugation to work in infants. Hepatitis B in infancy prevents the chronic carriage that early infection guarantees in a large share of infected babies, later cirrhosis and liver cancer being the delayed invoice.",
+   "say": "Two additions earned their place. Hib conjugate stops meningitis antibiotics reached too late, its sugar coat needing protein help in infants. Infant hepatitis B prevents chronic carriage, the delayed invoice being cirrhosis and liver cancer.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Added antigen", "Burden it removes"],
+    "rows": [
+     ["Hib conjugate", "Infant meningitis and pneumonia deaths"],
+     ["Hepatitis B", "Chronic carriage, cirrhosis, liver cancer"],
+     ["Both inside pentavalent", "No extra visit or injection"]
+    ]
+   }
+  },
+  {
+   "title": "Reading a stem about combinations",
+   "tx": "Stems test combinations through logistics: **one injection at 14 weeks** covering five diseases names pentavalent; a frozen pentavalent vial implicates all five components; a child due for DPT booster at 16 to 24 months still receives plain DPT, not pentavalent. Hepatitis B birth dose stays separate, given within 24 hours before the series begins.",
+   "say": "Logistics betray the product. One fourteen-week injection with five diseases is pentavalent; one frozen vial loses five components; toddler boosters use plain DPT. The hepatitis B birth dose stands separate, inside twenty four hours.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pentavalent moment",
+     "points": ["6, 10 and 14 week visits", "Five diseases, one injection", "Freeze-sensitive liquid vial"]
+    },
+    "right": {
+     "title": "Not pentavalent",
+     "points": ["Hepatitis B birth dose alone", "DPT boosters in second year", "MR vaccine at 9 months"]
+    }
+   }
+  },
+  {
+   "title": "Future combinations keep growing",
+   "tx": "**Hexavalent products** abroad add injectable polio vaccine to the same five antigens, and research keeps folding more into single vials against the limits of interference, volume and cost. The direction of travel since DPT has been relentless: fewer needles per protection. Schedule literacy now means reading combinations first and single antigens as the exceptions they have become.",
+   "say": "Combinations keep growing. Hexavalent products fold polio injection into the same vial abroad, against limits of interference, volume and cost. Single antigens have become the exceptions; read schedules combination-first.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Single antigen era"},
+     {"id": "b", "label": "DPT triple combination"},
+     {"id": "c", "label": "Pentavalent five in one"},
+     {"id": "d", "label": "Hexavalent adds IPV"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}
