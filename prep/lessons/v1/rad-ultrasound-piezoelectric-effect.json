@@ -33,10 +33,32 @@
    "vis": {"kind": "table", "cols": ["Structure", "Shadow", "Moves on rolling"], "rows": [["Gallstone", "Clean dark shadow", "Yes, falls to dependent wall"], ["Gallbladder polyp", "No shadow", "No, fixed to wall"], ["Bowel gas", "Dirty shadow", "Shifts with peristalsis"], ["Rib", "Clean shadow", "Fixed to chest wall"]]}
   },
   {
+   "tx": "When a structure reflects or absorbs the beam, a dark path is left behind it. That path is **acoustic shadowing**, and gallstones, renal stones, ribs and bowel gas all cast one. A bright gallbladder focus with a clean sharp shadow is read as a stone. A polyp fails the same tests: it is fixed to the wall, it does not roll when the patient changes position, and it casts no shadow. Those differences are settled at the bedside, without sending the patient for another test first.",
+   "say": "A clean dark trail behind a bright gallbladder focus is acoustic shadowing from a stone. Ribs, renal stones and gas cast shadows too. A polyp is attached to the wall, stays still when the patient moves, and casts no shadow, which separates it from a stone during the scan.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n163-rad-ultrasound-piezoelectric-effect.webp",
+    "alt": "A gallbladder ultrasound shows a bright stone with a clean dark band of acoustic shadow behind it.",
+    "caption": "An echogenic focus inside the gallbladder throws a sharp black shadow, the ultrasound appearance of a gallstone rather than a polyp. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "title": "Posterior acoustic enhancement",
    "tx": "**Posterior enhancement** is the bright band behind fluid because fluid attenuates the beam far less than solid tissue at the same depth. The scanner assumes average attenuation, so echoes returning through a cyst arrive stronger than expected and are painted brighter. Simple cysts of liver, kidney and breast all show this through transmission, which supports calling the lesion fluid rather than a solid mass.",
    "say": "Posterior enhancement is the bright band behind fluid because fluid weakens the beam far less than solid tissue at the same depth. The scanner assumes average weakening, so echoes returning through a cyst arrive stronger than expected and are painted brighter. Simple cysts of liver, kidney and breast all show this through transmission, supporting a fluid diagnosis.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Beam crosses fluid"}, {"id": "b", "label": "Little attenuation"}, {"id": "c", "label": "Strong deep echoes"}, {"id": "d", "label": "Bright band painted"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "Fluid attenuates ultrasound much less than solid tissue at the same depth. The scanner still expects average loss, so echoes that have passed through a cyst return stronger than the machine predicted and are displayed too bright. The bright band is **posterior enhancement**, also called through transmission. Simple cysts of liver, kidney and breast all produce it. A solid mass would weaken the beam and darken what lies behind, so the bright trail supports fluid.",
+   "say": "Because fluid weakens the beam less than solid tissue, echoes behind a cyst come back stronger than the scanner expects and are painted bright. That posterior enhancement is through transmission. Liver, kidney and breast cysts all show it, which argues the lesion is fluid rather than a solid mass.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n164-rad-ultrasound-piezoelectric-effect.webp",
+    "alt": "A renal ultrasound shows an anechoic simple cyst with a bright band of posterior acoustic enhancement behind it.",
+    "caption": "A simple kidney cyst is black, and the tissue immediately behind it is brighter than tissue at the same depth beside the cyst. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Reverberation and comet tail",
