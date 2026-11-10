@@ -32,6 +32,17 @@
             }
         },
         {
+            "tx": "Scatter is fog, and this device is a fence against fog. An **antiscatter grid** of lead strips lets straight primary rays pass between its slats while absorbing photons scattered at angles inside the patient. Contrast returns, at the price of higher exposure to replace the absorbed scatter and any misaligned primary rays. Grid ratio and alignment are therefore daily practicalities, not exam trivia, in every busy radiography room.",
+            "say": "An antiscatter grid passes straight primary rays and absorbs angled scatter, restoring contrast. Misalignment and dose are its costs.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m547-rad-xray-grid.webp",
+                "alt": "Cross section diagram of an antiscatter grid transmitting primary rays and absorbing scattered rays.",
+                "caption": "Straight rays pass between lead strips while angled scatter is absorbed. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
             "title": "Grid Ratio and Scatter Cleanup",
             "tx": "**Grid ratio determination** defines the efficiency of scatter removal, calculated as the physical height of the lead strips divided by the width of the radiolucent interspace. Diagnostic grids feature ratios ranging from 5 to 1 up to 16 to 1. High-ratio grids provide superior scatter cleanup and radiographic contrast, but require precise beam alignment to avoid absorbing primary rays.",
             "say": "Grid ratio determination defines the efficiency of scatter removal, calculated as the physical height of the lead strips divided by the width of the radiolucent interspace. Diagnostic grids feature ratios ranging from 5 to 1 up to 16 to 1. High-ratio grids provide superior scatter cleanup and radiographic contrast, but require precise beam alignment to avoid absorbing primary rays.",
@@ -122,7 +133,7 @@
                     "points": [
                         "Grid remains motionless during exposure",
                         "Thin parallel lead lines visible on image",
-                        "Can generate moir\u00e9 interference artefacts on digital plates"
+                        "Can generate moiré interference artefacts on digital plates"
                     ]
                 },
                 "right": {
@@ -192,6 +203,17 @@
                         "Output reaches up to 120 percent of central axis"
                     ]
                 }
+            }
+        },
+        {
+            "tx": "One side of every radiograph is quietly darker than the other, by design of the anode itself. The **anode heel effect** means photons leaving toward the anode side travel through more tungsten and emerge weaker than those toward the cathode side. Placing thicker anatomy under the cathode side exploits that gradient instead of fighting it. A thoracic spine film positioned carelessly can manufacture a density difference that mimics disease.",
+            "say": "The anode heel effect weakens beam intensity toward the anode side. Placing thicker anatomy toward the cathode exploits the gradient.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m548-rad-xray-grid.webp",
+                "alt": "Diagram of the anode heel effect showing intensity variation across the X-ray field.",
+                "caption": "Beam intensity fades toward the anode side and strengthens toward the cathode side. Illustration: StewardMD original.",
+                "ar": 1.3393
             }
         },
         {
