@@ -1,236 +1,236 @@
 {
-  "v": 1,
-  "gen": "AI",
-  "module": "ana-female-reproductive",
-  "subject": "anatomy",
-  "title": "Uterine Anatomy: Normal Axis, Supports, and Broad Ligaments",
-  "minutes": 8,
-  "steps": [
-    {
-      "tx": "The uterus is a pear-shaped, thick-walled muscular organ situated in the lesser pelvis between the urinary bladder anteriorly and the rectum posteriorly. In the nulliparous adult female, the **uterus** measures approximately 7.5 centimetres in length, 5 centimetres in width, and 2.5 centimetres in anteroposterior thickness, weighing around thirty to forty grams.",
-      "say": "Positioned between bladder and rectum, the nulliparous adult uterus resembles a flattened pear. It measures 7.5 centimetres long by 5 centimetres wide, weighing roughly forty grams.",
-      "vis": {
-        "kind": "image",
-        "src": "prep/lessons/media/ana-uterine-ligaments.svg",
-        "alt": "Anatomical diagram of the uterus showing fundus, body, cervix, and peritoneal broad ligaments",
-        "caption": "Anatomical configuration of the uterus, fallopian tubes, and broad ligament reflections. [Credit: StewardMD]",
-        "ar": 1.5
-      }
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-female-reproductive",
+ "subject": "anatomy",
+ "title": "Uterine Anatomy: Normal Axis, Supports, and Broad Ligaments",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The uterus is a pear-shaped, thick-walled muscular organ situated in the lesser pelvis between the urinary bladder anteriorly and the rectum posteriorly. In the nulliparous adult female, the **uterus** measures approximately 7.5 centimetres in length, 5 centimetres in width, and 2.5 centimetres in anteroposterior thickness, weighing around thirty to forty grams.",
+   "say": "Positioned between bladder and rectum, the nulliparous adult uterus resembles a flattened pear. It measures 7.5 centimetres long by 5 centimetres wide, weighing roughly forty grams.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-uterine-ligaments.svg",
+    "alt": "Anatomical diagram of the uterus showing fundus, body, cervix, and peritoneal broad ligaments",
+    "caption": "Anatomical configuration of the uterus, fallopian tubes, and broad ligament reflections. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The anatomical posture of the resting uterus is described by two distinct angular relationships: anteversion and anteflexion. The angle of **anteversion** measures approximately ninety degrees, representing the forward tilt of the long axis of the cervix relative to the long axis of the vagina. This disposition places the external cervical os facing the posterior vaginal fornix.",
+   "say": "Anteversion describes a ninety-degree forward angle between the long axis of the cervix and the vagina. This orientation directs the external os toward the posterior fornix.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Angle of Anteversion",
+     "points": [
+      "Angle between long axis of cervix and long axis of vagina",
+      "Normally measures approximately 90 degrees",
+      "Directs the cervix downwards and backwards",
+      "Prevents direct downward prolapse into the vaginal canal"
+     ]
     },
-    {
-      "tx": "The anatomical posture of the resting uterus is described by two distinct angular relationships: anteversion and anteflexion. The angle of **anteversion** measures approximately ninety degrees, representing the forward tilt of the long axis of the cervix relative to the long axis of the vagina. This disposition places the external cervical os facing the posterior vaginal fornix.",
-      "say": "Anteversion describes a ninety-degree forward angle between the long axis of the cervix and the vagina. This orientation directs the external os toward the posterior fornix.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Angle of Anteversion",
-          "points": [
-            "Angle between long axis of cervix and long axis of vagina",
-            "Normally measures approximately 90 degrees",
-            "Directs the cervix downwards and backwards",
-            "Prevents direct downward prolapse into the vaginal canal"
-          ]
-        },
-        "right": {
-          "title": "Angle of Anteflexion",
-          "points": [
-            "Angle between long axis of uterine body and long axis of cervix",
-            "Normally measures approximately 120 to 125 degrees",
-            "Bends the uterine body forward over the urinary bladder",
-            "Maintains fundus resting upon the superior bladder surface"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "The angle of anteflexion measures approximately 120 to 125 degrees, representing the forward bending of the uterine corpus over the cervix at the level of the internal os. Together, normal **anteflexion** and anteversion ensure that during raised intra-abdominal pressure, the fundus and corpus are pressed downward against the upper surface of the bladder and pubic bones rather than herniating through the introitus.",
-      "say": "Anteflexion creates a 125-degree anterior bend at the isthmus. Raised abdominal pressure presses the fundus against the bladder and pubic bones, protecting against prolapse.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "p1",
-            "label": "Increased Intra-Abdominal Pressure (Coughing, lifting, straining at stool)"
-          },
-          {
-            "id": "p2",
-            "label": "Downward Force on Anteverted Fundus (Forces corpus flat against bladder and pubic symphysis)"
-          },
-          {
-            "id": "p3",
-            "label": "Mechanical Resistance (Prevents axis alignment with vaginal canal; resists prolapse)"
-          }
-        ],
-        "edges": [
-          [
-            "p1",
-            "p2"
-          ],
-          [
-            "p2",
-            "p3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The broad ligament is a two-layered fold of peritoneum extending from the lateral borders of the uterus to the lateral pelvic walls. The **broad ligament** is divided into four anatomical regions: the mesometrium below the ovarian ligament, the mesosalpinx suspending the fallopian tube, the mesovarium attaching to the ovary, and the suspensory ligament of the ovary transmitting ovarian vessels.",
-      "say": "Extending to the pelvic sidewalls, the broad ligament is a two-layered peritoneal fold. It comprises the mesometrium, mesosalpinx, mesovarium, and suspensory ligament of the ovary.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Broad Ligament Region",
-          "Anatomical Boundaries",
-          "Major Enclosed Structures"
-        ],
-        "rows": [
-          [
-            "Mesometrium",
-            "Largest portion below mesovarium to pelvic floor",
-            "Uterine artery, uterine venous plexus, sympathetic nerves"
-          ],
-          [
-            "Mesosalpinx",
-            "Superior fold between fallopian tube and mesovarium",
-            "Anastomotic arterial arcade, epoophoron, paroophoron"
-          ],
-          [
-            "Mesovarium",
-            "Posterior horizontal shelf attaching to ovary",
-            "Ovarian vascular rete entering the ovarian hilum"
-          ],
-          [
-            "Suspensory ligament",
-            "Lateral continuation attaching to pelvic brim",
-            "Ovarian artery and vein, ovarian nerve plexus, lymphatics"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The **broad ligament** is a double sheet of peritoneum from the uterine sides to the pelvic walls, divided into mesometrium below the ovarian ligament, mesosalpinx around the tube, mesovarium to the ovary, and the suspensory ligament of the ovary carrying the ovarian vessels. That peritoneal drape is not the chief passive support. The cardinal ligament is: fascia fanning from cervix and upper vagina out to the lateral pelvic wall, the condensation that actually holds the uterus up.",
-      "say": "The broad ligament is peritoneal, with mesometrium, mesosalpinx, mesovarium, and the suspensory ligament that carries ovarian vessels. Mechanical support is the cardinal ligament, a fascial fan from the cervix and upper vagina to the lateral pelvic wall. Confusing the peritoneal fold with that fan misstates what holds the uterus.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n6-ana-female-reproductive-uterus-position.webp",
-        "alt": "The cardinal ligament fanning from the cervix and upper vagina to the lateral pelvic wall.",
-        "caption": "A fascial fan leaves the cervix and upper vagina and reaches the lateral pelvic wall as the main passive uterine support. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "The primary mechanical supports of the uterus are stratified into active muscular and passive fibromuscular mechanisms. The active support is provided by the muscular pelvic diaphragm (levator ani) and the perineal body. The chief passive mechanical ligament is the **cardinal ligament** (transverse cervical ligament of Mackenrodt), which radiates fan-like from the cervix to the lateral pelvic walls.",
-      "say": "Active support comes from the muscular levator ani, while passive suspension depends on ligaments. Mackenrodt cardinal ligaments form the primary lateral suspensory bands.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n6-ana-female-reproductive-uterus-position.webp",
-        "alt": "Cardinal ligament fanning from cervix and upper vagina to the lateral pelvic wall as the chief passive uterine support",
-        "caption": "Cardinal ligament fanning from cervix and upper vagina to the lateral pelvic wall as the chief passive uterine support. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "The cardinal ligaments are condensation bands of dense pelvic endopelvic fascia surrounding the uterine artery and venous plexus at the base of the broad ligament. Bilaterally, each **Mackenrodt ligament** anchors the supravaginal cervix and lateral vaginal fornices to the pelvic fascia overlying obturator internus. Attenuation of these ligaments permits the uterus to descend directly down the vaginal axis.",
-      "say": "Dense endopelvic condensations forming the cardinal ligaments flank the supravaginal cervix. Stretching or rupture of these bands allows the uterus to descend as a prolapse.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "m1",
-            "label": "Obstetric Trauma / Chronic Strain (Damage to collagen and elastic fibres during labour)"
-          },
-          {
-            "id": "m2",
-            "label": "Laxity of Cardinal Ligaments (Loss of lateral anchoring of supravaginal cervix)"
-          },
-          {
-            "id": "m3",
-            "label": "Retroversion and Axis Alignment (Uterine axis parallels vaginal axis)"
-          },
-          {
-            "id": "m4",
-            "label": "Uterocervical Descent (Progressive first, second, or third degree procidentia)"
-          }
-        ],
-        "edges": [
-          [
-            "m1",
-            "m2"
-          ],
-          [
-            "m2",
-            "m3"
-          ],
-          [
-            "m3",
-            "m4"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Complementing the cardinal ligaments are the round ligaments of the uterus, which represent the cranial remnant of the embryonic gubernaculum. Originating from the anterolateral aspect of the uterine corpus below the tubal junction, each **round ligament** travels through the deep inguinal ring, traverse the inguinal canal, and terminates by fanning out into the subcutaneous tissue of the labium majus.",
-      "say": "Derived from the embryonic gubernaculum, each round ligament arises below the fallopian tube. It traverses the inguinal canal to terminate in the connective tissue of the labium majus.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Uterine Ligament",
-          "Anatomical Attachments",
-          "Primary Function"
-        ],
-        "rows": [
-          [
-            "Cardinal (Mackenrodt)",
-            "Supravaginal cervix to lateral pelvic sidewall",
-            "Primary support preventing vertical descent and apical prolapse"
-          ],
-          [
-            "Uterosacral ligament",
-            "Supravaginal cervix to third sacral vertebra",
-            "Tethers cervix posteriorly, maintaining normal anteversion"
-          ],
-          [
-            "Round ligament",
-            "Uterine cornu to labium majus via inguinal canal",
-            "Tethers fundus forwards, dynamically preserving anteversion"
-          ],
-          [
-            "Pubocervical ligament",
-            "Cervix to posterior surface of pubic bones",
-            "Supports bladder base, preventing cystocele formation"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Retroversion occurs when the uterus tilts backwards such that its long axis aligns with that of the vagina. While often a mobile congenital variant, fixed **retroversion** may develop secondary to pelvic inflammatory disease, severe endometriosis of the pouch of Douglas, or postpartum ligamentous stretching, which facilitates uterine descent and dyspareunia.",
-      "say": "When the uterus tilts backward into alignment with the vagina, retroversion occurs. Fixed retroversion often results from endometriosis or adhesions in the pouch of Douglas.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Normal Anteverted Posture",
-          "points": [
-            "Fundus rests on top of the bladder",
-            "Cervix points backwards toward posterior fornix",
-            "Intra-abdominal pressure closes vaginal slit",
-            "Minimal risk of apical uterine descent"
-          ]
-        },
-        "right": {
-          "title": "Retroverted Uterus",
-          "points": [
-            "Fundus lies backwards in pouch of Douglas",
-            "Cervix points forwards toward anterior fornix",
-            "Intra-abdominal pressure acts directly down vaginal canal",
-            "Predisposes to uterine prolapse and pelvic heaviness"
-          ]
-        }
-      }
+    "right": {
+     "title": "Angle of Anteflexion",
+     "points": [
+      "Angle between long axis of uterine body and long axis of cervix",
+      "Normally measures approximately 120 to 125 degrees",
+      "Bends the uterine body forward over the urinary bladder",
+      "Maintains fundus resting upon the superior bladder surface"
+     ]
     }
-  ],
-  "quiz": [
-    "10df754e-6592-40c9-9273-c77b6755ad42",
-    "3824fd7a-1037-4750-bdc7-23ac1aceb92f",
-    "83fa36d1-895b-4d7b-ad14-d3d9bf84d94a"
-  ]
+   }
+  },
+  {
+   "tx": "The angle of anteflexion measures approximately 120 to 125 degrees, representing the forward bending of the uterine corpus over the cervix at the level of the internal os. Together, normal **anteflexion** and anteversion ensure that during raised intra-abdominal pressure, the fundus and corpus are pressed downward against the upper surface of the bladder and pubic bones rather than herniating through the introitus.",
+   "say": "Anteflexion creates a 125-degree anterior bend at the isthmus. Raised abdominal pressure presses the fundus against the bladder and pubic bones, protecting against prolapse.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Increased Intra-Abdominal Pressure (Coughing, lifting, straining at stool)"
+     },
+     {
+      "id": "p2",
+      "label": "Downward Force on Anteverted Fundus (Forces corpus flat against bladder and pubic symphysis)"
+     },
+     {
+      "id": "p3",
+      "label": "Mechanical Resistance (Prevents axis alignment with vaginal canal; resists prolapse)"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2"
+     ],
+     [
+      "p2",
+      "p3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The broad ligament is a two-layered fold of peritoneum extending from the lateral borders of the uterus to the lateral pelvic walls. The **broad ligament** is divided into four anatomical regions: the mesometrium below the ovarian ligament, the mesosalpinx suspending the fallopian tube, the mesovarium attaching to the ovary, and the suspensory ligament of the ovary transmitting ovarian vessels.",
+   "say": "Extending to the pelvic sidewalls, the broad ligament is a two-layered peritoneal fold. It comprises the mesometrium, mesosalpinx, mesovarium, and suspensory ligament of the ovary.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Broad Ligament Region",
+     "Anatomical Boundaries",
+     "Major Enclosed Structures"
+    ],
+    "rows": [
+     [
+      "Mesometrium",
+      "Largest portion below mesovarium to pelvic floor",
+      "Uterine artery, uterine venous plexus, sympathetic nerves"
+     ],
+     [
+      "Mesosalpinx",
+      "Superior fold between fallopian tube and mesovarium",
+      "Anastomotic arterial arcade, epoophoron, paroophoron"
+     ],
+     [
+      "Mesovarium",
+      "Posterior horizontal shelf attaching to ovary",
+      "Ovarian vascular rete entering the ovarian hilum"
+     ],
+     [
+      "Suspensory ligament",
+      "Lateral continuation attaching to pelvic brim",
+      "Ovarian artery and vein, ovarian nerve plexus, lymphatics"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **broad ligament** is a double sheet of peritoneum from the uterine sides to the pelvic walls, divided into mesometrium below the ovarian ligament, mesosalpinx around the tube, mesovarium to the ovary, and the suspensory ligament of the ovary carrying the ovarian vessels. That peritoneal drape is not the chief passive support. The cardinal ligament is: fascia fanning from cervix and upper vagina out to the lateral pelvic wall, the condensation that actually holds the uterus up.",
+   "say": "The broad ligament is peritoneal, with mesometrium, mesosalpinx, mesovarium, and the suspensory ligament that carries ovarian vessels. Mechanical support is the cardinal ligament, a fascial fan from the cervix and upper vagina to the lateral pelvic wall. Confusing the peritoneal fold with that fan misstates what holds the uterus.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n6-ana-female-reproductive-uterus-position.webp",
+    "alt": "The cardinal ligament fanning from the cervix and upper vagina to the lateral pelvic wall.",
+    "caption": "A fascial fan leaves the cervix and upper vagina and reaches the lateral pelvic wall as the main passive uterine support. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The primary mechanical supports of the uterus are stratified into active muscular and passive fibromuscular mechanisms. The active support is provided by the muscular pelvic diaphragm (levator ani) and the perineal body. The chief passive mechanical ligament is the **cardinal ligament** (transverse cervical ligament of Mackenrodt), which radiates fan-like from the cervix to the lateral pelvic walls.",
+   "say": "Active support comes from the muscular levator ani, while passive suspension depends on ligaments. Mackenrodt cardinal ligaments form the primary lateral suspensory bands.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n6-ana-female-reproductive-uterus-position.webp",
+    "alt": "Cardinal ligament fanning from cervix and upper vagina to the lateral pelvic wall as the chief passive uterine support",
+    "caption": "Cardinal ligament fanning from cervix and upper vagina to the lateral pelvic wall as the chief passive uterine support. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The cardinal ligaments are condensation bands of dense pelvic endopelvic fascia surrounding the uterine artery and venous plexus at the base of the broad ligament. Bilaterally, each **Mackenrodt ligament** anchors the supravaginal cervix and lateral vaginal fornices to the pelvic fascia overlying obturator internus. Attenuation of these ligaments permits the uterus to descend directly down the vaginal axis.",
+   "say": "Dense endopelvic condensations forming the cardinal ligaments flank the supravaginal cervix. Stretching or rupture of these bands allows the uterus to descend as a prolapse.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "m1",
+      "label": "Obstetric Trauma / Chronic Strain (Damage to collagen and elastic fibres during labour)"
+     },
+     {
+      "id": "m2",
+      "label": "Laxity of Cardinal Ligaments (Loss of lateral anchoring of supravaginal cervix)"
+     },
+     {
+      "id": "m3",
+      "label": "Retroversion and Axis Alignment (Uterine axis parallels vaginal axis)"
+     },
+     {
+      "id": "m4",
+      "label": "Uterocervical Descent (Progressive first, second, or third degree procidentia)"
+     }
+    ],
+    "edges": [
+     [
+      "m1",
+      "m2"
+     ],
+     [
+      "m2",
+      "m3"
+     ],
+     [
+      "m3",
+      "m4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Complementing the cardinal ligaments are the round ligaments of the uterus, which represent the cranial remnant of the embryonic gubernaculum. Originating from the anterolateral aspect of the uterine corpus below the tubal junction, each **round ligament** travels through the deep inguinal ring, traverse the inguinal canal, and terminates by fanning out into the subcutaneous tissue of the labium majus.",
+   "say": "Derived from the embryonic gubernaculum, each round ligament arises below the fallopian tube. It traverses the inguinal canal to terminate in the connective tissue of the labium majus.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Uterine Ligament",
+     "Anatomical Attachments",
+     "Primary Function"
+    ],
+    "rows": [
+     [
+      "Cardinal (Mackenrodt)",
+      "Supravaginal cervix to lateral pelvic sidewall",
+      "Primary support preventing vertical descent and apical prolapse"
+     ],
+     [
+      "Uterosacral ligament",
+      "Supravaginal cervix to third sacral vertebra",
+      "Tethers cervix posteriorly, maintaining normal anteversion"
+     ],
+     [
+      "Round ligament",
+      "Uterine cornu to labium majus via inguinal canal",
+      "Tethers fundus forwards, dynamically preserving anteversion"
+     ],
+     [
+      "Pubocervical ligament",
+      "Cervix to posterior surface of pubic bones",
+      "Supports bladder base, preventing cystocele formation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Retroversion occurs when the uterus tilts backwards such that its long axis aligns with that of the vagina. While often a mobile congenital variant, fixed **retroversion** may develop secondary to pelvic inflammatory disease, severe endometriosis of the pouch of Douglas, or postpartum ligamentous stretching, which facilitates uterine descent and dyspareunia.",
+   "say": "When the uterus tilts backward into alignment with the vagina, retroversion occurs. Fixed retroversion often results from endometriosis or adhesions in the pouch of Douglas.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal Anteverted Posture",
+     "points": [
+      "Fundus rests on top of the bladder",
+      "Cervix points backwards toward posterior fornix",
+      "Intra-abdominal pressure closes vaginal slit",
+      "Minimal risk of apical uterine descent"
+     ]
+    },
+    "right": {
+     "title": "Retroverted Uterus",
+     "points": [
+      "Fundus lies backwards in pouch of Douglas",
+      "Cervix points forwards toward anterior fornix",
+      "Intra-abdominal pressure acts directly down vaginal canal",
+      "Predisposes to uterine prolapse and pelvic heaviness"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [
+  "10df754e-6592-40c9-9273-c77b6755ad42",
+  "3824fd7a-1037-4750-bdc7-23ac1aceb92f",
+  "83fa36d1-895b-4d7b-ad14-d3d9bf84d94a"
+ ]
 }

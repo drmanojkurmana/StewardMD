@@ -1,239 +1,239 @@
 {
-  "v": 1,
-  "module": "obg-hypertensive-disorders",
-  "subject": "obstetrics-gynaecology",
-  "title": "Magnesium Sulphate: Pritchard, Zuspan and Toxicity",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "The anticonvulsant of choice for eclampsia prevention and treatment is **magnesium sulphate**. It outperforms diazepam and phenytoin in preventing recurrent fits. Every labour ward stocks it with its antidote immediately available. The Magpie trial showed it more than halves eclampsia risk in pre-eclampsia, the evidence behind universal stocking.",
-      "say": "Magnesium sulphate is the anticonvulsant of choice for eclampsia prevention and treatment.",
-      "vis": {
-        "kind": "image",
-        "src": "clinix/media/practicals/obg-drug-magnesium-sulphate.webp",
-        "alt": "Magnesium sulphate in eclampsia.",
-        "caption": "Magnesium sulphate. [Credit: StewardMD]",
-        "ar": 1.5
-      }
+ "v": 1,
+ "module": "obg-hypertensive-disorders",
+ "subject": "obstetrics-gynaecology",
+ "title": "Magnesium Sulphate: Pritchard, Zuspan and Toxicity",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The anticonvulsant of choice for eclampsia prevention and treatment is **magnesium sulphate**. It outperforms diazepam and phenytoin in preventing recurrent fits. Every labour ward stocks it with its antidote immediately available. The Magpie trial showed it more than halves eclampsia risk in pre-eclampsia, the evidence behind universal stocking.",
+   "say": "Magnesium sulphate is the anticonvulsant of choice for eclampsia prevention and treatment.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-magnesium-sulphate.webp",
+    "alt": "Magnesium sulphate in eclampsia.",
+    "caption": "Magnesium sulphate. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The intramuscular regimen with loading doses into each buttock is the **Pritchard regimen**. It suits settings without infusion pumps, needing only clinical monitoring of reflexes, respiration and urine. Maintenance doses follow every four hours while criteria stay safe. Four grams load in each buttock with 5 grams maintenance is the classic Pritchard schedule in many textbooks.",
+   "say": "The Pritchard regimen uses intramuscular magnesium where infusion pumps are unavailable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Element",
+     "Pritchard"
+    ],
+    "rows": [
+     [
+      "Loading",
+      "IV plus IM buttock doses"
+     ],
+     [
+      "Maintenance",
+      "IM every 4 hours"
+     ],
+     [
+      "Monitoring",
+      "Reflex, breathing, urine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The continuous intravenous infusion regimen is the **Zuspan regimen**. A loading dose precedes a gram per hour infusion, typically for twenty four hours after delivery or the last fit. Serum levels are checked when renal function is impaired. Zuspan uses a 4 gram load then 1 gram per hour, while Sibai doubles the infusion to 2 grams.",
+   "say": "The Zuspan regimen infuses a gram per hour for twenty four hours after delivery.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Loading dose given"
+     },
+     {
+      "id": "n1",
+      "label": "Infusion at gram per hour"
+     },
+     {
+      "id": "n2",
+      "label": "Continue 24 hours"
+     },
+     {
+      "id": "n3",
+      "label": "After delivery or last fit"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Loss of deep tendon reflexes is the earliest clinical sign of magnesium excess, monitored through the **patellar reflex**. Each maintenance dose requires reflexes present, breathing adequate and urine flowing. Any failure withholds the dose. Respiratory rate under 16, urine under 30 millilitres an hour, or absent reflexes each stop the next dose.",
+   "say": "The patellar reflex is checked before every magnesium dose as the earliest toxicity sign.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Safe to give",
+     "points": [
+      "Reflexes present",
+      "Breathing over 16 per minute",
+      "Urine over 25 ml per hour"
+     ]
     },
-    {
-      "tx": "The intramuscular regimen with loading doses into each buttock is the **Pritchard regimen**. It suits settings without infusion pumps, needing only clinical monitoring of reflexes, respiration and urine. Maintenance doses follow every four hours while criteria stay safe. Four grams load in each buttock with 5 grams maintenance is the classic Pritchard schedule in many textbooks.",
-      "say": "The Pritchard regimen uses intramuscular magnesium where infusion pumps are unavailable.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Element",
-          "Pritchard"
-        ],
-        "rows": [
-          [
-            "Loading",
-            "IV plus IM buttock doses"
-          ],
-          [
-            "Maintenance",
-            "IM every 4 hours"
-          ],
-          [
-            "Monitoring",
-            "Reflex, breathing, urine"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The continuous intravenous infusion regimen is the **Zuspan regimen**. A loading dose precedes a gram per hour infusion, typically for twenty four hours after delivery or the last fit. Serum levels are checked when renal function is impaired. Zuspan uses a 4 gram load then 1 gram per hour, while Sibai doubles the infusion to 2 grams.",
-      "say": "The Zuspan regimen infuses a gram per hour for twenty four hours after delivery.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Loading dose given"
-          },
-          {
-            "id": "n1",
-            "label": "Infusion at gram per hour"
-          },
-          {
-            "id": "n2",
-            "label": "Continue 24 hours"
-          },
-          {
-            "id": "n3",
-            "label": "After delivery or last fit"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Loss of deep tendon reflexes is the earliest clinical sign of magnesium excess, monitored through the **patellar reflex**. Each maintenance dose requires reflexes present, breathing adequate and urine flowing. Any failure withholds the dose. Respiratory rate under 16, urine under 30 millilitres an hour, or absent reflexes each stop the next dose.",
-      "say": "The patellar reflex is checked before every magnesium dose as the earliest toxicity sign.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Safe to give",
-          "points": [
-            "Reflexes present",
-            "Breathing over 16 per minute",
-            "Urine over 25 ml per hour"
-          ]
-        },
-        "right": {
-          "title": "Withhold dose",
-          "points": [
-            "Reflexes absent",
-            "Slow breathing",
-            " scanty urine"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Loss of deep tendon reflexes is the earliest clinical sign of magnesium excess, watched at the **patellar reflex**. Before every maintenance dose the reflex must be present, breathing must be adequate, and urine must be flowing. A respiratory rate under 16, urine under 30 millilitres an hour, or an absent reflex stops the next dose. If breathing fails, calcium gluconate drawn up at the bedside is the antidote that reverses respiratory depression from magnesium while ventilation is supported.",
-      "say": "The patellar reflex is the earliest warning of too much magnesium and is checked before each maintenance dose, along with breathing and urine output. Rate under 16 breaths a minute, urine under 30 millilitres an hour, or a lost reflex cancels the next dose. Calcium gluconate kept at the bedside reverses respiratory depression if toxicity has already stopped breathing.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n32-obg-hypertensive-disorders-magnesium-sulphate.webp",
-        "alt": "A syringe of calcium gluconate drawn up beside a woman receiving magnesium sulphate, ready to reverse respiratory depression.",
-        "caption": "Calcium gluconate stands ready at the bedside while magnesium is infused, prepared for the moment breathing slows. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "The specific antidote reversing magnesium toxicity is **calcium gluconate**. One gram given intravenously over minutes restores neuromuscular function. It is drawn up and kept at the bedside during magnesium therapy. Ten millilitres of 10 percent calcium gluconate given over ten minutes is the dose taped to the magnesium chart.",
-      "say": "Calcium gluconate reverses magnesium toxicity and is kept at the bedside throughout therapy.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n32-obg-hypertensive-disorders-magnesium-sulphate.webp",
-        "alt": "Calcium gluconate antidote drawn up at the bedside during magnesium sulphate therapy reversing respiratory depression",
-        "caption": "Calcium gluconate antidote drawn up at the bedside during magnesium sulphate therapy reversing respiratory depression. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Magnesium also protects the preterm fetal brain when given before early delivery, termed **neuroprotection**. Below thirty two weeks it reduces cerebral palsy in survivors. The same infusion serves mother and fetus simultaneously in pre-eclampsia. It is given from viability to about 32 weeks, ideally within four hours before the expected preterm birth.",
-      "say": "Magnesium neuroprotection before preterm delivery reduces cerebral palsy in survivors.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Indication",
-          "Benefit"
-        ],
-        "rows": [
-          [
-            "Eclampsia prophylaxis",
-            "Fewer fits"
-          ],
-          [
-            "Eclampsia treatment",
-            "Fewer recurrences"
-          ],
-          [
-            "Preterm neuroprotection",
-            "Less cerebral palsy"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Recurrent fit on magnesium is treated with a further bolus before changing drugs, following **breakthrough fit protocol**. Most eclamptic fits stop spontaneously within minutes. Airway, oxygen and left lateral positioning accompany drug therapy. A second fit after the extra bolus earns a check of magnesium level and imaging to exclude bleeding in the brain.",
-      "say": "Breakthrough fits get a further magnesium bolus with airway and lateral positioning.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Fit occurs on magnesium"
-          },
-          {
-            "id": "n1",
-            "label": "Extra bolus given"
-          },
-          {
-            "id": "n2",
-            "label": "Airway and oxygen maintained"
-          },
-          {
-            "id": "n3",
-            "label": "Most fits self limit"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Renal impairment accumulates magnesium dangerously, demanding **dose adjustment in renal failure**. Serum levels guide therapy when urine output falls. Dialysis removes magnesium in life threatening toxicity. Levels above 5 millimoles per litre can stop breathing, so ventilation support sits alongside the antidote.",
-      "say": "Renal failure accumulates magnesium dangerously and demands level guided dosing.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Normal kidneys",
-          "points": [
-            "Standard regimen",
-            "Clinical monitoring"
-          ]
-        },
-        "right": {
-          "title": "Failed kidneys",
-          "points": [
-            "Reduced dose",
-            "Serum levels",
-            "Dialysis if toxic"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Do not ask magnesium to do a job it barely performs. It guards the brain against fits while hardly touching arterial pressure, so a reading still above 160 over 110 needs its own drug beside the infusion. Labetalol, hydralazine or nifedipine lowers pressure while magnesium keeps running for seizure protection. Managing the two problems on parallel tracks is **separate pressure control**, and confusing them leaves stroke risk untreated.",
-      "say": "Pressure is controlled separately with labetalol or nifedipine because magnesium protects against fits but barely lowers pressure.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-m635-obg-hypertensive-disorders-magnesium-sulphate.webp",
-        "alt": "Two parallel treatment tracks, magnesium infusion guarding against seizures beside a separate drug lowering high blood pressure",
-        "caption": "Magnesium running for seizure protection on one track while a separate antihypertensive brings severe pressure down on the other. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Blood pressure itself is controlled separately with labetalol, hydralazine or nifedipine because magnesium is a poor antihypertensive, a distinction of **separate pressure control**. Severe hypertension needs treatment within the hour to prevent stroke. Magnesium continues alongside for seizure protection. Oral nifedipine works within 20 minutes, while intravenous labetalol is avoided in asthma or a slow heart.",
-      "say": "Separate pressure control treats severe hypertension because magnesium barely lowers pressure.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/preeclampsia-fig1.webp",
-        "alt": "Pre-eclampsia pressure and seizure management.",
-        "caption": "Pressure and seizure control. [Credit: StewardMD]",
-        "ar": 1.5
-      }
+    "right": {
+     "title": "Withhold dose",
+     "points": [
+      "Reflexes absent",
+      "Slow breathing",
+      " scanty urine"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "Loss of deep tendon reflexes is the earliest clinical sign of magnesium excess, watched at the **patellar reflex**. Before every maintenance dose the reflex must be present, breathing must be adequate, and urine must be flowing. A respiratory rate under 16, urine under 30 millilitres an hour, or an absent reflex stops the next dose. If breathing fails, calcium gluconate drawn up at the bedside is the antidote that reverses respiratory depression from magnesium while ventilation is supported.",
+   "say": "The patellar reflex is the earliest warning of too much magnesium and is checked before each maintenance dose, along with breathing and urine output. Rate under 16 breaths a minute, urine under 30 millilitres an hour, or a lost reflex cancels the next dose. Calcium gluconate kept at the bedside reverses respiratory depression if toxicity has already stopped breathing.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n32-obg-hypertensive-disorders-magnesium-sulphate.webp",
+    "alt": "A syringe of calcium gluconate drawn up beside a woman receiving magnesium sulphate, ready to reverse respiratory depression.",
+    "caption": "Calcium gluconate stands ready at the bedside while magnesium is infused, prepared for the moment breathing slows. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The specific antidote reversing magnesium toxicity is **calcium gluconate**. One gram given intravenously over minutes restores neuromuscular function. It is drawn up and kept at the bedside during magnesium therapy. Ten millilitres of 10 percent calcium gluconate given over ten minutes is the dose taped to the magnesium chart.",
+   "say": "Calcium gluconate reverses magnesium toxicity and is kept at the bedside throughout therapy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n32-obg-hypertensive-disorders-magnesium-sulphate.webp",
+    "alt": "Calcium gluconate antidote drawn up at the bedside during magnesium sulphate therapy reversing respiratory depression",
+    "caption": "Calcium gluconate antidote drawn up at the bedside during magnesium sulphate therapy reversing respiratory depression. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Magnesium also protects the preterm fetal brain when given before early delivery, termed **neuroprotection**. Below thirty two weeks it reduces cerebral palsy in survivors. The same infusion serves mother and fetus simultaneously in pre-eclampsia. It is given from viability to about 32 weeks, ideally within four hours before the expected preterm birth.",
+   "say": "Magnesium neuroprotection before preterm delivery reduces cerebral palsy in survivors.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Indication",
+     "Benefit"
+    ],
+    "rows": [
+     [
+      "Eclampsia prophylaxis",
+      "Fewer fits"
+     ],
+     [
+      "Eclampsia treatment",
+      "Fewer recurrences"
+     ],
+     [
+      "Preterm neuroprotection",
+      "Less cerebral palsy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recurrent fit on magnesium is treated with a further bolus before changing drugs, following **breakthrough fit protocol**. Most eclamptic fits stop spontaneously within minutes. Airway, oxygen and left lateral positioning accompany drug therapy. A second fit after the extra bolus earns a check of magnesium level and imaging to exclude bleeding in the brain.",
+   "say": "Breakthrough fits get a further magnesium bolus with airway and lateral positioning.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Fit occurs on magnesium"
+     },
+     {
+      "id": "n1",
+      "label": "Extra bolus given"
+     },
+     {
+      "id": "n2",
+      "label": "Airway and oxygen maintained"
+     },
+     {
+      "id": "n3",
+      "label": "Most fits self limit"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Renal impairment accumulates magnesium dangerously, demanding **dose adjustment in renal failure**. Serum levels guide therapy when urine output falls. Dialysis removes magnesium in life threatening toxicity. Levels above 5 millimoles per litre can stop breathing, so ventilation support sits alongside the antidote.",
+   "say": "Renal failure accumulates magnesium dangerously and demands level guided dosing.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal kidneys",
+     "points": [
+      "Standard regimen",
+      "Clinical monitoring"
+     ]
+    },
+    "right": {
+     "title": "Failed kidneys",
+     "points": [
+      "Reduced dose",
+      "Serum levels",
+      "Dialysis if toxic"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Do not ask magnesium to do a job it barely performs. It guards the brain against fits while hardly touching arterial pressure, so a reading still above 160 over 110 needs its own drug beside the infusion. Labetalol, hydralazine or nifedipine lowers pressure while magnesium keeps running for seizure protection. Managing the two problems on parallel tracks is **separate pressure control**, and confusing them leaves stroke risk untreated.",
+   "say": "Pressure is controlled separately with labetalol or nifedipine because magnesium protects against fits but barely lowers pressure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m635-obg-hypertensive-disorders-magnesium-sulphate.webp",
+    "alt": "Two parallel treatment tracks, magnesium infusion guarding against seizures beside a separate drug lowering high blood pressure",
+    "caption": "Magnesium running for seizure protection on one track while a separate antihypertensive brings severe pressure down on the other. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Blood pressure itself is controlled separately with labetalol, hydralazine or nifedipine because magnesium is a poor antihypertensive, a distinction of **separate pressure control**. Severe hypertension needs treatment within the hour to prevent stroke. Magnesium continues alongside for seizure protection. Oral nifedipine works within 20 minutes, while intravenous labetalol is avoided in asthma or a slow heart.",
+   "say": "Separate pressure control treats severe hypertension because magnesium barely lowers pressure.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/preeclampsia-fig1.webp",
+    "alt": "Pre-eclampsia pressure and seizure management.",
+    "caption": "Pressure and seizure control. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
 }

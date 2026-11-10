@@ -1,216 +1,216 @@
 {
-  "key": "ped-neonatal-respiratory-respiratory-distress-syndrome",
-  "v": 1,
-  "module": "ped-neonatal-respiratory",
-  "subject": "paediatrics",
-  "title": "Respiratory Distress Syndrome, Surfactant and Wet Lung",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "The leading cause of respiratory failure in premature infants is **neonatal respiratory distress syndrome**, historically termed hyaline membrane disease. Arising almost exclusively in infants born before thirty-four weeks gestation, the primary pathophysiological defect is developmental deficiency of pulmonary surfactant, leading to widespread microatelectasis and progressive ventilatory failure.",
-      "say": "Respiratory distress syndrome is caused by developmental surfactant deficiency in premature infants.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/neonatal-rds-fig1.webp",
-        "alt": "Placental transfer of antenatal corticosteroids stimulating fetal alveolar surfactant synthesis.",
-        "caption": "Neonatal respiratory distress syndrome: chest X-ray with diffuse reticulogranular pattern and air bronchograms beside an infant with nasal flaring. Illustration: StewardMD original.",
-        "ar": 1.5
-      }
+ "key": "ped-neonatal-respiratory-respiratory-distress-syndrome",
+ "v": 1,
+ "module": "ped-neonatal-respiratory",
+ "subject": "paediatrics",
+ "title": "Respiratory Distress Syndrome, Surfactant and Wet Lung",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The leading cause of respiratory failure in premature infants is **neonatal respiratory distress syndrome**, historically termed hyaline membrane disease. Arising almost exclusively in infants born before thirty-four weeks gestation, the primary pathophysiological defect is developmental deficiency of pulmonary surfactant, leading to widespread microatelectasis and progressive ventilatory failure.",
+   "say": "Respiratory distress syndrome is caused by developmental surfactant deficiency in premature infants.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/neonatal-rds-fig1.webp",
+    "alt": "Placental transfer of antenatal corticosteroids stimulating fetal alveolar surfactant synthesis.",
+    "caption": "Neonatal respiratory distress syndrome: chest X-ray with diffuse reticulogranular pattern and air bronchograms beside an infant with nasal flaring. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Pulmonary surfactant is synthesized, packaged in lamellar bodies, and secreted by **alveolar type two pneumocytes**. Composed of eighty percent phospholipids, ten percent neutral lipids, and ten percent proteins, its primary active component is dipalmitoylphosphatidylcholine. Surfactant lowers alveolar surface tension at end-expiration, preventing alveolar collapse in accordance with the Law of Laplace.",
+   "say": "Surfactant synthesized by type two pneumocytes lowers surface tension to prevent end-expiratory collapse.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surfactant Component",
+     "Proportion by Weight",
+     "Physiological Function"
+    ],
+    "rows": [
+     [
+      "Dipalmitoylphosphatidylcholine (DPPC)",
+      "Approximately 60 percent",
+      "Forms compact monolayer reducing surface tension to zero"
+     ],
+     [
+      "Phosphatidylglycerol (PG)",
+      "Approximately 10 percent",
+      "Promotes rapid spreading of surfactant over alveolar surface"
+     ],
+     [
+      "Surfactant proteins SP-B and SP-C",
+      "Approximately 2 percent",
+      "Hydrophobic proteins facilitating monolayer insertion"
+     ],
+     [
+      "Surfactant proteins SP-A and SP-D",
+      "Approximately 6 percent",
+      "Hydrophilic collectins mediating innate immune defense"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In the absence of functional surfactant, high surface tension causes **widespread alveolar collapse**. Diffuse microatelectasis results in right-to-left intrapulmonary shunting, severe ventilation-perfusion mismatch, hypoxia, and respiratory acidosis. Epithelial damage and transudation of fibrinogen into alveolar spaces form eosinophilic fibrin-rich hyaline membranes that severely impair diffusion.",
+   "say": "High surface tension causes alveolar collapse, intrapulmonary shunting, and hyaline membrane formation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pathophysiological Cascade",
+     "points": [
+      "Alveolar collapse at end-expiration",
+      "Massive intrapulmonary right-to-left shunt",
+      "Hypoxia, hypercapnia, and mixed acidosis"
+     ]
     },
-    {
-      "tx": "Pulmonary surfactant is synthesized, packaged in lamellar bodies, and secreted by **alveolar type two pneumocytes**. Composed of eighty percent phospholipids, ten percent neutral lipids, and ten percent proteins, its primary active component is dipalmitoylphosphatidylcholine. Surfactant lowers alveolar surface tension at end-expiration, preventing alveolar collapse in accordance with the Law of Laplace.",
-      "say": "Surfactant synthesized by type two pneumocytes lowers surface tension to prevent end-expiratory collapse.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Surfactant Component",
-          "Proportion by Weight",
-          "Physiological Function"
-        ],
-        "rows": [
-          [
-            "Dipalmitoylphosphatidylcholine (DPPC)",
-            "Approximately 60 percent",
-            "Forms compact monolayer reducing surface tension to zero"
-          ],
-          [
-            "Phosphatidylglycerol (PG)",
-            "Approximately 10 percent",
-            "Promotes rapid spreading of surfactant over alveolar surface"
-          ],
-          [
-            "Surfactant proteins SP-B and SP-C",
-            "Approximately 2 percent",
-            "Hydrophobic proteins facilitating monolayer insertion"
-          ],
-          [
-            "Surfactant proteins SP-A and SP-D",
-            "Approximately 6 percent",
-            "Hydrophilic collectins mediating innate immune defense"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "In the absence of functional surfactant, high surface tension causes **widespread alveolar collapse**. Diffuse microatelectasis results in right-to-left intrapulmonary shunting, severe ventilation-perfusion mismatch, hypoxia, and respiratory acidosis. Epithelial damage and transudation of fibrinogen into alveolar spaces form eosinophilic fibrin-rich hyaline membranes that severely impair diffusion.",
-      "say": "High surface tension causes alveolar collapse, intrapulmonary shunting, and hyaline membrane formation.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Pathophysiological Cascade",
-          "points": [
-            "Alveolar collapse at end-expiration",
-            "Massive intrapulmonary right-to-left shunt",
-            "Hypoxia, hypercapnia, and mixed acidosis"
-          ]
-        },
-        "right": {
-          "title": "Histopathological Lesion",
-          "points": [
-            "Desquamation of necrotic alveolar epithelium",
-            "Fibrin and cellular debris exudation",
-            "Eosinophilic hyaline membranes lining ducts"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "The diagnostic radiological appearance on chest radiography is a **diffuse reticulogranular ground glass pattern**. High surface tension produces uniform microatelectasis appearing as fine granular opacities distributed symmetrically throughout both lung fields. Concurrently, patent major bronchi stand out prominently as dark branching air bronchograms against the opacified background, while overall lung volume is markedly reduced.",
-      "say": "Chest radiography displays diffuse reticulogranular ground-glass opacities with prominent air bronchograms.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Radiological Grade",
-          "X-ray Finding",
-          "Clinical Correlate"
-        ],
-        "rows": [
-          [
-            "Grade 1 (Mild)",
-            "Fine diffuse reticulogranular ground-glass mottling",
-            "Mild distress responding to CPAP alone"
-          ],
-          [
-            "Grade 2 (Moderate)",
-            "Reticulogranular pattern with air bronchograms",
-            "Obvious respiratory distress, needs surfactant"
-          ],
-          [
-            "Grade 3 (Severe)",
-            "Confluent opacities, blurred cardiac borders",
-            "Marked hypoxia, high oxygen requirement"
-          ],
-          [
-            "Grade 4 (Whiteout)",
-            "Complete bilateral opacification, obscured diaphragm",
-            "Severe respiratory failure, mechanical ventilation"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "A vital preventive intervention in threatened preterm labor is maternal **antenatal corticosteroid administration**. Intramuscular betamethasone administered as two twelve-milligram doses twenty-four hours apart between twenty-four and thirty-four weeks gestation crosses the placenta to bind fetal glucocorticoid receptors, accelerating alveolar maturation and cutting RDS incidence and neonatal mortality in half.",
-      "say": "Antenatal betamethasone accelerates lung maturation and cuts respiratory distress syndrome by half.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Recommended Regimens",
-          "points": [
-            "Betamethasone: 12 mg IM every 24 hours (2 doses)",
-            "Dexamethasone: 6 mg IM every 12 hours (4 doses)",
-            "Administered between 24 and 34 weeks gestation"
-          ]
-        },
-        "right": {
-          "title": "Proven Clinical Reductions",
-          "points": [
-            "Halves respiratory distress syndrome",
-            "Halves intraventricular hemorrhage",
-            "Reduces overall neonatal mortality by 40 percent"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Prevention of respiratory distress in a threatened preterm birth is maternal **antenatal corticosteroid administration**. Betamethasone 12 mg intramuscularly, two doses 24 hours apart, between 24 and 34 weeks, crosses the placenta, binds fetal glucocorticoid receptors, speeds alveolar maturation, and cuts both respiratory distress syndrome and neonatal death by about half. If the infant is still preterm and working to breathe, early nasal CPAP through binasal prongs at about five to eight centimetres of water keeps alveoli open without an immediate endotracheal tube.",
-      "say": "Two intramuscular doses of betamethasone, 12 mg and a day apart, given from 24 to 34 weeks, mature the fetal lung and roughly halve respiratory distress and neonatal death. A preterm baby who still struggles can start on nasal CPAP with binasal prongs at five to eight centimetres of water, holding alveoli open before intubation.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n54-ped-neonatal-respiratory-respiratory-distress-syndrome.webp",
-        "alt": "A preterm infant receiving early nasal CPAP through binasal prongs at five to eight centimetres of water.",
-        "caption": "Binasal prongs deliver nasal CPAP at about five to eight centimetres of water to a preterm infant. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "The modern delivery room standard for managing spontaneous breathing in preterm infants is **early nasal continuous positive airway pressure**. Applying five to eight centimeters of water pressure via binasal prongs maintains end-expiratory alveolar stability, establishes functional residual capacity, and avoids the barotrauma and volutrauma associated with early invasive endotracheal mechanical ventilation.",
-      "say": "Early nasal CPAP maintains functional residual capacity and avoids invasive ventilator trauma.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n54-ped-neonatal-respiratory-respiratory-distress-syndrome.webp",
-        "alt": "Preterm infant on early nasal CPAP with binasal prongs delivering five to eight centimetres of water pressure",
-        "caption": "Preterm infant on early nasal CPAP with binasal prongs delivering five to eight centimetres of water pressure. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "When infants on CPAP require rising inspired oxygen fractions exceeding thirty percent, **exogenous surfactant replacement therapy** is administered. Natural bovine or porcine extracts like poractant alfa are instilled directly into the trachea using minimally invasive surfactant administration techniques, rapidly expanding lung compliance and dramatically reducing oxygen and ventilatory requirements.",
-      "say": "Exogenous surfactant instilled into the trachea improves compliance and reduces oxygen needs.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Surfactant Preparations",
-          "points": [
-            "Poractant alfa (porcine, 200 mg/kg initial dose)",
-            "Beractant (bovine, 100 mg/kg initial dose)",
-            "Natural animal extracts superior to synthetics"
-          ]
-        },
-        "right": {
-          "title": "Administration Seams",
-          "points": [
-            "INSURE: Intubate, Surfactant, Extubate to CPAP",
-            "LISA: Less Invasive Surfactant Administration",
-            "Thin catheter instillation during spontaneous CPAP"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "A common clinical mimic in late preterm infants delivered by elective cesarean is **transient tachypnoea of the newborn**. Arising from delayed resorption of fetal alveolar fluid by epithelial sodium channels, infants present with rapid respirations within hours of birth. Radiography reveals prominent perihilar vascular markings and fluid in interlobar fissures, with spontaneous resolution occurring within forty-eight hours.",
-      "say": "Transient tachypnoea results from delayed lung fluid clearance and resolves in forty-eight hours.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Feature",
-          "Respiratory Distress Syndrome",
-          "Transient Tachypnoea (TTN)"
-        ],
-        "rows": [
-          [
-            "Gestational age",
-            "Preterm infants under 34 weeks",
-            "Late preterm and term cesarean deliveries"
-          ],
-          [
-            "Pathophysiology",
-            "Surfactant deficiency, alveolar collapse",
-            "Delayed alveolar fluid resorption via ENaC channels"
-          ],
-          [
-            "Chest radiograph",
-            "Ground-glass reticulogranular, air bronchograms",
-            "Perihilar streaking, fissure fluid, hyperinflation"
-          ],
-          [
-            "Clinical course",
-            "Worsens over 48 hours without surfactant",
-            "Improves rapidly, resolves within 48 to 72 hours"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Histopathological Lesion",
+     "points": [
+      "Desquamation of necrotic alveolar epithelium",
+      "Fibrin and cellular debris exudation",
+      "Eosinophilic hyaline membranes lining ducts"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "The diagnostic radiological appearance on chest radiography is a **diffuse reticulogranular ground glass pattern**. High surface tension produces uniform microatelectasis appearing as fine granular opacities distributed symmetrically throughout both lung fields. Concurrently, patent major bronchi stand out prominently as dark branching air bronchograms against the opacified background, while overall lung volume is markedly reduced.",
+   "say": "Chest radiography displays diffuse reticulogranular ground-glass opacities with prominent air bronchograms.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Radiological Grade",
+     "X-ray Finding",
+     "Clinical Correlate"
+    ],
+    "rows": [
+     [
+      "Grade 1 (Mild)",
+      "Fine diffuse reticulogranular ground-glass mottling",
+      "Mild distress responding to CPAP alone"
+     ],
+     [
+      "Grade 2 (Moderate)",
+      "Reticulogranular pattern with air bronchograms",
+      "Obvious respiratory distress, needs surfactant"
+     ],
+     [
+      "Grade 3 (Severe)",
+      "Confluent opacities, blurred cardiac borders",
+      "Marked hypoxia, high oxygen requirement"
+     ],
+     [
+      "Grade 4 (Whiteout)",
+      "Complete bilateral opacification, obscured diaphragm",
+      "Severe respiratory failure, mechanical ventilation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A vital preventive intervention in threatened preterm labor is maternal **antenatal corticosteroid administration**. Intramuscular betamethasone administered as two twelve-milligram doses twenty-four hours apart between twenty-four and thirty-four weeks gestation crosses the placenta to bind fetal glucocorticoid receptors, accelerating alveolar maturation and cutting RDS incidence and neonatal mortality in half.",
+   "say": "Antenatal betamethasone accelerates lung maturation and cuts respiratory distress syndrome by half.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Recommended Regimens",
+     "points": [
+      "Betamethasone: 12 mg IM every 24 hours (2 doses)",
+      "Dexamethasone: 6 mg IM every 12 hours (4 doses)",
+      "Administered between 24 and 34 weeks gestation"
+     ]
+    },
+    "right": {
+     "title": "Proven Clinical Reductions",
+     "points": [
+      "Halves respiratory distress syndrome",
+      "Halves intraventricular hemorrhage",
+      "Reduces overall neonatal mortality by 40 percent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Prevention of respiratory distress in a threatened preterm birth is maternal **antenatal corticosteroid administration**. Betamethasone 12 mg intramuscularly, two doses 24 hours apart, between 24 and 34 weeks, crosses the placenta, binds fetal glucocorticoid receptors, speeds alveolar maturation, and cuts both respiratory distress syndrome and neonatal death by about half. If the infant is still preterm and working to breathe, early nasal CPAP through binasal prongs at about five to eight centimetres of water keeps alveoli open without an immediate endotracheal tube.",
+   "say": "Two intramuscular doses of betamethasone, 12 mg and a day apart, given from 24 to 34 weeks, mature the fetal lung and roughly halve respiratory distress and neonatal death. A preterm baby who still struggles can start on nasal CPAP with binasal prongs at five to eight centimetres of water, holding alveoli open before intubation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n54-ped-neonatal-respiratory-respiratory-distress-syndrome.webp",
+    "alt": "A preterm infant receiving early nasal CPAP through binasal prongs at five to eight centimetres of water.",
+    "caption": "Binasal prongs deliver nasal CPAP at about five to eight centimetres of water to a preterm infant. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The modern delivery room standard for managing spontaneous breathing in preterm infants is **early nasal continuous positive airway pressure**. Applying five to eight centimeters of water pressure via binasal prongs maintains end-expiratory alveolar stability, establishes functional residual capacity, and avoids the barotrauma and volutrauma associated with early invasive endotracheal mechanical ventilation.",
+   "say": "Early nasal CPAP maintains functional residual capacity and avoids invasive ventilator trauma.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n54-ped-neonatal-respiratory-respiratory-distress-syndrome.webp",
+    "alt": "Preterm infant on early nasal CPAP with binasal prongs delivering five to eight centimetres of water pressure",
+    "caption": "Preterm infant on early nasal CPAP with binasal prongs delivering five to eight centimetres of water pressure. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "When infants on CPAP require rising inspired oxygen fractions exceeding thirty percent, **exogenous surfactant replacement therapy** is administered. Natural bovine or porcine extracts like poractant alfa are instilled directly into the trachea using minimally invasive surfactant administration techniques, rapidly expanding lung compliance and dramatically reducing oxygen and ventilatory requirements.",
+   "say": "Exogenous surfactant instilled into the trachea improves compliance and reduces oxygen needs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Surfactant Preparations",
+     "points": [
+      "Poractant alfa (porcine, 200 mg/kg initial dose)",
+      "Beractant (bovine, 100 mg/kg initial dose)",
+      "Natural animal extracts superior to synthetics"
+     ]
+    },
+    "right": {
+     "title": "Administration Seams",
+     "points": [
+      "INSURE: Intubate, Surfactant, Extubate to CPAP",
+      "LISA: Less Invasive Surfactant Administration",
+      "Thin catheter instillation during spontaneous CPAP"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "A common clinical mimic in late preterm infants delivered by elective cesarean is **transient tachypnoea of the newborn**. Arising from delayed resorption of fetal alveolar fluid by epithelial sodium channels, infants present with rapid respirations within hours of birth. Radiography reveals prominent perihilar vascular markings and fluid in interlobar fissures, with spontaneous resolution occurring within forty-eight hours.",
+   "say": "Transient tachypnoea results from delayed lung fluid clearance and resolves in forty-eight hours.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Respiratory Distress Syndrome",
+     "Transient Tachypnoea (TTN)"
+    ],
+    "rows": [
+     [
+      "Gestational age",
+      "Preterm infants under 34 weeks",
+      "Late preterm and term cesarean deliveries"
+     ],
+     [
+      "Pathophysiology",
+      "Surfactant deficiency, alveolar collapse",
+      "Delayed alveolar fluid resorption via ENaC channels"
+     ],
+     [
+      "Chest radiograph",
+      "Ground-glass reticulogranular, air bronchograms",
+      "Perihilar streaking, fissure fluid, hyperinflation"
+     ],
+     [
+      "Clinical course",
+      "Worsens over 48 hours without surfactant",
+      "Improves rapidly, resolves within 48 to 72 hours"
+     ]
+    ]
+   }
+  }
+ ]
 }

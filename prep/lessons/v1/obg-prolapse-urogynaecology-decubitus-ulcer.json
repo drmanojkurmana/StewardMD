@@ -1,231 +1,231 @@
 {
-  "v": 1,
-  "module": "obg-prolapse-urogynaecology",
-  "subject": "obstetrics-gynaecology",
-  "title": "Decubitus Ulcer and Definitive Prolapse Surgery",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "Friction ulceration of the dependent cervix in long standing prolapse is the **decubitus ulcer**. The exposed cervix rubs on clothing and dries, breaking down at its lowest point. Any ulcer that looks atypical earns biopsy because cancer hides in chronic prolapse ulcers. Healing the ulcer always precedes definitive repair to keep infected tissue out of suture lines.",
-      "say": "A decubitus ulcer forms by friction on the dependent cervix in prolapse.",
-      "vis": {
-        "kind": "image",
-        "src": "clinix/media/skills/skill-exam-obg-prolapse_popq.webp",
-        "alt": "Prolapse with dependent cervix.",
-        "caption": "Prolapse assessment. [Credit: StewardMD]",
-        "ar": 1.5
-      }
+ "v": 1,
+ "module": "obg-prolapse-urogynaecology",
+ "subject": "obstetrics-gynaecology",
+ "title": "Decubitus Ulcer and Definitive Prolapse Surgery",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Friction ulceration of the dependent cervix in long standing prolapse is the **decubitus ulcer**. The exposed cervix rubs on clothing and dries, breaking down at its lowest point. Any ulcer that looks atypical earns biopsy because cancer hides in chronic prolapse ulcers. Healing the ulcer always precedes definitive repair to keep infected tissue out of suture lines.",
+   "say": "A decubitus ulcer forms by friction on the dependent cervix in prolapse.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-prolapse_popq.webp",
+    "alt": "Prolapse with dependent cervix.",
+    "caption": "Prolapse assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Reduction of the prolapse with packing and local oestrogen heals most ulcers, termed **ulcer preparation**. Atrophic postmenopausal epithelium thickens and vascularises under oestrogen cream. Surgery on an unhealed ulcer invites breakdown and fistula. Weeks of preparation are treatment, not delay, and elderly women tolerate them well at home.",
+   "say": "Ulcer preparation involves reduction, packing and oestrogen before definitive repair.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Prolapse reduced"
+     },
+     {
+      "id": "n1",
+      "label": "Pack and oestrogen"
+     },
+     {
+      "id": "n2",
+      "label": "Ulcer heals"
+     },
+     {
+      "id": "n3",
+      "label": "Surgery booked"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Cervical amputation with ligament plication preserving the uterus is the **Manchester Fothergill** operation. It suits uterine descent with an elongated cervix in women wishing uterine conservation. Shortening the cervix can stenose it and complicate later pregnancies. It fails when vault support itself, rather than the cervix, is the main problem.",
+   "say": "The Manchester Fothergill operation preserves the uterus by amputating the cervix.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature",
+     "Manchester repair"
+    ],
+    "rows": [
+     [
+      "Uterus",
+      "Preserved"
+     ],
+     [
+      "Cervix",
+      "Amputated"
+     ],
+     [
+      "Best for",
+      "Elongated cervix"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Vaginal hysterectomy with pelvic floor repair for prolapse is the **Ward-Mayo** tradition. Removing the uterus eliminates its descent while repairs rebuild both walls. Enterocele sac excision and vault anchoring complete the operation. It remains the workhorse for postmenopausal prolapse with completed families and healed ulcers.",
+   "say": "Ward-Mayo vaginal hysterectomy removes the uterus and rebuilds the pelvic floor.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-prc-vaginal-hysterectomy.webp",
+    "alt": "Vaginal hysterectomy steps.",
+    "caption": "Vaginal hysterectomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Sewing the vaginal walls together to obliterate the canal is **Le Fort colpocleisis**. It offers the highest success and shortest operation for elderly women who are not sexually active. The uterus can remain in situ behind the closure when pathology is excluded. Regret follows poor counselling, so the sexual activity question is asked explicitly and kindly.",
+   "say": "Le Fort colpocleisis obliterates the vaginal canal for elderly women.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Le Fort",
+     "points": [
+      "No coitus after",
+      "Short operation",
+      "Highest success"
+     ]
     },
-    {
-      "tx": "Reduction of the prolapse with packing and local oestrogen heals most ulcers, termed **ulcer preparation**. Atrophic postmenopausal epithelium thickens and vascularises under oestrogen cream. Surgery on an unhealed ulcer invites breakdown and fistula. Weeks of preparation are treatment, not delay, and elderly women tolerate them well at home.",
-      "say": "Ulcer preparation involves reduction, packing and oestrogen before definitive repair.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Prolapse reduced"
-          },
-          {
-            "id": "n1",
-            "label": "Pack and oestrogen"
-          },
-          {
-            "id": "n2",
-            "label": "Ulcer heals"
-          },
-          {
-            "id": "n3",
-            "label": "Surgery booked"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Cervical amputation with ligament plication preserving the uterus is the **Manchester Fothergill** operation. It suits uterine descent with an elongated cervix in women wishing uterine conservation. Shortening the cervix can stenose it and complicate later pregnancies. It fails when vault support itself, rather than the cervix, is the main problem.",
-      "say": "The Manchester Fothergill operation preserves the uterus by amputating the cervix.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Feature",
-          "Manchester repair"
-        ],
-        "rows": [
-          [
-            "Uterus",
-            "Preserved"
-          ],
-          [
-            "Cervix",
-            "Amputated"
-          ],
-          [
-            "Best for",
-            "Elongated cervix"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Vaginal hysterectomy with pelvic floor repair for prolapse is the **Ward-Mayo** tradition. Removing the uterus eliminates its descent while repairs rebuild both walls. Enterocele sac excision and vault anchoring complete the operation. It remains the workhorse for postmenopausal prolapse with completed families and healed ulcers.",
-      "say": "Ward-Mayo vaginal hysterectomy removes the uterus and rebuilds the pelvic floor.",
-      "vis": {
-        "kind": "image",
-        "src": "clinix/media/practicals/obg-prc-vaginal-hysterectomy.webp",
-        "alt": "Vaginal hysterectomy steps.",
-        "caption": "Vaginal hysterectomy. [Credit: StewardMD]",
-        "ar": 1.5
-      }
-    },
-    {
-      "tx": "Sewing the vaginal walls together to obliterate the canal is **Le Fort colpocleisis**. It offers the highest success and shortest operation for elderly women who are not sexually active. The uterus can remain in situ behind the closure when pathology is excluded. Regret follows poor counselling, so the sexual activity question is asked explicitly and kindly.",
-      "say": "Le Fort colpocleisis obliterates the vaginal canal for elderly women.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Le Fort",
-          "points": [
-            "No coitus after",
-            "Short operation",
-            "Highest success"
-          ]
-        },
-        "right": {
-          "title": "Reconstructive",
-          "points": [
-            "Coitus preserved",
-            "Longer operation",
-            "Anatomy restored"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Anchoring the vaginal vault to the sacrum with mesh is **sacrocolpopexy**. It restores vaginal length and axis better than vaginal routes for vault prolapse. Abdominal or laparoscopic access and mesh erosion are its prices. It suits younger, active women with recurrent vault descent after vaginal repairs have failed.",
-      "say": "Sacrocolpopexy involves anchoring the vault to the sacrum with mesh.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Route",
-          "Strength"
-        ],
-        "rows": [
-          [
-            "Sacrocolpopexy",
-            "Vault axis, durability"
-          ],
-          [
-            "Vaginal repair",
-            "No abdominal entry"
-          ],
-          [
-            "Colpocleisis",
-            "Speed, success"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Age, sexual activity, comorbidity and prior failure choose the operation, summarised as **operation selection**. The same prolapse earns colpocleisis in one woman and sacrocolpopexy in another. Tissue quality and surgeon experience honestly belong in the discussion. Photographs and diagrams help women choose with real understanding of each trade off.",
-      "say": "Operation selection involves age, sexual activity and comorbidity for each woman.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Prolapse mapped"
-          },
-          {
-            "id": "n1",
-            "label": "Priorities heard"
-          },
-          {
-            "id": "n2",
-            "label": "Route chosen"
-          },
-          {
-            "id": "n3",
-            "label": "Consent with trade offs"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Bladder, ureter and rectum lie millimetres from every prolapse suture, defining **repair dangers**. Cystoscopy after vault suspension confirms ureteric patency when kinking is feared. Rectal examination before closing posterior repairs finds stray sutures. Recognising injury in theatre converts a fistula into a repaired incision.",
-      "say": "Repair dangers involve bladder, ureter and rectum beside every suture line.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Structure",
-          "Injury sign"
-        ],
-        "rows": [
-          [
-            "Bladder",
-            "Haematuria"
-          ],
-          [
-            "Ureter",
-            "No urine jet"
-          ],
-          [
-            "Rectum",
-            "Suture on examination"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Bladder, ureter, and rectum lie millimetres from the sutures of a definitive repair, which is why those neighbours define **repair dangers**. Apical vault suspension, anterior and posterior wall repair, and rebuilding of the perineal body all pass close to those organs. Cystoscopy after vault suspension checks that the ureters still spill urine when kinking is feared. A rectal examination before the posterior repair is closed finds a suture that strayed into bowel. Seeing the injury in theatre turns a future fistula into a repair done at once.",
-      "say": "Vault suspension, anterior repair, posterior repair, and perineal reconstruction place sutures within millimetres of bladder, ureter, and rectum. Cystoscopy after the vault is suspended confirms the ureters still drain if kinking is a worry. A finger in the rectum before closing the posterior repair detects a stray suture. Finding that injury immediately lets it be fixed before it becomes a fistula.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n39-obg-prolapse-urogynaecology-decubitus-ulcer.webp",
-        "alt": "A definitive prolapse repair combining vault suspension, anterior and posterior repair, and reconstruction of the perineal body.",
-        "caption": "Sutures suspend the vault, repair both vaginal walls, and rebuild the perineal body in one definitive operation. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Vault support, wall repair and perineal rebuilding together decide durability, closing with **repair principles**. Apical suspension is the step whose omission most predicts recurrence. Early mobilisation and load advice protect healing tissues. Review at healed stage confirms anatomy before discharge from follow up care.",
-      "say": "Repair principles require apical suspension for durable prolapse surgery.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n39-obg-prolapse-urogynaecology-decubitus-ulcer.webp",
-        "alt": "Definitive prolapse repair with apical vault suspension, anterior and posterior wall repair and perineal body reconstruction",
-        "caption": "Definitive prolapse repair with apical vault suspension, anterior and posterior wall repair and perineal body reconstruction. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
+    "right": {
+     "title": "Reconstructive",
+     "points": [
+      "Coitus preserved",
+      "Longer operation",
+      "Anatomy restored"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "Anchoring the vaginal vault to the sacrum with mesh is **sacrocolpopexy**. It restores vaginal length and axis better than vaginal routes for vault prolapse. Abdominal or laparoscopic access and mesh erosion are its prices. It suits younger, active women with recurrent vault descent after vaginal repairs have failed.",
+   "say": "Sacrocolpopexy involves anchoring the vault to the sacrum with mesh.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Route",
+     "Strength"
+    ],
+    "rows": [
+     [
+      "Sacrocolpopexy",
+      "Vault axis, durability"
+     ],
+     [
+      "Vaginal repair",
+      "No abdominal entry"
+     ],
+     [
+      "Colpocleisis",
+      "Speed, success"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Age, sexual activity, comorbidity and prior failure choose the operation, summarised as **operation selection**. The same prolapse earns colpocleisis in one woman and sacrocolpopexy in another. Tissue quality and surgeon experience honestly belong in the discussion. Photographs and diagrams help women choose with real understanding of each trade off.",
+   "say": "Operation selection involves age, sexual activity and comorbidity for each woman.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Prolapse mapped"
+     },
+     {
+      "id": "n1",
+      "label": "Priorities heard"
+     },
+     {
+      "id": "n2",
+      "label": "Route chosen"
+     },
+     {
+      "id": "n3",
+      "label": "Consent with trade offs"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bladder, ureter and rectum lie millimetres from every prolapse suture, defining **repair dangers**. Cystoscopy after vault suspension confirms ureteric patency when kinking is feared. Rectal examination before closing posterior repairs finds stray sutures. Recognising injury in theatre converts a fistula into a repaired incision.",
+   "say": "Repair dangers involve bladder, ureter and rectum beside every suture line.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Structure",
+     "Injury sign"
+    ],
+    "rows": [
+     [
+      "Bladder",
+      "Haematuria"
+     ],
+     [
+      "Ureter",
+      "No urine jet"
+     ],
+     [
+      "Rectum",
+      "Suture on examination"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bladder, ureter, and rectum lie millimetres from the sutures of a definitive repair, which is why those neighbours define **repair dangers**. Apical vault suspension, anterior and posterior wall repair, and rebuilding of the perineal body all pass close to those organs. Cystoscopy after vault suspension checks that the ureters still spill urine when kinking is feared. A rectal examination before the posterior repair is closed finds a suture that strayed into bowel. Seeing the injury in theatre turns a future fistula into a repair done at once.",
+   "say": "Vault suspension, anterior repair, posterior repair, and perineal reconstruction place sutures within millimetres of bladder, ureter, and rectum. Cystoscopy after the vault is suspended confirms the ureters still drain if kinking is a worry. A finger in the rectum before closing the posterior repair detects a stray suture. Finding that injury immediately lets it be fixed before it becomes a fistula.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n39-obg-prolapse-urogynaecology-decubitus-ulcer.webp",
+    "alt": "A definitive prolapse repair combining vault suspension, anterior and posterior repair, and reconstruction of the perineal body.",
+    "caption": "Sutures suspend the vault, repair both vaginal walls, and rebuild the perineal body in one definitive operation. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Vault support, wall repair and perineal rebuilding together decide durability, closing with **repair principles**. Apical suspension is the step whose omission most predicts recurrence. Early mobilisation and load advice protect healing tissues. Review at healed stage confirms anatomy before discharge from follow up care.",
+   "say": "Repair principles require apical suspension for durable prolapse surgery.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n39-obg-prolapse-urogynaecology-decubitus-ulcer.webp",
+    "alt": "Definitive prolapse repair with apical vault suspension, anterior and posterior wall repair and perineal body reconstruction",
+    "caption": "Definitive prolapse repair with apical vault suspension, anterior and posterior wall repair and perineal body reconstruction. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  }
+ ]
 }

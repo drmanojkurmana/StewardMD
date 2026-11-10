@@ -1,222 +1,222 @@
 {
-  "v": 1,
-  "module": "obg-fibroid",
-  "subject": "obstetrics-gynaecology",
-  "title": "Pedunculated Fibroids, Cervical Fibroids and Broad Ligament Fibroids",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "A subserosal fibroid hanging from the uterus on a stalk is a **pedunculated fibroid**. Torsion of the stalk cuts its blood and mimics ovarian torsion or appendicitis. Laparoscopic stalk division cures it simply. Torsion twists the stalk veins first, so congestion and swelling precede arterial loss and make early pain deceptively intermittent.",
-      "say": "Pedunculated fibroids twist on stalks mimicking torsion or appendicitis.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Event",
-          "Presentation"
-        ],
-        "rows": [
-          [
-            "Stalk torsion",
-            "Acute abdomen"
-          ],
-          [
-            "Parasitic wandering",
-            "Mass away from uterus"
-          ]
-        ]
-      }
+ "v": 1,
+ "module": "obg-fibroid",
+ "subject": "obstetrics-gynaecology",
+ "title": "Pedunculated Fibroids, Cervical Fibroids and Broad Ligament Fibroids",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A subserosal fibroid hanging from the uterus on a stalk is a **pedunculated fibroid**. Torsion of the stalk cuts its blood and mimics ovarian torsion or appendicitis. Laparoscopic stalk division cures it simply. Torsion twists the stalk veins first, so congestion and swelling precede arterial loss and make early pain deceptively intermittent.",
+   "say": "Pedunculated fibroids twist on stalks mimicking torsion or appendicitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Event",
+     "Presentation"
+    ],
+    "rows": [
+     [
+      "Stalk torsion",
+      "Acute abdomen"
+     ],
+     [
+      "Parasitic wandering",
+      "Mass away from uterus"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A fibroid growing from the cervix, distorting bladder and ureters upward, is a **cervical fibroid**. It fills the pelvis centrally, the lantern on the dome of St Pauls on imaging. Surgery is among the hardest hysterectomies. The uterus perches on top of the cervical mass like a lantern on a dome, displacing the bladder upward and ureters outward.",
+   "say": "Cervical fibroids fill the pelvis centrally and make the hardest hysterectomies.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-gynae_abdominal.webp",
+    "alt": "Cervical fibroid examination.",
+    "caption": "Cervical fibroid. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Fibroids growing sideways between broad ligament leaves are **broad ligament fibroids**. True ones arise from ligament muscle, false ones fall out from the uterus. Ureters are displaced unpredictably, demanding their identification first. Ureter injury is the defining danger of broad ligament surgery, so tracing the ureter under vision precedes any clamp placement.",
+   "say": "Broad ligament fibroids displace ureters unpredictably between ligament leaves.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Lateral pelvic mass"
+     },
+     {
+      "id": "n1",
+      "label": "Ureter displaced"
+     },
+     {
+      "id": "n2",
+      "label": "Identified first"
+     },
+     {
+      "id": "n3",
+      "label": "Fibroid enucleated"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A prolapsing submucosal fibroid polyp through the cervix presents as a vaginal mass, termed **fibroid polyp**. It ulcerates, bleeds and infects while mimicking cervical cancer. Vaginal myomectomy twists it off after excluding inversion. Inversion of the uterus mimics a fibroid polyp exactly, and pulling an inverted uterus downward is the classic operative trap here.",
+   "say": "Fibroid polyps prolapse through the cervix mimicking cancer and are twisted off.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/abnormal-uterine-bleeding-and-palm-coein-classification-fig1.webp",
+    "alt": "Fibroid polyp within AUB causes.",
+    "caption": "Fibroid polyp. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Parasitic fibroids detach and parasitize omental blood supply after stalk atrophy, called **parasitic leiomyoma**. Morcellation spread creates the iatrogenic modern version across the peritoneum. Contained extraction prevents seeding. Contained extraction inside a bag has replaced open morcellation because spilled fragments implant and grow across the peritoneal cavity.",
+   "say": "Parasitic leiomyomas feed from omentum, with morcellation spread the iatrogenic version.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spontaneous parasitic",
+     "points": [
+      "Stalk atrophied",
+      "Omental supply"
+     ]
     },
-    {
-      "tx": "A fibroid growing from the cervix, distorting bladder and ureters upward, is a **cervical fibroid**. It fills the pelvis centrally, the lantern on the dome of St Pauls on imaging. Surgery is among the hardest hysterectomies. The uterus perches on top of the cervical mass like a lantern on a dome, displacing the bladder upward and ureters outward.",
-      "say": "Cervical fibroids fill the pelvis centrally and make the hardest hysterectomies.",
-      "vis": {
-        "kind": "image",
-        "src": "clinix/media/skills/skill-exam-obg-gynae_abdominal.webp",
-        "alt": "Cervical fibroid examination.",
-        "caption": "Cervical fibroid. [Credit: StewardMD]",
-        "ar": 1.5
-      }
-    },
-    {
-      "tx": "Fibroids growing sideways between broad ligament leaves are **broad ligament fibroids**. True ones arise from ligament muscle, false ones fall out from the uterus. Ureters are displaced unpredictably, demanding their identification first. Ureter injury is the defining danger of broad ligament surgery, so tracing the ureter under vision precedes any clamp placement.",
-      "say": "Broad ligament fibroids displace ureters unpredictably between ligament leaves.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Lateral pelvic mass"
-          },
-          {
-            "id": "n1",
-            "label": "Ureter displaced"
-          },
-          {
-            "id": "n2",
-            "label": "Identified first"
-          },
-          {
-            "id": "n3",
-            "label": "Fibroid enucleated"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "A prolapsing submucosal fibroid polyp through the cervix presents as a vaginal mass, termed **fibroid polyp**. It ulcerates, bleeds and infects while mimicking cervical cancer. Vaginal myomectomy twists it off after excluding inversion. Inversion of the uterus mimics a fibroid polyp exactly, and pulling an inverted uterus downward is the classic operative trap here.",
-      "say": "Fibroid polyps prolapse through the cervix mimicking cancer and are twisted off.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/abnormal-uterine-bleeding-and-palm-coein-classification-fig1.webp",
-        "alt": "Fibroid polyp within AUB causes.",
-        "caption": "Fibroid polyp. [Credit: StewardMD]",
-        "ar": 1.5
-      }
-    },
-    {
-      "tx": "Parasitic fibroids detach and parasitize omental blood supply after stalk atrophy, called **parasitic leiomyoma**. Morcellation spread creates the iatrogenic modern version across the peritoneum. Contained extraction prevents seeding. Contained extraction inside a bag has replaced open morcellation because spilled fragments implant and grow across the peritoneal cavity.",
-      "say": "Parasitic leiomyomas feed from omentum, with morcellation spread the iatrogenic version.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Spontaneous parasitic",
-          "points": [
-            "Stalk atrophied",
-            "Omental supply"
-          ]
-        },
-        "right": {
-          "title": "Iatrogenic disseminated",
-          "points": [
-            "Morcellation seeded",
-            "Contained bags prevent"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Imaging maps fibroid number, size and cavity relation before any surgery as **fibroid mapping**. MRI is the gold standard when ultrasound is inconclusive or surgery complex. The map chooses route: hysteroscopic, laparoscopic or open. Mapping also counts fibroids, because missed deep intramural lesions are the commonest cause of early symptom recurrence after surgery.",
-      "say": "Fibroid mapping by MRI chooses hysteroscopic, laparoscopic or open routes.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Route",
-          "Suits"
-        ],
-        "rows": [
-          [
-            "Hysteroscopic",
-            "Submucosal 0 to 2"
-          ],
-          [
-            "Laparoscopic",
-            "Moderate intramural"
-          ],
-          [
-            "Open",
-            "Huge, multiple, cervical"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Imaging that records fibroid number, size, and relation to the cavity before surgery is **fibroid mapping**. MRI is the gold standard when ultrasound is unclear or the operation will be complex, and the map chooses a hysteroscopic, laparoscopic, or open route. A GnRH analogue can shrink uterine volume over about three months before that operation, but the map still has to count every fibroid. Missed deep intramural lesions are the usual reason symptoms return early after surgery.",
-      "say": "Before surgery, fibroid mapping records how many fibroids there are, how large they are, and how they sit against the cavity. MRI is used when ultrasound is not enough, and it chooses hysteroscopic, laparoscopic, or open surgery. A GnRH analogue may reduce uterine volume across three months, yet a missed deep intramural fibroid is still the common reason symptoms come back early.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n29-obg-fibroid-pedunculated.webp",
-        "alt": "A fibroid uterus becoming smaller across three months of GnRH analogue treatment as uterine volume falls.",
-        "caption": "Serial outlines show uterine volume declining over three months while a GnRH analogue is given. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Shrinking a fibroid before theatre can convert an impossible operation into a routine one. **Preoperative shrinkage** with GnRH analogues reduces volume and corrects anaemia over a few months, moving some uteri from open to laparoscopic or vaginal routes. The benefit is rented, not bought: regrowth follows stopping, and hypoestrogenic symptoms limit duration. Timing surgery inside the treatment window is therefore part of the prescription, not an administrative detail.",
-      "say": "GnRH analogues shrink fibroids and correct anaemia before surgery, widening route choices. Regrowth follows stopping, so surgery must sit inside the window.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-m929-obg-fibroid-pedunculated.webp",
-        "alt": "Image showing fibroid shrinkage on imaging before planned surgery.",
-        "caption": "Serial scans show a fibroid uterus shrinking during preoperative medical treatment. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "GnRH analogues shrink fibroids by a third preoperatively, termed **preoperative shrinkage**. Three months corrects anaemia and eases surgery, especially vaginal or laparoscopic routes. Hot flushes and bone loss cap duration. Analogues also induce amenorrhoea that rebuilds haemoglobin without transfusion, provided iron is replaced alongside the hormonal suppression.",
-      "say": "Preoperative GnRH therapy reduces fibroid size and improves anaemia before surgery.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n29-obg-fibroid-pedunculated.webp",
-        "alt": "Fibroid uterus shrinking under GnRH analogue therapy with falling uterine volume over three months",
-        "caption": "Fibroid uterus shrinking under GnRH analogue therapy with falling uterine volume over three months. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Uterine artery embolisation infarcts fibroids while sparing uterus, covered fully next, as **embolisation alternative**. It suits women avoiding surgery who accept possible reintervention. Ovarian reserve effects limit use in fertility seekers. Embolisation is detailed fully in the myomectomy lesson, and its fertility cautions apply equally to every stalked lesion here.",
-      "say": "Embolisation infarcts fibroids sparing the uterus for surgery avoiders.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Catheter to uterine arteries"
-          },
-          {
-            "id": "n1",
-            "label": "Particles infarct fibroids"
-          },
-          {
-            "id": "n2",
-            "label": "Uterus survives on collaterals"
-          },
-          {
-            "id": "n3",
-            "label": "Symptoms improve"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Pregnancy with fibroids usually proceeds normally, with red degeneration and malpresentation the watch items, termed **fibroid pregnancy care**. Caesarean myomectomy is avoided except for pedunculated stalks. Delivery planning follows obstruction, not fibroid presence. Lower segment obstruction by a cervical or broad ligament fibroid converts a planned vaginal birth into caesarean delivery.",
-      "say": "Fibroid pregnancy care watches degeneration and malpresentation, avoiding caesarean myomectomy.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n30-obg-fibroid-pedunculated.webp",
-        "alt": "Pregnant uterus with fibroids showing red degeneration and malpresentation surveillance",
-        "caption": "Pregnant uterus with fibroids showing red degeneration and malpresentation surveillance. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
+    "right": {
+     "title": "Iatrogenic disseminated",
+     "points": [
+      "Morcellation seeded",
+      "Contained bags prevent"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "Imaging maps fibroid number, size and cavity relation before any surgery as **fibroid mapping**. MRI is the gold standard when ultrasound is inconclusive or surgery complex. The map chooses route: hysteroscopic, laparoscopic or open. Mapping also counts fibroids, because missed deep intramural lesions are the commonest cause of early symptom recurrence after surgery.",
+   "say": "Fibroid mapping by MRI chooses hysteroscopic, laparoscopic or open routes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Route",
+     "Suits"
+    ],
+    "rows": [
+     [
+      "Hysteroscopic",
+      "Submucosal 0 to 2"
+     ],
+     [
+      "Laparoscopic",
+      "Moderate intramural"
+     ],
+     [
+      "Open",
+      "Huge, multiple, cervical"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Imaging that records fibroid number, size, and relation to the cavity before surgery is **fibroid mapping**. MRI is the gold standard when ultrasound is unclear or the operation will be complex, and the map chooses a hysteroscopic, laparoscopic, or open route. A GnRH analogue can shrink uterine volume over about three months before that operation, but the map still has to count every fibroid. Missed deep intramural lesions are the usual reason symptoms return early after surgery.",
+   "say": "Before surgery, fibroid mapping records how many fibroids there are, how large they are, and how they sit against the cavity. MRI is used when ultrasound is not enough, and it chooses hysteroscopic, laparoscopic, or open surgery. A GnRH analogue may reduce uterine volume across three months, yet a missed deep intramural fibroid is still the common reason symptoms come back early.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n29-obg-fibroid-pedunculated.webp",
+    "alt": "A fibroid uterus becoming smaller across three months of GnRH analogue treatment as uterine volume falls.",
+    "caption": "Serial outlines show uterine volume declining over three months while a GnRH analogue is given. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Shrinking a fibroid before theatre can convert an impossible operation into a routine one. **Preoperative shrinkage** with GnRH analogues reduces volume and corrects anaemia over a few months, moving some uteri from open to laparoscopic or vaginal routes. The benefit is rented, not bought: regrowth follows stopping, and hypoestrogenic symptoms limit duration. Timing surgery inside the treatment window is therefore part of the prescription, not an administrative detail.",
+   "say": "GnRH analogues shrink fibroids and correct anaemia before surgery, widening route choices. Regrowth follows stopping, so surgery must sit inside the window.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m929-obg-fibroid-pedunculated.webp",
+    "alt": "Image showing fibroid shrinkage on imaging before planned surgery.",
+    "caption": "Serial scans show a fibroid uterus shrinking during preoperative medical treatment. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "GnRH analogues shrink fibroids by a third preoperatively, termed **preoperative shrinkage**. Three months corrects anaemia and eases surgery, especially vaginal or laparoscopic routes. Hot flushes and bone loss cap duration. Analogues also induce amenorrhoea that rebuilds haemoglobin without transfusion, provided iron is replaced alongside the hormonal suppression.",
+   "say": "Preoperative GnRH therapy reduces fibroid size and improves anaemia before surgery.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n29-obg-fibroid-pedunculated.webp",
+    "alt": "Fibroid uterus shrinking under GnRH analogue therapy with falling uterine volume over three months",
+    "caption": "Fibroid uterus shrinking under GnRH analogue therapy with falling uterine volume over three months. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Uterine artery embolisation infarcts fibroids while sparing uterus, covered fully next, as **embolisation alternative**. It suits women avoiding surgery who accept possible reintervention. Ovarian reserve effects limit use in fertility seekers. Embolisation is detailed fully in the myomectomy lesson, and its fertility cautions apply equally to every stalked lesion here.",
+   "say": "Embolisation infarcts fibroids sparing the uterus for surgery avoiders.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Catheter to uterine arteries"
+     },
+     {
+      "id": "n1",
+      "label": "Particles infarct fibroids"
+     },
+     {
+      "id": "n2",
+      "label": "Uterus survives on collaterals"
+     },
+     {
+      "id": "n3",
+      "label": "Symptoms improve"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pregnancy with fibroids usually proceeds normally, with red degeneration and malpresentation the watch items, termed **fibroid pregnancy care**. Caesarean myomectomy is avoided except for pedunculated stalks. Delivery planning follows obstruction, not fibroid presence. Lower segment obstruction by a cervical or broad ligament fibroid converts a planned vaginal birth into caesarean delivery.",
+   "say": "Fibroid pregnancy care watches degeneration and malpresentation, avoiding caesarean myomectomy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n30-obg-fibroid-pedunculated.webp",
+    "alt": "Pregnant uterus with fibroids showing red degeneration and malpresentation surveillance",
+    "caption": "Pregnant uterus with fibroids showing red degeneration and malpresentation surveillance. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  }
+ ]
 }

@@ -1,241 +1,241 @@
 {
-  "v": 1,
-  "module": "obg-pid-genital-tb",
-  "subject": "obstetrics-gynaecology",
-  "title": "Genital Tuberculosis and the Tobacco Pouch Tube",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "Haematogenous spread of tuberculosis to tubes, endometrium and ovaries is **genital tuberculosis**. In endemic regions it is a leading cause of tubal infertility. Periods lighten progressively to amenorrhoea as endometrium is destroyed. Tubes suffer first and worst, then endometrium and ovaries, while cervical tuberculosis stays rare even in heavily endemic practice.",
-      "say": "Genital tuberculosis spreads by blood to tubes and is a leading tubal infertility cause.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Site",
-          "Frequency"
-        ],
-        "rows": [
-          [
-            "Tubes",
-            "Almost always"
-          ],
-          [
-            "Endometrium",
-            "Half"
-          ],
-          [
-            "Ovaries",
-            "A quarter"
-          ]
-        ]
-      }
+ "v": 1,
+ "module": "obg-pid-genital-tb",
+ "subject": "obstetrics-gynaecology",
+ "title": "Genital Tuberculosis and the Tobacco Pouch Tube",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Haematogenous spread of tuberculosis to tubes, endometrium and ovaries is **genital tuberculosis**. In endemic regions it is a leading cause of tubal infertility. Periods lighten progressively to amenorrhoea as endometrium is destroyed. Tubes suffer first and worst, then endometrium and ovaries, while cervical tuberculosis stays rare even in heavily endemic practice.",
+   "say": "Genital tuberculosis spreads by blood to tubes and is a leading tubal infertility cause.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Site",
+     "Frequency"
+    ],
+    "rows": [
+     [
+      "Tubes",
+      "Almost always"
+     ],
+     [
+      "Endometrium",
+      "Half"
+     ],
+     [
+      "Ovaries",
+      "A quarter"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The rigid pipe stem tube with a pouch like distal collection on contrast study is the **tobacco pouch tube**. Hysterosalpingography shows beaded, blocked tubes with this classic deformity. It is radiology speaking tuberculosis without words. Beaded tubes with multiple strictures and a lead pipe rigid tube complete the radiological trio that examiners love to quote.",
+   "say": "The tobacco pouch tube is a classic sign of genital tuberculosis on contrast study.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Tubal TB scarring"
+     },
+     {
+      "id": "n1",
+      "label": "Pipe stem rigidity"
+     },
+     {
+      "id": "n2",
+      "label": "Pouch at distal end"
+     },
+     {
+      "id": "n3",
+      "label": "Blockage complete"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Endometrial sampling in the premenstrual phase maximises yield for tubercles, timed as **premenstrual sampling**. Acid fast stain, culture and molecular tests combine on the tissue. A negative sample never excludes genital tuberculosis. Sampling after ovulation catches tubercles seeded in the secretory endometrium, and tissue goes for histology, culture and molecular testing together.",
+   "say": "Premenstrual sampling maximises endometrial tuberculosis yield but never excludes it.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-endometrial_sampling.webp",
+    "alt": "Outpatient endometrial sampling with a Pipelle suction curette.",
+    "caption": "Outpatient endometrial sampling with a Pipelle suction curette. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Caseating granulomas on histology clinch the diagnosis as **caseating granuloma**. Where histology is silent, a therapeutic trial follows strong clinical and radiological suspicion in endemic settings. Multidisciplinary teams own that judgement. Sarcoidosis and other granulomatous diseases imitate the histology, so culture or molecular proof strengthens an uncertain biopsy result.",
+   "say": "Caseating granulomas on histology provide the firmest proof of genital tuberculosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Proven",
+     "points": [
+      "Granuloma or culture",
+      "Full ATT"
+     ]
     },
-    {
-      "tx": "The rigid pipe stem tube with a pouch like distal collection on contrast study is the **tobacco pouch tube**. Hysterosalpingography shows beaded, blocked tubes with this classic deformity. It is radiology speaking tuberculosis without words. Beaded tubes with multiple strictures and a lead pipe rigid tube complete the radiological trio that examiners love to quote.",
-      "say": "The tobacco pouch tube is a classic sign of genital tuberculosis on contrast study.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Tubal TB scarring"
-          },
-          {
-            "id": "n1",
-            "label": "Pipe stem rigidity"
-          },
-          {
-            "id": "n2",
-            "label": "Pouch at distal end"
-          },
-          {
-            "id": "n3",
-            "label": "Blockage complete"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Endometrial sampling in the premenstrual phase maximises yield for tubercles, timed as **premenstrual sampling**. Acid fast stain, culture and molecular tests combine on the tissue. A negative sample never excludes genital tuberculosis. Sampling after ovulation catches tubercles seeded in the secretory endometrium, and tissue goes for histology, culture and molecular testing together.",
-      "say": "Premenstrual sampling maximises endometrial tuberculosis yield but never excludes it.",
-      "vis": {
-        "kind": "image",
-        "src": "clinix/media/skills/skill-exam-obg-endometrial_sampling.webp",
-        "alt": "Outpatient endometrial sampling with a Pipelle suction curette.",
-        "caption": "Outpatient endometrial sampling with a Pipelle suction curette. [Credit: StewardMD]",
-        "ar": 1.5
-      }
-    },
-    {
-      "tx": "Caseating granulomas on histology clinch the diagnosis as **caseating granuloma**. Where histology is silent, a therapeutic trial follows strong clinical and radiological suspicion in endemic settings. Multidisciplinary teams own that judgement. Sarcoidosis and other granulomatous diseases imitate the histology, so culture or molecular proof strengthens an uncertain biopsy result.",
-      "say": "Caseating granulomas on histology provide the firmest proof of genital tuberculosis.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Proven",
-          "points": [
-            "Granuloma or culture",
-            "Full ATT"
-          ]
-        },
-        "right": {
-          "title": "Suspected",
-          "points": [
-            "Classic imaging, infertility",
-            "Trial by team decision"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Standard antitubercular therapy cures infection but not scarring, following **ATT principles**. Intensive treatment gives way to a longer continuation phase. Surgery cannot restore destroyed tubes, and IVF bypasses them instead. Fertility rarely returns after treatment because caseation destroys tubal muscle and cilia long before drugs sterilise the tissue.",
-      "say": "ATT cures infection but not scarring, and IVF bypasses destroyed tubes.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Phase",
-          "Drugs"
-        ],
-        "rows": [
-          [
-            "Intensive phase",
-            "Combination therapy"
-          ],
-          [
-            "Continuation phase",
-            "Maintenance therapy"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Standard drug treatment follows **ATT principles**: an intensive phase, then a longer continuation phase, and it sterilises genital tuberculosis without undoing scar. Caseation has already destroyed tubal muscle and cilia, so fertility seldom returns and surgery cannot rebuild the tube. IVF bypasses the ruined tube. A tubo ovarian mass with ascites and a raised CA 125 can look like ovarian cancer, yet the same infection explains the mass, and drugs still do not restore the ciliary lining.",
-      "say": "Antitubercular therapy uses an intensive phase then a longer continuation phase. It clears infection but not the scar caseation left in tubal muscle and cilia, so pregnancy rarely returns and IVF is used instead of tubal repair. Ascites, a raised CA 125, and a tubo ovarian mass can imitate ovarian cancer even though drugs will not rebuild the tube.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n37-obg-pid-genital-tb-tobacco-pouch-tube.webp",
-        "alt": "A tubo ovarian mass with ascites from genital tuberculosis, resembling ovarian cancer and accompanied by a raised CA 125.",
-        "caption": "A complex tubo ovarian mass and ascitic fluid mimic ovarian carcinoma, with CA 125 elevated by genital tuberculosis. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Genital tuberculosis earns its reputation by imitation. A **cancer mimic** picture of a pelvic mass, ascites and raised CA125 from tuberculous peritonitis has sent many women toward cancer surgery before fluid cytology and biopsy corrected the course. Endometrial sampling, image guided biopsy and a careful exposure history protect against that error. In endemic settings, tuberculosis belongs on the differential of every unexplained pelvic mass in a young woman.",
-      "say": "Tuberculous peritonitis mimics ovarian cancer with mass, ascites and raised CA125. Biopsy before radical surgery prevents a serious wrong operation.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-m942-obg-pid-genital-tb-tobacco-pouch-tube.webp",
-        "alt": "Image showing tuberculous pelvic disease mimicking ovarian cancer with ascites and a pelvic mass.",
-        "caption": "A pelvic mass with ascites is shown in tuberculous disease mimicking ovarian cancer. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Tuberculous tubo ovarian masses mimic ovarian cancer with a raised tumour marker, a dangerous **cancer mimic**. Ascites, weight loss and adnexal mass complete the deception. Biopsy before radical surgery saves ovaries and lives. Ascitic fluid cytology and image guided biopsy separate the two, sparing young women radical surgery for curable infection.",
-      "say": "Genital tuberculosis mimics ovarian cancer with a raised tumour marker and requires biopsy first.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n37-obg-pid-genital-tb-tobacco-pouch-tube.webp",
-        "alt": "Genital tuberculosis tubo-ovarian mass mimicking ovarian cancer with raised CA-125 and ascites",
-        "caption": "Genital tuberculosis tubo-ovarian mass mimicking ovarian cancer with raised CA-125 and ascites. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Asherman like adhesions from endometrial tuberculosis resist standard adhesiolysis prognosis, termed **TB endometrial scarring**. Even divided, the basal layer is often gone. Gestational surrogacy enters fertility counselling in severe cases. Surrogacy counselling arises only after honest assessment shows a scarred cavity that cannot carry, however healthy the ovaries remain.",
-      "say": "TB endometrial scarring resists adhesiolysis because the basal layer is gone.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "n0",
-            "label": "Endometrium destroyed"
-          },
-          {
-            "id": "n1",
-            "label": "Adhesions divided"
-          },
-          {
-            "id": "n2",
-            "label": "Lining fails to regrow"
-          },
-          {
-            "id": "n3",
-            "label": "Surrogacy discussed"
-          }
-        ],
-        "edges": [
-          [
-            "n0",
-            "n1"
-          ],
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Treating only the woman in the room leaves half an infection untreated. **Partner evaluation** in pelvic infection means testing and treating partners, advising abstinence until treatment completes, and offering screening for other infections. Reinfection from an untreated partner is a common reason for apparent treatment failure. The conversation is handled matter of factly and without blame, because its purpose is microbiological rather than moral.",
-      "say": "Partner testing and treatment prevent reinfection after pelvic infection. Apparent drug failure often means an untreated partner.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-m943-obg-pid-genital-tb-tobacco-pouch-tube.webp",
-        "alt": "Image showing partner evaluation and treatment counselling after pelvic inflammatory disease.",
-        "caption": "A clinician is shown counselling a couple about partner testing and treatment. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Male partner evaluation matters because genital tuberculosis can involve epididymis silently, termed **partner evaluation**. Semen and imaging complete the couples picture. Contact tracing for pulmonary source protects the household. Epididymal disease in the male partner is usually silent, and semen analysis plus scrotal examination completes the couple assessment.",
-      "say": "Partner evaluation checks epididymal tuberculosis and traces pulmonary sources.",
-      "vis": {
-        "kind": "image",
-        "src": "clinix/media/skills/skill-exam-surg-scrotal_palpation.webp",
-        "alt": "Epididymal assessment in genital TB.",
-        "caption": "Partner evaluation. [Credit: StewardMD]",
-        "ar": 1.5
-      }
-    },
-    {
-      "tx": "Prevention is pulmonary tuberculosis control plus BCG, because genital disease is always secondary, following **source prevention**. Infertility clinics in endemic areas keep tuberculosis on every tubal differential. Early pulmonary treatment prevents the entire cascade. Every infertility workup in an endemic clinic therefore asks about past tuberculosis, contact history and unexplained menstrual change.",
-      "say": "Source prevention controls pulmonary tuberculosis because genital disease is always secondary.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Pulmonary controlled",
-          "points": [
-            "Genital TB prevented"
-          ]
-        },
-        "right": {
-          "title": "Pulmonary missed",
-          "points": [
-            "Tubal destruction years later"
-          ]
-        }
-      }
+    "right": {
+     "title": "Suspected",
+     "points": [
+      "Classic imaging, infertility",
+      "Trial by team decision"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "Standard antitubercular therapy cures infection but not scarring, following **ATT principles**. Intensive treatment gives way to a longer continuation phase. Surgery cannot restore destroyed tubes, and IVF bypasses them instead. Fertility rarely returns after treatment because caseation destroys tubal muscle and cilia long before drugs sterilise the tissue.",
+   "say": "ATT cures infection but not scarring, and IVF bypasses destroyed tubes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase",
+     "Drugs"
+    ],
+    "rows": [
+     [
+      "Intensive phase",
+      "Combination therapy"
+     ],
+     [
+      "Continuation phase",
+      "Maintenance therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Standard drug treatment follows **ATT principles**: an intensive phase, then a longer continuation phase, and it sterilises genital tuberculosis without undoing scar. Caseation has already destroyed tubal muscle and cilia, so fertility seldom returns and surgery cannot rebuild the tube. IVF bypasses the ruined tube. A tubo ovarian mass with ascites and a raised CA 125 can look like ovarian cancer, yet the same infection explains the mass, and drugs still do not restore the ciliary lining.",
+   "say": "Antitubercular therapy uses an intensive phase then a longer continuation phase. It clears infection but not the scar caseation left in tubal muscle and cilia, so pregnancy rarely returns and IVF is used instead of tubal repair. Ascites, a raised CA 125, and a tubo ovarian mass can imitate ovarian cancer even though drugs will not rebuild the tube.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n37-obg-pid-genital-tb-tobacco-pouch-tube.webp",
+    "alt": "A tubo ovarian mass with ascites from genital tuberculosis, resembling ovarian cancer and accompanied by a raised CA 125.",
+    "caption": "A complex tubo ovarian mass and ascitic fluid mimic ovarian carcinoma, with CA 125 elevated by genital tuberculosis. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Genital tuberculosis earns its reputation by imitation. A **cancer mimic** picture of a pelvic mass, ascites and raised CA125 from tuberculous peritonitis has sent many women toward cancer surgery before fluid cytology and biopsy corrected the course. Endometrial sampling, image guided biopsy and a careful exposure history protect against that error. In endemic settings, tuberculosis belongs on the differential of every unexplained pelvic mass in a young woman.",
+   "say": "Tuberculous peritonitis mimics ovarian cancer with mass, ascites and raised CA125. Biopsy before radical surgery prevents a serious wrong operation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m942-obg-pid-genital-tb-tobacco-pouch-tube.webp",
+    "alt": "Image showing tuberculous pelvic disease mimicking ovarian cancer with ascites and a pelvic mass.",
+    "caption": "A pelvic mass with ascites is shown in tuberculous disease mimicking ovarian cancer. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Tuberculous tubo ovarian masses mimic ovarian cancer with a raised tumour marker, a dangerous **cancer mimic**. Ascites, weight loss and adnexal mass complete the deception. Biopsy before radical surgery saves ovaries and lives. Ascitic fluid cytology and image guided biopsy separate the two, sparing young women radical surgery for curable infection.",
+   "say": "Genital tuberculosis mimics ovarian cancer with a raised tumour marker and requires biopsy first.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n37-obg-pid-genital-tb-tobacco-pouch-tube.webp",
+    "alt": "Genital tuberculosis tubo-ovarian mass mimicking ovarian cancer with raised CA-125 and ascites",
+    "caption": "Genital tuberculosis tubo-ovarian mass mimicking ovarian cancer with raised CA-125 and ascites. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Asherman like adhesions from endometrial tuberculosis resist standard adhesiolysis prognosis, termed **TB endometrial scarring**. Even divided, the basal layer is often gone. Gestational surrogacy enters fertility counselling in severe cases. Surrogacy counselling arises only after honest assessment shows a scarred cavity that cannot carry, however healthy the ovaries remain.",
+   "say": "TB endometrial scarring resists adhesiolysis because the basal layer is gone.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Endometrium destroyed"
+     },
+     {
+      "id": "n1",
+      "label": "Adhesions divided"
+     },
+     {
+      "id": "n2",
+      "label": "Lining fails to regrow"
+     },
+     {
+      "id": "n3",
+      "label": "Surrogacy discussed"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Treating only the woman in the room leaves half an infection untreated. **Partner evaluation** in pelvic infection means testing and treating partners, advising abstinence until treatment completes, and offering screening for other infections. Reinfection from an untreated partner is a common reason for apparent treatment failure. The conversation is handled matter of factly and without blame, because its purpose is microbiological rather than moral.",
+   "say": "Partner testing and treatment prevent reinfection after pelvic infection. Apparent drug failure often means an untreated partner.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m943-obg-pid-genital-tb-tobacco-pouch-tube.webp",
+    "alt": "Image showing partner evaluation and treatment counselling after pelvic inflammatory disease.",
+    "caption": "A clinician is shown counselling a couple about partner testing and treatment. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Male partner evaluation matters because genital tuberculosis can involve epididymis silently, termed **partner evaluation**. Semen and imaging complete the couples picture. Contact tracing for pulmonary source protects the household. Epididymal disease in the male partner is usually silent, and semen analysis plus scrotal examination completes the couple assessment.",
+   "say": "Partner evaluation checks epididymal tuberculosis and traces pulmonary sources.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-scrotal_palpation.webp",
+    "alt": "Epididymal assessment in genital TB.",
+    "caption": "Partner evaluation. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Prevention is pulmonary tuberculosis control plus BCG, because genital disease is always secondary, following **source prevention**. Infertility clinics in endemic areas keep tuberculosis on every tubal differential. Early pulmonary treatment prevents the entire cascade. Every infertility workup in an endemic clinic therefore asks about past tuberculosis, contact history and unexplained menstrual change.",
+   "say": "Source prevention controls pulmonary tuberculosis because genital disease is always secondary.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pulmonary controlled",
+     "points": [
+      "Genital TB prevented"
+     ]
+    },
+    "right": {
+     "title": "Pulmonary missed",
+     "points": [
+      "Tubal destruction years later"
+     ]
+    }
+   }
+  }
+ ]
 }

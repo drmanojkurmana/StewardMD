@@ -1,263 +1,263 @@
 {
-  "v": 1,
-  "module": "ana-nervous-senses",
-  "subject": "anatomy",
-  "title": "Brain Vesicles, Ventricular Systems and Dysraphisms",
-  "minutes": 8,
-  "steps": [
-    {
-      "tx": "During the fourth gestational week, following closure of the anterior neuropore, the cephalic extremity of the neural tube expands into three primary brain vesicles: the prosencephalon (forebrain), mesencephalon (midbrain), and **rhombencephalon** (hindbrain). Two distinct flexures appear: the cephalic flexure at the midbrain and the cervical flexure at the hindbrain-cord junction.",
-      "say": "In week four, following anterior neuropore closure, the cranial neural tube expands into three primary brain vesicles: the prosencephalon, mesencephalon, and rhombencephalon. Two bends appear: the cephalic flexure in the midbrain and the cervical flexure at the spinal junction.",
-      "vis": {
-        "kind": "image",
-        "src": "prep/lessons/media/ana-neural-tube.svg",
-        "alt": "Primary brain vesicles: prosencephalon, mesencephalon, and rhombencephalon",
-        "caption": "Primary and secondary brain vesicles derived from the cranial neural tube. [Credit: StewardMD]",
-        "ar": 1.5
-      }
+ "v": 1,
+ "module": "ana-nervous-senses",
+ "subject": "anatomy",
+ "title": "Brain Vesicles, Ventricular Systems and Dysraphisms",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "During the fourth gestational week, following closure of the anterior neuropore, the cephalic extremity of the neural tube expands into three primary brain vesicles: the prosencephalon (forebrain), mesencephalon (midbrain), and **rhombencephalon** (hindbrain). Two distinct flexures appear: the cephalic flexure at the midbrain and the cervical flexure at the hindbrain-cord junction.",
+   "say": "In week four, following anterior neuropore closure, the cranial neural tube expands into three primary brain vesicles: the prosencephalon, mesencephalon, and rhombencephalon. Two bends appear: the cephalic flexure in the midbrain and the cervical flexure at the spinal junction.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-neural-tube.svg",
+    "alt": "Primary brain vesicles: prosencephalon, mesencephalon, and rhombencephalon",
+    "caption": "Primary and secondary brain vesicles derived from the cranial neural tube. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "During the fifth week, secondary subdivision transforms the three primary vesicles into five secondary brain vesicles. The prosencephalon subdivides into the **telencephalon** and the diencephalon. The telencephalon expands dramatically into bilateral cerebral hemispheres enclosing lateral ventricles, while its basal floor differentiates into the caudate, putamen, and amygdala.",
+   "say": "In week five, the three primary vesicles subdivide into five secondary vesicles. The prosencephalon splits into telencephalon and diencephalon. The telencephalon expands into bilateral cerebral hemispheres and basal ganglia enclosing the lateral ventricles.",
+   "vis": {
+    "kind": "flow",
+    "title": "Five-Vesicle Subdivision Hierarchy",
+    "nodes": [
+     {
+      "id": "pro",
+      "label": "Prosencephalon (Forebrain)"
+     },
+     {
+      "id": "tel",
+      "label": "Telencephalon: Cerebral Hemispheres"
+     },
+     {
+      "id": "di",
+      "label": "Diencephalon: Thalamus and Epithalamus"
+     },
+     {
+      "id": "vent",
+      "label": "Lateral and Third Ventricles"
+     }
+    ],
+    "edges": [
+     [
+      "pro",
+      "tel"
+     ],
+     [
+      "pro",
+      "di"
+     ],
+     [
+      "tel",
+      "vent"
+     ],
+     [
+      "di",
+      "vent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **diencephalon** forms the epithalamus, dorsal thalamus, and hypothalamus surrounding the slit-like third ventricle. Lateral evaginations of the diencephalon sprout early in the fourth week as optic vesicles, which induce overlying surface ectoderm to form lens placodes. The posterior neurohypophysis of the pituitary gland also develops as an infundibular downgrowth of the diencephalon.",
+   "say": "The diencephalon generates the thalamus, hypothalamus, and epithalamus around the third ventricle. Lateral outgrowths form the optic cups for the eyes, while a ventral diverticulum yields the posterior pituitary neurohypophysis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Secondary Vesicle",
+     "Primary Derivation",
+     "Adult Brain Structure",
+     "Enclosed Ventricle"
+    ],
+    "rows": [
+     [
+      "Telencephalon",
+      "Prosencephalon",
+      "Cerebral cortex, basal ganglia, hippocampus",
+      "Lateral ventricles (paired)"
+     ],
+     [
+      "Diencephalon",
+      "Prosencephalon",
+      "Thalamus, hypothalamus, retina, neurohypophysis",
+      "Third ventricle (midline slit)"
+     ],
+     [
+      "Mesencephalon",
+      "Mesencephalon",
+      "Colliculi, cerebral peduncles, red nucleus",
+      "Cerebral aqueduct of Sylvius"
+     ],
+     [
+      "Metencephalon",
+      "Rhombencephalon",
+      "Pons and cerebellar hemispheres",
+      "Upper fourth ventricle"
+     ],
+     [
+      "Myelencephalon",
+      "Rhombencephalon",
+      "Medulla oblongata (open and closed)",
+      "Lower fourth ventricle"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The **mesencephalon** does not subdivide, retaining its name into adult anatomy. Its alar plates differentiate into the superior and inferior colliculi of the tectum, while its basal plates form the red nuclei, substantia nigra, and motor cranial nerve nuclei III and IV. Its narrow central lumen persists as the cerebral aqueduct of Sylvius connecting the third and fourth ventricles.",
+   "say": "The mesencephalon does not subdivide. Its dorsal alar plates form the superior and inferior colliculi, while its ventral plates build the red nuclei, substantia nigra, and ocular motor nuclei. Its narrow channel forms the cerebral aqueduct.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mesencephalon Structure",
+     "points": [
+      "Tectum: Superior and inferior colliculi",
+      "Tegmentum: Oculomotor and trochlear nuclei",
+      "Crura cerebri: Corticospinal motor pathways",
+      "Narrowest channel: Cerebral aqueduct"
+     ]
     },
-    {
-      "tx": "During the fifth week, secondary subdivision transforms the three primary vesicles into five secondary brain vesicles. The prosencephalon subdivides into the **telencephalon** and the diencephalon. The telencephalon expands dramatically into bilateral cerebral hemispheres enclosing lateral ventricles, while its basal floor differentiates into the caudate, putamen, and amygdala.",
-      "say": "In week five, the three primary vesicles subdivide into five secondary vesicles. The prosencephalon splits into telencephalon and diencephalon. The telencephalon expands into bilateral cerebral hemispheres and basal ganglia enclosing the lateral ventricles.",
-      "vis": {
-        "kind": "flow",
-        "title": "Five-Vesicle Subdivision Hierarchy",
-        "nodes": [
-          {
-            "id": "pro",
-            "label": "Prosencephalon (Forebrain)"
-          },
-          {
-            "id": "tel",
-            "label": "Telencephalon: Cerebral Hemispheres"
-          },
-          {
-            "id": "di",
-            "label": "Diencephalon: Thalamus and Epithalamus"
-          },
-          {
-            "id": "vent",
-            "label": "Lateral and Third Ventricles"
-          }
-        ],
-        "edges": [
-          [
-            "pro",
-            "tel"
-          ],
-          [
-            "pro",
-            "di"
-          ],
-          [
-            "tel",
-            "vent"
-          ],
-          [
-            "di",
-            "vent"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The **diencephalon** forms the epithalamus, dorsal thalamus, and hypothalamus surrounding the slit-like third ventricle. Lateral evaginations of the diencephalon sprout early in the fourth week as optic vesicles, which induce overlying surface ectoderm to form lens placodes. The posterior neurohypophysis of the pituitary gland also develops as an infundibular downgrowth of the diencephalon.",
-      "say": "The diencephalon generates the thalamus, hypothalamus, and epithalamus around the third ventricle. Lateral outgrowths form the optic cups for the eyes, while a ventral diverticulum yields the posterior pituitary neurohypophysis.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Secondary Vesicle",
-          "Primary Derivation",
-          "Adult Brain Structure",
-          "Enclosed Ventricle"
-        ],
-        "rows": [
-          [
-            "Telencephalon",
-            "Prosencephalon",
-            "Cerebral cortex, basal ganglia, hippocampus",
-            "Lateral ventricles (paired)"
-          ],
-          [
-            "Diencephalon",
-            "Prosencephalon",
-            "Thalamus, hypothalamus, retina, neurohypophysis",
-            "Third ventricle (midline slit)"
-          ],
-          [
-            "Mesencephalon",
-            "Mesencephalon",
-            "Colliculi, cerebral peduncles, red nucleus",
-            "Cerebral aqueduct of Sylvius"
-          ],
-          [
-            "Metencephalon",
-            "Rhombencephalon",
-            "Pons and cerebellar hemispheres",
-            "Upper fourth ventricle"
-          ],
-          [
-            "Myelencephalon",
-            "Rhombencephalon",
-            "Medulla oblongata (open and closed)",
-            "Lower fourth ventricle"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The **mesencephalon** does not subdivide, retaining its name into adult anatomy. Its alar plates differentiate into the superior and inferior colliculi of the tectum, while its basal plates form the red nuclei, substantia nigra, and motor cranial nerve nuclei III and IV. Its narrow central lumen persists as the cerebral aqueduct of Sylvius connecting the third and fourth ventricles.",
-      "say": "The mesencephalon does not subdivide. Its dorsal alar plates form the superior and inferior colliculi, while its ventral plates build the red nuclei, substantia nigra, and ocular motor nuclei. Its narrow channel forms the cerebral aqueduct.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Mesencephalon Structure",
-          "points": [
-            "Tectum: Superior and inferior colliculi",
-            "Tegmentum: Oculomotor and trochlear nuclei",
-            "Crura cerebri: Corticospinal motor pathways",
-            "Narrowest channel: Cerebral aqueduct"
-          ]
-        },
-        "right": {
-          "title": "Rhombencephalon Structure",
-          "points": [
-            "Metencephalon: Pons and cerebellum",
-            "Myelencephalon: Medulla oblongata",
-            "Fourth ventricle with choroid plexus",
-            "Foramina of Luschka and Magendie"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "The **mesencephalon** does not split, and its name survives in the adult. Alar plates there become the superior and inferior colliculi, basal plates become the red nuclei, substantia nigra, and the nuclei of cranial nerves III and IV, and the lumen stays the cerebral aqueduct. By contrast the metencephalon, from the hindbrain, sends rhombic lips dorsally. Those lips bridge the roof of the fourth ventricle and fuse in the midline as the cerebellar plate.",
-      "say": "The midbrain vesicle keeps its name. Its alar plates form the colliculi, its basal plates form the red nuclei, substantia nigra, and the nuclei of nerves III and IV, and its cavity becomes the cerebral aqueduct. The cerebellar plate is separate: rhombic lips of the metencephalon grow across the roof of the fourth ventricle and meet in the midline.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n14-ana-nervous-senses-prosencephalon.webp",
-        "alt": "Rhombic lips of the metencephalon growing across the roof of the fourth ventricle to form the cerebellar plate.",
-        "caption": "Paired rhombic lips rise beside the fourth ventricle and meet over its roof as the developing cerebellum. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "The rhombencephalon divides into the metencephalon and myelencephalon, separated by the pontine flexure. The metencephalon develops into the pons and the **cerebellum**, which forms from proliferating rhombic lips bridging the dorsal roof of the fourth ventricle. The myelencephalon differentiates into the medulla oblongata, housing autonomic respiratory and cardiovascular centres.",
-      "say": "The rhombencephalon divides into metencephalon and myelencephalon across the pontine flexure. The metencephalon yields the pons and cerebellum from the rhombic lips, while the myelencephalon forms the medulla oblongata.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n14-ana-nervous-senses-prosencephalon.webp",
-        "alt": "Developing cerebellum from the metencephalon rhombic lips bridging the roof of the fourth ventricle",
-        "caption": "Developing cerebellum from the metencephalon rhombic lips bridging the roof of the fourth ventricle. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "The ventricular cavities contain choroid plexuses that secrete cerebrospinal fluid. Obstruction of cerebrospinal fluid flow causes **hydrocephalus**. Congenital stenosis of the cerebral aqueduct of Sylvius is the most common cause of congenital obstructive hydrocephalus, leading to massive dilatation of both lateral ventricles and the third ventricle with a normal fourth ventricle.",
-      "say": "Cerebrospinal fluid flows through the ventricular cavities. Flow obstruction produces hydrocephalus. Congenital aqueduct stenosis is the most common obstructive cause, ballooning both lateral ventricles and the third ventricle while sparing the fourth ventricle.",
-      "vis": {
-        "kind": "flow",
-        "title": "CSF Flow Pathway",
-        "nodes": [
-          {
-            "id": "lat",
-            "label": "Lateral Ventricles Choroid Plexus"
-          },
-          {
-            "id": "monro",
-            "label": "Foramen of Monro"
-          },
-          {
-            "id": "v3",
-            "label": "Third Ventricle and Aqueduct of Sylvius"
-          },
-          {
-            "id": "v4",
-            "label": "Fourth Ventricle Apertures (Luschka/Magendie)"
-          }
-        ],
-        "edges": [
-          [
-            "lat",
-            "monro"
-          ],
-          [
-            "monro",
-            "v3"
-          ],
-          [
-            "v3",
-            "v4"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Failure of the fourth ventricle exit foramina (median foramen of Magendie and lateral foramina of Luschka) to open, combined with cerebellar vermis agenesis, causes the **Dandy-Walker malformation**. The posterior fossa expands into a massive cyst-like dilatation of the fourth ventricle with elevated tentorium, causing macrocephaly and hydrocephalus in infants.",
-      "say": "Failure of the fourth ventricle foramina of Luschka and Magendie to open, paired with vermis agenesis, causes the Dandy-Walker malformation. The posterior fossa balloons into a massive fourth ventricle cyst with an elevated tentorium and hydrocephalus.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Dandy-Walker Malformation",
-          "points": [
-            "Agenesis or hypoplasia of cerebellar vermis",
-            "Cystic dilatation of the fourth ventricle",
-            "Enlarged posterior cranial fossa",
-            "High insertion of the torcula and tentorium"
-          ]
-        },
-        "right": {
-          "title": "Arnold-Chiari Malformation",
-          "points": [
-            "Chiari I: Herniation of cerebellar tonsils only",
-            "Chiari II: Herniation of vermis, medulla, tonsils",
-            "Strong association with lumbar myelomeningocele",
-            "Beaked tectum and low torcula in small fossa"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "In **Arnold-Chiari malformation type II**, an abnormally small posterior cranial fossa causes downward herniation of the cerebellar vermis and medulla oblongata through the foramen magnum into the upper cervical canal. Almost universally associated with lumbar myelomeningocele, it blocks fourth ventricular CSF outflow, producing progressive non-communicating hydrocephalus and lower cranial nerve palsies.",
-      "say": "In Arnold-Chiari type two, a cramped posterior fossa forces the cerebellar vermis and medulla down through the foramen magnum into the cervical canal. Tightly linked to lumbar myelomeningocele, it blocks CSF outflow and compresses brainstem nuclei.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Congenital Malformation",
-          "Embryonic Defect",
-          "Key Radiological Finding",
-          "Clinical Manifestation"
-        ],
-        "rows": [
-          [
-            "Aqueduct Stenosis",
-            "Failure of mesencephalon lumen recanalization",
-            "Triventricular hydrocephalus (spared 4th)",
-            "Rapidly enlarging head circumference"
-          ],
-          [
-            "Dandy-Walker",
-            "Agenesis of vermis, atresia of Magendie",
-            "Massive cystic 4th ventricle, small vermis",
-            "Ataxia, bulging fontanelle, nystagmus"
-          ],
-          [
-            "Chiari I Malformation",
-            "Overcrowded posterior fossa",
-            "Cerebellar tonsillar herniation >5 mm",
-            "Adult-onset occipital headache, syringomyelia"
-          ],
-          [
-            "Chiari II Malformation",
-            "Small fossa associated with neural tube defect",
-            "Vermis and medulla herniation into C-spine",
-            "Neonatal stridor, apnea, myelomeningocele"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Rhombencephalon Structure",
+     "points": [
+      "Metencephalon: Pons and cerebellum",
+      "Myelencephalon: Medulla oblongata",
+      "Fourth ventricle with choroid plexus",
+      "Foramina of Luschka and Magendie"
+     ]
     }
-  ],
-  "quiz": [],
-  "gen": "AI",
-  "src": []
+   }
+  },
+  {
+   "tx": "The **mesencephalon** does not split, and its name survives in the adult. Alar plates there become the superior and inferior colliculi, basal plates become the red nuclei, substantia nigra, and the nuclei of cranial nerves III and IV, and the lumen stays the cerebral aqueduct. By contrast the metencephalon, from the hindbrain, sends rhombic lips dorsally. Those lips bridge the roof of the fourth ventricle and fuse in the midline as the cerebellar plate.",
+   "say": "The midbrain vesicle keeps its name. Its alar plates form the colliculi, its basal plates form the red nuclei, substantia nigra, and the nuclei of nerves III and IV, and its cavity becomes the cerebral aqueduct. The cerebellar plate is separate: rhombic lips of the metencephalon grow across the roof of the fourth ventricle and meet in the midline.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n14-ana-nervous-senses-prosencephalon.webp",
+    "alt": "Rhombic lips of the metencephalon growing across the roof of the fourth ventricle to form the cerebellar plate.",
+    "caption": "Paired rhombic lips rise beside the fourth ventricle and meet over its roof as the developing cerebellum. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The rhombencephalon divides into the metencephalon and myelencephalon, separated by the pontine flexure. The metencephalon develops into the pons and the **cerebellum**, which forms from proliferating rhombic lips bridging the dorsal roof of the fourth ventricle. The myelencephalon differentiates into the medulla oblongata, housing autonomic respiratory and cardiovascular centres.",
+   "say": "The rhombencephalon divides into metencephalon and myelencephalon across the pontine flexure. The metencephalon yields the pons and cerebellum from the rhombic lips, while the myelencephalon forms the medulla oblongata.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n14-ana-nervous-senses-prosencephalon.webp",
+    "alt": "Developing cerebellum from the metencephalon rhombic lips bridging the roof of the fourth ventricle",
+    "caption": "Developing cerebellum from the metencephalon rhombic lips bridging the roof of the fourth ventricle. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The ventricular cavities contain choroid plexuses that secrete cerebrospinal fluid. Obstruction of cerebrospinal fluid flow causes **hydrocephalus**. Congenital stenosis of the cerebral aqueduct of Sylvius is the most common cause of congenital obstructive hydrocephalus, leading to massive dilatation of both lateral ventricles and the third ventricle with a normal fourth ventricle.",
+   "say": "Cerebrospinal fluid flows through the ventricular cavities. Flow obstruction produces hydrocephalus. Congenital aqueduct stenosis is the most common obstructive cause, ballooning both lateral ventricles and the third ventricle while sparing the fourth ventricle.",
+   "vis": {
+    "kind": "flow",
+    "title": "CSF Flow Pathway",
+    "nodes": [
+     {
+      "id": "lat",
+      "label": "Lateral Ventricles Choroid Plexus"
+     },
+     {
+      "id": "monro",
+      "label": "Foramen of Monro"
+     },
+     {
+      "id": "v3",
+      "label": "Third Ventricle and Aqueduct of Sylvius"
+     },
+     {
+      "id": "v4",
+      "label": "Fourth Ventricle Apertures (Luschka/Magendie)"
+     }
+    ],
+    "edges": [
+     [
+      "lat",
+      "monro"
+     ],
+     [
+      "monro",
+      "v3"
+     ],
+     [
+      "v3",
+      "v4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure of the fourth ventricle exit foramina (median foramen of Magendie and lateral foramina of Luschka) to open, combined with cerebellar vermis agenesis, causes the **Dandy-Walker malformation**. The posterior fossa expands into a massive cyst-like dilatation of the fourth ventricle with elevated tentorium, causing macrocephaly and hydrocephalus in infants.",
+   "say": "Failure of the fourth ventricle foramina of Luschka and Magendie to open, paired with vermis agenesis, causes the Dandy-Walker malformation. The posterior fossa balloons into a massive fourth ventricle cyst with an elevated tentorium and hydrocephalus.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dandy-Walker Malformation",
+     "points": [
+      "Agenesis or hypoplasia of cerebellar vermis",
+      "Cystic dilatation of the fourth ventricle",
+      "Enlarged posterior cranial fossa",
+      "High insertion of the torcula and tentorium"
+     ]
+    },
+    "right": {
+     "title": "Arnold-Chiari Malformation",
+     "points": [
+      "Chiari I: Herniation of cerebellar tonsils only",
+      "Chiari II: Herniation of vermis, medulla, tonsils",
+      "Strong association with lumbar myelomeningocele",
+      "Beaked tectum and low torcula in small fossa"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In **Arnold-Chiari malformation type II**, an abnormally small posterior cranial fossa causes downward herniation of the cerebellar vermis and medulla oblongata through the foramen magnum into the upper cervical canal. Almost universally associated with lumbar myelomeningocele, it blocks fourth ventricular CSF outflow, producing progressive non-communicating hydrocephalus and lower cranial nerve palsies.",
+   "say": "In Arnold-Chiari type two, a cramped posterior fossa forces the cerebellar vermis and medulla down through the foramen magnum into the cervical canal. Tightly linked to lumbar myelomeningocele, it blocks CSF outflow and compresses brainstem nuclei.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Congenital Malformation",
+     "Embryonic Defect",
+     "Key Radiological Finding",
+     "Clinical Manifestation"
+    ],
+    "rows": [
+     [
+      "Aqueduct Stenosis",
+      "Failure of mesencephalon lumen recanalization",
+      "Triventricular hydrocephalus (spared 4th)",
+      "Rapidly enlarging head circumference"
+     ],
+     [
+      "Dandy-Walker",
+      "Agenesis of vermis, atresia of Magendie",
+      "Massive cystic 4th ventricle, small vermis",
+      "Ataxia, bulging fontanelle, nystagmus"
+     ],
+     [
+      "Chiari I Malformation",
+      "Overcrowded posterior fossa",
+      "Cerebellar tonsillar herniation >5 mm",
+      "Adult-onset occipital headache, syringomyelia"
+     ],
+     [
+      "Chiari II Malformation",
+      "Small fossa associated with neural tube defect",
+      "Vermis and medulla herniation into C-spine",
+      "Neonatal stridor, apnea, myelomeningocele"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "gen": "AI",
+ "src": []
 }

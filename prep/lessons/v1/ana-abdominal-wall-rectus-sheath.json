@@ -1,256 +1,256 @@
 {
-  "v": 1,
-  "gen": "AI",
-  "module": "ana-abdominal-wall",
-  "subject": "anatomy",
-  "title": "Anterior Abdominal Wall: Rectus Sheath, Conjoint Tendon, and Inguinal Canal",
-  "minutes": 8,
-  "steps": [
-    {
-      "tx": "The anterior abdominal wall is reinforced by the **rectus sheath**, a long, tough aponeurotic envelope enclosing the rectus abdominis and pyramidalis muscles. Formed by the interlacing aponeuroses of the three flat abdominal muscles (external oblique, internal oblique, and transversus abdominis), its composition changes dramatically along its length.",
-      "say": "The anterior abdominal wall features the rectus sheath, a tough envelope surrounding the rectus abdominis. Formed by aponeuroses of the three flat abdominal muscles, its structure varies at different levels.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n1-ana-abdominal-wall-rectus-sheath.webp",
-        "alt": "Rectus sheath cross-sections above and below the arcuate line showing aponeurotic layers around rectus abdominis",
-        "caption": "Rectus sheath cross-sections above and below the arcuate line showing aponeurotic layers around rectus abdominis. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-abdominal-wall",
+ "subject": "anatomy",
+ "title": "Anterior Abdominal Wall: Rectus Sheath, Conjoint Tendon, and Inguinal Canal",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The anterior abdominal wall is reinforced by the **rectus sheath**, a long, tough aponeurotic envelope enclosing the rectus abdominis and pyramidalis muscles. Formed by the interlacing aponeuroses of the three flat abdominal muscles (external oblique, internal oblique, and transversus abdominis), its composition changes dramatically along its length.",
+   "say": "The anterior abdominal wall features the rectus sheath, a tough envelope surrounding the rectus abdominis. Formed by aponeuroses of the three flat abdominal muscles, its structure varies at different levels.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n1-ana-abdominal-wall-rectus-sheath.webp",
+    "alt": "Rectus sheath cross-sections above and below the arcuate line showing aponeurotic layers around rectus abdominis",
+    "caption": "Rectus sheath cross-sections above and below the arcuate line showing aponeurotic layers around rectus abdominis. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "From the costal margin down to midway between the umbilicus and pubic crest, the internal oblique aponeurosis splits around rectus abdominis. The anterior wall is formed by the **external oblique aponeurosis** and the anterior leaf of internal oblique, while the posterior wall is formed by the posterior leaf of internal oblique and transversus abdominis aponeurosis.",
+   "say": "Above the arcuate line, the internal oblique aponeurosis splits around rectus abdominis. Its anterior leaf fuses with external oblique, while its posterior leaf fuses with transversus abdominis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Above Arcuate Line",
+     "points": [
+      "Internal oblique aponeurosis splits into two lamellae",
+      "Anterior wall: external oblique + anterior internal oblique",
+      "Posterior wall: posterior internal oblique + transversus",
+      "Rectus abdominis is completely enclosed front and back"
+     ]
     },
-    {
-      "tx": "From the costal margin down to midway between the umbilicus and pubic crest, the internal oblique aponeurosis splits around rectus abdominis. The anterior wall is formed by the **external oblique aponeurosis** and the anterior leaf of internal oblique, while the posterior wall is formed by the posterior leaf of internal oblique and transversus abdominis aponeurosis.",
-      "say": "Above the arcuate line, the internal oblique aponeurosis splits around rectus abdominis. Its anterior leaf fuses with external oblique, while its posterior leaf fuses with transversus abdominis.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Above Arcuate Line",
-          "points": [
-            "Internal oblique aponeurosis splits into two lamellae",
-            "Anterior wall: external oblique + anterior internal oblique",
-            "Posterior wall: posterior internal oblique + transversus",
-            "Rectus abdominis is completely enclosed front and back"
-          ]
-        },
-        "right": {
-          "title": "Below Arcuate Line",
-          "points": [
-            "All three aponeuroses pass anterior to rectus",
-            "Anterior wall: external oblique + internal oblique + transversus",
-            "Posterior wall: absent (fascia transversalis only)",
-            "Rectus rests directly against fascia transversalis"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "The abrupt transition where the posterior wall of the rectus sheath terminates is the **arcuate line** of Douglas. Located midway between the umbilicus and pubic symphysis, below this crescentic line all three aponeuroses pass anterior to the rectus abdominis, leaving the muscle resting directly upon the endoabdominal fascia transversalis and peritoneum.",
-      "say": "The posterior wall of the rectus sheath ends at the arcuate line of Douglas. Below this line, all three muscle aponeuroses pass anteriorly, leaving rectus abdominis on the fascia transversalis.",
-      "vis": {
-        "kind": "flow",
-        "title": "Aponeurotic Shift at the Arcuate Line",
-        "nodes": [
-          {
-            "id": "above",
-            "label": "Above Arcuate Line: Balanced Anterior and Posterior Walls"
-          },
-          {
-            "id": "line",
-            "label": "Arcuate Line of Douglas (Midway Umbilicus to Pubis)"
-          },
-          {
-            "id": "shift",
-            "label": "All 3 Aponeuroses Shift Exclusively to Anterior Sheath"
-          },
-          {
-            "id": "vessels",
-            "label": "Inferior Epigastric Vessels Enter Sheath over Arcuate Rim"
-          }
-        ],
-        "edges": [
-          [
-            "above",
-            "line"
-          ],
-          [
-            "line",
-            "shift"
-          ],
-          [
-            "shift",
-            "vessels"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Within the rectus sheath run the superior and **inferior epigastric arteries**, forming an extensive arterial anastomosis. The inferior epigastric artery arises from the external iliac artery just above the inguinal ligament, curves over the arcuate line into the posterior rectus substance, and anastomoses with the superior epigastric branch of the internal thoracic artery.",
-      "say": "Superior and inferior epigastric arteries anastomose within the rectus sheath. The inferior epigastric arises from the external iliac artery and enters the sheath over the arcuate line to join the superior epigastric.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Epigastric Vessel",
-          "Parent Arterial Source",
-          "Entry into Sheath",
-          "Territory of Perfusion"
-        ],
-        "rows": [
-          [
-            "Superior Epigastric",
-            "Internal thoracic artery (subclavian)",
-            "Enters behind 7th costal cartilage",
-            "Upper rectus abdominis and overlying skin"
-          ],
-          [
-            "Inferior Epigastric",
-            "External iliac artery (groin)",
-            "Hooks over arcuate line of Douglas",
-            "Lower rectus abdominis; major collateral conduit"
-          ],
-          [
-            "Deep Circumflex Iliac",
-            "External iliac artery",
-            "Courses along inner iliac crest",
-            "Supplies transversus abdominis and iliac crest flap"
-          ],
-          [
-            "Superficial Epigastric",
-            "Femoral artery (saphenous opening)",
-            "Ascends in superficial Camper fascia",
-            "Subcutaneous tissues of lower abdominal wall"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Where the two flat aponeuroses of the lower abdominal wall fuse, they build a shared tendon with surgical significance. The **conjoint tendon** is that fused insertion of internal oblique and transversus abdominis onto the pubic crest, forming the medial posterior wall of the inguinal canal. Its strength decides whether a direct hernia bulges through Hesselbach's triangle beside it. Herniorrhaphy techniques plicate or reinforce exactly this layer, so its anatomy is not trivia but the operative plan written in advance.",
-      "say": "The conjoint tendon fuses two aponeuroses behind the inguinal canal, guarding against direct hernia.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-m792-ana-abdominal-wall-rectus-sheath.webp",
-        "alt": "Conjoint tendon",
-        "caption": "Conjoint tendon. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Medially, lower aponeurotic fibres of internal oblique and transversus abdominis arch downward to insert together into the pubic crest and pectineal line, forming the **conjoint tendon** (falx inguinalis). Situated immediately posterior to the superficial inguinal ring, the conjoint tendon reinforces the medial half of the posterior inguinal wall.",
-      "say": "Lower fibers of internal oblique and transversus abdominis unite into the conjoint tendon. Inserting into the pubic crest and pectineal line, it bolsters the posterior wall of the inguinal canal.",
-      "vis": {
-        "kind": "image",
-        "src": "clinix/media/skills/skill-exam-surg-hernia_inspection.webp",
-        "alt": "Anatomical diagram of the groin highlighting the conjoint tendon and posterior wall of inguinal canal",
-        "caption": "Posterior inguinal wall reinforcement by the conjoint tendon behind the superficial ring. [Credit: StewardMD]",
-        "ar": 1.5
-      }
-    },
-    {
-      "tx": "The **inguinal canal** is an oblique intermuscular tunnel measuring four centimetres in length, directed inferomedially through the lower anterior abdominal wall just above the medial half of the inguinal ligament. It extends from the deep inguinal ring to the superficial inguinal ring, transmitting the spermatic cord in males and round ligament in females.",
-      "say": "The inguinal canal is an oblique tunnel four centimeters long situated above the medial inguinal ligament. Extending between deep and superficial rings, it transmits the spermatic cord or round ligament.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Inguinal Canal Wall",
-          "Anatomical Composition",
-          "Lateral Half",
-          "Medial Half"
-        ],
-        "rows": [
-          [
-            "Anterior Wall",
-            "External oblique aponeurosis",
-            "Reinforced by fleshy internal oblique fibers",
-            "External oblique aponeurosis only"
-          ],
-          [
-            "Posterior Wall",
-            "Fascia transversalis and peritoneum",
-            "Fascia transversalis only (weak area)",
-            "Reinforced by conjoint tendon and reflected lig"
-          ],
-          [
-            "Roof (Superior)",
-            "Arching fleshy fibers",
-            "Internal oblique fibers arching over cord",
-            "Transversus abdominis arching fibers"
-          ],
-          [
-            "Floor (Inferior)",
-            "Grooved upper surface of ligaments",
-            "Upper surface of grooved inguinal ligament",
-            "Lacunar ligament of Gimbernat medially"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The superficial opening of the canal is the **superficial inguinal ring**, a triangular gap in the external oblique aponeurosis located immediately above and lateral to the pubic tubercle. Its base rests on the pubic crest, bounded by medial and lateral crura united at the apex by intercrural fibres that prevent the opening from splitting.",
-      "say": "The superficial inguinal ring is a triangular hiatus in the external oblique aponeurosis above the pubic tubercle. Bounded by medial and lateral crura, intercrural fibers prevent it from tearing open.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Superficial Inguinal Ring",
-          "points": [
-            "Triangular aperture in external oblique aponeurosis",
-            "Located above and lateral to pubic tubercle",
-            "Exit portal of spermatic cord / ilioinguinal nerve",
-            "Site where hernia emerges under the skin"
-          ]
-        },
-        "right": {
-          "title": "Deep Inguinal Ring",
-          "points": [
-            "Oval aperture in fascia transversalis",
-            "Located 1.25 cm above midinguinal point",
-            "Entrance portal of vas deferens / gonadal vessels",
-            "Site where indirect inguinal hernia enters"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Integrity of the inguinal canal is maintained dynamically by the **shutter mechanism**. Increased intra-abdominal pressure during coughing or straining causes contraction of the arched fleshy fibres of internal oblique and transversus abdominis, pulling the roof down against the grooved floor like a shutter, occluding the canal and preventing visceral herniation.",
-      "say": "Canal integrity is defended by the shutter mechanism. When intra-abdominal pressure rises, contraction of arched internal oblique and transversus fibers pulls the roof down against the floor to block herniation.",
-      "vis": {
-        "kind": "flow",
-        "title": "Dynamic Shutter Defense of Inguinal Canal",
-        "nodes": [
-          {
-            "id": "cough",
-            "label": "Sudden Spike in Intra-abdominal Pressure (Cough or Valsalva)"
-          },
-          {
-            "id": "reflex",
-            "label": "Reflex Contraction of Arched Internal Oblique and Transversus"
-          },
-          {
-            "id": "shutter",
-            "label": "Muscular Roof Pulls Down Tightly Against Inguinal Floor"
-          },
-          {
-            "id": "occlude",
-            "label": "Canal Occluded Mechanically, Preventing Visceral Extrusion"
-          }
-        ],
-        "edges": [
-          [
-            "cough",
-            "reflex"
-          ],
-          [
-            "reflex",
-            "shutter"
-          ],
-          [
-            "shutter",
-            "occlude"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Below Arcuate Line",
+     "points": [
+      "All three aponeuroses pass anterior to rectus",
+      "Anterior wall: external oblique + internal oblique + transversus",
+      "Posterior wall: absent (fascia transversalis only)",
+      "Rectus rests directly against fascia transversalis"
+     ]
     }
-  ],
-  "quiz": [
-    "1f77cf49-7120-45b1-a4aa-027b7127ba35",
-    "f46bc24c-d6f2-4d1a-8cc9-7d037d2267f8",
-    "3d70e53b-1e66-4755-b618-dcba8f5327db"
-  ]
+   }
+  },
+  {
+   "tx": "The abrupt transition where the posterior wall of the rectus sheath terminates is the **arcuate line** of Douglas. Located midway between the umbilicus and pubic symphysis, below this crescentic line all three aponeuroses pass anterior to the rectus abdominis, leaving the muscle resting directly upon the endoabdominal fascia transversalis and peritoneum.",
+   "say": "The posterior wall of the rectus sheath ends at the arcuate line of Douglas. Below this line, all three muscle aponeuroses pass anteriorly, leaving rectus abdominis on the fascia transversalis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Aponeurotic Shift at the Arcuate Line",
+    "nodes": [
+     {
+      "id": "above",
+      "label": "Above Arcuate Line: Balanced Anterior and Posterior Walls"
+     },
+     {
+      "id": "line",
+      "label": "Arcuate Line of Douglas (Midway Umbilicus to Pubis)"
+     },
+     {
+      "id": "shift",
+      "label": "All 3 Aponeuroses Shift Exclusively to Anterior Sheath"
+     },
+     {
+      "id": "vessels",
+      "label": "Inferior Epigastric Vessels Enter Sheath over Arcuate Rim"
+     }
+    ],
+    "edges": [
+     [
+      "above",
+      "line"
+     ],
+     [
+      "line",
+      "shift"
+     ],
+     [
+      "shift",
+      "vessels"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Within the rectus sheath run the superior and **inferior epigastric arteries**, forming an extensive arterial anastomosis. The inferior epigastric artery arises from the external iliac artery just above the inguinal ligament, curves over the arcuate line into the posterior rectus substance, and anastomoses with the superior epigastric branch of the internal thoracic artery.",
+   "say": "Superior and inferior epigastric arteries anastomose within the rectus sheath. The inferior epigastric arises from the external iliac artery and enters the sheath over the arcuate line to join the superior epigastric.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Epigastric Vessel",
+     "Parent Arterial Source",
+     "Entry into Sheath",
+     "Territory of Perfusion"
+    ],
+    "rows": [
+     [
+      "Superior Epigastric",
+      "Internal thoracic artery (subclavian)",
+      "Enters behind 7th costal cartilage",
+      "Upper rectus abdominis and overlying skin"
+     ],
+     [
+      "Inferior Epigastric",
+      "External iliac artery (groin)",
+      "Hooks over arcuate line of Douglas",
+      "Lower rectus abdominis; major collateral conduit"
+     ],
+     [
+      "Deep Circumflex Iliac",
+      "External iliac artery",
+      "Courses along inner iliac crest",
+      "Supplies transversus abdominis and iliac crest flap"
+     ],
+     [
+      "Superficial Epigastric",
+      "Femoral artery (saphenous opening)",
+      "Ascends in superficial Camper fascia",
+      "Subcutaneous tissues of lower abdominal wall"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Where the two flat aponeuroses of the lower abdominal wall fuse, they build a shared tendon with surgical significance. The **conjoint tendon** is that fused insertion of internal oblique and transversus abdominis onto the pubic crest, forming the medial posterior wall of the inguinal canal. Its strength decides whether a direct hernia bulges through Hesselbach's triangle beside it. Herniorrhaphy techniques plicate or reinforce exactly this layer, so its anatomy is not trivia but the operative plan written in advance.",
+   "say": "The conjoint tendon fuses two aponeuroses behind the inguinal canal, guarding against direct hernia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m792-ana-abdominal-wall-rectus-sheath.webp",
+    "alt": "Conjoint tendon",
+    "caption": "Conjoint tendon. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Medially, lower aponeurotic fibres of internal oblique and transversus abdominis arch downward to insert together into the pubic crest and pectineal line, forming the **conjoint tendon** (falx inguinalis). Situated immediately posterior to the superficial inguinal ring, the conjoint tendon reinforces the medial half of the posterior inguinal wall.",
+   "say": "Lower fibers of internal oblique and transversus abdominis unite into the conjoint tendon. Inserting into the pubic crest and pectineal line, it bolsters the posterior wall of the inguinal canal.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-hernia_inspection.webp",
+    "alt": "Anatomical diagram of the groin highlighting the conjoint tendon and posterior wall of inguinal canal",
+    "caption": "Posterior inguinal wall reinforcement by the conjoint tendon behind the superficial ring. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The **inguinal canal** is an oblique intermuscular tunnel measuring four centimetres in length, directed inferomedially through the lower anterior abdominal wall just above the medial half of the inguinal ligament. It extends from the deep inguinal ring to the superficial inguinal ring, transmitting the spermatic cord in males and round ligament in females.",
+   "say": "The inguinal canal is an oblique tunnel four centimeters long situated above the medial inguinal ligament. Extending between deep and superficial rings, it transmits the spermatic cord or round ligament.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Inguinal Canal Wall",
+     "Anatomical Composition",
+     "Lateral Half",
+     "Medial Half"
+    ],
+    "rows": [
+     [
+      "Anterior Wall",
+      "External oblique aponeurosis",
+      "Reinforced by fleshy internal oblique fibers",
+      "External oblique aponeurosis only"
+     ],
+     [
+      "Posterior Wall",
+      "Fascia transversalis and peritoneum",
+      "Fascia transversalis only (weak area)",
+      "Reinforced by conjoint tendon and reflected lig"
+     ],
+     [
+      "Roof (Superior)",
+      "Arching fleshy fibers",
+      "Internal oblique fibers arching over cord",
+      "Transversus abdominis arching fibers"
+     ],
+     [
+      "Floor (Inferior)",
+      "Grooved upper surface of ligaments",
+      "Upper surface of grooved inguinal ligament",
+      "Lacunar ligament of Gimbernat medially"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The superficial opening of the canal is the **superficial inguinal ring**, a triangular gap in the external oblique aponeurosis located immediately above and lateral to the pubic tubercle. Its base rests on the pubic crest, bounded by medial and lateral crura united at the apex by intercrural fibres that prevent the opening from splitting.",
+   "say": "The superficial inguinal ring is a triangular hiatus in the external oblique aponeurosis above the pubic tubercle. Bounded by medial and lateral crura, intercrural fibers prevent it from tearing open.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Superficial Inguinal Ring",
+     "points": [
+      "Triangular aperture in external oblique aponeurosis",
+      "Located above and lateral to pubic tubercle",
+      "Exit portal of spermatic cord / ilioinguinal nerve",
+      "Site where hernia emerges under the skin"
+     ]
+    },
+    "right": {
+     "title": "Deep Inguinal Ring",
+     "points": [
+      "Oval aperture in fascia transversalis",
+      "Located 1.25 cm above midinguinal point",
+      "Entrance portal of vas deferens / gonadal vessels",
+      "Site where indirect inguinal hernia enters"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Integrity of the inguinal canal is maintained dynamically by the **shutter mechanism**. Increased intra-abdominal pressure during coughing or straining causes contraction of the arched fleshy fibres of internal oblique and transversus abdominis, pulling the roof down against the grooved floor like a shutter, occluding the canal and preventing visceral herniation.",
+   "say": "Canal integrity is defended by the shutter mechanism. When intra-abdominal pressure rises, contraction of arched internal oblique and transversus fibers pulls the roof down against the floor to block herniation.",
+   "vis": {
+    "kind": "flow",
+    "title": "Dynamic Shutter Defense of Inguinal Canal",
+    "nodes": [
+     {
+      "id": "cough",
+      "label": "Sudden Spike in Intra-abdominal Pressure (Cough or Valsalva)"
+     },
+     {
+      "id": "reflex",
+      "label": "Reflex Contraction of Arched Internal Oblique and Transversus"
+     },
+     {
+      "id": "shutter",
+      "label": "Muscular Roof Pulls Down Tightly Against Inguinal Floor"
+     },
+     {
+      "id": "occlude",
+      "label": "Canal Occluded Mechanically, Preventing Visceral Extrusion"
+     }
+    ],
+    "edges": [
+     [
+      "cough",
+      "reflex"
+     ],
+     [
+      "reflex",
+      "shutter"
+     ],
+     [
+      "shutter",
+      "occlude"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "1f77cf49-7120-45b1-a4aa-027b7127ba35",
+  "f46bc24c-d6f2-4d1a-8cc9-7d037d2267f8",
+  "3d70e53b-1e66-4755-b618-dcba8f5327db"
+ ]
 }

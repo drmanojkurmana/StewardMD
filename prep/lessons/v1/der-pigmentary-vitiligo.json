@@ -1,256 +1,256 @@
 {
-  "v": 1,
-  "id": "der-pigmentary-vitiligo",
-  "subject": "dermatology",
-  "module": "der-pigmentary",
-  "title": "Vitiligo and Pigmentary Disorders",
-  "minutes": 6,
-  "gen": "AI",
-  "steps": [
-    {
-      "tx": "**Autoimmune melanocyte destruction** mediated by autoreactive CD8+ cytotoxic T lymphocytes drives the pathogenesis of vitiligo. These T cells recognize melanocytic differentiation antigens such as Melan-A and tyrosinase, releasing interferon-gamma and triggering CXCL10 chemokine secretion that recruits further effector lymphocytes to eliminate epidermal melanocytes.",
-      "say": "Vitiligo results from targeted autoimmune destruction of melanocytes by CD8+ T cells. Interferon-gamma and CXCL10 chemokines perpetuate the targeted destruction of pigment cells.",
-      "vis": {
-        "kind": "flow",
-        "title": "Vitiligo Autoimmune Cascade",
-        "nodes": [
-          {
-            "id": "n1",
-            "label": "Oxidative stress triggers melanocytic danger signaling"
-          },
-          {
-            "id": "n2",
-            "label": "CD8+ cytotoxic T cells target tyrosinase and Melan-A"
-          },
-          {
-            "id": "n3",
-            "label": "Interferon-gamma release drives epidermal CXCL10 secretion"
-          },
-          {
-            "id": "n4",
-            "label": "Complete loss of melanin production and epidermal depigmentation"
-          }
-        ],
-        "edges": [
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ],
-          [
-            "n3",
-            "n4"
-          ]
-        ]
-      }
+ "v": 1,
+ "id": "der-pigmentary-vitiligo",
+ "subject": "dermatology",
+ "module": "der-pigmentary",
+ "title": "Vitiligo and Pigmentary Disorders",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Autoimmune melanocyte destruction** mediated by autoreactive CD8+ cytotoxic T lymphocytes drives the pathogenesis of vitiligo. These T cells recognize melanocytic differentiation antigens such as Melan-A and tyrosinase, releasing interferon-gamma and triggering CXCL10 chemokine secretion that recruits further effector lymphocytes to eliminate epidermal melanocytes.",
+   "say": "Vitiligo results from targeted autoimmune destruction of melanocytes by CD8+ T cells. Interferon-gamma and CXCL10 chemokines perpetuate the targeted destruction of pigment cells.",
+   "vis": {
+    "kind": "flow",
+    "title": "Vitiligo Autoimmune Cascade",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Oxidative stress triggers melanocytic danger signaling"
+     },
+     {
+      "id": "n2",
+      "label": "CD8+ cytotoxic T cells target tyrosinase and Melan-A"
+     },
+     {
+      "id": "n3",
+      "label": "Interferon-gamma release drives epidermal CXCL10 secretion"
+     },
+     {
+      "id": "n4",
+      "label": "Complete loss of melanin production and epidermal depigmentation"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Chalk-white macules** with sharply demarcated borders represent the classic morphology of vitiligo lesions. The depigmented patches completely lack melanin and range from millimeters to broad confluent sheets. Non-segmental vitiligo presents with generalized, symmetric bilateral distribution, whereas segmental vitiligo manifests as a rapid-onset unilateral dermatomal patch.",
+   "say": "Lesions present as completely depigmented, chalk-white macules with well-defined borders. Non-segmental disease is symmetric, while segmental vitiligo follows a unilateral distribution.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Non-Segmental Vitiligo",
+     "points": [
+      "Bilateral symmetric lesions",
+      "Acrofacial and generalized",
+      "High autoimmune disease association",
+      "Lifelong fluctuating activity"
+     ]
     },
-    {
-      "tx": "**Chalk-white macules** with sharply demarcated borders represent the classic morphology of vitiligo lesions. The depigmented patches completely lack melanin and range from millimeters to broad confluent sheets. Non-segmental vitiligo presents with generalized, symmetric bilateral distribution, whereas segmental vitiligo manifests as a rapid-onset unilateral dermatomal patch.",
-      "say": "Lesions present as completely depigmented, chalk-white macules with well-defined borders. Non-segmental disease is symmetric, while segmental vitiligo follows a unilateral distribution.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Non-Segmental Vitiligo",
-          "points": [
-            "Bilateral symmetric lesions",
-            "Acrofacial and generalized",
-            "High autoimmune disease association",
-            "Lifelong fluctuating activity"
-          ]
-        },
-        "right": {
-          "title": "Segmental Vitiligo",
-          "points": [
-            "Unilateral dermatomal layout",
-            "Rapid early stabilization",
-            "Lower systemic autoimmunity",
-            "Refractory to medical repigmentation"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "**Wood lamp accentuation** provides immediate bedside confirmation by demonstrating brilliant blue-white fluorescence of vitiligo macules with sharp enhancement of lesion margins. In contrast, post-inflammatory hypopigmentation or pityriasis alba shows incomplete contrast enhancement, while tinea versicolor displays pale golden-yellow fluorescence under ultraviolet illumination.",
-      "say": "Examination under Wood lamp illuminates vitiligo macules with striking blue-white contrast. Partial hypopigmentation lacks this sharp enhancement, aiding rapid bedside distinction.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/progressive-macular-hypomelanosis-fig1.webp",
-        "alt": "Wood lamp examination and follicular fluorescence patterns.",
-        "caption": "Wood lamp examination demonstrating illumination of pigmentary contrast across skin lesions.",
-        "ar": 1.5
-      }
-    },
-    {
-      "tx": "**Leukotrichia** describes the development of white hair within vitiligo macules, signifying the destruction of melanocyte stem cell reservoirs within the hair follicle bulge. Because follicular stem cells provide the primary source of melanocyte migration during repigmentation, leukotrichia indicates disease resistance to conventional phototherapy and topical medical treatments.",
-      "say": "White hair within a patch indicates that the follicular melanocyte stem cell pool is exhausted. Its presence signals reduced likelihood of successful medical repigmentation.",
-      "vis": {
-        "kind": "table",
-        "title": "Prognostic Factors in Vitiligo",
-        "cols": [
-          "Feature",
-          "Favorable Indicator",
-          "Poor Prognostic Indicator"
-        ],
-        "rows": [
-          [
-            "Hair pigmentation",
-            "Retained black/brown hair",
-            "Leukotrichia within macule"
-          ],
-          [
-            "Anatomic site",
-            "Face, trunk, neck",
-            "Acral fingers, toes, lips"
-          ],
-          [
-            "Lesion stability",
-            "Static borders without itching",
-            "Active trichrome or confetti depigmentation"
-          ],
-          [
-            "Koebner status",
-            "Negative isomorphic response",
-            "Active Koebnerization after friction"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "**Isomorphic Koebner response** frequently occurs in active progressive vitiligo, where new depigmented macules appear at sites of repeated friction, belt pressure, or superficial trauma. Patients should be cautioned against vigorous scrubbing or wearing restrictive garments that precipitate fresh lesions across vulnerable anatomical zones.",
-      "say": "Mechanical friction, tight clothing, or scratching prompts new depigmented lesions along injury lines. This isomorphic Koebner phenomenon indicates unstable, active disease.",
-      "vis": {
-        "kind": "flow",
-        "title": "Koebnerization in Progressive Vitiligo",
-        "nodes": [
-          {
-            "id": "n1",
-            "label": "Repetitive mechanical trauma or friction at pressure points"
-          },
-          {
-            "id": "n2",
-            "label": "Stressed keratinocytes release inflammatory danger molecules"
-          },
-          {
-            "id": "n3",
-            "label": "Autoreactive CD8+ T cells home to the injured microenvironment"
-          },
-          {
-            "id": "n4",
-            "label": "Melanocytes destroyed along the line of physical trauma"
-          }
-        ],
-        "edges": [
-          [
-            "n1",
-            "n2"
-          ],
-          [
-            "n2",
-            "n3"
-          ],
-          [
-            "n3",
-            "n4"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "**Autoimmune thyroid disease** represents the most frequent systemic comorbidity associated with vitiligo, affecting up to twenty percent of patients. Hashimoto thyroiditis and Graves disease predominate, warranting baseline serum thyroid-stimulating hormone screening. Other associated conditions include type 1 diabetes, pernicious anemia, Addison disease, and alopecia areata.",
-      "say": "Autoimmune thyroid disorders accompany vitiligo in up to a fifth of patients. Baseline screening for thyroid dysfunction is standard practice in comprehensive evaluation.",
-      "vis": {
-        "kind": "table",
-        "title": "Vitiligo Autoimmune Comorbidities",
-        "cols": [
-          "Systemic Condition",
-          "Associated Autoantibody",
-          "Clinical Screening"
-        ],
-        "rows": [
-          [
-            "Hashimoto thyroiditis",
-            "Anti-TPO, anti-thyroglobulin",
-            "Serum TSH and free T4"
-          ],
-          [
-            "Type 1 diabetes",
-            "Anti-GAD65, anti-islet cell",
-            "Fasting glucose, HbA1c"
-          ],
-          [
-            "Pernicious anemia",
-            "Anti-intrinsic factor",
-            "Complete blood count, B12"
-          ],
-          [
-            "Addison disease",
-            "Anti-21-hydroxylase",
-            "Electrolytes, morning cortisol"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "**Autoimmune thyroid disease** is the systemic illness most often tied to vitiligo, present in up to 20 percent of patients, usually Hashimoto thyroiditis or Graves disease, so a baseline thyroid stimulating hormone is part of the workup. Type 1 diabetes, pernicious anemia, Addison disease, and alopecia areata travel with it as well. For widespread pigment loss, a narrowband UVB cabinet is used, and returning colour often starts as small islands around hair follicles before the islands join.",
-      "say": "Thyroid autoimmunity, mainly Hashimoto thyroiditis or Graves disease, affects up to a fifth of people with vitiligo, so thyroid stimulating hormone is checked at the start. Type 1 diabetes, pernicious anemia, Addison disease, and alopecia areata are the other associations. Narrowband UVB for generalised loss often brings colour back first as dots around follicles.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n23-der-pigmentary-vitiligo.webp",
-        "alt": "A narrowband UVB cabinet treating widespread vitiligo, with new pigment appearing around hair follicles.",
-        "caption": "A standing phototherapy cabinet delivers narrowband UVB, and repigmentation begins as small islands around follicles. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "This treatment turns light itself into medicine measured in millijoules. **Narrowband ultraviolet B**, delivered at three hundred and eleven nanometres in a phototherapy cabinet, calms the autoimmune attack on melanocytes and coaxes pigment cells from follicle reservoirs back into white vitiligo patches. Sessions run two or three times weekly for months, repigmentation creeping from the edges and freckling around hairs first. It suits widespread disease where creams cannot keep up, and its safety record in children keeps it ahead of older psoralen based photochemotherapy.",
-      "say": "Narrowband ultraviolet B phototherapy stimulates melanocyte reservoirs to repigment widespread vitiligo patches.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-m909-der-pigmentary-vitiligo.webp",
-        "alt": "Narrowband ultraviolet B",
-        "caption": "Narrowband ultraviolet B. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "**Narrowband ultraviolet B** phototherapy administered two to three times weekly serves as the gold-standard treatment for generalized vitiligo. By suppressing cutaneous T-cell autoimmunity and stimulating follicular stem cell proliferation, NB-UVB induces perifollicular islands of repigmentation that slowly coalesce across the depigmented macule.",
-      "say": "Narrowband UVB phototherapy dampens local T-cell activity and awakens follicular melanocyte stem cells. Repigmentation begins as small islands around hair follicles.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n23-der-pigmentary-vitiligo.webp",
-        "alt": "Narrowband UVB phototherapy cabinet treating generalised vitiligo with perifollicular repigmentation",
-        "caption": "Narrowband UVB phototherapy cabinet treating generalised vitiligo with perifollicular repigmentation. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "**Melasma** presents as symmetric, reticulated, light-to-dark brown macules across sun-exposed areas of the face, categorized into centrofacial, malar, and mandibular patterns. Driven by ultraviolet radiation and hormonal stimulation from pregnancy or oral contraceptives, Wood lamp illumination differentiates epidermal melasma which enhances sharply from non-enhancing dermal forms.",
-      "say": "Melasma produces irregular brown facial patches provoked by sunlight and estrogens. Wood lamp examination distinguishes epidermal forms that enhance from deep dermal pigmentation.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Epidermal Melasma",
-          "points": [
-            "Melanin deposited in basal layer",
-            "Sharp enhancement under Wood lamp",
-            "Favorable response to topical lightening",
-            "Hydroquinone and tretinoin effective"
-          ]
-        },
-        "right": {
-          "title": "Dermal Melasma",
-          "points": [
-            "Melanin in dermal melanophages",
-            "Does not enhance under Wood lamp",
-            "Refractory to topical bleaching",
-            "Requires broad-spectrum photoprotection"
-          ]
-        }
-      }
+    "right": {
+     "title": "Segmental Vitiligo",
+     "points": [
+      "Unilateral dermatomal layout",
+      "Rapid early stabilization",
+      "Lower systemic autoimmunity",
+      "Refractory to medical repigmentation"
+     ]
     }
-  ],
-  "quiz": []
+   }
+  },
+  {
+   "tx": "**Wood lamp accentuation** provides immediate bedside confirmation by demonstrating brilliant blue-white fluorescence of vitiligo macules with sharp enhancement of lesion margins. In contrast, post-inflammatory hypopigmentation or pityriasis alba shows incomplete contrast enhancement, while tinea versicolor displays pale golden-yellow fluorescence under ultraviolet illumination.",
+   "say": "Examination under Wood lamp illuminates vitiligo macules with striking blue-white contrast. Partial hypopigmentation lacks this sharp enhancement, aiding rapid bedside distinction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/progressive-macular-hypomelanosis-fig1.webp",
+    "alt": "Wood lamp examination and follicular fluorescence patterns.",
+    "caption": "Wood lamp examination demonstrating illumination of pigmentary contrast across skin lesions.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Leukotrichia** describes the development of white hair within vitiligo macules, signifying the destruction of melanocyte stem cell reservoirs within the hair follicle bulge. Because follicular stem cells provide the primary source of melanocyte migration during repigmentation, leukotrichia indicates disease resistance to conventional phototherapy and topical medical treatments.",
+   "say": "White hair within a patch indicates that the follicular melanocyte stem cell pool is exhausted. Its presence signals reduced likelihood of successful medical repigmentation.",
+   "vis": {
+    "kind": "table",
+    "title": "Prognostic Factors in Vitiligo",
+    "cols": [
+     "Feature",
+     "Favorable Indicator",
+     "Poor Prognostic Indicator"
+    ],
+    "rows": [
+     [
+      "Hair pigmentation",
+      "Retained black/brown hair",
+      "Leukotrichia within macule"
+     ],
+     [
+      "Anatomic site",
+      "Face, trunk, neck",
+      "Acral fingers, toes, lips"
+     ],
+     [
+      "Lesion stability",
+      "Static borders without itching",
+      "Active trichrome or confetti depigmentation"
+     ],
+     [
+      "Koebner status",
+      "Negative isomorphic response",
+      "Active Koebnerization after friction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Isomorphic Koebner response** frequently occurs in active progressive vitiligo, where new depigmented macules appear at sites of repeated friction, belt pressure, or superficial trauma. Patients should be cautioned against vigorous scrubbing or wearing restrictive garments that precipitate fresh lesions across vulnerable anatomical zones.",
+   "say": "Mechanical friction, tight clothing, or scratching prompts new depigmented lesions along injury lines. This isomorphic Koebner phenomenon indicates unstable, active disease.",
+   "vis": {
+    "kind": "flow",
+    "title": "Koebnerization in Progressive Vitiligo",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Repetitive mechanical trauma or friction at pressure points"
+     },
+     {
+      "id": "n2",
+      "label": "Stressed keratinocytes release inflammatory danger molecules"
+     },
+     {
+      "id": "n3",
+      "label": "Autoreactive CD8+ T cells home to the injured microenvironment"
+     },
+     {
+      "id": "n4",
+      "label": "Melanocytes destroyed along the line of physical trauma"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Autoimmune thyroid disease** represents the most frequent systemic comorbidity associated with vitiligo, affecting up to twenty percent of patients. Hashimoto thyroiditis and Graves disease predominate, warranting baseline serum thyroid-stimulating hormone screening. Other associated conditions include type 1 diabetes, pernicious anemia, Addison disease, and alopecia areata.",
+   "say": "Autoimmune thyroid disorders accompany vitiligo in up to a fifth of patients. Baseline screening for thyroid dysfunction is standard practice in comprehensive evaluation.",
+   "vis": {
+    "kind": "table",
+    "title": "Vitiligo Autoimmune Comorbidities",
+    "cols": [
+     "Systemic Condition",
+     "Associated Autoantibody",
+     "Clinical Screening"
+    ],
+    "rows": [
+     [
+      "Hashimoto thyroiditis",
+      "Anti-TPO, anti-thyroglobulin",
+      "Serum TSH and free T4"
+     ],
+     [
+      "Type 1 diabetes",
+      "Anti-GAD65, anti-islet cell",
+      "Fasting glucose, HbA1c"
+     ],
+     [
+      "Pernicious anemia",
+      "Anti-intrinsic factor",
+      "Complete blood count, B12"
+     ],
+     [
+      "Addison disease",
+      "Anti-21-hydroxylase",
+      "Electrolytes, morning cortisol"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Autoimmune thyroid disease** is the systemic illness most often tied to vitiligo, present in up to 20 percent of patients, usually Hashimoto thyroiditis or Graves disease, so a baseline thyroid stimulating hormone is part of the workup. Type 1 diabetes, pernicious anemia, Addison disease, and alopecia areata travel with it as well. For widespread pigment loss, a narrowband UVB cabinet is used, and returning colour often starts as small islands around hair follicles before the islands join.",
+   "say": "Thyroid autoimmunity, mainly Hashimoto thyroiditis or Graves disease, affects up to a fifth of people with vitiligo, so thyroid stimulating hormone is checked at the start. Type 1 diabetes, pernicious anemia, Addison disease, and alopecia areata are the other associations. Narrowband UVB for generalised loss often brings colour back first as dots around follicles.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n23-der-pigmentary-vitiligo.webp",
+    "alt": "A narrowband UVB cabinet treating widespread vitiligo, with new pigment appearing around hair follicles.",
+    "caption": "A standing phototherapy cabinet delivers narrowband UVB, and repigmentation begins as small islands around follicles. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "This treatment turns light itself into medicine measured in millijoules. **Narrowband ultraviolet B**, delivered at three hundred and eleven nanometres in a phototherapy cabinet, calms the autoimmune attack on melanocytes and coaxes pigment cells from follicle reservoirs back into white vitiligo patches. Sessions run two or three times weekly for months, repigmentation creeping from the edges and freckling around hairs first. It suits widespread disease where creams cannot keep up, and its safety record in children keeps it ahead of older psoralen based photochemotherapy.",
+   "say": "Narrowband ultraviolet B phototherapy stimulates melanocyte reservoirs to repigment widespread vitiligo patches.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m909-der-pigmentary-vitiligo.webp",
+    "alt": "Narrowband ultraviolet B",
+    "caption": "Narrowband ultraviolet B. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Narrowband ultraviolet B** phototherapy administered two to three times weekly serves as the gold-standard treatment for generalized vitiligo. By suppressing cutaneous T-cell autoimmunity and stimulating follicular stem cell proliferation, NB-UVB induces perifollicular islands of repigmentation that slowly coalesce across the depigmented macule.",
+   "say": "Narrowband UVB phototherapy dampens local T-cell activity and awakens follicular melanocyte stem cells. Repigmentation begins as small islands around hair follicles.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n23-der-pigmentary-vitiligo.webp",
+    "alt": "Narrowband UVB phototherapy cabinet treating generalised vitiligo with perifollicular repigmentation",
+    "caption": "Narrowband UVB phototherapy cabinet treating generalised vitiligo with perifollicular repigmentation. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Melasma** presents as symmetric, reticulated, light-to-dark brown macules across sun-exposed areas of the face, categorized into centrofacial, malar, and mandibular patterns. Driven by ultraviolet radiation and hormonal stimulation from pregnancy or oral contraceptives, Wood lamp illumination differentiates epidermal melasma which enhances sharply from non-enhancing dermal forms.",
+   "say": "Melasma produces irregular brown facial patches provoked by sunlight and estrogens. Wood lamp examination distinguishes epidermal forms that enhance from deep dermal pigmentation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Epidermal Melasma",
+     "points": [
+      "Melanin deposited in basal layer",
+      "Sharp enhancement under Wood lamp",
+      "Favorable response to topical lightening",
+      "Hydroquinone and tretinoin effective"
+     ]
+    },
+    "right": {
+     "title": "Dermal Melasma",
+     "points": [
+      "Melanin in dermal melanophages",
+      "Does not enhance under Wood lamp",
+      "Refractory to topical bleaching",
+      "Requires broad-spectrum photoprotection"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
 }

@@ -1,242 +1,242 @@
 {
-  "v": 1,
-  "gen": "AI",
-  "module": "ana-orbit",
-  "subject": "anatomy",
-  "title": "Orbital Walls, Blow-Out Fractures, and Orbital Fissures",
-  "minutes": 8,
-  "steps": [
-    {
-      "tx": "The orbit is a quadrangular pyramidal bony cavity with its base opening on the face and its apex directed posteromedially into the optic canal. Seven bones contribute to its architecture: frontal, zygomatic, maxilla, sphenoid, ethmoid, lacrimal, and palatine. The **orbital cavity** cushions the eyeball and houses extraocular muscles, nerves, vessels, and lacrimal apparatus.",
-      "say": "Seven bones assemble to form the pyramidal orbital cavity. Housing the globe and extraocular muscles, the orbit directs its apex posteromedially toward the optic canal.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n15-ana-orbit-orbital-walls.webp",
-        "alt": "Bony orbital cavity with its seven contributing bones forming roof, floor, medial and lateral walls",
-        "caption": "Bony orbital cavity with its seven contributing bones forming roof, floor, medial and lateral walls. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-orbit",
+ "subject": "anatomy",
+ "title": "Orbital Walls, Blow-Out Fractures, and Orbital Fissures",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "The orbit is a quadrangular pyramidal bony cavity with its base opening on the face and its apex directed posteromedially into the optic canal. Seven bones contribute to its architecture: frontal, zygomatic, maxilla, sphenoid, ethmoid, lacrimal, and palatine. The **orbital cavity** cushions the eyeball and houses extraocular muscles, nerves, vessels, and lacrimal apparatus.",
+   "say": "Seven bones assemble to form the pyramidal orbital cavity. Housing the globe and extraocular muscles, the orbit directs its apex posteromedially toward the optic canal.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n15-ana-orbit-orbital-walls.webp",
+    "alt": "Bony orbital cavity with its seven contributing bones forming roof, floor, medial and lateral walls",
+    "caption": "Bony orbital cavity with its seven contributing bones forming roof, floor, medial and lateral walls. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The four orbital walls exhibit marked differences in thickness and vulnerability. The superior wall (roof) is formed primarily by the orbital plate of the frontal bone and the lesser wing of the sphenoid, separating the orbit from the anterior cranial fossa. The **lateral wall** is the strongest wall, formed by the zygomatic bone and greater wing of the sphenoid.",
+   "say": "The lateral wall is the thickest, built from the zygomatic bone and greater sphenoid wing. In contrast, the roof separates the orbital cavity from the anterior cranial fossa.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Orbital Wall",
+     "Constituent Bones",
+     "Structural Characteristics and Clinical Note"
+    ],
+    "rows": [
+     [
+      "Roof (superior wall)",
+      "Orbital plate of frontal bone and lesser wing of sphenoid",
+      "Houses lacrimal gland fossa anterolaterally; separates orbit from frontal lobe"
+     ],
+     [
+      "Lateral wall",
+      "Frontal process of zygomatic and greater wing of sphenoid",
+      "Thickest, strongest wall; shields globe from lateral impact"
+     ],
+     [
+      "Floor (inferior wall)",
+      "Orbital surface of maxilla, zygomatic, and palatine bone",
+      "Thinned by infraorbital canal; classic site of blow-out fracture"
+     ],
+     [
+      "Medial wall",
+      "Frontal process of maxilla, lacrimal, lamina papyracea of ethmoid, sphenoid body",
+      "Thinnest wall (paper-thin lamina papyracea); transmits ethmoidal sinusitis into orbit"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The medial wall is the thinnest orbital boundary, formed from anterior to posterior by the maxilla, lacrimal bone, the paper-thin lamina papyracea of the ethmoid, and the sphenoid body. Because the **lamina papyracea** is as thin as parchment, bacterial ethmoidal sinusitis easily breaches this barrier, causing orbital cellulitis, subperiosteal abscess, and threatened cavernous sinus thrombosis.",
+   "say": "The paper-thin lamina papyracea forms the medial wall. Severe ethmoid sinus infections readily erode this delicate partition to cause blinding orbital cellulitis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Ethmoidal Sinusitis (Purulent bacterial infection within ethmoidal air cells)"
+     },
+     {
+      "id": "e2",
+      "label": "Lamina Papyracea Erosion (Infection penetrates paper-thin medial wall)"
+     },
+     {
+      "id": "e3",
+      "label": "Subperiosteal Orbital Abscess (Pus collects beneath periorbita, displacing globe laterally)"
+     },
+     {
+      "id": "e4",
+      "label": "Orbital Apex / Cavernous Spread (Risks intracranial cavernous sinus thrombosis)"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2"
+     ],
+     [
+      "e2",
+      "e3"
+     ],
+     [
+      "e3",
+      "e4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The orbital floor is formed primarily by the orbital plate of the maxilla, weakened along its middle by the infraorbital groove and canal transmitting the infraorbital nerve and vessels. When an object larger than the orbital rim (such as a tennis ball or fist) strikes the eye, hydraulic pressure ruptures the **orbital floor**, producing a classic blow-out fracture.",
+   "say": "Impact from an object larger than the orbital rim raises intraorbital pressure. The floor fractures downward into the maxillary sinus, causing a blow-out fracture.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Orbital Floor Blow-Out",
+     "points": [
+      "Trauma: Large blunt object (tennis ball, fist) strikes globe",
+      "Mechanism: Hydraulic pressure ruptures thin maxillary floor",
+      "Herniation: Orbital fat and inferior rectus herniate into maxillary sinus",
+      "Signs: Enophthalmos, vertical diplopia on upward gaze, cheek numbness"
+     ]
     },
-    {
-      "tx": "The four orbital walls exhibit marked differences in thickness and vulnerability. The superior wall (roof) is formed primarily by the orbital plate of the frontal bone and the lesser wing of the sphenoid, separating the orbit from the anterior cranial fossa. The **lateral wall** is the strongest wall, formed by the zygomatic bone and greater wing of the sphenoid.",
-      "say": "The lateral wall is the thickest, built from the zygomatic bone and greater sphenoid wing. In contrast, the roof separates the orbital cavity from the anterior cranial fossa.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Orbital Wall",
-          "Constituent Bones",
-          "Structural Characteristics and Clinical Note"
-        ],
-        "rows": [
-          [
-            "Roof (superior wall)",
-            "Orbital plate of frontal bone and lesser wing of sphenoid",
-            "Houses lacrimal gland fossa anterolaterally; separates orbit from frontal lobe"
-          ],
-          [
-            "Lateral wall",
-            "Frontal process of zygomatic and greater wing of sphenoid",
-            "Thickest, strongest wall; shields globe from lateral impact"
-          ],
-          [
-            "Floor (inferior wall)",
-            "Orbital surface of maxilla, zygomatic, and palatine bone",
-            "Thinned by infraorbital canal; classic site of blow-out fracture"
-          ],
-          [
-            "Medial wall",
-            "Frontal process of maxilla, lacrimal, lamina papyracea of ethmoid, sphenoid body",
-            "Thinnest wall (paper-thin lamina papyracea); transmits ethmoidal sinusitis into orbit"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The medial wall is the thinnest orbital boundary, formed from anterior to posterior by the maxilla, lacrimal bone, the paper-thin lamina papyracea of the ethmoid, and the sphenoid body. Because the **lamina papyracea** is as thin as parchment, bacterial ethmoidal sinusitis easily breaches this barrier, causing orbital cellulitis, subperiosteal abscess, and threatened cavernous sinus thrombosis.",
-      "say": "The paper-thin lamina papyracea forms the medial wall. Severe ethmoid sinus infections readily erode this delicate partition to cause blinding orbital cellulitis.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "e1",
-            "label": "Ethmoidal Sinusitis (Purulent bacterial infection within ethmoidal air cells)"
-          },
-          {
-            "id": "e2",
-            "label": "Lamina Papyracea Erosion (Infection penetrates paper-thin medial wall)"
-          },
-          {
-            "id": "e3",
-            "label": "Subperiosteal Orbital Abscess (Pus collects beneath periorbita, displacing globe laterally)"
-          },
-          {
-            "id": "e4",
-            "label": "Orbital Apex / Cavernous Spread (Risks intracranial cavernous sinus thrombosis)"
-          }
-        ],
-        "edges": [
-          [
-            "e1",
-            "e2"
-          ],
-          [
-            "e2",
-            "e3"
-          ],
-          [
-            "e3",
-            "e4"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The orbital floor is formed primarily by the orbital plate of the maxilla, weakened along its middle by the infraorbital groove and canal transmitting the infraorbital nerve and vessels. When an object larger than the orbital rim (such as a tennis ball or fist) strikes the eye, hydraulic pressure ruptures the **orbital floor**, producing a classic blow-out fracture.",
-      "say": "Impact from an object larger than the orbital rim raises intraorbital pressure. The floor fractures downward into the maxillary sinus, causing a blow-out fracture.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Orbital Floor Blow-Out",
-          "points": [
-            "Trauma: Large blunt object (tennis ball, fist) strikes globe",
-            "Mechanism: Hydraulic pressure ruptures thin maxillary floor",
-            "Herniation: Orbital fat and inferior rectus herniate into maxillary sinus",
-            "Signs: Enophthalmos, vertical diplopia on upward gaze, cheek numbness"
-          ]
-        },
-        "right": {
-          "title": "Medial Wall Blow-Out",
-          "points": [
-            "Trauma: Severe blunt nasal and facial impact",
-            "Mechanism: Direct fracture of fragile lamina papyracea",
-            "Complication: Orbital emphysema when patient blows nose",
-            "Signs: Palpable subcutaneous crepitus around eyelids and medial canthus"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "In an orbital blow-out fracture, periorbital adipose tissue and the inferior rectus muscle herniate downward into the maxillary sinus. Entrapment of the **inferior rectus** and inferior oblique muscles within the fractured bony fragments mechanically tethers the globe, preventing upward gaze. Patients present with diplopia on attempting to look upward, accompanied by enophthalmos.",
-      "say": "Herniation traps the inferior rectus muscle in the maxillary floor defect. Entrapment anchors the eyeball, preventing upward gaze and producing vertical diplopia.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "b1",
-            "label": "Hydraulic Floor Fracture (Orbital plate of maxilla fractures into maxillary antrum)"
-          },
-          {
-            "id": "b2",
-            "label": "Muscular Entrapment (Inferior rectus and inferior oblique muscle fibres snagged in bone margins)"
-          },
-          {
-            "id": "b3",
-            "label": "Restricted Upward Gaze (Patient unable to elevate affected eye; complains of vertical diplopia)"
-          },
-          {
-            "id": "b4",
-            "label": "Infraorbital Hypaesthesia (Infraorbital nerve injury causes numbness of upper cheek and lip)"
-          }
-        ],
-        "edges": [
-          [
-            "b1",
-            "b2"
-          ],
-          [
-            "b2",
-            "b3"
-          ],
-          [
-            "b3",
-            "b4"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The superior orbital fissure is a triangular cleft between the greater and lesser wings of the sphenoid, connecting the middle cranial fossa with the orbit. The common tendinous ring (annulus of Zinn) straddles the fissure, dividing it into three compartments. Transmitted through the **superior orbital fissure** are cranial nerves III, IV, VI, the ophthalmic nerve branches, and ophthalmic veins.",
-      "say": "Connecting middle cranial fossa to orbit, the superior orbital fissure transmits cranial nerves three, four, VI, and V1. The common tendinous ring spans across it.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Fissure Sector",
-          "Position to Tendinous Ring",
-          "Transmitted Neurovascular Conduits"
-        ],
-        "rows": [
-          [
-            "Lateral sector",
-            "Outside (above) tendinous ring",
-            "Trochlear nerve (IV), frontal nerve, lacrimal nerve (V1), superior ophthalmic vein"
-          ],
-          [
-            "Central sector (oculomotor foramen)",
-            "Inside the tendinous ring",
-            "Superior and inferior divisions of oculomotor (III), nasociliary (V1), abducens (VI)"
-          ],
-          [
-            "Inferior sector",
-            "Outside (below) tendinous ring",
-            "Inferior ophthalmic vein branches and sympathetic filaments"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The inferior orbital fissure lies in the floor of the orbit between the greater wing of the sphenoid and the maxilla. It connects the orbit posteriorly with the pterygopalatine fossa and anteriorly with the infratemporal fossa. The **inferior orbital fissure** transmits the maxillary nerve becoming the infraorbital nerve, the zygomatic nerve, and emissary veins connecting to the pterygoid plexus.",
-      "say": "Between the greater sphenoid wing and maxilla lies the inferior orbital fissure. It transmits the infraorbital nerve, zygomatic nerve, and veins to the pterygoid plexus.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "i1",
-            "label": "Pterygopalatine Fossa (Houses maxillary nerve V2 and sphenopalatine ganglion)"
-          },
-          {
-            "id": "i2",
-            "label": "Inferior Orbital Fissure (Maxillary nerve enters orbit to become infraorbital nerve)"
-          },
-          {
-            "id": "i3",
-            "label": "Infraorbital Canal (Traverses orbital floor, giving off superior alveolar nerves)"
-          },
-          {
-            "id": "i4",
-            "label": "Infraorbital Foramen (Emerges on face to supply upper lip, cheek, and lateral nose)"
-          }
-        ],
-        "edges": [
-          [
-            "i1",
-            "i2"
-          ],
-          [
-            "i2",
-            "i3"
-          ],
-          [
-            "i3",
-            "i4"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Superior orbital fissure syndrome results from fractures, tumors, or retro-orbital inflammation affecting structures passing through the fissure. It presents with complete ophthalmoplegia (palsy of CN III, IV, and VI), ptosis, a fixed dilated pupil, and sensory anaesthesia over the upper eyelid and forehead in the distribution of the **ophthalmic nerve** (V1), while sparing the optic nerve.",
-      "say": "Superior orbital fissure syndrome produces ophthalmoplegia, ptosis, and forehead anaesthesia. Involvement of the optic canal distinguishes orbital apex syndrome.",
-      "vis": {
-        "kind": "image",
-        "src": "prep/lessons/media/ana-visual-lesions.svg",
-        "alt": "Anatomical schematic illustrating visual pathway lesions and optic nerve vs cranial nerve defect patterns",
-        "caption": "Diagnostic mapping of orbital apex and visual pathway neurological lesions. [Credit: StewardMD]",
-        "ar": 1.5
-      }
+    "right": {
+     "title": "Medial Wall Blow-Out",
+     "points": [
+      "Trauma: Severe blunt nasal and facial impact",
+      "Mechanism: Direct fracture of fragile lamina papyracea",
+      "Complication: Orbital emphysema when patient blows nose",
+      "Signs: Palpable subcutaneous crepitus around eyelids and medial canthus"
+     ]
     }
-  ],
-  "quiz": [
-    "1b239bb7-bbf8-4eeb-b177-c1d84921d8f9",
-    "0b63d5ed-2923-42da-b429-409f0c2fa8d6",
-    "0c512e55-c21c-4959-bb2e-ee3990a760d1"
-  ]
+   }
+  },
+  {
+   "tx": "In an orbital blow-out fracture, periorbital adipose tissue and the inferior rectus muscle herniate downward into the maxillary sinus. Entrapment of the **inferior rectus** and inferior oblique muscles within the fractured bony fragments mechanically tethers the globe, preventing upward gaze. Patients present with diplopia on attempting to look upward, accompanied by enophthalmos.",
+   "say": "Herniation traps the inferior rectus muscle in the maxillary floor defect. Entrapment anchors the eyeball, preventing upward gaze and producing vertical diplopia.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Hydraulic Floor Fracture (Orbital plate of maxilla fractures into maxillary antrum)"
+     },
+     {
+      "id": "b2",
+      "label": "Muscular Entrapment (Inferior rectus and inferior oblique muscle fibres snagged in bone margins)"
+     },
+     {
+      "id": "b3",
+      "label": "Restricted Upward Gaze (Patient unable to elevate affected eye; complains of vertical diplopia)"
+     },
+     {
+      "id": "b4",
+      "label": "Infraorbital Hypaesthesia (Infraorbital nerve injury causes numbness of upper cheek and lip)"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2"
+     ],
+     [
+      "b2",
+      "b3"
+     ],
+     [
+      "b3",
+      "b4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The superior orbital fissure is a triangular cleft between the greater and lesser wings of the sphenoid, connecting the middle cranial fossa with the orbit. The common tendinous ring (annulus of Zinn) straddles the fissure, dividing it into three compartments. Transmitted through the **superior orbital fissure** are cranial nerves III, IV, VI, the ophthalmic nerve branches, and ophthalmic veins.",
+   "say": "Connecting middle cranial fossa to orbit, the superior orbital fissure transmits cranial nerves three, four, VI, and V1. The common tendinous ring spans across it.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Fissure Sector",
+     "Position to Tendinous Ring",
+     "Transmitted Neurovascular Conduits"
+    ],
+    "rows": [
+     [
+      "Lateral sector",
+      "Outside (above) tendinous ring",
+      "Trochlear nerve (IV), frontal nerve, lacrimal nerve (V1), superior ophthalmic vein"
+     ],
+     [
+      "Central sector (oculomotor foramen)",
+      "Inside the tendinous ring",
+      "Superior and inferior divisions of oculomotor (III), nasociliary (V1), abducens (VI)"
+     ],
+     [
+      "Inferior sector",
+      "Outside (below) tendinous ring",
+      "Inferior ophthalmic vein branches and sympathetic filaments"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The inferior orbital fissure lies in the floor of the orbit between the greater wing of the sphenoid and the maxilla. It connects the orbit posteriorly with the pterygopalatine fossa and anteriorly with the infratemporal fossa. The **inferior orbital fissure** transmits the maxillary nerve becoming the infraorbital nerve, the zygomatic nerve, and emissary veins connecting to the pterygoid plexus.",
+   "say": "Between the greater sphenoid wing and maxilla lies the inferior orbital fissure. It transmits the infraorbital nerve, zygomatic nerve, and veins to the pterygoid plexus.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "i1",
+      "label": "Pterygopalatine Fossa (Houses maxillary nerve V2 and sphenopalatine ganglion)"
+     },
+     {
+      "id": "i2",
+      "label": "Inferior Orbital Fissure (Maxillary nerve enters orbit to become infraorbital nerve)"
+     },
+     {
+      "id": "i3",
+      "label": "Infraorbital Canal (Traverses orbital floor, giving off superior alveolar nerves)"
+     },
+     {
+      "id": "i4",
+      "label": "Infraorbital Foramen (Emerges on face to supply upper lip, cheek, and lateral nose)"
+     }
+    ],
+    "edges": [
+     [
+      "i1",
+      "i2"
+     ],
+     [
+      "i2",
+      "i3"
+     ],
+     [
+      "i3",
+      "i4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Superior orbital fissure syndrome results from fractures, tumors, or retro-orbital inflammation affecting structures passing through the fissure. It presents with complete ophthalmoplegia (palsy of CN III, IV, and VI), ptosis, a fixed dilated pupil, and sensory anaesthesia over the upper eyelid and forehead in the distribution of the **ophthalmic nerve** (V1), while sparing the optic nerve.",
+   "say": "Superior orbital fissure syndrome produces ophthalmoplegia, ptosis, and forehead anaesthesia. Involvement of the optic canal distinguishes orbital apex syndrome.",
+   "vis": {
+    "kind": "image",
+    "src": "prep/lessons/media/ana-visual-lesions.svg",
+    "alt": "Anatomical schematic illustrating visual pathway lesions and optic nerve vs cranial nerve defect patterns",
+    "caption": "Diagnostic mapping of orbital apex and visual pathway neurological lesions. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ],
+ "quiz": [
+  "1b239bb7-bbf8-4eeb-b177-c1d84921d8f9",
+  "0b63d5ed-2923-42da-b429-409f0c2fa8d6",
+  "0c512e55-c21c-4959-bb2e-ee3990a760d1"
+ ]
 }

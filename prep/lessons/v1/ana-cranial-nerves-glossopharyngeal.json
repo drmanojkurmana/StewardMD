@@ -1,243 +1,243 @@
 {
-  "v": 1,
-  "gen": "AI",
-  "module": "ana-cranial-nerves",
-  "subject": "anatomy",
-  "title": "Glossopharyngeal, Vagus, Accessory, and Hypoglossal Nerves",
-  "minutes": 8,
-  "steps": [
-    {
-      "tx": "Cranial nerves IX, X, XI, and XII form the caudal group of cranial nerves, arising from the medulla oblongata and innervating visceral, pharyngeal, and cervical structures. Cranial nerves IX (glossopharyngeal), X (vagus), and XI (accessory) exit the skull together through the intermediate and posterior compartments of the **jugular foramen**, closely related to the internal jugular vein.",
-      "say": "Arising from the medulla, cranial nerves nine, ten, eleven, and twelve govern vital bulbar functions. Nerves nine, ten, and eleven exit together through the jugular foramen.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/ana-skull-cranial-cavity-s4.webp",
-        "alt": "Superior view of the internal cranial base showing the middle and posterior cranial fossae with insets for foramen rotundum, foramen ovale, foramen spinosum, and jugular foramen",
-        "caption": "Superior view of the internal cranial base showing the middle and posterior cranial fossae with insets for foramen rotundum, foramen ovale, foramen spinosum, and jugular foramen. Foramina and transmitted structures of the middle and posterior cranial fossae.",
-        "ar": 1.3333
-      }
+ "v": 1,
+ "gen": "AI",
+ "module": "ana-cranial-nerves",
+ "subject": "anatomy",
+ "title": "Glossopharyngeal, Vagus, Accessory, and Hypoglossal Nerves",
+ "minutes": 8,
+ "steps": [
+  {
+   "tx": "Cranial nerves IX, X, XI, and XII form the caudal group of cranial nerves, arising from the medulla oblongata and innervating visceral, pharyngeal, and cervical structures. Cranial nerves IX (glossopharyngeal), X (vagus), and XI (accessory) exit the skull together through the intermediate and posterior compartments of the **jugular foramen**, closely related to the internal jugular vein.",
+   "say": "Arising from the medulla, cranial nerves nine, ten, eleven, and twelve govern vital bulbar functions. Nerves nine, ten, and eleven exit together through the jugular foramen.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/ana-skull-cranial-cavity-s4.webp",
+    "alt": "Superior view of the internal cranial base showing the middle and posterior cranial fossae with insets for foramen rotundum, foramen ovale, foramen spinosum, and jugular foramen",
+    "caption": "Superior view of the internal cranial base showing the middle and posterior cranial fossae with insets for foramen rotundum, foramen ovale, foramen spinosum, and jugular foramen. Foramina and transmitted structures of the middle and posterior cranial fossae.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "The glossopharyngeal nerve (cranial nerve IX) is the nerve of the third pharyngeal arch. It provides motor supply to a single solitary muscle: the stylopharyngeus. Sensory modalities are diverse: it supplies general and special taste sensation to the posterior third of the tongue, sensory supply to the **oropharynx** and palatine tonsil, and baroreceptor sensory input from the carotid sinus.",
+   "say": "Nerve of the third arch, the glossopharyngeal innervates only one muscle: stylopharyngeus. It conveys taste and touch from the posterior tongue and mediates carotid sinus reflexes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Functional Modality",
+     "Target Organ / Structure",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Special visceral efferent (motor)",
+      "Stylopharyngeus muscle only",
+      "Elevates pharynx and larynx during swallowing"
+     ],
+     [
+      "General visceral efferent (parasympathetic)",
+      "Otic ganglion to parotid gland",
+      "Secretomotor innervation via tympanic and lesser petrosal nerves"
+     ],
+     [
+      "General somatic / visceral afferent",
+      "Posterior 1/3 of tongue, tonsil, pharynx, middle ear",
+      "Afferent sensory limb of the pharyngeal gag reflex"
+     ],
+     [
+      "Special visceral afferent (taste)",
+      "Circumvallate papillae and posterior 1/3 tongue",
+      "Gustatory perception of bitter substances"
+     ],
+     [
+      "Visceral afferent (sensory)",
+      "Carotid sinus and carotid body",
+      "Baroreceptor blood pressure and chemoreceptor oxygen monitoring"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The pharyngeal gag reflex tests the functional integrity of cranial nerves IX and X. Touching the mucosal wall of the oropharynx, palatine tonsillar pillar, or posterior tongue triggers bilateral pharyngeal contraction and retching. The sensory afferent limb of the **gag reflex** is mediated entirely by the glossopharyngeal nerve, while the motor efferent limb is carried by the vagus nerve.",
+   "say": "The gag reflex tests bulbar function. Touching the oropharynx fires glossopharyngeal sensory afferents, driving bilateral vagal motor pharyngeal contractions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "g1",
+      "label": "Mucosal Touch (Spatula touches posterior pharyngeal wall or tonsillar pillar)"
+     },
+     {
+      "id": "g2",
+      "label": "Sensory Afferent Limb (Glossopharyngeal nerve CN IX carries impulses to solitary tract nucleus)"
+     },
+     {
+      "id": "g3",
+      "label": "Central Synaptic Relay (Interneurons project bilaterally to nucleus ambiguus)"
+     },
+     {
+      "id": "g4",
+      "label": "Motor Efferent Limb (Vagus nerve CN X stimulates pharyngeal constrictor spasm and gagging)"
+     }
+    ],
+    "edges": [
+     [
+      "g1",
+      "g2"
+     ],
+     [
+      "g2",
+      "g3"
+     ],
+     [
+      "g3",
+      "g4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The vagus nerve (cranial nerve X) is the longest cranial nerve, possessing the most extensive body distribution. Exiting the jugular foramen, it possesses a superior (jugular) and inferior (nodose) ganglion. Descending vertically within the **carotid sheath** between the internal jugular vein and carotid arteries, it supplies motor branches to all muscles of the pharynx, larynx, and palate (with noted single exceptions).",
+   "say": "The vagus nerve descends vertically within the carotid sheath between the artery and vein. It supplies all muscles of the pharynx, larynx, and soft palate, with three single exceptions.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vagal Innervation Exceptions",
+     "points": [
+      "Tensor veli palatini: Supplied by mandibular nerve (V3)",
+      "Stylopharyngeus: Supplied by glossopharyngeal nerve (IX)",
+      "Cricothyroid: Supplied by external laryngeal nerve (X)",
+      "All other pharyngeal and palatal muscles supplied by vagus"
+     ]
     },
-    {
-      "tx": "The glossopharyngeal nerve (cranial nerve IX) is the nerve of the third pharyngeal arch. It provides motor supply to a single solitary muscle: the stylopharyngeus. Sensory modalities are diverse: it supplies general and special taste sensation to the posterior third of the tongue, sensory supply to the **oropharynx** and palatine tonsil, and baroreceptor sensory input from the carotid sinus.",
-      "say": "Nerve of the third arch, the glossopharyngeal innervates only one muscle: stylopharyngeus. It conveys taste and touch from the posterior tongue and mediates carotid sinus reflexes.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Functional Modality",
-          "Target Organ / Structure",
-          "Clinical Significance"
-        ],
-        "rows": [
-          [
-            "Special visceral efferent (motor)",
-            "Stylopharyngeus muscle only",
-            "Elevates pharynx and larynx during swallowing"
-          ],
-          [
-            "General visceral efferent (parasympathetic)",
-            "Otic ganglion to parotid gland",
-            "Secretomotor innervation via tympanic and lesser petrosal nerves"
-          ],
-          [
-            "General somatic / visceral afferent",
-            "Posterior 1/3 of tongue, tonsil, pharynx, middle ear",
-            "Afferent sensory limb of the pharyngeal gag reflex"
-          ],
-          [
-            "Special visceral afferent (taste)",
-            "Circumvallate papillae and posterior 1/3 tongue",
-            "Gustatory perception of bitter substances"
-          ],
-          [
-            "Visceral afferent (sensory)",
-            "Carotid sinus and carotid body",
-            "Baroreceptor blood pressure and chemoreceptor oxygen monitoring"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The pharyngeal gag reflex tests the functional integrity of cranial nerves IX and X. Touching the mucosal wall of the oropharynx, palatine tonsillar pillar, or posterior tongue triggers bilateral pharyngeal contraction and retching. The sensory afferent limb of the **gag reflex** is mediated entirely by the glossopharyngeal nerve, while the motor efferent limb is carried by the vagus nerve.",
-      "say": "The gag reflex tests bulbar function. Touching the oropharynx fires glossopharyngeal sensory afferents, driving bilateral vagal motor pharyngeal contractions.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "g1",
-            "label": "Mucosal Touch (Spatula touches posterior pharyngeal wall or tonsillar pillar)"
-          },
-          {
-            "id": "g2",
-            "label": "Sensory Afferent Limb (Glossopharyngeal nerve CN IX carries impulses to solitary tract nucleus)"
-          },
-          {
-            "id": "g3",
-            "label": "Central Synaptic Relay (Interneurons project bilaterally to nucleus ambiguus)"
-          },
-          {
-            "id": "g4",
-            "label": "Motor Efferent Limb (Vagus nerve CN X stimulates pharyngeal constrictor spasm and gagging)"
-          }
-        ],
-        "edges": [
-          [
-            "g1",
-            "g2"
-          ],
-          [
-            "g2",
-            "g3"
-          ],
-          [
-            "g3",
-            "g4"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The vagus nerve (cranial nerve X) is the longest cranial nerve, possessing the most extensive body distribution. Exiting the jugular foramen, it possesses a superior (jugular) and inferior (nodose) ganglion. Descending vertically within the **carotid sheath** between the internal jugular vein and carotid arteries, it supplies motor branches to all muscles of the pharynx, larynx, and palate (with noted single exceptions).",
-      "say": "The vagus nerve descends vertically within the carotid sheath between the artery and vein. It supplies all muscles of the pharynx, larynx, and soft palate, with three single exceptions.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Vagal Innervation Exceptions",
-          "points": [
-            "Tensor veli palatini: Supplied by mandibular nerve (V3)",
-            "Stylopharyngeus: Supplied by glossopharyngeal nerve (IX)",
-            "Cricothyroid: Supplied by external laryngeal nerve (X)",
-            "All other pharyngeal and palatal muscles supplied by vagus"
-          ]
-        },
-        "right": {
-          "title": "Parasympathetic Autonomic Viscera",
-          "points": [
-            "Heart: Bradycardia and decreased conduction velocity",
-            "Tracheobronchial tree: Bronchoconstriction and secretions",
-            "Foregut & Midgut: Peristalsis up to distal transverse colon",
-            "Abdominal plexuses: Celiac, mesenteric, renal networks"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "The accessory nerve (cranial nerve XI) possesses two distinct components: a cranial root and a spinal root. The cranial root arises from the nucleus ambiguus, briefly joining the spinal root before transferring entirely to the vagus nerve to form the **pharyngeal plexus**. The spinal root arises from C1-C5 anterior horn motor neurons, ascending through foramen magnum to innervate sternocleidomastoid and trapezius.",
-      "say": "The accessory nerve has cranial and spinal roots. The cranial root merges with the vagus, while the spinal root ascends from C1-C5 to innervate sternocleidomastoid and trapezius.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Accessory Component",
-          "Anatomical Origin",
-          "Intracranial Pathway",
-          "Ultimate Muscular Target"
-        ],
-        "rows": [
-          [
-            "Cranial root",
-            "Nucleus ambiguus of medulla",
-            "Exits jugular foramen, merges into vagal nerve trunk",
-            "Distributed via pharyngeal and laryngeal branches of vagus"
-          ],
-          [
-            "Spinal root",
-            "C1 to C5 anterior horn spinal cord",
-            "Ascends through foramen magnum into posterior fossa",
-            "Traverses jugular foramen to supply sternocleidomastoid and trapezius"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "Testing of the spinal accessory nerve examines sternocleidomastoid and trapezius function. To test the right sternocleidomastoid, the patient is instructed to turn the head forcefully to the left against the examiner's resisting hand, while the muscle belly is inspected. To test the **trapezius muscle**, the patient shrugs both shoulders upward against manual downward resistance.",
-      "say": "Turning the head to the opposite side tests sternocleidomastoid, while shrugging the shoulders upward against resistance tests trapezius. Weakness confirms an accessory nerve lesion.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "t1",
-            "label": "Sternocleidomastoid Testing (Patient turns chin to opposite side against resistance)"
-          },
-          {
-            "id": "t2",
-            "label": "Trapezius Testing (Patient elevates shoulders upward against downward hand pressure)"
-          },
-          {
-            "id": "t3",
-            "label": "Unilateral CN XI Deficit (Weak contralateral head turning and marked ipsilateral shoulder droop)"
-          }
-        ],
-        "edges": [
-          [
-            "t1",
-            "t3"
-          ],
-          [
-            "t2",
-            "t3"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The hypoglossal canal pierces the occipital bone just above the occipital condyle and transmits the hypoglossal nerve to the tongue muscles. That canal is not the route of the spinal accessory nerve. Accessory testing instead checks sternocleidomastoid and trapezius. To test the right sternocleidomastoid the patient turns the head hard to the left against resistance while the belly is watched. The **trapezius muscle** is tested by shrugging both shoulders upward against downward pressure. Weakness of those muscles marks an accessory lesion, whereas tongue weakness marks the nerve in the canal.",
-      "say": "The hypoglossal nerve leaves the skull through the hypoglossal canal beside the occipital condyle and supplies the tongue. The accessory nerve is tested differently: turning the head to the opposite side against resistance checks sternocleidomastoid, and shrugging against downward pressure checks trapezius. Weak shrug or turn means accessory injury, not a canal lesion.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n3-ana-cranial-nerves-glossopharyngeal.webp",
-        "alt": "The hypoglossal canal in the occipital bone beside the occipital condyle, with the hypoglossal nerve passing through it.",
-        "caption": "A canal in the occipital bone immediately beside the occipital condyle transmits the hypoglossal nerve. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "The hypoglossal nerve (cranial nerve XII) is a purely somatic motor nerve arising from the hypoglossal nucleus in the dorsal medulla. It emerges from the anterolateral sulcus between the pyramid and the olive, exiting the skull via the **hypoglossal canal**. It descends in the neck, hooks around the occipital artery, and crosses the hyoglossus to supply all tongue muscles except palatoglossus.",
-      "say": "Emerging between the medullary pyramid and olive, the hypoglossal nerve exits through the hypoglossal canal. It supplies all intrinsic and extrinsic tongue muscles except palatoglossus.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/lessons/media/need-n3-ana-cranial-nerves-glossopharyngeal.webp",
-        "alt": "Hypoglossal canal in the occipital bone transmitting the hypoglossal nerve beside the occipital condyle",
-        "caption": "Hypoglossal canal in the occipital bone transmitting the hypoglossal nerve beside the occipital condyle. Illustration: StewardMD original.",
-        "ar": 1.3393
-      }
-    },
-    {
-      "tx": "Jugular foramen syndrome (Vernet syndrome) results from skull base fractures, glomus jugulare tumors, or schwannomas compressing the jugular foramen. It presents with combined ipsilateral paralysis of cranial nerves **nine, ten, and eleven**: loss of taste and sensation on the posterior tongue (IX), vocal cord and palatal paralysis (X), and sternocleidomastoid and trapezius weakness with shoulder droop (XI).",
-      "say": "Vernet syndrome involves cranial nerves nine, ten, and eleven at the jugular foramen. Patients present with dysphagia, vocal cord paralysis, uvular deviation, and shoulder droop.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Cranial Nerve",
-          "Loss of Function in Vernet Syndrome",
-          "Diagnostic Clinical Sign"
-        ],
-        "rows": [
-          [
-            "Glossopharyngeal (IX)",
-            "Loss of posterior tongue sensation, loss of gag reflex",
-            "Absence of pharyngeal contraction on touched side"
-          ],
-          [
-            "Vagus (X)",
-            "Paralysis of soft palate, pharynx, and vocal cord",
-            "Uvula deviates to normal side; hoarseness and aspiration"
-          ],
-          [
-            "Spinal accessory (XI)",
-            "Paralysis of sternocleidomastoid and trapezius",
-            "Shoulder droop; inability to shrug or turn head to opposite side"
-          ],
-          [
-            "Hypoglossal (XII) (Collet-Sicard)",
-            "If canal involved, adds tongue hemiparalysis",
-            "Protruded tongue deviates to affected side with hemilingual atrophy"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Parasympathetic Autonomic Viscera",
+     "points": [
+      "Heart: Bradycardia and decreased conduction velocity",
+      "Tracheobronchial tree: Bronchoconstriction and secretions",
+      "Foregut & Midgut: Peristalsis up to distal transverse colon",
+      "Abdominal plexuses: Celiac, mesenteric, renal networks"
+     ]
     }
-  ],
-  "quiz": [
-    "9fd3f752-fcd1-46c4-aa0d-6fba2635cd69",
-    "b54ac627-187e-4258-a8a5-2dcff6964ce6",
-    "d5723b69-10dd-437f-90fd-a3ce8cbdd2d7"
-  ]
+   }
+  },
+  {
+   "tx": "The accessory nerve (cranial nerve XI) possesses two distinct components: a cranial root and a spinal root. The cranial root arises from the nucleus ambiguus, briefly joining the spinal root before transferring entirely to the vagus nerve to form the **pharyngeal plexus**. The spinal root arises from C1-C5 anterior horn motor neurons, ascending through foramen magnum to innervate sternocleidomastoid and trapezius.",
+   "say": "The accessory nerve has cranial and spinal roots. The cranial root merges with the vagus, while the spinal root ascends from C1-C5 to innervate sternocleidomastoid and trapezius.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Accessory Component",
+     "Anatomical Origin",
+     "Intracranial Pathway",
+     "Ultimate Muscular Target"
+    ],
+    "rows": [
+     [
+      "Cranial root",
+      "Nucleus ambiguus of medulla",
+      "Exits jugular foramen, merges into vagal nerve trunk",
+      "Distributed via pharyngeal and laryngeal branches of vagus"
+     ],
+     [
+      "Spinal root",
+      "C1 to C5 anterior horn spinal cord",
+      "Ascends through foramen magnum into posterior fossa",
+      "Traverses jugular foramen to supply sternocleidomastoid and trapezius"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Testing of the spinal accessory nerve examines sternocleidomastoid and trapezius function. To test the right sternocleidomastoid, the patient is instructed to turn the head forcefully to the left against the examiner's resisting hand, while the muscle belly is inspected. To test the **trapezius muscle**, the patient shrugs both shoulders upward against manual downward resistance.",
+   "say": "Turning the head to the opposite side tests sternocleidomastoid, while shrugging the shoulders upward against resistance tests trapezius. Weakness confirms an accessory nerve lesion.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "t1",
+      "label": "Sternocleidomastoid Testing (Patient turns chin to opposite side against resistance)"
+     },
+     {
+      "id": "t2",
+      "label": "Trapezius Testing (Patient elevates shoulders upward against downward hand pressure)"
+     },
+     {
+      "id": "t3",
+      "label": "Unilateral CN XI Deficit (Weak contralateral head turning and marked ipsilateral shoulder droop)"
+     }
+    ],
+    "edges": [
+     [
+      "t1",
+      "t3"
+     ],
+     [
+      "t2",
+      "t3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The hypoglossal canal pierces the occipital bone just above the occipital condyle and transmits the hypoglossal nerve to the tongue muscles. That canal is not the route of the spinal accessory nerve. Accessory testing instead checks sternocleidomastoid and trapezius. To test the right sternocleidomastoid the patient turns the head hard to the left against resistance while the belly is watched. The **trapezius muscle** is tested by shrugging both shoulders upward against downward pressure. Weakness of those muscles marks an accessory lesion, whereas tongue weakness marks the nerve in the canal.",
+   "say": "The hypoglossal nerve leaves the skull through the hypoglossal canal beside the occipital condyle and supplies the tongue. The accessory nerve is tested differently: turning the head to the opposite side against resistance checks sternocleidomastoid, and shrugging against downward pressure checks trapezius. Weak shrug or turn means accessory injury, not a canal lesion.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n3-ana-cranial-nerves-glossopharyngeal.webp",
+    "alt": "The hypoglossal canal in the occipital bone beside the occipital condyle, with the hypoglossal nerve passing through it.",
+    "caption": "A canal in the occipital bone immediately beside the occipital condyle transmits the hypoglossal nerve. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The hypoglossal nerve (cranial nerve XII) is a purely somatic motor nerve arising from the hypoglossal nucleus in the dorsal medulla. It emerges from the anterolateral sulcus between the pyramid and the olive, exiting the skull via the **hypoglossal canal**. It descends in the neck, hooks around the occipital artery, and crosses the hyoglossus to supply all tongue muscles except palatoglossus.",
+   "say": "Emerging between the medullary pyramid and olive, the hypoglossal nerve exits through the hypoglossal canal. It supplies all intrinsic and extrinsic tongue muscles except palatoglossus.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n3-ana-cranial-nerves-glossopharyngeal.webp",
+    "alt": "Hypoglossal canal in the occipital bone transmitting the hypoglossal nerve beside the occipital condyle",
+    "caption": "Hypoglossal canal in the occipital bone transmitting the hypoglossal nerve beside the occipital condyle. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Jugular foramen syndrome (Vernet syndrome) results from skull base fractures, glomus jugulare tumors, or schwannomas compressing the jugular foramen. It presents with combined ipsilateral paralysis of cranial nerves **nine, ten, and eleven**: loss of taste and sensation on the posterior tongue (IX), vocal cord and palatal paralysis (X), and sternocleidomastoid and trapezius weakness with shoulder droop (XI).",
+   "say": "Vernet syndrome involves cranial nerves nine, ten, and eleven at the jugular foramen. Patients present with dysphagia, vocal cord paralysis, uvular deviation, and shoulder droop.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Cranial Nerve",
+     "Loss of Function in Vernet Syndrome",
+     "Diagnostic Clinical Sign"
+    ],
+    "rows": [
+     [
+      "Glossopharyngeal (IX)",
+      "Loss of posterior tongue sensation, loss of gag reflex",
+      "Absence of pharyngeal contraction on touched side"
+     ],
+     [
+      "Vagus (X)",
+      "Paralysis of soft palate, pharynx, and vocal cord",
+      "Uvula deviates to normal side; hoarseness and aspiration"
+     ],
+     [
+      "Spinal accessory (XI)",
+      "Paralysis of sternocleidomastoid and trapezius",
+      "Shoulder droop; inability to shrug or turn head to opposite side"
+     ],
+     [
+      "Hypoglossal (XII) (Collet-Sicard)",
+      "If canal involved, adds tongue hemiparalysis",
+      "Protruded tongue deviates to affected side with hemilingual atrophy"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  "9fd3f752-fcd1-46c4-aa0d-6fba2635cd69",
+  "b54ac627-187e-4258-a8a5-2dcff6964ce6",
+  "d5723b69-10dd-437f-90fd-a3ce8cbdd2d7"
+ ]
 }
