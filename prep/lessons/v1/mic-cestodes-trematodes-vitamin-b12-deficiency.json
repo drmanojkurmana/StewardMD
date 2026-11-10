@@ -1,0 +1,232 @@
+{
+  "v": 1,
+  "module": "mic-cestodes-trematodes",
+  "subject": "microbiology",
+  "title": "Cestode Cobalamin Deficiency, Hymenolepis nana and Schistosoma",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A classic metabolic consequence of high-burden Diphyllobothrium latum infection in the proximal jejunum is severe **vitamin B12 deficiency**. The adult tapeworm possesses high affinity for intrinsic factor-cobalamin complexes, absorbing up to one hundred percent of ingested dietary vitamin B12. This nutritional theft starves the host of cobalamin, precipitating macrocytic megaloblastic anaemia identical to pernicious anaemia.",
+      "say": "The fish tapeworm absorbs dietary cobalamin in the jejunum, producing severe megaloblastic anaemia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tapeworm cobalamin theft",
+          "points": [
+            "Worm in proximal jejunum competes for B12",
+            "Parietal cells and intrinsic factor secretion normal",
+            "Hypersegmented neutrophils on blood smear",
+            "Subacute combined degeneration of spinal cord"
+          ]
+        },
+        "right": {
+          "title": "Pernicious anaemia",
+          "points": [
+            "Autoimmune destruction of gastric parietal cells",
+            "Absent intrinsic factor secretion in gastric juice",
+            "Anti-intrinsic factor antibodies present in serum",
+            "Permanent lifelong parenteral B12 required"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Neurological consequences of long-standing tapeworm-induced cobalamin deficiency mirror subacute combined degeneration of the spinal cord. Demyelination of the posterior and lateral columns produces progressive sensory ataxia, loss of vibration and position sense, spastic paraparesis, and positive Babinski signs. Oral **praziquantel** rapidly expels the worm, after which parenteral cyanocobalamin supplementation restores haematological parameters.",
+      "say": "Spinal cord posterior column demyelination causes sensory ataxia; single-dose praziquantel cures the infestation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "b12_1",
+            "label": "Adult tapeworm in jejunum sequesters ingested vitamin B12"
+          },
+          {
+            "id": "b12_2",
+            "label": "Host cobalamin depletion impairs methionine synthase and DNA synthesis"
+          },
+          {
+            "id": "b12_3",
+            "label": "Macrocytic megaloblastic anaemia and spinal posterior column demyelination emerge"
+          }
+        ],
+        "edges": [
+          [
+            "b12_1",
+            "b12_2"
+          ],
+          [
+            "b12_2",
+            "b12_3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The dwarf tapeworm **Hymenolepis nana** is the smallest tapeworm infecting humans, measuring only one to four centimetres in length, and is the most common cestode worldwide. It possesses the unique biological capability among cestodes of completing its entire life cycle within a single human host without requiring an obligate intermediate host, predisposing to intense autoinfection.",
+      "say": "Dwarf tapeworm completes its entire life cycle in one host, making internal autoinfection possible.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cestodes-trematodes-hydatid-schistosoma-flukes-fig1.webp",
+        "alt": "Cestode and trematode life cycle features",
+        "caption": "Comparative cestode morphology illustrating Hymenolepis nana life cycle and egg anatomy [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "When ingested, H. nana eggs hatch in the duodenum, where hexacanth oncospheres penetrate villi to become cysticercoids before re-entering the intestinal lumen to mature into adult worms. In internal autoinfection, eggs hatch inside the bowel without ever leaving the host, producing heavy worm burdens of thousands of tapeworms. Stool microscopy reveals spherical, colorless eggs with an inner membrane bearing two **polar filaments** emerging from polar knobs.",
+      "say": "Spherical colorless eggs show two polar knobs with four to eight wavy polar filaments.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Feature",
+          "Hymenolepis nana (Dwarf Tapeworm)",
+          "Hymenolepis diminuta (Rat Tapeworm)"
+        ],
+        "rows": [
+          [
+            "Intermediate host",
+            "Optional (direct transmission from eggs)",
+            "Mandatory (grain beetles and fleas)"
+          ],
+          [
+            "Egg polar filaments",
+            "Present: 4 to 8 wavy filaments from polar knobs",
+            "Completely absent; no polar filaments present"
+          ],
+          [
+            "Scolex armature",
+            "Armed: retractable rostellum with single row of hooks",
+            "Unarmed: rudimentary rostellum without hooks"
+          ],
+          [
+            "Worm size",
+            "Small, 1 to 4 cm (dwarf tapeworm)",
+            "Larger, 20 to 60 cm (rat tapeworm)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Blood flukes belonging to the genus Schistosoma reside as paired copulating adults within human visceral venous plexuses. Infection occurs when free-swimming fork-tailed cercariae shed by aquatic snail hosts penetrate intact skin during freshwater bathing. Adult **Schistosoma haematobium** pairs migrate to the vesical and pelvic venous plexuses draining the urinary bladder.",
+      "say": "Aquatic cercariae penetrate skin; adult haematobium pairs migrate to the vesical venous plexus.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sc1",
+            "label": "Free-swimming cercariae shed by Bulinus snails penetrate human skin"
+          },
+          {
+            "id": "sc2",
+            "label": "Schistosomulae migrate via lungs and liver into vesical venous plexus"
+          },
+          {
+            "id": "sc3",
+            "label": "Paired adults oviposit eggs that penetrate through bladder wall into urine"
+          }
+        ],
+        "edges": [
+          [
+            "sc1",
+            "sc2"
+          ],
+          [
+            "sc2",
+            "sc3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Females oviposit hundreds of large, elongated, non-operculated eggs bearing a prominent, sharp **terminal spine**. As eggs traverse the bladder mucosal wall, they induce granulomatous inflammation, ulceration, and painless terminal haematuria. Chronic fibrosis produces calcified bladder walls appearing as an eggshell bladder on pelvic radiography, obstructive hydronephrosis, and markedly increased risk of squamous cell carcinoma of the urinary bladder.",
+      "say": "Sharp terminal-spined eggs erode the bladder mucosa, causing painless haematuria and squamous cell carcinoma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Complication",
+          "Pathological Substrate",
+          "Clinical Presentation"
+        ],
+        "rows": [
+          [
+            "Terminal haematuria",
+            "Egg extrusion through inflamed mucosal venules",
+            "Painless blood at the end of micturition"
+          ],
+          [
+            "Bladder calcification",
+            "Deposition of calcium in dead mural eggs",
+            "Curvilinear eggshell calcification on pelvic radiograph"
+          ],
+          [
+            "Squamous cell cancer",
+            "Chronic irritation and bacterial nitrosamines",
+            "Ulcerative exophytic bladder dome tumor"
+          ],
+          [
+            "Diagnostic egg",
+            "Urine centrifugation (collected 10 AM to 2 PM)",
+            "Large oval egg with sharp pointed terminal spine"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In contrast, adult pairs of **Schistosoma mansoni** reside in the inferior mesenteric venules draining the large intestine, while Schistosoma japonicum occupies the superior mesenteric venules. S. mansoni eggs possess a prominent, large, sharp lateral spine, whereas S. japonicum eggs are rounded with a rudimentary, inconspicuous lateral knob or spine.",
+      "say": "Mansoni eggs feature a large sharp lateral spine and migrate through the wall of the colon.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Schistosoma mansoni",
+          "points": [
+            "Venous habitat: inferior mesenteric venules",
+            "Egg morphology: prominent sharp lateral spine",
+            "Pathology: intestinal bilharziasis and bloody stool",
+            "Snail intermediate host: Biomphalaria"
+          ]
+        },
+        "right": {
+          "title": "Schistosoma japonicum",
+          "points": [
+            "Venous habitat: superior mesenteric venules",
+            "Egg morphology: rounded with small lateral knob",
+            "Pathology: severe hepatic and cerebral granulomas",
+            "Snail intermediate host: Oncomelania"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Eggs carried retrogradely in the portal venous flow lodge within intrahepatic portal venules, provoking T-cell-mediated granulomatous inflammation. Fibrotic healing produces pathognomonic **Symmers pipestem fibrosis**, where dense white fibrous bands encircle portal tracts without altering lobular architecture. This non-cirrhotic presinusoidal portal hypertension produces massive splenomegaly and life-threatening bleeding from oesophageal varices.",
+      "say": "Embolized eggs induce Symmers pipestem periportal fibrosis, driving severe presinusoidal portal hypertension.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pf1",
+            "label": "Oviposited eggs carried retrogradely into intrahepatic portal venules"
+          },
+          {
+            "id": "pf2",
+            "label": "Soluble egg antigens trigger delayed hypersensitivity granulomas"
+          },
+          {
+            "id": "pf3",
+            "label": "Dense Symmers pipestem fibrosis induces non-cirrhotic portal hypertension"
+          }
+        ],
+        "edges": [
+          [
+            "pf1",
+            "pf2"
+          ],
+          [
+            "pf2",
+            "pf3"
+          ]
+        ]
+      }
+    }
+  ]
+}

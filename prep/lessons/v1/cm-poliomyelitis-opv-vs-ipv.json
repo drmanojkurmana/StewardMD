@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-poliomyelitis-opv-vs-ipv",
+ "subject": "community-medicine",
+ "module": "cm-poliomyelitis",
+ "title": "OPV versus IPV: Gut Immunity, VAPP and Fractional IPV",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Two vaccines, two immune geographies",
+   "tx": "**Oral polio vaccine** (Sabin, live attenuated) replicates in the gut, inducing intestinal IgA that blocks wild virus carriage and transmission, plus serum antibody. Inactivated polio vaccine (Salk, killed) induces strong serum IgG preventing paralysis but weaker gut immunity, so vaccinated children can still carry and pass wild virus silently.",
+   "say": "Geography separates them. Oral vaccine lives in the gut and blocks carriage itself; injected killed vaccine guards the nerves through blood antibody while guts can still ferry virus. Eradication strategy turns on that difference.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "OPV (Sabin, live oral)",
+     "points": ["Gut IgA blocks carriage", "Serum antibody also induced", "Shed virus can immunise contacts"]
+    },
+    "right": {
+     "title": "IPV (Salk, killed injectable)",
+     "points": ["Strong serum IgG", "Weaker gut immunity", "No shedding, no contact spread"]
+    }
+   }
+  },
+  {
+   "title": "OPV advantages that built eradication",
+   "tx": "**OPV advantages** explain its eradication role: oral drops need no needles or highly trained injectors, cost little, induce gut immunity that interrupts transmission, and secondarily immunise contacts through shedding. Mass campaigns vaccinating millions in days are logistically impossible with injectables alone. Its risks, covered next, are the price endgame strategy now retires.",
+   "say": "Drops built eradication. No needles, tiny cost, gut immunity interrupting transmission, contacts immunised by shedding. Million-child campaign days exist only because drops do. The risks priced into that bargain come next.",
+   "vis": {
+    "kind": "table",
+    "cols": ["OPV advantage", "Programme value"],
+    "rows": [
+     ["Oral administration", "No needles, faster campaigns"],
+     ["Intestinal immunity", "Transmission interrupted"],
+     ["Contact shedding", "Contacts immunised secondarily"],
+     ["Low cost", "National scale affordable"]
+    ]
+   }
+  },
+  {
+   "title": "VAPP: the rare price of live vaccine",
+   "tx": "**Vaccine-associated paralytic poliomyelitis** strikes about 4 cases per million birth cohort per year in OPV-using countries, in recipients or unimmunised contacts, most often with Sabin type 3 (60 percent), then types 2 and 1. Clinically indistinguishable from wild polio, only laboratory analysis separates them. As wild virus vanishes, VAPP becomes the dominant remaining polio risk.",
+   "say": "Live vaccine rarely paralyses: about four per million birth cohort yearly, recipients and contacts, type three leading. Laboratory analysis alone separates it from wild disease. Vanishing wild virus promotes this rarity into the main remaining risk.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fact", "Figure or pattern"],
+    "rows": [
+     ["Incidence", "About 4 per million birth cohort per year"],
+     ["Commonest type", "Sabin 3, about 60 percent of cases"],
+     ["Who is affected", "Recipients and unimmunised contacts"]
+    ]
+   }
+  },
+  {
+   "title": "VDPV: when shed virus relearns virulence",
+   "tx": "**Vaccine-derived polioviruses** emerge where shed Sabin virus circulates for months in under-immunised populations, mutating back toward neurovirulence (circulating VDPV), or persists in immunodeficient excretors. Low coverage, not the vaccine alone, creates them. Their existence is the scientific core of the endgame: OPV must eventually stop everywhere, synchronously.",
+   "say": "Shed virus can relearn virulence. Months of circulation in under-immunised groups mutates it back; immune-deficient hosts can excrete for years. Low coverage creates these strains. Eventually oral vaccine must stop everywhere, together.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Sabin virus shed after OPV"},
+     {"id": "b", "label": "Circulates in under-immunised group"},
+     {"id": "c", "label": "Mutations restore neurovirulence"},
+     {"id": "d", "label": "Circulating VDPV outbreak"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "IPV advantages in the endgame",
+   "tx": "**IPV advantages** invert OPV's risks: no VAPP, no VDPV, safe in immunodeficiency and pregnancy, and stable without OPV's heat fragility. Costs, injections, trained staff and weaker gut immunity are its limits. Fractional intradermal dosing stretches supply: one-fifth dose intradermally, two doses at 6 and 14 weeks in the national schedule.",
+   "say": "Killed vaccine inverts the risk table. No vaccine paralysis, no derived strains, safe where live vaccine is forbidden. Fractional intradermal fifth doses at six and fourteen weeks stretch costly supply inside the national schedule.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "IPV strengths",
+     "points": ["No VAPP or VDPV possible", "Safe in immunodeficiency", "Fractional doses save supply"]
+    },
+    "right": {
+     "title": "IPV limits",
+     "points": ["Costly, needs injectors", "Gut carriage continues", "Cold chain still required"]
+    }
+   }
+  },
+  {
+   "title": "The type 2 switch of 2016",
+   "tx": "The **global switch** in April 2016 replaced trivalent OPV with bivalent OPV (types 1 and 3) worldwide after wild type 2 eradication was certified, because most circulating VDPV and a large VAPP share traced to Sabin 2. IPV introduction everywhere preceded it as insurance. Synchronised timing prevented unprotected cohorts appearing country by country.",
+   "say": "One month rewired the world schedule. Trivalent became bivalent in April 2016: certified wild type two extinction made its Sabin strain the main derived-virus source. Injectable cover preceded it, synchronised globally to protect every cohort.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Era", "OPV used", "Reason"],
+    "rows": [
+     ["Before April 2016", "Trivalent OPV (types 1, 2, 3)", "All wild types circulating"],
+     ["After April 2016", "Bivalent OPV (types 1, 3)", "Wild type 2 eradicated, Sabin 2 risk"],
+     ["Endgame direction", "OPV cessation with IPV cover", "Remove VAPP and VDPV entirely"]
+    ]
+   }
+  },
+  {
+   "title": "Cold chain asymmetry: OPV fears heat",
+   "tx": "**OPV heat lability** is the cold chain's strictest demand among routine antigens, degrading fastest at ambient temperature, which is why its vial monitor type reacts quickest. IPV, adsorbed-adjacent behaviour aside, must never freeze like other injectables. Session discipline differs by vial in the same carrier: OPV guards against warmth, IPV against the ice pack itself.",
+   "say": "Two vials, opposite fears in one carrier. Oral drops degrade fastest in warmth with the quickest vial monitors. Injectable must never freeze against the packs. Session discipline reads each vial's own enemy correctly.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Vaccine", "Chief cold chain enemy"],
+    "rows": [
+     ["OPV", "Heat, fastest potency loss"],
+     ["IPV (fractional, intradermal)", "Freezing and heat both guarded"],
+     ["Both at session", "Conditioned packs, zipper bags"]
+    ]
+   }
+  },
+  {
+   "title": "Choosing vaccine by scenario",
+   "tx": "Scenario stems resolve mechanically: **outbreak interruption** in a transmitting population wants OPV's gut immunity; an immunodeficient child wants IPV only; the post-eradication world wants IPV alone; a campaign needing millions in days wants drops. Naming the strategic job (block transmission versus protect nerves) selects the vaccine before brand details matter.",
+   "say": "Name the job, pick the vaccine. Interrupting transmission wants gut immunity; protecting one immunodeficient child wants killed vaccine; the final world wants injectables alone; million-child days want drops. Strategy precedes brand in every stem.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Choose OPV when",
+     "points": ["Interrupting community transmission", "Mass campaign speed required", "Contacts need secondary cover"]
+    },
+    "right": {
+     "title": "Choose IPV when",
+     "points": ["Child is immunodeficient", "Wild virus absent, risk is vaccine itself", "Individual protection sufficient"]
+    }
+   }
+  },
+  {
+   "title": "Herd effects differ by vaccine",
+   "tx": "**Herd immunity mechanics** differ: OPV actively extends immunity beyond recipients through shedding and gut blockade, so effective coverage exceeds recorded coverage. IPV protects recipients' nervous systems while silent intestinal circulation can persist beneath high IPV coverage, documented in environmental surveillance. Sewage virus detection therefore distinguishes the two programmes' true interruption status.",
+   "say": "Herd effects differ mechanically. Oral vaccine leaks protection to contacts; injectable coverage can hide silent gut circulation beneath it. Sewage surveillance tells programmes which situation they actually live in.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "High IPV coverage"},
+     {"id": "b", "label": "Paralysis prevented in recipients"},
+     {"id": "c", "label": "Silent gut circulation possible"},
+     {"id": "d", "label": "Sewage detection reveals truth"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

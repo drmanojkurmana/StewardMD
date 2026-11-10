@@ -1,0 +1,239 @@
+{
+  "v": 1,
+  "module": "mic-history-morphology",
+  "subject": "microbiology",
+  "title": "L-Forms, Bacterial Growth Curve and Culture Physiology",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**L-forms** are bacteria that have lost their cell wall wholly or partly, named for the Lister Institute where Klieneberger described them in 1935: protoplasts (gram positive, wall fully lost), spheroplasts (gram negative, wall remnants) and stable L forms that grow without walls on osmotically protective media in fried egg colonies. Wall active antibiotics can induce them, and their clinical reality in persistent infection remains debated rather than established.",
+      "say": "Strip the wall and the bacterium survives as a fragile sphere, if the medium protects it osmotically.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Wall deficient forms",
+          "points": [
+            "Protoplast: gram positive wall completely lost",
+            "Spheroplast: gram negative partial wall retained",
+            "Unstable forms revert when inducer removed",
+            "Stable L forms propagate without walls"
+          ]
+        },
+        "right": {
+          "title": "Recognition",
+          "points": [
+            "Fried egg colonies on hypertonic media",
+            "Induced by penicillin and lysozyme in vitro",
+            "Mycoplasma is a natural wall less genus, not an L form",
+            "Clinical significance debated"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **bacterial growth curve** in closed culture runs four acts: **lag phase** (enzymes synthesised, no division, length set by inoculum history), **log or exponential phase** (balanced doubling at generation time, organisms most uniform and antibiotic susceptible), stationary phase (nutrient exhaustion and waste, growth equals death, spores and secondary metabolites appear), and decline phase. Every culture based test reads its inoculum from log phase for reproducibility.",
+      "say": "Lag adapts, log doubles, stationary starves, decline dies; log phase is the laboratory's standard actor.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lag",
+            "label": "Lag: adaptation, no division"
+          },
+          {
+            "id": "log",
+            "label": "Log: exponential doubling"
+          },
+          {
+            "id": "stat",
+            "label": "Stationary: growth equals death"
+          },
+          {
+            "id": "decline",
+            "label": "Decline: death exceeds growth"
+          }
+        ],
+        "edges": [
+          [
+            "lag",
+            "log"
+          ],
+          [
+            "log",
+            "stat"
+          ],
+          [
+            "stat",
+            "decline"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Generation time** grades bacterial patience: E coli doubles in about 20 minutes in rich broth, Mycobacterium tuberculosis in 18 to 24 hours, Mycobacterium leprae in about two weeks (in mouse footpads, never yet in broth), which is why tuberculosis cultures report in weeks and leprosy in animal passages. Arithmetic follows: one E coli becomes billions overnight, explaining colony timing and food poisoning incubation scales.",
+      "say": "Twenty minutes versus twenty hours versus two weeks: generation time sets the laboratory calendar.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Doubling league",
+          "points": [
+            "E coli: about 20 minutes",
+            "Staphylococcus aureus: about 30 minutes",
+            "M tuberculosis: 18 to 24 hours",
+            "M leprae: about 12 to 14 days (in vivo)"
+          ]
+        },
+        "right": {
+          "title": "Consequences",
+          "points": [
+            "Overnight colonies for enterics",
+            "Weeks for tuberculosis culture positivity",
+            "Exponential counts in food poisoning",
+            "Inoculum standardisation by turbidity (McFarland)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Oxygen requirements classify** bench handling: obligate aerobes (M tuberculosis, Pseudomonas), obligate anaerobes (next lesson), facultative anaerobes (most enterics, growing either way), microaerophiles (Campylobacter, Helicobacter at 5 to 10 percent oxygen) and capnophiles needing added carbon dioxide (Neisseria, pneumococcus enriched in CO2 incubators). Thioglycollate broth layers these preferences into one tube's gradient.",
+      "say": "Read the thioglycollate tube from top to bottom and the oxygen class announces itself.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oxygen classes",
+          "points": [
+            "Obligate aerobe: surface growth only",
+            "Obligate anaerobe: bottom growth only",
+            "Facultative: throughout, denser at top",
+            "Microaerophile: band below surface"
+          ]
+        },
+        "right": {
+          "title": "Bench systems",
+          "points": [
+            "Candle jars and CO2 incubators",
+            "Thioglycollate and Robertson cooked meat media",
+            "McIntosh Fildes and GasPak anaerobic jars",
+            "Anaerobic cabinets for fastidious work"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Nutrition and environment** write culture requirements: temperature optima (mesophiles at 37 degrees, Yersinia and Listeria growing in refrigerators, Campylobacter jejuni at 42), pH tolerances (Vibrio cholerae alkaline, lactobacilli acid), salt (halophilic vibrios), and growth factors called fastidiousness (Haemophilus demanding X and V factors from the respiratory lessons). Cold enrichment and alkaline media are physiology exploited as selection.",
+      "say": "Every selective medium is an organism's physiology turned into a trap for its rivals.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Exploited physiologies",
+          "points": [
+            "Alkaline peptone water selects Vibrio cholerae",
+            "Cold enrichment selects Listeria and Yersinia",
+            "42 degrees selects Campylobacter jejuni",
+            "Salt media select halophilic vibrios and staphylococci"
+          ]
+        },
+        "right": {
+          "title": "Fastidious demands",
+          "points": [
+            "Haemophilus: X (haemin) and V (NAD) factors",
+            "Neisseria: enriched heated blood media",
+            "Legionella: cysteine and iron (BCYE)",
+            "Mycoplasma: sterols required"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Bacterial metabolism names** the identification bench: fermentation versus oxidation of sugars, enzyme armament (catalase, coagulase, oxidase from the culture module), end products from glucose (mixed acid in E coli, butylene glycol in Klebsiella behind the IMViC pattern), and pigment and haemolysis as metabolic signatures. Biochemical panels are physiology interrogated systematically, now miniaturised into automated galleries.",
+      "say": "A biochemical panel is twenty physiology questions asked of one colony overnight.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Metabolic tests",
+          "points": [
+            "Sugar fermentation with gas (Durham tube)",
+            "Catalase separates staphylococci from streptococci",
+            "Oxidase names Pseudomonas and Neisseria",
+            "IMViC sorts enteric genera"
+          ]
+        },
+        "right": {
+          "title": "Metabolic signatures",
+          "points": [
+            "Pigments: Pseudomonas blue green, S aureus gold",
+            "Haemolysis patterns on blood agar",
+            "Urease: Proteus and Helicobacter",
+            "Hydrogen sulfide in TSI agar blackening"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Stationary phase is** where bacteria arm for survival: endospores form, competence for DNA uptake peaks in some species (genetics module), secondary metabolites including many antibiotics are secreted (Streptomyces in soil warfare), and persister cells tolerate antibiotics phenotypically without resistance genes. Biofilm and stationary physiology together explain why chronic infections shrug at drugs that kill log phase cultures beautifully.",
+      "say": "Starving bacteria make spores, antibiotics and persisters; log phase susceptibility is a fair weather report.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stationary programmes",
+          "points": [
+            "Sporulation in Bacillus and Clostridium",
+            "Competence for transformation",
+            "Antibiotic production by Streptomyces",
+            "Stress sigma factors reprogramme survival"
+          ]
+        },
+        "right": {
+          "title": "Clinical echoes",
+          "points": [
+            "Persisters relapse after therapy",
+            "Biofilm tolerance without resistance genes",
+            "Culture negativity in treated specimens",
+            "Viable but non culturable states (cholera)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Diauxic growth** (Monod's double curve) shows regulatory economy: glucose first, then a second lag while lactose enzymes are induced (the lac operon at work), producing two log phases separated by a plateau. It is the growth curve's built in genetics lesson and the reason mixed sugar media read sequentially in fermentation tests.",
+      "say": "Two sugars, two growth spurts, one operon switching between them.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "glu",
+            "label": "Glucose consumed: first log phase"
+          },
+          {
+            "id": "switch",
+            "label": "Lac operon induced: second lag"
+          },
+          {
+            "id": "lac",
+            "label": "Lactose consumed: second log phase"
+          },
+          {
+            "id": "stat",
+            "label": "Stationary phase"
+          }
+        ],
+        "edges": [
+          [
+            "glu",
+            "switch"
+          ],
+          [
+            "switch",
+            "lac"
+          ],
+          [
+            "lac",
+            "stat"
+          ]
+        ]
+      }
+    }
+  ]
+}
