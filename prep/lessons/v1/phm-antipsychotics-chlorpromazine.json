@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-antipsychotics",
+  "subject": "pharmacology",
+  "title": "Typical Antipsychotics and Clozapine: Chlorpromazine, Haloperidol, Agranulocytosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Chlorpromazine**, the phenothiazine that founded psychopharmacology in 1952, blocks dopamine D2 receptors across all four dopamine pathways and throws in muscarinic, alpha 1 and histamine blockade as adverse ballast: sedation, postural hypotension, anticholinergic effects, and a low potency high nuisance profile by modern standards. Its discoveries were serendipitous (a pre anaesthetic sedative that calmed psychosis) and revolutionary, emptying asylums into the pharmacological era this module still inhabits.",
+      "say": "Chlorpromazine blocks D2 and almost everything else; history forgives it, modern prescribing rarely chooses it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antipsychotics-d2-eps-clozapine-nms-fig1.webp",
+        "alt": "Antipsychotic dopamine neurocircuit pathways diagram showing mesolimbic, nigrostriatal, tuberoinfundibular and mesocortical tracts",
+        "caption": "The four dopamine pathways whose D2 blockade produces both antipsychotic benefit and the classic adverse effects."
+      }
+    },
+    {
+      "tx": "High potency **haloperidol** concentrates on D2 with little else, trading chlorpromazine's sedation and hypotension for extrapyramidal symptoms at low doses: acute dystonia, parkinsonism, akathisia and, with time, tardive dyskinesia. Intravenous haloperidol in delirium and acute agitation remains hospital furniture, QT interval permitting. The potency spectrum rule generalises: low potency agents sedate and drop pressure, high potency agents stiffen and pace.",
+      "say": "Haloperidol is D2 nearly pure: less sedation, more stiffness, and a QT to respect.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Low potency (chlorpromazine)",
+          "points": [
+            "Heavy sedation, postural hypotension",
+            "Anticholinergic burden and weight gain",
+            "Blue grey skin and corneal deposits chronically",
+            "Fewer extrapyramidal effects per milligram"
+          ]
+        },
+        "right": {
+          "title": "High potency (haloperidol)",
+          "points": [
+            "Little sedation or hypotension",
+            "Extrapyramidal effects at low doses",
+            "QT prolongation, especially intravenous",
+            "Delirium and acute agitation roles persist"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pathway accounting** predicts every adverse effect in the class: mesolimbic D2 blockade treats positive symptoms, nigrostriatal blockade causes movement disorders, tuberoinfundibular blockade raises prolactin (galactorrhoea, amenorrhoea, sexual dysfunction, bone loss), and mesocortical blockade may worsen the negative and cognitive symptoms nobody can yet treat well. An antipsychotic prescription is therefore four simultaneous prescriptions, three of them unwanted, and reviews must interrogate all four territories.",
+      "say": "One receptor, four pathways: benefit lives in one, and the side effects live in the other three.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Therapeutic pathway",
+          "points": [
+            "Mesolimbic blockade: delusions and hallucinations settle",
+            "Onset of calm in days, full effect over weeks",
+            "Relapse prevention is the maintenance goal",
+            "Adherence decides most outcomes"
+          ]
+        },
+        "right": {
+          "title": "Adverse pathways",
+          "points": [
+            "Nigrostriatal: dystonia, parkinsonism, akathisia, tardive dyskinesia",
+            "Tuberoinfundibular: hyperprolactinaemia effects",
+            "Mesocortical: negative symptoms unhelped or worsened",
+            "Each reviewed at every appointment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Clozapine** is the singular exception that proves the D2 rule incomplete: weak transient D2 occupancy with broad serotonergic and other receptor actions makes it the only antipsychotic with proven superiority in treatment resistant schizophrenia, reducing suicidality and hospitalisation where two adequate antipsychotic trials have failed. It also barely causes tardive dyskinesia and may improve it. Nothing else in the class may claim its efficacy, and nothing else carries its monitoring burden either.",
+      "say": "Clozapine works when two others have failed, by mechanisms D2 alone cannot explain.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "two",
+            "label": "Two adequate antipsychotic trials failed"
+          },
+          {
+            "id": "cloz",
+            "label": "Clozapine considered with consent and registration"
+          },
+          {
+            "id": "blood",
+            "label": "Mandatory blood monitoring programme enrolment"
+          },
+          {
+            "id": "gain",
+            "label": "Response assessed over 3 to 6 months"
+          }
+        ],
+        "edges": [
+          [
+            "two",
+            "cloz"
+          ],
+          [
+            "cloz",
+            "blood"
+          ],
+          [
+            "blood",
+            "gain"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clozapine's price list begins with **agranulocytosis** in roughly 1 percent, concentrated in the first months, which is why absolute neutrophil counts gate every dispensing in registered programmes with weekly then fortnightly then monthly cadence by jurisdiction. Fever or sore throat on clozapine is a same day blood count, full stop. Add dose dependent seizures, severe constipation that kills by ileus more often than agranulocytosis does in modern series, myocarditis in the first weeks, sedation, hypersalivation and the metabolic storm shared with olanzapine next.",
+      "say": "Fever on clozapine means a blood count today; constipation on clozapine can kill more quietly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Haematological contract",
+          "points": [
+            "Registered monitoring with gated dispensing",
+            "Neutrophil thresholds interrupt or stop therapy",
+            "Fever or sore throat: same day full blood count",
+            "Rechallenge after agranulocytosis generally forbidden"
+          ]
+        },
+        "right": {
+          "title": "Other clozapine costs",
+          "points": [
+            "Constipation progressing to fatal ileus if ignored",
+            "Myocarditis in early weeks: chest pain, fever, CRP",
+            "Seizures dose related, valproate cover sometimes",
+            "Sedation, hypersalivation and metabolic syndrome"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Olanzapine**, clozapine's chemical cousin without the blood contract, pairs strong efficacy with the class's heaviest metabolic burden alongside clozapine: weight gain averaging many kilograms, diabetes and dyslipidaemia demanding baseline and serial metabolic monitoring for the whole class. Its sedative antihistamine action helps acute agitation and insomnia at real cardiometabolic interest rates. Smoking induces its CYP1A2 clearance, so quitting smoking raises levels, a transition interaction with admission and discharge consequences.",
+      "say": "Olanzapine buys calm with kilograms; monitor metabolism like a diabetic clinic and remember smoking changes its level.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Olanzapine profile",
+          "points": [
+            "Broad receptor blockade, strong sedative component",
+            "Weight gain and metabolic syndrome at the class summit",
+            "No routine blood count gating",
+            "Long acting injection available"
+          ]
+        },
+        "right": {
+          "title": "Monitoring duties",
+          "points": [
+            "Weight, waist, glucose and lipids at baseline and serially",
+            "Smoking cessation raises levels via CYP1A2",
+            "Sedation and anticholinergic effects reviewed",
+            "Switching weighed when metabolic harm accumulates"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Depot** (long acting injectable) formulations convert adherence from daily willpower into monthly logistics for haloperidol, risperidone, paliperidone, aripiprazole and olanzapine (the last with a post injection observation rule for delirium sedation syndrome). Relapse and hospitalisation fall where non adherence drove them. Choice of depot is a shared decision about control and convenience, offered positively rather than as punishment, and test oral tolerability precedes the first long injection.",
+      "say": "Depots turn adherence into a monthly appointment instead of a daily negotiation; offer them as freedom, not sanction.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "oral",
+            "label": "Oral tolerability established"
+          },
+          {
+            "id": "choose",
+            "label": "Shared decision: agent and injection interval"
+          },
+          {
+            "id": "depot",
+            "label": "Monthly or longer depot administered"
+          },
+          {
+            "id": "relapse",
+            "label": "Relapse surveillance shifts to missed appointments"
+          }
+        ],
+        "edges": [
+          [
+            "oral",
+            "choose"
+          ],
+          [
+            "choose",
+            "depot"
+          ],
+          [
+            "depot",
+            "relapse"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Acute agitation protocols** assemble the class pragmatically: verbal de escalation first, oral offers (lorazepam, or an antipsychotic the patient knows) before intramuscular compulsion, QT and airway vigilance after parenteral haloperidol combinations, and physical health screening because delirium, intoxication and head injury impersonate psychosis nightly. Rapid tranquillisation is a safety procedure with monitoring obligations, not a chemical restraint shortcut, and documentation carries the reasoning.",
+      "say": "De escalate, offer oral, monitor after intramuscular; agitation is a differential diagnosis before it is a prescription.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Before medication",
+          "points": [
+            "Verbal de escalation and environmental calming",
+            "Exclude delirium, intoxication, hypoglycaemia, head injury",
+            "Offer oral medication and patient preference",
+            "Least restrictive setting maintained"
+          ]
+        },
+        "right": {
+          "title": "After parenteral sedation",
+          "points": [
+            "Pulse, pressure, respiration and consciousness observed",
+            "QT vigilance with haloperidol combinations",
+            "Airway and aspiration precautions",
+            "Debrief and care plan documented"
+          ]
+        }
+      }
+    }
+  ]
+}

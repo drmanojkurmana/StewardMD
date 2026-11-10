@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "id": "cm-leprosy-clofazimine",
+ "subject": "community-medicine",
+ "module": "cm-leprosy",
+ "title": "Leprosy Chemotherapy: Clofazimine, Reactions and Disability Grading",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Clofazimine: riminophenazine dye properties",
+   "tx": "The fat-soluble riminophenazine dye **clofazimine therapy** serves a crucial dual function in multibacillary leprosy by exerting slow bactericidal activity against Mycobacterium leprae while delivering potent systemic anti-inflammatory protection. Because it binds bacterial DNA and concentrates in reticuloendothelial macrophages and subcutaneous adipose depots, its long biological half-life of roughly seventy days maintains therapeutic tissue levels long after supervised monthly clinic doses.",
+   "say": "Clofazimine is a reddish-brown dye that kills leprosy bacilli and calms inflammation. It accumulates in fat tissues, remaining active in the body for over two months.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Drug characteristic", "Pharmacological feature", "Clinical relevance"],
+    "rows": [
+     ["Chemical class", "Riminophenazine lipophilic dye", "Accumulates in adipose and macrophages"],
+     ["Elimination half-life", "Approximately 70 days", "Maintains prolonged tissue bactericidal levels"],
+     ["Anti-inflammatory effect", "Inhibits neutrophil motility and cytokines", "Prevents and suppresses erythema nodosum leprosum"],
+     ["Adverse skin effect", "Reversible reddish-black skin discoloration", "Demands sensitive pre-treatment counselling"]
+    ]
+   }
+  },
+  {
+   "title": "Clofazimine dosing and skin pigmentation",
+   "tx": "Adult multibacillary regimens deliver three hundred milligrams of **supervised clofazimine** once monthly at the primary health centre, accompanied by fifty milligrams self-administered daily at home on days two through twenty-eight. A predictable side effect is reversible reddish-brown to dark brownish-black skin discoloration and dry ichthyotic scaling, which requires empathetic pre-treatment counselling to prevent medication abandonment driven by fears of permanent cosmetic disfigurement.",
+   "say": "Patients take three hundred milligrams monthly at the clinic and fifty milligrams daily at home. The drug turns the skin reddish-black; reassure patients that the color fades after treatment stops.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Supervised 300 mg dose on Day 1"},
+     {"id": "b", "label": "Self-administered 50 mg daily Days 2-28"},
+     {"id": "c", "label": "Pigmentation peaks, clearing 1-2 years post-cure"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Dapsone toxicity and hypersensitivity syndrome",
+   "tx": "While dapsone provides dependable daily bacteriostasis, physicians monitor for **dapsone hypersensitivity syndrome**, a rare but life-threatening idiosyncratic reaction that typically develops two to eight weeks after starting therapy. Manifesting with high fever, generalized exfoliative dermatitis, diffuse lymphadenopathy, hepatitis, jaundice and mononucleosis-like atypical lymphocytosis, it mandates immediate and permanent discontinuation of dapsone, supported by high-dose systemic corticosteroid therapy.",
+   "say": "Dapsone hypersensitivity is an emergency causing high fever, peeling skin rashes, jaundice and liver swelling within two months. Stop dapsone permanently and start corticosteroids immediately.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Dose-related haemolysis (common)",
+     "points": ["Mild drop in haemoglobin by 1 to 2 g/dl", "Compensated reticulocytosis in normal hosts", "Severe in G6PD deficiency; monitor blood count"]
+    },
+    "right": {
+     "title": "Hypersensitivity syndrome (rare)",
+     "points": ["Exfoliative dermatitis and high fever", "Hepatitis, jaundice and lymphadenopathy", "Stop dapsone permanently; give oral steroids"]
+    }
+   }
+  },
+  {
+   "title": "Type 1 lepra reaction: reversal reaction",
+   "tx": "Sudden immunopathological shifts provoke a **Type 1 lepra reaction**, or reversal reaction, which represents a delayed hypersensitivity response occurring primarily in borderline tuberculoid, borderline borderline and borderline lepromatous patients. Existing skin lesions rapidly become acutely erythematous, oedematous and hot, accompanied by severe peripheral nerve trunk tenderness; acute neuritis can destroy nerve function within hours, demanding emergency oral prednisolone therapy.",
+   "say": "A Type one reversal reaction occurs when immune cells attack bacilli inside nerves. Pre-existing patches become red and swollen, and nerves become agonizingly tender, requiring emergency steroids.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Surge in cell-mediated immunity"},
+     {"id": "b", "label": "Erythema and swelling of existing skin patches"},
+     {"id": "c", "label": "Acute nerve pain, tenderness and sensory loss"},
+     {"id": "d", "label": "Emergency oral prednisolone 40 mg daily"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Type 2 lepra reaction: erythema nodosum leprosum",
+   "tx": "In lepromatous patients harboring massive bacillary loads, immune complex deposition triggers **erythema nodosum leprosum**, or Type 2 lepra reaction. Manifesting with crops of evanescent, exquisitely tender, erythematous subcutaneous nodules over the limbs and face, it causes high swinging fever, iridocyclitis, orchitis, dactylitis, arthritis, glomerulonephritis and acute neuritis, responding to high doses of oral prednisolone, thalidomide or escalated clofazimine.",
+   "say": "Type two reactions happen when antibodies clump with dead bacterial fragments in the blood. Tender red lumps erupt on the skin with high fever, joint pain and severe eye inflammation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Type 1 reversal reaction",
+     "points": ["Delayed hypersensitivity mechanism", "Swelling of pre-existing skin lesions", "Severe acute peripheral neuritis risk"]
+    },
+    "right": {
+     "title": "Type 2 (ENL) reaction",
+     "points": ["Immune complex vasculitis mechanism", "Crops of new tender subcutaneous nodules", "Systemic fever, arthritis, iridocyclitis"]
+    }
+   }
+  },
+  {
+   "title": "WHO disability grading system: eyes",
+   "tx": "To measure nerve damage and monitor programmatic rehabilitation, the World Health Organization enforces a standardised **disability grading system** evaluated separately for eyes, hands and feet on a three-tier scale from zero to two. For the eyes, Grade 0 denotes normal vision without impairment; Grade 1 denotes visual acuity of six-eighteen or better but with lagophthalmos or corneal anaesthesia; Grade 2 denotes severe visual impairment below six-sixtieths or complete blindness.",
+   "say": "Eye disability is graded zero for normal sight, grade one for mild visual changes or incomplete eyelid closure, and grade two for severe blindness below six over sixty.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Disability Grade", "Clinical status of the eyes", "Intervention required"],
+    "rows": [
+     ["Grade 0", "No eye problem due to leprosy; normal vision", "Routine annual eye check"],
+     ["Grade 1", "Visual acuity 6/18 or better; lagophthalmos", "Protective glasses, eye drops, blinking exercise"],
+     ["Grade 2", "Severe visual impairment (vision < 6/60) or lagophthalmos with corneal ulcer", "Surgical eyelid reconstruction and ophthalmology referral"]
+    ]
+   }
+  },
+  {
+   "title": "Disability grading for hands and feet",
+   "tx": "For extremities, clinicians assign **Grade 2 disability** whenever visible permanent deformity or damage is present, including claw hand from ulnar or median nerve palsy, foot drop from common peroneal nerve paralysis, resorption of digits, or chronic plantary trophic ulcers. Grade 1 reflects pure loss of protective sensation detected by monofilament testing without visible physical deformity, whereas Grade 0 confirms completely intact sensation and motor power.",
+   "say": "Grade one is loss of touch sensation without deformity. Grade two means visible permanent damage, including claw fingers, foot drop, shortened toes or deep plantar ulcers.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Disability Grade", "Anatomical finding in hands and feet", "Preventive / corrective care"],
+    "rows": [
+     ["Grade 0", "No anaesthesia and no visible deformity", "Education on protecting hands and feet"],
+     ["Grade 1", "Loss of protective sensation (anaesthesia only)", "Microcellular rubber footwear, self-care kits"],
+     ["Grade 2", "Visible claw hand, foot drop, ulcer or resorption", "Reconstructive surgery and protective orthoses"]
+    ]
+   }
+  },
+  {
+   "title": "National Leprosy Eradication Programme structure",
+   "tx": "The centrally sponsored **NLEP strategic framework** decentralised leprosy services into general primary healthcare institutions across India, ensuring free diagnostic services, blister-pack dispensing, and reconstructive surgery in district hospitals. The programme monitors the annual new case detection rate per hundred thousand population, prioritizing early detection before irreversible Grade 2 disabilities develop and providing financial compensation to patients undergoing reconstructive surgery.",
+   "say": "The National Leprosy Eradication Programme delivers free diagnosis and blister packs through all primary health centres, compensating patients who undergo surgical deformity correction.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Doorstep screening by frontline workers"},
+     {"id": "b", "label": "Free blister-pack MDT at primary health centres"},
+     {"id": "c", "label": "Self-care education and footwear distribution"},
+     {"id": "d", "label": "Reconstructive surgery at district hospital"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Disability prevention through self-care and footwear",
+   "tx": "Preventing progressive Grade 2 damage in anaesthetic limbs centers on structured **self-care training**, teaching patients daily inspection of hands and feet for unnoticed cuts, thorn pricks or blisters. Patients soak their feet daily in plain water for twenty minutes, scrape off hyperkeratotic calluses with a pumice stone, and apply mineral oil to preserve skin suppleness, wearing prescribed microcellular rubber footwear to distribute walking pressure.",
+   "say": "Patients with numb feet soak them daily in water, scrape off hard calluses and rub oil into the skin. Microcellular rubber footwear prevents pressure sores and trophic ulcers.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Soak feet in cool water for 20 minutes"},
+     {"id": "b", "label": "Scrape hard calluses with pumice stone"},
+     {"id": "c", "label": "Apply oil to retain skin moisture"},
+     {"id": "d", "label": "Wear thick microcellular rubber footwear"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

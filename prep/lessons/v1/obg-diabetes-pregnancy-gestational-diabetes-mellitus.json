@@ -1,0 +1,220 @@
+{
+ "v": 1,
+ "module": "obg-diabetes-pregnancy",
+ "subject": "obstetrics-gynaecology",
+ "title": "Gestational Diabetes: DIPSI, IADPSG, Insulin and Metformin",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Glucose intolerance first recognised in pregnancy is **gestational diabetes mellitus**. Placental insulin resistance unmasks limited pancreatic reserve. It raises macrosomia, shoulder dystocia and neonatal hypoglycaemia risks. Screening at 24 to 28 weeks catches it, earlier when a previous pregnancy was affected or obesity is present.",
+   "say": "Gestational diabetes is glucose intolerance first recognised in pregnancy from placental resistance.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gestational-diabetes-mellitus-fig1.webp",
+    "alt": "GDM fetal pathophysiology and complications.",
+    "caption": "Gestational diabetes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The Indian single step seventy five gram test diagnosing at two hour value of one forty is the **DIPSI 75 g OGTT**. It needs no fasting and suits low resource settings. One abnormal value diagnoses gestational diabetes under this method. The test is done in a non fasting state, and a value at or above 140 milligrams per decilitre diagnoses it.",
+   "say": "The DIPSI test diagnoses gestational diabetes with one non fasting seventy five gram test.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Method",
+     "Diagnosis"
+    ],
+    "rows": [
+     [
+      "DIPSI",
+      "2 hour 140 or more"
+     ],
+     [
+      "IADPSG",
+      "Any one of three values"
+     ],
+     [
+      "Two step",
+      "Screen then confirm"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The international fasting test with three thresholds, any one abnormal diagnosing, uses **IADPSG criteria**. Fasting ninety two, one hour one eighty and two hour one fifty three milligrams per decilitre are the cutoffs. It labels more women diabetic than older criteria. These thresholds came from the HAPO study, where risk rose continuously with no natural break point.",
+   "say": "IADPSG criteria diagnose with any one of three thresholds on a fasting test.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Fasting sample"
+     },
+     {
+      "id": "n1",
+      "label": "75 gram load"
+     },
+     {
+      "id": "n2",
+      "label": "Samples at 1 and 2 hours"
+     },
+     {
+      "id": "n3",
+      "label": "Any one high diagnoses"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The safest glucose lowering drug in pregnancy, not crossing the placenta, is **insulin**. It remains standard when diet fails to meet targets. Regimens mimic physiology with basal and mealtime doses. Fasting readings at or above 5.1 and two hour readings at or above 8.5 are typical treatment targets.",
+   "say": "Insulin does not cross the placenta and remains standard when diet fails.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Insulin",
+     "points": [
+      "No placental crossing",
+      "Flexible dosing",
+      "Injections needed"
+     ]
+    },
+    "right": {
+     "title": "Metformin",
+     "points": [
+      "Oral, crosses placenta",
+      "Easy adherence",
+      "Long term offspring data awaited"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The oral agent increasingly used where insulin is declined or impractical is **metformin**. It crosses the placenta, so counselling covers the limited long term offspring data. About a quarter of women still need added insulin. Glyburide is an alternative in some countries, though metformin has largely displaced it.",
+   "say": "Metformin is oral and crosses the placenta, with a quarter still needing insulin.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Target",
+     "Fasting and postmeal"
+    ],
+    "rows": [
+     [
+      "Fasting",
+      "Under 95 mg per dl"
+     ],
+     [
+      "One hour",
+      "Under 140"
+     ],
+     [
+      "Two hour",
+      "Under 120"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Diabetes present before conception is **pregestational diabetes**. Unlike gestational disease it carries congenital anomaly risk from early hyperglycaemia. Preconception control and folate are its great preventives. An HbA1c of 6.5 percent or more at booking reclassifies the case as overt, pre existing diabetes.",
+   "say": "Pregestational diabetes carries anomaly risk from early hyperglycaemia unlike gestational disease.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "Diabetes in pregnancy care.",
+    "caption": "Diabetes care. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Three month average glucose guiding preconception and pregnancy control is **HbA1c**. Below six and a half percent before conception minimises anomaly risk. It performs less well in later pregnancy when glucose profiling takes over. In anaemia and haemoglobinopathies HbA1c misleads, and fructosamine or glucose profiles take its place.",
+   "say": "HbA1c guides preconception control, with below six and a half minimising anomalies.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Preconception HbA1c"
+     },
+     {
+      "id": "n1",
+      "label": "Optimised below target"
+     },
+     {
+      "id": "n2",
+      "label": "Folate high dose"
+     },
+     {
+      "id": "n3",
+      "label": "Early anomaly scan"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Medical nutrition therapy and postmeal walking are first treatment for most gestational diabetes, termed **lifestyle first**. Eighty percent achieve targets without drugs. Self monitoring four times daily proves whether targets hold. Thirty minutes walking after main meals blunts the postprandial peaks that drive fetal overgrowth.",
+   "say": "Lifestyle first with nutrition therapy controls most gestational diabetes without drugs.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Component",
+     "Advice"
+    ],
+    "rows": [
+     [
+      "Meals",
+      "Split, low glycaemic"
+     ],
+     [
+      "Activity",
+      "Walk after meals"
+     ],
+     [
+      "Monitoring",
+      "Fasting plus postmeal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "After delivery most gestational diabetes resolves, but later type two risk is high, needing **postpartum OGTT**. Testing at six to twelve weeks, then regular screening lifelong, catches progression early. Breastfeeding improves maternal metabolism measurably. Half of women develop type two diabetes within ten years, so the six week test is only the first checkpoint.",
+   "say": "Postpartum OGTT at six to twelve weeks catches later type two diabetes early.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gestational-diabetes-mellitus-fig1.webp",
+    "alt": "GDM postpartum follow up importance.",
+    "caption": "GDM follow up. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  }
+ ]
+}

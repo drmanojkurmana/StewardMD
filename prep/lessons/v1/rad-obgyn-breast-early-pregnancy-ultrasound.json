@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-obgyn-breast-early-pregnancy-ultrasound",
+ "subject": "radiology",
+ "module": "rad-obgyn-breast",
+ "title": "Early Pregnancy Ultrasound, Nuchal Translucency and BIRADS",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Gestational sac landmarks in order",
+   "tx": "**Early pregnancy ultrasound** meets landmarks in a fixed order: gestational sac near four and a half to five weeks, yolk sac inside it by five and a half, fetal pole with cardiac activity by six, all dated transvaginally about a week ahead of abdominal scanning. The double decidual sac sign separates a true sac from the pseudosac of ectopic pregnancy, which holds no yolk sac and sits centrally rather than eccentrically in the decidua.",
+   "say": "Early pregnancy ultrasound meets landmarks in a fixed order: gestational sac, then yolk sac, then fetal pole with cardiac activity, dated about a week earlier transvaginally. The double decidual sign separates a true sac from the pseudosac of ectopic pregnancy, which holds no yolk sac.",
+   "vis": {"kind": "table", "cols": ["Landmark", "Transvaginal week", "Confirms"], "rows": [["Gestational sac", "4.5 to 5", "Pregnancy in uterus likely"], ["Yolk sac", "5.5", "True intrauterine pregnancy"], ["Fetal pole", "6", "Embryo present"], ["Cardiac activity", "6 to 6.5", "Viability at that moment"]]}
+  },
+  {
+   "title": "Crown rump length dates best",
+   "tx": "**Crown rump length** between 7 and 13 weeks dates a pregnancy to within about five days, more accurately than any later measurement, and it anchors every screening calculation that follows. A sac over 25 mm mean diameter without an embryo, or a crown rump length of 7 mm without cardiac activity on a rescan interval the guidelines set, defines early pregnancy loss without touching a viable pregnancy by mistake.",
+   "say": "Crown rump length between seven and thirteen weeks dates a pregnancy to within about five days, anchoring every screening calculation. A sac over twenty five millimetres without an embryo, or a seven millimetre pole without cardiac activity on rescan, defines early pregnancy loss safely.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Measure crown rump length"}, {"id": "b", "label": "Assign gestational age"}, {"id": "c", "label": "Anchor screening dates"}, {"id": "d", "label": "Later growth judged against it"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Nuchal translucency window is narrow",
+   "tx": "**Nuchal translucency** measures the fluid stripe behind the fetal neck between 11 and 13 weeks plus six days, when crown rump length runs 45 to 84 mm, in a true sagittal plane with the fetus neutral. Thickness at or above 3 mm, or above the 99th centile for length, raises Down syndrome and cardiac anomaly risk and earns karyotype discussion plus fetal echocardiography. A week late and the window has closed, lymphatics having drained the stripe away.",
+   "say": "Nuchal translucency measures fluid behind the fetal neck between eleven and thirteen weeks plus six days, when crown rump length runs forty five to eighty four millimetres. Thickness at or above three millimetres earns karyotype discussion and fetal echocardiography. A week late and the window closes.",
+   "vis": {"kind": "table", "cols": ["Element", "Requirement", "Why"], "rows": [["Gestation", "11 to 13 plus 6 weeks", "Stripe present only then"], ["Crown rump length", "45 to 84 mm", "Centile charts valid"], ["Plane", "True sagittal, neutral neck", "Flexion fakes thickness"], ["Threshold", "3 mm or 99th centile", "Triggers testing pathway"]]}
+  },
+  {
+   "title": "Lambda and T signs in twins",
+   "tx": "**Lambda sign** wedges triangular chorionic tissue between the two amnion layers at the membrane base in dichorionic twins, while the T sign meets the placenta at a right angle with no wedge in monochorionic diamniotic twins. Chorionicity, not zygosity, is the reportable fact because monochorionic pairs share vessels and risk twin to twin transfusion. The sign fades after fourteen weeks, so the first trimester scan owns this determination permanently.",
+   "say": "Lambda sign wedges chorionic tissue between amnion layers in dichorionic twins, while the T sign meets the placenta at a right angle in monochorionic pairs. Chorionicity is the reportable fact because monochorionic pairs risk twin transfusion. The sign fades after fourteen weeks.",
+   "vis": {"kind": "compare", "left": {"title": "Lambda: dichorionic", "points": ["Triangular chorionic wedge", "Two placentas or fused with wedge", "Lower transfusion risk", "Separate circulations"]}, "right": {"title": "T sign: monochorionic", "points": ["Membrane meets at right angle", "One placenta shared", "Transfusion surveillance", "Fortnightly scans from 16 weeks"]}}
+  },
+  {
+   "title": "Molar snowstorm fills the uterus",
+   "tx": "**Molar pregnancy** fills the uterus with a snowstorm or bunch of grapes vesicular pattern and no fetus in a complete mole, the ultrasound in the pictured trophoblastic set, beside ovarian theca lutein cysts from extreme hormone drive. Beta human chorionic gonadotropin runs far above dates, and evacuation with hormone surveillance follows because choriocarcinoma is the sequela being hunted. A partial mole instead shows a growth restricted fetus with focal vesicular placenta.",
+   "say": "Molar pregnancy fills the uterus with a snowstorm vesicular pattern and no fetus in a complete mole, the ultrasound in the pictured trophoblastic set. Hormone levels run far above dates, and evacuation with surveillance follows because choriocarcinoma is the sequela being hunted.",
+   "vis": {"kind": "image", "src": "v1/kb/media/gestational-trophoblastic-disease-fig1.webp", "alt": "Molar pregnancy ultrasound illustration showing vesicular snowstorm pattern in the uterus.", "caption": "Molar pregnancy vesicular ultrasound pattern. Illustration: StewardMD."}
+  },
+  {
+   "title": "Anomaly scan checklist",
+   "tx": "**Anomaly scan** at eighteen to twenty two weeks surveys brain, spine, heart outflow tracts, diaphragm, stomach, kidneys, bladder, cord insertion and limbs against a printed checklist, because reassurance is only as good as the structures actually seen. Placental site is recorded against the internal os for praevia, and cervical length joins when preterm risk history demands it. Unseen structures are recalled, never assumed normal, and the report names every view still owed.",
+   "say": "Anomaly scan at eighteen to twenty two weeks surveys brain, spine, heart, diaphragm, kidneys and limbs against a printed checklist, because reassurance is only as good as structures actually seen. Unseen structures are recalled, never assumed normal, and the report names every view still owed.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "System checklist survey"}, {"id": "b", "label": "Record placental site"}, {"id": "c", "label": "Recall unseen structures"}, {"id": "d", "label": "Refer anomalies same week"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "BIRADS ends every breast report",
+   "tx": "**BIRADS categories** close breast imaging with a management number: 0 incomplete needing more views, 1 negative, 2 benign, 3 probably benign with short interval follow up under two percent risk, 4 suspicious split into a, b and c for biopsy, 5 over ninety five percent malignant, and 6 known cancer. The number, not adjectives, drives the next appointment, so reports that describe without categorising fail the referring clinician.",
+   "say": "BIRADS categories close breast imaging with a management number: zero incomplete, one negative, two benign, three probably benign with follow up, four suspicious for biopsy, five over ninety five percent malignant and six known cancer. The number drives the next appointment, not adjectives.",
+   "vis": {"kind": "table", "cols": ["BIRADS", "Meaning", "Action"], "rows": [["0", "Incomplete", "More views or prior films"], ["2", "Benign finding", "Routine screening"], ["3", "Probably benign, under 2 percent", "Short interval follow up"], ["4 and 5", "Suspicious to malignant", "Core biopsy"]]}
+  },
+  {
+   "title": "Spiculated mass and microcalcification",
+   "tx": "**Spiculated mass** radiates irregular strands into surrounding tissue on mammography, the desmoplastic signature of invasive cancer, while architectural distortion without a mass can be its only footprint. Clustered pleomorphic microcalcifications in a ductal line mark ductal carcinoma in situ. Ultrasound then judges cystic versus solid, and a simple cyst meeting every rule is discharged as benign without a needle, the commonest kindness the breast clinic performs.",
+   "say": "Spiculated mass radiates irregular strands on mammography, the signature of invasive cancer, while clustered pleomorphic microcalcifications mark ductal carcinoma in situ. Ultrasound judges cystic versus solid, and a simple cyst meeting every rule is discharged as benign without a needle.",
+   "vis": {"kind": "compare", "left": {"title": "Suspicious mammogram", "points": ["Spiculated mass margins", "Pleomorphic microcalcification cluster", "Architectural distortion", "BIRADS 4 or 5, biopsy"]}, "right": {"title": "Benign mammogram", "points": ["Circumscribed round mass", "Coarse popcorn calcification", "Simple cyst on ultrasound", "BIRADS 2, routine recall"]}}
+  }
+ ]
+}

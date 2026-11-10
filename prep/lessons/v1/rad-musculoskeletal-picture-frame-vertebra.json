@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-musculoskeletal-picture-frame-vertebra",
+ "subject": "radiology",
+ "module": "rad-musculoskeletal",
+ "title": "Picture Frame Vertebra, Ivory Vertebra and Rugger Jersey Spine",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Picture frame means Paget bone",
+   "tx": "**Picture frame vertebra** thickens the cortical rim of a vertebral body while the centre stays relatively lucent, framing the vertebra like a picture in Paget disease of bone. The pictured metabolic bone set places that frame beside osteoporosis and osteomalacia patterns. The vertebra also enlarges compared with neighbours, a size gain metastases and myeloma never produce, making enlargement the quiet discriminator in a crowded spine film.",
+   "say": "Picture frame vertebra thickens the cortical rim while the centre stays lucent, framing the vertebra in Paget disease. The pictured set places that frame beside other metabolic patterns. The vertebra also enlarges compared with neighbours, a size gain metastases never produce.",
+   "vis": {"kind": "image", "src": "v1/kb/media/metabolic-bone-osteoporosis-paget-long-case-fig1.webp", "alt": "Metabolic bone disease features illustration including Paget disease of bone.", "caption": "Metabolic bone disease features including Paget disease. Illustration: StewardMD."}
+  },
+  {
+   "title": "Paget phases on film",
+   "tx": "**Paget disease** marches through lytic, mixed and sclerotic phases: a flame shaped lytic front advances down a long bone, cotton wool sclerosis fills the skull, then dense coarse trabeculae thicken everything. Alkaline phosphatase climbs with activity while calcium stays normal in most, the blood split from myeloma and metastases. Sarcomatous transformation declares itself with new pain, cortical destruction and a soft tissue mass inside old Paget bone.",
+   "say": "Paget disease marches through lytic, mixed and sclerotic phases: a flame shaped lytic front, cotton wool skull sclerosis, then dense coarse trabeculae. Alkaline phosphatase climbs while calcium stays normal. New pain with cortical destruction inside old Paget bone declares sarcomatous transformation.",
+   "vis": {"kind": "table", "cols": ["Phase", "Film pattern", "Skull form"], "rows": [["Early lytic", "Flame or blade of grass front", "Osteoporosis circumscripta"], ["Mixed", "Lysis plus sclerosis", "Cotton wool patches"], ["Late sclerotic", "Thick coarse trabeculae", "Enlarged dense calvarium"], ["Transformed", "Destruction plus mass", "New lytic breakthrough"]]}
+  },
+  {
+   "title": "Ivory vertebra differential",
+   "tx": "**Ivory vertebra** is one uniformly dense white vertebral body with normal size and shape, and its list runs lymphoma, osteoblastic metastasis, Paget disease and infection. Prostate and breast cancers seed the osteoblastic deposits in older adults, often at several levels with disc spaces preserved. A single ivory vertebra in a young adult with night sweats leans lymphoma, while Paget adds enlargement and the picture frame rim.",
+   "say": "Ivory vertebra is one uniformly dense white body with normal size and shape, from lymphoma, osteoblastic metastasis, Paget disease or infection. Prostate and breast cancers seed such deposits in older adults. A single ivory vertebra in a young adult with night sweats leans lymphoma instead.",
+   "vis": {"kind": "compare", "left": {"title": "Favours metastasis", "points": ["Older patient, known primary", "Several levels involved", "Pedicle destruction possible", "Disc spaces preserved"]}, "right": {"title": "Favours Paget or lymphoma", "points": ["Vertebra enlarged: Paget", "Picture frame rim: Paget", "Single level, young: lymphoma", "Night sweats and nodes"]}}
+  },
+  {
+   "title": "Rugger jersey stripes the spine",
+   "tx": "**Rugger jersey spine** bands the top and bottom of each vertebral body with dense sclerosis and leaves the centre lucent, striping the spine like a rugby shirt in renal osteodystrophy. The pictured renal bone set shows that banding from secondary hyperparathyroidism of chronic kidney disease. Subperiosteal hand resorption, brown tumours and vascular calcification travel with it, so one lateral spine film can announce years of disordered parathyroid hormone.",
+   "say": "Rugger jersey spine bands the top and bottom of each vertebral body with sclerosis, striping the spine in renal osteodystrophy. The pictured set shows that banding from secondary hyperparathyroidism. Hand resorption and brown tumours travel with it, announcing years of disordered parathyroid hormone.",
+   "vis": {"kind": "image", "src": "v1/kb/media/renal-osteodystrophy-fig1.webp", "alt": "Renal osteodystrophy skeletal illustration showing rugger jersey spine banding.", "caption": "Renal osteodystrophy with rugger jersey spine. Illustration: StewardMD."}
+  },
+  {
+   "title": "Osteoporosis loses height silently",
+   "tx": "**Osteoporotic vertebra** loses trabecular bone until the body wedges, biconcaves around a swollen disc as a codfish shape, or crushes flat, each deformity costing height and kyphosis. Plain films need roughly thirty percent bone loss before lucency convinces anyone, so DEXA, not the radiograph, makes the diagnosis. A vertebra collapsing below the third lumbar level or with a destroyed pedicle should be read as malignant until proven otherwise.",
+   "say": "Osteoporotic vertebra loses bone until it wedges, biconcaves as a codfish shape or crushes flat. Films need roughly thirty percent bone loss before lucency convinces, so DEXA makes the diagnosis. Collapse below the third lumbar level or a destroyed pedicle reads malignant until proven otherwise.",
+   "vis": {"kind": "table", "cols": ["Deformity", "Shape", "Typical cause"], "rows": [["Wedge", "Anterior height lost", "Osteoporosis, trauma"], ["Biconcave codfish", "Both endplates dented", "Osteoporosis, osteomalacia"], ["Crush", "Whole body flattened", "Severe osteoporosis, tumour"], ["Plana", "Paper thin body in child", "Histiocytosis classic"]]}
+  },
+  {
+   "title": "Vertebra plana in a child",
+   "tx": "**Vertebra plana** flattens a child vertebral body to a thin disc with preserved neighbouring discs, classically from Langerhans cell histiocytosis whose lytic phase preceded the collapse. Infection and leukaemia enter the same differential, so the flattened vertebra in a child earns MRI and often biopsy rather than reassurance. Remarkably the body can rebuild substantial height over years of growth, a recovery adult crush fractures never achieve.",
+   "say": "Vertebra plana flattens a child vertebral body to a thin disc with preserved neighbouring discs, classically from Langerhans cell histiocytosis. Infection and leukaemia share the differential, so MRI and often biopsy follow. The body can rebuild height over years of growth, unlike adult crush fractures.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Child with back pain"}, {"id": "b", "label": "Single flat vertebra"}, {"id": "c", "label": "MRI whole spine"}, {"id": "d", "label": "Biopsy if cause unclear"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Pott spine destroys the disc",
+   "tx": "**Pott spine** is tuberculous spondylitis eroding the front of vertebral bodies beside a disc it destroys late, spreading under the anterior longitudinal ligament to neighbours and leaking paravertebral and psoas abscesses. Gibbus kyphosis follows anterior collapse. Metastasis instead spares the disc and eats the pedicle, the winking owl sign on frontal films, so disc state plus pedicle state split infection from tumour at one glance.",
+   "say": "Pott spine is tuberculous spondylitis eroding vertebral fronts and spreading to neighbours with psoas abscesses, ending in gibbus kyphosis. Metastasis spares the disc and eats the pedicle, the winking owl sign. Disc state plus pedicle state split infection from tumour at one glance.",
+   "vis": {"kind": "compare", "left": {"title": "Infection pattern", "points": ["Disc destroyed", "Two bodies involved", "Paravertebral abscess", "Endplate erosion"]}, "right": {"title": "Metastasis pattern", "points": ["Disc preserved", "Pedicle eaten: winking owl", "Posterior elements involved", "No abscess rim"]}}
+  },
+  {
+   "title": "Bone scan lights Paget and spread",
+   "tx": "**Bone scintigraphy** maps Paget activity and metastatic burden in one whole body pass, Paget bone glowing intensely through its whole expanded shape while metastases dot the axial skeleton randomly. A superscan washes the skeleton uniformly bright with faint kidneys when prostate metastases saturate bone. Plain films then characterise the hot spots that matter, because scintigraphy shouts sensitivity and whispers specificity in every metabolic and metastatic read.",
+   "say": "Bone scintigraphy maps Paget activity and metastatic burden in one pass, Paget bone glowing through its whole expanded shape while metastases dot the skeleton randomly. A superscan washes the skeleton uniformly bright when prostate metastases saturate bone. Films then characterise the hot spots that matter.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Whole body bone scan"}, {"id": "b", "label": "Hot expanded bone: Paget"}, {"id": "c", "label": "Random axial dots: metastases"}, {"id": "d", "label": "Films characterise hot spots"}], "edges": [["a", "b"], ["a", "c"], ["b", "d"], ["c", "d"]]}
+  }
+ ]
+}

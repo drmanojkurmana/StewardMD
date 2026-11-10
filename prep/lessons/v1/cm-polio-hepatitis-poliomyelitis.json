@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "id": "cm-polio-hepatitis-poliomyelitis",
+ "subject": "community-medicine",
+ "module": "cm-polio-hepatitis",
+ "title": "Poliomyelitis: Paralysis Surveillance and the Endgame",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "An enterovirus that mostly hides",
+   "tx": "**Poliovirus** spreads faeco orally, infects the gut and throat of far more people than it paralyses, and reaches motor neurons in well under one percent of infections. Most infections are silent or a brief fever, which is why paralysis surveillance must be paired with environmental and population immunity data to know where virus still travels.",
+   "say": "For every paralysed child, hundreds are silently infected. Faeco oral spread, motor neurons rarely reached. Silence is this virus's camouflage and surveillance's problem.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Feature", "Fact"],
+    "rows": [
+     ["Family", "Enterovirus, picornavirus"],
+     ["Spread", "Faeco oral mainly"],
+     ["Paralysis ratio", "Well under 1 in 100 infections"],
+     ["Serotypes", "Three originally, type 2 and 3 eradicated"]
+    ]
+   }
+  },
+  {
+   "title": "Acute flaccid paralysis surveillance",
+   "tx": "**AFP surveillance** requires immediate notification of every case of acute flaccid paralysis in children under fifteen, plus any age when polio is suspected, with two stool samples collected twenty four hours apart within fourteen days of onset and shipped cold to accredited laboratories. Timeliness and stool adequacy rates audit whether surveillance would actually catch imported virus.",
+   "say": "Every floppy child under fifteen, reported at once, two stools a day apart within fourteen days, cold shipped. Adequacy percentages tell whether the net has holes.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "AFP case detected under 15 years"},
+     {"id": "b", "label": "Notify immediately"},
+     {"id": "c", "label": "Two stools 24 h apart, within 14 days"},
+     {"id": "d", "label": "Cold chain to accredited laboratory"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "The paralysis pattern at the bedside",
+   "tx": "**Poliomyelitis paralysis** is asymmetric, flaccid and proximal more than distal, with reflexes lost, sensation intact and no bladder involvement, evolving over days with fever at onset. Guillain Barre syndrome, the great mimic, tends to symmetry and ascending spread. Residual paralysis review at sixty days classifies AFP outcomes for the programme.",
+   "say": "Asymmetric, flaccid, feeling intact, reflexes gone, fever at onset. Guillain Barre climbs symmetrically. Sixty day review sorts residue from recovery for the register.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Poliomyelitis pattern",
+     "points": ["Asymmetric flaccid weakness", "Sensation preserved", "Fever at onset", "Proximal predominance"]
+    },
+    "right": {
+     "title": "Guillain Barre pattern",
+     "points": ["Symmetric ascending weakness", "Paraesthesiae common", "Afebrile progression", "Autonomic features possible"]
+    }
+   }
+  },
+  {
+   "title": "India's last case and certification",
+   "tx": "**India's last wild polio case** occurred in January 2011 in West Bengal, and the South East Asia Region was certified polio free in March 2014 after surveillance proved absence, not merely silence. Pulse Polio rounds vaccinating every child under five on national days, booth plus house to house, built the immunity wall that made interruption possible.",
+   "say": "Last Indian case January 2011, regional certification March 2014. Pulse rounds, booth then doorstep, built the wall. Certification audited silence until it proved absence.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Milestone", "Date"],
+    "rows": [
+     ["Last wild case in India", "January 2011"],
+     ["Regional certification", "March 2014"],
+     ["Global type 2 declaration", "2015"],
+     ["Global type 3 declaration", "2019"]
+    ]
+   }
+  },
+  {
+   "title": "OPV: gut immunity with a rare price",
+   "tx": "The **oral polio vaccine** replicates briefly in the gut, inducing strong intestinal immunity that blocks transmission and spreads secondarily to contacts, which powered eradication rounds. Its rare costs are vaccine associated paralytic poliomyelitis in recipients or contacts, and circulating vaccine derived polioviruses where coverage gaps let vaccine virus keep transmitting and mutate back toward virulence.",
+   "say": "OPV blocks transmission in the gut and immunises contacts free. Rare paralysis and vaccine derived outbreaks in undercovered pockets are its price. Coverage decides which face shows.",
+   "vis": {
+    "kind": "table",
+    "cols": ["OPV trait", "Consequence"],
+    "rows": [
+     ["Gut replication", "Strong intestinal immunity"],
+     ["Secondary spread", "Contacts immunised passively"],
+     ["VAPP", "Rare paralysis, recipient or contact"],
+     ["cVDPV", "Outbreaks where coverage gaps persist"]
+    ]
+   }
+  },
+  {
+   "title": "IPV: blood immunity without replication",
+   "tx": "**Inactivated polio vaccine** given by injection induces strong blood antibody preventing paralysis but weaker gut immunity, so vaccinated people can still carry and shed virus silently. Fractional intradermal doses stretch supply in the programme. In the endgame, IPV anchors individual protection while OPV withdraws in a globally synchronised sequence.",
+   "say": "IPV guards the nervous system, less so the gut; silent carriage continues. Fractional skin doses stretch vials. It anchors protection as oral vaccine retires.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "OPV",
+     "points": ["Oral, easy mass delivery", "Strong gut immunity", "Rare vaccine virus risks", "Blocks transmission best"]
+    },
+    "right": {
+     "title": "IPV",
+     "points": ["Injection, trained staff", "Strong blood antibody", "No vaccine virus risk", "Weaker gut blocking"]
+    }
+   }
+  },
+  {
+   "title": "The switch and containment era",
+   "tx": "The **global switch** in 2016 withdrew type 2 oral vaccine worldwide simultaneously after type 2 eradication, replacing trivalent with bivalent OPV plus IPV introduction, because most vaccine derived outbreaks were type 2. Laboratories and manufacturers now destroy or contain poliovirus stocks under strict global action plan rules to prevent re seeding.",
+   "say": "In 2016 the world retired type 2 oral vaccine on one calendar to stop vaccine derived type 2 outbreaks. Containment rules now guard every stored vial.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Type 2 wild virus eradicated"},
+     {"id": "b", "label": "Synchronised tOPV to bOPV switch"},
+     {"id": "c", "label": "IPV introduced universally"},
+     {"id": "d", "label": "Stock containment and audits"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Environmental surveillance: sewage tells",
+   "tx": "**Environmental surveillance** samples sewage at sentinel sites to detect poliovirus circulation before any child is paralysed, repeatedly proving its worth by finding silent transmission and importations in polio free cities. A single positive sample triggers risk assessment, coverage review and targeted vaccination without waiting for a clinical case.",
+   "say": "Sewage speaks before children fall. One positive sample starts investigation and targeted rounds. Waiting for paralysis wastes the warning the drains provided.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Signal", "Response"],
+    "rows": [
+     ["Sewage positive, no cases", "Investigate, review coverage"],
+     ["Repeated positives", "Targeted vaccination rounds"],
+     ["AFP stool positive", "Outbreak response protocol"],
+     ["Coverage pocket found", "Microplan revision"]
+    ]
+   }
+  },
+  {
+   "title": "What remains: Afghanistan, Pakistan and importation risk",
+   "tx": "**Wild poliovirus type 1** persists endemically only in Afghanistan and Pakistan corridors, while vaccine derived outbreaks flare where routine immunisation collapsed. Every polio free country therefore maintains AFP and environmental surveillance, high routine coverage and outbreak response stockpile access until global certification closes the file permanently.",
+   "say": "Type 1 survives in two country corridors; vaccine derived fires start wherever coverage collapsed. Surveillance and routine rounds stay until the world, not the map, is certified.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Risk", "Standing defence"],
+    "rows": [
+     ["Importation by travel", "AFP plus sewage surveillance"],
+     ["Coverage collapse", "Routine immunisation strengthening"],
+     ["Vaccine derived outbreak", "Stockpile vaccine response"],
+     ["Surveillance fatigue", "Performance indicators audited"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

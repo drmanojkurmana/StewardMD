@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-corticosteroids",
+  "subject": "pharmacology",
+  "title": "Fludrocortisone, Potency, HPA Suppression, Cushingoid Features and Steroid Withdrawal",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Fludrocortisone** is the mineralocorticoid specialist: fluorination multiplies aldosterone like activity (sodium retention, potassium and hydrogen excretion, volume expansion) to roughly 125 times hydrocortisone with useful glucocorticoid spill, dosed in micrograms (50 to 300) for adrenal insufficiency's salt half and off label for orthostatic hypotension. Its surrogates are lying and standing pressure, potassium and renin; overdose is hypertension, oedema and hypokalaemia wearing an endocrine costume.",
+      "say": "Fludrocortisone is bottled aldosterone in microgram doses; pressure, potassium and renin steer it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fludrocortisone territory",
+          "points": [
+            "Adrenal insufficiency mineralocorticoid replacement",
+            "50 to 300 micrograms daily",
+            "Orthostatic hypotension in autonomic failure",
+            "Salt intake partnered to dose"
+          ]
+        },
+        "right": {
+          "title": "Fludrocortisone overdose",
+          "points": [
+            "Hypertension and dependent oedema",
+            "Hypokalaemia and metabolic alkalosis",
+            "Headache as an early complaint",
+            "Dose reduction, not diuretics first"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Glucocorticoid potency** tables compare anti inflammatory power per milligram (hydrocortisone 1, prednisolone 4, methylprednisolone 5, triamcinolone 5, dexamethasone 25 to 30) against duration (short, intermediate, long) and mineralocorticoid residue, and fluency in the three columns converts any steroid question into arithmetic. Potency is not efficacy: a potent drug at an equivalent dose does not outperform, it merely lasts longer and suppresses the axis deeper per course.",
+      "say": "Potency converts doses, duration converts risk; neither converts a weak indication into a strong one.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Potency and duration",
+          "points": [
+            "Short: hydrocortisone, cortisone (8 to 12 hours)",
+            "Intermediate: prednisolone, methylprednisolone, triamcinolone",
+            "Long: dexamethasone, betamethasone (36 to 72 hours)",
+            "Potency rises along the same sequence"
+          ]
+        },
+        "right": {
+          "title": "Prescribing translations",
+          "points": [
+            "Equivalent doses, equivalent efficacy",
+            "Longer action, deeper axis suppression",
+            "Short agents for replacement and withdrawal safety",
+            "Depot forms convert weeks into single injections"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**HPA axis suppression** follows dose and duration arithmetic: courses under two to three weeks at modest doses rarely suppress meaningfully, while prednisolone above 7.5 mg daily (or equivalents) beyond three weeks should be assumed suppressive, with recovery taking weeks to a year after long therapy. Evening dosing, long acting agents and divided doses suppress most. Testing (morning cortisol, Synacthen stimulation) and endocrine liaison govern withdrawal after serious exposure.",
+      "say": "Three weeks above seven point five milligrams: assume suppression and plan the exit like a landing, not a jump.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "expose",
+            "label": "Dose and duration accumulate beyond thresholds"
+          },
+          {
+            "id": "suppress",
+            "label": "CRH and ACTH silenced, adrenal cortex idles"
+          },
+          {
+            "id": "taper",
+            "label": "Taper to physiological range, then slow further"
+          },
+          {
+            "id": "test",
+            "label": "Morning cortisol or Synacthen before final cessation"
+          }
+        ],
+        "edges": [
+          [
+            "expose",
+            "suppress"
+          ],
+          [
+            "suppress",
+            "taper"
+          ],
+          [
+            "taper",
+            "test"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cushingoid features** catalogue chronic glucocorticoid excess on the body the drug was mimicking: central obesity with moon face and buffalo hump, purple striae, proximal myopathy, hypertension, hyperglycaemia, osteoporosis, skin thinning and bruising, cataracts, mood and psychosis, growth suppression in children and infection masked until advanced. The catalogue is a monitoring checklist at every chronic review, each item triggering dose reduction pressure or organ protection in parallel.",
+      "say": "Read the Cushingoid catalogue as a checklist at every review; each feature found argues the dose down.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Visible Cushingoid signs",
+          "points": [
+            "Central weight, moon face, supraclavicular pads",
+            "Purple striae, thin skin, easy bruising",
+            "Proximal weakness on chair rise testing",
+            "Growth deceleration in children charted"
+          ]
+        },
+        "right": {
+          "title": "Silent Cushingoid costs",
+          "points": [
+            "Osteoporosis and avascular necrosis",
+            "Diabetes, hypertension and dyslipidaemia",
+            "Infection masked and opportunistic",
+            "Cataract, glaucoma, mood and psychosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Steroid withdrawal** separates three syndromes students conflate: true adrenal insufficiency on cessation (axis suppressed, crisis risk), steroid withdrawal syndrome (lethargy, myalgia, mood fall with a recovered axis and miserable physiology), and disease relapse misread as withdrawal. Tapering treats the first and prevents confusion with the third: reduce swiftly to physiological range while disease allows, then crawl (1 mg prednisolone per month territory), switch to hydrocortisone for the final approach, and test the axis before declaring independence.",
+      "say": "Crisis, withdrawal misery and relapse are three different patients; taper speed and axis testing separate them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Withdrawal syndromes",
+          "points": [
+            "Adrenal insufficiency: hypotension, crisis risk",
+            "Withdrawal syndrome: aches, lethargy, low mood, axis intact",
+            "Disease relapse: original symptoms returning",
+            "Each has a different next move"
+          ]
+        },
+        "right": {
+          "title": "Taper architecture",
+          "points": [
+            "Fast to physiological range if disease permits",
+            "Slow below it: small decrements monthly",
+            "Hydrocortisone switch for final testing",
+            "Sick day rules continue until axis proven"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Steroid induced hyperglycaemia follows** hepatic glucose output and insulin resistance with a postprandial accent, worst on morning intermediate acting doses by afternoon and evening, screened by capillary profiles rather than fasting alone and treated often with basal or mixed insulin scaled to the steroid curve, then de escalated in lockstep with the taper lest the steroid fall strand the patient hypoglycaemic on yesterday's insulin.",
+      "say": "Steroid glucose peaks after lunch and falls with the taper; insulin must dance the same choreography backwards.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "steroid",
+            "label": "Morning prednisolone started"
+          },
+          {
+            "id": "afternoon",
+            "label": "Afternoon and evening glucose peaks"
+          },
+          {
+            "id": "insulin",
+            "label": "Insulin matched to the steroid curve"
+          },
+          {
+            "id": "taper",
+            "label": "Taper: insulin reduced in lockstep"
+          }
+        ],
+        "edges": [
+          [
+            "steroid",
+            "afternoon"
+          ],
+          [
+            "afternoon",
+            "insulin"
+          ],
+          [
+            "insulin",
+            "taper"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Bone protection is protocol**, not virtue: calcium and vitamin D repletion, bisphosphonate therapy by fracture risk tools in adults on three months plus of prednisolone at 7.5 mg equivalents and above (lower thresholds with prior fractures or high risk), densitometry baselines and falls review. Children trade growth plates into the bargain, making paediatric chronic steroids a growth chart surveillance contract with endocrine partnership.",
+      "say": "Three months of steroids earns a bone plan the same week, not after the first fracture.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bone protection bundle",
+          "points": [
+            "Calcium and vitamin D repleted",
+            "Fracture risk assessed and bisphosphonate by threshold",
+            "Baseline densitometry where indicated",
+            "Weight bearing activity counselled"
+          ]
+        },
+        "right": {
+          "title": "Growth surveillance in children",
+          "points": [
+            "Height velocity charted at every visit",
+            "Lowest dose and alternate day strategies",
+            "Steroid sparing agents introduced early",
+            "Endocrine partnership for chronic courses"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Infection under steroids hides** and multiplies: fever and inflammatory markers blunt while tuberculosis reactivates, fungi and Pneumocystis colonise at sustained higher doses (prophylaxis thresholds near prednisolone 20 mg for a month with other risks), varicella can kill the non immune, and live vaccines wait. Screening (TB, hepatitis B, strongyloides where endemic) precedes long high dose courses and biologics combined with them, an order of operations examinations increasingly test.",
+      "say": "Screen before you suppress: TB, hepatitis B and threadworm where relevant, and prophylax at sustained high doses.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "plan",
+            "label": "Long or high dose steroid course planned"
+          },
+          {
+            "id": "screen",
+            "label": "TB, hepatitis B, strongyloides screening by risk"
+          },
+          {
+            "id": "proph",
+            "label": "PJP prophylaxis at sustained higher doses"
+          },
+          {
+            "id": "vacc",
+            "label": "Vaccinations updated before, live vaccines deferred during"
+          }
+        ],
+        "edges": [
+          [
+            "plan",
+            "screen"
+          ],
+          [
+            "screen",
+            "proph"
+          ],
+          [
+            "proph",
+            "vacc"
+          ]
+        ]
+      }
+    }
+  ]
+}

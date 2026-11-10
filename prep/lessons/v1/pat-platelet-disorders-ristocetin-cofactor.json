@@ -1,0 +1,254 @@
+{
+  "v": 1,
+  "gen": "AI",
+  "module": "pat-platelet-disorders",
+  "key": null,
+  "title": "Ristocetin Cofactor, Heparin-Induced Thrombocytopenia, Henoch-Schonlein Purpura, and Scurvy",
+  "steps": [
+    {
+      "tx": "The **ristocetin cofactor activity assay** represents the reference quantitative laboratory method for assessing the adhesive functional capacity of circulating von Willebrand factor. The antibiotic ristocetin induces a conformational change in von Willebrand factor, exposing its A1 domain to bind platelet glycoprotein Ib receptors. In this in vitro assay, patient plasma is mixed with formalin-fixed normal donor platelets and ristocetin; the rate and extent of platelet agglutination are measured spectrophotometrically. A markedly reduced ristocetin cofactor activity paired with low vWF antigen confirms quantitative or qualitative von Willebrand disease.",
+      "say": "The ristocetin cofactor assay is the standard test to measure the biological activity of von Willebrand factor. Ristocetin binds von Willebrand factor and changes its shape, exposing the binding site for platelet glycoprotein one-b. In the test, patient plasma is mixed with washed, fixed normal platelets and ristocetin. If functional von Willebrand factor is present, platelets agglutinate, clearing the cloudy solution. A low agglutination rate proves functional von Willebrand deficiency.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "vWF Ristocetin Cofactor (vWF:RCo)",
+          "points": [
+            "Measures biological binding function to GPIb",
+            "Uses fixed normal donor platelets",
+            "Severely reduced in Type 2A, 2M, and Type 3 vWD",
+            "Ratio of vWF:RCo to vWF:Ag <0.7 indicates Type 2 defect"
+          ]
+        },
+        "right": {
+          "title": "vWF Antigen (vWF:Ag)",
+          "points": [
+            "Measures absolute total circulating vWF protein mass",
+            "Quantified via standardized ELISA or immunoassay",
+            "Proportionately reduced in Type 1 vWD",
+            "Normal in qualitative Type 2M and 2N vWD"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Heparin-induced thrombocytopenia type II is an immune-mediated prothrombotic disorder triggered by exposure to unfractionated or low-molecular-weight heparin. The pathogenesis involves IgG autoantibodies directed against multimolecular complexes formed between positively charged **platelet factor 4 neoepitopes** and negatively charged polyanionic heparin molecules. The Fc portions of these IgG-PF4-heparin complexes bind platelet Fc-gamma-RIIa receptors, triggering massive, uncontrolled platelet activation, microparticle shedding, and intense thrombin generation that precipitates catastrophic arterial and venous thrombosis rather than haemorrhage.",
+      "say": "Type two heparin-induced thrombocytopenia is an immune-mediated prothrombotic disaster caused by heparin exposure. Negatively charged heparin binds positively charged platelet factor four released from platelet granules, creating a conformational neoantigen. Patients develop IgG antibodies against this complex. When these antibodies bind platelet Fc receptors, they trigger massive platelet activation and thrombin generation, leading to paradoxical arterial and venous blood clots.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "h1",
+            "label": "Heparin Administration"
+          },
+          {
+            "id": "h2",
+            "label": "Heparin-PF4 Complex Forms"
+          },
+          {
+            "id": "h3",
+            "label": "IgG Autoantibody Binding"
+          },
+          {
+            "id": "h4",
+            "label": "Platelet Fc-gamma-RIIa Firing"
+          },
+          {
+            "id": "h5",
+            "label": "Explosive Thrombin & Thrombosis"
+          }
+        ],
+        "edges": [
+          [
+            "h1",
+            "h2",
+            "Positively Charged Chemokine"
+          ],
+          [
+            "h2",
+            "h3",
+            "Neoantigen Recognition"
+          ],
+          [
+            "h3",
+            "h4",
+            "Receptor Cross-Linking"
+          ],
+          [
+            "h4",
+            "h5",
+            "White Clot Syndrome"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical suspicion of heparin-induced thrombocytopenia is quantified using the validated 4T clinical scoring system, evaluating: magnitude of Thrombocytopenia (drop greater than fifty percent from baseline), Timing of onset (five to ten days post-heparin initiation, or within twenty-four hours upon recent exposure), documented Thrombosis, and oTher causes of thrombocytopenia excluded. Once suspected, **immediate heparin cessation** is mandatory. Clinicians must never switch to low-molecular-weight heparin or initiate warfarin acutely due to protein C depletion risks, starting non-heparin anticoagulants such as argatroban or bivalirudin.",
+      "say": "Clinicians use the 4T score to calculate pre-test probability of heparin-induced thrombocytopenia based on thrombocytopenia magnitude, timing five to ten days after starting heparin, new thrombosis, and absence of other causes. If intermediate or high risk, immediately stop all heparin products, including flushes. Never switch to low-molecular-weight heparin because it cross-reacts, and never start warfarin acutely because it depletes protein C and causes limb gangrene. Switch immediately to a direct thrombin inhibitor like argatroban.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/heparin-induced-thrombocytopenia-fig1.webp",
+        "alt": "Clinical management algorithm and thrombosis features in heparin-induced thrombocytopenia",
+        "caption": "Heparin induced thrombocytopenia mechanism with platelet activation and thrombosis."
+      }
+    },
+    {
+      "tx": "Heparin-induced thrombocytopenia type I is a benign, non-immune phenomenon developing within forty-eight hours of starting heparin therapy. Heparin exerts a direct, transient pro-aggregatory effect on platelets, causing a modest, self-limiting drop in platelet count that rarely falls below one hundred thousand per microliter. In contrast to immune type II HIT, **type I heparin-associated thrombocytopenia** involves no antibody formation, does not produce thrombosis, normalizes spontaneously despite continued heparin therapy, and requires no cessation of heparin or specialized laboratory investigation.",
+      "say": "Type one heparin-induced thrombocytopenia is a harmless, non-immune reaction that occurs within the first two days of starting heparin. Heparin directly causes mild, transient platelet clumping without any antibody involvement. Platelet counts rarely drop below one hundred thousand, there is zero risk of thrombosis, and counts spontaneously recover even if heparin is continued. It is critical to recognize type one to avoid unnecessarily discontinuing essential heparin therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Type I (Non-Immune) HIT",
+          "points": [
+            "Onset: Early (within 1 to 2 days of heparin)",
+            "Mechanism: Direct transient platelet agglutination",
+            "Platelet drop: Modest (rarely <100,000/uL)",
+            "Thrombosis risk: None; heparin can be safely continued"
+          ]
+        },
+        "right": {
+          "title": "Type II (Immune-Mediated) HIT",
+          "points": [
+            "Onset: Delayed (5 to 10 days post-exposure)",
+            "Mechanism: IgG autoantibodies against PF4-heparin",
+            "Platelet drop: Severe (>50% drop from baseline)",
+            "Thrombosis risk: Extreme (30-50%); stop all heparin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Henoch-Schonlein purpura, formally termed IgA vasculitis, is an acute systemic small-vessel leukocytoclastic vasculitis mediated by tissue deposition of galactose-deficient **immunoglobulin A immune complexes**. Predominantly affecting children aged three to ten years following an upper respiratory tract infection, it presents with a pathognomonic clinical tetrad: non-thrombocytopenic palpable purpura distributed symmetrically over dependent lower extremities and buttocks, migratory arthralgias of knees and ankles, colicky abdominal pain with gastrointestinal bleeding, and glomerulonephritis identical to IgA nephropathy on renal biopsy.",
+      "say": "Henoch-Schonlein purpura, or IgA vasculitis, is a small-vessel vasculitis that predominantly affects children following an upper respiratory tract infection. Galactose-deficient IgA-one immune complexes deposit within post-capillary venules, attracting neutrophils and provoking leukocytoclastic inflammation. It presents with a classic tetrad: palpable purpura over the buttocks and lower limbs, joint pain in knees and ankles, crampy abdominal pain, and haematuria from glomerulonephritis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/henoch-schonlein-purpura-fig1.webp",
+        "alt": "Clinical distribution of palpable purpura on lower limbs in Henoch-Schonlein purpura",
+        "caption": "IgA vasculitis tetrad with palpable purpura, arthritis, abdominal pain, and renal disease."
+      }
+    },
+    {
+      "tx": "Scurvy is the clinical syndrome resulting from severe nutritional ascorbic acid deficiency. Vitamin C acts as an obligatory reducing cofactor for prolyl hydroxylase and lysyl hydroxylase enzymes, which post-translationally hydroxylate proline and lysine residues during procollagen alpha-chain synthesis in the rough endoplasmic reticulum. Without adequate hydroxylation, procollagen polypeptides cannot assemble into a stable **collagen triple helix cross-linking**, rendering capillary basement membranes and perivascular connective tissues fragile. Patients manifest with bleeding gums, corkscrew hairs, perifollicular purpura, and subperiosteal haematomas, with normal platelet counts.",
+      "say": "Scurvy is caused by nutritional deficiency of vitamin C, or ascorbic acid. Vitamin C is a mandatory cofactor that keeps iron in its reduced ferrous state inside prolyl and lysyl hydroxylase enzymes. Without hydroxylation, collagen chains cannot form the triple helix required for structural stability. Defective collagen weakens capillary basement membranes and perivascular support, producing fragile blood vessels that bleed easily, presenting with bleeding gums, loose teeth, corkscrew hairs, and perifollicular haemorrhages.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Scurvy Vascular Purpura",
+          "points": [
+            "Underlying defect in collagen triple helix synthesis",
+            "Bleeding time, PT, APTT, and platelet count are normal",
+            "Perifollicular hemorrhages and corkscrew hairs",
+            "Rapidly resolves with oral vitamin C supplementation"
+          ]
+        },
+        "right": {
+          "title": "Thrombocytopenic Purpura",
+          "points": [
+            "Underlying defect is quantitative platelet depletion",
+            "Platelet count is severely decreased (<50,000/uL)",
+            "Bleeding time is markedly prolonged",
+            "Petechiae occur spontaneously across dependent skin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Hereditary haemorrhagic telangiectasia, also known as **Osler-Weber-Rendu syndrome**, is an autosomal dominant vascular dysplasia caused by loss-of-function mutations in genes of the transforming growth factor-beta signalling superfamily (ENG encoding endoglin or ACVRL1 encoding ALK1). Defective vascular remodeling causes thin-walled, dilated vascular ectasias lacking muscularis layers that communicate directly between arterioles and venules without an intervening capillary bed. Patients present with recurrent spontaneous epistaxis, widespread mucocutaneous telangiectasias on lips and oral mucosa, and visceral arteriovenous malformations in lungs, liver, and brain.",
+      "say": "Osler-Weber-Rendu disease, or hereditary haemorrhagic telangiectasia, is an autosomal dominant disorder caused by mutations in endoglin or ALK-one in the TGF-beta pathway. Abnormal angiogenesis produces delicate, dilated microvascular channels that lack muscular walls. Patients suffer from childhood with recurrent nosebleeds and develop red telangiectatic macules on the lips, tongue, and fingertips. Visceral arteriovenous malformations in the lungs and brain can cause paradoxical emboli and intracranial abscesses.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Curacao Diagnostic Criteria",
+          "Clinical Description",
+          "Diagnostic Threshold",
+          "Management Considerations"
+        ],
+        "rows": [
+          [
+            "Epistaxis",
+            "Recurrent, spontaneous nocturnal nosebleeds",
+            "Present in >95% of adult patients",
+            "Humidification, tranexamic acid, laser ablation"
+          ],
+          [
+            "Telangiectasias",
+            "Multiple small blanching red ectasias on lips, tongue",
+            "Characteristic anatomical sites",
+            "Local cautery and protection from trauma"
+          ],
+          [
+            "Visceral AVMs",
+            "Pulmonary, cerebral, hepatic, or spinal AVMs",
+            "Confirmed by contrast echocardiogram or CT",
+            "Embolization of pulmonary AVMs prevents brain abscess"
+          ],
+          [
+            "Family History",
+            "First-degree relative with definitive HHT",
+            "Autosomal dominant inheritance pattern",
+            "Targeted genetic screening for ENG and ACVRL1"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinicians must maintain sharp diagnostic separation between vascular purpuras and thrombocytopenic purpuras. In **non-thrombocytopenic vascular purpuras**, including Henoch-Schonlein purpura, scurvy, hereditary haemorrhagic telangiectasia, and senile purpura, vascular extravasation results entirely from endothelial inflammation, perivascular collagen degeneration, or structural dysplasia. Consequently, automated platelet counts, bleeding time, prothrombin time, and activated partial thromboplastin time remain completely normal. Lesions in vascular purpura are characteristically palpable (palpable purpura) due to underlying inflammatory perivascular leukocytoclasis, unlike the flat, non-palpable petechiae of thrombocytopenia.",
+      "say": "A critical bedside distinction is separating vascular purpura from thrombocytopenia. In vascular purpuras like Henoch-Schonlein purpura, scurvy, and senile purpura, the fault lies within the vessel wall itself, not in the platelets or clotting cascade. Platelet counts and coagulation times are completely normal. Furthermore, while thrombocytopenic petechiae are flat and non-palpable, the purpuric lesions in vasculitis are distinctly raised and palpable due to surrounding inflammatory edema and leukocyte infiltration.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vascular Purpura (Vasculitis)",
+          "points": [
+            "Palpable purpura (raised, inflamed, tender lesions)",
+            "Platelet count is normal (>150,000/uL)",
+            "Bleeding time, PT, and APTT are completely normal",
+            "Pathology: Leukocytoclastic post-capillary venulitis"
+          ]
+        },
+        "right": {
+          "title": "Thrombocytopenic Purpura",
+          "points": [
+            "Non-palpable petechiae (flat, pinpoint macules)",
+            "Platelet count is severely reduced (<50,000/uL)",
+            "Bleeding time is markedly prolonged",
+            "Pathology: Simple erythrocyte extravasation without vasculitis"
+          ]
+        }
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "What is the primary antigenic target recognized by IgG autoantibodies in type II heparin-induced thrombocytopenia?",
+      "options": [
+        "Platelet factor 4 (PF4)-heparin multimolecular complexes",
+        "Glycoprotein IIb/IIIa integrin receptor complex",
+        "Endothelial surface thrombomodulin receptors",
+        "ADAMTS13 ultra-large vWF cleaving metalloprotease"
+      ],
+      "correct": 0,
+      "explain": "Type II HIT is caused by IgG antibodies targeting conformational neoantigens on platelet factor 4 (PF4) complexed with polyanionic heparin."
+    },
+    {
+      "q": "What biochemical defect underlies the defective vessel wall integrity in nutritional scurvy?",
+      "options": [
+        "Impaired prolyl and lysyl hydroxylation preventing stable collagen triple helix formation",
+        "Mutations in endoglin and ALK1 impairing TGF-beta receptor signaling",
+        "Autoantibody-mediated destruction of post-capillary venule endothelial cells",
+        "Deficiency of factor XIIIa preventing covalent cross-linking of fibrin meshworks"
+      ],
+      "correct": 0,
+      "explain": "Ascorbic acid (vitamin C) is a required cofactor for prolyl and lysyl hydroxylases; its deficiency impairs collagen triple-helix cross-linking, causing fragile microvessels."
+    },
+    {
+      "q": "Which clinical feature differentiates vasculitic purpura (such as Henoch-Schonlein purpura) from thrombocytopenic purpura?",
+      "options": [
+        "Vascular purpura lesions are characteristically palpable and elevated",
+        "Vascular purpura produces severe prolongation of both PT and APTT",
+        "Vascular purpura causes marked reduction in platelet count under 20,000 / uL",
+        "Vascular purpura causes massive splenomegaly with teardrop poikilocytes"
+      ],
+      "correct": 0,
+      "explain": "Lesions in vasculitic purpuras are palpable purpura due to inflammatory dermal edema and leukocytoclasis, while thrombocytopenic petechiae are flat and non-palpable."
+    }
+  ]
+}

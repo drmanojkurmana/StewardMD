@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-beta-lactams",
+  "subject": "pharmacology",
+  "title": "Amoxicillin, Piperacillin and Clavulanic Acid: Extended Penicillins and Beta Lactamase Inhibitors",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Amoxicillin**, ampicillin's para hydroxylated twin, absorbs almost completely and food independently, tripling oral levels and becoming the world's default oral aminopenicillin: otitis, sinusitis, pneumonia guidelines, Helicobacter pylori regimens and dental prophylaxis all run on it. Its intravenous sibling ampicillin keeps the meningitis and enterococcus intravenous roles from the previous lesson. Diarrhoea and rash, including the EBV trap, are its ordinary tolls.",
+      "say": "Amoxicillin is ampicillin that actually absorbs; most oral penicillin prescribing on Earth is this molecule.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Amoxicillin territory",
+          "points": [
+            "Otitis, sinusitis and community pneumonia guidelines",
+            "H pylori eradication combinations",
+            "High dose regimens stretch pneumococcal cover",
+            "Dental and endocarditis prophylaxis niches"
+          ]
+        },
+        "right": {
+          "title": "Amoxicillin cautions",
+          "points": [
+            "EBV rash mislabelled as allergy",
+            "Diarrhoea and candidiasis with courses",
+            "Beta lactamase producers need inhibitor pairing",
+            "Renal dose adjustment at extremes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Clavulanic acid** changed penicillin history by suicide inhibition: it sacrifices itself to beta lactamases (irreversible binding) so amoxicillin (co amoxiclav) or ticarcillin survives to kill, extending cover to beta lactamase producing staphylococci, Haemophilus, Moraxella, E coli and anaerobes including Bacteroides. Its price is gastrointestinal (dose dependent diarrhoea) and cholestatic hepatitis, classically in older men on prolonged or repeated courses, which caps co amoxiclav enthusiasm for trivial infections.",
+      "say": "Clavulanate dies so amoxicillin may kill; diarrhoea and cholestasis are its invoice.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "enzyme",
+            "label": "Bacterial beta lactamase attacks the penicillin"
+          },
+          {
+            "id": "clav",
+            "label": "Clavulanate suicide inhibits the enzyme"
+          },
+          {
+            "id": "survive",
+            "label": "Amoxicillin survives to bind PBPs"
+          },
+          {
+            "id": "spectrum",
+            "label": "Anaerobes and beta lactamase producers covered"
+          }
+        ],
+        "edges": [
+          [
+            "enzyme",
+            "clav"
+          ],
+          [
+            "clav",
+            "survive"
+          ],
+          [
+            "survive",
+            "spectrum"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Piperacillin**, the ureidopenicillin, reaches Pseudomonas aeruginosa, Klebsiella and broader Gram negatives plus anaerobes, and paired with tazobactam next lesson became hospital empiricism's backbone (pip tazo) for sepsis, nosocomial pneumonia, intra abdominal and febrile neutropenic cover. It is intravenous only, dosed frequently or by extended infusion to honour time dependent killing, and its sodium load and platelet dysfunction at high doses join the monitoring list.",
+      "say": "Piperacillin is the hospital penicillin: Pseudomonas breadth, intravenous only, infused long to kill by time.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Piperacillin reach",
+          "points": [
+            "Pseudomonas and broad Gram negatives",
+            "Anaerobes including Bacteroides",
+            "Enterococcus (faecalis) retained",
+            "Extended infusions maximise time above MIC"
+          ]
+        },
+        "right": {
+          "title": "Piperacillin limits",
+          "points": [
+            "Beta lactamase labile without tazobactam",
+            "Frequent dosing burden (every 4 to 6 hours)",
+            "Sodium load in cardiac failure",
+            "Cytopenias and platelet effects on long courses"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Beta lactamase inhibitor** generations widen behind clavulanate: sulbactam (with ampicillin, and intrinsic Acinetobacter activity of its own), tazobactam (with piperacillin and ceftolozane), and the newer non beta lactam inhibitors avibactam and vaborbactam that neutralise carbapenemases (KPC) when married to ceftazidime or meropenem respectively. Each pairing is a spectrum argument that must be recited, not assumed, because inhibitor reach varies by enzyme class (Ambler A to D).",
+      "say": "Name the inhibitor's enzyme reach before trusting the pair; clavulanate cannot stop a carbapenemase.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic suicide inhibitors",
+          "points": [
+            "Clavulanate with amoxicillin (oral empire)",
+            "Sulbactam with ampicillin, Acinetobacter accent",
+            "Tazobactam with piperacillin (hospital backbone)",
+            "Class A enzymes broadly, others patchy"
+          ]
+        },
+        "right": {
+          "title": "New generation inhibitors",
+          "points": [
+            "Avibactam: KPC and AmpC reach (with ceftazidime)",
+            "Vaborbactam: KPC focus (with meropenem)",
+            "Relebactam: similar KPC territory (with imipenem)",
+            "Metallo beta lactamases (class B) escape all three"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Co amoxiclav's cholestatic** hepatitis deserves its own vigilance: onset during or weeks after courses (delayed presentations fool attribution), risk concentrated in males over 55 and repeated exposure, usually self limited over weeks yet occasionally severe, and a history of it contraindicates future clavulanate in any costume. Amoxicillin alone almost never shares the blame, which is why the inhibitor, not the penicillin, owns the warning and the alternative plan (amoxicillin plus metronidazole where anaerobic cover drove the choice).",
+      "say": "Co amoxiclav jaundice is clavulanate's delayed invoice; once paid, never prescribe the inhibitor again.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "course",
+            "label": "Co amoxiclav course, often prolonged or repeated"
+          },
+          {
+            "id": "jaundice",
+            "label": "Cholestatic jaundice during or weeks after"
+          },
+          {
+            "id": "resolve",
+            "label": "Resolution over weeks, rarely severe"
+          },
+          {
+            "id": "ban",
+            "label": "Clavulanate banned lifelong, alternatives documented"
+          }
+        ],
+        "edges": [
+          [
+            "course",
+            "jaundice"
+          ],
+          [
+            "jaundice",
+            "resolve"
+          ],
+          [
+            "resolve",
+            "ban"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Helicobacter pylori eradication** keeps amoxicillin irreplaceable: clarithromycin triple therapy (PPI, amoxicillin, clarithromycin) where resistance permits, bismuth quadruple where it does not, and amoxicillin's near zero resistance (unlike clarithromycin and metronidazole) makes it the regimen's spine, with penicillin allergy genuinely complicating eradication choices. Test of cure weeks later closes a prescription that began as dyspepsia.",
+      "say": "Amoxicillin never meets H pylori resistance; it is the spine every eradication regimen leans on.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Eradication architecture",
+          "points": [
+            "Clarithromycin triple where susceptibility allows",
+            "Bismuth quadruple where resistance or allergy dictates",
+            "Amoxicillin resistance near zero globally",
+            "Test of cure at least 4 weeks after therapy"
+          ]
+        },
+        "right": {
+          "title": "Failure stewardship",
+          "points": [
+            "Never repeat clarithromycin after failure",
+            "Levofloxacin or rifabutin salvage by expertise",
+            "Penicillin allergy delabelling expands options",
+            "Adherence explains most first failures"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**High dose amoxicillin** stretches pneumococcal cover by brute concentration: 80 to 90 mg per kg in children or 3 to 4 grams daily in adults keeps time above MIC for intermediately resistant pneumococci at respiratory sites, which is why guidelines prefer dose escalation over class abandonment for otitis and sinusitis in penicillin non severe allergy histories. The pharmacodynamic lesson generalises: beta lactams buy resistance margin with dose and infusion time before they surrender.",
+      "say": "Dose up before class up: beta lactams purchase resistant pneumococci with concentration and time.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "intermediate",
+            "label": "Intermediately resistant pneumococcus at respiratory site"
+          },
+          {
+            "id": "high",
+            "label": "High dose amoxicillin prescribed"
+          },
+          {
+            "id": "time",
+            "label": "Time above MIC restored to killing range"
+          },
+          {
+            "id": "cure",
+            "label": "Clinical cure without broader class exposure"
+          }
+        ],
+        "edges": [
+          [
+            "intermediate",
+            "high"
+          ],
+          [
+            "high",
+            "time"
+          ],
+          [
+            "time",
+            "cure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Aminopenicillin stewardship trims** the empire honestly: viral respiratory infections take no antibiotic, acute otitis media in many children takes analgesia and observation first, and co amoxiclav is reserved where beta lactamase probability (recent antibiotics, conjunctivitis otitis syndrome, treatment failure) justifies its adverse ledger. Amoxicillin remains the most defensible first prescription in primary care precisely because its resistance, adverse and cost accounts all balance.",
+      "say": "Amoxicillin first, co amoxiclav on evidence, nothing for viruses: the primary care hierarchy in one line.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Amoxicillin first",
+          "points": [
+            "Streptococcal pharyngitis and otitis by guideline",
+            "Community pneumonia oral step therapy",
+            "Observation options in selected otitis",
+            "Narrow, cheap and familiarly tolerated"
+          ]
+        },
+        "right": {
+          "title": "Co amoxiclav on justification",
+          "points": [
+            "Recent antibiotic exposure or treatment failure",
+            "Conjunctivitis otitis (Haemophilus signal)",
+            "Bites and diabetic foot polymicrobial cover",
+            "Shortest effective course, gut counselled"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-significance-tests-mann-whitney-u-test",
+  "subject": "community-medicine",
+  "module": "cm-significance-tests",
+  "title": "Non Parametric Tests, Correlation, and Regression",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "When parametric tests fail",
+      "tx": "**Non parametric tests** drop the normality assumption by analysing ranks instead of raw values, suiting skewed data, ordinal scales, small samples, and outliers that would poison means. They sacrifice some power when data truly are normal (about five percent efficiency loss for the classic rank tests), a small insurance premium most field datasets should gladly pay.",
+      "say": "Rank tests trade a little power for freedom from normality. Skewed, ordinal, or tiny data demand them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Parametric (t, ANOVA)",
+          "points": ["Uses raw values and means", "Assumes near normal data", "Maximum power when assumptions hold"]
+        },
+        "right": {
+          "title": "Non parametric (rank based)",
+          "points": ["Uses ranks of values", "No normality assumption", "Suits skew, ordinal, small n"]
+        }
+      }
+    },
+    {
+      "title": "Mann Whitney U test",
+      "tx": "The **Mann Whitney U test** (Wilcoxon rank sum) is the non parametric twin of the unpaired t test: pool both groups, rank all values, and compare rank sums; if groups match, ranks intermingle evenly. It compares distributions (often summarised as medians) for two independent groups: hospital stay by sex, antibody titres by vaccination status, pain scores by analgesia arm.",
+      "say": "Mann Whitney ranks both groups together and compares rank sums. It is the unpaired t test without normality.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "mw1", "label": "Pool both groups, rank all values" },
+          { "id": "mw2", "label": "Sum ranks within each group" },
+          { "id": "mw3", "label": "Compare rank sums against chance" }
+        ],
+        "edges": [["mw1", "mw2"], ["mw2", "mw3"]]
+      }
+    },
+    {
+      "title": "Wilcoxon signed rank test",
+      "tx": "For paired data the **Wilcoxon signed rank test** ranks the absolute within pair differences and restores their signs, testing whether positive and negative ranks balance: the non parametric twin of the paired t test. It suits before after pain scores, skewed biochemical changes, and small paired samples where difference normality cannot be trusted.",
+      "say": "Signed rank is the paired twin: rank the changes, keep their signs, test the balance.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Design", "Parametric versus rank test"],
+        "rows": [
+          ["Two independent groups", "Unpaired t versus Mann Whitney U"],
+          ["Paired before after", "Paired t versus Wilcoxon signed rank"],
+          ["Three plus independent groups", "ANOVA versus Kruskal Wallis"],
+          ["Paired categories", "McNemar (categorical special case)"]
+        ]
+      }
+    },
+    {
+      "title": "Kruskal Wallis test",
+      "tx": "Extending ranks to three or more independent groups gives the **Kruskal Wallis test**, the non parametric ANOVA: rank everything, compare average ranks per group with an H statistic judged on chi square. A significant result needs post hoc pairwise rank tests with correction. Typical uses compare ordinal scores or skewed costs across three treatment arms or districts.",
+      "say": "Kruskal Wallis is ANOVA on ranks for three or more groups. Follow significance with corrected pairwise tests.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "kw1", "label": "Rank all values across groups" },
+          { "id": "kw2", "label": "Compare mean ranks by H statistic" },
+          { "id": "kw3", "label": "Post hoc pairs if H significant" }
+        ],
+        "edges": [["kw1", "kw2"], ["kw2", "kw3"]]
+      }
+    },
+    {
+      "title": "Correlation: strength of association",
+      "tx": "**Correlation** quantifies linear association between two continuous variables (height with weight, dose with response) without claiming causation. The scatter plot comes first: correlation computed on a curved or outlier ridden cloud lies confidently. Correlation describes this sample's pattern; regression (two steps on) will weaponise it for prediction, and examiners separate the twins by asking which predicts (regression).",
+      "say": "Correlation measures linear association, never causation. Always look at the scatter before trusting the number.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Correlation asks",
+          "points": ["How strongly are they associated?", "Symmetric: x with y equals y with x", "One coefficient, no prediction"]
+        },
+        "right": {
+          "title": "Regression asks",
+          "points": ["What y follows from this x?", "Asymmetric: prediction direction matters", "Equation with slope and intercept"]
+        }
+      }
+    },
+    {
+      "title": "Pearson versus Spearman coefficients",
+      "tx": "The **Pearson correlation coefficient (r)** measures linear association on raw values, needing near normal continuous data, while Spearman's rank coefficient repeats the calculation on ranks, tolerating skew, ordinal data, and outliers. Both span minus one to plus one: sign gives direction, absolute value gives strength (above zero point seven strong, zero point four to zero point seven moderate, below weak, by common teaching bands).",
+      "say": "Pearson uses values; Spearman uses ranks. Both run minus one to plus one for direction and strength.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Absolute r", "Strength wording"],
+        "rows": [
+          ["0.9 to 1.0", "Very strong"],
+          ["0.7 to 0.9", "Strong"],
+          ["0.4 to 0.7", "Moderate"],
+          ["Below 0.4", "Weak"]
+        ]
+      }
+    },
+    {
+      "title": "Coefficient of determination",
+      "tx": "Squaring Pearson's r gives the **coefficient of determination (r squared)**: the share of variation in y explained by x. An r of zero point eight (impressive sounding) explains only sixty four percent of variation, leaving a third to other causes. This deflation is the honest antidote to correlation hype in abstracts and the press, and examinations test the squaring explicitly.",
+      "say": "Square r before celebrating. Zero point eight explains only sixty four percent of the variation.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "r21", "label": "Pearson r equals 0.8" },
+          { "id": "r22", "label": "Square it: 0.64" },
+          { "id": "r23", "label": "64 percent explained, 36 percent other causes" }
+        ],
+        "edges": [["r21", "r22"], ["r22", "r23"]]
+      }
+    },
+    {
+      "title": "Simple linear regression",
+      "tx": "**Simple linear regression** fits y equals a plus b x by least squares: intercept a is the predicted y at x zero, slope b is the change in y per unit x (regression coefficient). The line predicts within the observed x range; extrapolation beyond it (adult doses to neonates by line extension) is the classic abuse. Residual scatter around the line grades the fit honestly.",
+      "say": "Regression draws the prediction line: intercept plus slope times x. Never extrapolate beyond observed data.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Regression element", "Meaning"],
+        "rows": [
+          ["Intercept a", "Predicted y when x is zero"],
+          ["Slope b", "Change in y per one unit x"],
+          ["Residual", "Observed minus predicted value"],
+          ["Least squares", "Line minimising squared residuals"]
+        ]
+      }
+    },
+    {
+      "title": "Correlation traps that cost marks",
+      "tx": "Closing traps for **correlation and regression questions**: correlation never proves causation (confounding lurks), range restriction shrinks r, one outlier can invent or destroy r, ecological correlations over group averages exceed individual ones, and regression to the mean makes extreme first measurements improve spontaneously (the placebo free explanation of many before after claims). Each trap has ended examination answers and journal claims alike.",
+      "say": "Association is not causation, outliers forge coefficients, and extreme values regress to the mean on remeasurement.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Trust the coefficient when",
+          "points": ["Scatter looks linear without wild outliers", "Full range of x represented", "Confounders considered separately"]
+        },
+        "right": {
+          "title": "Distrust it when",
+          "points": ["One point drives the line", "Groups averaged (ecological data)", "Extreme group remeasured improvement claimed"]
+        }
+      }
+    }
+  ]
+}

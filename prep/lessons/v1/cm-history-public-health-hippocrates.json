@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-history-public-health-hippocrates",
+ "subject": "community-medicine",
+ "module": "cm-history-public-health",
+ "title": "Hippocrates to Koch: Snow, Jenner, Pasteur and the Germ Theory",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Hippocrates separates medicine from magic",
+   "tx": "**Hippocrates** of Cos (460 to 370 BC), called the father of medicine, studied and classified disease by observation and reasoning, challenging magical explanation. His school compiled the Corpus Hippocraticum and the first scientific clinical case histories. The Hippocratic oath still anchors medical ethics, demanding integrity from every doctor who takes it.",
+   "say": "Start in ancient Greece. A physician from Cos classified disease by observation and reasoning instead of magic. His school left the first scientific case histories, and his oath still anchors medical ethics today.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Contribution", "Detail"],
+    "rows": [
+     ["Clinical method", "Observation and reasoning over magic"],
+     ["Corpus Hippocraticum", "Compiled writings, first case histories"],
+     ["Hippocratic oath", "Lasting code of medical ethics"]
+    ]
+   }
+  },
+  {
+   "title": "The first epidemiologist",
+   "tx": "As an **epidemiologist**, Hippocrates distinguished epidemic diseases from endemic ones and hunted causes in climate, water, clothing, diet and habits of eating and drinking. His book Airs, Waters and Places reads as an early treatise on social medicine and hygiene. That environmental lens, man in relation to surroundings, still opens every community diagnosis today.",
+   "say": "The same man earns a second title. He separated epidemic from endemic disease and searched climate, water, diet and habits for causes. His work on airs, waters and places still models how surroundings shape disease.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Exposure he studied", "Modern echo"],
+    "rows": [
+     ["Climate and season", "Seasonal disease patterns"],
+     ["Water source", "Waterborne outbreak investigation"],
+     ["Diet and drinking habits", "Lifestyle risk factor surveys"]
+    ]
+   }
+  },
+  {
+   "title": "John Snow and the Broad Street pump",
+   "tx": "**John Snow** studied cholera in London from 1848 to 1854 and established polluted drinking water as the vehicle, before any vibrio had been seen. His spot map clustered deaths around the Broad Street pump, and removing the pump handle interrupted the outbreak. Snow therefore founded modern outbreak investigation: define cases, map them, compare exposure, then act.",
+   "say": "Move to Victorian London. An epidemiologist mapped cholera deaths clustering around one pump and had its handle removed, proving water carried the disease before the germ was known. Case definition, mapping, exposure comparison, action: the template still holds.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Cholera deaths mapped"},
+     {"id": "b", "label": "Cluster around one pump"},
+     {"id": "c", "label": "Water exposure suspected"},
+     {"id": "d", "label": "Pump handle removed"},
+     {"id": "e", "label": "Outbreak interrupted"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]]
+   }
+  },
+  {
+   "title": "Budd, typhoid and the death of miasma",
+   "tx": "**William Budd** reached the parallel conclusion for typhoid fever in rural England, showing spread by drinking water rather than miasma or sewer gas. Two waterborne proofs, cholera and typhoid, created public demand for clean water when the Thames served as both drinking source and sewage depository. Legislation followed, culminating in the Public Health Act of 1875.",
+   "say": "A second proof sealed the argument. Typhoid also travelled by drinking water, not foul air. With the Thames acting as both water source and sewer, the public demanded clean water, and sweeping public health legislation followed.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Miasma explanation",
+     "points": ["Disease blamed on foul air", "Sewer gas held responsible", "No vehicle to interrupt"]
+    },
+    "right": {
+     "title": "Waterborne proof",
+     "points": ["Cholera and typhoid traced to water", "Specific vehicle can be cut", "Clean water demand follows"]
+    }
+   }
+  },
+  {
+   "title": "Jenner and vaccination against smallpox",
+   "tx": "**Edward Jenner** showed in 1796 that cowpox material could protect against smallpox, giving medicine vaccination, named from vacca, the cow. Unlike variolation with smallpox matter itself, cowpox inoculation carried far less risk to the recipient and contacts. That single experiment opened the road that ended with global smallpox eradication, still the only completed eradication of a human disease.",
+   "say": "In 1796 a country doctor showed cowpox material protects against smallpox, with far less danger than using smallpox matter itself. Vaccination was born, and the road opened toward the only completed global eradication of a human disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Variolation",
+     "points": ["Uses smallpox material itself", "Can start real smallpox", "Risk to recipient and contacts"]
+    },
+    "right": {
+     "title": "Vaccination",
+     "points": ["Uses cowpox material", "Milder reaction, cross protection", "Safer for recipient and contacts"]
+    }
+   }
+  },
+  {
+   "title": "Chinese variolation before Jenner",
+   "tx": "**Variolation** itself began far earlier: Chinese physicians practised inoculation to prevent smallpox centuries before Jenner, holding that the great doctor treats someone not yet ill. Their barefoot doctor system and acupuncture later drew worldwide attention. Credit questions in exams often test this sequence: variolation first, vaccination after, eradication last.",
+   "say": "Jenner stood on older shoulders. Chinese physicians inoculated against smallpox centuries earlier, teaching that the great doctor treats people before illness. Exams test the order: variolation first, vaccination next, eradication last.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Variolation in early practice"},
+     {"id": "b", "label": "Jenner vaccination 1796"},
+     {"id": "c", "label": "Global eradication achieved"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Pasteur disproves spontaneous generation",
+   "tx": "**Louis Pasteur** demonstrated bacteria in air in 1860 and disproved spontaneous generation, then advanced the germ theory of disease in 1873. His swan neck flasks showed broth stays sterile until dust borne microbes enter. Fermentation, wine diseases and silkworm infections all yielded to the same logic: invisible living agents, specific to each process.",
+   "say": "A French chemist broke the old theory. Broth in swan neck flasks stayed sterile until airborne dust entered, killing spontaneous generation. By 1873 he had advanced the germ theory: invisible living agents, specific to each disease process.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Year", "Milestone"],
+    "rows": [
+     ["1860", "Bacteria shown in air, spontaneous generation disproved"],
+     ["1873", "Germ theory of disease advanced"],
+     ["1877", "Anthrax shown to be bacterial in cause"]
+    ]
+   }
+  },
+  {
+   "title": "Koch and the golden age of bacteriology",
+   "tx": "**Robert Koch** showed in 1877 that anthrax was caused by a bacterium, and microbe discoveries followed in quick succession: typhoid bacillus and pneumococcus in 1880, tubercle bacillus in 1882, cholera vibrio in 1883 and diphtheria bacillus in 1884. His postulates gave the hunt its rules: find the organism in every case, isolate, reproduce disease, recover it again.",
+   "say": "A German physician turned discovery into method. Anthrax fell first in 1877, then typhoid, tubercle and cholera organisms within seven years. His postulates set the rules: present in every case, isolated, able to reproduce disease, recovered again.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Organism in every case"},
+     {"id": "b", "label": "Isolated in culture"},
+     {"id": "c", "label": "Disease reproduced in host"},
+     {"id": "d", "label": "Organism recovered again"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Where the postulates fail",
+   "tx": "**Koch postulates** fail where carriers exist, where organisms cannot be cultured, or where one agent causes several diseases and several agents cause one syndrome. The tubercle bacillus, for instance, cannot be isolated from every person with tuberculosis disease. Exams pair the postulates with these limits, and with viruses unknown in Koch's lifetime.",
+   "say": "Know the limits too. Carriers break the first rule, uncultivable organisms break the second, and viruses were unknown in that era. The tubercle bacillus cannot be recovered from every tuberculosis patient, a favourite exam pairing.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Postulate demand", "Where it fails"],
+    "rows": [
+     ["Organism in every case", "Healthy carriers exist"],
+     ["Isolation in culture", "Some organisms resist culture"],
+     ["One agent, one disease", "One agent, several diseases occur"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

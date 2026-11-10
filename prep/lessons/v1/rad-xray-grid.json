@@ -1,0 +1,258 @@
+{
+    "v": 1,
+    "id": "rad-xray-grid",
+    "subject": "radiology",
+    "module": "rad-xray",
+    "title": "Scatter Radiation Control: Antiscatter Grids and the Heel Effect",
+    "minutes": 5,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Antiscatter Grid Design",
+            "tx": "**Antiscatter grid design** employs alternating thin strips of radiopaque lead separated by radiolucent interspaces made of aluminium or organic carbon fibre. Positioned between the patient and the image receptor, the grid selectively transmits primary photons travelling along straight lines from the focal spot while absorbing scattered Compton photons travelling at divergent oblique angles, markedly reducing radiographic fog.",
+            "say": "Antiscatter grid design employs alternating thin strips of radiopaque lead separated by radiolucent interspaces made of aluminium or organic carbon fibre. Positioned between the patient and the image receptor, the grid selectively transmits primary photons travelling along straight lines from the focal spot while absorbing scattered Compton photons travelling at divergent oblique angles, markedly reducing radiographic fog.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Primary Beam Photons",
+                    "points": [
+                        "Travel along straight divergent vectors from focal spot",
+                        "Parallel to the orientation of lead strips",
+                        "Pass cleanly through radiolucent interspaces to detector"
+                    ]
+                },
+                "right": {
+                    "title": "Compton Scatter Photons",
+                    "points": [
+                        "Deflected obliquely within patient soft tissues",
+                        "Strike lead strips at wide incident angles",
+                        "Absorbed before degrading detector contrast"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Grid Ratio and Scatter Cleanup",
+            "tx": "**Grid ratio determination** defines the efficiency of scatter removal, calculated as the physical height of the lead strips divided by the width of the radiolucent interspace. Diagnostic grids feature ratios ranging from 5 to 1 up to 16 to 1. High-ratio grids provide superior scatter cleanup and radiographic contrast, but require precise beam alignment to avoid absorbing primary rays.",
+            "say": "Grid ratio determination defines the efficiency of scatter removal, calculated as the physical height of the lead strips divided by the width of the radiolucent interspace. Diagnostic grids feature ratios ranging from 5 to 1 up to 16 to 1. High-ratio grids provide superior scatter cleanup and radiographic contrast, but require precise beam alignment to avoid absorbing primary rays.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Grid Ratio",
+                    "Clean-up Efficiency",
+                    "Contrast Improvement",
+                    "Alignment Sensitivity"
+                ],
+                "rows": [
+                    [
+                        "5:1 or 6:1",
+                        "Modest (absorbs 80% scatter)",
+                        "Moderate contrast gain",
+                        "Wide positioning tolerance; ideal for mobile X-ray"
+                    ],
+                    [
+                        "8:1 or 10:1",
+                        "High (absorbs 90% scatter)",
+                        "Substantial contrast gain",
+                        "Standard general radiography table grid"
+                    ],
+                    [
+                        "12:1 or 16:1",
+                        "Superior (absorbs 95% scatter)",
+                        "Maximum radiographic contrast",
+                        "Severe cutoff risk; dedicated bucky chest stands"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "The Bucky Factor Dose Cost",
+            "tx": "**Bucky factor dose penalty** reflects the increased radiation exposure necessary to maintain optical density when an antiscatter grid is introduced. Because the grid absorbs not only scatter but also a fraction of primary photons, the Bucky factor ranges from 2 to 6. Radiographers must increase the milliampere-seconds by this factor, increasing patient dose proportionally.",
+            "say": "Bucky factor dose penalty reflects the increased radiation exposure necessary to maintain optical density when an antiscatter grid is introduced. Because the grid absorbs not only scatter but also a fraction of primary photons, the Bucky factor ranges from 2 to 6. Radiographers must increase the milliampere-seconds by this factor, increasing patient dose proportionally.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Grid Ratio",
+                    "Bucky Factor (70 kVp)",
+                    "Bucky Factor (120 kVp)",
+                    "mAs Compensation Factor"
+                ],
+                "rows": [
+                    [
+                        "No Grid",
+                        "1.0",
+                        "1.0",
+                        "Baseline 1x exposure"
+                    ],
+                    [
+                        "5:1 Grid",
+                        "2.5",
+                        "3.0",
+                        "Increase mAs by 2.5x to 3x"
+                    ],
+                    [
+                        "8:1 Grid",
+                        "3.5",
+                        "4.0",
+                        "Increase mAs by 3.5x to 4x"
+                    ],
+                    [
+                        "12:1 Grid",
+                        "4.0",
+                        "5.0",
+                        "Increase mAs by 4x to 5x"
+                    ],
+                    [
+                        "16:1 Grid",
+                        "4.5",
+                        "6.0",
+                        "Increase mAs by 4.5x to 6x"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Moving Potter-Bucky Mechanism",
+            "tx": "**Moving Potter-Bucky diaphragm** systems prevent fine lead strip shadows from superimposing onto the final anatomical image. Invented by Hollis Potter, the mechanism rapidly oscillates the grid back and forth perpendicular to the lead strip orientation during the exposure. This deliberate lateral motion blurs the sharp radio-opaque grid lines across adjacent detector pixels, leaving a clean image.",
+            "say": "Moving Potter-Bucky diaphragm systems prevent fine lead strip shadows from superimposing onto the final anatomical image. Invented by Hollis Potter, the mechanism rapidly oscillates the grid back and forth perpendicular to the lead strip orientation during the exposure. This deliberate lateral motion blurs the sharp radio-opaque grid lines across adjacent detector pixels, leaving a clean image.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Stationary Grid Pattern",
+                    "points": [
+                        "Grid remains motionless during exposure",
+                        "Thin parallel lead lines visible on image",
+                        "Can generate moir\u00e9 interference artefacts on digital plates"
+                    ]
+                },
+                "right": {
+                    "title": "Potter-Bucky Moving Grid",
+                    "points": [
+                        "Reciprocates laterally during tube activation",
+                        "Blurs out lead lines entirely across receptor",
+                        "Produces smooth uniform diagnostic background"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Grid Cutoff Manifestations",
+            "tx": "**Grid cutoff artefacts** occur when geometric errors cause lead strips to absorb primary, non-scattered X-ray photons. Common causes include angling the central beam against the grid strips, centering off-axis relative to a focused grid, positioning the tube outside the focal distance range, or placing a focused grid upside down, which creates intense central exposure flanked by complete bilateral peripheral cutoff.",
+            "say": "Grid cutoff artefacts occur when geometric errors cause lead strips to absorb primary, non-scattered X-ray photons. Common causes include angling the central beam against the grid strips, centering off-axis relative to a focused grid, positioning the tube outside the focal distance range, or placing a focused grid upside down, which creates intense central exposure flanked by complete bilateral peripheral cutoff.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Alignment Error",
+                    "Primary Beam Impact",
+                    "Radiographic Presentation"
+                ],
+                "rows": [
+                    [
+                        "Upside-Down Focused Grid",
+                        "Central rays pass, peripheral rays blocked",
+                        "Severe bilateral underexposure and light margins"
+                    ],
+                    [
+                        "Off-Center Beam",
+                        "Uniform lead strip interception across field",
+                        "Overall decrease in optical density across entire image"
+                    ],
+                    [
+                        "Off-Focus Distance Error",
+                        "Focal-to-grid distance mismatch",
+                        "Peripheral image cut-off with light outer margins"
+                    ],
+                    [
+                        "Off-Level Grid Angle",
+                        "Beam angled across angled lead strips",
+                        "Uniform partial cut-off and global density loss"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "The Anode Heel Effect",
+            "tx": "**Anode heel effect attenuation** produces an uneven intensity distribution across the X-ray field. Photons originating below the anode surface that emerge toward the anode side must traverse a greater thickness of tungsten target metal than those directed toward the cathode. This self-absorption reduces beam intensity on the anode side by up to 30 to 40 percent relative to the cathode.",
+            "say": "Anode heel effect attenuation produces an uneven intensity distribution across the X-ray field. Photons originating below the anode surface that emerge toward the anode side must traverse a greater thickness of tungsten target metal than those directed toward the cathode. This self-absorption reduces beam intensity on the anode side by up to 30 to 40 percent relative to the cathode.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Anode Side of Beam",
+                    "points": [
+                        "Photons pass through thicker target path",
+                        "Substantial self-attenuation reduces beam intensity",
+                        "Output drops to approximately 75 percent of central axis"
+                    ]
+                },
+                "right": {
+                    "title": "Cathode Side of Beam",
+                    "points": [
+                        "Photons exit with minimal tungsten self-absorption",
+                        "Significantly higher photon fluence and intensity",
+                        "Output reaches up to 120 percent of central axis"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Clinical Positioning and Heel Effect",
+            "tx": "**Cathode orientation strategy** utilizes the heel effect to balance optical density across body parts with unequal thicknesses. Radiographers deliberately orient the more intense cathode side of the X-ray tube toward the thicker anatomical segment. In thoracic spine imaging, the cathode faces the thicker lower thorax; in femur imaging, it faces the proximal hip; in mammography, it faces the posterior chest wall.",
+            "say": "Cathode orientation strategy utilizes the heel effect to balance optical density across body parts with unequal thicknesses. Radiographers deliberately orient the more intense cathode side of the X-ray tube toward the thicker anatomical segment. In thoracic spine imaging, the cathode faces the thicker lower thorax; in femur imaging, it faces the proximal hip; in mammography, it faces the posterior chest wall.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Anatomical Examination",
+                    "Cathode End Placement",
+                    "Anode End Placement"
+                ],
+                "rows": [
+                    [
+                        "Thoracic Spine",
+                        "Lower thoracic region (thicker)",
+                        "Upper thoracic/cervical region (thinner)"
+                    ],
+                    [
+                        "Femur Radiography",
+                        "Proximal thigh and hip (thicker)",
+                        "Distal knee joint (thinner)"
+                    ],
+                    [
+                        "Abdominal Radiography",
+                        "Upper abdomen and diaphragm (thicker)",
+                        "Lower pelvis (thinner)"
+                    ],
+                    [
+                        "Mammography",
+                        "Posterior chest wall (thicker base)",
+                        "Anterior nipple region (thinner)"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Fluoroscopic Tube Currents",
+            "tx": "**Fluoroscopy tube currents** operate on low continuous levels between 0.5 and 5 milliamperes, contrasting sharply with radiographic exposures that employ 100 to 1000 milliamperes. However, because fluoroscopy runs continuously for several minutes, the cumulative radiation dose to the patient and operator can be substantial. Modern units utilize pulsed fluoroscopy, firing short millisecond pulses to halve overall procedure exposure.",
+            "say": "Fluoroscopy tube currents operate on low continuous levels between 0.5 and 5 milliamperes, contrasting sharply with radiographic exposures that employ 100 to 1000 milliamperes. However, because fluoroscopy runs continuously for several minutes, the cumulative radiation dose to the patient and operator can be substantial. Modern units utilize pulsed fluoroscopy, firing short millisecond pulses to halve overall procedure exposure.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Continuous Fluoroscopy",
+                    "points": [
+                        "Operates at continuous 0.5 to 5 mA current",
+                        "Draws uninterrupted electron flow during pedal depression",
+                        "Substantial cumulative dose during prolonged procedures"
+                    ]
+                },
+                "right": {
+                    "title": "Pulsed Fluoroscopy",
+                    "points": [
+                        "Emits rapid pulses at 7.5, 15, or 30 frames per second",
+                        "Maintains real-time visualization with lower beam-on time",
+                        "Reduces patient and scatter dose by 30 to 70 percent"
+                    ]
+                }
+            }
+        }
+    ],
+    "quiz": []
+}

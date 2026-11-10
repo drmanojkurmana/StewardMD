@@ -1,0 +1,240 @@
+{
+  "key": "ped-development-denver-developmental-screening",
+  "v": 1,
+  "module": "ped-development",
+  "subject": "paediatrics",
+  "title": "Denver Screening, Developmental Quotient and Delay",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Standardized population surveillance detects subtle developmental deficits before formal schooling. The **Denver II screening** tool evaluates performance in children from birth to six years of age across 125 individual tasks organized into four major functional sectors. It is specifically designed as a quick screening instrument for asymptomatic populations rather than a diagnostic IQ or achievement assessment.",
+      "say": "The Denver II screening test evaluates asymptomatic children from birth through six years of age. It surveys 125 tasks divided across four domains to detect unsuspected developmental delays without providing an intellectual diagnosis.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/skills/skill-annex-paed-milestones.webp",
+        "alt": "Denver II developmental screening quadrant layout assessing performance streams across preschool years.",
+        "caption": "Denver II developmental screening quadrant layout assessing performance streams across preschool years.",
+        "ar": 1.5
+      }
+    },
+    {
+      "tx": "The assessment categorizes neurodevelopment into four separate functional streams. The **four developmental domains** of the Denver II comprise personal-social, fine motor-adaptive, language, and gross motor performance. Personal-social tasks measure autonomy and interpersonal engagement, fine motor-adaptive evaluates hand-eye coordination and problem-solving with objects, language measures expressive and receptive communication, and gross motor tracks balance and locomotion.",
+      "say": "Denver II assesses four developmental sectors: personal social, fine motor adaptive, language, and gross motor. Evaluating these streams independently prevents isolated motor or speech handicaps from obscuring total child capability.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Domain Name",
+          "Evaluated Skills",
+          "Representative 12-Month Task",
+          "Representative 3-Year Task"
+        ],
+        "rows": [
+          [
+            "Personal-Social",
+            "Self-help and socialization",
+            "Drinks from cup unassisted",
+            "Puts on clothing independently"
+          ],
+          [
+            "Fine Motor-Adaptive",
+            "Digital coordination, drawing",
+            "Bangs two cubes held in hands",
+            "Copies vertical circle accurately"
+          ],
+          [
+            "Language",
+            "Phonation, comprehension",
+            "Says one word with meaning",
+            "Names one colour correctly"
+          ],
+          [
+            "Gross Motor",
+            "Balance, mobility, posture",
+            "Stands alone momentarily",
+            "Jumps broad distance forward"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Interpreting developmental capability in preterm infants requires biological chronological correction. The clinician calculates **corrected gestational age** by subtracting the total weeks of prematurity from the infant's chronological postnatal age, and this correction is maintained for all growth and developmental assessments until twenty-four months of age. Using uncorrected age falsely penalizes prematurely born children on norm-referenced developmental tools.",
+      "say": "For premature babies, calculate corrected age by subtracting weeks of prematurity from postnatal age until twenty-four months. Correcting age avoids misdiagnosing healthy preterm infants with developmental delay.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chronological Age Formula",
+          "points": [
+            "Calendar days elapsed since physical delivery, regardless of completed gestational weeks at birth"
+          ]
+        },
+        "right": {
+          "title": "Corrected Age Formula",
+          "points": [
+            "Postnatal age minus weeks born before 40 weeks gestation",
+            "Utilized strictly up to 2 years of age"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Each test item on the Denver score sheet is depicted as a horizontal bar spanning age percentiles. An item is classified as a **developmental delay** when the child completely fails or refuses a task that is normally passed by ninety percent of younger normative peers. When a child fails an item passed by seventy-five to ninety percent of peers, the result is scored as a caution.",
+      "say": "A developmental delay is documented when a child fails an activity passed by ninety percent of younger peers. Failing an item passed by seventy-five to ninety percent is marked as a caution.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Performance Classification",
+          "Item Bar Position",
+          "Normative Threshold",
+          "Clinical Action"
+        ],
+        "rows": [
+          [
+            "Normal performance",
+            "Passes item within bar",
+            "Up to 75th percentile passed",
+            "Continue routine health visits"
+          ],
+          [
+            "Caution item",
+            "Fails or refuses task",
+            "75th to 90th percentile failed",
+            "Re-screen within 3 months"
+          ],
+          [
+            "Delay item",
+            "Fails or refuses task",
+            "Exceeds 90th percentile line",
+            "Comprehensive developmental audit"
+          ],
+          [
+            "Untested item",
+            "Caregiver reports unable",
+            "Beyond current capability",
+            "Score based on direct observation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Test classifications guide follow-up referrals and interventions. A Denver II result is rated **suspect screening** if there are two or more caution items or one or more delay items across any sector. A suspect test requires prompt re-testing within one to two weeks to eliminate transient situational confounders such as acute intercurrent viral illness, fatigue, fear, or uncooperativeness.",
+      "say": "A screening result is classified as suspect if there is at least one delay or two caution items. Suspect results mandate re-testing in one to two weeks to exclude fatigue, anxiety, or illness.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal Screen",
+          "points": [
+            "No delays and at most one caution item across all four sectors",
+            "Reassure family and follow routinely"
+          ]
+        },
+        "right": {
+          "title": "Suspect Screen",
+          "points": [
+            "One or more delays or two or more cautions",
+            "Repeat screening within two weeks; refer if persistent"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Quantifying developmental pace provides a numerical benchmark across longitudinal visits. The **developmental quotient** expresses performance speed as developmental age divided by chronological age, multiplied by one hundred. A score of eighty-five or above is normal, scores between seventy and eighty-four represent borderline delay, and values below seventy signify significant impairment requiring full multidisciplinary investigation.",
+      "say": "The developmental quotient is calculated by dividing developmental age by chronological age and multiplying by one hundred. A quotient under seventy indicates significant developmental handicap.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "DQ Numerical Range",
+          "Functional Stratification",
+          "Prognostic Significance",
+          "Intervention Plan"
+        ],
+        "rows": [
+          [
+            "85 and above",
+            "Normal developmental rate",
+            "Age-appropriate neurocognitive health",
+            "Routine developmental advice"
+          ],
+          [
+            "70 to 84",
+            "Borderline developmental delay",
+            "Mild vulnerability, risk of learning gap",
+            "Targeted stimulation therapy"
+          ],
+          [
+            "50 to 69",
+            "Mild developmental disability",
+            "Educable with specialized schooling",
+            "Formal early intervention programme"
+          ],
+          [
+            "Under 50",
+            "Moderate to severe disability",
+            "Severe functional dependency",
+            "Comprehensive neuro-rehabilitation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Pervasive impairment spanning multiple sectors denotes a specific clinical syndrome in preschool children. The diagnostic category **global developmental delay** is restricted to children younger than five years of age presenting with significant delay, defined as two standard deviations below the mean, in two or more developmental domains. In children older than five years, formal psychometric testing replaces this term with intellectual disability.",
+      "say": "Global developmental delay applies to children under five years who score two standard deviations below the mean across two or more domains. Beyond five years, intellectual disability becomes the formal diagnostic term.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Global Developmental Delay",
+          "points": [
+            "Applied exclusively to children younger than 5 years",
+            "Requires significant deficits in 2 or more functional sectors"
+          ]
+        },
+        "right": {
+          "title": "Intellectual Disability",
+          "points": [
+            "Diagnosed in children older than 5 years using standardized intelligence tests showing IQ below 70 with adaptive deficits"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Systematic investigation of global delay targets treatable inborn metabolic or structural pathologies. First-tier diagnostic workup for unexplained developmental delay prioritizes **chromosomal microarray** alongside Fragile X syndrome testing, as copy number variants and trinucleotide repeats account for over fifteen percent of cases. Brain magnetic resonance imaging and targeted metabolic screening are indicated when focal neurological signs or regression are present.",
+      "say": "Chromosomal microarray and fragile X DNA analysis represent first-line genetic investigations for global delay. Magnetic resonance imaging of the brain and metabolic profiles are obtained when neurological signs or regression occur.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Diagnostic Modality",
+          "Primary Target Lesion",
+          "Clinical Indication",
+          "Diagnostic Yield"
+        ],
+        "rows": [
+          [
+            "Chromosomal microarray",
+            "Microdeletions and duplications",
+            "First-tier test for unexplained delay",
+            "15 to 20 percent"
+          ],
+          [
+            "Fragile X FMR1 testing",
+            "CGG trinucleotide expansion",
+            "All males, females with family history",
+            "2 to 3 percent"
+          ],
+          [
+            "Brain MRI with spectroscopy",
+            "Dysmyelination, cortical dysplasia",
+            "Microcephaly, focal deficits, seizures",
+            "30 percent abnormal"
+          ],
+          [
+            "Serum tandem mass spectrometry",
+            "Aminoacidopathies, organic acidurias",
+            "Episodic decompensation, regression",
+            "1 to 2 percent"
+          ]
+        ]
+      }
+    }
+  ]
+}

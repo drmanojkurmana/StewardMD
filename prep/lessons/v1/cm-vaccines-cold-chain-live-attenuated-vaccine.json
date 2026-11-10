@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-vaccines-cold-chain-live-attenuated-vaccine",
+ "subject": "community-medicine",
+ "module": "cm-vaccines-cold-chain",
+ "title": "Live and Killed Vaccines, Cold Chain, VVM, Shake Test and Open Vial Policy",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Live vaccines multiply in the host",
+   "tx": "**Live attenuated vaccines** contain organisms passaged until they lost disease-causing power while keeping immunogenicity: BCG, oral polio, measles and yellow fever. They multiply in the host, so the antigenic dose grows beyond the injection, all major and minor antigens engage, and one dose usually protects. Immunodeficiency and pregnancy contraindicate most of them.",
+   "say": "Living vaccines keep working after injection. Attenuated organisms multiply, antigen dose grows, every component engages, and one dose usually protects. Immune deficiency and pregnancy forbid most of them; that pairing fills exam stems.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Live vaccine", "Route in practice"],
+    "rows": [
+     ["BCG", "Intradermal, birth dose"],
+     ["Oral polio vaccine", "Oral drops"],
+     ["Measles containing vaccine", "Subcutaneous"],
+     ["Yellow fever 17D", "Subcutaneous, travellers"]
+    ]
+   }
+  },
+  {
+   "title": "Killed vaccines: safer, weaker, repeated",
+   "tx": "**Inactivated vaccines** are grown then killed by heat or formalin: injectable polio, hepatitis A, rabies and whole-cell pertussis among them. They cannot multiply or revert, so they suit the immunocompromised, but they generally protect less strongly and need multiple doses plus boosters. Cholera vaccine's roughly 50 percent protection is the classic efficacy warning.",
+   "say": "Killed products trade power for safety. No multiplication, no reversion, safe in immune deficiency, but weaker and hungrier for repeat doses. Cholera vaccine near fifty percent protection is the classic warning figure.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Live attenuated",
+     "points": ["Multiply in host, strong immunity", "Usually single dose", "Avoid in pregnancy, immunodeficiency"]
+    },
+    "right": {
+     "title": "Inactivated or killed",
+     "points": ["Cannot multiply or revert", "Multiple doses and boosters", "Safer in immunodeficiency"]
+    }
+   }
+  },
+  {
+   "title": "Subunits, toxoids and conjugates",
+   "tx": "**Subunit vaccines** present selected antigens: toxoids (tetanus, diphtheria), protein and recombinant vaccines (hepatitis B), polysaccharide vaccines, and conjugates that link polysaccharide to protein so infants respond, as in Hib and pneumococcal conjugate vaccines. Adjuvants such as aluminium salts amplify response where the antigen alone is weak.",
+   "say": "Selected antigens form the third family. Toxoids, recombinant hepatitis B protein, plain polysaccharides, and conjugates that recruit infant responses. Aluminium adjuvants amplify weak antigens. Platform decides age suitability, dose count and cold chain behaviour.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Platform", "Example"],
+    "rows": [
+     ["Toxoid", "Tetanus and diphtheria toxoids"],
+     ["Recombinant protein", "Hepatitis B vaccine"],
+     ["Polysaccharide", "Meningococcal polysaccharide"],
+     ["Conjugate", "Hib and pneumococcal conjugates"]
+    ]
+   }
+  },
+  {
+   "title": "The cold chain end to end",
+   "tx": "The **cold chain** holds vaccines between +2 and +8 degrees Celsius from manufacturer to beneficiary through walk-in freezers and coolers, deep freezers, ice-lined refrigerators, cold boxes, vaccine carriers and conditioned ice packs. Breaks accumulate invisibly: potency lost to heat never returns on re-cooling, which is why monitoring, not trust, guards every link.",
+   "say": "Two to eight degrees, factory to arm. Walk-in stores, deep freezers, ice-lined refrigerators, cold boxes, carriers and conditioned ice packs form the relay. Heat damage accumulates invisibly and never reverses on re-cooling.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Manufacturer and national store"},
+     {"id": "b", "label": "Walk-in freezer or cooler"},
+     {"id": "c", "label": "Ice-lined refrigerator at facility"},
+     {"id": "d", "label": "Vaccine carrier to session"},
+     {"id": "e", "label": "Child vaccinated"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"], ["d", "e"]]
+   }
+  },
+  {
+   "title": "Heat sensitivity has an order",
+   "tx": "**Heat sensitivity** ranks vaccines for storage discipline: oral polio vaccine is among the most heat-labile, while tetanus toxoid and hepatitis B tolerate heat better but freeze easily. Ice-lined refrigerators hold the +2 to +8 range at primary facilities; deep freezers make ice packs and store only what freezing cannot harm. Light also damages BCG and measles vaccines.",
+   "say": "Sensitivity has a ranking. Oral polio vaccine fears heat most; tetanus and hepatitis B fear freezing instead. Ice-lined refrigerators hold the working range, deep freezers serve ice packs, and light itself damages BCG and measles products.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Vaccine group", "Chief enemy"],
+    "rows": [
+     ["Oral polio vaccine", "Heat, most labile"],
+     ["Measles and BCG", "Heat and light"],
+     ["Hepatitis B, DPT, tetanus toxoid", "Freezing, adsorbed vaccines"]
+    ]
+   }
+  },
+  {
+   "title": "Vaccine vial monitor reads cumulative heat",
+   "tx": "A **vaccine vial monitor** is a heat-sensitive label whose inner square darkens with cumulative heat exposure: lighter than the outer circle means use the vaccine, equal colour means use it first, darker means discard. Types VVM2, 7, 14 and 30 reach discard in that many days at a constant 37 degrees. It never detects freezing.",
+   "say": "One label remembers every warm hour. Inner square lighter than the ring: use it. Equal: use it first. Darker: discard. The number counts days to discard at thirty seven degrees. Freezing leaves no trace here.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Inner square versus circle", "Action"],
+    "rows": [
+     ["Lighter", "Use the vaccine"],
+     ["Same colour", "Use this vaccine first"],
+     ["Darker", "Discard, heat damaged"]
+    ]
+   }
+  },
+  {
+   "title": "Shake test for suspected freezing",
+   "tx": "The **shake test** checks freeze damage in adsorbed vaccines: freeze a same-batch control vial solid at minus 20 degrees overnight, thaw, shake both vials vigorously for 10 to 15 seconds, rest 30 minutes and compare sedimentation. Faster or equal sedimentation in the test vial means freeze damage and discard; slower means the batch survives.",
+   "say": "Freezing betrays itself by settling. Freeze a same-batch control overnight, shake both together, rest half an hour. Test vial settling as fast as the frozen control means damage and discard; slower settling clears the batch.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Freeze control vial at minus 20"},
+     {"id": "b", "label": "Thaw, shake both 10 to 15 seconds"},
+     {"id": "c", "label": "Rest 30 minutes, compare settling"},
+     {"id": "d", "label": "Faster settling: discard batch"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Open vial policy: 28 days, with exclusions",
+   "tx": "The **open vial policy** lets opened multidose vials of DPT, TT, hepatitis B, OPV, liquid pentavalent, PCV and injectable IPV be reused across sessions for up to 4 weeks (28 days) if expiry, cold chain, aseptic technique, uncontaminated septum and VVM all pass. Measles, MR, BCG, JE and rotavirus vials are excluded and discarded, BCG and measles within 48 hours.",
+   "say": "Opened vials need not die daily. Named liquid vaccines serve up to twenty eight days across sessions when expiry, cold chain, asepsis, septum and monitor all pass. Reconstituted measles, BCG and JE vials stay excluded and perish fast.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Reusable up to 28 days",
+     "points": ["DPT, TT, hepatitis B, OPV", "Liquid pentavalent, PCV, IPV", "All conditions must hold"]
+    },
+    "right": {
+     "title": "Never reused",
+     "points": ["Measles and MR, BCG, JE", "Rotavirus excluded", "Discard within 48 hours or session end"]
+    }
+   }
+  },
+  {
+   "title": "Two live vaccines: spacing rule",
+   "tx": "When two **live vaccines** are not given on the same day at different sites, at least 3 weeks (commonly taught as 4 weeks) must separate them, so the first vaccine's interferon response cannot blunt the second. The same visit remains best practice. Measles vaccine seroconverts 95 to 98 percent after one dose; the second dose exists to catch the remainder, not to boost.",
+   "say": "Live pairs need choreography. Same day at different sites, or weeks apart, so early interferon cannot blunt the second vaccine. Measles converts ninety five to ninety eight percent first time; dose two catches the remainder rather than boosting.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Situation", "Rule"],
+    "rows": [
+     ["Two live vaccines, same day", "Give at different sites"],
+     ["Two live vaccines, different days", "Separate by at least 3 to 4 weeks"],
+     ["Measles second dose", "Catches non-responders, not a booster"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

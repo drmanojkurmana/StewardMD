@@ -1,0 +1,242 @@
+{
+  "v": 1,
+  "module": "phm-hypolipidaemics",
+  "subject": "pharmacology",
+  "title": "Niacin, Resins, PCSK9 Inhibitors, Bempedoic Acid and Omega 3 Fats",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Nicotinic acid (niacin) at gram doses inhibits hormone sensitive lipase in adipose tissue, cutting free fatty acid flux to the liver so VLDL (very low density lipoprotein) assembly falls, triglycerides drop and HDL rises more than with any other oral agent. Outcome trials added to statins, however, showed no event benefit, leaving **niacin** a historical and examination drug whose adverse effect, flushing, remains the most tested in this corner of pharmacology.",
+      "say": "Niacin moves every lipid number the right way and still failed outcome trials; know it for its flushing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Niacin lipid effects",
+          "points": [
+            "Adipose lipolysis inhibited, fatty acid flux falls",
+            "Triglycerides down 20 to 50 percent",
+            "HDL raised 15 to 35 percent, best in class",
+            "LDL down modestly, lipoprotein(a) reduced"
+          ]
+        },
+        "right": {
+          "title": "Why niacin faded",
+          "points": [
+            "No outcome benefit added to statins in AIM HIGH and HPS2 THRIVE",
+            "Flushing, itch and gastrointestinal upset burden adherence",
+            "Hyperglycaemia, gout and liver enzyme rises",
+            "Survives in examinations and rare specialist niches"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Niacin flushing** is prostaglandin D2 and E2 mediated cutaneous vasodilatation: burning redness of face and trunk within minutes of a dose, worst in the first weeks before tachyphylaxis mercifully develops. Aspirin 30 minutes beforehand blocks the prostaglandin surge, slow dose escalation and bedtime dosing with a low fat snack blunt it further, and laropiprant, a prostaglandin receptor blocker once co formulated for exactly this, was withdrawn when its parent trial disappointed.",
+      "say": "Flushing is prostaglandins, aspirin beforehand is the antidote, and tolerance arrives if patients persist.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "niacin",
+            "label": "Niacin dose absorbed"
+          },
+          {
+            "id": "pg",
+            "label": "Skin prostaglandin D2 and E2 release"
+          },
+          {
+            "id": "flush",
+            "label": "Burning facial flushing and itch within minutes"
+          },
+          {
+            "id": "aspirin",
+            "label": "Aspirin pre dose blocks the prostaglandin surge"
+          }
+        ],
+        "edges": [
+          [
+            "niacin",
+            "pg"
+          ],
+          [
+            "pg",
+            "flush"
+          ],
+          [
+            "niacin",
+            "aspirin"
+          ],
+          [
+            "aspirin",
+            "flush"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Bile acid sequestrants **cholestyramine** and colesevelam are non absorbed resins that bind bile acids in the gut, forcing the liver to burn cholesterol making replacements and upregulating LDL receptors for a 15 to 25 percent LDL fall. Cholestyramine's gritty powder, bloating and constipation limit it; colesevelam's tablets are kinder and even improve glycaemia. Both bind co administered drugs and fat soluble vitamins, so other medicines are spaced one hour before or four hours after.",
+      "say": "Resins trap bile in the gut and make the liver spend cholesterol replacing it; space every other drug around them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cholestyramine",
+          "points": [
+            "Powder resin, gritty and constipating",
+            "LDL down 15 to 25 percent at full doses",
+            "Also treats bile acid diarrhoea and pruritus",
+            "Binds warfarin, thyroxine and many others"
+          ]
+        },
+        "right": {
+          "title": "Colesevelam",
+          "points": [
+            "Tablet resin, better tolerated",
+            "Modest glycaemic improvement in type 2 diabetes",
+            "Fewer drug interactions but spacing still advised",
+            "Triglycerides can rise; avoid in severe hypertriglyceridaemia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The protein PCSK9 normally escorts hepatic LDL receptors to lysosomal destruction; monoclonal antibodies **evolocumab** and alirocumab neutralise it, receptors recycle to the surface repeatedly, and LDL falls by 50 to 60 percent on top of statins. Fortnightly or monthly self injections, outcome benefit in FOURIER and ODYSSEY, and a clean adverse profile except injection site reactions make cost, not pharmacology, the barrier. Inclisiran, a small interfering RNA dosed twice yearly, silences PCSK9 production upstream.",
+      "say": "PCSK9 antibodies let LDL receptors live longer and work harder; sixty percent more lowering, priced accordingly.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/lipoprotein-metabolism-and-hyperlipidemias-fig1.webp",
+        "alt": "Lipoprotein metabolism and atherogenesis pathways diagram",
+        "caption": "Lipoprotein metabolism pathways within which PCSK9 inhibition preserves hepatic LDL receptor recycling."
+      }
+    },
+    {
+      "tx": "**Bempedoic acid** inhibits ATP citrate lyase two steps above HMG CoA reductase in the same synthesis pathway, but it is a prodrug activated only by a liver enzyme absent from skeletal muscle, which is its entire commercial logic: statin pathway benefit without muscle exposure. LDL falls about 18 percent alone and more with ezetimibe in a fixed combination. Costs are a small gout signal from raised uric acid, cholelithiasis reports and a tendon rupture caution shared oddly with fluoroquinolone co therapy.",
+      "say": "Bempedoic acid blocks cholesterol synthesis only where the liver activates it, sparing muscle by design.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bemp",
+            "label": "Bempedoic acid prodrug reaches the liver"
+          },
+          {
+            "id": "acl",
+            "label": "Hepatic enzyme activates it; ATP citrate lyase blocked"
+          },
+          {
+            "id": "muscle",
+            "label": "Muscle lacks the activating enzyme and is spared"
+          },
+          {
+            "id": "ldl",
+            "label": "LDL receptors rise, LDL falls about 18 percent"
+          }
+        ],
+        "edges": [
+          [
+            "bemp",
+            "acl"
+          ],
+          [
+            "acl",
+            "ldl"
+          ],
+          [
+            "bemp",
+            "muscle"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Prescription **omega 3 fatty acids** divide by formulation: mixed EPA DHA (eicosapentaenoic and docosahexaenoic acid) preparations lower triglycerides at 4 g daily with a small LDL rise from the DHA component, while purified EPA ethyl ester, icosapent ethyl, cut events in the REDUCE IT trial in statin treated patients with raised triglycerides. Atrial fibrillation and bleeding signals accompany high dose therapy, and over the counter fish oil capsules contain a fraction of trial doses.",
+      "say": "Four grams is a drug dose: icosapent ethyl has outcome data, supermarket fish oil does not.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Icosapent ethyl (purified EPA)",
+          "points": [
+            "2 g twice daily on top of statin therapy",
+            "REDUCE IT: fewer cardiovascular events",
+            "Small atrial fibrillation and bleeding excess",
+            "No LDL rise, unlike mixed preparations"
+          ]
+        },
+        "right": {
+          "title": "Mixed EPA DHA products",
+          "points": [
+            "Triglycerides fall at prescription doses",
+            "DHA component can raise LDL cholesterol",
+            "Outcome trials neutral for events",
+            "Over the counter doses far below trial doses"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Severe hypertriglyceridaemia** above 10 mmol per litre (about 880 mg per dl) is treated to prevent pancreatitis rather than atherosclerosis, and the order of operations matters: alcohol abstinence, glycaemic control, stopping culprits like oestrogens and isotretinoin, then fibrates or prescription omega 3, with statins contributing modestly. In the acute pancreatitis of hypertriglyceridaemia, insulin infusions activate lipoprotein lipase and plasmapheresis enters specialist conversations when levels are extreme.",
+      "say": "Triglycerides over ten are a pancreatitis problem: remove causes first, then fibrate or omega 3.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tg",
+            "label": "Triglycerides above 10 mmol per litre confirmed"
+          },
+          {
+            "id": "causes",
+            "label": "Alcohol, diabetes control and culprit drugs addressed"
+          },
+          {
+            "id": "drug",
+            "label": "Fibrate or prescription omega 3 started"
+          },
+          {
+            "id": "goal",
+            "label": "Goal below 5.6 mmol per litre to protect the pancreas"
+          }
+        ],
+        "edges": [
+          [
+            "tg",
+            "causes"
+          ],
+          [
+            "causes",
+            "drug"
+          ],
+          [
+            "drug",
+            "goal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Combination logic** for LDL assembles the lesson set in order of evidence and tolerability: maximally tolerated statin first, ezetimibe second, PCSK9 therapy third for high risk patients still above target, with bempedoic acid for the statin intolerant and resins as a non systemic extra. Each layer multiplies rather than replaces, so a patient can plausibly stack an 85 percent total LDL reduction without any single drug at a heroic dose.",
+      "say": "Statin, then ezetimibe, then PCSK9; stack percentages instead of hero doses.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Combination sequence",
+          "points": [
+            "Maximally tolerated statin as the foundation",
+            "Add ezetimibe for the next 15 to 20 percent",
+            "Add PCSK9 therapy in high risk patients above target",
+            "Bempedoic acid where statin intolerance limits dosing"
+          ]
+        },
+        "right": {
+          "title": "Stacked effect",
+          "points": [
+            "Each layer multiplies the previous reduction",
+            "Total LDL falls of 80 percent or more are achievable",
+            "No single drug pushed to a heroic dose",
+            "Adherence reviewed at every layer before escalating"
+          ]
+        }
+      }
+    }
+  ]
+}

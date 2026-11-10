@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-asphyxiant-gases-carbon-monoxide",
+ "subject": "forensic-medicine",
+ "module": "fmt-asphyxiant-gases",
+ "title": "Carbon Monoxide: Carboxyhaemoglobin, Cherry Red Blood and CO Automatism",
+ "minutes": 9,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Carbon monoxide, the silent chemical asphyxiant",
+   "tx": "**Carbon monoxide** is a colourless, tasteless, non irritative gas from incomplete combustion of carbon, insoluble in water, burning with a blue flame and lighter than air, gathering at one and a half to two metres in closed rooms and seeping through cracks and plasterboard through whole houses. It binds haemoglobin with two hundred to three hundred times oxygen's affinity into stable carboxyhaemoglobin, and forty times affinity for myoglobin, while also blocking cytochrome oxidase and shifting the dissociation curve left so tissues starve beyond the anaemia.",
+   "say": "Two hundred times oxygen's grip on haemoglobin and a left shifted curve make CO a chemical asphyxiant that hides in plain air.",
+   "vis": {"kind": "table", "cols": ["CO property", "Detail", "Consequence"], "rows": [["Affinity for haemoglobin", "200 to 300 times oxygen", "Stable carboxyhaemoglobin"], ["Affinity for myoglobin", "About 40 times oxygen", "Direct myocardial depression"], ["Curve effect", "Shifted to the left", "Oxygen not released to tissues"], ["Spread in houses", "Seeps through cracks and boards", "Upstairs rooms poisoned too"]]}
+  },
+  {
+   "title": "Saturation bands and symptoms",
+   "tx": "**Carboxyhaemoglobin percentage predicts the picture**. Zero to ten percent: no appreciable symptoms. Ten to twenty: breathlessness on moderate exertion, mild headache and weakness. Twenty to thirty: throbbing headache, irritability, emotional instability, disturbed judgement, defective memory and rapid fatigue. Thirty to forty: severe headache, nausea, vomiting, dizziness, dim vision and confusion. Forty to fifty: confusion, hallucinations, severe ataxia, rapid breathing and collapse resembling alcoholic intoxication, with cherry red colour appearing.",
+   "say": "Headache at ten, throbbing confusion at thirty and drunken collapse at fifty: saturation writes the symptoms in advance.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "10 to 20 percent: headache, weakness"}, {"id": "b", "label": "20 to 30 percent: judgement fails"}, {"id": "c", "label": "30 to 40 percent: vomiting, dim vision"}, {"id": "d", "label": "40 to 50 percent: ataxic collapse"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Coma, death and lowered lethal levels",
+   "tx": "At fifty to sixty percent come syncope or coma with intermittent convulsions, rapid respirations, tachycardia with weak pulse and pink red skin; sixty to seventy deepens coma with incontinence; seventy to eighty brings profound coma, absent reflexes, thready pulse and shallow irregular breathing to death; above eighty, rapid respiratory arrest. Death usually needs **eighty percent saturation**, but senility, heart or lung disease, anaemia, hypnotics and alcohol can kill from as little as thirty percent.",
+   "say": "Eighty percent kills the healthy, thirty percent can kill the old, anaemic or drunk, so comorbidity rewrites the lethal level.",
+   "vis": {"kind": "compare", "left": {"title": "High saturation course", "points": ["Convulsions at 50 to 60 percent", "Incontinence at 60 to 70", "Absent reflexes at 70 to 80", "Respiratory arrest above 80"]}, "right": {"title": "Death at low saturation", "points": ["Senility and heart disease", "Respiratory deficiency", "Anaemia present", "Alcohol or hypnotics aboard"]}}
+  },
+  {
+   "title": "Cherry red blood and postmortem staining",
+   "tx": "**Cherry red discolouration** of skin, blood and postmortem staining is carbon monoxide's autopsy signature, because cells cannot extract oxygen from carboxyhaemoglobin and the blood stays bright under the skin instead of turning blue. Platelet aggregation is inhibited. Bullae from skin hypoxia appear at calves, buttocks, wrists and knees, separate and isolated with thick cellular fluid and surrounding inflammation, mistakable for second degree burns but rarely touching fingers and toes. CO is not absorbed by a body after death, separating antemortem exposure cleanly.",
+   "say": "Cherry red lividity, bright blood and pressure bullae mark CO death, and a corpse in CO air absorbs none of it.",
+   "vis": {"kind": "table", "cols": ["CO autopsy sign", "Appearance", "Distinguished from"], "rows": [["Lividity and blood", "Cherry red, bright", "Ordinary blue staining"], ["Skin bullae", "Calves, buttocks, wrists, knees", "Burns, which involve fingers"], ["Bullous fluid", "Thick and cellular", "Putrefaction blisters"], ["Postmortem absorption", "None occurs", "Proves antemortem exposure"]]}
+  },
+  {
+   "title": "CO automatism: the disturbed room",
+   "tx": "The dying CO victim may make **wild erratic swinging movements** inside the room, disturbing clothing and furniture and giving an impression of violent struggle, called CO automatism. More than one death investigation has chased a murderer through a room wrecked by its own victim. The scene discipline follows: photograph before touching, measure carboxyhaemoglobin in every body found, and test the appliance and air before reconstructing any assault from disorder alone.",
+   "say": "A wrecked room with a cherry red body may be the victim's own automatism, not a struggle with any murderer.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Room found disturbed"}, {"id": "b", "label": "Body shows cherry red staining"}, {"id": "c", "label": "Carboxyhaemoglobin measured high"}, {"id": "d", "label": "Automatism replaces assault theory"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Sources: heaters, engines and cigarettes",
+   "tx": "**CO sources** are coal gas, fire smoke and defective furnaces, stoves, water heaters, fireplaces and oil lamps, a yellow flame generating CO while a blue flame burns clean. Mine explosions leave after damp, badly ventilated collieries choke damp, and motor exhaust holds one to seven percent CO, poisoning a small garage in five to ten minutes, diesel far less than petrol. Industry makes about twenty percent of cases. A pack a day smoker runs five to six percent saturation, heavy smokers fifteen to twenty, traffic policemen up to ten.",
+   "say": "Yellow flames, garage exhaust in ten minutes and even cigarettes at six percent saturate blood from everyday sources.",
+   "vis": {"kind": "compare", "left": {"title": "Domestic sources", "points": ["Defective heaters and stoves", "Fire smoke in closed rooms", "Oil lamps, yellow flames", "Gas geysers in bathrooms"]}, "right": {"title": "Background saturation", "points": ["Pack a day smoker, 5 to 6 percent", "Heavy smoker, 15 to 20 percent", "Traffic police, up to 10 percent", "Endogenous, under 1 percent"]}}
+  },
+  {
+   "title": "Elimination and oxygen therapy",
+   "tx": "**CO elimination** is through the lungs alone, about one percent metabolised to carbon dioxide, none through skin, bile, sweat, urine or faeces. Half life is four to five hours breathing room air, eighty to ninety minutes on one hundred percent oxygen, and under thirty minutes under hyperbaric oxygen at three atmospheres. Treatment is therefore removal and oxygen at the highest available concentration, with hyperbaric referral for coma, pregnancy and cardiac involvement in modern practice.",
+   "say": "Four hours on air, ninety minutes on pure oxygen and thirty under pressure: oxygen is the whole antidote strategy.",
+   "vis": {"kind": "table", "cols": ["Breathing gas", "CO half life", "Use"], "rows": [["Room air, 21 percent", "4 to 5 hours", "After removal only"], ["100 percent oxygen", "80 to 90 minutes", "Standard hospital care"], ["Hyperbaric, 3 atmospheres", "Under 30 minutes", "Coma, pregnancy, cardiac signs"], ["Skin or urine routes", "No elimination", "Lungs only"]]}
+  },
+  {
+   "title": "Fetal poisoning and delayed brain injury",
+   "tx": "CO crosses to the fetus, where **fetal carboxyhaemoglobin runs ten to fifteen percent higher than maternal**, so intrauterine death can occur though the mother survives. Survivors of CO poisoning may develop neurological sequelae within two to four weeks: tremors, personality change, memory impairment, monoplegia, hemiplegia, psychosis, peripheral neuropathy, visual loss, poor concentration and Parkinsonism. Children saturate faster than adults for their higher respiratory exchange, and physical activity during exposure accelerates saturation.",
+   "say": "The fetus saturates above its mother and may die while she lives, and survivors can declare Parkinsonism a month later.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Mother survives exposure"}, {"id": "b", "label": "Fetal level exceeds maternal"}, {"id": "c", "label": "Delayed sequelae at 2 to 4 weeks"}, {"id": "d", "label": "Memory, movement and mind injured"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "CO in fire deaths ties back to burns",
+   "tx": "In burnt bodies, **carboxyhaemoglobin proves breathing during the fire** alongside soot in the terminal bronchioles, the pair built in the thermal module. Heat haematoma blood carries the same CO saturation as peripheral blood, separating it from a pre fire extradural bleed. A body burnt after death shows neither deep soot nor raised saturation. Every charred body therefore gets blood CO estimation with the soot examination, before putrefaction destroys both witnesses.",
+   "say": "Soot below the cords plus raised CO convict the fire of killing a living breather; neither appears in a body burnt dead.",
+   "vis": {"kind": "compare", "left": {"title": "Alive in the fire", "points": ["Soot in terminal bronchioles", "Raised carboxyhaemoglobin", "Cherry red tissues", "Vital burn reactions"]}, "right": {"title": "Burnt after death", "points": ["Soot only in pharynx", "Background CO level", "No vital reaction", "Pugilistic pose still present"]}}
+  }
+ ],
+ "quiz": []
+}

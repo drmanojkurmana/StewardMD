@@ -1,0 +1,239 @@
+{
+  "v": 1,
+  "module": "phm-cytotoxic-anticancer",
+  "subject": "pharmacology",
+  "title": "Cytotoxic Anticancer VI: Anthracyclines, Cumulative Cardiotoxicity and Dexrazoxane",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Anthracyclines** (doxorubicin, daunorubicin, epirubicin, idarubicin) poison topoisomerase II, intercalate DNA and generate iron catalysed free radicals, a triple mechanism billing the class crown toxicity: cumulative dose related cardiomyopathy. Doxorubicin's red urine (harmless colour, coached), vesicant extravasation necrosis, marrow and mucositis, and radiation recall complete the portrait every oncology trainee must recite without notes.",
+      "say": "Doxorubicin is red, vesicant and cumulatively cardiotoxic; the heart keeps its lifetime ledger.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mechanism triple",
+          "points": [
+            "Topoisomerase II poisoning",
+            "DNA intercalation",
+            "Iron dependent free radical generation",
+            "Topo II beta in cardiomyocytes implicates the heart"
+          ]
+        },
+        "right": {
+          "title": "Bedside portrait",
+          "points": [
+            "Red urine and tears (harmless, coached)",
+            "Vesicant: extravasation necrosis",
+            "Radiation recall dermatitis",
+            "Marrow nadir 10 to 14 days"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cumulative cardiotoxicity** follows a dose curve examiners quote: heart failure incidence climbs steeply beyond 450 to 550 mg per square metre of doxorubicin, lower with chest radiation, age extremes and cardiac disease, monitored by serial ejection fraction (echo or MUGA, strain and biomarkers refining) with stop rules, and mitigated by liposomal formulations, infusion schedules, epirubicin's kinder ratio and dexrazoxane in defined settings. Anthracycline cardiomyopathy is dilated, often irreversible, and preventable mainly by arithmetic.",
+      "say": "Count milligrams per square metre like radiation dose; the ejection fraction is read before symptoms.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "baseline",
+            "label": "Baseline ejection fraction and risk inventory"
+          },
+          {
+            "id": "count",
+            "label": "Cumulative dose counted every cycle"
+          },
+          {
+            "id": "monitor",
+            "label": "Serial EF (strain and troponin refining)"
+          },
+          {
+            "id": "stop",
+            "label": "Stop rules at EF fall or dose ceiling"
+          }
+        ],
+        "edges": [
+          [
+            "baseline",
+            "count"
+          ],
+          [
+            "count",
+            "monitor"
+          ],
+          [
+            "monitor",
+            "stop"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Dexrazoxane** serves two rescues from one molecule: an iron chelator and topoisomerase II catalytic inhibitor that protects cardiomyocytes when given before anthracyclines (10 to 1 dose ratio, metastatic breast and high cumulative dose settings, fenced by historical response and second malignancy debates) and rescues anthracycline extravasation as a three day infusion started within six hours, replacing surgery for most leaks.",
+      "say": "Dexrazoxane guards the heart before the dose and the skin within six hours of the leak.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cardioprotection role",
+          "points": [
+            "Given IV before anthracycline (10:1 ratio)",
+            "High cumulative dose and metastatic settings",
+            "Iron chelation plus topo II beta protection",
+            "Marrow suppression added modestly"
+          ]
+        },
+        "right": {
+          "title": "Extravasation role",
+          "points": [
+            "Start within 6 hours, daily for 3 days",
+            "Cold compresses (held around infusions per protocol)",
+            "Surgery avoided in most treated leaks",
+            "Document and follow to healing"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Liposomal doxorubicin** re engineers distribution rather than mechanism: pegylated liposomes leak preferentially into tumour vasculature and away from cardiac capillaries, trading cardiomyopathy down and hand foot syndrome and mucositis up, serving Kaposi sarcoma, ovarian and myeloma niches where cardiac risk or prior anthracycline exposure fences the conventional drug. Epirubicin and idarubicin adjust the same trade by chemistry instead of packaging.",
+      "say": "Liposomes move doxorubicin from heart to tumour and bill the palms instead.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Liposomal trade",
+          "points": [
+            "Cardiotoxicity reduced, not abolished",
+            "Hand foot syndrome and mucositis rise",
+            "Kaposi, ovarian and myeloma niches",
+            "Infusion reactions distinct (complement mediated)"
+          ]
+        },
+        "right": {
+          "title": "Chemical cousins",
+          "points": [
+            "Epirubicin: higher dose ceiling per cardiotoxicity",
+            "Idarubicin: oral kin, leukaemia niches",
+            "Daunorubicin: AML induction classic (with cytarabine)",
+            "Mitoxantrone: anthracenedione, blue urine, cardiac ledger kept"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anthracycline combinations** anchor curative regimens whose survivorship wrote modern cardio oncology: CHOP in lymphoma, AC in breast, 7 plus 3 in AML (daunorubicin days against cytarabine's week), ABVD's doxorubicin in Hodgkin lymphoma, each with ejection fraction gates and late cardiac clinics following survivors, especially childhood survivors screened lifelong by cumulative dose and radiation fields.",
+      "say": "Curative anthracycline regimens created cardio oncology; childhood survivors are screened for life.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anchor regimens",
+          "points": [
+            "CHOP and R CHOP in lymphomas",
+            "AC then taxane sequences in breast",
+            "7+3 induction in AML",
+            "ABVD in Hodgkin lymphoma"
+          ]
+        },
+        "right": {
+          "title": "Survivorship system",
+          "points": [
+            "Lifetime cardiac screening by exposure",
+            "Childhood survivor guidelines by dose and radiation",
+            "Pregnancy cardiac assessment in exposed survivors",
+            "Heart failure treated conventionally when found"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Bleomycin** pair by organ: bleomycin (inactivated by hydrolase absent in lung and skin) bills pulmonary fibrosis by cumulative units with oxygen caution in anaesthesia forever after, testicular and Hodgkin careers (ABVD), and flagellate dermatitis; dactinomycin serves paediatric tumours with vesicant and radiation recall ledgers. Name the drug, name the organ, again.",
+      "say": "Bleomycin bills lungs and skin where its inactivating enzyme is absent; oxygen respects it forever.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bleomycin portrait",
+          "points": [
+            "Pulmonary fibrosis cumulative, monitored by DLCO",
+            "Skin: flagellate dermatitis, Raynaud",
+            "Little marrow suppression (combination friendly)",
+            "High inspired oxygen caution lifelong"
+          ]
+        },
+        "right": {
+          "title": "Dactinomycin footnote",
+          "points": [
+            "Wilms and rhabdomyosarcoma paediatric regimens",
+            "Vesicant, radiation recall",
+            "Hepatic sinusoidal injury in Wilms protocols",
+            "Marrow and mucositis standard"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mitomycin and streptozocin** close the shelf: mitomycin (bioreductive alkylator like) serves anal and bladder (intravesical) niches billing delayed marrow and haemolytic uraemic syndrome at cumulative doses, streptozocin's glucose guided pancreatic islet tropism treats neuroendocrine tumours billing kidneys and violent emesis. The remaining agents are niche by design; examinations test the niche and the organ, never the catalogue.",
+      "say": "Minor cytotoxics are niche plus organ; learn the pairing, skip the catalogue.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mitomycin",
+          "points": [
+            "Anal chemoradiation partner",
+            "Intravesical bladder therapy",
+            "Delayed and cumulative marrow nadirs",
+            "HUS and pulmonary fibrosis late"
+          ]
+        },
+        "right": {
+          "title": "Streptozocin",
+          "points": [
+            "Pancreatic neuroendocrine tumours",
+            "GLUT2 guided islet uptake",
+            "Nephrotoxicity dose limiting",
+            "Severe emetogenicity by reputation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cardio oncology** gathers this lesson with the targeted batch's cardiac ledgers (trastuzumab's reversible dysfunction, kinase inhibitor hypertension and QT): baseline risk, serial imaging, biomarker assistance, cardioprotective therapy (ACE inhibitors and beta blockers debated prophylactically, prescribed therapeutically), and the curative intent calculus that sometimes accepts monitored cardiac risk rather than surrendering cure, decided jointly and documented.",
+      "say": "Sometimes cure is worth monitored cardiac risk; that decision is joint, imaged and documented.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "risk",
+            "label": "Baseline cardiac risk and EF documented"
+          },
+          {
+            "id": "monitor",
+            "label": "Serial imaging through cumulative exposure"
+          },
+          {
+            "id": "treat",
+            "label": "Dysfunction: heart failure therapy, hold or continue jointly"
+          },
+          {
+            "id": "survive",
+            "label": "Survivorship cardiac clinic by exposure tier"
+          }
+        ],
+        "edges": [
+          [
+            "risk",
+            "monitor"
+          ],
+          [
+            "monitor",
+            "treat"
+          ],
+          [
+            "treat",
+            "survive"
+          ]
+        ]
+      }
+    }
+  ]
+}

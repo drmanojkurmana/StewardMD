@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-musculoskeletal-soap-bubble-appearance",
+ "subject": "radiology",
+ "module": "rad-musculoskeletal",
+ "title": "Soap Bubble Appearance, Giant Cell Tumour and Benign Bone Lesions",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Soap bubble means expanded multilocular bone",
+   "tx": "**Soap bubble appearance** is an expanded, multiloculated lytic lesion divided by thin bony ridges into bubble like chambers. Giant cell tumour of bone is the classic owner at the end of a long bone, and the pictured osteoclastoma film shows that expanded epiphyseal lucency around the knee. Aneurysmal bone cyst blows the same bubble in younger metaphyses, often with fluid levels on MRI that giant cell tumour lacks.",
+   "say": "Soap bubble appearance is an expanded multiloculated lytic lesion divided by thin bony ridges. Giant cell tumour is the classic owner at the end of a long bone, and the pictured film shows that expanded lucency at the knee. Aneurysmal bone cyst blows the same bubble in younger metaphyses.",
+   "vis": {"kind": "image", "src": "clinix/media/practicals/surg-xray-osteoclastoma-giant-cell-tumour.webp", "alt": "Radiograph of giant cell tumour showing expanded soap bubble lytic lesion at the end of a long bone.", "caption": "Giant cell tumour soap bubble lesion on radiograph. Credit: StewardMD library."}
+  },
+  {
+   "title": "Giant cell tumour touches the joint",
+   "tx": "**Giant cell tumour** arises in the epiphysis of a skeletally mature adult between twenty and forty, extending to subchondral bone so the lesion kisses the joint surface. It favours distal femur, proximal tibia and distal radius, is lytic without sclerotic rim or matrix, and recurs locally after curettage often enough that adjuvants fill the cavity. A sclerotic rim or a lesion stopping short of the joint argues against it.",
+   "say": "Giant cell tumour arises in the epiphysis of adults between twenty and forty, extending to subchondral bone so it kisses the joint. It favours distal femur, proximal tibia and distal radius, without sclerotic rim or matrix. A sclerotic rim or a lesion stopping short of the joint argues against it.",
+   "vis": {"kind": "compare", "left": {"title": "Giant cell tumour", "points": ["Epiphysis to joint surface", "Age twenty to forty", "No sclerotic rim", "Soap bubble expansion"]}, "right": {"title": "Chondroblastoma mimic", "points": ["Epiphysis in adolescents", "Open growth plate", "Sclerotic rim often", "Calcified matrix possible"]}}
+  },
+  {
+   "title": "Aneurysmal cyst blows out the cortex",
+   "tx": "**Aneurysmal bone cyst** expands bone eccentrically like a balloon in patients under twenty, thinning cortex to an eggshell and filling blood spaces that layer into fluid fluid levels on MRI. It can also grow secondarily inside a giant cell tumour, chondroblastoma or osteosarcoma, so sampling the solid parts matters. The fluid levels are seductive but not specific, appearing in telangiectatic osteosarcoma, the malignant trap in this differential.",
+   "say": "Aneurysmal bone cyst expands bone like a balloon under twenty, filling blood spaces that layer into fluid levels on MRI. It can grow secondarily inside other tumours, so sampling solid parts matters. Fluid levels also appear in telangiectatic osteosarcoma, the malignant trap here.",
+   "vis": {"kind": "table", "cols": ["Feature", "Aneurysmal cyst", "Giant cell tumour"], "rows": [["Typical age", "Under 20", "20 to 40"], ["Bone zone", "Metaphysis, eccentric", "Epiphysis to joint"], ["MRI fluid levels", "Characteristic", "Uncommon"], ["Secondary form", "Inside other tumours", "Not applicable"]]}
+  },
+  {
+   "title": "Benign tumour atlas sorts by site",
+   "tx": "**Benign bone tumours** map predictably by age and zone, the pattern summarised in the pictured benign tumour set: epiphyseal lesions in the young are chondroblastoma, metaphyseal cortical defects and osteochondromas dominate school age films, and giant cell tumour waits for the closed physis. Reading zone before density halves the list, because a soap bubble in a metaphysis and the same bubble in an epiphysis carry different first diagnoses.",
+   "say": "Benign bone tumours map by age and zone, the pattern in the pictured set: chondroblastoma fills young epiphyses, cortical defects dominate school films, giant cell tumour waits for the closed growth plate. Reading zone before density halves the list, because the same bubble carries different diagnoses by zone.",
+   "vis": {"kind": "image", "src": "v1/kb/media/benign-bone-tumours-age-site-margin-fig1.webp", "alt": "Illustration chart of benign bone tumour types by age and bone site.", "caption": "Benign bone tumour types by site and age. Illustration: StewardMD."}
+  },
+  {
+   "title": "Osteochondroma points away",
+   "tx": "**Osteochondroma** grows from the metaphysis as a bony stalk or sessile mound whose cortex and marrow continue directly from the host bone, pointing away from the nearest joint as growth drags it down the shaft. A cartilage cap over 2 cm thick in an adult warns of transformation to secondary chondrosarcoma. Multiple lesions with forearm and ankle deformities name hereditary multiple exostoses and its higher transformation watch.",
+   "say": "Osteochondroma grows from the metaphysis with cortex and marrow continuous from host bone, pointing away from the joint. A cartilage cap over two centimetres in an adult warns of transformation. Multiple lesions with limb deformities name hereditary multiple exostoses.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Metaphyseal outgrowth"}, {"id": "b", "label": "Marrow continues into stalk"}, {"id": "c", "label": "Points away from joint"}, {"id": "d", "label": "Cap over 2 cm warns"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Simple cyst and fallen fragment",
+   "tx": "**Unicameral bone cyst** fills the central metaphysis of proximal humerus or femur in children with a lytic lesion that starts at the growth plate and migrates down as bone grows. After a pathological fracture a small bone shard sinks to the dependent part, the fallen fragment sign that confirms a fluid cavity rather than solid tumour. Most need only fracture care and observation, with injection or curettage for persistent painful lesions.",
+   "say": "Unicameral bone cyst fills the central metaphysis of proximal humerus or femur in children, migrating down as bone grows. After fracture a bone shard sinks dependently, the fallen fragment sign confirming a fluid cavity. Most need only fracture care and observation.",
+   "vis": {"kind": "compare", "left": {"title": "Simple bone cyst", "points": ["Central metaphysis, child", "Fallen fragment after fracture", "Fluid cavity", "Migrates with growth"]}, "right": {"title": "Fibrous dysplasia", "points": ["Ground glass matrix", "Shepherd crook femur deformity", "Solid, no fallen fragment", "Endocrine syndromes possible"]}}
+  },
+  {
+   "title": "Nidus names osteoid osteoma",
+   "tx": "**Osteoid osteoma** hides a tiny radiolucent nidus under 2 cm inside dense reactive sclerosis, classically in the cortex of a young man femur or tibia with night pain relieved dramatically by aspirin and other anti inflammatories. CT finds the nidus that plain films bury in sclerosis, and radiofrequency ablation through that CT map is definitive for most. A nidus over 2 cm renames the lesion osteoblastoma, favouring spine posterior elements.",
+   "say": "Osteoid osteoma hides a tiny nidus under two centimetres inside dense sclerosis, with night pain relieved by aspirin. CT finds the nidus plain films bury, and radiofrequency ablation is definitive for most. A nidus over two centimetres renames it osteoblastoma, favouring the spine.",
+   "vis": {"kind": "table", "cols": ["Feature", "Osteoid osteoma", "Osteoblastoma"], "rows": [["Nidus size", "Under 2 cm", "Over 2 cm"], ["Favourite site", "Femur and tibia cortex", "Spine posterior elements"], ["Night pain", "Classic, aspirin relieved", "Less dramatic"], ["Treatment", "CT guided ablation", "Surgical excision usual"]]}
+  },
+  {
+   "title": "Brown tumour copies the bubble",
+   "tx": "**Brown tumour** of hyperparathyroidism resorbs bone into lytic expansile lesions that copy giant cell tumour on a single film, even under the same soap bubble description. The giveaway is company: subperiosteal resorption along the radial side of middle phalanges, salt and pepper skull, rugger jersey spine and a raised parathyroid hormone with high calcium. Treating the parathyroid adenoma heals the bone lesions without bone surgery, the systemic save examiners reward.",
+   "say": "Brown tumour of hyperparathyroidism copies giant cell tumour on a single film. The giveaway is company: subperiosteal resorption in the fingers, salt and pepper skull and raised parathyroid hormone with high calcium. Treating the parathyroid adenoma heals the bone lesions without bone surgery.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Expansile lytic lesion"}, {"id": "b", "label": "Check hands and skull films"}, {"id": "c", "label": "Calcium and hormone raised"}, {"id": "d", "label": "Treat parathyroid first"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}

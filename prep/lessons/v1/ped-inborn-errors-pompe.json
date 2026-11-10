@@ -1,0 +1,215 @@
+{
+ "key": "ped-inborn-errors-pompe",
+ "v": 1,
+ "module": "ped-inborn-errors",
+ "subject": "paediatrics",
+ "title": "Lysosomal Storage Diseases: Pompe, Gaucher, Niemann-Pick and Tay-Sachs",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Lysosomal accumulation of un-degraded macromolecules triggers progressive multiorgan expansion and cell death. Genetic deficiencies of specific lysosomal acid hydrolases produce systemic **lysosomal storage disorders**, where substrate engorgement within intracellular vacuoles disrupts cellular energetics. Depending upon whether the primary undegraded substrate is glycogen, sphingolipid, or glycosaminoglycan, clinical presentations manifest with massive visceral organomegaly, progressive neurodegeneration, or severe skeletal dysplasia.",
+   "say": "Lysosomal storage disorders result from missing acid hydrolases, causing substrate engorgement in cells. They present with progressive organomegaly, neurodegeneration, and skeletal deformities.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/lysosomal-storage-diseases-fig1.webp",
+    "alt": "Clinical and organ manifestations across lysosomal storage diseases.",
+    "caption": "Comparative organ pathology across lysosomal and glycogen storage diseases. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Defective lysosomal glycogen breakdown provokes devastating cardiac and skeletal muscle hypertrophy. The autosomal recessive condition **infantile Pompe disease** arises from deficiency of acid alpha-glucosidase (acid maltase) on chromosome 17q25, causing intralysosomal glycogen accumulation across cardiac myocytes. Affected infants present within the first months of life with massive cardiomegaly, severe biventricular hypertrophic cardiomyopathy, profound generalized muscular hypotonia, and macroglossia, accompanied by normal blood glucose levels.",
+   "say": "Pompe disease stems from acid maltase deficiency, storing glycogen inside cardiac myocytes. Infants exhibit massive cardiomegaly, hypertrophic cardiomyopathy, and hypotonia with normal blood glucose.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pompe Cardiac Features",
+     "points": [
+      "Huge globular cardiomegaly on chest radiograph",
+      "Hypertrophic outflow tract obstruction",
+      "Short PR interval and giant QRS on ECG",
+      "Heart failure is primary cause of death"
+     ]
+    },
+    "right": {
+     "title": "Pompe Muscular Features",
+     "points": [
+      "Profound floppy infant muscular weakness",
+      "Enlarged protruding tongue (macroglossia)",
+      "Elevated serum creatine kinase (CK)",
+      "Recombinant alglucosidase alfa therapy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Glucocerebroside accumulation in tissue macrophages produces skeletal collapse and massive splenomegaly. The most prevalent lysosomal storage disorder is **Gaucher disease type 1**, caused by autosomal recessive glucocerebrosidase (beta-glucosidase) deficiency on chromosome 1q21. Reticuloendothelial macrophages transform into Gaucher cells with characteristic crumpled tissue-paper fibrillary cytoplasm, engorging the spleen and liver, while bone marrow infiltration precipitates painful bone crises and distal femoral Erlenmeyer flask deformities.",
+   "say": "Gaucher disease is the most common lysosomal disorder, accumulating glucocerebroside in macrophages. It features massive splenomegaly, pancytopenia, bone pain, and Erlenmeyer flask femoral deformities.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/gaucher-disease-fig1.webp",
+    "alt": "Histopathological appearance of Gaucher cells with crumpled paper cytoplasm and marrow infiltration.",
+    "caption": "Gaucher cells infiltrating bone marrow alongside distal femoral Erlenmeyer flask deformity on radiography. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Sphingomyelin deposition within visceral organs and central neurones characterizes a severe neurodegenerative disorder. Autosomal recessive **Niemann-Pick disease type A** results from severe deficiency of acid sphingomyelinase (SMPD1 gene), provoking accumulation of sphingomyelin. Infants present by six months with progressive loss of motor milestones, failure to thrive, massive hepatosplenomegaly, and a bilateral macular cherry-red spot in fifty percent of cases, with bone marrow aspirates demonstrating pathognomonic foamy histiocytes.",
+   "say": "Niemann-Pick type A stems from acid sphingomyelinase deficiency. Infants show neurodegeneration, hepatosplenomegaly, foamy marrow histiocytes, and a cherry-red macular spot.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Niemann-Pick Type A (Neuropathic)",
+     "points": [
+      "Acid sphingomyelinase deficiency",
+      "Massive hepatosplenomegaly present",
+      "Cherry-red macular spot in 50%",
+      "Foamy mulberry histiocytes in bone marrow"
+     ]
+    },
+    "right": {
+     "title": "Niemann-Pick Type B (Visceral)",
+     "points": [
+      "Partial residual sphingomyelinase activity",
+      "Massive visceral hepatosplenomegaly",
+      "Completely spared neurological function",
+      "Normal survival into adult life"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Neuronal accumulation of GM2 gangliosides produces fulminant neuroregression without visceral enlargement. The severe condition **Tay-Sachs disease** is caused by autosomal recessive deficiency of hexosaminidase A (HEXA gene on 15q23). Infantile onset features hyperacusis with an exaggerated startle response to sound, progressive motor regression, hypotonia, macrocephaly secondary to cerebral lipid accumulation, and refractory seizures, progressing to vegetative decerebration and death by three to four years.",
+   "say": "Tay-Sachs disease results from hexosaminidase A deficiency, storing GM2 gangliosides in neurons. It causes sound hyperacusis, rapid neuroregression, macrocephaly, and early blindness.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Storage Disorder",
+     "Deficient Enzyme",
+     "Accumulated Substrate",
+     "Organomegaly Status",
+     "Macular Cherry-Red Spot"
+    ],
+    "rows": [
+     [
+      "Pompe disease (GSD II)",
+      "Acid alpha-glucosidase",
+      "Glycogen (lysosomal)",
+      "Massive cardiomegaly, liver normal",
+      "Strictly absent"
+     ],
+     [
+      "Gaucher disease",
+      "Glucocerebrosidase",
+      "Glucocerebroside",
+      "Massive splenomegaly, hepatomegaly",
+      "Strictly absent"
+     ],
+     [
+      "Niemann-Pick Type A",
+      "Acid sphingomyelinase",
+      "Sphingomyelin",
+      "Massive hepatosplenomegaly",
+      "Present in 50% of patients"
+     ],
+     [
+      "Tay-Sachs disease",
+      "Hexosaminidase A",
+      "GM2 ganglioside",
+      "Completely absent organomegaly",
+      "Present in 100% of patients"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Ophthalmoscopic visualization of the fovea provides a crucial diagnostic clue for lipid storage disorders. A pathognomonic **macular cherry-red spot** appears when lipid-engorged, pale, opaque retinal ganglion cells surrounding the fovea centralis contrast sharply against the normal red vascular choroid shining through the thin central foveola. While present in nearly all infants with Tay-Sachs, the complete absence of hepatomegaly and splenomegaly definitively distinguishes Tay-Sachs from Niemann-Pick disease.",
+   "say": "A cherry-red macular spot occurs when lipid-laden pale retinal ganglion cells highlight the central vascular fovea. Absent hepatosplenomegaly definitively distinguishes Tay-Sachs from Niemann-Pick.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Tay-Sachs Clinical Signature",
+     "points": [
+      "Cherry-red spot present in 100% of cases",
+      "Liver and spleen are completely normal",
+      "Profound hyperacusis startle to sound",
+      "Hexosaminidase A deficiency"
+     ]
+    },
+    "right": {
+     "title": "Niemann-Pick Clinical Signature",
+     "points": [
+      "Cherry-red spot present in 50% of cases",
+      "Massive hepatomegaly and splenomegaly",
+      "Foamy lipid histiocytes in bone marrow",
+      "Sphingomyelinase deficiency"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Recombinant biotechnology enables targeted intracellular metabolic reconstitution for non-neuropathic storage disorders. Modern management for Gaucher type 1 utilizes **enzyme replacement therapy** with intravenous imiglucerase, which reverses cytopenias, shrinks massive splenomegaly, and arrests osteolytic bone destruction. In infantile Pompe disease, recombinant human alglucosidase alfa significantly reverses left ventricular hypertrophy and prolongs ventilator-free survival, particularly when initiated before irreversible cardiac damage occurs.",
+   "say": "Enzyme replacement therapy with imiglucerase resolves splenomegaly and marrow disease in Gaucher. In Pompe disease, alglucosidase alfa shrinks hypertrophic myocardium and extends life.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Storage Condition",
+     "Recombinant Enzyme Agent",
+     "Primary Target Organ",
+     "Therapeutic Clinical Endpoint"
+    ],
+    "rows": [
+     [
+      "Gaucher disease type 1",
+      "Intravenous imiglucerase",
+      "Spleen, liver, bone marrow",
+      "Normalize platelets, resolve bone pain"
+     ],
+     [
+      "Infantile Pompe disease",
+      "Recombinant alglucosidase alfa",
+      "Myocardium, skeletal muscle",
+      "Reverse cardiac hypertrophy, prolong life"
+     ],
+     [
+      "Fabry disease",
+      "Agalsidase beta",
+      "Vascular endothelium, kidney",
+      "Prevent end-stage renal failure, stroke"
+     ],
+     [
+      "MPS I (Hurler-Scheie)",
+      "Intravenous laronidase",
+      "Viscera, joint connective tissue",
+      "Improve joint mobility, shrink liver"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Definitive diagnostic verification requires fluorometric enzyme quantification in peripheral blood leukocytes. Rather than relying solely on invasive tissue biopsies, clinicians confirm lysosomal storage disorders by measuring **fluorometric leukocyte enzyme activity**, demonstrating profound catalytic reduction of hexosaminidase A, sphingomyelinase, or glucocerebrosidase. Targeted Sanger or next-generation sequencing identifies specific pathogenic mutations, enabling early prenatal diagnosis via chorionic villus sampling in subsequent pregnancies.",
+   "say": "Leukocyte enzyme assays provide definitive confirmation of specific hydrolase deficiencies without invasive biopsies. Molecular DNA testing enables early prenatal diagnosis in future pregnancies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Biochemical Enzyme Assay",
+     "points": [
+      "Gold standard diagnostic confirmation",
+      "Measures catalytic activity in leukocytes or fibroblasts",
+      "Demonstrates >90% loss of specific hydrolase activity"
+     ]
+    },
+    "right": {
+     "title": "Molecular Genetic Analysis",
+     "points": [
+      "Identifies pathogenic bi-allelic mutations",
+      "Essential for carrier screening in high-risk populations",
+      "Enables definitive prenatal diagnosis by CVS"
+     ]
+    }
+   }
+  }
+ ]
+}

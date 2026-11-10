@@ -1,0 +1,160 @@
+{
+  "v": 1,
+  "module": "mic-rickettsia-chlamydia-mycoplasma",
+  "subject": "microbiology",
+  "title": "Rickettsia prowazekii, Epidemic Typhus and Scrub Typhus",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Rickettsia prowazekii** is an obligate intracellular gram negative bacterium transmitted by human body lice and causes epidemic typhus. Louse faeces are scratched into skin or mucous membranes rather than inoculated by a bite alone. Crowding, war, displacement and inability to wash or change clothes drive outbreaks. Fever, severe headache, myalgia and a centrifugal rash cause confusion with other febrile exanthems.",
+      "say": "Epidemic typhus follows body lice and crowding, not simply a tick bite.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/rickettsial-diseases-fig1.webp",
+        "alt": "Rickettsial disease visual clues including rash and eschar patterns",
+        "caption": "Rickettsial diseases may show eschars, rashes and vector clues."
+      }
+    },
+    {
+      "tx": "Rickettsiae invade **endothelial cells**, multiply intracellularly and spread cell to cell, injuring small vessels throughout the body. Vasculitis explains rash, meningoencephalitis, pneumonitis, myocarditis, acute kidney injury and digital or skin necrosis in severe disease. Rocky Mountain spotted fever demonstrates that capillary leakage and thrombocytopenia can kill before confirmatory antibody tests become positive.",
+      "say": "Endothelial infection turns rickettsial disease into systemic small vessel vasculitis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pathogenesis",
+          "points": [
+            "Endothelial entry and intracellular replication",
+            "Cell injury and increased permeability",
+            "Platelet consumption and microthrombi",
+            "Perivascular lymphohistiocytic inflammation"
+          ]
+        },
+        "right": {
+          "title": "Consequences",
+          "points": [
+            "Petechial or maculopapular rash",
+            "Encephalopathy and meningismus",
+            "Hypotension and oedema",
+            "Gangrene in fulminant disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Scrub typhus** is caused by Orientia tsutsugamushi and transmitted by larval trombiculid mites called chiggers. It is a major cause of acute febrile illness across the tsutsugamushi triangle in Asia and the Pacific. An eschar at the bite site, regional lymphadenopathy, fever and rash are important clues, but eschar frequency varies by population and skin pigmentation and absence cannot exclude the diagnosis.",
+      "say": "Scrub typhus is mite borne Orientia disease; an eschar helps greatly but is not mandatory.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Exposure pattern",
+          "points": [
+            "Grass, scrub and agricultural work",
+            "Rodents and mites maintain transmission cycles",
+            "Outdoor sleeping and military field exposure",
+            "Seasonal peaks with vegetation and rain"
+          ]
+        },
+        "right": {
+          "title": "Clinical clues",
+          "points": [
+            "Eschar often in groin, axilla or waistline",
+            "Fever and severe headache",
+            "Lymphadenopathy near eschar",
+            "Hepatitis, pneumonitis or meningoencephalitis in severe cases"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Early rickettsial diagnosis is frequently clinical because **antibodies rise later**. PCR from blood, eschar swab or biopsy can help before seroconversion. Immunofluorescence is a reference serology, while IgM enzyme assays vary in specificity. The Weil Felix test is historically important and still used in some settings, but cross reactivity and poor sensitivity make it unreliable as the sole basis for urgent treatment decisions.",
+      "say": "Do not wait for rickettsial serology when fever, exposure and rash justify immediate doxycycline.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Early tests",
+          "points": [
+            "Eschar PCR has high yield in scrub typhus",
+            "Buffy coat or whole blood PCR varies by day",
+            "Skin biopsy immunohistochemistry in reference centres",
+            "Acute serology often negative"
+          ]
+        },
+        "right": {
+          "title": "Later tests",
+          "points": [
+            "Paired serology shows fourfold rise",
+            "IgM may cross react or persist",
+            "Weil Felix uses Proteus OX antigens",
+            "Blood cultures are unhelpful for obligate intracellular organisms"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Doxycycline** is the cornerstone treatment for epidemic typhus, spotted fever rickettsioses and scrub typhus, including in young children when the diagnosis is likely because short courses have a favourable safety profile compared with untreated rickettsial mortality. Fever often improves within forty eight hours, but lack of rapid improvement should prompt reconsideration of diagnosis, complications or alternative therapy rather than abandoning the rickettsial hypothesis too early.",
+      "say": "Doxycycline should not be withheld from a likely rickettsial illness because of age alone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Treatment points",
+          "points": [
+            "Start empirically on clinical suspicion",
+            "Children with spotted fever should receive doxycycline",
+            "Severe disease may need intensive organ support",
+            "Azithromycin is used in selected scrub typhus settings"
+          ]
+        },
+        "right": {
+          "title": "If fever persists",
+          "points": [
+            "Check adherence and absorption",
+            "Seek pneumonia, abscess or another fever cause",
+            "Consider doxycycline resistance signals regionally",
+            "Use specialist advice for pregnancy and severe disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Brill Zinsser disease** is recrudescence of R prowazekii years after primary epidemic typhus, usually milder and without lice initially, but capable of initiating a new epidemic if body lice are present. It illustrates bacterial latency within a recovered human host. Control of epidemic typhus therefore combines antibiotics, delousing, clothing hygiene and social measures that interrupt the human louse human cycle.",
+      "say": "A remote typhus infection can recrudesce as Brill Zinsser disease and reseed lice borne transmission.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "primary",
+            "label": "Primary epidemic typhus"
+          },
+          {
+            "id": "latent",
+            "label": "Years of silent persistence"
+          },
+          {
+            "id": "recrudescence",
+            "label": "Milder Brill Zinsser illness"
+          },
+          {
+            "id": "lice",
+            "label": "Lice can restart epidemic transmission"
+          }
+        ],
+        "edges": [
+          [
+            "primary",
+            "latent"
+          ],
+          [
+            "latent",
+            "recrudescence"
+          ],
+          [
+            "recrudescence",
+            "lice"
+          ]
+        ]
+      }
+    }
+  ]
+}

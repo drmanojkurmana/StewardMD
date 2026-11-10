@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "id": "cm-foods-toxins-argemone-oil",
+ "subject": "community-medicine",
+ "module": "cm-foods-toxins",
+ "title": "Food Adulteration: Argemone Oil, Sanguinarine and FSSAI Standards",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Argemone oil adulteration in edible oils",
+   "tx": "The predatory or negligent contamination of edible mustard oil with oil expressed from seeds of Argemone mexicana represents a catastrophic form of **food adulteration poisoning**. The toxic alkaloid sanguinarine, alongside dihydrosanguinarine, remains completely soluble and heat-stable in vegetable oil, resisting normal kitchen boiling and frying temperatures and producing devastating multi-system toxicity across entire households sharing a common cooking pot.",
+   "say": "Adulterating mustard oil with prickly poppy seeds introduces heat-stable sanguinarine poison. Boiling and deep-frying cannot destroy the toxin, which strikes everyone eating from the family pot.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Adulteration characteristics",
+     "points": ["Added fraudulently to increase profit margins", "Yellow colour and viscosity mimic mustard oil", "Toxin stable at high domestic frying heats"]
+    },
+    "right": {
+     "title": "Clinical presentation in families",
+     "points": ["Simultaneous onset across entire household", "Bilateral pitting leg dropsy and breathlessness", "Bilateral open-angle glaucoma and blindness"]
+    }
+   }
+  },
+  {
+   "title": "Nitric acid and paper chromatography detection tests",
+   "tx": "Food safety inspectors detect argemone contamination using rapid chemical screening methods, primarily the **nitric acid test for argemone**. Adding five millilitres of concentrated nitric acid to an equal volume of suspect oil in a test tube yields a characteristic brownish-red to orange-red ring at the liquid interface within minutes; laboratory confirmation uses thin-layer chromatography, where sanguinarine fluoresces bright golden-yellow under ultraviolet illumination.",
+   "say": "Food inspectors add concentrated nitric acid to test suspected mustard oil, producing a brown-red ring. Under ultraviolet laboratory light, sanguinarine glows bright golden-yellow.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Equal parts suspect oil and concentrated nitric acid"},
+     {"id": "b", "label": "Shake gently and observe interface for 10 minutes"},
+     {"id": "c", "label": "Development of characteristic brownish-red ring"},
+     {"id": "d", "label": "TLC confirmation: Golden-yellow UV fluorescence"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Sanguinarine mechanism: capillary leakage and glaucoma",
+   "tx": "At the molecular level, **sanguinarine vascular toxicity** inhibits vascular endothelial sodium-potassium ATPase, depleting cellular energy and triggering profound capillary hyperpermeability. Massive extravasation of proteinaceous plasma fluid into subcutaneous tissues produces bilateral dependent dropsy, while fluid accumulation in uveal vascular tissue and trabecular meshwork causes acute intraocular pressure elevation, bilateral open-angle glaucoma, and optic nerve atrophy.",
+   "say": "Sanguinarine paralyzes the pumps that keep blood vessel walls tight. Massive fluid leaks out into the legs, while fluid trapped inside the eyes causes acute glaucoma and blindness.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Organ system", "Sanguinarine pathological effect", "Clinical manifestation"],
+    "rows": [
+     ["Peripheral vasculature", "Endothelial breakdown and capillary leakage", "Bilateral pitting pedal oedema and erythema"],
+     ["Ocular drainage", "Trabecular meshwork block and uveal oedema", "Bilateral open-angle glaucoma with visual loss"],
+     ["Cardiovascular", "Myocardial interstitial oedema and low resistance", "High-output congestive cardiac failure and dyspnoea"],
+     ["Gastrointestinal", "Mucosal congestion and vascular hyperaemia", "Nausea, vomiting, loose watery diarrhoea"]
+    ]
+   }
+  },
+  {
+   "title": "Endemic ascites: Crotalaria and pyrrolizidine alkaloids",
+   "tx": "Another lethal food-borne intoxication in central India is **endemic ascites outbreaks**, historically reported in Madhya Pradesh and Rajasthan when millet crops (little millet or Panicum miliare) are contaminated with weed seeds of Crotalaria species (jhunjhunia). Crotalaria seeds contain hepatotoxic pyrrolizidine alkaloids, specifically monocrotaline, which induce hepatic veno-occlusive disease, obliterating central hepatic venules and causing massive, painful ascites with high fatality.",
+   "say": "Endemic ascites occurs when weed seeds of Crotalaria contaminate harvested millet. The alkaloid monocrotaline blocks liver veins, triggering rapid, painful fluid buildup in the abdomen.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Millet crops contaminated with Crotalaria weed seeds"},
+     {"id": "b", "label": "Ingestion of hepatotoxic monocrotaline alkaloid"},
+     {"id": "c", "label": "Subendothelial swelling of central hepatic venules"},
+     {"id": "d", "label": "Hepatic veno-occlusive disease and massive ascites"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Common food adulterants and rapid home detection",
+   "tx": "Unscrupulous commercial vendors add harmful substances to common foodstuffs, creating pervasive **food adulterant hazards** across municipal markets. Common examples include adding lead chromate or metanil yellow dye to turmeric powder, brick powder to chilli powder, starch to milk, and mineral oil to edible oils; basic consumer awareness and household testing with dilute iodine or hydrochloric acid readily unmask these fraudulent practices.",
+   "say": "Traders cheat consumers by mixing starch into milk, chalk into flour, and toxic dyes into turmeric. Adding simple iodine turns starch purple, exposing watered-down adulterated milk instantly.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Food commodity", "Common fraudulent adulterant", "Health danger / Simple test"],
+    "rows": [
+     ["Turmeric powder", "Metanil yellow chemical dye, lead chromate", "Carcinogenic dye; turns pink with conc. HCl"],
+     ["Chilli powder", "Brick powder, artificial red coal tar dyes", "Stomach irritation; settles rapidly in water glass"],
+     ["Fresh cow milk", "Water, starch, urea, detergent", "Iodine turns blue for starch; lactometer checks water"],
+     ["Black pepper", "Dried papaya seeds", "Papaya seeds float in alcohol; repulsive bitter taste"],
+     ["Ground spices", "Argemone, sawdust, chalk powder", "Effervescence with acid indicates chalk"]
+    ]
+   }
+  },
+  {
+   "title": "Food Safety and Standards Authority of India (FSSAI)",
+   "tx": "Established under the Food Safety and Standards Act of 2006, the **FSSAI regulatory authority** serves as the apex statutory body regulating the manufacture, storage, distribution, sale and import of food products across India. Consolidating eight older conflicting food laws (including the Prevention of Food Adulteration Act of 1954), FSSAI sets science-based standards, licenses food business operators, deploys food safety officers, and conducts market surveillance.",
+   "say": "The Food Safety and Standards Authority of India sets national food standards and licenses businesses. It consolidated older food laws to enforce strict hygiene from farm to dining table.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Regulatory mechanism", "FSSAI statutory role", "Consumer protection outcome"],
+    "rows": [
+     ["Consolidated legal mandate", "Replaced 8 fragmented historical food orders", "Single unified national food safety code"],
+     ["Mandatory licensing", "Mandatory registration for all food business operators", "Traceability and hygiene accountability enforced"],
+     ["Market surveillance", "Random inspection and chemical laboratory sampling", "Prosecution and heavy fines for adulteration"],
+     ["Consumer empowerment", "Food Safety on Wheels mobile testing vans", "Rapid doorstep detection of common adulterants"]
+    ]
+   }
+  },
+  {
+   "title": "National food fortification policy: the +F logo",
+   "tx": "To eradicate widespread micronutrient malnutrition without requiring individual pill compliance, FSSAI established comprehensive **food fortification standards**, introducing the standardized plus-F logo to identify verified fortified foods. Regulations establish precise fortification standards for five key staple food vehicles: wheat flour (atta) and rice fortified with iron, folic acid and B12; edible oils and milk fortified with vitamins A and D; and double fortified salt.",
+   "say": "The plus-F logo on food packets marks staple items enriched with vitamins and minerals. Fortifying ration rice, milk and cooking oil provides daily micronutrients without taking pills.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fortified staple food", "Mandatory micronutrient added", "Public health benefit"],
+    "rows": [
+     ["Wheat flour and Rice", "Iron, Folic acid, Vitamin B12", "Eradicates microcytic and megaloblastic anaemia"],
+     ["Edible vegetable oils", "Vitamin A and Vitamin D (retinyl palmitate)", "Prevents night blindness and adult osteomalacia"],
+     ["Pasteurised dairy milk", "Vitamin A and Vitamin D", "Supports bone growth and mucosal child immunity"],
+     ["Table cooking salt", "Iodine + Microencapsulated iron", "Dual protection against cretinism and anaemia"]
+    ]
+   }
+  },
+  {
+   "title": "Eat Right India movement and public campaigns",
+   "tx": "Complementing regulatory enforcement, FSSAI spearheads the multi-sectoral **Eat Right India movement**, built upon three interconnected pillars: Eat Safe, Eat Healthy, and Eat Sustainably. The campaign promotes front-of-pack traffic light labeling, certifies schools and campuses as Eat Right campuses, restricts the marketing of high-fat, high-sugar and high-salt (HFSS) ultra-processed foods to children, and trains street food vendors in hygienic food handling.",
+   "say": "The Eat Right India campaign urges families to cut salt, sugar and trans fats. It certifies clean school cafeterias and trains street food vendors to handle snacks safely.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Eat Safe: Hygiene standards and vendor training"},
+     {"id": "b", "label": "Eat Healthy: Reduce salt, sugar, trans fats"},
+     {"id": "c", "label": "Eat Sustainably: Local seasonal foods, eliminate waste"},
+     {"id": "d", "label": "National non-communicable disease risk reduction"}
+    ],
+    "edges": [["a", "d"], ["b", "d"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Clean street food hubs and vendor certification",
+   "tx": "Recognizing that millions of citizens consume food prepared by informal street food vendors daily, FSSAI implements the **clean street food hub certification**. Municipal authorities audit popular street food clusters against strict sanitary criteria, ensuring potable running water, pest-proof waste bins, personal protective aprons and caps for vendors, food safety training, and periodic bacteriological testing of prepared dishes and drinking water.",
+   "say": "Clean street food hubs guarantee that outdoor food stalls use clean drinking water, wear caps and aprons, and dispose of garbage properly, keeping street dining safe from contamination.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Mapping urban street food clusters"},
+     {"id": "b", "label": "Food handler hygiene training and medical check"},
+     {"id": "c", "label": "Provision of potable water and waste disposal"},
+     {"id": "d", "label": "Formal FSSAI Clean Street Food Hub certification"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

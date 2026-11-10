@@ -1,223 +1,234 @@
 {
- "v": 1,
- "module": "pat-adaptations-accumulations",
- "subject": "pathology",
- "title": "Pathological Calcification, Dystrophic Deposition, and Psammoma Bodies",
- "minutes": 6,
- "steps": [
-  {
-   "tx": "The abnormal tissue deposition of calcium salts together with smaller amounts of iron, magnesium, and other mineral salts constitutes pathological calcification. When mineral precipitation occurs locally in dying, necrotic, or damaged tissues despite completely normal circulating serum calcium and phosphate levels, the process is designated **dystrophic calcification**.",
-   "say": "Dystrophic calcification deposits calcium salts in damaged or necrotic tissue despite normal serum calcium.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "necrotic_focus",
-      "label": "Cellular Necrosis Generates Abundant Membrane Phospholipid Fragments"
-     },
-     {
-      "id": "calcium_chelation",
-      "label": "Negatively Charged Phosphate Groups Electrostatically Chelate Calcium"
-     },
-     {
-      "id": "phosphatase_cleave",
-      "label": "Membrane-Associated Phosphatases Cleave Inorganic Phosphate Groups"
-     },
-     {
-      "id": "apatite_crystal",
-      "label": "Calcium Phosphate Nucleates into Insoluble Hydroxyapatite Crystals"
-     }
-    ],
-    "edges": [
-     [
-      "necrotic_focus",
-      "calcium_chelation"
-     ],
-     [
-      "calcium_chelation",
-      "phosphatase_cleave"
-     ],
-     [
-      "phosphatase_cleave",
-      "apatite_crystal"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Dystrophic calcification initiates on membrane fragments within dead cells, where phosphatases generate concentrated phosphate ions that bind ambient calcium. Over time, the amorphous calcium phosphate precipitate organizes into structural **hydroxyapatite crystal lattices**, causing progressive hardening and functional stenosis of affected heart valves and atheromatous arterial plaques.",
-   "say": "Amorphous calcium phosphate precipitates on necrotic membranes, organizing into rigid hydroxyapatite.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Dystrophic Calcification",
-     "points": [
-      "Occurs in dead, dying, degenerating, or necrotic tissues",
-      "Normal serum calcium and normal phosphate metabolism",
-      "Initiates locally within membrane-bound vesicular fragments",
-      "Examples: calcific aortic stenosis, tuberculous caseum, atheromas"
-     ]
+  "v": 1,
+  "module": "pat-adaptations-accumulations",
+  "subject": "pathology",
+  "title": "Pathological Calcification, Dystrophic Deposition, and Psammoma Bodies",
+  "minutes": 6,
+  "steps": [
+    {
+      "tx": "The abnormal tissue deposition of calcium salts together with smaller amounts of iron, magnesium, and other mineral salts constitutes pathological calcification. When mineral precipitation occurs locally in dying, necrotic, or damaged tissues despite completely normal circulating serum calcium and phosphate levels, the process is designated **dystrophic calcification**.",
+      "say": "Dystrophic calcification deposits calcium salts in damaged or necrotic tissue despite normal serum calcium.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "necrotic_focus",
+            "label": "Cellular Necrosis Generates Abundant Membrane Phospholipid Fragments"
+          },
+          {
+            "id": "calcium_chelation",
+            "label": "Negatively Charged Phosphate Groups Electrostatically Chelate Calcium"
+          },
+          {
+            "id": "phosphatase_cleave",
+            "label": "Membrane-Associated Phosphatases Cleave Inorganic Phosphate Groups"
+          },
+          {
+            "id": "apatite_crystal",
+            "label": "Calcium Phosphate Nucleates into Insoluble Hydroxyapatite Crystals"
+          }
+        ],
+        "edges": [
+          [
+            "necrotic_focus",
+            "calcium_chelation"
+          ],
+          [
+            "calcium_chelation",
+            "phosphatase_cleave"
+          ],
+          [
+            "phosphatase_cleave",
+            "apatite_crystal"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Metastatic Calcification",
-     "points": [
-      "Occurs in normal, healthy, non-injured tissues throughout body",
-      "Driven by sustained systemic hypercalcaemia or hyperphosphataemia",
-      "Predilects alkaline tissues with active acid excretion (lungs, stomach, kidneys)",
-      "Examples: primary hyperparathyroidism, bone metastases, vitamin D toxicity"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "In contrast to dystrophic deposition, calcification occurring in normal, uninjured tissues secondary to persistent systemic hypercalcaemia represents metastatic calcification. Characteristically, **metastatic calcification sites** involve internal organs that actively excrete acid, where local tissue alkalinization promotes calcium phosphate precipitation, predominantly affecting gastric mucosa, alveolar septa, and renal tubular basements.",
-   "say": "Metastatic calcification deposits calcium in healthy alkaline tissues due to systemic hypercalcaemia.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "hypercalcemia_surge",
-      "label": "Systemic Hypercalcaemia (Hyperparathyroidism, Osteolysis, Sarcoidosis)"
-     },
-     {
-      "id": "alkaline_gradient",
-      "label": "Gastric, Alveolar, and Renal Tissues Excrete Acid, Elevating Local pH"
-     },
-     {
-      "id": "solubility_drop",
-      "label": "Alkaline Environment Drastically Lowers Calcium Phosphate Solubility"
-     },
-     {
-      "id": "interstitial_deposit",
-      "label": "Metastatic Hydroxyapatite Crystallizes Across Delicate Basement Membranes"
-     }
-    ],
-    "edges": [
-     [
-      "hypercalcemia_surge",
-      "alkaline_gradient"
-     ],
-     [
-      "alkaline_gradient",
-      "solubility_drop"
-     ],
-     [
-      "solubility_drop",
-      "interstitial_deposit"
-     ]
-    ]
-   }
-  },
-  {
-   "tx": "Common clinical causes of metastatic calcification include primary hyperparathyroidism, parathyroid-hormone-related peptide secretion by squamous cell carcinomas, osteolytic skeletal metastases, vitamin D intoxication, and chronic kidney disease. In chronic renal failure, phosphate retention drives secondary hyperparathyroidism and elevates the **calcium-phosphate solubility product** above seventy.",
-   "say": "Metastatic calcification occurs when hypercalcaemia or renal phosphate retention exceeds the solubility product.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Hypercalcaemia Drivers",
-     "points": [
-      "Primary hyperparathyroidism from solitary parathyroid adenoma",
-      "Humoral hypercalcemia of malignancy via PTHrP secretion",
-      "Widespread osteolytic bone metastases from breast or lung cancer",
-      "Extra-renal 1-alpha-hydroxylase activity in sarcoid granulomas"
-     ]
+    {
+      "tx": "Dystrophic calcification initiates on membrane fragments within dead cells, where phosphatases generate concentrated phosphate ions that bind ambient calcium. Over time, the amorphous calcium phosphate precipitate organizes into structural **hydroxyapatite crystal lattices**, causing progressive hardening and functional stenosis of affected heart valves and atheromatous arterial plaques.",
+      "say": "Amorphous calcium phosphate precipitates on necrotic membranes, organizing into rigid hydroxyapatite.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dystrophic Calcification",
+          "points": [
+            "Occurs in dead, dying, degenerating, or necrotic tissues",
+            "Normal serum calcium and normal phosphate metabolism",
+            "Initiates locally within membrane-bound vesicular fragments",
+            "Examples: calcific aortic stenosis, tuberculous caseum, atheromas"
+          ]
+        },
+        "right": {
+          "title": "Metastatic Calcification",
+          "points": [
+            "Occurs in normal, healthy, non-injured tissues throughout body",
+            "Driven by sustained systemic hypercalcaemia or hyperphosphataemia",
+            "Predilects alkaline tissues with active acid excretion (lungs, stomach, kidneys)",
+            "Examples: primary hyperparathyroidism, bone metastases, vitamin D toxicity"
+          ]
+        }
+      }
     },
-    "right": {
-     "title": "Hyperphosphataemia Drivers",
-     "points": [
-      "Chronic kidney disease with decreased phosphate filtration",
-      "Secondary hyperparathyroidism attempting to excrete retained phosphate",
-      "Elevated calcium x phosphate ion product exceeding 60-70 mg2/dL2",
-      "Calciphylaxis: lethal metastatic calcification of cutaneous arterioles"
-     ]
-    }
-   }
-  },
-  {
-   "tx": "Under light microscopy, dystrophic calcium deposits can organize into concentric, lamellated, spherical basophilic calcifications resembling tiny microscopic pearls. Known as **psammoma bodies**, these structures represent successive waves of mineral deposition around single necrotic tumor cells, providing a distinctive diagnostic histological hallmark in specific neoplasms.",
-   "say": "Psammoma bodies are concentric, lamellated calcified spheres formed around dying neoplastic cells.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/cns-tumours-types-and-grading-fig1.webp",
-    "caption": "Meningioma histology: whorled syncytial meningothelial cells with concentric psammoma bodies on H&E. Image: Mikael Häggström, CC0, Wikimedia Commons.",
-    "alt": "Histological section of meningioma demonstrating abundant calcified psammoma bodies"
-   }
-  },
-  {
-   "tx": "The classic tumors and lesions known for displaying prominent psammoma bodies are summarized by the medical mnemonic PSaMMoma. These include papillary thyroid carcinoma, serous papillary cystadenocarcinoma of the ovary, meningioma, and malignant mesothelioma, where the **concentric calcified rings** stain dark purple-blue with hematoxylin.",
-   "say": "Psammoma bodies classically occur in papillary thyroid cancer, serous ovarian cancer, and meningioma.",
-   "vis": {
-    "kind": "image",
-    "src": "v1/kb/media/papillary-thyroid-carcinoma-fig1.webp",
-    "caption": "Papillary fronds displaying ground-glass nuclei and concentric basophilic psammoma calcifications.",
-    "alt": "Papillary thyroid carcinoma histology exhibiting laminated psammoma bodies"
-   }
-  },
-  {
-   "tx": "On standard histological sections stained with hematoxylin and eosin, calcium salts appear as intensely basophilic, amorphous, granular or clumped deposits. Pathologists confirm calcium composition using the **von Kossa silver stain**, which reacts with phosphates to turn black, or Alizarin Red S, which binds directly to calcium to form an orange-red lake.",
-   "say": "Von Kossa stain reacts with phosphate to turn calcium deposits black, while Alizarin Red turns red.",
-   "vis": {
-    "kind": "compare",
-    "left": {
-     "title": "Von Kossa Silver Reaction",
-     "points": [
-      "Relies on photochemical reaction with calcium-bound phosphate ions",
-      "Silver cations replace calcium in hydroxyapatite crystals",
-      "Ultraviolet reduction precipitates visible black metallic silver",
-      "Standard histological method for demonstrating microcalcifications"
-     ]
+    {
+      "tx": "In contrast to dystrophic deposition, calcification occurring in normal, uninjured tissues secondary to persistent systemic hypercalcaemia represents metastatic calcification. Characteristically, **metastatic calcification sites** involve internal organs that actively excrete acid, where local tissue alkalinization promotes calcium phosphate precipitation, predominantly affecting gastric mucosa, alveolar septa, and renal tubular basements.",
+      "say": "Metastatic calcification deposits calcium in healthy alkaline tissues due to systemic hypercalcaemia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "hypercalcemia_surge",
+            "label": "Systemic Hypercalcaemia (Hyperparathyroidism, Osteolysis, Sarcoidosis)"
+          },
+          {
+            "id": "alkaline_gradient",
+            "label": "Gastric, Alveolar, and Renal Tissues Excrete Acid, Elevating Local pH"
+          },
+          {
+            "id": "solubility_drop",
+            "label": "Alkaline Environment Drastically Lowers Calcium Phosphate Solubility"
+          },
+          {
+            "id": "interstitial_deposit",
+            "label": "Metastatic Hydroxyapatite Crystallizes Across Delicate Basement Membranes"
+          }
+        ],
+        "edges": [
+          [
+            "hypercalcemia_surge",
+            "alkaline_gradient"
+          ],
+          [
+            "alkaline_gradient",
+            "solubility_drop"
+          ],
+          [
+            "solubility_drop",
+            "interstitial_deposit"
+          ]
+        ]
+      }
     },
-    "right": {
-     "title": "Alizarin Red S Staining",
-     "points": [
-      "Directly chelates ionized and crystalline calcium cations",
-      "Forms birefringent, bright orange-red insoluble coordination lake",
-      "High biochemical specificity for calcium over other divalent cations",
-      "Confirms mineral nature in metabolic bone biopsies and vessels"
-     ]
+    {
+      "tx": "Common clinical causes of metastatic calcification include primary hyperparathyroidism, parathyroid-hormone-related peptide secretion by squamous cell carcinomas, osteolytic skeletal metastases, vitamin D intoxication, and chronic kidney disease. In chronic renal failure, phosphate retention drives secondary hyperparathyroidism and elevates the **calcium-phosphate solubility product** above seventy.",
+      "say": "Metastatic calcification occurs when hypercalcaemia or renal phosphate retention exceeds the solubility product.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hypercalcaemia Drivers",
+          "points": [
+            "Primary hyperparathyroidism from solitary parathyroid adenoma",
+            "Humoral hypercalcemia of malignancy via PTHrP secretion",
+            "Widespread osteolytic bone metastases from breast or lung cancer",
+            "Extra-renal 1-alpha-hydroxylase activity in sarcoid granulomas"
+          ]
+        },
+        "right": {
+          "title": "Hyperphosphataemia Drivers",
+          "points": [
+            "Chronic kidney disease with decreased phosphate filtration",
+            "Secondary hyperparathyroidism attempting to excrete retained phosphate",
+            "Elevated calcium x phosphate ion product exceeding 60-70 mg2/dL2",
+            "Calciphylaxis: lethal metastatic calcification of cutaneous arterioles"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Search this microscopy field for the round purple targets. Each one is built from concentric rings of calcium deposited layer upon layer in dying tissue, like the rings inside an onion cut across. These laminated spheres are **psammoma bodies**, and finding them should immediately bring papillary thyroid carcinoma, meningioma and serous ovarian tumours into your differential list.",
+      "say": "Under the microscope these round structures show ring upon ring of deposited calcium. They are psammoma bodies, and they point towards papillary thyroid carcinoma, meningioma and serous ovarian tumours.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m954-pat-adaptations-accumulations-dystrophic-calcification.webp",
+        "alt": "Microscopy view of round concentric lamellated psammoma bodies formed by dystrophic calcification in necrotic tissue",
+        "caption": "Microscopy view of round concentric lamellated psammoma bodies formed by dystrophic calcification in necrotic tissue. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Under light microscopy, dystrophic calcium deposits can organize into concentric, lamellated, spherical basophilic calcifications resembling tiny microscopic pearls. Known as **psammoma bodies**, these structures represent successive waves of mineral deposition around single necrotic tumor cells, providing a distinctive diagnostic histological hallmark in specific neoplasms.",
+      "say": "Psammoma bodies are concentric, lamellated calcified spheres formed around dying neoplastic cells.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/cns-tumours-types-and-grading-fig1.webp",
+        "caption": "Meningioma histology: whorled syncytial meningothelial cells with concentric psammoma bodies on H&E. Image: Mikael Häggström, CC0, Wikimedia Commons.",
+        "alt": "Histological section of meningioma demonstrating abundant calcified psammoma bodies"
+      }
+    },
+    {
+      "tx": "The classic tumors and lesions known for displaying prominent psammoma bodies are summarized by the medical mnemonic PSaMMoma. These include papillary thyroid carcinoma, serous papillary cystadenocarcinoma of the ovary, meningioma, and malignant mesothelioma, where the **concentric calcified rings** stain dark purple-blue with hematoxylin.",
+      "say": "Psammoma bodies classically occur in papillary thyroid cancer, serous ovarian cancer, and meningioma.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/papillary-thyroid-carcinoma-fig1.webp",
+        "caption": "Papillary fronds displaying ground-glass nuclei and concentric basophilic psammoma calcifications.",
+        "alt": "Papillary thyroid carcinoma histology exhibiting laminated psammoma bodies"
+      }
+    },
+    {
+      "tx": "On standard histological sections stained with hematoxylin and eosin, calcium salts appear as intensely basophilic, amorphous, granular or clumped deposits. Pathologists confirm calcium composition using the **von Kossa silver stain**, which reacts with phosphates to turn black, or Alizarin Red S, which binds directly to calcium to form an orange-red lake.",
+      "say": "Von Kossa stain reacts with phosphate to turn calcium deposits black, while Alizarin Red turns red.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Von Kossa Silver Reaction",
+          "points": [
+            "Relies on photochemical reaction with calcium-bound phosphate ions",
+            "Silver cations replace calcium in hydroxyapatite crystals",
+            "Ultraviolet reduction precipitates visible black metallic silver",
+            "Standard histological method for demonstrating microcalcifications"
+          ]
+        },
+        "right": {
+          "title": "Alizarin Red S Staining",
+          "points": [
+            "Directly chelates ionized and crystalline calcium cations",
+            "Forms birefringent, bright orange-red insoluble coordination lake",
+            "High biochemical specificity for calcium over other divalent cations",
+            "Confirms mineral nature in metabolic bone biopsies and vessels"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In older adults, dystrophic calcification commonly targets the aortic valve cusps, producing severe mechanical narrowing of the aortic outflow tract. In **calcific aortic stenosis**, decades of repetitive mechanical shear stress across the valve cusps injure valvular endothelial cells, inciting lipid accumulation, chronic inflammation, and massive nodular calcification that immobilizes the leaflets.",
+      "say": "Calcific aortic stenosis develops when chronic mechanical shear stresses cause nodular calcification of cusps.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "shear_stress",
+            "label": "Lifelong Mechanical Flexing and High Shear Stress Injure Aortic Cusps"
+          },
+          {
+            "id": "lipid_infiltrate",
+            "label": "Circulating Lipoproteins Infiltrate Fibrosa Layer, Inciting Inflammation"
+          },
+          {
+            "id": "myofibroblast_switch",
+            "label": "Valvular Interstitial Cells Differentiate into Osteoblast-Like Phenotypes"
+          },
+          {
+            "id": "nodular_stenosis",
+            "label": "Massive Stony Hard Nodules Precipitate, Restricting Systolic Leaflet Opening"
+          }
+        ],
+        "edges": [
+          [
+            "shear_stress",
+            "lipid_infiltrate"
+          ],
+          [
+            "lipid_infiltrate",
+            "myofibroblast_switch"
+          ],
+          [
+            "myofibroblast_switch",
+            "nodular_stenosis"
+          ]
+        ]
+      }
     }
-   }
-  },
-  {
-   "tx": "In older adults, dystrophic calcification commonly targets the aortic valve cusps, producing severe mechanical narrowing of the aortic outflow tract. In **calcific aortic stenosis**, decades of repetitive mechanical shear stress across the valve cusps injure valvular endothelial cells, inciting lipid accumulation, chronic inflammation, and massive nodular calcification that immobilizes the leaflets.",
-   "say": "Calcific aortic stenosis develops when chronic mechanical shear stresses cause nodular calcification of cusps.",
-   "vis": {
-    "kind": "flow",
-    "nodes": [
-     {
-      "id": "shear_stress",
-      "label": "Lifelong Mechanical Flexing and High Shear Stress Injure Aortic Cusps"
-     },
-     {
-      "id": "lipid_infiltrate",
-      "label": "Circulating Lipoproteins Infiltrate Fibrosa Layer, Inciting Inflammation"
-     },
-     {
-      "id": "myofibroblast_switch",
-      "label": "Valvular Interstitial Cells Differentiate into Osteoblast-Like Phenotypes"
-     },
-     {
-      "id": "nodular_stenosis",
-      "label": "Massive Stony Hard Nodules Precipitate, Restricting Systolic Leaflet Opening"
-     }
-    ],
-    "edges": [
-     [
-      "shear_stress",
-      "lipid_infiltrate"
-     ],
-     [
-      "lipid_infiltrate",
-      "myofibroblast_switch"
-     ],
-     [
-      "myofibroblast_switch",
-      "nodular_stenosis"
-     ]
-    ]
-   }
-  }
- ],
- "quiz": [],
- "gen": "AI"
+  ],
+  "quiz": [],
+  "gen": "AI"
 }

@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-macronutrients-trans-fats",
+ "subject": "community-medicine",
+ "module": "cm-macronutrients",
+ "title": "Dietary Carbohydrates: Glycaemic Index, Dietary Fibre and Trans Fats",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Industrial partial hydrogenation and trans fats",
+   "tx": "Formed during industrial partial hydrogenation of liquid vegetable oils to produce solid shortening and vanaspati, **industrial trans fatty acids** possess geometric trans double bonds that straighten fatty acyl chains into rigid structures. Trans fats exert a doubly deleterious atherogenic effect, simultaneously elevating circulating low-density lipoprotein (LDL) cholesterol and depressing protective high-density lipoprotein (HDL) cholesterol, multiplying coronary artery disease risk.",
+   "say": "Trans fats are created when liquid vegetable oils are chemically hardened into vanaspati ghee. They simultaneously drive up bad LDL cholesterol and drive down protective HDL cholesterol.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Natural cis fatty acids",
+     "points": ["Kinked carbon chain with cis double bonds", "Liquid at room temperature in plant oils", "Preserves normal arterial endothelial health"]
+    },
+    "right": {
+     "title": "Industrial trans fatty acids",
+     "points": ["Straight, rigid trans double bond geometry", "Solid at room temperature (vanaspati ghee)", "Raises LDL, lowers HDL and sparks vascular inflammation"]
+    }
+   }
+  },
+  {
+   "title": "Regulatory limits and India's trans-fat elimination",
+   "tx": "To protect cardiovascular health, the Food Safety and Standards Authority of India enforces strict **trans fat regulatory limits** across all commercial fats, bakery shortenings, margarines and edible vegetable oils. Aligned with the WHO REPLACE initiative, statutory regulations capped trans fats at no more than two percent by weight of total oils, with packaged food manufacturers legally prohibited from using partially hydrogenated vegetable oils.",
+   "say": "The Food Safety and Standards Authority caps trans fats at two percent of total oil weight in all packaged foods, banning dangerous partially hydrogenated fats from bakery items.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Regulatory timeline", "FSSAI statutory limit", "Global WHO REPLACE target"],
+    "rows": [
+     ["Pre-2015 regulation", "Capped at 10 percent in vanaspati", "Broad global phase-out recommended"],
+     ["2017 amendment", "Lowered to 5 percent in all fats", "National surveillance networks established"],
+     ["Current regulation", "Strictly capped at <= 2 percent", "Complete elimination of industrial trans fats"]
+    ]
+   }
+  },
+  {
+   "title": "Dietary fibre: soluble versus insoluble components",
+   "tx": "The non-digestible carbohydrate fraction derived from plant cell walls constitutes **dietary fibre intake**, dividing into water-soluble and water-insoluble fractions. Insoluble fibres (cellulose, hemicellulose and lignin) from whole wheat bran and vegetable skins increase stool bulk, accelerate intestinal transit, and prevent diverticular disease; soluble fibres (pectins, beta-glucans and mucilages) from oats, fenugreek and legumes form viscous gels that blunt postprandial glycaemia.",
+   "say": "Dietary fibre is plant matter that resists human digestion. Insoluble wheat fibre bulks stool and prevents constipation, while soluble oat fibre forms a gel that traps sugars and cholesterol.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Fibre fraction", "Representative food sources", "Primary physiological benefit"],
+    "rows": [
+     ["Insoluble fibre", "Whole wheat bran, brown rice, cabbage, nuts", "Increases fecal mass; accelerates transit time"],
+     ["Soluble fibre", "Oats, barley, fenugreek seeds (methi), psyllium", "Binds bile acids; lowers serum LDL cholesterol"],
+     ["Viscous gel formation", "Pectins in apples, citrus fruits and legumes", "Delays gastric emptying and smooths glucose spikes"],
+     ["Prebiotic fermentation", "Inulin in onions, garlic, bananas and chicory", "Nourishes healthy gut bifidobacteria to make SCFAs"]
+    ]
+   }
+  },
+  {
+   "title": "Recommended fibre intake and health benefits",
+   "tx": "The National Institute of Nutrition prescribes an **adequate fibre recommendation** of thirty to forty grams daily for adults (or roughly fifteen grams per one thousand kilocalories ingested). In addition to preventing hemorrhoids and colonic cancer through dilution of faecal carcinogens, colonic bacterial fermentation of soluble fibre yields short-chain fatty acids (acetate, propionate and butyrate) that nourish colonocytes and suppress hepatic cholesterol synthesis.",
+   "say": "Adults need thirty to forty grams of fibre every day. Bacteria ferment soluble fibre into short-chain fatty acids that protect the bowel wall and lower liver cholesterol production.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Daily intake of 30 to 40 grams dietary fibre"},
+     {"id": "b", "label": "Colonic fermentation by commensal microbiota"},
+     {"id": "c", "label": "Generation of butyrate and short-chain fatty acids"},
+     {"id": "d", "label": "Colonocyte protection and reduced colon cancer risk"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Glycaemic index: postprandial glucose curves",
+   "tx": "To rank carbohydrate foods based on their physiological impact on blood sugar, nutritionists calculate the **glycaemic index ranking**. Determined by measuring the incremental area under the two-hour blood glucose response curve following ingestion of fifty grams of available carbohydrate from a test food, it is expressed as a percentage of the response elicited by fifty grams of pure glucose or white bread.",
+   "say": "The glycaemic index measures how fast a food raises blood sugar compared to pure glucose over two hours. Foods with a low index release sugar slowly, preventing insulin spikes.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Glycaemic index tier", "Numerical GI range", "Common food examples in India"],
+    "rows": [
+     ["Low GI foods", "55 or less", "Whole pulses (rajma, chana), barley, soy, apples"],
+     ["Medium GI foods", "56 to 69", "Brown rice, whole wheat roti, rolled oats, sweet potato"],
+     ["High GI foods", "70 or greater", "White polished rice, maida refined flour, cornflakes, potatoes"]
+    ]
+   }
+  },
+  {
+   "title": "Glycaemic load: integrating quality and portion size",
+   "tx": "Because the glycaemic index does not account for typical serving portions, clinicians calculate **glycaemic load assessment**, which multiplies the food's glycaemic index by the actual grams of available carbohydrate in a standard serving, divided by one hundred. A watermelon slice possesses a high glycaemic index but a low glycaemic load because it is mostly water, whereas polished white rice delivers both high index and high load.",
+   "say": "Glycaemic load accounts for both carbohydrate quality and serving size. A food can have a high index but a low load if it contains very little carbohydrate per serving, like watermelon.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Glycaemic Index (GI)",
+     "points": ["Ranks carbohydrates per 50 grams available sugar", "Reflects rate of intestinal glucose absorption", "Ignores real-world meal portion sizes"]
+    },
+    "right": {
+     "title": "Glycaemic Load (GL)",
+     "points": ["(GI x Available carbohydrate per serving) / 100", "Low GL: <= 10; High GL: >= 20", "Accurately predicts total meal insulin demand"]
+    }
+   }
+  },
+  {
+   "title": "Recommended dietary allowances: concepts and framework",
+   "tx": "Public health nutrition policy is anchored by the **recommended dietary allowance**, defined as the average daily dietary intake level of a nutrient sufficient to meet the physiological requirements of nearly all (ninety-seven to ninety-eight percent) healthy individuals in a specific life stage and gender group. Computed as the Estimated Average Requirement (EAR) plus two standard deviations, RDAs incorporate biological safety margins.",
+   "say": "Recommended dietary allowances are set at two standard deviations above average needs. This safety buffer ensures that daily nutritional targets cover ninety-eight percent of the population.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Estimated Average Requirement (EAR, 50% population)"},
+     {"id": "b", "label": "Add two standard deviations (2 SD safety margin)"},
+     {"id": "c", "label": "Recommended Dietary Allowance (RDA, 97.5% coverage)"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Macronutrient caloric distribution standards",
+   "tx": "The Indian Council of Medical Research recommends a **balanced macronutrient distribution**, specifying that total daily energy should be derived fifty to sixty percent from carbohydrates (emphasizing unrefined whole grains and pulses), twenty to thirty percent from total fats (with visible fat under thirty grams), and ten to fifteen percent from dietary protein, ensuring optimal metabolic homeostasis without excessive glycaemic stress.",
+   "say": "Healthy daily calories should come fifty to sixty percent from complex carbohydrates, twenty to thirty percent from healthy fats, and ten to fifteen percent from protein building blocks.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Macronutrient class", "Target percentage of total daily energy", "Dietary quality priority"],
+    "rows": [
+     ["Complex carbohydrates", "50 to 60 percent of total kcal", "Unrefined millets, brown rice, whole pulses"],
+     ["Total dietary lipids", "20 to 30 percent of total kcal", "Plant oils rich in MUFA/PUFA; limit saturated fats"],
+     ["Dietary proteins", "10 to 15 percent of total kcal", "High biological value cereal-pulse combinations"],
+     ["Free refined sugars", "Less than 5 percent of total kcal", "Eliminate sweetened sodas and confectionery"]
+    ]
+   }
+  },
+  {
+   "title": "Food labelling and consumer warning systems",
+   "tx": "To empower consumers to make cardioprotective choices, statutory regulations mandate clear **front-of-pack nutrition labelling** on all packaged ultra-processed foods. Manufacturers must display standardized declarations of total energy, added sugars, saturated fats, trans fatty acids and sodium per serving, accompanied by warning color-coded stop symbols when nutrient thresholds for salt, trans fats or refined sugars are breached.",
+   "say": "Front-of-pack nutrition labels require clear disclosure of salt, saturated fat, trans fats and added sugar per serving, warning consumers before they purchase unhealthy processed snacks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Packaged food nutrient analysis"},
+     {"id": "b", "label": "Threshold check for sodium, sugar, trans fats"},
+     {"id": "c", "label": "Front-of-pack color-coded consumer warning symbol"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  }
+ ],
+ "quiz": []
+}

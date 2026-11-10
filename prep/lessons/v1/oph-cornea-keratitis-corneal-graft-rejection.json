@@ -1,0 +1,235 @@
+{
+ "v": 1,
+ "id": "oph-cornea-keratitis-corneal-graft-rejection",
+ "subject": "ophthalmology",
+ "module": "oph-cornea",
+ "title": "Corneal Graft Rejection and Keratoplasty",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Corneal graft rejection** is immune attack on donor endothelium or stroma after keratoplasty, giving graft oedema, keratic precipitates on donor, rejection line and vision fall in previously clear graft. Vascularised host beds and prior rejection raise risk because immune privilege weakens. Early steroid rescue reverses endothelial rejection if endothelium survives, delay costing permanent failure.",
+   "say": "Immune attack together gives graft clouding after clear interval in keratoplasty follow up at specialist clinics over months. Early rescue gives endothelial salvage window. Vascular bed gives risk prediction.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m216-oph-cornea-keratitis-corneal-graft-rejection.webp",
+    "alt": "Slit lamp view of endothelial graft rejection, with a linear Khodadoust line of keratic precipitates and stromal oedema in the graft.",
+    "caption": "A linear Khodadoust line of keratic precipitates crosses the donor endothelium, with stromal oedema marking endothelial graft rejection. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Khodadoust line** is linear endothelial rejection front of precipitates advancing across donor endothelium, pathognomonic rejection sign at slit lamp. Epithelial rejection lines and stromal infiltrates give other layer rejections usually self limited or steroid responsive. Endothelial form threatens permanence because human endothelium barely regenerates after immune killing.",
+   "say": "Linear precipitate front together gives endothelial rejection recognition at slit lamp during graft follow up in clinic characteristically. Layer forms give severity separation additionally. Endothelial loss gives permanence risk.",
+   "vis": {
+    "kind": "table",
+    "title": "Rejection by layer",
+    "cols": [
+     "Layer",
+     "Sign and threat"
+    ],
+    "rows": [
+     [
+      "Epithelial",
+      "Raised line, usually transient"
+     ],
+     [
+      "Stromal",
+      "Infiltrate haze, steroid responsive"
+     ],
+     [
+      "Endothelial",
+      "Khodadoust line, failure threat"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Trace this line with your eye before reading the rest of the graft. The **Khodadoust line** is a row of keratic precipitates marching across donor endothelium, the visible front where recipient immune cells are destroying donor cells in sequence. Cornea behind the line swells as its pump cells die, while cornea ahead of it may still be clear. That advancing edge is why urgent steroids can rescue a graft if treatment starts while endothelium remains.",
+   "say": "The Khodadoust line is an advancing front of precipitates destroying donor endothelium in sequence. Urgent steroids can still rescue the graft while clear endothelium remains ahead of it.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m106-oph-cornea-keratitis-corneal-graft-rejection.webp",
+    "alt": "Close view of a Khodadoust rejection line, keratic precipitates advancing in a line across donor endothelium with oedema behind it.",
+    "caption": "A linear front of keratic precipitates crosses the donor endothelium, with graft oedema spreading behind the Khodadoust line. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Penetrating keratoplasty replaces full thickness cornea for deep scars, while lamellar techniques replace diseased layers selectively: anterior lamellar for stromal scar sparing healthy endothelium, endothelial keratoplasty for endothelial failure sparing healthy stroma. **Layer surgery** principle reduces rejection and structural risks by replacing only failed layer where possible.",
+   "say": "Layer selective replacement together gives modern keratoplasty principle in corneal surgery at referral centres for scar and failure. Endothelium sparing gives rejection reduction benefit. Full replacement gives deep scar role.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Penetrating graft",
+     "points": [
+      "Full thickness replacement",
+      "Deep scar indications",
+      "All layer rejection possible"
+     ]
+    },
+    "right": {
+     "title": "Lamellar grafts",
+     "points": [
+      "Only diseased layer replaced",
+      "Lower rejection by layer",
+      "Technique by failed layer"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Endothelial keratoplasty** strips diseased host endothelium and inserts donor endothelial lenticule through small incision for Fuchs or pseudophakic failure, faster rehabilitation and less astigmatism than penetrating surgery. Graft detachment managed by air rebubbling is its early signature complication. Stromal clarity returns as pump function resumes over weeks.",
+   "say": "Endothelial lenticule insertion together gives pump restoration in endothelial failure at modern corneal units with small incisions. Detachment gives rebubbling management early. Rehabilitation gives speed advantage additionally.",
+   "vis": {
+    "kind": "flow",
+    "title": "Rejection rescue sequence",
+    "nodes": [
+     {
+      "id": "see",
+      "label": "Cloudy graft, line assessed"
+     },
+     {
+      "id": "ster",
+      "label": "Intensive steroid rescue"
+     },
+     {
+      "id": "clear",
+      "label": "Clearing from line backward"
+     },
+     {
+      "id": "fail",
+      "label": "Regraft plan if failed"
+     }
+    ],
+    "edges": [
+     [
+      "see",
+      "ster"
+     ],
+     [
+      "ster",
+      "clear"
+     ],
+     [
+      "clear",
+      "fail"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Counting quadrants in this diagram is a risk calculation, not decoration. A **vascularised graft bed** brings donor tissue within reach of host vessels, and each quadrant of vessels raises the chance that immune cells will reach and reject the graft. Beds scarred by old inflammation or previous surgery sit in the high risk categories. Such patients need closer follow up and readier steroid cover, because rejection here arrives faster and responds less reliably.",
+   "say": "Each quadrant of vessels in the graft bed raises rejection risk by bringing host immunity closer to the donor. High risk beds need closer follow up and readier steroids.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m217-oph-cornea-keratitis-corneal-graft-rejection.webp",
+    "alt": "Diagram grading a vascularised corneal graft bed from zero to four quadrants, with the high risk rejection categories marked.",
+    "caption": "Corneal graft beds are graded by quadrants of vascularisation, from clear beds to four quadrant high risk beds. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "High risk graft beds vascularised in quadrants, inflamed, previously rejected or paediatric need systemic or intensified immunosuppression and counselling on guarded prognosis. Quiet vascular free scar grafts carry best survival statistics quoted to routine patients. **Bed grading** therefore precedes donor allocation ethics and consent in keratoplasty lists.",
+   "say": "Bed vascularisation together gives survival grading before keratoplasty listing at corneal services for scar patients in clinic. High risk gives intensified suppression need. Counselling gives guarded prognosis honesty."
+  },
+  {
+   "tx": "Suture complications, astigmatism management and rejection surveillance structure graft follow up years, selective suture removal guided by topography shaping focus progressively. Patient education on rejection redness, pain and vision fall symptoms with same day access saves grafts more than routine intervals alone. **Red eye in graft** is rejection until examined, discharge instruction phrase.",
+   "say": "Red eye together gives rejection urgency in graft patients at any follow up interval after keratoplasty in discharge teaching always. Topography gives suture shaping additionally. Same day access gives salvage value.",
+   "vis": {
+    "kind": "table",
+    "title": "Graft follow up tasks",
+    "cols": [
+     "Task",
+     "Purpose"
+    ],
+    "rows": [
+     [
+      "Topography suture plan",
+      "Astigmatism shaping progressively"
+     ],
+     [
+      "Endothelium counts",
+      "Failure surveillance years"
+     ],
+     [
+      "Red eye education",
+      "Rejection salvage access"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure versus rejection distinction: failed graft never cleared or clouds from endothelial attrition without inflammatory line, rejection clouds previously clear graft with immune signs. Treatment differs, rescue steroids for rejection, regraft planning for attrition failure. **Clear interval** history therefore decides rescue attempt legitimacy at presentation.",
+   "say": "Clear interval together gives rejection separation from attrition failure during graft assessment in clinic at presentation urgently. Rescue gives inflammatory pathway direction. Regraft gives attrition endpoint.",
+   "vis": {
+    "kind": "table",
+    "title": "Cloudy graft split",
+    "cols": [
+     "History",
+     "Direction"
+    ],
+    "rows": [
+     [
+      "Was clear, line present",
+      "Rejection rescue steroids"
+     ],
+     [
+      "Never cleared well",
+      "Primary failure regraft"
+     ],
+     [
+      "Slow cloud years, quiet",
+      "Attrition failure planning"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: line rejects endothelium, layers select surgery, beds grade survival and red eye rescues same day. Lamellar sparing reduces rejection, endothelial barely regenerates and quiet beds survive longest. **Khodadoust** name answers endothelial rejection in one word. Donor tissue allocation follows the same bed grading in waiting list priority discussions.",
+   "say": "Rejection line together gives endothelial recognition while bed grading gives survival prediction at graft clinics for patients reliably. Layer selection gives modern surgery principle additionally. Same day review gives salvage rule.",
+   "vis": {
+    "kind": "table",
+    "title": "Graft anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Khodadoust line",
+      "Endothelial rejection front"
+     ],
+     [
+      "Best bed",
+      "Quiet avascular scar"
+     ],
+     [
+      "Red graft eye",
+      "Same day rejection review"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Khodadoust line",
+   "b": "Linear endothelial rejection precipitate front; intensive steroid rescue before endothelium lost."
+  },
+  {
+   "f": "Lamellar principle",
+   "b": "Replace only failed layer: anterior for stromal scar, endothelial for pump failure."
+  },
+  {
+   "f": "Rejection versus failure",
+   "b": "Rejection clouds clear graft with immune line; attrition clouds slowly without inflammation."
+  }
+ ],
+ "keys": [
+  "Vascular beds reject more, counsel guarded",
+  "Endothelial rejection threatens permanence",
+  "Graft red eye is rejection until examined"
+ ]
+}

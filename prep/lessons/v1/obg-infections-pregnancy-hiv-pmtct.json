@@ -1,0 +1,246 @@
+{
+ "v": 1,
+ "module": "obg-infections-pregnancy",
+ "subject": "obstetrics-gynaecology",
+ "title": "HIV PMTCT, Hepatitis B, Syphilis and Group B Streptococcus",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Prevention of mother to child transmission through antiretroviral treatment is **HIV PMTCT**. Universal maternal therapy with viral suppression reduces transmission below one percent. Infant prophylaxis and feeding advice complete the programme. Transmission without treatment runs 25 to 40 percent including breastfeeding, the baseline the programme must beat.",
+   "say": "HIV PMTCT with universal therapy cuts transmission below one percent when suppressed.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Step",
+     "Effect"
+    ],
+    "rows": [
+     [
+      "Maternal ART",
+      "Viral suppression"
+     ],
+     [
+      "Infant prophylaxis",
+      "Post exposure protection"
+     ],
+     [
+      "Result",
+      "Transmission under 1 percent"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lifelong combination treatment for every pregnant woman regardless of count is **antiretroviral therapy** for all. Integrase based regimens suppress fastest in late presenters. Adherence support is the programmes true engine. Dolutegravir based treatment is now preferred, with folate cover addressing early neural tube concerns.",
+   "say": "Antiretroviral therapy for all suppresses virus fastest with integrase based regimens.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "HIV diagnosed"
+     },
+     {
+      "id": "n1",
+      "label": "ART started same day"
+     },
+     {
+      "id": "n2",
+      "label": "Viral load monitored"
+     },
+     {
+      "id": "n3",
+      "label": "Suppression by delivery"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Newborn vaccine plus antibody injection preventing perinatal hepatitis B is **hepatitis B immunoglobulin** with vaccine at birth. Together they cut transmission by over ninety percent in carrier mothers. High viral load mothers also receive tenofovir in late pregnancy. Vaccine within 24 hours of birth plus immunoglobulin within seven days is the timing written in protocols.",
+   "say": "Hepatitis B immunoglobulin plus vaccine at birth cuts transmission over ninety percent.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-preg_prep_inspect.webp",
+    "alt": "PMTCT and immunisation care.",
+    "caption": "PMTCT care. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Treponemal and non treponemal testing at booking with penicillin treatment forms **syphilis screening** in pregnancy. Partners are treated simultaneously to prevent reinfection. Repeat testing in late pregnancy catches new infection in high prevalence settings. Benzathine penicillin is the only treatment proven to prevent congenital syphilis; allergy earns desensitisation, not substitution.",
+   "say": "Syphilis screening treats partners simultaneously to prevent reinfection in pregnancy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Test",
+     "Type"
+    ],
+    "rows": [
+     [
+      "VDRL or RPR",
+      "Non treponemal, activity"
+     ],
+     [
+      "TPHA",
+      "Treponemal, ever infected"
+     ],
+     [
+      "Treatment",
+      "Penicillin only in pregnancy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Intrapartum penicillin preventing early neonatal sepsis from vaginal colonisation is **group B streptococcus prophylaxis**. Screening based or risk based strategies both work when applied consistently. Previous affected baby or bacteriuria mandates prophylaxis regardless. Four hours of intravenous penicillin before delivery is the adequacy threshold quoted for full protection.",
+   "say": "Group B streptococcus prophylaxis with intrapartum penicillin prevents early neonatal sepsis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Risk identified"
+     },
+     {
+      "id": "n1",
+      "label": "Penicillin in labour"
+     },
+     {
+      "id": "n2",
+      "label": "Four hours before delivery ideal"
+     },
+     {
+      "id": "n3",
+      "label": "Neonatal sepsis prevented"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Delivery mode for HIV follows viral load, with caesarean reserved for unsuppressed women, termed **viral load delivery planning**. Suppressed women deliver vaginally safely. Membranes and invasive monitoring decisions follow the same logic. A viral load under 50 copies per millilitre near delivery supports vaginal birth in current guidance.",
+   "say": "Viral load delivery planning reserves caesarean for unsuppressed HIV.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Suppressed",
+     "points": [
+      "Vaginal delivery",
+      "Standard care"
+     ]
+    },
+    "right": {
+     "title": "Unsuppressed",
+     "points": [
+      "Planned caesarean considered",
+      "Intensive infant prophylaxis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Infant feeding advice balances transmission against formula dangers by setting, following **context feeding guidance**. Where safe water is assured, formula avoids postnatal transmission entirely. Elsewhere exclusive breastfeeding on maternal therapy is safer overall. Mixed feeding raises transmission compared with exclusive breastfeeding and is counselled against where breastfeeding is chosen.",
+   "say": "Context feeding guidance balances transmission risk against formula dangers by setting.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/rh-isoimmunization-fig1.webp",
+    "alt": "Perinatal prevention programmes context.",
+    "caption": "Prevention context. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Hepatitis C has no perinatal prophylaxis, so management is **identification and linkage**. Vertical transmission is about five percent and rises with HIV coinfection. Direct acting antivirals are deferred until after pregnancy currently. Children exposed perinatally are offered testing as adults, closing the loop years later.",
+   "say": "Hepatitis C management in pregnancy is identification and postpartum treatment linkage.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Aspect",
+     "HCV in pregnancy"
+    ],
+    "rows": [
+     [
+      "Transmission",
+      "About 5 percent"
+     ],
+     [
+      "Prophylaxis",
+      "None available"
+     ],
+     [
+      "Treatment",
+      "After pregnancy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Every positive infectious screen triggers partner services and neonatal alerts, systematised as **positive result pathway**. Documentation in handheld notes ensures the delivery team acts. Confidentiality protections apply throughout. A named clinician owns each positive result until treatment and partner care are documented complete.",
+   "say": "Positive result pathways trigger partner services and neonatal alerts systematically.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "n0",
+      "label": "Screen positive"
+     },
+     {
+      "id": "n1",
+      "label": "Mother treated"
+     },
+     {
+      "id": "n2",
+      "label": "Partner services offered"
+     },
+     {
+      "id": "n3",
+      "label": "Neonatal team alerted"
+     }
+    ],
+    "edges": [
+     [
+      "n0",
+      "n1"
+     ],
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ]
+    ]
+   }
+  }
+ ]
+}

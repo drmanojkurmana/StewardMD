@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "mic-history-morphology",
+  "subject": "microbiology",
+  "title": "Bacterial Surface Structures: Capsule, Flagella, Pili and Spores",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The bacterial **capsule** is a hydrated polysaccharide (occasionally polypeptide, as in anthrax poly D glutamic acid) gel outside the wall that phagocytes cannot grip, making it the classic antiphagocytic virulence factor of pneumococcus, meningococcus, Hib and Klebsiella. Capsular antigens define serotypes, carry conjugate vaccines, and swell visibly with specific antiserum in the Quellung reaction Neufeld described in pneumococcus.",
+      "say": "A slippery sugar coat defeats phagocyte grip; vaccines learned to target the coat itself.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Capsule functions",
+          "points": [
+            "Antiphagocytic: pneumococcus, meningococcus, Hib",
+            "Serotype identity (over 90 pneumococcal)",
+            "Conjugate vaccine antigen",
+            "Biofilm and desiccation protection"
+          ]
+        },
+        "right": {
+          "title": "Capsule demonstrations",
+          "points": [
+            "Quellung reaction: capsular swelling with antiserum",
+            "India ink negative halo",
+            "Mucoid colonies on agar",
+            "Latex agglutination antigen tests (CSF)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Flagella** are helical flagellin propellers driven by a rotary motor, arranged peritrichously (all around, E coli and Salmonella), polar (Vibrio, Pseudomonas), lophotrichous tufts or amphitrichous, powering motility and chemotaxis. H antigens in Salmonella serotyping are flagellar, darting motility names Vibrio cholerae under the microscope, and swarming names Proteus across the agar plate.",
+      "say": "Name the flagellar pattern and the motility; H antigen is flagellin in serotyping language.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Arrangements",
+          "points": [
+            "Peritrichous: E coli, Salmonella, Proteus",
+            "Polar monotrichous: Vibrio cholerae (darting)",
+            "Lophotrichous tufts: Helicobacter",
+            "Non motile: Klebsiella, Shigella, Yersinia at 37C"
+          ]
+        },
+        "right": {
+          "title": "Bedside clues",
+          "points": [
+            "Swarming film over blood agar: Proteus",
+            "Hanging drop motility in cholera stool",
+            "Flagellin triggers TLR5 innate sensing",
+            "Motility agar (SIM) in identification panels"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pili** (fimbriae) are adhesive hair like protein appendages: common pili mediate attachment to mucosa (E coli P pili to uroepithelium, gonococcal pili with antigenic variation), while the single sex pilus of F plasmid donors builds the bridge of conjugation. Adhesion is colonisation's first step, so pili are vaccine and anti adhesion targets, and their phase variation lets pathogens shuffle surface identity.",
+      "say": "Pili grip the mucosa first and conjugate second; colonisation begins with adhesion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Common pili",
+          "points": [
+            "Mucosal adhesion (uropathogenic E coli)",
+            "Antigenic and phase variation (gonococcus)",
+            "Type IV pili: twitching motility, Neisseria",
+            "Anti adhesion strategies in vaccine design"
+          ]
+        },
+        "right": {
+          "title": "Sex pilus",
+          "points": [
+            "Encoded by F plasmid",
+            "Conjugation bridge for DNA transfer",
+            "Resistance plasmids travel this route",
+            "Male specific phages attach here"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Bacterial **spores** (endospores) are dormant, dehydrated fortresses formed inside Bacillus and Clostridium cells under starvation: calcium dipicolinate core, keratin like coat, DNA armoured by small acid soluble proteins, surviving boiling, desiccation and years of soil. Germination returns the vegetative cell when nutrients reappear. Spores explain tetanus in wounds, anthrax persistence and why sterilisation standards are written against them.",
+      "say": "An endospore is a bacterium's time capsule; sterilisation is certified against its survival.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Spore anatomy",
+          "points": [
+            "Core: DNA, calcium dipicolinate, low water",
+            "Cortex and spore coat layers",
+            "Formed intracellularly, released on lysis",
+            "Terminal, subterminal or central positions identify"
+          ]
+        },
+        "right": {
+          "title": "Spore formers to know",
+          "points": [
+            "Bacillus anthracis and cereus",
+            "Clostridium tetani (terminal, drumstick)",
+            "Clostridioides difficile (hospital diarrhoea)",
+            "Clostridium botulinum and perfringens"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Spore resistance writes** disinfection law: boiling and most disinfectants fail, so moist heat at 121 degrees under pressure, hot air at 160 to 180, ethylene oxide and sporicidal agents (glutaraldehyde prolonged, peracetic acid, hypochlorite) carry the spore claim, and biological indicators use Geobacillus stearothermophilus spores precisely because anything that kills them certifies the cycle. Alcohol hand rubs do not kill C difficile spores; soap and water physically removes them.",
+      "say": "If it cannot kill stearothermophilus spores, it has not sterilised; alcohol cannot, soap removes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "contaminate",
+            "label": "Spores contaminate surface or instrument"
+          },
+          {
+            "id": "choose",
+            "label": "Sporicidal method chosen (autoclave, EtO, hypochlorite)"
+          },
+          {
+            "id": "indicator",
+            "label": "Biological indicator spores killed: cycle certified"
+          },
+          {
+            "id": "germinate",
+            "label": "Failure leaves spores to germinate in host or broth"
+          }
+        ],
+        "edges": [
+          [
+            "contaminate",
+            "choose"
+          ],
+          [
+            "choose",
+            "indicator"
+          ],
+          [
+            "indicator",
+            "germinate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The glycocalyx spectrum extends capsule logic into **biofilms**: slime layers anchoring communities to catheters, prostheses and teeth, where matrix polymers slow antibiotic penetration and metabolism slows killing, so device infections relapse until the device is removed. Staphylococcus epidermidis on lines and Pseudomonas in cystic fibrosis airways are biofilm diseases wearing organism names.",
+      "say": "A biofilm is a capsule become a city; antibiotics besiege it, removal conquers it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Biofilm properties",
+          "points": [
+            "Polysaccharide matrix community",
+            "Slow growth persisters survive antibiotics",
+            "Quorum sensing coordinates behaviour",
+            "Device removal usually required for cure"
+          ]
+        },
+        "right": {
+          "title": "Clinical theatres",
+          "points": [
+            "Central line staphylococci",
+            "Prosthetic joint and valve infections",
+            "Dental plaque as biofilm prototype",
+            "Cystic fibrosis Pseudomonas"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Surface antigens organise** serotyping grammar: O antigen is the gram negative outer membrane polysaccharide side chain (somatic, heat stable), H is flagellar (heat labile), K is capsular (Vi in Salmonella Typhi masking O agglutination until heated), and F is fimbrial. Weil Felix and Widal reactions from the serology lessons are these letters at work in the test tube.",
+      "say": "O is wall sugar, H is flagellum, K is capsule; serology questions are alphabet questions.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Antigen letters",
+          "points": [
+            "O: LPS polysaccharide, heat stable",
+            "H: flagellin, heat labile",
+            "K and Vi: capsular, mask O antigen",
+            "M protein: streptococcal virulence analogue"
+          ]
+        },
+        "right": {
+          "title": "Where letters work",
+          "points": [
+            "Salmonella serotyping (Kauffmann White)",
+            "E coli O157 and other pathotypes",
+            "Widal reads O and H titres",
+            "Vaccine serotype selection (pneumococcus)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Spore position and** capsule presence become rapid bench identities: terminal drumstick spores name tetani in a wound Gram stain, large boxcar bacilli with capsule in blood name anthracis, mucoid pink colonies on MacConkey whisper capsulated Klebsiella, and non motile capsulated coccobacilli in CSF answer Hib in the unvaccinated. Morphology lessons earn their marks at exactly these pattern recognitions.",
+      "say": "Drumstick, boxcar, mucoid: morphology patterns are diagnoses at bench speed.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pattern identities",
+          "points": [
+            "Terminal spore drumstick: C tetani",
+            "Boxcar bacilli with capsule: B anthracis",
+            "Mucoid lactose fermenter: Klebsiella",
+            "Sporing in culture, not tissue: clostridia usually"
+          ]
+        },
+        "right": {
+          "title": "Bench cautions",
+          "points": [
+            "Spores rarely seen in clinical specimens",
+            "Capsule lost on repeated subculture",
+            "Swarming Proteus obscures mixed cultures",
+            "Confirm patterns with culture and tests"
+          ]
+        }
+      }
+    }
+  ]
+}

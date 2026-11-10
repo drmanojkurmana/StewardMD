@@ -1,0 +1,239 @@
+{
+  "v": 1,
+  "module": "mic-history-morphology",
+  "subject": "microbiology",
+  "title": "History of Microbiology: Koch Postulates, Pasteur, Lister and Leeuwenhoek",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Koch postulates** demand four proofs before a microbe is blamed for a disease: the organism occurs in every case, it is isolated in pure culture, the culture reproduces disease in a healthy host, and it is re-isolated from that host. Robert Koch built them on anthrax, tuberculosis and cholera work, and they remain the logic skeleton beneath modern causal claims even where viruses, uncultivable organisms and carrier states force their molecular revision.",
+      "say": "Find it, grow it, reproduce it, recover it: Koch's four proofs still frame causal claims.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "find",
+            "label": "Organism in every case of disease"
+          },
+          {
+            "id": "grow",
+            "label": "Isolated in pure culture"
+          },
+          {
+            "id": "cause",
+            "label": "Culture causes disease in healthy host"
+          },
+          {
+            "id": "recover",
+            "label": "Re-isolated from the experimental host"
+          }
+        ],
+        "edges": [
+          [
+            "find",
+            "grow"
+          ],
+          [
+            "grow",
+            "cause"
+          ],
+          [
+            "cause",
+            "recover"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Antonie van Leeuwenhoek**, a draper grinding single lenses in Delft, first saw bacteria and protozoa in 1670s letters to the Royal Society, calling them animalcules in water, dental plaque and his own stool. His microscopes magnified about 270 fold with a single bead lens, better than compound instruments of his century, and microbiology begins with his curiosity rather than any theory of disease.",
+      "say": "A draper's bead lens saw bacteria a century before anyone knew what they did.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Leeuwenhoek's world",
+          "points": [
+            "Single lens microscopes, about 270x",
+            "Animalcules in rainwater and plaque (1670s)",
+            "Letters to the Royal Society as publications",
+            "No disease theory attached to his microbes"
+          ]
+        },
+        "right": {
+          "title": "What followed",
+          "points": [
+            "Compound microscopes and staining (19th century)",
+            "Germ theory awaited Pasteur and Koch",
+            "Morphology first: cocci, bacilli, spirilla named",
+            "Leeuwenhoek commemorated as father of microbiology"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Louis Pasteur** refuted spontaneous generation with swan neck flasks (broth stays sterile until dust enters), proved microbes cause fermentation and silkworm disease, and converted germ theory into vaccines: attenuated chicken cholera, anthrax at Pouilly le Fort, and rabies post exposure treatment in 1885. Pasteurisation and the Pasteur Institute complete a career that founded microbiology as an experimental science and immunology as its application.",
+      "say": "Pasteur killed spontaneous generation with a bent glass neck and built vaccines from attenuation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pasteur's proofs",
+          "points": [
+            "Swan neck flasks refute spontaneous generation",
+            "Fermentation is microbial, not purely chemical",
+            "Germ theory of disease experimentally grounded",
+            "Attenuation discovered by aged cultures"
+          ]
+        },
+        "right": {
+          "title": "Pasteur's vaccines",
+          "points": [
+            "Chicken cholera (attenuation accident)",
+            "Anthrax vaccine public trial 1881",
+            "Rabies post exposure series 1885",
+            "Pasteurisation from wine and milk work"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Joseph Lister**, reading Pasteur, sprayed carbolic acid over surgical wounds and instruments in 1867 and watched compound fracture and amputation mortality fall, founding antiseptic surgery. Semmelweis's earlier handwashing data (chlorinated lime, puerperal fever) and Nightingale's sanitation statistics complete the pre antibiotic infection control triad that modern sterile technique inherited and converted from antisepsis to asepsis.",
+      "say": "Lister sprayed carbolic acid and surgical sepsis fell; asepsis is his idea matured.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Antisepsis era",
+          "points": [
+            "Carbolic spray and dressings (1867)",
+            "Semmelweis chlorinated lime hand disinfection",
+            "Antiseptics kill microbes in and around wounds",
+            "Mortality falls documented ward by ward"
+          ]
+        },
+        "right": {
+          "title": "Asepsis succession",
+          "points": [
+            "Exclude microbes rather than kill in situ",
+            "Steam sterilisation and sterile fields",
+            "Gloves (Halsted) and theatre discipline",
+            "Modern infection control descends directly"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Koch's laboratory technology** made the postulates executable: solid media (agar suggested by Fanny Hesse, replacing gelatin that melted and was eaten), the Petri dish from his assistant, aniline dyes and the Gram and acid fast stains, and pure culture technique. His 1882 tuberculosis announcement and 1883 cholera expedition are dated by these tools as much as by genius, a recurring history lesson that methods precede discoveries.",
+      "say": "Agar, Petri dishes and dyes came before the famous identifications; methods precede discoveries.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Koch's toolkit",
+          "points": [
+            "Agar solid media (Hesse suggestion)",
+            "Petri dish and streak plate pure cultures",
+            "Aniline dye staining of bacteria",
+            "Microphotography as evidence"
+          ]
+        },
+        "right": {
+          "title": "Koch's identifications",
+          "points": [
+            "Anthrax life cycle and spores (1876)",
+            "Tubercle bacillus announced 1882",
+            "Cholera vibrio in Egypt and India (1883)",
+            "Tuberculin: diagnostic legacy, therapeutic failure"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **postulates fail instructively** where biology disobeys them: viruses uncultivable in Koch's media ( Rivers postulates later), asymptomatic carriers (Typhoid Mary sheds Salmonella Typhi healthily), uncultivable organisms (Treponema pallidum, Mycobacterium leprae for decades), polymicrobial diseases, and organisms that cause disease only in compromised hosts. Molecular Koch postulates (Falkow) relocate proof to virulence genes: delete it, lose disease; restore it, regain it.",
+      "say": "Carriers, viruses and uncultivable organisms broke the postulates; genes inherited their logic.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classical failures",
+          "points": [
+            "Healthy carriers shed pathogens",
+            "Viruses need cells, not agar",
+            "Leprae and pallidum resist routine culture",
+            "Opportunists need host defects to harm"
+          ]
+        },
+        "right": {
+          "title": "Modern revisions",
+          "points": [
+            "Molecular postulates: virulence gene deletion and restoration",
+            "Sequence based identification (Fredricks and Relman)",
+            "Animal models and organoids substitute hosts",
+            "Epidemiological causality frameworks alongside"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **golden age cascade** (1876 to 1910) named a pathogen per year at its peak: Neisser's gonococcus, Loeffler's diphtheria bacillus, Klebs's and, in the usual telling, the roster examiners sample from history questions beside their organisms. Each identification converted a clinical syndrome into a transmissible agent with a culture, a stain and eventually a therapy, which is why historical pairings (Koch TB, Pasteur rabies, Lister antisepsis) remain shorthand.",
+      "say": "A microbe a year for three decades turned syndromes into agents with stains and cultures.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pairings to know",
+          "points": [
+            "Koch: anthrax, tuberculosis, cholera",
+            "Pasteur: attenuation, rabies, pasteurisation",
+            "Lister: antiseptic surgery",
+            "Leeuwenhoek: first bacterial observations"
+          ]
+        },
+        "right": {
+          "title": "Supporting cast",
+          "points": [
+            "Gram: differential stain (1884)",
+            "Petri and Hesse: dish and agar",
+            "Ehrlich: acid fast stain roots, chemotherapy",
+            "Fleming, Florey, Chain: penicillin era opening"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**History questions test** one discipline beyond dates: separating observation, mechanism and application. Leeuwenhoek observed without mechanism, Pasteur mechanised without seeing most agents, Koch proved causation with new methods, Lister applied before proof was complete. Examiners reward candidates who place each name at the right station of that sequence rather than in a single inventor blur.",
+      "say": "Observation, mechanism, proof, application: place each name at its station.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "observe",
+            "label": "Leeuwenhoek observes microbes (1670s)"
+          },
+          {
+            "id": "mechanism",
+            "label": "Pasteur mechanises germ theory"
+          },
+          {
+            "id": "prove",
+            "label": "Koch proves causation with pure cultures"
+          },
+          {
+            "id": "apply",
+            "label": "Lister applies antisepsis to surgery"
+          }
+        ],
+        "edges": [
+          [
+            "observe",
+            "mechanism"
+          ],
+          [
+            "mechanism",
+            "prove"
+          ],
+          [
+            "prove",
+            "apply"
+          ]
+        ]
+      }
+    }
+  ]
+}

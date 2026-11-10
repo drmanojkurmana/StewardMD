@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-teletherapy-cobalt-60-teletherapy",
+ "subject": "radiology",
+ "module": "rad-teletherapy",
+ "title": "Cobalt 60, Linear Accelerators, IMRT and Proton Bragg Peak",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Cobalt 60 decays on a clock",
+   "tx": "**Cobalt 60 teletherapy** beams gamma rays of 1.17 and 1.33 megaelectronvolts, averaging 1.25, from a decaying source with a half life of 5.27 years. Output falls about one percent a month, stretching treatment times until the source is replaced roughly every five to seven years. Its wide penumbra from a large source and constant decay made it the developing worlds workhorse before linear accelerators spread.",
+   "say": "Cobalt 60 teletherapy beams gamma rays averaging one point two five megaelectronvolts from a source with half life five point two seven years. Output falls about one percent a month until replacement every five to seven years. Its wide penumbra made it the workhorse before linear accelerators spread.",
+   "vis": {"kind": "table", "cols": ["Property", "Cobalt 60", "Linear accelerator"], "rows": [["Beam origin", "Decaying isotope", "Accelerated electrons"], ["Energy", "1.25 MeV average", "4 to 25 MV selectable"], ["Output drift", "Falls monthly", "Stable, switchable off"], ["Penumbra", "Wide, large source", "Sharper focal spot"]]}
+  },
+  {
+   "title": "Skin sparing and build up",
+   "tx": "**Skin sparing effect** of megavoltage beams deposits maximum dose below the skin, at depth 0.5 cm for cobalt 60 and about 1.5 cm for a 6 megavolt beam, because secondary electrons need distance to build up. Skin therefore tolerates megavoltage courses that orthovoltage beams would burn. Bolus material on the skin deliberately destroys that sparing when the target is skin itself, as in chest wall recurrence cover.",
+   "say": "Skin sparing effect deposits maximum dose below skin, half a centimetre for cobalt and about one point five centimetres for a six megavolt beam. Skin tolerates megavoltage courses orthovoltage beams would burn. Bolus on the skin deliberately destroys that sparing when the target is skin itself.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Megavoltage beam enters"}, {"id": "b", "label": "Electrons build up with depth"}, {"id": "c", "label": "Maximum dose at depth"}, {"id": "d", "label": "Skin dose stays lower"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Linear accelerator makes both beams",
+   "tx": "**Linear accelerator** fires electrons at a tungsten target to brew megavoltage photons, or removes the target and treats with the electron beam itself. Electrons stop within centimetres, dose set by energy at roughly one third of energy in centimetres depth, ideal for skin, scar boosts and chest wall. Photons penetrate to deep pelvis and chest targets. One machine therefore covers superficial and deep work by switching modes.",
+   "say": "Linear accelerator fires electrons at a tungsten target to brew photons, or removes the target and treats with electrons themselves. Electrons stop within centimetres, ideal for skin and scar boosts. Photons penetrate to deep targets. One machine covers superficial and deep work by switching modes.",
+   "vis": {"kind": "compare", "left": {"title": "Photon mode", "points": ["Target in place", "Deep penetration", "Skin sparing build up", "Pelvis and chest targets"]}, "right": {"title": "Electron mode", "points": ["No target, direct beam", "Range about energy over three", "Sharp distal fall off", "Skin and scar boosts"]}}
+  },
+  {
+   "title": "3D conformal to IMRT",
+   "tx": "**IMRT**, intensity modulated radiotherapy, lets each beam deliver a patterned fluence through moving multileaf collimator leaves, sculpting concave dose around cord and parotids that 3D conformal blocks cannot carve. The price is a larger bath of low dose through normal tissue and heavy planning physics. Image guided radiotherapy then verifies position daily with cone beam CT, cashing the conformity IMRT promises instead of assuming the setup repeats perfectly.",
+   "say": "IMRT lets each beam deliver patterned fluence through moving collimator leaves, sculpting concave dose around cord and parotids. The price is a larger low dose bath and heavy planning. Image guidance verifies position daily, cashing the conformity IMRT promises instead of assuming perfect setup.",
+   "vis": {"kind": "table", "cols": ["Technique", "Dose shaping", "Verification"], "rows": [["3D conformal", "Shaped blocks per beam", "Portal films"], ["IMRT", "Modulated fluence patterns", "Planning inverse optimisation"], ["IGRT", "Any technique, daily imaging", "Cone beam CT each fraction"], ["Stereotactic", "Many beams, ablative dose", "Millimetre image guidance"]]}
+  },
+  {
+   "title": "Stereotactic and gamma knife",
+   "tx": "**Stereotactic radiosurgery** delivers one large precise fraction, gamma knife pooling about two hundred cobalt sources through a frame onto intracranial targets like metastases, acoustic neuromas and arteriovenous malformations. Frame or frameless body stereotaxis extends the idea to lung and spine in three to five fractions. Precision, not energy, is the product: submillimetre targeting buys the right to use ablative doses beside cord and optic structures.",
+   "say": "Stereotactic radiosurgery delivers one large precise fraction, gamma knife pooling about two hundred cobalt sources onto intracranial targets. Body stereotaxis extends the idea to lung and spine in three to five fractions. Precision buys the right to use ablative doses beside cord and optic structures.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Frame or frameless fixation"}, {"id": "b", "label": "Submillimetre targeting"}, {"id": "c", "label": "Hundreds of converging beams"}, {"id": "d", "label": "Ablative focal dose"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Proton Bragg peak stops",
+   "tx": "**Bragg peak** is the dose spike protons deposit at the end of their range before stopping completely, with almost no exit dose beyond the tumour. Depth is dialled by beam energy, and multiple energies stack peaks into a spread out plateau covering the target. Children and skull base tumours gain most, sparing growing tissue and the brain beyond, at several times photon cost and with range uncertainty margins that planning must respect.",
+   "say": "Bragg peak is the dose spike protons deposit at the end of their range before stopping, with almost no exit dose beyond the tumour. Multiple energies stack peaks to cover the target. Children and skull base tumours gain most, at several times photon cost and with range uncertainty margins.",
+   "vis": {"kind": "compare", "left": {"title": "Photon depth dose", "points": ["Build up then exponential fall", "Exit dose beyond tumour", "Dose along whole track", "Cheap and universal"]}, "right": {"title": "Proton depth dose", "points": ["Bragg peak at range end", "No exit dose", "Stacked spread out peak", "Costly, range margins needed"]}}
+  },
+  {
+   "title": "Total body irradiation",
+   "tx": "**Total body irradiation** conditions marrow before transplant, using large fields, extended distance, lung shielding blocks and low dose rates to deliver a myeloablative but survivable whole body dose in fractions. The lungs cap the prescription because radiation pneumonitis is the dose limiting toxicity, with kidneys and lens following. It survives in leukaemia conditioning because no drug reaches sanctuary sites like testis and brain as evenly as photons do.",
+   "say": "Total body irradiation conditions marrow before transplant, using large fields and lung shielding to deliver a survivable whole body dose. The lungs cap the prescription because pneumonitis is the dose limiting toxicity. It survives because no drug reaches sanctuary sites as evenly as photons.",
+   "vis": {"kind": "table", "cols": ["Element", "Technique", "Reason"], "rows": [["Field", "Whole body, extended distance", "Uniform coverage"], ["Lung blocks", "Partial transmission", "Pneumonitis limit"], ["Fractionation", "Twice daily splits", "Repair sparing"], ["Sanctuary cover", "Brain and testis included", "Leukaemia hiding places"]]}
+  },
+  {
+   "title": "Choosing energy at the desk",
+   "tx": "**Beam choice** questions in examinations reduce to depth, skin and exit: superficial targets take electrons or superficial photons, deep pelvic targets take high energy photons, spinal cord behind the target argues for protons or IMRT carving, and skin involvement erases skin sparing with bolus. Cobalt answers now test its decay arithmetic and gamma knife role more than routine planning, reflecting its shrinking but real global footprint.",
+   "say": "Beam choice reduces to depth, skin and exit: superficial targets take electrons, deep pelvic targets take high energy photons, cord behind the target argues for protons or IMRT, and skin involvement erases sparing with bolus. Cobalt questions now test decay arithmetic and gamma knife roles.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "How deep is the target"}, {"id": "b", "label": "Skin involved or spared"}, {"id": "c", "label": "What lies beyond"}, {"id": "d", "label": "Energy and modality chosen"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}

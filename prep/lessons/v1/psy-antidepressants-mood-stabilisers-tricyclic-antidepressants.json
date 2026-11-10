@@ -1,0 +1,268 @@
+{
+    "v": 1,
+    "id": "psy-antidepressants-mood-stabilisers-tricyclic-antidepressants",
+    "subject": "psychiatry",
+    "module": "psy-antidepressants-mood-stabilisers",
+    "title": "Tricyclic Antidepressants, SSRIs, and SNRIs: Mechanism and Clinical Applications",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "TCA Pharmacological Profile",
+            "tx": "**Tricyclic antidepressant pharmacology** involves inhibition of presynaptic reuptake transporters for serotonin and norepinephrine, elevating monoamine neurotransmitter concentrations within synaptic clefts. However, tertiary amines like amitriptyline, imipramine, and clomipramine also exert potent antagonistic blockade at muscarinic acetylcholine receptors, histamine H1 receptors, and vascular alpha-1 adrenergic receptors, creating broad side-effect profiles.",
+            "say": "Tricyclic antidepressant pharmacology involves inhibition of presynaptic reuptake transporters for serotonin and norepinephrine, elevating monoamine neurotransmitter concentrations within synaptic clefts. However, tertiary amines like amitriptyline, imipramine, and clomipramine also exert potent antagonistic blockade at muscarinic acetylcholine receptors, histamine H1 receptors, and vascular alpha-1 adrenergic receptors, creating broad side-effect profiles.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/kb/media/antidepressants-ssri-lithium-mood-fig1.webp",
+                "alt": "Reuptake inhibition pathways for serotonin, norepinephrine, and monoaminergic receptors",
+                "caption": "Reuptake inhibition pathways for serotonin, norepinephrine, and monoaminergic receptors"
+            }
+        },
+        {
+            "title": "Specific Indications for TCAs",
+            "tx": "**Clinical indications for tricyclic agents** extend far beyond major depressive disorder due to unique receptor affinities. Clomipramine is the most serotonergic tricyclic and remains a formidable second-line medication for severe refractory obsessive-compulsive disorder. Imipramine remains historically celebrated for nocturnal enuresis, while low-dose amitriptyline provides effective prophylaxis for chronic tension headache and neuropathic pain.",
+            "say": "Clinical indications for tricyclic agents extend far beyond major depressive disorder due to unique receptor affinities. Clomipramine is the most serotonergic tricyclic and remains a formidable second-line medication for severe refractory obsessive-compulsive disorder. Imipramine remains historically celebrated for nocturnal enuresis, while low-dose amitriptyline provides effective prophylaxis for chronic tension headache and neuropathic pain.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Drug Molecule",
+                    "Receptor Selectivity",
+                    "Primary Approved Indication",
+                    "Classic Clinical Vignette"
+                ],
+                "rows": [
+                    [
+                        "Clomipramine",
+                        "Potent 5-HT reuptake inhibitor",
+                        "Obsessive-compulsive disorder",
+                        "Patient with severe contamination rituals"
+                    ],
+                    [
+                        "Imipramine",
+                        "Mixed 5-HT and NE inhibitor",
+                        "Childhood nocturnal enuresis",
+                        "School-age child with refractory bedwetting"
+                    ],
+                    [
+                        "Amitriptyline",
+                        "Mixed reuptake and H1 antagonist",
+                        "Neuropathic pain and migraine prophylaxis",
+                        "Diabetic patient with burning peripheral pain"
+                    ],
+                    [
+                        "Nortriptyline",
+                        "Secondary amine NE selective",
+                        "Elderly unipolar depression",
+                        "Depressed elder needing low orthostatic risk"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "TCA Toxicity and Overdose",
+            "tx": "**Cardiotoxicity in TCA overdose** represents the foremost cause of fatality following self-poisoning, driven by blockade of cardiac fast voltage-gated sodium channels and delayed rectifier potassium channels. Electrocardiographic widening of the QRS complex beyond 100 milliseconds indicates substantial seizure risk, while a QRS duration exceeding 160 milliseconds reliably predicts life-threatening ventricular arrhythmias.",
+            "say": "Cardiotoxicity in TCA overdose represents the foremost cause of fatality following self-poisoning, driven by blockade of cardiac fast voltage-gated sodium channels and delayed rectifier potassium channels. Electrocardiographic widening of the QRS complex beyond 100 milliseconds indicates substantial seizure risk, while a QRS duration exceeding 160 milliseconds reliably predicts life-threatening ventricular arrhythmias.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "QRS Duration 100 to 160 ms",
+                    "points": [
+                        "Moderate intraventricular conduction delay",
+                        "predicts significant central nervous system seizure emergence"
+                    ]
+                },
+                "right": {
+                    "title": "QRS Duration >160 ms",
+                    "points": [
+                        "Severe cardiac sodium channel blockade",
+                        "highly predictive of ventricular tachycardia and cardiovascular collapse"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Antidote for TCA Toxicity",
+            "tx": "**Sodium bicarbonate therapy for TCA toxicity** serves as the definitive lifesaving intervention when the QRS complex exceeds 100 milliseconds or refractory hypotension develops. Hypertonic sodium bicarbonate provides an overwhelming extracellular sodium load that displaces tricyclic molecules from myocardial sodium channels, while alkalinizing serum to pH 7.45 to 7.55 to maximize non-ionized drug binding.",
+            "say": "Sodium bicarbonate therapy for TCA toxicity serves as the definitive lifesaving intervention when the QRS complex exceeds 100 milliseconds or refractory hypotension develops. Hypertonic sodium bicarbonate provides an overwhelming extracellular sodium load that displaces tricyclic molecules from myocardial sodium channels, while alkalinizing serum to pH 7.45 to 7.55 to maximize non-ionized drug binding.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Detect QRS >100 ms on ECG"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Administer IV sodium bicarbonate"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Titrate to arterial pH 7.45-7.55"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Confirm QRS narrowing and rhythm stability"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "SSRI Comparative Pharmacokinetics",
+            "tx": "**Selective serotonin reuptake inhibitors differentiation** highlights distinctive pharmacokinetic traits: fluoxetine possesses the longest terminal elimination half-life of one to two weeks through its active metabolite norfluoxetine, minimizing abrupt withdrawal distress. Sertraline is preferred in coronary artery disease, paroxetine carries heavy anticholinergic sedation and teratogenic cardiac risks, and escitalopram exhibits the purest serotonergic selectivity.",
+            "say": "Selective serotonin reuptake inhibitors differentiation highlights distinctive pharmacokinetic traits: fluoxetine possesses the longest terminal elimination half-life of one to two weeks through its active metabolite norfluoxetine, minimizing abrupt withdrawal distress. Sertraline is preferred in coronary artery disease, paroxetine carries heavy anticholinergic sedation and teratogenic cardiac risks, and escitalopram exhibits the purest serotonergic selectivity.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "SSRI Molecule",
+                    "Elimination Half-Life",
+                    "Metabolic Clearance",
+                    "Key Clinical Pearl"
+                ],
+                "rows": [
+                    [
+                        "Fluoxetine",
+                        "2 to 4 days (Norfluoxetine 7 to 15 days)",
+                        "Potent CYP2D6 inhibitor",
+                        "Lowest risk of discontinuation syndrome"
+                    ],
+                    [
+                        "Sertraline",
+                        "26 hours",
+                        "Minimal CYP interactions",
+                        "Safest first-line agent post-myocardial infarction"
+                    ],
+                    [
+                        "Paroxetine",
+                        "21 hours",
+                        "CYP2D6 inhibitor and anticholinergic",
+                        "Highest risk of weight gain and fetal cardiac defects"
+                    ],
+                    [
+                        "Escitalopram",
+                        "27 to 32 hours",
+                        "Purest 5-HT reuptake inhibition",
+                        "Dose-dependent QTc prolongation ceiling of 20 mg"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "SNRIs and Noradrenergic Effects",
+            "tx": "**Dual action SNRIs** venlafaxine and duloxetine simultaneously inhibit both serotonin and norepinephrine reuptake transporters without blocking histamine, muscarinic, or adrenergic receptors. At dosages exceeding 150 milligrams daily, venlafaxine activates noradrenergic tone, producing sustained dose-dependent elevations in diastolic blood pressure. Duloxetine uniquely carries approved indications for diabetic peripheral neuropathy, chronic musculoskeletal pain, and fibromyalgia.",
+            "say": "Dual action SNRIs venlafaxine and duloxetine simultaneously inhibit both serotonin and norepinephrine reuptake transporters without blocking histamine, muscarinic, or adrenergic receptors. At dosages exceeding 150 milligrams daily, venlafaxine activates noradrenergic tone, producing sustained dose-dependent elevations in diastolic blood pressure. Duloxetine uniquely carries approved indications for diabetic peripheral neuropathy, chronic musculoskeletal pain, and fibromyalgia.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Venlafaxine Specifics",
+                    "points": [
+                        "Low-dose pure 5-HT reuptake",
+                        "high-dose noradrenergic shift producing diastolic hypertension",
+                        "severe withdrawal"
+                    ]
+                },
+                "right": {
+                    "title": "Duloxetine Specifics",
+                    "points": [
+                        "Balanced dual 5-HT and NE reuptake across therapeutic dose range",
+                        "approved for chronic neuropathic pain"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Adverse Effects of SSRIs",
+            "tx": "**Common adverse effects of SSRIs** arise from stimulation of 5-HT2 and 5-HT3 receptors throughout the central nervous system and gastrointestinal tract, causing early nausea, loose stools, and sleep disturbance. Persistent sexual dysfunction occurs in up to 50 percent of long-term users, manifesting as delayed ejaculation, erectile difficulty, or anorgasmia, which often necessitates adjunctive bupropion or dose adjustment.",
+            "say": "Common adverse effects of SSRIs arise from stimulation of 5-HT2 and 5-HT3 receptors throughout the central nervous system and gastrointestinal tract, causing early nausea, loose stools, and sleep disturbance. Persistent sexual dysfunction occurs in up to 50 percent of long-term users, manifesting as delayed ejaculation, erectile difficulty, or anorgasmia, which often necessitates adjunctive bupropion or dose adjustment.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Receptor Subtype",
+                    "Anatomical Distribution",
+                    "Clinical Manifestation",
+                    "Clinical Management"
+                ],
+                "rows": [
+                    [
+                        "5-HT2A Stimulation",
+                        "Spinal cord and limbic cortex",
+                        "Sexual anorgasmia and delayed ejaculation",
+                        "Add bupropion or switch to mirtazapine"
+                    ],
+                    [
+                        "5-HT2C Stimulation",
+                        "Basal ganglia and hypothalamus",
+                        "Anxiety, agitation, and appetite reduction",
+                        "Reassure regarding self-resolution"
+                    ],
+                    [
+                        "5-HT3 Stimulation",
+                        "Chemoreceptor trigger zone and gut",
+                        "Nausea, emesis, and loose watery stools",
+                        "Take medication with substantial meals"
+                    ],
+                    [
+                        "Platelet 5-HT Depletion",
+                        "Circulating blood platelets",
+                        "Impaired aggregation and mild bruising",
+                        "Caution with concurrent NSAIDs or aspirin"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Discontinuation Syndrome",
+            "tx": "**Antidepressant discontinuation syndrome symptoms** are remembered by the FINISH mnemonic: Flu-like malaise, Insomnia, Nausea, Imbalance, Sensory paresthesias described as electric brain zaps, and Hyperarousal. Symptoms erupt within two to four days of abrupt cessation, being particularly severe with short-acting paroxetine and venlafaxine, requiring gradual dose tapering over several weeks.",
+            "say": "Antidepressant discontinuation syndrome symptoms are remembered by the FINISH mnemonic: Flu-like malaise, Insomnia, Nausea, Imbalance, Sensory paresthesias described as electric brain zaps, and Hyperarousal. Symptoms erupt within two to four days of abrupt cessation, being particularly severe with short-acting paroxetine and venlafaxine, requiring gradual dose tapering over several weeks.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Abrupt cessation of short half-life drug"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Onset of electric brain zaps and vertigo"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Reintroduce original medication dose"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Execute slow gradual dose tapering"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

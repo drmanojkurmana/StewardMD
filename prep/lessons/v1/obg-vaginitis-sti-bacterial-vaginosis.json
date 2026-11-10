@@ -1,0 +1,286 @@
+{
+ "v": 1,
+ "id": "obg-vaginitis-sti-bacterial-vaginosis",
+ "subject": "obstetrics-gynaecology",
+ "module": "obg-vaginitis-sti",
+ "title": "Bacterial Vaginosis",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Bacterial vaginosis** is the most frequent cause of pathological vaginal discharge in reproductive-age women, representing an ecological dysbiosis of the vaginal microbiome rather than a classic monomicrobial infection. The normal microflora, overwhelmingly dominated by hydrogen peroxide-producing lactobacilli (such as Lactobacillus crispatus and jensenii), undergoes profound collapse. This is accompanied by a massive hundred- to thousand-fold overgrowth of diverse facultative and obligate anaerobic bacteria, predominantly Gardnerella vaginalis, Atopobium vaginae, and Prevotella.",
+   "say": "Bacterial vaginosis is a polymicrobial dysbiosis where protective hydrogen peroxide-producing lactobacilli collapse. Anaerobic bacteria like Gardnerella and Atopobium multiply up to a thousand-fold, triggering characteristic symptoms.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bacterial-vaginosis-fig1.webp",
+    "alt": "Photomicrograph of vaginal saline wet mount showing clue cells.",
+    "caption": "Vaginal squamous epithelial cells studded with countless coccobacilli obscuring cellular borders (clue cells). Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Vaginal discharge** in bacterial vaginosis is typically thin, homogeneous, watery, and off-white or grey, coating the vaginal walls smoothly like a film of paint. Patients complain of an unpleasant, pungent, fishy odour that characteristically worsens following sexual intercourse or during menses, when alkaline semen or menstrual blood volatilizes foul-smelling biogenic amines. Crucially, despite abundant discharge, local inflammatory signs such as vulvovaginal erythema, burning, and pruritus are conspicuously absent.",
+   "say": "The discharge is thin, watery, and greyish-white, coating the vaginal walls smoothly. It gives off a foul fishy smell that worsens after intercourse, but lacks vulvar itching or redness because it is non-inflammatory.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bacterial Vaginosis",
+     "points": [
+      "Thin, watery, homogeneous grey discharge",
+      "Pungent, fishy amine odour",
+      "No vulvar erythema, itching, or soreness",
+      "Elevated vaginal pH exceeding 4.5"
+     ]
+    },
+    "right": {
+     "title": "Vulvovaginal Candidiasis",
+     "points": [
+      "Thick, white, curd-like cottage-cheese discharge",
+      "Odourless discharge",
+      "Intense vulvar pruritus, erythema, fissures",
+      "Normal acidic vaginal pH (under 4.5)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Amsel criteria** establish the bedside clinical diagnosis of bacterial vaginosis, requiring the presence of at least three of four physical and microscopic signs: thin, homogeneous, greyish-white discharge smoothly adhering to the vaginal mucosa; elevated vaginal pH exceeding 4.5; positive whiff test demonstrating a sharp fishy amine odour upon adding a drop of ten percent potassium hydroxide; and presence of clue cells exceeding twenty percent of epithelial cells on saline wet mount.",
+   "say": "Amsel criteria require three of four signs: thin grey discharge, vaginal pH over 4.5, a fishy whiff test with ten percent KOH, and clue cells making up over twenty percent of epithelial cells on microscopy.",
+   "vis": {
+    "kind": "table",
+    "title": "Amsel Clinical Diagnostic Criteria (3 of 4 Required)",
+    "cols": [
+     "Diagnostic Parameter",
+     "Threshold for Positive Criterion",
+     "Diagnostic Pathophysiology"
+    ],
+    "rows": [
+     [
+      "Discharge appearance",
+      "Thin, homogeneous, off-white to grey film",
+      "Biofilm desquamation from mucosal wall"
+     ],
+     [
+      "Vaginal pH",
+      "Greater than 4.5 (typically 5.0 to 6.0)",
+      "Loss of lactic acid from lactobacilli"
+     ],
+     [
+      "Whiff (amine) test",
+      "Fishy odour on adding 10% KOH drop",
+      "Alkalinization volatilizes putrescine/cadaverine"
+     ],
+     [
+      "Clue cells",
+      "Exceeds 20% of squamous cells on wet mount",
+      "Bacterial biofilm adheres to cell membranes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Clue cells** are the pathognomonic microscopic diagnostic feature of bacterial vaginosis identified on physiological saline wet mount preparations. They are mature vaginal squamous epithelial cells whose distinct polygonal borders are completely obscured and stippled by countless tiny, adherent, Gram-variable coccobacilli, primarily Gardnerella vaginalis. The cell cytoplasm assumes a distinctive ground-glass, peppered appearance. For a positive diagnostic criterion, clue cells must comprise more than twenty percent of all visualized squamous epithelial cells.",
+   "say": "Clue cells are vaginal epithelial cells whose sharp edges are obscured by hordes of adherent bacteria, giving them a peppered, ground-glass appearance. Seeing them make up over twenty percent of cells confirms bacterial vaginosis.",
+   "vis": {
+    "kind": "flow",
+    "title": "Saline Wet Mount Microscopic Preparation",
+    "nodes": [
+     {
+      "id": "w1",
+      "label": "Vaginal Swab",
+      "sub": "Swab lateral vaginal wall; avoid cervical mucus"
+     },
+     {
+      "id": "w2",
+      "label": "Normal Saline Drop",
+      "sub": "Mix swab on glass slide with 0.9% saline"
+     },
+     {
+      "id": "w3",
+      "label": "High-Power Field",
+      "sub": "Inspect at 400x for clue cells and leukocytes"
+     },
+     {
+      "id": "w4",
+      "label": "Lack of Neutrophils",
+      "sub": "Absence of polymorphs confirms non-inflammatory state"
+     }
+    ],
+    "edges": [
+     [
+      "w1",
+      "w2",
+      "Specimen collection"
+     ],
+     [
+      "w2",
+      "w3",
+      "Coverslip placement"
+     ],
+     [
+      "w3",
+      "w4",
+      "Microscopic analysis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nugent scoring system** provides the laboratory gold standard for diagnosing bacterial vaginosis on Gram-stained vaginal smears. It quantifies the relative proportion of three bacterial morphotypes under oil immersion: large Gram-positive rods (Lactobacillus), small Gram-variable rods (Gardnerella and Bacteroides), and curved Gram-variable rods (Mobiluncus). Scores range from 0 to 10: a score of 0 to 3 reflects normal lactobacillus-dominated flora; 4 to 6 represents intermediate flora; and 7 to 10 establishes a definitive diagnosis of bacterial vaginosis.",
+   "say": "The Nugent score is the laboratory gold standard on Gram stain, scoring three bacterial shapes from zero to ten. Zero to three is normal lactobacilli, four to six is intermediate, and seven to ten confirms bacterial vaginosis.",
+   "vis": {
+    "kind": "table",
+    "title": "Nugent Gram Stain Scoring System (0 to 10 Scale)",
+    "cols": [
+     "Diagnostic Score",
+     "Microbiological Interpretation",
+     "Dominant Bacterial Morphotype"
+    ],
+    "rows": [
+     [
+      "Score 0 to 3",
+      "Normal vaginal microflora",
+      "Abundant large Gram-positive rods (Lactobacillus)"
+     ],
+     [
+      "Score 4 to 6",
+      "Intermediate / altered flora",
+      "Mixed lactobacilli and small Gram-negative rods"
+     ],
+     [
+      "Score 7 to 10",
+      "Definitive bacterial vaginosis",
+      "Absence of lactobacilli; heavy coccobacillary fields"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Preterm birth** is a serious obstetrical complication associated with bacterial vaginosis during pregnancy, with infected women facing a two-fold increased risk of spontaneous preterm labour and preterm premature rupture of membranes (PPROM). Ascending anaerobic bacteria degrade chorioamniotic extracellular matrix via sialidases, proteases, and collagenases, while endotoxins stimulate fetal decidual prostaglandin E2 and inflammatory cytokine release (IL-1, IL-6, TNF-alpha), precipitating early cervical ripening and premature uterine contractions.",
+   "say": "Bacterial vaginosis doubles the risk of preterm labour and premature rupture of membranes. Ascending anaerobes produce collagenases and prostaglandins that weaken the membranes and ripen the cervix prematurely.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathophysiological Pathway to Preterm Delivery",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Bacterial Overgrowth",
+      "sub": "Anaerobes synthesize mucinases and sialidases"
+     },
+     {
+      "id": "p2",
+      "label": "Ascending Infection",
+      "sub": "Microbes penetrate cervical barrier to decidua"
+     },
+     {
+      "id": "p3",
+      "label": "Cytokine Release",
+      "sub": "Decidual IL-1, IL-6, and TNF-alpha activate PGE2"
+     },
+     {
+      "id": "p4",
+      "label": "Preterm Delivery",
+      "sub": "Premature rupture of membranes and labour"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2",
+      "Barrier destruction"
+     ],
+     [
+      "p2",
+      "p3",
+      "Decidual inflammation"
+     ],
+     [
+      "p3",
+      "p4",
+      "Myometrial contractions"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Oral metronidazole** four hundred to five hundred milligrams twice daily for seven consecutive days represents the first-line antimicrobial therapy for bacterial vaginosis. As a nitroimidazole, metronidazole is enzymatically reduced within anaerobic microorganisms into toxic reactive nitro radicals that induce lethal DNA strand breakage. Topical alternatives include intravaginal metronidazole 0.75% gel once nightly for five days, or intravaginal clindamycin 2% cream for seven days, achieving equivalent short-term clinical cure rates.",
+   "say": "First-line treatment is oral metronidazole 400 to 500 milligrams twice daily for seven days, or five days of intravaginal metronidazole gel. Patients taking oral metronidazole must strictly avoid alcohol to prevent severe vomiting.",
+   "vis": {
+    "kind": "table",
+    "title": "Recommended Treatment Regimens for Bacterial Vaginosis",
+    "cols": [
+     "Antimicrobial Agent",
+     "Dosage Regimen",
+     "Key Clinical Considerations"
+    ],
+    "rows": [
+     [
+      "Oral metronidazole",
+      "400 to 500 mg twice daily for 7 days",
+      "High cure rate; disulfiram-like alcohol reaction"
+     ],
+     [
+      "Intravaginal metronidazole gel",
+      "0.75% applicator once daily for 5 days",
+      "Avoids gastrointestinal side effects"
+     ],
+     [
+      "Intravaginal clindamycin cream",
+      "2% applicator once daily for 7 days",
+      "Oil base weakens latex condoms and diaphragms"
+     ],
+     [
+      "Oral tinidazole",
+      "2 grams once daily for 2 days",
+      "Convenient shorter course alternative"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Partner treatment** is not routinely recommended for male sexual partners of women with bacterial vaginosis, as multiple randomized controlled trials demonstrate that treating male partners does not reduce the high rate of clinical recurrence in women. In pregnancy, universal screening of asymptomatic low-risk pregnant women is not indicated, but symptomatic pregnant women must receive standard oral metronidazole to alleviate symptoms and reduce the hazards of chorioamnionitis and post-cesarean endometritis.",
+   "say": "Treating male sexual partners does not prevent bacterial vaginosis from coming back, so partner therapy is not routinely recommended. In pregnancy, treat all symptomatic women with oral metronidazole to protect against post-delivery infections.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bacterial Vaginosis (Dysbiosis)",
+     "points": [
+      "Not classified as a classic STI",
+      "Male partner treatment does not prevent recurrence",
+      "Associated with new or multiple partners",
+      "Biofilm recurrence common within 3 months"
+     ]
+    },
+    "right": {
+     "title": "Trichomoniasis (True STI)",
+     "points": [
+      "Obligate protozoan sexually transmitted parasite",
+      "Simultaneous treatment of sexual partners mandatory",
+      "Single 2-gram dose of metronidazole",
+      "Abstain from intercourse until both partners treated"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Bacterial vaginosis: definition of pathognomonic clue cells",
+   "b": "Vaginal squamous epithelial cells studded with adherent bacteria, obscuring cell borders (>20% of cells)."
+  },
+  {
+   "f": "Amsel criteria: four components for clinical diagnosis",
+   "b": "Thin grey discharge, pH >4.5, positive amine whiff test with 10% KOH, and clue cells >20% on wet mount."
+  },
+  {
+   "f": "Bacterial vaginosis: major obstetrical complications",
+   "b": "Two-fold increased risk of spontaneous preterm birth and preterm premature rupture of membranes."
+  }
+ ],
+ "keys": [
+  "Bacterial vaginosis represents a loss of hydrogen peroxide-producing lactobacilli and overgrowth of anaerobes",
+  "Diagnosis requires 3 of 4 Amsel criteria: thin discharge, pH >4.5, positive whiff test, and clue cells >20%",
+  "Oral or topical metronidazole provides first-line cure, but partner treatment does not reduce recurrence"
+ ]
+}

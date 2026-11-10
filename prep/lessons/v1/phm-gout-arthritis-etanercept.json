@@ -1,0 +1,252 @@
+{
+  "v": 1,
+  "module": "phm-gout-arthritis",
+  "subject": "pharmacology",
+  "title": "Biologic Disease-Modifying Drugs, Xanthine Oxidase Inhibitors, and Urate-Lowering Therapy",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A soluble dimeric fusion protein linking the extracellular ligand-binding domain of human TNF receptor 2 to the Fc portion of human IgG1 is **etanercept**. Administered subcutaneously once weekly at 50 mg, etanercept binds and neutralizes both soluble TNF-alpha and lymphotoxin-alpha. Unlike monoclonal antibodies, it does not trigger complement-dependent cellular cytotoxicity, accounting for a significantly lower incidence of latent tuberculosis reactivation. It provides effective disease suppression in active rheumatoid arthritis, polyarticular juvenile idiopathic arthritis, psoriatic arthritis, and ankylosing spondylitis.",
+      "say": "Etanercept is a soluble TNF receptor fusion protein that neutralizes TNF-alpha without inducing complement-mediated cell lysis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Etanercept (Soluble Receptor Fusion)",
+          "points": [
+            "Recombinant p75 TNF receptor linked to IgG1 Fc domain",
+            "Binds soluble TNF-alpha and lymphotoxin-alpha",
+            "Does not trigger complement-dependent cellular lysis",
+            "Lower relative risk of latent tuberculosis reactivation"
+          ]
+        },
+        "right": {
+          "title": "Infliximab (Chimeric Monoclonal Antibody)",
+          "points": [
+            "Chimeric human-murine IgG1 monoclonal antibody",
+            "Binds soluble and transmembrane TNF-alpha trimers",
+            "Triggers complement cytotoxicity and cellular apoptosis",
+            "Higher risk of tuberculosis reactivation and antibody development"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The fully human recombinant IgG1-kappa monoclonal antibody directed specifically against human tumor necrosis factor-alpha is **adalimumab**. Administered subcutaneously every two weeks at 40 mg, adalimumab binds soluble and transmembrane TNF-alpha with high affinity, preventing receptor binding and downregulating cellular adhesion molecules and vascular endothelial growth factor. Because of its entirely human polypeptide sequence, it exhibits lower immunogenicity than chimeric antibodies, though neutralizing anti-drug antibodies can still attenuate clinical response. Co-administration with weekly methotrexate reduces anti-adalimumab antibody formation.",
+      "say": "Adalimumab is a fully human anti-TNF monoclonal antibody administered subcutaneously every two weeks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "adali",
+            "label": "Subcutaneous adalimumab administration (40 mg every 2 weeks)"
+          },
+          {
+            "id": "tnf",
+            "label": "High-affinity binding to soluble and transmembrane TNF-alpha"
+          },
+          {
+            "id": "block",
+            "label": "Blockade of TNFR1 and TNFR2 downstream NF-kappa-B signaling"
+          },
+          {
+            "id": "joint",
+            "label": "Downregulation of synovial adhesion molecules and arrest of bony erosion"
+          }
+        ],
+        "edges": [
+          [
+            "adali",
+            "tnf"
+          ],
+          [
+            "tnf",
+            "block"
+          ],
+          [
+            "block",
+            "joint"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A chimeric monoclonal antibody that targets the CD20 surface antigen present on pre-B and mature B lymphocytes is **rituximab**. Administered as two 1000 mg intravenous infusions separated by two weeks and repeated every six months, rituximab depletes circulating B cells via complement-dependent cytotoxicity and antibody-dependent cellular cytotoxicity. Indicated for active rheumatoid arthritis refractory to anti-TNF biologics, it disrupts autoantibody production and T-cell costimulation. Pre-treatment screening is mandatory because it can provoke fatal hepatitis B virus reactivation and progressive multifocal leukoencephalopathy.",
+      "say": "Rituximab depletes CD20-positive B lymphocytes to control severe rheumatoid arthritis refractory to anti-TNF therapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Targeted biologic agent",
+          "Specific molecular target",
+          "Route of delivery",
+          "Notable safety monitoring requirement"
+        ],
+        "rows": [
+          [
+            "Rituximab",
+            "CD20 B-lymphocyte surface antigen",
+            "Intravenous infusion with antihistamine prep",
+            "Hepatitis B viral serologies and JC virus monitoring"
+          ],
+          [
+            "Tocilizumab",
+            "Interleukin-6 receptor (IL-6R)",
+            "Intravenous or subcutaneous injection",
+            "Neutropenia, lipid elevations, bowel perforation"
+          ],
+          [
+            "Anakinra",
+            "Interleukin-1 receptor antagonist",
+            "Daily subcutaneous injection",
+            "Severe painful injection site cutaneous reactions"
+          ],
+          [
+            "Secukinumab",
+            "Interleukin-17A (IL-17A)",
+            "Monthly subcutaneous injection",
+            "Mucocutaneous candida infections, IBD exacerbation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A soluble fusion protein comprising the extracellular domain of cytotoxic T-lymphocyte-associated antigen 4 linked to a modified IgG1 Fc domain is **abatacept**. By selectively binding to CD80 and CD86 costimulatory molecules on antigen-presenting cells, abatacept prevents their interaction with CD28 receptors on naive and memory T lymphocytes. This selective costimulation blockade arrests T-cell activation, suppressing downstream cytokine release, synovial proliferation, and osteoclast activation in rheumatoid arthritis patients who fail conventional DMARDs or anti-TNF agents.",
+      "say": "Abatacept binds CD80 and CD86 to block costimulatory signal 2, arresting T-cell activation in rheumatoid synovium.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Antigen-Specific Signal 1",
+          "points": [
+            "MHC class II peptide complex engages T-cell receptor (TCR)",
+            "Provides primary antigen recognition specificity",
+            "Insufficient alone to trigger productive T-cell proliferation",
+            "Absence of signal 2 induces functional immune anergy"
+          ]
+        },
+        "right": {
+          "title": "Costimulatory Signal 2 (Targeted by Abatacept)",
+          "points": [
+            "APC surface CD80 and CD86 engage T-cell surface CD28",
+            "Drives interleukin-2 transcription, survival, and proliferation",
+            "Abatacept mimics CTLA-4 to bind CD80/86 with avid affinity",
+            "Selective costimulatory blockade induces immune tolerance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The foundational purine-analogue xanthine oxidase inhibitor utilized as first-line urate-lowering therapy in chronic gout is **allopurinol**. Metabolized by xanthine oxidase into the long-acting active metabolite oxypurinol, it competitively inhibits xanthine oxidase, blocking the sequential oxidation of hypoxanthine to xanthine and xanthine to uric acid. This lowers serum and urinary uric acid below the 6 mg/dL saturation threshold. It must never be initiated during an acute gout flare, and carriers of the HLA-B*58:01 allele carry extreme risks of fatal severe cutaneous adverse reactions.",
+      "say": "Allopurinol is metabolized to oxypurinol, inhibiting xanthine oxidase to suppress uric acid formation in chronic gout.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/purine-metabolism-gout-and-lesch-nyhan-fig1.webp",
+        "alt": "Purine metabolic pathway showing xanthine oxidase and uric acid synthesis",
+        "caption": "Purine degradation cascade demonstrating xanthine oxidase conversion of hypoxanthine to xanthine and uric acid, blocked by allopurinol and febuxostat."
+      }
+    },
+    {
+      "tx": "A potent non-purine selective inhibitor of xanthine oxidase that achieves robust urate reduction in chronic tophaceous gout is **febuxostat**. Unlike allopurinol, febuxostat forms a tight, stable complex within the catalytic pterin-binding channel of both oxidized and reduced forms of xanthine oxidase without inhibiting other enzymes in purine or pyrimidine metabolism. Because it is eliminated primarily by hepatic glucuronidation and oxidation, febuxostat requires no dosage adjustment in mild-to-moderate renal impairment, making it the preferred xanthine oxidase inhibitor in chronic kidney disease.",
+      "say": "Febuxostat is a non-purine xanthine oxidase inhibitor cleared hepatically, ideal for gout patients with renal impairment.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Febuxostat (Non-Purine Inhibitor)",
+          "points": [
+            "Non-purine structure selectively blocks xanthine oxidase",
+            "Forms tight complex with both oxidized and reduced enzyme forms",
+            "Hepatic metabolism; no dose reduction in moderate renal failure",
+            "Higher cardiovascular mortality reported in landmark trials"
+          ]
+        },
+        "right": {
+          "title": "Allopurinol (Purine Analogue)",
+          "points": [
+            "Purine analogue oxidized to active metabolite oxypurinol",
+            "Blocks only reduced form of xanthine oxidase enzyme",
+            "Renal excretion of oxypurinol mandates dose adjustment in CKD",
+            "High risk of severe hypersensitivity in HLA-B*58:01 carriers"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The crucial clinical principle governing the introduction of xanthine oxidase inhibitors in chronic gout is **urate-lowering therapy initiation**. Starting allopurinol or febuxostat abruptly causes a rapid drop in serum urate concentrations, which destabilizes existing intra-articular monosodium urate tophi and precipitates paradoxical acute gouty arthritis flares. Consequently, urate-lowering drugs must never be started in the midst of an acute flare, and must always be co-prescribed with low-dose prophylactic colchicine or NSAIDs for three to six months to prevent mobilization attacks.",
+      "say": "Urate-lowering therapy must never start during an acute gout flare and requires anti-inflammatory flare prophylaxis.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Initiation of xanthine oxidase inhibitor (allopurinol or febuxostat)"
+          },
+          {
+            "id": "drop",
+            "label": "Rapid precipitous decline in circulating serum uric acid levels"
+          },
+          {
+            "id": "dissolve",
+            "label": "Superficial dissolution and fragmentation of synovial microtophi"
+          },
+          {
+            "id": "flare",
+            "label": "Secondary mobilization arthritis flare aborted by co-prescribed colchicine"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "drop"
+          ],
+          [
+            "drop",
+            "dissolve"
+          ],
+          [
+            "dissolve",
+            "flare"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Mandatory testing for the HLA-B*58:01 allele prior to initiating allopurinol therapy in high-risk populations is **allopurinol pharmacogenomics**. Possessing this human leukocyte antigen allele increases the relative risk of allopurinol hypersensitivity syndrome by hundreds of times, provoking severe cutaneous adverse reactions including Stevens-Johnson syndrome, toxic epidermal necrolysis, fever, eosinophilia, and acute hepatic and renal failure. The allele frequency is particularly elevated among Han Chinese, Korean, Thai, and African populations, in whom febuxostat serves as the preferred initial urate-lowering agent.",
+      "say": "Pre-treatment HLA-B*58:01 testing prevents life-threatening allopurinol hypersensitivity syndrome in high-risk populations.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Pharmacogenomic allele",
+          "Associated therapeutic drug",
+          "Severe clinical adverse manifestation",
+          "High-prevalence ancestral population"
+        ],
+        "rows": [
+          [
+            "HLA-B*58:01",
+            "Allopurinol",
+            "Toxic epidermal necrolysis and severe DRESS syndrome",
+            "Han Chinese, Korean, Thai, African ancestry"
+          ],
+          [
+            "HLA-B*15:02",
+            "Carbamazepine",
+            "Stevens-Johnson syndrome and toxic epidermal necrolysis",
+            "Southeast Asian and South Asian populations"
+          ],
+          [
+            "HLA-B*57:01",
+            "Abacavir",
+            "Fatal multi-organ systemic hypersensitivity reaction",
+            "European and Caucasian ancestry"
+          ],
+          [
+            "TPMT deficiency",
+            "Azathioprine / 6-Mercaptopurine",
+            "Profound life-threatening bone marrow aplasia",
+            "Universal pan-ethnic genetic screening target"
+          ]
+        ]
+      }
+    }
+  ]
+}

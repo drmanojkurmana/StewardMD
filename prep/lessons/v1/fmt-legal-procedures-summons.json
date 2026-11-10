@@ -1,0 +1,338 @@
+{
+ "v": 1,
+ "id": "fmt-legal-procedures-summons",
+ "subject": "forensic-medicine",
+ "module": "fmt-legal-procedures",
+ "title": "Medical Evidence: Summons, Subpoena and Dying Declaration",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The statutory nature of summons and subpoena",
+   "tx": "In judicial procedure, a formal **court witness summons order** constitutes a solemn legal mandate issued by a judicial officer compelling the appearance of a designated person at a specified date and time to give evidence or produce documents. Delivered through a police officer or registered postal service, willful disobedience of a court summons without valid legal excuse constitutes contempt of court, risking arrest under bailable or non-bailable warrants.",
+   "say": "A court summons is a legal command to attend court and testify on a specified date. Disobeying summons without valid excuse risks contempt and arrest warrants.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Summons component",
+     "Statutory requirement",
+     "Legal consequence"
+    ],
+    "rows": [
+     [
+      "Court seal and signature",
+      "Signed by presiding judge with court seal",
+      "Renders the process legally binding"
+     ],
+     [
+      "Specified appearance time",
+      "Exact date, time and courtroom venue",
+      "Doctor must attend punctually or seek exemption"
+     ],
+     [
+      "Service verification",
+      "Signature on duplicate copy or electronic delivery",
+      "Confirms legal service on the witness"
+     ],
+     [
+      "Disobedience penalty",
+      "Section 174 IPC / Section 209 BNS",
+      "Punishable with fine or bailable arrest warrant"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Subpoena duces tecum and document production",
+   "tx": "When medical evidence requires written records, courts issue a specialized **subpoena duces tecum writ**, ordering the medical superintendent or treating clinician to appear carrying specific original patient charts, surgical logs, radiological films, or medicolegal registers. The clinician must produce the original handwritten records in court, where certified true copies are submitted for the official judicial file while originals are verified by counsel.",
+   "say": "A subpoena duces tecum orders the hospital or clinician to produce original treatment charts, postmortem registers, and X-rays in court for judicial verification.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Court issues subpoena duces tecum for medical records"
+     },
+     {
+      "id": "b",
+      "label": "Hospital medical records department retrieves original file"
+     },
+     {
+      "id": "c",
+      "label": "Clinician presents original records in witness box"
+     },
+     {
+      "id": "d",
+      "label": "Court inspects originals and admits attested photocopies"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Priority rules when receiving conflicting summons",
+   "tx": "When a busy clinician receives simultaneous court summonses scheduled for the identical calendar date, well-established **summons priority operational rules** govern attendance decisions. Criminal court summonses take absolute precedence over civil court summonses. Between courts of unequal status, the higher-ranking court takes precedence over a lower bench. Between courts of equal rank, the summons received earlier in chronological order dictates attendance.",
+   "say": "When summons dates clash, criminal courts take priority over civil courts, higher courts take priority over lower ones, and earlier received summonses take priority among equals.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Conflicting courts",
+     "Priority determination",
+     "Required action by doctor"
+    ],
+    "rows": [
+     [
+      "Criminal court vs Civil court",
+      "Criminal court takes priority",
+      "Attend criminal court; send formal letter to civil court"
+     ],
+     [
+      "High Court vs District Sessions Court",
+      "High Court takes priority",
+      "Attend High Court; forward certified copy of notice to Sessions"
+     ],
+     [
+      "Two courts of equal rank",
+      "Earlier received summons wins",
+      "Attend first summons; notify second court with arrival proof"
+     ],
+     [
+      "Unavoidable clinical emergency",
+      "Inform presiding judge in writing",
+      "Submit medical certificate explaining urgent surgery / illness"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Definition and philosophy of dying declarations",
+   "tx": "Originating from the Latin maxim nemo moriturus praesumitur mentiri, the **dying declaration evidentiary principle** holds that a dying individual is presumed incapable of falsehood on the threshold of death. Under Indian law, a dying declaration represents a statement made by a person regarding the cause of their death or the circumstances of the transaction resulting in their fatal condition, admissible as primary legal evidence.",
+   "say": "A dying declaration is a statement by a dying victim regarding the circumstances of their death, accepted as evidence because a person facing death is presumed truthful.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Victim sustains fatal assault or burns"
+     },
+     {
+      "id": "b",
+      "label": "Admitted to hospital casualty in critical state"
+     },
+     {
+      "id": "c",
+      "label": "Requisition sent to Judicial Magistrate to record statement"
+     },
+     {
+      "id": "d",
+      "label": "Formal dying declaration recorded under medical certification"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Comparison between Indian and English law on dying declarations",
+   "tx": "A critical medicolegal distinction exists regarding the **expectation of death requirement** between British and Indian jurisprudence. Under English common law, the declarant must possess an absolute settled hopeless expectation of imminent death for the declaration to be admissible. Conversely, under Indian law, actual expectation of impending death is not essential; the statement remains fully admissible even if the declarant had hopes of recovery.",
+   "say": "Under English law, the patient must have an absolute expectation of imminent death. Under Indian law, expectation of death is not required for the statement to be admissible.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Indian law (Section 26 BSA)",
+     "points": [
+      "Expectation of death is not mandatory",
+      "Admissible if person dies subsequently",
+      "Can be recorded by magistrate, doctor or police",
+      "Covers suicide, homicide, and accidents"
+     ]
+    },
+    "right": {
+     "title": "English common law",
+     "points": [
+      "Settled hopeless expectation of death required",
+      "Applies exclusively to homicide trials",
+      "Inadmissible if patient expects recovery",
+      "Strict religious presumption of final truth"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Who may record a dying declaration",
+   "tx": "While an Executive or Judicial Magistrate represents the **preferred dying declaration recorder**, statutory law recognizes statements recorded by treating physicians, police officers, village headmen, or even private citizens when death is rapidly approaching. However, declarations recorded by magistrates carry the highest probative value in trial courts, while police-recorded statements are viewed with strict judicial caution due to risks of coaching or duress.",
+   "say": "Magistrates are preferred to record dying declarations. If time is short, treating doctors or police officers may record the statement to prevent evidence loss.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Recording authority",
+     "Evidentiary weight",
+     "Procedural safeguard"
+    ],
+    "rows": [
+     [
+      "Judicial Magistrate",
+      "Highest probative credibility",
+      "Administers formal questions without police presence"
+     ],
+     [
+      "Treating medical officer",
+      "High independent credibility",
+      "Records in casualty when magistrate cannot arrive in time"
+     ],
+     [
+      "Investigating police officer",
+      "Lower credibility, scrutinised closely",
+      "Must record verbatim without leading prompts"
+     ],
+     [
+      "Private citizen / nurse",
+      "Admissible under emergency doctrine",
+      "Corroboration required to prove lack of coaching"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The crucial role of the medical officer during recording",
+   "tx": "During the recording process, the **compos mentis medical certification** represents the most vital legal safeguard protecting the integrity of the declaration. The treating doctor must personally examine the patient and endorse on the paper that the victim was conscious, coherent, and mentally competent before recording commences, throughout the questioning, and at the conclusion of the statement.",
+   "say": "The doctor must certify in writing that the patient is conscious and mentally sound before, during, and after recording the dying declaration.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Pre-recording clinical check of orientation and memory"
+     },
+     {
+      "id": "b",
+      "label": "Doctor endorses initial fitness certificate on paper"
+     },
+     {
+      "id": "c",
+      "label": "Statement recorded without relatives or police in room"
+     },
+     {
+      "id": "d",
+      "label": "Doctor signs final endorsement confirming ongoing lucidity"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Standard protocol and format for recording statements",
+   "tx": "The formal **question and answer protocol** must follow strict evidentiary conventions to avoid judicial rejection during trial. The recorder must exclude all investigating police personnel and relatives from the room to eliminate coaching. The statement is documented in the patient's own vernacular words without prompting, read back to the patient, affirmed, and endorsed with the declarant's signature or left thumbprint.",
+   "say": "The statement is written in question-and-answer format using the patient's own words. Relatives and police are sent outside, and the text is read back before signing.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Procedural step",
+     "Standard execution",
+     "Reason for requirement"
+    ],
+    "rows": [
+     [
+      "Language of recording",
+      "Patient's exact vernacular words",
+      "Avoids misinterpretation or altered meaning"
+     ],
+     [
+      "Format of documentation",
+      "Question and answer format",
+      "Demonstrates lack of leading or suggestive questions"
+     ],
+     [
+      "Exclusion of outsiders",
+      "Remove police and emotional family",
+      "Prevents coaching, intimidation, or tutoring"
+     ],
+     [
+      "Signatures / thumbprint",
+      "Signature or left thumb impression",
+      "Establishes authentic execution by the victim"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Evidentiary outcome if the declarant survives",
+   "tx": "When a gravely wounded victim unexpectedly recovers after providing a statement, the **surviving declarant legal transformation** dictates that the document completely ceases to be a dying declaration under Section 26 BSA. Instead, the written statement transforms into a prior recorded statement, which can only be utilized in court under Section 157 BSA to corroborate or contradict the victim's live testimony from the witness box.",
+   "say": "If the injured patient survives, the dying declaration loses its special status and becomes an ordinary prior statement used to support or challenge their testimony.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Dying declaration recorded in intensive care unit"
+     },
+     {
+      "id": "b",
+      "label": "Intensive surgical resuscitation succeeds"
+     },
+     {
+      "id": "c",
+      "label": "Patient discharged and summoned as living witness"
+     },
+     {
+      "id": "d",
+      "label": "Document utilised solely for corroboration or contradiction"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

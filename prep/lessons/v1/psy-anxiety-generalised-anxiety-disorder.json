@@ -1,0 +1,269 @@
+{
+ "v": 1,
+ "id": "psy-anxiety-generalised-anxiety-disorder",
+ "subject": "psychiatry",
+ "module": "psy-anxiety",
+ "title": "Generalised Anxiety Disorder and Panic Syndromes",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Generalised anxiety disorder** is defined by excessive, uncontrollable worry and persistent apprehension regarding multiple everyday life domains for at least six consecutive months. Patients experience significant autonomic arousal accompanied by motor tension, restlessness, fatigue, impaired concentration, muscle aches, and severe sleep disturbances.",
+   "say": "Generalised anxiety disorder features pervasive, uncontrollable worry across multiple life spheres lasting at least six months, paired with somatic tension and insomnia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/generalized-anxiety-disorder-fig1.webp",
+    "alt": "Neurobiological pathways and autonomic arousal mechanisms in generalized anxiety disorder",
+    "caption": "Neurobiological pathways and autonomic arousal mechanisms in generalized anxiety disorder.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Somatic manifestations of anxiety** arise from heightened sympathetic nervous system activity and central noradrenergic output originating within the locus coeruleus. Somatic indicators encompass diaphoresis, resting tachycardia, epigastric distress, frequent urination, dry mouth, and chronic tension headaches, frequently leading patients to present to medical clinics.",
+   "say": "Sympathetic hyperactivity drives physical anxiety features including palpitations, sweating, tremors, dry mouth, and tension headaches that prompt extensive medical evaluations.",
+   "vis": {
+    "kind": "table",
+    "title": "Anxiety Symptom Clusters",
+    "cols": [
+     "Domain",
+     "Physical Sign",
+     "Physiological Basis"
+    ],
+    "rows": [
+     [
+      "Cardiovascular",
+      "Tachycardia & palpitations",
+      "Locus coeruleus noradrenaline release"
+     ],
+     [
+      "Musculoskeletal",
+      "Tremors & muscle tension",
+      "Persistent gamma motor neuron firing"
+     ],
+     [
+      "Gastrointestinal",
+      "Epigastric churning & nausea",
+      "Altered enteric nervous system motility"
+     ],
+     [
+      "Respiratory",
+      "Hyperventilation & air hunger",
+      "Respiratory center chemoreceptor hypersensitivity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Panic attack** represents an abrupt surge of intense fear or overwhelming discomfort that reaches a crescendo within minutes, accompanied by at least four somatic or cognitive symptoms. Physical features include palpitations, diaphoresis, shaking, chest pain, and choking sensations, alongside profound cognitive terror of impending doom.",
+   "say": "A panic attack produces an abrupt surge of intense terror peaking within ten minutes, accompanied by palpitations, shortness of breath, and fear of impending doom.",
+   "vis": {
+    "kind": "flow",
+    "title": "Panic Cascade Mechanism",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Initial somatic trigger: benign tachycardia or dyspnoea"
+     },
+     {
+      "id": "n2",
+      "label": "Catastrophic misinterpretation: 'I am dying of a heart attack'"
+     },
+     {
+      "id": "n3",
+      "label": "Massive amygdala and autonomic adrenaline surge"
+     },
+     {
+      "id": "n4",
+      "label": "Peak panic crescendo with depersonalisation within 10 minutes"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Follow the arrows around this loop, starting with a harmless flutter in the chest. Interpreting that sensation as a heart attack triggers fear, which releases adrenaline and makes the heart pound harder, seemingly confirming the catastrophe. This **vicious circle** explains why panic peaks within minutes, and why therapy teaches patients to relabel body sensations as uncomfortable rather than dangerous during attacks.",
+   "say": "A body sensation is read as catastrophe, fear releases adrenaline, and stronger sensations seem to confirm the fear. Breaking that interpretation is central to panic treatment.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m346-psy-anxiety-generalised-anxiety-disorder.webp",
+    "alt": "Vicious circle diagram of a panic attack linking catastrophic interpretation of body sensations to rising fear and stronger physical symptoms",
+    "caption": "Flowchart of the physiological and cognitive vicious circle that drives an acute panic attack. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Panic disorder** requires recurrent, unexpected panic attacks followed by at least one month of persistent concern about experiencing additional attacks, worry over their health consequences, or maladaptive behavioural changes. First-line pharmacotherapy utilizes selective serotonin reuptake inhibitors, while cognitive therapy targets catastrophic misinterpretation of normal somatic sensations.",
+   "say": "Panic disorder requires recurrent unexpected panic surges followed by at least one month of persistent anticipatory worry or agoraphobic lifestyle avoidance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Panic Disorder Criteria",
+     "points": [
+      "Recurrent unexpected panic surges",
+      "One month of persistent anticipatory dread",
+      "Worry regarding heart attack or insanity",
+      "Marked maladaptive behavioral restriction"
+     ]
+    },
+    "right": {
+     "title": "Medical Mimics to Exclude",
+     "points": [
+      "Phaeochromocytoma (episodic hypertension)",
+      "Hyperthyroidism (elevated free T4)",
+      "Paroxysmal supraventricular tachycardia",
+      "Hypoglycaemia and caffeinism"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Agoraphobia** involves marked, disproportionate fear or active avoidance of at least two situations where escape might prove difficult, or where emergency medical assistance might be unavailable during a panic attack. Feared environments classically include public transport, open spaces, enclosed shops, standing in queues, or leaving home alone.",
+   "say": "Agoraphobia involves intense fear and avoidance of environments like buses, crowded malls, or queues where escape during a panic surge seems impossible.",
+   "vis": {
+    "kind": "table",
+    "title": "Agoraphobic Diagnostic Environments",
+    "cols": [
+     "Environmental Setting",
+     "Feared Outcome",
+     "Avoidance Behavior"
+    ],
+    "rows": [
+     [
+      "Public transportation",
+      "Inability to exit rapidly on trains or buses",
+      "Refusing to travel without a trusted companion"
+     ],
+     [
+      "Open spaces",
+      "Helplessness in public squares or bridges",
+      "Remaining confined to immediate home grounds"
+     ],
+     [
+      "Enclosed public places",
+      "Suffocation in cinemas or shopping malls",
+      "Sitting exclusively near exit doors"
+     ],
+     [
+      "Crowded lines",
+      "Fainting or humiliation in grocery queues",
+      "Abandoning shopping carts and fleeing stores"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Specific phobia** entails marked, unreasonable fear or anxiety circumscribed to a specific object or situation, which is actively avoided or endured with intense dread. The disturbance persists for at least six months and causes functional impairment, classified into animal, natural environment, blood-injection-injury, and situational subtypes.",
+   "say": "Specific phobias involve intense, irrational fear of circumscribed triggers like heights, spiders, or blood lasting over six months and provoking active avoidance.",
+   "vis": {
+    "kind": "table",
+    "title": "Specific Phobia Categories",
+    "cols": [
+     "Subtype",
+     "Common Triggers",
+     "Physiological Reaction"
+    ],
+    "rows": [
+     [
+      "Animal",
+      "Spiders, snakes, dogs, insects",
+      "Tachycardia, sympathetic arousal, freezing"
+     ],
+     [
+      "Natural environment",
+      "Heights (acrophobia), storms, deep water",
+      "Sympathetic fight-or-flight activation"
+     ],
+     [
+      "Blood-injection-injury",
+      "Needles, lacerations, medical procedures",
+      "Biphasic response: initial tachycardia then vasovagal syncope"
+     ],
+     [
+      "Situational",
+      "Airplanes, elevators, driving enclosed tunnels",
+      "Intense panic-like sympathetic hyperarousal"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Blood-injection-injury phobia** exhibits a unique biphasic autonomic response that fundamentally distinguishes it from all other anxiety disorders. Upon encountering the phobic stimulus, an initial brief rise in heart rate and blood pressure is rapidly followed by profound vagal stimulation, resulting in bradycardia, hypotension, and vasovagal syncope.",
+   "say": "Blood-injury phobia produces a unique biphasic autonomic reaction: initial sympathetic acceleration followed by profound vagal bradycardia and fainting.",
+   "vis": {
+    "kind": "flow",
+    "title": "Biphasic Vasovagal Response",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Visual exposure to blood or needle puncture"
+     },
+     {
+      "id": "n2",
+      "label": "Transient brief sympathetic tachycardia and hypertension"
+     },
+     {
+      "id": "n3",
+      "label": "Profound parasympathetic vagal discharge & peripheral vasodilation"
+     },
+     {
+      "id": "n4",
+      "label": "Sudden cerebral hypoperfusion triggering vasovagal syncope"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Applied tension technique** serves as the specialized behavioral treatment of choice for blood-injection-injury phobia, directly counteracting the precipitous drop in blood pressure. Patients are trained to rhythmically tense large skeletal muscle groups in the arms, chest, and legs, mechanically raising systemic blood pressure to prevent fainting.",
+   "say": "Applied tension is the definitive treatment for needle phobia. Tensing skeletal muscle groups elevates systemic blood pressure and prevents syncope.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Applied Tension Protocol",
+     "points": [
+      "Tense leg, torso, and arm muscles for twenty seconds",
+      "Release tension for thirty seconds to baseline",
+      "Repeat five cycles prior to venipuncture",
+      "Mechanically preserves cerebral blood flow"
+     ]
+    },
+    "right": {
+     "title": "Standard Phobia Therapy",
+     "points": [
+      "Systematic desensitisation for animal phobias",
+      "In vivo graded exposure therapy",
+      "Deep muscle relaxation and breathing control",
+      "Virtual reality immersion protocols"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -23,6 +23,14 @@ try {
   await call('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:true});
   await sleep(350);
   ok(await ev(`!!document.querySelector('#dxIntake') && !!document.querySelector('#dxReview')`),'intake and review render');
+  const typeDx=t=>ev(`{const q=document.querySelector('#dxSearch');q.focus();q.value=${JSON.stringify(t)};q.dispatchEvent(new Event('input',{bubbles:true}));}`);
+  const dropOpen=()=>ev(`document.querySelector('#dxSearchDrop').style.display==='block'`);
+  await typeDx('fever');
+  ok(await dropOpen() && await ev(`getComputedStyle(document.querySelector('#dxSearchClear')).display!=='none'`),'typing opens the list and shows the clear button');
+  await ev(`document.querySelector('#dxSearchClear').click();`);
+  ok(await ev(`document.querySelector('#dxSearch').value===''`) && !await dropOpen() && await ev(`getComputedStyle(document.querySelector('#dxSearchClear')).display==='none'`),'clear button empties the box and hides itself');
+  await ev(`document.querySelector('#dxSearch').blur();DX.reset();`);
+  await sleep(200);
   ok(await ev(`document.querySelector('#dxAdv').style.display==='none'`),'case tools start collapsed');
   ok(await ev(`document.body.classList.contains('dx-lock') && getComputedStyle(document.querySelector('#dxOverlay')).overflow==='hidden' && getComputedStyle(document.querySelector('.dx-body')).overflowY==='auto'`),'workspace stays pinned while its content scrolls');
   const viewportFit=await ev(`({top:document.querySelector('#dxOverlay').getBoundingClientRect().top,bottom:document.querySelector('#dxOverlay').getBoundingClientRect().bottom,height:innerHeight,position:getComputedStyle(document.querySelector('#dxOverlay')).position})`);

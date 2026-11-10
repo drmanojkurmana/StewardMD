@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-antipsychotics",
+  "subject": "pharmacology",
+  "title": "Atypical Antipsychotics: Risperidone, Quetiapine, Aripiprazole, Ziprasidone and D2 Partial Agonism",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Risperidone** pairs D2 blockade with potent serotonin 5 HT2A antagonism, the original atypical recipe promising fewer extrapyramidal effects at low doses, a promise that expires as doses climb into typical territory. Its active metabolite paliperidone is marketed separately with renal dosing and depot elegance. Risperidone owns the class's strongest prolactin elevation, outstripping even haloperidol in some series, so sexual, menstrual and bone questions belong in its reviews by default.",
+      "say": "Risperidone is atypical at low dose and typical at high dose, with the class's loudest prolactin signal.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antipsychotic-drugs-psych-fig1.webp",
+        "alt": "Antipsychotic side effects summary diagram by receptor profile",
+        "caption": "Antipsychotic adverse effects by receptor profile, the map for comparing this lesson's atypical agents."
+      }
+    },
+    {
+      "tx": "**Quetiapine** barely holds D2 (fast off kinetics) and leans on histamine and alpha blockade for heavy sedation with minimal extrapyramidal and prolactin effects, plus an active metabolite (norquetiapine) inhibiting noradrenaline reuptake that underwrites bipolar depression and augmentation roles. Low doses are widely (and controversially) used as hypnotics, importing metabolic syndrome for a sleeping pill's benefit. Orthostatic hypotension, cataract signals historically, and weight gain complete its ledger.",
+      "say": "Quetiapine sedates more than it blocks; respect its metabolism and question its life as a sleeping tablet.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Quetiapine strengths",
+          "points": [
+            "Minimal extrapyramidal and prolactin effects",
+            "Bipolar depression and mania indications",
+            "Strong sedation useful in acute settings",
+            "Oral and extended release formulations"
+          ]
+        },
+        "right": {
+          "title": "Quetiapine cautions",
+          "points": [
+            "Metabolic syndrome burden accumulates silently",
+            "Postural hypotension on initiation and titration",
+            "Off label low dose hypnotic use questioned",
+            "CYP3A4 inhibitors multiply levels"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Aripiprazole** broke the antagonist monopoly as a D2 partial agonist: a stabiliser occupying receptors with about 30 percent intrinsic activity, damping hyperdopaminergic psychosis while propping hypodopaminergic tone, slashing prolactin (it can normalise others' elevations) and largely sparing metabolism and QT. Akathisia and activation, nausea and insomnia are its tolls, and impulse control disorders inherited from agonist pharmacology forced class warnings even here. Long acting monthly injections anchor its adherence story.",
+      "say": "Aripiprazole is a dimmer switch, not an off switch: prolactin falls, akathisia rises, metabolism breathes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Partial agonist gains",
+          "points": [
+            "Prolactin neutral or lowering",
+            "Metabolic and QT profiles among the kindest",
+            "Once daily oral and monthly depot forms",
+            "Adjunct in depression at low doses"
+          ]
+        },
+        "right": {
+          "title": "Partial agonist costs",
+          "points": [
+            "Akathisia and restless activation early",
+            "Nausea, insomnia and headache",
+            "Impulse control warnings apply",
+            "CYP2D6 and 3A4 interactions need dose surgery"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Ziprasidone** pairs D2 and 5 HT2A blockade with serotonin and noradrenaline reuptake inhibition, near metabolic neutrality and the class's most prominent QT prolongation, demanding baseline ECG respect, electrolyte care and food (absorption doubles with a meal of about 500 kcal). Capsules taken fasting are half absorbed, a pharmacokinetic trap behind apparent non response. Its intramuscular form serves acute agitation where QT allows.",
+      "say": "Ziprasidone spares the waistline and taxes the QT; feed it properly or it never arrives.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dose",
+            "label": "Ziprasidone prescribed twice daily"
+          },
+          {
+            "id": "food",
+            "label": "Taken with a substantial meal: absorption doubles"
+          },
+          {
+            "id": "qt",
+            "label": "QT interval and electrolytes respected"
+          },
+          {
+            "id": "gain",
+            "label": "Metabolically neutral antipsychosis achieved"
+          }
+        ],
+        "edges": [
+          [
+            "dose",
+            "food"
+          ],
+          [
+            "food",
+            "qt"
+          ],
+          [
+            "qt",
+            "gain"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The engine of atypical advantage, where real, is **D2 blockade** loosened by serotonin: 5 HT2A antagonism disinhibits dopamine release in nigrostriatal and tuberoinfundibular pathways, cushioning movement and prolactin effects while mesolimbic antipsychosis persists. Occupancy imaging quantifies the therapeutic window (roughly 65 to 80 percent striatal D2 occupancy; beyond 80, extrapyramidal effects bloom), turning dose selection from folklore into receptor arithmetic for the atypicals and typicals alike.",
+      "say": "Sixty five to eighty percent D2 occupancy is the window; serotonin buys the margins around it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antipsychotics-d2-eps-clozapine-nms-fig1.webp",
+        "alt": "Antipsychotic dopamine neurocircuit pathways diagram showing mesolimbic, nigrostriatal, tuberoinfundibular and mesocortical tracts",
+        "caption": "Dopamine pathways whose differential D2 occupancy explains atypical tolerability advantages."
+      }
+    },
+    {
+      "tx": "**Metabolic syndrome** is the atypical era's defining iatrogenic epidemic: clozapine and olanzapine heaviest, risperidone and quetiapine intermediate, aripiprazole and ziprasidone lightest, with weight gain steepest in antipsychotic naive youth. Monitoring is therefore class law, not agent choice: weight, waist, blood pressure, fasting glucose and lipids at baseline, 3 months and at least annually, with switching and metformin conversations when trajectories worsen, because cardiovascular disease, not suicide alone, shortens lives in schizophrenia by 15 to 20 years.",
+      "say": "Monitor every atypical like a diabetes risk factor; hearts end more schizophrenic lives than symptoms do.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Metabolic weight league",
+          "points": [
+            "Heaviest: clozapine, olanzapine",
+            "Intermediate: risperidone, quetiapine",
+            "Lightest: aripiprazole, ziprasidone, lurasidone",
+            "Youth gain fastest in first exposures"
+          ]
+        },
+        "right": {
+          "title": "Monitoring law",
+          "points": [
+            "Baseline weight, waist, pressure, glucose, lipids",
+            "Recheck at 3 months, then at least annually",
+            "Lifestyle intervention from the first prescription",
+            "Switch or add metformin on worsening trajectories"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Choice among atypicals** is therefore adverse effect matchmaking against the patient's body and history: avoid olanzapine where obesity or diabetes loom, risperidone where prolactin already troubles, quetiapine where sedation or hypotension endanger, ziprasidone where QT stretches, aripiprazole where akathisia previously tormented, and clozapine reserved by its resistance criteria and blood contract from the previous lesson. Efficacy differences outside clozapine are modest enough that tolerability usually writes the prescription.",
+      "say": "Outside clozapine, tolerability chooses the drug; match the adverse profile to the body in front of you.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "history",
+            "label": "Audit weight, prolactin, QT, sedation and movement history"
+          },
+          {
+            "id": "match",
+            "label": "Exclude agents whose signature harms collide"
+          },
+          {
+            "id": "start",
+            "label": "Start the survivor low with monitoring booked"
+          },
+          {
+            "id": "switch",
+            "label": "Switch early for intolerable effects rather than abandoning class"
+          }
+        ],
+        "edges": [
+          [
+            "history",
+            "match"
+          ],
+          [
+            "match",
+            "start"
+          ],
+          [
+            "start",
+            "switch"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Prolactin league tables** repay memorising because vignettes test them by symptom: risperidone and typicals raise most (galactorrhoea, amenorrhoea, sexual dysfunction, long term bone density loss), olanzapine and quetiapine modestly and transiently, aripiprazole lowers, sometimes used deliberately to rescue others' hyperprolactinaemia. Symptomatic elevation earns prolactin measurement, pituitary confounders excluded, dose or agent change, and bone protection where exposure has been long.",
+      "say": "Risperidone raises prolactin loudest, aripiprazole lowers it; ask about periods, milk and sex to hear it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prolactin raisers",
+          "points": [
+            "Risperidone and paliperidone: strongest atypical signal",
+            "Typicals especially haloperidol",
+            "Symptoms: galactorrhoea, amenorrhoea, sexual dysfunction",
+            "Long term: bone density consequences"
+          ]
+        },
+        "right": {
+          "title": "Prolactin sparers and rescuers",
+          "points": [
+            "Aripiprazole lowers prolactin, used as rescue adjunct",
+            "Quetiapine and clozapine largely neutral",
+            "Dose reduction or switch usually normalises",
+            "Exclude pregnancy, hypothyroidism and adenoma first"
+          ]
+        }
+      }
+    }
+  ]
+}

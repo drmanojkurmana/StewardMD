@@ -1,0 +1,281 @@
+{
+ "v": 1,
+ "id": "obg-pcos-hirsutism-polycystic-ovary-syndrome",
+ "subject": "obstetrics-gynaecology",
+ "module": "obg-pcos-hirsutism",
+ "title": "Polycystic Ovary Syndrome",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Rotterdam criteria** establish the international diagnostic framework for polycystic ovary syndrome, requiring the presence of at least two of three cardinal features: oligo- or anovulation; clinical and/or biochemical signs of hyperandrogenism; and polycystic ovarian morphology on pelvic ultrasonography. Application of the criteria requires the strict exclusion of specific secondary mimicking etiologies including non-classic congenital adrenal hyperplasia, hyperprolactinaemia, thyroid dysfunction, and androgen-secreting ovarian or adrenal neoplasms.",
+   "say": "The Rotterdam criteria require at least two of three features: ovulatory dysfunction, hyperandrogenism, and polycystic ovaries on ultrasound. Secondary mimics like thyroid disease, hyperprolactinaemia, and adrenal hyperplasia must be formally excluded.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/pcos-hirsutism-rotterdam-metabolic-induction-fig1.webp",
+    "alt": "Diagram illustrating Rotterdam diagnostic consensus criteria and metabolic management.",
+    "caption": "Rotterdam diagnostic criteria, ovarian follicular dynamics, and metabolic intervention targets. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Polycystic ovarian morphology** has been updated in international evidence-based guidelines using modern high-frequency transvaginal ultrasound transducers. The diagnostic threshold requires twenty or more follicles per ovary, measuring between two and nine millimetres in diameter, and/or an increased ovarian volume of ten millilitres or greater, in the absence of a dominant follicle or corpus luteum. Follicles characteristically arrange in a peripheral radial pattern around an expanded, hyperechoic central stroma.",
+   "say": "Modern ultrasound criteria define polycystic ovaries as twenty or more follicles measuring two to nine millimetres, or an ovarian volume of ten millilitres or more. They form a characteristic string-of-pearls around dense central stroma.",
+   "vis": {
+    "kind": "table",
+    "title": "International Consensus Ultrasound Criteria for PCO Morphology",
+    "cols": [
+     "Diagnostic Parameter",
+     "Transvaginal Ultrasound Cut-Off",
+     "Clinical Scanning Rule"
+    ],
+    "rows": [
+     [
+      "Follicle number per ovary (FNPO)",
+      "20 or more follicles (2 to 9 mm)",
+      "Count using high-resolution TVUS probe"
+     ],
+     [
+      "Ovarian volume threshold",
+      "10 mL or greater in either ovary",
+      "Calculated via prolate ellipsoid formula"
+     ],
+     [
+      "Stromal distribution",
+      "Increased central echogenic stroma",
+      "Reflects theca cell hyperplasia"
+     ],
+     [
+      "Dominant structure rule",
+      "Examine when no cyst >10 mm present",
+      "Repeat scan if active corpus luteum seen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Modified Ferriman-Gallwey score** provides the standardized clinical metric for quantifying the degree and distribution of hirsutism. The scoring system evaluates terminal, coarse, pigmented hair growth across nine androgen-sensitive body areas: upper lip, chin, chest, upper back, lower back, upper abdomen, lower abdomen, upper arms, and thighs. Each anatomical site is graded from 0 (absence of terminal hair) to 4 (extensive confluent growth). A total composite score of four to eight defines clinical hirsutism depending on racial ethnicity.",
+   "say": "The modified Ferriman-Gallwey score grades coarse terminal hair across nine androgen-dependent areas from zero to four. A score of four to eight, depending on ethnicity, confirms clinical hirsutism.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vellus Hair (Normal)",
+     "points": [
+      "Fine, soft, non-pigmented hair",
+      "Lacks internal medullary canal",
+      "Short length (under 2 mm)",
+      "Unresponsive to circulating androgens"
+     ]
+    },
+    "right": {
+     "title": "Terminal Hair (Hirsutism)",
+     "points": [
+      "Coarse, thick, darkly pigmented hair",
+      "Possesses prominent central medulla",
+      "Exceeds 5 mm in length",
+      "Driven by 5-alpha reductase conversion to DHT"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Insulin resistance** is present in up to seventy-five percent of women with polycystic ovary syndrome, independent of body mass index, driven by post-receptor defects in insulin signaling. Compensatory hyperinsulinaemia acts directly on the liver to suppress sex hormone-binding globulin, elevating free circulating testosterone. Furthermore, insulin acts through its own receptor and homologous IGF-1 receptors on ovarian theca cells to augment steroidogenesis. Up to ten percent of affected women develop type 2 diabetes by age forty.",
+   "say": "Insulin resistance affects most women with PCOS regardless of weight. The resulting hyperinsulinaemia suppresses liver SHBG, releasing free active testosterone, while directly stimulating ovarian theca cells to overproduce androgens.",
+   "vis": {
+    "kind": "flow",
+    "title": "Metabolic Cross-talk in Hyperandrogenic PCOS",
+    "nodes": [
+     {
+      "id": "i1",
+      "label": "Insulin Resistance",
+      "sub": "Post-receptor IRS-1 serine phosphorylation"
+     },
+     {
+      "id": "i2",
+      "label": "Hyperinsulinaemia",
+      "sub": "Compensatory pancreatic beta-cell hypersecretion"
+     },
+     {
+      "id": "i3",
+      "label": "Dual Target Action",
+      "sub": "Suppresses hepatic SHBG and stimulates theca cells"
+     },
+     {
+      "id": "i4",
+      "label": "Androgen Toxicity",
+      "sub": "Hirsutism, ovulatory arrest, and metabolic syndrome"
+     }
+    ],
+    "edges": [
+     [
+      "i1",
+      "i2",
+      "Pancreatic compensation"
+     ],
+     [
+      "i2",
+      "i3",
+      "Systemic signaling"
+     ],
+     [
+      "i3",
+      "i4",
+      "Clinical phenotype"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Acanthosis nigricans** serves as a dependable cutaneous physical marker of profound, severe insulin resistance in patients with polycystic ovary syndrome. It presents as symmetrical, velvety, hyperpigmented, papillomatous plaques prominently distributed along the posterior neck, axillae, groin creases, and inframammary folds. High circulating concentrations of insulin cross-react with and activate insulin-like growth factor-1 (IGF-1) receptors on dermal fibroblasts and epidermal keratinocytes, stimulating localized epithelial hyperplasia and hyperkeratosis.",
+   "say": "Acanthosis nigricans is a telltale skin sign of severe insulin resistance. High circulating insulin stimulates keratinocyte IGF-1 receptors, causing velvety hyperpigmented plaques across the neck and axillae.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Acanthosis in PCOS",
+     "points": [
+      "Driven by profound hyperinsulinaemia",
+      "Stimulates dermal IGF-1 receptors",
+      "Velvety flexural plaques on neck and axillae",
+      "Improves with weight loss and metformin"
+     ]
+    },
+    "right": {
+     "title": "Malignant Acanthosis",
+     "points": [
+      "Paraneoplastic response to visceral cancer",
+      "Gastric or abdominal adenocarcinoma",
+      "Rapid, explosive mucosal and palm involvement",
+      "Refractory to metabolic interventions"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Endometrial cancer** risk is elevated three- to four-fold in women with chronic anovulatory polycystic ovary syndrome. In the continuous absence of ovulation, the endometrium is deprived of cyclical progesterone-mediated differentiation and secretory shedding. Sustained, unopposed circulating estrogen stimulates constant, unmitigated endometrial glandular proliferation. This unremitting mitogenic stimulus leads sequentially from hyperplasia without atypia to atypical hyperplasia and well-differentiated endometrioid adenocarcinoma, mandating periodic withdrawal bleeding every three months.",
+   "say": "PCOS carries a four-fold increased risk of endometrial cancer. Without ovulation, there is no progesterone to oppose estrogen, causing relentless glandular growth. Induce a withdrawal bleed at least every three months to shed the lining.",
+   "vis": {
+    "kind": "flow",
+    "title": "Oncological Sequence of Unopposed Estrogen",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Chronic Anovulation",
+      "sub": "Absent corpus luteum and zero progesterone"
+     },
+     {
+      "id": "e2",
+      "label": "Unopposed Estrogen",
+      "sub": "Continuous mitogenic stimulation of endometrium"
+     },
+     {
+      "id": "e3",
+      "label": "Atypical Hyperplasia",
+      "sub": "Endometrial intraepithelial neoplasia (EIN)"
+     },
+     {
+      "id": "e4",
+      "label": "Endometrial Carcinoma",
+      "sub": "Invasive type 1 endometrioid adenocarcinoma"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2",
+      "Endocrine uncoupling"
+     ],
+     [
+      "e2",
+      "e3",
+      "Glandular atypia"
+     ],
+     [
+      "e3",
+      "e4",
+      "Malignant transformation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lifestyle intervention** incorporating structured caloric restriction and regular aerobic exercise constitutes the mandatory first-line therapy for all overweight and obese women with polycystic ovary syndrome. A weight loss of just five to ten percent of total baseline body weight significantly reduces visceral adipose tissue, improves peripheral insulin sensitivity, lowers circulating bioavailable testosterone, and spontaneously restores regular ovulatory menstrual cycles and spontaneous fertility in over fifty percent of patients.",
+   "say": "Lifestyle modification is the foundation of management. A weight loss of just five to ten percent restores insulin sensitivity, drops free androgens, and restarts spontaneous ovulation in over half of overweight women.",
+   "vis": {
+    "kind": "table",
+    "title": "Therapeutic Hierarchy in Polycystic Ovary Syndrome",
+    "cols": [
+     "Clinical Priority",
+     "First-Line Recommendation",
+     "Second-Line Alternative"
+    ],
+    "rows": [
+     [
+      "Weight and metabolic health",
+      "5% to 10% weight loss via diet and exercise",
+      "Metformin 1500 to 2000 mg daily"
+     ],
+     [
+      "Menstrual irregularity / acne",
+      "Combined oral contraceptive pill (anti-androgenic)",
+      "Levonorgestrel intrauterine system (LNG-IUS)"
+     ],
+     [
+      "Persistent hirsutism",
+      "Spironolactone 50 to 200 mg daily (with COCP)",
+      "Finasteride or cyproterone acetate"
+     ],
+     [
+      "Infertility and anovulation",
+      "Letrozole 2.5 to 5 mg daily on cycle days 3 to 7",
+      "Clomiphene citrate or gonadotropins"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Spironolactone** at doses of fifty to two hundred milligrams daily serves as a potent anti-androgenic medication for persistent hirsutism failing six months of oral contraceptive therapy. It competitively blocks androgen receptors in target tissues and inhibits 5-alpha reductase, preventing conversion of testosterone to dihydrotestosterone within pilosebaceous units. Because spironolactone causes feminization of a male fetus, it must always be co-prescribed with effective contraception, alongside monitoring of serum potassium for potential hyperkalaemia.",
+   "say": "Spironolactone blocks androgen receptors and 5-alpha reductase, clearing stubborn facial hair. Because it can feminize a male fetus, reliable contraception is mandatory, and serum potassium should be monitored periodically.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spironolactone Mechanisms",
+     "points": [
+      "Competitive androgen receptor antagonist",
+      "Weak 5-alpha reductase inhibition",
+      "Suppresses ovarian androgen synthesis",
+      "Reduces Ferriman-Gallwey scores over 6 months"
+     ]
+    },
+    "right": {
+     "title": "Safety and Precautions",
+     "points": [
+      "Strict contraception mandatory (teratogenic)",
+      "Risk of male fetal genital feminization",
+      "Potassium-sparing effect requires K+ checks",
+      "Menstrual spotting if used without oral pill"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Rotterdam PCOS criteria: minimum requirements for diagnosis",
+   "b": "At least 2 of 3: oligo/anovulation, hyperandrogenism, polycystic ovaries on ultrasound."
+  },
+  {
+   "f": "PCOS ultrasound criteria: modern follicle count cut-off",
+   "b": "20 or more follicles per ovary measuring 2 to 9 mm, or ovarian volume of 10 mL or more."
+  },
+  {
+   "f": "PCOS oncology risk: most common associated malignancy",
+   "b": "Endometrial adenocarcinoma (3- to 4-fold risk due to unopposed estrogen)."
+  }
+ ],
+ "keys": [
+  "Rotterdam criteria diagnose PCOS based on ovulatory dysfunction, hyperandrogenism, and polycystic ovaries",
+  "Insulin resistance drives ovarian androgen excess and suppresses sex hormone-binding globulin",
+  "Lifestyle weight loss is first-line, oral contraceptives regulate cycles, and letrozole induces ovulation"
+ ]
+}

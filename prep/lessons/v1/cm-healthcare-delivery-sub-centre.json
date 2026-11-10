@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-healthcare-delivery-sub-centre",
+  "subject": "community-medicine",
+  "module": "cm-healthcare-delivery",
+  "title": "Health Care Delivery: Sub Centre, Health and Wellness Centre, PHC and CHC",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "The sub centre: first contact point",
+      "tx": "The **sub centre (sub health centre)** is the most peripheral public facility, staffed chiefly by an auxiliary nurse midwife and a male health worker, delivering immunisation, antenatal care, family planning, and minor illness care to its villages. Upgraded sub centres now function as health and wellness centres (Ayushman Arogya Mandirs) adding a community health officer and expanded services, detailed in step four.",
+      "say": "The sub centre is the village doorstep of the public system. The ANM anchors it, now joined by a community health officer.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "sc1", "label": "Villages served by sub centre team" },
+          { "id": "sc2", "label": "ANM, health worker, ASHA network" },
+          { "id": "sc3", "label": "Referral upward to PHC" }
+        ],
+        "edges": [["sc1", "sc2"], ["sc2", "sc3"]]
+      }
+    },
+    {
+      "title": "Primary health centre: the medical officer tier",
+      "tx": "The **primary health centre (PHC)** is the first facility headed by a medical officer, with beds (conventionally four to six), a labour room, laboratory basics, and supervisory charge over its sub centres. PHCs run outpatient care, maternal and child services, national programme implementation, school health, and referral transport linkage, and their medical officer doubles as the block's public health manager in many states.",
+      "say": "The PHC brings the first doctor, beds, and a labour room. Its medical officer also supervises the sub centres below.",
+      "vis": {
+        "kind": "table",
+        "cols": ["PHC element", "Function"],
+        "rows": [
+          ["Medical officer", "Clinical care plus public health management"],
+          ["4 to 6 beds", "Observation, delivery, stabilisation"],
+          ["Labour room", "Conduct of normal deliveries"],
+          ["Sub centre supervision", "Supplies, training, data review"]
+        ]
+      }
+    },
+    {
+      "title": "Community health centre: first referral backbone",
+      "tx": "The **community health centre (CHC)** is a thirty bedded referral hospital with specialists in medicine, surgery, obstetrics, and paediatrics plus anaesthesia support, operation theatre, X-ray, and blood storage, serving roughly four PHCs. Where staffed to Indian Public Health Standards it becomes the first referral unit for obstetric emergencies; where specialists are vacant, its referral promise collapses, the system's most audited gap.",
+      "say": "The CHC promises specialists, surgery, and blood for four PHCs. Vacant specialist posts are its chronic failure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CHC on paper (IPHS)",
+          "points": ["30 beds, four specialists", "Theatre, X-ray, blood storage", "24 by 7 emergency obstetric care"]
+        },
+        "right": {
+          "title": "CHC in audit reality",
+          "points": ["Specialist vacancies widespread", "Blood storage licensing delays", "Referrals bypass to district hospital"]
+        }
+      }
+    },
+    {
+      "title": "Health and wellness centres (Arogya Mandirs)",
+      "tx": "Ayushman Bharat upgraded sub centres and PHCs into **health and wellness centres** delivering comprehensive primary care: an expanded package spanning maternal child care plus noncommunicable disease screening, mental health, eye, ENT, oral, elderly, and emergency basics, led at sub centre level by a trained community health officer (mid level health provider) with telemedicine linkage to the PHC doctor.",
+      "say": "Wellness centres expand the old package to screening, mental health, and elder care. A community health officer leads the sub centre team.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Expanded service", "Example at HWC"],
+        "rows": [
+          ["NCD screening", "BP, sugar, oral breast cervical screening"],
+          ["Mental health", "Screening, counselling, referral"],
+          ["Elderly and palliative", "Home based assessment and support"],
+          ["Telemedicine", "CHO consults PHC medical officer"]
+        ]
+      }
+    },
+    {
+      "title": "Indian Public Health Standards",
+      "tx": "**Indian Public Health Standards (IPHS)** prescribe each facility level's infrastructure, staff, equipment, drugs, and services, revised periodically (2022 revision current) to match wellness centre expansion. IPHS converts vague adequacy into auditable checklists: a PHC either has a functional labour room table or it does not. States report compliance, and quality certification (NQAS) builds its assessments on these standards.",
+      "say": "IPHS turns adequacy into checklists per facility level. The 2022 revision matches the wellness centre era.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ip1", "label": "IPHS lists staff, space, equipment, drugs" },
+          { "id": "ip2", "label": "Facility audited against checklist" },
+          { "id": "ip3", "label": "Gaps funded, NQAS quality certified" }
+        ],
+        "edges": [["ip1", "ip2"], ["ip2", "ip3"]]
+      }
+    },
+    {
+      "title": "Village level: VHSNC and health days",
+      "tx": "At the village itself, the **Village Health Sanitation and Nutrition Committee** (elected panchayat linked body with untied funds) plans local health action, while the monthly village health and nutrition day brings immunisation, antenatal checks, and counselling to the anganwadi platform. Rogi Kalyan Samitis mirror the committee idea at facilities, using user fees and grants for local repairs and patient amenities.",
+      "say": "Village committees plan and spend small untied funds locally. Monthly health days carry services to the anganwadi doorstep.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Village platforms",
+          "points": ["VHSNC plans with untied funds", "Monthly village health nutrition day", "Gram sabha health review"]
+        },
+        "right": {
+          "title": "Facility platforms",
+          "points": ["Rogi Kalyan Samiti manages amenities", "Quality circles under NQAS", "Jan Arogya Samiti at wellness centres"]
+        }
+      }
+    },
+    {
+      "title": "Three tier and referral logic",
+      "tx": "The public system's **three tier structure** (primary at sub centre and PHC, secondary at CHC and district hospital, tertiary at medical colleges) works only when referral moves both ways: up with a referral slip and transport, down with discharge advice for follow up near home. Gatekeeping fails in practice as patients self refer to district hospitals, overcrowding them while PHCs idle, the bypass problem every health system reform chases.",
+      "say": "Referral must travel up with transport and down with advice. Bypassing starves PHCs and chokes district hospitals.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "rt1", "label": "Sub centre and PHC: primary care" },
+          { "id": "rt2", "label": "CHC and district: secondary care" },
+          { "id": "rt3", "label": "Medical college: tertiary care" }
+        ],
+        "edges": [["rt1", "rt2"], ["rt2", "rt3"]]
+      }
+    },
+    {
+      "title": "Private and informal sectors in reality",
+      "tx": "Most Indian outpatient care actually flows through the **private health sector** (qualified practitioners, nursing homes, hospitals) and informal providers, especially in rural areas where the informal practitioner is first contact for the poor. Public policy therefore mixes provision with purchasing (insurance empanelment), regulation (Clinical Establishments Act), and engagement (contracting, public private partnerships), rather than pretending the public tier serves alone.",
+      "say": "Private and informal providers deliver most first contact care. Policy must purchase and regulate, not just provide.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Sector reality", "Policy instrument"],
+        "rows": [
+          ["Private hospitals dominate inpatient cities", "Insurance empanelment and standards"],
+          ["Informal rural first contact", "Training, referral linkage debates"],
+          ["Out of pocket dominance", "Public financing expansion (NHP goal)"],
+          ["Quality variation", "Clinical Establishments Act registration"]
+        ]
+      }
+    },
+    {
+      "title": "Levels of care versus tiers of facilities",
+      "tx": "Close by separating care levels from buildings in **levels of health care**: primary care is first contact, comprehensive, continuous care (whoever provides it), secondary is specialist referral care, and tertiary is super specialist care. A medical college outpatient department delivering primary care wastes tertiary resources, while a wellness centre delivering true primary care fulfils the Alma Ata promise locally. Examiners test this concept against facility names deliberately.",
+      "say": "Primary is a function, not a building. Colleges doing primary care waste tertiary strength; wellness centres embody it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Care level (function)",
+          "points": ["Primary: first contact comprehensive", "Secondary: specialist referral", "Tertiary: super specialist"]
+        },
+        "right": {
+          "title": "Facility tier (building)",
+          "points": ["Sub centre, PHC", "CHC, district hospital", "Medical college hospital"]
+        }
+      }
+    }
+  ]
+}

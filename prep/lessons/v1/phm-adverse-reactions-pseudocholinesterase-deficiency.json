@@ -1,0 +1,269 @@
+{
+  "v": 1,
+  "module": "phm-adverse-reactions",
+  "subject": "pharmacology",
+  "title": "Pseudocholinesterase Deficiency, Pharmacokinetic Drug Interactions, Pregnancy Categories, and Geriatric Prescribing",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The duration of neuromuscular paralysis elicited by the depolarizing agent succinylcholine is normally limited to five to ten minutes because of rapid enzymatic hydrolysis by butyrylcholinesterase synthesized in hepatocytes and circulating in plasma. An inherited autosomal recessive pharmacogenetic defect resulting in atypical plasma butyrylcholinesterase that fails to hydrolyse neuromuscular blockers is designated **pseudocholinesterase deficiency**. Affected individuals exposed to standard intubation doses of succinylcholine or mivacurium experience flaccid paralysis lasting hours.",
+      "say": "Pseudocholinesterase deficiency is an inherited enzymopathy where atypical plasma cholinesterase fails to hydrolyse succinylcholine, causing prolonged paralysis.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Enzyme variant phenotype",
+          "Genotype designation",
+          "Dibucaine number (% inhibition)",
+          "Duration of succinylcholine apnoea"
+        ],
+        "rows": [
+          [
+            "Homozygous typical (normal)",
+            "Eu / Eu",
+            "70 to 85 (approx 80%)",
+            "Normal (5 to 10 minutes)"
+          ],
+          [
+            "Heterozygous atypical",
+            "Eu / Ea",
+            "50 to 65 (approx 60%)",
+            "Slightly prolonged (15 to 30 minutes)"
+          ],
+          [
+            "Homozygous atypical",
+            "Ea / Ea",
+            "16 to 25 (approx 20%)",
+            "Severely prolonged (2 to 6+ hours)"
+          ],
+          [
+            "Silent allele (null)",
+            "Es / Es",
+            "Zero (no enzyme activity)",
+            "Extremely prolonged (> 8 hours)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A single percentage predicts how long paralysis will last after succinylcholine. Typical plasma cholinesterase is strongly blocked by dibucaine, giving a **dibucaine number** near eighty percent, whereas the homozygous atypical enzyme resists blockade and scores near twenty percent. The two curves separate those genotypes cleanly, explaining why one patient breathes again in minutes and another needs ventilation for hours.",
+      "say": "Typical enzyme gives a dibucaine number near eighty percent, while homozygous atypical enzyme scores near twenty. That gap predicts brief versus prolonged succinylcholine paralysis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m366-phm-adverse-reactions-pseudocholinesterase-deficiency.webp",
+        "alt": "Two inhibition curves, one reaching about eighty percent dibucaine inhibition and the other flattening near twenty percent.",
+        "caption": "Dibucaine inhibition curve showing about eighty percent inhibition in typical enzyme and twenty percent in homozygous atypical enzyme. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Laboratory diagnosis of atypical butyrylcholinesterase relies on measuring the percentage inhibition of plasma enzyme activity by the local anaesthetic dibucaine, expressed as the **dibucaine number**. Normal plasma cholinesterase is inhibited approximately eighty percent by dibucaine, whereas the homozygous atypical enzyme variant is resistant to dibucaine inhibition and demonstrates a low dibucaine number around twenty. When prolonged post-succinylcholine apnoea occurs, management requires continued mechanical ventilation and sedation until spontaneous muscular recovery ensues.",
+      "say": "A low dibucaine number of twenty confirms homozygous atypical pseudocholinesterase, managed by continued mechanical ventilation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal plasma cholinesterase",
+          "points": [
+            "Dibucaine number between 70 and 85",
+            "Rapid hydrolysis of succinylcholine",
+            "Recovery of spontaneous breathing in 5-10 min",
+            "Normal fluoride inhibition number"
+          ]
+        },
+        "right": {
+          "title": "Atypical pseudocholinesterase",
+          "points": [
+            "Dibucaine number between 16 and 25",
+            "Marked resistance to dibucaine inhibition",
+            "Persistent apnoea lasting several hours",
+            "Requires prolonged mechanical ventilatory support"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "When two or more pharmaceutical agents are co-administered, one drug may alter the magnitude or duration of response to another through complex **drug interactions**. Pharmacokinetic interactions alter absorption, protein binding, metabolism, or renal excretion of a victim drug, altering its systemic bioavailability and plasma half-life. In contrast, pharmacodynamic interactions occur directly at common receptor or physiological effector pathways, yielding additive, synergistic, or antagonistic effects without altering plasma drug concentrations.",
+      "say": "Drug interactions divide into pharmacokinetic alterations in drug disposition and pharmacodynamic interactions at shared physiological receptors.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Interaction category",
+          "Mechanism of action",
+          "Pharmacokinetic vs Pharmacodynamic",
+          "Clinical scenario"
+        ],
+        "rows": [
+          [
+            "Enzyme inhibition",
+            "Inhibition of CYP3A4 by ketoconazole or clarithromycin",
+            "Pharmacokinetic (elevated victim drug AUC)",
+            "Elevated simvastatin levels causing rhabdomyolysis"
+          ],
+          [
+            "Enzyme induction",
+            "Induction of CYP2C9 and CYP3A4 by rifampicin",
+            "Pharmacokinetic (reduced victim drug AUC)",
+            "Rapid clearance of warfarin causing thrombosis"
+          ],
+          [
+            "Receptor antagonism",
+            "Beta-blocker co-administered with salbutamol",
+            "Pharmacodynamic (competitive antagonism)",
+            "Loss of bronchodilation and severe bronchospasm"
+          ],
+          [
+            "Additive CNS depression",
+            "Benzodiazepines combined with opioids",
+            "Pharmacodynamic (synergistic sedation)",
+            "Fatal respiratory depression and coma"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Antiepileptic drugs like carbamazepine exemplify potent pharmacokinetic interactions by strongly inducing hepatic microsomal cytochrome P450 enzymes including CYP1A2, CYP2C9, and CYP3A4. Chronic carbamazepine therapy accelerates the hepatic biotransformation and clearance of concurrent medications including oral contraceptives, warfarin, and cyclosporine, often causing unexpected therapeutic failure. Furthermore, carbamazepine exhibits autoinduction, progressively accelerating its own hepatic metabolism over the initial four to six weeks of therapy, requiring systematic **antiepileptic therapeutic monitoring**.",
+      "say": "Carbamazepine induces multiple cytochrome enzymes, lowering levels of oral contraceptives and warfarin while accelerating its own elimination.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-carbamazepine.webp",
+        "alt": "Carbamazepine kinetics and CYP induction",
+        "caption": "Carbamazepine pharmacokinetic profile highlighting hepatic microsomal enzyme induction, multiple drug interactions, and neural tube defect teratogenicity."
+      }
+    },
+    {
+      "tx": "Prescribing during pregnancy requires rigorous evaluation of maternal benefit against potential fetal embryopathy, previously structured by the five-tier **pregnancy category** system established by the United States Food and Drug Administration. While Category A designates medications with rigorous human controlled trials demonstrating no fetal harm, Category X identifies drugs where fetal risks clearly outweigh any conceivable maternal benefit, constituting absolute contraindications during pregnancy. Modern labeling has transitioned to narrative Pregnancy and Lactation Labeling Rule risk summaries.",
+      "say": "FDA pregnancy categories range from Category A safe drugs to Category X compounds absolutely contraindicated in pregnancy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "FDA Pregnancy Category",
+          "Evidence of human fetal risk",
+          "Animal reproduction findings",
+          "Representative clinical drugs"
+        ],
+        "rows": [
+          [
+            "Category A",
+            "Controlled human trials fail to demonstrate fetal risk",
+            "No demonstrated harm across animal studies",
+            "Folic acid, levothyroxine, vitamin B6 (pyridoxine)"
+          ],
+          [
+            "Category B",
+            "No controlled human data, but no evidence of risk",
+            "Animal studies show no fetal risk or harm",
+            "Amoxicillin, cephalosporins, paracetamol, metformin"
+          ],
+          [
+            "Category C",
+            "Lacks adequate human controlled studies",
+            "Animal studies demonstrate adverse fetal effects",
+            "Fluoroquinolones, amlodipine, most SSRIs"
+          ],
+          [
+            "Category D",
+            "Positive evidence of human fetal risk exists",
+            "Potential benefits may warrant maternal emergency use",
+            "Phenytoin, valproate, lithium, tetracyclines"
+          ],
+          [
+            "Category X",
+            "Definite proven fetal abnormalities in humans",
+            "Contraindicated; risks clearly outweigh all benefits",
+            "Thalidomide, isotretinoin, methotrexate, statins, warfarin"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Major anatomical birth defects result from fetal exposure to potent teratogenic pharmaceuticals during the critical organogenesis window. Ingestion of the vitamin A analogue isotretinoin causes craniofacial dysmorphism, microtia, and thymic hypoplasia through cranial neural crest disruption. Anticonvulsant exposure to valproate induces spina bifida and neural tube defects, while administration of angiotensin-converting enzyme inhibitors during the second and third trimesters produces **fetal renal dysgenesis**, profound oligohydramnios, pulmonary hypoplasia, and neonatal anuria.",
+      "say": "Potent teratogens include isotretinoin causing ear and face anomalies, valproate causing spina bifida, and ACE inhibitors causing renal dysgenesis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Valproate exposure in utero",
+          "points": [
+            "Impairs folate metabolism and histone deacetylases",
+            "High risk of spina bifida and neural tube defects",
+            "Craniofacial anomalies and microcephaly",
+            "Significant reduction in childhood cognitive IQ"
+          ]
+        },
+        "right": {
+          "title": "ACE inhibitor exposure in utero",
+          "points": [
+            "Blunts angiotensin-mediated renal tubular development",
+            "Severe fetal renal tubular dysgenesis and anuria",
+            "Profound oligohydramnios (Potter sequence)",
+            "Pulmonary hypoplasia and fetal calvarial hypoplasia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Age-related physiological changes markedly alter drug absorption, distribution, hepatic metabolism, and renal excretion in elderly individuals. Aging is accompanied by reduced total body water, increased relative body fat, decreased circulating plasma albumin, diminished hepatic blood flow, and progressive loss of functional nephrons. These physiological alterations substantially prolong the elimination half-life of lipid-soluble drugs and impair renal clearance, predisposing to drug accumulation and severe **geriatric pharmacokinetic toxicity**.",
+      "say": "Aging decreases body water, reduces albumin, and diminishes renal glomerular filtration, causing drug accumulation and toxicity.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Physiological age change",
+          "Pharmacokinetic consequence",
+          "Vulnerable drug class",
+          "Clinical adverse outcome"
+        ],
+        "rows": [
+          [
+            "Decreased glomerular filtration rate",
+            "Marked reduction in renal drug clearance",
+            "Digoxin, aminoglycosides, gabapentin",
+            "Digitalis toxicity, acute renal injury"
+          ],
+          [
+            "Decreased circulating serum albumin",
+            "Elevated free, unbound drug fraction",
+            "Warfarin, phenytoin, sulfonylureas",
+            "Spontaneous haemorrhage, profound hypoglycaemia"
+          ],
+          [
+            "Increased total body fat percentage",
+            "Enlarged volume of distribution for lipophilic drugs",
+            "Diazepam, flurazepam, chlordiazepoxide",
+            "Prolonged daytime sedation, falls and hip fractures"
+          ],
+          [
+            "Enhanced central nervous sensitivity",
+            "Exaggerated pharmacodynamic response",
+            "Sedatives, anticholinergics, opioids",
+            "Acute delirium, cognitive decline, urinary retention"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "To reduce preventable iatrogenic morbidity and adverse drug events in older adults, clinical practice relies on the evidence-based American Geriatrics Society **Beers Criteria**. The Beers Criteria systematically identify medications where potential hazards generally exceed anticipated clinical benefits in older patients. High-risk classes flagged for avoidance include potent first-generation antihistamines, tertiary tricyclic antidepressants, long-acting benzodiazepines, muscle relaxants, and sliding-scale regular insulin regimens that provoke severe neuroglycopenia.",
+      "say": "The AGS Beers Criteria identify inappropriate medications in elderly patients to prevent falls, anticholinergic delirium, and severe hypoglycaemia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Potentially inappropriate in elderly",
+          "points": [
+            "First-generation antihistamines (chlorpheniramine)",
+            "Tertiary tricyclics (amitriptyline, imipramine)",
+            "Long-acting benzodiazepines (diazepam, flurazepam)",
+            "Sliding-scale regular insulin monotherapy"
+          ]
+        },
+        "right": {
+          "title": "Preferred safer alternatives",
+          "points": [
+            "Second-generation antihistamines (loratadine, cetirizine)",
+            "Selective serotonin reuptake inhibitors (sertraline)",
+            "Short-acting LOT agents (lorazepam, oxazepam) if needed",
+            "Basal-bolus insulin with carbohydrate counting"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,267 @@
+{
+ "v": 1,
+ "id": "der-sti-primary-syphilis-chancre",
+ "subject": "dermatology",
+ "module": "der-sti",
+ "title": "Primary Syphilis Chancre",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Treponema pallidum** subspecies pallidum is the causative spirochete of syphilis, a chronic systemic sexually transmitted infection. It is a slender, tightly coiled, helically shaped bacterium measuring six to twenty micrometres in length, exhibiting characteristic corkscrew motility along its longitudinal axis. Lacking a classic lipopolysaccharide outer membrane, it evades host immune recognition. Transmission occurs through direct contact with active infectious mucosal or cutaneous lesions during sexual intercourse, with spirochetes penetrating microscopic epithelial abrasions.",
+   "say": "Treponema pallidum is a corkscrew-shaped spirochete that causes syphilis. It enters through tiny epithelial breaks during sexual contact, disseminating systemically within hours through lymphatic and vascular channels.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/syphilis-fig1.webp",
+    "alt": "Clinical photograph of cutaneous syphilitic lesions.",
+    "caption": "Characteristic indurated primary chancre and secondary papulosquamous eruptions of syphilis. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Hard chancre** represents the primary cutaneous lesion of syphilis, developing at the site of inoculation following an incubation period of ten to ninety days, with an average of twenty-one days. The chancre begins as a painless erythematous macule that rapidly erodes into a solitary, round or oval ulcer with sharply demarcated borders. The base is clean, non-purulent, glistening red, and characteristically indurated, exhibiting a firm, button-like cartilaginous consistency when palpated between gloved fingers.",
+   "say": "The hard chancre appears about three weeks after exposure. It is a painless, clean-based ulcer with a firm, cartilaginous button-like rim that feels distinctly hard when rolled between two fingers.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/syphilis-fig2.webp",
+    "alt": "Diagram illustrating clinical stages of syphilis from primary chancre to tertiary disease.",
+    "caption": "Natural clinical progression of syphilis: primary chancre, secondary rash, and tertiary gummatous lesions. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Regional lymphadenopathy** develops in over eighty percent of patients one to two weeks following the appearance of the primary chancre. In genital chancres, painless, discrete, bilateral inguinal lymph node enlargement is typical. The nodes feel firm, rubbery, and freely mobile without tenderness, warmth, or overlying erythema. Unlike chancroid, syphilitic lymph nodes do not suppurate, soften, or break down into fluctuant buboes, serving as a dependable diagnostic discriminator.",
+   "say": "Painless bilateral inguinal lymphadenopathy appears within two weeks of the chancre. The nodes are rubbery, discrete, and non-tender, and they never soften or suppurate like chancroid buboes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Syphilis Nodes",
+     "points": [
+      "Bilateral and symmetrical",
+      "Painless and non-tender to touch",
+      "Firm, discrete, rubbery texture",
+      "Never suppurate or form sinuses"
+     ]
+    },
+    "right": {
+     "title": "Chancroid Inguinal Nodes",
+     "points": [
+      "Unilateral in over fifty percent",
+      "Exquisitely painful and tender",
+      "Soft, fluctuant, inflammatory bubo",
+      "Spontaneous purulent skin rupture"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Darkfield microscopy** provides immediate, definitive morphological confirmation of primary syphilis by demonstrating live, motile spirochetes from chancre exudate. The ulcer surface is cleansed with saline to remove crusts, and gentle lateral pressure is applied to express clear serous exudate. Under darkfield illumination, Treponema pallidum appears as a bright, silvery, slender spiral organism displaying purposeful forward and backward movement, rotation along its longitudinal axis, and graceful mid-body flexion.",
+   "say": "Darkfield examination of clear chancre fluid directly visualizes silvery, tightly coiled spirochetes rotating like a corkscrew. It provides immediate proof of infection before blood antibody tests turn positive.",
+   "vis": {
+    "kind": "flow",
+    "title": "Darkfield Microscopic Examination Protocol",
+    "nodes": [
+     {
+      "id": "d1",
+      "label": "Cleanse Chancre",
+      "sub": "Wipe base with sterile saline gauze"
+     },
+     {
+      "id": "d2",
+      "label": "Express Serous Fluid",
+      "sub": "Gentle lateral squeeze yields clear serum"
+     },
+     {
+      "id": "d3",
+      "label": "Darkfield Illumination",
+      "sub": "High-contrast condenser visualizes refractile spirals"
+     },
+     {
+      "id": "d4",
+      "label": "Motility Confirmation",
+      "sub": "Graceful rotation and central flexion movement"
+     }
+    ],
+    "edges": [
+     [
+      "d1",
+      "d2",
+      "Remove debris"
+     ],
+     [
+      "d2",
+      "d3",
+      "Slide mounting"
+     ],
+     [
+      "d3",
+      "d4",
+      "Spirochete identity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**VDRL test** (Venereal Disease Research Laboratory) and RPR (Rapid Plasma Reagin) are nontreponemal flocculation tests detecting IgG and IgM antibodies directed against cardiolipin-lecithin-cholesterol antigens released from host cells damaged by spirochetes. These tests become reactive one to four weeks after the chancre appears, making them negative in early primary disease. Quantitative titres reflect clinical disease activity, allowing monitoring of therapeutic response, where a four-fold decline confirms successful antibiotic eradication.",
+   "say": "Non-treponemal tests like VDRL and RPR measure anti-cardiolipin antibodies, but can be negative early on. Their quantitative titres drop four-fold after successful treatment, making them ideal for monitoring cure.",
+   "vis": {
+    "kind": "table",
+    "title": "Serological Timeline and Test Comparison in Syphilis",
+    "cols": [
+     "Test Category",
+     "Specific Assays",
+     "Sensitivity in Primary Syphilis"
+    ],
+    "rows": [
+     [
+      "Direct microscopic",
+      "Darkfield, direct fluorescent antibody (DFA)",
+      "Highest early (>90% if serous)"
+     ],
+     [
+      "Nontreponemal tests",
+      "VDRL, RPR (quantitative titres)",
+      "Moderate (70% to 80% initially)"
+     ],
+     [
+      "Treponemal specific",
+      "FTA-ABS, TPHA, TPPA, EIA",
+      "High (85% to 90% in early chancre)"
+     ],
+     [
+      "Post-treatment behavior",
+      "Nontreponemal drops 4-fold; treponemal stays positive",
+      "Defines cure versus serological scar"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Spontaneous healing** of the primary chancre occurs predictably within three to six weeks even without antimicrobial therapy, leaving a faint, imperceptible atrophic scar. This deceptive clinical resolution lulls patients and clinicians into false reassurance that the disease has resolved. In reality, spirochetes disseminate systemically through blood vessels and lymphatic channels, heralding the emergence of secondary syphilis characterized by generalized maculopapular eruptions, condylomata lata, and mucosal patches six to eight weeks later.",
+   "say": "An untreated chancre heals spontaneously within three to six weeks, falsely reassuring the patient. Spirochetes are actively spreading throughout the body, setting the stage for secondary syphilis weeks later.",
+   "vis": {
+    "kind": "flow",
+    "title": "Natural History of Untreated Syphilis",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Primary Chancre",
+      "sub": "Painless hard ulcer heals in 3 to 6 weeks"
+     },
+     {
+      "id": "s2",
+      "label": "Asymptomatic Interval",
+      "sub": "Systemic spirochaetal dissemination"
+     },
+     {
+      "id": "s3",
+      "label": "Secondary Syphilis",
+      "sub": "Palmar-plantar rash, condyloma lata, fever"
+     },
+     {
+      "id": "s4",
+      "label": "Latent Syphilis",
+      "sub": "Asymptomatic with reactive serology"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2",
+      "Spontaneous healing"
+     ],
+     [
+      "s2",
+      "s3",
+      "6 to 8 week latency"
+     ],
+     [
+      "s3",
+      "s4",
+      "Immune control"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Benzathine penicillin G** remains the unchallenged drug of choice for primary syphilis, administered as a single intramuscular injection of 2.4 million units. Treponema pallidum remains completely susceptible to penicillin, with zero documented resistance worldwide. The depot formulation delivers low, sustained serum penicillin concentrations exceeding the minimum treponemicidal threshold of 0.018 micrograms per millilitre for three weeks, exceeding multiple treponemal replication cycles and ensuring complete clinical and microbiological cure.",
+   "say": "A single intramuscular injection of 2.4 million units of benzathine penicillin G cures primary syphilis. Treponema pallidum has never developed penicillin resistance, and the depot shot maintains curative levels for three weeks.",
+   "vis": {
+    "kind": "table",
+    "title": "Treatment Guidelines for Early Syphilis",
+    "cols": [
+     "Patient Clinical Status",
+     "First-Line Antibiotic Regimen",
+     "Alternative for Penicillin Allergy"
+    ],
+    "rows": [
+     [
+      "Non-pregnant adult",
+      "Benzathine penicillin G 2.4 MU IM single dose",
+      "Doxycycline 100 mg orally twice daily for 14 days"
+     ],
+     [
+      "Pregnant patient",
+      "Benzathine penicillin G 2.4 MU IM single dose",
+      "Hospital desensitization to penicillin mandatory"
+     ],
+     [
+      "HIV co-infected",
+      "Benzathine penicillin G 2.4 MU IM single dose",
+      "Close serological follow-up at 3, 6, 9, 12 months"
+     ],
+     [
+      "Penicillin desensitization",
+      "Oral titrated penicillin escalation",
+      "Standard of care in pregnancy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Jarisch-Herxheimer reaction** is an acute, self-limiting systemic febrile reaction that develops within two to twelve hours following the first antibiotic dose in syphilis. Massive, rapid lysis of treponemes releases endotoxin-like lipoproteins, triggering a sudden release of inflammatory cytokines including tumour necrosis factor-alpha and interleukin-6. Patients manifest sudden high fever, chills, rigors, tachycardia, hypotension, and transient exacerbation of cutaneous lesions. Management is supportive with oral paracetamol, bed rest, and reassurance.",
+   "say": "Within hours of starting penicillin, massive spirochete destruction triggers the Jarisch-Herxheimer reaction with fever, chills, and flushing. Reassure the patient that this is a cytokine reaction to dying bacteria, not a penicillin allergy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Jarisch-Herxheimer Reaction",
+     "points": [
+      "Onset within 2 to 12 hours of penicillin",
+      "Fever, rigors, headache, and tachycardia",
+      "Transient accentuation of skin lesions",
+      "Self-limiting; treat with antipyretics"
+     ]
+    },
+    "right": {
+     "title": "True Penicillin IgE Anaphylaxis",
+     "points": [
+      "Onset within minutes to an hour of dose",
+      "Urticaria, angioedema, and stridor",
+      "Bronchospasm with severe hypotension",
+      "Requires immediate intramuscular epinephrine"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Primary syphilis chancre: cardinal tactile feature on palpation",
+   "b": "Cartilaginous button-like induration of the ulcer base and margins."
+  },
+  {
+   "f": "Primary syphilis: drug of choice and exact dose",
+   "b": "Benzathine penicillin G 2.4 million units as a single intramuscular injection."
+  },
+  {
+   "f": "Jarisch-Herxheimer reaction: underlying pathophysiology",
+   "b": "Endotoxin-like lipoprotein release from dying spirochetes triggering a cytokine storm."
+  }
+ ],
+ "keys": [
+  "Primary syphilis presents with a solitary painless hard chancre with rubbery regional lymphadenopathy",
+  "Darkfield microscopy demonstrates live spirochetes with corkscrew motility from clean serous exudate",
+  "A single intramuscular injection of 2.4 million units of benzathine penicillin G provides definitive cure"
+ ]
+}

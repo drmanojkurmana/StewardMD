@@ -1,0 +1,239 @@
+{
+  "v": 1,
+  "module": "phm-cytotoxic-anticancer",
+  "subject": "pharmacology",
+  "title": "Cytotoxic Anticancer IV: 5-Fluorouracil, Capecitabine, DPD Deficiency and Hand-Foot Syndrome",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**5-Fluorouracil** (5 FU) impersonates uracil into two crimes: its metabolite FdUMP locks thymidylate synthase (with leucovorin stabilising the lock from the previous lesson) starving DNA of thymidine, while FUTP corrupts RNA processing, killing across gut, marrow and tumour in proportion to exposure schedule. Bolus schedules emphasise marrow, infusional schedules emphasise gut and hand foot injury, which is why FOLFOX and FOLFIRI carry pumps for 46 hours.",
+      "say": "Schedule writes 5 FU toxicity: bolus hits marrow, infusion hits gut and palms.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mechanism double act",
+          "points": [
+            "FdUMP blocks thymidylate synthase (leucovorin stabilised)",
+            "FUTP incorporation corrupts RNA",
+            "FdUTP misincorporates into DNA",
+            "DPD catabolises over 80 percent of dose"
+          ]
+        },
+        "right": {
+          "title": "Schedule signatures",
+          "points": [
+            "Bolus: myelosuppression dominant",
+            "Protracted infusion: mucositis, diarrhoea, hand foot",
+            "46 hour pumps in FOLFOX and FOLFIRI",
+            "Topical 5 FU for actinic keratoses separately"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**DPD deficiency** (dihydropyrimidine dehydrogenase, DPYD variants) converts standard fluoropyrimidine doses into lethal mucositis, marrow failure, neurotoxicity and death within the first cycle, which is why DPYD genotyping or phenotyping before therapy is now guideline law in many systems, with dose halving or drug avoidance by variant burden. Uridine triacetate, an oral antidote given within 96 hours of overdose or early severe toxicity, completes the safety architecture.",
+      "say": "Test DPD before the first dose; uridine triacetate is the 96 hour fire exit after.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "DPYD risk system",
+          "points": [
+            "Complete deficiency: fluoropyrimidines forbidden",
+            "Partial: start at reduced dose, titrate by tolerance",
+            "First cycle early severe toxicity is the alarm",
+            "Family implications of germline findings"
+          ]
+        },
+        "right": {
+          "title": "Uridine triacetate rescue",
+          "points": [
+            "Oral antidote within 96 hours",
+            "Overdose and early life threatening toxicity",
+            "Competes as uridine source downstream",
+            "Does not reverse established organ injury fully"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Capecitabine** is 5 FU in oral prodrug costume: absorbed intact, converted through liver and tumour enriched thymidine phosphorylase into 5 FU where tumours (and palms) concentrate the final step, dosed twice daily in two weeks on, one week off cycles for colorectal and breast disease. Its hand foot and diarrhoea ledgers exceed infusional 5 FU while marrow lightens, and adherence, food timing and renal dosing become patient executed pharmacology.",
+      "say": "Capecitabine lets patients swallow the infusion; palms and adherence pay the difference.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Capecitabine design",
+          "points": [
+            "Three step activation, tumour enriched final step",
+            "14 days on, 7 off cycles",
+            "Taken within 30 minutes after food",
+            "Renal impairment dose reductions"
+          ]
+        },
+        "right": {
+          "title": "Capecitabine burden",
+          "points": [
+            "Hand foot syndrome prominent",
+            "Diarrhoea and mucositis DPD sensitive",
+            "Warfarin interaction clinically real",
+            "Missed dose rules: never double up"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hand foot syndrome** (palmar plantar erythrodysesthesia) grades from tingling and redness (hold, emollients, cool) through blistering pain (stop until recovery, dose reduce) to desquamation disability, shared by capecitabine, infusional 5 FU, liposomal doxorubicin and multikinase inhibitors from later lessons. Regional cooling during infusion and urea creams soften incidence; dose interruption, not stoicism, is the treatment, and recurrence at full dose is a prescribing error.",
+      "say": "Hand foot syndrome is treated by stopping, not enduring; rechallenge at reduced dose.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "grade1",
+            "label": "Grade 1 tingling and redness: continue, emollients"
+          },
+          {
+            "id": "grade2",
+            "label": "Grade 2 painful swelling: hold drug"
+          },
+          {
+            "id": "recover",
+            "label": "Recovered to grade 1 or less"
+          },
+          {
+            "id": "reduce",
+            "label": "Resume at reduced dose with cooling habits"
+          }
+        ],
+        "edges": [
+          [
+            "grade1",
+            "grade2"
+          ],
+          [
+            "grade2",
+            "recover"
+          ],
+          [
+            "recover",
+            "reduce"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Vasospasm ledger** reward a step: coronary spasm (chest pain during infusion, stop and never rechallenge casually, calcium blockers debated), cerebellar ataxia and encephalopathy at high levels (DPD deficiency's neuro face), lacrimal duct stenosis with weeping eyes, and hyperammonaemia in protracted infusions. Chest pain on a 5 FU pump is cardiology and oncology sharing one emergency, vasospasm rather than plaque usually.",
+      "say": "Chest pain on the pump is 5 FU vasospasm until proven otherwise; stop first, litigate later.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cardiac ledger",
+          "points": [
+            "Coronary vasospasm during or after infusion",
+            "ECG and troponin assessment mandatory",
+            "Rechallenge generally avoided",
+            "Nitrate and calcium blocker roles debated"
+          ]
+        },
+        "right": {
+          "title": "Neuro and other ledgers",
+          "points": [
+            "Cerebellar ataxia at high exposure",
+            "Hyperammonaemic encephalopathy in infusions",
+            "Lacrimal stenosis: persistent tearing",
+            "Photosensitivity and nail changes minor"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Fluoropyrimidine combinations** write colorectal oncology's grammar: FOLFOX (leucovorin, 5 FU, oxaliplatin), FOLFIRI (irinotecan swapped in), FOLFOXIRI triplets for fit patients, and capecitabine partnerships (CAPOX) trading pumps for tablets, sequenced and switched by tolerance (oxaliplatin nerves usually retire first) and biology (RAS and BRAF from the targeted lesson deciding antibody partners). The antimetabolite is the constant; partners rotate.",
+      "say": "Partners rotate around the fluoropyrimidine constant; nerves and mutations call the rotations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Regimen grammar",
+          "points": [
+            "FOLFOX and CAPOX: oxaliplatin partners",
+            "FOLFIRI: irinotecan partner",
+            "Triplet FOLFOXIRI for selected fit patients",
+            "Maintenance fluoropyrimidine de escalation strategies"
+          ]
+        },
+        "right": {
+          "title": "Sequencing drivers",
+          "points": [
+            "Oxaliplatin cumulative neuropathy retirements",
+            "RAS, BRAF and sidedness for antibodies",
+            "Patient preference: pump versus tablets",
+            "DPYD result before any of it starts"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Topical fluoropyrimidine** deserve their footnote: 5 FU cream destroys actinic keratoses and superficial basal cell carcinomas through weeks of deliberate inflammation patients must be coached to endure, and hepatic arterial floxuridine historically perfused liver metastases exploiting first pass DPD clearance. The same molecule teaches local versus systemic exposure arithmetic dermatologists and oncologists share.",
+      "say": "Painted on skin, 5 FU inflames on purpose; route is a dose decision.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Topical fluorouracil",
+          "points": [
+            "Actinic keratosis and superficial BCC courses",
+            "Expected inflammation coached in advance",
+            "DPD deficient patients: systemic absorption caution",
+            "Photosensitivity during treatment fields"
+          ]
+        },
+        "right": {
+          "title": "Regional traditions",
+          "points": [
+            "Hepatic arterial floxuridine for liver metastases",
+            "First pass clearance exploited",
+            "Biliary toxicity its ceiling",
+            "Mostly historical beside modern systemic regimens"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Warfarin interaction** the fluoropyrimidine interaction ledger examinations favour: capecitabine and 5 FU raise INR and bleeding (mechanism partly CYP2C9 and vitamin K territory), demanding intensified INR surveillance or anticoagulant reconsideration, while phenytoin levels climb and DPD inhibiting antivirals (brivudine class) are flatly forbidden near fluoropyrimidines after fatal interactions wrote the rule.",
+      "say": "Check the INR and the viral chart before fluoropyrimidines; two interactions here have killed.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Fluoropyrimidine planned"
+          },
+          {
+            "id": "dpyd",
+            "label": "DPYD checked, brivudine class excluded"
+          },
+          {
+            "id": "inr",
+            "label": "Warfarin patients: INR surveillance intensified"
+          },
+          {
+            "id": "alarm",
+            "label": "Early severe toxicity: uridine triacetate window"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "dpyd"
+          ],
+          [
+            "dpyd",
+            "inr"
+          ],
+          [
+            "inr",
+            "alarm"
+          ]
+        ]
+      }
+    }
+  ]
+}

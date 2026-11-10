@@ -1,0 +1,174 @@
+{
+  "v": 1,
+  "module": "phm-antimalarials",
+  "subject": "pharmacology",
+  "title": "Antimalarials II: Atovaquone Proguanil, Chemoprophylaxis, Severe Falciparum and Radical Cure",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Atovaquone proguanil** (Malarone) pairs mitochondrial electron transport sabotage (atovaquone at cytochrome bc1) with proguanil's dihydrofolate blockade and its parent drug synergy, giving causal prophylaxis (liver stages killed, so only one week of post travel dosing) and treatment of uncomplicated falciparum where wallets permit. Atovaquone alone breeds resistance in a single cytochrome mutation, which is why it never travels without proguanil, the combination commandment from principles again.",
+      "say": "Atovaquone proguanil kills liver stages and stops a week after travel; atovaquone never travels alone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Causal prophylaxis advantage",
+          "points": [
+            "Liver schizonts killed: post travel tail 7 days",
+            "Daily dosing, start 1 to 2 days before entry",
+            "Treatment courses for uncomplicated falciparum",
+            "Well tolerated beside mefloquine's ledger"
+          ]
+        },
+        "right": {
+          "title": "Limits",
+          "points": [
+            "Cost excludes endemic population therapy",
+            "Atovaquone monotherapy resistance instant: never alone",
+            "Renal impairment severe: avoid",
+            "Vomiting doses must be repeated by rule"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Doxycycline** prophylaxis (from the tetracycline lesson) is the budget causal alternative: daily, cheap, photosensitivity and oesophagitis counselled, four weeks of post travel tail because liver stages survive it, and ancillary protection against leptospirosis and rickettsiae that adventure travellers value. Pregnancy and childhood fences apply as the parent lesson wrote. Adherence after return, when malaria feels impossible, is where all prophylaxis regimens go to die and counselling must follow.",
+      "say": "Doxycycline is cheap, sunny and four weeks past the holiday; the tail is where adherence dies.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prophylaxis league table",
+          "points": [
+            "Atovaquone proguanil: daily, 7 day tail",
+            "Doxycycline: daily, 28 day tail, photosensitivity",
+            "Mefloquine: weekly, 28 day tail, neuropsychiatric screen",
+            "Chloroquine: weekly, sensitive zones only"
+          ]
+        },
+        "right": {
+          "title": "Choice arithmetic",
+          "points": [
+            "Trip duration and departure urgency",
+            "Resistance geography of destination",
+            "Pregnancy, age and psychiatric fences",
+            "Cost and adherence personality"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Severe falciparum malaria** is a metabolic and microvascular emergency (sequestration, acidosis, hypoglycaemia, cerebral and renal failure): intravenous artesunate immediately (2.4 mg per kg at 0, 12, 24 hours then daily), never delayed for full workup, followed by a complete oral ACT when drinking resumes, with exchange transfusion retired, steroids harmful in cerebral disease, and fluid bolus caution from the FEAST era. Parasitaemia percentages guide level of care, not treatment delay.",
+      "say": "Severe malaria gets artesunate now and questions later; percentage guides the bed, never the start.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/malaria-fig1.webp",
+        "alt": "Malaria parasite life cycle diagram showing sequestration and liver stages",
+        "caption": "Plasmodium life cycle with the sequestering blood stage that makes falciparum malaria severe."
+      }
+    },
+    {
+      "tx": "**Radical cure** names vivax and ovale's two front war: blood schizonticides clear the fever while primaquine or tafenoquine (previous lesson) burn the hypnozoite reservoir over the following days, without which relapses return for years. G6PD testing (quantitative where tafenoquine or high dose primaquine is planned), pregnancy exclusion (primaquine forbidden, chloroquine bridges until delivery), and directly observed primaquine options where adherence to fourteen days is fiction complete the prescription.",
+      "say": "Cure the blood, then burn the liver sleepers; vivax without primaquine is a relapse subscription.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "vivax", "label": "Vivax or ovale confirmed" },
+          { "id": "blood", "label": "Blood stage therapy (chloroquine or ACT by geography)" },
+          { "id": "g6pd", "label": "G6PD assessed, pregnancy excluded" },
+          { "id": "radical", "label": "Primaquine 14 days or tafenoquine single dose" }
+        ],
+        "edges": [["vivax", "blood"], ["blood", "g6pd"], ["g6pd", "radical"]]
+      }
+    },
+    {
+      "tx": "**Gametocidal** strategy is transmission pharmacology: artemisinins kill young gametocytes incidentally, primaquine's single 0.25 mg per kg dose sterilises mature falciparum gametocytes (safe even in G6PD deficiency at this dose by WHO judgement) and is added in low transmission and elimination settings and artemisinin resistance containment, while methylene blue and transmission blocking vaccines develop behind it. The patient feels nothing; the village mosquito receives the benefit.",
+      "say": "One small primaquine dose treats the mosquito's next blood meal, not the patient's fever.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Gametocyte biology",
+          "points": [
+            "Falciparum gametocytes mature over 10 days, drug sheltered",
+            "ACTs kill young stages, mature persist",
+            "Primaquine sterilises mature gametocytes",
+            "Vivax gametocytes appear early and transmit before treatment"
+          ]
+        },
+        "right": {
+          "title": "Elimination deployment",
+          "points": [
+            "Single low dose primaquine with ACT in low transmission",
+            "Mass drug administration in defined campaigns",
+            "Reactive focal strategies around index cases",
+            "Surveillance measures infectious reservoir, not only cases"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Chemoprophylaxis** completes its rule set with standby emergency treatment for remote travellers (self carried ACT with strict seek care instructions), intermittent preventive therapy in pregnancy (sulfadoxine pyrimethamine at antenatal visits in endemic Africa, because placental malaria injures silently), and seasonal chemoprevention for Sahel children monthly through rains. Each is risk window pharmacology from principles, scaled to populations instead of suitcases.",
+      "say": "Prophylaxis follows risk windows from suitcases to whole pregnancies and rainy seasons.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "window", "label": "Risk window: travel, pregnancy or rainy season" },
+          { "id": "agent", "label": "Agent matched to window and geography" },
+          { "id": "adhere", "label": "Adherence supported through the window's tail" },
+          { "id": "fever", "label": "Fever within a year of exposure still tests for malaria" }
+        ],
+        "edges": [["window", "agent"], ["agent", "adhere"], ["adhere", "fever"]]
+      }
+    },
+    {
+      "tx": "**Haemolysis** threads the lesson's drugs into one vigilance: primaquine and tafenoquine in G6PD deficiency (variant graded, Mediterranean and Asian variants severe, African A minus milder and sometimes risk accepted with monitoring), dapsone and rasburicase sharing the fence from neighbouring lessons, and post artesunate delayed haemolysis (pitted once infected red cells cleared by spleen at days 7 to 21) needing haemoglobin follow up after severe malaria rather than alarm.",
+      "say": "Three haemolyses, three mechanisms: enzyme deficiency, drug oxidant stress, and splenic pitting after artesunate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "G6PD oxidant haemolysis",
+          "points": [
+            "Primaquine, tafenoquine, dapsone triggers",
+            "Variant severity grades the risk",
+            "Quantitative testing before tafenoquine mandatory",
+            "Dark urine, jaundice and falling haemoglobin announce"
+          ]
+        },
+        "right": {
+          "title": "Post artesunate delayed haemolysis",
+          "points": [
+            "Days 7 to 21 after severe malaria therapy",
+            "Once parasitised cells pitted and cleared",
+            "Haemoglobin checked at follow up visits",
+            "Usually self limited, transfusion rarely"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Retinopathy** bookends chloroquine family chronicity from the previous lesson with screening arithmetic worth stating once completely: hydroxychloroquine risk under 1 percent at five years at proper real weight doses, rising steeply beyond twenty years and with renal impairment or tamoxifen partners, screened by visual fields and OCT annually after five years (earlier with risk), and irreversible once symptomatic, which is why screening hunts pre symptomatic change and dose ceilings (5 mg per kg real weight) are treated as pharmacology, not paperwork.",
+      "say": "Screen retinas before symptoms because symptomatic chloroquine retinopathy does not reverse.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Risk arithmetic",
+          "points": [
+            "Dose above 5 mg/kg real weight multiplies risk",
+            "Duration beyond 5 and 20 years thresholds",
+            "Renal impairment and tamoxifen add risk",
+            "Pre existing maculopathy fences starting"
+          ]
+        },
+        "right": {
+          "title": "Screening discipline",
+          "points": [
+            "Baseline examination within the first year",
+            "Annual fields and OCT after 5 years (earlier if risk)",
+            "Stop at definite toxicity signs",
+            "Rheumatology ophthalmology communication documented"
+          ]
+        }
+      }
+    }
+  ]
+}

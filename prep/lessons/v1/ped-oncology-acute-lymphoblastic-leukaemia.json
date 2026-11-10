@@ -1,0 +1,226 @@
+{
+ "key": "ped-oncology-acute-lymphoblastic-leukaemia",
+ "v": 1,
+ "module": "ped-oncology",
+ "subject": "paediatrics",
+ "title": "Pediatric Leukemias and Renal Neoplasms: ALL, AML, and Wilms Tumour",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Clonal proliferation and marrow replacement by immature lymphoid progenitor blast cells represents the most common childhood malignancy. Peak incidence of **pediatric acute lymphoblastic leukaemia** (ALL) occurs between two and five years of age, with precursor B-cell ALL accounting for eighty-five percent. Marrow infiltration suppresses normal hematopoiesis, causing pallor, petechiae, refractory fever, generalized lymphadenopathy, and bone pain from leukemic periosteal expansion.",
+   "say": "Acute lymphoblastic leukemia is the most common childhood cancer, peaking between two and five years. Bone marrow replacement causes pallor, purpura, fever, and bone pain.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-lymphoid-leukemia-fig1.webp",
+    "alt": "Peripheral blood smear and marrow aspirate showing high nucleocytoplasmic ratio lymphoblasts in acute lymphoblastic leukemia.",
+    "caption": "Marrow aspirate displaying dense replacement by immature lymphoblasts with high nucleocytoplasmic ratio in ALL. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Bone marrow aspiration and multiparametric flow cytometry establish the definitive diagnosis and lineage immunophenotyping. Confirming acute leukemia requires demonstrating **marrow lymphoblasts exceeding twenty percent** on morphological examination of bone marrow aspirates. Precursor B-cell ALL is characterized by positive expression of CD19, CD10 (common ALL antigen CALLA), CD22, and terminal deoxynucleotidyl transferase (TdT), while lacking myeloperoxidase.",
+   "say": "Demonstrating more than twenty percent lymphoblasts in the bone marrow establishes the diagnosis. B-ALL blasts express CD19, CD10, and terminal deoxynucleotidyl transferase.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Leukemia Subtype",
+     "Morphological Blast Cytology",
+     "Key Flow Cytometry Markers",
+     "Cytochemistry Profile"
+    ],
+    "rows": [
+     [
+      "B-cell ALL (85%)",
+      "Small to medium blasts, high N:C ratio",
+      "CD19, CD10 (CALLA), CD22, TdT +",
+      "Myeloperoxidase (MPO) negative; PAS +"
+     ],
+     [
+      "T-cell ALL (15%)",
+      "Variable size; prominent anterior mediastinal mass",
+      "CD3 (lineage specific), CD7, CD2, CD5 +",
+      "Myeloperoxidase (MPO) negative"
+     ],
+     [
+      "Acute myeloid leukemia (AML)",
+      "Large blasts, abundant cytoplasm, Auer rods",
+      "CD13, CD33, CD117, MPO positive",
+      "Myeloperoxidase & Sudan Black positive"
+     ],
+     [
+      "Good prognostic genetics",
+      "Hyperdiploidy (>50 chromosomes), t(12;21) ETV6-RUNX1",
+      "Low risk; excellent 5-year survival (>90%)",
+      "Responsive to standard chemotherapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Multidrug risk-stratified chemotherapy protocols cure over ninety percent of children with acute lymphoblastic leukemia. Modern therapy for **pediatric ALL chemotherapy phases** comprises four successive stages: four-drug induction (vincristine, corticosteroid, L-asparaginase, and daunorubicin) achieving complete remission in ninety-eight percent, followed by consolidation/intensification, central nervous system-directed intrathecal therapy, and continuation maintenance for two to three years.",
+   "say": "Four-drug induction chemotherapy achieves complete remission in ninety-eight percent of children with ALL. Total therapy lasts two to three years, including maintenance methotrexate.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Treatment Phase Sequences",
+     "points": [
+      "Induction: 4 weeks to induce complete morphological remission",
+      "Consolidation / Intensification: eradicates residual disease",
+      "CNS prophylaxis: intrathecal methotrexate (no cranial RT)",
+      "Maintenance: oral 6-mercaptopurine daily + methotrexate weekly"
+     ]
+    },
+    "right": {
+     "title": "Minimal Residual Disease (MRD)",
+     "points": [
+      "Measured by flow cytometry or PCR at end of induction",
+      "MRD <0.01% (<1 blast per 10,000 cells) defines deep remission",
+      "Most powerful independent prognostic predictor",
+      "High MRD prompts treatment escalation to HSCT"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Myeloid blast proliferation in childhood acute myeloid leukemia requires aggressive myeloablative therapy and intensive supportive care. Accounting for fifteen percent of pediatric leukemias, **pediatric acute myeloid leukemia** (AML) presents with life-threatening complications including severe disseminated intravascular coagulation in acute promyelocytic leukemia (APL with t(15;17)), chloromas (extramedullary granulocytic sarcomas), and gum hypertrophy, showing Auer rods on cytology.",
+   "say": "Acute myeloid leukemia features Auer rods, gum hypertrophy, and chloromas. Acute promyelocytic leukemia with t(15;17) carries a high risk of fatal DIC.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "AML Subtype / Clinical Feature",
+     "Cytogenetic Translocation",
+     "Characteristic Clinical Finding",
+     "Targeted Therapy Agent"
+    ],
+    "rows": [
+     [
+      "Acute promyelocytic (APL)",
+      "t(15;17) PML-RARA fusion",
+      "Severe consumption DIC with fatal haemorrhage",
+      "All-trans retinoic acid (ATRA) + Arsenic trioxide"
+     ],
+     [
+      "Chloroma / Granulocytic sarcoma",
+      "Extramedullary myeloid blast collection",
+      "Greenish orbital tumor, skin nodules, spinal mass",
+      "Systemic induction chemotherapy"
+     ],
+     [
+      "Acute monoblastic leukemia",
+      "11q23 MLL / KMT2A rearrangements",
+      "Gingival hyperplasia, skin infiltration",
+      "High-dose cytarabine (HiDAC) + Daunorubicin"
+     ],
+     [
+      "Down syndrome AML",
+      "GATA1 mutation (M7 megakaryoblastic)",
+      "Occurs under 4 years; exquisite chemosensitivity",
+      "Low-dose cytarabine; >90% cure rate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The most common primary malignant renal tumor of childhood arises from primitive metanephric blastema. Typically presenting between two and five years of age, **Wilms tumour or nephroblastoma** manifests in ninety percent as an asymptomatic, smooth, firm, non-tender abdominal flank mass that rarely crosses the midline. Microscopic examination demonstrates classic triphasic histology consisting of blastemal, epithelial, and stromal mesenchymal elements.",
+   "say": "Wilms tumour is the commonest pediatric renal malignancy, presenting as a firm flank mass that does not cross the midline. Histology is classically triphasic.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-misc-wagr.webp",
+    "alt": "Diagram displaying congenital syndromic associations of Wilms tumor including WAGR and Beckwith-Wiedemann syndromes.",
+    "caption": "Congenital syndromic associations linking chromosome 11p WT1 deletions to Wilms tumor and aniridia. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Specific congenital malformation syndromes and genetic deletions dramatically increase the risk of nephroblastoma. Arising from deletions of the WT1 tumor suppressor gene on chromosome 11p13, **WAGR syndrome and Wilms tumour** comprises Wilms tumor, sporadic aniridia, genitourinary anomalies (cryptorchidism, ambiguous genitalia), and intellectual disability. Beckwith-Wiedemann syndrome (11p15 WT2 overgrowth) features hemihypertrophy, macroglossia, and omphalocele.",
+   "say": "WAGR syndrome links 11p13 WT1 deletion to Wilms tumor, aniridia, and genital anomalies. Beckwith-Wiedemann syndrome features hemihypertrophy and macroglossia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "WAGR Syndrome (11p13 Deletion)",
+     "points": [
+      "Wilms tumour: 50% lifetime risk",
+      "Aniridia: complete or partial absence of iris",
+      "Genitourinary anomalies (hypospadias, cryptorchidism)",
+      "Range of intellectual developmental delays"
+     ]
+    },
+    "right": {
+     "title": "Beckwith-Wiedemann Syndrome",
+     "points": [
+      "11p15.5 imprinting anomaly (IGF2 overexpression)",
+      "Hemihypertrophy (asymmetric limb growth)",
+      "Macroglossia, omphalocele, neonatal hypoglycemia",
+      "Ultrasound surveillance every 3 months until age 8"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Clinical and radiological differentiation distinguishes renal Wilms tumor from adrenal neuroblastoma reliably. On physical examination and contrast computed tomography, **Wilms tumour versus neuroblastoma** is characterized by a smooth, mobile flank mass that displaces rather than encases surrounding renal vessels, rarely crosses the abdominal midline, and exhibits a claw sign of parenchymal stretching, whereas neuroblastoma is nodular and calcified.",
+   "say": "Wilms tumor is smooth, rarely crosses the midline, and displaces vessels. Neuroblastoma is irregular, crosses the midline, encases major arteries, and shows dense calcifications.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Diagnostic Feature",
+     "Wilms Tumour (Nephroblastoma)",
+     "Neuroblastoma (Adrenal / Sympathetic)",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Midline relationship",
+      "Rarely crosses the abdominal midline",
+      "Frequently crosses the midline extensively",
+      "Physical palpation & CT landmark"
+     ],
+     [
+      "Vascular relationship",
+      "Displaces renal and mesenteric vessels",
+      "Encases and encrusts aorta and IVC",
+      "Determines surgical resectability"
+     ],
+     [
+      "Tumor calcification on CT",
+      "Rarely calcified (<10% of cases)",
+      "Dense, coarse calcifications in >85%",
+      "Pathognomonic CT discriminator"
+     ],
+     [
+      "Urinary catecholamines",
+      "Normal urine VMA and HVA levels",
+      "Elevated urinary VMA and HVA (>90%)",
+      "Biochemical tumor marker in urine"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Multimodal risk-adapted treatment combining surgical resection and chemotherapy achieves cure in ninety percent of children with Wilms tumor. Standard staging directs management: Stage I and II tumors confined to the kidney undergo **radical nephrectomy and adjuvant chemotherapy** with dactinomycin and vincristine. In tumors exhibiting diffuse anaplasia (TP53 mutations) or advanced Stage III and IV with pulmonary metastases, doxorubicin and flank radiotherapy are incorporated.",
+   "say": "Radical nephrectomy and vincristine with dactinomycin achieve ninety percent cure rates in Wilms tumor. Diffuse anaplasia indicates unfavorable histology requiring escalated therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Histological Stratification",
+     "points": [
+      "Favorable histology: classic triphasic without anaplasia",
+      "Excellent cure rates (>90% 5-year overall survival)",
+      "Unfavorable histology: diffuse nuclear anaplasia (TP53)",
+      "Higher relapse risk requiring intensified therapy"
+     ]
+    },
+    "right": {
+     "title": "Surgical Principles in Nephrectomy",
+     "points": [
+      "Transabdominal incision to inspect contralateral kidney",
+      "Early ligation of renal vein to prevent embolization",
+      "Meticulous handling to avoid intraoperative capsule rupture",
+      "Capsule spill upstages patient to Stage III, requiring RT"
+     ]
+    }
+   }
+  }
+ ]
+}

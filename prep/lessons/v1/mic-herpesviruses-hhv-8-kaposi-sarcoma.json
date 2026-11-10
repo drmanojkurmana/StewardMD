@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-herpesviruses",
+  "subject": "microbiology",
+  "title": "HHV-8, Kaposi Sarcoma and Herpesvirus Latency",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**HHV 8**, also called Kaposi sarcoma associated herpesvirus, is a gamma herpesvirus transmitted mainly by saliva and, less efficiently, sexually or by blood and organs. Infection is often silent when cellular immunity is intact. The virus persists in B cells and infects endothelial lineage cells in lesions, blending viral oncogenes with inflammatory cytokines to create the spindle cell proliferation of Kaposi sarcoma.",
+      "say": "HHV 8 is necessary for Kaposi sarcoma, but immune failure lets the disease appear.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Virus biology",
+          "points": [
+            "Gamma herpesvirus related to EBV",
+            "Saliva is the main transmission route",
+            "Latency in B lymphocytes",
+            "Lytic reactivation contributes inflammatory viral proteins"
+          ]
+        },
+        "right": {
+          "title": "Permissive settings",
+          "points": [
+            "Advanced HIV with low CD4 count",
+            "Organ transplantation immunosuppression",
+            "Classic disease in older Mediterranean and Eastern European men",
+            "Endemic disease in parts of sub Saharan Africa"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Kaposi sarcoma** forms violaceous macules, plaques, nodules and oedematous lesions driven by spindle cells, slit-like vessels, extravasated red cells and inflammation. Lesions may involve mouth, gut and lungs. Skin appearance can suggest the diagnosis but biopsy confirms it when presentation is atypical. Visceral symptoms, ulceration and lymphoedema determine staging and treatment urgency more than lesion count alone.",
+      "say": "Purple vascular skin lesions plus immunosuppression should trigger Kaposi assessment and biopsy when uncertain.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical forms",
+          "points": [
+            "Classic indolent lower leg lesions",
+            "Endemic African lymphadenopathic forms",
+            "Transplant associated disease after immunosuppression",
+            "Epidemic HIV associated systemic disease"
+          ]
+        },
+        "right": {
+          "title": "Assessment",
+          "points": [
+            "Examine oral cavity carefully",
+            "Ask about cough, dyspnoea and gastrointestinal bleeding",
+            "Biopsy atypical lesions",
+            "Stage HIV, CD4 and organ involvement"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The shared herpesvirus property in the plan is **latency**: viral genome persists in host cells with restricted gene expression and periodic reactivation. HSV hides in neurons, VZV in ganglia, EBV and HHV 8 in B cells, and CMV in myeloid progenitors. Latency is not eradication, and loss of T-cell surveillance can change a silent viral reservoir into proliferative or lytic disease.",
+      "say": "Each herpesvirus chooses a latency address, and immune control keeps that address quiet.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Latency reservoirs",
+          "points": [
+            "HSV and VZV in sensory ganglia",
+            "EBV in memory B cells",
+            "HHV 8 in B cells and lesion spindle cells",
+            "CMV in myeloid progenitors"
+          ]
+        },
+        "right": {
+          "title": "Reactivation triggers",
+          "points": [
+            "Ageing cellular immunity",
+            "Transplant immunosuppression",
+            "Advanced HIV",
+            "Local stress or ultraviolet exposure for HSV"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "HHV 8 also causes **primary effusion lymphoma**, multicentric Castleman disease and KSHV inflammatory cytokine syndrome. These are distinct presentations of viral driven B cell and cytokine pathology. Fever, effusions, lymphadenopathy, splenomegaly, cytopenias and high inflammatory markers can overlap. Diagnosis combines imaging, fluid or node pathology, HHV 8 staining and viral load in specialist pathways, not serology alone.",
+      "say": "HHV 8 can drive tumours and cytokine storms, not Kaposi sarcoma alone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "B cell disorders",
+          "points": [
+            "Primary effusion lymphoma in body cavities",
+            "Multicentric Castleman disease with plasmablasts",
+            "HHV 8 positive diffuse large B cell lymphoma",
+            "LANA nuclear staining confirms infected tumour cells"
+          ]
+        },
+        "right": {
+          "title": "Inflammatory presentations",
+          "points": [
+            "KICS with high viral load and cytokines",
+            "Fever and serous effusions",
+            "Cytopenias and hypoalbuminaemia",
+            "Must separate infection and lymphoma progression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Effective **antiretroviral therapy** is central in HIV associated Kaposi sarcoma and can cause lesion regression as CD4 control recovers. Reducing immunosuppression may help transplant disease, balanced against graft rejection. Local therapy suits limited lesions, while systemic chemotherapy is used for symptomatic visceral, rapidly progressive or refractory disease. Immune reconstitution inflammatory worsening may occur after ART initiation and needs expert distinction from progression.",
+      "say": "Restoring immune control is treatment, not merely background, in HHV 8 disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "diagnose",
+            "label": "Confirm lesion and stage organ disease"
+          },
+          {
+            "id": "immune",
+            "label": "Start ART or reduce excess suppression"
+          },
+          {
+            "id": "assess",
+            "label": "Assess response and IRIS possibility"
+          },
+          {
+            "id": "systemic",
+            "label": "Local or systemic therapy by burden"
+          }
+        ],
+        "edges": [
+          [
+            "diagnose",
+            "immune"
+          ],
+          [
+            "immune",
+            "assess"
+          ],
+          [
+            "assess",
+            "systemic"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Antiviral drugs have limited direct impact on latent HHV 8 because latency expresses few lytic targets and established Kaposi sarcoma is a vascular tumour sustained by viral and host growth signals. Ganciclovir can reduce lytic replication in selected settings but is not standard KS therapy. The key lesson is to treat **host immunity, tumour burden and complications** rather than expecting herpes antivirals to erase latent virus.",
+      "say": "Latent HHV 8 is not cured by standard herpes antivirals; immune and tumour therapy lead.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "What helps",
+          "points": [
+            "Antiretroviral immune recovery",
+            "Reduced iatrogenic immunosuppression when safe",
+            "Chemotherapy for advanced symptomatic KS",
+            "Local radiation, intralesional or surgical care in selected lesions"
+          ]
+        },
+        "right": {
+          "title": "What does not",
+          "points": [
+            "Acyclovir as Kaposi treatment",
+            "Expecting serology to monitor lesion activity alone",
+            "Ignoring oral and visceral disease",
+            "Stopping ART because lesions flare during early immune recovery"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,141 @@
+{
+ "v": 1,
+ "id": "cm-micronutrients-vitamin-d",
+ "subject": "community-medicine",
+ "module": "cm-micronutrients",
+ "title": "Fat and Water-Soluble Vitamins: Vitamin D, Rickets and Beriberi",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Cutaneous vitamin D synthesis and activation",
+   "tx": "Unlike classic dietary vitamins, **endogenous vitamin D synthesis** occurs predominantly in the skin, where solar ultraviolet B radiation (wavelengths 290 to 315 nm) photolyses 7-dehydrocholesterol to pre-vitamin D3, isomerising to cholecalciferol. Two sequential hydroxylations follow: first in the liver by 25-hydroxylase to produce 25-hydroxyvitamin D (calcidiol), and second in the renal proximal tubules by 1-alpha-hydroxylase to form calcitriol, the active steroid hormone.",
+   "say": "Sunlight converts cholesterol precursors in the skin into cholecalciferol. The liver and kidneys then add hydroxyl groups to create calcitriol, the active hormone that controls calcium absorption.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vitamin-d-deficiency-fig1.webp",
+    "alt": "Diagram showing cutaneous vitamin D photolysis, hepatic and renal hydroxylation, and skeletal rickets manifestations",
+    "caption": "Vitamin D metabolism and rickets: Cutaneous UVB synthesis, 1,25-dihydroxyvitamin D activation, and defective growth plate mineralization. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Calcitriol action and calcium homeostasis",
+   "tx": "The hormonally active metabolite calcitriol binds nuclear vitamin D receptors in intestinal enterocytes, upregulating calbindin-D9k and TRPV6 calcium channels to stimulate active duodenal calcium and phosphorus absorption. In conjunction with parathyroid hormone, it maintains serum ionic calcium within tight physiological limits; when levels drop, secondary hyperparathyroidism mobilizes calcium from skeleton, causing generalized **defective bone mineralisation** in growing children and adults.",
+   "say": "Calcitriol forces the intestine to absorb calcium and phosphorus. When vitamin D is missing, parathyroid hormone leaches calcium from the skeleton, leaving bones soft and weak.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Low vitamin D reduces intestinal calcium absorption"},
+     {"id": "b", "label": "Serum ionic calcium drops, triggering PTH surge"},
+     {"id": "c", "label": "Secondary hyperparathyroidism leaches bone mineral"},
+     {"id": "d", "label": "Unmineralised osteoid accumulation and skeletal deformity"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Nutritional rickets in infants and young children",
+   "tx": "In growing infants and children, failure of osteoid mineralisation at open epiphyseal growth plates produces **nutritional rickets pathology**. Manifestations appear in rapidly growing bones: craniotabes (ping-pong ball softening of occipital bones), frontal bossing, delayed anterior fontanelle closure, delayed dentition, rachitic rosary (beading of costochondral junctions), Harrison sulcus, widening of wrists and ankles, and progressive genu varum (bow legs) or genu valgum (knock knees).",
+   "say": "Rickets causes soft skull bones, delayed teeth, knobby ribs called rachitic rosary, and widened wrists. Once children start walking, soft leg bones bend into bow legs or knock knees.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Anatomical region", "Characteristic rachitic skeletal sign", "Underlying developmental mechanism"],
+    "rows": [
+     ["Skull / Cranium", "Craniotabes, frontal bossing, open fontanelle", "Unmineralized soft cranial vault bones"],
+     ["Thoracic cage", "Rachitic rosary, Harrison sulcus, pigeon chest", "Costochondral junction cartilaginous hypertrophy"],
+     ["Extremities", "Widened wrists and ankles (cupping and flaring)", "Disorganised proliferating growth plate cartilage"],
+     ["Weight-bearing legs", "Genu varum (bow legs) or genu valgum (knock knees)", "Mechanical bowing of softened tibial shafts"]
+    ]
+   }
+  },
+  {
+   "title": "Adult osteomalacia and muscle weakness",
+   "tx": "In mature adults with fused epiphyses, vitamin D deficiency manifests as **adult osteomalacia**, marked by widespread bone pain, tenderness over the anterior tibia and sternum, and proximal myopathy causing a characteristic waddling gait and difficulty rising from a chair. Pelvic bone softening in young women leads to tri-radiate pelvic deformities, posing severe mechanical obstruction during childbirth, while radiographs reveal radiolucent Looser zones (pseudofractures).",
+   "say": "In adults, softened bones cause deep aching pain and muscle weakness, producing a waddling walk. Softened pelvic bones can narrow the birth canal, causing obstructed labor.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Paediatric rickets (open growth plates)",
+     "points": ["Widened, cupped, frayed metaphyseal plates", "Craniotabes and rachitic rosary beading", "Weight-bearing leg deformities (bow legs)"]
+    },
+    "right": {
+     "title": "Adult osteomalacia (closed plates)",
+     "points": ["Diffuse aching bone pain and sternal tenderness", "Proximal myopathy with waddling gait", "Radiolucent Looser zones (pseudofractures)"]
+    }
+   }
+  },
+  {
+   "title": "Sunlight exposure and vitamin D prophylaxis",
+   "tx": "Widespread urban deficiency in sunny climates is driven by air pollution, indoor lifestyles, sunscreens, and traditional modest clothing, which prevent cutaneous ultraviolet penetration. Public health guidelines recommend **regular sunlight exposure** of twenty to thirty minutes daily between eleven AM and two PM on bare arms and face, alongside daily supplementation of four hundred international units for breastfed infants and six hundred units for adults.",
+   "say": "Pollution, clothing and indoor desks prevent sunlight from reaching our skin. Exposing arms and face to midday sun for twenty minutes daily helps maintain healthy vitamin D levels.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Population group", "Recommended daily vitamin D intake", "Clinical rationale"],
+    "rows": [
+     ["Infants 0 to 12 months", "400 international units (IU) daily", "Breast milk contains inadequate vitamin D (<50 IU/L)"],
+     ["Children and adults (1-70 yrs)", "600 international units (IU) daily", "Maintains serum 25(OH)D above 20 ng/ml"],
+     ["Elderly adults (> 70 yrs)", "800 international units (IU) daily", "Compensates for declining skin synthesis capacity"],
+     ["Therapeutic rickets regimen", "60,000 IU weekly for 6 weeks", "Rapidly replenishes exhausted body stores"]
+    ]
+   }
+  },
+  {
+   "title": "Thiamine (vitamin B1) and cellular energy metabolism",
+   "tx": "Turning to water-soluble vitamins, **thiamine pyrophosphate function** serves as an indispensable coenzyme for pyruvate dehydrogenase, alpha-ketoglutarate dehydrogenase, and transketolase in the pentose phosphate pathway. Thiamine deficiency arrests aerobic carbohydrate metabolism, impairing ATP generation and causing neurotoxic accumulations of pyruvate and lactic acid in metabolically active neural tissues and myocardium.",
+   "say": "Thiamine is essential for converting carbohydrates into cellular energy. Deficiency halts aerobic metabolism, causing lactic acid buildup that damages heart muscle and nerves.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/vitamin-deficiencies-and-cofactors-fig1.webp",
+    "alt": "Clinical and biochemical diagram of water-soluble vitamin deficiencies showing beriberi, angular stomatitis and pellagra",
+    "caption": "Water-soluble vitamin deficiency: Thiamine beriberi, riboflavin angular stomatitis, niacin pellagra, and ascorbic acid scurvy. Credit: StewardMD."
+   }
+  },
+  {
+   "title": "Polished rice and the epidemiology of beriberi",
+   "tx": "Historically striking coastal populations consuming machine-milled white rice, **beriberi epidemic distribution** occurs when industrial milling and polishing discard the outer thiamine-rich aleurone layer and pericarp of the paddy grain. Consumption of parboiled rice protects against beriberi because the parboiling process steams water-soluble thiamine from the outer husk into the central starchy endosperm before the outer bran is milled away.",
+   "say": "Polishing rice strips away the outer brown layer where thiamine lives. Parboiling rice steams the vitamin into the grain center before milling, protecting consumers from beriberi.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Machine-polished white rice",
+     "points": ["Aleurone layer and germ completely removed", "Thiamine content dropped by over 80 percent", "Staple diet triggers endemic beriberi"]
+    },
+    "right": {
+     "title": "Parboiled rice (steamed in husk)",
+     "points": ["Thiamine diffuses into central endosperm", "Vitamins retained even after hulling and washing", "Traditional cultural shield against beriberi"]
+    }
+   }
+  },
+  {
+   "title": "Clinical spectrum of adult beriberi: dry versus wet",
+   "tx": "In adults, chronic thiamine deprivation presents in two distinct clinical forms: dry beriberi and wet beriberi. Dry beriberi is a symmetrical ascending peripheral neuropathy causing distal sensory loss, foot drop, wrist drop, and severe calf tenderness; **wet beriberi manifestations** are characterized by high-output congestive cardiac failure with warm extremities, tachycardia, bounding pulses, massive peripheral oedema, and breathlessness.",
+   "say": "Dry beriberi affects the nerves, causing foot drop, numbness and painful calf muscles. Wet beriberi strikes the heart, causing high-output heart failure, breathlessness and swollen legs.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Clinical form", "Primary organ system involved", "Hallmark clinical signs"],
+    "rows": [
+     ["Dry beriberi", "Peripheral nervous system", "Symmetrical distal polyneuropathy, foot drop, wrist drop"],
+     ["Wet beriberi", "Cardiovascular system", "High-output heart failure, bounding pulse, generalized oedema"],
+     ["Infantile beriberi", "Cardiac and neurological in infants", "Aphonia (silent cry), cyanosis, rapid fatal heart failure"],
+     ["Wernicke encephalopathy", "Central nervous system (alcoholism)", "Ophthalmoplegia, cerebellar ataxia, confusion"]
+    ]
+   }
+  },
+  {
+   "title": "Infantile beriberi and public health eradication",
+   "tx": "The most acute and fulminant presentation is **infantile beriberi syndrome**, occurring in breastfed infants aged two to six months whose mothers consume polished white rice diets deficient in thiamine. Manifesting with restlessness, tachycardia, cyanosis, and pathognomonic aphonia where the infant cries silently without producing vocal sound, it causes sudden cardiac death within hours if untreated, responding miraculously to immediate parenteral thiamine.",
+   "say": "Infantile beriberi strikes breastfed infants of thiamine-deficient mothers. The baby develops a silent cry and rapid heart failure, but recovers miraculously with a single thiamine injection.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Maternal diet of polished rice deficient in B1"},
+     {"id": "b", "label": "Breastfed infant develops silent cry (aphonia)"},
+     {"id": "c", "label": "Acute cardiac dilation and dyspnoea"},
+     {"id": "d", "label": "Immediate parenteral thiamine 50 to 100 mg"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,148 @@
+{
+  "v": 1,
+  "module": "phm-raas",
+  "subject": "pharmacology",
+  "title": "RAAS Blockade Risks: Hyperkalaemia, Fetopathy, Diabetic Nephropathy and Renal Artery Stenosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Aldosterone normally drives principal cells to reabsorb sodium and secrete potassium, so blocking the renin angiotensin system predictably causes **hyperkalaemia**. ACE inhibitors, receptor blockers, aliskiren and sacubitril valsartan all share the risk, which climbs with chronic kidney disease, diabetes, potassium supplements, potassium sparing diuretics and trimethoprim. A rise of 0.3 to 0.5 mmol per litre is common; beyond 5.5 mmol per litre the drug is usually stopped and the diet and drug list reviewed.",
+      "say": "Less aldosterone means less potassium secreted; expect a small rise and act when it passes five point five.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-emergency-correction.webp",
+        "alt": "Emergency correction panel showing calcium stabilising the hyperkalaemic cardiac membrane and bicarbonate treating acidosis",
+        "caption": "Emergency treatment of significant hyperkalaemia, the endpoint RAAS monitoring is designed to prevent. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "The electrocardiogram announces dangerous potassium before the laboratory returns: tall peaked **T waves**, flattened P waves, a widening QRS complex and finally a sine wave pattern preceding arrest. Membrane stabilisation with intravenous calcium gluconate works within minutes but shifts nothing, so insulin with glucose and nebulised salbutamol then move potassium into cells, while potassium binders or dialysis actually remove it from the body over hours.",
+      "say": "Peaked T waves mean treat now: calcium protects the heart, insulin shifts potassium, binders or dialysis remove it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "ecg", "label": "Peaked T waves or widening QRS on the ECG" },
+          { "id": "calcium", "label": "Intravenous calcium gluconate stabilises the membrane" },
+          { "id": "shift", "label": "Insulin glucose and salbutamol shift potassium into cells" },
+          { "id": "remove", "label": "Binders, loop diuretics or dialysis remove potassium" }
+        ],
+        "edges": [["ecg", "calcium"], ["calcium", "shift"], ["shift", "remove"]]
+      }
+    },
+    {
+      "tx": "From mid gestation the fetal kidney builds its glomeruli under angiotensin II control, so RAAS blockade in the second and third trimesters causes **fetopathy**: fetal renal tubular dysplasia, oligohydramnios, pulmonary hypoplasia, skull ossification defects and growth restriction. First trimester signals are weaker, but the safe rule is unchanged: stop ACE inhibitors, blockers and aliskiren before conception or the moment pregnancy is recognised, and switch to labetalol, methyldopa or nifedipine.",
+      "say": "In pregnancy these drugs damage the developing kidney; switch to labetalol, methyldopa or nifedipine before conception.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-ace-inhibitors.webp",
+        "alt": "Renin angiotensin cascade diagram showing ACE inhibition, vasodilatation and fetal nephrotoxicity",
+        "caption": "The fetal nephrotoxicity warning on the ACE cascade diagram reflects the fetopathy described in this step. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Angiotensin II preferentially constricts the **efferent** arteriole, holding glomerular pressure up when perfusion falls; that single fact explains both the kidney protection and the kidney danger of this drug family. Dilating the efferent vessel drops intraglomerular pressure, which protects diabetic glomeruli for decades but collapses filtration when a stenosed renal artery is the only thing keeping pressure barely adequate upstream.",
+      "say": "Efferent dilatation is the whole story: it rests the diabetic glomerulus and starves the stenosed kidney.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Protected glomerulus",
+          "points": [
+            "Efferent arteriole dilates on ACE inhibition",
+            "Intraglomerular pressure and hyperfiltration fall",
+            "Albumin leak across the filter decreases",
+            "Long term decline in filtration slows"
+          ]
+        },
+        "right": {
+          "title": "Endangered glomerulus",
+          "points": [
+            "Stenosed artery already limits afferent flow",
+            "Efferent dilatation removes the last compensation",
+            "Glomerular pressure falls below filtration threshold",
+            "Creatinine climbs within days of starting"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In **diabetic nephropathy**, glomerular hypertension and angiotensin driven transforming growth factor beta signalling scar the kidney years before creatinine rises. ACE inhibitors and receptor blockers reduce albuminuria by roughly a third beyond their pressure effect and slow progression to kidney failure in type 1 and type 2 diabetes alike. Current practice starts one when albuminuria persists despite glucose and pressure control, then titrates to the highest tolerated dose.",
+      "say": "For the albuminuric diabetic kidney, one RAAS blocker at full tolerated dose is kidney protection, not just pressure control.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "alb", "label": "Persistent albuminuria in diabetes" },
+          { "id": "start", "label": "Start ACE inhibitor or receptor blocker" },
+          { "id": "titrate", "label": "Titrate to highest tolerated dose" },
+          { "id": "gain", "label": "Albuminuria falls about a third, decline slows" }
+        ],
+        "edges": [["alb", "start"], ["start", "titrate"], ["titrate", "gain"]]
+      }
+    },
+    {
+      "tx": "When both renal arteries are narrowed, or the artery to a solitary kidney, the entire filtration pressure hangs on angiotensin II; this is **bilateral renal artery stenosis**, the classic contraindication. Starting a blocker then produces a creatinine rise beyond 30 percent within one to two weeks, occasionally with flash pulmonary oedema. The check is built into routine monitoring, which is why the baseline and two week creatinine exist in every guideline for this family.",
+      "say": "A creatinine jump over thirty percent after starting is bilateral stenosis until proven otherwise; stop and image.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acceptable response",
+          "points": [
+            "Creatinine rise up to 30 percent, then stable",
+            "Potassium rise under 0.5 mmol per litre",
+            "Pressure improved, patient asymptomatic",
+            "Action: continue, recheck in one to two weeks"
+          ]
+        },
+        "right": {
+          "title": "Alarm response",
+          "points": [
+            "Creatinine rise beyond 30 percent or still climbing",
+            "Potassium above 5.5 mmol per litre",
+            "New pulmonary oedema or symptomatic hypotension",
+            "Action: stop drug, assess volume, image renal arteries"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Not every creatinine rise means stenosis: volume depletion from diuretics or gastroenteritis, NSAIDs (non steroidal anti inflammatory drugs) constricting the afferent arteriole, and sepsis all mimic it. The combination of an NSAID, a diuretic and a RAAS blocker is nicknamed the **triple whammy** because afferent constriction, volume loss and efferent dilatation strike glomerular pressure from three sides at once, a frequent and preventable cause of hospital acute kidney injury.",
+      "say": "NSAID plus diuretic plus RAAS blocker is the triple whammy; sick patients should pause the vulnerable drugs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "nsaid", "label": "NSAID constricts the afferent arteriole" },
+          { "id": "diur", "label": "Diuretic and illness deplete circulating volume" },
+          { "id": "raas", "label": "RAAS blocker dilates the efferent arteriole" },
+          { "id": "aki", "label": "Glomerular pressure collapses: acute kidney injury" }
+        ],
+        "edges": [["nsaid", "aki"], ["diur", "aki"], ["raas", "aki"]]
+      }
+    },
+    {
+      "tx": "Sick day guidance operationalises all of this: during dehydrating illness with poor intake, patients temporarily pause their **RAAS blocker**, diuretic and metformin, seek testing of creatinine and potassium, and restart when eating and drinking normally for 24 to 48 hours. Counselled at initiation, this single habit prevents a large share of community acquired acute kidney injury attributed to an otherwise protective drug family.",
+      "say": "Teach sick day rules on day one: pause when dehydrated, test, and restart once eating and drinking again.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pause during illness",
+          "points": [
+            "ACE inhibitor, receptor blocker or ARNI",
+            "Diuretics and metformin while intake is poor",
+            "Any NSAID bought over the counter",
+            "Restart after 24 to 48 hours of normal intake"
+          ]
+        },
+        "right": {
+          "title": "Never pause abruptly",
+          "points": [
+            "Beta blockers in heart failure or ischaemic disease",
+            "Insulin and other hypoglycaemic therapy adjustments differ",
+            "Corticosteroids: adrenal crisis risk on sudden stopping",
+            "When unsure, test first and ask the same day"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,238 @@
+{
+ "key": "ped-inborn-errors-phenylketonuria",
+ "v": 1,
+ "module": "ped-inborn-errors",
+ "subject": "paediatrics",
+ "title": "Amino Acid and Carbohydrate Inborn Errors of Metabolism",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Inherited metabolic blocks in essential amino acid catabolism cause toxic accumulation of intermediary metabolites. The autosomal recessive condition **phenylketonuria** (PKU) is caused by deficiency of the hepatic enzyme phenylalanine hydroxylase (PAH) on chromosome 12q24, which normally converts phenylalanine into tyrosine. Inability to metabolize dietary phenylalanine produces toxic hyperphenylalaninaemia, competitive inhibition of cerebral amino acid uptake, and impaired myelin synthesis.",
+   "say": "Phenylketonuria results from phenylalanine hydroxylase deficiency on chromosome twelve. Elevated phenylalanine blocks cerebral amino acid transport, severely impairing brain development and myelination.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/inherited-disorders-of-amino-acid-fig1.webp",
+    "alt": "Phenylalanine catabolic pathway showing enzymatic block at phenylalanine hydroxylase.",
+    "caption": "Phenylalanine catabolism showing enzyme deficiency, toxic phenylketone formation, and tyrosine synthesis failure. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Untreated metabolic accumulation damages cerebral myelin and suppresses cutaneous pigment formation. Infants with untreated classic PKU present within months with severe progressive **intellectual disability microcephaly**, intractable infantile spasms, severe behavioural agitation, and generalized eczema. Deficient tyrosine production impairs melanin synthesis, producing fair skin, blond hair, and blue eyes, alongside a pathognomonic mousy or musty body odour caused by urinary phenylacetic acid.",
+   "say": "Untreated PKU causes severe intellectual disability, microcephaly, seizures, fair skin, blond hair, and a characteristic musty body odour resulting from excreted phenylacetic acid.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic PKU Clinical Phenotype",
+     "points": [
+      "Severe intellectual disability with IQ under 30",
+      "Microcephaly, infantile spasms, hyperreflexia",
+      "Blond hair, fair skin, blue eyes (melanin defect)",
+      "Musty/mousy odour of urine and sweat"
+     ]
+    },
+    "right": {
+     "title": "Maternal PKU Embryopathy",
+     "points": [
+      "Untreated PKU in pregnant mother damages fetus",
+      "High maternal phenylalanine crosses placenta",
+      "Fetal microcephaly, congenital heart disease, IUGR",
+      "Requires strict dietary control before conception"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Rigid nutritional restriction initiated immediately after newborn screening prevents neurocognitive impairment. Management of PKU mandates a strict **phenylalanine-restricted diet** initiated within the first three weeks of life, utilizing specialized synthetic medical formulas free of phenylalanine while supplementing tyrosine. Target plasma phenylalanine concentrations must be maintained strictly between 120 and 360 micromoles per litre to ensure normal neurodevelopment and cognitive maturation.",
+   "say": "A phenylalanine-free medical diet started within three weeks of life preserves normal brain development. Plasma phenylalanine must be maintained strictly between 120 and 360 micromoles per litre.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Therapeutic Strategy",
+     "Dietary Component",
+     "Target Parameter",
+     "Clinical Monitoring"
+    ],
+    "rows": [
+     [
+      "Synthetic amino acid formula",
+      "Phenylalanine-free medical protein",
+      "Provides 80% of daily protein requirements",
+      "Blood amino acid chromatography"
+     ],
+     [
+      "Controlled natural protein",
+      "Measured vegetables, fruits, cereals",
+      "Provides minimum essential phenylalanine",
+      "Maintain plasma Phe 120-360 umol/L"
+     ],
+     [
+      "Tyrosine supplementation",
+      "Conditional essential amino acid",
+      "Ensures normal melanin and catecholamines",
+      "Maintain normal serum tyrosine"
+     ],
+     [
+      "Sapropterin (BH4) therapy",
+      "Tetrahydrobiopterin cofactor",
+      "Enhances residual PAH enzyme activity",
+      "Trial in BH4-responsive variants"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Catabolic accumulation of branched-chain ketoacids provokes severe early neonatal encephalopathy. The autosomal recessive disorder **maple syrup urine disease** (MSUD) arises from deficiency of the branched-chain alpha-ketoacid dehydrogenase complex, impairing degradation of leucine, isoleucine, and valine. Neonates develop lethargy, poor feeding, dystonic bicycling and fencing movements, alternating tone, severe cerebral oedema, and a sweet burnt-sugar odour in urine and earwax.",
+   "say": "Maple syrup urine disease impairs degradation of leucine, isoleucine, and valine. Newborns develop bicycling movements, encephalopathy, cerebral oedema, and a sweet maple syrup urine odour.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "MSUD Pathophysiology & Biomarkers",
+     "points": [
+      "BCKAD complex deficiency",
+      "Leucine acts as primary neurotoxic driver",
+      "Pathognomonic plasma alloisoleucine elevation",
+      "Metabolic acidosis and ketonuria in first week"
+     ]
+    },
+    "right": {
+     "title": "Acute Crisis Management in MSUD",
+     "points": [
+      "Stop all dietary protein immediately",
+      "High-calorie IV dextrose and lipids to halt catabolism",
+      "Emergency hemodialysis or continuous filtration",
+      "Lifelong leucine-restricted formula"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Defective transsulfuration of methionine provokes connective tissue degradation and lethal thromboembolism. The condition **cystathionine beta-synthase homocystinuria** results from autosomal recessive CBS deficiency, requiring pyridoxine as a cofactor. Patients exhibit Marfanoid habitus, tall stature, arachnodactyly, scoliosis, and pectus deformities, but are distinguished by downward and inward lens subluxation, progressive intellectual disability, and life-threatening arterial and venous thromboses.",
+   "say": "Homocystinuria causes a Marfanoid habitus, downward lens dislocation, mental disability, and dangerous thromboembolism. High-dose vitamin B6, folic acid, and betaine form core therapy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Feature",
+     "Homocystinuria (CBS Deficiency)",
+     "Marfan Syndrome (FBN1 Mutation)",
+     "Diagnostic Significance"
+    ],
+    "rows": [
+     [
+      "Lens subluxation (Ectopia)",
+      "Downward and inward (inferonasal)",
+      "Upward and outward (superotemporal)",
+      "Pathognomonic ocular distinction"
+     ],
+     [
+      "Cognitive function",
+      "Frequent intellectual disability",
+      "Normal intelligence",
+      "Definitive neurological contrast"
+     ],
+     [
+      "Vascular complication",
+      "Thromboembolism (DVT, stroke, PE)",
+      "Aortic root dilatation and dissection",
+      "High risk of early vascular occlusion"
+     ],
+     [
+      "Skeletal morphology",
+      "Marfanoid tall habitus, osteoporosis",
+      "Marfanoid tall habitus, joint laxity",
+      "Osteoporosis is unique to homocystinuria"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Inability to metabolize galactose leads to life-threatening multiorgan failure upon milk ingestion. The disorder **classic galactosaemia** is caused by autosomal recessive deficiency of galactose-1-phosphate uridyltransferase (GALT) on chromosome 9p13. Ingestion of breast milk or standard lactose formula leads to rapid accumulation of galactose-1-phosphate and galactitol, precipitating hepatic cirrhosis, renal tubular dysfunction, bilateral oil-drop cataracts, and fulminant Escherichia coli sepsis.",
+   "say": "Classic galactosaemia results from GALT enzyme deficiency. Ingesting milk galactose triggers jaundice, liver failure, bilateral oil-drop cataracts, and lethal Escherichia coli neonatal sepsis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic Galactosaemia Clinical Signs",
+     "points": [
+      "Jaundice, hepatosplenomegaly, hepatic failure",
+      "Bilateral oil-drop nuclear cataracts",
+      "Severe Escherichia coli neonatal sepsis",
+      "Renal Fanconi syndrome and aminoaciduria"
+     ]
+    },
+    "right": {
+     "title": "Emergency Diagnostic Evaluation",
+     "points": [
+      "Positive urine reducing substance (Benedict test)",
+      "Negative urine glucose dipstick test",
+      "Erythrocyte GALT enzyme activity assay",
+      "Immediate switch to soy or elemental formula"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Simple bedside urine testing discriminates non-glucose reducing sugars from glucosuria. Finding **urine reducing substances non-glucose** using Benedict reagent in the presence of a completely negative glucose-oxidase dipstick strongly indicates galactosaemia, hereditary fructose intolerance, or pentosuria. Confirmatory testing measures erythrocyte GALT enzyme activity, and immediate dietary management strictly eliminates all milk and dairy products, replacing them with soy or elemental formula.",
+   "say": "A positive urine Benedict test alongside a negative glucose dipstick signals non-glucose reducing sugars like galactose. Immediate complete dietary lactose elimination is life-saving.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Urine Diagnostic Test",
+     "Reagent Reaction",
+     "Clinical Finding in Galactosaemia",
+     "Biochemical Interpretation"
+    ],
+    "rows": [
+     [
+      "Benedict test",
+      "Copper reduction reagent",
+      "Positive (brick-red precipitate)",
+      "Detects reducing sugars (galactose)"
+     ],
+     [
+      "Glucose dipstick",
+      "Glucose oxidase enzymatic",
+      "Strictly negative",
+      "Confirms reducing substance is not glucose"
+     ],
+     [
+      "Erythrocyte GALT assay",
+      "Enzymatic conversion rate",
+      "Markedly depressed or absent",
+      "Definitive gold standard confirmation"
+     ],
+     [
+      "RBC galactose-1-phosphate",
+      "Chromatographic quantification",
+      "Markedly elevated in untreated state",
+      "Used for long-term dietary compliance"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Lifelong dietary restriction halts acute toxicity but requires surveillance for long-term complications. While strict **lactose-free formula** resolves acute liver failure, clears renal tubular acidosis, and halts cataract progression, treated galactosaemic females face a high incidence of hypergonadotropic hypogonadism secondary to premature ovarian insufficiency, alongside speech dyspraxia, ataxia, and mild learning difficulties due to endogenous galactose synthesis.",
+   "say": "Lactose-free soy formula reverses acute liver damage and cataracts. However, long-term complications like premature ovarian failure and speech dyspraxia can still occur.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Reversible Acute Manifestations",
+     "points": [
+      "Hepatomegaly and acute liver dysfunction",
+      "Renal tubular Fanconi syndrome",
+      "Early oil-drop cataracts (reverse if early)"
+     ]
+    },
+    "right": {
+     "title": "Long-Term Chronic Complications",
+     "points": [
+      "Hypergonadotropic ovarian insufficiency (>80%)",
+      "Speech dyspraxia and expressive language delay",
+      "Cerebellar ataxia and tremor in adolescence"
+     ]
+    }
+   }
+  }
+ ]
+}

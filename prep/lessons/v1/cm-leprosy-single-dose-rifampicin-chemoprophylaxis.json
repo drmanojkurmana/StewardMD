@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "id": "cm-leprosy-single-dose-rifampicin-chemoprophylaxis",
+ "subject": "community-medicine",
+ "module": "cm-leprosy",
+ "title": "Leprosy Elimination: Contact Chemoprophylaxis and Sparsh Drives",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Contact chemoprophylaxis with single-dose rifampicin",
+   "tx": "To break ongoing community transmission chains, national guidelines prescribe **single-dose rifampicin chemoprophylaxis** for all eligible household, neighbour and social contacts of newly confirmed leprosy cases. Administered as a weight-banded oral dose, typically six hundred milligrams for adults, this preventive intervention destroys subclinical bacillary loads in exposed contacts, reducing the risk of developing clinical disease by fifty to sixty percent over two years.",
+   "say": "Giving a single preventive dose of rifampicin to household and next-door contacts of newly diagnosed patients halves their chance of developing leprosy over the next two years.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "New index leprosy case diagnosed"},
+     {"id": "b", "label": "Screening of household and neighbor contacts"},
+     {"id": "c", "label": "Single-dose rifampicin chemoprophylaxis (SDR)"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Contact screening and SDR eligibility rules",
+   "tx": "Before dispensing preventive medicine, health workers conduct rigorous **contact screening evaluation** to ensure that candidates do not already harbor active leprosy or active tuberculosis, have no known liver disease, and have not taken rifampicin in the preceding two years. Household contacts, family relatives and close residential neighbours residing within five houses undergo whole-body skin and peripheral nerve examination under adequate natural light before prophylaxis.",
+   "say": "Frontline workers examine every household member and immediate neighbours under bright daylight to verify they do not already have active leprosy before giving the preventive rifampicin pill.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Exclusion criteria for SDR", "Clinical reasoning", "Alternative management"],
+    "rows": [
+     ["Active leprosy diagnosed", "Requires full multidrug therapy", "Enrol immediately in PB or MB regimen"],
+     ["Active tuberculosis suspect", "Risk of generating rifampicin resistance", "Refer to NTEP for CBNAAT workup"],
+     ["Liver disease / jaundice", "Hepatotoxicity risk from rifampicin", "Withhold SDR; maintain physical observation"],
+     ["Rifampicin taken in last 2 years", "Prior exposure documented", "No repeat dose indicated"]
+    ]
+   }
+  },
+  {
+   "title": "Annual new case detection rate as the core metric",
+   "tx": "While national elimination at the country level was declared in 2005 when prevalence dropped below one case per ten thousand population, epidemiologists prioritize the **annual new case detection rate** to evaluate true transmission. Calculated as total newly detected cases during the calendar year divided by the total population times one hundred thousand, this rate reflects active ongoing transmission and exposes undetected disease reservoirs across endemic districts.",
+   "say": "Prevalence alone can hide active transmission. The annual new case detection rate per hundred thousand population shows whether fresh infections are actually declining or still spreading.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Prevalence rate (< 1 / 10,000)",
+     "points": ["Reflects total patients on active treatment", "Dropped rapidly when duration shortened", "Poor indicator of ongoing fresh infections"]
+    },
+    "right": {
+     "title": "Annual new case detection rate",
+     "points": ["Counts freshly diagnosed incident cases", "Measures true community transmission pressure", "Exposes hidden pockets and diagnostic delays"]
+    }
+   }
+  },
+  {
+   "title": "Child proportion and Grade 2 disability rates",
+   "tx": "Programme evaluators track two vital quality indicators: the **child proportion indicator**, which measures the percentage of new cases occurring in children under fifteen years, and the Grade 2 disability rate among new cases. A child proportion exceeding ten percent proves active recent community transmission, while a Grade 2 disability rate above five percent reveals substantial delays in diagnosis and treatment-seeking within the community.",
+   "say": "If more than ten percent of new patients are young children, infection is actively spreading today. A high rate of permanent deformity among new cases proves patients are arriving too late.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Quality surveillance metric", "Calculation formula", "Epidemiological meaning"],
+    "rows": [
+     ["Child proportion", "(New cases < 15 years / Total new cases) x 100", "High proportion signals recent active transmission"],
+     ["Grade 2 disability rate", "(New cases with G2D / Total new cases) x 100", "High rate reveals diagnostic delay and hidden illness"],
+     ["Multibacillary ratio", "(New MB cases / Total new cases) x 100", "Indicates late detection and high transmission risk"]
+    ]
+   }
+  },
+  {
+   "title": "Sparsh Leprosy Awareness Campaign",
+   "tx": "To combat social stigma and encourage voluntary presentation, the health ministry conducts the nationwide **Sparsh Leprosy Awareness Campaign** launched annually on World Leprosy Day on January thirtieth. The campaign mobilizes Gram Sabhas, village panchayats, schools and civil society organizations, reading an official anti-stigma charter, organizing street plays, and promoting the message that leprosy is completely curable and causes no permanent disability when diagnosed early.",
+   "say": "The Sparsh campaign launches every year on January thirtieth. Village councils and schools hold community rallies to shatter social stigma and urge people with skin patches to visit clinics.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "January 30: World Leprosy Day launch"},
+     {"id": "b", "label": "Village Gram Sabha anti-stigma pledge"},
+     {"id": "c", "label": "Community rallies, school talks, media drives"},
+     {"id": "d", "label": "Voluntary self-reporting for skin patch checks"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Active case detection campaigns in endemic blocks",
+   "tx": "In high-endemic districts, health authorities execute door-to-door **active case search campaigns**, pairing a female Accredited Social Health Activist with a male volunteer to examine every household resident. Operating with detailed microplans covering every village hamlet, teams examine male and female family members in separate private rooms with informed consent, uncovering hidden paucibacillary patches and early nerve enlargement before irreversible physical deformities can take hold.",
+   "say": "Two-person health teams visit every house in high-risk villages. Examining families in private rooms uncovers hidden patches early, protecting patients from permanent nerve injury.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Microplan mapping of vulnerable hamlets"},
+     {"id": "b", "label": "Two-worker teams conduct home visits"},
+     {"id": "c", "label": "Full-body skin inspection with privacy"},
+     {"id": "d", "label": "Immediate referral to PHC for confirmation"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Slit skin smear technique and bacteriological index",
+   "tx": "Laboratory technicians confirm multibacillary infection using a **slit skin smear**, obtaining dermal tissue fluid from at least four anatomical sites, typically both earlobes and two active skin lesions. Using a scalpel blade to make a small incision while squeezing skin between fingers to produce an avascular field, the technician scrapes tissue fluid, heat-fixes the smear, and performs modified Ziehl-Neelsen staining using five percent sulfuric acid decolouriser.",
+   "say": "A slit skin smear pinches the skin to stop bleeding, makes a tiny nick, and scrapes tissue fluid from earlobes and lesions. Staining with acid confirms whether bacilli are present.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Pinch skin between thumb and finger for ischaemia"},
+     {"id": "b", "label": "5 mm superficial scalpel incision into dermis"},
+     {"id": "c", "label": "Scrape wound margins for cloudy tissue pulp"},
+     {"id": "d", "label": "Modified Ziehl-Neelsen 5% acid stain"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Bacteriological and morphological index calculation",
+   "tx": "Microscopists grade bacillary load using Ridley scale to determine the **Bacteriological Index**, ranging from zero for no bacilli in one hundred oil immersion fields up to six plus for more than one thousand bacilli and globi per single field. The Morphological Index calculates the percentage of solidly stained, uniformly cylindrical, living bacilli versus fragmented or beaded non-viable organisms, serving as an accurate biological marker of therapeutic responsiveness.",
+   "say": "The Bacteriological Index grades the density of bacilli on a scale from zero to six. The Morphological Index measures the percentage of living, solidly stained bacteria to monitor cure.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Ridley BI Grade", "Bacterial count observed", "Clinical interpretation"],
+    "rows": [
+     ["BI 0", "No acid-fast bacilli in 100 oil fields", "Paucibacillary finding; low infectiousness"],
+     ["BI 1+", "1 to 10 bacilli in 100 oil immersion fields", "Multibacillary threshold; low density"],
+     ["BI 3+", "1 to 10 bacilli on average per single field", "Moderate bacillary load in dermis"],
+     ["BI 6+", "Over 1,000 bacilli and dense globi per field", "Heavy lepromatous burden; high transmission"]
+    ]
+   }
+  },
+  {
+   "title": "Nikshay-like digital tracking for leprosy",
+   "tx": "To ensure treatment adherence and track post-cure surveillance, the national directorate implemented the **digital leprosy portal**, registering every beneficiary on a cloud database linked to national identity numbers. The portal generates automated reminders for monthly blister pick-up, tracks treatment completion rates, logs Grade 2 disability status, and triggers timely household contact screening to guarantee that chemoprophylaxis is administered to all eligible contacts.",
+   "say": "A dedicated digital portal tracks every leprosy patient from initial diagnosis to treatment completion. It issues blister refill reminders and schedules contact screening rounds.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Online patient registration at diagnosis"},
+     {"id": "b", "label": "Monthly blister-pack dispensing tracked"},
+     {"id": "c", "label": "Household contact SDR administration logged"},
+     {"id": "d", "label": "Post-cure surveillance and disability records"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

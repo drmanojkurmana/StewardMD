@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-paediatric-double-bubble-sign",
+ "subject": "radiology",
+ "module": "rad-paediatric",
+ "title": "Double Bubble Sign, Necrotising Enterocolitis and Paediatric Chest Signs",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Two bubbles mean duodenal block",
+   "tx": "**Double bubble sign** pairs a gas filled stomach with a gas filled proximal duodenum and no gas beyond, the plain film signature of duodenal atresia in a newborn with bilious vomiting. The pictured infant film set shows that two bubble pattern beside annular pancreas anatomy, its common partner. Down syndrome accompanies about a third of cases, and polyhydramnios often announced the block before birth.",
+   "say": "Double bubble sign pairs a gas filled stomach with a gas filled proximal duodenum and no gas beyond, the signature of duodenal atresia in a newborn with bilious vomiting. The pictured set shows that pattern beside annular pancreas. Down syndrome accompanies about a third of cases.",
+   "vis": {"kind": "image", "src": "v1/kb/media/annular-pancreas-fig1.webp", "alt": "Infant abdominal imaging illustration showing double bubble pattern with annular pancreas.", "caption": "Double bubble pattern and annular pancreas in the newborn. Illustration: StewardMD."}
+  },
+  {
+   "title": "Distal gas changes the diagnosis",
+   "tx": "**Distal bowel gas** beyond the two bubbles downgrades atresia to duodenal stenosis or web, where a windsock membrane balloons into the lumen, or to malrotation with volvulus, the surgical emergency in the room. Bilious vomiting with any abnormal film in a newborn earns an urgent upper gastrointestinal contrast study and surgical review, because midgut volvulus kills bowel in hours while atresia tolerates a day of stabilisation.",
+   "say": "Distal gas beyond the two bubbles downgrades atresia to stenosis, a windsock web or malrotation with volvulus, the surgical emergency in the room. Bilious vomiting with any abnormal film earns urgent contrast study and surgical review, because volvulus kills bowel in hours.",
+   "vis": {"kind": "compare", "left": {"title": "No distal gas", "points": ["Complete duodenal atresia", "Double bubble only", "Stabilise then surgery", "Check cardiac and Down associations"]}, "right": {"title": "Some distal gas", "points": ["Stenosis or windsock web", "Malrotation volvulus possible", "Urgent contrast study", "Hours matter for bowel"]}}
+  },
+  {
+   "title": "Triple bubble and jejunal atresia",
+   "tx": "**Triple bubble** adds a third gas loop for jejunal atresia, and each lower atresia multiplies dilated loops while microcolon waits unused below. Apple peel atresia wraps the distal bowel around a single marginal artery like peel around a core, a vascular accident pattern with short gut consequences. Antenatal bowel dilatation and echogenic bowel are the ultrasound whispers that prepare the delivery room for these films.",
+   "say": "Triple bubble adds a third gas loop for jejunal atresia, and each lower atresia multiplies dilated loops. Apple peel atresia wraps distal bowel around one artery with short gut consequences. Antenatal bowel dilatation prepares the delivery room for these films.",
+   "vis": {"kind": "table", "cols": ["Film pattern", "Level", "Next concern"], "rows": [["Single bubble", "Gastric outlet or pyloric", "Electrolytes, pyloric ultrasound"], ["Double bubble", "Duodenum", "Atresia versus volvulus"], ["Triple bubble", "Jejunum", "Atresia, apple peel variant"], ["Many dilated loops", "Ileum or colon", "Atresia, Hirschsprung, meconium ileus"]]}
+  },
+  {
+   "title": "Hirschsprung transition zone",
+   "tx": "**Hirschsprung disease** films show a narrow aganglionic rectosigmoid opening into dilated ganglionic colon above, the transition zone a contrast enema maps with a reversed rectosigmoid ratio. The newborn fails to pass meconium in the first day or two, and the toddler version grows chronic constipation with a palpable loaded colon. Rectal suction biopsy proving absent ganglion cells still makes the diagnosis imaging only suspects.",
+   "say": "Hirschsprung disease shows a narrow aganglionic rectosigmoid opening into dilated colon above, the transition zone a contrast enema maps. The newborn fails to pass meconium in the first day or two. Rectal suction biopsy proving absent ganglion cells still makes the diagnosis imaging only suspects.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Delayed meconium or constipation"}, {"id": "b", "label": "Contrast enema transition zone"}, {"id": "c", "label": "Rectal suction biopsy"}, {"id": "d", "label": "Absent ganglion cells confirm"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Pneumatosis means necrotising bowel",
+   "tx": "**Pneumatosis intestinalis** traps gas inside the bowel wall as bubbly or linear lucencies, the plain film hallmark of necrotising enterocolitis in a preterm infant with distension, blood in stool and falling platelets. Portal venous gas branches that intramural gas into the liver, and pneumoperitoneum ends debate about perforation. A football sign of free gas on the supine baby film joins the same emergency set.",
+   "say": "Pneumatosis intestinalis traps gas inside the bowel wall, the hallmark of necrotising enterocolitis in a preterm infant with distension and falling platelets. Portal venous gas branches into the liver, and pneumoperitoneum ends debate about perforation. All three signs trigger the same emergency pathway.",
+   "vis": {"kind": "table", "cols": ["Sign", "Gas location", "Meaning"], "rows": [["Pneumatosis", "Bowel wall", "Necrotising enterocolitis"], ["Portal venous gas", "Branching in liver", "Advanced bowel necrosis"], ["Pneumoperitoneum", "Free in peritoneum", "Perforation, surgery"], ["Fixed dilated loop", "Same loop on repeats", "Full thickness injury"]]}
+  },
+  {
+   "title": "Respiratory distress films in newborns",
+   "tx": "**Hyaline membrane disease** grounds the premature lung into uniform fine granularity with air bronchograms and low volumes from surfactant deficiency, worst in the first hours and improving after surfactant doses. Transient tachypnoea of the newborn instead shows wet fissures, perihilar streaking and fluid that clears within a day or two after caesarean delivery. Meconium aspiration coarsens the pattern into patchy ropey opacities with hyperinflation in a term baby born through stained liquor.",
+   "say": "Hyaline membrane disease grounds the premature lung into fine granularity with air bronchograms from surfactant deficiency. Transient tachypnoea shows wet fissures clearing within a day or two. Meconium aspiration coarsens the pattern into patchy opacities with hyperinflation in a term baby.",
+   "vis": {"kind": "compare", "left": {"title": "Surfactant deficiency", "points": ["Preterm, first hours", "Fine ground glass granularity", "Air bronchograms, low volume", "Improves with surfactant"]}, "right": {"title": "Transient tachypnoea", "points": ["Term, caesarean birth", "Wet fissures, streaky hila", "Fluid in fissures", "Clears in 24 to 48 hours"]}}
+  },
+  {
+   "title": "Steeple versus thumbprint airways",
+   "tx": "**Steeple sign** narrows the subglottic airway into a church steeple on the frontal neck film of viral croup, the barking cough toddler whose lateral film shows a swollen epiglottis staying thin. Bacterial epiglottitis instead prints a thumb: a thick rounded epiglottis with ballooned hypopharynx in a toxic drooling child. That frontal versus lateral pairing is an examiner favourite precisely because swapping the two diseases swaps a home remedy for an airway emergency.",
+   "say": "Steeple sign narrows the subglottic airway in viral croup, the barking toddler whose epiglottis stays thin. Bacterial epiglottitis prints a thumb: a thick rounded epiglottis in a toxic drooling child. Swapping the two diseases swaps a home remedy for an airway emergency.",
+   "vis": {"kind": "table", "cols": ["Sign", "Disease", "Film view"], "rows": [["Steeple", "Viral croup", "Frontal neck, subglottic narrowing"], ["Thumbprint", "Epiglottitis", "Lateral neck, swollen epiglottis"], ["Thymic sail", "Normal thymus", "Frontal chest, sail shaped shadow"], ["Air trapping", "Foreign body", "Expiratory chest, one lung bright"]]}
+  },
+  {
+   "title": "Battered baby bone survey",
+   "tx": "**Skeletal survey** in suspected physical abuse hunts classic metaphyseal corner and bucket handle fractures, posterior rib fractures from squeezing, and fractures of different ages healing side by side. Skull, spine, hands and feet films complete the set because abusive injuries hide where routine trauma films never look. Rickets, osteogenesis imperfecta and normal variants enter the differential honestly, and the survey is reported beside metabolic labs and specialist review, never alone.",
+   "say": "Skeletal survey in suspected physical abuse hunts metaphyseal corner fractures, posterior rib fractures and fractures of different ages. Rickets and osteogenesis imperfecta enter the differential honestly, and the survey is reported beside metabolic labs and specialist review, never alone.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Injury inconsistent with story"}, {"id": "b", "label": "Full skeletal survey"}, {"id": "c", "label": "Metabolic bone labs"}, {"id": "d", "label": "Multidisciplinary review"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}

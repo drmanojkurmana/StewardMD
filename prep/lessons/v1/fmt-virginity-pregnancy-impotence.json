@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-virginity-pregnancy-impotence",
+ "subject": "forensic-medicine",
+ "module": "fmt-virginity-pregnancy",
+ "title": "Impotence, Virginity, Pregnancy and Delivery Signs",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Impotence and sterility are different questions",
+   "tx": "**Impotence** is inability to perform sexual intercourse; **sterility** is inability to procreate. A man may be impotent and fertile by assisted means, or potent and sterile after mumps orchitis or vas obstruction. In the female, the passive role in intercourse means general diseases rarely cause impotence, while tubal, uterine and ovarian disease readily cause sterility. Examinations and opinions must answer the exact question the court has asked, not its neighbour.",
+   "say": "Potency is about the act and sterility about procreation, and confusing them answers a question nobody asked.",
+   "vis": {"kind": "table", "cols": ["Question", "Male assessment", "Female assessment"], "rows": [["Potency", "Erection mechanism examined", "Vaginal patency and pain"], ["Fertility", "Semen analysis central", "Tubes, uterus and ovaries"], ["Both affected", "Severe genital malformation", "Absent vagina or uterus"], ["Opinion must state", "Which question was answered", "Limits of the examination"]]}
+  },
+  {
+   "title": "Quoad hanc impotence",
+   "tx": "**Quoad hanc**, also written quoad hoc in older texts, describes a man impotent with one particular woman but potent with others, a psychogenic and partner specific pattern. Disgust for the partner, dislike, guilt, anxiety and fear of failure produce temporary impotence that usually resolves, including first night impotence in a bridegroom. The finding matters in nullity of marriage suits, where impotence must be proved relative to the marriage, not in the abstract.",
+   "say": "Impotence toward one partner only is quoad hanc, usually psychogenic, and marriage courts test potency within that marriage.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Anxiety or dislike toward partner"}, {"id": "b", "label": "Erection fails in that setting"}, {"id": "c", "label": "Potency preserved elsewhere"}, {"id": "d", "label": "Quoad hanc pattern recorded"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Organic causes of male impotence",
+   "tx": "Nocturnal penile tumescence studies showed most impotence is organic under **causes of erectile failure**. Vasculogenic failure leads at about forty percent, from arteriosclerotic inflow failure or venous leakage, worsened by diabetes and hypertension. Diabetes alone accounts for about twenty percent, endocrinologic causes about twenty, psychogenic twelve and neurogenic seven. Lead exposure and drugs including tranquillisers contribute, and spinal, pelvic and perineal injuries damage the nerves of erection directly.",
+   "say": "Blood vessel failure leads organic impotence at forty percent, with diabetes, hormones, nerves and drugs behind it.",
+   "vis": {"kind": "table", "cols": ["Cause group", "Share or route", "Example"], "rows": [["Vasculogenic", "About 40 percent", "Arteriosclerosis, venous leak"], ["Diabetes mellitus", "About 20 percent", "Vessel and nerve damage"], ["Psychogenic", "About 12 percent", "Anxiety, guilt, depression"], ["Neurogenic", "About 7 percent", "Spinal and pelvic injury"]]}
+  },
+  {
+   "title": "True virgin and false virgin",
+   "tx": "A **true virgin** has never had intercourse; a **false virgin** has had intercourse yet retains an intact, elastic hymen that stretches without tearing, which is common with a fleshy, folded hymen. Because both states share the same examination appearance, virginity cannot be certified medically. The older sign lists, intact hymen, tight introitus, rugose vagina and firm breasts, are recorded as anatomy only, and every certificate that pronounces virginity exceeds the evidence.",
+   "say": "An intact elastic hymen fits both true and false virginity, so no doctor can honestly certify virginity at all.",
+   "vis": {"kind": "compare", "left": {"title": "True virgin", "points": ["No intercourse ever", "Hymen usually intact", "Anatomy as expected", "History is the only proof"]}, "right": {"title": "False virgin", "points": ["Intercourse has occurred", "Elastic hymen intact", "Identical examination picture", "Certificate still impossible"]}}
+  },
+  {
+   "title": "Signs of pregnancy, presumptive",
+   "tx": "**Presumptive signs of pregnancy** are subjective and suggestive only: amenorrhoea, morning sickness, breast changes with Montgomery tubercles, pigmentation including linea nigra and chloasma, urinary frequency and fatigue. Probable signs add abdominal enlargement, Hegar softening of the lower uterine segment, Goodell softening of the cervix, Chadwick bluish discolouration, ballotment and positive pregnancy tests. Only fetal heart sounds, fetal movements felt by the examiner and imaging are positive proof.",
+   "say": "Missed periods and breast changes only presume pregnancy; fetal heart, examiner felt movements and imaging prove it.",
+   "vis": {"kind": "table", "cols": ["Sign class", "Examples", "Certainty"], "rows": [["Presumptive", "Amenorrhoea, morning sickness", "Suggestive only"], ["Probable", "Hegar, Goodell, Chadwick signs", "Strongly suggestive"], ["Probable laboratory", "Positive pregnancy test", "Strong but not absolute"], ["Positive", "Fetal heart, movements, imaging", "Proof of pregnancy"]]}
+  },
+  {
+   "title": "Signs of recent delivery",
+   "tx": "**Signs of recent delivery** in the first days include a soft lax abdomen with striae, enlarged soft breasts secreting colostrum then milk, a uterus palpable above the pelvis that shrinks daily, lochia passing from red through serous to white, perineal tears or episiotomy, and a patulous cervix admitting fingers. These signs answer questions of concealed birth and surrogacy disputes. Within about a week most soften, so early examination decides what late examination cannot.",
+   "say": "Shrinking uterus, lochia and milk in the first days prove recent delivery, and each sign fades within the week.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Uterus palpable, shrinking daily"}, {"id": "b", "label": "Lochia red, then serous, then white"}, {"id": "c", "label": "Breasts secrete colostrum then milk"}, {"id": "d", "label": "Perineum and cervix show delivery"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Signs of remote delivery",
+   "tx": "**Signs of remote delivery** persist after the early signs vanish: lax abdominal wall with silvery striae albicantes, a patulous external os with transverse slit in place of the nulliparous dimple, old perineal scars, and pigmentation changes that slowly fade. These findings prove a woman has delivered at some time but cannot date the delivery. They are used where parity itself, not its timing, decides legitimacy, inheritance or a disputed maternity claim.",
+   "say": "Silvery striae and a slit like external os prove past delivery forever, while telling nothing about when it happened.",
+   "vis": {"kind": "compare", "left": {"title": "Recent delivery signs", "points": ["Palpable shrinking uterus", "Lochia changing colour", "Milk secretion beginning", "Fresh perineal injury"]}, "right": {"title": "Remote delivery signs", "points": ["Silvery striae albicantes", "Transverse slit external os", "Old perineal scars", "Parity proved, date impossible"]}}
+  },
+  {
+   "title": "Female sterility without impotence",
+   "tx": "A woman can be fully potent yet sterile in **female sterility assessment**: absent uterus, ovaries or tubes, tubal occlusion after gonorrhoeal or tubercular salpingitis, cervical obstruction and menstrual disorders all block conception while intercourse stays normal. Occlusion of the vagina causes impotence but not sterility if internal organs are healthy and assisted conception is used. Gonorrhoea ascending to cervix, uterus and tubes is the classic infective route to tubal sterility.",
+   "say": "Blocked tubes sterilise without touching potency, and an occluded vagina impedes the act without sterilising the woman.",
+   "vis": {"kind": "table", "cols": ["Female condition", "Potency", "Fertility"], "rows": [["Tubal occlusion", "Normal", "Sterile naturally"], ["Absent uterus", "Near normal", "Sterile"], ["Vaginal occlusion", "Impotent", "Fertile by assistance"], ["Gonorrhoeal salpingitis", "Normal", "Tubal sterility follows"]]}
+  },
+  {
+   "title": "Medicolegal uses of these examinations",
+   "tx": "Impotence, virginity and pregnancy examinations serve **nullity, legitimacy and criminal proceedings**: impotence at marriage for annulment, disputed paternity and legitimacy, alleged rape where potency of the accused is challenged, divorce, and claims of pregnancy to delay trial or execution. In each, the doctor answers only the medical question, states the examination limits and margin of error, and refuses the ultimate legal conclusion, which remains with the court on all the evidence.",
+   "say": "Annulment, paternity and potency challenges all need the same restraint: medical facts in, legal conclusions left to court.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Court frames a medical question"}, {"id": "b", "label": "Examination answers that question"}, {"id": "c", "label": "Limits and margins stated"}, {"id": "d", "label": "Court draws the legal conclusion"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ],
+ "quiz": []
+}

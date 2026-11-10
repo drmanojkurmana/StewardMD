@@ -1,0 +1,226 @@
+{
+ "key": "ped-glomerular-nephrotic-syndrome",
+ "v": 1,
+ "module": "ped-glomerular",
+ "subject": "paediatrics",
+ "title": "Pediatric Nephrotic and Nephritic Syndromes: MCD and PSGN",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Disruption of glomerular filtration barrier charge and pore selectivity allows massive protein leakage into urine. Diagnostic criteria defining **idiopathic nephrotic syndrome in children** require massive proteinuria exceeding forty milligrams per square metre per hour or a spot urine protein-to-creatinine ratio greater than two, profound hypoalbuminaemia falling below 2.5 grams per decilitre, generalized dependent oedema, and secondary hyperlipidaemia.",
+   "say": "Nephrotic syndrome is diagnosed by massive proteinuria over forty milligrams per hour, hypoalbuminemia below 2.5 grams, and generalized pitting edema. Hyperlipidemia is present.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-misc-nephrotic.webp",
+    "alt": "Clinical illustration depicting periorbital edema, ascites, and systemic complications of pediatric nephrotic syndrome.",
+    "caption": "Diagnostic triad and systemic complications of childhood nephrotic syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "The vast majority of idiopathic nephrotic cases in preschool children arise from reversible podocyte foot process architecture changes. Accounting for eighty percent of cases between two and six years, **minimal change disease** exhibits completely normal glomeruli on light microscopy, with diffuse effacement of visceral epithelial podocyte foot processes visible only on electron microscopy. Immunofluorescence demonstrates a notable absence of immune complexes or complement deposits.",
+   "say": "Minimal change disease accounts for eighty percent of childhood nephrotic cases, peaking between two and six years. Electron microscopy shows diffuse podocyte foot process effacement.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Minimal Change Disease (MCD)",
+     "points": [
+      "Normal glomeruli on light microscopy",
+      "Diffuse podocyte foot process effacement on EM",
+      "Absence of immune deposits on immunofluorescence",
+      "Over 90% respond completely to corticosteroids"
+     ]
+    },
+    "right": {
+     "title": "Focal Segmental Glomerulosclerosis (FSGS)",
+     "points": [
+      "Segmental sclerosis in some glomeruli on LM",
+      "Associated with microscopic haematuria & hypertension",
+      "High rate of steroid resistance (>70%)",
+      "Progresses to chronic end-stage kidney failure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Dependent fluid accumulation begins in tissues with low interstitial hydrostatic resistance. The cardinal presenting symptom is **periorbital and generalized oedema**, noticeable initially upon morning awakening as puffy eyelids, frequently misattributed by parents to allergic conjunctivitis. Over subsequent days, dependent gravitational fluid shifts cause pitting pretibial oedema, ascites, pleural effusions, and marked scrotal or labial swelling.",
+   "say": "Morning periorbital puffiness is the earliest sign of nephrotic syndrome, progressing to ascites and pitting leg edema. Pitting reflects low oncotic pressure from albumin loss.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-gen-paed-edema.webp",
+    "alt": "Clinical demonstration of testing for dependent pretibial pitting edema and ascites in childhood nephrotic syndrome.",
+    "caption": "Clinical assessment of periorbital and dependent pretibial pitting edema in nephrotic syndrome. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Standardized oral corticosteroid algorithms establish diagnostic responsiveness and induce complete clinical remission. Under international protocols, **steroid-sensitive nephrotic syndrome** is managed with oral prednisolone at sixty milligrams per square metre per day (maximum sixty milligrams) for six consecutive weeks, followed by alternate-day prednisolone at forty milligrams per square metre for six weeks. Remission is defined by trace or negative dipstick proteinuria for three consecutive days.",
+   "say": "Give oral prednisolone at sixty milligrams per square metre daily for six weeks, then alternate-day for six weeks. Complete remission means trace or negative protein for three days.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Protocol Phase",
+     "Prednisolone Dosage Schedule",
+     "Duration of Therapy",
+     "Clinical Therapeutic Objective"
+    ],
+    "rows": [
+     [
+      "Induction phase",
+      "60 mg/m2/day (single morning dose)",
+      "6 consecutive weeks",
+      "Induces remission (urine protein trace/neg)"
+     ],
+     [
+      "Maintenance phase",
+      "40 mg/m2 alternate mornings",
+      "6 consecutive weeks",
+      "Maintains podocyte stability, minimizes cushingoid effects"
+     ],
+     [
+      "Tapering schedule",
+      "Gradual reduction by 0.5 mg/kg every 2 wks",
+      "Over 4 to 8 weeks",
+      "Prevents secondary rebound adrenal crisis"
+     ],
+     [
+      "Relapse management",
+      "60 mg/m2/day until trace protein x 3 days",
+      "Then 40 mg/m2 alt days x 4 weeks",
+      "Rapidly terminates acute protein loss"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Persistent urinary protein excretion despite an adequate trial of full-dose corticosteroid therapy defines treatment failure. Patients demonstrating **steroid-resistant nephrotic syndrome** fail to achieve complete remission after four consecutive weeks of daily oral prednisolone at sixty milligrams per square metre. This condition mandates urgent percutaneous renal biopsy to evaluate for focal segmental glomerulosclerosis, membranoproliferative glomerulonephritis, or underlying genetic podocytopathies.",
+   "say": "Failure to achieve remission after four weeks of daily high-dose steroids defines steroid-resistant nephrotic syndrome. A percutaneous renal biopsy is required.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Steroid Resistance Definitions",
+     "points": [
+      "Proteinuria >=2+ persisting after 4 weeks of steroids",
+      "Lack of clinical response to high-dose prednisolone",
+      "High risk of progressive chronic kidney disease",
+      "Mandatory indication for core renal biopsy"
+     ]
+    },
+    "right": {
+     "title": "Second-Line Steroid-Sparing Agents",
+     "points": [
+      "Calcineurin inhibitors (cyclosporine or tacrolimus)",
+      "Mycophenolate mofetil (MMF) to reduce toxicity",
+      "Intravenous pulse methylprednisolone protocols",
+      "Rituximab (anti-CD20) for refractory cases"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Recurrent proteinuria upon steroid reduction or cessation presents complex clinical management challenges. Patients experiencing two or more relapses within six months, or four relapses in any twelve-month period, are classified as **frequent relapsers and steroid-dependent**, while those relapsing during steroid taper or within two weeks of stopping are steroid-dependent. These children require steroid-sparing agents such as levamisole, cyclophosphamide, or calcineurin inhibitors.",
+   "say": "Frequent relapsers experience four or more relapses in twelve months, while steroid-dependent cases relapse during tapering. Steroid-sparing agents prevent steroid toxicity.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Relapse Category",
+     "Diagnostic Definition / Frequency",
+     "Recommended Second-Line Agent",
+     "Monitoring Requirements"
+    ],
+    "rows": [
+     [
+      "Frequent relapser",
+      ">=2 relapses in 6 months, or >=4 in 12 months",
+      "Levamisole (2.5 mg/kg alternate days)",
+      "Complete blood counts every 8 weeks (neutropenia)"
+     ],
+     [
+      "Steroid dependent",
+      "Relapse during steroid taper or within 2 weeks",
+      "Cyclophosphamide (2 mg/kg/day x 8-12 wks)",
+      "Monitor CBC, cumulative dose <200 mg/kg"
+     ],
+     [
+      "Calcineurin inhibitors",
+      "Steroid-dependent failing cyclophosphamide",
+      "Tacrolimus (0.1 mg/kg/day) / Cyclosporine",
+      "Trough levels, serum creatinine, blood pressure"
+     ],
+     [
+      "Rituximab infusion",
+      "Complicated steroid-dependent / resistant",
+      "Monoclonal anti-CD20 (1-2 infusions)",
+      "Monitor CD19/CD20 B-cell repopulation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Immune-complex mediated glomerular inflammation follows specific nephritogenic group A streptococcal strains. Typically presenting one to two weeks after streptococcal pharyngitis or three to six weeks after pyoderma, **post-streptococcal glomerulonephritis** (PSGN) represents an acute nephritic syndrome characterized by the sudden onset of microscopic or gross haematuria, mild dependent periorbital oedema, oliguria, and systemic arterial hypertension.",
+   "say": "Post-streptococcal glomerulonephritis develops one to two weeks after pharyngitis, or three to six weeks after skin impetigo. It presents with acute nephritic syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Antecedent Streptococcal Infection",
+     "points": [
+      "Pharyngitis: nephritogenic serotypes (1, 4, 12)",
+      "Latency period: 1 to 2 weeks post-pharyngitis",
+      "Pyoderma/impetigo: nephritogenic serotypes (49, 55, 57)",
+      "Latency period: 3 to 6 weeks post-impetigo"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Serological Workup",
+     "points": [
+      "Elevated anti-streptolysin O (ASO) in pharyngitis",
+      "Elevated anti-DNase B in impetigo and skin infection",
+      "Marked transient depression of serum complement C3",
+      "C3 levels characteristically normalize within 8 weeks"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Oxidation of filtered hemoglobin within acidic tubular fluid imparts a classic discoloured appearance. Glomerular bleeding produces distinctive **smoky cola-coloured urine in nephritis**, resulting from red blood cell dysmorphism and erythrocyte cast formation within damaged nephrons. Management is strictly supportive, focusing on dietary sodium and water restriction, loop diuretics like furosemide for volume overload and hypertension, and complete spontaneous recovery in ninety-five percent of children.",
+   "say": "Cola-coloured urine reflects glomerular bleeding and dysmorphic red blood cells. Restrict sodium and fluids, and manage hypertension with furosemide.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature Comparison",
+     "Nephrotic Syndrome (MCD)",
+     "Acute Nephritic Syndrome (PSGN)",
+     "Key Discriminating Investigation"
+    ],
+    "rows": [
+     [
+      "Urine appearance",
+      "Normal pale yellow, frothy from protein",
+      "Dark smoky, tea-coloured, or cola-coloured",
+      "Macroscopic examination"
+     ],
+     [
+      "Urinary protein",
+      "Massive selective proteinuria (>40 mg/m2/hr)",
+      "Non-nephrotic mild proteinuria (<40 mg/m2/hr)",
+      "Spot urine protein:creatinine ratio"
+     ],
+     [
+      "Serum complement C3",
+      "Normal C3 and C4 complement levels",
+      "Profoundly depressed C3; normal C4",
+      "Serum complement C3 assay"
+     ],
+     [
+      "Blood pressure",
+      "Normal or reduced blood pressure",
+      "Elevated systolic & diastolic hypertension",
+      "Blood pressure measurement percentile"
+     ]
+    ]
+   }
+  }
+ ]
+}

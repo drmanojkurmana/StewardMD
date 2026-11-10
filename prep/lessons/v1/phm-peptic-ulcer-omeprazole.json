@@ -1,0 +1,237 @@
+{
+  "v": 1,
+  "module": "phm-peptic-ulcer",
+  "subject": "pharmacology",
+  "title": "Proton Pump Inhibitors, H2 Blockers, and Mucosal Protective Agents in Acid Peptic Disease",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The prototypical substituted benzimidazole prodrug that functions as an irreversible gastric proton pump inhibitor is **omeprazole**. Formulated as enteric-coated granules to survive acidic gastric transit, omeprazole is absorbed in the alkaline proximal small intestine and distributes via circulation into the acidic canaliculi of parietal cells. There, protonation traps the molecule and catalyzes its conversion into active sulfenamide and sulfenic acid, which covalently form disulfide bonds with cysteine residues of the luminal H+/K+ ATPase, permanently inactivating the pump until new enzyme molecules are synthesized.",
+      "say": "Omeprazole accumulates in acidic parietal canaliculi, converting into active sulfenamide to permanently inactivate proton pumps.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ome",
+            "label": "Enteric-coated omeprazole absorbed in proximal small intestine"
+          },
+          {
+            "id": "canalic",
+            "label": "Concentrates in acidic parietal canaliculi (pH < 1.0) via ion trapping"
+          },
+          {
+            "id": "sulfen",
+            "label": "Acid-catalyzed rearrangement to active cationic sulfenamide"
+          },
+          {
+            "id": "disulf",
+            "label": "Covalent disulfide bonding with Cys813 on luminal H+/K+ ATPase"
+          }
+        ],
+        "edges": [
+          [
+            "ome",
+            "canalic"
+          ],
+          [
+            "canalic",
+            "sulfen"
+          ],
+          [
+            "sulfen",
+            "disulf"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A chemically stable substituted benzimidazole proton pump inhibitor distinguished by lower affinity for hepatic cytochrome P450 enzymes is **pantoprazole**. Available in both oral and intravenous formulations, pantoprazole selectively binds to cysteine-813 and cysteine-822 on the gastric H+/K+ ATPase enzyme. Because pantoprazole undergoes hepatic clearance predominantly via sulfotransferase conjugation and only weakly inhibits CYP2C19, it does not impede the bioactivation of clopidogrel, making it the preferred intravenous and oral proton pump inhibitor in acute coronary syndromes and dual antiplatelet therapy.",
+      "say": "Pantoprazole is cleared by sulfotransferases with minimal CYP2C19 inhibition, making it safe alongside clopidogrel.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pantoprazole (Favorable CYP Profile)",
+          "points": [
+            "Chemically stable benzimidazole; oral and intravenous routes",
+            "Cleared predominantly via cytosolic sulfotransferase conjugation",
+            "Minimal inhibition of hepatic CYP2C19 or CYP3A4 isozymes",
+            "Safe to co-administer with antiplatelet prodrug clopidogrel"
+          ]
+        },
+        "right": {
+          "title": "Omeprazole (CYP2C19 Inhibitor)",
+          "points": [
+            "Prototypical oral benzimidazole proton pump inhibitor",
+            "Extensively metabolized by and inhibits hepatic CYP2C19",
+            "Competitively inhibits metabolic activation of clopidogrel",
+            "Elevates circulating plasma levels of phenytoin and warfarin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The most potent pharmacological suppressors of gastric hydrochloric acid secretion available in clinical practice are **proton pump inhibitors** (PPIs). By targeting the final common pathway of acid production, the luminal H+/K+ ATPase exchanger, PPIs inhibit both basal and meal-stimulated acid secretion by greater than ninety percent, regardless of whether stimulation originates from gastrin, histamine, or acetylcholine. In contrast to H2 blockers, PPIs maintain intragastric pH above 4 for fourteen to sixteen hours daily, providing superior healing of peptic ulcers and reflux esophagitis.",
+      "say": "Proton pump inhibitors target the final common H+/K+ ATPase pathway to suppress acid secretion by over ninety percent.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/peptic-ulcer-fig2.webp",
+        "alt": "Diagram of gastric parietal cell acid secretion pathways and proton pump",
+        "caption": "Gastric parietal cell receptor physiology illustrating histamine, gastrin, and acetylcholine inputs converging on the apical H+/K+ ATPase proton pump."
+      }
+    },
+    {
+      "tx": "A competitive, reversible antagonist of histamine H2 receptors on gastric parietal cells developed as a second-generation agent is **ranitidine**. Structurally incorporating a furan ring that avoids the antiandrogenic gynecomastia and extensive CYP450 enzyme inhibition characteristic of cimetidine, ranitidine suppresses basal and nocturnal gastric acid secretion by seventy percent. While historically a cornerstone of peptic ulcer and GERD therapy, commercial ranitidine formulations were withdrawn globally due to contamination with the probable human carcinogen N-nitrosodimethylamine.",
+      "say": "Ranitidine was a second-generation H2 blocker withdrawn worldwide due to nitrosodimethylamine contamination.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "H2 receptor antagonist",
+          "Chemical ring structure",
+          "Relative acid-inhibitory potency",
+          "CYP450 enzyme inhibition"
+        ],
+        "rows": [
+          [
+            "Cimetidine",
+            "Imidazole ring",
+            "1 (Reference base)",
+            "Marked inhibition; gynecomastia and impotence"
+          ],
+          [
+            "Ranitidine (Withdrawn)",
+            "Furan ring",
+            "5 to 10-fold more potent",
+            "Negligible inhibition; withdrawn for NDMA impurity"
+          ],
+          [
+            "Famotidine",
+            "Thiazole ring",
+            "20 to 50-fold more potent",
+            "Zero inhibition of hepatic CYP450 enzymes"
+          ],
+          [
+            "Nizatidine",
+            "Thiazole ring",
+            "5 to 10-fold more potent",
+            "Zero inhibition; high oral bioavailability (90%)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most potent thiazole-containing competitive histamine H2 receptor antagonist currently utilized in clinical practice is **famotidine**. Demonstrating twenty-to-fifty times greater acid-inhibitory potency than cimetidine, famotidine suppresses basal, nocturnal, and pentagastrin-stimulated gastric acid output for ten to twelve hours without inhibiting hepatic CYP450 isozymes or displaying antiandrogenic activity. It is widely indicated for mild gastroesophageal reflux disease, duodenal ulcer healing, and prevention of stress ulcers in critically ill intensive care patients.",
+      "say": "Famotidine is a potent thiazole H2 antagonist providing ten to twelve hours of nocturnal acid suppression without drug interactions.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Famotidine (H2 Receptor Antagonist)",
+          "points": [
+            "Reversibly blocks basolateral parietal H2 receptors",
+            "Selectively suppresses nocturnal and basal acid secretion (70%)",
+            "Tachyphylaxis (tolerance) develops within 1 to 2 weeks of use",
+            "Rapid onset of action; ideal for episodic on-demand heartburn"
+          ]
+        },
+        "right": {
+          "title": "Proton Pump Inhibitors (Omeprazole, Pantoprazole)",
+          "points": [
+            "Irreversibly inhibits apical H+/K+ ATPase proton pumps",
+            "Suppresses both basal and meal-stimulated acid secretion (>90%)",
+            "Maintains therapeutic efficacy without tachyphylaxis or tolerance",
+            "Requires 2 to 3 days to achieve maximal steady-state acid suppression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A basic aluminum hydroxide complex of sulfated sucrose that serves as a non-absorbable mucosal protective cytoprotective agent is **sucralfate**. In an acidic gastric environment with a pH below 4.0, sucralfate undergoes extensive cross-linking and polymerization into a viscous, sticky paste that adheres selectively to positively charged proteins exposed in the crater base of peptic ulcers. This physical barrier resists acid, pepsin, and bile salt penetration for six hours while stimulating local prostaglandin and epidermal growth factor synthesis. It requires acidic pH and must not be taken with antacids or PPIs.",
+      "say": "Sucralfate polymerizes in acidic environments to coat ulcer craters, requiring separation from antacids and PPIs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ingest",
+            "label": "Oral administration of sucralfate suspension on an empty stomach"
+          },
+          {
+            "id": "acid",
+            "label": "Acid-catalyzed (pH < 4.0) polymerization into viscous polyanionic paste"
+          },
+          {
+            "id": "coat",
+            "label": "Selective electrovalent binding to positively charged proteins in ulcer crater"
+          },
+          {
+            "id": "protect",
+            "label": "Physical barrier against luminal acid-pepsin and stimulation of mucosal PGE2"
+          }
+        ],
+        "edges": [
+          [
+            "ingest",
+            "acid"
+          ],
+          [
+            "acid",
+            "coat"
+          ],
+          [
+            "coat",
+            "protect"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "An insoluble heavy metal salt formulation that exerts multi-factorial topical antimicrobial and gastroprotective actions is **bismuth**. In the stomach, bismuth complexes with mucosal glycoproteins to coat ulcer bases, inhibits pepsin proteolytic activity, and stimulates endogenous mucosal prostaglandin and bicarbonate release. Crucially, bismuth exerts direct bactericidal action against Helicobacter pylori by disrupting bacterial cell wall synthesis and inhibiting urease and catalase enzymes, serving as an indispensable anchor of quadruple eradication regimens.",
+      "say": "Bismuth salts coat ulcer bases and exert direct bactericidal activity against Helicobacter pylori in quadruple therapy.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/peptic-ulcer-fig1.webp",
+        "alt": "Endoscopic and histologic appearance of active gastric and duodenal peptic ulcer",
+        "caption": "Endoscopic view of punched-out duodenal ulcer crater alongside mucosal biopsy showing Helicobacter pylori bacterial colonization."
+      }
+    },
+    {
+      "tx": "While proton pump inhibitors exhibit an exceptional safety profile during acute and short-term courses, prolonged multi-year administration carries **chronic PPI safety hazards**. Long-term profound achlorhydria impairs the gastric absorption of vitamin B12, non-heme iron, and calcium, predisposing elderly patients to osteoporosis, vertebral fractures, and hip fractures. Furthermore, loss of the protective gastric acid barrier permits colonization of the gastrointestinal tract by pathogens, significantly increasing the clinical incidence of Clostridioides difficile colitis, bacterial gastroenteritis, and hospital-acquired pneumonia.",
+      "say": "Chronic proton pump inhibitor therapy impairs calcium and iron absorption, predisposing to hip fractures and Clostridioides difficile.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Adverse complication",
+          "Pathophysiologic mechanism",
+          "High-risk patient cohort",
+          "Surveillance or preventive measure"
+        ],
+        "rows": [
+          [
+            "Osteoporotic hip fractures",
+            "Impaired gastric dissolution and ionization of calcium carbonate",
+            "Elderly females on high-dose therapy >1 year",
+            "Switch to calcium citrate; bone mineral densitometry"
+          ],
+          [
+            "Clostridioides difficile colitis",
+            "Loss of gastric acid bactericidal barrier allows spore survival",
+            "Hospitalized patients receiving broad-spectrum antibiotics",
+            "Immediate PPI cessation; stool toxin testing"
+          ],
+          [
+            "Hypomagnesemia",
+            "Impaired intestinal TRPM6/TRPM7 active magnesium transport",
+            "Patients on concurrent thiazide or loop diuretics",
+            "Baseline and periodic serum magnesium monitoring"
+          ],
+          [
+            "Acute interstitial nephritis",
+            "Idiosyncratic immune hypersensitivity reaction in renal interstitium",
+            "Any age group, typically within weeks to months",
+            "Urgent drug discontinuation and corticosteroid therapy"
+          ]
+        ]
+      }
+    }
+  ]
+}

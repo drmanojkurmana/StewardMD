@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-anticoagulants",
+  "subject": "pharmacology",
+  "title": "Warfarin, Vitamin K and INR Monitoring",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Warfarin** blocks vitamin K epoxide reductase (VKORC1), halting regeneration of reduced vitamin K and therefore gamma carboxylation of factors II, VII, IX and X and proteins C and S. Without carboxylation the liver secretes inert precursors. Onset waits for circulating factor II to decay (half life near 60 hours), so full anticoagulation takes four to five days despite an INR that rises early on factor VII's six hour half life, which is why heparin bridging overlaps initiation.",
+      "say": "Warfarin starves new clotting factors of vitamin K; the INR rises early but real protection waits for factor two to fall.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-warfarin.webp",
+        "alt": "Warfarin mechanism illustration showing vitamin K cycle blockade and clotting factor depletion",
+        "caption": "Warfarin blocking the vitamin K cycle, depleting carboxylated factors II, VII, IX and X. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "The **INR** (international normalised ratio) standardises the prothrombin time across reagents so a result of 2.5 means the same anticoagulation anywhere. Targets are indication specific: 2.0 to 3.0 for atrial fibrillation and venous thromboembolism, 2.5 to 3.5 for most mechanical heart valves with the mitral position and older designs at the higher band. Time in therapeutic range, not any single reading, predicts both clotting and bleeding outcomes.",
+      "say": "INR two to three for most, higher for mechanical mitral valves; time in range is the quality measure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "INR target bands",
+          "points": [
+            "2.0 to 3.0: atrial fibrillation and venous thromboembolism",
+            "2.5 to 3.5: mechanical mitral and older valves",
+            "Below range: clotting risk returns",
+            "Above 4.5: bleeding risk climbs steeply"
+          ]
+        },
+        "right": {
+          "title": "Reading quality",
+          "points": [
+            "Time in therapeutic range summarises control",
+            "Single readings mislead without trend",
+            "Point of care testing enables self management",
+            "Illness and diet changes demand earlier rechecks"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Genetics** writes the starting dose: CYP2C9 variants slow S warfarin clearance and VKORC1 variants change enzyme sensitivity, together explaining several fold dose differences between patients, with requirements from under 1 mg to over 10 mg daily. Algorithms combining genotype, age, body size, amiodarone and indication outperform fixed dosing in trials, yet clinical variables alone serve most services; either way, small increments and frequent early INR checks replace guesswork.",
+      "say": "Two genes and the drug list set the dose; titrate in small steps with frequent early INR checks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Start 5 mg daily (lower if elderly, liver disease, interacting drugs)"
+          },
+          {
+            "id": "inr",
+            "label": "INR checked from day 3 to 5 and titrated"
+          },
+          {
+            "id": "stable",
+            "label": "Stable dose found, interval stretches to 4 to 12 weeks"
+          },
+          {
+            "id": "perturb",
+            "label": "Any new drug, diet or illness restarts close surveillance"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "inr"
+          ],
+          [
+            "inr",
+            "stable"
+          ],
+          [
+            "stable",
+            "perturb"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Warfarin's interaction web is pharmacology's densest: CYP2C9 inhibitors (metronidazole, co trimoxazole, amiodarone, azoles) raise INR, enzyme inducers (rifampicin, carbamazepine, St John's wort) lower it, antibiotics also starve gut vitamin K production, and highly protein bound rivals displace it transiently. Alcohol, liver disease and thyrotoxicosis sensitise; **vitamin K** rich diets and supplements antagonise. Every medication change in a warfarin patient is an INR appointment, a rule with no exceptions worth memorising.",
+      "say": "Any new drug, antibiotic course or diet swing earns an INR check; warfarin forgives nothing silently.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "INR climbers",
+          "points": [
+            "Metronidazole, co trimoxazole, azole antifungals",
+            "Amiodarone (dose cut needed on starting)",
+            "Antibiotics reducing gut vitamin K synthesis",
+            "Alcohol excess and deteriorating liver function"
+          ]
+        },
+        "right": {
+          "title": "INR fallers",
+          "points": [
+            "Rifampicin and carbamazepine induction",
+            "St John's wort self medication",
+            "Vitamin K supplements and enteral feeds",
+            "Improved diet after illness related starvation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For supratherapeutic INR without bleeding, management is omission plus **vitamin K** judged by number and bleeding risk: hold warfarin, give oral vitamin K 1 to 2.5 mg when INR exceeds 10 or bleeding risk is high, and simply withhold for lesser elevations. Intravenous vitamin K works over 6 to 12 hours, oral over 24, so neither rescues active haemorrhage, where four factor prothrombin complex concentrate supplies the missing factors immediately alongside intravenous vitamin K for durability.",
+      "say": "High INR without bleeding: hold and consider oral vitamin K. Bleeding now: concentrate first, vitamin K for durability.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "high",
+            "label": "INR above range, no bleeding"
+          },
+          {
+            "id": "hold",
+            "label": "Hold warfarin, review causes and interacting drugs"
+          },
+          {
+            "id": "vitk",
+            "label": "Oral vitamin K if INR over 10 or bleeding risk high"
+          },
+          {
+            "id": "recheck",
+            "label": "Recheck INR in 24 to 48 hours, resume lower"
+          }
+        ],
+        "edges": [
+          [
+            "high",
+            "hold"
+          ],
+          [
+            "hold",
+            "vitk"
+          ],
+          [
+            "vitk",
+            "recheck"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Major bleeding on warfarin inverts the initiation choreography at speed: hold the drug, give four factor **prothrombin complex concentrate** dosed by INR and weight, add intravenous vitamin K 5 to 10 mg so hepatic synthesis resumes as the concentrate decays, and recheck INR within the hour. Fresh frozen plasma is the slower, volume heavy ancestor where concentrate is unavailable. Reversal is then a bridge to source control, endoscopy, surgery or embolisation as anatomy dictates.",
+      "say": "Concentrate replaces factors in minutes, vitamin K keeps them replaced; then find and fix the bleeding source.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Four factor PCC",
+          "points": [
+            "Factors II, VII, IX, X in small volume",
+            "INR correction within minutes of infusion",
+            "Dose banded by presenting INR and weight",
+            "Preferred agent for warfarin major bleeding"
+          ]
+        },
+        "right": {
+          "title": "Adjuncts and follow through",
+          "points": [
+            "Intravenous vitamin K 5 to 10 mg for durability",
+            "Recheck INR and haemoglobin after reversal",
+            "Fresh frozen plasma only where PCC unavailable",
+            "Source control: endoscopy, surgery or embolisation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Because proteins C and S fall faster than factor II at initiation, **warfarin** briefly creates a prothrombotic imbalance before it anticoagulates, the mechanism behind warfarin skin necrosis in the next lesson and behind bridging heparin for acute thrombosis. Loading doses do not shorten the wait for factor II decay and only deepen the protein C trough, so modern practice starts modestly and bridges deliberately rather than front loading heroically.",
+      "say": "Protein C falls first, so warfarin can clot before it protects; bridge acute thrombosis and skip loading heroics.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Warfarin started for acute thrombosis"
+          },
+          {
+            "id": "pc",
+            "label": "Protein C (half life hours) falls before factor II (days)"
+          },
+          {
+            "id": "gap",
+            "label": "Transient prothrombotic window opens"
+          },
+          {
+            "id": "bridge",
+            "label": "Therapeutic heparin bridges until INR therapeutic two days"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "pc"
+          ],
+          [
+            "pc",
+            "gap"
+          ],
+          [
+            "gap",
+            "bridge"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Warfarin crosses the placenta and is **teratogenic**, classically nasal hypoplasia and stippled epiphyses with first trimester exposure and fetal intracranial bleeding later, so mechanical valve pregnancies become specialist shared care balancing maternal valve thrombosis against fetal harm with heparins and dose adjusted warfarin in defined windows. Outside pregnancy its remaining fortresses are mechanical valves and antiphospholipid syndrome, where direct oral anticoagulants proved inferior or harmful in trials.",
+      "say": "Valves and antiphospholipid syndrome keep warfarin employed; pregnancy makes every week a specialist decision.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Warfarin strongholds",
+          "points": [
+            "Mechanical heart valves, all positions",
+            "Moderate to severe rheumatic mitral stenosis with AF",
+            "Triple positive antiphospholipid syndrome",
+            "Severe renal failure where DOACs are untested"
+          ]
+        },
+        "right": {
+          "title": "Pregnancy hazards",
+          "points": [
+            "Embryopathy: nasal hypoplasia, stippled epiphyses",
+            "Fetal intracranial haemorrhage in later trimesters",
+            "Heparins substitute in defined windows",
+            "Mechanical valve pregnancy: specialist shared care"
+          ]
+        }
+      }
+    }
+  ]
+}

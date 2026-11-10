@@ -1,0 +1,226 @@
+{
+ "key": "ped-hepatology-acute-viral-hepatitis",
+ "v": 1,
+ "module": "ped-hepatology",
+ "subject": "paediatrics",
+ "title": "Pediatric Hepatology: Viral Hepatitis, Wilson Disease, and Portal Hypertension",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Infection with hepatotropic viruses produces diffuse hepatocellular inflammation and parenchymal injury. In pediatric populations across developing nations, **hepatitis A virus infection** represents the most common etiology of acute jaundice, transmitted primarily through the feco-oral route via contaminated water or food. Young children under five years often experience asymptomatic anicteric infection, whereas older children develop fatigue, anorexia, nausea, tender hepatomegaly, and dark urine.",
+   "say": "Hepatitis A is the leading cause of acute viral hepatitis in children, transmitted through contaminated water. Most infections in under-fives are mild and anicteric.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/viral-hepatitis-fig1.webp",
+    "alt": "Microscopic view of acute viral hepatitis demonstrating ballooning degeneration, apoptotic Councilman bodies, and lobular inflammation.",
+    "caption": "Histopathological features of acute viral hepatitis showing ballooning hepatocytes, Councilman bodies, and mononuclear infiltrate. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Rapid loss of hepatocellular function in previously healthy children precipitates life-threatening systemic collapse. Establishing the diagnosis of **pediatric acute liver failure** requires demonstrating coagulopathy unresponsive to parenteral vitamin K, defined as an international normalized ratio (INR) exceeding 1.5 in the presence of hepatic encephalopathy, or an INR exceeding 2.0 irrespective of encephalopathy, occurring within eight weeks of initial symptom onset.",
+   "say": "Pediatric acute liver failure is defined by an INR over 2.0 without encephalopathy, or over 1.5 with encephalopathy. It requires immediate ICU admission and transplant evaluation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Etiological Category",
+     "Key Pediatric Causes",
+     "Diagnostic Clues / Testing",
+     "Specific Antidote / Action"
+    ],
+    "rows": [
+     [
+      "Viral hepatotropic",
+      "Hepatitis A, E, B; HSV, enteroviruses",
+      "Viral serologies, PCR in neonates",
+      "Acyclovir for HSV; supportive"
+     ],
+     [
+      "Toxin / Drug-induced",
+      "Paracetamol, valproate, anti-tubercular",
+      "Serum paracetamol levels, history",
+      "N-acetylcysteine intravenously"
+     ],
+     [
+      "Metabolic disorders",
+      "Wilson disease, galactosaemia, tyrosinaemia",
+      "Ceruloplasmin, succinylacetone, reducing substances",
+      "Chelation, specialized dietary formulas"
+     ],
+     [
+      "Autoimmune hepatitis",
+      "Type 1 (ANA, ASMA) & Type 2 (anti-LKM1)",
+      "Hypergammaglobulinaemia, autoantibodies",
+      "High-dose intravenous methylprednisolone"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Autosomal recessive mutations in the ATP7B gene on chromosome 13 impair hepatic copper transport and biliary excretion. Unbound copper accumulates progressively, driving severe oxidative parenchymal destruction in **pediatric Wilson disease**, presenting in children older than five years with acute or chronic liver disease, hemolytic anemia with negative Coombs test, or neuropsychiatric decline. Serum ceruloplasmin is characteristically depressed below twenty milligrams per decilitre.",
+   "say": "Wilson disease is an autosomal recessive copper overload disorder caused by ATP7B mutations. Children over five present with chronic liver disease, tremors, and Coombs-negative hemolysis.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/liver-failure-wilson-galactosemia-gsd-fig1.webp",
+    "alt": "Slit-lamp examination photograph showing golden-brown copper deposition in the Descemet membrane forming a Kayser-Fleischer ring.",
+    "caption": "Slit-lamp ocular view displaying the golden-brown Kayser-Fleischer ring in peripheral cornea. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Deposition of excess copper granules within the peripheral Descemet membrane of the cornea produces pathognomonic ophthalmological signs. Slit-lamp biomicroscopy identifies the golden-brown **Kayser-Fleischer ring in cornea**, present in nearly all patients with neurological manifestations and approximately eighty percent of those with hepatic Wilson disease. Diagnostic confirmation is reinforced by twenty-four-hour urinary copper excretion exceeding one hundred micrograms per day.",
+   "say": "A golden-brown Kayser-Fleischer ring in Descemet membrane confirms copper overload on slit lamp. Twenty-four-hour urinary copper excretion exceeds one hundred micrograms.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Wilson Diagnostic Panel",
+     "points": [
+      "Low serum ceruloplasmin (<20 mg/dL)",
+      "Elevated 24-hour urine copper (>100 mcg/day)",
+      "Presence of Kayser-Fleischer ring on slit lamp",
+      "Elevated hepatic copper on biopsy (>250 mcg/g dry)"
+     ]
+    },
+    "right": {
+     "title": "Copper Chelation Protocol",
+     "points": [
+      "D-penicillamine or trientine as initial chelators",
+      "Administer pyridoxine alongside penicillamine",
+      "Oral zinc acetate blocks intestinal absorption",
+      "Liver transplantation for acute fulminant failure"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Historic copper toxicity from dietary boiling practices in unlined brass vessels characterises progressive infantile fibrosis. Primarily described in rural Indian communities, **Indian childhood cirrhosis** (ICC) affects toddlers between one and three years with prominent hepatosplenomegaly, firm granular liver margins, anorexia, and rapid progression to micronodular cirrhosis. Liver biopsy demonstrates massive periportal copper deposition, Mallory-Denk hyaline bodies, and dense pericellular fibrosis.",
+   "say": "Indian childhood cirrhosis causes progressive liver failure in toddlers due to boiling animal milk in brass vessels. Biopsy shows massive copper accumulation and Mallory bodies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Indian Childhood Cirrhosis Profile",
+     "points": [
+      "Onset between 1 and 3 years of age",
+      "History of storing animal milk in brass vessels",
+      "Prominent firm hepatomegaly with leaf-like sharp edge",
+      "Rapid progression to jaundice, ascites, and liver failure"
+     ]
+    },
+    "right": {
+     "title": "Histopathological Biopsy Hallmarks",
+     "points": [
+      "Dense pericellular and intralobular fibrosis",
+      "Widespread Mallory-Denk hyaline degeneration",
+      "Extensive orcein-positive copper granules in hepatocytes",
+      "Distinguished by complete absence of fatty change"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Thrombosis and obliteration of the main extrahepatic portal venous trunk represents the most frequent cause of childhood gastrointestinal bleeding in India. Presenting in toddlers with well-preserved liver architecture, **extrahepatic portal vein obstruction** (EHPVO) follows neonatal umbilical sepsis or umbilical vein catheterization. Children present with sudden massive, painless haematemesis from ruptured oesophageal varices, accompanied by massive splenomegaly, hypersplenism, and normal synthetic hepatic function.",
+   "say": "Extrahepatic portal vein obstruction is the commonest cause of childhood variceal bleeding in India. Children present with massive hematemesis and splenomegaly, with normal liver enzymes.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical / Diagnostic Feature",
+     "Extrahepatic Portal Vein Obstruction",
+     "Cirrhotic Portal Hypertension",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Underlying liver architecture",
+      "Entirely normal; no cirrhosis",
+      "Diffuse nodular cirrhosis & fibrosis",
+      "EHPVO has excellent long-term prognosis"
+     ],
+     [
+      "Liver function tests (LFTs)",
+      "Normal bilirubin, albumin, enzymes",
+      "Abnormal; coagulopathy, hypoalbuminaemia",
+      "Synthetic function intact in EHPVO"
+     ],
+     [
+      "Physical examination",
+      "Massive splenomegaly; soft non-tender liver",
+      "Stigmata of chronic liver disease, ascites",
+      "Splenomegaly disproportionate in EHPVO"
+     ],
+     [
+      "Abdominal Doppler ultrasound",
+      "Cavernous transformation of portal vein",
+      "Coarse echotexture; reduced portal flow",
+      "Confirms portal vein cavernoma formation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Administration of salicylates during acute viral respiratory or varicella infections precipitates acute mitochondrial dysfunction. Named after Australian pathologist Douglas Reye, **pediatric Reye syndrome** involves severe hepatic and cerebral mitochondrial injury, presenting with pernicious vomiting, rapid encephalopathy, delirium, and coma. Laboratory tests show profound hyperammonaemia, prolonged prothrombin time, elevated serum transaminases, and normal or minimally elevated serum bilirubin.",
+   "say": "Reye syndrome strikes children given aspirin during viral infections like influenza or chickenpox. Severe vomiting, hyperammonemia, and cerebral edema develop without jaundice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pathophysiological Mechanisms",
+     "points": [
+      "Salicylate-induced inhibition of mitochondrial fatty acid beta-oxidation",
+      "Microvesicular hepatic steatosis without inflammation",
+      "Severe hyperammonaemia and metabolic acidosis",
+      "Raised intracranial pressure and cerebral oedema"
+     ]
+    },
+    "right": {
+     "title": "Preventive Clinical Principle",
+     "points": [
+      "Aspirin strictly contraindicated in childhood fevers",
+      "Use paracetamol or ibuprofen as safe antipyretics",
+      "Aspirin reserved only for Kawasaki and arthritis",
+      "Immediate 10% dextrose to prevent hypoglycaemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Progressive necroinflammatory liver destruction mediated by circulating autoantibodies responds promptly to immunosuppression. Classified into two clinical categories, **childhood autoimmune hepatitis** includes Type 1 characterized by positive antinuclear (ANA) and anti-smooth muscle antibodies (ASMA), and Type 2 characterized by anti-liver-kidney microsomal antibodies (anti-LKM1). Markedly elevated serum IgG and interface hepatitis on liver biopsy mandate long-term prednisolone and azathioprine therapy.",
+   "say": "Autoimmune hepatitis presents with hypergammaglobulinemia, autoantibodies, and interface hepatitis on biopsy. Combined therapy with prednisolone and azathioprine induces clinical remission.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classification Type",
+     "Primary Autoantibody Profile",
+     "Age / Gender Predilection",
+     "Clinical Course & Prognosis"
+    ],
+    "rows": [
+     [
+      "Type 1 Autoimmune Hepatitis",
+      "Antinuclear (ANA) & Anti-smooth muscle (ASMA)",
+      "Adolescent girls (75% female)",
+      "Good response to steroids; relapses common"
+     ],
+     [
+      "Type 2 Autoimmune Hepatitis",
+      "Anti-liver-kidney microsomal 1 (anti-LKM1)",
+      "Young children (infants to 14 years)",
+      "Acute presentation; high failure rate; aggressive"
+     ],
+     [
+      "Diagnostic histology",
+      "Interface hepatitis with plasma cell infiltrate",
+      "Bridging necrosis and rosette formation",
+      "Hallmark histological feature on core biopsy"
+     ],
+     [
+      "Maintenance therapy",
+      "Azathioprine (1-2 mg/kg/day) + low-dose steroid",
+      "Corticosteroid-sparing maintenance regimen",
+      "Continued for minimum 2-3 years after remission"
+     ]
+    ]
+   }
+  }
+ ]
+}

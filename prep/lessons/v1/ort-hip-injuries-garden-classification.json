@@ -1,0 +1,180 @@
+{
+ "v": 1,
+ "id": "ort-hip-injuries-garden-classification",
+ "subject": "orthopaedics",
+ "module": "ort-hip-injuries",
+ "title": "Garden Classification",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "The **Garden classification** categorizes intracapsular femoral neck fractures into four stages based on the alignment of medial compressive bone trabeculae on anteroposterior pelvic radiographs. Introduced by Robert Symon Garden in 1961, it provides an indispensable prognostic framework for predicting vascular compromise to the femoral head, nonunion rates, and the necessity for prosthetic joint replacement.",
+   "say": "Robert Garden introduced his classification in 1961 for intracapsular neck of femur fractures. It evaluates the angle of weight-bearing trabeculae on the AP hip radiograph. The four stages tell you the risk of avascular necrosis and dictate whether to fix the bone or replace the joint.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/hip-fracture-fig1.webp",
+    "alt": "Diagram illustrating proximal femur fracture patterns including intracapsular femoral neck and trochanteric fractures.",
+    "caption": "Proximal femur fracture patterns and neck classification zones. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "In **Garden Stage I**, the fracture is incomplete or impacted, with the inferior femoral neck cortex remaining intact. Trabeculae of the femoral head tilt into valgus relative to the pelvic trabeculae. In Garden Stage II, the fracture is complete across both cortices, but the trabecular orientation across the fracture line remains anatomically aligned without angulatory or rotational displacement.",
+   "say": "In stage one, the fracture is incomplete or impacted in valgus, meaning the trabeculae angle upward but stay securely wedged. In stage two, the fracture line is complete through both cortices, but the bone has not moved and the trabecular lines remain perfectly straight and aligned.",
+   "vis": {
+    "kind": "table",
+    "title": "Garden Stages I and II (Non-Displaced)",
+    "cols": [
+     "Feature",
+     "Garden Stage I",
+     "Garden Stage II"
+    ],
+    "rows": [
+     [
+      "Completeness",
+      "Incomplete or impacted subcapital",
+      "Complete two-cortex fracture"
+     ],
+     [
+      "Trabecular alignment",
+      "Valgus tilt (>160 degrees)",
+      "Normal anatomical alignment (160 degrees)"
+     ],
+     [
+      "Capsular retinacular vessels",
+      "Intact and uncompromised",
+      "Intact; minimal vascular disruption"
+     ],
+     [
+      "Avascular necrosis risk",
+      "Under 5 to 10 percent",
+      "Under 10 percent with early fixation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "In **Garden Stage III**, the fracture is complete and partially displaced. Femoral head trabeculae rotate out of alignment with the acetabular arc into a varus orientation, although continuity between posterior cortical fragments is partially preserved. The retinacular blood supply entering through the capsule is extensively stretched and torn, significantly elevating the risk of osteonecrosis.",
+   "say": "Stage three is a complete fracture with partial displacement. The femoral head tilts into varus, so its trabeculae no longer match the acetabular roof. Because the fragments are shifted, the delicate retinacular blood vessels are torn and stretched, sharply elevating avascular necrosis risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Stage III Characteristics",
+     "points": [
+      "Complete fracture with partial displacement",
+      "Femoral head trabeculae tilted in varus",
+      "Posterior retinacular hinge partially intact",
+      "Osteonecrosis risk 20 to 30 percent"
+     ]
+    },
+    "right": {
+     "title": "Stage IV Characteristics",
+     "points": [
+      "Complete fracture with full displacement",
+      "Head rotates freely; trabeculae parallel socket",
+      "Total retinacular vessel disruption",
+      "Avascular necrosis rate over 35 to 40 percent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In **Garden Stage IV**, complete displacement has occurred with total detachment of the femoral head from the distal femoral neck. Because all soft tissue tethering is severed, the femoral head rotates independently back into neutral congruity with the acetabulum, so its trabeculae appear deceptively parallel to pelvic lines. Retinacular blood vessels are obliterated, resulting in high nonunion rates.",
+   "say": "Stage four is complete displacement with total detachment. The head floats free in the socket and aligns itself with the pelvis, making its trabeculae look deceptively straight. All retinacular blood supply is shredded, leading to nonunion and avascular necrosis if you attempt simple screw pinning.",
+   "vis": {
+    "kind": "table",
+    "title": "Garden Stages Summary",
+    "cols": [
+     "Garden Stage",
+     "Displacement State",
+     "Trabecular Pattern",
+     "Clinical Classification"
+    ],
+    "rows": [
+     [
+      "Stage I",
+      "Incomplete / valgus impacted",
+      "Trabeculae tilted upward in valgus",
+      "Non-displaced fracture"
+     ],
+     [
+      "Stage II",
+      "Complete, non-displaced",
+      "Trabeculae aligned across fracture",
+      "Non-displaced fracture"
+     ],
+     [
+      "Stage III",
+      "Complete, partially displaced",
+      "Head in varus; trabeculae out of line",
+      "Displaced fracture"
+     ],
+     [
+      "Stage IV",
+      "Complete, totally displaced",
+      "Head rotates free; trabeculae parallel pelvis",
+      "Displaced fracture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The clinical management algorithm hinges on patient age and displacement. In elderly patients over sixty-five years with displaced Stage III or IV fractures, **hemiarthroplasty** or total hip arthroplasty is indicated to permit immediate mobilization and avoid failure. Conversely, in young patients, urgent anatomical closed or open reduction within six hours followed by parallel cannulated screw fixation is mandatory.",
+   "say": "For elderly patients with displaced stage three or four fractures, do not pin the bone; perform a hemiarthroplasty or total hip replacement so they can walk immediately without fear of avascular necrosis. In young patients under sixty, preserve the natural head with urgent anatomical reduction and three cannulated screws.",
+   "vis": {
+    "kind": "table",
+    "title": "Management Strategy by Demographics",
+    "cols": [
+     "Patient Age",
+     "Garden Stage",
+     "Preferred Operation",
+     "Clinical Rationale"
+    ],
+    "rows": [
+     [
+      "Elderly (>65 years)",
+      "Stage I or II",
+      "Percutaneous cannulated screws",
+      "Low morbidity, preserves native joint"
+     ],
+     [
+      "Elderly (>65 years)",
+      "Stage III or IV",
+      "Hemiarthroplasty or total hip replacement",
+      "Eliminates AVN and nonunion risk; early walking"
+     ],
+     [
+      "Young (<60 years)",
+      "Any Stage",
+      "Urgent reduction + 3 parallel cancellous screws",
+      "Joint preservation; urgent surgery saves head blood supply"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [
+  {
+   "q": "Which vascular structure is primarily disrupted in displaced Garden Stage III and IV femoral neck fractures?",
+   "options": [
+    "Retinacular branches of medial femoral circumflex artery",
+    "Nutrient artery entering the middle third femur shaft",
+    "Artery of ligamentum teres supplying the fovea",
+    "Inferior gluteal artery descending branches"
+   ],
+   "correct": 0,
+   "explain": "The lateral epiphyseal and ascending retinacular vessels arising from the medial femoral circumflex artery supply over 80 percent of the femoral head and are torn in displaced fractures."
+  },
+  {
+   "q": "What is the definitive management for an active 78-year-old patient with an acute displaced Garden Stage IV fracture?",
+   "options": [
+    "Hemiarthroplasty or total hip replacement",
+    "Closed reduction and three cannulated screws",
+    "Skeletal traction on a Thomas splint for 6 weeks",
+    "Dynamic hip screw fixation without compression"
+   ],
+   "correct": 0,
+   "explain": "In elderly patients with displaced intracapsular fractures (Garden III/IV), arthroplasty provides immediate weight-bearing and avoids the high rates of avascular necrosis and nonunion associated with internal fixation."
+  }
+ ]
+}

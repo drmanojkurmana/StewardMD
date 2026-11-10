@@ -1,0 +1,261 @@
+{
+    "v": 1,
+    "id": "rad-radiation-protection-lead-apron",
+    "subject": "radiology",
+    "module": "rad-radiation-protection",
+    "title": "Radiation Shielding and Protection in Pregnancy: AERB Regulations",
+    "minutes": 5,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Lead Apron Attenuation Physics",
+            "tx": "**Lead apron attenuation** shields clinical personnel against scattered X-ray radiation. Standard protective aprons provide 0.25 to 0.5 millimetres of lead equivalence, manufactured from lead-impregnated vinyl or rubber polymers. A 0.5-millimetre lead equivalent apron attenuates approximately 90 to 95 percent of scattered radiation generated at diagnostic tube potentials between 70 and 100 kilovolts.",
+            "say": "Lead apron attenuation shields clinical personnel against scattered X-ray radiation. Standard protective aprons provide 0.25 to 0.5 millimetres of lead equivalence, manufactured from lead-impregnated vinyl or rubber polymers. A 0.5-millimetre lead equivalent apron attenuates approximately 90 to 95 percent of scattered radiation generated at diagnostic tube potentials between 70 and 100 kilovolts.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Lead Equivalence",
+                    "Weight Burden",
+                    "Scatter Attenuation at 75 kVp",
+                    "Clinical Indication"
+                ],
+                "rows": [
+                    [
+                        "0.25 mm Lead",
+                        "2 to 3 kilograms",
+                        "Approximately 85 to 90 percent",
+                        "Low-scatter general radiography; assisting patients"
+                    ],
+                    [
+                        "0.35 mm Lead",
+                        "3 to 4 kilograms",
+                        "Approximately 92 to 95 percent",
+                        "Standard diagnostic fluoroscopy examinations"
+                    ],
+                    [
+                        "0.50 mm Lead",
+                        "4 to 6 kilograms",
+                        "Greater than 97 percent",
+                        "High-workload interventional radiology and cardiology suites"
+                    ],
+                    [
+                        "Wrap-around style",
+                        "Full circumferential",
+                        "Equal front and rear shielding",
+                        "Moving around patient table during procedures"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Thyroid and Eye Protective Barriers",
+            "tx": "**Thyroid shield protection** incorporates a separate collar providing 0.5 millimetres of lead equivalence fastened securely around the anterior neck. Because the thyroid gland has a high tissue weighting factor of 0.04 and vulnerability to radiation-induced carcinoma, collar shielding reduces scatter dose by over 80 percent. Lead acrylic eyewear with 0.75-millimetre equivalence protects against cataractogenesis.",
+            "say": "Thyroid shield protection incorporates a separate collar providing 0.5 millimetres of lead equivalence fastened securely around the anterior neck. Because the thyroid gland has a high tissue weighting factor of 0.04 and vulnerability to radiation-induced carcinoma, collar shielding reduces scatter dose by over 80 percent. Lead acrylic eyewear with 0.75-millimetre equivalence protects against cataractogenesis.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Thyroid Shield Collar (0.5 mm Pb)",
+                    "points": [
+                        "Fastens around anterior and lateral neck",
+                        "Reduces thyroid scatter dose by over 80 percent",
+                        "Protects highly radiosensitive thyroid follicular tissue"
+                    ]
+                },
+                "right": {
+                    "title": "Lead Acrylic Eyewear (0.75 mm Pb)",
+                    "points": [
+                        "Fitted with protective lateral side shields",
+                        "Prevents ionizing damage to lens anterior epithelium",
+                        "Essential for interventionalists facing 20 mSv annual limit"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Apron Handling and Structural Integrity",
+            "tx": "**Lead apron maintenance** mandates hanging garments on dedicated heavy-duty hangers or storing them flat on flat examination surfaces. Folding, creasing, or dropping lead aprons causes internal fractures and tearing of the brittle lead-rubber shielding layer. Facilities must perform annual fluoroscopic or radiographic screening to inspect aprons for occult cracks and tear defects.",
+            "say": "Lead apron maintenance mandates hanging garments on dedicated heavy-duty hangers or storing them flat on flat examination surfaces. Folding, creasing, or dropping lead aprons causes internal fractures and tearing of the brittle lead-rubber shielding layer. Facilities must perform annual fluoroscopic or radiographic screening to inspect aprons for occult cracks and tear defects.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Hang aprons vertically on dedicated curved racks"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Avoid folding or dumping to prevent internal tears"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Perform annual fluoroscopic integrity inspection"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Pre-implantation All-or-None Response",
+            "tx": "**Pre-implantation radiation response** governs the initial two weeks following conception, corresponding to menstrual weeks 3 and 4. During this blastocyst cleavage phase, ionizing radiation operates under an all-or-none biological rule: embryonic damage either proves lethal, resulting in failure of implantation or occult spontaneous resorption, or surviving totipotent cells completely repair the damage without congenital malformations.",
+            "say": "Pre-implantation radiation response governs the initial two weeks following conception, corresponding to menstrual weeks 3 and 4. During this blastocyst cleavage phase, ionizing radiation operates under an all-or-none biological rule: embryonic damage either proves lethal, resulting in failure of implantation or occult spontaneous resorption, or surviving totipotent cells completely repair the damage without congenital malformations.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Lethal Blastocyst Insult",
+                    "points": [
+                        "High-dose radiation kills critical fraction of blastomeres",
+                        "Results in embryonic failure of uterine implantation",
+                        "Manifests as occult resorption or delayed menstruation"
+                    ]
+                },
+                "right": {
+                    "title": "Complete Totipotent Recovery",
+                    "points": [
+                        "Surviving totipotent stem cells compensate for loss",
+                        "Embryo develops normally without structural defects",
+                        "No teratogenic structural abnormalities produced"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Organogenesis Teratogenic Risks",
+            "tx": "**Organogenesis teratogenic risk** spans post-conception weeks 3 through 8, corresponding to gestational weeks 5 through 10. Rapid cellular differentiation renders organ systems susceptible to structural malformations. The deterministic threshold for gross structural anomalies, including skeletal dysplasias, cleft palate, and cardiac defects, is roughly 100 to 200 milligrays, an exposure never reached during routine diagnostic imaging.",
+            "say": "Organogenesis teratogenic risk spans post-conception weeks 3 through 8, corresponding to gestational weeks 5 through 10. Rapid cellular differentiation renders organ systems susceptible to structural malformations. The deterministic threshold for gross structural anomalies, including skeletal dysplasias, cleft palate, and cardiac defects, is roughly 100 to 200 milligrays, an exposure never reached during routine diagnostic imaging.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Gestational Window",
+                    "Biological Vulnerability",
+                    "Deterministic Threshold",
+                    "Principal Outcome"
+                ],
+                "rows": [
+                    [
+                        "0 to 2 weeks post-conception",
+                        "Pre-implantation cleavage",
+                        "50 to 100 milligrays",
+                        "All-or-none: embryonic death or normal survival"
+                    ],
+                    [
+                        "3 to 8 weeks post-conception",
+                        "Major organogenesis",
+                        "100 to 200 milligrays",
+                        "Gross structural anatomical malformations and growth restriction"
+                    ],
+                    [
+                        "8 to 15 weeks post-conception",
+                        "Neuronal proliferation and migration",
+                        "100 milligrays",
+                        "Severe intellectual deficit (25 IQ points/Gy) and microcephaly"
+                    ],
+                    [
+                        "16 to 25 weeks post-conception",
+                        "Cerebral maturation",
+                        "250 milligrays",
+                        "Mild cognitive reduction; diminished vulnerability"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Neurogenesis and Intellectual Impairment",
+            "tx": "**Neurogenesis intellectual impairment** peaks during post-conception weeks 8 through 15, when neuronal stem cells proliferate and migrate to form the cerebral cortex. Radiation exposure exceeding 100 milligrays causes dose-dependent microcephaly and severe intellectual disability, with an estimated loss of 25 to 30 IQ points per gray. Medical termination of pregnancy is never justified below 100 milligrays.",
+            "say": "Neurogenesis intellectual impairment peaks during post-conception weeks 8 through 15, when neuronal stem cells proliferate and migrate to form the cerebral cortex. Radiation exposure exceeding 100 milligrays causes dose-dependent microcephaly and severe intellectual disability, with an estimated loss of 25 to 30 IQ points per gray. Medical termination of pregnancy is never justified below 100 milligrays.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "High Vulnerability Period (8-15 Weeks)",
+                    "points": [
+                        "Peak active neuronal migration to cerebral cortex",
+                        "Dose threshold approximately 100 to 200 mGy",
+                        "Produces microcephaly and cognitive deficit of 25 IQ points/Gy"
+                    ]
+                },
+                "right": {
+                    "title": "Clinical Diagnostic Reality (<50 mGy)",
+                    "points": [
+                        "Routine radiographs impart fetal dose under 1 mGy",
+                        "Abdominal CT delivers fetal dose of 10 to 25 mGy",
+                        "Never reaches threshold justifying pregnancy termination"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Law of Bergonie and Tribondeau",
+            "tx": "**Bergonie and Tribondeau law** established in 1906 states that the radiosensitivity of biological tissue is directly proportional to its mitotic rate and inversely proportional to its degree of differentiation. Consequently, erythroblasts, spermatogonia, and intestinal crypt cells are exquisitely radiosensitive. The notable exception is the mature circulating lymphocyte, which, despite non-dividing status, undergoes rapid apoptosis following radiation.",
+            "say": "Bergonie and Tribondeau law established in 1906 states that the radiosensitivity of biological tissue is directly proportional to its mitotic rate and inversely proportional to its degree of differentiation. Consequently, erythroblasts, spermatogonia, and intestinal crypt cells are exquisitely radiosensitive. The notable exception is the mature circulating lymphocyte, which, despite non-dividing status, undergoes rapid apoptosis following radiation.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Sensitivity Tier",
+                    "Cell Types",
+                    "Mitotic and Differentiation Characteristics"
+                ],
+                "rows": [
+                    [
+                        "High Radiosensitivity",
+                        "Erythroblasts, Spermatogonia, Crypt cells, Lymphocytes",
+                        "Rapid cell division, undifferentiated (lymphocyte p53 apoptosis)"
+                    ],
+                    [
+                        "Intermediate Radiosensitivity",
+                        "Endothelial cells, Fibroblasts, Osteoblasts",
+                        "Moderate division rate and intermediate differentiation"
+                    ],
+                    [
+                        "Low Radiosensitivity (Resistant)",
+                        "Mature neurons, Myocytes, Chondrocytes",
+                        "Permanent post-mitotic cells with high structural differentiation"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "AERB Regulations and Facility Shielding",
+            "tx": "**Atomic Energy Regulatory Board** statutory mandates enforce diagnostic radiation safety across India under the Atomic Energy Act. Installations must obtain site clearance, layout approval, and operating licensing through the e-LORA digital portal. Structural regulations require diagnostic X-ray room walls to provide lead shielding equivalent to at least 2 millimetres of lead or 23 centimetres of solid red brick.",
+            "say": "Atomic Energy Regulatory Board statutory mandates enforce diagnostic radiation safety across India under the Atomic Energy Act. Installations must obtain site clearance, layout approval, and operating licensing through the e-LORA digital portal. Structural regulations require diagnostic X-ray room walls to provide lead shielding equivalent to at least 2 millimetres of lead or 23 centimetres of solid red brick.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Regulatory Requirement",
+                    "AERB Standard",
+                    "Practical Enforcement"
+                ],
+                "rows": [
+                    [
+                        "Licensing Portal",
+                        "e-LORA (Electronic Licensing)",
+                        "Mandatory online registration of equipment and personnel"
+                    ],
+                    [
+                        "Primary Wall Shielding",
+                        "2 mm lead or 23 cm solid brick",
+                        "Blocks direct and primary scatter rays into corridors"
+                    ],
+                    [
+                        "Control Console Barrier",
+                        "Lead glass viewing window (minimum 2 mm Pb)",
+                        "Enables visual patient monitoring without scatter exposure"
+                    ],
+                    [
+                        "Periodic Quality Assurance",
+                        "Every 2 years by certified physicist",
+                        "Mandatory verification of kVp, timer, and filtration"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

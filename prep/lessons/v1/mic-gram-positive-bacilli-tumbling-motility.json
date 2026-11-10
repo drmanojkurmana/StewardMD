@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "mic-gram-positive-bacilli",
+  "subject": "microbiology",
+  "title": "Tumbling Motility and Listeria Identification Systems",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Tumbling motility** is Listeria's end over end somersaulting in broth at 20 to 25 degrees, peritrichous flagella expressed at room temperature and silenced at 37 (virulence programme switch), read in hanging drop or wet mount, with umbrella shaped growth below the surface of semisolid agar at room temperature confirming in parallel.",
+      "say": "Tumbles at room temperature, still at body temperature: Listeria motility is temperature theatre.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Motility facts",
+          "points": [
+            "Peritrichous flagella at 20 to 25 C",
+            "Flagellar genes repressed at 37 C",
+            "End over end tumbling description",
+            "Wet mount from young broth"
+          ]
+        },
+        "right": {
+          "title": "Semisolid read",
+          "points": [
+            "Umbrella layer 3 to 5 mm below surface",
+            "Incubate at room temperature days",
+            "37 degree tubes grow surface only",
+            "Motility indole citrate media adaptations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Temperature regulation** in Listeria links bench to virulence: PrfA regulon (internalins, listeriolysin, ActA) activates at 37 degrees while flagella turn off, an environmental to host programme switch RNA thermosensors mediate. The refrigerator organism becomes intracellular invader by thermometer. The same thermometer logic explains why motility tests incubated only at body temperature can miss the organism completely.",
+      "say": "Cold grows flagella, warmth grows invasion genes; temperature is Listeria's career switch.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Environmental mode",
+          "points": [
+            "Flagella and motility on",
+            "Biofilm in factories",
+            "Stress and cold tolerance",
+            "Soil and decaying vegetation life"
+          ]
+        },
+        "right": {
+          "title": "Host mode",
+          "points": [
+            "PrfA virulence regulon on",
+            "Invasion and phagosomal escape",
+            "Actin based spread cell to cell",
+            "Flagella off avoids TLR5 alarm"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cold enrichment** (specimens held at 4 degrees with weekly subculture for weeks) was Listeria isolation's historic trick, psychrotroph outgrowing rivals in fridges, now selective chromogenic agars (ALOA showing phospholipase halos) and PCR shorten it. The principle remains examinable: exploit the trait rivals lack.",
+      "say": "Hold it cold and let rivals die: enrichment by refrigerator, Listeria's signature trick.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Historic method",
+          "points": [
+            "4 degree storage of specimens",
+            "Weekly subculture up to months",
+            "Placental and brain specimens classic",
+            "Slow but specific in pre selective era"
+          ]
+        },
+        "right": {
+          "title": "Modern media",
+          "points": [
+            "Oxford and PALCAM aesculin black",
+            "ALOA chromogenic with pathogenicity halo",
+            "Enrichment broths (Fraser) two stage",
+            "Food industry ISO methods standardised"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Intracellular life cycle** in sequence: internalin A binds E cadherin (intestine, placenta), internalin B Met receptor (liver), phagosome escaped by listeriolysin O and phospholipases, cytosolic doubling, ActA polar actin comet propulsion into neighbour cell membrane, double membrane vacuole escaped again, antibody bypassed throughout.",
+      "say": "Invade, escape, ride actin, repeat: Listeria never needs to face antibody between cells.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "invade",
+            "label": "Internalins enter epithelial cell"
+          },
+          {
+            "id": "escape",
+            "label": "Listeriolysin bursts phagosome"
+          },
+          {
+            "id": "actin",
+            "label": "ActA comet pushes into neighbour"
+          },
+          {
+            "id": "spread",
+            "label": "Double membrane escaped, cycle repeats"
+          }
+        ],
+        "edges": [
+          [
+            "invade",
+            "escape"
+          ],
+          [
+            "escape",
+            "actin"
+          ],
+          [
+            "actin",
+            "spread"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Pregnancy listeriosis** mechanics (placental trophoblast invasion, granulomatous microabscesses, fetal septicaemia granulomatosis infantiseptica, late neonatal meningitis from birth canal) dictate maternal blood cultures in febrile third trimester flu, ampicillin urgently, placenta to microbiology and histology always. Blood cultures drawn during that apparently mild maternal illness may be the only warning before delivery turns catastrophic.",
+      "say": "Febrile flu in late pregnancy gets blood cultures and ampicillin thinking, placenta to the laboratory.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Maternal fetal",
+          "points": [
+            "Mother mildly ill, fetus severely",
+            "Chorioamnionitis and preterm labour",
+            "Stillbirth and early neonatal sepsis",
+            "Placental microabscesses pathology"
+          ]
+        },
+        "right": {
+          "title": "Neonatal forms",
+          "points": [
+            "Early: granulomatosis infantiseptica disseminated",
+            "Late: meningitis after first week",
+            "Ampicillin plus gentamicin traditions empiric",
+            "Maternal food history in investigation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Listeria meningitis pattern** (subacute, gram positive rod hunted in mononuclear CSF, rhombencephalitis brainstem variant in healthy adults with cranial nerve signs) and empiric ampicillin age rules (neonates, over fifties, pregnancy, immunocompromise) are prescriptions this bacterium personally wrote into guidelines. Cerebrospinal fluid may show surprisingly few organisms, so negative Gram stains carry little reassurance in the right host.",
+      "say": "Brainstem encephalitis in a healthy adult is Listeria until proven otherwise.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CNS portraits",
+          "points": [
+            "Meningitis in elderly and suppressed",
+            "Rhombencephalitis: diplopia, ataxia, cranial palsies",
+            "CSF gram stain positive only minority",
+            "Blood cultures often positive companion"
+          ]
+        },
+        "right": {
+          "title": "Empiric rules",
+          "points": [
+            "Add ampicillin: neonate, pregnancy, over 50, immunocompromised",
+            "Cephalosporin gap taught explicitly",
+            "Dexamethasone meningitis rules vary with Listeria suspicion",
+            "MRI brainstem abscess differentials"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Outbreak genomics** for Listeria (core genome MLST clusters linking deli, ice cream, melon and cheese cases across years, persistent factory strains) changed food investigation from culture luck to sequence led, with patient food histories reinterviewed when genomes match. Food histories therefore extend over weeks rather than days, and refrigerator contents may be cultured when a genomic match points to a product.",
+      "say": "Genomes remember what patients ate months ago; clusters emerge from freezers of sequences.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Investigation tools",
+          "points": [
+            "Whole genome cluster definitions",
+            "Environmental factory isolates matched",
+            "Traceback to production dates",
+            "Recall thresholds by match and product risk"
+          ]
+        },
+        "right": {
+          "title": "Clinical echoes",
+          "points": [
+            "Ask stored food histories in cases",
+            "Culture placenta and products",
+            "Pregnancy clusters trigger alerts",
+            "Long incubation (up to 70 days) blurs recall"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Motility differentials** among gram positive rods close: Listeria tumbling, Erysipelothrix non motile, Bacillus peritrichous vigorous, Corynebacterium non motile, Lactobacillus non motile; temperature pattern separates Listeria from Bacillus where colony similarity tempts. A bench that fails to test motility at the cooler temperature loses this separation and may need molecular methods to recover the answer.",
+      "say": "Tumbling cool, Bacillus always, coryneforms never: motility sorts the rods.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Motility table",
+          "points": [
+            "Listeria: tumbling at 25, umbrella",
+            "Bacillus: motile most (anthracis exception)",
+            "Erysipelothrix and Corynebacterium: non motile",
+            "Clostridium: peritrichous (tetani swarming kin)"
+          ]
+        },
+        "right": {
+          "title": "Temperature clues",
+          "points": [
+            "Listeria flagella temperature regulated",
+            "Yersinia enterocolitica motile cool not warm parallel",
+            "Cold growth itself a Listeria flag",
+            "Bench incubators set both temperatures deliberately"
+          ]
+        }
+      }
+    }
+  ]
+}

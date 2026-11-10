@@ -1,0 +1,223 @@
+{
+  "v": 1,
+  "module": "pat-metabolic-liver-tumours",
+  "subject": "pathology",
+  "title": "Focal Nodular Hyperplasia, Hepatocellular Carcinoma, and AFP",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Focal nodular hyperplasia is a benign regenerative response to vascular anomaly, hepatocytes around a central scar with radiating septa and malformed arteries, needing no treatment once confidently imaged. Glutamine synthetase staining paints a map like geographic pattern around veins inside **focal nodular hyperplasia**, separating it from ordinary adenoma, and unlike adenoma it never bleeds or transforms, so even large lesions stay under observation alone.",
+      "say": "A central scar in a young woman's liver lesion reassures toward focal nodular hyperplasia; leave it alone.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/focal-nodular-hyperplasia-fig1.webp",
+        "alt": "Focal nodular hyperplasia imaging characteristics",
+        "caption": "Focal nodular hyperplasia imaging with central scar and spoke wheel vessels."
+      }
+    },
+    {
+      "tx": "Hepatobiliary contrast MRI separates FNH, retaining contrast in functioning hepatocytes, from adenoma and metastases, sparing biopsies whose bleeding risks exceed diagnostic need. Gadoxetate enters working hepatocytes through OATP transporters and leaves through bile, so a lesion still bright at twenty minutes owns functioning transporters; most **adenomas** lack that machinery and turn dark against the brightened liver around them.",
+      "say": "Hepatobiliary contrast lights FNH and darkens adenoma; imaging now retires many liver biopsies.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Focal nodular hyperplasia",
+          "points": [
+            "Central scar, spoke wheel arteries",
+            "Retains hepatobiliary contrast",
+            "No treatment, no follow up usually"
+          ]
+        },
+        "right": {
+          "title": "Hepatic adenoma",
+          "points": [
+            "No true central scar",
+            "Risk of bleed and transformation",
+            "Subtype and size management"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Hepatocellular carcinoma rises from cirrhotic soil of hepatitis B and C, alcohol, and metabolic disease, arterially enhancing with venous washout on imaging inside cirrhosis diagnostic without biopsy. A lesion at least 1 cm showing nonrim arterial hyperenhancement with later washout and an enhancing capsule earns the top **LI-RADS** category in a cirrhotic liver, letting treatment start on imaging alone without exposing the patient to biopsy bleeding or seeding.",
+      "say": "Arterial enhancement plus washout in a cirrhotic liver diagnoses HCC; biopsy stays sheathed.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hepatocellular-carcinoma-fig1.webp",
+        "alt": "Hepatocellular carcinoma imaging features",
+        "caption": "Hepatocellular carcinoma imaging with arterial enhancement and washout."
+      }
+    },
+    {
+      "tx": "Alpha fetoprotein supports HCC surveillance and prognosis yet misses many small tumours and rises in flares and pregnancy, so ultrasound surveillance leads and AFP assists rather than replaces imaging. Values above 400 nanograms per millilitre in a cirrhotic patient with a liver mass come close to diagnostic, yet a third of small tumours secrete nothing measurable; adding **AFP** to ultrasound lifts early detection only modestly, which keeps imaging firmly in charge.",
+      "say": "AFP assists but never replaces ultrasound surveillance; normal AFP never clears a cirrhotic liver.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tool",
+          "Role in HCC",
+          "Limit"
+        ],
+        "rows": [
+          [
+            "Six monthly ultrasound",
+            "Surveillance backbone in cirrhosis",
+            "Operator and obesity dependent"
+          ],
+          [
+            "AFP",
+            "Adjunct, prognosis, recurrence",
+            "Misses small tumours, false rises"
+          ],
+          [
+            "CT or MRI LI-RADS",
+            "Noninvasive diagnosis in cirrhosis",
+            "Needs cirrhotic context"
+          ],
+          [
+            "Biopsy",
+            "Non cirrhotic or atypical lesions",
+            "Bleeding and seeding considerations"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "HCC staging weaves tumour burden, liver function, and performance into Barcelona Clinic decisions from resection and ablation through chemoembolisation to systemic immunotherapy combinations. A solitary tumour with preserved function sits at the curative end where resection or ablation competes, multifocal disease inside the liver moves toward chemoembolisation, and vascular invasion or spread opens systemic therapy; **BCLC** staging reassigns patients as liver function drifts between visits.",
+      "say": "Tumour, liver, patient: BCLC stages all three before any HCC therapy is chosen.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "HCC diagnosed by imaging criteria"
+          },
+          {
+            "id": "b",
+            "label": "Liver function and performance graded"
+          },
+          {
+            "id": "c",
+            "label": "BCLC stage assigns therapy family"
+          },
+          {
+            "id": "d",
+            "label": "Transplant criteria assessed in parallel"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Hepatitis B vaccination, antiviral suppression, hepatitis C cure, alcohol and metabolic control prevent HCC upstream while surveillance catches it curable downstream, a two front war. Taiwan's universal infant vaccination programme cut childhood liver cancer dramatically within a generation, the cleanest proof that prevention outperforms rescue; even after hepatitis C cure, established cirrhosis keeps its **hepatocellular carcinoma** surveillance because scarred liver retains malignant momentum.",
+      "say": "Vaccinate, suppress, cure, and surveil: HCC is prevented years before it is treated.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prevent upstream",
+          "points": [
+            "HBV vaccination and antivirals",
+            "HCV direct acting cure",
+            "Alcohol and metabolic control"
+          ]
+        },
+        "right": {
+          "title": "Catch downstream",
+          "points": [
+            "Six monthly cirrhosis surveillance",
+            "Early ablation or resection",
+            "Transplant within criteria"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Fibrolamellar carcinoma strikes young non cirrhotic livers with large scarred masses and normal AFP, DNAJB1-PRKACA fusion defining it, surgery offering its best hope. Lamellar collagen bands wrap large eosinophilic tumour cells under the microscope, lymph node spread runs commoner than in ordinary liver cancer, and complete resection with nodal clearance gives **fibrolamellar carcinoma** patients their one realistic route to long survival.",
+      "say": "A scarred liver mass in a teenager without cirrhosis suggests fibrolamellar carcinoma; AFP stays silent.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Conventional HCC",
+          "Fibrolamellar"
+        ],
+        "rows": [
+          [
+            "Liver soil",
+            "Cirrhosis usual",
+            "Normal liver"
+          ],
+          [
+            "Age accent",
+            "Older, risk factor laden",
+            "Adolescents and young adults"
+          ],
+          [
+            "AFP",
+            "Often raised",
+            "Usually normal"
+          ],
+          [
+            "Defining test",
+            "Imaging in cirrhosis",
+            "DNAJB1-PRKACA fusion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Liver lesion in non cirrhotic liver widens differential to metastases, adenoma, FNH, haemangioma, and abscess, metastasis commonest malignancy overall, imaging tempo and primary hunt guiding biopsy. A cavernous **haemangioma** fills in centripetally from its rim on delayed phases and needs no treatment, whereas multiple rim enhancing lesions in a patient losing weight should launch a search for a gastrointestinal or pancreatic primary before any liver biopsy.",
+      "say": "Cirrhotic or clean liver changes every lesion's odds; metastases outnumber primaries in clean livers.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Focal liver lesion detected"
+          },
+          {
+            "id": "b",
+            "label": "Background liver and history assessed"
+          },
+          {
+            "id": "c",
+            "label": "Contrast imaging characterises pattern"
+          },
+          {
+            "id": "d",
+            "label": "Biopsy only when imaging leaves doubt"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

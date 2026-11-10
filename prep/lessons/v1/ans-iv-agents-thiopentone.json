@@ -1,0 +1,266 @@
+{
+    "v": 1,
+    "id": "ans-iv-agents-thiopentone",
+    "subject": "anaesthesia",
+    "module": "ans-iv-agents",
+    "title": "Intravenous Induction: Thiopentone Barbiturate, Intra-Arterial Injury, and Porphyria",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Thiopentone Pharmacodynamics",
+            "tx": "**Thiopentone sodium pharmacodynamics** center on positive allosteric modulation and direct activation of gamma-aminobutyric acid type A (GABA-A) receptors. Thiopentone prolongs the open duration of neuronal chloride channels, producing hyperpolarization of postsynaptic membranes in the reticular activating system, resulting in rapid loss of consciousness within a single arm-brain circulation time (10 to 15 seconds) following an intravenous dose of 3 to 5 mg/kg.",
+            "say": "Thiopentone sodium pharmacodynamics center on positive allosteric modulation and direct activation of gamma-aminobutyric acid type A (GABA-A) receptors. Thiopentone prolongs the open duration of neuronal chloride channels, producing hyperpolarization of postsynaptic membranes in the reticular activating system, resulting in rapid loss of consciousness within a single arm-brain circulation time (10 to 15 seconds) following an intravenous dose of 3 to 5 mg/kg.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/kb/media/general-anaesthesia-inhaled-iv-mh-fig1.webp",
+                "alt": "GABA-A receptor chloride channel modulation by intravenous barbiturate induction agents",
+                "caption": "GABA-A receptor chloride channel modulation by intravenous barbiturate induction agents"
+            }
+        },
+        {
+            "title": "Termination by Redistribution",
+            "tx": "**Redistribution kinetics of thiopentone** account for rapid awakening within 5 to 10 minutes following a single intravenous bolus, despite a long terminal elimination half-life of 11 to 12 hours. Thiopentone rapidly diffuses from the vessel-rich central group (brain, heart, kidneys) into muscle and cutaneous tissues, dropping central plasma concentrations below the threshold necessary to maintain unconsciousness.",
+            "say": "Redistribution kinetics of thiopentone account for rapid awakening within 5 to 10 minutes following a single intravenous bolus, despite a long terminal elimination half-life of 11 to 12 hours. Thiopentone rapidly diffuses from the vessel-rich central group (brain, heart, kidneys) into muscle and cutaneous tissues, dropping central plasma concentrations below the threshold necessary to maintain unconsciousness.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "IV bolus injection of thiopentone 4 mg/kg"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Rapid peak concentration in vessel-rich group (brain)"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Redistribution into muscle and fat compartments"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Awakening within 5 to 10 minutes post-induction"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Intra-Arterial Thiopentone Injection",
+            "tx": "**Accidental intra-arterial thiopentone injection** represents a catastrophic limb-threatening surgical emergency. Thiopentone is formulated as an intensely alkaline solution with a pH of 10.5 to prevent precipitation. When injected into an artery, physiological blood pH (7.4) neutralizes the alkali, causing insoluble thiopentone microcrystals to precipitate instantly, occluding distal arterioles and inducing intense vasospasm, endothelial thrombosis, and ischemic tissue necrosis.",
+            "say": "Accidental intra-arterial thiopentone injection represents a catastrophic limb-threatening surgical emergency. Thiopentone is formulated as an intensely alkaline solution with a pH of 10.5 to prevent precipitation. When injected into an artery, physiological blood pH (7.4) neutralizes the alkali, causing insoluble thiopentone microcrystals to precipitate instantly, occluding distal arterioles and inducing intense vasospasm, endothelial thrombosis, and ischemic tissue necrosis.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Immediate Pathological Mechanism",
+                    "points": [
+                        "Alkaline solution (pH 10.5) mixes with acidic arterial blood (pH 7.4)",
+                        "Immediate precipitation of solid lipophilic barbiturate crystals",
+                        "Mechanical obstruction of downstream microvascular beds"
+                    ]
+                },
+                "right": {
+                    "title": "Downstream Tissue Consequences",
+                    "points": [
+                        "Excruciating retrograde burning pain radiating down limb",
+                        "Severe arterial vasospasm mediated by noradrenaline release",
+                        "Complete thrombosis, distal cyanosis, and dry gangrene of fingers"
+                    ]
+                }
+            }
+        },
+        {
+            "tx": "These fingers have turned mottled and dusky within minutes of an injection that went into the wrong vessel. Intra arterial **thiopentone** crystallises at blood pH, shredding endothelium and locking distal arterioles in spasm, so the hand blanches then cyanoses downstream. Immediate management stays inside the limb: leave the needle, flush gently, give vasodilators and heparin, and block the sympathetic supply to coax vessels open. Recognising the pattern instantly, severe pain with a blanching hand on injection, is what separates a salvageable limb from an amputation discussion.",
+            "say": "Mottled cyanosed fingers after intra arterial thiopentone show crystal occlusion and vasospasm threatening the hand.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m487-ans-iv-agents-thiopentone.webp",
+                "alt": "Clinical photograph of hand showing acute ischemic digital mottling and cyanosis following accidental intra-arterial thiopentone",
+                "caption": "Clinical photograph of hand showing acute ischemic digital mottling and cyanosis following accidental intra-arterial thiopentone. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "Management of Intra-Arterial Injection",
+            "tx": "**Emergency management of intra-arterial thiopentone** requires leaving the arterial needle or cannula in place to provide instant direct vascular access. Clinicians must immediately flush the cannula with heparinized saline, inject 5 to 10 milliliters of 1 percent preservative-free lignocaine (to relieve arterial vasospasm and dilute crystals), administer vasodilator papaverine or phentolamine, and perform an emergency stellate ganglion or brachial plexus sympathetic block.",
+            "say": "Emergency management of intra-arterial thiopentone requires leaving the arterial needle or cannula in place to provide instant direct vascular access. Clinicians must immediately flush the cannula with heparinized saline, inject 5 to 10 milliliters of 1 percent preservative-free lignocaine (to relieve arterial vasospasm and dilute crystals), administer vasodilator papaverine or phentolamine, and perform an emergency stellate ganglion or brachial plexus sympathetic block.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Intervention Category",
+                    "Specific Therapeutic Measure",
+                    "Pharmacological Purpose",
+                    "Clinical Precaution"
+                ],
+                "rows": [
+                    [
+                        "Cannula Retention",
+                        "Leave arterial needle in place",
+                        "Direct conduit for intra-arterial rescue drugs",
+                        "Never remove cannula until therapy completes"
+                    ],
+                    [
+                        "Local Vasodilation",
+                        "Intra-arterial 1% lignocaine (40-50 mg)",
+                        "Relieves arterial vasospasm and eases pain",
+                        "Use preservative-free lignocaine exclusively"
+                    ],
+                    [
+                        "Smooth Muscle Relaxation",
+                        "Intra-arterial papaverine (40 mg)",
+                        "Direct phosphodiesterase inhibition and vasodilation",
+                        "Can substitute phentolamine (5 mg)"
+                    ],
+                    [
+                        "Sympathetic Blockade",
+                        "Stellate ganglion or brachial block",
+                        "Abolishes sympathetic vasoconstrictor tone",
+                        "Improves distal collateral capillary perfusion"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Absolute Contraindication in Porphyria",
+            "tx": "**Absolute contraindication of barbiturates in porphyria** applies strictly to patients with acute intermittent porphyria (AIP), variegate porphyria, or hereditary coproporphyria. Thiopentone induces hepatic delta-aminolevulinic acid synthase (ALAS-1), the initial rate-limiting enzyme in heme biosynthesis. In patients with partial porphobilinogen deaminase deficiency, this induction triggers massive accumulation of toxic porphyrin precursors, precipitating life-threatening paralytic neurovisceral attacks.",
+            "say": "Absolute contraindication of barbiturates in porphyria applies strictly to patients with acute intermittent porphyria (AIP), variegate porphyria, or hereditary coproporphyria. Thiopentone induces hepatic delta-aminolevulinic acid synthase (ALAS-1), the initial rate-limiting enzyme in heme biosynthesis. In patients with partial porphobilinogen deaminase deficiency, this induction triggers massive accumulation of toxic porphyrin precursors, precipitating life-threatening paralytic neurovisceral attacks.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Normal Heme Biosynthesis",
+                    "points": [
+                        "ALAS-1 produces delta-aminolevulinic acid under negative feedback",
+                        "Unimpeded enzymatic conversion into mature heme",
+                        "Intravenous barbiturate safely metabolised without toxicity"
+                    ]
+                },
+                "right": {
+                    "title": "Acute Porphyric Attack Induction",
+                    "points": [
+                        "Massive uninhibited hepatic ALAS-1 induction by thiopentone",
+                        "Downstream enzymatic block traps neurotoxic ALA and PBG",
+                        "Severe abdominal pain, quadriparesis, and respiratory arrest"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Neurosurgical Profile and Brain Protection",
+            "tx": "**Cerebral hemodynamic suppression by thiopentone** produces coupled reductions in cerebral metabolic rate of oxygen consumption (CMRO2) and cerebral blood flow (CBF) by up to 50 percent, creating electroencephalographic burst suppression. This makes thiopentone an exceptional neuroprotective agent for refractory intracranial hypertension, status epilepticus, and temporary focal cerebral ischemia during neurovascular clipping.",
+            "say": "Cerebral hemodynamic suppression by thiopentone produces coupled reductions in cerebral metabolic rate of oxygen consumption (CMRO2) and cerebral blood flow (CBF) by up to 50 percent, creating electroencephalographic burst suppression. This makes thiopentone an exceptional neuroprotective agent for refractory intracranial hypertension, status epilepticus, and temporary focal cerebral ischemia during neurovascular clipping.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Cerebral Parameter",
+                    "Barbiturate Effect",
+                    "Underlying Mechanism",
+                    "Neurosurgical Advantage"
+                ],
+                "rows": [
+                    [
+                        "Cerebral Metabolic Rate (CMRO2)",
+                        "Decreases up to 50 percent",
+                        "Suppresses cortical synaptic neuronal firing",
+                        "Protects ischemic brain tissue from hypoxia"
+                    ],
+                    [
+                        "Cerebral Blood Flow (CBF)",
+                        "Decreases in parallel with CMRO2",
+                        "Coupled cerebral vasoconstriction",
+                        "Decreases intracranial blood volume and pressure"
+                    ],
+                    [
+                        "Intracranial Pressure (ICP)",
+                        "Marked reduction",
+                        "Decreased cerebral blood volume and edema",
+                        "First-line medical therapy for refractory intracranial hypertension"
+                    ],
+                    [
+                        "Cerebral Perfusion Pressure",
+                        "Maintained if MAP supported",
+                        "CPP equals MAP minus ICP",
+                        "Must co-administer vasopressors to preserve MAP"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Cardiorespiratory Side Effects",
+            "tx": "**Cardiorespiratory depression of thiopentone** produces a dose-dependent fall in systemic blood pressure resulting from peripheral venodilation (pooling blood in compliant capacitance beds and dropping venous return) and modest direct myocardial depression. Respiratory drive is blunted, causing central apnea, while upper airway protective reflexes remain hyperreactive, meaning direct laryngoscopy under light thiopentone anaesthesia precipitates severe reflex laryngospasm.",
+            "say": "Cardiorespiratory depression of thiopentone produces a dose-dependent fall in systemic blood pressure resulting from peripheral venodilation (pooling blood in compliant capacitance beds and dropping venous return) and modest direct myocardial depression. Respiratory drive is blunted, causing central apnea, while upper airway protective reflexes remain hyperreactive, meaning direct laryngoscopy under light thiopentone anaesthesia precipitates severe reflex laryngospasm.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Upper Airway Reflex Hyperreactivity",
+                    "points": [
+                        "Laryngeal reflexes remain remarkably intact under light barbiturate",
+                        "Pharyngeal suctioning or intubation triggers severe laryngospasm",
+                        "Requires deep anaesthesia or muscle relaxation before airway instrumentation"
+                    ]
+                },
+                "right": {
+                    "title": "Cardiovascular Hemodynamics",
+                    "points": [
+                        "Venodilation drops central venous return and stroke volume",
+                        "Compensatory baroreceptor reflex tachycardia of 10 to 20 bpm",
+                        "Severe uncorrected hypotension in hypovolemic shock patients"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Preparation and Chemical Stability",
+            "tx": "**Preparation and storage of thiopentone** involves reconstitution of yellow thiopentone sodium powder mixed with 6 percent anhydrous sodium carbonate in sterile water to yield a 2.5 percent solution (25 mg/mL). The added sodium carbonate reacts with carbon dioxide to maintain an alkaline pH of 10.5, preventing precipitation of insoluble thiopentone acid; reconstituted solutions remain chemically stable at 4 degrees Celsius for up to 24 to 48 hours.",
+            "say": "Preparation and storage of thiopentone involves reconstitution of yellow thiopentone sodium powder mixed with 6 percent anhydrous sodium carbonate in sterile water to yield a 2.5 percent solution (25 mg/mL). The added sodium carbonate reacts with carbon dioxide to maintain an alkaline pH of 10.5, preventing precipitation of insoluble thiopentone acid; reconstituted solutions remain chemically stable at 4 degrees Celsius for up to 24 to 48 hours.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Reconstitute thiopentone powder with sterile water"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Sodium carbonate stabilizes solution at pH 10.5"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Inspect clear straw-yellow 2.5% solution"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Discard solution after 24 hours to prevent bacterial contamination"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

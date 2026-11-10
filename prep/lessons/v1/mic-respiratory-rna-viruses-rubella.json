@@ -1,0 +1,125 @@
+{
+  "v": 1,
+  "module": "mic-respiratory-rna-viruses",
+  "subject": "microbiology",
+  "title": "Rubella, Congenital Rubella Syndrome and Coronavirus Diagnosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Rubella** is a mild febrile exanthem caused by a togavirus-like RNA virus spread by respiratory droplets, with postauricular and suboccipital lymphadenopathy and a fine pink rash spreading from face downward. Adults, especially women, may have transient arthritis. The illness matters chiefly because infection in early pregnancy can damage the fetus.",
+      "say": "Rubella is trivial in children and teratogenic in early pregnancy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acquired rubella",
+          "points": [
+            "Low fever and coryza mild",
+            "Postauricular nodes",
+            "Rash starts on face, lasts about three days",
+            "Arthralgia in adult women"
+          ]
+        },
+        "right": {
+          "title": "Lookalikes",
+          "points": [
+            "Measles: cough, coryza, conjunctivitis and Koplik spots",
+            "Parvovirus B19 slapped cheek",
+            "Scarlet fever sandpaper rash",
+            "Drug eruption history"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Congenital rubella syndrome** follows maternal infection especially in the first trimester, causing cataracts, patent ductus arteriosus and sensorineural deafness in the classic triad, plus microcephaly, growth restriction, hepatosplenomegaly and thrombocytopenic blueberry muffin lesions. Infants can shed virus for months and infect susceptible contacts.",
+      "say": "Cataract, heart defect and deafness are the congenital rubella triad to recall instantly.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic triad",
+          "points": [
+            "Cataracts or glaucoma",
+            "Patent ductus arteriosus or pulmonary artery hypoplasia",
+            "Sensorineural hearing loss",
+            "Risk highest earliest in gestation"
+          ]
+        },
+        "right": {
+          "title": "Wider features",
+          "points": [
+            "Intrauterine growth restriction",
+            "Blueberry muffin purpura",
+            "Hepatosplenomegaly and hepatitis",
+            "Developmental delay and microcephaly"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Prevention depends on **MMR vaccination** before pregnancy and identification of non-immune women. Rubella IgG documents immunity; acute infection in pregnancy is assessed with IgM, avidity and reference testing because IgM can persist or cross-react. Live rubella vaccine is avoided during pregnancy, and pregnancy is usually deferred for a short interval after vaccination.",
+      "say": "Check rubella immunity before pregnancy, because vaccination cannot be given once pregnant.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "test",
+            "label": "Antenatal rubella IgG"
+          },
+          {
+            "id": "immune",
+            "label": "Immune: reassure"
+          },
+          {
+            "id": "susceptible",
+            "label": "Susceptible: vaccinate postpartum"
+          },
+          {
+            "id": "exposure",
+            "label": "Exposure in pregnancy: urgent serology"
+          }
+        ],
+        "edges": [
+          [
+            "test",
+            "immune"
+          ],
+          [
+            "test",
+            "susceptible"
+          ],
+          [
+            "susceptible",
+            "exposure"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**SARS-CoV-2** is a betacoronavirus whose spike protein binds ACE2. Diagnosis uses RT-PCR or other nucleic acid amplification from a respiratory specimen; antigen tests are fastest early with high viral load but less sensitive. Cycle threshold values are platform dependent and should not be converted loosely into contagiousness. Serology is not a routine acute diagnostic.",
+      "say": "For acute coronavirus infection, respiratory NAAT or antigen testing answers; serology dates the past.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "RT-PCR",
+          "points": [
+            "Most sensitive acute test",
+            "Detects RNA after infectivity may have fallen",
+            "Specimen quality determines yield",
+            "Variants tracked by sequencing"
+          ]
+        },
+        "right": {
+          "title": "Antigen test",
+          "points": [
+            "Best in first symptomatic days",
+            "Positive result is actionable in compatible illness",
+            "Negative may need molecular confirmation",
+            "Serial testing improves detection"
+          ]
+        }
+      }
+    }
+  ]
+}

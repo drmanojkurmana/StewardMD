@@ -1,0 +1,234 @@
+{
+  "v": 1,
+  "module": "pat-obstructive-restrictive",
+  "subject": "pathology",
+  "title": "Reid Index, Asthma Remodelling, Curschmann Spirals, and Bronchiectasis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The Reid index divides submucosal gland thickness by bronchial wall thickness between epithelium and cartilage, rising above 0.4 in chronic bronchitis as glands hypertrophy to flood airways with mucus. That gland ratio is the **Reid index of chronic bronchitis**. This point is tested repeatedly because it changes everyday bedside decisions.",
+      "say": "Reid index above point four means hypertrophied bronchial glands are manufacturing the chronic cough.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Measurement",
+          "Normal",
+          "Chronic bronchitis"
+        ],
+        "rows": [
+          [
+            "Reid index gland to wall",
+            "Under 0.4",
+            "Above 0.4, glands hypertrophied"
+          ],
+          [
+            "Goblet cells",
+            "Minor population",
+            "Hyperplasia into small airways"
+          ],
+          [
+            "Airway result",
+            "Clear mucociliary escalator",
+            "Mucus hypersecretion and plugging"
+          ],
+          [
+            "Clinical echo",
+            "No chronic cough",
+            "Productive cough definition met"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Asthma inflames airways eosinophilically with reversible bronchospasm, mucus, and hyperresponsiveness, wheezing episodically from childhood atop atopy, yet fatal attacks still kill the undertreated. Reversibility defines it physiologically: **asthma as reversible eosinophilic airway disease**. Examiners return to it because it separates careful clinicians from guesswork.",
+      "say": "Asthma wheezes reversibly on eosinophilic inflammation; undertreated fatal attacks remain its scandal.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Asthma pattern",
+          "points": [
+            "Episodic wheeze, nocturnal cough",
+            "Reversible obstruction, bronchodilator response",
+            "Eosinophils, raised IgE, atopy"
+          ]
+        },
+        "right": {
+          "title": "COPD pattern",
+          "points": [
+            "Progressive breathlessness, smoking load",
+            "Fixed obstruction incompletely reversible",
+            "Neutrophils, emphysema and bronchitis mix"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Chronic asthma remodels: basement membrane thickens, smooth muscle hypertrophies, goblet cells multiply, and vessels proliferate until obstruction incompletely reverses and inhalers lose their magic. That structural drift is **airway remodelling in chronic asthma**. Bedside recognition of this pattern saves time, blood, and unnecessary investigation.",
+      "say": "Years of uncontrolled asthma rebuild the airway wall until reversibility is lost; control inflammation early.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Eosinophilic inflammation persists untreated"
+          },
+          {
+            "id": "b",
+            "label": "Basement membrane and muscle thicken"
+          },
+          {
+            "id": "c",
+            "label": "Goblet hyperplasia floods mucus"
+          },
+          {
+            "id": "d",
+            "label": "Fixed obstruction supervenes"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Curschmann spirals are corkscrew mucus casts of small airways expectorated in asthma, moulded in bronchioles and recognised microscopically beside eosinophil breakdown products. The sputum cast is the **Curschmann spiral of asthma sputum**. Students should anchor this fact before moving to rarer causes and exceptions.",
+      "say": "Corkscrew mucus casts in sputum are Curschmann spirals, small airways signing their asthma work.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Sputum finding",
+          "Composition",
+          "Disease"
+        ],
+        "rows": [
+          [
+            "Curschmann spirals",
+            "Bronchiolar mucus casts",
+            "Asthma"
+          ],
+          [
+            "Charcot-Leyden crystals",
+            "Eosinophil protein crystals",
+            "Asthma, eosinophilic disease"
+          ],
+          [
+            "Creola bodies",
+            "Shed epithelial clusters",
+            "Asthma exacerbation"
+          ],
+          [
+            "Aspergillus plugs",
+            "Fungal hyphae in mucus",
+            "Allergic bronchopulmonary aspergillosis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Under the microscope, asthmatic sputum tells the story of eosinophils that have died inside the airway. Their granule proteins crystallise into slender bipyramidal shards, the **Charcot-Leyden crystals** scattered beside coiled mucus spirals in this field. Finding both together supports an eosinophil rich airway process rather than a purely neutrophilic infection. The spirals are moulded casts of small bronchioles, so their corkscrew shape records the calibre of the airway that produced them during an attack.",
+      "say": "Charcot-Leyden crystals and Curschmann spirals in sputum mark eosinophilic asthma inflammation under the microscope.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m111-pat-obstructive-restrictive-reid-index.webp",
+        "alt": "Asthma sputum microscopy with Curschmann spirals and Charcot-Leyden crystals",
+        "caption": "Asthma sputum microscopy with Curschmann spirals and Charcot-Leyden crystals. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Charcot-Leyden crystals crystallise from eosinophil lysophospholipase into slender needles wherever eosinophils die in numbers, sputum, tissue, or stool in parasitic disease. The eosinophil tombstone is the **Charcot-Leyden crystal**. In practice this distinction decides the next test, treatment, or referral made.",
+      "say": "Needle crystals from dead eosinophils mark eosinophilic battlefields in sputum, tissue, and stool.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Eosinophilic asthma clues",
+          "points": [
+            "Sputum eosinophils, crystals, spirals",
+            "Raised FeNO and blood eosinophils",
+            "Steroid and biologic responsiveness"
+          ]
+        },
+        "right": {
+          "title": "Neutrophilic pattern",
+          "points": [
+            "Infection and smoke driven",
+            "Sputum purulence dominates",
+            "Antibiotic and cessation emphasis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Bronchiectasis permanently dilates bronchi after necrotising infection, obstruction, cystic fibrosis, ciliary failure, or immune deficiency, pooling secretions into chronic cough, purulent sputum, haemoptysis, and recurrent infections. The vicious vortex drives **bronchiectasis, permanent bronchial dilation**. That is why this detail earns its place in every examination and ward round.",
+      "say": "Dilated bronchi pool pus, infect, inflame, and dilate further; breaking that vortex is bronchiectasis care.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bronchiectasis-fig1.webp",
+        "alt": "Chest CT showing bronchiectasis",
+        "caption": "Chest CT bronchiectasis with dilated bronchi, signet ring signs, and mucus plugging."
+      }
+    },
+    {
+      "tx": "CT signs name bronchiectasis radiologically: signet ring bronchi wider than companion arteries, tram track walls, tree in bud impaction, and lack of distal tapering graded cylindrical, varicose, or cystic morphologically. The artery dwarfing bronchus is the **signet ring sign of bronchiectasis**. Remembering it prevents the commonest errors made with this presentation entirely.",
+      "say": "A bronchus wider than its artery is the signet ring sign; cystic change marks bronchiectasis at its worst.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/bronchiectasis-exacerbation-fig1.webp",
+        "alt": "Bronchiectasis types and exacerbation",
+        "caption": "Bronchiectasis morphological types and exacerbation features."
+      }
+    },
+    {
+      "tx": "Airway clearance physiotherapy, prompt exacerbation antibiotics guided by sputum culture including Pseudomonas strategy, vaccination, and treating underlying causes form bronchiectasis management's unglamorous pillars. Daily clearance discipline is **bronchiectasis airway clearance and exacerbation planning**. The clinical payoff comes from applying it early, before complications accumulate further.",
+      "say": "Clearance every day, cultures every exacerbation, Pseudomonas planned for: bronchiectasis rewards routine.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Confirm CT pattern, hunt cause"
+          },
+          {
+            "id": "b",
+            "label": "Physiotherapy clearance taught"
+          },
+          {
+            "id": "c",
+            "label": "Sputum cultures guide exacerbation drugs"
+          },
+          {
+            "id": "d",
+            "label": "Vaccines, cause therapy, review"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

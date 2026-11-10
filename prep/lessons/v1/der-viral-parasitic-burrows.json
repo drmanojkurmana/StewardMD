@@ -1,0 +1,291 @@
+{
+ "v": 1,
+ "id": "der-viral-parasitic-burrows",
+ "subject": "dermatology",
+ "module": "der-viral-parasitic",
+ "title": "Scabies Burrows",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Sarcoptes scabiei** var. hominis is an obligate, microscopic, eyeless human parasitic mite measuring 0.3 to 0.4 millimetres in length that infests the cutaneous epidermis. Transmission occurs overwhelmingly via direct, prolonged skin-to-skin contact, as occurs between sexual partners or family members sleeping in the same bed. Female mites burrow horizontally into the stratum corneum, secreting digestive proteolytic enzymes to tunnel forward while laying two to three oval eggs and depositing scybala feces daily.",
+   "say": "Scabies is caused by the Sarcoptes scabiei mite, which tunnels into the stratum corneum after prolonged skin-to-skin contact. The female mite deposits eggs and feces in her burrow, driving intense allergic sensitization.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/scabies-fig1.webp",
+    "alt": "Clinical photograph of scabies burrows and papules in the finger web spaces.",
+    "caption": "Serpiginous thread-like burrows and erythematous papules in the interdigital web spaces. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Scabies burrow** constitutes the pathognomonic, diagnostic physical lesion of classical human scabies. Clinically, it appears as a delicate, thread-like, serpiginous or wavy, greyish-white or light brown line measuring five to fifteen millimetres in length. The burrow terminates in a tiny, pinpoint vesicle or dark speck, which represents the living adult female mite in her terminal pocket. Burrows are best visualized by rubbing a drop of liquid ink over suspected skin and wiping it with alcohol.",
+   "say": "The pathognomonic burrow is a wavy, thread-like grey track measuring up to fifteen millimetres, ending in a tiny speck representing the female mite. The burrow ink test outlines the channel clearly.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic Scabies Burrows",
+     "points": [
+      "Fine serpiginous grey tracks",
+      "Terminal tiny vesicle or mite speck",
+      "Selective affinity for web spaces and wrists",
+      "Burrow ink test stains channel dark blue"
+     ]
+    },
+    "right": {
+     "title": "Cutaneous Larva Migrans",
+     "points": [
+      "Wide erythematous snake-like track",
+      "Advances several centimetres daily",
+      "Feet, buttocks, exposed sandy areas",
+      "Animal hookworm larva (Ancylostoma)"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Circle of Hebra** outlines the classic anatomical distribution of scabietic lesions across the body. Preferred sites include the interdigital finger web spaces, anterior flexor surfaces of the wrists, ulnar borders of forearms, extensor elbows, anterior axillary folds, periumbilical skin, lower buttocks, and genitalia, including the penile shaft and scrotum in men and areolae in women. Crucially, in immunocompetent adults, the head, neck, face, and upper back are strictly spared.",
+   "say": "The Circle of Hebra maps classic scabies sites: finger webs, flexor wrists, axillary folds, and genitalia. Remember that in healthy adults, the face, scalp, and neck are characteristically spared.",
+   "vis": {
+    "kind": "table",
+    "title": "Anatomical Predilection Sites (Circle of Hebra)",
+    "cols": [
+     "Body Region",
+     "Classic Manifestation",
+     "Clinical Significance"
+    ],
+    "rows": [
+     [
+      "Interdigital finger webs",
+      "Serpiginous burrows and papules",
+      "Highest diagnostic yield for scrapings"
+     ],
+     [
+      "Volar wrists and elbows",
+      "Excoriated pruritic papules",
+      "Constant friction site with easy access"
+     ],
+     [
+      "Male genitalia (penis/scrotum)",
+      "Pruritic indurated reddish-brown nodules",
+      "Pathognomonic post-scabietic nodules"
+     ],
+     [
+      "Head and face",
+      "Strictly spared in adults",
+      "Involved only in infants and crusted cases"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nocturnal pruritus** is the cardinal presenting complaint of scabies, described by patients as intense, intractable itching that characteristically intensifies at night in a warm bed. This itching stems from a type IV delayed hypersensitivity reaction against mite proteins, saliva, eggs, and scybala fecal pellets. In primary infestations, sensitization requires three to six weeks of incubation before pruritus begins; in re-infestations, allergic pruritus erupts explosively within twenty-four to forty-eight hours.",
+   "say": "Intractable itching that worsens at night in a warm bed is the hallmark symptom. It represents an allergic hypersensitivity reaction to mite feces, taking three to six weeks to develop in primary cases.",
+   "vis": {
+    "kind": "flow",
+    "title": "Sensitization Kinetics in Primary Versus Re-infestation",
+    "nodes": [
+     {
+      "id": "s1",
+      "label": "Primary Inoculation",
+      "sub": "Mite burrows and deposits scybala feces"
+     },
+     {
+      "id": "s2",
+      "label": "Immune Incubation",
+      "sub": "3 to 6 weeks of asymptomatic sensitization"
+     },
+     {
+      "id": "s3",
+      "label": "Allergic Explosion",
+      "sub": "Intense nocturnal generalized pruritus begins"
+     },
+     {
+      "id": "s4",
+      "label": "Re-infestation",
+      "sub": "Memory T cells provoke pruritus within 24 hours"
+     }
+    ],
+    "edges": [
+     [
+      "s1",
+      "s2",
+      "Delayed reaction"
+     ],
+     [
+      "s2",
+      "s3",
+      "Sensitization complete"
+     ],
+     [
+      "s3",
+      "s4",
+      "Subsequent re-exposure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dermoscopy** provides rapid non-invasive confirmation of scabies by demonstrating the pathognomonic delta-wing jet sign. Under polarized magnification, the pigmented triangular head and anterior two pairs of legs of the female mite resemble a dark delta-wing aircraft, positioned at the leading edge of a faint, translucent, curvilinear wake corresponding to the burrow. Scraping the skin at this dark triangle under mineral oil reliably harvests the intact adult mite, translucent eggs, or golden-brown feces for light microscopy.",
+   "say": "Under dermoscopy, the mite head appears as a dark brown triangle at the end of a burrow, resembling a delta-wing jet. Scraping this triangular landmark under mineral oil provides definitive proof of the mite.",
+   "vis": {
+    "kind": "table",
+    "title": "Microscopic Findings in Scabies Skin Scrapings",
+    "cols": [
+     "Diagnostic Finding",
+     "Microscopic Appearance",
+     "Diagnostic Certainty"
+    ],
+    "rows": [
+     [
+      "Adult female mite",
+      "Oval, flattened, eight-legged organism",
+      "Absolute 100% confirmation"
+     ],
+     [
+      "Translucent eggs",
+      "Oval structures containing developing larvae",
+      "Definitive confirmation of active infestation"
+     ],
+     [
+      "Scybala pellets",
+      "Dark brown, oval, granular fecal droppings",
+      "Confirms past or present burrowing"
+     ],
+     [
+      "Delta-wing sign",
+      "Dark triangular mite head on dermoscopy",
+      "High clinical diagnostic specificity"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Crusted scabies** represents a hyper-infestation occurring in immunocompromised, elderly, or neurologically debilitated individuals who cannot mount an effective cellular hypersensitivity or scratch response. Millions of mites proliferate unchecked, transforming the skin into thick, hyperkeratotic, fissured, yellow-brown, asbestos-like crusts over the hands, feet, scalp, and trunk. Patients frequently report minimal or absent pruritus. Crusted scabies is exceptionally contagious, often triggering explosive institutional outbreaks of classical scabies in hospitals and nursing homes.",
+   "say": "Crusted or Norwegian scabies occurs in immunocompromised patients who cannot scratch, allowing millions of mites to thrive beneath thick warty crusts. Because pruritus is absent, it sparks massive hospital outbreaks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classical Scabies",
+     "points": [
+      "Low mite burden (10 to 15 mites per host)",
+      "Intense nocturnal generalized pruritus",
+      "Discrete burrows in finger web spaces",
+      "Requires close prolonged skin contact"
+     ]
+    },
+    "right": {
+     "title": "Crusted (Norwegian) Scabies",
+     "points": [
+      "Massive mite burden (millions of mites)",
+      "Minimal or absent pruritus",
+      "Thick psoriatic-like hyperkeratotic crusts",
+      "Highly contagious via casual contact or fomites"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Permethrin** five percent dermal cream represents the topical therapeutic drug of choice for classical human scabies. As a synthetic pyrethroid, it disrupts voltage-gated sodium channels in parasite nerve cell membranes, inducing delayed repolarization, paralysis, and mite death. The cream is applied thoroughly over the entire body surface from the neck downward to the soles of the feet, paying meticulous attention to finger webs, under nails, and the perianal cleft, and washed off after eight to fourteen hours.",
+   "say": "Five percent permethrin cream is the first-line treatment. Apply it from the jawline down to the soles of the feet, leaving it on overnight for eight to fourteen hours before washing off thoroughly.",
+   "vis": {
+    "kind": "flow",
+    "title": "Permethrin Eradication Protocol",
+    "nodes": [
+     {
+      "id": "p1",
+      "label": "Full Body Application",
+      "sub": "Apply from neck down to soles of feet"
+     },
+     {
+      "id": "p2",
+      "label": "8 to 14 Hour Contact",
+      "sub": "Leave cream overnight on dry, cool skin"
+     },
+     {
+      "id": "p3",
+      "label": "Day 7 Re-application",
+      "sub": "Second application kills newly hatched larvae"
+     },
+     {
+      "id": "p4",
+      "label": "Contact Treatment",
+      "sub": "Treat all household members simultaneously"
+     }
+    ],
+    "edges": [
+     [
+      "p1",
+      "p2",
+      "Thorough coverage"
+     ],
+     [
+      "p2",
+      "p3",
+      "Ovicide failure window"
+     ],
+     [
+      "p3",
+      "p4",
+      "Transmission prevention"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Oral ivermectin** administered at a dose of two hundred micrograms per kilogram is an effective systemic alternative and the cornerstone for managing institutional scabies outbreaks and crusted scabies. Because ivermectin is not reliably ovicidal, a second identical dose must be administered on day fourteen to eradicate nymphs that have newly hatched from surviving eggs. Simultaneously, all household members and close physical contacts must be treated, and bed linens and clothing washed in hot water exceeding sixty degrees Celsius.",
+   "say": "Oral ivermectin is dosed at 200 micrograms per kilogram, repeated after two weeks to kill nymphs hatched from surviving eggs. Always treat all household members at the exact same time to prevent ping-pong re-infestation.",
+   "vis": {
+    "kind": "table",
+    "title": "Therapeutic Options for Human Scabies",
+    "cols": [
+     "Treatment Agent",
+     "Dosage Regimen",
+     "Clinical Indications and Precautions"
+    ],
+    "rows": [
+     [
+      "Permethrin 5% cream",
+      "Neck to toes overnight, repeat on day 7 to 14",
+      "First-line treatment in adults and children >2 months"
+     ],
+     [
+      "Oral ivermectin",
+      "200 mcg/kg single dose, repeat at 14 days",
+      "Crusted scabies, institutional epidemics, bedridden"
+     ],
+     [
+      "Precipitated sulfur 5% to 10%",
+      "Applied nightly for three consecutive days",
+      "Safe in infants under 2 months and pregnant women"
+     ],
+     [
+      "Environmental control",
+      "Wash linens and clothes at >60 degrees C",
+      "Seal non-washable items in plastic bag for 72 hours"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Scabies: diagnostic dermoscopic sign of female mite",
+   "b": "Delta-wing jet sign with a dark triangular mite head at the end of a burrow."
+  },
+  {
+   "f": "Crusted scabies: reason for missing pruritus",
+   "b": "Impaired host cell-mediated hypersensitivity fails to mount an allergic response."
+  },
+  {
+   "f": "Oral ivermectin: reason for repeating dose at 14 days",
+   "b": "Ivermectin is not ovicidal, so a second dose kills newly hatched nymphs."
+  }
+ ],
+ "keys": [
+  "Sarcoptes scabiei burrows in the stratum corneum, creating pathognomonic serpiginous tracks",
+  "The Circle of Hebra maps predilection for web spaces and wrists, while sparing the adult face",
+  "Five percent permethrin cream applied from neck to toes or oral ivermectin provides complete eradication"
+ ]
+}

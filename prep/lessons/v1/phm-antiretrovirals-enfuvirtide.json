@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-antiretrovirals",
+  "subject": "pharmacology",
+  "title": "Enfuvirtide, Class Architecture, Lipodystrophy, PEP and PrEP",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Enfuvirtide**, a synthetic peptide mimicking gp41's heptad repeat, jams HIV's fusion machinery from outside the cell, twice daily by subcutaneous injection with near universal injection site reactions, reserving it for deep salvage where resistance has burned oral options. It proved entry inhibition clinically (maraviroc's CCR5 door beside it) and taught that delivery burden is a pharmacological property: a perfect target with an impossible route is a museum agent.",
+      "say": "Enfuvirtide blocks fusion beautifully by injection and lives in salvage because of it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Enfuvirtide profile",
+          "points": [
+            "Fusion inhibitor, extracellular action",
+            "Twice daily subcutaneous injections",
+            "Injection site reactions near universal",
+            "Deep salvage, multidrug resistant virus"
+          ]
+        },
+        "right": {
+          "title": "Entry inhibitor neighbours",
+          "points": [
+            "Maraviroc: oral CCR5 blockade, tropism tested",
+            "Ibalizumab: monoclonal CD4 attachment, IV salvage",
+            "Fostemsavir: attachment inhibitor, salvage",
+            "Capsid inhibitor lenacapavir: six monthly salvage and prevention trials"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**NRTI** architecture recap with toxicity gradient (zidovudine marrow, tenofovir kidney and bone by prodrug, abacavir HLA) under an **NNRTI** or integrase roof is the regimen grammar from the previous lessons, and switching within suppression (for toxicity, simplification, pregnancy or interactions) follows the rule that suppressed patients switch components without viral load drama when resistance history permits. Every switch is documented against genotype archives because resistance mutations sleep in reservoirs, not in plasma.",
+      "say": "Switch suppressed patients by archives, not amnesia; resistance sleeps in reservoirs.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antiretrovirals-art-pep-prep-iris-fig1.webp",
+        "alt": "Sites of antiretroviral drug action diagram across the HIV life cycle",
+        "caption": "The complete antiretroviral target map whose classes this lesson assembles into regimens."
+      }
+    },
+    {
+      "tx": "**Lipodystrophy** names the treated HIV body composition era: lipoatrophy of face and limbs (stavudine and zidovudine mitochondria), visceral and dorsocervical fat accumulation (protease era), insulin resistance and dyslipidaemia braided together, managed by switching culprits early, metabolic therapy and honest acknowledgement that faces carry adherence decisions. Modern regimens shrank the syndrome without erasing its survivors, whose monitoring remains metabolic from the previous lesson.",
+      "say": "Lipodystrophy was the visible price of early survival; switching early was its only cure.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lipoatrophy pattern",
+          "points": [
+            "Facial, limb and buttock fat loss",
+            "Thymidine NRTIs (stavudine, zidovudine)",
+            "Mitochondrial mechanism",
+            "Switching halts, rarely reverses fully"
+          ]
+        },
+        "right": {
+          "title": "Accumulation pattern",
+          "points": [
+            "Visceral, breast and dorsocervical fat gain",
+            "Protease inhibitor era association",
+            "Insulin resistance and dyslipidaemia",
+            "Modern weight gain debates continue (integrase, TAF)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**PEP** (post exposure prophylaxis) is antiretroviral emergency medicine: risk assessed (source viral load, exposure type), three drugs (tenofovir emtricitabine plus dolutegravir or raltegravir typically) within 72 hours and ideally within hours, for 28 days with baseline and follow up HIV, hepatitis and pregnancy testing and adherence support through gastrointestinal weather. Occupational and non occupational pathways share pharmacology and differ in counselling and follow up architecture.",
+      "say": "PEP is 72 hours, 28 days, three drugs; every hour earlier is pharmacology compounding.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "exposure",
+            "label": "Exposure assessed: source, type, timing"
+          },
+          {
+            "id": "start",
+            "label": "Three drug PEP started within 72 hours"
+          },
+          {
+            "id": "tests",
+            "label": "Baseline HIV, hepatitis, pregnancy tests"
+          },
+          {
+            "id": "follow",
+            "label": "28 days completed, follow up testing scheduled"
+          }
+        ],
+        "edges": [
+          [
+            "exposure",
+            "start"
+          ],
+          [
+            "start",
+            "tests"
+          ],
+          [
+            "tests",
+            "follow"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**PrEP** (pre exposure prophylaxis) inverts PEP into anticipation: daily tenofovir emtricitabine (or TAF emtricitabine by population), event driven dosing in defined groups, and long acting cabotegravir injections every two months (with lenacapavir's twice yearly prevention data reshaping the field), reducing acquisition by over 99 percent when drug is present. HIV testing before and during (resistance if breakthrough), STI screening and creatinine surveillance are its contract, and undiagnosed acute HIV at initiation is its resistance trap.",
+      "say": "PrEP works when drug is present; test before, test during, and never start into undiagnosed acute HIV.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "PrEP options",
+          "points": [
+            "Daily oral tenofovir based (TDF or TAF forms)",
+            "Event driven dosing in defined populations",
+            "Cabotegravir injections every 2 months",
+            "Efficacy over 99 percent with adherence"
+          ]
+        },
+        "right": {
+          "title": "PrEP obligations",
+          "points": [
+            "HIV test before start and periodically",
+            "Acute HIV symptoms screened at initiation",
+            "Creatinine and STI surveillance",
+            "Risk reduction counselling accompanies, never replaced"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Immune reconstitution inflammatory** syndrome (IRIS) is treatment success inflaming: restored immunity attacks subclinical opportunists (tuberculosis, cryptococcus, CMV) weeks after starting, managed by treating the opportunist, continuing antiretrovirals, and steroids for defined severe phenotypes, with timing of ART in meningitis (cryptococcal delay, tuberculosis nuance by CD4 and site) written from mortality trials rather than instinct.",
+      "say": "IRIS is immunity returning with a vengeance; treat the opportunist, keep the ART, steroid the severe.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "IRIS recognition",
+          "points": [
+            "Weeks after ART start, CD4 rising, load falling",
+            "Paradoxical worsening of known infection",
+            "Unmasking of subclinical opportunists",
+            "TB, cryptococcus and CMV lead the list"
+          ]
+        },
+        "right": {
+          "title": "Timing lessons",
+          "points": [
+            "Cryptococcal meningitis: defer ART about 4 to 6 weeks",
+            "TB meningitis: caution, steroids accompany",
+            "Other TB: early ART by CD4 strata",
+            "ART continued through IRIS in most cases"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Resistance testing and** failure management close the therapeutic arc: genotype at diagnosis (transmitted resistance) and at failure (while on drugs or within weeks), tropism before maraviroc, HLA before abacavir, archived mutations respected in switches, and adherence interrogated before regimen blame because most failure is pharmacokinetic (missed doses, interactions, absorption) wearing resistance's clothing. Salvage builds two or more fully active agents (darunavir, dolutegravir second generation, entry and capsid novelties) by expert panels.",
+      "say": "Genotype the failure, interrogate adherence first, and build salvage from fully active agents only.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fail",
+            "label": "Virological failure confirmed on repeat load"
+          },
+          {
+            "id": "adhere",
+            "label": "Adherence, interactions and absorption audited"
+          },
+          {
+            "id": "geno",
+            "label": "Genotype on therapy or within weeks"
+          },
+          {
+            "id": "salvage",
+            "label": "Two plus fully active agents constructed"
+          }
+        ],
+        "edges": [
+          [
+            "fail",
+            "adhere"
+          ],
+          [
+            "adhere",
+            "geno"
+          ],
+          [
+            "geno",
+            "salvage"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Undetectable equals untransmittable** (U equals U) is the prevention theorem this pharmacology earned: sustained viral suppression eliminates sexual transmission in prospective cohorts, converting adherence support into the most effective HIV prevention intervention alongside PrEP and PEP. Counselling states it plainly because stigma, not virology, is now the larger obstacle, and every regimen decision in three lessons ultimately serves that sentence.",
+      "say": "Suppressed virus does not transmit sexually; say it plainly, it is the point of the whole cabinet.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prevention portfolio",
+          "points": [
+            "Treatment as prevention (U equals U)",
+            "PrEP before exposure, PEP within 72 hours after",
+            "Condoms and STI treatment accompany",
+            "Vertical transmission prevention in pregnancy protocols"
+          ]
+        },
+        "right": {
+          "title": "Counselling duties",
+          "points": [
+            "State U equals U explicitly and repeatedly",
+            "Adherence framed as protection, not obedience",
+            "Partner services offered without coercion",
+            "Stigma addressed as a clinical variable"
+          ]
+        }
+      }
+    }
+  ]
+}

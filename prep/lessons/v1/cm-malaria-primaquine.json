@@ -1,0 +1,145 @@
+{
+ "v": 1,
+ "id": "cm-malaria-primaquine",
+ "subject": "community-medicine",
+ "module": "cm-malaria",
+ "title": "Radical Cure and Elimination: Primaquine, Diagnostics and NCVBDC",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The dual role of primaquine",
+   "tx": "The synthetic 8-aminoquinoline drug **primaquine therapy** holds a unique position in malaria eradication because it targets non-erythrocytic parasite stages impervious to ordinary blood schizontocides. It destroys the latent liver hypnozoites responsible for true clinical relapses in Plasmodium vivax and Plasmodium ovale, while simultaneously eradicating the mature intraerythrocytic gametocytes of Plasmodium falciparum, thereby preventing mosquito infection and interrupting community transmission.",
+   "say": "Primaquine attacks stages that standard antimalarials cannot touch. It clears dormant hypnozoites in the liver to prevent relapses, and destroys gametocytes to stop transmission.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Parasite target", "Plasmodium species", "Therapeutic goal"],
+    "rows": [
+     ["Dormant hypnozoites", "Plasmodium vivax and ovale", "Prevents delayed clinical relapses"],
+     ["Mature gametocytes", "Plasmodium falciparum", "Destroys infectivity to biting mosquitoes"],
+     ["Asexual blood schizonts", "All human species", "Weak activity, never used as monotherapy"]
+    ]
+   }
+  },
+  {
+   "title": "Radical cure protocol for Plasmodium vivax",
+   "tx": "Achieving definitive cure for Plasmodium vivax requires a structured **radical cure** that eliminates both circulating erythrocytic stages and dormant intrahepatic hypnozoites. Chloroquine is administered at twenty-five milligrams base per kilogram body weight divided over three consecutive days to suppress active blood infection, immediately followed by oral primaquine at zero point two five milligrams per kilogram daily for fourteen consecutive days under supervision.",
+   "say": "For vivax malaria, give chloroquine over three days to clear blood parasites, followed by fourteen days of daily primaquine to eradicate dormant hypnozoites in the liver.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Days 1-3: Chloroquine 25 mg base/kg"},
+     {"id": "b", "label": "Days 1-14: Primaquine 0.25 mg/kg daily"},
+     {"id": "c", "label": "Complete liver hypnozoite eradication"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Single-dose gametocytocidal therapy for falciparum",
+   "tx": "In falciparum malaria, mature crescentic gametocytes persist in peripheral blood for several weeks after asexual parasites are cleared, remaining infectious to feeding mosquitoes. To halt transmission, national guidelines prescribe a single **gametocytocidal dose** of primaquine at zero point seven five milligrams base per kilogram, administered on the second day of artemisinin combination therapy, rendering the host non-infectious within twenty-four hours.",
+   "say": "A single dose of primaquine is added on day two of falciparum treatment. This sterilises and clears mature gametocytes so mosquitoes cannot pick up the infection.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vivax anti-relapse regimen",
+     "points": ["0.25 mg/kg daily for 14 days", "Aims at hepatic hypnozoites", "Prevents true clinical relapses"]
+    },
+    "right": {
+     "title": "Falciparum transmission blocker",
+     "points": ["0.75 mg/kg as a single dose", "Aims at stage V gametocytes", "Prevents mosquito infectivity"]
+    }
+   }
+  },
+  {
+   "title": "Glucose-6-phosphate dehydrogenase deficiency risk",
+   "tx": "Because primaquine generates reactive oxidative metabolites, administration carries a dangerous **haemolytic anaemia precaution** in individuals deficient in glucose-6-phosphate dehydrogenase. Severe acute intravascular haemolysis, black urine from haemoglobinuria and acute renal injury can occur; consequently, primaquine is strictly contra-indicated in pregnant women, infants under one year of age, and patients with documented severe enzymopathy, requiring close clinical observation during therapy.",
+   "say": "Primaquine triggers oxidative breakdown of red cells in patients deficient in G6PD. It is strictly forbidden during pregnancy and in infants younger than one year.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Risk group", "Clinical danger", "Mandatory practice"],
+    "rows": [
+     ["G6PD-deficient hosts", "Massive intravascular haemolysis", "Screen or monitor urine color daily"],
+     ["Pregnant women", "Fetal haemolysis and stillbirth", "Contra-indicated; maintain chloroquine suppression"],
+     ["Infants under 1 year", "Immature antioxidant enzymes", "Withhold primaquine until age reaches 12 months"]
+    ]
+   }
+  },
+  {
+   "title": "Point-of-care rapid diagnostic tests",
+   "tx": "For immediate diagnosis where microscopy is absent, healthcare workers perform a **rapid diagnostic test** using an immunochromatographic cassette from a single drop of finger-prick blood. The test detects histidine-rich protein two specific to Plasmodium falciparum and pan-specific parasite lactate dehydrogenase or aldolase shared by vivax and other species, displaying visual chromatic control and test bands within fifteen minutes.",
+   "say": "Rapid diagnostic strips detect falciparum proteins and pan-malarial enzymes from a single finger-prick drop within fifteen minutes, enabling immediate treatment in remote villages.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Capillary blood drop and buffer added"},
+     {"id": "b", "label": "Capillary migration across antibody strip"},
+     {"id": "c", "label": "15-minute chromatic band interpretation"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  },
+  {
+   "title": "Limitations of antigen-detecting tests",
+   "tx": "Clinicians must recognize the pitfall of **HRP-2 antigen persistence**, wherein the histidine-rich protein two antigen lingers in the bloodstream for two to four weeks after successful therapeutic clearance of falciparum parasites, causing false-positive tests during recovery. Furthermore, emerging mutant strains exhibiting pfhrp2 and pfhrp3 gene deletions cause false-negative diagnostic results, underscoring the enduring role of confirmatory microscopy in problem cases.",
+   "say": "Antigens can linger in the blood for up to a month after complete cure, causing false-positive rapid tests. In addition, gene deletions can produce false negatives.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Rapid diagnostic cassette",
+     "points": ["Fast results in 15 minutes", "No electricity or staining needed", "Cannot quantify parasite density"]
+    },
+    "right": {
+     "title": "Standard blood microscopy",
+     "points": ["Quantifies parasite densities", "Confirms viability of parasites", "Requires stained smears and electricity"]
+    }
+   }
+  },
+  {
+   "title": "National Center for Vector Borne Diseases Control",
+   "tx": "The government administers vector control under the **NCVBDC framework**, an integrated national agency managing six major vector-borne diseases across India: malaria, lymphatic filariasis, kala-azar, dengue, chikungunya and Japanese encephalitis. The directorate formulates national technical guidelines, distributes free diagnostic kits and antimalarial combinations, procures long-lasting insecticidal nets, and coordinates vector management across all states.",
+   "say": "The National Center for Vector Borne Diseases Control oversees malaria, filariasis, kala-azar, dengue, chikungunya and Japanese encephalitis, providing free medicines and diagnostic kits nationwide.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Disease covered", "Primary insect vector", "Key national intervention"],
+    "rows": [
+     ["Malaria", "Anopheles culicifacies and stephensi", "Artemisinin therapy, LLINs, IRS"],
+     ["Lymphatic filariasis", "Culex quinquefasciatus", "Mass drug administration with IDA"],
+     ["Kala-azar", "Phlebotomus argentipes", "Single-dose liposomal amphotericin B"],
+     ["Dengue / Chikungunya", "Aedes aegypti and albopictus", "Source reduction and larval control"],
+     ["Japanese encephalitis", "Culex tritaeniorhynchus", "SA 14-14-2 vaccination and pig isolation"]
+    ]
+   }
+  },
+  {
+   "title": "National framework for malaria elimination",
+   "tx": "India established the **National Framework for Malaria Elimination** to systematically eliminate local transmission nationwide by 2030 and maintain zero indigenous cases thereafter. Districts are categorized into four distinct strategic tiers based on their annual parasite incidence: Category 0 prevents reintroduction, Category 1 focuses on focal interruption, Category 2 prepares for pre-elimination, and Category 3 conducts intensified vector control.",
+   "say": "The elimination framework stratifies districts from category zero to three based on their annual parasite incidence, with the goal of ending indigenous transmission across India by 2030.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Elimination tier", "Annual parasite incidence criteria", "Operational goal"],
+    "rows": [
+     ["Category 0", "Zero indigenous cases reported", "Maintain vigilance and prevent re-importation"],
+     ["Category 1", "API less than 1 case per 1,000", "Interrupt focal local transmission"],
+     ["Category 2", "API between 1 and 2 per 1,000", "Transform high-risk areas into low endemicity"],
+     ["Category 3", "API 2 or more cases per 1,000", "Intensive multi-sectoral outbreak containment"]
+    ]
+   }
+  },
+  {
+   "title": "Focal outbreak response and 1-3-7 strategy",
+   "tx": "In pre-elimination districts, epidemiological surveillance follows a rapid **case investigation protocol** modeled after the one-three-seven strategy. Every laboratory-confirmed case must be notified within one day, thoroughly investigated and classified as indigenous or imported within three days, and encircled with focal vector control, bed net verification and household fever screening within seven days to extinguish transmission chains before secondary spread occurs.",
+   "say": "The one-three-seven strategy requires notifying cases within one day, investigating them within three days, and completing focal vector control within seven days to stop outbreaks.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Day 1: Notification of positive case"},
+     {"id": "b", "label": "Day 3: Case investigation and travel history"},
+     {"id": "c", "label": "Day 7: Focal spraying and contact testing"}
+    ],
+    "edges": [["a", "b"], ["b", "c"]]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,211 @@
+{
+  "v": 1,
+  "module": "mic-ag-ab-reactions",
+  "subject": "microbiology",
+  "title": "Antigen-Antibody Reactions I: Precipitation, Agglutination, Coombs, Widal and ELISA",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Precipitation** occurs when soluble antigen and antibody form visible lattice at equivalence, read as lines in gel (double immunodiffusion Ouchterlony), arcs under electric fields (immunoelectrophoresis), rings in tubes, or turbidity measured by nephelometry; antigen or antibody excess dissolves lattice (prozone, postzone) so curves, not single points, define it.",
+      "say": "Soluble antigen plus antibody precipitates at equivalence; excess on either side hides the lattice.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Precipitation formats",
+          "points": [
+            "Double diffusion (Ouchterlony): identity patterns",
+            "Single radial immunodiffusion: quantitation rings",
+            "Immunoelectrophoresis and immunofixation",
+            "Nephelometry and turbidimetry in analysers"
+          ]
+        },
+        "right": {
+          "title": "Curve zones",
+          "points": [
+            "Antibody excess: prozone",
+            "Equivalence: maximal lattice",
+            "Antigen excess: postzone (hook in assays)",
+            "Serial dilution escapes both traps"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Flocculation** is precipitation's fine cloudy cousin (VDRL for syphilis, where cardiolipin antigen flocculates with reagin antibody), while **agglutination** crosslinks particulate antigen (cells, bacteria, latex beads) into visible clumps, faster and more sensitive, powering Widal, blood grouping and latex antigen tests.",
+      "say": "Particles clump, solubles precipitate, cardiolipin flocculates: aggregate size names the reaction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Agglutination family",
+          "points": [
+            "Direct: bacteria and red cells (grouping, Widal)",
+            "Passive: antigen coated latex or red cells",
+            "Reverse passive: antibody coated particles detect antigen",
+            "Coagglutination: staphylococcal protein A carries antibody"
+          ]
+        },
+        "right": {
+          "title": "Reading discipline",
+          "points": [
+            "Titres are doubling dilutions",
+            "Prozone false negatives at low dilutions",
+            "Positive and negative controls mandatory",
+            "Autoagglutination invalidates red cell tests"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Coombs test** (antiglobulin) finds antibodies that coat without clumping: direct test washes patient red cells and adds anti human globulin to reveal in vivo coating (haemolytic disease of newborn, autoimmune haemolysis, transfusion reactions), indirect test coats donor or reagent cells in vitro to screen sera for unexpected antibodies before transfusion and in pregnancy.",
+      "say": "Direct Coombs reads cells already coated in the patient; indirect coats them in the tube.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Direct antiglobulin (DAT)",
+          "points": [
+            "Patient cells washed, AHG added",
+            "Positive: HDN, AIHA, drug and transfusion causes",
+            "Polyspecific then monospecific (IgG, C3d)",
+            "Elution identifies the coating antibody"
+          ]
+        },
+        "right": {
+          "title": "Indirect (IAT)",
+          "points": [
+            "Serum plus reagent cells, then AHG",
+            "Antibody screening before transfusion",
+            "Antenatal antibody monitoring",
+            "Crossmatch final phase historically"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Widal test** agglutinates Salmonella Typhi O and H and paratyphi antigens with patient serum, weakened by endemic background titres, prior vaccination, cross reactions and early antibiotics, needing rising paired titres and local cut offs to mean anything. Blood culture in week one outranks it, which the Salmonella module makes the hierarchy to state aloud.",
+      "say": "A single Widal titre in an endemic town is gossip; paired rising titres approach evidence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Widal reading",
+          "points": [
+            "O rises early, falls months; H persists (vaccination confounds)",
+            "Local significant titre (often 1:160 and above endemic adjusted)",
+            "Paired sera four fold rise stronger",
+            "Anamnestic H rises in unrelated fevers"
+          ]
+        },
+        "right": {
+          "title": "Typhoid test hierarchy",
+          "points": [
+            "Blood culture week 1 highest yield",
+            "Bone marrow culture most sensitive",
+            "Stool and urine cultures later weeks",
+            "Widal and rapid tests supportive only"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Weil Felix test** exploits cross reacting Proteus antigens (OX19, OX2, OXK) agglutinating with rickettsial antibodies (shared epitopes), a heterophile economy now largely replaced by specific serology and PCR yet immortal in examinations. It teaches that agglutination specificity is epitope luck.",
+      "say": "Proteus stands in for rickettsiae by shared epitopes; specificity was borrowed, not owned.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Weil Felix pairings",
+          "points": [
+            "OX19: typhus and Rocky Mountain groups",
+            "OX2: spotted fever leaning",
+            "OXK: scrub typhus (Orientia)",
+            "Proteus urinary infection false positives"
+          ]
+        },
+        "right": {
+          "title": "Modern successors",
+          "points": [
+            "Rickettsial IgM ELISA and IFA",
+            "Eschar and blood PCR",
+            "Doxycycline never waits for serology",
+            "Weil Felix persists where resources thin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Complement fixation** (historical Wassermann for syphilis, viral serology era) consumed complement by antigen antibody complexes, reporting haemolysis absence as positive via indicator sheep cells, elegant and now museum grade beside ELISA. Its logic (complement consumed equals antibody present) still explains complement consumption reasoning.",
+      "say": "No haemolysis meant positive: complement fixation read absence as evidence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CF mechanics",
+          "points": [
+            "Test system consumes complement if antibody present",
+            "Sensitised sheep red cells as indicator",
+            "Haemolysis absent equals positive",
+            "Anticomplementary sera confounded results"
+          ]
+        },
+        "right": {
+          "title": "CF legacy",
+          "points": [
+            "Wassermann reaction in syphilis history",
+            "Viral and rickettsial serology era",
+            "Replaced by ELISA and chemiluminescence",
+            "Complement consumption logic survives in C3 C4 reading"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**ELISA** (enzyme linked immunosorbent assay) binds antigen or antibody to plates, detects with enzyme conjugated reagents and coloured substrate, in direct, indirect, sandwich and competitive architectures, quantified against standards. HIV fourth generation (antigen plus antibody), hepatitis serology and dengue NS1 all live on this chassis with chemiluminescence as its luminous upgrade.",
+      "say": "Sandwich catches antigen, indirect catches antibody; the enzyme's colour is the report.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ELISA architectures",
+          "points": [
+            "Direct and indirect antigen antibody detection",
+            "Sandwich: capture and detection antibodies",
+            "Competitive: signal inversely reads analyte",
+            "Cut offs and grey zones require confirms"
+          ]
+        },
+        "right": {
+          "title": "ELISA discipline",
+          "points": [
+            "Washing decides background",
+            "Hook effect at extreme antigen excess",
+            "Confirmatory algorithms (HIV, HCV)",
+            "Point of care lateral flow is its paper cousin"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Serological test evaluation** (sensitivity, specificity, predictive values shifting with prevalence, likelihood ratios, window periods) governs every reaction in this lesson: a 99 percent specific test at 0.1 percent prevalence yields mostly false positives, which is why confirmatory cascades and testing strategies (NACO HIV algorithms) exist instead of single heroic tests.",
+      "say": "Prevalence writes predictive value; confirmatory cascades exist because arithmetic demands them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Test metrics",
+          "points": [
+            "Sensitivity rules out (screening)",
+            "Specificity rules in (confirmation)",
+            "PPV falls as prevalence falls",
+            "Window period false negatives early"
+          ]
+        },
+        "right": {
+          "title": "Strategy design",
+          "points": [
+            "Screen sensitive, confirm specific",
+            "Algorithms by prevalence setting",
+            "Grey zone repeat sampling",
+            "Quality assurance and lot verification"
+          ]
+        }
+      }
+    }
+  ]
+}

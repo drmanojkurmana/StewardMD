@@ -1,0 +1,313 @@
+{
+  "v": 1,
+  "module": "phm-adrenergic-agonists",
+  "subject": "pharmacology",
+  "title": "Alpha-1 Agonists, Mixed-Acting Sympathomimetics, and Indirect CNS Stimulants",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "A selective direct-acting alpha-1 adrenergic receptor agonist devoid of cardiac beta receptor stimulation is **phenylephrine**. By activating Gq protein-coupled alpha-1 receptors on vascular smooth muscle, phenylephrine stimulates phospholipase C, raising intracellular calcium to produce intense arteriolar vasoconstriction. This elevates systolic and diastolic blood pressure, triggering baroreceptor-mediated reflex bradycardia without direct myocardial stimulation, making it ideal for anesthesia-induced vasodilation.",
+      "say": "Phenylephrine stimulates alpha-1 receptors directly, raising vascular resistance and triggering reflex bradycardia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical application",
+          "Route of delivery",
+          "Pharmacological mechanism",
+          "Clinical advantage"
+        ],
+        "rows": [
+          [
+            "Spinal anesthesia hypotension",
+            "Intravenous bolus or infusion",
+            "Vascular alpha-1 vasoconstriction",
+            "Raises blood pressure without tachycardia"
+          ],
+          [
+            "Nasal mucosal congestion",
+            "Topical nasal spray",
+            "Constricts engorged nasal submucosal veins",
+            "Immediate airway decongestion"
+          ],
+          [
+            "Diagnostic funduscopy",
+            "Topical eyedrop (2.5%)",
+            "Radial dilator pupillae contraction",
+            "Mydriasis without cycloplegia"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Zoom in on the label and the details carry the safety message: phenylephrine hydrochloride, two point five percent, in a dropper built for the eye. This weaker **ophthalmic phenylephrine** dilates the pupil for fundus examination while limiting systemic absorption, unlike its ten percent sibling reserved for breaking stubborn synechiae. Even so, excess drops drain through the tear duct into the nose and circulation, which is why punctal occlusion and restraint with repeats feature in good technique, particularly for children and hypertensive adults.",
+      "say": "Phenylephrine two point five percent eye drops dilate the pupil, with the red cap warning of a mydriatic.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m451-phm-adrenergic-agonists-phenylephrine.webp",
+        "alt": "Close-up photograph of phenylephrine hydrochloride ophthalmic solution 2.5% dropper bottle showing red cap indicating mydriatic",
+        "caption": "Close-up photograph of phenylephrine hydrochloride ophthalmic solution 2.5% dropper bottle showing red cap indicating mydriatic. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "The red cap on this little bottle is not decoration but a safety language every eye theatre speaks. It flags a **mydriatic drop**, phenylephrine two point five percent, warning staff that pupils will dilate and that the bottle must never be confused with a miotic. Concentration matters too: the stronger ten percent preparation can spike blood pressure, especially in infants and frail adults. Reading caps and strengths aloud before instilling drops is the small ritual that keeps an everyday drug from becoming an incident report.",
+      "say": "A red capped bottle marks phenylephrine mydriatic drops, where checking the strength prevents dangerous mix ups.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m442-phm-adrenergic-agonists-phenylephrine.webp",
+        "alt": "Close-up photograph of phenylephrine hydrochloride ophthalmic solution 2.5% dropper bottle showing red cap indicating mydriatic",
+        "caption": "Close-up photograph of phenylephrine hydrochloride ophthalmic solution 2.5% dropper bottle showing red cap indicating mydriatic. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "A classical mixed-acting sympathomimetic alkaloid derived from Ephedra sinica is **ephedrine**. Ephedrine acts directly on alpha and beta adrenergic receptors while simultaneously entering presynaptic terminals to displace stored norepinephrine into the synaptic cleft. Because it crosses the blood-brain barrier, it produces central nervous system stimulation and alertness alongside peripheral cardiac stimulation, but repeated doses over hours produce progressive tachyphylaxis due to synaptic neurotransmitter depletion.",
+      "say": "Ephedrine acts both directly and indirectly on adrenergic receptors, developing tachyphylaxis as stores deplete.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ephedrine (Mixed acting)",
+          "points": [
+            "Stimulates alpha, beta-1, and beta-2 directly",
+            "Displaces presynaptic norepinephrine stores",
+            "Crosses blood-brain barrier causing alertness",
+            "Exhibits tachyphylaxis on repeated dosing"
+          ]
+        },
+        "right": {
+          "title": "Phenylephrine (Direct acting)",
+          "points": [
+            "Pure alpha-1 agonist without beta activity",
+            "Zero presynaptic neurotransmitter displacement",
+            "Minimal central nervous system entry",
+            "No significant acute receptor tachyphylaxis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A potent indirect-acting sympathomimetic and powerful psychostimulant is **amphetamine**. Amphetamine serves as a substrate for presynaptic norepinephrine and dopamine reuptake transporters (NET and DAT). Once inside the terminal cytoplasm, it enters storage vesicles via the vesicular monoamine transporter (VMAT2), displacing catecholamines into the axoplasm and reversing NET and DAT directionality to pump massive neurotransmitter floods into synapses.",
+      "say": "Amphetamine enters presynaptic nerve terminals to displace and pump catecholamines into synapses.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ent",
+            "label": "Amphetamine enters presynaptic terminal via NET / DAT"
+          },
+          {
+            "id": "vmat",
+            "label": "Disrupts VMAT2 vesicular storage of monoamines"
+          },
+          {
+            "id": "cyt",
+            "label": "Massive accumulation of free cytoplasmic catecholamines"
+          },
+          {
+            "id": "rev",
+            "label": "Transporter reversal pumps dopamine and norepinephrine out"
+          }
+        ],
+        "edges": [
+          [
+            "ent",
+            "vmat"
+          ],
+          [
+            "vmat",
+            "cyt"
+          ],
+          [
+            "cyt",
+            "rev"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A dietary indirect-acting sympathomimetic amine found in aged cheeses, fermented sausages, and red wines is **tyramine**. In healthy individuals, intestinal and hepatic monoamine oxidase type A (MAO-A) degrades ingested tyramine completely during first-pass transit. However, in patients taking non-selective MAO inhibitors, intact tyramine enters systemic circulation, enters peripheral adrenergic terminals via NET, and triggers massive norepinephrine exocytosis.",
+      "say": "Ingested tyramine normally undergoes first-pass metabolism by MAO-A before reaching systemic circulation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Normal tyramine handling",
+          "points": [
+            "Ingested in aged cheese, wine, and yeast",
+            "Intestinal and hepatic MAO-A hydrolyzes tyramine",
+            "Zero active tyramine reaches systemic blood",
+            "Sympathetic nerves remain unaffected"
+          ]
+        },
+        "right": {
+          "title": "MAO inhibitor interaction",
+          "points": [
+            "Intestinal and hepatic MAO-A enzymes blocked",
+            "Tyramine enters systemic circulation freely",
+            "Displaces massive norepinephrine stores",
+            "Precipitates fatal hypertensive crisis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Fermentation is the quiet chemist behind everything arranged on this board. Ageing and curing concentrate **tyramine** in cheese, sausage and wine alike, stockpiling a pressor amine that monoamine oxidase normally dismantles during first pass through gut and liver. Remove that enzyme with an MAOI antidepressant and a celebratory meal becomes a drug interaction, blood pressure climbing as noradrenaline pours from nerve endings. Dietary counselling for these patients is therefore pharmacology, not fussiness, and this spread shows exactly what must stay off the table.",
+      "say": "Aged and fermented foods stockpile the tyramine that MAO inhibitors fail to destroy, causing hypertensive crisis.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m452-phm-adrenergic-agonists-phenylephrine.webp",
+        "alt": "Aged cheese and red wine board illustrating dietary sources of tyramine responsible for hypertensive cheese reaction",
+        "caption": "Aged cheese and red wine board illustrating dietary sources of tyramine responsible for hypertensive cheese reaction. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "This innocent looking supper board hides a pharmacological trap for anyone taking older antidepressants. Aged cheese and fermented wine concentrate **tyramine**, which healthy gut enzymes destroy before it reaches the circulation. Block monoamine oxidase, though, and tyramine survives to flood adrenergic terminals, discharging noradrenaline in one hypertensive surge. Patients on MAO inhibitors therefore learn this menu by heart, because the cheese reaction announces itself with a pounding occipital headache that can end in intracranial bleeding if the warning goes unheeded.",
+      "say": "Tyramine in aged cheese and wine triggers the hypertensive cheese reaction when monoamine oxidase is blocked.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m443-phm-adrenergic-agonists-phenylephrine.webp",
+        "alt": "Aged cheese and red wine board illustrating dietary sources of tyramine responsible for hypertensive cheese reaction",
+        "caption": "Aged cheese and red wine board illustrating dietary sources of tyramine responsible for hypertensive cheese reaction. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "The life-threatening interaction between dietary tyramine and antidepressant monoamine oxidase inhibitors is termed the **cheese reaction**. Unchecked systemic tyramine penetrates sympathetic varicosities, displacing massive floods of norepinephrine into peripheral neuroeffector junctions. Patients experience sudden, explosive occipital headaches, severe palpitations, malignant hypertension exceeding 220/120 mm Hg, intracranial hemorrhage, and acute myocardial infarction unless immediately managed with intravenous alpha-blockers like phentolamine.",
+      "say": "The cheese reaction triggers a hypertensive emergency when tyramine displaces stored norepinephrine in patients on MAO inhibitors.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "diet",
+            "label": "Ingestion of tyramine-rich aged cheese or wine"
+          },
+          {
+            "id": "maoi",
+            "label": "MAO inhibitor prevents intestinal and hepatic breakdown"
+          },
+          {
+            "id": "disp",
+            "label": "Tyramine displaces vast presynaptic norepinephrine stores"
+          },
+          {
+            "id": "cris",
+            "label": "Severe hypertensive crisis and intracranial hemorrhage risk"
+          }
+        ],
+        "edges": [
+          [
+            "diet",
+            "maoi"
+          ],
+          [
+            "maoi",
+            "disp"
+          ],
+          [
+            "disp",
+            "cris"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Direct-acting alpha-1 and alpha-2 adrenergic agonists formulated for ocular and nasal mucosal decongestion include **oxymetazoline and xylometazoline**. Extensively utilized as over-the-counter nasal sprays, these imidazoline derivatives constrict dilated submucosal venous plexuses in turbinate tissue, rapidly relieving nasal airway resistance. However, regular application exceeding three to five days causes profound rebound mucosal edema, erythema, and dependence recognized as rhinitis medicamentosa.",
+      "say": "Topical imidazoline sprays rapidly clear nasal congestion but cause rebound rhinitis medicamentosa if overused.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Topical decongestant",
+          "Chemical family",
+          "Receptor selectivity",
+          "Adverse effect with overuse"
+        ],
+        "rows": [
+          [
+            "Oxymetazoline",
+            "Imidazoline derivative",
+            "Mixed alpha-1 and alpha-2 agonist",
+            "Rhinitis medicamentosa rebound congestion"
+          ],
+          [
+            "Xylometazoline",
+            "Imidazoline derivative",
+            "Mixed alpha-1 and alpha-2 agonist",
+            "Nasal mucosal atrophy and dryness"
+          ],
+          [
+            "Phenylephrine spray",
+            "Phenethylamine derivative",
+            "Selective alpha-1 agonist",
+            "Transient burning and rebound congestion"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Symptomatic treatment of orthostatic hypotension and autonomic failure relies on the oral prodrug **midodrine**. Following oral ingestion, midodrine undergoes rapid enzymatic deglycination in systemic tissues to generate its active metabolite, desglymidodrine. As a selective, direct-acting alpha-1 adrenergic agonist, desglymidodrine elevates standing systolic and diastolic blood pressure, alleviating debilitating postural presyncope while requiring evening dose restriction to prevent severe supine hypertension.",
+      "say": "Midodrine is converted into desglymidodrine to raise venous and arterial tone in orthostatic hypotension.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "oral",
+            "label": "Oral midodrine hydrochloride ingestion"
+          },
+          {
+            "id": "degly",
+            "label": "Systemic enzymatic deglycination in liver and tissues"
+          },
+          {
+            "id": "desg",
+            "label": "Active desglymidodrine stimulates vascular alpha-1 receptors"
+          },
+          {
+            "id": "bp",
+            "label": "Arteriolar and venous constriction relieves orthostatic syncope"
+          }
+        ],
+        "edges": [
+          [
+            "oral",
+            "degly"
+          ],
+          [
+            "degly",
+            "desg"
+          ],
+          [
+            "desg",
+            "bp"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Central sympathomimetic central nervous system stimulants like methylphenidate and dextroamphetamine are indicated in **attention deficit hyperactivity disorder**. By inhibiting presynaptic dopamine and norepinephrine reuptake transporters in frontostriatal and prefrontal cortical networks, these agents augment synaptic catecholamine signaling. This targeted cortical enhancement improves executive attention, strengthens working memory, and dampens motor restlessness in pediatric and adult patients.",
+      "say": "Stimulants enhance prefrontal catecholamine neurotransmission to improve executive control in ADHD.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Methylphenidate",
+          "points": [
+            "Blocks dopamine (DAT) and norepinephrine (NET) reuptake",
+            "Does not facilitate reverse transport or vesicular release",
+            "Less neurotoxic to monoaminergic terminals",
+            "First-line pharmacological therapy in pediatric ADHD"
+          ]
+        },
+        "right": {
+          "title": "Amphetamine",
+          "points": [
+            "Inhibits DAT and NET reuptake",
+            "Displaces vesicular storage and reverses transporters",
+            "Higher potential for euphoria and dependence",
+            "Available as prodrug lisdexamfetamine"
+          ]
+        }
+      }
+    }
+  ]
+}

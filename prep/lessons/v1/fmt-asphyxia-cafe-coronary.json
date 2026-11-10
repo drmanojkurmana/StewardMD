@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-asphyxia-cafe-coronary",
+ "subject": "forensic-medicine",
+ "module": "fmt-asphyxia",
+ "title": "Cafe Coronary, Traumatic Asphyxia and Tardieu Spots",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Cafe coronary, the meal that mimics a heart attack",
+   "tx": "**Cafe coronary** is the sudden collapse of a healthy but grossly intoxicated restaurant patron who begins a meal, turns blue, coughs violently and dies quietly as if from a heart attack. At autopsy a large piece of poorly chewed meat obstructs the larynx. The clinical signs of choking are absent because high blood alcohol anaesthetises the gag reflex, so the victim cannot cough the bolus clear or call for help.",
+   "say": "An intoxicated diner silently obstructing his larynx with meat imitates coronary death until the airway is opened.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Intoxicated patron starts eating"}, {"id": "b", "label": "Meat bolus lodges in larynx"}, {"id": "c", "label": "Alcohol silences the gag reflex"}, {"id": "d", "label": "Quiet collapse imitates infarction"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Rescue and autopsy in cafe coronary",
+   "tx": "A blow on the back or sternum may make the victim cough the bolus out in **cafe coronary rescue**; failing that, the foreign body is removed from the hypopharynx with middle and index fingers or forceps. At autopsy the obstructing food is found in mouth, larynx or trachea. Food particles embedded in thick mucus deep in bronchi prove live aspiration and separate the event from food that slipped into the larynx after death from the oesophagus.",
+   "say": "Back blows, then fingers or forceps, clear the bolus, and food deep in bronchi later proves the victim inhaled alive.",
+   "vis": {"kind": "compare", "left": {"title": "At the table", "points": ["Blow on back or sternum", "Sweep hypopharynx with fingers", "Forceps for a visible bolus", "Call emergency help early"]}, "right": {"title": "At autopsy", "points": ["Bolus in larynx or trachea", "Food in bronchiolar mucus", "Other asphyxial signs present", "Alcohol level supports story"]}}
+  },
+  {
+   "title": "Traumatic asphyxia fixes the chest",
+   "tx": "**Traumatic asphyxia** is respiratory arrest from mechanical fixation of the chest by an unyielding object so the chest wall cannot move and the diaphragm cannot descend. Crowd crushes in theatres and riots, falls of earth in mines and building collapses, burial in grain or sand, vehicles falling off jacks onto mechanics, and stamping assaults all produce it. Fatal cases are almost only accidental, apart from deliberate crushing assaults.",
+   "say": "A chest pinned so it cannot expand suffocates its owner, in crowd crushes, cave ins and vehicles slipped off jacks.",
+   "vis": {"kind": "table", "cols": ["Setting", "Compressing force", "Victims"], "rows": [["Crowd or riot crush", "Weight of the crowd", "Multiple deaths together"], ["Mine or building collapse", "Earth and masonry", "Head may stay above soil"], ["Vehicle off a jack", "Car body on chest", "Mechanic working beneath"], ["Stamping assault", "Assailants jumping on chest", "Homicidal exception"]]}
+  },
+  {
+   "title": "The purple mask of traumatic asphyxia",
+   "tx": "The signboard of traumatic asphyxia is **intense purple red congestion of head, neck and upper chest** stopping sharply at the compression level, with pallor below it. Blood driven retrograde from the superior vena cava into the valveless veins of head and neck ruptures distal venules and capillaries. Pallor stripes remain where a collar, garment folds, buttons or braces shielded the skin. In survivors the purple colour fades over ten to fourteen days without bruise colour changes.",
+   "say": "A deep purple head and neck above a sharp line, with collar stripes of pallor, is traumatic asphyxia written on skin.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Chest compressed suddenly"}, {"id": "b", "label": "Blood forced up vena cava"}, {"id": "c", "label": "Valveless head veins rupture"}, {"id": "d", "label": "Purple mask with pallor stripes"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Eye and internal signs of chest crush",
+   "tx": "The eyes suffer dramatically in **traumatic asphyxia signs**: conjunctivae and sclerae are grossly congested and haemorrhagic, bleeding may form blood blisters bulging through the eyelids, and petechiae dot skin, eyelids, conjunctivae and mouth mucosa with bleeding from nose and ears. Inside, the lungs are dark and heavy with subpleural petechiae, the right heart and veins above the diaphragm are markedly distended, and petechiae may stud the cerebral hemispheres.",
+   "say": "Blood blistered eyes, nose and ear bleeding and a distended right heart complete the crush picture inside and out.",
+   "vis": {"kind": "compare", "left": {"title": "External crush signs", "points": ["Purple red head and neck", "Conjunctival haemorrhage, blisters", "Petechiae of face and mouth", "Bleeding from nose and ears"]}, "right": {"title": "Internal crush signs", "points": ["Dark heavy lungs, petechiae", "Right heart distended", "Veins above diaphragm engorged", "Cerebral surface petechiae"]}}
+  },
+  {
+   "title": "Tardieu spots in dependent parts",
+   "tx": "**Tardieu spots** are round dark petechial haemorrhages that appear where capillaries rupture under prolonged venous congestion during a slow asphyxial death, most marked where the blood has gravitated. In hanging they stud the legs and feet below the ligature congestion. They are numerous where capillaries are loosely supported. Their presence argues for a death slow enough for venous pressure to build, rather than an instantaneous vagal arrest.",
+   "say": "Round dark spots in dependent congested parts are Tardieu spots, evidence that venous pressure had time to build.",
+   "vis": {"kind": "table", "cols": ["Petechia type", "Where found", "Meaning"], "rows": [["Tardieu spots", "Dependent legs in hanging", "Slow congestive asphyxia"], ["Conjunctival petechiae", "Eyes in neck compression", "Head venous pressure rose"], ["Subpleural petechiae", "Lung surfaces in crush", "Chest compression occurred"], ["Visceral petechiae", "Heart and lung surfaces", "General asphyxial pattern"]]}
+  },
+  {
+   "title": "Petechial haemorrhages as asphyxial evidence",
+   "tx": "**Petechial haemorrhages** arise when thin walled venules and capillaries burst under raised venous pressure and increased permeability in asphyxia. They favour loose tissues: conjunctivae, eyelids, face, and the surfaces of heart and lungs. Alone they are non specific, appearing in other congestive deaths, so examiners weigh them with the ligature mark, scene and internal findings. Their complete absence fits vagal inhibition, where the heart stops before congestion can develop.",
+   "say": "Petechiae support asphyxia only in company with other findings, and their absence fits a heart stopped instantly by vagal reflex.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Venous outflow obstructed"}, {"id": "b", "label": "Venule pressure climbs"}, {"id": "c", "label": "Loose tissue capillaries rupture"}, {"id": "d", "label": "Petechiae mark eyes and viscera"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Positional asphyxia and restraint deaths",
+   "tx": "**Positional or postural asphyxia** kills when a body position itself impairs breathing, typically inverted, with abdominal contents pressing the diaphragm up and the neck twisted or flexed onto the chest. Violently restrained prone persons, people wedged in wells, and intoxicated persons slid half out of bed with head hanging down are the classic victims. Diagnosis demands that the position obstructed gas exchange, escape was impossible, and every other cause is excluded.",
+   "say": "An inverted or neck twisted body that cannot free itself dies positionally, a diagnosis of position plus exclusion.",
+   "vis": {"kind": "compare", "left": {"title": "Typical positions", "points": ["Prone restrained, face down", "Wedged inside a well", "Head hanging off a bed", "Jack knife thighs on chest"]}, "right": {"title": "Diagnosis requires", "points": ["Position obstructed breathing", "Self rescue impossible", "Other causes excluded", "Congestion and petechiae supportive"]}}
+  },
+  {
+   "title": "Asphyxial signs, the assembled picture",
+   "tx": "No single sign diagnoses asphyxia; the **assembled asphyxial picture** combines cyanosis, congestion, petechiae, fluid dark blood and the specific local lesion, ligature mark, bolus, water or chest fixation. Vagal deaths and dry drowning may show almost none of it. The examiner therefore certifies the mechanism that the total evidence supports and records negative findings with the same care, because absence of petechiae in a claimed slow strangulation is itself evidence.",
+   "say": "Judge asphyxia by the whole assembly of signs plus the local lesion, and record what is absent as carefully as what is present.",
+   "vis": {"kind": "table", "cols": ["Evidence layer", "Positive example", "Negative example"], "rows": [["Local lesion", "Ligature groove, bolus, water", "No mark in mugging"], ["Congestive signs", "Purple face, petechiae", "Pale face in vagal death"], ["Blood state", "Dark and fluid", "Unchanged in rapid death"], ["Scene", "Suspension point, crowd crush", "Unwitnessed, position lost"]]}
+  }
+ ],
+ "quiz": []
+}

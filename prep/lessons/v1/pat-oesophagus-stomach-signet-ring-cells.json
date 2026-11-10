@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "pat-oesophagus-stomach",
+  "subject": "pathology",
+  "title": "Signet Ring Cells, Linitis Plastica, Krukenberg Tumours, GIST, and CD117",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Signet ring cells push nuclei aside with intracytoplasmic mucin vacuoles, growing singly without glands in diffuse gastric cancer that thickens wall into leather bottle rigidity. The mucin signet is the **signet ring cell of diffuse gastric carcinoma**. Intracytoplasmic mucin stains with PAS diastase, helping separate signet cells from muciphages on biopsy.",
+      "say": "Mucin pushing nuclei into signets means diffuse gastric cancer infiltrating cell by lonely cell.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Diffuse gastric cancer",
+          "points": [
+            "Signet ring cells, no mass",
+            "E-cadherin lost, CDH1 sometimes",
+            "Linitis plastica rigidity"
+          ]
+        },
+        "right": {
+          "title": "Intestinal type cancer",
+          "points": [
+            "Glands form, mass visible",
+            "Helicobacter sequence behind",
+            "Liver metastases haematogenous"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Linitis plastica stiffens the whole stomach into a nondistending leather bottle from submucosal diffuse infiltration, baffling superficial biopsies that sample only normal mucosa above tumour. Deep bites diagnose **linitis plastica, diffuse infiltrative gastric cancer**. Endoscopic ultrasound gauges wall thickening when mucosal biopsies return negative despite strong clinical suspicion.",
+      "say": "A stomach that will not distend with negative surface biopsies still means linitis plastica; bite deeper.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Early satiety, weight loss"
+          },
+          {
+            "id": "b",
+            "label": "Stomach rigid and nondistending"
+          },
+          {
+            "id": "c",
+            "label": "Deep or snare biopsies pursued"
+          },
+          {
+            "id": "d",
+            "label": "Signet cells confirm diffuse cancer"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Krukenberg tumours return here as gastric signet ring metastases filling both ovaries, reminding that ovarian masses may be messengers whose primary hides in a stiff stomach. The metastatic messenger remains the **Krukenberg tumour of gastric signet ring origin**. Both ovaries involved in most cases distinguishes Krukenberg spread from a primary ovarian mucinous tumour.",
+      "say": "Bilateral solid ovarian signet tumours demand a gastric primary hunt, however quiet the stomach feels.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/krukenberg-tumour-fig1.webp",
+        "alt": "Krukenberg tumour gross and signet ring histology",
+        "caption": "Krukenberg tumour with signet ring cells in bilateral ovarian metastases."
+      }
+    },
+    {
+      "tx": "Hereditary diffuse gastric cancer from CDH1 mutation justifies genetic counselling, endoscopic surveillance with extensive random biopsies, and discussion of prophylactic total gastrectomy in confirmed carriers. That prevention dilemma is **CDH1 hereditary diffuse gastric cancer management**. Endoscopic screening from age twenty is advised for carriers from families meeting testing criteria.",
+      "say": "CDH1 carriers discuss prophylactic gastrectomy because surveillance biopsies sample a haystack blindly.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Risk clue",
+          "Gene",
+          "Action"
+        ],
+        "rows": [
+          [
+            "Diffuse gastric cancer under 50",
+            "CDH1",
+            "Genetic counselling and testing"
+          ],
+          [
+            "Lobular breast plus gastric family",
+            "CDH1",
+            "Breast MRI surveillance joins"
+          ],
+          [
+            "Multiple intestinal polyps and cancer",
+            "APC and Lynch genes",
+            "Colorectal pathways"
+          ],
+          [
+            "GIST family clustering",
+            "KIT germline rare",
+            "Kindred evaluation"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Gastrointestinal stromal tumours arise from interstitial cells of Cajal, spindle or epithelioid, expressing KIT CD117 and DOG1, risk graded by size, mitotic rate, and site rather than benign malignant labels. The Cajal cell tumour is **gastrointestinal stromal tumour (GIST)**. Small bowel primaries behave more aggressively than gastric ones of equal size and mitotic count.",
+      "say": "CD117 and DOG1 positive spindle tumours of gut wall are GISTs; size and mitoses grade their danger.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m120-pat-oesophagus-stomach-signet-ring-cells.webp",
+        "alt": "GIST gastric submucosal tumour with CD117 immunostain inset",
+        "caption": "GIST gastric submucosal tumour with CD117 immunostain inset. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Imatinib blocking mutant KIT transformed GIST from surgery only disease into targeted therapy prototype, resistance mutations guiding sunitinib and later lines by genotype. That targeted story is **KIT inhibition by imatinib in GIST**. Exon 11 KIT mutations predict the strongest imatinib responses, outperforming exon 9 disease at standard doses.",
+      "say": "Imatinib made GIST the poster child of targeted therapy; mutation type still predicts its success.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Low risk GIST",
+          "points": [
+            "Small, low mitoses, gastric site",
+            "Excision and surveillance",
+            "Imatinib often omitted"
+          ]
+        },
+        "right": {
+          "title": "High risk GIST",
+          "points": [
+            "Large, high mitoses, intestinal site",
+            "Adjuvant imatinib years",
+            "Rupture worsens prognosis sharply"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "GISTs must not be biopsied carelessly through mucosa when resectable, because rupture and seeding convert curable tumours into peritoneal disease, so endoscopic ultrasound characterisation precedes decisions. That caution is **GIST rupture avoidance in diagnosis and surgery**. Endoscopic ultrasound guided fine needle biopsy samples the wall lesion without breaching the serosal surface.",
+      "say": "Never rupture a GIST; its capsule is its prognosis, in biopsy planning and surgery alike.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Lower risk",
+          "Higher risk"
+        ],
+        "rows": [
+          [
+            "Size",
+            "Under 2 cm often observed",
+            "Over 5 cm concerning"
+          ],
+          [
+            "Mitotic rate",
+            "Low per 5 square mm",
+            "High per 5 square mm"
+          ],
+          [
+            "Site",
+            "Gastric kinder",
+            "Small bowel harsher"
+          ],
+          [
+            "Rupture",
+            "Absent",
+            "Automatically high risk"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Submucosal gastric masses triage among GIST, leiomyoma, schwannoma, ectopic pancreas, and lipoma by endoscopic ultrasound layer and echogenicity before tissue strategy. Layer literacy performs **endoscopic ultrasound triage of submucosal gastric lesions**. A hypoechoic fourth layer mass favours GIST or leiomyoma, while an anechoic lesion suggests cyst.",
+      "say": "Name the wall layer first in submucosal masses; ultrasound anatomy halves the differential instantly.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "Submucosal mass found at endoscopy"
+          },
+          {
+            "id": "b",
+            "label": "Ultrasound assigns wall layer"
+          },
+          {
+            "id": "c",
+            "label": "GIST features trigger oncology path"
+          },
+          {
+            "id": "d",
+            "label": "Benign patterns observed or excised"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    }
+  ]
+}

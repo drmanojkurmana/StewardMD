@@ -1,0 +1,189 @@
+{
+  "v": 1,
+  "module": "mic-sterilisation",
+  "subject": "microbiology",
+  "title": "Biomedical Waste Segregation and Hand Hygiene in Infection Control",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Biomedical waste segregation** happens at the point of generation, never later: yellow bags for human anatomical, soiled, expired medicine and chemical waste (incineration), red for contaminated recyclable plastic (autoclave and recycle), white puncture proof containers for sharps, and blue for glass and metallic implants (disinfection and recycle). Colour literacy at the bedside prevents the entire downstream chain of injuries and illegal dumping.",
+      "say": "Segregate where the waste is born; sorting later multiplies every injury.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Colour code India",
+          "points": [
+            "Yellow: anatomical, soiled, medicines: incinerate",
+            "Red: tubing, catheters, gloves: autoclave recycle",
+            "White: sharps and metal: puncture proof",
+            "Blue: glass, ampoules, implants: disinfect recycle"
+          ]
+        },
+        "right": {
+          "title": "Segregation discipline",
+          "points": [
+            "Bags filled three quarters only",
+            "Labelled with ward, date and category",
+            "Hub cutters destroy needle syringe junctions",
+            "No general waste in yellow (burning cost and emissions)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hand hygiene** (WHO five moments) is the single most effective infection control act: before patient contact, before asepsis, after body fluid exposure, after patient contact, and after surroundings contact, using alcohol rub for 20 to 30 seconds on unsoiled hands or soap and water for 40 to 60 seconds, covering all surfaces in the six step technique. Compliance auditing by direct observation remains its quality instrument.",
+      "say": "Five moments, six surfaces, thirty seconds: the cheapest antibiotic stewardship in the building.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "m1", "label": "Before patient and before asepsis" },
+          { "id": "m2", "label": "After fluids, after patient, after surroundings" },
+          { "id": "tech", "label": "Six step coverage, thumbs and fingertips" },
+          { "id": "audit", "label": "Direct observation audit and feedback" }
+        ],
+        "edges": [["m1", "m2"], ["m2", "tech"], ["tech", "audit"]]
+      }
+    },
+    {
+      "tx": "**Sharps management** makes white container rules physical: needles never recapped two handed, never bent or cut by fingers, containers within arm's reach and replaced at three quarters, safety engineered devices where budgets allow, and injury reporting treated as a system input rather than a blame event. Most needle sticks happen between the patient and the container, in transit habits.",
+      "say": "The metre between patient and sharps box is where needle sticks live.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Safe sharps habits",
+          "points": [
+            "No two handed recapping (one hand scoop if unavoidable)",
+            "Container at point of use",
+            "Never overfill past the line",
+            "Hub cutters where policy uses them"
+          ]
+        },
+        "right": {
+          "title": "Unsafe habits audited",
+          "points": [
+            "Carrying exposed needles across rooms",
+            "Sharps in general waste bags",
+            "Recapping for tray tidiness",
+            "Under reporting injuries from stigma"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Liquid and chemical waste** follows the drain rules generations confuse: infectious liquid waste pretreated (hypochlorite or autoclave pathways) before sewer, chemical and cytotoxic waste never to drains or yellow bags indiscriminately (dedicated streams, incineration at authorised facilities), mercury contained as hazardous spill (never vacuumed), and expired drugs returned through pharmacy channels rather than ward bins.",
+      "say": "Drains, yellow bags and pharmacies are three different rivers; mercury joins none casually.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Liquid streams",
+          "points": [
+            "Infectious fluids pretreated before sewer",
+            "Blood spills chlorinated per protocol",
+            "Cytotoxic waste in dedicated labelled streams",
+            "Chemical waste by compatibility segregation"
+          ]
+        },
+        "right": {
+          "title": "Special hazards",
+          "points": [
+            "Mercury spills: kit containment, no vacuum",
+            "Radioactive waste: decay storage rules",
+            "Expired medicines: pharmacy take back",
+            "Pressurised canisters excluded from incineration"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Waste treatment technologies** divide by stream: incineration (850 to 1100 degrees chambers) for yellow, autoclaving and shredding for red, encapsulation and deep burial traditions shrinking under regulation, microwave and chemical disinfection niches, and common biomedical waste treatment facilities collecting from small generators on scheduled barcoded rounds. Segregation quality determines which technology may legally receive each bag.",
+      "say": "Incinerators and autoclaves can only treat what segregation honestly labelled.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Treatment map",
+          "points": [
+            "Yellow: incineration or plasma pyrolysis",
+            "Red: autoclave, shred, recycle",
+            "White sharps: autoclave then encapsulation or landfill",
+            "Blue glass: disinfection and recycling"
+          ]
+        },
+        "right": {
+          "title": "System machinery",
+          "points": [
+            "Barcoded bag tracking to treatment facility",
+            "48 hour storage limits untreated",
+            "Transport in closed dedicated vehicles",
+            "Annual reporting and staff immunisation (hepatitis B)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hand hygiene exceptions** complete the rule from the disinfectant lessons: soap and water mandatory when hands are visibly soiled, after toilet and caring for C difficile or norovirus patients (spores and naked viruses resist alcohol), and before eating; gloves never substitute (change and clean between tasks and patients). Skin care programmes keep the workforce's hands intact enough to comply.",
+      "say": "Gloves are not hand hygiene, and spores vote for soap every time.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Soap mandatory",
+          "points": [
+            "Visible soil or body fluid contamination",
+            "C difficile and norovirus care",
+            "After toilet, before food",
+            "Outbreak declarations by infection control"
+          ]
+        },
+        "right": {
+          "title": "Glove discipline",
+          "points": [
+            "Indicated for fluid and mucosa contact",
+            "Changed between dirty and clean sites same patient",
+            "Removed and hands cleaned immediately after",
+            "Double gloving in defined high risk surgery"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Training and audit** close the waste loop: induction and annual refreshers for every cadre including housekeeping (the highest exposure, lowest historic training group), hepatitis B vaccination verified, spill drills, segregation audits scoring wards, and feedback posted where the bags are filled. Rules laminated without audit decay within months in every published compliance study.",
+      "say": "Train the hands that fill the bags and audit where they fill them.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "train", "label": "All cadres trained and hepatitis B vaccinated" },
+          { "id": "segregate", "label": "Segregation at generation audited per ward" },
+          { "id": "feedback", "label": "Scores fed back with retraining" },
+          { "id": "injury", "label": "Injuries and near misses reviewed without blame" }
+        ],
+        "edges": [["train", "segregate"], ["segregate", "feedback"], ["feedback", "injury"]]
+      }
+    },
+    {
+      "tx": "**General waste discipline** protects the biomedical stream's economics and emissions: food, paper and packaging must stay in municipal waste, because every kilogram of general waste misrouted to yellow multiplies incineration cost and dioxin risk, while biomedical waste leaked into general bags endangers municipal workers invisibly. Segregation audits measure both directions of error deliberately.",
+      "say": "Yellow bags poisoned with lunch waste and general bags hiding sharps are the same failure mirrored.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Over classification harms",
+          "points": [
+            "Incinerator overload and emissions",
+            "Treatment cost per kilogram multiplied",
+            "Ash and residue burden",
+            "False compliance statistics"
+          ]
+        },
+        "right": {
+          "title": "Under classification harms",
+          "points": [
+            "Municipal worker sharps injuries",
+            "Rag picker and community exposure",
+            "Illegal resale of plastics",
+            "Outbreaks traced to waste streams"
+          ]
+        }
+      }
+    }
+  ]
+}

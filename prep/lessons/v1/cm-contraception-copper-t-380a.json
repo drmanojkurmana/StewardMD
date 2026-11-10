@@ -1,0 +1,146 @@
+{
+  "v": 1,
+  "id": "cm-contraception-copper-t-380a",
+  "subject": "community-medicine",
+  "module": "cm-contraception",
+  "title": "Intrauterine Devices: Copper T 380A, Cu 375, LNG-IUS, and Pearl Index",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "How copper devices prevent pregnancy",
+      "tx": "A **copper intrauterine contraceptive device** releases copper ions that cripple sperm motility and viability inside the uterus, while a sterile foreign body reaction in the endometrium blocks implantation if fertilisation still occurs. The mechanism is chiefly prefertilisation, which is why copper devices also work as emergency contraception within five days of unprotected intercourse, the most effective emergency option available.",
+      "say": "Copper ions paralyse sperm before fertilisation. That same action makes the copper device the strongest emergency contraceptive within five days.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "c1", "label": "Copper ions enter uterine fluid" },
+          { "id": "c2", "label": "Sperm motility and capacitation fail" },
+          { "id": "c3", "label": "Endometrial reaction blocks implantation" }
+        ],
+        "edges": [["c1", "c2"], ["c2", "c3"]]
+      }
+    },
+    {
+      "title": "Copper T 380A: lifespan and efficacy",
+      "tx": "The **Copper T 380A** carries three hundred eighty square millimetres of exposed copper on its frame and stems, is approved for ten years of use, and fails in fewer than one per hundred women in the first year. The Copper 375 (Multiload pattern) lasts five years. Both suit nulliparous women, can be inserted immediately after delivery or abortion, and restore fertility at once on removal.",
+      "say": "Copper T 380A works for ten years with under one pregnancy per hundred women yearly. Fertility returns immediately after removal.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Device", "Copper area and lifespan"],
+        "rows": [
+          ["Copper T 380A", "380 sq mm, approved 10 years"],
+          ["Copper 375", "375 sq mm, approved 5 years"],
+          ["Lippes Loop (historical)", "Inert plastic, no longer used in programme"],
+          ["LNG-IUS (see later step)", "Hormonal, 52 mg levonorgestrel reservoir"]
+        ]
+      }
+    },
+    {
+      "title": "Pearl index: measuring contraceptive failure",
+      "tx": "Contraceptive efficacy is expressed by the **Pearl index**: pregnancies multiplied by one thousand two hundred, divided by total months of exposure, giving failures per hundred woman years. Perfect use Pearl indices run far below typical use values for user dependent methods, while long acting devices nearly erase that gap. A Pearl index under two marks a highly effective method in programme terms.",
+      "say": "Pearl index is failures per hundred woman years. Long acting devices keep typical use as good as perfect use.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Method", "Typical Pearl index (approx)"],
+        "rows": [
+          ["Copper T 380A", "Below 1"],
+          ["Combined oral pills", "About 7 in typical use"],
+          ["Male condom", "About 13 in typical use"],
+          ["No method", "About 85"]
+        ]
+      }
+    },
+    {
+      "title": "Insertion timing that examiners test",
+      "tx": "Safe **intrauterine device insertion timing** includes the first five days of the cycle, within forty eight hours of delivery, after six weeks postpartum, immediately after first trimester abortion, and any day pregnancy is reasonably excluded. The postpartum intrauterine device placed within ten minutes of placental delivery (post placental) anchors many facility births in India, with expulsion rates accepted against its coverage gains.",
+      "say": "Insert during menses, within forty eight hours of delivery, or after six weeks. Post placental insertion within ten minutes is the programme workhorse.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "t1", "label": "Exclude pregnancy and pelvic infection" },
+          { "id": "t2", "label": "Insert with no touch technique under asepsis" },
+          { "id": "t3", "label": "Trim threads, teach thread checking" }
+        ],
+        "edges": [["t1", "t2"], ["t2", "t3"]]
+      }
+    },
+    {
+      "title": "Side effects and their management",
+      "tx": "Heavier, longer periods and intermenstrual spotting in the first three months are the commonest **copper device side effects**, managed with reassurance, iron, and nonsteroidal anti inflammatory drugs rather than removal. Cramping settles within days. Counselling before insertion about expected bleeding change is the strongest predictor that a woman will retain the device instead of demanding early removal.",
+      "say": "Expect heavier periods for a few months. Treat with iron and painkillers, counsel beforehand, and most women happily keep the device.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Common, manage in place",
+          "points": ["Heavier menstrual bleeding", "Spotting in first 3 months", "Mild cramps after insertion"]
+        },
+        "right": {
+          "title": "Act promptly",
+          "points": ["Missing threads or felt plastic stem", "Severe pelvic pain with fever", "Positive pregnancy test with device in situ"]
+        }
+      }
+    },
+    {
+      "title": "Complications: perforation, expulsion, infection",
+      "tx": "Uterine perforation complicates roughly one per thousand insertions, expulsion occurs in two to ten percent (highest after postpartum insertion), and pelvic inflammatory disease risk concentrates in the first twenty days, reflecting insertion contamination rather than the device itself: together these form the classic **intrauterine device complications** triad. Screening for sexually transmitted infection and strict asepsis keep the infection risk near background thereafter.",
+      "say": "Perforation is rare, expulsion commonest after delivery insertion, and infection clusters in the first twenty days. Asepsis and screening control all three.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Complication", "Key fact"],
+        "rows": [
+          ["Perforation", "About 1 per 1000 insertions, often at insertion"],
+          ["Expulsion", "2 to 10 percent, highest postpartum"],
+          ["Pelvic infection", "Risk mainly first 20 days"],
+          ["Ectopic share", "Rare overall, but higher share if pregnancy occurs"]
+        ]
+      }
+    },
+    {
+      "title": "Contraindications to copper devices",
+      "tx": "Current pelvic inflammatory disease, untreated sexually transmitted infection, unexplained uterine bleeding, suspected pregnancy, distorted uterine cavity, genital malignancy, and copper allergy or Wilson disease are standard **contraindications to intrauterine devices** in the World Health Organization medical eligibility criteria. A past ectopic pregnancy, youth, nulliparity, and treated infection three months ago are not contraindications, a distinction examiners probe repeatedly.",
+      "say": "Active pelvic infection and a distorted cavity bar insertion. Nulliparity and a past ectopic do not, and examiners love that contrast.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Do not insert",
+          "points": ["Current pelvic inflammatory disease", "Unexplained abnormal uterine bleeding", "Cavity distorted by fibroids"]
+        },
+        "right": {
+          "title": "May insert",
+          "points": ["Nulliparous young woman", "Past ectopic pregnancy", "Infection treated over 3 months ago"]
+        }
+      }
+    },
+    {
+      "title": "LNG-IUS and how it differs",
+      "tx": "The **levonorgestrel intrauterine system** releases twenty micrograms daily from a fifty two milligram reservoir over five to eight years, thickening cervical mucus, suppressing endometrium, and reducing menstrual blood loss by up to ninety percent, which makes it therapeutic in heavy menstrual bleeding and endometriosis. Unlike copper devices it often induces amenorrhoea, needs hormone counselling, and costs far more, so the public programme stocks copper devices as default.",
+      "say": "The hormonal system cuts bleeding dramatically and often stops periods. Copper devices do the opposite, which decides counselling for each woman.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Feature", "Copper T 380A versus LNG-IUS"],
+        "rows": [
+          ["Bleeding pattern", "Heavier periods versus lighter or absent"],
+          ["Duration", "10 years versus 5 to 8 years"],
+          ["Extra benefit", "Emergency use versus heavy bleeding therapy"],
+          ["Programme status", "Free national programme standard versus costly private"]
+        ]
+      }
+    },
+    {
+      "title": "Missing threads: the algorithm",
+      "tx": "A woman reporting **missing intrauterine device threads** needs a pregnancy test first, then gentle exploration of the endocervical canal with thread retrievers, ultrasound to locate the device, and plain radiography if ultrasound shows an empty uterus. Most devices remain correctly placed with threads curled into the canal; true expulsion and perforation are the alternatives the imaging sequence exists to separate.",
+      "say": "Missing threads usually mean curled threads, not disaster. Test for pregnancy, retrieve, scan, and only then X-ray the abdomen.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "m1", "label": "Pregnancy test and speculum examination" },
+          { "id": "m2", "label": "Thread retrieval, then pelvic ultrasound" },
+          { "id": "m3", "label": "Abdominal X-ray if uterus is empty" }
+        ],
+        "edges": [["m1", "m2"], ["m2", "m3"]]
+      }
+    }
+  ]
+}

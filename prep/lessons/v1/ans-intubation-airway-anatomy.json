@@ -1,0 +1,255 @@
+{
+    "v": 1,
+    "id": "ans-intubation-airway-anatomy",
+    "subject": "anaesthesia",
+    "module": "ans-intubation",
+    "title": "Airway Anatomy, Direct Laryngoscopy, and Rapid Sequence Induction",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Laryngeal Functional Anatomy",
+            "tx": "**Laryngeal cartilage functional anatomy** consists of nine cartilages: three single (thyroid, cricoid, epiglottis) and three paired (arytenoid, corniculate, cuneiform). The cricoid cartilage is the only completely circular cartilaginous ring in the respiratory tract, forming the narrowest anatomical point of the upper airway in infants and young children (subglottic space), whereas the vocal cord glottic chink represents the narrowest opening in adults.",
+            "say": "Laryngeal cartilage functional anatomy consists of nine cartilages: three single (thyroid, cricoid, epiglottis) and three paired (arytenoid, corniculate, cuneiform). The cricoid cartilage is the only completely circular cartilaginous ring in the respiratory tract, forming the narrowest anatomical point of the upper airway in infants and young children (subglottic space), whereas the vocal cord glottic chink represents the narrowest opening in adults.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Anatomical Feature",
+                    "Adult Airway Characteristic",
+                    "Paediatric Airway Difference",
+                    "Clinical Implication"
+                ],
+                "rows": [
+                    [
+                        "Narrowest Airway Point",
+                        "Vocal cord glottic chink",
+                        "Subglottic cricoid cartilage ring",
+                        "Uncuffed tubes traditionally fit snug at cricoid"
+                    ],
+                    [
+                        "Laryngeal Position",
+                        "Level of C4 to C6 vertebrae",
+                        "Level of C3 to C4 vertebrae (cephalad)",
+                        "Steeper visual axis during infant laryngoscopy"
+                    ],
+                    [
+                        "Epiglottic Morphology",
+                        "Broad, flat, and flexible leaf",
+                        "Long, narrow, stiff, and omega-shaped",
+                        "Requires straight Miller blade to lift epiglottis"
+                    ],
+                    [
+                        "Tracheal Axis",
+                        "Vertical straight downward course",
+                        "Funnel-shaped narrowing toward cricoid",
+                        "High risk of post-extubation subglottic edema"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Macintosh versus Miller Blades",
+            "tx": "**Laryngoscope blade mechanical design** dictates distinct techniques of glottic visualization: the curved Macintosh blade is inserted along the right side of the mouth, sweeping the tongue leftward into the mandibular floor, with its tip seated into the vallecula to indirectly elevate the epiglottis via tension on the hyoepiglottic ligament. In contrast, the straight Miller blade directly scoops under and lifts the epiglottis, preferred in infants.",
+            "say": "Laryngoscope blade mechanical design dictates distinct techniques of glottic visualization: the curved Macintosh blade is inserted along the right side of the mouth, sweeping the tongue leftward into the mandibular floor, with its tip seated into the vallecula to indirectly elevate the epiglottis via tension on the hyoepiglottic ligament. In contrast, the straight Miller blade directly scoops under and lifts the epiglottis, preferred in infants.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Curved Macintosh Blade",
+                    "points": [
+                        "Tip placed into vallecula anterior to epiglottis",
+                        "Indirect elevation of epiglottis preserves sensory nerve",
+                        "Less vagal stimulation and trauma in adult patients"
+                    ]
+                },
+                "right": {
+                    "title": "Straight Miller Blade",
+                    "points": [
+                        "Tip directly scoops under and lifts the epiglottis",
+                        "Presents direct view of glottic opening in narrow oropharynx",
+                        "Preferred in neonates with floppy, elongated epiglottis"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Cormack-Lehane Laryngoscopy Grading",
+            "tx": "**Cormack-Lehane laryngoscopic view classification** grades glottic exposure during direct laryngoscopy without external laryngeal manipulation: Grade I visualizes the entire glottic aperture; Grade II visualizes only the posterior portion of vocal cords and arytenoids; Grade III visualizes only the epiglottis with zero glottic opening visible; and Grade IV reveals only the soft palate, with neither epiglottis nor vocal cords discernible.",
+            "say": "Cormack-Lehane laryngoscopic view classification grades glottic exposure during direct laryngoscopy without external laryngeal manipulation: Grade I visualizes the entire glottic aperture; Grade II visualizes only the posterior portion of vocal cords and arytenoids; Grade III visualizes only the epiglottis with zero glottic opening visible; and Grade IV reveals only the soft palate, with neither epiglottis nor vocal cords discernible.",
+            "vis": {
+                "kind": "image",
+                "src": "clinix/media/skills/skill-exam-ana-airway_mouth.webp",
+                "alt": "Direct laryngoscopy glottic visualization grading Cormack-Lehane classification",
+                "caption": "Direct laryngoscopy glottic visualization grading Cormack-Lehane classification"
+            }
+        },
+        {
+            "title": "Endotracheal Tube Sizing and Depth",
+            "tx": "**Endotracheal tube sizing rules** specify internal diameter (ID) in millimeters: standard adult females take a 7.0 to 7.5 mm ID tube, secured at 21 centimeters at the corner of the incisors, while adult males take an 8.0 to 8.5 mm ID tube, secured at 23 centimeters. In children over one year, uncuffed tube size is calculated by (Age divided by 4) plus 4, whereas modern cuffed tubes use (Age divided by 4) plus 3.5.",
+            "say": "Endotracheal tube sizing rules specify internal diameter (ID) in millimeters: standard adult females take a 7.0 to 7.5 mm ID tube, secured at 21 centimeters at the corner of the incisors, while adult males take an 8.0 to 8.5 mm ID tube, secured at 23 centimeters. In children over one year, uncuffed tube size is calculated by (Age divided by 4) plus 4, whereas modern cuffed tubes use (Age divided by 4) plus 3.5.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Patient Population",
+                    "Standard Tube Internal Diameter",
+                    "Fixation Depth at Central Incisors",
+                    "Alternative Pediatric Sizing Formula"
+                ],
+                "rows": [
+                    [
+                        "Adult Female",
+                        "7.0 to 7.5 mm ID",
+                        "21 centimeters at teeth",
+                        "Height in cm divided by 10 (approximate)"
+                    ],
+                    [
+                        "Adult Male",
+                        "8.0 to 8.5 mm ID",
+                        "23 centimeters at teeth",
+                        "Height in cm divided by 10 (approximate)"
+                    ],
+                    [
+                        "Child over 1 Year (Uncuffed)",
+                        "(Age in years / 4) + 4 mm ID",
+                        "Age in years / 2 + 12 cm",
+                        "Match child fifth fingernail width"
+                    ],
+                    [
+                        "Child over 1 Year (Cuffed)",
+                        "(Age in years / 4) + 3.5 mm ID",
+                        "Age in years / 2 + 12 cm",
+                        "Permits low-pressure cuff seal and monitoring"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Endotracheal Cuff Pressure Limits",
+            "tx": "**Endotracheal tube cuff pressure limits** must be maintained strictly between 20 and 30 cmH2O (15 to 22 mmHg) utilizing a handheld aneroid manometer. Cuff pressures exceeding 30 cmH2O surpass capillary perfusion pressure of the tracheal mucosa, provoking ischemic ulceration, mucosal sloughing, and tracheal stenosis, whereas pressures under 20 cmH2O permit silent microaspiration of pharyngeal secretions around cuff folds.",
+            "say": "Endotracheal tube cuff pressure limits must be maintained strictly between 20 and 30 cmH2O (15 to 22 mmHg) utilizing a handheld aneroid manometer. Cuff pressures exceeding 30 cmH2O surpass capillary perfusion pressure of the tracheal mucosa, provoking ischemic ulceration, mucosal sloughing, and tracheal stenosis, whereas pressures under 20 cmH2O permit silent microaspiration of pharyngeal secretions around cuff folds.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Cuff Pressure >30 cmH2O",
+                    "points": [
+                        "Exceeds tracheal mucosal capillary arteriolar pressure (30 cmH2O)",
+                        "Tracheal mucosal ischemia, ulceration, and necrosis",
+                        "Long-term scar contraction causing post-intubation tracheal stenosis"
+                    ]
+                },
+                "right": {
+                    "title": "Cuff Pressure <20 cmH2O",
+                    "points": [
+                        "Insufficient mechanical seal against tracheal wall",
+                        "Ventilator gas leaks during positive-pressure inspiration",
+                        "Permits silent microaspiration of colonized subglottic secretions"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Confirming Tracheal Tube Placement",
+            "tx": "**Confirmation of tracheal tube placement** demands immediate waveform capnography: persistence of continuous, rectangular carbon dioxide waveforms for at least five to six consecutive breaths serves as the unequivocal gold standard. Secondary clinical confirmation includes bilateral chest expansion, five-point auscultation (bilateral axillae, apices, and epigastrium to exclude stomach gurgling), tube fogging, and fiberoptic bronchoscopic visualization of tracheal cartilaginous rings and carina.",
+            "say": "Confirmation of tracheal tube placement demands immediate waveform capnography: persistence of continuous, rectangular carbon dioxide waveforms for at least five to six consecutive breaths serves as the unequivocal gold standard. Secondary clinical confirmation includes bilateral chest expansion, five-point auscultation (bilateral axillae, apices, and epigastrium to exclude stomach gurgling), tube fogging, and fiberoptic bronchoscopic visualization of tracheal cartilaginous rings and carina.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Pass endotracheal tube past vocal cords"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Inflate cuff and attach capnograph sensor"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Verify continuous CO2 waveforms for >5 breaths"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Auscultate bilateral axillae and epigastrium"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Rapid Sequence Induction Steps",
+            "tx": "**Rapid sequence induction protocol** prevents pulmonary aspiration in patients with a full stomach, bowel obstruction, active reflux, or trauma. Key steps comprise preoxygenation with 100 percent oxygen for three minutes (or eight vital capacity breaths), administering a predetermined intravenous induction dose (propofol 2 mg/kg or ketamine 2 mg/kg) immediately followed by rapid-onset muscle relaxant (succinylcholine 1.5 mg/kg or rocuronium 1.2 mg/kg), and withholding positive-pressure mask ventilation.",
+            "say": "Rapid sequence induction protocol prevents pulmonary aspiration in patients with a full stomach, bowel obstruction, active reflux, or trauma. Key steps comprise preoxygenation with 100 percent oxygen for three minutes (or eight vital capacity breaths), administering a predetermined intravenous induction dose (propofol 2 mg/kg or ketamine 2 mg/kg) immediately followed by rapid-onset muscle relaxant (succinylcholine 1.5 mg/kg or rocuronium 1.2 mg/kg), and withholding positive-pressure mask ventilation.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "RSI Protocol Step",
+                    "Action and Timing",
+                    "Pharmacological Agent",
+                    "Primary Safety Objective"
+                ],
+                "rows": [
+                    [
+                        "Denitrogenation",
+                        "3 minutes tidal breathing 100% O2",
+                        "High-flow pure oxygen",
+                        "Fills FRC with oxygen, prolonging safe apnea"
+                    ],
+                    [
+                        "Rapid Induction",
+                        "Immediate bolus injection",
+                        "Propofol (2 mg/kg) or Etomidate (0.3 mg/kg)",
+                        "Produces rapid unarousable unconsciousness"
+                    ],
+                    [
+                        "Neuromuscular Block",
+                        "Immediate rapid-acting relaxant",
+                        "Succinylcholine (1.5 mg/kg) or Rocuronium (1.2 mg/kg)",
+                        "Abolishes vocal cord reflexes within 45 to 60 seconds"
+                    ],
+                    [
+                        "Zero Bag-Mask Ventilation",
+                        "Avoid positive pressure before tube",
+                        "None",
+                        "Prevents stomach insufflation and vomiting"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Cricoid Pressure Application",
+            "tx": "**Sellick manoeuvre cricoid pressure** compresses the cartilaginous cricoid ring posteriorly against the sixth cervical vertebral body, occluding the compliant cervical esophagus to prevent passive regurgitation of gastric contents. A force of 10 Newtons is applied while the patient remains conscious, increasing to 30 Newtons (approximately 3 kilograms of force) upon loss of consciousness, maintained continuously until the endotracheal tube cuff is inflated and verified in the trachea.",
+            "say": "Sellick manoeuvre cricoid pressure compresses the cartilaginous cricoid ring posteriorly against the sixth cervical vertebral body, occluding the compliant cervical esophagus to prevent passive regurgitation of gastric contents. A force of 10 Newtons is applied while the patient remains conscious, increasing to 30 Newtons (approximately 3 kilograms of force) upon loss of consciousness, maintained continuously until the endotracheal tube cuff is inflated and verified in the trachea.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Proper Cricoid Pressure (Sellick)",
+                    "points": [
+                        "Downward posterior pressure on complete cricoid ring",
+                        "Ten Newtons awake, increasing to 30 Newtons upon sleep",
+                        "Occludes upper esophagus without distorting laryngeal cords"
+                    ]
+                },
+                "right": {
+                    "title": "BURP Manoeuvre (Airway Optimization)",
+                    "points": [
+                        "Backward, Upward, Rightward Pressure on thyroid cartilage",
+                        "Optimizes glottic visualization during difficult laryngoscopy",
+                        "Improves Cormack-Lehane view by bringing cords into sight"
+                    ]
+                }
+            }
+        }
+    ],
+    "quiz": []
+}
