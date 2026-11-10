@@ -263,3 +263,7 @@ screen behind `smd_opd_q2`, tests in CI. See [[OPD Queue]].
 - [ ] Split `functions/api/queue/[[path]].js` (7,679 lines) and `opd-emr.js` (419 KB). Move-only, tests unchanged.
 - [ ] `PRODUCT.md` / `DESIGN.md` (impeccable init needs the owner).
 
+## ICD Search and Scheme Search, 2026-11 look (flag `smd_ref_ui2`, shipped default ON 2026-11-10)
+- [ ] Owner check on a phone after build-www, cap sync and a native rebuild (only verified in headless Chrome).
+- [ ] After owner approval: delete the earlier markup branches and the `smd_ref_ui2` flag.
+- [ ] Lift the shared palette (`.q2app` in queue.css, `.r2` in ref-ui.css) into one token file.

@@ -1,0 +1,200 @@
+/* StewardMD - reference screens, 2026-11 look. ICD Search (#icdOverlay) and Scheme Search (#gsOverlay)
+ * put the class .r2 on their root when flag smd_ref_ui2 is on (default on, ref-ui.js). Every rule here is
+ * scoped to .r2, so with the flag off the earlier icd.css / govschemes.css screens are untouched.
+ *
+ * The system is the OPD queue's (queue.css, .q2app):
+ *   ONE accent, emerald. ONE grey family, green-tinted neutrals. Amber and red only carry meaning
+ *   (unverified data, a failed load).
+ *   Face: the iPhone's own (San Francisco through -apple-system); Android gets the bundled Inter.
+ *   Shape lock: surfaces 24, controls 14, tags 8. Nothing else.
+ *   Type ramp (Apple's): display 34 / 28 bold, title 22 / 20, headline 17 semibold, body 17 / 16,
+ *   subhead 15, footnote 13. Numbers are tabular. Codes stay monospace so O/0 and I/1 can be told apart.
+ *   Heights: buttons 50, bar and row controls 44, list rows 52 or more. Spacing on a 4px grid.
+ *   Surfaces are flat white on a grey ground with no outlines; the selected segment is the only shadow.
+ *   Motion: press 120ms, off under reduced motion. Loading rows pulse only while a request is open. */
+
+/* ── palette (the only raw colours in this file) ── */
+.r2 {
+  --r2-primary: #0a7556; --r2-on-primary: #ffffff; --r2-tint: #e1f0ea; --r2-on-tint: #07563f;
+  --r2-ink: #101a17; --r2-ink2: #3f4b47; --r2-muted: #5b6965;
+  --r2-bg: #f3f5f4; --r2-card: #ffffff; --r2-fill: #e6e9e8; --r2-press: #eceeed; --r2-line: #dde2e0;
+  --r2-err: #c0271f; --r2-err-bg: #fdecea; --r2-on-err: #8c1812;
+  --r2-warn-bg: #fff3d9; --r2-on-warn: #7a4a00;
+  --r2-seg: #ffffff; --r2-seg-shadow: 0 1px 2px rgba(16, 26, 23, .14);
+  --r2-r-card: 24px; --r2-r-ctl: 14px; --r2-r-tag: 8px;
+  --r2-ease: cubic-bezier(.23, 1, .32, 1);
+  --r2-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Inter Variable', 'Noto Sans Telugu', 'Noto Sans Devanagari', system-ui, Roboto, sans-serif;
+}
+body.dark .r2 {
+  --r2-primary: #3ecf9a; --r2-on-primary: #04291c; --r2-tint: #12392d; --r2-on-tint: #bdf0dc;
+  --r2-ink: #eef3f1; --r2-ink2: #c2cdc9; --r2-muted: #9aa8a3;
+  --r2-bg: #0b110f; --r2-card: #151c19; --r2-fill: #25302c; --r2-press: #1f2925; --r2-line: #2a3531;
+  --r2-err: #ff8a80; --r2-err-bg: #4a1512; --r2-on-err: #ffd9d5;
+  --r2-warn-bg: #3b2e10; --r2-on-warn: #f5d28a;
+  --r2-seg: #3b4843; --r2-seg-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+}
+/* ── end palette. Tokens only below this line. ── */
+
+/* The app's shared variables, pointed at this palette, so any earlier rule left standing (and the iPad
+   split rules in ipad-clinical.css) takes the same colours and face. */
+.r2 {
+  --sans: var(--r2-sans); --teal: var(--r2-primary); --teal-soft: var(--r2-tint);
+  --ink: var(--r2-ink); --slate: var(--r2-ink2); --slate-soft: var(--r2-muted);
+  --paper: var(--r2-bg); --panel: var(--r2-card); --line: var(--r2-line); --red: var(--r2-err);
+  background: var(--r2-bg); color: var(--r2-ink);
+  font-family: var(--r2-sans); -webkit-font-smoothing: antialiased;
+}
+.r2, .r2 *, .r2 *::before, .r2 *::after { box-sizing: border-box; }
+.r2 button, .r2 input, .r2 select { font-family: var(--r2-sans); -webkit-tap-highlight-color: transparent; }
+.r2 button { touch-action: manipulation; }
+.r2 ::selection { background: color-mix(in srgb, var(--r2-primary) 22%, transparent); }
+.r2 :focus-visible { outline: 2px solid var(--r2-primary); outline-offset: 2px; }
+.r2 svg { fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.r2 .r2-vh { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+/* ── bar: leave, where you are ── */
+.r2 .icd-top, .r2 .gs-top { gap: 8px; padding: calc(4px + env(safe-area-inset-top)) 8px 4px; background: var(--r2-bg); border-bottom: none; }
+.r2 .icd-back, .r2 .gs-back { display: inline-flex; align-items: center; gap: 2px; flex: 0 0 auto; min-width: 76px; height: 44px; padding: 0 8px 0 2px; border: none; border-radius: var(--r2-r-ctl); background: none; color: var(--r2-primary); font: 400 17px/1 var(--r2-sans); transition: opacity .12s; }
+.r2 .icd-back:active, .r2 .gs-back:active { opacity: .5; }
+.r2 .r2-backic { width: 24px; height: 24px; flex: 0 0 auto; stroke-width: 2.4; }
+.r2 .icd-title, .r2 .gs-title { font: 600 17px/1.3 var(--r2-sans); color: var(--r2-ink); }
+.r2 .icd-top-sp, .r2 .gs-top-sp { width: 76px; }
+
+.r2 .icd-body, .r2 .gs-body { padding: 8px 16px calc(48px + env(safe-area-inset-bottom)); background: var(--r2-bg); }
+
+/* ── search field ── */
+.r2 .r2-search { position: relative; margin-bottom: 12px; }
+.r2 .r2-search input { width: 100%; height: 48px; padding: 0 48px 0 44px; border: none; border-radius: var(--r2-r-ctl); background: var(--r2-card); color: var(--r2-ink); font: 400 17px/1.2 var(--r2-sans); -webkit-appearance: none; appearance: none; }
+.r2 .r2-search input { text-overflow: ellipsis; }
+.r2 .r2-search input::placeholder { color: var(--r2-muted); opacity: 1; }
+.r2 .r2-search input:focus { outline: 2px solid var(--r2-primary); outline-offset: -2px; }
+.r2 .r2-glass { position: absolute; left: 14px; top: 50%; width: 20px; height: 20px; margin-top: -10px; color: var(--r2-muted); pointer-events: none; }
+.r2 .r2-search .icd-search-ic, .r2 .r2-search .gs-search-ic { display: none; }
+.r2 .r2-clear { position: absolute; right: 2px; top: 2px; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: none; border-radius: var(--r2-r-ctl); background: none; color: var(--r2-muted); cursor: pointer; }
+.r2 .r2-clear[hidden] { display: none; }
+.r2 .r2-x { width: 18px; height: 18px; padding: 3px; border-radius: 50%; background: var(--r2-fill); color: var(--r2-ink2); stroke-width: 2.6; }
+
+/* ── segmented control: ICD system, Browse / Search ── */
+.r2 .icd-row2, .r2 .gs-tabs { display: flex; gap: 0; margin-bottom: 16px; padding: 3px; border: none; border-radius: var(--r2-r-ctl); background: var(--r2-fill); }
+.r2 .icd-sys, .r2 .gs-tab { flex: 1; height: 44px; min-height: 44px; padding: 0 8px; border: none; border-radius: calc(var(--r2-r-ctl) - 3px); background: none; box-shadow: none; color: var(--r2-ink2); font: 600 15px/1 var(--r2-sans); cursor: pointer; transition: background-color .12s, color .12s; }
+.r2 .icd-sys.on, .r2 .gs-tab.on { background: var(--r2-seg); color: var(--r2-ink); box-shadow: var(--r2-seg-shadow); }
+
+/* ── grouped list: one white surface, rows divided by an inset hairline ── */
+.r2 .r2-list { display: block; margin: 0 0 16px; border-radius: var(--r2-r-card); background: var(--r2-card); overflow: hidden; }
+.r2 .r2-list > * { position: relative; width: 100%; margin: 0; border: none; border-radius: 0; background: none; text-align: left; }
+.r2 .r2-list > * + *::before { content: ""; position: absolute; left: 16px; right: 0; top: 0; height: 1px; background: var(--r2-line); }
+.r2 .r2-list > button { display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 12px 12px 12px 16px; color: var(--r2-ink); cursor: pointer; transition: background-color .12s; }
+.r2 .r2-list > button:active { background: var(--r2-press); }
+.r2 .r2-list > button:focus-visible { outline-offset: -3px; border-radius: var(--r2-r-ctl); }
+.r2 .r2-list > button.sel { background: var(--r2-tint); }
+.r2 .r2-main { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 6px; }
+.r2 .r2-chev { flex: 0 0 auto; width: 20px; height: 20px; color: var(--r2-muted); opacity: .7; }
+.r2 .r2-plus { color: var(--r2-primary); opacity: 1; stroke-width: 2.2; }
+.r2 .r2-sub { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; font: 400 13px/1.4 var(--r2-sans); color: var(--r2-muted); }
+
+/* tags: codes, scheme, state, tier */
+.r2 .r2-code, .r2 .icd-card-sys, .r2 .gs-pill, .r2 .gs-card-code, .r2 .gs-tier, .r2 .gs-verified { display: inline-block; margin: 0; padding: 2px 8px; border: none; border-radius: var(--r2-r-tag); background: var(--r2-fill); color: var(--r2-ink2); font: 600 12px/1.5 var(--r2-sans); opacity: 1; overflow-wrap: anywhere; }
+.r2 .r2-code, .r2 .gs-card-code, .r2 .gs-pill-code { font-family: var(--mono, ui-monospace, monospace); font-weight: 700; color: var(--r2-ink); letter-spacing: .01em; }
+.r2 .gs-tier { background: var(--r2-warn-bg); color: var(--r2-on-warn); }
+.r2 .gs-tier.unset { padding-left: 0; padding-right: 0; background: none; color: var(--r2-muted); font-weight: 400; }
+.r2 .gs-verified { margin-left: 8px; background: var(--r2-tint); color: var(--r2-on-tint); }
+
+/* ── ICD rows ── */
+.r2 .icd-results { margin: 0; }
+.r2 .icd-card { min-height: 68px; }
+.r2 .icd-card-name { font: 600 17px/1.3 var(--r2-sans); color: var(--r2-ink); overflow-wrap: anywhere; }
+.r2 .icd-card-ch { margin: 0; font: 400 13px/1.4 var(--r2-sans); color: var(--r2-muted); }
+
+/* ── Scheme Search: states, schemes, categories ── */
+.r2 .gs-crumbs { flex-wrap: nowrap; gap: 0 2px; margin: -8px 0 8px; padding: 0; }
+.r2 .gs-crumb { flex: 0 1 auto; min-width: 44px; min-height: 44px; max-width: none; padding: 0 4px; text-align: left; font: 600 15px/1 var(--r2-sans); color: var(--r2-primary); }
+.r2 .gs-crumb.cur { flex-shrink: 0; max-width: 45%; color: var(--r2-ink); }
+.r2 .gs-crumb-sep { flex: 0 0 auto; }
+.r2 .gs-crumb-sep { margin: 0; color: var(--r2-muted); font-size: 15px; }
+.r2 .gs-cat { flex-direction: row; }
+.r2 .gs-cat-name { flex: 1; min-width: 0; font: 400 17px/1.3 var(--r2-sans); color: var(--r2-ink); overflow-wrap: anywhere; }
+.r2 .gs-cat-count { flex: 0 0 auto; font: 400 15px/1.3 var(--r2-sans); color: var(--r2-muted); font-variant-numeric: tabular-nums; }
+.r2 .gs-cat-all .gs-cat-name { font-weight: 600; color: var(--r2-primary); }
+.r2 .gs-cat-all .gs-cat-count { color: var(--r2-muted); }
+.r2 .gs-schemecard { min-height: 68px; }
+.r2 .gs-schemecard .gs-card-name { margin: 0; }
+.r2 .gs-scheme-auth { margin: 0; font: 400 14px/1.4 var(--r2-sans); color: var(--r2-ink2); }
+.r2 .gs-schemecard .gs-cat-count { font-size: 13px; }
+
+/* ── Scheme Search: package rows ── */
+.r2 .gs-card { min-height: 68px; }
+.r2 .gs-card-name { margin: 0; font: 600 16px/1.35 var(--r2-sans); color: var(--r2-ink); overflow-wrap: anywhere; }
+.r2 .gs-pills { gap: 6px; margin: 0; }
+.r2 .gs-amtrow { gap: 8px; }
+.r2 .gs-amt { font: 700 17px/1.3 var(--r2-sans); color: var(--r2-ink); font-variant-numeric: tabular-nums; }
+.r2 .gs-amt.unset { font: 400 15px/1.3 var(--r2-sans); font-style: normal; color: var(--r2-muted); }
+
+.r2 .gs-row2 { gap: 8px 16px; margin-bottom: 16px; }
+.r2 .gs-state { height: 44px; min-width: 150px; padding: 0 12px; border: none; border-radius: var(--r2-r-ctl); background: var(--r2-card); color: var(--r2-ink); font: 400 16px/1 var(--r2-sans); }
+.r2 .gs-state:disabled { opacity: .5; }
+.r2 .gs-cmp { min-height: 44px; gap: 8px; padding: 0; font: 400 15px/1.3 var(--r2-sans); color: var(--r2-ink); }
+.r2 .gs-cmp input { width: 20px; height: 20px; accent-color: var(--r2-primary); }
+
+.r2 .r2-countline { margin: 0 4px 8px; font: 400 13px/1.4 var(--r2-sans); color: var(--r2-muted); font-variant-numeric: tabular-nums; }
+
+/* ── buttons ── */
+.r2 .r2-btn, .r2 .gs-more { display: flex; align-items: center; justify-content: center; width: 100%; height: 50px; margin: 0 0 16px; padding: 0 20px; border: none; border-radius: var(--r2-r-ctl); font: 600 17px/1 var(--r2-sans); cursor: pointer; transition: transform .12s var(--r2-ease), opacity .12s; }
+.r2 .r2-btn:active, .r2 .gs-more:active { transform: scale(.97); }
+.r2 .r2-primary { background: var(--r2-primary); color: var(--r2-on-primary); }
+.r2 .r2-tonal, .r2 .gs-more { background: var(--r2-tint); color: var(--r2-on-tint); }
+.r2 .gs-more:disabled { opacity: .6; }
+
+/* ── empty, hint, error ── */
+.r2 .r2-state { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 48px 24px 24px; text-align: center; }
+.r2 .r2-state-t { font: 600 20px/1.3 var(--r2-sans); color: var(--r2-ink); overflow-wrap: anywhere; }
+.r2 .r2-state-x { max-width: 34ch; font: 400 15px/1.45 var(--r2-sans); color: var(--r2-muted); }
+.r2 .r2-state .r2-btn { width: auto; min-width: 160px; margin: 12px 0 0; }
+.r2 .icd-err .r2-state-t, .r2 .gs-err .r2-state-t { color: var(--r2-on-err); }
+.r2 .r2-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 12px; }
+.r2 .r2-chip { height: 44px; padding: 0 16px; border: none; border-radius: var(--r2-r-ctl); background: var(--r2-card); color: var(--r2-ink); font: 600 15px/1 var(--r2-sans); cursor: pointer; transition: background-color .12s; }
+.r2 .r2-chip:active { background: var(--r2-press); }
+
+/* ── loading rows ── */
+.r2 .r2-sk-row { display: flex; flex-direction: column; justify-content: center; gap: 10px; min-height: 68px; padding: 12px 16px; }
+.r2 .r2-sk-row i { display: block; height: 12px; border-radius: var(--r2-r-tag); background: var(--r2-fill); animation: r2Pulse 1.2s ease-in-out infinite; }
+.r2 .r2-sk-row i:first-child { width: 62%; }
+.r2 .r2-sk-row i:last-child { width: 34%; }
+.r2 .r2-sk-row:nth-child(odd) i:first-child { width: 78%; }
+@keyframes r2Pulse { 50% { opacity: .45; } }
+
+/* ── detail: ICD code ── */
+.r2 .icd-dhead, .r2 .gs-dhead { margin: 0 0 16px; padding: 20px; border-radius: var(--r2-r-card); background: var(--r2-card); -webkit-user-select: text; user-select: text; }
+.r2 .icd-dcode { gap: 12px; margin: 0 0 8px; font: 700 34px/1.15 var(--mono, ui-monospace, monospace); color: var(--r2-ink); letter-spacing: -.01em; overflow-wrap: anywhere; }
+.r2 .icd-dname { font: 600 20px/1.3 var(--r2-sans); color: var(--r2-ink); overflow-wrap: anywhere; }
+.r2 .icd-dhead .icd-card-ch { margin-top: 8px; font-size: 15px; }
+.r2 .icd-src { padding: 0 4px; border: none; background: none; font: 400 13px/1.5 var(--r2-sans); color: var(--r2-muted); }
+
+/* ── detail: scheme package ── */
+.r2 .gs-dname { margin: 0 0 12px; font: 700 22px/1.25 var(--r2-sans); color: var(--r2-ink); overflow-wrap: anywhere; }
+.r2 .gs-amtrow-d { margin-top: 16px; }
+.r2 .gs-amt-lg { font-size: 28px; line-height: 1.15; letter-spacing: -.01em; }
+.r2 .gs-warn { gap: 10px; margin: 0 0 16px; padding: 12px 16px; border: none; border-radius: var(--r2-r-ctl); background: var(--r2-warn-bg); color: var(--r2-on-warn); font: 400 15px/1.45 var(--r2-sans); }
+.r2 .gs-warn .gs-ico { width: 20px; height: 20px; margin-top: 1px; }
+.r2 .gs-sec { margin: 0 0 16px; padding: 4px 16px; border: none; border-radius: var(--r2-r-card); background: var(--r2-card); }
+.r2 .gs-sec-h { margin: 0; padding: 12px 0 4px; font: 600 13px/1.4 var(--r2-sans); letter-spacing: 0; text-transform: none; color: var(--r2-muted); }
+.r2 .gs-kv { gap: 12px; padding: 12px 0; border-top-color: var(--r2-line); font: 400 16px/1.45 var(--r2-sans); color: var(--r2-ink); -webkit-user-select: text; user-select: text; }
+.r2 .gs-kv b { flex: 0 0 44%; font: 400 15px/1.45 var(--r2-sans); color: var(--r2-muted); }
+.r2 .gs-kv.long { flex-direction: column; gap: 4px; }
+.r2 .gs-kv.long b { flex: 0 0 auto; font-size: 13px; }
+.r2 .gs-kv code { padding: 2px 8px; border-radius: var(--r2-r-tag); background: var(--r2-fill); font-size: 14px; font-weight: 700; }
+.r2 .gs-src { padding: 8px 0 12px; font: 400 15px/1.6 var(--r2-sans); color: var(--r2-ink2); }
+.r2 .gs-src a { display: inline-block; padding: 12px 0; color: var(--r2-primary); }
+
+/* ── compare across states ── */
+.r2 .gs-cmpcard { margin: 0 0 16px; padding: 16px 16px 4px; border: none; border-radius: var(--r2-r-card); background: var(--r2-card); }
+.r2 .gs-cmpname { margin: 0 0 4px; font: 600 17px/1.3 var(--r2-sans); color: var(--r2-ink); }
+.r2 .gs-cmprow { gap: 8px; padding: 12px 0; border-top-color: var(--r2-line); }
+.r2 .gs-cmpstate { font: 400 15px/1.3 var(--r2-sans); color: var(--r2-ink2); }
+
+/* ── iPad: the earlier two-column result grid would split one grouped surface, so results stay one list ── */
+html.smd-tablet #icdOverlay.r2 .icd-results { display: block; }
+html.smd-tablet #icdOverlay.r2 .icd-pane, html.smd-tablet #gsOverlay.r2 .gs-pane { background: var(--r2-bg); }
+
+@media (prefers-reduced-motion: reduce) {
+  .r2 *, .r2 *::before, .r2 *::after { animation: none !important; transition: none !important; }
+}
