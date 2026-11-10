@@ -1,0 +1,215 @@
+{
+ "v": 1,
+ "id": "oph-glaucoma-prostaglandin-analogues",
+ "subject": "ophthalmology",
+ "module": "oph-glaucoma",
+ "title": "Prostaglandin Analogues and Glaucoma Drops",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Prostaglandin analogues** lower pressure by increasing uveoscleral outflow, once nightly dosing, first line in most open angle glaucoma for efficacy and adherence profile. Local effects iris darkening, lash growth and periorbital fat atrophy cosmetic counselling, uveitis and macular oedema caution in susceptible eyes. Mechanism recalls outflow lesson uveoscleral route directly.",
+   "say": "Uveoscleral increase together gives first line efficacy in open angle therapy at glaucoma clinics for adults nightly. Cosmetic effects give counselling additionally. Mechanism gives outflow recall.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/primary-open-angle-glaucoma-fig1.webp",
+    "alt": "Open angle glaucoma diagram relevant to prostaglandin outflow therapy.",
+    "caption": "Open-angle glaucoma outflow pathways and medical pressure reduction with prostaglandin analogues. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Beta blocker drops reduce aqueous production with systemic bronchospasm and bradycardia risks by nasolacrimal absorption, punctal occlusion reducing systemic entry. Alpha agonists add production and outflow effects with allergy limits, carbonic inhibitors reduce production with sulfonamide and metabolic cautions. **Production versus outflow** therefore organises drop families by Goldmann equation terms.",
+   "say": "Equation terms together give drop family organisation in glaucoma prescribing at examinations for students reliably. Systemic absorption gives occlusion value additionally. Allergy gives family limits.",
+   "vis": {
+    "kind": "table",
+    "title": "Drop families by equation",
+    "cols": [
+     "Family action",
+     "Term changed"
+    ],
+    "rows": [
+     [
+      "Prostaglandin analogues",
+      "Uveoscleral outflow increased"
+     ],
+     [
+      "Beta blockers",
+      "Aqueous production reduced"
+     ],
+     [
+      "Carbonic inhibitors",
+      "Production reduced, oral systemic"
+     ],
+     [
+      "Alpha agonists",
+      "Production down, outflow up"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Punctal occlusion** after drop instillation presses inner canthus reducing systemic absorption and prolonging ocular contact, technique taught at first prescription. Nasolacrimal bypass to nasal mucosa explains systemic effects of eye drops generally in pharmacology teaching. Children and cardiac or asthma patients gain most from occlusion discipline.",
+   "say": "Inner canthus pressure together gives systemic protection in drop technique at first prescription teaching for glaucoma patients. Contact prolongation gives efficacy additionally. Vulnerable groups give discipline value.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Outflow drops",
+     "points": [
+      "Prostaglandin nightly first line",
+      "Laser trabeculoplasty alternative"
+     ]
+    },
+    "right": {
+     "title": "Production drops",
+     "points": [
+      "Beta and carbonic families",
+      "Systemic screening needed"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Combination drops improve adherence where two agents needed, preservative load and ocular surface disease limiting multi bottle regimens in elderly. Preservative free options serve surface disease and upcoming surgery conjunctiva preservation. **Surface health** therefore influences glaucoma prescribing years before filtration surgery needs virgin conjunctiva.",
+   "say": "Surface preservation together gives prescribing influence in chronic glaucoma at follow up clinics for elderly adults on multiple drops. Combination gives adherence additionally. Surgery gives conjunctiva value.",
+   "vis": {
+    "kind": "flow",
+    "title": "Drop escalation logic",
+    "nodes": [
+     {
+      "id": "first",
+      "label": "First line agent, technique taught"
+     },
+     {
+      "id": "target",
+      "label": "Target reached reviewed"
+     },
+     {
+      "id": "add",
+      "label": "Add or combine second family"
+     },
+     {
+      "id": "laser",
+      "label": "Laser or surgery if failed"
+     }
+    ],
+    "edges": [
+     [
+      "first",
+      "target"
+     ],
+     [
+      "target",
+      "add"
+     ],
+     [
+      "add",
+      "laser"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Pregnancy, childhood and asthma comorbidity restrict families: beta blockers bronchospasm, alpha agonists infant apnoea historically, prostaglandin pregnancy caution discussions individualised. Family choice therefore screens systemic history at glaucoma diagnosis as formally as gonioscopy. **Systemic screen** phrase completes first prescription safety in examinations.",
+   "say": "Systemic screening together gives family safety in first glaucoma prescription at diagnosis clinics for adults with comorbidity. Age gives restriction additionally. Gonioscopy gives parallel formality."
+  },
+  {
+   "tx": "Adherence measurement by refill, technique observation and direct non judgemental enquiry outperforms assumption at target failure reviews. White coat adherence around visits distorts office pressure interpretation needing trend context. **Failure first checks technique** repeats open angle lesson in pharmacology language.",
+   "say": "Technique checking together gives failure review in drop therapy at glaucoma follow up for adults missing targets. Refill gives adherence evidence additionally. Trend gives office distortion context.",
+   "vis": {
+    "kind": "table",
+    "title": "Drop failure checks",
+    "cols": [
+     "Check",
+     "Finds"
+    ],
+    "rows": [
+     [
+      "Observe instillation",
+      "Technique and occlusion faults"
+     ],
+     [
+      "Refill history",
+      "Adherence gaps honestly"
+     ],
+     [
+      "Surface examination",
+      "Preservative intolerance cause"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Rho kinase and gas donating newer families add trabecular outflow mechanisms expanding equation options where available, hyperaemia cosmetic limit common. Teaching value is mechanism completeness rather than brand memorisation in examinations. **Trabecular pharmacology** revival therefore updates outflow lesson drug map.",
+   "say": "Trabecular mechanisms together give equation completeness in modern glaucoma therapy at specialist clinics for adults failing first line. Hyperaemia gives cosmetic limit additionally. Mechanism gives examination value.",
+   "vis": {
+    "kind": "table",
+    "title": "Outflow mechanisms updated",
+    "cols": [
+     "Route",
+     "Therapy examples logic"
+    ],
+    "rows": [
+     [
+      "Uveoscleral",
+      "Prostaglandin family nightly"
+     ],
+     [
+      "Trabecular",
+      "Newer kinase nitric families"
+     ],
+     [
+      "Production",
+      "Beta carbonic alpha families"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors drops: prostaglandin outflow nightly first, production families screen systemically, occlusion protects and surface preserves surgery future. Target failure checks technique before molecule blame. **Equation prescribing** answers glaucoma pharmacology by mechanism, never by brand lists alone in examinations. Pharmacy therefore supplies technique leaflets with first bottles as part of glaucoma dispensing.",
+   "say": "Equation prescribing together gives glaucoma pharmacology answers in examinations for students reliably by mechanism. Technique gives failure priority additionally. Surface gives future protection value.",
+   "vis": {
+    "kind": "table",
+    "title": "Drop anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "First line usual",
+      "Prostaglandin outflow nightly"
+     ],
+     [
+      "Systemic protection",
+      "Punctal occlusion technique"
+     ],
+     [
+      "Failure first check",
+      "Technique and adherence"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Prostaglandin mechanism",
+   "b": "Increases uveoscleral outflow, once nightly first line; iris, lash and fat cosmetic effects."
+  },
+  {
+   "f": "Punctal occlusion",
+   "b": "Press inner canthus after drops to cut systemic absorption and prolong contact."
+  },
+  {
+   "f": "Drop family equation",
+   "b": "Outflow prostaglandin and trabecular agents versus production beta, carbonic and alpha families."
+  }
+ ],
+ "keys": [
+  "Screen asthma and heart before beta drops",
+  "Preserve conjunctiva for future filtration",
+  "Technique failure mimics drug failure"
+ ]
+}
