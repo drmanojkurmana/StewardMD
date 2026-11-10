@@ -612,17 +612,20 @@
     var u;
     if (/^v\d{1,3}\//.test(str(src).replace(/^\/+/, ""))) { u = lessonImgUrl(src, api); u = u.charAt(0) === "/" && base ? base + u : u; }
     else u = imgUrl(src, api, base);
-    if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.signImageUrl) return G.PREP_BANK_CLIENT.signImageUrl(u);
+    var C = G.PREP_BANK_CLIENT;
+    // Public lesson figures load from media.stewardmd.in (edge-cached, no bank request); gated images are signed.
+    if (C && C.publicMediaUrl) { var m = C.publicMediaUrl(u); if (m !== u) return m; }
+    if (C && C.signImageUrl) return C.signImageUrl(u);
     return u;
   }
   // Every figure of a lesson is fetched when it opens (not only as the reader reaches it), so a lesson opened once
   // online keeps its X-rays offline: figures are immutable and served with a one-year cache.
   function warm(les) {
-    try { lessonImages(les).forEach(function (src) { var im = new G.Image(); im.decoding = "async"; im.onerror = function () { if (G.PREP_BANK_CLIENT && G.PREP_BANK_CLIENT.resignImg) G.PREP_BANK_CLIENT.resignImg(im, imgSrc(src)); }; im.src = imgSrc(src); }); } catch (e) {}
+    try { lessonImages(les).forEach(function (src) { var im = new G.Image(); im.decoding = "async"; im.onerror = function () { var C = G.PREP_BANK_CLIENT; if (C && C.mediaFallback && C.mediaFallback(im)) return; if (C && C.resignImg) C.resignImg(im, imgSrc(src)); }; im.src = imgSrc(src); }); } catch (e) {}
   }
   // width and height from the image's shape reserve its box before it loads (no jump under the text).
   function imgTag(src, alt, ar) {
-    return '<img src="' + escH(imgSrc(src)) + '" alt="' + escH(alt) + '"' + (ar ? ' width="' + Math.round(ar * 1000) + '" height="1000"' : "") + ' loading="lazy" decoding="async" onerror="window.PREP_BANK_CLIENT&&window.PREP_BANK_CLIENT.resignImg&&window.PREP_BANK_CLIENT.resignImg(this)">';
+    return '<img src="' + escH(imgSrc(src)) + '" alt="' + escH(alt) + '"' + (ar ? ' width="' + Math.round(ar * 1000) + '" height="1000"' : "") + ' loading="lazy" decoding="async" onerror="var C=window.PREP_BANK_CLIENT;C&&!(C.mediaFallback&&C.mediaFallback(this))&&C.resignImg&&C.resignImg(this)">';
   }
   function imageHtml(v, i) {
     if (v.spot) return spotHtml(v, i);
@@ -892,7 +895,7 @@
   function zoomHtml() {
     var z = L.zoom;
     return '<div class="pn-zoom" role="dialog" aria-modal="true" aria-label="Image, enlarged" id="pnZoom"><div class="pn-zoom-top"><p>' + escH(z.caption) + '</p><button type="button" class="pn-ib" data-act="l-unzoom" aria-label="Close image">' + ic("close") + "</button></div>" +
-      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="l-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + escH(imgSrc(z.src)) + '" alt="' + escH(z.alt) + '" onerror="window.PREP_BANK_CLIENT&&window.PREP_BANK_CLIENT.resignImg&&window.PREP_BANK_CLIENT.resignImg(this)"></button></div><p class="pn-zoom-h">Pinch or tap to zoom, drag to look around</p></div>';
+      '<div class="pn-zoom-sc"><button type="button" class="pn-zoom-b" data-act="l-zoom2" aria-pressed="false" aria-label="Enlarge further"><img src="' + escH(imgSrc(z.src)) + '" alt="' + escH(z.alt) + '" onerror="var C=window.PREP_BANK_CLIENT;C&&!(C.mediaFallback&&C.mediaFallback(this))&&C.resignImg&&C.resignImg(this)"></button></div><p class="pn-zoom-h">Pinch or tap to zoom, drag to look around</p></div>';
   }
   function zoomOf(z) {
     var p = page(), v = typeof p === "number" && L.les.steps[p].vis;
