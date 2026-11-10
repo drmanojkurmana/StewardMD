@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-antiretrovirals",
+  "subject": "pharmacology",
+  "title": "Antiretrovirals II: Protease Inhibitors, Ritonavir Boosting and Integrase Inhibitors",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Lopinavir**, always sold ritonavir boosted (lopinavir ritonavir), inhibits HIV protease so polyprotein cleavage fails and immature non infectious virions bud, a mechanism with a high resistance barrier bought with gastrointestinal misery, metabolic syndrome (lipids, insulin resistance), and the interaction empire of its booster. It anchored therapy where integrase agents were absent and survives in second line and paediatric liquid history with a famously foul taste.",
+      "say": "Lopinavir ritonavir is barrier rich and metabolism poor; integrase agents retired it kindly.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antiretrovirals-art-pep-prep-iris-fig1.webp",
+        "alt": "Sites of antiretroviral drug action diagram across the HIV life cycle",
+        "caption": "Protease inhibition at viral maturation, the final life cycle step on this antiretroviral map."
+      }
+    },
+    {
+      "tx": "**Ritonavir boosting** is deliberate pharmacokinetic arson: subtherapeutic ritonavir (100 mg) strangles intestinal and hepatic CYP3A4 so partner protease inhibitors (and elvitegravir, and Paxlovid's nirmatrelvir from the antiviral lesson) survive first pass and dose once daily with resistance forgiving troughs. Cobicistat imitates the trick without antiviral activity. Every boosted regimen imports a formulary wide interaction audit as its shadow prescription, statins, sedatives, anticoagulants and inhaled steroids included.",
+      "say": "Ritonavir sacrifices itself to CYP3A4 so partners may live; audit the whole chart in exchange.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "rito",
+            "label": "Ritonavir 100 mg inhibits gut and liver CYP3A4"
+          },
+          {
+            "id": "partner",
+            "label": "Partner protease inhibitor survives first pass"
+          },
+          {
+            "id": "trough",
+            "label": "High troughs forgive adherence wobbles"
+          },
+          {
+            "id": "audit",
+            "label": "Whole chart interaction audit accompanies"
+          }
+        ],
+        "edges": [
+          [
+            "rito",
+            "partner"
+          ],
+          [
+            "partner",
+            "trough"
+          ],
+          [
+            "trough",
+            "audit"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Atazanavir** distinguishes itself among protease inhibitors by metabolic kindness and unconjugated hyperbilirubinaemia (UGT1A1 inhibition, Gilbert mimicry, cosmetic jaundice without hepatitis), with acid dependent absorption (PPIs fence it), nephrolithiasis and gallstones of crystallised drug, and ritonavir or cobicistat boosting. **Darunavir** is the class's high barrier champion, twice or once daily by resistance history, reserved power for salvage and preferred where protease therapy is chosen today.",
+      "say": "Atazanavir yellows eyes harmlessly and needs acid; darunavir is the barrier champion kept for hard cases.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Atazanavir",
+          "points": [
+            "Benign unconjugated hyperbilirubinaemia",
+            "Acid required: PPIs restricted",
+            "Kidney and gallstone crystallisation",
+            "Metabolically kinder protease inhibitor"
+          ]
+        },
+        "right": {
+          "title": "Darunavir",
+          "points": [
+            "Highest protease resistance barrier",
+            "Once daily naive, twice with resistance",
+            "Boosting mandatory (ritonavir or cobicistat)",
+            "Salvage and preferred protease roles"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Dolutegravir**, a second generation integrase strand transfer inhibitor, blocks viral DNA integration with a resistance barrier rivalling boosted protease inhibitors, once daily dosing, rapid viral decay and a tolerability (insomnia, headache, weight gain debated) that made it the global preferred third agent, including WHO first line. It chelates with cations (antacids, iron, calcium spaced), raises metformin levels (dose capped), and carries a neural tube signal from Botswana surveillance that larger data softened into informed choice rather than prohibition.",
+      "say": "Dolutegravir integrates potency, barrier and simplicity; space its cations and cap its metformin.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hiv-aids-fig2.webp",
+        "alt": "HIV life cycle and drug targets diagram showing integration inhibition",
+        "caption": "Integration blockade on the HIV life cycle, dolutegravir's step at the centre of modern regimens."
+      }
+    },
+    {
+      "tx": "**Raltegravir**, the first integrase inhibitor, proved the class with twice daily dosing and a lower barrier, surviving in neonatal and pregnancy and interaction free niches (no CYP metabolism) where dolutegravir's chelation or weight debates argue. Elvitegravir, cobicistat chained and interaction heavy, is the class's retired lesson, while bictegravir (single tablet with TAF emtricitabine) and long acting cabotegravir complete the modern integrase shelf.",
+      "say": "Raltegravir opened integration and stays for its clean metabolism; bictegravir and cabotegravir run the present.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Raltegravir niches",
+          "points": [
+            "Twice daily, no CYP interactions",
+            "Pregnancy and neonatal data deepest in class historically",
+            "Lower resistance barrier than dolutegravir",
+            "Chemoprophylaxis combinations historically"
+          ]
+        },
+        "right": {
+          "title": "Modern integrase shelf",
+          "points": [
+            "Bictegravir single tablet regimens",
+            "Cabotegravir monthly or bimonthly injections",
+            "Dolutegravir two drug regimen with lamivudine (selected)",
+            "Weight and metabolic surveillance continues"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Maraviroc**, the CCR5 antagonist, blocks HIV's co receptor door only for CCR5 tropic virus, requiring a tropism assay before use and serving salvage regimens where tropism permits, proof that entry is druggable and a reminder that tropism switches defeat it silently. Its CYP3A substrate life needs dose adjustment with inhibitors and inducers, and its examination value is mechanistic uniqueness rather than frequency of use.",
+      "say": "Maraviroc locks the CCR5 door for viruses that use it; test tropism or do not bother.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tropism",
+            "label": "CCR5 tropism assay performed"
+          },
+          {
+            "id": "r5",
+            "label": "R5 virus confirmed (no X4 or dual mixed)"
+          },
+          {
+            "id": "mara",
+            "label": "Maraviroc blocks CCR5 entry"
+          },
+          {
+            "id": "salvage",
+            "label": "Salvage regimen component with genotype guidance"
+          }
+        ],
+        "edges": [
+          [
+            "tropism",
+            "r5"
+          ],
+          [
+            "r5",
+            "mara"
+          ],
+          [
+            "mara",
+            "salvage"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Two drug therapy** (dolutegravir lamivudine, dolutegravir rilpivirine, long acting cabotegravir rilpivirine injections) challenged the three drug dogma in selected suppressed or naive (fenced) patients, trading NRTI toxicities for strict eligibility (no hepatitis B, no prior failure or resistance, viral load criteria). Long acting injections convert daily adherence into monthly clinic dependence, with missed injection windows managed by oral bridging protocols written in advance.",
+      "say": "Two drugs or monthly needles for the carefully eligible; hepatitis B and resistance history close those doors.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Two drug oral regimens",
+          "points": [
+            "Dolutegravir lamivudine in selected naive and suppressed",
+            "No hepatitis B co infection permitted",
+            "No prior virological failure or resistance",
+            "NRTI toxicities spared"
+          ]
+        },
+        "right": {
+          "title": "Long acting injectables",
+          "points": [
+            "Cabotegravir plus rilpivirine monthly or bimonthly",
+            "Oral lead in or direct start by protocol",
+            "Missed doses: oral bridging rules",
+            "Injection site reactions and clinic logistics"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Protease inhibitor metabolic** legacy (lipodystrophy next lesson, lipids, insulin resistance) and integrase weight gain debates share a monitoring covenant: fasting lipids, glucose, weight trajectory, bone and renal by backbone, vitamin D, cardiovascular risk treated aggressively because treated HIV ages arteries early. The regimen that suppresses virus while ignoring metabolism trades one chronic disease for another on instalments.",
+      "say": "Suppress the virus and the arteries together; metabolic monitoring is antiretroviral therapy, not an extra.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Metabolic surveillance",
+          "points": [
+            "Weight, waist, pressure at visits",
+            "Fasting lipids and glucose periodically",
+            "Smoking cessation prioritised",
+            "Statin interactions with boosters audited"
+          ]
+        },
+        "right": {
+          "title": "Organ surveillance",
+          "points": [
+            "Creatinine, phosphate and urine by tenofovir form",
+            "Bone density where risk accumulates",
+            "Liver enzymes with hepatitis co infection",
+            "Mental health and substance use integrated"
+          ]
+        }
+      }
+    }
+  ]
+}

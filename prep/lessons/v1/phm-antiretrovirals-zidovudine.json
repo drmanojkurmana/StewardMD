@@ -1,0 +1,209 @@
+{
+  "v": 1,
+  "module": "phm-antiretrovirals",
+  "subject": "pharmacology",
+  "title": "Antiretrovirals I: NRTIs, Abacavir HLA Screening and NNRTIs",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Zidovudine** (AZT), the 1987 nucleoside reverse transcriptase inhibitor that opened antiretroviral history, chain terminates viral DNA after intracellular phosphorylation and now survives in neonatal prophylaxis and reserve regimens, its anaemia and neutropenia (marrow), myopathy and lipoatrophy writing the first generation's toxicity textbook. **Lamivudine** beside it is the gentle cytosine analogue shared with hepatitis B therapy, whose M184V resistance mutation paradoxically weakens viral fitness and retains tenofovir sensitivity exploited by regimen designers.",
+      "say": "Zidovudine opened the era and billed the marrow; lamivudine stays gentle and useful even resistant.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/hiv-aids-fig2.webp",
+        "alt": "HIV life cycle and drug targets diagram showing reverse transcriptase inhibition",
+        "caption": "HIV life cycle drug targets, with reverse transcriptase the home of NRTI and NNRTI classes."
+      }
+    },
+    {
+      "tx": "**Tenofovir**, the nucleotide (pre phosphorylated) backbone of modern therapy and HIV prophylaxis, divides into disoproxil (TDF, renal tubular and bone density taxes) and alafenamide (TAF, lymphocyte targeted, kinder kidneys and bones, heavier lipids and cost), with creatinine, phosphate and bone surveillance by form. Emtricitabine twins with lamivudine's profile interchangeably. Tenofovir's hepatitis B activity (previous lesson) forbids casual cessation in co infection lest flares follow.",
+      "say": "Tenofovir anchors therapy and prophylaxis; choose its prodrug by kidneys, bones and lipids.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antiretrovirals-art-pep-prep-iris-fig1.webp",
+        "alt": "Sites of antiretroviral drug action diagram across the HIV life cycle",
+        "caption": "Antiretroviral sites of action across entry, reverse transcription, integration and maturation."
+      }
+    },
+    {
+      "tx": "**Abacavir screening** by HLA B*5701 is is pharmacogenetics' cleanest mandate: the allele predicts immunologically mediated hypersensitivity (fever, rash, gastrointestinal and respiratory symptoms escalating on rechallenge, potentially fatal) so reliably that abacavir is contraindicated in carriers and screening precedes every start. Negative patients still receive symptom education because no test is absolute, and rechallenge after suspected hypersensitivity is forbidden forever, documented in allergy records.",
+      "say": "Test HLA B*5701 before abacavir, every time; rechallenge after hypersensitivity is never repeated.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "consider",
+            "label": "Abacavir containing regimen considered"
+          },
+          {
+            "id": "hla",
+            "label": "HLA B*5701 result checked negative"
+          },
+          {
+            "id": "start",
+            "label": "Start with hypersensitivity symptom education"
+          },
+          {
+            "id": "stop",
+            "label": "Suspected reaction: stop, never rechallenge"
+          }
+        ],
+        "edges": [
+          [
+            "consider",
+            "hla"
+          ],
+          [
+            "hla",
+            "start"
+          ],
+          [
+            "start",
+            "stop"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**NRTI class toxicities** trace to mitochondrial DNA polymerase gamma inhibition in the older agents (zidovudine marrow and muscle, stavudine neuropathy and lipoatrophy, didanosine pancreatitis) and fade across tenofovir and abacavir generations, while lactic acidosis with hepatic steatosis is the class's rare historical catastrophe. Modern backbones (tenofovir with emtricitabine or lamivudine, or abacavir lamivudine) were selected as much for mitochondrial manners as for potency.",
+      "say": "Old NRTIs poisoned mitochondria by generation; modern backbones were chosen for outgrowing it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Older NRTI burdens",
+          "points": [
+            "Zidovudine: anaemia, neutropenia, myopathy",
+            "Stavudine: neuropathy, lipoatrophy, lactic acidosis",
+            "Didanosine: pancreatitis, neuropathy",
+            "Mostly retired from first line globally"
+          ]
+        },
+        "right": {
+          "title": "Modern backbone manners",
+          "points": [
+            "Tenofovir forms: renal and bone accounting",
+            "Abacavir: HLA screening, cardiovascular debate",
+            "Emtricitabine and lamivudine: minimal toxicity",
+            "Mitochondrial effects negligible at class level"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Efavirenz**, the NNRTI (non nucleoside reverse transcriptase inhibitor) binding a hydrophobic pocket beside the active site, anchored first line therapy for a decade on potency and pregnancy reassurance accumulated late, billing neuropsychiatric effects (vivid dreams, dizziness, depression, psychosis rarely) dosed at bedtime, CYP induction including its own, and rash. Its 600 to 400 mg dose reduction saga teaches exposure response stewardship inside one drug.",
+      "say": "Efavirenz works at bedtime and dreams loudly; psychiatry history chooses its successor first.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Efavirenz profile",
+          "points": [
+            "NNRTI pocket binding, no phosphorylation needed",
+            "Bedtime dosing for CNS tolerability",
+            "Potent enzyme inducer, contraception affected",
+            "Historical first line anchor globally"
+          ]
+        },
+        "right": {
+          "title": "Efavirenz cautions",
+          "points": [
+            "Neuropsychiatric effects, suicide signal reviewed",
+            "Rash usually early and self limited",
+            "Lipids and vitamin D effects",
+            "Falling from favour to integrase era"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Nevirapine** carries NNRTI hepatotoxicity at its sharpest (immune rash and hepatic necrosis, CD4 graded risk fences that retired it from many indications) and survives in defined prevention of mother to child transmission history and resource settings, while **rilpivirine** offers the class's gentlest metabolic and CNS profile at the price of viral load ceilings (not above 100,000 copies), food and acid requirements (PPIs forbidden), and depot partnership with cabotegravir in long acting regimens next lesson.",
+      "say": "Nevirapine taxes the liver by CD4 rules; rilpivirine is gentle, fed, unacidified and load capped.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nevirapine",
+          "points": [
+            "Hepatotoxicity and rash, CD4 threshold fences",
+            "Lead in dose escalation for rash mitigation",
+            "Prevention of vertical transmission history",
+            "Potent inducer interactions"
+          ]
+        },
+        "right": {
+          "title": "Rilpivirine",
+          "points": [
+            "Baseline viral load ceiling applies",
+            "Requires food, forbids PPIs",
+            "QT at supratherapeutic doses",
+            "Long acting depot with cabotegravir"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**NNRTI resistance is** a single mutation's work (K103N and kin collapse first generation cross resistance), which is why the class demands adherence perfection and why doravirine, the modern NNRTI engineered against those mutations with clean lipids and CNS manners, revived the class inside integrase dominated guidelines. Etravirine's barrier in salvage completes the generational ladder from fragile to fortified.",
+      "say": "One mutation used to fell the class; doravirine was engineered against the usual suspects.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "miss",
+            "label": "Adherence gaps on first generation NNRTI"
+          },
+          {
+            "id": "k103n",
+            "label": "K103N selected rapidly under pressure"
+          },
+          {
+            "id": "cross",
+            "label": "Efavirenz and nevirapine cross resistant"
+          },
+          {
+            "id": "dora",
+            "label": "Doravirine or integrase switch by genotype"
+          }
+        ],
+        "edges": [
+          [
+            "miss",
+            "k103n"
+          ],
+          [
+            "k103n",
+            "cross"
+          ],
+          [
+            "cross",
+            "dora"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Regimen architecture today** builds two NRTIs beneath a third agent with the highest barrier available (integrase inhibitors next lesson preferred globally), started same day as diagnosis increasingly (rapid start) after baseline genotype, renal, HLA where abacavir contemplated, hepatitis and pregnancy screening, because treatment as prevention (undetectable equals untransmittable) converted early therapy into public health. The NRTI backbone choice by kidney, bone, HLA and hepatitis status is this lesson's residue inside that architecture.",
+      "say": "Two NRTIs chosen by kidney, bone, HLA and hepatitis under a high barrier third; start fast, screen in parallel.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Backbone selection",
+          "points": [
+            "TAF or TDF plus emtricitabine by renal and bone profile",
+            "Abacavir lamivudine after negative HLA B*5701",
+            "Hepatitis B co infection forces tenofovir inclusion",
+            "Genotype before or alongside rapid start"
+          ]
+        },
+        "right": {
+          "title": "Third agent preview",
+          "points": [
+            "Integrase inhibitors preferred (next lesson)",
+            "Doravirine or boosted protease in defined niches",
+            "NNRTI fragility respected in adherence risk",
+            "Viral load at 4 to 8 weeks judges the build"
+          ]
+        }
+      }
+    }
+  ]
+}
