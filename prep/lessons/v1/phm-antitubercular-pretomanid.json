@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-antitubercular",
+  "subject": "pharmacology",
+  "title": "Pretomanid, Linezolid in Tuberculosis, MDR and XDR Definitions",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Pretomanid**, a nitroimidazooxazine activated by mycobacterial deazaflavin dependent nitroreductase, kills replicating bacilli by blocking mycolic acid synthesis and non replicating persisters by releasing nitric oxide that poisons respiration, one molecule covering both metabolic worlds that first line therapy needed two drugs to reach. It exists only inside the BPaL combination, licensed as a regimen component rather than a solo agent, with hepatic and reproductive toxicities inherited from animal data into its cautions.",
+      "say": "Pretomanid kills dividers by wall sabotage and sleepers by nitric oxide; it never works alone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pretomanid dual killing",
+          "points": [
+            "Aerobic: mycolic acid synthesis blocked",
+            "Anaerobic persisters: nitric oxide poisoning",
+            "Activated only inside mycobacteria",
+            "Licensed solely within BPaL regimens"
+          ]
+        },
+        "right": {
+          "title": "Pretomanid cautions",
+          "points": [
+            "Hepatotoxicity within the regimen's shared ledger",
+            "Male reproductive toxicity in animal data counselled",
+            "CYP3A interactions with inducers",
+            "Never monotherapy: resistance would follow"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Linezolid** in tuberculosis is the oxazolidinone from the antibacterial lessons repurposed at 600 mg daily (reduced to 300 where toxicity argues) for its potent anti mycobacterial initiation blockade, and its toxicities set BPaL's monitoring calendar: thrombocytopenia and anaemia weekly counted early, peripheral and optic neuropathy beyond months (pyridoxine debated, dose reduction and interruption rules protocolised), lactic acidosis and serotonergic fences carried from its antibacterial life.",
+      "say": "Linezolid powers BPaL and writes its blood count and neuropathy calendar.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "start",
+            "label": "Linezolid 600 mg daily within BPaL"
+          },
+          {
+            "id": "counts",
+            "label": "Weekly full blood counts initially"
+          },
+          {
+            "id": "nerve",
+            "label": "Neuropathy and vision symptoms monthly"
+          },
+          {
+            "id": "reduce",
+            "label": "Dose reduce or interrupt by protocol thresholds"
+          }
+        ],
+        "edges": [
+          [
+            "start",
+            "counts"
+          ],
+          [
+            "counts",
+            "nerve"
+          ],
+          [
+            "nerve",
+            "reduce"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**MDR TB** is resistance to at least isoniazid and rifampicin, the two pillars; pre XDR adds a fluoroquinolone, and **XDR TB** under current definitions adds resistance to at least one of bedaquiline or linezolid beyond that, a 2021 redefinition that moved XDR from injectables to the drugs that now matter. Definitions are treatment algorithms in shorthand, which is why examinations test the current version and clinicians verify it at every guideline cycle.",
+      "say": "MDR loses the two pillars, XDR now loses bedaquiline or linezolid too; definitions are regimens in shorthand.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mdr-tuberculosis-fig1.webp",
+        "alt": "MDR tuberculosis line probe assay diagram for rapid resistance detection",
+        "caption": "Molecular assays that sort tuberculosis into MDR and XDR categories within hours."
+      }
+    },
+    {
+      "tx": "**Regimen construction for** resistant disease follows principles made protocol: at least four effective drugs (never add a single drug to a failing regimen, the resistance commandment), rapid molecular susceptibility (line probe, Xpert XDR, sequencing) replacing months of phenotypic waiting, group A agents (levofloxacin or moxifloxacin, bedaquiline, linezolid) prioritised, and durations individualised by response and extent rather than calendar worship.",
+      "say": "Never add one drug to failure; build four deep from molecular results and group A first.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Construction rules",
+          "points": [
+            "Four or more likely effective agents",
+            "Group A prioritised: quinolone, bedaquiline, linezolid",
+            "Rapid molecular susceptibilities guide design",
+            "Single drug addition to failure forbidden"
+          ]
+        },
+        "right": {
+          "title": "Monitoring rules",
+          "points": [
+            "Monthly cultures until conversion, then spaced",
+            "ECG, counts, vision, liver by component drugs",
+            "Adherence and adverse effect support funded",
+            "Outcomes cohort reviewed (cure, failure, loss, death)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Fluoroquinolones in resistant** tuberculosis (levofloxacin preferred for tolerability, moxifloxacin for potency with more QT) are group A citizens whose loss defines pre XDR and worsens prognosis, which is why community fluoroquinolone exposure before diagnosis (respiratory courses) is interrogated in every tuberculosis history: a fortnight of levofloxacin for pneumonia can mask tuberculosis while selecting its quinolone resistance.",
+      "say": "Quinolones spent casually before diagnosis are quinolones lost to the regimen; ask every TB patient.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "resp",
+            "label": "Undiagnosed TB treated as pneumonia with quinolone"
+          },
+          {
+            "id": "mask",
+            "label": "Transient improvement masks the diagnosis"
+          },
+          {
+            "id": "select",
+            "label": "Quinolone resistance selected in bacilli"
+          },
+          {
+            "id": "prexdr",
+            "label": "Pre XDR declared: regimen options narrow"
+          }
+        ],
+        "edges": [
+          [
+            "resp",
+            "mask"
+          ],
+          [
+            "mask",
+            "select"
+          ],
+          [
+            "select",
+            "prexdr"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**BPaL versus BPaLM** choice is fluoroquinolone susceptibility made binary: where moxifloxacin susceptibility is proven, adding it (BPaLM) improves outcomes in trials; where resistance exists, BPaL proceeds without it, and where linezolid toxicity forces dose dances, protocols pre write the reductions (600 to 300 mg) and interruptions rather than improvising at the bedside. Eligibility fences (pregnancy, prior exposure to components, extensive disease nuances) keep specialists at the design table.",
+      "say": "Moxifloxacin susceptibility adds the M; linezolid toxicity follows pre written dose dances.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "BPaLM (susceptible)",
+          "points": [
+            "Bedaquiline, pretomanid, linezolid, moxifloxacin",
+            "Six months for eligible MDR disease",
+            "Best trial outcomes in susceptible disease",
+            "QT budget includes moxifloxacin"
+          ]
+        },
+        "right": {
+          "title": "BPaL (resistant or intolerant)",
+          "points": [
+            "Moxifloxacin omitted on resistance",
+            "Linezolid dose protocolised by toxicity",
+            "Extensions and substitutions specialist led",
+            "Prior component exposure reviewed carefully"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Children**, pregnancy and HIV reshape resistant regimens without changing their grammar: delamanid and bedaquiline have paediatric formulations and growing age approvals, linezolid dosing is weight argued, pregnancy excludes pretomanid (animal reproductive signals) toward individualised older constructions, and dolutegravir based HIV therapy doubles its dose against rifamycin free regimens' lesser induction while bedaquiline CYP interactions are mapped drug by drug.",
+      "say": "Same grammar, different vocabulary for children, pregnancy and HIV; specialists conjugate it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Special population adjustments",
+          "points": [
+            "Children: dispersible delamanid and bedaquiline by age and weight",
+            "Pregnancy: pretomanid avoided, regimens individualised",
+            "HIV: antiretroviral interactions mapped per agent",
+            "Diabetes and liver disease: toxicity budgets tightened"
+          ]
+        },
+        "right": {
+          "title": "Unchanged grammar",
+          "points": [
+            "Four effective agents minimum in construction",
+            "Never add singly to failure",
+            "Monitoring by component toxicity",
+            "Culture conversion as the compass"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Treatment success vocabulary** closes the module with cohort honesty: cure and completion (success), failure, death, loss to follow up and not evaluated are reported for every registered patient, because tuberculosis pharmacology is population medicine where a private cure that defaults three contacts is a public failure. The drugs in these four lessons are only as good as the programme delivering all six months of them.",
+      "say": "Cure is a cohort word in tuberculosis; the programme is part of the prescription.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "register",
+            "label": "Every diagnosed patient registered and supported"
+          },
+          {
+            "id": "deliver",
+            "label": "Full regimen delivered with adverse effect care"
+          },
+          {
+            "id": "outcome",
+            "label": "Outcome assigned: cure, completion, failure, death, loss"
+          },
+          {
+            "id": "learn",
+            "label": "Cohort review feeds programme correction"
+          }
+        ],
+        "edges": [
+          [
+            "register",
+            "deliver"
+          ],
+          [
+            "deliver",
+            "outcome"
+          ],
+          [
+            "outcome",
+            "learn"
+          ]
+        ]
+      }
+    }
+  ]
+}

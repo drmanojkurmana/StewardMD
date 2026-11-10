@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-nm-principles-technetium-99m",
+ "subject": "radiology",
+ "module": "rad-nm-principles",
+ "title": "Technetium 99m, Generators, Gamma Camera, SPECT and PET Principles",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Technetium 99m is the workhorse",
+   "tx": "**Technetium 99m** dominates nuclear medicine because it emits a single 140 kiloelectronvolt gamma photon ideal for camera detection, carries a six hour physical half life long enough to image but short enough to spare dose, and binds to many kits that target bone, kidney, heart, liver and infection. Its metastable decay by isomeric transition releases the photon without particle radiation inside the patient, a clean physics profile no rival isotope matches at its price.",
+   "say": "Technetium 99m dominates nuclear medicine because it emits a single one hundred forty kiloelectronvolt gamma ideal for cameras, with a six hour half life balancing imaging time against dose. Its isomeric transition releases the photon without particle radiation inside the patient.",
+   "vis": {"kind": "table", "cols": ["Property", "Technetium 99m", "Why it matters"], "rows": [["Gamma energy", "140 keV", "Matches gamma camera crystal"], ["Physical half life", "6 hours", "Image today, dose gone tomorrow"], ["Decay mode", "Isomeric transition", "No particle dose in patient"], ["Chemistry", "Many labelled kits", "One isotope, many organs"]]}
+  },
+  {
+   "title": "The molybdenum generator cow",
+   "tx": "**Molybdenum technetium generator** ships parent molybdenum 99, half life sixty six hours, adsorbed on an alumina column, and saline elution milks off the technetium daughter as pertechnetate each morning. Daughter regrows to a new peak about twenty four hours after each milking, so one generator serves a department for roughly a week. Alumina breakthrough and molybdenum contamination are assayed because both add useless patient dose.",
+   "say": "Molybdenum generator ships parent molybdenum 99 on an alumina column, and saline milks off the technetium daughter each morning. Daughter regrows to a peak about twenty four hours after each milking, so one generator serves about a week. Contamination is assayed because it adds useless dose.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Molybdenum 99 on column"}, {"id": "b", "label": "Decays to technetium 99m"}, {"id": "c", "label": "Saline elutes pertechnetate"}, {"id": "d", "label": "Kits labelled for patients"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Gamma camera builds the image",
+   "tx": "**Gamma camera** collimates incoming photons through parallel lead holes onto a sodium iodide crystal, whose flashes a photomultiplier array positions into an image. The collimator, not a lens, does the focusing, throwing away most photons to know where the survivors came from, which is why nuclear images count minutes and look grainier than CT. Energy windows centred on 140 kiloelectronvolts reject scattered photons that would fog the map.",
+   "say": "Gamma camera collimates photons through parallel lead holes onto a sodium iodide crystal, whose flashes are positioned into an image. The collimator throws away most photons to locate the survivors, which is why nuclear images take minutes and look grainy. Energy windows reject scattered photons.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Photons leave the patient"}, {"id": "b", "label": "Collimator selects direction"}, {"id": "c", "label": "Crystal flashes"}, {"id": "d", "label": "Position becomes image"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "SPECT adds the third dimension",
+   "tx": "**SPECT**, single photon emission computed tomography, rotates one or two camera heads around the patient and reconstructs slices like CT, separating overlapping heart, brain and bone activity that planar views stack into confusion. Myocardial perfusion and dopamine transporter brain studies live on SPECT. Its spatial resolution stays near a centimetre, several times coarser than PET, the honest limit quoted whenever small lesions go hunting.",
+   "say": "SPECT rotates camera heads around the patient and reconstructs slices like CT, separating overlapping activity that planar views confuse. Myocardial perfusion and brain transporter studies live on it. Resolution stays near a centimetre, several times coarser than PET, the honest limit for small lesions.",
+   "vis": {"kind": "compare", "left": {"title": "Planar imaging", "points": ["One flat projection", "Organs overlap", "Fast whole body bone scans", "No depth information"]}, "right": {"title": "SPECT", "points": ["Rotating heads, slices rebuilt", "Overlap separated", "Heart and brain quantification", "Resolution near 1 cm"]}}
+  },
+  {
+   "title": "PET annihilates positrons",
+   "tx": "**Positron emission tomography** detects the paired 511 kiloelectronvolt photons fired back to back when a positron from fluorine 18, carbon 11, nitrogen 13 or oxygen 15 annihilates with an electron. Coincidence detection of that pair draws the line of response electronically, no lead collimator needed, buying sensitivity and resolution near four to five millimetres. Cyclotrons make the short lived parent isotopes, fluorine 18 at one hundred ten minutes being just shippable.",
+   "say": "PET detects paired five hundred eleven kiloelectronvolt photons fired back to back when a positron annihilates with an electron. Coincidence detection draws the response line electronically without a collimator, buying resolution near four to five millimetres. Fluorine 18 at one hundred ten minutes is just shippable.",
+   "vis": {"kind": "table", "cols": ["Isotope", "Half life", "Typical tracer"], "rows": [["Fluorine 18", "110 minutes", "FDG glucose analogue"], ["Carbon 11", "20 minutes", "On site cyclotron tracers"], ["Gallium 68", "68 minutes", "PSMA and DOTATATE"], ["Rubidium 82", "75 seconds", "Generator myocardial perfusion"]]}
+  },
+  {
+   "title": "Half lives combine into effective decay",
+   "tx": "**Effective half life** merges physical decay with biological excretion: one over effective equals one over physical plus one over biological, so the effective value is always shorter than both parents. It sets patient dose, discharge timing and how long a breastfeeding pause lasts after a scan. Iodine 131 in thyroid tissue stretches its effective life toward the physical eight days, which is why radioiodine precautions outlast technetium ones by days.",
+   "say": "Effective half life merges physical decay with biological excretion, always shorter than both parents. It sets patient dose, discharge timing and breastfeeding pauses. Iodine 131 in thyroid stretches toward its physical eight days, which is why its precautions outlast technetium ones.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Physical half life"}, {"id": "b", "label": "Biological half life"}, {"id": "c", "label": "Reciprocals add"}, {"id": "d", "label": "Effective half life shortest"}], "edges": [["a", "c"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Radiopharmaceutical targeting",
+   "tx": "**Radiopharmaceutical** design bolts the isotope to a carrier that physiology delivers: diphosphonates to bone turnover, pertechnetate itself to thyroid and gastric mucosa, macroaggregated albumin particles to lung capillary beds, and labelled white cells to infection. The image therefore maps function, not anatomy, and hybrid SPECT CT or PET CT scanners bolt the anatomy back on in the same sitting, which is why modern reports localise what old planar scans only detected.",
+   "say": "Radiopharmaceutical design bolts the isotope to a carrier physiology delivers: diphosphonates to bone, pertechnetate to thyroid, albumin particles to lung beds. The image maps function, not anatomy, and hybrid scanners bolt anatomy back on in the same sitting for localisation.",
+   "vis": {"kind": "table", "cols": ["Carrier", "Delivered to", "Study"], "rows": [["Diphosphonate MDP", "Bone turnover", "Bone scan"], ["Pertechnetate alone", "Thyroid, gastric mucosa", "Thyroid and Meckel scans"], ["Macroaggregated albumin", "Lung capillaries", "Perfusion lung scan"], ["Labelled white cells", "Infection sites", "Infection imaging"]]}
+  },
+  {
+   "title": "Quality control keeps scans honest",
+   "tx": "**Quality control** in the radiopharmacy assays every elution for molybdenum breakthrough, checks labelling efficiency with chromatography strips and calibrates dose in a dose calibrator before injection. A mislabelled kit images the wrong organ convincingly, free pertechnetate painting thyroid and stomach on a bone scan being the classic giveaway pattern. Recognising free tracer artefacts is an examination staple because it tests whether the reader understands the chemistry behind the picture.",
+   "say": "Quality control assays every elution for molybdenum breakthrough, checks labelling efficiency and calibrates dose before injection. A mislabelled kit images the wrong organ convincingly, free pertechnetate painting thyroid and stomach on a bone scan being the classic giveaway. Recognising that artefact is an examination staple.",
+   "vis": {"kind": "compare", "left": {"title": "Good labelling", "points": ["Tracer on target organ", "Background low", "Dose assayed before injection", "Elution breakthrough checked"]}, "right": {"title": "Free pertechnetate artefact", "points": ["Thyroid lights up unexpectedly", "Stomach and salivary tissue hot", "Target organ faint", "Kit labelling failed"]}}
+  }
+ ]
+}

@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-antitubercular",
+  "subject": "pharmacology",
+  "title": "NTEP Regimens, DOTS and Latent Tuberculosis Treatment",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **NTEP regimen** (India's National TB Elimination Programme, descendant of RNTCP) delivers standardised weight banded fixed dose combinations free through public systems: daily 2HRZE then 4HRE (ethambutol continued in continuation in current Indian guidance) for drug susceptible disease, with Nikshay registration, nutritional support payments, and drug resistant pathways feeding BPaL era regimens. Knowing the national programme's current shape is pharmacology in uniform for Indian examinations and practice alike.",
+      "say": "NTEP standardises free, weight banded, daily therapy with registration and nutritional support attached.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/paed-drug-tb-dots.webp",
+        "alt": "DOTS tuberculosis treatment categories and regimen illustration",
+        "caption": "Standardised tuberculosis regimen categories delivered through programme structures like NTEP. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "**DOTS** (directly observed therapy, short course) began as witnessed ingestion and matured into patient centric adherence ecosystems: community health worker observation, family DOT, digital adherence technologies (pill boxes, video observation, 99DOTS style phone confirmation), because the evidence favours support over surveillance theatre. Its five original pillars (political commitment, quality microscopy and now molecular diagnostics, drug supply, standardised treatment, recording) remain programme grammar worldwide.",
+      "say": "DOTS grew from watching swallows to supporting completion; observation is the least important letter now.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Original DOTS pillars",
+          "points": [
+            "Political commitment and funding",
+            "Quality assured diagnosis",
+            "Uninterrupted drug supply",
+            "Standardised treatment with support"
+          ]
+        },
+        "right": {
+          "title": "Modern adherence ecosystem",
+          "points": [
+            "Video observed and digital adherence options",
+            "Family and community treatment partners",
+            "Nutritional and travel enablers (Nikshay Poshan)",
+            "Counselling and adverse effect responsiveness"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Weight banding replaces** milligram arithmetic in programme prescribing: fixed dose combination tablets in adult bands (for example 25 to 34, 35 to 49, 50 to 64, 65 plus kg bands under NTEP with defined tablet counts) and paediatric dispersible formulations, reducing dispensing error and simplifying supply chains. Private sector prescriptions that ignore bands and split combinations invite the dosing errors programmes were built to abolish.",
+      "say": "Bands, not calculators: programme tablets turn weight into a tablet count anyone can verify.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "weigh",
+            "label": "Patient weighed at initiation and monthly"
+          },
+          {
+            "id": "band",
+            "label": "Weight band assigns fixed dose tablet count"
+          },
+          {
+            "id": "dispense",
+            "label": "Full course strips dispensed and recorded"
+          },
+          {
+            "id": "reweigh",
+            "label": "Band adjusted as weight recovers"
+          }
+        ],
+        "edges": [
+          [
+            "weigh",
+            "band"
+          ],
+          [
+            "band",
+            "dispense"
+          ],
+          [
+            "dispense",
+            "reweigh"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Latent TB** management inside programmes follows risk arithmetic: test (tuberculin skin or IGRA) where it changes management, treat household contacts (especially under five years, where preventive therapy follows active disease exclusion clinically), people with HIV, and pre immunosuppression cohorts, with regimens from the isoniazid lesson chosen by interactions and completion probability. India's programme expansion of TB preventive treatment to household contacts is the current policy frontier.",
+      "say": "Preventive therapy follows risk and exclusion of active disease, children under five first in line.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Priority for preventive therapy",
+          "points": [
+            "Household contacts under 5 years",
+            "People living with HIV",
+            "Pre anti TNF, transplant and dialysis patients",
+            "Silicosis and other high risk lungs"
+          ]
+        },
+        "right": {
+          "title": "Before prescribing",
+          "points": [
+            "Symptom screen and chest imaging exclude activity",
+            "Liver risk and alcohol reviewed",
+            "Regimen chosen for completion probability",
+            "Adverse effect contact route documented"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Extrapulmonary and special** site regimens extend durations by anatomy: tuberculous meningitis nine to twelve months with adjunctive corticosteroids (mortality benefit proven), bone and joint nine to twelve by response, pericardial steroids debated by HIV status, and drug penetration arguments (rifampicin and isoniazid enter CSF; ethambutol and aminoglycosides poorly) shaping substitutions. The six month pulmonary sentence is a minimum, not a reflex, at these sites.",
+      "say": "Meninges and bone buy longer courses and steroids; six months is the floor, not the law.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "site",
+            "label": "Site defined: meningeal, bone, pericardial, pulmonary"
+          },
+          {
+            "id": "duration",
+            "label": "Duration set: 6, 9 or 12 months by site"
+          },
+          {
+            "id": "steroid",
+            "label": "Adjunctive steroids for meningitis (and defined niches)"
+          },
+          {
+            "id": "review",
+            "label": "Response review with imaging and cultures"
+          }
+        ],
+        "edges": [
+          [
+            "site",
+            "duration"
+          ],
+          [
+            "duration",
+            "steroid"
+          ],
+          [
+            "steroid",
+            "review"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Programme pharmacovigilance converts** individual adverse effects into system learning: hepatotoxicity, rash, visual and neuropathy reporting through Nikshay, drug resistant referral pathways to district centres, and private sector notification mandates because half of India's tuberculosis is first treated outside the programme. Every private prescription for tuberculosis that escapes notification delays contact tracing and resistance surveillance, a civic dimension of prescribing examinations increasingly acknowledge.",
+      "say": "Notify, report adverse effects, refer resistance: the programme is the patient's second prescription.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Programme duties",
+          "points": [
+            "Notification of every diagnosed case",
+            "Adverse drug reaction reporting",
+            "Drug resistance referral pathways",
+            "Contact evaluation arranged"
+          ]
+        },
+        "right": {
+          "title": "Private practice integration",
+          "points": [
+            "Free programme drugs versus private purchase counselling",
+            "Standards for TB Care in India alignment",
+            "Nikshay entry regardless of treatment site",
+            "Outcome ascertainment shared"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Treatment interruptions are** managed by calendar rules rather than blame: intensive phase interruptions restart or extend by gap length, continuation interruptions count missed doses toward extension thresholds, and default retrieval systems (calls, visits, digital nudges) activate within days. Pharmacologically, interrupted therapy is resistance selection pressure with a timetable, which is why programmes count doses, not months, as the true currency of completion.",
+      "say": "Count doses, retrieve early, extend by rule; interruption is resistance pressure with paperwork.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "miss",
+            "label": "Doses missed detected within days"
+          },
+          {
+            "id": "retrieve",
+            "label": "Retrieval contact and barrier assessment"
+          },
+          {
+            "id": "extend",
+            "label": "Phase extended or restarted by gap rules"
+          },
+          {
+            "id": "complete",
+            "label": "Dose count completed and outcome assigned"
+          }
+        ],
+        "edges": [
+          [
+            "miss",
+            "retrieve"
+          ],
+          [
+            "retrieve",
+            "extend"
+          ],
+          [
+            "extend",
+            "complete"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**The endgame vocabulary** closes the tuberculosis arc: elimination targets measured in incidence per lakh, preventive therapy scale up, molecular universal drug susceptibility testing, and shorter regimens (four month rifapentine moxifloxacin for susceptible disease in current guidance) compressing what six months meant. Each advance is a previous lesson's pharmacology (rifamycin potency, quinolone sterilisation, adherence science) arriving as policy.",
+      "say": "Shorter, molecular and preventive: elimination policy is this module's pharmacology at population scale.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Programme frontier",
+          "points": [
+            "Universal rapid molecular testing with resistance",
+            "Preventive therapy at household scale",
+            "Four month susceptible regimens entering guidance",
+            "Digital adherence and nutritional enablers"
+          ]
+        },
+        "right": {
+          "title": "Clinician's part",
+          "points": [
+            "Prescribe programme shapes, private or public",
+            "Report, notify and refer by pathway",
+            "Counsel completion as cure's active ingredient",
+            "Suspect resistance early and test for it"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-sulfonamides-quinolones",
+  "subject": "pharmacology",
+  "title": "Sulfonamides and Co trimoxazole: Sulfadiazine, Trimethoprim, Kernicterus and Pneumocystis Prophylaxis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Sulfonamides impersonate para aminobenzoic acid and jam dihydropteroate synthase, starving bacteria of folate they must synthesise (humans eat theirs, the selectivity), while trimethoprim blocks dihydrofolate reductase one step later; together in **cotrimoxazole** the sequential blockade turns two bacteriostatic agents bactericidal and broad. That synergy, not nostalgia, keeps this 1960s pairing on modern prophylaxis and treatment lists.",
+      "say": "Two folate roadblocks in sequence kill what either alone only stalls; humans eat folate and dodge.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "paba",
+            "label": "Bacterial folate synthesis from PABA"
+          },
+          {
+            "id": "sulfa",
+            "label": "Sulfonamide blocks dihydropteroate synthase"
+          },
+          {
+            "id": "tmp",
+            "label": "Trimethoprim blocks dihydrofolate reductase"
+          },
+          {
+            "id": "kill",
+            "label": "Sequential blockade: bactericidal synergy"
+          }
+        ],
+        "edges": [
+          [
+            "paba",
+            "sulfa"
+          ],
+          [
+            "sulfa",
+            "tmp"
+          ],
+          [
+            "tmp",
+            "kill"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Sulfadiazine** survives in toxoplasmosis therapy (with pyrimethamine, folinic acid rescuing the marrow the pair suppresses) and silver sulfadiazine cream historically dressed burns, while **sulfacetamide** drops treat bacterial conjunctivitis and sulfasalazine carries 5 aminosalicylate to colons in inflammatory bowel disease on a sulfonamide chassis. Each surviving niche exploits concentration at a privileged site: eye, skin, colon lumen or the immunocompromised brain.",
+      "say": "Sulfadiazine lives in toxoplasmosis and burn creams; sulfacetamide in eyes, sulfasalazine in colons.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Surviving sulfonamide niches",
+          "points": [
+            "Sulfadiazine plus pyrimethamine: toxoplasmosis",
+            "Silver sulfadiazine: burn wound prophylaxis historically",
+            "Sulfacetamide: bacterial conjunctivitis drops",
+            "Sulfasalazine: ulcerative colitis delivery vehicle"
+          ]
+        },
+        "right": {
+          "title": "Co trimoxazole empire",
+          "points": [
+            "Urinary and respiratory infections where susceptible",
+            "Pneumocystis treatment and prophylaxis",
+            "Nocardia, Stenotrophomonas and community MRSA cover",
+            "Prostatitis from tissue penetration"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Kernicterus** is the sulfonamide lesson written in neonatal neurology: sulfonamides displace bilirubin from albumin, and the newborn's permeable blood brain barrier admits the freed bilirubin to basal ganglia, staining and injuring them permanently. The class is therefore avoided in late pregnancy and neonates, and the same displacement logic cautions other albumin competitors (ceftriaxone in neonates from the beta lactam lessons shares this exact fence).",
+      "say": "Sulfonamides free bilirubin into newborn brains; late pregnancy and neonates are forbidden ground.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "sulfa",
+            "label": "Sulfonamide competes for albumin binding"
+          },
+          {
+            "id": "free",
+            "label": "Unconjugated bilirubin freed in neonatal plasma"
+          },
+          {
+            "id": "brain",
+            "label": "Immature barrier admits bilirubin to basal ganglia"
+          },
+          {
+            "id": "kern",
+            "label": "Kernicterus: permanent choreoathetosis and deafness"
+          }
+        ],
+        "edges": [
+          [
+            "sulfa",
+            "free"
+          ],
+          [
+            "free",
+            "brain"
+          ],
+          [
+            "brain",
+            "kern"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Pneumocystis prophylaxis** is cotrimoxazole's modern crown: in HIV with CD4 counts below 200, transplant and immunosuppressed patients, single strength daily (or double strength thrice weekly) prevents Pneumocystis jirovecii pneumonia and toxoplasmosis together at pennies per day, while treatment doses (15 to 20 mg per kg of trimethoprim) with steroids for hypoxia treat the established pneumonia. No rival (dapsone, atovaquone, aerosolised pentamidine) matches its breadth per coin.",
+      "say": "One cheap tablet guards two opportunist diseases; prophylaxis thresholds are CD4 arithmetic.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prophylaxis territory",
+          "points": [
+            "HIV: CD4 below 200 cells per microlitre",
+            "Transplant and prolonged high dose steroids",
+            "Also prevents toxoplasmosis and bacterial infections",
+            "Stop when immune reconstitution sustains"
+          ]
+        },
+        "right": {
+          "title": "Treatment territory",
+          "points": [
+            "High dose cotrimoxazole 15 to 20 mg/kg trimethoprim",
+            "Adjunct steroids when hypoxic (PaO2 thresholds)",
+            "Alternatives: clindamycin primaquine, atovaquone",
+            "G6PD screening where alternatives use dapsone or primaquine"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**The sulfonamide adverse** catalogue is hypersensitivity heavy: rash through Stevens Johnson syndrome, haemolysis in G6PD deficiency, crystalluria in concentrated acidic urine (hydration prevents), hyperkalaemia from trimethoprim's amiloride like sodium channel blockade, creatinine rises by tubular secretion competition without true injury, marrow suppression, and kernicterus above. True sulfonamide allergy cross reacts within antibacterial sulfonamides, not to sulfur, sulfates or non antibiotic sulfonamides (furosemide, celecoxib) nearly as reliably as labels assume.",
+      "say": "Rash, crystals, potassium and marrow: the catalogue is long, and sulfur allergy is mostly a myth needing interrogation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Common and serious effects",
+          "points": [
+            "Rash through to Stevens Johnson syndrome",
+            "Hyperkalaemia and pseudo creatinine rise (trimethoprim)",
+            "Crystalluria: hydrate and alkalinise where needed",
+            "Haemolysis in G6PD deficiency"
+          ]
+        },
+        "right": {
+          "title": "Allergy label hygiene",
+          "points": [
+            "Cross reactivity within antibacterial sulfonamides",
+            "Non antibiotic sulfonamides rarely cross react",
+            "Sulfur and sulfate allergy do not exist as such",
+            "Labels reviewed before denying prophylaxis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Trimethoprim** alone serves uncomplicated urinary infection where resistance permits (below 20 percent is the empirical rule), and its potassium and creatinine effects are dose proportional pharmacology, not allergy: it blocks epithelial sodium channels in the collecting duct like amiloride and competes for creatinine secretion. Combined with RAAS blockers, spironolactone or kidney impairment, hyperkalaemia hospitalises the unwary, a drug interaction that kills quietly in elderly urinary prescribing.",
+      "say": "Trimethoprim raises potassium like a weak amiloride; with RAAS blockers aboard, check the potassium.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tmp",
+            "label": "Trimethoprim blocks collecting duct sodium channels"
+          },
+          {
+            "id": "k",
+            "label": "Potassium secretion falls, levels rise"
+          },
+          {
+            "id": "stack",
+            "label": "RAAS blockers, spironolactone or CKD stack the risk"
+          },
+          {
+            "id": "check",
+            "label": "Potassium and creatinine checked after starting"
+          }
+        ],
+        "edges": [
+          [
+            "tmp",
+            "k"
+          ],
+          [
+            "k",
+            "stack"
+          ],
+          [
+            "stack",
+            "check"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Fluoroquinolone **ciprofloxacin** and levofloxacin enter from this module's bridge: ciprofloxacin owns Pseudomonas and Gram negative territory including anthrax and traveller's diarrhoea history, **levofloxacin** adds respiratory Gram positive cover as the respiratory quinolone, and both carry the class warnings detailed next lesson (tendon, QT, CNS, cartilage). Their oral bioavailability rivaling intravenous is their stewardship superpower and their overuse engine in a single fact.",
+      "say": "Ciprofloxacin for Pseudomonas, levofloxacin for lungs; oral equals intravenous is both gift and temptation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ciprofloxacin",
+          "points": [
+            "Strongest anti pseudomonal quinolone",
+            "Urinary, gut and anthrax territory",
+            "Gram positive cover modest",
+            "Twice daily, chelation by cations"
+          ]
+        },
+        "right": {
+          "title": "Levofloxacin",
+          "points": [
+            "Respiratory quinolone: pneumococcus covered",
+            "Once daily, renal dosing",
+            "Tuberculosis activity (second line regimens)",
+            "Same class warnings, next lesson detailed"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Sulfonamide resistance rose** on the same mobile genetics as the principles lesson (altered synthase and reductase genes on plasmids), which is why urinary cotrimoxazole is prescribed against local antibiograms rather than habit, and why the drug's prophylactic empire (where resistance matters less against Pneumocystis) outlives its shrinking empirical treatment territory. Stewardship at organism scale is visible nowhere more plainly than in this family's biography.",
+      "say": "Treatment territory shrinks by antibiogram while prophylaxis endures; prescribe against the local map.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Where susceptibility holds",
+          "points": [
+            "Pneumocystis and toxoplasma prophylaxis",
+            "Nocardia and Stenotrophomonas treatment",
+            "Community MRSA skin infections in many regions",
+            "Guided urinary therapy by culture"
+          ]
+        },
+        "right": {
+          "title": "Where empiricism retired",
+          "points": [
+            "Blind urinary therapy where resistance exceeds thresholds",
+            "Respiratory empirical cover in high resistance regions",
+            "Any indication without allergy label review",
+            "Long courses without potassium and marrow review"
+          ]
+        }
+      }
+    }
+  ]
+}

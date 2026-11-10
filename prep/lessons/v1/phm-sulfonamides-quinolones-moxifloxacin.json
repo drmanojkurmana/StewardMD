@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-sulfonamides-quinolones",
+  "subject": "pharmacology",
+  "title": "Fluoroquinolones: Moxifloxacin, Ofloxacin, Targets, Tendon and QT, Nalidixic Acid and Nitrofurantoin",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Fluoroquinolones trap bacterial **DNA gyrase** (topoisomerase II, primary in Gram negatives) and **topoisomerase IV** (primary in Gram positives) on DNA, converting them into double strand break machines that shred the chromosome, bactericidal and concentration dependent. Stepwise target mutations plus efflux and plasmid borne qnr protection genes erode the class; gatifloxacin's dysglycaemia exit and temafloxacin's haemolysis wrote early warnings that the class's convenience would always be audited by rare serious harms.",
+      "say": "Quinolones turn the bacterium's own enzymes into chromosome shredders; resistance edits the enzymes one step at a time.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fq",
+            "label": "Fluoroquinolone enters the bacterium"
+          },
+          {
+            "id": "trap",
+            "label": "Gyrase and topoisomerase IV trapped on DNA"
+          },
+          {
+            "id": "break",
+            "label": "Double strand breaks accumulate"
+          },
+          {
+            "id": "die",
+            "label": "Concentration dependent bactericidal death"
+          }
+        ],
+        "edges": [
+          [
+            "fq",
+            "trap"
+          ],
+          [
+            "trap",
+            "break"
+          ],
+          [
+            "break",
+            "die"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Moxifloxacin** extends the spectrum to anaerobes and tuberculosis (a second line and MDR regimen pillar) with once daily dosing, hepatic clearance and the class's strongest QT prolongation, while lacking urinary concentrations that forbid it in urinary infection, a formulary trap. **Ofloxacin**, levofloxacin's racemic parent, survives in second line tuberculosis history and topical eye and ear preparations where systemic warnings evaporate at microgram exposure.",
+      "say": "Moxifloxacin covers anaerobes and TB but never the urine; QT is its loudest warning.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Moxifloxacin",
+          "points": [
+            "Anaerobic and tuberculosis activity added",
+            "Hepatic clearance, negligible urine levels",
+            "Strongest QT effect in class",
+            "Once daily respiratory and intra abdominal roles"
+          ]
+        },
+        "right": {
+          "title": "Ofloxacin",
+          "points": [
+            "Racemate from which levofloxacin was refined",
+            "Topical ophthalmic and otic preparations common",
+            "Historical second line tuberculosis use",
+            "Systemic use largely superseded"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Tendon rupture** is the class's signature orthopaedic catastrophe: Achilles tendinitis progressing to rupture, risk multiplied by age over 60, steroids, renal failure, transplantation and sport, occurring during or months after therapy. Regulators boxed it alongside peripheral neuropathy (potentially irreversible), CNS effects and myasthenia exacerbation, reserving fluoroquinolones where alternatives exist for sinusitis, bronchitis and uncomplicated urinary infection. Any tendon pain on a quinolone stops the drug and the sport the same day.",
+      "say": "Tendon pain on a quinolone means stop today; the rupture does not send a second warning.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Boxed warning cluster",
+          "points": [
+            "Tendinitis and Achilles rupture",
+            "Peripheral neuropathy, potentially permanent",
+            "CNS: agitation, insomnia, seizures rarely",
+            "Myasthenia gravis exacerbation"
+          ]
+        },
+        "right": {
+          "title": "Risk multipliers",
+          "points": [
+            "Age over 60 and corticosteroid co therapy",
+            "Renal failure and organ transplantation",
+            "High athletic load during therapy",
+            "Previous quinolone tendon injury: never again"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**QT prolongation** ranks within the class (moxifloxacin strongest, then levofloxacin, ciprofloxacin least) and stacks with hypokalaemia, bradycardia and the antiarrhythmic and antipsychotic QT shelves from earlier modules into torsades arithmetic. Dysglycaemia (both directions), photosensitivity, C difficile, aortic aneurysm and dissection signals in predisposed patients, and cartilage toxicity in juvenile animal studies fencing paediatric use to defined exceptions (anthrax, complicated urinary infection, cystic fibrosis) complete the audit list.",
+      "say": "QT, glucose, tendon, nerve, aorta: the quinolone audit is five systems long, so indications must be worth it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "indication",
+            "label": "Quinolone indication proposed"
+          },
+          {
+            "id": "audit",
+            "label": "Tendon, QT, glucose, nerve and aorta audit"
+          },
+          {
+            "id": "alt",
+            "label": "Alternative adequate? Quinolone reserved"
+          },
+          {
+            "id": "counsel",
+            "label": "Stop rules counselled: tendon pain, palpitations, paraesthesia"
+          }
+        ],
+        "edges": [
+          [
+            "indication",
+            "audit"
+          ],
+          [
+            "audit",
+            "alt"
+          ],
+          [
+            "alt",
+            "counsel"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Nalidixic acid**, the first generation quinolone without fluorination, survives as archaeology and a urine only agent whose rapid single step resistance retired it; its importance is genealogical (every fluoroquinolone descends from its naphthyridine scaffold) and mechanistic (proof that gyrase was druggable). Modern formularies that still stock it for urinary infection are practising history, and examinations ask it as the class's founding fossil.",
+      "say": "Nalidixic acid founded the family and retired on resistance; know it as the fossil, not the therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nalidixic acid",
+          "points": [
+            "First generation, non fluorinated quinolone",
+            "Urinary concentrations only, no systemic use",
+            "Single step resistance emerges rapidly",
+            "CNS effects and intracranial pressure in children historically"
+          ]
+        },
+        "right": {
+          "title": "Fluorinated descendants",
+          "points": [
+            "Fluorine and piperazine rings: potency and penetration",
+            "Systemic, respiratory and tissue indications",
+            "Generations widen Gram positive and anaerobic cover",
+            "Class warnings accumulate with potency"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Nitrofurantoin** is reduced by bacterial flavoproteins into reactive intermediates that shatter multiple bacterial targets at once, which is why resistance stays rare after seventy years, and why its therapeutic universe is the bladder: serum and tissue levels are subtherapeutic, forbidding pyelonephritis and bacteraemia use absolutely. It owns uncomplicated cystitis and long term prophylaxis in pregnancy compatible windows (avoided at term for neonatal haemolysis), with eGFR floors debated between 30 and 45.",
+      "say": "Nitrofurantoin is a bladder only drug of rare resistance; pyelonephritis on it is a prescribing error.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nitrofurantoin strengths",
+          "points": [
+            "Multi target bacterial damage, resistance rare",
+            "Uncomplicated cystitis and prophylaxis",
+            "Preserves gut flora relatively, low C difficile",
+            "Oral, inexpensive, pregnancy windows defined"
+          ]
+        },
+        "right": {
+          "title": "Nitrofurantoin fences",
+          "points": [
+            "No tissue levels: never pyelonephritis or sepsis",
+            "eGFR below 30 to 45: ineffective and toxic",
+            "Avoid at term and in G6PD neonates",
+            "Peripheral neuropathy in renal impairment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Chronic nitrofurantoin writes** its own toxicology chapter: acute eosinophilic pneumonitis weeks in, chronic fibrotic lung injury and hepatitis months to years into prophylaxis, and peripheral neuropathy where renal impairment accumulates it. Long term users earn periodic liver, lung and symptom review, and any new cough, breathlessness or jaundice on prophylaxis stops the drug pending workup, because fibrosis caught late does not forgive.",
+      "say": "Years of prophylaxis can scar lungs and liver; new breathlessness on nitrofurantoin stops it first and investigates second.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "chronic",
+            "label": "Months to years of nitrofurantoin prophylaxis"
+          },
+          {
+            "id": "symptom",
+            "label": "New cough, breathlessness, jaundice or paraesthesia"
+          },
+          {
+            "id": "stop",
+            "label": "Stop drug, image and test liver and lungs"
+          },
+          {
+            "id": "review",
+            "label": "Prophylaxis indication re justified or retired"
+          }
+        ],
+        "edges": [
+          [
+            "chronic",
+            "symptom"
+          ],
+          [
+            "symptom",
+            "stop"
+          ],
+          [
+            "stop",
+            "review"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Chelation governs quinolone** absorption absolutely: aluminium and magnesium antacids, iron, calcium, zinc and sucralfate bind the drug in the gut into uselessness, spacing by two hours before or four to six after is prescription information as important as dose, and enteral feeds do the same silently in tube fed patients. Cystic fibrosis, anthrax and febrile neutropenia protocols keep paediatric and specialist doors open where the class warnings bend to indications that outweigh them.",
+      "say": "Cations cage quinolones in the gut; spacing rules are dosing rules, not dietary advice.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chelation culprits",
+          "points": [
+            "Antacids, iron, calcium and zinc supplements",
+            "Sucralfate and phosphate binders",
+            "Enteral feeds in tube fed patients",
+            "Spacing: 2 hours before, 4 to 6 after"
+          ]
+        },
+        "right": {
+          "title": "Where warnings bend",
+          "points": [
+            "Anthrax and plague indications",
+            "Cystic fibrosis Pseudomonas exacerbations",
+            "Complicated urinary infection in children by specialists",
+            "MDR tuberculosis regimens (levofloxacin, moxifloxacin)"
+          ]
+        }
+      }
+    }
+  ]
+}

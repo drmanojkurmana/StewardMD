@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-aminoglycosides",
+  "subject": "pharmacology",
+  "title": "Aminoglycoside Nephrotoxicity, Neuromuscular Blockade, Once Daily Dosing and Spectinomycin",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Nephrotoxicity** is aminoglycoside accumulation in proximal tubular lysosomes producing phospholipidosis and tubular necrosis: a usually reversible, non oliguric acute kidney injury arriving after five to seven days in 5 to 15 percent of courses, announced by rising creatinine and wasting of magnesium, potassium and calcium. Risk multiplies with trough levels, duration, age, volume depletion, and co toxins (vancomycin, amphotericin, ciclosporin, contrast). Recovery takes weeks and forbids immediate rechallenge.",
+      "say": "Day five creatinine creep is tubular aminoglycoside rent coming due; usually reversible, never ignorable.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "accum",
+            "label": "Proximal tubular uptake saturates and accumulates"
+          },
+          {
+            "id": "lyso",
+            "label": "Lysosomal phospholipidosis injures tubular cells"
+          },
+          {
+            "id": "aki",
+            "label": "Non oliguric AKI with magnesium and potassium wasting"
+          },
+          {
+            "id": "recover",
+            "label": "Recovery over weeks after cessation"
+          }
+        ],
+        "edges": [
+          [
+            "accum",
+            "lyso"
+          ],
+          [
+            "lyso",
+            "aki"
+          ],
+          [
+            "aki",
+            "recover"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Neuromuscular blockade** completes the toxicity triad: aminoglycosides reduce presynaptic acetylcholine release (magnesium like) and postsynaptic sensitivity, normally irrelevant, dangerous with neuromuscular blockers, anaesthesia, hypocalcaemia or myasthenia gravis, where apnoea can follow ordinary doses. Calcium (and cautiously anticholinesterases) antagonises it. Rapid intravenous push is the classic precipitant, one more reason infusions run over 30 to 60 minutes.",
+      "say": "Aminoglycosides weaken the junction quietly; with relaxants or myasthenia they can stop breathing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Blockade mechanism",
+          "points": [
+            "Presynaptic acetylcholine release reduced",
+            "Postsynaptic sensitivity blunted",
+            "Magnesium and hypocalcaemia amplify",
+            "Rapid intravenous push precipitates"
+          ]
+        },
+        "right": {
+          "title": "Danger contexts",
+          "points": [
+            "Neuromuscular blockers and anaesthesia",
+            "Myasthenia gravis: avoid where possible",
+            "Botulism and Lambert Eaton vulnerability",
+            "Calcium as partial physiological antagonist"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Once daily dosing** (5 to 7 mg per kg gentamicin or tobramycin) exploits three principles lesson facts at once: concentration dependent killing rewards the peak, the post antibiotic effect covers the trough, and saturable tubular and ear uptake means one large dose loads organs less than three smaller ones with equal area. Meta analyses show equal efficacy with equal or less nephrotoxicity, excluding endocarditis synergy, pregnancy, burns and dialysis populations where traditional dosing and levels rule.",
+      "say": "One big dose kills better and loads organs less; synergy and pregnancy keep the old calendar.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Once daily logic",
+          "points": [
+            "Peak to MIC maximised for killing",
+            "Post antibiotic effect bridges low troughs",
+            "Saturable organ uptake limits toxicity",
+            "Nomograms or single levels verify exposure"
+          ]
+        },
+        "right": {
+          "title": "Traditional dosing retained",
+          "points": [
+            "Endocarditis synergy regimens",
+            "Pregnancy and major burns",
+            "Dialysis and profound renal impairment",
+            "Meningitis and neonates by specialist protocols"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **post antibiotic effect** deserves its starring step: leukocyte enhancement and persistent ribosomal binding suppress regrowth for hours after levels fall below MIC, longer with higher peaks and against Gram positives with beta lactam partners. It is why troughs may safely touch zero in once daily regimens, why aminoglycosides forgive imperfect timing better than beta lactams, and why the effect shortens in neutropenia where the leukocyte half of the partnership is missing.",
+      "say": "The drug leaves and the suppression stays; neutropenia shortens the afterglow and the dosing must know it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "peak",
+            "label": "High peak achieves rapid killing"
+          },
+          {
+            "id": "fall",
+            "label": "Levels fall below MIC"
+          },
+          {
+            "id": "pae",
+            "label": "Post antibiotic effect suppresses regrowth for hours"
+          },
+          {
+            "id": "next",
+            "label": "Next dose timed inside the protected interval"
+          }
+        ],
+        "edges": [
+          [
+            "peak",
+            "fall"
+          ],
+          [
+            "fall",
+            "pae"
+          ],
+          [
+            "pae",
+            "next"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Concentration dependent killing** is quantified as peak to MIC ratios of 8 to 10 targeted for Gram negative sepsis, against time dependent beta lactams chasing duration, the principles lesson's graph now with a prescription attached. Aminoglycoside dosing errors are therefore asymmetric: underdosing loses efficacy irretrievably while modest overdosing costs little in a monitored single dose, which is why sepsis protocols round doses up by weight bands and check levels after, not before, the first dose.",
+      "say": "In septic shock, give the full weight based dose now and measure after; timid first doses lose the peak forever.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Peak driven practice",
+          "points": [
+            "Target peak to MIC of 8 to 10",
+            "Actual body weight dosing with caps by protocol",
+            "First dose never reduced for renal fear in sepsis",
+            "Subsequent doses level guided"
+          ]
+        },
+        "right": {
+          "title": "Time driven contrast",
+          "points": [
+            "Beta lactams: maximise time above MIC",
+            "Extended infusions in critical illness",
+            "Frequent smaller doses",
+            "Post antibiotic effect minimal"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Oxygen dependent transport** writes the family's blind spots permanently: anaerobes never import the drug, acidic abscesses and devitalised tissue inactivate it, enterococci import too little for monotherapy (synergy only), and intracellular pathogens (Salmonella typhi historically disappointing) sit beyond reach. Alkalinising urine enhances urinary activity, a pH footnote used in older urinary protocols. Every blind spot is a vignette where aminoglycoside monotherapy is the wrong answer by mechanism.",
+      "say": "No oxygen, no entry: anaerobes, abscesses and intracellular pathogens are aminoglycoside free zones.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transport dependent failures",
+          "points": [
+            "Anaerobes intrinsically resistant",
+            "Abscess acidity and debris inactivate",
+            "Enterococci: synergy only, never alone",
+            "Intracellular pathogens unreachable"
+          ]
+        },
+        "right": {
+          "title": "Where transport triumphs",
+          "points": [
+            "Aerobic Gram negative bacteraemia",
+            "Urinary tract with alkaline enhancement",
+            "Synergy across damaged cell walls",
+            "Inhaled delivery bypasses transport limits"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Spectinomycin**, an aminocyclitol cousin binding the 30S subunit without misreading, is bacteriostatic and survives as a single dose gonorrhoea alternative where ceftriaxone cannot go, ineffective in pharyngeal infection and unavailable in many markets, its examination value being taxonomic (not a true aminoglycoside, no ototoxicity signature) and historical. Plazomicin, the engineered modern aminoglycoside for carbapenem resistant Enterobacterales, carries the family into the resistance era with the same organ surveillance attached.",
+      "say": "Spectinomycin is the cousin who binds politely and treats gonorrhoea once; plazomicin is the family's resistance era heir.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Spectinomycin",
+          "points": [
+            "Aminocyclitol, 30S binding without misreading",
+            "Single dose gonorrhoea alternative",
+            "Pharyngeal infection unreliable",
+            "No classic oto or nephrotoxic signature"
+          ]
+        },
+        "right": {
+          "title": "Plazomicin",
+          "points": [
+            "Engineered against modifying enzymes",
+            "Carbapenem resistant Enterobacterales niche",
+            "16S methyltransferases still defeat it",
+            "Full aminoglycoside monitoring applies"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Monitoring bundles close** the module as a prescribing checklist: indication and regimen named, weight and renal baseline, dose by protocol, level timing documented (trough before the fourth traditional dose, nomogram point after the first once daily dose), creatinine and electrolytes serially, hearing and balance enquiry in courses beyond a week, interacting toxins audited (loop diuretics, vancomycin, contrast) and a stop or de escalation date that cultures are invited to shorten.",
+      "say": "Indication, weight, level, creatinine, ears, stop date: six nouns on every aminoglycoside order.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "order",
+            "label": "Indication, regimen and weight documented"
+          },
+          {
+            "id": "level",
+            "label": "Level timing per protocol"
+          },
+          {
+            "id": "organs",
+            "label": "Creatinine, electrolytes, hearing reviewed"
+          },
+          {
+            "id": "stop",
+            "label": "De escalation or stop date honoured"
+          }
+        ],
+        "edges": [
+          [
+            "order",
+            "level"
+          ],
+          [
+            "level",
+            "organs"
+          ],
+          [
+            "organs",
+            "stop"
+          ]
+        ]
+      }
+    }
+  ]
+}
