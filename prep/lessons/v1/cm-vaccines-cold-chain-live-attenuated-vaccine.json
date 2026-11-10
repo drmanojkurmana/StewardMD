@@ -98,6 +98,17 @@
    }
   },
   {
+   "tx": "A **vaccine vial monitor** is a heat sensitive label whose inner square darkens with cumulative heat. Lighter than the outer circle means the vaccine may be used. Colour equal to the circle means that vial should be used first. Darker than the circle means discard. Types VVM2, VVM7, VVM14, and VVM30 reach discard after that many days at a constant 37 degrees. The square remembers warmth. It never detects freezing, so a vial that has frozen can still display a square that looks usable.",
+   "say": "The inner square of a vaccine vial monitor darkens as heat adds up. Lighter than the outer circle means use the vial, the same colour means use it first, and darker means discard. The type number is how many days at 37 degrees bring the discard point. Freezing leaves no mark on this label.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n260-cm-vaccines-cold-chain-live-attenuated-vaccine.webp",
+    "alt": "Three vaccine vial monitors show an inner square lighter than, equal to, and darker than the outer circle.",
+    "caption": "The inner square progresses from paler than the reference ring, to the same colour, to darker than the ring as heat exposure accumulates. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "title": "Shake test for suspected freezing",
    "tx": "The **shake test** checks freeze damage in adsorbed vaccines: freeze a same-batch control vial solid at minus 20 degrees overnight, thaw, shake both vials vigorously for 10 to 15 seconds, rest 30 minutes and compare sedimentation. Faster or equal sedimentation in the test vial means freeze damage and discard; slower means the batch survives.",
    "say": "Freezing betrays itself by settling. Freeze a same-batch control overnight, shake both together, rest half an hour. Test vial settling as fast as the frozen control means damage and discard; slower settling clears the batch.",
@@ -110,6 +121,17 @@
      {"id": "d", "label": "Faster settling: discard batch"}
     ],
     "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "The **shake test** checks freeze damage in adsorbed vaccines. Freeze a same batch control solid overnight at minus 20 degrees, then thaw it. Shake both vials hard for 10 to 15 seconds and let them stand for 30 minutes. If the test vial sediments as fast as the frozen control, or faster, the batch was frozen and is discarded. Slower sedimentation means freezing has not ruined it and the vaccine may still be used.",
+   "say": "Freeze a same batch control solid overnight at minus 20 degrees, thaw it, and shake it with the suspect vial for 10 to 15 seconds. After 30 minutes, settling as fast as that frozen control means damage and discard. Slower settling means the batch survived freezing.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n261-cm-vaccines-cold-chain-live-attenuated-vaccine.webp",
+    "alt": "Two vials rest after shaking, one sedimenting slowly and a frozen control sedimenting quickly.",
+    "caption": "After a timed rest, the test vial stays cloudy longer while the deliberately frozen control has already settled. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {

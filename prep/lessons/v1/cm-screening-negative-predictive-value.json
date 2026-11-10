@@ -50,6 +50,17 @@
    }
   },
   {
+   "tx": "**Disease prevalence** changes predictive value while sensitivity and specificity stay fixed. Take a gonorrhoea smear with 50 percent sensitivity and 90 percent specificity. Its positive predictive value is 21 percent when prevalence is 5 percent, 47 percent when prevalence is 15 percent, and 63 percent when prevalence is 25 percent. The identical positive smear means different things in a low prevalence clinic and in a high prevalence clinic. Screening a rare disease with that test therefore manufactures mostly false positives by arithmetic.",
+   "say": "Keep sensitivity at 50 percent and specificity at 90 percent, and positive predictive value still moves from 21 percent at 5 percent prevalence to 47 percent at 15 percent and 63 percent at 25 percent. The assay did not get better. Screening rare disease creates many false alarms because true cases are scarce.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n248-cm-screening-negative-predictive-value.webp",
+    "alt": "A bar chart shows positive predictive value rising from 21 to 47 to 63 percent as prevalence rises from 5 to 15 to 25 percent.",
+    "caption": "Three bars grow taller as the same test is applied in populations with higher disease prevalence. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "title": "False negatives reassure falsely",
    "tx": "**False negatives** tell diseased people they are healthy, a false reassurance that can postpone care when symptoms later appear and the test is not soon repeated. The worked table hides 100 of them, 71.4 percent of all diseased. Sensitive tests minimise this cell; that is the entire argument for sensitivity where disease is serious and treatable.",
    "say": "One error cell lies to the sick. False negatives send diseased people home reassured, and later symptoms get ignored. The worked table hides one hundred of them. Sensitive tests shrink this cell; serious treatable disease demands exactly that.",
@@ -92,6 +103,17 @@
      {"id": "d", "label": "Area under curve compares tests"}
     ],
     "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "tx": "An **ROC curve** plots sensitivity against 1 minus specificity for every possible cut off of a quantitative test, turning the whole trade off into one picture. A better test bows toward the top left corner, where true positives are high and false positives are few. The diagonal is a useless test, no better than chance. Area under the curve compresses accuracy into a single number so two assays can be compared without arguing over one arbitrary threshold.",
+   "say": "Every cut off of a numeric test can be drawn as sensitivity against the false positive rate. Stronger tests arch toward the top left corner. The diagonal performs no better than chance. Area under the curve packs that accuracy into one number used to compare tests.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n249-cm-screening-negative-predictive-value.webp",
+    "alt": "An ROC plot shows a useful curve bowing to the top left, a useless diagonal, and a shaded area under the curve.",
+    "caption": "Sensitivity is plotted against the false positive rate, with a strong test arching toward the corner and a chance test lying on the diagonal. Illustration: StewardMD original.",
+    "ar": 1.3393
    }
   },
   {
