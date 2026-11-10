@@ -1001,3 +1001,289 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-canvas { overflow-x: hidden; overscroll-behavior: contain; touch-action: pan-y; }
 #smdQueue .q-canvas > * { min-width: 0; max-width: 100%; }
 #smdQueue .q-pulse-row, #smdQueue .q-fd .q-pulse-row { touch-action: pan-x pan-y; overscroll-behavior-x: contain; }
+
+/* ── Truthful backup card, clinic set-up form, 44px targets (both queue screens) ─────────────────── */
+#smdQueue { --warn-container: #fdf2de; --on-warn-container: #6f4a06; --r-card: 16px; --r-ctl: 12px; --r-tag: 6px; }
+body.dark #smdQueue { --warn-container: #3a2e12; --on-warn-container: #f3d08a; }
+#smdQueue .q-hint-lead { margin: -4px 0 12px; }
+#smdQueue .q-hint-h { margin: 2px 0 6px; font-weight: 700; color: var(--on-surface); }
+#smdQueue .q-hint-status { margin: 10px 0 4px; }
+#smdQueue .q-warn { display: flex; align-items: flex-start; gap: 10px; margin-top: 10px; padding: 12px; border-radius: var(--r-ctl); background: var(--warn-container); color: var(--on-warn-container); font: 500 13px/1.45 var(--q-sans); }
+#smdQueue .q-warn .material-symbols-outlined { font-size: 20px; flex: 0 0 auto; }
+#smdQueue .q-gate-lbl { display: block; text-align: left; margin: 0 2px 6px; font: 600 13px var(--q-sans); color: var(--on-surface-variant); }
+#smdQueue .q-gate-close { min-height: 44px; }
+#smdQueue .q-finish { min-height: 44px; }
+#smdQueue input { caret-color: var(--primary); }
+
+/* ── Palette and type for the 2026-11 queue screen. Scoped to .q2app, so every existing rule under it
+   (profile and priority sheets, analytics, settings, the gates) takes the same colours and face.
+   ONE accent: emerald. ONE grey family: green-tinted neutrals. Face: the iPhone's own (San Francisco, through
+   -apple-system); Android has no San Francisco, so it gets the bundled Inter, the closest open face.
+   Telugu and Devanagari fall through to the bundled Noto faces. ─────────────────────────────────────────── */
+#smdQueue .q2app {
+  --primary: #0a7556; --on-primary: #ffffff; --primary-container: #0a7556; --on-primary-container: #ffffff;
+  --secondary: #5b6965; --on-surface: #101a17; --on-surface-variant: #3f4b47;
+  --bg: #f3f5f4; --surface: #f3f5f4; --surface-bright: #f3f5f4;
+  --sc-lowest: #ffffff; --sc-low: #f1f3f2; --sc: #eceeed; --sc-high: #e6e9e8; --sc-highest: #dfe3e1;
+  --outline: #75827e; --outline-variant: #d5dbd8;
+  --error: #c0271f; --on-error: #ffffff; --error-container: #fdecea; --on-error-container: #8c1812;
+  --warn-container: #fff3d9; --on-warn-container: #7a4a00;
+  --q2-hero: #0a7556; --q2-on-hero: #ffffff;
+  --r-card: 24px; --r-ctl: 14px; --r-tag: 8px;
+  --q2-ease: cubic-bezier(.23, 1, .32, 1);
+  --q-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Inter Variable', 'Noto Sans Telugu', 'Noto Sans Devanagari', system-ui, Roboto, sans-serif;
+}
+body.dark #smdQueue .q2app {
+  --primary: #3ecf9a; --on-primary: #04291c; --primary-container: #0d5a43; --on-primary-container: #d6f7ea;
+  --secondary: #9aa8a3; --on-surface: #eef3f1; --on-surface-variant: #c2cdc9;
+  --bg: #0b110f; --surface: #0b110f; --surface-bright: #151c19;
+  --sc-lowest: #151c19; --sc-low: #1a2320; --sc: #1f2925; --sc-high: #25302c; --sc-highest: #2c3833;
+  --outline: #7d8a86; --outline-variant: #2e3a36;
+  --error: #ff8a80; --on-error: #3b0b08; --error-container: #4a1512; --on-error-container: #ffd9d5;
+  --warn-container: #3b2e10; --on-warn-container: #f5d28a;
+  --q2-hero: #0d5a43; --q2-on-hero: #ffffff;
+}
+
+/* ── The 2026-11 queue screen (flag smd_opd_q2). Tokens only (palette above).
+   Shape lock: surfaces 24, controls 14, tags and tokens 8, avatar and switch round. Nothing else.
+   Type ramp (Apple's): title 30 bold, names 24 or 20 bold, headline 17 semibold, buttons 17 semibold,
+   text 16 or 15 regular, footnote 13 regular. San Francisco does its own tracking; only titles are tightened.
+   Heights: buttons 50, row and header controls 44, rows 68, icons 20. Spacing on a 4px grid.
+   Surfaces are flat white on a grey ground with no outlines; only sheets and the undo message float.
+   Emerald is spent on the patient with the doctor and the one main action; amber and red mean a
+   patient needs someone. Motion: press 120ms, sheets 280ms on --q2-ease, off under reduced motion. ── */
+#smdQueue .q2app, #smdQueue .q2app button, #smdQueue .q2app input, #smdQueue .q2app select { font-family: var(--q-sans); }
+#smdQueue .q2app { -webkit-font-smoothing: antialiased; color: var(--on-surface); }
+#smdQueue .q2 { background: var(--bg); }
+#smdQueue .q2 .q-canvas { gap: 16px; padding: 4px 16px 112px; background: var(--bg); }
+#smdQueue .q2 .q-canvas > * { flex-shrink: 0; }
+#smdQueue .q2 .q-card { animation: none; box-shadow: none; border: none; border-radius: var(--r-card); padding: 20px; }
+#smdQueue .q2 ::selection, #smdQueue .q2-over ::selection { background: color-mix(in srgb, var(--primary) 22%, transparent); }
+
+/* bar: leave, where you are, add, you */
+#smdQueue .q2-top { box-shadow: none; border-bottom: none; background: var(--bg); }
+#smdQueue .q2-top .q-top-in { gap: 8px; padding-left: 8px; padding-right: 16px; }
+#smdQueue .q2-top .q-iconbtn { border: none; background: none; color: var(--on-surface); }
+#smdQueue .q2-top .q-top-r { gap: 8px; }
+#smdQueue .q2-title { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+#smdQueue .q2-title b { font: 700 17px/1.25 var(--q-sans); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#smdQueue .q2-title span { font: 400 13px/1.3 var(--q-sans); color: var(--secondary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#smdQueue .q2-add { display: inline-flex; align-items: center; gap: 6px; height: 44px; padding: 0 16px 0 12px; border: none; border-radius: var(--r-ctl); background: var(--sc-lowest); color: var(--on-surface); font: 600 15px var(--q-sans); cursor: pointer; }
+#smdQueue .q2-add .material-symbols-outlined { font-size: 20px; color: var(--primary); }
+#smdQueue .q2-top .q-avatar-btn { border: none; font: 700 14px var(--q-sans); }
+
+/* small parts */
+#smdQueue .q2-h { display: flex; align-items: center; gap: 8px; margin: 0; font: 700 20px/1.25 var(--q-sans); color: var(--on-surface); }
+#smdQueue .q2-count { color: var(--secondary); font-weight: 600; font-variant-numeric: tabular-nums; }
+#smdQueue .q2-muted { margin: 4px 0 0; font: 400 15px/1.45 var(--q-sans); color: var(--secondary); font-variant-numeric: tabular-nums; }
+#smdQueue .q2-name { font: 700 20px/1.25 var(--q-sans); color: var(--on-surface); overflow-wrap: anywhere; min-width: 0; }
+#smdQueue .q2-tag { display: inline-flex; align-items: center; gap: 4px; flex: 0 0 auto; padding: 3px 8px; border-radius: var(--r-tag); background: var(--sc-high); color: var(--on-surface-variant); font: 600 12px/1.5 var(--q-sans); white-space: nowrap; }
+#smdQueue .q2-tag.warn { background: var(--warn-container); color: var(--on-warn-container); }
+#smdQueue .q2-tag.danger { background: var(--error-container); color: var(--on-error-container); }
+#smdQueue .q2app .q-tok { display: inline-block; min-width: 44px; margin-right: 10px; padding: 0 8px; border-radius: var(--r-tag); background: var(--sc); color: var(--on-surface); font: 700 13px/28px var(--q-sans); letter-spacing: .01em; text-align: center; vertical-align: 3px; }
+#smdQueue .q2-meta { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; min-height: 24px; font: 400 14px/1.4 var(--q-sans); color: var(--secondary); font-variant-numeric: tabular-nums; }
+#smdQueue .q2-meta b { font-weight: 700; color: var(--on-surface); }
+#smdQueue .q2-meta .late, #smdQueue .q2-rwhen.late { color: var(--error); font-weight: 600; }
+#smdQueue .q2-dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; flex: 0 0 auto; }
+
+/* title: the state of the queue */
+#smdQueue .q2-status { padding: 4px 4px 4px; }
+#smdQueue .q2-lt { margin: 0; font: 700 30px/1.15 var(--q-sans); letter-spacing: -.02em; color: var(--on-surface); font-variant-numeric: tabular-nums; }
+#smdQueue .q2-sub { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; margin: 6px 0 0; font: 400 15px/1.4 var(--q-sans); color: var(--secondary); font-variant-numeric: tabular-nums; }
+#smdQueue .q2-hold { display: flex; align-items: center; gap: 8px; margin-top: 12px; padding: 8px 8px 8px 12px; border-radius: var(--r-ctl); background: var(--warn-container); color: var(--on-warn-container); font: 600 14px/1.4 var(--q-sans); }
+#smdQueue .q2-hold > span:not(.material-symbols-outlined) { flex: 1; min-width: 0; }
+#smdQueue .q2-hold .material-symbols-outlined { font-size: 20px; }
+#smdQueue .q2-hold .q2-btn { width: auto; flex: 0 0 auto; background: var(--sc-lowest); }
+
+/* the patient with you: the one emerald surface on the screen */
+#smdQueue .q2-now, #smdQueue .q2-next, #smdQueue .q2-empty { padding: 20px; border-radius: var(--r-card); background: var(--sc-lowest); }
+#smdQueue .q2-now { background: var(--q2-hero); color: var(--q2-on-hero); }
+#smdQueue .q2-now .q2-meta { flex-wrap: nowrap; color: color-mix(in srgb, var(--q2-on-hero) 78%, var(--q2-hero)); }
+#smdQueue .q2-now .q2-meta b { flex: 0 0 auto; color: var(--q2-on-hero); }
+#smdQueue .q2-now .q2-meta [data-q2-since] { min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+#smdQueue .q2-now .q2-dot { color: var(--q2-on-hero); }
+#smdQueue .q2-now .q2-meta .q2-tag, #smdQueue .q2-next .q2-meta .q2-tag { margin-left: auto; }
+#smdQueue .q2-now .q2-tag, #smdQueue .q2-now .q-tok { background: color-mix(in srgb, var(--q2-on-hero) 16%, transparent); color: var(--q2-on-hero); }
+#smdQueue .q2-now .q2-name { margin-top: 8px; font-size: 24px; color: var(--q2-on-hero); }
+#smdQueue .q2-next .q2-name { margin-top: 6px; }
+#smdQueue .q2-acts { display: flex; gap: 8px; margin-top: 16px; }
+#smdQueue .q2-acts .q2-btn { flex: 1 1 0; min-width: 0; padding: 0 10px; }
+#smdQueue .q2-next .q2-acts .q2-btn { font-size: 16px; }
+#smdQueue .q2-acts .q2-btn.primary, #smdQueue .q2-acts .q2-btn.tonal { flex: 1.3 1 0; }
+#smdQueue .q2-acts .q2-btn.icon { flex: 0 0 50px; }
+#smdQueue .q2-now .q2-btn.primary { background: var(--q2-on-hero); color: var(--q2-hero); }
+#smdQueue .q2-now .q2-btn.primary:active { background: color-mix(in srgb, var(--q2-on-hero) 88%, var(--q2-hero)); }
+#smdQueue .q2-now .q2-btn.icon { background: color-mix(in srgb, var(--q2-on-hero) 16%, transparent); color: var(--q2-on-hero); }
+
+/* buttons: one shape, filled / tinted / quiet */
+#smdQueue .q2-btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; width: 100%; height: 50px; padding: 0 16px; box-sizing: border-box; border: none; border-radius: var(--r-ctl); background: var(--sc-low); color: var(--on-surface); font: 600 17px/1.2 var(--q-sans); white-space: nowrap; cursor: pointer; -webkit-tap-highlight-color: transparent; transition: transform .12s var(--q2-ease), background .12s ease; }
+#smdQueue .q2-btn:active { transform: scale(.97); background: var(--sc-high); }
+#smdQueue .q2-btn .material-symbols-outlined { font-size: 20px; }
+#smdQueue .q2-btn.primary { background: var(--primary); color: var(--on-primary); }
+#smdQueue .q2-btn.primary:active { background: color-mix(in srgb, var(--primary) 86%, black); }
+#smdQueue .q2-btn.tonal { background: color-mix(in srgb, var(--primary) 12%, var(--sc-lowest)); color: var(--primary); }
+#smdQueue .q2-btn.danger { background: var(--error); color: var(--on-error); }
+#smdQueue .q2-btn.icon { width: 50px; padding: 0; color: var(--on-surface-variant); }
+#smdQueue .q2-btn.sm { width: auto; height: 44px; padding: 0 14px; border-radius: 12px; font-size: 15px; }
+#smdQueue .q2-btn.sm.icon { width: 44px; padding: 0; background: none; }
+#smdQueue .q2-row .q2-btn.sm:not(.icon) .material-symbols-outlined { display: none; }
+#smdQueue .q2-link { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; border: none; background: none; color: var(--primary); font: 600 15px var(--q-sans); cursor: pointer; }
+
+/* end the consult: a slim track inside the emerald card */
+#smdQueue .q2-swipe { display: block; width: 100%; height: 44px; margin-top: 8px; padding: 0; border: none; border-radius: var(--r-ctl); background: color-mix(in srgb, var(--q2-on-hero) 14%, transparent); font: inherit; color: inherit; cursor: pointer; -webkit-appearance: none; appearance: none; -webkit-tap-highlight-color: transparent; }
+#smdQueue .q2-swipe span { display: block; }
+#smdQueue .q2-swipe .q-swipe-fill { width: 44px; background: var(--q2-on-hero); opacity: .12; }
+#smdQueue .q2-swipe.armed .q-swipe-fill { opacity: .24; }
+#smdQueue .q2-swipe .q-swipe-txt { display: flex; padding-left: 36px; font: 600 14px var(--q-sans); color: color-mix(in srgb, var(--q2-on-hero) 88%, var(--q2-hero)); }
+#smdQueue .q2-swipe.armed .q-swipe-txt { color: var(--q2-on-hero); }
+#smdQueue .q2-swipe .q-swipe-knob { display: flex; left: 4px; top: 4px; width: 36px; height: 36px; border-radius: 10px; background: var(--q2-on-hero); color: var(--q2-hero); box-shadow: none; }
+#smdQueue .q2-swipe .q-swipe-knob .material-symbols-outlined { font-size: 20px; }
+
+/* waiting: one white surface, inset hairlines */
+#smdQueue .q2-list { margin-top: 8px; }
+#smdQueue .q2-listh { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 44px; padding: 0 4px; margin-bottom: 4px; }
+#smdQueue .q2 #qTlRows { border-radius: var(--r-card); background: var(--sc-lowest); overflow: hidden; }
+#smdQueue .q2 .q-tl-search-wrap { margin-bottom: 8px; height: 48px; padding: 0 4px 0 14px; border: none; border-radius: var(--r-ctl); background: var(--sc-lowest); }
+#smdQueue .q2 .q-tl-search { font: 400 16px var(--q-sans); }
+#smdQueue .q2 .q-tl-search-x { width: 44px; height: 44px; align-items: center; justify-content: center; }
+#smdQueue .q2-row { position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto 44px; align-items: center; gap: 4px; min-height: 68px; padding: 10px 6px 10px 16px; }
+#smdQueue .q2-row + .q2-row::before { content: ""; position: absolute; top: 0; left: 16px; right: 0; height: 1px; background: var(--sc-high); }
+#smdQueue .q2-row .q-tok { min-width: 40px; margin-right: 6px; padding: 0 6px; vertical-align: 0; }
+#smdQueue .q2-row .q2-notok { color: var(--secondary); }
+#smdQueue .q2-pos { display: none; font: 600 13px var(--q-sans); color: var(--secondary); text-align: center; font-variant-numeric: tabular-nums; }
+#smdQueue .q2-rinfo { display: flex; flex-direction: column; gap: 2px; min-width: 0; padding-right: 4px; }
+#smdQueue .q2-rname { font: 600 16px/1.3 var(--q-sans); color: var(--on-surface); overflow-wrap: anywhere; }
+#smdQueue .q2-rmeta { display: flex; flex-wrap: wrap; align-items: center; gap: 2px 8px; }
+#smdQueue .q2-rwhen { font: 400 13px/1.4 var(--q-sans); color: var(--secondary); font-variant-numeric: tabular-nums; }
+#smdQueue .q2-none { margin: 0; padding: 20px 16px; }
+
+/* empty day */
+#smdQueue .q2-empty { display: flex; flex-direction: column; gap: 8px; padding: 24px 20px 20px; }
+#smdQueue .q2-empty p { margin: 0 0 8px; font: 400 15px/1.5 var(--q-sans); color: var(--secondary); }
+
+/* sheets rise from the bottom edge */
+@keyframes q2SheetUp { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes q2Fade { from { opacity: 0; } to { opacity: 1; } }
+#smdQueue .q2-over { align-items: flex-end; padding: 0; background: color-mix(in srgb, black 40%, transparent); backdrop-filter: none; -webkit-backdrop-filter: none; animation: q2Fade .2s ease both; }
+#smdQueue .q2-over .q2-sheet { display: flex; flex-direction: column; width: 100%; max-width: 560px; padding: 20px 16px calc(16px + env(safe-area-inset-bottom, 0px)); border: none; border-radius: 28px 28px 0 0; box-shadow: none; animation: q2SheetUp .28s var(--q2-ease) both; }
+#smdQueue .q2-sheet-h { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; padding: 0 0 12px 4px; }
+#smdQueue .q2-sheet-h .q2-meta { margin-top: 6px; }
+#smdQueue .q2-sheet-h .q-profile-x { flex: 0 0 auto; margin: -6px -4px 0 0; border: none; background: var(--sc-low); border-radius: 50%; color: var(--on-surface-variant); }
+#smdQueue .q2-items { display: flex; flex-direction: column; border-radius: 18px; background: var(--sc-low); overflow: hidden; }
+#smdQueue .q2-item { position: relative; display: flex; align-items: center; gap: 14px; width: 100%; height: 56px; padding: 0 16px; border: none; background: none; color: var(--on-surface); font: 600 16px/1.3 var(--q-sans); text-align: left; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+#smdQueue .q2-item + .q2-item::before { content: ""; position: absolute; top: 0; left: 50px; right: 0; height: 1px; background: var(--sc-highest); }
+#smdQueue .q2-item:active { background: var(--sc-high); }
+#smdQueue .q2-item .material-symbols-outlined { font-size: 20px; color: var(--on-surface-variant); flex: 0 0 auto; }
+#smdQueue .q2-items.q2-danger { margin-top: 16px; background: var(--error-container); }
+#smdQueue .q2-item.danger { color: var(--error); font-weight: 600; }
+#smdQueue .q2-item.danger .material-symbols-outlined { color: var(--error); }
+#smdQueue .q2-ask > .q2-name { padding: 0 4px; }
+#smdQueue .q2-ask > .q2-muted { margin: 6px 4px 20px; }
+#smdQueue .q2-ask > .q2-btn + .q2-btn { margin-top: 8px; }
+#smdQueue .q2-ask > .q-gate-lbl { margin: 0 4px 8px; }
+#smdQueue .q2-ask > .q-gate-in { height: 50px; margin: 0 0 16px; border: none; border-radius: var(--r-ctl); background: var(--sc-low); font: 400 16px var(--q-sans); }
+
+/* undo */
+#smdQueue .q2-snack { position: absolute; left: 16px; right: 16px; bottom: calc(84px + env(safe-area-inset-bottom, 0px)); z-index: 25; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 4px 4px 4px 16px; border-radius: var(--r-ctl); background: var(--on-surface); color: var(--bg); font: 600 14px/1.4 var(--q-sans); box-shadow: 0 8px 24px color-mix(in srgb, black 22%, transparent); animation: q2Fade .2s ease both; }
+#smdQueue .q2-snack button { flex: 0 0 auto; height: 44px; padding: 0 14px; border: none; border-radius: 10px; background: none; color: inherit; font: 700 14px var(--q-sans); cursor: pointer; }
+
+/* tabs: the platform's bar, not pills */
+#smdQueue .q2 .q-bottomnav { padding: 6px 8px calc(6px + env(safe-area-inset-bottom, 0px)); gap: 0; border-top: 1px solid var(--sc-high); background: color-mix(in srgb, var(--sc-lowest) 86%, transparent); -webkit-backdrop-filter: saturate(1.6) blur(20px); backdrop-filter: saturate(1.6) blur(20px); }
+#smdQueue .q2 .q-bottomnav .q-nav { min-height: 50px; gap: 2px; padding: 4px; border-radius: 0; background: none; color: var(--secondary); font: 600 11px/1.3 var(--q-sans); -webkit-tap-highlight-color: transparent; }
+#smdQueue .q2 .q-bottomnav .q-nav .material-symbols-outlined { font-size: 26px; }
+#smdQueue .q2 .q-bottomnav .q-nav.on { background: none; color: var(--primary); }
+#smdQueue .q2 .q-bottomnav .q-nav:active { opacity: .6; }
+
+/* settings: grouped white surfaces, calmer controls */
+#smdQueue .q2 .q-set-hd { margin: 0; padding: 4px; }
+#smdQueue .q2 .q-set-hd .q-h2 { font: 700 30px/1.15 var(--q-sans); letter-spacing: -.02em; }
+#smdQueue .q2 .q-set-hd .q-h2 .material-symbols-outlined { display: none; }
+#smdQueue .q2 .q-grid2 { gap: 16px; }
+#smdQueue .q2 .q-card-h { margin-bottom: 8px; font: 700 17px/1.3 var(--q-sans); }
+#smdQueue .q2 .q-hint { margin-top: 4px; font: 400 13px/1.45 var(--q-sans); color: var(--secondary); }
+#smdQueue .q2 .q-hint-lead { margin: 0 0 12px; font-size: 14px; }
+#smdQueue .q2 .q-hint-h { margin: 0 0 4px; font-weight: 600; color: var(--on-surface); }
+#smdQueue .q2 .q-fld { margin: 16px 0 0; }
+#smdQueue .q2 .q-fld label { margin-bottom: 8px; font: 600 15px/1.3 var(--q-sans); }
+#smdQueue .q2 .q-fld input { height: 50px; padding: 0 16px; border: none; border-radius: var(--r-ctl); background: var(--sc-low); font: 600 17px var(--q-sans); font-variant-numeric: tabular-nums; }
+#smdQueue .q2 .q-fld input:focus { outline: 2px solid var(--primary); outline-offset: 0; }
+#smdQueue .q2 .q-out { margin-top: 16px; padding: 12px 0; border-top: 1px solid var(--sc-high); border-bottom: none; font: 600 14px var(--q-sans); }
+#smdQueue .q2 .q-togrow { min-height: 60px; padding: 8px 0; border-top-color: var(--sc-high); }
+#smdQueue .q2 .q-togl { font: 600 16px/1.3 var(--q-sans); }
+#smdQueue .q2 .q-tog { width: 51px; height: 31px; }
+#smdQueue .q2 .q-tog::after { content: ""; position: absolute; inset: -7px; }
+#smdQueue .q2 .q-tog span { background: var(--sc-highest); transition: background .2s ease; }
+#smdQueue .q2 .q-tog span::before { top: 2px; left: 2px; width: 27px; height: 27px; background: var(--q2-on-hero); box-shadow: 0 2px 4px color-mix(in srgb, black 18%, transparent); transition: transform .2s var(--q2-ease); }
+#smdQueue .q2 .q-tog input:checked + span { background: var(--primary); }
+#smdQueue .q2 .q-tog input:checked + span::before { transform: translateX(20px); }
+#smdQueue .q2 .q-tog input:focus-visible + span { outline: 2px solid var(--primary); outline-offset: 2px; }
+#smdQueue .q2 .q-set-btn { height: 50px; margin-top: 12px; padding: 0 16px; border: none; border-radius: var(--r-ctl); background: color-mix(in srgb, var(--primary) 12%, var(--sc-lowest)); color: var(--primary); font: 600 16px var(--q-sans); }
+#smdQueue .q2 .q-warn { margin-top: 12px; }
+
+#smdQueue .q2 button:focus-visible, #smdQueue .q2-sheet button:focus-visible, #smdQueue .q2-sheet input:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+#smdQueue .q2-now button:focus-visible { outline-color: var(--q2-on-hero); }
+@media (max-width: 359px) {
+  #smdQueue .q2-next .q2-acts { flex-wrap: wrap; }
+  #smdQueue .q2-next .q2-acts .q2-btn.primary, #smdQueue .q2-next .q2-acts .q2-btn.tonal { flex: 1 0 100%; }
+  #smdQueue .q2-add { width: 44px; padding: 0; justify-content: center; }
+  #smdQueue .q2-add span:not(.material-symbols-outlined) { display: none; }
+  #smdQueue .q2-lt { font-size: 26px; }
+}
+/* The place in the queue is a column of its own once there is room for it; on a phone the order of the rows says it. */
+@media (min-width: 480px) {
+  #smdQueue .q2-row { grid-template-columns: 20px auto minmax(0, 1fr) auto 44px; }
+  #smdQueue .q2-pos { display: block; }
+}
+@media (min-width: 901px) {
+  #smdQueue .q2 .q-canvas { max-width: 720px; }
+  #smdQueue .q2-over { align-items: center; padding: 24px; }
+  #smdQueue .q2-over .q2-sheet { max-width: 420px; border-radius: 28px; animation: q2Fade .2s ease both; }
+  #smdQueue .q2-snack { left: auto; right: 24px; bottom: 24px; max-width: 420px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #smdQueue .q2-btn, #smdQueue .q2-btn:active, #smdQueue .q2 .q-tog span, #smdQueue .q2 .q-tog span::before { transition: none; }
+  #smdQueue .q2-btn:active { transform: none; }
+  #smdQueue .q2-over, #smdQueue .q2-over .q2-sheet, #smdQueue .q2-snack { animation: none; }
+}
+
+/* The sheets and gates the new screen shares with the earlier one, in the same language: filled controls,
+   no outlines, the same shape lock. Choices are neutral rows; only the button that commits is emerald. */
+#smdQueue .q2app .q-profile { border: none; border-radius: 28px; }
+#smdQueue .q2app .q-profile-id b { font: 700 20px/1.25 var(--q-sans); }
+#smdQueue .q2app .q-profile-id span { font: 400 14px var(--q-sans); }
+#smdQueue .q2app .q-profile-row { padding: 14px 0; border-top-color: var(--sc-high); font: 400 15px var(--q-sans); }
+#smdQueue .q2app .q-sec-h { margin: 8px 0; font: 700 15px/1.3 var(--q-sans); text-transform: none; color: var(--on-surface); }
+#smdQueue .q2app .q-profile .q-ic { border: none; border-radius: 12px; background: var(--sc-low); color: var(--on-surface-variant); }
+#smdQueue .q2app .q-profile .q-profile-x { border-radius: 50%; }
+#smdQueue .q2app .q-pbtn { height: 50px; padding: 0 16px; border: none; border-radius: var(--r-ctl); background: var(--sc-low); font: 600 16px var(--q-sans); transition: transform .12s var(--q2-ease), background .12s ease; }
+#smdQueue .q2app .q-pbtn:active { transform: scale(.97); background: var(--sc-high); }
+#smdQueue .q2app .q-pbtn.danger { background: var(--error-container); color: var(--error); }
+#smdQueue .q2app .q-pbtn.ghost { background: none; color: var(--secondary); }
+#smdQueue .q2app .q-staff-add input, #smdQueue .q2app .q-staff-add select { height: 50px; border: none; border-radius: var(--r-ctl); background: var(--sc-low); font: 400 16px var(--q-sans); }
+#smdQueue .q2app .q-prio-chip { border: none; border-radius: 12px; background: var(--sc-low); font: 600 15px var(--q-sans); }
+#smdQueue .q2app .q-prio-chip.on { background: var(--primary); color: var(--on-primary); }
+#smdQueue .q2app .q-prio-note { height: 50px; border: none; border-radius: var(--r-ctl); background: var(--sc-low); font: 400 16px var(--q-sans); }
+#smdQueue .q2app .q-pbtn.q-prio-ok { background: var(--primary); color: var(--on-primary); }
+#smdQueue .q-gate.q2app { align-items: flex-end; padding: 16px 16px calc(16px + env(safe-area-inset-bottom, 0px)); }
+#smdQueue .q2app .q-gate-card { max-width: 480px; padding: 28px 20px 12px; border: none; border-radius: 28px; background: var(--sc-lowest); box-shadow: none; animation: q2Fade .24s ease both; }
+#smdQueue .q2app .q-gate-h { margin: 12px 0 4px; font: 700 26px/1.2 var(--q-sans); letter-spacing: -.02em; }
+#smdQueue .q2app .q-gate-sub { margin: 0 0 20px; font: 400 15px/1.45 var(--q-sans); color: var(--secondary); }
+#smdQueue .q2app .q-gate-btn { min-height: 54px; padding: 8px 16px; border-radius: var(--r-ctl); font: 600 16px/1.3 var(--q-sans); }
+#smdQueue .q2app .q-gate-btn small { font: 400 13px var(--q-sans); }
+#smdQueue .q2app .q-gate-btn[data-q-act^="type"], #smdQueue .q2app .q-gate-btn[data-q-act^="pick"], #smdQueue .q2app .q-gate-btn[data-q-act="newclinic"], #smdQueue .q2app .q-gate-btn[data-q-act="addhosp"] { display: flex; align-items: center; gap: 12px; text-align: left; background: var(--sc-low) !important; color: var(--on-surface) !important; }
+#smdQueue .q2app .q-gate-btn[data-q-act^="type"] .material-symbols-outlined, #smdQueue .q2app .q-gate-btn[data-q-act^="pick"] .material-symbols-outlined, #smdQueue .q2app .q-gate-btn[data-q-act="newclinic"] .material-symbols-outlined, #smdQueue .q2app .q-gate-btn[data-q-act="addhosp"] .material-symbols-outlined { color: var(--primary); }
+#smdQueue .q2app .q-gate-demo { min-height: 50px; border: none; border-radius: var(--r-ctl); background: none; color: var(--primary); font: 600 15px var(--q-sans); }
+#smdQueue .q2app .q-gate-in { height: 50px; margin-bottom: 16px; border: none; border-radius: var(--r-ctl); background: var(--sc-low); font: 400 16px var(--q-sans); }
+#smdQueue .q2app .q-gate-in:focus { outline: 2px solid var(--primary); box-shadow: none; }
+#smdQueue .q2app .q-gate-lbl { font: 600 14px var(--q-sans); color: var(--on-surface); margin-bottom: 8px; }
+#smdQueue .q2app .q-gate-err { color: var(--error); font: 600 13px var(--q-sans); }
+#smdQueue .q2app .q-gate-close { font: 600 15px var(--q-sans); color: var(--secondary); }
+@media (max-width: 359px) { #smdQueue .q2-now .q2-meta { flex-wrap: wrap; } #smdQueue .q2-now .q2-meta .q2-tag { margin-left: 0; } }
+@media (min-width: 901px) { #smdQueue .q-gate.q2app { align-items: center; } }
+
+/* 44px floor for the controls the queue shares between both screens (measured by test/run-opd-q2-ui.mjs). */
+#smdQueue .q-ic, #smdQueue .q-profile-x { width: 44px; height: 44px; }
+#smdQueue .q-avatar-btn { width: 44px; height: 44px; }
+#smdQueue .q-pbtn { min-height: 44px; }
+#smdQueue .q-staff-add input, #smdQueue .q-staff-add select { min-height: 44px; }
+#smdQueue .q-tl-acts .q-ic { width: auto; }

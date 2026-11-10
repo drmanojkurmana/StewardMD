@@ -33,6 +33,17 @@
       }
     },
     {
+      "tx": "**Plasmids** are DNA circles, occasionally linear, that replicate apart from the chromosome and carry accessory cargo rather than core housekeeping genes. That cargo can include antibiotic resistance, toxins, adhesion factors, bacteriocins, heavy metal resistance, and the fertility genes that build the mating machinery. Plasmids are grouped by incompatibility and by how many copies sit in the cell. Acridine dyes and growth stress can cure a cell of its plasmid. If the cargo stops earning its keep, the plasmid is readily lost. They function as luggage that bacteria trade.",
+      "say": "Plasmids are extra DNA circles, sometimes linear, copied apart from the chromosome. They carry resistance, toxins, adhesins, bacteriocins, metal resistance, and fertility genes. Incompatibility group and copy number classify them. Acridines and stress can cure them, and unused plasmids are lost. They are traded luggage, not the core chromosome.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n333-mic-bacterial-genetics-plasmids.webp",
+        "alt": "A circular plasmid map marks genes for antibiotic resistance, toxin, and fertility functions outside the bacterial chromosome.",
+        "caption": "A small DNA circle carries accessory genes for resistance, toxins, and transfer, separate from the chromosomal circle. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
       "tx": "**Transposons** are jumping genes flanked by insertion sequences that hop between chromosome and plasmids carrying resistance cassettes (Tn3 beta lactamases, vanA vancomycin transposons), building multi resistance plasmids gene by gene; integrons beneath them run cassette capture systems that stack aminoglycoside and other resistances in promoter driven arrays. Hospital resistance is largely transposon architecture assembled.",
       "say": "Transposons hop, integrons stack; hospital resistance is assembled luggage.",
       "vis": {
@@ -144,6 +155,17 @@
           { "id": "convert", "label": "Recipient becomes F+ donor" }
         ],
         "edges": [["donor", "bridge"], ["bridge", "copy"], ["copy", "convert"]]
+      }
+    },
+    {
+      "tx": "**Conjugation** moves plasmids by direct contact. An F plus donor builds a sex pilus and passes one plasmid strand through the mating bridge. The F minus recipient becomes F plus and can donate next. If F is integrated in the chromosome, the high frequency recombination strain drags chromosomal genes behind it. R plasmids travel the same bridge, so resistance crosses between gut genera by touch rather than by inheritance alone.",
+      "say": "Conjugation uses a sex pilus to move a plasmid strand from an F plus donor into an F minus cell, which then becomes a donor. Integrated F creates a high frequency recombination strain that can pull chromosomal genes along. R plasmids send resistance across gut species on that same bridge.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-n332-mic-bacterial-genetics-plasmids.webp",
+        "alt": "A diagram shows a donor bacterium extending a sex pilus to a recipient and transferring a plasmid strand across the mating bridge.",
+        "caption": "An F plasmid donor builds a sex pilus, passes one DNA strand, and converts the recipient into a new donor. Illustration: StewardMD original.",
+        "ar": 1.3393
       }
     },
     {
