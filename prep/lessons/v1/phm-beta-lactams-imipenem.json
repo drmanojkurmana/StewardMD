@@ -1,0 +1,253 @@
+{
+  "v": 1,
+  "module": "phm-beta-lactams",
+  "subject": "pharmacology",
+  "title": "Carbapenems and Aztreonam: Imipenem, Meropenem and the Monobactam",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Imipenem**, the first carbapenem, marries the broadest beta lactam spectrum (Gram positives, Gram negatives including Pseudomonas, and anaerobes) to a renal assassin: dehydropeptidase I in the brush border hydrolyses it, so it is co formulated with cilastatin, an inhibitor with no antibacterial action that simply bodyguards it through the kidney. Seizures, especially with renal impairment, CNS lesions and excessive dose, are imipenem's signature beyond meropenem's calmer profile.",
+      "say": "Imipenem needs cilastatin as a kidney bodyguard and carries the family's seizure accent.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Imipenem cilastatin",
+          "points": [
+            "Broadest early carbapenem spectrum",
+            "Cilastatin blocks renal dehydropeptidase only",
+            "Seizure risk highest in class",
+            "Nausea prominent at rapid infusion"
+          ]
+        },
+        "right": {
+          "title": "Meropenem",
+          "points": [
+            "Dehydropeptidase stable, no partner needed",
+            "Meningitis licensed, seizure risk lower",
+            "Slightly weaker Gram positive, stronger Gram negative",
+            "Febrile neutropenia and intra abdominal staple"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Meropenem** refined the class for meningitis and febrile neutropenia, ertapenem deliberately surrendered Pseudomonas and enterococcus for once daily convenience in community intra abdominal and pelvic infections, and doripenem fills regional formularies between them. All carbapenems share the boundaries: no MRSA, no atypicals, no Enterococcus faecium reliability, and vulnerability to carbapenemases (KPC, metallo enzymes) that the new inhibitor pairs from previous lessons chase with incomplete success.",
+      "say": "Carbapenems cover almost everything except MRSA, atypicals and their own carbapenemases.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Carbapenem family",
+          "points": [
+            "Meropenem: meningitis and neutropenia",
+            "Ertapenem: once daily, no Pseudomonas cover",
+            "Imipenem: seizure accent, cilastatin partner",
+            "All: anaerobes and ESBL producers covered"
+          ]
+        },
+        "right": {
+          "title": "Universal gaps",
+          "points": [
+            "MRSA and most E faecium",
+            "Atypical intracellular pathogens",
+            "Carbapenemase producers by enzyme class",
+            "Stenotrophomonas maltophilia intrinsically"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Aztreonam**, the monobactam, is a single ring with Gram negative only vision (including Pseudomonas) and a life changing allergy property: negligible cross reactivity with penicillins and cephalosporins (except, famously, ceftazidime, with which it shares an identical side chain), making it the beta lactam refuge in serious beta lactam allergy for Gram negative cover. Inhaled aztreonam serves cystic fibrosis Pseudomonas suppression in rotation with tobramycin.",
+      "say": "Aztreonam sees only Gram negatives and forgives beta lactam allergy, except its ceftazidime twin.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "allergy",
+            "label": "Serious beta lactam allergy with Gram negative sepsis"
+          },
+          {
+            "id": "azt",
+            "label": "Aztreonam covers Gram negatives including Pseudomonas"
+          },
+          {
+            "id": "partner",
+            "label": "Gram positive partner added (vancomycin) as indicated"
+          },
+          {
+            "id": "twin",
+            "label": "Ceftazidime allergy history: shared side chain caution"
+          }
+        ],
+        "edges": [
+          [
+            "allergy",
+            "azt"
+          ],
+          [
+            "azt",
+            "partner"
+          ],
+          [
+            "partner",
+            "twin"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Carbapenem stewardship is** the class's survival contract: reserve for ESBL producers, severe polymicrobial sepsis and defined empirical niches, because every empirical course selects carbapenemase carriers in the unit's ecology. Carbapenem sparing strategies (pip tazo for low risk ESBL urinary sources by trial nuance, cefepime for AmpC, source control shortening courses) are argued patient by patient with infectious diseases, never by habit in either direction.",
+      "say": "Carbapenems are spent by the course and saved by the culture; argue each one.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Carbapenem justified",
+          "points": [
+            "ESBL bacteraemia and deep infection",
+            "Severe polymicrobial sepsis with resistance risk",
+            "Febrile neutropenia with ESBL colonisation",
+            "Meningitis with resistant Gram negatives"
+          ]
+        },
+        "right": {
+          "title": "Carbapenem spared",
+          "points": [
+            "AmpC producers: cefepime serves",
+            "Low risk urinary ESBL by specialist judgement",
+            "Culture proven narrower susceptibility",
+            "Short courses with source control achieved"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Valproate levels collapse** by 60 to 90 percent within a day of carbapenem co therapy (glucuronidation induced and recycling blocked), provoking seizures in epilepsy patients in one of pharmacology's most absolute interaction prohibitions: the combination is avoided outright, and if carbapenems are unavoidable, alternative seizure prophylaxis is specialist built. Carbapenems also lower thresholds themselves, compounding the vignette both pharmacologically and examinably.",
+      "say": "Carbapenems erase valproate in a day; that combination is forbidden, not monitored.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "valp",
+            "label": "Patient stabilised on valproate"
+          },
+          {
+            "id": "carb",
+            "label": "Carbapenem started for resistant infection"
+          },
+          {
+            "id": "crash",
+            "label": "Valproate levels collapse within 24 hours"
+          },
+          {
+            "id": "plan",
+            "label": "Alternative seizure plan built with specialists"
+          }
+        ],
+        "edges": [
+          [
+            "valp",
+            "carb"
+          ],
+          [
+            "carb",
+            "crash"
+          ],
+          [
+            "crash",
+            "plan"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Ertapenem's once daily**, Pseudomonas free design teaches spectrum subtraction as strategy: community acquired intra abdominal infection, diabetic foot without Pseudomonas risk and pelvic sepsis gain a single daily dose and outpatient parenteral feasibility, while any Pseudomonas probability (prior colonisation, bronchiectasis, recent broad antibiotics) disqualifies it in favour of meropenem or pip tazo. Reading which pathogen a carbapenem omits is as examinable as which it covers.",
+      "say": "Ertapenem omits Pseudomonas on purpose; any Pseudomonas probability disqualifies it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ertapenem suited",
+          "points": [
+            "Community intra abdominal infection",
+            "Once daily outpatient parenteral therapy",
+            "ESBL cover without Pseudomonas need",
+            "High protein binding, long half life"
+          ]
+        },
+        "right": {
+          "title": "Ertapenem excluded",
+          "points": [
+            "Any Pseudomonas probability",
+            "Enterococcus cover required",
+            "Nosocomial pneumonia empiricism",
+            "Meningitis (penetration and spectrum)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Aztreonam's second career** is combination chemistry: because metallo beta lactamases destroy every beta lactam except aztreonam (which they cannot hydrolyse, though co produced ESBLs and AmpC can), aztreonam plus avibactam (shielding it from those companions) treats metallo producers, the cleverest spectrum chess in the modern cabinet. The lesson generalises: know which enzyme defeats which molecule, and combinations become deductions instead of memoranda.",
+      "say": "Aztreonam survives metallo enzymes and avibactam shields it from their friends; enzyme chess wins infections.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mbl",
+            "label": "Metallo beta lactamase producer identified"
+          },
+          {
+            "id": "azt",
+            "label": "Aztreonam intrinsically stable to the metallo enzyme"
+          },
+          {
+            "id": "avi",
+            "label": "Avibactam shields aztreonam from co produced enzymes"
+          },
+          {
+            "id": "treat",
+            "label": "Combination treats otherwise untouchable Gram negatives"
+          }
+        ],
+        "edges": [
+          [
+            "mbl",
+            "azt"
+          ],
+          [
+            "azt",
+            "avi"
+          ],
+          [
+            "avi",
+            "treat"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Beta lactam infusion** science closes the class: extended (3 to 4 hour) or continuous infusions of meropenem, pip tazo and cefepime maximise time above MIC and improve outcomes in critically ill and resistant infection meta analyses, at the cost of line occupancy and stability arithmetic. Loading doses precede them because time dependent killing punishes slow starts in septic shock most of all.",
+      "say": "Extend the infusion to extend the killing; load first because septic shock cannot wait for steady state.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Extended infusion gains",
+          "points": [
+            "Time above MIC maximised for resistant isolates",
+            "Meropenem, pip tazo and cefepime protocols",
+            "Mortality signals in severe sepsis analyses",
+            "Loading dose always precedes"
+          ]
+        },
+        "right": {
+          "title": "Practical costs",
+          "points": [
+            "Line occupancy and compatibility planning",
+            "Drug stability limits infusion duration",
+            "Nursing workload and pump availability",
+            "Not needed for low MIC community isolates"
+          ]
+        }
+      }
+    }
+  ]
+}

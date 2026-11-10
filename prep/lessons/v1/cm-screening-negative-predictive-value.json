@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "id": "cm-screening-negative-predictive-value",
+ "subject": "community-medicine",
+ "module": "cm-screening",
+ "title": "Predictive Values, Likelihood Ratios and the ROC Curve",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Positive predictive value answers the patient",
+   "tx": "The **positive predictive value** is a over (a plus b) times 100: the probability that a positive result truly means disease. In the worked table, 40 true positives among 60 positives give 66.66 percent. This, not sensitivity, is what the person holding a positive report actually wants to know.",
+   "say": "The patient asks one question: my test is positive, do I have it? True positives over all positives answers it: forty of sixty, sixty six point seven percent in the worked table. Sensitivity answers a different, population question.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Quantity", "Worked value"],
+    "rows": [
+     ["All positives (a plus b)", "60 people"],
+     ["True positives (a)", "40 people"],
+     ["Positive predictive value", "66.66 percent"]
+    ]
+   }
+  },
+  {
+   "title": "Negative predictive value answers the reassured",
+   "tx": "The **negative predictive value** is d over (c plus d) times 100: the probability that a negative result truly means no disease. The worked table gives 9840 of 9940 negatives, 98.9 percent. In low prevalence settings negatives are almost always right, which is why screening reassurance is usually trustworthy even from mediocre tests.",
+   "say": "Negatives get their own probability. True negatives over all negatives: ninety eight point nine percent in the worked table. Where disease is rare, negatives are almost always right, so reassurance from screening usually deserves trust.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Quantity", "Worked value"],
+    "rows": [
+     ["All negatives (c plus d)", "9940 people"],
+     ["True negatives (d)", "9840 people"],
+     ["Negative predictive value", "98.9 percent"]
+    ]
+   }
+  },
+  {
+   "title": "Prevalence moves predictive value, not accuracy",
+   "tx": "**Disease prevalence** swings predictive value while sensitivity and specificity stay fixed: a gonorrhoea smear with 50 percent sensitivity and 90 percent specificity yields predictive values of 21 percent at 5 percent prevalence, 47 percent at 15 percent, and 63 percent at 25 percent. Screening rare disease therefore manufactures mostly false positives from the same test.",
+   "say": "Same test, different district, different meaning. At five percent prevalence only twenty one percent of positives are true; at twenty five percent, sixty three percent are. Accuracy never changed. Rare disease screening manufactures false alarms by arithmetic.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Prevalence", "Positive predictive value"],
+    "rows": [
+     ["5 percent", "21 percent"],
+     ["15 percent", "47 percent"],
+     ["25 percent", "63 percent"]
+    ]
+   }
+  },
+  {
+   "title": "False negatives reassure falsely",
+   "tx": "**False negatives** tell diseased people they are healthy, a false reassurance that can postpone care when symptoms later appear and the test is not soon repeated. The worked table hides 100 of them, 71.4 percent of all diseased. Sensitive tests minimise this cell; that is the entire argument for sensitivity where disease is serious and treatable.",
+   "say": "One error cell lies to the sick. False negatives send diseased people home reassured, and later symptoms get ignored. The worked table hides one hundred of them. Sensitive tests shrink this cell; serious treatable disease demands exactly that.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "False negative harm",
+     "points": ["Diseased person told healthy", "Later symptoms ignored", "Treatment postponed"]
+    },
+    "right": {
+     "title": "False positive harm",
+     "points": ["Healthy person told diseased", "Anxiety and repeat testing", "Diagnostic services burdened"]
+    }
+   }
+  },
+  {
+   "title": "Likelihood ratios escape prevalence",
+   "tx": "A **likelihood ratio** divides the chance of a result in disease by its chance in health: for a positive result, sensitivity over (1 minus specificity). It converts pre-test odds into post-test odds without naming prevalence directly. Values above 10 strongly rule in disease; values below 0.1 strongly rule it out, the thresholds examiners quote.",
+   "say": "Ratios escape the prevalence trap. Positive result likelihood divides sensitivity by one minus specificity, converting prior odds into posterior odds. Above ten rules disease in strongly; below zero point one for negatives rules it out.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Likelihood ratio", "Interpretation"],
+    "rows": [
+     ["Positive ratio above 10", "Strong evidence for disease"],
+     ["Positive ratio 1", "Result changes nothing"],
+     ["Negative ratio below 0.1", "Strong evidence against disease"]
+    ]
+   }
+  },
+  {
+   "title": "The ROC curve plots every cut-off",
+   "tx": "An **ROC curve** plots sensitivity against (1 minus specificity) for every possible cut-off of a quantitative test, so the whole trade-off becomes one picture. Curves bowing toward the top-left corner mark better tests; the diagonal marks a useless test. The area under the curve summarises accuracy in one number for comparisons.",
+   "say": "One picture holds every cut-off. Sensitivity rises against false positive rate as thresholds move. Better tests bow toward the top-left corner; the diagonal is useless. Area under the curve compresses accuracy into one comparable number.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Each cut-off gives one point"},
+     {"id": "b", "label": "Points join into a curve"},
+     {"id": "c", "label": "Top-left bow means better test"},
+     {"id": "d", "label": "Area under curve compares tests"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Choosing the cut-off by consequence",
+   "tx": "Cut-off choice follows consequence: **cervical cancer** screening tolerates false positives to avoid false negatives, because missing a lethal, curable-early cancer outweighs extra work-ups. Diabetes screening leans specific instead, since flooding clinics with false positives would swamp services. Prevalence points the same way: high prevalence justifies a lower, more sensitive threshold.",
+   "say": "Consequences set the dial. Lethal cancers caught early tolerate false alarms to avoid a single miss. Diabetes screening protects clinic capacity with specificity instead. High prevalence also argues for a lower, more sensitive threshold.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Situation", "Cut-off leans"],
+    "rows": [
+     ["Lethal disease, curable early", "Sensitive, tolerate false positives"],
+     ["Prevalent disease, limited clinics", "Specific, limit false positives"],
+     ["High community prevalence", "Lower threshold justified"]
+    ]
+   }
+  },
+  {
+   "title": "Who attends decides real world value",
+   "tx": "**Participation bias** quietly caps every programme: women at greatest risk of cervical cancer are least likely to attend cytology screening, so the worried well consume the yield. Selective invitation by age, sex, history, occupation and family risk, plus honest explanation of false result risks, defends real world value better than a marginally better test.",
+   "say": "Attendance caps everything. Those at highest cervical cancer risk attend cytology least, while the low risk fill appointments. Targeted invitation and honest warning about false results defend value better than a marginally better test.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Programme on paper",
+     "points": ["Test accuracy from validation study", "Yield assumes full attendance", "Benefits counted for all eligible"]
+    },
+    "right": {
+     "title": "Programme in practice",
+     "points": ["Highest risk attend least", "Yield consumed by low risk", "Invitation strategy decides value"]
+    }
+   }
+  },
+  {
+   "title": "Screening, case-finding, diagnosis: keep them apart",
+   "tx": "**Case-finding** tests people already seeking care for other reasons, like VDRL testing in pregnancy, while screening tests people not seeking care at all, like donor blood serology. Diagnosis confirms or refutes disease in the symptomatic. The same VDRL test serves all three contexts, so stems must be read for who initiated the test and why.",
+   "say": "Same test, three contexts. Screening approaches people not seeking care; case-finding tests those already attending for other reasons; diagnosis settles the symptomatic. Read who initiated the test before naming the activity in a stem.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Activity", "Who is tested", "Initiative"],
+    "rows": [
+     ["Screening", "Apparently healthy, not seeking care", "Service or investigator"],
+     ["Case-finding", "Attending for other reasons", "Clinician during contact"],
+     ["Diagnosis", "Symptomatic, seeking care", "Patient complaint"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

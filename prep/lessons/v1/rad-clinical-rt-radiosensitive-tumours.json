@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-clinical-rt-radiosensitive-tumours",
+ "subject": "radiology",
+ "module": "rad-clinical-rt",
+ "title": "Radiosensitive Tumours, Chemoradiation and Palliative Radiotherapy",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Seminoma melts with radiation",
+   "tx": "**Radiosensitive tumours** led by seminoma and lymphoma shrink dramatically at doses other cancers laugh at, because their cells die in interphase and divide rapidly with poor repair. The pictured testicular germ cell set includes seminoma, whose stage one paraaortic relapse risk was historically managed with modest dose fields around twenty gray. Modern surveillance has replaced much of that prophylactic radiation, but the sensitivity ranking itself remains the examiners favourite list.",
+   "say": "Radiosensitive tumours led by seminoma and lymphoma shrink dramatically at modest doses because their cells divide rapidly with poor repair. The pictured germ cell set includes seminoma, historically managed with modest paraaortic fields. Modern surveillance replaced much prophylactic radiation, but the sensitivity ranking remains.",
+   "vis": {"kind": "image", "src": "v1/kb/media/testicular-germ-cell-tumor-fig1.webp", "alt": "Testicular germ cell tumour pathology illustration including seminoma.", "caption": "Testicular germ cell tumours including seminoma. Illustration: StewardMD."}
+  },
+  {
+   "title": "The sensitivity ladder",
+   "tx": "**Radiocurability ranking** runs seminoma and lymphoma most sensitive, then neuroblastoma and Wilms, myeloma intermediate, epithelial cancers of cervix, head and neck and skin in the middle, and melanoma, osteosarcoma, glioblastoma and renal cell traditionally resistant at standard doses. Resistant never means radiation proof: high dose stereotaxis controls renal and melanoma metastases that shrug at conventional fractions, rewriting several rungs of the classic ladder in modern practice.",
+   "say": "Radiocurability runs seminoma and lymphoma most sensitive, epithelial cancers in the middle, and melanoma, osteosarcoma and renal cell traditionally resistant. Resistant never means radiation proof: high dose stereotaxis controls renal and melanoma metastases that shrug at conventional fractions.",
+   "vis": {"kind": "table", "cols": ["Sensitivity", "Tumours", "Dose habit"], "rows": [["Highest", "Seminoma, lymphoma", "Low to moderate doses cure"], ["Intermediate", "Cervix, head and neck, skin", "Radical 60 to 70 gray range"], ["Lower", "Melanoma, renal cell", "Stereotactic high doses"], ["Lowest classic", "Osteosarcoma, glioblastoma", "Radiation adjunct only"]]}
+  },
+  {
+   "title": "Specimen and marker partners",
+   "tx": "**Seminoma specimen** in the pictured gross set shows the creamy homogeneous cut surface that matches its uniform radiosensitive biology, while its markers stay nearly silent: human chorionic gonadotropin mildly raised in a minority, alpha fetoprotein never raised by pure seminoma, lactate dehydrogenase tracking burden. Those marker rules matter because a raised alpha fetoprotein reclassifies the tumour as nonseminomatous and reroutes chemotherapy and surgery decisions entirely.",
+   "say": "Seminoma specimen in the pictured set shows a creamy homogeneous cut surface matching its uniform biology, while markers stay nearly silent: alpha fetoprotein never raised by pure seminoma. A raised alpha fetoprotein reclassifies the tumour as nonseminomatous and reroutes all treatment decisions.",
+   "vis": {"kind": "image", "src": "clinix/media/practicals/surg-spc-seminoma-testis.webp", "alt": "Gross specimen of seminoma of the testis with homogeneous creamy cut surface.", "caption": "Seminoma gross specimen with homogeneous cut surface. Credit: StewardMD library."}
+  },
+  {
+   "title": "Cisplatin radiosensitises cervix and head neck",
+   "tx": "**Concurrent chemoradiation** pairs weekly cisplatin with pelvic radiotherapy in locally advanced cervix cancer and with head and neck fields in unresectable or organ preservation disease, because platinum crosslinks disable the repair of radiation breaks in the same cells. The combination buys survival at the cost of nausea, kidney and marrow reserve, so fitness for cisplatin is assessed as carefully as the tumour stage. Brachytherapy remains non negotiable in cervix, external beam alone never substitutes.",
+   "say": "Concurrent chemoradiation pairs weekly cisplatin with pelvic or head and neck radiotherapy, because platinum crosslinks disable repair of radiation breaks. The combination buys survival at real toxicity cost, so cisplatin fitness is assessed as carefully as stage. Brachytherapy remains non negotiable in cervix cancer.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Locally advanced tumour"}, {"id": "b", "label": "External beam plus cisplatin"}, {"id": "c", "label": "Brachytherapy boost cervix"}, {"id": "d", "label": "Survival gain proven"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Radical versus palliative intent",
+   "tx": "**Palliative radiotherapy** trades duration for speed: single 8 gray fractions relieve bone metastasis pain as well as long courses in most patients, with response over two to four weeks in about sixty percent. Radical courses instead spend six to seven weeks chasing cure where microscopic spread patterns allow. Cord compression, bleeding tumours and superior vena cava obstruction sit between, urgent palliative problems where steroids, stents and radiation are sequenced by neurology and airway, not by habit.",
+   "say": "Palliative radiotherapy trades duration for speed: single eight gray fractions relieve bone pain as well as long courses, responding over two to four weeks in about sixty percent. Cord compression and vena cava obstruction are sequenced by neurology and airway, not by habit.",
+   "vis": {"kind": "compare", "left": {"title": "Radical intent", "points": ["Six to seven week courses", "Cure or durable control aim", "Chemoradiation partners", "Strict organ constraints"]}, "right": {"title": "Palliative intent", "points": ["Single or short fractions", "Symptom relief aim", "Bone pain, bleeding, compression", "Response judged in weeks"]}}
+  },
+  {
+   "title": "Whole brain and bone protocols",
+   "tx": "**Whole brain radiotherapy** historically treated multiple brain metastases at thirty gray in ten fractions, now displaced for limited deposits by stereotactic radiosurgery that spares cognition, with hippocampal avoidance and memantine softening whole brain when diffuse disease still needs it. Bone metastases answer single fractions except where cord, weight bearing stability or re treatment fields complicate. The modern desk skill is choosing the shortest effective course per patient, not the longest available.",
+   "say": "Whole brain radiotherapy historically treated multiple metastases at thirty gray in ten fractions, now displaced for limited deposits by stereotaxis sparing cognition. Bone metastases answer single fractions except where cord or stability complicates. The modern skill is choosing the shortest effective course per patient.",
+   "vis": {"kind": "table", "cols": ["Situation", "Modern default", "Old default"], "rows": [["Limited brain metastases", "Stereotactic radiosurgery", "Whole brain course"], ["Diffuse brain metastases", "Hippocampal sparing plus memantine", "Plain whole brain"], ["Painful bone metastasis", "Single 8 gray", "Ten fraction course"], ["Cord compression", "Surgery assess, then radiation", "Radiation alone always"]]}
+  },
+  {
+   "title": "Head neck organ preservation",
+   "tx": "**Organ preservation** chemoradiation keeps the larynx in advanced laryngeal and hypopharyngeal cancer with survival equal to primary laryngectomy in selected patients, trading the voice box for mucositis, feeding tubes and hypothyroid surveillance. Human papillomavirus positive oropharynx cancers respond so well that de escalation trials test lower doses, while HPV negative smokers tumours keep full intensity. Salvage surgery after failed chemoradiation is harder and leakier, a consent point patients must hear upfront.",
+   "say": "Organ preservation chemoradiation keeps the larynx with survival equal to surgery in selected patients, trading the voice box for mucositis and feeding tubes. HPV positive oropharynx cancers respond so well that de escalation trials test lower doses. Salvage surgery after failure is harder, a consent point heard upfront.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Advanced larynx cancer"}, {"id": "b", "label": "Chemoradiation offered"}, {"id": "c", "label": "Voice preserved if cured"}, {"id": "d", "label": "Salvage surgery if residual"}], "edges": [["a", "b"], ["b", "c"], ["b", "d"]]}
+  },
+  {
+   "title": "Lymphoma fields shrink safely",
+   "tx": "**Lymphoma radiotherapy** shrank from extended fields bathing whole nodal chains to involved node and involved site fields of twenty to thirty gray, because chemotherapy carries the systemic load and late second malignancy plus cardiac dose haunted the old generous fields. Hodgkin lymphoma in young women drove that evolution, breast and thyroid late effects being unacceptable prices for already high cure rates. Sensitivity made lymphoma curable; restraint made the cure survivable.",
+   "say": "Lymphoma radiotherapy shrank from extended fields to involved site fields of twenty to thirty gray, because chemotherapy carries the systemic load and late second malignancy haunted generous fields. Sensitivity made lymphoma curable; restraint made the cure survivable, especially in young women.",
+   "vis": {"kind": "compare", "left": {"title": "Historical extended field", "points": ["Whole nodal chains treated", "High late malignancy risk", "Cardiac and breast dose high", "Pre chemotherapy era logic"]}, "right": {"title": "Modern involved site", "points": ["Only involved nodes plus margin", "20 to 30 gray typical", "Image guided tight fields", "Late effects minimised"]}}
+  }
+ ]
+}

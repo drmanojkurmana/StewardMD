@@ -1,0 +1,148 @@
+{
+ "v": 1,
+ "id": "cm-vaccines-cold-chain-cold-chain",
+ "subject": "community-medicine",
+ "module": "cm-vaccines-cold-chain",
+ "title": "Cold Chain Equipment: ILR, Deep Freezer, Carriers and Temperature Monitoring",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Why potency lost never returns",
+   "tx": "**Cold chain failure** destroys potency invisibly: a heat-damaged vaccine looks normal, injects normally and protects nobody. Damage accumulates with every warm hour and cannot reverse on re-cooling. That single fact justifies temperature loggers, twice-daily recording and vial monitors at every link from national store to session site.",
+   "say": "Heat damage hides completely. The vial looks normal, injects normally, protects nobody, and re-cooling restores nothing. Cumulative invisible loss is why loggers, twice-daily records and vial monitors guard every link.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "What staff see",
+     "points": ["Normal looking vial and label", "Normal injection experience", "No complaint at session"]
+    },
+    "right": {
+     "title": "What actually happened",
+     "points": ["Potency lost hour by warm hour", "Child left unprotected", "Failure found only by audit or outbreak"]
+    }
+   }
+  },
+  {
+   "title": "Walk-in freezers and coolers at the top",
+   "tx": "**Walk-in freezers** store oral polio vaccine frozen at state and regional stores, while walk-in coolers hold other vaccines at +2 to +8 degrees in bulk. Volumes shrink down the chain: national stores think in lakhs of doses, session carriers in dozens. Equipment choice at each level follows storage volume plus the temperatures its vaccines demand.",
+   "say": "Scale shrinks down the chain. Freezers at the top freeze polio vaccine in bulk; coolers hold the rest refrigerated. Each level's equipment matches its dose volume and temperature needs, down to dozens of doses in a session carrier.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Equipment", "Level and temperature"],
+    "rows": [
+     ["Walk-in freezer", "State store, frozen OPV bulk"],
+     ["Walk-in cooler", "State store, +2 to +8 degrees bulk"],
+     ["Deep freezer", "District and facility, ice packs"],
+     ["Ice-lined refrigerator", "Facility, +2 to +8 degrees working stock"]
+    ]
+   }
+  },
+  {
+   "title": "Ice-lined refrigerator: the facility workhorse",
+   "tx": "The **ice-lined refrigerator** holds +2 to +8 degrees through an ice lining that keeps contents cold during power cuts, its hold-over time deciding how long safety lasts without electricity. Vaccines sit in baskets by type, never against the freezing back plate, and the door stays shut. Twice-daily temperature recording, morning and evening including holidays, is non-negotiable discipline.",
+   "say": "One machine serves most facilities. Its ice lining rides out power cuts for a rated hold-over time. Baskets organise vaccines away from the freezing plate, and twice-daily temperature recording, holidays included, is non-negotiable discipline.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Power cut begins"},
+     {"id": "b", "label": "Ice lining releases cold"},
+     {"id": "c", "label": "Temperature holds in range"},
+     {"id": "d", "label": "Hold-over time expires, risk begins"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Deep freezer discipline",
+   "tx": "**Deep freezers** make and store ice packs and hold only vaccines that tolerate freezing, chiefly oral polio vaccine where policy directs. Adsorbed vaccines (DPT, pentavalent, hepatitis B, tetanus toxoid) must never enter: freezing destroys their aluminium adjuvant structure irreversibly. Most freeze damage in real programmes happens here or against unconditioned ice packs in carriers.",
+   "say": "Freezers serve ice packs first. Only freeze-tolerant stock belongs inside. Adsorbed vaccines entering one lose their adjuvant structure forever. Most real freeze damage happens in freezers or against unconditioned packs touching vials in carriers.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Belongs in deep freezer", "Never belongs"],
+    "rows": [
+     ["Ice packs being frozen", "DPT and pentavalent vials"],
+     ["OPV where directed", "Hepatitis B and tetanus toxoid"],
+     ["Frozen control vial for shake test", "Any adsorbed vaccine"]
+    ]
+   }
+  },
+  {
+   "title": "Cold boxes, carriers and day carriers",
+   "tx": "**Cold boxes** move bulk vaccine between stores with packed ice for days, while vaccine carriers hold a session's supply for hours and day carriers serve a few vials for very short outreach. Conditioned ice packs, frozen then rested until water moves inside, protect adsorbed vaccines from contact freezing during transport. Vials travel in zipper bags, never loose in melt water.",
+   "say": "Transport has three sizes. Cold boxes move bulk for days, carriers serve one session, day carriers a handful of vials. Conditioned packs, rested until water sloshes, stop contact freezing. Vials ride in zipper bags, never loose in melt water.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Conditioned ice pack",
+     "points": ["Frozen then rested at room air", "Water audibly moves inside", "Safe against adsorbed vials"]
+    },
+    "right": {
+     "title": "Unconditioned ice pack",
+     "points": ["Straight from deep freezer", "Surface below zero degrees", "Freezes adsorbed vaccines on contact"]
+    }
+   }
+  },
+  {
+   "title": "Temperature monitoring beyond the thermometer",
+   "tx": "**Vaccine vial monitors** record cumulative heat on each vial, while refrigerator loggers and twice-daily charts record storage history; neither detects the other's enemy, since vial monitors ignore freezing. Freeze indicators and the shake test cover the cold side. Reading all three together, heat, freeze and storage record, is the complete monitoring habit examiners describe.",
+   "say": "Three monitors, three enemies. Vial labels remember cumulative heat, charts remember storage, shake tests expose freezing. Vial monitors never detect freezing, so reading all three together forms the complete habit.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Monitor", "Detects", "Misses"],
+    "rows": [
+     ["Vaccine vial monitor", "Cumulative heat exposure", "Freezing entirely"],
+     ["Temperature chart and logger", "Storage excursions", "Transit exposure of single vials"],
+     ["Shake test", "Freeze damage in adsorbed vials", "Heat damage"]
+    ]
+   }
+  },
+  {
+   "title": "Reverse cold chain and surveillance samples",
+   "tx": "**Reverse cold chain** carries stool specimens from acute flaccid paralysis cases and other surveillance samples back to laboratories under the same temperature discipline, because a warm specimen kills virus before culture. The concept delights examiners: the chain runs both ways, vaccines down, specimens up, and surveillance quality depends on the return leg.",
+   "say": "The chain runs backward too. Stool specimens from paralysis cases travel up to laboratories cold, or virus dies before culture. Surveillance quality depends on that return leg as much as vaccine delivery depends on the forward one.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Vaccines travel down cold"},
+     {"id": "b", "label": "Child vaccinated at session"},
+     {"id": "c", "label": "Stool specimen collected if AFP"},
+     {"id": "d", "label": "Specimen travels up cold to lab"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Cold chain sickness and breakdown protocol",
+   "tx": "On **equipment breakdown**, vaccines move immediately to the nearest working unit or into cold boxes with conditioned packs, the temperature excursion is recorded with duration, and vial monitor plus freeze status decide use, use-first or discard with the cold chain officer. Guessing silently and re-serving stock is the one unforgivable response; documented excursion with expert decision is the professional one.",
+   "say": "Breakdowns demand choreography. Move stock cold at once, record excursion and duration, then let monitor and freeze status decide use, priority use or discard with the officer. Silent guessing and re-serving is the only unforgivable response.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Step on breakdown", "Purpose"],
+    "rows": [
+     ["Shift stock to working cold unit", "Stop further damage"],
+     ["Record temperature and duration", "Evidence for the decision"],
+     ["Assess VVM and freeze status", "Use, use-first or discard"],
+     ["Inform cold chain officer", "Authorised disposition"]
+    ]
+   }
+  },
+  {
+   "title": "Solar and passive innovations",
+   "tx": "**Solar direct-drive refrigerators** freeze an ice bank by day and cool from it through night and cloudy spells without batteries, suiting off-grid facilities where kerosene and electricity failed historically. Passive cold boxes extend outreach where no equipment exists. Technology changes down the decades; the discipline, hold +2 to +8 and prove it, never does.",
+   "say": "Sunlight now banks cold by day for the night, battery-free, where grids and kerosene failed. Passive boxes extend the last miles. Equipment evolves across decades; the discipline of holding range and proving it never changes.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Solar direct drive",
+     "points": ["Ice bank frozen by daylight", "Cools through night and cloud", "No battery to maintain"]
+    },
+    "right": {
+     "title": "Passive cold box",
+     "points": ["Conditioned packs only", "Days of hold with ice", "Suits outreach and transport"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

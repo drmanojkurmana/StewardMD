@@ -1,0 +1,231 @@
+{
+  "v": 1,
+  "module": "phm-diuretics",
+  "subject": "pharmacology",
+  "title": "Thiazide-Like Diuretics, Chlorthalidone Trials, and Mineralocorticoid Antagonism",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The long-acting phthalimidine derivative that functions as a potent thiazide-like diuretic is **chlorthalidone**. Exhibiting a prolonged elimination half-life of forty to sixty hours due to extensive partitioning and binding to intraerythrocytic carbonic anhydrase, chlorthalidone provides smooth, sustained 24-hour blood pressure reduction with once-daily dosing. In major landmark clinical trials including ALLHAT and SHEP, chlorthalidone demonstrated clear superiority in preventing cardiovascular events, stroke, and congestive heart failure compared to shorter-acting thiazides like hydrochlorothiazide. Its extended nocturnal blood pressure reduction provides superior end-organ cardiovascular protection.",
+      "say": "Chlorthalidone binds intraerythrocytic carbonic anhydrase, providing a fifty-hour half-life and proven cardiovascular mortality reduction.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chlorthalidone (Long-Acting Phthalimidine)",
+          "points": [
+            "Elimination half-life of 40 to 60 hours",
+            "Extensive erythrocyte sequestration and slow release",
+            "Maintains 24-hour blood pressure control including night",
+            "Proven superior cardiovascular event reduction in ALLHAT"
+          ]
+        },
+        "right": {
+          "title": "Hydrochlorothiazide (Short-Acting Benzothiadiazine)",
+          "points": [
+            "Elimination half-life of 8 to 12 hours",
+            "Minimal red blood cell binding; rapid renal clearance",
+            "Blood pressure lowering wanes overnight during 24-hour cycle",
+            "Lacks prospective head-to-head trial superiority data"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "An indol-line chlorobenzene derivative that combines thiazide-like diuretic efficacy with direct arterial vasodilating properties is **indapamide**. Administered once daily as a 1.5 mg sustained-release tablet, indapamide inhibits the apical Na+/Cl- cotransporter in the distal convoluted tubule while concurrently blocking vascular L-type calcium channels and stimulating vasodilatory prostaglandin I2 synthesis. Because of its vasodilating action, indapamide lowers peripheral vascular resistance at sub-diuretic doses without adversely altering serum lipid panels or glucose tolerance, making it ideal in diabetic hypertensives.",
+      "say": "Indapamide combines distal tubular natriuresis with direct calcium-dependent arterial vasodilation, sparing lipid and glucose profiles.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Thiazide-like diuretic",
+          "Chemical ring structure",
+          "Vasodilator mechanism",
+          "Efficacy in renal impairment"
+        ],
+        "rows": [
+          [
+            "Indapamide",
+            "Indoline chlorobenzene",
+            "Inhibits vascular calcium influx and stimulates PGI2",
+            "Neutral lipid/glucose profile; safe in mild CKD"
+          ],
+          [
+            "Chlorthalidone",
+            "Phthalimidine derivative",
+            "Reduces arterial wall sodium and vascular stiffness",
+            "Ineffective when eGFR falls below 30 mL/min"
+          ],
+          [
+            "Metolazone",
+            "Quinazoline sulfonamide",
+            "Direct proximal and distal tubular inhibition",
+            "Retains potent saluretic efficacy even in severe CKD"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The synthetic steroid that acts as a competitive antagonist of the cytoplasmic mineralocorticoid receptor is **spironolactone**. By binding intracellular aldosterone receptors in principal cells of the late distal tubule and cortical collecting duct, spironolactone blocks receptor translocation into the nucleus. This prevents the de novo synthesis of aldosterone-induced proteins, thereby decreasing the expression and opening of apical epithelial sodium channels and basolateral Na+/K+ ATPase pumps. Consequently, it promotes mild natriuresis while completely halting urinary potassium and magnesium wasting.",
+      "say": "Spironolactone blocks cytoplasmic aldosterone receptors to downregulate ENaC channels and conserve potassium.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "spiro",
+            "label": "Oral spironolactone penetrates collecting duct principal cells"
+          },
+          {
+            "id": "mr",
+            "label": "Competitive binding to cytoplasmic mineralocorticoid receptor"
+          },
+          {
+            "id": "dna",
+            "label": "Prevention of nuclear translocation and AIP gene transcription"
+          },
+          {
+            "id": "enac",
+            "label": "Decreased apical ENaC channels: sodium excretion with complete potassium retention"
+          }
+        ],
+        "edges": [
+          [
+            "spiro",
+            "mr"
+          ],
+          [
+            "mr",
+            "dna"
+          ],
+          [
+            "dna",
+            "enac"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A distinctive endocrine adverse reaction caused by non-selective steroidal mineralocorticoid receptor blockade is painful **gynecomastia**. Structurally related to progesterone and testosterone, spironolactone acts as a competitive antagonist at androgen receptors and weakly inhibits 17-alpha-hydroxylase and 17,20-lyase enzymes, decreasing systemic testosterone synthesis while increasing peripheral conversion to estradiol. In male patients, this hormonal imbalance triggers bilateral tender breast enlargement, erectile dysfunction, and decreased libido, which reverse upon switching to the selective mineralocorticoid antagonist eplerenone.",
+      "say": "Spironolactone blocks androgen receptors and lowers testosterone, causing painful gynecomastia that resolves with eplerenone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Spironolactone (Non-Selective Antagonist)",
+          "points": [
+            "Potent affinity for mineralocorticoid receptor",
+            "Cross-reacts with androgen and progesterone receptors",
+            "High incidence of tender gynecomastia and erectile failure (10%)",
+            "Causes menstrual irregularities and amenorrhea in females"
+          ]
+        },
+        "right": {
+          "title": "Eplerenone (Highly Selective Antagonist)",
+          "points": [
+            "Engineered with epoxy group conferring high MR selectivity",
+            "Zero binding affinity for androgen or progesterone receptors",
+            "Incidence of gynecomastia equivalent to placebo (<1%)",
+            "Preferred mineralocorticoid antagonist for symptomatic males"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The highly potent quinazoline-derivative thiazide-like diuretic distinguished by retaining efficacy in severe chronic kidney disease is **metolazone**. Unlike hydrochlorothiazide, which becomes completely ineffective when glomerular filtration falls below 30 mL/min, metolazone continues to block sodium reabsorption in the distal convoluted tubule and proximal tubule even in patients with end-stage renal disease. Administered thirty minutes prior to intravenous loop diuretics, metolazone delivers sequential nephron blockade, overcoming severe diuretic resistance in refractory congestive heart failure and nephrotic syndrome.",
+      "say": "Metolazone retains natriuretic potency in advanced kidney failure, anchoring sequential nephron blockade alongside loop diuretics.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/renal-tubular-transport-and-diuretics-fig1.webp",
+        "alt": "Anatomical nephron diagram detailing tubular transport mechanisms and diuretic sites",
+        "caption": "Nephron transport sites illustrating distal convoluted tubule NCCT cotransporter block by metolazone in refractory edema."
+      }
+    },
+    {
+      "tx": "The powerful synergistic pharmacological strategy employed to overcome severe refractory diuretic resistance in hospital intensive care is **sequential nephron blockade**. Combining a loop diuretic like intravenous furosemide with a thiazide-like diuretic like oral metolazone simultaneously inhibits sodium reabsorption at two distinct, sequential anatomical sites: the thick ascending limb of Henle and the distal convoluted tubule. This completely neutralizes distal nephron compensatory sodium reabsorption, triggering massive saluresis that requires close hemodynamic and electrolyte monitoring to prevent circulatory collapse.",
+      "say": "Sequential nephron blockade combines loop and thiazide diuretics to simultaneously block multiple segments and overcome resistance.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "loop",
+            "label": "Intravenous furosemide blocks 25% of sodium in thick ascending limb"
+          },
+          {
+            "id": "escape",
+            "label": "Massive unabsorbed sodium load flows into distal convoluted tubule"
+          },
+          {
+            "id": "metol",
+            "label": "Concurrent metolazone blocks compensatory distal NCCT reabsorption"
+          },
+          {
+            "id": "diuresis",
+            "label": "Profound synergistic natriuresis overcoming refractory fluid overload"
+          }
+        ],
+        "edges": [
+          [
+            "loop",
+            "escape"
+          ],
+          [
+            "escape",
+            "metol"
+          ],
+          [
+            "metol",
+            "diuresis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The pivotal randomized controlled clinical trial that established mineralocorticoid receptor antagonism as mortality-reducing therapy in heart failure is the **RALES landmark trial**. Demonstrating that low-dose spironolactone at 25 mg daily added to standard therapy in patients with severe heart failure with reduced ejection fraction reduced all-cause mortality by thirty percent and hospitalizations by thirty-five percent, the trial showed that benefit stems from blocking aldosterone-mediated myocardial fibrosis, endothelial dysfunction, and baroreceptor desensitization rather than diuretic volume loss.",
+      "say": "The RALES trial proved that low-dose spironolactone reduces heart failure mortality by thirty percent through antifibrotic actions.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Landmark trial",
+          "Investigated drug",
+          "Patient study population",
+          "Primary mortality endpoint reduction"
+        ],
+        "rows": [
+          [
+            "RALES trial",
+            "Spironolactone (25 mg daily)",
+            "Severe systolic heart failure (NYHA III-IV)",
+            "30% reduction in all-cause mortality"
+          ],
+          [
+            "EPHESUS trial",
+            "Eplerenone (25 to 50 mg daily)",
+            "Post-myocardial infarction with LV dysfunction",
+            "15% reduction in all-cause cardiovascular death"
+          ],
+          [
+            "EMPHASIS-HF",
+            "Eplerenone (25 to 50 mg daily)",
+            "Mild chronic heart failure (NYHA class II)",
+            "37% reduction in death or HF hospitalization"
+          ],
+          [
+            "FIDELIO-DKD",
+            "Finerenone (non-steroidal MRA)",
+            "Chronic kidney disease in type 2 diabetes",
+            "18% reduction in CKD progression composite"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most dangerous, potentially lethal metabolic complication associated with spironolactone and potassium-sparing diuretic therapy is the **hyperkalemic hazard**. In patients receiving concomitant ACE inhibitors, angiotensin receptor blockers, beta blockers, direct renin inhibitors, or NSAIDs, or in those with baseline renal impairment, potassium retention can quickly escalate above 6.0 mEq/L. Severe hyperkalemia causes peaked T-waves, PR prolongation, QRS widening, sine-wave cardiac arrest, and sudden death, necessitating close serum potassium and creatinine monitoring.",
+      "say": "Potassium-sparing diuretics carry life-threatening hyperkalemia risks, especially when combined with ACE inhibitors or in renal failure.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-diuretics.webp",
+        "alt": "Collecting duct transport physiology and potassium handling",
+        "caption": "Collecting duct principal cell physiology illustrating mineralocorticoid antagonism, sodium excretion, and potassium conservation hazards."
+      }
+    }
+  ]
+}

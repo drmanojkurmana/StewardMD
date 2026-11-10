@@ -1,223 +1,223 @@
 {
-  "v": 1,
-  "module": "pat-tumour-biology",
-  "subject": "pathology",
-  "title": "Transcoelomic Seeding, Grading, TNM Staging, EMT, and Virchow Node",
-  "minutes": 6,
-  "gen": "AI",
-  "quiz": [],
-  "steps": [
-    {
-      "tx": "When a tumour breaches a serosal surface it can scatter cells across the peritoneal, pleural, or pericardial cavity, where gravity and fluid currents plant them on the omentum, pelvis, and diaphragm. Ovarian and gastric cancers exploit this route relentlessly; the process is **transcoelomic seeding**.",
-      "say": "Breaching the serosa lets ovarian and gastric cancers seed the whole peritoneal cavity, omentum, and pelvis.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "Tumour breaches visceral serosa"
-          },
-          {
-            "id": "b",
-            "label": "Cells exfoliate into peritoneal fluid"
-          },
-          {
-            "id": "c",
-            "label": "Gravity plants cells in pelvis and omentum"
-          },
-          {
-            "id": "d",
-            "label": "Omental cake, ascites, carcinomatosis"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
+ "v": 1,
+ "module": "pat-tumour-biology",
+ "subject": "pathology",
+ "title": "Transcoelomic Seeding, Grading, TNM Staging, EMT, and Virchow Node",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "When a tumour breaches a serosal surface it can scatter cells across the peritoneal, pleural, or pericardial cavity, where gravity and fluid currents plant them on the omentum, pelvis, and diaphragm. Ovarian and gastric cancers exploit this route relentlessly; the process is **transcoelomic seeding**.",
+   "say": "Breaching the serosa lets ovarian and gastric cancers seed the whole peritoneal cavity, omentum, and pelvis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Tumour breaches visceral serosa"
+     },
+     {
+      "id": "b",
+      "label": "Cells exfoliate into peritoneal fluid"
+     },
+     {
+      "id": "c",
+      "label": "Gravity plants cells in pelvis and omentum"
+     },
+     {
+      "id": "d",
+      "label": "Omental cake, ascites, carcinomatosis"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Bilateral solid ovarian masses packed with mucin filled signet ring cells in a woman usually mean metastasis from a gastric primary rather than primary ovarian cancer. These eponymous ovarian deposits, often with a deceptively small stomach tumour, are **Krukenberg tumours**.",
+   "say": "Bilateral signet ring ovarian masses mean a Krukenberg metastasis until proven otherwise; hunt for the gastric primary.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/krukenberg-tumour-fig1.webp",
+    "alt": "Krukenberg tumour gross and signet ring histology",
+    "caption": "Krukenberg tumour with signet ring cell histology in bilateral ovarian metastases."
+   }
+  },
+  {
+   "tx": "Mucinous appendiceal and ovarian tumours can fill the abdomen with gelatinous mucin that redistributes but rarely invades viscera, producing distension, nutritional failure, and characteristic scalloping of the liver surface. Surgeons treat this low grade mucinous flood, **pseudomyxoma peritonei**, with cytoreduction and heated intraperitoneal chemotherapy.",
+   "say": "Pseudomyxoma peritonei floods the abdomen with mucin that scallops the liver edge; cytoreduction plus HIPEC is its treatment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Peritoneal carcinomatosis",
+     "points": [
+      "Invasive nodules on peritoneum and bowel",
+      "Malignant ascites, omental cake",
+      "Poor prognosis without response"
+     ]
     },
-    {
-      "tx": "Bilateral solid ovarian masses packed with mucin filled signet ring cells in a woman usually mean metastasis from a gastric primary rather than primary ovarian cancer. These eponymous ovarian deposits, often with a deceptively small stomach tumour, are **Krukenberg tumours**.",
-      "say": "Bilateral signet ring ovarian masses mean a Krukenberg metastasis until proven otherwise; hunt for the gastric primary.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/krukenberg-tumour-fig1.webp",
-        "alt": "Krukenberg tumour gross and signet ring histology",
-        "caption": "Krukenberg tumour with signet ring cell histology in bilateral ovarian metastases."
-      }
-    },
-    {
-      "tx": "Mucinous appendiceal and ovarian tumours can fill the abdomen with gelatinous mucin that redistributes but rarely invades viscera, producing distension, nutritional failure, and characteristic scalloping of the liver surface. Surgeons treat this low grade mucinous flood, **pseudomyxoma peritonei**, with cytoreduction and heated intraperitoneal chemotherapy.",
-      "say": "Pseudomyxoma peritonei floods the abdomen with mucin that scallops the liver edge; cytoreduction plus HIPEC is its treatment.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Peritoneal carcinomatosis",
-          "points": [
-            "Invasive nodules on peritoneum and bowel",
-            "Malignant ascites, omental cake",
-            "Poor prognosis without response"
-          ]
-        },
-        "right": {
-          "title": "Pseudomyxoma peritonei",
-          "points": [
-            "Gelatinous mucin, redistributes by flow",
-            "Liver surface scalloping on imaging",
-            "Cytoreduction and HIPEC considered"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "Grading scores how malignant a tumour looks, differentiation, mitoses, and necrosis, while staging maps how far it has actually gone, and the two answer different clinical questions. A small high grade tumour may behave worse than a large low grade one; the microscope based assessment is **histological grading**.",
-      "say": "Grade is how bad the tumour looks; stage is how far it has gone. Both are needed, and they are not interchangeable.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "System",
-          "Question answered",
-          "Basis"
-        ],
-        "rows": [
-          [
-            "Grading",
-            "How aggressive does it look?",
-            "Differentiation, mitoses, necrosis"
-          ],
-          [
-            "Staging",
-            "How far has it spread?",
-            "Size, nodes, metastases"
-          ],
-          [
-            "Grade example",
-            "G1 well to G3 poorly differentiated",
-            "Histology of the primary"
-          ],
-          [
-            "Stage example",
-            "Stage I localised to stage IV distant",
-            "Imaging, surgery, pathology"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "The TNM system stages by primary tumour extent, regional node involvement, and distant metastasis, then collapses combinations into stage groups that drive treatment and prognosis across most solid cancers. Pathological staging after resection refines clinical staging, and the universal language is the **TNM staging system** maintained jointly by UICC and AJCC.",
-      "say": "TNM stages tumour, nodes, and metastases into groups that decide treatment; learn it as the universal cancer language.",
-      "vis": {
-        "kind": "flow",
-        "nodes": [
-          {
-            "id": "a",
-            "label": "T: size and local extent of primary"
-          },
-          {
-            "id": "b",
-            "label": "N: regional node involvement"
-          },
-          {
-            "id": "c",
-            "label": "M: distant metastasis present or absent"
-          },
-          {
-            "id": "d",
-            "label": "Combined into stage I to IV groups"
-          }
-        ],
-        "edges": [
-          [
-            "a",
-            "b"
-          ],
-          [
-            "b",
-            "c"
-          ],
-          [
-            "c",
-            "d"
-          ]
-        ]
-      }
-    },
-    {
-      "tx": "To invade and travel, epithelial cells reactivate an embryonic programme that sheds E-cadherin and polarity, gains mesenchymal motility markers, and survives detachment, then may reverse at the metastatic site. This reversible identity switch powering dissemination is **epithelial-mesenchymal transition**. This programme also confers resistance to anoikis, the death normal epithelial cells suffer when detached.",
-      "say": "Epithelial mesenchymal transition lets carcinoma cells loosen, migrate, and survive travel, then switch back to colonise.",
-      "vis": {
-        "kind": "compare",
-        "left": {
-          "title": "Epithelial state",
-          "points": [
-            "E-cadherin high, cells polarised",
-            "Attached in ordered sheets",
-            "Proliferative at metastatic site"
-          ]
-        },
-        "right": {
-          "title": "Mesenchymal state",
-          "points": [
-            "Vimentin high, motile phenotype",
-            "Detached, protease secreting",
-            "Invasive during dissemination"
-          ]
-        }
-      }
-    },
-    {
-      "tx": "An enlarged hard left supraclavicular node in an adult warns of abdominal or thoracic malignancy ascending the thoracic duct, classically gastric cancer, and is readily biopsied for tissue diagnosis. Troisier sign is the clinical presentation; the node itself is the **Virchow node**.",
-      "say": "A hard left supraclavicular Virchow node means thoracic duct spread from below the diaphragm until proven otherwise; biopsy it.",
-      "vis": {
-        "kind": "image",
-        "src": "v1/kb/media/leptomeningeal-metastasis-fig1.webp",
-        "alt": "Leptomeningeal metastasis diagnosis overview",
-        "caption": "Leptomeningeal metastasis, another route of discontinuous spread requiring staging awareness."
-      }
-    },
-    {
-      "tx": "Leptomeningeal spread completes the route map: tumour bathing the cerebrospinal fluid produces multifocal cranial nerve and root signs with raised pressure, diagnosed by MRI and cytology. Remembering lymphatic, haematogenous, transcoelomic, and perineural routes together constitutes complete **metastatic route mapping**. Perineural invasion along nerve sheaths deserves the same attention in pancreatic and prostate cancers.",
-      "say": "Add leptomeningeal and perineural spread to lymphatic, blood, and cavity routes and your metastatic map is complete.",
-      "vis": {
-        "kind": "table",
-        "cols": [
-          "Route",
-          "Prototype tumour",
-          "First distant clue"
-        ],
-        "rows": [
-          [
-            "Lymphatic",
-            "Breast, melanoma",
-            "Sentinel node positivity"
-          ],
-          [
-            "Haematogenous",
-            "Sarcoma, renal cell carcinoma",
-            "Lung or liver deposits"
-          ],
-          [
-            "Transcoelomic",
-            "Ovarian, gastric",
-            "Ascites, omental cake"
-          ],
-          [
-            "Leptomeningeal",
-            "Leukaemia, lung, breast",
-            "Multifocal nerve and root signs"
-          ]
-        ]
-      }
+    "right": {
+     "title": "Pseudomyxoma peritonei",
+     "points": [
+      "Gelatinous mucin, redistributes by flow",
+      "Liver surface scalloping on imaging",
+      "Cytoreduction and HIPEC considered"
+     ]
     }
-  ]
+   }
+  },
+  {
+   "tx": "Grading scores how malignant a tumour looks, differentiation, mitoses, and necrosis, while staging maps how far it has actually gone, and the two answer different clinical questions. A small high grade tumour may behave worse than a large low grade one; the microscope based assessment is **histological grading**.",
+   "say": "Grade is how bad the tumour looks; stage is how far it has gone. Both are needed, and they are not interchangeable.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "System",
+     "Question answered",
+     "Basis"
+    ],
+    "rows": [
+     [
+      "Grading",
+      "How aggressive does it look?",
+      "Differentiation, mitoses, necrosis"
+     ],
+     [
+      "Staging",
+      "How far has it spread?",
+      "Size, nodes, metastases"
+     ],
+     [
+      "Grade example",
+      "G1 well to G3 poorly differentiated",
+      "Histology of the primary"
+     ],
+     [
+      "Stage example",
+      "Stage I localised to stage IV distant",
+      "Imaging, surgery, pathology"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The TNM system stages by primary tumour extent, regional node involvement, and distant metastasis, then collapses combinations into stage groups that drive treatment and prognosis across most solid cancers. Pathological staging after resection refines clinical staging, and the universal language is the **TNM staging system** maintained jointly by UICC and AJCC.",
+   "say": "TNM stages tumour, nodes, and metastases into groups that decide treatment; learn it as the universal cancer language.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "T: size and local extent of primary"
+     },
+     {
+      "id": "b",
+      "label": "N: regional node involvement"
+     },
+     {
+      "id": "c",
+      "label": "M: distant metastasis present or absent"
+     },
+     {
+      "id": "d",
+      "label": "Combined into stage I to IV groups"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "To invade and travel, epithelial cells reactivate an embryonic programme that sheds E-cadherin and polarity, gains mesenchymal motility markers, and survives detachment, then may reverse at the metastatic site. This reversible identity switch powering dissemination is **epithelial-mesenchymal transition**. This programme also confers resistance to anoikis, the death normal epithelial cells suffer when detached.",
+   "say": "Epithelial mesenchymal transition lets carcinoma cells loosen, migrate, and survive travel, then switch back to colonise.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Epithelial state",
+     "points": [
+      "E-cadherin high, cells polarised",
+      "Attached in ordered sheets",
+      "Proliferative at metastatic site"
+     ]
+    },
+    "right": {
+     "title": "Mesenchymal state",
+     "points": [
+      "Vimentin high, motile phenotype",
+      "Detached, protease secreting",
+      "Invasive during dissemination"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "An enlarged hard left supraclavicular node in an adult warns of abdominal or thoracic malignancy ascending the thoracic duct, classically gastric cancer, and is readily biopsied for tissue diagnosis. Troisier sign is the clinical presentation; the node itself is the **Virchow node**.",
+   "say": "A hard left supraclavicular Virchow node means thoracic duct spread from below the diaphragm until proven otherwise; biopsy it.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-malignancy_stigmata.webp",
+    "alt": "Leptomeningeal metastasis diagnosis overview",
+    "caption": "Malignancy stigmata on examination: Virchow node, umbilical nodule, Krukenberg ovaries, Blumer shelf and hepatic ascites in a supine patient. [Credit: StewardMD]"
+   }
+  },
+  {
+   "tx": "Leptomeningeal spread completes the route map: tumour bathing the cerebrospinal fluid produces multifocal cranial nerve and root signs with raised pressure, diagnosed by MRI and cytology. Remembering lymphatic, haematogenous, transcoelomic, and perineural routes together constitutes complete **metastatic route mapping**. Perineural invasion along nerve sheaths deserves the same attention in pancreatic and prostate cancers.",
+   "say": "Add leptomeningeal and perineural spread to lymphatic, blood, and cavity routes and your metastatic map is complete.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Route",
+     "Prototype tumour",
+     "First distant clue"
+    ],
+    "rows": [
+     [
+      "Lymphatic",
+      "Breast, melanoma",
+      "Sentinel node positivity"
+     ],
+     [
+      "Haematogenous",
+      "Sarcoma, renal cell carcinoma",
+      "Lung or liver deposits"
+     ],
+     [
+      "Transcoelomic",
+      "Ovarian, gastric",
+      "Ascites, omental cake"
+     ],
+     [
+      "Leptomeningeal",
+      "Leukaemia, lung, breast",
+      "Multifocal nerve and root signs"
+     ]
+    ]
+   }
+  }
+ ]
 }

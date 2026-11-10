@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "id": "psy-schizophrenia-clozapine",
+ "subject": "psychiatry",
+ "module": "psy-schizophrenia",
+ "title": "Treatment-Resistant Schizophrenia and Clozapine Protocol",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Treatment-resistant schizophrenia** is diagnosed when a patient demonstrates persistent moderate to severe psychotic symptoms despite at least two adequate trials of different antipsychotic agents. Each trial must utilize therapeutic doses equivalent to at least 600 milligrams of chlorpromazine daily for a minimum duration of six continuous weeks.",
+   "say": "Treatment resistance requires failure of two adequate trials of different antipsychotics at therapeutic doses for at least six weeks each. Clozapine is the gold standard therapy.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antipsychotics-d2-eps-clozapine-nms-fig1.webp",
+    "alt": "Clozapine atypical receptor binding and surveillance protocols",
+    "caption": "Atypical antipsychotic mechanisms showing clozapine multi-receptor affinity, agranulocytosis risk, and adverse effect profile.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Atypical receptor pharmacology of clozapine** features high affinity for dopamine D4, serotonin 5-HT2A, histamine H1, and alpha-1 adrenergic receptors, alongside exceptionally weak binding to striatal D2 receptors. Because striatal D2 occupancy remains below 60 percent, clozapine virtually never induces extrapyramidal symptoms or tardive dyskinesia.",
+   "say": "Clozapine exhibits potent D4 and 5-HT2A antagonism with minimal striatal D2 blockade. It avoids extrapyramidal motor side effects and does not cause tardive dyskinesia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Receptor Affinities",
+     "points": [
+      "Potent D4 receptor antagonism",
+      "High 5-HT2A serotonin blockade",
+      "Antagonist at H1 and alpha-1 receptors",
+      "Negligible striatal D2 binding affinity"
+     ]
+    },
+    "right": {
+     "title": "Clinical Correlates",
+     "points": [
+      "Superior efficacy in refractory psychosis",
+      "Negligible extrapyramidal motor symptoms",
+      "Does not elevate serum prolactin",
+      "Protective against tardive dyskinesia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Agranulocytosis monitoring protocol** mandates baseline absolute neutrophil count exceeding 1500 per microliter before initiating clozapine therapy. Blood counts are performed weekly for the first 18 weeks, fortnightly from week 19 through week 52, and every four weeks indefinitely thereafter to intercept life-threatening bone marrow suppression.",
+   "say": "Absolute neutrophil counts must exceed 1500 per microliter before therapy. Monitoring is weekly for eighteen weeks, fortnightly until one year, and monthly thereafter.",
+   "vis": {
+    "kind": "flow",
+    "title": "Haematological Surveillance Schedule",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Baseline ANC >= 1500/mcL (>=1000 in benign ethnic neutropenia)"
+     },
+     {
+      "id": "n2",
+      "label": "Weekly ANC monitoring through week 18"
+     },
+     {
+      "id": "n3",
+      "label": "Fortnightly ANC monitoring from week 19 to week 52"
+     },
+     {
+      "id": "n4",
+      "label": "Monthly ANC testing continued indefinitely"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Absolute neutrophil count thresholds** dictate immediate clinical action: a count dropping between 1000 and 1499 per microliter requires three-times-weekly monitoring. An absolute neutrophil count falling below 1000 per microliter mandates immediate, permanent clozapine cessation, strict infectious disease consultation, and protective isolation.",
+   "say": "Counts between 1000 and 1499 require blood tests three times weekly. A drop below 1000 per microliter demands immediate and permanent clozapine discontinuation.",
+   "vis": {
+    "kind": "table",
+    "title": "ANC Action Cutoffs",
+    "cols": [
+     "ANC Value",
+     "Status",
+     "Clinical Action Required"
+    ],
+    "rows": [
+     [
+      ">= 1500 /mcL",
+      "Normal",
+      "Continue routine clozapine surveillance schedule"
+     ],
+     [
+      "1000 - 1499 /mcL",
+      "Mild neutropenia",
+      "Continue clozapine; test ANC three times weekly"
+     ],
+     [
+      "500 - 999 /mcL",
+      "Moderate neutropenia",
+      "Stop clozapine immediately; daily haematology monitoring"
+     ],
+     [
+      "< 500 /mcL",
+      "Agranulocytosis",
+      "Stop clozapine permanently; reverse barrier nursing, consider G-CSF"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adverse effects of clozapine** include dose-dependent seizure risk exceeding five percent at doses over 600 milligrams daily, profound sedation, severe constipation, significant metabolic syndrome, and nocturnal hypersalivation. Fatal myocarditis occurs predominantly during the initial month of titration, requiring baseline electrocardiography and serial cardiac troponin monitoring.",
+   "say": "Clozapine can induce dose-related seizures, sedation, severe constipation, metabolic syndrome, and hypersalivation. Acute myocarditis usually presents during the first month of therapy.",
+   "vis": {
+    "kind": "table",
+    "title": "Non-Haematological Complications",
+    "cols": [
+     "Adverse Effect",
+     "Pathophysiology",
+     "Management"
+    ],
+    "rows": [
+     [
+      "Myocarditis",
+      "IgE-mediated hypersensitivity",
+      "Baseline troponin & ECG; stop immediately if elevated"
+     ],
+     [
+      "Seizures",
+      "Dose-dependent lowering of threshold",
+      "Titrate slowly; add sodium valproate above 450 mg/day"
+     ],
+     [
+      "Severe constipation",
+      "Potent muscarinic M3 antagonism",
+      "Prophylactic stimulant laxatives to avoid paralytic ileus"
+     ],
+     [
+      "Sialorrhoea",
+      "Muscarinic M4 agonism",
+      "Sublingual ipratropium spray or oral glycopyrrolate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Depot antipsychotic formulations**, such as haloperidol decanoate, fluphenazine decanoate, and paliperidone palmitate, resolve covert medication non-adherence in non-compliant schizophrenia patients. These long-acting injectable agents require an oral test dose before administration to ensure immunological tolerance and absence of acute dystonic hypersensitivity.",
+   "say": "Long-acting depot antipsychotics overcome medication non-adherence. An oral test dose is always administered first to confirm patient tolerance and prevent acute dystonia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First-Generation Depots",
+     "points": [
+      "Haloperidol decanoate & fluphenazine",
+      "Sesame oil or ester vehicle",
+      "High risk of extrapyramidal symptoms",
+      "Administered deep intramuscular every 2-4 weeks"
+     ]
+    },
+    "right": {
+     "title": "Second-Generation Depots",
+     "points": [
+      "Paliperidone palmitate & aripiprazole",
+      "Aqueous crystal suspension",
+      "Low risk of tardive dyskinesia",
+      "Monthly or three-monthly dosing schedules"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Anti-suicidal efficacy of clozapine** represents a unique pharmacological benefit, demonstrating significant reductions in completed suicide and deliberate self-harm in patients with schizophrenia. Clozapine remains the sole psychotropic agent specifically indicated by regulatory authorities for reducing suicidal behavior in chronic psychotic illness.",
+   "say": "Clozapine reduces completed suicide and severe self-harm in schizophrenia. It is specifically approved for suicide prevention in refractory psychotic illness.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Indications",
+     "points": [
+      "Treatment-resistant schizophrenia",
+      "Recurrent suicidal behavior in psychosis",
+      "Severe tardive dyskinesia from typicals",
+      "Persistent hostility and violent conduct"
+     ]
+    },
+    "right": {
+     "title": "Mandatory Contraindications",
+     "points": [
+      "History of clozapine-induced agranulocytosis",
+      "Uncontrolled active epilepsy",
+      "Paralytic ileus or toxic megacolon",
+      "Severe active bone marrow depression"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Therapeutic drug monitoring of clozapine** optimizes clinical response while avoiding toxic neurotoxicity, targeting a trough plasma concentration between 350 and 600 nanograms per milliliter. Plasma levels above 1000 nanograms per milliliter dramatically increase epileptogenic activity without conferring additional therapeutic benefit.",
+   "say": "Trough plasma clozapine levels should measure between 350 and 600 nanograms per milliliter. Levels above 1000 nanograms markedly heighten seizure probability.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Therapeutic Trough Range",
+     "points": [
+      "Target window 350 to 600 ng/mL",
+      "Trough drawn twelve hours post-dose",
+      "Ensures optimal antipsychotic response",
+      "Guides safe upward dose titration"
+     ]
+    },
+    "right": {
+     "title": "Toxic Threshold Signs",
+     "points": [
+      "Levels exceeding 1000 ng/mL",
+      "Dramatically heightened seizure risk",
+      "Diffuse encephalopathy and myoclonus",
+      "Requires immediate dose reduction"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

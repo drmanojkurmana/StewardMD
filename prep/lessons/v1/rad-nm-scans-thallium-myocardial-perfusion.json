@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-nm-scans-thallium-myocardial-perfusion",
+ "subject": "radiology",
+ "module": "rad-nm-scans",
+ "title": "Myocardial Perfusion, V/Q Scanning, MIBG and HIDA Studies",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Perfusion tracers follow flow and viability",
+   "tx": "**Myocardial perfusion imaging** injects thallium 201, a potassium analogue taken up by living myocytes in proportion to flow, or technetium sestamibi and tetrofosmin agents with better photons and gating. Stress and rest pairs separate ischaemia, where stress defects refill at rest, from scar, where defects stay fixed. Thallium redistributes over hours into viable ischaemic tissue, the property that made it the classic viability tracer.",
+   "say": "Myocardial perfusion imaging injects thallium, a potassium analogue taken up by living myocytes, or technetium agents with better photons. Stress defects that refill at rest mean ischaemia, fixed defects mean scar. Thallium redistributes into viable tissue over hours, making it the classic viability tracer.",
+   "vis": {"kind": "table", "cols": ["Tracer", "Mechanism", "Niche"], "rows": [["Thallium 201", "Potassium analogue, redistributes", "Viability assessment"], ["Sestamibi technetium", "Mitochondrial retention", "Gated perfusion workhorse"], ["Tetrofosmin technetium", "Lipophilic cation", "Faster liver clearance"], ["Rubidium 82 PET", "Generator potassium analogue", "Quantitative flow reserve"]]}
+  },
+  {
+   "title": "Reversible versus fixed defects",
+   "tx": "**Reversible defect** territory is alive but underperfused at stress, the angina producing segment that revascularisation can rescue, while a fixed defect matching a prior infarct territory with wall thinning is scar that no stent revives. Partially reversible defects mix scar with peri infarct ischaemia and often drive the angioplasty decision hardest. Balanced three vessel ischaemia can hide as a globally faint stress study with transient cavity dilatation, the trap that punishes single territory reading.",
+   "say": "Reversible defect territory is alive but underperfused at stress, rescuable by revascularisation, while a fixed defect with wall thinning is scar. Partially reversible defects mix both. Balanced three vessel ischaemia can hide as a globally faint study, the trap punishing single territory reading.",
+   "vis": {"kind": "compare", "left": {"title": "Reversible: ischaemia", "points": ["Stress defect, rest fills", "Viable myocardium", "Revascularisation helps", "Matches angina territory"]}, "right": {"title": "Fixed: scar", "points": ["Defect at stress and rest", "Thinned akinetic wall", "Prior infarct territory", "No rescue expected"]}}
+  },
+  {
+   "title": "Ventilation perfusion mismatch",
+   "tx": "**V/Q scan** diagnoses pulmonary embolism by mismatch: lung segments perfused defectively by technetium albumin particles yet ventilated normally by inhaled tracer, because clot blocks artery but not airway. Matched defects where ventilation and perfusion fail together point to lung disease instead. A normal perfusion scan excludes embolism as firmly as a negative CT angiogram, and the study still serves pregnancy and contrast failure patients where CT falters.",
+   "say": "V/Q scan diagnoses embolism by mismatch: segments perfused defectively yet ventilated normally, because clot blocks artery not airway. Matched defects point to lung disease instead. A normal perfusion scan excludes embolism firmly, serving pregnancy and contrast failure patients where CT falters.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Perfusion defect found"}, {"id": "b", "label": "Ventilation normal there"}, {"id": "c", "label": "Mismatch declared"}, {"id": "d", "label": "Embolism probability high"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "MIBG finds catecholamine tissue",
+   "tx": "**MIBG scan** uses iodine 123 metaiodobenzylguanidine, a noradrenaline analogue concentrated by chromaffin tissue, to localise phaeochromocytoma and paraganglioma outside the adrenal, stage neuroblastoma in children and prove MIBG avidity before iodine 131 MIBG therapy. Drugs from labetalol to tricyclics block uptake and are withheld by protocol. A negative MIBG in a biochemically proven tumour reroutes to DOTATATE or FDG PET, which catch dedifferentiated disease MIBG misses.",
+   "say": "MIBG scan concentrates a noradrenaline analogue in chromaffin tissue, localising phaeochromocytoma and staging neuroblastoma. Drugs from labetalol to tricyclics block uptake and are withheld. A negative MIBG in proven tumour reroutes to DOTATATE or FDG PET for dedifferentiated disease.",
+   "vis": {"kind": "table", "cols": ["Tumour", "MIBG role", "Fallback tracer"], "rows": [["Phaeochromocytoma", "Extra adrenal localisation", "DOTATATE PET"], ["Neuroblastoma", "Staging and therapy selection", "FDG PET"], ["Paraganglioma", "Multifocal mapping", "DOTATATE PET"], ["Medullary thyroid cancer", "Limited sensitivity", "FDG or DOTATATE"]]}
+  },
+  {
+   "title": "HIDA proves cystic duct block",
+   "tx": "**HIDA scan** follows technetium iminodiacetic acid through hepatocytes into bile: gallbladder filling proves a patent cystic duct, and non filling at four hours or after morphine augmentation supports acute cholecystitis with sensitivity ultrasound cannot match in equivocal cases. Chronic cholecystitis fills late but fills. Acalculous disease is hunted with a fatty meal or cholecystokinin ejection fraction under about thirty five percent plus reproduced pain, a softer and contested indication.",
+   "say": "HIDA scan follows tracer through hepatocytes into bile: gallbladder filling proves a patent cystic duct, and non filling supports acute cholecystitis in equivocal cases. Chronic disease fills late but fills. Ejection fraction under about thirty five percent with reproduced pain hunts acalculous disease.",
+   "vis": {"kind": "compare", "left": {"title": "Normal HIDA", "points": ["Liver uptake prompt", "Gallbladder fills in an hour", "Bowel activity follows", "Cystic duct patent"]}, "right": {"title": "Acute cholecystitis", "points": ["Gallbladder never fills", "Rim sign if gangrenous", "Morphine augmentation used", "Surgical referral"]}}
+  },
+  {
+   "title": "Bone scan flare and superscan review",
+   "tx": "**Bone scan** with technetium MDP maps osteoblastic response, lighting metastases, fractures, infection and Paget bone wherever new bone is being laid, sensitive months before films change. Healing metastases can flare brighter at three months on effective therapy before fading, a worsening picture that means repair, not progression. Three phase imaging separates cellulitis, early flow and blood pool only, from osteomyelitis, which stays hot on delayed bone phase too.",
+   "say": "Bone scan maps osteoblastic response, lighting metastases and fractures months before films change. Healing metastases can flare brighter on effective therapy before fading, meaning repair not progression. Three phase imaging separates cellulitis from osteomyelitis, which stays hot on delayed images.",
+   "vis": {"kind": "table", "cols": ["Phase", "Timing", "Osteomyelitis look"], "rows": [["Flow phase", "Seconds", "Increased"], ["Blood pool", "Minutes", "Increased"], ["Delayed bone", "3 to 4 hours", "Focally increased"], ["Cellulitis pattern", "Delayed normalises", "Bone phase quiet"]]}
+  },
+  {
+   "title": "Thyroid and parathyroid nuclear roles",
+   "tx": "**Sestamibi parathyroid** imaging exploits mitochondrial retention in hyperfunctioning parathyroid tissue after thyroid washout, localising the adenoma for focused minimally invasive surgery, often fused with SPECT CT for ectopic mediastinal glands. Thyroid cancer follow up uses iodine whole body scans after thyroidectomy, where any iodine avid focus outside the thyroid bed is recurrence or metastasis until proven otherwise, and thyroglobulin levels chaperone every image interpretation.",
+   "say": "Sestamibi parathyroid imaging localises adenomas for focused surgery after thyroid washout. Thyroid cancer follow up uses iodine whole body scans, where any iodine avid focus outside the thyroid bed is recurrence until proven otherwise, and thyroglobulin chaperones every interpretation.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Hyperparathyroidism proven"}, {"id": "b", "label": "Sestamibi with SPECT CT"}, {"id": "c", "label": "Single adenoma localised"}, {"id": "d", "label": "Focused parathyroidectomy"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Choosing nuclear versus anatomical tests",
+   "tx": "**Test selection** in nuclear medicine trades anatomy for physiology: perfusion imaging proves ischaemia CT anatomy only predicts, V/Q proves embolism physiology when contrast fails, DMSA proves cortical function ultrasound cannot grade, and HIDA proves duct patency no static picture shows. Reporting must therefore answer the physiological question asked, name the tracer and protocol, and state the anatomical correlation still owed, which is the discipline this whole subject examines.",
+   "say": "Test selection trades anatomy for physiology: perfusion proves ischaemia, V/Q proves embolism physiology, DMSA proves cortical function and HIDA proves duct patency. Reporting must answer the physiological question asked, name the tracer and protocol, and state the anatomical correlation still owed.",
+   "vis": {"kind": "compare", "left": {"title": "Physiology questions", "points": ["Is this segment ischaemic", "Is this pelvis obstructed", "Is this duct patent", "Nuclear medicine answers"]}, "right": {"title": "Anatomy questions", "points": ["How tight is this stenosis", "Where exactly is this mass", "What stage is this tumour", "CT and MRI answer"]}}
+  }
+ ]
+}

@@ -1,0 +1,238 @@
+{
+  "v": 1,
+  "module": "phm-antitubercular",
+  "subject": "pharmacology",
+  "title": "Ethambutol Optic Neuritis, Hyperuricaemia, Bedaquiline and Delamanid",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Optic neuritis** is ethambutol's defining toxicity: dose and duration related retrobulbar inflammation presenting as painless central vision loss, red green colour blindness first (red desaturation is the clinic test), and central scotoma, usually after months at doses above 15 mg per kg or with renal accumulation. Early cessation usually recovers vision over weeks to months; continuation can blind permanently, which is why monthly symptom questions and baseline formal testing govern its entire prescription.",
+      "say": "Red looks dull is ethambutol until excluded; stop first and let recovery argue later.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Optic toxicity presentation",
+          "points": [
+            "Painless bilateral central vision loss",
+            "Red green dyschromatopsia earliest",
+            "Central or caecocentral scotoma",
+            "Dose above 15 mg/kg, duration, renal failure"
+          ]
+        },
+        "right": {
+          "title": "Monitoring contract",
+          "points": [
+            "Baseline acuity and Ishihara colour documented",
+            "Monthly symptom question at every visit",
+            "Immediate stop and ophthalmology on symptoms",
+            "Recovery weeks to months if stopped early"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hyperuricaemia** rides pyrazinamide's urate excretion blockade (and ethambutol's smaller contribution), producing biochemical elevation in most patients and arthralgia in many, with frank gout in the predisposed. Asymptomatic elevation takes no treatment (allopurinol disappoints because the mechanism is excretion blockade of pyrazinoate, and guidelines counsel reassurance), while symptomatic joints earn NSAIDs and regimen review rather than automatic pyrazinamide sacrifice in the intensive phase.",
+      "say": "Pyrazinamide urate is loud and usually innocent; treat joints, not numbers.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "pza",
+            "label": "Pyrazinamide metabolite blocks urate excretion"
+          },
+          {
+            "id": "urate",
+            "label": "Serum urate climbs in most patients"
+          },
+          {
+            "id": "joint",
+            "label": "Arthralgia common, gout in the predisposed"
+          },
+          {
+            "id": "nsaid",
+            "label": "NSAIDs for symptoms; regimen usually continues"
+          }
+        ],
+        "edges": [
+          [
+            "pza",
+            "urate"
+          ],
+          [
+            "urate",
+            "joint"
+          ],
+          [
+            "joint",
+            "nsaid"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Bedaquiline**, a diarylquinoline strangling mycobacterial ATP synthase (a target no other drug class touches), revolutionised drug resistant tuberculosis while carrying a QT prolongation signature and a hepatic and mortality imbalance signal from its pivotal trial that fenced it inside six month specialist regimens with ECG surveillance. Its terminal half life of months means interactions and QT effects outlive the prescription by a season.",
+      "say": "Bedaquiline starves the bacillus of ATP for months after the last dose; the ECG is its chaperone.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/mdr-tuberculosis-fig1.webp",
+        "alt": "MDR tuberculosis line probe assay diagram for rapid resistance detection",
+        "caption": "Rapid molecular resistance detection that assigns patients to bedaquiline containing MDR regimens."
+      }
+    },
+    {
+      "tx": "**Delamanid**, a nitroimidazole cousin, blocks methoxy and keto mycolic acid synthesis after mycobacterial activation, joining bedaquiline in resistant regimens with its own QT contribution (via its albumin bound metabolite, worst with hypoalbuminaemia) and a gentler hepatic profile. QT effects add across bedaquiline, delamanid, clofazimine and moxifloxacin in modern regimens, so electrolytes and ECGs are regimen infrastructure, not per drug garnish.",
+      "say": "Delamanid joins bedaquiline at the QT table; the whole regimen's ECG is read as one drug.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bedaquiline",
+          "points": [
+            "ATP synthase inhibition, novel target",
+            "QT prolongation, hepatic monitoring",
+            "Half life months: lingering interactions",
+            "Six month core of resistant regimens"
+          ]
+        },
+        "right": {
+          "title": "Delamanid",
+          "points": [
+            "Mycolic acid synthesis inhibition",
+            "QT via metabolite, albumin dependent",
+            "Twice daily for six months typically",
+            "Paediatric dispersible formulations exist"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**QT stewardship in** resistant tuberculosis is a protocol unto itself: baseline ECG and electrolytes (potassium, magnesium, calcium corrected), repeats at defined weeks, thresholds for withholding (QTc beyond 500 ms), and substitution choreography when one agent must fall. CYP3A4 inhibitors multiply bedaquiline; inducers (rifampicin, efavirenz) erase it, which is why rifampicin never shares its regimen and HIV co therapy is rebuilt around dolutegravir arithmetic.",
+      "say": "Baseline, correct, repeat, withhold at five hundred: the resistant TB ECG liturgy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "base",
+            "label": "Baseline ECG, potassium, magnesium, calcium"
+          },
+          {
+            "id": "correct",
+            "label": "Electrolytes corrected before first dose"
+          },
+          {
+            "id": "serial",
+            "label": "Serial ECGs at protocol weeks"
+          },
+          {
+            "id": "hold",
+            "label": "Withhold and review beyond QTc 500 ms"
+          }
+        ],
+        "edges": [
+          [
+            "base",
+            "correct"
+          ],
+          [
+            "correct",
+            "serial"
+          ],
+          [
+            "serial",
+            "hold"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Ethambutol's other exclusions** deserve explicitness: pre existing optic neuritis or diabetic retinopathy complicating assessment, inability to report visual symptoms (young children, which is why paediatric ethambutol dosing and monitoring are specialist argued rather than banned), and renal impairment without dose spacing. Its bacteriostatic humility in the regimen is protective, which is why it exits at two months when susceptibilities prove the killers suffice.",
+      "say": "Children are monitored, not automatically excluded; untestable vision is the real fence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Use with surveillance",
+          "points": [
+            "Children: weight dosing with vision checks as able",
+            "Diabetes: baseline retinal status documented",
+            "Renal impairment: interval spacing by clearance",
+            "All: symptom question monthly"
+          ]
+        },
+        "right": {
+          "title": "Avoid or substitute",
+          "points": [
+            "Established ethambutol optic injury history",
+            "Inability to assess vision with high dose need",
+            "Pre existing unexplained optic neuropathy",
+            "Beyond intensive phase without resistance reason"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Gout differentiation in** tuberculosis therapy prevents regimen vandalism: pyrazinamide arthralgia is polyarticular and urate high, septic arthritis is monoarticular and hot, and rifampicin has no urate role. Stopping pyrazinamide for asymptomatic hyperuricaemia sacrifices sterilising power for a number, while missing septic arthritis for a drug label loses a joint; aspiration, not assumption, arbitrates the hot single joint.",
+      "say": "Many sore joints forgive pyrazinamide, one hot joint demands a needle, not a label.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Drug arthralgia pattern",
+          "points": [
+            "Polyarticular aches, urate elevated",
+            "Temporal link to intensive phase",
+            "NSAIDs and reassurance usually suffice",
+            "Regimen preserved where possible"
+          ]
+        },
+        "right": {
+          "title": "Septic arthritis pattern",
+          "points": [
+            "Single hot swollen joint, fever",
+            "Aspiration before attribution",
+            "Crystals do not exclude infection",
+            "Urgent drainage and antibiotics if septic"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**The modern resistant** regimen assembled (bedaquiline, pretomanid next lesson, linezolid, with or without moxifloxacin: BPaL and BPaLM) delivers six month, all oral, injection free cure near 90 percent in trials for MDR and pre XDR disease, against the twenty month injectable era's fifty. Every drug in this lesson is therefore read as a component of that sentence, its toxicities (QT, vision, urate) budgeted across the combination rather than in isolation.",
+      "say": "Six months, no injections, ninety percent: read every toxicity here as a budget line in BPaL.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mdr",
+            "label": "MDR or pre XDR tuberculosis confirmed"
+          },
+          {
+            "id": "bpal",
+            "label": "Bedaquiline, pretomanid, linezolid based regimen"
+          },
+          {
+            "id": "monitor",
+            "label": "ECG, blood counts, vision and liver surveillance"
+          },
+          {
+            "id": "cure",
+            "label": "Six month cure assessed with cultures"
+          }
+        ],
+        "edges": [
+          [
+            "mdr",
+            "bpal"
+          ],
+          [
+            "bpal",
+            "monitor"
+          ],
+          [
+            "monitor",
+            "cure"
+          ]
+        ]
+      }
+    }
+  ]
+}

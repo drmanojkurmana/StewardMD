@@ -1,0 +1,273 @@
+{
+  "v": 1,
+  "module": "phm-antihypertensives",
+  "subject": "pharmacology",
+  "title": "Prazosin, Hypertensive Emergencies and Vasodilator Adverse Effects",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Selective blockade of postsynaptic alpha 1 receptors defines **prazosin**, which dilates arteries and veins together so pressure falls with little reflex tachycardia, because presynaptic alpha 2 feedback on noradrenaline release stays intact. The same alpha 1 blockade relaxes the bladder neck and prostate, which is why its longer acting cousins doxazosin and terazosin are prescribed for benign prostatic symptoms as much as for pressure.",
+      "say": "Prazosin blocks alpha 1 only, dilating both sides of the circulation while sparing the feedback brake.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Alpha 1 blockade effects",
+          "points": [
+            "Arteriolar and venous dilatation together",
+            "Little reflex tachycardia, feedback preserved",
+            "Bladder neck and prostate relaxation",
+            "Favourable lipid changes, historically noted"
+          ]
+        },
+        "right": {
+          "title": "The prazosin family",
+          "points": [
+            "Prazosin: short acting, multiple daily doses",
+            "Doxazosin: long acting, prostate and pressure use",
+            "Terazosin: similar dual role, nightly dosing",
+            "Alfuzosin and tamsulosin: uroselective cousins"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The first dose of prazosin can drop pressure catastrophically on standing, the **first dose phenomenon**, because venous pooling meets a blocked compensatory vasoconstriction. Starting with 0.5 mg at bedtime, rising slowly, and warning the patient to sit back down if dizzy prevents most events. Alpha blockers also fell from first line grace when doxazosin showed more heart failure than chlorthalidone in a major outcomes trial.",
+      "say": "Give the first prazosin dose at bedtime and warn about standing up; the first dose phenomenon is preventable.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "first",
+            "label": "First dose of prazosin taken upright"
+          },
+          {
+            "id": "pool",
+            "label": "Venous pooling with blocked compensation"
+          },
+          {
+            "id": "faint",
+            "label": "Postural collapse within 30 to 90 minutes"
+          },
+          {
+            "id": "prevent",
+            "label": "Prevention: 0.5 mg at bedtime, slow titration"
+          }
+        ],
+        "edges": [
+          [
+            "first",
+            "pool"
+          ],
+          [
+            "pool",
+            "faint"
+          ],
+          [
+            "first",
+            "prevent"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A **hypertensive emergency** is severe pressure elevation, usually above 180/120 mmHg, married to acute target organ damage: encephalopathy, pulmonary oedema, myocardial ischaemia, aortic dissection or acute kidney injury. The same numbers without damage are hypertensive urgency, managed with oral drugs over days. The distinction drives everything, because emergencies need intravenous titration in a monitored bed while urgencies are harmed by frantic pressure crashing.",
+      "say": "Numbers alone do not make an emergency; acute organ damage does, and it changes the drug and the pace.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hypertensive emergency",
+          "points": [
+            "Pressure high with acute organ damage",
+            "Examples: dissection, encephalopathy, pulmonary oedema",
+            "Intravenous titratable drug, monitored bed",
+            "Lower mean pressure about 20 to 25 percent in first hours"
+          ]
+        },
+        "right": {
+          "title": "Hypertensive urgency",
+          "points": [
+            "Pressure high, no acute organ damage",
+            "Headache alone does not qualify as damage",
+            "Oral therapy resumed or adjusted, days not minutes",
+            "Rapid crashing risks cerebral and coronary ischaemia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Rate limits protect adapted organs: chronic hypertension shifts cerebral autoregulation rightward, so dropping mean arterial pressure more than about 25 percent in the first hours can watershed the brain. **Aortic dissection** breaks the rule in the opposite direction, demanding systolic pressure near 100 to 120 mmHg within twenty minutes, with beta blockade started before any vasodilator so reflex shear stress does not extend the tear.",
+      "say": "Lower pressure by a quarter, not to normal, except in dissection where fast and low with beta blockade first saves the aorta.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "emerg",
+            "label": "Emergency confirmed with organ damage"
+          },
+          {
+            "id": "quarter",
+            "label": "Reduce mean pressure 20 to 25 percent over hours"
+          },
+          {
+            "id": "except",
+            "label": "Dissection exception: systolic 100 to 120 in 20 minutes"
+          },
+          {
+            "id": "beta",
+            "label": "Beta blocker before vasodilator in dissection"
+          }
+        ],
+        "edges": [
+          [
+            "emerg",
+            "quarter"
+          ],
+          [
+            "emerg",
+            "except"
+          ],
+          [
+            "except",
+            "beta"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Severe hypertension in pregnancy** follows its own thresholds and drug list: treat sustained pressure at or above 160/110 mmHg within the hour to prevent maternal stroke, using intravenous labetalol, oral nifedipine or intravenous hydralazine, with magnesium sulfate for seizure prophylaxis in pre-eclampsia. ACE inhibitors, blockers and direct renin inhibitors are fetotoxic and excluded; methyldopa remains the calm chronic option when weeks, not minutes, are available.",
+      "say": "In pregnancy, 160 over 110 is the treat now line: labetalol, nifedipine or hydralazine, plus magnesium when indicated.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-labetalol.webp",
+        "alt": "Concurrent alpha 1 and beta adrenergic blockade by labetalol lowering blood pressure",
+        "caption": "Labetalol, a first choice intravenous agent for severe hypertension in pregnancy. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Abrupt cessation syndromes haunt this whole area, and **rebound hypertension** after suddenly stopping clonidine is the prototype: upregulated receptors meet restored sympathetic traffic and pressure overshoots baseline within 12 to 48 hours, with headache, tremor and sweating that mimic phaeochromocytoma. Beta blocker withdrawal similarly risks coronary events. Taper centrally acting agents, counsel at initiation, and interrogate adherence before escalating therapy in any unexplained pressure surge.",
+      "say": "Rebound after clonidine mimics phaeochromocytoma; ask about missed doses before adding new drugs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clonidine rebound",
+          "points": [
+            "Onset 12 to 48 hours after abrupt stopping",
+            "Pressure overshoots with headache and tremor",
+            "Sweating and palpitations mimic phaeochromocytoma",
+            "Restart clonidine or use labetalol to control"
+          ]
+        },
+        "right": {
+          "title": "Prevention habits",
+          "points": [
+            "Taper central agents over several days",
+            "Counsel about rebound at the first prescription",
+            "Check adherence in every resistant hypertension review",
+            "Simplify regimens before labelling resistance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Each nitroprusside molecule liberates five cyanide ions, detoxified by hepatic rhodanese to **thiocyanate** using thiosulfate as sulfur donor. When infusion rate, duration, malnutrition or renal failure outrun that pathway, cyanide toxicity appears as lactic acidosis, confusion and cardiovascular collapse despite a controlled pressure. Co infusing sodium thiosulfate prevents accumulation, and a rising lactate on a long infusion is the bedside alarm to stop and think.",
+      "say": "Cyanide toxicity on nitroprusside announces itself with lactate and confusion; thiosulfate co infusion prevents it.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-clonidine.webp",
+        "alt": "Presynaptic alpha 2 stimulation inhibiting sympathetic outflow from the brainstem",
+        "caption": "Central sympathetic control by clonidine, the drug whose abrupt withdrawal produces the rebound syndrome in this lesson. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Chronic hydralazine, procainamide and isoniazid share the **lupus like syndrome**, an autoimmune reaction with arthralgia, fever, serositis and positive antinuclear antibodies that remits on withdrawal. Slow acetylators accumulate more parent drug and dominate the case series, and anti histone antibodies are the characteristic serology while anti double stranded DNA and complement stay reassuringly normal. Kidney and brain involvement are rare, separating drug induced from spontaneous lupus at the bedside.",
+      "say": "Drug induced lupus favours slow acetylators, carries anti histone antibodies, and spares kidney and brain.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Drug induced lupus",
+          "points": [
+            "Culprits: hydralazine, procainamide, isoniazid",
+            "Slow acetylator status raises the risk",
+            "Anti histone antibodies characteristic",
+            "Remits over weeks after withdrawal"
+          ]
+        },
+        "right": {
+          "title": "Spontaneous lupus contrasts",
+          "points": [
+            "Anti double stranded DNA and low complement",
+            "Renal and cerebral involvement common",
+            "Persists and needs immunosuppression",
+            "Drug history still worth taking in every case"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The cosmetic signature in this module is minoxidil induced **hirsutism**, properly hypertrichosis: coarse hair growth on face and body appearing within weeks in most oral users, distressing enough to stop an otherwise effective drug, and reversible months after withdrawal. The same follicular stimulation, delivered topically at a fraction of the systemic dose, became a mainstay hair loss treatment, a neat exam illustration of route changing the benefit harm balance.",
+      "say": "Minoxidil grows hair wherever it reaches; topically that is therapy, systemically it is the price of pressure control.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "oral",
+            "label": "Oral minoxidil for refractory hypertension"
+          },
+          {
+            "id": "follicle",
+            "label": "Follicular potassium channels open, growth phase prolongs"
+          },
+          {
+            "id": "hyper",
+            "label": "Hypertrichosis appears within weeks"
+          },
+          {
+            "id": "topical",
+            "label": "Topical route harnesses the same effect for alopecia"
+          }
+        ],
+        "edges": [
+          [
+            "oral",
+            "follicle"
+          ],
+          [
+            "follicle",
+            "hyper"
+          ],
+          [
+            "follicle",
+            "topical"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Guideline thresholds frame all these choices: the JNC (Joint National Committee) reports popularised treating to below 140/90 mmHg, while later American guidance moved the definition of hypertension down to 130/80 and European guidance kept office 140/90 with lower targets once treated. Examinations still test the **JNC** staging vocabulary, but safe practice means knowing your local guideline, treating global cardiovascular risk rather than a number alone, and reviewing standing pressure in anyone on alpha blockade.",
+      "say": "Know the JNC vocabulary for examinations and your local guideline for patients; treat risk, not just a number.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Threshold landmarks",
+          "points": [
+            "JNC 7 hypertension: at or above 140/90 mmHg",
+            "Later American definition: at or above 130/80 mmHg",
+            "European office threshold remains 140/90 mmHg",
+            "Severe pregnancy threshold: 160/110 mmHg, treat within the hour"
+          ]
+        },
+        "right": {
+          "title": "Applying thresholds safely",
+          "points": [
+            "Confirm with repeated, ambulatory or home readings",
+            "Treat global cardiovascular risk, not pressure alone",
+            "Check postural drops on alpha blockers and in the elderly",
+            "Escalate one change at a time with follow up booked"
+          ]
+        }
+      }
+    }
+  ]
+}

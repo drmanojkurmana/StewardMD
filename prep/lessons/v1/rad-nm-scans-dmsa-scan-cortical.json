@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-nm-scans-dmsa-scan-cortical",
+ "subject": "radiology",
+ "module": "rad-nm-scans",
+ "title": "DMSA Cortical Scarring, DTPA Renograms and MAG3 Studies",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "DMSA binds working cortex",
+   "tx": "**DMSA scan** uses technetium labelled dimercaptosuccinic acid that proximal tubular cells extract and hold, imaging functioning renal cortex hours after injection. Photopenic wedges and contour dents mark cortical scars from reflux nephropathy or infarcts, and split function percentages between kidneys guide surgery. It is the reference standard for cortical scarring in children after urinary infections, outperforming ultrasound which misses a third of established scars.",
+   "say": "DMSA scan labels a tracer that tubular cells hold, imaging functioning cortex hours after injection. Photopenic wedges mark scars from reflux nephropathy, and split function percentages guide surgery. It is the reference standard for cortical scarring in children after urinary infections.",
+   "vis": {"kind": "compare", "left": {"title": "DMSA strengths", "points": ["Cortical scars shown directly", "Split function percentages", "Reference standard in children", "Detects scars ultrasound misses"]}, "right": {"title": "DMSA limits", "points": ["No drainage information", "Radiation in children justified carefully", "Acute infection also photopenic", "Repeat at six months for permanence"]}}
+  },
+  {
+   "title": "Acute pyelonephritis versus scar",
+   "tx": "**Acute pyelonephritis** on DMSA also turns photopenic, single or multiple defects with preserved renal contour and size, indistinguishable from scar during the illness itself. Only a repeat scan after six months separates them: recovered cortex refills, scar stays dented and shrunken. That timing rule stops children being labelled permanently scarred from one febrile infection image, a lifelong insurance and follow up consequence from a single word.",
+   "say": "Acute pyelonephritis on DMSA also turns photopenic with preserved contour, indistinguishable from scar during the illness. Only a repeat scan after six months separates them: recovered cortex refills, scar stays dented. That timing rule stops children being labelled permanently scarred from one infection image.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Febrile urinary infection"}, {"id": "b", "label": "DMSA defect seen"}, {"id": "c", "label": "Wait six months"}, {"id": "d", "label": "Refilled recovery or fixed scar"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "DTPA follows filtration",
+   "tx": "**DTPA renogram** follows technetium diethylenetriamine pentaacetate, filtered at the glomerulus without tubular handling, so its time activity curve measures filtration and drainage together. The curve rises as tracer arrives, peaks, then washes out with a half time under about fifteen minutes in an unobstructed, hydrated kidney. Split function from the uptake slope phase allocates percentages that decide nephrectomy versus reconstruction in borderline kidneys.",
+   "say": "DTPA renogram follows a tracer filtered at the glomerulus, so its curve measures filtration and drainage together. Washout half time under about fifteen minutes marks an unobstructed hydrated kidney. Split function from the uptake phase decides nephrectomy versus reconstruction in borderline kidneys.",
+   "vis": {"kind": "table", "cols": ["Curve phase", "What it shows", "Abnormal look"], "rows": [["Vascular first pass", "Perfusion arrival", "Delayed in artery stenosis"], ["Uptake slope", "Filtration and split function", "Low share under 40 percent"], ["Washout", "Drainage half time", "Over 20 minutes obstructed"], ["Post frusemide", "Response to diuresis", "No fall in true obstruction"]]}
+  },
+  {
+   "title": "Frusemide separates baggy from blocked",
+   "tx": "**Frusemide challenge** floods the collecting system mid study: a dilated but unobstructed pelvis washes out briskly once urine flow rises, while a truly obstructed pelviureteric junction keeps tracer parked despite the diuretic. Timing the dose before, with or fifteen minutes after tracer follows the F minus, F zero and F plus fifteen protocols centres argue about. A poorly functioning kidney cannot answer frusemide, so non response there is uninterpretable, not obstruction.",
+   "say": "Frusemide challenge floods the collecting system: a dilated unobstructed pelvis washes out once flow rises, while a truly obstructed junction keeps tracer parked. A poorly functioning kidney cannot answer frusemide, so non response there is uninterpretable rather than obstruction.",
+   "vis": {"kind": "compare", "left": {"title": "Baggy unobstructed pelvis", "points": ["Tracer pools before frusemide", "Brisk washout after", "Half time normalises", "Observe, no surgery"]}, "right": {"title": "True junction obstruction", "points": ["Tracer stays parked", "Curve keeps rising", "Half time over 20 minutes", "Pyeloplasty discussion"]}}
+  },
+  {
+   "title": "MAG3 beats DTPA in weak kidneys",
+   "tx": "**MAG3 renogram** uses tubular secretion rather than filtration, extracting far more tracer per pass, so kidneys with poor filtration, newborn kidneys and transplant kidneys still draw readable curves where DTPA fades into background. It has become the default renogram tracer in most departments for exactly that extraction advantage. Its split function reflects tubular extraction, close enough to filtration shares for surgical decisions in obstructed systems.",
+   "say": "MAG3 renogram uses tubular secretion, extracting far more tracer per pass, so weak, newborn and transplant kidneys still draw readable curves where DTPA fades. It is the default renogram tracer in most departments for that extraction advantage.",
+   "vis": {"kind": "table", "cols": ["Feature", "DTPA", "MAG3"], "rows": [["Handling", "Glomerular filtration only", "Tubular secretion"], ["Extraction per pass", "About 20 percent", "About 50 percent"], ["Weak kidney curves", "Faint, noisy", "Readable"], ["Default modern use", "Filtration measurement niches", "Routine renograms"]]}
+  },
+  {
+   "title": "Captopril renogram hunts stenosis",
+   "tx": "**Captopril renogram** stresses the kidney with an angiotensin converting enzyme inhibitor: a kidney behind renal artery stenosis depends on angiotensin to hold its filtration, so its curve collapses after captopril while the normal side sails on. A baseline study is compared because one abnormal post captopril curve alone misleads in dehydration and bilateral disease. The test now shares territory with CT and MR angiography, surviving where functional significance of a known narrowing is the question.",
+   "say": "Captopril renogram stresses the kidney with an ACE inhibitor: a kidney behind artery stenosis depends on angiotensin, so its curve collapses after captopril. The test now survives where functional significance of a known narrowing is the question, sharing territory with CT angiography.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Baseline renogram"}, {"id": "b", "label": "Captopril given"}, {"id": "c", "label": "Repeat renogram"}, {"id": "d", "label": "Curve collapse means significant stenosis"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Transplant kidney curves",
+   "tx": "**Transplant renogram** reads perfusion and excretion in the iliac fossa graft: acute tubular necrosis keeps perfusion with delayed excretion after ischaemic injury, rejection worsens perfusion itself over days, and a urine leak pools tracer outside every collecting boundary. Cyclosporin toxicity mimics rejection on curves, so the scan triages biopsy timing rather than replacing histology. A rising creatinine with a beautiful renogram points away from graft catastrophe toward drug and volume causes.",
+   "say": "Transplant renogram reads perfusion and excretion in the graft: tubular necrosis keeps perfusion with delayed excretion, rejection worsens perfusion itself, and leaks pool tracer outside boundaries. A rising creatinine with a beautiful renogram points away from graft catastrophe toward drug causes.",
+   "vis": {"kind": "compare", "left": {"title": "Tubular necrosis pattern", "points": ["Perfusion preserved", "Excretion delayed", "Early post transplant", "Recovers over days to weeks"]}, "right": {"title": "Rejection pattern", "points": ["Perfusion deteriorates", "Uptake falls", "Later onset", "Biopsy decides treatment"]}}
+  },
+  {
+   "title": "Split function decides surgery",
+   "tx": "**Split renal function** percentages from renogram or DMSA allocate how much work each kidney does, with a share under forty percent called reduced and under ten to fifteen percent often called non salvageable in obstruction decisions. The number is read beside drainage, symptoms, infection and the other kidneys health, never alone. A silent ten percent kidney causing hypertension or infection may still earn nephrectomy, while an asymptomatic one is watched.",
+   "say": "Split renal function allocates how much work each kidney does, under forty percent called reduced and under ten to fifteen often non salvageable. The number is read beside drainage, symptoms and the other kidney, never alone. A silent poor kidney causing hypertension may still earn nephrectomy.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Measure split function"}, {"id": "b", "label": "Add drainage curve"}, {"id": "c", "label": "Add symptoms and infection"}, {"id": "d", "label": "Reconstruct, remove or watch"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  }
+ ]
+}
