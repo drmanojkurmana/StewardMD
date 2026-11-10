@@ -1,0 +1,219 @@
+{
+  "v": 1,
+  "module": "phm-diuretics",
+  "subject": "pharmacology",
+  "title": "Selective Aldosterone Blockers, Epithelial Sodium Channel Inhibitors, and Liddle Syndrome",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The second-generation selective mineralocorticoid receptor antagonist engineered to eliminate sex-hormone-related adverse effects is **eplerenone**. Synthesized by substituting an epoxy group at the 9,11-position of spironolactone, eplerenone displays high selectivity for the mineralocorticoid receptor, binding with less than 0.1% affinity to androgen or progesterone receptors. Consequently, eplerenone does not produce gynecomastia, breast tenderness, impotence, or menstrual irregularity. In the EPHESUS trial, eplerenone reduced cardiovascular mortality in post-infarction heart failure.",
+      "say": "Eplerenone is a selective mineralocorticoid antagonist engineered with an epoxy bridge to eliminate gynecomastia.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Eplerenone (Selective Mineralocorticoid Antagonist)",
+          "points": [
+            "Recombinant epoxy-steroid with high MR specificity",
+            "Less than 0.1% binding affinity to androgen or progesterone receptors",
+            "Zero incidence of painful gynecomastia, impotence, or breast tenderness",
+            "Proven cardiovascular mortality reduction in EPHESUS trial"
+          ]
+        },
+        "right": {
+          "title": "Spironolactone (Non-Selective Antagonist)",
+          "points": [
+            "Potent steroidal mineralocorticoid receptor antagonist",
+            "Significant cross-reactivity with androgen and progesterone receptors",
+            "High incidence of tender bilateral gynecomastia (up to 10%)",
+            "Lower financial cost and longer historical clinical track record"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The prototypical potassium-sparing pyrazinecarboxamide derivative that directly blocks apical epithelial sodium channels without interacting with mineralocorticoid receptors is **amiloride**. Acting on principal cells of the late distal convoluted tubule and cortical collecting duct, amiloride physically plugs the open pore of the ENaC channel, arresting sodium entry into the cell. By halting electrogenic sodium reabsorption, it abolishes the negative transepithelial luminal voltage that drives passive potassium and hydrogen ion excretion, conserving potassium independent of circulating aldosterone levels.",
+      "say": "Amiloride directly plugs apical ENaC channels in collecting ducts to conserve potassium independent of aldosterone.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "amil",
+            "label": "Amiloride reaches tubular lumen via glomerular filtration"
+          },
+          {
+            "id": "pore",
+            "label": "Physical occlusion of apical ENaC sodium channel pore"
+          },
+          {
+            "id": "volt",
+            "label": "Abolition of lumen-negative transepithelial electrical potential"
+          },
+          {
+            "id": "spare",
+            "label": "Halted electrogenic potassium and proton secretion with mild natriuresis"
+          }
+        ],
+        "edges": [
+          [
+            "amil",
+            "pore"
+          ],
+          [
+            "pore",
+            "volt"
+          ],
+          [
+            "volt",
+            "spare"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A pteridine-derivative potassium-sparing diuretic that directly inhibits apical epithelial sodium channels independently of aldosterone is **triamterene**. Like amiloride, triamterene blocks luminal ENaC channels in the cortical collecting duct, promoting mild sodium bicarbonate excretion while retaining potassium. Often combined with hydrochlorothiazide to prevent thiazide-induced hypokalemia, triamterene is poorly water-soluble and can precipitate in acidic urine, predisposing to renal tubular crystal deposition and radiolucent triamterene nephrolithiasis.",
+      "say": "Triamterene blocks luminal ENaC channels to spare potassium, but poor water solubility can cause kidney stones.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Direct ENaC blocker",
+          "Chemical ring structure",
+          "Elimination pathway",
+          "Notable unique adverse risk"
+        ],
+        "rows": [
+          [
+            "Amiloride",
+            "Guanidinium pyrazinecarboxamide",
+            "Renal excretion unchanged (100%)",
+            "Rapid hyperkalemia in renal failure; drug of choice in Liddle"
+          ],
+          [
+            "Triamterene",
+            "Pteridine derivative (pteroyl)",
+            "Hepatic CYP1A2 metabolism to sulfate",
+            "Urinary crystal precipitation and triamterene nephrolithiasis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The rare, autosomal dominant monogenic form of low-renin, low-aldosterone volume-expanded pseudohyperaldosteronism is **Liddle syndrome**. Caused by gain-of-function mutations in the beta or gamma subunits of the epithelial sodium channel that disrupt the proline-tyrosine binding motif, ENaC channels escape ubiquitin-mediated degradation by Nedd4-2. This results in constitutive, excessive surface expression of ENaC, causing severe early-onset hypertension, hypokalemic metabolic alkalosis, and suppressed renin and aldosterone. Crucially, it responds completely to amiloride or triamterene, while remaining unresponsive to spironolactone.",
+      "say": "Liddle syndrome features constitutive ENaC hyperactivity, responding completely to amiloride but refractory to spironolactone.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Liddle Syndrome (Pseudohyperaldosteronism)",
+          "points": [
+            "Gain-of-function mutation in ENaC beta or gamma subunits",
+            "Disrupted PY motif prevents Nedd4-2 ubiquitin degradation",
+            "Suppressed plasma renin and suppressed serum aldosterone",
+            "Curative response to amiloride; refractory to spironolactone"
+          ]
+        },
+        "right": {
+          "title": "Conn Syndrome (Primary Hyperaldosteronism)",
+          "points": [
+            "Autonomous aldosterone-secreting adrenal cortical adenoma",
+            "Suppressed plasma renin with markedly elevated aldosterone",
+            "Aldosterone drives mineralocorticoid receptor transcription of ENaC",
+            "Responsive to mineralocorticoid antagonists (spironolactone, eplerenone)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The first-in-class, non-steroidal selective mineralocorticoid receptor antagonist developed to provide renal and cardiac protection in diabetic nephropathy is **finerenone**. Structurally distinct from steroidal antagonists, finerenone binds the mineralocorticoid receptor with equal affinity to spironolactone but without steroidal cross-reactivity, acting as a bulky antagonist that blocks coregulator recruitment. In the FIDELIO-DKD and FIGARO-DKD landmark clinical trials, finerenone significantly slowed chronic kidney disease progression and reduced cardiovascular events in patients with type 2 diabetes with lower hyperkalemia rates than steroidal MRAs.",
+      "say": "Finerenone is a non-steroidal mineralocorticoid antagonist that slows diabetic kidney disease progression.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Mineralocorticoid antagonist",
+          "Chemical class",
+          "Target binding mechanism",
+          "Landmark renal / cardiac trial"
+        ],
+        "rows": [
+          [
+            "Finerenone",
+            "Non-steroidal dihydropyridine",
+            "Bulky passive antagonist blocking coregulator recruitment",
+            "FIDELIO-DKD and FIGARO-DKD trials"
+          ],
+          [
+            "Eplerenone",
+            "Steroidal (9,11-epoxy)",
+            "Competitive classical antagonist at ligand domain",
+            "EPHESUS and EMPHASIS-HF trials"
+          ],
+          [
+            "Spironolactone",
+            "Steroidal (spirolactone ring)",
+            "Competitive non-selective antagonist at MR and androgen",
+            "RALES trial (severe heart failure)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A specific clinical indication for the direct epithelial sodium channel inhibitor amiloride is **lithium-induced nephrogenic diabetes insipidus**. When patients receive psychiatric lithium therapy, lithium enters collecting duct principal cells predominantly via apical ENaC channels, where it accumulates and inhibits glycogen synthase kinase-3beta and adenylyl cyclase, impairing aquaporin-2 translocation and causing profound polyuria and polydipsia. Amiloride competitively blocks ENaC channels, preventing cellular entry of lithium and reversing nephrogenic diabetes insipidus without requiring lithium discontinuation.",
+      "say": "Amiloride blocks ENaC to prevent intracellular lithium accumulation, reversing lithium-induced diabetes insipidus.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "li",
+            "label": "Psychiatric lithium therapy enters collecting duct principal cells via ENaC"
+          },
+          {
+            "id": "accum",
+            "label": "Intracellular lithium accumulation inhibits GSK-3beta and adenylyl cyclase"
+          },
+          {
+            "id": "aqp",
+            "label": "Impaired aquaporin-2 vesicle translocation causing severe polyuria and polydipsia"
+          },
+          {
+            "id": "block",
+            "label": "Amiloride blocks ENaC entry, restoring vasopressin responsiveness and water balance"
+          }
+        ],
+        "edges": [
+          [
+            "li",
+            "accum"
+          ],
+          [
+            "accum",
+            "aqp"
+          ],
+          [
+            "aqp",
+            "block"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The physiological and pharmacological significance of the late distal convoluted tubule and cortical collecting duct is designated as **nephron site 4 transport**. Handling approximately two to five percent of the total filtered sodium load, site 4 is the primary site of fine-tuning urinary sodium, potassium, and proton excretion, modulated physiologically by circulating aldosterone. Principal cells mediate electrogenic sodium reabsorption via ENaC channels and potassium excretion via ROMK channels, while adjacent alpha-intercalated cells drive proton secretion via apical H+ ATPase pumps.",
+      "say": "Nephron site 4 in the collecting duct fine-tunes sodium, potassium, and acid excretion under aldosterone control.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-diuretics.webp",
+        "alt": "Collecting duct cellular transport architecture and diuretic sites",
+        "caption": "Nephron site 4 collecting duct transport illustrating principal cell ENaC sodium reabsorption and intercalated cell proton secretion."
+      }
+    },
+    {
+      "tx": "The systemic acid-base and electrolyte signature produced by direct ENaC channel blockers and mineralocorticoid receptor antagonists is **hyperkalemic metabolic acidosis**. By abolishing the lumen-negative potential in the cortical collecting duct, these agents simultaneously arrest electrogenic potassium secretion by principal cells and proton extrusion by alpha-intercalated cells. Retention of hydrogen ions lowers arterial blood pH and decreases serum bicarbonate, while concurrent hyperkalemia impairs renal ammoniagenesis, compounding systemic metabolic acidosis.",
+      "say": "Blocking collecting duct sodium reabsorption collapses the electrical gradient, causing hyperkalemic metabolic acidosis.",
+      "vis": {
+        "kind": "image",
+        "src": "prep/lessons/media/ap-nephron-filtration.webp",
+        "alt": "Electrolyte and acid-base transport in renal tubules",
+        "caption": "Cellular schematic of cortical collecting duct showing coupled sodium reabsorption, potassium elimination, and hydrogen ion secretion."
+      }
+    }
+  ]
+}

@@ -1,0 +1,227 @@
+{
+  "v": 1,
+  "module": "phm-heart-failure",
+  "subject": "pharmacology",
+  "title": "Digoxin, Digitalis Toxicity and Acute Inotropic Support",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Extracted from foxglove and used since Withering's 1785 account, **digoxin** inhibits the membrane Na K ATPase of cardiac myocytes. Intracellular sodium rises, the sodium calcium exchanger extrudes less calcium, and the sarcoplasmic reticulum loads more calcium for each beat, so contractility increases. The same glycoside increases vagal tone, slowing the sinoatrial node and delaying atrioventricular conduction, which is its second career in rate control.",
+      "say": "Digoxin squeezes more calcium into every beat and leans on the vagus to slow the node; both actions come from one pump blocked.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/digoxin-toxicity-fig1.webp",
+        "alt": "Digoxin toxicity cellular mechanisms showing Na K ATPase inhibition, calcium loading and arrhythmia generation",
+        "caption": "Cellular mechanism of digoxin: Na K ATPase inhibition loads calcium for contraction and, in excess, triggers the arrhythmias of toxicity."
+      }
+    },
+    {
+      "tx": "The **therapeutic window** is famously narrow, with most benefit between serum levels of 0.5 and 0.9 ng per ml and toxicity stalking above 2, although overlap is wide. Digoxin is cleared renally, accumulates in kidney impairment and old age, and distributes into a huge tissue volume, so loading doses are calculated on lean weight and maintenance shrinks with the glomerular filtration rate. Levels are drawn at least six hours after a dose to let distribution finish.",
+      "say": "Aim low, dose by kidney and lean weight, and never trust a level drawn before six hours.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Digoxin handling",
+          "points": [
+            "Large volume of distribution into muscle",
+            "Renal excretion, half life about 36 hours normally",
+            "Half life stretches to days in kidney failure",
+            "Sample levels at least 6 hours post dose"
+          ]
+        },
+        "right": {
+          "title": "Target and danger zones",
+          "points": [
+            "Mortality benefit zone roughly 0.5 to 0.9 ng per ml",
+            "Toxicity likelier above 2 ng per ml, overlap wide",
+            "Symptoms trump numbers in either direction",
+            "Hypokalaemia makes any level more toxic"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Digitalis toxicity** announces itself in three registers: gut (anorexia, nausea, vomiting), visual (yellow green halos and blurred vision, the xanthopsia of legend), and cardiac, where almost any arrhythmia can appear. The signature rhythms are atrial tachycardia with block and bidirectional ventricular tachycardia, because enhanced automaticity and impaired conduction coexist, a combination few other poisons produce. Chronic toxicity creeps; acute overdose declares itself with hyperkalaemia.",
+      "say": "Gut upset, yellow vision and atrial tachycardia with block: that triad on digoxin is toxicity until proven otherwise.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "excess",
+            "label": "Excess digoxin effect at the Na K ATPase"
+          },
+          {
+            "id": "auto",
+            "label": "Delayed afterdepolarisations raise automaticity"
+          },
+          {
+            "id": "block",
+            "label": "Vagal and direct effects block AV conduction"
+          },
+          {
+            "id": "rhythm",
+            "label": "Atrial tachycardia with block, bidirectional VT"
+          }
+        ],
+        "edges": [
+          [
+            "excess",
+            "auto"
+          ],
+          [
+            "excess",
+            "block"
+          ],
+          [
+            "auto",
+            "rhythm"
+          ],
+          [
+            "block",
+            "rhythm"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Potassium** conducts the whole tragedy: hypokalaemia from loop and thiazide diuretics lets digoxin bind its pump more avidly, so toxicity blooms at ordinary levels, while the hyperkalaemia of acute poisoning marks massive pump blockade and predicts lethality. Hypomagnesaemia and hypercalcaemia amplify risk, and amiodarone, verapamil and quinidine raise levels by cutting clearance. Correcting potassium and magnesium is therefore treatment, not housekeeping.",
+      "say": "Low potassium invites chronic toxicity, high potassium grades acute poisoning; fix the electrolytes as therapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Factors precipitating toxicity",
+          "points": [
+            "Hypokalaemia and hypomagnesaemia from diuretics",
+            "Hypercalcaemia and myocardial ischaemia",
+            "Kidney impairment reducing clearance",
+            "Amiodarone, verapamil, quinidine raising levels"
+          ]
+        },
+        "right": {
+          "title": "First corrective moves",
+          "points": [
+            "Stop digoxin and the interacting drugs",
+            "Replete potassium and magnesium carefully",
+            "Treat bradycardia: atropine, pacing if unstable",
+            "Avoid cardioversion shocks where possible, they may not hold"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For life threatening toxicity the definitive antidote is **digoxin immune Fab**, sheep antibody fragments that bind free digoxin in plasma, drag the equilibrium off tissue pumps, and let the kidney excrete the inert complex. Indications are haemodynamically significant arrhythmia, potassium above 5 to 5.5 mmol per litre in acute poisoning, massive ingestion or a very high level with symptoms. Total measured digoxin afterwards is meaningless because assays count the bound fraction too.",
+      "say": "Fab fragments vacuum digoxin off its pumps; give them for bad rhythms, high potassium or massive overdose.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fab",
+            "label": "Digoxin immune Fab infused intravenously"
+          },
+          {
+            "id": "bind",
+            "label": "Fab binds free plasma digoxin with high affinity"
+          },
+          {
+            "id": "pull",
+            "label": "Equilibrium pulls digoxin off tissue Na K ATPase"
+          },
+          {
+            "id": "excrete",
+            "label": "Inert Fab digoxin complex excreted by the kidney"
+          }
+        ],
+        "edges": [
+          [
+            "fab",
+            "bind"
+          ],
+          [
+            "bind",
+            "pull"
+          ],
+          [
+            "pull",
+            "excrete"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In chronic **heart failure** digoxin earns a modest, honest living: the DIG trial showed no mortality benefit but fewer heart failure hospitalisations, and it remains an add on for symptomatic reduced ejection fraction despite standard therapy, or for rate control when beta blockers fall short. Its outcome neutrality plus toxicity burden explains why modern foundational therapy, the blockers, ARNI and SGLT2 inhibitors of the following lessons, is built first and digoxin layered later.",
+      "say": "Digoxin keeps people out of hospital without saving lives outright; build the proven pillars first.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix-heartfailure-signs.jpg",
+        "alt": "Reference signs of heart failure including basal crepitations and pitting oedema",
+        "caption": "Bedside signs of the heart failure syndrome in which digoxin reduces hospitalisation. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "When the failing ventricle needs minutes rather than weeks, catecholamine **dobutamine** is the standard intravenous inotrope: beta 1 stimulation raises contractility and output with modest beta 2 vasodilatation, at the price of tachycardia, arrhythmia and rising myocardial oxygen demand. Tolerance develops within days as receptors downregulate, and trials of prolonged use show harm, so it is a bridge to recovery, decision or device, never a destination.",
+      "say": "Dobutamine buys output for days at an oxygen price; use it as a bridge, not a home.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dobutamine (beta agonist)",
+          "points": [
+            "Beta 1 inotropy with mild beta 2 vasodilatation",
+            "Onset in minutes, titrated to perfusion",
+            "Tachycardia, ectopy and demand ischaemia limit use",
+            "Receptor downregulation blunts effect over days"
+          ]
+        },
+        "right": {
+          "title": "Milrinone (PDE3 inhibitor, next lesson detail)",
+          "points": [
+            "Inotropy plus vasodilatation: an inodilator",
+            "Works despite beta blockade or downregulation",
+            "Renally cleared, accumulates in kidney failure",
+            "Hypotension and arrhythmias are its costs"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The shared examination thread is therapeutic index: digoxin helps at 0.5 to 0.9, poisons not far above, is provoked by the diuretics prescribed beside it, and has a specific antibody antidote, a distinction it shares with few cardiovascular drugs. Dobutamine and **milrinone** extend the lesson to the infusion pump: powerful, fast and unforgiving, reserved for low output states with monitoring, and weaned as soon as the native ventricle or definitive therapy can take over.",
+      "say": "Narrow windows demand monitoring: digoxin levels and potassium on the ward, pressures and rhythm on the pump.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "lowout",
+            "label": "Low output heart failure with hypoperfusion"
+          },
+          {
+            "id": "inotrope",
+            "label": "Dobutamine or milrinone infusion with monitoring"
+          },
+          {
+            "id": "bridge",
+            "label": "Bridge to recovery, device or decision"
+          },
+          {
+            "id": "wean",
+            "label": "Wean as perfusion and native function return"
+          }
+        ],
+        "edges": [
+          [
+            "lowout",
+            "inotrope"
+          ],
+          [
+            "inotrope",
+            "bridge"
+          ],
+          [
+            "bridge",
+            "wean"
+          ]
+        ]
+      }
+    }
+  ]
+}

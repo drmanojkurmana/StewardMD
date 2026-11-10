@@ -1,0 +1,233 @@
+{
+ "v": 1,
+ "id": "psy-schizophrenia-hebephrenic",
+ "subject": "psychiatry",
+ "module": "psy-schizophrenia",
+ "title": "Hebephrenic Schizophrenia and Prognostic Indicators",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Hebephrenic schizophrenia**, also termed disorganized schizophrenia, features prominent affective blunting or incongruity, fleeting non-systematized delusions, and aimless, unpredictable behavior. Onset typically occurs in adolescence between 15 and 25 years of age, characteristically preceded by poor premorbid school and social adjustment.",
+   "say": "Hebephrenic schizophrenia begins early in adolescence with disorganized thought, shallow emotional responses, and unpredictable actions. Premorbid social function is typically substandard.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Hallmarks",
+     "points": [
+      "Onset between fifteen and twenty-five years",
+      "Prominent affective blunting and giggling",
+      "Fleeting disorganized delusions",
+      "Aimless mannerisms and grimacing"
+     ]
+    },
+    "right": {
+     "title": "Prognostic Profile",
+     "points": [
+      "Poor premorbid personality adjustment",
+      "Insidious deterioration without remission",
+      "Early development of negative symptoms",
+      "Worst overall long-term prognosis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Disorganized speech and affect** in hebephrenic presentations manifest as inappropriate giggling, mirror gazing, silly facial grimacing, and fragmented thought patterns without logical coherence. Patients display shallow emotional reactions that appear completely detached from their expressed verbal content or environmental context.",
+   "say": "Patients demonstrate inappropriate grinning, mirror gazing, and fragmented communication. Their observed emotional display appears completely detached from current surroundings.",
+   "vis": {
+    "kind": "table",
+    "title": "Hebephrenic Symptom Clusters",
+    "cols": [
+     "Clinical Domain",
+     "Specific Sign",
+     "Diagnostic Significance"
+    ],
+    "rows": [
+     [
+      "Affect",
+      "Incongruous giggling",
+      "Severe emotional dysregulation"
+     ],
+     [
+      "Behavior",
+      "Mirror gazing & grimacing",
+      "Loss of purposeful motor conduct"
+     ],
+     [
+      "Thought",
+      "Fragmented incoherence",
+      "Disorganized formal thought disorder"
+     ],
+     [
+      "Course",
+      "Early negative decline",
+      "Rapid progression to chronic disability"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Dopamine hypothesis of schizophrenia** posits that positive psychotic symptoms stem from hyperactive dopamine transmission along mesolimbic projections to the nucleus accumbens. Conversely, negative deficits, cognitive slowing, and executive apathy arise from primary hypodopaminergic activity within prefrontal mesocortical pathways, creating a fundamental regional imbalance across the cerebral hemispheres.",
+   "say": "The dopamine model links positive psychotic symptoms to mesolimbic dopamine excess. Negative symptoms and cognitive deficits reflect decreased dopamine tone in prefrontal cortex.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antipsychotic-drugs-psych-fig1.webp",
+    "alt": "Dopamine pathways and D2 receptor block in schizophrenia",
+    "caption": "Mesolimbic and mesocortical dopamine tracts showing differential neurotransmitter abnormalities in schizophrenia.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Mesocortical hypodopaminergia** explains why first-generation antipsychotics that block D2 receptors non-selectively fail to ameliorate negative symptoms and often worsen cognitive blunting. Second-generation atypical agents combine 5-HT2A serotonin antagonism with D2 blockade, which releases cortical dopamine while dampening excessive limbic signalling.",
+   "say": "Conventional antipsychotics fail to resolve negative symptoms because cortical dopamine remains low. Serotonin-dopamine antagonists elevate prefrontal dopamine release through 5-HT2A receptor blockade.",
+   "vis": {
+    "kind": "flow",
+    "title": "Dopaminergic Pathway Divergence",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Ventral tegmental area dopaminergic output"
+     },
+     {
+      "id": "n2",
+      "label": "Mesolimbic excess driving delusions & hallucinations"
+     },
+     {
+      "id": "n3",
+      "label": "Mesocortical deficit driving affective flattening & abulia"
+     },
+     {
+      "id": "n4",
+      "label": "Atypical 5-HT2A blockade elevating cortical dopamine"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Good prognostic factors in schizophrenia** include late age of onset, female sex, acute clinical presentation, and identifiable psychosocial precipitants. Married status, strong social support networks, prominent positive symptoms, and absence of structural brain changes consistently correlate with higher rates of recovery.",
+   "say": "Favourable clinical outcomes associate with acute onset, female sex, older age, precipitating stressors, married status, and preservation of baseline brain volume.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Favourable Indicators",
+     "points": [
+      "Late adult onset above thirty years",
+      "Acute precipitation following clear stress",
+      "Prominent positive psychotic symptoms",
+      "Family history of affective disorder"
+     ]
+    },
+    "right": {
+     "title": "Unfavourable Indicators",
+     "points": [
+      "Insidious adolescent or teenage onset",
+      "Prominent negative and cognitive deficits",
+      "Enlarged lateral and third ventricles",
+      "Family history of chronic schizophrenia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Poor prognostic predictors** encompass insidious clinical progression, young male presentation, prominent negative deficits, and prolonged duration of untreated psychosis exceeding one continuous year. A verified history of perinatal obstetric complications, low premorbid intelligence quotient, and structural ventricular enlargement consistently forecast chronic refractory disability and poor independent living skills.",
+   "say": "Unfavourable trajectories occur in young males with insidious progression, untreated illness duration over twelve months, and prominent negative deficits.",
+   "vis": {
+    "kind": "table",
+    "title": "Prognostic Variables Across Domains",
+    "cols": [
+     "Domain",
+     "Good Prognosis",
+     "Poor Prognosis"
+    ],
+    "rows": [
+     [
+      "Onset style",
+      "Acute under two weeks",
+      "Insidious over months"
+     ],
+     [
+      "Demographics",
+      "Female, married, older",
+      "Male, single, adolescent"
+     ],
+     [
+      "Symptom profile",
+      "Affective, positive, paranoid",
+      "Negative, blunted, hebephrenic"
+     ],
+     [
+      "Neuroimaging",
+      "Normal ventricular volume",
+      "Ventricular dilation & sulcal widening"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Subtype prognostic comparison** demonstrates that catatonic and paranoid subtypes maintain significantly better treatment responsiveness than hebephrenic or undifferentiated categories. Catatonia responds dramatically to intravenous benzodiazepines and electroconvulsive therapy, while paranoid patients preserve premorbid cognitive reserves and executive functioning despite persistent persecutory beliefs.",
+   "say": "Paranoid and catatonic schizophrenia carry relatively favourable treatment responses. In contrast, hebephrenic schizophrenia produces unrelenting cognitive and social regression.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Higher Remission Subtypes",
+     "points": [
+      "Catatonic type: dramatic response to lorazepam",
+      "High efficacy with electroconvulsive therapy",
+      "Paranoid type: preserved intellect and speech",
+      "Later onset with intact cognitive reserves"
+     ]
+    },
+    "right": {
+     "title": "Poor Remission Subtypes",
+     "points": [
+      "Hebephrenic type: rapid cognitive decline",
+      "Prominent emotional blunting and apathy",
+      "Undifferentiated type: mixed chronic symptoms",
+      "Minimal recovery of employment capacity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Affective family history** strongly influences clinical trajectory because patients with first-degree relatives suffering from bipolar disorder or unipolar depression experience significantly higher rates of episode remission. Coexisting affective symptoms during acute psychotic decompensation indicate responsive neurobiology and superior medication adherence over long-term follow-up.",
+   "say": "A familial background of affective disorder forecasts higher recovery rates. Affective symptoms during acute psychotic episodes signal superior therapy adherence.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Affective Spectrum Markers",
+     "points": [
+      "Familial mood disorder history",
+      "Acute affective turmoil at presentation",
+      "Rapid response to mood stabilization",
+      "Higher inter-episode remission rates"
+     ]
+    },
+    "right": {
+     "title": "Pure Schizophrenia Markers",
+     "points": [
+      "Familial schizophrenia loading",
+      "Emotional indifference and avolition",
+      "Resistance to standard dopamine blockers",
+      "Progressive social isolation"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}
