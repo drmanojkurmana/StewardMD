@@ -1,0 +1,147 @@
+{
+ "v": 1,
+ "id": "cm-infectious-epi-communicable-period",
+ "subject": "community-medicine",
+ "module": "cm-infectious-epi",
+ "title": "Incubation Period, Communicable Period, Serial Interval and Herd Immunity",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Incubation period: entry to first symptoms",
+   "tx": "The **incubation period** runs from entry of the agent to the first sign or symptom. It reflects generation time of the organism, portal of entry, infective dose and individual immunity. Knowing its range lets investigators work backward from onset to the exposure event, and forward to how long contacts must be watched.",
+   "say": "Entry to first symptom: that interval does double duty. Work backward from onset to find the exposure; work forward to set contact watching periods. Dose, portal and immunity stretch or shrink it person by person.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Agent enters the host"},
+     {"id": "b", "label": "Silent multiplication"},
+     {"id": "c", "label": "First sign or symptom"},
+     {"id": "d", "label": "Exposure traced backward"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Using incubation ranges in an outbreak",
+   "tx": "**Median incubation** anchors food poisoning investigation: cases clustering 12 to 24 hours after a meal point to one family of organisms, while 48 to 72 hours points elsewhere. The earliest and latest cases bound the exposure window. A single case outside the plausible range usually signals a different exposure or secondary spread, not a longer tail.",
+   "say": "Timing accuses the organism. Cases clustering half a day after a meal suggest one family; three days suggest another. Earliest and latest cases bound the exposure window. Outliers usually mean secondary spread, not statistical tails.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Onset after meal", "Investigative reading"],
+    "rows": [
+     ["1 to 6 hours", "Preformed toxin suspected"],
+     ["12 to 24 hours", "One organism family favoured"],
+     ["48 to 72 hours", "Another organism family favoured"],
+     ["Far outside range", "Secondary case or new exposure"]
+    ]
+   }
+  },
+  {
+   "title": "Communicable period: when the host infects others",
+   "tx": "The **communicable period** is the interval during which the agent can pass directly or indirectly from infected person to susceptible person. It may start before symptoms, as in measles catarrh, and outlast them, as in chronic carriage. Isolation durations, school exclusions and return-to-work rules are all built directly on this interval, disease by disease.",
+   "say": "Infectiousness has its own calendar. It can open before symptoms and close long after them, or never close in chronic carriers. Isolation durations and school exclusions are built directly on this interval, disease by disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Before symptoms",
+     "points": ["Measles infectious in catarrhal stage", "Incubatory carriers shed late incubation", "Case isolation starts too late"]
+    },
+    "right": {
+     "title": "After symptoms",
+     "points": ["Convalescent shedding continues", "Chronic carriage may never end", "Treatment shortens the window"]
+    }
+   }
+  },
+  {
+   "title": "Serial interval and generation time",
+   "tx": "The **serial interval** runs from onset in a primary case to onset in its secondary case, approximating incubation plus early infectiousness. Generation time runs from infection of the infector to infection of the infectee, unobservable directly. Chains plotted by serial interval reveal generation-by-generation growth, the raw material for judging whether control is bending transmission.",
+   "say": "Two intervals time the chain. Onset to onset in linked cases is observable; infection to infection is not. Plotting generations by the observable interval shows whether control is bending transmission or merely watching it.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Interval", "From, to", "Observable?"],
+    "rows": [
+     ["Incubation period", "Infection to symptoms", "Partly, by exposure history"],
+     ["Serial interval", "Onset to onset in next case", "Yes, from case dates"],
+     ["Generation time", "Infection to infection", "No, inferred only"]
+    ]
+   }
+  },
+  {
+   "title": "Latent period versus incubation period",
+   "tx": "The **latent period** runs from infection to infectiousness, while incubation runs from infection to symptoms; their difference decides whether presymptomatic spread occurs. Diseases infectious before symptoms, like influenza and COVID-era respiratory viruses in exam stems, defeat symptom-based isolation. Diseases infectious only after symptoms, like SARS in 2003, surrendered to it.",
+   "say": "Compare two clocks from infection. One ends at infectiousness, the other at symptoms. Infectious first means presymptomatic spread defeats symptom-based isolation; symptoms first means isolation can actually win.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Infectious before symptoms",
+     "points": ["Latent period shorter than incubation", "Presymptomatic spread occurs", "Symptom isolation fails"]
+    },
+    "right": {
+     "title": "Infectious after symptoms",
+     "points": ["Latent period longer than incubation", "Cases declare before spreading", "Symptom isolation can win"]
+    }
+   }
+  },
+  {
+   "title": "Herd immunity: protection without vaccination",
+   "tx": "**Herd immunity** is group resistance that protects even unimmunised members when enough of the population is immune, because chains of transmission break for lack of susceptibles. It follows natural infection, active immunisation, or both, and collapses as births and migration dilute the immune share. It never protects against tetanus, whose reservoir is soil, not people.",
+   "say": "Groups protect their unprotected members when immune density breaks transmission chains. Births and migration dilute it steadily. Tetanus stands outside the concept entirely: soil, not people, carries that reservoir.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Immune share rises"},
+     {"id": "b", "label": "Transmission chains break"},
+     {"id": "c", "label": "Susceptibles rarely meet agent"},
+     {"id": "d", "label": "Unimmunised protected indirectly"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Herd immunity threshold",
+   "tx": "The **herd immunity threshold** is the immune proportion above which disease may no longer persist, varying with virulence, vaccine efficacy and population contact patterns. Highly transmissible measles demands a far higher threshold than slower diseases. Serological surveys measure the actual immune share, letting programmes compare reality against the threshold instead of guessing from doses delivered.",
+   "say": "Persistence has a tipping point. Above the threshold immune share, disease cannot sustain itself; measles sets that bar far higher than slower diseases. Serological surveys measure the real share, replacing dose-count guessing.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Threshold rises with", "Example direction"],
+    "rows": [
+     ["Higher transmissibility", "Measles needs very high coverage"],
+     ["Lower vaccine efficacy", "More doses for same protection"],
+     ["Denser contact patterns", "Cities need higher shares"]
+    ]
+   }
+  },
+  {
+   "title": "Active and passive immunity contrasted",
+   "tx": "**Active immunity** follows infection or vaccination: slow to build, durable, with immunological memory, humoral and cellular arms cooperating. Passive immunity transfers ready antibody: immediate, brief, without memory, as with immunoglobulin after exposure. Combined active-passive protection, as in rabies and hepatitis B post-exposure care, exploits both clocks at once.",
+   "say": "Two clocks again. Active immunity builds slowly after infection or vaccine and remembers for years. Passive antibody acts immediately and fades within weeks. Post-exposure care for rabies deliberately runs both clocks together.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Active immunity",
+     "points": ["After infection or vaccination", "Slow onset, long duration", "Memory cells persist"]
+    },
+    "right": {
+     "title": "Passive immunity",
+     "points": ["Ready antibody transferred", "Immediate, short duration", "No memory formed"]
+    }
+   }
+  },
+  {
+   "title": "Why some diseases ignore herd logic",
+   "tx": "**Successful parasitism** describes agents that live in balance with hosts without destroying their habitat, persisting endemically for generations. Where vectors, animal reservoirs or soil maintain the agent, human herd immunity alone cannot eliminate disease. Vector density and animal control then matter as much as vaccine coverage, the closing lesson of this module.",
+   "say": "Some agents outwait immunity. Balanced parasitism, vectors, animal reservoirs and soil all maintain transmission beyond human immune shares. Elimination then needs vector and reservoir control standing beside vaccine coverage, never behind it.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Persistence route", "Control implication"],
+    "rows": [
+     ["Vector maintained", "Vector control beside vaccination"],
+     ["Animal reservoir", "Animal measures required"],
+     ["Soil reservoir (tetanus)", "Herd immunity irrelevant, wound care rules"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,148 @@
+{
+  "v": 1,
+  "module": "phm-antianginal",
+  "subject": "pharmacology",
+  "title": "Non-Dihydropyridine Calcium Blockers: Verapamil and Diltiazem versus Nifedipine",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Phenylalkylamine **verapamil** blocks L type calcium channels preferentially in cardiac tissue: the sinoatrial node slows, atrioventricular conduction delays, and contractility falls, with vasodilatation as a junior partner. Use dependence sharpens this profile because the drug binds open channels, so rapidly firing nodal tissue accumulates block fastest. That nodal grip makes verapamil an antiarrhythmic and antianginal, and forbids it where the ventricle already fails or conduction already limps.",
+      "say": "Verapamil grips the heart's pacemaker and wiring first and blood vessels second; that order explains everything about it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/calcium-channel-blocker-overdose-fig1.webp",
+        "alt": "Calcium channel blocker overdose pathophysiology showing nodal blockade, vasodilatation and myocardial depression",
+        "caption": "Calcium channel blocker actions at node, vessel and myocardium; overdose exaggerates the same nodal and contractile effects verapamil uses therapeutically."
+      }
+    },
+    {
+      "tx": "Benzothiazepine **diltiazem** sits deliberately between the families, with meaningful nodal slowing and coronary vasodilatation but gentler myocardial depression than verapamil. It controls rate in atrial fibrillation, relieves exertional and vasospastic angina, and constipates nobody, which makes it the common compromise when a beta blocker is contraindicated by asthma yet rate control is still required. Its metabolism by CYP3A4 invites the same interaction vigilance as verapamil.",
+      "say": "Diltiazem is the middle child: real nodal slowing, real vasodilatation, and a kinder gut and ventricle than verapamil.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Verapamil (phenylalkylamine)",
+          "points": [
+            "Strongest nodal and negative inotropic effects",
+            "Rate control, angina and SVT termination roles",
+            "Constipation in up to a quarter of users",
+            "Avoid in reduced ejection fraction failure"
+          ]
+        },
+        "right": {
+          "title": "Diltiazem (benzothiazepine)",
+          "points": [
+            "Balanced nodal slowing and vasodilatation",
+            "Rate control when beta blockers are barred by asthma",
+            "Less constipation and myocardial depression",
+            "Ankle oedema occurs, milder than dihydropyridines"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Against these, the dihydropyridine **nifedipine** and its cousins barely touch the node at therapeutic doses: vascular selectivity spares conduction but unleashes reflex tachycardia, flushing and headache, worst with rapid release forms. In angina that reflex can steal the benefit by raising oxygen demand, which is why dihydropyridines pair with beta blockers while verapamil and diltiazem must never casually do so intravenously.",
+      "say": "Nifedipine is all vessel and reflex; verapamil is node and muscle. Their beta blocker rules are mirror images.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-nifedipine.webp",
+        "alt": "L type calcium blockade causing vascular and myometrial smooth muscle relaxation",
+        "caption": "Vascular selective L type blockade by nifedipine, contrasting with the nodal emphasis of verapamil and diltiazem. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Combining verapamil with a **beta blocker** stacks two nodal depressants and two negative inotropes, and the literature of heart block and cardiogenic shock from this pairing, especially with intravenous verapamil, is long. Oral combinations under supervision exist, but the examination rule stands: never give intravenous verapamil to a beta blocked patient, and think twice orally when ejection fraction is reduced or the PR interval already long.",
+      "say": "Intravenous verapamil on top of a beta blocker is a classic way to stop a heart; the prohibition is absolute.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "beta", "label": "Beta blocker already slowing node and weakening contraction" },
+          { "id": "verap", "label": "Intravenous verapamil added for rapid rate" },
+          { "id": "block", "label": "Complete heart block and falling contractility" },
+          { "id": "shock", "label": "Cardiogenic shock: avoid the combination" }
+        ],
+        "edges": [["beta", "verap"], ["verap", "block"], ["block", "shock"]]
+      }
+    },
+    {
+      "tx": "Verapamil also raises **digoxin** levels by inhibiting P glycoprotein transport in gut and kidney, roughly doubling concentrations within a week and inviting toxicity unless the digoxin dose is cut and levels rechecked. Its CYP3A4 inhibition similarly elevates simvastatin, several immunosuppressants and some direct oral anticoagulants, while grapefruit juice, itself a CYP3A4 inhibitor, raises verapamil and dihydropyridine levels from the dietary side.",
+      "say": "Verapamil doubles digoxin and tangles with CYP3A4 substrates; grapefruit does the same trick from the breakfast table.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Levels verapamil raises",
+          "points": [
+            "Digoxin: reduce dose, recheck level in a week",
+            "Simvastatin: cap the statin dose to limit myopathy",
+            "Ciclosporin and tacrolimus: monitor concentrations",
+            "Carbamazepine: watch for neurotoxicity"
+          ]
+        },
+        "right": {
+          "title": "What raises verapamil",
+          "points": [
+            "Grapefruit juice and strong CYP3A4 inhibitors",
+            "Macrolide antibiotics and azole antifungals",
+            "Result: bradycardia, block and hypotension",
+            "Inducers like rifampicin do the opposite"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In exertional angina the non dihydropyridines cut demand twice, slowing heart rate and blunting contractility while dilating coronary arteries, and they remain first choice when beta blockers fail or asthma forbids them. In **vasospastic** (Prinzmetal) angina they are co first line with nitrates because the problem is supply side spasm, not demand; beta blockers, by contrast, can worsen spasm by leaving alpha constriction unopposed and are avoided there.",
+      "say": "For spasm angina, calcium blockers and nitrates are the treatment and beta blockers can make it worse.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "spasm", "label": "Coronary spasm at rest, often nocturnal, ST elevation" },
+          { "id": "ccb", "label": "Calcium blocker relaxes the spastic segment" },
+          { "id": "nitrate", "label": "Nitrates relieve attacks and add prophylaxis" },
+          { "id": "avoid", "label": "Avoid non selective beta blockade worsening spasm" }
+        ],
+        "edges": [["spasm", "ccb"], ["spasm", "nitrate"], ["spasm", "avoid"]]
+      }
+    },
+    {
+      "tx": "The everyday adverse effect students forget is verapamil **constipation**, occasionally severe enough to mimic obstruction in the elderly, from calcium blockade in gut smooth muscle. Gingival hyperplasia appears across the class and with ciclosporin or phenytoin co therapy, while ankle oedema, headache and flushing track the dihydropyridines. A careful drug history solves many a dental and bowel complaint attributed to ageing.",
+      "say": "Verapamil constipates, the class swells gums and ankles; check the drug chart before blaming age or ordering scans.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Non dihydropyridine effects",
+          "points": [
+            "Verapamil constipation, sometimes severe",
+            "Bradycardia and heart block at high dose",
+            "Worsening of reduced ejection fraction failure",
+            "Diltiazem ankle oedema, less constipation"
+          ]
+        },
+        "right": {
+          "title": "Dihydropyridine effects",
+          "points": [
+            "Ankle oedema from precapillary dilatation",
+            "Flushing, headache and palpitations",
+            "Gingival hyperplasia across the class",
+            "Reflex tachycardia with rapid release forms"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Overdose inverts the therapeutic profile into bradycardia, high grade block, vasodilatory shock and hyperglycaemia, because pancreatic L type channels normally trigger insulin release. Management escalates through intravenous calcium, high dose insulin euglycaemia therapy, vasopressors and pacing, with lipid emulsion and mechanical support in extremis. The **hyperglycaemia** in a shocked, bradycardic patient is a diagnostic fingerprint distinguishing calcium blocker from beta blocker poisoning, where glucose falls instead.",
+      "say": "Shock plus bradycardia plus high glucose points to calcium blocker overdose; beta blocker poisoning drops the glucose.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "od", "label": "Calcium blocker overdose: block, shock, hyperglycaemia" },
+          { "id": "calcium", "label": "Intravenous calcium salts as first antidote" },
+          { "id": "hiet", "label": "High dose insulin euglycaemia therapy" },
+          { "id": "support", "label": "Vasopressors, pacing and escalation of support" }
+        ],
+        "edges": [["od", "calcium"], ["calcium", "hiet"], ["hiet", "support"]]
+      }
+    }
+  ]
+}

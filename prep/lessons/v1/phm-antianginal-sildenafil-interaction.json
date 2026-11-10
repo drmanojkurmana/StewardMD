@@ -1,0 +1,252 @@
+{
+  "v": 1,
+  "module": "phm-antianginal",
+  "subject": "pharmacology",
+  "title": "Sildenafil Nitrate Interaction, Variant Angina and Coronary Steal",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Sexual stimulation releases nitric oxide in the corpus cavernosum, cyclic GMP accumulates, and **sildenafil** blocks phosphodiesterase 5, the enzyme that destroys that cyclic GMP, so erection is amplified. The same enzyme sits in systemic vascular smooth muscle, which is why sildenafil alone lowers pressure modestly. Add a nitrate, which manufactures cyclic GMP at full throttle, and production meets blocked destruction: the multiplication, not addition, is what collapses pressure.",
+      "say": "Sildenafil blocks the drain while nitrates open the tap; together cyclic GMP floods and pressure crashes.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "nitrate",
+            "label": "Nitrate donates nitric oxide, cyclic GMP production surges"
+          },
+          {
+            "id": "pde5",
+            "label": "Sildenafil blocks phosphodiesterase 5 breakdown"
+          },
+          {
+            "id": "flood",
+            "label": "Cyclic GMP accumulates many fold in vessels"
+          },
+          {
+            "id": "crash",
+            "label": "Profound vasodilatation and hypotension"
+          }
+        ],
+        "edges": [
+          [
+            "nitrate",
+            "flood"
+          ],
+          [
+            "pde5",
+            "flood"
+          ],
+          [
+            "flood",
+            "crash"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The contraindication windows follow each drug's half life: no nitrate within 24 hours of **sildenafil** or vardenafil, and none within 48 hours of tadalafil, whose 17.5 hour half life earned it the weekend pill nickname. The rule cuts both ways in the emergency department: a man with chest pain who took sildenafil yesterday gets morphine, aspirin and beta blockade or calcium blockade strategies while nitrates wait, and the sexual history becomes a resuscitation question.",
+      "say": "Twenty four hours for sildenafil, forty eight for tadalafil; in chest pain, ask before you spray.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/acs-fig1.webp",
+        "alt": "Acute coronary syndrome pathophysiology showing plaque disruption and thrombus formation",
+        "caption": "The acute coronary syndrome presentation in which a recent sildenafil dose changes which antianginal drugs may be given."
+      }
+    },
+    {
+      "tx": "If hypotension follows the combination, treatment is supportive because no direct antidote exists: lie the patient flat with legs raised, give intravenous fluids, and escalate to **vasopressors** such as phenylephrine or noradrenaline for refractory shock. The episode usually burns out as the shorter acting partner clears, which is why observation until the window closes matters more than exotic therapy. Prevention remains a one line counselling point at every nitrate prescription.",
+      "say": "Treat the crash with fluids, legs up and pressors; then teach the interaction so it never repeats.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "drop",
+            "label": "Hypotension after nitrate plus PDE5 inhibitor"
+          },
+          {
+            "id": "flat",
+            "label": "Supine, legs raised, intravenous fluid bolus"
+          },
+          {
+            "id": "pressor",
+            "label": "Phenylephrine or noradrenaline if refractory"
+          },
+          {
+            "id": "observe",
+            "label": "Observe until the interaction window has passed"
+          }
+        ],
+        "edges": [
+          [
+            "drop",
+            "flat"
+          ],
+          [
+            "flat",
+            "pressor"
+          ],
+          [
+            "pressor",
+            "observe"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Angina at rest with transient ST elevation, often in the small hours and clustered with migraine or Raynaud phenomena, defines **variant angina** (Prinzmetal angina): focal spasm of an epicardial artery, sometimes on a mild plaque, throttles supply while demand sleeps. Attacks answer nitrates dramatically, smoking is the dominant modifiable risk, and provocative testing with ergonovine or acetylcholine, once diagnostic, now lives mainly in specialised laboratories.",
+      "say": "Variant angina is spasm at rest with ST elevation; the artery clamps shut while the heart asks for nothing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Variant angina features",
+          "points": [
+            "Rest pain, classically between midnight and early morning",
+            "Transient ST elevation during the attack",
+            "Preserved exercise tolerance between episodes",
+            "Smoking and cocaine are potent triggers"
+          ]
+        },
+        "right": {
+          "title": "Exertional angina contrasts",
+          "points": [
+            "Pain predictably on effort, relieved by rest",
+            "ST depression during the attack",
+            "Fixed flow limiting stenosis on imaging",
+            "Demand reduction is the therapeutic centre"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Calcium channel blockers and nitrates are the twin pillars of variant angina therapy, titrated until attacks vanish, sometimes in doses higher than hypertension practice uses. Non selective **beta blockers** are the trap: blocking beta 2 vasodilatation leaves alpha mediated constriction unopposed and can lengthen spasm, so propranolol worsens the condition it would help in exertional disease. Statins and smoking cessation reduce attack frequency by healing the irritable endothelium.",
+      "say": "Spasm wants calcium blockers and nitrates; non selective beta blockers feed it by leaving alpha constriction unopposed.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "diagnose",
+            "label": "Variant angina recognised by rest pain and ST elevation"
+          },
+          {
+            "id": "ccb",
+            "label": "Calcium channel blocker titrated to abolish attacks"
+          },
+          {
+            "id": "nitrate",
+            "label": "Nitrates for attacks and overnight prophylaxis"
+          },
+          {
+            "id": "trap",
+            "label": "Avoid non selective beta blockers worsening spasm"
+          }
+        ],
+        "edges": [
+          [
+            "diagnose",
+            "ccb"
+          ],
+          [
+            "ccb",
+            "nitrate"
+          ],
+          [
+            "diagnose",
+            "trap"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The potent arteriolar dilators can paradoxically worsen ischaemia by **coronary steal**: dilating resistance vessels in healthy territories drops perfusion pressure distal to a fixed stenosis, so blood is diverted away from the ischaemic zone whose vessels were already maximally dilated. Dipyridamole exploits exactly this physiology in pharmacological stress testing, unmasking stenoses as perfusion defects, which is why aminophylline, its antagonist, is kept beside the scanner.",
+      "say": "Steal means dilating the healthy bed starves the stenosed one; stress testing weaponises that flaw diagnostically.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fixed",
+            "label": "Fixed stenosis: downstream bed already maximally dilated"
+          },
+          {
+            "id": "dilator",
+            "label": "Vasodilator opens healthy resistance vessels"
+          },
+          {
+            "id": "divert",
+            "label": "Perfusion pressure falls, flow diverts to healthy zones"
+          },
+          {
+            "id": "steal",
+            "label": "Ischaemic zone worsens: coronary steal demonstrated"
+          }
+        ],
+        "edges": [
+          [
+            "fixed",
+            "steal"
+          ],
+          [
+            "dilator",
+            "divert"
+          ],
+          [
+            "divert",
+            "steal"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Adenosine** shares the steal physiology and the stress laboratory, and its ultra short half life makes it the terminator of choice for regular narrow complex tachycardia as well. Both agents provoke chest discomfort and flushing that mimic angina, and both are blocked or blunted by caffeine and theophylline, which is why patients fast from coffee before pharmacological stress studies. Bronchospasm risk makes dipyridamole the usual choice in reactive airways.",
+      "say": "Caffeine cancels the stress test and aminophylline cancels the drug; remember the pair before booking the scan.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Adenosine and dipyridamole",
+          "points": [
+            "Adenosine half life measured in seconds",
+            "Dipyridamole blocks adenosine reuptake, prolonging it",
+            "Flushing, chest tightness and breathlessness common",
+            "Used to unmask stenoses by coronary steal"
+          ]
+        },
+        "right": {
+          "title": "Antidotes and interference",
+          "points": [
+            "Aminophylline antagonises adenosine receptors",
+            "Caffeine and theophylline blunt the test effect",
+            "Bronchospasm cautions in asthma, choose carefully",
+            "Effects fade quickly once infusion stops"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "One **synthesis** closes the module: nitrates help exertional angina by cutting demand, cure variant attacks by breaking spasm, and become dangerous when a PDE5 inhibitor, a preload dependent ventricle or a steal prone circulation removes the safety margin. Reading the circulation before the drug, rather than memorising lists, is what the examination is really sampling when it dresses these facts as case vignettes.",
+      "say": "Same drug, three circulations, three outcomes; read the physiology in the vignette before reaching for the nitrate.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nitrates help",
+          "points": [
+            "Exertional angina: preload and demand reduction",
+            "Variant angina: direct spasm antagonism",
+            "Acute heart failure: venodilatation unloads the lungs",
+            "Unstable angina infusion titrated to pain"
+          ]
+        },
+        "right": {
+          "title": "Nitrates harm",
+          "points": [
+            "PDE5 inhibitor inside its window",
+            "Right ventricular infarction or severe aortic stenosis",
+            "Hypertrophic obstructive cardiomyopathy",
+            "Steal prone anatomy with pure arteriolar dilators"
+          ]
+        }
+      }
+    }
+  ]
+}

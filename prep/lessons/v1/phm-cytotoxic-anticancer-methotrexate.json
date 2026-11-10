@@ -1,0 +1,239 @@
+{
+  "v": 1,
+  "module": "phm-cytotoxic-anticancer",
+  "subject": "pharmacology",
+  "title": "Cytotoxic Anticancer III: Antimetabolites, Methotrexate Leucovorin Rescue and Fluoropyrimidines",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Antimetabolites** are molecular impersonators: methotrexate impersonates folate, fluorouracil impersonates uracil, cytarabine and gemcitabine impersonate cytidine, mercaptopurine impersonates purines, and all kill in S phase where impersonation is cashed as broken DNA or starved nucleotide pools. Their schedules (infusions, daily oral years, high dose pulses with rescues) exploit phase specificity, and their antidotes and pharmacogenetic fences are the richest in cytotoxic practice.",
+      "say": "Antimetabolites forge the cell's currency and are spent in S phase; each forgery has its own antidote.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "The impersonators",
+          "points": [
+            "Methotrexate: folate analogue, DHFR blockade",
+            "5 FU and capecitabine: uracil analogues",
+            "Cytarabine, gemcitabine: cytidine analogues",
+            "Mercaptopurine, thioguanine: purine analogues"
+          ]
+        },
+        "right": {
+          "title": "Shared grammar",
+          "points": [
+            "S phase specific kill",
+            "Schedule dependence (infusion length matters)",
+            "Rescue and antidote traditions per agent",
+            "Pharmacogenetic fences unusually strong"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Methotrexate** lives three dose lives from the immunology lesson (weekly milligrams in rheumatoid arthritis) to oncology grams per square metre in leukaemia, lymphoma and osteosarcoma, where high dose courses run only with hydration, urine alkalinisation (its crystals obstruct acidic tubules), timed drug levels, and **leucovorin** rescue dosed by nomogram from those levels. Intrathecal methotrexate guards CNS sanctuaries and bills chemical arachnoiditis and leukoencephalopathy.",
+      "say": "High dose methotrexate is a level guided performance; leucovorin waits in the wings with a nomogram.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dose",
+            "label": "High dose methotrexate infused with hydration"
+          },
+          {
+            "id": "alkali",
+            "label": "Urine alkalinised above pH 7"
+          },
+          {
+            "id": "level",
+            "label": "Timed levels at 24, 48, 72 hours"
+          },
+          {
+            "id": "rescue",
+            "label": "Leucovorin dose and duration set by nomogram"
+          }
+        ],
+        "edges": [
+          [
+            "dose",
+            "alkali"
+          ],
+          [
+            "alkali",
+            "level"
+          ],
+          [
+            "level",
+            "rescue"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Leucovorin** (folinic acid, 5 formyl tetrahydrofolate) rescues by refilling reduced folate pools downstream of dihydrofolate reductase, preferentially rescuing normal tissue when timed after methotrexate's tumour exposure, and in a second career potentiates fluorouracil (from the next lesson's family) by stabilising its thymidylate synthase complex. When methotrexate clearance collapses (renal failure), glucarpidase, a bacterial enzyme that cleaves methotrexate in blood, is the emergency exit.",
+      "say": "Leucovorin refills folate past the blockade; glucarpidase is the fire axe when kidneys fail.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Leucovorin roles",
+          "points": [
+            "Rescue after high dose methotrexate (nomogram dosed)",
+            "Weekly low dose with rheumatoid methotrexate",
+            "Potentiates 5 FU against colorectal cancer",
+            "Timing decides rescue versus tumour protection"
+          ]
+        },
+        "right": {
+          "title": "Glucarpidase exit",
+          "points": [
+            "Cleaves circulating methotrexate enzymatically",
+            "For renal failure with toxic levels",
+            "Leucovorin held around its dosing (substrate competition)",
+            "Levels by immunoassay mislead after use"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Pemetrexed**, methotrexate's multitargeted descendant (thymidylate synthase, DHFR and purine synthesis enzymes), treats mesothelioma and lung adenocarcinoma only under folate and B12 supplementation that disarmed its early marrow and gut mortality, a supplementation mandate written on every prescription. Its rash yields to dexamethasone premedication, and renal clearance fences dosing as the parent drug taught.",
+      "say": "Pemetrexed only became safe when vitamins were prescribed with it; supplementation is part of the drug.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pemetrexed territory",
+          "points": [
+            "Mesothelioma with cisplatin",
+            "Non squamous lung cancer therapy and maintenance",
+            "Multitargeted antifolate mechanism",
+            "Renal clearance dosing fences"
+          ]
+        },
+        "right": {
+          "title": "Mandatory partners",
+          "points": [
+            "Folic acid daily from before cycle one",
+            "Vitamin B12 injections periodically",
+            "Dexamethasone against rash",
+            "NSAID caution near dosing in renal impairment"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mercaptopurine** maintains childhood leukaemia remissions for years of nightly tablets, metabolised by thiopurine methyltransferase (TPMT, from the pharmacogenetic canon: deficiency converts standard doses into marrow catastrophes, testing or dose empiricism mandatory) and xanthine oxidase, so allopurinol co therapy demands mercaptopurine dose cuts of two thirds. Azathioprine shares the pathway from the immunology lesson, one metabolism governing three wards.",
+      "say": "TPMT decides mercaptopurine's dose; allopurinol rewrites it; one pathway, three wards again.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Mercaptopurine career",
+          "points": [
+            "ALL maintenance backbone (nightly, years)",
+            "TPMT deficiency: severe myelosuppression",
+            "NUDT15 variants in Asian ancestry added",
+            "Adherence measured by metabolite levels"
+          ]
+        },
+        "right": {
+          "title": "Interaction arithmetic",
+          "points": [
+            "Allopurinol or febuxostat: cut dose by two thirds",
+            "Warfarin effect diminished",
+            "Hepatotoxicity and pancreatitis (azathioprine) watched",
+            "Live vaccines fenced in maintenance immunosuppression"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cytarabine** (ara C) is leukaemia's S phase scalpel: standard dose consolidation in AML, high dose courses billing cerebellar toxicity (finger nose testing before each dose in older patients), conjunctivitis prevented by steroid eye drops, and hand foot and neurotoxicity ceilings, while gemcitabine (its pancreatic and lung cousin) bills flu like fevers, oedema and rare pulmonary and haemolytic uraemic syndromes behind a gentler reputation.",
+      "say": "High dose cytarabine examines the cerebellum before each dose; the eyes get steroid drops by routine.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cytarabine signatures",
+          "points": [
+            "AML induction and consolidation backbone",
+            "High dose cerebellar toxicity (age fenced)",
+            "Steroid eye drops against conjunctivitis",
+            "Intrathecal form for meningeal disease"
+          ]
+        },
+        "right": {
+          "title": "Gemcitabine signatures",
+          "points": [
+            "Pancreatic, lung, bladder and breast regimens",
+            "Weekly infusions, flu like syndrome",
+            "Capillary leak and oedema uncommon",
+            "Radiation recall and HUS rare ledgers"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Hydroxyurea**, the ribonucleotide reductase inhibitor from the haematology lessons (sickle cell HbF induction, myeloproliferative cytoreduction), and fludarabine and cladribine (purine analogues whose lymphocyte specificity treats CLL and hairy cell leukaemia while billing years of cellular immunosuppression and PJP prophylaxis) complete the antimetabolite shelf examiners stock. Each drug's immune shadow outlasts its marrow shadow by years.",
+      "say": "Purine analogues suppress lymphocytes for years; prophylaxis calendars outlive chemotherapy calendars.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Hydroxyurea",
+          "points": [
+            "Sickle cell HbF induction",
+            "Essential thrombocythaemia cytoreduction",
+            "Marrow suppression dose titrated",
+            "Leg ulcers and skin cancers on long use"
+          ]
+        },
+        "right": {
+          "title": "Fludarabine and cladribine",
+          "points": [
+            "CLL and hairy cell leukaemia respectively",
+            "Profound prolonged T cell suppression",
+            "PJP and antiviral prophylaxis traditions",
+            "Irradiated blood products (graft versus host risk)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Methotrexate interactions** deserves the final step because it kills quietly: NSAIDs and penicillins impair its renal excretion, trimethoprim adds antifolate blockade (pancytopenia in case reports that read like warnings), proton pump inhibitors delay high dose clearance, and alcohol and leflunomide share its liver. Every medication reconciliation before methotrexate, weekly or high dose, is this web read aloud.",
+      "say": "Methotrexate deaths are usually interaction deaths; reconcile the chart before every dose.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "list",
+            "label": "Medication list read against methotrexate"
+          },
+          {
+            "id": "renal",
+            "label": "NSAIDs, penicillins, PPIs: clearance threats flagged"
+          },
+          {
+            "id": "folate",
+            "label": "Trimethoprim antifolate addition refused or rescued"
+          },
+          {
+            "id": "liver",
+            "label": "Alcohol and liver partners reviewed, bloods scheduled"
+          }
+        ],
+        "edges": [
+          [
+            "list",
+            "renal"
+          ],
+          [
+            "renal",
+            "folate"
+          ],
+          [
+            "folate",
+            "liver"
+          ]
+        ]
+      }
+    }
+  ]
+}

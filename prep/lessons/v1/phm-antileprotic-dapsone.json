@@ -1,0 +1,178 @@
+{
+  "v": 1,
+  "module": "phm-antileprotic",
+  "subject": "pharmacology",
+  "title": "Leprosy Pharmacology: Dapsone, Clofazimine, Rifampicin, MDT, Lepra Reactions and Thalidomide",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Dapsone**, a sulfone blocking folate synthesis exactly as sulfonamides do, was leprosy's first effective monotherapy and now serves inside multidrug therapy (MDT) and dermatology's neutrophilic dermatosis niches. Its signature toxicities are haematological: dose related haemolysis (dangerous and occasionally fatal in G6PD deficiency, screening argued by population), methaemoglobinaemia, and the dapsone hypersensitivity (sulfone) syndrome of fever, rash, hepatitis and lymphadenopathy at four to six weeks that demands immediate cessation.",
+      "say": "Dapsone is leprosy's sulfone elder: haemolysis in G6PD, sulfone syndrome at six weeks, stop on the rash.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Dapsone territory",
+          "points": [
+            "Leprosy MDT component for decades",
+            "Dermatitis herpetiformis and neutrophilic dermatoses",
+            "Pneumocystis alternative in sulfa allergy history",
+            "Folate pathway blockade like sulfonamides"
+          ]
+        },
+        "right": {
+          "title": "Dapsone toxicities",
+          "points": [
+            "Haemolysis: G6PD deficiency dangerous",
+            "Methaemoglobinaemia dose related",
+            "Sulfone syndrome at 4 to 6 weeks",
+            "Peripheral neuropathy with prolonged use"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Clofazimine**, a riminophenazine dye concentrating in macrophages and fat, kills Mycobacterium leprae slowly while its anti inflammatory action suppresses erythema nodosum leprosum, earning double duty in MDT and reactions. It stains skin red brown to near black (months to fade, darkest in lesions), discolours secretions, crystallises in gut with enteropathy at high doses, and prolongs QT inside resistant tuberculosis regimens where it moonlights. Patients warned about pigmentation complete therapy; patients surprised by it default.",
+      "say": "Clofazimine dyes the patient to cure them; warn about the colour or lose the adherence.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clofazimine actions",
+          "points": [
+            "Slow mycobacterial killing in macrophages",
+            "Anti inflammatory in type 2 lepra reactions",
+            "MDT multibacillary component",
+            "Resistant tuberculosis regimens member"
+          ]
+        },
+        "right": {
+          "title": "Clofazimine burdens",
+          "points": [
+            "Red brown skin pigmentation, slow to fade",
+            "Dry ichthyotic skin and eye discoloration",
+            "Gastrointestinal crystal enteropathy at high dose",
+            "QT contribution in TB combinations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Rifampicin** in leprosy is prescribed by the month, not the day: a single supervised 600 mg monthly dose inside MDT exploits its bactericidal peak (killing 99.9 percent of viable bacilli per dose) while monthly spacing contains its enzyme induction and cost. Daily rifampicin has no place here, and its interactions still apply to the monthly pulse. The contrast with tuberculosis daily rifampicin is a favourite prescribing examination hinge.",
+      "say": "Leprosy rifampicin is monthly and supervised; tuberculosis rifampicin is daily. Do not cross the calendars.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "mdt", "label": "MDT blister pack issued monthly" },
+          { "id": "rif", "label": "Rifampicin 600 mg supervised monthly dose" },
+          { "id": "daily", "label": "Dapsone (and clofazimine) daily self administered" },
+          { "id": "count", "label": "Packs counted at each monthly collection" }
+        ],
+        "edges": [["mdt", "rif"], ["rif", "daily"], ["daily", "count"]]
+      }
+    },
+    {
+      "tx": "**Multidrug therapy** divides leprosy by bacterial load: paucibacillary (PB, up to five lesions, rifampicin monthly plus dapsone daily for six months) and multibacillary (MB, rifampicin plus clofazimine monthly supervised with clofazimine and dapsone daily for twelve months), free in WHO blister packs globally. Uniform MDT (all patients twelve months) is trialled in some programmes; classification by lesion count and slit skin smear where available assigns the pack.",
+      "say": "Count lesions, choose the pack: six months paucibacillary, twelve multibacillary, free everywhere.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Paucibacillary MDT",
+          "points": [
+            "Five or fewer skin lesions",
+            "Rifampicin monthly supervised, dapsone daily",
+            "Six months duration",
+            "Single lesion: ROM single dose historically (below)"
+          ]
+        },
+        "right": {
+          "title": "Multibacillary MDT",
+          "points": [
+            "More than five lesions or smear positive",
+            "Adds clofazimine monthly and daily",
+            "Twelve months duration",
+            "Reaction surveillance continues beyond completion"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **ROM regimen** (single dose rifampicin, ofloxacin and minocycline) treated single lesion paucibacillary leprosy in one supervised encounter, an adherence masterpiece whose niche narrowed as classification and uniform MDT evolved; ofloxacin and **minocycline** remain the alternative MDT components for rifampicin resistance, intolerance or contraindication, alongside clarithromycin in specialist constructions. Their existence matters when reactions or toxicity remove first line pieces mid course.",
+      "say": "ROM cured a single lesion in one visit; ofloxacin and minocycline are the spare parts shelf.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ROM concept",
+          "points": [
+            "Rifampicin, ofloxacin, minocycline single dose",
+            "Single lesion paucibacillary indication historically",
+            "One supervised encounter completes therapy",
+            "Superseded in many programmes by standard MDT"
+          ]
+        },
+        "right": {
+          "title": "Alternative components",
+          "points": [
+            "Ofloxacin daily in rifampicin sparing regimens",
+            "Minocycline daily substitute options",
+            "Clarithromycin in specialist combinations",
+            "Resistance testing guides substitutions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Lepra reaction** type 1 (reversal reaction) is upgrading cell mediated immunity inflaming lesions and nerves, threatening function in days, treated by continuing MDT and adding prednisolone tapered over months with nerve function charted serially; steroids started late save less nerve, which makes reaction recognition a neurological emergency wearing dermatological clothes. Analgesia, splinting and physiotherapy ride with the steroid prescription.",
+      "say": "Type 1 reactions eat nerves quietly; prednisolone early and nerve charts monthly are the rescue.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "inflame", "label": "Lesions inflame, nerves tender and weakening" },
+          { "id": "continue", "label": "MDT continued without interruption" },
+          { "id": "steroid", "label": "Prednisolone started and tapered over months" },
+          { "id": "chart", "label": "Nerve function charted serially for recovery" }
+        ],
+        "edges": [["inflame", "continue"], ["continue", "steroid"], ["steroid", "chart"]]
+      }
+    },
+    {
+      "tx": "**Erythema nodosum leprosum** (ENL, type 2 reaction) is immune complex vasculitis in lepromatous disease: crops of tender nodules, fever, neuritis, iritis, orchitis and glomerulonephritis in waves for years. Mild disease takes NSAIDs; severe disease takes high dose prednisolone, clofazimine's anti inflammatory high dose, and **thalidomide**, the most effective agent, fenced by its teratogenic history behind absolute pregnancy prohibition and controlled distribution. ENL, not bacillary load, is where leprosy blinds and cripples treated patients.",
+      "say": "ENL is vasculitis in waves; thalidomide masters it behind the strictest pregnancy fence in pharmacology.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ENL management ladder",
+          "points": [
+            "Mild: NSAIDs and reassurance, MDT continues",
+            "Moderate to severe: prednisolone high dose taper",
+            "Clofazimine escalated for anti inflammatory effect",
+            "Thalidomide for severe or steroid dependent disease"
+          ]
+        },
+        "right": {
+          "title": "Thalidomide fences",
+          "points": [
+            "Absolute contraindication in pregnancy",
+            "Controlled distribution programmes mandatory",
+            "Peripheral neuropathy and sedation monitored",
+            "Thrombosis prophylaxis considered in combinations"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Haemolysis in G6PD deficiency** and the **sulfone syndrome** close dapsone's safety liturgy with management: baseline G6PD testing where prevalence argues, haemoglobin and reticulocytes after starting, methaemoglobinaemia treated by cessation and methylene blue where symptomatic (itself G6PD fenced, from the anaesthetic lessons), and sulfone syndrome treated by immediate withdrawal and corticosteroids with weeks of vigilance. Alternative regimens without dapsone are built with ofloxacin and minocycline from the spare shelf above.",
+      "say": "Test, count, stop on the syndrome, and build the dapsone free regimen from ofloxacin and minocycline.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "test", "label": "G6PD status assessed before dapsone" },
+          { "id": "count", "label": "Haemoglobin reviewed after initiation" },
+          { "id": "syndrome", "label": "Fever, rash and hepatitis at weeks 4 to 6: stop dapsone" },
+          { "id": "rebuild", "label": "Steroids for syndrome, regimen rebuilt without dapsone" }
+        ],
+        "edges": [["test", "count"], ["count", "syndrome"], ["syndrome", "rebuild"]]
+      }
+    }
+  ]
+}

@@ -1,0 +1,239 @@
+{
+  "v": 1,
+  "module": "phm-cytotoxic-anticancer",
+  "subject": "pharmacology",
+  "title": "Cytotoxic Anticancer VIII: Cell Cycle Specificity, Combination Logic and Tumour Lysis Syndrome",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Cell cycle specificity** sorts cytotoxics by the phase they kill in: antimetabolites in S, vinca and taxanes in M, etoposide in late S and G2, bleomycin in G2 and M, against cell cycle non specific alkylators and platinums that damage DNA in any phase including resting cells. Phase specific drugs kill a fraction per exposure and reward schedule (prolonged or repeated dosing catches more cells entering the phase), while non specific agents show linear dose kill.",
+      "say": "Phase drugs need time and repetition; non specific drugs need dose. Schedule follows the sort.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Phase specific",
+          "points": [
+            "S: methotrexate, 5 FU, cytarabine",
+            "M: vincristine, paclitaxel",
+            "Late S G2: etoposide; G2 M: bleomycin",
+            "Log kill per exposure capped: schedule dependent"
+          ]
+        },
+        "right": {
+          "title": "Non specific",
+          "points": [
+            "Alkylators, platinums, anthracyclines (partly)",
+            "Kill resting cells too",
+            "Steeper dose response",
+            "Cumulative organ ledgers dominate"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Log kill** mathematics governs expectations: a given therapy kills a constant fraction (say 99 percent, two logs) not a constant number, so a tumour of 10 to the 12 cells needs repeated cycles interleaved with regrowth, adjuvant therapy exists to kill micrometastatic fractions while they are small, and cure requires the last clonogenic cell, which immune surveillance and luck finish in the classic model. Gompertzian growth (small tumours grow fastest fractionally) explains adjuvant advantage.",
+      "say": "Chemotherapy kills fractions, not numbers; small residual disease is where cure is won.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "bulk",
+            "label": "10^12 cells: cycle kills 99 percent"
+          },
+          {
+            "id": "resid",
+            "label": "10^10 remain and regrow between cycles"
+          },
+          {
+            "id": "repeat",
+            "label": "Repeated cycles ratchet the fraction down"
+          },
+          {
+            "id": "micro",
+            "label": "Adjuvant therapy erases micrometastases at smallest size"
+          }
+        ],
+        "edges": [
+          [
+            "bulk",
+            "resid"
+          ],
+          [
+            "resid",
+            "repeat"
+          ],
+          [
+            "repeat",
+            "micro"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Combination chemotherapy** obeys four design rules written by the successful regimens of earlier lessons: each drug active alone, mechanisms distinct (non cross resistant), toxicities non overlapping where possible (vincristine's marrow sparing beside cyclophosphamide), and schedules that keep dose intensity. Dose reductions and delays surrender the arithmetic, which is why growth factors and antiemetic prophylaxis are efficacy drugs in disguise.",
+      "say": "Active alone, different mechanism, different toxicity, full dose on time: the four rules behind every acronym.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Design rules",
+          "points": [
+            "Single agent activity required",
+            "Distinct mechanisms limit cross resistance",
+            "Non overlapping toxicities preferred",
+            "Dose intensity defended by supportive care"
+          ]
+        },
+        "right": {
+          "title": "Failure modes",
+          "points": [
+            "Two marrow drugs without growth factor plan",
+            "Cross resistant partners repeating one mechanism",
+            "Dose delays surrendering log kill",
+            "Sanctuary sites (CNS, testis) left untreated"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Tumour lysis syndrome** is successful kill outrunning excretion: bulky chemosensitive disease (Burkitt lymphoma, ALL, high LDH solid tumours) releases potassium, phosphate and nucleic acids converted to uric acid, causing hyperkalaemia, hyperphosphataemia with hypocalcaemia, uric acid nephropathy and acute kidney injury, largely within days of first therapy. Risk stratification before cycle one assigns hydration intensity and hypouricaemic strategy.",
+      "say": "Killing a kilogram of lymphoma releases its insides at once; kidneys meet the flood first.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Laboratory TLS",
+          "points": [
+            "Potassium and phosphate rise",
+            "Calcium falls (phosphate binding)",
+            "Uric acid and creatinine rise",
+            "LDH marks tumour bulk and turnover"
+          ]
+        },
+        "right": {
+          "title": "High risk portraits",
+          "points": [
+            "Burkitt and lymphoblastic lymphomas",
+            "ALL with high white counts",
+            "Bulky disease with renal impairment",
+            "Pre existing hyperuricaemia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Allopurinol** prevents new uric acid formation (xanthine oxidase blockade from the gout lesson) and suits low and intermediate risk with vigorous hydration, started before chemotherapy, while **rasburicase** (recombinant urate oxidase) destroys existing uric acid within hours for high risk or established lysis, fenced by G6PD deficiency (hydrogen peroxide haemolysis) and by blood samples that keep degrading uric acid in the tube unless chilled. Urinary alkalinisation has retired beside rasburicase era evidence.",
+      "say": "Allopurinol stops uric acid being made; rasburicase eats what already exists. Risk chooses.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Allopurinol lane",
+          "points": [
+            "Low intermediate risk prophylaxis",
+            "Start 24 to 48 hours before chemotherapy",
+            "Hydration partner mandatory",
+            "Mercaptopurine interaction from earlier lessons"
+          ]
+        },
+        "right": {
+          "title": "Rasburicase lane",
+          "points": [
+            "High risk or established lysis",
+            "Uric acid falls within 4 hours",
+            "G6PD deficiency forbidden (haemolysis)",
+            "Samples on ice: ex vivo degradation falsifies levels"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**TLS management** beyond hypouricaemics is electrolyte triage: hyperkalaemia treated by the hyperkalaemia ladder (calcium, insulin dextrose, potassium binders, dialysis thresholds), phosphate binders and avoidance of calcium unless symptomatic hypocalcaemia (calcium phosphate precipitation), generous hydration titrated to urine output, and nephrology engaged early because dialysis in TLS treats a moving metabolic target.",
+      "say": "Treat potassium, bind phosphate, spare calcium unless symptoms; dialysis thresholds come early in TLS.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "monitor",
+            "label": "Electrolytes and urine output every 4 to 6 hours"
+          },
+          {
+            "id": "k",
+            "label": "Hyperkalaemia ladder activated"
+          },
+          {
+            "id": "phos",
+            "label": "Phosphate binders, calcium only if symptomatic"
+          },
+          {
+            "id": "dial",
+            "label": "Dialysis for refractory potassium, phosphate or fluid"
+          }
+        ],
+        "edges": [
+          [
+            "monitor",
+            "k"
+          ],
+          [
+            "k",
+            "phos"
+          ],
+          [
+            "phos",
+            "dial"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Sanctuary sites** explain intrathecal therapy and testicular vigilance: the blood brain and blood testis barriers exclude most cytotoxics, so ALL protocols deliver methotrexate and cytarabine intrathecally and high dose systemic methotrexate crosses by gradient, while drugs that penetrate (temozolomide, nitrosoureas, procarbazine) anchor brain tumour regimens. Relapse in sanctuaries after systemic cure is barrier pharmacology announcing itself.",
+      "say": "Barriers create sanctuaries; protocols invade them deliberately or relapse moves in.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Barrier problem",
+          "points": [
+            "Most cytotoxics excluded from CNS",
+            "Testis sanctuary in ALL relapse",
+            "Meningeal disease needs local therapy",
+            "High dose methotrexate crosses by gradient"
+          ]
+        },
+        "right": {
+          "title": "Barrier penetrators",
+          "points": [
+            "Temozolomide and nitrosoureas (brain tumours)",
+            "Intrathecal methotrexate, cytarabine, hydrocortisone",
+            "Liposomal cytarabine depot traditions",
+            "Radiation reserved by age and relapse rules"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Response language** completes cytotoxic literacy: complete and partial response by RECIST measurements, progression dates that trigger regimen change, performance status gating eligibility, and adjuvant, neoadjuvant, concurrent and palliative intents that decide how much toxicity arithmetic is rational. The same drug is four different prescriptions under four intents, which is why intent is documented before dose.",
+      "say": "Intent writes the toxicity budget; RECIST writes the report card. Both precede cycle two.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Intent ladder",
+          "points": [
+            "Neoadjuvant: shrink before surgery",
+            "Adjuvant: erase micrometastases after",
+            "Concurrent: radiosensitise",
+            "Palliative: symptom and survival balance"
+          ]
+        },
+        "right": {
+          "title": "Response grammar",
+          "points": [
+            "RECIST target lesion sums",
+            "Complete, partial, stable, progression categories",
+            "Performance status gates eligibility",
+            "Progression triggers regimen succession"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+{
+ "key": "ped-urinary-tract-renal-tubular-acidosis",
+ "v": 1,
+ "module": "ped-urinary-tract",
+ "subject": "paediatrics",
+ "title": "Pediatric Tubular Disorders and Genital Anomalies: RTA and Cryptorchidism",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Defective tubular excretion of hydrogen ions or reabsorption of bicarbonate produces normal anion gap metabolic acidosis. Presenting with failure to thrive, polyuria, and refractory rickets, **pediatric renal tubular acidosis** (RTA) exhibits hyperchloraemic metabolic acidosis with a normal serum anion gap. Type 1 distal RTA involves defective alpha-intercalated cell hydrogen secretion, resulting in an inappropriately high urine pH exceeding 5.5 despite severe systemic acidaemia.",
+   "say": "Renal tubular acidosis causes hyperchloremic normal anion gap metabolic acidosis. In distal Type 1 RTA, the urine pH remains persistently above 5.5 despite systemic acidosis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "RTA Subtype",
+     "Primary Tubular Defect",
+     "Urine pH During Acidosis",
+     "Serum Potassium & Complications"
+    ],
+    "rows": [
+     [
+      "Type 1 (Distal RTA)",
+      "Defective distal H+ proton pumping",
+      "Persistently high (>5.5)",
+      "Hypokalaemia, nephrocalcinosis, rickets"
+     ],
+     [
+      "Type 2 (Proximal RTA)",
+      "Defective proximal HCO3- reabsorption",
+      "Variable (<5.5 if bicarbonate low)",
+      "Hypokalaemia, Fanconi syndrome association"
+     ],
+     [
+      "Type 4 (Hyperkalaemic)",
+      "Aldosterone deficiency or resistance",
+      "Persistently acidic (<5.5)",
+      "Hyperkalaemia, normal bone architecture"
+     ],
+     [
+      "Bicarbonate replacement",
+      "Alkali therapy (citrate or bicarbonate)",
+      "Titrated to normalize serum bicarbonate",
+      "Prevents growth failure and rickets"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Autosomal recessive transport channel mutations in the thick ascending limb of Henle mimic chronic loop diuretic exposure. In infants presenting with severe polyuria and salt wasting, **pediatric Bartter syndrome** arises from genetic defects in the NKCC2 co-transporter, ROMK potassium channel, or CLCNKB chloride channel. Patients demonstrate profound hypokalaemic hypochloraemic metabolic alkalosis, hypercalciuria with early nephrocalcinosis, markedly elevated plasma renin and aldosterone, and normal blood pressure.",
+   "say": "Bartter syndrome mimics chronic furosemide abuse, causing severe hypokalemic metabolic alkalosis and nephrocalcinosis. Blood pressure remains completely normal.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bartter Syndrome (Loop Defect)",
+     "points": [
+      "Impaired NKCC2 or ROMK channel in loop of Henle",
+      "Severe hypokalaemic metabolic alkalosis",
+      "Marked hypercalciuria with early nephrocalcinosis",
+      "Presents in infancy with maternal polyhydramnios"
+     ]
+    },
+    "right": {
+     "title": "Gitelman Syndrome (Distal Defect)",
+     "points": [
+      "Impaired NCCT co-transporter in distal convoluted tubule",
+      "Hypokalaemic metabolic alkalosis with hypomagnesaemia",
+      "Hypocalciuria (protective against stones)",
+      "Presents in older children or adolescents with muscle cramps"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Generalized functional impairment of proximal convoluted tubular transport leads to indiscriminate urinary wasting of solutes. Clinically characterized by glycosuria with normal blood glucose, **pediatric Fanconi syndrome** produces massive urinary loss of amino acids, phosphate, bicarbonate, uric acid, and potassium. The resulting hypophosphataemia triggers refractory hypophosphataemic rickets and growth failure, frequently secondary to underlying infantile nephropathic cystinosis.",
+   "say": "Fanconi syndrome causes proximal tubular wasting of phosphate, glucose, amino acids, and bicarbonate. It causes severe refractory rickets with normal blood glucose levels.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Wasted Solute in Urine",
+     "Underlying Tubular Mechanism",
+     "Resulting Clinical Manifestation",
+     "Therapeutic Replacement"
+    ],
+    "rows": [
+     [
+      "Inorganic phosphate",
+      "Proximal sodium-phosphate cotransport failure",
+      "Severe hypophosphataemic rickets, osteomalacia",
+      "Oral phosphate solutions (Joulie solution)"
+     ],
+     [
+      "Bicarbonate ion",
+      "Defective proximal bicarbonate reabsorption",
+      "Type 2 proximal renal tubular acidosis",
+      "High-dose oral sodium bicarbonate / citrate"
+     ],
+     [
+      "Glucose (Glycosuria)",
+      "Defective SGLT2 sodium-glucose cotransport",
+      "Persistent glycosuria despite normal glycemia",
+      "Diagnostic marker; no treatment needed"
+     ],
+     [
+      "Amino acids / Potassium",
+      "Indiscriminate aminoaciduria and kaliuresis",
+      "Hypokalaemic weakness, episodic paralysis",
+      "Oral potassium supplementation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Insensitivity of renal medullary collecting ducts to antidiuretic hormone impairs water reabsorption despite physiological hyperosmolality. Inherited as an X-linked recessive trait due to AVPR2 vasopressin receptor mutations, **congenital nephrogenic diabetes insipidus** manifests in young infants with extreme polydipsia, severe polyuria, hypernatraemic dehydration, recurrent unexplained fevers, and dilute urine with osmolality below two hundred milliosmoles per kilogram.",
+   "say": "Nephrogenic diabetes insipidus involves collecting duct insensitivity to ADH, causing hypernatremic dehydration and dilute urine. Exogenous desmopressin produces no response.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diagnostic Testing Profile",
+     "points": [
+      "Inappropriate dilute urine during dehydration",
+      "Urine osmolality <300 mOsm/kg despite high serum Na",
+      "Water deprivation test shows persistent polyuria",
+      "Failure to concentrate urine following desmopressin"
+     ]
+    },
+    "right": {
+     "title": "Paradoxical Therapy Protocol",
+     "points": [
+      "Unrestricted access to free drinking water",
+      "Hydrochlorothiazide produces paradoxical volume contraction",
+      "Indomethacin inhibits prostaglandins, enhancing water uptake",
+      "Low-solute, low-sodium dietary modifications"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Arrested embryological development of the ventral urethral folds produces abnormal ectopic positioning of the external urethral orifice. The classic triad of **congenital hypospadias in boys** includes an abnormally located ventral urethral meatus anywhere from the glans to the perineum, ventral fibrous chordee curvature, and a dorsal hooded prepuce. Neonatal circumcision is strictly contraindicated, as the prepucial skin is required for reconstructive urethroplasty.",
+   "say": "Hypospadias presents with a ventral urethral opening, chordee curvature, and a hooded dorsal foreskin. Circumcision is strictly contraindicated because the prepuce is needed for repair.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-penis_inspection.webp",
+    "alt": "Clinical anatomical diagram displaying hypospadias classifications, ventral chordee, and hooded dorsal prepuce.",
+    "caption": "Anatomical features of hypospadias showing ventral displacement of the urethral meatus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Surgical reconstruction corrects penile curvature and constructs an adequate neourethral conduit opening at the glans tip. Optimal timing for **hypospadias urethroplasty reconstruction** is between six and eighteen months of age, before the child develops conscious body image and gender identity awareness. Reconstructive steps involve orthoplasty to release chordee, tabularized incised plate (Snodgrass) urethroplasty, and glanuloplasty with foreskin reconstruction.",
+   "say": "Perform hypospadias repair between six and eighteen months of age. The Snodgrass tabularized incised plate urethroplasty provides excellent functional and cosmetic results.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Hypospadias Anatomic Subtype",
+     "Meatal Location on Penis",
+     "Proportion of Cases",
+     "Surgical Complexity"
+    ],
+    "rows": [
+     [
+      "Distal (Glanular / Coronal)",
+      "Glans or coronal sulcus on ventral side",
+      "65 to 70 percent",
+      "Single-stage repair (Snodgrass TIP)"
+     ],
+     [
+      "Midshaft (Penile shaft)",
+      "Along the ventral midshaft of penis",
+      "15 to 20 percent",
+      "Single-stage tabularized flap repair"
+     ],
+     [
+      "Proximal (Penoscrotal / Perineal)",
+      "At junction of penis and scrotum",
+      "10 to 15 percent",
+      "Two-stage repair; rule out DSD anomalies"
+     ],
+     [
+      "Chordee correction",
+      "Excision of dysplastic ventral dartos",
+      "Essential initial step",
+      "Straightens phallus completely for erection"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Failure of one or both testes to descend along the retroperitoneal path into the dependent scrotal sac constitutes cryptorchidism. In term male infants, **congenital undescended testis** occurs in three percent, rising to thirty percent in premature boys. The higher intra-abdominal temperature impairs normal testicular germ cell maturation, significantly increasing long-term risks of subfertility and malignant transformation into testicular seminoma.",
+   "say": "Undescended testis affects three percent of term and thirty percent of preterm boys. Higher temperature impairs spermatogenesis and increases future malignancy risks.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-surg-undescended_testis.webp",
+    "alt": "Clinical examination diagram illustrating milking palpation technique along the inguinal canal for cryptorchidism.",
+    "caption": "Milking examination technique along the inguinal canal distinguishing retractile from undescended testes. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Clinical physical examination carefully distinguishes true undescended testes from hyperactive cremasteric retractile variants. While a retractile testis can be milked gently into the scrotal base where it remains temporarily, an undescended testis retracts immediately upon release. If spontaneous descent does not occur by six months, **surgical orchidopexy for cryptorchidism** is recommended between six and twelve months of age to preserve spermatogenesis.",
+   "say": "Differentiate retractile from true undescended testes using warm-hand milking examination. Perform orchidopexy between six and twelve months to preserve fertility.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Retractile Testis Features",
+     "points": [
+      "Exaggerated cremasteric reflex response",
+      "Can be milked fully to scrotal bottom",
+      "Remains in scrotum until cremaster re-contracts",
+      "Normal adult spermatogenesis; no surgery needed"
+     ]
+    },
+    "right": {
+     "title": "Surgical Orchidopexy Protocol",
+     "points": [
+      "Perform between 6 and 12 months of age",
+      "Mobilize spermatic cord and ligate patent processus",
+      "Anchor testis securely in dartos pouch",
+      "Enables testicular examination for malignancy surveillance"
+     ]
+    }
+   }
+  }
+ ]
+}

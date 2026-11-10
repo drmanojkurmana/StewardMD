@@ -1,0 +1,239 @@
+{
+  "v": 1,
+  "module": "phm-cytotoxic-anticancer",
+  "subject": "pharmacology",
+  "title": "Cytotoxic Anticancer VII: Etoposide and Irinotecan in Depth",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Etoposide** traps topoisomerase II on DNA after it has cut both strands, so replication forks collide with protein DNA complexes and shatter chromosomes, killing chiefly in late S and G2. Podophyllum resin supplied the parent scaffold; chemical editing turned a spindle poison into a topoisomerase poison, a genealogy worth knowing because teniposide and the parent compound behave differently at the bedside.",
+      "say": "Etoposide does not cut DNA itself; it handcuffs the enzyme that already cut it.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "cut",
+            "label": "Topoisomerase II cuts both DNA strands"
+          },
+          {
+            "id": "trap",
+            "label": "Etoposide traps the cleavage complex"
+          },
+          {
+            "id": "fork",
+            "label": "Replication fork collides and shatters chromosome"
+          },
+          {
+            "id": "death",
+            "label": "Double strand breaks trigger cell death"
+          }
+        ],
+        "edges": [
+          [
+            "cut",
+            "trap"
+          ],
+          [
+            "trap",
+            "fork"
+          ],
+          [
+            "fork",
+            "death"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Small cell lung cancer** is etoposide's home regimen: etoposide plus cisplatin or carboplatin (EP) for four to six cycles, concurrent with thoracic radiation in limited stage, where its marrow ceiling and platinum's kidney ceiling interlock without overlap. Prophylactic cranial irradiation debates and immunotherapy maintenance now surround the backbone without replacing it.",
+      "say": "EP is small cell lung cancer's skeleton; radiation and immunotherapy hang on it, not instead of it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "EP architecture",
+          "points": [
+            "Etoposide days 1 to 3 with platinum day 1",
+            "Limited stage: concurrent thoracic radiation",
+            "Extensive stage: chemo immunotherapy successors",
+            "Marrow and kidney ceilings non overlapping"
+          ]
+        },
+        "right": {
+          "title": "Around the backbone",
+          "points": [
+            "Prophylactic cranial irradiation in responders (debated)",
+            "Consolidation immunotherapy after chemoradiation",
+            "Second line topotecan or lurbinectedin territory",
+            "Growth factor support by febrile risk"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**BEP** (bleomycin, etoposide, cisplatin) cures most metastatic germ cell tumours, oncology's proof that cytotoxic combinations can cure solid cancer: three or four cycles by prognostic group, bleomycin lung monitoring and cisplatin kidney ear protection from earlier lessons converging, with tumour markers (AFP, hCG, LDH) falling as the response assay. Etoposide substitution (VIP regimens) answers bleomycin lung failure.",
+      "say": "BEP cures testicular cancer; markers falling are the chemotherapy working in numbers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "BEP components",
+          "points": [
+            "Bleomycin weekly (lung ledger)",
+            "Etoposide five days per cycle",
+            "Cisplatin five days with forced diuresis",
+            "Three versus four cycles by IGCCCG risk"
+          ]
+        },
+        "right": {
+          "title": "Response assays",
+          "points": [
+            "AFP and hCG half lives tracked",
+            "Residual masses resected or watched by histology rules",
+            "Bleomycin stopped for DLCO falls",
+            "Survivorship: fertility, lung, kidney, second malignancy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Oral etoposide** trades peak for persistence: daily low doses in relapsed ovarian, small cell and palliative settings exploit schedule dependence, billing prolonged marrow suppression and mucositis at cumulative exposures intravenous courses avoid. Capsule adherence, food effects and renal dose cuts (etoposide clears renally, halve at low clearances) make it a considered rather than gentle option.",
+      "say": "Oral etoposide is schedule pharmacology in a capsule, not a softer drug.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oral niches",
+          "points": [
+            "Relapsed small cell and ovarian palliation",
+            "Daily schedules over weeks",
+            "Schedule dependent kill exploited",
+            "Renal dose adjustment required"
+          ]
+        },
+        "right": {
+          "title": "Oral burdens",
+          "points": [
+            "Prolonged cumulative myelosuppression",
+            "Mucositis and alopecia continue",
+            "Variable bioavailability (about 50 percent)",
+            "Secondary leukaemia ledger unchanged"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Secondary leukaemia** after etoposide differs from alkylator leukaemia in tempo and genetics: balanced translocations at 11q23 (MLL) and 21q22, latency typically two to three years, often without a myelodysplastic prelude, dose and schedule related. Survivorship consent states it plainly alongside infertility, and cumulative etoposide dose is recorded with the same permanence as anthracycline dose.",
+      "say": "Etoposide leukaemia arrives in two to three years with 11q23; alkylator leukaemia takes longer by a different road.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Topo II leukaemia",
+          "points": [
+            "11q23 MLL and 21q22 translocations",
+            "Latency 2 to 3 years, no MDS prelude usually",
+            "Weekly and twice weekly schedules implicated",
+            "Anthracyclines share the mechanism class"
+          ]
+        },
+        "right": {
+          "title": "Alkylator leukaemia contrast",
+          "points": [
+            "Chromosome 5 and 7 deletions",
+            "Latency 5 to 7 years with dysplastic phase",
+            "Cumulative dose relationship",
+            "Consent distinguishes the two clocks"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Irinotecan** activation runs carboxylesterases to SN 38 (a thousand fold more potent), then UGT1A1 glucuronidation to inactive SN 38G excreted in bile, where bacterial beta glucuronidases reactivate it in the gut and author late diarrhoea. Antibiotics, loperamide timing and UGT genetics all act on this enterohepatic loop, making irinotecan the metabolism lesson with a chemotherapy badge.",
+      "say": "Gut bacteria resurrect SN 38 from bile; late diarrhoea is metabolism completing a circle.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "iri",
+            "label": "Irinotecan infused"
+          },
+          {
+            "id": "sn38",
+            "label": "Carboxylesterase activates to SN-38"
+          },
+          {
+            "id": "ugt",
+            "label": "UGT1A1 glucuronidates to SN-38G in bile"
+          },
+          {
+            "id": "gut",
+            "label": "Bacterial enzymes reactivate in gut: late diarrhoea"
+          }
+        ],
+        "edges": [
+          [
+            "iri",
+            "sn38"
+          ],
+          [
+            "sn38",
+            "ugt"
+          ],
+          [
+            "ugt",
+            "gut"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Topotecan** irinotecan's sibling, bills marrow almost alone (neutropenia and thrombocytopenia on daily times five schedules) in relapsed ovarian and small cell disease, while liposomal irinotecan extends pancreatic cancer survival after gemcitabine in NAPOLI regimens. Same topoisomerase, three personalities written by formulation and schedule, the recurring cytotoxic moral.",
+      "say": "One enzyme target, three drugs; formulation and schedule write the personality.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Topotecan",
+          "points": [
+            "Relapsed ovarian and small cell lung",
+            "Daily x 5 marrow ceiling",
+            "Renal dosing essential",
+            "Oral form for selected schedules"
+          ]
+        },
+        "right": {
+          "title": "Liposomal irinotecan",
+          "points": [
+            "Post gemcitabine pancreatic cancer (with 5 FU)",
+            "Prolonged SN-38 exposure by liposome",
+            "Diarrhoea and marrow persist",
+            "Not interchangeable mg for mg with conventional"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Infusion safety** give etoposide its administration rules: dilute adequately, infuse over at least 30 to 60 minutes (rapid pushes drop blood pressure), watch first doses, and respect solvent and filter instructions, while irinotecan's early cholinergic syndrome (cramps, sweating, diarrhoea during infusion) answers atropine and premedication on later cycles. Chair side pharmacology again, protocolised because it recurs.",
+      "say": "Slow the etoposide, atropinise the irinotecan gut; infusion speed is a drug property.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Etoposide administration",
+          "points": [
+            "Infuse 30 to 60 minutes minimum",
+            "Hypotension with rapid push",
+            "Concentration limits prevent precipitation",
+            "Hypersensitivity rare, observed first dose"
+          ]
+        },
+        "right": {
+          "title": "Irinotecan administration",
+          "points": [
+            "Early cholinergic syndrome: atropine ready",
+            "Premedicate antiemetic (moderate high risk)",
+            "Loperamide dispensed with teaching at discharge",
+            "Dose by UGT1A1 and bilirubin fences"
+          ]
+        }
+      }
+    }
+  ]
+}

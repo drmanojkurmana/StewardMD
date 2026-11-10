@@ -1,0 +1,142 @@
+{
+ "v": 1,
+ "id": "cm-vaccines-cold-chain-bcg",
+ "subject": "community-medicine",
+ "module": "cm-vaccines-cold-chain",
+ "title": "BCG Vaccine: Technique, Scar, Efficacy and Revaccination",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "A live vaccine from Calmette and Guerin",
+   "tx": "**BCG vaccine** is a live attenuated strain of Mycobacterium bovis, passaged by Calmette and Guerin until virulence fell while immunogenicity survived. It is freeze-dried, reconstituted with normal saline diluent, light and heat sensitive, and used within hours of reconstitution. One strain history explains its whole handling personality.",
+   "say": "A living vaccine with a famous pedigree. Attenuated bovine tuberculosis bacilli, freeze-dried, rebuilt with saline, fragile under light and heat, used within hours. Its live nature explains every handling rule that follows.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Property", "Consequence"],
+    "rows": [
+     ["Live attenuated M. bovis", "Avoid in major immunodeficiency"],
+     ["Freeze-dried presentation", "Reconstitute, use within hours"],
+     ["Light and heat sensitive", "Protect vial, discard leftovers"]
+    ]
+   }
+  },
+  {
+   "title": "Intradermal technique over the left deltoid",
+   "tx": "Correct **BCG technique** raises a bleb: 0.1 ml intradermally over the left deltoid insertion (0.05 ml below one month of age), bevel up, skin stretched, producing a raised wheal of about 5 mm. Too deep gives an abscess; too superficial leaks the dose. The left arm is universal convention so scars are sought in one place.",
+   "say": "Technique shows instantly. A five millimetre wheal over the left deltoid proves intradermal placement. Too deep breeds abscess, too shallow leaks away. The universal left arm lets any examiner find the evidence in one place.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-imm-bcg.webp",
+    "alt": "Intradermal BCG injection over the deltoid with the healing sequence from wheal through ulcer to permanent depressed scar.",
+    "caption": "Intradermal BCG technique and scar healing from wheal to depressed scar. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "From wheal to scar in weeks",
+   "tx": "The **BCG scar** evolves predictably: wheal absorbs in minutes, a papule appears at 2 to 3 weeks, ulcerates, discharges briefly, crusts and heals by 6 to 12 weeks into a permanent depressed scar. Parents warned of this sequence do not panic at the ulcer; parents unwarned apply home remedies and present with infected lesions instead.",
+   "say": "Warn parents about the calendar. Papule at two to three weeks, brief ulcer, crust, then a permanent depressed scar by three months. Forewarned families wait calmly; unwarned ones apply remedies and return with infected lesions.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Wheal at injection, minutes"},
+     {"id": "b", "label": "Papule at 2 to 3 weeks"},
+     {"id": "c", "label": "Ulcer and crusting"},
+     {"id": "d", "label": "Depressed scar by 6 to 12 weeks"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "What BCG protects, and what it does not",
+   "tx": "**BCG efficacy** is strongest and most consistent against severe childhood tuberculosis: miliary disease and tubercular meningitis in infants, the forms that kill and maim. Protection against adult pulmonary tuberculosis varies widely between trials and geographies. Teaching BCG as general tuberculosis prevention overpromises; teaching it as infant catastrophe prevention is accurate.",
+   "say": "Protection has a shape. Infant miliary tuberculosis and tubercular meningitis fall consistently; adult lung disease protection varies by trial and geography. Catastrophe prevention in infants is the accurate promise.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Consistent protection",
+     "points": ["Miliary tuberculosis in infants", "Tubercular meningitis in children", "Severe disseminated forms"]
+    },
+    "right": {
+     "title": "Variable protection",
+     "points": ["Adult pulmonary tuberculosis", "Trial results differ by geography", "No reliable transmission block"]
+    }
+   }
+  },
+  {
+   "title": "No scar: what to do",
+   "tx": "An **absent scar** after 3 months prompts review: was the dose truly intradermal, viable and in date? Policy commonly revaccinates a child with no scar and no record confidence, since repeat BCG is safe. A present scar, conversely, is accepted documentary evidence of vaccination when cards are lost, which is why examiners inspect the left deltoid.",
+   "say": "Missing scar, structured response. Check technique, viability and records; revaccinate where confidence fails, because repeating is safe. A present scar doubles as documentary proof when cards vanish, so inspect the left deltoid.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Finding", "Action"],
+    "rows": [
+     ["Scar present, card lost", "Accept as vaccinated evidence"],
+     ["No scar at 3 months, record doubtful", "Revaccinate"],
+     ["Large ulcer or abscess", "Evaluate technique and infection"]
+    ]
+   }
+  },
+  {
+   "title": "Adverse events: nodes, ulcers, dissemination",
+   "tx": "**BCG adverse events** include prolonged ulceration, suppurative lymphadenitis (classically ipsilateral axillary nodes), keloid scarring commoner in Asian and African populations, and rarely osteitis. Disseminated BCG disease signals underlying immunodeficiency such as severe combined immunodeficiency and demands urgent evaluation, converting a vaccine event into a diagnostic clue.",
+   "say": "Reactions grade from nuisance to warning. Persistent ulcers, suppurative armpit nodes and keloids stay local. Disseminated BCG disease accuses the immune system itself and demands urgent evaluation, vaccine event turned diagnostic clue.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Event", "Reading"],
+    "rows": [
+     ["Suppurative axillary lymphadenitis", "Usually local, observe or aspirate"],
+     ["Keloid scar", "Commoner in Asian and African skin"],
+     ["Disseminated BCG disease", "Suspect major immunodeficiency"]
+    ]
+   }
+  },
+  {
+   "title": "Who must not receive BCG",
+   "tx": "**Contraindications** centre on cellular immunodeficiency: symptomatic HIV infection in older guidance, severe combined immunodeficiency, and immunosuppressive therapy, where live bacilli can disseminate. Asymptomatic HIV-exposed infants in high-burden settings follow current national guidance balancing tuberculosis risk. Pregnancy avoids live vaccines generally, though BCG is an infant vaccine in practice.",
+   "say": "Live bacilli need competent cellular immunity. Symptomatic immune deficiency and suppressive therapy forbid the vaccine. Exposed but well infants follow current national balancing of tuberculosis risk. The principle outlives any single guideline edition.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Give BCG",
+     "points": ["Healthy newborn at birth", "Up to one year if missed", "No scar and doubtful record"]
+    },
+    "right": {
+     "title": "Withhold BCG",
+     "points": ["Severe cellular immunodeficiency", "Immunosuppressive therapy", "Disseminated BCG history in family, evaluate first"]
+    }
+   }
+  },
+  {
+   "title": "Tuberculin conversion and waning",
+   "tx": "**Tuberculin sensitivity** follows BCG within weeks, complicating later Mantoux interpretation in vaccinated populations, one cost of universal infant vaccination. Protection wanes over 10 to 15 years in most readings, yet routine revaccination of schoolchildren was abandoned where trials showed no added benefit. Scar reading therefore certifies infancy vaccination, not lifelong immunity.",
+   "say": "Vaccination echoes in skin tests for years, complicating Mantoux reading, and protection wanes across a decade or more. Routine school revaccination died for lack of added benefit. A scar certifies an infant dose, not lifelong armour.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "BCG at birth"},
+     {"id": "b", "label": "Tuberculin conversion in weeks"},
+     {"id": "c", "label": "Protection strongest in childhood"},
+     {"id": "d", "label": "Waning over 10 to 15 years"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "BCG in the schedule: timing rules",
+   "tx": "**Timing** gives BCG at birth or first contact, up to one year of age in the national schedule, alongside OPV zero and hepatitis B birth doses at separate sites. Given with other live vaccines the same day it needs no spacing; given apart from another live parenteral vaccine, the live-vaccine interval rule applies. Birth timing exploits the window before environmental mycobacteria and tuberculosis exposure accumulate.",
+   "say": "Birth or first contact, up to one year, beside polio drops and hepatitis B at separate sites. Same-day live companions need no spacing. Early timing beats accumulating environmental exposure, the schedule's quiet logic.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Question", "Answer"],
+    "rows": [
+     ["Latest routine age", "Up to one year of age"],
+     ["Companions at birth", "OPV-0 and hepatitis B birth dose"],
+     ["Site when combined", "BCG left arm, others separate sites"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

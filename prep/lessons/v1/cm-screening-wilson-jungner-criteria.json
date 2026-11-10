@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "id": "cm-screening-wilson-jungner-criteria",
+ "subject": "community-medicine",
+ "module": "cm-screening",
+ "title": "Wilson and Jungner Criteria: When Screening Is Worth Doing",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The disease must matter and hide",
+   "tx": "The **Wilson and Jungner criteria** first demand an important health problem with reasonably high prevalence, plus a recognisable latent or early asymptomatic stage. Without a silent stage there is nothing to find early; without importance there is no case for spending. Natural history, including where reversibility ends, must be adequately understood before anyone is invited.",
+   "say": "First gate: importance plus hiding. The condition must matter, occur often enough, and pass through a recognisable silent stage. Its natural history, including where reversibility ends, must be understood before invitations go out.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Disease criterion", "Why it gates"],
+    "rows": [
+     ["Important health problem", "Justifies programme spending"],
+     ["Recognisable latent stage", "Gives screening something to find"],
+     ["Natural history understood", "Marks where reversibility ends"]
+    ]
+   }
+  },
+  {
+   "title": "A test must exist before symptoms",
+   "tx": "There must be a **test that detects** the disease before signs and symptoms, satisfying acceptability, repeatability and validity, with facilities available to confirm the diagnosis. A screening test without diagnostic backup strands positives in anxiety. Simplicity, safety, rapidity, ease of administration and cost complete the test side of the checklist.",
+   "say": "Second gate: a usable test plus backup. Detection before symptoms, acceptable and repeatable, with confirmatory facilities waiting for positives. Stranding positives without diagnosis converts a programme into an anxiety machine.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Test requirements",
+     "points": ["Detects disease before symptoms", "Acceptable, repeatable, valid", "Simple, safe, rapid, affordable"]
+    },
+    "right": {
+     "title": "System requirements",
+     "points": ["Confirmation facilities exist", "Positives get full work-up", "No one stranded after screening"]
+    }
+   }
+  },
+  {
+   "title": "Treatment and an agreed policy on whom to treat",
+   "tx": "An **effective treatment** must exist, with an agreed policy on whom to treat as patients, the borderline problem in writing: which lower blood pressures, which borderline glucose values count. Detecting what cannot be treated, or what services cannot agree to treat, fails the criteria however elegant the test may be.",
+   "say": "Third gate: treatment plus agreement. Effective therapy must exist, and services must already agree which borderline values count as patients. Elegant detection without agreed treatment fails the checklist outright.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Requirement", "Borderline example"],
+    "rows": [
+     ["Effective treatment available", "Antihypertensives change outcomes"],
+     ["Agreed treatment threshold", "Which blood pressure level starts drugs"],
+     ["Evidence early beats late", "Morbidity and mortality reduced"]
+    ]
+   }
+  },
+  {
+   "title": "Benefits must exceed risks and costs",
+   "tx": "**Expected benefits** of early detection, in lives saved and suffering avoided, must exceed the risks and costs of the whole programme, including false positive work-ups and overdiagnosis. Good evidence that early detection and treatment reduces morbidity and mortality is demanded, not assumed from biological enthusiasm. This economic clause kills more proposals than any laboratory flaw.",
+   "say": "Fourth gate: arithmetic. Lives saved must outweigh harms and costs, including false alarm work-ups and overdiagnosis, on evidence rather than enthusiasm. More proposals die on this clause than on any laboratory flaw.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Lives saved by early treatment"},
+     {"id": "b", "label": "Suffering avoided counted"},
+     {"id": "c", "label": "Harms and costs subtracted"},
+     {"id": "d", "label": "Net benefit must stay positive"}
+    ],
+    "edges": [["a", "c"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Cervical screening through the VIA image",
+   "tx": "**Visual inspection with acetic acid** screens for cervical cancer where cytology services are thin: dilute acetic acid turns precancerous areas white on the cervix, visible to a trained provider in one visit. It satisfies the checklist imperfectly but practically: important disease, latent stage, cheap rapid test, and treatment of precancer by ablation at the same visit where protocols allow.",
+   "say": "Watch criteria become practice. Acetic acid whitens precancerous cervix in one visit, cheaply, where cytology is thin. Important disease, silent stage, rapid test, same visit ablation where allowed: an imperfect test passing a practical checklist.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-exam-obg-via_screening.webp",
+    "alt": "Cervix shown before and after application of acetic acid, with a white acetowhite area marking precancerous change for visual inspection screening.",
+    "caption": "Visual inspection with acetic acid: acetowhite precancerous area on the cervix. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Applying the checklist to diabetes",
+   "tx": "**Diabetes screening** passes most gates: important and prevalent, long latent hyperglycaemia, understood natural history, cheap glucose testing, effective treatment, and evidence that control prevents complications. Its borderline dispute is the treatment threshold for early values, and its yield argument favours selective screening of older and high-risk adults over whole population sweeps.",
+   "say": "Run diabetes through the gates. Important, prevalent, silently latent for years, cheaply tested, effectively treated. The live disputes are treatment thresholds for borderline values and targeting: older high-risk adults yield far more than whole population sweeps.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Criterion", "Diabetes verdict"],
+    "rows": [
+     ["Important, prevalent, latent stage", "Passes clearly"],
+     ["Test before symptoms", "Glucose testing passes"],
+     ["Treatment changes outcome", "Passes, complications prevented"],
+     ["Best targeting", "Selective, older and high-risk adults"]
+    ]
+   }
+  },
+  {
+   "title": "Where candidate programmes fail",
+   "tx": "Programmes fail predictably: **no effective treatment** for what the test finds, no latent stage to exploit, confirmation facilities absent, or harms exceeding benefits at low prevalence. Each failure maps to one checklist line, which is why examiners present a flawed proposal and ask which criterion it violates rather than whether screening sounds good.",
+   "say": "Failures repeat by line. Nothing treatable found, no silent stage, no confirmation backup, or harms swamping benefits at low prevalence. Stems describe one flaw; your job is naming the violated criterion, not judging enthusiasm.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Proposal flaw",
+     "points": ["Test finds untreatable disease", "Disease declares itself obviously", "No confirmation facilities exist"]
+    },
+    "right": {
+     "title": "Criterion violated",
+     "points": ["Effective treatment required", "Latent stage required", "Diagnostic backup required"]
+    }
+   }
+  },
+  {
+   "title": "Integration, consent and honest risk talk",
+   "tx": "**Integration into existing services** closes the checklist in practice: screening built apart from routine care collapses when grants end. Participants must hear the risks, including false positives, false negatives and procedural complications, before consenting. People at highest risk attend least, so invitation design is part of the intervention, not administration.",
+   "say": "Programmes live inside services or die beside them. Standalone screening collapses when funding ends. Participants deserve warning about false results and procedural risks beforehand, and invitation design matters because highest risk attends least.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Practical duty", "Reason"],
+    "rows": [
+     ["Integrate with routine services", "Survives after project funding"],
+     ["Explain false result risks", "Honest consent before testing"],
+     ["Design invitations actively", "Highest risk attends least"]
+    ]
+   }
+  },
+  {
+   "title": "The checklist as an exam instrument",
+   "tx": "Quote the **criteria** in two families on paper: disease side (important, latent stage, understood history, test exists, facilities, treatment, agreed policy, proven early benefit, net benefit) and test side (acceptable, repeatable, valid, high yield, simple, safe, rapid, cheap). Splitting an answer this way collects marks even when the stem's disease is unfamiliar.",
+   "say": "Structure answers in two families. Disease side: importance, latent stage, understood history, treatment, agreed policy, proven net benefit. Test side: acceptable, repeatable, valid, simple, safe, rapid, cheap. Unfamiliar diseases still yield marks under that scaffold.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Disease criteria satisfied"},
+     {"id": "b", "label": "Test criteria satisfied"},
+     {"id": "c", "label": "Facilities and policy ready"},
+     {"id": "d", "label": "Programme worth starting"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  }
+ ],
+ "quiz": []
+}

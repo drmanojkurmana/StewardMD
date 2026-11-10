@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "id": "cm-vaccines-cold-chain-measles-mr-vaccine",
+ "subject": "community-medicine",
+ "module": "cm-vaccines-cold-chain",
+ "title": "Measles and MR Vaccine: Timing, Efficacy and Elimination Strategy",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Why measles still commands a programme",
+   "tx": "**Measles** spreads so efficiently (secondary attack rates near 90 percent in susceptible households) that coverage below the mid-90s percent invites outbreaks. Koplik spots inside the cheek announce it before the rash, in the prodrome when isolation advice matters most. Pneumonia, diarrhoea and encephalitis make it a killer where nutrition is poor.",
+   "say": "Few diseases spread faster. Koplik spots inside the cheek precede the rash, and pneumonia, diarrhoea and encephalitis kill where nutrition fails. Coverage slipping below the mid nineties invites outbreaks back.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/measles-fig1.webp",
+    "alt": "Koplik spots on the buccal mucosa in the prodromal stage of measles, before the generalised rash appears.",
+    "caption": "Koplik spots of measles on the inner cheek in the prodrome. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Nine months: the maternal antibody compromise",
+   "tx": "**Nine completed months** balances two losses: vaccinate earlier and persisting maternal antibody neutralises the live vaccine in many infants; vaccinate later and wild measles strikes the unprotected interval. Seroconversion after one dose reaches 95 to 98 percent at this age in programme teaching. The second dose at 16 to 24 months immunises the remainder, not a booster in the classic sense.",
+   "say": "Timing trades two losses. Earlier, maternal antibody blocks the vaccine; later, wild measles fills the gap. Nine months optimises the exchange, converting ninety five to ninety eight percent. Dose two catches the remainder rather than boosting.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vaccinate too early",
+     "points": ["Maternal antibody neutralises vaccine", "Primary vaccine failure commoner", "False sense of protection"]
+    },
+    "right": {
+     "title": "Vaccinate too late",
+     "points": ["Wild measles strikes first", "Infant deaths in the gap", "Outbreak fuel accumulates"]
+    }
+   }
+  },
+  {
+   "title": "MR: rubella rides along",
+   "tx": "The **measles-rubella vaccine** adds rubella protection to prevent congenital rubella syndrome: cataract, cardiac malformations and deafness after first-trimester infection. Rubella itself is mild; its teratogenicity is the entire indication. Wide childhood MR coverage indirectly protects pregnant women by shrinking virus circulation around them.",
+   "say": "Rubella rides along for its fetal damage. Mild in children, catastrophic in the first trimester: cataracts, heart defects, deafness. Childhood coverage protects pregnant women indirectly by shrinking circulation around them.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Component", "Catastrophe prevented"],
+    "rows": [
+     ["Measles antigen", "Pneumonia, encephalitis, measles deaths"],
+     ["Rubella antigen", "Congenital rubella syndrome"],
+     ["Given at", "9 to 12 months and 16 to 24 months"]
+    ]
+   }
+  },
+  {
+   "title": "Administration and handling",
+   "tx": "**MR vaccine** is live, freeze-dried, reconstituted and given 0.5 ml subcutaneously in the right upper arm, used within hours and protected from light. It is excluded from the open vial policy's 28-day reuse: reconstituted vials die at session end (measles-containing vials within hours per session rules). Anaphylaxis readiness and correct diluent, never substitutes, complete the discipline.",
+   "say": "Live and freeze-dried means fragile. Half a millilitre under the right arm skin, correct diluent only, used within hours, never saved under the open vial policy. Light protection and adrenaline readiness complete the discipline.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Reconstitute with supplied diluent"},
+     {"id": "b", "label": "0.5 ml subcutaneous, right arm"},
+     {"id": "c", "label": "Use within session hours"},
+     {"id": "d", "label": "Discard remainder, no reuse"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Reactions: a mild measles echo",
+   "tx": "**Vaccine reactions** mimic miniature measles: fever, mild rash or conjunctivitis in 5 to 15 percent of recipients about a week later, from vaccine virus infection itself, far milder than wild disease. Febrile seizures and thrombocytopenia are rare; encephalopathy attribution remains unproven in programme teaching. Subacute sclerosing panencephalitis follows wild measles, and vaccination prevents it by preventing measles.",
+   "say": "Expect a miniature measles echo in a minority: fever and faint rash a week later, vastly milder than wild disease. Rare seizures and platelet falls occur. The dreaded late brain disease follows wild measles, which vaccination prevents.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Reaction", "Frequency or note"],
+    "rows": [
+     ["Fever, mild rash, conjunctivitis", "5 to 15 percent of vaccinees"],
+     ["Febrile seizure", "Rare, recovers fully usually"],
+     ["Thrombocytopenia", "Rare and transient"],
+     ["SSPE", "Follows wild measles, vaccine prevents it"]
+    ]
+   }
+  },
+  {
+   "title": "Contraindications and the immunocompromised",
+   "tx": "**Live vaccine cautions** apply: pregnancy, severe immunodeficiency and anaphylaxis to components defer or forbid MR vaccine. Egg allergy, once feared, does not contraindicate measles-containing vaccines grown in chick embryo fibroblasts with negligible ovalbumin. Severely immunocompromised children risk vaccine-virus disease, the group for whom herd protection must substitute.",
+   "say": "Cautions follow live vaccine logic. Pregnancy, severe immune deficiency and component anaphylaxis bar it. Egg allergy does not, a myth worth marks. The immunocompromised depend on everyone else's coverage instead.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Do not vaccinate",
+     "points": ["Pregnancy", "Severe immunodeficiency", "Anaphylaxis to a component"]
+    },
+    "right": {
+     "title": "Vaccinate anyway",
+     "points": ["Egg allergy", "Mild illness or malnutrition", "Breastfeeding by mother or child"]
+    }
+   }
+  },
+  {
+   "title": "Elimination targets and the 95 percent logic",
+   "tx": "**Elimination strategy** demands two-dose coverage at or above 95 percent nationally and in every district, because measles exploits the last susceptible pockets with the highest herd threshold among UIP diseases. Global milestones paired 90 percent first-dose coverage, incidence under 5 per million and 95 percent mortality reduction against 2000 levels. District-level, not national, averages decide success.",
+   "say": "Measles sets the hardest threshold. Two doses at ninety five percent in every district, not national averages, because the virus finds the last pockets. Global milestones paired coverage, incidence and mortality targets together.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Target", "Level demanded"],
+    "rows": [
+     ["First dose coverage", "90 percent or more nationally"],
+     ["District coverage", "80 percent minimum, 95 elimination goal"],
+     ["Incidence milestone", "Under 5 cases per million"]
+    ]
+   }
+  },
+  {
+   "title": "Campaigns, catch-up and outbreak response",
+   "tx": "**Supplementary immunization activities** sweep wide age bands to close accumulated immunity gaps faster than routine services can, followed by periodic follow-up campaigns for each new birth cohort. Outbreak response immunisation rings affected areas quickly. Campaigns supplement, never substitute, routine systems; programmes that campaign without routine repair re-fill the same gap every cycle.",
+   "say": "Campaigns close gaps routines cannot. Wide age sweeps, then periodic follow-ups for new cohorts, plus rapid outbreak rings. They supplement routine systems; campaigning over broken routines refills the same gap forever.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Immunity gap identified by data"},
+     {"id": "b", "label": "Wide age-band campaign"},
+     {"id": "c", "label": "Routine system repaired meanwhile"},
+     {"id": "d", "label": "Follow-up campaigns per cohort"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Vitamin A travels with measles control",
+   "tx": "**Vitamin A supplementation** pairs with measles contacts and doses at 9 months (1 ml, 1 lakh IU) then 2 ml six-monthly to age five, because deficiency converts measles into a blinding, killing disease. Therapeutic high-dose vitamin A in acute measles cuts mortality in deficient populations, making the measles visit a combined intervention examiners love to combine in stems.",
+   "say": "Vitamin A rides the measles platform. One lakh units at nine months, double thereafter six-monthly to age five. Deficiency turns measles blinding and lethal; therapeutic doses in acute measles save lives where deficiency rules.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Contact", "Vitamin A dose"],
+    "rows": [
+     ["At 9 months with MR-1", "1 ml, 1 lakh IU oral"],
+     ["16 to 18 months onward", "2 ml, 2 lakh IU oral"],
+     ["Interval thereafter", "Every 6 months to age 5"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

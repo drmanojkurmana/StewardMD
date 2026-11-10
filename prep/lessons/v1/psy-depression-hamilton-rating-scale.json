@@ -1,0 +1,262 @@
+{
+ "v": 1,
+ "id": "psy-depression-hamilton-rating-scale",
+ "subject": "psychiatry",
+ "module": "psy-depression",
+ "title": "Depression Rating Scales and Treatment-Resistant Depression",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Hamilton Rating Scale for Depression**, abbreviated HAM-D, is a clinician-administered 17-item rating instrument utilized as the international reference standard in clinical trials to quantify depressive symptom severity. Clinicians score items through direct interview and observation, yielding a cumulative score ranging from zero to 52.",
+   "say": "The seventeen-item Hamilton Depression Rating Scale is the gold standard clinician-administered tool for measuring depression severity in clinical trials.",
+   "vis": {
+    "kind": "table",
+    "title": "HAM-D 17 Severity Stratification",
+    "cols": [
+     "Score Range",
+     "Severity Category",
+     "Clinical Response Benchmark"
+    ],
+    "rows": [
+     [
+      "0 - 7",
+      "Normal / Euthymic",
+      "Full clinical remission target in trials"
+     ],
+     [
+      "8 - 13",
+      "Mild depression",
+      "Subthreshold or residual depressive features"
+     ],
+     [
+      "14 - 18",
+      "Moderate depression",
+      "Standard threshold for starting pharmacotherapy"
+     ],
+     [
+      "19 - 22",
+      "Severe depression",
+      "High symptom burden requiring intensive intervention"
+     ],
+     [
+      ">= 23",
+      "Very severe depression",
+      "Evaluate hospitalization and electroconvulsive therapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Treatment response and remission benchmarks** in clinical trials define therapeutic response as a minimum 50 percent reduction in baseline HAM-D score following therapeutic antidepressant intervention. Clinical remission requires achieving an absolute HAM-D score of seven or lower, reflecting complete restoration of psychological wellbeing.",
+   "say": "Clinical response requires at least a fifty percent reduction in HAM-D score. Complete remission is defined by an absolute score of seven or below.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Response",
+     "points": [
+      "Fifty percent reduction from baseline score",
+      "Clinically meaningful symptom improvement",
+      "Residual symptoms may persist",
+      "Relapse risk remains elevated"
+     ]
+    },
+    "right": {
+     "title": "Clinical Remission",
+     "points": [
+      "Absolute HAM-D score of seven or lower",
+      "Virtual absence of depressive symptoms",
+      "Restoration of psychosocial function",
+      "Substantially lower long-term relapse risk"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Selective serotonin reuptake inhibitors** serve as first-line pharmacological treatment for major depression due to superior safety, tolerability, and low toxicity in overdose compared to tricyclics. Common first-line agents include escitalopram, sertraline, and fluoxetine, which block the presynaptic serotonin transporter protein SERT to enhance synaptic serotonin.",
+   "say": "Selective serotonin reuptake inhibitors are first-line antidepressants with favorable safety profiles. They elevate synaptic serotonin by inhibiting the SERT transporter.",
+   "vis": {
+    "kind": "table",
+    "title": "First-Line SSRI Pharmacokinetics",
+    "cols": [
+     "Agent",
+     "Daily Dose Range",
+     "Distinguishing Pharmacological Feature"
+    ],
+    "rows": [
+     [
+      "Escitalopram",
+      "10 - 20 mg",
+      "Purest SERT selectivity with minimal CYP interactions"
+     ],
+     [
+      "Sertraline",
+      "50 - 200 mg",
+      "Preferred in post-myocardial infarction cardiac patients"
+     ],
+     [
+      "Fluoxetine",
+      "20 - 60 mg",
+      "Longest half-life due to active metabolite norfluoxetine"
+     ],
+     [
+      "Paroxetine",
+      "20 - 50 mg",
+      "Most potent anticholinergic & highest discontinuation risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Adverse effects of SSRIs** commonly include transient nausea, diarrhea, headaches, insomnia, and tremors during the initial two weeks of initiation. Persistent side effects encompass sexual dysfunction, including delayed ejaculation and anorgasmia in over 40 percent of patients, alongside risk of hyponatraemia due to SIADH.",
+   "say": "SSRIs cause transient gastrointestinal upset and headaches early on. Sexual dysfunction persists in many patients, and elderly individuals carry a risk of hyponatremia.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Transient Effects",
+     "points": [
+      "Nausea and loose stools (5-HT3 activation)",
+      "Mild insomnia and motor restlessness",
+      "Tension headache and diaphoresis",
+      "Resolves spontaneously within fourteen days"
+     ]
+    },
+    "right": {
+     "title": "Long-Term Adverse Effects",
+     "points": [
+      "Erectile dysfunction and anorgasmia",
+      "Blunted emotional reactivity",
+      "SIADH-induced hyponatraemia in elderly",
+      "Increased bleeding risk via platelet inhibition"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Treatment-resistant depression** is formally defined as failure to achieve clinical remission despite at least two consecutive trials of different antidepressant classes administered at therapeutic doses for adequate durations of 6 to 8 weeks. Clinicians must first verify medication adherence and rule out occult hypothyroidism, substance abuse, or bipolarity.",
+   "say": "Treatment resistance is defined as failing two consecutive trials of different antidepressant classes for six to eight weeks each at therapeutic dosing.",
+   "vis": {
+    "kind": "flow",
+    "title": "Treatment-Resistant Depression Workup",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Confirm diagnosis, medication adherence, & exclude pseudoresistance"
+     },
+     {
+      "id": "n2",
+      "label": "Screen for occult medical causes: TSH, B12, sleep apnoea"
+     },
+     {
+      "id": "n3",
+      "label": "Switch to alternative class (SNRI, bupropion, or vortioxetine)"
+     },
+     {
+      "id": "n4",
+      "label": "Augment with lithium, atypical antipsychotic, or thyroid T3"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Augmentation strategies in resistant depression** include adding lithium targeting a serum concentration of 0.6 to 0.8 mEq/L, or adding low-dose atypical antipsychotics such as aripiprazole or quetiapine. Other evidence-based options encompass thyroid hormone liothyronine supplementation, esketamine nasal spray, or switching to the dual-action agent venlafaxine.",
+   "say": "Augmentation options include lithium, low-dose aripiprazole, quetiapine, or liothyronine. Esketamine nasal spray provides rapid relief in resistant illness.",
+   "vis": {
+    "kind": "table",
+    "title": "Evidence-Based Augmentation Regimens",
+    "cols": [
+     "Regimen",
+     "Mechanism",
+     "Target Dose / Serum Level"
+    ],
+    "rows": [
+     [
+      "Lithium carbonate",
+      "GSK-3 inhibition & inositol depletion",
+      "0.6 - 0.8 mEq/L trough level"
+     ],
+     [
+      "Aripiprazole",
+      "D2 partial agonism & 5-HT1A activation",
+      "2 - 10 mg once daily"
+     ],
+     [
+      "Quetiapine",
+      "5-HT2A antagonism & norquetiapine NET block",
+      "150 - 300 mg daily (XR form)"
+     ],
+     [
+      "Liothyronine (T3)",
+      "Thyroid nuclear receptor transcription",
+      "25 - 50 mcg once daily"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Electroconvulsive therapy indications** identify ECT as the most rapidly effective intervention for severe treatment-resistant depression, severe psychotic depression, catatonic stupor, and acute life-threatening suicidality. Therapeutic efficacy consistently exceeds 80 percent, far surpassing pharmacological augmentation options in emergency psychiatric presentations where rapid clinical response is life-saving.",
+   "say": "Electroconvulsive therapy is the most effective intervention for severe depression, psychotic depression, catatonia, and acute life-threatening suicidality.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Indications for ECT",
+     "points": [
+      "Immediate high suicide risk and lethal intent",
+      "Severe psychotic depression with food refusal",
+      "Catatonic stupor and mutism",
+      "Multidrug treatment-resistant depression"
+     ]
+    },
+    "right": {
+     "title": "Clinical Efficacy Profile",
+     "points": [
+      "Response rate exceeds seventy to eighty percent",
+      "Rapid clinical onset within two to three sessions",
+      "Bilateral electrode placement yields fastest response",
+      "Right unilateral placement minimizes memory deficits"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Absolute contraindications to ECT** do not exist, though significantly elevated intracranial pressure carries life-threatening risk of cerebral tentorial herniation due to transient intracerebral pressure spikes during seizure induction. Recent myocardial infarction within three months, unstable cerebral aneurysms, and acute retinal detachment require meticulous cardiovascular stabilization.",
+   "say": "Raised intracranial pressure is a critical contraindication risking brain herniation. Recent myocardial infarction and cerebral aneurysms require careful medical clearance.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "High-Risk Medical Conditions",
+     "points": [
+      "Elevated intracranial pressure & space-occupying lesions",
+      "Recent myocardial infarction within three months",
+      "Unclipped intracranial cerebral aneurysm",
+      "Recent retinal detachment or unstable glaucoma"
+     ]
+    },
+    "right": {
+     "title": "Safety & Anaesthesia Regimen",
+     "points": [
+      "Pre-procedure fundoscopy to exclude papilloedema",
+      "Intravenous induction with propofol or methohexital",
+      "Muscle relaxation using succinylcholine",
+      "Pre-oxygenation with one hundred percent oxygen"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

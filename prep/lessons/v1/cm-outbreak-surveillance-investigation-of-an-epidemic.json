@@ -1,0 +1,143 @@
+{
+ "v": 1,
+ "id": "cm-outbreak-surveillance-investigation-of-an-epidemic",
+ "subject": "community-medicine",
+ "module": "cm-outbreak-surveillance",
+ "title": "Investigation of an Epidemic: Ten Steps and Surveillance",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Step one and two: verify, then confirm",
+   "tx": "**Verification of diagnosis** opens every investigation: confirm the reported disease is what it claims to be, clinically and in the laboratory where possible. Confirmation of an epidemic follows by comparing observed cases with the usual expectancy for that population and season. Skipping verification wastes a full investigation on rumour, changed reporting or a new diagnostic fashion.",
+   "say": "Verify before mobilising. Confirm the diagnosis is real, then confirm cases exceed usual expectancy for that place and season. Rumour, better reporting and new diagnostic fashion fake epidemics regularly; two cheap steps expose them.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Step", "Question settled"],
+    "rows": [
+     ["1. Verification of diagnosis", "Is this disease really present?"],
+     ["2. Confirmation of epidemic", "Do cases exceed normal expectancy?"],
+     ["3. Defining population at risk", "Who could have been exposed?"]
+    ]
+   }
+  },
+  {
+   "title": "The ten-step framework in one view",
+   "tx": "The panel lays out the **ten steps of outbreak investigation** beside epidemic curves and attack rates: verify, confirm, define the population at risk, search rapidly for cases, analyse by time place and person, formulate and test a hypothesis, evaluate ecological factors, investigate further, and write the report. Control measures run alongside, never after, the sequence.",
+   "say": "See the whole framework at once. Ten steps from verification to written report, with curves and attack rates as working tools. Control runs alongside the sequence from the first day, never politely after it.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/sid-outbreaks-fig1.webp",
+    "alt": "Outbreak investigation panel listing the ten investigation steps beside epidemic curve shapes and attack rate calculation.",
+    "caption": "Ten steps of outbreak investigation with epidemic curves and attack rate. Credit: StewardMD.",
+    "ar": 1.33
+   }
+  },
+  {
+   "title": "Rapid case search builds the line list",
+   "tx": "A **rapid search for all cases** uses a case definition applied house to house, in hospitals and through informants, recording age, sex, onset time, residence, exposures and outcome for each case. This line list becomes the dataset for every later calculation. Cases found late through routine reports alone undercount the early, mild and hidden parts of the outbreak.",
+   "say": "Hunt cases actively, not passively. One case definition, applied door to door and through hospitals and informants, builds the line list: onset, residence, exposures, outcome. Routine reports alone miss early, mild and hidden cases.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Case definition fixed"},
+     {"id": "b", "label": "House and hospital search"},
+     {"id": "c", "label": "Line list completed"},
+     {"id": "d", "label": "Analysis by time, place, person"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Analysis, hypothesis, testing",
+   "tx": "**Data analysis** converts the line list into an epidemic curve, spot map and attack rates by exposure, from which a hypothesis naming source, vehicle and mode of spread is formulated. Testing compares attack rates between exposed and unexposed, or cases with controls. Ecological evaluation then asks what environmental change permitted the event at all.",
+   "say": "Counts become a claim. Curve, map and exposure-specific attack rates suggest source, vehicle and spread mode. Testing compares exposed with unexposed rates. Ecological review asks what changed in the environment to permit the event.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Analysis product", "Hypothesis it feeds"],
+    "rows": [
+     ["Epidemic curve", "Point source or propagated spread"],
+     ["Spot map", "Where exposure happened"],
+     ["Attack rates by food or water source", "Which vehicle carried it"]
+    ]
+   }
+  },
+  {
+   "title": "Control runs parallel, report closes",
+   "tx": "**Control measures** start on suspicion, not on proof: safe water, isolation of cases, food withdrawal or vector attack proceed while hypothesis testing continues. The written report ends the investigation with background, methods, analysis, control and preventive recommendations, so the next district inherits lessons instead of repeating the emergency.",
+   "say": "Act on suspicion, document for successors. Safe water, isolation, food withdrawal or vector attack proceed while testing continues. The final report packages background, methods, findings and prevention so the next district inherits lessons, not chaos.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "During investigation",
+     "points": ["Control on suspicion immediately", "Hypothesis testing continues", "Further population study if needed"]
+    },
+    "right": {
+     "title": "At closure",
+     "points": ["Written report completed", "Preventive measures recommended", "Surveillance tightened afterwards"]
+    }
+   }
+  },
+  {
+   "title": "Surveillance: ongoing, systematic, acted upon",
+   "tx": "**Surveillance** is the continuous, systematic collection, analysis, interpretation and dissemination of health data for action, distinct from one-off surveys and from research. Its loop only closes when findings reach those who can act and action follows. Data collected without feedback to peripheral workers decays into ritual reporting within a few cycles.",
+   "say": "Surveillance never sleeps and must end in action. Continuous systematic data, analysed, interpreted and disseminated to people who can act. Feedback to the periphery keeps it alive; silent collection decays into ritual reporting.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Continuous data collection"},
+     {"id": "b", "label": "Analysis and interpretation"},
+     {"id": "c", "label": "Dissemination to actors"},
+     {"id": "d", "label": "Action and feedback"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Sentinel, active and passive surveillance",
+   "tx": "**Sentinel surveillance** watches selected high-quality sites to signal trends cheaply, accepting that rates cannot be generalised exactly. Active surveillance sends workers to find cases, raising completeness at cost; passive surveillance waits for routine reports, cheap but incomplete. Epidemic-prone diseases justify active searching during alerts despite the expense.",
+   "say": "Three intensities, three prices. Sentinel sites signal trends cheaply without exact rates. Active searching finds cases completely at cost. Passive reporting waits cheaply and misses much. Epidemic alerts justify paying for active search.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Type", "Trade-off"],
+    "rows": [
+     ["Passive", "Cheap, incomplete, routine reports"],
+     ["Active", "Complete, expensive, workers search"],
+     ["Sentinel", "Cheap trend signal, no exact rates"]
+    ]
+   }
+  },
+  {
+   "title": "Isolation separates the infectious",
+   "tx": "**Isolation** separates infected persons for their period of communicability, in places and under conditions preventing transmission to susceptibles: until lesions crust in chickenpox (about 6 days after rash), through the third day of rash in measles, and for 3 weeks in sputum-positive tuberculosis on effective chemotherapy in the classic table. Hospital isolation beats home isolation where feasible.",
+   "say": "Isolation holds the infectious. Durations follow communicability: chickenpox until lesions crust, measles through the third rash day, tuberculosis for weeks on effective therapy in the classic table. Hospital beats home where feasible.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Disease", "Isolation guide"],
+    "rows": [
+     ["Chickenpox", "Until all lesions crusted, about 6 days"],
+     ["Measles", "Catarrhal stage through 3rd day of rash"],
+     ["Mumps", "Until swelling subsides"],
+     ["Pertussis", "4 weeks or until paroxysms cease"]
+    ]
+   }
+  },
+  {
+   "title": "Quarantine restricts the exposed healthy",
+   "tx": "**Quarantine** limits freedom of movement of well persons exposed to communicable disease, for no longer than the longest usual incubation period, preventing effective contact with the unexposed. Modified quarantine partially restricts, as in excluding exposed children from school. Modern practice replaces much quarantine with active surveillance, reserving restriction for exceptionally serious transmission risk.",
+   "say": "Quarantine holds the healthy exposed, isolation the infectious: the distinction examiners love. Duration caps at the longest usual incubation period. School exclusion is its modified form. Active surveillance now replaces most quarantine in practice.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Isolation",
+     "points": ["Applies to infected persons", "Lasts the communicable period", "Hospital preferred where possible"]
+    },
+    "right": {
+     "title": "Quarantine",
+     "points": ["Applies to well exposed contacts", "Caps at longest incubation period", "Largely replaced by surveillance"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

@@ -1,0 +1,178 @@
+{
+  "v": 1,
+  "module": "phm-antimicrobial-principles",
+  "subject": "pharmacology",
+  "title": "Antimicrobial Principles: Bactericidal versus Bacteriostatic, MIC, Killing Curves, Resistance and Stewardship",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Bactericidal** drugs kill bacteria outright (beta lactams, aminoglycosides, fluoroquinolones, vancomycin, metronidazole) while **bacteriostatic** drugs halt growth and let immunity finish (macrolides, tetracyclines, sulfonamides, linezolid against most). The distinction matters existentially where immunity cannot help: endocarditis, meningitis and neutropenic sepsis demand bactericidal therapy, while most immunocompetent infections forgive static agents. In vitro labels bend by organism and concentration, so the classification is a guide, not scripture.",
+      "say": "Cidal where immunity cannot enter, static where it can; the site chooses before the drug does.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bactericidal territory",
+          "points": [
+            "Beta lactams, aminoglycosides, fluoroquinolones",
+            "Vancomycin, daptomycin, metronidazole",
+            "Mandatory in endocarditis, meningitis, neutropenia",
+            "Kill independent of host defences"
+          ]
+        },
+        "right": {
+          "title": "Bacteriostatic territory",
+          "points": [
+            "Macrolides, tetracyclines, sulfonamides, clindamycin",
+            "Host immunity completes clearance",
+            "Adequate for most community infections",
+            "Combinations with cidal agents rarely antagonise in practice"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **minimum inhibitory concentration** (MIC) is the lowest drug concentration preventing visible growth overnight, set against breakpoints that declare organisms susceptible, intermediate or resistant using achievable tissue levels and clinical outcomes. MIC creeps upward under selection pressure foreshadow resistance before breakpoints break. Dose and site arithmetic (a susceptible urinary isolate may be untouchable in meninges) makes MIC a pharmacokinetic conversation, never a naked number to recite.",
+      "say": "MIC meets breakpoint meets tissue level; susceptible on paper can still fail in the meninges.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "mic", "label": "MIC measured against the isolate" },
+          { "id": "break", "label": "Breakpoint declares susceptible or resistant" },
+          { "id": "site", "label": "Achievable site concentration compared" },
+          { "id": "dose", "label": "Dose and agent chosen to exceed MIC at the site" }
+        ],
+        "edges": [["mic", "break"], ["break", "site"], ["site", "dose"]]
+      }
+    },
+    {
+      "tx": "Killing geometry splits the cabinet: **concentration dependent killing** with post antibiotic effect (aminoglycosides, fluoroquinolones, daptomycin) rewards large infrequent doses maximising peak to MIC, while **time dependent killing** (beta lactams, vancomycin) rewards the fraction of the day spent above MIC, favouring frequent dosing or continuous infusion. The **post antibiotic effect** itself, persistent suppression after levels fall, is the pharmacological permission slip behind once daily aminoglycosides in the next lessons.",
+      "say": "Peak chasers dose big and rare, time keepers dose often and steady; the curve chooses the calendar.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Concentration dependent",
+          "points": [
+            "Aminoglycosides, fluoroquinolones, daptomycin",
+            "Peak to MIC ratio predicts killing",
+            "Post antibiotic effect extends cover",
+            "Once daily large dosing optimised"
+          ]
+        },
+        "right": {
+          "title": "Time dependent",
+          "points": [
+            "Beta lactams and vancomycin (AUC guided)",
+            "Time above MIC predicts killing",
+            "Frequent dosing or prolonged infusion",
+            "Little post antibiotic effect against Gram negatives"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Antimicrobial resistance** assembles by mechanism into a grid examinations recite: enzymatic destruction (beta lactamases), target modification (altered penicillin binding proteins, ribosomal methylation, DNA gyrase mutations), permeability loss (porin deletion) and efflux pumping, riding mobile genetic elements between species at speeds that outrun drug development. Every course prescribed selects within the patient's microbiome, which is why duration and spectrum discipline in the stewardship step is resistance policy at bedside scale.",
+      "say": "Destroy it, dodge it, expel it or change the lock: four resistance moves, all inherited horizontally.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Resistance mechanisms",
+          "points": [
+            "Enzymes: beta lactamases, aminoglycoside modifiers",
+            "Targets: PBP, ribosome and gyrase alteration",
+            "Porin loss and efflux pumps",
+            "Plasmids and transposons spread the recipes"
+          ]
+        },
+        "right": {
+          "title": "Selection pressures",
+          "points": [
+            "Broad spectrum where narrow would do",
+            "Courses longer than evidence",
+            "Subtherapeutic levels at sanctuary sites",
+            "Agricultural and environmental reservoirs"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Superinfection** is resistance's domestic face: broad therapy clears competing flora and Candida, Clostridioides difficile or resistant Gram negatives inherit the vacated gut, causing the diarrhoea that complicates day five of meropenem. **Chemoprophylaxis** obeys the inverse virtue, narrow and time boxed (surgical prophylaxis within the hour before incision and rarely beyond 24, meningococcal contacts, Pneumocystis in immunosuppression), because prophylaxis without an end date is unlabelled treatment of the microbiome.",
+      "say": "Broad cures breed superinfection; prophylaxis earns its keep only with a clock attached.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "broad", "label": "Broad spectrum course clears competing flora" },
+          { "id": "vacuum", "label": "C difficile, Candida or resistant Gram negatives expand" },
+          { "id": "super", "label": "Superinfection: new fever, diarrhoea or thrush" },
+          { "id": "narrow", "label": "Response: narrow, stop, or treat the successor deliberately" }
+        ],
+        "edges": [["broad", "vacuum"], ["vacuum", "super"], ["super", "narrow"]]
+      }
+    },
+    {
+      "tx": "**Combination therapy** has four legitimate passports and must show one at the border: synergy (beta lactam plus aminoglycoside in endocarditis), resistance suppression (tuberculosis and HIV paradigms), polymicrobial breadth (intra abdominal sepsis) and toxin plus cover pairings (clindamycin with beta lactams in toxin mediated disease). Combinations for anxiety alone multiply toxicity, cost and C difficile. De escalation at culture results is the second half of every combination prescription and is written at the first dose.",
+      "say": "Synergy, suppression, breadth or toxin: a combination without a passport is just double toxicity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Legitimate combinations",
+          "points": [
+            "Synergy: endocarditis beta lactam plus aminoglycoside",
+            "Resistance suppression: tuberculosis, HIV, hepatitis C",
+            "Polymicrobial cover: intra abdominal and diabetic foot",
+            "Toxin suppression: clindamycin in toxic shock and fasciitis"
+          ]
+        },
+        "right": {
+          "title": "Stewardship reflexes",
+          "points": [
+            "Cultures before antibiotics where safe",
+            "Review at 48 to 72 hours with results",
+            "Intravenous to oral switch on criteria",
+            "Stop dates documented at initiation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Antibiotic stewardship** is the institutional form of this lesson: formulary restriction and preauthorisation for broad agents, prospective audit with feedback, local antibiograms guiding empirical choices, cascade reporting of susceptibilities, and duration defaults challenged by trial evidence (shorter often equal). Individual prescribers practise it as five questions (is it bacterial, what is the narrowest adequate agent, what dose by site and kidney, when reviewed, when stopped) asked in order, every time.",
+      "say": "Stewardship is five questions asked in order on every prescription, scaled from ward to hospital.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Institutional stewardship",
+          "points": [
+            "Formulary restriction and preauthorisation",
+            "Local antibiograms for empirical guidance",
+            "Audit with prescriber feedback",
+            "Intravenous to oral switch programmes"
+          ]
+        },
+        "right": {
+          "title": "Bedside stewardship",
+          "points": [
+            "Confirm bacterial likelihood before starting",
+            "Narrowest adequate spectrum chosen",
+            "Review date and stop date written",
+            "Allergy labels interrogated, not inherited"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **Jarisch Herxheimer reaction** closes the principles with a treatment caused fever: spirochaete killing (syphilis, Lyme, leptospirosis, relapsing fever) releases lipoproteins that ignite cytokine fever, rigors and hypotension within hours of the first penicillin dose, managed supportively without abandoning therapy, warned about in advance so the patient does not read cure as catastrophe. NSAIDs blunt it, steroids are reserved for cerebral or pregnancy stakes by specialist judgement, and the antibiotics continue throughout.",
+      "say": "Fever hours after first penicillin for spirochaetes is Herxheimer, not allergy; support and continue.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "pen", "label": "First penicillin dose in spirochaetal disease" },
+          { "id": "lyse", "label": "Spirochaete lysis releases inflammatory lipoproteins" },
+          { "id": "fever", "label": "Fever, rigors and pressure dip within hours" },
+          { "id": "support", "label": "Antipyretics, fluids, continue antibiotics" }
+        ],
+        "edges": [["pen", "lyse"], ["lyse", "fever"], ["fever", "support"]]
+      }
+    }
+  ]
+}

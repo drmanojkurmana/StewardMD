@@ -1,0 +1,235 @@
+{
+  "v": 1,
+  "module": "mic-blood-tissue-protozoa",
+  "subject": "microbiology",
+  "title": "Toxoplasma gondii, Ring Lesions and Intraerythrocytic Babesia",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The coccidian apicomplexan **Toxoplasma gondii** infects virtually all warm-blooded vertebrates, but domestic cats and other felids serve as the sole definitive hosts where sexual coccidian schizogony occurs. Infected felines excrete millions of unsporulated oocysts into the environment in cat feces. Following environmental sporulation over one to five days, infective oocysts persist in moist soil and water for over a year.",
+      "say": "Felines are the sole definitive hosts, shedding environmentally hardy oocysts in cat feces.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/malaria-leishmania-trypanosoma-toxoplasma-babesia-fig1.webp",
+        "alt": "Toxoplasma and tissue protozoa morphology",
+        "caption": "Toxoplasma gondii crescentic tachyzoite morphology compared with blood protozoa [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Humans acquire infection by ingesting undercooked meat containing resting **tissue cysts** (bradyzoites) from livestock, or by accidentally ingesting feline fecal oocysts from unwashed vegetables, contaminated soil, or domestic cat litter boxes. In the human small intestine, excystation releases rapidly dividing crescent-shaped tachyzoites that actively invade nucleated host cells, establishing acute haematogenous dissemination throughout deep visceral organs.",
+      "say": "Undercooked meat containing tissue cysts or cat oocysts transmit Toxoplasma to humans.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tachyzoites (acute stage)",
+          "points": [
+            "Crescent-shaped motile invasive form",
+            "Rapid binary fission inside nucleated cells",
+            "Destroys host cells, driving acute tissue damage",
+            "Sensitive to pyrimethamine and sulfadiazine"
+          ]
+        },
+        "right": {
+          "title": "Bradyzoites (chronic stage)",
+          "points": [
+            "Slow-growing dormant stage within tissue cysts",
+            "Enclosed by tough spherical cyst membrane",
+            "Persists lifelong in brain, retina, and skeletal muscle",
+            "Refractory to standard antimicrobial therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In patients with advanced human immunodeficiency virus and helper T-cell counts falling below one hundred cells per microlitre, dormant cerebral bradyzoites reactivate, causing necrotizing toxoplasmic encephalitis. Contrast-enhanced computed tomography or magnetic resonance imaging demonstrates multiple, spherical **ring-enhancing lesions** with extensive surrounding vasogenic oedema, preferentially clustered within the basal ganglia, thalamus, and hemispheric corticomedullary junctions.",
+      "say": "Multiple ring-enhancing brain lesions targeting the basal ganglia signify reactivated toxoplasmic encephalitis in AIDS.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Cerebral Toxoplasmosis",
+          "Primary CNS Lymphoma"
+        ],
+        "rows": [
+          [
+            "Lesion multiplicity",
+            "Usually multiple scattered ring lesions (over 80%)",
+            "Frequently solitary (or few) periventricular lesion"
+          ],
+          [
+            "Anatomical predilection",
+            "Basal ganglia, corticomedullary junction, thalamus",
+            "Periventricular white matter, subependymal zone"
+          ],
+          [
+            "Contrast enhancement",
+            "Thin, smooth, uniform peripheral ring enhancement",
+            "Thick, irregular, nodular or patchy enhancement"
+          ],
+          [
+            "CSF EBV DNA",
+            "Negative for Epstein-Barr virus DNA",
+            "Strongly positive for EBV DNA via PCR assay"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Primary maternal infection acquired during pregnancy leads to transplacental vertical transmission, producing congenital toxoplasmosis. The classical **Sabin triad** comprises chorioretinitis, obstructive hydrocephalus, and diffuse intracranial periventricular calcifications. Chorioretinitis produces pigmented macular scars with vitritis, often described as a headlight in the fog on fundoscopic examination.",
+      "say": "The Sabin triad consists of chorioretinitis, hydrocephalus, and intracranial periventricular calcifications.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Classic Triad Element",
+          "Diagnostic Feature",
+          "Long-Term Prognosis"
+        ],
+        "rows": [
+          [
+            "Chorioretinitis",
+            "Focal necrotizing retinitis with pigmented scar",
+            "Severe visual loss; recurrent retinal reactivation"
+          ],
+          [
+            "Hydrocephalus",
+            "Aqueductal stenosis from ependymal necrosis",
+            "Macrocephaly, intracranial hypertension, shunt needed"
+          ],
+          [
+            "Intracranial calcifications",
+            "Diffuse scattered nodular and periventricular calcifications",
+            "Distinguishes from periventricular CMV calcifications"
+          ],
+          [
+            "Systemic signs",
+            "Hepatosplenomegaly, jaundice, thrombocytopenia",
+            "Petechial rash mimicking blueberry muffin syndrome"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The definitive first-line therapeutic regimen for cerebral toxoplasmosis is oral **pyrimethamine** combined with sulfadiazine, co-administered with oral folinic acid (leucovorin) to prevent bone marrow myelosuppression from dihydrofolate reductase inhibition. Clinical and radiological improvement should be evident within ten to fourteen days; failure to respond mandates brain biopsy to exclude primary central nervous system lymphoma.",
+      "say": "Pyrimethamine and sulfadiazine combined with folinic acid provide definitive first-line medical therapy.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "tx1",
+            "label": "Presumptive toxoplasmic encephalitis: multiple ring-enhancing lesions on MRI"
+          },
+          {
+            "id": "tx2",
+            "label": "Initiate pyrimethamine plus sulfadiazine plus oral folinic acid"
+          },
+          {
+            "id": "tx3",
+            "label": "Repeat neuroimaging at 14 days: lesion regression confirms diagnosis"
+          }
+        ],
+        "edges": [
+          [
+            "tx1",
+            "tx2"
+          ],
+          [
+            "tx2",
+            "tx3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The zoonotic tick-borne intraerythrocytic protozoan **Babesia microti** is transmitted by the bite of the Ixodes scapularis blacklegged tick in the northeastern United States, sharing the same vector as Lyme disease. Trophozoites invade host erythrocytes directly without undergoing any hepatic exo-erythrocytic schizogony, causing acute haemolytic anaemia, high fever, drenching sweats, and hemoglobinuria.",
+      "say": "Ixodes tick bites transmit Babesia microti directly into red blood cells, triggering acute haemolysis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Babesia microti",
+          "points": [
+            "Transmitted by Ixodes scapularis deer tick",
+            "No hepatic exo-erythrocytic stage; direct red cell entry",
+            "Severe, life-threatening haemolysis in asplenic patients",
+            "Treated with atovaquone plus azithromycin"
+          ]
+        },
+        "right": {
+          "title": "Plasmodium falciparum",
+          "points": [
+            "Transmitted by female Anopheles mosquito",
+            "Obligate initial exo-erythrocytic liver schizogony",
+            "Hemozoin pigment and gametocytes present",
+            "Treated with artemisinin-based combination therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "On Giemsa-stained thin blood films, Babesia trophozoites appear as delicate, pleomorphic intra-erythrocytic rings that closely resemble Plasmodium falciparum ring forms. However, Babesia is definitively distinguished by the complete absence of intracellular hemozoin pigment, the absence of gametocytes, and the pathognomonic formation of four daughter merozoites joined together in a cross-shaped **Maltese cross** tetrad.",
+      "say": "A cross-shaped tetrad of four merozoites resembling a Maltese cross definitively identifies Babesia.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Microscopic Feature",
+          "Babesia microti",
+          "Plasmodium falciparum"
+        ],
+        "rows": [
+          [
+            "Tetrad formation",
+            "Present (pathognomonic Maltese cross formation)",
+            "Completely absent; schizonts form rounded morula"
+          ],
+          [
+            "Hemozoin pigment",
+            "Absent entirely; no dark crystal biocrystallization",
+            "Prominent golden-brown to black hemozoin pigment"
+          ],
+          [
+            "Gametocytes",
+            "Absent in circulating human blood films",
+            "Crescentic or banana-shaped gametocytes present"
+          ],
+          [
+            "Extracellular forms",
+            "Pyriform merozoites visible free in plasma",
+            "Extracellular merozoites rarely seen on smear"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Asplenic patients, elderly individuals, and immunocompromised hosts suffer catastrophic, life-threatening babesiosis characterized by profound intravascular haemolysis, acute renal failure, and non-cardiogenic pulmonary oedema. First-line therapy for mild to moderate babesiosis is oral **atovaquone plus azithromycin** for seven to ten days, whereas severe fulminant haemolytic infection requires intravenous clindamycin combined with oral quinine alongside urgent automated red cell exchange transfusion.",
+      "say": "Atovaquone plus azithromycin is first line, while severe disease in asplenic hosts warrants exchange transfusion.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "b1",
+            "label": "Confirm intraerythrocytic Maltese cross tetrads on thin blood film"
+          },
+          {
+            "id": "b2",
+            "label": "Mild to moderate disease: oral atovaquone plus oral azithromycin for 7-10 days"
+          },
+          {
+            "id": "b3",
+            "label": "Severe infection with parasitaemia >10%: IV clindamycin + quinine + exchange transfusion"
+          }
+        ],
+        "edges": [
+          [
+            "b1",
+            "b2"
+          ],
+          [
+            "b2",
+            "b3"
+          ]
+        ]
+      }
+    }
+  ]
+}

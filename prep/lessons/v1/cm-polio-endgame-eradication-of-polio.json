@@ -1,0 +1,146 @@
+{
+ "v": 1,
+ "id": "cm-polio-endgame-eradication-of-polio",
+ "subject": "community-medicine",
+ "module": "cm-polio-endgame",
+ "title": "Polio Eradication and Endgame: Pulse Polio, AFP Surveillance and Certification",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "India's last case and certification path",
+   "tx": "**India's last polio case** had onset on 13 January 2011 in Howrah, West Bengal; thereafter no case was reported, and India was declared non-endemic, certified polio-free with the South-East Asia Region on 27 March 2014. Three silent years under sensitive surveillance separate last case from certification, because absence of reports must be proven to mean absence of virus.",
+   "say": "Two dates close the Indian story. Last case onset 13 January 2011 in Howrah; regional certification 27 March 2014. Three silent years under sensitive surveillance had to prove that no reports meant no virus.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Date", "Event"],
+    "rows": [
+     ["13 January 2011", "Last case onset, Howrah, West Bengal"],
+     ["2011 to 2014", "Zero cases under AFP surveillance"],
+     ["27 March 2014", "India and region certified polio-free"]
+    ]
+   }
+  },
+  {
+   "title": "The four eradication strategies",
+   "tx": "**Eradication strategy** stands on four legs: high routine immunisation coverage, Pulse Polio supplementary days, sensitive AFP surveillance with stool virology, and mopping-up in residual foci. Remove any leg and the others wobble: campaigns without surveillance fly blind, surveillance without coverage only documents failure beautifully.",
+   "say": "Four legs hold eradication. Routine coverage, pulse campaign days, paralysis surveillance with stool virology, and mopping-up where virus lingers. Campaigns without surveillance fly blind; surveillance without coverage documents failure beautifully.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Routine coverage sustained high"},
+     {"id": "b", "label": "Pulse Polio days each year"},
+     {"id": "c", "label": "AFP surveillance detects every case"},
+     {"id": "d", "label": "Mopping-up in residual foci"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Pulse Polio: synchronised national days",
+   "tx": "**Pulse Polio Immunization** vaccinates all under-five children on single national days regardless of prior status, repeated in rounds weeks apart and yearly until eradication, flooding the community with vaccine virus so wild virus finds no gut to inhabit. Booth days follow with house-to-house teams for missed children, tracked finger-mark by finger-mark.",
+   "say": "One day, every under-five, whatever the card says. Repeated rounds flood guts with vaccine virus until wild virus finds no home. Booths then hunt missed children house to house, finger marks auditing coverage.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Element", "Design"],
+    "rows": [
+     ["Target", "All children under five years"],
+     ["Prior status", "Irrelevant, every child dosed"],
+     ["Follow-up", "House-to-house missed child search"],
+     ["Audit", "Finger marking and tally review"]
+    ]
+   }
+  },
+  {
+   "title": "AFP surveillance: paralysis as the signal",
+   "tx": "**Acute flaccid paralysis surveillance** reports every AFP case in children (and any suspected polio at any age), because polio hides among Guillain-Barre syndrome, transverse myelitis and traumatic neuritis. Two stool specimens 24 to 48 hours apart within 14 days of onset chase virus isolation, with 60-day follow-up examining residual paralysis.",
+   "say": "Every floppy child is the signal. Polio hides among nerve and cord mimics, so all paralysis gets reported, two stools a day apart inside fourteen days, and a sixty-day check for residual paralysis.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "AFP case reported immediately"},
+     {"id": "b", "label": "Two stools, 24 to 48 hours apart"},
+     {"id": "c", "label": "Virus isolation in laboratory"},
+     {"id": "d", "label": "60-day residual paralysis review"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Certification-standard surveillance indicators",
+   "tx": "**Surveillance quality** is itself certified: at least 80 percent of expected weekly or monthly AFP reports received on time including zero reports, a non-polio AFP rate proving the system finds paralysis (benchmark around 1 to 2 per 100000 under-fives), and adequate stool collection in 80 percent plus of cases. Silent districts are treated as blind, not healthy.",
+   "say": "Silence must prove itself. Eighty percent timely reports including zeros, enough non-polio paralysis found to prove sensitivity, adequate stools in most cases. Quiet districts count as blind spots, never as healthy by default.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Indicator", "Certification expectation"],
+    "rows": [
+     ["Timely weekly reports incl. zero", "80 percent or more"],
+     ["Non-polio AFP rate", "Proves system sensitivity"],
+     ["Adequate stool specimens", "80 percent or more of cases"]
+    ]
+   }
+  },
+  {
+   "title": "Mopping-up: the last foci door to door",
+   "tx": "**Mopping-up** is door-to-door immunisation in high-risk districts where wild virus is known or suspected to persist, the last stage of eradication when booths and routine posts miss the same mobile, marginalised children repeatedly. Microplans list every household, newborn and migrant camp by name and brick kiln, because residual transmission lives exactly where registers do not.",
+   "say": "Last foci need doorsteps, not booths. Mopping-up goes house to house in high-risk districts where the same mobile children escape every fixed site. Microplans name households, newborns and migrant camps where registers stay blank.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Booth strategy reaches",
+     "points": ["Settled, motivated families", "Children brought to fixed sites", "High volume per day"]
+    },
+    "right": {
+     "title": "Mopping-up reaches",
+     "points": ["Migrant and mobile families", "Newborns missed by registers", "Residual transmission pockets"]
+    }
+   }
+  },
+  {
+   "title": "Outbreak response after importation",
+   "tx": "**Outbreak response** to any wild or vaccine-derived detection is immediate: rapid case investigation, stool and contact sampling, large-scale supplementary rounds in widening rings around the case, and surveillance intensification, all before laboratory confirmation completes. In a certified world, one isolate is an emergency because every chain restarted threatens the global certificate.",
+   "say": "One isolate is an emergency. Investigation, sampling, widening immunisation rings and intensified surveillance start before confirmation finishes. Certified status makes every restarted chain a threat to the global achievement.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Virus detected, case investigated"},
+     {"id": "b", "label": "Stools and contacts sampled"},
+     {"id": "c", "label": "Large supplementary rounds launched"},
+     {"id": "d", "label": "Surveillance intensified around focus"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Endgame: stopping OPV itself",
+   "tx": "The **Polio Endgame** sequences the paradoxical finish: certify wild types gone, switch trivalent to bivalent OPV (done 2016 for type 2), introduce IPV everywhere, then cease all OPV synchronously once types 1 and 3 fall, containing laboratory and vaccine stocks thereafter. Circulating vaccine-derived outbreaks are answered meanwhile with targeted novel OPV2 under emergency listing.",
+   "say": "The finish retires the weapon. Certify wild types, strip Sabin strains stepwise as in 2016, cover with injectable vaccine, then stop oral vaccine globally together. Derived outbreaks meanwhile meet targeted newer type-two vaccine.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Endgame step", "Status logic"],
+    "rows": [
+     ["Wild type certification", "Type 2 certified 2015, type 3 in 2019"],
+     ["tOPV to bOPV switch", "Completed April 2016 globally"],
+     ["IPV everywhere, then OPV cessation", "Final sequence after types 1 and 3"]
+    ]
+   }
+  },
+  {
+   "title": "Why smallpox succeeded first, in comparison",
+   "tx": "**Smallpox eradication** (certified 1980) succeeded with surveillance-containment and ring immunisation around cases, helped by a vaccine stable without deep cold chain and a disease with no subclinical carriers or animal reservoir. Polio's hidden infections (hundreds per paralysis), gut transmission and vaccine-derived strains explain its harder, longer endgame by direct contrast.",
+   "say": "Comparison explains difficulty. Smallpox showed itself, carried no silent carriers or animal reservoir, and fell to ring containment by 1980. Polio hides hundreds of infections per paralysis and derives strains from its own vaccine.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Smallpox advantages",
+     "points": ["Every case visible by rash", "No subclinical carrier state", "Ring containment sufficient"]
+    },
+    "right": {
+     "title": "Polio difficulties",
+     "points": ["Most infections silent", "Gut transmission widespread", "Vaccine-derived strains emerge"]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}
