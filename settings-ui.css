@@ -683,4 +683,56 @@ body:is(.dark,.v3-dark) #sbrSettings#sbrSettings[data-settings-ui] .settings-det
 #sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-ms-foot::before{content:"";position:absolute;top:0;left:16px;right:0;height:.5px;background:var(--st-sep)}
 #sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-ms-off{min-height:44px;padding:0!important;color:var(--settings-primary)!important;font:400 15px/1 var(--sans,system-ui)!important;text-decoration:none!important}
 #sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-ms-note{margin:0 16px 14px!important;border:0!important;border-radius:12px!important;background:var(--ai-fill)!important}
-@media (prefers-reduced-motion:reduce){#sbrSettings#sbrSettings[data-settings-ui] .settings-detail :is(.smd-nav-sw,.smd-nav-sw>span,.smdv-ms-tier,.mk-grp-cv,.smdv-grp-cv){transition:none!important}}
+/* AI & voice remaining states (owner 2026-11-10): downloading, queued/paused/downloaded, vision add-on, Labs MLX, voice cards, Edge download, answering pill. Flat iOS, no glows. */
+/* Progress bars: 4px, track ai-fill, fill settings-primary, no shadow/glow, live-injected bars included. */
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-bar]{display:block!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-bar]:empty{display:none!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-bar]>div{height:4px!important;border-radius:999px!important;background:var(--ai-fill)!important;overflow:hidden!important;margin-top:7px!important;box-shadow:none!important;border:0!important;padding:0!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-bar]>div>div{height:100%!important;width:0;border-radius:999px!important;background:var(--settings-primary)!important;box-shadow:none!important;border:0!important;transition:width .25s ease!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .me-edgedl [data-me-bar]>div{margin-top:6px!important}
+/* Status lines: all pack/search/vision/MLX/edge use 13px regular grey on 16px inset. */
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail :is([data-me-pack-row],[data-me-search-row]) [data-me-status]{font:400 13px/1.35 var(--sans,system-ui)!important;color:var(--st-sub)!important;margin-top:3px!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-pack-row] [data-me-status][style*="11.5px"]{font:400 13px/1.35 var(--sans,system-ui)!important;color:var(--st-sub)!important;margin-top:2px!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .mk-grp[data-mk-grp=advanced] [data-me-status]{font:400 13px/1.4 var(--sans,system-ui)!important;color:var(--st-sub)!important;margin-top:3px!important}
+/* Compact actions: capsules side by side, never stretch full width. Includes first-download (data-me-upgrade). */
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-actions]{display:flex!important;gap:8px!important;flex-wrap:wrap!important;margin-top:10px!important;padding:0!important;border:0!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail :is([data-me-actions] .smd-nav-btn,[data-me-upgrade],.me-edgedl .smd-nav-btn,.me-cloudblock .smd-nav-btn,[data-me-mlx]:not([role=switch])){position:relative!important;flex:0 0 auto!important;width:auto!important;min-height:34px!important;margin:0!important;padding:0 16px!important;border-radius:999px!important;background:var(--ai-fill)!important;color:var(--settings-primary)!important;font:600 14px/1 var(--sans,system-ui)!important;white-space:nowrap!important;border:0!important;box-shadow:none!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail :is([data-me-actions] .smd-nav-btn,[data-me-upgrade],.me-edgedl .smd-nav-btn,.me-cloudblock .smd-nav-btn,[data-me-mlx]:not([role=switch]))::after{content:"";position:absolute;inset:-6px -2px}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail :is([data-me-actions] .smd-nav-btn,[data-me-upgrade],.me-edgedl .smd-nav-btn,.me-cloudblock .smd-nav-btn,[data-me-mlx]:not([role=switch])):active{background:var(--st-press)!important}
+/* Destructive: Delete / Remove in red, light #c4001a, dark #ff6961. Higher specificity to beat the capsule rule. */
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-actions] .smd-nav-btn[data-me-model="delete"],#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-mlx="remove"].smd-nav-btn{color:#c4001a!important}
+body:is(.dark,.v3-dark) #sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-actions] .smd-nav-btn[data-me-model="delete"],body:is(.dark,.v3-dark) #sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-mlx="remove"].smd-nav-btn{color:#ff6961!important}
+/* Vision add-on: dashed top to hairline inset, same inset/padding as pack rows, compact capsule, 4px bar. */
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-pack-row][style*="dashed"]{position:relative!important;padding:12px 16px 14px!important;border:0!important;margin-top:0!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-pack-row][style*="dashed"]::before{content:"";position:absolute;top:0;left:16px;right:0;height:.5px;background:var(--st-sep);pointer-events:none}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-pack-row][style*="dashed"]>div:first-child{font:600 15px/1.3 var(--sans,system-ui)!important;color:var(--st-ink)!important}
+/* MLX Labs row: head padding/border to inset hairline, status grey, bar flat, buttons already capsule non-stretch. */
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .mk-grp[data-mk-grp=advanced]>div:first-of-type{padding:12px 16px 14px!important;border:0!important;position:relative}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .mk-grp[data-mk-grp=advanced]>div:first-of-type:has([data-me-status])::before,#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .mk-grp[data-mk-grp=advanced]>div:first-of-type:has(>.smd-nav-row)::before{content:"";position:absolute;top:0;left:16px;right:0;height:.5px;background:var(--st-sep);pointer-events:none}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .mk-grp[data-mk-grp=advanced]>div>div[style*="display:flex;gap:8px"]{display:flex!important;gap:8px!important;flex-wrap:wrap!important;margin-top:8px!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .mk-grp[data-mk-grp=advanced] [data-me-bar]>div{margin-top:6px!important}
+/* Edge FunctionGemma download line: inset 16px, status grey, bar flat, Pause capsule. */
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .me-edgedl{position:relative;margin:0!important;padding:10px 16px 12px!important;display:flex!important;align-items:center!important;gap:10px!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .me-edgedl>span{flex:1;min-width:0}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .me-edgedl [data-me-status]{font:400 13px/1.35 var(--sans,system-ui)!important;color:var(--st-sub)!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .me-edgedl [data-me-bar]>div{margin-top:6px!important}
+/* On this phone: Answering now pill flat, uses settings-primary, no tiny 9px. */
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-caps] span[style*="background:#0e6e63"]{background:var(--settings-primary)!important;color:#fff!important;font:600 12px/1 var(--sans,system-ui)!important;padding:5px 9px!important;border-radius:999px!important;border:0!important;box-shadow:none!important}
+/* Voice models: flat rows, 4px track, no glow. */
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-prog:not([style*="display:none"]){display:flex}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-prog{align-items:center!important;gap:9px!important;margin-top:9px!important;padding:0!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-pct{font:500 12px/1 ui-monospace,Menlo,monospace!important;color:var(--st-sub)!important;background:none!important;padding:0!important;min-width:36px;text-align:right;font-variant-numeric:tabular-nums!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-prog-track{flex:1 1 0!important;height:4px!important;border-radius:999px!important;background:var(--ai-fill)!important;overflow:hidden!important;border:0!important;box-shadow:none!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-prog-track>i{display:block!important;height:100%!important;width:0;border-radius:999px!important;background:var(--settings-primary)!important;box-shadow:none!important;transition:width .25s ease!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-st{font-weight:500!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-st.ok{color:var(--settings-primary)!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-st.off{color:var(--st-sub)!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-st.dl{color:var(--st-sub)!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-card-btn{width:32px!important;height:32px!important;border-radius:50%!important;background:var(--ai-fill)!important;color:var(--settings-primary)!important;border:0!important;box-shadow:none!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-card-btn svg{width:17px;height:17px}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-card-btn.del{color:#c4001a!important}
+body:is(.dark,.v3-dark) #sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-card-btn.del{color:#ff6961!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-card.installed{background:transparent!important;border:0!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-card-t{font:400 17px/1.25 var(--sans,system-ui)!important;color:var(--st-ink)!important}
+#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-card-s{font:400 13px/1.35 var(--sans,system-ui)!important;color:var(--st-sub)!important}
+@media (prefers-reduced-motion:reduce){#sbrSettings#sbrSettings[data-settings-ui] .settings-detail [data-me-bar]>div>div,#sbrSettings#sbrSettings[data-settings-ui] .settings-detail .smdv-prog-track>i{transition:none!important} #sbrSettings#sbrSettings[data-settings-ui] .settings-detail :is(.smd-nav-sw,.smd-nav-sw>span,.smdv-ms-tier,.mk-grp-cv,.smdv-grp-cv){transition:none!important}}
