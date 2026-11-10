@@ -1,0 +1,210 @@
+{
+  "v": 1,
+  "module": "mic-superficial-subcutaneous-mycoses",
+  "subject": "microbiology",
+  "title": "Dermatophytes: Trichophyton, Microsporum and Conidial Morphology",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Keratinophilic filamentous moulds capable of invading cornified tissues such as skin, hair, and nails are collectively designated as **dermatophytes**. They produce keratinases that digest insoluble structural keratin into assimilable oligopeptides. Infection remains strictly confined to non-viable keratinized layers because serum transferrin, neutral pH, and body temperature of thirty-seven degrees Celsius effectively inhibit deep fungal germination.",
+      "say": "Keratinase enzymes allow dermatophytes to metabolize stratum corneum, nails and hair shafts.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/dermatophytosis-fig1.webp",
+        "alt": "Tinea corporis annular erythematous plaque",
+        "caption": "Tinea corporis presenting as an annular erythematous scaly plaque with central clearing and active advancing peripheral borders [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "Taxonomically, dermatophytes belong to three anamorph genera classified by conidial architecture: **Trichophyton**, Microsporum, and Epidermophyton. Trichophyton species infect all three keratinized substrates: skin, hair, and nails. Microsporum infects skin and hair while sparing nails entirely, and Epidermophyton infects skin and nails while never invading hair follicles in clinical practice.",
+      "say": "Trichophyton attacks all three structures while Microsporum spares nails and Epidermophyton spares hair.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Substrate affinities",
+          "points": [
+            "Trichophyton infects skin, hair, and nails",
+            "Microsporum infects skin and hair (no nails)",
+            "Epidermophyton infects skin and nails (no hair)"
+          ]
+        },
+        "right": {
+          "title": "Diagnostic conidia",
+          "points": [
+            "Trichophyton: abundant microconidia, rare macroconidia",
+            "Microsporum: abundant rough spindle macroconidia",
+            "Epidermophyton: grouped club-shaped macroconidia"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The genus Trichophyton produces numerous small unicellular **microconidia** alongside rare, thin-walled, smooth, pencil-shaped or cylindrical macroconidia. Microconidia may appear spherical, pyriform, or tear-drop shaped, arranged in grape-like clusters or singly along hyphal walls. Species identification relies on microconidial arrangement, hair perforation testing, and production of red reverse pigmentation on Sabouraud agar.",
+      "say": "Abundant pyriform microconidia and rare smooth pencil macroconidia identify Trichophyton.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "Hyphal filaments produce plentiful single or clustered microconidia"
+          },
+          {
+            "id": "t2",
+            "label": "Occasional elongated smooth pencil-shaped macroconidia"
+          },
+          {
+            "id": "t3",
+            "label": "Species separation by urease and in vitro hair perforation"
+          }
+        ],
+        "edges": [
+          [
+            "t1",
+            "t2"
+          ],
+          [
+            "t2",
+            "t3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The most common global causative agent of tinea corporis, tinea pedis, and onychomycosis is **Trichophyton rubrum**. On Sabouraud dextrose agar, colonies present with white fluffy aerial mycelium and an intense wine-red to deep purple-red pigment on the reverse side. The fungus is urease-negative and fails to produce wedge-shaped transverse perforations when incubated with sterilized human hair in vitro.",
+      "say": "White downy colonies with deep wine-red reverse pigment identify Trichophyton rubrum.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Trichophyton rubrum",
+          "points": [
+            "Deep wine-red reverse colony pigment",
+            "Urease negative at seven days",
+            "Negative in vitro hair perforation test",
+            "Causes chronic recalcitrant ringworm"
+          ]
+        },
+        "right": {
+          "title": "Trichophyton mentagrophytes",
+          "points": [
+            "Yellow-brown or tan reverse pigment",
+            "Urease positive within three days",
+            "Positive in vitro hair perforation test",
+            "Produces acute inflammatory lesions"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In contrast, the genus **Microsporum** is distinguished by the production of abundant, large, multicelled, thick-walled, rough or echinulate macroconidia. Microconidia are sparse or occasionally absent. Macroconidia exhibit a characteristic spindle shape with pointed, beak-like ends and contain five to fifteen internal transverse septa. Microsporum canis is a zoophilic species acquired through contact with domestic puppies and kittens.",
+      "say": "Rough, thick-walled spindle macroconidia with pointed beaks define the genus Microsporum.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "m1",
+            "label": "Production of prominent multicellular spindle macroconidia"
+          },
+          {
+            "id": "m2",
+            "label": "Thick verrucose or spiny echinulate outer cell walls"
+          },
+          {
+            "id": "m3",
+            "label": "Terminal asymmetrical beak curvature distinguishing M canis"
+          }
+        ],
+        "edges": [
+          [
+            "m1",
+            "m2"
+          ],
+          [
+            "m2",
+            "m3"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Geophilic dermatophytes such as **Microsporum gypseum** inhabit rich soil and cause inflammatory ringworm in agricultural workers and gardeners. On lactophenol mounts, it displays broad, elliptical macroconidia with thinner, moderately rough walls containing four to six septa and rounded ends. Colonies on Sabouraud agar grow rapidly, producing a granular, cinnamon-brown or buff-colored powdery surface.",
+      "say": "Cinnamon-buff powdery colonies with thin-walled symmetrical macroconidia represent Microsporum gypseum.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Microsporum canis",
+          "points": [
+            "Zoophilic reservoir in cats and dogs",
+            "Thick-walled macroconidia with recurved beaks",
+            "Bright green fluorescence on Wood lamp"
+          ]
+        },
+        "right": {
+          "title": "Microsporum gypseum",
+          "points": [
+            "Geophilic reservoir in garden soil",
+            "Thinner-walled macroconidia with rounded ends",
+            "No fluorescence under Wood ultraviolet lamp"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Invasion of hair shafts occurs in two classical patterns: **ectothrix and endothrix** infection. In ectothrix invasion seen with Microsporum canis and Trichophyton verrucosum, fungal arthroconidia form a dense sheath on the external hair cuticle. In endothrix invasion seen with Trichophyton tonsurans and violaceum, hyphae and arthrospores multiply entirely within the hair shaft, weakening it into fragile black dots at follicular orifices.",
+      "say": "Ectothrix forms an external conidial sheath while endothrix packs spores inside the shaft.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ectothrix invasion",
+          "points": [
+            "Arthroconidia form outer sheath around cuticle",
+            "Cuticle destroyed and hair looks frosted",
+            "Microsporum and T verrucosum prototypes",
+            "Often fluoresces under Wood lamp"
+          ]
+        },
+        "right": {
+          "title": "Endothrix invasion",
+          "points": [
+            "Arthroconidia entirely inside hair cortex",
+            "Cuticle intact but cortex fractured easily",
+            "Trichophyton tonsurans and violaceum",
+            "No fluorescence; causes black dot tinea"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Severe hypersensitivity to fungal antigen manifests as an inflammatory boggy scalp mass called **kerion celsi**. T-cell-mediated immune responses against zoophilic dermatophytes provoke intense follicular pustules, swelling, and purulent exudate that mimics bacterial abscess. Incision and drainage is strictly contraindicated; treatment requires systemic oral griseofulvin or terbinafine coupled with a short course of oral corticosteroids to prevent permanent scarring alopecia.",
+      "say": "A boggy inflammatory scalp swelling represents fungal hypersensitivity and must never be incised.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "k1",
+            "label": "Zoophilic dermatophyte infection triggers intense T-cell response"
+          },
+          {
+            "id": "k2",
+            "label": "Development of boggy honey-combed mass with loosened hairs"
+          },
+          {
+            "id": "k3",
+            "label": "Oral antifungal plus short-course steroid prevents scarring"
+          }
+        ],
+        "edges": [
+          [
+            "k1",
+            "k2"
+          ],
+          [
+            "k2",
+            "k3"
+          ]
+        ]
+      }
+    }
+  ]
+}

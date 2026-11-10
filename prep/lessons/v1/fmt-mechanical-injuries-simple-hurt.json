@@ -1,0 +1,66 @@
+{
+ "v": 1,
+ "id": "fmt-mechanical-injuries-simple-hurt",
+ "subject": "forensic-medicine",
+ "module": "fmt-mechanical-injuries",
+ "title": "Simple Hurt, Antemortem Versus Postmortem Wounds and Age of Injury",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Simple hurt is what remains",
+   "tx": "**Simple hurt** is the legal residue: any bodily pain, disease or infirmity inflicted on another that does not fall inside the eight grievous clauses. Abrasions, most contusions and shallow lacerations usually sit here. The grading matters because it drives the charge, the bail position and the compensation conversation. The doctor's duty is accurate description and honest grading, stating the clause relied on whenever grievous hurt is certified.",
+   "say": "Hurt outside the eight grievous clauses is simple hurt, and the certificate should name the clause whenever grievous is claimed.",
+   "vis": {"kind": "table", "cols": ["Grading", "Typical injuries", "Doctor must state"], "rows": [["Simple hurt", "Abrasions, small bruises", "Nature and site of injury"], ["Grievous, clause seven", "Any bone fracture", "Bone and fracture type"], ["Grievous, clause eight", "Twenty days disability", "Days of pain or lost work"], ["Dangerous injury", "Imminent danger to life", "Effects creating the danger"]]}
+  },
+  {
+   "title": "Vital reaction proves injury during life",
+   "tx": "The cornerstone distinction is **vital reaction**: tissues injured during life respond with bleeding into the wound, swelling, congestion, retraction and early cellular infiltration, because circulation and living enzymes still work. After death those responses fail. An antemortem wound therefore shows extravasation and infiltration of blood in its margins, gaping from muscle retraction and blood staining that washing cannot remove. Postmortem wounds look dry, pale or yellow and sharply defined.",
+   "say": "Bleeding into margins, swelling and gaping mark a wound made in life, while postmortem wounds stay dry and pale.",
+   "vis": {"kind": "compare", "left": {"title": "Antemortem wound", "points": ["Blood infiltrates the margins", "Swelling and congestion present", "Edges gape and retract", "Vital reaction on microscopy"]}, "right": {"title": "Postmortem wound", "points": ["Little or no bleeding", "No swelling or infiltration", "Edges stay close, yellowish", "No cellular reaction seen"]}}
+  },
+  {
+   "title": "Antemortem versus postmortem abrasions",
+   "tx": "For abrasions the contrast is visible to the naked eye in **antemortem and postmortem abrasion differences**. Antemortem abrasions are bright reddish brown with more exudation and a scab sitting slightly raised. Postmortem abrasions look yellowish, translucent and parchment like, with the scab lying slightly below skin level, and they favour bony prominences where a dragged body rubs. Microscopy confirms intravital congestion only in the antemortem lesion.",
+   "say": "Raised reddish scabs anywhere suggest life, while flat parchment abrasions over bony points suggest damage after death.",
+   "vis": {"kind": "table", "cols": ["Trait", "Antemortem abrasion", "Postmortem abrasion"], "rows": [["Site", "Anywhere on the body", "Over bony prominences"], ["Colour", "Bright reddish brown", "Yellowish and translucent"], ["Exudation", "More, scab raised", "Less, scab lies below level"], ["Microscopy", "Congestion and vital reaction", "No vital reaction"]]}
+  },
+  {
+   "title": "Bruises before and after death",
+   "tx": "Appreciable bruising needs a beating circulation, so **postmortem bruising** is limited: great violence within two to three hours of death can raise small bruises where tissue is crushed against bone or in hypostatic areas such as the back of the scalp. Antemortem bruises show swelling, damaged epithelium, extravasation, coagulation and colour change, with indistinct margins. Postmortem bruise margins stay sharply defined. In decomposed scalp, haemolysis blurs the distinction badly.",
+   "say": "Real bruising needs circulation, so only small sharp edged bruises can be forced within two to three hours after death.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Check swelling and margin blur"}, {"id": "b", "label": "Look for colour change sequence"}, {"id": "c", "label": "Consider hours since death"}, {"id": "d", "label": "Grade antemortem or postmortem"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Ageing a bruise by colour, with caution",
+   "tx": "Extravasated haemoglobin degrades through a colour parade that roughly gives the **age of a bruise**. Fresh bruises are red, blue within hours to three days, bluish black to brown from haemosiderin on the fourth day, greenish from haematoidin at five to six days, yellow from bilirubin at seven to twelve days, and normal by two weeks. Reddy warns the rate varies widely between persons and even between bruises, so opinions stay cautious.",
+   "say": "Red, blue, brown, green, yellow dates a bruise across two weeks, but variation is wide and certainty is forbidden.",
+   "vis": {"kind": "table", "cols": ["Bruise colour", "Pigment responsible", "Approximate age"], "rows": [["Red then blue", "Fresh extravasated blood", "Hours to three days"], ["Bluish black to brown", "Haemosiderin", "Fourth day onward"], ["Greenish", "Haematoidin", "Five to six days"], ["Yellow, then normal", "Bilirubin, then cleared", "Seven days to two weeks"]]}
+  },
+  {
+   "title": "Exceptions that break bruise colour rules",
+   "tx": "Three exceptions rescue students in viva. **Subconjunctival ecchymosis** never follows the usual colour sequence because oxygen diffuses through the conjunctiva; it stays bright red, then turns yellow directly. Children clear bruises rapidly, sometimes in days, while the elderly heal them very slowly. A bruise raised at the time of carbon monoxide poisoning can stay bright red from carboxyhaemoglobin, imitating a fresh injury on an older body.",
+   "say": "Eye bruises skip the colour parade, children clear bruises fast, and carbon monoxide keeps a bruise misleadingly red.",
+   "vis": {"kind": "compare", "left": {"title": "Faster or atypical", "points": ["Children clear bruises in days", "Subconjunctival stays red then yellow", "CO poisoning keeps bruises red", "Small bruises fade sooner"]}, "right": {"title": "Slower healing", "points": ["Elderly skin and vessels", "Large deep collections", "Poorly vascular sites", "Haematoidin crystals linger long"]}}
+  },
+  {
+   "title": "Ageing incised wounds and lacerations",
+   "tx": "Cut wounds heal on a timetable usable in court for the **age of an incised wound**. Edges are red, swollen and adherent by twelve hours; a continuous endothelial layer covers the surface by twenty four hours; neutrophils give way to macrophages by seventy two hours; vascularised granulation tissue and new fibrils form at four to five days; a soft reddish scar appears by one week. Lacerations can be aged only when granulation or fibroblast growth shows.",
+   "say": "Adherent edges at twelve hours, granulation at four days and a soft scar at one week date a healing cut wound.",
+   "vis": {"kind": "table", "cols": ["Age", "Incised wound stage", "Cells seen"], "rows": [["12 hours", "Edges red, swollen, adherent", "Leucocytes appreciable"], ["24 hours", "Endothelial layer covers surface", "Epithelium starts at edges"], ["72 hours", "Granulation tissue forming", "Macrophages replace neutrophils"], ["One week", "Soft reddish scar", "New fibrils laid down"]]}
+  },
+  {
+   "title": "When wounds cannot be separated in time",
+   "tx": "Honest limits matter: abrasions made slightly before or after death cannot be differentiated even microscopically, and **limits of wound timing** widen as decomposition advances. Blood in wounds of a body immersed soon after injury is lysed by water and washes away, so antemortem and postmortem injuries become indistinguishable. In a decomposed body, even telling a laceration from an incised wound can fail. The report should state these limits instead of guessing.",
+   "say": "Perimortem scrapes, immersed bodies and decay can erase timing evidence entirely, and the report must admit that plainly.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Assess decomposition first"}, {"id": "b", "label": "Check immersion history"}, {"id": "c", "label": "Seek vital reaction microscopically"}, {"id": "d", "label": "State limits where evidence fails"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "Therapeutic wounds masquerading as trauma",
+   "tx": "Doctors create wounds that later confuse investigators, grouped as **therapeutic wounds**. Surgical stab wounds for chest drains, laparotomy and thoracotomy incisions, cut downs at wrist, elbow and ankle, and tracheostomy openings can all be mistaken for assault injuries. A drain may even be placed through a homicidal stab wound, merging the two. Hospital records and operation notes, read before the autopsy opinion, prevent this avoidable error.",
+   "say": "Drain sites, cut downs and tracheostomy wounds imitate assault injuries, so read the treatment records before opining.",
+   "vis": {"kind": "table", "cols": ["Therapeutic wound", "Mistaken for", "Safeguard"], "rows": [["Chest drain stab", "Homicidal stab wound", "Check operation notes"], ["Tracheostomy incision", "Cut throat injury", "Look for the tube history"], ["Venous cut down", "Wrist slash wound", "Sites at wrist and ankle"], ["Laparotomy scar", "Abdominal stab or slash", "Correlate with surgery dates"]]}
+  }
+ ],
+ "quiz": []
+}

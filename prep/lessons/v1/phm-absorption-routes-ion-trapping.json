@@ -1,0 +1,279 @@
+{
+  "v": 1,
+  "module": "phm-absorption-routes",
+  "subject": "pharmacology",
+  "title": "Ion Trapping, P-Glycoprotein Transporters, Sustained Release, and Bioequivalence",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "When a non-ionized, lipid-soluble drug diffuses across a biological membrane into a compartment with differing pH, subsequent ionization prevents retro-diffusion, producing **ion trapping**. Weakly acidic drugs become ionized and trapped in basic environments, whereas weakly basic drugs accumulate in acidic fluids like gastric juice and breast milk. In acute phenobarbital or salicylate poisoning, intravenous sodium bicarbonate alkalinizes the urine, trapping ionized drug in renal tubular lumens and accelerating urinary excretion.",
+      "say": "Ion trapping occurs when differing pH ionizes a drug across a membrane, preventing retro-diffusion and trapping it.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Toxin / Drug",
+          "pKa and nature",
+          "Urinary manipulation",
+          "Clinical elimination mechanism"
+        ],
+        "rows": [
+          [
+            "Phenobarbital",
+            "pKa 7.2 (weak acid)",
+            "Alkalinization with sodium bicarbonate",
+            "Trapped as ionized conjugate in tubular lumen"
+          ],
+          [
+            "Salicylate (aspirin)",
+            "pKa 3.5 (weak acid)",
+            "Alkalinization with sodium bicarbonate",
+            "Increases renal clearance by over ten-fold"
+          ],
+          [
+            "Amphetamine",
+            "pKa 9.8 (weak base)",
+            "Acidification with ammonium chloride",
+            "Trapped as ionized ammonium cation in acidic urine"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Charge is a one way door at the tubular membrane. Uncharged weak acid molecules slip through lipid easily, but once they reach alkaline urine they gain a charge and become **ion trapped**, because charged molecules cannot diffuse back into blood. The diagram shows why alkalinising urine with bicarbonate speeds salicylate and phenobarbital elimination after overdose, turning the kidney into an exit route.",
+      "say": "Uncharged weak acid crosses into alkaline urine, gains a charge, and cannot return to blood. Alkalinising urine therefore speeds salicylate and phenobarbital elimination.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m293-phm-absorption-routes-ion-trapping.webp",
+        "alt": "Membrane diagram with uncharged weak acid molecules crossing into alkaline tubular fluid and charged molecules unable to cross back.",
+        "caption": "Ion trapping of a weak acid crossing into alkaline urine, where ionisation prevents reabsorption. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "An ATP-binding cassette transporter located on the apical membranes of enterocytes, renal proximal tubular cells, and brain capillary endothelia functions as **P-glycoprotein**. This efflux pump actively extrudes structurally diverse hydrophobic xenobiotics from the intracellular cytoplasm back into the intestinal lumen, urine, or blood. By pumping drugs outward, P-glycoprotein limits the oral absorption and blood-brain barrier penetration of essential therapeutic agents including digoxin, cyclosporine, and dabigatran etexilate.",
+      "say": "P-glycoprotein is an ATP-dependent pump that expels xenobiotics back into the gut lumen and out of the brain.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "entry",
+            "label": "Xenobiotic enters enterocyte cytoplasm"
+          },
+          {
+            "id": "binding",
+            "label": "Substrate binds P-glycoprotein pocket"
+          },
+          {
+            "id": "atp",
+            "label": "ATP hydrolysis conformational switch"
+          },
+          {
+            "id": "efflux",
+            "label": "Extrusion back into intestinal lumen"
+          }
+        ],
+        "edges": [
+          [
+            "entry",
+            "binding"
+          ],
+          [
+            "binding",
+            "atp"
+          ],
+          [
+            "atp",
+            "efflux"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Concomitant administration of pharmacological agents that inhibit or induce apical efflux pumps causes pronounced changes in substrate bioavailability and tissue distribution. Potent inhibitors like clarithromycin, verapamil, and amiodarone block transporter-mediated efflux, precipitating hazardous **digoxin toxicity** through combined enhancement of intestinal absorption and reduction of renal tubular secretion. Conversely, inducers like rifampicin and St John's wort upregulate P-glycoprotein expression, drastically reducing systemic substrate levels and causing therapeutic failure.",
+      "say": "Transporter inhibitors like verapamil and clarithromycin block P-glycoprotein, precipitating toxic surges in serum digoxin concentrations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "P-glycoprotein inhibitors",
+          "points": [
+            "Verapamil, amiodarone, quinidine",
+            "Clarithromycin, erythromycin, ketoconazole",
+            "Enhance intestinal substrate absorption",
+            "Increase brain entry across blood-brain barrier"
+          ]
+        },
+        "right": {
+          "title": "P-glycoprotein inducers",
+          "points": [
+            "Rifampicin, carbamazepine, phenytoin",
+            "St John's wort (hyperforin)",
+            "Accelerate intestinal drug extrusion",
+            "Reduce systemic substrate bioavailability"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Specially engineered oral solid dosage forms that slowly release active pharmaceutical ingredients over extended intervals are designated as **sustained release** preparations. Utilizing insoluble porous matrix cores, osmotic pump laser-drilled delivery tablets (OROS), or polymer-coated multi-particulate beads, these systems maintain uniform plasma concentrations within the therapeutic window. They eliminate steep peak-to-trough plasma oscillations, reduce dosing frequency from multiple daily doses to once daily, and significantly enhance patient compliance in chronic hypertension.",
+      "say": "Sustained release formulations maintain stable plasma concentrations over twenty-four hours, eliminating peak-and-trough oscillations.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-con-combined-pill.webp",
+        "alt": "Oral solid pharmaceutical formulation",
+        "caption": "Oral solid pharmaceutical tablet formulation designed for regular daily systemic absorption."
+      }
+    },
+    {
+      "tx": "Injectable parenteral suspensions, microcrystalline dispersions, or oily ester solutions administered deep into intramuscular or subcutaneous tissues constitute a **depot preparation**. The vehicle or crystalline lattice slowly dissolves into surrounding interstitial fluid, delivering sustained therapeutic drug levels over weeks or months. Key clinical examples include medroxyprogesterone acetate injections for three months of contraception, haloperidol decanoate for schizophrenia maintenance, and depot leuprolide acetate microspheres for prostate cancer androgen suppression.",
+      "say": "Depot preparations dissolve slowly from intramuscular tissue reservoirs to provide weeks or months of continuous drug release.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Depot preparation",
+          "Active drug entity",
+          "Physical vehicle / matrix",
+          "Duration of clinical action"
+        ],
+        "rows": [
+          [
+            "Depo-Provera",
+            "Medroxyprogesterone acetate",
+            "Microcrystalline aqueous suspension",
+            "Three months (contraception)"
+          ],
+          [
+            "Haldol Decanoate",
+            "Haloperidol decanoate",
+            "Sesame oil solution",
+            "Four weeks (antipsychotic)"
+          ],
+          [
+            "Lupron Depot",
+            "Leuprolide acetate",
+            "Biodegradable polymer microspheres",
+            "One to six months (GnRH agonist)"
+          ],
+          [
+            "Penicillin Depot",
+            "Benzathine penicillin G",
+            "Insoluble crystalline salt",
+            "Three to four weeks (streptococcal)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Two pharmaceutical products containing identical active drug moieties that display no statistically significant difference in bioavailability when administered at the same molar dose are established as **bioequivalence**. Regulatory health authorities mandate bioequivalence testing before approving generic formulations against innovator reference products. Demonstrating equivalent rate and extent of systemic exposure guarantees that the generic formulation will provide therapeutic efficacy and safety profiles identical to the original brand-name pharmaceutical.",
+      "say": "Bioequivalence verifies that generic and innovator formulations demonstrate identical rates and extents of systemic drug absorption.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Chemical equivalence",
+          "points": [
+            "Contains identical active chemical entity",
+            "Same dosage strength and salt form",
+            "Same route of administration",
+            "Does not guarantee identical absorption in vivo"
+          ]
+        },
+        "right": {
+          "title": "Biological equivalence",
+          "points": [
+            "Demonstrates identical in vivo bioavailability",
+            "Equivalent Cmax, Tmax, and total AUC",
+            "Interchangeable in clinical practice",
+            "Mandatory for generic drug approval"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Evaluating pharmaceutical equivalence requires rigorous crossover pharmacokinetic trials comparing key plasma concentration parameters in healthy human volunteers. The primary regulatory metric mandates that the ninety percent confidence interval for the geometric mean ratio of generic to innovator **AUC** and Cmax must fall strictly within the bioequivalence boundary of eighty to one hundred and twenty-five percent. This narrow acceptance range ensures that formulation differences will not precipitate subtherapeutic treatment failure or toxic drug overdoses.",
+      "say": "Regulatory authorities require the ninety percent confidence interval of generic AUC and Cmax to lie within eighty to one hundred twenty-five percent.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "trial",
+            "label": "Two-period randomized crossover trial in healthy volunteers"
+          },
+          {
+            "id": "sampling",
+            "label": "Serial blood sampling across elimination half-lives"
+          },
+          {
+            "id": "parameters",
+            "label": "Computation of Cmax, Tmax, and AUC0-inf"
+          },
+          {
+            "id": "boundary",
+            "label": "90% confidence interval falls strictly within 80% to 125%"
+          },
+          {
+            "id": "approval",
+            "label": "Regulatory approval as interchangeable generic product"
+          }
+        ],
+        "edges": [
+          [
+            "trial",
+            "sampling"
+          ],
+          [
+            "sampling",
+            "parameters"
+          ],
+          [
+            "parameters",
+            "boundary"
+          ],
+          [
+            "boundary",
+            "approval"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "For critical pharmaceuticals characterized by steep dose-response curves, small variations in systemic bioavailability can trigger disastrous clinical consequences, defined by a **narrow therapeutic index**. For drugs such as lithium, theophylline, warfarin, and cyclosporine, switching between distinct generic brands without therapeutic drug monitoring is strongly discouraged. Minor formulation discrepancies in dissolution rate or excipient binding can shift plasma concentrations outside the narrow therapeutic window into lethal toxicity.",
+      "say": "Substituting generic brands of narrow therapeutic index drugs like lithium and warfarin risks toxic overdose or therapeutic failure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Narrow-index drug",
+          "Therapeutic target window",
+          "Toxic manifestation",
+          "Clinical monitoring parameter"
+        ],
+        "rows": [
+          [
+            "Warfarin",
+            "INR 2.0 to 3.0",
+            "Major fatal hemorrhage",
+            "Prothrombin time and INR"
+          ],
+          [
+            "Lithium",
+            "0.6 to 1.2 mEq/L",
+            "Coarse tremor, ataxia, seizures",
+            "Serum lithium trough concentration"
+          ],
+          [
+            "Digoxin",
+            "0.5 to 0.9 ng/mL",
+            "Ventricular arrhythmias, nausea",
+            "Serum digoxin trough concentration"
+          ],
+          [
+            "Theophylline",
+            "5 to 15 mcg/mL",
+            "Tachycardia, refractory seizures",
+            "Serum theophylline concentration"
+          ]
+        ]
+      }
+    }
+  ]
+}

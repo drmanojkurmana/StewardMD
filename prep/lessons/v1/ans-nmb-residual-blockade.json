@@ -1,0 +1,300 @@
+{
+    "v": 1,
+    "id": "ans-nmb-residual-blockade",
+    "subject": "anaesthesia",
+    "module": "ans-nmb",
+    "title": "Postoperative Residual Curarisation: Monitoring, Tetanic Fade, and Safety Standards",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Postoperative Residual Curarisation (PORC)",
+            "tx": "**Postoperative residual curarisation definition** describes persistent objective neuromuscular weakness (train-of-four ratio under 0.9) upon arrival in the post-anaesthesia care unit following general anaesthesia. Occurring in up to 30 to 40 percent of patients reversed subjectively without quantitative acceleromyography, PORC represents a major preventable driver of postoperative critical respiratory events, hypoxaemia, and microaspiration.",
+            "say": "Postoperative residual curarisation definition describes persistent objective neuromuscular weakness (train-of-four ratio under 0.9) upon arrival in the post-anaesthesia care unit following general anaesthesia. Occurring in up to 30 to 40 percent of patients reversed subjectively without quantitative acceleromyography, PORC represents a major preventable driver of postoperative critical respiratory events, hypoxaemia, and microaspiration.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Clinical Parameter",
+                    "Inadequately Reversed (TOF <0.9)",
+                    "Adequately Reversed (TOF >0.9)",
+                    "Clinical Consequence of PORC"
+                ],
+                "rows": [
+                    [
+                        "Upper Airway Patency",
+                        "Genioglossus muscle tone depressed",
+                        "Full pharyngeal airway tone restored",
+                        "Obstructive hypopnoea and upper airway collapse"
+                    ],
+                    [
+                        "Hypoxic Ventilatory Response",
+                        "Carotid body hypoxic drive blunted by 50%",
+                        "Pristine ventilatory response to hypoxaemia",
+                        "Silent uncompensated arterial desaturation"
+                    ],
+                    [
+                        "Swallowing and Airway Protection",
+                        "Impaired upper esophageal coordination",
+                        "Intact vocal cord adduction and swallowing",
+                        "Silent microaspiration of pharyngeal secretions"
+                    ],
+                    [
+                        "Patient Subjective Sensation",
+                        "Distressing weakness, diplopia, dyspnoea",
+                        "Alert, comfortable, clear vision",
+                        "Severe post-anaesthetic psychological distress"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Failure of Subjective Clinical Tests",
+            "tx": "**Unreliability of clinical muscle strength tests** highlights why five-second sustained head lift, forceful hand grip, tongue protrusion, and inspiratory tidal volumes under 500 milliliters fail to exclude residual curarisation. A patient can readily perform a five-second sustained head lift with an objective TOF ratio as low as 0.60 to 0.70, harboring up to 70 percent residual nicotinic receptor occupancy in pharyngeal and respiratory muscles.",
+            "say": "Unreliability of clinical muscle strength tests highlights why five-second sustained head lift, forceful hand grip, tongue protrusion, and inspiratory tidal volumes under 500 milliliters fail to exclude residual curarisation. A patient can readily perform a five-second sustained head lift with an objective TOF ratio as low as 0.60 to 0.70, harboring up to 70 percent residual nicotinic receptor occupancy in pharyngeal and respiratory muscles.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Subjective Bedside Muscle Tests",
+                    "points": [
+                        "Five-second sustained neck flexion off the pillow",
+                        "Generating negative inspiratory force greater than 20 cmH2O",
+                        "Can still harbor up to 70 percent neuromuscular receptor blockade"
+                    ]
+                },
+                "right": {
+                    "title": "Quantitative Acceleromyography (TOF >0.9)",
+                    "points": [
+                        "Objective accelerometric measurement of adductor pollicis twitch",
+                        "Confirmed T4/T1 twitch height ratio exceeding 90 percent",
+                        "Guarantees full physiological recovery of upper airway protective reflexes"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Mechanisms of Tetanic Fade",
+            "tx": "**Pathophysiology of non-depolarizing tetanic fade** reflects presynaptic nicotinic acetylcholine receptor blockade during high-frequency motor stimulation. Sustained 50-Hertz tetanic motor stimulation normally stimulates presynaptic nicotinic receptors on the motor nerve terminal to mobilize vesicle stores, maintaining high acetylcholine release. Non-depolarizing relaxants block these presynaptic receptors, rapidly exhausting vesicular release and generating muscle contraction fade.",
+            "say": "Pathophysiology of non-depolarizing tetanic fade reflects presynaptic nicotinic acetylcholine receptor blockade during high-frequency motor stimulation. Sustained 50-Hertz tetanic motor stimulation normally stimulates presynaptic nicotinic receptors on the motor nerve terminal to mobilize vesicle stores, maintaining high acetylcholine release. Non-depolarizing relaxants block these presynaptic receptors, rapidly exhausting vesicular release and generating muscle contraction fade.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Deliver 50 Hz high-frequency tetanic nerve stimulation"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Non-depolarizing relaxant blocks presynaptic nicotinic receptors"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Impairs mobilization of reserve acetylcholine storage vesicles"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Acetylcholine release dwindles, producing visible muscular contraction fade"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Train-of-Four Stimulus Characteristics",
+            "tx": "**Standard train-of-four stimulation parameters** deliver four supramaximal square-wave electrical pulses of 0.2-millisecond duration at a frequency of 2 Hertz (one pulse every 0.5 seconds, total cycle 1.5 seconds) over an accessible peripheral motor nerve. Train-of-four cycles must not be repeated more frequently than every 15 to 20 seconds to prevent post-stimulation exhaustion and false-positive fade.",
+            "say": "Standard train-of-four stimulation parameters deliver four supramaximal square-wave electrical pulses of 0.2-millisecond duration at a frequency of 2 Hertz (one pulse every 0.5 seconds, total cycle 1.5 seconds) over an accessible peripheral motor nerve. Train-of-four cycles must not be repeated more frequently than every 15 to 20 seconds to prevent post-stimulation exhaustion and false-positive fade.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Stimulation Parameter",
+                    "Standard Technical Value",
+                    "Physiological Rationale",
+                    "Monitoring Precaution"
+                ],
+                "rows": [
+                    [
+                        "Electrical Pulse Frequency",
+                        "2 Hertz (2 cycles per second)",
+                        "Simulates physiological motor unit firing without tetanus",
+                        "Avoid exceeding 2 Hz to prevent vesicular depletion"
+                    ],
+                    [
+                        "Pulse Duration",
+                        "0.2 milliseconds square wave",
+                        "Stimulates motor axons without direct muscle depolarization",
+                        "Too wide pulse directly excites muscle fibers"
+                    ],
+                    [
+                        "Current Amplitude",
+                        "40 to 60 milliamperes (supramaximal)",
+                        "Recruits 100 percent of underlying motor nerve fibers",
+                        "Must establish supramaximal baseline while awake"
+                    ],
+                    [
+                        "Repetition Interval",
+                        "Every 15 to 20 seconds minimum",
+                        "Allows acetylcholine vesicle pools to replenish",
+                        "Rapid repeating causes false-positive fade readings"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Post-Tetanic Count Deep Monitoring",
+            "tx": "**Post-tetanic count deep blockade assessment** evaluates intense neuromuscular blockade when all four train-of-four twitches are absent (TOF count of zero). The stimulator delivers a 50-Hertz tetanic stimulus for five seconds (which drives massive calcium entry and mobilizes presynaptic acetylcholine), pauses for three seconds, and then delivers 1-Hertz single twitches. The number of elicited twitches correlates inversely with minutes remaining until first TOF twitch return.",
+            "say": "Post-tetanic count deep blockade assessment evaluates intense neuromuscular blockade when all four train-of-four twitches are absent (TOF count of zero). The stimulator delivers a 50-Hertz tetanic stimulus for five seconds (which drives massive calcium entry and mobilizes presynaptic acetylcholine), pauses for three seconds, and then delivers 1-Hertz single twitches. The number of elicited twitches correlates inversely with minutes remaining until first TOF twitch return.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Post-Tetanic Twitch Count",
+                    "Depth of Neuromuscular Blockade",
+                    "Estimated Time to First TOF Twitch",
+                    "Recommended Reversal Agent"
+                ],
+                "rows": [
+                    [
+                        "0 post-tetanic twitches",
+                        "Profound, intense neuromuscular paralysis",
+                        "Greater than 30 to 45 minutes",
+                        "Sugammadex 4 to 8 mg/kg if emergency reversal required"
+                    ],
+                    [
+                        "1 to 2 post-tetanic twitches",
+                        "Deep neuromuscular blockade",
+                        "Approximately 15 to 25 minutes",
+                        "Sugammadex 4 mg/kg (neostigmine ineffective)"
+                    ],
+                    [
+                        "4 to 6 post-tetanic twitches",
+                        "Moderate-to-deep blockade transition",
+                        "Approximately 5 to 10 minutes",
+                        "Sugammadex 2 to 4 mg/kg"
+                    ],
+                    [
+                        "Reappearance of T1 on TOF",
+                        "Moderate neuromuscular blockade",
+                        "Zero minutes (T1 is now detectable)",
+                        "Neostigmine 0.05 mg/kg with glycopyrrolate (or sugammadex 2 mg/kg)"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Double-Burst Stimulation Tactile Detection",
+            "tx": "**Double-burst stimulation tactile superiority** overcomes the human tactile threshold that cannot reliably detect train-of-four fade when the TOF ratio surpasses 0.60. Double-burst stimulation delivers two short 50-Hertz tetanic bursts separated by 750 milliseconds (DBS 3,3 consists of three pulses per burst). Tactile fade between the first and second muscle twitch is discernible by manual palpation up to a TOF ratio of 0.80.",
+            "say": "Double-burst stimulation tactile superiority overcomes the human tactile threshold that cannot reliably detect train-of-four fade when the TOF ratio surpasses 0.60. Double-burst stimulation delivers two short 50-Hertz tetanic bursts separated by 750 milliseconds (DBS 3,3 consists of three pulses per burst). Tactile fade between the first and second muscle twitch is discernible by manual palpation up to a TOF ratio of 0.80.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Standard Train-of-Four Tactile Feel",
+                    "points": [
+                        "Four individual twitches at 2 Hertz",
+                        "Manual palpation cannot detect fade when TOF ratio >0.60",
+                        "Clinicians routinely miss residual curarisation between 0.60 and 0.90"
+                    ]
+                },
+                "right": {
+                    "title": "Double-Burst Stimulation (DBS 3,3)",
+                    "points": [
+                        "Two high-frequency 50 Hz micro-tetanic bursts",
+                        "Amplifies the subjective difference between twitches",
+                        "Allows manual tactile detection of subtle fade up to TOF 0.80"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Acceleromyography and Objective Monitoring",
+            "tx": "**Quantitative acceleromyography monitoring technology** employs a piezoelectric sensor strapped to the thumb over the adductor pollicis tendon. Based on Newton second law (Force equals mass times acceleration), the transducer measures thumb acceleration upon ulnar nerve stimulation, calculating an objective digital TOF ratio and eliminating human observer error.",
+            "say": "Quantitative acceleromyography monitoring technology employs a piezoelectric sensor strapped to the thumb over the adductor pollicis tendon. Based on Newton second law (Force equals mass times acceleration), the transducer measures thumb acceleration upon ulnar nerve stimulation, calculating an objective digital TOF ratio and eliminating human observer error.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Attach piezoelectric sensor to palmar surface of thumb"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Place stimulation electrodes over ulnar nerve at wrist"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Deliver supramaximal TOF stimulation"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Microprocessor calculates digital T4/T1 ratio; extubate only when >0.90"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "ASA and ESAIC International Standards",
+            "tx": "**International neuromuscular safety guidelines** published by the American Society of Anesthesiologists and the European Society of Anaesthesiology mandate quantitative objective neuromuscular monitoring for every patient receiving non-depolarizing relaxants. Extubation is prohibited until acceleromyography confirms a TOF ratio greater than 0.90 at the adductor pollicis, backed by routine pharmacologic reversal with sugammadex or neostigmine.",
+            "say": "International neuromuscular safety guidelines published by the American Society of Anesthesiologists and the European Society of Anaesthesiology mandate quantitative objective neuromuscular monitoring for every patient receiving non-depolarizing relaxants. Extubation is prohibited until acceleromyography confirms a TOF ratio greater than 0.90 at the adductor pollicis, backed by routine pharmacologic reversal with sugammadex or neostigmine.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Standard Component",
+                    "Mandated Protocol Requirement",
+                    "Underlying Scientific Basis",
+                    "Patient Safety Outcome"
+                ],
+                "rows": [
+                    [
+                        "Monitoring Modality",
+                        "Quantitative acceleromyography or electromyography",
+                        "Subjective tactile evaluation misses 30% of PORC",
+                        "Guarantees objective proof of recovery before extubation"
+                    ],
+                    [
+                        "Extubation Threshold",
+                        "Strict objective TOF ratio greater than 0.90",
+                        "Restores normal pharyngeal protective tone",
+                        "Virtually eliminates post-extubation aspiration and reintubation"
+                    ],
+                    [
+                        "Monitoring Site for Recovery",
+                        "Adductor pollicis (ulnar nerve stimulation)",
+                        "Most sensitive peripheral muscle bed; recovers last",
+                        "If thumb is recovered, diaphragm and cords are guaranteed safe"
+                    ],
+                    [
+                        "Pharmacological Reversal",
+                        "Mandatory reversal unless spontaneous TOF >0.90",
+                        "Prevents unpredictable variable duration",
+                        "Slashes post-anaesthesia care unit respiratory arrest"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

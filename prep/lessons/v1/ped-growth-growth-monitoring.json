@@ -1,0 +1,190 @@
+{
+ "key": "ped-growth-growth-monitoring",
+ "v": 1,
+ "module": "ped-growth",
+ "subject": "paediatrics",
+ "title": "Growth Monitoring, WHO Standards and Anthropometric Indices",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "The continuous, dynamic evaluation of child physical development over time is **growth monitoring and promotion**. Regular measurement of body dimensions plotted on standardized growth charts detects subtle growth faltering long before overt malnutrition manifests clinically, enabling early nutritional and developmental intervention during the critical first one thousand days of life.",
+   "say": "Growth monitoring plots physical dimensions on charts to detect growth faltering before overt malnutrition.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-annex-paed-growth_charts.webp",
+    "alt": "WHO growth charts, malnutrition thresholds, and mid-upper arm circumference measurement.",
+    "caption": "WHO growth charts, malnutrition diagnostic cutoffs, and arm circumference assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "International pediatric assessment relies on the **WHO child growth standards**, derived from the Multicentre Growth Reference Study. Unlike historical reference curves describing how children grew in a single population, WHO standards establish a prescriptive biological norm, demonstrating how healthy children grow worldwide when provided optimal nutrition, exclusive breastfeeding, and hygienic environments.",
+   "say": "WHO growth standards establish an international biological norm for optimal early childhood growth.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "WHO Growth Standards (Prescriptive)",
+     "points": [
+      "Derived from optimal global cohort",
+      "Children exclusively breastfed for 4 to 6 months",
+      "Shows how children should grow worldwide"
+     ]
+    },
+    "right": {
+     "title": "Historical Growth References (Descriptive)",
+     "points": [
+      "Described past populations (NCHS curves)",
+      "Included high proportions of formula-fed infants",
+      "Artificially higher weight gain standards"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Nutritional indices express statistical deviation from the median as **anthropometric standard deviation z-scores**. A z-score quantifies the exact distance of an individual child's measurement from the reference median divided by the standard deviation. A score between minus two and plus two represents the normal healthy range, while scores below minus two indicate malnutrition.",
+   "say": "Standard deviation z-scores measure distance from the reference median, with minus two marking malnutrition.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Z-Score Range",
+     "Nutritional Classification",
+     "Clinical Interpretation"
+    ],
+    "rows": [
+     [
+      "Between -2 SD and +2 SD",
+      "Normal nutritional status",
+      "Optimal physical growth trajectory"
+     ],
+     [
+      "Between -2 SD and -3 SD",
+      "Moderate undernutrition",
+      "Requires targeted supplementary nutrition"
+     ],
+     [
+      "Below -3 SD",
+      "Severe undernutrition",
+      "Critical malnutrition requiring facility-based care"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic linear growth failure resulting from sustained, cumulative nutrient deprivation is classified as **childhood nutritional stunting**. Defined as a height-for-age or length-for-age falling below minus two standard deviations from the WHO median, stunting reflects long-standing chronic malnutrition, recurrent enteric infections, and persistent environmental enteropathy, causing permanent cognitive and economic deficits.",
+   "say": "Stunting is length or height for age below minus two standard deviations, reflecting chronic undernutrition.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Growth Index",
+     "Malnutrition Category",
+     "Etiological Process"
+    ],
+    "rows": [
+     [
+      "Height-for-age < -2 SD",
+      "Stunting (chronic undernutrition)",
+      "Sustained cumulative deprivation, poor linear growth"
+     ],
+     [
+      "Weight-for-height < -2 SD",
+      "Wasting (acute undernutrition)",
+      "Acute starvation, rapid weight loss, severe infection"
+     ],
+     [
+      "Weight-for-age < -2 SD",
+      "Underweight (composite indicator)",
+      "Combines elements of both acute wasting and chronic stunting"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Acute starvation resulting in rapid subcutaneous fat and muscle wasting produces **severe childhood wasting**. Diagnosed when weight-for-height falls below minus three standard deviations or mid-upper arm circumference is less than 11.5 centimeters, it represents severe acute malnutrition. Affected children face a ninefold higher mortality risk from infectious complications.",
+   "say": "Wasting below minus three standard deviations defines severe acute malnutrition with high mortality risk.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Diagnostic Criteria for SAM",
+     "points": [
+      "Weight-for-height below -3 SD",
+      "Mid-upper arm circumference under 115 mm",
+      "Presence of bilateral pitting nutritional edema"
+     ]
+    },
+    "right": {
+     "title": "Clinical Vulnerabilities",
+     "points": [
+      "Hypothermia, hypoglycemia, and dehydration",
+      "Severe electrolyte imbalance (potassium/magnesium depletion)",
+      "Impaired immune defense and occult septicemia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "In children under two years of age, recumbent length is measured using an **infantometer measuring board**. The infant lies supine with the vertex of the head touching the fixed headboard, legs fully extended at the knees, and feet flat against the sliding footboard. Above two years of age, standing height is measured on a stadiometer, which measures approximately 0.7 centimeters less than length.",
+   "say": "Recumbent length is measured on an infantometer up to two years, switching to a stadiometer thereafter.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-anthro-length-height-mph.webp",
+    "alt": "Measurement of infant length on an infantometer and child height on a stadiometer.",
+    "caption": "Standardized infantometer length measurement and stadiometer height assessment. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Rapid community screening for acute malnutrition in children aged six to fifty-nine months utilizes **mid-upper arm circumference**. Measured midway between the acromion of the scapula and olecranon of the ulna on the relaxed left arm, an arm circumference under 11.5 centimeters in the red zone designates severe acute malnutrition, while 11.5 to 12.5 centimeters denotes moderate acute malnutrition.",
+   "say": "Mid-upper arm circumference under 11.5 centimeters identifies severe acute malnutrition in young children.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "MUAC Measurement Strip Color",
+     "Arm Circumference Cutoff",
+     "Nutritional Status"
+    ],
+    "rows": [
+     [
+      "Red zone",
+      "Below 11.5 cm (under 115 mm)",
+      "Severe acute malnutrition (urgent referral)"
+     ],
+     [
+      "Yellow zone",
+      "11.5 to 12.5 cm (115 to 124 mm)",
+      "Moderate acute malnutrition (supplementary feeding)"
+     ],
+     [
+      "Green zone",
+      "12.5 cm or greater (125 mm and above)",
+      "Normal nutritional status"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Normal cranial growth reflects underlying brain development, tracked via **head circumference measurement**. Measured using a non-stretchable flexible tape passing across the supraorbital ridges and maximum occipital protuberance, normal head circumference averages thirty-five centimeters at birth, reaches forty centimeters at three months, forty-five centimeters at one year, and fifty centimeters at two years.",
+   "say": "Head circumference averages thirty-five centimeters at birth, forty-five at one year, and fifty at two years.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Head Circumference Progression",
+     "points": [
+      "Birth: approximately 35 cm",
+      "3 months: 40 cm (grows 2 cm/month initially)",
+      "1 year: 45 cm (grows 10 cm in first year)"
+     ]
+    },
+    "right": {
+     "title": "Clinical Pathologies",
+     "points": [
+      "Microcephaly: head circumference below -2 SD",
+      "Macrocephaly: head circumference above +2 SD",
+      "Craniosynostosis: premature suture fusion"
+     ]
+    }
+   }
+  }
+ ]
+}

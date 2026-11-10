@@ -1,0 +1,171 @@
+{
+  "v": 1,
+  "module": "pat-cervix-uterus",
+  "subject": "pathology",
+  "title": "CIN, HPV Koilocytes, Pap Screening, Cervical and Endometrial Cancers, Endometriosis, Leiomyoma, and Molar Pregnancy",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Persistent infection with high risk HPV types 16 and 18 drives **cervical intraepithelial neoplasia** in the transformation zone, where columnar epithelium is being replaced by squamous cells. Atypia occupying the lower third is CIN 1, two thirds is CIN 2, and full thickness change without invasion is CIN 3. Most CIN 1 regresses, whereas untreated CIN 3 carries substantial progression risk.",
+      "say": "Persistent HPV dysplasias the transformation zone by thirds; CIN three is carcinoma in situ awaiting invasion's breach.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "a",
+            "label": "High risk HPV persists in transformation zone"
+          },
+          {
+            "id": "b",
+            "label": "E6 E7 disable p53 and RB"
+          },
+          {
+            "id": "c",
+            "label": "CIN grades through epithelial thirds"
+          },
+          {
+            "id": "d",
+            "label": "Invasion breaches basement membrane"
+          }
+        ],
+        "edges": [
+          [
+            "a",
+            "b"
+          ],
+          [
+            "b",
+            "c"
+          ],
+          [
+            "c",
+            "d"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A superficial squamous cell with a sharply cleared perinuclear halo, enlarged wrinkled raisin-like nucleus and dense peripheral cytoplasm is a **koilocyte**, the cytopathic signature of productive HPV infection. Finding koilocytes on a smear places the lesion in low grade territory. Their absence in a high grade lesion does not exclude HPV, because replicative change fades as dysplasia advances.",
+      "say": "Perinuclear halo plus raisin nucleus equals koilocyte; HPV signs its work in superficial cells.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m135-pat-cervix-uterus-cervical-intraepithelial-neoplasia.webp",
+        "alt": "Koilocytes on Pap smear with perinuclear halos and raisin nuclei",
+        "caption": "Koilocytes on Pap smear with perinuclear halos and raisin nuclei. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "Prophylactic **HPV vaccination** before first sexual exposure prevents most infections with types 16 and 18, which together cause about 70 percent of cervical cancers. Screening then catches established precursors: primary HPV testing is more sensitive than cytology alone, with a negative result allowing longer intervals. Excising CIN 2 or 3 by loop excision completes a prevention chain few cancers can match.",
+      "say": "Vaccinate, screen by HPV, excise precursors: cervical cancer prevention is prevention's proof of concept.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cytology screening",
+          "points": [
+            "Pap smear morphology",
+            "Triage by HPV reflex increasingly",
+            "Catches established lesions"
+          ]
+        },
+        "right": {
+          "title": "Primary HPV screening",
+          "points": [
+            "Viral test first, longer intervals",
+            "Cytology triages positives",
+            "Vaccination reshapes prevalence"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Roughly 70 percent of cervical cancers are **squamous cell carcinoma**, with adenocarcinoma forming most of the remainder and rising as screening removes squamous precursors more efficiently. Postcoital and intermenstrual bleeding are the presenting clues that demand speculum inspection. Locally advanced tumours are treated with concurrent chemoradiation rather than surgery, and parametrial invasion on examination is the finding that pushes stage upward.",
+      "say": "Cervical cancer stages by spread, treats locally advanced disease with chemoradiation, and traces to HPV.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/ss-gyn-cervix-endometrium-staging-therapy-fig1.webp",
+        "alt": "Endometrial and cervical cancer invasion and therapy",
+        "caption": "Cervical and endometrial cancer invasion patterns guiding staging therapy."
+      }
+    },
+    {
+      "tx": "Unopposed oestrogen from obesity, anovulation or oestrogen therapy first produces hyperplasia without atypia, which usually settles with progestin. **Atypical hyperplasia**, also called endometrioid intraepithelial neoplasia, is a different beast: hysterectomy specimens reveal concurrent carcinoma in roughly a third of cases. Postmenopausal bleeding with a thickened endometrial stripe therefore always needs tissue sampling, never reassurance alone.",
+      "say": "Atypical hyperplasia is endometrial cancer's antechamber; a third already harbour carcinoma at hysterectomy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Endometrial lesion",
+          "Driver accent",
+          "Cancer risk"
+        ],
+        "rows": [
+          [
+            "Hyperplasia without atypia",
+            "Unopposed oestrogen",
+            "Low, progestin responsive"
+          ],
+          [
+            "Atypical hyperplasia EIN",
+            "Clonal precancer",
+            "High concurrent carcinoma"
+          ],
+          [
+            "Endometrioid carcinoma",
+            "Oestrogen, PTEN pathway",
+            "Grade by solid share"
+          ],
+          [
+            "Serous carcinoma",
+            "TP53, older atrophic background",
+            "Aggressive from inception"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Ectopic endometrial glands plus stroma define **endometriosis**, most often seeded on ovaries, pouch of Douglas and uterosacral ligaments by retrograde menstruation. Cyclic bleeding into an ovarian implant degrades into a chocolate cyst, or endometrioma, filled with old blood. The symptom triad worth memorising is dysmenorrhoea, deep dyspareunia and infertility, with severity of pain correlating poorly with surgical stage.",
+      "say": "Chocolate cysts and cyclical pelvic pain mean endometriosis; glands plus stroma outside uterus prove it.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/endometriosis-fig1.webp",
+        "alt": "Endometriosis common locations and appearance",
+        "caption": "Endometriosis locations and appearances across ovary and pelvis."
+      }
+    },
+    {
+      "tx": "A **uterine leiomyoma** is a benign smooth muscle tumour forming firm whorled white balls that distort the uterus, causing heavy menstrual bleeding, pelvic pressure and urinary frequency during reproductive years. Growth is oestrogen dependent, so fibroids shrink after menopause. Leiomyosarcoma does not arise from a pre-existing fibroid; it typically appears de novo, and rapid postmenopausal uterine growth should raise that alarm.",
+      "say": "Fibroids shrink after menopause; a growing postmenopausal uterine mass thinks sarcoma instead.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Leiomyoma",
+          "points": [
+            "Reproductive years, multiple whorled",
+            "Shrinks after menopause",
+            "Bleeding by submucosal site"
+          ]
+        },
+        "right": {
+          "title": "Leiomyosarcoma",
+          "points": [
+            "Postmenopausal growth, solitary",
+            "Necrosis and mitoses histologically",
+            "Haematogenous lung spread"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In a **complete hydatidiform mole**, an empty ovum fertilised by sperm gives a purely paternal 46,XX genome, hydropic grape-like villi and no embryo at all. A partial mole is triploid with some fetal tissue present. Beta-hCG rises far beyond normal pregnancy levels, and suction evacuation must be followed by serial hCG surveillance because about 15 percent of complete moles progress to gestational trophoblastic neoplasia.",
+      "say": "Grape villi, sky high beta-hCG, no fetus in complete mole; evacuate and follow hCG to zero.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/gestational-trophoblastic-disease-fig1.webp",
+        "alt": "Molar pregnancy ultrasound",
+        "caption": "Molar pregnancy imaging with vesicular snowstorm pattern."
+      }
+    }
+  ]
+}

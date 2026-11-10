@@ -1,0 +1,296 @@
+{
+    "v": 1,
+    "id": "ans-local-anaesthetics-maximum-safe-dose",
+    "subject": "anaesthesia",
+    "module": "ans-local-anaesthetics",
+    "title": "Local Anaesthetic Systemic Toxicity: Maximum Doses, LAST, and Intralipid Rescue",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Maximum Safe Dosing Guidelines",
+            "tx": "**Maximum safe weight-based dosages** define upper boundaries to prevent systemic toxicity: plain lignocaine is capped at 3 to 4.5 mg/kg (maximal 300 mg in adults), expanding to 7 mg/kg (maximal 500 mg) when combined with adrenaline (1:200,000). Plain bupivacaine is capped at 2 mg/kg (maximal 150 mg), expanding to 2.5 to 3 mg/kg (maximal 200 mg) with adrenaline, while ropivacaine is capped at 3 to 3.5 mg/kg.",
+            "say": "Maximum safe weight-based dosages define upper boundaries to prevent systemic toxicity: plain lignocaine is capped at 3 to 4.5 mg/kg (maximal 300 mg in adults), expanding to 7 mg/kg (maximal 500 mg) when combined with adrenaline (1:200,000). Plain bupivacaine is capped at 2 mg/kg (maximal 150 mg), expanding to 2.5 to 3 mg/kg (maximal 200 mg) with adrenaline, while ropivacaine is capped at 3 to 3.5 mg/kg.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Local Anaesthetic Agent",
+                    "Plain Maximum Safe Dose",
+                    "Maximal Dose with Adrenaline",
+                    "Absolute Adult Ceiling Dose"
+                ],
+                "rows": [
+                    [
+                        "Lignocaine (Lidocaine)",
+                        "3.0 to 4.5 mg/kg",
+                        "7.0 mg/kg (with 1:200,000 adrenaline)",
+                        "300 mg plain / 500 mg with adrenaline"
+                    ],
+                    [
+                        "Bupivacaine (Marcaine)",
+                        "2.0 mg/kg",
+                        "2.5 to 3.0 mg/kg",
+                        "150 mg plain / 200 mg with adrenaline"
+                    ],
+                    [
+                        "Ropivacaine (Naropin)",
+                        "3.0 mg/kg",
+                        "3.5 to 4.0 mg/kg",
+                        "225 mg plain / 300 mg with adrenaline"
+                    ],
+                    [
+                        "Procaine",
+                        "7.0 mg/kg",
+                        "10.0 mg/kg",
+                        "500 mg plain / 1,000 mg with adrenaline"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Adrenaline as a Chemical Tourniquet",
+            "tx": "**Adrenaline local vasoconstrictive action** at standard 1:200,000 concentrations (5 micrograms per milliliter) stimulates local vascular alpha-1 adrenergic receptors, producing arteriolar vasoconstriction. This slows the rate of vascular absorption into systemic circulation by 30 to 50 percent, lowering peak plasma drug concentrations (C-max), extending duration of surgical analgesia, and serving as an intravascular test marker.",
+            "say": "Adrenaline local vasoconstrictive action at standard 1:200,000 concentrations (5 micrograms per milliliter) stimulates local vascular alpha-1 adrenergic receptors, producing arteriolar vasoconstriction. This slows the rate of vascular absorption into systemic circulation by 30 to 50 percent, lowering peak plasma drug concentrations (C-max), extending duration of surgical analgesia, and serving as an intravascular test marker.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Plain Local Anaesthetic Infiltration",
+                    "points": [
+                        "Rapid vascular uptake through dilated microcapillaries",
+                        "High, early plasma concentration peak (C-max)",
+                        "Shorter duration of tissue analgesia"
+                    ]
+                },
+                "right": {
+                    "title": "Adrenaline 1:200,000 Co-Administration",
+                    "points": [
+                        "Arteriolar vasoconstriction acts as a chemical tourniquet",
+                        "Blunts peak systemic plasma level by 30 to 50 percent",
+                        "Doubles duration of sensory blockade"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Vascular Absorption Site Hierarchy",
+            "tx": "**Systemic absorption hierarchy across injection sites** determines peak plasma concentration and toxicity risk according to local microvascular tissue perfusion, remembered by the BICEPS mnemonic: Blood (intravenous) yields immediate catastrophic levels, followed by Intercostal nerve blocks, Caudal epidural, Epidural lumbar, Plexus (brachial), and Subcutaneous tissue, which exhibits the slowest absorption rate.",
+            "say": "Systemic absorption hierarchy across injection sites determines peak plasma concentration and toxicity risk according to local microvascular tissue perfusion, remembered by the BICEPS mnemonic: Blood (intravenous) yields immediate catastrophic levels, followed by Intercostal nerve blocks, Caudal epidural, Epidural lumbar, Plexus (brachial), and Subcutaneous tissue, which exhibits the slowest absorption rate.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Anatomical Site Tier",
+                    "Vascularity and Absorption Velocity",
+                    "Representative Regional Technique",
+                    "Relative LAST Risk"
+                ],
+                "rows": [
+                    [
+                        "Intravenous (Direct)",
+                        "Instantaneous peak plasma level",
+                        "Accidental intravascular cannulation",
+                        "Extreme immediate cardiovascular collapse"
+                    ],
+                    [
+                        "Intercostal Nerve Block",
+                        "Highest extravascular absorption rate",
+                        "Intercostal neurovascular bundle block",
+                        "Highest non-intravascular systemic drug peak"
+                    ],
+                    [
+                        "Caudal Epidural Space",
+                        "Rich epidural venous plexus absorption",
+                        "Pediatric caudal epidural block",
+                        "High peak; requires careful weight calculation"
+                    ],
+                    [
+                        "Lumbar Epidural Space",
+                        "Substantial absorption via Batson plexus",
+                        "Labor epidural analgesia",
+                        "Intermediate systemic absorption rate"
+                    ],
+                    [
+                        "Brachial Plexus Block",
+                        "Moderate vascular clearance",
+                        "Supraclavicular or axillary block",
+                        "Moderate risk; aspirate before injection"
+                    ],
+                    [
+                        "Subcutaneous Infiltration",
+                        "Slowest extravascular absorption",
+                        "Local surgical wound infiltration",
+                        "Lowest peak plasma level; safest site"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Progression of LAST Symptoms",
+            "tx": "**Progression of local anaesthetic systemic toxicity** initially displays central nervous system excitation followed by depression, culminating in cardiovascular collapse. Early subjective warning signs include perioral numbness, tongue tingling, metallic taste in the mouth, tinnitus, and auditory hallucinations, progressing rapidly to visual disturbances, muscular fasciculations, grand mal convulsions, respiratory arrest, and coma.",
+            "say": "Progression of local anaesthetic systemic toxicity initially displays central nervous system excitation followed by depression, culminating in cardiovascular collapse. Early subjective warning signs include perioral numbness, tongue tingling, metallic taste in the mouth, tinnitus, and auditory hallucinations, progressing rapidly to visual disturbances, muscular fasciculations, grand mal convulsions, respiratory arrest, and coma.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Perioral numbness, metallic taste, and tinnitus"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Visual disturbances, dysarthria, and muscle twitching"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Grand mal tonic-clonic generalized seizures"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Coma, respiratory arrest, and refractory ventricular arrhythmias"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Cardiovascular Toxicity Patterns",
+            "tx": "**Cardiovascular collapse in LAST** presents with broad complex ventricular arrhythmias, extreme bradycardia, sinus arrest, progressive intraventricular conduction delays (widening QRS and prolonged PR interval), ventricular tachycardia, and refractory ventricular fibrillation. In bupivacaine toxicity, cardiac arrest can occur precipitously without preceding central nervous system prodromal warning signs.",
+            "say": "Cardiovascular collapse in LAST presents with broad complex ventricular arrhythmias, extreme bradycardia, sinus arrest, progressive intraventricular conduction delays (widening QRS and prolonged PR interval), ventricular tachycardia, and refractory ventricular fibrillation. In bupivacaine toxicity, cardiac arrest can occur precipitously without preceding central nervous system prodromal warning signs.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Classical Lignocaine LAST Course",
+                    "points": [
+                        "Clear progression through CNS warning signs before cardiac arrest",
+                        "Perioral numbness and seizures precede arrhythmia by several minutes",
+                        "Wide therapeutic margin between seizure threshold and cardiac collapse"
+                    ]
+                },
+                "right": {
+                    "title": "Fulminant Bupivacaine LAST Course",
+                    "points": [
+                        "Malignant ventricular arrhythmias can occur simultaneously with seizures",
+                        "Direct refractory ventricular fibrillation without prior CNS signs",
+                        "Narrow margin between convulsant and fatal cardiotoxic thresholds"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Immediate LAST Airway and Seizure Control",
+            "tx": "**Immediate emergency management of LAST** demands immediate cessation of local anaesthetic injection, calling for multidisciplinary resuscitation assistance, securing the airway with 100 percent oxygen to prevent hypercapnia and acidosis (which worsen local anaesthetic toxicity), and suppressing seizures with intravenous midazolam (1 to 2 mg) or propofol (in small 20-30 mg increments to avoid worsening cardiovascular depression).",
+            "say": "Immediate emergency management of LAST demands immediate cessation of local anaesthetic injection, calling for multidisciplinary resuscitation assistance, securing the airway with 100 percent oxygen to prevent hypercapnia and acidosis (which worsen local anaesthetic toxicity), and suppressing seizures with intravenous midazolam (1 to 2 mg) or propofol (in small 20-30 mg increments to avoid worsening cardiovascular depression).",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Stop local anaesthetic injection immediately and call for help"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Secure airway and ventilate with 100% oxygen"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Administer IV midazolam or low-dose propofol to stop seizures"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Fetch LAST rescue kit containing 20% Intralipid emulsion"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Intralipid 20 Percent Rescue Protocol",
+            "tx": "**Intralipid 20 percent emulsion rescue protocol** is the definitive antidote for local anaesthetic cardiotoxicity. Administer an immediate intravenous bolus of 20 percent lipid emulsion at 1.5 milliliters per kilogram over one minute (approximately 100 mL in an adult), immediately followed by a continuous infusion of 0.25 mL/kg/min (approximately 1,000 mL/hour). For refractory arrest, repeat the bolus twice and double the infusion rate.",
+            "say": "Intralipid 20 percent emulsion rescue protocol is the definitive antidote for local anaesthetic cardiotoxicity. Administer an immediate intravenous bolus of 20 percent lipid emulsion at 1.5 milliliters per kilogram over one minute (approximately 100 mL in an adult), immediately followed by a continuous infusion of 0.25 mL/kg/min (approximately 1,000 mL/hour). For refractory arrest, repeat the bolus twice and double the infusion rate.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Lipid Emulsion Step",
+                    "Weight-Based Dosing Formula",
+                    "Standard 70-kg Adult Volume",
+                    "Administration Instructions"
+                ],
+                "rows": [
+                    [
+                        "Initial Intravenous Bolus",
+                        "1.5 milliliters per kilogram",
+                        "100 milliliters of 20% Intralipid",
+                        "Inject rapidly over 1 full minute"
+                    ],
+                    [
+                        "Continuous Maintenance Infusion",
+                        "0.25 mL/kg/min (15 mL/kg/hour)",
+                        "Approximately 18 mL/min (1,000 mL/hr)",
+                        "Run continuously via dedicated infusion set"
+                    ],
+                    [
+                        "Repeat Bolus (Refractory Arrest)",
+                        "1.5 mL/kg every 3 to 5 minutes",
+                        "100 milliliters per repeat bolus",
+                        "Administer up to 2 repeat boluses if pulseless"
+                    ],
+                    [
+                        "Maximal Cumulative Dose",
+                        "12 milliliters per kilogram",
+                        "Approximately 800 to 1,000 mL total",
+                        "Do not exceed 12 mL/kg in first hour"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Mechanism of Lipid Rescue and Resuscitation",
+            "tx": "**Lipid sink and metabolic activation mechanisms** reverse toxicity through two complementary actions: the lipid sink mechanism creates an intravascular hydrophobic lipid phase that draws highly lipophilic bupivacaine molecules away from cardiac tissue down a concentration gradient. Concurrently, high-dose fatty acids overcome local anaesthetic-induced mitochondrial acylcarnitine transport blockade, restoring ATP synthesis in myocardium.",
+            "say": "Lipid sink and metabolic activation mechanisms reverse toxicity through two complementary actions: the lipid sink mechanism creates an intravascular hydrophobic lipid phase that draws highly lipophilic bupivacaine molecules away from cardiac tissue down a concentration gradient. Concurrently, high-dose fatty acids overcome local anaesthetic-induced mitochondrial acylcarnitine transport blockade, restoring ATP synthesis in myocardium.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Modified ACLS Modifications in LAST",
+                    "points": [
+                        "Reduce adrenaline boluses to under 1 microgram/kg (under 100 mcg)",
+                        "Avoid vasopressin entirely; worsens lipid resuscitation success",
+                        "Strictly avoid class IB and IC antiarrhythmics (lignocaine/flecainide)"
+                    ]
+                },
+                "right": {
+                    "title": "Lipid Sink Dynamic Clearance",
+                    "points": [
+                        "Absorbs unbound free local anaesthetic molecules from plasma",
+                        "Accelerates clearance from myocardial sodium channel binding sites",
+                        "Restores organized cardiac conduction and spontaneous rhythm"
+                    ]
+                }
+            }
+        }
+    ],
+    "quiz": []
+}

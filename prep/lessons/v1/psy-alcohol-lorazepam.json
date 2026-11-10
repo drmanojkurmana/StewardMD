@@ -1,0 +1,259 @@
+{
+ "v": 1,
+ "id": "psy-alcohol-lorazepam",
+ "subject": "psychiatry",
+ "module": "psy-alcohol",
+ "title": "Wernicke-Korsakoff Syndrome and Cirrhotic Withdrawal",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Wernicke encephalopathy** is an acute, life-threatening neuropsychiatric emergency caused by severe thiamine (vitamin B1) deficiency, characteristically encountered in chronic alcohol dependence and severe nutritional deprivation. The classic clinical presentation features a triad of global confusion, cerebellar ataxia, and bilateral ophthalmoplegia with nystagmus.",
+   "say": "Wernicke encephalopathy is an acute medical emergency from thiamine deficiency, classically presenting with confusion, ataxia, and ocular motor palsies.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Classic Clinical Triad",
+     "points": [
+      "Global mental confusion & disorientation",
+      "Truncal & gait cerebellar ataxia",
+      "Bilateral abducens palsy (CN VI)",
+      "Horizontal & vertical nystagmus"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic Reality",
+     "points": [
+      "Full triad present in only thirty percent",
+      "Confusion is the most frequent sign",
+      "Petechial hemorrhages in mammillary bodies",
+      "Rapidly fatal if untreated with thiamine"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Brain magnetic resonance imaging in acute Wernicke encephalopathy demonstrates characteristic selective vulnerability of periventricular structures lacking adequate thiamine pyrophosphate. Symmetrical **mammillary body hyperintensity** on T2-weighted and fluid-attenuated inversion recovery sequences, alongside signal abnormalities within the dorsomedial thalamus and periaqueductal gray matter, confirms acute neurotoxicity. Prompt intravenous thiamine must precede glucose administration to prevent irreversible necrosis.",
+   "say": "Mammillary body hyperintensity and medial thalamic signal changes on T2-weighted MRI confirm acute Wernicke encephalopathy requiring urgent parenteral thiamine.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/phe-lifestyle-gen1.webp",
+    "alt": "Axial brain scan showing bright signal in mammillary bodies and medial thalamus.",
+    "caption": "Axial brain scan showing bright signal in mammillary bodies and medial thalamus, matching Wernicke changes from severe thiamine depletion. Brain MRI shows bright thiamine deficiency changes in midbrain. Illustration: StewardMD original.",
+    "ar": 1.3333
+   }
+  },
+  {
+   "tx": "**Neuropathology of Wernicke encephalopathy** demonstrates selective microvascular congestion, petechial haemorrhages, and glial proliferation within periventricular diencephalic structures. Vulnerable regions include the mammillary bodies, periaqueductal grey matter of the midbrain, and the dorsomedial and anterior nuclei of the thalamus, reflecting their high rate of thiamine-dependent glucose metabolism.",
+   "say": "Microscopic pathology reveals petechial hemorrhages and capillary endothelial proliferation in the mammillary bodies, thalamus, and midbrain periaqueductal gray.",
+   "vis": {
+    "kind": "table",
+    "title": "Neuropathological Distribution",
+    "cols": [
+     "Anatomical Structure",
+     "Observed Pathology",
+     "Clinical Correlation"
+    ],
+    "rows": [
+     [
+      "Mammillary bodies",
+      "Petechial hemorrhage & capillary proliferation",
+      "Acute confusion and transitional amnesic deficits"
+     ],
+     [
+      "Periaqueductal grey",
+      "Endothelial swelling and astrogliosis",
+      "Horizontal and vertical gaze palsies"
+     ],
+     [
+      "Vestibular nuclei",
+      "Neuronal chromatolysis and edema",
+      "Vestibular dysfunction and severe truncal ataxia"
+     ],
+     [
+      "Medial thalamus",
+      "Microvascular necrosis and spongiosis",
+      "Profound anterograde memory encoding failure"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Parenteral thiamine treatment protocol** requires immediate intravenous or intramuscular administration of high-dose thiamine (500 milligrams three times daily) diluted in normal saline over 30 minutes for three consecutive days. Oral thiamine is completely ineffective in acute Wernicke encephalopathy due to alcohol-induced mucosal malabsorption.",
+   "say": "Acute Wernicke encephalopathy demands immediate high-dose parenteral thiamine of five hundred milligrams three times daily. Oral thiamine fails due to malabsorption.",
+   "vis": {
+    "kind": "flow",
+    "title": "Emergency Thiamine Protocol",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Identify clinical signs: confusion, nystagmus, or ataxia"
+     },
+     {
+      "id": "n2",
+      "label": "Administer IV thiamine 500 mg infused over 30 minutes"
+     },
+     {
+      "id": "n3",
+      "label": "Continue thiamine 500 mg IV three times daily for 3 days"
+     },
+     {
+      "id": "n4",
+      "label": "Step down to 250 mg daily until full cognitive stabilization"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lorazepam pharmacokinetics in hepatic cirrhosis** make it the undisputed sedative of choice for alcohol withdrawal in patients with chronic liver disease, alcoholic hepatitis, or cirrhosis. Unlike chlordiazepoxide, lorazepam bypasses Phase I hepatic cytochrome P450 oxidation, undergoing direct Phase II glucuronidation to form an inactive water-soluble conjugate.",
+   "say": "Lorazepam is the sedative of choice in liver cirrhosis because it undergoes direct glucuronidation without relying on hepatic cytochrome P450 enzymes.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/obg-drug-lorazepam.webp",
+    "alt": "Lorazepam Phase II hepatic glucuronidation pathway preserving clearance in cirrhotic liver disease",
+    "caption": "Lorazepam Phase II hepatic glucuronidation pathway preserving clearance in cirrhotic liver disease.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Korsakoff psychosis** represents the chronic, largely irreversible neurocognitive sequel of untreated or inadequately treated Wernicke encephalopathy. Characterized by profound anterograde amnesia, extensive retrograde memory loss, and lack of illness insight, patients retain completely intact immediate working memory and alert clear sensorium.",
+   "say": "Korsakoff psychosis is the chronic irreversible sequel of thiamine deficiency, causing profound anterograde amnesia while immediate working memory remains intact.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Memory Profile",
+     "points": [
+      "Profound anterograde amnesia (cannot learn new facts)",
+      "Variable retrograde amnesia for remote events",
+      "Immediate working memory completely intact",
+      "Procedural motor memory well preserved"
+     ]
+    },
+    "right": {
+     "title": "Cognitive Features",
+     "points": [
+      "Alert, completely clear level of consciousness",
+      "Preserved general intelligence quotient",
+      "Prominent confabulation to fill memory voids",
+      "Total lack of insight into memory disability"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Confabulation** is the hallmark clinical phenomenon of Korsakoff amnesia, involving the spontaneous or provoked fabrication of detailed, false memories to bridge extensive autobiographical memory gaps. Crucially, confabulation occurs without any conscious intent to deceive; patients genuinely believe their fabricated narrative as absolute truth.",
+   "say": "Confabulation involves fabricating memories to bridge gaps without intent to deceive. Patients genuinely believe their invented stories to be completely true.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Spontaneous Confabulation",
+     "points": [
+      "Unprovoked fantastical narrative claims",
+      "Associated with frontal lobe executive lesions",
+      "Loss of self-monitoring and memory verification",
+      "Prominent in early stages of Korsakoff"
+     ]
+    },
+    "right": {
+     "title": "Provoked Confabulation",
+     "points": [
+      "Elicited by direct clinician questioning",
+      "Plausible everyday fabrications produced",
+      "Compensatory mechanism to mask memory void",
+      "Persists indefinitely throughout chronic course"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Diagnostic differentiation of amnesias** distinguishes Korsakoff amnesia from Alzheimer disease and transient global amnesia based on specific neuropsychological profiles. In Korsakoff amnesia, immediate registration remains normal while delayed recall is devastated; Alzheimer disease presents with pervasive global cortical deterioration including aphasia and apraxia.",
+   "say": "Korsakoff amnesia spares immediate registration while devastating delayed recall. Alzheimer disease causes generalized cortical decline with aphasia and apraxia.",
+   "vis": {
+    "kind": "table",
+    "title": "Amnestic Syndromes Contrasted",
+    "cols": [
+     "Feature",
+     "Korsakoff Amnesia",
+     "Alzheimer Disease",
+     "Transient Global Amnesia"
+    ],
+    "rows": [
+     [
+      "Immediate memory",
+      "Completely intact (digit span 6)",
+      "Impaired encoding early on",
+      "Intact immediate recall"
+     ],
+     [
+      "Delayed recall",
+      "Severely devastated",
+      "Severely devastated",
+      "Devastated during episode"
+     ],
+     [
+      "Confabulation",
+      "Prominent and characteristic",
+      "Absent or rare",
+      "Absent; repetitive questioning"
+     ],
+     [
+      "Duration",
+      "Permanent chronic disability",
+      "Progressive gradual decline",
+      "Resolves within 24 hours"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Long-term recovery prospects** in Korsakoff syndrome remain poor: only approximately 20 percent of affected patients achieve complete recovery of functional memory, while 25 percent show no improvement whatsoever. Continued complete alcohol abstinence and lifelong oral thiamine supplementation are mandatory to halt further neurological deterioration.",
+   "say": "Only twenty percent of Korsakoff patients recover memory function. Strict lifelong alcohol abstinence and thiamine are required to halt further damage.",
+   "vis": {
+    "kind": "table",
+    "title": "Korsakoff Prognostic Outcomes",
+    "cols": [
+     "Prognostic Category",
+     "Percentage of Patients",
+     "Functional Status"
+    ],
+    "rows": [
+     [
+      "Complete recovery",
+      "Approx 20 percent",
+      "Near-total restoration of memory encoding capacity"
+     ],
+     [
+      "Partial recovery",
+      "Approx 30 percent",
+      "Meaningful recovery; requires structured daily reminders"
+     ],
+     [
+      "Slight recovery",
+      "Approx 25 percent",
+      "Minor improvements; remains institutionalized or dependent"
+     ],
+     [
+      "No improvement",
+      "Approx 25 percent",
+      "Severe permanent disability; total memory dependency"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

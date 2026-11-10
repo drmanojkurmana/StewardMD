@@ -1,0 +1,239 @@
+{
+ "v": 1,
+ "id": "psy-dementia-alzheimer-disease",
+ "subject": "psychiatry",
+ "module": "psy-dementia",
+ "title": "Alzheimer Disease, Vascular Dementia, and Frontotemporal Syndromes",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Alzheimer disease** is the most common cause of neurodegenerative dementia, responsible for 60 to 70 percent of cases worldwide. It features an insidious onset and gradual progressive cognitive decline, characteristically beginning with prominent episodic memory impairment, difficulty learning new information, and temporal disorientation.",
+   "say": "Alzheimer disease is the leading cause of dementia, causing insidious, progressive episodic memory loss and difficulty encoding new information.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/alzheimers-disease-fig2.webp",
+    "alt": "Alzheimer disease histopathology comparing extracellular amyloid plaques and intracellular neurofibrillary tangles",
+    "caption": "Alzheimer disease histopathology comparing extracellular amyloid plaques and intracellular neurofibrillary tangles.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Amyloid plaques and neurofibrillary tangles** constitute the definitive dual neuropathological hallmarks of Alzheimer disease. Extracellular senile plaques are composed of insoluble beta-amyloid-42 peptides derived from abnormal amyloid precursor protein cleavage, while intracellular tangles consist of hyperphosphorylated tau microtubule-associated protein within degenerating cortical neurons.",
+   "say": "Pathological hallmarks include extracellular beta-amyloid plaques and intracellular hyperphosphorylated tau neurofibrillary tangles.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Extracellular Amyloid Plaques",
+     "points": [
+      "Aggregates of insoluble A-beta-42 peptides",
+      "Derived from amyloid precursor protein (APP)",
+      "Deposited early in cerebral cortex and hippocampus",
+      "Triggers local microglial inflammation"
+     ]
+    },
+    "right": {
+     "title": "Intracellular Neurofibrillary Tangles",
+     "points": [
+      "Hyperphosphorylated tau microtubule protein",
+      "Disrupts axonal nutrient transport mechanisms",
+      "Spreads hierarchically from entorhinal cortex",
+      "Correlates directly with cognitive decline severity"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Genetic risk architecture in Alzheimer disease** distinguishes rare early-onset familial forms from common late-onset sporadic disease. Early-onset autosomal dominant Alzheimer disease (onset under 65 years) is caused by mutations in APP on chromosome 21, PSEN1 on chromosome 14, or PSEN2 on chromosome 1.",
+   "say": "Early-onset familial Alzheimer disease involves APP, PSEN1, and PSEN2 mutations. Late-onset sporadic disease is strongly linked to the APOE epsilon-4 allele.",
+   "vis": {
+    "kind": "table",
+    "title": "Alzheimer Genetic Architecture",
+    "cols": [
+     "Gene",
+     "Chromosome",
+     "Inheritance Pattern",
+     "Pathophysiological Impact"
+    ],
+    "rows": [
+     [
+      "APP",
+      "Chromosome 21",
+      "Autosomal dominant (<65y)",
+      "Excessive A-beta-42 production; Down syndrome link"
+     ],
+     [
+      "PSEN1 (Presenilin 1)",
+      "Chromosome 14",
+      "Autosomal dominant (<65y)",
+      "Most common cause of familial AD (onset ~45y)"
+     ],
+     [
+      "PSEN2 (Presenilin 2)",
+      "Chromosome 1",
+      "Autosomal dominant (<65y)",
+      "Gamma-secretase catalytic subunit mutation"
+     ],
+     [
+      "APOE epsilon-4",
+      "Chromosome 19",
+      "Major susceptibility allele",
+      "Impairs A-beta clearance; 12-fold risk if homozygous"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Vascular dementia** is the second most common form of dementia, caused by cerebral ischemic or hemorrhagic injury resulting from large-vessel strokes, small-vessel microvascular disease, or lacunar infarcts. The clinical presentation is classically characterized by abrupt onset, stepwise cognitive deterioration, executive dysfunction, and focal neurological deficits.",
+   "say": "Vascular dementia causes abrupt, stepwise cognitive decline with focal neurological deficits resulting from multi-infarct cerebrovascular disease.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Vascular Dementia",
+     "points": [
+      "Abrupt onset with stepwise deterioration",
+      "Prominent executive dysfunction and slowing",
+      "Focal neurological deficits (hyperreflexia, gait)",
+      "Brain MRI shows extensive white matter ischemia"
+     ]
+    },
+    "right": {
+     "title": "Alzheimer Disease",
+     "points": [
+      "Insidious onset with smooth progressive decline",
+      "Early devastating episodic memory loss",
+      "Absence of early focal neurological motor deficits",
+      "Brain MRI shows medial temporal & hippocampal atrophy"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Lewy body dementia** is clinically characterized by a core diagnostic triad: fluctuating cognition with pronounced variations in attention, recurrent detailed visual hallucinations of animals or people, and spontaneous parkinsonian motor features. Neuropathology demonstrates cortical Lewy bodies containing aggregated alpha-synuclein protein.",
+   "say": "Lewy body dementia presents with fluctuating cognition, vivid visual hallucinations, spontaneous parkinsonism, and extreme neuroleptic sensitivity.",
+   "vis": {
+    "kind": "table",
+    "title": "Lewy Body Dementia Diagnostic Triad",
+    "cols": [
+     "Diagnostic Domain",
+     "Clinical Manifestation",
+     "Diagnostic Significance"
+    ],
+    "rows": [
+     [
+      "Fluctuating cognition",
+      "Spontaneous daytime waxing and waning",
+      "Marked variations in alertness and attention"
+     ],
+     [
+      "Visual hallucinations",
+      "Detailed, colorful visions of people or animals",
+      "Presents early; usually non-threatening to patient"
+     ],
+     [
+      "Spontaneous parkinsonism",
+      "Rigidity, resting tremor, bradykinesia",
+      "Precedes or emerges within one year of dementia"
+     ],
+     [
+      "REM sleep behavior disorder",
+      "Vigorous dream enactment during sleep",
+      "Precedes cognitive decline by years or decades"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Set the two scans in this picture side by side and compare where brain tissue has been lost. **Pick disease** carves out the frontal and anterior temporal lobes with sharp, knife-edge wasting, while Alzheimer disease spreads atrophy more diffusely through temporoparietal regions. That distribution matches the clinical story: early personality and behaviour change in one, early memory failure in the other patient group.",
+   "say": "Pick disease wastes frontal and anterior temporal lobes sharply, while Alzheimer disease thins temporoparietal cortex more diffusely. The scan pattern mirrors behaviour versus memory onset.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m398-psy-dementia-alzheimer-disease.webp",
+    "alt": "Coronal brain MRI comparison showing knife-edge frontotemporal atrophy in Pick disease against diffuse temporoparietal atrophy in Alzheimer disease",
+    "caption": "Coronal brain MRI showing knife-edge frontotemporal atrophy in Pick disease contrasting with diffuse temporoparietal atrophy in Alzheimer disease. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Severe neuroleptic sensitivity in Lewy body dementia** represents a life-threatening pharmacological hazard, wherein administering first-generation antipsychotics like haloperidol precipitates catastrophic irreversible parkinsonian rigidity, neuroleptic malignant syndrome, coma, and sudden death. If psychotic agitation demands medical intervention, low-dose quetiapine is the safest option.",
+   "say": "First-generation antipsychotics trigger fatal rigidity in Lewy body dementia. Low-dose quetiapine is the safest agent for severe psychotic agitation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Neuroleptic Hypersensitivity",
+     "points": [
+      "Severe acute exacerbation of parkinsonism",
+      "Impaired swallowing and severe rigidity",
+      "Autonomic collapse mimicking NMS",
+      "Up to three-fold elevation in acute mortality"
+     ]
+    },
+    "right": {
+     "title": "Safe Pharmacological Choices",
+     "points": [
+      "Cholinesterase inhibitors (donepezil/rivastigmine)",
+      "Very low-dose quetiapine (12.5 to 25 mg)",
+      "Pimavanserin (selective 5-HT2A inverse agonist)",
+      "Strict avoidance of haloperidol and risperidone"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Frontotemporal dementia**, also designated Pick disease, presents in presenile adults aged 45 to 65 with profound early personality alterations, behavioral disinhibition, apathy, loss of empathy, and compulsive hyperorality. In striking contrast to Alzheimer disease, patients completely preserve visuospatial orientation and episodic memory in early stages.",
+   "say": "Frontotemporal dementia presents early with social disinhibition, personality change, and loss of empathy, while memory remains preserved.",
+   "vis": {
+    "kind": "table",
+    "title": "Frontotemporal Dementia Subtypes",
+    "cols": [
+     "Subtype",
+     "Core Symptom Complex",
+     "Focal Neuroimaging Finding"
+    ],
+    "rows": [
+     [
+      "Behavioral variant FTD",
+      "Disinhibition, apathy, loss of empathy, hyperorality",
+      "Bilateral frontal lobe knife-edge atrophy"
+     ],
+     [
+      "Semantic variant PPA",
+      "Loss of word meaning and object naming",
+      "Left anterior temporal lobe atrophy"
+     ],
+     [
+      "Non-fluent variant PPA",
+      "Agrammatic, effortful, halting speech production",
+      "Left inferior frontal gyrus (Broca) atrophy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Knife-edge lobar atrophy on neuroimaging** serves as the classic anatomical hallmark of Pick disease, displaying circumscribed, severe gyral shrinkage of the frontal and temporal lobes resembling the blade of a knife. Histopathology demonstrates swollen ballooned neurons (Pick cells) and round, argentophilic intraneuronal inclusion bodies (Pick bodies) containing tau.",
+   "say": "Pick disease exhibits severe knife-edge lobar atrophy of the frontal and temporal lobes, with silver-staining Pick bodies on histology.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Pick Disease Pathology",
+     "points": [
+      "Severe knife-edge frontotemporal atrophy",
+      "Spares posterior parietal and occipital lobes",
+      "Round tau-positive Pick bodies on silver stain",
+      "Ballooned chromatolytic Pick neurons"
+     ]
+    },
+    "right": {
+     "title": "Alzheimer Pathology",
+     "points": [
+      "Prominent medial temporal & hippocampal atrophy",
+      "Symmetrical temporoparietal cortical thinning",
+      "Extracellular beta-amyloid senile plaques",
+      "Intracellular flame-shaped neurofibrillary tangles"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

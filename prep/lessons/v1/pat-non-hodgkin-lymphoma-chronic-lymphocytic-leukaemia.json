@@ -1,0 +1,292 @@
+{
+  "v": 1,
+  "gen": "AI",
+  "module": "pat-non-hodgkin-lymphoma",
+  "key": null,
+  "title": "Chronic Lymphocytic Leukaemia, Smudge Cells, CD5 CD23, and Follicular Lymphoma t(14;18)",
+  "steps": [
+    {
+      "tx": "Chronic lymphocytic leukaemia and small lymphocytic lymphoma represent different manifestations of the same indolent non-Hodgkin B-cell neoplasm, differing only by tissue distribution. Marked by an absolute clonal peripheral blood lymphocytosis exceeding five thousand mature B-cells per microliter sustained for at least three months, **chronic lymphocytic leukaemia** is the most prevalent leukaemia among adults in Western nations. Microscopic examination of blood films shows monotonous, small, mature-appearing lymphocytes with round nuclei, coarsely clumped soccer-ball chromatin, and inconspicuous cytoplasm.",
+      "say": "Chronic lymphocytic leukaemia is the most frequent leukaemia in elderly adults across Western countries. The World Health Organization defines CLL by finding a persistent clonal B-cell lymphocytosis of at least five thousand cells per microliter in peripheral blood. Under the microscope, the neoplastic cells look deceptively normal: small, mature lymphocytes with scantly visible cytoplasm and densely condensed chromatin resembling the dark pattern on a soccer ball.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chronic-lymphocytic-leukemia-fig1.webp",
+        "alt": "Peripheral blood smear in chronic lymphocytic leukaemia showing mature lymphocytes and smudge cells",
+        "caption": "CLL peripheral blood smear with mature lymphocytes and smudge cells."
+      }
+    },
+    {
+      "tx": "A characteristic morphological feature on peripheral blood films of chronic lymphocytic leukaemia is the abundant presence of **smudge cells**, historically termed Gumprecht shadows or basket cells. Smudge cells are artefactual remnants of fragile neoplastic lymphocytes that rupture during the mechanical shear stress of spreading the blood drop across a glass slide. Although smudge cells carry no intrinsic biological malignancy, mixing one drop of bovine albumin with four drops of blood prior to film preparation preserves cell membrane integrity, preventing lysis.",
+      "say": "A classic diagnostic clue on a CLL blood film is the appearance of smudge cells, also called Gumprecht shadows. These pale, smeared cellular remnants are not distinct biological entities, but artifacts created when mechanically fragile leukemic lymphocytes burst under the shear stress of spreading the blood smear. Adding a drop of bovine albumin to the blood sample stabilizes the cell membranes and eliminates smudge cell distortion.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Smudge Cell Artifact",
+          "points": [
+            "Mechanically ruptured fragile lymphocytes",
+            "Amorphous nuclear chromatin smear",
+            "High percentage reflects membrane fragility",
+            "Eliminated by adding bovine serum albumin"
+          ]
+        },
+        "right": {
+          "title": "Intact Neoplastic Lymphocyte",
+          "points": [
+            "Small, uniform mature cell morphology",
+            "Deeply clumped soccer-ball chromatin",
+            "Narrow rim of agranular cytoplasm",
+            "Surface expression of CD19, CD5, and CD23"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Diagnostic confirmation of chronic lymphocytic leukaemia requires multiparameter flow cytometry demonstrating a pathognomonic immunophenotypic profile. Clonal B-cells co-express pan-B markers CD19 and CD20 (characteristically dim) alongside the T-cell activation antigen **cluster of differentiation 5** and the activation antigen CD23. Crucially, neoplastic cells exhibit weak, dim surface immunoglobulin expression demonstrating light chain restriction (kappa or lambda). This aberrant co-expression of CD5 and CD23 conclusively differentiates CLL from mantle cell lymphoma, which is CD23 negative and cyclin D1 positive.",
+      "say": "Flow cytometry is the definitive test to confirm chronic lymphocytic leukaemia. Neoplastic B-cells display a unique antigen signature: they co-express standard B-cell markers like CD19 with the T-cell marker CD5 and the activation antigen CD23. Furthermore, they express characteristically dim surface immunoglobulin with monoclonal light chain restriction. The presence of CD23 and absence of cyclin D1 reliably distinguishes CLL from aggressive mantle cell lymphoma.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Antigen Marker",
+          "CLL Expression Pattern",
+          "Mantle Cell Lymphoma",
+          "Diagnostic Significance"
+        ],
+        "rows": [
+          [
+            "CD5",
+            "Positive (aberrant T-marker)",
+            "Positive",
+            "Confirms CD5-positive B-cell neoplasm"
+          ],
+          [
+            "CD23",
+            "Positive (strong, homogeneous)",
+            "Strictly negative",
+            "Definitive seam separating CLL from MCL"
+          ],
+          [
+            "Cyclin D1",
+            "Strictly negative",
+            "Positive (nuclear overexpression)",
+            "Excludes t(11;14) mantle cell lymphoma"
+          ],
+          [
+            "Surface Ig",
+            "Dim, weak expression",
+            "Bright, intense expression",
+            "Demonstrates clonality and light chain restriction"
+          ],
+          [
+            "CD20",
+            "Dim, low intensity",
+            "Bright, intense expression",
+            "Classic flow gating parameter in CLL"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Clinical risk stratification in chronic lymphocytic leukaemia utilizes two widely accepted systems: the American **Rai staging system** and the European Binet staging system. Rai stage 0 is defined by isolated blood and marrow lymphocytosis. Stage I adds lymphadenopathy, Stage II incorporates splenomegaly or hepatomegaly, Stage III is defined by anaemia with haemoglobin under eleven grams per deciliter, and Stage IV indicates thrombocytopenia with platelet count under one hundred thousand. Stages III and IV constitute advanced disease carrying poor baseline survival.",
+      "say": "Clinicians grade CLL severity using the Rai and Binet staging systems based entirely on physical exam and standard blood counts. Under the Rai classification, stage zero is isolated lymphocytosis. Stages one and two add lymphadenopathy and organomegaly. Stages three and four denote bone marrow failure with anaemia below eleven grams per deciliter or thrombocytopenia below one hundred thousand per microliter, indicating advanced disease requiring treatment.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "s0",
+            "label": "Rai 0: Pure Lymphocytosis"
+          },
+          {
+            "id": "s1",
+            "label": "Rai I-II: Node/Organ Enlargement"
+          },
+          {
+            "id": "s3",
+            "label": "Rai III-IV: Marrow Failure"
+          },
+          {
+            "id": "rx",
+            "label": "Targeted Therapy Required"
+          }
+        ],
+        "edges": [
+          [
+            "s0",
+            "s1",
+            "Disease Progression"
+          ],
+          [
+            "s1",
+            "s3",
+            "Marrow Infiltration"
+          ],
+          [
+            "s3",
+            "rx",
+            "Hb <11 or Platelets <100k"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Asymptomatic early-stage chronic lymphocytic leukaemia does not benefit from immediate chemotherapy, adhering to a strict **watch-and-wait management strategy**. Randomized clinical trials demonstrate that early intervention in Rai stage 0 or Binet stage A fails to improve overall survival and exposes patients to unnecessary toxicity. Treatment initiation is reserved for active disease: progressive bone marrow failure with worsening anaemia or thrombocytopenia, massive symptomatic splenomegaly extending six centimeters below costal margin, bulky progressive lymphadenopathy, refractory autoimmune haemolytic anaemia, or constitutional B symptoms.",
+      "say": "Asymptomatic patients with early-stage CLL should not receive immediate treatment. Large clinical trials have repeatedly proven that chemotherapy in early disease does not extend life and only produces drug toxicity. Instead, we adopt a watchful waiting approach, checking counts every few months. Treatment is triggered only by active disease manifestations: progressive marrow failure, massive symptomatic splenomegaly, rapidly doubling lymphocytosis, or refractory autoimmune cytopenias.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Watch-and-Wait Criteria",
+          "points": [
+            "Asymptomatic Rai 0 or Binet A disease",
+            "Stable mild lymphocytosis without cytopenias",
+            "Slow lymphocyte doubling time (>12 months)",
+            "Routine clinical review every 3 to 6 months"
+          ]
+        },
+        "right": {
+          "title": "Active Treatment Indications",
+          "points": [
+            "Progressive marrow failure (haemoglobin, platelets)",
+            "Massive (>6 cm) or symptomatic splenomegaly",
+            "Bulky progressive lymphadenopathy (>10 cm)",
+            "Unexplained weight loss, night sweats, or fever"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Accounting for twenty percent of all non-Hodgkin lymphomas, **follicular lymphoma** is the second most frequent adult lymphoid malignancy. Derived from germinal centre B-cells, it exhibits a nodular, follicular architectural pattern that effaces normal lymph node tissue. Under high magnification, the neoplastic follicles are composed of a mixture of small cleaved cells with indented nuclei termed centrocytes and larger non-cleaved cells with vesicular chromatin and prominent nucleoli termed centroblasts. Unlike reactive follicles, neoplastic follicles lack tingible-body macrophages and display attenuated mantle zones.",
+      "say": "Follicular lymphoma is the second most common adult non-Hodgkin lymphoma and represents the quintessential indolent lymphoid cancer. Biopsy reveals a monotonous nodular proliferation of neoplastic follicles that effaces normal lymph node architecture. Inside follicles, a mixture of small cleaved centrocytes and larger centroblasts proliferates. Crucially, neoplastic follicles lack tingible-body macrophages and polarized dark-light zones, demonstrating loss of normal germinal center control.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m97-pat-non-hodgkin-lymphoma-chronic-lymphocytic-leukaemia.webp",
+        "alt": "Follicular lymphoma lymph node histology showing a nodular follicle centre pattern with a t(14;18) inset",
+        "caption": "Follicular lymphoma lymph node histology showing a nodular follicle centre pattern with a t(14;18) inset. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "The genetic hallmark present in eighty-five to ninety percent of follicular lymphomas is the balanced reciprocal **translocation t(14;18)(q32;q21)**. This structural rearrangement moves the BCL2 proto-oncogene from chromosome 18 into juxtaposition with the immunoglobulin heavy-chain enhancer on chromosome 14. Constitutive overexpression of BCL2 protein suppresses the physiological apoptotic death that germinal centre B-cells normally undergo during somatic hypermutation, leading to relentless accumulation of long-lived clonal centrocytes and centroblasts within follicular structures.",
+      "say": "Nearly ninety percent of follicular lymphomas are initiated by the reciprocal translocation t(14;18), which relocates the BCL2 gene from chromosome eighteen adjacent to the immunoglobulin heavy chain locus on chromosome fourteen. This rearrangement drives continuous, high-level expression of BCL2 protein. Because BCL2 suppresses apoptosis, germinal center B-cells that should normally die if they fail antigen selection survive indefinitely, accumulating as indolent follicular lymphoma.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "t1",
+            "label": "Translocation t(14;18)"
+          },
+          {
+            "id": "t2",
+            "label": "BCL2-IGH Fusion"
+          },
+          {
+            "id": "t3",
+            "label": "BCL2 Overexpression"
+          },
+          {
+            "id": "t4",
+            "label": "Apoptosis Evaded"
+          },
+          {
+            "id": "t5",
+            "label": "Follicular Clonal Accumulation"
+          }
+        ],
+        "edges": [
+          [
+            "t1",
+            "t2",
+            "Chromosomal Breakage"
+          ],
+          [
+            "t2",
+            "t3",
+            "Transcriptional Drive"
+          ],
+          [
+            "t3",
+            "t4",
+            "Blocks Cytochrome C"
+          ],
+          [
+            "t4",
+            "t5",
+            "Centrocytes & Centroblasts Persist"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In two to eight percent of patients with chronic lymphocytic leukaemia, the indolent disease undergoes an abrupt histological transformation termed **Richter transformation**, most frequently evolving into an aggressive diffuse large B-cell lymphoma. Patients present with sudden, discordant clinical deterioration characterized by rapid asymmetrical enlargement of a single lymph node group, new systemic B symptoms, and an acute spike in serum lactate dehydrogenase. Positron emission tomography demonstrates localized intense standardized uptake value exceeding 5, and median survival is under one year.",
+      "say": "Richter transformation describes the sudden histological evolution of indolent CLL into an aggressive diffuse large B-cell lymphoma, occurring in roughly five percent of patients. Clinically, suspect Richter transformation when a patient experiences rapid, asymmetrical enlargement of a single lymph node site accompanied by severe fever, weight loss, and an acute jump in serum LDH. PET scanning shows intensely hot lesions with SUVs exceeding five, and the transformed disease is notoriously refractory to chemotherapy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Clinical Feature",
+          "Indolent Chronic Lymphocytic Leukaemia",
+          "Richter Transformation",
+          "Diagnostic Assessment"
+        ],
+        "rows": [
+          [
+            "Nodal Evolution",
+            "Generalized, symmetrical, slow enlargement",
+            "Rapid, explosive, asymmetrical node growth",
+            "FDG-PET showing SUVmax >5.0"
+          ],
+          [
+            "Serum LDH",
+            "Normal or mildly elevated",
+            "Marked acute elevation above baseline",
+            "Reflects rapid tumor cell turnover"
+          ],
+          [
+            "Constitutional Symptoms",
+            "Generally absent in early stages",
+            "Severe B symptoms (fever, drenching sweats)",
+            "Systemic cytokine storm from high-grade clone"
+          ],
+          [
+            "Histological Biopsy",
+            "Small mature lymphocytes with proliferation centers",
+            "Diffuse sheets of large vesicular B-blasts",
+            "Mandatory excisional biopsy of PET-avid node"
+          ]
+        ]
+      }
+    }
+  ],
+  "quiz": [
+    {
+      "q": "Which flow cytometric immunophenotypic profile is pathognomonic of chronic lymphocytic leukaemia?",
+      "options": [
+        "CD19 positive, CD5 positive, CD23 positive, Cyclin D1 negative",
+        "CD19 positive, CD5 positive, CD23 negative, Cyclin D1 positive",
+        "CD19 positive, CD10 positive, BCL2 positive, CD5 negative",
+        "CD3 positive, CD4 positive, CD8 negative, CD25 positive"
+      ],
+      "correct": 0,
+      "explain": "Chronic lymphocytic leukaemia is defined by the co-expression of CD5 and CD23 on clonal CD19-positive B-cells with dim surface immunoglobulin, whereas mantle cell lymphoma is CD23 negative and cyclin D1 positive."
+    },
+    {
+      "q": "Which chromosomal translocation drives the molecular pathogenesis of follicular lymphoma?",
+      "options": [
+        "t(14;18)(q32;q21) fusing BCL2 with IGH",
+        "t(11;14)(q13;q32) fusing CCND1 with IGH",
+        "t(8;14)(q24;q32) fusing MYC with IGH",
+        "t(9;22)(q34;q11) fusing BCR with ABL1"
+      ],
+      "correct": 0,
+      "explain": "Follicular lymphoma is characterized in up to 90% of cases by the t(14;18)(q32;q21) translocation that places the anti-apoptotic BCL2 gene under the IGH enhancer."
+    },
+    {
+      "q": "What histological and clinical event defines Richter transformation in chronic lymphocytic leukaemia?",
+      "options": [
+        "Evolution of indolent CLL into aggressive diffuse large B-cell lymphoma",
+        "Transformation of CLL into acute promyelocytic leukaemia with DIC",
+        "Progression of CLL into primary myelofibrosis with dry marrow tap",
+        "Development of severe pure red cell aplasia responsive to steroids"
+      ],
+      "correct": 0,
+      "explain": "Richter transformation refers to the sudden development of an aggressive diffuse large B-cell lymphoma (or rarely Hodgkin lymphoma) in a patient with pre-existing CLL."
+    }
+  ]
+}

@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "mic-staphylococcus",
+  "subject": "microbiology",
+  "title": "VISA, Coagulase-Negative Staphylococci, S epidermidis and S saprophyticus",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**VISA** (vancomycin intermediate S aureus, MIC 4 to 8) thickens its cell wall with extra peptidoglycan decoy targets that soak vancomycin before it reaches the membrane, emerging under prolonged glycopeptide exposure in MRSA bacteraemia and deep foci, while fully resistant VRSA (MIC 16 plus) borrows vanA from enterococci rarely. Disc diffusion cannot detect VISA; MIC methods must.",
+      "say": "A thicker wall sponges vancomycin mid journey; only MIC testing catches VISA.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "VISA mechanics",
+          "points": [
+            "Thickened wall, increased free D Ala D Ala decoys",
+            "Vancomycin trapped and clogged in outer layers",
+            "Selected by prolonged exposure and undrained foci",
+            "Associated with vancomycin treatment failure"
+          ]
+        },
+        "right": {
+          "title": "Detection and response",
+          "points": [
+            "Broth MIC or gradient methods (no disc)",
+            "Reference confirmation and infection control alert",
+            "Daptomycin and linezolid alternatives by syndrome",
+            "Source control is the decisive therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Staphylococcus epidermidis** heads the coagulase negative staphylococci (CoNS): skin commensal turned device pathogen by biofilm (polysaccharide intercellular adhesin), contaminating blood cultures innocently far oftener than it infects, yet the leading cause of prosthetic valve endocarditis early, line infections, CSF shunt and prosthetic joint infections where it is isolated repeatedly.",
+      "say": "One bottle epidermidis is skin; the same organism in three sets on a prosthesis is disease.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Device pathogen",
+          "points": [
+            "Biofilm on lines, valves, joints, shunts",
+            "Indolent, weeks of low grade symptoms",
+            "Multiple positive sets with identical pattern",
+            "Removal usually part of cure"
+          ]
+        },
+        "right": {
+          "title": "Contaminant portrait",
+          "points": [
+            "Single bottle of several sets",
+            "Late time to positivity",
+            "No device or syndrome fit",
+            "Repeat cultures before committing therapy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Staphylococcus saprophyticus** (novobiocin resistant CoNS) causes honeymoon cystitis, urinary infection in young sexually active women second to E coli in that group, adhering to uroepithelium, D serine deaminase armed, usually susceptible to urinary agents, and identified when a CoNS in urine is not dismissed as contamination in a symptomatic young woman.",
+      "say": "A CoNS in a young woman's urine is saprophyticus until proven otherwise.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Saprophyticus portrait",
+          "points": [
+            "Young women urinary infection",
+            "Dysuria and frequency, pyuria",
+            "Novobiocin resistant identification",
+            "Rarely invasive beyond urinary tract"
+          ]
+        },
+        "right": {
+          "title": "Urine CoNS triage",
+          "points": [
+            "Symptomatic young woman: treat as pathogen",
+            "Catheterised or elderly mixed growth: caution",
+            "Speciation worth it in recurrent cases",
+            "Staph aureus in urine hints bacteraemia separately"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**CoNS identification** sorts the skin crowd: novobiocin susceptibility (epidermidis susceptible, saprophyticus resistant), haemolysis, urease, ornithine and sugar patterns, MALDI now naming lugdunensis, the CoNS that behaves like aureus (aggressive endocarditis, abscesses) and must never be waved away as contaminant. Species identification therefore matters most in blood, joint fluid, prosthesis sonicate and cerebrospinal fluid, where a name changes both drug choice and decisions about removing hardware.",
+      "say": "Lugdunensis wears a CoNS coat with an aureus heart; name it and respect it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bench sorting",
+          "points": [
+            "Novobiocin: saprophyticus resistant",
+            "Epidermidis group: device associated",
+            "Lugdunensis: PYR and ornithine clues, MALDI confirms",
+            "Capitis, haemolyticus, hominis line and NICU niches"
+          ]
+        },
+        "right": {
+          "title": "Clinical weight by species",
+          "points": [
+            "Lugdunensis: treat like aureus",
+            "Epidermidis: device probability",
+            "Saprophyticus: urinary probability",
+            "Others: context decides, speciation in sterile sites"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Biofilm mechanics** unite the device lessons: attachment, accumulation (PIA polysaccharide or protein mediated), maturation with channels, dispersal seeding downstream, antibiotic tolerance by depth and dormancy exceeding resistance by orders, rifampicin's biofilm activity (never alone, resistance) and device removal as the reliable cure.",
+      "say": "Tolerance by architecture beats resistance by gene on devices; remove or suppress forever.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "attach",
+            "label": "Attachment to device surface proteins"
+          },
+          {
+            "id": "accum",
+            "label": "Accumulation: biofilm matrix builds"
+          },
+          {
+            "id": "mature",
+            "label": "Mature biofilm tolerates antibiotics"
+          },
+          {
+            "id": "disperse",
+            "label": "Dispersal seeds bloodstream episodes"
+          }
+        ],
+        "edges": [
+          [
+            "attach",
+            "accum"
+          ],
+          [
+            "accum",
+            "mature"
+          ],
+          [
+            "mature",
+            "disperse"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Blood culture contamination** discipline protects patients from CoNS overtreatment: contamination rates benchmarked (under 3 percent), skin antisepsis and diversion devices lowering them, interpretation rules (sets positive, time to positivity, device presence) taught to every prescriber, vancomycin days saved by restraint counted by stewardship.",
+      "say": "Every contaminated set costs days of vancomycin and a line of false history; draw clean.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Contamination prevention",
+          "points": [
+            "Chlorhexidine alcohol skin prep, dry fully",
+            "No repalpation after prep",
+            "Initial specimen diversion devices",
+            "Trained phlebotomy teams benchmarked"
+          ]
+        },
+        "right": {
+          "title": "Interpretation rules",
+          "points": [
+            "Proportion of sets positive",
+            "Identical antibiograms across sets",
+            "Syndrome and device fit",
+            "Repeat before long therapy commitments"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Methicillin resistance in CoNS** exceeds even MRSA rates (mecA widespread in skin flora), narrowing device therapy to glycopeptides and successors empirically until susceptibilities return, while making CoNS a resistance gene reservoir for aureus on shared skin. Device prophylaxis and lock therapies (antibiotic and ethanol locks) live in this reality.",
+      "say": "Skin staphylococci are a mecA library aureus borrows from; empiric device cover assumes it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CoNS resistance",
+          "points": [
+            "mecA in majority of hospital CoNS",
+            "Multidrug patterns common",
+            "Vancomycin empiric for serious device infection",
+            "Linezolid and daptomycin by site and duration"
+          ]
+        },
+        "right": {
+          "title": "Prevention echoes",
+          "points": [
+            "Line bundles cut CoNS CLABSI too",
+            "Antimicrobial lock prophylaxis in selected lines",
+            "Catheter removal thresholds low",
+            "Stewardship de escalates on culture patterns"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Neonatal and neurosurgical niches** close the CoNS file: late onset neonatal sepsis leaders in NICU lines, CSF shunt infections indolent with low inflammatory markers, peritoneal dialysis peritonitis causes, each rewarding speciation and repeated isolation rather than single culture dismissal. Context, repetition and devices convert commensals into diagnoses.",
+      "say": "In NICU and shunt patients, repeated CoNS is a pathogen with paperwork.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Niche diseases",
+          "points": [
+            "NICU late onset sepsis via lines",
+            "VP shunt malfunction with low grade fever",
+            "CAPD peritonitis touch contamination",
+            "Prosthetic joint late indolent loosening"
+          ]
+        },
+        "right": {
+          "title": "Diagnostic posture",
+          "points": [
+            "Culture devices and fluids repeatedly",
+            "Sonicate removed prostheses where available",
+            " prolonged incubation for slow growers",
+            "Infectious diseases consultation thresholds low"
+          ]
+        }
+      }
+    }
+  ]
+}

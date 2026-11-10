@@ -1,0 +1,226 @@
+{
+ "key": "ped-diarrhoea-persistent-diarrhoea",
+ "v": 1,
+ "module": "ped-diarrhoea",
+ "subject": "paediatrics",
+ "title": "Persistent Diarrhoea, Dysentery, Cholera and Hypokalaemia",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Protracted diarrhoeal episodes continuing beyond two weeks carry catastrophic risks of severe acute malnutrition. By definition, **pediatric persistent diarrhoea** represents an episode of presumed infectious etiology starting acutely and lasting fourteen days or longer. Persistent mucosal blunting, secondary disaccharidase deficiency, and bacterial overgrowth disrupt enterocyte absorption, accounting for over thirty-five percent of all diarrhoeal child deaths.",
+   "say": "Persistent diarrhoea starts acutely and lasts fourteen days or longer. It damages the intestinal lining and impairs nutrient absorption, causing over a third of diarrhoeal deaths.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/practicals/paed-anthro-dehydration-ors.webp",
+    "alt": "Dehydration and malnutrition staging in persistent and chronic childhood diarrhoea.",
+    "caption": "Persistent diarrhoeal nutritional decline, secondary disaccharidase loss, and therapeutic dietary algorithms. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Invasive colonic mucosal ulceration causes painful bloody stools accompanied by systemic toxicity. The syndrome termed **bacillary dysentery** presents with acute passage of loose stools containing visible blood and mucus, accompanied by high fever, severe abdominal cramps, and painful tenesmus. It is caused primarily by Shigella flexneri and Shigella dysenteriae type 1, which invade enterocytes and elaborate cytotoxic Shiga toxins, producing mucosal necrosis.",
+   "say": "Bacillary dysentery features acute bloody, mucoid stools with fever and tenesmus, caused by invasive Shigella. It causes mucosal necrosis and risks haemolytic uraemic syndrome.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bacillary Dysentery (Shigellosis)",
+     "points": [
+      "Acute onset with high fever and severe cramps",
+      "Frequent scant stools with frank blood and mucus",
+      "Caused by invasive Shigella, Campylobacter, or Salmonella",
+      "High risk of toxic megacolon and rectal prolapse"
+     ]
+    },
+    "right": {
+     "title": "Amoebic Dysentery (Entamoeba)",
+     "points": [
+      "Insidious onset with mild or absent fever",
+      "Bulky foul-smelling stools mixed with dark blood",
+      "Caused by Entamoeba histolytica trophozoites",
+      "Flask-shaped colonic ulcers; treat with metronidazole"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Empirical antimicrobial therapy must eradicate invasive Shigella to prevent life-threatening complications. Children presenting with bloody diarrhoea require immediate **ciprofloxacin for dysentery** (15 mg/kg twice daily for three days) as the first-line oral antimicrobial. Ciprofloxacin rapidly clears bacterial excretion, halts mucosal necrosis, and prevents systemic complications such as toxic encephalopathy, leukaemoid reactions, and Shiga toxin-mediated haemolytic uraemic syndrome.",
+   "say": "Treat dysentery immediately with oral ciprofloxacin at fifteen milligrams per kilogram twice daily for three days. This eradicates Shigella and prevents haemolytic uraemic syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Antimicrobial Agent",
+     "Paediatric Dosing Regimen",
+     "Spectrum of Action",
+     "Key Clinical Advantage"
+    ],
+    "rows": [
+     [
+      "Oral ciprofloxacin",
+      "15 mg/kg twice daily for 3 days",
+      "First-line empirical against Shigella",
+      "Short 3-day course, high clinical cure"
+     ],
+     [
+      "Oral azithromycin",
+      "10-12 mg/kg once daily for 5 days",
+      "Effective alternative for resistant strains",
+      "Excellent intracellular tissue penetration"
+     ],
+     [
+      "Oral ceftriaxone / cefixime",
+      "8 mg/kg once daily for 5 days",
+      "Third-generation cephalosporin alternative",
+      "Safe in multidrug-resistant Shigella"
+     ],
+     [
+      "Oral metronidazole",
+      "10 mg/kg three times daily for 7 days",
+      "Specific for Entamoeba histolytica",
+      "Used only when amoebic trophozoites confirmed"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Secretory enterotoxin-mediated hypersecretion precipitates fulminant dehydration within hours of onset. Infection with Vibrio cholerae produces classic **cholera rice-water diarrhoea**, characterized by sudden, profuse, painless watery stools with a fishy odour containing flecks of mucus and epithelial debris. Vibrio cholerae enterotoxin irreversibly ADP-ribosylates G-alpha-s proteins, constitutively activating adenylate cyclase to drive massive, uncontrolled chloride and water secretion.",
+   "say": "Cholera causes sudden profuse rice-water diarrhoea driven by cholera enterotoxin activating adenylate cyclase. Fluid loss can exceed one litre per hour, demanding emergency IV rehydration.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cholera Toxin Secretory Mechanism",
+     "points": [
+      "B subunit binds enterocyte GM1 ganglioside receptor",
+      "A subunit ADP-ribosylates stimulatory G-protein",
+      "Persistent cAMP elevation opens CFTR chloride channels",
+      "Massive secretory water loss exceeding 1 L/hour"
+     ]
+    },
+    "right": {
+     "title": "Emergency Cholera Management",
+     "points": [
+      "Immediate IV Ringer's lactate via Plan C protocol",
+      "Replaces massive stool losses volume-for-volume",
+      "Single-dose oral azithromycin (20 mg/kg) or doxycycline",
+      "Shortens excretion and decreases total volume by 50%"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Viral enterotoxin synthesis and villous tip destruction drive severe winter infantile gastroenteritis. The most prevalent cause of severe dehydrating diarrhoea in infants under two years is **rotavirus gastroenteritis**, transmitted via feco-oral spread. Viral non-structural protein 4 (NSP4) acts as a viral enterotoxin, mobilizing intracellular calcium to stimulate chloride secretion, while viral replication destroys mature absorptive enterocytes, provoking severe osmotic and secretory diarrhoea.",
+   "say": "Rotavirus causes severe dehydrating diarrhoea in young infants through enterocyte blunting and NSP4 enterotoxin. Live oral rotavirus vaccines at six, ten, and fourteen weeks prevent disease.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-gen-paed-hydration.webp",
+    "alt": "Clinical evaluation of pediatric dehydration signs and abdominal skin pinch assessment.",
+    "caption": "Bedside evaluation of dehydration severity, sunken eyes, and abdominal skin pinch in viral gastroenteritis. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Massive gastrointestinal potassium excretion depletes total-body intracellular electrolyte reserves. Severe watery diarrhoea frequently precipitates **hypokalaemia in diarrhoea**, characterized by serum potassium concentrations falling below 3.5 milliequivalents per litre. Clinical manifestations include generalized muscular hypotonia, weakness, diminished deep tendon reflexes, abdominal distension secondary to paralytic ileus, and dangerous cardiac arrhythmias with flattened T waves and prominent U waves.",
+   "say": "Diarrhoea causes severe potassium loss, leading to muscle weakness, paralytic ileus, and cardiac arrhythmias with U waves on ECG. Standard ORS replaces potassium safely.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Potassium Concentration",
+     "Clinical Neuromuscular Signs",
+     "Cardiac Electrocardiographic Signs",
+     "Therapeutic Protocol"
+    ],
+    "rows": [
+     [
+      "3.0 to 3.5 mEq/L (Mild)",
+      "Mild muscle weakness, malaise",
+      "Flattening of T waves on ECG",
+      "Oral ORS contains 20 mEq/L potassium"
+     ],
+     [
+      "2.5 to 2.9 mEq/L (Moderate)",
+      "Hypotonia, abdominal distension, cramps",
+      "ST segment depression, U waves appear",
+      "Oral potassium chloride (2-4 mEq/kg/day)"
+     ],
+     [
+      "Under 2.5 mEq/L (Severe)",
+      "Paralytic ileus, flaccid quadriparesis",
+      "Prolonged PR, prominent U waves, ventricular VT",
+      "IV potassium infusion (max rate 0.5 mEq/kg/hr)"
+     ],
+     [
+      "Post-acidosis correction",
+      "Potassium shifts into cells with bicarbonate",
+      "Exacerbates acute hypokalaemia",
+      "Always correct potassium alongside acidosis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Secondary loss of brush border lactase enzyme provokes severe osmotic fermentation. Persistent injury to villous tips causes **secondary disaccharidase lactose intolerance**, where unabsorbed dietary lactose in milk feeds ferments in the colon, producing lactic acid and hydrogen gas. The infant passes explosive, frothy, acidic stools with a pH below 5.5, triggering severe perineal excoriation and positive stool reducing substances.",
+   "say": "Damage to brush border enzymes causes secondary lactose intolerance. Unabsorbed lactose ferments into acid, producing explosive frothy stools that excoriate the buttocks.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Lactose Intolerance Signs",
+     "points": [
+      "Explosive watery stools following milk feeds",
+      "Stool pH <5.5 (acidic due to lactic acid)",
+      "Stool reducing substances >0.5% (Benedict test)",
+      "Severe perianal erythema and raw skin breakdown"
+     ]
+    },
+    "right": {
+     "title": "Dietary Management Protocol",
+     "points": [
+      "Continue breastfeeding unhindered (protective factors)",
+      "Replace animal milk with yoghurt or low-lactose diet",
+      "Or temporary lactose-free formula for 2 to 3 weeks",
+      "Spontaneous recovery as enterocytes regenerate"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Evidence-based dietary algorithms restore enterocyte regeneration in persistent childhood diarrhoea. Under IMNCI and WHO guidelines, children with persistent diarrhoea without severe dehydration are managed using the **initial persistent diarrhoea diet** (Diet A), which replaces animal milk with reduced-lactose feeds like curd or yoghurt, combined with energy-dense cereals (rice, lentils, vegetable oil) and continuous breastfeeding. If diarrhoea persists at seven days, a non-lactose egg-based diet (Diet B) is introduced.",
+   "say": "Manage persistent diarrhoea using yoghurt-based reduced-lactose diets with rice and oil. If diarrhoea persists after one week, switch to a lactose-free egg and glucose diet.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Persistent Diarrhoea Diet",
+     "Nutritional Ingredients",
+     "Lactose Content",
+     "Indications and Timing"
+    ],
+    "rows": [
+     [
+      "Diet A (First-line)",
+      "Yoghurt/curd, rice, lentils, oil, sugar",
+      "Low lactose (fermented lactic acid)",
+      "Start on Day 1 for 7 days; continue breast milk"
+     ],
+     [
+      "Diet B (Second-line)",
+      "Cooked egg white, puffed rice, glucose, oil",
+      "Zero lactose (completely lactose-free)",
+      "If Diet A fails at 7 days; feed for 7 days"
+     ],
+     [
+      "Diet C (Specialized)",
+      "Elemental amino acid or semielemental formula",
+      "Monosaccharide-based elemental diet",
+      "Intractable diarrhoea; inpatient referral"
+     ],
+     [
+      "Micronutrient package",
+      "Double RDA of multivitamins & zinc (20 mg)",
+      "Covers trace element malabsorption",
+      "Give daily for 2 to 4 weeks"
+     ]
+    ]
+   }
+  }
+ ]
+}

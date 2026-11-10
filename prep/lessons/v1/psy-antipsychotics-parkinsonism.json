@@ -1,0 +1,279 @@
+{
+    "v": 1,
+    "id": "psy-antipsychotics-parkinsonism",
+    "subject": "psychiatry",
+    "module": "psy-antipsychotics",
+    "title": "Antipsychotic Complications: Extrapyramidal Symptoms, Tardive Dyskinesia, and Neuroleptic Malignant Syndrome",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Extrapyramidal Parkinsonism",
+            "tx": "**Drug-induced parkinsonism** develops within one to four weeks of starting high-potency dopamine D2 receptor antagonists like haloperidol. Blockade of striatal dopamine receptors disinhibits cholinergic interneurons, generating classical cogwheel rigidity, resting pill-rolling tremor, bradykinesia, masked facies, and a slow festinating gait.",
+            "say": "Drug-induced parkinsonism develops within one to four weeks of starting high-potency dopamine D2 receptor antagonists like haloperidol. Blockade of striatal dopamine receptors disinhibits cholinergic interneurons, generating classical cogwheel rigidity, resting pill-rolling tremor, bradykinesia, masked facies, and a slow festinating gait.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/kb/media/antipsychotics-d2-eps-clozapine-nms-fig1.webp",
+                "alt": "Dopamine D2 blockade inducing extrapyramidal symptoms and neuroleptic malignant syndrome",
+                "caption": "Dopamine D2 blockade inducing extrapyramidal symptoms and neuroleptic malignant syndrome"
+            }
+        },
+        {
+            "title": "Akathisia Presentation",
+            "tx": "**Subjective motor akathisia** manifests as an agonizing sense of internal motor restlessness and somatic tension, compelling patients to pace constantly, cross and uncross legs, or shift weight while standing. Akathisia is frequently misdiagnosed as worsening psychotic agitation, leading to disastrous neuroleptic dose escalations instead of proper treatment.",
+            "say": "Subjective motor akathisia manifests as an agonizing sense of internal motor restlessness and somatic tension, compelling patients to pace constantly, cross and uncross legs, or shift weight while standing. Akathisia is frequently misdiagnosed as worsening psychotic agitation, leading to disastrous neuroleptic dose escalations instead of proper treatment.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Akathisia Presentation",
+                    "points": [
+                        "Intense inner subjective restlessness and compulsive urge to move",
+                        "pacing, leg shifting",
+                        "alleviated by beta-blockers"
+                    ]
+                },
+                "right": {
+                    "title": "Psychotic Agitation",
+                    "points": [
+                        "Objective hostility or panic driven by persecutory delusions or hallucinations",
+                        "no inner drive to move",
+                        "requires sedation"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Tardive Dyskinesia Mechanism",
+            "tx": "**Pathophysiology of tardive dyskinesia** stems from prolonged dopamine D2 receptor blockade leading to dopamine receptor up-regulation and postsynaptic supersensitivity in the nigrostriatal pathway. Involuntary, choreoathetoid movements emerge months or years later, classically involving facial grimacing, lip smacking, jaw chewing, and repetitive fly-catcher tongue darting.",
+            "say": "Pathophysiology of tardive dyskinesia stems from prolonged dopamine D2 receptor blockade leading to dopamine receptor up-regulation and postsynaptic supersensitivity in the nigrostriatal pathway. Involuntary, choreoathetoid movements emerge months or years later, classically involving facial grimacing, lip smacking, jaw chewing, and repetitive fly-catcher tongue darting.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Disorder",
+                    "Onset Timing",
+                    "Core Mechanism",
+                    "Primary Therapy"
+                ],
+                "rows": [
+                    [
+                        "Acute Dystonia",
+                        "Hours to days",
+                        "Acute dopaminergic-cholinergic imbalance",
+                        "Promethazine or trihexyphenidyl"
+                    ],
+                    [
+                        "Parkinsonism",
+                        "Days to weeks",
+                        "Striatal D2 dopamine receptor blockade",
+                        "Central anticholinergics or amantadine"
+                    ],
+                    [
+                        "Akathisia",
+                        "Days to months",
+                        "Mesocortical dopaminergic-adrenergic disruption",
+                        "Propranolol or clonazepam"
+                    ],
+                    [
+                        "Tardive Dyskinesia",
+                        "Months to years",
+                        "Postsynaptic D2 receptor supersensitivity",
+                        "VMAT2 inhibitors (valbenazine)"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "This face is moving without its owner's permission, lips puckering and tongue darting in the repetitive rhythm of **tardive dyskinesia**. Months or years of dopamine blockade have left striatal receptors supersensitive, so the movements arrive late and may never fully leave. Older women carry the highest risk, and anticholinergics prescribed for earlier stiffness can paradoxically worsen this later disorder. Spotting perioral movements at review matters because switching strategy early, and considering vesicular monoamine transporter inhibitors, offers more than waiting for the movements to entrench.",
+            "say": "Involuntary perioral and tongue movements after prolonged antipsychotics are tardive dyskinesia from receptor supersensitivity.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m459-psy-antipsychotics-parkinsonism.webp",
+                "alt": "Clinical photograph of tardive dyskinesia showing involuntary perioral choreiform movements",
+                "caption": "Clinical photograph of tardive dyskinesia showing involuntary perioral choreiform movements. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "Tardive Dyskinesia Management",
+            "tx": "**Therapeutic strategy in tardive dyskinesia** requires immediate cessation of anticholinergic medications because anticholinergics worsen involuntary choreoathetoid movements by exaggerating striatal dopaminergic predominance. Clinicians should cautiously transition the patient to clozapine and initiate vesicular monoamine transporter 2 (VMAT2) inhibitors, specifically valbenazine or deutetrabenazine, to deplete presynaptic dopamine stores.",
+            "say": "Therapeutic strategy in tardive dyskinesia requires immediate cessation of anticholinergic medications because anticholinergics worsen involuntary choreoathetoid movements by exaggerating striatal dopaminergic predominance. Clinicians should cautiously transition the patient to clozapine and initiate vesicular monoamine transporter 2 (VMAT2) inhibitors, specifically valbenazine or deutetrabenazine, to deplete presynaptic dopamine stores.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Identify choreoathetosis"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Stop anticholinergics"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Switch to clozapine"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Start VMAT2 inhibitor"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Neuroleptic Malignant Syndrome",
+            "tx": "**Neuroleptic malignant syndrome presentation** is a rare, idiosyncratic medical emergency characterized by the classic diagnostic tetrad of severe hyperthermia exceeding 38 to 40 degrees Celsius, generalized lead-pipe muscular rigidity, profound autonomic instability with labile blood pressure, and fluctuating delirium progressing rapidly toward stupor.",
+            "say": "Neuroleptic malignant syndrome presentation is a rare, idiosyncratic medical emergency characterized by the classic diagnostic tetrad of severe hyperthermia exceeding 38 to 40 degrees Celsius, generalized lead-pipe muscular rigidity, profound autonomic instability with labile blood pressure, and fluctuating delirium progressing rapidly toward stupor.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "NMS Clinical Features",
+                    "points": [
+                        "Extreme hyperthermia >38C, lead-pipe generalized rigidity, labile blood pressure, diaphoresis, and severe mental obtundation"
+                    ]
+                },
+                "right": {
+                    "title": "Malignant Catatonia",
+                    "points": [
+                        "Preceding psychiatric prodrome, waxy flexibility, catatonic posturing, autonomic instability",
+                        "dramatic response to lorazepam"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Laboratory Markers in NMS",
+            "tx": "**Laboratory markers in NMS** reveal massive elevation of serum creatine kinase, often exceeding 1,000 to 50,000 international units per liter, reflecting extensive rhabdomyolysis and muscle necrosis. Concurrent marked leukocytosis between 15,000 and 30,000 cells per microliter, metabolic acidosis, hyperkalemia, and myoglobinuria threaten acute tubular necrosis and renal failure.",
+            "say": "Laboratory markers in NMS reveal massive elevation of serum creatine kinase, often exceeding 1,000 to 50,000 international units per liter, reflecting extensive rhabdomyolysis and muscle necrosis. Concurrent marked leukocytosis between 15,000 and 30,000 cells per microliter, metabolic acidosis, hyperkalemia, and myoglobinuria threaten acute tubular necrosis and renal failure.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Laboratory Parameter",
+                    "Observed Finding in NMS",
+                    "Pathophysiological Mechanism",
+                    "Clinical Implication"
+                ],
+                "rows": [
+                    [
+                        "Serum Creatine Kinase",
+                        ">1,000 to 50,000 IU/L",
+                        "Skeletal muscle hyperthermic breakdown",
+                        "Rhabdomyolysis and myoglobinuria"
+                    ],
+                    [
+                        "Total Leukocyte Count",
+                        "15,000 to 30,000 /uL",
+                        "Acute systemic stress leukemoid reaction",
+                        "Differentiate from occult sepsis"
+                    ],
+                    [
+                        "Serum Electrolytes",
+                        "Hyperkalemia, low bicarbonate",
+                        "Muscle necrosis and metabolic acidosis",
+                        "High risk of cardiac dysrhythmias"
+                    ],
+                    [
+                        "Renal Function",
+                        "Elevated BUN and creatinine",
+                        "Myoglobin cast nephropathy and dehydration",
+                        "Mandates urgent forced diuresis"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Emergency Treatment of NMS",
+            "tx": "**Emergency management of neuroleptic malignant syndrome** begins with instant withdrawal of all triggering antipsychotics, aggressive external physical cooling, and rapid intravenous fluid resuscitation to prevent renal cast precipitation. Intravenous dantrolene sodium directly uncouples excitation-contraction coupling in skeletal muscle, while bromocriptine or amantadine restores central dopaminergic tone.",
+            "say": "Emergency management of neuroleptic malignant syndrome begins with instant withdrawal of all triggering antipsychotics, aggressive external physical cooling, and rapid intravenous fluid resuscitation to prevent renal cast precipitation. Intravenous dantrolene sodium directly uncouples excitation-contraction coupling in skeletal muscle, while bromocriptine or amantadine restores central dopaminergic tone.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Stop offending neuroleptic"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "External cooling and IV fluids"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Administer IV dantrolene"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Add oral bromocriptine"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Depot Preparations and Cardiotoxicity",
+            "tx": "**Long-acting injectable antipsychotics** including fluphenazine decanoate, haloperidol decanoate, and paliperidone palmitate improve long-term therapeutic compliance in chronic schizophrenia. However, clinicians must vigilantly monitor electrocardiograms for dose-dependent QTc prolongation, especially with intravenous haloperidol, ziprasidone, and thioridazine, which can trigger lethal polymorphic ventricular tachycardia or torsades de pointes.",
+            "say": "Long-acting injectable antipsychotics including fluphenazine decanoate, haloperidol decanoate, and paliperidone palmitate improve long-term therapeutic compliance in chronic schizophrenia. However, clinicians must vigilantly monitor electrocardiograms for dose-dependent QTc prolongation, especially with intravenous haloperidol, ziprasidone, and thioridazine, which can trigger lethal polymorphic ventricular tachycardia or torsades de pointes.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Agent or Formulation",
+                    "Dosing Interval",
+                    "Primary Clinical Advantage",
+                    "Critical Safety Warning"
+                ],
+                "rows": [
+                    [
+                        "Haloperidol Decanoate",
+                        "Every 4 weeks IM",
+                        "Overcomes poor oral medication adherence",
+                        "Post-injection EPS and QTc risk"
+                    ],
+                    [
+                        "Paliperidone Palmitate",
+                        "Every 1 to 3 months IM",
+                        "Stable active metabolite plasma levels",
+                        "Injection site nodule and hyperprolactinemia"
+                    ],
+                    [
+                        "Intravenous Haloperidol",
+                        "Acute emergency bolus",
+                        "Rapid calming of severe violent delirium",
+                        "High risk of torsades de pointes"
+                    ],
+                    [
+                        "Thioridazine",
+                        "Oral maintenance",
+                        "Low EPS due to inherent anticholinergic action",
+                        "Severe QTc widening and pigmentary retinopathy"
+                    ]
+                ]
+            }
+        }
+    ],
+    "quiz": []
+}

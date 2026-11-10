@@ -1,0 +1,239 @@
+{
+  "v": 1,
+  "module": "phm-beta-lactams",
+  "subject": "pharmacology",
+  "title": "Ceftazidime, Cefepime and Ceftaroline: Antipseudomonal and Anti MRSA Cephalosporins",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Ceftazidime** sacrificed Gram positive potency for the third generation's best Pseudomonas reach, becoming febrile neutropenia and cystic fibrosis royalty (inhaled formulations included) and melioidosis tradition, always remembering its Gram positive thinness needs partners where staphylococci threaten. Its avibactam pairing (ceftazidime avibactam) rescues it against KPC and AmpC producers for carbapenem resistant infections, the inhibitor arithmetic from two lessons ago made flesh.",
+      "say": "Ceftazidime trades staphylococci for Pseudomonas; pair it where Gram positives threaten.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ceftazidime strengths",
+          "points": [
+            "Pseudomonas cover strongest in generation three",
+            "Febrile neutropenia and cystic fibrosis roles",
+            "Melioidosis (Burkholderia) tradition",
+            "CNS penetration for Gram negative meningitis"
+          ]
+        },
+        "right": {
+          "title": "Ceftazidime gaps",
+          "points": [
+            "Gram positive cover thin: partner where needed",
+            "No anaerobic reliability",
+            "Beta lactamase labile alone",
+            "Avibactam pairing rescues resistant Gram negatives"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cefepime**, fourth generation, zwitterionic and porin swift, resists AmpC beta lactamases that destroy ceftazidime and covers Pseudomonas plus respectable Gram positives (MSSA, streptococci) in one empirical molecule for febrile neutropenia and nosocomial sepsis. Its renown is shadowed by neurotoxicity in renal impairment: confusion, myoclonus, aphasia and non convulsive status epilepticus at accumulated doses, reversed by dose correction, dialysis in extremes and EEG recognition.",
+      "say": "Cefepime covers both empires and confuses failing kidneys; dose by creatinine or read the EEG.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Cefepime profile",
+          "points": [
+            "AmpC stable, Pseudomonas plus Gram positive cover",
+            "Febrile neutropenia monotherapy staple",
+            "Porin rapid entry, beta lactamase resilience",
+            "Dose strictly renal adjusted"
+          ]
+        },
+        "right": {
+          "title": "Cefepime neurotoxicity",
+          "points": [
+            "Confusion, myoclonus, aphasia, seizures",
+            "Renal impairment accumulation the mechanism",
+            "Non convulsive status on EEG possible",
+            "Resolves with cessation and dose discipline"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Ceftaroline**, fifth generation, binds PBP2a, the altered target that defines MRSA, restoring beta lactam killing against the resistant staphylococcus while keeping broad Gram negative (short of Pseudomonas) cover, licensed for MRSA skin infection and community pneumonia and used by specialists for MRSA bacteraemia salvage. It is the generational seesaw's return swing from the generations lesson, and neutropenia on courses beyond two to three weeks is its monitoring footnote.",
+      "say": "Ceftaroline alone among cephalosporins binds MRSA's altered lock; watch neutrophils on long courses.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mrsa",
+            "label": "MRSA with altered PBP2a target"
+          },
+          {
+            "id": "ceft",
+            "label": "Ceftaroline binds PBP2a where others cannot"
+          },
+          {
+            "id": "kill",
+            "label": "Cell wall synthesis blocked, bactericidal killing"
+          },
+          {
+            "id": "niche",
+            "label": "Skin, pneumonia and specialist bacteraemia salvage"
+          }
+        ],
+        "edges": [
+          [
+            "mrsa",
+            "ceft"
+          ],
+          [
+            "ceft",
+            "kill"
+          ],
+          [
+            "kill",
+            "niche"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Ceftolozane tazobactam and** ceftazidime avibactam divide resistant Pseudomonas and Enterobacterales salvage by enzyme geography, while cefiderocol, a siderophore cephalosporin smuggling itself through iron transporters (Trojan horse), reaches metallo beta lactamase producers that defeat the inhibitor pairs. These are stewardship restricted last lines whose empirical use without cultures and infectious diseases counsel burns the class's future, a principle examinations now test as prescribing ethics.",
+      "say": "New cephalosporins are saved ammunition: culture first, specialists co sign, or resistance spends them.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Salvage pairings",
+          "points": [
+            "Ceftolozane tazobactam: resistant Pseudomonas focus",
+            "Ceftazidime avibactam: KPC and AmpC producers",
+            "Cefiderocol: siderophore entry, metallo enzymes reached",
+            "All restricted, culture directed"
+          ]
+        },
+        "right": {
+          "title": "Stewardship fences",
+          "points": [
+            "Infectious diseases approval in most centres",
+            "Never empirical without resistance evidence",
+            "De escalation when susceptibilities allow",
+            "Local resistance epidemiology guides stocking"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**AmpC and ESBL** literacy separates prescribers at this altitude: ESBLs (extended spectrum beta lactamases) destroy penicillins and cephalosporins and yield to carbapenems (and some inhibitor pairs), while AmpC enzymes (inducible in Enterobacter, Citrobacter, Serratia and kin) destroy ceftazidime yet spare cefepime and carbapenems, so an initially susceptible ceftazidime report can relapse resistant on therapy in high inoculum deep infections. Enzyme names are treatment decisions here.",
+      "say": "ESBL sends you to carbapenems, AmpC spares cefepime; the enzyme's surname writes the prescription.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ESBL producers",
+          "points": [
+            "Hydrolyse penicillins and most cephalosporins",
+            "Carbapenems the reliable backbone",
+            "Inhibitor pairs by susceptibility and site",
+            "Urinary niches may allow oral fosfomycin or nitrofurantoin"
+          ]
+        },
+        "right": {
+          "title": "AmpC producers",
+          "points": [
+            "Inducible in Enterobacter, Serratia, Citrobacter group",
+            "Ceftazidime resistance emerges on therapy",
+            "Cefepime and carbapenems stable",
+            "Avoid third generation cephalosporins in deep infection"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Febrile neutropenia assembles** this lesson empirically: an antipseudomonal beta lactam within the hour (cefepime, pip tazo or meropenem by local ecology and allergy), vancomycin added only for defined indications (skin, line, haemodynamic or MRSA signals), antifungals at day four plus of unremitting fever, and growth factors and source hunting in parallel. Every element is a previous step wearing a protocol number, which is why the protocol is learnable rather than memorised.",
+      "say": "Neutropenic fever gets an antipseudomonal beta lactam in the hour; vancomycin waits for its named indications.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "fever",
+            "label": "Febrile neutropenia recognised, cultures drawn"
+          },
+          {
+            "id": "hour",
+            "label": "Antipseudomonal beta lactam within the hour"
+          },
+          {
+            "id": "vanco",
+            "label": "Vancomycin only for defined indications"
+          },
+          {
+            "id": "day4",
+            "label": "Persistent fever day 4: antifungal and source review"
+          }
+        ],
+        "edges": [
+          [
+            "fever",
+            "hour"
+          ],
+          [
+            "hour",
+            "vanco"
+          ],
+          [
+            "vanco",
+            "day4"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Cefepime versus pip** tazo in that protocol is the AKI debate rehearsed previously, resolved locally by ecology, allergy and kidney baselines, while ceftazidime's neutropenia tradition yields to both on Gram positive thinness. Meropenem enters where ESBL risk, prior colonisation or severity argues. The empirical choice is therefore a local antibiogram sentence spoken fluently, and de escalation at 48 to 72 hours remains the proof of stewardship literacy regardless of the opener.",
+      "say": "Choose the opener by local ecology, prove stewardship by de escalating on day three.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Opener selection factors",
+          "points": [
+            "Prior colonisation and recent antibiotics",
+            "Local ESBL and Pseudomonas rates",
+            "Allergy grade and kidney baseline",
+            "Severity and source of sepsis"
+          ]
+        },
+        "right": {
+          "title": "De escalation duties",
+          "points": [
+            "Review cultures at 48 to 72 hours",
+            "Narrow to the susceptibilities proven",
+            "Oral switch when stable and absorbing",
+            "Stop dates and total duration documented"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**MRSA beta lactam** hope beyond ceftaroline includes ceftobiprole (another PBP2a binder licensed in some regions) and the carbapenem exception that there is none: every carbapenem fails MRSA despite their breadth, a boundary examinations police relentlessly. Vancomycin, daptomycin, linezolid and ceftaroline therefore divide MRSA therapy by site and susceptibility in the glycopeptide lessons ahead, with beta lactam allergy delabelling recovering cefazolin for the MSSA majority mislabelled away from it.",
+      "say": "No carbapenem touches MRSA; ceftaroline is the beta lactam exception that proves the PBP2a rule.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Anti MRSA armamentarium",
+          "points": [
+            "Vancomycin: monitored intravenous default",
+            "Daptomycin: bacteraemia, never pneumonia (surfactant)",
+            "Linezolid: oral bioavailability, pneumonia and skin",
+            "Ceftaroline: beta lactam salvage option"
+          ]
+        },
+        "right": {
+          "title": "MSSA reminder",
+          "points": [
+            "Cloxacillin or cefazolin beat vancomycin for MSSA",
+            "Allergy labels audited before accepting vancomycin",
+            "Delabelling recovers first line therapy",
+            "Generation number never substitutes for susceptibility"
+          ]
+        }
+      }
+    }
+  ]
+}

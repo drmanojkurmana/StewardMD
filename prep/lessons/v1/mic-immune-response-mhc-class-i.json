@@ -1,0 +1,211 @@
+{
+  "v": 1,
+  "module": "mic-immune-response",
+  "subject": "microbiology",
+  "title": "MHC Class I and II, HLA and Antigen Processing",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**MHC class I** (HLA A, B, C) displays cytosolic peptides (8 to 10 amino acids) on every nucleated cell to CD8 cytotoxic T cells: proteasome cuts, TAP transports into endoplasmic reticulum, tapasin loads, surface display invites killing when viral or tumour peptides appear. Platelets carry it, red cells do not, neurons whisper it.",
+      "say": "Class I reports the cell's internal protein life to CD8 executioners.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Class I pathway",
+          "points": [
+            "Proteasome and immunoproteasome cutting",
+            "TAP1 and 2 transport peptides to ER",
+            "Beta 2 microglobulin partners heavy chain",
+            "Presents to CD8, NK inhibition via KIR"
+          ]
+        },
+        "right": {
+          "title": "Class I evasions",
+          "points": [
+            "Viruses downregulate (CMV, HIV nef)",
+            "Tumours lose HLA or beta 2 microglobulin",
+            "NK missing self catches the escapees",
+            "Bare lymphocyte syndrome (TAP defects)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**MHC class II** (HLA DP, DQ, DR) displays endocytosed external peptides (13 to 18 amino acids) on professional presenters to CD4 helpers: invariant chain guards the groove, CLIP exchanges via HLA DM in endosomes. Its expression is inducible by interferon gamma on many cells in inflammation, widening presentation and autoimmune risk together.",
+      "say": "Class II reports what the cell ate to CD4 commanders.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Class II pathway",
+          "points": [
+            "Invariant chain blocks premature loading",
+            "Endosomal proteases free the groove (CLIP)",
+            "HLA DM catalyses peptide exchange",
+            "Presents to CD4 on dendritic cells, macrophages, B cells"
+          ]
+        },
+        "right": {
+          "title": "Class II regulation",
+          "points": [
+            "CIITA master transcription factor",
+            "Interferon gamma induces on epithelium and endothelium",
+            "Defects: bare lymphocyte syndrome type II",
+            "Expression on grafts drives rejection visibility"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**HLA polymorphism** (thousands of alleles at class I and II loci on chromosome 6, codominant expression, haplotype inheritance) is the population's peptide display diversity, its disease associations (B27 ankylosing spondylitis, DQ2 and DQ8 coeliac, DR4 rheumatoid, B57 HIV control) and transplantation's matching grammar. Linkage disequilibrium keeps ancestral haplotypes travelling together.",
+      "say": "No two unrelated people share the full display; HLA is immunity's fingerprint system.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "HLA genetics",
+          "points": [
+            "Chromosome 6p, codominant alleles",
+            "Haplotypes inherited as blocks",
+            "Most polymorphic human genes",
+            "Typing by sequence based methods now"
+          ]
+        },
+        "right": {
+          "title": "Disease associations",
+          "points": [
+            "HLA B27: ankylosing spondylitis (strongest classic)",
+            "DQ2 and DQ8: coeliac necessity (near)",
+            "B5701: abacavir hypersensitivity screening",
+            "B1502: carbamazepine SJS in Asian ancestry"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Antigen processing cross presentation** lets dendritic cells display exogenous antigen on class I to prime CD8 responses against viruses that never infect them and tumours, the exception proving pathway rules. Proteasome inhibitors (bortezomib lesson) and TAP blockers by viruses confirm by sabotage what processing builds.",
+      "say": "Cross presentation lets dendritic cells report other cells' infections to CD8.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Pathway rules",
+          "points": [
+            "Endogenous to class I, exogenous to class II",
+            "Cross presentation: exogenous to class I in dendritic cells",
+            "Autophagy feeds endogenous to class II",
+            "Rules bend at specialised interfaces"
+          ]
+        },
+        "right": {
+          "title": "Processing targets",
+          "points": [
+            "Viral TAP and tapasin blockers",
+            "Proteasome in antigen and myeloma biology",
+            "ER aminopeptidases trim peptides",
+            "Vaccine adjuvants aim at cross presentation"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**HLA typing** methods ascended from serology (microlymphocytotoxicity) through PCR sequence specific primers and probes to next generation sequencing allele resolution, serving transplantation matching, disease association and pharmacogenetic screens. Nomenclature (HLA A star 02 colon 01) encodes locus, allele group and protein precisely.",
+      "say": "Serology named families; sequencing names exact alleles; matching precision follows method.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Typing generations",
+          "points": [
+            "Serological cytotoxicity (historical)",
+            "PCR SSP and SSOP intermediate resolution",
+            "Sanger and NGS high resolution",
+            "Two field allele reporting standard"
+          ]
+        },
+        "right": {
+          "title": "Typing indications",
+          "points": [
+            "Solid organ and stem cell matching",
+            "Platelet refractoriness (HLA antibodies)",
+            "Pharmacogenetic single alleles",
+            "Disease association (supportive, rarely diagnostic alone)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Transplant matching hierarchy** differs by organ: kidney survival improves with HLA matching (DR weightiest), heart and lung prioritise urgency and size over waiting for matches, stem cell transplantation demands highest resolution matching (10 of 10 alleles) because graft versus host reads every mismatch, and sensitised patients (panel reactive antibodies) wait longest.",
+      "say": "Stem cell grafts demand allele perfection; hearts cannot wait for it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Solid organs",
+          "points": [
+            "Kidney: matching improves graft survival",
+            "Heart lung liver: urgency dominates, matching opportunistic",
+            "ABO compatibility gate first",
+            "Crossmatch prevents hyperacute rejection"
+          ]
+        },
+        "right": {
+          "title": "Stem cell",
+          "points": [
+            "10 of 10 allele match preferred",
+            "Haploidentical donors with post transplant cyclophosphamide",
+            "Donor registries search globally",
+            "GVHD rises with disparity"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Superantigen and MHC** from the antigens lesson reconnects: superantigens bind class II outside the groove, mitogens bypass it, conventional responses need its peptide. Tumour neoantigens are mutant peptides whose MHC binding predicts checkpoint response, making HLA the silent variable in immunotherapy biomarkers.",
+      "say": "No MHC binding, no neoantigen response: HLA quietly grades immunotherapy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "MHC in cancer",
+          "points": [
+            "Neoantigen load correlates with response",
+            "HLA loss of heterozygosity escapes",
+            "B2M mutation resistance mechanism",
+            "HLA type influences epitope prediction"
+          ]
+        },
+        "right": {
+          "title": "MHC in infection",
+          "points": [
+            "B57 and HIV elite control",
+            "HLA class II and hepatitis persistence associations",
+            "Vaccine epitope coverage by population HLA",
+            "KIR HLA pairs in NK education"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Minor histocompatibility and ABO** complete graft immunology's vocabulary: ABO antigens on endothelium cause hyperacute rejection when mismatched (universal donor logic inverted for organs), minor antigens (Y chromosome H-Y in female donors) drive chronic graft versus host despite HLA identity, proving class display of any differing peptide can matter.",
+      "say": "ABO mismatch rejects in hours; minor peptides graft versus host over months despite perfect HLA.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ABO barrier",
+          "points": [
+            "Preformed antibodies to graft endothelium",
+            "Hyperacute rejection minutes to hours",
+            "ABO incompatible protocols desensitise selected kidneys",
+            "Rh irrelevant in organ allocation"
+          ]
+        },
+        "right": {
+          "title": "Minor antigens",
+          "points": [
+            "Peptide differences outside HLA loci",
+            "H Y antigens: male recipients female graft considerations",
+            "GVHD in HLA identical siblings explained",
+            "Graft versus leukaemia shares the mechanism helpfully"
+          ]
+        }
+      }
+    }
+  ]
+}

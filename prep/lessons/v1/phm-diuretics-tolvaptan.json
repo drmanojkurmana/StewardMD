@@ -1,0 +1,173 @@
+{
+  "v": 1,
+  "module": "phm-diuretics",
+  "subject": "pharmacology",
+  "title": "Vasopressin Antagonists: Tolvaptan, Conivaptan and Pure Water Diuresis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The oral benzazepine derivative that selectively blocks vasopressin V2 receptors in the collecting duct is **tolvaptan**. Vasopressin (antidiuretic hormone, ADH) normally binds basolateral V2 receptors on principal cells, raises cyclic AMP, and inserts aquaporin 2 water channels into the apical membrane. Tolvaptan occupies that receptor without activating it, so aquaporin channels stay inside the cell and free water cannot follow the medullary osmotic gradient back into blood.",
+      "say": "Tolvaptan blocks the V2 receptor, so aquaporin channels never reach the surface and water stays in the tubule.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-diuretics.webp",
+        "alt": "Nephron diagram showing diuretic target sites along the proximal tubule, loop, distal tubule and collecting duct",
+        "caption": "The nephron segment where vasopressin antagonists act is the collecting duct, the final site shown in this diuretic target diagram. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Because solute reabsorption continues while water reabsorption stops, tolvaptan produces **aquaresis**, the excretion of electrolyte free water without matching sodium or potassium loss. Urine volume rises and urine osmolality falls below 100 mOsm per kg, yet serum sodium climbs toward normal. This separates vaptans from every saluretic diuretic, which wastes sodium first and water second, and explains why vaptans correct dilutional hyponatraemia instead of causing it.",
+      "say": "Aquaresis means losing water without losing salt, which is exactly what dilutional hyponatraemia needs.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tolvaptan (aquaretic)",
+          "points": [
+            "Blocks V2 receptors in collecting duct principal cells",
+            "Urine osmolality falls, free water clearance rises",
+            "Serum sodium rises with little change in potassium",
+            "No activation of the renin angiotensin system from salt loss"
+          ]
+        },
+        "right": {
+          "title": "Furosemide (saluretic)",
+          "points": [
+            "Blocks Na K 2Cl cotransporter in thick ascending limb",
+            "Sodium and water lost together in large volumes",
+            "Serum potassium and magnesium fall",
+            "Can worsen hyponatraemia despite brisk diuresis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The intravenous nonpeptide antagonist that blocks both V1a and V2 receptors is **conivaptan**. V1a blockade relaxes vascular smooth muscle, so conivaptan can lower systemic vascular resistance while its V2 blockade drives aquaresis. It is given as a loading dose followed by continuous infusion for short hospital courses only. Infusion site reactions are frequent, so a large vein and site rotation every 24 hours are advised in practice.",
+      "say": "Conivaptan blocks V1a as well as V2, adding vasodilatation to aquaresis, but it is infusion only and short course.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "coni", "label": "Intravenous conivaptan infusion started" },
+          { "id": "v1a", "label": "V1a blockade relaxes vascular smooth muscle" },
+          { "id": "v2", "label": "V2 blockade stops aquaporin 2 insertion" },
+          { "id": "aqua", "label": "Free water excretion rises and serum sodium corrects" }
+        ],
+        "edges": [["coni", "v1a"], ["coni", "v2"], ["v2", "aqua"]]
+      }
+    },
+    {
+      "tx": "The licensed niche for tolvaptan is euvolaemic and hypervolaemic **hyponatraemia**, chiefly the syndrome of inappropriate ADH secretion (SIADH) and decompensated heart failure or cirrhosis with dilutional sodium below 125 mmol per litre. Treatment starts in hospital at 15 mg once daily, titrated to 30 or 60 mg against serum sodium. Fluid restriction is lifted during initiation so thirst can protect against overly rapid correction.",
+      "say": "Vaptans are for dilutional hyponatraemia in hospital, started low and titrated against daily sodium checks.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "hypo", "label": "Serum sodium under 125 with euvolaemia or hypervolaemia" },
+          { "id": "start", "label": "Tolvaptan 15 mg daily in hospital, no fluid restriction" },
+          { "id": "monitor", "label": "Sodium checked at 6 to 8 hours, then daily" },
+          { "id": "titr", "label": "Titrate to 30 or 60 mg if rise is under 5 mmol per day" }
+        ],
+        "edges": [["hypo", "start"], ["start", "monitor"], ["monitor", "titr"]]
+      }
+    },
+    {
+      "tx": "Rising faster than 10 to 12 mmol per litre in 24 hours risks **osmotic demyelination**, the delayed pontine and extrapontine myelin injury that follows overrapid correction of chronic hyponatraemia. Adapted brain cells have extruded organic osmolytes and cannot reaccumulate them quickly, so shrinking axons shear. If sodium overshoots, the infusion is stopped and hypotonic fluid, sometimes with desmopressin, is used to relower it under specialist care.",
+      "say": "Correct chronic hyponatraemia too fast and the pons pays; overshoot is managed by stopping and relowering.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Safe correction",
+          "points": [
+            "Rise of 4 to 6 mmol per litre relieves most symptoms",
+            "Daily rise kept at or below 8 to 10 mmol per litre",
+            "Chronic hyponatraemia treated as the high risk case",
+            "Thirst allowed to operate during vaptan initiation"
+          ]
+        },
+        "right": {
+          "title": "Overshoot warning signs",
+          "points": [
+            "Rise above 12 mmol per litre in the first 24 hours",
+            "Urine output suddenly exceeding 3 to 4 litres daily",
+            "New dysarthria, dysphagia or quadriparesis days later",
+            "Action: stop drug, give hypotonic fluid, seek specialist help"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A second licensed role exploits a different tissue: in autosomal dominant polycystic kidney disease, vasopressin drives cyst fluid secretion, and long term tolvaptan slows cyst growth and decline in glomerular filtration. This chronic use carries an idiosyncratic **hepatotoxicity** warning, with liver enzymes checked monthly at first. Hyponatraemia courses are capped at 30 days partly because of that liver signal seen in the kidney disease trials.",
+      "say": "In polycystic kidney disease tolvaptan slows cyst growth, but the liver warning limits how it is used.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/surg-spc-polycystic-kidney-disease.webp",
+        "alt": "Gross nephrectomy specimen of adult polycystic kidney disease with enlarged cystic kidney on cut surface",
+        "caption": "Massively enlarged polycystic kidney, the condition in which long term tolvaptan slows cyst growth while liver tests are monitored. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Unlike loop and thiazide agents, vaptans largely spare **potassium**, because distal sodium delivery and aldosterone driven potassium secretion are unchanged. Hypokalaemia, a listed fact for this lesson set, belongs to the saluretics: furosemide and thiazides flood the collecting duct with sodium, principal cells reabsorb it through epithelial sodium channels, and potassium is secreted to balance charge. Vaptan treated patients instead watch sodium, volume status and liver enzymes.",
+      "say": "Potassium wasting is a saluretic problem; with vaptans you watch sodium, volume and the liver instead.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Saluretic potassium loss",
+          "points": [
+            "More sodium delivered to the collecting duct",
+            "Sodium reabsorbed through epithelial sodium channels",
+            "Potassium and hydrogen ions secreted in exchange",
+            "Result: hypokalaemia with metabolic alkalosis"
+          ]
+        },
+        "right": {
+          "title": "Vaptan electrolyte profile",
+          "points": [
+            "Water channels blocked, sodium handling untouched",
+            "Serum sodium rises toward normal",
+            "Potassium stays broadly unchanged",
+            "Main risks: thirst, dehydration, rapid sodium rise"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Tolvaptan is metabolised by **CYP3A4**, so strong inhibitors such as ketoconazole, itraconazole, clarithromycin and grapefruit juice raise its levels and are contraindicated, while rifampicin and other inducers blunt its effect. It must not be combined with hypertonic saline for hyponatraemia, and it is useless in hypovolaemic hyponatraemia, where volume replacement comes first. Patients unable to sense or respond to thirst should not receive it.",
+      "say": "Check CYP3A4 interactions, never pair it with hypertonic saline, and never use it when the patient is volume depleted.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "check", "label": "Before prescribing: volume status, thirst, drug list" },
+          { "id": "avoid", "label": "Avoid strong CYP3A4 inhibitors and hypertonic saline" },
+          { "id": "give", "label": "Give morning dose, allow free access to water" },
+          { "id": "watch", "label": "Watch sodium, urine output, weight and liver enzymes" }
+        ],
+        "edges": [["check", "avoid"], ["avoid", "give"], ["give", "watch"]]
+      }
+    },
+    {
+      "tx": "Expected nuisance effects follow the mechanism: **thirst**, dry mouth, polyuria and nocturia are near universal and usually settle, while dehydration and hypernatraemia signal excessive aquaresis or poor water access. Constipation, anorexia and asthenia are also reported. The exam trap is direction of sodium change: thiazides cause hyponatraemia, vaptans treat it, and demeclocycline, the older ADH antagonist at the collecting duct, is now rarely used because of nephrotoxicity.",
+      "say": "Thirst and polyuria are the price of aquaresis; remember thiazides lower sodium while vaptans raise it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Drugs that lower serum sodium",
+          "points": [
+            "Thiazide and thiazide like diuretics",
+            "Loop diuretics in volume depleted patients",
+            "Desmopressin excess or water intoxication",
+            "Mechanism: salt loss or water retention"
+          ]
+        },
+        "right": {
+          "title": "Drugs that raise serum sodium",
+          "points": [
+            "Tolvaptan and conivaptan by aquaresis",
+            "Demeclocycline by collecting duct ADH resistance",
+            "Lithium induced nephrogenic diabetes insipidus",
+            "Mechanism: free water loss without salt loss"
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,265 @@
+{
+  "v": 1,
+  "module": "phm-pharmacodynamics",
+  "subject": "pharmacology",
+  "title": "Second Messenger Cascades, Cyclic AMP Signaling, Agonists, and Inverse Agonists",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Extracellular chemical messengers including peptide hormones, catecholamines, and local autacoids cannot penetrate the hydrophobic lipid bilayer of cell membranes. Upon binding cell-surface receptors, their primary hormonal signals are transduced across the plasmalemma and converted into intracellular effector signals through molecules termed a **second messenger**. Common second messengers include cyclic adenosine monophosphate, cyclic guanosine monophosphate, inositol 1,4,5-trisphosphate, diacylglycerol, and ionic calcium, which amplify extracellular signals by several orders of magnitude.",
+      "say": "Intracellular second messengers amplify extracellular hormone and drug signals inside the cell, orchestrating downstream metabolic responses.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Second messenger",
+          "Generating enzyme",
+          "Immediate intracellular target",
+          "Physiological response example"
+        ],
+        "rows": [
+          [
+            "Cyclic AMP (cAMP)",
+            "Adenylyl cyclase",
+            "Protein kinase A (PKA)",
+            "Glycogenolysis, positive inotropy, bronchodilation"
+          ],
+          [
+            "Cyclic GMP (cGMP)",
+            "Guanylyl cyclase (soluble/particulate)",
+            "Protein kinase G (PKG)",
+            "Vascular smooth muscle relaxation, penile erection"
+          ],
+          [
+            "Inositol trisphosphate (IP3)",
+            "Phospholipase C-beta/gamma",
+            "IP3 receptor on endoplasmic reticulum",
+            "Sarcoplasmic calcium release, vasoconstriction"
+          ],
+          [
+            "Diacylglycerol (DAG)",
+            "Phospholipase C-beta/gamma",
+            "Protein kinase C (PKC)",
+            "Enzyme phosphorylation, smooth muscle tone"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Stimulation of Gs-coupled receptors triggers transmembrane adenylyl cyclase to convert cellular adenosine triphosphate into cyclic adenosine 3',5'-monophosphate, commonly abbreviated as **cAMP**. Rising cytosolic cyclic AMP binds cooperatively to the regulatory subunits of protein kinase A, liberating active catalytic subunits that phosphorylate serine and threonine residues on target metabolic enzymes, voltage-gated L-type calcium channels, and cAMP response element-binding transcription factors in the cell nucleus.",
+      "say": "Cyclic AMP liberates catalytic protein kinase A subunits, which phosphorylate functional enzymes, ion channels, and transcription factors.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/sympathomimetics-adrenergic-agonists-fig1.webp",
+        "alt": "Cyclic AMP second messenger cascade",
+        "caption": "Cyclic adenosine monophosphate intracellular second messenger cascade, demonstrating adenylyl cyclase synthesis, protein kinase A activation, and downstream tissue phosphorylation."
+      }
+    },
+    {
+      "tx": "Intracellular duration and intensity of cyclic nucleotide signaling are terminated through enzymatic hydrolysis by a family of eleven cyclic nucleotide phosphodiesterases. Pharmacological inhibition of specific PDE isoenzymes prevents cyclic AMP or cGMP degradation, elevating second messenger pools and prolonging biological effects. For instance, the selective **phosphodiesterase 5 inhibitor** sildenafil prevents cyclic GMP breakdown in vascular smooth muscle cells of the corpus cavernosum, promoting persistent vasodilation and enhanced arterial inflow in erectile dysfunction.",
+      "say": "Phosphodiesterase enzymes terminate second messenger signals, and their targeted inhibition forms the basis of drugs like sildenafil.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "atp",
+            "label": "Cellular ATP substrate"
+          },
+          {
+            "id": "ac",
+            "label": "Adenylyl cyclase catalysis"
+          },
+          {
+            "id": "camp",
+            "label": "Cyclic AMP second messenger"
+          },
+          {
+            "id": "pde",
+            "label": "Phosphodiesterase breakdown to 5'-AMP"
+          }
+        ],
+        "edges": [
+          [
+            "atp",
+            "ac"
+          ],
+          [
+            "ac",
+            "camp"
+          ],
+          [
+            "camp",
+            "pde"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Receptors exist in a dynamic equilibrium between two distinct conformational states: an inactive Ri conformation and an active Ra conformation capable of initiating downstream signaling. According to the two-state receptor model, many receptor populations maintain a modest proportion of receptors in the Ra state even in the total absence of any ligand, producing a baseline biological tone recognized as **constitutive receptor activity**.",
+      "say": "The two-state receptor model explains that receptors spontaneously transition into active states, creating basal constitutive biological activity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Inactive receptor state (Ri)",
+          "points": [
+            "Conformation unable to couple to G-proteins",
+            "Does not activate effector enzyme cascades",
+            "Favoured by neutral antagonists and inverse agonists",
+            "Dominant resting conformation in basal states"
+          ]
+        },
+        "right": {
+          "title": "Active receptor state (Ra)",
+          "points": [
+            "Couples efficiently to heterotrimeric G-proteins",
+            "Directly stimulates second messenger generation",
+            "Selectively stabilized by full and partial agonists",
+            "Generates baseline constitutive tone when unliganded"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A ligand that possesses both high binding affinity for the receptor and maximal intrinsic activity of 1.0 is defined as an **agonist**. Agonists bind preferentially to the active Ra conformation, shifting the conformational equilibrium towards Ra and generating the maximal possible biological response attainable by the tissue. Classic pharmacological examples include adrenaline acting at beta-1 adrenergic receptors to accelerate heart rate and morphine binding mu opioid receptors to induce profound analgesia.",
+      "say": "Agonists bind active receptor conformations with high affinity and an intrinsic activity of 1.0 to produce maximal biological effects.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Ligand classification",
+          "Conformational affinity",
+          "Intrinsic activity (alpha)",
+          "Net biological effect on basal tone"
+        ],
+        "rows": [
+          [
+            "Full agonist",
+            "Selectively binds active Ra state",
+            "+ 1.0",
+            "Produces maximal biological response above baseline"
+          ],
+          [
+            "Partial agonist",
+            "Binds both Ra and Ri states",
+            "Between 0 and + 1.0",
+            "Produces submaximal response; acts as competitive blocker"
+          ],
+          [
+            "Neutral antagonist",
+            "Equal affinity for Ra and Ri states",
+            "0",
+            "Zero effect on basal tone; prevents agonist binding"
+          ],
+          [
+            "Inverse agonist",
+            "Selectively binds inactive Ri state",
+            "Between 0 and - 1.0",
+            "Suppresses basal constitutive activity below baseline"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "This diagram places four ligands on one balance between resting and active receptor states. A **full agonist** pulls the balance strongly toward the active form and gives the largest signal. A partial agonist pulls less firmly, a neutral antagonist binds without moving the balance, and an inverse agonist pushes toward the resting form, lowering activity that was present even without any ligand.",
+      "say": "Picture the receptor as a balance. Agonists tip it toward active, a neutral antagonist leaves it where it was, and an inverse agonist tips it back toward resting.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m362-phm-pharmacodynamics-second-messenger.webp",
+        "alt": "Two-state receptor equilibrium diagram with full agonist, partial agonist, neutral antagonist, and inverse agonist favouring different receptor conformations",
+        "caption": "Two-state receptor equilibrium diagram comparing full agonist, partial agonist, neutral antagonist, and inverse agonist binding conformations. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "A molecule that binds with high affinity to the inactive Ri receptor conformation, shifting the equilibrium away from Ra, is termed an **inverse agonist**. By selectively trapping receptors in the uncoupled Ri state, inverse agonists drive constitutive receptor activity below baseline levels, producing an intrinsic pharmacological effect in the opposite direction of an agonist. In systems lacking constitutive activity, inverse agonists behave indistinguishably from neutral competitive antagonists.",
+      "say": "Inverse agonists stabilize inactive receptor states, actively suppressing constitutive basal signaling below baseline levels.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "unliganded",
+            "label": "Equilibrium: Ri (majority) and Ra (basal tone)"
+          },
+          {
+            "id": "inverse",
+            "label": "Inverse agonist selective binding to Ri"
+          },
+          {
+            "id": "shift",
+            "label": "Leftward equilibrium shift depleting Ra"
+          },
+          {
+            "id": "suppression",
+            "label": "Suppression of basal second messenger generation"
+          }
+        ],
+        "edges": [
+          [
+            "unliganded",
+            "inverse"
+          ],
+          [
+            "inverse",
+            "shift"
+          ],
+          [
+            "shift",
+            "suppression"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Numerous drugs originally classified as classic competitive antagonists have subsequently been demonstrated to function as inverse agonists at constitutively active receptors. At the GABA-A benzodiazepine allosteric site, beta-carbolines act as inverse agonists, precipitating severe anxiety and seizures by suppressing basal chloride conductance. Similarly, conventional antihistamines including diphenhydramine, cetirizine, and famotidine operate as **H1 inverse agonists**, stabilizing the inactive H1 receptor conformation to curb spontaneous inflammatory mediator release.",
+      "say": "Beta-carbolines at GABA receptors and antihistamines at H1 receptors represent inverse agonists rather than neutral antagonists.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Neutral antagonist properties",
+          "points": [
+            "Affinity for Ra equals affinity for Ri",
+            "Does not perturb basal receptor equilibrium",
+            "Exerts zero effect in absence of agonist",
+            "Blocks access of both agonists and inverse agonists"
+          ]
+        },
+        "right": {
+          "title": "Inverse agonist properties",
+          "points": [
+            "Affinity for Ri substantially exceeds Ra",
+            "Drives receptor equilibrium towards Ri",
+            "Reduces basal activity in absence of agonist",
+            "Inverts constitutive physiological signaling"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Recognizing the distinction between neutral antagonists and inverse agonists provides valuable therapeutic insight into drug tolerance and receptor up-regulation. Prolonged exposure to inverse agonists or competitive antagonists shifts receptor populations, often triggering compensatory increases in receptor density termed **receptor up-regulation**. When chronic antagonist administration is abruptly discontinued, the sudden abundance of unblocked, hyper-sensitized receptors precipitates severe rebound withdrawal syndromes such as hypertensive crises following sudden beta-blocker cessation.",
+      "say": "Abrupt withdrawal of chronic antagonists triggers rebound toxicity due to compensatory up-regulation of sensitized cell surface receptors.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Chronic drug exposure",
+          "Receptor adaptation mechanism",
+          "Cellular receptor number",
+          "Clinical withdrawal hazard"
+        ],
+        "rows": [
+          [
+            "Chronic agonist therapy (e.g. salbutamol)",
+            "Phosphorylation by GRKs, internalisation, downregulation",
+            "Reduced membrane receptor density",
+            "Tachyphylaxis and refractory bronchospasm"
+          ],
+          [
+            "Chronic antagonist therapy (e.g. propranolol)",
+            "Inhibition of turnover, receptor up-regulation",
+            "Increased membrane receptor density",
+            "Severe rebound tachycardia, angina, and hypertensive surge"
+          ]
+        ]
+      }
+    }
+  ]
+}

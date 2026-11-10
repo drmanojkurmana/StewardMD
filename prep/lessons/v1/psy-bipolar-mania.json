@@ -1,0 +1,238 @@
+{
+ "v": 1,
+ "id": "psy-bipolar-mania",
+ "subject": "psychiatry",
+ "module": "psy-bipolar",
+ "title": "Bipolar Disorder and Acute Manic Episodes",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Mania** is defined as a distinct period of abnormally and persistently elevated, expansive, or irritable mood, accompanied by abnormally increased goal-directed activity or energy, lasting at least one full week. The episode must cause marked social or occupational impairment, necessitate psychiatric hospitalization, or feature psychotic symptoms.",
+   "say": "A manic episode requires elevated or irritable mood lasting at least one week, with marked functional impairment, hospitalization, or psychotic symptoms.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/bipolar-disorder-fig1.webp",
+    "alt": "Bipolar disorder episode trajectory across mania and depression",
+    "caption": "Bipolar disorder clinical course contrasting unipolar depression with manic and hypomanic cycles.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Hypomania** shares similar phenomenology with mania but differs fundamentally in duration, severity, and functional consequences. Symptoms must persist for at least four consecutive days and represent an observable change in functioning, but never cause marked social impairment, never require hospitalization, and never feature psychosis.",
+   "say": "Hypomania involves elevated mood lasting at least four consecutive days without psychotic symptoms, without marked social impairment, and without hospitalization.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Manic Episode",
+     "points": [
+      "Duration at least one full week",
+      "Marked social or occupational impairment",
+      "Hospitalization frequently required",
+      "Psychotic symptoms may be present"
+     ]
+    },
+    "right": {
+     "title": "Hypomanic Episode",
+     "points": [
+      "Duration at least four consecutive days",
+      "No marked social or functional impairment",
+      "Hospitalization is never indicated",
+      "Psychotic features are strictly absent"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Bipolar I disorder** requires the occurrence of at least one lifetime manic episode, regardless of whether major depressive episodes have occurred. While the vast majority of bipolar I patients experience recurrent depressive episodes throughout life, a single documented manic episode is sufficient to establish definitive diagnosis.",
+   "say": "Bipolar I disorder requires at least one documented lifetime manic episode. Depressive episodes are common but not required for diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Bipolar I Disorder",
+     "points": [
+      "At least one lifetime manic episode",
+      "Major depressive episodes typical but optional",
+      "High risk of acute psychotic features",
+      "Equal prevalence in males and females"
+     ]
+    },
+    "right": {
+     "title": "Bipolar II Disorder",
+     "points": [
+      "At least one hypomanic episode",
+      "At least one major depressive episode mandatory",
+      "Never experienced a full manic episode",
+      "Higher lifetime frequency of depressive episodes"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Bipolar II disorder** requires the occurrence of at least one lifetime hypomanic episode AND at least one major depressive episode, without any lifetime history of full mania. Patients spend significantly more time in debilitating depressive phases than in hypomanic states, resulting in high suicide mortality.",
+   "say": "Bipolar II disorder requires both a hypomanic episode and a major depressive episode. Full manic episodes never occur, yet depressive burden and suicide risk remain high.",
+   "vis": {
+    "kind": "table",
+    "title": "Bipolar Spectrum Classification",
+    "cols": [
+     "Disorder",
+     "Manic Episodes",
+     "Hypomanic Episodes",
+     "Depressive Episodes"
+    ],
+    "rows": [
+     [
+      "Bipolar I",
+      "Mandatory (>= 1)",
+      "Commonly present",
+      "Occur in >95%, not mandatory"
+     ],
+     [
+      "Bipolar II",
+      "Never present",
+      "Mandatory (>= 1)",
+      "Mandatory (>= 1)"
+     ],
+     [
+      "Cyclothymia",
+      "Never present",
+      "Subthreshold hypomania",
+      "Subthreshold depression (>= 2 years)"
+     ],
+     [
+      "Unipolar MDD",
+      "Never present",
+      "Never present",
+      "Mandatory recurrent episodes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cyclothymia** is a chronic mood disturbance persisting for at least two years in adults, or one year in adolescents, featuring numerous periods with hypomanic symptoms and depressive symptoms. Crucially, these mood fluctuations never meet full diagnostic criteria for a major depressive, manic, or hypomanic episode.",
+   "say": "Cyclothymia is a chronic mood disturbance lasting at least two years with subthreshold hypomanic and depressive fluctuations that never meet full episode criteria.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Cyclothymia Criteria",
+     "points": [
+      "Two-year minimum duration in adults",
+      "Symptom-free intervals under two months",
+      "Never met criteria for major depression",
+      "Never met criteria for full mania"
+     ]
+    },
+    "right": {
+     "title": "Long-Term Course",
+     "points": [
+      "Insidious onset in late adolescence",
+      "Up to thirty percent develop bipolar I or II",
+      "Frequent substance misuse comorbidity",
+      "Responds well to mood stabilizers"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Rapid cycling specifier** applies when a patient experiences at least four distinct affective episodes, comprising any combination of mania, hypomania, or depression, within a 12-month period. Rapid cycling occurs predominantly in female patients, is often triggered by antidepressant monotherapy, and responds preferentially to sodium valproate.",
+   "say": "Rapid cycling denotes four or more mood episodes within a twelve-month period. More common in women, it is provoked by antidepressants and responds to valproate.",
+   "vis": {
+    "kind": "table",
+    "title": "Rapid Cycling Features",
+    "cols": [
+     "Feature",
+     "Clinical Reality",
+     "Therapeutic Implication"
+    ],
+    "rows": [
+     [
+      "Episode frequency",
+      ">= 4 episodes within 12 months",
+      "Demands aggressive long-term mood stabilization"
+     ],
+     [
+      "Sex distribution",
+      "Marked female preponderance",
+      "Evaluate thyroid function (hypothyroidism link)"
+     ],
+     [
+      "Iatrogenic trigger",
+      "Tricyclic and SSRI antidepressants",
+      "Taper and discontinue antidepressant agents immediately"
+     ],
+     [
+      "Drug of choice",
+      "Sodium valproate / divalproex",
+      "Superior efficacy over lithium monotherapy"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Mixed episode features** occur when full criteria for a manic or hypomanic episode are met while the patient concurrently experiences at least three depressive symptoms, or vice versa. Patients display intense dysphoric agitation, racing thoughts, extreme guilt, and severe irritability, carrying exceptionally high acute suicide risk.",
+   "say": "Mixed episodes combine manic hyperactivity and racing thoughts with depressive misery and guilt. This dysphoric turmoil substantially heightens immediate suicide danger.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Mixed State Presentation",
+     "points": [
+      "Psychomotor agitation and racing thoughts",
+      "Profound despair, guilt, and tearfulness",
+      "High impulsivity coupled with hopelessness",
+      "Highest suicide rate across bipolar phases"
+     ]
+    },
+    "right": {
+     "title": "Management Priorities",
+     "points": [
+      "Avoid antidepressant medications strictly",
+      "First-line therapy with sodium valproate",
+      "Add second-generation antipsychotics",
+      "Electroconvulsive therapy for severe agitation"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Flight of ideas** describes an accelerated flow of thought manifested through continuous, rapid speech characterized by shifting abruptly from one topic to another. Unlike loose associations seen in schizophrenia, the connections between successive thoughts remain logically understandable, driven by environmental distractibility, play on words, and clang associations.",
+   "say": "Flight of ideas features rapid thought transitions where understandable logical connections persist. Clang associations and external distractibility drive topic changes.",
+   "vis": {
+    "kind": "flow",
+    "title": "Thought Acceleration Cascade",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Internal cognitive acceleration & flight of ideas"
+     },
+     {
+      "id": "n2",
+      "label": "Pressure of speech with loud, un-interruptible output"
+     },
+     {
+      "id": "n3",
+      "label": "Distractibility & clang associations redirect topic"
+     },
+     {
+      "id": "n4",
+      "label": "Distinguishable from schizophrenic derailment by preserved links"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

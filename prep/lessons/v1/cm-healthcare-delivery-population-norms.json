@@ -1,0 +1,146 @@
+{
+  "v": 1,
+  "id": "cm-healthcare-delivery-population-norms",
+  "subject": "community-medicine",
+  "module": "cm-healthcare-delivery",
+  "title": "Population Norms and the Grassroots Workforce: ASHA, ANM, MPW, Anganwadi",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Population norms: plains versus hills",
+      "tx": "Facilities are sanctioned by population with easier norms for difficult terrain: the **population norms for health facilities** place a sub centre per five thousand population in plains and three thousand in hilly, tribal, or desert areas; a PHC per thirty thousand plains (twenty thousand hills); and a CHC per one hundred twenty thousand plains (eighty thousand hills). Examinations test the six numbers as two triplets.",
+      "say": "Five, thirty, one hundred twenty thousand in plains; three, twenty, eighty in hills. Learn the two triplets cold.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Facility", "Plains versus hilly population"],
+        "rows": [
+          ["Sub centre", "5000 versus 3000"],
+          ["Primary health centre", "30000 versus 20000"],
+          ["Community health centre", "120000 versus 80000"],
+          ["Sub district hospital", "Per about 5 lakh (state norms vary)"]
+        ]
+      }
+    },
+    {
+      "title": "ASHA: the community link worker",
+      "tx": "The **accredited social health activist (ASHA)** is a village resident woman (roughly one per thousand population, relaxed in hills) selected by the community, trained in modules, and paid performance incentives for escorting deliveries, mobilising immunisation, supporting home newborn care, and community mobilisation. She is a volunteer activist in design, not a salaried employee, a status distinction with legal and examination significance.",
+      "say": "One ASHA per thousand people, chosen by her village, paid by performance. She links households to the system.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "as1", "label": "Village selects resident woman as ASHA" },
+          { "id": "as2", "label": "Trained, equipped with drug kit" },
+          { "id": "as3", "label": "Mobilises, escorts, follows up at home" }
+        ],
+        "edges": [["as1", "as2"], ["as2", "as3"]]
+      }
+    },
+    {
+      "title": "ANM: auxiliary nurse midwife",
+      "tx": "The **auxiliary nurse midwife (ANM)** is the salaried female health worker at the sub centre (increasingly two per centre), trained eighteen to twenty four months, delivering immunisation, antenatal and postnatal care, family planning, delivery care at equipped centres, and records for her villages. She anchors the system clinically where doctors are distant, and supervises ASHAs in her area with the health supervisor structure.",
+      "say": "The ANM is the salaried clinical anchor of the sub centre. Immunisation, pregnancy care, and records run through her.",
+      "vis": {
+        "kind": "table",
+        "cols": ["ANM duty", "Setting"],
+        "rows": [
+          ["Immunisation sessions", "Sub centre plus village health days"],
+          ["Antenatal and postnatal care", "Clinics and home visits"],
+          ["Family planning services", "Counselling, pills, condoms, IUCD support"],
+          ["Records and reports", "Registers, HMIS, due lists"]
+        ]
+      }
+    },
+    {
+      "title": "Multipurpose worker (male) and supervisors",
+      "tx": "The **multipurpose health worker male** covers disease surveillance, malaria and tuberculosis programme tasks, sanitation, and health education across a larger population (historically five to seven thousand plains), chronically vacant in many states. Health assistants (male and female supervisors) each oversee a sector of sub centres, checking tours, supplies, and data, forming the supervisory spine between ANMs and the PHC medical officer.",
+      "say": "Male multipurpose workers carry surveillance and vector programmes. Supervisors stitch sub centres to the PHC.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Female line",
+          "points": ["ANM at sub centre", "Lady health visitor supervises", "Maternal child focus"]
+        },
+        "right": {
+          "title": "Male line",
+          "points": ["MPW male in villages", "Health assistant male supervises", "Disease surveillance focus"]
+        }
+      }
+    },
+    {
+      "title": "Anganwadi worker and ICDS platform",
+      "tx": "Under the Integrated Child Development Services, the **anganwadi worker** runs the village courtyard centre for children under six and pregnant or lactating mothers: supplementary nutrition, preschool education, growth monitoring, health check referral, and nutrition counselling, assisted by a helper and supervised by the Mukhya Sevika under the child development project officer. One anganwadi serves roughly four hundred to eight hundred population by current norms.",
+      "say": "The anganwadi feeds, weighs, and teaches under sixes and mothers. It is the nutrition platform of the village.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "aw1", "label": "Supplementary nutrition and preschool" },
+          { "id": "aw2", "label": "Monthly weighing and growth charts" },
+          { "id": "aw3", "label": "Referral of malnourished to health system" }
+        ],
+        "edges": [["aw1", "aw2"], ["aw2", "aw3"]]
+      }
+    },
+    {
+      "title": "Community health officer at wellness centres",
+      "tx": "The **community health officer (CHO)** is a BSc nursing or AYUSH graduate with a certificate in community health who leads the health and wellness centre team (ANM, MPW, ASHAs), provides protocol based care for common illnesses and noncommunicable diseases, screens and refers, and uses telemedicine backup. The CHO cadre operationalises mid level care, and its scope, standing orders, and drug list are live policy examination material.",
+      "say": "The community health officer leads the wellness centre team with protocol based care and tele backup from the PHC doctor.",
+      "vis": {
+        "kind": "table",
+        "cols": ["CHO function", "Example"],
+        "rows": [
+          ["Clinical care by protocol", "Minor illness, stable chronic refills"],
+          ["Population screening", "BP, sugar, cancer screening camps"],
+          ["Team leadership", "ASHA and ANM task planning"],
+          ["Teleconsultation", "Escalation to PHC medical officer"]
+        ]
+      }
+    },
+    {
+      "title": "Dai, TBA, and their transformed roles",
+      "tx": "Traditional birth attendants (dais) once conducted most rural deliveries; policy has shifted them from conducting deliveries to **linking mothers to institutions** (identifying pregnancies, escorting, postnatal support) while skilled birth attendance became non negotiable for safety. Village health guides and Jan Swasthya Rakshaks of earlier decades are the historical ancestors the ASHA design consciously improved upon with training, kits, and incentives.",
+      "say": "Dais now link and escort rather than deliver. Skilled attendance at birth is the non negotiable safety line.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Historical roles",
+          "points": ["Dai conducted home deliveries", "Village health guide 1977 scheme", "Jan Swasthya Rakshak proposal 1975"]
+        },
+        "right": {
+          "title": "Current design",
+          "points": ["ASHA mobilises and escorts", "ANM and CHO provide skilled care", "Institutions conduct deliveries"]
+        }
+      }
+    },
+    {
+      "title": "Who serves how many: workforce norms",
+      "tx": "Grassroots ratios complete the norm set for **health workforce population ratios**: ASHA about one per thousand, anganwadi per four hundred to eight hundred (mini anganwadi for smaller hamlets), ANM per sub centre population, and doctor population ratios tracked against the WHO threshold discussions. Norms are planning sanctions, not field reality; vacancy audits compare sanctioned, posted, and present on the day, three different numbers.",
+      "say": "Sanctioned, posted, and present are three different workforces. Audits and examinations both punish confusing them.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Worker", "Norm population"],
+        "rows": [
+          ["ASHA", "About 1000 (relaxed in hills)"],
+          ["Anganwadi worker", "400 to 800 per centre"],
+          ["ANM", "Per sub centre (5000 or 3000)"],
+          ["Community health officer", "Per health and wellness centre"]
+        ]
+      }
+    },
+    {
+      "title": "Exam traps in norms and workers",
+      "tx": "Final fingerprints for **population norms examination questions**: sub centre five thousand (three hilly), PHC thirty (twenty), CHC one twenty (eighty), ASHA one per thousand and incentive based (not salaried), ANM salaried at sub centre, anganwadi under the women and child ministry (not health), CHO leading wellness centres. Ministry ownership and salary status are the traps planted beside the numbers.",
+      "say": "Numbers plus ownership plus payment status: anganwadis belong to women and child development, ASHAs earn incentives, ANMs draw salary.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "tn1", "label": "Recall triplets: 5-30-120 plains, 3-20-80 hills" },
+          { "id": "tn2", "label": "Check worker status and ministry" },
+          { "id": "tn3", "label": "Answer norm with terrain qualifier" }
+        ],
+        "edges": [["tn1", "tn2"], ["tn2", "tn3"]]
+      }
+    }
+  ]
+}

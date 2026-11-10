@@ -1,0 +1,293 @@
+{
+  "v": 1,
+  "module": "phm-pharmacodynamics",
+  "subject": "pharmacology",
+  "title": "Partial Agonists, Competitive Antagonists, Dose-Response Curves, and Median Effective Dose",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "Quantitative pharmacology assesses the relationship between the concentration of a drug at its receptor biophase and the resulting biological magnitude of effect. Plotting drug concentration against biological response on an arithmetic scale produces a rectangular hyperbola that is difficult to analyze mathematically. Converting drug concentration to a logarithmic scale transforms the relationship into a symmetrical, sigmoidal **dose-response curve**, which provides a linear midsection suitable for calculating crucial potency and efficacy metrics.",
+      "say": "Plotting drug response against log concentration creates a sigmoidal dose-response curve with a linear midsection.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Dose-response curve parameter",
+          "Graphical representation on log plot",
+          "Governing pharmacological property",
+          "Clinical therapeutic significance"
+        ],
+        "rows": [
+          [
+            "Potency (EC50 / ED50)",
+            "Horizontal position along x-axis",
+            "Receptor affinity and tissue coupling",
+            "Determines required milligram tablet dose"
+          ],
+          [
+            "Maximal efficacy (Emax)",
+            "Upper asymptote plateau height",
+            "Intrinsic activity (alpha)",
+            "Determines ceiling of therapeutic benefit"
+          ],
+          [
+            "Slope of linear portion",
+            "Steepness of central linear rise",
+            "Receptor stoichiometry and cooperativity",
+            "Steep curves carry narrower safety margins"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Read the three curves in this picture from left to right along the log dose axis. The **partial agonist** curve rises early yet levels off below the full agonist plateau, even when every receptor is occupied. A competitive antagonist instead pushes the full agonist curve rightward in parallel, so more agonist is needed for the same effect while the maximum itself stays reachable.",
+      "say": "Compare the heights and positions of these curves. A partial agonist has a lower ceiling, while a competitive antagonist shifts the curve right without lowering its top.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m363-phm-pharmacodynamics-partial-agonist.webp",
+        "alt": "Semi-logarithmic dose-response curves with a full agonist reaching a high plateau, a partial agonist reaching a lower ceiling, and a competitive antagonist shifting the curve rightward",
+        "caption": "Semi-logarithmic dose-response curve showing a full agonist maximal response plateau, a partial agonist submaximal ceiling, and a competitive antagonist parallel rightward shift. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "The concentration or dose of an agonist that produces exactly fifty percent of its maximal attainable biological response is defined as the **ED50**. On a semi-logarithmic curve, ED50 serves as the primary quantitative benchmark for pharmacological potency: drugs with lower ED50 values require lower concentrations to occupy receptors and elicit effects, placing their curves further to the left along the concentration axis without necessarily implying greater maximal efficacy.",
+      "say": "The ED50 reflects the drug dose producing fifty percent of maximal effect, serving as the standard measure of potency.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dose",
+            "label": "Progressive agonist concentration increase"
+          },
+          {
+            "id": "occupancy",
+            "label": "Proportional receptor occupancy"
+          },
+          {
+            "id": "ed50",
+            "label": "Fifty percent maximal response (ED50)"
+          },
+          {
+            "id": "emax",
+            "label": "Receptor saturation and plateau (Emax)"
+          }
+        ],
+        "edges": [
+          [
+            "dose",
+            "occupancy"
+          ],
+          [
+            "occupancy",
+            "ed50"
+          ],
+          [
+            "ed50",
+            "emax"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A drug that binds to a receptor with high affinity but possesses submaximal intrinsic activity between zero and one is classified as a **partial agonist**. Even when administered at high concentrations that occupy one hundred percent of available receptor sites, a partial agonist cannot elicit the maximal tissue response achieved by a full agonist. Archetypal examples include pindolol at beta receptors, buprenorphine at mu opioid receptors, and varenicline at nicotinic acetylcholine receptors.",
+      "say": "Partial agonists bind receptors with high affinity but intermediate intrinsic activity, failing to reach full agonist efficacy even at complete saturation.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Full agonist profile",
+          "points": [
+            "Intrinsic activity equals 1.0",
+            "Produces 100% maximal tissue response",
+            "Occupies variable fraction of spare receptors",
+            "Morphine, noradrenaline, acetylcholine"
+          ]
+        },
+        "right": {
+          "title": "Partial agonist profile",
+          "points": [
+            "Intrinsic activity between 0 and 1.0",
+            "Submaximal response ceiling at 100% occupancy",
+            "Antagonizes full agonists competitively",
+            "Buprenorphine, pindolol, varenicline"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In the presence of a full agonist, a partial agonist demonstrates dual pharmacological behavior by acting as a functional antagonist. Because the partial agonist competes for the same receptor binding pocket, it displaces full agonist molecules that possess higher intrinsic activity, reducing total receptor activation. This clinical ceiling effect makes buprenorphine safer than morphine in opioid-dependent individuals, producing robust analgesia while protecting against fatal respiratory depression during accidental **opioid overdose**.",
+      "say": "When co-administered with a full agonist, a partial agonist displaces it, acting as a competitive antagonist with a protective ceiling effect.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "coadmin",
+            "label": "Morphine combined with buprenorphine"
+          },
+          {
+            "id": "displacement",
+            "label": "Competitive displacement of full agonist"
+          },
+          {
+            "id": "intermediate",
+            "label": "Intermediate submaximal receptor activation"
+          },
+          {
+            "id": "ceiling",
+            "label": "Ceiling effect preventing fatal hypoventilation"
+          }
+        ],
+        "edges": [
+          [
+            "coadmin",
+            "displacement"
+          ],
+          [
+            "displacement",
+            "intermediate"
+          ],
+          [
+            "intermediate",
+            "ceiling"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Use this picture to separate two kinds of blockade by the shape of the curve. In **non-competitive antagonism**, the blocker acts away from the agonist site and the plateau falls, so adding more agonist cannot restore the original maximum. Competitive blockade looks different: the curve moves right in parallel and the same maximum can still be reached with enough agonist.",
+      "say": "Look first at the plateau. If the maximum falls, the antagonism is non-competitive. If the curve only moves right, extra agonist can still overcome the block.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/lessons/media/need-m364-phm-pharmacodynamics-partial-agonist.webp",
+        "alt": "Dose-response comparison with competitive antagonism shifting the curve rightward in parallel and non-competitive antagonism depressing the maximal plateau",
+        "caption": "Comparison of competitive orthosteric antagonism showing a parallel rightward shift versus non-competitive allosteric antagonism showing a depressed Emax plateau. Illustration: StewardMD original.",
+        "ar": 1.3393
+      }
+    },
+    {
+      "tx": "An antagonist that reversibly binds to the same orthosteric receptor recognition pocket as the endogenous agonist is designated a **competitive antagonist**. Because the antagonist and agonist compete for identical binding sites, the inhibition can be completely overcome by escalating the agonist concentration. Consequently, a competitive antagonist produces a parallel rightward shift of the agonist log dose-response curve, increasing the apparent ED50 without depressing the maximal achievable efficacy plateau.",
+      "say": "Competitive antagonists bind the orthosteric site reversibly, shifting the log dose-response curve to the right without depressing maximal efficacy.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Competitive antagonism",
+          "points": [
+            "Binds reversibly to orthosteric active site",
+            "Surmountable by increasing agonist concentration",
+            "Parallel rightward shift of log curve",
+            "Increases apparent ED50; Emax unchanged"
+          ]
+        },
+        "right": {
+          "title": "Non-competitive antagonism",
+          "points": [
+            "Binds allosteric site or forms covalent bond",
+            "Insurmountable by high agonist concentrations",
+            "Depresses maximal response plateau (Emax)",
+            "Does not shift ED50; reduces functional receptors"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The quantitative potency of a competitive antagonist is mathematically characterized by its pA2 value derived through Schild plot analysis. The pA2 is defined as the negative logarithm of the molar antagonist concentration that necessitates a twofold increase in agonist concentration to elicit the original biological effect. When an antagonist is strictly competitive, the slope of the **Schild regression** line equals unity, providing definitive experimental confirmation of simple reversible orthosteric competition.",
+      "say": "The pA2 value measures competitive antagonist potency, where a Schild regression slope of unity confirms orthosteric competition.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Schild analysis parameter",
+          "Mathematical definition",
+          "Experimental interpretation",
+          "Diagnostic significance"
+        ],
+        "rows": [
+          [
+            "Dose ratio (r)",
+            "[Agonist with antagonist] / [Agonist alone] for equal effect",
+            "Fold-increase in agonist needed to restore response",
+            "Measures degree of receptor blockade"
+          ],
+          [
+            "pA2 value",
+            "-log10 [Antagonist] when dose ratio = 2",
+            "Antagonist concentration doubling required agonist dose",
+            "Higher pA2 indicates greater competitive antagonist potency"
+          ],
+          [
+            "Schild plot slope",
+            "Linear regression slope of log(r-1) versus log[Antagonist]",
+            "Slope equal to 1.0 confirms reversible orthosteric competition",
+            "Deviations indicate allosteric action or non-equilibrium"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Irreversible or allosteric blockers that diminish receptor signaling without being displaced by high agonist concentrations are classified as non-competitive antagonists. Phenoxybenzamine forms covalent aziridinium bonds with alpha-adrenergic receptors, permanently disabling them until de novo receptor synthesis occurs. Similarly, ketamine binds an allosteric channel pore site on the NMDA receptor, preventing calcium conductance regardless of glutamate levels, illustrating classic **insurmountable antagonism**.",
+      "say": "Non-competitive antagonists bind allosteric sites or form irreversible bonds, depressing maximal tissue response insurmountably.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "blocker",
+            "label": "Phenoxybenzamine covalent binding"
+          },
+          {
+            "id": "inactivation",
+            "label": "Irreversible alpha-receptor alkylation"
+          },
+          {
+            "id": "depletion",
+            "label": "Exhaustion of spare receptor reserve"
+          },
+          {
+            "id": "depression",
+            "label": "Depression of maximal vasoconstrictor Emax"
+          }
+        ],
+        "edges": [
+          [
+            "blocker",
+            "inactivation"
+          ],
+          [
+            "inactivation",
+            "depletion"
+          ],
+          [
+            "depletion",
+            "depression"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In many tissues, eliciting a maximal biological response requires occupation of only a small fraction of total available receptors, leaving an abundance of spare receptors. When spare receptors are present, low concentrations of irreversible antagonists can inactivate receptors without depressing the maximal response, mimicking competitive antagonism by shifting the dose-response curve to the right. Only after the irreversible antagonist inactivates all **spare receptor reserve** does further blockade crush the maximal tissue response plateau.",
+      "say": "Spare receptors allow tissues to achieve maximal responses at fractional receptor occupancy, buffering against irreversible receptor blockade.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Tissue receptor state",
+          "Irreversible blocker concentration",
+          "Apparent curve effect",
+          "Mechanistic basis"
+        ],
+        "rows": [
+          [
+            "Large spare receptor reserve (e.g. myocardium)",
+            "Low to moderate antagonist concentration",
+            "Parallel rightward shift (looks competitive)",
+            "Remaining unblocked receptors suffice to elicit 100% Emax"
+          ],
+          [
+            "Spare receptors exhausted",
+            "High antagonist concentration",
+            "Depression of maximal plateau (crushed Emax)",
+            "Functional receptor pool falls below threshold needed for Emax"
+          ]
+        ]
+      }
+    }
+  ]
+}

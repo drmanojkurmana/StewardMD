@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-antifungals",
+  "subject": "pharmacology",
+  "title": "Antifungals II: Ketoconazole, Echinocandins, Griseofulvin, Terbinafine, Nystatin and Mucormycosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Ketoconazole**, the first oral azole, now survives mainly as shampoo and cream (seborrhoeic dermatitis, pityriasis versicolor) because systemic use collected hepatotoxicity black boxes, adrenal suppression and the CYP3A4 interaction empire that its endocrine lesson exploited deliberately. Its systemic retirement is the syllabus's cleanest example of a class improving past its founder, and prescribing oral ketoconazole for fungal disease today is a formulary error in most jurisdictions.",
+      "say": "Ketoconazole retired to shampoo; its systemic life continues only as an endocrine tool elsewhere.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ketoconazole history",
+          "points": [
+            "First broad oral azole (1980s)",
+            "Hepatotoxicity and adrenal effects systemic",
+            "Potent CYP3A4 inhibition",
+            "Topical forms safe and effective"
+          ]
+        },
+        "right": {
+          "title": "Modern topical territory",
+          "points": [
+            "Ketoconazole 2 percent shampoo for seborrhoea",
+            "Creams for dermatophytes and versicolor",
+            "Negligible systemic absorption",
+            "Systemic fungal therapy belongs to successors"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Caspofungin** opened the echinocandins, intravenous inhibitors of beta 1,3 glucan synthesis that dissolve Candida and Aspergillus walls (fungicidal in yeasts, static at mould tips) with a tolerability profile (histamine infusion effects, mild liver enzymes) that made them empiric candidemia's first line in guidelines. **Micafungin** adds transplantation prophylaxis and paediatric data, anidulafungin adds hepatic free elimination, and rezafungin stretches dosing to weekly.",
+      "say": "Echinocandins melt Candida walls kindly and intravenously; candidemia starts here in most guidelines.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antifungals-azoles-amphotericin-echinocandins-fig1.webp",
+        "alt": "Antifungal drug mechanisms diagram showing ergosterol targets for polyenes and azoles and glucan for echinocandins",
+        "caption": "Echinocandin glucan attack beside azole and polyene ergosterol mechanisms."
+      }
+    },
+    {
+      "tx": "**Echinocandin blind spots** are taxonomic law: no Cryptococcus (its glucan is shielded), no Mucorales, no Fusarium reliability, no oral forms, and FKS target mutations breeding resistance in Candida glabrata under exposure. Their empire is therefore candidemia and invasive candidiasis, empiric febrile neutropenia history, and Aspergillus salvage or combination, always with species identification deciding when azoles or amphotericin must take the case instead.",
+      "say": "No crypto, no mucor, no mouth route: echinocandin limits are taxonomy, not dose.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Echinocandin empire",
+          "points": [
+            "Candidemia and invasive candidiasis first line",
+            "Aspergillus salvage and combination roles",
+            "Empirical therapy in high risk neutropenia history",
+            "Once daily intravenous dosing"
+          ]
+        },
+        "right": {
+          "title": "Echinocandin exclusions",
+          "points": [
+            "Cryptococcus and Mucorales uncovered",
+            "FKS mutation resistance in glabrata",
+            "No oral step down within class",
+            "CNS and urinary penetration poor"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Griseofulvin**, from Penicillium griseofulvum, deposits in keratin precursor cells and disrupts fungal microtubules, so new nail and hair grow out protected while infected keratin sheds over months, serving tinea capitis in children (where terbinafine covers Trichophyton better and griseofulvin Microsporum) with fatty food absorption, enzyme induction (warfarin failure), photosensitivity and teratogenicity fences. Treatment duration is keratin turnover duration, measured in months for nails.",
+      "say": "Griseofulvin grows protection into new keratin; cure waits for the nail to grow out.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Griseofulvin territory",
+          "points": [
+            "Tinea capitis, especially Microsporum",
+            "Dermatophytes only, no yeasts of consequence",
+            "Fatty food improves absorption",
+            "Months of therapy for nails"
+          ]
+        },
+        "right": {
+          "title": "Griseofulvin cautions",
+          "points": [
+            "Enzyme induction: warfarin and pill failure",
+            "Photosensitivity and lupus exacerbation",
+            "Teratogenic: contraception both sexes advised",
+            "Alcohol disulfiram like reactions reported"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Terbinafine**, an allylamine blocking squalene epoxidase (ergosterol's earlier step, accumulating toxic squalene), is fungicidal against dermatophytes and the oral answer to onychomycosis (six weeks fingers, twelve toes) and topical tinea, with taste disturbance (occasionally prolonged), liver enzyme and rare failure warnings, and CYP2D6 inhibition. It outperforms azoles for Trichophyton nails, which is why nail clippings and species guide its prescriptions.",
+      "say": "Terbinafine kills dermatophytes by squalene poisoning; nails take a season, taste takes the complaints.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "species",
+            "label": "Nail dystrophy: mycology confirms dermatophyte"
+          },
+          {
+            "id": "terb",
+            "label": "Terbinafine daily 6 or 12 weeks by site"
+          },
+          {
+            "id": "grow",
+            "label": "Healthy nail grows out over months"
+          },
+          {
+            "id": "liver",
+            "label": "Baseline liver tests, taste reviewed"
+          }
+        ],
+        "edges": [
+          [
+            "species",
+            "terb"
+          ],
+          [
+            "terb",
+            "grow"
+          ],
+          [
+            "grow",
+            "liver"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Nystatin**, a polyene too toxic for injection, lives on mucosa and skin: oral suspension swished for thrush, vaginal tablets, neonatal prophylaxis in intensive care niches, with zero absorption making systemic effects nil and adherence (taste, four times daily) its only enemy. It is the topical echo of amphotericin's ergosterol mechanism from the previous lesson, and clotrimazole and miconazole divide the remaining topical azole shelf beside it.",
+      "say": "Nystatin never enters the body and cures the surfaces it touches; frequency is its pharmacology.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Nystatin territory",
+          "points": [
+            "Oral and oesophageal thrush (swish and swallow)",
+            "Vaginal and cutaneous candidiasis",
+            "No systemic absorption or toxicity",
+            "Neonatal intensive care prophylaxis niches"
+          ]
+        },
+        "right": {
+          "title": "Topical azole neighbours",
+          "points": [
+            "Clotrimazole creams, troches and vaginal forms",
+            "Miconazole including oral gel (warfarin interaction)",
+            "Oral gel miconazole multiplies INR: counsel",
+            "Topical therapy fails in invasive disease always"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Mucormycosis** is the angioinvasive emergency that tests the whole cabinet: Mucorales fungi invade vessels in diabetic ketoacidosis, neutropenia and iron overload (deferoxamine is a siderophore accomplice), infarcting sinuses, orbit and lung with black eschars. Therapy is surgical debridement plus liposomal amphotericin immediately, isavuconazole or posaconazole as step down or salvage, and reversal of the predisposing physiology; echinocandins and fluconazole and voriconazole are useless, a negative formulary examinations adore.",
+      "say": "Mucor needs surgery and liposomal amphotericin today; voriconazole cover is how it declares itself.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "suspect",
+            "label": "DKA or neutropenia with sinus pain, black eschar"
+          },
+          {
+            "id": "image",
+            "label": "Urgent imaging and ENT, ophthalmology involvement"
+          },
+          {
+            "id": "lamb",
+            "label": "Liposomal amphotericin started immediately"
+          },
+          {
+            "id": "debride",
+            "label": "Surgical debridement and physiology reversal"
+          }
+        ],
+        "edges": [
+          [
+            "suspect",
+            "image"
+          ],
+          [
+            "image",
+            "lamb"
+          ],
+          [
+            "lamb",
+            "debride"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Ergosterol** unifies the syllabus as cholesterol unified statins: fungi build membranes on ergosterol where humans use cholesterol, and polyenes bind it, azoles block its 14 demethylation step, allylamines its squalene epoxidation, and newer agents (olorofim's pyrimidine synthesis, ibrexafungerp's glucan) widen the map beyond it. Every selectivity in antifungal therapy is an ergosterol or wall difference priced against human similarity, which is why antifungals are few and toxic beside antibacterials' abundance.",
+      "say": "One sterol separates fungus from host; three classes attack it and the wall beside it.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ergosterol attacks",
+          "points": [
+            "Polyenes: direct binding and pores",
+            "Azoles: 14 alpha demethylase blockade",
+            "Allylamines: squalene epoxidase blockade",
+            "Selectivity from human cholesterol distance"
+          ]
+        },
+        "right": {
+          "title": "Beyond ergosterol",
+          "points": [
+            "Echinocandins and ibrexafungerp: glucan wall",
+            "Flucytosine: RNA and DNA sabotage",
+            "Olorofim: pyrimidine synthesis (moulds)",
+            "Fosmanogepix: Gwt1 anchor protein target"
+          ]
+        }
+      }
+    }
+  ]
+}

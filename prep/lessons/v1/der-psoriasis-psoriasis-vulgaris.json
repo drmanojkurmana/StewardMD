@@ -1,0 +1,303 @@
+{
+ "v": 1,
+ "id": "der-psoriasis-psoriasis-vulgaris",
+ "subject": "dermatology",
+ "module": "der-psoriasis",
+ "title": "Psoriasis Vulgaris",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Psoriasis vulgaris** is a chronic, immune-mediated papulosquamous dermatosis driven by dysregulated interactions between innate immune cells, dendritic cells, and helper T lymphocytes. Activation of the interleukin-23 and interleukin-17 cytokine signaling axis drives massive keratinocyte hyperproliferation. The epidermal turnover time accelerates dramatically from the normal twenty-eight days down to just four days. Strongest genetic susceptibility maps to the PSORS1 locus on chromosome 6p21, closely linked to the HLA-Cw6 major histocompatibility allele.",
+   "say": "Psoriasis is a chronic inflammatory disorder driven by the IL-23 and IL-17 cytokine pathway. Keratinocyte transit time is cut from twenty-eight days down to four days. Genetic predisposition strongly associates with the HLA-Cw6 allele on chromosome 6.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/psoriasis-fig1.webp",
+    "alt": "Clinical photograph of psoriatic nail changes including pitting and onycholysis.",
+    "caption": "Characteristic nail pitting, subungual hyperkeratosis, and distal onycholysis in psoriasis. Masryyy, CC BY-SA 4.0.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Plaque psoriasis** represents the most prevalent clinical phenotype, occurring in over eighty percent of affected individuals. Primary lesions present as sharply demarcated, erythematous, indurated plaques draped with thick, coarse, silvery-white, micaceous scales. Lesions demonstrate an affinity for extensor surfaces, including the elbows, knees, scalp, and lumbosacral region, typically maintaining a bilateral and symmetrical distribution. Removal of scale reveals a glistening red surface reflecting underlying dermal capillary engorgement.",
+   "say": "Plaque psoriasis features well-demarcated salmon-pink plaques covered by silvery micaceous scales. They favour extensor surfaces like the elbows, knees, scalp, and lower back in a symmetrical pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Plaque Psoriasis",
+     "points": [
+      "Sharply circumscribed borders",
+      "Extensor predilection (elbows, knees)",
+      "Coarse, silvery micaceous scales",
+      "Dry plaques without primary vesicles"
+     ]
+    },
+    "right": {
+     "title": "Nummular Eczema",
+     "points": [
+      "Poorly defined coin-shaped borders",
+      "Flexural and extremity predilection",
+      "Yellow serocrusts with microvesicles",
+      "Intense pruritus with oozing base"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Auspitz sign** is a classic bedside physical examination finding that confirms the presence of psoriasis. When micaceous scales are methodically scraped off with a glass slide, the underlying translucent epidermal membrane (membrane of Duncan) is detached, exposing the summits of elongated dermal papillae. Tearing the tortuous, dilated papillary capillaries results in multiple punctate bleeding droplets. Another cardinal physical sign is Koebner phenomenon, where isomorphic psoriatic plaques emerge at sites of mechanical scratching, surgical trauma, or sunburn.",
+   "say": "Auspitz sign is elicited by scraping off scales to reveal pinpoint bleeding from dilated papillary capillaries. The Koebner phenomenon occurs when trauma or scratching triggers new psoriatic plaques along the line of injury.",
+   "vis": {
+    "kind": "flow",
+    "title": "Eliciting the Auspitz Bleeding Phenomenon",
+    "nodes": [
+     {
+      "id": "a1",
+      "label": "Candle-Grease Sign",
+      "sub": "Gentle scraping produces white powdery flakes"
+     },
+     {
+      "id": "a2",
+      "label": "Glistening Membrane",
+      "sub": "Duncan membrane peels to expose red base"
+     },
+     {
+      "id": "a3",
+      "label": "Auspitz Sign",
+      "sub": "Capillaries bleed in discrete pinpoint droplets"
+     },
+     {
+      "id": "a4",
+      "label": "Diagnostic Confirmation",
+      "sub": "Correlates with suprapapillary thinning"
+     }
+    ],
+    "edges": [
+     [
+      "a1",
+      "a2",
+      "Progressive scraping"
+     ],
+     [
+      "a2",
+      "a3",
+      "Membrane detachment"
+     ],
+     [
+      "a3",
+      "a4",
+      "Histological validation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Nail psoriasis** occurs in up to fifty percent of patients with cutaneous disease and over eighty percent of those with psoriatic arthritis. Pathological changes in the proximal nail matrix generate irregular, deep surface pitting and leukonychia. In contrast, involvement of the nail bed creates characteristic salmon patches or oil-drop dyschromia, subungual hyperkeratosis, and distal onycholysis. Severe nail dystrophy is a powerful clinical predictor of concurrent distal interphalangeal psoriatic arthropathy.",
+   "say": "Nail changes occur in half of psoriatic patients. Matrix involvement causes nail pitting, while nail bed involvement produces salmon oil-drop patches, subungual hyperkeratosis, and onycholysis.",
+   "vis": {
+    "kind": "table",
+    "title": "Psoriatic Nail Manifestations by Anatomical Site",
+    "cols": [
+     "Anatomical Structure",
+     "Pathological Mechanism",
+     "Resultant Clinical Sign"
+    ],
+    "rows": [
+     [
+      "Proximal nail matrix",
+      "Focal parakeratosis in dorsal plate",
+      "Nail pitting and trachyonychia"
+     ],
+     [
+      "Intermediate matrix",
+      "Defective keratinocyte maturation",
+      "True leukonychia and crumbling"
+     ],
+     [
+      "Nail bed",
+      "Capillary dilation and lipid exudation",
+      "Oil-drop / salmon patch dyschromia"
+     ],
+     [
+      "Hyponychium",
+      "Accumulation of subungual squames",
+      "Subungual hyperkeratosis and onycholysis"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Guttate psoriasis** presents acutely with a sudden, widespread shower of small, two to ten millimetre, drop-like erythematous scaly papules distributed across the trunk and proximal extremities. This variant occurs predominantly in children and adolescents, characteristically erupting one to three weeks following an acute streptococcal pharyngitis or tonsillitis. Streptococcal superantigens stimulate T-cell receptor subsets to provoke the rash. While many cases undergo spontaneous remission within three months, approximately one-third eventually transition into chronic plaque psoriasis.",
+   "say": "Guttate psoriasis erupts as rain-drop scaly papules on the trunk following group A streptococcal throat infection. Superantigens trigger T-cells. Treat the underlying infection, and note that many young patients enter remission.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathogenesis and Trajectory of Guttate Eruptions",
+    "nodes": [
+     {
+      "id": "g1",
+      "label": "Strep Pharyngitis",
+      "sub": "Group A beta-haemolytic streptococcal throat infection"
+     },
+     {
+      "id": "g2",
+      "label": "Superantigen Burst",
+      "sub": "Cross-reactive activation of cutaneous T cells"
+     },
+     {
+      "id": "g3",
+      "label": "Drop-like Eruption",
+      "sub": "Shower of 2 to 10 mm scaly papules across trunk"
+     },
+     {
+      "id": "g4",
+      "label": "Clinical Outcome",
+      "sub": "Spontaneous resolution or chronic plaque disease"
+     }
+    ],
+    "edges": [
+     [
+      "g1",
+      "g2",
+      "1 to 3 week latency"
+     ],
+     [
+      "g2",
+      "g3",
+      "Immune dissemination"
+     ],
+     [
+      "g3",
+      "g4",
+      "Long-term course"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Munro microabscesses** constitute a pathognomonic histological hallmark of psoriasis vulgaris, identified within the parakeratotic stratum corneum. Activated neutrophils migrate upward from tortuous dermal capillaries into the epidermis, collecting beneath the cornified layer. In the deeper spinous layer, intraepidermal neutrophil aggregates form spongiform pustules of Kogoj. Other cardinal microscopic features include regular elongation of rete ridges with clubbed bases (test-tube in a rack appearance), marked thinning of the suprapapillary epidermal plates, and complete loss of the stratum granulosum.",
+   "say": "On histology, neutrophils migrate through the epidermis into the stratum corneum, forming Munro microabscesses. Look for regular elongation of rete ridges resembling test tubes in a rack, along with suprapapillary thinning.",
+   "vis": {
+    "kind": "table",
+    "title": "Histopathological Hallmarks of Psoriasis",
+    "cols": [
+     "Epidermal Layer",
+     "Histological Finding",
+     "Clinical Correlation"
+    ],
+    "rows": [
+     [
+      "Stratum corneum",
+      "Parakeratosis and Munro microabscesses",
+      "Silvery micaceous scaling"
+     ],
+     [
+      "Stratum granulosum",
+      "Complete absence or marked attenuation",
+      "Accelerated keratinocyte transit"
+     ],
+     [
+      "Stratum spinosum",
+      "Regular elongated rete ridges and Kogoj pustules",
+      "Plaque induration and thickness"
+     ],
+     [
+      "Dermal papillae",
+      "Thinning over dilated tortuous capillaries",
+      "Punctate bleeding (Auspitz sign)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Calcipotriol** combined with potent topical corticosteroids like betamethasone dipropionate represents the first-line topical regimen for mild to moderate plaque psoriasis. Calcipotriol, a synthetic vitamin D3 analogue, binds nuclear vitamin D receptors on keratinocytes, suppressing hyperproliferation and inducing normal terminal differentiation while inhibiting inflammatory T-cell recruitment. Topical therapy is applied once daily for four weeks, achieving synergistic anti-inflammatory efficacy while reducing corticosteroid-induced dermal atrophy.",
+   "say": "The combination of topical calcipotriol with betamethasone is the gold standard for localized plaque psoriasis. Calcipotriol restores normal keratinocyte maturation, working synergistically with steroids while mitigating skin atrophy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Topical Combination Therapy",
+     "points": [
+      "Betamethasone plus calcipotriol gel",
+      "Applied once daily for 4 to 8 weeks",
+      "Mitigates corticosteroid dermal atrophy",
+      "First-line for body surface area under 10%"
+     ]
+    },
+    "right": {
+     "title": "Systemic Therapy Escalation",
+     "points": [
+      "Body surface area exceeding 10%",
+      "Severe psoriatic arthropathy",
+      "Weekly oral methotrexate 15 to 25 mg",
+      "Biologic anti-IL-17 or anti-IL-23 antibodies"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Secukinumab** is a fully human IgG1 monoclonal antibody that selectively binds and neutralizes interleukin-17A, providing potent targeted biological therapy for moderate-to-severe plaque psoriasis and psoriatic arthritis. By blocking IL-17A from binding its receptor, secukinumab halts downstream keratinocyte activation, chemokine production, and neutrophil recruitment. Administered subcutaneously at a dose of three hundred milligrams weekly for five loading weeks followed by monthly maintenance, it achieves ninety to one hundred percent skin clearance in most patients.",
+   "say": "Secukinumab selectively neutralizes interleukin-17A, blocking the downstream inflammatory cascade in psoriasis. It delivers rapid, complete plaque clearance. Screen all candidates for latent tuberculosis before starting biologic therapy.",
+   "vis": {
+    "kind": "flow",
+    "title": "Biologic Targets in Psoriasis Pathogenesis",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "IL-23 Secretion",
+      "sub": "Dendritic cells drive Th17 survival (Risankizumab)"
+     },
+     {
+      "id": "b2",
+      "label": "Th17 Activation",
+      "sub": "Production of IL-17A, IL-17F, and IL-22 cytokines"
+     },
+     {
+      "id": "b3",
+      "label": "IL-17A Neutralization",
+      "sub": "Secukinumab blocks cytokine receptor binding"
+     },
+     {
+      "id": "b4",
+      "label": "Epidermal Normalization",
+      "sub": "Resolution of plaques and parakeratotic scaling"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2",
+      "T cell expansion"
+     ],
+     [
+      "b2",
+      "b3",
+      "Targeted blockade"
+     ],
+     [
+      "b3",
+      "b4",
+      "Clinical remission"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Psoriasis: cellular mechanism underlying the Auspitz sign",
+   "b": "Thinning of suprapapillary epidermal plates exposing dilated tortuous capillaries."
+  },
+  {
+   "f": "Psoriasis histopathology: pathognomonic neutrophil collection in stratum corneum",
+   "b": "Munro microabscesses within the parakeratotic stratum corneum."
+  },
+  {
+   "f": "Guttate psoriasis: most frequent antecedent bacterial trigger",
+   "b": "Group A beta-haemolytic streptococcal pharyngitis or tonsillitis."
+  }
+ ],
+ "keys": [
+  "Psoriasis features scaly plaques over extensors driven by the IL-23 and IL-17 cytokine signaling axis",
+  "Auspitz sign pinpoint bleeding reflects capillary dilation beneath thinned suprapapillary plates",
+  "Management steps from topical calcipotriol and steroids up to methotrexate and targeted biologic agents"
+ ]
+}

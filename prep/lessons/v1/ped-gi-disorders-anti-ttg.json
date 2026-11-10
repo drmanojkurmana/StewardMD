@@ -1,0 +1,240 @@
+{
+ "key": "ped-gi-disorders-anti-ttg",
+ "v": 1,
+ "module": "ped-gi-disorders",
+ "subject": "paediatrics",
+ "title": "Pediatric GI Emergencies: Anti-tTG, TEF, Malrotation, and Abdominal Pain",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Quantifying circulating autoantibodies directed against tissue transglutaminase enzyme underpins modern pediatric celiac algorithms. Diagnostic assessment relying on **anti-tissue transglutaminase screening** demonstrates extraordinary accuracy, where titre concentrations exceeding ten times the upper limit of normal allow biopsy-sparing diagnosis under ESPGHAN guidelines when confirmed by positive endomysial antibodies and appropriate human leukocyte antigen markers.",
+   "say": "Anti-tissue transglutaminase IgA is the benchmark serological test for coeliac disease. High antibody levels exceeding ten times normal allow biopsy-sparing diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "ESPGHAN Biopsy-Sparing Criteria",
+     "points": [
+      "Anti-tTG IgA exceeds 10 times upper normal limit",
+      "Confirmed on second separate blood sample",
+      "Positive anti-endomysial antibodies (EMA)",
+      "Complete symptom resolution on gluten-free diet"
+     ]
+    },
+    "right": {
+     "title": "Conventional Biopsy Indications",
+     "points": [
+      "Titre below 10 times upper normal limit",
+      "Total serum IgA deficiency present",
+      "Atypical symptoms or uncertain serology",
+      "Multiple duodenal bulb and distal biopsies required"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Defective separation of the embryonic foregut into anterior respiratory and posterior digestive tracts produces congenital fistulae. The most prevalent variant is **Type C tracheo-oesophageal fistula**, comprising eighty-five percent of anomalies, characterized by a blind proximal oesophageal pouch with a fistula connecting the distal oesophagus to the trachea. Maternal history frequently documents severe polyhydramnios.",
+   "say": "Type C tracheo-oesophageal fistula accounts for eighty-five percent of cases, featuring a proximal blind pouch and distal fistula. Maternal polyhydramnios is common.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Gross Anatomical Type",
+     "Proximal Oesophagus",
+     "Distal Oesophagus",
+     "Proportion of Cases"
+    ],
+    "rows": [
+     [
+      "Type A (Pure Atresia)",
+      "Blind pouch (no fistula)",
+      "Blind pouch (no fistula)",
+      "8 percent (Scaphoid abdomen, gasless)"
+     ],
+     [
+      "Type B (Proximal Fistula)",
+      "Fistula to trachea",
+      "Blind pouch (no fistula)",
+      "1 percent (Rare, severe aspiration)"
+     ],
+     [
+      "Type C (Classic TEF)",
+      "Blind proximal pouch",
+      "Fistula to distal trachea/carina",
+      "85 percent (Abdominal distension from air)"
+     ],
+     [
+      "Type E (H-type Fistula)",
+      "Continuous patent lumen",
+      "Fistula connects trachea to oesophagus",
+      "4 percent (Late presentation, chronic cough)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Neonatal presentation involves immediate post-delivery airway and digestive distress. Affected infants exhibit excessive salivation, continuous frothing at the mouth, and choking, coughing, and cyanosis with the very first oral feed. Bedside diagnosis is confirmed when a **radiopaque nasogastric tube arrests** at ten to twelve centimetres from the alveolar margin, coiling in the upper blind pouch on chest radiography.",
+   "say": "Frothing at the mouth and choking during the first feed demand immediate evaluation for TEF. A coiled nasogastric tube on chest X-ray confirms the diagnosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Bedside Findings in TEF",
+     "points": [
+      "Persistent oral frothing and bubbling saliva",
+      "Immediate choking and cyanosis with feeding",
+      "Abdominal distension from distal fistula air",
+      "High association with VACTERL anomalies (50%)"
+     ]
+    },
+    "right": {
+     "title": "Immediate Preoperative Protocol",
+     "points": [
+      "Keep infant nil by mouth immediately",
+      "Continuous suctioning of blind upper pouch",
+      "Nurse in 30-degree head-up prone position",
+      "Screen for cardiac and vertebral anomalies"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Failure of the embryonic midgut to complete its normal counterclockwise rotation around the superior mesenteric axis precipitates volvulus. In normal development, the bowel undergoes two hundred and seventy degrees of counterclockwise rotation; arrest results in **intestinal malrotation in infants**, characterized by an abnormally narrow mesenteric root. Lax peritoneal Ladd bands traverse the duodenum, predisposing the midgut to catastrophic twisting.",
+   "say": "Malrotation occurs when embryonic midgut rotation is arrested, leaving a narrow mesenteric stalk. Ladd bands cross the duodenum and predispose to twisting volvulus.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/paediatric-gastrointestinal-emergencies-pyloromyotomy-and-ladd-procedure-fig1.webp",
+    "alt": "Surgical diagram showing untwisting of midgut volvulus, division of Ladd bands, and widening of mesenteric base.",
+    "caption": "Surgical steps of the Ladd procedure for relieving intestinal malrotation and midgut volvulus. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Sudden onset of bilious vomiting in a previously thriving neonate represents a surgical emergency until proven otherwise. Midgut torsion around the narrow mesenteric pedicle produces **acute midgut volvulus**, cutting off superior mesenteric arterial and venous blood flow. The infant develops sudden bile-stained emesis, progressive abdominal tenderness, haematochezia, and rapid cardiovascular collapse secondary to widespread bowel infarction.",
+   "say": "Sudden bilious vomiting in a newborn is midgut volvulus until proven otherwise. Urgent upper gastrointestinal contrast series shows a corkscrew duodenojejunal pattern.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Midgut Volvulus Red Flags",
+     "points": [
+      "Sudden onset bilious (green) emesis in first month",
+      "Abdominal distension, guarding, and peritonism",
+      "Passage of blood in stool (mesenteric ischemia)",
+      "Rapid development of hypovolaemic septic shock"
+     ]
+    },
+    "right": {
+     "title": "Diagnostic & Emergency Steps",
+     "points": [
+      "Upper GI contrast series shows corkscrew twist",
+      "Duodenojejunal flexure located to right of spine",
+      "Doppler shows whirlpool sign of mesenteric vessels",
+      "Emergency laparotomy within hours saves bowel"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Definitive surgical correction relieves mechanical obstruction and broadens the mesenteric base to prevent future volvulus. Emergency laparotomy utilizes the classic **Ladd procedure for malrotation**, consisting of counterclockwise untwisting of the volvulus, surgical division of constricting peritoneal Ladd bands across the duodenum, widening of the narrow mesenteric base, placement of the colon on the left and caecum in the right, and appendicectomy.",
+   "say": "The Ladd procedure untwists the volvulus, divides peritoneal bands, broadens the mesenteric base, and removes the appendix to avoid future diagnostic confusion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Surgical Step in Ladd Procedure",
+     "Surgical Action Taken",
+     "Pathological Objective",
+     "Clinical Outcome"
+    ],
+    "rows": [
+     [
+      "Counterclockwise detorsion",
+      "Untwisting of volvulus 360-720 degrees",
+      "Restores superior mesenteric arterial perfusion",
+      "Reverses acute intestinal ischaemia"
+     ],
+     [
+      "Division of Ladd bands",
+      "Transecting peritoneal fibrous bands",
+      "Relieves extrinsic duodenal obstruction",
+      "Mobilizes the right colon entirely"
+     ],
+     [
+      "Mesenteric base widening",
+      "Separation of mesenteric leaflets",
+      "Broadens pedicle between duodenum & colon",
+      "Prevents recurrent volvulus formation"
+     ],
+     [
+      "Prophylactic appendicectomy",
+      "Appendicectomy performed routinely",
+      "Prevents future diagnostic confusion",
+      "Appendix resides in left upper quadrant"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Recurrent episodic abdominal pain represents one of the most common complaints in school-aged children. Diagnostic evaluation begins by assessing established **Apley criteria for abdominal pain**, defined as at least three discrete episodes of pain severe enough to interrupt normal daily activities occurring over a period of at least three months. The vast majority of cases represent functional abdominal pain disorders.",
+   "say": "Apley criteria define recurrent abdominal pain as at least three episodes over three months affecting activity. Most cases are functional disorders like irritable bowel syndrome.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Feature Category",
+     "Functional Abdominal Pain",
+     "Organic Pathology (Red Flags)",
+     "Action Required"
+    ],
+    "rows": [
+     [
+      "Pain localization",
+      "Periumbilical, vague, non-radiating",
+      "Well-localized, right lower or upper quadrant",
+      "Organic alert: focused ultrasound"
+     ],
+     [
+      "Nocturnal symptoms",
+      "Never wakes child from sound sleep",
+      "Wakes child from sleep repeatedly",
+      "Organic alert: upper endoscopy"
+     ],
+     [
+      "Systemic symptoms",
+      "Absent; growth velocity entirely normal",
+      "Fever, weight loss, anorexia, rash, arthritis",
+      "Organic alert: ESR, CRP, screening"
+     ],
+     [
+      "Altered bowel habit",
+      "Normal or functional constipation",
+      "Persistent diarrhoea, nocturnal stooling, blood",
+      "Organic alert: stool calprotectin"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Distinguishing benign functional disorders from occult inflammatory or organic bowel disease relies on identifying red flag clinical features. Symptoms such as persistent right upper or lower quadrant pain, nocturnal awakening, recurrent unexplained fevers, localized guarding, involuntary weight loss, and **gastrointestinal red flags in abdominal pain** warrant immediate comprehensive investigation, including inflammatory markers, fecal calprotectin, abdominal imaging, and diagnostic endoscopy.",
+   "say": "Red flags including nocturnal awakening, localized tenderness, weight loss, and rectal bleeding rule out functional pain, demanding targeted endoscopy and imaging.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Reassuring Functional Clues",
+     "points": [
+      "Pain strictly periumbilical without radiation",
+      "Associated with academic or social anxiety",
+      "Child thrives with normal height and weight percentiles",
+      "Negative screening labs (normal CBC, ESR, CRP, urinalysis)"
+     ]
+    },
+    "right": {
+     "title": "Mandatory Laboratory Workup",
+     "points": [
+      "Complete blood count and inflammatory markers (ESR, CRP)",
+      "Urinalysis and urine culture to exclude occult UTI",
+      "Stool calprotectin for inflammatory bowel disease",
+      "Abdominal ultrasound for hydronephrosis or stones"
+     ]
+    }
+   }
+  }
+ ]
+}

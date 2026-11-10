@@ -1,0 +1,334 @@
+{
+ "v": 1,
+ "id": "fmt-ethics-negligence-consumer-protection-act",
+ "subject": "forensic-medicine",
+ "module": "fmt-ethics-negligence",
+ "title": "Medicolegal Frameworks: Consumer Protection Act, Euthanasia and Organ Transplantation",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "The Consumer Protection Act and medical services",
+   "tx": "In the landmark judgment Indian Medical Association v V.P. Shantha (1995), the Supreme Court established the **Consumer Protection Act medical inclusion**, ruling that medical services rendered by clinicians and private hospitals fall within the statutory definition of 'service' under consumer protection legislation. Patients who pay consultation fees, hospital charges, or insurance premiums can approach consumer commissions for compensation regarding deficiency of medical service.",
+   "say": "The Supreme Court brought paid medical services under the Consumer Protection Act in the Shantha ruling, allowing patients to seek compensation for clinical deficiency.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Healthcare sector",
+     "CPA applicability",
+     "Statutory rationale"
+    ],
+    "rows": [
+     [
+      "Private practitioners and hospitals",
+      "Fully covered under CPA",
+      "Services rendered for direct monetary consideration"
+     ],
+     [
+      "Government hospitals (completely free)",
+      "Exempt from CPA coverage",
+      "Free public healthcare without consideration is not a service"
+     ],
+     [
+      "Government hospitals (partially charged)",
+      "Covered for all patients",
+      "Paying patients subsidizing free beds brings facility under CPA"
+     ],
+     [
+      "Corporate employee health schemes",
+      "Fully covered under CPA",
+      "Employer contributions constitute valid consideration"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The three-tier consumer dispute redressal commission structure",
+   "tx": "Under the Consumer Protection Act of 2019, aggrieved patients file claims across a **three-tier consumer dispute structure** organized by pecuniary jurisdiction. The District Consumer Disputes Redressal Commission adjudicates claims where the consideration paid does not exceed fifty lakh rupees. The State Commission hears disputes up to two crore rupees, while the National Commission in New Delhi exercises original jurisdiction over claims exceeding two crore rupees.",
+   "say": "Consumer complaints are heard across three tiers: District Commissions up to fifty lakhs, State Commissions up to two crores, and the National Commission above two crores.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "District Commission (Claims up to 50 lakh rupees)"
+     },
+     {
+      "id": "b",
+      "label": "State Commission (Claims between 50 lakh and 2 crore rupees)"
+     },
+     {
+      "id": "c",
+      "label": "National Commission (Claims exceeding 2 crore rupees)"
+     },
+     {
+      "id": "d",
+      "label": "Appellate appeal to Supreme Court of India"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Advantages of consumer forums over ordinary civil courts",
+   "tx": "Litigants prefer consumer forums because the **consumer forum summary adjudication** offers rapid, accessible, and inexpensive justice compared to protracted civil court trials. Consumer commissions charge nominal filing court fees, are not bound by rigid technical evidentiary formalities, follow principles of natural justice, conduct summary hearings, and are legally mandated to deliver judgments within three to five months from notice service.",
+   "say": "Consumer commissions provide fast, affordable summary hearings without heavy court fees, deciding medical compensation disputes in months rather than years.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Ordinary civil court",
+     "points": [
+      "Demands substantial ad-valorem court fees",
+      "Governed strictly by Evidence Act and CPC",
+      "Lengthy trials spanning decades",
+      "Formal legal representation mandatory"
+     ]
+    },
+    "right": {
+     "title": "Consumer commission",
+     "points": [
+      "Nominal filing fee based on claim slab",
+      "Summary procedure governed by natural justice",
+      "Target disposal within 3 to 5 months",
+      "Complainant can argue in person"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Active versus passive euthanasia concepts",
+   "tx": "In bioethics and forensic medicine, a fundamental boundary separates **active versus passive euthanasia legalities**. Active euthanasia involves intentionally administering a lethal substance, such as potassium chloride, to accelerate death and end intractable suffering; this remains strictly illegal in India, amounting to culpable homicide or murder. Conversely, passive euthanasia involves withdrawing or withholding artificial life support in terminally ill patients, which is legally recognized.",
+   "say": "Active euthanasia uses lethal injections and is illegal murder in India. Passive euthanasia involves withdrawing futile life support in terminally ill patients and is lawful.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Active euthanasia (Illegal)",
+     "points": [
+      "Positive lethal act (e.g. fatal drug injection)",
+      "Directly causes cessation of vital life functions",
+      "Treated as murder under Section 103 BNS",
+      "Prohibited by Indian courts and medical council"
+     ]
+    },
+    "right": {
+     "title": "Passive euthanasia (Legal)",
+     "points": [
+      "Withholding / withdrawing futile life support",
+      "Allows natural underlying disease to take course",
+      "Permitted under Supreme Court guidelines",
+      "Requires dual medical board approvals"
+     ]
+    }
+   }
+  },
+  {
+   "title": "The Aruna Shanbaug and Common Cause landmark judgments",
+   "tx": "The legal foundation of passive euthanasia was forged in the historic **Aruna Shanbaug euthanasia precedent** (2011), where the Supreme Court legalized withdrawal of life-sustaining treatment for patients in permanent vegetative states. This was expanded in Common Cause v Union of India (2018), which declared the right to die with dignity a fundamental right under Article 21, legalizing advance medical directives (living wills).",
+   "say": "The Supreme Court legalized passive euthanasia in the Aruna Shanbaug case and later recognized advance medical directives and the right to die with dignity.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Aruna Shanbaug case (2011) legalizes passive euthanasia"
+     },
+     {
+      "id": "b",
+      "label": "Common Cause ruling (2018) affirms right to die with dignity"
+     },
+     {
+      "id": "c",
+      "label": "Legal recognition of advance medical directives (living wills)"
+     },
+     {
+      "id": "d",
+      "label": "Streamlined 2023 guidelines simplifying medical board approvals"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Procedure for executing an advance medical directive or living will",
+   "tx": "Under Supreme Court guidelines, a competent adult may execute an **advance medical directive living will** specifying that futile life support should not be administered if they become terminally ill without hope of recovery. When the condition arises, a Primary Medical Board comprising treating clinicians and a Secondary Medical Board comprising hospital specialists must both verify terminal status before withdrawing ventilation.",
+   "say": "A living will instructs doctors to withdraw futile life support if terminal illness occurs, requiring independent approvals from primary and secondary hospital boards.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Competent adult executes living will before notary"
+     },
+     {
+      "id": "b",
+      "label": "Patient enters terminal, irreversible persistent state"
+     },
+     {
+      "id": "c",
+      "label": "Primary medical board verifies irreversible condition"
+     },
+     {
+      "id": "d",
+      "label": "Secondary hospital board concurs and life support withdrawn"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "The Transplantation of Human Organs and Tissues Act",
+   "tx": "Governing therapeutic organ recovery, the **Transplantation of Human Organs Act** (THOTA 1994, amended 2011) provides statutory mechanisms for organ retrieval and prohibits commercial organ trafficking. The statute legally defines brain stem death, regulates living related donations, mandates authorization committee clearances for non-related transplants, and prescribes severe criminal imprisonment and fines for buying, selling, or brokering human organs.",
+   "say": "The Transplantation of Human Organs Act regulates organ donations, defines brain stem death, and criminalizes all commercial organ trafficking in India.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Donation category",
+     "Authorisation requirement",
+     "Statutory restriction"
+    ],
+    "rows": [
+     [
+      "Near relatives (spouse, parent, child, sibling)",
+      "Hospital transplant committee approval",
+      "Genetic / marital relationship documented"
+     ],
+     [
+      "Unrelated living donor (altruistic)",
+      "State / District Authorisation Committee",
+      "Strict screening to rule out commercial payment"
+     ],
+     [
+      "Brain stem dead cadaveric donor",
+      "Consent from next of kin / legal custodian",
+      "Organ retrieval coordinated via NOTTO network"
+     ],
+     [
+      "Commercial organ commerce / middleman",
+      "Strictly criminalised under THOTA",
+      "Imprisonment up to 10 years and heavy fines"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Statutory certification of brain stem death",
+   "tx": "Under THOTA regulations, the formal **brain stem death medical board** must comprise four designated physicians: the medical superintendent in charge of the hospital, an independent specialist, a neurologist or neurosurgeon, and the treating medical officer. The board must independently conduct two clinical apnea tests spaced by an interval of at least six hours in adults, confirming total, irreversible cessation of all brain stem functions.",
+   "say": "Brain stem death must be certified by four doctors, including a neurologist. They must confirm absent brain stem reflexes across two apnea tests spaced six hours apart.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Deep coma with irreversible structural brain injury identified"
+     },
+     {
+      "id": "b",
+      "label": "First clinical neurological exam and apnea test performed"
+     },
+     {
+      "id": "c",
+      "label": "Six-hour waiting period with continuous intensive maintenance"
+     },
+     {
+      "id": "d",
+      "label": "Second clinical exam and apnea test signed by all four doctors"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "National Organ and Tissue Transplant Organisation network",
+   "tx": "To ensure equitable cadaveric allocation, the central government created the **NOTTO organ allocation registry**, operating through the National Organ and Tissue Transplant Organisation, Regional (ROTTO), and State (SOTTO) centres. This computerized network maintains national waitlists for heart, lung, liver, and kidney recipients, coordinating organ logistics, airport green corridors, and emergency transfers while eliminating commercial exploitation.",
+   "say": "NOTTO coordinates national cadaveric organ waitlists and transport corridors across India, ensuring transparent and fair organ sharing for waiting patients.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Brain stem death certified and family consents to donation"
+     },
+     {
+      "id": "b",
+      "label": "Donor data uploaded to SOTTO and NOTTO national portal"
+     },
+     {
+      "id": "c",
+      "label": "Recipient matched by computerized waitlist and blood group"
+     },
+     {
+      "id": "d",
+      "label": "Organ harvested and transported through police green corridor"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

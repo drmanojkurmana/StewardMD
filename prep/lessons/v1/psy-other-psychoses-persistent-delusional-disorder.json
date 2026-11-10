@@ -1,0 +1,259 @@
+{
+ "v": 1,
+ "id": "psy-other-psychoses-persistent-delusional-disorder",
+ "subject": "psychiatry",
+ "module": "psy-other-psychoses",
+ "title": "Persistent Delusional Disorder and Paranoid Syndromes",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Persistent delusional disorder** is characterized by the insidious development of a single well-systematized, non-bizarre delusion, or a group of related delusions, persisting for at least three months. Importantly, personality structure, intellect, and occupational functioning outside the direct sphere of the delusion remain remarkably preserved.",
+   "say": "Persistent delusional disorder involves stable, non-bizarre delusions lasting at least three months. General personality and functional capacity outside the delusion remain intact.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Persistent Delusional Disorder",
+     "points": [
+      "Non-bizarre plausible delusions",
+      "No persistent auditory hallucinations",
+      "Normal affect, speech, and intellect",
+      "Encapsulated functional impact"
+     ]
+    },
+    "right": {
+     "title": "Schizophrenia Presentation",
+     "points": [
+      "Bizarre impossible delusions",
+      "Prominent Schneiderian hallucinations",
+      "Formal thought disorder and blunting",
+      "Pervasive social deterioration"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Erotomania**, or de Clerambault syndrome, is a delusional subtype where the patient harbours an unshakeable conviction that another person, typically of higher socioeconomic standing or celebrity status, is secretly in love with them. The patient often interprets neutral media broadcasts, attire, or vehicle movements as covert romantic signals.",
+   "say": "Erotomania, or de Clerambault syndrome, is the conviction that an individual of higher social status is secretly in love with the patient, communicating through subtle signals.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "de Clerambault Characteristics",
+     "points": [
+      "Target of higher status or fame",
+      "Delusion that target initiated love",
+      "Rejection interpreted as secret devotion",
+      "Stalking and intrusive letter writing"
+     ]
+    },
+    "right": {
+     "title": "Associated Risks",
+     "points": [
+      "Legal harassment and injunctions",
+      "Resentment upon prolonged frustration",
+      "Transition to persecutory delusions",
+      "Threats toward target's spouse"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Othello syndrome**, also known as morbid jealousy or conjugal paranoia, involves an unfounded, fixed delusion that one's marital partner or romantic lover is unfaithful. Patients repeatedly interrogate spouses, search personal belongings, inspect bedsheets, and conduct intrusive surveillance, posing severe risks of domestic physical violence.",
+   "say": "Othello syndrome involves the unshakeable delusion that one's spouse is being unfaithful. Patients perform intrusive checks, which creates a substantial domestic violence hazard.",
+   "vis": {
+    "kind": "table",
+    "title": "Classic Delusional Subtypes",
+    "cols": [
+     "Eponym / Term",
+     "Core Delusion",
+     "Key Clinical Features"
+    ],
+    "rows": [
+     [
+      "de Clerambault",
+      "Erotomanic love",
+      "Belief that high-status person loves patient; stalking"
+     ],
+     [
+      "Othello syndrome",
+      "Morbid jealousy",
+      "Unfounded spousal infidelity; severe violence risk"
+     ],
+     [
+      "Ekbom syndrome",
+      "Delusional parasitosis",
+      "Belief that skin is infested by bugs; matchbox sign"
+     ],
+     [
+      "Cotard syndrome",
+      "Nihilistic delusion",
+      "Belief that organs or body are dead; severe depression"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Capgras syndrome** represents a delusional misidentification syndrome where the patient firmly believes that an emotionally significant person, such as a spouse or parent, has been replaced by an identical-looking imposter. It arises from neuroanatomical disconnection between intact facial recognition in the fusiform gyrus and emotional autonomic appraisal.",
+   "say": "In Capgras syndrome, the patient believes a close relative has been replaced by an identical double. It reflects disconnection between facial recognition and emotional familiarity.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Capgras Syndrome",
+     "points": [
+      "Familiar person is deemed an imposter",
+      "Physical appearance recognized normally",
+      "Affective familiarity response lost",
+      "More common in organic cerebral lesions"
+     ]
+    },
+    "right": {
+     "title": "Fregoli Syndrome",
+     "points": [
+      "Strangers identified as a familiar person",
+      "Belief of shapeshifting disguise",
+      "Hyper-responsiveness to facial familiarity",
+      "Frequent association with persecutory ideas"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Fregoli syndrome** is the converse delusional misidentification phenomenon, wherein the patient identifies completely unfamiliar strangers as a familiar persecutor disguised in different physical appearances. Patients believe this single antagonist systematically changes clothing, makeup, and bodily features to pursue and torment them in public environments.",
+   "say": "Fregoli syndrome causes patients to believe strangers are actually a single familiar persecutor disguised in different bodies to surveil and torment them.",
+   "vis": {
+    "kind": "flow",
+    "title": "Misidentification Mechanisms",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Visual face recognition via fusiform gyrus"
+     },
+     {
+      "id": "n2",
+      "label": "Capgras: Loss of limbic autonomic emotional signal produces double delusion"
+     },
+     {
+      "id": "n3",
+      "label": "Fregoli: Limbic hyper-reactivity falsely attaches familiarity to strangers"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n1",
+      "n3"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cotard syndrome** involves profound nihilistic delusions wherein patients assert that they have lost their internal organs, have no blood, have died, or that the entire world has ceased to exist. Classically encountered in severe psychotic depression, it carries extreme suicide risk and severe self-neglect.",
+   "say": "Cotard syndrome features nihilistic delusions of being dead or lacking internal organs. It occurs in severe melancholic psychotic depression and requires urgent electroconvulsive therapy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nihilistic Symptomatology",
+     "points": [
+      "Conviction of internal organ putrefaction",
+      "Belief of having no blood, heart, or brain",
+      "Delusion that the patient is already dead",
+      "Belief that the external world is destroyed"
+     ]
+    },
+    "right": {
+     "title": "Clinical Setting & Treatment",
+     "points": [
+      "Severe melancholic psychotic depression",
+      "High risk of lethal starvation and suicide",
+      "Elderly and geriatric patient predominance",
+      "Treatment of choice is bilateral ECT"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Schizoaffective disorder** requires the simultaneous presence of full psychotic symptoms meeting schizophrenia criteria alongside a prominent major depressive or manic episode. Critically, definitive diagnosis demands delusions or hallucinations persisting for at least two consecutive weeks in the complete absence of prominent affective symptoms.",
+   "say": "Schizoaffective disorder requires concurrent schizophrenia and mood episodes, with hallucinations or delusions persisting for at least two weeks without prominent mood symptoms.",
+   "vis": {
+    "kind": "table",
+    "title": "Psychotic Spectrum Diagnostic Rules",
+    "cols": [
+     "Disorder",
+     "Psychotic Symptoms",
+     "Mood Symptoms",
+     "Duration Threshold"
+    ],
+    "rows": [
+     [
+      "Schizophrenia",
+      "Bizarre, Schneiderian",
+      "Brief or absent",
+      ">= 1 month active (6 mo total)"
+     ],
+     [
+      "Schizoaffective",
+      "Full schizophrenia criteria",
+      "Concurrent prominent episode",
+      "Psychosis >= 2 weeks without mood"
+     ],
+     [
+      "Bipolar with psychosis",
+      "Mood-congruent delusions",
+      "Concurrent with manic episode",
+      "Psychosis only during mood episode"
+     ],
+     [
+      "Brief psychotic disorder",
+      "Polymorphic psychosis",
+      "Variable or absent",
+      "1 day to under 1 month"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Shared psychotic disorder**, historically designated folie a deux, occurs when a secondary impressionable individual develops delusional beliefs transmitted directly from a dominant primary partner suffering from established psychotic illness. Management requires immediate physical separation of the pair, which frequently dissolves the delusional convictions of the secondary partner.",
+   "say": "Folie a deux describes delusion transmission from a dominant psychotic patient to an isolated partner. Physical separation often rapidly resolves delusions in the secondary individual.",
+   "vis": {
+    "kind": "flow",
+    "title": "Shared Psychosis Management",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Dominant inducer transmits delusion to submissive dependent"
+     },
+     {
+      "id": "n2",
+      "label": "Shared social isolation reinforces mutual belief system"
+     },
+     {
+      "id": "n3",
+      "label": "Physical separation of the pair in different environments"
+     },
+     {
+      "id": "n4",
+      "label": "Secondary partner delusions resolve without major antipsychotic dosing"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

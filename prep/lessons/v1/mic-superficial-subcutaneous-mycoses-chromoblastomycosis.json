@@ -1,0 +1,214 @@
+{
+  "v": 1,
+  "module": "mic-superficial-subcutaneous-mycoses",
+  "subject": "microbiology",
+  "title": "Chromoblastomycosis Agents, Muriform Bodies, Rhinosporidiosis and Lobomycosis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Fonsecaea pedrosoi** and related dematiaceous fungi are leading causes of chromoblastomycosis in humid tropics. They enter through minor trauma in barefoot agricultural workers and grow slowly for years. Melanin in their walls protects against oxidative killing and may reduce antifungal susceptibility. Early small lesions can be excised, while extensive plaques need prolonged itraconazole, terbinafine or combination approaches.",
+      "say": "Barefoot trauma plus a warty plaque in the tropics should trigger Fonsecaea thinking.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/chromoblastomycosis-fig1.webp",
+        "alt": "Chromoblastomycosis Medlar bodies",
+        "caption": "Chromoblastomycosis histopathology section displaying dark brown thick-walled Medlar muriform bodies with cross septation [Credit: CDC, StewardMD cleared]"
+      }
+    },
+    {
+      "tx": "**Muriform bodies** are the tissue form of chromoblastomycosis agents: round brown thick-walled cells about 5 to 12 micrometres that divide by internal septation rather than budding. They appear in giant cells and microabscesses. Their presence is diagnostic even when culture is slow, and black dots on the lesion surface correspond to transepidermal elimination of fungal elements that can be scraped for KOH.",
+      "say": "Scrape the black dots; muriform bodies may be waiting on the slide.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Microscopy",
+          "points": [
+            "Brown round sclerotic cells",
+            "Septa in two planes",
+            "No ordinary budding yeast pattern",
+            "Visible on KOH and histology"
+          ]
+        },
+        "right": {
+          "title": "Culture",
+          "points": [
+            "Slow dark olivaceous colonies",
+            "Microscopy separates Fonsecaea Cladophialophora Phialophora",
+            "Species can influence neurotropism risk",
+            "Molecular identification in reference laboratories"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Rhinosporidiosis** is caused by Rhinosporidium seeberi, now classified among aquatic protistan parasites rather than true fungi. It forms friable red polypoid masses in nose and conjunctiva studded with white dots, bleeding easily in people exposed to stagnant water. Histology shows huge thick-walled sporangia packed with endospores. Surgical excision with cautery of the base is primary treatment; antifungals are ineffective.",
+      "say": "A bleeding nasal polyp with white dots and giant sporangia is rhinosporidiosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Clinical clues",
+          "points": [
+            "Strawberry-like nasal mass",
+            "Epistaxis and nasal obstruction",
+            "Conjunctival lesions also occur",
+            "Pond bathing exposure history"
+          ]
+        },
+        "right": {
+          "title": "Histology",
+          "points": [
+            "Large sporangia up to hundreds of micrometres",
+            "Thousands of endospores inside",
+            "Rupture releases spores into tissue",
+            "Dapsone may reduce recurrence in selected cases"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Lobomycosis**, also called lacaziosis, is a chronic keloid-like skin infection by Lacazia loboi in Amazonian regions and dolphins. Nodules grow slowly on exposed skin without systemic spread, and the organism has never been cultured reliably in vitro. Chains of uniform yeast-like cells connected by narrow bridges in tissue are characteristic. Excision is used for limited lesions; antifungal responses are inconsistent.",
+      "say": "Keloidal nodules with chained yeast cells that refuse culture suggest lobomycosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Lobomycosis",
+          "points": [
+            "Keloid like smooth nodules",
+            "Amazon basin human cases",
+            "Chains of yeast-like cells",
+            "No reliable culture"
+          ]
+        },
+        "right": {
+          "title": "Rhinosporidiosis contrast",
+          "points": [
+            "Mucosal polyps nose and eye",
+            "Giant sporangia with endospores",
+            "Aquatic exposure",
+            "Excision with base cautery"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Entomophthoromycosis** from Basidiobolus and Conidiobolus causes subcutaneous swelling of limbs or a firm rhinofacial mass respectively, typically in immunocompetent tropical patients. Tissue shows broad hyphae surrounded by eosinophilic Splendore-Hoeppli material. It differs from mucormycosis: patients are usually not ketoacidotic or neutropenic, lesions are chronic and angioinvasion is not the defining catastrophe.",
+      "say": "Chronic subcutaneous swelling with eosinophil-rich broad hyphae is not automatically mucormycosis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Entomophthorales",
+          "points": [
+            "Basidiobolus limb swelling in children",
+            "Conidiobolus rhinofacial disease",
+            "Splendore Hoeppli phenomenon",
+            "Potassium iodide or azoles used"
+          ]
+        },
+        "right": {
+          "title": "Mucorales contrast",
+          "points": [
+            "Acute angioinvasion and necrosis",
+            "Diabetic ketoacidosis or neutropenia",
+            "Black eschar in sinuses",
+            "Surgical emergency plus amphotericin B"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "For all implantation mycoses, **deep biopsy for histology plus culture** outperforms surface sampling. Send fresh tissue for fungal and bacterial culture, fixed tissue for stains, and tell the laboratory the suspected organism so incubation duration and media are appropriate. Imaging defines deep extension before surgery, and long follow-up matters because lesions that look quiet can relapse after premature antifungal cessation.",
+      "say": "Implantation mycoses reward deep specimens and punish superficial shortcuts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "biopsy",
+            "label": "Deep biopsy and discharge grains"
+          },
+          {
+            "id": "stain",
+            "label": "KOH histology Gram and fungal stains"
+          },
+          {
+            "id": "culture",
+            "label": "Fungal and bacterial culture"
+          },
+          {
+            "id": "stage",
+            "label": "Image depth and plan prolonged therapy"
+          }
+        ],
+        "edges": [
+          [
+            "biopsy",
+            "stain"
+          ],
+          [
+            "stain",
+            "culture"
+          ],
+          [
+            "culture",
+            "stage"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "On high-resolution magnetic resonance imaging, eumycetoma lesions demonstrate the distinctive **dot-in-circle sign** on T2-weighted sequences. This pathognomonic radiological marker corresponds to central low-signal round fungal grains encased within hyperintense granulomatous tissue and surrounding low-signal fibrous tissue walls. Identifying this sign confirms mycetoma before definitive microbiological grains are extruded from cutaneous sinuses.",
+      "say": "The dot in circle MRI sign represents central fungal grains inside hyperintense granulomas.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "MRI Feature",
+          "Pathological Substrate"
+        ],
+        "rows": [
+          [
+            "Central round dot",
+            "Low signal intensity fungal grain aggregate"
+          ],
+          [
+            "High signal circle",
+            "Inflammatory granulomatous matrix and pus"
+          ],
+          [
+            "Peripheral margin",
+            "Dense fibrous capsule walling off sinus tract"
+          ],
+          [
+            "Diagnostic utility",
+            "Distinguishes mycetoma from chronic osteomyelitis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Histopathological examination of friable polypoid rhinosporidiosis tissues demonstrates massive round **sporangia** measuring up to three hundred and fifty micrometres embedded inside vascular fibrovascular stroma. Mature sporangia contain thousands of small round sporangiospores that discharge through an apical pore to propagate local infection. Surgical wide excision with electrocautery of the base minimizes recurrence because medical antifungals lack efficacy against this mesomycetozoean pathogen.",
+      "say": "Vascular nasal polyps contain giant sporangia packed with thousands of discharged sporangiospores.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Rhinosporidiosis sporangium",
+          "points": [
+            "Giant spherical structure up to 350 microns",
+            "Contains thousands of tiny endospores",
+            "Apical pore discharges mature spores",
+            "Stains with mucicarmine and PAS stains"
+          ]
+        },
+        "right": {
+          "title": "Coccidioides spherule",
+          "points": [
+            "Smaller spherule measuring 20 to 100 microns",
+            "Contains non-budding round endospores",
+            "Ruptures irregularly without defined pore",
+            "True dimorphic systemic fungal pathogen"
+          ]
+        }
+      }
+    }
+  ]
+}

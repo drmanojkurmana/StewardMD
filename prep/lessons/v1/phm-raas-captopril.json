@@ -1,0 +1,263 @@
+{
+  "v": 1,
+  "module": "phm-raas",
+  "subject": "pharmacology",
+  "title": "ACE Inhibitors: Captopril, Enalapril, Lisinopril and Ramipril",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The short acting sulfhydryl containing prototype that first proved angiotensin converting enzyme blockade works is **captopril**. The enzyme it blocks converts angiotensin I to the potent vasoconstrictor angiotensin II and simultaneously breaks down bradykinin. Inhibiting it therefore dilates arterioles, cuts aldosterone release and lets bradykinin accumulate. Captopril needs two or three doses daily and is taken on an empty stomach because food cuts its absorption.",
+      "say": "Captopril blocks the converting enzyme, lowering angiotensin II while letting bradykinin build up.",
+      "vis": {
+        "kind": "image",
+        "src": "clinix/media/practicals/obg-drug-ace-inhibitors.webp",
+        "alt": "Renin angiotensin cascade diagram showing ACE inhibition, vasodilatation and fetal nephrotoxicity warnings",
+        "caption": "The renin angiotensin cascade with the ACE step blocked, showing vasodilatation and the fetal kidney warning. Credit: StewardMD."
+      }
+    },
+    {
+      "tx": "Most successors are **prodrugs** activated by hepatic esterases: enalapril becomes enalaprilat, ramipril becomes ramiprilat, and perindopril becomes perindoprilat. Lisinopril breaks the pattern as the active lysine analogue of enalaprilat, absorbed unchanged and excreted by the kidney. Active metabolites bind tissue ACE tightly and clear slowly, which is why once daily dosing controls pressure around the clock despite shorter plasma half lives.",
+      "say": "Enalapril and ramipril need liver activation; lisinopril is active as swallowed. All of them grip tissue ACE for a full day.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Prodrug ACE inhibitors",
+          "points": [
+            "Enalapril converted to enalaprilat in the liver",
+            "Ramipril converted to ramiprilat, very tight tissue binding",
+            "Inactive in renal failure only if liver activation fails rarely",
+            "Once daily dosing from slow tissue ACE dissociation"
+          ]
+        },
+        "right": {
+          "title": "Active as given",
+          "points": [
+            "Captopril active, short acting, food reduces absorption",
+            "Lisinopril active lysine analogue, renally excreted",
+            "Enalaprilat itself used intravenously in emergencies abroad",
+            "Renal dose adjustment needed for lisinopril in kidney disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Falling angiotensin II removes feedback inhibition on the juxtaglomerular apparatus, so plasma **renin** activity rises severalfold on treatment. That rise is expected and harmless, but it means the system is primed: stop the drug and angiotensin II rebounds. The same feedback explains why combining an ACE inhibitor with a direct renin inhibitor or a receptor blocker stacks adverse effects faster than it adds blood pressure benefit.",
+      "say": "Renin rises on ACE inhibitors because the brake is off; that is expected, and it warns against stacking blockers.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "ace",
+            "label": "ACE inhibitor blocks angiotensin II formation"
+          },
+          {
+            "id": "fb",
+            "label": "Negative feedback on juxtaglomerular cells lost"
+          },
+          {
+            "id": "renin",
+            "label": "Renin release and plasma renin activity climb"
+          },
+          {
+            "id": "caution",
+            "label": "Dual blockade risks hypotension and hyperkalaemia"
+          }
+        ],
+        "edges": [
+          [
+            "ace",
+            "fb"
+          ],
+          [
+            "fb",
+            "renin"
+          ],
+          [
+            "renin",
+            "caution"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "In **hypertension** these drugs lower pressure without reflex tachycardia, because angiotensin II withdrawal also reduces sympathetic facilitation and resets baroreceptors. They are preferred starters with diabetes, proteinuria or left ventricular hypertrophy, and they regress hypertrophy better than pressure matched beta blockade. A first dose fall is most likely in salt depleted or high renin patients, so the opening dose is small and diuretics are sometimes paused for a day.",
+      "say": "Pressure falls without a racing heart, ventricles remodel backwards, and the first dose deserves respect.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Haemodynamic profile",
+          "points": [
+            "Arteriolar dilatation lowers afterload",
+            "Venodilatation and natriuresis trim preload",
+            "No reflex tachycardia or fluid retention",
+            "Cerebral and renal autoregulation preserved"
+          ]
+        },
+        "right": {
+          "title": "First dose precautions",
+          "points": [
+            "Start low in diuretic treated or salt depleted patients",
+            "Check creatinine and potassium within two weeks",
+            "A creatinine rise up to 30 percent can be acceptable",
+            "Larger rises suggest renal artery stenosis or volume depletion"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "After myocardial infarction, early ACE inhibition limits infarct expansion and adverse remodelling, while in chronic heart failure with reduced ejection fraction agents such as **ramipril** and enalapril cut mortality and hospitalisation. Benefit tracks with dose, so guidelines push titration toward trial doses as pressure, potassium and creatinine allow. The same afterload and aldosterone reduction slows progression of diabetic kidney disease discussed in the companion hyperkalaemia lesson.",
+      "say": "Post infarct and in heart failure these drugs save lives; titrate toward trial doses as labs allow.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mi",
+            "label": "Infarction or reduced ejection fraction heart failure"
+          },
+          {
+            "id": "start",
+            "label": "Start ACE inhibitor early at low dose"
+          },
+          {
+            "id": "up",
+            "label": "Uptitrate toward trial doses over weeks"
+          },
+          {
+            "id": "gain",
+            "label": "Less remodelling, fewer deaths and admissions"
+          }
+        ],
+        "edges": [
+          [
+            "mi",
+            "start"
+          ],
+          [
+            "start",
+            "up"
+          ],
+          [
+            "up",
+            "gain"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The signature nuisance is a persistent dry **cough** in 5 to 15 percent of patients, more in women and in East Asian populations, caused by bradykinin and substance P accumulating in airways. It starts weeks into therapy, disturbs sleep, and resolves within days to weeks of stopping. Rechallenge reproduces it, so the correct move is switching class, usually to an angiotensin receptor blocker, rather than suppressing it with antitussives.",
+      "say": "A dry cough weeks into treatment is bradykinin talking; switch class instead of treating the cough.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "ACE inhibitor cough",
+          "points": [
+            "Dry, tickly, worse lying flat at night",
+            "Onset weeks to months after starting",
+            "Bradykinin and substance P accumulate in bronchi",
+            "Resolves on withdrawal, recurs on rechallenge"
+          ]
+        },
+        "right": {
+          "title": "Cough not to blame on the drug",
+          "points": [
+            "Productive cough with fever suggests infection",
+            "Wheeze and breathlessness suggest asthma or failure",
+            "Haemoptysis always needs its own workup",
+            "Check the timeline before blaming the tablet"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Bradykinin excess also explains **angioedema**, the rarest but most dangerous reaction, with sudden swelling of lips, tongue and larynx that can obstruct the airway. Risk is several fold higher in Black patients, and episodes can strike after years of uneventful use. It does not respond reliably to antihistamines or steroids because it is bradykinin rather than histamine mediated; securing the airway comes first, and the class is banned for life afterwards.",
+      "say": "Angioedema on an ACE inhibitor means airway first, drug banned for life, and no rechallenge ever.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Bradykinin angioedema",
+          "points": [
+            "Lips, tongue and larynx swell over hours",
+            "No urticaria or itch accompanies the swelling",
+            "Antihistamines and steroids are unreliable",
+            "Airway assessment and monitoring come first"
+          ]
+        },
+        "right": {
+          "title": "Immediate actions",
+          "points": [
+            "Stop the ACE inhibitor permanently",
+            "Assess airway, give oxygen, call for airway help",
+            "Observe for at least 12 to 24 hours after an episode",
+            "Document drug allergy prominently for all future prescribers"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Captopril carries two quirks from its **sulfhydryl** group that later agents largely escaped: a metallic taste disturbance and, at the high doses of early practice, neutropenia and proteinuria resembling penicillamine toxicity. Modern low doses make these rare, but the exam still pairs captopril with taste loss, rash and the shortest half life in the class. It remains useful where a brief, quickly reversible trial of ACE blockade is wanted.",
+      "say": "Captopril alone carries the sulfhydryl quirks: metallic taste, rash, and rare marrow and kidney toxicity at high dose.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Captopril specifics",
+          "points": [
+            "Sulfhydryl group, active without liver activation",
+            "Half life under 2 hours, dosed two or three times daily",
+            "Food reduces absorption, take before meals",
+            "Taste disturbance and rash are class distinctive"
+          ]
+        },
+        "right": {
+          "title": "Class wide effects",
+          "points": [
+            "Dry cough and rare angioedema from bradykinin",
+            "Hyperkalaemia and creatinine rise from aldosterone fall",
+            "Fetopathy in second and third trimester exposure",
+            "Hypotension in volume depleted or high renin states"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Practical prescribing runs on three numbers: baseline **potassium**, creatinine and blood pressure, rechecked one to two weeks after starting or increasing the dose. Stop or seek advice for potassium above 5.5 mmol per litre, a creatinine rise beyond 30 percent, symptomatic hypotension, cough that will not settle, or any angioedema. Pregnancy planning means switching beforehand, because the fetal kidney depends on angiotensin II from mid gestation onward.",
+      "say": "Check potassium, creatinine and pressure before and after starting; know your five stop rules cold.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "base",
+            "label": "Baseline potassium, creatinine, blood pressure"
+          },
+          {
+            "id": "start",
+            "label": "Start low, counsel on cough and swelling"
+          },
+          {
+            "id": "recheck",
+            "label": "Recheck labs in one to two weeks"
+          },
+          {
+            "id": "stop",
+            "label": "Stop for hyperkalaemia, big creatinine rise or angioedema"
+          }
+        ],
+        "edges": [
+          [
+            "base",
+            "start"
+          ],
+          [
+            "start",
+            "recheck"
+          ],
+          [
+            "recheck",
+            "stop"
+          ]
+        ]
+      }
+    }
+  ]
+}

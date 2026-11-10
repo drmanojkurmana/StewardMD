@@ -1,0 +1,149 @@
+{
+ "v": 1,
+ "id": "cm-foods-toxins-milk-composition",
+ "subject": "community-medicine",
+ "module": "cm-foods-toxins",
+ "title": "Food Hygiene: Milk Pasteurisation, Phosphatase Test and Egg Quality",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Milk composition and nutritional profile",
+   "tx": "Serving as an almost complete physiological food for infant growth, the **nutritional milk composition** provides high biological value casein and whey proteins, emulsified fat droplets, lactose disaccharide, calcium, phosphorus, and riboflavin. However, cow and buffalo milk are notoriously deficient in two essential nutrients: iron and vitamin C (ascorbic acid), meaning infants exclusively fed animal milk beyond six months inevitably develop microcytic iron deficiency anaemia.",
+   "say": "Milk provides high-quality protein, calcium and B vitamins, but it completely lacks iron and vitamin C. Babies fed cow milk without solids develop severe iron deficiency anaemia.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Nutrient component", "Human breast milk (per 100 ml)", "Cow milk (per 100 ml)", "Buffalo milk (per 100 ml)"],
+    "rows": [
+     ["Water content", "87.5 g", "87.0 g", "81.0 g"],
+     ["Protein density", "1.1 g (rich in lactalbumin)", "3.2 g (rich in casein)", "4.3 g (dense curd tension)"],
+     ["Fat concentration", "3.5 g (rich in essential PUFA)", "3.5 to 4.0 g", "6.5 to 8.5 g (high caloric density)"],
+     ["Lactose sugar", "7.0 g (sweet, promotes lactobacillus)", "4.5 g", "5.0 g"],
+     ["Calcium content", "28 to 30 mg", "120 mg", "210 mg"]
+    ]
+   }
+  },
+  {
+   "title": "Milk-borne disease transmission risks",
+   "tx": "Because raw unpasteurised milk serves as an ideal microbial culture medium, consuming raw dairy carries severe **milk-borne infection hazards**, acquiring pathogens either directly from diseased dairy animals or through unhygienic human handling. Bovine tuberculosis caused by Mycobacterium bovis, undulant brucellosis, Q fever, salmonellosis, campylobacter enteritis, listeriosis, and staphylococcal enterotoxin food poisoning spread efficiently through pooled raw milk supplies.",
+   "say": "Raw milk transmits bovine tuberculosis, brucellosis, Q fever, salmonella and listeria. Drinking unboiled dairy risks chronic fevers and dangerous intestinal infections.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Infection category", "Pathogen transmitted", "Source of dairy contamination"],
+    "rows": [
+     ["Bovine zoonoses", "Mycobacterium bovis, Brucella abortus, Coxiella", "Infected cow udder, mastitis, systemic bovine illness"],
+     ["Human handling contamination", "Salmonella typhi, Shigella, Hepatitis A", "Infected milkers, carriers, unwashed hands"],
+     ["Bacterial food poisoning", "Staphylococcus aureus, Bacillus cereus", "Milker skin boils, unsterilised milk cans"],
+     ["Environmental contamination", "Listeria monocytogenes, Campylobacter jejuni", "Farm manure, unpasteurised holding tanks"]
+    ]
+   }
+  },
+  {
+   "title": "Principles of milk pasteurisation",
+   "tx": "Developed by Louis Pasteur, **commercial milk pasteurisation** is a thermal process that heats every particle of milk to a specific temperature and holds it for a specific duration, followed by immediate rapid cooling to below five degrees Celsius. The thermal exposure is mathematically calibrated to destroy the most heat-resistant non-spore-forming vegetative pathogen known to be transmitted through milk, namely Coxiella burnetii and Mycobacterium tuberculosis.",
+   "say": "Pasteurisation heats milk to a precise temperature to destroy all disease-causing bacteria, particularly Coxiella and tuberculosis bacilli, before rapidly chilling it below five degrees.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Raw milk pre-warmed and filtered"},
+     {"id": "b", "label": "Precise heat holding kills vegetative pathogens"},
+     {"id": "c", "label": "Immediate rapid chilling to < 5 degrees Celsius"},
+     {"id": "d", "label": "Sterile cold packaging in tamper-evident pouches"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "The Holder method: batch pasteurisation",
+   "tx": "In smaller dairy plants and batch processing facilities, milk is pasteurised using the **Holder method batch technique**, also termed low-temperature long-time pasteurisation (LTLT). Raw milk is placed in a jacketed vat, heated uniformly to not less than sixty-three degrees Celsius (one hundred and forty-five degrees Fahrenheit), held at that precise temperature for at least thirty consecutive minutes, and immediately chilled to five degrees Celsius.",
+   "say": "The Holder batch method heats milk in a tank to sixty-three degrees Celsius, holds it there for thirty minutes, and chills it immediately. It is ideal for small local dairies.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Operational parameter", "Holder method (LTLT)", "HTST continuous method"],
+    "rows": [
+     ["Heating temperature", "63 to 66 degrees C (145 to 150 F)", "72 degrees C (161 F) minimum"],
+     ["Holding duration", "Held for at least 30 minutes", "Held for at least 15 seconds"],
+     ["Cooling temperature", "Chilled immediately to < 5 degrees C", "Chilled immediately to < 4 degrees C"],
+     ["Processing style", "Batch processing in vats", "Continuous flow through plate exchangers"]
+    ]
+   }
+  },
+  {
+   "title": "High-temperature short-time (HTST) pasteurisation",
+   "tx": "Modern industrial dairies universally deploy the **HTST continuous pasteurisation** process, passing a continuous thin film of milk between corrugated stainless steel heat exchanger plates. Milk is heated rapidly to at least seventy-two degrees Celsius (one hundred and sixty-one degrees Fahrenheit), held in an insulated holding tube for precisely fifteen seconds, and diverted through regenerative cooling plates directly to refrigerated packaging lines.",
+   "say": "Large dairies pump milk through hot steel plates at seventy-two degrees Celsius for fifteen seconds. The continuous flow method saves time and energy while killing all germs.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Continuous flow through heat exchanger plates"},
+     {"id": "b", "label": "Heated to 72 degrees C (161 F) for 15 seconds"},
+     {"id": "c", "label": "Flow diversion valve recirculates under-heated milk"},
+     {"id": "d", "label": "Regenerative rapid chilling to 4 degrees C"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["b", "d"]]
+   }
+  },
+  {
+   "title": "Phosphatase test for pasteurisation verification",
+   "tx": "The statutory biochemical test verifying adequate pasteurisation is the **standard phosphatase test**, exploiting the enzyme alkaline phosphatase naturally present in raw milk. Because alkaline phosphatase is slightly more heat-resistant than Mycobacterium tuberculosis and Coxiella burnetii, its complete thermal denaturation confirms that all bacterial pathogens have been eradicated; detecting residual phosphatase proves under-pasteurisation or post-process raw milk leakage.",
+   "say": "The phosphatase test checks whether milk was heated properly. Because alkaline phosphatase resists heat slightly more than tuberculosis bacteria, destroying the enzyme proves the milk is safe.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {"id": "a", "label": "Alkaline phosphatase present in raw milk"},
+     {"id": "b", "label": "Pasteurisation heat denatures enzyme completely"},
+     {"id": "c", "label": "Add disodium phenyl phosphate substrate"},
+     {"id": "d", "label": "Colourless result confirms complete pasteurisation"}
+    ],
+    "edges": [["a", "b"], ["b", "c"], ["c", "d"]]
+   }
+  },
+  {
+   "title": "Methylene blue and standard plate count tests",
+   "tx": "To evaluate bacteriological quality before and after processing, dairy laboratories perform the **methylene blue reduction test**, adding methylene blue dye to raw milk and incubating at thirty-seven degrees Celsius. Active bacterial multiplication consumes oxygen, reducing the blue dye to colourless leucomethylene blue; milk that retains its blue color for five hours or longer is graded superior, whereas rapid decolourisation under two hours denotes heavy contamination.",
+   "say": "Bacteria consume oxygen and bleach methylene blue dye. High-quality clean milk keeps its blue color for over five hours, whereas dirty milk bleaches the dye within two hours.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Decolourisation time", "Milk quality grading", "Bacteriological interpretation"],
+    "rows": [
+     ["5 hours or longer", "Class 1: Very good quality", "Minimal bacterial contamination (< 200,000/ml)"],
+     ["3 to 4 hours", "Class 2: Fair / Average quality", "Moderate bacterial load; acceptable for processing"],
+     ["1 to 2 hours", "Class 3: Poor quality", "Heavy contamination; unhygienic dairy handling"],
+     ["Under 30 minutes", "Class 4: Very poor quality", "Grossly spoiled milk; reject immediately"]
+    ]
+   }
+  },
+  {
+   "title": "Egg structure and nutritional value",
+   "tx": "Regarded as a biological reference protein, the **nutritional egg profile** delivers six grams of high biological value protein, five grams of emulsified lipids, bioavailable iron, vitamin A, vitamin D, vitamin B12, and lutein. The yolk concentrates fat and cholesterol, while the egg white (albumen) supplies pure ovalbumin, conalbumin and lysozyme; avidin in raw egg white binds biotin tightly, though heat cooking denatures avidin completely.",
+   "say": "A single egg supplies six grams of perfect reference protein, vitamin D and choline. Cooking destroys avidin in egg white, preventing it from binding and blocking biotin absorption.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Egg white (Albumen)",
+     "points": ["Comprises 60% of total egg mass", "Pure protein (ovalbumin, lysozyme)", "Zero fat and zero cholesterol"]
+    },
+    "right": {
+     "title": "Egg yolk (Vitellus)",
+     "points": ["Comprises 30% of total egg mass", "High fat and cholesterol (200 mg)", "Rich in vitamins A, D, B12 and choline"]
+    }
+   }
+  },
+  {
+   "title": "Egg candling, freshness and Salmonella enteritidis",
+   "tx": "Freshness of commercial eggs is evaluated through **optical egg candling**, holding the egg before a bright beam of light in a darkened room to inspect air cell depth, yolk mobility and internal blood spots; fresh eggs exhibit an air cell depth under three millimetres. Furthermore, raw or undercooked eggs pose serious risk of Salmonella enteritidis food poisoning due to transovarian infection, mandating thorough cooking until both yolk and white solidify.",
+   "say": "Candling holds an egg over a light beam to check the air cell size and freshness. Always cook eggs until firm to kill Salmonella bacteria that can lurk inside raw yolks.",
+   "vis": {
+    "kind": "table",
+    "cols": ["Egg freshness test", "Fresh egg finding", "Stale / Spoiled egg finding"],
+    "rows": [
+     ["Candling examination", "Tiny air cell (< 3 mm depth); central stable yolk", "Enlarged air cell (> 6 mm); movable displaced yolk"],
+     ["Water flotation test", "Sinks to bottom and lies flat on its side", "Stands upright or floats to surface (air expansion)"],
+     ["Cracked plate test", "Thick, raised albumen; rounded dome-shaped yolk", "Watery, spreading albumen; flattened broken yolk"],
+     ["Microbiological safety", "Absence of transovarian Salmonella", "Salmonella enteritidis risk; cook thoroughly"]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

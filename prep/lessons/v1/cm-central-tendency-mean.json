@@ -1,0 +1,147 @@
+{
+  "v": 1,
+  "id": "cm-central-tendency-mean",
+  "subject": "community-medicine",
+  "module": "cm-central-tendency",
+  "title": "Mean, Median, and Mode: Choosing the Average",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Arithmetic mean: definition and calculation",
+      "tx": "The **arithmetic mean** divides the sum of all observations by their count, using every value exactly once. For grouped data, class midpoints weighted by frequencies replace raw values. The mean anchors almost all later statistics (standard deviation, standard error, t tests), which is why it is the default average whenever the distribution is roughly symmetric and free of extreme outliers.",
+      "say": "The mean adds everything and divides by the count. It uses every value, which is both its strength and its weakness.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "m1", "label": "Add all observations together" },
+          { "id": "m2", "label": "Divide by number of observations" },
+          { "id": "m3", "label": "Mean reported with its units" }
+        ],
+        "edges": [["m1", "m2"], ["m2", "m3"]]
+      }
+    },
+    {
+      "title": "Median: the middle value",
+      "tx": "The **median (middle value)** splits ordered data into two equal halves: the middle observation for odd counts, or the average of the two middle observations for even counts. In grouped data it is located through the cumulative frequency column. Because only position matters, one enormous income or hospital stay cannot drag the median, making it the honest average for skewed community data.",
+      "say": "The median is the middle person in the queue. Extreme values at the ends cannot move it.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Dataset size", "Median position"],
+        "rows": [
+          ["Odd count n", "Value at (n plus 1) divided by 2"],
+          ["Even count n", "Average of values at n/2 and n/2 plus 1"],
+          ["Grouped data", "Interpolated from cumulative frequencies"],
+          ["Skewed income data", "Median preferred over mean"]
+        ]
+      }
+    },
+    {
+      "title": "Mode: the commonest value",
+      "tx": "The **mode (most frequent value)** is the observation occurring most often: the peak of the distribution. It alone among averages serves nominal data (the modal blood group, the modal cause of death). Datasets may be unimodal, bimodal (two peaks hinting at mixed populations, such as incubation periods from two sources), or amodal. In grouped data the modal class carries the highest frequency.",
+      "say": "The mode is the commonest value and the only average allowed for categories. Two peaks suggest two mixed populations.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Unimodal data",
+          "points": ["One clear peak", "Typical heights of one school class", "Mode near mean and median"]
+        },
+        "right": {
+          "title": "Bimodal data",
+          "points": ["Two distinct peaks", "Suspect mixed groups or sources", "Investigate before averaging"]
+        }
+      }
+    },
+    {
+      "title": "When each average wins",
+      "tx": "Choosing among **mean median and mode** follows distribution shape and data scale: mean for symmetric quantitative data, median for skewed data, open ended classes, and ordinal grades, mode for nominal categories and quick field impressions. Hospital stay, income, incubation period, and parasite counts are classic median territories; examination stems naming skewed data or outliers are signalling median as loudly as they can.",
+      "say": "Symmetric numbers take the mean, skewed data take the median, categories take the mode. Skew in the stem means median.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Situation", "Average of choice"],
+        "rows": [
+          ["Symmetric heights of adults", "Mean"],
+          ["Household incomes of a village", "Median"],
+          ["Commonest blood group", "Mode"],
+          ["Ordinal pain grades", "Median or mode"]
+        ]
+      }
+    },
+    {
+      "title": "Geometric and harmonic means",
+      "tx": "Two specialist averages complete the family: the **geometric mean** averages ratios and growth (antibody titres, bacterial counts, index numbers) through the nth root of the product, always below the arithmetic mean, while the harmonic mean averages rates such as speeds over equal distances. Titres doubling in dilution series are the classic geometric mean examination example in microbiology statistics.",
+      "say": "Use the geometric mean for titres and growth ratios. It always sits below the arithmetic mean.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Geometric mean",
+          "points": ["For ratios, titres, growth rates", "Nth root of product of values", "Log values, average, antilog"]
+        },
+        "right": {
+          "title": "Harmonic mean",
+          "points": ["For rates like speed", "Reciprocal of mean of reciprocals", "Smallest of the three means"]
+        }
+      }
+    },
+    {
+      "title": "Empirical relation in skewed data",
+      "tx": "In moderately skewed unimodal distributions the three averages obey the **empirical relation mode equals three median minus two mean**, letting one be estimated from the other two. The ordering itself diagnoses skew direction: mean exceeds median exceeds mode in right skew (income), and reverses in left skew (age at death in developed countries). Examiners ask both the formula and the ordering.",
+      "say": "Mode equals three median minus two mean. In right skew the mean is largest; in left skew it is smallest.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "e1", "label": "Right skew: mean above median above mode" },
+          { "id": "e2", "label": "Symmetric: all three coincide" },
+          { "id": "e3", "label": "Left skew: mode above median above mean" }
+        ],
+        "edges": [["e1", "e2"], ["e2", "e3"]]
+      }
+    },
+    {
+      "title": "Weighted mean in grouped work",
+      "tx": "When values arrive with frequencies or importance weights, the **weighted mean** multiplies each value by its weight, sums, and divides by total weight: class marks weighted by class frequencies, or standardised rates weighted by standard population shares. Forgetting weights (averaging district rates without population weights) is the aggregation error behind many wrong programme conclusions and examination traps.",
+      "say": "Weight each value by its frequency before averaging. Never average district rates without population weights.",
+      "vis": {
+        "kind": "table",
+        "cols": ["Weighting task", "Weight used"],
+        "rows": [
+          ["Grouped frequency table", "Class frequency"],
+          ["Standardised death rate", "Standard population share"],
+          ["Pooled study estimate", "Sample size or inverse variance"],
+          ["Grade point average", "Course credit hours"]
+        ]
+      }
+    },
+    {
+      "title": "Trimmed means and robustness",
+      "tx": "A **trimmed mean** discards a fixed percentage from both tails before averaging, buying resistance to outliers while retaining more information than the median. Winsorising instead caps extremes at chosen percentiles. These robust averages appear in laboratory quality data and income statistics, and their existence teaches the core lesson: the ordinary mean trusts every value equally, including the erroneous ones.",
+      "say": "Trimming drops the wildest values at both ends before averaging. It protects the mean without discarding the whole dataset.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Ordinary mean",
+          "points": ["Uses every value fully", "One outlier can dominate", "Best only for clean symmetric data"]
+        },
+        "right": {
+          "title": "Trimmed mean",
+          "points": ["Drops top and bottom 5 percent", "Resists outliers and errors", "Keeps most data information"]
+        }
+      }
+    },
+    {
+      "title": "Exam stems decoded",
+      "tx": "Final decoding for **measures of central tendency questions**: most affected by extreme values (mean), best for skewed data (median), only measure for qualitative data (mode), middle value of ordered data (median), and average antibody titre (geometric mean). A stem giving mean, median, and mode as equal declares a symmetric (usually normal) distribution, which the next lessons exploit fully.",
+      "say": "Outliers hit the mean, skew wants the median, categories allow only the mode. Equal averages mean a symmetric curve.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "q1", "label": "Read stem for scale and skew" },
+          { "id": "q2", "label": "Nominal: mode; skewed: median" },
+          { "id": "q3", "label": "Symmetric numeric: mean" }
+        ],
+        "edges": [["q1", "q2"], ["q2", "q3"]]
+      }
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+{
+ "v": 1,
+ "id": "oph-lens-nucleus-parts",
+ "subject": "ophthalmology",
+ "module": "oph-cataract",
+ "title": "Lens Nucleus, Cortex and Capsule",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Lens nucleus** is oldest central fibre mass, embryonic, fetal and adult layers compressed lifelong, yellowing and hardening with age toward nuclear cataract and index myopia. Cortex surrounds nucleus with younger fibres, capsule encloses all as elastic basement membrane thickest anteriorly. Part naming therefore predicts cataract morphology and surgical behaviour by layer.",
+   "say": "Central fibre mass together gives nucleus ageing in lens anatomy at slit lamp in clinic for older patients. Layer naming gives morphology prediction additionally. Hardening gives index shift mechanism.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/cataract-fig1.webp",
+    "alt": "Cataract types diagram with nuclear and cortical lens changes.",
+    "caption": "Anatomical zones of the lens showing nuclear core and cortical layers. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Embryonic nucleus** innermost from primary fibres, fetal nucleus around it with Y sutures, adult nucleus and cortex added postnatally in shells examiners date congenital opacities by. Nuclear cataract grading by colour and hardness guides phaco energy expectations preoperatively. Brunescence brown nucleus marks advanced hardness and surgical difficulty.",
+   "say": "Shell dating together gives congenital opacity reading in lens assessment at paediatric clinics for children with cataract. Hardness grading gives surgical expectation additionally. Brown colour gives difficulty warning.",
+   "vis": {
+    "kind": "table",
+    "title": "Lens part map",
+    "cols": [
+     "Part",
+     "Identity"
+    ],
+    "rows": [
+     [
+      "Embryonic fetal nucleus",
+      "Oldest primary fibre core"
+     ],
+     [
+      "Adult nucleus cortex",
+      "Lifelong secondary shells"
+     ],
+     [
+      "Capsule epithelium",
+      "Elastic bag, anterior cells"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Lens capsule** is thick elastic basement membrane secreted by epithelium, anterior thicker than posterior, posterior pole thinnest and vulnerable in surgery and congenital defects. It contains implant after cataract surgery as capsular bag, opacifying later by equatorial cell migration. Capsule integrity therefore decides implant placement options intraoperatively.",
+   "say": "Elastic bag together gives implant containment in cataract surgery at operating assessment for adults with cataract. Posterior thinness gives vulnerability additionally. Integrity gives placement options.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Nuclear cataract",
+     "points": [
+      "Central yellow brown hardening",
+      "Index myopia, distance blur"
+     ]
+    },
+    "right": {
+     "title": "Cortical cataract",
+     "points": [
+      "Spoke wedge opacities",
+      "Glare, monocular diplopia"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Posterior subcapsular cataract plaque at posterior pole from steroids, inflammation, radiation or diabetes glare disproportionately and progresses faster near vision first. Its posterior capsule proximity makes surgery capsular risk higher. **Plaque position** therefore changes surgical counselling despite small slit appearance.",
+   "say": "Posterior plaque together gives glare dominance in subcapsular cataract at vision assessment for steroid users in clinic. Capsular proximity gives surgical risk additionally. Near gives first symptom.",
+   "vis": {
+    "kind": "flow",
+    "title": "Lens ageing sequence",
+    "nodes": [
+     {
+      "id": "shell",
+      "label": "Shells add lifelong"
+     },
+     {
+      "id": "hard",
+      "label": "Nucleus hardens yellows"
+     },
+     {
+      "id": "pres",
+      "label": "Presbyopia then cataract"
+     },
+     {
+      "id": "surg",
+      "label": "Surgical layer decisions"
+     }
+    ],
+    "edges": [
+     [
+      "shell",
+      "hard"
+     ],
+     [
+      "hard",
+      "pres"
+     ],
+     [
+      "pres",
+      "surg"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Shine a narrow beam through a young lens and two branching seams glow where fibre ends once met in the womb. At the front they stand upright as the **anterior Y suture**, while behind they flip upside down, a mirror arrangement locked in before birth. These sutures sit inside the fetal nucleus, the oldest tissue in the lens, around which every later layer wrapped itself. Recognising them stops trainees mistaking normal fetal architecture for the first shadows of a developmental cataract.",
+   "say": "Upright anterior and inverted posterior Y sutures mark the fetal nucleus inside a healthy young lens.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m260-oph-lens-nucleus-parts.webp",
+    "alt": "Slit lamp optical section showing upright anterior Y suture and inverted posterior Y suture in fetal lens nucleus",
+    "caption": "Slit lamp optical section showing upright anterior Y suture and inverted posterior Y suture in fetal lens nucleus. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "**Zonules** from ciliary processes to capsule equator suspend and centre lens, weakness decentring in Marfan, trauma or pseudoexfoliation surgical risk from lens embryology lessons. Phacodonesis tremor on movement betrays zonular dialysis preoperatively. Bag stability assessment therefore precedes implant choice in subluxated cataracts.",
+   "say": "Suspension weakness together gives decentration risk in cataract surgery at preoperative assessment for syndromic patients. Tremor gives dialysis evidence additionally. Stability gives implant choice."
+  },
+  {
+   "tx": "Lens epithelium anterior only, equatorial germinative zone producing fibres lifelong, posterior capsule bare as embryology taught, residual cells causing after cataract opacification or Soemmering ring. YAG capsulotomy treats opacified posterior capsule in graft lesson logic applied lens. **Equatorial cells** are after cataract source named in surgical consent.",
+   "say": "Equatorial source together gives after cataract explanation in surgical consent at cataract clinics for operated adults. Laser opening gives treatment route additionally. Anterior limitation gives anatomy value.",
+   "vis": {
+    "kind": "table",
+    "title": "Cataract morphology map",
+    "cols": [
+     "Morphology",
+     "Symptom lead"
+    ],
+    "rows": [
+     [
+      "Nuclear",
+      "Distance blur, index myopia"
+     ],
+     [
+      "Cortical spokes",
+      "Glare, contrast loss"
+     ],
+     [
+      "Posterior subcapsular",
+      "Near glare disproportionate"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Intumescent white cataract swells lens pushing iris forward toward phacomorphic closure, hypermature Morgagnian liquefies cortex leaking protein toward phacolytic glaucoma in secondary batch. Lens part failure therefore creates glaucoma mechanisms by swelling or leakage oppositely. **Lens glaucoma** bridge begins in anatomy, completes in secondary glaucoma lessons.",
+   "say": "Swelling together gives phacomorphic direction while leakage gives phacolytic direction in lens glaucoma at emergency assessment. Anatomy gives bridge value additionally. Opposite mechanisms give split clarity.",
+   "vis": {
+    "kind": "table",
+    "title": "Lens part failures",
+    "cols": [
+     "Failure",
+     "Consequence"
+    ],
+    "rows": [
+     [
+      "Intumescent swelling",
+      "Angle crowding closure risk"
+     ],
+     [
+      "Hypermature leakage",
+      "Protein glaucoma mechanism"
+     ],
+     [
+      "Zonular dialysis",
+      "Subluxation surgical risk"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: nucleus dates and hardens, cortex spokes glare, posterior plaque nears and capsule bags implant. Zonules centre, equatorial cells opacify later. **Layer first** lens reading predicts symptoms, surgery and glaucoma from one slit examination. Surgical notes therefore record layer findings for every cataract removed in training programmes.",
+   "say": "Layer reading together gives symptom and surgery prediction from slit examination in cataract clinics for older adults reliably. Bag anatomy gives implant logic additionally. Zonules give risk completion.",
+   "vis": {
+    "kind": "table",
+    "title": "Lens anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Nucleus",
+      "Oldest, hardens, index myopia"
+     ],
+     [
+      "Posterior capsule",
+      "Thinnest, bag for implant"
+     ],
+     [
+      "Equator cells",
+      "After cataract source"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Lens nucleus identity",
+   "b": "Oldest compressed fibres yellowing and hardening to nuclear cataract with index myopia."
+  },
+  {
+   "f": "Capsule facts",
+   "b": "Thick elastic bag, posterior thinnest, holds implant; equatorial cells cause after cataract."
+  },
+  {
+   "f": "Posterior subcapsular lead",
+   "b": "Near glare disproportionate from posterior pole plaque in steroid or diabetic lenses."
+  }
+ ],
+ "keys": [
+  "Morphology predicts symptoms by layer",
+  "Zonular tremor warns surgical dialysis",
+  "Lens swelling or leakage causes glaucoma oppositely"
+ ]
+}

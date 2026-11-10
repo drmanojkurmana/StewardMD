@@ -1,0 +1,255 @@
+{
+ "key": "ped-neonatal-infections-early-onset-sepsis",
+ "v": 1,
+ "module": "ped-neonatal-infections",
+ "subject": "paediatrics",
+ "title": "Neonatal Sepsis, Diagnostic Screen and Blood Culture",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Systemic bacterial infection manifesting within the initial seventy-two hours of life defines **early onset neonatal sepsis**. Acquired vertically from the maternal genital tract through ascending amniotic infection or during passage through the birth canal, it typically presents fulminantly with acute respiratory distress, severe hypothermia, poor peripheral perfusion, and rapidly progressive septic shock.",
+   "say": "Early-onset sepsis manifests within seventy-two hours from maternal vertical transmission.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Classification",
+     "Onset Timing",
+     "Transmission Route",
+     "Primary Clinical Presentation"
+    ],
+    "rows": [
+     [
+      "Early-onset sepsis (EOS)",
+      "Within 72 hours of birth",
+      "Vertical ascending from birth canal",
+      "Pneumonia, respiratory distress, septic shock"
+     ],
+     [
+      "Late-onset sepsis (LOS)",
+      "Beyond 72 hours to 28 days",
+      "Horizontal from hospital or community",
+      "Meningitis, focal bone or joint infections"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Early onset sepsis begins before the baby ever reaches the nursery. Organisms colonising the vagina, chiefly group B Streptococcus and **E coli**, climb through ruptured membranes into the amniotic fluid, and the fetus swallows or aspirates that infected fluid. The diagram traces this ascending route, explaining why prolonged rupture and maternal fever turn a colonised birth canal into neonatal pneumonia and septicaemia.",
+   "say": "Bacteria ascend from the vagina through ruptured membranes into the amniotic fluid, which the fetus aspirates. That vertical route explains early onset pneumonia and septicaemia.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m302-ped-neonatal-infections-early-onset-sepsis.webp",
+    "alt": "Diagram of a gravid uterus with bacteria ascending from the vagina through ruptured membranes into the amniotic fluid around the fetus.",
+    "caption": "Vertical transmission pathway for early onset sepsis, with group B Streptococcus and E coli ascending through ruptured membranes. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "The primary perinatal risk factors predisposing to early infection include maternal chorioamnionitis, maternal intrapartum fever exceeding thirty-eight degrees Celsius, and **prolonged rupture of membranes**. Amniotic membrane rupture exceeding eighteen hours permits rapid ascending bacterial colonization of fetal respiratory membranes, multiplying the risk of invasive early-onset sepsis.",
+   "say": "Membrane rupture beyond eighteen hours significantly increases the risk of ascending neonatal sepsis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Major Perinatal Risk Factors",
+     "points": [
+      "Membrane rupture exceeding 18 hours",
+      "Maternal chorioamnionitis or foul liquor",
+      "Maternal intrapartum pyrexia over 38 degrees C"
+     ]
+    },
+    "right": {
+     "title": "Neonatal Susceptibility Factors",
+     "points": [
+      "Prematurity under 37 weeks gestation",
+      "Low birth weight under 2500 grams",
+      "Low 5-minute Apgar score under 6"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Objective laboratory evaluation utilizes a standardized multi-parameter **neonatal sepsis screen panel**. A positive screen requires two or more abnormal parameters among total leukocyte count, absolute neutrophil count, immature to total neutrophil ratio, micro-erythrocyte sedimentation rate, and C-reactive protein, providing ninety percent negative predictive value.",
+   "say": "The sepsis screen requires two abnormal parameters to guide empirical antibiotic decisions.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Screen Parameter",
+     "Abnormal Cutoff Threshold",
+     "Diagnostic Significance"
+    ],
+    "rows": [
+     [
+      "Total leukocyte count",
+      "Under 5,000 or over 20,000 /mm³",
+      "Leukopenia reflects exhausted marrow reserves"
+     ],
+     [
+      "Immature to total (I:T) ratio",
+      "Ratio exceeding 0.20",
+      "Most sensitive early indicator of neutrophil left shift"
+     ],
+     [
+      "Absolute neutrophil count (ANC)",
+      "Below age-specific normal curve",
+      "Neutropenia has higher specificity than neutrophilia"
+     ],
+     [
+      "Micro-ESR",
+      "Over 15 mm in the first hour",
+      "Reflects acute phase fibrinogen response"
+     ],
+     [
+      "C-reactive protein (CRP)",
+      "Exceeding 10 mg/L (or 1 mg/dL)",
+      "Rises 12 to 24 hours after inflammatory onset"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "A rapid bedside hematological index is the **micro erythrocyte sedimentation rate**, performed using non-heparinized capillary tubes filled with anticoagulated blood. Tubes are stood vertically for sixty minutes. An erythrocyte fall exceeding fifteen millimeters in the first hour indicates systemic inflammation, matching standard Westergren performance with minimal blood volume requirements.",
+   "say": "Micro-ESR provides rapid bedside assessment of inflammation using capillary blood in an hour.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Micro-ESR Technique",
+     "points": [
+      "Heparinized capillary tube filled to 50 mm",
+      "Stood vertically for exactly 60 minutes",
+      "Erythrocyte meniscus fall measured in millimeters"
+     ]
+    },
+    "right": {
+     "title": "Clinical Interpretation",
+     "points": [
+      "Normal: age in days plus 3 mm (under 15 mm)",
+      "Abnormal: fall greater than 15 mm in first hour",
+      "Not influenced by gestational age or birth weight"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Two humble bench items carry most of the early sepsis decision. Blood drawn before antibiotics goes into the **blood culture bottle**, the single test that can later name the organism and its sensitivities, while a capillary tube stood upright gives the micro ESR within the hour. Together they anchor a screen that decides whether antibiotics start now and whether they can stop at forty eight hours.",
+   "say": "Blood culture taken before antibiotics names the organism later, while the upright capillary tube gives a micro ESR within the hour. Together they anchor the sepsis screen.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m303-ped-neonatal-infections-early-onset-sepsis.webp",
+    "alt": "Bench setup with an aerobic blood culture bottle, syringe of neonatal blood, and a filled capillary tube standing upright for micro ESR reading.",
+    "caption": "Blood culture bottle and micro ESR capillary tube setup used in the neonatal sepsis screen. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Synthesized by hepatocytes in response to interleukin-six, the acute-phase reactant **serum C-reactive protein** provides invaluable longitudinal guidance. Because hepatic CRP synthesis requires twelve to twenty-four hours to peak, initial levels may be normal in early infection. However, two consecutive normal CRP measurements taken twenty-four hours apart demonstrate high negative predictive value.",
+   "say": "Serial normal CRP levels twenty-four hours apart safely exclude sepsis and allow stopping antibiotics.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CRP Testing Timeline",
+     "Expected Biological Value",
+     "Clinical Decision"
+    ],
+    "rows": [
+     [
+      "At initial evaluation (0 hours)",
+      "May be normal (under 10 mg/L)",
+      "Initiate empirical antibiotics if clinical sepsis suspected"
+     ],
+     [
+      "At 24 to 48 hours of therapy",
+      "Rises to peak if infection true",
+      "Elevated CRP confirms active inflammatory state"
+     ],
+     [
+      "Two normal CRPs 24 hours apart",
+      "Both values under 10 mg/L",
+      "Safely discontinue antibiotics if cultures are sterile"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The absolute diagnostic gold standard for confirming neonatal bacteremia is a **sterile peripheral blood culture**. A minimum blood volume of one milliliter must be inoculated into a pediatric automated culture bottle prior to administering antimicrobial therapy. Drawing blood from umbilical arterial catheters is avoided due to the hazard of line colonization artifacts.",
+   "say": "One milliliter of blood drawn sterilely before antibiotics constitutes the gold standard culture.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Blood Culture Technique",
+     "points": [
+      "Clean skin with 70% alcohol and chlorhexidine",
+      "Draw at least 1.0 mL blood from peripheral vein",
+      "Inoculate automated pediatric blood culture bottle"
+     ]
+    },
+    "right": {
+     "title": "Technical Pitfalls",
+     "points": [
+      "Volumes under 0.5 mL yield false negatives",
+      "Catheter draws frequently contaminated",
+      "Antibiotic pretreatment suppresses bacterial growth"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Because clinical signs of meningitis are subtle and open cranial fontanelles prevent neck stiffness, a **diagnostic lumbar puncture** is indicated in suspected sepsis with positive blood cultures, clinical neurological deterioration, or unresponsiveness to therapy. Cerebrospinal fluid analysis reveals pleocytosis exceeding twenty to thirty white cells, protein over one hundred milligrams, and low glucose.",
+   "say": "Lumbar puncture is essential in proven bacteremia or neurological signs to detect neonatal meningitis.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "CSF Parameter",
+     "Normal Neonatal Range",
+     "Bacterial Meningitis"
+    ],
+    "rows": [
+     [
+      "Leukocyte count",
+      "0 to 20 /mm³ (mononuclear)",
+      "Over 30 to 100 /mm³ (polymorphonuclear)"
+     ],
+     [
+      "Protein concentration",
+      "60 to 100 mg/dL",
+      "Markedly elevated (over 150 to 300 mg/dL)"
+     ],
+     [
+      "CSF to blood glucose ratio",
+      "Over 60 percent",
+      "Markedly reduced (under 40 to 50 percent)"
+     ],
+     [
+      "Gram stain and culture",
+      "Sterile, no organisms seen",
+      "Positive for causative bacterial pathogen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Empirical first-line antimicrobial therapy for early-onset sepsis combines **intravenous ampicillin and gentamicin**. Ampicillin covers Listeria monocytogenes and Group B Streptococcus, while gentamicin provides synergistic bactericidal activity against enteric Gram-negative bacilli. If hospital-acquired late-onset sepsis is suspected, vancomycin or piperacillin-tazobactam is selected based on local NICU antibiograms.",
+   "say": "Empirical therapy pairs ampicillin with an aminoglycoside to cover Gram-positive and enteric pathogens.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First-Line EOS Regimen",
+     "points": [
+      "Ampicillin 100 mg/kg/day divided every 12 hours",
+      "Gentamicin 5 mg/kg/day once daily",
+      "Covers GBS, Listeria, and sensitive E. coli"
+     ]
+    },
+    "right": {
+     "title": "Meningitis Dosing Adjustment",
+     "points": [
+      "Double ampicillin dose to 200 to 300 mg/kg/day",
+      "Substitute cefotaxime for aminoglycoside",
+      "Third-generation cephalosporin crosses blood-brain barrier"
+     ]
+    }
+   }
+  }
+ ]
+}

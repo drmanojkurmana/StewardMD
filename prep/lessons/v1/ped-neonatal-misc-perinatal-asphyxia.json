@@ -1,0 +1,268 @@
+{
+ "key": "ped-neonatal-misc-perinatal-asphyxia",
+ "v": 1,
+ "module": "ped-neonatal-misc",
+ "subject": "paediatrics",
+ "title": "Perinatal Asphyxia, Sarnat Staging and Therapeutic Hypothermia",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "A severe disruption of fetal gas exchange during labor and delivery produces **perinatal asphyxia**, characterized by profound hypoxemia, hypercapnia, and metabolic acidosis. Diagnostic criteria established by consensus require an umbilical arterial cord blood pH below 7.00, a base deficit exceeding twelve millimoles per liter, an Apgar score under five at five minutes, and evidence of multi-organ failure.",
+   "say": "Perinatal asphyxia requires umbilical cord blood pH below 7.00, base deficit over 12, and encephalopathy.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Consensus Diagnostic Criterion",
+     "Objective Threshold",
+     "Pathophysiological Implication"
+    ],
+    "rows": [
+     [
+      "Umbilical cord arterial pH",
+      "Below 7.00",
+      "Profound intrapartum anaerobic lactic acidosis"
+     ],
+     [
+      "Cord blood base deficit",
+      "12 mmol/L or greater",
+      "Severe metabolic component of asphyxial insult"
+     ],
+     [
+      "5-minute Apgar score",
+      "0 to 3 for 5 minutes or longer",
+      "Failure to establish spontaneous cardiorespiratory stability"
+     ],
+     [
+      "Neonatal encephalopathy",
+      "Moderate to severe neurological signs",
+      "Direct cerebral hypoxic-ischemic tissue injury"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The central nervous system consequence of perinatal asphyxia is **hypoxic ischaemic encephalopathy**. Primary neuronal energy failure results from cellular ATP depletion, failure of sodium-potassium ATPase pumps, membrane depolarization, and excessive release of excitatory glutamate. This triggers massive intracellular calcium influx, activating proteases, endonucleases, and nitric oxide synthase that induce immediate necrosis.",
+   "say": "Primary energy failure depletes ATP and triggers massive calcium influx, causing acute neuronal necrosis.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Primary Energy Failure (Phase 1)",
+     "points": [
+      "Immediate cessation of cerebral oxidative metabolism",
+      "ATP depletion and lactic acid accumulation",
+      "Glutamate excitotoxicity and cellular swelling"
+     ]
+    },
+    "right": {
+     "title": "Secondary Energy Failure (Phase 2)",
+     "points": [
+      "Develops 6 to 24 hours after resuscitation",
+      "Mitochondrial dysfunction and free radical generation",
+      "Delayed apoptotic neuronal death"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Clinical stratification and neurological prognosis are established using **Sarnat staging criteria**. Stage one represents mild encephalopathy with hyperalertness, uninhibited Moro reflex, and sympathetic overactivity lasting under twenty-four hours. Stage two indicates moderate encephalopathy with lethargy, hypotonia, parasympathetic miosis, bradycardia, and clinical seizures, carrying a thirty percent risk of long-term disability.",
+   "say": "Sarnat staging divides encephalopathy into mild hyperalert, moderate lethargic, and severe comatose stages.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neurological Domain",
+     "Stage 1 (Mild HIE)",
+     "Stage 2 (Moderate HIE)",
+     "Stage 3 (Severe HIE)"
+    ],
+    "rows": [
+     [
+      "Level of consciousness",
+      "Hyperalert, irritable, jittery",
+      "Lethargic or obtunded",
+      "Stupor or deep coma"
+     ],
+     [
+      "Muscle tone and posture",
+      "Normal tone, mild distal flexion",
+      "Hypotonic, weak flexion",
+      "Flaccid, complete loss of tone"
+     ],
+     [
+      "Moro reflex",
+      "Exaggerated, uninhibited",
+      "Weak, incomplete, or absent",
+      "Completely absent"
+     ],
+     [
+      "Pupils and autonomic signs",
+      "Dilated pupils, tachycardia",
+      "Constricted pupils, bradycardia",
+      "Fixed, dilated or sluggish pupils"
+     ],
+     [
+      "Neonatal seizures",
+      "Absent",
+      "Frequent focal or multifocal",
+      "Prolonged, intractable, status"
+     ],
+     [
+      "Long-term neurological outcome",
+      "Normal, excellent prognosis",
+      "20 to 30% death or disability",
+      "Over 50% mortality, severe handicap"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The established neuroprotective standard of care is **therapeutic hypothermia treatment**. Indicated for term and late preterm neonates of thirty-six weeks or greater with evidence of perinatal asphyxia and moderate to severe encephalopathy, cooling must be initiated within the therapeutic window of six hours post-birth, before secondary energy failure and delayed apoptotic cascades become irreversible.",
+   "say": "Therapeutic hypothermia must be initiated within six hours of birth for moderate or severe encephalopathy.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Inclusion Criteria for Cooling",
+     "points": [
+      "Gestational age 36 weeks or greater",
+      "Asphyxia marker (pH under 7.00 or base deficit over 16)",
+      "Moderate to severe HIE on clinical exam or aEEG"
+     ]
+    },
+    "right": {
+     "title": "Therapeutic Window",
+     "points": [
+      "Must commence within 6 hours of birth",
+      "Targets the latent neuroprotective window",
+      "Suppresses secondary mitochondrial collapse"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Cooling only protects the brain when the temperature is held with unusual discipline. The baby rests on a servo controlled blanket while a rectal probe reports core temperature continuously, and the unit adjusts flow to hold **33.5 degrees Celsius** for seventy two hours. Drifting warmer loses neuroprotection and drifting colder invites arrhythmia, so the quiet machine in this picture is doing active clinical work.",
+   "say": "A servo controlled blanket and rectal probe hold the cooled baby at 33.5 degrees for seventy two hours. Steady control matters because drifting either way causes harm.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-m307-ped-neonatal-misc-perinatal-asphyxia.webp",
+    "alt": "Newborn lying on a cooling mattress with temperature probe leads running to a servo control unit set at thirty three point five degrees.",
+    "caption": "Therapeutic hypothermia setup with a servo controlled cooling blanket and rectal temperature monitoring at 33.5 degrees Celsius. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
+   "tx": "Continuous systemic core temperature control relies on **whole body servo-controlled cooling**. The neonate is placed on a fluid-circulating cooling blanket to maintain a strict core rectal temperature of 33.5 degrees Celsius, within a target band of 33.0 to 34.0 degrees, for exactly seventy-two hours. This is followed by slow rewarming at 0.5 degrees per hour to prevent rebound seizures.",
+   "say": "Core temperature is cooled to 33.5 degrees for seventy-two hours, followed by slow rewarming.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Phase of Cooling Protocol",
+     "Target Temperature",
+     "Clinical Protocol Details"
+    ],
+    "rows": [
+     [
+      "Induction phase",
+      "Cool rapidly to 33.5 degrees C",
+      "Achieve target within 2 to 3 hours"
+     ],
+     [
+      "Maintenance phase",
+      "Maintain 33.0 to 34.0 degrees C",
+      "Continue strictly for exactly 72 hours"
+     ],
+     [
+      "Rewarming phase",
+      "Rewarm at 0.5 degrees C per hour",
+      "Gradual rewarming over 6 to 12 hours"
+     ],
+     [
+      "Physiological monitoring",
+      "Monitor heart rate and rhythm",
+      "Expect physiological sinus bradycardia (80 to 100 bpm)"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Continuous bedside cerebral functional monitoring is provided by **amplitude integrated electroencephalography**. Single or dual-channel filtered EEG traces are compressed over time to display cerebral background voltage activity. In moderate to severe encephalopathy, the baseline shifts from normal continuous patterns to discontinuous patterns, burst-suppression, or flat-line isoelectric traces that accurately predict neurodevelopmental handicap.",
+   "say": "Amplitude-integrated EEG tracks background cerebral voltage and detects subclinical electrographic seizures.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Normal aEEG Background",
+     "points": [
+      "Continuous normal voltage (CNV)",
+      "Upper margin over 10 microvolts",
+      "Lower margin over 5 microvolts with sleep-wake cycling"
+     ]
+    },
+    "right": {
+     "title": "Severe Abnormal Patterns",
+     "points": [
+      "Discontinuous voltage (DNV)",
+      "Burst suppression (periods of flatline with bursts)",
+      "Continuous low voltage or flat trace"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "The most common semiological presentation of seizures in neonates is **subtle neonatal seizures**, accounting for over fifty percent of all neonatal convulsive episodes. Manifesting with paroxysmal ocular blinking, sustained horizontal eye deviation, repetitive lip smacking, tongue thrusting, cycling movements of the arms, and unexplained apnoeic spells, they reflect primitive cortical organization.",
+   "say": "Subtle seizures present with lip smacking, bicycling leg movements, and horizontal eye deviation.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Neonatal Seizure Type",
+     "Clinical Manifestation",
+     "EEG Correlate"
+    ],
+    "rows": [
+     [
+      "Subtle seizures (most common)",
+      "Eye deviation, blinking, lip smacking, cycling",
+      "Frequently electrographic-clinical dissociation"
+     ],
+     [
+      "Clonic seizures (focal/multifocal)",
+      "Rhythmic, slow jerking of single limb (1 to 3 Hz)",
+      "Direct focal cortical sharp waves"
+     ],
+     [
+      "Tonic seizures (focal/generalized)",
+      "Sustained posturing of limbs or trunk flexion",
+      "High-voltage periodic delta activity"
+     ],
+     [
+      "Myoclonic seizures",
+      "Rapid, non-rhythmic lightning muscle jerks",
+      "Diffuse suppression-burst pattern"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "The definitive first-line anticonvulsant medication of choice is **intravenous phenobarbital therapy**, administered as a loading dose of twenty milligrams per kilogram infused over twenty minutes. Phenobarbital enhances GABA-mediated inhibitory neurotransmission by prolonging chloride channel opening. If electrographic seizures persist, a second ten-milligram aliquot is given, followed by second-line levetiracetam or fosphenytoin.",
+   "say": "Intravenous phenobarbital twenty milligrams per kilogram is the premier first-line anticonvulsant in neonates.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "First-Line Phenobarbital Regimen",
+     "points": [
+      "Loading dose 20 mg/kg IV over 20 minutes",
+      "GABA-A receptor chloride channel prolongation",
+      "Efficacy in terminating clinical seizures approx 70%"
+     ]
+    },
+    "right": {
+     "title": "Second-Line Options",
+     "points": [
+      "Levetiracetam 40 to 60 mg/kg IV loading dose",
+      "Fosphenytoin 20 mg PE/kg IV with cardiac monitoring",
+      "Midazolam infusion for refractory status epilepticus"
+     ]
+    }
+   }
+  }
+ ]
+}

@@ -1,0 +1,358 @@
+{
+ "v": 1,
+ "id": "fmt-early-changes-somatic-death",
+ "subject": "forensic-medicine",
+ "module": "fmt-early-changes",
+ "title": "Thanatology: Somatic Death, Molecular Death and Suspended Animation",
+ "minutes": 8,
+ "gen": "AI",
+ "steps": [
+  {
+   "title": "Thanatology and the tripod of life",
+   "tx": "In medical jurisprudence, thanatology represents the scientific study of death, dying mechanisms, and postmortem transformations. Classical physiological theory conceptualizes vital human existence as resting upon the **Bichat tripod of life**, which comprises the synchronized, continuous functions of circulation (the heart), respiration (the lungs), and central nervous activity (the brain). Irreversible arrest of any one of these three primary pillars inevitably induces somatic death.",
+   "say": "Thanatology is the study of death. Life depends on the tripod of circulation, respiration, and brain activity; irreversible loss of any pillar causes death.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Circulation: Heart pumps oxygenated blood"
+     },
+     {
+      "id": "b",
+      "label": "Respiration: Lungs oxygenate red blood cells"
+     },
+     {
+      "id": "c",
+      "label": "Innervation: Brainstem controls autonomic vital centers"
+     },
+     {
+      "id": "d",
+      "label": "Failure of any component causes collapse of the tripod"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "d"
+     ],
+     [
+      "b",
+      "d"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Somatic death versus molecular death",
+   "tx": "A vital chronological and physiological boundary separates **somatic death versus molecular death**. Somatic death (clinical or systemic death) signifies the complete, irreversible cessation of vital functions in the body as an integrated organism; the individual loses consciousness, reflexes vanish, and heartbeat ceases. Conversely, molecular death (cellular death) represents the progressive death of individual cells and tissues at differing rates as cellular reserves deplete.",
+   "say": "Somatic death is the loss of the person as a conscious organism. Molecular death is the slower, subsequent death of individual cells as their oxygen runs out.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Somatic death (Clinical)",
+     "points": [
+      "Complete cessation of heart, lungs and brain",
+      "Abolition of consciousness and sensory reflexes",
+      "Person is legally dead; death certificate issued",
+      "Occurs immediately at the moment of demise"
+     ]
+    },
+    "right": {
+     "title": "Molecular death (Cellular)",
+     "points": [
+      "Progressive death of tissues at differing rates",
+      "Cells metabolize residual glycogen and ATP",
+      "Tissues respond to electrical stimulation",
+      "Spans several hours following somatic demise"
+     ]
+    }
+   }
+  },
+  {
+   "title": "Tissue survival intervals after somatic demise",
+   "tx": "Because metabolic demands vary across human tissues, distinct **cellular postmortem survival intervals** dictate organ harvesting windows. Brain cortical neurons die within three to five minutes of complete anoxia. Heart muscle cells survive approximately twenty to thirty minutes, whereas liver and renal parenchyma survive up to one hour. Skeletal muscle retains mechanical and electrical excitability for two to three hours, corneas remain viable for grafting up to six hours, and spermatozoa retain motility for over eighteen hours.",
+   "say": "Brain cells die within five minutes of anoxia, while cornea tissue survives six hours, and muscles respond to electrical stimuli for two hours after death.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Tissue / organ system",
+     "Anoxic survival limit",
+     "Clinical / forensic manifestation"
+    ],
+    "rows": [
+     [
+      "Cerebral cortex",
+      "3 to 5 minutes",
+      "Irreversible loss of consciousness and cortical EEG"
+     ],
+     [
+      "Brainstem vital centres",
+      "10 to 15 minutes",
+      "Permanent loss of spontaneous respiration and vasomotor drive"
+     ],
+     [
+      "Cardiac myocytes",
+      "20 to 30 minutes",
+      "Potential window for acute cardiac resuscitation"
+     ],
+     [
+      "Corneal epithelium",
+      "Up to 6 hours",
+      "Window for postmortem corneal eye retrieval"
+     ],
+     [
+      "Skeletal muscle fibers",
+      "1 to 3 hours",
+      "Idiomuscular contraction upon percussion; electrical twitch"
+     ],
+     [
+      "Spermatozoa (in epididymis)",
+      "18 to 24 hours",
+      "Motile sperm recovery in forensic investigations"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Brain death and the concept of brainstem death",
+   "tx": "Modern medical jurisprudence distinguishes neocortical vegetative death from definitive **brainstem death clinical criteria**. While cortical death leaves brainstem autonomic reflexes intact (allowing spontaneous breathing and heartbeat in persistent vegetative states), brainstem death represents irreversible destruction of the medullary and pontine vital centers. Once the brainstem is dead, spontaneous respiration ceases permanently, providing the legal foundation for organ harvesting.",
+   "say": "Brainstem death means irreversible loss of vital brainstem functions, permanently ending breathing and serving as the legal basis for organ transplantation.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Severe structural intracranial catastrophic injury"
+     },
+     {
+      "id": "b",
+      "label": "Loss of all cranial nerve reflexes (pupillary, corneal, vestibulo-ocular)"
+     },
+     {
+      "id": "c",
+      "label": "Confirmatory apnea testing demonstrating absent respiratory drive"
+     },
+     {
+      "id": "d",
+      "label": "Statutory brainstem death certification under THOTA"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Concept and definition of suspended animation",
+   "tx": "In clinical forensic medicine, **suspended animation apparent death** describes an extraordinary state where vital bodily functions (respiration, cardiac pumping, nervous reflexes) are depressed to an imperceptible minimum, simulating somatic death to casual physical examination. While the individual appears dead, molecular life continues at a basal level, and timely cardiopulmonary resuscitation can fully revive the patient without permanent hypoxic damage.",
+   "say": "Suspended animation is a condition where pulse and breathing fall so low they seem absent, mimicking death, but the patient can still be resuscitated.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Etiological category",
+     "Underlying clinical cause",
+     "Mechanism simulating death"
+    ],
+    "rows": [
+     [
+      "Thermal / environmental",
+      "Severe accidental hypothermia",
+      "Extreme metabolic slowdown protects brain from anoxia"
+     ],
+     [
+      "Toxicological depression",
+      "Barbiturate or opiate overdose",
+      "Profound depression of brainstem respiratory and vasomotor drive"
+     ],
+     [
+      "Electrical trauma",
+      "High-voltage lightning or shock",
+      "Temporary myocardial stunning and electrical respiratory standstill"
+     ],
+     [
+      "Submersion / asphyxia",
+      "Cold water drowning (submersion)",
+      "Diving reflex induces bradycardia and cerebral hypometabolism"
+     ],
+     [
+      "Voluntary yogic trance",
+      "Extreme mental meditative control",
+      "Remarkable reduction of oxygen consumption and cardiac output"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Classic clinical tests to establish somatic death",
+   "tx": "Before the advent of modern electrocardiography, physicians developed classical **confirmatory clinical death tests** to avoid premature burial in suspected suspended animation. These historical tests included the Magnus test (ligating a digit tightly; absence of distal venous congestion indicates absent circulation), the Icard test (subcutaneous injection of fluorescein; green staining of sclera occurs only if blood circulates), and diaphanous transillumination of web spaces.",
+   "say": "Classic tests for death included tying a thread around a finger to see if it swells red, and injecting fluorescein to check for yellow-green eye staining.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Historical test",
+     "Method of execution",
+     "Interpretation indicating death"
+    ],
+    "rows": [
+     [
+      "Magnus test",
+      "Ligate finger base with tight ligature",
+      "Absence of venous engorgement or cyanosis distal to band"
+     ],
+     [
+      "Icard test",
+      "Subcutaneous injection of alkaline fluorescein",
+      "Absence of yellowish skin discoloration or green scleral hue"
+     ],
+     [
+      "Diaphanous test",
+      "Transilluminate finger web space with light",
+      "Dull opacity observed instead of glowing red vascularity"
+     ],
+     [
+      "Mirror / feather test",
+      "Place cold mirror or downy feather at nostrils",
+      "No condensation fogging on glass or movement of feather"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Ocular postmortem changes: The Kevorkian sign and tache noire",
+   "tx": "Examining the eyes provides immediate postmortem evidence through distinct **ocular death physical changes**. Within minutes of circulatory arrest, intraocular tension plummets, rendering the globes soft and flaccid. Ophthalmoscopy reveals the Kevorkian sign (fragmentation or cattle-trucking of blood columns in retinal veins). If the eyelids remain unclosed, two triangular yellowish-brown patches termed tache noire de la scl\u00e9rotique appear on the sclera within two to four hours due to atmospheric desiccation.",
+   "say": "After death, the eyes soften, retinal blood vessels break into segmented columns called the Kevorkian sign, and unclosed eyes develop brown scleral spots called tache noire.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Arrest of blood flow drops intraocular pressure (flaccid eyeball)"
+     },
+     {
+      "id": "b",
+      "label": "Retinal vein cattle-trucking segmentation (Kevorkian sign) in minutes"
+     },
+     {
+      "id": "c",
+      "label": "Corneal haziness and clouding develops within 2 to 4 hours"
+     },
+     {
+      "id": "d",
+      "label": "Atmospheric exposure causes dry brown scleral spots (Tache noire)"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Postmortem biochemical vitreous humor potassium",
+   "tx": "Because the eyes occupy an anatomically sheltered sanctuary, measuring **vitreous humor potassium elevation** represents the most scientifically accurate biochemical method for calculating time since death during the early postmortem period. Following somatic demise, the selective cellular pumps fail, allowing intracellular retinal potassium to leak into the vitreous fluid at a steady, linear rate that is unaffected by ambient temperature fluctuations.",
+   "say": "Potassium leaks from retinal cells into vitreous fluid at a steady rate after death, allowing chemists to calculate the postmortem interval accurately.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Aspiration of clear vitreous humor from posterior eye chamber"
+     },
+     {
+      "id": "b",
+      "label": "Flame photometry or ion-selective electrode potassium analysis"
+     },
+     {
+      "id": "c",
+      "label": "Potassium rises linearly at approximately 0.17 mEq/L per hour"
+     },
+     {
+      "id": "d",
+      "label": "Application of Sturner formula calculating postmortem hours"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  },
+  {
+   "title": "Medicolegal certification and premature burial precautions",
+   "tx": "To prevent catastrophic miscarriages of justice or accidental mortuary transfer, statutory regulations enforce a **rigorous death confirmation protocol**. The medical practitioner must personally auscultate the precordium for heart sounds and the trachea for breath sounds continuously for at least five full minutes. In hypothermia or suspected drug poisoning, declaring death is forbidden until the body has been actively rewarmed and checked on continuous electrocardiography.",
+   "say": "Doctors must listen for heart and breath sounds for five continuous minutes before certifying death, and always rewarm cold bodies before declaring death.",
+   "vis": {
+    "kind": "flow",
+    "nodes": [
+     {
+      "id": "a",
+      "label": "Absence of spontaneous movement, breathing, and palpable pulse"
+     },
+     {
+      "id": "b",
+      "label": "Continuous 5-minute cardiac and tracheal stethoscope auscultation"
+     },
+     {
+      "id": "c",
+      "label": "Confirmation of fixed, dilated pupils and loss of corneal reflex"
+     },
+     {
+      "id": "d",
+      "label": "Formal issuance of statutory medical certificate of cause of death"
+     }
+    ],
+    "edges": [
+     [
+      "a",
+      "b"
+     ],
+     [
+      "b",
+      "c"
+     ],
+     [
+      "c",
+      "d"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": []
+}

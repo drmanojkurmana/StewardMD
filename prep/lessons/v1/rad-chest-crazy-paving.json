@@ -1,0 +1,60 @@
+{
+ "v": 1,
+ "id": "rad-chest-crazy-paving",
+ "subject": "radiology",
+ "module": "rad-chest",
+ "title": "Crazy Paving, Ground Glass Causes and Mediastinal Compartments",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "title": "Crazy paving is two patterns stacked",
+   "tx": "**Crazy paving** combines ground glass opacity with superimposed interlobular septal thickening, resembling irregular paving stones on high resolution CT. The ground glass fills the paving stone while thickened septa draw its borders. Pulmonary alveolar proteinosis is the examination answer, but in daily practice oedema, haemorrhage and infection produce the pattern far more often, so the clinical story must pick the cause.",
+   "say": "Crazy paving combines ground glass opacity with superimposed interlobular septal thickening, resembling irregular paving stones. The ground glass fills each stone while thickened septa draw its borders. Alveolar proteinosis is the examination answer, but oedema, haemorrhage and infection produce the pattern far more often in daily practice.",
+   "vis": {"kind": "compare", "left": {"title": "Ground glass part", "points": ["Hazy density increase", "Vessels still visible", "Partly filled alveoli", "Forms the paving stone"]}, "right": {"title": "Septal part", "points": ["Thickened interlobular septa", "Smooth white network", "Draws the stone borders", "Fluid or cells in septa"]}}
+  },
+  {
+   "title": "Alveolar proteinosis fills alveoli with surfactant",
+   "tx": "**Pulmonary alveolar proteinosis** accumulates surfactant like material inside alveoli because macrophages fail to clear it, most often from antibodies against granulocyte macrophage colony stimulating factor. It favours central and symmetric lung zones while sparing apices and costophrenic angles. Patients pick up Nocardia infections, including brain abscess, and about thirty percent progress toward fibrosis. Whole lung lavage washes out the material and remains the defining treatment.",
+   "say": "Pulmonary alveolar proteinosis accumulates surfactant like material inside alveoli because macrophages fail to clear it, most often from antibodies against a macrophage growth factor. It favours central symmetric zones while sparing apices and costophrenic angles. Patients pick up Nocardia infections, and whole lung lavage remains the defining treatment.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Macrophage clearance fails"}, {"id": "b", "label": "Surfactant fills alveoli"}, {"id": "c", "label": "Crazy paving on CT"}, {"id": "d", "label": "Whole lung lavage"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "title": "The CRAZY causes list",
+   "tx": "**Crazy paving causes** span infection, oedema, haemorrhage, malignancy and proteinosis. Pneumocystis pneumonia in advanced HIV, viral pneumonia, cardiogenic oedema, diffuse alveolar haemorrhage and mucinous adenocarcinoma formerly called bronchioloalveolar carcinoma all stack septa over ground glass. Fever, immune state, heart size and speed of onset sort the list faster than any single density measurement on the scan.",
+   "say": "Crazy paving causes span infection, oedema, haemorrhage, malignancy and proteinosis. Pneumocystis in advanced HIV, viral pneumonia, cardiogenic oedema, alveolar haemorrhage and mucinous adenocarcinoma all stack septa over ground glass. Fever, immune state, heart size and speed of onset sort the list faster than any density measurement.",
+   "vis": {"kind": "table", "cols": ["Cause", "Clinical key", "Extra film clue"], "rows": [["Alveolar proteinosis", "Slow breathlessness", "Central symmetric zones"], ["Pneumocystis", "Advanced HIV", "Perihilar ground glass"], ["Cardiogenic oedema", "Orthopnoea", "Big heart, effusions"], ["Alveolar haemorrhage", "Falling haemoglobin", "Haemoptysis may be absent"]]}
+  },
+  {
+   "title": "Lipoid pneumonia hides fat density",
+   "tx": "**Lipoid pneumonia** follows aspiration of mineral or vegetable oils, classically in older adults taking liquid paraffin for constipation. Its consolidation can join the crazy paving list, but the giveaway is fat density inside the opacity, measuring negative Hounsfield values where pneumonia should sit near soft tissue density. Fire eaters and children swallowing hydrocarbons get the acute form with chemical pneumonitis within hours.",
+   "say": "Lipoid pneumonia follows aspiration of mineral or vegetable oils, classically in older adults taking liquid paraffin for constipation. Its consolidation can join the crazy paving list, but the giveaway is fat density inside the opacity. Fire eaters and children swallowing hydrocarbons get the acute form with chemical pneumonitis within hours.",
+   "vis": {"kind": "compare", "left": {"title": "Exogenous lipoid", "points": ["Oil aspiration history", "Fat density in consolidation", "Lower lobe predominance", "Chronic slow growth"]}, "right": {"title": "Endogenous lipoid", "points": ["Beyond an obstructing tumour", "Lipid laden macrophages", "Golden pneumonia at pathology", "Treat the obstruction"]}}
+  },
+  {
+   "title": "Ground glass in interstitial disease",
+   "tx": "**Nonspecific interstitial pneumonia** shows the pictured ground glass with traction bronchiectasis and immediate subpleural sparing, a combination that separates it from usual interstitial pneumonia. Usual interstitial pneumonia instead stacks subpleural honeycombing at the bases with almost no ground glass. The ground glass here signals inflammatory, steroid responsive change, while honeycombing signals fixed fibrosis that will not reverse with treatment.",
+   "say": "Nonspecific interstitial pneumonia shows the pictured ground glass with traction bronchiectasis and immediate subpleural sparing, separating it from usual interstitial pneumonia. That pattern instead stacks subpleural honeycombing at the bases with almost no ground glass. Ground glass signals inflammatory change, while honeycombing signals fixed fibrosis.",
+   "vis": {"kind": "image", "src": "v1/kb/media/nonspecific-interstitial-pneumonia-fig1.webp", "alt": "Illustration of ground glass opacities with subpleural sparing and bronchiectasis in nonspecific interstitial pneumonia.", "caption": "Ground glass with subpleural sparing in nonspecific interstitial pneumonia. Illustration: StewardMD."}
+  },
+  {
+   "title": "Anterior mediastinal masses: the four Ts",
+   "tx": "**Anterior mediastinal compartment** holds thymus, thyroid extensions, lymph nodes and the heart border, and its mass list is taught as the four Ts: thymoma, teratoma, thyroid and terrible lymphoma. A mass erasing the heart border silhouette sits in this compartment. Thymoma pairs with myasthenia gravis, teratoma can show fat, fluid, soft tissue and calcification in one mass, and lymphoma wraps vessels without narrowing them.",
+   "say": "Anterior mediastinal compartment holds thymus, thyroid extensions and lymph nodes, and its mass list is taught as the four Ts: thymoma, teratoma, thyroid and terrible lymphoma. A mass erasing the heart border sits here. Thymoma pairs with myasthenia, teratoma mixes fat and calcification, and lymphoma wraps vessels without narrowing them.",
+   "vis": {"kind": "table", "cols": ["Mass", "Patient clue", "Imaging clue"], "rows": [["Thymoma", "Myasthenia gravis", "Lobulated prevascular mass"], ["Teratoma", "Young adult", "Fat plus calcification"], ["Thyroid goitre", "Neck swelling moves on swallowing", "Continuous with neck thyroid"], ["Lymphoma", "Night sweats, nodes", "Wraps vessels, no narrowing"]]}
+  },
+  {
+   "title": "Middle and posterior mediastinum",
+   "tx": "**Middle mediastinal compartment** contains nodes, trachea, oesophagus and great vessels, so its masses are mostly lymphadenopathy, foregut duplication cysts and vascular rings. The posterior compartment hugs the spine and grows neurogenic tumours, meningoceles and descending aortic aneurysms. A posterior mass that widens the neural foramen on CT is a nerve sheath tumour until proven otherwise, and it changes the surgical approach completely.",
+   "say": "Middle mediastinal compartment contains nodes, trachea, oesophagus and great vessels, so its masses are mostly lymphadenopathy and duplication cysts. The posterior compartment hugs the spine and grows neurogenic tumours and aortic aneurysms. A posterior mass widening the neural foramen is a nerve sheath tumour until proven otherwise.",
+   "vis": {"kind": "compare", "left": {"title": "Middle compartment", "points": ["Lymph node masses", "Foregut duplication cysts", "Pericardial cyst at cardiophrenic angle", "Vascular rings"]}, "right": {"title": "Posterior compartment", "points": ["Neurogenic tumours", "Paravertebral masses", "Meningocele", "Descending aorta aneurysm"]}}
+  },
+  {
+   "title": "Localising by silhouette and lines",
+   "tx": "**Mediastinal lines** on the frontal film place a mass before CT. Loss of the heart border silhouette means anterior, loss of the paravertebral line means posterior, and a mass seen through the heart shadow with borders intact sits in the posterior inferior compartment. The cervicothoracic sign adds the clavicle rule: a top border surviving above the clavicles cannot be anterior, pointing instead to neck or posterior origin.",
+   "say": "Mediastinal lines on the frontal film place a mass before CT. Loss of the heart border means anterior, loss of the paravertebral line means posterior, and a mass seen through the heart with borders intact sits posteriorly. A top border surviving above the clavicles cannot be anterior either.",
+   "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Which border is lost"}, {"id": "b", "label": "Heart border: anterior"}, {"id": "c", "label": "Paravertebral: posterior"}, {"id": "d", "label": "CT confirms compartment"}], "edges": [["a", "b"], ["a", "c"], ["b", "d"], ["c", "d"]]}
+  }
+ ]
+}

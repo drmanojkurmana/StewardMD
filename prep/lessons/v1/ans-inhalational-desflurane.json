@@ -1,0 +1,295 @@
+{
+    "v": 1,
+    "id": "ans-inhalational-desflurane",
+    "subject": "anaesthesia",
+    "module": "ans-inhalational",
+    "title": "Inhalational Anaesthetics: Desflurane, Xenon, and Enflurane Neurotoxicity",
+    "minutes": 6,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Desflurane Physical Properties",
+            "tx": "**Desflurane fluorination and volatility** features complete fluorination of its ethyl methyl ether backbone, differing from isoflurane by a single fluorine substitution replacing a chlorine atom. This chemical modification reduces oil-gas solubility (diminishing potency to a MAC of 6.0 percent) while drastically lowering blood-gas solubility to 0.42. Because its boiling point is 22.8 degrees Celsius, desflurane vaporizes uncontrollably at room temperature unless contained in specialized Tec 6 heated vaporizers.",
+            "say": "Desflurane fluorination and volatility features complete fluorination of its ethyl methyl ether backbone, differing from isoflurane by a single fluorine substitution replacing a chlorine atom. This chemical modification reduces oil-gas solubility (diminishing potency to a MAC of 6.0 percent) while drastically lowering blood-gas solubility to 0.42. Because its boiling point is 22.8 degrees Celsius, desflurane vaporizes uncontrollably at room temperature unless contained in specialized Tec 6 heated vaporizers.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Physical Property",
+                    "Desflurane",
+                    "Isoflurane",
+                    "Sevoflurane"
+                ],
+                "rows": [
+                    [
+                        "Boiling Point",
+                        "22.8 degrees Celsius",
+                        "48.5 degrees Celsius",
+                        "58.5 degrees Celsius"
+                    ],
+                    [
+                        "Saturated Vapor Pressure (20C)",
+                        "669 mmHg (near atmospheric)",
+                        "238 mmHg",
+                        "157 mmHg"
+                    ],
+                    [
+                        "Blood-Gas Partition Coefficient",
+                        "0.42 (insoluble)",
+                        "1.40 (intermediate)",
+                        "0.65 (low)"
+                    ],
+                    [
+                        "Oil-Gas Partition Coefficient",
+                        "19 (low potency)",
+                        "98 (high potency)",
+                        "47 (intermediate)"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Airway Irritation and Sympathetic Surge",
+            "tx": "**Airway pungency and sympathetic activation** with desflurane prohibit its use for inhalational mask induction: concentrations above 6 percent provoke pungent airway irritation, coughing, breath-holding, salivation, and laryngospasm. Furthermore, rapid stepwise increases in inspired desflurane concentration stimulate tracheobronchial autonomic receptors, triggering a transient surge in circulating catecholamines that produces abrupt tachycardia and hypertension.",
+            "say": "Airway pungency and sympathetic activation with desflurane prohibit its use for inhalational mask induction: concentrations above 6 percent provoke pungent airway irritation, coughing, breath-holding, salivation, and laryngospasm. Furthermore, rapid stepwise increases in inspired desflurane concentration stimulate tracheobronchial autonomic receptors, triggering a transient surge in circulating catecholamines that produces abrupt tachycardia and hypertension.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Airway Irritation Features",
+                    "points": [
+                        "Pungent ether odor triggers vocal cord adduction and laryngospasm",
+                        "Severe coughing and breath-holding during attempted mask induction",
+                        "Restricted strictly to maintenance after intravenous induction"
+                    ]
+                },
+                "right": {
+                    "title": "Sympathetic Hyperactivity Response",
+                    "points": [
+                        "Rapid concentration step-up releases systemic noradrenaline",
+                        "Transient systolic hypertension and heart rate exceeding 110 bpm",
+                        "Blunted by prior administration of IV fentanyl or esmolol"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Ultra-Rapid Emergence in Morbid Obesity",
+            "tx": "**Bariatric emergence advantages of desflurane** stem directly from its negligible fat-blood partition coefficient (27, compared to 52 for sevoflurane and 110 for isoflurane). During prolonged bariatric surgeries lasting four to six hours, very little desflurane accumulates in peripheral adipose tissue reservoirs, resulting in emergence times that are up to 50 percent faster than sevoflurane, allowing rapid return of upper airway protective reflexes in obese patients.",
+            "say": "Bariatric emergence advantages of desflurane stem directly from its negligible fat-blood partition coefficient (27, compared to 52 for sevoflurane and 110 for isoflurane). During prolonged bariatric surgeries lasting four to six hours, very little desflurane accumulates in peripheral adipose tissue reservoirs, resulting in emergence times that are up to 50 percent faster than sevoflurane, allowing rapid return of upper airway protective reflexes in obese patients.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Four hours of desflurane anaesthesia in morbid obesity"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Minimal accumulation in massive adipose reservoirs"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Discontinue vaporizer at end of laparoscopic surgery"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Rapid alveolar clearance; extubate within 5 to 7 minutes"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Xenon Noble Gas Anaesthetic",
+            "tx": "**Xenon noble gas anaesthesia** represents the only elemental noble gas possessing general anaesthetic properties, acting via non-competitive antagonism of the N-methyl-D-aspartate (NMDA) receptor and two-pore domain potassium channel activation. Xenon has a blood-gas partition coefficient of 0.115 (lower than any other agent), a MAC of 63 to 71 percent, and remarkably pristine hemodynamic stability with zero myocardial depression.",
+            "say": "Xenon noble gas anaesthesia represents the only elemental noble gas possessing general anaesthetic properties, acting via non-competitive antagonism of the N-methyl-D-aspartate (NMDA) receptor and two-pore domain potassium channel activation. Xenon has a blood-gas partition coefficient of 0.115 (lower than any other agent), a MAC of 63 to 71 percent, and remarkably pristine hemodynamic stability with zero myocardial depression.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Anaesthetic Characteristic",
+                    "Xenon Noble Gas",
+                    "Nitrous Oxide",
+                    "Sevoflurane"
+                ],
+                "rows": [
+                    [
+                        "Primary Receptor Target",
+                        "Non-competitive NMDA receptor block",
+                        "Non-competitive NMDA receptor block",
+                        "GABA-A receptor positive modulation"
+                    ],
+                    [
+                        "Blood-Gas Partition Coefficient",
+                        "0.115 (fastest known agent)",
+                        "0.47",
+                        "0.65"
+                    ],
+                    [
+                        "Cardiovascular Stability",
+                        "Zero myocardial depression; stable cardiac index",
+                        "Mild sympathetic activation; direct inotropic depressant",
+                        "Dose-dependent systemic vasodilation"
+                    ],
+                    [
+                        "Environmental Greenhouse Impact",
+                        "Zero global warming potential; atmospheric gas",
+                        "Significant global warming potential (298x CO2)",
+                        "Moderate fluorinated greenhouse gas"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Xenon Limitations and Production",
+            "tx": "**Practical limitations of xenon anaesthesia** prevent widespread clinical adoption despite its ideal pharmacology. Xenon is manufactured exclusively via fractional distillation of atmospheric air, where it exists in miniscule concentrations of 0.087 parts per million. This makes xenon prohibitively expensive, requiring dedicated closed-circuit anaesthesia delivery systems with advanced gas recycling and scavenging technology to prevent atmospheric loss.",
+            "say": "Practical limitations of xenon anaesthesia prevent widespread clinical adoption despite its ideal pharmacology. Xenon is manufactured exclusively via fractional distillation of atmospheric air, where it exists in miniscule concentrations of 0.087 parts per million. This makes xenon prohibitively expensive, requiring dedicated closed-circuit anaesthesia delivery systems with advanced gas recycling and scavenging technology to prevent atmospheric loss.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Clinical and Pharmacological Virtues",
+                    "points": [
+                        "Remarkable neuroprotective and cardioprotective preconditioning",
+                        "Completely non-toxic, non-teratogenic, and non-flammable",
+                        "Zero biotransformation; excreted 100 percent via the lungs"
+                    ]
+                },
+                "right": {
+                    "title": "Economic and Engineering Hurdles",
+                    "points": [
+                        "High cost exceeding 10 dollars per liter of gas",
+                        "Demands airtight closed-circuit workstation to conserve gas",
+                        "High density increases airway resistance during ventilation"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Enflurane Epileptogenic Potential",
+            "tx": "**Enflurane-induced electroencephalographic seizures** distinguish enflurane from other volatile agents: deep enflurane anaesthesia (concentrations exceeding 2 to 2.5 MAC), particularly when accompanied by hyperventilation and hypocapnia (PaCO2 under 30 mmHg), induces high-voltage spike-and-wave discharges and paroxysmal burst suppression on electroencephalography, accompanied by frank motor twitching of facial and extremity muscles.",
+            "say": "Enflurane-induced electroencephalographic seizures distinguish enflurane from other volatile agents: deep enflurane anaesthesia (concentrations exceeding 2 to 2.5 MAC), particularly when accompanied by hyperventilation and hypocapnia (PaCO2 under 30 mmHg), induces high-voltage spike-and-wave discharges and paroxysmal burst suppression on electroencephalography, accompanied by frank motor twitching of facial and extremity muscles.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Deliver >2 MAC of enflurane maintenance"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Hyperventilate patient to arterial PaCO2 <30 mmHg"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Induce cerebral cortical hyperexcitability and spike-and-wave patterns"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Normalize ventilation and reduce enflurane to suppress seizures"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "tx": "This tracing misbehaves in a way no other volatile agent quite manages. Deep enflurane, especially with hyperventilation, fires **spike and wave discharges** across the EEG and can twitch the face and limbs of a patient who should be motionless. The phenomenon caps how deep enflurane may safely run and pushed it towards obsolescence as cleaner agents arrived. It also teaches a wider lesson: anaesthetic depth is not a single dial of safety, because each agent carries its own ceiling set by an idiosyncratic toxicity.",
+            "say": "Deep enflurane provokes spike and wave EEG seizures, the neurotoxicity that limited its clinical depth.",
+            "vis": {
+                "kind": "image",
+                "src": "v1/lessons/media/need-m486-ans-inhalational-desflurane.webp",
+                "alt": "Electroencephalogram recording showing spike-and-wave discharges and paroxysmal bursts during deep enflurane anaesthesia",
+                "caption": "Electroencephalogram recording showing spike-and-wave discharges and paroxysmal bursts during deep enflurane anaesthesia. Illustration: StewardMD original.",
+                "ar": 1.3393
+            }
+        },
+        {
+            "title": "Enflurane Fluoride Metabolism",
+            "tx": "**Enflurane metabolic biotransformation** clears approximately 2 to 4 percent of absorbed drug through hepatic microsomal oxidation, generating inorganic fluoride ions. While peak fluoride concentrations typically remain below 25 micromoles per liter during brief surgical procedures, prolonged enflurane administration in patients with preexisting renal impairment can impair urinary concentrating ability, leading to its obsolescence in modern operating suites.",
+            "say": "Enflurane metabolic biotransformation clears approximately 2 to 4 percent of absorbed drug through hepatic microsomal oxidation, generating inorganic fluoride ions. While peak fluoride concentrations typically remain below 25 micromoles per liter during brief surgical procedures, prolonged enflurane administration in patients with preexisting renal impairment can impair urinary concentrating ability, leading to its obsolescence in modern operating suites.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Parameter",
+                    "Enflurane",
+                    "Isoflurane",
+                    "Sevoflurane"
+                ],
+                "rows": [
+                    [
+                        "Chemical Structure",
+                        "Halogenated methyl ethyl ether",
+                        "Structural isomer of enflurane",
+                        "Fluorinated methyl isopropyl ether"
+                    ],
+                    [
+                        "Epileptogenic EEG Potential",
+                        "High (spike-and-wave seizures with hypocapnia)",
+                        "Zero (potent anticonvulsant burst suppressor)",
+                        "Low (epileptiform bursts in pediatric induction)"
+                    ],
+                    [
+                        "Hepatic Metabolism Rate",
+                        "2.4 percent biotransformation",
+                        "0.2 percent biotransformation",
+                        "3 to 5 percent biotransformation"
+                    ],
+                    [
+                        "Inorganic Fluoride Release",
+                        "Moderate (15 to 25 umol/L peak)",
+                        "Negligible (under 5 umol/L)",
+                        "Moderate (20 to 30 umol/L peak)"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Neuroprotection and Preconditioning",
+            "tx": "**Anaesthetic preconditioning by volatile agents** confers potent cellular protection against subsequent ischemic injury in cardiac and cerebral tissues. Isoflurane, sevoflurane, and desflurane activate mitochondrial ATP-sensitive potassium channels (mitoK-ATP) and protein kinase C, preserving mitochondrial membrane integrity and reducing myocardial infarct size and post-stroke neuronal apoptosis.",
+            "say": "Anaesthetic preconditioning by volatile agents confers potent cellular protection against subsequent ischemic injury in cardiac and cerebral tissues. Isoflurane, sevoflurane, and desflurane activate mitochondrial ATP-sensitive potassium channels (mitoK-ATP) and protein kinase C, preserving mitochondrial membrane integrity and reducing myocardial infarct size and post-stroke neuronal apoptosis.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Anaesthetic Preconditioning Pathways",
+                    "points": [
+                        "Mitochondrial ATP-sensitive K+ channel activation",
+                        "Free radical scavenging and nitric oxide synthase induction",
+                        "Preserves post-ischemic left ventricular contractile function"
+                    ]
+                },
+                "right": {
+                    "title": "Neurosurgical Implications",
+                    "points": [
+                        "Suppresses cerebral metabolic rate of oxygen consumption (CMRO2)",
+                        "Preserves neuronal viability during temporary arterial clipping",
+                        "Must maintain cerebral perfusion pressure above 60 mmHg"
+                    ]
+                }
+            }
+        }
+    ],
+    "quiz": []
+}

@@ -1,0 +1,248 @@
+{
+ "v": 1,
+ "id": "psy-depression-dysthymia",
+ "subject": "psychiatry",
+ "module": "psy-depression",
+ "title": "Persistent Depressive Disorder and Cognitive Models of Depression",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Dysthymia**, designated persistent depressive disorder in modern nosology, is a chronic depressive disturbance characterized by depressed mood lasting for at least two consecutive years in adults, or one year in children. During this period, the patient is never symptom-free for more than two consecutive months.",
+   "say": "Dysthymia involves continuous low mood for at least two years in adults without two consecutive symptom-free months. Symptoms are chronic though milder than major depression.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Persistent Depressive Disorder",
+     "points": [
+      "Minimum duration two continuous years",
+      "Never symptom-free for over two months",
+      "Subthreshold chronic depressive symptoms",
+      "Insidious onset often in early adulthood"
+     ]
+    },
+    "right": {
+     "title": "Major Depressive Episode",
+     "points": [
+      "Minimum duration two continuous weeks",
+      "Five of nine severe SIGECAPS symptoms",
+      "Acute severe functional impairment",
+      "Episodic pattern with inter-episode recovery"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Diagnostic criteria for dysthymia** require depressed mood accompanied by at least two associated vegetative and psychological symptoms: poor appetite or overeating, insomnia or hypersomnia, low energy or fatigue, low self-esteem, poor concentration, and feelings of hopelessness. Manic or hypomanic episodes must never have occurred.",
+   "say": "Dysthymia diagnosis requires chronic depressed mood with at least two features such as sleep change, low energy, poor concentration, and low self-esteem.",
+   "vis": {
+    "kind": "table",
+    "title": "Dysthymia Symptom Criteria",
+    "cols": [
+     "Domain",
+     "Associated Features",
+     "Clinical Impact"
+    ],
+    "rows": [
+     [
+      "Affect & Self",
+      "Low self-esteem & hopelessness",
+      "Chronic unworthiness and pessimistic worldview"
+     ],
+     [
+      "Energy & Sleep",
+      "Fatigue, insomnia or hypersomnia",
+      "Subtle persistent drag on occupational productivity"
+     ],
+     [
+      "Cognition",
+      "Indecisiveness & poor concentration",
+      "Struggles with long-term professional advancement"
+     ],
+     [
+      "Appetite",
+      "Poor appetite or chronic overeating",
+      "Gradual metabolic or nutritional changes"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Monoamine hypothesis of depression** proposes that depressive symptoms arise from functional deficiency in central monoaminergic neurotransmission, particularly serotonin 5-HT and noradrenaline, in limbic and frontocortical synapses. Evidence includes reserpine-induced monoamine vesicle depletion triggering depression and monoamine oxidase inhibitors alleviating depressive episodes.",
+   "say": "The monoamine hypothesis attributes depression to central serotonin and noradrenaline depletion. Medications that elevate synaptic monoamines effectively alleviate symptoms.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/antidepressants-ssri-lithium-mood-fig1.webp",
+    "alt": "Central monoamine transmission in chronic depression",
+    "caption": "Synaptic monoamine neurotransmitter reuptake and downstream neurotrophic signalling cascades in depressive disorders.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Beck cognitive triad** forms the cornerstone of cognitive models of depression, positing that depressive states are maintained by pervasive negative automatic thoughts regarding the self, the ongoing world, and the future. Depressed individuals view themselves as fundamentally defective, the world as excessively demanding, and the future as utterly hopeless.",
+   "say": "Beck cognitive triad links depression to negative thoughts about the self, the world, and the future. These are reinforced by cognitive distortions.",
+   "vis": {
+    "kind": "flow",
+    "title": "Beck Cognitive Model",
+    "nodes": [
+     {
+      "id": "n1",
+      "label": "Early negative life experiences form depressive schemas"
+     },
+     {
+      "id": "n2",
+      "label": "Critical incident activates dormant core schemas"
+     },
+     {
+      "id": "n3",
+      "label": "Automatic negative thoughts: Bad Self, Hostile World, Bleak Future"
+     },
+     {
+      "id": "n4",
+      "label": "Affective depression, psychomotor slowing & behavioral withdrawal"
+     }
+    ],
+    "edges": [
+     [
+      "n1",
+      "n2"
+     ],
+     [
+      "n2",
+      "n3"
+     ],
+     [
+      "n3",
+      "n4"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Cognitive distortions in depression** systematically bias information processing through irrational cognitive filters such as arbitrary inference, selective abstraction, overgeneralization, and catastrophizing. Cognitive behaviour therapy explicitly trains patients to identify these automatic cognitive errors and rationally restructure them through empirical behavioural experiments.",
+   "say": "Distortions like overgeneralization and catastrophizing reinforce negative beliefs. Cognitive behaviour therapy restructures these irrational cognitive patterns.",
+   "vis": {
+    "kind": "table",
+    "title": "Cognitive Distortion Typology",
+    "cols": [
+     "Distortion",
+     "Mechanism",
+     "Clinical Example"
+    ],
+    "rows": [
+     [
+      "Arbitrary inference",
+      "Drawing conclusions without supporting evidence",
+      "Assuming a colleague hates you because they passed by"
+     ],
+     [
+      "Selective abstraction",
+      "Focusing on a single negative detail",
+      "Dwelling on one critique amidst ten compliments"
+     ],
+     [
+      "Overgeneralization",
+      "Viewing single failure as endless pattern",
+      "Believing one test failure guarantees career ruin"
+     ],
+     [
+      "Catastrophizing",
+      "Anticipating worst possible outcome",
+      "Expecting immediate firing for a minor typographical error"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Patient Health Questionnaire-9** serves as a validated nine-item self-report screening and severity monitoring tool mapped directly onto the DSM criteria for depression. Scores range from zero to 27: scores 5 to 9 indicate mild depression, 10 to 14 moderate, 15 to 19 moderately severe, and 20 to 27 severe depression.",
+   "say": "The PHQ-9 scores depression severity from zero to twenty-seven. Scores above ten indicate moderate depression, while item nine screens for suicide risk.",
+   "vis": {
+    "kind": "table",
+    "title": "PHQ-9 Severity Strata",
+    "cols": [
+     "Score Range",
+     "Severity Stratum",
+     "Recommended Clinical Action"
+    ],
+    "rows": [
+     [
+      "0 - 4",
+      "Minimal or none",
+      "No specific psychiatric intervention warranted"
+     ],
+     [
+      "5 - 9",
+      "Mild depression",
+      "Watchful waiting; supportive lifestyle counseling"
+     ],
+     [
+      "10 - 14",
+      "Moderate depression",
+      "Initiate psychotherapy or first-line SSRI pharmacotherapy"
+     ],
+     [
+      "15 - 19",
+      "Moderately severe",
+      "Pharmacotherapy combined with structured psychotherapy"
+     ],
+     [
+      "20 - 27",
+      "Severe depression",
+      "Immediate pharmacotherapy, psychiatric referral, evaluate safety"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Item nine of the PHQ-9** explicitly evaluates passive death wishes and active suicidal thoughts occurring over the preceding two weeks, mandating immediate clinical risk assessment when endorsed. Even in patients scoring low aggregate totals, an affirmative response on item nine requires urgent evaluation of suicide lethality and intent.",
+   "say": "Any positive response on PHQ-9 item nine warrants an immediate suicide risk assessment regardless of the patient's overall score.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Positive Item 9 Response",
+     "points": [
+      "Endorsement of passive death wishes",
+      "Thoughts of deliberate self-harm",
+      "Mandates immediate suicide risk protocol",
+      "Overrides low aggregate depression score"
+     ]
+    },
+    "right": {
+     "title": "Required Clinical Actions",
+     "points": [
+      "Structured suicide intent evaluation",
+      "Assess lethality of method and access to means",
+      "Involve family or supportive caregivers",
+      "Determine need for inpatient admission"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Seasonal affective disorder** describes a depressive pattern wherein episodes recur annually during autumn or winter months and remit spontaneously during spring or summer. Characterized by atypical vegetative symptoms including hypersomnia and carbohydrate craving, bright light therapy delivering 10,000 lux for 30 minutes daily represents first-line treatment.",
+   "say": "Seasonal depression recurs during winter with hypersomnia and carbohydrate cravings. Daily bright light therapy of ten thousand lux provides first-line treatment.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Clinical Features",
+     "points": [
+      "Annual recurrence in autumn and winter",
+      "Spontaneous remission in spring and summer",
+      "Prominent hypersomnia and daytime fatigue",
+      "Carbohydrate craving and weight gain"
+     ]
+    },
+    "right": {
+     "title": "Evidence-Based Treatment",
+     "points": [
+      "Bright light therapy (10,000 lux daily for 30 min)",
+      "Morning light exposure to reset circadian rhythm",
+      "Second-generation SSRIs like fluoxetine",
+      "Preventive bupropion starting in early autumn"
+     ]
+    }
+   }
+  }
+ ],
+ "quiz": []
+}

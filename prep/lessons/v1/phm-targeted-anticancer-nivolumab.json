@@ -1,0 +1,224 @@
+{
+  "v": 1,
+  "module": "phm-targeted-anticancer",
+  "subject": "pharmacology",
+  "title": "Targeted Anticancer III: Checkpoint Inhibitors, CAR-T Cells and Hormonal Anticancer Therapy",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Nivolumab** and **pembrolizumab** block PD 1, the exhausted T cell brake that tumours exploit through PD L1, restoring immune attack across melanoma, lung, kidney, Hodgkin and dozens more niches, with PD L1 staining, mismatch repair deficiency and tumour mutational burden as imperfect biomarkers. Responses can last years off therapy, rewriting survivorship, while pseudoprogression (immune influx enlarging scans before shrinkage) disciplines early imaging interpretation.",
+      "say": "Checkpoint blockade releases the immune brake; scans may swell before they shrink.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/immunotherapy-toxicity-fig1.webp",
+        "alt": "Immunotherapy toxicity organ systems diagram showing immune related adverse events",
+        "caption": "Immune related adverse events by organ system, checkpoint therapy's distributed ledger."
+      }
+    },
+    {
+      "tx": "**Ipilimumab** blocks CTLA 4 earlier in T cell activation (lymph node priming), billing heavier immune toxicity (colitis, hypophysitis) at melanoma doses and anchoring combinations with nivolumab where dual blockade buys survival with doubled immune ledgers. Dose decides toxicity steeply here, and combination consent states grade 3 and 4 rates aloud.",
+      "say": "CTLA 4 blockade primes harder and bills harder; combinations double both curves.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CTLA 4 personality",
+          "points": [
+            "Acts at T cell priming in nodes",
+            "Colitis and hypophysitis prominent",
+            "Dose toxicity slope steep (10 vs 3 vs 1 mg/kg)",
+            "Melanoma origin, combinations widen"
+          ]
+        },
+        "right": {
+          "title": "PD 1 personality",
+          "points": [
+            "Acts at tumour T cell interface",
+            "Pneumonitis and thyroiditis prominent",
+            "Flatter dose toxicity, longer courses",
+            "Biomarkers guide some niches"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Immune related adverse events** follow one management grammar across organs: grade and hold, corticosteroids at immunosuppressive doses for grade 2 and above persistence, hormone replacement for endocrinopathies (which rarely recover), infliximab or mycophenolate for steroid refractory colitis or hepatitis, and permanent discontinuation for severe pneumonitis, myocarditis and neurologic events. Overlap syndromes (myocarditis with myositis and myasthenia) carry the highest mortality and lowest thresholds.",
+      "say": "Hold, steroid, replace hormones, escalate: one grammar for every inflamed organ.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "grade",
+            "label": "Grade toxicity and hold checkpoint drug"
+          },
+          {
+            "id": "steroid",
+            "label": "Corticosteroids at grade appropriate dose"
+          },
+          {
+            "id": "replace",
+            "label": "Endocrine failures replaced hormonally for life"
+          },
+          {
+            "id": "escalate",
+            "label": "Steroid refractory: infliximab or mycophenolate by organ"
+          }
+        ],
+        "edges": [
+          [
+            "grade",
+            "steroid"
+          ],
+          [
+            "steroid",
+            "replace"
+          ],
+          [
+            "replace",
+            "escalate"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**CAR T cells** engineer the patient's own T cells with a chimeric antigen receptor (CD19 principally) into living drugs that cure fractions of relapsed B cell leukaemias and lymphomas, billing cytokine release syndrome (fever, hypotension, hypoxia treated by tocilizumab and steroids) and neurotoxicity (ICANS), plus prolonged B cell aplasia and hypogammaglobulinaemia. Bridging therapy, vein to vein time and certified centres are its logistics pharmacology.",
+      "say": "CAR T is a living drug with a cytokine storm in its first week and cures in its tail.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Manufacturing journey",
+          "points": [
+            "Leukapheresis and viral engineering (weeks)",
+            "Bridging therapy holds disease meanwhile",
+            "Lymphodepleting chemotherapy precedes infusion",
+            "Certified centres and REMS style governance"
+          ]
+        },
+        "right": {
+          "title": "Toxicity pair",
+          "points": [
+            "CRS: tocilizumab IL 6 blockade first",
+            "ICANS neurotoxicity: steroids, seizure vigilance",
+            "B cell aplasia: immunoglobulin replacement",
+            "Late cytopenias and infection surveillance"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Tamoxifen**, the selective estrogen receptor modulator from the endocrine lessons, remains adjuvant breast cancer's elder statesman (five to ten years in premenopausal disease) with endometrial cancer and thrombosis ledgers, CYP2D6 endoxifen debates, and aromatase inhibitors as postmenopausal rivals, while fulvestrant degrades the receptor in metastatic lines. Adherence over years, again, is the efficacy variable trials cannot fully control.",
+      "say": "Tamoxifen's decade of tablets only works swallowed; its ledgers are uterus and vein.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Tamoxifen profile",
+          "points": [
+            "Premenopausal adjuvant anchor (5 to 10 years)",
+            "Bone protective in postmenopausal, uterus agonist",
+            "Endometrial cancer and VTE ledgers",
+            "Hot flushes and adherence erosion"
+          ]
+        },
+        "right": {
+          "title": "Successors and rivals",
+          "points": [
+            "Aromatase inhibitors postmenopausal standard",
+            "Fulvestrant receptor degrader injections",
+            "CDK4/6 inhibitors partner endocrine therapy",
+            "Ovarian suppression intensifies premenopausal control"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Abiraterone** starves prostate cancer of androgens at synthesis (CYP17 blockade in testes, adrenals and tumour), given with prednisone against the mineralocorticoid excess its blockade creates (hypertension, hypokalaemia, oedema), beside enzalutamide and apalutamide (receptor blockers billing fatigue, falls and seizures rarely) across castration resistant and sensitive stages. Androgen deprivation's metabolic and bone ledgers from the endocrine module ride underneath all of it.",
+      "say": "Abiraterone cuts androgen synthesis everywhere and pays prednisone to cover the mineralocorticoid bill.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Abiraterone mechanics",
+          "points": [
+            "CYP17 hydroxylase and lyase blockade",
+            "Prednisone companion mandatory",
+            "Potassium, blood pressure and liver monitored",
+            "Food effect: fasting administration"
+          ]
+        },
+        "right": {
+          "title": "Receptor blockers",
+          "points": [
+            "Enzalutamide, apalutamide, darolutamide gradations",
+            "Fatigue, falls and fracture vigilance",
+            "Seizure rare (enzalutamide highest)",
+            "CYP interactions extensive in elderly polypharmacy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**CDK4/6 inhibitors** (palbociclib, ribociclib, abemaciclib) freeze hormone receptor positive breast cancer cells at the G1 checkpoint beside endocrine therapy, billing neutropenia without much febrile danger (cell cycle arrest, not marrow ablation), QT (ribociclib), diarrhoea (abemaciclib) and thrombosis signals, and they moved into adjuvant stages where years of tolerability decide real world value.",
+      "say": "CDK4/6 drugs pause the cell cycle rather than poison it; their neutropenia rarely fevers.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Class effects",
+          "points": [
+            "Neutropenia by arrest, febrile episodes uncommon",
+            "Three weeks on one off (palbociclib, ribociclib)",
+            "Abemaciclib continuous with diarrhoea",
+            "Blood counts at cycle starts"
+          ]
+        },
+        "right": {
+          "title": "Agent signatures",
+          "points": [
+            "Ribociclib: QT and liver monitoring",
+            "Abemaciclib: diarrhoea and VTE signals",
+            "Palbociclib: marrow emphasis",
+            "Endocrine partner always underneath"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Eligibility fences** close the module: pre existing autoimmune disease (relative, organ and activity graded), solid organ transplant (rejection risk often prohibitive), chronic steroids above physiologic doses, and uncontrolled infections each demand joint decisions before checkpoint therapy, because unleashing immunity does not respect the tumour's borders. Baseline thyroid, liver, kidney and glucose tests are the laboratory fence posts.",
+      "say": "Autoimmunity and transplants fence checkpoint therapy; baseline labs are its fence posts.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "history",
+            "label": "Autoimmune, transplant and steroid history taken"
+          },
+          {
+            "id": "baseline",
+            "label": "Thyroid, liver, kidney, glucose baselined"
+          },
+          {
+            "id": "consent",
+            "label": "Immune toxicity and permanence consented"
+          },
+          {
+            "id": "monitor",
+            "label": "Organ labs each cycle, symptoms triaged early"
+          }
+        ],
+        "edges": [
+          [
+            "history",
+            "baseline"
+          ],
+          [
+            "baseline",
+            "consent"
+          ],
+          [
+            "consent",
+            "monitor"
+          ]
+        ]
+      }
+    }
+  ]
+}

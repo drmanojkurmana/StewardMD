@@ -1,0 +1,324 @@
+{
+  "v": 1,
+  "id": "cm-occ-diseases-benzene",
+  "subject": "community-medicine",
+  "module": "cm-occ-diseases",
+  "title": "Industrial Toxicants: Benzene, Aniline Dyes, Occupational Dermatitis, and Radiation Hazards",
+  "minutes": 8,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "title": "Benzene toxicity and bone marrow suppression",
+      "tx": "Benzene is a volatile monocyclic aromatic hydrocarbon solvent heavily utilized in petrochemical refining, rubber tyre manufacturing, shoe fabrication, and rotogravure printing. Inhaled benzene vapor is metabolised in the liver by cytochrome P450 2E1 into reactive quinones and hydroquinones that migrate to hematopoietic marrow, exerting **benzene myelotoxic leukemogenic mechanisms** that induce covalent DNA adducts, chromosomal aneuploidy, and progressive hematopoietic stem cell apoptosis leading to aplastic anemia and myelodysplastic syndrome.",
+      "say": "Benzene is an industrial solvent used in rubber, footwear, and paint printing. Its toxic metabolites damage bone marrow DNA, causing severe aplastic anaemia and leukemia.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "z1",
+            "label": "Inhalation of volatile benzene solvent vapors"
+          },
+          {
+            "id": "z2",
+            "label": "Hepatic CYP2E1 oxidation to hydroquinone and benzoquinone"
+          },
+          {
+            "id": "z3",
+            "label": "Bone marrow oxidative stress and chromosomal deletions"
+          },
+          {
+            "id": "z4",
+            "label": "Aplastic anaemia progressing to Acute Myeloid Leukemia"
+          }
+        ],
+        "edges": [
+          [
+            "z1",
+            "z2"
+          ],
+          [
+            "z2",
+            "z3"
+          ],
+          [
+            "z3",
+            "z4"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Biological monitoring of benzene exposure",
+      "tx": "Workplace surveillance of chemical workers exposed to petroleum distillates utilizes urinary metabolite biomarkers under **benzene biological exposure indices**. Because unmetabolised benzene is rapidly exhaled, occupational hygienists quantify end-of-shift urinary trans,trans-muconic acid and S-phenylmercapturic acid; exceeding five hundred micrograms per gram of creatinine for muconic acid signals excessive solvent vapor exposure, prompting engineering review of solvent enclosure hoods and mandatory substitution with less toxic aliphatic solvents like heptane.",
+      "say": "Worker exposure to benzene is tracked by testing urine for muconic acid. High levels indicate dangerous solvent inhalation, requiring sealed ventilation or safer chemical substitutes.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Surveillance marker",
+          "Biological specimen",
+          "Permissible BEI threshold"
+        ],
+        "rows": [
+          [
+            "trans,trans-Muconic acid",
+            "End-of-shift spot urine sample",
+            "500 micrograms/g creatinine"
+          ],
+          [
+            "S-Phenylmercapturic acid",
+            "End-of-shift spot urine sample",
+            "25 micrograms/g creatinine"
+          ],
+          [
+            "Benzene in air (8-hr TWA)",
+            "Industrial workplace atmosphere",
+            "0.5 to 1.0 parts per million (ppm)"
+          ],
+          [
+            "Complete blood count",
+            "Venous blood every 6 months",
+            "Baseline cytopenias and macrocytosis"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Aniline dyes and urinary bladder carcinogenesis",
+      "tx": "In the synthetic chemical, dyestuff, and pharmaceutical industries, workers encounter aromatic amine intermediates including benzidine, 2-naphthylamine, 4-aminobiphenyl, and auramine. These chemicals are absorbed through the respiratory tract and intact skin, acting as potent **aromatic amine bladder carcinogens**; hepatic N-acetylation and subsequent bladder glucuronidase hydrolysis release free reactive electrophiles into acidic urine, inducing transitional cell carcinoma of the bladder after an insidious latency of fifteen to thirty years.",
+      "say": "Aromatic amines like benzidine used in textile dyes are absorbed through skin and lungs. Their metabolites concentrate in urine, causing bladder cancer fifteen to thirty years later.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Causative aromatic amines",
+          "points": [
+            "2-Naphthylamine (potent carcinogen)",
+            "Benzidine and o-tolidine derivatives",
+            "4-Aminobiphenyl and 4-chloro-o-toluidine",
+            "Industrial textile and leather dyes"
+          ]
+        },
+        "right": {
+          "title": "Pathophysiological sequence",
+          "points": [
+            "Hepatic N-hydroxylation to reactive intermediates",
+            "Excretion as glucuronides into urinary bladder",
+            "Acidic urine cleavage releases reactive arylnitrenium",
+            "Transitional cell carcinoma development"
+          ]
+        }
+      }
+    },
+    {
+      "title": "Screening and prevention of occupational bladder cancer",
+      "tx": "Preventing industrial urothelial malignancies demands eliminating direct human handling of hazardous aromatic amines through closed automated processing. For currently and previously exposed chemical plant employees, secondary prevention relies on **occupational bladder cancer surveillance protocols**, requiring annual dipstick urinalysis for asymptomatic microscopic hematuria, periodic urine cytology to identify exfoliated malignant transitional urothelial cells, and immediate diagnostic flexible cystoscopy with biopsy whenever persistent microhematuria is detected.",
+      "say": "Dye workers need regular urine tests to detect early microscopic blood and cancer cells. Flexible cystoscopy allows doctors to find and remove bladder tumours before they spread.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "s1",
+            "label": "Routine 6-monthly dipstick urine screening"
+          },
+          {
+            "id": "s2",
+            "label": "Detection of microscopic painless hematuria"
+          },
+          {
+            "id": "s3",
+            "label": "Exfoliative urine cytology and NMP22 biomarker"
+          },
+          {
+            "id": "s4",
+            "label": "Diagnostic flexible cystoscopy and transurethral resection"
+          }
+        ],
+        "edges": [
+          [
+            "s1",
+            "s2"
+          ],
+          [
+            "s2",
+            "s3"
+          ],
+          [
+            "s3",
+            "s4"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Classification of occupational dermatoses",
+      "tx": "Cutaneous disorders constitute the single most frequent category of compensated industrial disease, divided into two distinct pathophysiological mechanisms under **occupational contact dermatitis classification**. Irritant contact dermatitis accounts for eighty percent of all workplace dermatoses, resulting from direct non-immunological chemical cytotoxicity of acids, alkalis, and cutting oils; allergic contact dermatitis accounts for the remaining twenty percent, representing a delayed type IV cell-mediated hypersensitivity reaction to specific chemical haptens.",
+      "say": "Occupational skin diseases are extremely common. Eighty percent are irritant dermatitis from harsh soaps and solvents, while twenty percent are allergic reactions to nickel or cement.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Irritant contact dermatitis (80%)",
+          "points": [
+            "Direct non-immunological toxicity",
+            "Occurs on first heavy chemical exposure",
+            "Confined strictly to contact zone",
+            "Caused by acids, alkalis, solvents, oils"
+          ]
+        },
+        "right": {
+          "title": "Allergic contact dermatitis (20%)",
+          "points": [
+            "Type IV cell-mediated hypersensitivity",
+            "Requires prior immunological sensitisation",
+            "Spreads beyond original contact zone",
+            "Caused by nickel, chromium, epoxy, rubber"
+          ]
+        }
+      }
+    },
+    {
+      "title": "Allergic contact dermatitis and patch testing",
+      "tx": "Occupational allergic contact eczema is triggered by low-molecular-weight chemical haptens that penetrate the stratum corneum and conjugate with epidermal proteins. As illustrated in **allergic contact dermatitis sensitisation pathways**, common workplace offenders comprise hexavalent potassium dichromate in construction cement and leather tanning, nickel sulfate in electroplating, thiuram accelerators in rubber gloves, and unpolymerised epoxy resins; definitive clinical confirmation requires diagnostic cutaneous patch testing evaluated at forty-eight and ninety-six hours.",
+      "say": "Allergic dermatitis is triggered by chemicals like chromium in cement and rubber chemicals in gloves. Patch testing on the patient's back confirms which specific chemical causes the allergy.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Workplace allergen",
+          "Industrial exposure setting",
+          "Typical clinical distribution"
+        ],
+        "rows": [
+          [
+            "Potassium dichromate",
+            "Masonry construction cement, leather tanning",
+            "Dorsal hands, forearms, cement-cracked feet"
+          ],
+          [
+            "Thiuram / Carbamates",
+            "Rubber surgical and industrial gloves",
+            "Bilateral hands conforming to glove borders"
+          ],
+          [
+            "Nickel sulfate",
+            "Electroplating, costume jewelry assembly",
+            "Earlobes, wrists, fingertips from metal tools"
+          ],
+          [
+            "Epoxy resin oligomers",
+            "Electrical manufacturing, adhesive bonding",
+            "Facial airborne eczema and dorsal hand vesicles"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Prevention of occupational skin disease",
+      "tx": "Preventing debilitating workplace eczematous dermatoses requires a multi-tiered engineering and hygiene approach under **occupational dermatological barrier strategies**. Facilities must install splash guards on chemical machinery, substitute irritant petroleum solvents with water-based detergents, provide pre-work water-repellent or oil-resistant barrier creams, supply task-appropriate nitrile or neoprene gloves, enforce prompt washing with neutral pH syndet cleansers, and rotate sensitised employees away from allergen-laden assembly lines.",
+      "say": "Protecting skin requires machine splash guards, barrier creams, and suitable nitrile gloves. Sensitised workers must be transferred to clean workstations to allow skin healing.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "b1",
+            "label": "Enclose chemical baths and install splash shields"
+          },
+          {
+            "id": "b2",
+            "label": "Apply pre-work protective barrier creams"
+          },
+          {
+            "id": "b3",
+            "label": "Wear task-specific nitrile or neoprene gloves"
+          },
+          {
+            "id": "b4",
+            "label": "Wash hands with gentle soap and apply moisturizers"
+          }
+        ],
+        "edges": [
+          [
+            "b1",
+            "b2"
+          ],
+          [
+            "b2",
+            "b3"
+          ],
+          [
+            "b3",
+            "b4"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Occupational radiation hazards and cataracts",
+      "tx": "Personnel operating industrial radiography units, cardiac catheterisation fluoroscopy suites, nuclear reactors, and medical radiotherapy accelerators face serious somatic risks classified as **occupational ionising radiation hazards**. Chronic low-dose ocular exposure to scattered X-rays induces radiation cataracts in the posterior subcapsular lens with a threshold of zero point five Gray, while cutaneous overexposure causes chronic radiodermatitis, indolent radiation ulcers, and squamous cell carcinoma of the fingers.",
+      "say": "Doctors and technicians using fluoroscopy face radiation cataracts and skin burns from scattered X-rays. Wearing lead glasses and lead aprons shields vulnerable eyes and organs.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Radiation effect",
+          "Tissue / Organ affected",
+          "Dose threshold and characteristic"
+        ],
+        "rows": [
+          [
+            "Posterior subcapsular cataract",
+            "Ocular lens fibers",
+            "Threshold ~0.5 Gy; cumulative opacification"
+          ],
+          [
+            "Chronic radiodermatitis",
+            "Cutaneous fingers and hands",
+            "Threshold ~2 to 5 Gy; atrophy and telangiectasia"
+          ],
+          [
+            "Radiation induced leukemia",
+            "Bone marrow stem cells",
+            "Stochastic (no threshold); latency 5 to 7 years"
+          ],
+          [
+            "Thyroid carcinoma",
+            "Follicular thyroid epithelium",
+            "Stochastic risk; high susceptibility in youth"
+          ]
+        ]
+      }
+    },
+    {
+      "title": "Radiation safety principles: Time, Distance, Shielding",
+      "tx": "Workplace protection against external ionising radiation rests upon three foundational cardinal tenets defined as the **radiation protection operational triad**. Health physicists enforce minimising exposure time near active sources, maximising physical distance based on the inverse-square law where doubling distance reduces radiation intensity to one-fourth, and installing structural lead, concrete, or lead-acrylic shielding, monitored continuously through personal thermoluminescent dosimeter badges worn beneath lead aprons.",
+      "say": "Radiation safety relies on three rules: minimise exposure time, maximise distance from the source, and use lead shielding. Workers wear dosimeter badges to track monthly exposure.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Safety pillar",
+          "Physical principle",
+          "Practical workplace measure"
+        ],
+        "rows": [
+          [
+            "Time minimization",
+            "Dose = Dose rate x Time",
+            "Rapid efficient procedures; beam-on limits"
+          ],
+          [
+            "Distance maximization",
+            "Inverse square law (1 / r^2)",
+            "Step back 2 metres; use long remote handling tongs"
+          ],
+          [
+            "Structural shielding",
+            "Exponential photon attenuation",
+            "0.5 mm lead aprons, thyroid shields, lead glass"
+          ],
+          [
+            "Personnel monitoring",
+            "Thermoluminescent dosimetry (TLD)",
+            "Wear TLD badge at chest level under lead apron"
+          ]
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "v": 1,
+  "module": "phm-cns-stimulants",
+  "subject": "pharmacology",
+  "title": "CNS Stimulants, ADHD and Dependence: Amphetamine, Methylphenidate, Modafinil, Cocaine and Nicotine Therapies",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Amphetamine** reverses monoamine transporters, flooding synapses with dopamine, noradrenaline (and serotonin at high dose): wakefulness, euphoria, appetite suppression, sympathomimetic cardiovascular stimulation, and with excess, hyperthermia, psychosis indistinguishable from paranoid schizophrenia, and seizures. Mixed amphetamine salts and lisdexamfetamine (a prodrug smoothing onset and deterring injection misuse) treat ADHD and narcolepsy; illicit methamphetamine's neurotoxicity and dependence write the public health counterpoint.",
+      "say": "Amphetamine empties the monoamine terminals; therapy and toxicity are the same flood at different depths.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "amph", "label": "Amphetamine enters monoamine terminals" },
+          { "id": "reverse", "label": "Transporters reverse, vesicles leak monoamines" },
+          { "id": "flood", "label": "Synaptic dopamine and noradrenaline surge" },
+          { "id": "excess", "label": "Excess: hyperthermia, psychosis, seizures, arrhythmia" }
+        ],
+        "edges": [["amph", "reverse"], ["reverse", "flood"], ["flood", "excess"]]
+      }
+    },
+    {
+      "tx": "**Methylphenidate** blocks dopamine and noradrenaline transporters without reversing them, a gentler mechanistic cousin that is first line for ADHD in most guidelines alongside amphetamines, in immediate and osmotic extended release forms engineered for school day coverage. Appetite suppression and growth velocity, insomnia, tics unmasked (not caused, modern data argue), and cardiovascular screening by history form its review list; diversion to peers is counselled as frankly as any adverse effect.",
+      "say": "Methylphenidate blocks the pump instead of reversing it; growth, sleep and diversion are its review list.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Methylphenidate profile",
+          "points": [
+            "DAT and NET blockade, no transporter reversal",
+            "Immediate and extended release (OROS) formulations",
+            "First line ADHD pharmacotherapy with amphetamines",
+            "Response assessed by teachers and parents, not only clinic"
+          ]
+        },
+        "right": {
+          "title": "Review list",
+          "points": [
+            "Appetite, weight and growth velocity charted",
+            "Sleep onset delayed: dose timing adjusted",
+            "Pulse and pressure at titration and annually",
+            "Diversion and misuse counselled in adolescents"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**ADHD** pharmacotherapy stratifies by age and comorbidity: stimulants carry the largest effect sizes (around 1.0) in school age children, atomoxetine and alpha 2 agonists (guanfacine, clonidine) serve where tics, anxiety, misuse risk or stimulant intolerance argue, and preschoolers start with behavioural therapy. Medication holidays, growth charts and academic versus weekend coverage are negotiated per child, because the disorder is developmental and the prescription is only one scaffold among educational and family ones.",
+      "say": "Stimulants lead for effect size; atomoxetine and guanfacine cover the comorbidity corners, behaviour first in the youngest.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "diagnose", "label": "ADHD confirmed across settings with impairment" },
+          { "id": "behave", "label": "Behavioural and educational scaffolds in place" },
+          { "id": "stim", "label": "Stimulant titrated to teacher and parent report" },
+          { "id": "review", "label": "Growth, sleep, pulse and diversion reviewed serially" }
+        ],
+        "edges": [["diagnose", "behave"], ["behave", "stim"], ["stim", "review"]]
+      }
+    },
+    {
+      "tx": "**Modafinil** promotes wakefulness by a mechanism still argued (weak dopamine transporter inhibition with hypothalamic downstream effects) in narcolepsy, shift work disorder and obstructive apnoea residual sleepiness, with less euphoria and abuse scheduling than amphetamines and rare severe skin reactions (Stevens Johnson) in its warnings. It induces CYP3A4 enough to compromise hormonal contraception, a counselling point with real pregnancies behind it. Armodafinil is its longer lived enantiomer.",
+      "say": "Modafinil wakes without much euphoria, induces contraceptive failure quietly, and rarely rashes dangerously.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Modafinil territory",
+          "points": [
+            "Narcolepsy and shift work sleep disorder",
+            "Residual apnoea sleepiness adjunct",
+            "Lower abuse scheduling than amphetamines",
+            "Headache and nausea commonest"
+          ]
+        },
+        "right": {
+          "title": "Modafinil cautions",
+          "points": [
+            "CYP3A4 induction: contraceptive failure risk",
+            "Rare Stevens Johnson syndrome: stop for rash",
+            "Psychiatric symptoms in predisposed patients",
+            "Not a substitute for treating apnoea itself"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Atomoxetine**, a selective noradrenaline reuptake inhibitor, treats ADHD without stimulant scheduling or tic anxiety, needing two to six weeks for effect, carrying hepatic warnings, a small suicidality signal in youth labelling, and noradrenergic tolls (appetite, pulse, pressure, urinary hesitancy). It suits families refusing stimulants, comorbid tic or anxiety presentations, and households where diversion is a live risk, trading onset speed for calm logistics.",
+      "say": "Atomoxetine is the slow, unscheduled ADHD option for tic, anxiety and diversion haunted households.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Atomoxetine advantages",
+          "points": [
+            "No controlled scheduling or misuse market",
+            "Tic and anxiety comorbidity friendly",
+            "Once daily, evening or morning flexibility",
+            "No growth effect of stimulant magnitude debated less"
+          ]
+        },
+        "right": {
+          "title": "Atomoxetine burdens",
+          "points": [
+            "Two to six weeks to judge effect",
+            "Nausea, appetite loss, somnolence or insomnia",
+            "Rare hepatic injury: jaundice warnings",
+            "Pulse and pressure monitored as with stimulants"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Caffeine**, adenosine receptor antagonism in a beverage, is the world's stimulant and a legitimate drug in neonatal apnoea of prematurity (caffeine citrate), analgesic adjuvancy and post dural puncture headache tradition. **Doxapram**, a carotid body and medullary stimulant, survives as a respiratory stimulant of historical and niche interest. Both illustrate that stimulant is a dose and context word: caffeine's withdrawal headache closes the dependence loop that the whole lesson keeps meeting.",
+      "say": "Caffeine is the licensed stimulant everyone self prescribes; doxapram is its museum grade respiratory cousin.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "caff", "label": "Caffeine blocks adenosine A1 and A2A receptors" },
+          { "id": "alert", "label": "Alertness rises, fatigue signalling muted" },
+          { "id": "neo", "label": "Neonatal apnoea: caffeine citrate stimulates drive" },
+          { "id": "withdraw", "label": "Withdrawal headache proves dependence physiology" }
+        ],
+        "edges": [["caff", "alert"], ["alert", "neo"], ["caff", "withdraw"]]
+      }
+    },
+    {
+      "tx": "The illicit stimulant and hallucinogen shelf maps by syndrome for examinations: **cocaine** (transporter blockade, vasospasm, hyperthermia; benzodiazepines cool its agitation, beta blockers avoided unopposed), cannabis (CB1 agonism, adolescent psychosis risk), LSD (5 HT2A agonism, hallucinogen persisting perception rarely), phencyclidine (NMDA antagonism, violent agitation, nystagmus), and MDMA (serotonin flood: hyperthermia, hyponatraemia, serotonin syndrome). Management across the shelf is cooling, benzodiazepines and time, tailored by toxidrome.",
+      "say": "Cool, sedate with benzodiazepines, and read the toxidrome; beta blockers stay holstered in cocaine toxicity.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Stimulant toxidromes",
+          "points": [
+            "Cocaine: vasospasm infarctions, hyperthermia, seizures",
+            "MDMA: serotonin excess, hyponatraemia, hyperthermia",
+            "Amphetamines: psychosis, hyperthermia, rhabdomyolysis",
+            "Shared care: benzodiazepines, cooling, fluids"
+          ]
+        },
+        "right": {
+          "title": "Dissociative and hallucinogen notes",
+          "points": [
+            "Phencyclidine: NMDA blockade, agitation, nystagmus",
+            "LSD: 5 HT2A hallucinosis, supportive calm environment",
+            "Cannabis: CB1 effects, adolescent psychosis association",
+            "Withdrawal syndromes milder than depressant classes"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Nicotine dependence pharmacotherapy closes the dependence arc: **nicotine replacement** in patch plus short acting combinations doubles quit rates, **varenicline** (alpha 4 beta 2 partial agonist) roughly doubles to triples them as the most effective single agent, and bupropion assists where depression argues. **Drug dependence** treatment principles generalise from here and the opioid lessons: substitution or partial agonism, contingency management, relapse as a treatment signal rather than moral failure, and withdrawal syndromes graded by class danger (alcohol and benzodiazepine withdrawals kill; stimulant and opioid withdrawals torment).",
+      "say": "Varenicline leads quitting, combinations follow, and withdrawal danger, not discomfort, ranks depressants above stimulants.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Smoking cessation league",
+          "points": [
+            "Varenicline: most effective monotherapy",
+            "Combination NRT (patch plus gum or lozenge) next",
+            "Bupropion where mood argues",
+            "Behavioural support multiplies every agent"
+          ]
+        },
+        "right": {
+          "title": "Withdrawal danger ranking",
+          "points": [
+            "Alcohol and benzodiazepines: seizures, delirium, death",
+            "Opioids: miserable, dangerous by dehydration and relapse",
+            "Stimulants: crash, depression, suicidality watch",
+            "Nicotine and caffeine: uncomfortable, safe"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Narcolepsy** prescribing inverts the stimulant lesson usefully: modafinil or solriamfetol and pitolisant for daytime sleepiness, sodium oxybate at night consolidating sleep and treating cataplexy (a controlled drug with respiratory cautions), stimulants as older alternatives, and anticataplectic antidepressants (venlafaxine) off label. The disorder's hypocretin deficiency is the same orexin system suvorexant blocks for insomnia in the sedative lessons, a symmetry examinations reward when both modules are read as one pharmacology.",
+      "say": "Narcolepsy is orexin missing; insomnia drugs block what narcolepsy lacks, and the examiners know you know.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "hypo", "label": "Hypocretin deficiency destabilises sleep wake borders" },
+          { "id": "day", "label": "Daytime: modafinil, solriamfetol, pitolisant or stimulants" },
+          { "id": "night", "label": "Night: sodium oxybate consolidates sleep" },
+          { "id": "cata", "label": "Cataplexy covered by oxybate or antidepressant effect" }
+        ],
+        "edges": [["hypo", "day"], ["hypo", "night"], ["night", "cata"]]
+      }
+    }
+  ]
+}

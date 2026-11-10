@@ -1,0 +1,264 @@
+{
+    "v": 1,
+    "id": "rad-xray-kvp",
+    "subject": "radiology",
+    "module": "rad-xray",
+    "title": "Radiographic Technique: Kilovoltage, Tube Current, and Filtration",
+    "minutes": 5,
+    "gen": "AI",
+    "steps": [
+        {
+            "title": "Tube Potential and Penetration",
+            "tx": "**Peak kilovoltage penetration** governs the maximum kinetic energy imparted to electrons traversing the vacuum gap. Because beam quality reflects the penetrating capability of X-ray photons, raising the tube potential enables the beam to pass through dense osseous and muscular structures. Higher kilovoltages favour Compton scatter over photoelectric absorption, diminishing subject contrast while broadening the exposure latitude on the final radiograph.",
+            "say": "Peak kilovoltage penetration governs the maximum kinetic energy imparted to electrons traversing the vacuum gap. Because beam quality reflects the penetrating capability of X-ray photons, raising the tube potential enables the beam to pass through dense osseous and muscular structures. Higher kilovoltages favour Compton scatter over photoelectric absorption, diminishing subject contrast while broadening the exposure latitude on the final radiograph.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Low Kilovoltage Settings (50-65 kVp)",
+                    "points": [
+                        "Dominated by photoelectric absorption",
+                        "High contrast with stark black and white boundaries",
+                        "Restricted to thin extremities and mammography"
+                    ]
+                },
+                "right": {
+                    "title": "High Kilovoltage Settings (100-140 kVp)",
+                    "points": [
+                        "Dominated by Compton scatter interactions",
+                        "Long greyscale latitude with subtle gradations",
+                        "Standard for chest radiography to visualize lung parenchyma"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Tube Current and Exposure Quantity",
+            "tx": "**Milliampere-second exposure control** determines the total number of X-ray photons produced during an examination without altering photon energy. Tube current, measured in milliamperes, reflects the rate of electron flow across the tube. Multiplying milliamperes by exposure time in seconds gives milliampere-seconds. Doubling milliampere-seconds doubles the number of photons striking the detector, directly controlling optical density.",
+            "say": "Milliampere-second exposure control determines the total number of X-ray photons produced during an examination without altering photon energy. Tube current, measured in milliamperes, reflects the rate of electron flow across the tube. Multiplying milliamperes by exposure time in seconds gives milliampere-seconds. Doubling milliampere-seconds doubles the number of photons striking the detector, directly controlling optical density.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Technique Parameter",
+                    "Primary Physical Effect",
+                    "Image Impact"
+                ],
+                "rows": [
+                    [
+                        "Tube Current (mA)",
+                        "Electron flow rate across vacuum",
+                        "Proportional increase in photon count"
+                    ],
+                    [
+                        "Exposure Time (seconds)",
+                        "Duration of electron bombardment",
+                        "Controls motion unsharpness risk"
+                    ],
+                    [
+                        "Product (mAs)",
+                        "Total photon quantity produced",
+                        "Governs baseline optical density and noise"
+                    ],
+                    [
+                        "Tube Potential (kVp)",
+                        "Maximum electron kinetic energy",
+                        "Governs beam penetrability and subject contrast"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "The Fifteen Percent Rule",
+            "tx": "**Fifteen percent kilovoltage rule** guides exposure adjustments in clinical practice. Increasing the peak tube potential by 15 percent doubles the effective exposure reaching the radiographic image receptor, yielding an effect identical to doubling the milliampere-seconds. Radiographers exploit this relationship by raising kilovoltage by 15 percent while halving milliampere-seconds, substantially reducing patient entrance skin dose.",
+            "say": "Fifteen percent kilovoltage rule guides exposure adjustments in clinical practice. Increasing the peak tube potential by 15 percent doubles the effective exposure reaching the radiographic image receptor, yielding an effect identical to doubling the milliampere-seconds. Radiographers exploit this relationship by raising kilovoltage by 15 percent while halving milliampere-seconds, substantially reducing patient entrance skin dose.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Increase tube potential by 15 percent"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Detector exposure doubles automatically"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Halve mAs to maintain receptor exposure"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Patient entrance skin dose drops significantly"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Inherent Tube Filtration",
+            "tx": "**Inherent tube filtration** refers to the permanent structural materials through which the emerging X-ray beam must pass before exiting the housing. These components include the glass or metal vacuum tube wall, the surrounding insulating dielectric oil bath, and the radiolucent exit port window. Together, these elements provide roughly 0.5 to 1.0 millimetres of aluminium equivalent filtration.",
+            "say": "Inherent tube filtration refers to the permanent structural materials through which the emerging X-ray beam must pass before exiting the housing. These components include the glass or metal vacuum tube wall, the surrounding insulating dielectric oil bath, and the radiolucent exit port window. Together, these elements provide roughly 0.5 to 1.0 millimetres of aluminium equivalent filtration.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Inherent Barrier",
+                    "Material Composition",
+                    "Aluminium Equivalence"
+                ],
+                "rows": [
+                    [
+                        "Tube Envelope Window",
+                        "Borosilicate glass or thin beryllium",
+                        "0.3 to 0.5 mm aluminium equivalent"
+                    ],
+                    [
+                        "Insulating Dielectric Oil",
+                        "Refined mineral transformer oil",
+                        "0.2 to 0.4 mm aluminium equivalent"
+                    ],
+                    [
+                        "Housing Exit Port",
+                        "Polycarbonate or Bakelite port seal",
+                        "0.1 to 0.2 mm aluminium equivalent"
+                    ],
+                    [
+                        "Aging Factor",
+                        "Tungsten vapour deposited on glass",
+                        "Gradually increases inherent filtration with age"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Added Aluminium Filtration",
+            "tx": "**Added aluminium filtration** consists of dedicated metal sheets inserted between the tube housing and the collimator aperture. Low-energy photons below 20 kiloelectron volts have insufficient energy to penetrate human tissues, contributing zero diagnostic information while depositing unwanted radiation into superficial skin layers. Added aluminium preferentially attenuates these non-penetrating photons, shifting the mean energy upward in a process termed beam hardening.",
+            "say": "Added aluminium filtration consists of dedicated metal sheets inserted between the tube housing and the collimator aperture. Low-energy photons below 20 kiloelectron volts have insufficient energy to penetrate human tissues, contributing zero diagnostic information while depositing unwanted radiation into superficial skin layers. Added aluminium preferentially attenuates these non-penetrating photons, shifting the mean energy upward in a process termed beam hardening.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "Unfiltered Polyenergetic Beam",
+                    "points": [
+                        "Contains high flux of soft 10 to 25 keV photons",
+                        "Entirely absorbed within patient epidermis and dermis",
+                        "Elevates entrance skin dose without reaching detector"
+                    ]
+                },
+                "right": {
+                    "title": "Filtered Hardened Beam",
+                    "points": [
+                        "Soft low-energy photons attenuated by aluminium",
+                        "Mean photon energy shifts toward higher penetrating values",
+                        "Decreases patient dose while preserving contrast"
+                    ]
+                }
+            }
+        },
+        {
+            "title": "Total Filtration Regulatory Standards",
+            "tx": "**Total filtration requirements** are mandated by international radiation protection bodies to guarantee clinical safety. Total filtration represents the numerical sum of inherent and added filtration. Diagnostic X-ray equipment operating above 70 peak kilovolts must maintain a minimum total filtration of 2.5 millimetres of aluminium equivalent, whereas machines operating between 50 and 70 kilovolts require at least 1.5 millimetres.",
+            "say": "Total filtration requirements are mandated by international radiation protection bodies to guarantee clinical safety. Total filtration represents the numerical sum of inherent and added filtration. Diagnostic X-ray equipment operating above 70 peak kilovolts must maintain a minimum total filtration of 2.5 millimetres of aluminium equivalent, whereas machines operating between 50 and 70 kilovolts require at least 1.5 millimetres.",
+            "vis": {
+                "kind": "table",
+                "cols": [
+                    "Operating Voltage Range",
+                    "Minimum Total Filtration",
+                    "Clinical Equipment Example"
+                ],
+                "rows": [
+                    [
+                        "Below 50 kVp",
+                        "0.5 mm aluminium equivalent",
+                        "Dedicated mammography units (molybdenum/rhodium filters)"
+                    ],
+                    [
+                        "50 to 70 kVp",
+                        "1.5 mm aluminium equivalent",
+                        "Dental intraoral radiography systems"
+                    ],
+                    [
+                        "Above 70 kVp",
+                        "2.5 mm aluminium equivalent",
+                        "Standard diagnostic radiography, fluoroscopy, and CT"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Half-Value Layer Measurement",
+            "tx": "**Half-value layer measurement** provides the most accurate experimental index of X-ray beam quality and penetrability. It is defined as the thickness of a specified absorbing material, typically aluminium, required to reduce beam exposure rate by exactly 50 percent. When an X-ray unit fails its statutory half-value layer test, insufficient filtration or an inaccurate kilovoltage generator calibration is suspected.",
+            "say": "Half-value layer measurement provides the most accurate experimental index of X-ray beam quality and penetrability. It is defined as the thickness of a specified absorbing material, typically aluminium, required to reduce beam exposure rate by exactly 50 percent. When an X-ray unit fails its statutory half-value layer test, insufficient filtration or an inaccurate kilovoltage generator calibration is suspected.",
+            "vis": {
+                "kind": "flow",
+                "nodes": [
+                    {
+                        "id": "n1",
+                        "label": "Measure baseline unattenuated beam intensity"
+                    },
+                    {
+                        "id": "n2",
+                        "label": "Add progressive aluminium sheets in beam path"
+                    },
+                    {
+                        "id": "n3",
+                        "label": "Identify thickness attenuating intensity by half"
+                    },
+                    {
+                        "id": "n4",
+                        "label": "Verify half-value layer meets regulatory code"
+                    }
+                ],
+                "edges": [
+                    [
+                        "n1",
+                        "n2"
+                    ],
+                    [
+                        "n2",
+                        "n3"
+                    ],
+                    [
+                        "n3",
+                        "n4"
+                    ]
+                ]
+            }
+        },
+        {
+            "title": "Optimizing Patient Entrance Dose",
+            "tx": "**Entrance skin dose optimization** relies on balancing kilovoltage and tube current during radiographic setup. Choosing higher tube potentials paired with reduced milliampere-seconds lowers the radiation absorbed by the patient's skin and superficial tissues. Because higher-energy photons penetrate through the patient with greater probability, fewer total photons need to be fired from the tube to produce an identical detector signal.",
+            "say": "Entrance skin dose optimization relies on balancing kilovoltage and tube current during radiographic setup. Choosing higher tube potentials paired with reduced milliampere-seconds lowers the radiation absorbed by the patient's skin and superficial tissues. Because higher-energy photons penetrate through the patient with greater probability, fewer total photons need to be fired from the tube to produce an identical detector signal.",
+            "vis": {
+                "kind": "compare",
+                "left": {
+                    "title": "High mAs, Low kVp Technique",
+                    "points": [
+                        "Generates heavy superficial skin absorption",
+                        "High contrast but narrow exposure latitude",
+                        "Substantially elevates patient entrance skin dose"
+                    ]
+                },
+                "right": {
+                    "title": "High kVp, Low mAs Technique",
+                    "points": [
+                        "Hardened photons penetrate readily to receptor",
+                        "Allows significant reduction in overall tube output",
+                        "Minimizes patient entrance radiation exposure"
+                    ]
+                }
+            }
+        }
+    ],
+    "quiz": []
+}

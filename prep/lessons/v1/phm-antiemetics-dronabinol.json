@@ -1,0 +1,252 @@
+{
+  "v": 1,
+  "module": "phm-antiemetics",
+  "subject": "pharmacology",
+  "title": "Cannabinoids, Vestibular Antiemetics, and Novel Prokinetic Pharmacology",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The synthetic formulation of delta-9-tetrahydrocannabinol that serves as an orally active cannabinoid antiemetic and appetite stimulant is **dronabinol**. By activating presynaptic cannabinoid CB1 receptors located on neurons in and around the vomiting center and solitary tract nucleus, dronabinol inhibits adenylyl cyclase, suppresses voltage-gated calcium channels, and blocks the exocytosis of excitatory neurotransmitters. It is approved as second-line therapy for chemotherapy-induced nausea and vomiting refractory to conventional agents and for anorexia-associated weight loss in AIDS, although central side effects like dysphoria, depersonalization, and tachycardia occur frequently.",
+      "say": "Dronabinol stimulates presynaptic CB1 receptors in emetic brainstem nuclei to suppress refractory chemotherapy nausea.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "dronab",
+            "label": "Oral dronabinol ingestion (rapidly absorbed, lipophilic)"
+          },
+          {
+            "id": "cb1",
+            "label": "Binding to presynaptic CB1 receptors in dorsal vagal complex"
+          },
+          {
+            "id": "inhibit",
+            "label": "Inhibition of adenylyl cyclase and suppression of presynaptic calcium entry"
+          },
+          {
+            "id": "emesis",
+            "label": "Suppression of excitatory neurotransmitter release and relief of refractory emesis"
+          }
+        ],
+        "edges": [
+          [
+            "dronab",
+            "cb1"
+          ],
+          [
+            "cb1",
+            "inhibit"
+          ],
+          [
+            "inhibit",
+            "emesis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The severe emetic reflex provoked by antineoplastic cytotoxic medications, characterized as **chemotherapy-induced vomiting**, occurs through biphasic neurochemical mechanisms. The acute phase within twenty-four hours is driven primarily by mucosal enterochromaffin cell damage releasing serotonin, which excites vagal afferent 5-HT3 receptors. In contrast, the delayed phase across days two through five, characteristically induced by cisplatin, is mediated predominantly by central substance P binding to neurokinin-1 receptors in the brainstem. Optimal prophylaxis pairs 5-HT3 antagonists, neurokinin-1 blockers, and dexamethasone.",
+      "say": "Chemotherapy emesis is biphasic: an acute serotonin-mediated phase within twenty-four hours, and a delayed substance P phase.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute Phase CINV (0 to 24 Hours)",
+          "points": [
+            "Triggered by mucosal enterochromaffin serotonin release",
+            "Stimulates abdominal vagal afferent 5-HT3 receptors",
+            "Peaks rapidly between 4 and 10 hours post-chemotherapy",
+            "Targeted primarily by 5-HT3 antagonists and dexamethasone"
+          ]
+        },
+        "right": {
+          "title": "Delayed Phase CINV (Days 2 to 5)",
+          "points": [
+            "Mediated by central brainstem substance P release",
+            "Stimulates neurokinin-1 (NK-1) receptors in solitary nucleus",
+            "Peaks between 48 and 72 hours following cisplatin administration",
+            "Targeted specifically by NK-1 antagonists (aprepitant, netupitant)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The specialized sensory organ located bilaterally on the floor of the fourth ventricle in the area postrema that monitors bloodborne emetogens is the **chemoreceptor trigger zone** (CTZ). Because the area postrema lacks a functional blood-brain barrier, endothelial fenestrations allow blood-borne and cerebrospinal emetic toxins, drugs like digoxin and opioids, and metabolic waste products direct access to sensory neurons. The CTZ is richly endowed with dopamine D2, serotonin 5-HT3, neurokinin-1, and opioid receptors, projecting excitatory impulses to the adjacent medullary vomiting coordination center.",
+      "say": "The chemoreceptor trigger zone in the area postrema lacks a blood-brain barrier, detecting circulating emetogens.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/antiemetics-prokinetics-fig1.webp",
+        "alt": "Chemoreceptor trigger zone and medullary vomiting coordination center schematic",
+        "caption": "Receptor architecture of the chemoreceptor trigger zone in the area postrema showing D2, 5-HT3, and NK-1 neurochemical targets."
+      }
+    },
+    {
+      "tx": "The acute autonomic disorder of nausea, cold sweating, pallor, and vomiting triggered by repetitive, unfamiliar vestibular sensory stimulation is **motion sickness**. Initiated by sensory conflict where visual inputs and vestibular labyrinthine signals mismatch, vestibular impulses travel via cranial nerve VIII to the vestibular nuclei and cerebellum, and onward via cholinergic and histaminergic projections to the vomiting center. Because dopaminergic and serotonergic blockers are ineffective in motion sickness, prophylactic pharmacotherapy relies strictly on antimuscarinic drugs like hyoscine and sedating first-generation H1 antihistamines.",
+      "say": "Motion sickness arises from visual-vestibular conflict and responds selectively to antimuscarinic and antihistaminic drugs.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "vestib",
+            "label": "Labyrinthine vestibular end-organ sensory conflict (cranial nerve VIII)"
+          },
+          {
+            "id": "nuclei",
+            "label": "Vestibular nuclei and flocculonodular lobe of cerebellum"
+          },
+          {
+            "id": "trans",
+            "label": "Cholinergic muscarinic and histaminergic H1 pathway transmission"
+          },
+          {
+            "id": "center",
+            "label": "Activation of medullary vomiting center: nausea, diaphoresis, emesis"
+          }
+        ],
+        "edges": [
+          [
+            "vestib",
+            "nuclei"
+          ],
+          [
+            "nuclei",
+            "trans"
+          ],
+          [
+            "trans",
+            "center"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The tertiary belladonna alkaloid that functions as the single most effective pharmacological agent for the prevention of motion sickness is **hyoscine** (scopolamine). Ingested orally or applied as a transdermal reservoir patch behind the postauricular mastoid process four hours before travel, hyoscine competitively blocks muscarinic M1 receptors in the vestibular nuclei and solitary tract nucleus. Transdermal application delivers a continuous release of one milligram over three days, providing sustained prophylaxis with minimized side effects, although dry mouth, pupillary cycloplegia, drowsiness, and urinary hesitancy can occur.",
+      "say": "Transdermal hyoscine patches block vestibular M1 receptors, providing continuous three-day motion sickness prophylaxis.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Transdermal Hyoscine Patch (Scopolamine)",
+          "points": [
+            "Applied behind postauricular ear 4 hours before travel",
+            "Provides constant delivery of 1.0 mg over 72 hours",
+            "Avoids rapid peak plasma spikes, minimizing sedation",
+            "Gold standard for prolonged travel (cruises, extended voyages)"
+          ]
+        },
+        "right": {
+          "title": "Oral Antihistamines (Dimenhydrinate, Promethazine)",
+          "points": [
+            "Ingested 30 to 60 minutes prior to travel departure",
+            "Duration of action 4 to 8 hours (requires repeated dosing)",
+            "Marked sedation, drowsiness, and psychomotor impairment",
+            "Preferred for short automobile or commuter transit trips"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "A modern prokinetic benzamide derivative that accelerates gastrointestinal motility without cardiac arrhythmias or central side effects is **itopride**. Structurally designed to avoid cytochrome P450 metabolism, itopride exerts dual action: it competitively blocks peripheral dopamine D2 receptors and inhibits acetylcholinesterase, thereby increasing acetylcholine concentrations within the myenteric plexus. It is primarily metabolized by flavin-containing monooxygenase, completely avoiding CYP3A4 interactions and QT-prolonging cardiotoxicity seen with cisapride, making it highly effective in functional dyspepsia and diabetic gastroparesis.",
+      "say": "Itopride combines D2 blockade with acetylcholinesterase inhibition, metabolized by FMO without cardiac QT risks.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Prokinetic agent",
+          "Primary molecular mechanism",
+          "Metabolic elimination pathway",
+          "Cardiac arrhythmia risk (hERG / QT)"
+        ],
+        "rows": [
+          [
+            "Itopride",
+            "D2 receptor antagonism + AChE inhibition",
+            "Flavin monooxygenase (FMO3)",
+            "Zero risk (no hERG potassium channel block)"
+          ],
+          [
+            "Mosapride",
+            "Selective 5-HT4 receptor agonism",
+            "Hepatic CYP3A4 oxidation",
+            "Negligible risk at therapeutic dosing"
+          ],
+          [
+            "Metoclopramide",
+            "D2 block + 5-HT4 agonism",
+            "Hepatic CYP2D6 metabolism",
+            "Low cardiac risk; high extrapyramidal risk"
+          ],
+          [
+            "Cisapride (Withdrawn)",
+            "Non-selective 5-HT4 agonism",
+            "Hepatic CYP3A4 metabolism",
+            "Severe fatal torsades de pointes with CYP inhibitors"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "A selective, potent 5-HT4 receptor agonist that stimulates intrinsic gastrointestinal prokinetic motor activity is **mosapride**. By binding to excitatory 5-HT4 receptors on postganglionic parasympathetic nerve terminals in the myenteric plexus, mosapride enhances endogenous acetylcholine exocytosis, accelerating gastric emptying and duodenal transit. Crucially, mosapride possesses negligible affinity for cardiac delayed rectifier potassium channels and 5-HT1 or 5-HT2 receptors, ensuring zero risk of fatal ventricular torsades de pointes arrhythmias that caused the withdrawal of older prokinetics like cisapride.",
+      "say": "Mosapride stimulates enteric 5-HT4 receptors to release acetylcholine, accelerating gastric emptying without cardiotoxicity.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mosa",
+            "label": "Oral mosapride administration"
+          },
+          {
+            "id": "5ht4",
+            "label": "Selective binding to presynaptic 5-HT4 receptors on myenteric nerves"
+          },
+          {
+            "id": "ach",
+            "label": "Enhanced physiological exocytosis of acetylcholine"
+          },
+          {
+            "id": "motility",
+            "label": "Accelerated antral gastric emptying and coordinated duodenal peristalsis"
+          }
+        ],
+        "edges": [
+          [
+            "mosa",
+            "5ht4"
+          ],
+          [
+            "5ht4",
+            "ach"
+          ],
+          [
+            "ach",
+            "motility"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The potent, direct dopamine D2 receptor agonist utilized clinically to rapidly induce therapeutic emesis in emergency toxicology is **apomorphine emesis**. Administered as a subcutaneous injection, apomorphine directly stimulates dopamine D2 receptors within the chemoreceptor trigger zone of the area postrema, provoking forceful emesis within three to five minutes. Because it also exerts central depressive and respiratory sedative actions in large doses, its emetic effect can be terminated or its central sedation reversed by intravenous naloxone or peripheral dopamine antagonists like domperidone.",
+      "say": "Subcutaneous apomorphine stimulates area postrema D2 receptors to trigger rapid therapeutic vomiting within minutes.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Apomorphine Subcutaneous Injection",
+          "points": [
+            "Direct dopamine D2 receptor agonist in area postrema",
+            "Triggers rapid emetic reflex within 3 to 5 minutes of injection",
+            "Effective even when oral ingestion is impaired or refused",
+            "Reversible with dopamine antagonists or opioid antagonists"
+          ]
+        },
+        "right": {
+          "title": "Syrup of Ipecac (Oral Emetic)",
+          "points": [
+            "Contains plant alkaloids emetine and cephaeline",
+            "Dual action: local gastric mucosal irritation and central CTZ stimulation",
+            "Requires 15 to 30 minutes to induce vomiting following oral dosing",
+            "Cardiotoxic if retained; largely abandoned in modern poison centers"
+          ]
+        }
+      }
+    }
+  ]
+}

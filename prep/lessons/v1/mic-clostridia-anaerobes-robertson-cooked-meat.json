@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "mic-clostridia-anaerobes",
+  "subject": "microbiology",
+  "title": "Robertson Cooked Meat Medium and Bacteroides fragilis",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Robertson cooked meat medium** grows anaerobes in minced meat particles whose glutathione and unsaturated fats consume oxygen and hold a low redox floor, beef heart infusion above feeding growth. Saccharolytic clostridia pinken the meat with acid and gas; proteolytic species blacken and digest it with foul odour, bench character included in the result.",
+      "say": "Meat particles eat the oxygen; pink means sugar fermented, black means protein digested.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Medium design",
+          "points": [
+            "Cooked meat particles provide reducing conditions",
+            "Meat infusion broth supports growth",
+            "Glucose and iron filings variants",
+            "Sealed depth limits oxygen diffusion"
+          ]
+        },
+        "right": {
+          "title": "Growth reads",
+          "points": [
+            "Saccharolytic: pink meat, acid, gas",
+            "Proteolytic: blackened digested meat, putrid",
+            "Subculture to anaerobic plates follows",
+            "Storage medium for anaerobe stocks historically"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anaerobic culture workflow** from the morphology module becomes concrete here: cooked meat or thioglycollate as backup broth, blood agar and selective plates (kanamycin vancomycin laked blood, Bacteroides bile aesculin) in jars or chambers, aerotolerance testing, and identification by MALDI, because mixed anaerobic flora forgive no shortcuts.",
+      "say": "Broth backup, selective plates, aerotolerance, MALDI: the anaerobic assembly line.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "inoc",
+            "label": "Specimen into plates plus cooked meat backup"
+          },
+          {
+            "id": "incub",
+            "label": "Anaerobic incubation 48 hours minimum"
+          },
+          {
+            "id": "aero",
+            "label": "Aerotolerance and colony work"
+          },
+          {
+            "id": "id",
+            "label": "MALDI and susceptibility for sterile sites"
+          }
+        ],
+        "edges": [
+          [
+            "inoc",
+            "incub"
+          ],
+          [
+            "incub",
+            "aero"
+          ],
+          [
+            "aero",
+            "id"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "**Bacteroides fragilis** leads non sporing anaerobes: gram negative pleomorphic rods with vacuoles, capsulated, bile tolerant (grows in 20 percent bile), kanamycin resistant, catalase positive often, gut dominant anaerobe turned abscess author (abdomen, pelvis, brain via blood), beta lactamase armed so metronidazole, beta lactam inhibitor combinations and carbapenems anchor therapy.",
+      "say": "The gut's commonest anaerobe is its abscess king, beta lactamase included.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fragilis identity",
+          "points": [
+            "Gram negative rods, pale with vacuoles",
+            "Bile aesculin blackening",
+            "Kanamycin resistant, vancomycin resistant (gram negative logic)",
+            "Capsule antiphagocytic and abscess promoting"
+          ]
+        },
+        "right": {
+          "title": "Fragilis disease",
+          "points": [
+            "Intra abdominal and pelvic abscesses",
+            "Diabetic foot and decubitus polymicrobial",
+            "Bacteraemia with malignancy associations",
+            "Brain abscess haematogenous rare"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anaerobic abscess ecology** is polymicrobial synergy: aerobes consume oxygen and lower redox, anaerobes capsule and short chain fatty acids block phagocytes, beta lactamases shield neighbours (indirect pathogenicity), and drainage breaks the architecture antibiotics cannot penetrate. Cultures report the cast; therapy covers the community.",
+      "say": "Abscesses are neighbourhoods, not single pathogens; drainage evicts what antibiotics besiege.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Synergy mechanics",
+          "points": [
+            "Facultative partners lower redox",
+            "Capsule and fatty acids impair neutrophils",
+            "Beta lactamase protects bystanders",
+            "Abscess wall limits drug and cell entry"
+          ]
+        },
+        "right": {
+          "title": "Therapy echoes",
+          "points": [
+            "Drainage or source control primary",
+            "Metronidazole plus aerobic cover combinations",
+            "Carbapenems for severe polymicrobial sepsis",
+            "Duration by source control adequacy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Prevotella and Porphyromonas** (oral black pigmenting anaerobes, hemin pigments) drive dental, sinus, aspiration lung and brain infections, Fusobacterium necrophorum Lemierre's jugular thrombophlebitis after sore throats in adolescents, Peptostreptococcus (now divided genera) in mixed abscesses, Veillonella gram negative cocci as oral markers.",
+      "say": "Above the diaphragm think oral anaerobes; a sore throat then septic jugular is Lemierre.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Oral anaerobe map",
+          "points": [
+            "Prevotella melaninogenica group: dental and sinus",
+            "Fusobacterium nucleatum: periodontal and Lemierre partner",
+            "Porphyromonas gingivalis: periodontitis keystone",
+            "Peptostreptococci: abscess gram positive cocci"
+          ]
+        },
+        "right": {
+          "title": "Syndrome flags",
+          "points": [
+            "Lemierre: sore throat, neck pain, lung septic emboli",
+            "Aspiration: putrid sputum and empyema",
+            "Brain abscess dental source hunt",
+            "Bite wounds human and animal polymicrobial"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Anaerobe susceptibility** is not routine for every isolate (slow, E test and agar dilution reference), reserved for sterile sites, failures and surveillance because patterns shift (metronidazole resistance rare but reported, carbapenem resistance by cfiA in fragilis, clindamycin resistance common). Empiric confidence is audited by surveys.",
+      "say": "Test anaerobes from blood and brain, survey the rest; metronidazole complacency gets audited.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Testing indications",
+          "points": [
+            "Blood, brain and sterile site isolates",
+            "Treatment failure and relapsing abscess",
+            "Transplant and immunocompromised hosts",
+            "Institutional surveillance batches"
+          ]
+        },
+        "right": {
+          "title": "Resistance watch",
+          "points": [
+            "Clindamycin resistance widespread (erm)",
+            "Moxifloxacin unreliable for fragilis",
+            "Carbapenem cfiA metallo enzyme subset",
+            "Metronidazole nim genes rare, monitored"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Specimen sins in anaerobes** repeat because they are mortal: swabs dried in air, refrigerated pus, superficial wound swabs over deep tissue, sputum for anaerobic culture (oral flora invalidates), and delays. Laboratories reject sputum anaerobes by policy because the answer would be fiction.",
+      "say": "Anaerobes die in air and lie on swabs; aspirate deep, transport sealed, arrive fast.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acceptable",
+          "points": [
+            "Needle aspirates of abscesses",
+            "Tissue biopsies in anaerobic transport",
+            "Blood cultures with anaerobic bottles",
+            "Suprapubic and sterile site fluids"
+          ]
+        },
+        "right": {
+          "title": "Rejected",
+          "points": [
+            "Sputum and throat derived specimens",
+            "Superficial ulcer swabs",
+            "Dry swabs and refrigerated delays",
+            "Voided urine and stool for anaerobes (specific toxins instead)"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Cooked meat descendants** (chopped meat glucose broth in automated era, thioglycollate in every laboratory) persist because redox insurance is timeless; identification moved to MALDI and sequencing, enrichment logic did not retire. Culture modules age asymmetrically: chemistry endures, names accelerate. That asymmetry explains why older microbiologists defend broths that younger molecular scientists initially wanted to discard.",
+      "say": "The broth is a century old; the names it grows are read in minutes now.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Enduring chemistry",
+          "points": [
+            "Reducing agents protect oxygen sensitive cells",
+            "Backup broth rescues scanty organisms",
+            "Saccharolytic and proteolytic reads still taught",
+            "Stock culture preservation heritage"
+          ]
+        },
+        "right": {
+          "title": "Accelerated names",
+          "points": [
+            "MALDI from anaerobic colonies",
+            "16S for fastidious isolates",
+            "Whole genome outbreak and resistance",
+            "Automated blood culture flagging anaerobes earlier"
+          ]
+        }
+      }
+    }
+  ]
+}

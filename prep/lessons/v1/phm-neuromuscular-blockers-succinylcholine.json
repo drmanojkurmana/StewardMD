@@ -1,0 +1,225 @@
+{
+  "v": 1,
+  "module": "phm-neuromuscular-blockers",
+  "subject": "pharmacology",
+  "title": "Depolarizing Neuromuscular Blockade and Intermediate Non-Depolarizing Relaxants",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The only clinically deployed depolarizing neuromuscular blocking agent for rapid-sequence endotracheal intubation is **succinylcholine**. Chemically structured as two conjoined acetylcholine molecules, succinylcholine binds motor endplate nicotinic receptors to trigger prolonged, continuous endplate depolarization. Because plasma butyrylcholinesterase hydrolyzes succinylcholine slower than synaptic acetylcholinesterase, initial visible muscle fasciculations rapidly transition into complete, flaccid motor paralysis within sixty seconds.",
+      "say": "Succinylcholine triggers prolonged motor endplate depolarization to produce rapid paralysis within sixty seconds.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Parameter",
+          "Succinylcholine clinical profile",
+          "Clinical significance"
+        ],
+        "rows": [
+          [
+            "Onset of paralysis",
+            "30 to 60 seconds",
+            "Fastest available agent for emergency intubation"
+          ],
+          [
+            "Duration of block",
+            "5 to 10 minutes",
+            "Ideal for brief airway maneuvers and electroconvulsive therapy"
+          ],
+          [
+            "Metabolic enzyme",
+            "Plasma butyrylcholinesterase (pseudocholinesterase)",
+            "Rapid systemic termination without hepatic reliance"
+          ],
+          [
+            "Primary adverse risk",
+            "Hyperkalemia, malignant hyperthermia",
+            "Requires screening for denervation and burn injury"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Prolonged or repeated administration of succinylcholine transforms the character of neuromuscular blockade into a **phase II block**. While initial Phase I blockade features persistent endplate depolarization without tetanic fade, continued receptor exposure desensitizes the postjunctional nicotinic channel. The receptor becomes refractory, membrane resting potential repolarizes, and the block acquires non-depolarizing characteristics including train-of-four fade, post-tetanic potentiation, and reversibility with anticholinesterases.",
+      "say": "Continued succinylcholine exposure causes receptor desensitization, shifting into a curare-like Phase II block.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Phase I depolarizing block",
+          "points": [
+            "Preceded by transient muscle fasciculations",
+            "No train-of-four stimulation fade",
+            "Absence of post-tetanic potentiation",
+            "Augmented and worsened by neostigmine"
+          ]
+        },
+        "right": {
+          "title": "Phase II desensitizing block",
+          "points": [
+            "Endplate membrane partially repolarizes",
+            "Pronounced train-of-four stimulation fade",
+            "Demonstrates post-tetanic potentiation",
+            "Reversible with anticholinesterase neostigmine"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The premier intermediate-acting aminosteroid non-depolarizing muscle relaxant favored for rapid-sequence induction is **rocuronium**. With an onset time approaching sixty to ninety seconds at an intubating dose of 1.2 milligrams per kilogram, rocuronium serves as the primary alternative when succinylcholine is contraindicated. Because rocuronium lacks active metabolites and undergoes primarily biliary excretion, its ninety-minute recovery profile remains stable in renal insufficiency.",
+      "say": "Rocuronium provides fast ninety-second intubating conditions and can be reversed instantaneously with sugammadex.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Aminosteroid relaxant",
+          "Intubating onset",
+          "Clinical duration",
+          "Primary elimination route"
+        ],
+        "rows": [
+          [
+            "Rocuronium",
+            "60 to 90 seconds (dose-dependent)",
+            "30 to 45 minutes",
+            "Hepatic uptake and biliary excretion (70%)"
+          ],
+          [
+            "Vecuronium",
+            "2.5 to 3 minutes",
+            "30 to 45 minutes",
+            "Biliary (50%) and renal excretion (30%)"
+          ],
+          [
+            "Pancuronium",
+            "3 to 5 minutes",
+            "60 to 120 minutes",
+            "Renal excretion (80%)"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Remarkable cardiovascular stability devoid of autonomic ganglion blockade or histamine release characterizes intermediate-acting **vecuronium**. Formulated as an uncharged aminosteroid, vecuronium does not induce histamine-mediated bronchospasm, flushing, or vagolytic tachycardia, making it an ideal choice for patients with severe coronary artery disease. It is metabolized partly in the liver to 3-hydroxyvecuronium, which retains fifty percent neuromuscular blocking potency and can accumulate in renal failure.",
+      "say": "Vecuronium provides intermediate muscle relaxation with absolute cardiovascular stability and zero histamine release.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Vecuronium",
+          "points": [
+            "Zero histamine release; no bronchospasm",
+            "No vagolytic sinus tachycardia",
+            "Partial active metabolite accumulation in renal failure",
+            "Requires reconstitution from lyophilized powder"
+          ]
+        },
+        "right": {
+          "title": "Atracurium",
+          "points": [
+            "Mild histamine release at higher doses",
+            "Spontaneous organ-independent elimination",
+            "Safe in both complete renal and liver failure",
+            "Ready-to-use liquid solution requiring refrigeration"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "Organ-independent elimination eliminating dependence on renal or hepatic clearance was achieved with the benzylisoquinolinium **atracurium**. Atracurium undergoes simultaneous breakdown via two distinct non-enzymatic pathways: spontaneous Hofmann elimination occurring at physiological body temperature and pH, and non-specific plasma ester hydrolysis. A tertiary amine breakdown byproduct, laudanosine, crosses the blood-brain barrier and can induce central epileptogenic seizure spikes during prolonged high-dose infusions.",
+      "say": "Atracurium breaks down spontaneously by Hofmann elimination, making it safe in severe kidney or liver disease.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "atr",
+            "label": "Intravenous atracurium administration"
+          },
+          {
+            "id": "hof",
+            "label": "Non-enzymatic Hofmann elimination (pH 7.4, 37\u00b0C)"
+          },
+          {
+            "id": "est",
+            "label": "Non-specific plasma esterase hydrolysis"
+          },
+          {
+            "id": "clear",
+            "label": "Metabolites laudanosine and monoquaternary alcohol excreted"
+          }
+        ],
+        "edges": [
+          [
+            "atr",
+            "hof"
+          ],
+          [
+            "atr",
+            "est"
+          ],
+          [
+            "hof",
+            "clear"
+          ],
+          [
+            "est",
+            "clear"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "The potent purified 1R-cis, 1'R-cis stereoisomer of atracurium possessing three-fold higher neuromuscular potency is **cisatracurium**. Because of its enhanced potency, the required clinical dose is substantially lower, resulting in minimal laudanosine generation and undetectable histamine release even at three times the standard intubating dose. Cisatracurium represents the muscle relaxant of choice for sustained neuromuscular paralysis in intensive care patients with acute respiratory distress syndrome.",
+      "say": "Cisatracurium provides organ-independent Hofmann elimination without histamine release or toxic laudanosine levels.",
+      "vis": {
+        "kind": "table",
+        "cols": [
+          "Feature",
+          "Atracurium",
+          "Cisatracurium"
+        ],
+        "rows": [
+          [
+            "Neuromuscular potency",
+            "Standard (ED95 = 0.2 mg/kg)",
+            "3 times more potent (ED95 = 0.05 mg/kg)"
+          ],
+          [
+            "Histamine release",
+            "Dose-dependent flush and hypotension",
+            "Completely absent at clinical doses"
+          ],
+          [
+            "Laudanosine production",
+            "Higher plasma concentrations",
+            "5-fold lower plasma laudanosine"
+          ],
+          [
+            "ICU infusion safety",
+            "Risk of seizure metabolite accumulation",
+            "Preferred relaxant for prolonged ICU paralysis"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "Somatic motor transmission relies on precise physiological interactions at the **neuromuscular junction**. Action potentials invading the presynaptic motor nerve terminal open voltage-gated P/Q calcium channels, triggering vesicular exocytosis of acetylcholine into the primary synaptic cleft. Acetylcholine binds postjunctional nicotinic receptors clustered on junctional folds, opening non-selective cation channels that drive endplate potential generation and striated muscle contraction.",
+      "say": "Presynaptic calcium influx triggers acetylcholine release onto postjunctional folded motor endplates.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/nmj-endplate-myasthenia-blockers-fig1.webp",
+        "alt": "Neuromuscular junction endplate and receptor structure",
+        "caption": "Synaptic architecture of the motor endplate showing presynaptic acetylcholine release onto folded postjunctional nicotinic receptors."
+      }
+    },
+    {
+      "tx": "Catastrophic hyperkalemic cardiac arrest can be precipitated by succinylcholine administration in patients with extensive **burns or denervation injuries**. Following thermal burns, spinal cord transection, stroke, or prolonged immobilization, extrajunctional nicotinic receptors with gamma subunits proliferate across the entire sarcolemmal surface. When succinylcholine depolarizes these widely dispersed channels, massive systemic potassium efflux occurs, driving serum potassium levels above eight millimoles per liter and triggering ventricular fibrillation.",
+      "say": "Proliferating extrajunctional receptors in burns and denervation cause lethal potassium release after succinylcholine.",
+      "vis": {
+        "kind": "image",
+        "src": "v1/kb/media/myasthenia-gravis-fig2.webp",
+        "alt": "Motor endplate receptor regulation and receptor architecture",
+        "caption": "Sarcolemmal receptor regulation illustrating normal junctional clustering versus dangerous widespread extrajunctional proliferation."
+      }
+    }
+  ]
+}

@@ -130,14 +130,19 @@ test("voice: settle timing: bare letters fast, everything else that parses slow,
   assert.equal(v.commit, null);
   v = P.partialVote(v.seen, "the", o, P.SETTLE_MS);
   assert.deepEqual(v.commit, { k: 3 });
-  // A phrase, option words and a command all settle at SETTLE_MS.
-  for (const [t, opts, want] of [["I'll go with B", o, { k: 1 }], ["metformin", o, { k: 1 }], ["skip", o, { cmd: "skip" }]]) {
+  // A phrase and option words settle at SETTLE_MS; a whole-utterance command commits at PARTIAL_MS.
+  for (const [t, opts, want] of [["I'll go with B", o, { k: 1 }], ["metformin", o, { k: 1 }]]) {
     v = P.partialVote(null, t, opts, 0);
     v = P.partialVote(v.seen, t, opts, P.SETTLE_MS - 1);
     assert.equal(v.commit, null, t);
     v = P.partialVote(v.seen, t, opts, P.SETTLE_MS);
     assert.deepEqual(v.commit, want, t);
   }
+  v = P.partialVote(null, "skip", o, 0);
+  v = P.partialVote(v.seen, "skip", o, P.PARTIAL_MS - 1);
+  assert.equal(v.commit, null, "skip waits for the fast settle");
+  v = P.partialVote(v.seen, "skip", o, P.PARTIAL_MS);
+  assert.deepEqual(v.commit, { cmd: "skip" }, "a whole-utterance command commits at PARTIAL_MS");
   // A change restarts the clock even when the parsed letter stays the same: "a" then "a beta blocker".
   v = P.partialVote(null, "a", B, 0);
   v = P.partialVote(v.seen, "a beta blocker", B, 400);
@@ -176,6 +181,76 @@ test("voice: the prompt follows the real option count; partials commit only a he
   assert.deepEqual(v.seen, { k: 2, text: "c", at: 1000, ms: P.PARTIAL_MS });
   assert.equal(P.standaloneLetter("i think b", o), null, "a phrase is not a standalone partial");
   assert.equal(P.standaloneLetter("option b", o), 1);
+});
+
+test("voice: reading the option: a unique word, numbers, single letters, Greek, wrappers, ties", () => {
+  const BB = ["Beta blocker", "Calcium channel blocker", "Liver", "Insulin therapy"];
+  // A word found in only one option is enough; a shared word picks nothing.
+  assert.deepEqual(P.parseVoice("beta", BB), { k: 0 });
+  assert.deepEqual(P.parseVoice("calcium", BB), { k: 1 });
+  assert.deepEqual(P.parseVoice("channel", BB), { k: 1 });
+  assert.equal(P.parseVoice("blocker", BB), null);
+  // Numbers count, as digits or words, on both sides.
+  const DOSE = ["5 mg", "10 mg", "25%"];
+  for (const [t, k] of [["five mg", 0], ["five", 0], ["10", 1], ["ten", 1], ["twenty five", 2], ["25 percent", 2]]) assert.deepEqual(P.parseVoice(t, DOSE), { k }, t);
+  assert.equal(P.parseVoice("mg", DOSE), null, "a shared unit alone picks nothing");
+  // Single letters an option needs, and a spelled-out acronym.
+  const VIT = ["Vitamin A", "Vitamin B", "Vitamin C", "Vitamin D"];
+  assert.deepEqual(P.parseVoice("vitamin D", VIT), { k: 3 });
+  assert.deepEqual(P.parseVoice("vitamin b", VIT), { k: 1 });
+  assert.equal(P.parseVoice("vitamin", VIT), null);
+  assert.deepEqual(P.parseVoice("a c e inhibitor", ["ACE inhibitor", "Beta blocker", "Calcium channel blocker", "Liver"]), { k: 0 });
+  // Greek and hyphens normalise on both sides.
+  const GR = ["\u03b2 blocker", "\u03b1 blocker", "Liver", "Kidney"];
+  assert.deepEqual(P.parseVoice("beta blocker", GR), { k: 0 });
+  assert.deepEqual(P.parseVoice("alpha blocker", GR), { k: 1 });
+  assert.deepEqual(P.parseVoice("\u03b2 blocker", GR), { k: 0 });
+  assert.deepEqual(P.parseVoice("beta-blocker", BB), { k: 0 });
+  // Wrappers do not stop a match; identical or fully tied options give null; fuzzy needs one clear winner.
+  const o = ["Insulin glargine", "Metformin", "Glibenclamide", "Acarbose"];
+  assert.deepEqual(P.parseVoice("I think beta", BB), { k: 0 });
+  assert.deepEqual(P.parseVoice("metformin is the answer", o), { k: 1 });
+  assert.deepEqual(P.parseVoice("metformin please", o), { k: 1 });
+  assert.equal(P.parseVoice("metformin", ["Metformin", "Metformin", "Liver", "Kidney"]), null, "identical options");
+  assert.equal(P.parseVoice("liver kidney", ["Liver", "Kidney", "Metformin", "Acarbose"]), null, "a full tie");
+  assert.deepEqual(P.parseVoice("metformn", o), { k: 1 }, "a fuzzy match with one clear winner");
+});
+
+test("voice: spoken letter forms: A for apple, bare example words, NATO", () => {
+  const o = ["Insulin glargine", "Metformin", "Glibenclamide", "Acarbose"], o5 = o.concat("Sitagliptin");
+  for (const [t, opts, k] of [["A for apple", o, 0], ["B for ball", o, 1], ["C for cat", o, 2], ["D for dog", o, 3], ["E for elephant", o5, 4],
+    ["apple", o, 0], ["ball", o, 1], ["cat", o, 2], ["dog", o, 3], ["elephant", o5, 4],
+    ["alpha", o, 0], ["bravo", o, 1], ["charlie", o, 2], ["delta", o, 3], ["echo", o5, 4]])
+    assert.deepEqual(P.parseVoice(t, opts), { k }, t);
+  assert.deepEqual(P.parseVoice("A for apple", o), { k: 0 }, "never D from the for homophone");
+  // An option containing the word wins over the bare letter form.
+  assert.deepEqual(P.parseVoice("cat", ["Metformin", "Cat scratch disease", "Glibenclamide", "Acarbose"]), { k: 1 });
+  assert.deepEqual(P.parseVoice("alpha", ["Metformin", "Alpha blocker", "Glibenclamide", "Acarbose"]), { k: 1 });
+  assert.equal(P.parseVoice("I like apple", o), null, "a bare example word counts only as the whole utterance");
+});
+
+test("voice: common commands in natural phrasing; containing sentences never fire", () => {
+  const o = ["Insulin glargine", "Metformin", "Glibenclamide", "Acarbose"];
+  for (const t of ["repeat", "repeat that", "repeat the question", "repeat please", "say again", "say that again", "read again", "read it again", "again", "one more time", "once more", "come again", "pardon", "sorry what", "can you repeat", "could you repeat that", "what was the question", "REPEAT Please"])
+    assert.deepEqual(P.parseVoice(t, o), { cmd: "repeat" }, t);
+  for (const t of ["skip", "skip this", "skip it", "skip question", "skip this one", "next", "next question", "next one", "pass", "move on", "go next", "I don't know", "don't know", "no idea", "please skip this one"])
+    assert.deepEqual(P.parseVoice(t, o), { cmd: "skip" }, t);
+  for (const t of ["stop", "stop voice", "stop voice mode", "stop listening", "stop reading", "voice off", "exit voice", "quit", "end voice mode"])
+    assert.deepEqual(P.parseVoice(t, o), { cmd: "stop" }, t);
+  for (const t of ["slower", "go slower", "slow down", "read slower"]) assert.deepEqual(P.parseVoice(t, o), { cmd: "slower" }, t);
+  for (const t of ["faster", "go faster", "speed up", "read faster"]) assert.deepEqual(P.parseVoice(t, o), { cmd: "faster" }, t);
+  for (const t of ["the next step is surgery", "stop the drug", "next patient please", "pass the salt", "repeat the dose slowly"])
+    assert.equal(P.parseVoice(t, o), null, t);
+  assert.deepEqual(P.parseVoice("I don't know but maybe metformin", o), { k: 1 }, "the option's words win, no skip fires");
+});
+
+test("voice: option-B wording, heard text and the slow-rate watchdog", () => {
+  assert.equal(P.listenText(4), "Listening\u2026 say option A to D, or read it");
+  assert.equal(P.listenText(5), "Listening\u2026 say option A to E, or read it");
+  assert.equal(P.missSay(4), "Sorry, say option A to D, or read the option.");
+  assert.equal(P.missHeard("bee", 4), "Heard \u201Cbee\u201D. Say option A to D, or read it");
+  assert.equal(P.missHeard("", 4), "Nothing heard. Say option A to D, or read it");
+  assert.ok(P.sayWatchdogMs("hello world", 0.75) > P.sayWatchdogMs("hello world", 1), "a slow rate gets a longer watchdog");
 });
 
 test("voice: Phonon vs system choice, watchdog and option chunk joining", () => {

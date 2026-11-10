@@ -1,0 +1,223 @@
+{
+ "v": 1,
+ "id": "oph-glaucoma-shaffer-grading",
+ "subject": "ophthalmology",
+ "module": "oph-glaucoma",
+ "title": "Shaffer Grading and Angle Closure Mechanisms",
+ "minutes": 7,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Shaffer grading** grades angle width by deepest structure visible: grade four ciliary band wide open, three scleral spur, two trabeculum only, one Schwalbe only and zero closed no structures. Lower grades predict closure risk needing prophylaxis decisions. Grade therefore converts gonioscopy anatomy into risk number at record.",
+   "say": "Deepest structure together gives Shaffer number in angle records at gonioscopy clinics for adults at risk. Lower grades give closure prediction additionally. Number gives prophylaxis input."
+  },
+  {
+   "tx": "Grade two narrow angles occupy occludable territory where pupil dilation, dim light or drug triggers may close angle in predisposed anatomy. Grade one slit angles carry high closure probability needing laser discussion by risk company. **Occludable** label therefore follows grade plus mechanism, not grade alone in isolation.",
+   "say": "Occludable labelling together gives mechanism addition in narrow angle assessment at glaucoma clinics for adults with low grades. Trigger history gives risk company additionally. Laser gives discussion input.",
+   "vis": {
+    "kind": "table",
+    "title": "Shaffer grades",
+    "cols": [
+     "Grade",
+     "Deepest seen"
+    ],
+    "rows": [
+     [
+      "Four",
+      "Ciliary band, wide open"
+     ],
+     [
+      "Three",
+      "Scleral spur visible"
+     ],
+     [
+      "Two",
+      "Trabeculum only, narrow"
+     ],
+     [
+      "One",
+      "Schwalbe only, slit"
+     ],
+     [
+      "Zero",
+      "Closed, none seen"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Pupillary block** mechanism bows iris forward in grade low angles, iridotomy equalising pressure behind iris flattening configuration in block dominant eyes. Plateau mechanism persists closure despite patent hole by ciliary process position from outflow lesson. Grade therefore starts, mechanism finishes angle closure reasoning.",
+   "say": "Mechanism finishing together gives angle closure reasoning beyond grade at laser clinics for narrow angle adults. Block gives iridotomy logic additionally. Plateau gives persistence explanation.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Block dominant low grade",
+     "points": [
+      "Iris bombe configuration",
+      "Iridotomy flattens iris"
+     ]
+    },
+    "right": {
+     "title": "Plateau dominant low grade",
+     "points": [
+      "Flat iris, processes anterior",
+      "Closure despite patent hole"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Acute angle closure crisis gives rock hard painful red eye, mid dilated fixed pupil, corneal oedema and pressure extreme needing pressure lowering and laser after cornea clears. Chronic closure creeps synechial with few symptoms until advanced damage, grade zero sectors discovered gonioscopically. **Crisis versus creep** therefore share grade zero by opposite tempos.",
+   "say": "Tempo opposition together gives grade zero sharing in angle closure at emergency and screening clinics for adults. Crisis gives rock hard pattern additionally. Creep gives gonioscopy discovery value.",
+   "vis": {
+    "kind": "flow",
+    "title": "Low grade pathway",
+    "nodes": [
+     {
+      "id": "grade",
+      "label": "Shaffer grade recorded"
+     },
+     {
+      "id": "mech",
+      "label": "Block or plateau mechanism"
+     },
+     {
+      "id": "laser",
+      "label": "Iridotomy or other laser"
+     },
+     {
+      "id": "lens",
+      "label": "Lens strategy if persistent"
+     }
+    ],
+    "edges": [
+     [
+      "grade",
+      "mech"
+     ],
+     [
+      "mech",
+      "laser"
+     ],
+     [
+      "laser",
+      "lens"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Laser iridotomy** creates peripheral iris hole bypassing pupillary block, prophylactic in occludable fellow eyes after acute attack in partner eye. Fellow eye attack risk high without prophylaxis teaching justifies same pathway urgency. Grade of fellow therefore examined at acute presentation, not deferred to routine clinic.",
+   "say": "Fellow examination together gives prophylaxis urgency in acute angle closure at emergency clinics for adults with attacks. Hole gives block bypass additionally. Deferral gives attack risk.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/acute-angle-closure-glaucoma-fig1.webp",
+    "alt": "Angle closure mechanisms diagram with pupillary block and iris bombe.",
+    "caption": "Occludable angle with pupillary block and iris bombe requiring laser peripheral iridotomy. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Lens extraction in angle closure removes pupillary block component and deepens chamber, lens based strategy trials supporting selected acute or chronic closure with cataract company. Grade improves postoperatively by anatomy change rather than angle tissue change. **Lens as mechanism** therefore belongs closure algorithms beside laser choices.",
+   "say": "Lens mechanism together gives closure algorithm completion in angle surgery at tertiary clinics for adults with cataract company. Chamber deepening gives grade improvement additionally. Selection gives trial context.",
+   "vis": {
+    "kind": "table",
+    "title": "Closure intervention map",
+    "cols": [
+     "Mechanism dominant",
+     "Intervention tendency"
+    ],
+    "rows": [
+     [
+      "Pupillary block",
+      "Laser iridotomy first"
+     ],
+     [
+      "Plateau configuration",
+      "Iridoplasty or lens strategy"
+     ],
+     [
+      "Lens crowded cataract",
+      "Lens extraction considered"
+     ],
+     [
+      "Synechial chronic damage",
+      "Glaucoma surgery pathway"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Grading pitfalls include light opening angle falsely, compression opening by lens pressure and single quadrant grading missing sector closure. Four quadrant grades therefore record separately in closure records. **Quadrant grades** capture sector synechiae that average shorthand hides from surgical planning.",
+   "say": "Quadrant recording together gives sector capture in closure gonioscopy at glaucoma clinics for chronic adults. Light artefact gives pitfall awareness additionally. Shorthand gives hiding risk.",
+   "vis": {
+    "kind": "table",
+    "title": "Grading pitfalls",
+    "cols": [
+     "Pitfall",
+     "Protection"
+    ],
+    "rows": [
+     [
+      "Bright light opens angle",
+      "Dark room technique"
+     ],
+     [
+      "Lens pressure opens",
+      "Light touch gonioscopy"
+     ],
+     [
+      "Single quadrant only",
+      "Four quadrant grades"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Anchors: four wide to zero closed by deepest structure, block iridotomises, plateau persists and lens deepens. Crisis and creep share low grades by tempo opposites. **Grade plus mechanism** is angle closure prescription sentence in examinations and laser lists alike. Laser lists therefore confirm mechanism in the referral letter before booking any angle procedure.",
+   "say": "Grade together with mechanism gives angle closure prescription in examinations for students reliably in laser and clinic. Tempo gives crisis split additionally. Quadrant gives record completeness.",
+   "vis": {
+    "kind": "table",
+    "title": "Shaffer anchors",
+    "cols": [
+     "Anchor",
+     "Fact"
+    ],
+    "rows": [
+     [
+      "Grade four to zero",
+      "Ciliary band to closed"
+     ],
+     [
+      "Block treatment",
+      "Iridotomy equalises pressure"
+     ],
+     [
+      "Fellow eye",
+      "Examine and prophylax early"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Shaffer scale",
+   "b": "Four ciliary band, three spur, two trabeculum, one Schwalbe, zero closed by deepest structure."
+  },
+  {
+   "f": "Fellow eye rule",
+   "b": "Examine and prophylactic iridotomy pathway early after acute angle closure attack."
+  },
+  {
+   "f": "Plateau persistence",
+   "b": "Closure despite patent iridotomy by anterior ciliary processes; iridoplasty or lens strategy."
+  }
+ ],
+ "keys": [
+  "Grade starts, mechanism finishes closure logic",
+  "Record four quadrants separately",
+  "Lens extraction deepens crowded angles"
+ ]
+}

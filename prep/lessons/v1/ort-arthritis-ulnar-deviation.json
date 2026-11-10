@@ -1,0 +1,267 @@
+{
+ "v": 1,
+ "id": "ort-arthritis-ulnar-deviation",
+ "subject": "orthopaedics",
+ "module": "ort-arthritis",
+ "title": "Ulnar Deviation",
+ "minutes": 6,
+ "gen": "AI",
+ "steps": [
+  {
+   "tx": "**Ulnar deviation** of the fingers at the metacarpophalangeal joints represents a classic late hand deformity of chronic rheumatoid arthritis. Proliferative synovial pannus distends the joint capsule, attenuating the collateral ligaments and the extensor hood mechanism. Under the asymmetrical forces of normal pinch and grasp, the extensor digitorum communis tendons slip ulnarward into the valleys between metacarpal heads. Volar subluxation of the proximal phalanges accompanies this ulnar drift, severely compromising manual dexterity.",
+   "say": "Ulnar deviation of the fingers is driven by chronic proliferative synovitis weakening the collateral ligaments at the metacarpophalangeal joints. Daily gripping activities drag the extensor tendons into the ulnar valleys, culminating in volar subluxation and loss of fine hand function.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/rheumatoid-fig1.webp",
+    "alt": "Diagram illustrating rheumatoid arthritis synovial pannus formation and joint destruction.",
+    "caption": "Synovial pannus proliferation, inflammatory cytokine release, and bone erosion in rheumatoid arthritis. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Swan-neck deformity** is characterized by reciprocal hyper-extension of the proximal interphalangeal joint accompanied by compensatory flexion of the distal interphalangeal joint. The primary driving pathology involves chronic synovitis stretching or rupturing the volar plate of the proximal interphalangeal joint, often compounded by intrinsic muscle contracture. As the lateral bands of the extensor apparatus displace dorsal to the joint flexion axis, extensor pull concentrates at the middle phalanx, producing fixed PIP hyperextension that impairs initial finger flexion.",
+   "say": "Swan-neck deformity combines proximal interphalangeal hyperextension with distal interphalangeal flexion. Synovial stretching of the volar plate allows extensor lateral bands to displace dorsal to the joint axis, locking the joint into hyperextension during attempts to form a fist.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Swan-Neck Deformity",
+     "points": [
+      "Proximal joint in hyperextension",
+      "Distal joint in flexion",
+      "Volar plate stretching or laxity",
+      "Lateral bands displaced dorsal to axis"
+     ]
+    },
+    "right": {
+     "title": "Boutonniere Deformity",
+     "points": [
+      "Proximal joint in flexion",
+      "Distal joint in hyperextension",
+      "Central slip attenuation or rupture",
+      "Lateral bands subluxated volar to axis"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Boutonniere deformity** arises from attenuation or traumatic rupture of the central slip of the extensor digitorum tendon over the proximal interphalangeal joint. As the central slip fails, the proximal phalanx head herniates dorsally like a button through a buttonhole. The lateral bands subluxate volarly below the transverse axis of rotation of the PIP joint, transforming them from extensors into powerful flexors of the PIP joint while hyper-extending the distal interphalangeal joint.",
+   "say": "Boutonniere deformity develops when the central extensor slip over the proximal interphalangeal joint gives way. The lateral bands slip down volarly, paradoxically pulling the PIP joint into fixed flexion while keeping the distal joint hyperextended.",
+   "vis": {
+    "kind": "flow",
+    "title": "Pathogenesis of Boutonniere Deformity",
+    "nodes": [
+     {
+      "id": "b1",
+      "label": "Central Slip Rupture",
+      "sub": "Synovitis or direct mechanical disruption"
+     },
+     {
+      "id": "b2",
+      "label": "Volar Band Migration",
+      "sub": "Lateral bands slip below joint axis of rotation"
+     },
+     {
+      "id": "b3",
+      "label": "PIP Flexion Pull",
+      "sub": "Displaced bands act paradoxically as joint flexors"
+     },
+     {
+      "id": "b4",
+      "label": "Terminal Hyperextension",
+      "sub": "Concentrated extensor tension hyperextends DIP"
+     }
+    ],
+    "edges": [
+     [
+      "b1",
+      "b2",
+      "Tendon attenuation"
+     ],
+     [
+      "b2",
+      "b3",
+      "Altered biomechanics"
+     ],
+     [
+      "b3",
+      "b4",
+      "Fixed joint contracture"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Rheumatoid nodules** constitute the most frequent extra-articular cutaneous feature of rheumatoid arthritis, appearing in approximately twenty-five percent of patients. These firm, non-tender subcutaneous swellings arise preferentially over repetitive pressure points, especially the extensor forearm, olecranon bursa, and Achilles tendon. Histopathology demonstrates central areas of fibrinoid necrosis encircled by a palisade of CD68-positive histiocytes and chronic inflammatory cells. Their presence strongly correlates with high-titre rheumatoid factor positivity, anti-CCP antibodies, and aggressive erosive joint disease.",
+   "say": "Rheumatoid nodules develop over pressure-bearing extensor surfaces such as the olecranon. Dermal biopsy reveals palisading histiocytes enclosing central fibrinoid necrosis. They serve as a reliable clinical surrogate for high rheumatoid factor seropositivity and severe systemic involvement.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/kb/media/rheumatoid-fig2.webp",
+    "alt": "Anatomical diagram of rheumatoid deformities and pharmacological targets.",
+    "caption": "Characteristic rheumatoid hand deformities including ulnar drift, swan-neck, and boutonniere along with DMARD therapy targets. Illustration: StewardMD original.",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "**Methotrexate** serves as the anchor conventional synthetic disease-modifying antirheumatic drug in the management of rheumatoid arthritis, commenced immediately upon diagnosis. Administered as a single weekly oral or subcutaneous dose of 7.5 to 25 milligrams, it inhibits dihydrofolate reductase and promotes extracellular adenosine release to suppress joint inflammation. Concomitant folic acid supplementation of five milligrams weekly reduces gastrointestinal intolerance, oral mucositis, and hepatic transaminase elevations. Baseline and regular laboratory monitoring of complete blood counts and liver enzymes is mandatory.",
+   "say": "Methotrexate is the cornerstone disease-modifying drug, prescribed as a weekly dose between 7.5 and 25 milligrams. Always prescribe folic acid alongside it to prevent stomatitis and hepatic toxicity. Regularly monitor full blood counts and liver function tests during treatment.",
+   "vis": {
+    "kind": "table",
+    "title": "Conventional DMARDs in Rheumatoid Arthritis",
+    "cols": [
+     "Agent",
+     "Dosing Regimen",
+     "Key Monitoring Requirement"
+    ],
+    "rows": [
+     [
+      "Methotrexate",
+      "7.5 to 25 mg once weekly",
+      "Liver function and complete blood counts"
+     ],
+     [
+      "Hydroxychloroquine",
+      "200 to 400 mg daily (under 5 mg/kg)",
+      "Baseline and annual retinal screening"
+     ],
+     [
+      "Sulfasalazine",
+      "2 to 3 grams daily divided",
+      "Complete blood counts for myelosuppression"
+     ],
+     [
+      "Leflunomide",
+      "10 to 20 mg daily",
+      "Blood pressure and alanine transaminase"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Extensor pollicis longus** tendon rupture occurs spontaneously in rheumatoid arthritis as a consequence of mechanical attrition and ischaemic tenosynovitis over the dorsal tubercle of the radius, known as Lister tubercle. Patients present with sudden, painless loss of active extension of the thumb interphalangeal joint and an inability to lift the thumb off a flat surface. Because direct end-to-end tendon repair is impossible due to tendon fraying, surgical reconstruction requires an extensor indicis proprius tendon transfer.",
+   "say": "Spontaneous rupture of extensor pollicis longus occurs as the inflamed tendon grinds against Lister tubercle on the dorsal radius. The patient suddenly loses thumb extension. Treat this with an extensor indicis proprius tendon transfer rather than primary suture repair.",
+   "vis": {
+    "kind": "flow",
+    "title": "EPL Rupture Assessment and Reconstruction",
+    "nodes": [
+     {
+      "id": "e1",
+      "label": "Lister Tubercle Friction",
+      "sub": "Dorsal tenosynovitis with tendon attrition"
+     },
+     {
+      "id": "e2",
+      "label": "Spontaneous Rupture",
+      "sub": "Loss of active thumb IP joint extension"
+     },
+     {
+      "id": "e3",
+      "label": "Flat Surface Test",
+      "sub": "Inability to elevate thumb off tabletop"
+     },
+     {
+      "id": "e4",
+      "label": "EIP Tendon Transfer",
+      "sub": "Extensor indicis transferred to restore extension"
+     }
+    ],
+    "edges": [
+     [
+      "e1",
+      "e2",
+      "Ischaemic wear"
+     ],
+     [
+      "e2",
+      "e3",
+      "Bedside confirmation"
+     ],
+     [
+      "e3",
+      "e4",
+      "Operative reconstruction"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "**Synovectomy** of the wrist and extensor compartments is indicated in early to moderate rheumatoid disease when active, boggy proliferative tenosynovitis persists despite six months of optimized medical therapy. Surgical excision of proliferative dorsal tenosynovium decompress the extensor retinaculum and relieves pain while protecting the extensor tendons from spontaneous attrition rupture. Radiographic absence of advanced articular cartilage destruction and intact bony architecture are essential prerequisites to justify preventive surgical synovectomy.",
+   "say": "Early dorsal wrist tenosynovectomy is a preventative operation when florid synovitis fails medical management. Removing the hypertrophic pannus prevents spontaneous extensor tendon ruptures, provided joint cartilage remains intact on radiographs.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Early Stage Interventions",
+     "points": [
+      "Aggressive synthetic and biologic DMARDs",
+      "Dorsal extensor tenosynovectomy",
+      "Carpal tunnel median decompression",
+      "Working splints to preserve alignment"
+     ]
+    },
+    "right": {
+     "title": "Late Stage Salvage",
+     "points": [
+      "Silicone MCP joint arthroplasty",
+      "Sauve-Kapandji distal radioulnar fusion",
+      "Total wrist arthrodesis for stability",
+      "Tendon transfers for ruptured units"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "**Total wrist arthrodesis** represents the definitive surgical salvage procedure for late rheumatoid arthritis with painful, unstable, dislocated radiocarpal and midcarpal joints. The joint surfaces are denuded of residual cartilage, packed with cancellous bone graft, and rigidly fixed using a dorsal contour plate extending from the radius to the third metacarpal. Fixation is achieved in approximately ten to fifteen degrees of wrist dorsiflexion, which optimizes residual finger grip strength and provides dependable, lifelong, pain-free stability.",
+   "say": "Total wrist fusion stabilizes the late destroyed rheumatoid wrist. By fixing the joint in ten to fifteen degrees of extension with a dorsal plate, the patient gains a painless, stable limb with optimized finger flexion power for daily tasks.",
+   "vis": {
+    "kind": "table",
+    "title": "Surgical Procedures for Rheumatoid Hand Deformities",
+    "cols": [
+     "Deformity / Defect",
+     "Pathological Driver",
+     "Standard Surgical Procedure"
+    ],
+    "rows": [
+     [
+      "Ulnar drift with MCP dislocation",
+      "Collateral ligament destruction",
+      "Silicone spacer MCP arthroplasty"
+     ],
+     [
+      "EPL tendon rupture",
+      "Attrition over Lister tubercle",
+      "Extensor indicis proprius transfer"
+     ],
+     [
+      "Gross wrist instability and pain",
+      "Pancarpal cartilage obliteration",
+      "Total wrist fusion in slight extension"
+     ],
+     [
+      "Volar subluxation of distal ulna",
+      "Distal radioulnar joint destruction",
+      "Darrach or Sauve-Kapandji excision"
+     ]
+    ]
+   }
+  }
+ ],
+ "quiz": [],
+ "cards": [
+  {
+   "f": "Swan-neck deformity: underlying anatomical mechanism",
+   "b": "Volar plate laxity at PIP joint with dorsal subluxation of lateral bands."
+  },
+  {
+   "f": "Boutonniere deformity: anatomical site of tendon disruption",
+   "b": "Rupture or attenuation of central extensor slip over proximal interphalangeal joint."
+  },
+  {
+   "f": "Spontaneous EPL rupture: reconstruction method of choice",
+   "b": "Extensor indicis proprius tendon transfer to the distal thumb extensor apparatus."
+  }
+ ],
+ "keys": [
+  "Ulnar drift is driven by MCP synovitis stretching collateral ligaments with extensor tendon subluxation",
+  "Swan-neck features PIP hyperextension with DIP flexion, whereas boutonniere displays the reverse",
+  "Methotrexate is the anchor DMARD, and surgical synovectomy prevents spontaneous tendon rupture"
+ ]
+}

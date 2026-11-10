@@ -1,0 +1,200 @@
+{
+  "v": 1,
+  "module": "mic-antibodies-complement",
+  "subject": "microbiology",
+  "title": "Monoclonal Antibodies, Hybridoma and Complement Pathways I",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "**Monoclonal antibodies** are one clone's single specificity product, uniform in a way polyclonal antisera never are, powering diagnostics (pregnancy kits, blood grouping, ELISA capture) and the therapeutic antibody era of the pharmacology lessons. Their uniformity is also their limit: one epitope, escapable by variation.",
+      "say": "One clone, one epitope, identical molecules: uniformity is the invention.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Monoclonal character",
+          "points": [
+            "Single specificity and affinity",
+            "Batch consistency, immortal supply",
+            "Diagnostics and therapeutics shared platform",
+            "Epitope escape possible"
+          ]
+        },
+        "right": {
+          "title": "Polyclonal contrast",
+          "points": [
+            "Many epitopes, many affinities",
+            "Animal serum finite and variable",
+            "Antitoxins and anti thymocyte globulin heritage",
+            "Broader neutralisation, reaction prone"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **hybridoma** method (Kohler and Milstein 1975) fuses antibody producing B cells with immortal myeloma partners, selects hybrids in HAT medium (myeloma lacks HGPRT, B cells die naturally, only fusions survive aminopterin blockade), clones single producers and screens supernatants for the wanted specificity. Nobel honoured, it industrialised antibody specificity.",
+      "say": "Fuse a mortal producer to an immortal tumour, select in HAT, clone the winner.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          { "id": "immunise", "label": "Mouse immunised, spleen B cells harvested" },
+          { "id": "fuse", "label": "Fused with HGPRT negative myeloma" },
+          { "id": "hat", "label": "HAT selection: only hybridomas survive" },
+          { "id": "clone", "label": "Single clones screened for specificity" }
+        ],
+        "edges": [["immunise", "fuse"], ["fuse", "hat"], ["hat", "clone"]]
+      }
+    },
+    {
+      "tx": "**HAT selection logic** deserves its mechanism: aminopterin blocks de novo nucleotide synthesis, salvage enzymes (HGPRT, thymidine kinase) rescue cells using hypoxanthine and thymidine, myeloma partners lack HGPRT, unfused B cells senesce, so hybridomas alone inherit both rescue and immortality. Modern recombinant expression (CHO cells, phage display) inherited hybridoma's clones without its mice for most new drugs.",
+      "say": "HAT starves every cell except the fusion; rescue enzymes are the selection's arithmetic.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Selection arithmetic",
+          "points": [
+            "Aminopterin blocks new nucleotide synthesis",
+            "Salvage needs HGPRT and TK",
+            "Myeloma parent HGPRT deficient",
+            "B cell parent mortal: only hybrids persist"
+          ]
+        },
+        "right": {
+          "title": "Modern successors",
+          "points": [
+            "Recombinant CHO production",
+            "Phage and yeast display libraries",
+            "Single B cell cloning (rabies, HIV antibodies)",
+            "Transgenic human antibody mice"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **classical complement pathway** ignites when C1q reads antibody Fc on antigen (IgM best, IgG1 and 3), C1r and C1s activate, C4 and C2 build the C3 convertase (C4b2a), and the cascade converges on C3, the system's traffic circle. Immune complexes and CRP can also engage C1q, which is why classical consumption (low C4) flags complex disease.",
+      "say": "Antibody plus C1q starts classical; C4 falls when complexes burn this road.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classical sequence",
+          "points": [
+            "C1q binds clustered Fc (or CRP, complexes)",
+            "C1r C1s proteases activate",
+            "C4 and C2 cleaved to C4b2a convertase",
+            "C3 cleaved: amplification begins"
+          ]
+        },
+        "right": {
+          "title": "Classical signatures",
+          "points": [
+            "Low C4 with low C3: immune complex consumption",
+            "C1 inhibitor deficiency: hereditary angioedema",
+            "CH50 screens whole classical to terminal",
+            "Early component deficiency: lupus like disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "The **alternative pathway** needs no antibody: spontaneous C3 tick over deposits C3b on surfaces, factor B and D build its convertase (C3bBb), properdin stabilises, and host regulators (factor H, membrane MCP and DAF) spare self while microbes lacking regulators amplify. This is innate complement from the earlier lesson with its proteins named.",
+      "say": "Alternative complement is a fire that self surfaces extinguish and microbes cannot.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Alternative sequence",
+          "points": [
+            "C3 tick over hydrolysis continuous",
+            "Factor B and D assemble convertase",
+            "Properdin stabilises on microbes",
+            "Amplification loop feeds all pathways"
+          ]
+        },
+        "right": {
+          "title": "Self protection",
+          "points": [
+            "Factor H and I degrade C3b on self",
+            "DAF and MCP membrane regulators",
+            "CD59 blocks membrane attack (PNH lesson)",
+            "Regulator mutation: atypical HUS and C3 glomerulopathy"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Complement effectors** divide labour cleanly: C3b opsonises, C3a and C5a inflame and chemotax (anaphylatoxins), C5b begins the membrane attack complex, and breakdown products (iC3b, C3d) tag antigen for B cell co stimulation (lowering activation thresholds, vaccines borrow this). Each fragment has a receptor and an examination pairing.",
+      "say": "C3b feeds phagocytes, C5a summons them, C5b drills the membrane.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Fragment jobs",
+          "points": [
+            "C3b and iC3b: opsonins (CR1, CR3)",
+            "C3a, C4a, C5a: anaphylatoxins (C5a strongest)",
+            "C5b: MAC nucleator",
+            "C3d: B cell co receptor tag (CR2)"
+          ]
+        },
+        "right": {
+          "title": "Clinical gauges",
+          "points": [
+            "Low C3 and C4 patterns localise pathway use",
+            "C5a in sepsis and dialysis reactions",
+            "Soluble MAC in thrombotic microangiopathy work",
+            "Complement blockade: eculizumab anti C5"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Complement deficiencies** fingerprint pathways by infection: early classical (C1, C4, C2) lupus like and encapsulated bacteria, C3 catastrophic pyogenic infection, properdin and terminal (C5 to C9) recurrent Neisseria (meningococcus and gonococcus disseminated), regulators (factor H, C1 inhibitor) kidney and angioedema diseases. A teenager with second meningococcal episode earns a CH50.",
+      "say": "Recurrent meningococcus means check the terminal pathway; the organism names the defect.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Deficiency phenotypes",
+          "points": [
+            "C2 commonest classical deficiency, lupus leaning",
+            "C3: severe pyogenic infections childhood",
+            "C5 to C9, properdin: Neisseria recurrence",
+            "Factor D and B: rare alternative failures"
+          ]
+        },
+        "right": {
+          "title": "Testing",
+          "points": [
+            "CH50: classical to terminal integrity",
+            "AH50: alternative pathway",
+            "Individual component levels follow",
+            "Vaccinate and counsel after diagnosis"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Complement therapeutics** now span blockade (eculizumab and ravulizumab anti C5 in PNH and atypical HUS, meningococcal vaccination mandatory before), C1 inhibitor replacement in hereditary angioedema, and complement biomarkers guiding lupus and transplant rejection. The cascade this module assembles has become a formulary.",
+      "say": "Block C5 and vaccinate against meningococcus first; the pathway you block names the vaccine.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Blockade territory",
+          "points": [
+            "Anti C5: PNH, atypical HUS, myasthenia niches",
+            "C3 and factor inhibitors emerging",
+            "C1 inhibitor concentrates: HAE attacks and prophylaxis",
+            "Avacopan C5a receptor in ANCA vasculitis"
+          ]
+        },
+        "right": {
+          "title": "Blockade obligations",
+          "points": [
+            "Meningococcal vaccination before anti C5",
+            "Breakthrough haemolysis monitoring in PNH",
+            "Infection vigilance lifelong",
+            "Complement levels do not guide blockade simply"
+          ]
+        }
+      }
+    }
+  ]
+}

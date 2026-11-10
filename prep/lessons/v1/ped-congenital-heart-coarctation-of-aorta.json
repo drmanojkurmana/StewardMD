@@ -1,0 +1,226 @@
+{
+ "key": "ped-congenital-heart-coarctation-of-aorta",
+ "v": 1,
+ "module": "ped-congenital-heart",
+ "subject": "paediatrics",
+ "title": "Coarctation of the Aorta, Eisenmenger and Ebstein Anomaly",
+ "minutes": 6,
+ "gen": "AI",
+ "quiz": [],
+ "steps": [
+  {
+   "tx": "Juxtaductal aortic narrowing creates significant mechanical impedance to systemic arterial outflow. The obstructive lesion **coarctation of the aorta** involves focal stenosis of the aortic arch lumen, situated almost invariably directly opposite the insertion of the ductus arteriosus. Accounting for eight percent of congenital cardiac defects, it exhibits a strong association with bicuspid aortic valve in eighty percent of cases and Turner syndrome 45X.",
+   "say": "Coarctation of the aorta is a focal constriction opposite the ductus arteriosus. Associated with bicuspid aortic valves and Turner syndrome, it causes upper body hypertension.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-ix-paed-cxr_chd.webp",
+    "alt": "Radiographic view of thoracic aorta showing coarctation figure-of-3 and rib notching.",
+    "caption": "Aortic coarctation demonstrating figure-of-3 sign on superior mediastinum and inferior rib notching. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Differential vascular perfusion between upper and lower extremities provides the clinical diagnostic hallmark. Palpation reveals marked **radio-femoral delay**, where the femoral arterial pulse is noticeably delayed and diminished compared to the synchronous radial pulse. Blood pressure measurement confirms upper extremity hypertension with lower extremity hypotension, demonstrating a systolic blood pressure gradient of twenty millimetres of mercury or greater between arm and leg.",
+   "say": "Radio-femoral delay and lower extremity hypotension confirm coarctation. A systolic blood pressure gradient of twenty millimetres or greater between arm and calf is diagnostic.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Upper Extremity Findings",
+     "points": [
+      "Hypertensive systolic blood pressure in right arm",
+      "Strong, bounding radial and brachial pulses",
+      "Prominent carotid arterial pulsations in neck",
+      "Early risk of cerebral Berry aneurysm rupture"
+     ]
+    },
+    "right": {
+     "title": "Lower Extremity Findings",
+     "points": [
+      "Diminished, weak, or completely absent femoral pulses",
+      "Noticeable time lag behind simultaneous radial beat",
+      "Hypotension in lower limbs (systolic calf BP < arm BP)",
+      "Cold feet and exertional lower extremity claudication"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Spontaneous postnatal ductal constriction precipitates sudden cardiogenic shock in neonates. In neonates with severe coarctation, systemic perfusion to the lower body relies upon ductal patency; when the ductus closes, the infant develops **neonatal duct-dependent shock**, presenting with sudden pallor, tachypnoea, metabolic lactic acidosis, and oliguria. Immediate resuscitation mandates continuous intravenous infusion of prostaglandin E1 to reopen the ductus and restore lower body perfusion.",
+   "say": "When the ductus closes, neonates with critical coarctation collapse in cardiogenic shock with absent femoral pulses. Continuous intravenous prostaglandin E1 reopens the ductus to restore perfusion.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Clinical Setting",
+     "Presenting Signs",
+     "Haemodynamic Status",
+     "Emergency Action"
+    ],
+    "rows": [
+     [
+      "Neonatal critical coarctation",
+      "Cardiogenic shock, severe acidosis, oliguria",
+      "Ductus arteriosus constricting rapidly",
+      "Immediate IV Prostaglandin E1 infusion"
+     ],
+     [
+      "Infantile coarctation",
+      "Poor feeding, tachypnoea, hepatomegaly",
+      "Severe left ventricular failure and hypertension",
+      "Stabilize and surgical resection"
+     ],
+     [
+      "Childhood/Adolescent form",
+      "Asymptomatic hypertension, cold feet",
+      "Collateral intercostal circulation established",
+      "Balloon angioplasty or surgical repair"
+     ],
+     [
+      "Adult unrepaired coarctation",
+      "Severe hypertension, stroke, aortic rupture",
+      "Accelerated coronary disease, Berry aneurysm",
+      "Covered endovascular stent implantation"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Chronic collateral blood flow through intercostal arteries erodes the cortical margins of ribs. In children older than five years, plain chest radiography demonstrates **inferior rib notching**, or Roesler's sign, appearing as scalloped erosions along the inferior margins of the third through eighth ribs caused by tortuous, dilated intercostal collaterals. The left superior mediastinal shadow shows the figure-of-3 sign, formed by pre-stenotic and post-stenotic aortic dilatations.",
+   "say": "Dilated intercostal collateral vessels erode the undersides of the ribs, producing rib notching on chest X-rays. The aortic shadow displays the classic figure-of-three sign.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Roesler Rib Notching Sign",
+     "points": [
+      "Scalloped cortical indentations on lower rib borders",
+      "Involves 3rd to 8th ribs bilaterally",
+      "Snares 1st and 2nd ribs (supplied by costocervical trunk)",
+      "Evolves with age; rarely visible under 5 years"
+     ]
+    },
+    "right": {
+     "title": "Figure-of-3 Aortic Sign",
+     "points": [
+      "Upper curve: dilated left subclavian and aortic arch",
+      "Central indentation: narrow coarctation stenosis",
+      "Lower curve: post-stenotic dilatation of descending aorta",
+      "Barium swallow shows corresponding E-sign"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Irreversible remodeling of the pulmonary arterial microvasculature reverses intracardiac shunt direction. Chronic uncorrected left-to-right shunting from large VSDs or PDAs induces medial hypertrophy and intimal fibrosis of pulmonary arterioles, culminating in **Eisenmenger syndrome physiology**. When pulmonary vascular resistance equals or exceeds systemic vascular resistance, the shunt reverses right-to-left, transforming an acyanotic patient into an irreversibly cyanotic state with digital clubbing.",
+   "say": "Eisenmenger syndrome occurs when high pulmonary blood flow causes irreversible vascular remodeling. Pulmonary resistance exceeds systemic pressure, reversing the shunt to right-to-left.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Haemodynamic Phase",
+     "Intracardiac Shunt Direction",
+     "Auscultatory Finding",
+     "Therapeutic Feasibility"
+    ],
+    "rows": [
+     [
+      "Initial acyanotic phase",
+      "Large left-to-right shunt (Qp:Qs >2:1)",
+      "Loud holosystolic or continuous murmur",
+      "Defect closure is curative and safe"
+     ],
+     [
+      "Transitional pulmonary hypertension",
+      "Bidirectional shunting begins",
+      "Softening murmur, loud pulmonary S2",
+      "Cardiac catheterization for vasoreactivity"
+     ],
+     [
+      "Established Eisenmenger",
+      "Fixed right-to-left shunt (Qp:Qs <1:1)",
+      "Murmur disappears, loud single P2",
+      "Defect closure is strictly contraindicated"
+     ],
+     [
+      "Terminal Eisenmenger state",
+      "Severe hypoxaemia, polycythaemia, stroke",
+      "Diastolic Graham Steell murmur",
+      "Heart-lung transplantation only option"
+     ]
+    ]
+   }
+  },
+  {
+   "tx": "Establishing Eisenmenger syndrome permanently contraindicates surgical or transcatheter defect closure. Attempting surgical closure in fixed pulmonary hypertension precipitates acute fatal right ventricular failure, as the right ventricle loses its pop-off decompression pathway across the defect. Medical management relies on pulmonary vasodilators like endothelin receptor antagonists (bosentan) and phosphodiesterase-5 inhibitors (sildenafil), alongside targeted venesection for **symptomatic hyperviscosity syndrome** (headaches, visual disturbances).",
+   "say": "Once Eisenmenger syndrome develops, surgical closure is strictly contraindicated because the right ventricle fails. Medical therapy uses sildenafil and bosentan to dilate pulmonary vessels.",
+   "vis": {
+    "kind": "compare",
+    "left": {
+     "title": "Absolute Contraindication to Surgery",
+     "points": [
+      "Fixed pulmonary vascular resistance >8 Wood units",
+      "Negative pulmonary vasoreactivity testing",
+      "Surgical closure leads to acute fatal RV failure",
+      "VSD acts as vital pop-off decompression valve"
+     ]
+    },
+    "right": {
+     "title": "Advanced Medical Management",
+     "points": [
+      "Oral endothelin receptor antagonists (bosentan)",
+      "Oral PDE-5 inhibitors (sildenafil, tadalafil)",
+      "Prostacyclin analogues (treprostinil)",
+      "Targeted phlebotomy with isovolaemic replacement"
+     ]
+    }
+   }
+  },
+  {
+   "tx": "Embryological failure of tricuspid delamination displaces the valve deep into the right ventricle. The congenital malformation **Ebstein anomaly of tricuspid valve** features downward apical displacement of the septal and posterior tricuspid leaflets into the right ventricular cavity, associated with first-trimester maternal lithium ingestion. This divides the right ventricle into an atrialized inlet portion and a small functional pumping chamber, precipitating tricuspid regurgitation.",
+   "say": "Ebstein anomaly features downward displacement of the tricuspid valve into the right ventricle, linked to maternal lithium use. This creates an atrialized right ventricle and massive tricuspid leakage.",
+   "vis": {
+    "kind": "image",
+    "src": "clinix/media/skills/skill-ix-paed-cxr_chd.webp",
+    "alt": "Chest radiograph showing box-shaped massive cardiomegaly in Ebstein anomaly.",
+    "caption": "Massive globular box-shaped cardiomegaly filling the thoracic cavity in neonatal Ebstein anomaly. [Credit: StewardMD]",
+    "ar": 1.5
+   }
+  },
+  {
+   "tx": "Extravagant tricuspid regurgitation and chamber enlargement produce a distinctive box-shaped cardiac contour. Chest radiography demonstrates **box-shaped cardiomegaly**, where the heart fills the entire thoracic cavity due to massive enlargement of the right atrium and atrialized right ventricle. Accessory atrioventricular pathways producing Wolff-Parkinson-White (WPW) syndrome occur in twenty-five percent of patients, triggering recurrent paroxysmal supraventricular tachycardias.",
+   "say": "Massive right atrial dilatation creates a huge box-shaped heart on chest X-rays. Accessory pathways cause Wolff-Parkinson-White syndrome and supraventricular tachycardia in a quarter of patients.",
+   "vis": {
+    "kind": "table",
+    "cols": [
+     "Ebstein Manifestation",
+     "Underlying Structural Defect",
+     "Electrocardiographic Sign",
+     "Clinical Risk"
+    ],
+    "rows": [
+     [
+      "Tricuspid regurgitation",
+      "Apical displacement and leaflet tethering",
+      "Tall peaked P waves (Himalayan P waves)",
+      "Right heart failure and low cardiac output"
+     ],
+     [
+      "Atrialized right ventricle",
+      "Inlet segment incorporated into RA",
+      "Prolonged PR interval, right bundle branch block",
+      "Stagnant blood pool and thrombosis"
+     ],
+     [
+      "WPW pre-excitation (25%)",
+      "Right-sided accessory bypass tracts",
+      "Short PR interval with delta wave",
+      "Paroxysmal supraventricular tachycardia"
+     ],
+     [
+      "Interatrial right-to-left shunt",
+      "Stretched PFO or secundum ASD",
+      "Cyanosis and paradoxical systemic emboli",
+      "Stroke and brain abscess"
+     ]
+    ]
+   }
+  }
+ ]
+}

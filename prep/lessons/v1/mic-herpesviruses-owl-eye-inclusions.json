@@ -1,0 +1,175 @@
+{
+  "v": 1,
+  "module": "mic-herpesviruses",
+  "subject": "microbiology",
+  "title": "Owl-Eye Inclusions, CMV Pathology and Epstein-Barr Virus",
+  "minutes": 6,
+  "gen": "AI",
+  "quiz": [],
+  "steps": [
+    {
+      "tx": "The **owl eye inclusion** is the classic enlarged CMV infected cell with a large central intranuclear inclusion separated by a clear halo. It can be seen in endothelial cells, pneumocytes, gastrointestinal epithelial cells and renal tissue. Its absence does not exclude CMV, especially in small biopsies or early infection. Immunohistochemistry and tissue PCR increase sensitivity and help distinguish CMV injury from rejection or other infection.",
+      "say": "Owl eye morphology is highly suggestive when present but too insensitive to rule out CMV.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Classic cell",
+          "points": [
+            "Marked cellular enlargement",
+            "Large basophilic nuclear inclusion",
+            "Clear halo around inclusion",
+            "Smaller cytoplasmic inclusions may coexist"
+          ]
+        },
+        "right": {
+          "title": "Diagnostic upgrades",
+          "points": [
+            "CMV immunostain highlights infected nuclei",
+            "PCR can detect viral DNA in tissue",
+            "Clinicopathological correlation is essential",
+            "A negative small biopsy may miss patchy disease"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Epstein Barr virus** infects B lymphocytes through CD21 and establishes latency programmes that vary by cell and immune state. Primary infection in adolescents often causes infectious mononucleosis, whereas early childhood infection may be silent. EBV DNA levels and serology answer different questions: antibody patterns date infection, while viral load in blood helps selected transplant and lymphoproliferative contexts rather than routine glandular fever diagnosis.",
+      "say": "EBV serology dates infection; EBV DNA load belongs mainly to specialist immunocompromised care.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Latency patterns",
+          "points": [
+            "Growth programme drives B cell proliferation",
+            "Restricted latency hides from cytotoxic T cells",
+            "Lytic reactivation sheds virus in saliva",
+            "Host T cell control is decisive"
+          ]
+        },
+        "right": {
+          "title": "Disease links",
+          "points": [
+            "Infectious mononucleosis",
+            "Burkitt and Hodgkin lymphoma subsets",
+            "Nasopharyngeal carcinoma",
+            "Post transplant lymphoproliferative disorder"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "In infectious mononucleosis, atypical lymphocytes are mostly reactive **CD8 T cells** responding to infected B cells, not the malignant or infected population itself. Fever, pharyngitis, posterior cervical lymphadenopathy, splenomegaly and transaminitis form the classic pattern. Heterophile antibody tests can be negative early and in young children; EBV specific serology resolves timing. Contact sports should be avoided while splenomegaly persists.",
+      "say": "The dramatic atypical lymphocytes in glandular fever are mainly the immune response, not infected B cells.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Blood clues",
+          "points": [
+            "Lymphocytosis with atypical forms",
+            "Mild thrombocytopenia may occur",
+            "Transaminases often elevated",
+            "Cold agglutinins are uncommon and nonspecific"
+          ]
+        },
+        "right": {
+          "title": "Clinical cautions",
+          "points": [
+            "Avoid ampicillin rash mislabelled as allergy",
+            "Protect enlarged spleen from trauma",
+            "Airway swelling may need urgent review",
+            "Fatigue can persist after acute signs resolve"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "EBV serology uses viral capsid antigen **VCA IgM and IgG**, early antigen and EBV nuclear antigen **EBNA IgG**. VCA IgM supports acute primary infection; VCA IgG appears early and lasts; EBNA IgG develops later, so VCA IgG positive with EBNA negative can indicate recent infection. Patterns must be integrated because immunocompromised patients may not follow textbook timelines.",
+      "say": "VCA catches the present, EBNA certifies the past in EBV serology.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "Acute primary pattern",
+          "points": [
+            "VCA IgM positive",
+            "VCA IgG positive or emerging",
+            "EBNA IgG usually negative",
+            "Heterophile may be positive in adolescents"
+          ]
+        },
+        "right": {
+          "title": "Past infection pattern",
+          "points": [
+            "VCA IgG positive",
+            "EBNA IgG positive",
+            "VCA IgM negative",
+            "Early antigen can reappear in reactivation but is nonspecific"
+          ]
+        }
+      }
+    },
+    {
+      "tx": "**Post transplant lymphoproliferative disorder** arises when EBV driven B cell proliferation escapes reduced T cell surveillance, especially after primary EBV infection in a seronegative recipient of a seropositive graft. Rising EBV DNA may precede clinical disease in high-risk monitoring programmes. Reducing immunosuppression is a first therapeutic principle; rituximab targets CD20 positive B cell proliferation in many cases.",
+      "say": "PTLD is EBV proliferation released by pharmacologic T cell suppression.",
+      "vis": {
+        "kind": "flow",
+        "nodes": [
+          {
+            "id": "mismatch",
+            "label": "EBV seronegative recipient risk"
+          },
+          {
+            "id": "suppress",
+            "label": "T cell immunosuppression"
+          },
+          {
+            "id": "proliferate",
+            "label": "EBV driven B cell proliferation"
+          },
+          {
+            "id": "reduce",
+            "label": "Reduce suppression and treat B cells"
+          }
+        ],
+        "edges": [
+          [
+            "mismatch",
+            "suppress"
+          ],
+          [
+            "suppress",
+            "proliferate"
+          ],
+          [
+            "proliferate",
+            "reduce"
+          ]
+        ]
+      }
+    },
+    {
+      "tx": "CMV and EBV are both herpesviruses but occupy different diagnostic habits. CMV management often uses **quantitative DNA surveillance and organ biopsy**, whereas uncomplicated EBV mononucleosis is clinical plus antibody patterns. Both exploit latency and both become dangerous when cellular immunity falls. Comparing their tests prevents the common error of ordering viral loads where serology dating is the actual question.",
+      "say": "Choose CMV load for replication pressure and EBV serology for infection timing.",
+      "vis": {
+        "kind": "compare",
+        "left": {
+          "title": "CMV emphasis",
+          "points": [
+            "Quantitative PCR trends after transplant",
+            "Histology proves tissue invasion",
+            "Antibody helps donor recipient risk status",
+            "Retinitis can occur with compartmentalised disease"
+          ]
+        },
+        "right": {
+          "title": "EBV emphasis",
+          "points": [
+            "VCA and EBNA pattern dates infection",
+            "Heterophile rapid test in adolescents",
+            "DNA load for selected transplant monitoring",
+            "No routine viral load test of cure in mononucleosis"
+          ]
+        }
+      }
+    }
+  ]
+}
