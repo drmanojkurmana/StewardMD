@@ -15,6 +15,17 @@
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Sound meets moving cells"}, {"id": "b", "label": "Frequency shifts"}, {"id": "c", "label": "Angle corrected"}, {"id": "d", "label": "Velocity calculated"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
   },
   {
+   "tx": "Red cells change the frequency of the echo they return, and the size of that **Doppler shift** depends on direction. Flow toward the probe raises frequency and flow away lowers it. The shift is largest when the beam looks straight along the vessel and it falls to zero at 90 degrees to the flow. Velocity is therefore calculated only when the angle is 60 degrees or less and angle correction is switched on. At a right angle an open vessel can be reported as having no flow.",
+   "say": "Doppler shift is the frequency change from moving red cells. Flow toward the probe raises it and flow away lowers it. The change is greatest head on and is zero at 90 degrees, so speed is measured at 60 degrees or less with angle correction on. A right angle view can make a patent vessel look empty of flow.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n165-rad-ultrasound-doppler-shift.webp",
+    "alt": "A diagram shows an ultrasound probe, a blood vessel, and a 60 degree angle between the Doppler beam and the direction of flow.",
+    "caption": "The Doppler beam meets flowing blood at 60 degrees, with the probe and the vessel both drawn so the angle can be measured. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "title": "Colour Doppler maps direction",
    "tx": "**Colour Doppler** paints mean velocity and direction over the grey scale image, by convention red toward the probe and blue away from it. The mnemonic BART, blue away red toward, holds only for the default map and flips if the operator inverts the scale. A tight carotid stenosis shows a mosaic of mixed colours where fast turbulent flow wraps through several hues inside one pixel cluster.",
    "say": "Colour Doppler paints mean velocity and direction over the grey scale image, by convention red toward the probe and blue away from it. The mnemonic blue away red toward holds only for the default map and flips if the operator inverts the scale. A tight carotid narrowing shows a mosaic where fast turbulent flow wraps through several hues.",

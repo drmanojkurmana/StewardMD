@@ -15,6 +15,17 @@
    "vis": {"kind": "table", "cols": ["Field strength", "Hydrogen frequency", "Common use"], "rows": [["0.3 tesla", "12.8 MHz", "Open low field scanners"], ["1.5 tesla", "63.9 MHz", "Routine clinical MRI"], ["3.0 tesla", "127.7 MHz", "Neuro and angiography detail"], ["7.0 tesla", "298 MHz", "Research imaging"]]}
   },
   {
+   "tx": "Hydrogen protons precess around the main field at the **Larmor frequency**, which equals the gyromagnetic ratio times the field strength. For hydrogen the ratio is 42.58 megahertz per tesla. A 1.5 tesla scanner is therefore tuned near 63.9 megahertz, and a 3 tesla scanner near 127.7 megahertz. The radiofrequency pulse has to match that frequency or the magnetisation does not tip. A pulse written for the 1.5 tesla machine is the wrong frequency for the 3 tesla machine.",
+   "say": "Larmor frequency is the precession rate of hydrogen protons, the gyromagnetic ratio of 42.58 megahertz per tesla multiplied by field strength. That is about 63.9 megahertz at 1.5 tesla and about 127.7 megahertz at 3 tesla. The radiofrequency pulse must match, or it will not tip the magnetisation.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n161-rad-ct-mri-larmor-frequency.webp",
+    "alt": "Hydrogen protons are drawn precessing around a vertical magnetic field arrow, with the Larmor frequency labelled beside the spin.",
+    "caption": "Protons circle the main magnetic field, and the rate of that precession is marked as the Larmor frequency. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "title": "Parts per million in spectroscopy",
    "tx": "**Parts per million** in magnetic resonance spectroscopy expresses each metabolite frequency as a fraction of the Larmor frequency, which keeps positions fixed across scanner strengths. N acetylaspartate sits at 2.0 parts per million, creatine at 3.0 and choline at 3.2 on a scale that counts down left to right. Joining choline, creatine and N acetylaspartate peaks normally forms a 45 degree Hunters angle.",
    "say": "Parts per million in spectroscopy expresses each metabolite frequency as a fraction of the Larmor frequency, keeping positions fixed across scanner strengths. N acetylaspartate sits at two, creatine at three and choline at three point two, on a scale counting down left to right. Joining those peaks normally forms a forty five degree Hunters angle.",
@@ -31,6 +42,17 @@
    "tx": "**Time of flight angiography** needs no injected contrast. Repeated pulses saturate stationary tissue until it gives little signal, while fresh blood flowing into the slice arrives unsaturated and bright. Circle of Willis aneurysms and stenoses are mapped this way at 3 tesla. Slow or turbulent flow loses signal and can mimic a gap, so a suspected occlusion is confirmed on a second sequence.",
    "say": "Time of flight angiography needs no injected contrast. Repeated pulses saturate stationary tissue until it gives little signal, while fresh blood entering the slice arrives unsaturated and bright. Circle of Willis aneurysms and narrowings are mapped this way. Slow or turbulent flow loses signal and can mimic a gap, so suspected blockage needs a second sequence.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Pulses saturate tissue"}, {"id": "b", "label": "Fresh blood flows in"}, {"id": "c", "label": "Vessel appears bright"}, {"id": "d", "label": "Aneurysm mapped"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "No gadolinium is injected for **time of flight angiography**. Repeated pulses drive stationary tissue into saturation so it returns almost no signal, while blood that has just entered the slice is still fresh and therefore bright. Aneurysms and stenoses around the circle of Willis are mapped in this way, commonly at 3 tesla. Very slow flow and turbulent flow also lose signal and can look like a missing segment. An apparent occlusion is confirmed on another sequence before anyone treats it as a real blockage.",
+   "say": "Time of flight angiography needs no contrast. Repeated pulses silence stationary tissue, and unsaturated blood flowing into the slice stays bright. Circle of Willis aneurysms and narrowings are shown this way, often at 3 tesla. Slow or turbulent flow can mimic a gap, so a possible occlusion is checked with a second sequence.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n162-rad-ct-mri-larmor-frequency.webp",
+    "alt": "A time of flight MR angiogram of the circle of Willis shows a saccular aneurysm without any injected contrast.",
+    "caption": "Bright arteries of the circle of Willis appear on an unenhanced time of flight study, with a berry aneurysm arising from the circle. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "Contrast enhanced MR angiography",

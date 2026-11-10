@@ -15,6 +15,17 @@
    "vis": {"kind": "table", "cols": ["Window", "Level (HU)", "Width (HU)"], "rows": [["Brain", "40", "80"], ["Stroke", "32", "8"], ["Bone", "400", "1800"], ["Lung", "-600", "1500"], ["Mediastinum", "40", "350"]]}
   },
   {
+   "tx": "Middle grey on a CT display is pinned to one Hounsfield number, and that number is the **window level**. Tissue at the level looks mid grey, denser tissue looks white, and less dense tissue looks black. Brain display centres near 40 HU because grey matter is about 37 HU and white matter about 30 HU, so a narrow band can separate them. Shift the level off that cluster and the contrast between grey and white matter disappears.",
+   "say": "Window level is the Hounsfield value placed at middle grey. Denser tissue then looks whiter and less dense tissue looks darker. Brain images centre the level near 40 because grey matter is about 37 and white matter about 30, letting a narrow band split them. A badly placed level leaves both looking the same.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n159-rad-ct-mri-window-level.webp",
+    "alt": "A grey scale ramp on a Hounsfield bar marks window level at middle grey and window width as the distance from black to white.",
+    "caption": "On a Hounsfield scale the middle of the grey ramp is the window level and the full span from black to white is the window width. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
+  },
+  {
    "title": "Window width sets contrast",
    "tx": "**Window width** is the range of Hounsfield values spread across the visible grey scale. Values above the top of the range show pure white and values below the bottom show pure black. A narrow width of 8 HU in a stroke window makes a 3 HU density difference visible, while a lung width of 1500 HU sacrifices soft tissue detail to show aerated parenchyma.",
    "say": "Window width is the range of values stretched over the grey scale. Anything above the top prints pure white and anything below the bottom prints pure black. A stroke window only eight units wide reveals a three unit density gap, whereas a lung window fifteen hundred units wide trades soft tissue detail for aerated lung.",
@@ -25,6 +36,17 @@
    "tx": "A dedicated **stroke window** uses level 32 HU and width 8 HU to stretch the tiny density gap between normal cortex and early infarcted cortex. Early ischaemia lowers tissue density by only 1 to 3 HU through cytotoxic oedema. On a standard brain window that change is invisible, so the narrow stroke window is the setting that reveals the insular ribbon loss.",
    "say": "A dedicated stroke window uses level thirty two and width eight to stretch the tiny gap between normal and early infarcted cortex. Early ischaemia lowers density by only one to three units through cytotoxic oedema. That change stays invisible on a standard brain window, so the narrow setting is what reveals loss of the insular ribbon.",
    "vis": {"kind": "flow", "nodes": [{"id": "a", "label": "Cytotoxic oedema"}, {"id": "b", "label": "Density falls 1 to 3 HU"}, {"id": "c", "label": "Stroke window width 8"}, {"id": "d", "label": "Insular ribbon loss seen"}], "edges": [["a", "b"], ["b", "c"], ["c", "d"]]}
+  },
+  {
+   "tx": "Early ischaemia drops cortical density by only 1 to 3 HU, the effect of cytotoxic oedema, and a standard brain window hides a change that small. The **stroke window** stretches it by using a level of 32 HU and a width of 8 HU. Loss of the insular ribbon is the sign that then becomes visible: the cortical stripe fades on the infarcted side and remains on the healthy side. The same slice, viewed on an ordinary brain setting, can be passed as normal.",
+   "say": "A stroke window uses level 32 and width 8 to magnify a density fall of only 1 to 3 units from cytotoxic oedema. Ordinary brain windows do not show that gap. On the narrow setting the insular ribbon disappears on the ischaemic side and stays visible on the other, which is the early CT sign.",
+   "vis": {
+    "kind": "image",
+    "src": "v1/lessons/media/need-n160-rad-ct-mri-window-level.webp",
+    "alt": "An axial CT head displayed on a narrow stroke window shows loss of the insular ribbon on one side and a normal ribbon on the other.",
+    "caption": "With a very narrow window the insular cortex has lost its bright ribbon on one side, while the opposite insula is still clearly seen. Illustration: StewardMD original.",
+    "ar": 1.3393
+   }
   },
   {
    "title": "HRCT technique",
